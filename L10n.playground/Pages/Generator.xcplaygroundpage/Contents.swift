@@ -1,6 +1,6 @@
 import Foundation
 
-
+//: #### List of supported types in string placeholders (`%…`)
 enum PlaceholderType : String {
     case String
     case Float
@@ -16,8 +16,10 @@ enum PlaceholderType : String {
     }
 }
 
+//: #### Transform Localisable.string keys into valid enum identifiers
+//:
+//: -> Transform "alert.title" to "AlertTitle"
 func identifierFromKey(key: String) -> String {
-    // Build Identifier
     var identifier = ""
     var capitalizeNext = true
     let separatorChars = [".","_"," "].map(Character.init)
@@ -25,6 +27,7 @@ func identifierFromKey(key: String) -> String {
         if separatorChars.contains(char) {
             capitalizeNext = true
         }
+        // TODO: Also manage characters forbidden in a Swift identifier, like # or &
         else if capitalizeNext {
             identifier += String(char).capitalizedString
             capitalizeNext = false
@@ -37,17 +40,23 @@ func identifierFromKey(key: String) -> String {
     return identifier
 }
 
+//: #### Build Types list
+//:
+//: -> Parse "I give %d apples to %@" into [.Int, .String]
 func typesFromFormatString(formatString: String) -> [PlaceholderType] {
-    // Build Types list
     var types = [PlaceholderType]()
     var placeholderIndex: Int? = nil
     var lastPlaceholderIndex = 0
     
     for char in formatString.characters {
         if char == Character("%") {
+            // TODO: Manage the "%%" special sequence
             placeholderIndex = lastPlaceholderIndex++
         }
         else if placeholderIndex != nil {
+            // TODO: Manage positional placeholders like "%2$@"
+            //       That change the order the placeholder should be inserted in the types array
+            //        (If types.count+1 < placehlderIndex, we'll need to insert "Any" types to fill the gap)
             if let type = PlaceholderType.fromFormatChar(char) {
                 types.append(type)
                 placeholderIndex = nil
@@ -58,23 +67,29 @@ func typesFromFormatString(formatString: String) -> [PlaceholderType] {
     return types
 }
 
+//: #### Parse a Localizable.strings line
+//:
+//: From a line in the Localizable.strings file, extract the key and value
+//: And compute the case identifier and list of PlaceholderTypes to use for it
 func parseKeyAndPlaceholders(line: String) -> (key: String, identifier: String, types: [PlaceholderType])? {
     let range = NSRange(location: 0, length: line.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
     let regex = try! NSRegularExpression(pattern: "^\"([^\"]*)\" *= *\"(.*)\";", options: [])
-    if let keyMatch = regex.firstMatchInString(line, options: [], range: range) {
+    if let match = regex.firstMatchInString(line, options: [], range: range) {
 
-        let key = (line as NSString).substringWithRange(keyMatch.rangeAtIndex(1))
+        let key = (line as NSString).substringWithRange(match.rangeAtIndex(1))
         
         let identifier = identifierFromKey(key)
 
-        let stringValue = (line as NSString).substringWithRange(keyMatch.rangeAtIndex(2))
-        let types = typesFromFormatString(stringValue)
+        let translation = (line as NSString).substringWithRange(match.rangeAtIndex(2))
+        let types = typesFromFormatString(translation)
         
         return (key, identifier, types)
     }
     return nil
 }
 
+
+//: #### Transform an array of lines into the code for the enum
 func processLines(lines: [String]) -> String {
     let keys = lines.map { parseKeyAndPlaceholders($0) }
     var enumText = "// AUTO-GENERATED FILE, DO NOT EDIT\n\n"
@@ -101,11 +116,11 @@ func processLines(lines: [String]) -> String {
     for case let (key, identifier, types)? in keys {
         enumText += "\t\t\tcase .\(identifier)"
         if !types.isEmpty {
-            let params = types.enumerate().map { (idx,type) in "p\(idx): \(type.rawValue)" }
+            let params = (0..<types.count).map { "let p\($0)" }
             enumText += "(" + ", ".join(params) + ")"
         }
         enumText += ":\n"
-        enumText += "\t\t\t\treturn tr(\"\(key)\""
+        enumText += "\t\t\t\treturn L10n.tr(\"\(key)\""
         if !types.isEmpty {
             enumText += ", "
             let params = (0..<types.count).map { "p\($0)" }
@@ -117,7 +132,7 @@ func processLines(lines: [String]) -> String {
     enumText += "\t\t}\n"
     enumText += "\t}\n\n"
     
-    enumText += "\tprivate func tr(key: String, _ args: CVarArgType...) -> String {\n"
+    enumText += "\tprivate static func tr(key: String, _ args: CVarArgType...) -> String {\n"
     enumText += "\t\tlet format = NSLocalizedString(key, comment: \"\")\n"
     enumText += "\t\treturn String(format: format, arguments: args)\n"
     enumText += "\t}\n"
@@ -135,8 +150,9 @@ func processLines(lines: [String]) -> String {
 
 
 
-
-
+//: ## Main
+//: The entry point for the code.
+//: This needs to be transformed into a standalone CLI tool in the future
 if let path = NSBundle.mainBundle().pathForResource("Localizable", ofType: "strings") {
     do {
         let fileContent = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
@@ -148,3 +164,4 @@ if let path = NSBundle.mainBundle().pathForResource("Localizable", ofType: "stri
         print("Ooops: \(error)")
     }
 }
+

@@ -19,8 +19,8 @@ tr(.Greetings("John", 30)) // "I'm John and I'm 30"
 Given this `Localizable.strings` file:
 
 ```
-"alert_title" = "Title of the Alert";
-"alert_message" = "Body of the Alert";
+"alert_title" = "Title of the alert";
+"alert_message" = "Some alert body there";
 "greetings" = "Hello, my name is %@ and I'm %d";
 "apples.count" = "You have %d apples";
 "bananas.owner" = "Those %d bananas belong to %@.";
@@ -68,7 +68,7 @@ let nbApples = tr(.ApplesCount(5))
 
 // More parameters of various types!
 let ban = tr(.BananasOwner(2, "John"))
-// -> "Those %d bananas belong to %@."
+// -> "Those 2 bananas belong to John."
 ```
 
 ## Current State

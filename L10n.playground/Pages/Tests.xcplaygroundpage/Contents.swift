@@ -1,25 +1,6 @@
 
 import Foundation
 
-//: Some setup to fake use of LocalizableStrings when in the Playground
-
-// This is a fake implementation mimicking the behavior of having a Localizable.string
-// This is used here to be able to test the code easily in a Playground
-func localize(key: String) -> String {
-    return [
-        "alert.title": "This is the alert title",
-        "alert.message": "Body Message for the Alert",
-        "greetings.text": "My name is %@ and I'm %d."
-    ][key] ?? key
-}
-
-// The real implementation would instead use Localizable.strings:
-/*
-func localize(key: String) -> String {
-    return NSLocalizedString(key, comment: "")
-}
-*/
-
 
 //: ### First idea: too simple, not secure enough regarding parameters
 
@@ -31,11 +12,11 @@ enum L10n_Draft : String {
     // <<< ---
     
     func format(args: CVarArgType...) -> String {
-        let format = localize(self.rawValue)
+        let format = NSLocalizedString(self.rawValue, comment: "")
         return String(format: format, arguments: args)
     }
     var string : String {
-        return localize(self.rawValue)
+        return NSLocalizedString(self.rawValue, comment: "")
     }
 }
 
@@ -54,37 +35,44 @@ L10n_Draft.Presentation.format("David", 29)
 enum L10n {
     case AlertTitle
     case AlertMessage
-    case Presentation(String, Int)
+    case Greetings(String, Int)
+    case ApplesCount(Int)
+    case BananasOwner(Int, String)
 }
 
 extension L10n : CustomStringConvertible {
     var description : String { return self.string }
-
-    // >>> GENERATE THIS USING A SCRIPT
+    
     var string : String {
         switch self {
         case .AlertTitle:
-            return tr("alert.title")
+            return L10n.tr("alert_title")
         case .AlertMessage:
-            return tr("alert.message")
-        case .Presentation(let first, let last):
-            return tr("greetings.text", first, last)
+            return L10n.tr("alert_message")
+        case .Greetings(let p0, let p1):
+            return L10n.tr("greetings", p0, p1)
+        case .ApplesCount(let p0):
+            return L10n.tr("apples.count", p0)
+        case .BananasOwner(let p0, let p1):
+            return L10n.tr("bananas.owner", p0, p1)
         }
     }
     
-    private func tr(key: String, _ args: CVarArgType...) -> String {
-        let format = localize(key)
+    private static func tr(key: String, _ args: CVarArgType...) -> String {
+        let format = NSLocalizedString(key, comment: "")
         return String(format: format, arguments: args)
     }
 }
 
-func tr(key: L10n) -> String { return key.string }
+func tr(key: L10n) -> String {
+    return key.string
+}
 
 //: #### Usage example
 
 print(tr(.AlertTitle))
-print(tr(.Presentation("David", 29)))
-let v = L10n.Presentation("Olivier", 32)
-print("Hello, \(v)") // CustomStringConvertible automatically calls description
+print(tr(.Greetings("David", 29)))
+let v = L10n.Greetings("Olivier", 32)
+print("Hey! \(v).") // CustomStringConvertible automatically calls description
 
 
