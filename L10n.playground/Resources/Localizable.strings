@@ -1,0 +1,8 @@
+"alert_title" = "Alert Title";
+"alert_message" = "Alert Body";
+
+"greetings" = "Hello, my name is %@ and I'm %d";
+
+"apples.count" = "You have %d apples";
+"bananas.owner" = "Those %d bananas belong to %@.";
+
