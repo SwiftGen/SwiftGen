@@ -1,6 +1,6 @@
 #!/usr/bin/rake
 
-MODULES_SOURCE_DIR = './src'
+MODULES_SOURCE_DIR = './SwiftGen.playground/Sources'
 MODULES_BUILT_DIR = './lib'
 
 task :mkdir do
@@ -15,7 +15,7 @@ end
 desc "Generate all libraries and modules from source"
 task :build => :mkdir do
   Dir["#{MODULES_SOURCE_DIR}/*.swift"].each do |path|
-    build_module File.basename(path, '.swift')
+    build_module(path)
   end
 end
 
@@ -23,6 +23,7 @@ end
 desc 'clean and regenerate all libs and  modules from source'
 task :default => [:clean, :build]
 
-def build_module(name)
-  `xcrun -sdk macosx swiftc -emit-library -o "#{MODULES_BUILT_DIR}/lib#{name}.dylib" -emit-module -module-link-name "#{name}" #{MODULES_SOURCE_DIR}/"#{name}.swift"`
+def build_module(file_path)
+  module_name = File.basename(file_path, '.swift')
+  `xcrun -sdk macosx swiftc -emit-library -o "#{MODULES_BUILT_DIR}/lib#{module_name}.dylib" -emit-module -module-link-name "#{module_name}" "#{file_path}"`
 end

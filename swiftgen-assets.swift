@@ -1,7 +1,7 @@
 #!/usr/bin/env xcrun swift -I ./lib -L ./lib
 
 import Foundation
-import StringIdentifier
+import SwiftIdentifier
 
 var generatedCases = Set<String>()
 

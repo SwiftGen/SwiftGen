@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' requires-full-environment='true' display-mode='raw'>
+    <pages>
+        <page name='swiftgen-l10n'/>
+        <page name='L10n-Demo'/>
+    </pages>
+</playground>

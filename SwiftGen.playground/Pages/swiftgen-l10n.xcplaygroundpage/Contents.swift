@@ -8,36 +8,15 @@ enum PlaceholderType : String {
     
     static func fromFormatChar(char: Character) -> PlaceholderType? {
         switch char {
-            case "@": return .String
-            case "f": return .Float
-            case "d": return .Int
+            case "@":
+                return .String
+            case "f":
+                return .Float
+            case "d", "i", "u":
+                return .Int
             default: return nil
         }
     }
-}
-
-//: #### Transform Localisable.string keys into valid enum identifiers
-//:
-//: -> Transform "alert.title" to "AlertTitle"
-func identifierFromKey(key: String) -> String {
-    var identifier = ""
-    var capitalizeNext = true
-    let separatorChars = [".","_"," "].map(Character.init)
-    for char in key.characters {
-        if separatorChars.contains(char) {
-            capitalizeNext = true
-        }
-        // TODO: Also manage characters forbidden in a Swift identifier, like # or &
-        else if capitalizeNext {
-            identifier += String(char).capitalizedString
-            capitalizeNext = false
-        }
-        else {
-            identifier += String(char)
-        }
-    }
-    
-    return identifier
 }
 
 //: #### Build Types list
@@ -78,7 +57,7 @@ func parseKeyAndPlaceholders(line: String) -> (key: String, identifier: String, 
 
         let key = (line as NSString).substringWithRange(match.rangeAtIndex(1))
         
-        let identifier = identifierFromKey(key)
+        let identifier = key.asSwiftIdentifier(forbiddenChars: "_")
 
         let translation = (line as NSString).substringWithRange(match.rangeAtIndex(2))
         let types = typesFromFormatString(translation)

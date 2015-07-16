@@ -1,8 +1,8 @@
 import Foundation
 
 extension String {
-    public func asSwiftIdentifier() -> String {
-        let (head, tail) : (NSCharacterSet, NSCharacterSet) = {
+    public func asSwiftIdentifier(forbiddenChars exceptions: String = "", replaceWithUnderscores underscores: Bool = false) -> String {
+        let (head, tail) : (NSMutableCharacterSet, NSMutableCharacterSet) = {
             let addRange: (NSMutableCharacterSet, Range<Int>) -> Void = { (mcs, range) in
                 mcs.addCharactersInRange(NSRange(location: range.startIndex, length: range.endIndex-range.startIndex))
             }
@@ -70,20 +70,29 @@ extension String {
             addRange(tail, 0x20D0...0x20FF)
             addRange(tail, 0xFE20...0xFE2F)
             
-            return (head.copy() as! NSCharacterSet, tail.copy() as! NSCharacterSet)
+            return (head, tail)
         }()
+        
+        head.removeCharactersInString(exceptions)
+        tail.removeCharactersInString(exceptions)
         
         let chars = self.unicodeScalars
         let firstChar = chars[chars.startIndex]
         
-        let prefix = head.longCharacterIsMember(firstChar.value) ? "" : "_"
+        let prefix = !head.longCharacterIsMember(firstChar.value) && tail.longCharacterIsMember(firstChar.value) ? "_" : ""
         let parts = self.componentsSeparatedByCharactersInSet(tail.invertedSet)
-        return prefix + "".join(parts.map { string in
+        let replacement = underscores ? "_" : ""
+        return prefix + replacement.join(parts.map { string in
             // Can't use capitalizedString here because it will lowercase all letters after the first
             // e.g. "SomeNiceIdentifier".capitalizedString will because "Someniceidentifier" which is not what we want
-            let firstLetter = (string as NSString).substringToIndex(1)
-            let rest = (string as NSString).substringFromIndex(1)
-            return firstLetter.uppercaseString + rest
+            let ns = string as NSString
+            if ns.length > 0 {
+                let firstLetter = ns.substringToIndex(1)
+                let rest = ns.substringFromIndex(1)
+                return firstLetter.uppercaseString + rest
+            } else {
+                return ""
+            }
         })
     }
 }
