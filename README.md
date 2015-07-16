@@ -81,7 +81,7 @@ extension UIStoryboard {
             return UIStoryboard(name: "Profile", bundle: nil)
         }
        
-        static func initialviewController() -> UIViewController {
+        static func initialViewController() -> UIViewController {
             return instance().instantiateInitialViewController() as! UIViewController
         }
        
@@ -102,7 +102,7 @@ Once the script has parsed your storyboard files and generated the code above, y
 
 ```
 let storyboard = UIStoryboard.Profile.instance()
-let mainVC = UIStoryboard.Profile.initialviewController()
+let mainVC = UIStoryboard.Profile.initialViewController()
 
 let editVC = UIStoryboard.Profile.Edit.viewController()
 let advancedVC = UIStoryboard.Profile.viewController(.Advanced) // Alternative syntax
@@ -110,7 +110,7 @@ let advancedVC = UIStoryboard.Profile.viewController(.Advanced) // Alternative s
 
 ## Localizable.strings
 
-> Associated script: `L10n.playground` _(work in progress, not converted to a CLI script yet)_
+> Associated script: `SwiftGen.playground/swiftgen)l10n` _(work in progress, not converted to a CLI script yet)_
 
 This script will generate a Swift `enum L10n` that will map all your `Localizable.strings` keys to an `enum case`. Additionnaly, if it detects placeholders like `%@`,`%d`,`%f`, it will add associated values to that `case`.
 
