@@ -9,11 +9,16 @@ This is a suite of scripts / tools to auto-generate Swift code for various asset
 
 ## Installation
 
-* clone this repository locally
-* run `rake` from the command line (this will generate the private modules/libraries commonly used and needed by the various scripts)
-* run one of the `swiftgen-xxx.swift` tool
+Those scripts are written in Swift 2.0 and should be build using Xcode 7.
 
-_Note: those scripts are written in Swift 2.0 (because I like it and that's the next thing anyway)_
+> If your Xcode 7 is not the one set as default for use from the Command Line, you can use `sudo xcode-select -s` to change it. Alternatively, you can prepend `DEVELOPER_DIR=/Applications/Xcode-beta.app` to each command to use it only for those command line invocations.
+
+To install the scripts:
+
+* clone this repository locally
+* run `rake` from the command line. This will generate the private modules/libraries commonly used and needed by the various scripts
+* run one of the `swiftgen-xxx.swift` tool.
+
 
 ## Assets Catalogs
 

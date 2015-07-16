@@ -1,5 +1,7 @@
 import Foundation
 
+
+// WIP. This should be ported as a lib + CLI later
 //: #### List of supported types in string placeholders (`%…`)
 enum PlaceholderType : String {
     case String
