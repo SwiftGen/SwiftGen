@@ -1,30 +1,48 @@
 # SwiftGen
 
-This is a suite of scripts / tools to auto-generate Swift code for various assets of your project:
+This is a suite of tools written in Swift to auto-generate Swift code for various assets of your project:
 
 * [`enums` for your Assets Catalogs](#assets-catalogs)
 * [`enums` for your `UIStoryboard` and their Scenes](#uistoryboard)
 * [`enums` for your `Localizable.strings` strings](#localizablestrings).
 * And maybe more to come…
 
-## Installation
+## Installation & Repo Organization
 
-Those scripts are written in Swift 2.0 and should be build using Xcode 7.
+### Build the tools from source
 
-> If your Xcode 7 is not the one set as default for use from the Command Line, you can use `sudo xcode-select -s` to change it. Alternatively, you can prepend `DEVELOPER_DIR=/Applications/Xcode-beta.app` to each command to use it only for those command line invocations.
+To build the executables from the source, **simply run `rake` from the command line**.
 
-To install the scripts:
+This will generate the local libraries (code shared between the various tools) in `lib/` and the executables in `bin/`.
 
-* clone this repository locally
-* run `rake` from the command line. This will generate the private modules/libraries commonly used and needed by the various scripts
-* run one of the `swiftgen-xxx.swift` tool.
+> Note: The tools are written in Swift 2.0 and need to be compiled with Xcode 7.
+> 
+> If your Xcode 7 is not the one set as default for use from the Command Line, you can use `sudo xcode-select -s` to change it. Alternatively, you can use `DEVELOPER_DIR=/Applications/Xcode-beta.app rake`.
 
+### Using the binaries
+
+* The built tools will be located in `bin/`. Simply invoke them with the necessary arguments from the command line (see doc of each tool below).
+* The `SwiftGen.playground` will allow you to play around with the various EnumFactories Swift libs used by the compiled scripts and see some usage examples.
+
+### Repository Organisation
+
+* The source of the command-line scripts are located in `src/`
+* The command-line scripts basically parse command-line arguments, then use the `SwiftGenXXXFactory` classes to generate the appropriate code
+* The various `SwiftGenXXXFactory` classes and shared code used by these scripts are stored in `SwiftGen.playground/Sources`. This way, the playground can also use those factories directly
+
+When running `rake`:
+
+* The `SwiftGen.playground/Sources` directory is parsed
+* Dependencies are automatically computed for each file
+* `rake` compiles each of those files as a library and its associated module into `lib/`
+* Then the `src/` directory is parsed, computing local lib dependencies needed for each
+* And finally `rake` compiles each of these file in `src` and link them with the libraries generated in `lib/` to produce the final executables in `bin/`..
 
 ## Assets Catalogs
 
-> Associated script: `swiftgen-assets.swift /dir/to/search/for/imageset/assets`
+> `swiftgen-assets /dir/to/search/for/imageset/assets`
 
-This script will allow you to generate a `enum ImageAsset` with one `case` per image asset in your catalog, so that you can use them as constants. For example:
+This tool will generate a `enum ImageAsset` with one `case` per image asset in your catalog, so that you can use them as constants. For example:
 
 ```
 enum ImageAsset : String {
@@ -61,51 +79,73 @@ This script only generate extensions and code compatible with `UIKit` and `UIIma
 
 ## UIStoryboard
 
-> Associated script: `N/A` _(work in progress)_
+> `swiftgen-storyboard` _(WIP, Only in Storyboard for now)_
 
-I plan this (future) script to generate enums for your `UIStoryboard` with one case per storyboard scene.
+This tool generate an `enum` for each of your `UIStoryboard`, with one `case` per storyboard scene.
 
 ### Generated code
 
-The generated code will probably look something like this:
+The generated code will look like this:
 
 ```
-extension UIStoryboard {
-    enum Profile : String {
-        case View = "profileViewIdentifier"
-        case Edit = "profileEditIdentifier"
-        case Advanced = "profileAdvancedIdentifier"
-       
-        // get the UIStoryboard instance itself
-        static func instance() -> UIStoryboard {
-            return UIStoryboard(name: "Profile", bundle: nil)
-        }
-       
-        static func initialViewController() -> UIViewController {
-            return instance().instantiateInitialViewController() as! UIViewController
-        }
-       
-        func viewController() -> UIViewController {
-            return Profile.instance().instantiateViewControllerWithIdentifier(self.rawValue) as! UIViewController
-        }
-        
-        static func viewController(identifier: Profile) -> UIViewController {
-            return identifier.viewController()
-        }
+import Foundation
+import UIKit
+
+protocol StoryboardScene : RawRepresentable {
+    static var storyboardName : String { get }
+}
+
+extension StoryboardScene where Self.RawValue == String {
+    static func storyboard() -> UIStoryboard {
+        return UIStoryboard(name: self.storyboardName, bundle: nil)
     }
+
+    static func initialViewController() -> UIViewController {
+        return storyboard().instantiateInitialViewController()!
+    }
+
+    func viewController() -> UIViewController {
+        return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
+    }
+    static func viewController(identifier: Self) -> UIViewController {
+        return identifier.viewController()
+    }
+}
+
+enum Wizzard : String, StoryboardScene {
+    static let storyboardName = "Wizzard"
+
+    case CreateAccount = "CreateAccount"
+    case AcceptCGU = "Accept-CGU"
+    case ValidatePassword = "Validate_Password"
+    case Preferences = "Preferences"
+
+    static var createAccountViewController : CreateAccViewController { return Wizzard.CreateAccount.viewController() as! CreateAccViewController }
+    static var acceptCGUViewController : UIViewController { return Wizzard.AcceptCGU.viewController() }
+    static var validatePasswordViewController : UIViewController { return Wizzard.ValidatePassword.viewController() }
+    static var preferencesViewController : UIViewController { return Wizzard.Preferences.viewController() }
+}
+
+enum Message : String, StoryboardScene {
+    static let storyboardName = "Message"
+
+    case Composer = "Composer"
+    case Recipient = "Recipient"
+
+    static var composerViewController : UIViewController { return Message.Composer.viewController() }
+    static var recipientViewController : UIViewController { return Message.Recipient.viewController() }
 }
 ```
 
 ### Usage
 
-Once the script has parsed your storyboard files and generated the code above, you'll be able to do the following:
-
 ```
-let storyboard = UIStoryboard.Profile.instance()
-let mainVC = UIStoryboard.Profile.initialViewController()
-
-let editVC = UIStoryboard.Profile.Edit.viewController()
-let advancedVC = UIStoryboard.Profile.viewController(.Advanced) // Alternative syntax
+// Initial VC
+let initialVC = Wizzard.initialViewController()
+// Generic ViewController constructor, returns a UIViewController instance
+let validateVC = Wizzard.ValidatePassword.viewController()
+// Dedicated type var that returns the right type of VC (CreateAccViewController here)
+let createVC = Wizzard.createAccountViewController
 ```
 
 ## Localizable.strings
