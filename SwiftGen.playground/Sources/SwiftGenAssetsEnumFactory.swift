@@ -5,7 +5,7 @@ public class SwiftGenAssetsEnumFactory {
     var enumName : String
     private var assetNames = [String]()
     
-    public init(enumName : String = "ImageAsset") {
+    public init(enumName : String = "Asset") {
         self.enumName = enumName
     }
     
@@ -41,23 +41,24 @@ public class SwiftGenAssetsEnumFactory {
         text += "import UIKit\n"
         text += "\n"
         
-        text += "enum \(enumName) : String {\n"
+        text += "extension UIImage {\n"
+
+        text += "    enum \(enumName) : String {\n"
         
         for name in assetNames {
             let caseName = name.asSwiftIdentifier(forbiddenChars: "_")
-            text += "    case \(caseName) = \"\(name)\"\n"
+            text += "        case \(caseName) = \"\(name)\"\n"
         }
         
         text += "\n"
-        text += "    var image: UIImage {\n"
-        text += "        return UIImage(named: self.rawValue)!\n"
-        text += "    }\n"
+        text += "        var image: UIImage {\n"
+        text += "            return UIImage(named: self.rawValue)!\n"
+        text += "        }\n"
         
-        text += "}\n\n"
+        text += "    }\n\n"
         
-        text += "extension UIImage {\n"
-        text += "    convenience init(asset: ImageAsset) {\n"
-        text += "        self.init(named: asset.rawValue)!\n"
+        text += "    convenience init?(asset: \(enumName)) {\n"
+        text += "        self.init(named: asset.rawValue)\n"
         text += "    }\n"
         text += "}\n"
         
