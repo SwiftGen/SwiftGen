@@ -19,24 +19,26 @@ This will generate the local libraries (code shared between the various tools) i
 > 
 > If your Xcode 7 is not the one set as default for use from the Command Line, you can use `sudo xcode-select -s` to change it. Alternatively, you can use `DEVELOPER_DIR=/Applications/Xcode-beta.app rake`.
 
-### Using the binaries
+### Using the binaries & Play with the Playground
 
 * The built tools will be located in `bin/`. Simply invoke them with the necessary arguments from the command line (see doc of each tool below).
-* The `SwiftGen.playground` will allow you to play around with the various EnumFactories Swift libs used by the compiled scripts and see some usage examples.
+* The `SwiftGen.playground` will allow you to play around with the various EnumFactories Swift classes used by the compiled tools and see some usage examples.
+
+> Note: The playground is in the Xcode 7 format, and uses its new concept of "Playground pages" to regroup multiple playground pages in a single Playground.
 
 ### Repository Organisation & Developer Info
 
 * The source of the command-line scripts are located in `src/`
-* The command-line scripts basically parse command-line arguments, then use the `SwiftGenXXXFactory` classes to generate the appropriate code
-* The various `SwiftGenXXXFactory` classes and shared code used by these scripts are stored in `SwiftGen.playground/Sources`. This way, the playground can also use those factories directly
+* The command-line scripts basically parse command-line arguments, then use the `SwiftGenXXXFactory` classes to generate the appropriate code, so their code is pretty simple as they are just wrappers around other classes
+* The core elements of the project, which is the various `SwiftGenXXXFactory` classes and the `SwiftIdentifier` shared code used by these scripts, are actually stored in `SwiftGen.playground/Sources`, so the playground can use those `SwiftGenXXXFactory` classes directly.
 
 When running `rake`:
 
 * The `SwiftGen.playground/Sources` directory is parsed
 * Dependencies are automatically computed for each file
-* `rake` compiles each of those files as a library and its associated module into `lib/`
+* `rake` compiles each of those files, as a library + its associated module, into `lib/`
 * Then the `src/` directory is parsed, computing local lib dependencies needed for each
-* And finally `rake` compiles each of these file in `src` and link them with the libraries generated in `lib/` to produce the final executables in `bin/`..
+* And finally `rake` compiles each of these file in `src`, and link them with the dependent libraries generated in `lib/`, to produce the final executables in `bin/`.
 
 ## Assets Catalogs
 
