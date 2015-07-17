@@ -57,7 +57,8 @@ enum Wizzard : String, StoryboardScene {
 
 let initialVC = Wizzard.initialViewController()
 let validateVC = Wizzard.ValidatePassword.viewController()
-let cgu = Wizzard.acceptCGUViewController
+/* Note: will crash in playground (because the storyboard file was not compiled alongside the playground code so the CreateAccViewController class was not known by the storyboard) */
+// let cgu = Wizzard.createAccountViewController
 
+initialVC.title
 validateVC.title
-cgu.title
