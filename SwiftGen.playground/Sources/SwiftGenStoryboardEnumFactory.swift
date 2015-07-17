@@ -12,13 +12,40 @@ public class SwiftGenStoryboardEnumFactory {
         
         class ParserDelegate : NSObject, NSXMLParserDelegate {
             var identifiers = [SceneInfo]()
+            var inScene = false
+            var readyForFirstObject = false
+            
             @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
                 namespaceURI: String?, qualifiedName qName: String?,
                 attributes attributeDict: [String : String])
             {
-                if elementName == "viewController", let identifier = attributeDict["storyboardIdentifier"] {
-                    let customClass = attributeDict["customClass"]
-                    identifiers.append(SceneInfo(identifier, customClass))
+                
+                switch elementName {
+                case "scene":
+                    inScene = true
+                case "objects" where inScene:
+                    readyForFirstObject = true
+                case _ where readyForFirstObject:
+                    if let identifier = attributeDict["storyboardIdentifier"] {
+                        let customClass = attributeDict["customClass"]
+                        identifiers.append(SceneInfo(identifier, customClass))
+                    }
+                    readyForFirstObject = false
+                default:
+                    break
+                }
+            }
+            
+            @objc func parser(parser: NSXMLParser, didEndElement elementName: String,
+                namespaceURI: String?, qualifiedName qName: String?)
+            {
+                switch elementName {
+                case "scene":
+                    inScene = false
+                case "objects" where inScene:
+                    readyForFirstObject = false
+                default:
+                    break;
                 }
             }
         }
@@ -33,9 +60,9 @@ public class SwiftGenStoryboardEnumFactory {
     
     public func parseDirectory(path: String) {
         if let dirEnum = NSFileManager.defaultManager().enumeratorAtPath(path) {
-            while let path = dirEnum.nextObject() as? String {
-                if path.pathExtension == "storyboard" {
-                    self.addStoryboardAtPath(path)
+            while let subPath = dirEnum.nextObject() as? String {
+                if subPath.pathExtension == "storyboard" {
+                    self.addStoryboardAtPath(path.stringByAppendingPathComponent(subPath))
                 }
             }
         }
@@ -44,6 +71,7 @@ public class SwiftGenStoryboardEnumFactory {
     
     private var commonCode : String = {
         var text = ""
+        
         text += "import Foundation\n"
         text += "import UIKit\n"
         text += "\n"
@@ -73,6 +101,8 @@ public class SwiftGenStoryboardEnumFactory {
     
     private func lowercaseFirst(string: String) -> String {
         let ns = string as NSString
+        // TODO: lowercase all letters that are uppercase at the beggining, except the last of the series. But always lowercase the first
+        //       e.g. : "FooBar" --> "fooBar" but also "URLFooBar" --> "urlFooBar" and not "uRLFooBar" like it's implemented now
         if ns.length > 0 {
             let firstLetter = ns.substringToIndex(1)
             let rest = ns.substringFromIndex(1)
@@ -85,7 +115,7 @@ public class SwiftGenStoryboardEnumFactory {
     
     public func generate() -> String {
         var text = commonCode
-        
+
         for (name, identifiers) in storyboards {
             let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
             text += "enum \(enumName) : String, StoryboardScene {\n"
@@ -106,7 +136,9 @@ public class SwiftGenStoryboardEnumFactory {
                     let lcCaseName = lowercaseFirst(caseName)
                     let vcClass = sceneInfo.customClass ?? "UIViewController"
                     let cast = sceneInfo.customClass == nil ? "" : " as! \(vcClass)"
-                    text += "    static var \(lcCaseName)ViewController : \(vcClass) { return \(enumName).\(caseName).viewController()\(cast) }\n"
+                    text += "    static var \(lcCaseName)ViewController : \(vcClass) {\n"
+                    text += "        return \(enumName).\(caseName).viewController()\(cast)\n"
+                    text += "    }\n"
                 }
             }
             

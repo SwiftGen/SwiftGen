@@ -131,10 +131,18 @@ enum Wizzard : String, StoryboardScene {
     case ValidatePassword = "Validate_Password"
     case Preferences = "Preferences"
 
-    static var createAccountViewController : CreateAccViewController { return Wizzard.CreateAccount.viewController() as! CreateAccViewController }
-    static var acceptCGUViewController : UIViewController { return Wizzard.AcceptCGU.viewController() }
-    static var validatePasswordViewController : UIViewController { return Wizzard.ValidatePassword.viewController() }
-    static var preferencesViewController : UIViewController { return Wizzard.Preferences.viewController() }
+    static var createAccountViewController : CreateAccViewController {
+      return Wizzard.CreateAccount.viewController() as! CreateAccViewController
+    }
+    static var acceptCGUViewController : UIViewController {
+      return Wizzard.AcceptCGU.viewController()
+    }
+    static var validatePasswordViewController : PasswordValidationViewController {
+      return Wizzard.ValidatePassword.viewController() as! PasswordValidationViewController
+    }
+    static var preferencesViewController : PrefsViewController {
+      return Wizzard.Preferences.viewController() as! PrefsViewController
+    }
 }
 
 enum Message : String, StoryboardScene {
@@ -143,8 +151,12 @@ enum Message : String, StoryboardScene {
     case Composer = "Composer"
     case Recipient = "Recipient"
 
-    static var composerViewController : UIViewController { return Message.Composer.viewController() }
-    static var recipientViewController : UIViewController { return Message.Recipient.viewController() }
+    static var composerViewController : MessageComposerViewController {
+      return Message.Composer.viewController() as! MessageComposerViewController
+    }
+    static var recipientViewController : RecipientChooserViewController {
+      return Message.Recipient.viewController() as! RecipientChooserViewController
+    }
 }
 ```
 
