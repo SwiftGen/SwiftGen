@@ -1,33 +1,109 @@
 #!/usr/bin/rake
 
-MODULES_SOURCE_DIR = './SwiftGen.playground/Sources'
-MODULES_BUILT_DIR = './lib'
+LIBS_SOURCE_DIR = './SwiftGen.playground/Sources'
+LIBS_OUTPUT_DIR = './lib'
+BINS_SOURCE_DIR = './src'
+BINS_OUTPUT_DIR = './bin'
 
-task :mkdir do
-  `[ -d "#{MODULES_BUILT_DIR}" ] || mkdir "#{MODULES_BUILT_DIR}"`
+def fn(path)
+  File.basename(path, '.swift')
 end
 
-desc "Remove all build products in #{MODULES_BUILT_DIR}"
-task :clean do
-  `rm -rf "#{MODULES_BUILT_DIR}"`
+namespace :lib do
+  task :mkdir do
+    `[ -d "#{LIBS_OUTPUT_DIR}" ] || mkdir "#{LIBS_OUTPUT_DIR}"`
+  end
+
+  task :clean do
+    `rm -rf "#{LIBS_OUTPUT_DIR}"`
+  end
 end
 
-desc "Generate all libraries and modules from source"
-task :build => :mkdir do
-  # Dir["#{MODULES_SOURCE_DIR}/*.swift"].each do |path|
-  build_module("#{MODULES_SOURCE_DIR}/SwiftIdentifier.swift")
-  build_module("#{MODULES_SOURCE_DIR}/SwiftGenAssetsEnumFactory.swift")
-  # end
+namespace :bin do
+  task :mkdir do
+    `[ -d "#{BINS_OUTPUT_DIR}" ] || mkdir "#{BINS_OUTPUT_DIR}"`
+  end
+
+  task :clean do
+    `rm -rf "#{BINS_OUTPUT_DIR}"`
+  end
 end
 
+desc 'Remove both build libraries and executables'
+task :clean => %w(lib:clean bin:clean)
 
-desc 'clean and regenerate all libs and  modules from source'
-task :default => [:clean, :build]
 
-def build_module(file_path)
-  module_name = File.basename(file_path, '.swift')
-  tmp_file = "#{MODULES_BUILT_DIR}/#{module_name}.tmp.swift"
-  File.write(tmp_file, File.read(file_path).gsub('//@import ','import '))
-  `xcrun -sdk macosx swiftc -I "#{MODULES_BUILT_DIR}" -L "#{MODULES_BUILT_DIR}" -emit-library -o "#{MODULES_BUILT_DIR}/lib#{module_name}.dylib" -emit-module -module-link-name "#{module_name}" "#{tmp_file}"`
+
+
+def build_lib(path)
+  Rake::Task['lib:mkdir'].invoke
+  module_name = fn(path)
+  tmp_file = "#{LIBS_OUTPUT_DIR}/#{module_name}.tmp.swift"
+  File.write(tmp_file, File.read(path).gsub('//@import ','import '))
+  `xcrun -sdk macosx swiftc -I "#{LIBS_OUTPUT_DIR}" -L "#{LIBS_OUTPUT_DIR}" -emit-library -o "#{LIBS_OUTPUT_DIR}/lib#{module_name}.dylib" -emit-module -module-link-name "#{module_name}" "#{tmp_file}"`
   FileUtils.rm(tmp_file)
 end
+
+def build_bin(path)
+  Rake::Task['bin:mkdir'].invoke
+  exec_name = fn(path)
+  `xcrun -sdk macosx swiftc -I "#{LIBS_OUTPUT_DIR}" -L "#{LIBS_OUTPUT_DIR}" -emit-executable -o "#{BINS_OUTPUT_DIR}/#{exec_name}" "#{path}"`
+end
+
+def lib_dependencies(path)
+  content = File.read(path)
+  deps = []
+  content.scan(%r{^//@import (.*)$}) { |match| deps.push(match.first) }
+  deps
+end
+
+def src_dependencies(path)
+  content = File.read(path)
+  deps = []
+  content.scan(%r{^import (.*)$}) { |match| deps.push(match.first) }
+  deps
+end
+
+def create_lib_task(path, deps)
+  name = fn(path)
+  all_deps = %w(lib:mkdir) + deps
+  
+  desc "Build #{name} library"
+  task name => all_deps do
+    build_lib(path)
+  end
+end
+
+def create_bin_task(path, deps = [])
+  name = fn(path)
+  all_deps = %w(bin:mkdir) + deps
+  desc "Build #{name} executable"
+  task name => all_deps do
+    build_bin(path)
+  end
+end
+
+
+
+
+known_libs = []
+Dir["#{LIBS_SOURCE_DIR}/*.swift"].each do |path|
+  deps = lib_dependencies(path)
+  create_lib_task(path, deps)
+  known_libs.push(fn(path))
+end
+known_bins = []
+Dir["#{BINS_SOURCE_DIR}/*.swift"].each do |path|
+  libs = src_dependencies(path)
+  deps = libs & known_libs
+  create_bin_task(path, deps)
+  known_bins.push(fn(path))
+end
+
+
+desc 'Build all executables'
+task :all => known_bins
+
+desc 'clean all libs & bins then regenerate all executables'
+task :default => [:clean, :all]
+
