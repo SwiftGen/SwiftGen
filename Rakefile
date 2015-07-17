@@ -66,19 +66,18 @@ end
 
 def create_lib_task(path, deps)
   name = fn(path)
-  all_deps = %w(lib:mkdir) + deps
   
   desc "Build #{name} library"
-  task name => all_deps do
+  task name => deps do
     build_lib(path)
   end
 end
 
 def create_bin_task(path, deps = [])
   name = fn(path)
-  all_deps = %w(bin:mkdir) + deps
+  
   desc "Build #{name} executable"
-  task name => all_deps do
+  task name => deps do
     build_bin(path)
   end
 end
