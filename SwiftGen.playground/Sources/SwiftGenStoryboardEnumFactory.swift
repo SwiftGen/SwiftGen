@@ -7,7 +7,7 @@ public class SwiftGenStoryboardEnumFactory {
     
     public init() {}
     
-    public func addStoryboard(path: String) {
+    public func addStoryboardAtPath(path: String) {
         let parser = NSXMLParser(contentsOfURL: NSURL.fileURLWithPath(path))
         
         class ParserDelegate : NSObject, NSXMLParserDelegate {
@@ -31,6 +31,16 @@ public class SwiftGenStoryboardEnumFactory {
         storyboards[storyboardName] = delegate.identifiers
     }
     
+    public func parseDirectory(path: String) {
+        if let dirEnum = NSFileManager.defaultManager().enumeratorAtPath(path) {
+            while let path = dirEnum.nextObject() as? String {
+                if path.pathExtension == "storyboard" {
+                    self.addStoryboardAtPath(path)
+                }
+            }
+        }
+    }
+
     
     private var commonCode : String = {
         var text = ""
@@ -79,21 +89,25 @@ public class SwiftGenStoryboardEnumFactory {
         for (name, identifiers) in storyboards {
             let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
             text += "enum \(enumName) : String, StoryboardScene {\n"
-            text += "    static let storyboardName = \"\(name)\"\n\n"
+            text += "    static let storyboardName = \"\(name)\"\n"
             
-            for sceneInfo in identifiers {
-                let caseName = sceneInfo.identifier.asSwiftIdentifier(forbiddenChars: "_")
-                text += "    case \(caseName) = \"\(sceneInfo.identifier)\"\n"
-            }
-            
-            text += "\n"
-            
-            for sceneInfo in identifiers {
-                let caseName = sceneInfo.identifier.asSwiftIdentifier(forbiddenChars: "_")
-                let lcCaseName = lowercaseFirst(caseName)
-                let vcClass = sceneInfo.customClass ?? "UIViewController"
-                let cast = sceneInfo.customClass == nil ? "" : " as! \(vcClass)"
-                text += "    static var \(lcCaseName)ViewController : \(vcClass) { return \(enumName).\(caseName).viewController()\(cast) }\n"
+            if !identifiers.isEmpty {
+                text += "\n"
+                
+                for sceneInfo in identifiers {
+                    let caseName = sceneInfo.identifier.asSwiftIdentifier(forbiddenChars: "_")
+                    text += "    case \(caseName) = \"\(sceneInfo.identifier)\"\n"
+                }
+                    
+                text += "\n"
+                
+                for sceneInfo in identifiers {
+                    let caseName = sceneInfo.identifier.asSwiftIdentifier(forbiddenChars: "_")
+                    let lcCaseName = lowercaseFirst(caseName)
+                    let vcClass = sceneInfo.customClass ?? "UIViewController"
+                    let cast = sceneInfo.customClass == nil ? "" : " as! \(vcClass)"
+                    text += "    static var \(lcCaseName)ViewController : \(vcClass) { return \(enumName).\(caseName).viewController()\(cast) }\n"
+                }
             }
             
             text += "}\n\n"

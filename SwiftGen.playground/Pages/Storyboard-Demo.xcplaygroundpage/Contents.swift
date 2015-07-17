@@ -9,10 +9,10 @@ class CreateAccViewController : UIViewController {}
 
 let factory = SwiftGenStoryboardEnumFactory()
 if let sbFile1 = NSBundle.mainBundle().pathForResource("Wizzard", ofType: "storyboard") {
-    factory.addStoryboard(sbFile1)
+    factory.addStoryboardAtPath(sbFile1)
 }
 //if let sbFile2 = NSBundle.mainBundle().pathForResource("Message", ofType: "storyboard") {
-//    factory.addStoryboard(sbFile2)
+//    factory.addStoryboardAtPath(sbFile2)
 //}
 print(factory.generate())
 
