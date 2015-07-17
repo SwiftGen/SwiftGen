@@ -3,7 +3,7 @@ import Foundation
 
 public class SwiftGenAssetsEnumFactory {
     var enumName : String
-    var assetNames = [String]()
+    private var assetNames = [String]()
     
     public init(enumName : String = "ImageAsset") {
         self.enumName = enumName
@@ -36,6 +36,10 @@ public class SwiftGenAssetsEnumFactory {
     
     public func generate() -> String {
         var text = ""
+        
+        text += "import Foundation\n"
+        text += "import UIKit\n"
+        text += "\n"
         
         text += "enum \(enumName) : String {\n"
         
