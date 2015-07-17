@@ -90,7 +90,7 @@ Note that this script only generate extensions and code compatible with `UIKit` 
 
 ## UIStoryboard
 
-> `swiftgen-storyboard` _(WIP, Only in Storyboard for now)_
+> `swiftgen-storyboard /dir/to/search/for/storyboards`
 
 This tool generate an `enum` for each of your `UIStoryboard`, with one `case` per storyboard scene.
 
@@ -161,7 +161,7 @@ let createVC = Wizzard.createAccountViewController
 
 ## Localizable.strings
 
-> Associated script: `SwiftGen.playground/swiftgen)l10n` _(work in progress, not converted to a CLI script yet)_
+> `SwiftGen.playground/swiftgen-l10n` _(work in progress, not converted to a CLI script yet)_
 
 This script will generate a Swift `enum L10n` that will map all your `Localizable.strings` keys to an `enum case`. Additionnaly, if it detects placeholders like `%@`,`%d`,`%f`, it will add associated values to that `case`.
 
