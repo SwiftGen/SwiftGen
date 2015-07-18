@@ -2,12 +2,9 @@ import Foundation
 //@import SwiftIdentifier
 
 public class SwiftGenAssetsEnumBuilder {
-    var enumName : String
     private var assetNames = [String]()
     
-    public init(enumName : String = "Asset") {
-        self.enumName = enumName
-    }
+    public init() {}
     
     public func addAssetName(name: String) -> Bool {
         if assetNames.contains(name) {
@@ -34,7 +31,7 @@ public class SwiftGenAssetsEnumBuilder {
         }
     }
     
-    public func build() -> String {
+    public func build(enumName : String = "Asset") -> String {
         var text = "// AUTO-GENERATED FILE, DO NOT EDIT\n\n"
         
         text += "import Foundation\n"
