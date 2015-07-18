@@ -57,14 +57,18 @@ def build_standalone(path, deps)
   Rake::Task['bin:mkdir'].invoke
   exec_name = fn(path)
   all_deps = recursive_dependencies(deps)
-  deps_files = all_deps.map { |lib| "#{LIBS_SOURCE_DIR}/#{lib}.swift" } .join(' ')
+  deps_files = all_deps.map { |lib| "#{LIBS_SOURCE_DIR}/#{lib}.swift" }
 
   Dir.mktmpdir do |dir|
     main_file = "#{dir}/main.swift"
     cleaned_source = File.read(path)
     deps.each { |lib| cleaned_source.gsub!("import #{lib}",'') }
     File.write(main_file, cleaned_source)
-    `xcrun -sdk macosx swiftc -o "#{BINS_OUTPUT_DIR}/#{exec_name}" #{deps_files} "#{main_file}"`
+    `xcrun -sdk macosx swiftc -o "#{BINS_OUTPUT_DIR}/#{exec_name}" #{deps_files.join(' ')} "#{main_file}"`
+    if verbose === true
+      list = (deps_files + [path]).map { |d| " - #{d}" }.join("\n")
+      puts "Building #{BINS_OUTPUT_DIR}/#{exec_name} from files:\n" + list
+    end
   end
 end
 

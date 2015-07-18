@@ -257,10 +257,12 @@ The `Rakefile` tasks are automatically constructed by filesystem parsing. For ex
 * Potential transitive dependencies for libs (like `SwiftGenAssetsEnumBuilder` depending itself on `SwiftIdentifier`) are also automatically detected by scanning for `//@import` comment lines I added in the lib sources (that's an entirely personal convention)
 * As a result, `rake` is able to build each script into a standalone tool by determining all by itself all the files needed to build the binary
 
-Note that even if it's not the recommended mode, the `Rakefile` also allows you to build _dependant_ binaries. In this mode:
+> Note: You can see which `.swift` files are used when building each too by using the verbose mode of rake: `rake --verbose`.
 
-* It starts by creating a rake task `lib:xxx` for each files in `SwiftGen.playground/Sources` that will compile them as dynamic libraries into `./lib/`
-* Then it adds rake tasks `bin:xxx` that compiles the scripts located in `src/` into `bin/`, but as executables **linked against those dynamic libraries**.
+Additionally, even if it's not the recommended mode, the `Rakefile` allows you to build _dependant_ binaries too. In this mode:
+
+* It starts by creating a rake task `lib:XXX` for each files in `SwiftGen.playground/Sources` that will compile them as dynamic libraries into `./lib/libXXX.dylib`
+* Then it adds rake tasks `bin:XXX` that compiles the scripts located in `src/XXX` into `bin/XXX`, but as executables **linked against those dynamic libraries** previously generated.
 * Dependencies are also automagically computed when using this mode, with similar techniques as described above, so that executables are only linked against the appropriate dynamic libraries in `lib/`
 
 > The drawback of this mode is that the executables are being linked against libs at path `./lib/libXXX`, which means that it needs those dynamic libs to always be located at that path (relative to the working dir) for the binary to even be launchable. This means that you will only be able to call `bin/swiftgen-assets` from this repository working directory, and not from anywhere else.
