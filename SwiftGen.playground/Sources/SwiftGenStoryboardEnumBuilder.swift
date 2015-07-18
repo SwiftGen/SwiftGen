@@ -71,8 +71,9 @@ public class SwiftGenStoryboardEnumBuilder {
     }
     
     public func build(indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
+        var text = "// AUTO-GENERATED FILE, DO NOT EDIT\n\n"    
         let t = indent.string
-        var text = commonCode(indentationString: t)
+        text += commonCode(indentationString: t)
 
         for (name, scenes) in storyboards {
             let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
@@ -107,7 +108,7 @@ public class SwiftGenStoryboardEnumBuilder {
     // MARK: - Private Helpers
     
     private func commonCode(indentationString t : String) -> String {
-        var text = "// AUTO-GENERATED FILE, DO NOT EDIT\n\n"
+        var text = ""
         
         text += "import Foundation\n"
         text += "import UIKit\n"
