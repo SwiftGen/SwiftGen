@@ -2,8 +2,9 @@ import Foundation
 //@import SwiftIdentifier
 
 public class SwiftGenStoryboardEnumBuilder {
-    typealias SceneInfo = (identifier: String, customClass: String?)
-    private var storyboards = [String : [SceneInfo]]()
+    private typealias Scene = (storyboardID: String, customClass: String?)
+    private var storyboards = [String : [Scene]]()
+
     
     public init() {}
     
@@ -11,7 +12,7 @@ public class SwiftGenStoryboardEnumBuilder {
         let parser = NSXMLParser(contentsOfURL: NSURL.fileURLWithPath(path))
         
         class ParserDelegate : NSObject, NSXMLParserDelegate {
-            var identifiers = [SceneInfo]()
+            var scenes = [Scene]()
             var inScene = false
             var readyForFirstObject = false
             
@@ -26,9 +27,9 @@ public class SwiftGenStoryboardEnumBuilder {
                 case "objects" where inScene:
                     readyForFirstObject = true
                 case _ where readyForFirstObject:
-                    if let identifier = attributeDict["storyboardIdentifier"] {
+                    if let storyboardID = attributeDict["storyboardIdentifier"] {
                         let customClass = attributeDict["customClass"]
-                        identifiers.append(SceneInfo(identifier, customClass))
+                        scenes.append(Scene(storyboardID, customClass))
                     }
                     readyForFirstObject = false
                 default:
@@ -55,7 +56,7 @@ public class SwiftGenStoryboardEnumBuilder {
         parser?.parse()
         
         let storyboardName = path.lastPathComponent.stringByDeletingPathExtension
-        storyboards[storyboardName] = delegate.identifiers
+        storyboards[storyboardName] = delegate.scenes
     }
     
     public func parseDirectory(path: String) {
@@ -67,7 +68,42 @@ public class SwiftGenStoryboardEnumBuilder {
             }
         }
     }
+    
+    public func build() -> String {
+        var text = commonCode
 
+        for (name, scenes) in storyboards {
+            let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
+            text += "enum \(enumName) : String, StoryboardScene {\n"
+            text += "    static let storyboardName = \"\(name)\"\n"
+            
+            if !scenes.isEmpty {
+                text += "\n"
+                
+                for scene in scenes {
+                    let caseName = scene.storyboardID.asSwiftIdentifier(forbiddenChars: "_")
+                    let lcCaseName = lowercaseFirst(caseName)
+                    let vcClass = scene.customClass ?? "UIViewController"
+                    let cast = scene.customClass == nil ? "" : " as! \(vcClass)"
+
+                    text += "    case \(caseName) = \"\(scene.storyboardID)\"\n"
+                    text += "    static var \(lcCaseName)ViewController : \(vcClass) {\n"
+                    text += "        return \(enumName).\(caseName).viewController()\(cast)\n"
+                    text += "    }\n\n"
+
+                }
+            }
+            
+            text += "}\n\n"
+        }
+        
+        return text
+    }
+    
+    
+    
+    
+    // MARK: - Private Helpers
     
     private var commonCode : String = {
         var text = "// AUTO-GENERATED FILE, DO NOT EDIT\n\n"
@@ -82,7 +118,7 @@ public class SwiftGenStoryboardEnumBuilder {
         text += "    static func initialViewController() -> UIViewController\n"
         text += "    func viewController() -> UIViewController\n"
         text += "    static func viewController(identifier: Self) -> UIViewController\n"
-
+        
         text += "}\n"
         text += "\n"
         text += "extension StoryboardScene where Self.RawValue == String {\n"
@@ -116,36 +152,6 @@ public class SwiftGenStoryboardEnumBuilder {
         let lettersToLower = count > 1 ? count-1 : count
         return ns.substringToIndex(lettersToLower).lowercaseString + ns.substringFromIndex(lettersToLower)
     }
-    
-    public func build() -> String {
-        var text = commonCode
 
-        for (name, identifiers) in storyboards {
-            let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
-            text += "enum \(enumName) : String, StoryboardScene {\n"
-            text += "    static let storyboardName = \"\(name)\"\n"
-            
-            if !identifiers.isEmpty {
-                text += "\n"
-                
-                for sceneInfo in identifiers {
-                    let caseName = sceneInfo.identifier.asSwiftIdentifier(forbiddenChars: "_")
-                    let lcCaseName = lowercaseFirst(caseName)
-                    let vcClass = sceneInfo.customClass ?? "UIViewController"
-                    let cast = sceneInfo.customClass == nil ? "" : " as! \(vcClass)"
-
-                    text += "    case \(caseName) = \"\(sceneInfo.identifier)\"\n"
-                    text += "    static var \(lcCaseName)ViewController : \(vcClass) {\n"
-                    text += "        return \(enumName).\(caseName).viewController()\(cast)\n"
-                    text += "    }\n\n"
-
-                }
-            }
-            
-            text += "}\n\n"
-        }
-        
-        return text
-    }
 }
 
