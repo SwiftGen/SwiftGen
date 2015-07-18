@@ -302,7 +302,7 @@ Here are some details on how the files are organized in that repo and how the Ra
 
 * The source of the command-line scripts are located in `src/`
 * The command-line scripts basically parse command-line arguments, then use the `SwiftGenXXXEnumBuilder` classes to generate the appropriate code, so their code is pretty simple as they are just wrappers around other builder classes
-* The core elements of the project, which is the various `SwiftGenXXXEnumBuilder` classes and the `SwiftIdentifier` shared code used by these classes, are actually stored in `SwiftGen.playground/Sources`, so the playground can use those `SwiftGenXXXEnumBuilder` classes directly.
+* The core elements of the project, which are the various `SwiftGenXXXEnumBuilder` classes + some other shared code used by these classes, are actually stored in `SwiftGen.playground/Sources`. That way, the playground can use those `SwiftGenXXXEnumBuilder` classes directly and you can play around with those `Builder` classes here.
 
 The `Rakefile` tasks are automatically constructed by filesystem parsing. For example, when running `rake`:
 
@@ -311,20 +311,18 @@ The `Rakefile` tasks are automatically constructed by filesystem parsing. For ex
 * Potential transitive dependencies for libs (like `SwiftGenAssetsEnumBuilder` depending itself on `SwiftIdentifier`) are also automatically detected by scanning for `//@import` comment lines I added in the lib sources (that's an entirely personal convention)
 * As a result, `rake` is able to build each script into a standalone tool by determining all by itself all the files needed to build the binary
 
-> Note: You can see which `.swift` files are used when building each too by using the verbose mode of rake: `rake --verbose`.
-
-Additionally, even if it's not the recommended mode, the `Rakefile` allows you to build _dependant_ binaries too. In this mode:
+Additionally, even if it's not the recommended mode, the `Rakefile` allows you to build _dependant_ binaries too, using `rake bin:all`. In this mode:
 
 * It starts by creating a rake task `lib:XXX` for each files in `SwiftGen.playground/Sources` that will compile them as dynamic libraries into `./lib/libXXX.dylib`
 * Then it adds rake tasks `bin:XXX` that compiles the scripts located in `src/XXX` into `bin/XXX`, but as executables **linked against those dynamic libraries** previously generated.
-* Dependencies are also automagically computed when using this mode, with similar techniques as described above, so that executables are only linked against the appropriate dynamic libraries in `lib/`
+* Dependencies are also automagically computed when using this mode, with similar techniques as described above, so that the `bin:XXX` rake tasks are made dependant on the appropriate `lib:XXX` rake tasks, and the final executables are only linked against the appropriate dynamic libraries in `lib/` (and not all of them).
 
 > The drawback of this mode is that the executables are being linked against libs at path `./lib/libXXX`, which means that it needs those dynamic libs to always be located at that path (relative to the working dir) for the binary to even be launchable. This means that you will only be able to call `bin/swiftgen-assets` from this repository working directory, and not from anywhere else.
 > 
-> This mode still exists anyway, because it was the first mode I implemented when creating that Rakefile, and because it's still interesting as an exercice to know how to build dylibs and modules (and because it may evolve someday to build a reusable framework maybe?).
+> This mode still exists anyway, because it was the first mode I implemented when creating that `Rakefile`, and because it's still interesting as an exercice to know how to build dylibs and modules (and because it may evolve someday to build a reusable framework maybe?).
 
 # Licence
 
-This code will be released under the MIT Licence.
+This code is under the MIT Licence.
 
 Any ideas and contributions welcome!
