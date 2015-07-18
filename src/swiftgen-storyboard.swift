@@ -1,9 +1,9 @@
 import Foundation
-import SwiftGenStoryboardEnumFactory
+import SwiftGenStoryboardEnumBuilder
 
 
 let scanDir = Process.argc < 2 ? "." : Process.arguments[1]
 
-let factory = SwiftGenStoryboardEnumFactory()
-factory.parseDirectory(scanDir)
-print(factory.generate())
+let enumBuilder = SwiftGenStoryboardEnumBuilder()
+enumBuilder.parseDirectory(scanDir)
+print(enumBuilder.build())

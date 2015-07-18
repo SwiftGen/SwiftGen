@@ -1,7 +1,7 @@
 import Foundation
 //@import SwiftIdentifier
 
-public class SwiftGenAssetsEnumFactory {
+public class SwiftGenAssetsEnumBuilder {
     var enumName : String
     private var assetNames = [String]()
     
@@ -34,7 +34,7 @@ public class SwiftGenAssetsEnumFactory {
         }
     }
     
-    public func generate() -> String {
+    public func build() -> String {
         var text = ""
         
         text += "import Foundation\n"
