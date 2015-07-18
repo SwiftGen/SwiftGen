@@ -70,7 +70,7 @@ public class SwiftGenStoryboardEnumBuilder {
 
     
     private var commonCode : String = {
-        var text = ""
+        var text = "// AUTO-GENERATED FILE, DO NOT EDIT\n\n"
         
         text += "import Foundation\n"
         text += "import UIKit\n"
