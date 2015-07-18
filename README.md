@@ -4,7 +4,7 @@ This is a suite of tools written in Swift to auto-generate Swift code for variou
 
 * [`enums` for your Assets Catalogs](#assets-catalogs)
 * [`enums` for your `UIStoryboard` and their Scenes](#uistoryboard)
-* [`enums` for your `UIColor`s](#uicolors).
+* [`enums` for your `UIColor`s](#uicolor).
 * [`enums` for your `Localizable.strings` strings](#localizablestrings).
 
 ## Installation
@@ -26,7 +26,7 @@ This will generate standalone executables into the `bin/` directory.
 
 > Note: The playground is in the Xcode 7 format, and uses its new concept of "Playground pages" to regroup multiple playground pages in a single Playground.
 
-To learn more on how the various source files used to build the tools are organized in the repository, see [Repository Organization & Rakefile Internals](repository-organization---rakefile-internals) at the end of this README.
+To learn more on how the various source files used to build the tools are organized in the repository, see [Repository Organization & Rakefile Internals](#repository-organization--rakefile-internals) at the end of this README.
 
 ---
 
@@ -92,9 +92,6 @@ This tool generate an `enum` for each of your `UIStoryboard`, with one `case` pe
 The generated code will look like this:
 
 ```
-import Foundation
-import UIKit
-
 protocol StoryboardScene : RawRepresentable {
     static var storyboardName : String { get }
 }
@@ -187,10 +184,6 @@ Translucent  : ffffffcc
 The generated code will look like this:
 
 ```
-// AUTO-GENERATED FILE, DO NOT EDIT
-
-import UIKit
-
 extension UIColor {
     /* Private Implementation details */
     ...
