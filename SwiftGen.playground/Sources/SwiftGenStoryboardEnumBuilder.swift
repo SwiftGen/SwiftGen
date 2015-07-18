@@ -1,5 +1,6 @@
 import Foundation
 //@import SwiftIdentifier
+//@import SwiftGenIndentation
 
 public class SwiftGenStoryboardEnumBuilder {
     private typealias Scene = (storyboardID: String, customClass: String?)
@@ -69,13 +70,14 @@ public class SwiftGenStoryboardEnumBuilder {
         }
     }
     
-    public func build() -> String {
-        var text = commonCode
+    public func build(indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
+        let t = indent.string
+        var text = commonCode(indentationString: t)
 
         for (name, scenes) in storyboards {
             let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
             text += "enum \(enumName) : String, StoryboardScene {\n"
-            text += "    static let storyboardName = \"\(name)\"\n"
+            text += "\(t)static let storyboardName = \"\(name)\"\n"
             
             if !scenes.isEmpty {
                 text += "\n"
@@ -86,11 +88,10 @@ public class SwiftGenStoryboardEnumBuilder {
                     let vcClass = scene.customClass ?? "UIViewController"
                     let cast = scene.customClass == nil ? "" : " as! \(vcClass)"
 
-                    text += "    case \(caseName) = \"\(scene.storyboardID)\"\n"
-                    text += "    static var \(lcCaseName)ViewController : \(vcClass) {\n"
-                    text += "        return \(enumName).\(caseName).viewController()\(cast)\n"
-                    text += "    }\n\n"
-
+                    text += "\(t)case \(caseName) = \"\(scene.storyboardID)\"\n"
+                    text += "\(t)static var \(lcCaseName)ViewController : \(vcClass) {\n"
+                    text += "\(t)\(t)return \(enumName).\(caseName).viewController()\(cast)\n"
+                    text += "\(t)}\n\n"
                 }
             }
             
@@ -105,7 +106,7 @@ public class SwiftGenStoryboardEnumBuilder {
     
     // MARK: - Private Helpers
     
-    private var commonCode : String = {
+    private func commonCode(indentationString t : String) -> String {
         var text = "// AUTO-GENERATED FILE, DO NOT EDIT\n\n"
         
         text += "import Foundation\n"
@@ -113,32 +114,33 @@ public class SwiftGenStoryboardEnumBuilder {
         text += "\n"
         
         text += "protocol StoryboardScene : RawRepresentable {\n"
-        text += "    static var storyboardName : String { get }\n"
-        text += "    static func storyboard() -> UIStoryboard\n"
-        text += "    static func initialViewController() -> UIViewController\n"
-        text += "    func viewController() -> UIViewController\n"
-        text += "    static func viewController(identifier: Self) -> UIViewController\n"
+        text += "\(t)static var storyboardName : String { get }\n"
+        text += "\(t)static func storyboard() -> UIStoryboard\n"
+        text += "\(t)static func initialViewController() -> UIViewController\n"
+        text += "\(t)func viewController() -> UIViewController\n"
+        text += "\(t)static func viewController(identifier: Self) -> UIViewController\n"
         
         text += "}\n"
         text += "\n"
         text += "extension StoryboardScene where Self.RawValue == String {\n"
-        text += "    static func storyboard() -> UIStoryboard {\n"
-        text += "        return UIStoryboard(name: self.storyboardName, bundle: nil)\n"
-        text += "    }\n"
+        text += "\(t)static func storyboard() -> UIStoryboard {\n"
+        text += "\(t)\(t)return UIStoryboard(name: self.storyboardName, bundle: nil)\n"
+        text += "\(t)}\n"
         text += "\n"
-        text += "    static func initialViewController() -> UIViewController {\n"
-        text += "        return storyboard().instantiateInitialViewController()!\n"
-        text += "    }\n"
+        text += "\(t)static func initialViewController() -> UIViewController {\n"
+        text += "\(t)\(t)return storyboard().instantiateInitialViewController()!\n"
+        text += "\(t)}\n"
         text += "\n"
-        text += "    func viewController() -> UIViewController {\n"
-        text += "        return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)\n"
-        text += "    }\n"
-        text += "    static func viewController(identifier: Self) -> UIViewController {\n"
-        text += "        return identifier.viewController()\n"
-        text += "    }\n"
+        text += "\(t)func viewController() -> UIViewController {\n"
+        text += "\(t)\(t)return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)\n"
+        text += "\(t)}\n"
+        text += "\(t)static func viewController(identifier: Self) -> UIViewController {\n"
+        text += "\(t)\(t)return identifier.viewController()\n"
+        text += "\(t)}\n"
         text += "}\n\n"
+        
         return text
-        }()
+    }
     
     private func lowercaseFirst(string: String) -> String {
         let ns = string as NSString
