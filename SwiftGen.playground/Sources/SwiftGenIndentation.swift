@@ -6,7 +6,7 @@ public enum SwiftGenIndentation {
     
     var string : String {
         if case let .Spaces(n) = self {
-            return (0..<n).reduce("") { s, _ in s + " " }
+            return String(count: n, repeatedValue: " " as Character)
         }
         else {
             return "\t"
