@@ -165,9 +165,9 @@ let createVC = Wizzard.createAccountViewController
 
 ## Localizable.strings
 
-> `SwiftGen.playground/swiftgen-l10n` _(work in progress, not converted to a CLI script yet)_
+> `SwiftGen.playground/swiftgen-l10n`
 
-This script will generate a Swift `enum L10n` that will map all your `Localizable.strings` keys to an `enum case`. Additionnaly, if it detects placeholders like `%@`,`%d`,`%f`, it will add associated values to that `case`.
+This tool generate a Swift `enum L10n` that will map all your `Localizable.strings` keys to an `enum case`. Additionnaly, if it detects placeholders like `%@`,`%d`,`%f`, it will add associated values to that `case`.
 
 ### Generated code
 
@@ -227,17 +227,12 @@ let ban = tr(.BananasOwner(2, "John"))
 // -> "Those 2 bananas belong to John."
 ```
 
-### Work in progress
+### Limitations
 
-The code for the `swiftgen-l10n` tool is almost ready, but is still in the form of a Playground (not converted to a standalone CLI tool yet) so I can continue playing around and test it.
-
-This is an early stage sample, for now only tested in a Playground. Next steps include:
-
-* Transforming it into a stand-alone Swift script, runnable from the Command Line and that will take the input file as parameter
-* Support more format placeholders, like `%x`, `%g`, etc
-* Support positionable placeholders, like `%2$@`, etc (which change the order in which the parameters are parsed)
-* Add some security during the parsing of placeholders, to avoid parsing too far in case we have an `%` that is not terminated by a known format type character
-  * e.g. today `%x makes %g fail` will start parsing the placeholder from `%` and won't stop until it encounters `@`, `f` or `d` — the only types supported so far — which will only happen on `fail`, so it will consider `%x makes %g f` like it were `%f` altogether, skipping a parameter in the process.
+* Does only support `%@`, `%f`, `%d`, `%i` and `%u` format placeholders.
+* Does not yet support positionable placeholders, like `%2$@`, etc (which change the order in which the parameters are parsed)
+* We need to add some security during the parsing of placeholders
+  * e.g. today `%x makes %g fail` will start parsing the placeholder from `%` and won't stop until it encounters one of `@fdiu` — the only types supported so far — which will only happen on `fail`, so it will consider `%x makes %g f` like it were `%f` altogether, skipping a parameter in the process…
 
 
 ---
