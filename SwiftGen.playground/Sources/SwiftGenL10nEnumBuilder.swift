@@ -1,5 +1,6 @@
 import Foundation
 //@import SwiftIdentifier
+//@import SwiftGenIndentation
 
 public class SwiftGenL10nEnumBuilder {
     public init() {}
@@ -18,14 +19,15 @@ public class SwiftGenL10nEnumBuilder {
         parsedLines.append(entry)
     }
     
-    public func build(enumName : String = "L10n") -> String {
+    public func build(enumName enumName : String = "L10n", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
         var enumText = "// AUTO-GENERATED FILE, DO NOT EDIT\n\n"
+        let t = indent.string
         
         enumText += "enum \(enumName.asSwiftIdentifier()) {\n"
         
         for entry in parsedLines {
             let caseName = entry.key.asSwiftIdentifier(forbiddenChars: "_")
-            enumText += "    case \(caseName)"
+            enumText += "\(t)case \(caseName)"
             if !entry.types.isEmpty {
                 enumText += "(" + ", ".join(entry.types.map{ $0.rawValue }) + ")"
             }
@@ -36,20 +38,20 @@ public class SwiftGenL10nEnumBuilder {
         
         enumText += "extension \(enumName.asSwiftIdentifier()) : CustomStringConvertible {\n"
         
-        enumText += "    var description : String { return self.string }\n\n"
+        enumText += "\(t)var description : String { return self.string }\n\n"
         
-        enumText += "    var string : String {\n"
-        enumText += "        switch self {\n"
+        enumText += "\(t)var string : String {\n"
+        enumText += "\(t)\(t)switch self {\n"
         
         for entry in parsedLines {
             let caseName = entry.key.asSwiftIdentifier(forbiddenChars: "_")
-            enumText += "            case .\(caseName)"
+            enumText += "\(t)\(t)\(t)case .\(caseName)"
             if !entry.types.isEmpty {
                 let params = (0..<entry.types.count).map { "let p\($0)" }
                 enumText += "(" + ", ".join(params) + ")"
             }
             enumText += ":\n"
-            enumText += "                return L10n.tr(\"\(entry.key)\""
+            enumText += "\(t)\(t)\(t)\(t)return \(enumName).tr(\"\(entry.key)\""
             if !entry.types.isEmpty {
                 enumText += ", "
                 let params = (0..<entry.types.count).map { "p\($0)" }
@@ -58,17 +60,17 @@ public class SwiftGenL10nEnumBuilder {
             enumText += ")\n"
         }
         
-        enumText += "        }\n"
-        enumText += "    }\n\n"
+        enumText += "\(t)\(t)}\n"
+        enumText += "\(t)}\n\n"
         
-        enumText += "    private static func tr(key: String, _ args: CVarArgType...) -> String {\n"
-        enumText += "        let format = NSLocalizedString(key, comment: \"\")\n"
-        enumText += "        return String(format: format, arguments: args)\n"
-        enumText += "    }\n"
+        enumText += "\(t)private static func tr(key: String, _ args: CVarArgType...) -> String {\n"
+        enumText += "\(t)\(t)let format = NSLocalizedString(key, comment: \"\")\n"
+        enumText += "\(t)\(t)return String(format: format, arguments: args)\n"
+        enumText += "\(t)}\n"
         enumText += "}\n\n"
         
-        enumText += "func tr(key: L10n) -> String {\n"
-        enumText += "    return key.string\n"
+        enumText += "func tr(key: \(enumName)) -> String {\n"
+        enumText += "\(t)return key.string\n"
         enumText += "}\n"
         
         return enumText
