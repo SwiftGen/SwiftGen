@@ -22,15 +22,15 @@ This will generate the local libraries (code shared between the various tools) i
 ### Using the binaries & Play with the Playground
 
 * The built tools will be located in `bin/`. Simply invoke them with the necessary arguments from the command line (see doc of each tool below).
-* The `SwiftGen.playground` will allow you to play around with the various EnumFactories Swift classes used by the compiled tools and see some usage examples.
+* The `SwiftGen.playground` will allow you to play around with the various EnumBuilders Swift classes used by the compiled tools and see some usage examples.
 
 > Note: The playground is in the Xcode 7 format, and uses its new concept of "Playground pages" to regroup multiple playground pages in a single Playground.
 
 ### Repository Organisation & Developer Info
 
 * The source of the command-line scripts are located in `src/`
-* The command-line scripts basically parse command-line arguments, then use the `SwiftGenXXXFactory` classes to generate the appropriate code, so their code is pretty simple as they are just wrappers around other classes
-* The core elements of the project, which is the various `SwiftGenXXXFactory` classes and the `SwiftIdentifier` shared code used by these scripts, are actually stored in `SwiftGen.playground/Sources`, so the playground can use those `SwiftGenXXXFactory` classes directly.
+* The command-line scripts basically parse command-line arguments, then use the `SwiftGenXXXEnumBuilder` classes to generate the appropriate code, so their code is pretty simple as they are just wrappers around other classes
+* The core elements of the project, which is the various `SwiftGenXXXEnumBuilder` classes and the `SwiftIdentifier` shared code used by these scripts, are actually stored in `SwiftGen.playground/Sources`, so the playground can use those `SwiftGenXXXEnumBuilder` classes directly.
 
 When running `rake`:
 

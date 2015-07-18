@@ -1,7 +1,7 @@
 import Foundation
 //@import SwiftIdentifier
 
-public class SwiftGenStoryboardEnumFactory {
+public class SwiftGenStoryboardEnumBuilder {
     typealias SceneInfo = (identifier: String, customClass: String?)
     private var storyboards = [String : [SceneInfo]]()
     
@@ -113,7 +113,7 @@ public class SwiftGenStoryboardEnumFactory {
         
     }
     
-    public func generate() -> String {
+    public func build() -> String {
         var text = commonCode
 
         for (name, identifiers) in storyboards {
