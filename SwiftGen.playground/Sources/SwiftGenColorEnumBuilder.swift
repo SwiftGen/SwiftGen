@@ -1,0 +1,124 @@
+import UIKit
+//@import SwiftIdentifier
+//@import SwiftGenIndentation
+
+public class SwiftGenColorEnumBuilder {
+    public init() {}
+    
+    public func addColorWithName(name: String, color: UIColor) {
+        var red   = CGFloat(0.0)
+        var green = CGFloat(0.0)
+        var blue  = CGFloat(0.0)
+        var alpha = CGFloat(1.0)
+        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        let value : UInt32 =
+            (UInt32(red   * 255) & 0xff) << 24
+          | (UInt32(green * 255) & 0xff) << 16
+          | (UInt32(blue  * 255) & 0xff) <<  8
+          | (UInt32(alpha * 255) & 0xff)
+        
+        addColorWithName(name, value: value)
+    }
+    
+    public func addColorWithName(name: String, value: String) {
+        addColorWithName(name, value: SwiftGenColorEnumBuilder.parse(value))
+    }
+    
+    public func addColorWithName(name: String, value: UInt32) {
+        colors[name] = value
+    }
+    
+    public func build(enumName enumName : String = "Name", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
+        var text = "// AUTO-GENERATED FILE, DO NOT EDIT\n\n"
+        let t = indent.string
+        text += commonCode(indentationString: t)
+        
+        text += "extension UIColor {\n"
+        text += "    enum \(enumName) : UInt32 {\n"
+        for (name, value) in colors {
+            let caseName = name.asSwiftIdentifier()
+            let hexValue = String(value, radix: 16)
+            text += "        case \(caseName) = 0x\(hexValue)\n"
+        }
+        text += "    }\n"
+        text += "\n"
+        text += "    convenience init(named name: \(enumName)) {\n"
+        text += "        self.init(rgbaValue: name.rawValue)\n"
+        text += "    }\n"
+        text += "}\n"
+        text += "\n"
+        
+        return text
+    }
+    
+    
+    // MARK: - Private Helpers
+    
+    var colors = [String:UInt32]()
+    
+    private func commonCode(indentationString t: String) -> String {
+        var text = ""
+        
+        text += "import UIKit\n"
+        text += "\n"
+        text += "extension UIColor {\n"
+        text += "\(t)private struct Cache {\n"
+        text += "\(t)\(t)static var values = [String:UInt32]()\n"
+        text += "\(t)}\n"
+        text += "\(t)\n"
+        text += "\(t)private static func parse(hexString: String) -> UInt32 {\n"
+        text += "\(t)\(t)if let cached = Cache.values[hexString] {\n"
+        text += "\(t)\(t)\(t)return cached\n"
+        text += "\(t)\(t)}\n"
+        text += "\(t)\(t)\n"
+        text += "\(t)\(t)let scanner = NSScanner(string: hexString)\n"
+        text += "\(t)\(t)let hasHash = scanner.scanString(\"#\", intoString: nil)\n"
+        text += "\(t)\(t)\n"
+        text += "\(t)\(t)var value : UInt32 = 0\n"
+        text += "\(t)\(t)scanner.scanHexInt(&value)\n"
+        text += "\(t)\(t)\n"
+        text += "\(t)\(t)let len = hexString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) - (hasHash ? 1 : 0)\n"
+        text += "\(t)\(t)if len == 6 {\n"
+        text += "\(t)\(t)\(t)// There were no alpha component, assume 0xff\n"
+        text += "\(t)\(t)\(t)value = (value << 8) | 0xff\n"
+        text += "\(t)\(t)}\n"
+        text += "\(t)\(t)\n"
+        text += "\(t)\(t)Cache.values[hexString] = value\n"
+        text += "\(t)\(t)return value\n"
+        text += "\(t)}\n"
+        text += "\(t)\n"
+        text += "\(t)convenience init(hexString: String) {\n"
+        text += "\(t)\(t)let value = UIColor.parse(hexString)\n"
+        text += "\(t)\(t)self.init(rgbaValue: value)\n"
+        text += "\(t)}\n"
+        text += "\(t)\n"
+        text += "\(t)convenience init(rgbaValue: UInt32) {\n"
+        text += "\(t)\(t)let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0\n"
+        text += "\(t)\(t)let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0\n"
+        text += "\(t)\(t)let blue  = CGFloat((rgbaValue >>  8) & 0xff) / 255.0\n"
+        text += "\(t)\(t)let alpha = CGFloat((rgbaValue      ) & 0xff) / 255.0\n"
+        text += "\(t)\(t)\n"
+        text += "\(t)\(t)self.init(red: red, green: green, blue: blue, alpha: alpha)\n"
+        text += "\(t)}\n"
+        text += "}\n\n"
+        
+        return text
+    }
+    
+    private static func parse(hexString: String) -> UInt32 {
+        let scanner = NSScanner(string: hexString)
+        let hasHash = scanner.scanString("#", intoString: nil)
+        
+        var value : UInt32 = 0
+        scanner.scanHexInt(&value)
+        
+        let len = hexString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) - (hasHash ? 1 : 0)
+        if len == 6 {
+            // There were no alpha component, assume 0xff
+            value = (value << 8) | 0xff
+        }
+        
+        return value
+    }
+}
