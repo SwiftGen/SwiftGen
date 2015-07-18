@@ -1,12 +1,14 @@
 import Foundation
+//@import SwiftIdentifier
 
 public class SwiftGenL10nEnumBuilder {
-
     public init() {}
 
-    public func parseLocalizableStringsFile(path: String) throws {
-        let fileContent = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+    // Localizable.strings files are generally UTF16, not UTF8!
+    public func parseLocalizableStringsFile(path: String, encoding: UInt = NSUTF16StringEncoding) throws {
+        let fileContent = try NSString(contentsOfFile: path, encoding: encoding)
         let lines = fileContent.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+
         for case let entry? in lines.map(Entry.init) {
             addEntry(entry)
         }
@@ -109,19 +111,22 @@ public class SwiftGenL10nEnumBuilder {
             self.types = types
         }
         
+        private static var regex = {
+            return try! NSRegularExpression(pattern: "^\"([^\"]+)\"[ \t]*=[ \t]*\"(.*)\"[ \t]*;", options: [])
+        }()
+        
         init?(line: String) {
-            let range = NSRange(location: 0, length: line.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
-            let regex = try! NSRegularExpression(pattern: "^\"([^\"]*)\" *= *\"(.*)\";", options: [])
-            if let match = regex.firstMatchInString(line, options: [], range: range) {
-                
+            let range = NSRange(location: 0, length: (line as NSString).length)
+            if let match = Entry.regex.firstMatchInString(line, options: [], range: range) {
                 let key = (line as NSString).substringWithRange(match.rangeAtIndex(1))
                 
                 let translation = (line as NSString).substringWithRange(match.rangeAtIndex(2))
                 let types = SwiftGenL10nEnumBuilder.typesFromFormatString(translation)
                 
                 self = Entry(key: key, types: types)
+            } else {
+                return nil
             }
-            return nil
         }
     }
     
@@ -138,7 +143,7 @@ public class SwiftGenL10nEnumBuilder {
         var lastPlaceholderIndex = 0
         
         for char in formatString.characters {
-            if char == Character("%") {
+            if char == "%" {
                 // TODO: Manage the "%%" special sequence
                 placeholderIndex = lastPlaceholderIndex++
             }
@@ -148,6 +153,12 @@ public class SwiftGenL10nEnumBuilder {
                 //        (If types.count+1 < placehlderIndex, we'll need to insert "Any" types to fill the gap)
                 if let type = PlaceholderType(formatChar: char) {
                     types.append(type)
+                    placeholderIndex = nil
+                }
+                else if char == "%" {
+                    // Treat it as "%%"
+                    // FIXME: This case will also be executed with strings like "%--%"
+                    //        Better add some more security during that parsing later
                     placeholderIndex = nil
                 }
             }
