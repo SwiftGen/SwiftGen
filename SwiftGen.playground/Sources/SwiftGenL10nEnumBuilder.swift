@@ -25,7 +25,7 @@ public class SwiftGenL10nEnumBuilder {
         
         for entry in parsedLines {
             let caseName = entry.key.asSwiftIdentifier(forbiddenChars: "_")
-            enumText += "\tcase \(caseName)"
+            enumText += "    case \(caseName)"
             if !entry.types.isEmpty {
                 enumText += "(" + ", ".join(entry.types.map{ $0.rawValue }) + ")"
             }
@@ -36,20 +36,20 @@ public class SwiftGenL10nEnumBuilder {
         
         enumText += "extension \(enumName.asSwiftIdentifier()) : CustomStringConvertible {\n"
         
-        enumText += "\tvar description : String { return self.string }\n\n"
+        enumText += "    var description : String { return self.string }\n\n"
         
-        enumText += "\tvar string : String {\n"
-        enumText += "\t\tswitch self {\n"
+        enumText += "    var string : String {\n"
+        enumText += "        switch self {\n"
         
         for entry in parsedLines {
             let caseName = entry.key.asSwiftIdentifier(forbiddenChars: "_")
-            enumText += "\t\t\tcase .\(caseName)"
+            enumText += "            case .\(caseName)"
             if !entry.types.isEmpty {
                 let params = (0..<entry.types.count).map { "let p\($0)" }
                 enumText += "(" + ", ".join(params) + ")"
             }
             enumText += ":\n"
-            enumText += "\t\t\t\treturn L10n.tr(\"\(entry.key)\""
+            enumText += "                return L10n.tr(\"\(entry.key)\""
             if !entry.types.isEmpty {
                 enumText += ", "
                 let params = (0..<entry.types.count).map { "p\($0)" }
@@ -58,17 +58,17 @@ public class SwiftGenL10nEnumBuilder {
             enumText += ")\n"
         }
         
-        enumText += "\t\t}\n"
-        enumText += "\t}\n\n"
+        enumText += "        }\n"
+        enumText += "    }\n\n"
         
-        enumText += "\tprivate static func tr(key: String, _ args: CVarArgType...) -> String {\n"
-        enumText += "\t\tlet format = NSLocalizedString(key, comment: \"\")\n"
-        enumText += "\t\treturn String(format: format, arguments: args)\n"
-        enumText += "\t}\n"
+        enumText += "    private static func tr(key: String, _ args: CVarArgType...) -> String {\n"
+        enumText += "        let format = NSLocalizedString(key, comment: \"\")\n"
+        enumText += "        return String(format: format, arguments: args)\n"
+        enumText += "    }\n"
         enumText += "}\n\n"
         
         enumText += "func tr(key: L10n) -> String {\n"
-        enumText += "\treturn key.string\n"
+        enumText += "    return key.string\n"
         enumText += "}\n"
         
         return enumText
