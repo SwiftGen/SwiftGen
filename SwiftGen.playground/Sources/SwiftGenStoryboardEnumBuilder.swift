@@ -106,16 +106,15 @@ public class SwiftGenStoryboardEnumBuilder {
     
     private func lowercaseFirst(string: String) -> String {
         let ns = string as NSString
-        // TODO: lowercase all letters that are uppercase at the beggining, except the last of the series. But always lowercase the first
-        //       e.g. : "FooBar" --> "fooBar" but also "URLFooBar" --> "urlFooBar" and not "uRLFooBar" like it's implemented now
-        if ns.length > 0 {
-            let firstLetter = ns.substringToIndex(1)
-            let rest = ns.substringFromIndex(1)
-            return firstLetter.lowercaseString + rest
-        } else {
-            return ""
+        let cs = NSCharacterSet.uppercaseLetterCharacterSet()
+        
+        var count = 0
+        while cs.characterIsMember(ns.characterAtIndex(count)) {
+            count++
         }
         
+        let lettersToLower = count > 1 ? count-1 : count
+        return ns.substringToIndex(lettersToLower).lowercaseString + ns.substringFromIndex(lettersToLower)
     }
     
     public func build() -> String {

@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="1514" y="172"/>
         </scene>
-        <!--Recipient-->
+        <!--URL to share-->
         <scene sceneID="xq8-Pa-EzB">
             <objects>
-                <viewController storyboardIdentifier="Recipient" title="Recipient" id="fbV-qd-GcD" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="URLChooser" title="URL to share" id="fbV-qd-GcD" customClass="XXPickerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XcH-RB-9tn"/>
                         <viewControllerLayoutGuide type="bottom" id="5vl-V0-RgR"/>
