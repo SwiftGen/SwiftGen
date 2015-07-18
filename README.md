@@ -4,8 +4,8 @@ This is a suite of tools written in Swift to auto-generate Swift code for variou
 
 * [`enums` for your Assets Catalogs](#assets-catalogs)
 * [`enums` for your `UIStoryboard` and their Scenes](#uistoryboard)
+* [`enums` for your `UIColor`s](#uicolors).
 * [`enums` for your `Localizable.strings` strings](#localizablestrings).
-* And maybe more to come…
 
 ## Installation
 
@@ -34,7 +34,7 @@ To learn more on how the various source files used to build the tools are organi
 
 > `swiftgen-assets /dir/to/search/for/imageset/assets`
 
-This tool will generate a `enum ImageAsset` with one `case` per image asset in your catalog, so that you can use them as constants.
+This tool will generate a `enum Asset` in an extension of `UIImage`, with one `case` per image asset in your assets catalog, so that you can use them as constants.
 
 ### Generated code
 
@@ -79,6 +79,7 @@ There are multiple benefits in using this:
 * All this will be ensured by the compiler.
 
 Note that this script only generate extensions and code compatible with `UIKit` and `UIImage`. It would be nice to have an option to generate OSX code in the future.
+
 
 ## UIStoryboard
 
@@ -163,15 +164,72 @@ let validateVC = Wizzard.ValidatePassword.viewController()
 let createVC = Wizzard.createAccountViewController
 ```
 
+
+## UIColor
+
+> `swiftgen-color /path/to/colors-file.txt`
+
+This tool will generate a `enum Name` in an extension of `UIColor`, with one `case` per color listed in the text file passed as argument.
+
+The text file is expected to have one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`). Whitespaces are ignored.
+
+### Generated code
+
+Given the following `colors.txt` file:
+
+```
+Cyan         : 0xff66ccff
+ArticleTitle : #33fe66
+ArticleBody  : 339666
+Translucent  : ffffffcc
+```
+
+The generated code will look like this:
+
+```
+// AUTO-GENERATED FILE, DO NOT EDIT
+
+import UIKit
+
+extension UIColor {
+    /* Private Implementation details */
+    ...
+}
+
+extension UIColor {
+    enum Name : UInt32 {
+        case Translucent = 0xffffffcc
+        case ArticleBody = 0x339666ff
+        case Cyan = 0xff66ccff
+        case ArticleTitle = 0x33fe66ff
+    }
+
+    convenience init(named name: Name) {
+        self.init(rgbaValue: name.rawValue)
+    }
+}
+```
+
+### Usage Example
+
+```
+UIColor(named: .ArticleTitle)
+UIColor(named: .ArticleBody)
+UIColor(named: .Translucent)
+```
+
+This way, no need to enter the color red, green, blue, alpha values each time and create ugly constants in the global namespace for them.
+
+
 ## Localizable.strings
 
-> `SwiftGen.playground/swiftgen-l10n`
+> `swiftgen-l10n /path/to/Localizable.strings`
 
 This tool generate a Swift `enum L10n` that will map all your `Localizable.strings` keys to an `enum case`. Additionnaly, if it detects placeholders like `%@`,`%d`,`%f`, it will add associated values to that `case`.
 
 ### Generated code
 
-Given this `Localizable.strings` file:
+Given the following `Localizable.strings` file:
 
 ```
 "alert_title" = "Title of the alert";
