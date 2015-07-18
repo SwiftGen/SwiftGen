@@ -11,9 +11,9 @@ let enumBuilder = SwiftGenStoryboardEnumBuilder()
 if let sbFile1 = NSBundle.mainBundle().pathForResource("Wizzard", ofType: "storyboard") {
     enumBuilder.addStoryboardAtPath(sbFile1)
 }
-//if let sbFile2 = NSBundle.mainBundle().pathForResource("Message", ofType: "storyboard") {
-//    enumBuilder.addStoryboardAtPath(sbFile2)
-//}
+if let sbFile2 = NSBundle.mainBundle().pathForResource("Message", ofType: "storyboard") {
+    enumBuilder.addStoryboardAtPath(sbFile2)
+}
 print(enumBuilder.build())
 
 
@@ -22,6 +22,10 @@ print(enumBuilder.build())
 
 protocol StoryboardScene : RawRepresentable {
     static var storyboardName : String { get }
+    static func storyboard() -> UIStoryboard
+    static func initialViewController() -> UIViewController
+    func viewController() -> UIViewController
+    static func viewController(identifier: Self) -> UIViewController
 }
 
 extension StoryboardScene where Self.RawValue == String {
@@ -61,7 +65,9 @@ enum Wizzard : String, StoryboardScene {
 
 let initialVC = Wizzard.initialViewController()
 let validateVC = Wizzard.ValidatePassword.viewController()
-/* Note: will crash in playground (because the storyboard file was not compiled alongside the playground code so the CreateAccViewController class was not known by the storyboard) */
+/* Note: the following line would crash when run in playground, because the storyboard file
+   was not compiled alongside the playground code, so the CreateAccViewController class was
+   not known by the storyboard. But it should work correctly in a real project. */
 // let cgu = Wizzard.createAccountViewController
 
 initialVC.title
