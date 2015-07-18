@@ -2,7 +2,7 @@ import Foundation
 //@import SwiftIdentifier
 //@import SwiftGenIndentation
 
-public class SwiftGenStoryboardEnumBuilder {
+public final class SwiftGenStoryboardEnumBuilder {
     private typealias Scene = (storyboardID: String, customClass: String?)
     private var storyboards = [String : [Scene]]()
 
@@ -157,4 +157,3 @@ public class SwiftGenStoryboardEnumBuilder {
     }
 
 }
-
