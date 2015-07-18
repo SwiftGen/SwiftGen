@@ -1,25 +1,9 @@
-import UIKit
+import Foundation
 //@import SwiftIdentifier
 //@import SwiftGenIndentation
 
 public class SwiftGenColorEnumBuilder {
     public init() {}
-    
-    public func addColorWithName(name: String, color: UIColor) {
-        var red   = CGFloat(0.0)
-        var green = CGFloat(0.0)
-        var blue  = CGFloat(0.0)
-        var alpha = CGFloat(1.0)
-        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        
-        let value : UInt32 =
-            (UInt32(red   * 255) & 0xff) << 24
-          | (UInt32(green * 255) & 0xff) << 16
-          | (UInt32(blue  * 255) & 0xff) <<  8
-          | (UInt32(alpha * 255) & 0xff)
-        
-        addColorWithName(name, value: value)
-    }
     
     public func addColorWithName(name: String, value: String) {
         addColorWithName(name, value: SwiftGenColorEnumBuilder.parse(value))
@@ -29,7 +13,29 @@ public class SwiftGenColorEnumBuilder {
         colors[name] = value
     }
     
-    public func build(enumName enumName : String = "Name", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
+    // Text file expected to be:
+    //  - One line per entry
+    //  - Each line composed by the color name, then ":", then the color hex representation
+    //  - Extra spaces will be skipped
+    public func parseTextFile(path: String, separator: String = ":") throws {
+        let content = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+        let lines = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+        let ws = NSCharacterSet.whitespaceCharacterSet()
+        for line in lines {
+            let scanner = NSScanner(string: line)
+            scanner.charactersToBeSkipped = ws
+            var key: NSString?
+            if scanner.scanUpToString(":", intoString: &key) {
+                scanner.scanString(":", intoString: nil)
+                var value: NSString?
+                if scanner.scanUpToCharactersFromSet(ws, intoString: &value) {
+                    addColorWithName(key! as String, value: value! as String)
+                }
+            }
+        }
+    }
+    
+    public func build(enumName enumName: String = "Name", indentation indent: SwiftGenIndentation = .Spaces(4)) -> String {
         var text = "// AUTO-GENERATED FILE, DO NOT EDIT\n\n"
         let t = indent.string
         text += commonCode(indentationString: t)
@@ -55,7 +61,7 @@ public class SwiftGenColorEnumBuilder {
     
     // MARK: - Private Helpers
     
-    var colors = [String:UInt32]()
+    private var colors = [String:UInt32]()
     
     private func commonCode(indentationString t: String) -> String {
         var text = ""

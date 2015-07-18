@@ -5,11 +5,9 @@ import UIKit
 //: #### SwiftGenStoryboardEnumBuilder Usage Example
 
 let enumBuilder = SwiftGenColorEnumBuilder()
-enumBuilder.addColorWithName("Cyan", value: 0xff66ccff)
-enumBuilder.addColorWithName("ArticleTitle", value: "#33fe66")
-enumBuilder.addColorWithName("ArticleBody", value: "339666")
-enumBuilder.addColorWithName("Translucent", value: "ffffffcc")
-enumBuilder.addColorWithName("Wood", color: UIColor.brownColor())
+if let colorsFile = NSBundle.mainBundle().pathForResource("colors", ofType: "txt") {
+    try enumBuilder.parseTextFile(colorsFile)
+}
 print(enumBuilder.build())
 
 
@@ -63,7 +61,6 @@ extension UIColor {
         case ArticleTitle = 0x33fe66ff
         case Cyan = 0xff66ccff
         case ArticleBody = 0x339666ff
-        case Wood = 0x996633ff
     }
     
     convenience init(named name: Name) {
