@@ -7,38 +7,28 @@ This is a suite of tools written in Swift to auto-generate Swift code for variou
 * [`enums` for your `Localizable.strings` strings](#localizablestrings).
 * And maybe more to come…
 
-## Installation & Repo Organization
+## Installation
 
 ### Build the tools from source
 
 To build the executables from the source, **simply run `rake` from the command line**.
 
-This will generate the local libraries (code shared between the various tools) in `lib/` and the executables in `bin/`.
+This will generate standalone executables into the `bin/` directory.
 
 > Note: The tools are written in Swift 2.0 and need to be compiled with Xcode 7.
 > 
 > If your Xcode 7 is not the one set as default for use from the Command Line, you can use `sudo xcode-select -s` to change it. Alternatively, you can use `DEVELOPER_DIR=/Applications/Xcode-beta.app rake`.
 
-### Using the binaries & Play with the Playground
+### Using the binaries & play with the Playground
 
 * The built tools will be located in `bin/`. Simply invoke them with the necessary arguments from the command line (see doc of each tool below).
-* The `SwiftGen.playground` will allow you to play around with the various EnumBuilders Swift classes used by the compiled tools and see some usage examples.
+* The `SwiftGen.playground` will allow you to play around with the various `EnumBuilders` classes used by the compiled tools and see some usage examples.
 
 > Note: The playground is in the Xcode 7 format, and uses its new concept of "Playground pages" to regroup multiple playground pages in a single Playground.
 
-### Repository Organisation & Developer Info
+To learn more on how the various source files used to build the tools are organized in the repository, see [Repository Organization & Rakefile Internals](repository-organization---rakefile-internals) at the end of this README.
 
-* The source of the command-line scripts are located in `src/`
-* The command-line scripts basically parse command-line arguments, then use the `SwiftGenXXXEnumBuilder` classes to generate the appropriate code, so their code is pretty simple as they are just wrappers around other classes
-* The core elements of the project, which is the various `SwiftGenXXXEnumBuilder` classes and the `SwiftIdentifier` shared code used by these scripts, are actually stored in `SwiftGen.playground/Sources`, so the playground can use those `SwiftGenXXXEnumBuilder` classes directly.
-
-When running `rake`:
-
-* The `SwiftGen.playground/Sources` directory is parsed
-* Dependencies are automatically computed for each file
-* `rake` compiles each of those files, as a library + its associated module, into `lib/`
-* Then the `src/` directory is parsed, computing local lib dependencies needed for each
-* And finally `rake` compiles each of these file in `src`, and link them with the dependent libraries generated in `lib/`, to produce the final executables in `bin/`.
+---
 
 ## Assets Catalogs
 
@@ -251,6 +241,31 @@ This is an early stage sample, for now only tested in a Playground. Next steps i
 
 
 ---
+
+# Repository Organization & Rakefile Internals
+
+Here are some details on how the files are organized in that repo and how the Rakefile works.
+
+* The source of the command-line scripts are located in `src/`
+* The command-line scripts basically parse command-line arguments, then use the `SwiftGenXXXEnumBuilder` classes to generate the appropriate code, so their code is pretty simple as they are just wrappers around other builder classes
+* The core elements of the project, which is the various `SwiftGenXXXEnumBuilder` classes and the `SwiftIdentifier` shared code used by these classes, are actually stored in `SwiftGen.playground/Sources`, so the playground can use those `SwiftGenXXXEnumBuilder` classes directly.
+
+The `Rakefile` tasks are automatically constructed by filesystem parsing. For example, when running `rake`:
+
+* The `src/` directory is parsed, and a rake task is created to build each target executable
+* Dependencies on other sources for each script are automatically computed by scanning for `import` statements and comparing them with the sources in `SwiftGen.playground/Sources/`
+* Potential transitive dependencies for libs (like `SwiftGenAssetsEnumBuilder` depending itself on `SwiftIdentifier`) are also automatically detected by scanning for `//@import` comment lines I added in the lib sources (that's an entirely personal convention)
+* As a result, `rake` is able to build each script into a standalone tool by determining all by itself all the files needed to build the binary
+
+Note that even if it's not the recommended mode, the `Rakefile` also allows you to build _dependant_ binaries. In this mode:
+
+* It starts by creating a rake task `lib:xxx` for each files in `SwiftGen.playground/Sources` that will compile them as dynamic libraries into `./lib/`
+* Then it adds rake tasks `bin:xxx` that compiles the scripts located in `src/` into `bin/`, but as executables **linked against those dynamic libraries**.
+* Dependencies are also automagically computed when using this mode, with similar techniques as described above, so that executables are only linked against the appropriate dynamic libraries in `lib/`
+
+> The drawback of this mode is that the executables are being linked against libs at path `./lib/libXXX`, which means that it needs those dynamic libs to always be located at that path (relative to the working dir) for the binary to even be launchable. This means that you will only be able to call `bin/swiftgen-assets` from this repository working directory, and not from anywhere else.
+> 
+> This mode still exists anyway, because it was the first mode I implemented when creating that Rakefile, and because it's still interesting as an exercice to know how to build dylibs and modules (and because it may evolve someday to build a reusable framework maybe?).
 
 # Licence
 
