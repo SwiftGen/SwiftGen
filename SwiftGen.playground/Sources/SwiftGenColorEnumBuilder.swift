@@ -2,7 +2,7 @@ import Foundation
 //@import SwiftIdentifier
 //@import SwiftGenIndentation
 
-public class SwiftGenColorEnumBuilder {
+public final class SwiftGenColorEnumBuilder {
     public init() {}
     
     public func addColorWithName(name: String, value: String) {

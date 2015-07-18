@@ -2,8 +2,12 @@ import Foundation
 //@import SwiftIdentifier
 //@import SwiftGenIndentation
 
-public class SwiftGenL10nEnumBuilder {
+public final class SwiftGenL10nEnumBuilder {
     public init() {}
+
+    public func addEntry(entry: Entry) {
+        parsedLines.append(entry)
+    }
 
     // Localizable.strings files are generally UTF16, not UTF8!
     public func parseLocalizableStringsFile(path: String, encoding: UInt = NSUTF16StringEncoding) throws {
@@ -13,10 +17,6 @@ public class SwiftGenL10nEnumBuilder {
         for case let entry? in lines.map(Entry.init) {
             addEntry(entry)
         }
-    }
-    
-    public func addEntry(entry: Entry) {
-        parsedLines.append(entry)
     }
     
     public func build(enumName enumName : String = "L10n", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
@@ -169,5 +169,3 @@ public class SwiftGenL10nEnumBuilder {
         return types
     }
 }
-
-

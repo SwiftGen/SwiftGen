@@ -41,6 +41,8 @@ def build_lib(path)
   Rake::Task['lib:mkdir'].invoke
   module_name = fn(path)
 
+  puts "Building #{LIBS_OUTPUT_DIR}/lib#{module_name}.dylib and associated module"
+
   tmp_file = "#{LIBS_OUTPUT_DIR}/#{module_name}.tmp.swift"
   File.write(tmp_file, File.read(path).gsub('//@import ','import '))
   `xcrun -sdk macosx swiftc -I "#{LIBS_OUTPUT_DIR}" -L "#{LIBS_OUTPUT_DIR}" -emit-library -o "#{LIBS_OUTPUT_DIR}/lib#{module_name}.dylib" -emit-module -module-link-name "#{module_name}" "#{tmp_file}"`
@@ -50,6 +52,9 @@ end
 def build_bin(path)
   Rake::Task['bin:mkdir'].invoke
   exec_name = fn(path)
+
+  puts "Building #{BINS_OUTPUT_DIR}/#{exec_name} (dependant on ./libs/*)"
+
   `xcrun -sdk macosx swiftc -I "#{LIBS_OUTPUT_DIR}" -L "#{LIBS_OUTPUT_DIR}" -emit-executable -o "#{BINS_OUTPUT_DIR}/#{exec_name}" "#{path}"`
 end
 
@@ -59,16 +64,15 @@ def build_standalone(path, deps)
   all_deps = recursive_dependencies(deps)
   deps_files = all_deps.map { |lib| "#{LIBS_SOURCE_DIR}/#{lib}.swift" }
 
+  list = (deps_files + [path]).map { |d| " - #{d}" }.join("\n")
+  puts "Building #{BINS_OUTPUT_DIR}/#{exec_name} from files:\n" + list
+
   Dir.mktmpdir do |dir|
     main_file = "#{dir}/main.swift"
     cleaned_source = File.read(path)
     deps.each { |lib| cleaned_source.gsub!("import #{lib}",'') }
     File.write(main_file, cleaned_source)
-    `xcrun -sdk macosx swiftc -o "#{BINS_OUTPUT_DIR}/#{exec_name}" #{deps_files.join(' ')} "#{main_file}"`
-    if verbose === true
-      list = (deps_files + [path]).map { |d| " - #{d}" }.join("\n")
-      puts "Building #{BINS_OUTPUT_DIR}/#{exec_name} from files:\n" + list
-    end
+    `xcrun -sdk macosx swiftc -whole-module-optimization -o "#{BINS_OUTPUT_DIR}/#{exec_name}" #{deps_files.join(' ')} "#{main_file}"`
   end
 end
 
