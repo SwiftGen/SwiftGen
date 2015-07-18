@@ -94,6 +94,10 @@ The generated code will look like this:
 ```
 protocol StoryboardScene : RawRepresentable {
     static var storyboardName : String { get }
+    static func storyboard() -> UIStoryboard
+    static func initialViewController() -> UIViewController
+    func viewController() -> UIViewController
+    static func viewController(identifier: Self) -> UIViewController
 }
 
 extension StoryboardScene where Self.RawValue == String {
@@ -117,36 +121,40 @@ enum Wizzard : String, StoryboardScene {
     static let storyboardName = "Wizzard"
 
     case CreateAccount = "CreateAccount"
-    case AcceptCGU = "Accept-CGU"
-    case ValidatePassword = "Validate_Password"
-    case Preferences = "Preferences"
-
     static var createAccountViewController : CreateAccViewController {
-      return Wizzard.CreateAccount.viewController() as! CreateAccViewController
+        return Wizzard.CreateAccount.viewController() as! CreateAccViewController
     }
+
+    case AcceptCGU = "Accept-CGU"
     static var acceptCGUViewController : UIViewController {
-      return Wizzard.AcceptCGU.viewController()
+        return Wizzard.AcceptCGU.viewController()
     }
-    static var validatePasswordViewController : PasswordValidationViewController {
-      return Wizzard.ValidatePassword.viewController() as! PasswordValidationViewController
+
+    case ValidatePassword = "Validate_Password"
+    static var validatePasswordViewController : UIViewController {
+        return Wizzard.ValidatePassword.viewController()
     }
-    static var preferencesViewController : PrefsViewController {
-      return Wizzard.Preferences.viewController() as! PrefsViewController
+
+    case Preferences = "Preferences"
+    static var preferencesViewController : UIViewController {
+        return Wizzard.Preferences.viewController()
     }
+
 }
 
 enum Message : String, StoryboardScene {
     static let storyboardName = "Message"
 
     case Composer = "Composer"
-    case Recipient = "Recipient"
+    static var composerViewController : UIViewController {
+        return Message.Composer.viewController()
+    }
 
-    static var composerViewController : MessageComposerViewController {
-      return Message.Composer.viewController() as! MessageComposerViewController
+    case URLChooser = "URLChooser"
+    static var urlChooserViewController : XXPickerViewController {
+        return Message.URLChooser.viewController() as! XXPickerViewController
     }
-    static var recipientViewController : RecipientChooserViewController {
-      return Message.Recipient.viewController() as! RecipientChooserViewController
-    }
+
 }
 ```
 
