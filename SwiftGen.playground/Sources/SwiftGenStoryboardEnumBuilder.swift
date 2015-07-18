@@ -78,6 +78,11 @@ public class SwiftGenStoryboardEnumBuilder {
         
         text += "protocol StoryboardScene : RawRepresentable {\n"
         text += "    static var storyboardName : String { get }\n"
+        text += "    static func storyboard() -> UIStoryboard\n"
+        text += "    static func initialViewController() -> UIViewController\n"
+        text += "    func viewController() -> UIViewController\n"
+        text += "    static func viewController(identifier: Self) -> UIViewController\n"
+
         text += "}\n"
         text += "\n"
         text += "extension StoryboardScene where Self.RawValue == String {\n"
@@ -126,19 +131,15 @@ public class SwiftGenStoryboardEnumBuilder {
                 
                 for sceneInfo in identifiers {
                     let caseName = sceneInfo.identifier.asSwiftIdentifier(forbiddenChars: "_")
-                    text += "    case \(caseName) = \"\(sceneInfo.identifier)\"\n"
-                }
-                    
-                text += "\n"
-                
-                for sceneInfo in identifiers {
-                    let caseName = sceneInfo.identifier.asSwiftIdentifier(forbiddenChars: "_")
                     let lcCaseName = lowercaseFirst(caseName)
                     let vcClass = sceneInfo.customClass ?? "UIViewController"
                     let cast = sceneInfo.customClass == nil ? "" : " as! \(vcClass)"
+
+                    text += "    case \(caseName) = \"\(sceneInfo.identifier)\"\n"
                     text += "    static var \(lcCaseName)ViewController : \(vcClass) {\n"
                     text += "        return \(enumName).\(caseName).viewController()\(cast)\n"
-                    text += "    }\n"
+                    text += "    }\n\n"
+
                 }
             }
             
