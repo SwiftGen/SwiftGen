@@ -70,34 +70,39 @@ public final class SwiftGenStoryboardEnumBuilder {
         }
     }
     
-    public func build(indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
+    public func build(enumName enumName: String? = "Name", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
         var text = "// AUTO-GENERATED FILE, DO NOT EDIT\n\n"    
         let t = indent.string
         text += commonCode(indentationString: t)
 
+        text += "extension UIStoryboard {\n"
+        let s = enumName == nil ? "" : t
+        if let enumName = enumName {
+            text += "\(t)enum \(enumName.asSwiftIdentifier()) {\n"
+        }
         for (name, scenes) in storyboards {
             let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
-            text += "enum \(enumName) : String, StoryboardScene {\n"
-            text += "\(t)static let storyboardName = \"\(name)\"\n"
+            text += "\(s)\(t)enum \(enumName) : String, StoryboardScene {\n"
+            text += "\(s)\(t)\(t)static let storyboardName = \"\(name)\"\n"
             
-            if !scenes.isEmpty {
+            for scene in scenes {
+                let caseName = scene.storyboardID.asSwiftIdentifier(forbiddenChars: "_")
+                let lcCaseName = lowercaseFirst(caseName)
+                let vcClass = scene.customClass ?? "UIViewController"
+                let cast = scene.customClass == nil ? "" : " as! \(vcClass)"
                 text += "\n"
-                
-                for scene in scenes {
-                    let caseName = scene.storyboardID.asSwiftIdentifier(forbiddenChars: "_")
-                    let lcCaseName = lowercaseFirst(caseName)
-                    let vcClass = scene.customClass ?? "UIViewController"
-                    let cast = scene.customClass == nil ? "" : " as! \(vcClass)"
-
-                    text += "\(t)case \(caseName) = \"\(scene.storyboardID)\"\n"
-                    text += "\(t)static var \(lcCaseName)ViewController : \(vcClass) {\n"
-                    text += "\(t)\(t)return \(enumName).\(caseName).viewController()\(cast)\n"
-                    text += "\(t)}\n\n"
-                }
+                text += "\(s)\(t)\(t)case \(caseName) = \"\(scene.storyboardID)\"\n"
+                text += "\(s)\(t)\(t)static var \(lcCaseName)ViewController : \(vcClass) {\n"
+                text += "\(s)\(t)\(t)\(t)return \(enumName).\(caseName).viewController()\(cast)\n"
+                text += "\(s)\(t)\(t)}\n"
             }
             
-            text += "}\n\n"
+            text += "\(s)\(t)}\n"
         }
+        if enumName != nil {
+            text += "\(t)}\n"
+        }
+        text += "}\n\n"
         
         return text
     }

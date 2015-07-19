@@ -44,31 +44,46 @@ extension StoryboardScene where Self.RawValue == String {
     }
 }
 
-
-enum Wizzard : String, StoryboardScene {
-    static let storyboardName = "Wizzard"
-    
-    case CreateAccount = "CreateAccount"
-    case AcceptCGU = "Accept-CGU"
-    case ValidatePassword = "Validate_Password"
-    case Preferences = "Preferences"
-    
-    static var createAccountViewController : CreateAccViewController { return Wizzard.CreateAccount.viewController() as! CreateAccViewController }
-    static var acceptCGUViewController : UIViewController { return Wizzard.AcceptCGU.viewController() }
-    static var validatePasswordViewController : UIViewController { return Wizzard.ValidatePassword.viewController() }
-    static var preferencesViewController : UIViewController { return Wizzard.Preferences.viewController() }
+extension UIStoryboard {
+    enum Name {
+        enum Wizzard : String, StoryboardScene {
+            static let storyboardName = "Wizzard"
+            
+            case CreateAccount = "CreateAccount"
+            static var createAccountViewController : CreateAccViewController {
+                return Wizzard.CreateAccount.viewController() as! CreateAccViewController
+            }
+            
+            case AcceptCGU = "Accept-CGU"
+            static var acceptCGUViewController : UIViewController {
+                return Wizzard.AcceptCGU.viewController()
+            }
+            
+            case ValidatePassword = "Validate_Password"
+            static var validatePasswordViewController : UIViewController {
+                return Wizzard.ValidatePassword.viewController()
+            }
+            
+            case Preferences = "Preferences"
+            static var preferencesViewController : UIViewController {
+                return Wizzard.Preferences.viewController()
+            }
+        }
+    }
 }
-
 
 
 //: #### Usage Example
 
-let initialVC = Wizzard.initialViewController()
-let validateVC = Wizzard.ValidatePassword.viewController()
+let initialVC = UIStoryboard.Name.Wizzard.initialViewController()
+initialVC.title
+
+let validateVC = UIStoryboard.Name.Wizzard.ValidatePassword.viewController()
+validateVC.title
+
 /* Note: the following line would crash when run in playground, because the storyboard file
    was not compiled alongside the playground code, so the CreateAccViewController class was
    not known by the storyboard. But it should work correctly in a real project. */
-// let cgu = Wizzard.createAccountViewController
+// let cgu = UIStoryboard.Name.Wizzard.createAccountViewController
 
-initialVC.title
-validateVC.title
+
