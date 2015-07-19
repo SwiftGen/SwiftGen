@@ -22,6 +22,7 @@ This will generate standalone executables into the `bin/` directory.
 ### Using the binaries & play with the Playground
 
 * The built tools will be located in `bin/`. Simply invoke them with the necessary arguments from the command line (see doc of each tool below).
+* Each tool generates the code to `stdout`, so you'll probably use a shell redirection to write that to a file (e.g. `./swiftgen-assets /path/to/Images.xcassets >Assets.swift`)
 * The `SwiftGen.playground` will allow you to play around with the various `EnumBuilders` classes used by the compiled tools and see some usage examples.
 
 > Note: The playground is in the Xcode 7 format, and uses its new concept of "Playground pages" to regroup multiple playground pages in a single Playground.
