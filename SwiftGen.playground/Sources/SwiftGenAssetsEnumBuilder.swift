@@ -33,7 +33,7 @@ public final class SwiftGenAssetsEnumBuilder {
     }
     
     public func build(enumName enumName : String = "Asset", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
-        var text = "// AUTO-GENERATED FILE, DO NOT EDIT\n\n"
+        var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
         let t = indent.string
         
         text += "import Foundation\n"
