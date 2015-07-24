@@ -4,7 +4,8 @@ import Foundation
 
 public final class SwiftGenStoryboardEnumBuilder {
     private typealias Scene = (storyboardID: String, customClass: String?)
-    private var storyboards = [String : [Scene]]()
+    private var storyboardsScenes = [String : [Scene]]()
+    private var storyboardsSegues = [String: [Scene]]()
 
     
     public init() {}
@@ -14,30 +15,39 @@ public final class SwiftGenStoryboardEnumBuilder {
         
         class ParserDelegate : NSObject, NSXMLParserDelegate {
             var scenes = [Scene]()
+            var segues = [Scene]()
             var inScene = false
             var readyForFirstObject = false
+            var readyForConnections = false
             
             @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
-                namespaceURI: String?, qualifiedName qName: String?,
-                attributes attributeDict: [String : String])
+              namespaceURI: String?, qualifiedName qName: String?,
+              attributes attributeDict: [String : String])
             {
-                
-                switch elementName {
-                case "scene":
-                    inScene = true
-                case "objects" where inScene:
-                    readyForFirstObject = true
-                case _ where readyForFirstObject:
-                    if let storyboardID = attributeDict["storyboardIdentifier"] {
-                        let customClass = attributeDict["customClass"]
-                        scenes.append(Scene(storyboardID, customClass))
-                    }
-                    readyForFirstObject = false
-                default:
-                    break
+              
+              switch elementName {
+              case "scene":
+                inScene = true
+              case "objects" where inScene:
+                readyForFirstObject = true
+              case _ where readyForFirstObject:
+                if let storyboardID = attributeDict["storyboardIdentifier"] {
+                  let customClass = attributeDict["customClass"]
+                  scenes.append(Scene(storyboardID, customClass))
                 }
+                readyForFirstObject = false
+              case "connections":
+                readyForConnections = true
+              case _ where readyForConnections:
+                if let segueID = attributeDict["identifier"] {
+                  let customClass = attributeDict["customClass"]
+                  segues.append(Scene(segueID, customClass))
+                }
+              default:
+                break
+              }
             }
-            
+      
             @objc func parser(parser: NSXMLParser, didEndElement elementName: String,
                 namespaceURI: String?, qualifiedName qName: String?)
             {
@@ -46,6 +56,8 @@ public final class SwiftGenStoryboardEnumBuilder {
                     inScene = false
                 case "objects" where inScene:
                     readyForFirstObject = false
+                case "connections":
+                    readyForConnections = false
                 default:
                     break;
                 }
@@ -57,7 +69,8 @@ public final class SwiftGenStoryboardEnumBuilder {
         parser?.parse()
         
         let storyboardName = path.lastPathComponent.stringByDeletingPathExtension
-        storyboards[storyboardName] = delegate.scenes
+        storyboardsScenes[storyboardName] = delegate.scenes
+        storyboardsSegues[storyboardName] = delegate.segues
     }
     
     public func parseDirectory(path: String) {
@@ -70,17 +83,19 @@ public final class SwiftGenStoryboardEnumBuilder {
         }
     }
     
-    public func build(enumName enumName: String? = "Name", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
+    public func build(enumName enumName: String? = "Scene", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
         var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
         let t = indent.string
         text += commonCode(indentationString: t)
 
         text += "extension UIStoryboard {\n"
+      
+        /// Scenes
         let s = enumName == nil ? "" : t
         if let enumName = enumName {
             text += "\(t)enum \(enumName.asSwiftIdentifier()) {\n"
         }
-        for (name, scenes) in storyboards {
+        for (name, scenes) in storyboardsScenes {
             let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
             text += "\(s)\(t)enum \(enumName) : String, StoryboardScene {\n"
             text += "\(s)\(t)\(t)static let storyboardName = \"\(name)\"\n"
@@ -102,14 +117,38 @@ public final class SwiftGenStoryboardEnumBuilder {
         if enumName != nil {
             text += "\(t)}\n"
         }
-        text += "}\n\n"
+      
+        /// Segues
+        if (storyboardsSegues.count > 0) {
+          text += "\n"
+          
+          let enumName = "Segue"
+          text += "\(t)enum \(enumName.asSwiftIdentifier()) {\n"
         
+          for (name, segues) in storyboardsSegues
+            where segues.count > 0 {
+              
+            let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
+            text += "\(s)\(t)enum \(enumName) : String {"
+            
+            for segue in segues {
+              let caseName = segue.storyboardID.asSwiftIdentifier(forbiddenChars: "_")
+              text += "\n\(s)\(t)\(t)/// \(caseName)\n"
+              text += "\(s)\(t)\(t)case \(caseName)Segue = \"\(caseName)\"\n"
+            }
+            
+            text += "\(s)\(t)}\n"
+          }
+        
+          text += "\(t)}\n"
+        }
+      
+        text += "}\n\n"
+      
         return text
     }
-    
-    
-    
-    
+  
+  
     // MARK: - Private Helpers
     
     private func commonCode(indentationString t : String) -> String {
