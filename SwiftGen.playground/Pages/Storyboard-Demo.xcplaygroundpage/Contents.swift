@@ -110,3 +110,17 @@ switch segue {
   default:
     print("Not working! 😱")
 }
+
+/*******************************************************************************
+This is a «real world» example of how you can benefit from the generated enum;
+you can easily switch or directly compare the passed in `segue` with the corresponding
+segues for a specific storyboard.
+*******************************************************************************/
+//override func prepareForSegue(_ segue: UIStoryboardSegue, sender sender: AnyObject?) {
+//  switch UIStoryboard.Segue.Message(rawValue: segue.identifier)! {
+//  case .CustomSegue:
+//    // Prepare for your custom segue transition
+//  case .NonCustomSegue:
+//    // Pass in information to the destination View Controller
+//  }
+//}
