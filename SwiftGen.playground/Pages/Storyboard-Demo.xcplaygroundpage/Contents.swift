@@ -101,7 +101,7 @@ validateVC.title
    not known by the storyboard. But it should work correctly in a real project. */
 // let cgu = UIStoryboard.Name.Wizzard.createAccountViewController
 
-let segue = UIStoryboard.Segue.Message(rawValue: "CustomSegue")!
+let segue = UIStoryboard.Segue.Message(rawValue: "Custom")!
 segue
 
 switch segue {
