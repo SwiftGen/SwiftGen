@@ -84,7 +84,7 @@ public final class SwiftGenStoryboardEnumBuilder {
         }
     }
     
-    public func build(scenesEnumName scenesEnumName: String = "Scene", seguesEnumName: String = "Segue", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
+    public func build(scenesStructName scenesStructName: String = "Scene", seguesStructName: String = "Segue", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
         var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
         let t = indent.string
         text += commonCode(indentationString: t)
@@ -92,7 +92,7 @@ public final class SwiftGenStoryboardEnumBuilder {
         text += "extension UIStoryboard {\n"
       
         /// Scenes
-        text += "\(t)enum \(scenesEnumName.asSwiftIdentifier()) {\n"
+        text += "\(t)struct \(scenesStructName.asSwiftIdentifier()) {\n"
         for (name, scenes) in storyboardsScenes {
             let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
             text += "\(t)\(t)enum \(enumName) : String, StoryboardScene {\n"
@@ -118,7 +118,7 @@ public final class SwiftGenStoryboardEnumBuilder {
         if (storyboardsSegues.count > 0) {
           text += "\n"
           
-          text += "\(t)enum \(seguesEnumName.asSwiftIdentifier()) {\n"
+          text += "\(t)struct \(seguesStructName.asSwiftIdentifier()) {\n"
         
           for (name, segues) in storyboardsSegues
             where segues.count > 0 {
