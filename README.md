@@ -102,60 +102,46 @@ protocol StoryboardScene : RawRepresentable {
 }
 
 extension StoryboardScene where Self.RawValue == String {
-    static func storyboard() -> UIStoryboard {
-        return UIStoryboard(name: self.storyboardName, bundle: nil)
-    }
-
-    static func initialViewController() -> UIViewController {
-        return storyboard().instantiateInitialViewController()!
-    }
-
-    func viewController() -> UIViewController {
-        return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
-    }
-    static func viewController(identifier: Self) -> UIViewController {
-        return identifier.viewController()
-    }
+    /* Implementation details */
 }
 
-enum Wizzard : String, StoryboardScene {
-    static let storyboardName = "Wizzard"
+extension UIStoryboard {
+    struct Scene {
+        enum Wizzard : String, StoryboardScene {
+            static let storyboardName = "Wizzard"
 
-    case CreateAccount = "CreateAccount"
-    static var createAccountViewController : CreateAccViewController {
-        return Wizzard.CreateAccount.viewController() as! CreateAccViewController
+            case CreateAccount = "CreateAccount"
+            static func createAccountViewController() -> CreateAccViewController {
+                return Wizzard.CreateAccount.viewController() as! CreateAccViewController
+            }
+
+            case ValidatePassword = "Validate_Password"
+            static func validatePasswordViewController() -> UIViewController {
+                return Wizzard.ValidatePassword.viewController()
+            }
+        }
+        enum Message : String, StoryboardScene {
+            static let storyboardName = "Message"
+
+            case Composer = "Composer"
+            static func composerViewController() -> UIViewController {
+                return Message.Composer.viewController()
+            }
+
+            case URLChooser = "URLChooser"
+            static func urlChooserViewController() -> XXPickerViewController {
+                return Message.URLChooser.viewController() as! XXPickerViewController
+            }
+        }
     }
 
-    case AcceptCGU = "Accept-CGU"
-    static var acceptCGUViewController : UIViewController {
-        return Wizzard.AcceptCGU.viewController()
+    struct Segue {
+        enum Message : String {
+            case Custom = "Custom"
+            case Back = "Back"
+            case NonCustom = "NonCustom"
+        }
     }
-
-    case ValidatePassword = "Validate_Password"
-    static var validatePasswordViewController : UIViewController {
-        return Wizzard.ValidatePassword.viewController()
-    }
-
-    case Preferences = "Preferences"
-    static var preferencesViewController : UIViewController {
-        return Wizzard.Preferences.viewController()
-    }
-
-}
-
-enum Message : String, StoryboardScene {
-    static let storyboardName = "Message"
-
-    case Composer = "Composer"
-    static var composerViewController : UIViewController {
-        return Message.Composer.viewController()
-    }
-
-    case URLChooser = "URLChooser"
-    static var urlChooserViewController : XXPickerViewController {
-        return Message.URLChooser.viewController() as! XXPickerViewController
-    }
-
 }
 ```
 
@@ -163,11 +149,11 @@ enum Message : String, StoryboardScene {
 
 ```
 // Initial VC
-let initialVC = Wizzard.initialViewController()
+let initialVC = UIStoryboard.Scene.Wizzard.initialViewController()
 // Generic ViewController constructor, returns a UIViewController instance
-let validateVC = Wizzard.ValidatePassword.viewController()
+let validateVC = UIStoryboard.Scene.Wizzard.ValidatePassword.viewController()
 // Dedicated type var that returns the right type of VC (CreateAccViewController here)
-let createVC = Wizzard.createAccountViewController
+let createVC = UIStoryboard.Scene.Wizzard.createAccountViewController()
 ```
 
 

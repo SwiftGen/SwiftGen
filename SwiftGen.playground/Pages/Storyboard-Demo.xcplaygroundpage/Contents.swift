@@ -56,22 +56,22 @@ extension UIStoryboard {
             static let storyboardName = "Wizzard"
             
             case CreateAccount = "CreateAccount"
-            static var createAccountViewController : CreateAccViewController {
+            static func createAccountViewController() -> CreateAccViewController {
                 return Wizzard.CreateAccount.viewController() as! CreateAccViewController
             }
             
             case AcceptCGU = "Accept-CGU"
-            static var acceptCGUViewController : UIViewController {
+            static func acceptCGUViewController() -> UIViewController {
                 return Wizzard.AcceptCGU.viewController()
             }
             
             case ValidatePassword = "Validate_Password"
-            static var validatePasswordViewController : UIViewController {
+            static func validatePasswordViewController() -> UIViewController {
                 return Wizzard.ValidatePassword.viewController()
             }
             
             case Preferences = "Preferences"
-            static var preferencesViewController : UIViewController {
+            static func preferencesViewController() -> UIViewController {
                 return Wizzard.Preferences.viewController()
             }
         }
@@ -97,7 +97,7 @@ validateVC.title
 /* Note: the following line would crash when run in playground, because the storyboard file
    was not compiled alongside the playground code, so the CreateAccViewController class was
    not known by the storyboard. But it should work correctly in a real project. */
-// let cgu = UIStoryboard.Name.Wizzard.createAccountViewController
+// let cgu = UIStoryboard.Scene.Wizzard.createAccountViewController()
 
 let segue = UIStoryboard.Segue.Message(rawValue: "Custom")!
 segue
