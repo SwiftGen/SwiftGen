@@ -84,7 +84,7 @@ public final class SwiftGenStoryboardEnumBuilder {
         }
     }
     
-    public func build(scenesEnumName enumName: String? = "Scene", seguesEnumName: String? = "Segue", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
+    public func build(scenesEnumName: String = "Scene", seguesEnumName: String = "Segue", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
         var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
         let t = indent.string
         text += commonCode(indentationString: t)
@@ -92,10 +92,8 @@ public final class SwiftGenStoryboardEnumBuilder {
         text += "extension UIStoryboard {\n"
       
         /// Scenes
-        let s = enumName == nil ? "" : t
-        if let enumName = enumName {
-            text += "\(t)enum \(enumName.asSwiftIdentifier()) {\n"
-        }
+        let s = t
+        text += "\(t)enum \(scenesEnumName.asSwiftIdentifier()) {\n"
         for (name, scenes) in storyboardsScenes {
             let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
             text += "\(s)\(t)enum \(enumName) : String, StoryboardScene {\n"
@@ -115,17 +113,13 @@ public final class SwiftGenStoryboardEnumBuilder {
             
             text += "\(s)\(t)}\n"
         }
-        if enumName != nil {
-            text += "\(t)}\n"
-        }
+        text += "\(t)}\n"
       
         /// Segues
         if (storyboardsSegues.count > 0) {
           text += "\n"
           
-          if let enumName = seguesEnumName {
-            text += "\(t)enum \(enumName.asSwiftIdentifier()) {\n"
-          }
+          text += "\(t)enum \(seguesEnumName.asSwiftIdentifier()) {\n"
         
           for (name, segues) in storyboardsSegues
             where segues.count > 0 {
