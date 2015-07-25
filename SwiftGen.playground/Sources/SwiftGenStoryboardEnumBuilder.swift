@@ -39,7 +39,7 @@ public final class SwiftGenStoryboardEnumBuilder {
                 readyForFirstObject = false
               case "connections":
                 readyForConnections = true
-              case _ where readyForConnections:
+              case "segue" where readyForConnections:
                 if let segueID = attributeDict["identifier"] {
                   let customClass = attributeDict["customClass"]
                   segues.append(Segue(segueID, customClass))
@@ -84,7 +84,7 @@ public final class SwiftGenStoryboardEnumBuilder {
         }
     }
     
-    public func build(scenesEnumName: String = "Scene", seguesEnumName: String = "Segue", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
+    public func build(scenesEnumName scenesEnumName: String = "Scene", seguesEnumName: String = "Segue", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
         var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
         let t = indent.string
         text += commonCode(indentationString: t)
