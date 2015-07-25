@@ -105,7 +105,7 @@ public final class SwiftGenStoryboardEnumBuilder {
                 let cast = scene.customClass == nil ? "" : " as! \(vcClass)"
                 text += "\n"
                 text += "\(t)\(t)\(t)case \(caseName) = \"\(scene.storyboardID)\"\n"
-                text += "\(t)\(t)\(t)static var \(lcCaseName)ViewController : \(vcClass) {\n"
+                text += "\(t)\(t)\(t)static func \(lcCaseName)ViewController() -> \(vcClass) {\n"
                 text += "\(t)\(t)\(t)\(t)return \(enumName).\(caseName).viewController()\(cast)\n"
                 text += "\(t)\(t)\(t)}\n"
             }
