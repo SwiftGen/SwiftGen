@@ -92,12 +92,11 @@ public final class SwiftGenStoryboardEnumBuilder {
         text += "extension UIStoryboard {\n"
       
         /// Scenes
-        let s = t
         text += "\(t)enum \(scenesEnumName.asSwiftIdentifier()) {\n"
         for (name, scenes) in storyboardsScenes {
             let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
-            text += "\(s)\(t)enum \(enumName) : String, StoryboardScene {\n"
-            text += "\(s)\(t)\(t)static let storyboardName = \"\(name)\"\n"
+            text += "\(t)\(t)enum \(enumName) : String, StoryboardScene {\n"
+            text += "\(t)\(t)\(t)static let storyboardName = \"\(name)\"\n"
             
             for scene in scenes {
                 let caseName = scene.storyboardID.asSwiftIdentifier(forbiddenChars: "_")
@@ -105,13 +104,13 @@ public final class SwiftGenStoryboardEnumBuilder {
                 let vcClass = scene.customClass ?? "UIViewController"
                 let cast = scene.customClass == nil ? "" : " as! \(vcClass)"
                 text += "\n"
-                text += "\(s)\(t)\(t)case \(caseName) = \"\(scene.storyboardID)\"\n"
-                text += "\(s)\(t)\(t)static var \(lcCaseName)ViewController : \(vcClass) {\n"
-                text += "\(s)\(t)\(t)\(t)return \(enumName).\(caseName).viewController()\(cast)\n"
-                text += "\(s)\(t)\(t)}\n"
+                text += "\(t)\(t)\(t)case \(caseName) = \"\(scene.storyboardID)\"\n"
+                text += "\(t)\(t)\(t)static var \(lcCaseName)ViewController : \(vcClass) {\n"
+                text += "\(t)\(t)\(t)\(t)return \(enumName).\(caseName).viewController()\(cast)\n"
+                text += "\(t)\(t)\(t)}\n"
             }
             
-            text += "\(s)\(t)}\n"
+            text += "\(t)\(t)}\n"
         }
         text += "\(t)}\n"
       
@@ -125,14 +124,14 @@ public final class SwiftGenStoryboardEnumBuilder {
             where segues.count > 0 {
               
             let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
-            text += "\(s)\(t)enum \(enumName) : String {\n"
+            text += "\(t)\(t)enum \(enumName) : String {\n"
             
             for segue in segues {
               let caseName = segue.segueID.asSwiftIdentifier(forbiddenChars: "_")
-              text += "\(s)\(t)\(t)case \(caseName)\n"
+              text += "\(t)\(t)\(t)case \(caseName) = \"\(segue.segueID)\"\n"
             }
             
-            text += "\(s)\(t)}\n"
+            text += "\(t)\(t)}\n"
           }
         
           text += "\(t)}\n"
