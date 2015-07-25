@@ -26,64 +26,64 @@ import Foundation
 import UIKit
 
 protocol StoryboardScene : RawRepresentable {
-  static var storyboardName : String { get }
-  static func storyboard() -> UIStoryboard
-  static func initialViewController() -> UIViewController
-  func viewController() -> UIViewController
-  static func viewController(identifier: Self) -> UIViewController
+    static var storyboardName : String { get }
+    static func storyboard() -> UIStoryboard
+    static func initialViewController() -> UIViewController
+    func viewController() -> UIViewController
+    static func viewController(identifier: Self) -> UIViewController
 }
 
 extension StoryboardScene where Self.RawValue == String {
-  static func storyboard() -> UIStoryboard {
-    return UIStoryboard(name: self.storyboardName, bundle: nil)
-  }
-  
-  static func initialViewController() -> UIViewController {
-    return storyboard().instantiateInitialViewController()!
-  }
-  
-  func viewController() -> UIViewController {
-    return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
-  }
-  static func viewController(identifier: Self) -> UIViewController {
-    return identifier.viewController()
-  }
+    static func storyboard() -> UIStoryboard {
+        return UIStoryboard(name: self.storyboardName, bundle: nil)
+    }
+    
+    static func initialViewController() -> UIViewController {
+        return storyboard().instantiateInitialViewController()!
+    }
+    
+    func viewController() -> UIViewController {
+        return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
+    }
+    static func viewController(identifier: Self) -> UIViewController {
+        return identifier.viewController()
+    }
 }
 
 extension UIStoryboard {
-  enum Scene {
-    enum Wizzard : String, StoryboardScene {
-      static let storyboardName = "Wizzard"
-      
-      case CreateAccount = "CreateAccount"
-      static var createAccountViewController : CreateAccViewController {
-        return Wizzard.CreateAccount.viewController() as! CreateAccViewController
-      }
-      
-      case AcceptCGU = "Accept-CGU"
-      static var acceptCGUViewController : UIViewController {
-        return Wizzard.AcceptCGU.viewController()
-      }
-      
-      case ValidatePassword = "Validate_Password"
-      static var validatePasswordViewController : UIViewController {
-        return Wizzard.ValidatePassword.viewController()
-      }
-      
-      case Preferences = "Preferences"
-      static var preferencesViewController : UIViewController {
-        return Wizzard.Preferences.viewController()
-      }
+    struct Scene {
+        enum Wizzard : String, StoryboardScene {
+            static let storyboardName = "Wizzard"
+            
+            case CreateAccount = "CreateAccount"
+            static var createAccountViewController : CreateAccViewController {
+                return Wizzard.CreateAccount.viewController() as! CreateAccViewController
+            }
+            
+            case AcceptCGU = "Accept-CGU"
+            static var acceptCGUViewController : UIViewController {
+                return Wizzard.AcceptCGU.viewController()
+            }
+            
+            case ValidatePassword = "Validate_Password"
+            static var validatePasswordViewController : UIViewController {
+                return Wizzard.ValidatePassword.viewController()
+            }
+            
+            case Preferences = "Preferences"
+            static var preferencesViewController : UIViewController {
+                return Wizzard.Preferences.viewController()
+            }
+        }
     }
-  }
-  
-  enum Segue {
-      enum Message : String {
-        case Custom = "Custom"
-        case Back = "Back"
-        case NonCustom = "NonCustom"
+    
+    struct Segue {
+        enum Message : String {
+            case Custom = "Custom"
+            case Back = "Back"
+            case NonCustom = "NonCustom"
+        }
     }
-  }
 }
 
 //: #### Usage Example
