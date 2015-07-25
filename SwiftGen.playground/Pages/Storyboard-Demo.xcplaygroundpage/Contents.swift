@@ -80,6 +80,7 @@ extension UIStoryboard {
   enum Segue {
       enum Message : String {
         case Custom = "Custom"
+        case Back = "Back"
         case NonCustom = "NonCustom"
     }
   }
