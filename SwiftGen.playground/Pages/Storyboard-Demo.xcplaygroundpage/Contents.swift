@@ -79,8 +79,8 @@ extension UIStoryboard {
   
   enum Segue {
       enum Message : String {
-        case Custom
-        case NonCustom
+        case Custom = "Custom"
+        case NonCustom = "NonCustom"
     }
   }
 }
