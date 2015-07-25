@@ -125,12 +125,11 @@ public final class SwiftGenStoryboardEnumBuilder {
             where segues.count > 0 {
               
             let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
-            text += "\(s)\(t)enum \(enumName) : String {"
+            text += "\(s)\(t)enum \(enumName) : String {\n"
             
             for segue in segues {
               let caseName = segue.segueID.asSwiftIdentifier(forbiddenChars: "_")
-              text += "\n\(s)\(t)\(t)/// \(caseName)\n"
-              text += "\(s)\(t)\(t)case \(caseName)Segue = \"\(caseName)\"\n"
+              text += "\(s)\(t)\(t)case \(caseName)\n"
             }
             
             text += "\(s)\(t)}\n"
