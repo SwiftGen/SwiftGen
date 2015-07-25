@@ -4,8 +4,9 @@ import Foundation
 
 public final class SwiftGenStoryboardEnumBuilder {
     private typealias Scene = (storyboardID: String, customClass: String?)
+    private typealias Segue = (segueID: String, customClass: String?)
     private var storyboardsScenes = [String : [Scene]]()
-    private var storyboardsSegues = [String: [Scene]]()
+    private var storyboardsSegues = [String: [Segue]]()
 
     
     public init() {}
@@ -15,7 +16,7 @@ public final class SwiftGenStoryboardEnumBuilder {
         
         class ParserDelegate : NSObject, NSXMLParserDelegate {
             var scenes = [Scene]()
-            var segues = [Scene]()
+            var segues = [Segue]()
             var inScene = false
             var readyForFirstObject = false
             var readyForConnections = false
@@ -41,7 +42,7 @@ public final class SwiftGenStoryboardEnumBuilder {
               case _ where readyForConnections:
                 if let segueID = attributeDict["identifier"] {
                   let customClass = attributeDict["customClass"]
-                  segues.append(Scene(segueID, customClass))
+                  segues.append(Segue(segueID, customClass))
                 }
               default:
                 break
@@ -133,7 +134,7 @@ public final class SwiftGenStoryboardEnumBuilder {
             text += "\(s)\(t)enum \(enumName) : String {"
             
             for segue in segues {
-              let caseName = segue.storyboardID.asSwiftIdentifier(forbiddenChars: "_")
+              let caseName = segue.segueID.asSwiftIdentifier(forbiddenChars: "_")
               text += "\n\(s)\(t)\(t)/// \(caseName)\n"
               text += "\(s)\(t)\(t)case \(caseName)Segue = \"\(caseName)\"\n"
             }
