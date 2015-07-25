@@ -79,12 +79,9 @@ extension UIStoryboard {
   
   enum Segue {
       enum Message : String {
-        /// Custom
-        case CustomSegue = "Custom"
-        
-        /// NonCustom
-        case NonCustomSegue = "NonCustom"
-      }
+        case Custom
+        case NonCustom
+    }
   }
 }
 
@@ -105,7 +102,7 @@ let segue = UIStoryboard.Segue.Message(rawValue: "Custom")!
 segue
 
 switch segue {
-  case .CustomSegue:
+  case .Custom:
     print("Working! 🎉")
   default:
     print("Not working! 😱")
@@ -118,9 +115,9 @@ segues for a specific storyboard.
 *******************************************************************************/
 //override func prepareForSegue(_ segue: UIStoryboardSegue, sender sender: AnyObject?) {
 //  switch UIStoryboard.Segue.Message(rawValue: segue.identifier)! {
-//  case .CustomSegue:
+//  case .Custom:
 //    // Prepare for your custom segue transition
-//  case .NonCustomSegue:
+//  case .NonCustom:
 //    // Pass in information to the destination View Controller
 //  }
 //}
