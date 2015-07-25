@@ -35,10 +35,10 @@ public final class SwiftGenColorEnumBuilder {
         }
     }
     
-    public func build(enumName enumName: String = "Name", indentation indent: SwiftGenIndentation = .Spaces(4)) -> String {
+    public func build(enumName enumName: String = "Name", generateStringInit stringInit: Bool = false, indentation indent: SwiftGenIndentation = .Spaces(4)) -> String {
         var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
         let t = indent.string
-        text += commonCode(indentationString: t)
+        text += commonCode(generateStringInit: stringInit, indentationString: t)
         
         text += "extension UIColor {\n"
         text += "    enum \(enumName) : UInt32 {\n"
@@ -63,47 +63,46 @@ public final class SwiftGenColorEnumBuilder {
     
     private var colors = [String:UInt32]()
     
-    private func commonCode(indentationString t: String) -> String {
+    private func commonCode(generateStringInit stringInit: Bool, indentationString t: String) -> String {
         var text = ""
         
         text += "import UIKit\n"
         text += "\n"
         text += "extension UIColor {\n"
-        text += "\(t)private struct Cache {\n"
-        text += "\(t)\(t)static var values = [String:UInt32]()\n"
-        text += "\(t)}\n"
-        text += "\(t)\n"
-        text += "\(t)private static func parse(hexString: String) -> UInt32 {\n"
-        text += "\(t)\(t)if let cached = Cache.values[hexString] {\n"
-        text += "\(t)\(t)\(t)return cached\n"
-        text += "\(t)\(t)}\n"
-        text += "\(t)\(t)\n"
-        text += "\(t)\(t)let scanner = NSScanner(string: hexString)\n"
-        text += "\(t)\(t)let hasHash = scanner.scanString(\"#\", intoString: nil)\n"
-        text += "\(t)\(t)\n"
-        text += "\(t)\(t)var value : UInt32 = 0\n"
-        text += "\(t)\(t)scanner.scanHexInt(&value)\n"
-        text += "\(t)\(t)\n"
-        text += "\(t)\(t)let len = hexString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) - (hasHash ? 1 : 0)\n"
-        text += "\(t)\(t)if len == 6 {\n"
-        text += "\(t)\(t)\(t)// There were no alpha component, assume 0xff\n"
-        text += "\(t)\(t)\(t)value = (value << 8) | 0xff\n"
-        text += "\(t)\(t)}\n"
-        text += "\(t)\(t)\n"
-        text += "\(t)\(t)Cache.values[hexString] = value\n"
-        text += "\(t)\(t)return value\n"
-        text += "\(t)}\n"
-        text += "\(t)\n"
-        text += "\(t)convenience init(hexString: String) {\n"
-        text += "\(t)\(t)let value = UIColor.parse(hexString)\n"
-        text += "\(t)\(t)self.init(rgbaValue: value)\n"
-        text += "\(t)}\n"
-        text += "\(t)\n"
+        if (stringInit) {
+            text += "\(t)convenience init(hexString: String) {\n"
+            text += "\(t)\(t)struct Cache {\n"
+            text += "\(t)\(t)\(t)static var values = [String:UInt32]()\n"
+            text += "\(t)\(t)}\n"
+            text += "\n"
+            text += "\(t)\(t)if let cached = Cache.values[hexString] {\n"
+            text += "\(t)\(t)\(t)self.init(rgbaValue: cached)\n"
+            text += "\(t)\(t)\(t)return\n"
+            text += "\(t)\(t)}\n"
+            text += "\(t)\(t)\n"
+            text += "\(t)\(t)let scanner = NSScanner(string: hexString)\n"
+            text += "\(t)\(t)let hasHash = scanner.scanString(\"#\", intoString: nil)\n"
+            text += "\(t)\(t)\n"
+            text += "\(t)\(t)var value : UInt32 = 0\n"
+            text += "\(t)\(t)scanner.scanHexInt(&value)\n"
+            text += "\(t)\(t)\n"
+            text += "\(t)\(t)let len = hexString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) - (hasHash ? 1 : 0)\n"
+            text += "\(t)\(t)if len == 6 {\n"
+            text += "\(t)\(t)\(t)// There were no alpha component, assume 0xff\n"
+            text += "\(t)\(t)\(t)value = (value << 8) | 0xff\n"
+            text += "\(t)\(t)}\n"
+            text += "\(t)\(t)\n"
+            text += "\(t)\(t)Cache.values[hexString] = value\n"
+            text += "\(t)\(t)\n"
+            text += "\(t)\(t)self.init(rgbaValue: value)\n"
+            text += "\(t)}\n"
+            text += "\(t)\n"
+        }
         text += "\(t)convenience init(rgbaValue: UInt32) {\n"
         text += "\(t)\(t)let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0\n"
         text += "\(t)\(t)let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0\n"
         text += "\(t)\(t)let blue  = CGFloat((rgbaValue >>  8) & 0xff) / 255.0\n"
-        text += "\(t)\(t)let alpha = CGFloat((rgbaValue      ) & 0xff) / 255.0\n"
+        text += "\(t)\(t)let alpha = CGFloat((rgbaValue\(t)  ) & 0xff) / 255.0\n"
         text += "\(t)\(t)\n"
         text += "\(t)\(t)self.init(red: red, green: green, blue: blue, alpha: alpha)\n"
         text += "\(t)}\n"
