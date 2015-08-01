@@ -1,5 +1,5 @@
 import Foundation
-import SwiftGenStoryboardEnumBuilder
+//@import SwiftGenStoryboardEnumBuilder
 
 
 let scanDir = Process.argc < 2 ? "." : Process.arguments[1]

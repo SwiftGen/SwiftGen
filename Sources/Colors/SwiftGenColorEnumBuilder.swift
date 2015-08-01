@@ -53,7 +53,6 @@ public final class SwiftGenColorEnumBuilder {
         text += "        self.init(rgbaValue: name.rawValue)\n"
         text += "    }\n"
         text += "}\n"
-        text += "\n"
         
         return text
     }

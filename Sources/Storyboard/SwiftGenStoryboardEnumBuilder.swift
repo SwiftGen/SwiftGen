@@ -137,7 +137,7 @@ public final class SwiftGenStoryboardEnumBuilder {
           text += "\(t)}\n"
         }
       
-        text += "}\n\n"
+        text += "}\n"
       
         return text
     }
