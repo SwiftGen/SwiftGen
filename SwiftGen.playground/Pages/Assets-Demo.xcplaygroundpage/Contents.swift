@@ -29,3 +29,4 @@ extension UIImage {
 let image = UIImage(asset: .Apple)
 
 UIImage.Asset.Banana.image
+
