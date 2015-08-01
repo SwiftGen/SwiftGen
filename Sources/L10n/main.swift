@@ -1,12 +1,12 @@
 import Foundation
-import SwiftGenColorEnumBuilder
+//@import SwiftGenL10nEnumBuilder
 
 
 let filePath = Process.argc < 2 ? "." : Process.arguments[1]
 
-let enumBuilder = SwiftGenColorEnumBuilder()
+let enumBuilder = SwiftGenL10nEnumBuilder()
 do {
-  try enumBuilder.parseTextFile(filePath)
+  try enumBuilder.parseLocalizableStringsFile(filePath)
   let output = enumBuilder.build()
 
   print(output)

@@ -1,5 +1,5 @@
 import Foundation
-import SwiftGenAssetsEnumBuilder
+//@import SwiftGenAssetsEnumBuilder
 
 
 let scanDir = Process.argc < 2 ? "." : Process.arguments[1]
