@@ -62,6 +62,20 @@
                ReferencedContainer = "container:SwiftGen.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "09E714791B6D7247007FF3CF"
+               BuildableName = "common-tests.xctest"
+               BlueprintName = "common-tests"
+               ReferencedContainer = "container:SwiftGen.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -107,6 +121,16 @@
                BlueprintIdentifier = "09030BBB1B6D2A8F00275BF5"
                BuildableName = "swiftgen-storyboard-tests.xctest"
                BlueprintName = "swiftgen-storyboard-tests"
+               ReferencedContainer = "container:SwiftGen.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "09E714791B6D7247007FF3CF"
+               BuildableName = "common-tests.xctest"
+               BlueprintName = "common-tests"
                ReferencedContainer = "container:SwiftGen.xcodeproj">
             </BuildableReference>
          </TestableReference>
