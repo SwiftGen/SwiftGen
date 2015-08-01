@@ -16,7 +16,18 @@ import XCTest
 
 class AssetsTests: XCTestCase {
 
-    func testFileDefaults() {
+    func testEntriesWithDefaults() {
+        let enumBuilder = SwiftGenAssetsEnumBuilder()
+        enumBuilder.addAssetName("Green-Apple")
+        enumBuilder.addAssetName("Red Apple")
+        enumBuilder.addAssetName("2-pears")
+        let result = enumBuilder.build()
+        
+        let expected = self.fixtureString("EntiresDefaults.swift.out")
+        XCTAssertEqual(result, expected)
+    }
+
+    func testFileWithDefaults() {
         let enumBuilder = SwiftGenAssetsEnumBuilder()
         enumBuilder.parseDirectory(fixturePath("Images.xcassets"))
         let result = enumBuilder.build()

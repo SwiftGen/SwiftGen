@@ -57,6 +57,9 @@
 		09030C321B6D504600275BF5 /* FileDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C311B6D504100275BF5 /* FileDefaults.swift.out */; };
 		09030C331B6D504A00275BF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09030C2F1B6D4F8500275BF5 /* Images.xcassets */; };
 		09030C351B6D521B00275BF5 /* FileDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C301B6D4FD200275BF5 /* FileDefaults.swift.out */; };
+		09E714701B6D7082007FF3CF /* EntiresDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09E7146F1B6D707E007FF3CF /* EntiresDefaults.swift.out */; };
+		09E714821B6D7252007FF3CF /* SwiftIdentifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E714711B6D711A007FF3CF /* SwiftIdentifierTests.swift */; };
+		09E714831B6D7259007FF3CF /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -139,11 +142,8 @@
 		09030BBC1B6D2A8F00275BF5 /* swiftgen-storyboard-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swiftgen-storyboard-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09030BC01B6D2A8F00275BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09030BC91B6D2BB700275BF5 /* StoryboardTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardTests.swift; sourceTree = "<group>"; };
-		09030BCF1B6D2E3900275BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09030BD11B6D2E3900275BF5 /* AssetsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsTests.swift; sourceTree = "<group>"; };
-		09030BD31B6D2E3900275BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09030BD51B6D2E3900275BF5 /* L10nTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10nTests.swift; sourceTree = "<group>"; };
-		09030BD71B6D2E5900275BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09030BD81B6D2E5900275BF5 /* ColorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsTests.swift; sourceTree = "<group>"; };
 		09030BE41B6D2E7E00275BF5 /* swiftgen-assets-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swiftgen-assets-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09030BF11B6D2EB000275BF5 /* swiftgen-colors-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swiftgen-colors-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +165,9 @@
 		09030C311B6D504100275BF5 /* FileDefaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileDefaults.swift.out; sourceTree = "<group>"; };
 		09E7146D1B6D55B4007FF3CF /* SwiftGen.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftGen.playground; sourceTree = "<group>"; };
 		09E7146E1B6D5946007FF3CF /* Rakefile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Rakefile; sourceTree = "<group>"; };
+		09E7146F1B6D707E007FF3CF /* EntiresDefaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EntiresDefaults.swift.out; sourceTree = "<group>"; };
+		09E714711B6D711A007FF3CF /* SwiftIdentifierTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftIdentifierTests.swift; sourceTree = "<group>"; };
+		09E7147A1B6D7247007FF3CF /* common-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "common-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +227,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		09E714771B6D7247007FF3CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -249,6 +259,7 @@
 				09030BE41B6D2E7E00275BF5 /* swiftgen-assets-tests.xctest */,
 				09030BF11B6D2EB000275BF5 /* swiftgen-colors-tests.xctest */,
 				09030BFE1B6D2ED500275BF5 /* swiftgen-l10n-tests.xctest */,
+				09E7147A1B6D7247007FF3CF /* common-tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -314,6 +325,8 @@
 			isa = PBXGroup;
 			children = (
 				09030C171B6D43D400275BF5 /* TestsHelper.swift */,
+				09E714711B6D711A007FF3CF /* SwiftIdentifierTests.swift */,
+				09030BC01B6D2A8F00275BF5 /* Info.plist */,
 				09030BC71B6D2BA300275BF5 /* Storyboard */,
 				09030BCE1B6D2E3900275BF5 /* Assets */,
 				09030BD61B6D2E5900275BF5 /* Colors */,
@@ -325,7 +338,6 @@
 		09030BC71B6D2BA300275BF5 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				09030BC01B6D2A8F00275BF5 /* Info.plist */,
 				09030BC91B6D2BB700275BF5 /* StoryboardTests.swift */,
 				09030C081B6D2FF600275BF5 /* fixtures */,
 				09030C071B6D2FF600275BF5 /* expected */,
@@ -336,7 +348,6 @@
 		09030BCE1B6D2E3900275BF5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				09030BCF1B6D2E3900275BF5 /* Info.plist */,
 				09030BD11B6D2E3900275BF5 /* AssetsTests.swift */,
 				09030C2E1B6D4F6600275BF5 /* fixtures */,
 				09030C2D1B6D4F6600275BF5 /* expected */,
@@ -347,7 +358,6 @@
 		09030BD21B6D2E3900275BF5 /* L10n */ = {
 			isa = PBXGroup;
 			children = (
-				09030BD31B6D2E3900275BF5 /* Info.plist */,
 				09030BD51B6D2E3900275BF5 /* L10nTests.swift */,
 				09030C231B6D48FC00275BF5 /* fixtures */,
 				09030C221B6D48FC00275BF5 /* expected */,
@@ -358,7 +368,6 @@
 		09030BD61B6D2E5900275BF5 /* Colors */ = {
 			isa = PBXGroup;
 			children = (
-				09030BD71B6D2E5900275BF5 /* Info.plist */,
 				09030BD81B6D2E5900275BF5 /* ColorsTests.swift */,
 				09030C1C1B6D473E00275BF5 /* fixtures */,
 				09030C1F1B6D474C00275BF5 /* expected */,
@@ -424,6 +433,7 @@
 			isa = PBXGroup;
 			children = (
 				09030C311B6D504100275BF5 /* FileDefaults.swift.out */,
+				09E7146F1B6D707E007FF3CF /* EntiresDefaults.swift.out */,
 			);
 			path = expected;
 			sourceTree = "<group>";
@@ -577,6 +587,23 @@
 			productReference = 09030BFE1B6D2ED500275BF5 /* swiftgen-l10n-tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		09E714791B6D7247007FF3CF /* common-tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 09E7147F1B6D7247007FF3CF /* Build configuration list for PBXNativeTarget "common-tests" */;
+			buildPhases = (
+				09E714761B6D7247007FF3CF /* Sources */,
+				09E714771B6D7247007FF3CF /* Frameworks */,
+				09E714781B6D7247007FF3CF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "common-tests";
+			productName = "common-tests";
+			productReference = 09E7147A1B6D7247007FF3CF /* common-tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -590,6 +617,9 @@
 						CreatedOnToolsVersion = 7.0;
 					};
 					09030BBB1B6D2A8F00275BF5 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					09E714791B6D7247007FF3CF = {
 						CreatedOnToolsVersion = 7.0;
 					};
 				};
@@ -614,6 +644,7 @@
 				09030BE61B6D2EB000275BF5 /* swiftgen-colors-tests */,
 				09030B991B6D26C100275BF5 /* swiftgen-l10n */,
 				09030BF31B6D2ED500275BF5 /* swiftgen-l10n-tests */,
+				09E714791B6D7247007FF3CF /* common-tests */,
 			);
 		};
 /* End PBXProject section */
@@ -636,6 +667,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09E714701B6D7082007FF3CF /* EntiresDefaults.swift.out in Resources */,
 				09030C321B6D504600275BF5 /* FileDefaults.swift.out in Resources */,
 				09030C331B6D504A00275BF5 /* Images.xcassets in Resources */,
 			);
@@ -658,6 +690,13 @@
 				09030C281B6D499C00275BF5 /* EntriesWithDefaults.swift.out in Resources */,
 				09030C2C1B6D4DF400275BF5 /* FileWithDefaults.swift.out in Resources */,
 				09030C291B6D49A100275BF5 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		09E714781B6D7247007FF3CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,6 +792,15 @@
 				09030BF51B6D2ED500275BF5 /* SwiftIdentifier.swift in Sources */,
 				09030C021B6D2F2900275BF5 /* SwiftGenL10nEnumBuilder.swift in Sources */,
 				09030BF71B6D2ED500275BF5 /* SwiftGenIndentation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		09E714761B6D7247007FF3CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09E714821B6D7252007FF3CF /* SwiftIdentifierTests.swift in Sources */,
+				09E714831B6D7259007FF3CF /* SwiftIdentifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -897,7 +945,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Storyboard/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-storyboard-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -908,7 +956,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Storyboard/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-storyboard-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -919,7 +967,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Assets/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-assets-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -930,7 +978,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Assets/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-assets-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -941,7 +989,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Colors/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-colors-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -952,7 +1000,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Colors/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-colors-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -963,7 +1011,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/L10n/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-l10n-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -974,9 +1022,31 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/L10n/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-l10n-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		09E714801B6D7247007FF3CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.common-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		09E714811B6D7247007FF3CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.common-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -1064,6 +1134,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		09E7147F1B6D7247007FF3CF /* Build configuration list for PBXNativeTarget "common-tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09E714801B6D7247007FF3CF /* Debug */,
+				09E714811B6D7247007FF3CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

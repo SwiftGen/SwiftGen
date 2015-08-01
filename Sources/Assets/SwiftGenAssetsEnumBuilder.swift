@@ -17,16 +17,12 @@ public final class SwiftGenAssetsEnumBuilder {
         }
     }
     
-    public func addAssetAtPath(path: String) -> Bool {
-        let assetName = path.lastPathComponent.stringByDeletingPathExtension
-        return self.addAssetName(assetName)
-    }
-    
     public func parseDirectory(path: String) {
         if let dirEnum = NSFileManager.defaultManager().enumeratorAtPath(path) {
             while let path = dirEnum.nextObject() as? String {
                 if path.pathExtension == "imageset" {
-                    self.addAssetAtPath(path)
+                    let assetName = path.lastPathComponent.stringByDeletingPathExtension
+                    self.addAssetName(assetName)
                 }
             }
         }
