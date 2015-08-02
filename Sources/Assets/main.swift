@@ -3,6 +3,7 @@ import Foundation
 
 guard Process.argc >= 2 else {
     print("Usage: swiftgen-assets path/to/dir/containing/xcassets")
+    print("\n -- Version: \(SwiftGenVersion)")
     exit(-1)
 }
 

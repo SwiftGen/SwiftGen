@@ -60,6 +60,10 @@
 		095685EC1B6DA16800BF300C /* FileWithCustomName.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 095685EB1B6DA16200BF300C /* FileWithCustomName.swift.out */; };
 		095685EE1B6DA24900BF300C /* FileWithCustomIndentation.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 095685ED1B6DA17300BF300C /* FileWithCustomIndentation.swift.out */; };
 		095685F01B6DA32E00BF300C /* LinesWithDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 095685EF1B6DA32800BF300C /* LinesWithDefaults.swift.out */; };
+		095685F21B6DAF1000BF300C /* SwiftGenVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095685F11B6DAF1000BF300C /* SwiftGenVersion.swift */; };
+		095685F31B6DB0E300BF300C /* SwiftGenVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095685F11B6DAF1000BF300C /* SwiftGenVersion.swift */; };
+		095685F41B6DB0E300BF300C /* SwiftGenVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095685F11B6DAF1000BF300C /* SwiftGenVersion.swift */; };
+		095685F51B6DB0E400BF300C /* SwiftGenVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095685F11B6DAF1000BF300C /* SwiftGenVersion.swift */; };
 		09E714701B6D7082007FF3CF /* EntiresDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09E7146F1B6D707E007FF3CF /* EntiresDefaults.swift.out */; };
 		09E714821B6D7252007FF3CF /* SwiftIdentifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E714711B6D711A007FF3CF /* SwiftIdentifierTests.swift */; };
 		09E714831B6D7259007FF3CF /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */; };
@@ -169,6 +173,7 @@
 		095685EB1B6DA16200BF300C /* FileWithCustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileWithCustomName.swift.out; sourceTree = "<group>"; };
 		095685ED1B6DA17300BF300C /* FileWithCustomIndentation.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileWithCustomIndentation.swift.out; sourceTree = "<group>"; };
 		095685EF1B6DA32800BF300C /* LinesWithDefaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LinesWithDefaults.swift.out; sourceTree = "<group>"; };
+		095685F11B6DAF1000BF300C /* SwiftGenVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftGenVersion.swift; sourceTree = "<group>"; };
 		09E7146D1B6D55B4007FF3CF /* SwiftGen.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftGen.playground; sourceTree = "<group>"; };
 		09E7146E1B6D5946007FF3CF /* Rakefile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Rakefile; sourceTree = "<group>"; };
 		09E7146F1B6D707E007FF3CF /* EntiresDefaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EntiresDefaults.swift.out; sourceTree = "<group>"; };
@@ -305,6 +310,7 @@
 			children = (
 				09030B831B6D26A600275BF5 /* SwiftGenIndentation.swift */,
 				09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */,
+				095685F11B6DAF1000BF300C /* SwiftGenVersion.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -462,6 +468,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09030B721B6D254200275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-storyboard" */;
 			buildPhases = (
+				095685F61B6DB78D00BF300C /* Update SwiftGenVersion */,
 				09030B671B6D254200275BF5 /* Sources */,
 				09030B681B6D254200275BF5 /* Frameworks */,
 				09030B691B6D254200275BF5 /* CopyFiles */,
@@ -479,6 +486,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09030B8D1B6D26AF00275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-assets" */;
 			buildPhases = (
+				095685F71B6DB81000BF300C /* Update SwiftGenVersion */,
 				09030B8A1B6D26AF00275BF5 /* Sources */,
 				09030B8B1B6D26AF00275BF5 /* Frameworks */,
 				09030B8C1B6D26AF00275BF5 /* CopyFiles */,
@@ -496,6 +504,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09030B951B6D26B800275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-colors" */;
 			buildPhases = (
+				095685F81B6DB83100BF300C /* Update SwiftGenVersion */,
 				09030B921B6D26B800275BF5 /* Sources */,
 				09030B931B6D26B800275BF5 /* Frameworks */,
 				09030B941B6D26B800275BF5 /* CopyFiles */,
@@ -513,6 +522,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09030B9D1B6D26C100275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-l10n" */;
 			buildPhases = (
+				095685F91B6DB83A00BF300C /* Update SwiftGenVersion */,
 				09030B9A1B6D26C100275BF5 /* Sources */,
 				09030B9B1B6D26C100275BF5 /* Frameworks */,
 				09030B9C1B6D26C100275BF5 /* CopyFiles */,
@@ -714,6 +724,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		095685F61B6DB78D00BF300C /* Update SwiftGenVersion */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update SwiftGenVersion";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"public let SwiftGenVersion = \\\"`date \"+%Y-%m-%d, %H:%M:%S\"` - `git rev-parse --short HEAD`\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
+			showEnvVarsInLog = 0;
+		};
+		095685F71B6DB81000BF300C /* Update SwiftGenVersion */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update SwiftGenVersion";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"public let SwiftGenVersion = \\\"`date \"+%Y-%m-%d, %H:%M:%S\"` - `git rev-parse --short HEAD`\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
+			showEnvVarsInLog = 0;
+		};
+		095685F81B6DB83100BF300C /* Update SwiftGenVersion */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update SwiftGenVersion";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"public let SwiftGenVersion = \\\"`date \"+%Y-%m-%d, %H:%M:%S\"` - `git rev-parse --short HEAD`\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
+			showEnvVarsInLog = 0;
+		};
+		095685F91B6DB83A00BF300C /* Update SwiftGenVersion */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update SwiftGenVersion";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"public let SwiftGenVersion = \\\"`date \"+%Y-%m-%d, %H:%M:%S\"` - `git rev-parse --short HEAD`\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		09030B671B6D254200275BF5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -723,6 +796,7 @@
 				09030BA11B6D26D200275BF5 /* SwiftGenIndentation.swift in Sources */,
 				09030BAC1B6D26EA00275BF5 /* SwiftGenStoryboardEnumBuilder.swift in Sources */,
 				09030BB41B6D273800275BF5 /* main.swift in Sources */,
+				095685F21B6DAF1000BF300C /* SwiftGenVersion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,6 +808,7 @@
 				09030BA31B6D26D200275BF5 /* SwiftGenIndentation.swift in Sources */,
 				09030BA91B6D26D900275BF5 /* SwiftGenAssetsEnumBuilder.swift in Sources */,
 				09030BAE1B6D271D00275BF5 /* main.swift in Sources */,
+				095685F31B6DB0E300BF300C /* SwiftGenVersion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,6 +820,7 @@
 				09030BA51B6D26D300275BF5 /* SwiftGenIndentation.swift in Sources */,
 				09030BAA1B6D26E000275BF5 /* SwiftGenColorEnumBuilder.swift in Sources */,
 				09030BB01B6D272800275BF5 /* main.swift in Sources */,
+				095685F41B6DB0E300BF300C /* SwiftGenVersion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -756,6 +832,7 @@
 				09030BA71B6D26D400275BF5 /* SwiftGenIndentation.swift in Sources */,
 				09030BAB1B6D26E500275BF5 /* SwiftGenL10nEnumBuilder.swift in Sources */,
 				09030BB21B6D273000275BF5 /* main.swift in Sources */,
+				095685F51B6DB0E400BF300C /* SwiftGenVersion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

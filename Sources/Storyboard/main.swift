@@ -3,6 +3,7 @@ import Foundation
 
 guard Process.argc >= 2 else {
     print("Usage: swiftgen-storyboard path/to/dir/containing/storyboards")
+    print("\n -- Version: \(SwiftGenVersion)")
     exit(-1)
 }
 
