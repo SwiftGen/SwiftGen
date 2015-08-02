@@ -9,25 +9,32 @@ This is a suite of tools written in Swift to auto-generate Swift code for variou
 
 ## Installation
 
-### Build the tools from source
+### Build and install the tools from source
 
-To build the executables from the source, **simply run `rake` from the command line**.
+* To build the executables from the source, **simply use `rake` from the command line**.
 
-This will generate standalone executables into the `bin/` directory.
+```sh
+# To build and install all the SwiftGen executables in ./bin
+$ rake all
 
-> Note: The tools are written in Swift 2.0 and need to be compiled with Xcode 7.
-> 
-> If your Xcode 7 is not the one set as default for use from the Command Line, you can use `sudo xcode-select -s` to change it. Alternatively, you can use `DEVELOPER_DIR=/Applications/Xcode-beta.app rake`.
+# To build and install the executables in ./exec rather than in ./bin
+$ rake all[.,/exec]
+
+# To install the executables in /usr/local/bin
+# (similar to all[/usr/local,/bin])
+$ rake install
+```
+
+> Note: The tools are written in Swift 2.0 and need to be compiled with Xcode 7.  
+> The Rakefile will automatically find the copy of Xcode 7.x installed on your Mac (thanks to Spotlight and `mdfind`) and use it to compile the tools — even if Xcode 7 is not the version selected for use in the command line by `xcode-select`
 
 ### Using the binaries & play with the Playground
 
-* The built tools will be located in `bin/`. Simply invoke them with the necessary arguments from the command line (see doc of each tool below).
-* Each tool generates the code to `stdout`, so you'll probably use a shell redirection to write that to a file (e.g. `./swiftgen-assets /path/to/Images.xcassets >Assets.swift`)
-* The `SwiftGen.playground` will allow you to play around with the various `EnumBuilders` classes used by the compiled tools and see some usage examples.
+* Once the tool has been generated, simply invoke them with the necessary arguments from the command line (see doc of each tool below). Invoking them without any argument will print a very basic usage help and the tool version.
+* Each tool generates the code to `stdout`, so you'll probably use a shell redirection to write that to a file (e.g. `swiftgen-assets /path/to/Images.xcassets >Assets.swift`)
+* The `SwiftGen.playground` will allow you to play with the code that the tools typically generates and see some examples of how you can take advantage of it.
 
 > Note: The playground is in the Xcode 7 format, and uses its new concept of "Playground pages" to regroup multiple playground pages in a single Playground.
-
-To learn more on how the various source files used to build the tools are organized in the repository, see [Repository Organization & Rakefile Internals](#repository-organization--rakefile-internals) at the end of this README.
 
 ---
 
@@ -281,40 +288,8 @@ let ban = tr(.BananasOwner(2, "John"))
 // -> "Those 2 bananas belong to John."
 ```
 
-### Limitations
-
-* Does only support `%@`, `%f`, `%d`, `%i` and `%u` format placeholders.
-* Does not yet support positionable placeholders, like `%2$@`, etc (which change the order in which the parameters are parsed)
-* We need to add some security during the parsing of placeholders
-  * e.g. today `%x makes %g fail` will start parsing the placeholder from `%` and won't stop until it encounters one of `@fdiu` — the only types supported so far — which will only happen on `fail`, so it will consider `%x makes %g f` like it were `%f` altogether, skipping a parameter in the process…
-
-
 ---
 
-# Repository Organization & Rakefile Internals
-
-Here are some details on how the files are organized in that repo and how the Rakefile works.
-
-* The source of the command-line scripts are located in `src/`
-* The command-line scripts basically parse command-line arguments, then use the `SwiftGenXXXEnumBuilder` classes to generate the appropriate code, so their code is pretty simple as they are just wrappers around other builder classes
-* The core elements of the project, which are the various `SwiftGenXXXEnumBuilder` classes + some other shared code used by these classes, are actually stored in `SwiftGen.playground/Sources`. That way, the playground can use those `SwiftGenXXXEnumBuilder` classes directly and you can play around with those `Builder` classes here.
-
-The `Rakefile` tasks are automatically constructed by filesystem parsing. For example, when running `rake`:
-
-* The `src/` directory is parsed, and a rake task is created to build each target executable
-* Dependencies on other sources for each script are automatically computed by scanning for `import` statements and comparing them with the sources in `SwiftGen.playground/Sources/`
-* Potential transitive dependencies for libs (like `SwiftGenAssetsEnumBuilder` depending itself on `SwiftIdentifier`) are also automatically detected by scanning for `//@import` comment lines I added in the lib sources (that's an entirely personal convention)
-* As a result, `rake` is able to build each script into a standalone tool by determining all by itself all the files needed to build the binary
-
-Additionally, even if it's not the recommended mode, the `Rakefile` allows you to build _dependant_ binaries too, using `rake bin:all`. In this mode:
-
-* It starts by creating a rake task `lib:XXX` for each files in `SwiftGen.playground/Sources` that will compile them as dynamic libraries into `./lib/libXXX.dylib`
-* Then it adds rake tasks `bin:XXX` that compiles the scripts located in `src/XXX` into `bin/XXX`, but as executables **linked against those dynamic libraries** previously generated.
-* Dependencies are also automagically computed when using this mode, with similar techniques as described above, so that the `bin:XXX` rake tasks are made dependant on the appropriate `lib:XXX` rake tasks, and the final executables are only linked against the appropriate dynamic libraries in `lib/` (and not all of them).
-
-> The drawback of this mode is that the executables are being linked against libs at path `./lib/libXXX`, which means that it needs those dynamic libs to always be located at that path (relative to the working dir) for the binary to even be launchable. This means that you will only be able to call `bin/swiftgen-assets` from this repository working directory, and not from anywhere else.
-> 
-> This mode still exists anyway, because it was the first mode I implemented when creating that `Rakefile`, and because it's still interesting as an exercice to know how to build dylibs and modules (and because it may evolve someday to build a reusable framework maybe?).
 
 # Licence
 
