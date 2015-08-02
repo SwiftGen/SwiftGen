@@ -3,6 +3,7 @@ import Foundation
 
 guard Process.argc >= 2 else {
     print("Usage: swiftgen-l10n path/to/Localizable.strings")
+    print("\n -- Version: \(SwiftGenVersion)")
     exit(-1)
 }
 

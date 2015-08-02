@@ -6,42 +6,45 @@ def dev_dir
   %Q(DEVELOPER_DIR=#{xcode7.last.shellescape})
 end
 
-def build(files, output)
-  files_list = files.flat_map { |pat| Dir["Sources/#{pat}"] }
-  puts "\n== #{output} =="
-  sh %Q(#{dev_dir} xcrun -sdk macosx swiftc -whole-module-optimization -o #{output} #{files_list.shelljoin})
+def build(scheme, install_root, install_dir)
+  puts "\n== #{scheme} =="
+  install_paths = "DSTROOT=#{install_root.shellescape} INSTALL_PATH=#{install_dir.shellescape}"
+  sh %Q(#{dev_dir} xcodebuild -project SwiftGen.xcodeproj -scheme #{scheme} -sdk macosx install #{install_paths})
 end
 
-def bintask(binary, src_folder)
-  desc "Build swiftgen-#{binary} binary in bin/"
-  task binary => :bin_dir do
-    build(%W(Common/*.swift #{src_folder}/*.swift), "bin/swiftgen-#{binary}")
+def bintask(scheme_tag)
+  scheme = "swiftgen-#{scheme_tag}"
+  desc "Build and install #{scheme} in ${install_root}${dir}.\n(install_root defaults to '.' and dir defaults to '/bin')"
+  task scheme_tag, [:install_root, :dir] => :mkinstalldir do |_, args|
+    args.with_defaults(:install_root => '.', :dir => '/bin')
+    build(scheme, args.install_root, args.dir)
   end
 end
 
 ###########################################################
 
-task :bin_dir do
-  `[ -d "./bin" ] || mkdir "./bin"`
-end
-
-desc 'Delete the bin/ directory'
-task :clean do
-  sh 'rm -rf ./bin'
+task :mkinstalldir, [:install_root, :dir] do |_, args|
+  args.with_defaults(:install_root => '.', :dir => '/bin')
+  dir = "#{args.install_root}#{args.dir}"
+  `[ -d #{dir.shellescape} ] || mkdir #{dir.shellescape}`
 end
 
 namespace :swiftgen do
-  bintask 'l10n', 'L10n'
-  bintask 'storyboard', 'Storyboard'
-  bintask 'colors', 'Colors'
-  bintask 'assets', 'Assets'
+  bintask 'l10n'
+  bintask 'storyboard'
+  bintask 'colors'
+  bintask 'assets'
 end
 
-desc 'Build all executables in bin/'
-task :all => %w(swiftgen:l10n swiftgen:storyboard swiftgen:colors swiftgen:assets)
+desc 'Build and install all executables in ${install_root}${dir}'
+task :all, [:install_root, :dir] => %w(swiftgen:l10n swiftgen:storyboard swiftgen:colors swiftgen:assets)
 
-desc 'clean + all'
-task :default => [:clean, :all]
+task :default => [:all]
+
+desc "Shortcut for `all[/usr/local,/bin]` (may need sudo).\nThis will install all SwiftGen executables in /usr/local/bin."
+task :install do
+  Rake::Task[:all].invoke('/usr/local','/bin')
+end
 
 
 ###########################################################
@@ -61,7 +64,7 @@ namespace :playground do
     sh %Q(#{dev_dir} xcrun plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings Tests/L10n/fixtures/Localizable.strings)
   end
 
-  desc 'Regenerate all the Playground resources based on the test fixtures'
+  desc "Regenerate all the Playground resources based on the test fixtures.\nThis compiles the needed fixtures and place them in SwiftGen.playground/Resources"
   task :resources => %w(clean assets storyboard localizable)
 end
 

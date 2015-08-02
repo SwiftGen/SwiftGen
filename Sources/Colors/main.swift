@@ -3,6 +3,7 @@ import Foundation
 
 guard Process.argc >= 2 else {
     print("Usage: swiftgen-colors path/to/colors.txt")
+    print("\n -- Version: \(SwiftGenVersion)")
     exit(-1)
 }
 
