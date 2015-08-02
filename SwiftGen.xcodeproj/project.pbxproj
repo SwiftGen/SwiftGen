@@ -57,6 +57,9 @@
 		09030C321B6D504600275BF5 /* FileDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C311B6D504100275BF5 /* FileDefaults.swift.out */; };
 		09030C331B6D504A00275BF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09030C2F1B6D4F8500275BF5 /* Images.xcassets */; };
 		09030C351B6D521B00275BF5 /* FileDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C301B6D4FD200275BF5 /* FileDefaults.swift.out */; };
+		095685EC1B6DA16800BF300C /* FileWithCustomName.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 095685EB1B6DA16200BF300C /* FileWithCustomName.swift.out */; };
+		095685EE1B6DA24900BF300C /* FileWithCustomIndentation.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 095685ED1B6DA17300BF300C /* FileWithCustomIndentation.swift.out */; };
+		095685F01B6DA32E00BF300C /* LinesWithDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 095685EF1B6DA32800BF300C /* LinesWithDefaults.swift.out */; };
 		09E714701B6D7082007FF3CF /* EntiresDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09E7146F1B6D707E007FF3CF /* EntiresDefaults.swift.out */; };
 		09E714821B6D7252007FF3CF /* SwiftIdentifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E714711B6D711A007FF3CF /* SwiftIdentifierTests.swift */; };
 		09E714831B6D7259007FF3CF /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */; };
@@ -163,6 +166,9 @@
 		09030C2F1B6D4F8500275BF5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		09030C301B6D4FD200275BF5 /* FileDefaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileDefaults.swift.out; sourceTree = "<group>"; };
 		09030C311B6D504100275BF5 /* FileDefaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileDefaults.swift.out; sourceTree = "<group>"; };
+		095685EB1B6DA16200BF300C /* FileWithCustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileWithCustomName.swift.out; sourceTree = "<group>"; };
+		095685ED1B6DA17300BF300C /* FileWithCustomIndentation.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileWithCustomIndentation.swift.out; sourceTree = "<group>"; };
+		095685EF1B6DA32800BF300C /* LinesWithDefaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LinesWithDefaults.swift.out; sourceTree = "<group>"; };
 		09E7146D1B6D55B4007FF3CF /* SwiftGen.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftGen.playground; sourceTree = "<group>"; };
 		09E7146E1B6D5946007FF3CF /* Rakefile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Rakefile; sourceTree = "<group>"; };
 		09E7146F1B6D707E007FF3CF /* EntiresDefaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EntiresDefaults.swift.out; sourceTree = "<group>"; };
@@ -417,6 +423,9 @@
 			children = (
 				09030C261B6D492E00275BF5 /* EntriesWithDefaults.swift.out */,
 				09030C2A1B6D4D9A00275BF5 /* FileWithDefaults.swift.out */,
+				095685EB1B6DA16200BF300C /* FileWithCustomName.swift.out */,
+				095685ED1B6DA17300BF300C /* FileWithCustomIndentation.swift.out */,
+				095685EF1B6DA32800BF300C /* LinesWithDefaults.swift.out */,
 			);
 			path = expected;
 			sourceTree = "<group>";
@@ -688,7 +697,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				09030C281B6D499C00275BF5 /* EntriesWithDefaults.swift.out in Resources */,
+				095685EC1B6DA16800BF300C /* FileWithCustomName.swift.out in Resources */,
 				09030C2C1B6D4DF400275BF5 /* FileWithDefaults.swift.out in Resources */,
+				095685F01B6DA32E00BF300C /* LinesWithDefaults.swift.out in Resources */,
+				095685EE1B6DA24900BF300C /* FileWithCustomIndentation.swift.out in Resources */,
 				09030C291B6D49A100275BF5 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1142,6 +1154,7 @@
 				09E714811B6D7247007FF3CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

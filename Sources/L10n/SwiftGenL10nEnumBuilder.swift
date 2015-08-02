@@ -81,21 +81,36 @@ public final class SwiftGenL10nEnumBuilder {
     // MARK: - Public Enum types
     
     public enum PlaceholderType : String {
-        case String
-        case Float
-        case Int
+        case Object = "String"
+        case Float = "Float"
+        case Int = "Int"
+        case Char = "Character"
+        case CString = "UnsafePointer<unichar>"
+        case Pointer = "UnsafePointer<Void>"
+        case Unknown = "Any"
         
         init?(formatChar char: Character) {
-            switch char {
+            let lcChar = String(char).lowercaseString.characters.first!
+            switch lcChar {
             case "@":
-                self = .String
-            case "f":
+                self = .Object
+            case "a", "e", "f", "g":
                 self = .Float
-            case "d", "i", "u":
+            case "d", "i", "o", "u", "x":
                 self = .Int
+            case "c":
+                self = .Char
+            case "s":
+                self = .CString
+            case "p":
+                self = .Pointer
             default:
                 return nil
             }
+        }
+        
+        public static func fromFormatString(format: String) -> [PlaceholderType] {
+            return SwiftGenL10nEnumBuilder.typesFromFormatString(format)
         }
     }
     
@@ -113,17 +128,17 @@ public final class SwiftGenL10nEnumBuilder {
             self.types = types
         }
         
-        private static var regex = {
+        private static var lineRegEx = {
             return try! NSRegularExpression(pattern: "^\"([^\"]+)\"[ \t]*=[ \t]*\"(.*)\"[ \t]*;", options: [])
         }()
         
         init?(line: String) {
             let range = NSRange(location: 0, length: (line as NSString).length)
-            if let match = Entry.regex.firstMatchInString(line, options: [], range: range) {
+            if let match = Entry.lineRegEx.firstMatchInString(line, options: [], range: range) {
                 let key = (line as NSString).substringWithRange(match.rangeAtIndex(1))
                 
                 let translation = (line as NSString).substringWithRange(match.rangeAtIndex(2))
-                let types = SwiftGenL10nEnumBuilder.typesFromFormatString(translation)
+                let types = PlaceholderType.fromFormatString(translation)
                 
                 self = Entry(key: key, types: types)
             } else {
@@ -139,33 +154,56 @@ public final class SwiftGenL10nEnumBuilder {
     private var parsedLines = [Entry]()
     
     // "I give %d apples to %@" --> [.Int, .String]
+    private static var formatTypesRegEx : NSRegularExpression = {
+        let pattern_int = "(?:h|hh|l|ll|q|z|t|j)?([dioux])" // %d/%i/%o/%u/%x with their optional length modifiers like in "%lld"
+        let pattern_float = "[aefg]"
+        let position = "([1-9]\\d*\\$)?" // like in "%3$" to make positional specifiers
+        let precision = "[-+]?\\d?(?:\\.\\d)?" // precision like in "%1.2f"
+        return try! NSRegularExpression(pattern: "(?<!%)%\(position)\(precision)(@|\(pattern_int)|\(pattern_float)|[csp])", options: [.CaseInsensitive])
+    }()
+    
     private static func typesFromFormatString(formatString: String) -> [PlaceholderType] {
-        var types = [PlaceholderType]()
-        var placeholderIndex: Int? = nil
-        var lastPlaceholderIndex = 0
+        let range = NSRange(location: 0, length: (formatString as NSString).length)
         
-        for char in formatString.characters {
-            if char == "%" {
-                // TODO: Manage the "%%" special sequence
-                placeholderIndex = lastPlaceholderIndex++
+        // Extract the list of chars (conversion specifiers) and their optional positional specifier
+        let chars = formatTypesRegEx.matchesInString(formatString, options: [], range: range).map { match -> (String, Int?) in
+            let range : NSRange
+            if match.rangeAtIndex(3).location != NSNotFound {
+                // [dioux] are in range #3 because in #2 there may be length modifiers (like in "lld")
+                range = match.rangeAtIndex(3)
+            } else {
+                // otherwise, no length modifier, the conversion specifier is in #2
+                range = match.rangeAtIndex(2)
             }
-            else if placeholderIndex != nil {
-                // TODO: Manage positional placeholders like "%2$@"
-                //       That change the order the placeholder should be inserted in the types array
-                //        (If types.count+1 < placehlderIndex, we'll need to insert "Any" types to fill the gap)
-                if let type = PlaceholderType(formatChar: char) {
-                    types.append(type)
-                    placeholderIndex = nil
-                }
-                else if char == "%" {
-                    // Treat it as "%%"
-                    // FIXME: This case will also be executed with strings like "%--%"
-                    //        Better add some more security during that parsing later
-                    placeholderIndex = nil
-                }
+            let char = (formatString as NSString).substringWithRange(range)
+            
+            let posRange = match.rangeAtIndex(1)
+            if posRange.location == NSNotFound {
+                // No positional specifier
+                return (char, nil)
+            }
+            else {
+                // Remove the "$" at the end of the positional specifier, and convert to Int
+                let posRange1 = NSRange(location: posRange.location, length: posRange.length-1)
+                let pos = (formatString as NSString).substringWithRange(posRange1)
+                return (char, Int(pos))
             }
         }
         
-        return types
+        // enumerate the conversion specifiers and their optionally forced position and build the array of PlaceholderTypes accordingly
+        var list = [PlaceholderType]()
+        var nextNonPositional = 1
+        for (str, pos) in chars {
+            if let char = str.characters.first, let p = PlaceholderType(formatChar: char) {
+                let insertionPos = pos ?? nextNonPositional++
+                if insertionPos > 0 {
+                    while list.count <= insertionPos-1 {
+                        list.append(.Unknown)
+                    }
+                    list[insertionPos-1] = p
+                }
+            }
+        }
+        return list
     }
 }

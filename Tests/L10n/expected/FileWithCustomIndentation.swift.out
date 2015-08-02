@@ -1,0 +1,37 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+enum L10n {
+   case AlertTitle
+   case AlertMessage
+   case Greetings(String, Int)
+   case ApplesCount(Int)
+   case BananasOwner(Int, String)
+}
+
+extension L10n : CustomStringConvertible {
+   var description : String { return self.string }
+
+   var string : String {
+      switch self {
+         case .AlertTitle:
+            return L10n.tr("alert_title")
+         case .AlertMessage:
+            return L10n.tr("alert_message")
+         case .Greetings(let p0, let p1):
+            return L10n.tr("greetings", p0, p1)
+         case .ApplesCount(let p0):
+            return L10n.tr("apples.count", p0)
+         case .BananasOwner(let p0, let p1):
+            return L10n.tr("bananas.owner", p0, p1)
+      }
+   }
+
+   private static func tr(key: String, _ args: CVarArgType...) -> String {
+      let format = NSLocalizedString(key, comment: "")
+      return String(format: format, arguments: args)
+   }
+}
+
+func tr(key: L10n) -> String {
+   return key.string
+}
