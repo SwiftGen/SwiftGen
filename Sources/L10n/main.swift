@@ -1,8 +1,12 @@
 import Foundation
 //@import SwiftGenL10nEnumBuilder
 
+guard Process.argc >= 2 else {
+    print("Usage: swiftgen-l10n path/to/Localizable.strings")
+    exit(-1)
+}
 
-let filePath = Process.argc < 2 ? "." : Process.arguments[1]
+let filePath = Process.arguments[1]
 
 let enumBuilder = SwiftGenL10nEnumBuilder()
 do {
