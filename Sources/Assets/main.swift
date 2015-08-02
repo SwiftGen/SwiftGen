@@ -1,8 +1,12 @@
 import Foundation
 //@import SwiftGenAssetsEnumBuilder
 
+guard Process.argc >= 2 else {
+    print("Usage: swiftgen-assets path/to/dir/containing/xcassets")
+    exit(-1)
+}
 
-let scanDir = Process.argc < 2 ? "." : Process.arguments[1]
+let scanDir = Process.arguments[1]
 
 let enumBuilder = SwiftGenAssetsEnumBuilder()
 enumBuilder.parseDirectory(scanDir)

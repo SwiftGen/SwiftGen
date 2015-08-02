@@ -1,8 +1,12 @@
 import Foundation
 //@import SwiftGenColorEnumBuilder
 
+guard Process.argc >= 2 else {
+    print("Usage: swiftgen-colors path/to/colors.txt")
+    exit(-1)
+}
 
-let filePath = Process.argc < 2 ? "." : Process.arguments[1]
+let filePath = Process.arguments[1]
 
 let enumBuilder = SwiftGenColorEnumBuilder()
 do {
