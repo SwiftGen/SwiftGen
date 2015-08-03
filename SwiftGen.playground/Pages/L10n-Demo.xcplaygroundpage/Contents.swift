@@ -17,6 +17,7 @@ enum L10n {
     case Greetings(String, Int)
     case ApplesCount(Int)
     case BananasOwner(Int, String)
+    case ObjectOwnership(Int, String, String)
 }
 
 extension L10n : CustomStringConvertible {
@@ -34,6 +35,8 @@ extension L10n : CustomStringConvertible {
             return L10n.tr("apples.count", p0)
         case .BananasOwner(let p0, let p1):
             return L10n.tr("bananas.owner", p0, p1)
+        case .ObjectOwnership(let p0, let p1, let p2):
+            return L10n.tr("object.ownership", p0, p1, p2)
         }
     }
     
@@ -55,4 +58,6 @@ let alertTitle = tr(.AlertTitle)
 let hello1 = tr(.Greetings("David", 29))
 let hello2 = L10n.Greetings("Olivier", 32) // Prints as a string in the console because it's CustomStringConvertible
 
+// note the inversion of parameters' order due to usage of %1$d, %2$@ and %1$@ in Localizable.strings
+tr(.ObjectOwnership(3, "Apples", "John"))
 
