@@ -6,6 +6,7 @@ enum XCTLoc {
     case Greetings(String, Int)
     case ApplesCount(Int)
     case BananasOwner(Int, String)
+    case ObjectOwnership(Int, String, String)
 }
 
 extension XCTLoc : CustomStringConvertible {
@@ -23,6 +24,8 @@ extension XCTLoc : CustomStringConvertible {
                 return XCTLoc.tr("apples.count", p0)
             case .BananasOwner(let p0, let p1):
                 return XCTLoc.tr("bananas.owner", p0, p1)
+            case .ObjectOwnership(let p0, let p1, let p2):
+                return XCTLoc.tr("object.ownership", p0, p1, p2)
         }
     }
 
