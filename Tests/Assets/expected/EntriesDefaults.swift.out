@@ -10,11 +10,11 @@ extension UIImage {
         case _2Pears = "2-pears"
 
         var image: UIImage {
-            return UIImage(named: self.rawValue)!
+            return UIImage(asset: self)
         }
     }
 
-    convenience init?(asset: Asset) {
-        self.init(named: asset.rawValue)
+    convenience init(asset: Asset) {
+        self.init(named: asset.rawValue)!
     }
 }

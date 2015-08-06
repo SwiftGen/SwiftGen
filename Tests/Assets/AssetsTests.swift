@@ -23,8 +23,8 @@ class AssetsTests: XCTestCase {
         enumBuilder.addAssetName("2-pears")
         let result = enumBuilder.build()
         
-        let expected = self.fixtureString("EntiresDefaults.swift.out")
-        XCTAssertEqual(result, expected)
+        let expected = self.fixtureString("EntriesDefaults.swift.out")
+        XCTDiffStrings(result, expected)
     }
 
     func testFileWithDefaults() {
@@ -33,7 +33,7 @@ class AssetsTests: XCTestCase {
         let result = enumBuilder.build()
         
         let expected = self.fixtureString("FileDefaults.swift.out")
-        XCTAssertEqual(result, expected)
+        XCTDiffStrings(result, expected)
     }
 
 }
