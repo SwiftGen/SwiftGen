@@ -47,13 +47,13 @@ public final class SwiftGenAssetsEnumBuilder {
         
         text += "\n"
         text += "\(t)\(t)var image: UIImage {\n"
-        text += "\(t)\(t)\(t)return UIImage(named: self.rawValue)!\n"
+        text += "\(t)\(t)\(t)return UIImage(asset: self)\n"
         text += "\(t)\(t)}\n"
         
         text += "\(t)}\n\n"
         
-        text += "\(t)convenience init?(asset: \(enumName)) {\n"
-        text += "\(t)\(t)self.init(named: asset.rawValue)\n"
+        text += "\(t)convenience init(asset: \(enumName)) {\n"
+        text += "\(t)\(t)self.init(named: asset.rawValue)!\n"
         text += "\(t)}\n"
         text += "}\n"
         
