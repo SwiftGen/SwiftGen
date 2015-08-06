@@ -69,16 +69,16 @@ public final class SwiftGenStoryboardEnumBuilder {
         parser?.delegate = delegate
         parser?.parse()
         
-        let storyboardName = path.lastPathComponent.stringByDeletingPathExtension
+        let storyboardName = ((path as NSString).lastPathComponent as NSString).stringByDeletingPathExtension
         storyboardsScenes[storyboardName] = delegate.scenes
         storyboardsSegues[storyboardName] = delegate.segues
     }
     
     public func parseDirectory(path: String) {
         if let dirEnum = NSFileManager.defaultManager().enumeratorAtPath(path) {
-            while let subPath = dirEnum.nextObject() as? String {
+            while let subPath = dirEnum.nextObject() as? NSString {
                 if subPath.pathExtension == "storyboard" {
-                    self.addStoryboardAtPath(path.stringByAppendingPathComponent(subPath))
+                    self.addStoryboardAtPath((path as NSString).stringByAppendingPathComponent(subPath as String))
                 }
             }
         }

@@ -19,9 +19,9 @@ public final class SwiftGenAssetsEnumBuilder {
     
     public func parseDirectory(path: String) {
         if let dirEnum = NSFileManager.defaultManager().enumeratorAtPath(path) {
-            while let path = dirEnum.nextObject() as? String {
+            while let path = dirEnum.nextObject() as? NSString {
                 if path.pathExtension == "imageset" {
-                    let assetName = path.lastPathComponent.stringByDeletingPathExtension
+                    let assetName = (path.lastPathComponent as NSString).stringByDeletingPathExtension
                     self.addAssetName(assetName)
                 }
             }
