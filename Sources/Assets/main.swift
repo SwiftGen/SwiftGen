@@ -3,9 +3,15 @@ import Foundation
 
 guard Process.argc >= 2 else {
     print("Usage: swiftgen-assets path/to/dir/containing/xcassets")
-    print("\n -- Version: \(SwiftGenVersion)")
     exit(-1)
 }
+
+if ["-v","--version"].contains(Process.arguments[1]) {
+    print(SwiftGenVersion)
+    exit(0)
+}
+
+// MARK: Main Entry Point
 
 let scanDir = Process.arguments[1]
 

@@ -737,7 +737,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"public let SwiftGenVersion = \\\"`date \"+%Y-%m-%d, %H:%M:%S\"` - `git rev-parse --short HEAD`\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
+			shellScript = "echo \"public let SwiftGenVersion = \\\"`git describe`\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
 			showEnvVarsInLog = 0;
 		};
 		095685F71B6DB81000BF300C /* Update SwiftGenVersion */ = {
@@ -752,7 +752,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"public let SwiftGenVersion = \\\"`date \"+%Y-%m-%d, %H:%M:%S\"` - `git rev-parse --short HEAD`\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
+			shellScript = "echo \"public let SwiftGenVersion = \\\"`git describe`\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
 			showEnvVarsInLog = 0;
 		};
 		095685F81B6DB83100BF300C /* Update SwiftGenVersion */ = {
@@ -767,7 +767,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"public let SwiftGenVersion = \\\"`date \"+%Y-%m-%d, %H:%M:%S\"` - `git rev-parse --short HEAD`\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
+			shellScript = "echo \"public let SwiftGenVersion = \\\"`git describe`\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
 			showEnvVarsInLog = 0;
 		};
 		095685F91B6DB83A00BF300C /* Update SwiftGenVersion */ = {
@@ -782,7 +782,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"public let SwiftGenVersion = \\\"`date \"+%Y-%m-%d, %H:%M:%S\"` - `git rev-parse --short HEAD`\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
+			shellScript = "echo \"public let SwiftGenVersion = \\\"`git describe`\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
