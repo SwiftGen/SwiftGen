@@ -3,9 +3,15 @@ import Foundation
 
 guard Process.argc >= 2 else {
     print("Usage: swiftgen-storyboard path/to/dir/containing/storyboards")
-    print("\n -- Version: \(SwiftGenVersion)")
     exit(-1)
 }
+
+if ["-v","--version"].contains(Process.arguments[1]) {
+    print(SwiftGenVersion)
+    exit(0)
+}
+
+// MARK: Main Entry Point
 
 let scanDir = Process.arguments[1]
 
