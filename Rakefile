@@ -18,15 +18,6 @@ def build(scheme, install_root, install_dir)
   end
 end
 
-def bintask(scheme_tag)
-  scheme = "swiftgen-#{scheme_tag}"
-  desc "Build and install #{scheme} in ${install_root}${dir}.\n(install_root defaults to '.' and dir defaults to '/bin')"
-  task scheme_tag, [:install_root, :dir] => :mkinstalldir do |_, args|
-    args.with_defaults(:install_root => '.', :dir => '/bin')
-    build(scheme, args.install_root, args.dir)
-  end
-end
-
 ###########################################################
 
 task :mkinstalldir, [:install_root, :dir] do |_, args|
@@ -35,15 +26,36 @@ task :mkinstalldir, [:install_root, :dir] do |_, args|
   `[ -d #{dir.shellescape} ] || mkdir #{dir.shellescape}`
 end
 
+TOOLS_LIST = %w(l10n storyboard colors assets)
+
 namespace :swiftgen do
-  bintask 'l10n'
-  bintask 'storyboard'
-  bintask 'colors'
-  bintask 'assets'
+  TOOLS_LIST.each do |tool|
+    scheme = "swiftgen-#{tool}"
+    desc "Build and install #{scheme} in ${install_root}${dir}.\n(install_root defaults to '.' and dir defaults to '/bin')"
+    task tool, [:install_root, :dir] => :mkinstalldir do |_, args|
+      args.with_defaults(:install_root => '.', :dir => '/bin')
+      build(scheme, args.install_root, args.dir)
+    end
+  end
 end
+
+namespace :tests do
+  TOOLS_LIST.each do |tool|
+    scheme = "swiftgen-#{tool}"
+    desc "Run Unit Tests for #{scheme}"
+    task tool do
+      sh %Q(#{dev_dir} xcodebuild -project SwiftGen.xcodeproj -scheme #{scheme} -sdk macosx test)
+    end
+  end
+end
+
+###########################################################
 
 desc 'Build and install all executables in ${install_root}${dir}'
 task :all, [:install_root, :dir] => %w(swiftgen:l10n swiftgen:storyboard swiftgen:colors swiftgen:assets)
+
+desc 'Run Unit Tests for all the tools'
+task :tests => %w(tests:l10n tests:storyboard tests:colors tests:assets)
 
 task :default => [:all]
 
@@ -51,7 +63,6 @@ desc "Shortcut for `all[/usr/local,/bin]` (may need sudo).\nThis will install al
 task :install do
   Rake::Task[:all].invoke('/usr/local','/bin')
 end
-
 
 ###########################################################
 
