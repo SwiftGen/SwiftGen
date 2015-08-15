@@ -9,9 +9,23 @@ This is a suite of tools written in Swift to auto-generate Swift code for variou
 
 ## Installation
 
+> Note: The tools are written in Swift 2.0 and need to be compiled with the latest Xcode 7.  
+> The Rakefile will automatically find the copy of Xcode 7.x installed on your Mac (thanks to Spotlight and `mdfind`) and use it to compile the tools — even if Xcode 7 is not the version selected for use in the command line by `xcode-select`
+
+### Via Homebrew
+
+You can install SwiftGen via [Homebrew](http://brew.sh) like this:
+
+```sh
+$ brew install swiftgen
+```
+
 ### Build and install the tools from source
 
-* To build the executables from the source, **simply use `rake` from the command line**.
+Alternatively, you can build it from the sources yourself
+
+* Clone this repository
+* `cd` to the cloned working copy, then use `rake` to build and install SwiftGen
 
 ```sh
 # To build and install all the SwiftGen executables in ./bin
@@ -25,14 +39,12 @@ $ rake all[.,/exec]
 $ rake install
 ```
 
-> Note: The tools are written in Swift 2.0 and need to be compiled with Xcode 7.  
-> The Rakefile will automatically find the copy of Xcode 7.x installed on your Mac (thanks to Spotlight and `mdfind`) and use it to compile the tools — even if Xcode 7 is not the version selected for use in the command line by `xcode-select`
 
 ### Using the binaries & play with the Playground
 
 * Once the tool has been generated, simply invoke them with the necessary arguments from the command line (see doc of each tool below). Invoking them without any argument will print a very basic usage help and the tool version.
 * Each tool generates the code to `stdout`, so you'll probably use a shell redirection to write that to a file (e.g. `swiftgen-assets /path/to/Images.xcassets >Assets.swift`)
-* The `SwiftGen.playground` will allow you to play with the code that the tools typically generates and see some examples of how you can take advantage of it.
+* The `SwiftGen.playground` available in this repository will allow you to play with the code that the tools typically generates, and see some examples of how you can take advantage of it.
 
 > Note: The playground is in the Xcode 7 format, and uses its new concept of "Playground pages" to regroup multiple playground pages in a single Playground.
 
