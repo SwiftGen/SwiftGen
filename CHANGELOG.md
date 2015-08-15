@@ -2,6 +2,10 @@
 
 ---
 
+## 0.4.1
+
+* Updated for Xcode 7 Beta 5
+
 ## 0.4.0
 
 * Reorganized files into an **Xcode project** with one target per executable [[#2](https://github.com/AliSoftware/SwiftGen/issues/2)]
