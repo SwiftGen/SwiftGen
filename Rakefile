@@ -9,7 +9,13 @@ end
 def build(scheme, install_root, install_dir)
   puts "\n== #{scheme} =="
   install_paths = "DSTROOT=#{install_root.shellescape} INSTALL_PATH=#{install_dir.shellescape}"
-  sh %Q(#{dev_dir} xcodebuild -project SwiftGen.xcodeproj -scheme #{scheme} -sdk macosx install #{install_paths})
+  cmd = %Q(#{dev_dir} xcodebuild -project SwiftGen.xcodeproj -scheme #{scheme} -sdk macosx install #{install_paths})
+  if verbose == true
+    sh cmd # Verbose shell
+  else
+    puts cmd
+    `#{cmd} 2>/dev/null` # Quiet shell
+  end
 end
 
 def bintask(scheme_tag)
