@@ -13,10 +13,15 @@ if ["-v","--version"].contains(Process.arguments[1]) {
 
 // MARK: Main Entry Point
 
-let scanDir = Process.arguments[1]
+let argument = Process.arguments[1]
 
 let enumBuilder = SwiftGenStoryboardEnumBuilder()
-enumBuilder.parseDirectory(scanDir)
+if (argument as NSString).pathExtension == "storyboard" {
+    enumBuilder.addStoryboardAtPath(argument)
+}
+else {
+    enumBuilder.parseDirectory(argument)
+}
 let output = enumBuilder.build()
 
 print(output)
