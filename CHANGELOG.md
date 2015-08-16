@@ -5,6 +5,8 @@
 ## 0.4.1
 
 * Updated for Xcode 7 Beta 5
+* `swiftgen-storyboard` now allows to take a path to a `.storyboard` file as argument (as an alternative to give a path to a whole directory)
+* The `-v` and `--version` flags are now recognized and print the executable version.
 
 ## 0.4.0
 
