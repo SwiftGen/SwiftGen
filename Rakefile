@@ -51,17 +51,17 @@ end
 
 ###########################################################
 
-desc 'Build and install all executables in ${install_root}${dir}'
-task :all, [:install_root, :dir] => %w(swiftgen:l10n swiftgen:storyboard swiftgen:colors swiftgen:assets)
+desc 'Build and install all executables in ${install_root}${dir}.'
+task :install, [:install_root, :dir] => %w(swiftgen:l10n swiftgen:storyboard swiftgen:colors swiftgen:assets)
 
 desc 'Run Unit Tests for all the tools'
 task :tests => %w(tests:l10n tests:storyboard tests:colors tests:assets)
 
 task :default => [:all]
 
-desc "Shortcut for `all[/usr/local,/bin]` (may need sudo).\nThis will install all SwiftGen executables in /usr/local/bin."
-task :install do
-  Rake::Task[:all].invoke('/usr/local','/bin')
+desc "Build all executables in ./bin.\nThis is a synonym of `install[.,/bin]`."
+task :all do
+  Rake::Task[:install].invoke('.','/bin')
 end
 
 ###########################################################

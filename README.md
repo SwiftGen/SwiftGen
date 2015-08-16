@@ -28,15 +28,16 @@ Alternatively, you can build it from the sources yourself
 * `cd` to the cloned working copy, then use `rake` to build and install SwiftGen
 
 ```sh
-# To build and install all the SwiftGen executables in ./bin
+# To build all the SwiftGen executables in ./bin
 $ rake all
 
 # To build and install the executables in ./exec rather than in ./bin
-$ rake all[.,/exec]
+$ rake install[.,/exec]
 
 # To install the executables in /usr/local/bin
-# (similar to all[/usr/local,/bin])
-$ rake install
+$ rake install[/usr/local]
+# or (similar, as the 2nd argument defaults to /bin)
+$ rake install[/usr/local,/bin]
 ```
 
 
