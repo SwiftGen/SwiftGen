@@ -12,17 +12,20 @@ This is a suite of tools written in Swift to auto-generate Swift code for variou
 > Note: The tools are written in Swift 2.0 and need to be compiled with the latest Xcode 7.  
 > The Rakefile will automatically find the copy of Xcode 7.x installed on your Mac (using `mdfind`) and use it to compile the tools.
 
-### Via Homebrew
-
-You can install SwiftGen via [Homebrew](http://brew.sh) like this:
-
-```sh
-$ brew install swiftgen
-```
-
 ### Build and install the tools from source
 
-Alternatively, you can build it from the sources yourself, by cloning the repository and using `rake`. E.g. `rake all` will build the tools locally in `./bin` and `rake install[/usr/local,/bin]` will install them in `/usr/local/bin`.
+Clone the repository and use `rake` to build the tool.
+
+```sh
+# will build the tools locally in `./bin`
+$ rake all
+# will install them in `/usr/local/bin`
+$ rake install[/usr/local,/bin]
+```
+
+### Via Homebrew
+
+In the future, I intend to make SwiftGen be installable via [Homebrew](http://brew.sh), but [the Homebrew team want to wait for Xcode 7 to be out of beta first (PR pending)](https://github.com/Homebrew/homebrew/pull/42983#issuecomment-131553184).
 
 
 ### Using the binaries & play with the Playground
