@@ -10,7 +10,7 @@ This is a suite of tools written in Swift to auto-generate Swift code for variou
 ## Installation
 
 > Note: The tools are written in Swift 2.0 and need to be compiled with the latest Xcode 7.  
-> The Rakefile will automatically find the copy of Xcode 7.x installed on your Mac (thanks to Spotlight and `mdfind`) and use it to compile the tools — even if Xcode 7 is not the version selected for use in the command line by `xcode-select`
+> The Rakefile will automatically find the copy of Xcode 7.x installed on your Mac (using `mdfind`) and use it to compile the tools.
 
 ### Via Homebrew
 
@@ -22,28 +22,12 @@ $ brew install swiftgen
 
 ### Build and install the tools from source
 
-Alternatively, you can build it from the sources yourself
-
-* Clone this repository
-* `cd` to the cloned working copy, then use `rake` to build and install SwiftGen
-
-```sh
-# To build all the SwiftGen executables in ./bin
-$ rake all
-
-# To build and install the executables in ./exec rather than in ./bin
-$ rake install[.,/exec]
-
-# To install the executables in /usr/local/bin
-$ rake install[/usr/local]
-# or (similar, as the 2nd argument defaults to /bin)
-$ rake install[/usr/local,/bin]
-```
+Alternatively, you can build it from the sources yourself, by cloning the repository and using `rake`. E.g. `rake all` will build the tools locally in `./bin` and `rake install[/usr/local,/bin]` will install them in `/usr/local/bin`.
 
 
 ### Using the binaries & play with the Playground
 
-* Once the tool has been generated, simply invoke them with the necessary arguments from the command line (see doc of each tool below). Invoking them without any argument will print a very basic usage help and the tool version.
+* Once the tool has been generated, simply invoke them with the necessary arguments from the command line (see doc of each tool below). Invoking them without any argument will print a very basic "usage" help.
 * Each tool generates the code to `stdout`, so you'll probably use a shell redirection to write that to a file (e.g. `swiftgen-assets /path/to/Images.xcassets >Assets.swift`)
 * The `SwiftGen.playground` available in this repository will allow you to play with the code that the tools typically generates, and see some examples of how you can take advantage of it.
 
@@ -77,8 +61,8 @@ extension UIImage {
         }
     }
     
-    convenience init?(asset: Asset) {
-        self.init(named: asset.rawValue)
+    convenience init(asset: Asset) {
+        self.init(named: asset.rawValue)!
     }
 }
 ```
@@ -87,7 +71,7 @@ extension UIImage {
 
 ```swift
 let image1 = UIImage.Asset.Apple.image
-let image2 = UIImage(asset: .Banana)!
+let image2 = UIImage(asset: .Banana)
 ```
 
 This way, no need to enter the `"Banana"` string in your code and risk any typo.
@@ -178,6 +162,17 @@ let initialVC = UIStoryboard.Scene.Wizzard.initialViewController()
 let validateVC = UIStoryboard.Scene.Wizzard.ValidatePassword.viewController()
 // Dedicated type var that returns the right type of VC (CreateAccViewController here)
 let createVC = UIStoryboard.Scene.Wizzard.createAccountViewController()
+
+override func prepareForSegue(_ segue: UIStoryboardSegue, sender sender: AnyObject?) {
+  switch UIStoryboard.Segue.Message(rawValue: segue.identifier)! {
+  case .Custom:
+    // Prepare for your custom segue transition
+  case .Back:
+    // Prepare for your custom segue transition
+  case .NonCustom:
+    // Prepare for your custom segue transition
+  }
+}
 ```
 
 
