@@ -2,6 +2,10 @@
 
 ---
 
+## 0.4.2
+
+* Added `import Foundation` on top of `swiftgen-l10n` generated code [[Nick11](https://github.com/Nick11), [#12](https://github.com/AliSoftware/SwiftGen/pull/12)]
+
 ## 0.4.1
 
 * Updated for Xcode 7 Beta 5
