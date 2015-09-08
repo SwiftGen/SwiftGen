@@ -1,1 +1,1 @@
-public let SwiftGenVersion = "0.4.2"
+public let SwiftGenVersion = "0.4.3"
