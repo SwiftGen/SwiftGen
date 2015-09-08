@@ -31,7 +31,7 @@ public final class SwiftGenL10nEnumBuilder {
             let caseName = entry.key.asSwiftIdentifier(forbiddenChars: "_")
             text += "\(t)case \(caseName)"
             if !entry.types.isEmpty {
-                text += "(" + ", ".join(entry.types.map{ $0.rawValue }) + ")"
+                text += "(" + entry.types.map{ $0.rawValue }.joinWithSeparator(", ") + ")"
             }
             text += "\n"
         }
@@ -50,14 +50,14 @@ public final class SwiftGenL10nEnumBuilder {
             text += "\(t)\(t)\(t)case .\(caseName)"
             if !entry.types.isEmpty {
                 let params = (0..<entry.types.count).map { "let p\($0)" }
-                text += "(" + ", ".join(params) + ")"
+                text += "(" + params.joinWithSeparator(", ") + ")"
             }
             text += ":\n"
             text += "\(t)\(t)\(t)\(t)return \(enumName).tr(\"\(entry.key)\""
             if !entry.types.isEmpty {
                 text += ", "
                 let params = (0..<entry.types.count).map { "p\($0)" }
-                text += ", ".join(params)
+                text += params.joinWithSeparator(", ")
             }
             text += ")\n"
         }
