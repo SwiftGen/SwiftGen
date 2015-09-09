@@ -19,8 +19,8 @@ func diff(lhs: String, _ rhs: String) -> String {
     }
     if let idx = firstDiff {
         let slice = { (str: String, start: Int, len: Int) -> String in
-            let low = advance(str.characters.startIndex, max(0,start), str.characters.endIndex)
-            let high = advance(low, len, str.characters.endIndex)
+            let low = str.characters.startIndex.advancedBy(max(0,start), limit: str.characters.endIndex)
+            let high = low.advancedBy(len, limit: str.characters.endIndex)
             return String(str.characters[low..<high])
         }
         return "Character mismatch at index \(idx): <\(slice(lhs, idx-10, 21))> != <\(slice(rhs, idx-5, 10))>"

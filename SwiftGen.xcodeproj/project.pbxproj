@@ -633,6 +633,7 @@
 		09030B631B6D254200275BF5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = AliSoftware;
 				TargetAttributes = {
