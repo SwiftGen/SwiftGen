@@ -1,5 +1,7 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
+import Foundation
+
 enum L10n {
     case AppTitle
     case GreetingsAndAge(String, Int)
