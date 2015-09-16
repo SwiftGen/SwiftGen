@@ -43,27 +43,27 @@ extension StoryboardScene where Self.RawValue == String {
 
 extension UIStoryboard {
     struct Scene {
-        enum Wizzard : String, StoryboardScene {
-            static let storyboardName = "Wizzard"
+        enum Wizard : String, StoryboardScene {
+            static let storyboardName = "Wizard"
             
             case CreateAccount = "CreateAccount"
             static func createAccountViewController() -> CreateAccViewController {
-                return Wizzard.CreateAccount.viewController() as! CreateAccViewController
+                return Wizard.CreateAccount.viewController() as! CreateAccViewController
             }
             
             case AcceptCGU = "Accept-CGU"
             static func acceptCGUViewController() -> UIViewController {
-                return Wizzard.AcceptCGU.viewController()
+                return Wizard.AcceptCGU.viewController()
             }
             
             case ValidatePassword = "Validate_Password"
             static func validatePasswordViewController() -> UIViewController {
-                return Wizzard.ValidatePassword.viewController()
+                return Wizard.ValidatePassword.viewController()
             }
             
             case Preferences = "Preferences"
             static func preferencesViewController() -> UIViewController {
-                return Wizzard.Preferences.viewController()
+                return Wizard.Preferences.viewController()
             }
         }
     }
@@ -79,16 +79,16 @@ extension UIStoryboard {
 
 //: #### Usage Example
 
-let initialVC = UIStoryboard.Scene.Wizzard.initialViewController()
+let initialVC = UIStoryboard.Scene.Wizard.initialViewController()
 initialVC.title
 
-let validateVC = UIStoryboard.Scene.Wizzard.ValidatePassword.viewController()
+let validateVC = UIStoryboard.Scene.Wizard.ValidatePassword.viewController()
 validateVC.title
 
 /* Note: the following line would crash when run in playground, because the storyboard file
    was not compiled alongside the playground code, so the CreateAccViewController class was
    not known by the storyboard. But it should work correctly in a real project. */
-// let cgu = UIStoryboard.Scene.Wizzard.createAccountViewController()
+// let cgu = UIStoryboard.Scene.Wizard.createAccountViewController()
 
 let segue = UIStoryboard.Segue.Message(rawValue: "Custom")!
 segue

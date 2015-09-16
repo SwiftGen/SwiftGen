@@ -75,7 +75,7 @@ namespace :playground do
     sh %Q(#{dev_dir} xcrun actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text Tests/Assets/fixtures/Images.xcassets)
   end
   task :storyboard do
-    sh %Q(#{dev_dir} xcrun ibtool --compile SwiftGen.playground/Resources/Wizzard.storyboardc --flatten=NO Tests/Storyboard/fixtures/Wizzard.storyboard)
+    sh %Q(#{dev_dir} xcrun ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO Tests/Storyboard/fixtures/Wizard.storyboard)
   end
   task :localizable do
     sh %Q(#{dev_dir} xcrun plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings Tests/L10n/fixtures/Localizable.strings)

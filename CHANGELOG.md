@@ -30,7 +30,7 @@
 * Changed the "namespacing `enum`" in `UIStoryboard` to a `struct` to avoid confusion with the inner enums
 * The `UIStoryboard.Scene` enums now use `static func` instead of `static var` for the dedicated `ViewController` constructors ^(†)
 
-^(†) _because it feels more explicit that calling a function like `UIStoryboard.Scene.Wizzard.validatePasswordViewController()` will actually **instanciate** a new `ViewController`, rather than returning an existing one._
+^(†) _because it feels more explicit that calling a function like `UIStoryboard.Scene.Wizard.validatePasswordViewController()` will actually **instanciate** a new `ViewController`, rather than returning an existing one._
 
 ## 0.2.0
 
