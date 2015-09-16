@@ -118,17 +118,17 @@ extension StoryboardScene where Self.RawValue == String {
 
 extension UIStoryboard {
     struct Scene {
-        enum Wizzard : String, StoryboardScene {
-            static let storyboardName = "Wizzard"
+        enum Wizard : String, StoryboardScene {
+            static let storyboardName = "Wizard"
 
             case CreateAccount = "CreateAccount"
             static func createAccountViewController() -> CreateAccViewController {
-                return Wizzard.CreateAccount.viewController() as! CreateAccViewController
+                return Wizard.CreateAccount.viewController() as! CreateAccViewController
             }
 
             case ValidatePassword = "Validate_Password"
             static func validatePasswordViewController() -> UIViewController {
-                return Wizzard.ValidatePassword.viewController()
+                return Wizard.ValidatePassword.viewController()
             }
         }
         enum Message : String, StoryboardScene {
@@ -160,11 +160,11 @@ extension UIStoryboard {
 
 ```swift
 // Initial VC
-let initialVC = UIStoryboard.Scene.Wizzard.initialViewController()
+let initialVC = UIStoryboard.Scene.Wizard.initialViewController()
 // Generic ViewController constructor, returns a UIViewController instance
-let validateVC = UIStoryboard.Scene.Wizzard.ValidatePassword.viewController()
+let validateVC = UIStoryboard.Scene.Wizard.ValidatePassword.viewController()
 // Dedicated type var that returns the right type of VC (CreateAccViewController here)
-let createVC = UIStoryboard.Scene.Wizzard.createAccountViewController()
+let createVC = UIStoryboard.Scene.Wizard.createAccountViewController()
 
 override func prepareForSegue(_ segue: UIStoryboardSegue, sender sender: AnyObject?) {
   switch UIStoryboard.Segue.Message(rawValue: segue.identifier)! {

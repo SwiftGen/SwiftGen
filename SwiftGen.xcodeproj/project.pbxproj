@@ -41,7 +41,7 @@
 		09030C051B6D2F4300275BF5 /* L10nTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD51B6D2E3900275BF5 /* L10nTests.swift */; };
 		09030C0A1B6D30DB00275BF5 /* MessageWithDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C091B6D30DB00275BF5 /* MessageWithDefaults.swift.out */; };
 		09030C0D1B6D30E800275BF5 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09030C0B1B6D30E800275BF5 /* Message.storyboard */; };
-		09030C0E1B6D30E800275BF5 /* Wizzard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09030C0C1B6D30E800275BF5 /* Wizzard.storyboard */; };
+		09030C0E1B6D30E800275BF5 /* Wizard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09030C0C1B6D30E800275BF5 /* Wizard.storyboard */; };
 		09030C101B6D315C00275BF5 /* AllWithDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C0F1B6D315C00275BF5 /* AllWithDefaults.swift.out */; };
 		09030C141B6D3D5600275BF5 /* MessageWithCustomNames.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C131B6D3D5600275BF5 /* MessageWithCustomNames.swift.out */; };
 		09030C161B6D414800275BF5 /* MessageWithCustomIndentation.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C151B6D414800275BF5 /* MessageWithCustomIndentation.swift.out */; };
@@ -157,7 +157,7 @@
 		09030BFE1B6D2ED500275BF5 /* swiftgen-l10n-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swiftgen-l10n-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09030C091B6D30DB00275BF5 /* MessageWithDefaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MessageWithDefaults.swift.out; sourceTree = "<group>"; };
 		09030C0B1B6D30E800275BF5 /* Message.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
-		09030C0C1B6D30E800275BF5 /* Wizzard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Wizzard.storyboard; sourceTree = "<group>"; };
+		09030C0C1B6D30E800275BF5 /* Wizard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Wizard.storyboard; sourceTree = "<group>"; };
 		09030C0F1B6D315C00275BF5 /* AllWithDefaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AllWithDefaults.swift.out; sourceTree = "<group>"; };
 		09030C131B6D3D5600275BF5 /* MessageWithCustomNames.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MessageWithCustomNames.swift.out; sourceTree = "<group>"; };
 		09030C151B6D414800275BF5 /* MessageWithCustomIndentation.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MessageWithCustomIndentation.swift.out; sourceTree = "<group>"; };
@@ -406,7 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				09030C0B1B6D30E800275BF5 /* Message.storyboard */,
-				09030C0C1B6D30E800275BF5 /* Wizzard.storyboard */,
+				09030C0C1B6D30E800275BF5 /* Wizard.storyboard */,
 			);
 			path = fixtures;
 			sourceTree = "<group>";
@@ -678,7 +678,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09030C0E1B6D30E800275BF5 /* Wizzard.storyboard in Resources */,
+				09030C0E1B6D30E800275BF5 /* Wizard.storyboard in Resources */,
 				09030C0D1B6D30E800275BF5 /* Message.storyboard in Resources */,
 				09030C141B6D3D5600275BF5 /* MessageWithCustomNames.swift.out in Resources */,
 				09030C0A1B6D30DB00275BF5 /* MessageWithDefaults.swift.out in Resources */,
