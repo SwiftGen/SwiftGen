@@ -40,6 +40,10 @@ public final class SwiftGenColorEnumBuilder {
         let t = indent.string
         text += commonCode(generateStringInit: stringInit, indentationString: t)
         
+        guard !colors.isEmpty else {
+            return text + "// No colors found"
+        }
+        
         text += "extension UIColor {\n"
         text += "    enum \(enumName) : UInt32 {\n"
         for (name, value) in colors {

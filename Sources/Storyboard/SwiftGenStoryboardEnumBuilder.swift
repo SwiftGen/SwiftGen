@@ -95,7 +95,11 @@ public final class SwiftGenStoryboardEnumBuilder {
         text += "\(t)struct \(scenesStructName.asSwiftIdentifier()) {\n"
         for (name, scenes) in storyboardsScenes {
             let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
-            text += "\(t)\(t)enum \(enumName) : String, StoryboardScene {\n"
+            if scenes.isEmpty {
+                text += "\(t)\(t)enum \(enumName) {\n"
+            } else {
+                text += "\(t)\(t)enum \(enumName) : String, StoryboardScene {\n"
+            }
             text += "\(t)\(t)\(t)static let storyboardName = \"\(name)\"\n"
             
             for scene in scenes {
@@ -115,7 +119,7 @@ public final class SwiftGenStoryboardEnumBuilder {
         text += "\(t)}\n"
       
         /// Segues
-        if (storyboardsSegues.count > 0) {
+        if !storyboardsSegues.isEmpty {
           text += "\n"
           
           text += "\(t)struct \(seguesStructName.asSwiftIdentifier()) {\n"
