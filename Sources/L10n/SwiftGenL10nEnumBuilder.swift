@@ -25,6 +25,10 @@ public final class SwiftGenL10nEnumBuilder {
         
         let t = indent.string
         
+        guard !parsedLines.isEmpty else {
+            return text + "// No line found in Localizable.strings"
+        }
+        
         text += "enum \(enumName.asSwiftIdentifier()) {\n"
         
         for entry in parsedLines {

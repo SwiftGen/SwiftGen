@@ -36,6 +36,10 @@ public final class SwiftGenAssetsEnumBuilder {
         text += "import UIKit\n"
         text += "\n"
         
+        guard !assetNames.isEmpty else {
+            return text + "// No image found\n"
+        }
+        
         text += "extension UIImage {\n"
 
         text += "\(t)enum \(enumName) : String {\n"
