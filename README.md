@@ -25,8 +25,11 @@ $ rake install[/usr/local,/bin]
 
 ### Via Homebrew
 
-In the future, I intend to make SwiftGen be installable via [Homebrew](http://brew.sh), but [the Homebrew team want to wait for Xcode 7 to be out of beta first (PR pending)](https://github.com/Homebrew/homebrew/pull/42983#issuecomment-131553184).
+You can also install SwiftGen via [Homebrew](http://brew.sh):
 
+```sh
+$ brew install swiftgen
+```
 
 ### Using the binaries & play with the Playground
 
