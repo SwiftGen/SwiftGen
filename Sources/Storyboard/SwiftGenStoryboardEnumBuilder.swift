@@ -120,27 +120,36 @@ public final class SwiftGenStoryboardEnumBuilder {
       
         /// Segues
         if !storyboardsSegues.isEmpty {
-          text += "\n"
-          
-          text += "\(t)struct \(seguesStructName.asSwiftIdentifier()) {\n"
-        
-          for (name, segues) in storyboardsSegues
-            where segues.count > 0 {
-              
-            let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
-            text += "\(t)\(t)enum \(enumName) : String {\n"
+            text += "\n"
             
-            for segue in segues {
-              let caseName = segue.segueID.asSwiftIdentifier(forbiddenChars: "_")
-              text += "\(t)\(t)\(t)case \(caseName) = \"\(segue.segueID)\"\n"
+            text += "\(t)struct \(seguesStructName.asSwiftIdentifier()) {\n"
+            
+            for (name, segues) in storyboardsSegues
+                where segues.count > 0 {
+                    
+                let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
+                text += "\(t)\(t)enum \(enumName) : String {\n"
+                
+            	var existingCaseNames = [String]()
+                
+                for segue in segues {
+                    let caseName = segue.segueID.asSwiftIdentifier(forbiddenChars: "_")
+                    
+                    // Avoid duplicates by not adding already existing cases
+                    if existingCaseNames.contains(caseName) {
+                        continue
+                    }
+                    
+                    text += "\(t)\(t)\(t)case \(caseName) = \"\(segue.segueID)\"\n"
+                    existingCaseNames.append(caseName)
+                }
+                
+                text += "\(t)\(t)}\n"
             }
             
-            text += "\(t)\(t)}\n"
-          }
-        
-          text += "\(t)}\n"
+            text += "\(t)}\n"
         }
-      
+        
         text += "}\n"
       
         return text
