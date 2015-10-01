@@ -78,6 +78,7 @@
                     <connections>
                         <segue destination="bbN-U1-T2o" kind="showDetail" identifier="NonCustom" id="0gO-jd-IYi"/>
                         <segue destination="xKD-v4-X1W" kind="show" identifier="Back" id="7YR-nB-KRc"/>
+                        <segue destination="bbN-U1-T2o" kind="show" identifier="Non_Custom" id="mgm-DU-z1z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ph3-jv-P42" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -105,5 +106,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="4bU-WI-OTc"/>
+        <segue reference="mgm-DU-z1z"/>
     </inferredMetricsTieBreakers>
 </document>

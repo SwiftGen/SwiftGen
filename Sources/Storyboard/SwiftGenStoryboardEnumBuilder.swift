@@ -130,18 +130,32 @@ public final class SwiftGenStoryboardEnumBuilder {
                 let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
                 text += "\(t)\(t)enum \(enumName) : String {\n"
                 
-            	var existingCaseNames = [String]()
+                // Store existing case names (and their occurrences), as well as existing segue IDs
+                var existingCaseNames = [String: Int]()
+                var existingSegueIDs  = [String]()
                 
                 for segue in segues {
-                    let caseName = segue.segueID.asSwiftIdentifier(forbiddenChars: "_")
                     
-                    // Avoid duplicates by not adding already existing cases
-                    if existingCaseNames.contains(caseName) {
+                    // If this exact segue ID already exists, ignore it
+                    if existingSegueIDs.contains(segue.segueID) {
                         continue
                     }
                     
-                    text += "\(t)\(t)\(t)case \(caseName) = \"\(segue.segueID)\"\n"
-                    existingCaseNames.append(caseName)
+                    // Compute a case name that'll we'll check against dupicates
+                    let originalCaseName = segue.segueID.asSwiftIdentifier(forbiddenChars: "_")
+                    var incrementalCaseName = originalCaseName
+                    
+                    // Avoid duplicates by adding a suffix to duplicate case names (CaseName, CaseName2, CaseName3, ...)
+                    if let caseNameOccurrences = existingCaseNames[originalCaseName] {
+                        incrementalCaseName = "\(originalCaseName)\(caseNameOccurrences + 1)"
+                        existingCaseNames[originalCaseName] = caseNameOccurrences + 1
+                    }
+                    else {
+                        existingCaseNames[originalCaseName] = 1
+                    }
+                    
+                    text += "\(t)\(t)\(t)case \(incrementalCaseName) = \"\(segue.segueID)\"\n"
+                    existingSegueIDs.append(segue.segueID)
                 }
                 
                 text += "\(t)\(t)}\n"
