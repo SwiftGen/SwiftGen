@@ -2,17 +2,26 @@
 
 ---
 
+## Master
+
+* Fix color parsing with absent alpha  
+[@Igor-Palaguta](https://github.com/Igor-Palaguta), [#28](https://github.com/AliSoftware/SwiftGen/pull/28)
+
 ## 0.4.4
 
-* Fix color parsing with absent alpha [[@Igor-Palaguta](https://github.com/Igor-Palaguta), [#28](https://github.com/AliSoftware/SwiftGen/pull/28)]
+* Updated Unit tests for latest Swift 2.0 & tested against Xcode 7.1
+* Fix small typos in code
+* Guard against empty `enums`  
 
 ## 0.4.3
 
-* Updated for Xcode 7 Beta 6 [[@Dimentar](https://github.com/Dimentar), [#14](https://github.com/AliSoftware/SwiftGen/pull/14)]
+* Updated for Xcode 7 Beta 6  
+[@Dimentar](https://github.com/Dimentar), [#14](https://github.com/AliSoftware/SwiftGen/pull/14)
 
 ## 0.4.2
 
-* Added `import Foundation` on top of `swiftgen-l10n` generated code [[@Nick11](https://github.com/Nick11), [#12](https://github.com/AliSoftware/SwiftGen/pull/12)]
+* Added `import Foundation` on top of `swiftgen-l10n` generated code  
+[@Nick11](https://github.com/Nick11), [#12](https://github.com/AliSoftware/SwiftGen/pull/12)
 
 ## 0.4.1
 
@@ -22,9 +31,9 @@
 
 ## 0.4.0
 
-* Reorganized files into an **Xcode project** with one target per executable [[#2](https://github.com/AliSoftware/SwiftGen/issues/2)]
-* Added **Unit Tests** (one per executable + one for common code) [[#2](https://github.com/AliSoftware/SwiftGen/issues/2)]
-* Improved `SwiftGen-L10n` parsing of format strings and placeholders. [[#4](https://github.com/AliSoftware/SwiftGen/issues/4), [#5](https://github.com/AliSoftware/SwiftGen/issues/5), [#6](https://github.com/AliSoftware/SwiftGen/issues/6)]
+* Reorganized files into an **Xcode project** with one target per executable ([#2](https://github.com/AliSoftware/SwiftGen/issues/2))
+* Added **Unit Tests** (one per executable + one for common code) ([#2](https://github.com/AliSoftware/SwiftGen/issues/2))
+* Improved `SwiftGen-L10n` parsing of format strings and placeholders. ([#4](https://github.com/AliSoftware/SwiftGen/issues/4), [#5](https://github.com/AliSoftware/SwiftGen/issues/5), [#6](https://github.com/AliSoftware/SwiftGen/issues/6))
 * Updated `Rakefile` so that it now invokes `xcodebuild install`. You can now easily build & install all `swiftgen-xxx` executables in `/usr/local/bin` or anywhere else.
 * Added a **version** string (date + sha1) to the built executables (displayed when invoked with no argument)
 
@@ -38,7 +47,8 @@
 
 ## 0.2.0
 
-* Added `Segues` enums to `UIStoryboard` to be able to access their identifiers easily. ([@esttorhe](https://github.com/esttorhe), [#8](https://github.com/AliSoftware/SwiftGen/pull/8))
+* Added `Segues` enums to `UIStoryboard` to be able to access their identifiers easily.  
+[@esttorhe](https://github.com/esttorhe), [#8](https://github.com/AliSoftware/SwiftGen/pull/8)
 * Added this very `CHANGELOG.md`
 
 ## 0.1.0
