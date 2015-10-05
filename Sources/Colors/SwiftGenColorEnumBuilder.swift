@@ -116,12 +116,19 @@ public final class SwiftGenColorEnumBuilder {
     
     private static func parse(hexString: String) -> UInt32 {
         let scanner = NSScanner(string: hexString)
-        let hasHash = scanner.scanString("#", intoString: nil)
+        let prefixLen: Int
+        if scanner.scanString("#", intoString: nil) {
+            prefixLen = 1
+        } else if scanner.scanString("0x", intoString: nil) {
+            prefixLen = 2
+        } else {
+            prefixLen = 0
+        }
         
         var value : UInt32 = 0
         scanner.scanHexInt(&value)
         
-        let len = hexString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) - (hasHash ? 1 : 0)
+        let len = hexString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) - prefixLen
         if len == 6 {
             // There were no alpha component, assume 0xff
             value = (value << 8) | 0xff
