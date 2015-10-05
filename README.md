@@ -185,7 +185,7 @@ override func prepareForSegue(_ segue: UIStoryboardSegue, sender sender: AnyObje
 ## UIColor
 
 ```
-swiftgen-color /path/to/colors-file.txt
+swiftgen-colors /path/to/colors-file.txt
 ```
 
 This tool will generate a `enum Name` in an extension of `UIColor`, with one `case` per color listed in the text file passed as argument.
