@@ -1,5 +1,7 @@
 # SwiftGen
 
+[![CI Status](http://img.shields.io/travis/AliSoftware/SwiftGen.svg?style=flat)](https://travis-ci.org/AliSoftware/SwiftGen)
+
 This is a suite of tools written in Swift to auto-generate Swift code for various assets of your project:
 
 * [`enums` for your Assets Catalogs](#assets-catalogs)
