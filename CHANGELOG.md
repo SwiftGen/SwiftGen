@@ -2,6 +2,10 @@
 
 ---
 
+## 0.4.4
+
+* Fix color parsing with absent alpha [[@Igor-Palaguta](https://github.com/Igor-Palaguta), [#28](https://github.com/AliSoftware/SwiftGen/pull/28)]
+
 ## 0.4.3
 
 * Updated for Xcode 7 Beta 6 [[@Dimentar](https://github.com/Dimentar), [#14](https://github.com/AliSoftware/SwiftGen/pull/14)]

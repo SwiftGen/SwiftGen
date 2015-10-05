@@ -12,6 +12,7 @@ class ColorsTests: XCTestCase {
 
     func testListWithDefaults() {
         let enumBuilder = SwiftGenColorEnumBuilder()
+        enumBuilder.addColorWithName("TextColor", value: "0x999999")
         enumBuilder.addColorWithName("ArticleTitle", value: "#996600")
         enumBuilder.addColorWithName("ArticleBackground", value: "#ffcc0099")
         let result = enumBuilder.build()
