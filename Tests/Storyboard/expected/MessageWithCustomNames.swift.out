@@ -50,6 +50,7 @@ extension UIStoryboard {
             case Custom = "Custom"
             case Back = "Back"
             case NonCustom = "NonCustom"
+            case NonCustom2 = "Non_Custom"
         }
     }
 }

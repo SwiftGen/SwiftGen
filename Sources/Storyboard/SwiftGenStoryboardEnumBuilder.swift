@@ -120,27 +120,50 @@ public final class SwiftGenStoryboardEnumBuilder {
       
         /// Segues
         if !storyboardsSegues.isEmpty {
-          text += "\n"
-          
-          text += "\(t)struct \(seguesStructName.asSwiftIdentifier()) {\n"
-        
-          for (name, segues) in storyboardsSegues
-            where segues.count > 0 {
-              
-            let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
-            text += "\(t)\(t)enum \(enumName) : String {\n"
+            text += "\n"
             
-            for segue in segues {
-              let caseName = segue.segueID.asSwiftIdentifier(forbiddenChars: "_")
-              text += "\(t)\(t)\(t)case \(caseName) = \"\(segue.segueID)\"\n"
+            text += "\(t)struct \(seguesStructName.asSwiftIdentifier()) {\n"
+            
+            for (name, segues) in storyboardsSegues
+                where segues.count > 0 {
+                    
+                let enumName = name.asSwiftIdentifier(forbiddenChars: "_")
+                text += "\(t)\(t)enum \(enumName) : String {\n"
+                
+                // Store existing case names (and their occurrences), as well as existing segue IDs
+                var existingCaseNames = [String: Int]()
+                var existingSegueIDs  = [String]()
+                
+                for segue in segues {
+                    
+                    // If this exact segue ID already exists, ignore it
+                    if existingSegueIDs.contains(segue.segueID) {
+                        continue
+                    }
+                    
+                    // Compute a case name that'll we'll check against dupicates
+                    let originalCaseName = segue.segueID.asSwiftIdentifier(forbiddenChars: "_")
+                    var incrementalCaseName = originalCaseName
+                    
+                    // Avoid duplicates by adding a suffix to duplicate case names (CaseName, CaseName2, CaseName3, ...)
+                    if let caseNameOccurrences = existingCaseNames[originalCaseName] {
+                        incrementalCaseName = "\(originalCaseName)\(caseNameOccurrences + 1)"
+                        existingCaseNames[originalCaseName] = caseNameOccurrences + 1
+                    }
+                    else {
+                        existingCaseNames[originalCaseName] = 1
+                    }
+                    
+                    text += "\(t)\(t)\(t)case \(incrementalCaseName) = \"\(segue.segueID)\"\n"
+                    existingSegueIDs.append(segue.segueID)
+                }
+                
+                text += "\(t)\(t)}\n"
             }
             
-            text += "\(t)\(t)}\n"
-          }
-        
-          text += "\(t)}\n"
+            text += "\(t)}\n"
         }
-      
+        
         text += "}\n"
       
         return text
