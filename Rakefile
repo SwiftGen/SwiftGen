@@ -6,10 +6,7 @@ def dev_dir
   %Q(DEVELOPER_DIR=#{xcode7.last.shellescape})
 end
 
-def build(scheme, install_root, install_dir)
-  puts "\n== #{scheme} =="
-  install_paths = "DSTROOT=#{install_root.shellescape} INSTALL_PATH=#{install_dir.shellescape}"
-  cmd = %Q(#{dev_dir} xcodebuild -project SwiftGen.xcodeproj -scheme #{scheme} -sdk macosx install #{install_paths})
+def run(cmd)
   if verbose == true
     sh cmd # Verbose shell
   else
@@ -20,49 +17,37 @@ end
 
 ###########################################################
 
-task :mkinstalldir, [:install_root, :dir] do |_, args|
-  args.with_defaults(:install_root => '.', :dir => '/bin')
-  dir = "#{args.install_root}#{args.dir}"
-  `[ -d #{dir.shellescape} ] || mkdir #{dir.shellescape}`
+desc "Build only the CLI binary"
+task :cli do |_, args|
+  run %Q(#{dev_dir} xcrun -sdk macosx swiftc -O -o bin/swiftgen -F Rome -framework Commander -framework SwiftGenKit swiftgen-cli/*.swift)
 end
 
-TOOLS_LIST = %w(l10n storyboard colors assets)
-
-namespace :swiftgen do
-  TOOLS_LIST.each do |tool|
-    scheme = "swiftgen-#{tool}"
-    desc "Build and install #{scheme} in ${install_root}${dir}.\n(install_root defaults to '.' and dir defaults to '/bin')"
-    task tool, [:install_root, :dir] => :mkinstalldir do |_, args|
-      args.with_defaults(:install_root => '.', :dir => '/bin')
-      build(scheme, args.install_root, args.dir)
-    end
-  end
+desc "Rebuild dependencies using CocoaPods-Rome"
+task :dependencies do
+  run %q(pod install)
 end
 
-namespace :tests do
-  TOOLS_LIST.each do |tool|
-    scheme = "swiftgen-#{tool}"
-    desc "Run Unit Tests for #{scheme}"
-    task tool do
-      sh %Q(#{dev_dir} xcodebuild -project SwiftGen.xcodeproj -scheme #{scheme} -sdk macosx test)
-    end
-  end
+desc "Build the CLI and Framework, and install them in $dir/bin and $dir/Frameworks"
+task :install, [:dir] => [:dependencies, :cli] do |_, args|
+  args.with_defaults(:dir => '/usr/local')
+  run %Q(mkdir -p "#{args.dir}/bin")
+  run %Q(cp -f "bin/swiftgen" "#{args.dir}/bin/")
+  run %Q(mkdir -p "#{args.dir}/Frameworks")
+  run %Q(cp -fr "Rome/" "#{args.dir}/Frameworks/")
+  run %Q(install_name_tool -add_rpath "@executable_path/../Frameworks" "#{args.dir}/bin/swiftgen")
 end
 
-###########################################################
-
-desc 'Build and install all executables in ${install_root}${dir}.'
-task :install, [:install_root, :dir] => %w(swiftgen:l10n swiftgen:storyboard swiftgen:colors swiftgen:assets)
-
-desc 'Run Unit Tests for all the tools'
-task :tests => %w(tests:l10n tests:storyboard tests:colors tests:assets)
-
-task :default => [:all]
-
-desc "Build all executables in ./bin.\nThis is a synonym of `install[.,/bin]`."
-task :all do
-  Rake::Task[:install].invoke('.','/bin')
+desc "Run the Unit Tests"
+task :tests do
+  run %Q(#{dev_dir} xcodebuild -project SwiftGen.xcodeproj -scheme SwiftGenTests -sdk macosx test)
 end
+
+desc "Remove Rome/ and bin/"
+task :clean do
+  run %Q(rm -fr Rome bin)
+end
+
+task :default => [:dependencies, :cli]
 
 ###########################################################
 

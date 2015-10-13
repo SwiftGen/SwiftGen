@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "09030B6A1B6D254200275BF5"
-               BuildableName = "swiftgen-storyboard"
-               BlueprintName = "swiftgen-storyboard"
+               BlueprintIdentifier = "09C7B2D01BCC382800D7F488"
+               BuildableName = "swiftgen-cli"
+               BlueprintName = "swiftgen-cli"
                ReferencedContainer = "container:SwiftGen.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,23 +28,13 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "09030BBB1B6D2A8F00275BF5"
-               BuildableName = "swiftgen-storyboard-tests.xctest"
-               BlueprintName = "swiftgen-storyboard-tests"
-               ReferencedContainer = "container:SwiftGen.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "09030B6A1B6D254200275BF5"
-            BuildableName = "swiftgen-storyboard"
-            BlueprintName = "swiftgen-storyboard"
+            BlueprintIdentifier = "09C7B2D01BCC382800D7F488"
+            BuildableName = "swiftgen-cli"
+            BlueprintName = "swiftgen-cli"
             ReferencedContainer = "container:SwiftGen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -65,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "09030B6A1B6D254200275BF5"
-            BuildableName = "swiftgen-storyboard"
-            BlueprintName = "swiftgen-storyboard"
+            BlueprintIdentifier = "09C7B2D01BCC382800D7F488"
+            BuildableName = "swiftgen-cli"
+            BlueprintName = "swiftgen-cli"
             ReferencedContainer = "container:SwiftGen.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -84,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "09030B6A1B6D254200275BF5"
-            BuildableName = "swiftgen-storyboard"
-            BlueprintName = "swiftgen-storyboard"
+            BlueprintIdentifier = "09C7B2D01BCC382800D7F488"
+            BuildableName = "swiftgen-cli"
+            BlueprintName = "swiftgen-cli"
             ReferencedContainer = "container:SwiftGen.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

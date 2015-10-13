@@ -2,7 +2,7 @@ import Foundation
 //@import SwiftIdentifier
 //@import SwiftGenIndentation
 
-public final class SwiftGenStoryboardEnumBuilder {
+public final class StoryboardEnumBuilder {
     private typealias Scene = (storyboardID: String, customClass: String?)
     private typealias Segue = (segueID: String, customClass: String?)
     private var storyboardsScenes = [String : [Scene]]()

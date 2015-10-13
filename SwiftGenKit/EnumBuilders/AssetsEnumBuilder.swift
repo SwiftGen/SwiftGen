@@ -2,7 +2,7 @@ import Foundation
 //@import SwiftIdentifier
 //@import SwiftGenIndentation
 
-public final class SwiftGenAssetsEnumBuilder {
+public final class AssetsEnumBuilder {
     private var assetNames = [String]()
     
     public init() {}
