@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SwiftGenKit
 
 class ColorsTests: XCTestCase {
 

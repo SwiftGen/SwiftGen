@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SwiftGenKit
 
 /**
  * Important: In order for the "*.storyboard" files in fixtures/ to be copied as-is in the test bundle
@@ -17,7 +18,7 @@ import XCTest
 class StoryboardTests: XCTestCase {
     
     func testMessageWithDefaults() {
-        let enumBuilder = SwiftGenStoryboardEnumBuilder()
+        let enumBuilder = StoryboardEnumBuilder()
         enumBuilder.addStoryboardAtPath(self.fixturePath("Message.storyboard"))
         let result = enumBuilder.build()
         
@@ -26,7 +27,7 @@ class StoryboardTests: XCTestCase {
     }
     
     func testAllWithDefaults() {
-        let enumBuilder = SwiftGenStoryboardEnumBuilder()
+        let enumBuilder = StoryboardEnumBuilder()
         enumBuilder.parseDirectory(self.fixturesDir)
         let result = enumBuilder.build()
         
@@ -35,7 +36,7 @@ class StoryboardTests: XCTestCase {
     }
     
     func testMessageWithCustomNames() {
-        let enumBuilder = SwiftGenStoryboardEnumBuilder()
+        let enumBuilder = StoryboardEnumBuilder()
         enumBuilder.addStoryboardAtPath(self.fixturePath("Message.storyboard"))
         let result = enumBuilder.build(scenesStructName: "XCTAllScenes", seguesStructName: "XCTAllSegues")
         
@@ -44,7 +45,7 @@ class StoryboardTests: XCTestCase {
     }
     
     func testMessageWithCustomIndentation() {
-        let enumBuilder = SwiftGenStoryboardEnumBuilder()
+        let enumBuilder = StoryboardEnumBuilder()
         enumBuilder.addStoryboardAtPath(self.fixturePath("Message.storyboard"))
         let result = enumBuilder.build(indentation: .Spaces(3))
         

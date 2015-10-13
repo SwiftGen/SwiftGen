@@ -25,12 +25,6 @@ let outputOption = Option("output", OutputDestination.Console, description: "The
 // MARK: - Main
 
 Group {
-    $0.command("version") { _ in
-        print(SwiftGenKitVersionNumber)
-    }
-
     $0.addCommand("storyboards", storyboards)
     $0.addCommand("assets", assets)
-}.run()
-
-
+}.run("v\(SwiftGenKitVersionNumber)")

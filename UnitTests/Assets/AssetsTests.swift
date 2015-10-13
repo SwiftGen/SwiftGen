@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SwiftGenKit
 
 /**
  * Important: In order for the "*.xcassets" files in fixtures/ to be copied as-is in the test bundle
@@ -17,22 +18,22 @@ import XCTest
 class AssetsTests: XCTestCase {
 
     func testEntriesWithDefaults() {
-        let enumBuilder = SwiftGenAssetsEnumBuilder()
+        let enumBuilder = AssetsEnumBuilder()
         enumBuilder.addAssetName("Green-Apple")
         enumBuilder.addAssetName("Red Apple")
         enumBuilder.addAssetName("2-pears")
         let result = enumBuilder.build()
         
-        let expected = self.fixtureString("EntriesDefaults.swift.out")
+        let expected = self.fixtureString("AssetsEntriesDefaults.swift.out")
         XCTDiffStrings(result, expected)
     }
 
     func testFileWithDefaults() {
-        let enumBuilder = SwiftGenAssetsEnumBuilder()
+        let enumBuilder = AssetsEnumBuilder()
         enumBuilder.parseDirectory(fixturePath("Images.xcassets"))
         let result = enumBuilder.build()
         
-        let expected = self.fixtureString("FileDefaults.swift.out")
+        let expected = self.fixtureString("AssetsFileDefaults.swift.out")
         XCTDiffStrings(result, expected)
     }
 

@@ -124,12 +124,12 @@ public final class L10nEnumBuilder {
         let key: String
         let types: [PlaceholderType]
         
-        init(key: String, types: [PlaceholderType]) {
+        public init(key: String, types: [PlaceholderType]) {
             self.key = key
             self.types = types
         }
         
-        init(key: String, types: PlaceholderType...) {
+        public init(key: String, types: PlaceholderType...) {
             self.key = key
             self.types = types
         }
@@ -138,7 +138,7 @@ public final class L10nEnumBuilder {
             return try! NSRegularExpression(pattern: "^\"([^\"]+)\"[ \t]*=[ \t]*\"(.*)\"[ \t]*;", options: [])
         }()
         
-        init?(line: String) {
+        public init?(line: String) {
             let range = NSRange(location: 0, length: (line as NSString).length)
             if let match = Entry.lineRegEx.firstMatchInString(line, options: [], range: range) {
                 let key = (line as NSString).substringWithRange(match.rangeAtIndex(1))
