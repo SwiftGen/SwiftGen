@@ -6,6 +6,6 @@ target 'swiftgen' do
   pod 'SwiftGenKit', :path => 'SwiftGenKit'
 end
 
-target 'SwiftGenKitTests' do
+target 'UnitTests' do
   pod 'SwiftGenKit', :path => 'SwiftGenKit'
 end
