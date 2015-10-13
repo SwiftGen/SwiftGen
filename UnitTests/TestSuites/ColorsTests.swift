@@ -1,5 +1,5 @@
 //
-//  StoryboardTests.swift
+//  ColorsTests.swift
 //  SwiftGen
 //
 //  Created by Olivier Halligon on 01/08/2015.

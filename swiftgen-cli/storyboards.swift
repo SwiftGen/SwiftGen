@@ -11,9 +11,9 @@ import Commander
 import SwiftGenKit
 
 let storyboards = command(
-    Argument<String>("DIR", description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard", validator: pathExists(nil)),
-    outputOption
-) { path, output in
+    outputOption,
+    Argument<String>("DIR", description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard", validator: pathExists(nil))
+) { output, path in
     let enumBuilder = StoryboardEnumBuilder()
     if (path as NSString).pathExtension == "storyboard" {
         enumBuilder.addStoryboardAtPath(path)

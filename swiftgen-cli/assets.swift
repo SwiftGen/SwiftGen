@@ -11,9 +11,9 @@ import Commander
 import SwiftGenKit
 
 let assets = command(
-    Argument<String>("DIR", description: "Directory to scan for .imageset files.", validator: pathExists(true)),
-    outputOption
-) { path, output in
+    outputOption,
+    Argument<String>("DIR", description: "Directory to scan for .imageset files.", validator: pathExists(true))
+) { output, path in
     let enumBuilder = AssetsEnumBuilder()
     enumBuilder.parseDirectory(path)
     output.write(enumBuilder.build())

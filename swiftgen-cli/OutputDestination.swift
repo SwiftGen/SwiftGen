@@ -20,9 +20,6 @@ enum OutputDestination: ArgumentConvertible {
         if path == "-" {
             self = .Console
         } else {
-            guard NSFileManager.defaultManager().fileExistsAtPath(path) else {
-                throw ArgumentError.InvalidType(value: path, type: "path", argument: nil)
-            }
             self = .File(path)
         }
     }
@@ -43,7 +40,9 @@ enum OutputDestination: ArgumentConvertible {
             } catch let e as NSError {
                 print("Error: \(e)")
             }
+            print("File written: \(path)")
         }
     }
 }
 
+let outputOption = Option("output", OutputDestination.Console, description: "The path to the file to generate. Use - to generate in stdout")
