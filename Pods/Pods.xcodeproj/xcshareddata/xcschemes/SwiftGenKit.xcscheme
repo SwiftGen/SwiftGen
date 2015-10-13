@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3E8A6F5B1B853885E884F746'
+               BlueprintIdentifier = 'C60B2F79AA0FB28A40DAE119'
                BlueprintName = 'SwiftGenKit'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SwiftGenKit.framework'>
