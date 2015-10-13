@@ -7,7 +7,7 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
-            buildForTesting = "YES"
+            buildForTesting = "NO"
             buildForRunning = "YES"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
@@ -17,6 +17,20 @@
                BlueprintIdentifier = "09A87B401BCC9B8000D9B9F5"
                BuildableName = "swiftgen"
                BlueprintName = "swiftgen"
+               ReferencedContainer = "container:SwiftGen.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "09A87B4F1BCCA2C600D9B9F5"
+               BuildableName = "UnitTests.xctest"
+               BlueprintName = "UnitTests"
                ReferencedContainer = "container:SwiftGen.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -39,15 +53,6 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "09A87B401BCC9B8000D9B9F5"
-            BuildableName = "swiftgen"
-            BlueprintName = "swiftgen"
-            ReferencedContainer = "container:SwiftGen.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
