@@ -12,7 +12,7 @@ import SwiftGenKit
 
 let storyboards = command(
     outputOption,
-    Argument<String>("DIR", description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard", validator: pathExists(nil))
+    Argument<String>("PATH", description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard", validator: pathExists(nil))
 ) { output, path in
     let enumBuilder = StoryboardEnumBuilder()
     if (path as NSString).pathExtension == "storyboard" {
