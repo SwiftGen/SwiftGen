@@ -12,7 +12,7 @@ import SwiftGenKit
 
 let assets = command(
     outputOption,
-    Argument<String>("DIR", description: "Directory to scan for .imageset files.", validator: pathExists(true))
+    Argument<String>("DIR", description: "Directory to scan for .imageset files.", validator: pathExists(.Directory))
 ) { output, path in
     let enumBuilder = AssetsEnumBuilder()
     enumBuilder.parseDirectory(path)

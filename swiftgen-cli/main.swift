@@ -12,13 +12,20 @@ import SwiftGenKit
 
 // MARK: Validators
 
-func pathExists(mustBeDir: Bool?)(path: String) throws -> String {
+enum PathType: String { case Directory, File }
+
+func pathExists(type: PathType?)(path: String) throws -> String {
     var isDir = ObjCBool(false)
     let check: ObjCBool -> Bool = { isDir in
-        return mustBeDir.map { $0 == isDir.boolValue } ?? true
+        switch type {
+        case .Directory?: return isDir.boolValue == true
+        case .File?: return isDir.boolValue == false
+        default: return true
+        }
     }
     guard NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDir) && check(isDir) else {
-        throw ArgumentError.InvalidType(value: path, type: "directory", argument: nil)
+        let displayType = type.map{$0.rawValue} ?? "path"
+        throw ArgumentError.InvalidType(value: path, type: displayType, argument: nil)
     }
     return path
 }
@@ -28,4 +35,6 @@ func pathExists(mustBeDir: Bool?)(path: String) throws -> String {
 Group {
     $0.addCommand("storyboards", storyboards)
     $0.addCommand("assets", assets)
+    $0.addCommand("colors", colors)
+    $0.addCommand("l10n", l10n)
 }.run("SwiftGen v\(SwiftGenKitVersionNumber)")
