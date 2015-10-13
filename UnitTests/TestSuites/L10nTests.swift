@@ -17,7 +17,7 @@ class L10nTests: XCTestCase {
         enumBuilder.addEntry(L10nEnumBuilder.Entry(key: "Greetings", types: .Object, .Int))
         let result = enumBuilder.build()
         
-        let expected = self.fixtureString("EntriesWithDefaults.swift.out")
+        let expected = self.fixtureString("L10nEntriesWithDefaults.swift.out")
         XCTDiffStrings(result, expected)
     }
 
@@ -31,7 +31,7 @@ class L10nTests: XCTestCase {
         }
         let result = enumBuilder.build()
         
-        let expected = self.fixtureString("LinesWithDefaults.swift.out")
+        let expected = self.fixtureString("L10nLinesWithDefaults.swift.out")
         XCTDiffStrings(result, expected)
     }
     
@@ -40,7 +40,7 @@ class L10nTests: XCTestCase {
         try! enumBuilder.parseLocalizableStringsFile(fixturePath("Localizable.strings"))
         let result = enumBuilder.build()
         
-        let expected = self.fixtureString("FileWithDefaults.swift.out")
+        let expected = self.fixtureString("L10nFileWithDefaults.swift.out")
         XCTDiffStrings(result, expected)
     }
 
@@ -49,7 +49,7 @@ class L10nTests: XCTestCase {
         try! enumBuilder.parseLocalizableStringsFile(fixturePath("Localizable.strings"))
         let result = enumBuilder.build(enumName: "XCTLoc")
         
-        let expected = self.fixtureString("FileWithCustomName.swift.out")
+        let expected = self.fixtureString("L10nFileWithCustomName.swift.out")
         XCTDiffStrings(result, expected)
     }
 
@@ -58,7 +58,7 @@ class L10nTests: XCTestCase {
         try! enumBuilder.parseLocalizableStringsFile(fixturePath("Localizable.strings"))
         let result = enumBuilder.build(indentation: .Spaces(3))
         
-        let expected = self.fixtureString("FileWithCustomIndentation.swift.out")
+        let expected = self.fixtureString("L10nFileWithCustomIndentation.swift.out")
         XCTDiffStrings(result, expected)
     }
     

@@ -22,7 +22,7 @@ class StoryboardTests: XCTestCase {
         enumBuilder.addStoryboardAtPath(self.fixturePath("Message.storyboard"))
         let result = enumBuilder.build()
         
-        let expected = self.fixtureString("MessageWithDefaults.swift.out")
+        let expected = self.fixtureString("StoryboardsMessageWithDefaults.swift.out")
         XCTDiffStrings(result, expected)
     }
     
@@ -31,7 +31,7 @@ class StoryboardTests: XCTestCase {
         enumBuilder.parseDirectory(self.fixturesDir)
         let result = enumBuilder.build()
         
-        let expected = self.fixtureString("AllWithDefaults.swift.out")
+        let expected = self.fixtureString("StoryboardsAllWithDefaults.swift.out")
         XCTDiffStrings(result, expected)
     }
     
@@ -40,7 +40,7 @@ class StoryboardTests: XCTestCase {
         enumBuilder.addStoryboardAtPath(self.fixturePath("Message.storyboard"))
         let result = enumBuilder.build(scenesStructName: "XCTAllScenes", seguesStructName: "XCTAllSegues")
         
-        let expected = self.fixtureString("MessageWithCustomNames.swift.out")
+        let expected = self.fixtureString("StoryboardsMessageWithCustomNames.swift.out")
         XCTDiffStrings(result, expected)
     }
     
@@ -49,7 +49,7 @@ class StoryboardTests: XCTestCase {
         enumBuilder.addStoryboardAtPath(self.fixturePath("Message.storyboard"))
         let result = enumBuilder.build(indentation: .Spaces(3))
         
-        let expected = self.fixtureString("MessageWithCustomIndentation.swift.out")
+        let expected = self.fixtureString("StoryboardsMessageWithCustomIndentation.swift.out")
         XCTDiffStrings(result, expected)
     }
 }
