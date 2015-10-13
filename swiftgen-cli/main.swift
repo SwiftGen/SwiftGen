@@ -10,21 +10,22 @@ import Foundation
 import Commander
 import SwiftGenKit
 
-// MARK: Helpers
+// MARK: Validators
 
 func pathExists(mustBeDir: Bool?)(path: String) throws -> String {
     var isDir = ObjCBool(false)
-    guard NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDir) && isDir.boolValue else {
+    let check: ObjCBool -> Bool = { isDir in
+        return mustBeDir.map { $0 == isDir.boolValue } ?? true
+    }
+    guard NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDir) && check(isDir) else {
         throw ArgumentError.InvalidType(value: path, type: "directory", argument: nil)
     }
     return path
 }
-
-let outputOption = Option("output", OutputDestination.Console, description: "The path to the file to generate. Use - to generate in stdout")
 
 // MARK: - Main
 
 Group {
     $0.addCommand("storyboards", storyboards)
     $0.addCommand("assets", assets)
-}.run("v\(SwiftGenKitVersionNumber)")
+}.run("SwiftGen v\(SwiftGenKitVersionNumber)")

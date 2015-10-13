@@ -22,7 +22,6 @@ Clone the repository and use `rake` to build the tool.
 # will install the binary in `/usr/local/bin` and the Frameworks in `/usr/local/Frameworks`
 $ rake install[/usr/local]
 ```
-This needs `cocoapods-rome` to be able to build.
 
 ### Via Homebrew
 

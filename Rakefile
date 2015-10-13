@@ -6,46 +6,58 @@ def dev_dir
   %Q(DEVELOPER_DIR=#{xcode7.last.shellescape})
 end
 
-def run(cmd)
-  if verbose == true
-    sh cmd # Verbose shell
-  else
-    puts cmd
-    `#{cmd} 2>/dev/null` # Quiet shell
+def xcrun(cmd)
+  full_cmd = "#{dev_dir} xcrun #{cmd}"
+  if `which xcpretty` && $?.success?
+    full_cmd = "set -o pipefail && #{full_cmd} | xcpretty -c"
   end
+  sh full_cmd
 end
 
 ###########################################################
 
-desc "Build only the CLI binary"
-task :build do |_, args|
-  run %Q(mkdir -p bin)
-  run %Q(#{dev_dir} xcrun -sdk macosx swiftc -O -o bin/swiftgen -F Rome -framework Commander -framework SwiftGenKit swiftgen-cli/*.swift)
+DEPENDENCIES = [:SwiftGenKit, :Commander]
+CONFIGURATION = 'Release'
+BUILD_DIR = 'build/' + CONFIGURATION
+
+
+
+desc "Build the CLI binary and its Frameworks"
+task :build => DEPENDENCIES do |_, args|
+  frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
+  xcrun %Q(-sdk macosx swiftc -O -o #{BUILD_DIR}/swiftgen -F #{BUILD_DIR}/ #{frameworks} swiftgen-cli/*.swift)
 end
 
-desc "Rebuild dependencies using CocoaPods-Rome"
-task :dependencies do
-  run %q(pod install)
+DEPENDENCIES.each do |fmk|
+  # desc "Build #{fmk}.framework"
+  task fmk do
+    xcrun %Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION})
+  end
 end
+
 
 desc "Build the CLI and Framework, and install them in $dir/bin and $dir/Frameworks"
-task :install, [:dir] => [:dependencies, :cli] do |_, args|
+task :install, [:dir] => :build do |_, args|
   args.with_defaults(:dir => '/usr/local')
-  run %Q(mkdir -p "#{args.dir}/bin")
-  run %Q(cp -f "bin/swiftgen" "#{args.dir}/bin/")
-  run %Q(mkdir -p "#{args.dir}/Frameworks")
-  run %Q(cp -fr "Rome/" "#{args.dir}/Frameworks/")
-  run %Q(install_name_tool -add_rpath "@executable_path/../Frameworks" "#{args.dir}/bin/swiftgen")
+  puts "== Installing to #{args.dir} =="
+  sh %Q(mkdir -p "#{args.dir}/bin")
+  sh %Q(cp -f "#{BUILD_DIR}/swiftgen" "#{args.dir}/bin/")
+  sh %Q(mkdir -p "#{args.dir}/Frameworks")
+  DEPENDENCIES.each do |fmk|
+    sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}.framework" "#{args.dir}/Frameworks/")
+  end
+  sh %Q(install_name_tool -add_rpath "@executable_path/../Frameworks" "#{args.dir}/bin/swiftgen")
+  puts "\n  > Binary available in #{args.dir}/bin/swiftgen"
 end
 
 desc "Run the Unit Tests"
 task :tests do
-  run %Q(#{dev_dir} xcodebuild -project SwiftGen.xcodeproj -scheme SwiftGenTests -sdk macosx test)
+  xcrun %Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen-cli -sdk macosx test)
 end
 
 desc "Remove Rome/ and bin/"
 task :clean do
-  run %Q(rm -fr Rome bin)
+  sh %Q(rm -fr build)
 end
 
 task :default => [:dependencies, :build]

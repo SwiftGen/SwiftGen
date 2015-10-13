@@ -562,6 +562,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 45E36FC93A27CB2941081D0A /* Pods-swiftgen.debug.xcconfig */;
 			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -571,6 +572,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2A900E0D796A11ABCBD63942 /* Pods-swiftgen.release.xcconfig */;
 			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
