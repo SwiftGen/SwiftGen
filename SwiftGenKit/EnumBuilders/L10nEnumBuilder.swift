@@ -2,7 +2,7 @@ import Foundation
 //@import SwiftIdentifier
 //@import SwiftGenIndentation
 
-public final class SwiftGenL10nEnumBuilder {
+public final class L10nEnumBuilder {
     public init() {}
 
     public func addEntry(entry: Entry) {
@@ -116,7 +116,7 @@ public final class SwiftGenL10nEnumBuilder {
         }
         
         public static func fromFormatString(format: String) -> [PlaceholderType] {
-            return SwiftGenL10nEnumBuilder.typesFromFormatString(format)
+            return L10nEnumBuilder.typesFromFormatString(format)
         }
     }
     

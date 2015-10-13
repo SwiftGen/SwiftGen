@@ -19,11 +19,10 @@ This is a suite of tools written in Swift to auto-generate Swift code for variou
 Clone the repository and use `rake` to build the tool.
 
 ```sh
-# will build the tools locally in `./bin`
-$ rake all
-# will install them in `/usr/local/bin`
-$ rake install[/usr/local,/bin]
+# will install the binary in `/usr/local/bin` and the Frameworks in `/usr/local/Frameworks`
+$ rake install[/usr/local]
 ```
+This needs `cocoapods-rome` to be able to build.
 
 ### Via Homebrew
 

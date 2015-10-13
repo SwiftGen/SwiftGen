@@ -7,120 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09030BA11B6D26D200275BF5 /* SwiftGenIndentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B831B6D26A600275BF5 /* SwiftGenIndentation.swift */; };
-		09030BA21B6D26D200275BF5 /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */; };
-		09030BA31B6D26D200275BF5 /* SwiftGenIndentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B831B6D26A600275BF5 /* SwiftGenIndentation.swift */; };
-		09030BA41B6D26D200275BF5 /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */; };
-		09030BA51B6D26D300275BF5 /* SwiftGenIndentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B831B6D26A600275BF5 /* SwiftGenIndentation.swift */; };
-		09030BA61B6D26D300275BF5 /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */; };
-		09030BA71B6D26D400275BF5 /* SwiftGenIndentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B831B6D26A600275BF5 /* SwiftGenIndentation.swift */; };
-		09030BA81B6D26D400275BF5 /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */; };
-		09030BA91B6D26D900275BF5 /* SwiftGenAssetsEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B7F1B6D26A600275BF5 /* SwiftGenAssetsEnumBuilder.swift */; };
-		09030BAA1B6D26E000275BF5 /* SwiftGenColorEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B811B6D26A600275BF5 /* SwiftGenColorEnumBuilder.swift */; };
-		09030BAB1B6D26E500275BF5 /* SwiftGenL10nEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B861B6D26A600275BF5 /* SwiftGenL10nEnumBuilder.swift */; };
-		09030BAC1B6D26EA00275BF5 /* SwiftGenStoryboardEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B881B6D26A600275BF5 /* SwiftGenStoryboardEnumBuilder.swift */; };
-		09030BAE1B6D271D00275BF5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BAD1B6D271D00275BF5 /* main.swift */; };
-		09030BB01B6D272800275BF5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BAF1B6D272800275BF5 /* main.swift */; };
-		09030BB21B6D273000275BF5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BB11B6D273000275BF5 /* main.swift */; };
-		09030BB41B6D273800275BF5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BB31B6D273800275BF5 /* main.swift */; };
-		09030BC41B6D2AC600275BF5 /* SwiftGenStoryboardEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B881B6D26A600275BF5 /* SwiftGenStoryboardEnumBuilder.swift */; };
-		09030BC51B6D2AD500275BF5 /* SwiftGenIndentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B831B6D26A600275BF5 /* SwiftGenIndentation.swift */; };
-		09030BC61B6D2AD500275BF5 /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */; };
-		09030BCB1B6D2BB700275BF5 /* StoryboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BC91B6D2BB700275BF5 /* StoryboardTests.swift */; };
-		09030BDB1B6D2E7E00275BF5 /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */; };
-		09030BDD1B6D2E7E00275BF5 /* SwiftGenIndentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B831B6D26A600275BF5 /* SwiftGenIndentation.swift */; };
-		09030BE81B6D2EB000275BF5 /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */; };
-		09030BEA1B6D2EB000275BF5 /* SwiftGenIndentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B831B6D26A600275BF5 /* SwiftGenIndentation.swift */; };
-		09030BF51B6D2ED500275BF5 /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */; };
-		09030BF71B6D2ED500275BF5 /* SwiftGenIndentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B831B6D26A600275BF5 /* SwiftGenIndentation.swift */; };
-		09030C001B6D2F1A00275BF5 /* SwiftGenAssetsEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B7F1B6D26A600275BF5 /* SwiftGenAssetsEnumBuilder.swift */; };
-		09030C011B6D2F2300275BF5 /* SwiftGenColorEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B811B6D26A600275BF5 /* SwiftGenColorEnumBuilder.swift */; };
-		09030C021B6D2F2900275BF5 /* SwiftGenL10nEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B861B6D26A600275BF5 /* SwiftGenL10nEnumBuilder.swift */; };
-		09030C031B6D2F3C00275BF5 /* AssetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD11B6D2E3900275BF5 /* AssetsTests.swift */; };
-		09030C041B6D2F4000275BF5 /* ColorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD81B6D2E5900275BF5 /* ColorsTests.swift */; };
-		09030C051B6D2F4300275BF5 /* L10nTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD51B6D2E3900275BF5 /* L10nTests.swift */; };
-		09030C0A1B6D30DB00275BF5 /* MessageWithDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C091B6D30DB00275BF5 /* MessageWithDefaults.swift.out */; };
-		09030C0D1B6D30E800275BF5 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09030C0B1B6D30E800275BF5 /* Message.storyboard */; };
-		09030C0E1B6D30E800275BF5 /* Wizard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09030C0C1B6D30E800275BF5 /* Wizard.storyboard */; };
-		09030C101B6D315C00275BF5 /* AllWithDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C0F1B6D315C00275BF5 /* AllWithDefaults.swift.out */; };
-		09030C141B6D3D5600275BF5 /* MessageWithCustomNames.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C131B6D3D5600275BF5 /* MessageWithCustomNames.swift.out */; };
-		09030C161B6D414800275BF5 /* MessageWithCustomIndentation.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C151B6D414800275BF5 /* MessageWithCustomIndentation.swift.out */; };
-		09030C181B6D43D400275BF5 /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030C171B6D43D400275BF5 /* TestsHelper.swift */; };
-		09030C191B6D43D400275BF5 /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030C171B6D43D400275BF5 /* TestsHelper.swift */; };
-		09030C1A1B6D43D400275BF5 /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030C171B6D43D400275BF5 /* TestsHelper.swift */; };
-		09030C1B1B6D43D400275BF5 /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030C171B6D43D400275BF5 /* TestsHelper.swift */; };
-		09030C1E1B6D473E00275BF5 /* colors.txt in Resources */ = {isa = PBXBuildFile; fileRef = 09030C1D1B6D473E00275BF5 /* colors.txt */; };
-		09030C211B6D474C00275BF5 /* ListDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C201B6D474C00275BF5 /* ListDefaults.swift.out */; };
-		09030C281B6D499C00275BF5 /* EntriesWithDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C261B6D492E00275BF5 /* EntriesWithDefaults.swift.out */; };
-		09030C291B6D49A100275BF5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09030C241B6D48FC00275BF5 /* Localizable.strings */; };
-		09030C2C1B6D4DF400275BF5 /* FileWithDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C2A1B6D4D9A00275BF5 /* FileWithDefaults.swift.out */; };
-		09030C321B6D504600275BF5 /* FileDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C311B6D504100275BF5 /* FileDefaults.swift.out */; };
-		09030C331B6D504A00275BF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09030C2F1B6D4F8500275BF5 /* Images.xcassets */; };
-		09030C351B6D521B00275BF5 /* FileDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C301B6D4FD200275BF5 /* FileDefaults.swift.out */; };
-		095685EC1B6DA16800BF300C /* FileWithCustomName.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 095685EB1B6DA16200BF300C /* FileWithCustomName.swift.out */; };
-		095685EE1B6DA24900BF300C /* FileWithCustomIndentation.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 095685ED1B6DA17300BF300C /* FileWithCustomIndentation.swift.out */; };
-		095685F01B6DA32E00BF300C /* LinesWithDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 095685EF1B6DA32800BF300C /* LinesWithDefaults.swift.out */; };
-		095685F21B6DAF1000BF300C /* SwiftGenVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095685F11B6DAF1000BF300C /* SwiftGenVersion.swift */; };
-		095685F31B6DB0E300BF300C /* SwiftGenVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095685F11B6DAF1000BF300C /* SwiftGenVersion.swift */; };
-		095685F41B6DB0E300BF300C /* SwiftGenVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095685F11B6DAF1000BF300C /* SwiftGenVersion.swift */; };
-		095685F51B6DB0E400BF300C /* SwiftGenVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095685F11B6DAF1000BF300C /* SwiftGenVersion.swift */; };
-		09E714701B6D7082007FF3CF /* EntriesDefaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09E7146F1B6D707E007FF3CF /* EntriesDefaults.swift.out */; };
-		09E714821B6D7252007FF3CF /* SwiftIdentifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E714711B6D711A007FF3CF /* SwiftIdentifierTests.swift */; };
-		09E714831B6D7259007FF3CF /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */; };
+		0901413D1BCC6464002E8617 /* OutputDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0901413C1BCC6464002E8617 /* OutputDestination.swift */; settings = {ASSET_TAGS = (); }; };
+		0901413F1BCC64C9002E8617 /* storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0901413E1BCC64C9002E8617 /* storyboards.swift */; settings = {ASSET_TAGS = (); }; };
+		090141411BCC64FE002E8617 /* assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090141401BCC64FE002E8617 /* assets.swift */; settings = {ASSET_TAGS = (); }; };
+		0901414E1BCC70D7002E8617 /* SwiftGenKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0901414D1BCC70D7002E8617 /* SwiftGenKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0901416A1BCC710B002E8617 /* AssetsEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090141631BCC710B002E8617 /* AssetsEnumBuilder.swift */; settings = {ASSET_TAGS = (); }; };
+		0901416B1BCC710B002E8617 /* ColorEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090141641BCC710B002E8617 /* ColorEnumBuilder.swift */; settings = {ASSET_TAGS = (); }; };
+		0901416C1BCC710B002E8617 /* L10nEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090141651BCC710B002E8617 /* L10nEnumBuilder.swift */; settings = {ASSET_TAGS = (); }; };
+		0901416D1BCC710B002E8617 /* StoryboardEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090141661BCC710B002E8617 /* StoryboardEnumBuilder.swift */; settings = {ASSET_TAGS = (); }; };
+		0901416E1BCC710B002E8617 /* SwiftGenIndentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090141671BCC710B002E8617 /* SwiftGenIndentation.swift */; settings = {ASSET_TAGS = (); }; };
+		0901416F1BCC710B002E8617 /* SwiftGenVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090141681BCC710B002E8617 /* SwiftGenVersion.swift */; settings = {ASSET_TAGS = (); }; };
+		090141701BCC710B002E8617 /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090141691BCC710B002E8617 /* SwiftIdentifier.swift */; settings = {ASSET_TAGS = (); }; };
+		090141721BCC7298002E8617 /* Commander.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090141421BCC6D47002E8617 /* Commander.framework */; };
+		090141741BCC77AF002E8617 /* SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090141731BCC77AF002E8617 /* SwiftGenKit.framework */; };
+		09C7B2D41BCC382800D7F488 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7B2D31BCC382800D7F488 /* main.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildRule section */
-		09030C111B6D319100275BF5 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.pbxcp;
-			filePatterns = "*.storyboard";
-			fileType = pattern.proxy;
-			isEditable = 1;
-			outputFiles = (
-			);
-			script = "# ibtool\n";
-		};
-		09030C341B6D511100275BF5 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.pbxcp;
-			filePatterns = "*.xcassets";
-			fileType = pattern.proxy;
-			isEditable = 1;
-			outputFiles = (
-			);
-			script = "";
-		};
-/* End PBXBuildRule section */
-
 /* Begin PBXCopyFilesBuildPhase section */
-		09030B691B6D254200275BF5 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		09030B8C1B6D26AF00275BF5 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		09030B941B6D26B800275BF5 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		09030B9C1B6D26C100275BF5 /* CopyFiles */ = {
+		09C7B2CF1BCC382800D7F488 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -132,29 +36,27 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		09030B6B1B6D254200275BF5 /* swiftgen-storyboard */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "swiftgen-storyboard"; sourceTree = BUILT_PRODUCTS_DIR; };
-		09030B7F1B6D26A600275BF5 /* SwiftGenAssetsEnumBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGenAssetsEnumBuilder.swift; sourceTree = "<group>"; };
-		09030B811B6D26A600275BF5 /* SwiftGenColorEnumBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGenColorEnumBuilder.swift; sourceTree = "<group>"; };
-		09030B831B6D26A600275BF5 /* SwiftGenIndentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGenIndentation.swift; sourceTree = "<group>"; };
-		09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftIdentifier.swift; sourceTree = "<group>"; };
-		09030B861B6D26A600275BF5 /* SwiftGenL10nEnumBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGenL10nEnumBuilder.swift; sourceTree = "<group>"; };
-		09030B881B6D26A600275BF5 /* SwiftGenStoryboardEnumBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGenStoryboardEnumBuilder.swift; sourceTree = "<group>"; };
-		09030B901B6D26AF00275BF5 /* swiftgen-assets */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "swiftgen-assets"; sourceTree = BUILT_PRODUCTS_DIR; };
-		09030B981B6D26B800275BF5 /* swiftgen-colors */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "swiftgen-colors"; sourceTree = BUILT_PRODUCTS_DIR; };
-		09030BA01B6D26C100275BF5 /* swiftgen-l10n */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "swiftgen-l10n"; sourceTree = BUILT_PRODUCTS_DIR; };
-		09030BAD1B6D271D00275BF5 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		09030BAF1B6D272800275BF5 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		09030BB11B6D273000275BF5 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		09030BB31B6D273800275BF5 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		09030BBC1B6D2A8F00275BF5 /* swiftgen-storyboard-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swiftgen-storyboard-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		090141241BCC4464002E8617 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0901413C1BCC6464002E8617 /* OutputDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputDestination.swift; sourceTree = "<group>"; };
+		0901413E1BCC64C9002E8617 /* storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = storyboards.swift; sourceTree = "<group>"; };
+		090141401BCC64FE002E8617 /* assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assets.swift; sourceTree = "<group>"; };
+		090141421BCC6D47002E8617 /* Commander.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Commander.framework; path = Rome/Commander.framework; sourceTree = "<group>"; };
+		0901414B1BCC70D6002E8617 /* SwiftGenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftGenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0901414D1BCC70D7002E8617 /* SwiftGenKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftGenKit.h; sourceTree = "<group>"; };
+		0901414F1BCC70D7002E8617 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		090141631BCC710B002E8617 /* AssetsEnumBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsEnumBuilder.swift; sourceTree = "<group>"; };
+		090141641BCC710B002E8617 /* ColorEnumBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorEnumBuilder.swift; sourceTree = "<group>"; };
+		090141651BCC710B002E8617 /* L10nEnumBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10nEnumBuilder.swift; sourceTree = "<group>"; };
+		090141661BCC710B002E8617 /* StoryboardEnumBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardEnumBuilder.swift; sourceTree = "<group>"; };
+		090141671BCC710B002E8617 /* SwiftGenIndentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftGenIndentation.swift; sourceTree = "<group>"; };
+		090141681BCC710B002E8617 /* SwiftGenVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftGenVersion.swift; sourceTree = "<group>"; };
+		090141691BCC710B002E8617 /* SwiftIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftIdentifier.swift; sourceTree = "<group>"; };
+		090141731BCC77AF002E8617 /* SwiftGenKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftGenKit.framework; path = Rome/SwiftGenKit.framework; sourceTree = "<group>"; };
 		09030BC01B6D2A8F00275BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09030BC91B6D2BB700275BF5 /* StoryboardTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardTests.swift; sourceTree = "<group>"; };
 		09030BD11B6D2E3900275BF5 /* AssetsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsTests.swift; sourceTree = "<group>"; };
 		09030BD51B6D2E3900275BF5 /* L10nTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10nTests.swift; sourceTree = "<group>"; };
 		09030BD81B6D2E5900275BF5 /* ColorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsTests.swift; sourceTree = "<group>"; };
-		09030BE41B6D2E7E00275BF5 /* swiftgen-assets-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swiftgen-assets-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		09030BF11B6D2EB000275BF5 /* swiftgen-colors-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swiftgen-colors-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		09030BFE1B6D2ED500275BF5 /* swiftgen-l10n-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swiftgen-l10n-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09030C091B6D30DB00275BF5 /* MessageWithDefaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MessageWithDefaults.swift.out; sourceTree = "<group>"; };
 		09030C0B1B6D30E800275BF5 /* Message.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
 		09030C0C1B6D30E800275BF5 /* Wizard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Wizard.storyboard; sourceTree = "<group>"; };
@@ -173,171 +75,93 @@
 		095685EB1B6DA16200BF300C /* FileWithCustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileWithCustomName.swift.out; sourceTree = "<group>"; };
 		095685ED1B6DA17300BF300C /* FileWithCustomIndentation.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileWithCustomIndentation.swift.out; sourceTree = "<group>"; };
 		095685EF1B6DA32800BF300C /* LinesWithDefaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LinesWithDefaults.swift.out; sourceTree = "<group>"; };
-		095685F11B6DAF1000BF300C /* SwiftGenVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftGenVersion.swift; sourceTree = "<group>"; };
 		09AA16BD1B9F707200EC253A /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		09AA16BE1B9F707200EC253A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		09C7B2D11BCC382800D7F488 /* swiftgen-cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "swiftgen-cli"; sourceTree = BUILT_PRODUCTS_DIR; };
+		09C7B2D31BCC382800D7F488 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		09E7146D1B6D55B4007FF3CF /* SwiftGen.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftGen.playground; sourceTree = "<group>"; };
 		09E7146E1B6D5946007FF3CF /* Rakefile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Rakefile; sourceTree = "<group>"; };
 		09E7146F1B6D707E007FF3CF /* EntriesDefaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EntriesDefaults.swift.out; sourceTree = "<group>"; };
 		09E714711B6D711A007FF3CF /* SwiftIdentifierTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftIdentifierTests.swift; sourceTree = "<group>"; };
-		09E7147A1B6D7247007FF3CF /* common-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "common-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		09030B681B6D254200275BF5 /* Frameworks */ = {
+		090141211BCC4464002E8617 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		09030B8B1B6D26AF00275BF5 /* Frameworks */ = {
+		090141471BCC70D6002E8617 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		09030B931B6D26B800275BF5 /* Frameworks */ = {
+		09C7B2CE1BCC382800D7F488 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09030B9B1B6D26C100275BF5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09030BB91B6D2A8F00275BF5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09030BDF1B6D2E7E00275BF5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09030BEC1B6D2EB000275BF5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09030BF91B6D2ED500275BF5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09E714771B6D7247007FF3CF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				090141741BCC77AF002E8617 /* SwiftGenKit.framework in Frameworks */,
+				090141721BCC7298002E8617 /* Commander.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0901414C1BCC70D7002E8617 /* SwiftGenKit */ = {
+			isa = PBXGroup;
+			children = (
+				090141671BCC710B002E8617 /* SwiftGenIndentation.swift */,
+				090141681BCC710B002E8617 /* SwiftGenVersion.swift */,
+				090141691BCC710B002E8617 /* SwiftIdentifier.swift */,
+				090141621BCC710B002E8617 /* EnumBuilders */,
+				0901414D1BCC70D7002E8617 /* SwiftGenKit.h */,
+				0901414F1BCC70D7002E8617 /* Info.plist */,
+			);
+			path = SwiftGenKit;
+			sourceTree = "<group>";
+		};
+		090141621BCC710B002E8617 /* EnumBuilders */ = {
+			isa = PBXGroup;
+			children = (
+				090141631BCC710B002E8617 /* AssetsEnumBuilder.swift */,
+				090141641BCC710B002E8617 /* ColorEnumBuilder.swift */,
+				090141651BCC710B002E8617 /* L10nEnumBuilder.swift */,
+				090141661BCC710B002E8617 /* StoryboardEnumBuilder.swift */,
+			);
+			path = EnumBuilders;
+			sourceTree = "<group>";
+		};
 		09030B621B6D254200275BF5 = {
 			isa = PBXGroup;
 			children = (
 				09E7146E1B6D5946007FF3CF /* Rakefile */,
 				09AA16BD1B9F707200EC253A /* CHANGELOG.md */,
 				09AA16BE1B9F707200EC253A /* README.md */,
-				09030B7D1B6D26A600275BF5 /* Sources */,
-				09030BB51B6D286800275BF5 /* Tests */,
+				09C7B2D21BCC382800D7F488 /* swiftgen-cli */,
+				09030BB51B6D286800275BF5 /* UnitTests */,
+				0901414C1BCC70D7002E8617 /* SwiftGenKit */,
 				09E7146D1B6D55B4007FF3CF /* SwiftGen.playground */,
 				09030B6C1B6D254200275BF5 /* Products */,
+				C7CAE7DEC00A13462ED83105 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		09030B6C1B6D254200275BF5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				09030B6B1B6D254200275BF5 /* swiftgen-storyboard */,
-				09030B901B6D26AF00275BF5 /* swiftgen-assets */,
-				09030B981B6D26B800275BF5 /* swiftgen-colors */,
-				09030BA01B6D26C100275BF5 /* swiftgen-l10n */,
-				09030BBC1B6D2A8F00275BF5 /* swiftgen-storyboard-tests.xctest */,
-				09030BE41B6D2E7E00275BF5 /* swiftgen-assets-tests.xctest */,
-				09030BF11B6D2EB000275BF5 /* swiftgen-colors-tests.xctest */,
-				09030BFE1B6D2ED500275BF5 /* swiftgen-l10n-tests.xctest */,
-				09E7147A1B6D7247007FF3CF /* common-tests.xctest */,
+				09C7B2D11BCC382800D7F488 /* swiftgen-cli */,
+				090141241BCC4464002E8617 /* UnitTests.xctest */,
+				0901414B1BCC70D6002E8617 /* SwiftGenKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		09030B7D1B6D26A600275BF5 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				09030B821B6D26A600275BF5 /* Common */,
-				09030B871B6D26A600275BF5 /* Storyboard */,
-				09030B7E1B6D26A600275BF5 /* Assets */,
-				09030B801B6D26A600275BF5 /* Colors */,
-				09030B851B6D26A600275BF5 /* L10n */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		09030B7E1B6D26A600275BF5 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				09030B7F1B6D26A600275BF5 /* SwiftGenAssetsEnumBuilder.swift */,
-				09030BAD1B6D271D00275BF5 /* main.swift */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
-		09030B801B6D26A600275BF5 /* Colors */ = {
-			isa = PBXGroup;
-			children = (
-				09030B811B6D26A600275BF5 /* SwiftGenColorEnumBuilder.swift */,
-				09030BAF1B6D272800275BF5 /* main.swift */,
-			);
-			path = Colors;
-			sourceTree = "<group>";
-		};
-		09030B821B6D26A600275BF5 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				09030B831B6D26A600275BF5 /* SwiftGenIndentation.swift */,
-				09030B841B6D26A600275BF5 /* SwiftIdentifier.swift */,
-				095685F11B6DAF1000BF300C /* SwiftGenVersion.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		09030B851B6D26A600275BF5 /* L10n */ = {
-			isa = PBXGroup;
-			children = (
-				09030B861B6D26A600275BF5 /* SwiftGenL10nEnumBuilder.swift */,
-				09030BB11B6D273000275BF5 /* main.swift */,
-			);
-			path = L10n;
-			sourceTree = "<group>";
-		};
-		09030B871B6D26A600275BF5 /* Storyboard */ = {
-			isa = PBXGroup;
-			children = (
-				09030B881B6D26A600275BF5 /* SwiftGenStoryboardEnumBuilder.swift */,
-				09030BB31B6D273800275BF5 /* main.swift */,
-			);
-			path = Storyboard;
-			sourceTree = "<group>";
-		};
-		09030BB51B6D286800275BF5 /* Tests */ = {
+		09030BB51B6D286800275BF5 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
 				09030C171B6D43D400275BF5 /* TestsHelper.swift */,
@@ -348,7 +172,7 @@
 				09030BD61B6D2E5900275BF5 /* Colors */,
 				09030BD21B6D2E3900275BF5 /* L10n */,
 			);
-			path = Tests;
+			path = UnitTests;
 			sourceTree = "<group>";
 		};
 		09030BC71B6D2BA300275BF5 /* Storyboard */ = {
@@ -465,167 +289,91 @@
 			path = fixtures;
 			sourceTree = "<group>";
 		};
+		09C7B2D21BCC382800D7F488 /* swiftgen-cli */ = {
+			isa = PBXGroup;
+			children = (
+				09C7B2D31BCC382800D7F488 /* main.swift */,
+				0901413C1BCC6464002E8617 /* OutputDestination.swift */,
+				0901413E1BCC64C9002E8617 /* storyboards.swift */,
+				090141401BCC64FE002E8617 /* assets.swift */,
+			);
+			path = "swiftgen-cli";
+			sourceTree = "<group>";
+		};
+		C7CAE7DEC00A13462ED83105 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				090141731BCC77AF002E8617 /* SwiftGenKit.framework */,
+				090141421BCC6D47002E8617 /* Commander.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		090141481BCC70D6002E8617 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0901414E1BCC70D7002E8617 /* SwiftGenKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		09030B6A1B6D254200275BF5 /* swiftgen-storyboard */ = {
+		090141231BCC4464002E8617 /* UnitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 09030B721B6D254200275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-storyboard" */;
+			buildConfigurationList = 090141311BCC4464002E8617 /* Build configuration list for PBXNativeTarget "UnitTests" */;
 			buildPhases = (
-				095685F61B6DB78D00BF300C /* Update SwiftGenVersion */,
-				09030B671B6D254200275BF5 /* Sources */,
-				09030B681B6D254200275BF5 /* Frameworks */,
-				09030B691B6D254200275BF5 /* CopyFiles */,
+				090141201BCC4464002E8617 /* Sources */,
+				090141211BCC4464002E8617 /* Frameworks */,
+				090141221BCC4464002E8617 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "swiftgen-storyboard";
-			productName = SwiftGen;
-			productReference = 09030B6B1B6D254200275BF5 /* swiftgen-storyboard */;
+			name = UnitTests;
+			productName = SwiftGenTests;
+			productReference = 090141241BCC4464002E8617 /* UnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0901414A1BCC70D6002E8617 /* SwiftGenKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0901415C1BCC70D7002E8617 /* Build configuration list for PBXNativeTarget "SwiftGenKit" */;
+			buildPhases = (
+				090141461BCC70D6002E8617 /* Sources */,
+				090141471BCC70D6002E8617 /* Frameworks */,
+				090141481BCC70D6002E8617 /* Headers */,
+				090141491BCC70D6002E8617 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftGenKit;
+			productName = SwiftGenKit;
+			productReference = 0901414B1BCC70D6002E8617 /* SwiftGenKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		09C7B2D01BCC382800D7F488 /* swiftgen-cli */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 09C7B2D71BCC382800D7F488 /* Build configuration list for PBXNativeTarget "swiftgen-cli" */;
+			buildPhases = (
+				09C7B2CD1BCC382800D7F488 /* Sources */,
+				09C7B2CE1BCC382800D7F488 /* Frameworks */,
+				09C7B2CF1BCC382800D7F488 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "swiftgen-cli";
+			productName = swiftgen;
+			productReference = 09C7B2D11BCC382800D7F488 /* swiftgen-cli */;
 			productType = "com.apple.product-type.tool";
-		};
-		09030B891B6D26AF00275BF5 /* swiftgen-assets */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 09030B8D1B6D26AF00275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-assets" */;
-			buildPhases = (
-				095685F71B6DB81000BF300C /* Update SwiftGenVersion */,
-				09030B8A1B6D26AF00275BF5 /* Sources */,
-				09030B8B1B6D26AF00275BF5 /* Frameworks */,
-				09030B8C1B6D26AF00275BF5 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "swiftgen-assets";
-			productName = SwiftGen;
-			productReference = 09030B901B6D26AF00275BF5 /* swiftgen-assets */;
-			productType = "com.apple.product-type.tool";
-		};
-		09030B911B6D26B800275BF5 /* swiftgen-colors */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 09030B951B6D26B800275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-colors" */;
-			buildPhases = (
-				095685F81B6DB83100BF300C /* Update SwiftGenVersion */,
-				09030B921B6D26B800275BF5 /* Sources */,
-				09030B931B6D26B800275BF5 /* Frameworks */,
-				09030B941B6D26B800275BF5 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "swiftgen-colors";
-			productName = SwiftGen;
-			productReference = 09030B981B6D26B800275BF5 /* swiftgen-colors */;
-			productType = "com.apple.product-type.tool";
-		};
-		09030B991B6D26C100275BF5 /* swiftgen-l10n */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 09030B9D1B6D26C100275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-l10n" */;
-			buildPhases = (
-				095685F91B6DB83A00BF300C /* Update SwiftGenVersion */,
-				09030B9A1B6D26C100275BF5 /* Sources */,
-				09030B9B1B6D26C100275BF5 /* Frameworks */,
-				09030B9C1B6D26C100275BF5 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "swiftgen-l10n";
-			productName = SwiftGen;
-			productReference = 09030BA01B6D26C100275BF5 /* swiftgen-l10n */;
-			productType = "com.apple.product-type.tool";
-		};
-		09030BBB1B6D2A8F00275BF5 /* swiftgen-storyboard-tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 09030BC11B6D2A8F00275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-storyboard-tests" */;
-			buildPhases = (
-				09030BB81B6D2A8F00275BF5 /* Sources */,
-				09030BB91B6D2A8F00275BF5 /* Frameworks */,
-				09030BBA1B6D2A8F00275BF5 /* Resources */,
-			);
-			buildRules = (
-				09030C111B6D319100275BF5 /* PBXBuildRule */,
-			);
-			dependencies = (
-			);
-			name = "swiftgen-storyboard-tests";
-			productName = "swiftgen-storyboard-tests";
-			productReference = 09030BBC1B6D2A8F00275BF5 /* swiftgen-storyboard-tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		09030BD91B6D2E7E00275BF5 /* swiftgen-assets-tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 09030BE11B6D2E7E00275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-assets-tests" */;
-			buildPhases = (
-				09030BDA1B6D2E7E00275BF5 /* Sources */,
-				09030BDF1B6D2E7E00275BF5 /* Frameworks */,
-				09030BE01B6D2E7E00275BF5 /* Resources */,
-			);
-			buildRules = (
-				09030C341B6D511100275BF5 /* PBXBuildRule */,
-			);
-			dependencies = (
-			);
-			name = "swiftgen-assets-tests";
-			productName = "swiftgen-storyboard-tests";
-			productReference = 09030BE41B6D2E7E00275BF5 /* swiftgen-assets-tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		09030BE61B6D2EB000275BF5 /* swiftgen-colors-tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 09030BEE1B6D2EB000275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-colors-tests" */;
-			buildPhases = (
-				09030BE71B6D2EB000275BF5 /* Sources */,
-				09030BEC1B6D2EB000275BF5 /* Frameworks */,
-				09030BED1B6D2EB000275BF5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "swiftgen-colors-tests";
-			productName = "swiftgen-storyboard-tests";
-			productReference = 09030BF11B6D2EB000275BF5 /* swiftgen-colors-tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		09030BF31B6D2ED500275BF5 /* swiftgen-l10n-tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 09030BFB1B6D2ED500275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-l10n-tests" */;
-			buildPhases = (
-				09030BF41B6D2ED500275BF5 /* Sources */,
-				09030BF91B6D2ED500275BF5 /* Frameworks */,
-				09030BFA1B6D2ED500275BF5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "swiftgen-l10n-tests";
-			productName = "swiftgen-storyboard-tests";
-			productReference = 09030BFE1B6D2ED500275BF5 /* swiftgen-l10n-tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		09E714791B6D7247007FF3CF /* common-tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 09E7147F1B6D7247007FF3CF /* Build configuration list for PBXNativeTarget "common-tests" */;
-			buildPhases = (
-				09E714761B6D7247007FF3CF /* Sources */,
-				09E714771B6D7247007FF3CF /* Frameworks */,
-				09E714781B6D7247007FF3CF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "common-tests";
-			productName = "common-tests";
-			productReference = 09E7147A1B6D7247007FF3CF /* common-tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -637,14 +385,14 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = AliSoftware;
 				TargetAttributes = {
-					09030B6A1B6D254200275BF5 = {
-						CreatedOnToolsVersion = 7.0;
+					090141231BCC4464002E8617 = {
+						CreatedOnToolsVersion = 7.0.1;
 					};
-					09030BBB1B6D2A8F00275BF5 = {
-						CreatedOnToolsVersion = 7.0;
+					0901414A1BCC70D6002E8617 = {
+						CreatedOnToolsVersion = 7.0.1;
 					};
-					09E714791B6D7247007FF3CF = {
-						CreatedOnToolsVersion = 7.0;
+					09C7B2D01BCC382800D7F488 = {
+						CreatedOnToolsVersion = 7.0.1;
 					};
 				};
 			};
@@ -660,67 +408,22 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				09030B6A1B6D254200275BF5 /* swiftgen-storyboard */,
-				09030BBB1B6D2A8F00275BF5 /* swiftgen-storyboard-tests */,
-				09030B891B6D26AF00275BF5 /* swiftgen-assets */,
-				09030BD91B6D2E7E00275BF5 /* swiftgen-assets-tests */,
-				09030B911B6D26B800275BF5 /* swiftgen-colors */,
-				09030BE61B6D2EB000275BF5 /* swiftgen-colors-tests */,
-				09030B991B6D26C100275BF5 /* swiftgen-l10n */,
-				09030BF31B6D2ED500275BF5 /* swiftgen-l10n-tests */,
-				09E714791B6D7247007FF3CF /* common-tests */,
+				09C7B2D01BCC382800D7F488 /* swiftgen-cli */,
+				0901414A1BCC70D6002E8617 /* SwiftGenKit */,
+				090141231BCC4464002E8617 /* UnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		09030BBA1B6D2A8F00275BF5 /* Resources */ = {
+		090141221BCC4464002E8617 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09030C0E1B6D30E800275BF5 /* Wizard.storyboard in Resources */,
-				09030C0D1B6D30E800275BF5 /* Message.storyboard in Resources */,
-				09030C141B6D3D5600275BF5 /* MessageWithCustomNames.swift.out in Resources */,
-				09030C0A1B6D30DB00275BF5 /* MessageWithDefaults.swift.out in Resources */,
-				09030C161B6D414800275BF5 /* MessageWithCustomIndentation.swift.out in Resources */,
-				09030C101B6D315C00275BF5 /* AllWithDefaults.swift.out in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		09030BE01B6D2E7E00275BF5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09E714701B6D7082007FF3CF /* EntriesDefaults.swift.out in Resources */,
-				09030C321B6D504600275BF5 /* FileDefaults.swift.out in Resources */,
-				09030C331B6D504A00275BF5 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09030BED1B6D2EB000275BF5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09030C1E1B6D473E00275BF5 /* colors.txt in Resources */,
-				09030C351B6D521B00275BF5 /* FileDefaults.swift.out in Resources */,
-				09030C211B6D474C00275BF5 /* ListDefaults.swift.out in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09030BFA1B6D2ED500275BF5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09030C281B6D499C00275BF5 /* EntriesWithDefaults.swift.out in Resources */,
-				095685EC1B6DA16800BF300C /* FileWithCustomName.swift.out in Resources */,
-				09030C2C1B6D4DF400275BF5 /* FileWithDefaults.swift.out in Resources */,
-				095685F01B6DA32E00BF300C /* LinesWithDefaults.swift.out in Resources */,
-				095685EE1B6DA24900BF300C /* FileWithCustomIndentation.swift.out in Resources */,
-				09030C291B6D49A100275BF5 /* Localizable.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09E714781B6D7247007FF3CF /* Resources */ = {
+		090141491BCC70D6002E8617 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -729,178 +432,113 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		095685F61B6DB78D00BF300C /* Update SwiftGenVersion */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update SwiftGenVersion";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"public let SwiftGenVersion = \\\"${SWIFTGEN_VERSION-`git describe`}\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
-			showEnvVarsInLog = 0;
-		};
-		095685F71B6DB81000BF300C /* Update SwiftGenVersion */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update SwiftGenVersion";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"public let SwiftGenVersion = \\\"${SWIFTGEN_VERSION-`git describe`}\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
-			showEnvVarsInLog = 0;
-		};
-		095685F81B6DB83100BF300C /* Update SwiftGenVersion */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update SwiftGenVersion";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"public let SwiftGenVersion = \\\"${SWIFTGEN_VERSION-`git describe`}\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
-			showEnvVarsInLog = 0;
-		};
-		095685F91B6DB83A00BF300C /* Update SwiftGenVersion */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update SwiftGenVersion";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"public let SwiftGenVersion = \\\"${SWIFTGEN_VERSION-`git describe`}\\\"\" >$SRCROOT/Sources/Common/SwiftGenVersion.swift";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		09030B671B6D254200275BF5 /* Sources */ = {
+		090141201BCC4464002E8617 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09030BA21B6D26D200275BF5 /* SwiftIdentifier.swift in Sources */,
-				09030BA11B6D26D200275BF5 /* SwiftGenIndentation.swift in Sources */,
-				09030BAC1B6D26EA00275BF5 /* SwiftGenStoryboardEnumBuilder.swift in Sources */,
-				09030BB41B6D273800275BF5 /* main.swift in Sources */,
-				095685F21B6DAF1000BF300C /* SwiftGenVersion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		09030B8A1B6D26AF00275BF5 /* Sources */ = {
+		090141461BCC70D6002E8617 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09030BA41B6D26D200275BF5 /* SwiftIdentifier.swift in Sources */,
-				09030BA31B6D26D200275BF5 /* SwiftGenIndentation.swift in Sources */,
-				09030BA91B6D26D900275BF5 /* SwiftGenAssetsEnumBuilder.swift in Sources */,
-				09030BAE1B6D271D00275BF5 /* main.swift in Sources */,
-				095685F31B6DB0E300BF300C /* SwiftGenVersion.swift in Sources */,
+				0901416E1BCC710B002E8617 /* SwiftGenIndentation.swift in Sources */,
+				0901416C1BCC710B002E8617 /* L10nEnumBuilder.swift in Sources */,
+				0901416B1BCC710B002E8617 /* ColorEnumBuilder.swift in Sources */,
+				0901416A1BCC710B002E8617 /* AssetsEnumBuilder.swift in Sources */,
+				0901416D1BCC710B002E8617 /* StoryboardEnumBuilder.swift in Sources */,
+				090141701BCC710B002E8617 /* SwiftIdentifier.swift in Sources */,
+				0901416F1BCC710B002E8617 /* SwiftGenVersion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		09030B921B6D26B800275BF5 /* Sources */ = {
+		09C7B2CD1BCC382800D7F488 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09030BA61B6D26D300275BF5 /* SwiftIdentifier.swift in Sources */,
-				09030BA51B6D26D300275BF5 /* SwiftGenIndentation.swift in Sources */,
-				09030BAA1B6D26E000275BF5 /* SwiftGenColorEnumBuilder.swift in Sources */,
-				09030BB01B6D272800275BF5 /* main.swift in Sources */,
-				095685F41B6DB0E300BF300C /* SwiftGenVersion.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09030B9A1B6D26C100275BF5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09030BA81B6D26D400275BF5 /* SwiftIdentifier.swift in Sources */,
-				09030BA71B6D26D400275BF5 /* SwiftGenIndentation.swift in Sources */,
-				09030BAB1B6D26E500275BF5 /* SwiftGenL10nEnumBuilder.swift in Sources */,
-				09030BB21B6D273000275BF5 /* main.swift in Sources */,
-				095685F51B6DB0E400BF300C /* SwiftGenVersion.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09030BB81B6D2A8F00275BF5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09030BC61B6D2AD500275BF5 /* SwiftIdentifier.swift in Sources */,
-				09030C181B6D43D400275BF5 /* TestsHelper.swift in Sources */,
-				09030BCB1B6D2BB700275BF5 /* StoryboardTests.swift in Sources */,
-				09030BC51B6D2AD500275BF5 /* SwiftGenIndentation.swift in Sources */,
-				09030BC41B6D2AC600275BF5 /* SwiftGenStoryboardEnumBuilder.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09030BDA1B6D2E7E00275BF5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09030C001B6D2F1A00275BF5 /* SwiftGenAssetsEnumBuilder.swift in Sources */,
-				09030C191B6D43D400275BF5 /* TestsHelper.swift in Sources */,
-				09030BDB1B6D2E7E00275BF5 /* SwiftIdentifier.swift in Sources */,
-				09030C031B6D2F3C00275BF5 /* AssetsTests.swift in Sources */,
-				09030BDD1B6D2E7E00275BF5 /* SwiftGenIndentation.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09030BE71B6D2EB000275BF5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09030BE81B6D2EB000275BF5 /* SwiftIdentifier.swift in Sources */,
-				09030C1A1B6D43D400275BF5 /* TestsHelper.swift in Sources */,
-				09030C041B6D2F4000275BF5 /* ColorsTests.swift in Sources */,
-				09030BEA1B6D2EB000275BF5 /* SwiftGenIndentation.swift in Sources */,
-				09030C011B6D2F2300275BF5 /* SwiftGenColorEnumBuilder.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09030BF41B6D2ED500275BF5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09030C051B6D2F4300275BF5 /* L10nTests.swift in Sources */,
-				09030C1B1B6D43D400275BF5 /* TestsHelper.swift in Sources */,
-				09030BF51B6D2ED500275BF5 /* SwiftIdentifier.swift in Sources */,
-				09030C021B6D2F2900275BF5 /* SwiftGenL10nEnumBuilder.swift in Sources */,
-				09030BF71B6D2ED500275BF5 /* SwiftGenIndentation.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09E714761B6D7247007FF3CF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09E714821B6D7252007FF3CF /* SwiftIdentifierTests.swift in Sources */,
-				09E714831B6D7259007FF3CF /* SwiftIdentifier.swift in Sources */,
+				09C7B2D41BCC382800D7F488 /* main.swift in Sources */,
+				0901413F1BCC64C9002E8617 /* storyboards.swift in Sources */,
+				090141411BCC64FE002E8617 /* assets.swift in Sources */,
+				0901413D1BCC6464002E8617 /* OutputDestination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		0901412E1BCC4464002E8617 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SwiftGenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0901412F1BCC4464002E8617 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SwiftGenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		0901415D1BCC70D7002E8617 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = SwiftGenKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0901415E1BCC70D7002E8617 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = SwiftGenKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		09030B701B6D254200275BF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -979,168 +617,26 @@
 			};
 			name = Release;
 		};
-		09030B731B6D254200275BF5 /* Debug */ = {
+		09C7B2D51BCC382800D7F488 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Rome",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		09030B741B6D254200275BF5 /* Release */ = {
+		09C7B2D61BCC382800D7F488 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		09030B8E1B6D26AF00275BF5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		09030B8F1B6D26AF00275BF5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		09030B961B6D26B800275BF5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		09030B971B6D26B800275BF5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		09030B9E1B6D26C100275BF5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		09030B9F1B6D26C100275BF5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		09030BC21B6D2A8F00275BF5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-storyboard-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		09030BC31B6D2A8F00275BF5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-storyboard-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		09030BE21B6D2E7E00275BF5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-assets-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		09030BE31B6D2E7E00275BF5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-assets-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		09030BEF1B6D2EB000275BF5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-colors-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		09030BF01B6D2EB000275BF5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-colors-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		09030BFC1B6D2ED500275BF5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-l10n-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		09030BFD1B6D2ED500275BF5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.swiftgen-l10n-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		09E714801B6D7247007FF3CF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.common-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		09E714811B6D7247007FF3CF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alisoftware.common-tests";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Rome",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -1148,6 +644,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		090141311BCC4464002E8617 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0901412E1BCC4464002E8617 /* Debug */,
+				0901412F1BCC4464002E8617 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0901415C1BCC70D7002E8617 /* Build configuration list for PBXNativeTarget "SwiftGenKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0901415D1BCC70D7002E8617 /* Debug */,
+				0901415E1BCC70D7002E8617 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		09030B661B6D254200275BF5 /* Build configuration list for PBXProject "SwiftGen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1157,83 +671,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		09030B721B6D254200275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-storyboard" */ = {
+		09C7B2D71BCC382800D7F488 /* Build configuration list for PBXNativeTarget "swiftgen-cli" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				09030B731B6D254200275BF5 /* Debug */,
-				09030B741B6D254200275BF5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		09030B8D1B6D26AF00275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-assets" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				09030B8E1B6D26AF00275BF5 /* Debug */,
-				09030B8F1B6D26AF00275BF5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		09030B951B6D26B800275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-colors" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				09030B961B6D26B800275BF5 /* Debug */,
-				09030B971B6D26B800275BF5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		09030B9D1B6D26C100275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-l10n" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				09030B9E1B6D26C100275BF5 /* Debug */,
-				09030B9F1B6D26C100275BF5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		09030BC11B6D2A8F00275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-storyboard-tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				09030BC21B6D2A8F00275BF5 /* Debug */,
-				09030BC31B6D2A8F00275BF5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		09030BE11B6D2E7E00275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-assets-tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				09030BE21B6D2E7E00275BF5 /* Debug */,
-				09030BE31B6D2E7E00275BF5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		09030BEE1B6D2EB000275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-colors-tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				09030BEF1B6D2EB000275BF5 /* Debug */,
-				09030BF01B6D2EB000275BF5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		09030BFB1B6D2ED500275BF5 /* Build configuration list for PBXNativeTarget "swiftgen-l10n-tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				09030BFC1B6D2ED500275BF5 /* Debug */,
-				09030BFD1B6D2ED500275BF5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		09E7147F1B6D7247007FF3CF /* Build configuration list for PBXNativeTarget "common-tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				09E714801B6D7247007FF3CF /* Debug */,
-				09E714811B6D7247007FF3CF /* Release */,
+				09C7B2D51BCC382800D7F488 /* Debug */,
+				09C7B2D61BCC382800D7F488 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
