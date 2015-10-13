@@ -1,8 +1,11 @@
 platform :osx, '10.9'
 use_frameworks!
 
-plugin 'cocoapods-rome'
+target 'swiftgen' do
+  pod 'Commander'
+  pod 'SwiftGenKit', :path => 'SwiftGenKit'
+end
 
-pod 'Commander'
-pod 'SwiftGenKit', :path => 'SwiftGenKit'
-
+target 'SwiftGenKitTests' do
+  pod 'SwiftGenKit', :path => 'SwiftGenKit'
+end

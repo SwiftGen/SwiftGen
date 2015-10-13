@@ -18,7 +18,8 @@ end
 ###########################################################
 
 desc "Build only the CLI binary"
-task :cli do |_, args|
+task :build do |_, args|
+  run %Q(mkdir -p bin)
   run %Q(#{dev_dir} xcrun -sdk macosx swiftc -O -o bin/swiftgen -F Rome -framework Commander -framework SwiftGenKit swiftgen-cli/*.swift)
 end
 
@@ -47,7 +48,7 @@ task :clean do
   run %Q(rm -fr Rome bin)
 end
 
-task :default => [:dependencies, :cli]
+task :default => [:dependencies, :build]
 
 ###########################################################
 
