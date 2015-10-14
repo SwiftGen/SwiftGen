@@ -1,4 +1,5 @@
 #!/usr/bin/rake
+require 'pathname'
 
 def dev_dir
   xcode7 = `mdfind 'kMDItemCFBundleIdentifier == com.apple.dt.Xcode && kMDItemVersion == "7.*"'`.split("\n")
@@ -37,18 +38,20 @@ DEPENDENCIES.each do |fmk|
 end
 
 
-desc "Build the CLI and Framework, and install them in $dir/bin and $dir/Frameworks"
-task :install, [:dir] => :build do |_, args|
-  args.with_defaults(:dir => '/usr/local')
-  puts "== Installing to #{args.dir} =="
-  sh %Q(mkdir -p "#{args.dir}/bin")
-  sh %Q(cp -f "#{BUILD_DIR}/#{BIN_NAME}" "#{args.dir}/bin/")
-  sh %Q(mkdir -p "#{args.dir}/Frameworks")
+desc "Install the binary in $bindir (defaults to /usr/local/bin) and the framework in $fmkdir (defaults to $bindir/../Frameworks)"
+task :install, [:bindir,:fmkdir] => :build do |_, args|
+  bindir = args.bindir.nil? || args.bindir.empty? ? Pathname.new('.') : Pathname.new(args.bindir)
+  fmkdir = args.fmkdir.nil? || args.fmkdir.empty? ? bindir + '../Frameworks' : Pathname.new(args.fmkdir)
+  
+  puts "== Installing to #{bindir} =="
+  sh %Q(mkdir -p "#{bindir}")
+  sh %Q(cp -f "#{BUILD_DIR}/#{BIN_NAME}" "#{bindir}")
+  sh %Q(mkdir -p "#{fmkdir}")
   DEPENDENCIES.each do |fmk|
-    sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}.framework" "#{args.dir}/Frameworks/")
+    sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}.framework" "#{fmkdir}")
   end
-  sh %Q(install_name_tool -add_rpath "@executable_path/../Frameworks" "#{args.dir}/bin/#{BIN_NAME}")
-  puts "\n  > Binary available in #{args.dir}/bin/#{BIN_NAME}"
+  sh %Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}")
+  puts "\n  > Binary available in #{bindir}/#{BIN_NAME}"
 end
 
 desc "Run the Unit Tests"
