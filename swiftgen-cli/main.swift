@@ -33,8 +33,8 @@ func pathExists(type: PathType?)(path: String) throws -> String {
 // MARK: - Main
 
 Group {
-    $0.addCommand("storyboards", storyboards)
-    $0.addCommand("assets", assets)
-    $0.addCommand("colors", colors)
-    $0.addCommand("l10n", l10n)
+    $0.addCommand("storyboards", storyboardsCommand)
+    $0.addCommand("images", imagesCommand)
+    $0.addCommand("colors", colorsCommand)
+    $0.addCommand("strings", stringsCommand)
 }.run("SwiftGen v\(GenumKitVersionNumber)")

@@ -10,7 +10,7 @@ import Foundation
 import Commander
 import GenumKit
 
-let l10n = command(
+let stringsCommand = command(
     outputOption,
     Argument<String>("FILE", description: "Localizable.strings file to parse.", validator: pathExists(.File))
 ) { output, path in
