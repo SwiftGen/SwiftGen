@@ -5,16 +5,15 @@ import UIKit
 
 extension UIImage {
     enum Asset : String {
-        case GreenApple = "Green-Apple"
-        case RedApple = "Red Apple"
-        case _2Pears = "2-pears"
+        case Apple = "Apple"
+        case Banana = "Banana"
 
         var image: UIImage {
             return UIImage(asset: self)
         }
     }
 
-    convenience init(asset: Asset) {
-        self.init(named: asset.rawValue)!
+    convenience init!(asset: Asset) {
+        self.init(named: asset.rawValue)
     }
 }

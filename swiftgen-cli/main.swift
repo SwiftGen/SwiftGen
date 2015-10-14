@@ -33,7 +33,7 @@ func pathExists(type: PathType?)(path: String) throws -> String {
 // MARK: - Main
 
 let version: String = {
-    let info = NSBundle(forClass: GenumKit.AssetsEnumBuilder.self).infoDictionary
+    let info = NSBundle(forClass: GenumKit.ImageEnumBuilder.self).infoDictionary
     return info.flatMap { $0["CFBundleShortVersionString"] as? String } ?? "0.0"
 }()
 

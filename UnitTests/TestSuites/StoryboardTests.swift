@@ -12,7 +12,7 @@ import GenumKit
 /**
  * Important: In order for the "*.storyboard" files in fixtures/ to be copied as-is in the test bundle
  * (as opposed to being compiled when the test bundle is compiled), a custom "Build Rule" has been added to the target.
- * See Project -> Target "swiftgen-storyboard-tests" -> Build Rules -> « Files "*.storyboard" using PBXCp »
+ * See Project -> Target "UnitTests" -> Build Rules -> « Files "*.storyboard" using PBXCp »
  */
 
 class StoryboardTests: XCTestCase {
