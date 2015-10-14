@@ -1,12 +1,16 @@
-import Foundation
-//@import SwiftIdentifier
-//@import SwiftGenIndentation
+//
+// GenumKit
+// Copyright (c) 2015 Olivier Halligon
+// MIT Licence
+//
 
-public final class SwiftGenColorEnumBuilder {
+import Foundation
+
+public final class ColorEnumBuilder {
     public init() {}
     
     public func addColorWithName(name: String, value: String) {
-        addColorWithName(name, value: SwiftGenColorEnumBuilder.parse(value))
+        addColorWithName(name, value: ColorEnumBuilder.parse(value))
     }
     
     public func addColorWithName(name: String, value: UInt32) {
@@ -35,7 +39,7 @@ public final class SwiftGenColorEnumBuilder {
         }
     }
     
-    public func build(enumName enumName: String = "Name", generateStringInit stringInit: Bool = false, indentation indent: SwiftGenIndentation = .Spaces(4)) -> String {
+    public func build(enumName enumName: String = "Name", generateStringInit stringInit: Bool = false, indentation indent: Indentation = .Spaces(4)) -> String {
         var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
         let t = indent.string
         text += commonCode(generateStringInit: stringInit, indentationString: t)

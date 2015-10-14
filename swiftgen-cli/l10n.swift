@@ -8,7 +8,7 @@
 
 import Foundation
 import Commander
-import SwiftGenKit
+import GenumKit
 
 let l10n = command(
     outputOption,

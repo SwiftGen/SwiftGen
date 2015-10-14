@@ -1,3 +1,9 @@
+//
+// GenumKit
+// Copyright (c) 2015 Olivier Halligon
+// MIT Licence
+//
+
 import Foundation
 
 extension String {

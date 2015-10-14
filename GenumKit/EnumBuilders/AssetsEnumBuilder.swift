@@ -1,6 +1,10 @@
+//
+// GenumKit
+// Copyright (c) 2015 Olivier Halligon
+// MIT Licence
+//
+
 import Foundation
-//@import SwiftIdentifier
-//@import SwiftGenIndentation
 
 public final class AssetsEnumBuilder {
     private var assetNames = [String]()
@@ -28,7 +32,7 @@ public final class AssetsEnumBuilder {
         }
     }
     
-    public func build(enumName enumName : String = "Asset", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
+    public func build(enumName enumName : String = "Asset", indentation indent : Indentation = .Spaces(4)) -> String {
         var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
         let t = indent.string
         

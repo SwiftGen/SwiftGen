@@ -8,13 +8,13 @@
 
 import Foundation
 import Commander
-import SwiftGenKit
+import GenumKit
 
 let colors = command(
     outputOption,
     Argument<String>("FILE", description: "Colors.txt file to parse.", validator: pathExists(.File))
 ) { output, path in
-    let enumBuilder = SwiftGenColorEnumBuilder()
+    let enumBuilder = ColorEnumBuilder()
     do {
         try enumBuilder.parseTextFile(path)
         output.write(enumBuilder.build())

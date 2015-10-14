@@ -1,15 +1,17 @@
 Pod::Spec.new do |s|
 
-  s.name         = "SwiftGenKit"
+  s.name         = "GenumKit"
   s.version      = "0.5.0"
   s.summary      = "A tool to build constants using enums for your UIImage, Storyboards, Assets, Colors, and more"
 
   s.description  = <<-DESC
-                    SwiftGen is a framework and command-line tool to build constants using enums for:
+                   GenumKit is a framework to build constants using enums for:
                     - UIImages from your Assets Catalogs
                     - Storyboards, to instanciate scenes and identify segues using constants
                     - UIColors, to have named colors using an enums
                     - Localizable.strings so that you can format your localized text way easier!
+
+                   This framework is used by the swiftgen Command Line tool
                    DESC
 
   s.homepage     = "https://github.com/AliSoftware/SwiftGen"

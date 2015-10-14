@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import SwiftGenKit
+import GenumKit
 
 /**
  * Important: In order for the "*.storyboard" files in fixtures/ to be copied as-is in the test bundle

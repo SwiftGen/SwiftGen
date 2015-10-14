@@ -16,16 +16,17 @@ end
 
 ###########################################################
 
-DEPENDENCIES = [:SwiftGenKit, :Commander]
+BIN_NAME = 'swiftgen'
+DEPENDENCIES = [:GenumKit, :Commander]
 CONFIGURATION = 'Release'
 BUILD_DIR = 'build/' + CONFIGURATION
 
 
 
-desc "Build the CLI binary and its Frameworks"
+desc "Build the CLI binary and its Frameworks in #{BUILD_DIR}"
 task :build => DEPENDENCIES do |_, args|
   frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
-  xcrun %Q(-sdk macosx swiftc -O -o #{BUILD_DIR}/swiftgen -F #{BUILD_DIR}/ #{frameworks} swiftgen-cli/*.swift)
+  xcrun %Q(-sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} -F #{BUILD_DIR}/ #{frameworks} swiftgen-cli/*.swift)
 end
 
 DEPENDENCIES.each do |fmk|
@@ -41,13 +42,13 @@ task :install, [:dir] => :build do |_, args|
   args.with_defaults(:dir => '/usr/local')
   puts "== Installing to #{args.dir} =="
   sh %Q(mkdir -p "#{args.dir}/bin")
-  sh %Q(cp -f "#{BUILD_DIR}/swiftgen" "#{args.dir}/bin/")
+  sh %Q(cp -f "#{BUILD_DIR}/#{BIN_NAME}" "#{args.dir}/bin/")
   sh %Q(mkdir -p "#{args.dir}/Frameworks")
   DEPENDENCIES.each do |fmk|
     sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}.framework" "#{args.dir}/Frameworks/")
   end
-  sh %Q(install_name_tool -add_rpath "@executable_path/../Frameworks" "#{args.dir}/bin/swiftgen")
-  puts "\n  > Binary available in #{args.dir}/bin/swiftgen"
+  sh %Q(install_name_tool -add_rpath "@executable_path/../Frameworks" "#{args.dir}/bin/#{BIN_NAME}")
+  puts "\n  > Binary available in #{args.dir}/bin/#{BIN_NAME}"
 end
 
 desc "Run the Unit Tests"
@@ -55,7 +56,7 @@ task :tests do
   xcrun %Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen-cli -sdk macosx test)
 end
 
-desc "Remove Rome/ and bin/"
+desc "Delete the build/ directory"
 task :clean do
   sh %Q(rm -fr build)
 end

@@ -37,9 +37,8 @@
 		09A87B711BCCA5FC00D9B9F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09030C241B6D48FC00275BF5 /* Localizable.strings */; settings = {ASSET_TAGS = (); }; };
 		09A87B741BCCBE6D00D9B9F5 /* l10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A87B731BCCBE6D00D9B9F5 /* l10n.swift */; settings = {ASSET_TAGS = (); }; };
 		09A87B761BCCC02C00D9B9F5 /* colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A87B751BCCC02C00D9B9F5 /* colors.swift */; settings = {ASSET_TAGS = (); }; };
-		341A2167F2E3C2B5B76C27CC /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B594462FF573E83D0DEF1C64 /* Pods_UnitTests.framework */; };
-		7208A517F3AD3AE509D4A6A1 /* Pods_SwiftGenKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B85742845DA08FA0DD5D741C /* Pods_SwiftGenKitTests.framework */; };
-		853259B663FD574B7510C7D3 /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8A3B4DE5528DD17EC369AA3 /* Pods_swiftgen.framework */; };
+		3C88500AFCA6DE48360F93AE /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8A3B4DE5528DD17EC369AA3 /* Pods_swiftgen.framework */; };
+		91554FDE6EC0E514DECD71FA /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B594462FF573E83D0DEF1C64 /* Pods_UnitTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -140,7 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				853259B663FD574B7510C7D3 /* Pods_swiftgen.framework in Frameworks */,
+				3C88500AFCA6DE48360F93AE /* Pods_swiftgen.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,8 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7208A517F3AD3AE509D4A6A1 /* Pods_SwiftGenKitTests.framework in Frameworks */,
-				341A2167F2E3C2B5B76C27CC /* Pods_UnitTests.framework in Frameworks */,
+				91554FDE6EC0E514DECD71FA /* Pods_UnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
 
 import Foundation
 import Commander
-import SwiftGenKit
+import GenumKit
 
 let assets = command(
     outputOption,

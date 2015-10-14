@@ -3,9 +3,9 @@ use_frameworks!
 
 target 'swiftgen' do
   pod 'Commander'
-  pod 'SwiftGenKit', :path => 'SwiftGenKit'
+  pod 'GenumKit', :path => 'GenumKit'
 end
 
 target 'UnitTests' do
-  pod 'SwiftGenKit', :path => 'SwiftGenKit'
+  pod 'GenumKit', :path => 'GenumKit'
 end

@@ -8,7 +8,7 @@
 
 import Foundation
 import Commander
-import SwiftGenKit
+import GenumKit
 
 // MARK: Validators
 
@@ -37,4 +37,4 @@ Group {
     $0.addCommand("assets", assets)
     $0.addCommand("colors", colors)
     $0.addCommand("l10n", l10n)
-}.run("SwiftGen v\(SwiftGenKitVersionNumber)")
+}.run("SwiftGen v\(GenumKitVersionNumber)")
