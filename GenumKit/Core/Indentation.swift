@@ -1,6 +1,12 @@
+//
+// GenumKit
+// Copyright (c) 2015 Olivier Halligon
+// MIT Licence
+//
+
 import Foundation
 
-public enum SwiftGenIndentation {
+public enum Indentation {
     case Tab
     case Spaces(Int)
     

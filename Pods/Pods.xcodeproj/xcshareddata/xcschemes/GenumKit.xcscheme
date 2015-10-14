@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C60B2F79AA0FB28A40DAE119'
-               BlueprintName = 'SwiftGenKit'
+               BlueprintIdentifier = 'A63C91AC14C2748CB59653DA'
+               BlueprintName = 'GenumKit'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SwiftGenKit.framework'>
+               BuildableName = 'GenumKit.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

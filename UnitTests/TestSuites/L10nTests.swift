@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import SwiftGenKit
+import GenumKit
 
 class L10nTests: XCTestCase {
 

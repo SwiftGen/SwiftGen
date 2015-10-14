@@ -1,6 +1,10 @@
+//
+// GenumKit
+// Copyright (c) 2015 Olivier Halligon
+// MIT Licence
+//
+
 import Foundation
-//@import SwiftIdentifier
-//@import SwiftGenIndentation
 
 public final class StoryboardEnumBuilder {
     private typealias Scene = (storyboardID: String, customClass: String?)
@@ -84,7 +88,7 @@ public final class StoryboardEnumBuilder {
         }
     }
     
-    public func build(scenesStructName scenesStructName: String = "Scene", seguesStructName: String = "Segue", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
+    public func build(scenesStructName scenesStructName: String = "Scene", seguesStructName: String = "Segue", indentation indent : Indentation = .Spaces(4)) -> String {
         var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
         let t = indent.string
         text += commonCode(indentationString: t)

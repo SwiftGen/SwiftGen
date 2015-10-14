@@ -84,8 +84,8 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-UnitTests/SwiftGenKit.framework"
+  install_framework "Pods-UnitTests/GenumKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-UnitTests/SwiftGenKit.framework"
+  install_framework "Pods-UnitTests/GenumKit.framework"
 fi

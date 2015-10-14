@@ -7,12 +7,12 @@
 //
 
 import XCTest
-import SwiftGenKit
+import GenumKit
 
 class ColorsTests: XCTestCase {
 
     func testListWithDefaults() {
-        let enumBuilder = SwiftGenColorEnumBuilder()
+        let enumBuilder = ColorEnumBuilder()
         enumBuilder.addColorWithName("TextColor", value: "0x999999")
         enumBuilder.addColorWithName("ArticleTitle", value: "#996600")
         enumBuilder.addColorWithName("ArticleBackground", value: "#ffcc0099")
@@ -23,7 +23,7 @@ class ColorsTests: XCTestCase {
     }
 
     func testFileWithDefaults() {
-        let enumBuilder = SwiftGenColorEnumBuilder()
+        let enumBuilder = ColorEnumBuilder()
         try! enumBuilder.parseTextFile(fixturePath("colors.txt"))
         let result = enumBuilder.build()
         

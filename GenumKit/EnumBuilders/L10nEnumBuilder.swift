@@ -1,6 +1,10 @@
+//
+// GenumKit
+// Copyright (c) 2015 Olivier Halligon
+// MIT Licence
+//
+
 import Foundation
-//@import SwiftIdentifier
-//@import SwiftGenIndentation
 
 public final class L10nEnumBuilder {
     public init() {}
@@ -19,7 +23,7 @@ public final class L10nEnumBuilder {
         }
     }
     
-    public func build(enumName enumName : String = "L10n", indentation indent : SwiftGenIndentation = .Spaces(4)) -> String {
+    public func build(enumName enumName : String = "L10n", indentation indent : Indentation = .Spaces(4)) -> String {
         var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
         text += "import Foundation\n\n"
         
