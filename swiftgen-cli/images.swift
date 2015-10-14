@@ -1,5 +1,5 @@
 //
-//  assets.swift
+//  images.swift
 //  SwiftGen
 //
 //  Created by Olivier Halligon on 13/10/2015.
@@ -14,7 +14,7 @@ let imagesCommand = command(
     outputOption,
     Argument<String>("DIR", description: "Directory to scan for .imageset files.", validator: pathExists(.Directory))
 ) { output, path in
-    let enumBuilder = AssetsEnumBuilder()
+    let enumBuilder = ImageEnumBuilder()
     enumBuilder.parseDirectory(path)
     output.write(enumBuilder.build())
 }

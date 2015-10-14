@@ -6,17 +6,17 @@
 
 import Foundation
 
-public final class AssetsEnumBuilder {
-    private var assetNames = [String]()
+public final class ImageEnumBuilder {
+    private var imageNames = [String]()
     
     public init() {}
     
-    public func addAssetName(name: String) -> Bool {
-        if assetNames.contains(name) {
+    public func addImageName(name: String) -> Bool {
+        if imageNames.contains(name) {
             return false
         }
         else {
-            assetNames.append(name)
+            imageNames.append(name)
             return true
         }
     }
@@ -25,8 +25,8 @@ public final class AssetsEnumBuilder {
         if let dirEnum = NSFileManager.defaultManager().enumeratorAtPath(path) {
             while let path = dirEnum.nextObject() as? NSString {
                 if path.pathExtension == "imageset" {
-                    let assetName = (path.lastPathComponent as NSString).stringByDeletingPathExtension
-                    self.addAssetName(assetName)
+                    let imageName = (path.lastPathComponent as NSString).stringByDeletingPathExtension
+                    self.addImageName(imageName)
                 }
             }
         }
@@ -40,7 +40,7 @@ public final class AssetsEnumBuilder {
         text += "import UIKit\n"
         text += "\n"
         
-        guard !assetNames.isEmpty else {
+        guard !imageNames.isEmpty else {
             return text + "// No image found\n"
         }
         
@@ -48,7 +48,7 @@ public final class AssetsEnumBuilder {
 
         text += "\(t)enum \(enumName) : String {\n"
         
-        for name in assetNames {
+        for name in imageNames {
             let caseName = name.asSwiftIdentifier(forbiddenChars: "_")
             text += "\(t)\(t)case \(caseName) = \"\(name)\"\n"
         }
@@ -60,8 +60,8 @@ public final class AssetsEnumBuilder {
         
         text += "\(t)}\n\n"
         
-        text += "\(t)convenience init(asset: \(enumName)) {\n"
-        text += "\(t)\(t)self.init(named: asset.rawValue)!\n"
+        text += "\(t)convenience init!(asset: \(enumName)) {\n"
+        text += "\(t)\(t)self.init(named: asset.rawValue)\n"
         text += "\(t)}\n"
         text += "}\n"
         

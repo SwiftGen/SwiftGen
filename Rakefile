@@ -73,18 +73,18 @@ namespace :playground do
     sh 'rm -rf SwiftGen.playground/Resources'
     sh 'mkdir SwiftGen.playground/Resources'
   end
-  task :assets do
+  task :images do
     sh %Q(#{dev_dir} xcrun actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text UnitTests/fixtures/Images.xcassets)
   end
   task :storyboard do
     sh %Q(#{dev_dir} xcrun ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO UnitTests/fixtures/Wizard.storyboard)
   end
-  task :localizable do
+  task :strings do
     sh %Q(#{dev_dir} xcrun plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings UnitTests/fixtures/Localizable.strings)
   end
 
   desc "Regenerate all the Playground resources based on the test fixtures.\nThis compiles the needed fixtures and place them in SwiftGen.playground/Resources"
-  task :resources => %w(clean assets storyboard localizable)
+  task :resources => %w(clean images storyboard strings)
 end
 
 ###########################################################
