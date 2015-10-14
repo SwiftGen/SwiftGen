@@ -2,7 +2,17 @@
 
 ---
 
-## Master
+## 0.5.0
+
+#### New Features
+
+* Migrating to [Commander](https://github.com/kylef/Commander) to parse the CLI arguments. ([23](https://github.com/AliSoftware/SwiftGen/issues/23), [#30](https://github.com/AliSoftware/SwiftGen/issues/30))
+* `swiftgen` is now a single binary, and the subcommand names have changed to be more consistent. ([#30](https://github.com/AliSoftware/SwiftGen/issues/30))
+* New `--output` option. ([#30](https://github.com/AliSoftware/SwiftGen/issues/30))
+
+> You must now use the subcommands `swiftgen images`, `swiftgen strings`, `swiftgen storyboards` and `swiftgen colors`. See `swiftgen --help` for more usage info.
+
+#### Fixes
 
 * Fix color parsing with absent alpha  
 [@Igor-Palaguta](https://github.com/Igor-Palaguta), [#28](https://github.com/AliSoftware/SwiftGen/pull/28)
