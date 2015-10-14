@@ -6,7 +6,7 @@
 
 import Foundation
 
-public final class L10nEnumBuilder {
+public final class StringEnumBuilder {
     public init() {}
 
     public func addEntry(entry: Entry) {
@@ -120,7 +120,7 @@ public final class L10nEnumBuilder {
         }
         
         public static func fromFormatString(format: String) -> [PlaceholderType] {
-            return L10nEnumBuilder.typesFromFormatString(format)
+            return StringEnumBuilder.typesFromFormatString(format)
         }
     }
     
