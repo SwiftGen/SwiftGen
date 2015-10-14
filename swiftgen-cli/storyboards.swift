@@ -1,9 +1,7 @@
 //
-//  storyboards.swift
-//  SwiftGen
-//
-//  Created by Olivier Halligon on 12/10/2015.
-//  Copyright © 2015 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright (c) 2015 Olivier Halligon
+// MIT Licence
 //
 
 import Foundation
