@@ -19,8 +19,10 @@ This is a suite of tools written in Swift 2 to auto-generate Swift 2 code for va
 Clone the repository and use `rake` to build the tool.
 
 ```sh
-# will install the binary in `/usr/local/bin` and the Frameworks in `/usr/local/Frameworks`
-$ rake install[/usr/local]
+# will install the binary in `/usr/local/bin` and the frameworks in `/usr/local/Frameworks`
+$ rake install
+# will install the binary in `~/bin` and the frameworks in `~/lib`
+$ rake install[~/bin,~/lib]
 ```
 
 > With this solution you're sure to build and install the latest version from `master`.

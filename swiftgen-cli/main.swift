@@ -32,9 +32,14 @@ func pathExists(type: PathType?)(path: String) throws -> String {
 
 // MARK: - Main
 
+let version: String = {
+    let info = NSBundle(forClass: GenumKit.AssetsEnumBuilder.self).infoDictionary
+    return info.flatMap { $0["CFBundleShortVersionString"] as? String } ?? "0.0"
+}()
+
 Group {
     $0.addCommand("storyboards", storyboardsCommand)
     $0.addCommand("images", imagesCommand)
     $0.addCommand("colors", colorsCommand)
     $0.addCommand("strings", stringsCommand)
-}.run("SwiftGen v\(GenumKitVersionNumber)")
+}.run("SwiftGen v\(version)")
