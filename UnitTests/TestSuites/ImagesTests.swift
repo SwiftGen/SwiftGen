@@ -24,7 +24,7 @@ class ImagesTests: XCTestCase {
         enumBuilder.addImageName("2-pears")
         let result = enumBuilder.build()
         
-        let expected = self.fixtureString("ImagesEntriesDefaults.swift.out")
+        let expected = self.fixtureString("Images-Entries-Defaults.swift.out")
         XCTDiffStrings(result, expected)
     }
 
@@ -33,7 +33,7 @@ class ImagesTests: XCTestCase {
         enumBuilder.parseDirectory(fixturePath("Images.xcassets"))
         let result = enumBuilder.build()
         
-        let expected = self.fixtureString("ImagesFileDefaults.swift.out")
+        let expected = self.fixtureString("Images-File-Defaults.swift.out")
         XCTDiffStrings(result, expected)
     }
 

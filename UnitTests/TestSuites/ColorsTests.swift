@@ -18,7 +18,7 @@ class ColorsTests: XCTestCase {
         enumBuilder.addColorWithName("ArticleBackground", value: "#ffcc0099")
         let result = enumBuilder.build()
         
-        let expected = self.fixtureString("ColorsListDefaults.swift.out")
+        let expected = self.fixtureString("Colors-List-Defaults.swift.out")
         XCTDiffStrings(result, expected)
     }
 
@@ -27,7 +27,7 @@ class ColorsTests: XCTestCase {
         try! enumBuilder.parseTextFile(fixturePath("colors.txt"))
         let result = enumBuilder.build()
         
-        let expected = self.fixtureString("ColorsFileDefaults.swift.out")
+        let expected = self.fixtureString("Colors-File-Defaults.swift.out")
         XCTDiffStrings(result, expected)
     }
 
