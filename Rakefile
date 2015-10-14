@@ -6,63 +6,62 @@ def dev_dir
   %Q(DEVELOPER_DIR=#{xcode7.last.shellescape})
 end
 
-def build(scheme, install_root, install_dir)
-  puts "\n== #{scheme} =="
-  install_paths = "DSTROOT=#{install_root.shellescape} INSTALL_PATH=#{install_dir.shellescape}"
-  cmd = %Q(#{dev_dir} xcodebuild -project SwiftGen.xcodeproj -scheme #{scheme} -sdk macosx install #{install_paths})
-  if verbose == true
-    sh cmd # Verbose shell
-  else
-    puts cmd
-    `#{cmd} 2>/dev/null` # Quiet shell
+def xcrun(cmd)
+  full_cmd = "#{dev_dir} xcrun #{cmd}"
+  if `which xcpretty` && $?.success?
+    full_cmd = "set -o pipefail && #{full_cmd} | xcpretty -c"
   end
+  sh full_cmd
 end
 
 ###########################################################
 
-task :mkinstalldir, [:install_root, :dir] do |_, args|
-  args.with_defaults(:install_root => '.', :dir => '/bin')
-  dir = "#{args.install_root}#{args.dir}"
-  `[ -d #{dir.shellescape} ] || mkdir #{dir.shellescape}`
+BIN_NAME = 'swiftgen'
+DEPENDENCIES = [:GenumKit, :Commander]
+CONFIGURATION = 'Release'
+BUILD_DIR = 'build/' + CONFIGURATION
+
+
+
+desc "Build the CLI binary and its Frameworks in #{BUILD_DIR}"
+task :build => DEPENDENCIES do |_, args|
+  frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
+  xcrun %Q(-sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} -F #{BUILD_DIR}/ #{frameworks} swiftgen-cli/*.swift)
 end
 
-TOOLS_LIST = %w(l10n storyboard colors assets)
-
-namespace :swiftgen do
-  TOOLS_LIST.each do |tool|
-    scheme = "swiftgen-#{tool}"
-    desc "Build and install #{scheme} in ${install_root}${dir}.\n(install_root defaults to '.' and dir defaults to '/bin')"
-    task tool, [:install_root, :dir] => :mkinstalldir do |_, args|
-      args.with_defaults(:install_root => '.', :dir => '/bin')
-      build(scheme, args.install_root, args.dir)
-    end
+DEPENDENCIES.each do |fmk|
+  # desc "Build #{fmk}.framework"
+  task fmk do
+    xcrun %Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION})
   end
 end
 
-namespace :tests do
-  TOOLS_LIST.each do |tool|
-    scheme = "swiftgen-#{tool}"
-    desc "Run Unit Tests for #{scheme}"
-    task tool do
-      sh %Q(#{dev_dir} xcodebuild -project SwiftGen.xcodeproj -scheme #{scheme} -sdk macosx test)
-    end
+
+desc "Build the CLI and Framework, and install them in $dir/bin and $dir/Frameworks"
+task :install, [:dir] => :build do |_, args|
+  args.with_defaults(:dir => '/usr/local')
+  puts "== Installing to #{args.dir} =="
+  sh %Q(mkdir -p "#{args.dir}/bin")
+  sh %Q(cp -f "#{BUILD_DIR}/#{BIN_NAME}" "#{args.dir}/bin/")
+  sh %Q(mkdir -p "#{args.dir}/Frameworks")
+  DEPENDENCIES.each do |fmk|
+    sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}.framework" "#{args.dir}/Frameworks/")
   end
+  sh %Q(install_name_tool -add_rpath "@executable_path/../Frameworks" "#{args.dir}/bin/#{BIN_NAME}")
+  puts "\n  > Binary available in #{args.dir}/bin/#{BIN_NAME}"
 end
 
-###########################################################
-
-desc 'Build and install all executables in ${install_root}${dir}.'
-task :install, [:install_root, :dir] => %w(swiftgen:l10n swiftgen:storyboard swiftgen:colors swiftgen:assets)
-
-desc 'Run Unit Tests for all the tools'
-task :tests => %w(tests:l10n tests:storyboard tests:colors tests:assets)
-
-task :default => [:all]
-
-desc "Build all executables in ./bin.\nThis is a synonym of `install[.,/bin]`."
-task :all do
-  Rake::Task[:install].invoke('.','/bin')
+desc "Run the Unit Tests"
+task :tests do
+  xcrun %Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen-cli -sdk macosx test)
 end
+
+desc "Delete the build/ directory"
+task :clean do
+  sh %Q(rm -fr build)
+end
+
+task :default => [:dependencies, :build]
 
 ###########################################################
 
@@ -72,13 +71,13 @@ namespace :playground do
     sh 'mkdir SwiftGen.playground/Resources'
   end
   task :assets do
-    sh %Q(#{dev_dir} xcrun actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text Tests/Assets/fixtures/Images.xcassets)
+    sh %Q(#{dev_dir} xcrun actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text UnitTests/fixtures/Images.xcassets)
   end
   task :storyboard do
-    sh %Q(#{dev_dir} xcrun ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO Tests/Storyboard/fixtures/Wizard.storyboard)
+    sh %Q(#{dev_dir} xcrun ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO UnitTests/fixtures/Wizard.storyboard)
   end
   task :localizable do
-    sh %Q(#{dev_dir} xcrun plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings Tests/L10n/fixtures/Localizable.strings)
+    sh %Q(#{dev_dir} xcrun plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings UnitTests/fixtures/Localizable.strings)
   end
 
   desc "Regenerate all the Playground resources based on the test fixtures.\nThis compiles the needed fixtures and place them in SwiftGen.playground/Resources"

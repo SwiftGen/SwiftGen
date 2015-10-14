@@ -1,4 +1,8 @@
 xcuserdata
-lib/
+
+build/
 bin/
+Frameworks/
+Rome/
+Carthage/
 
