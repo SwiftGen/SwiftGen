@@ -10,7 +10,7 @@ import Foundation
 import Commander
 import GenumKit
 
-let colors = command(
+let colorsCommand = command(
     outputOption,
     Argument<String>("FILE", description: "Colors.txt file to parse.", validator: pathExists(.File))
 ) { output, path in

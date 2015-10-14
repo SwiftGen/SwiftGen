@@ -10,7 +10,7 @@ import Foundation
 import Commander
 import GenumKit
 
-let storyboards = command(
+let storyboardsCommand = command(
     outputOption,
     Argument<String>("PATH", description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard", validator: pathExists(nil))
 ) { output, path in

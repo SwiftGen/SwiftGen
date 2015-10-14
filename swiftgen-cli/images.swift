@@ -10,7 +10,7 @@ import Foundation
 import Commander
 import GenumKit
 
-let assets = command(
+let imagesCommand = command(
     outputOption,
     Argument<String>("DIR", description: "Directory to scan for .imageset files.", validator: pathExists(.Directory))
 ) { output, path in
