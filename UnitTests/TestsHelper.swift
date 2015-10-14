@@ -38,10 +38,17 @@ extension XCTestCase {
     }
     
     func fixturePath(name: String) -> String {
-        return NSBundle(forClass: self.dynamicType).pathForResource(name, ofType: "")!
+        guard let path = NSBundle(forClass: self.dynamicType).pathForResource(name, ofType: "") else {
+            fatalError("Unable to find fixture \"\(name)\"")
+        }
+        return path
     }
 
     func fixtureString(name: String, encoding: UInt = NSUTF8StringEncoding) -> String {
-        return try! NSString(contentsOfFile: fixturePath(name), encoding: encoding) as String
+        do {
+            return try NSString(contentsOfFile: fixturePath(name), encoding: encoding) as String
+        } catch let e {
+            fatalError("Unable to load fixture content: \(e)")
+        }
     }
 }
