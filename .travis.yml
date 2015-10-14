@@ -12,3 +12,4 @@ install:
 
 script:
 - set -o pipefail && rake tests | xcpretty -c
+- pod lib lint --quick GenumKit/GenumKit.podspec
