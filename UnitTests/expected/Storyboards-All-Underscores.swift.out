@@ -44,8 +44,8 @@ extension UIStoryboard {
             }
 
             case Validate_Password = "Validate_Password"
-            static func validatePasswordViewController() -> UIViewController {
-                return Wizard.ValidatePassword.viewController()
+            static func validate_PasswordViewController() -> UIViewController {
+                return Wizard.Validate_Password.viewController()
             }
 
             case Preferences = "Preferences"
