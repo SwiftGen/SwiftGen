@@ -66,10 +66,41 @@ class StringsTests: XCTestCase {
         XCTDiffStrings(result, expected)
     }
     
+    func testLinesWithUnderscore() {
+        
+        let enumBuilder = StringEnumBuilder()
+        if let e = StringEnumBuilder.Entry(line: "\"APP_TITLE\"    =   \"My awesome title\"  ; // Yeah") {
+            enumBuilder.addEntry(e)
+        }
+        if let e = StringEnumBuilder.Entry(line: "\"GREETINGS_AND_AGE\"=\"My name is %@, I am %d\";/* hello */") {
+            enumBuilder.addEntry(e)
+        }
+
+        let result = enumBuilder.build(forbiddenChars: "")
+        
+        let expected = self.fixtureString("Strings-Lines-Underscore.swift.out")
+        
+        XCTAssertEqual(result, expected)
+        XCTDiffStrings(result, expected)
+    }
     
+    func testLinesWithExcludeUnderscore() {
+        
+        let enumBuilder = StringEnumBuilder()
+        if let e = StringEnumBuilder.Entry(line: "\"APP_TITLE\"    =   \"My awesome title\"  ; // Yeah") {
+            enumBuilder.addEntry(e)
+        }
+        if let e = StringEnumBuilder.Entry(line: "\"GREETINGS_AND_AGE\"=\"My name is %@, I am %d\";/* hello */") {
+            enumBuilder.addEntry(e)
+        }
+        
+        let result = enumBuilder.build(forbiddenChars: "_")
+        
+        let expected = self.fixtureString("Strings-Lines-ExcludeUnderscore.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+
     ////////////////////////////////////////////////////////////////////////
-    
-    
     
     func testParseStringPlaceholder() {
         let placeholders = StringEnumBuilder.PlaceholderType.fromFormatString("%@")
