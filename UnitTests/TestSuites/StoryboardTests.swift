@@ -50,4 +50,13 @@ class StoryboardTests: XCTestCase {
         let expected = self.fixtureString("Storyboards-Message-CustomIndentation.swift.out")
         XCTDiffStrings(result, expected)
     }
+   
+    func testAllWithUnderscores() {
+        let enumBuilder = StoryboardEnumBuilder()
+        enumBuilder.parseDirectory(self.fixturesDir)
+        let result = enumBuilder.build(forbiddenChars: "")
+        
+        let expected = self.fixtureString("Storyboards-All-Underscores.swift.out")
+        XCTDiffStrings(result, expected)
+    }
 }
