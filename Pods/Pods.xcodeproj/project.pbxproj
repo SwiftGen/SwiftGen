@@ -10,29 +10,29 @@
 		08030AC9254DA1DBBDE19C49BA409B3C /* Pods-UnitTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4500F30C4160370D509B784106DD200F /* Pods-UnitTests-dummy.m */; };
 		08FF45424554BCED7C9ACD4FFBF71681 /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1069D71384F68CA3F772B57261762A /* Commands.swift */; };
 		093C29024902027B61452E3BF41405C4 /* ArgumentParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC543D2C6A6EDFBEB9396C64BCD367CD /* ArgumentParser.swift */; };
+		294F6896D4EC1D6AE26964CAE07A597A /* GenumKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 840683673104B629B057454804F0D147 /* GenumKit-dummy.m */; };
+		35D1107F969FBDE861C0C34885A431E0 /* StoryboardEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E66543A3272B34343C15364E706DF9 /* StoryboardEnumBuilder.swift */; };
 		3B2ECF7460E67C7801B2584EAE6EC44C /* ArgumentDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3B8AAC18569A7CE90745E427A5DA27 /* ArgumentDescription.swift */; };
 		3C6318AE50F98BCF6CAD6A01C922B9C0 /* Commander.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AF64C40CBEF4F9FDE6B1B12D1F057FC /* Commander.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55F69C2C7CC74F5F693A7A6518D41386 /* Indentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB3FC15B041E57334F2B5BE28EEE6BD /* Indentation.swift */; };
-		5A4C1C454A3EC85F9400679486EFB548 /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A12B8403145AD56F8DD0AC6016276F8 /* SwiftIdentifier.swift */; };
+		42C6DCC03996DC99244628FF599960D4 /* StringEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FDB87DD7705A9487DB1BBF3BAE020C /* StringEnumBuilder.swift */; };
 		670C8E6D05EB1072D413F59DE60A7E3F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA6EBC2E57D96052268211209D6AA52 /* Cocoa.framework */; };
 		6AA9740299155BD08CA4B9800C97A603 /* Pods-UnitTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A26D149F1BEED6163EA7E96B1C6ADA2B /* Pods-UnitTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D93AD46D49B84B538841E968751BD8D /* GenumKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF34E5CF21ACDC596668EE535D3A248 /* GenumKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8CC90BF9A0EAEB25FFA59D99CD9745BF /* ImageEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DFDDB8658BFF3404F1CEDE9DA0C231 /* ImageEnumBuilder.swift */; };
+		77E853C9ABF90074642479BAD51F4304 /* SwiftIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A12B8403145AD56F8DD0AC6016276F8 /* SwiftIdentifier.swift */; };
+		A43540B0F621925B06D14658C9332B34 /* Indentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB3FC15B041E57334F2B5BE28EEE6BD /* Indentation.swift */; };
 		AC67D06919758EF36E4EBBB0E344424C /* ArgumentConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE8132A2B32D0FD2752F4109BDB2D4C /* ArgumentConvertible.swift */; };
+		AE60F5C32D9A5291323FC5F64A2F2A48 /* ImageEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16AA5AD9F7733CA7D556D004523391 /* ImageEnumBuilder.swift */; };
 		B200F700E99372D5C51F3C98E09B29B4 /* Pods-swiftgen-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E7941FF308914D4E806F12A9F0A0E1C6 /* Pods-swiftgen-dummy.m */; };
 		B7DE858C5EB6E43B9BFC30D949555519 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA6EBC2E57D96052268211209D6AA52 /* Cocoa.framework */; };
-		C69685F21C1DD9E369C7F0A0499ADA9B /* GenumKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 840683673104B629B057454804F0D147 /* GenumKit-dummy.m */; };
 		C7DF1340BF44CA293A5214BBFD43FBB4 /* Commander-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AEEE8A7246D5DCC28387A2776270E9 /* Commander-dummy.m */; };
 		CA554D88CF7BD09CB52BA20FED119DED /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA6EBC2E57D96052268211209D6AA52 /* Cocoa.framework */; };
 		D1D2E9794DB22E377F95E279DE593DD2 /* CommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FA4EF8ABD014EBA7EB22C43F04A5BF /* CommandType.swift */; };
 		D2DF307E0C71F45E5C504F02206F003E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A837C6D6E6E01B5BFF75EAC852B440 /* Group.swift */; };
-		D99943956200D0D03E7D9099FACFB897 /* StringEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A71846477499F59EC2859D95C6569E /* StringEnumBuilder.swift */; };
 		DC7CBA9921A3A8BEB1F1477B0CC94081 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA6EBC2E57D96052268211209D6AA52 /* Cocoa.framework */; };
-		DD18B321106F79960C072E8F7C1113A5 /* StoryboardEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33B29AD04C55921118C8D8596FDB04C /* StoryboardEnumBuilder.swift */; };
 		E1A4BCBC106137E6C5F3D111A61C2500 /* CommandDarwin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585144C463668659A16D670AFA8DBA1D /* CommandDarwin.swift */; };
 		E66552D501A68C4BF2D503D495A40573 /* Commander-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 19DB170C7E7480C2F39CE518A2E7D93A /* Commander-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E774FA3B2EC8FE62350545AA4CDA6E11 /* ColorEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DABDB3BD5BCFC50B497A5C21AB13AC /* ColorEnumBuilder.swift */; };
 		ED11684CA6B330D2B2EA5E9DF86CAE4E /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D356EB681E4247839FFB5F8BC39AFE9 /* Command.swift */; };
+		F098F4D5461C50C50B47BB69B5AAB01C /* ColorEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6FAFA35FAC43D086859F469C77E857 /* ColorEnumBuilder.swift */; };
 		F61B4E79A8A3F39C4EE5A3494D5AE8EB /* Pods-swiftgen-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DD227BB696CD77975C6977ABFE31498D /* Pods-swiftgen-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -62,18 +62,19 @@
 
 /* Begin PBXFileReference section */
 		00FA4EF8ABD014EBA7EB22C43F04A5BF /* CommandType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CommandType.swift; path = Commander/CommandType.swift; sourceTree = "<group>"; };
-		08DABDB3BD5BCFC50B497A5C21AB13AC /* ColorEnumBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ColorEnumBuilder.swift; sourceTree = "<group>"; };
 		170957DF72214293FB0890D7B49E4D1D /* Pods-swiftgen-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-swiftgen-acknowledgements.plist"; sourceTree = "<group>"; };
 		19DB170C7E7480C2F39CE518A2E7D93A /* Commander-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Commander-umbrella.h"; sourceTree = "<group>"; };
 		1C3B8AAC18569A7CE90745E427A5DA27 /* ArgumentDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArgumentDescription.swift; path = Commander/ArgumentDescription.swift; sourceTree = "<group>"; };
+		1C6FAFA35FAC43D086859F469C77E857 /* ColorEnumBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ColorEnumBuilder.swift; sourceTree = "<group>"; };
 		1CA6EBC2E57D96052268211209D6AA52 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		205991245E3269E5CB482C64AA22DA1B /* Pods-UnitTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-UnitTests.modulemap"; sourceTree = "<group>"; };
 		23C0A5E701A35BD5223C5EE78CCF316F /* GenumKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenumKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		24DFDDB8658BFF3404F1CEDE9DA0C231 /* ImageEnumBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageEnumBuilder.swift; sourceTree = "<group>"; };
 		2B2ACEE45F1BA7831D09E86C6D12735F /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D652E4769C757F9FC7D6633C01B6484 /* Pods-swiftgen-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-swiftgen-resources.sh"; sourceTree = "<group>"; };
+		33E66543A3272B34343C15364E706DF9 /* StoryboardEnumBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StoryboardEnumBuilder.swift; sourceTree = "<group>"; };
 		3A12B8403145AD56F8DD0AC6016276F8 /* SwiftIdentifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SwiftIdentifier.swift; sourceTree = "<group>"; };
 		3AF64C40CBEF4F9FDE6B1B12D1F057FC /* Commander.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Commander.h; path = Commander/Commander.h; sourceTree = "<group>"; };
+		44FDB87DD7705A9487DB1BBF3BAE020C /* StringEnumBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StringEnumBuilder.swift; sourceTree = "<group>"; };
 		4500F30C4160370D509B784106DD200F /* Pods-UnitTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-UnitTests-dummy.m"; sourceTree = "<group>"; };
 		4D356EB681E4247839FFB5F8BC39AFE9 /* Command.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Command.swift; path = Commander/Command.swift; sourceTree = "<group>"; };
 		5240EAEA9887F6A89F8758ED754682BA /* Pods-swiftgen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-swiftgen.debug.xcconfig"; sourceTree = "<group>"; };
@@ -82,10 +83,10 @@
 		585144C463668659A16D670AFA8DBA1D /* CommandDarwin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CommandDarwin.swift; path = Commander/CommandDarwin.swift; sourceTree = "<group>"; };
 		5CC074022D7BB121F89DBCA7264CBC7D /* Pods-swiftgen-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-swiftgen-frameworks.sh"; sourceTree = "<group>"; };
 		606597DD93FB3114A85501767D86723B /* GenumKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GenumKit-prefix.pch"; sourceTree = "<group>"; };
-		61A71846477499F59EC2859D95C6569E /* StringEnumBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StringEnumBuilder.swift; sourceTree = "<group>"; };
 		682970AD7B683DB436E11EF98CE224AE /* Pods-swiftgen.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-swiftgen.modulemap"; sourceTree = "<group>"; };
 		7DEA9D2E76CB08D182925AE168B236B4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		840683673104B629B057454804F0D147 /* GenumKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GenumKit-dummy.m"; sourceTree = "<group>"; };
+		8A16AA5AD9F7733CA7D556D004523391 /* ImageEnumBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageEnumBuilder.swift; sourceTree = "<group>"; };
 		8B74F8229B5D50FA767E5A30FB2E10B5 /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8BD5BFBC22ED1AB696625CE7C6B2B84A /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF34E5CF21ACDC596668EE535D3A248 /* GenumKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GenumKit-umbrella.h"; sourceTree = "<group>"; };
@@ -111,7 +112,6 @@
 		EAB3FC15B041E57334F2B5BE28EEE6BD /* Indentation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Indentation.swift; sourceTree = "<group>"; };
 		ED01388310088794AC307D589658FC57 /* Commander.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Commander.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEF3677E032C35C8EE734727F40E312B /* Pods-swiftgen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-swiftgen.release.xcconfig"; sourceTree = "<group>"; };
-		F33B29AD04C55921118C8D8596FDB04C /* StoryboardEnumBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StoryboardEnumBuilder.swift; sourceTree = "<group>"; };
 		F81550872F0AFC1B2073A3B2B8CFDB61 /* Pods-UnitTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-UnitTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		FCBA3993C5B2747ABAD7BA740866E184 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -226,17 +226,6 @@
 			path = "Target Support Files/Pods-UnitTests";
 			sourceTree = "<group>";
 		};
-		60FE3411F75283B1CD0C324CFC921EE7 /* EnumBuilders */ = {
-			isa = PBXGroup;
-			children = (
-				24DFDDB8658BFF3404F1CEDE9DA0C231 /* ImageEnumBuilder.swift */,
-				08DABDB3BD5BCFC50B497A5C21AB13AC /* ColorEnumBuilder.swift */,
-				61A71846477499F59EC2859D95C6569E /* StringEnumBuilder.swift */,
-				F33B29AD04C55921118C8D8596FDB04C /* StoryboardEnumBuilder.swift */,
-			);
-			path = EnumBuilders;
-			sourceTree = "<group>";
-		};
 		6F7183954FF8A0C3DB6A72494B7DE4FC /* Commander */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,7 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				557167340748E9A454C89886897A79E9 /* Core */,
-				60FE3411F75283B1CD0C324CFC921EE7 /* EnumBuilders */,
+				EE0C19D1AA1674E6BB879FDC8CE56A45 /* EnumBuilders */,
 				1A5428915FFDA5613B909AC239DFD1FC /* Support Files */,
 			);
 			name = GenumKit;
@@ -326,6 +315,17 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Commander";
+			sourceTree = "<group>";
+		};
+		EE0C19D1AA1674E6BB879FDC8CE56A45 /* EnumBuilders */ = {
+			isa = PBXGroup;
+			children = (
+				1C6FAFA35FAC43D086859F469C77E857 /* ColorEnumBuilder.swift */,
+				8A16AA5AD9F7733CA7D556D004523391 /* ImageEnumBuilder.swift */,
+				33E66543A3272B34343C15364E706DF9 /* StoryboardEnumBuilder.swift */,
+				44FDB87DD7705A9487DB1BBF3BAE020C /* StringEnumBuilder.swift */,
+			);
+			path = EnumBuilders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -425,7 +425,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB916562708EA140781C8E55EF2C9598 /* Build configuration list for PBXNativeTarget "GenumKit" */;
 			buildPhases = (
-				FCC164515AD74D025F13D6CE6F60AFF8 /* Sources */,
+				99F350D509C60C8868A33C1CE2FB6BEF /* Sources */,
 				2DE57952808340BA66856F938AD037B2 /* Frameworks */,
 				BCB47E0A1577A39360074002A9C6D876 /* Headers */,
 			);
@@ -492,25 +492,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		99F350D509C60C8868A33C1CE2FB6BEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F098F4D5461C50C50B47BB69B5AAB01C /* ColorEnumBuilder.swift in Sources */,
+				294F6896D4EC1D6AE26964CAE07A597A /* GenumKit-dummy.m in Sources */,
+				AE60F5C32D9A5291323FC5F64A2F2A48 /* ImageEnumBuilder.swift in Sources */,
+				A43540B0F621925B06D14658C9332B34 /* Indentation.swift in Sources */,
+				35D1107F969FBDE861C0C34885A431E0 /* StoryboardEnumBuilder.swift in Sources */,
+				42C6DCC03996DC99244628FF599960D4 /* StringEnumBuilder.swift in Sources */,
+				77E853C9ABF90074642479BAD51F4304 /* SwiftIdentifier.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D32DAD7949B878CBF3E65AB1204AE8F2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				08030AC9254DA1DBBDE19C49BA409B3C /* Pods-UnitTests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FCC164515AD74D025F13D6CE6F60AFF8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8CC90BF9A0EAEB25FFA59D99CD9745BF /* ImageEnumBuilder.swift in Sources */,
-				E774FA3B2EC8FE62350545AA4CDA6E11 /* ColorEnumBuilder.swift in Sources */,
-				C69685F21C1DD9E369C7F0A0499ADA9B /* GenumKit-dummy.m in Sources */,
-				55F69C2C7CC74F5F693A7A6518D41386 /* Indentation.swift in Sources */,
-				D99943956200D0D03E7D9099FACFB897 /* StringEnumBuilder.swift in Sources */,
-				DD18B321106F79960C072E8F7C1113A5 /* StoryboardEnumBuilder.swift in Sources */,
-				5A4C1C454A3EC85F9400679486EFB548 /* SwiftIdentifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

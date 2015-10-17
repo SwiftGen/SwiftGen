@@ -1,6 +1,6 @@
 PODS:
   - Commander (0.2.2)
-  - GenumKit (0.5.0)
+  - GenumKit (0.5.1)
 
 DEPENDENCIES:
   - Commander
@@ -12,6 +12,6 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Commander: 3634740c4e1ed3a76ff55426424950e4c8a822e0
-  GenumKit: 50007ccd336c3887a503527d4facd07b6183bc62
+  GenumKit: 083ec2a78fc09b43e9af1a58b9637e62062791f0
 
 COCOAPODS: 0.39.0

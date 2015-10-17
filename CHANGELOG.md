@@ -2,6 +2,13 @@
 
 ---
 
+## 0.5.1
+
+#### Fixes
+
+* Installing via `rake install` or `brew install` will now copy the Swift dylibs too, so that `swiftgen` installation won't depend on the location of your Xcode.app (so it'll work on every machine even if you rename your Xcode).
+* Fixed links in Playground and Licence headers in source code.
+
 ## 0.5.0
 
 #### New Features
