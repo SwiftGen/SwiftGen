@@ -1,9 +1,9 @@
 //: #### Other pages
 //:
-//: * [Demo for swiftgen-l10n](L10n-Demo)
-//: * [Demo for swiftgen-assets](Assets-Demo)
-//: * Demo for swiftgen-storyboard
-//: * [Demo for swiftgen-colors](Colors-Demo)
+//: * [Demo for `swiftgen strings`](Strings-Demo)
+//: * [Demo for `swiftgen images`](Images-Demo)
+//: * Demo for `swiftgen storyboards`
+//: * [Demo for `swiftgen colors`](Colors-Demo)
 
 import UIKit
 

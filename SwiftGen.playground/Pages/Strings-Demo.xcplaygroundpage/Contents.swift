@@ -1,9 +1,9 @@
 //: #### Other pages
 //:
-//: * Demo for swiftgen-l10n
-//: * [Demo for swiftgen-assets](Assets-Demo)
-//: * [Demo for swiftgen-storyboard](Storyboard-Demo)
-//: * [Demo for swiftgen-colors](Colors-Demo)
+//: * Demo for `swiftgen strings`
+//: * [Demo for `swiftgen images`](Images-Demo)
+//: * [Demo for `swiftgen storyboards`](Storyboards-Demo)
+//: * [Demo for `swiftgen colors`](Colors-Demo)
 
 import Foundation
 
