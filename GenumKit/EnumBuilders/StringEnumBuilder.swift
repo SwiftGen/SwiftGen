@@ -23,7 +23,7 @@ public final class StringEnumBuilder {
         }
     }
     
-    public func build(enumName enumName : String = "L10n", indentation indent : Indentation = .Spaces(4)) -> String {
+    public func build(enumName enumName : String = "L10n", indentation indent : Indentation = .Spaces(4), forbiddenChars : String = "_") -> String {
         var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
         text += "import Foundation\n\n"
         
@@ -36,7 +36,7 @@ public final class StringEnumBuilder {
         text += "enum \(enumName.asSwiftIdentifier()) {\n"
         
         for entry in parsedLines {
-            let caseName = entry.key.asSwiftIdentifier(forbiddenChars: "_")
+            let caseName = entry.key.asSwiftIdentifier(forbiddenChars: forbiddenChars)
             text += "\(t)case \(caseName)"
             if !entry.types.isEmpty {
                 text += "(" + entry.types.map{ $0.rawValue }.joinWithSeparator(", ") + ")"
@@ -54,7 +54,7 @@ public final class StringEnumBuilder {
         text += "\(t)\(t)switch self {\n"
         
         for entry in parsedLines {
-            let caseName = entry.key.asSwiftIdentifier(forbiddenChars: "_")
+            let caseName = entry.key.asSwiftIdentifier(forbiddenChars: forbiddenChars)
             text += "\(t)\(t)\(t)case .\(caseName)"
             if !entry.types.isEmpty {
                 let params = (0..<entry.types.count).map { "let p\($0)" }

@@ -32,7 +32,7 @@ public final class ImageEnumBuilder {
         }
     }
     
-    public func build(enumName enumName : String = "Asset", indentation indent : Indentation = .Spaces(4)) -> String {
+    public func build(enumName enumName : String = "Asset", indentation indent : Indentation = .Spaces(4), forbiddenChars : String = "_") -> String {
         var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
         let t = indent.string
         
@@ -49,7 +49,7 @@ public final class ImageEnumBuilder {
         text += "\(t)enum \(enumName) : String {\n"
         
         for name in imageNames {
-            let caseName = name.asSwiftIdentifier(forbiddenChars: "_")
+            let caseName = name.asSwiftIdentifier(forbiddenChars: forbiddenChars)
             text += "\(t)\(t)case \(caseName) = \"\(name)\"\n"
         }
         

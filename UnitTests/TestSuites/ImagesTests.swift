@@ -35,4 +35,26 @@ class ImagesTests: XCTestCase {
         XCTDiffStrings(result, expected)
     }
 
+    func testEntriesWithUnderscore() {
+        let enumBuilder = ImageEnumBuilder()
+        enumBuilder.addImageName("Green_Apple")
+        enumBuilder.addImageName("Red_Apple")
+        enumBuilder.addImageName("2 pears")
+        let result = enumBuilder.build(forbiddenChars: "")
+        
+        let expected = self.fixtureString("Images-Entries-Underscore.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+
+    func testEntriesWithExcludeUnderscore() {
+        let enumBuilder = ImageEnumBuilder()
+        enumBuilder.addImageName("Green_Apple")
+        enumBuilder.addImageName("Red_Apple")
+        enumBuilder.addImageName("2 pears")
+        let result = enumBuilder.build(forbiddenChars: "_")
+        
+        let expected = self.fixtureString("Images-Entries-ExcludeUnderscore.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+
 }
