@@ -16,16 +16,22 @@ This is a suite of tools written in Swift 2 to auto-generate Swift 2 code for va
 
 ### Compile from source
 
-Clone the repository and use `rake` to build the tool.
+Clone the repository and use `rake` to build the tool.  
+With this solution you're sure to build and install the latest version from `master`.
 
 ```sh
-# will install the binary in `/usr/local/bin` and the frameworks in `/usr/local/Frameworks`
+# will install the binary in `/usr/local/bin` and the frameworks & dylibs in `/usr/local/lib`
 $ rake install
-# will install the binary in `~/bin` and the frameworks in `~/lib`
+# will install the binary in `~/bin` and the frameworks & dylibs in `~/lib`
 $ rake install[~/bin,~/lib]
+# same as the previous commands, but don't copy the Swift dylibs (see below)
+$ rake install:light
+# or `rake install:light[~/bin,~/lib]` to install in specific locations
 ```
 
-> With this solution you're sure to build and install the latest version from `master`.
+> **Note:** If you use `rake install:light`, the binary won't copy the Swift dylibs and will instead use the ones in the `Xcode.app` bundle that was used to compile SwiftGen.  
+> This will reduce the install size by ~5Mo, but requires that you don't rename or move your `Xcode.app` after SwiftGen installation (otherwise you'll need to reinstall SwiftGen).  
+
 
 ### Via Homebrew
 
@@ -34,6 +40,8 @@ You can also install SwiftGen via [Homebrew](http://brew.sh):
 ```sh
 $ brew install swiftgen
 ```
+
+> This installs the standalone version of SwiftGen (much like `rake install:standalone` and doesn't require your Xcode to be installed anywhere or not renamed or whatnot.
 
 ## Usage
 
