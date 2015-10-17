@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0911502B1BD2931700EBC803 /* Images-Entries-ExcludeUnderscore.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 091150261BD2931700EBC803 /* Images-Entries-ExcludeUnderscore.swift.out */; settings = {ASSET_TAGS = (); }; };
+		0911502C1BD2931700EBC803 /* Images-Entries-Underscore.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 091150271BD2931700EBC803 /* Images-Entries-Underscore.swift.out */; settings = {ASSET_TAGS = (); }; };
+		0911502D1BD2931700EBC803 /* Storyboards-All-Underscores.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 091150281BD2931700EBC803 /* Storyboards-All-Underscores.swift.out */; settings = {ASSET_TAGS = (); }; };
+		0911502E1BD2931700EBC803 /* Strings-Lines-ExcludeUnderscore.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 091150291BD2931700EBC803 /* Strings-Lines-ExcludeUnderscore.swift.out */; settings = {ASSET_TAGS = (); }; };
+		0911502F1BD2931700EBC803 /* Strings-Lines-Underscore.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 0911502A1BD2931700EBC803 /* Strings-Lines-Underscore.swift.out */; settings = {ASSET_TAGS = (); }; };
 		09A87B481BCC9BAD00D9B9F5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7B2D31BCC382800D7F488 /* main.swift */; settings = {ASSET_TAGS = (); }; };
 		09A87B491BCC9BB200D9B9F5 /* OutputDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0901413C1BCC6464002E8617 /* OutputDestination.swift */; settings = {ASSET_TAGS = (); }; };
 		09A87B4A1BCC9BB200D9B9F5 /* storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0901413E1BCC64C9002E8617 /* storyboards.swift */; settings = {ASSET_TAGS = (); }; };
@@ -110,6 +115,11 @@
 		09030C2F1B6D4F8500275BF5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		09030C301B6D4FD200275BF5 /* Colors-File-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-File-Defaults.swift.out"; sourceTree = "<group>"; };
 		09030C311B6D504100275BF5 /* Images-File-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-File-Defaults.swift.out"; sourceTree = "<group>"; };
+		091150261BD2931700EBC803 /* Images-Entries-ExcludeUnderscore.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-Entries-ExcludeUnderscore.swift.out"; sourceTree = "<group>"; };
+		091150271BD2931700EBC803 /* Images-Entries-Underscore.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-Entries-Underscore.swift.out"; sourceTree = "<group>"; };
+		091150281BD2931700EBC803 /* Storyboards-All-Underscores.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-All-Underscores.swift.out"; sourceTree = "<group>"; };
+		091150291BD2931700EBC803 /* Strings-Lines-ExcludeUnderscore.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Lines-ExcludeUnderscore.swift.out"; sourceTree = "<group>"; };
+		0911502A1BD2931700EBC803 /* Strings-Lines-Underscore.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Lines-Underscore.swift.out"; sourceTree = "<group>"; };
 		095685EB1B6DA16200BF300C /* Strings-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-CustomName.swift.out"; sourceTree = "<group>"; };
 		095685ED1B6DA17300BF300C /* Strings-File-CustomIndentation.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-CustomIndentation.swift.out"; sourceTree = "<group>"; };
 		095685EF1B6DA32800BF300C /* Strings-Lines-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Lines-Defaults.swift.out"; sourceTree = "<group>"; };
@@ -207,10 +217,13 @@
 			children = (
 				09030C311B6D504100275BF5 /* Images-File-Defaults.swift.out */,
 				09E7146F1B6D707E007FF3CF /* Images-Entries-Defaults.swift.out */,
+				091150261BD2931700EBC803 /* Images-Entries-ExcludeUnderscore.swift.out */,
+				091150271BD2931700EBC803 /* Images-Entries-Underscore.swift.out */,
 				09030C091B6D30DB00275BF5 /* Storyboards-Message-Defaults.swift.out */,
 				09030C0F1B6D315C00275BF5 /* Storyboards-All-Defaults.swift.out */,
 				09030C131B6D3D5600275BF5 /* Storyboards-Message-CustomNames.swift.out */,
 				09030C151B6D414800275BF5 /* Storyboards-Message-CustomIndentation.swift.out */,
+				091150281BD2931700EBC803 /* Storyboards-All-Underscores.swift.out */,
 				09030C201B6D474C00275BF5 /* Colors-List-Defaults.swift.out */,
 				09030C301B6D4FD200275BF5 /* Colors-File-Defaults.swift.out */,
 				09030C261B6D492E00275BF5 /* Strings-Entries-Defaults.swift.out */,
@@ -218,6 +231,8 @@
 				095685EB1B6DA16200BF300C /* Strings-File-CustomName.swift.out */,
 				095685ED1B6DA17300BF300C /* Strings-File-CustomIndentation.swift.out */,
 				095685EF1B6DA32800BF300C /* Strings-Lines-Defaults.swift.out */,
+				091150291BD2931700EBC803 /* Strings-Lines-ExcludeUnderscore.swift.out */,
+				0911502A1BD2931700EBC803 /* Strings-Lines-Underscore.swift.out */,
 			);
 			path = expected;
 			sourceTree = "<group>";
@@ -355,13 +370,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0911502D1BD2931700EBC803 /* Storyboards-All-Underscores.swift.out in Resources */,
+				0911502C1BD2931700EBC803 /* Images-Entries-Underscore.swift.out in Resources */,
 				09A87B671BCCA4E600D9B9F5 /* colors.txt in Resources */,
+				0911502B1BD2931700EBC803 /* Images-Entries-ExcludeUnderscore.swift.out in Resources */,
 				09A87B681BCCA4E600D9B9F5 /* Colors-List-Defaults.swift.out in Resources */,
 				09A87B601BCCA4D100D9B9F5 /* Storyboards-Message-Defaults.swift.out in Resources */,
 				09A87B701BCCA5F600D9B9F5 /* Strings-Lines-Defaults.swift.out in Resources */,
 				09A87B5E1BCCA4D100D9B9F5 /* Message.storyboard in Resources */,
 				09A87B641BCCA4DC00D9B9F5 /* Images.xcassets in Resources */,
 				09A87B621BCCA4D100D9B9F5 /* Storyboards-Message-CustomNames.swift.out in Resources */,
+				0911502F1BD2931700EBC803 /* Strings-Lines-Underscore.swift.out in Resources */,
 				09A87B5F1BCCA4D100D9B9F5 /* Wizard.storyboard in Resources */,
 				09A87B6C1BCCA5F600D9B9F5 /* Strings-Entries-Defaults.swift.out in Resources */,
 				09A87B6F1BCCA5F600D9B9F5 /* Strings-File-CustomIndentation.swift.out in Resources */,
@@ -373,6 +392,7 @@
 				09A87B661BCCA4DC00D9B9F5 /* Images-Entries-Defaults.swift.out in Resources */,
 				09A87B611BCCA4D100D9B9F5 /* Storyboards-All-Defaults.swift.out in Resources */,
 				09A87B651BCCA4DC00D9B9F5 /* Images-File-Defaults.swift.out in Resources */,
+				0911502E1BD2931700EBC803 /* Strings-Lines-ExcludeUnderscore.swift.out in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
