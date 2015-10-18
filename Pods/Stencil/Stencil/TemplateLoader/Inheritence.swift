@@ -31,12 +31,12 @@ class ExtendsNode : NodeType {
   class func parse(parser:TokenParser, token:Token) throws -> NodeType {
     let bits = token.contents.componentsSeparatedByString("\"")
 
-    guard bits.count == 3 else {
+    if bits.count != 3 {
       throw TemplateSyntaxError("'extends' takes one argument, the template file to be extended")
     }
 
     let parsedNodes = try parser.parse()
-    guard (any(parsedNodes) { $0 is ExtendsNode }) == nil else {
+    if (any(parsedNodes) { ($0 as? ExtendsNode) != nil }) != nil {
       throw TemplateSyntaxError("'extends' cannot appear more than once in the same template")
     }
 
@@ -58,20 +58,22 @@ class ExtendsNode : NodeType {
   }
 
   func render(context: Context) throws -> String {
-    guard let loader = context["loader"] as? TemplateLoader else {
-      throw TemplateSyntaxError("Template loader not in context")
-    }
-    
-    guard let template = loader.loadTemplate(templateName) else {
-      let paths:String = loader.paths.map { $0.description }.joinWithSeparator(", ")
+    if let loader =  context["loader"] as? TemplateLoader {
+      if let template = loader.loadTemplate(templateName) {
+        let blockContext = BlockContext(blocks: blocks)
+        context.push([BlockContext.contextKey: blockContext])
+        let result = try template.render(context)
+        context.pop()
+        return result
+      }
+
+      let paths:String = loader.paths.map { path in
+        return path.description
+        }.joinWithSeparator(", ")
       throw TemplateSyntaxError("'\(templateName)' template not found in \(paths)")
     }
 
-    let blockContext = BlockContext(blocks: blocks)
-    context.push([BlockContext.contextKey: blockContext])
-    let result = try template.render(context)
-    context.pop()
-    return result
+    throw TemplateSyntaxError("Template loader not in context")
   }
 }
 
@@ -82,7 +84,7 @@ class BlockNode : NodeType {
   class func parse(parser:TokenParser, token:Token) throws -> NodeType {
     let bits = token.components()
 
-    guard bits.count == 2 else {
+    if bits.count != 2 {
       throw TemplateSyntaxError("'block' tag takes one argument, the template file to be included")
     }
 

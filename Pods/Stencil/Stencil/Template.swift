@@ -8,15 +8,12 @@ public class Template {
 
   /// Create a template with the given name inside the given bundle
   public convenience init(named:String, inBundle bundle:NSBundle? = nil) throws {
-    let url:NSURL
-
-    if let bundle = bundle {
-      url = bundle.URLForResource(named, withExtension: nil)!
+    let useBundle = bundle ??  NSBundle.mainBundle()
+    if let url = useBundle.URLForResource(named, withExtension: nil) {
+      try self.init(URL:url)
     } else {
-      url = NSBundle.mainBundle().URLForResource(named, withExtension: nil)!
+      throw NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError, userInfo: nil)
     }
-
-    try self.init(URL:url)
   }
 
   /// Create a template with a file found at the given URL

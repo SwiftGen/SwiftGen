@@ -10,19 +10,19 @@ DEPENDENCIES:
   - Commander
   - GenumKit (from `GenumKit`)
   - PathKit
-  - Stencil (from `https://github.com/AliSoftware/Stencil.git`, branch `guards`)
+  - Stencil (from `https://github.com/Kylef/Stencil.git`, branch `master`)
 
 EXTERNAL SOURCES:
   GenumKit:
     :path: GenumKit
   Stencil:
-    :branch: guards
-    :git: https://github.com/AliSoftware/Stencil.git
+    :branch: master
+    :git: https://github.com/Kylef/Stencil.git
 
 CHECKOUT OPTIONS:
   Stencil:
-    :commit: a2e1cd65284ac83ffb81486617553e5249fb09de
-    :git: https://github.com/AliSoftware/Stencil.git
+    :commit: f0abd34c320751cdb82b25e66db9b6a782fb27f6
+    :git: https://github.com/Kylef/Stencil.git
 
 SPEC CHECKSUMS:
   Commander: 3634740c4e1ed3a76ff55426424950e4c8a822e0

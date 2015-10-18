@@ -8,7 +8,7 @@ public class IncludeNode : NodeType {
   public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
     let bits = token.contents.componentsSeparatedByString("\"")
 
-    guard bits.count == 3 else {
+    if bits.count != 3 {
       throw TemplateSyntaxError("'include' tag takes one argument, the template file to be included")
     }
 
@@ -20,16 +20,18 @@ public class IncludeNode : NodeType {
   }
 
   public func render(context: Context) throws -> String {
-    guard let loader = context["loader"] as? TemplateLoader else {
-      throw TemplateSyntaxError("Template loader not in context")
-    }
+    if let loader =  context["loader"] as? TemplateLoader {
+      if let template = loader.loadTemplate(templateName) {
+        return try template.render(context)
+      }
 
-    guard let template = loader.loadTemplate(templateName) else {
-      let paths:String = loader.paths.map { path in path.description }.joinWithSeparator(", ")
+      let paths:String = loader.paths.map { path in
+        return path.description
+      }.joinWithSeparator(", ")
       throw TemplateSyntaxError("'\(templateName)' template not found in \(paths)")
     }
-    
-    return try template.render(context)
+
+    throw TemplateSyntaxError("Template loader not in context")
   }
 }
 
