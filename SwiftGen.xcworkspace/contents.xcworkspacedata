@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "container:"
+      name = "Pod Metadata">
+      <FileRef
+         location = "group:GenumKit/GenumKit.podspec"
+         assignedFileDataType = "public.ruby-script">
+      </FileRef>
+      <FileRef
+         location = "group:Rakefile"
+         assignedFileDataType = "public.ruby-script">
+      </FileRef>
+      <FileRef
+         location = "group:CHANGELOG.md"
+         assignedFileDataType = "net.daringfireball.markdown">
+      </FileRef>
+      <FileRef
+         location = "group:README.md"
+         assignedFileDataType = "net.daringfireball.markdown">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:SwiftGen.xcodeproj">
    </FileRef>

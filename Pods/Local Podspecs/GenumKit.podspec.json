@@ -15,5 +15,11 @@
     "git": "https://github.com/AliSoftware/SwiftGen.git",
     "tag": "0.5.2"
   },
-  "source_files": "**/*.swift"
+  "source_files": "**/*.swift",
+  "dependencies": {
+    "Stencil": [
+
+    ]
+  },
+  "frameworks": "Foundation"
 }

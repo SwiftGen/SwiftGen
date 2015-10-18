@@ -86,8 +86,12 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-swiftgen/Commander.framework"
   install_framework "Pods-swiftgen/GenumKit.framework"
+  install_framework "Pods-swiftgen/PathKit.framework"
+  install_framework "Pods-swiftgen/Stencil.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-swiftgen/Commander.framework"
   install_framework "Pods-swiftgen/GenumKit.framework"
+  install_framework "Pods-swiftgen/PathKit.framework"
+  install_framework "Pods-swiftgen/Stencil.framework"
 fi

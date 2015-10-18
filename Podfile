@@ -3,6 +3,7 @@ use_frameworks!
 
 target 'swiftgen' do
   pod 'Commander'
+  pod 'PathKit'
   pod 'GenumKit', :path => 'GenumKit'
 end
 

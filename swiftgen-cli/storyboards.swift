@@ -4,21 +4,21 @@
 // MIT Licence
 //
 
-import Foundation
 import Commander
+import PathKit
 import GenumKit
 
 let storyboardsCommand = command(
     outputOption,
-    Argument<String>("PATH", description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard", validator: pathExists(nil)),
+    Argument<Path>("PATH", description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard", validator: pathExists),
     Option<String>("excludechars", "_", description: "Characters that should be ignored in swift identifier.")
 ) { output, path, forbiddenChars in
     let enumBuilder = StoryboardEnumBuilder()
-    if (path as NSString).pathExtension == "storyboard" {
-        enumBuilder.addStoryboardAtPath(path)
+    if path.`extension` == "storyboard" {
+        enumBuilder.addStoryboardAtPath(String(path))
     }
     else {
-        enumBuilder.parseDirectory(path)
+        enumBuilder.parseDirectory(String(path))
     }
     output.write(enumBuilder.build(forbiddenChars: forbiddenChars))
 }

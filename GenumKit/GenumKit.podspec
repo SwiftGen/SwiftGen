@@ -23,6 +23,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/AliSoftware/SwiftGen.git", :tag => s.version.to_s }
 
   s.source_files = "**/*.swift"
-  
-  # s.framework  = "Foundation"
+
+  s.dependency 'Stencil'
+  s.framework  = "Foundation"
 end

@@ -4,16 +4,16 @@
 // MIT Licence
 //
 
-import Foundation
 import Commander
+import PathKit
 import GenumKit
 
 let imagesCommand = command(
     outputOption,
-    Argument<String>("DIR", description: "Directory to scan for .imageset files.", validator: pathExists(.Directory)),
+    Argument<Path>("DIR", description: "Directory to scan for .imageset files.", validator: dirExists),
     Option<String>("excludechars", "_", description: "Characters that should be ignored in swift identifier.")
 ) { output, path, forbiddenChars in
     let enumBuilder = ImageEnumBuilder()
-    enumBuilder.parseDirectory(path)
+    enumBuilder.parseDirectory(String(path))
     output.write(enumBuilder.build(forbiddenChars: forbiddenChars))
 }

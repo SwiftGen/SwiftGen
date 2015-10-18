@@ -1,0 +1,6 @@
+framework module Stencil {
+  umbrella header "Stencil-umbrella.h"
+
+  export *
+  module * { export * }
+}
