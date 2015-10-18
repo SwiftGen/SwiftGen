@@ -50,14 +50,12 @@ extension UIStoryboard {
   }
 
   struct Segue {
-{% for storyboard in storyboards %}
-{% if storyboard.segues %}
+{% for storyboard in storyboards %}{% if storyboard.segues %}
     enum {% identifier storyboard.name %} : String {
 {% for segue in storyboard.segues %}
       case {% identifier segue.identifier %} = "{{ segue.identifier }}"
 {% endfor %}
     }
-{% endif %}
-{% endfor %}
+{% endif %}{% endfor %}
   }
 }

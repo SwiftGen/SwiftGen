@@ -30,26 +30,39 @@ extension StoryboardScene where Self.RawValue == String {
 
 extension UIStoryboard {
   struct Scene {
+
     enum Message : String, StoryboardScene {
       static let storyboardName = "Message"
 
       case Composer = "Composer"
+
       static func composerViewController() -> UIViewController {
         return Message.Composer.viewController()
       }
 
+
       case URLChooser = "URLChooser"
+
       static func urlChooserViewController() -> XXPickerViewController {
         return Message.URLChooser.viewController() as! XXPickerViewController
       }
+
+
     }
+
   }
 
   struct Segue {
+
     enum Message : String {
+
       case Back = "Back"
+
       case Custom = "Custom"
+
       case NonCustom = "NonCustom"
+
     }
+
   }
 }
