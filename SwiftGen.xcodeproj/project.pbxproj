@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0911502D1BD2931700EBC803 /* Storyboards-All-Underscores.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 091150281BD2931700EBC803 /* Storyboards-All-Underscores.swift.out */; settings = {ASSET_TAGS = (); }; };
 		0911502E1BD2931700EBC803 /* Strings-Lines-ExcludeUnderscore.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 091150291BD2931700EBC803 /* Strings-Lines-ExcludeUnderscore.swift.out */; settings = {ASSET_TAGS = (); }; };
 		0911502F1BD2931700EBC803 /* Strings-Lines-Underscore.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 0911502A1BD2931700EBC803 /* Strings-Lines-Underscore.swift.out */; settings = {ASSET_TAGS = (); }; };
 		091150311BD31A3300EBC803 /* PathArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091150301BD31A3300EBC803 /* PathArgument.swift */; settings = {ASSET_TAGS = (); }; };
 		091150361BD3274E00EBC803 /* images.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 091150351BD3274E00EBC803 /* images.stencil */; settings = {ASSET_TAGS = (); }; };
 		0911503B1BD3ECAE00EBC803 /* colors.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0911503A1BD3ECA900EBC803 /* colors.stencil */; settings = {ASSET_TAGS = (); }; };
+		0911503F1BD4136E00EBC803 /* storyboards.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0911503E1BD4053D00EBC803 /* storyboards.stencil */; settings = {ASSET_TAGS = (); }; };
 		09A87B481BCC9BAD00D9B9F5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7B2D31BCC382800D7F488 /* main.swift */; settings = {ASSET_TAGS = (); }; };
 		09A87B4A1BCC9BB200D9B9F5 /* storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0901413E1BCC64C9002E8617 /* storyboards.swift */; settings = {ASSET_TAGS = (); }; };
 		09A87B4B1BCC9BB200D9B9F5 /* images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090141401BCC64FE002E8617 /* images.swift */; settings = {ASSET_TAGS = (); }; };
@@ -24,10 +24,8 @@
 		09A87B5D1BCCA38400D9B9F5 /* StringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD51B6D2E3900275BF5 /* StringsTests.swift */; settings = {ASSET_TAGS = (); }; };
 		09A87B5E1BCCA4D100D9B9F5 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09030C0B1B6D30E800275BF5 /* Message.storyboard */; settings = {ASSET_TAGS = (); }; };
 		09A87B5F1BCCA4D100D9B9F5 /* Wizard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09030C0C1B6D30E800275BF5 /* Wizard.storyboard */; settings = {ASSET_TAGS = (); }; };
-		09A87B601BCCA4D100D9B9F5 /* Storyboards-Message-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C091B6D30DB00275BF5 /* Storyboards-Message-Defaults.swift.out */; settings = {ASSET_TAGS = (); }; };
-		09A87B611BCCA4D100D9B9F5 /* Storyboards-All-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C0F1B6D315C00275BF5 /* Storyboards-All-Defaults.swift.out */; settings = {ASSET_TAGS = (); }; };
-		09A87B621BCCA4D100D9B9F5 /* Storyboards-Message-CustomNames.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C131B6D3D5600275BF5 /* Storyboards-Message-CustomNames.swift.out */; settings = {ASSET_TAGS = (); }; };
-		09A87B631BCCA4D100D9B9F5 /* Storyboards-Message-CustomIndentation.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C151B6D414800275BF5 /* Storyboards-Message-CustomIndentation.swift.out */; settings = {ASSET_TAGS = (); }; };
+		09A87B601BCCA4D100D9B9F5 /* Storyboards-Message.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C091B6D30DB00275BF5 /* Storyboards-Message.swift.out */; settings = {ASSET_TAGS = (); }; };
+		09A87B611BCCA4D100D9B9F5 /* Storyboards-All.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C0F1B6D315C00275BF5 /* Storyboards-All.swift.out */; settings = {ASSET_TAGS = (); }; };
 		09A87B641BCCA4DC00D9B9F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09030C2F1B6D4F8500275BF5 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 		09A87B651BCCA4DC00D9B9F5 /* Images-File.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09030C311B6D504100275BF5 /* Images-File.swift.out */; settings = {ASSET_TAGS = (); }; };
 		09A87B661BCCA4DC00D9B9F5 /* Images-Entries.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09E7146F1B6D707E007FF3CF /* Images-Entries.swift.out */; settings = {ASSET_TAGS = (); }; };
@@ -99,12 +97,10 @@
 		09030BD11B6D2E3900275BF5 /* ImagesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesTests.swift; sourceTree = "<group>"; };
 		09030BD51B6D2E3900275BF5 /* StringsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsTests.swift; sourceTree = "<group>"; };
 		09030BD81B6D2E5900275BF5 /* ColorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsTests.swift; sourceTree = "<group>"; };
-		09030C091B6D30DB00275BF5 /* Storyboards-Message-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Message-Defaults.swift.out"; sourceTree = "<group>"; };
+		09030C091B6D30DB00275BF5 /* Storyboards-Message.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Message.swift.out"; sourceTree = "<group>"; };
 		09030C0B1B6D30E800275BF5 /* Message.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
 		09030C0C1B6D30E800275BF5 /* Wizard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Wizard.storyboard; sourceTree = "<group>"; };
-		09030C0F1B6D315C00275BF5 /* Storyboards-All-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-All-Defaults.swift.out"; sourceTree = "<group>"; };
-		09030C131B6D3D5600275BF5 /* Storyboards-Message-CustomNames.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Message-CustomNames.swift.out"; sourceTree = "<group>"; };
-		09030C151B6D414800275BF5 /* Storyboards-Message-CustomIndentation.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Message-CustomIndentation.swift.out"; sourceTree = "<group>"; };
+		09030C0F1B6D315C00275BF5 /* Storyboards-All.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-All.swift.out"; sourceTree = "<group>"; };
 		09030C171B6D43D400275BF5 /* TestsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsHelper.swift; sourceTree = "<group>"; };
 		09030C1D1B6D473E00275BF5 /* colors.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = colors.txt; sourceTree = "<group>"; };
 		09030C201B6D474C00275BF5 /* Colors-List.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-List.swift.out"; sourceTree = "<group>"; };
@@ -114,12 +110,12 @@
 		09030C2F1B6D4F8500275BF5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		09030C301B6D4FD200275BF5 /* Colors-File.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-File.swift.out"; sourceTree = "<group>"; };
 		09030C311B6D504100275BF5 /* Images-File.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-File.swift.out"; sourceTree = "<group>"; };
-		091150281BD2931700EBC803 /* Storyboards-All-Underscores.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-All-Underscores.swift.out"; sourceTree = "<group>"; };
 		091150291BD2931700EBC803 /* Strings-Lines-ExcludeUnderscore.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Lines-ExcludeUnderscore.swift.out"; sourceTree = "<group>"; };
 		0911502A1BD2931700EBC803 /* Strings-Lines-Underscore.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Lines-Underscore.swift.out"; sourceTree = "<group>"; };
 		091150301BD31A3300EBC803 /* PathArgument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathArgument.swift; sourceTree = "<group>"; };
 		091150351BD3274E00EBC803 /* images.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = images.stencil; sourceTree = "<group>"; };
 		0911503A1BD3ECA900EBC803 /* colors.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = colors.stencil; sourceTree = "<group>"; };
+		0911503E1BD4053D00EBC803 /* storyboards.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = storyboards.stencil; sourceTree = "<group>"; };
 		095685EB1B6DA16200BF300C /* Strings-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-CustomName.swift.out"; sourceTree = "<group>"; };
 		095685ED1B6DA17300BF300C /* Strings-File-CustomIndentation.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-CustomIndentation.swift.out"; sourceTree = "<group>"; };
 		095685EF1B6DA32800BF300C /* Strings-Lines-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Lines-Defaults.swift.out"; sourceTree = "<group>"; };
@@ -212,11 +208,8 @@
 			children = (
 				09030C311B6D504100275BF5 /* Images-File.swift.out */,
 				09E7146F1B6D707E007FF3CF /* Images-Entries.swift.out */,
-				09030C091B6D30DB00275BF5 /* Storyboards-Message-Defaults.swift.out */,
-				09030C0F1B6D315C00275BF5 /* Storyboards-All-Defaults.swift.out */,
-				09030C131B6D3D5600275BF5 /* Storyboards-Message-CustomNames.swift.out */,
-				09030C151B6D414800275BF5 /* Storyboards-Message-CustomIndentation.swift.out */,
-				091150281BD2931700EBC803 /* Storyboards-All-Underscores.swift.out */,
+				09030C091B6D30DB00275BF5 /* Storyboards-Message.swift.out */,
+				09030C0F1B6D315C00275BF5 /* Storyboards-All.swift.out */,
 				09030C201B6D474C00275BF5 /* Colors-List.swift.out */,
 				09030C301B6D4FD200275BF5 /* Colors-File.swift.out */,
 				09030C261B6D492E00275BF5 /* Strings-Entries-Defaults.swift.out */,
@@ -247,6 +240,7 @@
 			children = (
 				091150351BD3274E00EBC803 /* images.stencil */,
 				0911503A1BD3ECA900EBC803 /* colors.stencil */,
+				0911503E1BD4053D00EBC803 /* storyboards.stencil */,
 			);
 			path = templates;
 			sourceTree = "<group>";
@@ -372,15 +366,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0911502D1BD2931700EBC803 /* Storyboards-All-Underscores.swift.out in Resources */,
 				09A87B671BCCA4E600D9B9F5 /* colors.txt in Resources */,
 				091150361BD3274E00EBC803 /* images.stencil in Resources */,
 				09A87B681BCCA4E600D9B9F5 /* Colors-List.swift.out in Resources */,
-				09A87B601BCCA4D100D9B9F5 /* Storyboards-Message-Defaults.swift.out in Resources */,
+				09A87B601BCCA4D100D9B9F5 /* Storyboards-Message.swift.out in Resources */,
 				09A87B701BCCA5F600D9B9F5 /* Strings-Lines-Defaults.swift.out in Resources */,
 				09A87B5E1BCCA4D100D9B9F5 /* Message.storyboard in Resources */,
 				09A87B641BCCA4DC00D9B9F5 /* Images.xcassets in Resources */,
-				09A87B621BCCA4D100D9B9F5 /* Storyboards-Message-CustomNames.swift.out in Resources */,
 				0911502F1BD2931700EBC803 /* Strings-Lines-Underscore.swift.out in Resources */,
 				09A87B5F1BCCA4D100D9B9F5 /* Wizard.storyboard in Resources */,
 				09A87B6C1BCCA5F600D9B9F5 /* Strings-Entries-Defaults.swift.out in Resources */,
@@ -390,10 +382,10 @@
 				09A87B6D1BCCA5F600D9B9F5 /* Strings-File-Defaults.swift.out in Resources */,
 				09A87B6E1BCCA5F600D9B9F5 /* Strings-File-CustomName.swift.out in Resources */,
 				09A87B711BCCA5FC00D9B9F5 /* Localizable.strings in Resources */,
-				09A87B631BCCA4D100D9B9F5 /* Storyboards-Message-CustomIndentation.swift.out in Resources */,
 				09A87B661BCCA4DC00D9B9F5 /* Images-Entries.swift.out in Resources */,
-				09A87B611BCCA4D100D9B9F5 /* Storyboards-All-Defaults.swift.out in Resources */,
+				09A87B611BCCA4D100D9B9F5 /* Storyboards-All.swift.out in Resources */,
 				09A87B651BCCA4DC00D9B9F5 /* Images-File.swift.out in Resources */,
+				0911503F1BD4136E00EBC803 /* storyboards.stencil in Resources */,
 				0911502E1BD2931700EBC803 /* Strings-Lines-ExcludeUnderscore.swift.out in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

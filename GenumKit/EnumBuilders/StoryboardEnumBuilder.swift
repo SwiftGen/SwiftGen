@@ -5,201 +5,125 @@
 //
 
 import Foundation
+import Stencil
 
 public final class StoryboardEnumBuilder {
-    private typealias Scene = (storyboardID: String, customClass: String?)
-    private typealias Segue = (segueID: String, customClass: String?)
-    private var storyboardsScenes = [String : [Scene]]()
-    private var storyboardsSegues = [String: [Segue]]()
-
+  private typealias Scene = (storyboardID: String, tag: String, customClass: String?)
+  private typealias Segue = (segueID: String, customClass: String?)
+  private var storyboardsScenes = [String: [Scene]]()
+  private var storyboardsSegues = [String: [Segue]]()
+  
+  
+  public init() {}
+  
+  public func addStoryboardAtPath(path: String) {
+    let parser = NSXMLParser(contentsOfURL: NSURL.fileURLWithPath(path))
     
-    public init() {}
-    
-    public func addStoryboardAtPath(path: String) {
-        let parser = NSXMLParser(contentsOfURL: NSURL.fileURLWithPath(path))
-        
-        class ParserDelegate : NSObject, NSXMLParserDelegate {
-            var scenes = [Scene]()
-            var segues = [Segue]()
-            var inScene = false
-            var readyForFirstObject = false
-            var readyForConnections = false
-            
-            @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
-              namespaceURI: String?, qualifiedName qName: String?,
-              attributes attributeDict: [String : String])
-            {
-              
-              switch elementName {
-              case "scene":
-                inScene = true
-              case "objects" where inScene:
-                readyForFirstObject = true
-              case _ where readyForFirstObject:
-                if let storyboardID = attributeDict["storyboardIdentifier"] {
-                  let customClass = attributeDict["customClass"]
-                  scenes.append(Scene(storyboardID, customClass))
-                }
-                readyForFirstObject = false
-              case "connections":
-                readyForConnections = true
-              case "segue" where readyForConnections:
-                if let segueID = attributeDict["identifier"] {
-                  let customClass = attributeDict["customClass"]
-                  segues.append(Segue(segueID, customClass))
-                }
-              default:
-                break
-              }
-            }
+    class ParserDelegate : NSObject, NSXMLParserDelegate {
+      var scenes = [Scene]()
+      var segues = [Segue]()
+      var inScene = false
+      var readyForFirstObject = false
+      var readyForConnections = false
       
-            @objc func parser(parser: NSXMLParser, didEndElement elementName: String,
-                namespaceURI: String?, qualifiedName qName: String?)
-            {
-                switch elementName {
-                case "scene":
-                    inScene = false
-                case "objects" where inScene:
-                    readyForFirstObject = false
-                case "connections":
-                    readyForConnections = false
-                default:
-                    break;
-                }
-            }
-        }
+      @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
+        namespaceURI: String?, qualifiedName qName: String?,
+        attributes attributeDict: [String : String])
+      {
         
-        let delegate = ParserDelegate()
-        parser?.delegate = delegate
-        parser?.parse()
-        
-        let storyboardName = ((path as NSString).lastPathComponent as NSString).stringByDeletingPathExtension
-        storyboardsScenes[storyboardName] = delegate.scenes
-        storyboardsSegues[storyboardName] = delegate.segues
-    }
-    
-    public func parseDirectory(path: String) {
-        if let dirEnum = NSFileManager.defaultManager().enumeratorAtPath(path) {
-            while let subPath = dirEnum.nextObject() as? NSString {
-                if subPath.pathExtension == "storyboard" {
-                    self.addStoryboardAtPath((path as NSString).stringByAppendingPathComponent(subPath as String))
-                }
-            }
-        }
-    }
-    
-    public func build(scenesStructName scenesStructName: String = "Scene", seguesStructName: String = "Segue", indentation indent : Indentation = .Spaces(4), forbiddenChars : String = "_") -> String {
-        var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
-        let t = indent.string
-        text += commonCode(indentationString: t)
-
-        text += "extension UIStoryboard {\n"
-      
-        /// Scenes
-        text += "\(t)struct \(scenesStructName.asSwiftIdentifier()) {\n"
-        for (name, scenes) in storyboardsScenes {
-            let enumName = name.asSwiftIdentifier(forbiddenChars: forbiddenChars)
-            if scenes.isEmpty {
-                text += "\(t)\(t)enum \(enumName) {\n"
-            } else {
-                text += "\(t)\(t)enum \(enumName) : String, StoryboardScene {\n"
-            }
-            text += "\(t)\(t)\(t)static let storyboardName = \"\(name)\"\n"
-            
-            for scene in scenes {
-                let caseName = scene.storyboardID.asSwiftIdentifier(forbiddenChars: forbiddenChars)
-                let lcCaseName = lowercaseFirst(caseName)
-                let vcClass = scene.customClass ?? "UIViewController"
-                let cast = scene.customClass == nil ? "" : " as! \(vcClass)"
-                text += "\n"
-                text += "\(t)\(t)\(t)case \(caseName) = \"\(scene.storyboardID)\"\n"
-                text += "\(t)\(t)\(t)static func \(lcCaseName)ViewController() -> \(vcClass) {\n"
-                text += "\(t)\(t)\(t)\(t)return \(enumName).\(caseName).viewController()\(cast)\n"
-                text += "\(t)\(t)\(t)}\n"
-            }
-            
-            text += "\(t)\(t)}\n"
-        }
-        text += "\(t)}\n"
-      
-        /// Segues
-        if !storyboardsSegues.isEmpty {
-          text += "\n"
-          
-          text += "\(t)struct \(seguesStructName.asSwiftIdentifier()) {\n"
-        
-          for (name, segues) in storyboardsSegues
-            where segues.count > 0 {
-              
-            let enumName = name.asSwiftIdentifier(forbiddenChars: forbiddenChars)
-            text += "\(t)\(t)enum \(enumName) : String {\n"
-            
-            for segue in segues {
-              let caseName = segue.segueID.asSwiftIdentifier(forbiddenChars: forbiddenChars)
-              text += "\(t)\(t)\(t)case \(caseName) = \"\(segue.segueID)\"\n"
-            }
-            
-            text += "\(t)\(t)}\n"
+        switch elementName {
+        case "scene":
+          inScene = true
+        case "objects" where inScene:
+          readyForFirstObject = true
+        case let tag where readyForFirstObject:
+          if let storyboardID = attributeDict["storyboardIdentifier"] {
+            let customClass = attributeDict["customClass"]
+            scenes.append(Scene(storyboardID, tag, customClass))
           }
-        
-          text += "\(t)}\n"
+          readyForFirstObject = false
+        case "connections":
+          readyForConnections = true
+        case "segue" where readyForConnections:
+          if let segueID = attributeDict["identifier"] {
+            let customClass = attributeDict["customClass"]
+            segues.append(Segue(segueID, customClass))
+          }
+        default:
+          break
         }
+      }
       
-        text += "}\n"
-      
-        return text
-    }
-  
-  
-    // MARK: - Private Helpers
-    
-    private func commonCode(indentationString t : String) -> String {
-        var text = ""
-        
-        text += "import Foundation\n"
-        text += "import UIKit\n"
-        text += "\n"
-        
-        text += "protocol StoryboardScene : RawRepresentable {\n"
-        text += "\(t)static var storyboardName : String { get }\n"
-        text += "\(t)static func storyboard() -> UIStoryboard\n"
-        text += "\(t)static func initialViewController() -> UIViewController\n"
-        text += "\(t)func viewController() -> UIViewController\n"
-        text += "\(t)static func viewController(identifier: Self) -> UIViewController\n"
-        
-        text += "}\n"
-        text += "\n"
-        text += "extension StoryboardScene where Self.RawValue == String {\n"
-        text += "\(t)static func storyboard() -> UIStoryboard {\n"
-        text += "\(t)\(t)return UIStoryboard(name: self.storyboardName, bundle: nil)\n"
-        text += "\(t)}\n"
-        text += "\n"
-        text += "\(t)static func initialViewController() -> UIViewController {\n"
-        text += "\(t)\(t)return storyboard().instantiateInitialViewController()!\n"
-        text += "\(t)}\n"
-        text += "\n"
-        text += "\(t)func viewController() -> UIViewController {\n"
-        text += "\(t)\(t)return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)\n"
-        text += "\(t)}\n"
-        text += "\(t)static func viewController(identifier: Self) -> UIViewController {\n"
-        text += "\(t)\(t)return identifier.viewController()\n"
-        text += "\(t)}\n"
-        text += "}\n\n"
-        
-        return text
+      @objc func parser(parser: NSXMLParser, didEndElement elementName: String,
+        namespaceURI: String?, qualifiedName qName: String?)
+      {
+        switch elementName {
+        case "scene":
+          inScene = false
+        case "objects" where inScene:
+          readyForFirstObject = false
+        case "connections":
+          readyForConnections = false
+        default:
+          break;
+        }
+      }
     }
     
-    private func lowercaseFirst(string: String) -> String {
-        let ns = string as NSString
-        let cs = NSCharacterSet.uppercaseLetterCharacterSet()
-        
-        var count = 0
-        while cs.characterIsMember(ns.characterAtIndex(count)) {
-            count++
+    let delegate = ParserDelegate()
+    parser?.delegate = delegate
+    parser?.parse()
+    
+    let storyboardName = ((path as NSString).lastPathComponent as NSString).stringByDeletingPathExtension
+    storyboardsScenes[storyboardName] = delegate.scenes
+    storyboardsSegues[storyboardName] = delegate.segues
+  }
+  
+  public func parseDirectory(path: String) {
+    if let dirEnum = NSFileManager.defaultManager().enumeratorAtPath(path) {
+      while let subPath = dirEnum.nextObject() as? NSString {
+        if subPath.pathExtension == "storyboard" {
+          self.addStoryboardAtPath((path as NSString).stringByAppendingPathComponent(subPath as String))
         }
-        
-        let lettersToLower = count > 1 ? count-1 : count
-        return ns.substringToIndex(lettersToLower).lowercaseString + ns.substringFromIndex(lettersToLower)
+      }
     }
-
+  }
+  
+  public func stencilContext() -> Context {
+    let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sort(<)
+    let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:AnyObject] in
+      var sbMap: [String:AnyObject] = ["name": storyboardName]
+      if let scenes = storyboardsScenes[storyboardName] {
+        sbMap["scenes"] = scenes
+          .sort({$0.storyboardID < $1.storyboardID})
+          .map { (scene: Scene) -> [String:String] in
+            let customClass = scene.customClass ?? (scene.tag != "viewController" ? "UI" + uppercaseFirst(scene.tag) : nil)
+            if let customClass = customClass {
+              return ["identifier": scene.storyboardID, "class": customClass]
+            } else {
+              return ["identifier": scene.storyboardID]
+            }
+        }
+      }
+      if let segues = storyboardsSegues[storyboardName] {
+        sbMap["segues"] = segues
+          .sort({$0.segueID < $1.segueID})
+          .map { (segue: Segue) -> [String:String] in
+            ["identifier": segue.segueID, "class": segue.customClass ?? "UIStoryboardSegue"]
+        }
+      }
+      return sbMap
+    }
+    return Context(dictionary: ["storyboards": storyboardsMap])
+  }
+  
+  // MARK: - Private Helpers
+  
+  private func uppercaseFirst(string: String) -> String {
+    guard let first = string.characters.first else {
+      return string
+    }
+    return String(first).uppercaseString + String(string.characters.dropFirst())
+  }
+  
 }

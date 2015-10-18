@@ -8,10 +8,10 @@ import XCTest
 import GenumKit
 
 /**
-* Important: In order for the "*.xcassets" files in fixtures/ to be copied as-is in the test bundle
-* (as opposed to being compiled when the test bundle is compiled), a custom "Build Rule" has been added to the target.
-* See Project -> Target "UnitTests" -> Build Rules -> « Files "*.xccassets" using PBXCp »
-*/
+ * Important: In order for the "*.xcassets" files in fixtures/ to be copied as-is in the test bundle
+ * (as opposed to being compiled when the test bundle is compiled), a custom "Build Rule" has been added to the target.
+ * See Project -> Target "UnitTests" -> Build Rules -> « Files "*.xccassets" using PBXCp »
+ */
 
 class ImagesTests: XCTestCase {
   

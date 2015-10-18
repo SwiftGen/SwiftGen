@@ -7,7 +7,6 @@
 import Commander
 import PathKit
 import GenumKit
-import Stencil
 
 let imagesCommand = command(
   outputOption, templateOption("images.stencil"),
