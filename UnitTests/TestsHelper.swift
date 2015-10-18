@@ -21,7 +21,7 @@ func diff(lhs: String, _ rhs: String) -> String {
             let high = low.advancedBy(len, limit: str.characters.endIndex)
             return String(str.characters[low..<high])
         }
-        return "Character mismatch at index \(idx): <\(slice(lhs, idx-10, 21))> != <\(slice(rhs, idx-5, 10))>"
+        return ">>>> lhs\n\(lhs)\n====\n\(rhs)\n<<< rhs\n\n" + "Character mismatch at index \(idx): <\(slice(lhs, idx-10, 21))> != <\(slice(rhs, idx-5, 10))>"
     }
     return ""
 }

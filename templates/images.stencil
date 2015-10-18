@@ -1,0 +1,24 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+import UIKit
+
+{% if images %}
+extension UIImage {
+  enum Asset : String {
+{% for image in images %}
+    case {% identifier image %} = "{{ image }}"
+{% endfor %}
+
+    var image: UIImage {
+      return UIImage(asset: self)
+    }
+  }
+
+  convenience init!(asset: Asset) {
+    self.init(named: asset.rawValue)
+  }
+}
+{% else %}
+// SwiftGen: No image found
+{% endif %}

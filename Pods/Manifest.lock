@@ -1,17 +1,33 @@
 PODS:
   - Commander (0.2.2)
-  - GenumKit (0.5.2)
+  - GenumKit (0.5.2):
+    - Stencil
+  - PathKit (0.5.0)
+  - Stencil (0.3.0):
+    - PathKit (~> 0.5.0)
 
 DEPENDENCIES:
   - Commander
   - GenumKit (from `GenumKit`)
+  - PathKit
+  - Stencil (from `https://github.com/AliSoftware/Stencil.git`, branch `guards`)
 
 EXTERNAL SOURCES:
   GenumKit:
     :path: GenumKit
+  Stencil:
+    :branch: guards
+    :git: https://github.com/AliSoftware/Stencil.git
+
+CHECKOUT OPTIONS:
+  Stencil:
+    :commit: a2e1cd65284ac83ffb81486617553e5249fb09de
+    :git: https://github.com/AliSoftware/Stencil.git
 
 SPEC CHECKSUMS:
   Commander: 3634740c4e1ed3a76ff55426424950e4c8a822e0
-  GenumKit: 196553ef4c883043ed00bd90143401736c43ff0f
+  GenumKit: 52c670f94240073673d7c12aafecd22409cb59c1
+  PathKit: 64e70cb924d6faed9251049f5f28662855524baf
+  Stencil: 90ce766d6dba53380832692541403e27297337db
 
 COCOAPODS: 0.39.0

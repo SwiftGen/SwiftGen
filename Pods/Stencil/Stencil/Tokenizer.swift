@@ -12,7 +12,7 @@ public enum Token : Equatable {
   case Block(value:String)
 
   /// Returns the underlying value as an array seperated by spaces
-  func components() -> [String] {
+  public func components() -> [String] {
     // TODO: Make this smarter and treat quoted strings as a single component
     let characterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()
 
@@ -32,7 +32,7 @@ public enum Token : Equatable {
     }
   }
 
-  var contents:String {
+  public var contents:String {
     switch self {
     case .Block(let value):
       return value

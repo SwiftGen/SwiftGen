@@ -168,6 +168,8 @@ of template tags. You will need to call the `registerTag` API which accepts a
 closure to handle the parsing. You can find examples of the `now`, `if` and
 `for` tags found inside `Node.swift`.
 
+Custom template tags must be registered prior to calling `Template.render` the first time.
+
 The architecture of Stencil along with how to build advanced plugins can be found in the [architecture](ARCHITECTURE.md) document.
 
 ### Comments

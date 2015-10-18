@@ -23,7 +23,7 @@ end
 ###########################################################
 
 BIN_NAME = 'swiftgen'
-DEPENDENCIES = [:GenumKit, :Commander]
+DEPENDENCIES = [:GenumKit, :Commander, :PathKit, :Stencil]
 CONFIGURATION = 'Release'
 BUILD_DIR = 'build/' + CONFIGURATION
 
@@ -52,6 +52,11 @@ DEPENDENCIES.each do |fmk|
     print_info "== Building  #{fmk}.framework =="
     xcpretty %Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION})
   end
+end
+
+desc "Build the CLI and link it so it can be run from #{BUILD_DIR}. Useful for testing without installing."
+task :link => :build do
+  sh %Q(install_name_tool -add_rpath "@executable_path" #{BUILD_DIR}/#{BIN_NAME})
 end
 
 ###########################################################

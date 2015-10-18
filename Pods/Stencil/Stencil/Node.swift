@@ -73,10 +73,13 @@ public class VariableNode : NodeType {
 public class NowNode : NodeType {
   public let format:Variable
 
-  public class func parse(parser:TokenParser, token:Token) -> NodeType {
+  public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
     var format:Variable?
 
     let components = token.components()
+    guard components.count <= 2 else {
+      throw TemplateSyntaxError("'now' tags should may only have one argument: the format string `\(token.contents)`.")
+    }
     if components.count == 2 {
       format = Variable(components[1])
     }
@@ -85,11 +88,7 @@ public class NowNode : NodeType {
   }
 
   public init(format:Variable?) {
-    if let format = format {
-      self.format = format
-    } else {
-      self.format = Variable("\"yyyy-MM-dd 'at' HH:mm\"")
-    }
+    self.format = format ?? Variable("\"yyyy-MM-dd 'at' HH:mm\"")
   }
 
   public func render(context: Context) throws -> String {
@@ -118,33 +117,37 @@ public class ForNode : NodeType {
   public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
     let components = token.components()
 
-    if components.count == 4 && components[2] == "in" {
-      let loopVariable = components[1]
-      let variable = components[3]
-
-      var emptyNodes = [NodeType]()
-
-      let forNodes = try parser.parse(until(["endfor", "empty"]))
-
-      if let token = parser.nextToken() {
-        if token.contents == "empty" {
-          emptyNodes = try parser.parse(until(["endfor"]))
-          parser.nextToken()
-        }
-      } else {
-        throw TemplateSyntaxError("`endfor` was not found.")
-      }
-
-      return ForNode(variable: variable, loopVariable: loopVariable, nodes: forNodes, emptyNodes:emptyNodes)
+    guard components.count == 4 && components[2] == "in" else {
+      throw TemplateSyntaxError("'for' statements should use the following 'for x in y' `\(token.contents)`.")
+    }
+    
+    let loopVariable = components[1]
+    let variable = components[3]
+    
+    var emptyNodes = [NodeType]()
+    
+    parser.eatNextCRLF() // If CRLF after {% for %}, eat it
+    let forNodes = try parser.parse(until(["endfor", "empty"]))
+    
+    guard let token = parser.nextToken() else {
+      throw TemplateSyntaxError("`endfor` was not found.")
     }
 
-    throw TemplateSyntaxError("'for' statements should use the following 'for x in y' `\(token.contents)`.")
+    if token.contents == "empty" {
+      parser.eatNextCRLF() // if CRLF after {% empty %}, eat it
+      emptyNodes = try parser.parse(until(["endfor"]))
+      parser.nextToken()
+    }
+    parser.eatNextCRLF() // if CRLF after {% endfor %}, eat it
+
+    return ForNode(variable: variable, loopVariable: loopVariable, nodes: forNodes, emptyNodes: emptyNodes)
   }
 
   public init(variable:String, loopVariable:String, nodes:[NodeType], emptyNodes:[NodeType]) {
     self.variable = Variable(variable)
     self.loopVariable = loopVariable
     self.nodes = nodes
+    // TODO: Handle emptyNodes
   }
 
   public func render(context: Context) throws -> String {
@@ -168,40 +171,54 @@ public class IfNode : NodeType {
   public let falseNodes:[NodeType]
 
   public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
-    let variable = token.components()[1]
+    let components = token.components()
+    guard components.count == 2 else {
+      throw TemplateSyntaxError("'if' statements should use the following 'if condition' `\(token.contents)`.")
+    }
+    let variable = components[1]
     var trueNodes = [NodeType]()
     var falseNodes = [NodeType]()
 
+    parser.eatNextCRLF() // If CRLF after {% if %}, eat it
     trueNodes = try parser.parse(until(["endif", "else"]))
 
-    if let token = parser.nextToken() {
-      if token.contents == "else" {
-        falseNodes = try parser.parse(until(["endif"]))
-        parser.nextToken()
-      }
-    } else {
+    guard let token = parser.nextToken() else {
       throw TemplateSyntaxError("`endif` was not found.")
     }
+
+    if token.contents == "else" {
+      parser.eatNextCRLF() // If CRLF after {% else %}, eat it
+      falseNodes = try parser.parse(until(["endif"]))
+      parser.nextToken()
+    }
+    parser.eatNextCRLF() // If CRLF after {% endif %}, eat it
 
     return IfNode(variable: variable, trueNodes: trueNodes, falseNodes: falseNodes)
   }
 
   public class func parse_ifnot(parser:TokenParser, token:Token) throws -> NodeType {
-    let variable = token.components()[1]
+    let components = token.components()
+    guard components.count == 2 else {
+      throw TemplateSyntaxError("'ifnot' statements should use the following 'if condition' `\(token.contents)`.")
+    }
+    let variable = components[1]
     var trueNodes = [NodeType]()
     var falseNodes = [NodeType]()
 
+    parser.eatNextCRLF() // If CRLF after {% ifnot %}, eat it
     falseNodes = try parser.parse(until(["endif", "else"]))
 
-    if let token = parser.nextToken() {
-      if token.contents == "else" {
-        trueNodes = try parser.parse(until(["endif"]))
-        parser.nextToken()
-      }
-    } else {
+    guard let token = parser.nextToken() else {
       throw TemplateSyntaxError("`endif` was not found.")
     }
 
+    if token.contents == "else" {
+      parser.eatNextCRLF() // If CRLF after {% else %}, eat it
+      trueNodes = try parser.parse(until(["endif"]))
+      parser.nextToken()
+    }
+    parser.eatNextCRLF() // If CRLF after {% endif %}, eat it
+    
     return IfNode(variable: variable, trueNodes: trueNodes, falseNodes: falseNodes)
   }
 

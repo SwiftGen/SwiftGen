@@ -7,13 +7,20 @@
 import Commander
 import PathKit
 import GenumKit
+import Stencil
 
 let imagesCommand = command(
-    outputOption,
-    Argument<Path>("DIR", description: "Directory to scan for .imageset files.", validator: dirExists),
-    Option<String>("excludechars", "_", description: "Characters that should be ignored in swift identifier.")
-) { output, path, forbiddenChars in
-    let enumBuilder = ImageEnumBuilder()
-    enumBuilder.parseDirectory(String(path))
-    output.write(enumBuilder.build(forbiddenChars: forbiddenChars))
+  outputOption, templateOption("images.stencil"),
+  Argument<Path>("DIR", description: "Directory to scan for .imageset files.", validator: dirExists)
+) { output, template, path in
+  let enumBuilder = ImageEnumBuilder()
+  enumBuilder.parseDirectory(String(path))
+  
+  do {
+    let template = try GenumTemplate(path: try fileExists(path: template))
+    let rendered = try template.render(enumBuilder.stencilContext())
+    output.write(rendered)
+  } catch {
+    print("Failed to render template \(error)")
+  }
 }

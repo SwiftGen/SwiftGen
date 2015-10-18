@@ -59,11 +59,9 @@ public class TokenParser {
       case .Block:
         let tag = token.components().first
 
-        if let parse_until = parse_until {
-          if parse_until(parser: self, token: token) {
+        if let parse_until = parse_until where parse_until(parser: self, token: token) {
             prependToken(token)
             return nodes
-          }
         }
 
         if let tag = tag, let parser = self.tags[tag] {
@@ -77,6 +75,13 @@ public class TokenParser {
     return nodes
   }
 
+  public func eatNextCRLF() {
+    if let token = tokens.first, case Token.Text(let text) = token where text.characters.first == "\n" {
+      let strippedText: String = String(text.characters.dropFirst())
+      tokens[0] = Token.Text(value: strippedText)
+    }
+  }
+  
   public func nextToken() -> Token? {
     if tokens.count > 0 {
       return tokens.removeAtIndex(0)

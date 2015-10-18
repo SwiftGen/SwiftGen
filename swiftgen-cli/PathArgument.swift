@@ -10,7 +10,7 @@ import PathKit
 // MARK: Validators
 
 func checkPath(@noescape assert: Path->Bool)(path: Path) throws -> Path {
-    guard assert(path) else { throw ArgumentError.InvalidType(value: path.description, type: "path", argument: "PATH") }
+    guard assert(path) else { throw ArgumentError.InvalidType(value: path.description, type: "path", argument: nil) }
     return path
 }
 let pathExists = checkPath { $0.exists }
@@ -65,5 +65,3 @@ enum OutputDestination: ArgumentConvertible {
         }
     }
 }
-
-let outputOption = Option("output", OutputDestination.Console, description: "The path to the file to generate. Use - to generate in stdout")
