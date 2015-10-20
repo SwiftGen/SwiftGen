@@ -30,32 +30,33 @@ extension StoryboardScene where Self.RawValue == String {
 
 extension UIStoryboard {
   struct Scene {
-{% for storyboard in storyboards %}
+    {% for storyboard in storyboards %}
     enum {% identifier storyboard.name exclude _ %} : String, StoryboardScene {
       static let storyboardName = "{{ storyboard.name }}"
-{% for scene in storyboard.scenes %}{% set sceneID %}{% identifier scene.identifier exclude _ %}{% endset %}
+      {% for scene in storyboard.scenes %}{% set sceneID %}{% identifier scene.identifier exclude _ %}{% endset %}
+
       case {{ sceneID }} = "{{ scene.identifier }}"
-{% if scene.class %}
+      {% if scene.class %}
       static func {% lowerFirstWord sceneID %}ViewController() -> {{ scene.class }} {
         return {% identifier storyboard.name %}.{{ sceneID }}.viewController() as! {{ scene.class }}
       }
-{% else %}
+      {% else %}
       static func {% lowerFirstWord sceneID %}ViewController() -> UIViewController {
         return {% identifier storyboard.name %}.{{ sceneID }}.viewController()
       }
-{% endif %}
-{% endfor %}
+      {% endif %}
+      {% endfor %}
     }
-{% endfor %}
+    {% endfor %}
   }
 
   struct Segue {
-{% for storyboard in storyboards %}{% if storyboard.segues %}
+    {% for storyboard in storyboards %}{% if storyboard.segues %}
     enum {% identifier storyboard.name %} : String {
-{% for segue in storyboard.segues %}
+      {% for segue in storyboard.segues %}
       case {% identifier segue.identifier %} = "{{ segue.identifier }}"
-{% endfor %}
+      {% endfor %}
     }
-{% endif %}{% endfor %}
+    {% endif %}{% endfor %}
   }
 }

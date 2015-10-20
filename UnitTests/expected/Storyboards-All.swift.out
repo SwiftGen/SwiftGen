@@ -30,72 +30,49 @@ extension StoryboardScene where Self.RawValue == String {
 
 extension UIStoryboard {
   struct Scene {
-
     enum Message : String, StoryboardScene {
       static let storyboardName = "Message"
 
       case Composer = "Composer"
-
       static func composerViewController() -> UIViewController {
         return Message.Composer.viewController()
       }
 
-
       case URLChooser = "URLChooser"
-
       static func urlChooserViewController() -> XXPickerViewController {
         return Message.URLChooser.viewController() as! XXPickerViewController
       }
-
-
     }
-
     enum Wizard : String, StoryboardScene {
       static let storyboardName = "Wizard"
 
       case AcceptCGU = "Accept-CGU"
-
       static func acceptCGUViewController() -> UIViewController {
         return Wizard.AcceptCGU.viewController()
       }
 
-
       case CreateAccount = "CreateAccount"
-
       static func createAccountViewController() -> CreateAccViewController {
         return Wizard.CreateAccount.viewController() as! CreateAccViewController
       }
 
-
       case Preferences = "Preferences"
-
       static func preferencesViewController() -> UITableViewController {
         return Wizard.Preferences.viewController() as! UITableViewController
       }
 
-
       case ValidatePassword = "Validate_Password"
-
       static func validatePasswordViewController() -> UIViewController {
         return Wizard.ValidatePassword.viewController()
       }
-
-
     }
-
   }
 
   struct Segue {
-
     enum Message : String {
-
       case Back = "Back"
-
       case Custom = "Custom"
-
       case NonCustom = "NonCustom"
-
     }
-
   }
 }

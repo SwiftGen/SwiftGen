@@ -6,9 +6,9 @@ import UIKit
 {% if images %}
 extension UIImage {
   enum Asset : String {
-{% for image in images %}
+    {% for image in images %}
     case {% identifier image %} = "{{ image }}"
-{% endfor %}
+    {% endfor %}
 
     var image: UIImage {
       return UIImage(asset: self)

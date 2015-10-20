@@ -15,9 +15,9 @@ extension UIColor {
 
 extension UIColor {
   enum Name : UInt32 {
-{% for color in colors %}
+    {% for color in colors %}
     case {{ color.name }} = 0x{{ color.hex }}
-{% endfor %}
+    {% endfor %}
   }
 
   convenience init(named name: Name) {
