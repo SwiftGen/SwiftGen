@@ -3,6 +3,7 @@
 import Foundation
 import UIKit
 
+{# This first part of the code is static, same every time whatever Storyboard you have #}
 protocol StoryboardScene : RawRepresentable {
   static var storyboardName : String { get }
   static func storyboard() -> UIStoryboard
@@ -28,21 +29,24 @@ extension StoryboardScene where Self.RawValue == String {
   }
 }
 
+{# This is where the generation begins, this code depends on what you have in your Storyboards #}
 extension UIStoryboard {
   struct Scene {
     {% for storyboard in storyboards %}
-    enum {{ storyboard.name|swiftIdentifier }} : String, StoryboardScene {
-      static let storyboardName = "{{ storyboard.name }}"
-      {% for scene in storyboard.scenes %}{% set sceneID %}{{ scene.identifier|swiftIdentifier }}{% endset %}
+    {% set storyboardName %}{{storyboard.name|swiftIdentifier}}{% endset %}
+    enum {{storyboardName}} : String, StoryboardScene {
+      static let storyboardName = "{{storyboard.name}}"
+      {% for scene in storyboard.scenes %}
+      {% set sceneID %}{{scene.identifier|swiftIdentifier}}{% endset %}
 
-      case {{ sceneID }} = "{{ scene.identifier }}"
+      case {{sceneID}} = "{{scene.identifier}}"
       {% if scene.class %}
-      static func {{ sceneID|lowerFirstWord }}ViewController() -> {{ scene.class }} {
-        return {{ storyboard.name|swiftIdentifier }}.{{ sceneID }}.viewController() as! {{ scene.class }}
+      static func {{sceneID|lowerFirstWord}}ViewController() -> {{scene.class}} {
+        return {{storyboardName}}.{{sceneID}}.viewController() as! {{scene.class}}
       }
       {% else %}
-      static func {{ sceneID|lowerFirstWord }}ViewController() -> UIViewController {
-        return {{ storyboard.name|swiftIdentifier }}.{{ sceneID }}.viewController()
+      static func {{sceneID|lowerFirstWord}}ViewController() -> UIViewController {
+        return {{storyboardName}}.{{sceneID}}.viewController()
       }
       {% endif %}
       {% endfor %}
@@ -52,9 +56,9 @@ extension UIStoryboard {
 
   struct Segue {
     {% for storyboard in storyboards %}{% if storyboard.segues %}
-    enum {{ storyboard.name|swiftIdentifier }} : String {
+    enum {{storyboard.name|swiftIdentifier}} : String {
       {% for segue in storyboard.segues %}
-      case {{ segue.identifier|swiftIdentifier }} = "{{ segue.identifier }}"
+      case {{segue.identifier|swiftIdentifier}} = "{{segue.identifier}}"
       {% endfor %}
     }
     {% endif %}{% endfor %}
