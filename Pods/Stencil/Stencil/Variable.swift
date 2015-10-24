@@ -24,11 +24,11 @@ class FilterExpression : Resolvable {
     }
   }
 
-  func resolve(context: Context) -> Any? {
-    let result = variable.resolve(context)
+  func resolve(context: Context) throws -> Any? {
+    let result = try variable.resolve(context)
 
-    return filters.reduce(result) { x, y in
-      return y(x)
+    return try filters.reduce(result) { x, y in
+      return try y(x)
     }
   }
 }
@@ -47,7 +47,7 @@ public struct Variable : Equatable, Resolvable {
   }
 
   /// Resolve the variable in the given context
-  public func resolve(context:Context) -> Any? {
+  public func resolve(context:Context) throws -> Any? {
     var current: Any? = context
 
     if (variable.hasPrefix("'") && variable.hasSuffix("'")) || (variable.hasPrefix("\"") && variable.hasSuffix("\"")) {

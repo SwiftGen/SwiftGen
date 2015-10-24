@@ -25,10 +25,10 @@ public class IncludeNode : NodeType {
     }
 
     guard let template = loader.loadTemplate(templateName) else {
-      let paths:String = loader.paths.map { $0.description }.joinWithSeparator(", ")
+      let paths = loader.paths.map { $0.description }.joinWithSeparator(", ")
       throw TemplateSyntaxError("'\(templateName)' template not found in \(paths)")
     }
-    
+
     return try template.render(context)
   }
 }

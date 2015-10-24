@@ -12,7 +12,7 @@ public class Template {
     guard let url = useBundle.URLForResource(named, withExtension: nil) else {
       throw NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError, userInfo: nil)
     }
-    
+
     try self.init(URL:url)
   }
 
@@ -38,7 +38,7 @@ public class Template {
     if nodes == nil {
         nodes = try parser.parse()
     }
-    
+
     return try renderNodes(nodes!, context ?? Context())
   }
 }

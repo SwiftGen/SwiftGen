@@ -47,7 +47,7 @@ public class TextNode : NodeType {
 }
 
 public protocol Resolvable {
-  func resolve(context: Context) -> Any?
+  func resolve(context: Context) throws -> Any?
 }
 
 public class VariableNode : NodeType {
@@ -62,7 +62,7 @@ public class VariableNode : NodeType {
   }
 
   public func render(context: Context) throws -> String {
-    let result = variable.resolve(context)
+    let result = try variable.resolve(context)
 
     if let result = result as? String {
       return result
@@ -99,7 +99,7 @@ public class NowNode : NodeType {
 
   public func render(context: Context) throws -> String {
     let date = NSDate()
-    let format = self.format.resolve(context)
+    let format = try self.format.resolve(context)
     var formatter:NSDateFormatter?
 
     if let format = format as? NSDateFormatter {
@@ -126,23 +126,23 @@ public class ForNode : NodeType {
     guard components.count == 4 && components[2] == "in" else {
       throw TemplateSyntaxError("'for' statements should use the following 'for x in y' `\(token.contents)`.")
     }
-    
+
     let loopVariable = components[1]
     let variable = components[3]
-    
+
     var emptyNodes = [NodeType]()
-    
+
     let forNodes = try parser.parse(until(["endfor", "empty"]))
-    
+
     guard let token = parser.nextToken() else {
       throw TemplateSyntaxError("`endfor` was not found.")
     }
-    
+
     if token.contents == "empty" {
       emptyNodes = try parser.parse(until(["endfor"]))
       parser.nextToken()
     }
-    
+
     return ForNode(variable: variable, loopVariable: loopVariable, nodes: forNodes, emptyNodes:emptyNodes)
   }
 
@@ -154,7 +154,7 @@ public class ForNode : NodeType {
   }
 
   public func render(context: Context) throws -> String {
-    let values = variable.resolve(context)
+    let values = try variable.resolve(context)
     if let values = values as? NSArray {
       return try values.map { item in
         context.push()
@@ -188,7 +188,7 @@ public class IfNode : NodeType {
     guard let token = parser.nextToken() else {
       throw TemplateSyntaxError("`endif` was not found.")
     }
-    
+
     if token.contents == "else" {
       falseNodes = try parser.parse(until(["endif"]))
       parser.nextToken()
@@ -211,7 +211,7 @@ public class IfNode : NodeType {
     guard let token = parser.nextToken() else {
       throw TemplateSyntaxError("`endif` was not found.")
     }
-    
+
     if token.contents == "else" {
       trueNodes = try parser.parse(until(["endif"]))
       parser.nextToken()
@@ -227,7 +227,7 @@ public class IfNode : NodeType {
   }
 
   public func render(context: Context) throws -> String {
-    let result = variable.resolve(context)
+    let result = try variable.resolve(context)
     var truthy = false
 
     if let result = result as? [AnyObject] {

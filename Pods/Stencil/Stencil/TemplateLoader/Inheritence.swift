@@ -61,7 +61,7 @@ class ExtendsNode : NodeType {
     guard let loader = context["loader"] as? TemplateLoader else {
       throw TemplateSyntaxError("Template loader not in context")
     }
-    
+
     guard let template = loader.loadTemplate(templateName) else {
       let paths:String = loader.paths.map { $0.description }.joinWithSeparator(", ")
       throw TemplateSyntaxError("'\(templateName)' template not found in \(paths)")
@@ -88,6 +88,7 @@ class BlockNode : NodeType {
 
     let blockName = bits[1]
     let nodes = try parser.parse(until(["endblock"]))
+    parser.nextToken()
     return BlockNode(name:blockName, nodes:nodes)
   }
 
