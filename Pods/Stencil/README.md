@@ -1,5 +1,4 @@
-Stencil
-=======
+# Stencil
 
 [![Build Status](http://img.shields.io/circleci/project/kylef/Stencil/master.svg)](https://circleci.com/gh/kylef/Stencil)
 
@@ -7,7 +6,7 @@ Stencil is a simple and powerful template language for Swift. It provides a
 syntax similar to Django and Mustache. If you're familiar with these, you will
 feel right at home with Stencil.
 
-### Example
+## Example
 
 ```html+django
 There are {{ articles.count }} articles.
@@ -76,6 +75,53 @@ For example, if `people` was an array:
 ```html+django
 There are {{ people.count }} people, {{ people.first }} is first person.
 Followed by {{ people.1 }}.
+```
+
+#### Filters
+
+Filters allow you to transform the values of variables. For example, they look like:
+
+```html+django
+{{ variable|uppercase }}
+```
+
+##### Capitalize
+
+The capitalize filter allows you to capitalize a string.
+For example, `stencil` to `Stencil`.
+
+```html+django
+{{ "stencil"|capitalize }}
+```
+
+##### Uppercase
+
+The uppercase filter allows you to transform a string to uppercase.
+For example, `Stencil` to `STENCIL`.
+
+```html+django
+{{ "Stencil"|uppercase }}
+```
+
+##### Lowercase
+
+The uppercase filter allows you to transform a string to lowercase.
+For example, `Stencil` to `stencil`.
+
+```html+django
+{{ "Stencil"|lowercase }}
+```
+
+#### Registering custom filters
+
+```swift
+template.parser.registerFilter("double") { value in
+  if let value = value as? Int {
+    return value * 2
+  }
+
+  return value
+}
 ```
 
 ### Tags

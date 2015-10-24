@@ -10,12 +10,15 @@ public func until(tags:[String])(parser:TokenParser, token:Token) -> Bool {
   return false
 }
 
+public typealias Filter = Any? -> Any?
+
 /// A class for parsing an array of tokens and converts them into a collection of Node's
 public class TokenParser {
   public typealias TagParser = (TokenParser, Token) throws -> NodeType
 
   private var tokens:[Token]
   private var tags = [String:TagParser]()
+  private var filters = [String: Filter]()
 
   public init(tokens:[Token]) {
     self.tokens = tokens
@@ -26,6 +29,9 @@ public class TokenParser {
     registerTag("include", parser: IncludeNode.parse)
     registerTag("extends", parser: ExtendsNode.parse)
     registerTag("block", parser: BlockNode.parse)
+    registerFilter("capitalize", filter: capitalise)
+    registerFilter("uppercase", filter: uppercase)
+    registerFilter("lowercase", filter: lowercase)
   }
 
   /// Registers a new template tag
@@ -38,6 +44,10 @@ public class TokenParser {
     registerTag(name, parser: { parser, token in
       return SimpleNode(handler: handler)
     })
+  }
+
+  public func registerFilter(name: String, filter: Filter) {
+    filters[name] = filter
   }
 
   /// Parse the given tokens into nodes
@@ -54,16 +64,14 @@ public class TokenParser {
       switch token {
       case .Text(let text):
         nodes.append(TextNode(text: text))
-      case .Variable(let variable):
-        nodes.append(VariableNode(variable: variable))
+      case .Variable:
+        nodes.append(VariableNode(variable: try compileFilter(token.contents)))
       case .Block:
         let tag = token.components().first
 
-        if let parse_until = parse_until {
-          if parse_until(parser: self, token: token) {
+        if let parse_until = parse_until where parse_until(parser: self, token: token) {
             prependToken(token)
             return nodes
-          }
         }
 
         if let tag = tag, let parser = self.tags[tag] {
@@ -87,5 +95,17 @@ public class TokenParser {
 
   public func prependToken(token:Token) {
     tokens.insert(token, atIndex: 0)
+  }
+
+  public func findFilter(name: String) throws -> Filter {
+    if let filter = filters[name] {
+      return filter
+    }
+
+    throw TemplateSyntaxError("Invalid filter '\(name)'")
+  }
+
+  func compileFilter(token: String) throws -> Resolvable {
+    return try FilterExpression(token: token, parser: self)
   }
 }

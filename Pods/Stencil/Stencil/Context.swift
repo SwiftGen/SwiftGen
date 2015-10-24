@@ -1,9 +1,9 @@
 /// A container for template variables.
-public class Context : Equatable {
-  var dictionaries:[[String:AnyObject]]
+public class Context {
+  var dictionaries:[[String: Any]]
 
   /// Initialise a Context with a dictionary
-  public init(dictionary:[String:AnyObject]) {
+  public init(dictionary:[String: Any]) {
     dictionaries = [dictionary]
   }
 
@@ -12,7 +12,7 @@ public class Context : Equatable {
     dictionaries = []
   }
 
-  public subscript(key: String) -> AnyObject? {
+  public subscript(key: String) -> Any? {
     /// Retrieves a variable's value, starting at the current context and going upwards
     get {
       for dictionary in Array(dictionaries.reverse()) {
@@ -34,16 +34,12 @@ public class Context : Equatable {
   }
 
   /// Push a new level into the Context
-  public func push(dictionary:[String:AnyObject]? = nil) {
+  public func push(dictionary: [String: Any]? = nil) {
     dictionaries.append(dictionary ?? [:])
   }
 
   /// Pop the last level off of the Context
-  public func pop() -> [String:AnyObject]? {
+  public func pop() -> [String: Any]? {
     return dictionaries.popLast()
   }
-}
-
-public func ==(lhs:Context, rhs:Context) -> Bool {
-  return lhs.dictionaries == rhs.dictionaries
 }

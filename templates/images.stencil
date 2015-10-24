@@ -7,7 +7,7 @@ import UIKit
 extension UIImage {
   enum Asset : String {
     {% for image in images %}
-    case {% identifier image %} = "{{ image }}"
+    case {{ image|swiftIdentifier }} = "{{ image }}"
     {% endfor %}
 
     var image: UIImage {

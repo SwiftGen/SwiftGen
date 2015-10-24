@@ -6,22 +6,20 @@
 
 import Stencil
 
-public class GenumTemplate : Template {
+// Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
+public class CompactTemplate : Template {
   public override init(templateString: String) {
     let templateStringWithMarkedNewlines = templateString
       .stringByReplacingOccurrencesOfString("\n\n", withString: "\n\u{000b}\n")
       .stringByReplacingOccurrencesOfString("\n\n", withString: "\n\u{000b}\n")
     super.init(templateString: templateStringWithMarkedNewlines)
-    parser.registerTag("identifier", parser: IdentifierNode.parse)
-    parser.registerTag("set", parser: SetNode.parse)
-    parser.registerTag("lowerFirstWord", parser: StringCaseNode.parse_lowerFirstWord)
   }
   
-  // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
   public override func render(context:Context? = nil) throws -> String {
     return try removeExtraLines(super.render(context))
   }
   
+  // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
   private func removeExtraLines(str: String) -> String {
     let extraLinesRE = try! NSRegularExpression(pattern: "\\n([ \\t]*\\n)+", options: [])
     let compact = extraLinesRE.stringByReplacingMatchesInString(str, options: [], range: NSRange(location: 0, length: str.utf16.count), withTemplate: "\n")
@@ -29,5 +27,16 @@ public class GenumTemplate : Template {
       .stringByReplacingOccurrencesOfString("\n\u{000b}\n", withString: "\n\n")
       .stringByReplacingOccurrencesOfString("\n\u{000b}\n", withString: "\n\n")
     return unmarkedNewlines
+  }
+}
+
+// Register Genum-specific tags & filters
+public class GenumTemplate : CompactTemplate {
+  public override init(templateString: String) {
+    super.init(templateString: templateString)
+    parser.registerTag("set", parser: SetNode.parse)
+    parser.registerFilter("swiftIdentifier", filter: IdentifierFilters.identifierNoUnderscores)
+    parser.registerFilter("swift_Identifier", filter: IdentifierFilters.identifierWithUnderscores)
+    parser.registerFilter("lowerFirstWord", filter: StringCaseFilters.lowerFirstWord)
   }
 }
