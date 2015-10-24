@@ -9,12 +9,12 @@ import Stencil
 struct IdentifierFilters {
   static func identifierNoUnderscores(value: Any?) -> Any? {
     guard let value = value as? String else { return nil }
-    return value.asSwiftIdentifier(forbiddenChars: "_", replaceWithUnderscores: false)
+    return swiftIdentifier(fromString: value, forbiddenChars: "_", replaceWithUnderscores: false)
   }
   
   static func identifierWithUnderscores(value: Any?) -> Any? {
     guard let value = value as? String else { return nil }
-    return value.asSwiftIdentifier(replaceWithUnderscores: true)
+    return swiftIdentifier(fromString: value, replaceWithUnderscores: true)
   }
 }
 
