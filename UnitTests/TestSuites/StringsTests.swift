@@ -19,7 +19,9 @@ class StringsTests: XCTestCase {
     let enumBuilder = StringEnumBuilder()
     enumBuilder.addEntry(StringEnumBuilder.Entry(key: "Title"))
     enumBuilder.addEntry(StringEnumBuilder.Entry(key: "Greetings", types: .Object, .Int))
-    let result = enumBuilder.build()
+    
+    let template = GenumTemplate(templateString: fixtureString("strings.stencil"))
+    let result = try! template.render(enumBuilder.stencilContext())
     
     let expected = self.fixtureString("Strings-Entries-Defaults.swift.out")
     XCTDiffStrings(result, expected)
@@ -33,7 +35,9 @@ class StringsTests: XCTestCase {
     if let e = StringEnumBuilder.Entry(line: "\"GreetingsAndAge\"=\"My name is %@, I am %d\";/* hello */") {
       enumBuilder.addEntry(e)
     }
-    let result = enumBuilder.build()
+
+    let template = GenumTemplate(templateString: fixtureString("strings.stencil"))
+    let result = try! template.render(enumBuilder.stencilContext())
     
     let expected = self.fixtureString("Strings-Lines-Defaults.swift.out")
     XCTDiffStrings(result, expected)
@@ -42,8 +46,10 @@ class StringsTests: XCTestCase {
   func testFileWithDefaults() {
     let enumBuilder = StringEnumBuilder()
     try! enumBuilder.parseLocalizableStringsFile(fixturePath("Localizable.strings"))
-    let result = enumBuilder.build()
-    
+
+    let template = GenumTemplate(templateString: fixtureString("strings.stencil"))
+    let result = try! template.render(enumBuilder.stencilContext())
+
     let expected = self.fixtureString("Strings-File-Defaults.swift.out")
     XCTDiffStrings(result, expected)
   }
@@ -51,52 +57,11 @@ class StringsTests: XCTestCase {
   func testFileWithCustomName() {
     let enumBuilder = StringEnumBuilder()
     try! enumBuilder.parseLocalizableStringsFile(fixturePath("Localizable.strings"))
-    let result = enumBuilder.build(enumName: "XCTLoc")
-    
+
+    let template = GenumTemplate(templateString: fixtureString("strings.stencil"))
+    let result = try! template.render(enumBuilder.stencilContext())
+
     let expected = self.fixtureString("Strings-File-CustomName.swift.out")
-    XCTDiffStrings(result, expected)
-  }
-  
-  func testFileWithCustomIndentation() {
-    let enumBuilder = StringEnumBuilder()
-    try! enumBuilder.parseLocalizableStringsFile(fixturePath("Localizable.strings"))
-    let result = enumBuilder.build(indentation: .Spaces(3))
-    
-    let expected = self.fixtureString("Strings-File-CustomIndentation.swift.out")
-    XCTDiffStrings(result, expected)
-  }
-  
-  func testLinesWithUnderscore() {
-    
-    let enumBuilder = StringEnumBuilder()
-    if let e = StringEnumBuilder.Entry(line: "\"APP_TITLE\"    =   \"My awesome title\"  ; // Yeah") {
-      enumBuilder.addEntry(e)
-    }
-    if let e = StringEnumBuilder.Entry(line: "\"GREETINGS_AND_AGE\"=\"My name is %@, I am %d\";/* hello */") {
-      enumBuilder.addEntry(e)
-    }
-    
-    let result = enumBuilder.build(forbiddenChars: "")
-    
-    let expected = self.fixtureString("Strings-Lines-Underscore.swift.out")
-    
-    XCTAssertEqual(result, expected)
-    XCTDiffStrings(result, expected)
-  }
-  
-  func testLinesWithExcludeUnderscore() {
-    
-    let enumBuilder = StringEnumBuilder()
-    if let e = StringEnumBuilder.Entry(line: "\"APP_TITLE\"    =   \"My awesome title\"  ; // Yeah") {
-      enumBuilder.addEntry(e)
-    }
-    if let e = StringEnumBuilder.Entry(line: "\"GREETINGS_AND_AGE\"=\"My name is %@, I am %d\";/* hello */") {
-      enumBuilder.addEntry(e)
-    }
-    
-    let result = enumBuilder.build(forbiddenChars: "_")
-    
-    let expected = self.fixtureString("Strings-Lines-ExcludeUnderscore.swift.out")
     XCTDiffStrings(result, expected)
   }
   

@@ -9,14 +9,17 @@ import PathKit
 import GenumKit
 
 let stringsCommand = command(
-  outputOption,
-  Argument<Path>("FILE", description: "Localizable.strings file to parse.", validator: fileExists),
-  Option<String>("excludechars", "_", description: "Characters that should be ignored in swift identifier.")
-) { output, path, forbiddenChars in
+  outputOption, templateOption("strings.stencil"),
+  Argument<Path>("FILE", description: "Localizable.strings file to parse.", validator: fileExists)
+) { output, template, path in
   let enumBuilder = StringEnumBuilder()
+  
   do {
     try enumBuilder.parseLocalizableStringsFile(String(path))
-    output.write(enumBuilder.build(forbiddenChars: forbiddenChars))
+    
+    let template = try GenumTemplate(path: try fileExists(path: template))
+    let rendered = try template.render(enumBuilder.stencilContext())
+    output.write(rendered)
   }
   catch let error as NSError {
     print("Error: \(error.localizedDescription)")

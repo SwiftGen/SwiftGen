@@ -5,8 +5,11 @@
 //
 
 import Foundation
+import Stencil
 
 public final class StringEnumBuilder {
+  private var parsedLines = [Entry]()
+
   public init() {}
   
   public func addEntry(entry: Entry) {
@@ -14,8 +17,9 @@ public final class StringEnumBuilder {
   }
   
   // Localizable.strings files are generally UTF16, not UTF8!
-  public func parseLocalizableStringsFile(path: String, encoding: UInt = NSUTF16StringEncoding) throws {
-    let fileContent = try NSString(contentsOfFile: path, encoding: encoding)
+  public func parseLocalizableStringsFile(path: String) throws {
+    var encoding: NSStringEncoding = NSUTF16StringEncoding
+    let fileContent = try NSString(contentsOfFile: path, usedEncoding: &encoding)
     let lines = fileContent.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
     
     for case let entry? in lines.map(Entry.init) {
@@ -23,69 +27,22 @@ public final class StringEnumBuilder {
     }
   }
   
-  public func build(enumName enumName : String = "L10n", indentation indent : Indentation = .Spaces(4), forbiddenChars : String = "_") -> String {
-    var text = "// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen\n\n"
-    text += "import Foundation\n\n"
-    
-    let t = indent.string
-    
-    guard !parsedLines.isEmpty else {
-      return text + "// No line found in Localizable.strings"
-    }
-    
-    text += "enum \(enumName.asSwiftIdentifier()) {\n"
-    
-    for entry in parsedLines {
-      let caseName = entry.key.asSwiftIdentifier(forbiddenChars: forbiddenChars)
-      text += "\(t)case \(caseName)"
-      if !entry.types.isEmpty {
-        text += "(" + entry.types.map{ $0.rawValue }.joinWithSeparator(", ") + ")"
+  public func stencilContext() -> Context {
+    let strings = parsedLines.map { (entry: Entry) -> [String:AnyObject] in
+      if entry.types.count > 0 {
+        let params = [
+          "count": entry.types.count,
+          "types": entry.types.map { $0.rawValue },
+          "declarations": (0..<entry.types.count).map { "let p\($0)" },
+          "names": (0..<entry.types.count).map { "p\($0)" }
+        ]
+        return ["key": entry.key, "params":params]
+      } else {
+        return ["key": entry.key]
       }
-      text += "\n"
     }
-    
-    text += "}\n\n"
-    
-    text += "extension \(enumName.asSwiftIdentifier()) : CustomStringConvertible {\n"
-    
-    text += "\(t)var description : String { return self.string }\n\n"
-    
-    text += "\(t)var string : String {\n"
-    text += "\(t)\(t)switch self {\n"
-    
-    for entry in parsedLines {
-      let caseName = entry.key.asSwiftIdentifier(forbiddenChars: forbiddenChars)
-      text += "\(t)\(t)\(t)case .\(caseName)"
-      if !entry.types.isEmpty {
-        let params = (0..<entry.types.count).map { "let p\($0)" }
-        text += "(" + params.joinWithSeparator(", ") + ")"
-      }
-      text += ":\n"
-      text += "\(t)\(t)\(t)\(t)return \(enumName).tr(\"\(entry.key)\""
-      if !entry.types.isEmpty {
-        text += ", "
-        let params = (0..<entry.types.count).map { "p\($0)" }
-        text += params.joinWithSeparator(", ")
-      }
-      text += ")\n"
-    }
-    
-    text += "\(t)\(t)}\n"
-    text += "\(t)}\n\n"
-    
-    text += "\(t)private static func tr(key: String, _ args: CVarArgType...) -> String {\n"
-    text += "\(t)\(t)let format = NSLocalizedString(key, comment: \"\")\n"
-    text += "\(t)\(t)return String(format: format, arguments: args)\n"
-    text += "\(t)}\n"
-    text += "}\n\n"
-    
-    text += "func tr(key: \(enumName)) -> String {\n"
-    text += "\(t)return key.string\n"
-    text += "}\n"
-    
-    return text
+    return Context(dictionary: ["enumName":"L10n", "strings":strings])
   }
-  
   
   
   // MARK: - Public Enum types
@@ -138,9 +95,7 @@ public final class StringEnumBuilder {
       self.types = types
     }
     
-    private static var lineRegEx = {
-      return try! NSRegularExpression(pattern: "^\"([^\"]+)\"[ \t]*=[ \t]*\"(.*)\"[ \t]*;", options: [])
-      }()
+    private static let lineRegEx = try! NSRegularExpression(pattern: "^\"([^\"]+)\"[ \t]*=[ \t]*\"(.*)\"[ \t]*;", options: [])
     
     public init?(line: String) {
       let range = NSRange(location: 0, length: (line as NSString).length)
@@ -161,10 +116,7 @@ public final class StringEnumBuilder {
   
   // MARK: - Private Helpers
   
-  private var parsedLines = [Entry]()
-  
-  // "I give %d apples to %@" --> [.Int, .String]
-  private static var formatTypesRegEx : NSRegularExpression = {
+  private static let formatTypesRegEx : NSRegularExpression = {
     let pattern_int = "(?:h|hh|l|ll|q|z|t|j)?([dioux])" // %d/%i/%o/%u/%x with their optional length modifiers like in "%lld"
     let pattern_float = "[aefg]"
     let position = "([1-9]\\d*\\$)?" // like in "%3$" to make positional specifiers
@@ -172,6 +124,7 @@ public final class StringEnumBuilder {
     return try! NSRegularExpression(pattern: "(?<!%)%\(position)\(precision)(@|\(pattern_int)|\(pattern_float)|[csp])", options: [.CaseInsensitive])
     }()
   
+  // "I give %d apples to %@" --> [.Int, .String]
   private static func typesFromFormatString(formatString: String) -> [PlaceholderType] {
     let range = NSRange(location: 0, length: (formatString as NSString).length)
     

@@ -16,7 +16,6 @@ struct IdentifierFilters {
     guard let value = value as? String else { return nil }
     return value.asSwiftIdentifier(replaceWithUnderscores: true)
   }
-
 }
 
 struct StringCaseFilters {
@@ -41,5 +40,13 @@ struct StringCaseFilters {
     let transformed = String(scalars[start..<idx]).lowercaseString + String(scalars[idx..<scalars.endIndex])
     return transformed
 
+  }
+}
+
+struct ArrayFilters {
+  static func join(value: Any?) -> Any? {
+    guard let array = value as? [String] else { return nil }
+    
+    return array.joinWithSeparator(", ")
   }
 }

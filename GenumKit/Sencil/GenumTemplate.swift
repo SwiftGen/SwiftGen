@@ -37,6 +37,7 @@ public class GenumTemplate : CompactTemplate {
     parser.registerTag("set", parser: SetNode.parse)
     parser.registerFilter("swiftIdentifier", filter: IdentifierFilters.identifierNoUnderscores)
     parser.registerFilter("swift_Identifier", filter: IdentifierFilters.identifierWithUnderscores)
+    parser.registerFilter("join", filter: ArrayFilters.join)
     parser.registerFilter("lowerFirstWord", filter: StringCaseFilters.lowerFirstWord)
   }
 }

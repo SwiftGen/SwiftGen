@@ -15,7 +15,7 @@ import GenumKit
 
 class StoryboardTests: XCTestCase {
   
-  func testMessageWithDefaults() {
+  func testMessageStoryboard() {
     let enumBuilder = StoryboardEnumBuilder()
     enumBuilder.addStoryboardAtPath(self.fixturePath("Message.storyboard"))
     
@@ -26,7 +26,7 @@ class StoryboardTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
   
-  func testAllWithDefaults() {
+  func testAllStoryboards() {
     let enumBuilder = StoryboardEnumBuilder()
     enumBuilder.parseDirectory(self.fixturesDir)
     
