@@ -295,7 +295,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		232E53FF539FD7368CB0D3B36C216051 /* Sencil */ = {
+		232E53FF539FD7368CB0D3B36C216051 /* Stencil */ = {
 			isa = PBXGroup;
 			children = (
 				C8371A93EEEA80FC6FB253D22FED17C3 /* Contexts.swift */,
@@ -303,7 +303,7 @@
 				5E21517F3D04290A0CE9275A34C0448E /* GenumTemplate.swift */,
 				EA7C08A90A6EEA78CAD60ED0C3209157 /* SetNode.swift */,
 			);
-			path = Sencil;
+			path = Stencil;
 			sourceTree = "<group>";
 		};
 		259ECD19309DB41588CB064C4AC893AF /* PathKit */ = {
@@ -515,7 +515,7 @@
 			children = (
 				8FF82BDA147E692328A42DB693B1DD15 /* Core */,
 				761BA121FB169781ACC90F1B618D36E7 /* EnumBuilders */,
-				232E53FF539FD7368CB0D3B36C216051 /* Sencil */,
+				232E53FF539FD7368CB0D3B36C216051 /* Stencil */,
 				30BEB697630A06D6C81C66720E1F8F52 /* Support Files */,
 			);
 			name = GenumKit;
