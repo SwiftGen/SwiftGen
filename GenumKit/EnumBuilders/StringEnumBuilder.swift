@@ -5,19 +5,18 @@
 //
 
 import Foundation
-import Stencil
 
 public final class StringEnumBuilder {
-  private var parsedLines = [Entry]()
+  var entries = [Entry]()
 
   public init() {}
   
   public func addEntry(entry: Entry) {
-    parsedLines.append(entry)
+    entries.append(entry)
   }
   
   // Localizable.strings files are generally UTF16, not UTF8!
-  public func parseLocalizableStringsFile(path: String) throws {
+  public func addEntriesFromStringsFile(path: String) throws {
     var encoding: NSStringEncoding = NSUTF16StringEncoding
     let fileContent = try NSString(contentsOfFile: path, usedEncoding: &encoding)
     let lines = fileContent.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
@@ -26,24 +25,6 @@ public final class StringEnumBuilder {
       addEntry(entry)
     }
   }
-  
-  public func stencilContext() -> Context {
-    let strings = parsedLines.map { (entry: Entry) -> [String:AnyObject] in
-      if entry.types.count > 0 {
-        let params = [
-          "count": entry.types.count,
-          "types": entry.types.map { $0.rawValue },
-          "declarations": (0..<entry.types.count).map { "let p\($0)" },
-          "names": (0..<entry.types.count).map { "p\($0)" }
-        ]
-        return ["key": entry.key, "params":params]
-      } else {
-        return ["key": entry.key]
-      }
-    }
-    return Context(dictionary: ["enumName":"L10n", "strings":strings])
-  }
-  
   
   // MARK: - Public Enum types
   

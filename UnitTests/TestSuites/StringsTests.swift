@@ -45,7 +45,7 @@ class StringsTests: XCTestCase {
   
   func testFileWithDefaults() {
     let enumBuilder = StringEnumBuilder()
-    try! enumBuilder.parseLocalizableStringsFile(fixturePath("Localizable.strings"))
+    try! enumBuilder.addEntriesFromStringsFile(fixturePath("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings.stencil"))
     let result = try! template.render(enumBuilder.stencilContext())
@@ -56,10 +56,10 @@ class StringsTests: XCTestCase {
   
   func testFileWithCustomName() {
     let enumBuilder = StringEnumBuilder()
-    try! enumBuilder.parseLocalizableStringsFile(fixturePath("Localizable.strings"))
+    try! enumBuilder.addEntriesFromStringsFile(fixturePath("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings.stencil"))
-    let result = try! template.render(enumBuilder.stencilContext())
+    let result = try! template.render(enumBuilder.stencilContext("XCTLoc"))
 
     let expected = self.fixtureString("Strings-File-CustomName.swift.out")
     XCTDiffStrings(result, expected)

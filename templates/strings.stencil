@@ -16,10 +16,10 @@ extension {{enumName}} : CustomStringConvertible {
       {% for string in strings %}
       {% if string.params %}
       case .{{string.key|swiftIdentifier}}({{string.params.declarations|join}}):
-        return L10n.tr("{{string.key}}", {{string.params.names|join}})
+        return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
       {% else %}
       case .{{string.key|swiftIdentifier}}:
-        return L10n.tr("{{string.key}}")
+        return {{enumName}}.tr("{{string.key}}")
       {% endif %}
       {% endfor %}
     }
@@ -31,6 +31,6 @@ extension {{enumName}} : CustomStringConvertible {
   }
 }
 
-func tr(key: L10n) -> String {
+func tr(key: {{enumName}}) -> String {
   return key.string
 }
