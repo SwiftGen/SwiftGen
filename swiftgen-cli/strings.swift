@@ -7,7 +7,6 @@
 import Commander
 import PathKit
 import GenumKit
-import Stencil
 
 let stringsCommand = command(
   outputOption,
@@ -18,7 +17,7 @@ let stringsCommand = command(
   let parser = StringsFileParser()
   
   do {
-    try parser.addEntriesFromStringsFile(String(path))
+    try parser.parseStringsFile(String(path))
     
     let template = try GenumTemplate(path: try fileExists(path: template))
     let context = parser.stencilContext(enumName: enumName)

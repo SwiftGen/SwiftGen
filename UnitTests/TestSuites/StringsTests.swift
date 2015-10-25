@@ -45,7 +45,7 @@ class StringsTests: XCTestCase {
   
   func testFileWithDefaults() {
     let parser = StringsFileParser()
-    try! parser.addEntriesFromStringsFile(fixturePath("Localizable.strings"))
+    try! parser.parseStringsFile(fixturePath("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -56,7 +56,7 @@ class StringsTests: XCTestCase {
   
   func testFileWithCustomName() {
     let parser = StringsFileParser()
-    try! parser.addEntriesFromStringsFile(fixturePath("Localizable.strings"))
+    try! parser.parseStringsFile(fixturePath("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings.stencil"))
     let result = try! template.render(parser.stencilContext(enumName: "XCTLoc"))

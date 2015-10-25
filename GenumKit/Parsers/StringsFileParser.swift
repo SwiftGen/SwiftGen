@@ -16,7 +16,7 @@ public final class StringsFileParser {
   }
   
   // Localizable.strings files are generally UTF16, not UTF8!
-  public func addEntriesFromStringsFile(path: String) throws {
+  public func parseStringsFile(path: String) throws {
     var encoding: NSStringEncoding = NSUTF16StringEncoding
     let fileContent = try NSString(contentsOfFile: path, usedEncoding: &encoding)
     let lines = fileContent.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
