@@ -2,9 +2,9 @@
 
 ---
 
-## Master
+## 0.5.2
 
-### New Fatures
+### New Features
 
 * It's now possible to specify which chars should not be used when generating `case` identifiers.  
 [@Igor-Palaguta](https://github.com/Igor-Palaguta), [#34](https://github.com/AliSoftware/SwiftGen/pull/34)
