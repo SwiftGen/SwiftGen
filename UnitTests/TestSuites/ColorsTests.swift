@@ -6,27 +6,42 @@
 
 import XCTest
 import GenumKit
+import PathKit
 
 class ColorsTests: XCTestCase {
-
-    func testListWithDefaults() {
-        let enumBuilder = ColorEnumBuilder()
-        enumBuilder.addColorWithName("TextColor", value: "0x999999")
-        enumBuilder.addColorWithName("ArticleTitle", value: "#996600")
-        enumBuilder.addColorWithName("ArticleBackground", value: "#ffcc0099")
-        let result = enumBuilder.build()
-        
-        let expected = self.fixtureString("Colors-List-Defaults.swift.out")
-        XCTDiffStrings(result, expected)
-    }
-
-    func testFileWithDefaults() {
-        let enumBuilder = ColorEnumBuilder()
-        try! enumBuilder.parseTextFile(fixturePath("colors.txt"))
-        let result = enumBuilder.build()
-        
-        let expected = self.fixtureString("Colors-File-Defaults.swift.out")
-        XCTDiffStrings(result, expected)
-    }
-
+  
+  func testListWithDefaults() {
+    let parser = ColorsFileParser()
+    parser.addColorWithName("TextColor", value: "0x999999")
+    parser.addColorWithName("ArticleTitle", value: "#996600")
+    parser.addColorWithName("ArticleBackground", value: "#ffcc0099")
+    
+    let template = GenumTemplate(templateString: fixtureString("colors.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Colors-List-Defaults.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
+  func testFileWithDefaults() {
+    let parser = ColorsFileParser()
+    try! parser.parseTextFile(fixturePath("colors.txt"))
+    
+    let template = GenumTemplate(templateString: fixtureString("colors.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Colors-File-Defaults.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
+  func testFileWithCustomName() {
+    let parser = ColorsFileParser()
+    try! parser.parseTextFile(fixturePath("colors.txt"))
+    
+    let template = GenumTemplate(templateString: fixtureString("colors.stencil"))
+    let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
+    
+    let expected = self.fixtureString("Colors-File-CustomName.swift.out")
+    XCTDiffStrings(result, expected)
+  }
 }

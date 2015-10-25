@@ -2,6 +2,14 @@
 
 ---
 
+## 0.6.0
+
+### New Features: Templates
+
+* `SwiftGen` now uses [Stencil](https://github.com/kylef/Stencil) template engine to produce the generated code.
+* This means that the generate code will be easier to improve
+* This also means that **you can use your own templates** to generate code that better suits your needs and preferences, using `swiftgen … --template FILE …`
+
 ## 0.5.2
 
 ### New Features

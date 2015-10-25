@@ -1,0 +1,36 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+
+enum {{enumName}} {
+  {% for string in strings %}
+  case {{string.key|swiftIdentifier}}{% if string.params %}({{string.params.types|join}}){% endif %}
+  {% endfor %}
+}
+
+extension {{enumName}} : CustomStringConvertible {
+  var description : String { return self.string }
+
+  var string : String {
+    switch self {
+      {% for string in strings %}
+      {% if string.params %}
+      case .{{string.key|swiftIdentifier}}({{string.params.declarations|join}}):
+        return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
+      {% else %}
+      case .{{string.key|swiftIdentifier}}:
+        return {{enumName}}.tr("{{string.key}}")
+      {% endif %}
+      {% endfor %}
+    }
+  }
+
+  private static func tr(key: String, _ args: CVarArgType...) -> String {
+    let format = NSLocalizedString(key, comment: "")
+    return String(format: format, arguments: args)
+  }
+}
+
+func tr(key: {{enumName}}) -> String {
+  return key.string
+}

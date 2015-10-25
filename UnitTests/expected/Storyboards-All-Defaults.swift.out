@@ -4,75 +4,75 @@ import Foundation
 import UIKit
 
 protocol StoryboardScene : RawRepresentable {
-    static var storyboardName : String { get }
-    static func storyboard() -> UIStoryboard
-    static func initialViewController() -> UIViewController
-    func viewController() -> UIViewController
-    static func viewController(identifier: Self) -> UIViewController
+  static var storyboardName : String { get }
+  static func storyboard() -> UIStoryboard
+  static func initialViewController() -> UIViewController
+  func viewController() -> UIViewController
+  static func viewController(identifier: Self) -> UIViewController
 }
 
 extension StoryboardScene where Self.RawValue == String {
-    static func storyboard() -> UIStoryboard {
-        return UIStoryboard(name: self.storyboardName, bundle: nil)
-    }
+  static func storyboard() -> UIStoryboard {
+    return UIStoryboard(name: self.storyboardName, bundle: nil)
+  }
 
-    static func initialViewController() -> UIViewController {
-        return storyboard().instantiateInitialViewController()!
-    }
+  static func initialViewController() -> UIViewController {
+    return storyboard().instantiateInitialViewController()!
+  }
 
-    func viewController() -> UIViewController {
-        return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
-    }
-    static func viewController(identifier: Self) -> UIViewController {
-        return identifier.viewController()
-    }
+  func viewController() -> UIViewController {
+    return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
+  }
+  static func viewController(identifier: Self) -> UIViewController {
+    return identifier.viewController()
+  }
 }
 
 extension UIStoryboard {
-    struct Scene {
-        enum Wizard : String, StoryboardScene {
-            static let storyboardName = "Wizard"
+  struct Scene {
+    enum Message : String, StoryboardScene {
+      static let storyboardName = "Message"
 
-            case CreateAccount = "CreateAccount"
-            static func createAccountViewController() -> CreateAccViewController {
-                return Wizard.CreateAccount.viewController() as! CreateAccViewController
-            }
+      case Composer = "Composer"
+      static func composerViewController() -> UIViewController {
+        return Message.Composer.viewController()
+      }
 
-            case AcceptCGU = "Accept-CGU"
-            static func acceptCGUViewController() -> UIViewController {
-                return Wizard.AcceptCGU.viewController()
-            }
-
-            case ValidatePassword = "Validate_Password"
-            static func validatePasswordViewController() -> UIViewController {
-                return Wizard.ValidatePassword.viewController()
-            }
-
-            case Preferences = "Preferences"
-            static func preferencesViewController() -> UIViewController {
-                return Wizard.Preferences.viewController()
-            }
-        }
-        enum Message : String, StoryboardScene {
-            static let storyboardName = "Message"
-
-            case Composer = "Composer"
-            static func composerViewController() -> UIViewController {
-                return Message.Composer.viewController()
-            }
-
-            case URLChooser = "URLChooser"
-            static func urlChooserViewController() -> XXPickerViewController {
-                return Message.URLChooser.viewController() as! XXPickerViewController
-            }
-        }
+      case URLChooser = "URLChooser"
+      static func urlChooserViewController() -> XXPickerViewController {
+        return Message.URLChooser.viewController() as! XXPickerViewController
+      }
     }
+    enum Wizard : String, StoryboardScene {
+      static let storyboardName = "Wizard"
 
-    struct Segue {
-        enum Message : String {
-            case Custom = "Custom"
-            case Back = "Back"
-            case NonCustom = "NonCustom"
-        }
+      case AcceptCGU = "Accept-CGU"
+      static func acceptCGUViewController() -> UIViewController {
+        return Wizard.AcceptCGU.viewController()
+      }
+
+      case CreateAccount = "CreateAccount"
+      static func createAccountViewController() -> CreateAccViewController {
+        return Wizard.CreateAccount.viewController() as! CreateAccViewController
+      }
+
+      case Preferences = "Preferences"
+      static func preferencesViewController() -> UITableViewController {
+        return Wizard.Preferences.viewController() as! UITableViewController
+      }
+
+      case ValidatePassword = "Validate_Password"
+      static func validatePasswordViewController() -> UIViewController {
+        return Wizard.ValidatePassword.viewController()
+      }
     }
+  }
+
+  struct Segue {
+    enum Message : String {
+      case Back = "Back"
+      case Custom = "Custom"
+      case NonCustom = "NonCustom"
+    }
+  }
 }

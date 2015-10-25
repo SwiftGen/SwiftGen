@@ -14,47 +14,39 @@ import GenumKit
  */
 
 class ImagesTests: XCTestCase {
+  
+  func testEntriesWithDefaults() {
+    let parser = AssetsCatalogParser()
+    parser.addImageName("Green-Apple")
+    parser.addImageName("Red Apple")
+    parser.addImageName("2-pears")
+    
+    let template = GenumTemplate(templateString: fixtureString("images.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Images-Entries-Defaults.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
+  func testFileWithDefaults() {
+    let parser = AssetsCatalogParser()
+    parser.parseDirectory(fixturePath("Images.xcassets"))
 
-    func testEntriesWithDefaults() {
-        let enumBuilder = ImageEnumBuilder()
-        enumBuilder.addImageName("Green-Apple")
-        enumBuilder.addImageName("Red Apple")
-        enumBuilder.addImageName("2-pears")
-        let result = enumBuilder.build()
-        
-        let expected = self.fixtureString("Images-Entries-Defaults.swift.out")
-        XCTDiffStrings(result, expected)
-    }
+    let template = GenumTemplate(templateString: fixtureString("images.stencil"))
+    let result = try! template.render(parser.stencilContext())
 
-    func testFileWithDefaults() {
-        let enumBuilder = ImageEnumBuilder()
-        enumBuilder.parseDirectory(fixturePath("Images.xcassets"))
-        let result = enumBuilder.build()
-        
-        let expected = self.fixtureString("Images-File-Defaults.swift.out")
-        XCTDiffStrings(result, expected)
-    }
-
-    func testEntriesWithUnderscore() {
-        let enumBuilder = ImageEnumBuilder()
-        enumBuilder.addImageName("Green_Apple")
-        enumBuilder.addImageName("Red_Apple")
-        enumBuilder.addImageName("2 pears")
-        let result = enumBuilder.build(forbiddenChars: "")
-        
-        let expected = self.fixtureString("Images-Entries-Underscore.swift.out")
-        XCTDiffStrings(result, expected)
-    }
-
-    func testEntriesWithExcludeUnderscore() {
-        let enumBuilder = ImageEnumBuilder()
-        enumBuilder.addImageName("Green_Apple")
-        enumBuilder.addImageName("Red_Apple")
-        enumBuilder.addImageName("2 pears")
-        let result = enumBuilder.build(forbiddenChars: "_")
-        
-        let expected = self.fixtureString("Images-Entries-ExcludeUnderscore.swift.out")
-        XCTDiffStrings(result, expected)
-    }
-
+    let expected = self.fixtureString("Images-File-Defaults.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
+  func testFileWithCustomName() {
+    let parser = AssetsCatalogParser()
+    parser.parseDirectory(fixturePath("Images.xcassets"))
+    
+    let template = GenumTemplate(templateString: fixtureString("images.stencil"))
+    let result = try! template.render(parser.stencilContext(enumName: "XCTImages"))
+    
+    let expected = self.fixtureString("Images-File-CustomName.swift.out")
+    XCTDiffStrings(result, expected)
+  }  
 }

@@ -1,0 +1,66 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+import UIKit
+
+{# This first part of the code is static, same every time whatever Storyboard you have #}
+protocol StoryboardScene : RawRepresentable {
+  static var storyboardName : String { get }
+  static func storyboard() -> UIStoryboard
+  static func initialViewController() -> UIViewController
+  func viewController() -> UIViewController
+  static func viewController(identifier: Self) -> UIViewController
+}
+
+extension StoryboardScene where Self.RawValue == String {
+  static func storyboard() -> UIStoryboard {
+    return UIStoryboard(name: self.storyboardName, bundle: nil)
+  }
+
+  static func initialViewController() -> UIViewController {
+    return storyboard().instantiateInitialViewController()!
+  }
+
+  func viewController() -> UIViewController {
+    return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
+  }
+  static func viewController(identifier: Self) -> UIViewController {
+    return identifier.viewController()
+  }
+}
+
+{# This is where the generation begins, this code depends on what you have in your Storyboards #}
+extension UIStoryboard {
+  struct {{sceneEnumName}} {
+    {% for storyboard in storyboards %}
+    {% set storyboardName %}{{storyboard.name|swiftIdentifier}}{% endset %}
+    enum {{storyboardName}} : String, StoryboardScene {
+      static let storyboardName = "{{storyboard.name}}"
+      {% for scene in storyboard.scenes %}
+      {% set sceneID %}{{scene.identifier|swiftIdentifier}}{% endset %}
+
+      case {{sceneID}} = "{{scene.identifier}}"
+      {% if scene.class %}
+      static func {{sceneID|lowerFirstWord}}ViewController() -> {{scene.class}} {
+        return {{storyboardName}}.{{sceneID}}.viewController() as! {{scene.class}}
+      }
+      {% else %}
+      static func {{sceneID|lowerFirstWord}}ViewController() -> UIViewController {
+        return {{storyboardName}}.{{sceneID}}.viewController()
+      }
+      {% endif %}
+      {% endfor %}
+    }
+    {% endfor %}
+  }
+
+  struct {{segueEnumName}} {
+    {% for storyboard in storyboards %}{% if storyboard.segues %}
+    enum {{storyboard.name|swiftIdentifier}} : String {
+      {% for segue in storyboard.segues %}
+      case {{segue.identifier|swiftIdentifier}} = "{{segue.identifier}}"
+      {% endfor %}
+    }
+    {% endif %}{% endfor %}
+  }
+}

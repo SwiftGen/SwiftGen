@@ -1,0 +1,19 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+import UIKit
+
+extension UIImage {
+  enum XCTImages : String {
+    case Apple = "Apple"
+    case Banana = "Banana"
+
+    var image: UIImage {
+      return UIImage(asset: self)
+    }
+  }
+
+  convenience init!(asset: XCTImages) {
+    self.init(named: asset.rawValue)
+  }
+}

@@ -4,52 +4,52 @@ import Foundation
 import UIKit
 
 protocol StoryboardScene : RawRepresentable {
-    static var storyboardName : String { get }
-    static func storyboard() -> UIStoryboard
-    static func initialViewController() -> UIViewController
-    func viewController() -> UIViewController
-    static func viewController(identifier: Self) -> UIViewController
+  static var storyboardName : String { get }
+  static func storyboard() -> UIStoryboard
+  static func initialViewController() -> UIViewController
+  func viewController() -> UIViewController
+  static func viewController(identifier: Self) -> UIViewController
 }
 
 extension StoryboardScene where Self.RawValue == String {
-    static func storyboard() -> UIStoryboard {
-        return UIStoryboard(name: self.storyboardName, bundle: nil)
-    }
+  static func storyboard() -> UIStoryboard {
+    return UIStoryboard(name: self.storyboardName, bundle: nil)
+  }
 
-    static func initialViewController() -> UIViewController {
-        return storyboard().instantiateInitialViewController()!
-    }
+  static func initialViewController() -> UIViewController {
+    return storyboard().instantiateInitialViewController()!
+  }
 
-    func viewController() -> UIViewController {
-        return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
-    }
-    static func viewController(identifier: Self) -> UIViewController {
-        return identifier.viewController()
-    }
+  func viewController() -> UIViewController {
+    return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
+  }
+  static func viewController(identifier: Self) -> UIViewController {
+    return identifier.viewController()
+  }
 }
 
 extension UIStoryboard {
-    struct Scene {
-        enum Message : String, StoryboardScene {
-            static let storyboardName = "Message"
+  struct Scene {
+    enum Message : String, StoryboardScene {
+      static let storyboardName = "Message"
 
-            case Composer = "Composer"
-            static func composerViewController() -> UIViewController {
-                return Message.Composer.viewController()
-            }
+      case Composer = "Composer"
+      static func composerViewController() -> UIViewController {
+        return Message.Composer.viewController()
+      }
 
-            case URLChooser = "URLChooser"
-            static func urlChooserViewController() -> XXPickerViewController {
-                return Message.URLChooser.viewController() as! XXPickerViewController
-            }
-        }
+      case URLChooser = "URLChooser"
+      static func urlChooserViewController() -> XXPickerViewController {
+        return Message.URLChooser.viewController() as! XXPickerViewController
+      }
     }
+  }
 
-    struct Segue {
-        enum Message : String {
-            case Custom = "Custom"
-            case Back = "Back"
-            case NonCustom = "NonCustom"
-        }
+  struct Segue {
+    enum Message : String {
+      case Back = "Back"
+      case Custom = "Custom"
+      case NonCustom = "NonCustom"
     }
+  }
 }

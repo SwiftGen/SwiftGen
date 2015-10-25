@@ -4,40 +4,35 @@
 // MIT Licence
 //
 
-import Foundation
 import Commander
 import GenumKit
+import PathKit
 
-// MARK: Validators
+// MARK: Common
 
-enum PathType: String { case Directory, File }
+let TEMPLATES_RELATIVE_PATH = "../templates"
 
-func pathExists(type: PathType?)(path: String) throws -> String {
-    var isDir = ObjCBool(false)
-    let check: ObjCBool -> Bool = { isDir in
-        switch type {
-        case .Directory?: return isDir.boolValue == true
-        case .File?: return isDir.boolValue == false
-        default: return true
-        }
-    }
-    guard NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDir) && check(isDir) else {
-        let displayType = type.map{$0.rawValue} ?? "path"
-        throw ArgumentError.InvalidType(value: path, type: displayType, argument: nil)
-    }
-    return path
+let outputOption = Option("output", OutputDestination.Console, flag: "o", description: "The path to the file to generate. Use - to generate in stdout")
+
+func templateOption(name: String) -> Option<Path> {
+  let defaultTemplateRelativePath = Path(TEMPLATES_RELATIVE_PATH) + name
+  let defaultTemplate = Path(NSProcessInfo.processInfo().arguments[0]).parent() + defaultTemplateRelativePath
+  return Option<Path>("template",
+    defaultTemplate,
+    flag: "t",
+    description: "The template to use for code generation. (defaults to $swiftgen/\(defaultTemplateRelativePath))",
+    validator: fileExists)
 }
+
 
 // MARK: - Main
 
-let version: String = {
-    let info = NSBundle(forClass: GenumKit.ImageEnumBuilder.self).infoDictionary
-    return info.flatMap { $0["CFBundleShortVersionString"] as? String } ?? "0.0"
-}()
+let main = Group {
+  $0.addCommand("colors", colorsCommand)
+  $0.addCommand("images", imagesCommand)
+  $0.addCommand("storyboards", storyboardsCommand)
+  $0.addCommand("strings", stringsCommand)
+}
 
-Group {
-    $0.addCommand("storyboards", storyboardsCommand)
-    $0.addCommand("images", imagesCommand)
-    $0.addCommand("colors", colorsCommand)
-    $0.addCommand("strings", stringsCommand)
-}.run("SwiftGen v\(version)")
+let version = NSBundle(forClass: GenumKit.GenumTemplate.self).infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
+main.run("SwiftGen v\(version)")
