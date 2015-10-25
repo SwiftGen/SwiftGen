@@ -10,6 +10,10 @@
 * This means that the generate code will be easier to improve
 * This also means that **you can use your own templates** to generate code that better suits your needs and preferences, using `swiftgen … --template FILE …`
 
+### Fixes
+
+* The correct type of _ViewController_ (`UIViewController`, `UINavigationController`, `UITableViewController`, …) is now correctly generated even if not a custom subclass.  ([#40](https://github.com/AliSoftware/SwiftGen/issues/40))
+
 ## 0.5.2
 
 ### New Features

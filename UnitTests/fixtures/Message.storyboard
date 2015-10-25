@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xKD-v4-X1W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xKD-v4-X1W">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <scenes>
-        <!--Choose Message Type-->
+        <!--Home-->
         <scene sceneID="Xiw-Gn-sB9">
             <objects>
-                <viewController title="Choose Message Type" id="xKD-v4-X1W" sceneMemberID="viewController">
+                <viewController title="Home" id="xKD-v4-X1W" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BKm-Tp-8s8"/>
                         <viewControllerLayoutGuide type="bottom" id="9vY-Yn-kTM"/>
@@ -19,12 +20,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="fbV-qd-GcD" kind="show" identifier="Custom" customClass="CustomSegue" id="Xe4-Eu-32y"/>
+                        <segue destination="6de-Ew-T2L" kind="presentation" identifier="Show-NavCtrl" customClass="CustomSegueClass" id="xFF-3Q-EbQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gUd-OH-dp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="59" y="75"/>
+            <point key="canvasLocation" x="51" y="75"/>
         </scene>
         <!--Message Content-->
         <scene sceneID="xbl-90-0AD">
@@ -54,7 +55,7 @@
                                 <animations/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="fbV-qd-GcD" kind="show" identifier="Back" id="4bU-WI-OTc"/>
+                                    <segue destination="xKD-v4-X1W" kind="custom" identifier="CustomBack" customClass="CustomSegueClass2" id="eBb-AQ-abV"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -64,7 +65,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qt1-1T-8X7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1593" y="75"/>
+            <point key="canvasLocation" x="847" y="909"/>
         </scene>
         <!--URL to share-->
         <scene sceneID="xq8-Pa-EzB">
@@ -86,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ph3-jv-P42" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="871" y="75"/>
+            <point key="canvasLocation" x="51" y="909"/>
         </scene>
         <!--Unreachable-->
         <scene sceneID="yHG-qj-IXS">
@@ -105,10 +106,59 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mkc-TT-uhB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="805" y="855"/>
+            <point key="canvasLocation" x="1641" y="909"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="UZS-hB-UfV">
+            <objects>
+                <tableViewController storyboardIdentifier="MessagesList" id="4eG-UT-EY5" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="BfC-HV-CpZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomMessageCell" id="ABY-1J-cxh">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ABY-1J-cxh" id="mGm-Cb-M2O">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                                <connections>
+                                    <segue destination="fbV-qd-GcD" kind="show" id="x0v-NY-l9l"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="4eG-UT-EY5" id="dND-y4-Tln"/>
+                            <outlet property="delegate" destination="4eG-UT-EY5" id="M6r-7F-a29"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="vbR-YS-BAL"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2V0-gN-nL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1641" y="75"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="EWA-zt-XJd">
+            <objects>
+                <navigationController storyboardIdentifier="NavCtrl" id="6de-Ew-T2L" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nRP-jO-yPL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="4eG-UT-EY5" kind="relationship" relationship="rootViewController" id="Z5i-nf-Ukl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eMV-5n-jX3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="847" y="75"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="4bU-WI-OTc"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -38,6 +38,16 @@ extension UIStoryboard {
         return Message.Composer.viewController()
       }
 
+      case MessagesList = "MessagesList"
+      static func messagesListViewController() -> UITableViewController {
+        return Message.MessagesList.viewController() as! UITableViewController
+      }
+
+      case NavCtrl = "NavCtrl"
+      static func navCtrlViewController() -> UINavigationController {
+        return Message.NavCtrl.viewController() as! UINavigationController
+      }
+
       case URLChooser = "URLChooser"
       static func urlChooserViewController() -> XXPickerViewController {
         return Message.URLChooser.viewController() as! XXPickerViewController
@@ -47,9 +57,9 @@ extension UIStoryboard {
 
   struct Segue {
     enum Message : String {
-      case Back = "Back"
-      case Custom = "Custom"
+      case CustomBack = "CustomBack"
       case NonCustom = "NonCustom"
+      case ShowNavCtrl = "Show-NavCtrl"
     }
   }
 }
