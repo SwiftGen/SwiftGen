@@ -10,11 +10,18 @@ import PathKit
 
 // MARK: Common
 
+let TEMPLATES_RELATIVE_PATH = "../templates"
+
 let outputOption = Option("output", OutputDestination.Console, flag: "o", description: "The path to the file to generate. Use - to generate in stdout")
 
 func templateOption(name: String) -> Option<Path> {
-  let defaultTemplate = Path(NSBundle.mainBundle().executablePath!) + "/../share/templates/" + name
-  return Option<Path>("template", defaultTemplate, flag: "t", description: "The template to use for code generation.", validator: fileExists)
+  let defaultTemplateRelativePath = Path(TEMPLATES_RELATIVE_PATH) + name
+  let defaultTemplate = Path(NSProcessInfo.processInfo().arguments[0]).parent() + defaultTemplateRelativePath
+  return Option<Path>("template",
+    defaultTemplate,
+    flag: "t",
+    description: "The template to use for code generation. (defaults to $swiftgen/\(defaultTemplateRelativePath))",
+    validator: fileExists)
 }
 
 
