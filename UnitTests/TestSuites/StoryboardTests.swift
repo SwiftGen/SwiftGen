@@ -15,18 +15,18 @@ import GenumKit
 
 class StoryboardTests: XCTestCase {
   
-  func testMessageStoryboard() {
+  func testMessageStoryboardWithDefaults() {
     let enumBuilder = StoryboardEnumBuilder()
     enumBuilder.addStoryboardAtPath(self.fixturePath("Message.storyboard"))
     
     let template = GenumTemplate(templateString: fixtureString("storyboards.stencil"))
     let result = try! template.render(enumBuilder.stencilContext())
     
-    let expected = self.fixtureString("Storyboards-Message.swift.out")
+    let expected = self.fixtureString("Storyboards-Message-Defaults.swift.out")
     XCTDiffStrings(result, expected)
   }
   
-  func testAllStoryboards() {
+  func testAllStoryboardsWithDefaults() {
     let enumBuilder = StoryboardEnumBuilder()
     enumBuilder.parseDirectory(self.fixturesDir)
     
@@ -34,8 +34,19 @@ class StoryboardTests: XCTestCase {
     let ctx = enumBuilder.stencilContext()
     let result = try! template.render(ctx)
     
-    let expected = self.fixtureString("Storyboards-All.swift.out")
+    let expected = self.fixtureString("Storyboards-All-Defaults.swift.out")
     XCTDiffStrings(result, expected)
   }
 
+  func testAllStoryboardsWithCustomName() {
+    let enumBuilder = StoryboardEnumBuilder()
+    enumBuilder.parseDirectory(self.fixturesDir)
+    
+    let template = GenumTemplate(templateString: fixtureString("storyboards.stencil"))
+    let ctx = enumBuilder.stencilContext(sceneEnumName: "XCTStoryboardsScene", segueEnumName: "XCTStoryboardsSegue")
+    let result = try! template.render(ctx)
+    
+    let expected = self.fixtureString("Storyboards-All-CustomName.swift.out")
+    XCTDiffStrings(result, expected)
+  }
 }

@@ -15,7 +15,7 @@ import GenumKit
 
 class ImagesTests: XCTestCase {
   
-  func testEntries() {
+  func testEntriesWithDefaults() {
     let enumBuilder = ImageEnumBuilder()
     enumBuilder.addImageName("Green-Apple")
     enumBuilder.addImageName("Red Apple")
@@ -24,19 +24,29 @@ class ImagesTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("images.stencil"))
     let result = try! template.render(enumBuilder.stencilContext())
     
-    let expected = self.fixtureString("Images-Entries.swift.out")
+    let expected = self.fixtureString("Images-Entries-Defaults.swift.out")
     XCTDiffStrings(result, expected)
   }
   
-  func testFile() {
+  func testFileWithDefaults() {
     let enumBuilder = ImageEnumBuilder()
     enumBuilder.parseDirectory(fixturePath("Images.xcassets"))
 
     let template = GenumTemplate(templateString: fixtureString("images.stencil"))
     let result = try! template.render(enumBuilder.stencilContext())
 
-    let expected = self.fixtureString("Images-File.swift.out")
+    let expected = self.fixtureString("Images-File-Defaults.swift.out")
     XCTDiffStrings(result, expected)
   }
   
+  func testFileWithCustomName() {
+    let enumBuilder = ImageEnumBuilder()
+    enumBuilder.parseDirectory(fixturePath("Images.xcassets"))
+    
+    let template = GenumTemplate(templateString: fixtureString("images.stencil"))
+    let result = try! template.render(enumBuilder.stencilContext(enumName: "XCTImages"))
+    
+    let expected = self.fixtureString("Images-File-CustomName.swift.out")
+    XCTDiffStrings(result, expected)
+  }  
 }

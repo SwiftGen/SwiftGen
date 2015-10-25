@@ -26,9 +26,9 @@ func templateOption(name: String) -> Option<Path> {
 // MARK: - Main
 
 let main = Group {
-  $0.addCommand("storyboards", storyboardsCommand)
-  $0.addCommand("images", imagesCommand)
   $0.addCommand("colors", colorsCommand)
+  $0.addCommand("images", imagesCommand)
+  $0.addCommand("storyboards", storyboardsCommand)
   $0.addCommand("strings", stringsCommand)
 }
 main.run("SwiftGen v\(version)")
