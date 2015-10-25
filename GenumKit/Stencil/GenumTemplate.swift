@@ -38,6 +38,6 @@ public class GenumTemplate : CompactTemplate {
     parser.registerFilter("swiftIdentifier", filter: IdentifierFilters.identifierNoUnderscores)
     parser.registerFilter("swift_Identifier", filter: IdentifierFilters.identifierWithUnderscores)
     parser.registerFilter("join", filter: ArrayFilters.join)
-    parser.registerFilter("lowerFirstWord", filter: StringCaseFilters.lowerFirstWord)
+    parser.registerFilter("lowerFirstWord", filter: StringFilters.lowerFirstWord)
   }
 }

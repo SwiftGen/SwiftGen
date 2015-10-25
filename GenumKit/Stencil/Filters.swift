@@ -18,7 +18,7 @@ struct IdentifierFilters {
   }
 }
 
-struct StringCaseFilters {
+struct StringFilters {
   
   /* - If the string starts with only one uppercase letter, lowercase that first letter
    * - If the string starts with multiple uppercase letters, lowercase those first letters up to the one before the last uppercase one
@@ -39,7 +39,6 @@ struct StringCaseFilters {
     }
     let transformed = String(scalars[start..<idx]).lowercaseString + String(scalars[idx..<scalars.endIndex])
     return transformed
-
   }
 }
 

@@ -5,10 +5,9 @@
 //
 
 import Foundation
-import Stencil
 
 public final class ImageEnumBuilder {
-  private var imageNames = [String]()
+  var imageNames = [String]()
   
   public init() {}
   
@@ -31,9 +30,5 @@ public final class ImageEnumBuilder {
         }
       }
     }
-  }
-  
-  public func stencilContext() -> Context {
-    return Context(dictionary: ["images": imageNames])
   }
 }

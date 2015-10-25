@@ -902,34 +902,6 @@
 			};
 			name = Release;
 		};
-		31A89D6B2F06BA38D2207EE8FE829E0A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 58A82E490A7C0C5188326DAA73F49544 /* GenumKit.xcconfig */;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/GenumKit/GenumKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/GenumKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MODULEMAP_FILE = "Target Support Files/GenumKit/GenumKit.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = GenumKit;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		3608ED0683F399DB7664D221F4106C9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C6B9D3FF012BBC698FBA8D6CEB7AF94A /* Stencil.xcconfig */;
@@ -1239,6 +1211,35 @@
 			};
 			name = Debug;
 		};
+		EEB86586980D548C1AFC2963925F690D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58A82E490A7C0C5188326DAA73F49544 /* GenumKit.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/GenumKit/GenumKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GenumKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "Target Support Files/GenumKit/GenumKit.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = GenumKit;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		F720F2F3546346DB3AA38C8920C1CC7E /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C6B9D3FF012BBC698FBA8D6CEB7AF94A /* Stencil.xcconfig */;
@@ -1291,7 +1292,7 @@
 		3BBFE01EDA2E72F7A04C80CDD63CC130 /* Build configuration list for PBXNativeTarget "GenumKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31A89D6B2F06BA38D2207EE8FE829E0A /* Debug */,
+				EEB86586980D548C1AFC2963925F690D /* Debug */,
 				08A3F04706250A22251D108CD6365922 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

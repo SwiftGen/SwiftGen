@@ -59,7 +59,7 @@ class StringsTests: XCTestCase {
     try! enumBuilder.addEntriesFromStringsFile(fixturePath("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings.stencil"))
-    let result = try! template.render(enumBuilder.stencilContext("XCTLoc"))
+    let result = try! template.render(enumBuilder.stencilContext(enumName: "XCTLoc"))
 
     let expected = self.fixtureString("Strings-File-CustomName.swift.out")
     XCTDiffStrings(result, expected)

@@ -31,7 +31,7 @@ extension StoryboardScene where Self.RawValue == String {
 
 {# This is where the generation begins, this code depends on what you have in your Storyboards #}
 extension UIStoryboard {
-  struct Scene {
+  struct {{sceneEnumName}} {
     {% for storyboard in storyboards %}
     {% set storyboardName %}{{storyboard.name|swiftIdentifier}}{% endset %}
     enum {{storyboardName}} : String, StoryboardScene {
@@ -54,7 +54,7 @@ extension UIStoryboard {
     {% endfor %}
   }
 
-  struct Segue {
+  struct {{segueEnumName}} {
     {% for storyboard in storyboards %}{% if storyboard.segues %}
     enum {{storyboard.name|swiftIdentifier}} : String {
       {% for segue in storyboard.segues %}

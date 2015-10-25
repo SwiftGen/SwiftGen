@@ -5,9 +5,10 @@
 //
 
 import Foundation
-import Stencil
 
 public final class ColorEnumBuilder {
+  var colors = [String:UInt32]()
+  
   public init() {}
   
   public func addColorWithName(name: String, value: String) {
@@ -40,18 +41,7 @@ public final class ColorEnumBuilder {
     }
   }
   
-  public func stencilContext() -> Context {
-    let colorMap = colors.map { (color: (name: String, value: UInt32)) -> [String:String] in
-      let name = color.name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-      let hexValue = String(color.value, radix: 16)
-      return ["name": name, "hex": hexValue]
-    }
-    return Context(dictionary: ["colors": colorMap])
-  }
-  
   // MARK: - Private Helpers
-  
-  private var colors = [String:UInt32]()
   
   private static func parse(hexString: String) -> UInt32 {
     let scanner = NSScanner(string: hexString)

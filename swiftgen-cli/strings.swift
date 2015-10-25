@@ -21,7 +21,7 @@ let stringsCommand = command(
     try enumBuilder.addEntriesFromStringsFile(String(path))
     
     let template = try GenumTemplate(path: try fileExists(path: template))
-    let rendered = try template.render(enumBuilder.stencilContext(enumName))
+    let rendered = try template.render(enumBuilder.stencilContext(enumName: enumName))
     output.write(rendered)
   }
   catch let error as NSError {

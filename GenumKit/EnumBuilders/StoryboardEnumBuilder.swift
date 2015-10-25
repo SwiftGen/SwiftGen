@@ -5,14 +5,12 @@
 //
 
 import Foundation
-import Stencil
 
 public final class StoryboardEnumBuilder {
-  private typealias Scene = (storyboardID: String, tag: String, customClass: String?)
-  private typealias Segue = (segueID: String, customClass: String?)
-  private var storyboardsScenes = [String: [Scene]]()
-  private var storyboardsSegues = [String: [Segue]]()
-  
+  typealias Scene = (storyboardID: String, tag: String, customClass: String?)
+  typealias Segue = (segueID: String, customClass: String?)
+  var storyboardsScenes = [String: [Scene]]()
+  var storyboardsSegues = [String: [Segue]]()
   
   public init() {}
   
@@ -88,42 +86,4 @@ public final class StoryboardEnumBuilder {
       }
     }
   }
-  
-  public func stencilContext() -> Context {
-    let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sort(<)
-    let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:AnyObject] in
-      var sbMap: [String:AnyObject] = ["name": storyboardName]
-      if let scenes = storyboardsScenes[storyboardName] {
-        sbMap["scenes"] = scenes
-          .sort({$0.storyboardID < $1.storyboardID})
-          .map { (scene: Scene) -> [String:String] in
-            let customClass = scene.customClass ?? (scene.tag != "viewController" ? "UI" + uppercaseFirst(scene.tag) : nil)
-            if let customClass = customClass {
-              return ["identifier": scene.storyboardID, "class": customClass]
-            } else {
-              return ["identifier": scene.storyboardID]
-            }
-        }
-      }
-      if let segues = storyboardsSegues[storyboardName] {
-        sbMap["segues"] = segues
-          .sort({$0.segueID < $1.segueID})
-          .map { (segue: Segue) -> [String:String] in
-            ["identifier": segue.segueID, "class": segue.customClass ?? "UIStoryboardSegue"]
-        }
-      }
-      return sbMap
-    }
-    return Context(dictionary: ["storyboards": storyboardsMap])
-  }
-  
-  // MARK: - Private Helpers
-  
-  private func uppercaseFirst(string: String) -> String {
-    guard let first = string.characters.first else {
-      return string
-    }
-    return String(first).uppercaseString + String(string.characters.dropFirst())
-  }
-  
 }
