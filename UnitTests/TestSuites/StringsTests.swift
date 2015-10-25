@@ -54,6 +54,17 @@ class StringsTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
   
+  func testUTF8FileWithDefaults() {
+    let parser = StringsFileParser()
+    try! parser.parseStringsFile(fixturePath("LocUTF8.strings"))
+    
+    let template = GenumTemplate(templateString: fixtureString("strings.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Strings-File-Defaults.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
   func testFileWithCustomName() {
     let parser = StringsFileParser()
     try! parser.parseStringsFile(fixturePath("Localizable.strings"))

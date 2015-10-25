@@ -1,0 +1,9 @@
+﻿"alert_title" = "Titre de l'alerte";
+"alert_message" = "Contenu détaillé de l'alerte";
+
+"greetings" = "Bonjour, mon nom est %@ et j'ai %d ans";
+
+"apples.count" = "Vous avez %d pommes";
+"bananas.owner" = "Ces %d bananes appartiennent à %@.";
+
+"object.ownership" = "Ce sont les %1$d %2$@ de %3$@.";

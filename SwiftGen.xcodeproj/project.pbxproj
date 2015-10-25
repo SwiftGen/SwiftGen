@@ -41,6 +41,7 @@
 		09EB0A2D1BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */; };
 		09EB0A2E1BDC60F000B2CF79 /* Storyboards-All-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A251BDC60F000B2CF79 /* Storyboards-All-Defaults.swift.out */; };
 		09EB0A2F1BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A261BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out */; };
+		09EB0A311BDC8F4100B2CF79 /* LocUTF8.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */; };
 		3C88500AFCA6DE48360F93AE /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8A3B4DE5528DD17EC369AA3 /* Pods_swiftgen.framework */; };
 		91554FDE6EC0E514DECD71FA /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B594462FF573E83D0DEF1C64 /* Pods_UnitTests.framework */; };
 /* End PBXBuildFile section */
@@ -129,6 +130,7 @@
 		09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-All-CustomName.swift.out"; sourceTree = "<group>"; };
 		09EB0A251BDC60F000B2CF79 /* Storyboards-All-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-All-Defaults.swift.out"; sourceTree = "<group>"; };
 		09EB0A261BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Message-Defaults.swift.out"; sourceTree = "<group>"; };
+		09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = LocUTF8.strings; sourceTree = "<group>"; };
 		2A900E0D796A11ABCBD63942 /* Pods-swiftgen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.release.xcconfig"; sourceTree = "<group>"; };
 		45E36FC93A27CB2941081D0A /* Pods-swiftgen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.debug.xcconfig"; sourceTree = "<group>"; };
 		682F146ADE25633DEBA0841F /* Pods_swiftgen_cli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen_cli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -233,6 +235,7 @@
 				09030C0C1B6D30E800275BF5 /* Wizard.storyboard */,
 				09030C1D1B6D473E00275BF5 /* colors.txt */,
 				09030C241B6D48FC00275BF5 /* Localizable.strings */,
+				09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */,
 			);
 			path = fixtures;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				09A87B6E1BCCA5F600D9B9F5 /* Strings-File-CustomName.swift.out in Resources */,
 				09A87B711BCCA5FC00D9B9F5 /* Localizable.strings in Resources */,
 				09EB0A281BDC60F000B2CF79 /* Colors-File-Defaults.swift.out in Resources */,
+				09EB0A311BDC8F4100B2CF79 /* LocUTF8.strings in Resources */,
 				09EB0A2E1BDC60F000B2CF79 /* Storyboards-All-Defaults.swift.out in Resources */,
 				09EB0A2D1BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out in Resources */,
 				09EB0A271BDC60F000B2CF79 /* Colors-File-CustomName.swift.out in Resources */,

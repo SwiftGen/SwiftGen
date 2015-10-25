@@ -13,6 +13,7 @@
 ### Fixes
 
 * The correct type of _ViewController_ (`UIViewController`, `UINavigationController`, `UITableViewController`, …) is now correctly generated even if not a custom subclass.  ([#40](https://github.com/AliSoftware/SwiftGen/issues/40))
+* Fix issue with `.strings` files encoded in UTF8 ([#21](https://github.com/AliSoftware/SwiftGen/issues/21))
 
 ## 0.5.2
 
