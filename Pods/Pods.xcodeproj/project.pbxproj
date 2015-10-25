@@ -12,7 +12,7 @@
 		0E5A14740C89F5AD3907C34EBADD846D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6586E91DF9AD32C88B3212B7D04952AA /* Cocoa.framework */; };
 		0E5CE998B39D540500C7C805375459FC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6586E91DF9AD32C88B3212B7D04952AA /* Cocoa.framework */; };
 		1191CA4B65BCDBC794DDC0CBA2CB9B2F /* Contexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A19D82A1A3FBDEFCBC6CC18912AB325 /* Contexts.swift */; };
-		12FD1D9DB81D7B326695D55780648F71 /* ColorEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6A3EBAC99DDFDE4E687FA5E0B6A287 /* ColorEnumBuilder.swift */; };
+		12FD1D9DB81D7B326695D55780648F71 /* ColorsFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6A3EBAC99DDFDE4E687FA5E0B6A287 /* ColorsFileParser.swift */; };
 		1C6B2DC141A8C1FECE7839338D545D51 /* GenumTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA63F8D906A3C813D3A8CFD3DA7717AA /* GenumTemplate.swift */; };
 		21B34FFA23D1264CCA242E6B8DF1E3F7 /* PathKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C6F78DA436B78C667EEB15B14ED458 /* PathKit.swift */; };
 		2653DB302E5D14BC2BB5C47F3D3B7625 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253AF87E87B70220293D9DE1D35CDCED /* Variable.swift */; };
@@ -24,7 +24,7 @@
 		3C6318AE50F98BCF6CAD6A01C922B9C0 /* Commander.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFFBA00D72702C5EB0B28E12198DACC /* Commander.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5871D767BA2F2360E139D1C8199C2E53 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6586E91DF9AD32C88B3212B7D04952AA /* Cocoa.framework */; };
 		60171F9E4CAE8018843F4F1E819A00BF /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD2357F61D006BD2224C1908AF4777D /* Node.swift */; };
-		60A947FF173BB94994924C11389F34CC /* StringEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01263A86F8B683CBFE89E5604248FFCB /* StringEnumBuilder.swift */; };
+		60A947FF173BB94994924C11389F34CC /* StringsFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01263A86F8B683CBFE89E5604248FFCB /* StringsFileParser.swift */; };
 		61771F5038E132E910CC374FE63D51F0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6586E91DF9AD32C88B3212B7D04952AA /* Cocoa.framework */; };
 		670C8E6D05EB1072D413F59DE60A7E3F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6586E91DF9AD32C88B3212B7D04952AA /* Cocoa.framework */; };
 		69D0F9EF3EBE0C1CE713A7D297B6838A /* Stencil-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FCD17B1CB1A5DB675003F13561BCF963 /* Stencil-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,7 +36,7 @@
 		AC67D06919758EF36E4EBBB0E344424C /* ArgumentConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4180DC95B41EE539D60A5AE2FA4E08D /* ArgumentConvertible.swift */; };
 		ACA5CABA1459B4475AFB60A36B5DD81D /* PathKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436538F42B0A2EC1C972F8EE47937E0 /* PathKit.framework */; };
 		BBECFD3437A4436873C68217FBD1570E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6586E91DF9AD32C88B3212B7D04952AA /* Cocoa.framework */; };
-		BC0ECB5C812FBC93BF56C8661F11DB05 /* StoryboardEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E267E0373298A40C59D57642655E11D /* StoryboardEnumBuilder.swift */; };
+		BC0ECB5C812FBC93BF56C8661F11DB05 /* StoryboardParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E267E0373298A40C59D57642655E11D /* StoryboardParser.swift */; };
 		BF0B54A7BE8ECDEEED5CDC2A504508B8 /* GenumKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6000F5A3CB78EDF603FCD9A841100A7B /* GenumKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C15D6608B4141DA8170E7B7DB643CDE4 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A842EB8ED79BBE76FF8B83D8FF59AE1A /* Filters.swift */; };
 		C67F6447DA78AAE41B1B4924EEACD84B /* Include.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598E51E302EC3A25A7A2769D2F785345 /* Include.swift */; };
@@ -44,7 +44,7 @@
 		D1AA358B8DFBC5580AE830E49A82E727 /* Pods-swiftgen-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E7941FF308914D4E806F12A9F0A0E1C6 /* Pods-swiftgen-dummy.m */; };
 		D1D2E9794DB22E377F95E279DE593DD2 /* CommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6CC4CF19BE64547FE7E3B695FA0FD6 /* CommandType.swift */; };
 		D2DF307E0C71F45E5C504F02206F003E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BB0D8D29F977D71301B64BF1C76D59 /* Group.swift */; };
-		D3BA2A41214701E2379A160769A5511C /* ImageEnumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B1CD17DAEE622F710D4A6F458F4D6 /* ImageEnumBuilder.swift */; };
+		D3BA2A41214701E2379A160769A5511C /* AssetsCatalogParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B1CD17DAEE622F710D4A6F458F4D6 /* AssetsCatalogParser.swift */; };
 		D60472F8DBD2727587D6E92E1960066B /* Inheritence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D45FD456BD36ED66A28EAA24A6D946E /* Inheritence.swift */; };
 		D7209F915F3700F52F03FFE463174F1B /* Pods-UnitTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4500F30C4160370D509B784106DD200F /* Pods-UnitTests-dummy.m */; };
 		E0608D4638C3E7FA1C17F3272A0F1A4B /* GenumKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 87EB2FFD22A058D0A24899C56A26E9F4 /* GenumKit-dummy.m */; };
@@ -127,11 +127,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01263A86F8B683CBFE89E5604248FFCB /* StringEnumBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StringEnumBuilder.swift; sourceTree = "<group>"; };
+		01263A86F8B683CBFE89E5604248FFCB /* StringsFileParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StringsFileParser.swift; sourceTree = "<group>"; };
 		037FD791443186A468A65089D9784F2E /* ArgumentParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArgumentParser.swift; path = Commander/ArgumentParser.swift; sourceTree = "<group>"; };
 		0436538F42B0A2EC1C972F8EE47937E0 /* PathKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PathKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		049CF9DDEB4F389CF613C8381D3BD1B6 /* PathKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PathKit-umbrella.h"; sourceTree = "<group>"; };
-		0A3B1CD17DAEE622F710D4A6F458F4D6 /* ImageEnumBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageEnumBuilder.swift; sourceTree = "<group>"; };
+		0A3B1CD17DAEE622F710D4A6F458F4D6 /* AssetsCatalogParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AssetsCatalogParser.swift; sourceTree = "<group>"; };
 		0C759A30FBDC5AF1D1F4C02C9BF5C7E1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F09A3B490B3394E8074DEC70468678D /* GenumKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenumKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D6F12E4A0650452CA10378F841D7A8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 		2C87EB8985C1FA6FD5108E6A12DF7E35 /* Commander.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Commander.xcconfig; sourceTree = "<group>"; };
 		2CFA9DA6BF1C85EB42BE270F6FC59A07 /* GenumKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = GenumKit.modulemap; sourceTree = "<group>"; };
 		2D652E4769C757F9FC7D6633C01B6484 /* Pods-swiftgen-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-swiftgen-resources.sh"; sourceTree = "<group>"; };
-		2E267E0373298A40C59D57642655E11D /* StoryboardEnumBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StoryboardEnumBuilder.swift; sourceTree = "<group>"; };
+		2E267E0373298A40C59D57642655E11D /* StoryboardParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StoryboardParser.swift; sourceTree = "<group>"; };
 		2E69CFB6F74DD7A77F80F926C888A73A /* Lexer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Lexer.swift; path = Stencil/Lexer.swift; sourceTree = "<group>"; };
 		37080A5CB833C24027D1D6D5B9810A7F /* Stencil-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Stencil-dummy.m"; sourceTree = "<group>"; };
 		3D45FD456BD36ED66A28EAA24A6D946E /* Inheritence.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Inheritence.swift; path = Stencil/TemplateLoader/Inheritence.swift; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 		A4180DC95B41EE539D60A5AE2FA4E08D /* ArgumentConvertible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArgumentConvertible.swift; path = Commander/ArgumentConvertible.swift; sourceTree = "<group>"; };
 		A7BB0D8D29F977D71301B64BF1C76D59 /* Group.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Group.swift; path = Commander/Group.swift; sourceTree = "<group>"; };
 		A842EB8ED79BBE76FF8B83D8FF59AE1A /* Filters.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filters.swift; path = Stencil/Filters.swift; sourceTree = "<group>"; };
-		AB6A3EBAC99DDFDE4E687FA5E0B6A287 /* ColorEnumBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ColorEnumBuilder.swift; sourceTree = "<group>"; };
+		AB6A3EBAC99DDFDE4E687FA5E0B6A287 /* ColorsFileParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ColorsFileParser.swift; sourceTree = "<group>"; };
 		ACA38319CF510BD1DEAB837CF15E6931 /* Stencil-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Stencil-prefix.pch"; sourceTree = "<group>"; };
 		B19EEBA947C9E78A437BF0F7D28BC509 /* Template.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Template.swift; path = Stencil/Template.swift; sourceTree = "<group>"; };
 		B7C60A6D8335F644544F4E580149BD8A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -446,21 +446,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BA22AB3B4855C979425D99B2B7959451 /* EnumBuilders */ = {
+		BA22AB3B4855C979425D99B2B7959451 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
-				AB6A3EBAC99DDFDE4E687FA5E0B6A287 /* ColorEnumBuilder.swift */,
-				0A3B1CD17DAEE622F710D4A6F458F4D6 /* ImageEnumBuilder.swift */,
-				2E267E0373298A40C59D57642655E11D /* StoryboardEnumBuilder.swift */,
-				01263A86F8B683CBFE89E5604248FFCB /* StringEnumBuilder.swift */,
+				AB6A3EBAC99DDFDE4E687FA5E0B6A287 /* ColorsFileParser.swift */,
+				0A3B1CD17DAEE622F710D4A6F458F4D6 /* AssetsCatalogParser.swift */,
+				2E267E0373298A40C59D57642655E11D /* StoryboardParser.swift */,
+				01263A86F8B683CBFE89E5604248FFCB /* StringsFileParser.swift */,
 			);
-			path = EnumBuilders;
+			path = Parsers;
 			sourceTree = "<group>";
 		};
 		C2868535FCB308A7749008634551E30A /* GenumKit */ = {
 			isa = PBXGroup;
 			children = (
-				BA22AB3B4855C979425D99B2B7959451 /* EnumBuilders */,
+				BA22AB3B4855C979425D99B2B7959451 /* Parsers */,
 				F13119B34A9084F5E688E96CAC982421 /* Stencil */,
 				C7DE69D64BC82D13F0C31D3CC7E08126 /* Support Files */,
 			);
@@ -773,15 +773,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12FD1D9DB81D7B326695D55780648F71 /* ColorEnumBuilder.swift in Sources */,
+				12FD1D9DB81D7B326695D55780648F71 /* ColorsFileParser.swift in Sources */,
 				1191CA4B65BCDBC794DDC0CBA2CB9B2F /* Contexts.swift in Sources */,
 				8985087AE5FFF2860950F5DEBEFB32EF /* Filters.swift in Sources */,
 				E0608D4638C3E7FA1C17F3272A0F1A4B /* GenumKit-dummy.m in Sources */,
 				1C6B2DC141A8C1FECE7839338D545D51 /* GenumTemplate.swift in Sources */,
-				D3BA2A41214701E2379A160769A5511C /* ImageEnumBuilder.swift in Sources */,
+				D3BA2A41214701E2379A160769A5511C /* AssetsCatalogParser.swift in Sources */,
 				31B8B2ABA7EDBCA160C418FBF35CAA80 /* SetNode.swift in Sources */,
-				BC0ECB5C812FBC93BF56C8661F11DB05 /* StoryboardEnumBuilder.swift in Sources */,
-				60A947FF173BB94994924C11389F34CC /* StringEnumBuilder.swift in Sources */,
+				BC0ECB5C812FBC93BF56C8661F11DB05 /* StoryboardParser.swift in Sources */,
+				60A947FF173BB94994924C11389F34CC /* StringsFileParser.swift in Sources */,
 				EBB19F00C08B8698775F5ACEFB11B452 /* SwiftIdentifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

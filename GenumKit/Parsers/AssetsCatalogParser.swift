@@ -6,7 +6,7 @@
 
 import Foundation
 
-public final class ImageEnumBuilder {
+public final class AssetsCatalogParser {
   var imageNames = [String]()
   
   public init() {}

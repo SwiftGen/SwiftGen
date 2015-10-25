@@ -6,7 +6,7 @@
 
 import Foundation
 
-public final class StringEnumBuilder {
+public final class StringsFileParser {
   var entries = [Entry]()
 
   public init() {}
@@ -58,7 +58,7 @@ public final class StringEnumBuilder {
     }
     
     public static func fromFormatString(format: String) -> [PlaceholderType] {
-      return StringEnumBuilder.typesFromFormatString(format)
+      return StringsFileParser.typesFromFormatString(format)
     }
   }
   

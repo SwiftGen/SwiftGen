@@ -6,7 +6,7 @@
 
 import Foundation
 
-public final class StoryboardEnumBuilder {
+public final class StoryboardParser {
   typealias Scene = (storyboardID: String, tag: String, customClass: String?)
   typealias Segue = (segueID: String, customClass: String?)
   var storyboardsScenes = [String: [Scene]]()

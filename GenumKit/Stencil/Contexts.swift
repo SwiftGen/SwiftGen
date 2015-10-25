@@ -20,7 +20,7 @@ private func uppercaseFirst(string: String) -> String {
  .  - name: String
  .  - hex: String — hex value of for RRGGBBAA (without the "0x" prefix)
 */
-extension ColorEnumBuilder {
+extension ColorsFileParser {
   public func stencilContext(enumName enumName: String = "Name") -> Context {
     let colorMap = colors.map { (color: (name: String, value: UInt32)) -> [String:AnyObject] in
       let name = color.name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
@@ -36,7 +36,7 @@ extension ColorEnumBuilder {
  - enumName: String
  - images: Array<String> — image names
 */
-extension ImageEnumBuilder {
+extension AssetsCatalogParser {
   public func stencilContext(enumName enumName: String = "Asset") -> Context {
     return Context(dictionary: ["enumName": enumName, "images": imageNames])
   }
@@ -55,7 +55,7 @@ extension ImageEnumBuilder {
  .  .  - identifier: String
  .  .  - class: String (absent if generic UIStoryboardSegue)
 */
-extension StoryboardEnumBuilder {
+extension StoryboardParser {
   public func stencilContext(sceneEnumName sceneEnumName: String = "Scene", segueEnumName: String = "Segue") -> Context {
     let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sort(<)
     let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:AnyObject] in
@@ -96,9 +96,9 @@ extension StoryboardEnumBuilder {
  .  .  - declarations: Array<String> containing declarations like "let p0", "let p1", etc
  .  .  - names: Array<String> containing parameter names like "p0", "p1", etc
 */
-extension StringEnumBuilder {
+extension StringsFileParser {
   public func stencilContext(enumName enumName: String = "L10n") -> Context {
-    let strings = entries.map { (entry: StringEnumBuilder.Entry) -> [String:AnyObject] in
+    let strings = entries.map { (entry: StringsFileParser.Entry) -> [String:AnyObject] in
       if entry.types.count > 0 {
         let params = [
           "count": entry.types.count,

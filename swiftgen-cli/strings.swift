@@ -15,13 +15,14 @@ let stringsCommand = command(
   Option<String>("enumName", "L10n", flag: "e", description: "The name of the enum to generate"),
   Argument<Path>("FILE", description: "Localizable.strings file to parse.", validator: fileExists)
 ) { output, template, enumName, path in
-  let enumBuilder = StringEnumBuilder()
+  let parser = StringsFileParser()
   
   do {
-    try enumBuilder.addEntriesFromStringsFile(String(path))
+    try parser.addEntriesFromStringsFile(String(path))
     
     let template = try GenumTemplate(path: try fileExists(path: template))
-    let rendered = try template.render(enumBuilder.stencilContext(enumName: enumName))
+    let context = parser.stencilContext(enumName: enumName)
+    let rendered = try template.render(context)
     output.write(rendered)
   }
   catch let error as NSError {

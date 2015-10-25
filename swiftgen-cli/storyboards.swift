@@ -15,17 +15,18 @@ let storyboardsCommand = command(
   Option<String>("segueEnumName", "Segue", flag: "g", description: "The name of the enum to generate for Segues"),
   Argument<Path>("PATH", description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard", validator: pathExists)
 ) { output, template, sceneEnumName, segueEnumName, path in
-  let enumBuilder = StoryboardEnumBuilder()
+  let parser = StoryboardParser()
   if path.`extension` == "storyboard" {
-    enumBuilder.addStoryboardAtPath(String(path))
+    parser.addStoryboardAtPath(String(path))
   }
   else {
-    enumBuilder.parseDirectory(String(path))
+    parser.parseDirectory(String(path))
   }
   
   do {
     let template = try GenumTemplate(path: try fileExists(path: template))
-    let rendered = try template.render(enumBuilder.stencilContext(sceneEnumName: sceneEnumName, segueEnumName: segueEnumName))
+    let context = parser.stencilContext(sceneEnumName: sceneEnumName, segueEnumName: segueEnumName)
+    let rendered = try template.render(context)
     output.write(rendered)
   } catch {
     print("Failed to render template \(error)")

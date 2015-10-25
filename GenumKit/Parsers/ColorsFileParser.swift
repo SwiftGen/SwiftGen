@@ -6,13 +6,13 @@
 
 import Foundation
 
-public final class ColorEnumBuilder {
+public final class ColorsFileParser {
   var colors = [String:UInt32]()
   
   public init() {}
   
   public func addColorWithName(name: String, value: String) {
-    addColorWithName(name, value: ColorEnumBuilder.parse(value))
+    addColorWithName(name, value: ColorsFileParser.parse(value))
   }
   
   public func addColorWithName(name: String, value: UInt32) {
