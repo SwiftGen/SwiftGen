@@ -22,25 +22,25 @@ class StringFiltersrTests: XCTestCase {
     ]
     
     for (input, expected) in expectations {
-      let result = StringFilters.lowerFirstWord(input) as? String
+      let result = try! StringFilters.lowerFirstWord(input) as? String
       XCTAssertEqual(result, expected)
     }
   }
   
   func testSnakeToCamelCase() {
     let expectations = [
-      "string": "string",
-      "string_with_words": "stringWithWords",
-      "someCapString": "someCapString",
+      "string": "String",
+      "string_with_words": "StringWithWords",
+      "someCapString": "SomeCapString",
       "": "",
-      "x": "x",
-      "a__b__c": "aBC",
+      "x": "X",
+      "a__b__c": "ABC",
       "__y_z": "__YZ",
       "PLEASE_STOP_SCREAMING!": "PLEASESTOPSCREAMING!"
     ]
     
     for (input, expected) in expectations {
-      let result = StringFilters.snakeToCamelCase(input) as? String
+      let result = try! StringFilters.snakeToCamelCase(input) as? String
       XCTAssertEqual(result, expected)
     }
   }

@@ -59,7 +59,7 @@ extension UIStoryboard {
     enum Message : String {
       case CustomBack = "CustomBack"
       case NonCustom = "NonCustom"
-      case ShowNavCtrl = "Show-NavCtrl"
+      case Show_NavCtrl = "Show-NavCtrl"
     }
   }
 }

@@ -45,13 +45,13 @@ struct StringFilters {
     return transformed
   }
   
-  static func titlecase(value: Any?) -> Any? {
-    guard let string = value as? String else { return nil }
+  static func titlecase(value: Any?) throws -> Any? {
+    guard let string = value as? String else { throw FilterError.InvalidInputType }
     return titlecase(string)
   }
   
-  static func snakeToCamelCase(value: Any?) -> Any? {
-    guard let string = value as? String else { return nil }
+  static func snakeToCamelCase(value: Any?) throws -> Any? {
+    guard let string = value as? String else { throw FilterError.InvalidInputType }
 
     var prefixUnderscores = ""
     for scalar in string.unicodeScalars {
@@ -60,7 +60,7 @@ struct StringFilters {
     }
     
     let comps = string.componentsSeparatedByString("_")
-    return prefixUnderscores + (comps.first ?? "") + comps.dropFirst().map { titlecase($0) }.joinWithSeparator("")
+    return prefixUnderscores + comps.map { titlecase($0) }.joinWithSeparator("")
   }
   
   /**

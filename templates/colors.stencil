@@ -17,7 +17,7 @@ extension UIColor {
 extension UIColor {
   enum {{enumName}} : UInt32 {
     {% for color in colors %}
-    case {{color.name|swift_identifier|snakeToCamelCase}} = 0x{{color.hex}}
+    case {{color.name|swift_identifier}} = 0x{{color.hex}}
     {% endfor %}
   }
 

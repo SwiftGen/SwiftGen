@@ -34,19 +34,19 @@ extension StoryboardScene where Self.RawValue == String {
 extension UIStoryboard {
   struct {{sceneEnumName}} {
     {% for storyboard in storyboards %}
-    {% set storyboardName %}{{storyboard.name|swift_identifier|snakeToCamelCase}}{% endset %}
+    {% set storyboardName %}{{storyboard.name|swift_identifier}}{% endset %}
     enum {{storyboardName}} : String, StoryboardScene {
       static let storyboardName = "{{storyboard.name}}"
       {% for scene in storyboard.scenes %}
-      {% set sceneID %}{{scene.identifier|swift_identifier|snakeToCamelCase}}{% endset %}
+      {% set sceneID %}{{scene.identifier|swift_identifier}}{% endset %}
 
       case {{sceneID}} = "{{scene.identifier}}"
       {% if scene.class %}
-      static func {{sceneID|lowerFirstWord}}ViewController() -> {{scene.class}} {
+      static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> {{scene.class}} {
         return {{storyboardName}}.{{sceneID}}.viewController() as! {{scene.class}}
       }
       {% else %}
-      static func {{sceneID|lowerFirstWord}}ViewController() -> UIViewController {
+      static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> UIViewController {
         return {{storyboardName}}.{{sceneID}}.viewController()
       }
       {% endif %}
@@ -57,9 +57,9 @@ extension UIStoryboard {
 
   struct {{segueEnumName}} {
     {% for storyboard in storyboards %}{% if storyboard.segues %}
-    enum {{storyboard.name|swift_identifier|snakeToCamelCase}} : String {
+    enum {{storyboard.name|swift_identifier}} : String {
       {% for segue in storyboard.segues %}
-      case {{segue.identifier|swift_identifier|snakeToCamelCase}} = "{{segue.identifier}}"
+      case {{segue.identifier|swift_identifier}} = "{{segue.identifier}}"
       {% endfor %}
     }
     {% endif %}{% endfor %}
