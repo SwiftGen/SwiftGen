@@ -6,14 +6,18 @@
 
 import Stencil
 
+enum FilterError : ErrorType {
+  case InvalidInputType
+}
+
 struct IdentifierFilters {
-  static func identifierNoUnderscores(value: Any?) -> Any? {
-    guard let value = value as? String else { return nil }
+  static func identifierNoUnderscores(value: Any?) throws -> Any? {
+    guard let value = value as? String else { throw FilterError.InvalidInputType }
     return swiftIdentifier(fromString: value, forbiddenChars: "_", replaceWithUnderscores: false)
   }
   
-  static func identifierWithUnderscores(value: Any?) -> Any? {
-    guard let value = value as? String else { return nil }
+  static func identifierWithUnderscores(value: Any?) throws -> Any? {
+    guard let value = value as? String else { throw FilterError.InvalidInputType }
     return swiftIdentifier(fromString: value, replaceWithUnderscores: true)
   }
 }
@@ -24,8 +28,8 @@ struct StringFilters {
    * - If the string starts with multiple uppercase letters, lowercase those first letters up to the one before the last uppercase one
    * e.g. "PeoplePicker" gives "peoplePicker" but "URLChooser" gives "urlChooser"
    */
-  static func lowerFirstWord(value: Any?) -> Any? {
-    guard let string = value as? String else { return nil }
+  static func lowerFirstWord(value: Any?) throws -> Any? {
+    guard let string = value as? String else { throw FilterError.InvalidInputType }
     
     let cs = NSCharacterSet.uppercaseLetterCharacterSet()
     let scalars = string.unicodeScalars
@@ -43,8 +47,8 @@ struct StringFilters {
 }
 
 struct ArrayFilters {
-  static func join(value: Any?) -> Any? {
-    guard let array = value as? [String] else { return nil }
+  static func join(value: Any?) throws -> Any? {
+    guard let array = value as? [String] else { throw FilterError.InvalidInputType }
     
     return array.joinWithSeparator(", ")
   }
