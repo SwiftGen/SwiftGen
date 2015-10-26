@@ -56,9 +56,9 @@ extension UIStoryboard {
     enum Wizard : String, StoryboardScene {
       static let storyboardName = "Wizard"
 
-      case Accept_CGU = "Accept-CGU"
-      static func accept_CGUViewController() -> UIViewController {
-        return Wizard.Accept_CGU.viewController()
+      case AcceptCGU = "Accept-CGU"
+      static func acceptCGUViewController() -> UIViewController {
+        return Wizard.AcceptCGU.viewController()
       }
 
       case CreateAccount = "CreateAccount"
@@ -71,9 +71,9 @@ extension UIStoryboard {
         return Wizard.Preferences.viewController() as! UITableViewController
       }
 
-      case Validate_Password = "Validate_Password"
-      static func validate_PasswordViewController() -> UIViewController {
-        return Wizard.Validate_Password.viewController()
+      case ValidatePassword = "Validate_Password"
+      static func validatePasswordViewController() -> UIViewController {
+        return Wizard.ValidatePassword.viewController()
       }
     }
   }
@@ -82,7 +82,7 @@ extension UIStoryboard {
     enum Message : String {
       case CustomBack = "CustomBack"
       case NonCustom = "NonCustom"
-      case Show_NavCtrl = "Show-NavCtrl"
+      case ShowNavCtrl = "Show-NavCtrl"
     }
   }
 }

@@ -3,12 +3,12 @@
 import Foundation
 
 enum XCTLoc {
-  case Alert_title
-  case Alert_message
+  case AlertTitle
+  case AlertMessage
   case Greetings(String, Int)
-  case Apples_Count(Int)
-  case Bananas_Owner(Int, String)
-  case Object_Ownership(Int, String, String)
+  case ApplesCount(Int)
+  case BananasOwner(Int, String)
+  case ObjectOwnership(Int, String, String)
 }
 
 extension XCTLoc : CustomStringConvertible {
@@ -16,17 +16,17 @@ extension XCTLoc : CustomStringConvertible {
 
   var string : String {
     switch self {
-      case .Alert_title:
+      case .AlertTitle:
         return XCTLoc.tr("alert_title")
-      case .Alert_message:
+      case .AlertMessage:
         return XCTLoc.tr("alert_message")
       case .Greetings(let p0, let p1):
         return XCTLoc.tr("greetings", p0, p1)
-      case .Apples_Count(let p0):
+      case .ApplesCount(let p0):
         return XCTLoc.tr("apples.count", p0)
-      case .Bananas_Owner(let p0, let p1):
+      case .BananasOwner(let p0, let p1):
         return XCTLoc.tr("bananas.owner", p0, p1)
-      case .Object_Ownership(let p0, let p1, let p2):
+      case .ObjectOwnership(let p0, let p1, let p2):
         return XCTLoc.tr("object.ownership", p0, p1, p2)
     }
   }

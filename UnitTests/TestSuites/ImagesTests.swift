@@ -28,7 +28,7 @@ class ImagesTests: XCTestCase {
   func testEntriesWithDefaults() {
     let parser = AssetsCatalogParser()
     parser.addImageName("Green-Apple")
-    parser.addImageName("Red Apple")
+    parser.addImageName("Red apple")
     parser.addImageName("2-pears")
     
     let template = GenumTemplate(templateString: fixtureString("images.stencil"))

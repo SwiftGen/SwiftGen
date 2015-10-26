@@ -5,9 +5,9 @@ import UIKit
 
 extension UIImage {
   enum Asset : String {
-    case Green_Apple = "Green-Apple"
-    case Red_Apple = "Red Apple"
-    case _2_Pears = "2-pears"
+    case GreenApple = "Green-Apple"
+    case RedApple = "Red apple"
+    case _2Pears = "2-pears"
 
     var image: UIImage {
       return UIImage(asset: self)

@@ -35,21 +35,46 @@ struct StringFilters {
     let scalars = string.unicodeScalars
     let start = scalars.startIndex
     var idx = start
-    while cs.longCharacterIsMember(scalars[idx].value) && idx < scalars.endIndex {
+    while cs.longCharacterIsMember(scalars[idx].value) && idx <= scalars.endIndex {
       idx = idx.successor()
     }
-    if idx != start.successor() {
+    if idx > start.successor() && idx < scalars.endIndex {
       idx = idx.predecessor()
     }
     let transformed = String(scalars[start..<idx]).lowercaseString + String(scalars[idx..<scalars.endIndex])
     return transformed
   }
   
+  static func titlecase(value: Any?) -> Any? {
+    guard let string = value as? String else { return nil }
+    return titlecase(string)
+  }
+  
   static func snakeToCamelCase(value: Any?) -> Any? {
     guard let string = value as? String else { return nil }
+
+    var prefixUnderscores = ""
+    for scalar in string.unicodeScalars {
+      guard scalar == "_" else { break }
+      prefixUnderscores += "_"
+    }
     
-    let components = string.componentsSeparatedByString("_")
-    return (components.first ?? "") + (components.dropFirst().map { $0.capitalizedString }.joinWithSeparator(""))
+    let comps = string.componentsSeparatedByString("_")
+    return prefixUnderscores + (comps.first ?? "") + comps.dropFirst().map { titlecase($0) }.joinWithSeparator("")
+  }
+  
+  /**
+  This returns the string with its first parameter uppercased.
+  - note: This is quite similar to `capitalise` except that this filter doesn't lowercase
+          the rest of the string but keep it untouched.
+  
+  - parameter string: The string to titleCase
+  
+  - returns: The string with its first character uppercased, and the rest of the string unchanged.
+  */
+  private static func titlecase(string: String) -> String {
+    guard let first = string.unicodeScalars.first else { return string }
+    return String(first).uppercaseString + String(string.unicodeScalars.dropFirst())
   }
 }
 
