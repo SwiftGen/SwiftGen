@@ -43,6 +43,10 @@
 		09EB0A2F1BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A261BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out */; };
 		09EB0A311BDC8F4100B2CF79 /* LocUTF8.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */; };
 		3C88500AFCA6DE48360F93AE /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8A3B4DE5528DD17EC369AA3 /* Pods_swiftgen.framework */; };
+		4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0321BDE753000B9B05F /* Colors-Empty.swift.out */; settings = {ASSET_TAGS = (); }; };
+		4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0331BDE753000B9B05F /* Images-Empty.swift.out */; settings = {ASSET_TAGS = (); }; };
+		4761E0381BDE753000B9B05F /* Storyboards-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */; settings = {ASSET_TAGS = (); }; };
+		4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0351BDE753000B9B05F /* Strings-Empty.swift.out */; settings = {ASSET_TAGS = (); }; };
 		91554FDE6EC0E514DECD71FA /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B594462FF573E83D0DEF1C64 /* Pods_UnitTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +137,10 @@
 		09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = LocUTF8.strings; sourceTree = "<group>"; };
 		2A900E0D796A11ABCBD63942 /* Pods-swiftgen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.release.xcconfig"; sourceTree = "<group>"; };
 		45E36FC93A27CB2941081D0A /* Pods-swiftgen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.debug.xcconfig"; sourceTree = "<group>"; };
+		4761E0321BDE753000B9B05F /* Colors-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-Empty.swift.out"; sourceTree = "<group>"; };
+		4761E0331BDE753000B9B05F /* Images-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-Empty.swift.out"; sourceTree = "<group>"; };
+		4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Empty.swift.out"; sourceTree = "<group>"; };
+		4761E0351BDE753000B9B05F /* Strings-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Empty.swift.out"; sourceTree = "<group>"; };
 		682F146ADE25633DEBA0841F /* Pods_swiftgen_cli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen_cli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98E9147EC3C2F7F479CCF739 /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B594462FF573E83D0DEF1C64 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,15 +218,19 @@
 		09030C071B6D2FF600275BF5 /* expected */ = {
 			isa = PBXGroup;
 			children = (
+				4761E0321BDE753000B9B05F /* Colors-Empty.swift.out */,
 				09EB0A201BDC60F000B2CF79 /* Colors-List-Defaults.swift.out */,
 				09EB0A1F1BDC60F000B2CF79 /* Colors-File-Defaults.swift.out */,
 				09EB0A1E1BDC60F000B2CF79 /* Colors-File-CustomName.swift.out */,
+				4761E0331BDE753000B9B05F /* Images-Empty.swift.out */,
 				09EB0A211BDC60F000B2CF79 /* Images-Entries-Defaults.swift.out */,
 				09EB0A231BDC60F000B2CF79 /* Images-File-Defaults.swift.out */,
 				09EB0A221BDC60F000B2CF79 /* Images-File-CustomName.swift.out */,
+				4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */,
 				09EB0A261BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out */,
 				09EB0A251BDC60F000B2CF79 /* Storyboards-All-Defaults.swift.out */,
 				09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */,
+				4761E0351BDE753000B9B05F /* Strings-Empty.swift.out */,
 				09030C261B6D492E00275BF5 /* Strings-Entries-Defaults.swift.out */,
 				095685EF1B6DA32800BF300C /* Strings-Lines-Defaults.swift.out */,
 				09030C2A1B6D4D9A00275BF5 /* Strings-File-Defaults.swift.out */,
@@ -377,8 +389,10 @@
 				09EB0A1A1BDC3AC400B2CF79 /* strings.stencil in Resources */,
 				09EB0A291BDC60F000B2CF79 /* Colors-List-Defaults.swift.out in Resources */,
 				09A87B701BCCA5F600D9B9F5 /* Strings-Lines-Defaults.swift.out in Resources */,
+				4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */,
 				09A87B5E1BCCA4D100D9B9F5 /* Message.storyboard in Resources */,
 				09A87B641BCCA4DC00D9B9F5 /* Images.xcassets in Resources */,
+				4761E0381BDE753000B9B05F /* Storyboards-Empty.swift.out in Resources */,
 				09A87B5F1BCCA4D100D9B9F5 /* Wizard.storyboard in Resources */,
 				09EB0A2B1BDC60F000B2CF79 /* Images-File-CustomName.swift.out in Resources */,
 				09A87B6C1BCCA5F600D9B9F5 /* Strings-Entries-Defaults.swift.out in Resources */,
@@ -386,6 +400,8 @@
 				09A87B6D1BCCA5F600D9B9F5 /* Strings-File-Defaults.swift.out in Resources */,
 				09EB0A2A1BDC60F000B2CF79 /* Images-Entries-Defaults.swift.out in Resources */,
 				09A87B6E1BCCA5F600D9B9F5 /* Strings-File-CustomName.swift.out in Resources */,
+				4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */,
+				4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */,
 				09A87B711BCCA5FC00D9B9F5 /* Localizable.strings in Resources */,
 				09EB0A281BDC60F000B2CF79 /* Colors-File-Defaults.swift.out in Resources */,
 				09EB0A311BDC8F4100B2CF79 /* LocUTF8.strings in Resources */,

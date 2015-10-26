@@ -15,6 +15,16 @@ import GenumKit
 
 class StoryboardTests: XCTestCase {
   
+  func testEmpty() {
+    let parser = StoryboardParser()
+    
+    let template = GenumTemplate(templateString: fixtureString("storyboards.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Storyboards-Empty.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
   func testMessageStoryboardWithDefaults() {
     let parser = StoryboardParser()
     parser.addStoryboardAtPath(self.fixturePath("Message.storyboard"))

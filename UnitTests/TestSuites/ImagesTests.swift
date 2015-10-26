@@ -15,6 +15,16 @@ import GenumKit
 
 class ImagesTests: XCTestCase {
   
+  func testEmpty() {
+    let parser = AssetsCatalogParser()
+    
+    let template = GenumTemplate(templateString: fixtureString("images.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Images-Empty.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
   func testEntriesWithDefaults() {
     let parser = AssetsCatalogParser()
     parser.addImageName("Green-Apple")

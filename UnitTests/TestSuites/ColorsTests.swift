@@ -10,6 +10,16 @@ import PathKit
 
 class ColorsTests: XCTestCase {
   
+  func testEmpty() {
+    let parser = ColorsFileParser()
+    
+    let template = GenumTemplate(templateString: fixtureString("colors.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Colors-Empty.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
   func testListWithDefaults() {
     let parser = ColorsFileParser()
     parser.addColorWithName("TextColor", value: "0x999999")

@@ -30,6 +30,7 @@ extension StoryboardScene where Self.RawValue == String {
 }
 
 {# This is where the generation begins, this code depends on what you have in your Storyboards #}
+{% if storyboards %}
 extension UIStoryboard {
   struct {{sceneEnumName}} {
     {% for storyboard in storyboards %}
@@ -64,3 +65,6 @@ extension UIStoryboard {
     {% endif %}{% endfor %}
   }
 }
+{% else %}
+// No storyboard found
+{% endif %}

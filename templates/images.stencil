@@ -1,9 +1,9 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
+{% if images %}
 import Foundation
 import UIKit
 
-{% if images %}
 extension UIImage {
   enum {{enumName}} : String {
     {% for image in images %}
@@ -20,5 +20,5 @@ extension UIImage {
   }
 }
 {% else %}
-// SwiftGen: No image found
+// No image found
 {% endif %}

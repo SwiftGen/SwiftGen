@@ -13,18 +13,4 @@ extension UIColor {
   }
 }
 
-{% if colors %}
-extension UIColor {
-  enum {{enumName}} : UInt32 {
-    {% for color in colors %}
-    case {{color.name}} = 0x{{color.hex}}
-    {% endfor %}
-  }
-
-  convenience init(named name: {{enumName}}) {
-    self.init(rgbaValue: name.rawValue)
-  }
-}
-{% else %}
 // No color found
-{% endif %}

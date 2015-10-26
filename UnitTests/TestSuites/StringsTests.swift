@@ -15,6 +15,16 @@ import GenumKit
 
 class StringsTests: XCTestCase {
   
+  func testEmpty() {
+    let parser = StringsFileParser()
+    
+    let template = GenumTemplate(templateString: fixtureString("strings.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Strings-Empty.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
   func testEntriesWithDefaults() {
     let parser = StringsFileParser()
     parser.addEntry(StringsFileParser.Entry(key: "Title"))
