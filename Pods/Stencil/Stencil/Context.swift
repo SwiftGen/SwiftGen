@@ -42,4 +42,12 @@ public class Context {
   public func pop() -> [String: Any]? {
     return dictionaries.popLast()
   }
+
+  /// Push a new level onto the context for the duration of the execution of the given closure
+  public func push<Result>(dictionary: [String: Any]? = nil, @noescape closure: (() throws -> Result)) rethrows -> Result {
+    push(dictionary)
+    let result = try closure()
+    pop()
+    return result
+  }
 }

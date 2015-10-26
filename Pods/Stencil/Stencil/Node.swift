@@ -119,6 +119,7 @@ public class ForNode : NodeType {
   let variable:Variable
   let loopVariable:String
   let nodes:[NodeType]
+  let emptyNodes: [NodeType]
 
   public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
     let components = token.components()
@@ -150,22 +151,23 @@ public class ForNode : NodeType {
     self.variable = Variable(variable)
     self.loopVariable = loopVariable
     self.nodes = nodes
-    // TODO: Handle emptyNodes
+    self.emptyNodes = emptyNodes
   }
 
   public func render(context: Context) throws -> String {
     let values = try variable.resolve(context)
-    if let values = values as? NSArray {
+
+    if let values = values as? NSArray where values.count > 0 {
       return try values.map { item in
-        context.push()
-        context[loopVariable] = item
-        let result = try renderNodes(nodes, context)
-        context.pop()
-        return result
+        try context.push([loopVariable: item]) {
+          try renderNodes(nodes, context)
+        }
       }.joinWithSeparator("")
     }
 
-    return ""
+    return try context.push {
+      try renderNodes(emptyNodes, context)
+    }
   }
 }
 
@@ -230,7 +232,7 @@ public class IfNode : NodeType {
     let result = try variable.resolve(context)
     var truthy = false
 
-    if let result = result as? [AnyObject] {
+    if let result = result as? NSArray {
       if result.count > 0 {
         truthy = true
       }

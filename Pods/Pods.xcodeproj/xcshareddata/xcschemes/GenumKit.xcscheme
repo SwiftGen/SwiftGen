@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '79A016DC21CCC48C17DDACB1'
+               BlueprintIdentifier = '67D68B8B10BA76F230498D9A'
                BlueprintName = 'GenumKit'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'GenumKit.framework'>
