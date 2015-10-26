@@ -35,9 +35,9 @@ public class GenumTemplate : CompactTemplate {
   public override init(templateString: String) {
     super.init(templateString: templateString)
     parser.registerTag("set", parser: SetNode.parse)
-    parser.registerFilter("swiftIdentifier", filter: IdentifierFilters.identifierNoUnderscores)
-    parser.registerFilter("swift_Identifier", filter: IdentifierFilters.identifierWithUnderscores)
+    parser.registerFilter("swiftIdentifier", filter: StringFilters.stringToSwiftIdentifier)
     parser.registerFilter("join", filter: ArrayFilters.join)
     parser.registerFilter("lowerFirstWord", filter: StringFilters.lowerFirstWord)
+    parser.registerFilter("snakeToCamelCase", filter: StringFilters.snakeToCamelCase)
   }
 }
