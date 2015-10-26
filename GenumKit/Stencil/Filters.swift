@@ -10,19 +10,11 @@ enum FilterError : ErrorType {
   case InvalidInputType
 }
 
-struct IdentifierFilters {
-  static func stringToSwiftIdentifierNoUnderscores(value: Any?) throws -> Any? {
-    guard let value = value as? String else { throw FilterError.InvalidInputType }
-    return swiftIdentifier(fromString: value, forbiddenChars: "_", replaceWithUnderscores: false)
-  }
-  
-  static func stringToSwiftIdentifierReplaceWithUnderscores(value: Any?) throws -> Any? {
+struct StringFilters {
+  static func stringToSwiftIdentifier(value: Any?) throws -> Any? {
     guard let value = value as? String else { throw FilterError.InvalidInputType }
     return swiftIdentifier(fromString: value, replaceWithUnderscores: true)
   }
-}
-
-struct StringFilters {
   
   /* - If the string starts with only one uppercase letter, lowercase that first letter
    * - If the string starts with multiple uppercase letters, lowercase those first letters up to the one before the last uppercase one

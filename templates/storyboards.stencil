@@ -34,11 +34,11 @@ extension StoryboardScene where Self.RawValue == String {
 extension UIStoryboard {
   struct {{sceneEnumName}} {
     {% for storyboard in storyboards %}
-    {% set storyboardName %}{{storyboard.name|swift_identifier}}{% endset %}
+    {% set storyboardName %}{{storyboard.name|swiftIdentifier}}{% endset %}
     enum {{storyboardName}} : String, StoryboardScene {
       static let storyboardName = "{{storyboard.name}}"
       {% for scene in storyboard.scenes %}
-      {% set sceneID %}{{scene.identifier|swift_identifier}}{% endset %}
+      {% set sceneID %}{{scene.identifier|swiftIdentifier}}{% endset %}
 
       case {{sceneID}} = "{{scene.identifier}}"
       {% if scene.class %}
@@ -57,9 +57,9 @@ extension UIStoryboard {
 
   struct {{segueEnumName}} {
     {% for storyboard in storyboards %}{% if storyboard.segues %}
-    enum {{storyboard.name|swift_identifier}} : String {
+    enum {{storyboard.name|swiftIdentifier}} : String {
       {% for segue in storyboard.segues %}
-      case {{segue.identifier|swift_identifier}} = "{{segue.identifier}}"
+      case {{segue.identifier|swiftIdentifier}} = "{{segue.identifier}}"
       {% endfor %}
     }
     {% endif %}{% endfor %}

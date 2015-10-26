@@ -5,7 +5,7 @@ import Foundation
 
 enum {{enumName}} {
   {% for string in strings %}
-  case {{string.key|swift_identifier|snakeToCamelCase}}{% if string.params %}({{string.params.types|join}}){% endif %}
+  case {{string.key|swiftIdentifier|snakeToCamelCase}}{% if string.params %}({{string.params.types|join}}){% endif %}
   {% endfor %}
 }
 
@@ -16,10 +16,10 @@ extension {{enumName}} : CustomStringConvertible {
     switch self {
       {% for string in strings %}
       {% if string.params %}
-      case .{{string.key|swift_identifier|snakeToCamelCase}}({{string.params.declarations|join}}):
+      case .{{string.key|swiftIdentifier|snakeToCamelCase}}({{string.params.declarations|join}}):
         return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
       {% else %}
-      case .{{string.key|swift_identifier|snakeToCamelCase}}:
+      case .{{string.key|swiftIdentifier|snakeToCamelCase}}:
         return {{enumName}}.tr("{{string.key}}")
       {% endif %}
       {% endfor %}
