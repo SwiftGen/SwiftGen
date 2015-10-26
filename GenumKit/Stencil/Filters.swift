@@ -11,12 +11,12 @@ enum FilterError : ErrorType {
 }
 
 struct IdentifierFilters {
-  static func identifierNoUnderscores(value: Any?) throws -> Any? {
+  static func stringToSwiftIdentifierNoUnderscores(value: Any?) throws -> Any? {
     guard let value = value as? String else { throw FilterError.InvalidInputType }
     return swiftIdentifier(fromString: value, forbiddenChars: "_", replaceWithUnderscores: false)
   }
   
-  static func identifierWithUnderscores(value: Any?) throws -> Any? {
+  static func stringToSwiftIdentifierReplaceWithUnderscores(value: Any?) throws -> Any? {
     guard let value = value as? String else { throw FilterError.InvalidInputType }
     return swiftIdentifier(fromString: value, replaceWithUnderscores: true)
   }
@@ -43,6 +43,13 @@ struct StringFilters {
     }
     let transformed = String(scalars[start..<idx]).lowercaseString + String(scalars[idx..<scalars.endIndex])
     return transformed
+  }
+  
+  static func snakeToCamelCase(value: Any?) -> Any? {
+    guard let string = value as? String else { return nil }
+    
+    let components = string.componentsSeparatedByString("_")
+    return (components.first ?? "") + (components.dropFirst().map { $0.capitalizedString }.joinWithSeparator(""))
   }
 }
 
