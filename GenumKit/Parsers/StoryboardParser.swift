@@ -7,7 +7,11 @@
 import Foundation
 
 public final class StoryboardParser {
-  typealias Scene = (storyboardID: String, tag: String, customClass: String?)
+  struct Scene {
+    let storyboardID: String
+    let tag: String
+    let customClass: String?
+  }
   
   struct Segue {
     let segueID: String
@@ -23,7 +27,7 @@ public final class StoryboardParser {
     let parser = NSXMLParser(contentsOfURL: NSURL.fileURLWithPath(path))
     
     class ParserDelegate : NSObject, NSXMLParserDelegate {
-      var scenes = [Scene]()
+      var scenes = Set<Scene>()
       var segues = Set<Segue>()
       var inScene = false
       var readyForFirstObject = false
@@ -42,7 +46,7 @@ public final class StoryboardParser {
         case let tag where readyForFirstObject:
           if let storyboardID = attributeDict["storyboardIdentifier"] {
             let customClass = attributeDict["customClass"]
-            scenes.append(Scene(storyboardID, tag, customClass))
+            scenes.insert(Scene(storyboardID: storyboardID, tag: tag, customClass: customClass))
           }
           readyForFirstObject = false
         case "connections":
@@ -68,7 +72,7 @@ public final class StoryboardParser {
         case "connections":
           readyForConnections = false
         default:
-          break;
+          break
         }
       }
     }
@@ -78,7 +82,7 @@ public final class StoryboardParser {
     parser?.parse()
     
     let storyboardName = ((path as NSString).lastPathComponent as NSString).stringByDeletingPathExtension
-    storyboardsScenes[storyboardName] = delegate.scenes
+    storyboardsScenes[storyboardName] = Array(delegate.scenes)
     storyboardsSegues[storyboardName] = Array(delegate.segues)
   }
   
@@ -90,6 +94,17 @@ public final class StoryboardParser {
         }
       }
     }
+  }
+}
+
+extension StoryboardParser.Scene: Equatable { }
+func ==(lhs: StoryboardParser.Scene, rhs: StoryboardParser.Scene) -> Bool {
+  return lhs.storyboardID == rhs.storyboardID && lhs.tag == rhs.tag && lhs.customClass == rhs.customClass
+}
+
+extension StoryboardParser.Scene: Hashable {
+  var hashValue: Int {
+    return "\(storyboardID);\(tag);\(customClass)".hashValue
   }
 }
 
