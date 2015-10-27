@@ -95,11 +95,11 @@ public final class StoryboardParser {
 
 extension StoryboardParser.Segue: Equatable { }
 func ==(lhs: StoryboardParser.Segue, rhs: StoryboardParser.Segue) -> Bool {
-  return lhs.segueID == rhs.segueID
+  return lhs.segueID == rhs.segueID && lhs.customClass == rhs.customClass
 }
 
 extension StoryboardParser.Segue: Hashable {
   var hashValue: Int {
-    return self.segueID.hash
+    return "\(segueID);\(customClass)".hashValue
   }
 }
