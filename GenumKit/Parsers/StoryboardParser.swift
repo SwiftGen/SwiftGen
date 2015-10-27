@@ -8,7 +8,12 @@ import Foundation
 
 public final class StoryboardParser {
   typealias Scene = (storyboardID: String, tag: String, customClass: String?)
-  typealias Segue = (segueID: String, customClass: String?)
+  
+  struct Segue {
+    let segueID: String
+    let customClass: String?
+  }
+  
   var storyboardsScenes = [String: [Scene]]()
   var storyboardsSegues = [String: [Segue]]()
   
@@ -45,7 +50,7 @@ public final class StoryboardParser {
         case "segue" where readyForConnections:
           if let segueID = attributeDict["identifier"] {
             let customClass = attributeDict["customClass"]
-            segues.append(Segue(segueID, customClass))
+            appendSegue(Segue(segueID: segueID, customClass: customClass))
           }
         default:
           break
@@ -65,6 +70,11 @@ public final class StoryboardParser {
         default:
           break;
         }
+      }
+      
+      private func appendSegue(segue: Segue) {
+        guard !segues.contains(segue) else { return }
+        segues.append(segue)
       }
     }
     
@@ -86,4 +96,9 @@ public final class StoryboardParser {
       }
     }
   }
+}
+
+extension StoryboardParser.Segue: Equatable { }
+func ==(lhs: StoryboardParser.Segue, rhs: StoryboardParser.Segue) -> Bool {
+  return lhs.segueID == rhs.segueID
 }
