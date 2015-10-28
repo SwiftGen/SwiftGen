@@ -101,6 +101,8 @@ extension UIImage {
     case Banana = "Banana"
     case BigPear = "Big_Pear"
     case StopButtonEnabled = "stop.button.enabled"
+
+    static let allValues = [GreenApple, RedApple, Banana, BigPear, StopButtonEnabled, ]
     
     var image: UIImage {
       return UIImage(named: self.rawValue)!
@@ -121,6 +123,16 @@ let image2 = UIImage.Asset.Apple.image // Alternate way
 ```
 
 This way, no need to enter the `"Banana"` string in your code and risk any typo.
+
+
+If you want to loop over all your assets:
+
+```swift
+UIImage.Asset.allValues.forEach { asset in
+    print(asset.rawValue)
+}
+```
+
 
 ### Benefits & Limitations
 
