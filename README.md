@@ -18,6 +18,7 @@ This is a suite of tools written in Swift 2 to auto-generate Swift 2 code for va
 To install SwiftGen via [Homebrew](http://brew.sh), simply use:
 
 ```sh
+$ brew update
 $ brew install swiftgen
 ```
 
