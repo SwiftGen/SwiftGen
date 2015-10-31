@@ -18,8 +18,8 @@ public final class StoryboardParser {
     let customClass: String?
   }
   
-  var storyboardsScenes = [String: [Scene]]()
-  var storyboardsSegues = [String: [Segue]]()
+  var storyboardsScenes = [String: Set<Scene>]()
+  var storyboardsSegues = [String: Set<Segue>]()
   
   public init() {}
   
@@ -82,8 +82,8 @@ public final class StoryboardParser {
     parser?.parse()
     
     let storyboardName = ((path as NSString).lastPathComponent as NSString).stringByDeletingPathExtension
-    storyboardsScenes[storyboardName] = Array(delegate.scenes)
-    storyboardsSegues[storyboardName] = Array(delegate.segues)
+    storyboardsScenes[storyboardName] = delegate.scenes
+    storyboardsSegues[storyboardName] = delegate.segues
   }
   
   public func parseDirectory(path: String) {
