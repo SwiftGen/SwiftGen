@@ -58,6 +58,7 @@ extension UIStoryboard {
   struct Segue {
     enum Message : String {
       case CustomBack = "CustomBack"
+      case Embed = "Embed"
       case NonCustom = "NonCustom"
       case Show_NavCtrl = "Show-NavCtrl"
     }
