@@ -83,6 +83,7 @@ extension Path {
 }
 
 let appSupportTemplatesPath = Path.applicationSupport + "SwiftGen/templates"
+let bundledTemplatesPath = Path(NSProcessInfo.processInfo().arguments[0]).parent() + TEMPLATES_RELATIVE_PATH
 
 func findTemplate(prefix: String, templateShortName: String, templateFullPath: String) throws -> Path {
   guard templateFullPath.isEmpty else {
@@ -95,7 +96,6 @@ func findTemplate(prefix: String, templateShortName: String, templateFullPath: S
   
   var path = appSupportTemplatesPath + "\(prefix)-\(templateShortName).stencil"
   if !path.isFile {
-    let bundledTemplatesPath = Path(NSProcessInfo.processInfo().arguments[0]).parent() + TEMPLATES_RELATIVE_PATH
     path = bundledTemplatesPath + "\(prefix)-\(templateShortName).stencil"
   }
   guard path.isFile else {
