@@ -39,16 +39,16 @@ extension UIStoryboard {
     enum {{storyboardName}} : String, StoryboardScene {
       static let storyboardName = "{{storyboard.name}}"
       {% for scene in storyboard.scenes %}
-      {% set sceneID %}{{scene.identifier|swiftIdentifier}}{% endset %}
+      {% set sceneID %}{{scene.identifier|swiftIdentifier|lowerFirstWord}}{% endset %}
 
-      case {{sceneID|lowerFirstWord}} = "{{scene.identifier}}"
+      case {{sceneID}} = "{{scene.identifier}}"
       {% if scene.class %}
-      static func {{sceneID|lowerFirstWord}}ViewController() -> {{scene.class}} {
-        return {{storyboardName}}.{{sceneID|lowerFirstWord}}.viewController() as! {{scene.class}}
+      static func {{sceneID}}ViewController() -> {{scene.class}} {
+        return {{storyboardName}}.{{sceneID}}.viewController() as! {{scene.class}}
       }
       {% else %}
       static func {{sceneID|lowerFirstWord}}ViewController() -> UIViewController {
-        return {{storyboardName}}.{{sceneID|lowerFirstWord}}.viewController()
+        return {{storyboardName}}.{{sceneID}}.viewController()
       }
       {% endif %}
       {% endfor %}
