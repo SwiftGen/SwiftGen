@@ -1,5 +1,6 @@
-xcuserdata
-
+xcuserdata/
+.idea/
+DerivedData/
 build/
 bin/
 Frameworks/
