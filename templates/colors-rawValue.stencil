@@ -13,28 +13,18 @@ extension UIColor {
   }
 }
 
+{% if colors %}
 extension UIColor {
-  enum Name {
-    case ArticleBody
-    case ArticleFootnote
-    case ArticleTitle
-    case Cyan
-    case Translucent
-
-    static let rgbaValues: [Name:UInt32] = [
-      .ArticleBody : 0x339666ff,
-      .ArticleFootnote : 0xff66ccff,
-      .ArticleTitle : 0x33fe66ff,
-      .Cyan : 0xff66ccff,
-      .Translucent : 0xffffffcc,
-    ]
-
-    var rgbaValue: UInt32! {
-      return Name.rgbaValues[self]
-    }
+  enum {{enumName}} : UInt32 {
+    {% for color in colors %}
+    case {{color.name|swiftIdentifier}} = 0x{{color.rgba}}
+    {% endfor %}
   }
 
-  convenience init(named name: Name) {
-    self.init(rgbaValue: name.rgbaValue)
+  convenience init(named name: {{enumName}}) {
+    self.init(rgbaValue: name.rawValue)
   }
 }
+{% else %}
+// No color found
+{% endif %}

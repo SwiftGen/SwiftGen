@@ -18,15 +18,15 @@ private func uppercaseFirst(string: String) -> String {
  - enumName: String
  - colors: Array
  .  - name: String
- .  - hex: String — hex value of for RRGGBBAA (without the "0x" prefix)
+ .  - rgba: String — hex value of for RRGGBBAA (without the "0x" prefix)
 */
 extension ColorsFileParser {
   public func stencilContext(enumName enumName: String = "Name") -> Context {
-    let colorMap = colors.map { (color: (name: String, value: UInt32)) -> [String:AnyObject] in
+    let colorMap = colors.map({ (color: (name: String, value: UInt32)) -> [String:String] in
       let name = color.name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
       let hexValue = String(color.value, radix: 16)
-      return ["name": name, "hex": hexValue]
-    }
+      return ["name": name, "rgba": hexValue]
+    }).sort { $0["name"] < $1["name"] }
     return Context(dictionary: ["enumName": enumName, "colors": colorMap])
   }
 }
