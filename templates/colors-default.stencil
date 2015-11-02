@@ -13,28 +13,29 @@ extension UIColor {
   }
 }
 
+{% if colors %}
 extension UIColor {
-  enum Name {
-    case ArticleBody
-    case ArticleFootnote
-    case ArticleTitle
-    case Cyan
-    case Translucent
+  {# Note: We don't use a UInt32 rawValue, so we can have multiple colors with the same rgbaValue #}
+  enum {{enumName}} {
+    {% for color in colors %}
+    case {{color.name|swiftIdentifier}}
+    {% endfor %}
 
-    static let rgbaValues: [Name:UInt32] = [
-      .ArticleBody : 0x339666ff,
-      .ArticleFootnote : 0xff66ccff,
-      .ArticleTitle : 0x33fe66ff,
-      .Cyan : 0xff66ccff,
-      .Translucent : 0xffffffcc,
+    static let rgbaValues: [{{enumName}}:UInt32] = [
+      {% for color in colors %}
+      .{{color.name|swiftIdentifier}} : 0x{{color.rgba}},
+      {% endfor %}
     ]
 
     var rgbaValue: UInt32! {
-      return Name.rgbaValues[self]
+      return {{enumName}}.rgbaValues[self]
     }
   }
 
-  convenience init(named name: Name) {
+  convenience init(named name: {{enumName}}) {
     self.init(rgbaValue: name.rgbaValue)
   }
 }
+{% else %}
+// No color found
+{% endif %}

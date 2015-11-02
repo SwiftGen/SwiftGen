@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		091150311BD31A3300EBC803 /* PathArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091150301BD31A3300EBC803 /* PathArgument.swift */; };
 		091150361BD3274E00EBC803 /* images.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 091150351BD3274E00EBC803 /* images.stencil */; };
-		0911503B1BD3ECAE00EBC803 /* colors.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0911503A1BD3ECA900EBC803 /* colors.stencil */; };
+		0911503B1BD3ECAE00EBC803 /* colors-default.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0911503A1BD3ECA900EBC803 /* colors-default.stencil */; };
 		0911503F1BD4136E00EBC803 /* storyboards.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0911503E1BD4053D00EBC803 /* storyboards.stencil */; };
+		0921FB9C1BE785DF00B488B5 /* Colors-List-RawValue.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 0921FB9B1BE785DF00B488B5 /* Colors-List-RawValue.swift.out */; };
+		0921FB9D1BE7873400B488B5 /* colors-rawValue.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0921FB9A1BE7852F00B488B5 /* colors-rawValue.stencil */; };
 		09A87B481BCC9BAD00D9B9F5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7B2D31BCC382800D7F488 /* main.swift */; };
 		09A87B4A1BCC9BB200D9B9F5 /* storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0901413E1BCC64C9002E8617 /* storyboards.swift */; };
 		09A87B4B1BCC9BB200D9B9F5 /* images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090141401BCC64FE002E8617 /* images.swift */; };
@@ -43,11 +45,11 @@
 		09EB0A2F1BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A261BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out */; };
 		09EB0A311BDC8F4100B2CF79 /* LocUTF8.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */; };
 		3C88500AFCA6DE48360F93AE /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8A3B4DE5528DD17EC369AA3 /* Pods_swiftgen.framework */; };
-		4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0321BDE753000B9B05F /* Colors-Empty.swift.out */; settings = {ASSET_TAGS = (); }; };
-		4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0331BDE753000B9B05F /* Images-Empty.swift.out */; settings = {ASSET_TAGS = (); }; };
-		4761E0381BDE753000B9B05F /* Storyboards-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */; settings = {ASSET_TAGS = (); }; };
-		4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0351BDE753000B9B05F /* Strings-Empty.swift.out */; settings = {ASSET_TAGS = (); }; };
-		4761E0311BDE6EEA00B9B05F /* StringFiltersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761E0301BDE6EEA00B9B05F /* StringFiltersTests.swift */; settings = {ASSET_TAGS = (); }; };
+		4761E0311BDE6EEA00B9B05F /* StringFiltersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761E0301BDE6EEA00B9B05F /* StringFiltersTests.swift */; };
+		4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0321BDE753000B9B05F /* Colors-Empty.swift.out */; };
+		4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0331BDE753000B9B05F /* Images-Empty.swift.out */; };
+		4761E0381BDE753000B9B05F /* Storyboards-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */; };
+		4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0351BDE753000B9B05F /* Strings-Empty.swift.out */; };
 		91554FDE6EC0E514DECD71FA /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B594462FF573E83D0DEF1C64 /* Pods_UnitTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,8 +116,10 @@
 		09030C2F1B6D4F8500275BF5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		091150301BD31A3300EBC803 /* PathArgument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathArgument.swift; sourceTree = "<group>"; };
 		091150351BD3274E00EBC803 /* images.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = images.stencil; sourceTree = "<group>"; };
-		0911503A1BD3ECA900EBC803 /* colors.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = colors.stencil; sourceTree = "<group>"; };
+		0911503A1BD3ECA900EBC803 /* colors-default.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "colors-default.stencil"; sourceTree = "<group>"; };
 		0911503E1BD4053D00EBC803 /* storyboards.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = storyboards.stencil; sourceTree = "<group>"; };
+		0921FB9A1BE7852F00B488B5 /* colors-rawValue.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "colors-rawValue.stencil"; sourceTree = "<group>"; };
+		0921FB9B1BE785DF00B488B5 /* Colors-List-RawValue.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-List-RawValue.swift.out"; sourceTree = "<group>"; };
 		095685EB1B6DA16200BF300C /* Strings-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-CustomName.swift.out"; sourceTree = "<group>"; };
 		095685EF1B6DA32800BF300C /* Strings-Lines-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Lines-Defaults.swift.out"; sourceTree = "<group>"; };
 		09A87B411BCC9B8000D9B9F5 /* swiftgen */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftgen; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,11 +142,11 @@
 		09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = LocUTF8.strings; sourceTree = "<group>"; };
 		2A900E0D796A11ABCBD63942 /* Pods-swiftgen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.release.xcconfig"; sourceTree = "<group>"; };
 		45E36FC93A27CB2941081D0A /* Pods-swiftgen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.debug.xcconfig"; sourceTree = "<group>"; };
+		4761E0301BDE6EEA00B9B05F /* StringFiltersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringFiltersTests.swift; sourceTree = "<group>"; };
 		4761E0321BDE753000B9B05F /* Colors-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-Empty.swift.out"; sourceTree = "<group>"; };
 		4761E0331BDE753000B9B05F /* Images-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-Empty.swift.out"; sourceTree = "<group>"; };
 		4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Empty.swift.out"; sourceTree = "<group>"; };
 		4761E0351BDE753000B9B05F /* Strings-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Empty.swift.out"; sourceTree = "<group>"; };
-		4761E0301BDE6EEA00B9B05F /* StringFiltersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringFiltersTests.swift; sourceTree = "<group>"; };
 		682F146ADE25633DEBA0841F /* Pods_swiftgen_cli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen_cli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98E9147EC3C2F7F479CCF739 /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B594462FF573E83D0DEF1C64 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +226,7 @@
 			children = (
 				4761E0321BDE753000B9B05F /* Colors-Empty.swift.out */,
 				09EB0A201BDC60F000B2CF79 /* Colors-List-Defaults.swift.out */,
+				0921FB9B1BE785DF00B488B5 /* Colors-List-RawValue.swift.out */,
 				09EB0A1F1BDC60F000B2CF79 /* Colors-File-Defaults.swift.out */,
 				09EB0A1E1BDC60F000B2CF79 /* Colors-File-CustomName.swift.out */,
 				4761E0331BDE753000B9B05F /* Images-Empty.swift.out */,
@@ -257,7 +262,8 @@
 		091150341BD326B900EBC803 /* templates */ = {
 			isa = PBXGroup;
 			children = (
-				0911503A1BD3ECA900EBC803 /* colors.stencil */,
+				0921FB9A1BE7852F00B488B5 /* colors-rawValue.stencil */,
+				0911503A1BD3ECA900EBC803 /* colors-default.stencil */,
 				091150351BD3274E00EBC803 /* images.stencil */,
 				0911503E1BD4053D00EBC803 /* storyboards.stencil */,
 				09EB0A191BDC269300B2CF79 /* strings.stencil */,
@@ -395,6 +401,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0921FB9D1BE7873400B488B5 /* colors-rawValue.stencil in Resources */,
+				0921FB9C1BE785DF00B488B5 /* Colors-List-RawValue.swift.out in Resources */,
 				09A87B671BCCA4E600D9B9F5 /* colors.txt in Resources */,
 				091150361BD3274E00EBC803 /* images.stencil in Resources */,
 				09EB0A1A1BDC3AC400B2CF79 /* strings.stencil in Resources */,
@@ -407,7 +415,7 @@
 				09A87B5F1BCCA4D100D9B9F5 /* Wizard.storyboard in Resources */,
 				09EB0A2B1BDC60F000B2CF79 /* Images-File-CustomName.swift.out in Resources */,
 				09A87B6C1BCCA5F600D9B9F5 /* Strings-Entries-Defaults.swift.out in Resources */,
-				0911503B1BD3ECAE00EBC803 /* colors.stencil in Resources */,
+				0911503B1BD3ECAE00EBC803 /* colors-default.stencil in Resources */,
 				09A87B6D1BCCA5F600D9B9F5 /* Strings-File-Defaults.swift.out in Resources */,
 				09EB0A2A1BDC60F000B2CF79 /* Images-Entries-Defaults.swift.out in Resources */,
 				09A87B6E1BCCA5F600D9B9F5 /* Strings-File-CustomName.swift.out in Resources */,

@@ -14,13 +14,23 @@ extension UIColor {
 }
 
 extension UIColor {
-  enum Name : UInt32 {
-    case TextColor = 0x999999ff
-    case ArticleBackground = 0xffcc0099
-    case ArticleTitle = 0x996600ff
+  enum Name {
+    case ArticleBackground
+    case ArticleTitle
+    case TextColor
+
+    static let rgbaValues: [Name:UInt32] = [
+      .ArticleBackground : 0xffcc0099,
+      .ArticleTitle : 0x996600ff,
+      .TextColor : 0x999999ff,
+    ]
+
+    var rgbaValue: UInt32! {
+      return Name.rgbaValues[self]
+    }
   }
 
   convenience init(named name: Name) {
-    self.init(rgbaValue: name.rawValue)
+    self.init(rgbaValue: name.rgbaValue)
   }
 }
