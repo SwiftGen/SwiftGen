@@ -10,16 +10,17 @@ import GenumKit
 
 let colorsCommand = command(
   outputOption,
-  templateOption("colors.stencil"),
+  templateOption("colors"), templatePathOption,
   Option<String>("enumName", "Name", flag: "e", description: "The name of the enum to generate"),
   Argument<Path>("FILE", description: "Colors.txt file to parse.", validator: fileExists)
-) { output, template, enumName, path in
+) { output, templateName, templatePath, enumName, path in
   let parser = ColorsFileParser()
   
   do {
     try parser.parseTextFile(String(path))
     
-    let template = try GenumTemplate(path: try fileExists(path: template))
+    let templateRealPath = try findTemplate("colors", templateShortName: templateName, templateFullPath: templatePath)
+    let template = try GenumTemplate(path: templateRealPath)
     let context = parser.stencilContext(enumName: enumName)
     let rendered = try template.render(context)
     output.write(rendered)

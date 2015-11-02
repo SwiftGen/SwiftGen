@@ -10,15 +10,16 @@ import GenumKit
 
 let imagesCommand = command(
   outputOption,
-  templateOption("images.stencil"),
+  templateOption("images"), templatePathOption,
   Option<String>("enumName", "Asset", flag: "e", description: "The name of the enum to generate"),
   Argument<Path>("DIR", description: "Directory to scan for .imageset files.", validator: dirExists)
-) { output, template, enumName, path in
+) { output, templateName, templatePath, enumName, path in
   let parser = AssetsCatalogParser()
   parser.parseDirectory(String(path))
   
   do {
-    let template = try GenumTemplate(path: try fileExists(path: template))
+    let templateRealPath = try findTemplate("images", templateShortName: templateName, templateFullPath: templatePath)
+    let template = try GenumTemplate(path: templateRealPath)
     let context = parser.stencilContext(enumName: enumName)
     let rendered = try template.render(context)
     output.write(rendered)

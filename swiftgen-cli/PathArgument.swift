@@ -9,13 +9,13 @@ import PathKit
 
 // MARK: Validators
 
-func checkPath(@noescape assert: Path->Bool)(path: Path) throws -> Path {
-  guard assert(path) else { throw ArgumentError.InvalidType(value: path.description, type: "path", argument: nil) }
+func checkPath(type: String, @noescape assertion: Path->Bool)(path: Path) throws -> Path {
+  guard assertion(path) else { throw ArgumentError.InvalidType(value: path.description, type: type, argument: nil) }
   return path
 }
-let pathExists = checkPath { $0.exists }
-let fileExists = checkPath { $0.exists && $0.isFile }
-let dirExists  = checkPath { $0.exists && $0.isDirectory }
+let pathExists = checkPath("path") { $0.exists }
+let fileExists = checkPath("file") { $0.isFile }
+let dirExists  = checkPath("directory") { $0.isDirectory }
 
 // MARK: Path as Input Argument
 
@@ -38,11 +38,7 @@ enum OutputDestination: ArgumentConvertible {
     guard let path = parser.shift() else {
       throw ArgumentError.MissingValue(argument: nil)
     }
-    if path == "-" {
-      self = .Console
-    } else {
-      self = .File(Path(path))
-    }
+    self = .File(Path(path))
   }
   var description: String {
     switch self {
