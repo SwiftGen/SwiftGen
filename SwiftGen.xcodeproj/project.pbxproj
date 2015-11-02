@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		091150311BD31A3300EBC803 /* PathArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091150301BD31A3300EBC803 /* PathArgument.swift */; };
+		091150311BD31A3300EBC803 /* ArgumentsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091150301BD31A3300EBC803 /* ArgumentsUtils.swift */; };
 		091150361BD3274E00EBC803 /* images-default.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 091150351BD3274E00EBC803 /* images-default.stencil */; };
 		0911503B1BD3ECAE00EBC803 /* colors-default.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0911503A1BD3ECA900EBC803 /* colors-default.stencil */; };
 		0911503F1BD4136E00EBC803 /* storyboards-default.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0911503E1BD4053D00EBC803 /* storyboards-default.stencil */; };
@@ -114,7 +114,7 @@
 		09030C261B6D492E00275BF5 /* Strings-Entries-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Entries-Defaults.swift.out"; sourceTree = "<group>"; };
 		09030C2A1B6D4D9A00275BF5 /* Strings-File-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-Defaults.swift.out"; sourceTree = "<group>"; };
 		09030C2F1B6D4F8500275BF5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		091150301BD31A3300EBC803 /* PathArgument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathArgument.swift; sourceTree = "<group>"; };
+		091150301BD31A3300EBC803 /* ArgumentsUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgumentsUtils.swift; sourceTree = "<group>"; };
 		091150351BD3274E00EBC803 /* images-default.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "images-default.stencil"; sourceTree = "<group>"; };
 		0911503A1BD3ECA900EBC803 /* colors-default.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "colors-default.stencil"; sourceTree = "<group>"; };
 		0911503E1BD4053D00EBC803 /* storyboards-default.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "storyboards-default.stencil"; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				09C7B2D31BCC382800D7F488 /* main.swift */,
-				091150301BD31A3300EBC803 /* PathArgument.swift */,
+				091150301BD31A3300EBC803 /* ArgumentsUtils.swift */,
 				09A87B751BCCC02C00D9B9F5 /* colors.swift */,
 				090141401BCC64FE002E8617 /* images.swift */,
 				0901413E1BCC64C9002E8617 /* storyboards.swift */,
@@ -523,7 +523,7 @@
 				09A87B4A1BCC9BB200D9B9F5 /* storyboards.swift in Sources */,
 				09A87B481BCC9BAD00D9B9F5 /* main.swift in Sources */,
 				09A87B4B1BCC9BB200D9B9F5 /* images.swift in Sources */,
-				091150311BD31A3300EBC803 /* PathArgument.swift in Sources */,
+				091150311BD31A3300EBC803 /* ArgumentsUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
