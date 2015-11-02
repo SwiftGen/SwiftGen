@@ -2,6 +2,13 @@
 
 ---
 
+## 0.6.1
+
+### Fixes
+
+* Fix compilation issue if some of the storyboards has no scenes. Thanks [Viacheslav Karamov](https://github.com/vkaramov/) for contribution.
+* Fix compilation issue if there are storyboard identifiers matching view controller class names. Thanks [Viacheslav Karamov](https://github.com/vkaramov/) for contribution.
+
 ## 0.6.0
 
 ### New Features: Templates
