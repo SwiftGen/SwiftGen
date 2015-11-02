@@ -7,10 +7,19 @@
 import Foundation
 
 public final class StoryboardParser {
-  typealias Scene = (storyboardID: String, tag: String, customClass: String?)
-  typealias Segue = (segueID: String, customClass: String?)
-  var storyboardsScenes = [String: [Scene]]()
-  var storyboardsSegues = [String: [Segue]]()
+  struct Scene {
+    let storyboardID: String
+    let tag: String
+    let customClass: String?
+  }
+  
+  struct Segue {
+    let segueID: String
+    let customClass: String?
+  }
+  
+  var storyboardsScenes = [String: Set<Scene>]()
+  var storyboardsSegues = [String: Set<Segue>]()
   
   public init() {}
   
@@ -18,8 +27,8 @@ public final class StoryboardParser {
     let parser = NSXMLParser(contentsOfURL: NSURL.fileURLWithPath(path))
     
     class ParserDelegate : NSObject, NSXMLParserDelegate {
-      var scenes = [Scene]()
-      var segues = [Segue]()
+      var scenes = Set<Scene>()
+      var segues = Set<Segue>()
       var inScene = false
       var readyForFirstObject = false
       var readyForConnections = false
@@ -37,7 +46,7 @@ public final class StoryboardParser {
         case let tag where readyForFirstObject:
           if let storyboardID = attributeDict["storyboardIdentifier"] {
             let customClass = attributeDict["customClass"]
-            scenes.append(Scene(storyboardID, tag, customClass))
+            scenes.insert(Scene(storyboardID: storyboardID, tag: tag, customClass: customClass))
           }
           readyForFirstObject = false
         case "connections":
@@ -45,7 +54,7 @@ public final class StoryboardParser {
         case "segue" where readyForConnections:
           if let segueID = attributeDict["identifier"] {
             let customClass = attributeDict["customClass"]
-            segues.append(Segue(segueID, customClass))
+            segues.insert(Segue(segueID: segueID, customClass: customClass))
           }
         default:
           break
@@ -63,7 +72,7 @@ public final class StoryboardParser {
         case "connections":
           readyForConnections = false
         default:
-          break;
+          break
         }
       }
     }
@@ -85,5 +94,27 @@ public final class StoryboardParser {
         }
       }
     }
+  }
+}
+
+extension StoryboardParser.Scene: Equatable { }
+func ==(lhs: StoryboardParser.Scene, rhs: StoryboardParser.Scene) -> Bool {
+  return lhs.storyboardID == rhs.storyboardID && lhs.tag == rhs.tag && lhs.customClass == rhs.customClass
+}
+
+extension StoryboardParser.Scene: Hashable {
+  var hashValue: Int {
+    return "\(storyboardID);\(tag);\(customClass)".hashValue
+  }
+}
+
+extension StoryboardParser.Segue: Equatable { }
+func ==(lhs: StoryboardParser.Segue, rhs: StoryboardParser.Segue) -> Bool {
+  return lhs.segueID == rhs.segueID && lhs.customClass == rhs.customClass
+}
+
+extension StoryboardParser.Segue: Hashable {
+  var hashValue: Int {
+    return "\(segueID);\(customClass)".hashValue
   }
 }

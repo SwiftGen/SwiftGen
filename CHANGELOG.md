@@ -2,6 +2,13 @@
 
 ---
 
+## Master
+
+#### Fixes
+
+* Now `swiftgen storyboards` doesn't generate duplicate enum cases for identical segues (those having equal identifiers and shared custom class).
+[@filwag](https://github.com/filwag), [#43](https://github.com/AliSoftware/SwiftGen/pull/43)
+
 ## 0.6.0
 
 ### New Features: Templates

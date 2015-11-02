@@ -58,6 +58,13 @@
                                     <segue destination="xKD-v4-X1W" kind="custom" identifier="CustomBack" customClass="CustomSegueClass2" id="eBb-AQ-abV"/>
                                 </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jfg-zf-vVo">
+                                <rect key="frame" x="180" y="472" width="240" height="128"/>
+                                <animations/>
+                                <connections>
+                                    <segue destination="TKc-dv-ThZ" kind="embed" identifier="Embed" id="O2Q-vy-SWs"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -100,6 +107,15 @@
                     <view key="view" contentMode="scaleToFill" id="8dI-WY-DPv">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T02-7w-iPh">
+                                <rect key="frame" x="180" y="472" width="240" height="128"/>
+                                <animations/>
+                                <connections>
+                                    <segue destination="TKc-dv-ThZ" kind="embed" identifier="Embed" id="Ne2-PQ-HKf"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -160,5 +176,27 @@
             </objects>
             <point key="canvasLocation" x="847" y="75"/>
         </scene>
+        <!--Embedded-->
+        <scene sceneID="0KJ-B4-kHb">
+            <objects>
+                <viewController title="Embedded" id="TKc-dv-ThZ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oZN-vF-mOg"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xfj-uB-8o0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XWV-Fs-B8e">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gSB-Wj-Zgr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1239" y="1440"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ne2-PQ-HKf"/>
+    </inferredMetricsTieBreakers>
 </document>
