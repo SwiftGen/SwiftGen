@@ -22,7 +22,7 @@ class ColorsTests: XCTestCase {
   
   func testListWithDefaults() {
     let parser = ColorsFileParser()
-    parser.addColorWithName("TextColor", value: "0x999999")
+    parser.addColorWithName("Text&Body Color", value: "0x999999")
     parser.addColorWithName("ArticleTitle", value: "#996600")
     parser.addColorWithName("ArticleBackground", value: "#ffcc0099")
     
@@ -35,7 +35,7 @@ class ColorsTests: XCTestCase {
   
   func testListWithRawValueTemplate() {
     let parser = ColorsFileParser()
-    parser.addColorWithName("TextColor", value: "0x999999")
+    parser.addColorWithName("Text&Body Color", value: "0x999999")
     parser.addColorWithName("ArticleTitle", value: "#996600")
     parser.addColorWithName("ArticleBackground", value: "#ffcc0099")
     
