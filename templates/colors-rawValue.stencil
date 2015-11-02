@@ -15,7 +15,7 @@ extension UIColor {
 
 {% if colors %}
 extension UIColor {
-  enum {{enumName}} : UInt32 {
+  enum {{enumName|swiftIdentifier}} : UInt32 {
     {% for color in colors %}
     case {{color.name|swiftIdentifier}} = 0x{{color.rgba}}
     {% endfor %}

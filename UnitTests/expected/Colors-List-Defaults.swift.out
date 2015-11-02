@@ -17,12 +17,12 @@ extension UIColor {
   enum Name {
     case ArticleBackground
     case ArticleTitle
-    case TextColor
+    case Text_Body_Color
 
     static let rgbaValues: [Name:UInt32] = [
       .ArticleBackground : 0xffcc0099,
       .ArticleTitle : 0x996600ff,
-      .TextColor : 0x999999ff,
+      .Text_Body_Color : 0x999999ff,
     ]
 
     var rgbaValue: UInt32! {

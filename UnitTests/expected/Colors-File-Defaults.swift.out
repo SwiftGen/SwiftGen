@@ -18,14 +18,14 @@ extension UIColor {
     case ArticleBody
     case ArticleFootnote
     case ArticleTitle
-    case Cyan
+    case Cyan_Color
     case Translucent
 
     static let rgbaValues: [Name:UInt32] = [
       .ArticleBody : 0x339666ff,
       .ArticleFootnote : 0xff66ccff,
       .ArticleTitle : 0x33fe66ff,
-      .Cyan : 0xff66ccff,
+      .Cyan_Color : 0xff66ccff,
       .Translucent : 0xffffffcc,
     ]
 
