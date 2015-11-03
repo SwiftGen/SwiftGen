@@ -9,6 +9,8 @@ extension UIImage {
     case Red_Apple = "Red apple"
     case _2_Pears = "2-pears"
 
+    static let allValues = [Green_Apple, Red_Apple, _2_Pears, ]
+
     var image: UIImage {
       return UIImage(asset: self)
     }

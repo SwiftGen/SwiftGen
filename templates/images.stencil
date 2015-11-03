@@ -10,6 +10,8 @@ extension UIImage {
     case {{image|swiftIdentifier}} = "{{image}}"
     {% endfor %}
 
+    static let allValues = [{% for image in images %}{{image|swiftIdentifier}}, {% endfor %}]
+
     var image: UIImage {
       return UIImage(asset: self)
     }

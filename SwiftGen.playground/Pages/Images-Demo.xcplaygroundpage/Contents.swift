@@ -18,6 +18,8 @@ extension UIImage {
         case Apple = "Apple"
         case Banana = "Banana"
         
+        static let allValues = [Apple, Banana, ]
+        
         var image: UIImage {
             return UIImage(asset: self)
         }
@@ -35,4 +37,8 @@ extension UIImage {
 let image = UIImage(asset: .Apple)
 
 UIImage.Asset.Banana.image
+
+UIImage.Asset.allValues.forEach { asset in
+    print(asset.rawValue)
+}
 
