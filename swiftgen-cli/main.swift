@@ -29,6 +29,7 @@ let main = Group {
   $0.addCommand("images", imagesCommand)
   $0.addCommand("storyboards", storyboardsCommand)
   $0.addCommand("strings", stringsCommand)
+  $0.addCommand("fonts", fontsCommand)
 }
 
 let version = NSBundle(forClass: GenumKit.GenumTemplate.self).infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
