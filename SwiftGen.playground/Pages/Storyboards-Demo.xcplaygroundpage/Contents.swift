@@ -16,15 +16,11 @@ class CreateAccViewController : UIViewController {}
 import Foundation
 import UIKit
 
-protocol StoryboardScene : RawRepresentable {
+protocol StoryboardScene {
     static var storyboardName : String { get }
-    static func storyboard() -> UIStoryboard
-    static func initialViewController() -> UIViewController
-    func viewController() -> UIViewController
-    static func viewController(identifier: Self) -> UIViewController
 }
 
-extension StoryboardScene where Self.RawValue == String {
+extension StoryboardScene {
     static func storyboard() -> UIStoryboard {
         return UIStoryboard(name: self.storyboardName, bundle: nil)
     }
@@ -32,7 +28,9 @@ extension StoryboardScene where Self.RawValue == String {
     static func initialViewController() -> UIViewController {
         return storyboard().instantiateInitialViewController()!
     }
-    
+}
+
+extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String {
     func viewController() -> UIViewController {
         return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
     }

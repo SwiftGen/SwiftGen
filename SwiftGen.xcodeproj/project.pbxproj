@@ -50,6 +50,8 @@
 		470A14E31BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 470A14E21BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out */; };
 		470A14E61BEA68C40052EAC8 /* Images-File-AllValues.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 470A14E51BEA68C40052EAC8 /* Images-File-AllValues.swift.out */; };
 		470A14E71BEA691E0052EAC8 /* images-allvalues.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 470A14E41BEA68630052EAC8 /* images-allvalues.stencil */; };
+		470A14E91BEA6CF10052EAC8 /* Anonymous.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 470A14E81BEA6CF10052EAC8 /* Anonymous.storyboard */; };
+		470A14EB1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 470A14EA1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Defaults.swift.out */; };
 		4761E0311BDE6EEA00B9B05F /* StringFiltersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761E0301BDE6EEA00B9B05F /* StringFiltersTests.swift */; };
 		4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0321BDE753000B9B05F /* Colors-Empty.swift.out */; };
 		4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0331BDE753000B9B05F /* Images-Empty.swift.out */; };
@@ -152,6 +154,8 @@
 		470A14E21BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Message-Lowercase.swift.out"; sourceTree = "<group>"; };
 		470A14E41BEA68630052EAC8 /* images-allvalues.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "images-allvalues.stencil"; sourceTree = "<group>"; };
 		470A14E51BEA68C40052EAC8 /* Images-File-AllValues.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-File-AllValues.swift.out"; sourceTree = "<group>"; };
+		470A14E81BEA6CF10052EAC8 /* Anonymous.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Anonymous.storyboard; sourceTree = "<group>"; };
+		470A14EA1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Anonymous-Defaults.swift.out"; sourceTree = "<group>"; };
 		4761E0301BDE6EEA00B9B05F /* StringFiltersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringFiltersTests.swift; sourceTree = "<group>"; };
 		4761E0321BDE753000B9B05F /* Colors-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-Empty.swift.out"; sourceTree = "<group>"; };
 		4761E0331BDE753000B9B05F /* Images-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-Empty.swift.out"; sourceTree = "<group>"; };
@@ -247,6 +251,7 @@
 				4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */,
 				09EB0A261BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out */,
 				470A14E21BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out */,
+				470A14EA1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Defaults.swift.out */,
 				09EB0A251BDC60F000B2CF79 /* Storyboards-All-Defaults.swift.out */,
 				09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */,
 				4761E0351BDE753000B9B05F /* Strings-Empty.swift.out */,
@@ -264,6 +269,7 @@
 				09030C2F1B6D4F8500275BF5 /* Images.xcassets */,
 				09030C0B1B6D30E800275BF5 /* Message.storyboard */,
 				09030C0C1B6D30E800275BF5 /* Wizard.storyboard */,
+				470A14E81BEA6CF10052EAC8 /* Anonymous.storyboard */,
 				09030C1D1B6D473E00275BF5 /* colors.txt */,
 				09030C241B6D48FC00275BF5 /* Localizable.strings */,
 				09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */,
@@ -419,6 +425,7 @@
 				0921FB9D1BE7873400B488B5 /* colors-rawValue.stencil in Resources */,
 				0921FB9C1BE785DF00B488B5 /* Colors-List-RawValue.swift.out in Resources */,
 				470A14E31BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out in Resources */,
+				470A14EB1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Defaults.swift.out in Resources */,
 				09A87B671BCCA4E600D9B9F5 /* colors.txt in Resources */,
 				091150361BD3274E00EBC803 /* images-default.stencil in Resources */,
 				470A14E71BEA691E0052EAC8 /* images-allvalues.stencil in Resources */,
@@ -438,6 +445,7 @@
 				09A87B6E1BCCA5F600D9B9F5 /* Strings-File-CustomName.swift.out in Resources */,
 				4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */,
 				4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */,
+				470A14E91BEA6CF10052EAC8 /* Anonymous.storyboard in Resources */,
 				09A87B711BCCA5FC00D9B9F5 /* Localizable.strings in Resources */,
 				09EB0A281BDC60F000B2CF79 /* Colors-File-Defaults.swift.out in Resources */,
 				09EB0A311BDC8F4100B2CF79 /* LocUTF8.strings in Resources */,

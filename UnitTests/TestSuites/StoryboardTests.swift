@@ -47,6 +47,17 @@ class StoryboardTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
   
+  func testAnonymousStoryboardWithDefaults() {
+    let parser = StoryboardParser()
+    parser.addStoryboardAtPath(self.fixturePath("Anonymous.storyboard"))
+    
+    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Storyboards-Anonymous-Defaults.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
   func testAllStoryboardsWithDefaults() {
     let parser = StoryboardParser()
     parser.parseDirectory(self.fixturesDir)
