@@ -8,8 +8,10 @@
 
 * Now `swiftgen storyboards` doesn't generate duplicate enum cases for identical segues (those having equal identifiers and shared custom class).  
   [@filwag](https://github.com/filwag), [#43](https://github.com/AliSoftware/SwiftGen/pull/43)
-* Fix compilation issue if some of the storyboards has no scenes.  
+* Fix compilation issue for storyboards without any scene.  
   [Viacheslav Karamov](https://github.com/vkaramov/), [#47](https://github.com/AliSoftware/SwiftGen/issues/47)
+* Fix compilation issue if storyboard identifiers match view controller class names.  
+  [Viacheslav Karamov](https://github.com/vkaramov/), [#48](https://github.com/AliSoftware/SwiftGen/issues/48)
 
 ## 0.6.0
 
