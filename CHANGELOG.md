@@ -12,6 +12,8 @@
   [Viacheslav Karamov](https://github.com/vkaramov/), [#47](https://github.com/AliSoftware/SwiftGen/issues/47)
 * Propose an alternate template using lowercase names, especially for when storyboard identifiers match view controller class names.  
   [Viacheslav Karamov](https://github.com/vkaramov/), [#48](https://github.com/AliSoftware/SwiftGen/issues/48)
+* Introduced an `image-allvalues` template that exposes the list of all images in a `static let allValues` array.  
+  [Ahmed Mseddi](https://github.com/amseddi) & Guillaume Lagorce, [#44](https://github.com/AliSoftware/SwiftGen/pull/44)
 
 ## 0.6.0
 
