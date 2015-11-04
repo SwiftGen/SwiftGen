@@ -64,6 +64,12 @@ Each subcommand may have its own option and syntax, but here are some common opt
 
 You can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
 
+## Templates
+
+SwiftGen comes bundled with some default templates for each of the subcommand (`colors`, `images`, `strings`, `storyboard`, …), but you can also create your own templates to match your coding conventions, and store them in `~/Library/Application Support/SwiftGen/templates`.
+
+For more info about how to create your own templates, [see the dedicated documentation](Templates.md).
+
 ## Playground
 
 The `SwiftGen.playground` available in this repository will allow you to play with the code that the tools typically generates, and see some examples of how you can take advantage of it.

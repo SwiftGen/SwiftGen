@@ -1,6 +1,6 @@
 # Customize SwiftGen templates
 
-This document describes how to make your own templates for SwiftGen, is it can generate code more to your liking and code following your own coding conventions.
+This document describes how to make your own templates for SwiftGen, so it can generate code more to your liking and code following your own coding conventions.
 
 ## Templates files on disk
 
