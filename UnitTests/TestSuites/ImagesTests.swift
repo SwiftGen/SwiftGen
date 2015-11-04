@@ -41,11 +41,22 @@ class ImagesTests: XCTestCase {
   func testFileWithDefaults() {
     let parser = AssetsCatalogParser()
     parser.parseDirectory(fixturePath("Images.xcassets"))
-
+    
     let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
     let result = try! template.render(parser.stencilContext())
-
+    
     let expected = self.fixtureString("Images-File-Defaults.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
+  func testFileWithAllValuesTemplate() {
+    let parser = AssetsCatalogParser()
+    parser.parseDirectory(fixturePath("Images.xcassets"))
+    
+    let template = GenumTemplate(templateString: fixtureString("images-allvalues.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Images-File-AllValues.swift.out")
     XCTDiffStrings(result, expected)
   }
   
@@ -58,5 +69,5 @@ class ImagesTests: XCTestCase {
     
     let expected = self.fixtureString("Images-File-CustomName.swift.out")
     XCTDiffStrings(result, expected)
-  }  
+  }
 }
