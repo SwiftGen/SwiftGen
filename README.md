@@ -60,13 +60,18 @@ The tool is now a unique `swiftgen` binary command-line with subcommands:
 Each subcommand may have its own option and syntax, but here are some common options:
 
 * `--output FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
-* `--template PATH`: define the Stencil template to use to generate the output.
+* `--template NAME`: define the Stencil template to use (by name, see [here for more info](https://github.com/AliSoftware/SwiftGen/blob/master/Templates.md#using-a-name)) to generate the output.
+* `--templatePath PATH`: define the Stencil template to use, using a full path.
 
 You can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
 
 ## Templates
 
 SwiftGen comes bundled with some default templates for each of the subcommand (`colors`, `images`, `strings`, `storyboard`, …), but you can also create your own templates to match your coding conventions, and store them in `~/Library/Application Support/SwiftGen/templates`.
+
+Then, simply use the `-t` / `--template` to specify the name of the template to use.
+
+💡 You can use `swiftgen templates` to list all the templates available (both custom and bundled templates) for each subcommand.
 
 For more info about how to create your own templates, [see the dedicated documentation](Templates.md).
 

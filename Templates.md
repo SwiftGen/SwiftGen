@@ -23,6 +23,10 @@ For example `swiftgen images -t foo DIR` will search for a template named `image
 
 If you don't specify neither `-t` nor `-p`, SwiftGen will assume you specified `-t default`. That means that `swiftgen images DIR` will use the `images-default.stencil` template. Stencil comes with a default template for each of its subcommand, but given this rule, you have the ability to make your own default template for each subcommand and store them in `Application Support`.
 
+## List installed templates
+
+The `swiftgen templates` command will list all the installed templates (as YAML output) for each subcommand, both for bundled templates and custom templates.
+
 ## Templates Format, Nodes and Filters
 
 Templates in SwiftGen are based on [Stencil](https://github.com/kylef/Stencil), a template engine inspired by Django and Mustache. The syntax of the templates [is explained in Stencil's README](https://github.com/kylef/Stencil#templates).

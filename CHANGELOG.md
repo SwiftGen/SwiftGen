@@ -10,6 +10,8 @@
   * Now the `-t` flag expect a template name (defaults to `default`), and will search a matching template in `Application Support` first, then in the templates bundled with SwiftGen.  
   * You can still specify a template by path using `-p`.  
   * For more info, see [this dedicated documentation](Templates.md).  
+* You can now list all templates available (both bundled templates and custom ones) using the `swiftgen template` command.
+  ([#42](https://github.com/AliSoftware/SwiftGen/issues/42), [#50](https://github.com/AliSoftware/SwiftGen/pull/50))
 
 #### Fixes
 
