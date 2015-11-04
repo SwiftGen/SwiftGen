@@ -16,8 +16,8 @@ let templatesCommand = command(
     return $0
   }
 ) { onlySubcommand in
-  let customTemplates = try! appSupportTemplatesPath.children()
-  let bundledTemplates = try! bundledTemplatesPath.children()
+  let customTemplates = (try? appSupportTemplatesPath.children()) ?? []
+  let bundledTemplates = (try? bundledTemplatesPath.children()) ?? []
   
   let printTemplates = { (prefix: String, list: [Path]) in
     for file in list where file.lastComponent.hasPrefix("\(prefix)-") && file.`extension` == "stencil" {
