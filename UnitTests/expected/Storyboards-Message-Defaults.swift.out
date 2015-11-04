@@ -33,24 +33,24 @@ extension UIStoryboard {
     enum Message : String, StoryboardScene {
       static let storyboardName = "Message"
 
-      case composer = "Composer"
+      case Composer = "Composer"
       static func composerViewController() -> UIViewController {
-        return Message.composer.viewController()
+        return Message.Composer.viewController()
       }
 
-      case messagesList = "MessagesList"
+      case MessagesList = "MessagesList"
       static func messagesListViewController() -> UITableViewController {
-        return Message.messagesList.viewController() as! UITableViewController
+        return Message.MessagesList.viewController() as! UITableViewController
       }
 
-      case navCtrl = "NavCtrl"
+      case NavCtrl = "NavCtrl"
       static func navCtrlViewController() -> UINavigationController {
-        return Message.navCtrl.viewController() as! UINavigationController
+        return Message.NavCtrl.viewController() as! UINavigationController
       }
 
-      case urlChooser = "URLChooser"
+      case URLChooser = "URLChooser"
       static func urlChooserViewController() -> XXPickerViewController {
-        return Message.urlChooser.viewController() as! XXPickerViewController
+        return Message.URLChooser.viewController() as! XXPickerViewController
       }
     }
   }

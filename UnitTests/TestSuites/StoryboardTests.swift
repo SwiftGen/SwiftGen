@@ -35,6 +35,17 @@ class StoryboardTests: XCTestCase {
     let expected = self.fixtureString("Storyboards-Message-Defaults.swift.out")
     XCTDiffStrings(result, expected)
   }
+    
+  func testMessageStoryboardWithLowercaseTemplate() {
+    let parser = StoryboardParser()
+    parser.addStoryboardAtPath(self.fixturePath("Message.storyboard"))
+    
+    let template = GenumTemplate(templateString: fixtureString("storyboards-lowercase.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Storyboards-Message-Lowercase.swift.out")
+    XCTDiffStrings(result, expected)
+  }
   
   func testAllStoryboardsWithDefaults() {
     let parser = StoryboardParser()

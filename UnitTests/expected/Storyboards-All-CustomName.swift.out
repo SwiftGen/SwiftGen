@@ -33,47 +33,47 @@ extension UIStoryboard {
     enum Message : String, StoryboardScene {
       static let storyboardName = "Message"
 
-      case composer = "Composer"
+      case Composer = "Composer"
       static func composerViewController() -> UIViewController {
-        return Message.composer.viewController()
+        return Message.Composer.viewController()
       }
 
-      case messagesList = "MessagesList"
+      case MessagesList = "MessagesList"
       static func messagesListViewController() -> UITableViewController {
-        return Message.messagesList.viewController() as! UITableViewController
+        return Message.MessagesList.viewController() as! UITableViewController
       }
 
-      case navCtrl = "NavCtrl"
+      case NavCtrl = "NavCtrl"
       static func navCtrlViewController() -> UINavigationController {
-        return Message.navCtrl.viewController() as! UINavigationController
+        return Message.NavCtrl.viewController() as! UINavigationController
       }
 
-      case urlChooser = "URLChooser"
+      case URLChooser = "URLChooser"
       static func urlChooserViewController() -> XXPickerViewController {
-        return Message.urlChooser.viewController() as! XXPickerViewController
+        return Message.URLChooser.viewController() as! XXPickerViewController
       }
     }
     enum Wizard : String, StoryboardScene {
       static let storyboardName = "Wizard"
 
-      case accept_CGU = "Accept-CGU"
-      static func accept_CGUViewController() -> UIViewController {
-        return Wizard.accept_CGU.viewController()
+      case Accept_CGU = "Accept-CGU"
+      static func acceptCGUViewController() -> UIViewController {
+        return Wizard.Accept_CGU.viewController()
       }
 
-      case createAccount = "CreateAccount"
+      case CreateAccount = "CreateAccount"
       static func createAccountViewController() -> CreateAccViewController {
-        return Wizard.createAccount.viewController() as! CreateAccViewController
+        return Wizard.CreateAccount.viewController() as! CreateAccViewController
       }
 
-      case preferences = "Preferences"
+      case Preferences = "Preferences"
       static func preferencesViewController() -> UITableViewController {
-        return Wizard.preferences.viewController() as! UITableViewController
+        return Wizard.Preferences.viewController() as! UITableViewController
       }
 
-      case validate_Password = "Validate_Password"
-      static func validate_PasswordViewController() -> UIViewController {
-        return Wizard.validate_Password.viewController()
+      case Validate_Password = "Validate_Password"
+      static func validatePasswordViewController() -> UIViewController {
+        return Wizard.Validate_Password.viewController()
       }
     }
   }
