@@ -14,6 +14,8 @@
   [Viacheslav Karamov](https://github.com/vkaramov/), [#48](https://github.com/AliSoftware/SwiftGen/issues/48)
 * Introduced an `image-allvalues` template that exposes the list of all images in a `static let allValues` array.  
   [Ahmed Mseddi](https://github.com/amseddi) & Guillaume Lagorce, [#44](https://github.com/AliSoftware/SwiftGen/pull/44)
+* Fix issue with Storyboards without any StoryboardID (all scenes being anonymous) not extending `StoryboardScene`.
+  ([#36](https://github.com/AliSoftware/SwiftGen/issues/36))
 
 ## 0.6.0
 
