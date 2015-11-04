@@ -25,7 +25,7 @@ def print_info(str)
 end
 
 def defaults(args)
-  bindir = args.bindir.nil? || args.bindir.empty? ? Pathname.new('./swiftgen/bin')   : Pathname.new(args.bindir)
+  bindir = args.bindir.nil? || args.bindir.empty? ? Pathname.new('./build/swiftgen/bin')   : Pathname.new(args.bindir)
   fmkdir = args.fmkdir.nil? || args.fmkdir.empty? ? bindir + '../lib'   : Pathname.new(args.fmkdir)
   tpldir = args.tpldir.nil? || args.tpldir.empty? ? bindir + '../templates' : Pathname.new(args.tpldir)
   [bindir, fmkdir, tpldir]

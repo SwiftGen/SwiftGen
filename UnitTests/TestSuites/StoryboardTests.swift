@@ -18,7 +18,7 @@ class StoryboardTests: XCTestCase {
   func testEmpty() {
     let parser = StoryboardParser()
     
-    let template = GenumTemplate(templateString: fixtureString("storyboards.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let result = try! template.render(parser.stencilContext())
     
     let expected = self.fixtureString("Storyboards-Empty.swift.out")
@@ -29,7 +29,7 @@ class StoryboardTests: XCTestCase {
     let parser = StoryboardParser()
     parser.addStoryboardAtPath(self.fixturePath("Message.storyboard"))
     
-    let template = GenumTemplate(templateString: fixtureString("storyboards.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let result = try! template.render(parser.stencilContext())
     
     let expected = self.fixtureString("Storyboards-Message-Defaults.swift.out")
@@ -40,7 +40,7 @@ class StoryboardTests: XCTestCase {
     let parser = StoryboardParser()
     parser.parseDirectory(self.fixturesDir)
     
-    let template = GenumTemplate(templateString: fixtureString("storyboards.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let ctx = parser.stencilContext()
     let result = try! template.render(ctx)
     
@@ -52,7 +52,7 @@ class StoryboardTests: XCTestCase {
     let parser = StoryboardParser()
     parser.parseDirectory(self.fixturesDir)
     
-    let template = GenumTemplate(templateString: fixtureString("storyboards.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let ctx = parser.stencilContext(sceneEnumName: "XCTStoryboardsScene", segueEnumName: "XCTStoryboardsSegue")
     let result = try! template.render(ctx)
     

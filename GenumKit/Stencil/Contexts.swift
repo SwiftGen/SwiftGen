@@ -15,10 +15,10 @@ private func uppercaseFirst(string: String) -> String {
 
 /* MARK: - Stencil Context for Colors
 
- - enumName: String
- - colors: Array
- .  - name: String
- .  - rgba: String — hex value of for RRGGBBAA (without the "0x" prefix)
+ - `enumName`: `String` — name of the enum to generate
+ - `colors`: `Array` of:
+    - `name`: `String` — name of each color
+    - `rgba`: `String` — hex value of the form RRGGBBAA (without the "0x" prefix)
 */
 extension ColorsFileParser {
   public func stencilContext(enumName enumName: String = "Name") -> Context {
@@ -33,8 +33,8 @@ extension ColorsFileParser {
 
 /* MARK: - Stencil Context for Images
 
- - enumName: String
- - images: Array<String> — image names
+ - `enumName`: `String` — name of the enum to generate
+ - `images`: `Array<String>` — list of image names
 */
 extension AssetsCatalogParser {
   public func stencilContext(enumName enumName: String = "Asset") -> Context {
@@ -44,16 +44,16 @@ extension AssetsCatalogParser {
 
 /* MARK: - Stencil Context for Storyboards
 
- - sceneEnumName: String
- - segueEnumName: String
- - storyboards: Array
- .  - name: String
- .  - scenes: Array (absent if empty)
- .  .  - identifier: String
- .  .  - class: String (absent if generic UIViewController)
- .  - segues: Array (absent if empty)
- .  .  - identifier: String
- .  .  - class: String (absent if generic UIStoryboardSegue)
+ - `sceneEnumName`: `String`
+ - `segueEnumName`: `String`
+ - `storyboards`: `Array` of:
+    - `name`: `String`
+    - `scenes`: `Array` (absent if empty)
+       - `identifier`: `String`
+       - `class`: `String` (absent if generic UIViewController)
+    - `segues`: `Array` (absent if empty)
+       - `identifier`: `String`
+       - `class`: `String` (absent if generic UIStoryboardSegue)
 */
 extension StoryboardParser {
   public func stencilContext(sceneEnumName sceneEnumName: String = "Scene", segueEnumName: String = "Segue") -> Context {
@@ -87,14 +87,14 @@ extension StoryboardParser {
 
 /* MARK: - Stencil Context for Strings
 
- - enumName: String
- - strings: Array
- .  - key: String
- .  - params: dictionary defined only if localized string has parameters, and in such case contains the following entries:
- .  .  - count: number of parameters
- .  .  - types: Array<String> containing types like "String", "Int", etc
- .  .  - declarations: Array<String> containing declarations like "let p0", "let p1", etc
- .  .  - names: Array<String> containing parameter names like "p0", "p1", etc
+ - `enumName`: `String`
+ - `strings`: `Array`
+    - `key`: `String`
+    - `params`: `Dictionary` — defined only if localized string has parameters, and in such case contains the following entries:
+       - `count`: `Int` — number of parameters
+       - `types`: `Array<String>` containing types like `"String"`, `"Int"`, etc
+       - `declarations`: `Array<String>` containing declarations like `"let p0"`, `"let p1"`, etc
+       - `names`: `Array<String>` containing parameter names like `"p0"`, `"p1"`, etc
 */
 extension StringsFileParser {
   public func stencilContext(enumName enumName: String = "L10n") -> Context {
