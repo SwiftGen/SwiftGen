@@ -115,9 +115,20 @@
                                     <segue destination="TKc-dv-ThZ" kind="embed" identifier="Embed" id="Ne2-PQ-HKf"/>
                                 </connections>
                             </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This scene is volontarly unreachable to test that SwiftGen won't generate anything for it" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="bRe-yk-AVy">
+                                <rect key="frame" x="115" y="279.5" width="370" height="41"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bRe-yk-AVy" firstAttribute="centerY" secondItem="8dI-WY-DPv" secondAttribute="centerY" id="FJZ-AN-fRC"/>
+                            <constraint firstItem="bRe-yk-AVy" firstAttribute="centerX" secondItem="8dI-WY-DPv" secondAttribute="centerX" id="Kji-pm-6rr"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mkc-TT-uhB" userLabel="First Responder" sceneMemberID="firstResponder"/>

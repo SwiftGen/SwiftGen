@@ -27,6 +27,14 @@ extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String 
   }
 }
 
+protocol StoryboardSegue : RawRepresentable { }
+
+extension UIViewController {
+  func performSegue<S : StoryboardSegue where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
 {# This is where the generation begins, this code depends on what you have in your Storyboards #}
 {% if storyboards %}
 extension UIStoryboard {
@@ -61,7 +69,7 @@ extension UIStoryboard {
 
   struct {{segueEnumName}} {
     {% for storyboard in storyboards %}{% if storyboard.segues %}
-    enum {{storyboard.name|swiftIdentifier}} : String {
+    enum {{storyboard.name|swiftIdentifier}} : String, StoryboardSegue {
       {% for segue in storyboard.segues %}
       case {{segue.identifier|swiftIdentifier}} = "{{segue.identifier}}"
       {% endfor %}

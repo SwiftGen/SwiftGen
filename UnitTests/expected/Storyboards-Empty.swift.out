@@ -26,4 +26,12 @@ extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String 
   }
 }
 
+protocol StoryboardSegue : RawRepresentable { }
+
+extension UIViewController {
+  func performSegue<S : StoryboardSegue where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
 // No storyboard found

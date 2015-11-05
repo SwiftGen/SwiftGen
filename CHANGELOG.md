@@ -12,6 +12,9 @@
   * For more info, see [this dedicated documentation](Templates.md).  
 * You can now list all templates available (both bundled templates and custom ones) using the `swiftgen template` command.
   ([#42](https://github.com/AliSoftware/SwiftGen/issues/42), [#50](https://github.com/AliSoftware/SwiftGen/pull/50))
+* Add a `performSegue(_:sender:)` extension on `UIViewController` to accept a `StoryboardSegue` as parameter.  
+  You can now for example call `vc.performSegue(UIStoryboard.Segue.Wizard.ShowPassword)`.
+  ([#37](https://github.com/AliSoftware/SwiftGen/issues/37))
 
 #### Fixes
 

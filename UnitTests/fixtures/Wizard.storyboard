@@ -16,8 +16,22 @@
                     <view key="view" contentMode="scaleToFill" id="wQH-MG-v6Y">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6D-nB-wS1">
+                                <rect key="frame" x="548" y="28" width="32" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <segue destination="30h-14-fok" kind="show" identifier="ShowPassword" id="y7o-M4-oge"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="k6D-nB-wS1" firstAttribute="top" secondItem="vW2-yr-H1F" secondAttribute="bottom" constant="8" symbolic="YES" id="G1k-Td-dUp"/>
+                            <constraint firstAttribute="trailing" secondItem="k6D-nB-wS1" secondAttribute="trailing" constant="20" symbolic="YES" id="vYq-og-l8D"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="62i-h6-rU6" userLabel="First Responder" sceneMemberID="firstResponder"/>

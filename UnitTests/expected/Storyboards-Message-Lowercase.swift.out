@@ -26,6 +26,14 @@ extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String 
   }
 }
 
+protocol StoryboardSegue : RawRepresentable { }
+
+extension UIViewController {
+  func performSegue<S : StoryboardSegue where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
 extension UIStoryboard {
   struct Scene {
     enum Message : String, StoryboardScene {
@@ -54,7 +62,7 @@ extension UIStoryboard {
   }
 
   struct Segue {
-    enum Message : String {
+    enum Message : String, StoryboardSegue {
       case CustomBack = "CustomBack"
       case Embed = "Embed"
       case NonCustom = "NonCustom"

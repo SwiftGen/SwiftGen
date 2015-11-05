@@ -39,6 +39,14 @@ extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String 
     }
 }
 
+protocol StoryboardSegue : RawRepresentable { }
+
+extension UIViewController {
+  func performSegue<S : StoryboardSegue where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
 extension UIStoryboard {
     struct Scene {
         enum Wizard : String, StoryboardScene {
@@ -66,11 +74,12 @@ extension UIStoryboard {
         }
     }
     
-    struct Segue {
-        enum Message : String {
+  struct Segue {
+        enum Wizard : String, StoryboardSegue {
             case Custom = "Custom"
             case Back = "Back"
             case NonCustom = "NonCustom"
+            case ShowPassword = "ShowPassword"
         }
     }
 }
@@ -88,11 +97,11 @@ validateVC.title
    not known by the storyboard. But it should work correctly in a real project. */
 // let cgu = UIStoryboard.Scene.Wizard.createAccountViewController()
 
-let segue = UIStoryboard.Segue.Message(rawValue: "Custom")!
-segue
+let segue = UIStoryboard.Segue.Wizard.ShowPassword
+initialVC.performSegue(segue)
 
 switch segue {
-  case .Custom:
+  case .ShowPassword:
     print("Working! 🎉")
   default:
     print("Not working! 😱")
