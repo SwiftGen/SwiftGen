@@ -225,16 +225,35 @@ This will generate an `enum` for each of your `UIStoryboard`, with one `case` pe
 The generated code will look like this:
 
 ```swift
-protocol StoryboardScene : RawRepresentable {
-  static var storyboardName : String { get }
-  static func storyboard() -> UIStoryboard
-  static func initialViewController() -> UIViewController
-  func viewController() -> UIViewController
-  static func viewController(identifier: Self) -> UIViewController
+protocol StoryboardScene {
+    static var storyboardName : String { get }
 }
 
-extension StoryboardScene where Self.RawValue == String {
-  /* Implementation details */
+extension StoryboardScene {
+    static func storyboard() -> UIStoryboard {
+        return UIStoryboard(name: self.storyboardName, bundle: nil)
+    }
+    
+    static func initialViewController() -> UIViewController {
+        return storyboard().instantiateInitialViewController()!
+    }
+}
+
+extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String {
+    func viewController() -> UIViewController {
+        return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
+    }
+    static func viewController(identifier: Self) -> UIViewController {
+        return identifier.viewController()
+    }
+}
+
+protocol StoryboardSegue : RawRepresentable { }
+
+extension UIViewController {
+  func performSegue<S : StoryboardSegue where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
 }
 
 extension UIStoryboard {
@@ -268,7 +287,7 @@ extension UIStoryboard {
   }
 
   struct Segue {
-    enum Message : String {
+    enum Message : String, StoryboardSegue {
       case Back = "Back"
       case Custom = "Custom"
       case NonCustom = "NonCustom"
@@ -297,6 +316,8 @@ override func prepareForSegue(_ segue: UIStoryboardSegue, sender sender: AnyObje
     // Prepare for your custom segue transition
   }
 }
+
+initialVC.performSegue(UIStoryboard.Segue.Message.Back)
 ```
 
 
