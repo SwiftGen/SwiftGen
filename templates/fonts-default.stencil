@@ -1,0 +1,52 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+{% if fonts %}
+import UIKit
+
+extension UIFont {
+
+    enum {{enumName|swiftIdentifier}} {
+        {% for font in fonts %}
+        case {{font.name|swiftIdentifier}}
+        {% endfor %}
+
+        func fontName() -> String {
+            switch self {
+            {% for font in fonts %}
+            case .{{font.name|swiftIdentifier}}
+                return "{{font.fontName}}"
+            {% endfor %}
+            }
+        }
+
+        func fontSize() -> CGFloat {
+            switch self {
+            {% for font in fonts %}
+            case .{{font.name|swiftIdentifier}}
+                return "{{font.fontSize}}"
+            {% endfor %}
+            }
+        }
+
+    }
+
+    convenience init(named name: Name) {
+        self.init(name: name.fontName(), size:name.fontSize())
+    }
+}
+
+extension UIFont {
+
+    enum  {
+        {% for font in fonts %}
+        case {{font.name|swiftIdentifier}}(fontName: "{{font.fontName}}", fontSize:{{font.fontSize}})
+        {% endfor %}
+    }
+
+    convenience init(named name: {{enumName}}) {
+        self.init(name: name.rawValue.fontName, size:name.rawValue.fontSize)
+    }
+}
+{% else %}
+// No fonts found
+{% endif %}

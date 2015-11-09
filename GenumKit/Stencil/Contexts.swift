@@ -31,6 +31,33 @@ extension ColorsFileParser {
   }
 }
 
+/* MARK: - Stencil Context for Fonts
+
+- `enumName`: `String` — name of the enum to generate
+- `fonts`: `Array` of:
+- `fontName`: `String` — name of each font
+- `fontSize`: `Int` — size of the given font
+*/
+extension FontFileParser {
+	public func stencilContext(enumName enumName: String = "Name") -> Context {
+		
+		let fontMap = fonts.map({ (name:String, font:Font) -> [String:String] in
+			
+			let fontName = font.fontName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+			let size = font.fontSize
+			
+			return [
+				"name": name,
+				"fontName": fontName,
+				"fontSize": "\(size)"
+			]
+			
+		}).sort { $0["name"] < $1["name"] }
+		
+		return Context(dictionary: ["enumName": enumName, "fonts": fontMap])
+	}
+}
+
 /* MARK: - Stencil Context for Images
 
  - `enumName`: `String` — name of the enum to generate
