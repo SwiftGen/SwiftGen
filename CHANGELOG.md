@@ -1,6 +1,12 @@
 # SwiftGen CHANGELOG
 
 ---
+## 0.7.1
+
+#### Fixes
+
+* Fix issue with `swiftgen strings` that were using the colors templates instead of the strings template by default.  
+  [@ChristopherRogers](https://github.com/ChristopherRogers), [#54](https://github.com/AliSoftware/SwiftGen/pull/54)
 
 ## 0.7.0
 
