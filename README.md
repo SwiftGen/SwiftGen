@@ -2,7 +2,7 @@
 
 [![CI Status](http://img.shields.io/travis/AliSoftware/SwiftGen.svg?style=flat)](https://travis-ci.org/AliSoftware/SwiftGen)
 
-This is a suite of tools written in Swift 2 to auto-generate Swift 2 code for various assets of your project:
+SwiftGen is a suite of tools written in Swift 2 to auto-generate Swift 2 code for various assets of your project:
 
 * [`enums` for your Assets Catalogs](#uiimage)
 * [`enums` for your `Localizable.strings` strings](#localizablestrings).
@@ -12,6 +12,8 @@ This is a suite of tools written in Swift 2 to auto-generate Swift 2 code for va
 ## Installation
 
 > Note: The tools are written in Swift 2.0 and need to be compiled with the latest Xcode 7.  
+> 
+> For a list of recent changes, see the [CHANGELOG](CHANGELOG.md).
 
 ### Via Homebrew
 
