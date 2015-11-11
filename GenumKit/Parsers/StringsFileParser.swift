@@ -74,9 +74,7 @@ public final class StringsFileParser {
     }
     
     public init(key: String, translation: String, types: PlaceholderType...) {
-      self.key = key
-      self.translation = translation
-      self.types = types
+      self.init(key: key, translation: translation, types: types)
     }
     
     private static let lineRegEx = try! NSRegularExpression(pattern: "^\"([^\"]+)\"[ \t]*=[ \t]*\"(.*)\"[ \t]*;", options: [])

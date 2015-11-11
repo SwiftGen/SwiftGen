@@ -5,8 +5,9 @@
 
 #### Enhancements
 
-* The default translation of strings are now added as doc comments to the enum cases. ([@MrAlek](https://github.com/MrAlek), [#58](https://github.com/AliSoftware/SwiftGen/issues/58))
-  * You can add translations to your own templates by using the `string.translation` variable.
+* The default translation of strings are now added as documentation comments to the enum cases.  
+  _You can add translations to your own templates by using the `string.translation` variable._  
+  [@MrAlek](https://github.com/MrAlek), [#58](https://github.com/AliSoftware/SwiftGen/issues/58), [#60](https://github.com/AliSoftware/SwiftGen/pull/60)
 
 ## 0.7.1
 
