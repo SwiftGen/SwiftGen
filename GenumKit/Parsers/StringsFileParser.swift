@@ -64,15 +64,18 @@ public final class StringsFileParser {
   
   public struct Entry {
     let key: String
+    let translation: String
     let types: [PlaceholderType]
     
-    public init(key: String, types: [PlaceholderType]) {
+    public init(key: String, translation: String, types: [PlaceholderType]) {
       self.key = key
+      self.translation = translation
       self.types = types
     }
     
-    public init(key: String, types: PlaceholderType...) {
+    public init(key: String, translation: String, types: PlaceholderType...) {
       self.key = key
+      self.translation = translation
       self.types = types
     }
     
@@ -86,7 +89,7 @@ public final class StringsFileParser {
         let translation = (line as NSString).substringWithRange(match.rangeAtIndex(2))
         let types = PlaceholderType.fromFormatString(translation)
         
-        self = Entry(key: key, types: types)
+        self = Entry(key: key, translation: translation, types: types)
       } else {
         return nil
       }

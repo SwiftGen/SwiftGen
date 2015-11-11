@@ -155,10 +155,15 @@ The generated code will contain this:
 
 ```swift
 enum L10n {
+  /// Title of the alert
   case AlertTitle
+  /// Some alert body there
   case AlertMessage
+  /// Hello, my name is %@ and I'm %d
   case Greetings(String, Int)
+  /// You have %d apples
   case ApplesCount(Int)
+  /// Those %d bananas belong to %@.
   case BananasOwner(Int, String)
 }
 
@@ -186,7 +191,7 @@ let title = L10n.AlertTitle.string
 
 // Alternative syntax, shorter
 let msg = tr(.AlertMessage)
-// -> "Body of the Alert"
+// -> "Some alert body there"
 
 // Strings with parameters
 let nbApples = tr(.ApplesCount(5))

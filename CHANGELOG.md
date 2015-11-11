@@ -1,6 +1,13 @@
 # SwiftGen CHANGELOG
 
 ---
+## 0.7.2
+
+#### Enhancements
+
+* The default translation of strings are now added as doc comments to the enum cases. ([@MrAlek](https://github.com/MrAlek), [#58](https://github.com/AliSoftware/SwiftGen/issues/58))
+  * You can add translations to your own templates by using the `string.translation` variable.
+
 ## 0.7.1
 
 #### Fixes
@@ -10,7 +17,7 @@
 
 ## 0.7.0
 
-#### Enhencements
+#### Enhancements
 
 * Allow using **custom templates by name**. ([#42](https://github.com/AliSoftware/SwiftGen/issues/42), [#50](https://github.com/AliSoftware/SwiftGen/pull/50))
   * Now the `-t` flag expect a template name (defaults to `default`), and will search a matching template in `Application Support` first, then in the templates bundled with SwiftGen.  

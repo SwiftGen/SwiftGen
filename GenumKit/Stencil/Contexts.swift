@@ -90,6 +90,7 @@ extension StoryboardParser {
  - `enumName`: `String`
  - `strings`: `Array`
     - `key`: `String`
+    - `translation`: `String`
     - `params`: `Dictionary` — defined only if localized string has parameters, and in such case contains the following entries:
        - `count`: `Int` — number of parameters
        - `types`: `Array<String>` containing types like `"String"`, `"Int"`, etc
@@ -106,9 +107,9 @@ extension StringsFileParser {
           "declarations": (0..<entry.types.count).map { "let p\($0)" },
           "names": (0..<entry.types.count).map { "p\($0)" }
         ]
-        return ["key": entry.key, "params":params]
+        return ["key": entry.key, "translation": entry.translation, "params": params]
       } else {
-        return ["key": entry.key]
+        return ["key": entry.key, "translation": entry.translation]
       }
     }
     return Context(dictionary: ["enumName":enumName, "strings":strings])
