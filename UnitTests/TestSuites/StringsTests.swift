@@ -27,8 +27,8 @@ class StringsTests: XCTestCase {
   
   func testEntriesWithDefaults() {
     let parser = StringsFileParser()
-    parser.addEntry(StringsFileParser.Entry(key: "Title"))
-    parser.addEntry(StringsFileParser.Entry(key: "Greetings", types: .Object, .Int))
+    parser.addEntry(StringsFileParser.Entry(key: "Title", translation: "My awesome title"))
+    parser.addEntry(StringsFileParser.Entry(key: "Greetings", translation: "Hello, my name is %@ and I'm %d", types: .Object, .Int))
     
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -71,7 +71,7 @@ class StringsTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
     let result = try! template.render(parser.stencilContext())
     
-    let expected = self.fixtureString("Strings-File-Defaults.swift.out")
+    let expected = self.fixtureString("Strings-File-UTF8-Defaults.swift.out")
     XCTDiffStrings(result, expected)
   }
   
