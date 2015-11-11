@@ -16,8 +16,8 @@ enum CommandError : ErrorType {
 }
 
 /// Create a command using a closure
-public func command(closure:() -> ()) -> CommandType {
+public func command(closure:() throws -> ()) -> CommandType {
   return AnonymousCommand { parser in
-    closure()
+    try closure()
   }
 }

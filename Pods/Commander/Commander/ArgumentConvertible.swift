@@ -1,4 +1,4 @@
-public enum ArgumentError : ErrorType, CustomStringConvertible {
+public enum ArgumentError : ErrorType, Equatable, CustomStringConvertible {
   case MissingValue(argument: String?)
 
   /// Value is not convertible to type
@@ -24,6 +24,21 @@ public enum ArgumentError : ErrorType, CustomStringConvertible {
     }
   }
 }
+
+
+public func == (lhs: ArgumentError, rhs: ArgumentError) -> Bool {
+  switch (lhs, rhs) {
+  case let (.MissingValue(lhsKey), .MissingValue(rhsKey)):
+    return lhsKey == rhsKey
+  case let (.InvalidType(lhsValue, lhsType, lhsArgument), .InvalidType(rhsValue, rhsType, rhsArgument)):
+    return lhsValue == rhsValue && lhsType == rhsType && lhsArgument == rhsArgument
+  case let (.UnusedArgument(lhsArgument), .UnusedArgument(rhsArgument)):
+    return lhsArgument == rhsArgument
+  default:
+    return false
+  }
+}
+
 
 public protocol ArgumentConvertible : CustomStringConvertible {
   /// Initialise the type with an ArgumentParser
@@ -85,5 +100,24 @@ extension Double : ArgumentConvertible {
     } else {
       throw ArgumentError.MissingValue(argument: nil)
     }
+  }
+}
+
+
+extension Array where Element : ArgumentConvertible {
+  public init(parser: ArgumentParser) throws {
+    var temp = [Element]()
+
+    while true {
+      do {
+        temp.append(try Element(parser: parser))
+      } catch ArgumentError.MissingValue {
+        break
+      } catch {
+        throw error
+      }
+    }
+
+    self.init(temp)
   }
 }

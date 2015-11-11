@@ -2,7 +2,7 @@
 
 # Commander
 
-[![Build Status](http://img.shields.io/travis/kylef/Commander/master.svg?style=flat)](https://travis-ci.org/kylef/Commander)
+[![Build Status](https://img.shields.io/travis/kylef/Commander/master.svg?style=flat)](https://travis-ci.org/kylef/Commander)
 
 Commander is a small Swift framework allowing you to craft beautiful command
 line interfaces in a composable way.
@@ -122,6 +122,7 @@ Hello Kyle
 - Argument - A positional argument.
 - Option - An optional option with a value.
 - Flag - A boolean, on/off flag.
+- VaradicArgument - A varadic argument
 
 #### Using the argument parser
 
@@ -150,32 +151,60 @@ Hello Kyle
 
 ## Installation
 
-You can install Commander in many ways, such as with CocoaPods, Carthage or as
-a sub-project.
+You can install Commander in many ways, such as with Conche or CocoaPods.
+
+### Conche (recommended)
+
+The recommended way to use Commander would be via [Conche](https://github.com/Conche/Conche).
 
 ### CocoaPods
 
 ```ruby
+use_frameworks!
 pod 'Commander'
 ```
 
-#### Cato
+#### Rome
 
-The simplest way to build a Swift script that uses Commander would be to use
-[cato](https://github.com/neonichu/cato). Cato will automatically download
-Commander behind the scenes.
+[Rome](https://github.com/neonichu/Rome) is a plugin for CocoaPods to build
+the `.framework`s for your dependencies. When you run `pod install` using
+the Rome plugin, dependencies will be build into the `Rome` directory.
+
+```ruby
+platform :osx, '10.10'
+plugin 'cocoapods-rome'
+pod 'Commander'
+```
+
+### Frameworks and `rpath`
+
+It's important to note that the `.framework` file for Commander (and any
+other dependency) must be available at run-time for your command line tool.
+
+Applications will look in their `rpath` which contains paths of where it expects
+the `.framework`s to be found at.
+
+Using a Swift script, you can use the `-F` flag for setting framework search
+paths, as follows:
 
 ```swift
-#!/usr/bin/env cato
+#!/usr/bin/env xcrun swift -F Rome
 
 import Commander
-
-let main = command {
-  print("Hello World")
-}
-
-main.run()
 ```
+
+For compiled Swift code, you will need to add an rpath pointing to your
+dependency frameworks, as follows:
+
+```shell
+$ install_name_tool -add_rpath "@executable_path/../Frameworks/"  "bin/querykit"
+```
+
+Where "../Frameworks" relative to the executable path is used to find the
+frameworks and `bin/querykit` is the executable.
+
+When installing your executable on other systems it's important to copy the
+frameworks and the binary.
 
 ### Architecture
 
@@ -215,4 +244,3 @@ flags and positional arguments.
 
 Commander is available under the BSD license. See the [LICENSE file](LICENSE)
 for more info.
-

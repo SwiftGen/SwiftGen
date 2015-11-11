@@ -32,12 +32,17 @@ private enum Arg : CustomStringConvertible {
 }
 
 
-public struct ArgumentParserError : ErrorType, CustomStringConvertible {
-  public let description:String
+public struct ArgumentParserError : ErrorType, Equatable, CustomStringConvertible {
+  public let description: String
 
-  init(description:String) {
+  public init(_ description: String) {
     self.description = description
   }
+}
+
+
+public func ==(lhs: ArgumentParserError, rhs: ArgumentParserError) -> Bool {
+  return lhs.description == rhs.description
 }
 
 
@@ -67,7 +72,7 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
   }
 
   public var description:String {
-    return ""
+    return arguments.map { $0.description }.joinWithSeparator(" ")
   }
 
   public var isEmpty:Bool {
@@ -130,7 +135,7 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
           case .Argument(let value):
             return value
           default:
-            throw ArgumentParserError(description: "Unexpected \(argument.type) `\(argument)` as a value for `--\(name)`")
+            throw ArgumentParserError("Unexpected \(argument.type) `\(argument)` as a value for `--\(name)`")
           }
         }
 
@@ -223,14 +228,14 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
           case .Argument(let value):
             return value
           default:
-            throw ArgumentParserError(description: "Unexpected \(argument.type) `\(argument)` as a value for `-\(flag)`")
+            throw ArgumentParserError("Unexpected \(argument.type) `\(argument)` as a value for `-\(flag)`")
           }
         }
 
         throw ArgumentError.MissingValue(argument: "-\(flag)")
       }
     }
-    
+
     return nil
   }
 }

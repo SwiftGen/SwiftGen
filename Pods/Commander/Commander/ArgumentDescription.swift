@@ -24,6 +24,24 @@ extension ArgumentConvertible {
   }
 }
 
+public class VaradicArgument<T : ArgumentConvertible> : ArgumentDescriptor {
+  public typealias ValueType = [T]
+
+  public let name: String
+  public let description: String?
+
+  public var type: ArgumentType { return .Argument }
+
+  public init(_ name: String, description: String? = nil) {
+    self.name = name
+    self.description = description
+  }
+
+  public func parse(parser: ArgumentParser) throws -> ValueType {
+    return try Array<T>(parser: parser)
+  }
+}
+
 public class Argument<T : ArgumentConvertible> : ArgumentDescriptor {
   public typealias ValueType = T
   public typealias Validator = ValueType throws -> ValueType
@@ -41,7 +59,15 @@ public class Argument<T : ArgumentConvertible> : ArgumentDescriptor {
   }
 
   public func parse(parser:ArgumentParser) throws -> ValueType {
-    let value = try T(parser: parser)
+    let value: T
+
+    do {
+      value = try T(parser: parser)
+    } catch ArgumentError.MissingValue {
+      throw ArgumentError.MissingValue(argument: name)
+    } catch {
+      throw error
+    }
 
     if let validator = validator {
       return try validator(value)
@@ -125,19 +151,23 @@ public class Flag : ArgumentDescriptor {
 
   public let name:String
   public let flag:Character?
+  public let disabledName:String
+  public let disabledFlag:Character?
   public let description:String?
   public let `default`:ValueType
   public var type:ArgumentType { return .Option }
 
-  public init(_ name:String, flag:Character? = nil, description:String? = nil, `default`:Bool = false) {
+  public init(_ name:String, flag:Character? = nil, disabledName:String? = nil, disabledFlag:Character? = nil, description:String? = nil, `default`:Bool = false) {
     self.name = name
+    self.disabledName = disabledName ?? "no-\(name)"
     self.flag = flag
+    self.disabledFlag = disabledFlag
     self.description = description
     self.`default` = `default`
   }
 
   public func parse(parser:ArgumentParser) throws -> ValueType {
-    if parser.hasOption("no-\(name)") {
+    if parser.hasOption(disabledName) {
       return false
     }
 
@@ -148,6 +178,11 @@ public class Flag : ArgumentDescriptor {
     if let flag = flag {
       if parser.hasFlag(flag) {
         return true
+      }
+    }
+    if let disabledFlag = disabledFlag {
+      if parser.hasFlag(disabledFlag) {
+        return false
       }
     }
 
@@ -172,6 +207,20 @@ class BoxedArgumentDescriptor {
       // TODO, default for Option and Options
       `default` = nil
     }
+  }
+}
+
+class UsageError : ErrorType, CustomStringConvertible {
+  let message: String
+  let help: Help
+
+  init(_ message: String, _ help: Help) {
+    self.message = message
+    self.help = help
+  }
+
+  var description: String {
+    return [message, help.description].filter { !$0.isEmpty }.joinWithSeparator("\n\n")
   }
 }
 
@@ -212,8 +261,12 @@ class Help : ErrorType, CustomStringConvertible {
     if let group = group {
       output.append("Commands:")
       output.append("")
-      for (name, _) in group.commands {
-        output.append("    + \(name)")
+      for command in group.commands {
+        if let description = command.description {
+          output.append("    + \(command.name) - \(description)")
+        } else {
+          output.append("    + \(command.name)")
+        }
       }
       output.append("")
     }
