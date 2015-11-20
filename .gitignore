@@ -6,4 +6,4 @@ bin/
 Frameworks/
 Rome/
 Carthage/
-
+.DS_Store
