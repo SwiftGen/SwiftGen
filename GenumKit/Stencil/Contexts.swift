@@ -18,14 +18,30 @@ private func uppercaseFirst(string: String) -> String {
  - `enumName`: `String` — name of the enum to generate
  - `colors`: `Array` of:
     - `name`: `String` — name of each color
-    - `rgba`: `String` — hex value of the form RRGGBBAA (without the "0x" prefix)
+    - `rgb`  : `String` — hex value of the form RRGGBB (like "ff6600")
+    - `rgba` : `String` — hex value of the form RRGGBBAA (like "ff6600cc")
+    - `red`  : `String` — hex value of the red component
+    - `green`: `String` — hex value of the green component
+    - `blue` : `String` — hex value of the blue component
+    - `alpha`: `String` — hex value of the alpha component
 */
 extension ColorsFileParser {
   public func stencilContext(enumName enumName: String = "Name") -> Context {
     let colorMap = colors.map({ (color: (name: String, value: UInt32)) -> [String:String] in
       let name = color.name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-      let hexValue = String(color.value, radix: 16)
-      return ["name": name, "rgba": hexValue]
+      let hex = "00000000" + String(color.value, radix: 16)
+      let hexChars = Array(hex.characters.suffix(8))
+      let comps = (0..<4).map { idx in String(hexChars[idx*2...idx*2+1]) }
+
+      return [
+        "name": name,
+        "rgba" : String(hexChars[0..<8]),
+        "rgb"  : String(hexChars[0..<6]),
+        "red"  : comps[0],
+        "green": comps[1],
+        "blue" : comps[2],
+        "alpha": comps[3],
+      ]
     }).sort { $0["name"] < $1["name"] }
     return Context(dictionary: ["enumName": enumName, "colors": colorMap])
   }

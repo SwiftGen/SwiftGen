@@ -51,7 +51,7 @@ The tool is provided as a unique `swiftgen` binary command-line, with the follow
 Each subcommand has its own option and syntax, but some options are common to all:
 
 * `--output FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
-* `--template NAME`: define the Stencil template to use (by name, see [here for more info](https://github.com/AliSoftware/SwiftGen/blob/master/Templates.md#using-a-name)) to generate the output.
+* `--template NAME`: define the Stencil template to use (by name, see [here for more info](documentation/Templates.md#using-a-name)) to generate the output.
 * `--templatePath PATH`: define the Stencil template to use, using a full path.
 
 You can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
@@ -64,7 +64,7 @@ It comes bundled with some default templates for each of the subcommand (`colors
 
 💡 You can use the `swiftgen templates` command to list all the available templates (both custom and bundled templates) for each subcommand.
 
-For more information about how to create your own templates, [see the dedicated documentation](Templates.md).
+For more information about how to create your own templates, [see the dedicated documentation](documentation/Templates.md).
 
 > Don't hesitate to make PRs share your improvements suggestions on the default templates 😉
 
@@ -342,9 +342,17 @@ extension UIColor {
 
 extension UIColor {
   enum Name : UInt32 {
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
+    /// Alpha: 80% <br/> (0xffffffcc)
     case Translucent = 0xffffffcc
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>
+    /// Alpha: 100% <br/> (0x339666ff)
     case ArticleBody = 0x339666ff
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
+    /// Alpha: 100% <br/> (0xff66ccff)
     case Cyan = 0xff66ccff
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#33fe66"></span>
+    /// Alpha: 100% <br/> (0x33fe66ff)
     case ArticleTitle = 0x33fe66ff
   }
 

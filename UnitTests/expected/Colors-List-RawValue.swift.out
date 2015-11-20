@@ -15,8 +15,14 @@ extension UIColor {
 
 extension UIColor {
   enum Name : UInt32 {
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffcc00"></span>
+    /// Alpha: 60% <br/> (0xffcc0099)
     case ArticleBackground = 0xffcc0099
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#996600"></span>
+    /// Alpha: 100% <br/> (0x996600ff)
     case ArticleTitle = 0x996600ff
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#999999"></span>
+    /// Alpha: 100% <br/> (0x999999ff)
     case Text_Body_Color = 0x999999ff
   }
 

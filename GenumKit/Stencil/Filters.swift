@@ -77,3 +77,22 @@ struct ArrayFilters {
     return array.joinWithSeparator(", ")
   }
 }
+
+struct NumFilters {
+  static func hexToInt(value: Any?) throws -> Any? {
+    guard let value = value as? String else { throw FilterError.InvalidInputType }
+    return Int(value, radix:  16)
+  }
+
+  static func int255toFloat(value: Any?) throws -> Any? {
+    guard let value = value as? Int else { throw FilterError.InvalidInputType }
+    return Float(value) / Float(255.0)
+  }
+
+  static func percent(value: Any?) throws -> Any? {
+    guard let value = value as? Float else { throw FilterError.InvalidInputType }
+    
+    let percent = Int(value * 100.0)
+    return "\(percent)%"
+  }
+}
