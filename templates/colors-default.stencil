@@ -15,7 +15,7 @@ extension UIColor {
 
 {% if colors %}
 extension UIColor {
-  {# Note: We don't use a UInt32 rawValue, so we can have multiple colors with the same rgbaValue #}
+  {# Note: We don't use a UInt32 rawValue in this template so we can have multiple colors with the same rgbaValue #}
   enum {{enumName}} {
     {% for color in colors %}
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#{{color.rgb}}"></span>
@@ -23,14 +23,12 @@ extension UIColor {
     case {{color.name|swiftIdentifier}}
     {% endfor %}
 
-    static let rgbaValues: [{{enumName}}:UInt32] = [
-      {% for color in colors %}
-      .{{color.name|swiftIdentifier}} : 0x{{color.rgba}},
-      {% endfor %}
-    ]
-
     var rgbaValue: UInt32! {
-      return {{enumName}}.rgbaValues[self]
+      switch self {
+      {% for color in colors %}
+      case .{{color.name|swiftIdentifier}}: return 0x{{color.rgba}}
+      {% endfor %}
+      }
     }
   }
 
