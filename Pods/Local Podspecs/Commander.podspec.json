@@ -1,0 +1,31 @@
+{
+  "name": "Commander",
+  "version": "0.3.0",
+  "summary": "Compose beautiful command line interfaces",
+  "homepage": "https://github.com/kylef/Commander",
+  "license": {
+    "type": "BSD",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Kyle Fuller": "kyle@fuller.li"
+  },
+  "social_media_url": "http://twitter.com/kylefuller",
+  "source": {
+    "git": "https://github.com/kylef/Commander.git",
+    "tag": "0.3.0"
+  },
+  "source_files": "Commander/*.{h,swift}",
+  "platforms": {
+    "ios": "8.0",
+    "osx": "10.9"
+  },
+  "test_specification": {
+    "source_files": "CommanderSpecs/*Spec.swift",
+    "dependencies": {
+      "Spectre": [
+        "~> 0.5.0"
+      ]
+    }
+  }
+}

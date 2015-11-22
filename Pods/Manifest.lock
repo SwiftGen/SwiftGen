@@ -7,14 +7,22 @@ PODS:
     - PathKit (~> 0.5.0)
 
 DEPENDENCIES:
-  - Commander
+  - Commander (from `https://github.com/kylef/Commander.git`, branch `master`)
   - GenumKit (from `GenumKit`)
   - PathKit
   - Stencil
 
 EXTERNAL SOURCES:
+  Commander:
+    :branch: master
+    :git: https://github.com/kylef/Commander.git
   GenumKit:
     :path: GenumKit
+
+CHECKOUT OPTIONS:
+  Commander:
+    :commit: 5e589eb4229695252035ca878bd7e7011105be28
+    :git: https://github.com/kylef/Commander.git
 
 SPEC CHECKSUMS:
   Commander: 59428fb87ec13df77ac7aeb8e543e3a756de8277

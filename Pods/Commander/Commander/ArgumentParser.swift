@@ -219,7 +219,7 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
     }
 
     if hasFlag {
-      ++index // Jump flags
+      arguments.removeAtIndex(index)
 
       return try (0..<count).map { i in
         if arguments.count > index {

@@ -2,7 +2,7 @@ platform :osx, '10.9'
 use_frameworks!
 
 target 'swiftgen' do
-  pod 'Commander'
+  pod 'Commander', :git => 'https://github.com/kylef/Commander.git', :branch => 'master'
   pod 'PathKit'
   pod 'Stencil'
   pod 'GenumKit', :path => 'GenumKit'
