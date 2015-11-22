@@ -24,11 +24,11 @@ let outputOption = Option("output", OutputDestination.Console, flag: "o", descri
 // MARK: - Main
 
 let main = Group {
-  $0.addCommand("templates", templatesCommand)
-  $0.addCommand("colors", colorsCommand)
-  $0.addCommand("images", imagesCommand)
-  $0.addCommand("storyboards", storyboardsCommand)
-  $0.addCommand("strings", stringsCommand)
+  $0.addCommand("templates", "manage custom templates", templatesCommand)
+  $0.addCommand("colors", "generate code for UIColors", colorsCommand)
+  $0.addCommand("images", "generate code for UIImages based on your Assets Catalog", imagesCommand)
+  $0.addCommand("storyboards", "generate code for your Storyboard scenes and segues", storyboardsCommand)
+  $0.addCommand("strings", "generate code for your Localizable.strings", stringsCommand)
 }
 
 let version = NSBundle(forClass: GenumKit.GenumTemplate.self).infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
