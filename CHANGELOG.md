@@ -14,6 +14,11 @@
   _You can add translations to your own templates by using the `string.translation` variable._  
   [@MrAlek](https://github.com/MrAlek), [#58](https://github.com/AliSoftware/SwiftGen/issues/58), [#60](https://github.com/AliSoftware/SwiftGen/pull/60)
 
+#### Fixes
+
+* Fix an issue with the colors template due to an Apple Bug when building in Release and with WMO enabled.  
+  [#56](https://github.com/AliSoftware/SwiftGen/issues/58)
+
 ## 0.7.1
 
 #### Fixes

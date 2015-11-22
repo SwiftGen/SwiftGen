@@ -25,14 +25,12 @@ extension UIColor {
     /// Alpha: 100% <br/> (0x999999ff)
     case Text_Body_Color
 
-    static let rgbaValues: [Name:UInt32] = [
-      .ArticleBackground : 0xffcc0099,
-      .ArticleTitle : 0x996600ff,
-      .Text_Body_Color : 0x999999ff,
-    ]
-
     var rgbaValue: UInt32! {
-      return Name.rgbaValues[self]
+      switch self {
+      case .ArticleBackground: return 0xffcc0099
+      case .ArticleTitle: return 0x996600ff
+      case .Text_Body_Color: return 0x999999ff
+      }
     }
   }
 
