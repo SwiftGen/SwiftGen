@@ -17,7 +17,7 @@
 #### Fixes
 
 * Fix an issue with the colors template due to an Apple Bug when building in Release and with WMO enabled.  
-  [#56](https://github.com/AliSoftware/SwiftGen/issues/58)
+  [#56](https://github.com/AliSoftware/SwiftGen/issues/56)
 
 ## 0.7.1
 
