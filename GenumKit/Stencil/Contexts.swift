@@ -72,7 +72,7 @@ extension AssetsCatalogParser {
        - `class`: `String` (absent if generic UIStoryboardSegue)
 */
 extension StoryboardParser {
-  public func stencilContext(sceneEnumName sceneEnumName: String = "Scene", segueEnumName: String = "Segue") -> Context {
+  public func stencilContext(sceneEnumName sceneEnumName: String = "Scene", segueEnumName: String = "Segue", cellEnumName: String = "Cell") -> Context {
     let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sort(<)
     let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:AnyObject] in
       var sbMap: [String:AnyObject] = ["name": storyboardName]
@@ -95,9 +95,20 @@ extension StoryboardParser {
             ["identifier": segue.segueID, "class": segue.customClass ?? "UIStoryboardSegue"]
         }
       }
+        if let cells = storyboardsCells[storyboardName] {
+            sbMap["cells"] = cells
+                .sort({$0.reuseID < $1.reuseID})
+                .map { (cell: Cell) -> [String:String] in
+                    if let customClass = cell.customClass {
+                        return ["identifier": cell.reuseID, "class": customClass]
+                    } else {
+                        return ["identifier": cell.reuseID]
+                    }
+        }
+        }
       return sbMap
     }
-    return Context(dictionary: ["sceneEnumName": sceneEnumName, "segueEnumName": segueEnumName, "storyboards": storyboardsMap])
+    return Context(dictionary: ["sceneEnumName": sceneEnumName, "segueEnumName": segueEnumName, "cellEnumName": cellEnumName, "storyboards": storyboardsMap])
   }
 }
 

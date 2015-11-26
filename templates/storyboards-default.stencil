@@ -28,10 +28,18 @@ extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String 
 }
 
 protocol StoryboardSegue : RawRepresentable { }
+protocol StoryboardCell : RawRepresentable { }
 
 extension UIViewController {
   func performSegue<S : StoryboardSegue where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
+extension UICollectionView {
+  func dequeueReusableCellWithReuseIdentifier<C : StoryboardCell where C.RawValue == String>(identifier: C,
+      forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    return dequeueReusableCellWithReuseIdentifier(identifier.rawValue, forIndexPath: indexPath)
   }
 }
 
@@ -72,6 +80,16 @@ extension UIStoryboard {
     enum {{storyboard.name|swiftIdentifier}} : String, StoryboardSegue {
       {% for segue in storyboard.segues %}
       case {{segue.identifier|swiftIdentifier}} = "{{segue.identifier}}"
+      {% endfor %}
+    }
+    {% endif %}{% endfor %}
+  }
+
+  struct {{cellEnumName}} {
+    {% for storyboard in storyboards %}{% if storyboard.cells %}
+    enum {{storyboard.name|swiftIdentifier}} : String, StoryboardCell {
+      {% for cell in storyboard.cells %}
+      case {{cell.identifier|swiftIdentifier}} = "{{cell.identifier}}"
       {% endfor %}
     }
     {% endif %}{% endfor %}
