@@ -34,39 +34,37 @@ extension UIViewController {
   }
 }
 
-extension UIStoryboard {
-  struct Scene {
-    enum Message : String, StoryboardScene {
-      static let storyboardName = "Message"
+struct Scene {
+  enum Message : String, StoryboardScene {
+    static let storyboardName = "Message"
 
-      case composer = "Composer"
-      static func composerViewController() -> UIViewController {
-        return Message.composer.viewController()
-      }
+    case composer = "Composer"
+    static func composerViewController() -> UIViewController {
+      return Message.composer.viewController()
+    }
 
-      case messagesList = "MessagesList"
-      static func messagesListViewController() -> UITableViewController {
-        return Message.messagesList.viewController() as! UITableViewController
-      }
+    case messagesList = "MessagesList"
+    static func messagesListViewController() -> UITableViewController {
+      return Message.messagesList.viewController() as! UITableViewController
+    }
 
-      case navCtrl = "NavCtrl"
-      static func navCtrlViewController() -> UINavigationController {
-        return Message.navCtrl.viewController() as! UINavigationController
-      }
+    case navCtrl = "NavCtrl"
+    static func navCtrlViewController() -> UINavigationController {
+      return Message.navCtrl.viewController() as! UINavigationController
+    }
 
-      case urlChooser = "URLChooser"
-      static func urlChooserViewController() -> XXPickerViewController {
-        return Message.urlChooser.viewController() as! XXPickerViewController
-      }
+    case urlChooser = "URLChooser"
+    static func urlChooserViewController() -> XXPickerViewController {
+      return Message.urlChooser.viewController() as! XXPickerViewController
     }
   }
+}
 
-  struct Segue {
-    enum Message : String, StoryboardSegue {
-      case CustomBack = "CustomBack"
-      case Embed = "Embed"
-      case NonCustom = "NonCustom"
-      case Show_NavCtrl = "Show-NavCtrl"
-    }
+struct Segue {
+  enum Message : String, StoryboardSegue {
+    case CustomBack = "CustomBack"
+    case Embed = "Embed"
+    case NonCustom = "NonCustom"
+    case Show_NavCtrl = "Show-NavCtrl"
   }
 }

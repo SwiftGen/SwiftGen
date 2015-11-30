@@ -34,13 +34,11 @@ extension UIViewController {
   }
 }
 
-extension UIStoryboard {
-  struct Scene {
-    enum Anonymous : StoryboardScene {
-      static let storyboardName = "Anonymous"
-    }
+struct Scene {
+  enum Anonymous : StoryboardScene {
+    static let storyboardName = "Anonymous"
   }
+}
 
-  struct Segue {
-  }
+struct Segue {
 }
