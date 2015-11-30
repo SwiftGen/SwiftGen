@@ -16,6 +16,14 @@
 
 > Scenes and Segues are now referenced via `StoryboardScene.<Storyboard>` and `StoryboardSegue.<Storyboard>.<Segue>`
 
+## 0.7.3
+
+#### Fixes
+
+* Restructured storyboard templates to work around an LLVM issue with nested types.
+
+> Scenes and Segues are now referenced via `StoryboardScene.<Storyboard>` and `StoryboardSegue.<Storyboard>.<Segue>`
+
 ## 0.7.2
 
 #### Enhancements
