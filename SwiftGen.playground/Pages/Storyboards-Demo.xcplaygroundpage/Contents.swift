@@ -16,11 +16,11 @@ class CreateAccViewController : UIViewController {}
 import Foundation
 import UIKit
 
-protocol StoryboardScene {
+protocol StoryboardSceneType {
     static var storyboardName : String { get }
 }
 
-extension StoryboardScene {
+extension StoryboardSceneType {
     static func storyboard() -> UIStoryboard {
         return UIStoryboard(name: self.storyboardName, bundle: nil)
     }
@@ -30,7 +30,7 @@ extension StoryboardScene {
     }
 }
 
-extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String {
+extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
     func viewController() -> UIViewController {
         return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
     }
@@ -39,17 +39,17 @@ extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String 
     }
 }
 
-protocol StoryboardSegue : RawRepresentable { }
+protocol StoryboardSegueType : RawRepresentable { }
 
 extension UIViewController {
-  func performSegue<S : StoryboardSegue where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+  func performSegue<S : StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
   }
 }
 
 extension UIStoryboard {
     struct Scene {
-        enum Wizard : String, StoryboardScene {
+        enum Wizard : String, StoryboardSceneType {
             static let storyboardName = "Wizard"
             
             case CreateAccount = "CreateAccount"
@@ -75,16 +75,16 @@ extension UIStoryboard {
     }
     
   struct Segue {
-        enum Wizard : String, StoryboardSegue {
+        enum Wizard : String, StoryboardSegueType {
             case Custom = "Custom"
             case Back = "Back"
             case NonCustom = "NonCustom"
-            case ShowPassword = "ShowPassword"
+            case ShowPassword = "ShowP//: #### Usage Example
+assword"
         }
     }
 }
 
-//: #### Usage Example
 
 let initialVC = UIStoryboard.Scene.Wizard.initialViewController()
 initialVC.title
@@ -117,6 +117,4 @@ segues for a specific storyboard.
 //  case .Custom:
 //    // Prepare for your custom segue transition
 //  case .NonCustom:
-//    // Pass in information to the destination View Controller
-//  }
-//}
+//    // Pass in information to the destinatio

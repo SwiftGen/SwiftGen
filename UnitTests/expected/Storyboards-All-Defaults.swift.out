@@ -3,11 +3,11 @@
 import Foundation
 import UIKit
 
-protocol StoryboardScene {
+protocol StoryboardSceneType {
   static var storyboardName : String { get }
 }
 
-extension StoryboardScene {
+extension StoryboardSceneType {
   static func storyboard() -> UIStoryboard {
     return UIStoryboard(name: self.storyboardName, bundle: nil)
   }
@@ -17,7 +17,7 @@ extension StoryboardScene {
   }
 }
 
-extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String {
+extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
   func viewController() -> UIViewController {
     return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
   }
@@ -26,19 +26,19 @@ extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String 
   }
 }
 
-protocol StoryboardSegue : RawRepresentable { }
+protocol StoryboardSegueType : RawRepresentable { }
 
 extension UIViewController {
-  func performSegue<S : StoryboardSegue where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+  func performSegue<S : StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
   }
 }
 
 struct Scene {
-  enum Anonymous : StoryboardScene {
+  enum Anonymous : StoryboardSceneType {
     static let storyboardName = "Anonymous"
   }
-  enum Message : String, StoryboardScene {
+  enum Message : String, StoryboardSceneType {
     static let storyboardName = "Message"
 
     case Composer = "Composer"
@@ -61,7 +61,7 @@ struct Scene {
       return Message.URLChooser.viewController() as! XXPickerViewController
     }
   }
-  enum Wizard : String, StoryboardScene {
+  enum Wizard : String, StoryboardSceneType {
     static let storyboardName = "Wizard"
 
     case Accept_CGU = "Accept-CGU"
@@ -87,13 +87,13 @@ struct Scene {
 }
 
 struct Segue {
-  enum Message : String, StoryboardSegue {
+  enum Message : String, StoryboardSegueType {
     case CustomBack = "CustomBack"
     case Embed = "Embed"
     case NonCustom = "NonCustom"
     case Show_NavCtrl = "Show-NavCtrl"
   }
-  enum Wizard : String, StoryboardSegue {
+  enum Wizard : String, StoryboardSegueType {
     case ShowPassword = "ShowPassword"
   }
 }
