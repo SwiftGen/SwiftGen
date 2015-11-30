@@ -246,42 +246,40 @@ extension UIViewController {
   }
 }
 
-extension UIStoryboard {
-  struct Scene {
-    enum Message : String, StoryboardSceneType {
-      static let storyboardName = "Message"
+struct Scene {
+  enum Message : String, StoryboardSceneType {
+    static let storyboardName = "Message"
 
-      case Composer = "Composer"
-      static func composerViewController() -> UIViewController {
-        return Message.Composer.viewController()
-      }
-
-      case URLChooser = "URLChooser"
-      static func urlChooserViewController() -> XXPickerViewController {
-        return Message.URLChooser.viewController() as! XXPickerViewController
-      }
+    case Composer = "Composer"
+    static func composerViewController() -> UIViewController {
+      return Message.Composer.viewController()
     }
-    enum Wizard : String, StoryboardSceneType {
-      static let storyboardName = "Wizard"
 
-      case CreateAccount = "CreateAccount"
-      static func createAccountViewController() -> CreateAccViewController {
-          return Wizard.CreateAccount.viewController() as! CreateAccViewController
-      }
-
-      case ValidatePassword = "Validate_Password"
-      static func validatePasswordViewController() -> UIViewController {
-          return Wizard.ValidatePassword.viewController()
-      }
+    case URLChooser = "URLChooser"
+    static func urlChooserViewController() -> XXPickerViewController {
+      return Message.URLChooser.viewController() as! XXPickerViewController
     }
   }
+  enum Wizard : String, StoryboardSceneType {
+    static let storyboardName = "Wizard"
 
-  struct Segue {
-    enum Message : String, StoryboardSegueType {
-      case Back = "Back"
-      case Custom = "Custom"
-      case NonCustom = "NonCustom"
+    case CreateAccount = "CreateAccount"
+    static func createAccountViewController() -> CreateAccViewController {
+        return Wizard.CreateAccount.viewController() as! CreateAccViewController
     }
+
+    case ValidatePassword = "Validate_Password"
+    static func validatePasswordViewController() -> UIViewController {
+        return Wizard.ValidatePassword.viewController()
+    }
+  }
+}
+
+struct Segue {
+  enum Message : String, StoryboardSegueType {
+    case Back = "Back"
+    case Custom = "Custom"
+    case NonCustom = "NonCustom"
   }
 }
 ```
