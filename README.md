@@ -246,7 +246,7 @@ extension UIViewController {
   }
 }
 
-struct Scene {
+struct StoryboardScene {
   enum Message : String, StoryboardSceneType {
     static let storyboardName = "Message"
 
@@ -275,7 +275,7 @@ struct Scene {
   }
 }
 
-struct Segue {
+struct StoryboardSegue {
   enum Message : String, StoryboardSegueType {
     case Back = "Back"
     case Custom = "Custom"
