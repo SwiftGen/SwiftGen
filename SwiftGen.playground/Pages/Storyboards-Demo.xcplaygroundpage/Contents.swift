@@ -47,49 +47,47 @@ extension UIViewController {
   }
 }
 
-extension UIStoryboard {
-    struct Scene {
-        enum Wizard : String, StoryboardSceneType {
-            static let storyboardName = "Wizard"
-            
-            case CreateAccount = "CreateAccount"
-            static func createAccountViewController() -> CreateAccViewController {
-                return Wizard.CreateAccount.viewController() as! CreateAccViewController
-            }
-            
-            case AcceptCGU = "Accept-CGU"
-            static func acceptCGUViewController() -> UIViewController {
-                return Wizard.AcceptCGU.viewController()
-            }
-            
-            case ValidatePassword = "Validate_Password"
-            static func validatePasswordViewController() -> UIViewController {
-                return Wizard.ValidatePassword.viewController()
-            }
-            
-            case Preferences = "Preferences"
-            static func preferencesViewController() -> UIViewController {
-                return Wizard.Preferences.viewController()
-            }
+struct StoryboardScene {
+    enum Wizard : String, StoryboardSceneType {
+        static let storyboardName = "Wizard"
+        
+        case CreateAccount = "CreateAccount"
+        static func createAccountViewController() -> CreateAccViewController {
+            return Wizard.CreateAccount.viewController() as! CreateAccViewController
         }
-    }
-    
-  struct Segue {
-        enum Wizard : String, StoryboardSegueType {
-            case Custom = "Custom"
-            case Back = "Back"
-            case NonCustom = "NonCustom"
-            case ShowPassword = "ShowP//: #### Usage Example
-assword"
+        
+        case AcceptCGU = "Accept-CGU"
+        static func acceptCGUViewController() -> UIViewController {
+            return Wizard.AcceptCGU.viewController()
+        }
+        
+        case ValidatePassword = "Validate_Password"
+        static func validatePasswordViewController() -> UIViewController {
+            return Wizard.ValidatePassword.viewController()
+        }
+        
+        case Preferences = "Preferences"
+        static func preferencesViewController() -> UIViewController {
+            return Wizard.Preferences.viewController()
         }
     }
 }
 
+struct StoryboardSegue {
+    enum Wizard : String, StoryboardSegueType {
+        case Custom = "Custom"
+        case Back = "Back"
+        case NonCustom = "NonCustom"
+        case ShowPassword = "ShowPassword"
+    }
+}
 
-let initialVC = UIStoryboard.Scene.Wizard.initialViewController()
+//: #### Usage Example
+
+let initialVC = StoryboardScene.Wizard.initialViewController()
 initialVC.title
 
-let validateVC = UIStoryboard.Scene.Wizard.ValidatePassword.viewController()
+let validateVC = StoryboardScene.Wizard.ValidatePassword.viewController()
 validateVC.title
 
 /* Note: the following line would crash when run in playground, because the storyboard file
@@ -97,7 +95,7 @@ validateVC.title
    not known by the storyboard. But it should work correctly in a real project. */
 // let cgu = UIStoryboard.Scene.Wizard.createAccountViewController()
 
-let segue = UIStoryboard.Segue.Wizard.ShowPassword
+let segue = StoryboardSegue.Wizard.ShowPassword
 initialVC.performSegue(segue)
 
 switch segue {
