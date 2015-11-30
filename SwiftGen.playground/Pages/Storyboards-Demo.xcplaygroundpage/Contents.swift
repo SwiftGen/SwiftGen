@@ -115,4 +115,6 @@ segues for a specific storyboard.
 //  case .Custom:
 //    // Prepare for your custom segue transition
 //  case .NonCustom:
-//    // Pass in information to the destinatio
+//    // Pass in information to the destination View Controller
+//  }
+//}
