@@ -72,7 +72,7 @@ extension AssetsCatalogParser {
        - `class`: `String` (absent if generic UIStoryboardSegue)
 */
 extension StoryboardParser {
-  public func stencilContext(sceneEnumName sceneEnumName: String = "Scene", segueEnumName: String = "Segue") -> Context {
+  public func stencilContext(sceneEnumName sceneEnumName: String = "StoryboardScene", segueEnumName: String = "StoryboardSegue") -> Context {
     let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sort(<)
     let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:AnyObject] in
       var sbMap: [String:AnyObject] = ["name": storyboardName]

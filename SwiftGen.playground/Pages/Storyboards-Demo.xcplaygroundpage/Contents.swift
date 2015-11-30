@@ -16,11 +16,11 @@ class CreateAccViewController : UIViewController {}
 import Foundation
 import UIKit
 
-protocol StoryboardScene {
+protocol StoryboardSceneType {
     static var storyboardName : String { get }
 }
 
-extension StoryboardScene {
+extension StoryboardSceneType {
     static func storyboard() -> UIStoryboard {
         return UIStoryboard(name: self.storyboardName, bundle: nil)
     }
@@ -30,7 +30,7 @@ extension StoryboardScene {
     }
 }
 
-extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String {
+extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
     func viewController() -> UIViewController {
         return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
     }
@@ -39,57 +39,55 @@ extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String 
     }
 }
 
-protocol StoryboardSegue : RawRepresentable { }
+protocol StoryboardSegueType : RawRepresentable { }
 
 extension UIViewController {
-  func performSegue<S : StoryboardSegue where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+  func performSegue<S : StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
   }
 }
 
-extension UIStoryboard {
-    struct Scene {
-        enum Wizard : String, StoryboardScene {
-            static let storyboardName = "Wizard"
-            
-            case CreateAccount = "CreateAccount"
-            static func createAccountViewController() -> CreateAccViewController {
-                return Wizard.CreateAccount.viewController() as! CreateAccViewController
-            }
-            
-            case AcceptCGU = "Accept-CGU"
-            static func acceptCGUViewController() -> UIViewController {
-                return Wizard.AcceptCGU.viewController()
-            }
-            
-            case ValidatePassword = "Validate_Password"
-            static func validatePasswordViewController() -> UIViewController {
-                return Wizard.ValidatePassword.viewController()
-            }
-            
-            case Preferences = "Preferences"
-            static func preferencesViewController() -> UIViewController {
-                return Wizard.Preferences.viewController()
-            }
+struct StoryboardScene {
+    enum Wizard : String, StoryboardSceneType {
+        static let storyboardName = "Wizard"
+        
+        case CreateAccount = "CreateAccount"
+        static func createAccountViewController() -> CreateAccViewController {
+            return Wizard.CreateAccount.viewController() as! CreateAccViewController
+        }
+        
+        case AcceptCGU = "Accept-CGU"
+        static func acceptCGUViewController() -> UIViewController {
+            return Wizard.AcceptCGU.viewController()
+        }
+        
+        case ValidatePassword = "Validate_Password"
+        static func validatePasswordViewController() -> UIViewController {
+            return Wizard.ValidatePassword.viewController()
+        }
+        
+        case Preferences = "Preferences"
+        static func preferencesViewController() -> UIViewController {
+            return Wizard.Preferences.viewController()
         }
     }
-    
-  struct Segue {
-        enum Wizard : String, StoryboardSegue {
-            case Custom = "Custom"
-            case Back = "Back"
-            case NonCustom = "NonCustom"
-            case ShowPassword = "ShowPassword"
-        }
+}
+
+struct StoryboardSegue {
+    enum Wizard : String, StoryboardSegueType {
+        case Custom = "Custom"
+        case Back = "Back"
+        case NonCustom = "NonCustom"
+        case ShowPassword = "ShowPassword"
     }
 }
 
 //: #### Usage Example
 
-let initialVC = UIStoryboard.Scene.Wizard.initialViewController()
+let initialVC = StoryboardScene.Wizard.initialViewController()
 initialVC.title
 
-let validateVC = UIStoryboard.Scene.Wizard.ValidatePassword.viewController()
+let validateVC = StoryboardScene.Wizard.ValidatePassword.viewController()
 validateVC.title
 
 /* Note: the following line would crash when run in playground, because the storyboard file
@@ -97,7 +95,7 @@ validateVC.title
    not known by the storyboard. But it should work correctly in a real project. */
 // let cgu = UIStoryboard.Scene.Wizard.createAccountViewController()
 
-let segue = UIStoryboard.Segue.Wizard.ShowPassword
+let segue = StoryboardSegue.Wizard.ShowPassword
 initialVC.performSegue(segue)
 
 switch segue {

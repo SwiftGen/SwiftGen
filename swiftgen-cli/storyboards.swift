@@ -11,8 +11,8 @@ import GenumKit
 let storyboardsCommand = command(
   outputOption,
   templateOption("storyboards"), templatePathOption,
-  Option<String>("sceneEnumName", "Scene", flag: "e", description: "The name of the enum to generate for Scenes"),
-  Option<String>("segueEnumName", "Segue", flag: "g", description: "The name of the enum to generate for Segues"),
+  Option<String>("sceneEnumName", "StoryboardScene", flag: "e", description: "The name of the enum to generate for Scenes"),
+  Option<String>("segueEnumName", "StoryboardSegue", flag: "g", description: "The name of the enum to generate for Segues"),
   Argument<Path>("PATH", description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard", validator: pathExists)
 ) { output, templateName, templatePath, sceneEnumName, segueEnumName, path in
   let parser = StoryboardParser()

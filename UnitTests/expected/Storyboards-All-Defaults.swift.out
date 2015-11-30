@@ -3,11 +3,11 @@
 import Foundation
 import UIKit
 
-protocol StoryboardScene {
+protocol StoryboardSceneType {
   static var storyboardName : String { get }
 }
 
-extension StoryboardScene {
+extension StoryboardSceneType {
   static func storyboard() -> UIStoryboard {
     return UIStoryboard(name: self.storyboardName, bundle: nil)
   }
@@ -17,7 +17,7 @@ extension StoryboardScene {
   }
 }
 
-extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String {
+extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
   func viewController() -> UIViewController {
     return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
   }
@@ -26,76 +26,74 @@ extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String 
   }
 }
 
-protocol StoryboardSegue : RawRepresentable { }
+protocol StoryboardSegueType : RawRepresentable { }
 
 extension UIViewController {
-  func performSegue<S : StoryboardSegue where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+  func performSegue<S : StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
   }
 }
 
-extension UIStoryboard {
-  struct Scene {
-    enum Anonymous : StoryboardScene {
-      static let storyboardName = "Anonymous"
+struct StoryboardScene {
+  enum Anonymous : StoryboardSceneType {
+    static let storyboardName = "Anonymous"
+  }
+  enum Message : String, StoryboardSceneType {
+    static let storyboardName = "Message"
+
+    case Composer = "Composer"
+    static func composerViewController() -> UIViewController {
+      return Message.Composer.viewController()
     }
-    enum Message : String, StoryboardScene {
-      static let storyboardName = "Message"
 
-      case Composer = "Composer"
-      static func composerViewController() -> UIViewController {
-        return Message.Composer.viewController()
-      }
-
-      case MessagesList = "MessagesList"
-      static func messagesListViewController() -> UITableViewController {
-        return Message.MessagesList.viewController() as! UITableViewController
-      }
-
-      case NavCtrl = "NavCtrl"
-      static func navCtrlViewController() -> UINavigationController {
-        return Message.NavCtrl.viewController() as! UINavigationController
-      }
-
-      case URLChooser = "URLChooser"
-      static func urlChooserViewController() -> XXPickerViewController {
-        return Message.URLChooser.viewController() as! XXPickerViewController
-      }
+    case MessagesList = "MessagesList"
+    static func messagesListViewController() -> UITableViewController {
+      return Message.MessagesList.viewController() as! UITableViewController
     }
-    enum Wizard : String, StoryboardScene {
-      static let storyboardName = "Wizard"
 
-      case Accept_CGU = "Accept-CGU"
-      static func acceptCGUViewController() -> UIViewController {
-        return Wizard.Accept_CGU.viewController()
-      }
+    case NavCtrl = "NavCtrl"
+    static func navCtrlViewController() -> UINavigationController {
+      return Message.NavCtrl.viewController() as! UINavigationController
+    }
 
-      case CreateAccount = "CreateAccount"
-      static func createAccountViewController() -> CreateAccViewController {
-        return Wizard.CreateAccount.viewController() as! CreateAccViewController
-      }
-
-      case Preferences = "Preferences"
-      static func preferencesViewController() -> UITableViewController {
-        return Wizard.Preferences.viewController() as! UITableViewController
-      }
-
-      case Validate_Password = "Validate_Password"
-      static func validatePasswordViewController() -> UIViewController {
-        return Wizard.Validate_Password.viewController()
-      }
+    case URLChooser = "URLChooser"
+    static func urlChooserViewController() -> XXPickerViewController {
+      return Message.URLChooser.viewController() as! XXPickerViewController
     }
   }
+  enum Wizard : String, StoryboardSceneType {
+    static let storyboardName = "Wizard"
 
-  struct Segue {
-    enum Message : String, StoryboardSegue {
-      case CustomBack = "CustomBack"
-      case Embed = "Embed"
-      case NonCustom = "NonCustom"
-      case Show_NavCtrl = "Show-NavCtrl"
+    case Accept_CGU = "Accept-CGU"
+    static func acceptCGUViewController() -> UIViewController {
+      return Wizard.Accept_CGU.viewController()
     }
-    enum Wizard : String, StoryboardSegue {
-      case ShowPassword = "ShowPassword"
+
+    case CreateAccount = "CreateAccount"
+    static func createAccountViewController() -> CreateAccViewController {
+      return Wizard.CreateAccount.viewController() as! CreateAccViewController
     }
+
+    case Preferences = "Preferences"
+    static func preferencesViewController() -> UITableViewController {
+      return Wizard.Preferences.viewController() as! UITableViewController
+    }
+
+    case Validate_Password = "Validate_Password"
+    static func validatePasswordViewController() -> UIViewController {
+      return Wizard.Validate_Password.viewController()
+    }
+  }
+}
+
+struct StoryboardSegue {
+  enum Message : String, StoryboardSegueType {
+    case CustomBack = "CustomBack"
+    case Embed = "Embed"
+    case NonCustom = "NonCustom"
+    case Show_NavCtrl = "Show-NavCtrl"
+  }
+  enum Wizard : String, StoryboardSegueType {
+    case ShowPassword = "ShowPassword"
   }
 }

@@ -4,11 +4,11 @@ import Foundation
 import UIKit
 
 {# This first part of the code is static, same every time whatever Storyboard you have #}
-protocol StoryboardScene {
+protocol StoryboardSceneType {
   static var storyboardName : String { get }
 }
 
-extension StoryboardScene {
+extension StoryboardSceneType {
   static func storyboard() -> UIStoryboard {
     return UIStoryboard(name: self.storyboardName, bundle: nil)
   }
@@ -18,7 +18,7 @@ extension StoryboardScene {
   }
 }
 
-extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String {
+extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
   func viewController() -> UIViewController {
     return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
   }
@@ -27,55 +27,53 @@ extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String 
   }
 }
 
-protocol StoryboardSegue : RawRepresentable { }
+protocol StoryboardSegueType : RawRepresentable { }
 
 extension UIViewController {
-  func performSegue<S : StoryboardSegue where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+  func performSegue<S : StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
   }
 }
 
 {# This is where the generation begins, this code depends on what you have in your Storyboards #}
 {% if storyboards %}
-extension UIStoryboard {
-  struct {{sceneEnumName}} {
-    {% for storyboard in storyboards %}
-    {% set storyboardName %}{{storyboard.name|swiftIdentifier}}{% endset %}
-    {% if storyboard.scenes %}
-    enum {{storyboardName}} : String, StoryboardScene {
-      static let storyboardName = "{{storyboard.name}}"
-      {% for scene in storyboard.scenes %}
-      {% set sceneID %}{{scene.identifier|swiftIdentifier|lowerFirstWord}}{% endset %}
+struct {{sceneEnumName}} {
+  {% for storyboard in storyboards %}
+  {% set storyboardName %}{{storyboard.name|swiftIdentifier}}{% endset %}
+  {% if storyboard.scenes %}
+  enum {{storyboardName}} : String, StoryboardSceneType {
+    static let storyboardName = "{{storyboard.name}}"
+    {% for scene in storyboard.scenes %}
+    {% set sceneID %}{{scene.identifier|swiftIdentifier|lowerFirstWord}}{% endset %}
 
-      case {{sceneID}} = "{{scene.identifier}}"
-      {% if scene.class %}
-      static func {{sceneID}}ViewController() -> {{scene.class}} {
-        return {{storyboardName}}.{{sceneID}}.viewController() as! {{scene.class}}
-      }
-      {% else %}
-      static func {{sceneID|lowerFirstWord}}ViewController() -> UIViewController {
-        return {{storyboardName}}.{{sceneID}}.viewController()
-      }
-      {% endif %}
-      {% endfor %}
+    case {{sceneID}} = "{{scene.identifier}}"
+    {% if scene.class %}
+    static func {{sceneID}}ViewController() -> {{scene.class}} {
+      return {{storyboardName}}.{{sceneID}}.viewController() as! {{scene.class}}
     }
     {% else %}
-    enum {{storyboardName}} : StoryboardScene {
-      static let storyboardName = "{{storyboard.name}}"
+    static func {{sceneID|lowerFirstWord}}ViewController() -> UIViewController {
+      return {{storyboardName}}.{{sceneID}}.viewController()
     }
     {% endif %}
     {% endfor %}
   }
-
-  struct {{segueEnumName}} {
-    {% for storyboard in storyboards %}{% if storyboard.segues %}
-    enum {{storyboard.name|swiftIdentifier}} : String, StoryboardSegue {
-      {% for segue in storyboard.segues %}
-      case {{segue.identifier|swiftIdentifier}} = "{{segue.identifier}}"
-      {% endfor %}
-    }
-    {% endif %}{% endfor %}
+  {% else %}
+  enum {{storyboardName}} : StoryboardSceneType {
+    static let storyboardName = "{{storyboard.name}}"
   }
+  {% endif %}
+  {% endfor %}
+}
+
+struct {{segueEnumName}} {
+  {% for storyboard in storyboards %}{% if storyboard.segues %}
+  enum {{storyboard.name|swiftIdentifier}} : String, StoryboardSegueType {
+    {% for segue in storyboard.segues %}
+    case {{segue.identifier|swiftIdentifier}} = "{{segue.identifier}}"
+    {% endfor %}
+  }
+  {% endif %}{% endfor %}
 }
 {% else %}
 // No storyboard found

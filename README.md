@@ -215,11 +215,11 @@ This will generate an `enum` for each of your `UIStoryboard`, with one `case` pe
 The generated code will look like this:
 
 ```swift
-protocol StoryboardScene {
+protocol StoryboardSceneType {
     static var storyboardName : String { get }
 }
 
-extension StoryboardScene {
+extension StoryboardSceneType {
     static func storyboard() -> UIStoryboard {
         return UIStoryboard(name: self.storyboardName, bundle: nil)
     }
@@ -229,7 +229,7 @@ extension StoryboardScene {
     }
 }
 
-extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String {
+extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
     func viewController() -> UIViewController {
         return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
     }
@@ -238,50 +238,48 @@ extension StoryboardScene where Self: RawRepresentable, Self.RawValue == String 
     }
 }
 
-protocol StoryboardSegue : RawRepresentable { }
+protocol StoryboardSegueType : RawRepresentable { }
 
 extension UIViewController {
-  func performSegue<S : StoryboardSegue where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+  func performSegue<S : StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
   }
 }
 
-extension UIStoryboard {
-  struct Scene {
-    enum Message : String, StoryboardScene {
-      static let storyboardName = "Message"
+struct StoryboardScene {
+  enum Message : String, StoryboardSceneType {
+    static let storyboardName = "Message"
 
-      case Composer = "Composer"
-      static func composerViewController() -> UIViewController {
-        return Message.Composer.viewController()
-      }
-
-      case URLChooser = "URLChooser"
-      static func urlChooserViewController() -> XXPickerViewController {
-        return Message.URLChooser.viewController() as! XXPickerViewController
-      }
+    case Composer = "Composer"
+    static func composerViewController() -> UIViewController {
+      return Message.Composer.viewController()
     }
-    enum Wizard : String, StoryboardScene {
-      static let storyboardName = "Wizard"
 
-      case CreateAccount = "CreateAccount"
-      static func createAccountViewController() -> CreateAccViewController {
-          return Wizard.CreateAccount.viewController() as! CreateAccViewController
-      }
-
-      case ValidatePassword = "Validate_Password"
-      static func validatePasswordViewController() -> UIViewController {
-          return Wizard.ValidatePassword.viewController()
-      }
+    case URLChooser = "URLChooser"
+    static func urlChooserViewController() -> XXPickerViewController {
+      return Message.URLChooser.viewController() as! XXPickerViewController
     }
   }
+  enum Wizard : String, StoryboardSceneType {
+    static let storyboardName = "Wizard"
 
-  struct Segue {
-    enum Message : String, StoryboardSegue {
-      case Back = "Back"
-      case Custom = "Custom"
-      case NonCustom = "NonCustom"
+    case CreateAccount = "CreateAccount"
+    static func createAccountViewController() -> CreateAccViewController {
+        return Wizard.CreateAccount.viewController() as! CreateAccViewController
     }
+
+    case ValidatePassword = "Validate_Password"
+    static func validatePasswordViewController() -> UIViewController {
+        return Wizard.ValidatePassword.viewController()
+    }
+  }
+}
+
+struct StoryboardSegue {
+  enum Message : String, StoryboardSegueType {
+    case Back = "Back"
+    case Custom = "Custom"
+    case NonCustom = "NonCustom"
   }
 }
 ```
