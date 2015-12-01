@@ -49,11 +49,11 @@ struct {{sceneEnumName}} {
     case {{sceneID}} = "{{scene.identifier}}"
     {% if scene.class %}
     static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> {{scene.class}} {
-      return {{storyboardName}}.{{sceneID}}.viewController() as! {{scene.class}}
+      return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as! {{scene.class}}
     }
     {% else %}
     static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> UIViewController {
-      return {{storyboardName}}.{{sceneID}}.viewController()
+      return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController()
     }
     {% endif %}
     {% endfor %}
