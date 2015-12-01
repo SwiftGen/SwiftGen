@@ -43,22 +43,22 @@ struct XCTStoryboardsScene {
 
     case Composer = "Composer"
     static func composerViewController() -> UIViewController {
-      return Message.Composer.viewController()
+      return XCTStoryboardsScene.Message.Composer.viewController()
     }
 
     case MessagesList = "MessagesList"
     static func messagesListViewController() -> UITableViewController {
-      return Message.MessagesList.viewController() as! UITableViewController
+      return XCTStoryboardsScene.Message.MessagesList.viewController() as! UITableViewController
     }
 
     case NavCtrl = "NavCtrl"
     static func navCtrlViewController() -> UINavigationController {
-      return Message.NavCtrl.viewController() as! UINavigationController
+      return XCTStoryboardsScene.Message.NavCtrl.viewController() as! UINavigationController
     }
 
     case URLChooser = "URLChooser"
     static func urlChooserViewController() -> XXPickerViewController {
-      return Message.URLChooser.viewController() as! XXPickerViewController
+      return XCTStoryboardsScene.Message.URLChooser.viewController() as! XXPickerViewController
     }
   }
   enum Wizard : String, StoryboardSceneType {
@@ -66,22 +66,22 @@ struct XCTStoryboardsScene {
 
     case Accept_CGU = "Accept-CGU"
     static func acceptCGUViewController() -> UIViewController {
-      return Wizard.Accept_CGU.viewController()
+      return XCTStoryboardsScene.Wizard.Accept_CGU.viewController()
     }
 
     case CreateAccount = "CreateAccount"
     static func createAccountViewController() -> CreateAccViewController {
-      return Wizard.CreateAccount.viewController() as! CreateAccViewController
+      return XCTStoryboardsScene.Wizard.CreateAccount.viewController() as! CreateAccViewController
     }
 
     case Preferences = "Preferences"
     static func preferencesViewController() -> UITableViewController {
-      return Wizard.Preferences.viewController() as! UITableViewController
+      return XCTStoryboardsScene.Wizard.Preferences.viewController() as! UITableViewController
     }
 
     case Validate_Password = "Validate_Password"
     static func validatePasswordViewController() -> UIViewController {
-      return Wizard.Validate_Password.viewController()
+      return XCTStoryboardsScene.Wizard.Validate_Password.viewController()
     }
   }
 }

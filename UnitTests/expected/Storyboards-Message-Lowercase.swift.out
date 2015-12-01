@@ -40,22 +40,22 @@ struct StoryboardScene {
 
     case composer = "Composer"
     static func composerViewController() -> UIViewController {
-      return Message.composer.viewController()
+      return StoryboardScene.Message.composer.viewController()
     }
 
     case messagesList = "MessagesList"
     static func messagesListViewController() -> UITableViewController {
-      return Message.messagesList.viewController() as! UITableViewController
+      return StoryboardScene.Message.messagesList.viewController() as! UITableViewController
     }
 
     case navCtrl = "NavCtrl"
     static func navCtrlViewController() -> UINavigationController {
-      return Message.navCtrl.viewController() as! UINavigationController
+      return StoryboardScene.Message.navCtrl.viewController() as! UINavigationController
     }
 
     case urlChooser = "URLChooser"
     static func urlChooserViewController() -> XXPickerViewController {
-      return Message.urlChooser.viewController() as! XXPickerViewController
+      return StoryboardScene.Message.urlChooser.viewController() as! XXPickerViewController
     }
   }
 }
