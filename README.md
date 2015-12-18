@@ -56,6 +56,8 @@ Each subcommand has its own option and syntax, but some options are common to al
 
 You can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
 
+You can also see in the [wiki](https://github.com/AliSoftware/SwiftGen/wiki) some additional doc about how to [integrate SwiftGen in your Continuous Integration](https://github.com/AliSoftware/SwiftGen/wiki/Continuous-Integration) (Travis-CI, CircleCI, Jenkins, …) and how to [integrate in your Xcode project](https://github.com/AliSoftware/SwiftGen/wiki/Integrate-SwiftGen-in-an-xcodeproj) so it rebuild the constants every time you build.
+
 ## Templates
 
 SwiftGen uses [Stencil](https://github.com/kylef/Stencil) as its template engine.
