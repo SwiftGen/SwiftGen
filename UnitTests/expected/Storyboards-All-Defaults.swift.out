@@ -38,6 +38,14 @@ struct StoryboardScene {
   enum Anonymous : StoryboardSceneType {
     static let storyboardName = "Anonymous"
   }
+  enum Dependency : String, StoryboardSceneType {
+    static let storyboardName = "Dependency"
+
+    case Dependent = "Dependent"
+    static func dependentViewController() -> UIViewController {
+      return StoryboardScene.Dependency.Dependent.viewController()
+    }
+  }
   enum Message : String, StoryboardSceneType {
     static let storyboardName = "Message"
 
@@ -59,6 +67,14 @@ struct StoryboardScene {
     case URLChooser = "URLChooser"
     static func urlChooserViewController() -> XXPickerViewController {
       return StoryboardScene.Message.URLChooser.viewController() as! XXPickerViewController
+    }
+  }
+  enum Placeholder : String, StoryboardSceneType {
+    static let storyboardName = "Placeholder"
+
+    case Navigation = "Navigation"
+    static func navigationViewController() -> UINavigationController {
+      return StoryboardScene.Placeholder.Navigation.viewController() as! UINavigationController
     }
   }
   enum Wizard : String, StoryboardSceneType {
