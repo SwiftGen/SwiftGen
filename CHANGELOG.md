@@ -1,18 +1,19 @@
 # SwiftGen CHANGELOG
 
 ---
-## Master
+## 0.7.4
 
 #### Enhancements
 
-* Added View Controller Placeholders support
-[Viacheslav Karamov](https://github.com/vkaramov/), [#61](https://github.com/AliSoftware/SwiftGen/issues/61)
+* Added View Controller Placeholders support.  
+  [Viacheslav Karamov](https://github.com/vkaramov/), [#61](https://github.com/AliSoftware/SwiftGen/issues/61)
 
 ## 0.7.3
 
 #### Fixes
 
-* Restructured storyboard templates to work around an LLVM issue with nested types.
+* Restructured storyboard templates to work around an LLVM issue with nested types.  
+  [Ryan Booker](https://github.com/ryanbooker), [#57](https://github.com/AliSoftware/SwiftGen/issues/57#issuecomment-159996671)
 
 > Scenes and Segues are now referenced via `StoryboardScene.<Storyboard>` and `StoryboardSegue.<Storyboard>.<Segue>`
 
