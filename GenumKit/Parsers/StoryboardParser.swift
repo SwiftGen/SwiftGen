@@ -43,7 +43,7 @@ public final class StoryboardParser {
           inScene = true
         case "objects" where inScene:
           readyForFirstObject = true
-        case let tag where readyForFirstObject:
+        case let tag where (readyForFirstObject && tag != "viewControllerPlaceholder"):
           if let storyboardID = attributeDict["storyboardIdentifier"] {
             let customClass = attributeDict["customClass"]
             scenes.insert(Scene(storyboardID: storyboardID, tag: tag, customClass: customClass))

@@ -1,6 +1,12 @@
 # SwiftGen CHANGELOG
 
 ---
+## Master
+
+#### Enhancements
+
+* Added View Controller Placeholders support
+[Viacheslav Karamov](https://github.com/vkaramov/), [#61](https://github.com/AliSoftware/SwiftGen/issues/61)
 
 ## 0.7.3
 
