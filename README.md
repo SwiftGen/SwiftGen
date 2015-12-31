@@ -290,14 +290,14 @@ struct StoryboardSegue {
 
 ```swift
 // Initial VC
-let initialVC = UIStoryboard.Scene.Wizard.initialViewController()
+let initialVC = StoryboardScene.Wizard.initialViewController()
 // Generic ViewController constructor, returns a UIViewController instance
-let validateVC = UIStoryboard.Scene.Wizard.ValidatePassword.viewController()
+let validateVC = StoryboardScene.Wizard.ValidatePassword.viewController()
 // Dedicated type var that returns the right type of VC (CreateAccViewController here)
-let createVC = UIStoryboard.Scene.Wizard.createAccountViewController()
+let createVC = StoryboardScene.Wizard.createAccountViewController()
 
 override func prepareForSegue(_ segue: UIStoryboardSegue, sender sender: AnyObject?) {
-  switch UIStoryboard.Segue.Message(rawValue: segue.identifier)! {
+  switch StoryboardSegue.Message(rawValue: segue.identifier)! {
   case .Back:
     // Prepare for your custom segue transition
   case .Custom:
@@ -307,7 +307,7 @@ override func prepareForSegue(_ segue: UIStoryboardSegue, sender sender: AnyObje
   }
 }
 
-initialVC.performSegue(UIStoryboard.Segue.Message.Back)
+initialVC.performSegue(StoryboardSegue.Message.Back)
 ```
 
 
