@@ -11,9 +11,9 @@ enum {{enumName}} {
 }
 
 extension {{enumName}} : CustomStringConvertible {
-  var description : String { return self.string }
+  var description: String { return self.string }
 
-  var string : String {
+  var string: String {
     switch self {
       {% for string in strings %}
       {% if string.params %}
