@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 extension UIImage {
-  enum Asset : String {
+  enum Asset: String {
     case Green_Apple = "Green-Apple"
     case Red_Apple = "Red apple"
     case _2_Pears = "2-pears"

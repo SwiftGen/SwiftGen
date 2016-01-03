@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 protocol StoryboardSceneType {
-  static var storyboardName : String { get }
+  static var storyboardName: String { get }
 }
 
 extension StoryboardSceneType {
@@ -26,19 +26,19 @@ extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == Str
   }
 }
 
-protocol StoryboardSegueType : RawRepresentable { }
+protocol StoryboardSegueType: RawRepresentable { }
 
 extension UIViewController {
-  func performSegue<S : StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
   }
 }
 
 struct StoryboardScene {
-  enum Anonymous : StoryboardSceneType {
+  enum Anonymous: StoryboardSceneType {
     static let storyboardName = "Anonymous"
   }
-  enum Dependency : String, StoryboardSceneType {
+  enum Dependency: String, StoryboardSceneType {
     static let storyboardName = "Dependency"
 
     case Dependent = "Dependent"
@@ -46,7 +46,7 @@ struct StoryboardScene {
       return StoryboardScene.Dependency.Dependent.viewController()
     }
   }
-  enum Message : String, StoryboardSceneType {
+  enum Message: String, StoryboardSceneType {
     static let storyboardName = "Message"
 
     case Composer = "Composer"
@@ -69,7 +69,7 @@ struct StoryboardScene {
       return StoryboardScene.Message.URLChooser.viewController() as! XXPickerViewController
     }
   }
-  enum Placeholder : String, StoryboardSceneType {
+  enum Placeholder: String, StoryboardSceneType {
     static let storyboardName = "Placeholder"
 
     case Navigation = "Navigation"
@@ -77,7 +77,7 @@ struct StoryboardScene {
       return StoryboardScene.Placeholder.Navigation.viewController() as! UINavigationController
     }
   }
-  enum Wizard : String, StoryboardSceneType {
+  enum Wizard: String, StoryboardSceneType {
     static let storyboardName = "Wizard"
 
     case Accept_CGU = "Accept-CGU"
@@ -103,13 +103,13 @@ struct StoryboardScene {
 }
 
 struct StoryboardSegue {
-  enum Message : String, StoryboardSegueType {
+  enum Message: String, StoryboardSegueType {
     case CustomBack = "CustomBack"
     case Embed = "Embed"
     case NonCustom = "NonCustom"
     case Show_NavCtrl = "Show-NavCtrl"
   }
-  enum Wizard : String, StoryboardSegueType {
+  enum Wizard: String, StoryboardSegueType {
     case ShowPassword = "ShowPassword"
   }
 }

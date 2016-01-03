@@ -15,7 +15,7 @@ extension UIColor {
 
 {% if colors %}
 extension UIColor {
-  enum {{enumName|swiftIdentifier}} : UInt32 {
+  enum {{enumName|swiftIdentifier}}: UInt32 {
     {% for color in colors %}
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#{{color.rgb}}"></span>
     /// Alpha: {{color.alpha|hexToInt|int255toFloat|percent}} <br/> (0x{{color.rgba}})
