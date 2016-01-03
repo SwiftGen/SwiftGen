@@ -5,7 +5,7 @@ import UIKit
 
 {# This first part of the code is static, same every time whatever Storyboard you have #}
 protocol StoryboardSceneType {
-  static var storyboardName : String { get }
+  static var storyboardName: String { get }
 }
 
 extension StoryboardSceneType {
@@ -27,10 +27,10 @@ extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == Str
   }
 }
 
-protocol StoryboardSegueType : RawRepresentable { }
+protocol StoryboardSegueType: RawRepresentable { }
 
 extension UIViewController {
-  func performSegue<S : StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
   }
 }
@@ -41,7 +41,7 @@ struct {{sceneEnumName}} {
   {% for storyboard in storyboards %}
   {% set storyboardName %}{{storyboard.name|swiftIdentifier}}{% endset %}
   {% if storyboard.scenes %}
-  enum {{storyboardName}} : String, StoryboardSceneType {
+  enum {{storyboardName}}: String, StoryboardSceneType {
     static let storyboardName = "{{storyboard.name}}"
     {% for scene in storyboard.scenes %}
     {% set sceneID %}{{scene.identifier|swiftIdentifier|lowerFirstWord}}{% endset %}
@@ -59,7 +59,7 @@ struct {{sceneEnumName}} {
     {% endfor %}
   }
   {% else %}
-  enum {{storyboardName}} : StoryboardSceneType {
+  enum {{storyboardName}}: StoryboardSceneType {
     static let storyboardName = "{{storyboard.name}}"
   }
   {% endif %}
@@ -68,7 +68,7 @@ struct {{sceneEnumName}} {
 
 struct {{segueEnumName}} {
   {% for storyboard in storyboards %}{% if storyboard.segues %}
-  enum {{storyboard.name|swiftIdentifier}} : String, StoryboardSegueType {
+  enum {{storyboard.name|swiftIdentifier}}: String, StoryboardSegueType {
     {% for segue in storyboard.segues %}
     case {{segue.identifier|swiftIdentifier}} = "{{segue.identifier}}"
     {% endfor %}

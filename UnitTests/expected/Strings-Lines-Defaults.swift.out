@@ -9,10 +9,10 @@ enum L10n {
   case GreetingsAndAge(String, Int)
 }
 
-extension L10n : CustomStringConvertible {
-  var description : String { return self.string }
+extension L10n: CustomStringConvertible {
+  var description: String { return self.string }
 
-  var string : String {
+  var string: String {
     switch self {
       case .AppTitle:
         return L10n.tr("AppTitle")

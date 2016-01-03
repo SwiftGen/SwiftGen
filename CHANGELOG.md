@@ -1,6 +1,13 @@
 # SwiftGen CHANGELOG
 
 ---
+## 0.7.5
+
+### Enhancements
+
+*  Updated stencils and unit tests to pass [SwiftLint](https://github.com/realm/SwiftLint).  
+  [Adam Gask](https://github.com/AJ9), [#79](https://github.com/AliSoftware/SwiftGen/pull/79)
+
 ## 0.7.4
 
 #### Enhancements

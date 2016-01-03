@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 protocol StoryboardSceneType {
-  static var storyboardName : String { get }
+  static var storyboardName: String { get }
 }
 
 extension StoryboardSceneType {
@@ -26,16 +26,16 @@ extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == Str
   }
 }
 
-protocol StoryboardSegueType : RawRepresentable { }
+protocol StoryboardSegueType: RawRepresentable { }
 
 extension UIViewController {
-  func performSegue<S : StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
   }
 }
 
 struct StoryboardScene {
-  enum Message : String, StoryboardSceneType {
+  enum Message: String, StoryboardSceneType {
     static let storyboardName = "Message"
 
     case Composer = "Composer"
@@ -61,7 +61,7 @@ struct StoryboardScene {
 }
 
 struct StoryboardSegue {
-  enum Message : String, StoryboardSegueType {
+  enum Message: String, StoryboardSegueType {
     case CustomBack = "CustomBack"
     case Embed = "Embed"
     case NonCustom = "NonCustom"

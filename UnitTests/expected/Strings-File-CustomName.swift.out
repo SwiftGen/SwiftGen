@@ -17,10 +17,10 @@ enum XCTLoc {
   case ObjectOwnership(Int, String, String)
 }
 
-extension XCTLoc : CustomStringConvertible {
-  var description : String { return self.string }
+extension XCTLoc: CustomStringConvertible {
+  var description: String { return self.string }
 
-  var string : String {
+  var string: String {
     switch self {
       case .AlertTitle:
         return XCTLoc.tr("alert_title")

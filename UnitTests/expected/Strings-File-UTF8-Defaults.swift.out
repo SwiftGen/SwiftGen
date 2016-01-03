@@ -17,10 +17,10 @@ enum L10n {
   case ObjectOwnership(Int, String, String)
 }
 
-extension L10n : CustomStringConvertible {
-  var description : String { return self.string }
+extension L10n: CustomStringConvertible {
+  var description: String { return self.string }
 
-  var string : String {
+  var string: String {
     switch self {
       case .AlertTitle:
         return L10n.tr("alert_title")

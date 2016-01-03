@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 extension UIImage {
-  enum XCTImages : String {
+  enum XCTImages: String {
     case Apple = "Apple"
     case Banana = "Banana"
 
