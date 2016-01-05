@@ -7,7 +7,7 @@
 
 *  Updated stencils and unit tests to pass [SwiftLint](https://github.com/realm/SwiftLint).  
   [Adam Gask](https://github.com/AJ9), [#79](https://github.com/AliSoftware/SwiftGen/pull/79)
-* Added support for `*.clr` files.
+* Added support for `*.clr` files (files to store `NSColorList`'s presented in Color Picker on "Color Palettes" tab)
   [Ilya Puchka](https://github.com/ilyapuchka), [#81](https://github.com/AliSoftware/SwiftGen/pull/81)
 
 ## 0.7.4

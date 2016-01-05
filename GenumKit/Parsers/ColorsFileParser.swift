@@ -83,23 +83,12 @@ public final class CLRFileParser: ColorsFileParser {
   
   public func parseFile(path: String) {
     if let colorsList = NSColorList(name: "UserColors", fromFile: path) {
-      for keyColorPair in colorsList.allKeys.map({ ($0, colorsList.colorWithKey($0)) }) {
-        let colorName = keyColorPair.0.stringByReplacingOccurrencesOfString(" ", withString: "")
-        if let colorValue = keyColorPair.1?.rgbColor?.hexValue {
-          addColorWithName(colorName, value: colorValue)
-        }
+      for colorName in colorsList.allKeys {
+        colors[colorName] = colorsList.colorWithKey(colorName)?.rgbColor?.hexValue
       }
     }
   }
   
-  public func addColorWithName(name: String, value: String) {
-    addColorWithName(name, value: ColorsTextFileParser.parse(value))
-  }
-  
-  public func addColorWithName(name: String, value: UInt32) {
-    colors[name] = value
-  }
-
 }
 
 extension NSColor {
@@ -113,7 +102,7 @@ extension NSColor {
     let hexGreen = (UInt32(greenComponent * 255.0) << 8) << 8
     let hexBlue = UInt32(blueComponent * 255.0) << 8
     let hexAlpha = UInt32(alphaComponent * 255.0)
-    return hexRed + hexGreen + hexBlue + hexAlpha
+    return hexRed | hexGreen | hexBlue | hexAlpha
   }
   
 }
