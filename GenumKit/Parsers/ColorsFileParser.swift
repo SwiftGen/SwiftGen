@@ -5,14 +5,21 @@
 //
 
 import Foundation
+import AppKit.NSColor
 
-public final class ColorsFileParser {
-  var colors = [String:UInt32]()
+public protocol ColorsFileParser {
+    var colors: [String: UInt32] { get }
+}
+
+//MARK: - Text File Parser
+
+public final class ColorsTextFileParser: ColorsFileParser {
+  public private(set) var colors = [String:UInt32]()
   
   public init() {}
   
   public func addColorWithName(name: String, value: String) {
-    addColorWithName(name, value: ColorsFileParser.parse(value))
+    addColorWithName(name, value: ColorsTextFileParser.parse(value))
   }
   
   public func addColorWithName(name: String, value: UInt32) {
@@ -65,4 +72,37 @@ public final class ColorsFileParser {
     
     return value
   }
+}
+
+//MARK: - CLR File Parser
+
+public final class CLRFileParser: ColorsFileParser {
+  public private(set) var colors = [String: UInt32]()
+  
+  public init() {}
+  
+  public func parseFile(path: String) {
+    if let colorsList = NSColorList(name: "UserColors", fromFile: path) {
+      for colorName in colorsList.allKeys {
+        colors[colorName] = colorsList.colorWithKey(colorName)?.rgbColor?.hexValue
+      }
+    }
+  }
+  
+}
+
+extension NSColor {
+  
+  private var rgbColor: NSColor? {
+    return colorUsingColorSpaceName(NSCalibratedRGBColorSpace)
+  }
+  
+  private var hexValue: UInt32 {
+    let hexRed = ((UInt32(redComponent * 255.0) << 8) << 8) << 8
+    let hexGreen = (UInt32(greenComponent * 255.0) << 8) << 8
+    let hexBlue = UInt32(blueComponent * 255.0) << 8
+    let hexAlpha = UInt32(alphaComponent * 255.0)
+    return hexRed | hexGreen | hexBlue | hexAlpha
+  }
+  
 }

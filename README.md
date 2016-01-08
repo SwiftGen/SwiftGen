@@ -321,6 +321,14 @@ This will generate a `enum Name` in an extension of `UIColor`, with one `case` p
 
 The text file is expected to have one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`). Whitespaces are ignored.
 
+SwiftGen can also read [`*.clr` files](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/DrawColor/Concepts/AboutColorLists.html#//apple_ref/doc/uid/20000757-BAJHJEDI). For example you can use this command to generate colors from one of your system color lists:
+
+```
+swiftgen colors ~/Library/Colors/MyColors.clr
+```
+
+Generated code will look the same as if you'd use text file.
+
 ### Generated code
 
 Given the following `colors.txt` file:
