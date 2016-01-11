@@ -114,7 +114,7 @@ extension StoryboardParser {
        - `names`: `Array<String>` containing parameter names like `"p0"`, `"p1"`, etc
 */
 extension StringsFileParser {
-  public func stencilContext(enumName enumName: String = "L10n") -> Context {
+  public func stencilContext(enumName enumName: String = "L10n", tableName: String = "Localizable") -> Context {
     let strings = entries.map { (entry: StringsFileParser.Entry) -> [String:AnyObject] in
       if entry.types.count > 0 {
         let params = [
@@ -128,6 +128,6 @@ extension StringsFileParser {
         return ["key": entry.key, "translation": entry.translation]
       }
     }
-    return Context(dictionary: ["enumName":enumName, "strings":strings])
+    return Context(dictionary: ["enumName": enumName, "tableName": tableName, "strings": strings])
   }
 }

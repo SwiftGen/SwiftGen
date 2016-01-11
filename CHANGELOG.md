@@ -1,12 +1,16 @@
 # SwiftGen CHANGELOG
 
 ---
-## 0.7.5
+## Master
 
 ### Enhancements
 
-*  Updated stencils and unit tests to pass [SwiftLint](https://github.com/realm/SwiftLint).  
+* Updated stencils and unit tests to pass [SwiftLint](https://github.com/realm/SwiftLint).  
   [Adam Gask](https://github.com/AJ9), [#79](https://github.com/AliSoftware/SwiftGen/pull/79)
+* Updated `storyboards-default.stencil` to better avoid name confusions.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+   * Now `cases` names are suffixed with `…Scene` and `static func` are prefixed with `instanciate…` to lower the risks of a name conflict with your ViewController classes.
+   * The old template is still available but has been renamed `storyboards-uppercase.stencil`
 * Added support for `*.clr` files (files to store `NSColorList`'s presented in Color Picker on "Color Palettes" tab)
   [Ilya Puchka](https://github.com/ilyapuchka), [#81](https://github.com/AliSoftware/SwiftGen/pull/81)
 

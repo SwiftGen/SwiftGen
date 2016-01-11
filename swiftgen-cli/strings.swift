@@ -21,7 +21,7 @@ let stringsCommand = command(
     
     let templateRealPath = try findTemplate("strings", templateShortName: templateName, templateFullPath: templatePath)
     let template = try GenumTemplate(path: templateRealPath)
-    let context = parser.stencilContext(enumName: enumName)
+    let context = parser.stencilContext(enumName: enumName, tableName: path.lastComponentWithoutExtension)
     let rendered = try template.render(context)
     output.write(rendered)
   }

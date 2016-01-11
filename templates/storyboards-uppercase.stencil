@@ -46,14 +46,14 @@ struct {{sceneEnumName}} {
     {% for scene in storyboard.scenes %}
     {% set sceneID %}{{scene.identifier|swiftIdentifier}}{% endset %}
 
-    case {{sceneID}}Scene = "{{scene.identifier}}"
+    case {{sceneID}} = "{{scene.identifier}}"
     {% if scene.class %}
-    static func instanciate{{sceneID|snakeToCamelCase}}() -> {{scene.class}} {
-      return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.viewController() as! {{scene.class}}
+    static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> {{scene.class}} {
+      return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as! {{scene.class}}
     }
     {% else %}
-    static func instanciate{{sceneID|snakeToCamelCase}}() -> UIViewController {
-      return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.viewController()
+    static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> UIViewController {
+      return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController()
     }
     {% endif %}
     {% endfor %}
