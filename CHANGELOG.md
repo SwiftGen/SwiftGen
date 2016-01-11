@@ -1,7 +1,7 @@
 # SwiftGen CHANGELOG
 
 ---
-## Master
+## 0.7.5
 
 ### Enhancements
 
