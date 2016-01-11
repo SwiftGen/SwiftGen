@@ -41,63 +41,63 @@ struct XCTStoryboardsScene {
   enum Dependency: String, StoryboardSceneType {
     static let storyboardName = "Dependency"
 
-    case Dependent = "Dependent"
-    static func dependentViewController() -> UIViewController {
-      return XCTStoryboardsScene.Dependency.Dependent.viewController()
+    case DependentScene = "Dependent"
+    static func instanciateDependent() -> UIViewController {
+      return XCTStoryboardsScene.Dependency.DependentScene.viewController()
     }
   }
   enum Message: String, StoryboardSceneType {
     static let storyboardName = "Message"
 
-    case Composer = "Composer"
-    static func composerViewController() -> UIViewController {
-      return XCTStoryboardsScene.Message.Composer.viewController()
+    case ComposerScene = "Composer"
+    static func instanciateComposer() -> UIViewController {
+      return XCTStoryboardsScene.Message.ComposerScene.viewController()
     }
 
-    case MessagesList = "MessagesList"
-    static func messagesListViewController() -> UITableViewController {
-      return XCTStoryboardsScene.Message.MessagesList.viewController() as! UITableViewController
+    case MessagesListScene = "MessagesList"
+    static func instanciateMessagesList() -> UITableViewController {
+      return XCTStoryboardsScene.Message.MessagesListScene.viewController() as! UITableViewController
     }
 
-    case NavCtrl = "NavCtrl"
-    static func navCtrlViewController() -> UINavigationController {
-      return XCTStoryboardsScene.Message.NavCtrl.viewController() as! UINavigationController
+    case NavCtrlScene = "NavCtrl"
+    static func instanciateNavCtrl() -> UINavigationController {
+      return XCTStoryboardsScene.Message.NavCtrlScene.viewController() as! UINavigationController
     }
 
-    case URLChooser = "URLChooser"
-    static func urlChooserViewController() -> XXPickerViewController {
-      return XCTStoryboardsScene.Message.URLChooser.viewController() as! XXPickerViewController
+    case URLChooserScene = "URLChooser"
+    static func instanciateURLChooser() -> XXPickerViewController {
+      return XCTStoryboardsScene.Message.URLChooserScene.viewController() as! XXPickerViewController
     }
   }
   enum Placeholder: String, StoryboardSceneType {
     static let storyboardName = "Placeholder"
 
-    case Navigation = "Navigation"
-    static func navigationViewController() -> UINavigationController {
-      return XCTStoryboardsScene.Placeholder.Navigation.viewController() as! UINavigationController
+    case NavigationScene = "Navigation"
+    static func instanciateNavigation() -> UINavigationController {
+      return XCTStoryboardsScene.Placeholder.NavigationScene.viewController() as! UINavigationController
     }
   }
   enum Wizard: String, StoryboardSceneType {
     static let storyboardName = "Wizard"
 
-    case Accept_CGU = "Accept-CGU"
-    static func acceptCGUViewController() -> UIViewController {
-      return XCTStoryboardsScene.Wizard.Accept_CGU.viewController()
+    case Accept_CGUScene = "Accept-CGU"
+    static func instanciateAcceptCGU() -> UIViewController {
+      return XCTStoryboardsScene.Wizard.Accept_CGUScene.viewController()
     }
 
-    case CreateAccount = "CreateAccount"
-    static func createAccountViewController() -> CreateAccViewController {
-      return XCTStoryboardsScene.Wizard.CreateAccount.viewController() as! CreateAccViewController
+    case CreateAccountScene = "CreateAccount"
+    static func instanciateCreateAccount() -> CreateAccViewController {
+      return XCTStoryboardsScene.Wizard.CreateAccountScene.viewController() as! CreateAccViewController
     }
 
-    case Preferences = "Preferences"
-    static func preferencesViewController() -> UITableViewController {
-      return XCTStoryboardsScene.Wizard.Preferences.viewController() as! UITableViewController
+    case PreferencesScene = "Preferences"
+    static func instanciatePreferences() -> UITableViewController {
+      return XCTStoryboardsScene.Wizard.PreferencesScene.viewController() as! UITableViewController
     }
 
-    case Validate_Password = "Validate_Password"
-    static func validatePasswordViewController() -> UIViewController {
-      return XCTStoryboardsScene.Wizard.Validate_Password.viewController()
+    case Validate_PasswordScene = "Validate_Password"
+    static func instanciateValidatePassword() -> UIViewController {
+      return XCTStoryboardsScene.Wizard.Validate_PasswordScene.viewController()
     }
   }
 }
