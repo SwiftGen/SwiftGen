@@ -18,7 +18,7 @@ let templatesCommand = command(
 ) { onlySubcommand in
   let customTemplates = (try? appSupportTemplatesPath.children()) ?? []
   let bundledTemplates = (try? bundledTemplatesPath.children()) ?? []
-  
+
   let printTemplates = { (prefix: String, list: [Path]) in
     for file in list where file.lastComponent.hasPrefix("\(prefix)-") && file.`extension` == "stencil" {
       let basename = file.lastComponentWithoutExtension
@@ -27,7 +27,7 @@ let templatesCommand = command(
       print("   - \(name)")
     }
   }
-  
+
   let subcommandsToList = onlySubcommand.isEmpty ? allSubcommands : [onlySubcommand]
   for prefix in subcommandsToList {
     print("\(prefix):")
@@ -36,7 +36,7 @@ let templatesCommand = command(
     print("  bundled:")
     printTemplates(prefix, bundledTemplates)
   }
-  
+
   print("---")
   print("You can add custom templates in ~/Library/Application Support/SwiftGen/templates.")
   print("Simply name them 'subcmd-customname.stencil' where subcmd is one of the swiftgen subcommand,")

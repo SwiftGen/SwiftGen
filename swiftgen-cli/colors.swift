@@ -15,21 +15,20 @@ let colorsCommand = command(
   Option<String>("enumName", "Name", flag: "e", description: "The name of the enum to generate"),
   Argument<Path>("FILE", description: "Colors.txt|.clr file to parse.", validator: fileExists)
 ) { output, templateName, templatePath, enumName, path in
-  
+
   let filePath = String(path)
-  
+
   let parser: ColorsFileParser
   if filePath.hasSuffix("clr") {
     let clrParser = CLRFileParser()
     clrParser.parseFile(filePath)
     parser = clrParser
-  }
-  else {
+  } else {
     let textParser = ColorsTextFileParser()
     try textParser.parseTextFile(filePath)
     parser = textParser
   }
-  
+
   do {
     let templateRealPath = try findTemplate("colors", templateShortName: templateName, templateFullPath: templatePath)
     let template = try GenumTemplate(path: templateRealPath)

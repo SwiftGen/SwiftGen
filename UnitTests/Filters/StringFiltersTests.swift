@@ -8,7 +8,7 @@ import XCTest
 @testable import GenumKit
 
 class StringFiltersrTests: XCTestCase {
-  
+
   func testLowerFirstWord() {
     let expectations = [
       "string": "string",
@@ -20,13 +20,13 @@ class StringFiltersrTests: XCTestCase {
       "__y_z!": "__y_z!",
       "PLEASESTOPSCREAMING": "pleasestopscreaming"
     ]
-    
+
     for (input, expected) in expectations {
       let result = try! StringFilters.lowerFirstWord(input) as? String
       XCTAssertEqual(result, expected)
     }
   }
-  
+
   func testSnakeToCamelCase() {
     let expectations = [
       "string": "String",
@@ -38,7 +38,7 @@ class StringFiltersrTests: XCTestCase {
       "__y_z": "__YZ",
       "PLEASE_STOP_SCREAMING!": "PLEASESTOPSCREAMING!"
     ]
-    
+
     for (input, expected) in expectations {
       let result = try! StringFilters.snakeToCamelCase(input) as? String
       XCTAssertEqual(result, expected)

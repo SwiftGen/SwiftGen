@@ -12,32 +12,32 @@ public final class StoryboardParser {
     let tag: String
     let customClass: String?
   }
-  
+
   struct Segue {
     let segueID: String
     let customClass: String?
   }
-  
+
   var storyboardsScenes = [String: Set<Scene>]()
   var storyboardsSegues = [String: Set<Segue>]()
-  
+
   public init() {}
-  
+
   public func addStoryboardAtPath(path: String) {
     let parser = NSXMLParser(contentsOfURL: NSURL.fileURLWithPath(path))
-    
-    class ParserDelegate : NSObject, NSXMLParserDelegate {
+
+    class ParserDelegate: NSObject, NSXMLParserDelegate {
       var scenes = Set<Scene>()
       var segues = Set<Segue>()
       var inScene = false
       var readyForFirstObject = false
       var readyForConnections = false
-      
+
       @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
         namespaceURI: String?, qualifiedName qName: String?,
-        attributes attributeDict: [String : String])
+        attributes attributeDict: [String: String])
       {
-        
+
         switch elementName {
         case "scene":
           inScene = true
@@ -60,7 +60,7 @@ public final class StoryboardParser {
           break
         }
       }
-      
+
       @objc func parser(parser: NSXMLParser, didEndElement elementName: String,
         namespaceURI: String?, qualifiedName qName: String?)
       {
@@ -76,16 +76,16 @@ public final class StoryboardParser {
         }
       }
     }
-    
+
     let delegate = ParserDelegate()
     parser?.delegate = delegate
     parser?.parse()
-    
+
     let storyboardName = ((path as NSString).lastPathComponent as NSString).stringByDeletingPathExtension
     storyboardsScenes[storyboardName] = delegate.scenes
     storyboardsSegues[storyboardName] = delegate.segues
   }
-  
+
   public func parseDirectory(path: String) {
     if let dirEnum = NSFileManager.defaultManager().enumeratorAtPath(path) {
       while let subPath = dirEnum.nextObject() as? NSString {
@@ -98,7 +98,7 @@ public final class StoryboardParser {
 }
 
 extension StoryboardParser.Scene: Equatable { }
-func ==(lhs: StoryboardParser.Scene, rhs: StoryboardParser.Scene) -> Bool {
+func == (lhs: StoryboardParser.Scene, rhs: StoryboardParser.Scene) -> Bool {
   return lhs.storyboardID == rhs.storyboardID && lhs.tag == rhs.tag && lhs.customClass == rhs.customClass
 }
 
@@ -109,7 +109,7 @@ extension StoryboardParser.Scene: Hashable {
 }
 
 extension StoryboardParser.Segue: Equatable { }
-func ==(lhs: StoryboardParser.Segue, rhs: StoryboardParser.Segue) -> Bool {
+func == (lhs: StoryboardParser.Segue, rhs: StoryboardParser.Segue) -> Bool {
   return lhs.segueID == rhs.segueID && lhs.customClass == rhs.customClass
 }
 

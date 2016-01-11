@@ -100,12 +100,12 @@ extension UIImage {
     case Banana = "Banana"
     case BigPear = "Big_Pear"
     case StopButtonEnabled = "stop.button.enabled"
-    
+
     var image: UIImage {
       return UIImage(named: self.rawValue)!
     }
   }
-      
+
   convenience init!(asset: Asset) {
     self.init(named: asset.rawValue)
   }
@@ -225,7 +225,7 @@ extension StoryboardSceneType {
     static func storyboard() -> UIStoryboard {
         return UIStoryboard(name: self.storyboardName, bundle: nil)
     }
-    
+
     static func initialViewController() -> UIViewController {
         return storyboard().instantiateInitialViewController()!
     }

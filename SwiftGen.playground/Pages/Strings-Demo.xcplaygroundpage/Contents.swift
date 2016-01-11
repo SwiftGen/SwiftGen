@@ -20,10 +20,10 @@ enum L10n {
     case ObjectOwnership(Int, String, String)
 }
 
-extension L10n : CustomStringConvertible {
-    var description : String { return self.string }
-    
-    var string : String {
+extension L10n: CustomStringConvertible {
+    var description: String { return self.string }
+
+    var string: String {
         switch self {
         case .AlertTitle:
             return L10n.tr("alert_title")
@@ -39,7 +39,7 @@ extension L10n : CustomStringConvertible {
             return L10n.tr("object.ownership", p0, p1, p2)
         }
     }
-    
+
     private static func tr(key: String, _ args: CVarArgType...) -> String {
         let format = NSLocalizedString(key, comment: "")
         return String(format: format, arguments: args)
@@ -52,12 +52,11 @@ func tr(key: L10n) -> String {
 
 
 
-//: #### Usage example
 
-let alertTitle = tr(.AlertTitle)
+let ale//: #### Usage example
+rtTitle = tr(.AlertTitle)
 let hello1 = tr(.Greetings("David", 29))
 let hello2 = L10n.Greetings("Olivier", 32) // Prints as a string in the console because it's CustomStringConvertible
 
 // note the inversion of parameters' order due to usage of %1$d, %2$@ and %1$@ in Localizable.strings
 tr(.ObjectOwnership(3, "Apples", "John"))
-

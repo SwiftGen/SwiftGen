@@ -16,7 +16,7 @@ let imagesCommand = command(
 ) { output, templateName, templatePath, enumName, path in
   let parser = AssetsCatalogParser()
   parser.parseDirectory(String(path))
-  
+
   do {
     let templateRealPath = try findTemplate("images", templateShortName: templateName, templateFullPath: templatePath)
     let template = try GenumTemplate(path: templateRealPath)

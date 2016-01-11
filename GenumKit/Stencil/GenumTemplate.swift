@@ -7,18 +7,18 @@
 import Stencil
 
 // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
-public class CompactTemplate : Template {
+public class CompactTemplate: Template {
   public override init(templateString: String) {
     let templateStringWithMarkedNewlines = templateString
       .stringByReplacingOccurrencesOfString("\n\n", withString: "\n\u{000b}\n")
       .stringByReplacingOccurrencesOfString("\n\n", withString: "\n\u{000b}\n")
     super.init(templateString: templateStringWithMarkedNewlines)
   }
-  
-  public override func render(context:Context? = nil) throws -> String {
+
+  public override func render(context: Context? = nil) throws -> String {
     return try removeExtraLines(super.render(context))
   }
-  
+
   // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
   private func removeExtraLines(str: String) -> String {
     let extraLinesRE = try! NSRegularExpression(pattern: "\\n([ \\t]*\\n)+", options: [])
@@ -31,7 +31,7 @@ public class CompactTemplate : Template {
 }
 
 // Register Genum-specific tags & filters
-public class GenumTemplate : CompactTemplate {
+public class GenumTemplate: CompactTemplate {
   public override init(templateString: String) {
     super.init(templateString: templateString)
     parser.registerTag("set", parser: SetNode.parse)

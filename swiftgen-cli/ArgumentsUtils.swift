@@ -33,7 +33,7 @@ extension Path : ArgumentConvertible {
 enum OutputDestination: ArgumentConvertible {
   case Console
   case File(Path)
-  
+
   init(parser: ArgumentParser) throws {
     guard let path = parser.shift() else {
       throw ArgumentError.MissingValue(argument: nil)
@@ -46,7 +46,7 @@ enum OutputDestination: ArgumentConvertible {
     case .File(let path): return path.description
     }
   }
-  
+
   func write(content: String) {
     switch self {
     case .Console:
@@ -67,7 +67,7 @@ enum OutputDestination: ArgumentConvertible {
 enum TemplateError: ErrorType, CustomStringConvertible {
   case NamedTemplateNotFound(name: String)
   case TemplatePathNotFound(path: Path)
-  
+
   var description: String {
     switch self {
     case .NamedTemplateNotFound(let name):
@@ -79,7 +79,7 @@ enum TemplateError: ErrorType, CustomStringConvertible {
 }
 
 extension Path {
-  static let applicationSupport = Path(NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory,.UserDomainMask, true).first!)
+  static let applicationSupport = Path(NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true).first!)
 }
 
 let appSupportTemplatesPath = Path.applicationSupport + "SwiftGen/templates"
@@ -93,7 +93,7 @@ func findTemplate(prefix: String, templateShortName: String, templateFullPath: S
     }
     return fullPath
   }
-  
+
   var path = appSupportTemplatesPath + "\(prefix)-\(templateShortName).stencil"
   if !path.isFile {
     path = bundledTemplatesPath + "\(prefix)-\(templateShortName).stencil"

@@ -18,11 +18,10 @@ let storyboardsCommand = command(
   let parser = StoryboardParser()
   if path.`extension` == "storyboard" {
     parser.addStoryboardAtPath(String(path))
-  }
-  else {
+  } else {
     parser.parseDirectory(String(path))
   }
-  
+
   do {
     let templateRealPath = try findTemplate("storyboards", templateShortName: templateName, templateFullPath: templatePath)
     let template = try GenumTemplate(path: templateRealPath)

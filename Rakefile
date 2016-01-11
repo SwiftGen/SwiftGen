@@ -72,7 +72,7 @@ desc "Install the binary in $bindir, frameworks — without the Swift dylibs —
      "(defaults $bindir=./swiftgen/bin/, $fmkdir=$bindir/../lib, $tpldir=$bindir/../templates"
 task 'install:light', [:bindir, :fmkdir, :tpldir] => :build do |_, args|
   (bindir, fmkdir, tpldir) = defaults(args)
-  
+
   print_info "== Installing binary in #{bindir} =="
   sh %Q(mkdir -p "#{bindir}")
   sh %Q(cp -f "#{BUILD_DIR}/#{BIN_NAME}" "#{bindir}")

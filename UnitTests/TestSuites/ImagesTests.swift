@@ -14,59 +14,59 @@ import GenumKit
  */
 
 class ImagesTests: XCTestCase {
-  
+
   func testEmpty() {
     let parser = AssetsCatalogParser()
-    
+
     let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
     let result = try! template.render(parser.stencilContext())
-    
+
     let expected = self.fixtureString("Images-Empty.swift.out")
     XCTDiffStrings(result, expected)
   }
-  
+
   func testEntriesWithDefaults() {
     let parser = AssetsCatalogParser()
     parser.addImageName("Green-Apple")
     parser.addImageName("Red apple")
     parser.addImageName("2-pears")
-    
+
     let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
     let result = try! template.render(parser.stencilContext())
-    
+
     let expected = self.fixtureString("Images-Entries-Defaults.swift.out")
     XCTDiffStrings(result, expected)
   }
-  
+
   func testFileWithDefaults() {
     let parser = AssetsCatalogParser()
     parser.parseDirectory(fixturePath("Images.xcassets"))
-    
+
     let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
     let result = try! template.render(parser.stencilContext())
-    
+
     let expected = self.fixtureString("Images-File-Defaults.swift.out")
     XCTDiffStrings(result, expected)
   }
-  
+
   func testFileWithAllValuesTemplate() {
     let parser = AssetsCatalogParser()
     parser.parseDirectory(fixturePath("Images.xcassets"))
-    
+
     let template = GenumTemplate(templateString: fixtureString("images-allvalues.stencil"))
     let result = try! template.render(parser.stencilContext())
-    
+
     let expected = self.fixtureString("Images-File-AllValues.swift.out")
     XCTDiffStrings(result, expected)
   }
-  
+
   func testFileWithCustomName() {
     let parser = AssetsCatalogParser()
     parser.parseDirectory(fixturePath("Images.xcassets"))
-    
+
     let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
     let result = try! template.render(parser.stencilContext(enumName: "XCTImages"))
-    
+
     let expected = self.fixtureString("Images-File-CustomName.swift.out")
     XCTDiffStrings(result, expected)
   }

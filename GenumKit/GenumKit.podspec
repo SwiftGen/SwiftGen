@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/AliSoftware/SwiftGen"
   s.license      = "MIT"
   s.author       = { "Olivier Halligon" => "olivier@halligon.net" }
-  
+
   s.platform = :osx, '10.9'
 
   s.source       = { :git => "https://github.com/AliSoftware/SwiftGen.git", :tag => s.version.to_s }

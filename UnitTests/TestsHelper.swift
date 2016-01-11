@@ -8,15 +8,15 @@ import Foundation
 import XCTest
 
 func diff(lhs: String, _ rhs: String) -> String {
-  var firstDiff : Int? = nil
+  var firstDiff: Int? = nil
   let nl = NSCharacterSet.newlineCharacterSet()
   let lhsLines = lhs.componentsSeparatedByCharactersInSet(nl)
   let rhsLines = rhs.componentsSeparatedByCharactersInSet(nl)
-  
+
   for (idx, pair) in zip(lhsLines, rhsLines).enumerate() {
     if pair.0 != pair.1 {
       firstDiff = idx
-      break;
+      break
     }
   }
   if let idx = firstDiff {
@@ -33,17 +33,17 @@ func XCTDiffStrings(lhs: String, _ rhs: String) {
 }
 
 extension XCTestCase {
-  var fixturesDir : String {
+  var fixturesDir: String {
     return NSBundle(forClass: self.dynamicType).resourcePath!
   }
-  
+
   func fixturePath(name: String) -> String {
     guard let path = NSBundle(forClass: self.dynamicType).pathForResource(name, ofType: "") else {
       fatalError("Unable to find fixture \"\(name)\"")
     }
     return path
   }
-  
+
   func fixtureString(name: String, encoding: UInt = NSUTF8StringEncoding) -> String {
     do {
       return try NSString(contentsOfFile: fixturePath(name), encoding: encoding) as String

@@ -6,7 +6,7 @@
 
 import Stencil
 
-enum FilterError : ErrorType {
+enum FilterError: ErrorType {
   case InvalidInputType
 }
 
@@ -15,14 +15,14 @@ struct StringFilters {
     guard let value = value as? String else { throw FilterError.InvalidInputType }
     return swiftIdentifier(fromString: value, replaceWithUnderscores: true)
   }
-  
+
   /* - If the string starts with only one uppercase letter, lowercase that first letter
    * - If the string starts with multiple uppercase letters, lowercase those first letters up to the one before the last uppercase one
    * e.g. "PeoplePicker" gives "peoplePicker" but "URLChooser" gives "urlChooser"
    */
   static func lowerFirstWord(value: Any?) throws -> Any? {
     guard let string = value as? String else { throw FilterError.InvalidInputType }
-    
+
     let cs = NSCharacterSet.uppercaseLetterCharacterSet()
     let scalars = string.unicodeScalars
     let start = scalars.startIndex
@@ -36,12 +36,12 @@ struct StringFilters {
     let transformed = String(scalars[start..<idx]).lowercaseString + String(scalars[idx..<scalars.endIndex])
     return transformed
   }
-  
+
   static func titlecase(value: Any?) throws -> Any? {
     guard let string = value as? String else { throw FilterError.InvalidInputType }
     return titlecase(string)
   }
-  
+
   static func snakeToCamelCase(value: Any?) throws -> Any? {
     guard let string = value as? String else { throw FilterError.InvalidInputType }
 
@@ -50,18 +50,18 @@ struct StringFilters {
       guard scalar == "_" else { break }
       prefixUnderscores += "_"
     }
-    
+
     let comps = string.componentsSeparatedByString("_")
     return prefixUnderscores + comps.map { titlecase($0) }.joinWithSeparator("")
   }
-  
+
   /**
   This returns the string with its first parameter uppercased.
   - note: This is quite similar to `capitalise` except that this filter doesn't lowercase
           the rest of the string but keep it untouched.
-  
+
   - parameter string: The string to titleCase
-  
+
   - returns: The string with its first character uppercased, and the rest of the string unchanged.
   */
   private static func titlecase(string: String) -> String {
@@ -73,7 +73,7 @@ struct StringFilters {
 struct ArrayFilters {
   static func join(value: Any?) throws -> Any? {
     guard let array = value as? [String] else { throw FilterError.InvalidInputType }
-    
+
     return array.joinWithSeparator(", ")
   }
 }
@@ -91,7 +91,7 @@ struct NumFilters {
 
   static func percent(value: Any?) throws -> Any? {
     guard let value = value as? Float else { throw FilterError.InvalidInputType }
-    
+
     let percent = Int(value * 100.0)
     return "\(percent)%"
   }
