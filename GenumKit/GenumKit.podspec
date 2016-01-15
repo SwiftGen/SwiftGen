@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
                    GenumKit is a framework to build constants using enums for:
                     - UIImages from your Assets Catalogs
-                    - Storyboards, to instanciate scenes and identify segues using constants
+                    - Storyboards, to instantiate scenes and identify segues using constants
                     - UIColors, to have named colors using an enums
                     - Localizable.strings so that you can format your localized text way easier!
 
