@@ -11,12 +11,12 @@
   [Olivier Halligon](https://github.com/AliSoftware)
    * Now `cases` names are suffixed with `…Scene` and `static func` are prefixed with `instantiate…` to lower the risks of a name conflict with your ViewController classes.
    * The old template is still available but has been renamed `storyboards-uppercase.stencil`
-* Added support for `*.clr` files (files to store `NSColorList`'s presented in Color Picker on "Color Palettes" tab)
+* Added support for `*.clr` files (files to store `NSColorList`'s presented in Color Picker on "Color Palettes" tab)  
   [Ilya Puchka](https://github.com/ilyapuchka), [#81](https://github.com/AliSoftware/SwiftGen/pull/81)
 
 #### Fixes
 
-* Fixed typos in code and descriptions: _instanciate_ -> _instantiate_
+* Fixed typos in code and descriptions: _instanciate_ -> _instantiate_  
   [Pan Kolega](https://github.com/pankolega), [#83](https://github.com/AliSoftware/SwiftGen/pull/83)
 
 ## 0.7.4
