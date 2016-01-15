@@ -42,7 +42,7 @@ struct StoryboardScene {
     static let storyboardName = "Dependency"
 
     case DependentScene = "Dependent"
-    static func instanciateDependent() -> UIViewController {
+    static func instantiateDependent() -> UIViewController {
       return StoryboardScene.Dependency.DependentScene.viewController()
     }
   }
@@ -50,22 +50,22 @@ struct StoryboardScene {
     static let storyboardName = "Message"
 
     case ComposerScene = "Composer"
-    static func instanciateComposer() -> UIViewController {
+    static func instantiateComposer() -> UIViewController {
       return StoryboardScene.Message.ComposerScene.viewController()
     }
 
     case MessagesListScene = "MessagesList"
-    static func instanciateMessagesList() -> UITableViewController {
+    static func instantiateMessagesList() -> UITableViewController {
       return StoryboardScene.Message.MessagesListScene.viewController() as! UITableViewController
     }
 
     case NavCtrlScene = "NavCtrl"
-    static func instanciateNavCtrl() -> UINavigationController {
+    static func instantiateNavCtrl() -> UINavigationController {
       return StoryboardScene.Message.NavCtrlScene.viewController() as! UINavigationController
     }
 
     case URLChooserScene = "URLChooser"
-    static func instanciateURLChooser() -> XXPickerViewController {
+    static func instantiateURLChooser() -> XXPickerViewController {
       return StoryboardScene.Message.URLChooserScene.viewController() as! XXPickerViewController
     }
   }
@@ -73,7 +73,7 @@ struct StoryboardScene {
     static let storyboardName = "Placeholder"
 
     case NavigationScene = "Navigation"
-    static func instanciateNavigation() -> UINavigationController {
+    static func instantiateNavigation() -> UINavigationController {
       return StoryboardScene.Placeholder.NavigationScene.viewController() as! UINavigationController
     }
   }
@@ -81,22 +81,22 @@ struct StoryboardScene {
     static let storyboardName = "Wizard"
 
     case Accept_CGUScene = "Accept-CGU"
-    static func instanciateAcceptCGU() -> UIViewController {
+    static func instantiateAcceptCGU() -> UIViewController {
       return StoryboardScene.Wizard.Accept_CGUScene.viewController()
     }
 
     case CreateAccountScene = "CreateAccount"
-    static func instanciateCreateAccount() -> CreateAccViewController {
+    static func instantiateCreateAccount() -> CreateAccViewController {
       return StoryboardScene.Wizard.CreateAccountScene.viewController() as! CreateAccViewController
     }
 
     case PreferencesScene = "Preferences"
-    static func instanciatePreferences() -> UITableViewController {
+    static func instantiatePreferences() -> UITableViewController {
       return StoryboardScene.Wizard.PreferencesScene.viewController() as! UITableViewController
     }
 
     case Validate_PasswordScene = "Validate_Password"
-    static func instanciateValidatePassword() -> UIViewController {
+    static func instantiateValidatePassword() -> UIViewController {
       return StoryboardScene.Wizard.Validate_PasswordScene.viewController()
     }
   }

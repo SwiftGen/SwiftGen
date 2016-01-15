@@ -9,7 +9,7 @@
   [Adam Gask](https://github.com/AJ9), [#79](https://github.com/AliSoftware/SwiftGen/pull/79)
 * Updated `storyboards-default.stencil` to better avoid name confusions.  
   [Olivier Halligon](https://github.com/AliSoftware)
-   * Now `cases` names are suffixed with `…Scene` and `static func` are prefixed with `instanciate…` to lower the risks of a name conflict with your ViewController classes.
+   * Now `cases` names are suffixed with `…Scene` and `static func` are prefixed with `instantiate…` to lower the risks of a name conflict with your ViewController classes.
    * The old template is still available but has been renamed `storyboards-uppercase.stencil`
 * Added support for `*.clr` files (files to store `NSColorList`'s presented in Color Picker on "Color Palettes" tab)
   [Ilya Puchka](https://github.com/ilyapuchka), [#81](https://github.com/AliSoftware/SwiftGen/pull/81)
@@ -161,7 +161,7 @@ SwiftGen now comes bundled with some alternate templates, especially `colors-raw
 * Changed the "namespacing `enum`" in `UIStoryboard` to a `struct` to avoid confusion with the inner enums
 * The `UIStoryboard.Scene` enums now use `static func` instead of `static var` for the dedicated `ViewController` constructors ^(†)
 
-^(†) _because it feels more explicit that calling a function like `UIStoryboard.Scene.Wizard.validatePasswordViewController()` will actually **instanciate** a new `ViewController`, rather than returning an existing one._
+^(†) _because it feels more explicit that calling a function like `UIStoryboard.Scene.Wizard.validatePasswordViewController()` will actually **instantiate** a new `ViewController`, rather than returning an existing one._
 
 ## 0.2.0
 

@@ -48,11 +48,11 @@ struct {{sceneEnumName}} {
 
     case {{sceneID}}Scene = "{{scene.identifier}}"
     {% if scene.class %}
-    static func instanciate{{sceneID|snakeToCamelCase}}() -> {{scene.class}} {
+    static func instantiate{{sceneID|snakeToCamelCase}}() -> {{scene.class}} {
       return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.viewController() as! {{scene.class}}
     }
     {% else %}
-    static func instanciate{{sceneID|snakeToCamelCase}}() -> UIViewController {
+    static func instantiate{{sceneID|snakeToCamelCase}}() -> UIViewController {
       return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.viewController()
     }
     {% endif %}
