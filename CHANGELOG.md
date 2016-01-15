@@ -1,6 +1,13 @@
 # SwiftGen CHANGELOG
 
 ---
+## Master
+
+#### Fixes
+
+* Fixed typos in code and descriptions: _instanciate_ -> _instantiate_. Please note that the default template used for storyboards `storyboards-default.stencil` had to be modified, so make sure to update your codebase accordingly.  
+  [Pan Kolega](https://github.com/pankolega), [#83](https://github.com/AliSoftware/SwiftGen/pull/83)
+
 ## 0.7.5
 
 #### Enhancements
@@ -13,11 +20,6 @@
    * The old template is still available but has been renamed `storyboards-uppercase.stencil`
 * Added support for `*.clr` files (files to store `NSColorList`'s presented in Color Picker on "Color Palettes" tab)  
   [Ilya Puchka](https://github.com/ilyapuchka), [#81](https://github.com/AliSoftware/SwiftGen/pull/81)
-
-#### Fixes
-
-* Fixed typos in code and descriptions: _instanciate_ -> _instantiate_. Please note that `storyboards-default` had to be modified, so make sure to update your codebase accordingly.  
-  [Pan Kolega](https://github.com/pankolega), [#83](https://github.com/AliSoftware/SwiftGen/pull/83)
 
 ## 0.7.4
 
