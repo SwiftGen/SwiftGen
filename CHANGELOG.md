@@ -16,7 +16,7 @@
 
 #### Fixes
 
-* Fixed typos in code and descriptions: _instanciate_ -> _instantiate_  
+* Fixed typos in code and descriptions: _instanciate_ -> _instantiate_. Please note that `storyboards-default` had to be modified, so make sure to update your codebase accordingly.  
   [Pan Kolega](https://github.com/pankolega), [#83](https://github.com/AliSoftware/SwiftGen/pull/83)
 
 ## 0.7.4
