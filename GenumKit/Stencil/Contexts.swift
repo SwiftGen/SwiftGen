@@ -104,6 +104,7 @@ extension StoryboardParser {
 /* MARK: - Stencil Context for Strings
 
  - `enumName`: `String`
+ - `tableName`: `String`
  - `strings`: `Array`
     - `key`: `String`
     - `translation`: `String`
