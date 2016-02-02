@@ -3,39 +3,46 @@
 {% if strings %}
 import Foundation
 
-enum {{enumName}} {
-  {% for string in strings %}
-  /// {{string.translation}}
-  case {{string.key|swiftIdentifier|snakeToCamelCase}}{% if string.params %}({{string.params.types|join}}){% endif %}
-  {% endfor %}
+protocol Localizable: CustomStringConvertible {
+  static var tableName: String { get }
+  var localized: String { get }
 }
 
-extension {{enumName}}: CustomStringConvertible {
-  var description: String { return self.string }
+extension Localizable {
+  var description: String { get { return self.localized } }
+}
 
-  var string: String {
-    switch self {
-      {% for string in strings %}
-      {% if string.params %}
-      case .{{string.key|swiftIdentifier|snakeToCamelCase}}({{string.params.declarations|join}}):
-        return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
-      {% else %}
-      case .{{string.key|swiftIdentifier|snakeToCamelCase}}:
-        return {{enumName}}.tr("{{string.key}}")
-      {% endif %}
-      {% endfor %}
+struct {{enumName}} {
+  static func tr(table: String, _ key: String, _ params: CVarArgType...) -> String {
+    let format = NSLocalizedString(key, tableName: table, comment: "")
+    return params.count == 0 ? format : String(format: format, args: params)
+  }
+
+  enum {{tableName}}Table: Localizable {
+    static let tableName = "{{tableName}}"
+
+    {% for string in strings %}
+    /// {{string.translation}}
+    case {{string.key|swiftIdentifier|snakeToCamelCase}}{% if string.params %}({{string.params.types|join}}){% endif %}
+    {% endfor %}
+
+    var localized: String {
+      switch self {
+        {% for string in strings %}
+        {% if string.params %}
+        case .{{string.key|swiftIdentifier|snakeToCamelCase}}({{string.params.declarations|join}}):
+        return {{enumName}}.tr({{tableName}}Table.tableName, "{{string.key}}", {{string.params.names|join}})
+        {% else %}
+        case .{{string.key|swiftIdentifier|snakeToCamelCase}}:
+        return {{enumName}}.tr({{tableName}}Table.tableName, "{{string.key}}")
+        {% endif %}
+        {% endfor %}
+      }
     }
   }
-
-  private static func tr(key: String, _ args: CVarArgType...) -> String {
-    let format = NSLocalizedString(key, comment: "")
-    return String(format: format, arguments: args)
-  }
 }
 
-func tr(key: {{enumName}}) -> String {
-  return key.string
-}
+func tr(key: Localizable) -> String { return key.localized }
 {% else %}
 // No string found
 {% endif %}
