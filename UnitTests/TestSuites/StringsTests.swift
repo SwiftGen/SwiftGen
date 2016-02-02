@@ -75,7 +75,7 @@ class StringsTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
 
-  func testFileWithCustomName() {
+  func testFileWithCustomStructName() {
     let parser = StringsFileParser()
     try! parser.parseStringsFile(fixturePath("Localizable.strings"))
 

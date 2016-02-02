@@ -2,47 +2,54 @@
 
 import Foundation
 
-enum L10n {
-  /// Titre de l'alerte
-  case AlertTitle
-  /// Contenu détaillé de l'alerte
-  case AlertMessage
-  /// Bonjour, mon nom est %@ et j'ai %d ans
-  case Greetings(String, Int)
-  /// Vous avez %d pommes
-  case ApplesCount(Int)
-  /// Ces %d bananes appartiennent à %@.
-  case BananasOwner(Int, String)
-  /// Ce sont les %1$d %2$@ de %3$@.
-  case ObjectOwnership(Int, String, String)
+protocol Localizable: CustomStringConvertible {
+  static var tableName: String { get }
+  var localized: String { get }
 }
 
-extension L10n: CustomStringConvertible {
-  var description: String { return self.string }
+extension Localizable {
+  var description: String { get { return self.localized } }
+}
 
-  var string: String {
-    switch self {
-      case .AlertTitle:
-        return L10n.tr("alert_title")
-      case .AlertMessage:
-        return L10n.tr("alert_message")
-      case .Greetings(let p0, let p1):
-        return L10n.tr("greetings", p0, p1)
-      case .ApplesCount(let p0):
-        return L10n.tr("apples.count", p0)
-      case .BananasOwner(let p0, let p1):
-        return L10n.tr("bananas.owner", p0, p1)
-      case .ObjectOwnership(let p0, let p1, let p2):
-        return L10n.tr("object.ownership", p0, p1, p2)
+struct L10n {
+  static func tr(table: String, _ key: String, _ params: CVarArgType...) -> String {
+    let format = NSLocalizedString(key, tableName: table, comment: "")
+    return params.count == 0 ? format : String(format: format, args: params)
+  }
+
+  enum LocalizableTable: Localizable {
+    static let tableName = "Localizable"
+
+    /// Titre de l'alerte
+    case AlertTitle
+    /// Contenu détaillé de l'alerte
+    case AlertMessage
+    /// Bonjour, mon nom est %@ et j'ai %d ans
+    case Greetings(String, Int)
+    /// Vous avez %d pommes
+    case ApplesCount(Int)
+    /// Ces %d bananes appartiennent à %@.
+    case BananasOwner(Int, String)
+    /// Ce sont les %1$d %2$@ de %3$@.
+    case ObjectOwnership(Int, String, String)
+
+    var localized: String {
+      switch self {
+        case .AlertTitle:
+        return L10n.tr(LocalizableTable.tableName, "alert_title")
+        case .AlertMessage:
+        return L10n.tr(LocalizableTable.tableName, "alert_message")
+        case .Greetings(let p0, let p1):
+        return L10n.tr(LocalizableTable.tableName, "greetings", p0, p1)
+        case .ApplesCount(let p0):
+        return L10n.tr(LocalizableTable.tableName, "apples.count", p0)
+        case .BananasOwner(let p0, let p1):
+        return L10n.tr(LocalizableTable.tableName, "bananas.owner", p0, p1)
+        case .ObjectOwnership(let p0, let p1, let p2):
+        return L10n.tr(LocalizableTable.tableName, "object.ownership", p0, p1, p2)
+      }
     }
   }
-
-  private static func tr(key: String, _ args: CVarArgType...) -> String {
-    let format = NSLocalizedString(key, comment: "")
-    return String(format: format, arguments: args)
-  }
 }
 
-func tr(key: L10n) -> String {
-  return key.string
-}
+func tr(key: Localizable) -> String { return key.localized }
