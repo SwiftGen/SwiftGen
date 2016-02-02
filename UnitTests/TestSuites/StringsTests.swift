@@ -85,6 +85,18 @@ class StringsTests: XCTestCase {
     let expected = self.fixtureString("Strings-File-CustomName.swift.out")
     XCTDiffStrings(result, expected)
   }
+    
+  func testEntriesWithCustomTableName() {
+    let parser = StringsFileParser()
+    parser.addEntry(StringsFileParser.Entry(key: "Title", translation: "My awesome title"))
+    parser.addEntry(StringsFileParser.Entry(key: "Greetings", translation: "Hello, my name is %@ and I'm %d", types: .Object, .Int))
+    
+    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
+    let result = try! template.render(parser.stencilContext(enumName: "L10n", tableName: "Custom"))
+    
+    let expected = self.fixtureString("Strings-Entries-CustomTable.swift.out")
+    XCTDiffStrings(result, expected)
+  }
 
   ////////////////////////////////////////////////////////////////////////
 

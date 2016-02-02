@@ -1,0 +1,39 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+
+protocol Localizable: CustomStringConvertible {
+  static var tableName: String { get }
+  var localized: String { get }
+}
+
+extension Localizable {
+  var description: String { get { return self.localized } }
+}
+
+struct L10n {
+  static func tr(table: String, _ key: String, _ params: CVarArgType...) -> String {
+    let format = NSLocalizedString(key, tableName: table, comment: "")
+    return params.count == 0 ? format : String(format: format, args: params)
+  }
+
+  enum CustomTable: Localizable {
+    static let tableName = "Custom"
+
+    /// My awesome title
+    case Title
+    /// Hello, my name is %@ and I'm %d
+    case Greetings(String, Int)
+
+    var localized: String {
+      switch self {
+        case .Title:
+        return L10n.tr(CustomTable.tableName, "Title")
+        case .Greetings(let p0, let p1):
+        return L10n.tr(CustomTable.tableName, "Greetings", p0, p1)
+      }
+    }
+  }
+}
+
+func tr(key: Localizable) -> String { return key.localized }
