@@ -43,6 +43,7 @@ struct {{enumName}} {
 }
 
 func tr(key: Localizable) -> String { return key.localized }
+func tr(key: {{enumName}}.{{tableName}}Table) -> String { return key.localized }
 {% else %}
 // No string found
 {% endif %}
