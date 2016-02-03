@@ -53,3 +53,4 @@ struct XCTLoc {
 }
 
 func tr(key: Localizable) -> String { return key.localized }
+func tr(key: XCTLoc.LocalizableTable) -> String { return key.localized }

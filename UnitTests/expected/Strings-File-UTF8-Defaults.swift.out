@@ -53,3 +53,4 @@ struct L10n {
 }
 
 func tr(key: Localizable) -> String { return key.localized }
+func tr(key: L10n.LocalizableTable) -> String { return key.localized }
