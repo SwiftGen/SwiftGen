@@ -192,6 +192,7 @@ struct L10n {
 }
 
 func tr(key: Localizable) -> String { return key.localized }
+func tr(key: L10n.LocalizableTable) -> String { return key.localized }
 ```
 
 ### Usage Example
@@ -203,15 +204,15 @@ let title = L10n.LocalizableTable.AlertTitle.localized
 // -> "Title of the Alert"
 
 // Alternative syntax, shorter
-let msg = tr(L10n.LocalizableTable.AlertMessage)
+let msg = tr(.AlertMessage)
 // -> "Some alert body there"
 
 // Strings with parameters
-let nbApples = tr(L10n.LocalizableTable.ApplesCount(5))
+let nbApples = tr(.ApplesCount(5))
 // -> "You have 5 apples"
 
 // More parameters of various types!
-let ban = tr(L10n.LocalizableTable.BananasOwner(2, "John"))
+let ban = tr(.BananasOwner(2, "John"))
 // -> "Those 2 bananas belong to John."
 ```
 
