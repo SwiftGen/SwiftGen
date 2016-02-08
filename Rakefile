@@ -85,8 +85,8 @@ task 'install:light', [:bindir, :fmkdir, :tpldir] => :build do |_, args|
   sh %Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}")
 
   print_info "== Installing templates in #{tpldir} =="
-  sh %Q(mkdir -p #{tpldir})
-  sh %Q(cp -r #{TEMPLATES_SRC_DIR}/ #{tpldir})
+  sh %Q(mkdir -p "#{tpldir}")
+  sh %Q(cp -r "#{TEMPLATES_SRC_DIR}/" "#{tpldir}")
 end
 
 desc "Install the binary in $bindir, frameworks — including Swift dylibs — in $fmkdir, and templates in $tpldir\n" \
