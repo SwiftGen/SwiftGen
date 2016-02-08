@@ -74,15 +74,15 @@ task 'install:light', [:bindir, :fmkdir, :tpldir] => :build do |_, args|
   (bindir, fmkdir, tpldir) = defaults(args)
 
   print_info "== Installing binary in #{bindir} =="
-  sh %Q(mkdir -p "#{bindir}")
-  sh %Q(cp -f "#{BUILD_DIR}/#{BIN_NAME}" "#{bindir}")
+  sh %Q(mkdir -p #{bindir})
+  sh %Q(cp -f "#{BUILD_DIR}/#{BIN_NAME}" #{bindir})
 
   print_info "== Installing frameworks in #{fmkdir} =="
-  sh %Q(mkdir -p "#{fmkdir}")
+  sh %Q(mkdir -p #{fmkdir})
   DEPENDENCIES.each do |fmk|
-    sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}.framework" "#{fmkdir}")
+    sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}.framework" #{fmkdir})
   end
-  sh %Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}")
+  sh %Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" #{bindir}/#{BIN_NAME})
 
   print_info "== Installing templates in #{tpldir} =="
   sh %Q(mkdir -p #{tpldir})
@@ -95,10 +95,10 @@ task :install, [:bindir, :fmkdir, :tpldir] => 'install:light' do |_, args|
   (bindir, fmkdir, tpldir) = defaults(args)
 
   print_info "== Linking to standalone Swift dylibs =="
-  sh %Q(xcrun swift-stdlib-tool --copy --scan-executable "#{bindir}/#{BIN_NAME}" --platform macosx --destination "#{fmkdir}")
+  sh %Q(xcrun swift-stdlib-tool --copy --scan-executable #{bindir}/#{BIN_NAME} --platform macosx --destination #{fmkdir})
   toolchain_dir = `xcrun -find swift-stdlib-tool`.chomp
   xcode_rpath = File.dirname(File.dirname(toolchain_dir)) + '/lib/swift/macosx'
-  sh %Q(xcrun install_name_tool -delete_rpath "#{xcode_rpath}" "#{bindir}/#{BIN_NAME}")
+  sh %Q(xcrun install_name_tool -delete_rpath "#{xcode_rpath}" #{bindir}/#{BIN_NAME})
 end
 
 ## [ Tests & Clean ] ##########################################################
