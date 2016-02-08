@@ -28,7 +28,7 @@ def defaults(args)
   bindir = args.bindir.nil? || args.bindir.empty? ? Pathname.new('./build/swiftgen/bin')   : Pathname.new(args.bindir)
   fmkdir = args.fmkdir.nil? || args.fmkdir.empty? ? bindir + '../lib'   : Pathname.new(args.fmkdir)
   tpldir = args.tpldir.nil? || args.tpldir.empty? ? bindir + '../templates' : Pathname.new(args.tpldir)
-  [bindir, fmkdir, tpldir]
+  [bindir, fmkdir, tpldir].map(&:expand_path)
 end
 
 task :check_xcode do
@@ -85,8 +85,8 @@ task 'install:light', [:bindir, :fmkdir, :tpldir] => :build do |_, args|
   sh %Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}")
 
   print_info "== Installing templates in #{tpldir} =="
-  sh %Q(mkdir -p #{tpldir})
-  sh %Q(cp -r #{TEMPLATES_SRC_DIR}/ #{tpldir})
+  sh %Q(mkdir -p "#{tpldir}")
+  sh %Q(cp -r "#{TEMPLATES_SRC_DIR}/" "#{tpldir}")
 end
 
 desc "Install the binary in $bindir, frameworks — including Swift dylibs — in $fmkdir, and templates in $tpldir\n" \
