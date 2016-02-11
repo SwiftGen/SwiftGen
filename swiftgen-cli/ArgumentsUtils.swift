@@ -62,6 +62,15 @@ enum OutputDestination: ArgumentConvertible {
   }
 }
 
+// MARK: Change comparsion
+
+extension Path {
+  func isContentEqualTo(string: String) throws -> Bool {
+    let content = try read(NSUTF8StringEncoding)
+    return content == string
+  }
+}
+
 // MARK: Template Arguments
 
 enum TemplateError: ErrorType, CustomStringConvertible {
