@@ -47,6 +47,10 @@ enum OutputDestination: ArgumentConvertible {
     }
   }
 
+  func writeIfChanged(content: String) {
+    write(content, onlyIfChanged: true)
+  }
+  
   func write(content: String, onlyIfChanged: Bool = false) {
     switch self {
     case .Console:
