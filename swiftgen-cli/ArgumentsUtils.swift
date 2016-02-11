@@ -47,12 +47,16 @@ enum OutputDestination: ArgumentConvertible {
     }
   }
 
-  func write(content: String) {
+  func write(content: String, onlyIfChanged: Bool = false) {
     switch self {
     case .Console:
       print(content)
     case .File(let path):
       do {
+        if try path.isContentEqualTo(content) && onlyIfChanged {
+          print("Skipping write as content is unchanged")
+          return
+        }
         try path.write(content)
         print("File written: \(path)")
       } catch let e as NSError {
