@@ -53,9 +53,8 @@ enum OutputDestination: ArgumentConvertible {
       print(content)
     case .File(let path):
       do {
-        if try path.isContentEqualTo(content) && onlyIfChanged {
-          print("Skipping write as content is unchanged")
-          return
+        if try onlyIfChanged && path.read(NSUTF8StringEncoding) == content {
+          return print("Not writing the file as content is unchanged")
         }
         try path.write(content)
         print("File written: \(path)")
@@ -63,15 +62,6 @@ enum OutputDestination: ArgumentConvertible {
         print("Error: \(e)")
       }
     }
-  }
-}
-
-// MARK: Change comparsion
-
-extension Path {
-  func isContentEqualTo(string: String) throws -> Bool {
-    let content = try read(NSUTF8StringEncoding)
-    return content == string
   }
 }
 
