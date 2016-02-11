@@ -34,7 +34,7 @@ let colorsCommand = command(
     let template = try GenumTemplate(path: templateRealPath)
     let context = parser.stencilContext(enumName: enumName)
     let rendered = try template.render(context)
-    output.write(rendered)
+    output.writeIfChanged(rendered)
   } catch {
     print("Failed to render template \(error)")
   }
