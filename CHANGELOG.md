@@ -3,6 +3,11 @@
 ---
 ## Master
 
+#### Enhancements
+
+* Fixed build loop by changing SwiftGen to only write to the output file if the generated code is different from the file contents.
+  [Mathias Nagler](https://github.com/mathiasnagler), [#90](https://github.com/AliSoftware/SwiftGen/pull/90)
+
 #### Fixes
 
 * Fixed typos in code and descriptions: _instanciate_ -> _instantiate_. Please note that the default template used for storyboards `storyboards-default.stencil` had to be modified, so make sure to update your codebase accordingly.  
@@ -188,7 +193,7 @@ Considered to be the first cleaned-up version, far from finished but really usab
 * Introducing `SwiftGenColorEnumBuilder`
 * `swiftgen-colors` CLI
 * Added ability to choose indentation
-* 
+*
 
 ## 0.0.3
 
@@ -208,4 +213,3 @@ Initial version:
 * Mostly testing stuff in a playground
 * Introducing `SwiftGenAssetsEnumBuilder` class
 * `swiftgen-assets` CLI
-
