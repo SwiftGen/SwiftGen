@@ -5,13 +5,15 @@
 
 #### Enhancements
 
-* Fixed build loop by changing SwiftGen to only write to the output file if the generated code is different from the file contents.
+* Fixed build loop by changing SwiftGen to only write to the output file if the generated code is different from the file contents.  
   [Mathias Nagler](https://github.com/mathiasnagler), [#90](https://github.com/AliSoftware/SwiftGen/pull/90)
 
 #### Fixes
 
 * Fixed typos in code and descriptions: _instanciate_ -> _instantiate_. Please note that the default template used for storyboards `storyboards-default.stencil` had to be modified, so make sure to update your codebase accordingly.  
   [Pan Kolega](https://github.com/pankolega), [#83](https://github.com/AliSoftware/SwiftGen/pull/83)
+* Fixed issue in `Rakefile` when trying to install via `rake` in a path containing `~`.  
+  [Jesse Armand](https://github.com/jessearmand), [#88](https://github.com/AliSoftware/SwiftGen/pull/88)
 
 ## 0.7.5
 
