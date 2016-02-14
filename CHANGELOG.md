@@ -193,7 +193,6 @@ Considered to be the first cleaned-up version, far from finished but really usab
 * Introducing `SwiftGenColorEnumBuilder`
 * `swiftgen-colors` CLI
 * Added ability to choose indentation
-*
 
 ## 0.0.3
 

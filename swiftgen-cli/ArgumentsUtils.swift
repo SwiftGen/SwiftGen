@@ -53,7 +53,7 @@ enum OutputDestination: ArgumentConvertible {
       print(content)
     case .File(let path):
       do {
-        if try path.exists && onlyIfChanged && path.read(NSUTF8StringEncoding) == content {
+        if try onlyIfChanged && path.exists && path.read(NSUTF8StringEncoding) == content {
           return print("Not writing the file as content is unchanged")
         }
         try path.write(content)
