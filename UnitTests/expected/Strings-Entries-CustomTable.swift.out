@@ -17,8 +17,8 @@ struct L10n {
     return params.count == 0 ? format : String(format: format, args: params)
   }
 
-  enum LocalizableTable: Localizable {
-    static let tableName = "Localizable"
+  enum CustomTable: Localizable {
+    static let tableName = "Custom"
 
     /// My awesome title
     case Title
@@ -28,13 +28,13 @@ struct L10n {
     var localized: String {
       switch self {
         case .Title:
-        return L10n.tr(LocalizableTable.tableName, "Title")
+        return L10n.tr(CustomTable.tableName, "Title")
         case .Greetings(let p0, let p1):
-        return L10n.tr(LocalizableTable.tableName, "Greetings", p0, p1)
+        return L10n.tr(CustomTable.tableName, "Greetings", p0, p1)
       }
     }
   }
 }
 
 func tr(key: Localizable) -> String { return key.localized }
-func tr(key: L10n.LocalizableTable) -> String { return key.localized }
+func tr(key: L10n.CustomTable) -> String { return key.localized }
