@@ -51,10 +51,9 @@ func tr(key: L10n) -> String {
 }
 
 
+//: #### Usage example
 
-
-let ale//: #### Usage example
-rtTitle = tr(.AlertTitle)
+let alertTitle = tr(.AlertTitle)
 let hello1 = tr(.Greetings("David", 29))
 let hello2 = L10n.Greetings("Olivier", 32) // Prints as a string in the console because it's CustomStringConvertible
 

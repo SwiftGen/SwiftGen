@@ -46,10 +46,9 @@ extension UIColor {
 }
 
 
+//: #### Usage Example
 
-
-UICol//: #### Usage Example
-or(named: .ArticleTitle)
+UIColor(named: .ArticleTitle)
 UIColor(named: .ArticleBody)
 UIColor(named: .ArticleBody)
 UIColor(named: .Translucent)
