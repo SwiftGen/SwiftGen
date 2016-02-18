@@ -83,8 +83,9 @@ struct StoryboardSegue {
 }
 
 
-let initialVC = StoryboardScene.Wiz//: #### Usage Example
-ard.initialViewController()
+//: #### Usage Example
+
+let initialVC = StoryboardScene.Wizard.initialViewController()
 initialVC.title
 
 let validateVC = StoryboardScene.Wizard.ValidatePassword.viewController()
