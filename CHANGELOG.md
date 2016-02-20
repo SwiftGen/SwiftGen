@@ -2,6 +2,13 @@
 
 ---
 
+## Master
+
+#### Fixes
+
+* Removed the useless `import Foundation` from the "images" templates.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+
 ## 0.7.6
 
 #### Enhancements
