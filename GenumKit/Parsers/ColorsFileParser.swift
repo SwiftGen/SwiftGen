@@ -11,6 +11,31 @@ public protocol ColorsFileParser {
     var colors: [String: UInt32] { get }
 }
 
+// MARK: - Private Helpers
+
+private func parseHexString(hexString: String) -> UInt32 {
+  let scanner = NSScanner(string: hexString)
+  let prefixLen: Int
+  if scanner.scanString("#", intoString: nil) {
+    prefixLen = 1
+  } else if scanner.scanString("0x", intoString: nil) {
+    prefixLen = 2
+  } else {
+    prefixLen = 0
+  }
+
+  var value: UInt32 = 0
+  scanner.scanHexInt(&value)
+
+  let len = hexString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) - prefixLen
+  if len == 6 {
+    // There were no alpha component, assume 0xff
+    value = (value << 8) | 0xff
+  }
+
+  return value
+}
+
 //MARK: - Text File Parser
 
 public final class ColorsTextFileParser: ColorsFileParser {
@@ -19,7 +44,7 @@ public final class ColorsTextFileParser: ColorsFileParser {
   public init() {}
 
   public func addColorWithName(name: String, value: String) {
-    addColorWithName(name, value: ColorsTextFileParser.parse(value))
+    addColorWithName(name, value: parseHexString(value))
   }
 
   public func addColorWithName(name: String, value: UInt32) {
@@ -30,7 +55,7 @@ public final class ColorsTextFileParser: ColorsFileParser {
   //  - One line per entry
   //  - Each line composed by the color name, then ":", then the color hex representation
   //  - Extra spaces will be skipped
-  public func parseTextFile(path: String, separator: String = ":") throws {
+  public func parseFile(path: String, separator: String = ":") throws {
     let content = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
     let lines = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
     let ws = NSCharacterSet.whitespaceCharacterSet()
@@ -47,36 +72,11 @@ public final class ColorsTextFileParser: ColorsFileParser {
       }
     }
   }
-
-  // MARK: - Private Helpers
-
-  private static func parse(hexString: String) -> UInt32 {
-    let scanner = NSScanner(string: hexString)
-    let prefixLen: Int
-    if scanner.scanString("#", intoString: nil) {
-      prefixLen = 1
-    } else if scanner.scanString("0x", intoString: nil) {
-      prefixLen = 2
-    } else {
-      prefixLen = 0
-    }
-
-    var value: UInt32 = 0
-    scanner.scanHexInt(&value)
-
-    let len = hexString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) - prefixLen
-    if len == 6 {
-      // There were no alpha component, assume 0xff
-      value = (value << 8) | 0xff
-    }
-
-    return value
-  }
 }
 
 //MARK: - CLR File Parser
 
-public final class CLRFileParser: ColorsFileParser {
+public final class ColorsCLRFileParser: ColorsFileParser {
   public private(set) var colors = [String: UInt32]()
 
   public init() {}
@@ -98,11 +98,63 @@ extension NSColor {
   }
 
   private var hexValue: UInt32 {
-    let hexRed = ((UInt32(redComponent * 255.0) << 8) << 8) << 8
-    let hexGreen = (UInt32(greenComponent * 255.0) << 8) << 8
-    let hexBlue = UInt32(blueComponent * 255.0) << 8
-    let hexAlpha = UInt32(alphaComponent * 255.0)
+    let hexRed   = UInt32(redComponent   * 0xFF) << 24
+    let hexGreen = UInt32(greenComponent * 0xFF) << 16
+    let hexBlue  = UInt32(blueComponent  * 0xFF) << 8
+    let hexAlpha = UInt32(alphaComponent * 0xFF)
     return hexRed | hexGreen | hexBlue | hexAlpha
+  }
+
+}
+
+
+//MARK: - Android colors.xml File Parser
+
+public final class ColorsXMLFileParser: ColorsFileParser {
+  static let colorTagName = "color"
+  static let colorNameAttribute = "name"
+
+  public private(set) var colors = [String: UInt32]()
+
+  public init() {}
+
+  public func parseFile(path: String) throws {
+    class ParserDelegate: NSObject, NSXMLParserDelegate {
+      var parsedColors = [String: UInt32]()
+      var currentColorName: String? = nil
+      var currentColorValue: String? = nil
+
+      @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
+        namespaceURI: String?, qualifiedName qName: String?,
+        attributes attributeDict: [String: String])
+      {
+        guard elementName == ColorsXMLFileParser.colorTagName else { return }
+        currentColorName = attributeDict[ColorsXMLFileParser.colorNameAttribute]
+        currentColorValue = nil
+      }
+
+      @objc func parser(parser: NSXMLParser, foundCharacters string: String) {
+        currentColorValue = (currentColorValue ?? "") + string
+      }
+
+      @objc func parser(parser: NSXMLParser, didEndElement elementName: String,
+        namespaceURI: String?, qualifiedName qName: String?)
+      {
+        guard elementName == ColorsXMLFileParser.colorTagName else { return }
+        guard let colorName = currentColorName, let colorValue = currentColorValue else { return }
+        parsedColors[colorName] = parseHexString(colorValue)
+        currentColorName = nil
+        currentColorValue = nil
+      }
+    }
+
+    guard let parser = NSXMLParser(contentsOfURL: NSURL.fileURLWithPath(path)) else {
+      throw NSError(domain: NSXMLParserErrorDomain, code: NSXMLParserError.InternalError.rawValue, userInfo: nil)
+    }
+    let delegate = ParserDelegate()
+    parser.delegate = delegate
+    parser.parse()
+    colors = delegate.parsedColors
   }
 
 }

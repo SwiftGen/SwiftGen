@@ -4,6 +4,11 @@
 
 ## Master
 
+#### Enhancements
+
+* Add support for Android `colors.xml` files as input for the `swiftgen colors` subcommand.  
+  [Olivier Halligon](https://github.com/AliSoftware), [#15](https://github.com/AliSoftware/SwiftGen/issues/15)
+
 #### Fixes
 
 * Removed the useless `import Foundation` from the "images" templates.  

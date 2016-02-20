@@ -19,14 +19,21 @@ let colorsCommand = command(
   let filePath = String(path)
 
   let parser: ColorsFileParser
-  if filePath.hasSuffix("clr") {
-    let clrParser = CLRFileParser()
+  switch path.`extension` {
+  case "clr"?:
+    let clrParser = ColorsCLRFileParser()
     clrParser.parseFile(filePath)
     parser = clrParser
-  } else {
+  case "txt"?:
     let textParser = ColorsTextFileParser()
-    try textParser.parseTextFile(filePath)
+    try textParser.parseFile(filePath)
     parser = textParser
+  case "xml"?:
+    let textParser = ColorsXMLFileParser()
+    try textParser.parseFile(filePath)
+    parser = textParser
+  default:
+    throw ArgumentError.InvalidType(value: filePath, type: "CLR, TXT or XML file", argument: nil)
   }
 
   do {

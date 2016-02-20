@@ -14,6 +14,7 @@
 		0921FB9C1BE785DF00B488B5 /* Colors-List-RawValue.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 0921FB9B1BE785DF00B488B5 /* Colors-List-RawValue.swift.out */; };
 		0921FB9D1BE7873400B488B5 /* colors-rawValue.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0921FB9A1BE7852F00B488B5 /* colors-rawValue.stencil */; };
 		0921FBA11BE7D6B900B488B5 /* templates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921FBA01BE7D6B900B488B5 /* templates.swift */; };
+		097504271C78ED3400D1A01B /* colors.xml in Resources */ = {isa = PBXBuildFile; fileRef = 097504261C78ED3400D1A01B /* colors.xml */; };
 		09A87B481BCC9BAD00D9B9F5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7B2D31BCC382800D7F488 /* main.swift */; };
 		09A87B4A1BCC9BB200D9B9F5 /* storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0901413E1BCC64C9002E8617 /* storyboards.swift */; };
 		09A87B4B1BCC9BB200D9B9F5 /* images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090141401BCC64FE002E8617 /* images.swift */; };
@@ -134,6 +135,7 @@
 		0921FBA01BE7D6B900B488B5 /* templates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = templates.swift; sourceTree = "<group>"; };
 		095685EB1B6DA16200BF300C /* Strings-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-CustomName.swift.out"; sourceTree = "<group>"; };
 		095685EF1B6DA32800BF300C /* Strings-Lines-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Lines-Defaults.swift.out"; sourceTree = "<group>"; };
+		097504261C78ED3400D1A01B /* colors.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = colors.xml; sourceTree = "<group>"; };
 		09A87B411BCC9B8000D9B9F5 /* swiftgen */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftgen; sourceTree = BUILT_PRODUCTS_DIR; };
 		09A87B501BCCA2C600D9B9F5 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09A87B731BCCBE6D00D9B9F5 /* strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
@@ -280,10 +282,11 @@
 				09030C0B1B6D30E800275BF5 /* Message.storyboard */,
 				09030C0C1B6D30E800275BF5 /* Wizard.storyboard */,
 				470A14E81BEA6CF10052EAC8 /* Anonymous.storyboard */,
-				09030C1D1B6D473E00275BF5 /* colors.txt */,
 				EFFE62F31C27073700FE9783 /* Placeholder.storyboard */,
 				EFFE62F71C27081A00FE9783 /* Dependency.storyboard */,
+				09030C1D1B6D473E00275BF5 /* colors.txt */,
 				641CD33D1C3AE35A00D7FED9 /* colors.clr */,
+				097504261C78ED3400D1A01B /* colors.xml */,
 				09030C241B6D48FC00275BF5 /* Localizable.strings */,
 				09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */,
 			);
@@ -471,6 +474,7 @@
 				09EB0A2D1BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out in Resources */,
 				09EB0A271BDC60F000B2CF79 /* Colors-File-CustomName.swift.out in Resources */,
 				0911503F1BD4136E00EBC803 /* storyboards-default.stencil in Resources */,
+				097504271C78ED3400D1A01B /* colors.xml in Resources */,
 				470A14E11BEA63D30052EAC8 /* storyboards-lowercase.stencil in Resources */,
 				93DA731D1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out in Resources */,
 				09EB0A2F1BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out in Resources */,
