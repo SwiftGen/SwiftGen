@@ -4,13 +4,10 @@
 
 ## Master
 
-#### Enhancements
-
+* Use `String(format:locale:arguments:)` and the `NSLocale.currentLocale()` in the "string" templates so that it works with `.stringdict` files and pluralization.  
+  [Olivier Halligon](https://github.com/AliSoftware), [#91](https://github.com/AliSoftware/SwiftGen/issues/91)
 * Add support for Android `colors.xml` files as input for the `swiftgen colors` subcommand.  
   [Olivier Halligon](https://github.com/AliSoftware), [#15](https://github.com/AliSoftware/SwiftGen/issues/15)
-
-#### Fixes
-
 * Removed the useless `import Foundation` from the "images" templates.  
   [Olivier Halligon](https://github.com/AliSoftware)
 

@@ -39,7 +39,7 @@ extension L10n: CustomStringConvertible {
 
   private static func tr(key: String, _ args: CVarArgType...) -> String {
     let format = NSLocalizedString(key, comment: "")
-    return String(format: format, arguments: args)
+    return String(format: format, locale: NSLocale.currentLocale(), arguments: args)
   }
 }
 
