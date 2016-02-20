@@ -40,6 +40,10 @@ extension UIColor {
       case .Translucent: return 0xffffffcc
       }
     }
+
+    var color: UIColor {
+      return UIColor(named: self)
+    }
   }
 
   convenience init(named name: Name) {

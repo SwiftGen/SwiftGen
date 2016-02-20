@@ -30,6 +30,10 @@ extension UIColor {
       {% endfor %}
       }
     }
+
+    var color: UIColor {
+      return UIColor(named: self)
+    }
   }
 
   convenience init(named name: {{enumName}}) {

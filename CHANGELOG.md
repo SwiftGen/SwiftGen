@@ -10,6 +10,9 @@
   [Olivier Halligon](https://github.com/AliSoftware), [#15](https://github.com/AliSoftware/SwiftGen/issues/15)
 * Removed the useless `import Foundation` from the "images" templates.  
   [Olivier Halligon](https://github.com/AliSoftware)
+* Added computed property `var color: UIColor` to the color templates.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+
 
 ## 0.7.6
 

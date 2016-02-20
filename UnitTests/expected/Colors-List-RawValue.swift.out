@@ -24,6 +24,10 @@ extension UIColor {
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#999999"></span>
     /// Alpha: 100% <br/> (0x999999ff)
     case Text_Body_Color = 0x999999ff
+
+    var color: UIColor {
+      return UIColor(named: self)
+    }
   }
 
   convenience init(named name: Name) {

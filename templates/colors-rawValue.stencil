@@ -21,6 +21,10 @@ extension UIColor {
     /// Alpha: {{color.alpha|hexToInt|int255toFloat|percent}} <br/> (0x{{color.rgba}})
     case {{color.name|swiftIdentifier}} = 0x{{color.rgba}}
     {% endfor %}
+
+    var color: UIColor {
+      return UIColor(named: self)
+    }
   }
 
   convenience init(named name: {{enumName}}) {
