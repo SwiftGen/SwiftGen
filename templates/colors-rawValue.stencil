@@ -22,13 +22,14 @@ extension UIColor {
     case {{color.name|swiftIdentifier}} = 0x{{color.rgba}}
     {% endfor %}
 
-    var color: UIColor {
+    var color: UIColor? {
       return UIColor(named: self)
     }
   }
 
-  convenience init(named name: {{enumName}}) {
-    self.init(rgbaValue: name.rawValue)
+  convenience init?(named name: {{enumName}}) {
+    guard let rgba = name.rgbaValue else {return nil}
+    self.init(rgbaValue: rgba)
   }
 }
 {% else %}

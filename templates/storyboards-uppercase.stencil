@@ -13,8 +13,8 @@ extension StoryboardSceneType {
     return UIStoryboard(name: self.storyboardName, bundle: nil)
   }
 
-  static func initialViewController() -> UIViewController {
-    return storyboard().instantiateInitialViewController()!
+  static func initialViewController() -> UIViewController? {
+    return storyboard().instantiateInitialViewController()
   }
 }
 
@@ -48,8 +48,8 @@ struct {{sceneEnumName}} {
 
     case {{sceneID}} = "{{scene.identifier}}"
     {% if scene.class %}
-    static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> {{scene.class}} {
-      return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as! {{scene.class}}
+    static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> {{scene.class}}? {
+      return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as? {{scene.class}}
     }
     {% else %}
     static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> UIViewController {

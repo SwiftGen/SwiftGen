@@ -12,8 +12,8 @@ extension StoryboardSceneType {
     return UIStoryboard(name: self.storyboardName, bundle: nil)
   }
 
-  static func initialViewController() -> UIViewController {
-    return storyboard().instantiateInitialViewController()!
+  static func initialViewController() -> UIViewController? {
+    return storyboard().instantiateInitialViewController()
   }
 }
 
@@ -55,26 +55,26 @@ struct StoryboardScene {
     }
 
     case MessagesListScene = "MessagesList"
-    static func instantiateMessagesList() -> UITableViewController {
-      return StoryboardScene.Message.MessagesListScene.viewController() as! UITableViewController
+    static func instantiateMessagesList() -> UITableViewController? {
+      return StoryboardScene.Message.MessagesListScene.viewController() as? UITableViewController
     }
 
     case NavCtrlScene = "NavCtrl"
-    static func instantiateNavCtrl() -> UINavigationController {
-      return StoryboardScene.Message.NavCtrlScene.viewController() as! UINavigationController
+    static func instantiateNavCtrl() -> UINavigationController? {
+      return StoryboardScene.Message.NavCtrlScene.viewController() as? UINavigationController
     }
 
     case URLChooserScene = "URLChooser"
-    static func instantiateURLChooser() -> XXPickerViewController {
-      return StoryboardScene.Message.URLChooserScene.viewController() as! XXPickerViewController
+    static func instantiateURLChooser() -> XXPickerViewController? {
+      return StoryboardScene.Message.URLChooserScene.viewController() as? XXPickerViewController
     }
   }
   enum Placeholder: String, StoryboardSceneType {
     static let storyboardName = "Placeholder"
 
     case NavigationScene = "Navigation"
-    static func instantiateNavigation() -> UINavigationController {
-      return StoryboardScene.Placeholder.NavigationScene.viewController() as! UINavigationController
+    static func instantiateNavigation() -> UINavigationController? {
+      return StoryboardScene.Placeholder.NavigationScene.viewController() as? UINavigationController
     }
   }
   enum Wizard: String, StoryboardSceneType {
@@ -86,13 +86,13 @@ struct StoryboardScene {
     }
 
     case CreateAccountScene = "CreateAccount"
-    static func instantiateCreateAccount() -> CreateAccViewController {
-      return StoryboardScene.Wizard.CreateAccountScene.viewController() as! CreateAccViewController
+    static func instantiateCreateAccount() -> CreateAccViewController? {
+      return StoryboardScene.Wizard.CreateAccountScene.viewController() as? CreateAccViewController
     }
 
     case PreferencesScene = "Preferences"
-    static func instantiatePreferences() -> UITableViewController {
-      return StoryboardScene.Wizard.PreferencesScene.viewController() as! UITableViewController
+    static func instantiatePreferences() -> UITableViewController? {
+      return StoryboardScene.Wizard.PreferencesScene.viewController() as? UITableViewController
     }
 
     case Validate_PasswordScene = "Validate_Password"
