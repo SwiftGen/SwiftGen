@@ -18,12 +18,12 @@ extension UIImage {
         case Apple = "Apple"
         case Banana = "Banana"
 
-        var image: UIImage {
+        var image: UIImage? {
             return UIImage(asset: self)
         }
     }
 
-    convenience init!(asset: Asset) {
+    convenience init?(asset: Asset) {
         self.init(named: asset.rawValue)
     }
 }
