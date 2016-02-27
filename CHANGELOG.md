@@ -12,7 +12,8 @@
   [Olivier Halligon](https://github.com/AliSoftware)
 * Added computed property `var color: UIColor` to the color templates.  
   [Olivier Halligon](https://github.com/AliSoftware)
-
+* Avoid force casting and force unwrapping
+  [Toshihiro Suzuki](https://github.com/toshi0383), [#96](https://github.com/AliSoftware/SwiftGen/issues/96)
 
 ## 0.7.6
 
