@@ -12,8 +12,8 @@ extension StoryboardSceneType {
     return UIStoryboard(name: self.storyboardName, bundle: nil)
   }
 
-  static func initialViewController() -> UIViewController {
-    return storyboard().instantiateInitialViewController()!
+  static func initialViewController() -> UIViewController? {
+    return storyboard().instantiateInitialViewController()
   }
 }
 
@@ -44,18 +44,18 @@ struct StoryboardScene {
     }
 
     case messagesList = "MessagesList"
-    static func messagesListViewController() -> UITableViewController {
-      return StoryboardScene.Message.messagesList.viewController() as! UITableViewController
+    static func messagesListViewController() -> UITableViewController? {
+      return StoryboardScene.Message.messagesList.viewController() as? UITableViewController
     }
 
     case navCtrl = "NavCtrl"
-    static func navCtrlViewController() -> UINavigationController {
-      return StoryboardScene.Message.navCtrl.viewController() as! UINavigationController
+    static func navCtrlViewController() -> UINavigationController? {
+      return StoryboardScene.Message.navCtrl.viewController() as? UINavigationController
     }
 
     case urlChooser = "URLChooser"
-    static func urlChooserViewController() -> XXPickerViewController {
-      return StoryboardScene.Message.urlChooser.viewController() as! XXPickerViewController
+    static func urlChooserViewController() -> XXPickerViewController? {
+      return StoryboardScene.Message.urlChooser.viewController() as? XXPickerViewController
     }
   }
 }

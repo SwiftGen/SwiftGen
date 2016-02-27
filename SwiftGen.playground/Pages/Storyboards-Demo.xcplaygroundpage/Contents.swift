@@ -25,8 +25,8 @@ extension StoryboardSceneType {
         return UIStoryboard(name: self.storyboardName, bundle: nil)
     }
 
-    static func initialViewController() -> UIViewController {
-        return storyboard().instantiateInitialViewController()!
+    static func initialViewController() -> UIViewController? {
+        return storyboard().instantiateInitialViewController()
     }
 }
 
@@ -52,8 +52,8 @@ struct StoryboardScene {
         static let storyboardName = "Wizard"
 
         case CreateAccount = "CreateAccount"
-        static func createAccountViewController() -> CreateAccViewController {
-            return Wizard.CreateAccount.viewController() as! CreateAccViewController
+        static func createAccountViewController() -> CreateAccViewController? {
+            return Wizard.CreateAccount.viewController() as? CreateAccViewController
         }
 
         case AcceptCGU = "Accept-CGU"
@@ -85,7 +85,7 @@ struct StoryboardSegue {
 
 //: #### Usage Example
 
-let initialVC = StoryboardScene.Wizard.initialViewController()
+let initialVC = StoryboardScene.Wizard.initialViewController()!
 initialVC.title
 
 let validateVC = StoryboardScene.Wizard.ValidatePassword.viewController()

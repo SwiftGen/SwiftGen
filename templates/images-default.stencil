@@ -9,12 +9,12 @@ extension UIImage {
     case {{image|swiftIdentifier}} = "{{image}}"
     {% endfor %}
 
-    var image: UIImage {
+    var image: UIImage? {
       return UIImage(asset: self)
     }
   }
 
-  convenience init!(asset: {{enumName}}) {
+  convenience init?(asset: {{enumName}}) {
     self.init(named: asset.rawValue)
   }
 }

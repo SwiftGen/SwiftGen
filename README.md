@@ -101,12 +101,12 @@ extension UIImage {
     case BigPear = "Big_Pear"
     case StopButtonEnabled = "stop.button.enabled"
 
-    var image: UIImage {
-      return UIImage(named: self.rawValue)!
+    var image: UIImage? {
+      return UIImage(named: self.rawValue)
     }
   }
 
-  convenience init!(asset: Asset) {
+  convenience init?(asset: Asset) {
     self.init(named: asset.rawValue)
   }
 }
@@ -115,8 +115,8 @@ extension UIImage {
 ### Usage Example
 
 ```swift
-let image1 = UIImage(asset: .Banana)   // Prefered way
-let image2 = UIImage.Asset.Apple.image // Alternate way
+let image1 = UIImage(asset: .Banana)!   // Prefered way
+let image2 = UIImage.Asset.Apple.image! // Alternate way
 ```
 
 This way, no need to enter the `"Banana"` string in your code and risk any typo.
@@ -226,8 +226,8 @@ extension StoryboardSceneType {
         return UIStoryboard(name: self.storyboardName, bundle: nil)
     }
 
-    static func initialViewController() -> UIViewController {
-        return storyboard().instantiateInitialViewController()!
+    static func initialViewController() -> UIViewController? {
+        return storyboard().instantiateInitialViewController()
     }
 }
 
@@ -258,16 +258,16 @@ struct StoryboardScene {
     }
 
     case URLChooser = "URLChooser"
-    static func urlChooserViewController() -> XXPickerViewController {
-      return Message.URLChooser.viewController() as! XXPickerViewController
+    static func urlChooserViewController() -> XXPickerViewController? {
+      return Message.URLChooser.viewController() as? XXPickerViewController
     }
   }
   enum Wizard : String, StoryboardSceneType {
     static let storyboardName = "Wizard"
 
     case CreateAccount = "CreateAccount"
-    static func createAccountViewController() -> CreateAccViewController {
-        return Wizard.CreateAccount.viewController() as! CreateAccViewController
+    static func createAccountViewController() -> CreateAccViewController? {
+        return Wizard.CreateAccount.viewController() as? CreateAccViewController
     }
 
     case ValidatePassword = "Validate_Password"
@@ -364,8 +364,9 @@ extension UIColor {
     case ArticleTitle = 0x33fe66ff
   }
 
-  convenience init(named name: Name) {
-    self.init(rgbaValue: name.rawValue)
+  convenience init?(named name: Name) {
+    guard let rgba = name.rgbaValue else {return nil}
+    self.init(rgbaValue: rgba)
   }
 }
 ```

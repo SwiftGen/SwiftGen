@@ -25,12 +25,13 @@ extension UIColor {
     /// Alpha: 100% <br/> (0x999999ff)
     case Text_Body_Color = 0x999999ff
 
-    var color: UIColor {
+    var color: UIColor? {
       return UIColor(named: self)
     }
   }
 
-  convenience init(named name: Name) {
-    self.init(rgbaValue: name.rawValue)
+  convenience init?(named name: Name) {
+    guard let rgba = name.rgbaValue else {return nil}
+    self.init(rgbaValue: rgba)
   }
 }

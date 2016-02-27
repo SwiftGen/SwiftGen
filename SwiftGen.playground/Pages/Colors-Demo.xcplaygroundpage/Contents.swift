@@ -40,8 +40,9 @@ extension UIColor {
     case ArticleTitle = 0x33fe66ff
   }
 
-  convenience init(named name: Name) {
-    self.init(rgbaValue: name.rawValue)
+  convenience init?(named name: Name) {
+    guard let rgba = name.rgbaValue else {return nil}
+    self.init(rgbaValue: rgba)
   }
 }
 
