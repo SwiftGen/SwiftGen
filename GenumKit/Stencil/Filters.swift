@@ -16,6 +16,24 @@ struct StringFilters {
     return swiftIdentifier(fromString: value, replaceWithUnderscores: true)
   }
 
+  static func stringToCamelcaseIdentifier(value: Any?) throws -> Any? {
+    guard let string = value as? String else { throw FilterError.InvalidInputType }
+    let source = string.stringByReplacingOccurrencesOfString("-", withString: " ").stringByReplacingOccurrencesOfString("_", withString: " ")
+    var camelcase = ""
+    for str in source.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) {
+        if str.startIndex != str.endIndex {
+          let range = Range(start: str.startIndex, end: str.startIndex.advancedBy(1))
+          let first = str[range]
+          camelcase += str.stringByReplacingOccurrencesOfString(first, withString: first.capitalizedString, options: NSStringCompareOptions.BackwardsSearch, range: range)
+        }
+        else {
+          camelcase += str.capitalizedString
+        }
+    }
+    return camelcase
+  }
+
+
   /* - If the string starts with only one uppercase letter, lowercase that first letter
    * - If the string starts with multiple uppercase letters, lowercase those first letters up to the one before the last uppercase one
    * e.g. "PeoplePicker" gives "peoplePicker" but "URLChooser" gives "urlChooser"

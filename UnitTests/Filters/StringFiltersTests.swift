@@ -44,4 +44,22 @@ class StringFiltersrTests: XCTestCase {
       XCTAssertEqual(result, expected)
     }
   }
+
+  func testCamelCase() {
+    let expectations = [
+        "string": "String",
+        "string_with_words": "StringWithWords",
+        "someCapString": "SomeCapString",
+        "": "",
+        "x": "X",
+        "a__b__c": "ABC",
+        "__y_z": "YZ",
+        "PLEASE_STOP_SCREAMING!": "PLEASESTOPSCREAMING!"
+    ]
+
+    for (input, expected) in expectations {
+        let result = try! StringFilters.stringToCamelcaseIdentifier(input) as? String
+        XCTAssertEqual(result, expected)
+    }
+  }
 }
