@@ -158,3 +158,21 @@ public final class ColorsXMLFileParser: ColorsFileParser {
   }
 
 }
+
+//MARK: - JSON File Parser
+public final class ColorsJSONFileParser: ColorsFileParser {
+  public private(set) var colors = [String: UInt32]()
+
+  public init() {}
+
+  public func parseFile(path: String) throws {
+    if let JSONdata = NSData(contentsOfFile: path) {
+      if let json = try? NSJSONSerialization.JSONObjectWithData(JSONdata, options: NSJSONReadingOptions(rawValue: 0)) as! [String: String] {
+        for key in json.keys {
+          let colorValue = json[key] ?? ""
+          colors[key] = parseHexString(colorValue)
+        }
+      }
+    }
+  }
+}
