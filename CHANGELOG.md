@@ -4,6 +4,8 @@
 
 ## Master
 
+* Added support for JSON (`colors.json`) files as input for the `swiftgen colors` subcommand.   
+  [Derek Ostrander](https://github.com/dostrander)
 * Use `String(format:locale:arguments:)` and the `NSLocale.currentLocale()` in the "string" templates so that it works with `.stringdict` files and pluralization.  
   [Olivier Halligon](https://github.com/AliSoftware), [#91](https://github.com/AliSoftware/SwiftGen/issues/91)
 * Add support for Android `colors.xml` files as input for the `swiftgen colors` subcommand.  
