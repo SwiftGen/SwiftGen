@@ -32,8 +32,12 @@ let colorsCommand = command(
     let textParser = ColorsXMLFileParser()
     try textParser.parseFile(filePath)
     parser = textParser
+  case "json"?:
+    let textParser = ColorsJSONFileParser()
+    try textParser.parseFile(filePath)
+    parser = textParser
   default:
-    throw ArgumentError.InvalidType(value: filePath, type: "CLR, TXT or XML file", argument: nil)
+    throw ArgumentError.InvalidType(value: filePath, type: "CLR, TXT, XML or JSON file", argument: nil)
   }
 
   do {
