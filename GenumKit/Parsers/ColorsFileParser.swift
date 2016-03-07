@@ -8,7 +8,7 @@ import Foundation
 import AppKit.NSColor
 
 public protocol ColorsFileParser {
-    var colors: [String: UInt32] { get }
+  var colors: [String: UInt32] { get }
 }
 
 // MARK: - Private Helpers
@@ -36,7 +36,7 @@ private func parseHexString(hexString: String) -> UInt32 {
   return value
 }
 
-//MARK: - Text File Parser
+// MARK: - Text File Parser
 
 public final class ColorsTextFileParser: ColorsFileParser {
   public private(set) var colors = [String:UInt32]()
@@ -74,7 +74,7 @@ public final class ColorsTextFileParser: ColorsFileParser {
   }
 }
 
-//MARK: - CLR File Parser
+// MARK: - CLR File Parser
 
 public final class ColorsCLRFileParser: ColorsFileParser {
   public private(set) var colors = [String: UInt32]()
@@ -108,7 +108,7 @@ extension NSColor {
 }
 
 
-//MARK: - Android colors.xml File Parser
+// MARK: - Android colors.xml File Parser
 
 public final class ColorsXMLFileParser: ColorsFileParser {
   static let colorTagName = "color"
@@ -159,20 +159,20 @@ public final class ColorsXMLFileParser: ColorsFileParser {
 
 }
 
-//MARK: - JSON File Parser
+// MARK: - JSON File Parser
+
 public final class ColorsJSONFileParser: ColorsFileParser {
   public private(set) var colors = [String: UInt32]()
 
   public init() {}
 
   public func parseFile(path: String) throws {
-    if let JSONdata = NSData(contentsOfFile: path) {
-      if let json = try? NSJSONSerialization.JSONObjectWithData(JSONdata, options: NSJSONReadingOptions(rawValue: 0)) as! [String: String] {
-        for key in json.keys {
-          let colorValue = json[key] ?? ""
-          colors[key] = parseHexString(colorValue)
+    if let JSONdata = NSData(contentsOfFile: path),
+      let json = try? NSJSONSerialization.JSONObjectWithData(JSONdata, options: []),
+      let dict = json as? [String: String] {
+        for (key, value) in dict {
+          colors[key] = parseHexString(value)
         }
-      }
     }
   }
 }
