@@ -289,9 +289,9 @@
 				09030C1D1B6D473E00275BF5 /* colors.txt */,
 				641CD33D1C3AE35A00D7FED9 /* colors.clr */,
 				097504261C78ED3400D1A01B /* colors.xml */,
+				C2265B581C8907CA00CA5C4F /* colors.json */,
 				09030C241B6D48FC00275BF5 /* Localizable.strings */,
 				09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */,
-				C2265B581C8907CA00CA5C4F /* colors.json */,
 			);
 			path = fixtures;
 			sourceTree = "<group>";

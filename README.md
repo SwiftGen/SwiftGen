@@ -319,9 +319,14 @@ swiftgen colors /path/to/colors-file.txt
 
 This will generate a `enum Name` in an extension of `UIColor`, with one `case` per color listed in the text file passed as argument.
 
-The text file is expected to have one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`). Whitespaces are ignored.
+The input file is expected to be either:
 
-SwiftGen can also read [`*.clr` files](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/DrawColor/Concepts/AboutColorLists.html#//apple_ref/doc/uid/20000757-BAJHJEDI). For example you can use this command to generate colors from one of your system color lists:
+* a [plain text file](UnitTests/fixtures/colors.txt), with one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`). Whitespaces are ignored.
+* a [JSON file](UnitTests/fixtures/colors.json), representing a dictionary of names -> values, each value being the hex representation of the color
+* a [XML file](UnitTests/fixtures/colors.xml), expected to be the same format as the Android colors.xml files, containing tags `<color name="AColorName">AColorHexRepresentation</color>`
+* a [`*.clr` file](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/DrawColor/Concepts/AboutColorLists.html#//apple_ref/doc/uid/20000757-BAJHJEDI) used by Apple's Color Paletes.
+
+For example you can use this command to generate colors from one of your system color lists:
 
 ```
 swiftgen colors ~/Library/Colors/MyColors.clr
