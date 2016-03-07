@@ -15,6 +15,13 @@ SwiftGen is a suite of tools written in Swift 2 to auto-generate Swift 2 code fo
 > 
 > For a list of recent changes, see the [CHANGELOG](CHANGELOG.md).
 
+### Via CocoaPods
+
+If you're using CocoaPods, you can simply add `pod 'SwiftGen'` to your `Podfile`.
+
+This will download the `SwiftGen` binaries and dependencies in `Pods/` during your next `pod install` execution
+and will allow you to invoke it via `$PODS_ROOT/SwiftGen/bin/swiftgen` in your Script Build Phases.
+
 ### Via Homebrew
 
 To install SwiftGen via [Homebrew](http://brew.sh), simply use:
