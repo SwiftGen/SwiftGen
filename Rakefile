@@ -69,7 +69,7 @@ end
 ## [ Install Tasks ] ##########################################################
 
 desc "Install the binary in $bindir, frameworks — without the Swift dylibs — in $fmkdir, and templates in $tpldir\n" \
-     "(defaults $bindir=./swiftgen/bin/, $fmkdir=$bindir/../lib, $tpldir=$bindir/../templates"
+     "(defaults $bindir=./build/swiftgen/bin/, $fmkdir=$bindir/../lib, $tpldir=$bindir/../templates"
 task 'install:light', [:bindir, :fmkdir, :tpldir] => :build do |_, args|
   (bindir, fmkdir, tpldir) = defaults(args)
 
@@ -113,7 +113,7 @@ task :clean do
   sh %Q(rm -fr build)
 end
 
-task :default => [:dependencies, :build]
+task :default => [:build]
 
 
 ## [ Playground Resources ] ###################################################
@@ -137,3 +137,55 @@ namespace :playground do
   task :resources => %w(clean images storyboard strings)
 end
 
+## [ Release a new version ] ##################################################
+
+def log_result(result, label, error_msg)
+  if result
+    puts "#{label.ljust(25)} \u{2705}"
+  else
+    puts "#{label.ljust(25)} \u{274C} -  #{error_msg}"
+  end
+end
+
+namespace :release do
+  def podspec_version(file)
+    require 'JSON'
+    JSON.parse(`pod ipc spec #{file}.podspec`)["version"]
+  end
+
+  task :check_versions do
+    require 'YAML'
+
+    # Extract version from GenumKit.podspec
+    version = podspec_version('SwiftGen')
+    puts "#{'SwiftGen.podspec'.ljust(25)} \u{1F449}  #{version}"
+
+    genumkit_version = podspec_version('GenumKit/GenumKit')
+    log_result( genumkit_version == version, 'GenumKit version', 'Please make sure GenumKit.podspec has the same version as SwiftGen.podspec')
+
+    # Check if entry present in CHANGELOG
+    changelog_entry = system(%Q{grep -q '^## #{Regexp.quote(version)}$' CHANGELOG.md})
+    log_result(changelog_entry, "CHANGELOG, Entry added", "Please add an entry for #{version} in CHANGELOG.md")
+
+    changelog_no_master = system(%q{grep -qi '^## Master' CHANGELOG.md})
+    log_result(changelog_no_master, "CHANGELOG, No master", 'Please remove entry for master in CHANGELOG')
+
+    # Check if example project updated
+    sample_project_pods = YAML.load_file('Podfile.lock')['PODS']
+    sample_project_updated = sample_project_pods.reduce(false) { |a, e| a || (e.is_a?(Hash) && e.keys.include?("GenumKit (#{version})")) }
+    log_result(sample_project_updated, "Sample project updated", 'Please run pod update on the sample project')
+  end
+
+  task :zip => :build do
+    `cp LICENSE build/swiftgen`
+    `cd build; zip -r swiftgen-#{podspec_version}.zip swiftgen`
+  end
+
+  desc 'Prepare a new release'
+  task :new => [:check_versions, :zip] do
+    # Those tasks are still manual for now until I have time to write rake tasks for them too
+    puts "1. Create a new GitHub release and attach the zip file to it"
+    puts "2. pod trunk push SwiftGen.podspec"
+    puts "3. Push a version to homebrew (see wiki)"
+  end
+end
