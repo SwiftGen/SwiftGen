@@ -8,11 +8,12 @@ SwiftGen is a suite of tools written in Swift 2 to auto-generate Swift 2 code fo
 * [`enums` for your `Localizable.strings` strings](#localizablestrings).
 * [`enums` for your `UIStoryboard` and their Scenes](#uistoryboard)
 * [`enums` for your `UIColor`s](#uicolor).
+* [`enums` for your `UIFont`s](#uifont).
 
 ## Installation
 
 > Note: The tools are written in Swift 2.0 and need to be compiled with the latest Xcode 7.  
-> 
+>
 > For a list of recent changes, see the [CHANGELOG](CHANGELOG.md).
 
 ### Via Homebrew
@@ -47,6 +48,7 @@ The tool is provided as a unique `swiftgen` binary command-line, with the follow
 * `swiftgen strings [OPTIONS] FILE`
 * `swiftgen storyboards [OPTIONS] DIR`
 * `swiftgen colors [OPTIONS] FILE`
+* `swiftgen colors [OPTIONS] DIR`
 
 Each subcommand has its own option and syntax, but some options are common to all:
 
@@ -385,6 +387,38 @@ UIColor(named: .Translucent)
 
 This way, no need to enter the color red, green, blue, alpha values each time and create ugly constants in the global namespace for them.
 
+
+## UIFont  
+
+```
+swiftgen fonts /path/to/font/dir
+```
+
+This will go recursively go through the directory finding any typeface files and defining struct for each family, and an enum nested under that family that will represent that font variation.
+
+### Generated Code
+
+```swift
+extension UIFont {
+    struct Family {
+        enum Helvetica: String {
+            case Regular = "Helvetica"
+            case Bold = "Helvetica-Bold"
+            case Thin = "Helvetica-Thin"
+            case Medium = "Helvetica-Medium"
+
+            func font(size: CGFloat) -> UIFont? { return UIFont(name:self.rawValue, size:size)}
+        }
+    }
+}
+```
+
+### Usage
+
+```swift
+// Helvetica Bold font of point size 16.0
+let font = UIFont.Family.Helvetica.Bold.font(16.0)
+```
 
 ---
 
