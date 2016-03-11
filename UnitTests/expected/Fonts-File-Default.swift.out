@@ -1,0 +1,24 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import UIKit.UIFont
+
+extension UIFont {
+    struct Family {
+        enum Helvetica: String {
+            case Regular = "Helvetica"
+            case Bold = "Helvetica-Bold"
+            case Thin = "Helvetica-Thin"
+            case Medium = "Helvetica-Medium"
+
+            func font(size: CGFloat) -> UIFont? { return UIFont(name:self.rawValue, size:size)}
+        }
+        enum HelveticaNeue: String {
+            case Regular = "HelveticaNeue"
+            case Bold = "HelveticaNeue-Bold"
+            case Thin = "HelveticaNeue-Thin"
+            case Medium = "HelveticaNeue-Medium"
+
+            func font(size: CGFloat) -> UIFont? { return UIFont(name:self.rawValue, size:size)}
+        }
+    }
+}

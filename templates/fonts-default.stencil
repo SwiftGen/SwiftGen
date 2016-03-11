@@ -1,0 +1,21 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+{% if fonts %}
+import UIKit.UIFont
+
+extension UIFont {
+    struct {{enumName}} {
+        {% for font in fonts %}
+        enum {{font.familyName|swiftIdentifier}}: String {
+            {% for variant in font.variants %}
+            case {{variant.name|swiftIdentifier}} = "{{variant.value}}"
+            {% endfor %}
+
+            func font(size: CGFloat) -> UIFont? { return UIFont(name:self.rawValue, size:size)}
+        }
+        {% endfor %}
+    }
+}
+{% else %}
+// No fonts found
+{% endif %}

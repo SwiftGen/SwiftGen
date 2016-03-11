@@ -62,6 +62,12 @@
 		91554FDE6EC0E514DECD71FA /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B594462FF573E83D0DEF1C64 /* Pods_UnitTests.framework */; };
 		93DA731D1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 93DA731C1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out */; };
 		C2265B591C8907CA00CA5C4F /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = C2265B581C8907CA00CA5C4F /* colors.json */; };
+		C24AFD021C91DE33005FE3EF /* fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24AFD011C91DE33005FE3EF /* fonts.swift */; };
+		C24AFD041C92370D005FE3EF /* fonts-default.stencil in Resources */ = {isa = PBXBuildFile; fileRef = C24AFD031C91E63D005FE3EF /* fonts-default.stencil */; };
+		C24AFD0A1C924188005FE3EF /* Fonts-File-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = C24AFD091C924188005FE3EF /* Fonts-File-Empty.swift.out */; };
+		C24AFD0C1C924760005FE3EF /* Fonts-File-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = C24AFD0B1C924760005FE3EF /* Fonts-File-Default.swift.out */; };
+		C24AFD0E1C924A29005FE3EF /* Fonts-File-CustomName.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = C24AFD0D1C924A29005FE3EF /* Fonts-File-CustomName.swift.out */; };
+		C2DBEADE1C8F87AD00E62C9E /* FontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DBEADD1C8F87AD00E62C9E /* FontsTests.swift */; };
 		EFFE62F41C27073700FE9783 /* Placeholder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFFE62F31C27073700FE9783 /* Placeholder.storyboard */; };
 		EFFE62F81C27081A00FE9783 /* Dependency.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFFE62F71C27081A00FE9783 /* Dependency.storyboard */; };
 /* End PBXBuildFile section */
@@ -176,6 +182,12 @@
 		B594462FF573E83D0DEF1C64 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B85742845DA08FA0DD5D741C /* Pods_SwiftGenKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftGenKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2265B581C8907CA00CA5C4F /* colors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colors.json; sourceTree = "<group>"; };
+		C24AFD011C91DE33005FE3EF /* fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fonts.swift; sourceTree = "<group>"; };
+		C24AFD031C91E63D005FE3EF /* fonts-default.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "fonts-default.stencil"; sourceTree = "<group>"; };
+		C24AFD091C924188005FE3EF /* Fonts-File-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Fonts-File-Empty.swift.out"; sourceTree = "<group>"; };
+		C24AFD0B1C924760005FE3EF /* Fonts-File-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Fonts-File-Default.swift.out"; sourceTree = "<group>"; };
+		C24AFD0D1C924A29005FE3EF /* Fonts-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Fonts-File-CustomName.swift.out"; sourceTree = "<group>"; };
+		C2DBEADD1C8F87AD00E62C9E /* FontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsTests.swift; sourceTree = "<group>"; };
 		D54DBC7B97DF6F62F91FE724 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		E8A3B4DE5528DD17EC369AA3 /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFFE62F31C27073700FE9783 /* Placeholder.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Placeholder.storyboard; sourceTree = "<group>"; };
@@ -244,6 +256,7 @@
 				09030BD11B6D2E3900275BF5 /* ImagesTests.swift */,
 				09030BC91B6D2BB700275BF5 /* StoryboardTests.swift */,
 				09030BD51B6D2E3900275BF5 /* StringsTests.swift */,
+				C2DBEADD1C8F87AD00E62C9E /* FontsTests.swift */,
 			);
 			path = TestSuites;
 			sourceTree = "<group>";
@@ -273,6 +286,9 @@
 				09030C2A1B6D4D9A00275BF5 /* Strings-File-Defaults.swift.out */,
 				93DA731C1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out */,
 				095685EB1B6DA16200BF300C /* Strings-File-CustomName.swift.out */,
+				C24AFD091C924188005FE3EF /* Fonts-File-Empty.swift.out */,
+				C24AFD0B1C924760005FE3EF /* Fonts-File-Default.swift.out */,
+				C24AFD0D1C924A29005FE3EF /* Fonts-File-CustomName.swift.out */,
 			);
 			path = expected;
 			sourceTree = "<group>";
@@ -307,6 +323,7 @@
 				471D92121C43F65300D8EA69 /* storyboards-uppercase.stencil */,
 				470A14E01BEA63D30052EAC8 /* storyboards-lowercase.stencil */,
 				09EB0A191BDC269300B2CF79 /* strings-default.stencil */,
+				C24AFD031C91E63D005FE3EF /* fonts-default.stencil */,
 			);
 			path = templates;
 			sourceTree = "<group>";
@@ -321,6 +338,7 @@
 				090141401BCC64FE002E8617 /* images.swift */,
 				0901413E1BCC64C9002E8617 /* storyboards.swift */,
 				09A87B731BCCBE6D00D9B9F5 /* strings.swift */,
+				C24AFD011C91DE33005FE3EF /* fonts.swift */,
 			);
 			path = "swiftgen-cli";
 			sourceTree = "<group>";
@@ -446,6 +464,7 @@
 				0921FB9C1BE785DF00B488B5 /* Colors-List-RawValue.swift.out in Resources */,
 				470A14E31BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out in Resources */,
 				470A14EB1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Defaults.swift.out in Resources */,
+				C24AFD0E1C924A29005FE3EF /* Fonts-File-CustomName.swift.out in Resources */,
 				C2265B591C8907CA00CA5C4F /* colors.json in Resources */,
 				09A87B671BCCA4E600D9B9F5 /* colors.txt in Resources */,
 				091150361BD3274E00EBC803 /* images-default.stencil in Resources */,
@@ -457,11 +476,13 @@
 				EFFE62F81C27081A00FE9783 /* Dependency.storyboard in Resources */,
 				09A87B5E1BCCA4D100D9B9F5 /* Message.storyboard in Resources */,
 				09A87B641BCCA4DC00D9B9F5 /* Images.xcassets in Resources */,
+				C24AFD041C92370D005FE3EF /* fonts-default.stencil in Resources */,
 				4761E0381BDE753000B9B05F /* Storyboards-Empty.swift.out in Resources */,
 				641CD33E1C3AE35A00D7FED9 /* colors.clr in Resources */,
 				09A87B5F1BCCA4D100D9B9F5 /* Wizard.storyboard in Resources */,
 				09EB0A2B1BDC60F000B2CF79 /* Images-File-CustomName.swift.out in Resources */,
 				09A87B6C1BCCA5F600D9B9F5 /* Strings-Entries-Defaults.swift.out in Resources */,
+				C24AFD0A1C924188005FE3EF /* Fonts-File-Empty.swift.out in Resources */,
 				0911503B1BD3ECAE00EBC803 /* colors-default.stencil in Resources */,
 				09A87B6D1BCCA5F600D9B9F5 /* Strings-File-Defaults.swift.out in Resources */,
 				09EB0A2A1BDC60F000B2CF79 /* Images-Entries-Defaults.swift.out in Resources */,
@@ -483,6 +504,7 @@
 				93DA731D1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out in Resources */,
 				09EB0A2F1BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out in Resources */,
 				09EB0A2C1BDC60F000B2CF79 /* Images-File-Defaults.swift.out in Resources */,
+				C24AFD0C1C924760005FE3EF /* Fonts-File-Default.swift.out in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +593,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C24AFD021C91DE33005FE3EF /* fonts.swift in Sources */,
 				09A87B741BCCBE6D00D9B9F5 /* strings.swift in Sources */,
 				09A87B761BCCC02C00D9B9F5 /* colors.swift in Sources */,
 				09A87B4A1BCC9BB200D9B9F5 /* storyboards.swift in Sources */,
@@ -585,6 +608,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2DBEADE1C8F87AD00E62C9E /* FontsTests.swift in Sources */,
 				09A87B5B1BCCA37800D9B9F5 /* ImagesTests.swift in Sources */,
 				09A87B5A1BCCA37200D9B9F5 /* StoryboardTests.swift in Sources */,
 				09A87B5D1BCCA38400D9B9F5 /* StringsTests.swift in Sources */,
