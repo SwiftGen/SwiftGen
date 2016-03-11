@@ -39,6 +39,7 @@
 		BBECFD3437A4436873C68217FBD1570E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6586E91DF9AD32C88B3212B7D04952AA /* Cocoa.framework */; };
 		BF0B54A7BE8ECDEEED5CDC2A504508B8 /* GenumKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DF9A26894B62EF2C68B13878FE290C /* GenumKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C15D6608B4141DA8170E7B7DB643CDE4 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A842EB8ED79BBE76FF8B83D8FF59AE1A /* Filters.swift */; };
+		C2DBEADB1C8E387400E62C9E /* FontsFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DBEAD91C8E386B00E62C9E /* FontsFileParser.swift */; };
 		C67F6447DA78AAE41B1B4924EEACD84B /* Include.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598E51E302EC3A25A7A2769D2F785345 /* Include.swift */; };
 		C7DF1340BF44CA293A5214BBFD43FBB4 /* Commander-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D23306EC14F92750C0DB4F76886FB77B /* Commander-dummy.m */; };
 		D1AA358B8DFBC5580AE830E49A82E727 /* Pods-swiftgen-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E7941FF308914D4E806F12A9F0A0E1C6 /* Pods-swiftgen-dummy.m */; };
@@ -183,6 +184,7 @@
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BAC66522F339FBFB8E6E37E44015545D /* Command.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Command.swift; path = Commander/Command.swift; sourceTree = "<group>"; };
 		C158D6B1D1B201A3D569F8F9CC475AC3 /* Filters.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
+		C2DBEAD91C8E386B00E62C9E /* FontsFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsFileParser.swift; sourceTree = "<group>"; };
 		C6B9D3FF012BBC698FBA8D6CEB7AF94A /* Stencil.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Stencil.xcconfig; sourceTree = "<group>"; };
 		C78C83998486E5D84C243960BF2B0A68 /* SwiftIdentifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SwiftIdentifier.swift; sourceTree = "<group>"; };
 		C7F145514AC0C00C63A377D3033C4D74 /* Commander-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Commander-umbrella.h"; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				6270624087FE32B9D2727E67BA9F8870 /* ColorsFileParser.swift */,
 				6E375A67D5FA17EAFAF535617DE51D14 /* StoryboardParser.swift */,
 				970D69706EC8150AC00D269E325A1569 /* StringsFileParser.swift */,
+				C2DBEAD91C8E386B00E62C9E /* FontsFileParser.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -783,6 +786,7 @@
 				72FAD3D82556C6592B2ABC2BB2DB3F64 /* StoryboardParser.swift in Sources */,
 				A5821018DB55C7764827FE0282E63BEA /* StringsFileParser.swift in Sources */,
 				ADC55DFF0B46BE27BBEBEDC1FFB1B9BF /* SwiftIdentifier.swift in Sources */,
+				C2DBEADB1C8E387400E62C9E /* FontsFileParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
