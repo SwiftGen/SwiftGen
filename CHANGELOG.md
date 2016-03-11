@@ -5,6 +5,8 @@
 ## Master
 * Added support for Fonts using the `swiftgen fonts` command.  
   [Derek Ostrander](https://github.com/dostrander)
+* Introducing alternative way to install SwiftGen: using CocoaPods! See README for more details.  
+  [Olivier Halligon](https://github.com/AliSoftware), [#95](https://github.com/AliSoftware/SwiftGen/issues/95)
 * Added support for JSON (`colors.json`) files as input for the `swiftgen colors` subcommand.  
   [Derek Ostrander](https://github.com/dostrander)
 * Use `String(format:locale:arguments:)` and the `NSLocale.currentLocale()` in the "string" templates so that it works with `.stringdict` files and pluralization.  

@@ -13,7 +13,7 @@ let colorsCommand = command(
   outputOption,
   templateOption("colors"), templatePathOption,
   Option<String>("enumName", "Name", flag: "e", description: "The name of the enum to generate"),
-  Argument<Path>("FILE", description: "Colors.txt|.clr file to parse.", validator: fileExists)
+  Argument<Path>("FILE", description: "Colors.txt|.clr|.xml|.json file to parse.", validator: fileExists)
 ) { output, templateName, templatePath, enumName, path in
 
   let filePath = String(path)

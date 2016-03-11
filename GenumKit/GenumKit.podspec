@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/AliSoftware/SwiftGen"
   s.license      = "MIT"
   s.author       = { "Olivier Halligon" => "olivier@halligon.net" }
+  s.social_media_url = "https://twitter.com/aligatr"
 
   s.platform = :osx, '10.9'
 
@@ -24,6 +25,6 @@ Pod::Spec.new do |s|
 
   s.source_files = "**/*.swift"
 
-  s.dependency 'Stencil'
+  s.dependency 'Stencil', '~> 0.4.0'
   s.framework  = "Foundation"
 end
