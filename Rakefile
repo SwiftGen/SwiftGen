@@ -31,7 +31,7 @@ def defaults(args)
   [bindir, fmkdir, tpldir].map(&:expand_path)
 end
 
-task :check_xcode do
+task :check_xcode_version do
   xcode_dir = `xcode-select -p`.chomp
   xcode_version = `mdls -name kMDItemVersion -raw "#{xcode_dir}"/../..`.chomp
   unless xcode_version.start_with?('7.')
@@ -42,7 +42,7 @@ end
 ## [ Build Tasks ] ############################################################
 
 desc "Build the CLI binary and its frameworks in #{BUILD_DIR}"
-task :build, [:bindir, :tpldir] => [:check_xcode] + DEPENDENCIES do |_, args|
+task :build, [:bindir, :tpldir] => [:check_xcode_version] + DEPENDENCIES.map { |dep| "dependencies:#{dep}" } do |_, args|
   (bindir, _, tpldir) = defaults(args)
   tpl_rel_path = tpldir.relative_path_from(bindir)
   main = File.read('swiftgen-cli/main.swift')
@@ -53,12 +53,14 @@ task :build, [:bindir, :tpldir] => [:check_xcode] + DEPENDENCIES do |_, args|
   xcpretty %Q(xcrun -sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} -F #{BUILD_DIR}/ #{frameworks} swiftgen-cli/*.swift)
 end
 
-DEPENDENCIES.each do |fmk|
-  # desc "Build #{fmk}.framework"
-  task fmk do
-    print_info "== Building  #{fmk}.framework =="
-    xcpretty %Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION})
-  end
+namespace :dependencies do
+  DEPENDENCIES.each do |fmk|
+    # desc "Build #{fmk}.framework"
+    task fmk do
+      print_info "== Building  #{fmk}.framework =="
+      xcpretty %Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION})
+    end
+end
 end
 
 desc "Build the CLI and link it so it can be run from #{BUILD_DIR}. Useful for testing without installing."
@@ -143,8 +145,9 @@ def log_result(result, label, error_msg)
   if result
     puts "#{label.ljust(25)} \u{2705}"
   else
-    puts "#{label.ljust(25)} \u{274C} -  #{error_msg}"
+    puts "#{label.ljust(25)} \u{274C}  - #{error_msg}"
   end
+  result
 end
 
 namespace :release do
@@ -159,26 +162,29 @@ namespace :release do
     # Extract version from GenumKit.podspec
     version = podspec_version('SwiftGen')
     puts "#{'SwiftGen.podspec'.ljust(25)} \u{1F449}  #{version}"
+    results = []
 
     genumkit_version = podspec_version('GenumKit/GenumKit')
-    log_result( genumkit_version == version, 'GenumKit version', 'Please make sure GenumKit.podspec has the same version as SwiftGen.podspec')
+    results << log_result( genumkit_version == version, 'GenumKit version', 'Please make sure GenumKit.podspec has the same version as SwiftGen.podspec')
 
     # Check if entry present in CHANGELOG
     changelog_entry = system(%Q{grep -q '^## #{Regexp.quote(version)}$' CHANGELOG.md})
-    log_result(changelog_entry, "CHANGELOG, Entry added", "Please add an entry for #{version} in CHANGELOG.md")
+    results << log_result(changelog_entry, "CHANGELOG, Entry added", "Please add an entry for #{version} in CHANGELOG.md")
 
-    changelog_no_master = system(%q{grep -qi '^## Master' CHANGELOG.md})
-    log_result(changelog_no_master, "CHANGELOG, No master", 'Please remove entry for master in CHANGELOG')
+    changelog_master = system(%q{grep -qiv '^## Master' CHANGELOG.md})
+    results << log_result(!changelog_master, "CHANGELOG, No master", 'Please remove entry for master in CHANGELOG')
 
     # Check if example project updated
     sample_project_pods = YAML.load_file('Podfile.lock')['PODS']
     sample_project_updated = sample_project_pods.reduce(false) { |a, e| a || (e.is_a?(Hash) && e.keys.include?("GenumKit (#{version})")) }
-    log_result(sample_project_updated, "Sample project updated", 'Please run pod update on the sample project')
+    results << log_result(sample_project_updated, "Sample project updated", 'Please run pod update on the sample project')
+
+    exit 1 unless results.all?
   end
 
-  task :zip => :build do
+  task :zip => [:clean, :build] do
     `cp LICENSE build/swiftgen`
-    `cd build; zip -r swiftgen-#{podspec_version}.zip swiftgen`
+    `cd build/swiftgen; zip -r ../swiftgen-#{podspec_version}.zip .`
   end
 
   desc 'Prepare a new release'
