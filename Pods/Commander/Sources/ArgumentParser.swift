@@ -52,10 +52,10 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
   /// Initialises the ArgumentParser with an array of arguments
   public init(arguments: [String]) {
     self.arguments = arguments.map { argument in
-      if argument.hasPrefix("-") {
+      if argument.characters.first == "-" {
         let flags = argument[argument.startIndex.successor()..<argument.endIndex]
 
-        if flags.hasPrefix("-") {
+        if flags.characters.first == "-" {
           let option = flags[flags.startIndex.successor()..<flags.endIndex]
           return .Option(option)
         }
@@ -118,7 +118,7 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
         }
         fallthrough
       default:
-        ++index
+        index += 1
       }
 
       if hasOption {
@@ -160,7 +160,7 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
         break
       }
 
-      ++index
+      index += 1
     }
 
     return false
@@ -171,13 +171,14 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
     var index = 0
     for argument in arguments {
       switch argument {
-      case .Flag(var option):
-        if option.contains(flag) {
-          option.remove(flag)
+      case .Flag(let option):
+        var options = option
+        if options.contains(flag) {
+          options.remove(flag)
           arguments.removeAtIndex(index)
 
-          if !option.isEmpty {
-            arguments.insert(.Flag(option), atIndex: index)
+          if !options.isEmpty {
+            arguments.insert(.Flag(options), atIndex: index)
           }
           return true
         }
@@ -185,7 +186,7 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
         break
       }
 
-      ++index
+      index += 1
     }
 
     return false
@@ -210,7 +211,7 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
         }
         fallthrough
       default:
-        ++index
+        index += 1
       }
 
       if hasFlag {

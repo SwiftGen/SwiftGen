@@ -26,9 +26,10 @@ public class Context {
 
     /// Set a variable in the current context, deleting the variable if it's nil
     set(value) {
-      if var dictionary = dictionaries.popLast() {
-        dictionary[key] = value
-        dictionaries.append(dictionary)
+      if let dictionary = dictionaries.popLast() {
+        var mutable_dictionary = dictionary
+        mutable_dictionary[key] = value
+        dictionaries.append(mutable_dictionary)
       }
     }
   }

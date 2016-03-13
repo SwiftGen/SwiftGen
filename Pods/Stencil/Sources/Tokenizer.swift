@@ -1,41 +1,68 @@
 import Foundation
 
 
-public enum Token : Equatable {
-  /// A token representing a piece of text.
-  case Text(value:String)
+/// Split a string by spaces leaving quoted phrases together
+func smartSplit(value: String) -> [String] {
+  var word = ""
+  var separator: Character = " "
+  var components: [String] = []
 
-  /// A token representing a variable.
-  case Variable(value:String)
+  for character in value.characters {
+    if character == separator {
+      if separator != " " {
+        word.append(separator)
+      }
 
-  /// A token representing a comment.
-  case Comment(value:String)
+      if !word.isEmpty {
+        components.append(word)
+        word = ""
+      }
 
-  /// A token representing a template block.
-  case Block(value:String)
-
-  /// Returns the underlying value as an array seperated by spaces
-  public func components() -> [String] {
-    // TODO: Make this smarter and treat quoted strings as a single component
-    let characterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()
-
-    func strip(value: String) -> [String] {
-      return value.stringByTrimmingCharactersInSet(characterSet).componentsSeparatedByCharactersInSet(characterSet)
-    }
-
-    switch self {
-    case .Block(let value):
-      return strip(value)
-    case .Variable(let value):
-      return strip(value)
-    case .Text(let value):
-      return strip(value)
-    case .Comment(let value):
-      return strip(value)
+      separator = " "
+    } else {
+      if separator == " " && (character == "'" || character == "\"") {
+        separator = character
+      }
+      word.append(character)
     }
   }
 
-  public var contents:String {
+  if !word.isEmpty {
+    components.append(word)
+  }
+
+  return components
+}
+
+
+public enum Token : Equatable {
+  /// A token representing a piece of text.
+  case Text(value: String)
+
+  /// A token representing a variable.
+  case Variable(value: String)
+
+  /// A token representing a comment.
+  case Comment(value: String)
+
+  /// A token representing a template block.
+  case Block(value: String)
+
+  /// Returns the underlying value as an array seperated by spaces
+  public func components() -> [String] {
+    switch self {
+    case .Block(let value):
+      return smartSplit(value)
+    case .Variable(let value):
+      return smartSplit(value)
+    case .Text(let value):
+      return smartSplit(value)
+    case .Comment(let value):
+      return smartSplit(value)
+    }
+  }
+
+  public var contents: String {
     switch self {
     case .Block(let value):
       return value
@@ -49,7 +76,8 @@ public enum Token : Equatable {
   }
 }
 
-public func ==(lhs:Token, rhs:Token) -> Bool {
+
+public func == (lhs: Token, rhs: Token) -> Bool {
   switch (lhs, rhs) {
   case (.Text(let lhsValue), .Text(let rhsValue)):
     return lhsValue == rhsValue

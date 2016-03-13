@@ -7,7 +7,7 @@
 import Stencil
 
 // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
-public class CompactTemplate: Template {
+public class GenumTemplate: Template {
   public override init(templateString: String) {
     let templateStringWithMarkedNewlines = templateString
       .stringByReplacingOccurrencesOfString("\n\n", withString: "\n\u{000b}\n")
@@ -15,8 +15,8 @@ public class CompactTemplate: Template {
     super.init(templateString: templateStringWithMarkedNewlines)
   }
 
-  public override func render(context: Context? = nil) throws -> String {
-    return try removeExtraLines(super.render(context))
+  public override func render(context: Context? = nil, namespace: Namespace? = nil) throws -> String {
+    return try removeExtraLines(super.render(context, namespace: namespace ?? GenumNamespace()))
   }
 
   // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
@@ -31,18 +31,18 @@ public class CompactTemplate: Template {
 }
 
 // Register Genum-specific tags & filters
-public class GenumTemplate: CompactTemplate {
-  public override init(templateString: String) {
-    super.init(templateString: templateString)
-    parser.registerTag("set", parser: SetNode.parse)
-    parser.registerFilter("swiftIdentifier", filter: StringFilters.stringToSwiftIdentifier)
-    parser.registerFilter("join", filter: ArrayFilters.join)
-    parser.registerFilter("lowerFirstWord", filter: StringFilters.lowerFirstWord)
-    parser.registerFilter("snakeToCamelCase", filter: StringFilters.snakeToCamelCase)
-    parser.registerFilter("snakeToCamelCaseNoPrefix", filter: StringFilters.snakeToCamelCaseNoPrefix)
-    parser.registerFilter("titlecase", filter: StringFilters.titlecase)
-    parser.registerFilter("hexToInt", filter: NumFilters.hexToInt)
-    parser.registerFilter("int255toFloat", filter: NumFilters.int255toFloat)
-    parser.registerFilter("percent", filter: NumFilters.percent)
+public class GenumNamespace: Namespace {
+  public override init() {
+    super.init()
+    self.registerTag("set", parser: SetNode.parse)
+    self.registerFilter("swiftIdentifier", filter: StringFilters.stringToSwiftIdentifier)
+    self.registerFilter("join", filter: ArrayFilters.join)
+    self.registerFilter("lowerFirstWord", filter: StringFilters.lowerFirstWord)
+    self.registerFilter("snakeToCamelCase", filter: StringFilters.snakeToCamelCase)
+    self.registerFilter("snakeToCamelCaseNoPrefix", filter: StringFilters.snakeToCamelCaseNoPrefix)
+    self.registerFilter("titlecase", filter: StringFilters.titlecase)
+    self.registerFilter("hexToInt", filter: NumFilters.hexToInt)
+    self.registerFilter("int255toFloat", filter: NumFilters.int255toFloat)
+    self.registerFilter("percent", filter: NumFilters.percent)
   }
 }

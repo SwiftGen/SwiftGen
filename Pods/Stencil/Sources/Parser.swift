@@ -1,13 +1,15 @@
-public func until(tags:[String])(parser:TokenParser, token:Token) -> Bool {
-  if let name = token.components().first {
-    for tag in tags {
-      if name == tag {
-        return true
+public func until(tags: [String]) -> ((TokenParser, Token) -> Bool) {
+  return { parser, token in
+    if let name = token.components().first {
+      for tag in tags {
+        if name == tag {
+          return true
+        }
       }
     }
-  }
 
-  return false
+    return false
+  }
 }
 
 public typealias Filter = Any? throws -> Any?
@@ -16,38 +18,12 @@ public typealias Filter = Any? throws -> Any?
 public class TokenParser {
   public typealias TagParser = (TokenParser, Token) throws -> NodeType
 
-  private var tokens:[Token]
-  private var tags = [String:TagParser]()
-  private var filters = [String: Filter]()
+  private var tokens: [Token]
+  private let namespace: Namespace
 
-  public init(tokens:[Token]) {
+  public init(tokens: [Token], namespace: Namespace) {
     self.tokens = tokens
-    registerTag("for", parser: ForNode.parse)
-    registerTag("if", parser: IfNode.parse)
-    registerTag("ifnot", parser: IfNode.parse_ifnot)
-    registerTag("now", parser: NowNode.parse)
-    registerTag("include", parser: IncludeNode.parse)
-    registerTag("extends", parser: ExtendsNode.parse)
-    registerTag("block", parser: BlockNode.parse)
-    registerFilter("capitalize", filter: capitalise)
-    registerFilter("uppercase", filter: uppercase)
-    registerFilter("lowercase", filter: lowercase)
-  }
-
-  /// Registers a new template tag
-  public func registerTag(name:String, parser:TagParser) {
-    tags[name] = parser
-  }
-
-  /// Registers a simple template tag with a name and a handler
-  public func registerSimpleTag(name:String, handler:(Context throws -> String)) {
-    registerTag(name, parser: { parser, token in
-      return SimpleNode(handler: handler)
-    })
-  }
-
-  public func registerFilter(name: String, filter: Filter) {
-    filters[name] = filter
+    self.namespace = namespace
   }
 
   /// Parse the given tokens into nodes
@@ -75,7 +51,7 @@ public class TokenParser {
         }
 
         if let tag = tag {
-          if let parser = self.tags[tag] {
+          if let parser = namespace.tags[tag] {
             nodes.append(try parser(self, token))
           } else {
             throw TemplateSyntaxError("Unknown template tag '\(tag)'")
@@ -102,7 +78,7 @@ public class TokenParser {
   }
 
   public func findFilter(name: String) throws -> Filter {
-    if let filter = filters[name] {
+    if let filter = namespace.filters[name] {
       return filter
     }
 

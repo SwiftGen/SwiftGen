@@ -1,6 +1,6 @@
 # Stencil
 
-[![Build Status](http://img.shields.io/circleci/project/kylef/Stencil/master.svg)](https://circleci.com/gh/kylef/Stencil)
+[![Build Status](https://travis-ci.org/kylef/Stencil.svg?branch=master)](https://travis-ci.org/kylef/Stencil)
 
 Stencil is a simple and powerful template language for Swift. It provides a
 syntax similar to Django and Mustache. If you're familiar with these, you will
@@ -112,18 +112,6 @@ For example, `Stencil` to `stencil`.
 {{ "Stencil"|lowercase }}
 ```
 
-#### Registering custom filters
-
-```swift
-template.parser.registerFilter("double") { value in
-  if let value = value as? Int {
-    return value * 2
-  }
-
-  return value
-}
-```
-
 ### Tags
 
 Tags are a mechanism to execute a piece of code, allowing you to have
@@ -194,13 +182,37 @@ let context = Context(dictionary: [
 ])
 ```
 
+### Customisation
+
+You can build your own custom filters and tags and pass them down while
+rendering your template. Any custom filters or tags must be registered
+with a namespace which contains all filters and tags available to the template.
+
+```swift
+let namespace = Namespace()
+// Register your filters and tags with the namespace
+let rendered = try template.render(context, namespace: namespace)
+```
+
+#### Registering custom filters
+
+```swift
+namespace.registerFilter("double") { value in
+  if let value = value as? Int {
+    return value * 2
+  }
+
+  return value
+}
+```
+
 #### Building custom tags
 
 You can build a custom template tag. There are a couple of APIs to allow
 you to write your own custom tags. The following is the simplest form:
 
 ```swift
-template.parser.registerSimpleTag("custom") { context in
+namespace.registerSimpleTag("custom") { context in
   return "Hello World"
 }
 ```
@@ -214,9 +226,8 @@ of template tags. You will need to call the `registerTag` API which accepts a
 closure to handle the parsing. You can find examples of the `now`, `if` and
 `for` tags found inside `Node.swift`.
 
-Custom template tags must be registered prior to calling `Template.render` the first time.
-
-The architecture of Stencil along with how to build advanced plugins can be found in the [architecture](ARCHITECTURE.md) document.
+The architecture of Stencil along with how to build advanced plugins can be
+found in the [architecture](ARCHITECTURE.md) document.
 
 ### Comments
 
@@ -230,4 +241,3 @@ To comment out part of your template, you can use the following syntax:
 
 Stencil is licensed under the BSD license. See [LICENSE](LICENSE) for more
 info.
-

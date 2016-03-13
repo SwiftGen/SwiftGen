@@ -76,6 +76,8 @@ public class VariableNode : NodeType {
   }
 }
 
+
+#if !os(Linux)
 public class NowNode : NodeType {
   public let format:Variable
 
@@ -114,6 +116,8 @@ public class NowNode : NodeType {
     return formatter!.stringFromDate(date)
   }
 }
+#endif
+
 
 public class ForNode : NodeType {
   let variable:Variable
@@ -157,9 +161,16 @@ public class ForNode : NodeType {
   public func render(context: Context) throws -> String {
     let values = try variable.resolve(context)
 
-    if let values = values as? NSArray where values.count > 0 {
-      return try values.map { item in
-        try context.push([loopVariable: item]) {
+    if let values = values as? [Any] where values.count > 0 {
+      let count = values.count
+      return try values.enumerate().map { index, item in
+        let forContext: [String: Any] = [
+          "first": index == 0,
+          "last": index == (count - 1),
+          "counter": index + 1,
+        ]
+
+        return try context.push([loopVariable: item, "forloop": forContext]) {
           try renderNodes(nodes, context)
         }
       }.joinWithSeparator("")
@@ -232,10 +243,10 @@ public class IfNode : NodeType {
     let result = try variable.resolve(context)
     var truthy = false
 
-    if let result = result as? NSArray {
-      if result.count > 0 {
-        truthy = true
-      }
+    if let result = result as? [Any] {
+      truthy = !result.isEmpty
+    } else if let result = result as? [String:Any] {
+      truthy = !result.isEmpty
     } else if result != nil {
       truthy = true
     }
