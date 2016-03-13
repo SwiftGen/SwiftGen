@@ -91,9 +91,8 @@ public final class FontsFileParser {
 private extension FontsFileParser {
   func addFont(font: Font) {
     let familyName = font.familyName
-    if let _ = entries[familyName]
-    {
-      entries[familyName]!.insert(font)
+    if let styles = entries[familyName] {
+      entries[familyName] = styles.union([font])
     }
     else {
       entries[familyName] = [font]
