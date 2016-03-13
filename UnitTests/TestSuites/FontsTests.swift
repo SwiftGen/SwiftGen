@@ -22,7 +22,6 @@ class FontsTests: XCTestCase {
     func testDefaults() {
         let parser = FontsFileParser()
         parser.parseFonts(directoryPath())
-        parser.printFonts()
 
         let template = GenumTemplate(templateString: fixtureString("fonts-default.stencil"))
         let result = try! template.render(parser.stencilContext())
@@ -33,7 +32,6 @@ class FontsTests: XCTestCase {
     func testCustomName() {
         let parser = FontsFileParser()
         parser.parseFonts(directoryPath())
-        parser.printFonts()
 
         let template = GenumTemplate(templateString: fixtureString("fonts-default.stencil"))
         let result = try! template.render(parser.stencilContext(enumName: "AnotherFamily"))
