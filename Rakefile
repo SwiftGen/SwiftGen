@@ -1,8 +1,9 @@
 #!/usr/bin/rake
 require 'pathname'
-require 'YAML'
-require 'JSON'
+require 'yaml'
+require 'json'
 require 'net/http'
+require 'uri'
 
 
 
@@ -28,7 +29,7 @@ end
 
 def print_info(str)
   (red,clr) = (`tput colors`.chomp.to_i >= 8) ? %W(\e[33m \e[m) : ["", ""]
-  puts red, str.chomp, clr
+  puts red, "== #{str.chomp} ==", clr
 end
 
 def defaults(args)
@@ -57,7 +58,7 @@ task :build, [:bindir, :tpldir] => [:check_xcode_version] + DEPENDENCIES.map { |
   main = File.read('swiftgen-cli/main.swift')
   File.write('swiftgen-cli/main.swift', main.gsub(/^let TEMPLATES_RELATIVE_PATH = .*$/, %Q(let TEMPLATES_RELATIVE_PATH = "#{tpl_rel_path}")))
 
-  print_info "== Building Binary =="
+  print_info "Building Binary"
   frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
   xcpretty %Q(xcrun -sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} -F #{BUILD_DIR}/ #{frameworks} swiftgen-cli/*.swift)
 end
@@ -66,7 +67,7 @@ namespace :dependencies do
   DEPENDENCIES.each do |fmk|
     # desc "Build #{fmk}.framework"
     task fmk do
-      print_info "== Building  #{fmk}.framework =="
+      print_info "Building #{fmk}.framework"
       xcpretty %Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION})
     end
 end
@@ -86,18 +87,18 @@ desc "Install the binary in $bindir, frameworks — without the Swift dylibs —
 task 'install:light', [:bindir, :fmkdir, :tpldir] => :build do |_, args|
   (bindir, fmkdir, tpldir) = defaults(args)
 
-  print_info "== Installing binary in #{bindir} =="
+  print_info "Installing binary in #{bindir}"
   sh %Q(mkdir -p "#{bindir}")
   sh %Q(cp -f "#{BUILD_DIR}/#{BIN_NAME}" "#{bindir}")
 
-  print_info "== Installing frameworks in #{fmkdir} =="
+  print_info "Installing frameworks in #{fmkdir}"
   sh %Q(mkdir -p "#{fmkdir}")
   DEPENDENCIES.each do |fmk|
     sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}.framework" "#{fmkdir}")
   end
   sh %Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}")
 
-  print_info "== Installing templates in #{tpldir} =="
+  print_info "Installing templates in #{tpldir}"
   sh %Q(mkdir -p "#{tpldir}")
   sh %Q(cp -r "#{TEMPLATES_SRC_DIR}/" "#{tpldir}")
 end
@@ -107,7 +108,7 @@ desc "Install the binary in $bindir, frameworks — including Swift dylibs — i
 task :install, [:bindir, :fmkdir, :tpldir] => 'install:light' do |_, args|
   (bindir, fmkdir, tpldir) = defaults(args)
 
-  print_info "== Linking to standalone Swift dylibs =="
+  print_info "Linking to standalone Swift dylibs"
   sh %Q(xcrun swift-stdlib-tool --copy --scan-executable "#{bindir}/#{BIN_NAME}" --platform macosx --destination "#{fmkdir}")
   toolchain_dir = `xcrun -find swift-stdlib-tool`.chomp
   xcode_rpath = File.dirname(File.dirname(toolchain_dir)) + '/lib/swift/macosx'
@@ -120,6 +121,7 @@ end
 
 desc "Run the Unit Tests"
 task :tests do
+  print_info "Running Unit Tests"
   xcpretty %Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen-cli -sdk macosx test)
 end
 
@@ -194,38 +196,61 @@ namespace :release do
 
     exit 1 unless results.all?
 
-    puts("Release version #{version} [Y/n]?")
-    exit 2 unless (gets.chomp == 'Y')
+    print "Release version #{version} [Y/n]? "
+    exit 2 unless (STDIN.gets.chomp == 'Y')
   end
 
-  task :zip => [:clean, :build] do
-    `cp LICENSE build/swiftgen`
+  task :zip => [:clean, :install] do
+    `cp LICENSE README.md CHANGELOG.md build/swiftgen`
     `cd build/swiftgen; zip -r ../swiftgen-#{podspec_version}.zip .`
   end
 
   desc 'Create a new release'
-  task :new => [:check_versions, :github, :cocoapods, :homebrew]
+  task :new => [:check_versions, :tests, :github, :cocoapods, :homebrew]
 
-  def post(path, content_type, body)
-    req = Net::HTTP::Post.new(path, initheader = {'Content-Type' => content_type})
-    req.basic_auth 'AliSoftware', File.read('.apitoken')
-    req.body = body
-    Net::HTTP.new('api.github.com', 443).start { |http| http.request(req) }
+  def post(url, content_type)
+    uri = URI.parse(url)
+    req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' => content_type})
+    yield req if block_given?
+    req.basic_auth 'AliSoftware', File.read('.apitoken').chomp
+      
+    response = Net::HTTP.start(uri.host, uri.port, :use_ssl => (uri.scheme == 'https')) do |http|
+      http.request(req)
+    end
+    unless response.code == '201'
+      puts "Error: #{response.code} - #{response.message}"
+      puts response.body
+      exit 3
+    end
+    JSON.parse(response.body)
   end
 
   task :github => :zip do
     v = podspec_version
-    changelog = `sed -n /'^## #{v}$'/,/'^## '/p CHANGELOG.md`.gsub(/^## .*\n/,'')
-    release_json = { :tag_name => v, :name => v, :body => changelog, :draft => false, :prerelease => false }.to_json
     
-    response = post('/repos/AliSoftware/SwiftGen/releases', 'application/json', release_json)
-    assets_url = JSON.parse(response.body)['assets_url']
-    zip_content = File.read('build/swiftgen-#{v}.zip')
-    post(assets_url + "?name=swiftgen-#{v}.zip", 'application/zip', zip_content)
+    changelog = `sed -n /'^## #{v}$'/,/'^## '/p CHANGELOG.md`.gsub(/^## .*$/,'').strip
+    print_info "Releasing version #{v} on GitHub"
+    puts changelog
+  
+    json = post('https://api.github.com/repos/AliSoftware/SwiftGen/releases', 'application/json') do |req|
+      req.body = { :tag_name => v, :name => v, :body => changelog, :draft => false, :prerelease => false }.to_json
+    end
+    
+    upload_url = json['upload_url'].gsub(/\{.*\}/,"?name=swiftgen-#{v}.zip")
+    zipfile = "build/swiftgen-#{v}.zip"
+    zipsize = File.size(zipfile)
+    
+    print_info "Uploading ZIP (#{zipsize} bytes)"
+    post(upload_url, 'application/zip') do |req|
+      req.body_stream = File.open(zipfile, 'rb')
+      req.add_field('Content-Length', zipsize)
+      req.add_field('Content-Transfer-Encoding', 'binary')
+    end
   end
 
   task :cocoapods do
-    `pod trunk push SwiftGen.podspec`
+    print_info "Pushing pod to CocoaPods Trunk"
+    sh 'pod trunk push SwiftGen.podspec'
   end
 
   task :homebrew do
