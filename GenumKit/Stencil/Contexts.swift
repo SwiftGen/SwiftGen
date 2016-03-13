@@ -133,28 +133,33 @@ extension StringsFileParser {
 }
 
 /* MARK: - Stencil Context for Fonts
-    - `enumName`: `String`
-    - `fonts`: `Array`
-        - `familyName`: `String`
-        - `variant`: `Array`
-            - `name`: `String`
-            - `value`: `String`
+- `enumName`: `String`
+- `families`: `Array`
+  - `name`: `String`
+  - `fonts`: `Array`
+    - `name`: `String`
+    - `value`: `String`
 */
 
 extension FontsFileParser {
-    public func stencilContext(enumName enumName: String = "Family") -> Context{
-        // turn into array of dictionaries
-        let fontFamilies = entries.map { (name: String, variants: Set<String>) -> [String:AnyObject] in
-            let fontVariants = variants.map { return [
-                "name" : $0,
-                "value" : ($0 == "Regular" ? name : "\(name)-\($0)")
-                ]
-            }
-            return [
-                "familyName":name,
-                "variants":fontVariants
-            ]
-        }
-        return Context(dictionary: ["enumName": enumName, "fonts" : fontFamilies])
+  public func stencilContext(enumName enumName: String = "Family") -> Context{
+    // turn into array of dictionaries
+    let families = entries.map { (name: String, family: Set<Font>) -> [String:AnyObject] in
+      
+      let fonts = family.map { (font: Font) -> [String: String] in
+        // Font
+        return [
+          "name" : font.style,
+          "value" : font.postScriptName
+        ]
+      }
+
+      // Family
+      return [
+        "name":name,
+        "fonts":fonts
+      ]
     }
+    return Context(dictionary: ["enumName": enumName, "families" : families])
+  }
 }
