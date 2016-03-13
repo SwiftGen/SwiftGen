@@ -2,7 +2,7 @@
 
 ---
 
-## Master
+## 0.8.0
 
 * Introducing alternative way to install SwiftGen: using CocoaPods! See README for more details.  
   [Olivier Halligon](https://github.com/AliSoftware), [#95](https://github.com/AliSoftware/SwiftGen/issues/95)
