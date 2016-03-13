@@ -1,5 +1,10 @@
 #!/usr/bin/rake
 require 'pathname'
+require 'YAML'
+require 'JSON'
+require 'net/http'
+
+
 
 ## [ Constants ] ##############################################################
 
@@ -8,6 +13,8 @@ DEPENDENCIES = [:PathKit, :Stencil, :Commander, :GenumKit]
 CONFIGURATION = 'Release'
 BUILD_DIR = 'build/' + CONFIGURATION
 TEMPLATES_SRC_DIR = 'templates'
+
+
 
 ## [ Utils ] ##################################################################
 
@@ -39,6 +46,8 @@ task :check_xcode_version do
   end
 end
 
+
+
 ## [ Build Tasks ] ############################################################
 
 desc "Build the CLI binary and its frameworks in #{BUILD_DIR}"
@@ -67,6 +76,8 @@ desc "Build the CLI and link it so it can be run from #{BUILD_DIR}. Useful for t
 task :link => :build do
   sh %Q(install_name_tool -add_rpath "@executable_path" #{BUILD_DIR}/#{BIN_NAME})
 end
+
+
 
 ## [ Install Tasks ] ##########################################################
 
@@ -103,6 +114,8 @@ task :install, [:bindir, :fmkdir, :tpldir] => 'install:light' do |_, args|
   sh %Q(xcrun install_name_tool -delete_rpath "#{xcode_rpath}" "#{bindir}/#{BIN_NAME}")
 end
 
+
+
 ## [ Tests & Clean ] ##########################################################
 
 desc "Run the Unit Tests"
@@ -116,6 +129,7 @@ task :clean do
 end
 
 task :default => [:build]
+
 
 
 ## [ Playground Resources ] ###################################################
@@ -139,28 +153,27 @@ namespace :playground do
   task :resources => %w(clean images storyboard strings)
 end
 
+
+
 ## [ Release a new version ] ##################################################
 
-def log_result(result, label, error_msg)
-  if result
-    puts "#{label.ljust(25)} \u{2705}"
-  else
-    puts "#{label.ljust(25)} \u{274C}  - #{error_msg}"
-  end
-  result
-end
-
 namespace :release do
-  def podspec_version(file)
-    require 'JSON'
+  def podspec_version(file = 'SwiftGen')
     JSON.parse(`pod ipc spec #{file}.podspec`)["version"]
   end
 
-  task :check_versions do
-    require 'YAML'
+  def log_result(result, label, error_msg)
+    if result
+      puts "#{label.ljust(25)} \u{2705}"
+    else
+      puts "#{label.ljust(25)} \u{274C}  - #{error_msg}"
+    end
+    result
+  end
 
+  task :check_versions do
     # Extract version from GenumKit.podspec
-    version = podspec_version('SwiftGen')
+    version = podspec_version
     puts "#{'SwiftGen.podspec'.ljust(25)} \u{1F449}  #{version}"
     results = []
 
@@ -171,7 +184,7 @@ namespace :release do
     changelog_entry = system(%Q{grep -q '^## #{Regexp.quote(version)}$' CHANGELOG.md})
     results << log_result(changelog_entry, "CHANGELOG, Entry added", "Please add an entry for #{version} in CHANGELOG.md")
 
-    changelog_master = system(%q{grep -qiv '^## Master' CHANGELOG.md})
+    changelog_master = system(%q{grep -qi '^## Master' CHANGELOG.md})
     results << log_result(!changelog_master, "CHANGELOG, No master", 'Please remove entry for master in CHANGELOG')
 
     # Check if example project updated
@@ -180,6 +193,9 @@ namespace :release do
     results << log_result(sample_project_updated, "Sample project updated", 'Please run pod update on the sample project')
 
     exit 1 unless results.all?
+
+    puts("Release version #{version} [Y/n]?")
+    exit 2 unless (gets.chomp == 'Y')
   end
 
   task :zip => [:clean, :build] do
@@ -187,11 +203,34 @@ namespace :release do
     `cd build/swiftgen; zip -r ../swiftgen-#{podspec_version}.zip .`
   end
 
-  desc 'Prepare a new release'
-  task :new => [:check_versions, :zip] do
-    # Those tasks are still manual for now until I have time to write rake tasks for them too
-    puts "1. Create a new GitHub release and attach the zip file to it"
-    puts "2. pod trunk push SwiftGen.podspec"
-    puts "3. Push a version to homebrew (see wiki)"
+  desc 'Create a new release'
+  task :new => [:check_versions, :github, :cocoapods, :homebrew]
+
+  def post(path, content_type, body)
+    req = Net::HTTP::Post.new(path, initheader = {'Content-Type' => content_type})
+    req.basic_auth 'AliSoftware', File.read('.apitoken')
+    req.body = body
+    Net::HTTP.new('api.github.com', 443).start { |http| http.request(req) }
   end
+
+  task :github => :zip do
+    v = podspec_version
+    changelog = `sed -n /'^## #{v}$'/,/'^## '/p CHANGELOG.md`.gsub(/^## .*\n/,'')
+    release_json = { :tag_name => v, :name => v, :body => changelog, :draft => false, :prerelease => false }.to_json
+    
+    response = post('/repos/AliSoftware/SwiftGen/releases', 'application/json', release_json)
+    assets_url = JSON.parse(response.body)['assets_url']
+    zip_content = File.read('build/swiftgen-#{v}.zip')
+    post(assets_url + "?name=swiftgen-#{v}.zip", 'application/zip', zip_content)
+  end
+
+  task :cocoapods do
+    `pod trunk push SwiftGen.podspec`
+  end
+
+  task :homebrew do
+    puts "[TODO] Push a version to homebrew (see wiki)"
+  end
+
 end
+
