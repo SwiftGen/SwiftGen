@@ -254,7 +254,27 @@ namespace :release do
   end
 
   task :homebrew do
-    puts "[TODO] Push a version to homebrew (see wiki)"
+    tag = podspec_version
+    Dir.chdir('/usr/local') do
+      puts "[TODO] Push a version to homebrew (see wiki)"
+      sh 'git checkout master'
+      sh 'git pull'
+      sh "git checkout -b swiftgen-#{tag} origin/master"
+
+      targz_url = "https://github.com/AliSoftware/SwiftGen/archive/#{tag}.tar.gz"
+      sha256_res = `curl -L #{targz_url} | shasum -a 256`
+      sha256 = /^[A-Fa-f0-9]+/.match(sha256_res)
+      raise 'Unable to extract SHA256' if sha256.nil?
+      formula_file = '/usr/local/Library/Formula/swiftgen.rb'
+      formula = File.read(formula_file)
+      new_formula = formula.gsub(/url "https:.*"$/, %Q(url "#{targz_url}")).gsub(/sha256 ".*"$/,%Q(sha256 "#{sha256.to_s}"))
+      File.write(formula_file, new_formula)
+
+      sh "git add #{formula_file}"
+      sh "git commit -m 'swiftgen #{tag}'"
+      sh "git push -u AliSoftware swiftgen-#{tag}"
+      sh "open 'https://github.com/Homebrew/homebrew/compare/master...AliSoftware:swiftgen-#{tag}?expand=1'"
+    end
   end
 
 end
