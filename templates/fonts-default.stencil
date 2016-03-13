@@ -1,14 +1,22 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
-{% if fonts %}
+{% if families %}
 import UIKit.UIFont
 
 extension UIFont {
+{% for family in families %}
+    convinience init?(font: {{enumName}}.{{family.name|swiftIdentifier|snakeToCamelCaseNoPrefix}}, size: CGFloat) {
+        self.init(name:font.rawValue, size:size)
+    }
+{% endfor %}
+}
+
+extension UIFont {
     struct {{enumName}} {
-        {% for font in fonts %}
-        enum {{font.familyName|swiftIdentifier}}: String {
-            {% for variant in font.variants %}
-            case {{variant.name|swiftIdentifier}} = "{{variant.value}}"
+        {% for family in families %}
+        enum {{family.name|swiftIdentifier|snakeToCamelCaseNoPrefix}}: String {
+            {% for font in family.fonts %}
+            case {{font.name|swiftIdentifier|snakeToCamelCaseNoPrefix}} = "{{font.value}}"
             {% endfor %}
 
             func font(size: CGFloat) -> UIFont? { return UIFont(name:self.rawValue, size:size)}

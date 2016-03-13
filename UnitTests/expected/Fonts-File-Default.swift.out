@@ -3,20 +3,36 @@
 import UIKit.UIFont
 
 extension UIFont {
+    convinience init?(font: Family.SFNSDisplay, size: CGFloat) {
+        self.init(name:font.rawValue, size:size)
+    }
+    convinience init?(font: Family.SFNSText, size: CGFloat) {
+        self.init(name:font.rawValue, size:size)
+    }
+    convinience init?(font: Family.ZapfDingbats, size: CGFloat) {
+        self.init(name:font.rawValue, size:size)
+    }
+}
+
+extension UIFont {
     struct Family {
-        enum Helvetica: String {
-            case Regular = "Helvetica"
-            case Bold = "Helvetica-Bold"
-            case Thin = "Helvetica-Thin"
-            case Medium = "Helvetica-Medium"
+        enum SFNSDisplay: String {
+            case Regular = ".SFNSDisplay-Regular"
+            case Heavy = ".SFNSDisplay-Heavy"
+            case Black = ".SFNSDisplay-Black"
+            case Bold = ".SFNSDisplay-Bold"
 
             func font(size: CGFloat) -> UIFont? { return UIFont(name:self.rawValue, size:size)}
         }
-        enum HelveticaNeue: String {
-            case Regular = "HelveticaNeue"
-            case Bold = "HelveticaNeue-Bold"
-            case Thin = "HelveticaNeue-Thin"
-            case Medium = "HelveticaNeue-Medium"
+        enum SFNSText: String {
+            case Heavy = ".SFNSText-Heavy"
+            case Bold = ".SFNSText-Bold"
+            case Regular = ".SFNSText-Regular"
+
+            func font(size: CGFloat) -> UIFont? { return UIFont(name:self.rawValue, size:size)}
+        }
+        enum ZapfDingbats: String {
+            case Regular = "ZapfDingbatsITC"
 
             func font(size: CGFloat) -> UIFont? { return UIFont(name:self.rawValue, size:size)}
         }

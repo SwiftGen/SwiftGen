@@ -21,34 +21,19 @@ class FontsTests: XCTestCase {
 
     func testDefaults() {
         let parser = FontsFileParser()
-        parser.addVariation("Helvetica", variation:"Regular")
-        parser.addVariation("Helvetica", variation:"Bold")
-        parser.addVariation("Helvetica", variation:"Thin")
-        parser.addVariation("Helvetica", variation:"Medium")
-
-        parser.addVariation("HelveticaNeue", variation:"Regular")
-        parser.addVariation("HelveticaNeue", variation:"Bold")
-        parser.addVariation("HelveticaNeue", variation:"Thin")
-        parser.addVariation("HelveticaNeue", variation:"Medium")
+        parser.parseFonts(directoryPath())
+        parser.printFonts()
 
         let template = GenumTemplate(templateString: fixtureString("fonts-default.stencil"))
         let result = try! template.render(parser.stencilContext())
         let expected = fixtureString("Fonts-File-Default.swift.out")
         XCTDiffStrings(result, expected)
-
     }
 
     func testCustomName() {
         let parser = FontsFileParser()
-        parser.addVariation("Helvetica", variation:"Regular")
-        parser.addVariation("Helvetica", variation:"Bold")
-        parser.addVariation("Helvetica", variation:"Thin")
-        parser.addVariation("Helvetica", variation:"Medium")
-
-        parser.addVariation("HelveticaNeue", variation:"Regular")
-        parser.addVariation("HelveticaNeue", variation:"Bold")
-        parser.addVariation("HelveticaNeue", variation:"Thin")
-        parser.addVariation("HelveticaNeue", variation:"Medium")
+        parser.parseFonts(directoryPath())
+        parser.printFonts()
 
         let template = GenumTemplate(templateString: fixtureString("fonts-default.stencil"))
         let result = try! template.render(parser.stencilContext(enumName: "AnotherFamily"))

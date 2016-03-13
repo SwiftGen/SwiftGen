@@ -44,6 +44,13 @@ extension XCTestCase {
     return path
   }
 
+  func directoryPath() -> String  {
+    guard let path = NSBundle(forClass: self.dynamicType).resourcePath else {
+      fatalError("Unable to get test bundle resource path")
+    }
+    return path
+  }
+
   func fixtureString(name: String, encoding: UInt = NSUTF8StringEncoding) -> String {
     do {
       return try NSString(contentsOfFile: fixturePath(name), encoding: encoding) as String
