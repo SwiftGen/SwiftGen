@@ -401,7 +401,7 @@ This way, no need to enter the color red, green, blue, alpha values each time an
 swiftgen fonts /path/to/font/dir
 ```
 
-This will go recursively go through the directory finding any typeface files and defining struct for each family, and an enum nested under that family that will represent that font variation.
+This will go recursively go through the directory finding any typeface files and defining struct for each family, and an enum nested under that family that will represent that font style.
 
 ### Generated Code
 

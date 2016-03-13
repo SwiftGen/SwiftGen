@@ -9,7 +9,29 @@
 import Foundation
 import AppKit.NSFont
 
-typealias Font = (name: String, variant: String)
+// MARK: Font
+
+public struct Font {
+  let familyName: String
+  let style: String
+  let postScriptName: String
+
+  init(familyName: String, style: String, postScriptName: String) {
+    self.familyName = familyName
+    self.style = style
+    self.postScriptName = postScriptName
+  }
+}
+
+// Right now the postScriptName is the value of the font we are looking up, so we do
+// equatable comparisons on that. If we ever care about the familyName or style it can be added
+extension Font: Hashable {
+  public var hashValue: Int { return postScriptName.hashValue }
+}
+
+public func ==(lhs: Font, rhs: Font) -> Bool {
+  return lhs.postScriptName == rhs.postScriptName
+}
 
 extension CFString {
     var alphanumericString: String {
