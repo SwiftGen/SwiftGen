@@ -39,6 +39,7 @@ public class GenumTemplate: CompactTemplate {
     parser.registerFilter("join", filter: ArrayFilters.join)
     parser.registerFilter("lowerFirstWord", filter: StringFilters.lowerFirstWord)
     parser.registerFilter("snakeToCamelCase", filter: StringFilters.snakeToCamelCase)
+    parser.registerFilter("snakeToCamelCaseNoPrefix", filter: StringFilters.snakeToCamelCaseNoPrefix)
     parser.registerFilter("titlecase", filter: StringFilters.titlecase)
     parser.registerFilter("hexToInt", filter: NumFilters.hexToInt)
     parser.registerFilter("int255toFloat", filter: NumFilters.int255toFloat)
