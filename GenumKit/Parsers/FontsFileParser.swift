@@ -33,98 +33,70 @@ public func ==(lhs: Font, rhs: Font) -> Bool {
   return lhs.postScriptName == rhs.postScriptName
 }
 
+// MARK: CFString
+
 extension CFString {
-    var alphanumericString: String {
-         return (self as String).componentsSeparatedByCharactersInSet(NSCharacterSet.alphanumericCharacterSet().invertedSet).joinWithSeparator("")
-    }
+  var alphanumericString: String {
+    return (self as String).componentsSeparatedByCharactersInSet(NSCharacterSet.alphanumericCharacterSet().invertedSet).joinWithSeparator("")
+  }
 }
+
+// MARK: CTFont
 
 extension CTFont {
-    static func loadFont(path: String) -> Font? {
-        let inData = NSData(contentsOfFile: path)
-        var error: Unmanaged<CFError>?
-        guard
-            let provider: CGDataProvider = CGDataProviderCreateWithCFData(inData),
-            let font = CGFontCreateWithDataProvider(provider)
-            where CTFontManagerRegisterGraphicsFont(font, &error) else {
-                return nil
-        }
-        return CTFontCreateWithGraphicsFont(font, 0, nil, nil).font
-    }
+  static func parseFontInfo(fileURL: NSURL) -> Font? {
+    let descs = CTFontManagerCreateFontDescriptorsFromURL(fileURL) as NSArray?
+    guard let desc = (descs as? [CTFontDescriptorRef])?.first else { return nil }
 
-    private var font: Font? {
-        let family = CTFontCopyFamilyName(self).alphanumericString
-        let name = CTFontCopyFullName(self).alphanumericString.stringByReplacingOccurrencesOfString(family, withString: "")
-        if family.characters.count == 0 {
-            print("There was a problem detecting the name of the font. \(CTFontCopyFamilyName(self)) -- \(CTFontCopyFullName(self)) ")
-            return nil
-        }
-        return (family, name.characters.count > 0 ? name : "Regular")
-    }
+    let font = CTFontCreateWithFontDescriptorAndOptions(desc, 0.0, nil, [.PreventAutoActivation])
+    let postScriptName = CTFontCopyPostScriptName(font) as String
+    guard let familyName = CTFontCopyAttribute(font, kCTFontFamilyNameAttribute) as? String,
+      let style = CTFontCopyAttribute(font, kCTFontStyleNameAttribute) as? String else { return nil }
+    
+    return Font(familyName: familyName, style: style, postScriptName: postScriptName)
+  }
 }
 
-// MARK: Interface
+// MARK: FontsFileParser
+
 public final class FontsFileParser {
-    public var entries: [String: Set<String>] = [:]
+  public var entries: [String: Set<Font>] = [:]
 
-    public init() {}
+  public init() {}
 
-    public func parseFonts(path: String) {
-        for file in contentsOfDirectory(path) {
-            let fullPath = (path as NSString).stringByAppendingPathComponent(file)
-            if isDirectory(fullPath) {
-                parseFonts(fullPath)
-            } else if let font = CTFont.loadFont(fullPath) {
-                addVariation(font.name, variation: font.variant)
-            }
+  public func parseFonts(path: String) {
+    let url = NSURL(fileURLWithPath: path)
+    if let dirEnum = NSFileManager.defaultManager().enumeratorAtURL(url,
+      includingPropertiesForKeys: [],
+      options: [.SkipsHiddenFiles, .SkipsPackageDescendants],
+      errorHandler: nil) {
+        var value: AnyObject? = nil
+        while let file = dirEnum.nextObject() as? NSURL {
+          guard let _ = try? file.getResourceValue(&value, forKey: NSURLTypeIdentifierKey),
+          let uti = value as? String else {
+            print("Unable to determine the Universal Type Identifier for file \(file)")
+            continue
+          }
+          guard UTTypeConformsTo(uti, "public.font") else { continue }
+          guard let font = CTFont.parseFontInfo(file) else { continue }
+
+          addFont(font)
         }
     }
-
-    public func printFonts() {
-        for i in entries.keys {
-            var str = i
-            var index = 0
-            for variant in entries[i]! {
-                if index == 0 {
-                    str = str.stringByAppendingString(" -- ")
-                }
-
-                str = str.stringByAppendingString("\(variant) ")
-                index+=1
-            }
-            print(str)
-        }
-    }
+  }
 }
 
-// MARK: Entry Managment
-// needs to be testable
-extension FontsFileParser {
-    func addVariation(name: String, variation: String) {
-        if var variations = entries[name] {
-            variations.insert(variation)
-            entries[name] = variations
-        }
-        else {
-            entries[name] = [variation]
-        }
+// MARK: FontsFileParser - Entry Managment
+
+private extension FontsFileParser {
+  func addFont(font: Font) {
+    let familyName = font.familyName
+    if let _ = entries[familyName]
+    {
+      entries[familyName]!.insert(font)
     }
-}
-
-// MARK: Helpers
-
-private func contentsOfDirectory(path: String) -> [String] {
-    var files: [String] = []
-    do {
-        files = try NSFileManager.defaultManager().contentsOfDirectoryAtPath(path)
-    } catch let err {
-        print("There was a problem grabbing the contents of the directory -- \(err)")
+    else {
+      entries[familyName] = [font]
     }
-
-    return files
-}
-
-private func isDirectory(path: String) -> Bool {
-    var isDir: ObjCBool = false
-    return NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDir) && isDir
+  }
 }
