@@ -33,14 +33,6 @@ public func ==(lhs: Font, rhs: Font) -> Bool {
   return lhs.postScriptName == rhs.postScriptName
 }
 
-// MARK: CFString
-
-extension CFString {
-  var alphanumericString: String {
-    return (self as String).componentsSeparatedByCharactersInSet(NSCharacterSet.alphanumericCharacterSet().invertedSet).joinWithSeparator("")
-  }
-}
-
 // MARK: CTFont
 
 extension CTFont {
@@ -84,12 +76,8 @@ public final class FontsFileParser {
         }
     }
   }
-}
 
-// MARK: FontsFileParser - Entry Managment
-
-private extension FontsFileParser {
-  func addFont(font: Font) {
+  private func addFont(font: Font) {
     let familyName = font.familyName
     if let styles = entries[familyName] {
       entries[familyName] = styles.union([font])
