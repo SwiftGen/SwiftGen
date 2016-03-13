@@ -1,58 +1,60 @@
-import Foundation
-
 class BlockContext {
-  class var contextKey:String { return "block_context" }
+  class var contextKey: String { return "block_context" }
 
-  var blocks:[String:BlockNode]
+  var blocks: [String:BlockNode]
 
-  init(blocks:[String:BlockNode]) {
+  init(blocks: [String:BlockNode]) {
     self.blocks = blocks
   }
 
-  func pop(blockName:String) -> BlockNode? {
+  func pop(blockName: String) -> BlockNode? {
     return blocks.removeValueForKey(blockName)
   }
 }
 
-func any<Element>(elements:[Element], closure:(Element -> Bool)) -> Element? {
-  for element in elements {
-    if closure(element) {
-      return element
-    }
-  }
 
-  return nil
+extension CollectionType {
+  func any(closure: Generator.Element -> Bool) -> Generator.Element? {
+    for element in self {
+      if closure(element) {
+        return element
+      }
+    }
+
+    return nil
+  }
 }
 
+
 class ExtendsNode : NodeType {
-  let templateName:String
-  let blocks:[String:BlockNode]
+  let templateName: Variable
+  let blocks: [String:BlockNode]
 
-  class func parse(parser:TokenParser, token:Token) throws -> NodeType {
-    let bits = token.contents.componentsSeparatedByString("\"")
+  class func parse(parser: TokenParser, token: Token) throws -> NodeType {
+    let bits = token.components()
 
-    guard bits.count == 3 else {
+    guard bits.count == 2 else {
       throw TemplateSyntaxError("'extends' takes one argument, the template file to be extended")
     }
 
     let parsedNodes = try parser.parse()
-    guard (any(parsedNodes) { $0 is ExtendsNode }) == nil else {
+    guard (parsedNodes.any { $0 is ExtendsNode }) == nil else {
       throw TemplateSyntaxError("'extends' cannot appear more than once in the same template")
     }
 
     let blockNodes = parsedNodes.filter { node in node is BlockNode }
 
-    let nodes = blockNodes.reduce([String:BlockNode](), combine: { (accumulator, node:NodeType) -> [String:BlockNode] in
+    let nodes = blockNodes.reduce([String:BlockNode]()) { (accumulator, node:NodeType) -> [String:BlockNode] in
       let node = (node as! BlockNode)
       var dict = accumulator
       dict[node.name] = node
       return dict
-    })
+    }
 
-    return ExtendsNode(templateName: bits[1], blocks: nodes)
+    return ExtendsNode(templateName: Variable(bits[1]), blocks: nodes)
   }
 
-  init(templateName:String, blocks:[String:BlockNode]) {
+  init(templateName: Variable, blocks: [String: BlockNode]) {
     self.templateName = templateName
     self.blocks = blocks
   }
@@ -60,6 +62,10 @@ class ExtendsNode : NodeType {
   func render(context: Context) throws -> String {
     guard let loader = context["loader"] as? TemplateLoader else {
       throw TemplateSyntaxError("Template loader not in context")
+    }
+
+    guard let templateName = try self.templateName.resolve(context) as? String else {
+      throw TemplateSyntaxError("'\(self.templateName)' could not be resolved as a string")
     }
 
     guard let template = loader.loadTemplate(templateName) else {
@@ -75,11 +81,12 @@ class ExtendsNode : NodeType {
   }
 }
 
-class BlockNode : NodeType {
-  let name:String
-  let nodes:[NodeType]
 
-  class func parse(parser:TokenParser, token:Token) throws -> NodeType {
+class BlockNode : NodeType {
+  let name: String
+  let nodes: [NodeType]
+
+  class func parse(parser: TokenParser, token: Token) throws -> NodeType {
     let bits = token.components()
 
     guard bits.count == 2 else {
@@ -92,7 +99,7 @@ class BlockNode : NodeType {
     return BlockNode(name:blockName, nodes:nodes)
   }
 
-  init(name:String, nodes:[NodeType]) {
+  init(name: String, nodes: [NodeType]) {
     self.name = name
     self.nodes = nodes
   }

@@ -19,7 +19,7 @@
   "source_files": "**/*.swift",
   "dependencies": {
     "Stencil": [
-      "~> 0.4.0"
+
     ]
   },
   "frameworks": "Foundation"

@@ -72,9 +72,11 @@ struct StringFilters {
 
 struct ArrayFilters {
   static func join(value: Any?) throws -> Any? {
-    guard let array = value as? [String] else { throw FilterError.InvalidInputType }
+    guard let array = value as? [Any] else { throw FilterError.InvalidInputType }
+    let strings = array.flatMap { $0 as? String }
+    guard array.count == strings.count else { throw FilterError.InvalidInputType }
 
-    return array.joinWithSeparator(", ")
+    return strings.joinWithSeparator(", ")
   }
 }
 

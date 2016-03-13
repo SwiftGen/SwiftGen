@@ -1,27 +1,30 @@
-import Foundation
 import PathKit
 
 
 public class IncludeNode : NodeType {
-  public let templateName:String
+  public let templateName: Variable
 
-  public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
-    let bits = token.contents.componentsSeparatedByString("\"")
+  public class func parse(parser: TokenParser, token: Token) throws -> NodeType {
+    let bits = token.components()
 
-    guard bits.count == 3 else {
+    guard bits.count == 2 else {
       throw TemplateSyntaxError("'include' tag takes one argument, the template file to be included")
     }
 
-    return IncludeNode(templateName: bits[1])
+    return IncludeNode(templateName: Variable(bits[1]))
   }
 
-  public init(templateName:String) {
+  public init(templateName: Variable) {
     self.templateName = templateName
   }
 
   public func render(context: Context) throws -> String {
     guard let loader = context["loader"] as? TemplateLoader else {
       throw TemplateSyntaxError("Template loader not in context")
+    }
+
+    guard let templateName = try self.templateName.resolve(context) as? String else {
+      throw TemplateSyntaxError("'\(self.templateName)' could not be resolved as a string")
     }
 
     guard let template = loader.loadTemplate(templateName) else {

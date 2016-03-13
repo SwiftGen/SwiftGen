@@ -1,5 +1,6 @@
-PathKit
-=======
+# PathKit
+
+[![Build Status](https://travis-ci.org/kylef/PathKit.svg)](https://travis-ci.org/kylef/PathKit)
 
 Effortless path operations in Swift.
 
@@ -98,11 +99,17 @@ path.read()
 path.write("Hello World!")
 ```
 
+#### Glob
+
+```swift
+let paths = Path.glob("*.swift")
+```
+
 ### Contact
 
 Kyle Fuller
 
-- http://kylefuller.co.uk
+- https://fuller.li
 - https://twitter.com/kylefuller
 
 ### License
