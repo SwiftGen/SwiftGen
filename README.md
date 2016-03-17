@@ -55,7 +55,7 @@ The tool is provided as a unique `swiftgen` binary command-line, with the follow
 * `swiftgen strings [OPTIONS] FILE`
 * `swiftgen storyboards [OPTIONS] DIR`
 * `swiftgen colors [OPTIONS] FILE`
-* `swiftgen colors [OPTIONS] DIR`
+* `swiftgen fonts [OPTIONS] DIR`
 
 Each subcommand has its own option and syntax, but some options are common to all:
 
