@@ -137,8 +137,8 @@ extension StringsFileParser {
 - `families`: `Array`
   - `name`: `String`
   - `fonts`: `Array`
+    - `style`: `String`
     - `name`: `String`
-    - `value`: `String`
 */
 
 extension FontsFileParser {
@@ -149,8 +149,8 @@ extension FontsFileParser {
       let fonts = family.map { (font: Font) -> [String: String] in
         // Font
         return [
-          "name" : font.style,
-          "value" : font.postScriptName
+          "style" : font.style,
+          "fontName" : font.postScriptName
         ]
       }
 
