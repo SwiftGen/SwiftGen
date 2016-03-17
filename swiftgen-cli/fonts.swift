@@ -1,9 +1,8 @@
 //
-//  fonts.swift
 //  SwiftGen
-//
 //  Created by Derek Ostrander on 3/10/16.
-//  Copyright © 2016 AliSoftware. All rights reserved.
+//  Copyright (c) 2015 Olivier Halligon
+//  MIT License
 //
 
 import Commander

@@ -1,9 +1,8 @@
 //
-//  FontsFileParser.swift
-//  Pods
-//
+//  SwiftGen
 //  Created by Derek Ostrander on 3/7/16.
-//
+//  Copyright (c) 2015 Olivier Halligon
+//  MIT License
 //
 
 import Foundation
