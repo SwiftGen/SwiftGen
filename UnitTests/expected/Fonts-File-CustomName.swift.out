@@ -2,39 +2,37 @@
 
 import UIKit.UIFont
 
-extension UIFont {
-    convinience init?(font: AnotherFamily.SFNSDisplay, size: CGFloat) {
-        self.init(name:font.rawValue, size:size)
-    }
-    convinience init?(font: AnotherFamily.SFNSText, size: CGFloat) {
-        self.init(name:font.rawValue, size:size)
-    }
-    convinience init?(font: AnotherFamily.ZapfDingbats, size: CGFloat) {
-        self.init(name:font.rawValue, size:size)
-    }
+protocol FontConvertible {
+  func font(size: CGFloat) -> UIFont!
+}
+
+extension FontConvertible where Self: RawRepresentable, Self.RawValue == String {
+  func font(size: CGFloat) -> UIFont! {
+    return UIFont(font: self, size: size)
+  }
 }
 
 extension UIFont {
-    struct AnotherFamily {
-        enum SFNSDisplay: String {
-            case Regular = ".SFNSDisplay-Regular"
-            case Heavy = ".SFNSDisplay-Heavy"
-            case Black = ".SFNSDisplay-Black"
-            case Bold = ".SFNSDisplay-Bold"
+  convenience init!<FontType: FontConvertible where FontType: RawRepresentable, FontType.RawValue == String>(font: FontType, size: CGFloat) {
+    self.init(name: font.rawValue, size: size)
+  }
+}
 
-            func font(size: CGFloat) -> UIFont? { return UIFont(name:self.rawValue, size:size)}
-        }
-        enum SFNSText: String {
-            case Heavy = ".SFNSText-Heavy"
-            case Bold = ".SFNSText-Bold"
-            case Regular = ".SFNSText-Regular"
-
-            func font(size: CGFloat) -> UIFont? { return UIFont(name:self.rawValue, size:size)}
-        }
-        enum ZapfDingbats: String {
-            case Regular = "ZapfDingbatsITC"
-
-            func font(size: CGFloat) -> UIFont? { return UIFont(name:self.rawValue, size:size)}
-        }
+extension UIFont {
+  struct CustomFamily {
+    enum SFNSDisplay: String {
+        case Regular = ".SFNSDisplay-Regular"
+        case Heavy = ".SFNSDisplay-Heavy"
+        case Black = ".SFNSDisplay-Black"
+        case Bold = ".SFNSDisplay-Bold"
     }
+    enum SFNSText: String {
+        case Heavy = ".SFNSText-Heavy"
+        case Bold = ".SFNSText-Bold"
+        case Regular = ".SFNSText-Regular"
+    }
+    enum ZapfDingbats: String {
+        case Regular = "ZapfDingbatsITC"
+    }
+  }
 }

@@ -34,7 +34,7 @@ class FontsTests: XCTestCase {
         parser.parseFonts(directoryPath())
 
         let template = GenumTemplate(templateString: fixtureString("fonts-default.stencil"))
-        let result = try! template.render(parser.stencilContext(enumName: "AnotherFamily"))
+        let result = try! template.render(parser.stencilContext(enumName: "CustomFamily"))
         let expected = fixtureString("Fonts-File-CustomName.swift.out")
         XCTDiffStrings(result, expected)
     }

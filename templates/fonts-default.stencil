@@ -3,26 +3,32 @@
 {% if families %}
 import UIKit.UIFont
 
-extension UIFont {
-{% for family in families %}
-    convinience init?(font: {{enumName}}.{{family.name|swiftIdentifier|snakeToCamelCaseNoPrefix}}, size: CGFloat) {
-        self.init(name:font.rawValue, size:size)
-    }
-{% endfor %}
+protocol FontConvertible {
+  func font(size: CGFloat) -> UIFont!
+}
+
+extension FontConvertible where Self: RawRepresentable, Self.RawValue == String {
+  func font(size: CGFloat) -> UIFont! {
+    return UIFont(font: self, size: size)
+  }
 }
 
 extension UIFont {
-    struct {{enumName}} {
-        {% for family in families %}
-        enum {{family.name|swiftIdentifier|snakeToCamelCaseNoPrefix}}: String {
-            {% for font in family.fonts %}
-            case {{font.name|swiftIdentifier|snakeToCamelCaseNoPrefix}} = "{{font.value}}"
-            {% endfor %}
+  convenience init!<FontType: FontConvertible where FontType: RawRepresentable, FontType.RawValue == String>(font: FontType, size: CGFloat) {
+    self.init(name: font.rawValue, size: size)
+  }
+}
 
-            func font(size: CGFloat) -> UIFont? { return UIFont(name:self.rawValue, size:size)}
-        }
+extension UIFont {
+  struct {{enumName}} {
+    {% for family in families %}
+    enum {{family.name|swiftIdentifier|snakeToCamelCaseNoPrefix}}: String {
+        {% for font in family.fonts %}
+        case {{font.style|swiftIdentifier|snakeToCamelCaseNoPrefix}} = "{{font.fontName}}"
         {% endfor %}
     }
+    {% endfor %}
+  }
 }
 {% else %}
 // No fonts found
