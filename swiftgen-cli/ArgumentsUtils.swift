@@ -9,9 +9,11 @@ import PathKit
 
 // MARK: Validators
 
-func checkPath(type: String, @noescape assertion: Path->Bool)(path: Path) throws -> Path {
-  guard assertion(path) else { throw ArgumentError.InvalidType(value: path.description, type: type, argument: nil) }
-  return path
+func checkPath(type: String, assertion: Path -> Bool) -> (Path throws -> Path) {
+  return { (path: Path) throws -> Path in
+    guard assertion(path) else { throw ArgumentError.InvalidType(value: path.description, type: type, argument: nil) }
+    return path
+  }
 }
 let pathExists = checkPath("path") { $0.exists }
 let fileExists = checkPath("file") { $0.isFile }
