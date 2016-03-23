@@ -1,0 +1,13 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+{% if nibs %}
+
+enum {{enumName}}: String {
+  {% for nib in nibs %}
+  case {{nib|swiftIdentifier}} = "{{nib}}"
+  {% endfor %}
+}
+
+{% else %}
+// No nib found
+{% endif %}

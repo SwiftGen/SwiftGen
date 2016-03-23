@@ -1,0 +1,7 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+
+enum Nib: String {
+  case Cell = "Cell"
+}
+

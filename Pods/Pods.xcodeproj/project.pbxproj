@@ -50,6 +50,7 @@
 		BF0B54A7BE8ECDEEED5CDC2A504508B8 /* GenumKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DF9A26894B62EF2C68B13878FE290C /* GenumKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB1F6A40603D36437DD17F935D22E737 /* ArgumentDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B70BC8D2ED2DCB7CF0EF474FE68C69 /* ArgumentDescription.swift */; };
 		D1AA358B8DFBC5580AE830E49A82E727 /* Pods-swiftgen-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E7941FF308914D4E806F12A9F0A0E1C6 /* Pods-swiftgen-dummy.m */; };
+		D3DEEA041CA1AA920010DA86 /* XibParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DEEA031CA1AA920010DA86 /* XibParser.swift */; };
 		D63C38CB530CEC15C108175CDDFF52B8 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C158D6B1D1B201A3D569F8F9CC475AC3 /* Filters.swift */; };
 		D7209F915F3700F52F03FFE463174F1B /* Pods-UnitTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4500F30C4160370D509B784106DD200F /* Pods-UnitTests-dummy.m */; };
 		D9080DD59CDAB46B7135D75301C4F8DE /* GenumTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C3C0500295D68B74590D9C56493441 /* GenumTemplate.swift */; };
@@ -194,6 +195,7 @@
 		CCD2255B5AEB40DADDD89DC818EF25C1 /* Pods-swiftgen-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-swiftgen-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D2A3D7737C88A1A2BD3BB691AD7C10FF /* Commands.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Commands.swift; path = Sources/Commands.swift; sourceTree = "<group>"; };
 		D329C12E53D52239FC143CC80FB8F71F /* Inheritence.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Inheritence.swift; path = Sources/Inheritence.swift; sourceTree = "<group>"; };
+		D3DEEA031CA1AA920010DA86 /* XibParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XibParser.swift; sourceTree = "<group>"; };
 		D77159F9DFA63AD9FBA7DD65ACA265BA /* Commander.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Commander.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD227BB696CD77975C6977ABFE31498D /* Pods-swiftgen-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-swiftgen-umbrella.h"; sourceTree = "<group>"; };
 		DEE10F9FC417D3BE64F67E0C73AE2117 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				E12CCE32165D820950279B218E43FDBA /* AssetsCatalogParser.swift */,
+				D3DEEA031CA1AA920010DA86 /* XibParser.swift */,
 				6270624087FE32B9D2727E67BA9F8870 /* ColorsFileParser.swift */,
 				6E375A67D5FA17EAFAF535617DE51D14 /* StoryboardParser.swift */,
 				970D69706EC8150AC00D269E325A1569 /* StringsFileParser.swift */,
@@ -764,6 +767,7 @@
 				FE5168A40993D68168F0D4A41158F1C8 /* GenumKit-dummy.m in Sources */,
 				D9080DD59CDAB46B7135D75301C4F8DE /* GenumTemplate.swift in Sources */,
 				9093D27EE44088FD0D974BD625F759EE /* SetNode.swift in Sources */,
+				D3DEEA041CA1AA920010DA86 /* XibParser.swift in Sources */,
 				72FAD3D82556C6592B2ABC2BB2DB3F64 /* StoryboardParser.swift in Sources */,
 				A5821018DB55C7764827FE0282E63BEA /* StringsFileParser.swift in Sources */,
 				ADC55DFF0B46BE27BBEBEDC1FFB1B9BF /* SwiftIdentifier.swift in Sources */,
