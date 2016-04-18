@@ -211,6 +211,10 @@ let ban = tr(.BananasOwner(2, "John"))
 // -> "Those 2 bananas belong to John."
 ```
 
+### Automatically replace NSLocalizedString(...) calls
+
+This [script](https://gist.github.com/Lutzifer/3e7d967f73e38b57d4355f23274f303d) from [Lutzifer](https://github.com/Lutzifer/) can be run inside the project to transform `NSLocalizedString(...)` calls to the `tr(...)` syntax.
+
 ## UIStoryboard
 
 ```
