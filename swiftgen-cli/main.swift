@@ -12,7 +12,6 @@ import PathKit
 
 let TEMPLATES_RELATIVE_PATH = "../templates"
 
-
 func templateOption(prefix: String) -> Option<String> {
   return Option<String>("template", "default", flag: "t", description: "The name of the template to use for code generation (without the \"\(prefix)\" prefix nor extension).")
 }

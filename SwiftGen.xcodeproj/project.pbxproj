@@ -368,6 +368,7 @@
 				09A87B3E1BCC9B8000D9B9F5 /* Frameworks */,
 				09A87B3F1BCC9B8000D9B9F5 /* CopyFiles */,
 				1B796448B0837DA367438799 /* Copy Pods Resources */,
+				59962C4A1C39D38A00F68B7A /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -533,6 +534,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		59962C4A1C39D38A00F68B7A /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		B84C81A87A5797C0960C5265 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
