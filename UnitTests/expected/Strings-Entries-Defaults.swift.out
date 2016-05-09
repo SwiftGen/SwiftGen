@@ -3,9 +3,13 @@
 import Foundation
 
 enum L10n {
-  /// My awesome title
+  /**
+    My awesome title
+  */
   case Title
-  /// Hello, my name is %@ and I'm %d
+  /**
+    Hello, my name is %@ and I'm %d
+  */
   case Greetings(String, Int)
 }
 

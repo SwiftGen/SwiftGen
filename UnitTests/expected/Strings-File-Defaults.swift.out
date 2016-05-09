@@ -3,17 +3,29 @@
 import Foundation
 
 enum L10n {
-  /// Title of the alert
+  /**
+    Title of the alert
+  */
   case AlertTitle
-  /// Some alert body there
+  /**
+    Some alert body there
+  */
   case AlertMessage
-  /// Hello, my name is %@ and I'm %d
+  /**
+    Hello, my name is %@ and I'm %d
+  */
   case Greetings(String, Int)
-  /// You have %d apples
+  /**
+    You have %d apples
+  */
   case ApplesCount(Int)
-  /// Those %d bananas belong to %@.
+  /**
+    Those %d bananas belong to %@.
+  */
   case BananasOwner(Int, String)
-  /// These are %3$@'s %1$d %2$@.
+  /**
+    These are %3$@'s %1$d %2$@.
+  */
   case ObjectOwnership(Int, String, String)
 }
 
