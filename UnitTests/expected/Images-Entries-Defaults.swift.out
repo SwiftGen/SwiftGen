@@ -2,17 +2,17 @@
 
 import UIKit
 
-extension UIImage {
-  enum Asset: String {
-    case Green_Apple = "Green-Apple"
-    case Red_Apple = "Red apple"
-    case _2_Pears = "2-pears"
+enum Asset: String {
+  case Green_Apple = "Green-Apple"
+  case Red_Apple = "Red apple"
+  case _2_Pears = "2-pears"
 
-    var image: UIImage {
-      return UIImage(asset: self)
-    }
+  var image: UIImage {
+    return UIImage(asset: self)
   }
+}
 
+extension UIImage {
   convenience init!(asset: Asset) {
     self.init(named: asset.rawValue)
   }

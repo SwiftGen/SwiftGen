@@ -13,16 +13,16 @@ import Foundation
 
 import UIKit
 
-extension UIImage {
-    enum Asset: String {
-        case Apple = "Apple"
-        case Banana = "Banana"
-
-        var image: UIImage {
-            return UIImage(asset: self)
-        }
+enum Asset: String {
+    case Apple = "Apple"
+    case Banana = "Banana"
+    
+    var image: UIImage {
+        return UIImage(asset: self)
     }
+}
 
+extension UIImage {
     convenience init!(asset: Asset) {
         self.init(named: asset.rawValue)
     }
@@ -33,4 +33,4 @@ extension UIImage {
 
 let image = UIImage(asset: .Apple)
 
-UIImage.Asset.Banana.image
+Asset.Banana.image

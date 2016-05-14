@@ -2,21 +2,21 @@
 
 import UIKit
 
-extension UIImage {
-  enum Asset: String {
-    case Apple = "Apple"
-    case Banana = "Banana"
+enum Asset: String {
+  case Apple = "Apple"
+  case Banana = "Banana"
 
-    static let allValues = [
-      Apple,
-      Banana,
-    ]
+  static let allValues = [
+    Apple,
+    Banana,
+  ]
 
-    var image: UIImage {
-      return UIImage(asset: self)
-    }
+  var image: UIImage {
+    return UIImage(asset: self)
   }
+}
 
+extension UIImage {
   convenience init!(asset: Asset) {
     self.init(named: asset.rawValue)
   }

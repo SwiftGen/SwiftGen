@@ -3,17 +3,17 @@
 {% if images %}
 import UIKit
 
-extension UIImage {
-  enum {{enumName}}: String {
-    {% for image in images %}
-    case {{image|swiftIdentifier}} = "{{image}}"
-    {% endfor %}
+enum {{enumName}}: String {
+  {% for image in images %}
+  case {{image|swiftIdentifier}} = "{{image}}"
+  {% endfor %}
 
-    var image: UIImage {
-      return UIImage(asset: self)
-    }
+  var image: UIImage {
+    return UIImage(asset: self)
   }
+}
 
+extension UIImage {
   convenience init!(asset: {{enumName}}) {
     self.init(named: asset.rawValue)
   }
