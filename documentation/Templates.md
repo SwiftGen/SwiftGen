@@ -49,11 +49,13 @@ storyboards:
   bundled:
    - default
    - lowercase
+   - swift3
 strings:
   custom:
    - default
   bundled:
    - default
+   - swift3
 ```
 
 ## Templates Format, Nodes and Filters
