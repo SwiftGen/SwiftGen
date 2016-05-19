@@ -354,6 +354,7 @@ Cyan         : 0xff66ccff
 ArticleTitle : #33fe66
 ArticleBody  : 339666
 Translucent  : ffffffcc
+NamedColor   : Translucent
 ```
 
 The generated code will look like this:
@@ -378,6 +379,9 @@ extension UIColor {
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#33fe66"></span>
     /// Alpha: 100% <br/> (0x33fe66ff)
     case ArticleTitle = 0x33fe66ff
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
+    /// Alpha: 80% <br/> (0xffffffcc)
+    case NamedColor = 0xffffffcc
   }
 
   convenience init(named name: Name) {
@@ -392,6 +396,7 @@ extension UIColor {
 UIColor(named: .ArticleTitle)
 UIColor(named: .ArticleBody)
 UIColor(named: .Translucent)
+UIColor(named: .NamedColor)
 ```
 
 This way, no need to enter the color red, green, blue, alpha values each time and create ugly constants in the global namespace for them.
