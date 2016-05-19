@@ -2,6 +2,11 @@
 
 ---
 
+## Master
+
+* Added support for TXT (`colors.txt`) files to have named value.  
+[Derek Ostrander](https://github.com/dostrander)
+
 ## 0.8.0
 
 * Introducing alternative way to install SwiftGen: using CocoaPods! See README for more details.  
