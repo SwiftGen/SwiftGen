@@ -81,4 +81,26 @@ class StoryboardTests: XCTestCase {
     let expected = self.fixtureString("Storyboards-All-CustomName.swift.out")
     XCTDiffStrings(result, expected)
   }
+  
+  func testAnonymousStoryboardWithSwift3() {
+    let parser = StoryboardParser()
+    parser.addStoryboardAtPath(self.fixturePath("Wizard.storyboard"))
+    
+    let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Storyboards-Anonymous-Swift3.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+    
+  func testWizardsStoryboardsWithSwift3() {
+    let parser = StoryboardParser()
+    parser.addStoryboardAtPath(self.fixturePath("Anonymous.storyboard"))
+
+    let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"))
+    let result = try! template.render(parser.stencilContext())
+        
+    let expected = self.fixtureString("Storyboards-Wizard-Swift3.swift.out")
+    XCTDiffStrings(result, expected)
+  }
 }
