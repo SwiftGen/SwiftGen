@@ -12,7 +12,7 @@
 
 ## Master
 
-* Added Swift 3 templates for storyboards and strings
+* Added Swift 3 templates for storyboards and strings.  
   [Andrew Breckenridge](https://github.com/AndrewSB), [#117](https://github.com/AliSoftware/SwiftGen/pull/117)
 
 ## 0.8.0
