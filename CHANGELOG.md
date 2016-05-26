@@ -10,6 +10,11 @@
 * Restructured image templates to work around an LLVM issue with nested types.  
   [Ken Grigsby](https://github.com/kgrigsby59), [#112](https://github.com/AliSoftware/SwiftGen/issues/112)
 
+## Master
+
+* Added Swift 3 templates for storyboards and strings
+  [Andrew Breckenridge](https://github.com/AndrewSB), [#117](https://github.com/AliSoftware/SwiftGen/pull/117)
+
 ## 0.8.0
 
 * Introducing alternative way to install SwiftGen: using CocoaPods! See README for more details.  
