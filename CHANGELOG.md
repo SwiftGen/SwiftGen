@@ -3,9 +3,10 @@
 ---
 ## Master
 
+* Added support for TXT (`colors.txt`) files to have named value.  
+  [Derek Ostrander](https://github.com/dostrander), [#118](https://github.com/AliSoftware/SwiftGen/pull/118)
 * Restructured image templates to work around an LLVM issue with nested types.  
   [Ken Grigsby](https://github.com/kgrigsby59), [#112](https://github.com/AliSoftware/SwiftGen/issues/112)
-
 
 ## 0.8.0
 

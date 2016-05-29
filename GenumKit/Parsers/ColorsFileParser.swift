@@ -51,25 +51,56 @@ public final class ColorsTextFileParser: ColorsFileParser {
     colors[name] = value
   }
 
+  public func keyValueDict(fromPath path: String, withSeperator seperator: String = ":") throws -> [String:String] {
+
+    let content = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+    let lines = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+    let whitespace = NSCharacterSet.whitespaceCharacterSet()
+    let seperatorChar = NSCharacterSet(charactersInString: seperator)
+    let skippedCharacters = NSMutableCharacterSet()
+    skippedCharacters.formUnionWithCharacterSet(whitespace)
+    skippedCharacters.formUnionWithCharacterSet(skippedCharacters)
+
+    var dict: [String : String] = [:]
+    for line in lines {
+      let scanner = NSScanner(string: line)
+      scanner.charactersToBeSkipped = skippedCharacters
+
+      var key: NSString?
+      var value: NSString?
+      guard scanner.scanUpToString(seperator, intoString: &key) &&
+        scanner.scanString(seperator, intoString: nil) &&
+        scanner.scanUpToCharactersFromSet(whitespace, intoString: &value) else {
+          break
+      }
+
+      key = key?.stringByTrimmingCharactersInSet(whitespace)
+      value = value?.stringByTrimmingCharactersInSet(whitespace)
+      dict[key as! String] = value as! String
+    }
+
+    return dict
+  }
+
+  private func colorValue(forKey key: String, onDict dict: [String : String]) -> String {
+    var currentKey = key
+    var stringValue: String = ""
+    while let value = dict[currentKey]?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) {
+      currentKey = value
+      stringValue = value
+    }
+
+    return stringValue
+  }
+
   // Text file expected to be:
   //  - One line per entry
   //  - Each line composed by the color name, then ":", then the color hex representation
   //  - Extra spaces will be skipped
   public func parseFile(path: String, separator: String = ":") throws {
-    let content = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-    let lines = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
-    let ws = NSCharacterSet.whitespaceCharacterSet()
-    for line in lines {
-      let scanner = NSScanner(string: line)
-      scanner.charactersToBeSkipped = ws
-      var key: NSString?
-      if scanner.scanUpToString(":", intoString: &key) {
-        scanner.scanString(":", intoString: nil)
-        var value: NSString?
-        if scanner.scanUpToCharactersFromSet(ws, intoString: &value) {
-          addColorWithName(key! as String, value: value! as String)
-        }
-      }
+    let dict = try keyValueDict(fromPath: path, withSeperator: separator)
+    for (key, value) in dict {
+      addColorWithName(key, value: colorValue(forKey: key, onDict: dict))
     }
   }
 }

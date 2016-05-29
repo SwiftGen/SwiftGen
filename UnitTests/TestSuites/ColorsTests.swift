@@ -55,7 +55,7 @@ class ColorsTextFileTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("colors-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Colors-File-Defaults.swift.out")
+    let expected = self.fixtureString("Colors-Txt-File-Defaults.swift.out")
     XCTDiffStrings(result, expected)
   }
 
@@ -66,7 +66,7 @@ class ColorsTextFileTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("colors-default.stencil"))
     let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
 
-    let expected = self.fixtureString("Colors-File-CustomName.swift.out")
+    let expected = self.fixtureString("Colors-Txt-File-CustomName.swift.out")
     XCTDiffStrings(result, expected)
   }
 }
