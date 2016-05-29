@@ -4,6 +4,7 @@
 //: * [Demo for `swiftgen images`](Images-Demo)
 //: * Demo for `swiftgen storyboards`
 //: * [Demo for `swiftgen colors`](Colors-Demo)
+//: * [Demo for `swiftgen fonts`](Fonts-Demo)
 
 import UIKit
 

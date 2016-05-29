@@ -3,6 +3,8 @@
 ---
 ## Master
 
+* Added support for Fonts using the `swiftgen fonts` command.  
+  [Derek Ostrander](https://github.com/dostrander) [#102](https://github.com/AliSoftware/SwiftGen/pull/102)
 * Added support for TXT (`colors.txt`) files to have named value.  
   [Derek Ostrander](https://github.com/dostrander), [#118](https://github.com/AliSoftware/SwiftGen/pull/118)
 * Restructured image templates to work around an LLVM issue with nested types.  
