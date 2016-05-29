@@ -3,7 +3,6 @@ public enum ArgumentType {
   case Option
 }
 
-
 public protocol ArgumentDescriptor {
   typealias ValueType
 
@@ -19,13 +18,11 @@ public protocol ArgumentDescriptor {
   func parse(parser:ArgumentParser) throws -> ValueType
 }
 
-
 extension ArgumentConvertible {
   init(string: String) throws {
     try self.init(parser: ArgumentParser(arguments: [string]))
   }
 }
-
 
 public class VaradicArgument<T : ArgumentConvertible> : ArgumentDescriptor {
   public typealias ValueType = [T]
@@ -44,7 +41,6 @@ public class VaradicArgument<T : ArgumentConvertible> : ArgumentDescriptor {
     return try Array<T>(parser: parser)
   }
 }
-
 
 public class Argument<T : ArgumentConvertible> : ArgumentDescriptor {
   public typealias ValueType = T
@@ -128,7 +124,6 @@ public class Option<T : ArgumentConvertible> : ArgumentDescriptor {
   }
 }
 
-
 public class Options<T : ArgumentConvertible> : ArgumentDescriptor {
   public typealias ValueType = [T]
 
@@ -150,7 +145,6 @@ public class Options<T : ArgumentConvertible> : ArgumentDescriptor {
     return try values?.map { try T(string: $0) } ?? `default`
   }
 }
-
 
 public class Flag : ArgumentDescriptor {
   public typealias ValueType = Bool
@@ -196,7 +190,6 @@ public class Flag : ArgumentDescriptor {
   }
 }
 
-
 class BoxedArgumentDescriptor {
   let name:String
   let description:String?
@@ -217,8 +210,7 @@ class BoxedArgumentDescriptor {
   }
 }
 
-
-class UsageError : ErrorType, ANSIConvertible, CustomStringConvertible {
+class UsageError : ErrorType, CustomStringConvertible {
   let message: String
   let help: Help
 
@@ -230,14 +222,9 @@ class UsageError : ErrorType, ANSIConvertible, CustomStringConvertible {
   var description: String {
     return [message, help.description].filter { !$0.isEmpty }.joinWithSeparator("\n\n")
   }
-
-  var ansiDescription: String {
-    return [message, help.ansiDescription].filter { !$0.isEmpty }.joinWithSeparator("\n\n")
-  }
 }
 
-
-class Help : ErrorType, ANSIConvertible, CustomStringConvertible {
+class Help : ErrorType, CustomStringConvertible {
   let command:String?
   let group:Group?
   let descriptors:[BoxedArgumentDescriptor]
@@ -255,7 +242,7 @@ class Help : ErrorType, ANSIConvertible, CustomStringConvertible {
     return Help(descriptors, command: command ?? self.command)
   }
 
-  var description: String {
+  var description:String {
     var output = [String]()
 
     let arguments = descriptors.filter { $0.type == ArgumentType.Argument }
@@ -293,51 +280,6 @@ class Help : ErrorType, ANSIConvertible, CustomStringConvertible {
           output.append("    --\(option.name) - \(description)")
         } else {
           output.append("    --\(option.name)")
-        }
-      }
-    }
-
-    return output.joinWithSeparator("\n")
-  }
-
-  var ansiDescription: String {
-    var output = [String]()
-
-    let arguments = descriptors.filter { $0.type == ArgumentType.Argument }
-    let options = descriptors.filter   { $0.type == ArgumentType.Option }
-
-    if let command = command {
-      let args = arguments.map { "<\($0.name)>" }
-      let usage = ([command] + args).joinWithSeparator(" ")
-
-      output.append("Usage:")
-      output.append("")
-      output.append("    \(usage)")
-      output.append("")
-    }
-
-    if let group = group {
-      output.append("Commands:")
-      output.append("")
-      for command in group.commands {
-        if let description = command.description {
-          output.append("    + \(ANSI.Green)\(command.name)\(ANSI.Reset) - \(description)")
-        } else {
-          output.append("    + \(ANSI.Green)\(command.name)\(ANSI.Reset)")
-        }
-      }
-      output.append("")
-    }
-
-    if !options.isEmpty {
-      output.append("Options:")
-      for option in options {
-        // TODO: default, [default: `\(`default`)`]
-
-        if let description = option.description {
-          output.append("    \(ANSI.Blue)--\(option.name)\(ANSI.Reset) - \(description)")
-        } else {
-          output.append("    \(ANSI.Blue)--\(option.name)\(ANSI.Reset)")
         }
       }
     }
