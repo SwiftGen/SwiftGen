@@ -1,6 +1,11 @@
 # SwiftGen CHANGELOG
 
 ---
+## Master
+
+* Restructured image templates to work around an LLVM issue with nested types.  
+  [Ken Grigsby](https://github.com/kgrigsby59), [#112](https://github.com/AliSoftware/SwiftGen/issues/112)
+
 
 ## 0.8.0
 
