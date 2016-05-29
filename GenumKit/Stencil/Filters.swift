@@ -44,15 +44,22 @@ struct StringFilters {
 
   static func snakeToCamelCase(value: Any?) throws -> Any? {
     guard let string = value as? String else { throw FilterError.InvalidInputType }
-
+    guard let noPrefix = try snakeToCamelCaseNoPrefix(value) else {
+      return nil
+    }
     var prefixUnderscores = ""
     for scalar in string.unicodeScalars {
       guard scalar == "_" else { break }
       prefixUnderscores += "_"
     }
 
+    return prefixUnderscores + ("\(noPrefix)")
+  }
+
+  static func snakeToCamelCaseNoPrefix(value: Any?) throws -> Any? {
+    guard let string = value as? String else { throw FilterError.InvalidInputType }
     let comps = string.componentsSeparatedByString("_")
-    return prefixUnderscores + comps.map { titlecase($0) }.joinWithSeparator("")
+    return comps.map { titlecase($0) }.joinWithSeparator("")
   }
 
   /**

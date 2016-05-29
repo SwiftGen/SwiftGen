@@ -8,6 +8,11 @@
 * Restructured image templates to work around an LLVM issue with nested types.  
   [Ken Grigsby](https://github.com/kgrigsby59), [#112](https://github.com/AliSoftware/SwiftGen/issues/112)
 
+## Master
+
+* Added support for Fonts using the `swiftgen fonts` command.  
+  [Derek Ostrander](https://github.com/dostrander) [#102](https://github.com/AliSoftware/SwiftGen/pull/102)
+
 ## 0.8.0
 
 * Introducing alternative way to install SwiftGen: using CocoaPods! See README for more details.  

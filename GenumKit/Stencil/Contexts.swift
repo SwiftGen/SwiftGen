@@ -131,3 +131,35 @@ extension StringsFileParser {
     return Context(dictionary: ["enumName": enumName, "tableName": tableName, "strings": strings])
   }
 }
+
+/* MARK: - Stencil Context for Fonts
+- `enumName`: `String`
+- `families`: `Array`
+  - `name`: `String`
+  - `fonts`: `Array`
+    - `style`: `String`
+    - `name`: `String`
+*/
+
+extension FontsFileParser {
+  public func stencilContext(enumName enumName: String = "Family") -> Context{
+    // turn into array of dictionaries
+    let families = entries.map { (name: String, family: Set<Font>) -> [String:AnyObject] in
+      
+      let fonts = family.map { (font: Font) -> [String: String] in
+        // Font
+        return [
+          "style" : font.style,
+          "fontName" : font.postScriptName
+        ]
+      }
+
+      // Family
+      return [
+        "name":name,
+        "fonts":fonts
+      ]
+    }
+    return Context(dictionary: ["enumName": enumName, "families" : families])
+  }
+}
