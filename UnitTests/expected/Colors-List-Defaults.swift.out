@@ -1,6 +1,6 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
-import UIKit
+import UIKit.UIColor
 
 extension UIColor {
   convenience init(rgbaValue: UInt32) {
