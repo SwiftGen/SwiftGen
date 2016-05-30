@@ -90,7 +90,7 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseStringsFile(fixturePath("Localizable.strings"))
 
-    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-swift3.stencil"))
     let result = try! template.render(parser.stencilContext())
     
     let expected = self.fixtureString("Strings-Localizable-Swift3.swift.out")
