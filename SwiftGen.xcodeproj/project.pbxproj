@@ -322,13 +322,10 @@
 				09030C2A1B6D4D9A00275BF5 /* Strings-File-Defaults.swift.out */,
 				93DA731C1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out */,
 				095685EB1B6DA16200BF300C /* Strings-File-CustomName.swift.out */,
-<<<<<<< 8606d5f8b2cf793bd10b69c271036d9494963700
 				C24AFD091C924188005FE3EF /* Fonts-File-Empty.swift.out */,
 				C24AFD0B1C924760005FE3EF /* Fonts-File-Default.swift.out */,
 				C24AFD0D1C924A29005FE3EF /* Fonts-File-CustomName.swift.out */,
-=======
 				4681E5401CFBF8EC00B16B51 /* Strings-Localizable-Swift3.swift.out */,
->>>>>>> pass StringsTests
 			);
 			path = expected;
 			sourceTree = "<group>";
@@ -364,11 +361,8 @@
 				470A14E01BEA63D30052EAC8 /* storyboards-lowercase.stencil */,
 				4681E5421CFBF9AE00B16B51 /* storyboards-swift3.stencil */,
 				09EB0A191BDC269300B2CF79 /* strings-default.stencil */,
-<<<<<<< 8606d5f8b2cf793bd10b69c271036d9494963700
 				C24AFD031C91E63D005FE3EF /* fonts-default.stencil */,
-=======
 				4681E5441CFBF9B200B16B51 /* strings-swift3.stencil */,
->>>>>>> pass StringsTests
 			);
 			path = templates;
 			sourceTree = "<group>";
@@ -538,12 +532,9 @@
 				4681E5471CFBF9F300B16B51 /* Storyboards-Wizard-Swift3.swift.out in Resources */,
 				4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */,
 				EFFE62F81C27081A00FE9783 /* Dependency.storyboard in Resources */,
-<<<<<<< 8606d5f8b2cf793bd10b69c271036d9494963700
 				C221E4B11C960A84001E04E5 /* SFNSText-Bold.otf in Resources */,
 				C221E4AD1C960A84001E04E5 /* SFNSDisplay-Black.otf in Resources */,
-=======
 				4681E5431CFBF9AE00B16B51 /* storyboards-swift3.stencil in Resources */,
->>>>>>> pass StringsTests
 				09A87B5E1BCCA4D100D9B9F5 /* Message.storyboard in Resources */,
 				09A87B641BCCA4DC00D9B9F5 /* Images.xcassets in Resources */,
 				C24AFD041C92370D005FE3EF /* fonts-default.stencil in Resources */,
@@ -571,15 +562,9 @@
 				C221E4AF1C960A84001E04E5 /* SFNSDisplay-Heavy.otf in Resources */,
 				09EB0A2D1BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out in Resources */,
 				09EB0A271BDC60F000B2CF79 /* Colors-File-CustomName.swift.out in Resources */,
-<<<<<<< b940db527cbd012aec68ca0e39f110569c702b3c
-<<<<<<< 8606d5f8b2cf793bd10b69c271036d9494963700
 				C221E4B01C960A84001E04E5 /* SFNSDisplay-Regular.otf in Resources */,
-=======
-=======
 				4681E5491CFBF9FB00B16B51 /* Storyboards-Anonymous-Swift3.swift.out in Resources */,
->>>>>>> pass Storyboard tests
 				4681E5451CFBF9B200B16B51 /* strings-swift3.stencil in Resources */,
->>>>>>> pass StringsTests
 				0911503F1BD4136E00EBC803 /* storyboards-default.stencil in Resources */,
 				097504271C78ED3400D1A01B /* colors.xml in Resources */,
 				470A14E11BEA63D30052EAC8 /* storyboards-lowercase.stencil in Resources */,
