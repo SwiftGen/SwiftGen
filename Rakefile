@@ -60,7 +60,8 @@ task :build, [:bindir, :tpldir] => [:check_xcode_version] + DEPENDENCIES.map { |
 
   print_info "Building Binary"
   frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
-  xcpretty %Q(xcrun -sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} -F #{BUILD_DIR}/ #{frameworks} swiftgen-cli/*.swift)
+  search_paths = DEPENDENCIES.map { |fmk| "-F #{BUILD_DIR}/#{fmk}" }.join(" ")
+  xcpretty %Q(xcrun -sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} #{search_paths}/ #{frameworks} swiftgen-cli/*.swift)
 end
 
 namespace :dependencies do
@@ -94,7 +95,7 @@ task 'install:light', [:bindir, :fmkdir, :tpldir] => :build do |_, args|
   print_info "Installing frameworks in #{fmkdir}"
   sh %Q(mkdir -p "#{fmkdir}")
   DEPENDENCIES.each do |fmk|
-    sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}.framework" "#{fmkdir}")
+    sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}/#{fmk}.framework" "#{fmkdir}")
   end
   sh %Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}")
 
