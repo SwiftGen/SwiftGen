@@ -18,21 +18,19 @@ extension UIFont {
   }
 }
 
-extension UIFont {
-  struct Family {
-    enum SFNSDisplay: String {
-        case Regular = ".SFNSDisplay-Regular"
-        case Heavy = ".SFNSDisplay-Heavy"
-        case Black = ".SFNSDisplay-Black"
-        case Bold = ".SFNSDisplay-Bold"
-    }
-    enum SFNSText: String {
-        case Heavy = ".SFNSText-Heavy"
-        case Bold = ".SFNSText-Bold"
-        case Regular = ".SFNSText-Regular"
-    }
-    enum ZapfDingbats: String {
-        case Regular = "ZapfDingbatsITC"
-    }
+struct FontFamily {
+  enum SFNSDisplay: String {
+      case Regular = ".SFNSDisplay-Regular"
+      case Heavy = ".SFNSDisplay-Heavy"
+      case Black = ".SFNSDisplay-Black"
+      case Bold = ".SFNSDisplay-Bold"
+  }
+  enum SFNSText: String {
+      case Heavy = ".SFNSText-Heavy"
+      case Bold = ".SFNSText-Bold"
+      case Regular = ".SFNSText-Regular"
+  }
+  enum ZapfDingbats: String {
+      case Regular = "ZapfDingbatsITC"
   }
 }

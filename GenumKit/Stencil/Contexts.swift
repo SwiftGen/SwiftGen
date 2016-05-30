@@ -26,7 +26,7 @@ private func uppercaseFirst(string: String) -> String {
     - `alpha`: `String` — hex value of the alpha component
 */
 extension ColorsFileParser {
-  public func stencilContext(enumName enumName: String = "Name") -> Context {
+  public func stencilContext(enumName enumName: String = "ColorName") -> Context {
     let colorMap = colors.map({ (color: (name: String, value: UInt32)) -> [String:String] in
       let name = color.name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
       let hex = "00000000" + String(color.value, radix: 16)
@@ -142,7 +142,7 @@ extension StringsFileParser {
 */
 
 extension FontsFileParser {
-  public func stencilContext(enumName enumName: String = "Family") -> Context{
+  public func stencilContext(enumName enumName: String = "FontFamily") -> Context{
     // turn into array of dictionaries
     let families = entries.map { (name: String, family: Set<Font>) -> [String:AnyObject] in
       

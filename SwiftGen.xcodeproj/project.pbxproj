@@ -57,16 +57,16 @@
 		4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0331BDE753000B9B05F /* Images-Empty.swift.out */; };
 		4761E0381BDE753000B9B05F /* Storyboards-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */; };
 		4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0351BDE753000B9B05F /* Strings-Empty.swift.out */; };
+		47CB53321CFC0B2100AA19C0 /* SFNSDisplay-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB532A1CFC0B2100AA19C0 /* SFNSDisplay-Black.otf */; };
+		47CB53331CFC0B2100AA19C0 /* SFNSDisplay-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB532B1CFC0B2100AA19C0 /* SFNSDisplay-Bold.otf */; };
+		47CB53341CFC0B2100AA19C0 /* SFNSDisplay-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB532C1CFC0B2100AA19C0 /* SFNSDisplay-Heavy.otf */; };
+		47CB53351CFC0B2100AA19C0 /* SFNSDisplay-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB532D1CFC0B2100AA19C0 /* SFNSDisplay-Regular.otf */; };
+		47CB53361CFC0B2100AA19C0 /* SFNSText-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB532E1CFC0B2100AA19C0 /* SFNSText-Bold.otf */; };
+		47CB53371CFC0B2100AA19C0 /* SFNSText-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB532F1CFC0B2100AA19C0 /* SFNSText-Heavy.otf */; };
+		47CB53381CFC0B2100AA19C0 /* SFNSText-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB53301CFC0B2100AA19C0 /* SFNSText-Regular.otf */; };
+		47CB53391CFC0B2100AA19C0 /* ZapfDingbats.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB53311CFC0B2100AA19C0 /* ZapfDingbats.ttf */; };
 		641CD33E1C3AE35A00D7FED9 /* colors.clr in Resources */ = {isa = PBXBuildFile; fileRef = 641CD33D1C3AE35A00D7FED9 /* colors.clr */; };
 		93DA731D1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 93DA731C1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out */; };
-		C221E4AD1C960A84001E04E5 /* SFNSDisplay-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = C221E4A51C960A84001E04E5 /* SFNSDisplay-Black.otf */; };
-		C221E4AE1C960A84001E04E5 /* SFNSDisplay-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C221E4A61C960A84001E04E5 /* SFNSDisplay-Bold.otf */; };
-		C221E4AF1C960A84001E04E5 /* SFNSDisplay-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C221E4A71C960A84001E04E5 /* SFNSDisplay-Heavy.otf */; };
-		C221E4B01C960A84001E04E5 /* SFNSDisplay-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C221E4A81C960A84001E04E5 /* SFNSDisplay-Regular.otf */; };
-		C221E4B11C960A84001E04E5 /* SFNSText-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C221E4A91C960A84001E04E5 /* SFNSText-Bold.otf */; };
-		C221E4B21C960A84001E04E5 /* SFNSText-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C221E4AA1C960A84001E04E5 /* SFNSText-Heavy.otf */; };
-		C221E4B31C960A84001E04E5 /* SFNSText-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C221E4AB1C960A84001E04E5 /* SFNSText-Regular.otf */; };
-		C221E4B41C960A84001E04E5 /* ZapfDingbats.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C221E4AC1C960A84001E04E5 /* ZapfDingbats.ttf */; };
 		C2265B591C8907CA00CA5C4F /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = C2265B581C8907CA00CA5C4F /* colors.json */; };
 		C24AFD021C91DE33005FE3EF /* fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24AFD011C91DE33005FE3EF /* fonts.swift */; };
 		C24AFD041C92370D005FE3EF /* fonts-default.stencil in Resources */ = {isa = PBXBuildFile; fileRef = C24AFD031C91E63D005FE3EF /* fonts-default.stencil */; };
@@ -185,24 +185,24 @@
 		4761E0331BDE753000B9B05F /* Images-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-Empty.swift.out"; sourceTree = "<group>"; };
 		4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Empty.swift.out"; sourceTree = "<group>"; };
 		4761E0351BDE753000B9B05F /* Strings-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Empty.swift.out"; sourceTree = "<group>"; };
+		47CB532A1CFC0B2100AA19C0 /* SFNSDisplay-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSDisplay-Black.otf"; sourceTree = "<group>"; };
+		47CB532B1CFC0B2100AA19C0 /* SFNSDisplay-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSDisplay-Bold.otf"; sourceTree = "<group>"; };
+		47CB532C1CFC0B2100AA19C0 /* SFNSDisplay-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSDisplay-Heavy.otf"; sourceTree = "<group>"; };
+		47CB532D1CFC0B2100AA19C0 /* SFNSDisplay-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSDisplay-Regular.otf"; sourceTree = "<group>"; };
+		47CB532E1CFC0B2100AA19C0 /* SFNSText-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSText-Bold.otf"; sourceTree = "<group>"; };
+		47CB532F1CFC0B2100AA19C0 /* SFNSText-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSText-Heavy.otf"; sourceTree = "<group>"; };
+		47CB53301CFC0B2100AA19C0 /* SFNSText-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSText-Regular.otf"; sourceTree = "<group>"; };
+		47CB53311CFC0B2100AA19C0 /* ZapfDingbats.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ZapfDingbats.ttf; sourceTree = "<group>"; };
 		641CD33D1C3AE35A00D7FED9 /* colors.clr */ = {isa = PBXFileReference; lastKnownFileType = file; path = colors.clr; sourceTree = "<group>"; };
 		6FDA009E555D48BC367926D9 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		93DA731C1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-UTF8-Defaults.swift.out"; sourceTree = "<group>"; };
 		AC28A16A3F1852C832A3B47E /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C221E4A51C960A84001E04E5 /* SFNSDisplay-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSDisplay-Black.otf"; sourceTree = "<group>"; };
-		C221E4A61C960A84001E04E5 /* SFNSDisplay-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSDisplay-Bold.otf"; sourceTree = "<group>"; };
-		C221E4A71C960A84001E04E5 /* SFNSDisplay-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSDisplay-Heavy.otf"; sourceTree = "<group>"; };
-		C221E4A81C960A84001E04E5 /* SFNSDisplay-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSDisplay-Regular.otf"; sourceTree = "<group>"; };
-		C221E4A91C960A84001E04E5 /* SFNSText-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSText-Bold.otf"; sourceTree = "<group>"; };
-		C221E4AA1C960A84001E04E5 /* SFNSText-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSText-Heavy.otf"; sourceTree = "<group>"; };
-		C221E4AB1C960A84001E04E5 /* SFNSText-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFNSText-Regular.otf"; sourceTree = "<group>"; };
-		C221E4AC1C960A84001E04E5 /* ZapfDingbats.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ZapfDingbats.ttf; sourceTree = "<group>"; };
 		C2265B581C8907CA00CA5C4F /* colors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colors.json; sourceTree = "<group>"; };
 		C24AFD011C91DE33005FE3EF /* fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = fonts.swift; sourceTree = "<group>"; tabWidth = 2; };
 		C24AFD031C91E63D005FE3EF /* fonts-default.stencil */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = text; path = "fonts-default.stencil"; sourceTree = "<group>"; tabWidth = 2; };
-		C24AFD091C924188005FE3EF /* Fonts-File-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Fonts-File-Empty.swift.out"; sourceTree = "<group>"; };
-		C24AFD0B1C924760005FE3EF /* Fonts-File-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Fonts-File-Default.swift.out"; sourceTree = "<group>"; };
-		C24AFD0D1C924A29005FE3EF /* Fonts-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Fonts-File-CustomName.swift.out"; sourceTree = "<group>"; };
+		C24AFD091C924188005FE3EF /* Fonts-File-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Fonts-File-Empty.swift.out"; path = "UnitTests/expected/Fonts-File-Empty.swift.out"; sourceTree = SOURCE_ROOT; };
+		C24AFD0B1C924760005FE3EF /* Fonts-File-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Fonts-File-Default.swift.out"; path = "UnitTests/expected/Fonts-File-Default.swift.out"; sourceTree = SOURCE_ROOT; };
+		C24AFD0D1C924A29005FE3EF /* Fonts-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Fonts-File-CustomName.swift.out"; path = "UnitTests/expected/Fonts-File-CustomName.swift.out"; sourceTree = SOURCE_ROOT; };
 		C25A54311CEE7C2200401BE5 /* Colors-Txt-File-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-Txt-File-Defaults.swift.out"; sourceTree = "<group>"; };
 		C25A54331CEE7CEB00401BE5 /* Colors-Txt-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-Txt-File-CustomName.swift.out"; sourceTree = "<group>"; };
 		C2DBEADD1C8F87AD00E62C9E /* FontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsTests.swift; sourceTree = "<group>"; };
@@ -283,33 +283,10 @@
 			isa = PBXGroup;
 			children = (
 				C221E4A41C960A84001E04E5 /* Fonts */,
-				4761E0321BDE753000B9B05F /* Colors-Empty.swift.out */,
-				09EB0A201BDC60F000B2CF79 /* Colors-List-Defaults.swift.out */,
-				0921FB9B1BE785DF00B488B5 /* Colors-List-RawValue.swift.out */,
-				09EB0A1F1BDC60F000B2CF79 /* Colors-File-Defaults.swift.out */,
-				09EB0A1E1BDC60F000B2CF79 /* Colors-File-CustomName.swift.out */,
-				C25A54311CEE7C2200401BE5 /* Colors-Txt-File-Defaults.swift.out */,
-				C25A54331CEE7CEB00401BE5 /* Colors-Txt-File-CustomName.swift.out */,
-				4761E0331BDE753000B9B05F /* Images-Empty.swift.out */,
-				09EB0A211BDC60F000B2CF79 /* Images-Entries-Defaults.swift.out */,
-				09EB0A231BDC60F000B2CF79 /* Images-File-Defaults.swift.out */,
-				470A14E51BEA68C40052EAC8 /* Images-File-AllValues.swift.out */,
-				09EB0A221BDC60F000B2CF79 /* Images-File-CustomName.swift.out */,
-				4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */,
-				09EB0A261BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out */,
-				470A14E21BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out */,
-				470A14EA1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Defaults.swift.out */,
-				09EB0A251BDC60F000B2CF79 /* Storyboards-All-Defaults.swift.out */,
-				09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */,
-				4761E0351BDE753000B9B05F /* Strings-Empty.swift.out */,
-				09030C261B6D492E00275BF5 /* Strings-Entries-Defaults.swift.out */,
-				095685EF1B6DA32800BF300C /* Strings-Lines-Defaults.swift.out */,
-				09030C2A1B6D4D9A00275BF5 /* Strings-File-Defaults.swift.out */,
-				93DA731C1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out */,
-				095685EB1B6DA16200BF300C /* Strings-File-CustomName.swift.out */,
-				C24AFD091C924188005FE3EF /* Fonts-File-Empty.swift.out */,
-				C24AFD0B1C924760005FE3EF /* Fonts-File-Default.swift.out */,
-				C24AFD0D1C924A29005FE3EF /* Fonts-File-CustomName.swift.out */,
+				47CB53231CFC0AC900AA19C0 /* Colors */,
+				47CB53241CFC0AD000AA19C0 /* Images */,
+				47CB53251CFC0AD600AA19C0 /* Storyboards */,
+				47CB53261CFC0ADF00AA19C0 /* Strings */,
 			);
 			path = expected;
 			sourceTree = "<group>";
@@ -329,6 +306,7 @@
 				C2265B581C8907CA00CA5C4F /* colors.json */,
 				09030C241B6D48FC00275BF5 /* Localizable.strings */,
 				09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */,
+				47CB53291CFC0B2100AA19C0 /* Fonts */,
 			);
 			path = fixtures;
 			sourceTree = "<group>";
@@ -373,6 +351,73 @@
 			path = Filters;
 			sourceTree = "<group>";
 		};
+		47CB53231CFC0AC900AA19C0 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				4761E0321BDE753000B9B05F /* Colors-Empty.swift.out */,
+				09EB0A201BDC60F000B2CF79 /* Colors-List-Defaults.swift.out */,
+				0921FB9B1BE785DF00B488B5 /* Colors-List-RawValue.swift.out */,
+				09EB0A1F1BDC60F000B2CF79 /* Colors-File-Defaults.swift.out */,
+				09EB0A1E1BDC60F000B2CF79 /* Colors-File-CustomName.swift.out */,
+				C25A54311CEE7C2200401BE5 /* Colors-Txt-File-Defaults.swift.out */,
+				C25A54331CEE7CEB00401BE5 /* Colors-Txt-File-CustomName.swift.out */,
+			);
+			name = Colors;
+			sourceTree = "<group>";
+		};
+		47CB53241CFC0AD000AA19C0 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				4761E0331BDE753000B9B05F /* Images-Empty.swift.out */,
+				09EB0A211BDC60F000B2CF79 /* Images-Entries-Defaults.swift.out */,
+				09EB0A231BDC60F000B2CF79 /* Images-File-Defaults.swift.out */,
+				470A14E51BEA68C40052EAC8 /* Images-File-AllValues.swift.out */,
+				09EB0A221BDC60F000B2CF79 /* Images-File-CustomName.swift.out */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		47CB53251CFC0AD600AA19C0 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */,
+				09EB0A261BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out */,
+				470A14E21BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out */,
+				470A14EA1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Defaults.swift.out */,
+				09EB0A251BDC60F000B2CF79 /* Storyboards-All-Defaults.swift.out */,
+				09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		47CB53261CFC0ADF00AA19C0 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				4761E0351BDE753000B9B05F /* Strings-Empty.swift.out */,
+				09030C261B6D492E00275BF5 /* Strings-Entries-Defaults.swift.out */,
+				095685EF1B6DA32800BF300C /* Strings-Lines-Defaults.swift.out */,
+				09030C2A1B6D4D9A00275BF5 /* Strings-File-Defaults.swift.out */,
+				93DA731C1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out */,
+				095685EB1B6DA16200BF300C /* Strings-File-CustomName.swift.out */,
+			);
+			name = Strings;
+			sourceTree = "<group>";
+		};
+		47CB53291CFC0B2100AA19C0 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				47CB532A1CFC0B2100AA19C0 /* SFNSDisplay-Black.otf */,
+				47CB532B1CFC0B2100AA19C0 /* SFNSDisplay-Bold.otf */,
+				47CB532C1CFC0B2100AA19C0 /* SFNSDisplay-Heavy.otf */,
+				47CB532D1CFC0B2100AA19C0 /* SFNSDisplay-Regular.otf */,
+				47CB532E1CFC0B2100AA19C0 /* SFNSText-Bold.otf */,
+				47CB532F1CFC0B2100AA19C0 /* SFNSText-Heavy.otf */,
+				47CB53301CFC0B2100AA19C0 /* SFNSText-Regular.otf */,
+				47CB53311CFC0B2100AA19C0 /* ZapfDingbats.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		9545BA0984407302C0E83AB4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,14 +432,9 @@
 		C221E4A41C960A84001E04E5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				C221E4A51C960A84001E04E5 /* SFNSDisplay-Black.otf */,
-				C221E4A61C960A84001E04E5 /* SFNSDisplay-Bold.otf */,
-				C221E4A71C960A84001E04E5 /* SFNSDisplay-Heavy.otf */,
-				C221E4A81C960A84001E04E5 /* SFNSDisplay-Regular.otf */,
-				C221E4A91C960A84001E04E5 /* SFNSText-Bold.otf */,
-				C221E4AA1C960A84001E04E5 /* SFNSText-Heavy.otf */,
-				C221E4AB1C960A84001E04E5 /* SFNSText-Regular.otf */,
-				C221E4AC1C960A84001E04E5 /* ZapfDingbats.ttf */,
+				C24AFD091C924188005FE3EF /* Fonts-File-Empty.swift.out */,
+				C24AFD0B1C924760005FE3EF /* Fonts-File-Default.swift.out */,
+				C24AFD0D1C924A29005FE3EF /* Fonts-File-CustomName.swift.out */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -494,13 +534,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47CB53351CFC0B2100AA19C0 /* SFNSDisplay-Regular.otf in Resources */,
 				0921FB9D1BE7873400B488B5 /* colors-rawValue.stencil in Resources */,
-				C221E4AE1C960A84001E04E5 /* SFNSDisplay-Bold.otf in Resources */,
-				C221E4B41C960A84001E04E5 /* ZapfDingbats.ttf in Resources */,
 				0921FB9C1BE785DF00B488B5 /* Colors-List-RawValue.swift.out in Resources */,
 				C25A54321CEE7C2200401BE5 /* Colors-Txt-File-Defaults.swift.out in Resources */,
 				470A14E31BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out in Resources */,
 				470A14EB1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Defaults.swift.out in Resources */,
+				47CB53371CFC0B2100AA19C0 /* SFNSText-Heavy.otf in Resources */,
 				C24AFD0E1C924A29005FE3EF /* Fonts-File-CustomName.swift.out in Resources */,
 				C2265B591C8907CA00CA5C4F /* colors.json in Resources */,
 				C25A54341CEE7CEB00401BE5 /* Colors-Txt-File-CustomName.swift.out in Resources */,
@@ -510,10 +550,9 @@
 				09EB0A1A1BDC3AC400B2CF79 /* strings-default.stencil in Resources */,
 				09EB0A291BDC60F000B2CF79 /* Colors-List-Defaults.swift.out in Resources */,
 				09A87B701BCCA5F600D9B9F5 /* Strings-Lines-Defaults.swift.out in Resources */,
+				47CB53331CFC0B2100AA19C0 /* SFNSDisplay-Bold.otf in Resources */,
 				4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */,
 				EFFE62F81C27081A00FE9783 /* Dependency.storyboard in Resources */,
-				C221E4B11C960A84001E04E5 /* SFNSText-Bold.otf in Resources */,
-				C221E4AD1C960A84001E04E5 /* SFNSDisplay-Black.otf in Resources */,
 				09A87B5E1BCCA4D100D9B9F5 /* Message.storyboard in Resources */,
 				09A87B641BCCA4DC00D9B9F5 /* Images.xcassets in Resources */,
 				C24AFD041C92370D005FE3EF /* fonts-default.stencil in Resources */,
@@ -522,8 +561,6 @@
 				09A87B5F1BCCA4D100D9B9F5 /* Wizard.storyboard in Resources */,
 				09EB0A2B1BDC60F000B2CF79 /* Images-File-CustomName.swift.out in Resources */,
 				09A87B6C1BCCA5F600D9B9F5 /* Strings-Entries-Defaults.swift.out in Resources */,
-				C221E4B31C960A84001E04E5 /* SFNSText-Regular.otf in Resources */,
-				C221E4B21C960A84001E04E5 /* SFNSText-Heavy.otf in Resources */,
 				C24AFD0A1C924188005FE3EF /* Fonts-File-Empty.swift.out in Resources */,
 				0911503B1BD3ECAE00EBC803 /* colors-default.stencil in Resources */,
 				09A87B6D1BCCA5F600D9B9F5 /* Strings-File-Defaults.swift.out in Resources */,
@@ -532,21 +569,24 @@
 				4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */,
 				4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */,
 				470A14E91BEA6CF10052EAC8 /* Anonymous.storyboard in Resources */,
+				47CB53391CFC0B2100AA19C0 /* ZapfDingbats.ttf in Resources */,
 				09A87B711BCCA5FC00D9B9F5 /* Localizable.strings in Resources */,
 				EFFE62F41C27073700FE9783 /* Placeholder.storyboard in Resources */,
 				09EB0A281BDC60F000B2CF79 /* Colors-File-Defaults.swift.out in Resources */,
 				09EB0A311BDC8F4100B2CF79 /* LocUTF8.strings in Resources */,
+				47CB53381CFC0B2100AA19C0 /* SFNSText-Regular.otf in Resources */,
 				09EB0A2E1BDC60F000B2CF79 /* Storyboards-All-Defaults.swift.out in Resources */,
 				470A14E61BEA68C40052EAC8 /* Images-File-AllValues.swift.out in Resources */,
-				C221E4AF1C960A84001E04E5 /* SFNSDisplay-Heavy.otf in Resources */,
+				47CB53321CFC0B2100AA19C0 /* SFNSDisplay-Black.otf in Resources */,
 				09EB0A2D1BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out in Resources */,
 				09EB0A271BDC60F000B2CF79 /* Colors-File-CustomName.swift.out in Resources */,
-				C221E4B01C960A84001E04E5 /* SFNSDisplay-Regular.otf in Resources */,
 				0911503F1BD4136E00EBC803 /* storyboards-default.stencil in Resources */,
 				097504271C78ED3400D1A01B /* colors.xml in Resources */,
+				47CB53341CFC0B2100AA19C0 /* SFNSDisplay-Heavy.otf in Resources */,
 				470A14E11BEA63D30052EAC8 /* storyboards-lowercase.stencil in Resources */,
 				93DA731D1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out in Resources */,
 				09EB0A2F1BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out in Resources */,
+				47CB53361CFC0B2100AA19C0 /* SFNSText-Bold.otf in Resources */,
 				09EB0A2C1BDC60F000B2CF79 /* Images-File-Defaults.swift.out in Resources */,
 				C24AFD0C1C924760005FE3EF /* Fonts-File-Default.swift.out in Resources */,
 			);

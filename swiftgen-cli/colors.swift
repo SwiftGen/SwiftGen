@@ -12,7 +12,7 @@ import Stencil
 let colorsCommand = command(
   outputOption,
   templateOption("colors"), templatePathOption,
-  Option<String>("enumName", "Name", flag: "e", description: "The name of the enum to generate"),
+  Option<String>("enumName", "ColorName", flag: "e", description: "The name of the enum to generate"),
   Argument<Path>("FILE", description: "Colors.txt|.clr|.xml|.json file to parse.", validator: fileExists)
 ) { output, templateName, templatePath, enumName, path in
 

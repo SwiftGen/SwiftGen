@@ -1,8 +1,12 @@
 # SwiftGen CHANGELOG
 
 ---
-## Master
 
+## 1.0.0
+
+* Restructured colors & fonts templates to workaround the same LLVM issue as #112 with nested types
+  inside existing UIKit classes in Release/Optimized builds.  
+  [Olivier Halligon](https://github.com/AliSoftware)
 * Added support for Fonts using the `swiftgen fonts` command.  
   [Derek Ostrander](https://github.com/dostrander) [#102](https://github.com/AliSoftware/SwiftGen/pull/102)
 * Added support for TXT (`colors.txt`) files to have named value.  

@@ -13,32 +13,32 @@ extension UIColor {
   }
 }
 
-extension UIColor {
-  enum Name {
-    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffcc00"></span>
-    /// Alpha: 60% <br/> (0xffcc0099)
-    case ArticleBackground
-    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#996600"></span>
-    /// Alpha: 100% <br/> (0x996600ff)
-    case ArticleTitle
-    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#999999"></span>
-    /// Alpha: 100% <br/> (0x999999ff)
-    case Text_Body_Color
+enum ColorName {
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffcc00"></span>
+  /// Alpha: 60% <br/> (0xffcc0099)
+  case ArticleBackground
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#996600"></span>
+  /// Alpha: 100% <br/> (0x996600ff)
+  case ArticleTitle
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#999999"></span>
+  /// Alpha: 100% <br/> (0x999999ff)
+  case Text_Body_Color
 
-    var rgbaValue: UInt32! {
-      switch self {
-      case .ArticleBackground: return 0xffcc0099
-      case .ArticleTitle: return 0x996600ff
-      case .Text_Body_Color: return 0x999999ff
-      }
-    }
-
-    var color: UIColor {
-      return UIColor(named: self)
+  var rgbaValue: UInt32! {
+    switch self {
+    case .ArticleBackground: return 0xffcc0099
+    case .ArticleTitle: return 0x996600ff
+    case .Text_Body_Color: return 0x999999ff
     }
   }
 
-  convenience init(named name: Name) {
+  var color: UIColor {
+    return UIColor(named: self)
+  }
+}
+
+extension UIColor {
+  convenience init(named name: ColorName) {
     self.init(rgbaValue: name.rgbaValue)
   }
 }

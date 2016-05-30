@@ -14,28 +14,28 @@ extension UIColor {
 }
 
 {% if colors %}
-extension UIColor {
-  {# Note: We don't use a UInt32 rawValue in this template so we can have multiple colors with the same rgbaValue #}
-  enum {{enumName}} {
+{# Note: We don't use a UInt32 rawValue in this template so we can have multiple colors with the same rgbaValue #}
+enum {{enumName}} {
+  {% for color in colors %}
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#{{color.rgb}}"></span>
+  /// Alpha: {{color.alpha|hexToInt|int255toFloat|percent}} <br/> (0x{{color.rgba}})
+  case {{color.name|swiftIdentifier}}
+  {% endfor %}
+
+  var rgbaValue: UInt32! {
+    switch self {
     {% for color in colors %}
-    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#{{color.rgb}}"></span>
-    /// Alpha: {{color.alpha|hexToInt|int255toFloat|percent}} <br/> (0x{{color.rgba}})
-    case {{color.name|swiftIdentifier}}
+    case .{{color.name|swiftIdentifier}}: return 0x{{color.rgba}}
     {% endfor %}
-
-    var rgbaValue: UInt32! {
-      switch self {
-      {% for color in colors %}
-      case .{{color.name|swiftIdentifier}}: return 0x{{color.rgba}}
-      {% endfor %}
-      }
-    }
-
-    var color: UIColor {
-      return UIColor(named: self)
     }
   }
 
+  var color: UIColor {
+    return UIColor(named: self)
+  }
+}
+
+extension UIColor {
   convenience init(named name: {{enumName}}) {
     self.init(rgbaValue: name.rgbaValue)
   }

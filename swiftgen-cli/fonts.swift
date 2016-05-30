@@ -12,7 +12,7 @@ import GenumKit
 let fontsCommand = command(
   outputOption,
   templateOption("fonts"), templatePathOption,
-  Option<String>("enumName", "Family", flag: "e", description: "The name of the enum to generate"),
+  Option<String>("enumName", "FontFamily", flag: "e", description: "The name of the enum to generate"),
   Argument<Path>("DIR", description: "Directory to parse.", validator: dirExists)
   ) { output, templateName, templatePath, enumName, path in
     let parser = FontsFileParser()
