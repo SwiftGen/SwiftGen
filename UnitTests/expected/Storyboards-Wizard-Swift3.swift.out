@@ -1,0 +1,67 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+import UIKit
+
+protocol StoryboardSceneType {
+  static var storyboardName: String { get }
+}
+
+extension StoryboardSceneType {
+  static func storyboard() -> UIStoryboard {
+    return UIStoryboard(name: self.storyboardName, bundle: nil)
+  }
+
+  static func initialViewController() -> UIViewController {
+    return storyboard().instantiateInitialViewController()!
+  }
+}
+
+extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
+  func viewController() -> UIViewController {
+    return Self.storyboard().instantiateViewController(withIdentifier: self.rawValue)
+  }
+  static func viewController(identifier: Self) -> UIViewController {
+    return identifier.viewController()
+  }
+}
+
+protocol StoryboardSegueType: RawRepresentable { }
+
+extension UIViewController {
+  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegue(withIdentifier: segue.rawValue, sender: sender)
+  }
+}
+
+struct StoryboardScene {
+  enum Wizard: String, StoryboardSceneType {
+    static let storyboardName = "Wizard"
+
+    case Accept_CGUScene = "Accept-CGU"
+    static func instantiateAcceptCGU() -> UIViewController {
+      return StoryboardScene.Wizard.Accept_CGUScene.viewController()
+    }
+
+    case CreateAccountScene = "CreateAccount"
+    static func instantiateCreateAccount() -> CreateAccViewController {
+      return StoryboardScene.Wizard.CreateAccountScene.viewController() as! CreateAccViewController
+    }
+
+    case PreferencesScene = "Preferences"
+    static func instantiatePreferences() -> UITableViewController {
+      return StoryboardScene.Wizard.PreferencesScene.viewController() as! UITableViewController
+    }
+
+    case Validate_PasswordScene = "Validate_Password"
+    static func instantiateValidatePassword() -> UIViewController {
+      return StoryboardScene.Wizard.Validate_PasswordScene.viewController()
+    }
+  }
+}
+
+struct StoryboardSegue {
+  enum Wizard: String, StoryboardSegueType {
+    case ShowPassword = "ShowPassword"
+  }
+}
