@@ -257,7 +257,6 @@ namespace :release do
   task :homebrew do
     tag = podspec_version
     Dir.chdir('/usr/local') do
-      puts "[TODO] Push a version to homebrew (see wiki)"
       sh 'git checkout master'
       sh 'git pull'
       sh "git checkout -b swiftgen-#{tag} origin/master"
@@ -270,6 +269,11 @@ namespace :release do
       formula = File.read(formula_file)
       new_formula = formula.gsub(/url "https:.*"$/, %Q(url "#{targz_url}")).gsub(/sha256 ".*"$/,%Q(sha256 "#{sha256.to_s}"))
       File.write(formula_file, new_formula)
+
+      puts '==> Auditing and testing Homebrew formula...'
+      sh 'brew audit --strict swiftgen'
+      sh 'brew install swiftgen'
+      sh 'brew test swiftgen'
 
       sh "git add #{formula_file}"
       sh "git commit -m 'swiftgen #{tag}'"

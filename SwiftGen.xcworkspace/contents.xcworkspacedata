@@ -5,6 +5,10 @@
       location = "container:"
       name = "Pod Metadata">
       <FileRef
+         location = "group:SwiftGen.podspec"
+         assignedFileDataType = "public.ruby-script">
+      </FileRef>
+      <FileRef
          location = "group:GenumKit/GenumKit.podspec"
          assignedFileDataType = "public.ruby-script">
       </FileRef>
