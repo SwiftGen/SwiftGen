@@ -255,8 +255,10 @@ namespace :release do
   end
 
   task :homebrew do
+    print_info "Updating Homebrew Formula"
     tag = podspec_version
-    Dir.chdir('/usr/local') do
+    formulas_dir = `brew --repository homebrew/core`.chomp
+    Dir.chdir(formulas_dir) do
       sh 'git checkout master'
       sh 'git pull'
       sh "git checkout -b swiftgen-#{tag} origin/master"
@@ -265,22 +267,22 @@ namespace :release do
       sha256_res = `curl -L #{targz_url} | shasum -a 256`
       sha256 = /^[A-Fa-f0-9]+/.match(sha256_res)
       raise 'Unable to extract SHA256' if sha256.nil?
-      formula_file = '/usr/local/Library/Formula/swiftgen.rb'
+      formula_file = "#{formulas_dir}/Formula/swiftgen.rb"
       formula = File.read(formula_file)
       new_formula = formula.gsub(/url "https:.*"$/, %Q(url "#{targz_url}")).gsub(/sha256 ".*"$/,%Q(sha256 "#{sha256.to_s}"))
       File.write(formula_file, new_formula)
 
-      puts '==> Auditing and testing Homebrew formula...'
-      sh 'brew audit --strict swiftgen'
+      print_info "Checking Homebrew formula..."
+      sh 'brew audit --strict --online swiftgen'
       sh 'brew install swiftgen'
       sh 'brew test swiftgen'
 
+      print_info "Pushing to Homebrew"
       sh "git add #{formula_file}"
       sh "git commit -m 'swiftgen #{tag}'"
       sh "git push -u AliSoftware swiftgen-#{tag}"
-      sh "open 'https://github.com/Homebrew/homebrew/compare/master...AliSoftware:swiftgen-#{tag}?expand=1'"
+      sh "open 'https://github.com/Homebrew/homebrew-core/compare/master...AliSoftware:swiftgen-#{tag}?expand=1'"
     end
   end
 
 end
-
