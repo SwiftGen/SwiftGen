@@ -56,7 +56,6 @@ public final class ColorsTextFileParser: ColorsFileParser {
     let content = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
     let lines = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
     let whitespace = NSCharacterSet.whitespaceCharacterSet()
-    let seperatorChar = NSCharacterSet(charactersInString: seperator)
     let skippedCharacters = NSMutableCharacterSet()
     skippedCharacters.formUnionWithCharacterSet(whitespace)
     skippedCharacters.formUnionWithCharacterSet(skippedCharacters)
@@ -74,9 +73,10 @@ public final class ColorsTextFileParser: ColorsFileParser {
           break
       }
 
-      key = key?.stringByTrimmingCharactersInSet(whitespace)
-      value = value?.stringByTrimmingCharactersInSet(whitespace)
-      dict[key as! String] = value as! String
+      if let key: String = key?.stringByTrimmingCharactersInSet(whitespace),
+        value: String = value?.stringByTrimmingCharactersInSet(whitespace) {
+        dict[key] = value
+      }
     }
 
     return dict
@@ -99,7 +99,7 @@ public final class ColorsTextFileParser: ColorsFileParser {
   //  - Extra spaces will be skipped
   public func parseFile(path: String, separator: String = ":") throws {
     let dict = try keyValueDict(fromPath: path, withSeperator: separator)
-    for (key, value) in dict {
+    for key in dict.keys {
       addColorWithName(key, value: colorValue(forKey: key, onDict: dict))
     }
   }

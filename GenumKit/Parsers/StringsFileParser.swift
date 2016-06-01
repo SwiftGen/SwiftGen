@@ -149,7 +149,14 @@ public final class StringsFileParser {
     var nextNonPositional = 1
     for (str, pos) in chars {
       if let char = str.characters.first, let p = PlaceholderType(formatChar: char) {
-        let insertionPos = pos ?? nextNonPositional++
+        let insertionPos: Int
+        if let pos = pos {
+          insertionPos = pos
+        }
+        else {
+          insertionPos = nextNonPositional
+          nextNonPositional += 1
+        }
         if insertionPos > 0 {
           while list.count <= insertionPos-1 {
             list.append(.Unknown)
