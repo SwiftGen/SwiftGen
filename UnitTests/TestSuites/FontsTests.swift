@@ -39,3 +39,35 @@ class FontsTests: XCTestCase {
         XCTDiffStrings(result, expected)
     }
 }
+
+// MARK: OSX FontsTests
+
+extension FontsTests {
+    func testOSXEmpty() {
+        let parser = FontsFileParser()
+        let template = GenumTemplate(templateString: fixtureString("fonts-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext())
+        let expected = fixtureString("Fonts-osx-File-Empty.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+    
+    func testOSXDefaults() {
+        let parser = FontsFileParser()
+        parser.parseFonts(directoryPath())
+        
+        let template = GenumTemplate(templateString: fixtureString("fonts-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext())
+        let expected = fixtureString("Fonts-osx-File-Default.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+    
+    func testOSXCustomName() {
+        let parser = FontsFileParser()
+        parser.parseFonts(directoryPath())
+        
+        let template = GenumTemplate(templateString: fixtureString("fonts-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext(enumName: "CustomFamily"))
+        let expected = fixtureString("Fonts-osx-File-CustomName.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+}
