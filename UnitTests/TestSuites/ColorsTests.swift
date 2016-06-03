@@ -71,6 +71,67 @@ class ColorsTextFileTests: XCTestCase {
   }
 }
 
+extension ColorsTextFileTests {
+    
+    func testOSXEmpty() {
+        let parser = ColorsTextFileParser()
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext())
+        
+        let expected = self.fixtureString("Colors-osx-Empty.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+    
+    func testOSXListWithDefaults() {
+        let parser = ColorsTextFileParser()
+        parser.addColorWithName("Text&Body Color", value: "0x999999")
+        parser.addColorWithName("ArticleTitle", value: "#996600")
+        parser.addColorWithName("ArticleBackground", value: "#ffcc0099")
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext())
+        
+        let expected = self.fixtureString("Colors-osx-List-Defaults.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+    
+    func testOSXListWithRawValueTemplate() {
+        let parser = ColorsTextFileParser()
+        parser.addColorWithName("Text&Body Color", value: "0x999999")
+        parser.addColorWithName("ArticleTitle", value: "#996600")
+        parser.addColorWithName("ArticleBackground", value: "#ffcc0099")
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-rawValue.stencil"))
+        let result = try! template.render(parser.stencilContext())
+        
+        let expected = self.fixtureString("Colors-osx-List-RawValue.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+    
+    func testOSXFileWithDefaults() {
+        let parser = ColorsTextFileParser()
+        try! parser.parseFile(fixturePath("colors.txt"))
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext())
+        
+        let expected = self.fixtureString("Colors-osx-Txt-File-Defaults.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+    
+    func testOSXFileWithCustomName() {
+        let parser = ColorsTextFileParser()
+        try! parser.parseFile(fixturePath("colors.txt"))
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
+        
+        let expected = self.fixtureString("Colors-osx-Txt-File-CustomName.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+}
+
 // MARK: - Tests for CLR Palette files
 
 class ColorsCLRFileTests: XCTestCase {
@@ -106,6 +167,41 @@ class ColorsCLRFileTests: XCTestCase {
     let expected = self.fixtureString("Colors-File-CustomName.swift.out")
     XCTDiffStrings(result, expected)
   }
+}
+
+extension ColorsCLRFileTests {
+    
+    func testOSXEmpty() {
+        let parser = ColorsCLRFileParser()
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext())
+        
+        let expected = self.fixtureString("Colors-osx-Empty.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+    
+    func testOSXFileWithDefaults() {
+        let parser = ColorsCLRFileParser()
+        parser.parseFile(fixturePath("colors.clr"))
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext())
+        
+        let expected = self.fixtureString("Colors-osx-File-Defaults.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+    
+    func testOSXFileWithCustomName() {
+        let parser = ColorsCLRFileParser()
+        parser.parseFile(fixturePath("colors.clr"))
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
+        
+        let expected = self.fixtureString("Colors-osx-File-CustomName.swift.out")
+        XCTDiffStrings(result, expected)
+    }
 }
 
 // MARK: - Tests for XML Android color files
@@ -152,6 +248,49 @@ class ColorsXMLFileTests: XCTestCase {
   }
 }
 
+extension ColorsXMLFileTests {
+    
+    func testOSXEmpty() {
+        let parser = ColorsXMLFileParser()
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext())
+        
+        let expected = self.fixtureString("Colors-osx-Empty.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+    
+    func testOSXFileWithDefaults() {
+        let parser = ColorsXMLFileParser()
+        do {
+            try parser.parseFile(fixturePath("colors.xml"))
+        } catch {
+            XCTFail("Exception while parsing file: \(error)")
+        }
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext())
+        
+        let expected = self.fixtureString("Colors-osx-File-Defaults.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+    
+    func testOSXFileWithCustomName() {
+        let parser = ColorsXMLFileParser()
+        do {
+            try parser.parseFile(fixturePath("colors.xml"))
+        } catch {
+            XCTFail("Exception while parsing file: \(error)")
+        }
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
+        
+        let expected = self.fixtureString("Colors-osx-File-CustomName.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+}
+
 class ColorsJSONFileTests: XCTestCase {
     func testEmpty() {
         let parser = ColorsJSONFileParser()
@@ -194,3 +333,44 @@ class ColorsJSONFileTests: XCTestCase {
     }
 }
 
+extension ColorsJSONFileTests {
+    func testOSXEmpty() {
+        let parser = ColorsJSONFileParser()
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext())
+        
+        let expected = self.fixtureString("Colors-osx-Empty.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+    
+    func testOSXFileWithDefaults() {
+        let parser = ColorsJSONFileParser()
+        do {
+            try parser.parseFile(fixturePath("colors.json"))
+        } catch {
+            XCTFail("Exception while parsing file: \(error)")
+        }
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext())
+        
+        let expected = self.fixtureString("Colors-osx-File-Defaults.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+    
+    func testOSXFileWithCustomName() {
+        let parser = ColorsJSONFileParser()
+        do {
+            try parser.parseFile(fixturePath("colors.json"))
+        } catch {
+            XCTFail("Exception while parsing file: \(error)")
+        }
+        
+        let template = GenumTemplate(templateString: fixtureString("colors-osx-default.stencil"))
+        let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
+        
+        let expected = self.fixtureString("Colors-osx-File-CustomName.swift.out")
+        XCTDiffStrings(result, expected)
+    }
+}
