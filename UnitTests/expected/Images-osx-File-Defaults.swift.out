@@ -1,6 +1,6 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
-import Cocoa
+import AppKit.NSImage
 
 enum Asset: String {
   case Apple = "Apple"
