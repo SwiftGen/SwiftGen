@@ -22,7 +22,7 @@ enum {{enumName}} {
   case {{color.name|swiftIdentifier}}
   {% endfor %}
 
-  var rgbaValue: UInt32! {
+  var rgbaValue: UInt32 {
     switch self {
     {% for color in colors %}
     case .{{color.name|swiftIdentifier}}: return 0x{{color.rgba}}
