@@ -1,12 +1,10 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
-{% if images %}
 import Cocoa
 
-enum {{enumName}}: String {
-  {% for image in images %}
-  case {{image|swiftIdentifier}} = "{{image}}"
-  {% endfor %}
+enum Asset: String {
+  case Apple = "Apple"
+  case Banana = "Banana"
 
   var image: NSImage {
     return NSImage(asset: self)
@@ -14,10 +12,7 @@ enum {{enumName}}: String {
 }
 
 extension NSImage {
-  convenience init!(asset: {{enumName}}) {
+  convenience init!(asset: Asset) {
     self.init(named: asset.rawValue)
   }
 }
-{% else %}
-// No image found
-{% endif %}

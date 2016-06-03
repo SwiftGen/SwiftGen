@@ -1,7 +1,7 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
 {% if images %}
-import Cocoa.NSImage
+import Cocoa
 
 enum {{enumName}}: String {
   {% for image in images %}
