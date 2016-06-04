@@ -2,10 +2,13 @@
 
 ---
 
-## Next
+## Master
 
-* Added support for `.xcassets` files targetting OS X.
-  [Tom Baranes](https://github.com/tbaranes), [#125](https://github.com/AliSoftware/SwiftGen/pull/125)
+* Added support for OSX in images, fonts and color templates.  
+  [Tom Baranes](https://github.com/tbaranes),
+  [#125](https://github.com/AliSoftware/SwiftGen/pull/125),
+  [#126](https://github.com/AliSoftware/SwiftGen/pull/126),
+  [#127](https://github.com/AliSoftware/SwiftGen/pull/127)
 
 ## 1.0.0
 
