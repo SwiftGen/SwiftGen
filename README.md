@@ -429,7 +429,7 @@ struct FontFamily {
 // Helvetica Bold font of point size 16.0
 let font = FontFamily.Helvetica.Bold.font(16.0)
 // Another way to build the same font
-let sameFont = UIFont(family: FontFamily.Helvetica.Bold, size: 16.0)
+let sameFont = UIFont(font: FontFamily.Helvetica.Bold, size: 16.0)
 ```
 
 ---
