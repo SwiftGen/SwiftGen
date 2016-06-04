@@ -49,7 +49,11 @@ struct {{sceneEnumName}} {
     case {{sceneID}} = "{{scene.identifier}}"
     {% if scene.class %}
     static func {{sceneID}}ViewController() -> {{scene.class}} {
-      return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as! {{scene.class}}
+      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as? {{scene.class}}
+      else {
+        fatalError("ViewController '{{scene.identifier}}' is not of the expected class {{scene.class}}.")
+      }
+      return vc
     }
     {% else %}
     static func {{sceneID|lowerFirstWord}}ViewController() -> UIViewController {

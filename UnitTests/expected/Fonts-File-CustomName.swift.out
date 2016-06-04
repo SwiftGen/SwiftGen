@@ -19,24 +19,26 @@ extension FontConvertible where Self: RawRepresentable, Self.RawValue == String 
 }
 
 extension Font {
-  convenience init!<FontType: FontConvertible where FontType: RawRepresentable, FontType.RawValue == String>(font: FontType, size: CGFloat) {
-    self.init(name: font.rawValue, size: size)
+  convenience init!<FontType: FontConvertible
+    where FontType: RawRepresentable, FontType.RawValue == String>
+    (font: FontType, size: CGFloat) {
+      self.init(name: font.rawValue, size: size)
   }
 }
 
 struct CustomFamily {
   enum SFNSDisplay: String {
-      case Regular = ".SFNSDisplay-Regular"
-      case Heavy = ".SFNSDisplay-Heavy"
-      case Black = ".SFNSDisplay-Black"
-      case Bold = ".SFNSDisplay-Bold"
+    case Regular = ".SFNSDisplay-Regular"
+    case Heavy = ".SFNSDisplay-Heavy"
+    case Black = ".SFNSDisplay-Black"
+    case Bold = ".SFNSDisplay-Bold"
   }
   enum SFNSText: String {
-      case Heavy = ".SFNSText-Heavy"
-      case Bold = ".SFNSText-Bold"
-      case Regular = ".SFNSText-Regular"
+    case Heavy = ".SFNSText-Heavy"
+    case Bold = ".SFNSText-Bold"
+    case Regular = ".SFNSText-Regular"
   }
   enum ZapfDingbats: String {
-      case Regular = "ZapfDingbatsITC"
+    case Regular = "ZapfDingbatsITC"
   }
 }
