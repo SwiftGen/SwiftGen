@@ -1,8 +1,14 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
-import UIKit.UIColor
+#if os(iOS)
+  import UIKit.UIColor
+  typealias Color = UIColor
+#elseif os(OSX)
+  import AppKit.NSColor
+  typealias Color = NSColor
+#endif
 
-extension UIColor {
+extension Color {
   convenience init(rgbaValue: UInt32) {
     let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0
     let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0
@@ -24,7 +30,7 @@ enum ColorName {
   /// Alpha: 100% <br/> (0x999999ff)
   case Text_Body_Color
 
-  var rgbaValue: UInt32! {
+  var rgbaValue: UInt32 {
     switch self {
     case .ArticleBackground: return 0xffcc0099
     case .ArticleTitle: return 0x996600ff
@@ -32,12 +38,12 @@ enum ColorName {
     }
   }
 
-  var color: UIColor {
-    return UIColor(named: self)
+  var color: Color {
+    return Color(named: self)
   }
 }
 
-extension UIColor {
+extension Color {
   convenience init(named name: ColorName) {
     self.init(rgbaValue: name.rgbaValue)
   }

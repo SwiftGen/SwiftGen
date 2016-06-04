@@ -193,4 +193,3 @@ class ColorsJSONFileTests: XCTestCase {
         XCTDiffStrings(result, expected)
     }
 }
-

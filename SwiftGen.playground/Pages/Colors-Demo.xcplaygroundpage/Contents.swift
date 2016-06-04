@@ -38,7 +38,7 @@ enum ColorName {
     /// Alpha: 80% <br/> (0xffffffcc)
     case Translucent
     
-    var rgbaValue: UInt32! {
+    var rgbaValue: UInt32 {
         switch self {
         case .ArticleBody: return 0x339666ff
         case .ArticleFootnote: return 0xff66ccff
