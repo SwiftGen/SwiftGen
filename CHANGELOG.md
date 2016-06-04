@@ -14,6 +14,8 @@
   [#125](https://github.com/AliSoftware/SwiftGen/pull/125),
   [#126](https://github.com/AliSoftware/SwiftGen/pull/126),
   [#127](https://github.com/AliSoftware/SwiftGen/pull/127)
+* Added missing FontConvertible protocol conformance to default fonts template.  
+  [Ben Chatelain](https://github.com/phatblat) [#129](https://github.com/AliSoftware/SwiftGen/pull/129)
 
 ## 1.0.0
 
