@@ -72,7 +72,8 @@ extension AssetsCatalogParser {
        - `class`: `String` (absent if generic UIStoryboardSegue)
 */
 extension StoryboardParser {
-  public func stencilContext(sceneEnumName sceneEnumName: String = "StoryboardScene", segueEnumName: String = "StoryboardSegue") -> Context {
+  public func stencilContext(sceneEnumName sceneEnumName: String = "StoryboardScene",
+                                           segueEnumName: String = "StoryboardSegue") -> Context {
     let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sort(<)
     let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:AnyObject] in
       var sbMap: [String:AnyObject] = ["name": storyboardName]
@@ -80,7 +81,10 @@ extension StoryboardParser {
         sbMap["scenes"] = scenes
           .sort({$0.storyboardID < $1.storyboardID})
           .map { (scene: Scene) -> [String:String] in
-            let customClass = scene.customClass ?? (scene.tag != "viewController" ? "UI" + uppercaseFirst(scene.tag) : nil)
+            // Handle special scene.tag cases like navigationController, splitViewController, etc…
+            // TODO: Fix this to extract the 'UI' prefix and be able to implement OSX support in #128
+            let customClass = scene.customClass ??
+              (scene.tag != "viewController" ? "UI" + uppercaseFirst(scene.tag) : nil)
             if let customClass = customClass {
               return ["identifier": scene.storyboardID, "class": customClass]
             } else {
@@ -92,12 +96,19 @@ extension StoryboardParser {
         sbMap["segues"] = segues
           .sort({$0.segueID < $1.segueID})
           .map { (segue: Segue) -> [String:String] in
+            // TODO: Fix this to extract the 'UI' prefix and be able to implement OSX support in #128
             ["identifier": segue.segueID, "class": segue.customClass ?? "UIStoryboardSegue"]
         }
       }
       return sbMap
     }
-    return Context(dictionary: ["sceneEnumName": sceneEnumName, "segueEnumName": segueEnumName, "storyboards": storyboardsMap])
+    return Context(
+      dictionary: [
+        "sceneEnumName": sceneEnumName,
+        "segueEnumName": segueEnumName,
+        "storyboards": storyboardsMap
+      ]
+    )
   }
 }
 
@@ -107,7 +118,7 @@ extension StoryboardParser {
  - `strings`: `Array`
     - `key`: `String`
     - `translation`: `String`
-    - `params`: `Dictionary` — defined only if localized string has parameters, and in such case contains the following entries:
+    - `params`: `Dictionary` — defined only if localized string has parameters; contains the following entries:
        - `count`: `Int` — number of parameters
        - `types`: `Array<String>` containing types like `"String"`, `"Int"`, etc
        - `declarations`: `Array<String>` containing declarations like `"let p0"`, `"let p1"`, etc

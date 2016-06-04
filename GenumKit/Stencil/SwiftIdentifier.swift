@@ -6,7 +6,9 @@
 
 import Foundation
 
-func swiftIdentifier(fromString string: String, forbiddenChars exceptions: String = "", replaceWithUnderscores underscores: Bool = false) -> String {
+func swiftIdentifier(fromString string: String,
+                     forbiddenChars exceptions: String = "",
+                     replaceWithUnderscores underscores: Bool = false) -> String {
   let (head, tail) : (NSMutableCharacterSet, NSMutableCharacterSet) = {
     let addRange: (NSMutableCharacterSet, Range<Int>) -> Void = { (mcs, range) in
       mcs.addCharactersInRange(NSRange(location: range.startIndex, length: range.endIndex-range.startIndex))
@@ -15,6 +17,7 @@ func swiftIdentifier(fromString string: String, forbiddenChars exceptions: Strin
       mcs.addCharactersInString(string)
     }
 
+    // swiftlint:disable:next line_length
     // Official list from: https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html#//apple_ref/doc/uid/TP40014097-CH30-ID410
     let head = NSMutableCharacterSet()
 
