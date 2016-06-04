@@ -1,0 +1,43 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+import Cocoa
+
+protocol StoryboardSceneType {
+  static var storyboardName: String { get }
+}
+
+extension StoryboardSceneType {
+  static func storyboard() -> NSStoryboard {
+    return NSStoryboard(name: self.storyboardName, bundle: nil)
+  }
+
+  static func initialViewController() -> AnyObject {
+    return storyboard().instantiateInitialController()!
+  }
+}
+
+extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
+  func viewController() -> AnyObject {
+    return Self.storyboard().instantiateControllerWithIdentifier(self.rawValue)
+  }
+  static func viewController(identifier: Self) -> AnyObject {
+    return identifier.viewController()
+  }
+}
+
+protocol StoryboardSegueType: RawRepresentable { }
+
+extension NSWindowController {
+  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
+extension NSViewController {
+  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
+// No storyboard found

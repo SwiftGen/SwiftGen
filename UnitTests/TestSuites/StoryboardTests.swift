@@ -104,3 +104,30 @@ class StoryboardTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
 }
+
+// MARK: OS X StoryboardTests
+
+extension StoryboardTests {
+  
+  func testOSXEmpty() {
+    let parser = StoryboardParser()
+    
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Storyboards-osx-Empty.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
+  func testOSXAnonymousStoryboardWithDefaults() {
+    let parser = StoryboardParser()
+    parser.addStoryboardAtPath(self.fixturePath("Anonymous-osx.storyboard"))
+    
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Storyboards-osx-Anonymous-Defaults.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+ 
+}
