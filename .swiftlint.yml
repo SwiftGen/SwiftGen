@@ -1,0 +1,7 @@
+disabled_rules:
+ - type_name
+
+# Rules customization
+line_length:
+  warning: 120
+  error: 200

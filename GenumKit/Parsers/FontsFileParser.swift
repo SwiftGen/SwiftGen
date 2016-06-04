@@ -28,7 +28,7 @@ extension Font: Hashable {
   public var hashValue: Int { return postScriptName.hashValue }
 }
 
-public func ==(lhs: Font, rhs: Font) -> Bool {
+public func == (lhs: Font, rhs: Font) -> Bool {
   return lhs.postScriptName == rhs.postScriptName
 }
 
@@ -42,8 +42,8 @@ extension CTFont {
     let font = CTFontCreateWithFontDescriptorAndOptions(desc, 0.0, nil, [.PreventAutoActivation])
     let postScriptName = CTFontCopyPostScriptName(font) as String
     guard let familyName = CTFontCopyAttribute(font, kCTFontFamilyNameAttribute) as? String,
-      let style = CTFontCopyAttribute(font, kCTFontStyleNameAttribute) as? String else { return nil }
-    
+      style = CTFontCopyAttribute(font, kCTFontStyleNameAttribute) as? String else { return nil }
+
     return Font(familyName: familyName, style: style, postScriptName: postScriptName)
   }
 }
@@ -64,7 +64,7 @@ public final class FontsFileParser {
         var value: AnyObject? = nil
         while let file = dirEnum.nextObject() as? NSURL {
           guard let _ = try? file.getResourceValue(&value, forKey: NSURLTypeIdentifierKey),
-          let uti = value as? String else {
+          uti = value as? String else {
             print("Unable to determine the Universal Type Identifier for file \(file)")
             continue
           }

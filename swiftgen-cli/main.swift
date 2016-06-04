@@ -10,16 +10,26 @@ import PathKit
 
 // MARK: Common
 
-let TEMPLATES_RELATIVE_PATH = "../templates"
+let templatesRelativePath = "../templates"
 
 
 func templateOption(prefix: String) -> Option<String> {
-  return Option<String>("template", "default", flag: "t", description: "The name of the template to use for code generation (without the \"\(prefix)\" prefix nor extension).")
+  return Option<String>(
+    "template", "default", flag: "t",
+    description: "The name of the template to use for code generation " +
+      "(without the \"\(prefix)\" prefix nor extension)."
+  )
 }
 
-let templatePathOption = Option<String>("templatePath", "", flag: "p", description: "The path of the template to use for code generation. Overrides -t.")
+let templatePathOption = Option<String>(
+  "templatePath", "", flag: "p",
+  description: "The path of the template to use for code generation. Overrides -t."
+)
 
-let outputOption = Option("output", OutputDestination.Console, flag: "o", description: "The path to the file to generate (Omit to generate to stdout)")
+let outputOption = Option(
+  "output", OutputDestination.Console, flag: "o",
+  description: "The path to the file to generate (Omit to generate to stdout)"
+)
 
 // MARK: - Main
 
@@ -32,5 +42,6 @@ let main = Group {
   $0.addCommand("fonts", "generate code for your UIFonts", fontsCommand)
 }
 
-let version = NSBundle(forClass: GenumKit.GenumTemplate.self).infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
+let version = NSBundle(forClass: GenumKit.GenumTemplate.self)
+  .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
 main.run("SwiftGen v\(version)")

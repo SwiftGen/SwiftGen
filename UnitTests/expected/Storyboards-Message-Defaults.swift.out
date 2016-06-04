@@ -45,17 +45,29 @@ struct StoryboardScene {
 
     case MessagesListScene = "MessagesList"
     static func instantiateMessagesList() -> UITableViewController {
-      return StoryboardScene.Message.MessagesListScene.viewController() as! UITableViewController
+      guard let vc = StoryboardScene.Message.MessagesListScene.viewController() as? UITableViewController
+      else {
+        fatalError("ViewController 'MessagesList' is not of the expected class UITableViewController.")
+      }
+      return vc
     }
 
     case NavCtrlScene = "NavCtrl"
     static func instantiateNavCtrl() -> UINavigationController {
-      return StoryboardScene.Message.NavCtrlScene.viewController() as! UINavigationController
+      guard let vc = StoryboardScene.Message.NavCtrlScene.viewController() as? UINavigationController
+      else {
+        fatalError("ViewController 'NavCtrl' is not of the expected class UINavigationController.")
+      }
+      return vc
     }
 
     case URLChooserScene = "URLChooser"
     static func instantiateURLChooser() -> XXPickerViewController {
-      return StoryboardScene.Message.URLChooserScene.viewController() as! XXPickerViewController
+      guard let vc = StoryboardScene.Message.URLChooserScene.viewController() as? XXPickerViewController
+      else {
+        fatalError("ViewController 'URLChooser' is not of the expected class XXPickerViewController.")
+      }
+      return vc
     }
   }
 }

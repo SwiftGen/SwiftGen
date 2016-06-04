@@ -4,6 +4,11 @@
 
 ## Master
 
+* Added step to ensure all templates are [Swiftlint](https://github.com/realm/SwiftLint)'ed
+  and don't violate any code style rule.  
+  [Olivier Halligon](https://github.com/AliSoftware),
+  h/t [AJ9](https://github.com/AJ9) in [#80](https://github.com/AliSoftware/SwiftGen/pull/80)
+
 * Added support for OSX in images, fonts and color templates.  
   [Tom Baranes](https://github.com/tbaranes),
   [#125](https://github.com/AliSoftware/SwiftGen/pull/125),

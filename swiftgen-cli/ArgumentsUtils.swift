@@ -48,7 +48,7 @@ enum OutputDestination: ArgumentConvertible {
     case .File(let path): return path.description
     }
   }
-  
+
   func write(content: String, onlyIfChanged: Bool = false) {
     switch self {
     case .Console:
@@ -76,7 +76,8 @@ enum TemplateError: ErrorType, CustomStringConvertible {
   var description: String {
     switch self {
     case .NamedTemplateNotFound(let name):
-      return "Template named \(name) not found. Use `swiftgen template` to list available named templates or use --templatePath to specify a template by its full path."
+      return "Template named \(name) not found. Use `swiftgen template` to list available named templates " +
+      "or use --templatePath to specify a template by its full path."
     case .TemplatePathNotFound(let path):
       return "Template not found at path \(path.description)."
     }
@@ -84,11 +85,13 @@ enum TemplateError: ErrorType, CustomStringConvertible {
 }
 
 extension Path {
-  static let applicationSupport = Path(NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true).first!)
+  static let applicationSupport = Path(
+    NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true).first!
+  )
 }
 
 let appSupportTemplatesPath = Path.applicationSupport + "SwiftGen/templates"
-let bundledTemplatesPath = Path(NSProcessInfo.processInfo().arguments[0]).parent() + TEMPLATES_RELATIVE_PATH
+let bundledTemplatesPath = Path(NSProcessInfo.processInfo().arguments[0]).parent() + templatesRelativePath
 
 func findTemplate(prefix: String, templateShortName: String, templateFullPath: String) throws -> Path {
   guard templateFullPath.isEmpty else {

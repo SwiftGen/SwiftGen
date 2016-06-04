@@ -475,6 +475,7 @@
 				09A87B3E1BCC9B8000D9B9F5 /* Frameworks */,
 				09A87B3F1BCC9B8000D9B9F5 /* CopyFiles */,
 				EC82D06B0F4405DB4F1BCAE9 /* 📦 Copy Pods Resources */,
+				09E690541D037CB80024BE5F /* ⚠️ SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -615,6 +616,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		09E690541D037CB80024BE5F /* ⚠️ SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "⚠️ SwiftLint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Lint SwiftGen's source itself\nswiftlint lint --path ${PROJECT_DIR}/swiftgen-cli\nswiftlint lint --path ${PROJECT_DIR}/GenumKit\n\n# Lint generated code in UnitTests/expected\nfor f in \"${PROJECT_DIR}/UnitTests/expected\"/*.swift.out\ndo\n  cat $f | swiftlint lint --use-stdin | sed s:'<nopath>':\"$f\":\ndone";
+		};
 		6C7EBDA1392A1BFCC9F0A2DA /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
