@@ -29,7 +29,7 @@ extension Font {
 
 struct {{enumName}} {
   {% for family in families %}
-  enum {{family.name|swiftIdentifier|snakeToCamelCaseNoPrefix}}: String {
+  enum {{family.name|swiftIdentifier|snakeToCamelCaseNoPrefix}}: String, FontConvertible {
     {% for font in family.fonts %}
     case {{font.style|swiftIdentifier|snakeToCamelCaseNoPrefix}} = "{{font.fontName}}"
     {% endfor %}
