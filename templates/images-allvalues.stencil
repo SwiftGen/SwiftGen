@@ -2,8 +2,8 @@
 
 {% if images %}
 #if os(iOS)
-  import UIKit.Image
-  typealias Image = Image
+  import UIKit.UImage
+  typealias Image = UImage
 #elseif os(OSX)
   import AppKit.NSImage
   typealias Image = NSImage
