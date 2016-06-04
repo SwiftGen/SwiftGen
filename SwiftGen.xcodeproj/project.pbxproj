@@ -628,7 +628,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Lint SwiftGen's source itself\n#swiftlint lint --path ${PROJECT_DIR}/swiftgen-cli\n#swiftlint lint --path ${PROJECT_DIR}/GenumKit\n\n# Lint generated code in UnitTests/expected\nfor f in \"${PROJECT_DIR}/UnitTests/expected\"/*.swift.out\ndo\n  cat $f | swiftlint lint --use-stdin | sed s:'<nopath>':\"$f\":\ndone";
+			shellScript = "# Lint SwiftGen's source itself\nswiftlint lint --path ${PROJECT_DIR}/swiftgen-cli\nswiftlint lint --path ${PROJECT_DIR}/GenumKit\n\n# Lint generated code in UnitTests/expected\nfor f in \"${PROJECT_DIR}/UnitTests/expected\"/*.swift.out\ndo\n  cat $f | swiftlint lint --use-stdin | sed s:'<nopath>':\"$f\":\ndone";
 		};
 		6C7EBDA1392A1BFCC9F0A2DA /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

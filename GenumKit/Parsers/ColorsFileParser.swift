@@ -156,9 +156,8 @@ public final class ColorsXMLFileParser: ColorsFileParser {
       var currentColorValue: String? = nil
 
       @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
-        namespaceURI: String?, qualifiedName qName: String?,
-        attributes attributeDict: [String: String])
-      {
+                        namespaceURI: String?, qualifiedName qName: String?,
+                        attributes attributeDict: [String: String]) {
         guard elementName == ColorsXMLFileParser.colorTagName else { return }
         currentColorName = attributeDict[ColorsXMLFileParser.colorNameAttribute]
         currentColorValue = nil
@@ -169,10 +168,9 @@ public final class ColorsXMLFileParser: ColorsFileParser {
       }
 
       @objc func parser(parser: NSXMLParser, didEndElement elementName: String,
-        namespaceURI: String?, qualifiedName qName: String?)
-      {
+                        namespaceURI: String?, qualifiedName qName: String?) {
         guard elementName == ColorsXMLFileParser.colorTagName else { return }
-        guard let colorName = currentColorName, let colorValue = currentColorValue else { return }
+        guard let colorName = currentColorName, colorValue = currentColorValue else { return }
         parsedColors[colorName] = parseHexString(colorValue)
         currentColorName = nil
         currentColorValue = nil
@@ -199,8 +197,8 @@ public final class ColorsJSONFileParser: ColorsFileParser {
 
   public func parseFile(path: String) throws {
     if let JSONdata = NSData(contentsOfFile: path),
-      let json = try? NSJSONSerialization.JSONObjectWithData(JSONdata, options: []),
-      let dict = json as? [String: String] {
+      json = try? NSJSONSerialization.JSONObjectWithData(JSONdata, options: []),
+      dict = json as? [String: String] {
         for (key, value) in dict {
           colors[key] = parseHexString(value)
         }

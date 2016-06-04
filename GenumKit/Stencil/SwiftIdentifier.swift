@@ -68,7 +68,9 @@ func swiftIdentifier(fromString string: String, forbiddenChars exceptions: Strin
     addRange(head, 0xD0000...0xDFFFD)
     addRange(head, 0xE0000...0xEFFFD)
 
-    let tail = head.mutableCopy() as! NSMutableCharacterSet
+    guard let tail = head.mutableCopy() as? NSMutableCharacterSet else {
+      fatalError("Internal error: mutableCopy() should have returned a valid NSMutableCharacterSet")
+    }
     addChars(tail, "0123456789")
     addRange(tail, 0x0300...0x036F)
     addRange(tail, 0x1DC0...0x1DFF)

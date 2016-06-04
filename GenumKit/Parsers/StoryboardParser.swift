@@ -34,9 +34,8 @@ public final class StoryboardParser {
       var readyForConnections = false
 
       @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
-        namespaceURI: String?, qualifiedName qName: String?,
-        attributes attributeDict: [String: String])
-      {
+                        namespaceURI: String?, qualifiedName qName: String?,
+                        attributes attributeDict: [String: String]) {
 
         switch elementName {
         case "scene":
@@ -62,8 +61,7 @@ public final class StoryboardParser {
       }
 
       @objc func parser(parser: NSXMLParser, didEndElement elementName: String,
-        namespaceURI: String?, qualifiedName qName: String?)
-      {
+                        namespaceURI: String?, qualifiedName qName: String?) {
         switch elementName {
         case "scene":
           inScene = false

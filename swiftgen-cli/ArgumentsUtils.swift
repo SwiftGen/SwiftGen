@@ -48,7 +48,7 @@ enum OutputDestination: ArgumentConvertible {
     case .File(let path): return path.description
     }
   }
-  
+
   func write(content: String, onlyIfChanged: Bool = false) {
     switch self {
     case .Console:
@@ -88,7 +88,7 @@ extension Path {
 }
 
 let appSupportTemplatesPath = Path.applicationSupport + "SwiftGen/templates"
-let bundledTemplatesPath = Path(NSProcessInfo.processInfo().arguments[0]).parent() + TEMPLATES_RELATIVE_PATH
+let bundledTemplatesPath = Path(NSProcessInfo.processInfo().arguments[0]).parent() + templatesRelativePath
 
 func findTemplate(prefix: String, templateShortName: String, templateFullPath: String) throws -> Path {
   guard templateFullPath.isEmpty else {

@@ -142,10 +142,10 @@ extension StringsFileParser {
 */
 
 extension FontsFileParser {
-  public func stencilContext(enumName enumName: String = "FontFamily") -> Context{
+  public func stencilContext(enumName enumName: String = "FontFamily") -> Context {
     // turn into array of dictionaries
     let families = entries.map { (name: String, family: Set<Font>) -> [String:AnyObject] in
-      
+
       let fonts = family.map { (font: Font) -> [String: String] in
         // Font
         return [
