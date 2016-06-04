@@ -2,6 +2,11 @@
 
 ---
 
+## Next
+
+* Added support for `.xcassets` files targetting OS X.
+  [Tom Baranes](https://github.com/tbaranes), [#125](https://github.com/AliSoftware/SwiftGen/pull/125)
+
 ## 1.0.0
 
 * Restructured colors & fonts templates to workaround the same LLVM issue as #112 with nested types

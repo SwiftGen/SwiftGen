@@ -24,7 +24,7 @@ class ImagesTests: XCTestCase {
     let expected = self.fixtureString("Images-Empty.swift.out")
     XCTDiffStrings(result, expected)
   }
-
+  
   func testEntriesWithDefaults() {
     let parser = AssetsCatalogParser()
     parser.addImageName("Green-Apple")
