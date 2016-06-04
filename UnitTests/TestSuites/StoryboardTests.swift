@@ -119,6 +119,17 @@ extension StoryboardTests {
     XCTDiffStrings(result, expected)
   }
   
+  func testOSXMessageStoryboardWithDefaults() {
+    let parser = StoryboardParser()
+    parser.addStoryboardAtPath(self.fixturePath("Message-osx.storyboard"))
+    
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Storyboards-osx-Message-Defaults.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
   func testOSXAnonymousStoryboardWithDefaults() {
     let parser = StoryboardParser()
     parser.addStoryboardAtPath(self.fixturePath("Anonymous-osx.storyboard"))

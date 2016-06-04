@@ -85,6 +85,10 @@
 		E2B1F5841D0272A10000E40A /* storyboards-osx-default.stencil in Resources */ = {isa = PBXBuildFile; fileRef = E2B1F5831D0272A10000E40A /* storyboards-osx-default.stencil */; };
 		E2B1F5861D0272CF0000E40A /* Storyboards-osx-Anonymous-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = E2B1F5851D0272CF0000E40A /* Storyboards-osx-Anonymous-Defaults.swift.out */; };
 		E2B1F5881D0274B90000E40A /* Storyboards-osx-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = E2B1F5871D0274B90000E40A /* Storyboards-osx-Empty.swift.out */; };
+		E2B1F58C1D0282460000E40A /* Placeholder-osx.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B1F58B1D0282460000E40A /* Placeholder-osx.storyboard */; };
+		E2B1F58E1D02824D0000E40A /* Dependency-osx.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B1F58D1D02824D0000E40A /* Dependency-osx.storyboard */; };
+		E2B1F5901D02832F0000E40A /* Message-osx.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B1F58F1D02832F0000E40A /* Message-osx.storyboard */; };
+		E2B1F5961D0287CF0000E40A /* Storyboards-osx-Message-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = E2B1F5951D0287CF0000E40A /* Storyboards-osx-Message-Defaults.swift.out */; };
 		EFFE62F41C27073700FE9783 /* Placeholder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFFE62F31C27073700FE9783 /* Placeholder.storyboard */; };
 		EFFE62F81C27081A00FE9783 /* Dependency.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFFE62F71C27081A00FE9783 /* Dependency.storyboard */; };
 		F24DA0455755C4EC4F1DDD96 /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC28A16A3F1852C832A3B47E /* Pods_swiftgen.framework */; };
@@ -225,6 +229,10 @@
 		E2B1F5831D0272A10000E40A /* storyboards-osx-default.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "storyboards-osx-default.stencil"; sourceTree = "<group>"; };
 		E2B1F5851D0272CF0000E40A /* Storyboards-osx-Anonymous-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-osx-Anonymous-Defaults.swift.out"; sourceTree = "<group>"; };
 		E2B1F5871D0274B90000E40A /* Storyboards-osx-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-osx-Empty.swift.out"; sourceTree = "<group>"; };
+		E2B1F58B1D0282460000E40A /* Placeholder-osx.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Placeholder-osx.storyboard"; sourceTree = "<group>"; };
+		E2B1F58D1D02824D0000E40A /* Dependency-osx.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Dependency-osx.storyboard"; sourceTree = "<group>"; };
+		E2B1F58F1D02832F0000E40A /* Message-osx.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Message-osx.storyboard"; sourceTree = "<group>"; };
+		E2B1F5951D0287CF0000E40A /* Storyboards-osx-Message-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-osx-Message-Defaults.swift.out"; sourceTree = "<group>"; };
 		E5E15CBE3901E2C7C3240E93 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFFE62F31C27073700FE9783 /* Placeholder.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Placeholder.storyboard; sourceTree = "<group>"; };
 		EFFE62F71C27081A00FE9783 /* Dependency.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dependency.storyboard; sourceTree = "<group>"; };
@@ -314,11 +322,14 @@
 			children = (
 				09030C2F1B6D4F8500275BF5 /* Images.xcassets */,
 				09030C0B1B6D30E800275BF5 /* Message.storyboard */,
+				E2B1F58F1D02832F0000E40A /* Message-osx.storyboard */,
 				09030C0C1B6D30E800275BF5 /* Wizard.storyboard */,
 				470A14E81BEA6CF10052EAC8 /* Anonymous.storyboard */,
 				E2B1F5811D0272560000E40A /* Anonymous-osx.storyboard */,
 				EFFE62F31C27073700FE9783 /* Placeholder.storyboard */,
+				E2B1F58B1D0282460000E40A /* Placeholder-osx.storyboard */,
 				EFFE62F71C27081A00FE9783 /* Dependency.storyboard */,
+				E2B1F58D1D02824D0000E40A /* Dependency-osx.storyboard */,
 				09030C1D1B6D473E00275BF5 /* colors.txt */,
 				641CD33D1C3AE35A00D7FED9 /* colors.clr */,
 				097504261C78ED3400D1A01B /* colors.xml */,
@@ -405,6 +416,7 @@
 				4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */,
 				E2B1F5871D0274B90000E40A /* Storyboards-osx-Empty.swift.out */,
 				09EB0A261BDC60F000B2CF79 /* Storyboards-Message-Defaults.swift.out */,
+				E2B1F5951D0287CF0000E40A /* Storyboards-osx-Message-Defaults.swift.out */,
 				470A14E21BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out */,
 				470A14EA1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Defaults.swift.out */,
 				E2B1F5851D0272CF0000E40A /* Storyboards-osx-Anonymous-Defaults.swift.out */,
@@ -579,6 +591,7 @@
 				09EB0A1A1BDC3AC400B2CF79 /* strings-default.stencil in Resources */,
 				09EB0A291BDC60F000B2CF79 /* Colors-List-Defaults.swift.out in Resources */,
 				09A87B701BCCA5F600D9B9F5 /* Strings-Lines-Defaults.swift.out in Resources */,
+				E2B1F5961D0287CF0000E40A /* Storyboards-osx-Message-Defaults.swift.out in Resources */,
 				47CB53331CFC0B2100AA19C0 /* SFNSDisplay-Bold.otf in Resources */,
 				4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */,
 				EFFE62F81C27081A00FE9783 /* Dependency.storyboard in Resources */,
@@ -599,6 +612,7 @@
 				4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */,
 				4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */,
 				470A14E91BEA6CF10052EAC8 /* Anonymous.storyboard in Resources */,
+				E2B1F5901D02832F0000E40A /* Message-osx.storyboard in Resources */,
 				47CB53431CFC175100AA19C0 /* strings-swift3.stencil in Resources */,
 				47CB53391CFC0B2100AA19C0 /* ZapfDingbats.ttf in Resources */,
 				09A87B711BCCA5FC00D9B9F5 /* Localizable.strings in Resources */,
@@ -609,6 +623,7 @@
 				09EB0A311BDC8F4100B2CF79 /* LocUTF8.strings in Resources */,
 				E2B1F5841D0272A10000E40A /* storyboards-osx-default.stencil in Resources */,
 				47CB53381CFC0B2100AA19C0 /* SFNSText-Regular.otf in Resources */,
+				E2B1F58E1D02824D0000E40A /* Dependency-osx.storyboard in Resources */,
 				09EB0A2E1BDC60F000B2CF79 /* Storyboards-All-Defaults.swift.out in Resources */,
 				470A14E61BEA68C40052EAC8 /* Images-File-AllValues.swift.out in Resources */,
 				E2B1F5821D0272560000E40A /* Anonymous-osx.storyboard in Resources */,
@@ -618,6 +633,7 @@
 				0911503F1BD4136E00EBC803 /* storyboards-default.stencil in Resources */,
 				097504271C78ED3400D1A01B /* colors.xml in Resources */,
 				47CB53341CFC0B2100AA19C0 /* SFNSDisplay-Heavy.otf in Resources */,
+				E2B1F58C1D0282460000E40A /* Placeholder-osx.storyboard in Resources */,
 				470A14E11BEA63D30052EAC8 /* storyboards-lowercase.stencil in Resources */,
 				47CB53421CFC175100AA19C0 /* storyboards-swift3.stencil in Resources */,
 				93DA731D1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out in Resources */,
