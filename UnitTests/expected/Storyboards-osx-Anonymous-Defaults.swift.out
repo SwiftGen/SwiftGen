@@ -12,17 +12,17 @@ extension StoryboardSceneType {
     return NSStoryboard(name: self.storyboardName, bundle: nil)
   }
 
-  static func initialViewController() -> AnyObject {
+  static func initialController() -> AnyObject {
     return storyboard().instantiateInitialController()!
   }
 }
 
 extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
-  func viewController() -> AnyObject {
+  func controller() -> AnyObject {
     return Self.storyboard().instantiateControllerWithIdentifier(self.rawValue)
   }
-  static func viewController(identifier: Self) -> AnyObject {
-    return identifier.viewController()
+  static func controller(identifier: Self) -> AnyObject {
+    return identifier.controller()
   }
 }
 
