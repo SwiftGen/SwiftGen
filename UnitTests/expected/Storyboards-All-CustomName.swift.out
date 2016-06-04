@@ -58,7 +58,7 @@ struct XCTStoryboardsScene {
     static func instantiateMessagesList() -> UITableViewController {
       guard let vc = XCTStoryboardsScene.Message.MessagesListScene.viewController() as? UITableViewController
       else {
-        fatalError("ViewController 'URLChooser' is not of the expected class XXPickerViewController.")
+        fatalError("ViewController 'MessagesList' is not of the expected class UITableViewController.")
       }
       return vc
     }
@@ -67,7 +67,7 @@ struct XCTStoryboardsScene {
     static func instantiateNavCtrl() -> UINavigationController {
       guard let vc = XCTStoryboardsScene.Message.NavCtrlScene.viewController() as? UINavigationController
       else {
-        fatalError("ViewController 'URLChooser' is not of the expected class XXPickerViewController.")
+        fatalError("ViewController 'NavCtrl' is not of the expected class UINavigationController.")
       }
       return vc
     }
@@ -88,7 +88,7 @@ struct XCTStoryboardsScene {
     static func instantiateNavigation() -> UINavigationController {
       guard let vc = XCTStoryboardsScene.Placeholder.NavigationScene.viewController() as? UINavigationController
       else {
-        fatalError("ViewController 'URLChooser' is not of the expected class XXPickerViewController.")
+        fatalError("ViewController 'Navigation' is not of the expected class UINavigationController.")
       }
       return vc
     }

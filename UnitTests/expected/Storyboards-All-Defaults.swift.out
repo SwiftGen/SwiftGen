@@ -58,7 +58,7 @@ struct StoryboardScene {
     static func instantiateMessagesList() -> UITableViewController {
       guard let vc = StoryboardScene.Message.MessagesListScene.viewController() as? UITableViewController
       else {
-        fatalError("ViewController 'MssagesList' is not of the expected class UITableViewController.")
+        fatalError("ViewController 'MessagesList' is not of the expected class UITableViewController.")
       }
       return vc
     }
