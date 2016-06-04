@@ -27,18 +27,18 @@ extension Font {
 }
 
 struct FontFamily {
-  enum SFNSDisplay: String {
+  enum SFNSDisplay: String, FontConvertible {
     case Regular = ".SFNSDisplay-Regular"
     case Heavy = ".SFNSDisplay-Heavy"
     case Black = ".SFNSDisplay-Black"
     case Bold = ".SFNSDisplay-Bold"
   }
-  enum SFNSText: String {
+  enum SFNSText: String, FontConvertible {
     case Heavy = ".SFNSText-Heavy"
     case Bold = ".SFNSText-Bold"
     case Regular = ".SFNSText-Regular"
   }
-  enum ZapfDingbats: String {
+  enum ZapfDingbats: String, FontConvertible {
     case Regular = "ZapfDingbatsITC"
   }
 }
