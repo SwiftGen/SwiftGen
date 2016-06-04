@@ -149,34 +149,34 @@ public final class ColorsXMLFileParser: ColorsFileParser {
 
   public init() {}
 
-  public func parseFile(path: String) throws {
-    class ParserDelegate: NSObject, NSXMLParserDelegate {
-      var parsedColors = [String: UInt32]()
-      var currentColorName: String? = nil
-      var currentColorValue: String? = nil
+  private class ParserDelegate: NSObject, NSXMLParserDelegate {
+    var parsedColors = [String: UInt32]()
+    var currentColorName: String? = nil
+    var currentColorValue: String? = nil
 
-      @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
-                        namespaceURI: String?, qualifiedName qName: String?,
-                        attributes attributeDict: [String: String]) {
-        guard elementName == ColorsXMLFileParser.colorTagName else { return }
-        currentColorName = attributeDict[ColorsXMLFileParser.colorNameAttribute]
-        currentColorValue = nil
-      }
-
-      @objc func parser(parser: NSXMLParser, foundCharacters string: String) {
-        currentColorValue = (currentColorValue ?? "") + string
-      }
-
-      @objc func parser(parser: NSXMLParser, didEndElement elementName: String,
-                        namespaceURI: String?, qualifiedName qName: String?) {
-        guard elementName == ColorsXMLFileParser.colorTagName else { return }
-        guard let colorName = currentColorName, colorValue = currentColorValue else { return }
-        parsedColors[colorName] = parseHexString(colorValue)
-        currentColorName = nil
-        currentColorValue = nil
-      }
+    @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
+                      namespaceURI: String?, qualifiedName qName: String?,
+                      attributes attributeDict: [String: String]) {
+      guard elementName == ColorsXMLFileParser.colorTagName else { return }
+      currentColorName = attributeDict[ColorsXMLFileParser.colorNameAttribute]
+      currentColorValue = nil
     }
 
+    @objc func parser(parser: NSXMLParser, foundCharacters string: String) {
+      currentColorValue = (currentColorValue ?? "") + string
+    }
+
+    @objc func parser(parser: NSXMLParser, didEndElement elementName: String,
+                      namespaceURI: String?, qualifiedName qName: String?) {
+      guard elementName == ColorsXMLFileParser.colorTagName else { return }
+      guard let colorName = currentColorName, colorValue = currentColorValue else { return }
+      parsedColors[colorName] = parseHexString(colorValue)
+      currentColorName = nil
+      currentColorValue = nil
+    }
+  }
+
+  public func parseFile(path: String) throws {
     guard let parser = NSXMLParser(contentsOfURL: NSURL.fileURLWithPath(path)) else {
       throw NSError(domain: NSXMLParserErrorDomain, code: NSXMLParserError.InternalError.rawValue, userInfo: nil)
     }
