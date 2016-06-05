@@ -27,10 +27,18 @@ extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == Str
 }
 
 protocol StoryboardSegueType: RawRepresentable { }
+protocol StoryboardCellType: RawRepresentable { }
 
 extension UIViewController {
   func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
+extension UICollectionView {
+  func dequeueReusableCellWithReuseIdentifier<C : StoryboardCell where C.RawValue == String>(identifier: C,
+      forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    return dequeueReusableCellWithReuseIdentifier(identifier.rawValue, forIndexPath: indexPath)
   }
 }
 
@@ -78,5 +86,12 @@ struct StoryboardSegue {
     case Embed = "Embed"
     case NonCustom = "NonCustom"
     case Show_NavCtrl = "Show-NavCtrl"
+  }
+}
+
+struct Cell {
+  enum Message: String, StoryboardCell {
+    case CustomCollectionCell = "CustomCollectionCell"
+    case CustomMessageCell = "CustomMessageCell"
   }
 }

@@ -18,16 +18,24 @@ public final class StoryboardParser {
     let customClass: String?
   }
 
+  struct Cell {
+    let reuseID: String
+    let customClass: String?
+  }
+
   var storyboardsScenes = [String: Set<Scene>]()
   var storyboardsSegues = [String: Set<Segue>]()
+  var storyboardsCells = [String: Set<Cell>]()
 
   public init() {}
 
   private class ParserDelegate: NSObject, NSXMLParserDelegate {
     var scenes = Set<Scene>()
     var segues = Set<Segue>()
+    var cells = Set<Cell>()
     var inScene = false
     var readyForFirstObject = false
+    var readyForPrototypes = false
     var readyForConnections = false
 
     @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
@@ -45,12 +53,24 @@ public final class StoryboardParser {
           scenes.insert(Scene(storyboardID: storyboardID, tag: tag, customClass: customClass))
         }
         readyForFirstObject = false
+      case "prototypes":
+        readyForPrototypes = true
+      case "tableViewCell" where readyForPrototypes:
+        if let reuseID = attributeDict["reuseIdentifier"] {
+          let customClass = attributeDict["customClass"]
+          cells.insert(Cell(reuseID: reuseID, customClass: customClass))
+        }
       case "connections":
         readyForConnections = true
       case "segue" where readyForConnections:
         if let segueID = attributeDict["identifier"] {
           let customClass = attributeDict["customClass"]
           segues.insert(Segue(segueID: segueID, customClass: customClass))
+        }
+      case "collectionViewCell":
+        if let reuseID = attributeDict["reuseIdentifier"] {
+          let customClass = attributeDict["reuseIdentifier"]
+          cells.insert(Cell(reuseID: reuseID, customClass: customClass))
         }
       default:
         break
@@ -64,6 +84,8 @@ public final class StoryboardParser {
         inScene = false
       case "objects" where inScene:
         readyForFirstObject = false
+      case "prototypes":
+        readyForPrototypes = false
       case "connections":
         readyForConnections = false
       default:
@@ -82,6 +104,7 @@ public final class StoryboardParser {
     let storyboardName = ((path as NSString).lastPathComponent as NSString).stringByDeletingPathExtension
     storyboardsScenes[storyboardName] = delegate.scenes
     storyboardsSegues[storyboardName] = delegate.segues
+    storyboardsCells[storyboardName] = delegate.cells
   }
 
   public func parseDirectory(path: String) {
@@ -114,5 +137,16 @@ func == (lhs: StoryboardParser.Segue, rhs: StoryboardParser.Segue) -> Bool {
 extension StoryboardParser.Segue: Hashable {
   var hashValue: Int {
     return "\(segueID);\(customClass)".hashValue
+  }
+}
+
+extension StoryboardParser.Cell: Equatable { }
+func == (lhs: StoryboardParser.Cell, rhs: StoryboardParser.Cell) -> Bool {
+  return lhs.reuseID == rhs.reuseID && lhs.customClass == rhs.customClass
+}
+
+extension StoryboardParser.Cell: Hashable {
+  var hashValue: Int {
+    return "\(reuseID);\(customClass)".hashValue
   }
 }
