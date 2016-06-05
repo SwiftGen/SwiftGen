@@ -472,7 +472,6 @@
 			buildPhases = (
 				BEC9F3A158B764C68AF03EF9 /* 📦 Check Pods Manifest.lock */,
 				09E690541D037CB80024BE5F /* ⚠️ SwiftLint */,
-				09E690551D03A5990024BE5F /* ⛏ Compile-Check Templates */,
 				09A87B3D1BCC9B8000D9B9F5 /* Sources */,
 				09A87B3E1BCC9B8000D9B9F5 /* Frameworks */,
 				09A87B3F1BCC9B8000D9B9F5 /* CopyFiles */,
@@ -492,6 +491,8 @@
 			buildConfigurationList = 09A87B551BCCA2C600D9B9F5 /* Build configuration list for PBXNativeTarget "UnitTests" */;
 			buildPhases = (
 				CA6AE90B7FCE320CDD488241 /* 📦 Check Pods Manifest.lock */,
+				0960B14D1D03D11100CF53E4 /* ⚠️ SwiftLint */,
+				0960B14C1D03D0EC00CF53E4 /* ⛏ Compile-Check Templates */,
 				09A87B4C1BCCA2C600D9B9F5 /* Sources */,
 				09A87B4D1BCCA2C600D9B9F5 /* Frameworks */,
 				09A87B4E1BCCA2C600D9B9F5 /* Resources */,
@@ -617,6 +618,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0960B14C1D03D0EC00CF53E4 /* ⛏ Compile-Check Templates */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "⛏ Compile-Check Templates";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}\"/scripts/check_templates.sh";
+			showEnvVarsInLog = 0;
+		};
+		0960B14D1D03D11100CF53E4 /* ⚠️ SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "⚠️ SwiftLint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}\"/scripts/swiftlint-templates.sh";
+			showEnvVarsInLog = 0;
+		};
 		09E690541D037CB80024BE5F /* ⚠️ SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -629,22 +660,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Lint SwiftGen's source itself\nswiftlint lint --path ${PROJECT_DIR}/swiftgen-cli\nswiftlint lint --path ${PROJECT_DIR}/GenumKit\n\n# Lint generated code in UnitTests/expected\nfor f in \"${PROJECT_DIR}/UnitTests/expected\"/*.swift.out\ndo\n  cat $f | swiftlint lint --use-stdin | sed s:'<nopath>':\"$f\":\ndone";
-			showEnvVarsInLog = 0;
-		};
-		09E690551D03A5990024BE5F /* ⛏ Compile-Check Templates */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "⛏ Compile-Check Templates";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# For now this script doesn't work completely, because:\n# - Some of the templates are aimed for Swift 3, so compiling them with Swift 2.2 will fail\n# - Some templates require some context, specially for the Storyboards we need to declare\n#   XXPickerViewController and CreateAccViewController dummy VC subclasses to be able to compile.\n#\n# Once we find a clean way to resolve those limitation, we could reactivate the script.\n# You could also temporarly activate th script and ignore the errors listed above to check if those\n#   are the only errors or if we introduced unrelated errors that needs to be fixed\nexit 0\n\n\nSGTMPDIR=`mktemp -d -t SwiftGen-Templates` || exit 1\nfor f in \"${PROJECT_DIR}/UnitTests/expected\"/*.swift.out\ndo\n  TMPFILE=\"$SGTMPDIR\"/`basename $f .out`\n  cat $f >\"$TMPFILE\"\n  echo \"Checking $TMPFILE template-generated fixture for build errors…\"\n  xcrun -sdk iphoneos swiftc -parse -target armv7-apple-ios8.0 \"$TMPFILE\"\ndone\nrm \"$SGTMPDIR\"";
+			shellScript = "\"${PROJECT_DIR}\"/scripts/swiftlint-code.sh";
 			showEnvVarsInLog = 0;
 		};
 		6C7EBDA1392A1BFCC9F0A2DA /* 📦 Copy Pods Resources */ = {
