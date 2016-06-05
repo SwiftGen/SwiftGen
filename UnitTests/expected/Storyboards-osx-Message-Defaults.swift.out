@@ -1,0 +1,88 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+import Cocoa
+
+protocol StoryboardSceneType {
+  static var storyboardName: String { get }
+}
+
+extension StoryboardSceneType {
+  static func storyboard() -> NSStoryboard {
+    return NSStoryboard(name: self.storyboardName, bundle: nil)
+  }
+
+  static func initialController() -> AnyObject {
+    return storyboard().instantiateInitialController()!
+  }
+}
+
+extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
+  func controller() -> AnyObject {
+    return Self.storyboard().instantiateControllerWithIdentifier(self.rawValue)
+  }
+  static func controller(identifier: Self) -> AnyObject {
+    return identifier.controller()
+  }
+}
+
+protocol StoryboardSegueType: RawRepresentable { }
+
+extension NSWindowController {
+  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
+extension NSViewController {
+  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
+struct StoryboardScene {
+  enum Message_Osx: String, StoryboardSceneType {
+    static let storyboardName = "Message-osx"
+
+    case MessageDetailsScene = "MessageDetails"
+    static func instantiateMessageDetails() -> NSViewController {
+      return StoryboardScene.Message_Osx.MessageDetailsScene.controller()
+    }
+
+    case MessageListScene = "MessageList"
+    static func instantiateMessageList() -> NSViewController {
+      return StoryboardScene.Message_Osx.MessageListScene.controller()
+    }
+
+    case MessageListFooterScene = "MessageListFooter"
+    static func instantiateMessageListFooter() -> NSViewController {
+      return StoryboardScene.Message_Osx.MessageListFooterScene.controller()
+    }
+
+    case MessagesTabScene = "MessagesTab"
+    static func instantiateMessagesTab() -> NSTabViewController {
+      return StoryboardScene.Message_Osx.MessagesTabScene.controller() as! NSTabViewController
+    }
+
+    case SplitMessagesScene = "SplitMessages"
+    static func instantiateSplitMessages() -> NSSplitViewController {
+      return StoryboardScene.Message_Osx.SplitMessagesScene.controller() as! NSSplitViewController
+    }
+
+    case WindowCtrlScene = "WindowCtrl"
+    static func instantiateWindowCtrl() -> NSWindowController {
+      return StoryboardScene.Message_Osx.WindowCtrlScene.controller() as! NSWindowController
+    }
+  }
+}
+
+struct StoryboardSegue {
+  enum Message_Osx: String, StoryboardSegueType {
+    case Custom = "Custom"
+    case Embed = "Embed"
+    case Modal = "Modal"
+    case Popover = "Popover"
+    case Sheet = "Sheet"
+    case Show = "Show"
+  }
+}
