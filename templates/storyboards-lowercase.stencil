@@ -50,7 +50,7 @@ struct {{sceneEnumName}} {
     {% set sceneID %}{{scene.identifier|swiftIdentifier|lowerFirstWord}}{% endset %}
 
     case {{sceneID}} = "{{scene.identifier}}"
-    {% if scene.class %}
+    {% ifnot scene.isBaseViewController %}
     {% if scene.vcType %}
     static func {{sceneID}}ViewController() -> {{scene.class}} {
       guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as? {{scene.class}}

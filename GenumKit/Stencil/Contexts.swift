@@ -82,11 +82,12 @@ extension StoryboardParser {
           .sort({$0.storyboardID < $1.storyboardID})
           .map { (scene: Scene) -> [String:String] in
             // Handle special scene.tag cases like navigationController, splitViewController, etc…
-            let customClass = scene.customClass ??
-              (scene.tag != "viewController" ? uppercaseFirst(scene.tag) : nil)
-            if let customClass = customClass where scene.customClass == nil {
-              return ["identifier": scene.storyboardID, "class": customClass]
-            } else if let customClass = customClass {
+            let customClass = scene.customClass ?? uppercaseFirst(scene.tag)
+            if scene.customClass == nil && scene.tag == "viewController" {
+              return ["identifier": scene.storyboardID, "class": customClass, "isBaseViewController": ""]
+            } else if scene.customClass == nil {
+                return ["identifier": scene.storyboardID, "class": customClass]
+            } else if let customClass = scene.customClass {
               return ["identifier": scene.storyboardID, "class": customClass, "vcType": customClass]
             } else {
               return ["identifier": scene.storyboardID]

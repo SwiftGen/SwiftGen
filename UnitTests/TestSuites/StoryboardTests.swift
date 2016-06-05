@@ -141,18 +141,18 @@ extension StoryboardTests {
     XCTDiffStrings(result, expected)
   }
  
-//  func testOSXAllStoryboardsWithDefaults() {
-//    let parser = StoryboardParser()
-//    parser.parseDirectory(self.fixturesDir, osx: true)
-//    
-//    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
-//    let ctx = parser.stencilContext()
-//    let result = try! template.render(ctx)
-//    
-//    let expected = self.fixtureString("Storyboards-osx-All-Defaults.swift.out")
-//    XCTDiffStrings(result, expected)
-//  }
-//  
+  func testOSXAllStoryboardsWithDefaults() {
+    let parser = StoryboardParser()
+    parser.parseDirectory(self.fixturesDir, osx: true)
+    
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
+    let ctx = parser.stencilContext()
+    let result = try! template.render(ctx)
+    
+    let expected = self.fixtureString("Storyboards-osx-All-Defaults.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+
 //  func testOSXAllStoryboardsWithCustomName() {
 //    let parser = StoryboardParser()
 //    parser.parseDirectory(self.fixturesDir, osx: true)

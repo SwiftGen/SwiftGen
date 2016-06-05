@@ -46,22 +46,22 @@ struct StoryboardScene {
 
     case MessageDetailsScene = "MessageDetails"
     static func instantiateMessageDetails() -> NSViewController {
-      return StoryboardScene.Message_Osx.MessageDetailsScene.controller()
+      return StoryboardScene.Message_Osx.MessageDetailsScene.controller() as! NSViewController
     }
 
     case MessageListScene = "MessageList"
     static func instantiateMessageList() -> NSViewController {
-      return StoryboardScene.Message_Osx.MessageListScene.controller()
+      return StoryboardScene.Message_Osx.MessageListScene.controller() as! NSViewController
     }
 
     case MessageListFooterScene = "MessageListFooter"
     static func instantiateMessageListFooter() -> NSViewController {
-      return StoryboardScene.Message_Osx.MessageListFooterScene.controller()
+      return StoryboardScene.Message_Osx.MessageListFooterScene.controller() as! NSViewController
     }
 
     case MessagesTabScene = "MessagesTab"
-    static func instantiateMessagesTab() -> NSTabViewController {
-      return StoryboardScene.Message_Osx.MessagesTabScene.controller() as! NSTabViewController
+    static func instantiateMessagesTab() -> CustomTabViewController {
+      return StoryboardScene.Message_Osx.MessagesTabScene.controller() as! CustomTabViewController
     }
 
     case SplitMessagesScene = "SplitMessages"
