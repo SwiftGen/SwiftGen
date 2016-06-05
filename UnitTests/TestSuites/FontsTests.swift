@@ -15,7 +15,7 @@ class FontsTests: XCTestCase {
     let parser = FontsFileParser()
     let template = GenumTemplate(templateString: fixtureString("fonts-default.stencil"))
     let result = try! template.render(parser.stencilContext())
-    let expected = fixtureString("Fonts-File-Empty.swift.out")
+    let expected = fixtureString("Fonts-Dir-Empty.swift.out")
     XCTDiffStrings(result, expected)
   }
 
@@ -25,7 +25,7 @@ class FontsTests: XCTestCase {
 
     let template = GenumTemplate(templateString: fixtureString("fonts-default.stencil"))
     let result = try! template.render(parser.stencilContext())
-    let expected = fixtureString("Fonts-File-Default.swift.out")
+    let expected = fixtureString("Fonts-Dir-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
@@ -35,7 +35,7 @@ class FontsTests: XCTestCase {
 
     let template = GenumTemplate(templateString: fixtureString("fonts-default.stencil"))
     let result = try! template.render(parser.stencilContext(enumName: "CustomFamily"))
-    let expected = fixtureString("Fonts-File-CustomName.swift.out")
+    let expected = fixtureString("Fonts-Dir-CustomName.swift.out")
     XCTDiffStrings(result, expected)
   }
 }
