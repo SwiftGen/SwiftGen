@@ -12,7 +12,8 @@ install:
  - scripts/install_swiftlint.sh
 
 script:
-# - scripts/swiftlint.sh
+# - scripts/swiftlint-code.sh
+# - scripts/swiftlint-templates.sh
 # - scripts/check_templates.sh
  - set -o pipefail && rake tests | xcpretty -c
  - pod lib lint --quick GenumKit/GenumKit.podspec
