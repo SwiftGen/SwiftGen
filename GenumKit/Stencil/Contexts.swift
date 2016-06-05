@@ -62,6 +62,7 @@ extension AssetsCatalogParser {
 
  - `sceneEnumName`: `String`
  - `segueEnumName`: `String`
+ - `cellEnumName`: `String`
  - `storyboards`: `Array` of:
     - `name`: `String`
     - `scenes`: `Array` (absent if empty)
@@ -74,7 +75,7 @@ extension AssetsCatalogParser {
 extension StoryboardParser {
   public func stencilContext(sceneEnumName sceneEnumName: String = "StoryboardScene",
                                            segueEnumName: String = "StoryboardSegue",
-                                           cellEnumName: String = "Cell") -> Context {
+                                           cellEnumName: String = "StoryboardCell") -> Context {
     let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sort(<)
     let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:AnyObject] in
       var sbMap: [String:AnyObject] = ["name": storyboardName]

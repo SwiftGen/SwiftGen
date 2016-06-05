@@ -36,7 +36,7 @@ extension UIViewController {
 }
 
 extension UICollectionView {
-  func dequeueReusableCellWithReuseIdentifier<C : StoryboardCell where C.RawValue == String>(identifier: C,
+  func dequeueReusableCellWithReuseIdentifier<C: StoryboardCellType where C.RawValue == String>(identifier: C,
       forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     return dequeueReusableCellWithReuseIdentifier(identifier.rawValue, forIndexPath: indexPath)
   }
@@ -89,8 +89,8 @@ struct StoryboardSegue {
   }
 }
 
-struct Cell {
-  enum Message: String, StoryboardCell {
+struct StoryboardCell {
+  enum Message: String, StoryboardCellType {
     case CustomCollectionCell = "CustomCollectionCell"
     case CustomMessageCell = "CustomMessageCell"
   }

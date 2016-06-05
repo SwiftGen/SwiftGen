@@ -37,7 +37,7 @@ extension UIViewController {
 }
 
 extension UICollectionView {
-  func dequeueReusableCellWithReuseIdentifier<C : StoryboardCell where C.RawValue == String>(identifier: C,
+  func dequeueReusableCellWithReuseIdentifier<C: StoryboardCellType where C.RawValue == String>(identifier: C,
       forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     return dequeueReusableCellWithReuseIdentifier(identifier.rawValue, forIndexPath: indexPath)
   }
@@ -90,7 +90,7 @@ struct {{segueEnumName}} {
 
 struct {{cellEnumName}} {
   {% for storyboard in storyboards %}{% if storyboard.cells %}
-  enum {{storyboard.name|swiftIdentifier}}: String, StoryboardCell {
+  enum {{storyboard.name|swiftIdentifier}}: String, StoryboardCellType {
     {% for cell in storyboard.cells %}
     case {{cell.identifier|swiftIdentifier}} = "{{cell.identifier}}"
     {% endfor %}
