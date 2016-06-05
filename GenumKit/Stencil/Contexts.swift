@@ -97,8 +97,7 @@ extension StoryboardParser {
         sbMap["segues"] = segues
           .sort({$0.segueID < $1.segueID})
           .map { (segue: Segue) -> [String:String] in
-            // TODO: Fix this to extract the 'UI' prefix and be able to implement OSX support in #128
-            ["identifier": segue.segueID, "class": segue.customClass ?? "UIStoryboardSegue"]
+            ["identifier": segue.segueID, "class": segue.customClass ?? ""]
         }
       }
       return sbMap
