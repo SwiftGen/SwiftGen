@@ -25,6 +25,22 @@
          assignedFileDataType = "net.daringfireball.markdown">
       </FileRef>
    </Group>
+   <Group
+      location = "group:scripts"
+      name = "scripts">
+      <FileRef
+         location = "group:check_templates.sh">
+      </FileRef>
+      <FileRef
+         location = "group:install_swiftlint.sh">
+      </FileRef>
+      <FileRef
+         location = "group:swiftlint-code.sh">
+      </FileRef>
+      <FileRef
+         location = "group:swiftlint-templates.sh">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:SwiftGen.xcodeproj">
    </FileRef>

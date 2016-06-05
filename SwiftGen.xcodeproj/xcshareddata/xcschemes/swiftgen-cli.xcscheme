@@ -79,7 +79,7 @@
          <EnvironmentVariable
             key = "XcodeColors"
             value = "YES"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
