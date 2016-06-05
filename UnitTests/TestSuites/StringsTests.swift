@@ -33,7 +33,7 @@ class StringsTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Strings-Entries-Defaults.swift.out")
+    let expected = self.fixtureString("Strings-Entries-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
@@ -49,7 +49,7 @@ class StringsTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Strings-Lines-Defaults.swift.out")
+    let expected = self.fixtureString("Strings-Lines-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
@@ -60,7 +60,7 @@ class StringsTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Strings-File-Defaults.swift.out")
+    let expected = self.fixtureString("Strings-File-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
@@ -71,7 +71,7 @@ class StringsTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Strings-File-UTF8-Defaults.swift.out")
+    let expected = self.fixtureString("Strings-File-UTF8-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 

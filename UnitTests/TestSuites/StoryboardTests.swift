@@ -32,7 +32,7 @@ class StoryboardTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Storyboards-Message-Defaults.swift.out")
+    let expected = self.fixtureString("Storyboards-Message-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
@@ -54,7 +54,7 @@ class StoryboardTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Storyboards-Anonymous-Defaults.swift.out")
+    let expected = self.fixtureString("Storyboards-Anonymous-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
@@ -66,7 +66,7 @@ class StoryboardTests: XCTestCase {
     let ctx = parser.stencilContext()
     let result = try! template.render(ctx)
 
-    let expected = self.fixtureString("Storyboards-All-Defaults.swift.out")
+    let expected = self.fixtureString("Storyboards-All-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
