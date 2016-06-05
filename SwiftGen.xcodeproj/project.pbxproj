@@ -629,7 +629,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Lint SwiftGen's source itself\nswiftlint lint --path ${PROJECT_DIR}/swiftgen-cli\nswiftlint lint --path ${PROJECT_DIR}/GenumKit\n\n# Lint generated code in UnitTests/expected\nfor f in \"${PROJECT_DIR}/UnitTests/expected\"/*.swift.out\ndo\n  cat $f | swiftlint lint --use-stdin | sed s:'<nopath>':\"$f\":\ndone";
+			shellScript = "\"${PROJECT_DIR}\"/scripts/swiftlint.sh";
 			showEnvVarsInLog = 0;
 		};
 		09E690551D03A5990024BE5F /* ⛏ Compile-Check Templates */ = {
@@ -644,7 +644,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# For now this script doesn't work completely, because:\n# - Some of the templates are aimed for Swift 3, so compiling them with Swift 2.2 will fail\n# - Some templates require some context, specially for the Storyboards we need to declare\n#   XXPickerViewController and CreateAccViewController dummy VC subclasses to be able to compile.\n#\n# Once we find a clean way to resolve those limitation, we could reactivate the script.\n# You could also temporarly activate th script and ignore the errors listed above to check if those\n#   are the only errors or if we introduced unrelated errors that needs to be fixed\nexit 0\n\n\nSGTMPDIR=`mktemp -d -t SwiftGen-Templates` || exit 1\nfor f in \"${PROJECT_DIR}/UnitTests/expected\"/*.swift.out\ndo\n  TMPFILE=\"$SGTMPDIR\"/`basename $f .out`\n  cat $f >\"$TMPFILE\"\n  echo \"Checking $TMPFILE template-generated fixture for build errors…\"\n  xcrun -sdk iphoneos swiftc -parse -target armv7-apple-ios8.0 \"$TMPFILE\"\ndone\nrm \"$SGTMPDIR\"";
+			shellScript = "\"${PROJECT_DIR}\"/scripts/check_templates.sh";
 			showEnvVarsInLog = 0;
 		};
 		6C7EBDA1392A1BFCC9F0A2DA /* 📦 Copy Pods Resources */ = {
