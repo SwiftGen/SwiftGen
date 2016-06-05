@@ -7,11 +7,17 @@
 import Foundation
 import XCTest
 
-func diff(lhs: String, _ rhs: String) -> String {
+private let colorCode: String -> String = NSProcessInfo().environment["XcodeColors"] == "YES" ?  { "\u{001b}[\($0);" } : { _ in "" }
+private let (msgColor, reset) = (colorCode("fg250,0,0"), colorCode(""))
+private let okCode = (num: colorCode("fg127,127,127"), code: colorCode(""))
+private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"), code: colorCode("bg127,0,0"))
+
+func diff(result: String, _ expected: String) -> String? {
+  guard result != expected else { return nil }
   var firstDiff: Int? = nil
   let nl = NSCharacterSet.newlineCharacterSet()
-  let lhsLines = lhs.componentsSeparatedByCharactersInSet(nl)
-  let rhsLines = rhs.componentsSeparatedByCharactersInSet(nl)
+  let lhsLines = result.componentsSeparatedByCharactersInSet(nl)
+  let rhsLines = expected.componentsSeparatedByCharactersInSet(nl)
 
   for (idx, pair) in zip(lhsLines, rhsLines).enumerate() {
     if pair.0 != pair.1 {
@@ -19,17 +25,22 @@ func diff(lhs: String, _ rhs: String) -> String {
       break
     }
   }
-  if let idx = firstDiff {
-    let numLines = { (num: Int, line: String) -> String in "\(num)".stringByPaddingToLength(3, withString: " ", startingAtIndex: 0) + "|" + line }
+  if let badLineIdx = firstDiff {
+    let numLines = { (num: Int, line: String) -> String in
+      let lineNum = "\(num)".stringByPaddingToLength(3, withString: " ", startingAtIndex: 0) + "|"
+      let clr = num == badLineIdx ? koCode : okCode
+      return "\(clr.num)\(lineNum)\(reset)\(clr.code)\(line)\(reset)"
+    }
     let lhsNum = lhsLines.enumerate().map(numLines).joinWithSeparator("\n")
     let rhsNum = rhsLines.enumerate().map(numLines).joinWithSeparator("\n")
-    return "Mismatch at line \(idx)>\n>>>>>> lhs\n\(lhsNum)\n======\n\(rhsNum)\n<<<<<< rhs"
+    return "\(msgColor)Mismatch at line \(badLineIdx)\(reset)\n>>>>>> result\n\(lhsNum)\n======\n\(rhsNum)\n<<<<<< expected"
   }
-  return ""
+  return nil
 }
 
-func XCTDiffStrings(lhs: String, _ rhs: String) {
-  XCTAssertEqual(lhs, rhs, diff(lhs, rhs))
+func XCTDiffStrings(result: String, _ expected: String, file: StaticString = #file, line: UInt = #line) {
+  guard let error = diff(result, expected) else { return }
+  XCTFail(error, file: file, line: line)
 }
 
 extension XCTestCase {
