@@ -86,6 +86,8 @@
 		F24DA0455755C4EC4F1DDD96 /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC28A16A3F1852C832A3B47E /* Pods_swiftgen.framework */; };
 		F4705617D891407B43B021A3 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5E15CBE3901E2C7C3240E93 /* Pods_UnitTests.framework */; };
 		F87FF1AB1D0460D60001ACED /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1AA1D0460D60001ACED /* TableViewCell.xib */; };
+		F87FF1AF1D047D0D0001ACED /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1AE1D047D0D0001ACED /* CollectionViewCell.xib */; };
+		F87FF1B11D047D550001ACED /* CollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1B01D047D550001ACED /* CollectionReusableView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -232,6 +234,8 @@
 		EFFE62F31C27073700FE9783 /* Placeholder.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Placeholder.storyboard; sourceTree = "<group>"; };
 		EFFE62F71C27081A00FE9783 /* Dependency.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dependency.storyboard; sourceTree = "<group>"; };
 		F87FF1AA1D0460D60001ACED /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		F87FF1AE1D047D0D0001ACED /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
+		F87FF1B01D047D550001ACED /* CollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionReusableView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +333,8 @@
 				09030C241B6D48FC00275BF5 /* Localizable.strings */,
 				09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */,
 				47CB53291CFC0B2100AA19C0 /* Fonts */,
+				F87FF1B01D047D550001ACED /* CollectionReusableView.xib */,
+				F87FF1AE1D047D0D0001ACED /* CollectionViewCell.xib */,
 				F87FF1AA1D0460D60001ACED /* TableViewCell.xib */,
 			);
 			path = fixtures;
@@ -589,6 +595,8 @@
 				47CB53331CFC0B2100AA19C0 /* SFNSDisplay-Bold.otf in Resources */,
 				4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */,
 				EFFE62F81C27081A00FE9783 /* Dependency.storyboard in Resources */,
+				F87FF1B11D047D550001ACED /* CollectionReusableView.xib in Resources */,
+				F87FF1AF1D047D0D0001ACED /* CollectionViewCell.xib in Resources */,
 				09A87B5E1BCCA4D100D9B9F5 /* Message.storyboard in Resources */,
 				09A87B641BCCA4DC00D9B9F5 /* Images.xcassets in Resources */,
 				C24AFD041C92370D005FE3EF /* fonts-default.stencil in Resources */,
