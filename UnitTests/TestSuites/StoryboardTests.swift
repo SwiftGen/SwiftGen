@@ -103,4 +103,16 @@ class StoryboardTests: XCTestCase {
     let expected = self.fixtureString("Storyboards-Anonymous-Swift3.swift.out")
     XCTDiffStrings(result, expected)
   }
+
+  func testXibsWithDefaults() {
+    let parser = StoryboardParser()
+    parser.addStoryboardAtPath(self.fixturePath("TableViewCell.xib"))
+
+    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
+    let ctx = parser.stencilContext()
+    let result = try! template.render(ctx)
+
+    let expected = self.fixtureString("Storyboards-Xibs-Defaults.swift.out")
+    XCTDiffStrings(result, expected)
+  }
 }

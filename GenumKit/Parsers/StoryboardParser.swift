@@ -35,7 +35,7 @@ public final class StoryboardParser {
     var cells = Set<Cell>()
     var inScene = false
     var readyForFirstObject = false
-    var readyForPrototypes = false
+//    var readyForPrototypes = false
     var readyForConnections = false
 
     @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
@@ -53,9 +53,9 @@ public final class StoryboardParser {
           scenes.insert(Scene(storyboardID: storyboardID, tag: tag, customClass: customClass))
         }
         readyForFirstObject = false
-      case "prototypes":
-        readyForPrototypes = true
-      case "tableViewCell" where readyForPrototypes:
+//      case "prototypes":
+//        readyForPrototypes = true
+      case "tableViewCell": // where readyForPrototypes:
         if let reuseID = attributeDict["reuseIdentifier"] {
           let customClass = attributeDict["customClass"]
           cells.insert(Cell(reuseID: reuseID, customClass: customClass))
@@ -84,8 +84,8 @@ public final class StoryboardParser {
         inScene = false
       case "objects" where inScene:
         readyForFirstObject = false
-      case "prototypes":
-        readyForPrototypes = false
+//      case "prototypes":
+//        readyForPrototypes = false
       case "connections":
         readyForConnections = false
       default:
