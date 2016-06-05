@@ -3,7 +3,7 @@
 {% if images %}
 #if os(iOS)
   import UIKit.UIImage
-  typealias Image = UImage
+  typealias Image = UIImage
 #elseif os(OSX)
   import AppKit.NSImage
   typealias Image = NSImage
