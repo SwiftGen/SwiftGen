@@ -84,10 +84,11 @@ public final class StoryboardParser {
     storyboardsSegues[storyboardName] = delegate.segues
   }
 
-  public func parseDirectory(path: String) {
+  @available(OSX 10.10, *)
+  public func parseDirectory(path: String, osx: Bool = false) {
     if let dirEnum = NSFileManager.defaultManager().enumeratorAtPath(path) {
       while let subPath = dirEnum.nextObject() as? NSString {
-        if subPath.pathExtension == "storyboard" {
+        if subPath.pathExtension == "storyboard" && subPath.containsString("osx") == osx {
           self.addStoryboardAtPath((path as NSString).stringByAppendingPathComponent(subPath as String))
         }
       }

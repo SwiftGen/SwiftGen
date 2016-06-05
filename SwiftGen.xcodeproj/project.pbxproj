@@ -85,6 +85,8 @@
 		C25A54321CEE7C2200401BE5 /* Colors-Txt-File-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = C25A54311CEE7C2200401BE5 /* Colors-Txt-File-Default.swift.out */; };
 		C25A54341CEE7CEB00401BE5 /* Colors-Txt-File-CustomName.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = C25A54331CEE7CEB00401BE5 /* Colors-Txt-File-CustomName.swift.out */; };
 		C2DBEADE1C8F87AD00E62C9E /* FontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DBEADD1C8F87AD00E62C9E /* FontsTests.swift */; };
+		E2679A491D044D3F00D3F55B /* Storyboards-osx-All-CustomName.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = E2679A481D044D3F00D3F55B /* Storyboards-osx-All-CustomName.swift.out */; };
+		E2679A4B1D044D4600D3F55B /* Storyboards-osx-All-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = E2679A4A1D044D4600D3F55B /* Storyboards-osx-All-Defaults.swift.out */; };
 		E2F749741D03CAE800EA0BC8 /* Storyboards-osx-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = E2F749711D03CAE800EA0BC8 /* Storyboards-osx-Empty.swift.out */; };
 		E2F749751D03CAE800EA0BC8 /* Storyboards-osx-Message-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = E2F749721D03CAE800EA0BC8 /* Storyboards-osx-Message-Defaults.swift.out */; };
 		E2F749761D03CAE800EA0BC8 /* Storyboards-osx-Anonymous-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = E2F749731D03CAE800EA0BC8 /* Storyboards-osx-Anonymous-Defaults.swift.out */; };
@@ -233,6 +235,8 @@
 		C25A54331CEE7CEB00401BE5 /* Colors-Txt-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-Txt-File-CustomName.swift.out"; sourceTree = "<group>"; };
 		C2DBEADD1C8F87AD00E62C9E /* FontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsTests.swift; sourceTree = "<group>"; };
 		E0542E32A906407325456A56 /* Pods-swiftgen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.release.xcconfig"; sourceTree = "<group>"; };
+		E2679A481D044D3F00D3F55B /* Storyboards-osx-All-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-osx-All-CustomName.swift.out"; sourceTree = "<group>"; };
+		E2679A4A1D044D4600D3F55B /* Storyboards-osx-All-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-osx-All-Defaults.swift.out"; sourceTree = "<group>"; };
 		E2F749711D03CAE800EA0BC8 /* Storyboards-osx-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-osx-Empty.swift.out"; sourceTree = "<group>"; };
 		E2F749721D03CAE800EA0BC8 /* Storyboards-osx-Message-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-osx-Message-Defaults.swift.out"; sourceTree = "<group>"; };
 		E2F749731D03CAE800EA0BC8 /* Storyboards-osx-Anonymous-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-osx-Anonymous-Defaults.swift.out"; sourceTree = "<group>"; };
@@ -433,7 +437,9 @@
 				470A14EA1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Default.swift.out */,
 				E2F749731D03CAE800EA0BC8 /* Storyboards-osx-Anonymous-Defaults.swift.out */,
 				09EB0A251BDC60F000B2CF79 /* Storyboards-All-Default.swift.out */,
+				E2679A4A1D044D4600D3F55B /* Storyboards-osx-All-Defaults.swift.out */,
 				09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */,
+				E2679A481D044D3F00D3F55B /* Storyboards-osx-All-CustomName.swift.out */,
 				47CB533C1CFC170E00AA19C0 /* Storyboards-Anonymous-Swift3.swift.out */,
 				47CB533D1CFC170E00AA19C0 /* Storyboards-Wizard-Swift3.swift.out */,
 			);
@@ -611,11 +617,13 @@
 				09EB0A291BDC60F000B2CF79 /* Colors-List-Default.swift.out in Resources */,
 				09A87B701BCCA5F600D9B9F5 /* Strings-Lines-Default.swift.out in Resources */,
 				820D84B01D1F9D6C00504948 /* strings-structured.stencil in Resources */,
+				E2679A491D044D3F00D3F55B /* Storyboards-osx-All-CustomName.swift.out in Resources */,
 				47CB53331CFC0B2100AA19C0 /* SFNSDisplay-Bold.otf in Resources */,
 				4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */,
 				EFFE62F81C27081A00FE9783 /* Dependency.storyboard in Resources */,
 				09A87B5E1BCCA4D100D9B9F5 /* Message.storyboard in Resources */,
 				09A87B641BCCA4DC00D9B9F5 /* Images.xcassets in Resources */,
+				E2679A4B1D044D4600D3F55B /* Storyboards-osx-All-Defaults.swift.out in Resources */,
 				C24AFD041C92370D005FE3EF /* fonts-default.stencil in Resources */,
 				E2F7497B1D03CB2600EA0BC8 /* Message-osx.storyboard in Resources */,
 				4761E0381BDE753000B9B05F /* Storyboards-Empty.swift.out in Resources */,
