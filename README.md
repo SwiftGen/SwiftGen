@@ -1,6 +1,6 @@
 # SwiftGen
 
-[![CI Status](http://img.shields.io/travis/AliSoftware/SwiftGen.svg?style=flat)](https://travis-ci.org/AliSoftware/SwiftGen)
+[![Build Status](https://travis-ci.org/AliSoftware/SwiftGen.svg?branch=master)](https://travis-ci.org/AliSoftware/SwiftGen)
 
 SwiftGen is a suite of tools written in Swift to auto-generate Swift code (or anything else actually) for various assets of your project:
 
