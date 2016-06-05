@@ -35,6 +35,13 @@ extension UIViewController {
   }
 }
 
+extension UITableView {
+  func dequeueReusableCellWithIdentifier<C: StoryboardCellType where C.RawValue == String>(identifier: C,
+      forIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    return dequeueReusableCellWithIdentifier(identifier.rawValue, forIndexPath: indexPath)
+  }
+}
+
 extension UICollectionView {
   func dequeueReusableCellWithReuseIdentifier<C: StoryboardCellType where C.RawValue == String>(identifier: C,
       forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
