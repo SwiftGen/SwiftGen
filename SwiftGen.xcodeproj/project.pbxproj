@@ -120,6 +120,16 @@
 			);
 			script = "";
 		};
+		F87FF1AD1D0479520001ACED /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.pbxcp;
+			filePatterns = "*.xib";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# ibtool\n";
+		};
 /* End PBXBuildRule section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -509,6 +519,7 @@
 				09A87B721BCCA60900D9B9F5 /* PBXBuildRule */,
 				09A87B6B1BCCA52400D9B9F5 /* PBXBuildRule */,
 				09A87B6A1BCCA50000D9B9F5 /* PBXBuildRule */,
+				F87FF1AD1D0479520001ACED /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
