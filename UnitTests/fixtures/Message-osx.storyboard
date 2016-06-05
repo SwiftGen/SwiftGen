@@ -44,10 +44,10 @@
             </objects>
             <point key="canvasLocation" x="1260" y="179"/>
         </scene>
-        <!--Tab View Controller-->
+        <!--Custom Tab View Controller-->
         <scene sceneID="KL7-WW-1Vf">
             <objects>
-                <tabViewController storyboardIdentifier="MessagesTab" id="3pk-bw-FlH" sceneMemberID="viewController">
+                <tabViewController storyboardIdentifier="MessagesTab" id="3pk-bw-FlH" customClass="CustomTabViewController" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem id="cKo-D7-dmH"/>
                     </tabViewItems>

@@ -54,9 +54,15 @@ struct {{sceneEnumName}} {
 
     case {{sceneID}}Scene = "{{scene.identifier}}"
     {% if scene.class %}
-    static func instantiate{{sceneID|snakeToCamelCase}}() -> {{scene.class}} {
-      return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.controller() as! {{scene.class}}
-    }
+      {% if scene.vcType %}
+      static func instantiate{{sceneID|snakeToCamelCase}}() -> {{scene.class}} {
+        return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.controller() as! {{scene.class}}
+      }
+      {% else %}
+      static func instantiate{{sceneID|snakeToCamelCase}}() -> NS{{scene.class}} {
+        return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.controller() as! NS{{scene.class}}
+      }
+      {% endif %}
     {% else %}
     static func instantiate{{sceneID|snakeToCamelCase}}() -> AnyObject {
       return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.controller()
