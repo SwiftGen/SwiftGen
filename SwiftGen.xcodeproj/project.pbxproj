@@ -88,6 +88,7 @@
 		F87FF1AB1D0460D60001ACED /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1AA1D0460D60001ACED /* TableViewCell.xib */; };
 		F87FF1AF1D047D0D0001ACED /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1AE1D047D0D0001ACED /* CollectionViewCell.xib */; };
 		F87FF1B31D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1B21D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out */; };
+		F87FF1B61D0516840001ACED /* Xibs-CollectionViewCell-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1B51D0516840001ACED /* Xibs-CollectionViewCell-Defaults.swift.out */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -236,6 +237,7 @@
 		F87FF1AA1D0460D60001ACED /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		F87FF1AE1D047D0D0001ACED /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
 		F87FF1B21D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Xibs-TableViewCell-Defaults.swift.out"; sourceTree = "<group>"; };
+		F87FF1B51D0516840001ACED /* Xibs-CollectionViewCell-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Xibs-CollectionViewCell-Defaults.swift.out"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,6 +420,7 @@
 				09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */,
 				47CB533C1CFC170E00AA19C0 /* Storyboards-Anonymous-Swift3.swift.out */,
 				47CB533D1CFC170E00AA19C0 /* Storyboards-Wizard-Swift3.swift.out */,
+				F87FF1B51D0516840001ACED /* Xibs-CollectionViewCell-Defaults.swift.out */,
 				F87FF1B21D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out */,
 			);
 			name = Storyboards;
@@ -609,6 +612,9 @@
 				0911503B1BD3ECAE00EBC803 /* colors-default.stencil in Resources */,
 				09A87B6D1BCCA5F600D9B9F5 /* Strings-File-Default.swift.out in Resources */,
 				09EB0A2A1BDC60F000B2CF79 /* Images-Entries-Default.swift.out in Resources */,
+				F87FF1B61D0516840001ACED /* Xibs-CollectionViewCell-Defaults.swift.out in Resources */,
+				09A87B6D1BCCA5F600D9B9F5 /* Strings-File-Defaults.swift.out in Resources */,
+				09EB0A2A1BDC60F000B2CF79 /* Images-Entries-Defaults.swift.out in Resources */,
 				09A87B6E1BCCA5F600D9B9F5 /* Strings-File-CustomName.swift.out in Resources */,
 				4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */,
 				4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */,
