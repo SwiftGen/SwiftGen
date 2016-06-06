@@ -60,6 +60,6 @@ struct StoryboardSegue {
 
 struct StoryboardCell {
   enum TableViewCell: String, StoryboardCellType {
-    case CustomTableViewCell = "CustomTableViewCell"
+    case CustomTableViewCellReuseID = "CustomTableViewCellReuseID"
   }
 }
