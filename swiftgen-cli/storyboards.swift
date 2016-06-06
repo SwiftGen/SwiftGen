@@ -22,7 +22,7 @@ let storyboardsCommand = command(
     validator: pathExists)
 ) { output, templateName, templatePath, sceneEnumName, segueEnumName, cellEnumName, path in
   let parser = StoryboardParser()
-  if path.`extension` == "storyboard" {
+  if let `extension` = path.`extension` where ["storyboard", "xib"].contains(`extension`) {
     parser.addStoryboardAtPath(String(path))
   } else {
     parser.parseDirectory(String(path))
