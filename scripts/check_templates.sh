@@ -10,7 +10,7 @@ exit 0
 
 
 SGTMPDIR=`mktemp -d -t SwiftGen-Templates` || exit 1
-for f in "${PROJECT_DIR}/UnitTests/expected"/*.swift.out
+for f in `find "${PROJECT_DIR}/UnitTests/expected" -name '*.swift.out'`
 do
   TMPFILE="$SGTMPDIR"/`basename $f .out`
   cat $f >"$TMPFILE"
