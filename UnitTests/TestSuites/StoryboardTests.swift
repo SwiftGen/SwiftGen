@@ -30,11 +30,10 @@ class StoryboardTests: XCTestCase {
     parser.addStoryboardAtPath(self.fixturePath("Message.storyboard"))
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
-    do {
-      let result = try template.render(parser.stencilContext())
-      let expected = self.fixtureString("Storyboards-Message-Default.swift.out")
-      XCTDiffStrings(result, expected)
-    } catch {}
+    let result = try! template.render(parser.stencilContext())
+
+    let expected = self.fixtureString("Storyboards-Message-Default.swift.out")
+    XCTDiffStrings(result, expected)
   }
 
   func testMessageStoryboardWithLowercaseTemplate() {
@@ -42,11 +41,10 @@ class StoryboardTests: XCTestCase {
     parser.addStoryboardAtPath(self.fixturePath("Message.storyboard"))
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-lowercase.stencil"))
-    do {
-      let result = try template.render(parser.stencilContext())
-      let expected = self.fixtureString("Storyboards-Message-Lowercase.swift.out")
-      XCTDiffStrings(result, expected)
-    } catch {}
+    let result = try! template.render(parser.stencilContext())
+
+    let expected = self.fixtureString("Storyboards-Message-Lowercase.swift.out")
+    XCTDiffStrings(result, expected)
   }
 
   func testAnonymousStoryboardWithDefaults() {
@@ -66,11 +64,10 @@ class StoryboardTests: XCTestCase {
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let ctx = parser.stencilContext()
-    do {
-      let result = try template.render(ctx)
-      let expected = self.fixtureString("Storyboards-All-Default.swift.out")
-      XCTDiffStrings(result, expected)
-    } catch {}
+    let result = try! template.render(ctx)
+
+    let expected = self.fixtureString("Storyboards-All-Default.swift.out")
+    XCTDiffStrings(result, expected)
   }
 
   func testAllStoryboardsWithCustomName() {
@@ -79,23 +76,21 @@ class StoryboardTests: XCTestCase {
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let ctx = parser.stencilContext(sceneEnumName: "XCTStoryboardsScene", segueEnumName: "XCTStoryboardsSegue")
-    do {
-      let result = try template.render(ctx)
-      let expected = self.fixtureString("Storyboards-All-CustomName.swift.out")
-      XCTDiffStrings(result, expected)
-    } catch {}
+    let result = try! template.render(ctx)
+
+    let expected = self.fixtureString("Storyboards-All-CustomName.swift.out")
+    XCTDiffStrings(result, expected)
   }
-  
+
   func testAnonymousStoryboardWithSwift3() {
     let parser = StoryboardParser()
     parser.addStoryboardAtPath(self.fixturePath("Anonymous.storyboard"))
     
     let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"))
-    do {
-      let result = try template.render(parser.stencilContext())
-      let expected = self.fixtureString("Storyboards-Anonymous-Swift3.swift.out")
-      XCTDiffStrings(result, expected)
-    } catch {}
+    let result = try! template.render(parser.stencilContext())
+
+    let expected = self.fixtureString("Storyboards-Anonymous-Swift3.swift.out")
+    XCTDiffStrings(result, expected)
   }
     
   func testWizardsStoryboardsWithSwift3() {
@@ -103,11 +98,10 @@ class StoryboardTests: XCTestCase {
     parser.addStoryboardAtPath(self.fixturePath("Anonymous.storyboard"))
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"))
-    do {
-      let result = try template.render(parser.stencilContext())
-      let expected = self.fixtureString("Storyboards-Anonymous-Swift3.swift.out")
-      XCTDiffStrings(result, expected)
-    } catch {}
+    let result = try! template.render(parser.stencilContext())
+
+    let expected = self.fixtureString("Storyboards-Anonymous-Swift3.swift.out")
+    XCTDiffStrings(result, expected)
   }
 }
 
@@ -119,48 +113,44 @@ extension StoryboardTests {
     let parser = StoryboardParser()
     
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
-    do {
-      let result = try template.render(parser.stencilContext())
-      let expected = self.fixtureString("Storyboards-osx-Empty.swift.out")
-      XCTDiffStrings(result, expected)
-    } catch {}
+    let result = try! template.render(parser.stencilContext())
+
+    let expected = self.fixtureString("Storyboards-osx-Empty.swift.out")
+    XCTDiffStrings(result, expected)
   }
-  
+
   func testOSXMessageStoryboardWithDefaults() {
     let parser = StoryboardParser()
     parser.addStoryboardAtPath(self.fixturePath("Message-osx.storyboard"))
     
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
-    do {
-      let result = try template.render(parser.stencilContext())
-      let expected = self.fixtureString("Storyboards-osx-Message-Default.swift.out")
-      XCTDiffStrings(result, expected)
-    } catch {}
+    let result = try! template.render(parser.stencilContext())
+
+    let expected = self.fixtureString("Storyboards-osx-Message-Default.swift.out")
+    XCTDiffStrings(result, expected)
   }
-  
+
   func testOSXAnonymousStoryboardWithDefaults() {
     let parser = StoryboardParser()
     parser.addStoryboardAtPath(self.fixturePath("Anonymous-osx.storyboard"))
     
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
-    do {
-      let result = try template.render(parser.stencilContext())
-      let expected = self.fixtureString("Storyboards-osx-Anonymous-Default.swift.out")
-      XCTDiffStrings(result, expected)
-    } catch {}
+    let result = try! template.render(parser.stencilContext())
+
+    let expected = self.fixtureString("Storyboards-osx-Anonymous-Default.swift.out")
+    XCTDiffStrings(result, expected)
   }
- 
+
   func testOSXAllStoryboardsWithDefaults() {
     let parser = StoryboardParser()
-    parser.parseDirectory(self.fixturesDir, osx: true)
+    parser.parseDirectory(self.fixturesDir)
     
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
     let ctx = parser.stencilContext()
-    do {
-      let result = try template.render(ctx)
-      let expected = self.fixtureString("Storyboards-osx-All-Default.swift.out")
-      XCTDiffStrings(result, expected)
-    } catch {}
+    let result = try! template.render(ctx)
+    
+    let expected = self.fixtureString("Storyboards-osx-All-Default.swift.out")
+    XCTDiffStrings(result, expected)
   }
 
 //  func testOSXAllStoryboardsWithCustomName() {
