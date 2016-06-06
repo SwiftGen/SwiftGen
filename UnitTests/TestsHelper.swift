@@ -10,7 +10,7 @@ import XCTest
 private let colorCode: String -> String = NSProcessInfo().environment["XcodeColors"] == "YES" ?  { "\u{001b}[\($0);" } : { _ in "" }
 private let (msgColor, reset) = (colorCode("fg250,0,0"), colorCode(""))
 private let okCode = (num: colorCode("fg127,127,127"), code: colorCode(""))
-private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"), code: colorCode("bg127,0,0"))
+private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"), code: colorCode("fg250,250,250") + colorCode("bg127,0,0"))
 
 func diff(result: String, _ expected: String) -> String? {
   guard result != expected else { return nil }
@@ -26,13 +26,21 @@ func diff(result: String, _ expected: String) -> String? {
     }
   }
   if let badLineIdx = firstDiff {
-    let numLines = { (num: Int, line: String) -> String in
-      let lineNum = "\(num)".stringByPaddingToLength(3, withString: " ", startingAtIndex: 0) + "|"
-      let clr = num == badLineIdx ? koCode : okCode
-      return "\(clr.num)\(lineNum)\(reset)\(clr.code)\(line)\(reset)"
+    let slice = { (lines: [String], context: Int) -> ArraySlice<String> in
+      let start = max(0, badLineIdx-context)
+      let end = min(badLineIdx+context, lines.count-1)
+      return lines[start...end]
     }
-    let lhsNum = lhsLines.enumerate().map(numLines).joinWithSeparator("\n")
-    let rhsNum = rhsLines.enumerate().map(numLines).joinWithSeparator("\n")
+    let addLineNumbers = { (slice: ArraySlice) -> [String] in
+      slice.enumerate().map { (idx: Int, line: String) in
+        let num = idx + slice.startIndex
+        let lineNum = "\(num+1)".stringByPaddingToLength(3, withString: " ", startingAtIndex: 0) + "|"
+        let clr = num == badLineIdx ? koCode : okCode
+        return "\(clr.num)\(lineNum)\(reset)\(clr.code)\(line)\(reset)"
+      }
+    }
+    let lhsNum = addLineNumbers(slice(lhsLines, 4)).joinWithSeparator("\n")
+    let rhsNum = addLineNumbers(slice(rhsLines, 4)).joinWithSeparator("\n")
     return "\(msgColor)Mismatch at line \(badLineIdx)\(reset)\n>>>>>> result\n\(lhsNum)\n======\n\(rhsNum)\n<<<<<< expected"
   }
   return nil
