@@ -126,7 +126,7 @@ extension StoryboardTests {
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
     let result = try! template.render(parser.stencilContext())
     
-    let expected = self.fixtureString("Storyboards-osx-Message-Defaults.swift.out")
+    let expected = self.fixtureString("Storyboards-osx-Message-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
   
@@ -137,7 +137,7 @@ extension StoryboardTests {
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
     let result = try! template.render(parser.stencilContext())
     
-    let expected = self.fixtureString("Storyboards-osx-Anonymous-Defaults.swift.out")
+    let expected = self.fixtureString("Storyboards-osx-Anonymous-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
  
@@ -149,7 +149,7 @@ extension StoryboardTests {
     let ctx = parser.stencilContext()
     let result = try! template.render(ctx)
     
-    let expected = self.fixtureString("Storyboards-osx-All-Defaults.swift.out")
+    let expected = self.fixtureString("Storyboards-osx-All-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
