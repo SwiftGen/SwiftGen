@@ -67,6 +67,8 @@ extension AssetsCatalogParser {
     - `scenes`: `Array` (absent if empty)
        - `identifier`: `String`
        - `class`: `String` (absent if generic UIViewController)
+       - `isBaseViewController`: `Bool`
+       - `vcType`: `String` (absent if class is a custom class)
     - `segues`: `Array` (absent if empty)
        - `identifier`: `String`
        - `class`: `String` (absent if generic UIStoryboardSegue)
@@ -80,15 +82,13 @@ extension StoryboardParser {
       if let scenes = storyboardsScenes[storyboardName] {
         sbMap["scenes"] = scenes
           .sort({$0.storyboardID < $1.storyboardID})
-          .map { (scene: Scene) -> [String:String] in
+          .map { (scene: Scene) -> [String:AnyObject] in
             // Handle special scene.tag cases like navigationController, splitViewController, etc…
             let customClass = scene.customClass ?? uppercaseFirst(scene.tag)
-            if scene.customClass == nil && scene.tag == "viewController" {
-              return ["identifier": scene.storyboardID, "class": customClass, "isBaseViewController": ""]
+            if scene.customClass == nil {
+              return ["identifier": scene.storyboardID, "vcType": scene.tag, "isBaseViewController": scene.tag == "viewController"]
             } else if scene.customClass == nil {
-                return ["identifier": scene.storyboardID, "class": customClass]
-            } else if let customClass = scene.customClass {
-              return ["identifier": scene.storyboardID, "class": customClass, "vcType": customClass]
+              return ["identifier": scene.storyboardID, "class": customClass]
             } else {
               return ["identifier": scene.storyboardID]
             }

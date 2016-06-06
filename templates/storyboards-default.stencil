@@ -51,7 +51,7 @@ struct {{sceneEnumName}} {
 
     case {{sceneID}}Scene = "{{scene.identifier}}"
     {% ifnot scene.isBaseViewController %}
-    {% if scene.vcType %}
+    {% if scene.class %}
     static func instantiate{{sceneID|snakeToCamelCase}}() -> {{scene.class}} {
       guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.viewController() as? {{scene.class}}
       else {
@@ -60,10 +60,10 @@ struct {{sceneEnumName}} {
       return vc
     }
     {% else %}
-    static func instantiate{{sceneID|snakeToCamelCase}}() -> UI{{scene.class}} {
-      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.viewController() as? UI{{scene.class}}
+    static func instantiate{{sceneID|snakeToCamelCase}}() -> UI{{scene.vcType|titlecase}} {
+      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.viewController() as? UI{{scene.vcType|}}
       else {
-        fatalError("ViewController '{{scene.identifier}}' is not of the expected class UI{{scene.class}}.")
+        fatalError("ViewController '{{scene.identifier}}' is not of the expected class UI{{scene.vcType|}}.")
       }
       return vc
     }
