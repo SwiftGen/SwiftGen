@@ -143,7 +143,7 @@ extension StoryboardTests {
 
   func testOSXAllStoryboardsWithDefaults() {
     let parser = StoryboardParser()
-    parser.parseDirectory(self.fixturesDir)
+    parser.parseDirectory(self.fixturesDir, osx: true)
     
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
     let ctx = parser.stencilContext()
