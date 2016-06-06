@@ -2,7 +2,7 @@
 
 ---
 
-## Master
+## 1.1.0
 
 * Added step to ensure all templates are [Swiftlint](https://github.com/realm/SwiftLint)'ed
   and don't violate any code style rule.  
@@ -14,6 +14,7 @@
   [#125](https://github.com/AliSoftware/SwiftGen/pull/125),
   [#126](https://github.com/AliSoftware/SwiftGen/pull/126),
   [#127](https://github.com/AliSoftware/SwiftGen/pull/127)
+
 * Added missing FontConvertible protocol conformance to default fonts template.  
   [Ben Chatelain](https://github.com/phatblat) [#129](https://github.com/AliSoftware/SwiftGen/pull/129)
 
@@ -22,12 +23,16 @@
 * Restructured colors & fonts templates to workaround the same LLVM issue as #112 with nested types
   inside existing UIKit classes in Release/Optimized builds.  
   [Olivier Halligon](https://github.com/AliSoftware)
+
 * Added support for Fonts using the `swiftgen fonts` command.  
   [Derek Ostrander](https://github.com/dostrander) [#102](https://github.com/AliSoftware/SwiftGen/pull/102)
+
 * Added support for TXT (`colors.txt`) files to have named value.  
   [Derek Ostrander](https://github.com/dostrander), [#118](https://github.com/AliSoftware/SwiftGen/pull/118)
+
 * Restructured image templates to work around an LLVM issue with nested types.    
   [Ken Grigsby](https://github.com/kgrigsby59), [#112](https://github.com/AliSoftware/SwiftGen/issues/112)
+
 * Added Swift 3 templates for storyboards and strings.    
   [Andrew Breckenridge](https://github.com/AndrewSB), [#117](https://github.com/AliSoftware/SwiftGen/pull/117)
 
@@ -35,14 +40,19 @@
 
 * Introducing alternative way to install SwiftGen: using CocoaPods! See README for more details.  
   [Olivier Halligon](https://github.com/AliSoftware), [#95](https://github.com/AliSoftware/SwiftGen/issues/95)
+
 * Added support for JSON (`colors.json`) files as input for the `swiftgen colors` subcommand.  
   [Derek Ostrander](https://github.com/dostrander)
+
 * Use `String(format:locale:arguments:)` and the `NSLocale.currentLocale()` in the "string" templates so that it works with `.stringdict` files and pluralization.  
   [Olivier Halligon](https://github.com/AliSoftware), [#91](https://github.com/AliSoftware/SwiftGen/issues/91)
+
 * Add support for Android `colors.xml` files as input for the `swiftgen colors` subcommand.  
   [Olivier Halligon](https://github.com/AliSoftware), [#15](https://github.com/AliSoftware/SwiftGen/issues/15)
+
 * Removed the useless `import Foundation` from the "images" templates.  
   [Olivier Halligon](https://github.com/AliSoftware)
+
 * Added computed property `var color: UIColor` to the color templates.  
   [Olivier Halligon](https://github.com/AliSoftware)
 
