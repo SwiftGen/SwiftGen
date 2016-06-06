@@ -98,7 +98,7 @@ struct {{segueEnumName}} {
 {% for storyboard in storyboards %}
 {% for cell in storyboard.cells %}
 {% if cell.class %}
-extension {{cell.class|swiftIdentifier}} { static var reuseIdentifier = "{{cell.identifier}}" }
+extension {{cell.class|swiftIdentifier}} { static var reuseIdentifier: String { return "{{cell.identifier}}" } }
 {% endif %}
 {% endfor %}
 {% endfor %}

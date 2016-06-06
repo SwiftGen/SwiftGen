@@ -58,7 +58,7 @@ struct StoryboardScene {
 struct StoryboardSegue {
 }
 
-extension XibTableViewCell { static var reuseIdentifier = "XibTableViewCellReuseID" }
+extension XibTableViewCell { static var reuseIdentifier: String { return "XibTableViewCellReuseID" } }
 
 struct StoryboardCell {
   enum TableViewCell: String, StoryboardCellType {

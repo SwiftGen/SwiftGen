@@ -96,10 +96,10 @@ struct StoryboardSegue {
   }
 }
 
-extension CustomCollectionViewCell { static var reuseIdentifier = "CustomCollectionViewCellReuseID" }
-extension CustomMessageCell { static var reuseIdentifier = "CustomMessageCellReuseID" }
-extension StandaloneCollectionViewCell { static var reuseIdentifier = "StandaloneCollectionViewCellReuseID" }
-extension StandaloneTableViewCell { static var reuseIdentifier = "StandaloneTableViewCellReuseID" }
+extension CustomCollectionViewCell { static var reuseIdentifier: String { return "CustomCollectionViewCellReuseID" } }
+extension CustomMessageCell { static var reuseIdentifier: String { return "CustomMessageCellReuseID" } }
+extension StandaloneCollectionViewCell { static var reuseIdentifier: String { return "StandaloneCollectionViewCellReuseID" } }
+extension StandaloneTableViewCell { static var reuseIdentifier: String { return "StandaloneTableViewCellReuseID" } }
 
 struct StoryboardCell {
   enum Message: String, StoryboardCellType {
