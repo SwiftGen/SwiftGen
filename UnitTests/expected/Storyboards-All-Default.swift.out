@@ -167,8 +167,8 @@ struct StoryboardCell {
     case XibCollectionViewCellReuseID = "XibCollectionViewCellReuseID"
   }
   enum Message: String, StoryboardCellType {
-    case CustomCollectionCell = "CustomCollectionCell"
-    case CustomMessageCell = "CustomMessageCell"
+    case CustomCollectionViewCellReuseID = "CustomCollectionViewCellReuseID"
+    case CustomMessageCellReuseID = "CustomMessageCellReuseID"
     case StandaloneCollectionViewCellReuseID = "StandaloneCollectionViewCellReuseID"
     case StandaloneTableViewCellReuseID = "StandaloneTableViewCellReuseID"
   }

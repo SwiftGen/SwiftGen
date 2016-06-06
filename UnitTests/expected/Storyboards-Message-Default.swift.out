@@ -98,8 +98,8 @@ struct StoryboardSegue {
 
 struct StoryboardCell {
   enum Message: String, StoryboardCellType {
-    case CustomCollectionCell = "CustomCollectionCell"
-    case CustomMessageCell = "CustomMessageCell"
+    case CustomCollectionViewCellReuseID = "CustomCollectionViewCellReuseID"
+    case CustomMessageCellReuseID = "CustomMessageCellReuseID"
     case StandaloneCollectionViewCellReuseID = "StandaloneCollectionViewCellReuseID"
     case StandaloneTableViewCellReuseID = "StandaloneTableViewCellReuseID"
   }
