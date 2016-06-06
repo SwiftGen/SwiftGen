@@ -41,72 +41,121 @@ extension NSViewController {
 }
 
 struct StoryboardScene {
-  enum Anonymous_Osx: StoryboardSceneType {
-    static let storyboardName = "Anonymous-osx"
+  enum Anonymous: StoryboardSceneType {
+    static let storyboardName = "Anonymous"
   }
-  enum Dependency_Osx: String, StoryboardSceneType {
-    static let storyboardName = "Dependency-osx"
+  enum Dependency: String, StoryboardSceneType {
+    static let storyboardName = "Dependency"
 
     case DependentScene = "Dependent"
     static func instantiateDependent() -> NSViewController {
-      return StoryboardScene.Dependency_Osx.DependentScene.controller() as! NSViewController
+      guard let vc = StoryboardScene.Dependency.DependentScene.controller() as? NSViewController
+      else {
+        fatalError("ViewController 'Dependent' is not of the expected class NSViewController.")
+      }
+      return vc
     }
   }
-  enum Message_Osx: String, StoryboardSceneType {
-    static let storyboardName = "Message-osx"
+  enum Message: String, StoryboardSceneType {
+    static let storyboardName = "Message"
 
-    case MessageDetailsScene = "MessageDetails"
-    static func instantiateMessageDetails() -> NSViewController {
-      return StoryboardScene.Message_Osx.MessageDetailsScene.controller() as! NSViewController
+    case ComposerScene = "Composer"
+    static func instantiateComposer() -> NSViewController {
+      guard let vc = StoryboardScene.Message.ComposerScene.controller() as? NSViewController
+      else {
+        fatalError("ViewController 'Composer' is not of the expected class NSViewController.")
+      }
+      return vc
     }
 
-    case MessageListScene = "MessageList"
-    static func instantiateMessageList() -> NSViewController {
-      return StoryboardScene.Message_Osx.MessageListScene.controller() as! NSViewController
+    case MessagesListScene = "MessagesList"
+    static func instantiateMessagesList() -> NSTableViewController {
+      guard let vc = StoryboardScene.Message.MessagesListScene.controller() as? NSTableViewController
+      else {
+        fatalError("ViewController 'MessagesList' is not of the expected class NSTableViewController.")
+      }
+      return vc
     }
 
-    case MessageListFooterScene = "MessageListFooter"
-    static func instantiateMessageListFooter() -> NSViewController {
-      return StoryboardScene.Message_Osx.MessageListFooterScene.controller() as! NSViewController
+    case NavCtrlScene = "NavCtrl"
+    static func instantiateNavCtrl() -> NSNavigationController {
+      guard let vc = StoryboardScene.Message.NavCtrlScene.controller() as? NSNavigationController
+      else {
+        fatalError("ViewController 'NavCtrl' is not of the expected class NSNavigationController.")
+      }
+      return vc
     }
 
-    case MessagesTabScene = "MessagesTab"
-    static func instantiateMessagesTab() -> CustomTabViewController {
-      return StoryboardScene.Message_Osx.MessagesTabScene.controller() as! CustomTabViewController
-    }
-
-    case SplitMessagesScene = "SplitMessages"
-    static func instantiateSplitMessages() -> NSSplitViewController {
-      return StoryboardScene.Message_Osx.SplitMessagesScene.controller() as! NSSplitViewController
-    }
-
-    case WindowCtrlScene = "WindowCtrl"
-    static func instantiateWindowCtrl() -> NSWindowController {
-      return StoryboardScene.Message_Osx.WindowCtrlScene.controller() as! NSWindowController
+    case URLChooserScene = "URLChooser"
+    static func instantiateURLChooser() -> XXPickerViewController {
+      guard let vc = StoryboardScene.Message.URLChooserScene.controller() as? XXPickerViewController
+      else {
+        fatalError("ViewController 'URLChooser' is not of the expected class XXPickerViewController.")
+      }
+      return vc
     }
   }
-  enum Placeholder_Osx: String, StoryboardSceneType {
-    static let storyboardName = "Placeholder-osx"
+  enum Placeholder: String, StoryboardSceneType {
+    static let storyboardName = "Placeholder"
 
-    case DependentScene = "Dependent"
-    static func instantiateDependent() -> NSControllerPlaceholder {
-      return StoryboardScene.Placeholder_Osx.DependentScene.controller() as! NSControllerPlaceholder
+    case NavigationScene = "Navigation"
+    static func instantiateNavigation() -> NSNavigationController {
+      guard let vc = StoryboardScene.Placeholder.NavigationScene.controller() as? NSNavigationController
+      else {
+        fatalError("ViewController 'Navigation' is not of the expected class NSNavigationController.")
+      }
+      return vc
+    }
+  }
+  enum Wizard: String, StoryboardSceneType {
+    static let storyboardName = "Wizard"
+
+    case Accept_CGUScene = "Accept-CGU"
+    static func instantiateAcceptCGU() -> NSViewController {
+      guard let vc = StoryboardScene.Wizard.Accept_CGUScene.controller() as? NSViewController
+      else {
+        fatalError("ViewController 'Accept-CGU' is not of the expected class NSViewController.")
+      }
+      return vc
     }
 
-    case WindowScene = "Window"
-    static func instantiateWindow() -> NSWindowController {
-      return StoryboardScene.Placeholder_Osx.WindowScene.controller() as! NSWindowController
+    case CreateAccountScene = "CreateAccount"
+    static func instantiateCreateAccount() -> CreateAccViewController {
+      guard let vc = StoryboardScene.Wizard.CreateAccountScene.controller() as? CreateAccViewController
+      else {
+        fatalError("ViewController 'CreateAccount' is not of the expected class CreateAccViewController.")
+      }
+      return vc
+    }
+
+    case PreferencesScene = "Preferences"
+    static func instantiatePreferences() -> NSTableViewController {
+      guard let vc = StoryboardScene.Wizard.PreferencesScene.controller() as? NSTableViewController
+      else {
+        fatalError("ViewController 'Preferences' is not of the expected class NSTableViewController.")
+      }
+      return vc
+    }
+
+    case Validate_PasswordScene = "Validate_Password"
+    static func instantiateValidatePassword() -> NSViewController {
+      guard let vc = StoryboardScene.Wizard.Validate_PasswordScene.controller() as? NSViewController
+      else {
+        fatalError("ViewController 'Validate_Password' is not of the expected class NSViewController.")
+      }
+      return vc
     }
   }
 }
 
 struct StoryboardSegue {
-  enum Message_Osx: String, StoryboardSegueType {
-    case Custom = "Custom"
+  enum Message: String, StoryboardSegueType {
+    case CustomBack = "CustomBack"
     case Embed = "Embed"
-    case Modal = "Modal"
-    case Popover = "Popover"
-    case Sheet = "Sheet"
-    case Show = "Show"
+    case NonCustom = "NonCustom"
+    case Show_NavCtrl = "Show-NavCtrl"
+  }
+  enum Wizard: String, StoryboardSegueType {
+    case ShowPassword = "ShowPassword"
   }
 }

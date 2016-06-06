@@ -46,32 +46,56 @@ struct StoryboardScene {
 
     case MessageDetailsScene = "MessageDetails"
     static func instantiateMessageDetails() -> NSViewController {
-      return StoryboardScene.Message_Osx.MessageDetailsScene.controller() as! NSViewController
+      guard let vc = StoryboardScene.Message_Osx.MessageDetailsScene.controller() as? NSViewController
+      else {
+        fatalError("ViewController 'MessageDetails' is not of the expected class NSViewController.")
+      }
+      return vc
     }
 
     case MessageListScene = "MessageList"
     static func instantiateMessageList() -> NSViewController {
-      return StoryboardScene.Message_Osx.MessageListScene.controller() as! NSViewController
+      guard let vc = StoryboardScene.Message_Osx.MessageListScene.controller() as? NSViewController
+      else {
+        fatalError("ViewController 'MessageList' is not of the expected class NSViewController.")
+      }
+      return vc
     }
 
     case MessageListFooterScene = "MessageListFooter"
     static func instantiateMessageListFooter() -> NSViewController {
-      return StoryboardScene.Message_Osx.MessageListFooterScene.controller() as! NSViewController
+      guard let vc = StoryboardScene.Message_Osx.MessageListFooterScene.controller() as? NSViewController
+      else {
+        fatalError("ViewController 'MessageListFooter' is not of the expected class NSViewController.")
+      }
+      return vc
     }
 
     case MessagesTabScene = "MessagesTab"
     static func instantiateMessagesTab() -> CustomTabViewController {
-      return StoryboardScene.Message_Osx.MessagesTabScene.controller() as! CustomTabViewController
+      guard let vc = StoryboardScene.Message_Osx.MessagesTabScene.controller() as? CustomTabViewController
+      else {
+        fatalError("ViewController 'MessagesTab' is not of the expected class CustomTabViewController.")
+      }
+      return vc
     }
 
     case SplitMessagesScene = "SplitMessages"
     static func instantiateSplitMessages() -> NSSplitViewController {
-      return StoryboardScene.Message_Osx.SplitMessagesScene.controller() as! NSSplitViewController
+      guard let vc = StoryboardScene.Message_Osx.SplitMessagesScene.controller() as? NSSplitViewController
+      else {
+        fatalError("ViewController 'SplitMessages' is not of the expected class NSSplitViewController.")
+      }
+      return vc
     }
 
     case WindowCtrlScene = "WindowCtrl"
     static func instantiateWindowCtrl() -> NSWindowController {
-      return StoryboardScene.Message_Osx.WindowCtrlScene.controller() as! NSWindowController
+      guard let vc = StoryboardScene.Message_Osx.WindowCtrlScene.controller() as? NSWindowController
+      else {
+        fatalError("ViewController 'WindowCtrl' is not of the expected class NSWindowController.")
+      }
+      return vc
     }
   }
 }

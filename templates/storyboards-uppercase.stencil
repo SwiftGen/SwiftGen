@@ -60,10 +60,10 @@ struct {{sceneEnumName}} {
       return vc
     }
     {% else %}
-    static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> UI{{scene.baseType|titlecase}} {
-      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as? UI{{scene.baseType|titlecase}}
+    static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> UI{{scene.baseType}} {
+      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as? UI{{scene.baseType}}
       else {
-        fatalError("ViewController '{{scene.identifier}}' is not of the expected class UI{{scene.baseType|titlecase}}.")
+        fatalError("ViewController '{{scene.identifier}}' is not of the expected class UI{{scene.baseType}}.")
       }
       return vc
     }
