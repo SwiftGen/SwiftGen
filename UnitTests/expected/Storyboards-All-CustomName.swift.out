@@ -169,6 +169,8 @@ struct XCTStoryboardsCell {
   enum Message: String, StoryboardCellType {
     case CustomCollectionCell = "CustomCollectionCell"
     case CustomMessageCell = "CustomMessageCell"
+    case StandaloneCollectionViewCellReuseID = "StandaloneCollectionViewCellReuseID"
+    case StandaloneTableViewCellReuseID = "StandaloneTableViewCellReuseID"
   }
   enum TableViewCell: String, StoryboardCellType {
     case CustomTableViewCellReuseID = "CustomTableViewCellReuseID"
