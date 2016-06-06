@@ -96,14 +96,6 @@ This will generate an `enum Asset` with one `case` per image asset in your asset
 The generated code will look like this:
 
 ```swift
-#if os(iOS)
-  import UIKit.UIImage
-  typealias Image = UIImage
-#elseif os(OSX)
-  import AppKit.NSImage
-  typealias Image = NSImage
-#endif
-
 enum Asset: String {
   case Green_Apple = "Green-Apple"
   case Red_Apple = "Red apple"
@@ -125,8 +117,8 @@ extension Image {
 
 ```swift
 let image1 = UIImage(asset: .Banana)   // iOS Prefered way
-let image1 = NSImage(asset: .Banana)   // OS X Prefered way
-let image2 = Asset.Apple.image // Alternate way
+let image2 = NSImage(asset: .Banana)   // OS X Prefered way
+let image3 = Asset.Apple.image // Alternate way
 ```
 
 This way, no need to enter the `"Banana"` string in your code and risk any typo.
@@ -362,23 +354,9 @@ NamedColor   : Translucent
 The generated code will look like this:
 
 ```swift
-#if os(iOS)
-  import UIKit.UIColor
-  typealias Color = UIColor
-#elseif os(OSX)
-  import AppKit.NSColor
-  typealias Color = NSColor
-#endif
-
 extension Color {
-  convenience init(rgbaValue: UInt32) {
-    let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0
-    let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0
-    let blue  = CGFloat((rgbaValue >>  8) & 0xff) / 255.0
-    let alpha = CGFloat((rgbaValue      ) & 0xff) / 255.0
-
-    self.init(red: red, green: green, blue: blue, alpha: alpha)
-  }
+  /* Private Implementation details */
+  ...
 }
 
 enum ColorName {
@@ -391,18 +369,6 @@ enum ColorName {
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#999999"></span>
   /// Alpha: 100% <br/> (0x999999ff)
   case Text_Body_Color
-
-  var rgbaValue: UInt32 {
-    switch self {
-    case .ArticleBackground: return 0xffcc0099
-    case .ArticleTitle: return 0x996600ff
-    case .Text_Body_Color: return 0x999999ff
-    }
-  }
-
-  var color: Color {
-    return Color(named: self)
-  }
 }
 
 extension Color {
