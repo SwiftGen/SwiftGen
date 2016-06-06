@@ -66,7 +66,7 @@ public final class StoryboardParser {
         }
       case "collectionViewCell":
         if let reuseID = attributeDict["reuseIdentifier"] {
-          let customClass = attributeDict["reuseIdentifier"]
+          let customClass = attributeDict["customClass"]
           cells.insert(Cell(reuseID: reuseID, customClass: customClass))
         }
       default:
