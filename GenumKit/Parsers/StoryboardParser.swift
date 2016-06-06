@@ -105,7 +105,7 @@ public final class StoryboardParser {
   public func parseDirectory(path: String) {
     if let dirEnum = NSFileManager.defaultManager().enumeratorAtPath(path) {
       while let subPath = dirEnum.nextObject() as? NSString {
-        if subPath.pathExtension == "storyboard" {
+        if ["storyboard", "xib"].contains(subPath.pathExtension) {
           self.addStoryboardAtPath((path as NSString).stringByAppendingPathComponent(subPath as String))
         }
       }

@@ -53,6 +53,9 @@ struct XCTStoryboardsScene {
   enum Anonymous: StoryboardSceneType {
     static let storyboardName = "Anonymous"
   }
+  enum CollectionViewCell: StoryboardSceneType {
+    static let storyboardName = "CollectionViewCell"
+  }
   enum Dependency: String, StoryboardSceneType {
     static let storyboardName = "Dependency"
 
@@ -108,6 +111,9 @@ struct XCTStoryboardsScene {
       return vc
     }
   }
+  enum TableViewCell: StoryboardSceneType {
+    static let storyboardName = "TableViewCell"
+  }
   enum Wizard: String, StoryboardSceneType {
     static let storyboardName = "Wizard"
 
@@ -150,5 +156,24 @@ struct XCTStoryboardsSegue {
   }
   enum Wizard: String, StoryboardSegueType {
     case ShowPassword = "ShowPassword"
+  }
+}
+
+struct XCTStoryboardsCell {
+  enum Anonymous: String, StoryboardCellType {
+    case ReuseCellID = "ReuseCellID"
+  }
+  enum CollectionViewCell: String, StoryboardCellType {
+    case CustomCollectionViewCellReuseID = "CustomCollectionViewCellReuseID"
+  }
+  enum Message: String, StoryboardCellType {
+    case CustomCollectionCell = "CustomCollectionCell"
+    case CustomMessageCell = "CustomMessageCell"
+  }
+  enum TableViewCell: String, StoryboardCellType {
+    case CustomTableViewCellReuseID = "CustomTableViewCellReuseID"
+  }
+  enum Wizard: String, StoryboardCellType {
+    case PrefCell = "PrefCell"
   }
 }

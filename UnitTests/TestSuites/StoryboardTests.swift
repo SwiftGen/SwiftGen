@@ -75,7 +75,7 @@ class StoryboardTests: XCTestCase {
     parser.parseDirectory(self.fixturesDir)
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
-    let ctx = parser.stencilContext(sceneEnumName: "XCTStoryboardsScene", segueEnumName: "XCTStoryboardsSegue")
+    let ctx = parser.stencilContext(sceneEnumName: "XCTStoryboardsScene", segueEnumName: "XCTStoryboardsSegue", cellEnumName: "XCTStoryboardsCell")
     let result = try! template.render(ctx)
 
     let expected = self.fixtureString("Storyboards-All-CustomName.swift.out")
