@@ -95,6 +95,14 @@ struct {{segueEnumName}} {
   {% endif %}{% endfor %}
 }
 
+{% for storyboard in storyboards %}
+{% for cell in storyboard.cells %}
+{% if cell.class %}
+extension {{cell.class|swiftIdentifier}} { static var reuseIdentifier = "{{cell.identifier}}" }
+{% endif %}
+{% endfor %}
+{% endfor %}
+
 struct {{cellEnumName}} {
   {% for storyboard in storyboards %}{% if storyboard.cells %}
   enum {{storyboard.name|swiftIdentifier}}: String, StoryboardCellType {
@@ -104,6 +112,7 @@ struct {{cellEnumName}} {
   }
   {% endif %}{% endfor %}
 }
+
 {% else %}
 // No storyboard found
 {% endif %}

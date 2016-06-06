@@ -159,6 +159,13 @@ struct XCTStoryboardsSegue {
   }
 }
 
+extension XibCollectionViewCell { static var reuseIdentifier = "XibCollectionViewCellReuseID" }
+extension CustomCollectionViewCell { static var reuseIdentifier = "CustomCollectionViewCellReuseID" }
+extension CustomMessageCell { static var reuseIdentifier = "CustomMessageCellReuseID" }
+extension StandaloneCollectionViewCell { static var reuseIdentifier = "StandaloneCollectionViewCellReuseID" }
+extension StandaloneTableViewCell { static var reuseIdentifier = "StandaloneTableViewCellReuseID" }
+extension XibTableViewCell { static var reuseIdentifier = "XibTableViewCellReuseID" }
+
 struct XCTStoryboardsCell {
   enum Anonymous: String, StoryboardCellType {
     case ReuseCellID = "ReuseCellID"

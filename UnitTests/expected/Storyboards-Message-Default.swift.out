@@ -96,6 +96,11 @@ struct StoryboardSegue {
   }
 }
 
+extension CustomCollectionViewCell { static var reuseIdentifier = "CustomCollectionViewCellReuseID" }
+extension CustomMessageCell { static var reuseIdentifier = "CustomMessageCellReuseID" }
+extension StandaloneCollectionViewCell { static var reuseIdentifier = "StandaloneCollectionViewCellReuseID" }
+extension StandaloneTableViewCell { static var reuseIdentifier = "StandaloneTableViewCellReuseID" }
+
 struct StoryboardCell {
   enum Message: String, StoryboardCellType {
     case CustomCollectionViewCellReuseID = "CustomCollectionViewCellReuseID"
