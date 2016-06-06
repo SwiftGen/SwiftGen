@@ -104,7 +104,7 @@ class StoryboardTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
 
-  func testXibsWithDefaults() {
+  func testTableViewXibWithDefaults() {
     let parser = StoryboardParser()
     parser.addStoryboardAtPath(self.fixturePath("TableViewCell.xib"))
 
@@ -112,7 +112,7 @@ class StoryboardTests: XCTestCase {
     let ctx = parser.stencilContext()
     let result = try! template.render(ctx)
 
-    let expected = self.fixtureString("Storyboards-Xibs-Defaults.swift.out")
+    let expected = self.fixtureString("Xibs-TableViewCell-Defaults.swift.out")
     XCTDiffStrings(result, expected)
   }
 }

@@ -87,7 +87,7 @@
 		F4705617D891407B43B021A3 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5E15CBE3901E2C7C3240E93 /* Pods_UnitTests.framework */; };
 		F87FF1AB1D0460D60001ACED /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1AA1D0460D60001ACED /* TableViewCell.xib */; };
 		F87FF1AF1D047D0D0001ACED /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1AE1D047D0D0001ACED /* CollectionViewCell.xib */; };
-		F87FF1B31D04A2090001ACED /* Storyboards-Xibs-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1B21D04A2090001ACED /* Storyboards-Xibs-Defaults.swift.out */; };
+		F87FF1B31D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1B21D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -235,7 +235,7 @@
 		EFFE62F71C27081A00FE9783 /* Dependency.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dependency.storyboard; sourceTree = "<group>"; };
 		F87FF1AA1D0460D60001ACED /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		F87FF1AE1D047D0D0001ACED /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
-		F87FF1B21D04A2090001ACED /* Storyboards-Xibs-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Xibs-Defaults.swift.out"; sourceTree = "<group>"; };
+		F87FF1B21D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Xibs-TableViewCell-Defaults.swift.out"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,7 +418,7 @@
 				09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */,
 				47CB533C1CFC170E00AA19C0 /* Storyboards-Anonymous-Swift3.swift.out */,
 				47CB533D1CFC170E00AA19C0 /* Storyboards-Wizard-Swift3.swift.out */,
-				F87FF1B21D04A2090001ACED /* Storyboards-Xibs-Defaults.swift.out */,
+				F87FF1B21D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -589,7 +589,7 @@
 				091150361BD3274E00EBC803 /* images-default.stencil in Resources */,
 				47CB533F1CFC170E00AA19C0 /* Storyboards-Wizard-Swift3.swift.out in Resources */,
 				470A14E71BEA691E0052EAC8 /* images-allvalues.stencil in Resources */,
-				F87FF1B31D04A2090001ACED /* Storyboards-Xibs-Defaults.swift.out in Resources */,
+				F87FF1B31D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out in Resources */,
 				09EB0A1A1BDC3AC400B2CF79 /* strings-default.stencil in Resources */,
 				09EB0A291BDC60F000B2CF79 /* Colors-List-Default.swift.out in Resources */,
 				09A87B701BCCA5F600D9B9F5 /* Strings-Lines-Default.swift.out in Resources */,
