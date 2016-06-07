@@ -1,14 +1,16 @@
 # SwiftGen
 
 [![Build Status](https://travis-ci.org/AliSoftware/SwiftGen.svg?branch=master)](https://travis-ci.org/AliSoftware/SwiftGen)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftGen.svg)](https://img.shields.io/cocoapods/v/SwiftGen.svg)
+[![Platform](https://img.shields.io/cocoapods/p/SwiftGen.svg?style=flat)](http://cocoadocs.org/docsets/SwiftGen)
 
 SwiftGen is a suite of tools written in Swift to auto-generate Swift code (or anything else actually) for various assets of your project:
 
 * [`enums` for your Assets Catalogs images](#uiimage-and-nsimage)
 * [`enums` for your `Localizable.strings` strings](#localizablestrings).
-* [`enums` for your `UIStoryboard` and their Scenes](#uistoryboard)
-* [`enums` for your `UIColor`s and `NSColor`s](#uicolor-and-nscolor).
-* [`enums` for your `UIFont`s and `NSFont`s](#uifont-and-nsfont).
+* [`enums` for your Storyboards and their Scenes](#uistoryboard)
+* [`enums` for your Fonts](#uicolor-and-nscolor).
+* [`enums` for your Colors](#uifont-and-nsfont).
 
 ## Installation
 
@@ -96,6 +98,7 @@ This will generate an `enum Asset` with one `case` per image asset in your asset
 The generated code will look like this:
 
 ```swift
+// The Image type below is typealias'ed to UIImage on iOS and NSImage on OSX
 enum Asset: String {
   case Green_Apple = "Green-Apple"
   case Red_Apple = "Red apple"
@@ -354,6 +357,7 @@ NamedColor   : Translucent
 The generated code will look like this:
 
 ```swift
+// The Color type below is typealias'ed to UIColor on iOS and NSColor on OSX
 extension Color {
   /* Private Implementation details */
   ...
@@ -414,6 +418,7 @@ This will recursively go through the specified directory, finding any typeface f
 ### Generated Code
 
 ```swift
+// The Font type below is typealias'ed to UIFont on iOS and NSFont on OSX
 struct FontFamily {
   enum Helvetica: String {
     case Regular = "Helvetica"
@@ -421,7 +426,7 @@ struct FontFamily {
     case Thin = "Helvetica-Thin"
     case Medium = "Helvetica-Medium"
 
-    func font(size: CGFloat) -> UIFont? { return UIFont(name:self.rawValue, size:size)}
+    func font(size: CGFloat) -> Font? { return Font(name:self.rawValue, size:size)}
   }
 }
 ```
