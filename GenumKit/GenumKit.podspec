@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "GenumKit"
-  s.version      = "1.1.0"
+  s.version      = "1.1.1"
   s.summary      = "A tool to build constants using enums for your UIImage, Storyboards, Assets, Colors, and more"
 
   s.description  = <<-DESC

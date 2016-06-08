@@ -2,6 +2,11 @@
 
 ---
 
+## 1.1.1
+
+* Removed the last force-unwrap from storyboard templates.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+
 ## 1.1.0
 
 * Added step to ensure all templates are [Swiftlint](https://github.com/realm/SwiftLint)'ed
