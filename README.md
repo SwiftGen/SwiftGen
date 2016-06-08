@@ -220,6 +220,8 @@ swiftgen storyboards /dir/to/search/for/storyboards
 
 This will generate an `enum` for each of your `UIStoryboard`, with one `case` per storyboard scene.
 
+*Note: there is no OS X storyboards yet (but a PR [#131](https://github.com/AliSoftware/SwiftGen/pull/131) is pending to add that template if you want to help)*
+
 ### Generated code
 
 The generated code will look like this:
@@ -347,11 +349,11 @@ Generated code will look the same as if you'd use text file.
 Given the following `colors.txt` file:
 
 ```
-Cyan         : 0xff66ccff
-ArticleTitle : #33fe66
-ArticleBody  : 339666
-Translucent  : ffffffcc
-NamedColor   : Translucent
+Cyan-Color       : 0xff66ccff
+ArticleTitle     : #33fe66
+ArticleBody      : 339666
+ArticleFootnote  : ff66ccff
+Translucent      : ffffffcc
 ```
 
 The generated code will look like this:
@@ -364,21 +366,21 @@ extension Color {
 }
 
 enum ColorName {
-  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
-  /// Alpha: 80% <br/> (0xffffffcc)
-  case Translucent = 0xffffffcc
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>
   /// Alpha: 100% <br/> (0x339666ff)
-  case ArticleBody = 0x339666ff
+  case ArticleBody
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
   /// Alpha: 100% <br/> (0xff66ccff)
-  case Cyan = 0xff66ccff
+  case ArticleFootnote
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#33fe66"></span>
   /// Alpha: 100% <br/> (0x33fe66ff)
-  case ArticleTitle = 0x33fe66ff
+  case ArticleTitle
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
+  /// Alpha: 100% <br/> (0xff66ccff)
+  case Cyan_Color
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
   /// Alpha: 80% <br/> (0xffffffcc)
-  case NamedColor = 0xffffffcc
+  case Translucent
 }
 
 extension Color {
@@ -392,16 +394,18 @@ extension Color {
 
 ```swift
 // iOS
-UIColor(named: .ArticleTitle)
 UIColor(named: .ArticleBody)
+UIColor(named: .ArticleFootnote)
+UIColor(named: .ArticleTitle)
+UIColor(named: .Cyan_Color)
 UIColor(named: .Translucent)
-UIColor(named: .NamedColor)
 
 // OS X
-NSColor(named: .ArticleTitle)
 NSColor(named: .ArticleBody)
+NSColor(named: .ArticleFootnote)
+NSColor(named: .ArticleTitle)
+NSColor(named: .Cyan_Color)
 NSColor(named: .Translucent)
-NSColor(named: .NamedColor)
 ```
 
 This way, no need to enter the color red, green, blue, alpha values each time and create ugly constants in the global namespace for them.
