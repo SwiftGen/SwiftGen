@@ -2,18 +2,24 @@
 
 ---
 
-## Master
+## 1.1.1
+
+* Removed the last force-unwrap from storyboard templates.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+
+## 1.1.0
 
 * Added step to ensure all templates are [Swiftlint](https://github.com/realm/SwiftLint)'ed
   and don't violate any code style rule.  
   [Olivier Halligon](https://github.com/AliSoftware),
   h/t [AJ9](https://github.com/AJ9) in [#80](https://github.com/AliSoftware/SwiftGen/pull/80)
-
 * Added support for OSX in images, fonts and color templates.  
   [Tom Baranes](https://github.com/tbaranes),
   [#125](https://github.com/AliSoftware/SwiftGen/pull/125),
   [#126](https://github.com/AliSoftware/SwiftGen/pull/126),
   [#127](https://github.com/AliSoftware/SwiftGen/pull/127)
+* Added missing FontConvertible protocol conformance to default fonts template.  
+  [Ben Chatelain](https://github.com/phatblat) [#129](https://github.com/AliSoftware/SwiftGen/pull/129)
 
 ## 1.0.0
 
