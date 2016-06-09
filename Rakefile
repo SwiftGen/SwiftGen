@@ -274,7 +274,7 @@ namespace :release do
 
       print_info "Checking Homebrew formula..."
       sh 'brew audit --strict --online swiftgen'
-      sh 'brew install swiftgen'
+      sh 'brew upgrade swiftgen'
       sh 'brew test swiftgen'
 
       print_info "Pushing to Homebrew"

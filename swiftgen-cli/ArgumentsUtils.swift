@@ -85,9 +85,16 @@ enum TemplateError: ErrorType, CustomStringConvertible {
 }
 
 extension Path {
-  static let applicationSupport = Path(
-    NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true).first!
-  )
+  static let applicationSupport: Path = {
+    let paths = NSSearchPathForDirectoriesInDomains(
+      .ApplicationSupportDirectory,
+      .UserDomainMask, true
+    )
+    guard let path = paths.first else {
+      fatalError("Unable to locate the Application Support directory on your machine!")
+    }
+    return Path(path)
+  }()
 }
 
 let appSupportTemplatesPath = Path.applicationSupport + "SwiftGen/templates"
