@@ -38,7 +38,9 @@ public final class StringsFileParser {
     case Unknown = "Any"
 
     init?(formatChar char: Character) {
-      let lcChar = String(char).lowercaseString.characters.first!
+      guard let lcChar = String(char).lowercaseString.characters.first else {
+        return nil
+      }
       switch lcChar {
       case "@":
         self = .Object

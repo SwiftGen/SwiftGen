@@ -2,6 +2,11 @@
 
 ---
 
+## 1.1.2
+
+* Fix issue introduced by 1.1.1 in storyboard templates not returning.  
+  [Ben Chatelain](https://github.com/phatblat) [#138](https://github.com/AliSoftware/SwiftGen/pull/138)
+
 ## 1.1.1
 
 * Removed the last force-unwrap from storyboard templates.  
