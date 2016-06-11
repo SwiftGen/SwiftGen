@@ -162,12 +162,12 @@ struct StoryboardSegue {
   }
 }
 
-extension XibCollectionViewCell { static var reuseIdentifier: String { return "XibCollectionViewCellReuseID" } }
-extension CustomCollectionViewCell { static var reuseIdentifier: String { return "CustomCollectionViewCellReuseID" } }
-extension CustomMessageCell { static var reuseIdentifier: String { return "CustomMessageCellReuseID" } }
-extension StandaloneCollectionViewCell { static var reuseIdentifier: String { return "StandaloneCollectionViewCellReuseID" } }
-extension StandaloneTableViewCell { static var reuseIdentifier: String { return "StandaloneTableViewCellReuseID" } }
-extension XibTableViewCell { static var reuseIdentifier: String { return "XibTableViewCellReuseID" } }
+extension XibCollectionViewCell { public static var reuseIdentifier: String { return "XibCollectionViewCellReuseID" } }
+extension CustomCollectionViewCell { public static var reuseIdentifier: String { return "CustomCollectionViewCellReuseID" } }
+extension CustomMessageCell { public static var reuseIdentifier: String { return "CustomMessageCellReuseID" } }
+extension StandaloneCollectionViewCell { public static var reuseIdentifier: String { return "StandaloneCollectionViewCellReuseID" } }
+extension StandaloneTableViewCell { public static var reuseIdentifier: String { return "StandaloneTableViewCellReuseID" } }
+extension XibTableViewCell { public static var reuseIdentifier: String { return "XibTableViewCellReuseID" } }
 
 struct StoryboardCell {
   enum Anonymous: String, StoryboardCellType {
