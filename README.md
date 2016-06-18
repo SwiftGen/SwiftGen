@@ -9,8 +9,8 @@ SwiftGen is a suite of tools written in Swift to auto-generate Swift code (or an
 * [`enums` for your Assets Catalogs images](#uiimage-and-nsimage)
 * [`enums` for your `Localizable.strings` strings](#localizablestrings).
 * [`enums` for your Storyboards and their Scenes](#uistoryboard)
-* [`enums` for your Fonts](#uicolor-and-nscolor).
-* [`enums` for your Colors](#uifont-and-nsfont).
+* [`enums` for your Colors](#uicolor-and-nscolor).
+* [`enums` for your Fonts](#uifont-and-nsfont).
 
 ## Installation
 
