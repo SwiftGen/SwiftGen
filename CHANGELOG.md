@@ -9,6 +9,8 @@
 
 ## 1.1.2
 
+* Fix issue with txt files bailing on comments
+  [Derek Ostrander](https://github.com/dostrander), [#140](https://github.com/AliSoftware/SwiftGen/issues/140)
 * Fix issue introduced by 1.1.1 in storyboard templates not returning.  
   [Ben Chatelain](https://github.com/phatblat) [#138](https://github.com/AliSoftware/SwiftGen/pull/138)
 
