@@ -1,3 +1,5 @@
+# Hey this is a comment
+# And another one
 Cyan-Color       : 0xff66ccff
 ArticleTitle     : #33fe66
 ArticleBody      : 339666
