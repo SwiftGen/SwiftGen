@@ -4,7 +4,7 @@
 
 ## master
 
-* Fix issue with txt files bailing on comments
+* Fix issue with txt files bailing on comments  
 [Derek Ostrander](https://github.com/dostrander), [#140](https://github.com/AliSoftware/SwiftGen/issues/140)
 
 ## 1.1.2
