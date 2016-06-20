@@ -70,7 +70,7 @@ public final class ColorsTextFileParser: ColorsFileParser {
       guard scanner.scanUpToString(seperator, intoString: &key) &&
         scanner.scanString(seperator, intoString: nil) &&
         scanner.scanUpToCharactersFromSet(whitespace, intoString: &value) else {
-          break
+          continue
       }
 
       if let key: String = key?.stringByTrimmingCharactersInSet(whitespace),
