@@ -13,7 +13,7 @@ extension StoryboardSceneType {
   }
 
   static func initialController() -> AnyObject {
-    guard let controller = storyboard().instantiateInitialController() as? AnyObject
+    guard let controller = storyboard().instantiateInitialController()
     else {
       fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
     }
