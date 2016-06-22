@@ -1,6 +1,6 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
-#if os(iOS)
+#if os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIImage
   typealias Image = UIImage
 #elseif os(OSX)
