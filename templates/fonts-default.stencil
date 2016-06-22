@@ -1,7 +1,7 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
 {% if families %}
-#if os(iOS)
+#if os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIFont
   typealias Font = UIFont
 #elseif os(OSX)
