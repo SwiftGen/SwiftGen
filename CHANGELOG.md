@@ -11,7 +11,13 @@
   [#145](https://github.com/AliSoftware/SwiftGen/pull/145)
 * Added enum-based structured identifiers via `-t structured` option.
   [Cihat Gündüz](https://github.com/Dschee), [#148](https://github.com/AliSoftware/SwiftGen/pull/148)  
-
+* Added support for OSX in storyboards.  
+[Tom Baranes](https://github.com/tbaranes),
+  [#131](https://github.com/AliSoftware/SwiftGen/pull/131)
+* Stencil context for storyboard has changed a bit: `class` has been renamed into `customClass`.  
+ [Tom Baranes](https://github.com/tbaranes),
+ [#131](https://github.com/AliSoftware/SwiftGen/pull/131)
+    
 ## 1.1.2
 
 * Fix issue introduced by 1.1.1 in storyboard templates not returning.  
