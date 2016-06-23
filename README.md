@@ -322,7 +322,7 @@ initialVC.performSegue(StoryboardSegue.Message.Back)
 ## NSStoryboard
 
 ```
-swiftgen storyboards --template storyboards-osx-default.stencil /dir/to/search/for/storyboards
+swiftgen storyboards --template storyboards-osx-default /dir/to/search/for/storyboards
 ```
 
 This will generate an `enum` for each of your `NSStoryboard`, with one `case` per storyboard scene.
@@ -332,9 +332,6 @@ This will generate an `enum` for each of your `NSStoryboard`, with one `case` pe
 The generated code will look like this:
 
 ```swift
-import Foundation
-import Cocoa
-
 protocol StoryboardSceneType {
   static var storyboardName: String { get }
 }
@@ -380,38 +377,8 @@ struct StoryboardScene {
   enum Anonymous_Osx: StoryboardSceneType {
     static let storyboardName = "Anonymous-osx"
   }
-  enum Dependency_Osx: String, StoryboardSceneType {
-    static let storyboardName = "Dependency-osx"
-
-    case DependentScene = "Dependent"
-    static func instantiateDependent() -> NSViewController {
-      guard let vc = StoryboardScene.Dependency_Osx.DependentScene.controller() as? NSViewController
-      else {
-        fatalError("ViewController 'Dependent' is not of the expected class NSViewController.")
-      }
-      return vc
-    }
-  }
   enum Message_Osx: String, StoryboardSceneType {
     static let storyboardName = "Message-osx"
-
-    case MessageDetailsScene = "MessageDetails"
-    static func instantiateMessageDetails() -> NSViewController {
-      guard let vc = StoryboardScene.Message_Osx.MessageDetailsScene.controller() as? NSViewController
-      else {
-        fatalError("ViewController 'MessageDetails' is not of the expected class NSViewController.")
-      }
-      return vc
-    }
-
-    case MessageListScene = "MessageList"
-    static func instantiateMessageList() -> NSViewController {
-      guard let vc = StoryboardScene.Message_Osx.MessageListScene.controller() as? NSViewController
-      else {
-        fatalError("ViewController 'MessageList' is not of the expected class NSViewController.")
-      }
-      return vc
-    }
 
     case MessagesTabScene = "MessagesTab"
     static func instantiateMessagesTab() -> CustomTabViewController {
@@ -431,34 +398,12 @@ struct StoryboardScene {
       return vc
     }
   }
-  enum Placeholder_Osx: String, StoryboardSceneType {
-    static let storyboardName = "Placeholder-osx"
-
-    case DependentScene = "Dependent"
-    static func instantiateDependent() -> NSControllerPlaceholder {
-      guard let vc = StoryboardScene.Placeholder_Osx.DependentScene.controller() as? NSControllerPlaceholder
-      else {
-        fatalError("ViewController 'Dependent' is not of the expected class NSControllerPlaceholder.")
-      }
-      return vc
-    }
-
-    case WindowScene = "Window"
-    static func instantiateWindow() -> NSWindowController {
-      guard let vc = StoryboardScene.Placeholder_Osx.WindowScene.controller() as? NSWindowController
-      else {
-        fatalError("ViewController 'Window' is not of the expected class NSWindowController.")
-      }
-      return vc
-    }
-  }
 }
 
 struct StoryboardSegue {
   enum Message_Osx: String, StoryboardSegueType {
     case Custom = "Custom"
     case Embed = "Embed"
-    case Show = "Show"
   }
 }
 ```
@@ -469,7 +414,7 @@ struct StoryboardSegue {
 // Initial VC
 let initialVC = StoryboardScene.Message_Osx.initialController()
 // Dedicated type var that returns the right type of VC (CustomTabViewController here)
-let messageDetailsVC = StoryboardScene.Message_Osx.instantiateMessageDetails()
+let messageDetailsVC = StoryboardScene.Message_Osx.instantiateMessageTab()
 override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
     switch StoryboardSegue.Message_Osx(rawValue: segue.identifier!) {
     case .Custom:
