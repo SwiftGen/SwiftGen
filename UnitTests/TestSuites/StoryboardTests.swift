@@ -130,6 +130,17 @@ extension StoryboardTests {
     XCTDiffStrings(result, expected)
   }
 
+  func testOSXMessageStoryboardWithLowercaseTemplate() {
+    let parser = StoryboardParser()
+    parser.addStoryboardAtPath(self.fixturePath("Message-osx.storyboard"))
+
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-lowercase.stencil"))
+    let result = try! template.render(parser.stencilContext())
+
+    let expected = self.fixtureString("Storyboards-osx-Message-Lowercase.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+
   func testOSXAnonymousStoryboardWithDefaults() {
     let parser = StoryboardParser()
     parser.addStoryboardAtPath(self.fixturePath("Anonymous-osx.storyboard"))
@@ -153,15 +164,4 @@ extension StoryboardTests {
     XCTDiffStrings(result, expected)
   }
 
-//  func testOSXAllStoryboardsWithCustomName() {
-//    let parser = StoryboardParser()
-//    parser.parseDirectory(self.fixturesDir, osx: true)
-//    
-//    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
-//    let ctx = parser.stencilContext(sceneEnumName: "XCTStoryboardsScene", segueEnumName: "XCTStoryboardsSegue")
-//    let result = try! template.render(ctx)
-//    
-//    let expected = self.fixtureString("Storyboards-osx-All-CustomName.swift.out")
-//    XCTDiffStrings(result, expected)
-//  }
 }
