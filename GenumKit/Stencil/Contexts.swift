@@ -67,8 +67,8 @@ extension AssetsCatalogParser {
     - `scenes`: `Array` (absent if empty)
        - `identifier`: `String`
        - `customClass`: `String` (absent if generic UIViewController)
-       - `isBaseViewController`: `Bool`
-       - `baseType`: `String` (absent if class is a custom class)
+       - `isBaseViewController`: `Bool`, indicate if the baseType is 'viewController' or anything else
+       - `baseType`: `String` (absent if class is a custom class). The base class type on which a scene is base. Possible values include 'viewController', 'navigationController', 'tableViewController'…
     - `segues`: `Array` (absent if empty)
        - `identifier`: `String`
        - `class`: `String` (absent if generic UIStoryboardSegue)
