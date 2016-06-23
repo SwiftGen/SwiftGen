@@ -52,12 +52,16 @@ func XCTDiffStrings(result: String, _ expected: String, file: StaticString = #fi
 }
 
 extension XCTestCase {
-  var fixturesDir: String {
-    return NSBundle(forClass: self.dynamicType).resourcePath!
+  func fixturesDir(subDirectory subDir: String? = nil) -> String {
+    guard let rsrcURL = NSBundle(forClass: self.dynamicType).resourceURL else {
+      fatalError("Unable to find resource directory URL")
+    }
+    guard let dir = subDir else { return rsrcURL.path! }
+    return rsrcURL.URLByAppendingPathComponent(dir, isDirectory: true).path!
   }
 
-  func fixturePath(name: String) -> String {
-    guard let path = NSBundle(forClass: self.dynamicType).pathForResource(name, ofType: "") else {
+  func fixturePath(name: String, subDirectory: String? = nil) -> String {
+    guard let path = NSBundle(forClass: self.dynamicType).pathForResource(name, ofType: "", inDirectory: subDirectory) else {
       fatalError("Unable to find fixture \"\(name)\"")
     }
     return path

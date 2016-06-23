@@ -68,7 +68,8 @@ extension AssetsCatalogParser {
        - `identifier`: `String`
        - `customClass`: `String` (absent if generic UIViewController)
        - `isBaseViewController`: `Bool`, indicate if the baseType is 'viewController' or anything else
-       - `baseType`: `String` (absent if class is a custom class). The base class type on which a scene is base. Possible values include 'viewController', 'navigationController', 'tableViewController'…
+       - `baseType`: `String` (absent if class is a custom class). The base class type on which a scene is base.
+          Possible values include 'viewController', 'navigationController', 'tableViewController'…
     - `segues`: `Array` (absent if empty)
        - `identifier`: `String`
        - `class`: `String` (absent if generic UIStoryboardSegue)
@@ -84,7 +85,11 @@ extension StoryboardParser {
           .sort({$0.storyboardID < $1.storyboardID})
           .map { (scene: Scene) -> [String:AnyObject] in
             if scene.customClass == nil && scene.tag == "viewController" {
-              return ["identifier": scene.storyboardID, "baseType": uppercaseFirst(scene.tag), "isBaseViewController": true]
+              return [
+                "identifier": scene.storyboardID,
+                "baseType": uppercaseFirst(scene.tag),
+                "isBaseViewController": true
+              ]
             } else if scene.customClass == nil {
                 return ["identifier": scene.storyboardID, "baseType": uppercaseFirst(scene.tag)]
             } else if let customClass = scene.customClass {
