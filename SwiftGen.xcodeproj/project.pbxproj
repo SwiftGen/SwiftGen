@@ -85,6 +85,10 @@
 		EFFE62F81C27081A00FE9783 /* Dependency.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFFE62F71C27081A00FE9783 /* Dependency.storyboard */; };
 		F24DA0455755C4EC4F1DDD96 /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC28A16A3F1852C832A3B47E /* Pods_swiftgen.framework */; };
 		F4705617D891407B43B021A3 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5E15CBE3901E2C7C3240E93 /* Pods_UnitTests.framework */; };
+		F87FF1AB1D0460D60001ACED /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1AA1D0460D60001ACED /* TableViewCell.xib */; };
+		F87FF1AF1D047D0D0001ACED /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1AE1D047D0D0001ACED /* CollectionViewCell.xib */; };
+		F87FF1B31D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1B21D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out */; };
+		F87FF1B61D0516840001ACED /* Xibs-CollectionViewCell-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = F87FF1B51D0516840001ACED /* Xibs-CollectionViewCell-Defaults.swift.out */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -117,6 +121,16 @@
 			outputFiles = (
 			);
 			script = "";
+		};
+		F87FF1AD1D0479520001ACED /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.pbxcp;
+			filePatterns = "*.xib";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# ibtool\n";
 		};
 /* End PBXBuildRule section */
 
@@ -220,6 +234,10 @@
 		E5E15CBE3901E2C7C3240E93 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFFE62F31C27073700FE9783 /* Placeholder.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Placeholder.storyboard; sourceTree = "<group>"; };
 		EFFE62F71C27081A00FE9783 /* Dependency.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dependency.storyboard; sourceTree = "<group>"; };
+		F87FF1AA1D0460D60001ACED /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		F87FF1AE1D047D0D0001ACED /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
+		F87FF1B21D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Xibs-TableViewCell-Defaults.swift.out"; sourceTree = "<group>"; };
+		F87FF1B51D0516840001ACED /* Xibs-CollectionViewCell-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Xibs-CollectionViewCell-Defaults.swift.out"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +337,8 @@
 				09030C241B6D48FC00275BF5 /* Localizable.strings */,
 				09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */,
 				47CB53291CFC0B2100AA19C0 /* Fonts */,
+				F87FF1AE1D047D0D0001ACED /* CollectionViewCell.xib */,
+				F87FF1AA1D0460D60001ACED /* TableViewCell.xib */,
 			);
 			path = fixtures;
 			sourceTree = "<group>";
@@ -402,6 +422,8 @@
 				09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */,
 				47CB533C1CFC170E00AA19C0 /* Storyboards-Anonymous-Swift3.swift.out */,
 				47CB533D1CFC170E00AA19C0 /* Storyboards-Wizard-Swift3.swift.out */,
+				F87FF1B51D0516840001ACED /* Xibs-CollectionViewCell-Defaults.swift.out */,
+				F87FF1B21D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -505,6 +527,7 @@
 				09A87B721BCCA60900D9B9F5 /* PBXBuildRule */,
 				09A87B6B1BCCA52400D9B9F5 /* PBXBuildRule */,
 				09A87B6A1BCCA50000D9B9F5 /* PBXBuildRule */,
+				F87FF1AD1D0479520001ACED /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -563,18 +586,22 @@
 				470A14EB1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Default.swift.out in Resources */,
 				47CB53371CFC0B2100AA19C0 /* SFNSText-Heavy.otf in Resources */,
 				C24AFD0E1C924A29005FE3EF /* Fonts-Dir-CustomName.swift.out in Resources */,
+				C24AFD0E1C924A29005FE3EF /* Fonts-File-CustomName.swift.out in Resources */,
+				F87FF1AB1D0460D60001ACED /* TableViewCell.xib in Resources */,
 				C2265B591C8907CA00CA5C4F /* colors.json in Resources */,
 				C25A54341CEE7CEB00401BE5 /* Colors-Txt-File-CustomName.swift.out in Resources */,
 				09A87B671BCCA4E600D9B9F5 /* colors.txt in Resources */,
 				091150361BD3274E00EBC803 /* images-default.stencil in Resources */,
 				47CB533F1CFC170E00AA19C0 /* Storyboards-Wizard-Swift3.swift.out in Resources */,
 				470A14E71BEA691E0052EAC8 /* images-allvalues.stencil in Resources */,
+				F87FF1B31D04A2090001ACED /* Xibs-TableViewCell-Defaults.swift.out in Resources */,
 				09EB0A1A1BDC3AC400B2CF79 /* strings-default.stencil in Resources */,
 				09EB0A291BDC60F000B2CF79 /* Colors-List-Default.swift.out in Resources */,
 				09A87B701BCCA5F600D9B9F5 /* Strings-Lines-Default.swift.out in Resources */,
 				47CB53331CFC0B2100AA19C0 /* SFNSDisplay-Bold.otf in Resources */,
 				4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */,
 				EFFE62F81C27081A00FE9783 /* Dependency.storyboard in Resources */,
+				F87FF1AF1D047D0D0001ACED /* CollectionViewCell.xib in Resources */,
 				09A87B5E1BCCA4D100D9B9F5 /* Message.storyboard in Resources */,
 				09A87B641BCCA4DC00D9B9F5 /* Images.xcassets in Resources */,
 				C24AFD041C92370D005FE3EF /* fonts-default.stencil in Resources */,
@@ -587,6 +614,9 @@
 				0911503B1BD3ECAE00EBC803 /* colors-default.stencil in Resources */,
 				09A87B6D1BCCA5F600D9B9F5 /* Strings-File-Default.swift.out in Resources */,
 				09EB0A2A1BDC60F000B2CF79 /* Images-Entries-Default.swift.out in Resources */,
+				F87FF1B61D0516840001ACED /* Xibs-CollectionViewCell-Defaults.swift.out in Resources */,
+				09A87B6D1BCCA5F600D9B9F5 /* Strings-File-Defaults.swift.out in Resources */,
+				09EB0A2A1BDC60F000B2CF79 /* Images-Entries-Defaults.swift.out in Resources */,
 				09A87B6E1BCCA5F600D9B9F5 /* Strings-File-CustomName.swift.out in Resources */,
 				4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */,
 				4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */,

@@ -30,10 +30,25 @@ extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == Str
 }
 
 protocol StoryboardSegueType: RawRepresentable { }
+protocol StoryboardCellType: RawRepresentable { }
 
 extension UIViewController {
   func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
+extension UITableView {
+  func dequeueReusableCellWithIdentifier<C: StoryboardCellType where C.RawValue == String>(identifier: C,
+      forIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    return dequeueReusableCellWithIdentifier(identifier.rawValue, forIndexPath: indexPath)
+  }
+}
+
+extension UICollectionView {
+  func dequeueReusableCellWithReuseIdentifier<C: StoryboardCellType where C.RawValue == String>(identifier: C,
+      forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    return dequeueReusableCellWithReuseIdentifier(identifier.rawValue, forIndexPath: indexPath)
   }
 }
 
@@ -81,5 +96,19 @@ struct StoryboardSegue {
     case Embed = "Embed"
     case NonCustom = "NonCustom"
     case Show_NavCtrl = "Show-NavCtrl"
+  }
+}
+
+extension CustomCollectionViewCell { public static var reuseIdentifier: String { return "CustomCollectionViewCellReuseID" } }
+extension CustomMessageCell { public static var reuseIdentifier: String { return "CustomMessageCellReuseID" } }
+extension StandaloneCollectionViewCell { public static var reuseIdentifier: String { return "StandaloneCollectionViewCellReuseID" } }
+extension StandaloneTableViewCell { public static var reuseIdentifier: String { return "StandaloneTableViewCellReuseID" } }
+
+struct StoryboardCell {
+  enum Message: String, StoryboardCellType {
+    case CustomCollectionViewCellReuseID = "CustomCollectionViewCellReuseID"
+    case CustomMessageCellReuseID = "CustomMessageCellReuseID"
+    case StandaloneCollectionViewCellReuseID = "StandaloneCollectionViewCellReuseID"
+    case StandaloneTableViewCellReuseID = "StandaloneTableViewCellReuseID"
   }
 }

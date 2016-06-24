@@ -53,17 +53,18 @@ extension UICollectionView {
 }
 
 struct StoryboardScene {
-  enum Anonymous: StoryboardSceneType {
-    static let storyboardName = "Anonymous"
+  enum TableViewCell: StoryboardSceneType {
+    static let storyboardName = "TableViewCell"
   }
 }
 
 struct StoryboardSegue {
 }
 
+extension XibTableViewCell { public static var reuseIdentifier: String { return "XibTableViewCellReuseID" } }
 
 struct StoryboardCell {
-  enum Anonymous: String, StoryboardCellType {
-    case ReuseCellID = "ReuseCellID"
+  enum TableViewCell: String, StoryboardCellType {
+    case XibTableViewCellReuseID = "XibTableViewCellReuseID"
   }
 }

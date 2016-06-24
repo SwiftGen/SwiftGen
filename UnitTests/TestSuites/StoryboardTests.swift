@@ -75,7 +75,7 @@ class StoryboardTests: XCTestCase {
     parser.parseDirectory(self.fixturesDir)
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
-    let ctx = parser.stencilContext(sceneEnumName: "XCTStoryboardsScene", segueEnumName: "XCTStoryboardsSegue")
+    let ctx = parser.stencilContext(sceneEnumName: "XCTStoryboardsScene", segueEnumName: "XCTStoryboardsSegue", cellEnumName: "XCTStoryboardsCell")
     let result = try! template.render(ctx)
 
     let expected = self.fixtureString("Storyboards-All-CustomName.swift.out")
@@ -101,6 +101,30 @@ class StoryboardTests: XCTestCase {
     let result = try! template.render(parser.stencilContext())
         
     let expected = self.fixtureString("Storyboards-Anonymous-Swift3.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+
+  func testTableViewCellXibWithDefaults() {
+    let parser = StoryboardParser()
+    parser.addStoryboardAtPath(self.fixturePath("TableViewCell.xib"))
+
+    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
+    let ctx = parser.stencilContext()
+    let result = try! template.render(ctx)
+
+    let expected = self.fixtureString("Xibs-TableViewCell-Defaults.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+
+  func testCollectionViewCellXibWithDefaults() {
+    let parser = StoryboardParser()
+    parser.addStoryboardAtPath(self.fixturePath("CollectionViewCell.xib"))
+
+    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
+    let ctx = parser.stencilContext()
+    let result = try! template.render(ctx)
+
+    let expected = self.fixtureString("Xibs-CollectionViewCell-Defaults.swift.out")
     XCTDiffStrings(result, expected)
   }
 }

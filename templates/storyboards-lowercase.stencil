@@ -31,10 +31,25 @@ extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == Str
 }
 
 protocol StoryboardSegueType: RawRepresentable { }
+protocol StoryboardCellType: RawRepresentable { }
 
 extension UIViewController {
   func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
+extension UITableView {
+  func dequeueReusableCellWithIdentifier<C: StoryboardCellType where C.RawValue == String>(identifier: C,
+      forIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    return dequeueReusableCellWithIdentifier(identifier.rawValue, forIndexPath: indexPath)
+  }
+}
+
+extension UICollectionView {
+  func dequeueReusableCellWithReuseIdentifier<C: StoryboardCellType where C.RawValue == String>(identifier: C,
+      forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    return dequeueReusableCellWithReuseIdentifier(identifier.rawValue, forIndexPath: indexPath)
   }
 }
 
@@ -78,6 +93,16 @@ struct {{segueEnumName}} {
   enum {{storyboard.name|swiftIdentifier}}: String, StoryboardSegueType {
     {% for segue in storyboard.segues %}
     case {{segue.identifier|swiftIdentifier}} = "{{segue.identifier}}"
+    {% endfor %}
+  }
+  {% endif %}{% endfor %}
+}
+
+struct {{cellEnumName}} {
+  {% for storyboard in storyboards %}{% if storyboard.cells %}
+  enum {{storyboard.name|swiftIdentifier}}: String, StoryboardCellType {
+    {% for cell in storyboard.cells %}
+    case {{cell.identifier|swiftIdentifier}} = "{{cell.identifier}}"
     {% endfor %}
   }
   {% endif %}{% endfor %}

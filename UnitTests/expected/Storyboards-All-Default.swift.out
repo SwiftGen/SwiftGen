@@ -30,6 +30,7 @@ extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == Str
 }
 
 protocol StoryboardSegueType: RawRepresentable { }
+protocol StoryboardCellType: RawRepresentable { }
 
 extension UIViewController {
   func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
@@ -37,9 +38,26 @@ extension UIViewController {
   }
 }
 
+extension UITableView {
+  func dequeueReusableCellWithIdentifier<C: StoryboardCellType where C.RawValue == String>(identifier: C,
+      forIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    return dequeueReusableCellWithIdentifier(identifier.rawValue, forIndexPath: indexPath)
+  }
+}
+
+extension UICollectionView {
+  func dequeueReusableCellWithReuseIdentifier<C: StoryboardCellType where C.RawValue == String>(identifier: C,
+      forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    return dequeueReusableCellWithReuseIdentifier(identifier.rawValue, forIndexPath: indexPath)
+  }
+}
+
 struct StoryboardScene {
   enum Anonymous: StoryboardSceneType {
     static let storyboardName = "Anonymous"
+  }
+  enum CollectionViewCell: StoryboardSceneType {
+    static let storyboardName = "CollectionViewCell"
   }
   enum Dependency: String, StoryboardSceneType {
     static let storyboardName = "Dependency"
@@ -96,6 +114,9 @@ struct StoryboardScene {
       return vc
     }
   }
+  enum TableViewCell: StoryboardSceneType {
+    static let storyboardName = "TableViewCell"
+  }
   enum Wizard: String, StoryboardSceneType {
     static let storyboardName = "Wizard"
 
@@ -138,5 +159,33 @@ struct StoryboardSegue {
   }
   enum Wizard: String, StoryboardSegueType {
     case ShowPassword = "ShowPassword"
+  }
+}
+
+extension XibCollectionViewCell { public static var reuseIdentifier: String { return "XibCollectionViewCellReuseID" } }
+extension CustomCollectionViewCell { public static var reuseIdentifier: String { return "CustomCollectionViewCellReuseID" } }
+extension CustomMessageCell { public static var reuseIdentifier: String { return "CustomMessageCellReuseID" } }
+extension StandaloneCollectionViewCell { public static var reuseIdentifier: String { return "StandaloneCollectionViewCellReuseID" } }
+extension StandaloneTableViewCell { public static var reuseIdentifier: String { return "StandaloneTableViewCellReuseID" } }
+extension XibTableViewCell { public static var reuseIdentifier: String { return "XibTableViewCellReuseID" } }
+
+struct StoryboardCell {
+  enum Anonymous: String, StoryboardCellType {
+    case ReuseCellID = "ReuseCellID"
+  }
+  enum CollectionViewCell: String, StoryboardCellType {
+    case XibCollectionViewCellReuseID = "XibCollectionViewCellReuseID"
+  }
+  enum Message: String, StoryboardCellType {
+    case CustomCollectionViewCellReuseID = "CustomCollectionViewCellReuseID"
+    case CustomMessageCellReuseID = "CustomMessageCellReuseID"
+    case StandaloneCollectionViewCellReuseID = "StandaloneCollectionViewCellReuseID"
+    case StandaloneTableViewCellReuseID = "StandaloneTableViewCellReuseID"
+  }
+  enum TableViewCell: String, StoryboardCellType {
+    case XibTableViewCellReuseID = "XibTableViewCellReuseID"
+  }
+  enum Wizard: String, StoryboardCellType {
+    case PrefCell = "PrefCell"
   }
 }
