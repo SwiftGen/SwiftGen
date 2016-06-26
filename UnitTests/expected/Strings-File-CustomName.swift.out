@@ -15,6 +15,10 @@ enum XCTLoc {
   case BananasOwner(Int, String)
   /// These are %3$@'s %1$d %2$@.
   case ObjectOwnership(Int, String, String)
+  /// Settings
+  case SettingsNavigationBarTitle
+  /// User Profile Settings
+  case SETTINGSUSERPROFILESECTIONHEADERTITLE
 }
 
 extension XCTLoc: CustomStringConvertible {
@@ -34,6 +38,10 @@ extension XCTLoc: CustomStringConvertible {
         return XCTLoc.tr("bananas.owner", p0, p1)
       case .ObjectOwnership(let p0, let p1, let p2):
         return XCTLoc.tr("object.ownership", p0, p1, p2)
+      case .SettingsNavigationBarTitle:
+        return XCTLoc.tr("settings.navigation-bar.title")
+      case .SETTINGSUSERPROFILESECTIONHEADERTITLE:
+        return XCTLoc.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
     }
   }
 
