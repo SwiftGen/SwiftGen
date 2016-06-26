@@ -19,6 +19,8 @@ enum XCTLoc {
   case SettingsNavigationBarTitle
   /// User Profile Settings
   case SETTINGSUSERPROFILESECTIONHEADERTITLE
+  /// Here you can change some user profile settings.
+  case SeTTingsUSerProFileSectioNFooterText
 }
 
 extension XCTLoc: CustomStringConvertible {
@@ -42,6 +44,8 @@ extension XCTLoc: CustomStringConvertible {
         return XCTLoc.tr("settings.navigation-bar.title")
       case .SETTINGSUSERPROFILESECTIONHEADERTITLE:
         return XCTLoc.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
+      case .SeTTingsUSerProFileSectioNFooterText:
+        return XCTLoc.tr("seTTings.uSer-proFile-sectioN.footer_text")
     }
   }
 
