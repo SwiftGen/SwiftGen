@@ -5,7 +5,7 @@ public struct Lexer {
     self.templateString = templateString
   }
 
-  func createToken(string:String) -> Token {
+  func createToken(string: String) -> Token {
     func strip() -> String {
       return string[string.startIndex.successor().successor()..<string.endIndex.predecessor().predecessor()].trim(" ")
     }

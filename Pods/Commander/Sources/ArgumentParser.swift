@@ -1,4 +1,4 @@
-private enum Arg : CustomStringConvertible {
+private enum Arg: CustomStringConvertible {
   /// A positional argument
   case Argument(String)
 
@@ -8,7 +8,7 @@ private enum Arg : CustomStringConvertible {
   /// A flag
   case Flag(Set<Character>)
 
-  var description:String {
+  var description: String {
     switch self {
     case .Argument(let value):
       return value
@@ -19,7 +19,7 @@ private enum Arg : CustomStringConvertible {
     }
   }
 
-  var type:String {
+  var type: String {
     switch self {
     case .Argument:
       return "argument"
@@ -32,7 +32,7 @@ private enum Arg : CustomStringConvertible {
 }
 
 
-public struct ArgumentParserError : ErrorType, Equatable, CustomStringConvertible {
+public struct ArgumentParserError: ErrorType, Equatable, CustomStringConvertible {
   public let description: String
 
   public init(_ description: String) {
@@ -46,8 +46,8 @@ public func ==(lhs: ArgumentParserError, rhs: ArgumentParserError) -> Bool {
 }
 
 
-public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible {
-  private var arguments:[Arg]
+public final class ArgumentParser: ArgumentConvertible, CustomStringConvertible {
+  private var arguments: [Arg]
 
   /// Initialises the ArgumentParser with an array of arguments
   public init(arguments: [String]) {
@@ -71,15 +71,15 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
     arguments = parser.arguments
   }
 
-  public var description:String {
+  public var description: String {
     return arguments.map { $0.description }.joinWithSeparator(" ")
   }
 
-  public var isEmpty:Bool {
+  public var isEmpty: Bool {
     return arguments.isEmpty
   }
 
-  public var remainder:[String] {
+  public var remainder: [String] {
     return arguments.map { $0.description }
   }
 
@@ -100,12 +100,12 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
   }
 
   /// Returns the value for an option (--name Kyle, --name=Kyle)
-  public func shiftValueForOption(name:String) throws -> String? {
+  public func shiftValueForOption(name: String) throws -> String? {
     return try shiftValuesForOption(name)?.first
   }
 
   /// Returns the value for an option (--name Kyle, --name=Kyle)
-  public func shiftValuesForOption(name:String, count:Int = 1) throws -> [String]? {
+  public func shiftValuesForOption(name: String, count: Int = 1) throws -> [String]? {
     var index = 0
     var hasOption = false
 
@@ -147,7 +147,7 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
   }
 
   /// Returns whether an option was specified in the arguments
-  public func hasOption(name:String) -> Bool {
+  public func hasOption(name: String) -> Bool {
     var index = 0
     for argument in arguments {
       switch argument {
@@ -167,7 +167,7 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
   }
 
   /// Returns whether a flag was specified in the arguments
-  public func hasFlag(flag:Character) -> Bool {
+  public func hasFlag(flag: Character) -> Bool {
     var index = 0
     for argument in arguments {
       switch argument {
@@ -193,12 +193,12 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
   }
 
   /// Returns the value for a flag (-n Kyle)
-  public func shiftValueForFlag(flag:Character) throws -> String? {
+  public func shiftValueForFlag(flag: Character) throws -> String? {
     return try shiftValuesForFlag(flag)?.first
   }
 
   /// Returns the value for a flag (-n Kyle)
-  public func shiftValuesForFlag(flag:Character, count:Int = 1) throws -> [String]? {
+  public func shiftValuesForFlag(flag: Character, count: Int = 1) throws -> [String]? {
     var index = 0
     var hasFlag = false
 

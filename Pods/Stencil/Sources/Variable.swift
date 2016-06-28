@@ -1,7 +1,7 @@
 import Foundation
 
 
-class FilterExpression : Resolvable {
+class FilterExpression: Resolvable {
   let filters: [Filter]
   let variable: Variable
 
@@ -34,7 +34,7 @@ class FilterExpression : Resolvable {
 }
 
 /// A structure used to represent a template variable, and to resolve it in a given context.
-public struct Variable : Equatable, Resolvable {
+public struct Variable: Equatable, Resolvable {
   public let variable: String
 
   /// Create a variable with a string representing the variable

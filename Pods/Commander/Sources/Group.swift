@@ -1,4 +1,4 @@
-public enum GroupError : ErrorType, Equatable, CustomStringConvertible {
+public enum GroupError: ErrorType, Equatable, CustomStringConvertible {
   /// No-subcommand was found with the given name
   case UnknownCommand(String)
 
@@ -7,7 +7,7 @@ public enum GroupError : ErrorType, Equatable, CustomStringConvertible {
   /// :param: The group raising the error
   case NoCommand(String?, Group)
 
-  public var description:String {
+  public var description: String {
     switch self {
     case .UnknownCommand(let name):
       return "Unknown command: `\(name)`"
@@ -34,7 +34,7 @@ public func == (lhs: GroupError, rhs: GroupError) -> Bool {
 }
 
 /// Represents a group of commands
-public class Group : CommandType {
+public class Group: CommandType {
   struct SubCommand {
     let name: String
     let description: String?

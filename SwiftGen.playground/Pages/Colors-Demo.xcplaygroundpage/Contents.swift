@@ -16,7 +16,7 @@ extension UIColor {
         let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0
         let blue  = CGFloat((rgbaValue >>  8) & 0xff) / 255.0
         let alpha = CGFloat((rgbaValue      ) & 0xff) / 255.0
-        
+
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 }
@@ -37,7 +37,7 @@ enum ColorName {
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
     /// Alpha: 80% <br/> (0xffffffcc)
     case Translucent
-    
+
     var rgbaValue: UInt32 {
         switch self {
         case .ArticleBody: return 0x339666ff
@@ -47,7 +47,7 @@ enum ColorName {
         case .Translucent: return 0xffffffcc
         }
     }
-    
+
     var color: UIColor {
         return UIColor(named: self)
     }

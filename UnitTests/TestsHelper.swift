@@ -7,7 +7,7 @@
 import Foundation
 import XCTest
 
-private let colorCode: String -> String = NSProcessInfo().environment["XcodeColors"] == "YES" ?  { "\u{001b}[\($0);" } : { _ in "" }
+private let colorCode: String -> String = NSProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
 private let (msgColor, reset) = (colorCode("fg250,0,0"), colorCode(""))
 private let okCode = (num: colorCode("fg127,127,127"), code: colorCode(""))
 private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"), code: colorCode("fg250,250,250") + colorCode("bg127,0,0"))
@@ -67,7 +67,7 @@ extension XCTestCase {
     return path
   }
 
-  func directoryPath() -> String  {
+  func directoryPath() -> String {
     guard let path = NSBundle(forClass: self.dynamicType).resourcePath else {
       fatalError("Unable to get test bundle resource path")
     }

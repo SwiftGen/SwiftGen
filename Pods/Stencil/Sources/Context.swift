@@ -1,9 +1,9 @@
 /// A container for template variables.
 public class Context {
-  var dictionaries:[[String: Any]]
+  var dictionaries: [[String: Any]]
 
   /// Initialise a Context with a dictionary
-  public init(dictionary:[String: Any]) {
+  public init(dictionary: [String: Any]) {
     dictionaries = [dictionary]
   }
 

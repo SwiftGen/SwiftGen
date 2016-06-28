@@ -1,4 +1,4 @@
-public enum ArgumentError : ErrorType, Equatable, CustomStringConvertible {
+public enum ArgumentError: ErrorType, Equatable, CustomStringConvertible {
   case MissingValue(argument: String?)
 
   /// Value is not convertible to type
@@ -7,7 +7,7 @@ public enum ArgumentError : ErrorType, Equatable, CustomStringConvertible {
   /// Unused Argument
   case UnusedArgument(String)
 
-  public var description:String {
+  public var description: String {
     switch self {
     case .MissingValue(let key):
       if let key = key {
@@ -40,7 +40,7 @@ public func == (lhs: ArgumentError, rhs: ArgumentError) -> Bool {
 }
 
 
-public protocol ArgumentConvertible : CustomStringConvertible {
+public protocol ArgumentConvertible: CustomStringConvertible {
   /// Initialise the type with an ArgumentParser
   init(parser: ArgumentParser) throws
 }
@@ -54,7 +54,7 @@ extension String : ArgumentConvertible, CustomStringConvertible {
     }
   }
 
-  public var description:String {
+  public var description: String {
     return self
   }
 }

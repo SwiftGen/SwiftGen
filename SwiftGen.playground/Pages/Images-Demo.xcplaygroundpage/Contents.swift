@@ -15,7 +15,7 @@ import UIKit
 enum Asset: String {
     case Apple = "Apple"
     case Banana = "Banana"
-    
+
     var image: UIImage {
         return UIImage(asset: self)
     }

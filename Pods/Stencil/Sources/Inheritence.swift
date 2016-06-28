@@ -26,7 +26,7 @@ extension CollectionType {
 }
 
 
-class ExtendsNode : NodeType {
+class ExtendsNode: NodeType {
   let templateName: Variable
   let blocks: [String:BlockNode]
 
@@ -44,7 +44,7 @@ class ExtendsNode : NodeType {
 
     let blockNodes = parsedNodes.filter { node in node is BlockNode }
 
-    let nodes = blockNodes.reduce([String:BlockNode]()) { (accumulator, node:NodeType) -> [String:BlockNode] in
+    let nodes = blockNodes.reduce([String:BlockNode]()) { (accumulator, node: NodeType) -> [String:BlockNode] in
       let node = (node as! BlockNode)
       var dict = accumulator
       dict[node.name] = node
@@ -69,7 +69,7 @@ class ExtendsNode : NodeType {
     }
 
     guard let template = loader.loadTemplate(templateName) else {
-      let paths:String = loader.paths.map { $0.description }.joinWithSeparator(", ")
+      let paths: String = loader.paths.map { $0.description }.joinWithSeparator(", ")
       throw TemplateSyntaxError("'\(templateName)' template not found in \(paths)")
     }
 
@@ -82,7 +82,7 @@ class ExtendsNode : NodeType {
 }
 
 
-class BlockNode : NodeType {
+class BlockNode: NodeType {
   let name: String
   let nodes: [NodeType]
 

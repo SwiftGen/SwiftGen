@@ -26,7 +26,7 @@ public struct Path {
   }
 
   /// Create a Path by joining multiple path components together
-  public init<S : CollectionType where S.Generator.Element == String>(components: S) {
+  public init<S: CollectionType where S.Generator.Element == String>(components: S) {
     if components.isEmpty {
       path = "."
     } else if components.first == Path.separator && components.count > 1 {
@@ -544,7 +544,7 @@ extension Path {
 extension Path : SequenceType {
   /// Enumerates the contents of a directory, returning the paths of all files and directories
   /// contained within that directory. These paths are relative to the directory.
-  public struct DirectoryEnumerator : GeneratorType {
+  public struct DirectoryEnumerator: GeneratorType {
     public typealias Element = Path
 
     let path: Path
