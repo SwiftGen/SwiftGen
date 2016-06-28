@@ -152,7 +152,14 @@ extension StringsFileParser {
     let strings = entries.map { entryToStringMapper($0, []) }
     let structuredStrings = structure(entries, mapper: entryToStringMapper)
 
-    return Context(dictionary: ["enumName": enumName, "tableName": tableName, "strings": strings, "structuredStrings": structuredStrings])
+    return Context(dictionary:
+      [
+        "enumName": enumName,
+        "tableName": tableName,
+        "strings": strings,
+        "structuredStrings": structuredStrings
+      ]
+    )
   }
 
   private func normalize(string: String) -> String {
@@ -160,11 +167,15 @@ extension StringsFileParser {
     return components.map { $0.capitalizedString }.joinWithSeparator("")
   }
 
-  private func structure(entries: [Entry], keyPath: [String] = [], mapper: (Entry, [String]) -> [String: AnyObject]) -> [String: AnyObject] {
+  typealias Mapper = (entry: Entry, keyPath: [String]) -> [String: AnyObject]
+  private func structure(entries: [Entry], keyPath: [String] = [], mapper: Mapper) -> [String: AnyObject] {
 
     var structuredStrings: [String: AnyObject] = [:]
 
-    let strings = entries.filter { $0.keyStructure.count == keyPath.count+1 }.map { mapper($0, keyPath) }
+    let strings = entries
+      .filter { $0.keyStructure.count == keyPath.count+1 }
+      .map { mapper(entry: $0, keyPath: keyPath) }
+
     if !strings.isEmpty {
       structuredStrings["strings"] = strings
     }
@@ -174,15 +185,24 @@ extension StringsFileParser {
     }
 
     var subenums: [[String: AnyObject]] = []
-    var nextLevelKeyPaths: [[String]] = entries.filter { $0.keyStructure.count > keyPath.count+1 }.map { Array($0.keyStructure.prefix(keyPath.count+1)) }
+    let nextLevelKeyPaths: [[String]] = entries
+      .filter({ $0.keyStructure.count > keyPath.count+1 })
+      .map({ Array($0.keyStructure.prefix(keyPath.count+1)) })
 
     // make key paths unique
-    nextLevelKeyPaths = Array(Set(nextLevelKeyPaths.map { keyPath in
-        keyPath.map { $0.capitalizedString.stringByReplacingOccurrencesOfString("-", withString: "_") }.joinWithSeparator(".")
-    })).sort().map { $0.componentsSeparatedByString(".") }
+    let uniqueNextLevelKeyPaths = Array(Set(
+      nextLevelKeyPaths.map { keyPath in
+        keyPath.map({
+          $0.capitalizedString.stringByReplacingOccurrencesOfString("-", withString: "_")
+        }).joinWithSeparator(".")
+      }))
+      .sort()
+      .map { $0.componentsSeparatedByString(".") }
 
-    for nextLevelKeyPath in nextLevelKeyPaths {
-      let entriesInKeyPath = entries.filter { Array($0.keyStructure.map(normalize).prefix(nextLevelKeyPath.count)) == nextLevelKeyPath.map(normalize) }
+    for nextLevelKeyPath in uniqueNextLevelKeyPaths {
+      let entriesInKeyPath = entries.filter {
+        Array($0.keyStructure.map(normalize).prefix(nextLevelKeyPath.count)) == nextLevelKeyPath.map(normalize)
+      }
       subenums.append(structure(entriesInKeyPath, keyPath: nextLevelKeyPath, mapper: mapper))
     }
 
