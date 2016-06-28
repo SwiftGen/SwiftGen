@@ -599,8 +599,6 @@
 				09EB0A291BDC60F000B2CF79 /* Colors-List-Default.swift.out in Resources */,
 				09A87B701BCCA5F600D9B9F5 /* Strings-Lines-Default.swift.out in Resources */,
 				820D84B01D1F9D6C00504948 /* strings-structured.stencil in Resources */,
-				E2679A491D044D3F00D3F55B /* Storyboards-osx-All-CustomName.swift.out in Resources */,
-				E28EBB141D05209D009CBA13 /* Anonymous.storyboard in Resources */,
 				47CB53331CFC0B2100AA19C0 /* SFNSDisplay-Bold.otf in Resources */,
 				E29942C11D1C640A002A29C4 /* storyboards-osx-lowercase.stencil in Resources */,
 				4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */,

@@ -2,21 +2,28 @@
 
 ---
 
-## master
+## 2.0.0
 
-* Fix issue with txt files bailing on comments  
-[Derek Ostrander](https://github.com/dostrander), [#140](https://github.com/AliSoftware/SwiftGen/issues/140)
+* Fix issue with txt files bailing on comments.  
+  [Derek Ostrander](https://github.com/dostrander), [#140](https://github.com/AliSoftware/SwiftGen/issues/140)
 * Added support for tvOS and watchOS in images, fonts and color templates.  
-[Tom Baranes](https://github.com/tbaranes),
+  [Tom Baranes](https://github.com/tbaranes),
   [#145](https://github.com/AliSoftware/SwiftGen/pull/145)
-* Added enum-based structured identifiers via `-t structured` option.
+* Added enum-based structured identifiers via `-t structured` option.  
   [Cihat Gündüz](https://github.com/Dschee), [#148](https://github.com/AliSoftware/SwiftGen/pull/148)  
 * Added support for OSX in storyboards.  
-[Tom Baranes](https://github.com/tbaranes),
+  [Tom Baranes](https://github.com/tbaranes),
   [#131](https://github.com/AliSoftware/SwiftGen/pull/131)
-* Stencil context for storyboard has changed a bit: `class` has been renamed into `customClass`.  
- [Tom Baranes](https://github.com/tbaranes),
- [#131](https://github.com/AliSoftware/SwiftGen/pull/131)
+
+Note: The `Stencil` context keys (the name of the variables used in templates) for storyboard has changed a bit.
+Especially, `class` has been renamed into `customClass` (see [#131](https://github.com/AliSoftware/SwiftGen/pull/131))
+to better describe the intent (as this isn't defined if there is no _custom_ class set in the Storyboard), and
+new keys `isBaseViewController` and `baseType` has been added.
+
+This means that if you did implement your own custom templates for storyboards (instead of using the bundled ones),
+you'll have to remplace `{{class}}` by `{{customClass}}` in those storyboard templates, otherwise they'll probably
+stop working as expected. That's the main reason why the version has been bumped to a major version 2.0.0. 
+  
     
 ## 1.1.2
 
