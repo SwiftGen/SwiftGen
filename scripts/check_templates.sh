@@ -4,7 +4,7 @@
 #   XXPickerViewController and CreateAccViewController dummy VC subclasses to be able to compile.
 #
 # Once we find a clean way to resolve those limitation, we could reactivate the script.
-# You could also temporarly activate th script and ignore the errors listed above to check if those
+# You could also temporarly activate the script and ignore the errors listed above to check if those
 #   are the only errors or if we introduced unrelated errors that needs to be fixed
 exit 0
 
