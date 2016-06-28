@@ -27,6 +27,8 @@ enum L10n {
       case HeaderTitle
       /// Here you can change some user profile settings.
       case FooterText
+      /// Welcome %@! You have %d points on your account.
+      case Points(String, Int)
     }
   }
 }
@@ -60,6 +62,8 @@ extension L10n: CustomStringConvertible {
                 return L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
               case .FooterText:
                 return L10n.tr("seTTings.uSer-proFile-sectioN.footer_text")
+              case .Points(let p0, let p1):
+                return L10n.tr("settings.user_profile_section.points", p0, p1)
             }
         }
     }
