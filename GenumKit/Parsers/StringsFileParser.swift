@@ -66,6 +66,9 @@ public final class StringsFileParser {
 
   public struct Entry {
     let key: String
+    var keyStructure: [String] {
+        return key.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "."))
+    }
     let translation: String
     let types: [PlaceholderType]
 

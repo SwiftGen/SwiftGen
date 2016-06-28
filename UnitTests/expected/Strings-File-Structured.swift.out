@@ -9,32 +9,50 @@ enum L10n {
   case AlertMessage
   /// Hello, my name is %@ and I'm %d
   case Greetings(String, Int)
-  /// You have %d apples
-  case ApplesCount(Int)
-  /// Those %d bananas belong to %@.
-  case BananasOwner(Int, String)
-  /// These are %3$@'s %1$d %2$@.
-  case ObjectOwnership(Int, String, String)
 
-  case Settings(L10n.SettingsL10n)
+  case Apples(ApplesL10n)
+  enum ApplesL10n {
+    /// You have %d apples
+    case Count(Int)
+  }
+
+  case Bananas(BananasL10n)
+  enum BananasL10n {
+    /// Those %d bananas belong to %@.
+    case Owner(Int, String)
+  }
+
+  case Object(ObjectL10n)
+  enum ObjectL10n {
+    /// These are %3$@'s %1$d %2$@.
+    case Ownership(Int, String, String)
+  }
+
+  case Settings(SettingsL10n)
   enum SettingsL10n {
 
-    case NavigationBar(L10n.SettingsL10n.NavigationBarL10n)
+    case NavigationBar(NavigationBarL10n)
     enum NavigationBarL10n {
-        /// Settings
-        case Title
+
+      case Title(TitleL10n)
+      enum TitleL10n {
+
+        case Even(EvenL10n)
+        enum EvenL10n {
+          /// Settings
+          case Deeper
+        }
+      }
     }
 
-    case UserProfileSection(L10n.SettingsL10n.UserProfileSectionL10n)
+    case UserProfileSection(UserProfileSectionL10n)
     enum UserProfileSectionL10n {
       /// User Profile Settings
       case HeaderTitle
       /// Here you can change some user profile settings.
       case FooterText
     }
-
   }
-
 }
 
 extension L10n: CustomStringConvertible {
