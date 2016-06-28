@@ -84,7 +84,6 @@ public final class StoryboardParser {
     storyboardsSegues[storyboardName] = delegate.segues
   }
 
-  @available(OSX 10.10, *)
   public func parseDirectory(path: String) {
     if let dirEnum = NSFileManager.defaultManager().enumeratorAtPath(path) {
       while let subPath = dirEnum.nextObject() as? NSString {
