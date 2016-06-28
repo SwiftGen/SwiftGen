@@ -1,7 +1,7 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
 import Foundation
-import UIKit
+import Cocoa
 
 {# This first part of the code is static, same every time whatever Storyboard you have #}
 protocol StoryboardSceneType {
@@ -9,30 +9,37 @@ protocol StoryboardSceneType {
 }
 
 extension StoryboardSceneType {
-  static func storyboard() -> UIStoryboard {
-    return UIStoryboard(name: self.storyboardName, bundle: nil)
+  static func storyboard() -> NSStoryboard {
+    return NSStoryboard(name: self.storyboardName, bundle: nil)
   }
 
-  static func initialViewController() -> UIViewController {
-    guard let vc = storyboard().instantiateInitialViewController() else {
+  static func initialController() -> AnyObject {
+    guard let controller = storyboard().instantiateInitialController()
+    else {
       fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
     }
-    return vc
+    return controller
   }
 }
 
 extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
-  func viewController() -> UIViewController {
-    return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
+  func controller() -> AnyObject {
+    return Self.storyboard().instantiateControllerWithIdentifier(self.rawValue)
   }
-  static func viewController(identifier: Self) -> UIViewController {
-    return identifier.viewController()
+  static func controller(identifier: Self) -> AnyObject {
+    return identifier.controller()
   }
 }
 
 protocol StoryboardSegueType: RawRepresentable { }
 
-extension UIViewController {
+extension NSWindowController {
+  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
+extension NSViewController {
   func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
   }
@@ -49,28 +56,22 @@ struct {{sceneEnumName}} {
     {% for scene in storyboard.scenes %}
     {% set sceneID %}{{scene.identifier|swiftIdentifier|lowerFirstWord}}{% endset %}
 
-    case {{sceneID}} = "{{scene.identifier}}"
-    {% ifnot scene.isBaseViewController %}
+    case {{sceneID}}Scene = "{{scene.identifier}}"
     {% if scene.customClass %}
-    static func {{sceneID}}ViewController() -> {{scene.customClass}} {
-      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as? {{scene.customClass}}
+    static func instantiate{{sceneID||snakeToCamelCase}}() -> {{scene.customClass}} {
+      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.controller() as? {{scene.customClass}}
       else {
         fatalError("ViewController '{{scene.identifier}}' is not of the expected class {{scene.customClass}}.")
       }
       return vc
     }
     {% else %}
-    static func {{sceneID}}ViewController() -> UI{{scene.baseType}} {
-      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as? UI{{scene.baseType}}
+    static func instantiate{{sceneID||snakeToCamelCase}}() -> NS{{scene.baseType}} {
+      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.controller() as? NS{{scene.baseType}}
       else {
-        fatalError("ViewController '{{scene.identifier}}' is not of the expected class UI{{scene.baseType}}.")
+        fatalError("ViewController '{{scene.identifier}}' is not of the expected class NS{{scene.baseType}}.")
       }
       return vc
-    }
-    {% endif %}
-    {% else %}
-    static func {{sceneID|lowerFirstWord}}ViewController() -> UIViewController {
-      return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController()
     }
     {% endif %}
     {% endfor %}

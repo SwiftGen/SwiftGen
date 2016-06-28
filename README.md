@@ -8,7 +8,8 @@ SwiftGen is a suite of tools written in Swift to auto-generate Swift code (or an
 
 * [`enums` for your Assets Catalogs images](#uiimage-and-nsimage)
 * [`enums` for your `Localizable.strings` strings](#localizablestrings).
-* [`enums` for your Storyboards and their Scenes](#uistoryboard)
+* [`enums` for your UIStoryboards and their Scenes](#uistoryboard)
+* [`enums` for your NSStoryboards and their Scenes](#nsstoryboard)
 * [`enums` for your Colors](#uicolor-and-nscolor).
 * [`enums` for your Fonts](#uifont-and-nsfont).
 
@@ -220,8 +221,6 @@ swiftgen storyboards /dir/to/search/for/storyboards
 
 This will generate an `enum` for each of your `UIStoryboard`, with one `case` per storyboard scene.
 
-*Note: there is no OS X storyboards yet (but a PR [#131](https://github.com/AliSoftware/SwiftGen/pull/131) is pending to add that template if you want to help)*
-
 ### Generated code
 
 The generated code will look like this:
@@ -320,6 +319,112 @@ override func prepareForSegue(_ segue: UIStoryboardSegue, sender sender: AnyObje
 initialVC.performSegue(StoryboardSegue.Message.Back)
 ```
 
+## NSStoryboard
+
+```
+swiftgen storyboards --template storyboards-osx-default /dir/to/search/for/storyboards
+```
+
+This will generate an `enum` for each of your `NSStoryboard`, with one `case` per storyboard scene.
+
+### Generated code
+
+The generated code will look like this:
+
+```swift
+protocol StoryboardSceneType {
+  static var storyboardName: String { get }
+}
+
+extension StoryboardSceneType {
+  static func storyboard() -> NSStoryboard {
+    return NSStoryboard(name: self.storyboardName, bundle: nil)
+  }
+
+  static func initialController() -> AnyObject {
+    guard let controller = storyboard().instantiateInitialController()
+    else {
+      fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+    }
+    return controller
+  }
+}
+
+extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
+  func controller() -> AnyObject {
+    return Self.storyboard().instantiateControllerWithIdentifier(self.rawValue)
+  }
+  static func controller(identifier: Self) -> AnyObject {
+    return identifier.controller()
+  }
+}
+
+protocol StoryboardSegueType: RawRepresentable { }
+
+extension NSWindowController {
+  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
+extension NSViewController {
+  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
+struct StoryboardScene {
+  enum Anonymous_Osx: StoryboardSceneType {
+    static let storyboardName = "Anonymous-osx"
+  }
+  enum Message_Osx: String, StoryboardSceneType {
+    static let storyboardName = "Message-osx"
+
+    case MessagesTabScene = "MessagesTab"
+    static func instantiateMessagesTab() -> CustomTabViewController {
+      guard let vc = StoryboardScene.Message_Osx.MessagesTabScene.controller() as? CustomTabViewController
+      else {
+        fatalError("ViewController 'MessagesTab' is not of the expected class CustomTabViewController.")
+      }
+      return vc
+    }
+
+    case WindowCtrlScene = "WindowCtrl"
+    static func instantiateWindowCtrl() -> NSWindowController {
+      guard let vc = StoryboardScene.Message_Osx.WindowCtrlScene.controller() as? NSWindowController
+      else {
+        fatalError("ViewController 'WindowCtrl' is not of the expected class NSWindowController.")
+      }
+      return vc
+    }
+  }
+}
+
+struct StoryboardSegue {
+  enum Message_Osx: String, StoryboardSegueType {
+    case Custom = "Custom"
+    case Embed = "Embed"
+  }
+}
+```
+
+### Usage Example
+
+```swift
+// Initial VC
+let initialVC = StoryboardScene.Message_Osx.initialController()
+// Dedicated type var that returns the right type of VC (CustomTabViewController here)
+let messageDetailsVC = StoryboardScene.Message_Osx.instantiateMessageTab()
+override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+    switch StoryboardSegue.Message_Osx(rawValue: segue.identifier!) {
+    case .Custom:
+    // Prepare for your custom segue transition
+    case .Embed:
+        // Prepare for your embed segue transition
+    }
+}
+initialVC.performSegue(StoryboardSegue.Message.Back)
+```
 
 ## UIColor and NSColor
 

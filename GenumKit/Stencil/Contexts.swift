@@ -66,7 +66,10 @@ extension AssetsCatalogParser {
     - `name`: `String`
     - `scenes`: `Array` (absent if empty)
        - `identifier`: `String`
-       - `class`: `String` (absent if generic UIViewController)
+       - `customClass`: `String` (absent if generic UIViewController)
+       - `isBaseViewController`: `Bool`, indicate if the baseType is 'viewController' or anything else
+       - `baseType`: `String` (absent if class is a custom class). The base class type on which a scene is base.
+          Possible values include 'ViewController', 'NavigationController', 'TableViewController'…
     - `segues`: `Array` (absent if empty)
        - `identifier`: `String`
        - `class`: `String` (absent if generic UIStoryboardSegue)
@@ -80,24 +83,24 @@ extension StoryboardParser {
       if let scenes = storyboardsScenes[storyboardName] {
         sbMap["scenes"] = scenes
           .sort({$0.storyboardID < $1.storyboardID})
-          .map { (scene: Scene) -> [String:String] in
-            // Handle special scene.tag cases like navigationController, splitViewController, etc…
-            // TODO: Fix this to extract the 'UI' prefix and be able to implement OSX support in #128
-            let customClass = scene.customClass ??
-              (scene.tag != "viewController" ? "UI" + uppercaseFirst(scene.tag) : nil)
-            if let customClass = customClass {
-              return ["identifier": scene.storyboardID, "class": customClass]
-            } else {
-              return ["identifier": scene.storyboardID]
+          .map { (scene: Scene) -> [String:AnyObject] in
+            if let customClass = scene.customClass {
+                return ["identifier": scene.storyboardID, "customClass": customClass]
+            } else if scene.tag == "viewController" {
+                return [
+                    "identifier": scene.storyboardID,
+                    "baseType": uppercaseFirst(scene.tag),
+                    "isBaseViewController": scene.tag == "viewController"
+                ]
             }
+            return ["identifier": scene.storyboardID, "baseType": uppercaseFirst(scene.tag)]
         }
       }
       if let segues = storyboardsSegues[storyboardName] {
         sbMap["segues"] = segues
           .sort({$0.segueID < $1.segueID})
           .map { (segue: Segue) -> [String:String] in
-            // TODO: Fix this to extract the 'UI' prefix and be able to implement OSX support in #128
-            ["identifier": segue.segueID, "class": segue.customClass ?? "UIStoryboardSegue"]
+            ["identifier": segue.segueID, "customClass": segue.customClass ?? ""]
         }
       }
       return sbMap
