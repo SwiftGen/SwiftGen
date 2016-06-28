@@ -123,10 +123,16 @@ extension StoryboardParser {
        - `types`: `Array<String>` containing types like `"String"`, `"Int"`, etc
        - `declarations`: `Array<String>` containing declarations like `"let p0"`, `"let p1"`, etc
        - `names`: `Array<String>` containing parameter names like `"p0"`, `"p1"`, etc
+ - `structuredStrings`: `Dictionary` - contains strings structured by keys separated by '.' syntax
 */
 extension StringsFileParser {
   public func stencilContext(enumName enumName: String = "L10n", tableName: String = "Localizable") -> Context {
-    let strings = entries.map { (entry: StringsFileParser.Entry) -> [String:AnyObject] in
+
+    let entryToStringMapper = { (entry: Entry, keyPath: [String]) -> [String: AnyObject] in
+      var keyStructure = entry.keyStructure
+      Array(0..<keyPath.count).forEach { _ in keyStructure.removeFirst() }
+      let keytail = keyStructure.joinWithSeparator(".")
+        
       if entry.types.count > 0 {
         let params = [
           "count": entry.types.count,
@@ -134,12 +140,54 @@ extension StringsFileParser {
           "declarations": (0..<entry.types.count).map { "let p\($0)" },
           "names": (0..<entry.types.count).map { "p\($0)" }
         ]
-        return ["key": entry.key, "translation": entry.translation, "params": params]
+        return ["key": entry.key, "translation": entry.translation, "params": params, "keytail": keytail]
       } else {
-        return ["key": entry.key, "translation": entry.translation]
+        return ["key": entry.key, "translation": entry.translation, "keytail": keytail]
       }
     }
-    return Context(dictionary: ["enumName": enumName, "tableName": tableName, "strings": strings])
+    
+    let strings = entries.map { entryToStringMapper($0, []) }
+    let structuredStrings = structure(entries, mapper: entryToStringMapper)
+    
+    return Context(dictionary: ["enumName": enumName, "tableName": tableName, "strings": strings, "structuredStrings": structuredStrings])
+  }
+
+  private func normalize(string: String) -> String {
+    let components = string.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "-_"))
+    return components.map { $0.capitalizedString }.joinWithSeparator("")
+  }
+    
+  private func structure(entries: [Entry], keyPath: [String] = [], mapper: (Entry, [String]) -> [String: AnyObject]) -> [String: AnyObject] {
+    
+    var structuredStrings: [String: AnyObject] = [:]
+    
+    let strings = entries.filter { $0.keyStructure.count == keyPath.count+1 }.map { mapper($0, keyPath) }
+    if !strings.isEmpty {
+      structuredStrings["strings"] = strings
+    }
+    
+    if let lastKeyPathComponent = keyPath.last {
+      structuredStrings["name"] = lastKeyPathComponent
+    }
+    
+    var subenums: [[String: AnyObject]] = []
+    var nextLevelKeyPaths: [[String]] = entries.filter { $0.keyStructure.count > keyPath.count+1 }.map { Array($0.keyStructure.prefix(keyPath.count+1)) }
+    
+    // make key paths unique
+    nextLevelKeyPaths = Array(Set(nextLevelKeyPaths.map { keyPath in
+        keyPath.map { $0.capitalizedString.stringByReplacingOccurrencesOfString("-", withString: "_") }.joinWithSeparator(".")
+    })).sort().map { $0.componentsSeparatedByString(".") }
+    
+    for nextLevelKeyPath in nextLevelKeyPaths {
+      let entriesInKeyPath = entries.filter { Array($0.keyStructure.map(normalize).prefix(nextLevelKeyPath.count)) == nextLevelKeyPath.map(normalize) }
+      subenums.append(structure(entriesInKeyPath, keyPath: nextLevelKeyPath, mapper: mapper))
+    }
+    
+    if !subenums.isEmpty {
+      structuredStrings["subenums"] = subenums
+    }
+    
+    return structuredStrings
   }
 }
 

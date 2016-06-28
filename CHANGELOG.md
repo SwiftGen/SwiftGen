@@ -9,7 +9,9 @@
 * Added support for tvOS and watchOS in images, fonts and color templates.  
 [Tom Baranes](https://github.com/tbaranes),
   [#145](https://github.com/AliSoftware/SwiftGen/pull/145)
-  
+* Added enum-based structured identifiers via `-t structured` option.
+  [Cihat Gündüz](https://github.com/Dschee), [#148](https://github.com/AliSoftware/SwiftGen/pull/148)  
+
 ## 1.1.2
 
 * Fix issue introduced by 1.1.1 in storyboard templates not returning.  
