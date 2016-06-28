@@ -3,6 +3,7 @@
 {% if structuredStrings %}
 import Foundation
 
+// swiftlint:disable nesting
 enum {{enumName}} {
   {# ROOT LEVEL #}
   {% for string in structuredStrings.strings %}
@@ -228,6 +229,7 @@ extension {{enumName}}: CustomStringConvertible {
 func tr(key: {{enumName}}) -> String {
   return key.string
 }
+// swiftlint:enable nesting
 {% else %}
 // No string found
 {% endif %}

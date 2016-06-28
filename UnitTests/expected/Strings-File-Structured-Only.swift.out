@@ -2,6 +2,7 @@
 
 import Foundation
 
+// swiftlint:disable nesting
 enum L10n {
 
   case Settings(SettingsL10n)
@@ -78,3 +79,4 @@ extension L10n: CustomStringConvertible {
 func tr(key: L10n) -> String {
   return key.string
 }
+// swiftlint:enable nesting

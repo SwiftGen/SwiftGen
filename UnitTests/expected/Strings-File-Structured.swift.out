@@ -2,6 +2,7 @@
 
 import Foundation
 
+// swiftlint:disable nesting
 enum L10n {
   /// Title of the alert
   case AlertTitle
@@ -122,3 +123,4 @@ extension L10n: CustomStringConvertible {
 func tr(key: L10n) -> String {
   return key.string
 }
+// swiftlint:enable nesting
