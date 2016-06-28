@@ -108,6 +108,17 @@ class StringsTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
   
+  func testFileWithStructuredOnly() {
+    let parser = StringsFileParser()
+    try! parser.parseStringsFile(fixturePath("LocStructuredOnly.strings"))
+    
+    let template = GenumTemplate(templateString: fixtureString("strings-structured.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = self.fixtureString("Strings-File-Structured-Only.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
   ////////////////////////////////////////////////////////////////////////
 
   func testParseStringPlaceholder() {
