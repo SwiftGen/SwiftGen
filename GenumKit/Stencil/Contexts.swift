@@ -131,7 +131,7 @@ extension StringsFileParser {
     let entryToStringMapper = { (entry: Entry, keyPath: [String]) -> [String: AnyObject] in
       var keyStructure = entry.keyStructure
       Array(0..<keyPath.count).forEach { _ in keyStructure.removeFirst() }
-      let key = keyStructure.joinWithSeparator(".")
+      let keytail = keyStructure.joinWithSeparator(".")
         
       if entry.types.count > 0 {
         let params = [
@@ -140,9 +140,9 @@ extension StringsFileParser {
           "declarations": (0..<entry.types.count).map { "let p\($0)" },
           "names": (0..<entry.types.count).map { "p\($0)" }
         ]
-        return ["key": key, "translation": entry.translation, "params": params]
+        return ["key": entry.key, "translation": entry.translation, "params": params, "keytail": keytail]
       } else {
-        return ["key": key, "translation": entry.translation]
+        return ["key": entry.key, "translation": entry.translation, "keytail": keytail]
       }
     }
     
@@ -174,7 +174,11 @@ extension StringsFileParser {
     var nextLevelKeyPaths: [[String]] = entries.filter { $0.keyStructure.count > keyPath.count+1 }.map { Array($0.keyStructure.prefix(keyPath.count+1)) }
     
     // make key paths unique
-    nextLevelKeyPaths = Array(Set(nextLevelKeyPaths.map { $0.joinWithSeparator(".").lowercaseString })).sort().map { $0.componentsSeparatedByString(".") }
+    nextLevelKeyPaths = Array(Set(nextLevelKeyPaths.map { keyPath in
+        keyPath.map { $0.capitalizedString.stringByReplacingOccurrencesOfString("-", withString: "_") }.joinWithSeparator(".")
+    })).sort().map { $0.componentsSeparatedByString(".") }
+    
+    print("nextLevelKeyPaths: \(nextLevelKeyPaths)")
     
     for nextLevelKeyPath in nextLevelKeyPaths {
       let entriesInKeyPath = entries.filter { Array($0.keyStructure.map(normalize).prefix(nextLevelKeyPath.count)) == nextLevelKeyPath.map(normalize) }
