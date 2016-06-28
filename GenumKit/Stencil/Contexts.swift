@@ -152,12 +152,12 @@ extension StringsFileParser {
     return Context(dictionary: ["enumName": enumName, "tableName": tableName, "strings": strings, "structuredStrings": structuredStrings])
   }
 
-  func normalize(string: String) -> String {
+  private func normalize(string: String) -> String {
     let components = string.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "-_"))
     return components.map { $0.capitalizedString }.joinWithSeparator("")
   }
     
-  func structure(entries: [Entry], keyPath: [String] = [], mapper: (Entry, [String]) -> [String: AnyObject]) -> [String: AnyObject] {
+  private func structure(entries: [Entry], keyPath: [String] = [], mapper: (Entry, [String]) -> [String: AnyObject]) -> [String: AnyObject] {
     
     var structuredStrings: [String: AnyObject] = [:]
     
@@ -177,8 +177,6 @@ extension StringsFileParser {
     nextLevelKeyPaths = Array(Set(nextLevelKeyPaths.map { keyPath in
         keyPath.map { $0.capitalizedString.stringByReplacingOccurrencesOfString("-", withString: "_") }.joinWithSeparator(".")
     })).sort().map { $0.componentsSeparatedByString(".") }
-    
-    print("nextLevelKeyPaths: \(nextLevelKeyPaths)")
     
     for nextLevelKeyPath in nextLevelKeyPaths {
       let entriesInKeyPath = entries.filter { Array($0.keyStructure.map(normalize).prefix(nextLevelKeyPath.count)) == nextLevelKeyPath.map(normalize) }
