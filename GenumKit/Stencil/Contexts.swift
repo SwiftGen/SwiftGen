@@ -84,19 +84,16 @@ extension StoryboardParser {
         sbMap["scenes"] = scenes
           .sort({$0.storyboardID < $1.storyboardID})
           .map { (scene: Scene) -> [String:AnyObject] in
-            if scene.customClass == nil && scene.tag == "viewController" {
-              return [
-                "identifier": scene.storyboardID,
-                "baseType": uppercaseFirst(scene.tag),
-                "isBaseViewController": true
-              ]
-            } else if scene.customClass == nil {
-                return ["identifier": scene.storyboardID, "baseType": uppercaseFirst(scene.tag)]
-            } else if let customClass = scene.customClass {
-              return ["identifier": scene.storyboardID, "customClass": customClass]
-            } else {
-              return ["identifier": scene.storyboardID]
+            if let customClass = scene.customClass {
+                return ["identifier": scene.storyboardID, "customClass": customClass]
+            } else if scene.tag == "viewController" {
+                return [
+                    "identifier": scene.storyboardID,
+                    "baseType": uppercaseFirst(scene.tag),
+                    "isBaseViewController": scene.tag == "viewController"
+                ]
             }
+            return ["identifier": scene.storyboardID, "baseType": uppercaseFirst(scene.tag)]
         }
       }
       if let segues = storyboardsSegues[storyboardName] {
