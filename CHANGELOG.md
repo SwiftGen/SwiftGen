@@ -9,6 +9,21 @@
   [Olivier Halligon](https://github.com/AliSoftware)
 * Error messages ("template not found", etc) are now printed on `stderr`.  
   [Olivier Halligon](https://github.com/AliSoftware)
+* Add more `swiftgen templates` subcommands.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  * `swiftgen templates list` lists all the available templates
+  * `swiftgen templates which <name>` prints the path to the template named `<name>`
+  * `swiftgen templates cat <name>` prints the content to the template named `<name>`
+  * `<name>` here can be either a subcommand name like `colors` or a
+    composed name `colors-rawValue` for a specific template.
+
+> 💡 You can now **create your custom templates more easier than ever**, by cloning an existing template!
+>
+> e.g. to clone [the default `strings-default.stencil` template](https://github.com/AliSoftware/SwiftGen/blob/master/templates/strings-default.stencil):
+> 
+> * use `swiftgen templates cat strings --output strings-custom.stencil`
+> * modify the cloned `strings-custom.stencil` template to your liking
+> * use it with `swiftgen strings … --templatePath strings-custom.stencil …` in your projects!
 
 ## 2.0.0
 
