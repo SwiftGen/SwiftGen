@@ -37,6 +37,9 @@ extension UIViewController {
   }
 }
 
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+
 struct XCTStoryboardsScene {
   enum Anonymous: StoryboardSceneType {
     static let storyboardName = "Anonymous"

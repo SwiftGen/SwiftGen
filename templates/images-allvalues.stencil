@@ -9,6 +9,8 @@
   typealias Image = NSImage
 #endif
 
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
 enum {{enumName}}: String {
   {% for image in images %}
   case {{image|swiftIdentifier}} = "{{image}}"
@@ -22,6 +24,7 @@ enum {{enumName}}: String {
     return Image(asset: self)
   }
 }
+// swiftlint:enable type_body_length
 
 extension Image {
   convenience init!(asset: {{enumName}}) {

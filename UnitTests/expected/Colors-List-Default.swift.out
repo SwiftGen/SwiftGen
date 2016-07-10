@@ -19,6 +19,8 @@ extension Color {
   }
 }
 
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
 enum ColorName {
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffcc00"></span>
   /// Alpha: 60% <br/> (0xffcc0099)
@@ -42,6 +44,7 @@ enum ColorName {
     return Color(named: self)
   }
 }
+// swiftlint:enable type_body_length
 
 extension Color {
   convenience init(named name: ColorName) {

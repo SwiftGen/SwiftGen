@@ -37,6 +37,9 @@ extension UIViewController {
   }
 }
 
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+
 struct StoryboardScene {
   enum Wizard: String, StoryboardSceneType {
     static let storyboardName = "Wizard"

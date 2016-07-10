@@ -2,7 +2,10 @@
 
 import Foundation
 
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
 // swiftlint:disable nesting
+
 enum L10n {
 
   case Settings(SettingsL10n)
@@ -76,7 +79,9 @@ extension L10n: CustomStringConvertible {
   }
 }
 
+// swiftlint:enable type_body_length
+// swiftlint:enable nesting
+
 func tr(key: L10n) -> String {
   return key.string
 }
-// swiftlint:enable nesting

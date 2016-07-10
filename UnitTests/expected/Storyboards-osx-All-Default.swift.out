@@ -44,6 +44,9 @@ extension NSViewController {
   }
 }
 
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+
 struct StoryboardScene {
   enum Anonymous_Osx: StoryboardSceneType {
     static let storyboardName = "Anonymous-osx"

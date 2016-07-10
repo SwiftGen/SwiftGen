@@ -2,6 +2,8 @@
 
 import Foundation
 
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
 enum XCTLoc {
   /// Title of the alert
   case AlertTitle
@@ -22,6 +24,7 @@ enum XCTLoc {
   /// Here you can change some user profile settings.
   case SeTTingsUSerProFileSectioNFooterText
 }
+// swiftlint:enable type_body_length
 
 extension XCTLoc: CustomStringConvertible {
   var description: String { return self.string }

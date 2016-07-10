@@ -9,6 +9,8 @@
   typealias Font = NSFont
 #endif
 
+// swiftlint:disable file_length
+
 protocol FontConvertible {
   func font(size: CGFloat) -> Font!
 }

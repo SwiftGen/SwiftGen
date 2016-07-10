@@ -2,6 +2,8 @@
 
 import Foundation
 
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
 enum L10n {
   /// Title of the alert
   case AlertTitle
@@ -22,6 +24,7 @@ enum L10n {
   /// Here you can change some user profile settings.
   case SeTTingsUSerProFileSectioNFooterText
 }
+// swiftlint:enable type_body_length
 
 extension L10n: CustomStringConvertible {
   var description: String { return self.string }

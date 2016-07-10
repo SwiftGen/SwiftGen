@@ -21,6 +21,8 @@ extension Color {
 
 {% if colors %}
 {# Note: We don't use a UInt32 rawValue in this template so we can have multiple colors with the same rgbaValue #}
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
 enum {{enumName}} {
   {% for color in colors %}
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#{{color.rgb}}"></span>
@@ -40,6 +42,7 @@ enum {{enumName}} {
     return Color(named: self)
   }
 }
+// swiftlint:enable type_body_length
 
 extension Color {
   convenience init(named name: {{enumName}}) {
