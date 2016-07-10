@@ -34,7 +34,11 @@ let outputOption = Option(
 // MARK: - Main
 
 let main = Group {
-  $0.addCommand("templates", "manage custom templates", templatesCommand)
+  $0.group("templates", "manage custom templates") {
+    $0.addCommand("list", "list bundled and custom templates", templatesListCommand)
+    $0.addCommand("which", "print path of a given named template", templatesWhichCommand)
+    $0.addCommand("cat", "print content of a given named template", templatesCatCommand)
+  }
   $0.addCommand("colors", "generate code for UIColors", colorsCommand)
   $0.addCommand("images", "generate code for UIImages based on your Assets Catalog", imagesCommand)
   $0.addCommand("storyboards", "generate code for your Storyboard scenes and segues", storyboardsCommand)
