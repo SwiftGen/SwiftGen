@@ -24,6 +24,6 @@ let fontsCommand = command(
       let rendered = try template.render(context)
       output.write(rendered, onlyIfChanged: true)
     } catch let error as NSError {
-      print("Error: \(error.localizedDescription)")
+      printError("Error: \(error.localizedDescription)")
     }
 }
