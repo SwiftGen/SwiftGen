@@ -70,6 +70,8 @@
 		47CB53411CFC171600AA19C0 /* Strings-Localizable-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 47CB53401CFC171600AA19C0 /* Strings-Localizable-Swift3.swift.out */; };
 		47CB53421CFC175100AA19C0 /* storyboards-swift3.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 47CB533A1CFC16FE00AA19C0 /* storyboards-swift3.stencil */; };
 		47CB53431CFC175100AA19C0 /* strings-swift3.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 47CB533B1CFC16FE00AA19C0 /* strings-swift3.stencil */; };
+		57902A1D1D3510C00002A1EA /* strings-genstrings.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 57902A1C1D3510770002A1EA /* strings-genstrings.stencil */; };
+		57902A1F1D3511710002A1EA /* Strings-Localizable-Genstrings.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 57902A1E1D3511710002A1EA /* Strings-Localizable-Genstrings.swift.out */; };
 		641CD33E1C3AE35A00D7FED9 /* colors.clr in Resources */ = {isa = PBXBuildFile; fileRef = 641CD33D1C3AE35A00D7FED9 /* colors.clr */; };
 		93DA731D1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 93DA731C1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out */; };
 		C2265B591C8907CA00CA5C4F /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = C2265B581C8907CA00CA5C4F /* colors.json */; };
@@ -203,6 +205,8 @@
 		47CB533C1CFC170E00AA19C0 /* Storyboards-Anonymous-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Anonymous-Swift3.swift.out"; sourceTree = "<group>"; };
 		47CB533D1CFC170E00AA19C0 /* Storyboards-Wizard-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Wizard-Swift3.swift.out"; sourceTree = "<group>"; };
 		47CB53401CFC171600AA19C0 /* Strings-Localizable-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Localizable-Swift3.swift.out"; sourceTree = "<group>"; };
+		57902A1C1D3510770002A1EA /* strings-genstrings.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "strings-genstrings.stencil"; sourceTree = "<group>"; };
+		57902A1E1D3511710002A1EA /* Strings-Localizable-Genstrings.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Localizable-Genstrings.swift.out"; sourceTree = "<group>"; };
 		641CD33D1C3AE35A00D7FED9 /* colors.clr */ = {isa = PBXFileReference; lastKnownFileType = file; path = colors.clr; sourceTree = "<group>"; };
 		6FDA009E555D48BC367926D9 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		93DA731C1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-UTF8-Defaults.swift.out"; sourceTree = "<group>"; };
@@ -324,17 +328,18 @@
 		091150341BD326B900EBC803 /* templates */ = {
 			isa = PBXGroup;
 			children = (
-				0921FB9A1BE7852F00B488B5 /* colors-rawValue.stencil */,
 				0911503A1BD3ECA900EBC803 /* colors-default.stencil */,
-				091150351BD3274E00EBC803 /* images-default.stencil */,
+				0921FB9A1BE7852F00B488B5 /* colors-rawValue.stencil */,
+				C24AFD031C91E63D005FE3EF /* fonts-default.stencil */,
 				470A14E41BEA68630052EAC8 /* images-allvalues.stencil */,
+				091150351BD3274E00EBC803 /* images-default.stencil */,
 				0911503E1BD4053D00EBC803 /* storyboards-default.stencil */,
-				471D92121C43F65300D8EA69 /* storyboards-uppercase.stencil */,
 				470A14E01BEA63D30052EAC8 /* storyboards-lowercase.stencil */,
 				47CB533A1CFC16FE00AA19C0 /* storyboards-swift3.stencil */,
+				471D92121C43F65300D8EA69 /* storyboards-uppercase.stencil */,
 				09EB0A191BDC269300B2CF79 /* strings-default.stencil */,
+				57902A1C1D3510770002A1EA /* strings-genstrings.stencil */,
 				47CB533B1CFC16FE00AA19C0 /* strings-swift3.stencil */,
-				C24AFD031C91E63D005FE3EF /* fonts-default.stencil */,
 			);
 			path = templates;
 			sourceTree = "<group>";
@@ -414,6 +419,7 @@
 				93DA731C1BF34E26000A3C84 /* Strings-File-UTF8-Defaults.swift.out */,
 				095685EB1B6DA16200BF300C /* Strings-File-CustomName.swift.out */,
 				47CB53401CFC171600AA19C0 /* Strings-Localizable-Swift3.swift.out */,
+				57902A1E1D3511710002A1EA /* Strings-Localizable-Genstrings.swift.out */,
 			);
 			name = Strings;
 			sourceTree = "<group>";
@@ -560,6 +566,7 @@
 				C24AFD0E1C924A29005FE3EF /* Fonts-File-CustomName.swift.out in Resources */,
 				C2265B591C8907CA00CA5C4F /* colors.json in Resources */,
 				C25A54341CEE7CEB00401BE5 /* Colors-Txt-File-CustomName.swift.out in Resources */,
+				57902A1F1D3511710002A1EA /* Strings-Localizable-Genstrings.swift.out in Resources */,
 				09A87B671BCCA4E600D9B9F5 /* colors.txt in Resources */,
 				091150361BD3274E00EBC803 /* images-default.stencil in Resources */,
 				47CB533F1CFC170E00AA19C0 /* Storyboards-Wizard-Swift3.swift.out in Resources */,
@@ -585,6 +592,7 @@
 				09A87B6E1BCCA5F600D9B9F5 /* Strings-File-CustomName.swift.out in Resources */,
 				4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */,
 				4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */,
+				57902A1D1D3510C00002A1EA /* strings-genstrings.stencil in Resources */,
 				470A14E91BEA6CF10052EAC8 /* Anonymous.storyboard in Resources */,
 				47CB53431CFC175100AA19C0 /* strings-swift3.stencil in Resources */,
 				47CB53391CFC0B2100AA19C0 /* ZapfDingbats.ttf in Resources */,

@@ -1,0 +1,53 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+
+enum L10n {
+  /// Title of the alert
+  case AlertTitle
+  /// Some alert body there
+  case AlertMessage
+  /// Hello, my name is %@ and I'm %d
+  case Greetings(String, Int)
+  /// You have %d apples
+  case ApplesCount(Int)
+  /// Those %d bananas belong to %@.
+  case BananasOwner(Int, String)
+  /// These are %3$@'s %1$d %2$@.
+  case ObjectOwnership(Int, String, String)
+}
+
+extension L10n: CustomStringConvertible {
+  var description: String { return self.string }
+
+  var string: String {
+    switch self {
+      case .AlertTitle:
+        let format = NSLocalizedString("alert_title", comment: "")
+        return L10n.tr(format)
+      case .AlertMessage:
+        let format = NSLocalizedString("alert_message", comment: "")
+        return L10n.tr(format)
+      case .Greetings(let p0, let p1):
+        let format = NSLocalizedString("greetings", comment: "")
+        return L10n.tr(format, p0, p1)
+      case .ApplesCount(let p0):
+        let format = NSLocalizedString("apples.count", comment: "")
+        return L10n.tr(format, p0)
+      case .BananasOwner(let p0, let p1):
+        let format = NSLocalizedString("bananas.owner", comment: "")
+        return L10n.tr(format, p0, p1)
+      case .ObjectOwnership(let p0, let p1, let p2):
+        let format = NSLocalizedString("object.ownership", comment: "")
+        return L10n.tr(format, p0, p1, p2)
+    }
+  }
+
+  private static func tr(format: String, _ args: CVarArgType...) -> String {
+    return String(format: format, locale: NSLocale.currentLocale(), arguments: args)
+  }
+}
+
+func tr(key: L10n) -> String {
+  return key.string
+}
