@@ -1,17 +1,17 @@
 /// A simple CommandType using a closure
-struct AnonymousCommand : CommandType {
-  var closure:ArgumentParser throws -> ()
+struct AnonymousCommand: CommandType {
+  var closure: ArgumentParser throws -> ()
 
-  init(_ closure:(ArgumentParser throws -> ())) {
+  init(_ closure: (ArgumentParser throws -> ())) {
     self.closure = closure
   }
 
-  func run(parser:ArgumentParser) throws {
+  func run(parser: ArgumentParser) throws {
     try closure(parser)
   }
 }
 
-enum CommandError : ErrorType {
+enum CommandError: ErrorType {
   case InvalidArgument
 }
 

@@ -3,12 +3,15 @@
 {% if strings %}
 import Foundation
 
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
 enum {{enumName}} {
   {% for string in strings %}
   /// {{string.translation}}
   case {{string.key|swiftIdentifier|snakeToCamelCase}}{% if string.params %}({{string.params.types|join}}){% endif %}
   {% endfor %}
 }
+// swiftlint:enable type_body_length
 
 extension {{enumName}}: CustomStringConvertible {
   var description: String { return self.string }

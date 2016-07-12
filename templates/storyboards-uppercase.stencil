@@ -14,7 +14,10 @@ extension StoryboardSceneType {
   }
 
   static func initialViewController() -> UIViewController {
-    return storyboard().instantiateInitialViewController()!
+    guard let vc = storyboard().instantiateInitialViewController() else {
+      fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+    }
+    return vc
   }
 }
 
@@ -37,6 +40,9 @@ extension UIViewController {
 
 {# This is where the generation begins, this code depends on what you have in your Storyboards #}
 {% if storyboards %}
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+
 struct {{sceneEnumName}} {
   {% for storyboard in storyboards %}
   {% set storyboardName %}{{storyboard.name|swiftIdentifier}}{% endset %}
@@ -47,10 +53,24 @@ struct {{sceneEnumName}} {
     {% set sceneID %}{{scene.identifier|swiftIdentifier}}{% endset %}
 
     case {{sceneID}} = "{{scene.identifier}}"
-    {% if scene.class %}
-    static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> {{scene.class}} {
-      return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as! {{scene.class}}
+    {% ifnot scene.isBaseViewController %}
+    {% if scene.customClass %}
+    static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> {{scene.customClass}} {
+      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as? {{scene.customClass}}
+      else {
+        fatalError("ViewController '{{scene.identifier}}' is not of the expected class {{scene.customClass}}.")
+      }
+      return vc
     }
+    {% else %}
+    static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> UI{{scene.baseType}} {
+      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as? UI{{scene.baseType}}
+      else {
+        fatalError("ViewController '{{scene.identifier}}' is not of the expected class UI{{scene.baseType}}.")
+      }
+      return vc
+    }
+    {% endif %}
     {% else %}
     static func {{sceneID|snakeToCamelCase|lowerFirstWord}}ViewController() -> UIViewController {
       return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController()

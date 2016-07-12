@@ -31,7 +31,7 @@ public class TokenParser {
     return try parse(nil)
   }
 
-  public func parse(parse_until:((parser:TokenParser, token:Token) -> (Bool))?) throws -> [NodeType] {
+  public func parse(parse_until:((parser: TokenParser, token: Token) -> (Bool))?) throws -> [NodeType] {
     var nodes = [NodeType]()
 
     while tokens.count > 0 {
@@ -73,7 +73,7 @@ public class TokenParser {
     return nil
   }
 
-  public func prependToken(token:Token) {
+  public func prependToken(token: Token) {
     tokens.insert(token, atIndex: 0)
   }
 

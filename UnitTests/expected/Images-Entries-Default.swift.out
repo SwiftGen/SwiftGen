@@ -1,0 +1,28 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+#if os(iOS) || os(tvOS) || os(watchOS)
+  import UIKit.UIImage
+  typealias Image = UIImage
+#elseif os(OSX)
+  import AppKit.NSImage
+  typealias Image = NSImage
+#endif
+
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+enum Asset: String {
+  case Green_Apple = "Green-Apple"
+  case Red_Apple = "Red apple"
+  case _2_Pears = "2-pears"
+
+  var image: Image {
+    return Image(asset: self)
+  }
+}
+// swiftlint:enable type_body_length
+
+extension Image {
+  convenience init!(asset: Asset) {
+    self.init(named: asset.rawValue)
+  }
+}

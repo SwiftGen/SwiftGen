@@ -34,7 +34,7 @@ class ImagesTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Images-Entries-Defaults.swift.out")
+    let expected = self.fixtureString("Images-Entries-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
@@ -45,7 +45,7 @@ class ImagesTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Images-File-Defaults.swift.out")
+    let expected = self.fixtureString("Images-File-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 

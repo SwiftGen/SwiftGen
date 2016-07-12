@@ -13,7 +13,10 @@ extension StoryboardSceneType {
   }
 
   static func initialViewController() -> UIViewController {
-    return storyboard().instantiateInitialViewController()!
+    guard let vc = storyboard().instantiateInitialViewController() else {
+      fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+    }
+    return vc
   }
 }
 
@@ -34,6 +37,9 @@ extension UIViewController {
   }
 }
 
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+
 struct StoryboardScene {
   enum Message: String, StoryboardSceneType {
     static let storyboardName = "Message"
@@ -45,17 +51,29 @@ struct StoryboardScene {
 
     case messagesList = "MessagesList"
     static func messagesListViewController() -> UITableViewController {
-      return StoryboardScene.Message.messagesList.viewController() as! UITableViewController
+      guard let vc = StoryboardScene.Message.messagesList.viewController() as? UITableViewController
+      else {
+        fatalError("ViewController 'MessagesList' is not of the expected class UITableViewController.")
+      }
+      return vc
     }
 
     case navCtrl = "NavCtrl"
     static func navCtrlViewController() -> UINavigationController {
-      return StoryboardScene.Message.navCtrl.viewController() as! UINavigationController
+      guard let vc = StoryboardScene.Message.navCtrl.viewController() as? UINavigationController
+      else {
+        fatalError("ViewController 'NavCtrl' is not of the expected class UINavigationController.")
+      }
+      return vc
     }
 
     case urlChooser = "URLChooser"
     static func urlChooserViewController() -> XXPickerViewController {
-      return StoryboardScene.Message.urlChooser.viewController() as! XXPickerViewController
+      guard let vc = StoryboardScene.Message.urlChooser.viewController() as? XXPickerViewController
+      else {
+        fatalError("ViewController 'URLChooser' is not of the expected class XXPickerViewController.")
+      }
+      return vc
     }
   }
 }

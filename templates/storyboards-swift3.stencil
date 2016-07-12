@@ -14,7 +14,10 @@ extension StoryboardSceneType {
   }
 
   static func initialViewController() -> UIViewController {
-    return storyboard().instantiateInitialViewController()!
+    guard let vc = storyboard().instantiateInitialViewController() else {
+      fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+    }
+    return vc
   }
 }
 
@@ -37,6 +40,9 @@ extension UIViewController {
 
 {# This is where the generation begins, this code depends on what you have in your Storyboards #}
 {% if storyboards %}
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+
 struct {{sceneEnumName}} {
   {% for storyboard in storyboards %}
   {% set storyboardName %}{{storyboard.name|swiftIdentifier}}{% endset %}
@@ -47,9 +53,13 @@ struct {{sceneEnumName}} {
     {% set sceneID %}{{scene.identifier|swiftIdentifier}}{% endset %}
 
     case {{sceneID}}Scene = "{{scene.identifier}}"
-    {% if scene.class %}
-    static func instantiate{{sceneID|snakeToCamelCase}}() -> {{scene.class}} {
-      return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.viewController() as! {{scene.class}}
+    {% if scene.customClass %}
+    static func instantiate{{sceneID|snakeToCamelCase}}() -> {{scene.customClass}} {
+      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.viewController() as? {{scene.customClass}}
+      else {
+        fatalError("ViewController '{{scene.identifier}}' is not of the expected class {{scene.customClass}}.")
+      }
+      return vc
     }
     {% else %}
     static func instantiate{{sceneID|snakeToCamelCase}}() -> UIViewController {

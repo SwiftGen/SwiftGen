@@ -1,0 +1,10 @@
+disabled_rules:
+ - type_name
+
+opt_in_rules:
+ - force_unwrapping
+
+# Rules customization
+line_length:
+  warning: 120
+  error: 200

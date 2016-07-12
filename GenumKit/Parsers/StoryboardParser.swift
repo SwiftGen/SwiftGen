@@ -23,59 +23,57 @@ public final class StoryboardParser {
 
   public init() {}
 
-  public func addStoryboardAtPath(path: String) {
-    let parser = NSXMLParser(contentsOfURL: NSURL.fileURLWithPath(path))
+  private class ParserDelegate: NSObject, NSXMLParserDelegate {
+    var scenes = Set<Scene>()
+    var segues = Set<Segue>()
+    var inScene = false
+    var readyForFirstObject = false
+    var readyForConnections = false
 
-    class ParserDelegate: NSObject, NSXMLParserDelegate {
-      var scenes = Set<Scene>()
-      var segues = Set<Segue>()
-      var inScene = false
-      var readyForFirstObject = false
-      var readyForConnections = false
+    @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
+                      namespaceURI: String?, qualifiedName qName: String?,
+                      attributes attributeDict: [String: String]) {
 
-      @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
-        namespaceURI: String?, qualifiedName qName: String?,
-        attributes attributeDict: [String: String])
-      {
-
-        switch elementName {
-        case "scene":
-          inScene = true
-        case "objects" where inScene:
-          readyForFirstObject = true
-        case let tag where (readyForFirstObject && tag != "viewControllerPlaceholder"):
-          if let storyboardID = attributeDict["storyboardIdentifier"] {
-            let customClass = attributeDict["customClass"]
-            scenes.insert(Scene(storyboardID: storyboardID, tag: tag, customClass: customClass))
-          }
-          readyForFirstObject = false
-        case "connections":
-          readyForConnections = true
-        case "segue" where readyForConnections:
-          if let segueID = attributeDict["identifier"] {
-            let customClass = attributeDict["customClass"]
-            segues.insert(Segue(segueID: segueID, customClass: customClass))
-          }
-        default:
-          break
+      switch elementName {
+      case "scene":
+        inScene = true
+      case "objects" where inScene:
+        readyForFirstObject = true
+      case let tag where (readyForFirstObject && tag != "viewControllerPlaceholder"):
+        if let storyboardID = attributeDict["storyboardIdentifier"] {
+          let customClass = attributeDict["customClass"]
+          scenes.insert(Scene(storyboardID: storyboardID, tag: tag, customClass: customClass))
         }
-      }
-
-      @objc func parser(parser: NSXMLParser, didEndElement elementName: String,
-        namespaceURI: String?, qualifiedName qName: String?)
-      {
-        switch elementName {
-        case "scene":
-          inScene = false
-        case "objects" where inScene:
-          readyForFirstObject = false
-        case "connections":
-          readyForConnections = false
-        default:
-          break
+        readyForFirstObject = false
+      case "connections":
+        readyForConnections = true
+      case "segue" where readyForConnections:
+        if let segueID = attributeDict["identifier"] {
+          let customClass = attributeDict["customClass"]
+          segues.insert(Segue(segueID: segueID, customClass: customClass))
         }
+      default:
+        break
       }
     }
+
+    @objc func parser(parser: NSXMLParser, didEndElement elementName: String,
+                      namespaceURI: String?, qualifiedName qName: String?) {
+      switch elementName {
+      case "scene":
+        inScene = false
+      case "objects" where inScene:
+        readyForFirstObject = false
+      case "connections":
+        readyForConnections = false
+      default:
+        break
+      }
+    }
+  }
+
+  public func addStoryboardAtPath(path: String) {
+    let parser = NSXMLParser(contentsOfURL: NSURL.fileURLWithPath(path))
 
     let delegate = ParserDelegate()
     parser?.delegate = delegate

@@ -1,31 +1,31 @@
 import Foundation
 
-public struct TemplateSyntaxError : ErrorType, Equatable, CustomStringConvertible {
-  public let description:String
+public struct TemplateSyntaxError: ErrorType, Equatable, CustomStringConvertible {
+  public let description: String
 
-  public init(_ description:String) {
+  public init(_ description: String) {
     self.description = description
   }
 }
 
-public func ==(lhs:TemplateSyntaxError, rhs:TemplateSyntaxError) -> Bool {
+public func ==(lhs: TemplateSyntaxError, rhs: TemplateSyntaxError) -> Bool {
   return lhs.description == rhs.description
 }
 
 public protocol NodeType {
   /// Render the node in the given context
-  func render(context:Context) throws -> String
+  func render(context: Context) throws -> String
 }
 
 /// Render the collection of nodes in the given context
-public func renderNodes(nodes:[NodeType], _ context:Context) throws -> String {
+public func renderNodes(nodes: [NodeType], _ context: Context) throws -> String {
   return try nodes.map { try $0.render(context) }.joinWithSeparator("")
 }
 
-public class SimpleNode : NodeType {
-  let handler:Context throws -> String
+public class SimpleNode: NodeType {
+  let handler: Context throws -> String
 
-  public init(handler:Context throws -> String) {
+  public init(handler: Context throws -> String) {
     self.handler = handler
   }
 
@@ -34,14 +34,14 @@ public class SimpleNode : NodeType {
   }
 }
 
-public class TextNode : NodeType {
-  public let text:String
+public class TextNode: NodeType {
+  public let text: String
 
-  public init(text:String) {
+  public init(text: String) {
     self.text = text
   }
 
-  public func render(context:Context) throws -> String {
+  public func render(context: Context) throws -> String {
     return self.text
   }
 }
@@ -50,7 +50,7 @@ public protocol Resolvable {
   func resolve(context: Context) throws -> Any?
 }
 
-public class VariableNode : NodeType {
+public class VariableNode: NodeType {
   public let variable: Resolvable
 
   public init(variable: Resolvable) {
@@ -78,11 +78,11 @@ public class VariableNode : NodeType {
 
 
 #if !os(Linux)
-public class NowNode : NodeType {
-  public let format:Variable
+public class NowNode: NodeType {
+  public let format: Variable
 
-  public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
-    var format:Variable?
+  public class func parse(parser: TokenParser, token: Token) throws -> NodeType {
+    var format: Variable?
 
     let components = token.components()
     guard components.count <= 2 else {
@@ -95,14 +95,14 @@ public class NowNode : NodeType {
     return NowNode(format:format)
   }
 
-  public init(format:Variable?) {
+  public init(format: Variable?) {
     self.format = format ?? Variable("\"yyyy-MM-dd 'at' HH:mm\"")
   }
 
   public func render(context: Context) throws -> String {
     let date = NSDate()
     let format = try self.format.resolve(context)
-    var formatter:NSDateFormatter?
+    var formatter: NSDateFormatter?
 
     if let format = format as? NSDateFormatter {
       formatter = format
@@ -119,13 +119,13 @@ public class NowNode : NodeType {
 #endif
 
 
-public class ForNode : NodeType {
-  let variable:Variable
-  let loopVariable:String
-  let nodes:[NodeType]
+public class ForNode: NodeType {
+  let variable: Variable
+  let loopVariable: String
+  let nodes: [NodeType]
   let emptyNodes: [NodeType]
 
-  public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
+  public class func parse(parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
 
     guard components.count == 4 && components[2] == "in" else {
@@ -151,7 +151,7 @@ public class ForNode : NodeType {
     return ForNode(variable: variable, loopVariable: loopVariable, nodes: forNodes, emptyNodes:emptyNodes)
   }
 
-  public init(variable:String, loopVariable:String, nodes:[NodeType], emptyNodes:[NodeType]) {
+  public init(variable: String, loopVariable: String, nodes: [NodeType], emptyNodes: [NodeType]) {
     self.variable = Variable(variable)
     self.loopVariable = loopVariable
     self.nodes = nodes
@@ -182,12 +182,12 @@ public class ForNode : NodeType {
   }
 }
 
-public class IfNode : NodeType {
-  public let variable:Variable
-  public let trueNodes:[NodeType]
-  public let falseNodes:[NodeType]
+public class IfNode: NodeType {
+  public let variable: Variable
+  public let trueNodes: [NodeType]
+  public let falseNodes: [NodeType]
 
-  public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
+  public class func parse(parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
     guard components.count == 2 else {
       throw TemplateSyntaxError("'if' statements should use the following 'if condition' `\(token.contents)`.")
@@ -210,7 +210,7 @@ public class IfNode : NodeType {
     return IfNode(variable: variable, trueNodes: trueNodes, falseNodes: falseNodes)
   }
 
-  public class func parse_ifnot(parser:TokenParser, token:Token) throws -> NodeType {
+  public class func parse_ifnot(parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
     guard components.count == 2 else {
       throw TemplateSyntaxError("'ifnot' statements should use the following 'if condition' `\(token.contents)`.")
@@ -233,7 +233,7 @@ public class IfNode : NodeType {
     return IfNode(variable: variable, trueNodes: trueNodes, falseNodes: falseNodes)
   }
 
-  public init(variable:String, trueNodes:[NodeType], falseNodes:[NodeType]) {
+  public init(variable: String, trueNodes: [NodeType], falseNodes: [NodeType]) {
     self.variable = Variable(variable)
     self.trueNodes = trueNodes
     self.falseNodes = falseNodes
@@ -252,7 +252,7 @@ public class IfNode : NodeType {
     }
 
     context.push()
-    let output:String
+    let output: String
     if truthy {
       output = try renderNodes(trueNodes, context)
     } else {

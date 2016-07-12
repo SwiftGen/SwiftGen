@@ -1,8 +1,14 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
-import UIKit.UIColor
+#if os(iOS) || os(tvOS) || os(watchOS)
+  import UIKit.UIColor
+  typealias Color = UIColor
+#elseif os(OSX)
+  import AppKit.NSColor
+  typealias Color = NSColor
+#endif
 
-extension UIColor {
+extension Color {
   convenience init(rgbaValue: UInt32) {
     let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0
     let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0
@@ -14,6 +20,8 @@ extension UIColor {
 }
 
 {% if colors %}
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
 enum {{enumName|swiftIdentifier}}: UInt32 {
   {% for color in colors %}
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#{{color.rgb}}"></span>
@@ -21,12 +29,13 @@ enum {{enumName|swiftIdentifier}}: UInt32 {
   case {{color.name|swiftIdentifier}} = 0x{{color.rgba}}
   {% endfor %}
 
-  var color: UIColor {
-    return UIColor(named: self)
+  var color: Color {
+    return Color(named: self)
   }
 }
+// swiftlint:enable type_body_length
 
-extension UIColor {
+extension Color {
   convenience init(named name: {{enumName}}) {
     self.init(rgbaValue: name.rawValue)
   }

@@ -17,7 +17,8 @@ struct StringFilters {
   }
 
   /* - If the string starts with only one uppercase letter, lowercase that first letter
-   * - If the string starts with multiple uppercase letters, lowercase those first letters up to the one before the last uppercase one
+   * - If the string starts with multiple uppercase letters, lowercase those first letters
+   *   up to the one before the last uppercase one
    * e.g. "PeoplePicker" gives "peoplePicker" but "URLChooser" gives "urlChooser"
    */
   static func lowerFirstWord(value: Any?) throws -> Any? {

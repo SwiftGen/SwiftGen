@@ -56,7 +56,7 @@ task :build, [:bindir, :tpldir] => [:check_xcode_version] + DEPENDENCIES.map { |
   (bindir, _, tpldir) = defaults(args)
   tpl_rel_path = tpldir.relative_path_from(bindir)
   main = File.read('swiftgen-cli/main.swift')
-  File.write('swiftgen-cli/main.swift', main.gsub(/^let TEMPLATES_RELATIVE_PATH = .*$/, %Q(let TEMPLATES_RELATIVE_PATH = "#{tpl_rel_path}")))
+  File.write('swiftgen-cli/main.swift', main.gsub(/^let templatesRelativePath = .*$/, %Q(let templatesRelativePath = "#{tpl_rel_path}")))
 
   print_info "Building Binary"
   frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
@@ -146,7 +146,7 @@ namespace :playground do
     sh %Q(xcrun actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text UnitTests/fixtures/Images.xcassets)
   end
   task :storyboard do
-    sh %Q(xcrun ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO UnitTests/fixtures/Wizard.storyboard)
+    sh %Q(xcrun ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO UnitTests/fixtures/Storyboards-iOS/Wizard.storyboard)
   end
   task :strings do
     sh %Q(xcrun plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings UnitTests/fixtures/Localizable.strings)
@@ -274,7 +274,7 @@ namespace :release do
 
       print_info "Checking Homebrew formula..."
       sh 'brew audit --strict --online swiftgen'
-      sh 'brew install swiftgen'
+      sh 'brew upgrade swiftgen'
       sh 'brew test swiftgen'
 
       print_info "Pushing to Homebrew"

@@ -1,0 +1,119 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+import Cocoa
+
+protocol StoryboardSceneType {
+  static var storyboardName: String { get }
+}
+
+extension StoryboardSceneType {
+  static func storyboard() -> NSStoryboard {
+    return NSStoryboard(name: self.storyboardName, bundle: nil)
+  }
+
+  static func initialController() -> AnyObject {
+    guard let controller = storyboard().instantiateInitialController()
+    else {
+      fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+    }
+    return controller
+  }
+}
+
+extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
+  func controller() -> AnyObject {
+    return Self.storyboard().instantiateControllerWithIdentifier(self.rawValue)
+  }
+  static func controller(identifier: Self) -> AnyObject {
+    return identifier.controller()
+  }
+}
+
+protocol StoryboardSegueType: RawRepresentable { }
+
+extension NSWindowController {
+  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
+extension NSViewController {
+  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
+    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  }
+}
+
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+
+struct StoryboardScene {
+  enum Message_Osx: String, StoryboardSceneType {
+    static let storyboardName = "Message-osx"
+
+    case messageDetailsScene = "MessageDetails"
+    static func instantiateMessageDetails() -> NSViewController {
+      guard let vc = StoryboardScene.Message_Osx.messageDetailsScene.controller() as? NSViewController
+      else {
+        fatalError("ViewController 'MessageDetails' is not of the expected class NSViewController.")
+      }
+      return vc
+    }
+
+    case messageListScene = "MessageList"
+    static func instantiateMessageList() -> NSViewController {
+      guard let vc = StoryboardScene.Message_Osx.messageListScene.controller() as? NSViewController
+      else {
+        fatalError("ViewController 'MessageList' is not of the expected class NSViewController.")
+      }
+      return vc
+    }
+
+    case messageListFooterScene = "MessageListFooter"
+    static func instantiateMessageListFooter() -> NSViewController {
+      guard let vc = StoryboardScene.Message_Osx.messageListFooterScene.controller() as? NSViewController
+      else {
+        fatalError("ViewController 'MessageListFooter' is not of the expected class NSViewController.")
+      }
+      return vc
+    }
+
+    case messagesTabScene = "MessagesTab"
+    static func instantiateMessagesTab() -> CustomTabViewController {
+      guard let vc = StoryboardScene.Message_Osx.messagesTabScene.controller() as? CustomTabViewController
+      else {
+        fatalError("ViewController 'MessagesTab' is not of the expected class CustomTabViewController.")
+      }
+      return vc
+    }
+
+    case splitMessagesScene = "SplitMessages"
+    static func instantiateSplitMessages() -> NSSplitViewController {
+      guard let vc = StoryboardScene.Message_Osx.splitMessagesScene.controller() as? NSSplitViewController
+      else {
+        fatalError("ViewController 'SplitMessages' is not of the expected class NSSplitViewController.")
+      }
+      return vc
+    }
+
+    case windowCtrlScene = "WindowCtrl"
+    static func instantiateWindowCtrl() -> NSWindowController {
+      guard let vc = StoryboardScene.Message_Osx.windowCtrlScene.controller() as? NSWindowController
+      else {
+        fatalError("ViewController 'WindowCtrl' is not of the expected class NSWindowController.")
+      }
+      return vc
+    }
+  }
+}
+
+struct StoryboardSegue {
+  enum Message_Osx: String, StoryboardSegueType {
+    case Custom = "Custom"
+    case Embed = "Embed"
+    case Modal = "Modal"
+    case Popover = "Popover"
+    case Sheet = "Sheet"
+    case Show = "Show"
+  }
+}

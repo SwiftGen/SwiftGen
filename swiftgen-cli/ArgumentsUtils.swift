@@ -32,6 +32,10 @@ extension Path : ArgumentConvertible {
 
 // MARK: Output (Path or Console) Argument
 
+func printError(string: String) {
+  fputs("\(string)\n", stderr)
+}
+
 enum OutputDestination: ArgumentConvertible {
   case Console
   case File(Path)
@@ -48,7 +52,7 @@ enum OutputDestination: ArgumentConvertible {
     case .File(let path): return path.description
     }
   }
-  
+
   func write(content: String, onlyIfChanged: Bool = false) {
     switch self {
     case .Console:
@@ -61,7 +65,7 @@ enum OutputDestination: ArgumentConvertible {
         try path.write(content)
         print("File written: \(path)")
       } catch let e as NSError {
-        print("Error: \(e)")
+        printError("Error: \(e)")
       }
     }
   }
@@ -76,7 +80,8 @@ enum TemplateError: ErrorType, CustomStringConvertible {
   var description: String {
     switch self {
     case .NamedTemplateNotFound(let name):
-      return "Template named \(name) not found. Use `swiftgen template` to list available named templates or use --templatePath to specify a template by its full path."
+      return "Template named \(name) not found. Use `swiftgen template` to list available named templates " +
+      "or use --templatePath to specify a template by its full path."
     case .TemplatePathNotFound(let path):
       return "Template not found at path \(path.description)."
     }
@@ -84,12 +89,38 @@ enum TemplateError: ErrorType, CustomStringConvertible {
 }
 
 extension Path {
-  static let applicationSupport = Path(NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true).first!)
+  static let applicationSupport: Path = {
+    let paths = NSSearchPathForDirectoriesInDomains(
+      .ApplicationSupportDirectory,
+      .UserDomainMask, true
+    )
+    guard let path = paths.first else {
+      fatalError("Unable to locate the Application Support directory on your machine!")
+    }
+    return Path(path)
+  }()
 }
 
 let appSupportTemplatesPath = Path.applicationSupport + "SwiftGen/templates"
-let bundledTemplatesPath = Path(NSProcessInfo.processInfo().arguments[0]).parent() + TEMPLATES_RELATIVE_PATH
+let bundledTemplatesPath = Path(NSProcessInfo.processInfo().arguments[0]).parent() + templatesRelativePath
 
+/**
+ Returns the path of a template given its prefix and short name, or its full path.
+ * If `templateFullPath` is not empty, check that the path exists and return it (throws if it isn't an existing file)
+ * If `templateFullPath` is empty `""`, search the template named `prefix-templateShortName`
+   in the Application Support directory first, then in the bundled templates,
+   and returns the path if found (throws if none is found)
+
+ - parameter prefix:            the prefix for the template, typically name of one of the SwiftGen subcommand
+                                like `strings`, `colors`, etc
+ - parameter templateShortName: the short name of the template, might be `"default"` or any custom name
+ - parameter templateFullPath:  the full path of the template to find. If this is set to an existing file, it
+                                returns that Path without even using `prefix` and `templateShortName` parameters.
+
+ - throws: TemplateError
+
+ - returns: The Path matching the template to find
+ */
 func findTemplate(prefix: String, templateShortName: String, templateFullPath: String) throws -> Path {
   guard templateFullPath.isEmpty else {
     let fullPath = Path(templateFullPath)

@@ -13,7 +13,10 @@ extension StoryboardSceneType {
   }
 
   static func initialViewController() -> UIViewController {
-    return storyboard().instantiateInitialViewController()!
+    guard let vc = storyboard().instantiateInitialViewController() else {
+      fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+    }
+    return vc
   }
 }
 
@@ -33,6 +36,9 @@ extension UIViewController {
     performSegueWithIdentifier(segue.rawValue, sender: sender)
   }
 }
+
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
 
 struct StoryboardScene {
   enum Anonymous: StoryboardSceneType {
