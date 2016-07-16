@@ -54,7 +54,7 @@ extension L10n: CustomStringConvertible {
 
   private static func tr(key: String, _ args: CVarArg...) -> String {
     let format = NSLocalizedString(key, comment: "")
-    return String(format: format, locale: NSLocale.current(), arguments: args)
+    return String(format: format, locale: Locale.current, arguments: args)
   }
 }
 
