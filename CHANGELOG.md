@@ -19,8 +19,10 @@
   * `swiftgen templates cat <name>` prints the content to the template named `<name>`
   * `<name>` here can be either a subcommand name like `colors` or a
     composed name `colors-rawValue` for a specific template.
-* Fix swift 3 renaming change in strings-swift3.stencil
+* Fix swift 3 renaming change in strings-swift3.stencil.  
   [Kilian Koeltzsch](https://github.com/kiliankoe), [#150](https://github.com/AliSoftware/SwiftGen/pull/150)
+* Fix non-custom class, non-base view controller handling in storyboards-swift3.stencil.  
+  [Syo Ikeda](https://github.com/ikesyo), [#152](https://github.com/AliSoftware/SwiftGen/pull/152)
 
 > 💡 You can now **create your custom templates more easier than ever**, by cloning an existing template!
 >
