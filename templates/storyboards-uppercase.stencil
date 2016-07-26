@@ -49,6 +49,15 @@ struct {{sceneEnumName}} {
   {% if storyboard.scenes %}
   enum {{storyboardName}}: String, StoryboardSceneType {
     static let storyboardName = "{{storyboard.name}}"
+    {% ifnot storyboard.initialScene.isBaseViewController %}
+
+    static func initialViewController() -> {{storyboard.initialScene.viewController}} {
+      guard let vc = storyboard().instantiateInitialViewController() as? {{storyboard.initialScene.viewController}} else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+    {% endif %}
     {% for scene in storyboard.scenes %}
     {% set sceneID %}{{scene.identifier|swiftIdentifier}}{% endset %}
 
@@ -81,6 +90,15 @@ struct {{sceneEnumName}} {
   {% else %}
   enum {{storyboardName}}: StoryboardSceneType {
     static let storyboardName = "{{storyboard.name}}"
+    {% ifnot storyboard.initialScene.isBaseViewController %}
+
+    static func initialViewController() -> {{storyboard.initialScene.viewController}} {
+      guard let vc = storyboard().instantiateInitialViewController() as? {{storyboard.initialScene.viewController}} else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+    {% endif %}
   }
   {% endif %}
   {% endfor %}

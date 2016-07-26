@@ -44,6 +44,13 @@ struct StoryboardScene {
   enum Wizard: String, StoryboardSceneType {
     static let storyboardName = "Wizard"
 
+    static func initialViewController() -> CreateAccViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? CreateAccViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+
     case Accept_CGUScene = "Accept-CGU"
     static func instantiateAcceptCGU() -> UIViewController {
       return StoryboardScene.Wizard.Accept_CGUScene.viewController()

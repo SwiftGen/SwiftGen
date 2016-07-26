@@ -43,6 +43,13 @@ extension UIViewController {
 struct StoryboardScene {
   enum Anonymous: StoryboardSceneType {
     static let storyboardName = "Anonymous"
+
+    static func initialViewController() -> UINavigationController {
+      guard let vc = storyboard().instantiateInitialViewController() as? UINavigationController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
   }
 }
 
