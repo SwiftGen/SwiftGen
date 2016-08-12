@@ -35,16 +35,18 @@ public func == (lhs: Font, rhs: Font) -> Bool {
 // MARK: CTFont
 
 extension CTFont {
-  static func parseFontInfo(fileURL: NSURL) -> Font? {
+  static func parseFontInfo(fileURL: NSURL) -> [Font]? {
     let descs = CTFontManagerCreateFontDescriptorsFromURL(fileURL) as NSArray?
-    guard let desc = (descs as? [CTFontDescriptorRef])?.first else { return nil }
+    guard let descRefs = (descs as? [CTFontDescriptorRef]) else { return nil }
 
-    let font = CTFontCreateWithFontDescriptorAndOptions(desc, 0.0, nil, [.PreventAutoActivation])
-    let postScriptName = CTFontCopyPostScriptName(font) as String
-    guard let familyName = CTFontCopyAttribute(font, kCTFontFamilyNameAttribute) as? String,
-      style = CTFontCopyAttribute(font, kCTFontStyleNameAttribute) as? String else { return nil }
+    return descRefs.flatMap { (desc) -> Font? in
+      let font = CTFontCreateWithFontDescriptorAndOptions(desc, 0.0, nil, [.PreventAutoActivation])
+      let postScriptName = CTFontCopyPostScriptName(font) as String
+      guard let familyName = CTFontCopyAttribute(font, kCTFontFamilyNameAttribute) as? String,
+        style = CTFontCopyAttribute(font, kCTFontStyleNameAttribute) as? String else { return nil }
 
-    return Font(familyName: familyName, style: style, postScriptName: postScriptName)
+      return Font(familyName: familyName, style: style, postScriptName: postScriptName)
+    }
   }
 }
 
@@ -69,9 +71,9 @@ public final class FontsFileParser {
             continue
           }
           guard UTTypeConformsTo(uti, "public.font") else { continue }
-          guard let font = CTFont.parseFontInfo(file) else { continue }
+          guard let fonts = CTFont.parseFontInfo(file) else { continue }
 
-          addFont(font)
+          fonts.forEach { addFont($0) }
         }
     }
   }

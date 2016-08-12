@@ -29,6 +29,20 @@ extension Font {
 }
 
 struct CustomFamily {
+  enum Avenir: String, FontConvertible {
+    case Black = "Avenir-Black"
+    case BlackOblique = "Avenir-BlackOblique"
+    case Light = "Avenir-Light"
+    case MediumOblique = "Avenir-MediumOblique"
+    case Roman = "Avenir-Roman"
+    case Heavy = "Avenir-Heavy"
+    case HeavyOblique = "Avenir-HeavyOblique"
+    case Medium = "Avenir-Medium"
+    case Oblique = "Avenir-Oblique"
+    case LightOblique = "Avenir-LightOblique"
+    case Book = "Avenir-Book"
+    case BookOblique = "Avenir-BookOblique"
+  }
   enum SFNSDisplay: String, FontConvertible {
     case Regular = ".SFNSDisplay-Regular"
     case Heavy = ".SFNSDisplay-Heavy"
