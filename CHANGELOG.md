@@ -20,6 +20,8 @@
   [Kilian Koeltzsch](https://github.com/kiliankoe), [#150](https://github.com/AliSoftware/SwiftGen/pull/150)
 * Fix non-custom class, non-base view controller handling in storyboards-swift3.stencil.  
   [Syo Ikeda](https://github.com/ikesyo), [#152](https://github.com/AliSoftware/SwiftGen/pull/152)
+* Add strongly typed `initialViewController()` overrides for storyboard templates if available.  
+  [Syo Ikeda](https://github.com/ikesyo), [#153](https://github.com/AliSoftware/SwiftGen/pull/153)
 
 > 💡 You can now **create your custom templates more easier than ever**, by cloning an existing template!
 >

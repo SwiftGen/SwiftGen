@@ -64,6 +64,9 @@ extension AssetsCatalogParser {
  - `segueEnumName`: `String`
  - `storyboards`: `Array` of:
     - `name`: `String`
+    - `initialScene`: `Dictionary`
+       - `viewController`: `String`
+       - `isBaseViewController`: `Bool`, indicate if the baseType is 'viewController' or anything else
     - `scenes`: `Array` (absent if empty)
        - `identifier`: `String`
        - `customClass`: `String` (absent if generic UIViewController)
@@ -80,6 +83,13 @@ extension StoryboardParser {
     let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sort(<)
     let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:AnyObject] in
       var sbMap: [String:AnyObject] = ["name": storyboardName]
+      if let initialScene = initialScenes[storyboardName] {
+        var initial: [String:AnyObject] = ["viewController": initialScene.customClass ?? "UI\(uppercaseFirst(initialScene.tag))"]
+        if initialScene.customClass == nil && initialScene.tag == "viewController" {
+          initial["isBaseViewController"] = true
+        }
+        sbMap["initialScene"] = initial
+      }
       if let scenes = storyboardsScenes[storyboardName] {
         sbMap["scenes"] = scenes
           .sort({$0.storyboardID < $1.storyboardID})

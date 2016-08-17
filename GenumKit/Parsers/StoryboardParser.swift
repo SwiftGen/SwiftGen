@@ -7,6 +7,12 @@
 import Foundation
 
 public final class StoryboardParser {
+  struct InitialScene {
+    let objectID: String?
+    let tag: String
+    let customClass: String?
+  }
+
   struct Scene {
     let storyboardID: String
     let tag: String
@@ -18,12 +24,15 @@ public final class StoryboardParser {
     let customClass: String?
   }
 
+  var initialScenes = [String: InitialScene]()
   var storyboardsScenes = [String: Set<Scene>]()
   var storyboardsSegues = [String: Set<Segue>]()
 
   public init() {}
 
   private class ParserDelegate: NSObject, NSXMLParserDelegate {
+    var initialViewControllerObjectID: String?
+    var initialScene: InitialScene?
     var scenes = Set<Scene>()
     var segues = Set<Segue>()
     var inScene = false
@@ -35,13 +44,18 @@ public final class StoryboardParser {
                       attributes attributeDict: [String: String]) {
 
       switch elementName {
+      case "document":
+        initialViewControllerObjectID = attributeDict["initialViewController"]
       case "scene":
         inScene = true
       case "objects" where inScene:
         readyForFirstObject = true
       case let tag where (readyForFirstObject && tag != "viewControllerPlaceholder"):
+        let customClass = attributeDict["customClass"]
+        if let objectID = attributeDict["id"] where objectID == initialViewControllerObjectID {
+          initialScene = InitialScene(objectID: objectID, tag: tag, customClass: customClass)
+        }
         if let storyboardID = attributeDict["storyboardIdentifier"] {
-          let customClass = attributeDict["customClass"]
           scenes.insert(Scene(storyboardID: storyboardID, tag: tag, customClass: customClass))
         }
         readyForFirstObject = false
@@ -80,6 +94,7 @@ public final class StoryboardParser {
     parser?.parse()
 
     let storyboardName = ((path as NSString).lastPathComponent as NSString).stringByDeletingPathExtension
+    initialScenes[storyboardName] = delegate.initialScene ?? InitialScene(objectID: nil, tag: "viewController", customClass: nil)
     storyboardsScenes[storyboardName] = delegate.scenes
     storyboardsSegues[storyboardName] = delegate.segues
   }

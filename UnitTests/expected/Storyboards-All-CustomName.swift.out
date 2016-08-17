@@ -43,6 +43,13 @@ extension UIViewController {
 struct XCTStoryboardsScene {
   enum Anonymous: StoryboardSceneType {
     static let storyboardName = "Anonymous"
+
+    static func initialViewController() -> UINavigationController {
+      guard let vc = storyboard().instantiateInitialViewController() as? UINavigationController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
   }
   enum Dependency: String, StoryboardSceneType {
     static let storyboardName = "Dependency"
@@ -101,6 +108,13 @@ struct XCTStoryboardsScene {
   }
   enum Wizard: String, StoryboardSceneType {
     static let storyboardName = "Wizard"
+
+    static func initialViewController() -> CreateAccViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? CreateAccViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
 
     case Accept_CGUScene = "Accept-CGU"
     static func instantiateAcceptCGU() -> UIViewController {
