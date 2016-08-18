@@ -33,12 +33,13 @@
   [Olivier Halligon](https://github.com/AliSoftware)
 * Now reports an error when it failed to parse a color in a color input file.  
   [Olivier Halligon](https://github.com/AliSoftware), [#162](https://github.com/AliSoftware/SwiftGen/issues/162)
-
+* Add struct-based structured identifiers using dot syntax via `-t dot-syntax` option.
+  [Cihat Gündüz](https://github.com/Dschee), [#159](https://github.com/AliSoftware/SwiftGen/pull/159)
 
 > 💡 You can now **create your custom templates more easier than ever**, by cloning an existing template!
 >
 > e.g. to clone [the default `strings-default.stencil` template](https://github.com/AliSoftware/SwiftGen/blob/master/templates/strings-default.stencil):
-> 
+>
 > * use `swiftgen templates cat strings --output strings-custom.stencil`
 > * modify the cloned `strings-custom.stencil` template to your liking
 > * use it with `swiftgen strings … --templatePath strings-custom.stencil …` in your projects!
@@ -63,9 +64,9 @@ new keys `isBaseViewController` and `baseType` has been added.
 
 This means that if you did implement your own custom templates for storyboards (instead of using the bundled ones),
 you'll have to remplace `{{class}}` by `{{customClass}}` in those storyboard templates, otherwise they'll probably
-stop working as expected. That's the main reason why the version has been bumped to a major version 2.0.0. 
-  
-    
+stop working as expected. That's the main reason why the version has been bumped to a major version 2.0.0.
+
+
 ## 1.1.2
 
 * Fix issue introduced by 1.1.1 in storyboard templates not returning.  
