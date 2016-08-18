@@ -1,1 +1,36 @@
-# TODO
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+{% if structuredStrings %}
+import Foundation
+
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+// swiftlint:disable nesting
+
+struct {{enumName}} {
+  {# ROOT LEVEL #}
+  {% for string in structuredStrings.strings %}
+  /// {{string.translation}}
+  {% if string.params %}
+  static func {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+    return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
+  }
+  {% else %}
+  static let {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+  {% endif %}
+  {% endfor %}
+}
+
+extension {{enumName}} {
+  private static func tr(key: String, _ args: CVarArgType...) -> String {
+    let format = NSLocalizedString(key, comment: "")
+    return String(format: format, locale: NSLocale.currentLocale(), arguments: args)
+  }
+}
+
+// swiftlint:enable type_body_length
+// swiftlint:enable nesting
+
+{% else %}
+// No string found
+{% endif %}
