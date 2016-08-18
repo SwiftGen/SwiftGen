@@ -1,0 +1,60 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+#if os(iOS) || os(tvOS) || os(watchOS)
+  import UIKit.UIFont
+  typealias Font = UIFont
+#elseif os(OSX)
+  import AppKit.NSFont
+  typealias Font = NSFont
+#endif
+
+// swiftlint:disable file_length
+
+protocol FontConvertible {
+  func font(size: CGFloat) -> Font!
+}
+
+extension FontConvertible where Self: RawRepresentable, Self.RawValue == String {
+  func font(size: CGFloat) -> Font! {
+    return Font(font: self, size: size)
+  }
+}
+
+extension Font {
+  convenience init!<FontType: FontConvertible>
+    (font: FontType, size: CGFloat)
+    where FontType: RawRepresentable, FontType.RawValue == String {
+      self.init(name: font.rawValue, size: size)
+  }
+}
+
+struct FontFamily {
+  enum Avenir: String, FontConvertible {
+    case Black = "Avenir-Black"
+    case BlackOblique = "Avenir-BlackOblique"
+    case Light = "Avenir-Light"
+    case MediumOblique = "Avenir-MediumOblique"
+    case Roman = "Avenir-Roman"
+    case Heavy = "Avenir-Heavy"
+    case HeavyOblique = "Avenir-HeavyOblique"
+    case Medium = "Avenir-Medium"
+    case Oblique = "Avenir-Oblique"
+    case LightOblique = "Avenir-LightOblique"
+    case Book = "Avenir-Book"
+    case BookOblique = "Avenir-BookOblique"
+  }
+  enum SFNSDisplay: String, FontConvertible {
+    case Regular = ".SFNSDisplay-Regular"
+    case Heavy = ".SFNSDisplay-Heavy"
+    case Black = ".SFNSDisplay-Black"
+    case Bold = ".SFNSDisplay-Bold"
+  }
+  enum SFNSText: String, FontConvertible {
+    case Heavy = ".SFNSText-Heavy"
+    case Bold = ".SFNSText-Bold"
+    case Regular = ".SFNSText-Regular"
+  }
+  enum ZapfDingbats: String, FontConvertible {
+    case Regular = "ZapfDingbatsITC"
+  }
+}
