@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0902F5C11D6B86D00080F24D /* colors-bad.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0902F5C01D6B86D00080F24D /* colors-bad.txt */; };
 		091150311BD31A3300EBC803 /* ArgumentsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091150301BD31A3300EBC803 /* ArgumentsUtils.swift */; };
 		091150361BD3274E00EBC803 /* images-default.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 091150351BD3274E00EBC803 /* images-default.stencil */; };
 		0911503B1BD3ECAE00EBC803 /* colors-default.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0911503A1BD3ECA900EBC803 /* colors-default.stencil */; };
@@ -147,6 +148,7 @@
 /* Begin PBXFileReference section */
 		0901413E1BCC64C9002E8617 /* storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = storyboards.swift; sourceTree = "<group>"; };
 		090141401BCC64FE002E8617 /* images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = images.swift; sourceTree = "<group>"; };
+		0902F5C01D6B86D00080F24D /* colors-bad.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "colors-bad.txt"; sourceTree = "<group>"; };
 		09030BC01B6D2A8F00275BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09030BC91B6D2BB700275BF5 /* StoryboardsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = StoryboardsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		09030BD11B6D2E3900275BF5 /* ImagesTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ImagesTests.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -332,6 +334,7 @@
 			children = (
 				09030C2F1B6D4F8500275BF5 /* Images.xcassets */,
 				09030C1D1B6D473E00275BF5 /* colors.txt */,
+				0902F5C01D6B86D00080F24D /* colors-bad.txt */,
 				641CD33D1C3AE35A00D7FED9 /* colors.clr */,
 				097504261C78ED3400D1A01B /* colors.xml */,
 				C2265B581C8907CA00CA5C4F /* colors.json */,
@@ -635,6 +638,7 @@
 				4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */,
 				4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */,
 				47CB53431CFC175100AA19C0 /* strings-swift3.stencil in Resources */,
+				0902F5C11D6B86D00080F24D /* colors-bad.txt in Resources */,
 				47CB53391CFC0B2100AA19C0 /* ZapfDingbats.ttf in Resources */,
 				09A87B711BCCA5FC00D9B9F5 /* Localizable.strings in Resources */,
 				47CB533E1CFC170E00AA19C0 /* Storyboards-Anonymous-Swift3.swift.out in Resources */,

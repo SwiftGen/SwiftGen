@@ -25,6 +25,6 @@ let stringsCommand = command(
     let rendered = try template.render(context)
     output.write(rendered, onlyIfChanged: true)
   } catch let error as NSError {
-    printError("Error: \(error.localizedDescription)")
+    printError("error: \(error.localizedDescription)")
   }
 }

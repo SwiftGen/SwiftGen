@@ -24,9 +24,13 @@ class ColorsTextFileTests: XCTestCase {
 
   func testListWithDefaults() {
     let parser = ColorsTextFileParser()
-    parser.addColorWithName("Text&Body Color", value: "0x999999")
-    parser.addColorWithName("ArticleTitle", value: "#996600")
-    parser.addColorWithName("ArticleBackground", value: "#ffcc0099")
+    do {
+      try parser.addColorWithName("Text&Body Color", value: "0x999999")
+      try parser.addColorWithName("ArticleTitle", value: "#996600")
+      try parser.addColorWithName("ArticleBackground", value: "#ffcc0099")
+    } catch {
+      XCTFail("Failed with unexpected error \(error)")
+    }
 
     let template = GenumTemplate(templateString: fixtureString("colors-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -37,9 +41,13 @@ class ColorsTextFileTests: XCTestCase {
 
   func testListWithRawValueTemplate() {
     let parser = ColorsTextFileParser()
-    parser.addColorWithName("Text&Body Color", value: "0x999999")
-    parser.addColorWithName("ArticleTitle", value: "#996600")
-    parser.addColorWithName("ArticleBackground", value: "#ffcc0099")
+    do {
+      try parser.addColorWithName("Text&Body Color", value: "0x999999")
+      try parser.addColorWithName("ArticleTitle", value: "#996600")
+      try parser.addColorWithName("ArticleBackground", value: "#ffcc0099")
+    } catch {
+      XCTFail("Failed with unexpected error \(error)")
+    }
 
     let template = GenumTemplate(templateString: fixtureString("colors-rawValue.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -69,6 +77,19 @@ class ColorsTextFileTests: XCTestCase {
     let expected = self.fixtureString("Colors-Txt-File-CustomName.swift.out")
     XCTDiffStrings(result, expected)
   }
+
+  func testFileWithBadFormatting() {
+    let parser = ColorsTextFileParser()
+    do {
+      try parser.parseFile(fixturePath("colors-bad.txt"))
+      XCTFail("Code did parse file successfully while it was expected to fail for bad formatting")
+    } catch ColorsParserError.InvalidHexColor(string: ":", key: "MX_WELCOME_BACKGROUND"?) {
+      // That's the expected exception we want to happen
+    } catch let error {
+      XCTFail("Unexpected error occured while parsing: \(error)")
+    }
+  }
+
 }
 
 // MARK: - Tests for CLR Palette files

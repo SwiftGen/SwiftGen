@@ -70,7 +70,7 @@ private func templatePathCommandGenerator(execute: (Path, OutputDestination) thr
       let path = try findTemplate(prefix, templateShortName: shortName, templateFullPath: "")
       try execute(path, output)
     } catch {
-      printError("Failed to read template: \(error)")
+      printError("error: failed to read template: \(error)")
     }
   }
 }

@@ -37,6 +37,6 @@ let storyboardsCommand = command(
     let rendered = try template.render(context)
     output.write(rendered, onlyIfChanged: true)
   } catch {
-    printError("Failed to render template \(error)")
+    printError("error: failed to render template \(error)")
   }
 }
