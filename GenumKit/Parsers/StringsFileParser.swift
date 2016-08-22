@@ -35,7 +35,7 @@ public final class StringsFileParser {
     case Char = "Character"
     case CString = "UnsafePointer<unichar>"
     case Pointer = "UnsafePointer<Void>"
-    case Unknown = "Any"
+    case Unknown = "UnsafePointer<()>"
 
     init?(formatChar char: Character) {
       guard let lcChar = String(char).lowercaseString.characters.first else {

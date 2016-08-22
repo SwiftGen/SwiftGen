@@ -47,7 +47,7 @@ let templatesListCommand = command(
   outputLines.append("Simply name them 'subcmd-customname.stencil' where subcmd is one of the swiftgen subcommand,")
   outputLines.append("namely " + allSubcommands.map({"\($0)-xxx.stencil"}).joinWithSeparator(", ") + ".")
   outputLines.append("")
-  
+
   output.write(outputLines.joinWithSeparator("\n"))
 }
 
