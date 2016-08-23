@@ -119,6 +119,17 @@ class StringsTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
 
+  func testFileWithGenstrings() {
+    let parser = StringsFileParser()
+    try! parser.parseStringsFile(fixturePath("Localizable.strings"))
+
+    let template = GenumTemplate(templateString: fixtureString("strings-genstrings.stencil"))
+    let result = try! template.render(parser.stencilContext())
+
+    let expected = self.fixtureString("Strings-File-Genstrings.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+
   ////////////////////////////////////////////////////////////////////////
 
   func testParseStringPlaceholder() {

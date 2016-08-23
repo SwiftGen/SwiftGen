@@ -1,0 +1,42 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+{% if strings %}
+import Foundation
+
+enum {{enumName}} {
+  {% for string in strings %}
+  /// {{string.translation}}
+  case {{string.key|swiftIdentifier|snakeToCamelCase}}{% if string.params %}({{string.params.types|join}}){% endif %}
+  {% endfor %}
+}
+
+extension {{enumName}}: CustomStringConvertible {
+  var description: String { return self.string }
+
+  var string: String {
+    switch self {
+      {% for string in strings %}
+      {% if string.params %}
+      case .{{string.key|swiftIdentifier|snakeToCamelCase}}({{string.params.declarations|join}}):
+        let format = NSLocalizedString("{{string.key}}", comment: "")
+        return {{enumName}}.tr(format, {{string.params.names|join}})
+      {% else %}
+      case .{{string.key|swiftIdentifier|snakeToCamelCase}}:
+        let format = NSLocalizedString("{{string.key}}", comment: "")
+        return {{enumName}}.tr(format)
+      {% endif %}
+      {% endfor %}
+    }
+  }
+
+  private static func tr(format: String, _ args: CVarArgType...) -> String {
+    return String(format: format, locale: NSLocale.currentLocale(), arguments: args)
+  }
+}
+
+func tr(key: {{enumName}}) -> String {
+  return key.string
+}
+{% else %}
+// No string found
+{% endif %}
