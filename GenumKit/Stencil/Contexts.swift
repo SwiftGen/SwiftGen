@@ -150,9 +150,9 @@ extension StringsFileParser {
         let params = [
           "count": entry.types.count,
           "types": entry.types.map { $0.rawValue },
-          "declarations": (0..<entry.types.count).map { "let p\($0)" },
-          "names": (0..<entry.types.count).map { "p\($0)" },
-          "typednames": (0..<entry.types.count).map { "p\($0): \(entry.types[$0].rawValue)" }
+          "declarations": entry.types.indices.map { "let p\($0)" },
+          "names": entry.types.indices.map { "p\($0)" },
+          "typednames": entry.types.indices.map { "p\($0): \(entry.types[$0].rawValue)" }
         ]
         return ["key": entry.key, "translation": entry.translation, "params": params, "keytail": keytail]
       } else {
