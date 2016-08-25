@@ -110,7 +110,19 @@ struct {{enumName}} {
             {% for subenum6 in subenum5.subenums %}
 
             struct {{subenum6.name|swiftIdentifier|capitalize|snakeToCamelCase}} {
-              // maximum level reached, please make sure not to use keys with so many levels
+              {# FALLBACK LEVEL #}
+              {% if subenum6.strings %}
+              {% for string in subenum6.strings %}
+              /// {{string.translation}}
+              {% if string.params %}
+              static func {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+                return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
+              }
+              {% else %}
+              static let {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+              {% endif %}
+              {% endfor %}
+              {% endif %}
             }
             {% endfor %}
             {% endif %}
