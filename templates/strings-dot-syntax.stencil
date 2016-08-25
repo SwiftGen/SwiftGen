@@ -6,6 +6,8 @@ import Foundation
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
 // swiftlint:disable nesting
+// swiftlint:disable variable_name
+// swiftlint:disable valid_docs
 
 struct {{enumName}} {
   {# ROOT LEVEL #}
@@ -138,6 +140,8 @@ extension {{enumName}} {
 
 // swiftlint:enable type_body_length
 // swiftlint:enable nesting
+// swiftlint:enable variable_name
+// swiftlint:enable valid_docsx
 
 {% else %}
 // No string found

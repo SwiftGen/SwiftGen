@@ -5,6 +5,8 @@ import Foundation
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
 // swiftlint:disable nesting
+// swiftlint:disable variable_name
+// swiftlint:disable valid_docs
 
 struct L10n {
   /// Title of the alert
@@ -68,3 +70,5 @@ extension L10n {
 
 // swiftlint:enable type_body_length
 // swiftlint:enable nesting
+// swiftlint:enable variable_name
+// swiftlint:enable valid_docs
