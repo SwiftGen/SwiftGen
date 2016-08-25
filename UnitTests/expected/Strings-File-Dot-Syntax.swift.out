@@ -48,6 +48,13 @@ struct L10n {
         struct Even {
           /// Settings
           static let Deeper = L10n.tr("settings.navigation-bar.title.even.deeper")
+
+          struct Deeper {
+
+            struct Than {
+              // maximum level reached, please make sure not to use keys with so many levels
+            }
+          }
         }
       }
     }

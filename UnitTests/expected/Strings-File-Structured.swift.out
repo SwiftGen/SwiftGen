@@ -45,6 +45,15 @@ enum L10n {
         enum EvenL10n {
           /// Settings
           case Deeper
+
+          case Deeper(DeeperL10n)
+          enum DeeperL10n {
+
+            case Than(ThanL10n)
+            enum ThanL10n {
+              // maximum level reached, please make sure not to use keys with so many levels
+            }
+          }
         }
       }
     }
@@ -102,6 +111,12 @@ extension L10n: CustomStringConvertible {
                     switch level4key {
                       case .Deeper:
                         return L10n.tr("settings.navigation-bar.title.even.deeper")
+                      case .Deeper(let level5key):
+
+                        switch level5key {
+                          case .Than(let level6key):
+                            // maximum level reached, please make sure not to use keys with so many levels
+                        }
                     }
                 }
             }
