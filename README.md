@@ -213,6 +213,46 @@ let ban = tr(.BananasOwner(2, "John"))
 
 This [script](https://gist.github.com/Lutzifer/3e7d967f73e38b57d4355f23274f303d) from [Lutzifer](https://github.com/Lutzifer/) can be run inside the project to transform `NSLocalizedString(...)` calls to the `tr(...)` syntax.
 
+
+### Dot Syntax Support
+
+SwiftGen also has a template with dot syntax support. This is the recommended way of using the `strings` command in SwiftGen and will replace the current default in future versions.
+The main advantage of this is a much more useful auto-completion. To use the template simply add the `-t` option as follows:
+
+```
+swiftgen strings -t dot-syntax /path/to/Localizable.strings
+```
+
+Given the same `Localizable.strings` as above the usage will now be:
+
+```swift
+let title = L10n.AlertTitle
+// -> "Title of the Alert"
+
+let nbApples = L10n.Apples.Count(5)
+// -> "You have 5 apples"
+
+let ban = L10n.Bananas.Owner(2, "John")
+// -> "Those 2 bananas belong to John."
+```
+
+Note that all dots within the key are converted to dots in code. Also the key will be camel cased automatically separated by underscore (`_`) or dash (`-`):
+
+```swift
+"HOME.NAVIGATION_BAR.TITLE" = "Home";
+// or
+"home.navigation-bar.title" = "Home";
+```
+
+Can both be used as:
+
+```swift
+L10n.Home.NavigationBar.Title
+```
+
+The maximum number of dots supported is five (deeper levels are rendered without dots after the fifth level).
+
+
 ## UIStoryboard
 
 ```
@@ -516,7 +556,7 @@ NSColor(named: .Translucent)
 This way, no need to enter the color red, green, blue, alpha values each time and create ugly constants in the global namespace for them.
 
 
-## UIFont and NSFont 
+## UIFont and NSFont
 
 ```
 swiftgen fonts /path/to/font/dir
