@@ -33,7 +33,7 @@
   [Olivier Halligon](https://github.com/AliSoftware)
 * Now reports an error when it failed to parse a color in a color input file.  
   [Olivier Halligon](https://github.com/AliSoftware), [#162](https://github.com/AliSoftware/SwiftGen/issues/162)
-* Add struct-based structured identifiers using dot syntax via `-t dot-syntax` option.
+* New Strings template (available via `-t dot-syntax`), allowing string keys containing dots (like foo.bar.baz) to be organized as a hierarchy and accessible via dot syntax.
   [Cihat Gündüz](https://github.com/Dschee), [#159](https://github.com/AliSoftware/SwiftGen/pull/159)
 
 > 💡 You can now **create your custom templates more easier than ever**, by cloning an existing template!
