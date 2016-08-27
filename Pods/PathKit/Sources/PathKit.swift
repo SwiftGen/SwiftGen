@@ -673,6 +673,6 @@ internal func +(lhs: String, rhs: String) -> Path {
 
 extension Array {
   var fullSlice: ArraySlice<Element> {
-    return self[self.indices]
+    return self[0..<self.endIndex]
   }
 }
