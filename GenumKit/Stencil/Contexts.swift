@@ -150,8 +150,9 @@ extension StringsFileParser {
         let params = [
           "count": entry.types.count,
           "types": entry.types.map { $0.rawValue },
-          "declarations": (0..<entry.types.count).map { "let p\($0)" },
-          "names": (0..<entry.types.count).map { "p\($0)" }
+          "declarations": entry.types.indices.map { "let p\($0)" },
+          "names": entry.types.indices.map { "p\($0)" },
+          "typednames": entry.types.enumerate().map { "p\($0): \($1.rawValue)" }
         ]
         return ["key": entry.key, "translation": entry.translation, "params": params, "keytail": keytail]
       } else {
@@ -160,7 +161,7 @@ extension StringsFileParser {
     }
 
     let strings = entries.map { entryToStringMapper($0, []) }
-    let structuredStrings = structure(entries, mapper: entryToStringMapper)
+    let structuredStrings = structure(entries, mapper: entryToStringMapper, currentLevel: 0, maxLevel: 5)
 
     return Context(dictionary:
       [
@@ -178,7 +179,7 @@ extension StringsFileParser {
   }
 
   typealias Mapper = (entry: Entry, keyPath: [String]) -> [String: AnyObject]
-  private func structure(entries: [Entry], keyPath: [String] = [], mapper: Mapper) -> [String: AnyObject] {
+  private func structure(entries: [Entry], keyPath: [String] = [], mapper: Mapper, currentLevel: Int, maxLevel: Int) -> [String: AnyObject] {
 
     var structuredStrings: [String: AnyObject] = [:]
 
@@ -213,11 +214,34 @@ extension StringsFileParser {
       let entriesInKeyPath = entries.filter {
         Array($0.keyStructure.map(normalize).prefix(nextLevelKeyPath.count)) == nextLevelKeyPath.map(normalize)
       }
-      subenums.append(structure(entriesInKeyPath, keyPath: nextLevelKeyPath, mapper: mapper))
+      if currentLevel >= maxLevel {
+        subenums.append(flattenedStrings(entries, keyPath: nextLevelKeyPath, mapper: mapper, level: currentLevel+1))
+      } else {
+        subenums.append(structure(entriesInKeyPath, keyPath: nextLevelKeyPath, mapper: mapper, currentLevel: currentLevel+1, maxLevel: maxLevel))
+      }
     }
 
     if !subenums.isEmpty {
       structuredStrings["subenums"] = subenums
+    }
+
+    return structuredStrings
+  }
+
+  private func flattenedStrings(entries: [Entry], keyPath: [String], mapper: Mapper, level: Int) -> [String: AnyObject] {
+
+    var structuredStrings: [String: AnyObject] = [:]
+
+    let strings = entries
+      .filter { $0.keyStructure.count >= keyPath.count+1 }
+      .map { mapper(entry: $0, keyPath: keyPath) }
+
+    if !strings.isEmpty {
+      structuredStrings["strings"] = strings
+    }
+
+    if let lastKeyPathComponent = keyPath.last {
+      structuredStrings["name"] = lastKeyPathComponent
     }
 
     return structuredStrings
