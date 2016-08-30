@@ -8,7 +8,7 @@ import Foundation
 
 public final class StoryboardParser {
   struct InitialScene {
-    let objectID: String?
+    let objectID: String
     let tag: String
     let customClass: String?
   }
@@ -94,7 +94,7 @@ public final class StoryboardParser {
     parser?.parse()
 
     let storyboardName = ((path as NSString).lastPathComponent as NSString).stringByDeletingPathExtension
-    initialScenes[storyboardName] = delegate.initialScene ?? InitialScene(objectID: nil, tag: "viewController", customClass: nil)
+    initialScenes[storyboardName] = delegate.initialScene
     storyboardsScenes[storyboardName] = delegate.scenes
     storyboardsSegues[storyboardName] = delegate.segues
   }
