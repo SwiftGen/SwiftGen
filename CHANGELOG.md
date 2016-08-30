@@ -21,7 +21,7 @@
 * Fix non-custom class, non-base view controller handling in storyboards-swift3.stencil.  
   [Syo Ikeda](https://github.com/ikesyo), [#152](https://github.com/AliSoftware/SwiftGen/pull/152)
 * Add strongly typed `initialViewController()` overrides for storyboard templates if available.  
-  [Syo Ikeda](https://github.com/ikesyo), [#153](https://github.com/AliSoftware/SwiftGen/pull/153)
+  [Syo Ikeda](https://github.com/ikesyo), [#153](https://github.com/AliSoftware/SwiftGen/pull/153), [#163](https://github.com/AliSoftware/SwiftGen/pull/163)
 * Add support for font files containing multiple descriptors.  
   [Chris Ellsworth](https://github.com/chrisellsworth), [#156](https://github.com/AliSoftware/SwiftGen/pull/156)
 * Update deprecated usage of generics for Swift 3 / Xcode 8 beta 6.  
