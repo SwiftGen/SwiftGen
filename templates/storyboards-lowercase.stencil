@@ -49,6 +49,7 @@ struct {{sceneEnumName}} {
   {% if storyboard.scenes %}
   enum {{storyboardName}}: String, StoryboardSceneType {
     static let storyboardName = "{{storyboard.name}}"
+    {% if storyboard.initialScene %}
     {% ifnot storyboard.initialScene.isBaseViewController %}
 
     static func initialViewController() -> {{storyboard.initialScene.viewController}} {
@@ -57,6 +58,7 @@ struct {{sceneEnumName}} {
       }
       return vc
     }
+    {% endif %}
     {% endif %}
     {% for scene in storyboard.scenes %}
     {% set sceneID %}{{scene.identifier|swiftIdentifier|lowerFirstWord}}{% endset %}
@@ -90,6 +92,7 @@ struct {{sceneEnumName}} {
   {% else %}
   enum {{storyboardName}}: StoryboardSceneType {
     static let storyboardName = "{{storyboard.name}}"
+    {% if storyboard.initialScene %}
     {% ifnot storyboard.initialScene.isBaseViewController %}
 
     static func initialViewController() -> {{storyboard.initialScene.viewController}} {
@@ -98,6 +101,7 @@ struct {{sceneEnumName}} {
       }
       return vc
     }
+    {% endif %}
     {% endif %}
   }
   {% endif %}

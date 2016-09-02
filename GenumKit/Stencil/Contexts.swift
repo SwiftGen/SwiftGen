@@ -64,7 +64,7 @@ extension AssetsCatalogParser {
  - `segueEnumName`: `String`
  - `storyboards`: `Array` of:
     - `name`: `String`
-    - `initialScene`: `Dictionary`
+    - `initialScene`: `Dictionary` (absent if not specified)
        - `viewController`: `String`
        - `isBaseViewController`: `Bool`, indicate if the baseType is 'viewController' or anything else
     - `scenes`: `Array` (absent if empty)
