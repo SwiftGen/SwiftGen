@@ -43,7 +43,7 @@ extension ColorsFileParser {
         "alpha": comps[3],
       ]
     }).sort { $0["name"] < $1["name"] }
-    return Context(dictionary: ["enumName": enumName, "colors": colorMap])
+    return Context(dictionary: ["enumName": enumName, "colors": colorMap], namespace: GenumNamespace())
   }
 }
 
@@ -54,7 +54,7 @@ extension ColorsFileParser {
 */
 extension AssetsCatalogParser {
   public func stencilContext(enumName enumName: String = "Asset") -> Context {
-    return Context(dictionary: ["enumName": enumName, "images": imageNames])
+    return Context(dictionary: ["enumName": enumName, "images": imageNames], namespace: GenumNamespace())
   }
 }
 
@@ -120,7 +120,8 @@ extension StoryboardParser {
         "sceneEnumName": sceneEnumName,
         "segueEnumName": segueEnumName,
         "storyboards": storyboardsMap
-      ]
+      ],
+      namespace: GenumNamespace()
     )
   }
 }
@@ -169,7 +170,8 @@ extension StringsFileParser {
         "tableName": tableName,
         "strings": strings,
         "structuredStrings": structuredStrings
-      ]
+      ],
+      namespace: GenumNamespace()
     )
   }
 
@@ -276,6 +278,6 @@ extension FontsFileParser {
         "fonts":fonts
       ]
     }
-    return Context(dictionary: ["enumName": enumName, "families" : families])
+    return Context(dictionary: ["enumName": enumName, "families" : families], namespace: GenumNamespace())
   }
 }

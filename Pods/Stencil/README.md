@@ -25,8 +25,8 @@ let context = Context(dictionary: [
 ])
 
 do {
-  let template = Template(named: "template.stencil")
-  let rendered = template.render(context)
+  let template = try Template(named: "template.stencil")
+  let rendered = try template.render(context)
   print(rendered)
 } catch {
   print("Failed to render template \(error)")
@@ -73,8 +73,8 @@ following lookup:
 For example, if `people` was an array:
 
 ```html+django
-There are {{ people.count }} people, {{ people.first }} is first person.
-Followed by {{ people.1 }}.
+There are {{ people.count }} people. {{ people.first }} is the first person,
+followed by {{ people.1 }}.
 ```
 
 #### Filters
@@ -142,7 +142,7 @@ A for loop allows you to iterate over an array found by variable lookup.
 {% for item in items %}
   {{ item }}
 {% empty %}
-  There we're no items.
+  There were no items.
 {% endfor %}
 ```
 

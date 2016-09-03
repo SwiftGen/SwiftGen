@@ -4,7 +4,7 @@ use_frameworks!
 target 'swiftgen' do
   pod 'Commander'
   pod 'PathKit'
-  pod 'Stencil'
+  pod 'Stencil', :git => 'https://github.com/kylef/Stencil.git', :branch => 'master'
   pod 'GenumKit', :path => 'GenumKit'
 end
 
