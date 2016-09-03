@@ -65,12 +65,14 @@ extension AssetsCatalogParser {
  - `storyboards`: `Array` of:
     - `name`: `String`
     - `initialScene`: `Dictionary` (absent if not specified)
-       - `viewController`: `String`
+       - `customClass`: `String` (absent if generic UIViewController/NSViewController)
        - `isBaseViewController`: `Bool`, indicate if the baseType is 'viewController' or anything else
+       - `baseType`: `String` (absent if class is a custom class). The base class type on which the initial scene is base.
+          Possible values include 'ViewController', 'NavigationController', 'TableViewController'…
     - `scenes`: `Array` (absent if empty)
        - `identifier`: `String`
-       - `customClass`: `String` (absent if generic UIViewController)
-       - `isBaseViewController`: `Bool`, indicate if the baseType is 'viewController' or anything else
+       - `customClass`: `String` (absent if generic UIViewController/NSViewController)
+       - `isBaseViewController`: `Bool`, indicate if the baseType is 'ViewController' or anything else
        - `baseType`: `String` (absent if class is a custom class). The base class type on which a scene is base.
           Possible values include 'ViewController', 'NavigationController', 'TableViewController'…
     - `segues`: `Array` (absent if empty)
@@ -83,13 +85,20 @@ extension StoryboardParser {
     let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sort(<)
     let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:AnyObject] in
       var sbMap: [String:AnyObject] = ["name": storyboardName]
+      // Initial Scene
       if let initialScene = initialScenes[storyboardName] {
-        var initial: [String:AnyObject] = ["viewController": initialScene.customClass ?? "UI\(uppercaseFirst(initialScene.tag))"]
-        if initialScene.customClass == nil && initialScene.tag == "viewController" {
-          initial["isBaseViewController"] = true
+        let initial: [String:AnyObject]
+        if let customClass = initialScene.customClass {
+          initial = ["customClass": customClass]
+        } else {
+          initial = [
+            "baseType": uppercaseFirst(initialScene.tag),
+            "isBaseViewController": initialScene.tag == "viewController"
+          ]
         }
         sbMap["initialScene"] = initial
       }
+      // All Scenes
       if let scenes = storyboardsScenes[storyboardName] {
         sbMap["scenes"] = scenes
           .sort({$0.storyboardID < $1.storyboardID})
@@ -106,6 +115,7 @@ extension StoryboardParser {
             return ["identifier": scene.storyboardID, "baseType": uppercaseFirst(scene.tag)]
         }
       }
+      // All Segues
       if let segues = storyboardsSegues[storyboardName] {
         sbMap["segues"] = segues
           .sort({$0.segueID < $1.segueID})

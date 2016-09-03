@@ -49,17 +49,16 @@ struct {{sceneEnumName}} {
   {% if storyboard.scenes %}
   enum {{storyboardName}}: String, StoryboardSceneType {
     static let storyboardName = "{{storyboard.name}}"
-    {% if storyboard.initialScene %}
-    {% ifnot storyboard.initialScene.isBaseViewController %}
+    {% if storyboard.initialScene %}{% ifnot storyboard.initialScene.isBaseViewController %}
+    {% set initialSceneClass %}{% if storyboard.initialScene.customClass %}{{storyboard.initialScene.customClass}}{% else %}UI{{storyboard.initialScene.baseType}}{% endif %}{% endset %}
 
-    static func initialViewController() -> {{storyboard.initialScene.viewController}} {
-      guard let vc = storyboard().instantiateInitialViewController() as? {{storyboard.initialScene.viewController}} else {
+    static func initialViewController() -> {{initialSceneClass}} {
+      guard let vc = storyboard().instantiateInitialViewController() as? {{initialSceneClass}} else {
         fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
       }
       return vc
     }
-    {% endif %}
-    {% endif %}
+    {% endif %}{% endif %}
     {% for scene in storyboard.scenes %}
     {% set sceneID %}{{scene.identifier|swiftIdentifier}}{% endset %}
 
@@ -92,17 +91,16 @@ struct {{sceneEnumName}} {
   {% else %}
   enum {{storyboardName}}: StoryboardSceneType {
     static let storyboardName = "{{storyboard.name}}"
-    {% if storyboard.initialScene %}
-    {% ifnot storyboard.initialScene.isBaseViewController %}
+    {% if storyboard.initialScene %}{% ifnot storyboard.initialScene.isBaseViewController %}
+    {% set initialSceneClass %}{% if storyboard.initialScene.customClass %}{{storyboard.initialScene.customClass}}{% else %}UI{{storyboard.initialScene.baseType}}{% endif %}{% endset %}
 
-    static func initialViewController() -> {{storyboard.initialScene.viewController}} {
-      guard let vc = storyboard().instantiateInitialViewController() as? {{storyboard.initialScene.viewController}} else {
+    static func initialViewController() -> {{initialSceneClass}} {
+      guard let vc = storyboard().instantiateInitialViewController() as? {{initialSceneClass}} else {
         fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
       }
       return vc
     }
-    {% endif %}
-    {% endif %}
+    {% endif %}{% endif %}
   }
   {% endif %}
   {% endfor %}
