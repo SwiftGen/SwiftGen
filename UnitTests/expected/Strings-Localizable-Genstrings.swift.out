@@ -15,6 +15,14 @@ enum L10n {
   case BananasOwner(Int, String)
   /// These are %3$@'s %1$d %2$@.
   case ObjectOwnership(Int, String, String)
+  /// Settings
+  case SettingsNavigationBarTitleEvenDeeper
+  /// User Profile Settings
+  case SETTINGSUSERPROFILESECTIONHEADERTITLE
+  /// Here you can change some user profile settings.
+  case SeTTingsUSerProFileSectioNFooterText
+  /// DeepSettings
+  case SettingsNavigationBarTitleEvenDeeperThanWeCanHandle
 }
 
 extension L10n: CustomStringConvertible {
@@ -40,6 +48,18 @@ extension L10n: CustomStringConvertible {
       case .ObjectOwnership(let p0, let p1, let p2):
         let format = NSLocalizedString("object.ownership", comment: "")
         return L10n.tr(format, p0, p1, p2)
+      case .SettingsNavigationBarTitleEvenDeeper:
+        let format = NSLocalizedString("settings.navigation-bar.title.even.deeper", comment: "")
+        return L10n.tr(format)
+      case .SETTINGSUSERPROFILESECTIONHEADERTITLE:
+        let format = NSLocalizedString("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE", comment: "")
+        return L10n.tr(format)
+      case .SeTTingsUSerProFileSectioNFooterText:
+        let format = NSLocalizedString("seTTings.uSer-proFile-sectioN.footer_text", comment: "")
+        return L10n.tr(format)
+      case .SettingsNavigationBarTitleEvenDeeperThanWeCanHandle:
+        let format = NSLocalizedString("settings.navigation-bar.title.even.deeper.than.we.can.handle", comment: "")
+        return L10n.tr(format)
     }
   }
 
