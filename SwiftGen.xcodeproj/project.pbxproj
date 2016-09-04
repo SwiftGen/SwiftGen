@@ -18,6 +18,8 @@
 		09511C4E1D7B855E002A3A75 /* storyboards-uppercase.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 471D92121C43F65300D8EA69 /* storyboards-uppercase.stencil */; };
 		0971F98B1D7C42E2002531D5 /* colors-swift3.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0971F98A1D7C42E2002531D5 /* colors-swift3.stencil */; };
 		0971F98F1D7C4401002531D5 /* Colors-Txt-File-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 0971F98E1D7C4401002531D5 /* Colors-Txt-File-Swift3.swift.out */; };
+		0971F9911D7C44CF002531D5 /* images-swift3.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0971F9901D7C44CF002531D5 /* images-swift3.stencil */; };
+		0971F9931D7C455A002531D5 /* Images-File-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 0971F9921D7C455A002531D5 /* Images-File-Swift3.swift.out */; };
 		097504271C78ED3400D1A01B /* colors.xml in Resources */ = {isa = PBXBuildFile; fileRef = 097504261C78ED3400D1A01B /* colors.xml */; };
 		0996622E1D1C8D4F00366642 /* Storyboards-OSX in Resources */ = {isa = PBXBuildFile; fileRef = 0996622D1D1C8D4F00366642 /* Storyboards-OSX */; };
 		099662301D1C8D7300366642 /* Storyboards-iOS in Resources */ = {isa = PBXBuildFile; fileRef = 0996622F1D1C8D7300366642 /* Storyboards-iOS */; };
@@ -178,6 +180,8 @@
 		095685EF1B6DA32800BF300C /* Strings-Lines-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Lines-Default.swift.out"; sourceTree = "<group>"; };
 		0971F98A1D7C42E2002531D5 /* colors-swift3.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "colors-swift3.stencil"; sourceTree = "<group>"; };
 		0971F98E1D7C4401002531D5 /* Colors-Txt-File-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-Txt-File-Swift3.swift.out"; sourceTree = "<group>"; };
+		0971F9901D7C44CF002531D5 /* images-swift3.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "images-swift3.stencil"; sourceTree = "<group>"; };
+		0971F9921D7C455A002531D5 /* Images-File-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-File-Swift3.swift.out"; sourceTree = "<group>"; };
 		097504261C78ED3400D1A01B /* colors.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = colors.xml; sourceTree = "<group>"; };
 		0996622D1D1C8D4F00366642 /* Storyboards-OSX */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Storyboards-OSX"; sourceTree = "<group>"; };
 		0996622F1D1C8D7300366642 /* Storyboards-iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Storyboards-iOS"; sourceTree = "<group>"; };
@@ -369,6 +373,7 @@
 				0921FB9A1BE7852F00B488B5 /* colors-rawValue.stencil */,
 				470A14E41BEA68630052EAC8 /* images-allvalues.stencil */,
 				091150351BD3274E00EBC803 /* images-default.stencil */,
+				0971F9901D7C44CF002531D5 /* images-swift3.stencil */,
 				0911503E1BD4053D00EBC803 /* storyboards-default.stencil */,
 				E2F7497F1D03CB7E00EA0BC8 /* storyboards-osx-default.stencil */,
 				470A14E01BEA63D30052EAC8 /* storyboards-lowercase.stencil */,
@@ -431,6 +436,7 @@
 				4761E0331BDE753000B9B05F /* Images-Empty.swift.out */,
 				09EB0A211BDC60F000B2CF79 /* Images-Entries-Default.swift.out */,
 				09EB0A231BDC60F000B2CF79 /* Images-File-Default.swift.out */,
+				0971F9921D7C455A002531D5 /* Images-File-Swift3.swift.out */,
 				470A14E51BEA68C40052EAC8 /* Images-File-AllValues.swift.out */,
 				09EB0A221BDC60F000B2CF79 /* Images-File-CustomName.swift.out */,
 			);
@@ -631,6 +637,7 @@
 				091150361BD3274E00EBC803 /* images-default.stencil in Resources */,
 				47CB533F1CFC170E00AA19C0 /* Storyboards-Wizard-Swift3.swift.out in Resources */,
 				470A14E71BEA691E0052EAC8 /* images-allvalues.stencil in Resources */,
+				0971F9931D7C455A002531D5 /* Images-File-Swift3.swift.out in Resources */,
 				09EB0A1A1BDC3AC400B2CF79 /* strings-default.stencil in Resources */,
 				09EB0A291BDC60F000B2CF79 /* Colors-List-Default.swift.out in Resources */,
 				09A87B701BCCA5F600D9B9F5 /* Strings-Lines-Default.swift.out in Resources */,
@@ -685,6 +692,7 @@
 				D7C858DF1D5D4A4E00EA2C07 /* Avenir.ttc in Resources */,
 				470A14E11BEA63D30052EAC8 /* storyboards-lowercase.stencil in Resources */,
 				E2F749751D03CAE800EA0BC8 /* Storyboards-osx-Message-Default.swift.out in Resources */,
+				0971F9911D7C44CF002531D5 /* images-swift3.stencil in Resources */,
 				47CB53421CFC175100AA19C0 /* storyboards-swift3.stencil in Resources */,
 				93DA731D1BF34E26000A3C84 /* Strings-File-UTF8-Default.swift.out in Resources */,
 				0996622E1D1C8D4F00366642 /* Storyboards-OSX in Resources */,
