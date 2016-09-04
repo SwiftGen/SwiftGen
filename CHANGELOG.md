@@ -4,7 +4,7 @@
 
 ## 3.0.0
 
-* Add template that calls `NSLocalizedString()` separately for each string, 
+* Add template that calls `NSLocalizedString()` separately for each string,
   which is useful when trying to extract strings in the app to a `.strings` file.  
   [Ahmet Karalar](https://github.com/akaralar)
 * Add some `file_length` and similar SwiftLint exceptions in bundled templates, as
@@ -40,6 +40,8 @@
   [Cihat Gündüz](https://github.com/Dschee), [#159](https://github.com/AliSoftware/SwiftGen/pull/159)
 * Update Swift 3 templates to use lowercase enums.  
   [Olivier Halligon](https://github.com/AliSoftware), [#166](https://github.com/AliSoftware/SwiftGen/pull/166)
+* New Strings template (available via `-t dot-syntax-swift3`), allowing keys with dots in Swift 3 (see above).
+  [Cihat Gündüz](https://github.com/Dschee), [#168](https://github.com/AliSoftware/SwiftGen/pull/168)
 
 > 💡 You can now **create your custom templates more easier than ever**, by cloning an existing template!
 >
