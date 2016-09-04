@@ -130,6 +130,17 @@ class StringsTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
 
+  func testFileWithDotSyntaxSwift3() {
+    let parser = StringsFileParser()
+    try! parser.parseStringsFile(fixturePath("Localizable.strings"))
+
+    let template = GenumTemplate(templateString: fixtureString("strings-dot-syntax-swift3.stencil"))
+    let result = try! template.render(parser.stencilContext())
+
+    let expected = self.fixtureString("Strings-File-Dot-Syntax-Swift3.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+
   func testFileWithGenstringsTemplate() {
     let parser = StringsFileParser()
     try! parser.parseStringsFile(fixturePath("Localizable.strings"))
