@@ -13,16 +13,26 @@ SwiftGen is a suite of tools written in Swift to auto-generate Swift code (or an
 * [`enums` for your Colors](#uicolor-and-nscolor).
 * [`enums` for your Fonts](#uifont-and-nsfont).
 
+There are multiple benefits in using this:
+
+* Avoid any typo you could have when using a String
+* Free auto-completion
+* Avoid the risk to use an non-existing asset name
+* All this will be ensured by the compiler.
+
 ## Installation
 
-### Via CocoaPods
+<details>
+<summary>Via CocoaPods</summary>
 
 If you're using CocoaPods, you can simply add `pod 'SwiftGen'` to your `Podfile`.
 
 This will download the `SwiftGen` binaries and dependencies in `Pods/` during your next `pod install` execution
 and will allow you to invoke it via `$PODS_ROOT/SwiftGen/bin/swiftgen` in your Script Build Phases.
+</details>
 
-### Via Homebrew
+<details>
+<summary>Via Homebrew</summary>
 
 To install SwiftGen via [Homebrew](http://brew.sh), simply use:
 
@@ -30,8 +40,10 @@ To install SwiftGen via [Homebrew](http://brew.sh), simply use:
 $ brew update
 $ brew install swiftgen
 ```
+</details>
 
-### Compile from source
+<details>
+<summary>Compile from source</summary>
 
 Alternatively, you can clone the repository and use `rake install` to build the tool.  
 _With this solution you're sure to build and install the latest version from `master`._
@@ -45,6 +57,7 @@ $ rake install
 # Binary will be installed in `~/swiftgen/bin`, framworks in `~/swiftgen/fmk` and templates in `~/swiftgen/tpl`
 $ rake install[~/swiftgen/bin,~/swiftgen/fmk,~/swiftgen/tpl]
 ```
+</details>
 
 ## Usage
 
@@ -58,27 +71,35 @@ The tool is provided as a unique `swiftgen` binary command-line, with the follow
 
 Each subcommand has its own option and syntax, but some options are common to all:
 
-* `--output FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
-* `--template NAME`: define the Stencil template to use (by name, see [here for more info](documentation/Templates.md#using-a-name)) to generate the output.
-* `--templatePath PATH`: define the Stencil template to use, using a full path.
+* `--output FILE` or `-o FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
+* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](documentation/Templates.md#using-a-name)) to generate the output.
+* `--templatePath PATH` or `-p PATH`: define the Stencil template to use, using a full path.
 
 You can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
 
-You can also see in the [wiki](https://github.com/AliSoftware/SwiftGen/wiki) some additional doc about how to [integrate SwiftGen in your Continuous Integration](https://github.com/AliSoftware/SwiftGen/wiki/Continuous-Integration) (Travis-CI, CircleCI, Jenkins, …) and how to [integrate in your Xcode project](https://github.com/AliSoftware/SwiftGen/wiki/Integrate-SwiftGen-in-an-xcodeproj) so it rebuild the constants every time you build.
+### Additional documentation
 
-## Templates
+You can also see in the [wiki](https://github.com/AliSoftware/SwiftGen/wiki) some additional documentation, about:
 
-SwiftGen uses [Stencil](https://github.com/kylef/Stencil) as its template engine.
+* how to [integrate SwiftGen in your Continuous Integration](https://github.com/AliSoftware/SwiftGen/wiki/Continuous-Integration) (Travis-CI, CircleCI, Jenkins, …)
+* how to [integrate in your Xcode project](https://github.com/AliSoftware/SwiftGen/wiki/Integrate-SwiftGen-in-an-xcodeproj) so it rebuild the constants every time you build
+* …and more.
 
-It comes bundled with some default templates for each of the subcommand (`colors`, `images`, `strings`, `storyboard`, `fonts`…), but you can also create your own templates if the defaults don't suit your coding conventions or needs. Simply store them in `~/Library/Application Support/SwiftGen/templates`, then use the `-t` / `--template` option to specify the name of the template to use.
+## Choosing your template
 
-💡 You can use the `swiftgen templates` command to list all the available templates (both custom and bundled templates) for each subcommand.
+SwiftGen is based on templates (it uses [Stencil](https://github.com/kylef/Stencil) as its template engine). This means that **you can choose the template that best fit your preferences to customize the generated code to your own conventions**.
 
-Templates bundled with SwiftGen include:
+### Bundled templates vs. Custom ones
+
+SwiftGen comes bundled with some default templates for each of the subcommand (`colors`, `images`, `strings`, `storyboard`, `fonts`…), but you can also create your own templates if the defaults don't suit your coding conventions or needs. Simply store them in `~/Library/Application Support/SwiftGen/templates`, then use the `-t` / `--template` option to specify the name of the template to use, or store them somewhere else (like in your project repository) and use `-p` / `--templatePath` to specify a full path.
+
+💡 You can use the `swiftgen templates` command to list all the available templates (both custom and bundled templates) for each subcommand, list the template content and dupliate them to create your own.
+
+### Templates bundled with SwiftGen include:
 
 * A `default` template, compatible with Swift 2
 * A `swift3` template, compatible with Swift 3
-* Other variants, like `structured` and `dot-syntax` templates for Strings, or `osx` variant for ~~OS X~~ macOS Storyboards.
+* Other variants, like `structured` and `dot-syntax` / `dot-syntax-swift3` templates for Strings, or `osx` variant for ~~OS X~~ macOS Storyboards.
 
 For more information about how to create your own templates, [see the dedicated documentation](documentation/Templates.md).
 
@@ -100,15 +121,14 @@ This allows you to have a quick look at how typical code generated by SwiftGen l
 
 ## UIImage and NSImage
 
-```
+```sh
 swiftgen images /dir/to/search/for/imageset/assets
 ```
 
 This will generate an `enum Asset` with one `case` per image asset in your assets catalog, so that you can use them as constants.
 
-### Generated code
-
-The generated code will look like this:
+<details>
+<summary>Example of **code generated by the default template**</summary>
 
 ```swift
 // The Image type below is typealias'ed to UIImage on iOS and NSImage on OSX
@@ -128,6 +148,7 @@ extension Image {
   }
 }
 ```
+</details>
 
 ### Usage Example
 
@@ -137,26 +158,16 @@ let image2 = NSImage(asset: .Banana)   // OS X Prefered way
 let image3 = Asset.Apple.image // Alternate way
 ```
 
-This way, no need to enter the `"Banana"` string in your code and risk any typo.
-
-### Benefits & Limitations
-
-There are multiple benefits in using this:
-
-* Avoid any typo you could have when using a String
-* Free auto-completion
-* Avoid the risk to use an non-existing asset name
-* All this will be ensured by the compiler.
-
 ## Localizable.strings
 
-```
+```sh
 swiftgen strings /path/to/Localizable.strings
 ```
 
 This will generate a Swift `enum L10n` that will map all your `Localizable.strings` keys to an `enum case`. Additionaly, if it detects placeholders like `%@`,`%d`,`%f`, it will add associated values to that `case`.
 
-### Generated code
+<details>
+<summary>Example of **code generated by the default template**</summary>
 
 Given the following `Localizable.strings` file:
 
@@ -167,6 +178,8 @@ Given the following `Localizable.strings` file:
 "apples.count" = "You have %d apples";
 "bananas.owner" = "Those %d bananas belong to %@.";
 ```
+
+> _Reminder: Don't forget to end each line in your `*.strings` files with a semicolon `;`! Now that in Swift code we don't need semi-colons, it's easy to forget it's still required by the `Localizable.strings` file format 😉_
 
 The generated code will contain this:
 
@@ -197,8 +210,7 @@ func tr(key: L10n) -> String {
   return key.string
 }
 ```
-
-_Reminder: Don't forget to end each line in your `*.strings` files with a semicolon `;`! Now that in Swift code we don't need semi-colons, it's easy to forget it's still required by the `Localizable.strings` file format 😉_
+</details>
 
 ### Usage Example
 
@@ -229,10 +241,14 @@ This [script](https://gist.github.com/Lutzifer/3e7d967f73e38b57d4355f23274f303d)
 ### Dot Syntax Support
 
 SwiftGen also has a template with dot syntax support. This is the recommended way of using the `strings` command in SwiftGen and will replace the current default in future versions.
-The main advantage of this is a much more useful auto-completion. To use the template simply add the `-t` option as follows:
 
-```
+The main advantage of this is a much more useful auto-completion. To use the template simply add the `-t` option, either using the template `dot-syntax` for Swift 2 or `dot-syntax-swift3` if you're using Swift 3:
+
+```sh
+# Swift 2 compatible template
 swiftgen strings -t dot-syntax /path/to/Localizable.strings
+# Swift 3 compatible template
+swiftgen strings -t dot-syntax-swift3 /path/to/Localizable.strings
 ```
 
 Given the same `Localizable.strings` as above the usage will now be:
@@ -248,32 +264,21 @@ let ban = L10n.Bananas.Owner(2, "John")
 // -> "Those 2 bananas belong to John."
 ```
 
-Note that all dots within the key are converted to dots in code. Also the key will be camel cased automatically separated by underscore (`_`) or dash (`-`):
-
-```swift
-"HOME.NAVIGATION_BAR.TITLE" = "Home";
-// or
-"home.navigation-bar.title" = "Home";
-```
-
-Can both be used as:
-
-```swift
-L10n.Home.NavigationBar.Title
-```
+Note that all dots within the key are converted to dots in code.
 
 The maximum number of dots supported is five (deeper levels are rendered without dots after the fifth level).
 
 
 ## UIStoryboard
 
-```
+```sh
 swiftgen storyboards /dir/to/search/for/storyboards
 ```
 
 This will generate an `enum` for each of your `UIStoryboard`, with one `case` per storyboard scene.
 
-### Generated code
+<details>
+<summary>Example of **code generated by the default template**</summary>
 
 The generated code will look like this:
 
@@ -346,6 +351,7 @@ struct StoryboardSegue {
   }
 }
 ```
+</details>
 
 ### Usage Example
 
@@ -373,13 +379,14 @@ initialVC.performSegue(StoryboardSegue.Message.Back)
 
 ## NSStoryboard
 
-```
+```sh
 swiftgen storyboards --template storyboards-osx-default /dir/to/search/for/storyboards
 ```
 
 This will generate an `enum` for each of your `NSStoryboard`, with one `case` per storyboard scene.
 
-### Generated code
+<details>
+<summary>Example of **code generated by the default template**</summary>
 
 The generated code will look like this:
 
@@ -459,6 +466,7 @@ struct StoryboardSegue {
   }
 }
 ```
+</details>
 
 ### Usage Example
 
@@ -480,7 +488,7 @@ initialVC.performSegue(StoryboardSegue.Message.Back)
 
 ## UIColor and NSColor
 
-```
+```sh
 swiftgen colors /path/to/colors-file.txt
 ```
 
@@ -495,13 +503,14 @@ The input file is expected to be either:
 
 For example you can use this command to generate colors from one of your system color lists:
 
-```
+```sh
 swiftgen colors ~/Library/Colors/MyColors.clr
 ```
 
 Generated code will look the same as if you'd use text file.
 
-### Generated code
+<details>
+<summary>Example of **code generated by the default template**</summary>
 
 Given the following `colors.txt` file:
 
@@ -546,6 +555,7 @@ extension Color {
   }
 }
 ```
+</details>
 
 ### Usage Example
 
@@ -570,13 +580,14 @@ This way, no need to enter the color red, green, blue, alpha values each time an
 
 ## UIFont and NSFont
 
-```
+```sh
 swiftgen fonts /path/to/font/dir
 ```
 
 This will recursively go through the specified directory, finding any typeface files (TTF, OTF, …), defining a `struct FontFamily` for each family, and an enum nested under that family that will represent the font styles.
 
-### Generated Code
+<detals>
+<summary>Example of **code generated by the default template**</summary>
 
 ```swift
 // The Font type below is typealias'ed to UIFont on iOS and NSFont on OSX
@@ -591,6 +602,7 @@ struct FontFamily {
   }
 }
 ```
+</details>
 
 ### Usage
 
