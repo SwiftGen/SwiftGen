@@ -144,9 +144,9 @@ struct {{enumName}} {
 }
 
 extension {{enumName}} {
-  private static func tr(key: String, _ args: CVarArgType...) -> String {
+  fileprivate static func tr(_ key: String, _ args: CVarArg...) -> String {
     let format = NSLocalizedString(key, comment: "")
-    return String(format: format, locale: NSLocale.currentLocale(), arguments: args)
+    return String(format: format, locale: Locale.current, arguments: args)
   }
 }
 
