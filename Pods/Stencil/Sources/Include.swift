@@ -1,7 +1,7 @@
 import PathKit
 
 
-public class IncludeNode: NodeType {
+public class IncludeNode : NodeType {
   public let templateName: Variable
 
   public class func parse(parser: TokenParser, token: Token) throws -> NodeType {
@@ -35,3 +35,4 @@ public class IncludeNode: NodeType {
     return try template.render(context)
   }
 }
+

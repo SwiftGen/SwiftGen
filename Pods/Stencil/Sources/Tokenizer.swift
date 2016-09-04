@@ -35,7 +35,7 @@ func smartSplit(value: String) -> [String] {
 }
 
 
-public enum Token: Equatable {
+public enum Token : Equatable {
   /// A token representing a piece of text.
   case Text(value: String)
 

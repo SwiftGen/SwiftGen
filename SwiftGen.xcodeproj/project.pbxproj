@@ -15,6 +15,7 @@
 		0921FB9C1BE785DF00B488B5 /* Colors-List-RawValue.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 0921FB9B1BE785DF00B488B5 /* Colors-List-RawValue.swift.out */; };
 		0921FB9D1BE7873400B488B5 /* colors-rawValue.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0921FB9A1BE7852F00B488B5 /* colors-rawValue.stencil */; };
 		0921FBA11BE7D6B900B488B5 /* templates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921FBA01BE7D6B900B488B5 /* templates.swift */; };
+		09511C4E1D7B855E002A3A75 /* storyboards-uppercase.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 471D92121C43F65300D8EA69 /* storyboards-uppercase.stencil */; };
 		097504271C78ED3400D1A01B /* colors.xml in Resources */ = {isa = PBXBuildFile; fileRef = 097504261C78ED3400D1A01B /* colors.xml */; };
 		0996622E1D1C8D4F00366642 /* Storyboards-OSX in Resources */ = {isa = PBXBuildFile; fileRef = 0996622D1D1C8D4F00366642 /* Storyboards-OSX */; };
 		099662301D1C8D7300366642 /* Storyboards-iOS in Resources */ = {isa = PBXBuildFile; fileRef = 0996622F1D1C8D7300366642 /* Storyboards-iOS */; };
@@ -669,6 +670,7 @@
 				09EB0A2D1BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out in Resources */,
 				09EB0A271BDC60F000B2CF79 /* Colors-File-CustomName.swift.out in Resources */,
 				0911503F1BD4136E00EBC803 /* storyboards-default.stencil in Resources */,
+				09511C4E1D7B855E002A3A75 /* storyboards-uppercase.stencil in Resources */,
 				097504271C78ED3400D1A01B /* colors.xml in Resources */,
 				E2F749801D03CB7E00EA0BC8 /* storyboards-osx-default.stencil in Resources */,
 				47CB53341CFC0B2100AA19C0 /* SFNSDisplay-Heavy.otf in Resources */,

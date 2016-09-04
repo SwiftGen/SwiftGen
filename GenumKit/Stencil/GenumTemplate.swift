@@ -15,8 +15,8 @@ public class GenumTemplate: Template {
     super.init(templateString: templateStringWithMarkedNewlines)
   }
 
-  public override func render(context: Context? = nil, namespace: Namespace? = nil) throws -> String {
-    return try removeExtraLines(super.render(context, namespace: namespace ?? GenumNamespace()))
+  public override func render(context: Context? = nil) throws -> String {
+    return try removeExtraLines(super.render(context))
   }
 
   // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
