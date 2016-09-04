@@ -16,6 +16,8 @@
 		0921FB9D1BE7873400B488B5 /* colors-rawValue.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0921FB9A1BE7852F00B488B5 /* colors-rawValue.stencil */; };
 		0921FBA11BE7D6B900B488B5 /* templates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921FBA01BE7D6B900B488B5 /* templates.swift */; };
 		09511C4E1D7B855E002A3A75 /* storyboards-uppercase.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 471D92121C43F65300D8EA69 /* storyboards-uppercase.stencil */; };
+		0971F98B1D7C42E2002531D5 /* colors-swift3.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0971F98A1D7C42E2002531D5 /* colors-swift3.stencil */; };
+		0971F98F1D7C4401002531D5 /* Colors-Txt-File-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 0971F98E1D7C4401002531D5 /* Colors-Txt-File-Swift3.swift.out */; };
 		097504271C78ED3400D1A01B /* colors.xml in Resources */ = {isa = PBXBuildFile; fileRef = 097504261C78ED3400D1A01B /* colors.xml */; };
 		0996622E1D1C8D4F00366642 /* Storyboards-OSX in Resources */ = {isa = PBXBuildFile; fileRef = 0996622D1D1C8D4F00366642 /* Storyboards-OSX */; };
 		099662301D1C8D7300366642 /* Storyboards-iOS in Resources */ = {isa = PBXBuildFile; fileRef = 0996622F1D1C8D7300366642 /* Storyboards-iOS */; };
@@ -174,6 +176,8 @@
 		0921FBA01BE7D6B900B488B5 /* templates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = templates.swift; sourceTree = "<group>"; };
 		095685EB1B6DA16200BF300C /* Strings-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-CustomName.swift.out"; sourceTree = "<group>"; };
 		095685EF1B6DA32800BF300C /* Strings-Lines-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Lines-Default.swift.out"; sourceTree = "<group>"; };
+		0971F98A1D7C42E2002531D5 /* colors-swift3.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "colors-swift3.stencil"; sourceTree = "<group>"; };
+		0971F98E1D7C4401002531D5 /* Colors-Txt-File-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-Txt-File-Swift3.swift.out"; sourceTree = "<group>"; };
 		097504261C78ED3400D1A01B /* colors.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = colors.xml; sourceTree = "<group>"; };
 		0996622D1D1C8D4F00366642 /* Storyboards-OSX */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Storyboards-OSX"; sourceTree = "<group>"; };
 		0996622F1D1C8D7300366642 /* Storyboards-iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Storyboards-iOS"; sourceTree = "<group>"; };
@@ -329,11 +333,11 @@
 		09030C071B6D2FF600275BF5 /* expected */ = {
 			isa = PBXGroup;
 			children = (
-				C221E4A41C960A84001E04E5 /* Fonts */,
 				47CB53231CFC0AC900AA19C0 /* Colors */,
 				47CB53241CFC0AD000AA19C0 /* Images */,
 				47CB53251CFC0AD600AA19C0 /* Storyboards */,
 				47CB53261CFC0ADF00AA19C0 /* Strings */,
+				C221E4A41C960A84001E04E5 /* Fonts */,
 			);
 			path = expected;
 			sourceTree = "<group>";
@@ -341,18 +345,18 @@
 		09030C081B6D2FF600275BF5 /* fixtures */ = {
 			isa = PBXGroup;
 			children = (
-				09030C2F1B6D4F8500275BF5 /* Images.xcassets */,
 				09030C1D1B6D473E00275BF5 /* colors.txt */,
 				0902F5C01D6B86D00080F24D /* colors-bad.txt */,
 				641CD33D1C3AE35A00D7FED9 /* colors.clr */,
 				097504261C78ED3400D1A01B /* colors.xml */,
 				C2265B581C8907CA00CA5C4F /* colors.json */,
+				09030C2F1B6D4F8500275BF5 /* Images.xcassets */,
+				0996622F1D1C8D7300366642 /* Storyboards-iOS */,
+				0996622D1D1C8D4F00366642 /* Storyboards-OSX */,
 				09030C241B6D48FC00275BF5 /* Localizable.strings */,
 				82CC60371D22947500BA55E8 /* LocStructuredOnly.strings */,
 				09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */,
 				47CB53291CFC0B2100AA19C0 /* Fonts */,
-				0996622F1D1C8D7300366642 /* Storyboards-iOS */,
-				0996622D1D1C8D4F00366642 /* Storyboards-OSX */,
 			);
 			path = fixtures;
 			sourceTree = "<group>";
@@ -361,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				0911503A1BD3ECA900EBC803 /* colors-default.stencil */,
+				0971F98A1D7C42E2002531D5 /* colors-swift3.stencil */,
 				0921FB9A1BE7852F00B488B5 /* colors-rawValue.stencil */,
 				470A14E41BEA68630052EAC8 /* images-allvalues.stencil */,
 				091150351BD3274E00EBC803 /* images-default.stencil */,
@@ -415,6 +420,7 @@
 				09EB0A1E1BDC60F000B2CF79 /* Colors-File-CustomName.swift.out */,
 				C25A54311CEE7C2200401BE5 /* Colors-Txt-File-Default.swift.out */,
 				C25A54331CEE7CEB00401BE5 /* Colors-Txt-File-CustomName.swift.out */,
+				0971F98E1D7C4401002531D5 /* Colors-Txt-File-Swift3.swift.out */,
 			);
 			name = Colors;
 			sourceTree = "<group>";
@@ -629,11 +635,13 @@
 				09EB0A291BDC60F000B2CF79 /* Colors-List-Default.swift.out in Resources */,
 				09A87B701BCCA5F600D9B9F5 /* Strings-Lines-Default.swift.out in Resources */,
 				820D84B01D1F9D6C00504948 /* strings-structured.stencil in Resources */,
+				0971F98B1D7C42E2002531D5 /* colors-swift3.stencil in Resources */,
 				47CB53331CFC0B2100AA19C0 /* SFNSDisplay-Bold.otf in Resources */,
 				E29942C11D1C640A002A29C4 /* storyboards-osx-lowercase.stencil in Resources */,
 				4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */,
 				09A87B641BCCA4DC00D9B9F5 /* Images.xcassets in Resources */,
 				E2679A4B1D044D4600D3F55B /* Storyboards-osx-All-Default.swift.out in Resources */,
+				0971F98F1D7C4401002531D5 /* Colors-Txt-File-Swift3.swift.out in Resources */,
 				D7A14A861D64FD40002F4C65 /* fonts-swift3.stencil in Resources */,
 				C24AFD041C92370D005FE3EF /* fonts-default.stencil in Resources */,
 				4761E0381BDE753000B9B05F /* Storyboards-Empty.swift.out in Resources */,
