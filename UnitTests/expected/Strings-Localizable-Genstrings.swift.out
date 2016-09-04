@@ -46,7 +46,7 @@ extension L10n: CustomStringConvertible {
         let format = NSLocalizedString("bananas.owner", comment: "")
         return L10n.tr(format, p0, p1)
       case .ObjectOwnership(let p0, let p1, let p2):
-        let format = NSLocalizedString("object.ownership", comment: "")
+        let format = NSLocalizedString("ObjectOwnership", comment: "")
         return L10n.tr(format, p0, p1, p2)
       case .SettingsNavigationBarTitleEvenDeeper:
         let format = NSLocalizedString("settings.navigation-bar.title.even.deeper", comment: "")

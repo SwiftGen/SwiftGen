@@ -14,112 +14,112 @@ struct {{enumName}} {
   {% for string in structuredStrings.strings %}
   /// {{string.translation}}
   {% if string.params %}
-  static func {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+  static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
     return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
   }
   {% else %}
-  static let {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+  static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
   {% endif %}
   {% endfor %}
   {% if structuredStrings.subenums %}
   {% for subenum1 in structuredStrings.subenums %}
 
-  struct {{subenum1.name|swiftIdentifier|capitalize|snakeToCamelCase}} {
+  struct {{subenum1.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
     {# LEVEL 1 #}
     {% if subenum1.strings %}
     {% for string in subenum1.strings %}
     /// {{string.translation}}
     {% if string.params %}
-    static func {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+    static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
       return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
     }
     {% else %}
-    static let {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+    static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
     {% endif %}
     {% endfor %}
     {% endif %}
     {% if subenum1.subenums %}
     {% for subenum2 in subenum1.subenums %}
 
-    struct {{subenum2.name|swiftIdentifier|capitalize|snakeToCamelCase}} {
+    struct {{subenum2.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
       {# LEVEL 2 #}
       {% if subenum2.strings %}
       {% for string in subenum2.strings %}
       /// {{string.translation}}
       {% if string.params %}
-      static func {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+      static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
         return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
       }
       {% else %}
-      static let {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+      static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
       {% endif %}
       {% endfor %}
       {% endif %}
       {% if subenum2.subenums %}
       {% for subenum3 in subenum2.subenums %}
 
-      struct {{subenum3.name|swiftIdentifier|capitalize|snakeToCamelCase}} {
+      struct {{subenum3.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
         {# LEVEL 3 #}
         {% if subenum3.strings %}
         {% for string in subenum3.strings %}
         /// {{string.translation}}
         {% if string.params %}
-        static func {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+        static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
           return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
         }
         {% else %}
-        static let {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+        static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
         {% endif %}
         {% endfor %}
         {% endif %}
         {% if subenum3.subenums %}
         {% for subenum4 in subenum3.subenums %}
 
-        struct {{subenum4.name|swiftIdentifier|capitalize|snakeToCamelCase}} {
+        struct {{subenum4.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
           {# LEVEL 4 #}
           {% if subenum4.strings %}
           {% for string in subenum4.strings %}
           /// {{string.translation}}
           {% if string.params %}
-          static func {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+          static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
             return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
           }
           {% else %}
-          static let {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+          static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
           {% endif %}
           {% endfor %}
           {% endif %}
           {% if subenum4.subenums %}
           {% for subenum5 in subenum4.subenums %}
 
-          struct {{subenum5.name|swiftIdentifier|capitalize|snakeToCamelCase}} {
+          struct {{subenum5.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
             {# LEVEL 5 #}
             {% if subenum5.strings %}
             {% for string in subenum5.strings %}
             /// {{string.translation}}
             {% if string.params %}
-            static func {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+            static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
               return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
             }
             {% else %}
-            static let {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+            static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
             {% endif %}
             {% endfor %}
             {% endif %}
             {% if subenum5.subenums %}
             {% for subenum6 in subenum5.subenums %}
 
-            struct {{subenum6.name|swiftIdentifier|capitalize|snakeToCamelCase}} {
+            struct {{subenum6.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
               {# FALLBACK LEVEL #}
               {% if subenum6.strings %}
               {% for string in subenum6.strings %}
               /// {{string.translation}}
               {% if string.params %}
-              static func {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+              static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
                 return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
               }
               {% else %}
-              static let {{string.keytail|swiftIdentifier|capitalize|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+              static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
               {% endif %}
               {% endfor %}
               {% endif %}
