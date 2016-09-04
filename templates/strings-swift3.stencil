@@ -8,7 +8,7 @@ import Foundation
 enum {{enumName}} {
   {% for string in strings %}
   /// {{string.translation}}
-  case {{string.key|swiftIdentifier|snakeToCamelCase}}{% if string.params %}({{string.params.types|join}}){% endif %}
+  case {{string.key|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}{% if string.params %}({{string.params.types|join}}){% endif %}
   {% endfor %}
 }
 // swiftlint:enable type_body_length
@@ -20,10 +20,10 @@ extension {{enumName}}: CustomStringConvertible {
     switch self {
       {% for string in strings %}
       {% if string.params %}
-      case .{{string.key|swiftIdentifier|snakeToCamelCase}}({{string.params.declarations|join}}):
+      case .{{string.key|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}({{string.params.declarations|join}}):
         return {{enumName}}.tr(key: "{{string.key}}", {{string.params.names|join}})
       {% else %}
-      case .{{string.key|swiftIdentifier|snakeToCamelCase}}:
+      case .{{string.key|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}:
         return {{enumName}}.tr(key: "{{string.key}}")
       {% endif %}
       {% endfor %}

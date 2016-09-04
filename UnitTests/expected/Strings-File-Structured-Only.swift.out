@@ -28,7 +28,7 @@ enum L10n {
     case UserProfileSection(UserProfileSectionL10n)
     enum UserProfileSectionL10n {
       /// User Profile Settings
-      case HeaderTitle
+      case HEADERTITLE
       /// Here you can change some user profile settings.
       case FooterText
       /// Welcome %@! You have %d points on your account.
@@ -62,7 +62,7 @@ extension L10n: CustomStringConvertible {
           case .UserProfileSection(let level2key):
 
             switch level2key {
-              case .HeaderTitle:
+              case .HEADERTITLE:
                 return L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
               case .FooterText:
                 return L10n.tr("seTTings.uSer-proFile-sectioN.footer_text")

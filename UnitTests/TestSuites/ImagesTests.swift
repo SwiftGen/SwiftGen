@@ -49,6 +49,17 @@ class ImagesTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
 
+  func testFileWithSwift3() {
+    let parser = AssetsCatalogParser()
+    parser.parseDirectory(fixturePath("Images.xcassets"))
+
+    let template = GenumTemplate(templateString: fixtureString("images-swift3.stencil"))
+    let result = try! template.render(parser.stencilContext())
+
+    let expected = self.fixtureString("Images-File-Swift3.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+
   func testFileWithAllValuesTemplate() {
     let parser = AssetsCatalogParser()
     parser.parseDirectory(fixturePath("Images.xcassets"))

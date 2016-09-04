@@ -93,7 +93,7 @@ class StringsTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("strings-swift3.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Strings-Localizable-Swift3.swift.out")
+    let expected = self.fixtureString("Strings-File-Swift3.swift.out")
     XCTDiffStrings(result, expected)
   }
 

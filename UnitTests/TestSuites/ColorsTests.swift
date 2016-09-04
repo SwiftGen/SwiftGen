@@ -67,6 +67,17 @@ class ColorsTextFileTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
 
+  func testFileSwift3() {
+    let parser = ColorsTextFileParser()
+    try! parser.parseFile(fixturePath("colors.txt"))
+
+    let template = GenumTemplate(templateString: fixtureString("colors-swift3.stencil"))
+    let result = try! template.render(parser.stencilContext())
+
+    let expected = self.fixtureString("Colors-Txt-File-Swift3.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+
   func testFileWithCustomName() {
     let parser = ColorsTextFileParser()
     try! parser.parseFile(fixturePath("colors.txt"))

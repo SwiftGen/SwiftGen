@@ -33,7 +33,7 @@ struct {{enumName}} {
   {% for family in families %}
   enum {{family.name|swiftIdentifier|snakeToCamelCaseNoPrefix}}: String, FontConvertible {
     {% for font in family.fonts %}
-    case {{font.style|swiftIdentifier|snakeToCamelCaseNoPrefix}} = "{{font.fontName}}"
+    case {{font.style|swiftIdentifier|snakeToCamelCaseNoPrefix|lowerFirstWord}} = "{{font.fontName}}"
     {% endfor %}
   }
   {% endfor %}

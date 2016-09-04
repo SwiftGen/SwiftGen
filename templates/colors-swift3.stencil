@@ -1,0 +1,54 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+#if os(iOS) || os(tvOS) || os(watchOS)
+  import UIKit.UIColor
+  typealias Color = UIColor
+#elseif os(OSX)
+  import AppKit.NSColor
+  typealias Color = NSColor
+#endif
+
+extension Color {
+  convenience init(rgbaValue: UInt32) {
+    let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0
+    let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0
+    let blue  = CGFloat((rgbaValue >>  8) & 0xff) / 255.0
+    let alpha = CGFloat((rgbaValue      ) & 0xff) / 255.0
+
+    self.init(red: red, green: green, blue: blue, alpha: alpha)
+  }
+}
+
+{% if colors %}
+{# Note: We don't use a UInt32 rawValue in this template so we can have multiple colors with the same rgbaValue #}
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+enum {{enumName}} {
+  {% for color in colors %}
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#{{color.rgb}}"></span>
+  /// Alpha: {{color.alpha|hexToInt|int255toFloat|percent}} <br/> (0x{{color.rgba}})
+  case {{color.name|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}
+  {% endfor %}
+
+  var rgbaValue: UInt32 {
+    switch self {
+    {% for color in colors %}
+    case .{{color.name|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}: return 0x{{color.rgba}}
+    {% endfor %}
+    }
+  }
+
+  var color: Color {
+    return Color(named: self)
+  }
+}
+// swiftlint:enable type_body_length
+
+extension Color {
+  convenience init(named name: {{enumName}}) {
+    self.init(rgbaValue: name.rgbaValue)
+  }
+}
+{% else %}
+// No color found
+{% endif %}

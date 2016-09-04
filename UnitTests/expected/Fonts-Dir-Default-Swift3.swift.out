@@ -30,31 +30,31 @@ extension Font {
 
 struct FontFamily {
   enum Avenir: String, FontConvertible {
-    case Black = "Avenir-Black"
-    case BlackOblique = "Avenir-BlackOblique"
-    case Light = "Avenir-Light"
-    case MediumOblique = "Avenir-MediumOblique"
-    case Roman = "Avenir-Roman"
-    case Heavy = "Avenir-Heavy"
-    case HeavyOblique = "Avenir-HeavyOblique"
-    case Medium = "Avenir-Medium"
-    case Oblique = "Avenir-Oblique"
-    case LightOblique = "Avenir-LightOblique"
-    case Book = "Avenir-Book"
-    case BookOblique = "Avenir-BookOblique"
+    case black = "Avenir-Black"
+    case blackOblique = "Avenir-BlackOblique"
+    case light = "Avenir-Light"
+    case mediumOblique = "Avenir-MediumOblique"
+    case roman = "Avenir-Roman"
+    case heavy = "Avenir-Heavy"
+    case heavyOblique = "Avenir-HeavyOblique"
+    case medium = "Avenir-Medium"
+    case oblique = "Avenir-Oblique"
+    case lightOblique = "Avenir-LightOblique"
+    case book = "Avenir-Book"
+    case bookOblique = "Avenir-BookOblique"
   }
   enum SFNSDisplay: String, FontConvertible {
-    case Regular = ".SFNSDisplay-Regular"
-    case Heavy = ".SFNSDisplay-Heavy"
-    case Black = ".SFNSDisplay-Black"
-    case Bold = ".SFNSDisplay-Bold"
+    case regular = ".SFNSDisplay-Regular"
+    case heavy = ".SFNSDisplay-Heavy"
+    case black = ".SFNSDisplay-Black"
+    case bold = ".SFNSDisplay-Bold"
   }
   enum SFNSText: String, FontConvertible {
-    case Heavy = ".SFNSText-Heavy"
-    case Bold = ".SFNSText-Bold"
-    case Regular = ".SFNSText-Regular"
+    case heavy = ".SFNSText-Heavy"
+    case bold = ".SFNSText-Bold"
+    case regular = ".SFNSText-Regular"
   }
   enum ZapfDingbats: String, FontConvertible {
-    case Regular = "ZapfDingbatsITC"
+    case regular = "ZapfDingbatsITC"
   }
 }

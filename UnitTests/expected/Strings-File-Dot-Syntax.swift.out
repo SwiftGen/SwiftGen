@@ -17,6 +17,10 @@ struct L10n {
   static func Greetings(p0: String, p1: Int) -> String {
     return L10n.tr("greetings", p0, p1)
   }
+  /// These are %3$@'s %1$d %2$@.
+  static func ObjectOwnership(p0: Int, p1: String, p2: String) -> String {
+    return L10n.tr("ObjectOwnership", p0, p1, p2)
+  }
 
   struct Apples {
     /// You have %d apples
@@ -29,13 +33,6 @@ struct L10n {
     /// Those %d bananas belong to %@.
     static func Owner(p0: Int, p1: String) -> String {
       return L10n.tr("bananas.owner", p0, p1)
-    }
-  }
-
-  struct Object {
-    /// These are %3$@'s %1$d %2$@.
-    static func Ownership(p0: Int, p1: String, p2: String) -> String {
-      return L10n.tr("object.ownership", p0, p1, p2)
     }
   }
 
@@ -62,7 +59,7 @@ struct L10n {
 
     struct UserProfileSection {
       /// User Profile Settings
-      static let HeaderTitle = L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
+      static let HEADERTITLE = L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
       /// Here you can change some user profile settings.
       static let FooterText = L10n.tr("seTTings.uSer-proFile-sectioN.footer_text")
     }
