@@ -74,9 +74,21 @@ It comes bundled with some default templates for each of the subcommand (`colors
 
 💡 You can use the `swiftgen templates` command to list all the available templates (both custom and bundled templates) for each subcommand.
 
+Templates bundled with SwiftGen include:
+
+* A `default` template, compatible with Swift 2
+* A `swift3` template, compatible with Swift 3
+* Other variants, like `structured` and `dot-syntax` templates for Strings, or `osx` variant for ~~OS X~~ macOS Storyboards.
+
 For more information about how to create your own templates, [see the dedicated documentation](documentation/Templates.md).
 
 > Don't hesitate to make PRs to share your improvements suggestions on the default templates 😉
+
+## Swift 3 support
+
+As explained above, among other templates, Swift is bundled with a `swift3` template for each of its subcommands.
+
+If you're using Swift 3, don't forget to use `-t swift3` in your invocation of `swiftgen` to tell SwiftGen to use those Swift 3 templates and generate Swift 3 compatible code.
 
 ## Playground
 
