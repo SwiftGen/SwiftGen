@@ -98,7 +98,7 @@ func swiftIdentifier(fromString string: String,
   let prefix = !head.longCharacterIsMember(firstChar.value) && tail.longCharacterIsMember(firstChar.value) ? "_" : ""
   let parts = string.componentsSeparatedByCharactersInSet(tail.invertedSet)
   let replacement = underscores ? "_" : ""
-  return prefix + parts.map({ string in
+  let mappedParts = parts.map({ (string: String) -> String in
     // Can't use capitalizedString here because it will lowercase all letters after the first
     // e.g. "SomeNiceIdentifier".capitalizedString will because "Someniceidentifier" which is not what we want
     let ns = string as NSString
@@ -109,5 +109,6 @@ func swiftIdentifier(fromString string: String,
     } else {
       return ""
     }
-  }).joinWithSeparator(replacement)
+  })
+  return prefix + mappedParts.joinWithSeparator(replacement)
 }

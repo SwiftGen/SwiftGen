@@ -6,25 +6,25 @@ import Foundation
 // swiftlint:disable type_body_length
 enum L10n {
   /// Title of the alert
-  case AlertTitle
+  case alertTitle
   /// Some alert body there
-  case AlertMessage
+  case alertMessage
   /// Hello, my name is %@ and I'm %d
-  case Greetings(String, Int)
+  case greetings(String, Int)
   /// You have %d apples
-  case ApplesCount(Int)
+  case applesCount(Int)
   /// Those %d bananas belong to %@.
-  case BananasOwner(Int, String)
+  case bananasOwner(Int, String)
   /// These are %3$@'s %1$d %2$@.
-  case ObjectOwnership(Int, String, String)
+  case objectOwnership(Int, String, String)
   /// Settings
-  case SettingsNavigationBarTitleEvenDeeper
+  case settingsNavigationBarTitleEvenDeeper
   /// User Profile Settings
-  case SETTINGSUSERPROFILESECTIONHEADERTITLE
+  case settingsUserProfileSectionHeaderTitle
   /// Here you can change some user profile settings.
-  case SeTTingsUSerProFileSectioNFooterText
+  case settingsUserProfileSectionFooterText
   /// DeepSettings
-  case SettingsNavigationBarTitleEvenDeeperThanWeCanHandle
+  case settingsNavigationBarTitleEvenDeeperThanWeCanHandle
 }
 // swiftlint:enable type_body_length
 
@@ -33,25 +33,25 @@ extension L10n: CustomStringConvertible {
 
   var string: String {
     switch self {
-      case .AlertTitle:
+      case .alertTitle:
         return L10n.tr(key: "alert_title")
-      case .AlertMessage:
+      case .alertMessage:
         return L10n.tr(key: "alert_message")
-      case .Greetings(let p0, let p1):
+      case .greetings(let p0, let p1):
         return L10n.tr(key: "greetings", p0, p1)
-      case .ApplesCount(let p0):
+      case .applesCount(let p0):
         return L10n.tr(key: "apples.count", p0)
-      case .BananasOwner(let p0, let p1):
+      case .bananasOwner(let p0, let p1):
         return L10n.tr(key: "bananas.owner", p0, p1)
-      case .ObjectOwnership(let p0, let p1, let p2):
+      case .objectOwnership(let p0, let p1, let p2):
         return L10n.tr(key: "object.ownership", p0, p1, p2)
-      case .SettingsNavigationBarTitleEvenDeeper:
+      case .settingsNavigationBarTitleEvenDeeper:
         return L10n.tr(key: "settings.navigation-bar.title.even.deeper")
-      case .SETTINGSUSERPROFILESECTIONHEADERTITLE:
+      case .settingsUserProfileSectionHeaderTitle:
         return L10n.tr(key: "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
-      case .SeTTingsUSerProFileSectioNFooterText:
+      case .settingsUserProfileSectionFooterText:
         return L10n.tr(key: "seTTings.uSer-proFile-sectioN.footer_text")
-      case .SettingsNavigationBarTitleEvenDeeperThanWeCanHandle:
+      case .settingsNavigationBarTitleEvenDeeperThanWeCanHandle:
         return L10n.tr(key: "settings.navigation-bar.title.even.deeper.than.we.can.handle")
     }
   }

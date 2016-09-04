@@ -72,7 +72,7 @@
 		47CB53391CFC0B2100AA19C0 /* ZapfDingbats.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB53311CFC0B2100AA19C0 /* ZapfDingbats.ttf */; };
 		47CB533E1CFC170E00AA19C0 /* Storyboards-Anonymous-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 47CB533C1CFC170E00AA19C0 /* Storyboards-Anonymous-Swift3.swift.out */; };
 		47CB533F1CFC170E00AA19C0 /* Storyboards-Wizard-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 47CB533D1CFC170E00AA19C0 /* Storyboards-Wizard-Swift3.swift.out */; };
-		47CB53411CFC171600AA19C0 /* Strings-Localizable-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 47CB53401CFC171600AA19C0 /* Strings-Localizable-Swift3.swift.out */; };
+		47CB53411CFC171600AA19C0 /* Strings-File-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 47CB53401CFC171600AA19C0 /* Strings-File-Swift3.swift.out */; };
 		47CB53421CFC175100AA19C0 /* storyboards-swift3.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 47CB533A1CFC16FE00AA19C0 /* storyboards-swift3.stencil */; };
 		47CB53431CFC175100AA19C0 /* strings-swift3.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 47CB533B1CFC16FE00AA19C0 /* strings-swift3.stencil */; };
 		57902A1D1D3510C00002A1EA /* strings-genstrings.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 57902A1C1D3510770002A1EA /* strings-genstrings.stencil */; };
@@ -228,7 +228,7 @@
 		47CB533B1CFC16FE00AA19C0 /* strings-swift3.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "strings-swift3.stencil"; sourceTree = "<group>"; };
 		47CB533C1CFC170E00AA19C0 /* Storyboards-Anonymous-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Anonymous-Swift3.swift.out"; sourceTree = "<group>"; };
 		47CB533D1CFC170E00AA19C0 /* Storyboards-Wizard-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Wizard-Swift3.swift.out"; sourceTree = "<group>"; };
-		47CB53401CFC171600AA19C0 /* Strings-Localizable-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Localizable-Swift3.swift.out"; sourceTree = "<group>"; };
+		47CB53401CFC171600AA19C0 /* Strings-File-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-Swift3.swift.out"; sourceTree = "<group>"; };
 		57902A1C1D3510770002A1EA /* strings-genstrings.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "strings-genstrings.stencil"; sourceTree = "<group>"; };
 		57902A1E1D3511710002A1EA /* Strings-Localizable-Genstrings.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Localizable-Genstrings.swift.out"; sourceTree = "<group>"; };
 		641CD33D1C3AE35A00D7FED9 /* colors.clr */ = {isa = PBXFileReference; lastKnownFileType = file; path = colors.clr; sourceTree = "<group>"; };
@@ -472,7 +472,7 @@
 				09030C2A1B6D4D9A00275BF5 /* Strings-File-Default.swift.out */,
 				93DA731C1BF34E26000A3C84 /* Strings-File-UTF8-Default.swift.out */,
 				095685EB1B6DA16200BF300C /* Strings-File-CustomName.swift.out */,
-				47CB53401CFC171600AA19C0 /* Strings-Localizable-Swift3.swift.out */,
+				47CB53401CFC171600AA19C0 /* Strings-File-Swift3.swift.out */,
 				820D84AD1D1F9CAF00504948 /* Strings-File-Structured.swift.out */,
 				82CC60391D2294DD00BA55E8 /* Strings-File-Structured-Only.swift.out */,
 				82E3C8961D64C32300A2F73F /* Strings-File-Dot-Syntax.swift.out */,
@@ -622,7 +622,7 @@
 				47CB53351CFC0B2100AA19C0 /* SFNSDisplay-Regular.otf in Resources */,
 				0921FB9D1BE7873400B488B5 /* colors-rawValue.stencil in Resources */,
 				0921FB9C1BE785DF00B488B5 /* Colors-List-RawValue.swift.out in Resources */,
-				47CB53411CFC171600AA19C0 /* Strings-Localizable-Swift3.swift.out in Resources */,
+				47CB53411CFC171600AA19C0 /* Strings-File-Swift3.swift.out in Resources */,
 				C25A54321CEE7C2200401BE5 /* Colors-Txt-File-Default.swift.out in Resources */,
 				E2F749741D03CAE800EA0BC8 /* Storyboards-osx-Empty.swift.out in Resources */,
 				470A14E31BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out in Resources */,
