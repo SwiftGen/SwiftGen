@@ -60,12 +60,12 @@ struct {{sceneEnumName}} {
     }
     {% endif %}{% endif %}
     {% for scene in storyboard.scenes %}
-    {% set sceneID %}{{scene.identifier|swiftIdentifier}}{% endset %}
+    {% set sceneID %}{{scene.identifier|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}{% endset %}
 
     case {{sceneID}}Scene = "{{scene.identifier}}"
     {% ifnot scene.isBaseViewController %}
     {% if scene.customClass %}
-    static func instantiate{{sceneID|snakeToCamelCase}}() -> {{scene.customClass}} {
+    static func instantiate{{sceneID|titlecase}}() -> {{scene.customClass}} {
       guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.viewController() as? {{scene.customClass}}
       else {
         fatalError("ViewController '{{scene.identifier}}' is not of the expected class {{scene.customClass}}.")
@@ -73,7 +73,7 @@ struct {{sceneEnumName}} {
       return vc
     }
     {% else %}
-    static func instantiate{{sceneID|snakeToCamelCase}}() -> UI{{scene.baseType}} {
+    static func instantiate{{sceneID|titlecase}}() -> UI{{scene.baseType}} {
       guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.viewController() as? UI{{scene.baseType}}
       else {
         fatalError("ViewController '{{scene.identifier}}' is not of the expected class UI{{scene.baseType}}.")
@@ -82,7 +82,7 @@ struct {{sceneEnumName}} {
     }
     {% endif %}
     {% else %}
-    static func instantiate{{sceneID|snakeToCamelCase}}() -> UIViewController {
+    static func instantiate{{sceneID|titlecase}}() -> UIViewController {
       return {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.viewController()
     }
     {% endif %}
@@ -110,7 +110,7 @@ struct {{segueEnumName}} {
   {% for storyboard in storyboards %}{% if storyboard.segues %}
   enum {{storyboard.name|swiftIdentifier}}: String, StoryboardSegueType {
     {% for segue in storyboard.segues %}
-    case {{segue.identifier|swiftIdentifier}} = "{{segue.identifier}}"
+    case {{segue.identifier|swiftIdentifier|snakeToCamelCase|lowerFirstWord}} = "{{segue.identifier}}"
     {% endfor %}
   }
   {% endif %}{% endfor %}

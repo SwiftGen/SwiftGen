@@ -51,38 +51,38 @@ struct StoryboardScene {
       return vc
     }
 
-    case Accept_CGUScene = "Accept-CGU"
+    case acceptCGUScene = "Accept-CGU"
     static func instantiateAcceptCGU() -> UIViewController {
-      return StoryboardScene.Wizard.Accept_CGUScene.viewController()
+      return StoryboardScene.Wizard.acceptCGUScene.viewController()
     }
 
-    case CreateAccountScene = "CreateAccount"
+    case createAccountScene = "CreateAccount"
     static func instantiateCreateAccount() -> CreateAccViewController {
-      guard let vc = StoryboardScene.Wizard.CreateAccountScene.viewController() as? CreateAccViewController
+      guard let vc = StoryboardScene.Wizard.createAccountScene.viewController() as? CreateAccViewController
       else {
         fatalError("ViewController 'CreateAccount' is not of the expected class CreateAccViewController.")
       }
       return vc
     }
 
-    case PreferencesScene = "Preferences"
+    case preferencesScene = "Preferences"
     static func instantiatePreferences() -> UITableViewController {
-      guard let vc = StoryboardScene.Wizard.PreferencesScene.viewController() as? UITableViewController
+      guard let vc = StoryboardScene.Wizard.preferencesScene.viewController() as? UITableViewController
       else {
         fatalError("ViewController 'Preferences' is not of the expected class UITableViewController.")
       }
       return vc
     }
 
-    case Validate_PasswordScene = "Validate_Password"
+    case validatePasswordScene = "Validate_Password"
     static func instantiateValidatePassword() -> UIViewController {
-      return StoryboardScene.Wizard.Validate_PasswordScene.viewController()
+      return StoryboardScene.Wizard.validatePasswordScene.viewController()
     }
   }
 }
 
 struct StoryboardSegue {
   enum Wizard: String, StoryboardSegueType {
-    case ShowPassword = "ShowPassword"
+    case showPassword = "ShowPassword"
   }
 }
