@@ -71,13 +71,13 @@ class Scanner {
 
     var index = content.startIndex
     while index != content.endIndex {
-      let substring = content[index..<content.endIndex]
+      let substring = content.substringFromIndex(index)
       if substring.hasPrefix(until) {
-        let result = content[content.startIndex..<index]
+        let result = content.substringToIndex(index)
         content = substring
 
         if returnUntil {
-          content = content[until.endIndex..<content.endIndex]
+          content = content.substringFromIndex(until.endIndex)
           return result + until
         }
 
@@ -97,10 +97,10 @@ class Scanner {
 
     var index = content.startIndex
     while index != content.endIndex {
-      let substring = content[index..<content.endIndex]
+      let substring = content.substringFromIndex(index)
       for string in until {
         if substring.hasPrefix(string) {
-          let result = content[content.startIndex..<index]
+          let result = content.substringToIndex(index)
           content = substring
           return (string, result)
         }

@@ -21,7 +21,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Stencil:
-    :commit: df650c6b204c5002241e0e94d36e5338d6fa7685
+    :commit: f393efbd0bfe26ac26209d2d103907a3b5583f6b
     :git: https://github.com/kylef/Stencil.git
 
 SPEC CHECKSUMS:
