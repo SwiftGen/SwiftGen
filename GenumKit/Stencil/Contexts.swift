@@ -139,6 +139,7 @@ extension StoryboardParser {
 /* MARK: - Stencil Context for Strings
 
  - `enumName`: `String`
+ - `tableName`: `String` - name of the `.strings` file (usually `"Localizable"`)
  - `strings`: `Array`
     - `key`: `String`
     - `translation`: `String`
@@ -147,6 +148,9 @@ extension StoryboardParser {
        - `types`: `Array<String>` containing types like `"String"`, `"Int"`, etc
        - `declarations`: `Array<String>` containing declarations like `"let p0"`, `"let p1"`, etc
        - `names`: `Array<String>` containing parameter names like `"p0"`, `"p1"`, etc
+       - `typednames`: Array<String>` containing typed declarations like `"let p0: String`", `"let p1: Int"`, etc
+    - `keytail`: `String` containing the rest of the key after the next first `.`
+                 (useful to do recursion when splitting keys against `.` for structured templates)
  - `structuredStrings`: `Dictionary` - contains strings structured by keys separated by '.' syntax
 */
 extension StringsFileParser {
