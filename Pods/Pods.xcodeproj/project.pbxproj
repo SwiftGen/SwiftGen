@@ -945,6 +945,7 @@
 				PRODUCT_NAME = Pods_UnitTests;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -975,6 +976,7 @@
 				PRODUCT_NAME = Commander;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1006,6 +1008,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1038,6 +1041,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1072,6 +1076,7 @@
 				PRODUCT_NAME = Pods_swiftgen;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1102,6 +1107,7 @@
 				PRODUCT_NAME = Stencil;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1132,6 +1138,7 @@
 				PRODUCT_NAME = GenumKit;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1163,6 +1170,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1198,6 +1206,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1229,6 +1238,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1264,6 +1274,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1336,6 +1347,7 @@
 				PRODUCT_NAME = PathKit;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
