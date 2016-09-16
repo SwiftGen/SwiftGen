@@ -1,0 +1,9 @@
+{
+"title":"Unit test",
+"type": "UnitTestClass",
+"properties": {
+"firstName": {"type": "string"},
+"lastName": {"type": "string"}
+},
+"required": ["lastName"]
+}

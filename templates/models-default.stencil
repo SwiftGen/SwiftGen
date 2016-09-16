@@ -1,0 +1,20 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+class {{ spec.type }} {
+{% for field in spec.properties|keyValuePairs %}
+  let {{ field.0 }}: {{ field.1.type|titlecase }}
+{% endfor %}
+
+  init({% for field in spec.properties|keyValuePairs %}let {{ field.0 }}: {{ field.1.type|titlecase }}, {% endfor %}) {
+{% for field in spec.properties|keyValuePairs %}
+    self.{{ field.0 }} = {{ field.0 }}
+{% endfor %}
+  }
+
+  init(dictionary: [String: AnyObject]) throws {
+    let parser = Parser(dictionary: dictionary)
+{% for field in spec.properties|keyValuePairs %}
+    self.{{ field.0 }} = try parser.fetch("{{ field.0 }}")
+{% endfor %}
+  }
+}

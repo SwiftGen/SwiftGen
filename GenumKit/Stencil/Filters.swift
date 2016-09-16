@@ -141,3 +141,19 @@ struct NumFilters {
     return "\(percent)%"
   }
 }
+
+struct DictionaryFilters {
+  static func keyValuePairs(value: Any?) throws -> Any? {
+    if let dictionary = value as? [String: Any] {
+      return dictionary.map {
+        return [$0.0, $0.1] as Any
+      }
+    } else if let dictionary = value as? [String: AnyObject] {
+      return dictionary.map {
+        return [$0.0, $0.1] as Any
+      }
+    } else {
+      throw FilterError.InvalidInputType
+    }
+  }
+}

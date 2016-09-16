@@ -342,3 +342,11 @@ extension FontsFileParser {
     return Context(dictionary: ["enumName": enumName, "families": families], namespace: genumNamespace())
   }
 }
+
+/* MARK: - Stencil Context for Models
+ */
+extension ModelsJSONFileParser {
+    public func stencilContext() -> Context {
+        return Context(dictionary: ["spec": json], namespace: GenumNamespace())
+    }
+}
