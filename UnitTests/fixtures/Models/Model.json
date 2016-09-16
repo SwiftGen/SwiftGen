@@ -3,7 +3,8 @@
 "type": "UnitTestClass",
 "properties": {
 "firstName": {"type": "string"},
-"lastName": {"type": "string"}
+"lastName": {"type": "string"},
+"friends": {"type": "array", "element": "UnitTestClass"}
 },
-"required": ["lastName"]
+"required": ["lastName", "friends"]
 }

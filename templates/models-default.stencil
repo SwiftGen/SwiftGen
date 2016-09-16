@@ -1,11 +1,11 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
-class {{ spec.type }} {
+final class {{ spec.type }}: Parsable {
 {% for field in spec.properties|keyValuePairs %}
-  let {{ field.0 }}: {{ field.1.type|titlecase }}
+  let {{ field.0 }}: {% ifstrequal "array" field.1.type %}[{{ field.1.element|titlecase }}]{% else %}{{ field.1.type|titlecase }}{% ifnotcontains spec.required field.0 %}?{% endif %}{% endif %}
 {% endfor %}
 
-  init({% for field in spec.properties|keyValuePairs %}let {{ field.0 }}: {{ field.1.type|titlecase }}, {% endfor %}) {
+  init({% for field in spec.properties|keyValuePairs %}let {{ field.0 }}: {% ifstrequal "array" field.1.type %}[{{ field.1.element|titlecase }}]{% else %}{{ field.1.type|titlecase }}{% ifnotcontains spec.required field.0 %}?{% endif %}{% endif %}, {% endfor %}) {
 {% for field in spec.properties|keyValuePairs %}
     self.{{ field.0 }} = {{ field.0 }}
 {% endfor %}
@@ -14,7 +14,26 @@ class {{ spec.type }} {
   init(dictionary: [String: AnyObject]) throws {
     let parser = Parser(dictionary: dictionary)
 {% for field in spec.properties|keyValuePairs %}
-    self.{{ field.0 }} = try parser.fetch("{{ field.0 }}")
+    self.{{ field.0 }} = try parser.fetch{% ifnotcontains spec.required field.0 %}Optional{% endif %}("{{ field.0 }}")
 {% endfor %}
+  }
+
+  static func parse(data: Any) throws -> UnitTestClass {
+    if let data = data as? [String: AnyObject] {
+      return try {{ spec.type }}(dictionary: data)
+    }
+    throw ParserError(message: "Wrong type")
+  }
+
+  func data() -> AnyObject {
+    return data() as [String: AnyObject]
+  }
+
+  func data() -> [String: AnyObject] {
+    var data = [String: AnyObject]()
+{% for field in spec.properties|keyValuePairs %}
+    data["{{ field.0 }}"] = {{ field.0 }}{% ifnotcontains spec.required field.0 %}?{% endif %}{% ifstrequal "array" field.1.type %}.map { $0.data() }{% else %}.data(){% endif %}
+{% endfor %}
+    return data
   }
 }
