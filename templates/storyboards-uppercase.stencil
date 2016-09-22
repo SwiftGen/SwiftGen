@@ -2,6 +2,9 @@
 
 import Foundation
 import UIKit
+{% for import in extraImports %}
+import {{import}}
+{% endfor %}
 
 {# This first part of the code is static, same every time whatever Storyboard you have #}
 protocol StoryboardSceneType {
