@@ -57,7 +57,11 @@ extension XCTestCase {
       fatalError("Unable to find resource directory URL")
     }
     guard let dir = subDir else { return rsrcURL.path! }
-    return rsrcURL.URLByAppendingPathComponent(dir, isDirectory: true)!.path!
+    #if swift(>=2.3)
+      return rsrcURL.URLByAppendingPathComponent(dir, isDirectory: true)!.path!
+    #else
+      return rsrcURL.URLByAppendingPathComponent(dir, isDirectory: true).path!
+    #endif
   }
 
   func fixturePath(name: String, subDirectory: String? = nil) -> String {

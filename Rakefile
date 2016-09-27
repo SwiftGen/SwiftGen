@@ -42,8 +42,8 @@ end
 task :check_xcode_version do
   xcode_dir = `xcode-select -p`.chomp
   xcode_version = `mdls -name kMDItemVersion -raw "#{xcode_dir}"/../..`.chomp
-  unless xcode_version.start_with?('8.')
-    raise "\n[!!!] You need to use Xcode 8.x to compile SwiftGen. Use xcode-select to change the Xcode used to build from command line.\n\n"
+  unless xcode_version.start_with?('7.3') || xcode_version.start_with?('8.')
+    raise "\n[!!!] You need to use Xcode 7.3 or 8.x to compile SwiftGen. Use xcode-select to change the Xcode used to build from command line.\n\n"
   end
 end
 
