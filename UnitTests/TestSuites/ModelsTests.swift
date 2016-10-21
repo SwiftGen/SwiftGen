@@ -17,7 +17,7 @@ class ModelsTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("models-default.stencil"))
     let result = try! template.render(parser.stencilContext())
     print(result)
-//    let expected = fixtureString("Models-Dir-Basic.swift.out")
-//    XCTDiffStrings(result, expected)
+    let expected = fixtureString("Models-Dir-Basic.swift.out")
+    XCTDiffStrings(result, expected)
   }
 }
