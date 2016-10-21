@@ -39,7 +39,7 @@ public class StrEqualsNode : NodeType {
     return StrEqualsNode(lvariable: lvariable, rvariable: rvariable, trueNodes: trueNodes, falseNodes: falseNodes)
   }
 
-  public class func parse_ifnotcontains(parser:TokenParser, token:Token) throws -> NodeType {
+  public class func parse_ifnotstrequals(parser:TokenParser, token:Token) throws -> NodeType {
     let components = token.components()
     guard components.count == 3 else {
       throw TemplateSyntaxError("'ifnotstrequals' statements should use the following 'ifnotstrequals lvariable rvariable' `\(token.contents)`.")

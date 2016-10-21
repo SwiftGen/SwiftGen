@@ -114,12 +114,32 @@ extension StringFilters {
 }
 
 struct ArrayFilters {
-  static func join(_ value: Any?) throws -> Any? {
-    guard let array = value as? [Any] else { throw FilterError.invalidInputType }
-    let strings = array.flatMap { $0 as? String }
-    guard array.count == strings.count else { throw FilterError.invalidInputType }
+  static func join(value: Any?) throws -> Any? {
+    let strings: [String]
+    if let array = value as? [Any] {
+      strings = array.flatMap { $0 as? String }
+      guard array.count == strings.count else { throw FilterError.InvalidInputType }
+    } else if let array = value as? [String] {
+      strings = array
+    } else {
+      throw FilterError.InvalidInputType
+    }
 
     return strings.joined(separator: ", ")
+  }
+
+  static func joinAnd(value: Any?) throws -> Any? {
+    let strings: [String]
+    if let array = value as? [Any] {
+      strings = array.flatMap { $0 as? String }
+      guard array.count == strings.count else { throw FilterError.InvalidInputType }
+    } else if let array = value as? [String] {
+      strings = array
+    } else {
+      throw FilterError.InvalidInputType
+    }
+
+    return strings.joinWithSeparator(" && ")
   }
 }
 
@@ -142,18 +162,82 @@ struct NumFilters {
   }
 }
 
-struct DictionaryFilters {
-  static func keyValuePairs(value: Any?) throws -> Any? {
-    if let dictionary = value as? [String: Any] {
-      return dictionary.map {
-        return [$0.0, $0.1] as Any
+struct ModelParsingFilters {
+  static func parameterList(value: Any?) throws -> Any? {
+    if let value = value as? [Any] {
+      let params: [String] = try value.map { param in
+        guard let param = param as? [String: AnyObject] else {
+          throw FilterError.InvalidInputType
+        }
+        guard let name = param["name"] as? String else {
+          throw FilterError.InvalidInputType
+        }
+        return "\(name): \(try parameterType(param))"
       }
-    } else if let dictionary = value as? [String: AnyObject] {
-      return dictionary.map {
-        return [$0.0, $0.1] as Any
-      }
-    } else {
+      return params
+    }
+    throw FilterError.InvalidInputType
+  }
+
+  static func parameterType(value: Any?) throws -> Any? {
+    guard let value = value as? [String: AnyObject] else {
       throw FilterError.InvalidInputType
     }
+    return try parameterType(value)
+  }
+
+  static func equalityList(value: Any?) throws -> Any? {
+    if let value = value as? [Any] {
+      let params: [String] = try value.map { param in
+        guard let param = param as? [String: AnyObject] else {
+          throw FilterError.InvalidInputType
+        }
+        guard let name = param["name"] as? String else {
+          throw FilterError.InvalidInputType
+        }
+        return "lhs.\(name) == rhs.\(name)"
+      }
+      return params
+    }
+    throw FilterError.InvalidInputType
+  }
+
+  static func initializerList(value: Any?) throws -> Any? {
+    if let value = value as? [Any] {
+      let params: [String] = try value.map { param in
+        guard let param = param as? [String: AnyObject] else {
+          throw FilterError.InvalidInputType
+        }
+        guard let name = param["name"] as? String else {
+          throw FilterError.InvalidInputType
+        }
+        return "\(name): \(name)"
+      }
+      return params
+    }
+    throw FilterError.InvalidInputType
+  }
+
+  private static func parameterType(input: [String: AnyObject]) throws -> String {
+    guard let type = input["type"] as? String else {
+      throw FilterError.InvalidInputType
+    }
+    let baseType: String
+    if type.lowercaseString == "array" {
+      guard let innerType = input["element"] as? String else {
+        throw FilterError.InvalidInputType
+      }
+      baseType = "[\(StringFilters.titlecase(innerType))]"
+    } else {
+      baseType = StringFilters.titlecase(type)
+    }
+
+    let optionalSuffix: String
+    if let optional = input["optional"] as? Bool where optional {
+      optionalSuffix = "?"
+    } else {
+      optionalSuffix = ""
+    }
+    return baseType + optionalSuffix
   }
 }

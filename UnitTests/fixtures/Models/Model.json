@@ -1,10 +1,10 @@
 {
-    "title":"Unit test",
     "type": "UnitTestClass",
     "fields": [
                {"type": "string", "optional": true, "name": "firstName"},
                {"type": "string", "name": "lastName"},
                {"type": "array", "element": "UnitTestClass", "name": "friends"},
+               {"type": "array", "element": "UnitTestClass", "name": "optFriends", "optional": true},
                {"type": "int", "name": "age", "optional": true}
                ]
 }
