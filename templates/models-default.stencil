@@ -1,39 +1,35 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
-final class {{ spec.type }}: Parsable {
-{% for field in spec.properties|keyValuePairs %}
-  let {{ field.0 }}: {% ifstrequal "array" field.1.type %}[{{ field.1.element|titlecase }}]{% else %}{{ field.1.type|titlecase }}{% ifnotcontains spec.required field.0 %}?{% endif %}{% endif %}
+public final class {{ spec.type }}: DataModel {
+{% for field in spec.fields %}
+    let {{ field.name }}: {% ifstrequal "array" field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% if field.optional %}?{% endif %}{% endif %}
 {% endfor %}
 
-  init({% for field in spec.properties|keyValuePairs %}let {{ field.0 }}: {% ifstrequal "array" field.1.type %}[{{ field.1.element|titlecase }}]{% else %}{{ field.1.type|titlecase }}{% ifnotcontains spec.required field.0 %}?{% endif %}{% endif %}, {% endfor %}) {
-{% for field in spec.properties|keyValuePairs %}
-    self.{{ field.0 }} = {{ field.0 }}
+    public init({% for field in spec.fields %}{{ field.name }}: {% ifstrequal "array" field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% if field.optional %}?{% endif %}{% endif %}, {% endfor %}) {
+{% for field in spec.fields %}
+        self.{{ field.name }} = {{ field.name }}
 {% endfor %}
-  }
-
-  init(dictionary: [String: AnyObject]) throws {
-    let parser = Parser(dictionary: dictionary)
-{% for field in spec.properties|keyValuePairs %}
-    self.{{ field.0 }} = try parser.fetch{% ifnotcontains spec.required field.0 %}Optional{% endif %}("{{ field.0 }}")
-{% endfor %}
-  }
-
-  static func parse(data: Any) throws -> UnitTestClass {
-    if let data = data as? [String: AnyObject] {
-      return try {{ spec.type }}(dictionary: data)
     }
-    throw ParserError(message: "Wrong type")
-  }
 
-  func data() -> AnyObject {
-    return data() as [String: AnyObject]
-  }
-
-  func data() -> [String: AnyObject] {
-    var data = [String: AnyObject]()
-{% for field in spec.properties|keyValuePairs %}
-    data["{{ field.0 }}"] = {{ field.0 }}{% ifnotcontains spec.required field.0 %}?{% endif %}{% ifstrequal "array" field.1.type %}.map { $0.data() }{% else %}.data(){% endif %}
+    public init(dictionary: [String: Any]) throws {
+        let parser = Parser(dictionary: dictionary)
+{% for field in spec.fields %}
+        self.{{ field.name }} = try parser.fetch{% if field.optional %}Optional{% endif %}("{{ field.name }}")
 {% endfor %}
-    return data
-  }
+    }
+
+    public static func parse(data: Any) throws -> UnitTestClass {
+        if let data = data as? [String: Any] {
+            return try {{ spec.type }}(dictionary: data)
+        }
+        throw ParserError(message: "Wrong type")
+    }
+
+    public func data() -> [String: Any] {
+        var data = [String: Any]()
+{% for field in spec.fields %}
+        data["{{ field.name }}"] = {{ field.name }}{% if field.optional %}?{% endif %}{% ifstrequal "array" field.type %}.map { $0.dataRepresentation() }{% else %}.dataRepresentation(){% endif %}
+{% endfor %}
+        return data
+    }
 }
