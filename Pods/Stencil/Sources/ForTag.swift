@@ -1,13 +1,8 @@
 public class ForNode : NodeType {
-  let variable:ExpressionType
+  let variable:Variable
   let loopVariable:String
   let nodes:[NodeType]
   let emptyNodes: [NodeType]
-
-  enum ExpressionType {
-    case variable(Variable)
-    case filterExpression(FilterExpression)
-  }
 
   public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
     let components = token.components()
@@ -32,33 +27,18 @@ public class ForNode : NodeType {
       _ = parser.nextToken()
     }
 
-    return ForNode(variable: variable, loopVariable: loopVariable, nodes: forNodes, emptyNodes:emptyNodes, parser: parser)
+    return ForNode(variable: variable, loopVariable: loopVariable, nodes: forNodes, emptyNodes:emptyNodes)
   }
 
-  public init(variable:String, loopVariable:String, nodes:[NodeType], emptyNodes:[NodeType], parser: TokenParser) {
-    if variable.containsString("|") {
-      if let filter = try? FilterExpression(token: variable, parser: parser) {
-        self.variable = .filterExpression(filter)
-      } else {
-        // Hack to get around the try? for now
-        self.variable = .variable(Variable(variable))
-      }
-    } else {
-      self.variable = .variable(Variable(variable))
-    }
+  public init(variable:String, loopVariable:String, nodes:[NodeType], emptyNodes:[NodeType]) {
+    self.variable = Variable(variable)
     self.loopVariable = loopVariable
     self.nodes = nodes
     self.emptyNodes = emptyNodes
   }
 
   public func render(context: Context) throws -> String {
-    let values: Any?
-    switch variable {
-    case .variable(let variable):
-      values = try variable.resolve(context)
-    case .filterExpression(let expression):
-      values = try expression.resolve(context)
-    }
+    let values = try variable.resolve(context)
 
     if let values = values as? [Any] , values.count > 0 {
       let count = values.count
@@ -72,7 +52,7 @@ public class ForNode : NodeType {
         return try context.push(dictionary: [loopVariable: item, "forloop": forContext]) {
           try renderNodes(nodes, context)
         }
-        }.joinWithSeparator("")
+      }.joinWithSeparator("")
     }
 
     return try context.push {
