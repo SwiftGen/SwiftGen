@@ -36,7 +36,7 @@ extension {{enumName}}: CustomStringConvertible {
   }
 }
 
-func tr(key: {{enumName}}) -> String {
+func tr(_ key: {{enumName}}) -> String {
   return key.string
 }
 {% else %}
