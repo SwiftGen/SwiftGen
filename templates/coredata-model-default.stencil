@@ -1,0 +1,9 @@
+import Foundation
+
+{% if entities %}
+enum Entities: String {
+   {% for entity in entities %}
+   case {{ entity.name }}
+   {% endfor %}
+}
+{% endif %}
