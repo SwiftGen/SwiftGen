@@ -10,7 +10,7 @@ require 'uri'
 ## [ Constants ] ##############################################################
 
 BIN_NAME = 'swiftgen'
-DEPENDENCIES = [:PathKit, :Stencil, :Commander, :GenumKit]
+DEPENDENCIES = [:PathKit, :Stencil, :Commander, :GenumKit, :SWXMLHash]
 CONFIGURATION = 'Release'
 BUILD_DIR = 'build/' + CONFIGURATION
 TEMPLATES_SRC_DIR = 'templates'

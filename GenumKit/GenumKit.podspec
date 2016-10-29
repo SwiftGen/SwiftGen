@@ -26,5 +26,6 @@ Pod::Spec.new do |s|
   s.source_files = "**/*.swift"
 
   s.dependency 'Stencil'
+  s.dependency 'SWXMLHash', '~> 2.5'
   s.framework  = "Foundation"
 end

@@ -44,6 +44,10 @@ let main = Group {
   $0.addCommand("storyboards", "generate code for your Storyboard scenes and segues", storyboardsCommand)
   $0.addCommand("strings", "generate code for your Localizable.strings", stringsCommand)
   $0.addCommand("fonts", "generate code for your UIFonts", fontsCommand)
+  $0.addCommand("coredata", "generate code for Core Data model", Group {
+    $0.addCommand("model", "generate code for your model", coreDataModelCommand)
+    $0.addCommand("entity", "generate code for every entity to separate file", coreDataEntityCommand)
+    })
 }
 
 let version = NSBundle(forClass: GenumKit.GenumTemplate.self)

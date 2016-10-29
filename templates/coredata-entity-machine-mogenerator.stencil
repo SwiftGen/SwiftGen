@@ -1,0 +1,62 @@
+import Foundation
+import CoreData
+
+{% if attributes %}
+public enum {{ class }}Attributes: String {
+   {% for attribute in attributes %}
+   case {{ attribute.name }}
+   {% endfor %}
+}
+{% endif %}
+
+{% if relationships %}
+public enum {{ class }}Relationships: String {
+   {% for relationship in relationships %}
+   case {{ relationship.name }}
+   {% endfor %}
+}
+{% endif %}
+
+{% if fetchedProperties %}
+public enum {{ class }}FetchedProperties: String {
+   {% for property in fetchedProperties %}
+   case {{ property.name }}
+   {% endfor %}
+
+   public var predicateString: String {
+      switch self {
+      {% for property in fetchedProperties %}
+      case .{{ property.name }}:
+         return "{{ property.predicateString }}"
+      {% endfor %}
+      }
+   }
+
+   public var entityName: String {
+      switch self {
+      {% for property in fetchedProperties %}
+      case .{{ property.name }}:
+         return "{{ property.entityName }}"
+      {% endfor %}
+      }
+   }
+}
+{% endif %}
+
+public class _{{ class }}: {% if parentClass %}{{ parentClass }}{% else %}NSManagedObject{% endif %} {
+   public {% if parentClass %}override {% endif %}class var entityName: String {
+      return "{{ name }}"
+   }
+
+   {% for attribute in attributes %}
+   @NSManaged public var {{ attribute.name }}: {% if attribute.isScalar %}{{ attribute.scalarType }}{% else %}{{ attribute.type }}{% if attribute.isOptional %}?{% endif %}{% endif %}
+   {% endfor %}
+
+   {% for relationship in relationships %}
+   {% ifnot relationship.toMany %}
+   @NSManaged public var {{ relationship.name }}: {% if relationship.class %}{{ relationship.class }}{% else %}NSManagedObject{% endif %}{% if relationship.isOptional %}?{% endif %}
+   {% else %}
+   @NSManaged public var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}NSSet{% endif %}
+   {% endif %}
+   {% endfor %}
+}
