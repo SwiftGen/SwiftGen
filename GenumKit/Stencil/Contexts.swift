@@ -327,9 +327,9 @@ extension CoreDataModelParser {
     return Context(dictionary: context, namespace: GenumNamespace())
   }
 
-  public func stencilContext(language: Language = .Swift) -> Context {
+  public func stencilContext(enumName enumName: String = "CoreDataEntity", language: Language = .Swift) -> Context {
     let entitiesContext = entities.map { self.stencilVariablesForEntity($0, language: language) }
-    return Context(dictionary: ["entities": entitiesContext],
+    return Context(dictionary: ["entities": entitiesContext, "enumName": enumName],
                    namespace: GenumNamespace())
   }
 

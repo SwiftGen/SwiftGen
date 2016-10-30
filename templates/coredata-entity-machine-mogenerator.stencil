@@ -1,6 +1,10 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
 import Foundation
 import CoreData
 
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
 {% if attributes %}
 public enum {{ class }}Attributes: String {
    {% for attribute in attributes %}
@@ -43,6 +47,7 @@ public enum {{ class }}FetchedProperties: String {
 }
 {% endif %}
 
+// swiftlint:disable type_name
 public class _{{ class }}: {% if parentClass %}{{ parentClass }}{% else %}NSManagedObject{% endif %} {
    public {% if parentClass %}override {% endif %}class var entityName: String {
       return "{{ name }}"
