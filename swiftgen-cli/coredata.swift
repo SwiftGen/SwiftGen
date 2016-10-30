@@ -24,7 +24,7 @@ let coreDataEntityCommand = command(
   Option<Path>("output", ".",
     description: "The output directory."),
   Flag("machine", disabledName: "human",
-    description: "Generates machine or human code. Machine file refreshes everytime, human generates just once.", default: false)
+    description: "Generates machine or human code. Machine file refreshes everytime, human generates just once.", default: true)
 ) { templateName, templatePath, modelPath, fileMask, outputDir, isMachine in
 
   do {
@@ -74,8 +74,9 @@ let coreDataEntityCommand = command(
 let coreDataModelCommand = command(
   outputOption,
   templateOption("coredata-model"), templatePathOption,
-  Option<Path>("model", "", description: "Path to CoreData model.")
-) { output, templateName, templatePath, modelPath in
+  Option<Path>("model", "", description: "Path to CoreData model."),
+  Option<String>("enumName", "CoreDataEntity", flag: "e", description: "The name of the enum to generate")
+) { output, templateName, templatePath, modelPath, enumName in
 
   do {
     let templateRealPath = try findTemplate(
@@ -88,7 +89,7 @@ let coreDataModelCommand = command(
     try parser.parseModelFile(String(modelPath))
 
     let template = try GenumTemplate(path: templateRealPath)
-    let context = parser.stencilContext()
+    let context = parser.stencilContext(enumName: enumName)
     let rendered = try template.render(context)
 
     output.write(rendered, onlyIfChanged: true)
