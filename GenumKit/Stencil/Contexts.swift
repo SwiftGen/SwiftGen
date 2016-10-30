@@ -322,18 +322,18 @@ extension FontsFileParser {
  */
 
 extension CoreDataModelParser {
-  public func stencilContextForEntity(entity: Entity, language: Language = .Swift) -> Context {
-    let context = stencilVariablesForEntity(entity, language: language)
+  public func stencilContextForEntity(entity: Entity) -> Context {
+    let context = stencilVariablesForEntity(entity)
     return Context(dictionary: context, namespace: GenumNamespace())
   }
 
-  public func stencilContext(enumName enumName: String = "CoreDataEntity", language: Language = .Swift) -> Context {
-    let entitiesContext = entities.map { self.stencilVariablesForEntity($0, language: language) }
+  public func stencilContext(enumName enumName: String = "CoreDataEntity") -> Context {
+    let entitiesContext = entities.map { self.stencilVariablesForEntity($0) }
     return Context(dictionary: ["entities": entitiesContext, "enumName": enumName],
                    namespace: GenumNamespace())
   }
 
-  private func stencilVariablesForEntity(entity: Entity, language: Language = .Swift) -> [String:Any] {
+  private func stencilVariablesForEntity(entity: Entity) -> [String:Any] {
     var context: [String:Any] = ["name": entity.name]
     context["class"] = entity.className
 
@@ -343,11 +343,12 @@ extension CoreDataModelParser {
     }
 
     context["attributes"] = entity.attributes.map { attribute -> [String:Any] in
+      let type = attribute.type.type
       var context: [String:Any] = ["name": attribute.name,
-        "type": language.typeForType(attribute.type),
+        "type": type.object,
         "isOptional": attribute.isOptional,
         "isScalar": attribute.isScalar]
-      context["scalarType"] = language.scalarTypeForType(attribute.type)
+      context["scalarType"] = type.scalar
       return self.variableByOverridingVariables(context, withUserInfo: attribute.userInfo)
     }
 
