@@ -1,0 +1,38 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+import CoreData
+
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+public enum NumericTypesClassAttributes: String {
+   case boolean
+   case decimal
+   case double
+   case float
+   case int16
+   case int32
+   case int64
+}
+
+public enum NumericTypesClassRelationships: String {
+   case scalars
+}
+
+
+// swiftlint:disable type_name
+public class _NumericTypesClass: NSManagedObject {
+   public class var entityName: String {
+      return "NumericTypes"
+   }
+
+   @NSManaged public var boolean: NSNumber?
+   @NSManaged public var decimal: NSDecimalNumber?
+   @NSManaged public var double: NSNumber?
+   @NSManaged public var float: NSNumber?
+   @NSManaged public var int16: NSNumber?
+   @NSManaged public var int32: NSNumber?
+   @NSManaged public var int64: NSNumber?
+
+   @NSManaged public var scalars: ScalarTypesClass
+}
