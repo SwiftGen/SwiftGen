@@ -46,7 +46,8 @@ let main = Group {
   $0.addCommand("fonts", "generate code for your UIFonts", fontsCommand)
   $0.addCommand("coredata", "generate code for Core Data model", Group {
     $0.addCommand("model", "generate code for your model", coreDataModelCommand)
-    $0.addCommand("entity", "generate code for every entity to separate file", coreDataEntityCommand)
+    $0.addCommand("human", "generate human code for your model", coreDataHumanCommand)
+    $0.addCommand("machine", "generate machine code for your model", coreDataMachineCommand)
     })
 }
 
