@@ -23,7 +23,7 @@ let coreDataModelCommand = command(
   templateOption("coredata-model"), templatePathOption,
   Option<String>("enumName", "CoreDataEntity", flag: "e", description: "The name of the enum to generate"),
   Argument<Path>("FILE",
-    description: "CoreData model tp parse.",
+    description: "CoreData model to parse.",
     validator: pathExists)
 ) { output, templateName, templatePath, enumName, modelPath in
 
@@ -84,7 +84,7 @@ private enum EntityFile {
 private func commandForFile(fileType: EntityFile) -> CommandType {
   return command(
     templateOption(fileType.templatePrefix), templatePathOption,
-    Option<String>("file-mask", "",
+    Option<String>("file-mask", fileType.defaultMask,
       description: "The file name mask for entity file, e.g: \"_\(classPlaceholder).swift\""),
     Option<Path>("output", ".",
       description: "The output directory"),
@@ -94,9 +94,6 @@ private func commandForFile(fileType: EntityFile) -> CommandType {
   ) { templateName, templatePath, fileMask, outputDir, modelPath in
 
     do {
-
-      let fileMask = fileMask.isEmpty ? fileType.defaultMask : fileMask
-
       if !fileMask.containsString(classPlaceholder) {
         throw CoreDataError.InvalidMask(actual: fileMask, placeholder: classPlaceholder)
       }
