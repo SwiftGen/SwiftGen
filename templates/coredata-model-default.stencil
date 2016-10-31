@@ -1,0 +1,28 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+// swiftlint:disable nesting
+{% if entities %}
+public struct {{enumName}} {
+   {% for entity in entities %}
+   public struct {{ entity.name }} {
+      public static let name = "{{ entity.name }}"
+
+      public struct Field {
+         {% for attribute in entity.attributes %}
+         public static let {{ attribute.name }} = "{{ attribute.name }}"
+         {% endfor %}
+         {% for relationship in entity.relationships %}
+         public static let {{ relationship.name }} = "{{ relationship.name }}"
+         {% endfor %}
+         {% for property in entity.fetchedProperties %}
+         public static let {{ property.name }} = "{{ property.name }}"
+         {% endfor %}
+      }
+   }
+   {% endfor %}
+}
+{% endif %}

@@ -1,0 +1,8 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+import CoreData
+
+@objc({{ class }})
+public class {{ class }}: {% if parentClass %}{{ parentClass }}{% else %}NSManagedObject{% endif %} {
+}

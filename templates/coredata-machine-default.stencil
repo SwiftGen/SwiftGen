@@ -1,0 +1,28 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+import CoreData
+
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+extension {{ class }} {
+   public {% if parentClass %}override {% endif %}class var entityName: String {
+      return "{{ name }}"
+   }
+
+   @nonobjc public class func fetchRequest() -> NSFetchRequest<{{ class }}> {
+       return NSFetchRequest<{{ class }}>(entityName: self.entityName)
+   }
+
+   {% for attribute in attributes %}
+   @NSManaged public var {{ attribute.name }}: {% if attribute.isScalar %}{{ attribute.scalarType }}{% else %}{{ attribute.type }}{% if attribute.isOptional %}?{% endif %}{% endif %}
+   {% endfor %}
+
+   {% for relationship in relationships %}
+   {% ifnot relationship.toMany %}
+   @NSManaged public var {{ relationship.name }}: {% if relationship.class %}{{ relationship.class }}{% else %}NSManagedObject{% endif %}{% if relationship.isOptional %}?{% endif %}
+   {% else %}
+   @NSManaged public var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}NSSet{% endif %}
+   {% endif %}
+   {% endfor %}
+}

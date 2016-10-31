@@ -295,3 +295,90 @@ extension FontsFileParser {
     return Context(dictionary: ["enumName": enumName, "families" : families], namespace: GenumNamespace())
   }
 }
+
+/* MARK: - Stencil Context for CoreData
+- `entities`: `Array`
+  - `name`: `String`
+  - `class`: `String` (absent if empty)
+  - `parentClass`: `String` (absent if empty)
+  - `attributes`: `Array`
+    - `name`: `String`
+    - `isOptional`: `Bool`
+    - `isScalar`: `Bool`
+    - `scalarType`: `String` (absent if not available)
+  - `relationships`: `Array`
+    - `name`: `String`
+    - `entityName`: `String`
+    - `isOptional`: `Bool`
+    - `toMany`: `Bool`
+    - `isOrdered`: `Bool`
+    - `class`: `String` (absent if empty)
+  - `fetchedProperties`: `Array`
+    - `name`: `String`
+    - `entityName`: `String`
+    - `predicateString`: `String`
+    - `toMany`: `Bool`
+    - `class`: `String` (absent if empty)
+ */
+
+extension CoreDataModelParser {
+  public func stencilContextForEntity(entity: Entity) -> Context {
+    let context = stencilVariablesForEntity(entity)
+    return Context(dictionary: context, namespace: GenumNamespace())
+  }
+
+  public func stencilContext(enumName enumName: String = "CoreDataEntity") -> Context {
+    let entitiesContext = entities.map { self.stencilVariablesForEntity($0) }
+    return Context(dictionary: ["entities": entitiesContext, "enumName": enumName],
+                   namespace: GenumNamespace())
+  }
+
+  private func stencilVariablesForEntity(entity: Entity) -> [String:Any] {
+    var context: [String:Any] = ["name": entity.name]
+    context["class"] = entity.className
+
+    if let parentEntityName = entity.parentEntityName,
+      let parentClassName = self.entitiesByName[parentEntityName]?.className {
+      context["parentClass"] = parentClassName
+    }
+
+    context["attributes"] = entity.attributes.map { attribute -> [String:Any] in
+      let type = attribute.type.type
+      var context: [String:Any] = ["name": attribute.name,
+        "type": type.object,
+        "isOptional": attribute.isOptional,
+        "isScalar": attribute.isScalar]
+      context["scalarType"] = type.scalar
+      return self.variableByOverridingVariables(context, withUserInfo: attribute.userInfo)
+    }
+
+    context["relationships"] = entity.relationships.map { relationship -> [String:Any] in
+      var context: [String:Any] = ["name": relationship.name,
+        "entityName": relationship.entityName,
+        "isOptional": relationship.isOptional,
+        "toMany": relationship.toMany,
+        "isOrdered": relationship.isOrdered]
+      context["class"] = self.entitiesByName[relationship.entityName]?.className
+      return self.variableByOverridingVariables(context, withUserInfo: relationship.userInfo)
+    }
+
+    context["fetchedProperties"] = entity.fetchedProperties.map { property -> [String:Any] in
+      var context: [String:Any] = ["name": property.name,
+        "entityName": property.entityName,
+        "predicateString": property.predicateString]
+      context["class"] = self.entitiesByName[property.entityName]?.className
+      return self.variableByOverridingVariables(context, withUserInfo: property.userInfo)
+    }
+
+    return self.variableByOverridingVariables(context, withUserInfo: entity.userInfo)
+  }
+
+  private func variableByOverridingVariables(variables: [String:Any],
+                                             withUserInfo userInfo: [String:AnyObject]) -> [String:Any] {
+    var result = variables
+    for (k, v) in userInfo {
+      result[k] = v
+    }
+    return result
+  }
+}

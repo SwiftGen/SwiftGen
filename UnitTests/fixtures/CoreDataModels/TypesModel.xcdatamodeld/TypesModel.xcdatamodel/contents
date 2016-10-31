@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11538.1" systemVersion="15F34" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AllTypes" representedClassName="AllTypesClass" parentEntity="NumericTypes" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="string" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transformable" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <userInfo>
+            <entry key="description" value="all types"/>
+        </userInfo>
+    </entity>
+    <entity name="NumericTypes" representedClassName="NumericTypesClass" syncable="YES">
+        <attribute name="boolean" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="decimal" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="double" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="float" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="int16" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="int32" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="int64" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="scalars" maxCount="1" deletionRule="Nullify" destinationEntity="ScalarTypes" inverseName="numerics" inverseEntity="ScalarTypes" syncable="YES"/>
+        <userInfo>
+            <entry key="description" value="all numeric types"/>
+        </userInfo>
+    </entity>
+    <entity name="ScalarTypes" representedClassName="ScalarTypesClass" syncable="YES">
+        <attribute name="boolean" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="double" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="float" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="int16" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="int32" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="int64" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="numerics" maxCount="1" deletionRule="Nullify" destinationEntity="NumericTypes" inverseName="scalars" inverseEntity="NumericTypes" syncable="YES"/>
+        <fetchedProperty name="eq_true" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="ScalarTypes" predicateString="boolean == YES"/>
+        </fetchedProperty>
+        <fetchedProperty name="gt_100" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="ScalarTypes" predicateString="int16 &gt; 100"/>
+        </fetchedProperty>
+        <userInfo>
+            <entry key="description" value="all numeric types"/>
+        </userInfo>
+    </entity>
+    <elements>
+        <element name="AllTypes" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="NumericTypes" positionX="-54" positionY="72" width="128" height="165"/>
+        <element name="ScalarTypes" positionX="-9" positionY="117" width="128" height="194"/>
+    </elements>
+</model>

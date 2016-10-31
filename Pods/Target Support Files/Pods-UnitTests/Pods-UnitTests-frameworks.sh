@@ -86,10 +86,12 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GenumKit/GenumKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PathKit/PathKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SWXMLHash/SWXMLHash.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Stencil/Stencil.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GenumKit/GenumKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PathKit/PathKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SWXMLHash/SWXMLHash.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Stencil/Stencil.framework"
 fi
