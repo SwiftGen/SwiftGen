@@ -2,6 +2,9 @@
 
 import Foundation
 
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+// swiftlint:disable nesting
 {% if entities %}
 public struct {{enumName}} {
    {% for entity in entities %}

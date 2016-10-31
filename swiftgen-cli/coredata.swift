@@ -56,9 +56,9 @@ private enum EntityFile {
   var templatePrefix: String {
     switch self {
     case .Machine:
-      return "coredata-entity-machine"
+      return "coredata-machine"
     case .Human:
-      return "coredata-entity-human"
+      return "coredata-human"
     }
   }
 
