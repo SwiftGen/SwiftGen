@@ -10,73 +10,22 @@ enum CoreDataError: ErrorType, CustomStringConvertible {
   var description: String {
     switch self {
     case .InvalidMask(let actual, let placeholder):
-      return "Incorrect --file-mask '\(actual)'. It should containt '\(placeholder)', e.g '\(placeholder).swift'"
+      return "Incorrect --file-mask '\(actual)'. It should contain '\(placeholder)', e.g '\(placeholder).swift'"
     }
   }
 }
 
-let coreDataEntityCommand = command(
-  templateOption("coredata-entity"), templatePathOption,
-  Option<Path>("model", "",
-    description: "The Path to CoreData model."),
-  Option<String>("file-mask", "",
-    description: "The file name mask for entity file, e.g: \"_\(classPlaceholder).swift\"."),
-  Option<Path>("output", ".",
-    description: "The output directory."),
-  Flag("machine", disabledName: "human",
-    description: "Generates machine or human code. Machine file refreshes everytime, human generates just once.", default: true)
-) { templateName, templatePath, modelPath, fileMask, outputDir, isMachine in
-
-  do {
-
-    let fileType: EntityFile = isMachine ? .Machine : .Human
-    let fileMask = fileMask.isEmpty ? fileType.defaultMask : fileMask
-
-    if !fileMask.containsString(classPlaceholder) {
-      throw CoreDataError.InvalidMask(actual: fileMask, placeholder: classPlaceholder)
-    }
-
-    let templateRealPath = try findTemplate(
-      fileType.templatePrefix,
-      templateShortName: templateName,
-      templateFullPath: templatePath
-    )
-
-    let parser = CoreDataModelParser()
-    try parser.parseModelFile(String(modelPath))
-
-    let template = try GenumTemplate(path: templateRealPath)
-
-    try outputDir.mkpath()
-
-    for entity in parser.entities {
-      guard let className = entity.className else {
-        continue
-      }
-      let fileName = fileMask.stringByReplacingOccurrencesOfString(classPlaceholder, withString: className)
-      let entityPath = outputDir + fileName
-      if entityPath.exists && !fileType.isRewritable {
-        continue
-      }
-
-      let context = parser.stencilContextForEntity(entity)
-
-      let rendered = try template.render(context)
-
-      let output: OutputDestination = .File(entityPath)
-      output.write(rendered, onlyIfChanged: true)
-    }
-  } catch {
-    printError("error: failed to render template \(error)")
-  }
-}
+let coreDataHumanCommand = commandForFile(.Human)
+let coreDataMachineCommand = commandForFile(.Machine)
 
 let coreDataModelCommand = command(
   outputOption,
   templateOption("coredata-model"), templatePathOption,
-  Option<Path>("model", "", description: "Path to CoreData model."),
-  Option<String>("enumName", "CoreDataEntity", flag: "e", description: "The name of the enum to generate")
-) { output, templateName, templatePath, modelPath, enumName in
+  Option<String>("enumName", "CoreDataEntity", flag: "e", description: "The name of the enum to generate"),
+  Argument<Path>("FILE",
+    description: "CoreData model tp parse.",
+    validator: pathExists)
+) { output, templateName, templatePath, enumName, modelPath in
 
   do {
     let templateRealPath = try findTemplate(
@@ -128,6 +77,62 @@ private enum EntityFile {
       return true
     case .Human:
       return false
+    }
+  }
+}
+
+private func commandForFile(fileType: EntityFile) -> CommandType {
+  return command(
+    templateOption(fileType.templatePrefix), templatePathOption,
+    Option<String>("file-mask", "",
+      description: "The file name mask for entity file, e.g: \"_\(classPlaceholder).swift\""),
+    Option<Path>("output", ".",
+      description: "The output directory"),
+    Argument<Path>("FILE",
+      description: "CoreData model to parse.",
+      validator: pathExists)
+  ) { templateName, templatePath, fileMask, outputDir, modelPath in
+
+    do {
+
+      let fileMask = fileMask.isEmpty ? fileType.defaultMask : fileMask
+
+      if !fileMask.containsString(classPlaceholder) {
+        throw CoreDataError.InvalidMask(actual: fileMask, placeholder: classPlaceholder)
+      }
+
+      let templateRealPath = try findTemplate(
+        fileType.templatePrefix,
+        templateShortName: templateName,
+        templateFullPath: templatePath
+      )
+
+      let parser = CoreDataModelParser()
+      try parser.parseModelFile(String(modelPath))
+
+      let template = try GenumTemplate(path: templateRealPath)
+
+      try outputDir.mkpath()
+
+      for entity in parser.entities {
+        guard let className = entity.className else {
+          continue
+        }
+        let fileName = fileMask.stringByReplacingOccurrencesOfString(classPlaceholder, withString: className)
+        let entityPath = outputDir + fileName
+        if entityPath.exists && !fileType.isRewritable {
+          continue
+        }
+
+        let context = parser.stencilContextForEntity(entity)
+
+        let rendered = try template.render(context)
+
+        let output: OutputDestination = .File(entityPath)
+        output.write(rendered, onlyIfChanged: true)
+      }
+    } catch {
+      printError("error: failed to render template \(error)")
     }
   }
 }
