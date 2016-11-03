@@ -6,6 +6,20 @@
 
 import Foundation
 
+public enum StringsFileParserError: ErrorType, CustomStringConvertible {
+  case FailureOnLoading(path: String)
+  case InvalidFormat
+
+  public var description: String {
+    switch self {
+    case .FailureOnLoading(let path):
+      return "Failed to load a file at \"\(path)\""
+    case .InvalidFormat:
+      return "Invalid strings file"
+    }
+  }
+}
+
 public final class StringsFileParser {
   var entries = [Entry]()
 
@@ -17,12 +31,41 @@ public final class StringsFileParser {
 
   // Localizable.strings files are generally UTF16, not UTF8!
   public func parseStringsFile(path: String) throws {
+    guard let data = NSData(contentsOfFile: path) else {
+      throw StringsFileParserError.FailureOnLoading(path: path)
+    }
+
+    let plist = try NSPropertyListSerialization.propertyListWithData(data, options: NSPropertyListReadOptions.Immutable, format: nil)
+
+    guard let dict = plist as? Dictionary<String, String> else {
+      throw StringsFileParserError.InvalidFormat
+    }
+
     var encoding: NSStringEncoding = NSUTF16StringEncoding
     let fileContent = try NSString(contentsOfFile: path, usedEncoding: &encoding)
+
+    func extractKey(line: String) -> String? {
+      let regex: NSRegularExpression = {
+        do {
+          return try NSRegularExpression(pattern: "^\"([^\"]+)\"[ \t]*=", options: [])
+        } catch {
+          fatalError("Error while building Regular Expression for strings file parsing")
+        }
+      }()
+
+      let range = NSRange(location: 0, length: (line as NSString).length)
+      if let match = regex.firstMatchInString(line, options: [], range: range) {
+        return (line as NSString).substringWithRange(match.rangeAtIndex(1))
+      }
+      return nil
+    }
+
     let lines = fileContent.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
 
-    for case let entry? in lines.map(Entry.init) {
-      addEntry(entry)
+    for case let key? in lines.map(extractKey) {
+      if let translation = dict[key] {
+        addEntry(Entry(key: key, translation: translation))
+      }
     }
   }
 
@@ -79,6 +122,11 @@ public final class StringsFileParser {
     }
 
     public init(key: String, translation: String, types: PlaceholderType...) {
+      self.init(key: key, translation: translation, types: types)
+    }
+
+    public init(key: String, translation: String) {
+      let types = PlaceholderType.fromFormatString(translation)
       self.init(key: key, translation: translation, types: types)
     }
 

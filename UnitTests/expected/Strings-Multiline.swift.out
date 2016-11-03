@@ -1,0 +1,44 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+enum L10n {
+  /// single line
+  case SINGLELINE
+  /// multi\nline
+  case MULTILINE
+  /// another\nmulti\n    line
+  case MULTILINE2
+  /// another single line
+  case SINGLELINE2
+}
+// swiftlint:enable type_body_length
+
+extension L10n: CustomStringConvertible {
+  var description: String { return self.string }
+
+  var string: String {
+    switch self {
+      case .SINGLELINE:
+        return L10n.tr("SINGLELINE")
+      case .MULTILINE:
+        return L10n.tr("MULTILINE")
+      case .MULTILINE2:
+        return L10n.tr("MULTILINE2")
+      case .SINGLELINE2:
+        return L10n.tr("SINGLELINE2")
+    }
+  }
+
+  private static func tr(key: String, _ args: CVarArgType...) -> String {
+    let format = NSLocalizedString(key, comment: "")
+    return String(format: format, locale: NSLocale.currentLocale(), arguments: args)
+  }
+}
+
+func tr(key: L10n) -> String {
+  return key.string
+}
+

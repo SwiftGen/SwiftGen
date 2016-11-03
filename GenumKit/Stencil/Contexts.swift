@@ -13,6 +13,14 @@ private func uppercaseFirst(string: String) -> String {
   return String(first).uppercaseString + String(string.characters.dropFirst())
 }
 
+private extension String {
+  var newlineEscaped: String {
+    return self
+      .stringByReplacingOccurrencesOfString("\n", withString: "\\n")
+      .stringByReplacingOccurrencesOfString("\r", withString: "\\r")
+  }
+}
+
 /* MARK: - Stencil Context for Colors
 
  - `enumName`: `String` — name of the enum to generate
@@ -169,9 +177,9 @@ extension StringsFileParser {
           "names": entry.types.indices.map { "p\($0)" },
           "typednames": entry.types.enumerate().map { "p\($0): \($1.rawValue)" }
         ]
-        return ["key": entry.key, "translation": entry.translation, "params": params, "keytail": keytail]
+        return ["key": entry.key, "translation": entry.translation.newlineEscaped, "params": params, "keytail": keytail]
       } else {
-        return ["key": entry.key, "translation": entry.translation, "keytail": keytail]
+        return ["key": entry.key, "translation": entry.translation.newlineEscaped, "keytail": keytail]
       }
     }
 
