@@ -59,7 +59,7 @@ struct L10n {
 
     struct UserProfileSection {
       /// User Profile Settings
-      static let hEADERTITLE = L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
+      static let headertitle = L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
       /// Here you can change some user profile settings.
       static let footerText = L10n.tr("seTTings.uSer-proFile-sectioN.footer_text")
     }
