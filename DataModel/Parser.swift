@@ -6,55 +6,66 @@
 
 import Foundation
 
+/**
+ This is a convenience class used by the model parsing to reduce the amount of generated code.
+ */
 struct Parser {
-  let dictionary: [String: Any]?
+  /**
+   The dictionary we are going to parse.
+   */
+  let dictionary: NSDictionary?
 
-  init(dictionary: [String: Any]?) {
+  init(dictionary: NSDictionary?) {
     self.dictionary = dictionary
   }
 
-  func fetch<T: DataConvertible>(_ key: String) throws -> T {
-    let fetchedOptional = dictionary?[key]
-    guard let fetched = fetchedOptional else  {
-      throw ParserError(message: "The key '\(key)' was not found.")
+  /**
+   Attempts to fetch a value from the dictionary.
+   If the key is missing it will return nil.
+   Otherwise, it will attempt to parse the data value.
+   */
+  func fetch<T: DataConvertible>(_ key: String, error: (String) throws -> Void) rethrows -> T? {
+    guard let value = dictionary?[key] else  {
+      return nil
     }
-    return try T.parsed(data: fetched)
+    return try T.parse(data: value, error: error)
   }
 
-  func fetch<T: DataConvertible>(_ key: String) throws -> T? {
+  /**
+   Attempts to fetch a value from an array.
+   If the key is missing it will call the error block and return an empty array.
+   Otherwise, it will attempt to parse the array.
+   */
+  func fetch<T: DataConvertible>(_ key: String, error: (String) throws -> Void) rethrows -> [T] {
+    guard let fetched = dictionary?[key] else {
+      try error("The key '\(key)' was not found.")
+      return []
+    }
+    // NOTE: Do not use [Any] here. Casting to NSArray is much faster.
+    if let fetchedArray = fetched as? NSArray {
+      return try fetchedArray.flatMap { try T.parse(data: $0, error: error) }
+    } else {
+      try error("The key '\(key)' was the wrong type.")
+      return []
+    }
+  }
+
+  /**
+   Attempts to fetch a value from an optional array.
+   If the key is missing it will return nil.
+   Otherwise, it will attempt to parse the array.
+   */
+  func fetch<T: DataConvertible>(_ key: String, error: (String) throws -> Void) rethrows -> [T]? {
     let fetchedOptional = dictionary?[key]
     guard let fetched = fetchedOptional else {
       return nil
     }
-    return try T.parsed(data: fetched)
-  }
-
-  func fetch<T: DataConvertible>(_ key: String) throws -> [T] {
-    let fetchedOptional = dictionary?[key]
-    guard let fetched = fetchedOptional else {
-      throw ParserError(message: "The key '\(key)' was not found.")
-    }
-    if let fetchedArray = fetched as? [AnyObject] {
-      return try fetchedArray.map { try T.parsed(data: $0) }
+    // NOTE: Do not use [Any] here. Casting to NSArray is much faster.
+    if let fetchedArray = fetched as? NSArray {
+      return try fetchedArray.flatMap { try T.parse(data: $0, error: error) }
     } else {
-      throw ParserError(message: "The key '\(key)' was not found.")
-    }
-  }
-
-  func fetch<T: DataConvertible>(_ key: String) throws -> [T]? {
-    let fetchedOptional = dictionary?[key]
-    guard let fetched = fetchedOptional else {
+      try error("The key '\(key)' was the wrong type.")
       return nil
     }
-    if let fetchedArray = fetched as? [AnyObject] {
-      return try fetchedArray.map { try T.parsed(data: $0) }
-    } else {
-      throw ParserError(message: "The key '\(key)' was not found.")
-    }
   }
 }
-
-struct ParserError: ErrorType {
-  let message: String
-}
-
