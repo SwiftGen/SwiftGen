@@ -14,11 +14,11 @@ struct {{enumName}} {
   {% for string in structuredStrings.strings %}
   /// {{string.translation}}
   {% if string.params %}
-  static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+  static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}}({{string.params.typednames|join}}) -> String {
     return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
   }
   {% else %}
-  static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+  static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}} = {{enumName}}.tr("{{string.key}}")
   {% endif %}
   {% endfor %}
   {% if structuredStrings.subenums %}
@@ -30,11 +30,11 @@ struct {{enumName}} {
     {% for string in subenum1.strings %}
     /// {{string.translation}}
     {% if string.params %}
-    static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+    static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}}({{string.params.typednames|join}}) -> String {
       return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
     }
     {% else %}
-    static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+    static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}} = {{enumName}}.tr("{{string.key}}")
     {% endif %}
     {% endfor %}
     {% endif %}
@@ -47,11 +47,11 @@ struct {{enumName}} {
       {% for string in subenum2.strings %}
       /// {{string.translation}}
       {% if string.params %}
-      static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+      static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}}({{string.params.typednames|join}}) -> String {
         return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
       }
       {% else %}
-      static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+      static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}} = {{enumName}}.tr("{{string.key}}")
       {% endif %}
       {% endfor %}
       {% endif %}
@@ -64,11 +64,11 @@ struct {{enumName}} {
         {% for string in subenum3.strings %}
         /// {{string.translation}}
         {% if string.params %}
-        static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+        static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}}({{string.params.typednames|join}}) -> String {
           return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
         }
         {% else %}
-        static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+        static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}} = {{enumName}}.tr("{{string.key}}")
         {% endif %}
         {% endfor %}
         {% endif %}
@@ -81,11 +81,11 @@ struct {{enumName}} {
           {% for string in subenum4.strings %}
           /// {{string.translation}}
           {% if string.params %}
-          static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+          static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}}({{string.params.typednames|join}}) -> String {
             return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
           }
           {% else %}
-          static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+          static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}} = {{enumName}}.tr("{{string.key}}")
           {% endif %}
           {% endfor %}
           {% endif %}
@@ -98,11 +98,11 @@ struct {{enumName}} {
             {% for string in subenum5.strings %}
             /// {{string.translation}}
             {% if string.params %}
-            static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+            static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}}({{string.params.typednames|join}}) -> String {
               return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
             }
             {% else %}
-            static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+            static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}} = {{enumName}}.tr("{{string.key}}")
             {% endif %}
             {% endfor %}
             {% endif %}
@@ -115,11 +115,11 @@ struct {{enumName}} {
               {% for string in subenum6.strings %}
               /// {{string.translation}}
               {% if string.params %}
-              static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}}({{string.params.typednames|join}}) -> String {
+              static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}}({{string.params.typednames|join}}) -> String {
                 return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
               }
               {% else %}
-              static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase}} = {{enumName}}.tr("{{string.key}}")
+              static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord}} = {{enumName}}.tr("{{string.key}}")
               {% endif %}
               {% endfor %}
               {% endif %}
