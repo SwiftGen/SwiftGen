@@ -2,17 +2,10 @@ language: objective-c
 
 matrix:
   include:
-    - osx_image: xcode7.3
     - osx_image: xcode8
 
-# cache: cocoapods
-# podfile: Example/Podfile
-# before_install:
-# - gem install cocoapods # Since Travis is not always on latest version
-# - pod install --project-directory=Example
-
 install:
- - gem install cocoapods --pre # 1.1.0.rc.2 is required
+ - gem install cocoapods
  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
  - scripts/install_swiftlint.sh
 
@@ -21,4 +14,5 @@ script:
  - rake tests
 # - PROJECT_DIR=. scripts/swiftlint-templates.sh
 # - PROJECT_DIR=. scripts/check_templates.sh
+ - pod lib lint SwiftGen.podspec
  - pod lib lint GenumKit/GenumKit.podspec
