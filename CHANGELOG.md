@@ -2,6 +2,16 @@
 
 ---
 
+## Master
+
+* Add support for Xcode 8 and Swift 2.3.  
+  _(Should still compile in Xcode 7.3 but the `Rakefile` to build, install and release requires Xcode 8)._  
+  [Valentin Knabel](https://github.com/vknabel)
+  [Ignacio Romero Zurbuchen](https://github.com/dzenbot)
+  [HanxuanZhou](https://github.com/GenoZhou)
+  [Syo Ikeda](https://github.com/ikesyo)
+  
+
 ## 3.0.0
 
 * Add template that calls `NSLocalizedString()` separately for each string,
@@ -20,28 +30,38 @@
   * `<name>` here can be either a subcommand name like `colors` or a
     composed name `colors-rawValue` for a specific template.
 * Fix swift 3 renaming change in strings-swift3.stencil.  
-  [Kilian Koeltzsch](https://github.com/kiliankoe), [#150](https://github.com/AliSoftware/SwiftGen/pull/150)
+  [Kilian Koeltzsch](https://github.com/kiliankoe)
+  [#150](https://github.com/AliSoftware/SwiftGen/pull/150)
 * Fix non-custom class, non-base view controller handling in storyboards-swift3.stencil.  
-  [Syo Ikeda](https://github.com/ikesyo), [#152](https://github.com/AliSoftware/SwiftGen/pull/152)
+  [Syo Ikeda](https://github.com/ikesyo)
+  [#152](https://github.com/AliSoftware/SwiftGen/pull/152)
 * Add strongly typed `initialViewController()` overrides for storyboard templates if available.  
-  [Syo Ikeda](https://github.com/ikesyo), [#153](https://github.com/AliSoftware/SwiftGen/pull/153), [#163](https://github.com/AliSoftware/SwiftGen/pull/163)
+  [Syo Ikeda](https://github.com/ikesyo)
+  [#153](https://github.com/AliSoftware/SwiftGen/pull/153)
+  [#163](https://github.com/AliSoftware/SwiftGen/pull/163)
 * Add support for font files containing multiple descriptors.  
-  [Chris Ellsworth](https://github.com/chrisellsworth), [#156](https://github.com/AliSoftware/SwiftGen/pull/156)
+  [Chris Ellsworth](https://github.com/chrisellsworth)
+  [#156](https://github.com/AliSoftware/SwiftGen/pull/156)
 * Update deprecated usage of generics for Swift 3 / Xcode 8 beta 6.  
-  [Chris Ellsworth](https://github.com/chrisellsworth), [#158](https://github.com/AliSoftware/SwiftGen/pull/158)
+  [Chris Ellsworth](https://github.com/chrisellsworth)
+  [#158](https://github.com/AliSoftware/SwiftGen/pull/158)
 * Fix case when missing positional parameters, which leads to parameters in the enum with
   unspecified type (undeterminable from the `Localizable.strings` format analysis) where
   reported as `Any` — which is not a `CVarArgType`. Now using `UnsafePointer<()>`
   arguments instead for such odd edge-cases that should never happen anyway.  
   [Olivier Halligon](https://github.com/AliSoftware)
 * Now reports an error when it failed to parse a color in a color input file.  
-  [Olivier Halligon](https://github.com/AliSoftware), [#162](https://github.com/AliSoftware/SwiftGen/issues/162)
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#162](https://github.com/AliSoftware/SwiftGen/issues/162)
 * New Strings template (available via `-t dot-syntax`), allowing string keys containing dots (like foo.bar.baz) to be organized as a hierarchy and accessible via dot syntax.
-  [Cihat Gündüz](https://github.com/Dschee), [#159](https://github.com/AliSoftware/SwiftGen/pull/159)
+  [Cihat Gündüz](https://github.com/Dschee)
+  [#159](https://github.com/AliSoftware/SwiftGen/pull/159)
 * Update Swift 3 templates to use lowercase enums.  
-  [Olivier Halligon](https://github.com/AliSoftware), [#166](https://github.com/AliSoftware/SwiftGen/pull/166)
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#166](https://github.com/AliSoftware/SwiftGen/pull/166)
 * New Strings template (available via `-t dot-syntax-swift3`), allowing keys with dots in Swift 3 (see above).  
-  [Cihat Gündüz](https://github.com/Dschee), [#168](https://github.com/AliSoftware/SwiftGen/pull/168)
+  [Cihat Gündüz](https://github.com/Dschee)
+  [#168](https://github.com/AliSoftware/SwiftGen/pull/168)
 
 > 💡 You can now **create your custom templates more easier than ever**, by cloning an existing template!
 >
@@ -65,14 +85,16 @@ according to match the latest Swift 3 recommendations.
 ## 2.0.0
 
 * Fix issue with txt files bailing on comments.  
-  [Derek Ostrander](https://github.com/dostrander), [#140](https://github.com/AliSoftware/SwiftGen/issues/140)
+  [Derek Ostrander](https://github.com/dostrander)
+  [#140](https://github.com/AliSoftware/SwiftGen/issues/140)
 * Added support for tvOS and watchOS in images, fonts and color templates.  
-  [Tom Baranes](https://github.com/tbaranes),
+  [Tom Baranes](https://github.com/tbaranes)
   [#145](https://github.com/AliSoftware/SwiftGen/pull/145)
 * Added enum-based structured identifiers via `-t structured` option.  
-  [Cihat Gündüz](https://github.com/Dschee), [#148](https://github.com/AliSoftware/SwiftGen/pull/148)  
+  [Cihat Gündüz](https://github.com/Dschee)
+  [#148](https://github.com/AliSoftware/SwiftGen/pull/148)  
 * Added support for OSX in storyboards.  
-  [Tom Baranes](https://github.com/tbaranes),
+  [Tom Baranes](https://github.com/tbaranes)
   [#131](https://github.com/AliSoftware/SwiftGen/pull/131)
 
 Note: The `Stencil` context keys (the name of the variables used in templates) for storyboard has changed a bit.
@@ -88,7 +110,8 @@ stop working as expected. That's the main reason why the version has been bumped
 ## 1.1.2
 
 * Fix issue introduced by 1.1.1 in storyboard templates not returning.  
-  [Ben Chatelain](https://github.com/phatblat) [#138](https://github.com/AliSoftware/SwiftGen/pull/138)
+  [Ben Chatelain](https://github.com/phatblat)
+  [#138](https://github.com/AliSoftware/SwiftGen/pull/138)
 
 ## 1.1.1
 
@@ -99,15 +122,17 @@ stop working as expected. That's the main reason why the version has been bumped
 
 * Added step to ensure all templates are [Swiftlint](https://github.com/realm/SwiftLint)'ed
   and don't violate any code style rule.  
-  [Olivier Halligon](https://github.com/AliSoftware),
-  h/t [AJ9](https://github.com/AJ9) in [#80](https://github.com/AliSoftware/SwiftGen/pull/80)
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [AJ9](https://github.com/AJ9)
+  [#80](https://github.com/AliSoftware/SwiftGen/pull/80)
 * Added support for OSX in images, fonts and color templates.  
-  [Tom Baranes](https://github.com/tbaranes),
-  [#125](https://github.com/AliSoftware/SwiftGen/pull/125),
-  [#126](https://github.com/AliSoftware/SwiftGen/pull/126),
+  [Tom Baranes](https://github.com/tbaranes)
+  [#125](https://github.com/AliSoftware/SwiftGen/pull/125)
+  [#126](https://github.com/AliSoftware/SwiftGen/pull/126)
   [#127](https://github.com/AliSoftware/SwiftGen/pull/127)
 * Added missing FontConvertible protocol conformance to default fonts template.  
-  [Ben Chatelain](https://github.com/phatblat) [#129](https://github.com/AliSoftware/SwiftGen/pull/129)
+  [Ben Chatelain](https://github.com/phatblat)
+  [#129](https://github.com/AliSoftware/SwiftGen/pull/129)
 
 ## 1.0.0
 
@@ -115,24 +140,31 @@ stop working as expected. That's the main reason why the version has been bumped
   inside existing UIKit classes in Release/Optimized builds.  
   [Olivier Halligon](https://github.com/AliSoftware)
 * Added support for Fonts using the `swiftgen fonts` command.  
-  [Derek Ostrander](https://github.com/dostrander) [#102](https://github.com/AliSoftware/SwiftGen/pull/102)
+  [Derek Ostrander](https://github.com/dostrander)
+  [#102](https://github.com/AliSoftware/SwiftGen/pull/102)
 * Added support for TXT (`colors.txt`) files to have named value.  
-  [Derek Ostrander](https://github.com/dostrander), [#118](https://github.com/AliSoftware/SwiftGen/pull/118)
+  [Derek Ostrander](https://github.com/dostrander)
+  [#118](https://github.com/AliSoftware/SwiftGen/pull/118)
 * Restructured image templates to work around an LLVM issue with nested types.    
-  [Ken Grigsby](https://github.com/kgrigsby59), [#112](https://github.com/AliSoftware/SwiftGen/issues/112)
+  [Ken Grigsby](https://github.com/kgrigsby59)
+  [#112](https://github.com/AliSoftware/SwiftGen/issues/112)
 * Added Swift 3 templates for storyboards and strings.    
-  [Andrew Breckenridge](https://github.com/AndrewSB), [#117](https://github.com/AliSoftware/SwiftGen/pull/117)
+  [Andrew Breckenridge](https://github.com/AndrewSB)
+  [#117](https://github.com/AliSoftware/SwiftGen/pull/117)
 
 ## 0.8.0
 
 * Introducing alternative way to install SwiftGen: using CocoaPods! See README for more details.  
-  [Olivier Halligon](https://github.com/AliSoftware), [#95](https://github.com/AliSoftware/SwiftGen/issues/95)
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#95](https://github.com/AliSoftware/SwiftGen/issues/95)
 * Added support for JSON (`colors.json`) files as input for the `swiftgen colors` subcommand.  
   [Derek Ostrander](https://github.com/dostrander)
 * Use `String(format:locale:arguments:)` and the `NSLocale.currentLocale()` in the "string" templates so that it works with `.stringdict` files and pluralization.  
-  [Olivier Halligon](https://github.com/AliSoftware), [#91](https://github.com/AliSoftware/SwiftGen/issues/91)
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#91](https://github.com/AliSoftware/SwiftGen/issues/91)
 * Add support for Android `colors.xml` files as input for the `swiftgen colors` subcommand.  
-  [Olivier Halligon](https://github.com/AliSoftware), [#15](https://github.com/AliSoftware/SwiftGen/issues/15)
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#15](https://github.com/AliSoftware/SwiftGen/issues/15)
 * Removed the useless `import Foundation` from the "images" templates.  
   [Olivier Halligon](https://github.com/AliSoftware)
 * Added computed property `var color: UIColor` to the color templates.  
@@ -144,41 +176,48 @@ stop working as expected. That's the main reason why the version has been bumped
 #### Enhancements
 
 * Fixed build loop by changing SwiftGen to only write to the output file if the generated code is different from the file contents.  
-  [Mathias Nagler](https://github.com/mathiasnagler), [#90](https://github.com/AliSoftware/SwiftGen/pull/90)
+  [Mathias Nagler](https://github.com/mathiasnagler)
+  [#90](https://github.com/AliSoftware/SwiftGen/pull/90)
 
 #### Fixes
 
 * Fixed typos in code and descriptions: _instanciate_ -> _instantiate_. Please note that the default template used for storyboards `storyboards-default.stencil` had to be modified, so make sure to update your codebase accordingly.  
-  [Pan Kolega](https://github.com/pankolega), [#83](https://github.com/AliSoftware/SwiftGen/pull/83)
+  [Pan Kolega](https://github.com/pankolega)
+  [#83](https://github.com/AliSoftware/SwiftGen/pull/83)
 * Fixed issue in `Rakefile` when trying to install via `rake` in a path containing `~`.  
-  [Jesse Armand](https://github.com/jessearmand), [#88](https://github.com/AliSoftware/SwiftGen/pull/88)
+  [Jesse Armand](https://github.com/jessearmand)
+  [#88](https://github.com/AliSoftware/SwiftGen/pull/88)
 
 ## 0.7.5
 
 #### Enhancements
 
 * Updated stencils and unit tests to pass [SwiftLint](https://github.com/realm/SwiftLint).  
-  [Adam Gask](https://github.com/AJ9), [#79](https://github.com/AliSoftware/SwiftGen/pull/79)
+  [Adam Gask](https://github.com/AJ9)
+  [#79](https://github.com/AliSoftware/SwiftGen/pull/79)
 * Updated `storyboards-default.stencil` to better avoid name confusions.  
   [Olivier Halligon](https://github.com/AliSoftware)
    * Now `cases` names are suffixed with `…Scene` and `static func` are prefixed with `instantiate…` to lower the risks of a name conflict with your ViewController classes.
    * The old template is still available but has been renamed `storyboards-uppercase.stencil`
-* Added support for `*.clr` files (files to store `NSColorList`'s presented in Color Picker on "Color Palettes" tab)  
-  [Ilya Puchka](https://github.com/ilyapuchka), [#81](https://github.com/AliSoftware/SwiftGen/pull/81)
+* Added support for `*.clr` files (files to store `NSColorList`'s presented in Color Picker on "Color Palettes" tab).  
+  [Ilya Puchka](https://github.com/ilyapuchka)
+  [#81](https://github.com/AliSoftware/SwiftGen/pull/81)
 
 ## 0.7.4
 
 #### Enhancements
 
 * Added View Controller Placeholders support.  
-  [Viacheslav Karamov](https://github.com/vkaramov/), [#61](https://github.com/AliSoftware/SwiftGen/issues/61)
+  [Viacheslav Karamov](https://github.com/vkaramov/)
+  [#61](https://github.com/AliSoftware/SwiftGen/issues/61)
 
 ## 0.7.3
 
 #### Fixes
 
 * Restructured storyboard templates to work around an LLVM issue with nested types.  
-  [Ryan Booker](https://github.com/ryanbooker), [#57](https://github.com/AliSoftware/SwiftGen/issues/57#issuecomment-159996671)
+  [Ryan Booker](https://github.com/ryanbooker)
+  [#57](https://github.com/AliSoftware/SwiftGen/issues/57#issuecomment-159996671)
 
 > Scenes and Segues are now referenced via `StoryboardScene.<Storyboard>` and `StoryboardSegue.<Storyboard>.<Segue>`
 
@@ -192,7 +231,9 @@ stop working as expected. That's the main reason why the version has been bumped
 
 * The default translation of strings are now added as documentation comments to the enum cases.  
   _You can add translations to your own templates by using the `string.translation` variable._  
-  [@MrAlek](https://github.com/MrAlek), [#58](https://github.com/AliSoftware/SwiftGen/issues/58), [#60](https://github.com/AliSoftware/SwiftGen/pull/60)
+  [@MrAlek](https://github.com/MrAlek)
+  [#58](https://github.com/AliSoftware/SwiftGen/issues/58)
+  [#60](https://github.com/AliSoftware/SwiftGen/pull/60)
 
 #### Fixes
 
@@ -204,36 +245,44 @@ stop working as expected. That's the main reason why the version has been bumped
 #### Fixes
 
 * Fix issue with `swiftgen strings` that were using the colors templates instead of the strings template by default.  
-  [@ChristopherRogers](https://github.com/ChristopherRogers), [#54](https://github.com/AliSoftware/SwiftGen/pull/54)
+  [@ChristopherRogers](https://github.com/ChristopherRogers)
+  [#54](https://github.com/AliSoftware/SwiftGen/pull/54)
 
 ## 0.7.0
 
 #### Enhancements
 
-* Allow using **custom templates by name**. ([#42](https://github.com/AliSoftware/SwiftGen/issues/42), [#50](https://github.com/AliSoftware/SwiftGen/pull/50))
+* Allow using **custom templates by name**.  
+  [#42](https://github.com/AliSoftware/SwiftGen/issues/42)
+  [#50](https://github.com/AliSoftware/SwiftGen/pull/50)
   * Now the `-t` flag expect a template name (defaults to `default`), and will search a matching template in `Application Support` first, then in the templates bundled with SwiftGen.  
   * You can still specify a template by path using `-p`.  
   * For more info, see [this dedicated documentation](documentation/Templates.md).  
-* You can now list all templates available (both bundled templates and custom ones) using the `swiftgen templates` command.
-  ([#42](https://github.com/AliSoftware/SwiftGen/issues/42), [#50](https://github.com/AliSoftware/SwiftGen/pull/50))
+* You can now list all templates available (both bundled templates and custom ones) using the `swiftgen templates` command.  
+  [#42](https://github.com/AliSoftware/SwiftGen/issues/42)
+  [#50](https://github.com/AliSoftware/SwiftGen/pull/50)
 * Add a `performSegue(_:sender:)` extension on `UIViewController` to accept a `StoryboardSegue` as parameter.  
-  You can now for example call `vc.performSegue(UIStoryboard.Segue.Wizard.ShowPassword)`.
-  ([#37](https://github.com/AliSoftware/SwiftGen/issues/37))
+  You can now for example call `vc.performSegue(UIStoryboard.Segue.Wizard.ShowPassword)`.  
+  [#37](https://github.com/AliSoftware/SwiftGen/issues/37)
 
 SwiftGen now comes bundled with some alternate templates, especially `colors-rawValue`, `images-allvalues` and `storyboards-lowercase`, in addition to the default templates.
 
 #### Fixes
 
 * Now `swiftgen storyboards` doesn't generate duplicate enum cases for identical segues (those having equal identifiers and shared custom class).  
-  [@filwag](https://github.com/filwag), [#43](https://github.com/AliSoftware/SwiftGen/pull/43)
+  [@filwag](https://github.com/filwag)
+  [#43](https://github.com/AliSoftware/SwiftGen/pull/43)
 * Fix compilation issue for storyboards without any scene.  
-  [Viacheslav Karamov](https://github.com/vkaramov/), [#47](https://github.com/AliSoftware/SwiftGen/issues/47)
+  [Viacheslav Karamov](https://github.com/vkaramov/)
+  [#47](https://github.com/AliSoftware/SwiftGen/issues/47)
 * Propose an alternate template using lowercase names, especially for when storyboard identifiers match view controller class names.  
-  [Viacheslav Karamov](https://github.com/vkaramov/), [#48](https://github.com/AliSoftware/SwiftGen/issues/48)
+  [Viacheslav Karamov](https://github.com/vkaramov/)
+  [#48](https://github.com/AliSoftware/SwiftGen/issues/48)
 * Introduced an `image-allvalues` template that exposes the list of all images in a `static let allValues` array.  
-  [Ahmed Mseddi](https://github.com/amseddi) & Guillaume Lagorce, [#44](https://github.com/AliSoftware/SwiftGen/pull/44)
-* Fix issue with Storyboards without any StoryboardID (all scenes being anonymous) not extending `StoryboardScene`.
-  ([#36](https://github.com/AliSoftware/SwiftGen/issues/36))
+  [Ahmed Mseddi](https://github.com/amseddi) & Guillaume Lagorce
+  [#44](https://github.com/AliSoftware/SwiftGen/pull/44)
+* Fix issue with Storyboards without any StoryboardID (all scenes being anonymous) not extending `StoryboardScene`.  
+  [#36](https://github.com/AliSoftware/SwiftGen/issues/36)
 
 ## 0.6.0
 
@@ -245,15 +294,18 @@ SwiftGen now comes bundled with some alternate templates, especially `colors-raw
 
 ### Fixes
 
-* The correct type of _ViewController_ (`UIViewController`, `UINavigationController`, `UITableViewController`, …) is now correctly generated even if not a custom subclass.  ([#40](https://github.com/AliSoftware/SwiftGen/issues/40))
-* Fix issue with `.strings` files encoded in UTF8 ([#21](https://github.com/AliSoftware/SwiftGen/issues/21))
+* The correct type of _ViewController_ (`UIViewController`, `UINavigationController`, `UITableViewController`, …) is now correctly generated even if not a custom subclass.  
+  [#40](https://github.com/AliSoftware/SwiftGen/issues/40)
+* Fix issue with `.strings` files encoded in UTF8.  
+  [#21](https://github.com/AliSoftware/SwiftGen/issues/21)
 
 ## 0.5.2
 
 ### New Features
 
 * It's now possible to specify which chars should not be used when generating `case` identifiers.  
-[@Igor-Palaguta](https://github.com/Igor-Palaguta), [#34](https://github.com/AliSoftware/SwiftGen/pull/34)
+  [@Igor-Palaguta](https://github.com/Igor-Palaguta)
+  [#34](https://github.com/AliSoftware/SwiftGen/pull/34)
 
 ## 0.5.1
 
@@ -266,16 +318,21 @@ SwiftGen now comes bundled with some alternate templates, especially `colors-raw
 
 #### New Features
 
-* Migrating to [Commander](https://github.com/kylef/Commander) to parse the CLI arguments. ([23](https://github.com/AliSoftware/SwiftGen/issues/23), [#30](https://github.com/AliSoftware/SwiftGen/issues/30))
-* `swiftgen` is now a single binary, and the subcommand names have changed to be more consistent. ([#30](https://github.com/AliSoftware/SwiftGen/issues/30))
-* New `--output` option. ([#30](https://github.com/AliSoftware/SwiftGen/issues/30))
+* Migrating to [Commander](https://github.com/kylef/Commander) to parse the CLI arguments.  
+  [23](https://github.com/AliSoftware/SwiftGen/issues/23)
+  [#30](https://github.com/AliSoftware/SwiftGen/issues/30)
+* `swiftgen` is now a single binary, and the subcommand names have changed to be more consistent.  
+  [#30](https://github.com/AliSoftware/SwiftGen/issues/30)
+* New `--output` option.  
+  [#30](https://github.com/AliSoftware/SwiftGen/issues/30)
 
 > You must now use the subcommands `swiftgen images`, `swiftgen strings`, `swiftgen storyboards` and `swiftgen colors`. See `swiftgen --help` for more usage info.
 
 #### Fixes
 
 * Fix color parsing with absent alpha  
-[@Igor-Palaguta](https://github.com/Igor-Palaguta), [#28](https://github.com/AliSoftware/SwiftGen/pull/28)
+  [@Igor-Palaguta](https://github.com/Igor-Palaguta)
+  [#28](https://github.com/AliSoftware/SwiftGen/pull/28)
 
 ## 0.4.4
 
@@ -285,13 +342,15 @@ SwiftGen now comes bundled with some alternate templates, especially `colors-raw
 
 ## 0.4.3
 
-* Updated for Xcode 7 Beta 6  
-[@Dimentar](https://github.com/Dimentar), [#14](https://github.com/AliSoftware/SwiftGen/pull/14)
+* Updated for Xcode 7 Beta 6.  
+  [@Dimentar](https://github.com/Dimentar)
+  [#14](https://github.com/AliSoftware/SwiftGen/pull/14)
 
 ## 0.4.2
 
-* Added `import Foundation` on top of `swiftgen-l10n` generated code  
-[@Nick11](https://github.com/Nick11), [#12](https://github.com/AliSoftware/SwiftGen/pull/12)
+* Added `import Foundation` on top of `swiftgen-l10n` generated code.  
+  [@Nick11](https://github.com/Nick11)
+  [#12](https://github.com/AliSoftware/SwiftGen/pull/12)
 
 ## 0.4.1
 
@@ -301,9 +360,14 @@ SwiftGen now comes bundled with some alternate templates, especially `colors-raw
 
 ## 0.4.0
 
-* Reorganized files into an **Xcode project** with one target per executable ([#2](https://github.com/AliSoftware/SwiftGen/issues/2))
-* Added **Unit Tests** (one per executable + one for common code) ([#2](https://github.com/AliSoftware/SwiftGen/issues/2))
-* Improved `SwiftGen-L10n` parsing of format strings and placeholders. ([#4](https://github.com/AliSoftware/SwiftGen/issues/4), [#5](https://github.com/AliSoftware/SwiftGen/issues/5), [#6](https://github.com/AliSoftware/SwiftGen/issues/6))
+* Reorganized files into an **Xcode project** with one target per executable.  
+  [#2](https://github.com/AliSoftware/SwiftGen/issues/2)
+* Added **Unit Tests** (one per executable + one for common code).  
+  [#2](https://github.com/AliSoftware/SwiftGen/issues/2)
+* Improved `SwiftGen-L10n` parsing of format strings and placeholders.  
+  [#4](https://github.com/AliSoftware/SwiftGen/issues/4)
+  [#5](https://github.com/AliSoftware/SwiftGen/issues/5)
+  [#6](https://github.com/AliSoftware/SwiftGen/issues/6)
 * Updated `Rakefile` so that it now invokes `xcodebuild install`. You can now easily build & install all `swiftgen-xxx` executables in `/usr/local/bin` or anywhere else.
 * Added a **version** string (date + sha1) to the built executables (displayed when invoked with no argument)
 
@@ -318,7 +382,8 @@ SwiftGen now comes bundled with some alternate templates, especially `colors-raw
 ## 0.2.0
 
 * Added `Segues` enums to `UIStoryboard` to be able to access their identifiers easily.  
-[@esttorhe](https://github.com/esttorhe), [#8](https://github.com/AliSoftware/SwiftGen/pull/8)
+  [@esttorhe](https://github.com/esttorhe)
+  [#8](https://github.com/AliSoftware/SwiftGen/pull/8)
 * Added this very `CHANGELOG.md`
 
 ## 0.1.0
