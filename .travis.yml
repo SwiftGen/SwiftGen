@@ -14,5 +14,4 @@ script:
  - rake tests
 # - PROJECT_DIR=. scripts/swiftlint-templates.sh
 # - PROJECT_DIR=. scripts/check_templates.sh
- - pod lib lint --verbose SwiftGen.podspec
- - pod lib lint --verbose GenumKit/GenumKit.podspec
+ - pod lib lint GenumKit/GenumKit.podspec
