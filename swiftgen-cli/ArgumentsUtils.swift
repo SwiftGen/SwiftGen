@@ -80,7 +80,7 @@ enum TemplateError: ErrorType, CustomStringConvertible {
   var description: String {
     switch self {
     case .NamedTemplateNotFound(let name):
-      return "Template named \(name) not found. Use `swiftgen template` to list available named templates " +
+      return "Template named \(name) not found. Use `swiftgen templates` to list available named templates " +
       "or use --templatePath to specify a template by its full path."
     case .TemplatePathNotFound(let path):
       return "Template not found at path \(path.description)."
