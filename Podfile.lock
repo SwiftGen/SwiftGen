@@ -1,6 +1,6 @@
 PODS:
   - Commander (0.4.1)
-  - GenumKit (3.0.0):
+  - GenumKit (3.0.1):
     - Stencil (= 0.6.0-beta.1)
   - PathKit (0.6.0)
   - Stencil (0.6.0-beta.1):
@@ -26,10 +26,10 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Commander: 106cb704180eee0a5f9df2e9dbc090808b564636
-  GenumKit: 1e32409df77c791a9a7d14b23c0d213dc4efd71b
+  GenumKit: 41eacec2d0ee737328687a54efcbb7d8ddcec8ac
   PathKit: b224b6d2c4e75b87f08f45e1c0c610a3195c94e5
   Stencil: ab5a29fd8a48d53bb24fb254659f9a1fb36dfe5b
 
 PODFILE CHECKSUM: 02563ca3bd363e7a1b460b42df440c07193447e0
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.1.1
