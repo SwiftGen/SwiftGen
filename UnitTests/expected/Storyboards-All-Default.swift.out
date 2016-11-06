@@ -41,6 +41,16 @@ extension UIViewController {
 // swiftlint:disable type_body_length
 
 struct StoryboardScene {
+  enum AdditionalImport: StoryboardSceneType {
+    static let storyboardName = "AdditionalImport"
+
+    static func initialViewController() -> SomeViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? SomeViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+  }
   enum Anonymous: StoryboardSceneType {
     static let storyboardName = "Anonymous"
 
