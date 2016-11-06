@@ -2,7 +2,7 @@
 
 ---
 
-## Master
+## 3.0.1
 
 * Add support for Xcode 8 and Swift 2.3.  
   _(Should still compile in Xcode 7.3 but the `Rakefile` to build, install and release requires Xcode 8)._  
