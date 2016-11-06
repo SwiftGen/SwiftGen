@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "GenumKit"
-  s.version      = "3.0.0"
+  s.version      = "3.0.1"
   s.summary      = "A tool to build constants using enums for your UIImage, Storyboards, Assets, Colors, and more"
 
   s.description  = <<-DESC
@@ -25,6 +25,6 @@ Pod::Spec.new do |s|
 
   s.source_files = "**/*.swift"
 
-  s.dependency 'Stencil'
+  s.dependency 'Stencil', '0.6.0-beta.1'
   s.framework  = "Foundation"
 end
