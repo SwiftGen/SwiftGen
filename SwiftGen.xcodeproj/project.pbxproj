@@ -100,6 +100,7 @@
 		D7A14A8B1D64FE35002F4C65 /* Fonts-Dir-CustomName-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = D7A14A891D64FE35002F4C65 /* Fonts-Dir-CustomName-Swift3.swift.out */; };
 		D7A14A8C1D64FE35002F4C65 /* Fonts-Dir-Default-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = D7A14A8A1D64FE35002F4C65 /* Fonts-Dir-Default-Swift3.swift.out */; };
 		D7C858DF1D5D4A4E00EA2C07 /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = D7C858DE1D5D4A4E00EA2C07 /* Avenir.ttc */; };
+		DD49E6E61DCFD7720091A3CA /* Storyboards-AdditionalImport-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = DD49E6E51DCFD7720091A3CA /* Storyboards-AdditionalImport-Swift3.swift.out */; };
 		E2679A4B1D044D4600D3F55B /* Storyboards-osx-All-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = E2679A4A1D044D4600D3F55B /* Storyboards-osx-All-Default.swift.out */; };
 		E29942C11D1C640A002A29C4 /* storyboards-osx-lowercase.stencil in Resources */ = {isa = PBXBuildFile; fileRef = E29942C01D1C640A002A29C4 /* storyboards-osx-lowercase.stencil */; };
 		E29942C31D1C6560002A29C4 /* Storyboards-osx-Message-Lowercase.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = E29942C21D1C6560002A29C4 /* Storyboards-osx-Message-Lowercase.swift.out */; };
@@ -258,6 +259,7 @@
 		D7A14A891D64FE35002F4C65 /* Fonts-Dir-CustomName-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Fonts-Dir-CustomName-Swift3.swift.out"; path = "UnitTests/expected/Fonts-Dir-CustomName-Swift3.swift.out"; sourceTree = SOURCE_ROOT; };
 		D7A14A8A1D64FE35002F4C65 /* Fonts-Dir-Default-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Fonts-Dir-Default-Swift3.swift.out"; path = "UnitTests/expected/Fonts-Dir-Default-Swift3.swift.out"; sourceTree = SOURCE_ROOT; };
 		D7C858DE1D5D4A4E00EA2C07 /* Avenir.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Avenir.ttc; sourceTree = "<group>"; };
+		DD49E6E51DCFD7720091A3CA /* Storyboards-AdditionalImport-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-AdditionalImport-Swift3.swift.out"; sourceTree = "<group>"; };
 		E0542E32A906407325456A56 /* Pods-swiftgen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.release.xcconfig"; sourceTree = "<group>"; };
 		E2679A4A1D044D4600D3F55B /* Storyboards-osx-All-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-osx-All-Default.swift.out"; sourceTree = "<group>"; };
 		E29942C01D1C640A002A29C4 /* storyboards-osx-lowercase.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "storyboards-osx-lowercase.stencil"; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 		47CB53251CFC0AD600AA19C0 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				DD49E6E51DCFD7720091A3CA /* Storyboards-AdditionalImport-Swift3.swift.out */,
 				4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */,
 				E2F749711D03CAE800EA0BC8 /* Storyboards-osx-Empty.swift.out */,
 				09EB0A261BDC60F000B2CF79 /* Storyboards-Message-Default.swift.out */,
@@ -692,6 +695,7 @@
 				09EB0A2E1BDC60F000B2CF79 /* Storyboards-All-Default.swift.out in Resources */,
 				470A14E61BEA68C40052EAC8 /* Images-File-AllValues.swift.out in Resources */,
 				47CB53321CFC0B2100AA19C0 /* SFNSDisplay-Black.otf in Resources */,
+				DD49E6E61DCFD7720091A3CA /* Storyboards-AdditionalImport-Swift3.swift.out in Resources */,
 				09EB0A2D1BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out in Resources */,
 				09EB0A271BDC60F000B2CF79 /* Colors-File-CustomName.swift.out in Resources */,
 				0911503F1BD4136E00EBC803 /* storyboards-default.stencil in Resources */,

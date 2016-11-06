@@ -110,6 +110,25 @@ class StoryboardsiOSTests: XCTestCase {
     let expected = self.fixtureString("Storyboards-Wizard-Swift3.swift.out")
     XCTDiffStrings(result, expected)
   }
+
+  func testAdditionalImport() {
+    let parser = StoryboardParser()
+    parser.addStoryboardAtPath(self.fixturePath("AdditionalImport.storyboard", subDirectory: StoryboardsDir.iOS))
+
+    // additional import statements
+    let extraImports = [
+      "SlackTextViewController",
+      "Test",
+      "AnotherImport"
+    ]
+
+    let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"))
+    let context = parser.stencilContext(sceneEnumName: "StoryboardScene", segueEnumName: "StoryboardSegue", extraImports: extraImports)
+    let result = try! template.render(context)
+
+    let expected = self.fixtureString("Storyboards-AdditionalImport-Swift3.swift.out")
+    XCTDiffStrings(result, expected)
+  }
 }
 
 // MARK: OS X StoryboardTests
