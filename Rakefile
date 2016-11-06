@@ -169,6 +169,9 @@ end
 ## [ Release a new version ] ##################################################
 
 namespace :release do
+  desc 'Create a new release on GitHub, CocoaPods and Homebrew'
+  task :new => [:check_versions, :tests, :github, :cocoapods, :homebrew]
+
   def podspec_version(file = 'SwiftGen')
     JSON.parse(`pod ipc spec #{file}.podspec`)["version"]
   end
@@ -182,6 +185,7 @@ namespace :release do
     result
   end
 
+  desc 'Check if all versions from the podspecs and CHANGELOG match'
   task :check_versions do
     # Extract version from GenumKit.podspec
     version = podspec_version
@@ -209,13 +213,11 @@ namespace :release do
     exit 2 unless (STDIN.gets.chomp == 'Y')
   end
 
+  desc 'Create a zip containing all the prebuilt binaries'
   task :zip => [:clean, :install] do
     `cp LICENSE README.md CHANGELOG.md build/swiftgen`
     `cd build/swiftgen; zip -r ../swiftgen-#{podspec_version}.zip .`
   end
-
-  desc 'Create a new release'
-  task :new => [:check_versions, :tests, :github, :cocoapods, :homebrew]
 
   def post(url, content_type)
     uri = URI.parse(url)
@@ -234,6 +236,7 @@ namespace :release do
     JSON.parse(response.body)
   end
 
+  desc 'Upload the zipped binaries to a new GitHub release'
   task :github => :zip do
     v = podspec_version
     
@@ -257,11 +260,13 @@ namespace :release do
     end
   end
 
+  desc 'pod trunk push SwiftGen to CocoaPods'
   task :cocoapods do
     print_info "Pushing pod to CocoaPods Trunk"
     sh 'pod trunk push SwiftGen.podspec'
   end
 
+  desc 'Release a new version on Homebrew and prepare a PR'
   task :homebrew do
     print_info "Updating Homebrew Formula"
     tag = podspec_version
