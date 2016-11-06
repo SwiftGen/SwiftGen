@@ -2,6 +2,11 @@
 
 ---
 
+## Master
+
+* Add support for Xcode 8 and Swift 2.3. Xcode 7.3 is still supported.  
+  [Valentin Knabel](https://github.com/vknabel), [Ignacio Romero Zurbuchen](https://github.com/dzenbot), [HanxuanZhou](https://github.com/GenoZhou), [Syo Ikeda](https://github.com/ikesyo)
+
 ## 3.0.0
 
 * Add template that calls `NSLocalizedString()` separately for each string,
