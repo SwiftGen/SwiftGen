@@ -19,6 +19,19 @@ TEMPLATES_SRC_DIR = 'templates'
 
 ## [ Utils ] ##################################################################
 
+def version_select
+  # Find all Xcode 8 versions on this computer
+  xcodes = `mdfind "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode' && kMDItemVersion = '8.*'"`.chomp.split("\n")
+  if xcodes.empty?
+    raise "\n[!!!] You need to have Xcode 8.x to compile SwiftGen.\n\n"
+  end
+  # Order by version and get the latest one
+  vers = lambda { |path| `mdls -name kMDItemVersion -raw "#{path}"` }
+  latest_xcode_version = xcodes.sort { |p1, p2| vers.call(p1) <=> vers.call(p2) }.last
+  # Force the use of this Xcode 8 and the Swift 2.3 Toolchain
+  %Q(DEVELOPER_DIR="#{latest_xcode_version}/Contents/Developer" TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3)
+end
+
 def xcpretty(cmd)
   if `which xcpretty` && $?.success?
     sh "set -o pipefail && #{cmd} | xcpretty -c"
@@ -27,32 +40,27 @@ def xcpretty(cmd)
   end
 end
 
+def xcrun(cmd)
+  xcpretty "#{version_select} xcrun #{cmd}"
+end
+
 def print_info(str)
   (red,clr) = (`tput colors`.chomp.to_i >= 8) ? %W(\e[33m \e[m) : ["", ""]
   puts red, "== #{str.chomp} ==", clr
 end
 
 def defaults(args)
-  bindir = args.bindir.nil? || args.bindir.empty? ? Pathname.new('./build/swiftgen/bin')   : Pathname.new(args.bindir)
-  fmkdir = args.fmkdir.nil? || args.fmkdir.empty? ? bindir + '../lib'   : Pathname.new(args.fmkdir)
+  bindir = args.bindir.nil? || args.bindir.empty? ? Pathname.new('./build/swiftgen/bin') : Pathname.new(args.bindir)
+  fmkdir = args.fmkdir.nil? || args.fmkdir.empty? ? bindir + '../lib' : Pathname.new(args.fmkdir)
   tpldir = args.tpldir.nil? || args.tpldir.empty? ? bindir + '../templates' : Pathname.new(args.tpldir)
   [bindir, fmkdir, tpldir].map(&:expand_path)
 end
-
-task :check_xcode_version do
-  xcode_dir = `xcode-select -p`.chomp
-  xcode_version = `mdls -name kMDItemVersion -raw "#{xcode_dir}"/../..`.chomp
-  unless xcode_version.start_with?('7.')
-    raise "\n[!!!] You need to use Xcode 7.x to compile SwiftGen. Use xcode-select to change the Xcode used to build from command line.\n\n"
-  end
-end
-
 
 
 ## [ Build Tasks ] ############################################################
 
 desc "Build the CLI binary and its frameworks in #{BUILD_DIR}"
-task :build, [:bindir, :tpldir] => [:check_xcode_version] + DEPENDENCIES.map { |dep| "dependencies:#{dep}" } do |_, args|
+task :build, [:bindir, :tpldir] => DEPENDENCIES.map { |dep| "dependencies:#{dep}" } do |_, args|
   (bindir, _, tpldir) = defaults(args)
   tpl_rel_path = tpldir.relative_path_from(bindir)
   main = File.read('swiftgen-cli/main.swift')
@@ -61,7 +69,7 @@ task :build, [:bindir, :tpldir] => [:check_xcode_version] + DEPENDENCIES.map { |
   print_info "Building Binary"
   frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
   search_paths = DEPENDENCIES.map { |fmk| "-F #{BUILD_DIR}/#{fmk}" }.join(" ")
-  xcpretty %Q(xcrun -sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} #{search_paths}/ #{frameworks} swiftgen-cli/*.swift)
+  xcrun %Q(-sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} #{search_paths}/ #{frameworks} swiftgen-cli/*.swift)
 end
 
 namespace :dependencies do
@@ -69,7 +77,7 @@ namespace :dependencies do
     # desc "Build #{fmk}.framework"
     task fmk do
       print_info "Building #{fmk}.framework"
-      xcpretty %Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION})
+      xcrun %Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION})
     end
 end
 end
@@ -110,10 +118,10 @@ task :install, [:bindir, :fmkdir, :tpldir] => 'install:light' do |_, args|
   (bindir, fmkdir, tpldir) = defaults(args)
 
   print_info "Linking to standalone Swift dylibs"
-  sh %Q(xcrun swift-stdlib-tool --copy --scan-executable "#{bindir}/#{BIN_NAME}" --platform macosx --destination "#{fmkdir}")
-  toolchain_dir = `xcrun -find swift-stdlib-tool`.chomp
+  xcrun %Q(swift-stdlib-tool --copy --scan-executable "#{bindir}/#{BIN_NAME}" --platform macosx --destination "#{fmkdir}")
+  toolchain_dir = `#{version_select} xcrun -find swift-stdlib-tool`.chomp
   xcode_rpath = File.dirname(File.dirname(toolchain_dir)) + '/lib/swift/macosx'
-  sh %Q(xcrun install_name_tool -delete_rpath "#{xcode_rpath}" "#{bindir}/#{BIN_NAME}")
+  xcrun %Q(install_name_tool -delete_rpath "#{xcode_rpath}" "#{bindir}/#{BIN_NAME}")
 end
 
 
@@ -123,7 +131,7 @@ end
 desc "Run the Unit Tests"
 task :tests do
   print_info "Running Unit Tests"
-  xcpretty %Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen-cli -sdk macosx test)
+  xcrun %Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen-cli -sdk macosx test)
 end
 
 desc "Delete the build/ directory"
@@ -143,13 +151,13 @@ namespace :playground do
     sh 'mkdir SwiftGen.playground/Resources'
   end
   task :images do
-    sh %Q(xcrun actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text UnitTests/fixtures/Images.xcassets)
+    xcrun %Q(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text UnitTests/fixtures/Images.xcassets)
   end
   task :storyboard do
-    sh %Q(xcrun ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO UnitTests/fixtures/Storyboards-iOS/Wizard.storyboard)
+    xcrun %Q(ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO UnitTests/fixtures/Storyboards-iOS/Wizard.storyboard)
   end
   task :strings do
-    sh %Q(xcrun plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings UnitTests/fixtures/Localizable.strings)
+    xcrun %Q(plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings UnitTests/fixtures/Localizable.strings)
   end
 
   desc "Regenerate all the Playground resources based on the test fixtures.\nThis compiles the needed fixtures and place them in SwiftGen.playground/Resources"
