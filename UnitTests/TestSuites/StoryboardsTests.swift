@@ -117,9 +117,8 @@ class StoryboardsiOSTests: XCTestCase {
 
     // additional import statements
     let extraImports = [
-      "SlackTextViewController",
-      "Test",
-      "AnotherImport"
+      "LocationPicker",
+      "SlackTextViewController"
     ]
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"))

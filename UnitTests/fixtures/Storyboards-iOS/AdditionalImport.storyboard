@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Some View Controller-->
+        <!--Location Picker View Controller-->
         <scene sceneID="1iN-a4-Pl6">
             <objects>
-                <viewController id="sCq-1b-U1T" customClass="SomeViewController" sceneMemberID="viewController">
+                <viewController id="sCq-1b-U1T" customClass="LocationPickerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AF1-Pm-1gV"/>
                         <viewControllerLayoutGuide type="bottom" id="E3P-fP-oWf"/>
@@ -27,6 +27,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v2R-VI-fT0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1305" y="433"/>
+        </scene>
+        <!--Text View Controller-->
+        <scene sceneID="yg3-tg-GNr">
+            <objects>
+                <viewController storyboardIdentifier="SomeSlackViewControllerInstance" id="TuC-8Y-xZ9" customClass="SLKTextViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="M6w-YY-zkB"/>
+                        <viewControllerLayoutGuide type="bottom" id="DvD-4b-cvd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Gc-7S-lDu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="heH-CC-QsF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2236" y="432"/>
         </scene>
     </scenes>
 </document>

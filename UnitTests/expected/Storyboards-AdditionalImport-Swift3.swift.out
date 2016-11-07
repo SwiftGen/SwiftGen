@@ -2,9 +2,8 @@
 
 import Foundation
 import UIKit
+import LocationPicker
 import SlackTextViewController
-import Test
-import AnotherImport
 
 // swiftlint:disable file_length
 // swiftlint:disable line_length
@@ -45,12 +44,21 @@ extension UIViewController {
 }
 
 struct StoryboardScene {
-  enum AdditionalImport: StoryboardSceneType {
+  enum AdditionalImport: String, StoryboardSceneType {
     static let storyboardName = "AdditionalImport"
 
-    static func initialViewController() -> SomeViewController {
-      guard let vc = storyboard().instantiateInitialViewController() as? SomeViewController else {
+    static func initialViewController() -> LocationPickerViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? LocationPickerViewController else {
         fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+
+    case someSlackViewControllerInstanceScene = "SomeSlackViewControllerInstance"
+    static func instantiateSomeSlackViewControllerInstance() -> SLKTextViewController {
+      guard let vc = StoryboardScene.AdditionalImport.someSlackViewControllerInstanceScene.viewController() as? SLKTextViewController
+      else {
+        fatalError("ViewController 'SomeSlackViewControllerInstance' is not of the expected class SLKTextViewController.")
       }
       return vc
     }
