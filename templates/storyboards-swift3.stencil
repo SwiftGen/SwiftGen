@@ -3,6 +3,10 @@
 import Foundation
 import UIKit
 
+// swiftlint:disable file_length
+// swiftlint:disable line_length
+// swiftlint:disable type_body_length
+
 {# This first part of the code is static, same every time whatever Storyboard you have #}
 protocol StoryboardSceneType {
   static var storyboardName: String { get }
@@ -40,9 +44,6 @@ extension UIViewController {
 
 {# This is where the generation begins, this code depends on what you have in your Storyboards #}
 {% if storyboards %}
-// swiftlint:disable file_length
-// swiftlint:disable type_body_length
-
 struct {{sceneEnumName}} {
   {% for storyboard in storyboards %}
   {% set storyboardName %}{{storyboard.name|swiftIdentifier}}{% endset %}

@@ -20,6 +20,8 @@ extension Color {
 }
 
 // swiftlint:disable file_length
+// swiftlint:disable line_length
+
 // swiftlint:disable type_body_length
 enum XCTColors {
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>

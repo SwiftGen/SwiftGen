@@ -2,6 +2,8 @@
 
 import Foundation
 
+// swiftlint:disable line_length
+
 enum L10n {
   /// Title of the alert
   case AlertTitle
