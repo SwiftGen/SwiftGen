@@ -48,8 +48,8 @@ public enum {{ class }}FetchedProperties: String {
 {% endif %}
 
 // swiftlint:disable type_name
-public class _{{ class }}: {% if parentClass %}{{ parentClass }}{% else %}NSManagedObject{% endif %} {
-   public {% if parentClass %}override {% endif %}class var entityName: String {
+public class _{{ class }}: {% if parent.class %}{{ parent.class }}{% else %}NSManagedObject{% endif %} {
+   public {% if parent.class %}override {% endif %}class var entityName: String {
       return "{{ name }}"
    }
 

@@ -6,7 +6,7 @@ import CoreData
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
 extension {{ class }} {
-   public {% if parentClass %}override {% endif %}class var entityName: String {
+   public {% if parent.class %}override {% endif %}class var entityName: String {
       return "{{ name }}"
    }
 

@@ -19,23 +19,23 @@ public enum ScalarTypesClassRelationships: String {
 }
 
 public enum ScalarTypesClassFetchedProperties: String {
-   case eq_true
-   case gt_100
+   case eqTrue
+   case gt100
 
    public var predicateString: String {
       switch self {
-      case .eq_true:
+      case .eqTrue:
          return "boolean == YES"
-      case .gt_100:
+      case .gt100:
          return "int16 > 100"
       }
    }
 
    public var entityName: String {
       switch self {
-      case .eq_true:
+      case .eqTrue:
          return "ScalarTypes"
-      case .gt_100:
+      case .gt100:
          return "ScalarTypes"
       }
    }

@@ -11,7 +11,7 @@ public struct {{enumName}} {
    public struct {{ entity.name }} {
       public static let name = "{{ entity.name }}"
 
-      public struct Field {
+      public class Field{% if entity.parent.name %}: {{entity.parent.name}}.Field{% endif %} {
          {% for attribute in entity.attributes %}
          public static let {{ attribute.name }} = "{{ attribute.name }}"
          {% endfor %}

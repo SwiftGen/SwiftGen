@@ -1,5 +1,6 @@
 import Foundation
 import SWXMLHash
+import PathKit
 
 public enum CoreDataModelParserError: ErrorType, CustomStringConvertible {
   case InvalidModelType(String)
@@ -47,38 +48,31 @@ public final class CoreDataModelParser {
   public init() {
   }
 
-  public func parseModelFile(path: String) throws {
-    let path = NSURL(fileURLWithPath: try currentVersion(forModelPath: path), isDirectory: true)
-      .URLByAppendingPathComponent("contents")
-      .path!
+  public func parseModelFile(modelPath: String) throws {
+    let path = try currentVersionForModelFile(Path(modelPath)) + "contents"
 
-    let content = try String(contentsOfFile: path)
+    let content: String = try path.read()
     let xml = SWXMLHash.parse(content)
     self.entities = try xml["model"]["entity"].map { try Entity(xml: $0) }
   }
 
-  private func currentVersion(forModelPath modelPath: String) throws -> String {
-    let url = NSURL(fileURLWithPath: modelPath, isDirectory: true)
-    switch url.pathExtension {
+  private func currentVersionForModelFile(modelPath: Path) throws -> Path {
+    switch modelPath.`extension` {
     case .Some("xcdatamodel"):
       return modelPath
     case .Some("xcdatamodeld"):
-      let currentVersionFile = url.URLByAppendingPathComponent(".xccurrentversion").path!
-      guard NSFileManager.defaultManager().fileExistsAtPath(currentVersionFile) else {
-        return url
-          .URLByAppendingPathComponent(url.lastPathComponent!)
-          .URLByDeletingPathExtension!
-          .URLByAppendingPathExtension("xcdatamodel")
-          .path!
+      let versionFilePath = modelPath + ".xccurrentversion"
+      guard versionFilePath.exists else {
+         return modelPath + "\(modelPath.lastComponentWithoutExtension).xcdatamodel"
       }
       let versionKey = "_XCCurrentVersionName"
-      guard let plist = NSDictionary(contentsOfFile: currentVersionFile),
-        let versionFile = plist[versionKey] as? String else {
-          throw CoreDataModelParserError.AbsentPlistKey(key: versionKey, plistPath: currentVersionFile)
+      guard let plist = NSDictionary(contentsOfFile: String(versionFilePath)),
+         let versionFile = plist[versionKey] as? String else {
+          throw CoreDataModelParserError.AbsentPlistKey(key: versionKey, plistPath: String(versionFilePath))
       }
-      return url.URLByAppendingPathComponent(versionFile).path!
+      return modelPath + versionFile
     default:
-      throw CoreDataModelParserError.InvalidModelType(modelPath)
+      throw CoreDataModelParserError.InvalidModelType(String(modelPath))
     }
   }
 
