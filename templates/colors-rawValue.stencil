@@ -22,6 +22,7 @@ extension Color {
 {% if colors %}
 // swiftlint:disable file_length
 // swiftlint:disable line_length
+
 // swiftlint:disable type_body_length
 enum {{enumName|swiftIdentifier}}: UInt32 {
   {% for color in colors %}
