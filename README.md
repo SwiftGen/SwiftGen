@@ -70,9 +70,9 @@ The tool is provided as a unique `swiftgen` binary command-line, with the follow
 * `swiftgen storyboards [OPTIONS] DIR`
 * `swiftgen colors [OPTIONS] FILE`
 * `swiftgen fonts [OPTIONS] DIR`
-* `swiftgen coredata model [OPTIONS] DIR`
-* `swiftgen coredata human [OPTIONS] DIR`
-* `swiftgen coredata machine [OPTIONS] DIR`
+* `swiftgen coredata model [OPTIONS] FILE`
+* `swiftgen coredata human [OPTIONS] FILE`
+* `swiftgen coredata machine [OPTIONS] FILE`
 
 Each subcommand has its own option and syntax, but some options are common to all:
 
