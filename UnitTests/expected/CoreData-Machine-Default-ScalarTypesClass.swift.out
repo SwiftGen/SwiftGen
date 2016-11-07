@@ -10,10 +10,6 @@ extension ScalarTypesClass {
       return "ScalarTypes"
    }
 
-   @nonobjc public class func fetchRequest() -> NSFetchRequest<ScalarTypesClass> {
-       return NSFetchRequest<ScalarTypesClass>(entityName: self.entityName)
-   }
-
    @NSManaged public var boolean: Bool
    @NSManaged public var double: Double
    @NSManaged public var float: Float

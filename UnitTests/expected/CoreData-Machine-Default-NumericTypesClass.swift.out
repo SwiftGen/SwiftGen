@@ -10,10 +10,6 @@ extension NumericTypesClass {
       return "NumericTypes"
    }
 
-   @nonobjc public class func fetchRequest() -> NSFetchRequest<NumericTypesClass> {
-       return NSFetchRequest<NumericTypesClass>(entityName: self.entityName)
-   }
-
    @NSManaged public var boolean: NSNumber?
    @NSManaged public var decimal: NSDecimalNumber?
    @NSManaged public var double: NSNumber?
