@@ -4,5 +4,5 @@ import Foundation
 import CoreData
 
 @objc({{ class }})
-public class {{ class }}: {% if parentClass %}{{ parentClass }}{% else %}NSManagedObject{% endif %} {
+public class {{ class }}: {% if parent.class %}{{ parent.class }}{% else %}NSManagedObject{% endif %} {
 }

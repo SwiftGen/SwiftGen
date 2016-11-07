@@ -297,28 +297,32 @@ extension FontsFileParser {
 }
 
 /* MARK: - Stencil Context for CoreData
-- `entities`: `Array`
-  - `name`: `String`
-  - `class`: `String` (absent if empty)
-  - `parentClass`: `String` (absent if empty)
-  - `attributes`: `Array`
-    - `name`: `String`
-    - `isOptional`: `Bool`
-    - `isScalar`: `Bool`
-    - `scalarType`: `String` (absent if not available)
-  - `relationships`: `Array`
-    - `name`: `String`
-    - `entityName`: `String`
-    - `isOptional`: `Bool`
-    - `toMany`: `Bool`
-    - `isOrdered`: `Bool`
-    - `class`: `String` (absent if empty)
-  - `fetchedProperties`: `Array`
-    - `name`: `String`
-    - `entityName`: `String`
-    - `predicateString`: `String`
-    - `toMany`: `Bool`
-    - `class`: `String` (absent if empty)
+- `entities`: `Array` of:
+  - `name`: `String`, entity name
+  - `class`: `String` (absent if empty), class name
+  - `parent`: `Dictionary` (absent if empty), parent entity context
+  - `attributes`: `Array` of:
+    - `name`: `String`, attribute name
+    - `type`: `String`, object type, for scalar type `NSNumber`
+    - `isOptional`: `Bool`, whether optional or not
+    - `isScalar`: `Bool`, whether scalar or not
+    - `scalarType`: `String` (absent if not available), scalar type, e.g. `Bool`, `Float`, `Double`, `Int16`, `Int32`, `Int64`
+     - additionally contains attribute's user info. e.g. for specifying type for transform property add to user info key "type" with your type, user info shadows attribute variables
+  - `relationships`: `Array` of:
+    - `name`: `String`, relationship name
+    - `entityName`: `String`, destination entity name
+    - `isOptional`: `Bool`, whether optional or not
+    - `toMany`: `Bool`, whether relationship to one entity or to many
+    - `isOrdered`: `Bool`, whether `NSSet` or `NSOrderedSet` should be used for "to many" relationship
+    - `class`: `String` (absent if empty) - destination entity class
+     - additionally contains relationship's user info
+  - `fetchedProperties`: `Array` of:
+    - `name`: `String`, property name
+    - `entityName`: `String`, destination entity name
+    - `predicateString`: `String`, fetch request predicate string
+    - `class`: `String` (absent if empty), destination entity class
+    - additionally contains property's user info
+  - additionally contains entity's user info
  */
 
 extension CoreDataModelParser {
@@ -338,8 +342,8 @@ extension CoreDataModelParser {
     context["class"] = entity.className
 
     if let parentEntityName = entity.parentEntityName,
-      let parentClassName = self.entitiesByName[parentEntityName]?.className {
-      context["parentClass"] = parentClassName
+      let parentEntity = self.entitiesByName[parentEntityName] {
+      context["parent"] = stencilVariablesForEntity(parentEntity)
     }
 
     context["attributes"] = entity.attributes.map { attribute -> [String:Any] in
@@ -349,7 +353,7 @@ extension CoreDataModelParser {
         "isOptional": attribute.isOptional,
         "isScalar": attribute.isScalar]
       context["scalarType"] = type.scalar
-      return self.variableByOverridingVariables(context, withUserInfo: attribute.userInfo)
+      return self.overrideVariables(context, withUserInfo: attribute.userInfo)
     }
 
     context["relationships"] = entity.relationships.map { relationship -> [String:Any] in
@@ -359,7 +363,7 @@ extension CoreDataModelParser {
         "toMany": relationship.toMany,
         "isOrdered": relationship.isOrdered]
       context["class"] = self.entitiesByName[relationship.entityName]?.className
-      return self.variableByOverridingVariables(context, withUserInfo: relationship.userInfo)
+      return self.overrideVariables(context, withUserInfo: relationship.userInfo)
     }
 
     context["fetchedProperties"] = entity.fetchedProperties.map { property -> [String:Any] in
@@ -367,14 +371,14 @@ extension CoreDataModelParser {
         "entityName": property.entityName,
         "predicateString": property.predicateString]
       context["class"] = self.entitiesByName[property.entityName]?.className
-      return self.variableByOverridingVariables(context, withUserInfo: property.userInfo)
+      return self.overrideVariables(context, withUserInfo: property.userInfo)
     }
 
-    return self.variableByOverridingVariables(context, withUserInfo: entity.userInfo)
+    return self.overrideVariables(context, withUserInfo: entity.userInfo)
   }
 
-  private func variableByOverridingVariables(variables: [String:Any],
-                                             withUserInfo userInfo: [String:AnyObject]) -> [String:Any] {
+   private func overrideVariables(variables: [String:Any],
+                                  withUserInfo userInfo: [String:AnyObject]) -> [String:Any] {
     var result = variables
     for (k, v) in userInfo {
       result[k] = v

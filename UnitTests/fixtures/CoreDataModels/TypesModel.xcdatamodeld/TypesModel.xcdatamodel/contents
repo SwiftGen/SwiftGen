@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11538.1" systemVersion="15F34" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11756" systemVersion="15F34" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AllTypes" representedClassName="AllTypesClass" parentEntity="NumericTypes" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -30,10 +30,10 @@
         <attribute name="int32" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="int64" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="numerics" maxCount="1" deletionRule="Nullify" destinationEntity="NumericTypes" inverseName="scalars" inverseEntity="NumericTypes" syncable="YES"/>
-        <fetchedProperty name="eq_true" optional="YES" syncable="YES">
+        <fetchedProperty name="eqTrue" optional="YES" syncable="YES">
             <fetchRequest name="fetchedPropertyFetchRequest" entity="ScalarTypes" predicateString="boolean == YES"/>
         </fetchedProperty>
-        <fetchedProperty name="gt_100" optional="YES" syncable="YES">
+        <fetchedProperty name="gt100" optional="YES" syncable="YES">
             <fetchRequest name="fetchedPropertyFetchRequest" entity="ScalarTypes" predicateString="int16 &gt; 100"/>
         </fetchedProperty>
         <userInfo>
