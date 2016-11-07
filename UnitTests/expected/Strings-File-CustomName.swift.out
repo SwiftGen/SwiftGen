@@ -3,6 +3,8 @@
 import Foundation
 
 // swiftlint:disable file_length
+// swiftlint:disable line_length
+
 // swiftlint:disable type_body_length
 enum XCTLoc {
   /// Title of the alert

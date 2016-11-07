@@ -3,6 +3,8 @@
 {% if strings %}
 import Foundation
 
+// swiftlint:disable line_length
+
 enum {{enumName}} {
   {% for string in strings %}
   /// {{string.translation}}
