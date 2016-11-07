@@ -642,7 +642,7 @@ public struct CoreDataEntity {
          public static let fullName = "fullName"
          public static let userId = "userId"
          public static let userName = "userName"
-         public static let mySession = "mySession"
+         public static let session = "session"
       }
    }
    public struct Session {
@@ -661,9 +661,9 @@ public struct CoreDataEntity {
 ### Usage
 
 ```swift
-let user = NSEntityDescription.insertNewObject(forEntityName: CoreDataEntity.User.name, into: context)
-user.setValue("John Doe", forKey: CoreDataEntity.User.fullName)
-user.setValue("john", forKey: CoreDataEntity.User.userName)
+let user = NSEntityDescription.insertNewObjectForEntityForName(CoreDataEntity.User.name, inManagedObjectContext: context)
+user.setValue("John Doe", forKey: CoreDataEntity.User.Field.fullName)
+user.setValue("john", forKey: CoreDataEntity.User.Field.userName)
 ```
 
 ## CoreData machine and human code
@@ -695,17 +695,13 @@ extension User {
       return "User"
    }
 
-   @nonobjc public class func fetchRequest() -> NSFetchRequest<User> {
-       return NSFetchRequest<User>(entityName: self.entityName)
-   }
-
    @NSManaged var about: String?
    @NSManaged var email: String
    @NSManaged var fullName: String
    @NSManaged var userId: String
    @NSManaged var userName: String
 
-   @NSManaged var mySession: Session?
+   @NSManaged var session: Session?
 
 }
 
@@ -716,7 +712,7 @@ extension User {
 ### Usage
 
 ```swift
-let user = NSEntityDescription.insertNewObject(forEntityName: User.entityName, into: context)
+let user = NSEntityDescription.insertNewObjectForEntityForName(User.entityName, inManagedObjectContext: context) as! User
 user.fullName = "John Doe"
 user.userName = "john"
 ```

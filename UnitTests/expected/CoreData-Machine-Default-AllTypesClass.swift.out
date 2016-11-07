@@ -10,10 +10,6 @@ extension AllTypesClass {
       return "AllTypes"
    }
 
-   @nonobjc public class func fetchRequest() -> NSFetchRequest<AllTypesClass> {
-       return NSFetchRequest<AllTypesClass>(entityName: self.entityName)
-   }
-
    @NSManaged public var data: NSData?
    @NSManaged public var date: NSDate?
    @NSManaged public var string: String?

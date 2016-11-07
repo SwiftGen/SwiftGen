@@ -95,6 +95,7 @@
 		784239941DC74EC300865053 /* CoreData-Machine-Default-ScalarTypesClass.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 784239911DC74EC300865053 /* CoreData-Machine-Default-ScalarTypesClass.swift.out */; };
 		784239971DC74FC400865053 /* CoreData-Human-Mogenerator-AllTypesClass.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 784239951DC74FC400865053 /* CoreData-Human-Mogenerator-AllTypesClass.swift.out */; };
 		784239981DC74FC400865053 /* CoreData-Human-Default-AllTypesClass.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 784239961DC74FC400865053 /* CoreData-Human-Default-AllTypesClass.swift.out */; };
+		78581DE91DD0B9C0001AE436 /* User.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 78581DE71DD0B9C0001AE436 /* User.xcdatamodeld */; };
 		78A97B3E1DC4DB8C0026DF74 /* coredata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A97B3D1DC4DB8C0026DF74 /* coredata.swift */; };
 		820D84AE1D1F9CAF00504948 /* Strings-File-Structured.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 820D84AD1D1F9CAF00504948 /* Strings-File-Structured.swift.out */; };
 		820D84B01D1F9D6C00504948 /* strings-structured.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 820D84AF1D1F9D6C00504948 /* strings-structured.stencil */; };
@@ -281,6 +282,7 @@
 		784239911DC74EC300865053 /* CoreData-Machine-Default-ScalarTypesClass.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreData-Machine-Default-ScalarTypesClass.swift.out"; sourceTree = "<group>"; };
 		784239951DC74FC400865053 /* CoreData-Human-Mogenerator-AllTypesClass.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreData-Human-Mogenerator-AllTypesClass.swift.out"; sourceTree = "<group>"; };
 		784239961DC74FC400865053 /* CoreData-Human-Default-AllTypesClass.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreData-Human-Default-AllTypesClass.swift.out"; sourceTree = "<group>"; };
+		78581DE81DD0B9C0001AE436 /* User.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = User.xcdatamodel; sourceTree = "<group>"; };
 		78A97B3D1DC4DB8C0026DF74 /* coredata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = coredata.swift; sourceTree = "<group>"; };
 		820D84AD1D1F9CAF00504948 /* Strings-File-Structured.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-Structured.swift.out"; sourceTree = "<group>"; };
 		820D84AF1D1F9D6C00504948 /* strings-structured.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "strings-structured.stencil"; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 			isa = PBXGroup;
 			children = (
 				784239721DC7409300865053 /* TypesModel.xcdatamodeld */,
+				78581DE71DD0B9C0001AE436 /* User.xcdatamodeld */,
 			);
 			path = CoreDataModels;
 			sourceTree = "<group>";
@@ -960,6 +963,7 @@
 				09A87B5B1BCCA37800D9B9F5 /* ImagesTests.swift in Sources */,
 				09A87B5A1BCCA37200D9B9F5 /* StoryboardsTests.swift in Sources */,
 				09A87B5D1BCCA38400D9B9F5 /* StringsTests.swift in Sources */,
+				78581DE91DD0B9C0001AE436 /* User.xcdatamodeld in Sources */,
 				09A87B591BCCA2CF00D9B9F5 /* SwiftIdentifierTests.swift in Sources */,
 				09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */,
 				4761E0311BDE6EEA00B9B05F /* StringFiltersTests.swift in Sources */,
@@ -1144,6 +1148,16 @@
 			);
 			currentVersion = 784239731DC7409300865053 /* TypesModel.xcdatamodel */;
 			path = TypesModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		78581DE71DD0B9C0001AE436 /* User.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				78581DE81DD0B9C0001AE436 /* User.xcdatamodel */,
+			);
+			currentVersion = 78581DE81DD0B9C0001AE436 /* User.xcdatamodel */;
+			path = User.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
