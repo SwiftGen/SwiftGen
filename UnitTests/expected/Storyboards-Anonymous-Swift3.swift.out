@@ -3,6 +3,10 @@
 import Foundation
 import UIKit
 
+// swiftlint:disable file_length
+// swiftlint:disable line_length
+// swiftlint:disable type_body_length
+
 protocol StoryboardSceneType {
   static var storyboardName: String { get }
 }
@@ -36,9 +40,6 @@ extension UIViewController {
     performSegue(withIdentifier: segue.rawValue, sender: sender)
   }
 }
-
-// swiftlint:disable file_length
-// swiftlint:disable type_body_length
 
 struct StoryboardScene {
   enum Anonymous: StoryboardSceneType {
