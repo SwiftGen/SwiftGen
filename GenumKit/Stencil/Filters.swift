@@ -11,6 +11,23 @@ enum FilterError: ErrorType {
 }
 
 struct StringFilters {
+  private static let reservedKeywords = ["associatedtype", "class", "deinit", "enum", "extension",
+                                         "fileprivate", "func", "import", "init", "inout", "internal",
+                                         "let", "open", "operator", "private", "protocol", "public",
+                                         "static", "struct", "subscript", "typealias", "var", "break",
+                                         "case", "continue", "default", "defer", "do", "else",
+                                         "fallthrough", "for", "guard", "if", "in", "repeat", "return",
+                                         "switch", "where", "while", "as", "Any", "catch", "false", "is",
+                                         "nil", "rethrows", "super", "self", "Self", "throw", "throws",
+                                         "true", "try", "_", "#available", "#colorLiteral", "#column",
+                                         "#else", "#elseif", "#endif", "#file", "#fileLiteral",
+                                         "#function", "#if", "#imageLiteral", "#line", "#selector",
+                                         "#sourceLocation", "associativity", "convenience", "dynamic",
+                                         "didSet", "final", "get", "infix", "indirect", "lazy", "left",
+                                         "mutating", "none", "nonmutating", "optional", "override",
+                                         "postfix", "precedence", "prefix", "Protocol", "required",
+                                         "right", "set", "Type", "unowned", "weak", "willSet"]
+
   static func stringToSwiftIdentifier(value: Any?) throws -> Any? {
     guard let value = value as? String else { throw FilterError.InvalidInputType }
     return swiftIdentifier(fromString: value, replaceWithUnderscores: true)
@@ -75,6 +92,25 @@ struct StringFilters {
   private static func titlecase(string: String) -> String {
     guard let first = string.unicodeScalars.first else { return string }
     return String(first).uppercaseString + String(string.unicodeScalars.dropFirst())
+  }
+}
+
+// MARK: - Reserved Keyword escape
+extension StringFilters {
+  /// Checks if the string is one of the reserved keywords and if so, escapes it using backticks
+  ///
+  /// - Parameter in: the string to possibly escape
+  /// - Returns: if the string is a reserved keyword, the escaped string, otherwise the original one
+  private static func escapeReservedKeywords(in string: String) -> String {
+    guard reservedKeywords.contains(string) else {
+      return string
+    }
+    return "`\(string)`"
+  }
+
+  static func escapeReservedKeywords(value: Any?) throws -> Any? {
+    guard let string = value as? String else { throw FilterError.InvalidInputType }
+    return escapeReservedKeywords(in: string)
   }
 }
 

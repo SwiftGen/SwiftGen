@@ -7,7 +7,7 @@
 import XCTest
 @testable import GenumKit
 
-class StringFiltersrTests: XCTestCase {
+class StringFiltersTests: XCTestCase {
 
   func testLowerFirstWord() {
     let expectations = [
@@ -41,6 +41,23 @@ class StringFiltersrTests: XCTestCase {
 
     for (input, expected) in expectations {
       let result = try! StringFilters.snakeToCamelCase(input) as? String
+      XCTAssertEqual(result, expected)
+    }
+  }
+
+  func testEscapeReservedKeywords() {
+    let expectations = [
+      "self": "`self`",
+      "foo": "foo",
+      "Type": "`Type`",
+      "": "",
+      "x": "x",
+      "Bar": "Bar",
+      "#imageLiteral": "`#imageLiteral`"
+    ]
+
+    for (input, expected) in expectations {
+      let result = try! StringFilters.escapeReservedKeywords(input) as? String
       XCTAssertEqual(result, expected)
     }
   }
