@@ -6,5 +6,7 @@
         <page name='Storyboards-Demo'/>
         <page name='Colors-Demo'/>
         <page name='Fonts-Demo'/>
+        <page name='CoreData-Model-Demo'/>
+        <page name='CoreData-Entity-Demo'/>
     </pages>
 </playground>

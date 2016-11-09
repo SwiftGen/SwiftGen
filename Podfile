@@ -5,6 +5,7 @@ target 'swiftgen' do
   pod 'Commander', '~> 0.4.1'
   pod 'PathKit', '~> 0.6.0'
   pod 'Stencil', :git => 'https://github.com/kylef/Stencil.git', :commit => 'f393efbd0bfe26ac26209d2d103907a3b5583f6b'
+  pod 'SWXMLHash', '~> 2.5'
   pod 'GenumKit', :path => 'GenumKit'
 end
 

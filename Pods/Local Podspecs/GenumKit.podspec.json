@@ -20,6 +20,9 @@
   "dependencies": {
     "Stencil": [
       "0.6.0-beta.1"
+    ],
+    "SWXMLHash": [
+      "~> 2.5"
     ]
   },
   "frameworks": "Foundation"

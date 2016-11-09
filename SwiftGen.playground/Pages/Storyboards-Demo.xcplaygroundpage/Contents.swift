@@ -5,6 +5,8 @@
 //: * Demo for `swiftgen storyboards`
 //: * [Demo for `swiftgen colors`](Colors-Demo)
 //: * [Demo for `swiftgen fonts`](Fonts-Demo)
+//: * [Demo for `swiftgen coredata model`](CoreData-Model-Demo)
+//: * [Demo for `swiftgen coredata mahine` and `swiftgen coredata human`](CoreData-Entity-Demo)
 
 class CreateAccViewController: UIViewController {}
 

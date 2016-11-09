@@ -2,15 +2,18 @@ PODS:
   - Commander (0.4.1)
   - GenumKit (3.0.1):
     - Stencil (= 0.6.0-beta.1)
+    - SWXMLHash (~> 2.5)
   - PathKit (0.6.0)
   - Stencil (0.6.0-beta.1):
     - PathKit (~> 0.6.0)
+  - SWXMLHash (2.5.1)
 
 DEPENDENCIES:
   - Commander (~> 0.4.1)
   - GenumKit (from `GenumKit`)
   - PathKit (~> 0.6.0)
   - Stencil (from `https://github.com/kylef/Stencil.git`, commit `f393efbd0bfe26ac26209d2d103907a3b5583f6b`)
+  - SWXMLHash (~> 2.5)
 
 EXTERNAL SOURCES:
   GenumKit:
@@ -26,10 +29,11 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Commander: 106cb704180eee0a5f9df2e9dbc090808b564636
-  GenumKit: 41eacec2d0ee737328687a54efcbb7d8ddcec8ac
+  GenumKit: aa36b4d6233df0639921ac35b858b8d65138a90f
   PathKit: b224b6d2c4e75b87f08f45e1c0c610a3195c94e5
   Stencil: ab5a29fd8a48d53bb24fb254659f9a1fb36dfe5b
+  SWXMLHash: 89929225cad9c70ff96dcce54a19ddb2b1a18a69
 
-PODFILE CHECKSUM: 02563ca3bd363e7a1b460b42df440c07193447e0
+PODFILE CHECKSUM: b3954123d1007f347223c1be1d07035493922dbd
 
 COCOAPODS: 1.1.1

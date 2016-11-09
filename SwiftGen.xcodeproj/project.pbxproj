@@ -78,6 +78,25 @@
 		57902A1D1D3510C00002A1EA /* strings-genstrings.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 57902A1C1D3510770002A1EA /* strings-genstrings.stencil */; };
 		57902A1F1D3511710002A1EA /* Strings-Localizable-Genstrings.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 57902A1E1D3511710002A1EA /* Strings-Localizable-Genstrings.swift.out */; };
 		641CD33E1C3AE35A00D7FED9 /* colors.clr in Resources */ = {isa = PBXBuildFile; fileRef = 641CD33D1C3AE35A00D7FED9 /* colors.clr */; };
+		784239701DC7400000865053 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7842396F1DC7400000865053 /* CoreDataTests.swift */; };
+		7842397A1DC740FD00865053 /* coredata-model-default.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 784239751DC740FD00865053 /* coredata-model-default.stencil */; };
+		7842397B1DC740FD00865053 /* coredata-machine-default.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 784239761DC740FD00865053 /* coredata-machine-default.stencil */; };
+		7842397C1DC740FD00865053 /* coredata-machine-mogenerator.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 784239771DC740FD00865053 /* coredata-machine-mogenerator.stencil */; };
+		7842397D1DC740FD00865053 /* coredata-human-default.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 784239781DC740FD00865053 /* coredata-human-default.stencil */; };
+		7842397E1DC740FD00865053 /* coredata-human-mogenerator.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 784239791DC740FD00865053 /* coredata-human-mogenerator.stencil */; };
+		784239811DC7416B00865053 /* CoreData-Model-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 784239801DC7416B00865053 /* CoreData-Model-Empty.swift.out */; };
+		784239831DC743B200865053 /* TypesModel.xcdatamodeld in Copy CoreData model */ = {isa = PBXBuildFile; fileRef = 784239721DC7409300865053 /* TypesModel.xcdatamodeld */; };
+		784239851DC7455500865053 /* CoreData-Model-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 784239841DC7455500865053 /* CoreData-Model-Default.swift.out */; };
+		7842398C1DC74DD100865053 /* CoreData-Machine-Mogenerator-AllTypesClass.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 784239861DC74AA200865053 /* CoreData-Machine-Mogenerator-AllTypesClass.swift.out */; };
+		7842398D1DC74DD100865053 /* CoreData-Machine-Mogenerator-NumericTypesClass.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 784239871DC74AA200865053 /* CoreData-Machine-Mogenerator-NumericTypesClass.swift.out */; };
+		7842398E1DC74DD100865053 /* CoreData-Machine-Mogenerator-ScalarTypesClass.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 784239881DC74AA200865053 /* CoreData-Machine-Mogenerator-ScalarTypesClass.swift.out */; };
+		784239921DC74EC300865053 /* CoreData-Machine-Default-AllTypesClass.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 7842398F1DC74EC300865053 /* CoreData-Machine-Default-AllTypesClass.swift.out */; };
+		784239931DC74EC300865053 /* CoreData-Machine-Default-NumericTypesClass.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 784239901DC74EC300865053 /* CoreData-Machine-Default-NumericTypesClass.swift.out */; };
+		784239941DC74EC300865053 /* CoreData-Machine-Default-ScalarTypesClass.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 784239911DC74EC300865053 /* CoreData-Machine-Default-ScalarTypesClass.swift.out */; };
+		784239971DC74FC400865053 /* CoreData-Human-Mogenerator-AllTypesClass.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 784239951DC74FC400865053 /* CoreData-Human-Mogenerator-AllTypesClass.swift.out */; };
+		784239981DC74FC400865053 /* CoreData-Human-Default-AllTypesClass.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 784239961DC74FC400865053 /* CoreData-Human-Default-AllTypesClass.swift.out */; };
+		78581DE91DD0B9C0001AE436 /* User.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 78581DE71DD0B9C0001AE436 /* User.xcdatamodeld */; };
+		78A97B3E1DC4DB8C0026DF74 /* coredata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A97B3D1DC4DB8C0026DF74 /* coredata.swift */; };
 		820D84AE1D1F9CAF00504948 /* Strings-File-Structured.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 820D84AD1D1F9CAF00504948 /* Strings-File-Structured.swift.out */; };
 		820D84B01D1F9D6C00504948 /* strings-structured.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 820D84AF1D1F9D6C00504948 /* strings-structured.stencil */; };
 		82CC60381D22947500BA55E8 /* LocStructuredOnly.strings in Resources */ = {isa = PBXBuildFile; fileRef = 82CC60371D22947500BA55E8 /* LocStructuredOnly.strings */; };
@@ -153,6 +172,17 @@
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
+		};
+		784239821DC7438D00865053 /* Copy CoreData model */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				784239831DC743B200865053 /* TypesModel.xcdatamodeld in Copy CoreData model */,
+			);
+			name = "Copy CoreData model";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -235,6 +265,25 @@
 		57902A1E1D3511710002A1EA /* Strings-Localizable-Genstrings.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-Localizable-Genstrings.swift.out"; sourceTree = "<group>"; };
 		641CD33D1C3AE35A00D7FED9 /* colors.clr */ = {isa = PBXFileReference; lastKnownFileType = file; path = colors.clr; sourceTree = "<group>"; };
 		6FDA009E555D48BC367926D9 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
+		7842396F1DC7400000865053 /* CoreDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
+		784239731DC7409300865053 /* TypesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TypesModel.xcdatamodel; sourceTree = "<group>"; };
+		784239751DC740FD00865053 /* coredata-model-default.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "coredata-model-default.stencil"; sourceTree = "<group>"; };
+		784239761DC740FD00865053 /* coredata-machine-default.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "coredata-machine-default.stencil"; sourceTree = "<group>"; };
+		784239771DC740FD00865053 /* coredata-machine-mogenerator.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "coredata-machine-mogenerator.stencil"; sourceTree = "<group>"; };
+		784239781DC740FD00865053 /* coredata-human-default.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "coredata-human-default.stencil"; sourceTree = "<group>"; };
+		784239791DC740FD00865053 /* coredata-human-mogenerator.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "coredata-human-mogenerator.stencil"; sourceTree = "<group>"; };
+		784239801DC7416B00865053 /* CoreData-Model-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreData-Model-Empty.swift.out"; sourceTree = "<group>"; };
+		784239841DC7455500865053 /* CoreData-Model-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreData-Model-Default.swift.out"; sourceTree = "<group>"; };
+		784239861DC74AA200865053 /* CoreData-Machine-Mogenerator-AllTypesClass.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreData-Machine-Mogenerator-AllTypesClass.swift.out"; sourceTree = "<group>"; };
+		784239871DC74AA200865053 /* CoreData-Machine-Mogenerator-NumericTypesClass.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreData-Machine-Mogenerator-NumericTypesClass.swift.out"; sourceTree = "<group>"; };
+		784239881DC74AA200865053 /* CoreData-Machine-Mogenerator-ScalarTypesClass.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreData-Machine-Mogenerator-ScalarTypesClass.swift.out"; sourceTree = "<group>"; };
+		7842398F1DC74EC300865053 /* CoreData-Machine-Default-AllTypesClass.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreData-Machine-Default-AllTypesClass.swift.out"; sourceTree = "<group>"; };
+		784239901DC74EC300865053 /* CoreData-Machine-Default-NumericTypesClass.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreData-Machine-Default-NumericTypesClass.swift.out"; sourceTree = "<group>"; };
+		784239911DC74EC300865053 /* CoreData-Machine-Default-ScalarTypesClass.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreData-Machine-Default-ScalarTypesClass.swift.out"; sourceTree = "<group>"; };
+		784239951DC74FC400865053 /* CoreData-Human-Mogenerator-AllTypesClass.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreData-Human-Mogenerator-AllTypesClass.swift.out"; sourceTree = "<group>"; };
+		784239961DC74FC400865053 /* CoreData-Human-Default-AllTypesClass.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreData-Human-Default-AllTypesClass.swift.out"; sourceTree = "<group>"; };
+		78581DE81DD0B9C0001AE436 /* User.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = User.xcdatamodel; sourceTree = "<group>"; };
+		78A97B3D1DC4DB8C0026DF74 /* coredata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = coredata.swift; sourceTree = "<group>"; };
 		820D84AD1D1F9CAF00504948 /* Strings-File-Structured.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-Structured.swift.out"; sourceTree = "<group>"; };
 		820D84AF1D1F9D6C00504948 /* strings-structured.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "strings-structured.stencil"; sourceTree = "<group>"; };
 		82CC60371D22947500BA55E8 /* LocStructuredOnly.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = LocStructuredOnly.strings; sourceTree = "<group>"; };
@@ -334,6 +383,7 @@
 				09030BC91B6D2BB700275BF5 /* StoryboardsTests.swift */,
 				09030BD51B6D2E3900275BF5 /* StringsTests.swift */,
 				C2DBEADD1C8F87AD00E62C9E /* FontsTests.swift */,
+				7842396F1DC7400000865053 /* CoreDataTests.swift */,
 			);
 			path = TestSuites;
 			sourceTree = "<group>";
@@ -341,6 +391,7 @@
 		09030C071B6D2FF600275BF5 /* expected */ = {
 			isa = PBXGroup;
 			children = (
+				7842397F1DC7413700865053 /* CoreData */,
 				47CB53231CFC0AC900AA19C0 /* Colors */,
 				47CB53241CFC0AD000AA19C0 /* Images */,
 				47CB53251CFC0AD600AA19C0 /* Storyboards */,
@@ -353,6 +404,7 @@
 		09030C081B6D2FF600275BF5 /* fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				784239711DC7409300865053 /* CoreDataModels */,
 				09030C1D1B6D473E00275BF5 /* colors.txt */,
 				0902F5C01D6B86D00080F24D /* colors-bad.txt */,
 				641CD33D1C3AE35A00D7FED9 /* colors.clr */,
@@ -373,25 +425,30 @@
 			isa = PBXGroup;
 			children = (
 				0911503A1BD3ECA900EBC803 /* colors-default.stencil */,
-				0971F98A1D7C42E2002531D5 /* colors-swift3.stencil */,
 				0921FB9A1BE7852F00B488B5 /* colors-rawValue.stencil */,
+				0971F98A1D7C42E2002531D5 /* colors-swift3.stencil */,
+				784239781DC740FD00865053 /* coredata-human-default.stencil */,
+				784239791DC740FD00865053 /* coredata-human-mogenerator.stencil */,
+				784239761DC740FD00865053 /* coredata-machine-default.stencil */,
+				784239771DC740FD00865053 /* coredata-machine-mogenerator.stencil */,
+				784239751DC740FD00865053 /* coredata-model-default.stencil */,
+				C24AFD031C91E63D005FE3EF /* fonts-default.stencil */,
+				D7A14A851D64FD2F002F4C65 /* fonts-swift3.stencil */,
 				470A14E41BEA68630052EAC8 /* images-allvalues.stencil */,
 				091150351BD3274E00EBC803 /* images-default.stencil */,
 				0971F9901D7C44CF002531D5 /* images-swift3.stencil */,
 				0911503E1BD4053D00EBC803 /* storyboards-default.stencil */,
-				E2F7497F1D03CB7E00EA0BC8 /* storyboards-osx-default.stencil */,
 				470A14E01BEA63D30052EAC8 /* storyboards-lowercase.stencil */,
+				E2F7497F1D03CB7E00EA0BC8 /* storyboards-osx-default.stencil */,
 				E29942C01D1C640A002A29C4 /* storyboards-osx-lowercase.stencil */,
 				47CB533A1CFC16FE00AA19C0 /* storyboards-swift3.stencil */,
 				471D92121C43F65300D8EA69 /* storyboards-uppercase.stencil */,
 				09EB0A191BDC269300B2CF79 /* strings-default.stencil */,
-				57902A1C1D3510770002A1EA /* strings-genstrings.stencil */,
-				47CB533B1CFC16FE00AA19C0 /* strings-swift3.stencil */,
-				820D84AF1D1F9D6C00504948 /* strings-structured.stencil */,
-				82E3C8941D64BCA200A2F73F /* strings-dot-syntax.stencil */,
 				A1A31BAA1D7C83D400612B39 /* strings-dot-syntax-swift3.stencil */,
-				C24AFD031C91E63D005FE3EF /* fonts-default.stencil */,
-				D7A14A851D64FD2F002F4C65 /* fonts-swift3.stencil */,
+				82E3C8941D64BCA200A2F73F /* strings-dot-syntax.stencil */,
+				57902A1C1D3510770002A1EA /* strings-genstrings.stencil */,
+				820D84AF1D1F9D6C00504948 /* strings-structured.stencil */,
+				47CB533B1CFC16FE00AA19C0 /* strings-swift3.stencil */,
 			);
 			path = templates;
 			sourceTree = "<group>";
@@ -407,6 +464,7 @@
 				0901413E1BCC64C9002E8617 /* storyboards.swift */,
 				09A87B731BCCBE6D00D9B9F5 /* strings.swift */,
 				C24AFD011C91DE33005FE3EF /* fonts.swift */,
+				78A97B3D1DC4DB8C0026DF74 /* coredata.swift */,
 			);
 			path = "swiftgen-cli";
 			sourceTree = "<group>";
@@ -503,6 +561,32 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		784239711DC7409300865053 /* CoreDataModels */ = {
+			isa = PBXGroup;
+			children = (
+				784239721DC7409300865053 /* TypesModel.xcdatamodeld */,
+				78581DE71DD0B9C0001AE436 /* User.xcdatamodeld */,
+			);
+			path = CoreDataModels;
+			sourceTree = "<group>";
+		};
+		7842397F1DC7413700865053 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				784239961DC74FC400865053 /* CoreData-Human-Default-AllTypesClass.swift.out */,
+				784239951DC74FC400865053 /* CoreData-Human-Mogenerator-AllTypesClass.swift.out */,
+				7842398F1DC74EC300865053 /* CoreData-Machine-Default-AllTypesClass.swift.out */,
+				784239901DC74EC300865053 /* CoreData-Machine-Default-NumericTypesClass.swift.out */,
+				784239911DC74EC300865053 /* CoreData-Machine-Default-ScalarTypesClass.swift.out */,
+				784239861DC74AA200865053 /* CoreData-Machine-Mogenerator-AllTypesClass.swift.out */,
+				784239871DC74AA200865053 /* CoreData-Machine-Mogenerator-NumericTypesClass.swift.out */,
+				784239881DC74AA200865053 /* CoreData-Machine-Mogenerator-ScalarTypesClass.swift.out */,
+				784239841DC7455500865053 /* CoreData-Model-Default.swift.out */,
+				784239801DC7416B00865053 /* CoreData-Model-Empty.swift.out */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		9545BA0984407302C0E83AB4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -568,6 +652,7 @@
 				09A87B4C1BCCA2C600D9B9F5 /* Sources */,
 				09A87B4D1BCCA2C600D9B9F5 /* Frameworks */,
 				09A87B4E1BCCA2C600D9B9F5 /* Resources */,
+				784239821DC7438D00865053 /* Copy CoreData model */,
 				C40C2D80E9C1FEEAA4FD6B14 /* [CP] Embed Pods Frameworks */,
 				6C7EBDA1392A1BFCC9F0A2DA /* [CP] Copy Pods Resources */,
 			);
@@ -626,7 +711,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7842398C1DC74DD100865053 /* CoreData-Machine-Mogenerator-AllTypesClass.swift.out in Resources */,
+				7842398D1DC74DD100865053 /* CoreData-Machine-Mogenerator-NumericTypesClass.swift.out in Resources */,
+				7842398E1DC74DD100865053 /* CoreData-Machine-Mogenerator-ScalarTypesClass.swift.out in Resources */,
+				7842397B1DC740FD00865053 /* coredata-machine-default.stencil in Resources */,
 				82CC60381D22947500BA55E8 /* LocStructuredOnly.strings in Resources */,
+				7842397D1DC740FD00865053 /* coredata-human-default.stencil in Resources */,
+				7842397C1DC740FD00865053 /* coredata-machine-mogenerator.stencil in Resources */,
 				47CB53351CFC0B2100AA19C0 /* SFNSDisplay-Regular.otf in Resources */,
 				0921FB9D1BE7873400B488B5 /* colors-rawValue.stencil in Resources */,
 				0921FB9C1BE785DF00B488B5 /* Colors-List-RawValue.swift.out in Resources */,
@@ -638,15 +729,18 @@
 				A1A31BAB1D7C83D900612B39 /* strings-dot-syntax-swift3.stencil in Resources */,
 				47CB53371CFC0B2100AA19C0 /* SFNSText-Heavy.otf in Resources */,
 				C24AFD0E1C924A29005FE3EF /* Fonts-Dir-CustomName.swift.out in Resources */,
+				784239941DC74EC300865053 /* CoreData-Machine-Default-ScalarTypesClass.swift.out in Resources */,
 				C2265B591C8907CA00CA5C4F /* colors.json in Resources */,
 				C25A54341CEE7CEB00401BE5 /* Colors-Txt-File-CustomName.swift.out in Resources */,
 				82E3C8951D64BCAA00A2F73F /* strings-dot-syntax.stencil in Resources */,
 				57902A1F1D3511710002A1EA /* Strings-Localizable-Genstrings.swift.out in Resources */,
 				09A87B671BCCA4E600D9B9F5 /* colors.txt in Resources */,
+				784239921DC74EC300865053 /* CoreData-Machine-Default-AllTypesClass.swift.out in Resources */,
 				091150361BD3274E00EBC803 /* images-default.stencil in Resources */,
 				47CB533F1CFC170E00AA19C0 /* Storyboards-Wizard-Swift3.swift.out in Resources */,
 				470A14E71BEA691E0052EAC8 /* images-allvalues.stencil in Resources */,
 				0971F9931D7C455A002531D5 /* Images-File-Swift3.swift.out in Resources */,
+				784239981DC74FC400865053 /* CoreData-Human-Default-AllTypesClass.swift.out in Resources */,
 				A1A31BAD1D7C841F00612B39 /* Strings-File-Dot-Syntax-Swift3.swift.out in Resources */,
 				09EB0A1A1BDC3AC400B2CF79 /* strings-default.stencil in Resources */,
 				09EB0A291BDC60F000B2CF79 /* Colors-List-Default.swift.out in Resources */,
@@ -674,10 +768,13 @@
 				09A87B6D1BCCA5F600D9B9F5 /* Strings-File-Default.swift.out in Resources */,
 				09EB0A2A1BDC60F000B2CF79 /* Images-Entries-Default.swift.out in Resources */,
 				D7A14A8C1D64FE35002F4C65 /* Fonts-Dir-Default-Swift3.swift.out in Resources */,
+				784239931DC74EC300865053 /* CoreData-Machine-Default-NumericTypesClass.swift.out in Resources */,
 				09A87B6E1BCCA5F600D9B9F5 /* Strings-File-CustomName.swift.out in Resources */,
 				099662301D1C8D7300366642 /* Storyboards-iOS in Resources */,
 				4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */,
+				7842397A1DC740FD00865053 /* coredata-model-default.stencil in Resources */,
 				4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */,
+				784239851DC7455500865053 /* CoreData-Model-Default.swift.out in Resources */,
 				57902A1D1D3510C00002A1EA /* strings-genstrings.stencil in Resources */,
 				47CB53431CFC175100AA19C0 /* strings-swift3.stencil in Resources */,
 				0902F5C11D6B86D00080F24D /* colors-bad.txt in Resources */,
@@ -686,7 +783,9 @@
 				47CB533E1CFC170E00AA19C0 /* Storyboards-Anonymous-Swift3.swift.out in Resources */,
 				E2F749761D03CAE800EA0BC8 /* Storyboards-osx-Anonymous-Default.swift.out in Resources */,
 				09EB0A281BDC60F000B2CF79 /* Colors-File-Default.swift.out in Resources */,
+				7842397E1DC740FD00865053 /* coredata-human-mogenerator.stencil in Resources */,
 				09EB0A311BDC8F4100B2CF79 /* LocUTF8.strings in Resources */,
+				784239971DC74FC400865053 /* CoreData-Human-Mogenerator-AllTypesClass.swift.out in Resources */,
 				82CC603A1D2294DD00BA55E8 /* Strings-File-Structured-Only.swift.out in Resources */,
 				47CB53381CFC0B2100AA19C0 /* SFNSText-Regular.otf in Resources */,
 				09EB0A2E1BDC60F000B2CF79 /* Storyboards-All-Default.swift.out in Resources */,
@@ -695,6 +794,7 @@
 				09EB0A2D1BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out in Resources */,
 				09EB0A271BDC60F000B2CF79 /* Colors-File-CustomName.swift.out in Resources */,
 				0911503F1BD4136E00EBC803 /* storyboards-default.stencil in Resources */,
+				784239811DC7416B00865053 /* CoreData-Model-Empty.swift.out in Resources */,
 				09511C4E1D7B855E002A3A75 /* storyboards-uppercase.stencil in Resources */,
 				097504271C78ED3400D1A01B /* colors.xml in Resources */,
 				E2F749801D03CB7E00EA0BC8 /* storyboards-osx-default.stencil in Resources */,
@@ -850,6 +950,7 @@
 				0921FBA11BE7D6B900B488B5 /* templates.swift in Sources */,
 				09A87B481BCC9BAD00D9B9F5 /* main.swift in Sources */,
 				09A87B4B1BCC9BB200D9B9F5 /* images.swift in Sources */,
+				78A97B3E1DC4DB8C0026DF74 /* coredata.swift in Sources */,
 				091150311BD31A3300EBC803 /* ArgumentsUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -862,10 +963,12 @@
 				09A87B5B1BCCA37800D9B9F5 /* ImagesTests.swift in Sources */,
 				09A87B5A1BCCA37200D9B9F5 /* StoryboardsTests.swift in Sources */,
 				09A87B5D1BCCA38400D9B9F5 /* StringsTests.swift in Sources */,
+				78581DE91DD0B9C0001AE436 /* User.xcdatamodeld in Sources */,
 				09A87B591BCCA2CF00D9B9F5 /* SwiftIdentifierTests.swift in Sources */,
 				09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */,
 				4761E0311BDE6EEA00B9B05F /* StringFiltersTests.swift in Sources */,
 				09A87B5C1BCCA37F00D9B9F5 /* ColorsTests.swift in Sources */,
+				784239701DC7400000865053 /* CoreDataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1036,6 +1139,29 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		784239721DC7409300865053 /* TypesModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				784239731DC7409300865053 /* TypesModel.xcdatamodel */,
+			);
+			currentVersion = 784239731DC7409300865053 /* TypesModel.xcdatamodel */;
+			path = TypesModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		78581DE71DD0B9C0001AE436 /* User.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				78581DE81DD0B9C0001AE436 /* User.xcdatamodel */,
+			);
+			currentVersion = 78581DE81DD0B9C0001AE436 /* User.xcdatamodel */;
+			path = User.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 09030B631B6D254200275BF5 /* Project object */;
 }

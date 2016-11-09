@@ -1,0 +1,18 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+import Foundation
+import CoreData
+
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+extension AllTypesClass {
+   public override class var entityName: String {
+      return "AllTypes"
+   }
+
+   @NSManaged public var data: NSData?
+   @NSManaged public var date: NSDate?
+   @NSManaged public var string: String?
+   @NSManaged public var transformable: NSObject?
+
+}

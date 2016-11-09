@@ -2,6 +2,13 @@
 
 ---
 
+### New Features: CoreData
+
+* Add CoreData support.
+  Ability to generate human and machine code for CoreData model.
+  Ability to generate all entity and field names to one swift file
+  [Igor Palaguta](https://github.com/Igor-Palaguta)
+
 ## 3.0.1
 
 * Add support for Xcode 8 and Swift 2.3.  
@@ -63,7 +70,7 @@
   [Cihat Gündüz](https://github.com/Dschee)
   [#168](https://github.com/AliSoftware/SwiftGen/pull/168)
 
-> 💡 You can now **create your custom templates more easier than ever**, by cloning an existing template!
+>  You can now **create your custom templates more easier than ever**, by cloning an existing template!
 >
 > e.g. to clone [the default `strings-default.stencil` template](https://github.com/AliSoftware/SwiftGen/blob/master/templates/strings-default.stencil):
 >
