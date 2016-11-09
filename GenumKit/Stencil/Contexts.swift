@@ -62,6 +62,7 @@ extension AssetsCatalogParser {
 
  - `sceneEnumName`: `String`
  - `segueEnumName`: `String`
+ - `extraImports`: `Array` of `String`
  - `storyboards`: `Array` of:
     - `name`: `String`
     - `initialScene`: `Dictionary` (absent if not specified)
@@ -81,7 +82,8 @@ extension AssetsCatalogParser {
 */
 extension StoryboardParser {
   public func stencilContext(sceneEnumName sceneEnumName: String = "StoryboardScene",
-                                           segueEnumName: String = "StoryboardSegue") -> Context {
+                                           segueEnumName: String = "StoryboardSegue",
+                                           extraImports: [String] = []) -> Context {
     let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sort(<)
     let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:AnyObject] in
       var sbMap: [String:AnyObject] = ["name": storyboardName]
@@ -129,6 +131,7 @@ extension StoryboardParser {
       dictionary: [
         "sceneEnumName": sceneEnumName,
         "segueEnumName": segueEnumName,
+		"extraImports": extraImports,
         "storyboards": storyboardsMap
       ],
       namespace: GenumNamespace()

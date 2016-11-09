@@ -5,9 +5,13 @@
 ## unreleased
 
 * Change swift 3 storyboard segue template's sender from `AnyObject` to `Any`. 
-  [Derek Ostrander](https://github.com/dostrander)
+  [Derek Ostrander](https://github.com/dostrander) [#174](https://github.com/AliSoftware/SwiftGen/issues/174)
 * Fix swift 3 storyboard templates to be compliant with swift 3 api design guidelines.
   [Afonso](https://github.com/afonsograca)
+* Add option to add import statements at the top of the generated swift file (for
+  storyboards) using the `import` flag. Multiple imports can be added by repeating
+  this flag.  
+  [David Jennes](https://github.com/djbe), [#175](https://github.com/AliSoftware/SwiftGen/pull/175) 
 
 ## 3.0.1
 

@@ -49,6 +49,18 @@ extension NSViewController {
 }
 
 struct StoryboardScene {
+  enum AdditionalImport_Osx: String, StoryboardSceneType {
+    static let storyboardName = "AdditionalImport-osx"
+
+    case PreferencesScene = "Preferences"
+    static func instantiatePreferences() -> DBPrefsWindowController {
+      guard let vc = StoryboardScene.AdditionalImport_Osx.PreferencesScene.controller() as? DBPrefsWindowController
+      else {
+        fatalError("ViewController 'Preferences' is not of the expected class DBPrefsWindowController.")
+      }
+      return vc
+    }
+  }
   enum Anonymous_Osx: StoryboardSceneType {
     static let storyboardName = "Anonymous-osx"
   }
