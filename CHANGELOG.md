@@ -2,6 +2,13 @@
 
 ---
 
+## unreleased
+
+* Change swift 3 storyboard segue template's sender from `AnyObject` to `Any`. 
+  [Derek Ostrander](https://github.com/dostrander)
+* Fix swift 3 storyboard templates to be compliant with swift 3 api design guidelines.
+  [Afonso](https://github.com/afonsograca)
+
 ## 3.0.1
 
 * Add support for Xcode 8 and Swift 2.3.  
