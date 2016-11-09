@@ -2,6 +2,13 @@
 
 ---
 
+## Master
+
+* Add option to add import statements at the top of the generated swift file (for
+  storyboards) using the `import` flag. Multiple imports can be added by repeating
+  this flag.  
+  [David Jennes](https://github.com/djbe), [#175](https://github.com/AliSoftware/SwiftGen/pull/175) 
+
 ## 3.0.1
 
 * Add support for Xcode 8 and Swift 2.3.  
