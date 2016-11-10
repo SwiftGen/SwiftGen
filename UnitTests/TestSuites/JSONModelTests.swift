@@ -11,10 +11,10 @@ import XCTest
 
 class ModelsTests: XCTestCase {
   func testEmpty() {
-    let parser = ModelsJSONFileParser()
+    let parser = JSONFileParser()
     _ = try? parser.parseFile(self.fixturePath("Model.json", subDirectory: "Models"))
 
-    let template = GenumTemplate(templateString: fixtureString("models-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("json-model.stencil"))
     let result = try! template.render(parser.stencilContext())
     print(result)
     let expected = fixtureString("Models-Dir-Basic.swift.out")

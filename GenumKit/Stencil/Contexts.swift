@@ -345,7 +345,7 @@ extension FontsFileParser {
 
 /* MARK: - Stencil Context for Models
  */
-extension ModelsJSONFileParser {
+extension JSONFileParser {
     public func stencilContext() -> Context {
         return Context(dictionary: ["spec": json], namespace: GenumNamespace())
     }
