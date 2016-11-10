@@ -40,7 +40,7 @@ extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == Str
 protocol StoryboardSegueType: RawRepresentable { }
 
 extension UIViewController {
-  func perform<S: StoryboardSegueType>(segue: S, sender: AnyObject? = nil) where S.RawValue == String {
+  func perform<S: StoryboardSegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
     performSegue(withIdentifier: segue.rawValue, sender: sender)
   }
 }
