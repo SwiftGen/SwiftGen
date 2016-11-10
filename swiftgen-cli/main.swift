@@ -44,7 +44,6 @@ let main = Group {
   $0.addCommand("strings", "generate code for your Localizable.strings", stringsCommand)
   $0.addCommand("fonts", "generate code for your UIFonts", fontsCommand)
   $0.addCommand("json", "generate any code from a JSON spec", jsonCommand)
-  $0.addCommand("base", "generate static code with no input", baseCommand)
 }
 
 let version = Bundle(for: GenumKit.GenumTemplate.self)
