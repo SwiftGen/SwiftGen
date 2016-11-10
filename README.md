@@ -625,7 +625,7 @@ swiftgen templates cat model-base > /path/to/output/file
 
 This takes a JSON spec and converts it into a model file which supports parsing from a dictionary, converting back into a dictionary, equality, mapping, and three different initialization options.
 
-The input is a JSON file which creates a spec for the object. The schema is a custom schema but is based off a few standards (AVRO, Pegasus, JSON Schema). The spec takes a type name and a list of fields. Each field specifies it's type, name, whether it's optional and a doc. It can also specify `array` and `element` for an array of elements.
+The input is a JSON file which creates a spec for the object. The schema is a custom schema but is based off a few standards (AVRO, Pegasus, JSON Schema). The spec takes a type name and a list of fields. Each field specifies it's type, name, whether it's optional and a doc. It can also specify `array` and `element` for an array of elements. The type and element field can be anything. The model generator simply converts it to an uppercase string for the type.
 
 The model template also requires some static code which makes the generated code smaller. This static code is outputed by `swiftgen templates cat model-base > /path/to/output/file`. You should generate this code as well as the model code for each of your JSON specs.
 
@@ -806,7 +806,6 @@ swiftgen json /path/to/JSON/spec -t /path/to/template
 The JSON spec is parsed into a dictionary and can be accessed in the stencil context with the `'spec'` key. Effectively, you access the dictionary using: `{{ spec.myField }}`
 
 ---
-
 
 # License
 
