@@ -2,6 +2,9 @@
 
 import Foundation
 import Cocoa
+{% for import in extraImports %}
+import {{import}}
+{% endfor %}
 
 // swiftlint:disable file_length
 // swiftlint:disable line_length

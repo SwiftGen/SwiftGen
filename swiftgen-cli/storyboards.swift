@@ -15,10 +15,12 @@ let storyboardsCommand = command(
     description: "The name of the enum to generate for Scenes"),
   Option<String>("segueEnumName", "StoryboardSegue", flag: "g",
     description: "The name of the enum to generate for Segues"),
+  Options<String>("import", [], count: 0,
+		description: "Additional imports to be added to the generated file"),
   Argument<Path>("PATH",
     description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard",
     validator: pathExists)
-) { output, templateName, templatePath, sceneEnumName, segueEnumName, path in
+) { output, templateName, templatePath, sceneEnumName, segueEnumName, extraImports, path in
   let parser = StoryboardParser()
   if path.`extension` == "storyboard" {
     parser.addStoryboardAtPath(String(path))
@@ -33,7 +35,7 @@ let storyboardsCommand = command(
       templateFullPath: templatePath
     )
     let template = try GenumTemplate(path: templateRealPath)
-    let context = parser.stencilContext(sceneEnumName: sceneEnumName, segueEnumName: segueEnumName)
+    let context = parser.stencilContext(sceneEnumName: sceneEnumName, segueEnumName: segueEnumName, extraImports: extraImports)
     let rendered = try template.render(context)
     output.write(rendered, onlyIfChanged: true)
   } catch {
