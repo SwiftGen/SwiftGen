@@ -29,7 +29,7 @@ public final class AssetsCatalogParser {
   }
 }
 
-// Mark: - Plist processing
+// MARK: - Plist processing
 
 private enum AssetCatalog: String {
   case children = "children"
@@ -64,16 +64,12 @@ extension AssetsCatalogParser {
   }
 }
 
-// Mark: - ACTool
+// MARK: - ACTool
 
 extension AssetsCatalogParser {
   private func loadAssetCatalogContents(path: String) -> [[String: AnyObject]]? {
-    let output = executeCommand("/usr/bin/env", args: [
-      "xcrun",
-      "actool",
-      "--print-contents",
-      path
-      ])
+	let command = Command("xcrun", arguments: "actool", "--print-contents", path)
+    let output = command.execute()
 
     // try to parse plist
     guard let plist = try? NSPropertyListSerialization.propertyListWithData(output, options: .Immutable, format: nil) else { return nil }
@@ -87,20 +83,5 @@ extension AssetsCatalogParser {
     guard let children = catalog[AssetCatalog.children.rawValue] as? [[String: AnyObject]] else { return nil }
 
     return children
-  }
-
-  private func executeCommand(command: String, args: [String]) -> NSData {
-    let task = NSTask()
-
-    task.launchPath = command
-    task.arguments = args
-
-    let pipe = NSPipe()
-    task.standardOutput = pipe
-    task.launch()
-
-    let data = pipe.fileHandleForReading.readDataToEndOfFile()
-
-    return data
   }
 }
