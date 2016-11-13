@@ -14,7 +14,13 @@
 // swiftlint:disable type_body_length
 enum XCTImages: String {
   case Apple = "Apple"
+  case Apricot = "Apricot"
   case Banana = "Banana"
+  case Cherry = "Cherry"
+  case Lemon = "Lemon"
+  case Mango = "Mango"
+  case Orange = "Orange"
+  case Tomato = "Tomato"
 
   var image: Image {
     return Image(asset: self)
