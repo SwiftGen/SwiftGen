@@ -13,14 +13,14 @@
 
 // swiftlint:disable type_body_length
 enum Asset: String {
-  case apple = "Apple"
-  case apricot = "Apricot"
-  case banana = "Banana"
-  case cherry = "Cherry"
+  case exoticBanana = "Exotic/Banana"
+  case exoticMango = "Exotic/Mango"
   case lemon = "Lemon"
-  case mango = "Mango"
-  case orange = "Orange"
-  case tomato = "Tomato"
+  case roundApricot = "Round/Apricot"
+  case roundOrange = "Round/Orange"
+  case roundApple = "Round/Apple"
+  case roundDoubleCherry = "Round/Double/Cherry"
+  case roundTomato = "Round/Tomato"
 
   var image: Image {
     return Image(asset: self)
