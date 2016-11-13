@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import PathKit
 
 public final class AssetsCatalogParser {
   var imageNames = [String]()
@@ -42,11 +43,12 @@ extension AssetsCatalogParser {
 
   private func process(items: [[String: AnyObject]], prefix: String = "") {
     for item in items {
-      let filename = item[AssetCatalog.filename.rawValue] as! NSString
+      guard let filename = item[AssetCatalog.filename.rawValue] as? String else { continue }
+      let path = Path(filename)
 
       // this is a simple imageset
-      if filename.pathExtension == AssetsCatalogParser.ImageSet {
-        let imageName = (filename.lastPathComponent as NSString).stringByDeletingPathExtension
+      if path.`extension` == AssetsCatalogParser.ImageSet {
+        let imageName = path.lastComponentWithoutExtension
         addImageName("\(prefix)\(imageName)")
       } else {
         // this is a group/folder
