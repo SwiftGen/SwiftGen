@@ -7,7 +7,7 @@
 import Stencil
 
 // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
-public class GenumTemplate: Template {
+open class GenumTemplate: Template {
   public override init(templateString: String) {
     let templateStringWithMarkedNewlines = templateString
       .stringByReplacingOccurrencesOfString("\n\n", withString: "\n\u{000b}\n")
@@ -15,12 +15,12 @@ public class GenumTemplate: Template {
     super.init(templateString: templateStringWithMarkedNewlines)
   }
 
-  public override func render(context: Context? = nil) throws -> String {
+  open override func render(_ context: Context? = nil) throws -> String {
     return try removeExtraLines(super.render(context))
   }
 
   // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
-  private func removeExtraLines(str: String) -> String {
+  fileprivate func removeExtraLines(_ str: String) -> String {
     let extraLinesRE: NSRegularExpression = {
       do {
         return try NSRegularExpression(pattern: "\\n([ \\t]*\\n)+", options: [])
@@ -28,21 +28,21 @@ public class GenumTemplate: Template {
         fatalError("Regular Expression pattern error: \(error)")
       }
     }()
-    let compact = extraLinesRE.stringByReplacingMatchesInString(
-      str,
+    let compact = extraLinesRE.stringByReplacingMatches(
+      in: str,
       options: [],
       range: NSRange(location: 0, length: str.utf16.count),
       withTemplate: "\n"
     )
     let unmarkedNewlines = compact
-      .stringByReplacingOccurrencesOfString("\n\u{000b}\n", withString: "\n\n")
-      .stringByReplacingOccurrencesOfString("\n\u{000b}\n", withString: "\n\n")
+      .replacingOccurrences(of: "\n\u{000b}\n", with: "\n\n")
+      .replacingOccurrences(of: "\n\u{000b}\n", with: "\n\n")
     return unmarkedNewlines
   }
 }
 
 // Register Genum-specific tags & filters
-public class GenumNamespace: Namespace {
+open class GenumNamespace: Namespace {
   public override init() {
     super.init()
     self.registerTag("set", parser: SetNode.parse)

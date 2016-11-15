@@ -6,7 +6,7 @@
 
 import Foundation
 
-public enum StringsFileParserError: ErrorType, CustomStringConvertible {
+public enum StringsFileParserError: Error, CustomStringConvertible {
   case FailureOnLoading(path: String)
   case InvalidFormat
 
@@ -25,17 +25,18 @@ public final class StringsFileParser {
 
   public init() {}
 
-  public func addEntry(entry: Entry) {
+  public func addEntry(_ entry: Entry) {
     entries.append(entry)
   }
 
   // Localizable.strings files are generally UTF16, not UTF8!
-  public func parseStringsFile(path: String) throws {
-    guard let data = NSData(contentsOfFile: path) else {
+  public func parseFile(at path: String) throws {
+    guard let data = try? NSData(contentsOfFile: path) as Data else {
       throw StringsFileParserError.FailureOnLoading(path: path)
     }
 
-    let plist = try NSPropertyListSerialization.propertyListWithData(data, options: NSPropertyListReadOptions.Immutable, format: nil)
+    let plist = try PropertyListSerialization
+        .propertyList(from: data, format: nil)
 
     guard let dict = plist as? Dictionary<String, String> else {
       throw StringsFileParserError.InvalidFormat
@@ -58,7 +59,7 @@ public final class StringsFileParser {
     case Unknown = "UnsafePointer<()>"
 
     init?(formatChar char: Character) {
-      guard let lcChar = String(char).lowercaseString.characters.first else {
+      guard let lcChar = String(char).lowercased().characters.first else {
         return nil
       }
       switch lcChar {
@@ -79,7 +80,7 @@ public final class StringsFileParser {
       }
     }
 
-    public static func fromFormatString(format: String) -> [PlaceholderType] {
+    public static func fromFormatString(_ format: String) -> [PlaceholderType] {
       return StringsFileParser.typesFromFormatString(format)
     }
   }
@@ -87,7 +88,7 @@ public final class StringsFileParser {
   public struct Entry {
     let key: String
     var keyStructure: [String] {
-        return key.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "."))
+        return key.components(separatedBy: CharacterSet(charactersIn: "."))
     }
     let translation: String
     let types: [PlaceholderType]
@@ -112,7 +113,7 @@ public final class StringsFileParser {
 
   // MARK: - Private Helpers
 
-  private static let formatTypesRegEx: NSRegularExpression = {
+  fileprivate static let formatTypesRegEx: NSRegularExpression = {
     // %d/%i/%o/%u/%x with their optional length modifiers like in "%lld"
     let pattern_int = "(?:h|hh|l|ll|q|z|t|j)?([dioux])"
     // valid flags for float
@@ -125,7 +126,7 @@ public final class StringsFileParser {
     do {
       return try NSRegularExpression(
         pattern: "(?<!%)%\(position)\(precision)(@|\(pattern_int)|\(pattern_float)|[csp])",
-        options: [.CaseInsensitive]
+        options: [.caseInsensitive]
       )
     } catch {
       fatalError("Error building the regular expression used to match string formats")
@@ -133,30 +134,30 @@ public final class StringsFileParser {
     }()
 
   // "I give %d apples to %@" --> [.Int, .String]
-  private static func typesFromFormatString(formatString: String) -> [PlaceholderType] {
+  fileprivate static func typesFromFormatString(_ formatString: String) -> [PlaceholderType] {
     let range = NSRange(location: 0, length: (formatString as NSString).length)
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier
-    let chars = formatTypesRegEx.matchesInString(formatString, options: [], range: range)
+    let chars = formatTypesRegEx.matches(in: formatString, options: [], range: range)
       .map({ match -> (String, Int?) in
         let range: NSRange
-        if match.rangeAtIndex(3).location != NSNotFound {
+        if match.rangeAt(3).location != NSNotFound {
           // [dioux] are in range #3 because in #2 there may be length modifiers (like in "lld")
-          range = match.rangeAtIndex(3)
+          range = match.rangeAt(3)
         } else {
           // otherwise, no length modifier, the conversion specifier is in #2
-          range = match.rangeAtIndex(2)
+          range = match.rangeAt(2)
         }
-        let char = (formatString as NSString).substringWithRange(range)
+        let char = (formatString as NSString).substring(with: range)
 
-        let posRange = match.rangeAtIndex(1)
+        let posRange = match.rangeAt(1)
         if posRange.location == NSNotFound {
           // No positional specifier
           return (char, nil)
         } else {
           // Remove the "$" at the end of the positional specifier, and convert to Int
           let posRange1 = NSRange(location: posRange.location, length: posRange.length-1)
-          let pos = (formatString as NSString).substringWithRange(posRange1)
+          let pos = (formatString as NSString).substring(with: posRange1)
           return (char, Int(pos))
         }
         }
@@ -167,7 +168,7 @@ public final class StringsFileParser {
     var list = [PlaceholderType]()
     var nextNonPositional = 1
     for (str, pos) in chars {
-      if let char = str.characters.first, p = PlaceholderType(formatChar: char) {
+      if let char = str.characters.first, let p = PlaceholderType(formatChar: char) {
         let insertionPos: Int
         if let pos = pos {
           insertionPos = pos

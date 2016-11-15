@@ -6,12 +6,13 @@
 
 import Stencil
 
-enum FilterError: ErrorType {
-  case InvalidInputType
+enum FilterError: Error {
+  case invalidInputType
 }
 
 struct StringFilters {
-  private static let reservedKeywords = ["associatedtype", "class", "deinit", "enum", "extension",
+//<<<<<<< ebeba437e22a83ec8eda50e505a4779c9d9dc5cd
+  fileprivate static let reservedKeywords = ["associatedtype", "class", "deinit", "enum", "extension",
                                          "fileprivate", "func", "import", "init", "inout", "internal",
                                          "let", "open", "operator", "private", "protocol", "public",
                                          "static", "struct", "subscript", "typealias", "var", "break",
@@ -29,7 +30,7 @@ struct StringFilters {
                                          "right", "set", "Type", "unowned", "weak", "willSet"]
 
   static func stringToSwiftIdentifier(value: Any?) throws -> Any? {
-    guard let value = value as? String else { throw FilterError.InvalidInputType }
+    guard let value = value as? String else { throw FilterError.invalidInputType }
     return swiftIdentifier(fromString: value, replaceWithUnderscores: true)
   }
 
@@ -38,30 +39,30 @@ struct StringFilters {
    *   up to the one before the last uppercase one
    * e.g. "PeoplePicker" gives "peoplePicker" but "URLChooser" gives "urlChooser"
    */
-  static func lowerFirstWord(value: Any?) throws -> Any? {
-    guard let string = value as? String else { throw FilterError.InvalidInputType }
+  static func lowerFirstWord(_ value: Any?) throws -> Any? {
+    guard let string = value as? String else { throw FilterError.invalidInputType }
 
-    let cs = NSCharacterSet.uppercaseLetterCharacterSet()
+    let cs = CharacterSet.uppercaseLetters
     let scalars = string.unicodeScalars
     let start = scalars.startIndex
     var idx = start
-    while cs.longCharacterIsMember(scalars[idx].value) && idx <= scalars.endIndex {
-      idx = idx.successor()
+    while cs.contains(UnicodeScalar(scalars[idx].value)!) && idx <= scalars.endIndex {
+      idx = scalars.index(after: idx)
     }
-    if idx > start.successor() && idx < scalars.endIndex {
-      idx = idx.predecessor()
+    if idx > scalars.index(after: start) && idx < scalars.endIndex {
+      idx = scalars.index(before: idx)
     }
-    let transformed = String(scalars[start..<idx]).lowercaseString + String(scalars[idx..<scalars.endIndex])
+    let transformed = String(scalars[start..<idx]).lowercased() + String(scalars[idx..<scalars.endIndex])
     return transformed
   }
 
-  static func titlecase(value: Any?) throws -> Any? {
-    guard let string = value as? String else { throw FilterError.InvalidInputType }
+  static func titlecase(_ value: Any?) throws -> Any? {
+    guard let string = value as? String else { throw FilterError.invalidInputType }
     return titlecase(string)
   }
 
-  static func snakeToCamelCase(value: Any?) throws -> Any? {
-    guard let string = value as? String else { throw FilterError.InvalidInputType }
+  static func snakeToCamelCase(_ value: Any?) throws -> Any? {
+    guard let string = value as? String else { throw FilterError.invalidInputType }
     guard let noPrefix = try snakeToCamelCaseNoPrefix(value) else {
       return nil
     }
@@ -74,10 +75,10 @@ struct StringFilters {
     return prefixUnderscores + ("\(noPrefix)")
   }
 
-  static func snakeToCamelCaseNoPrefix(value: Any?) throws -> Any? {
-    guard let string = value as? String else { throw FilterError.InvalidInputType }
-    let comps = string.componentsSeparatedByString("_")
-    return comps.map { titlecase($0) }.joinWithSeparator("")
+  static func snakeToCamelCaseNoPrefix(_ value: Any?) throws -> Any? {
+    guard let string = value as? String else { throw FilterError.invalidInputType }
+    let comps = string.components(separatedBy: "_")
+    return comps.map { titlecase($0) }.joined(separator: "")
   }
 
   /**
@@ -89,9 +90,9 @@ struct StringFilters {
 
   - returns: The string with its first character uppercased, and the rest of the string unchanged.
   */
-  private static func titlecase(string: String) -> String {
+  fileprivate static func titlecase(_ string: String) -> String {
     guard let first = string.unicodeScalars.first else { return string }
-    return String(first).uppercaseString + String(string.unicodeScalars.dropFirst())
+    return String(first).uppercased() + String(string.unicodeScalars.dropFirst())
   }
 }
 
@@ -109,34 +110,34 @@ extension StringFilters {
   }
 
   static func escapeReservedKeywords(value: Any?) throws -> Any? {
-    guard let string = value as? String else { throw FilterError.InvalidInputType }
+    guard let string = value as? String else { throw FilterError.invalidInputType }
     return escapeReservedKeywords(in: string)
   }
 }
 
 struct ArrayFilters {
-  static func join(value: Any?) throws -> Any? {
-    guard let array = value as? [Any] else { throw FilterError.InvalidInputType }
+  static func join(_ value: Any?) throws -> Any? {
+    guard let array = value as? [Any] else { throw FilterError.invalidInputType }
     let strings = array.flatMap { $0 as? String }
-    guard array.count == strings.count else { throw FilterError.InvalidInputType }
+    guard array.count == strings.count else { throw FilterError.invalidInputType }
 
-    return strings.joinWithSeparator(", ")
+    return strings.joined(separator: ", ")
   }
 }
 
 struct NumFilters {
-  static func hexToInt(value: Any?) throws -> Any? {
-    guard let value = value as? String else { throw FilterError.InvalidInputType }
+  static func hexToInt(_ value: Any?) throws -> Any? {
+    guard let value = value as? String else { throw FilterError.invalidInputType }
     return Int(value, radix:  16)
   }
 
-  static func int255toFloat(value: Any?) throws -> Any? {
-    guard let value = value as? Int else { throw FilterError.InvalidInputType }
+  static func int255toFloat(_ value: Any?) throws -> Any? {
+    guard let value = value as? Int else { throw FilterError.invalidInputType }
     return Float(value) / Float(255.0)
   }
 
-  static func percent(value: Any?) throws -> Any? {
-    guard let value = value as? Float else { throw FilterError.InvalidInputType }
+  static func percent(_ value: Any?) throws -> Any? {
+    guard let value = value as? Float else { throw FilterError.invalidInputType }
 
     let percent = Int(value * 100.0)
     return "\(percent)%"

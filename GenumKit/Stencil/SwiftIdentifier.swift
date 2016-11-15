@@ -12,11 +12,11 @@ import Foundation
 // from: https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html#//apple_ref/doc/uid/TP40014097-CH30-ID410
 // swiftlint:disable function_body_length
 private func identifierCharacterSets() -> (head: NSMutableCharacterSet, tail: NSMutableCharacterSet) {
-  let addRange: (NSMutableCharacterSet, Range<Int>) -> Void = { (mcs, range) in
-    mcs.addCharactersInRange(NSRange(location: range.startIndex, length: range.endIndex-range.startIndex))
+  let addRange: (NSMutableCharacterSet, CountableRange<Int>) -> Void = { (mcs, range) in
+    mcs.addCharacters(in: NSRange(location: range.startIndex, length: range.endIndex-range.startIndex))
   }
   let addChars: (NSMutableCharacterSet, String) -> Void = { (mcs, string) in
-    mcs.addCharactersInString(string)
+    mcs.addCharacters(in: string)
   }
 
   let head = NSMutableCharacterSet()
@@ -89,26 +89,26 @@ func swiftIdentifier(fromString string: String,
                      replaceWithUnderscores underscores: Bool = false) -> String {
 
   let (head, tail) = identifierCharacterSets()
-  head.removeCharactersInString(exceptions)
-  tail.removeCharactersInString(exceptions)
+  head.removeCharacters(in: exceptions)
+  tail.removeCharacters(in: exceptions)
 
   let chars = string.unicodeScalars
   let firstChar = chars[chars.startIndex]
 
-  let prefix = !head.longCharacterIsMember(firstChar.value) && tail.longCharacterIsMember(firstChar.value) ? "_" : ""
-  let parts = string.componentsSeparatedByCharactersInSet(tail.invertedSet)
+  let prefix = !head.contains(UnicodeScalar(firstChar.value)) && tail.contains(UnicodeScalar(firstChar.value)) ? "_" : ""
+  let parts = string.components(separatedBy: tail.inverted)
   let replacement = underscores ? "_" : ""
   let mappedParts = parts.map({ (string: String) -> String in
     // Can't use capitalizedString here because it will lowercase all letters after the first
     // e.g. "SomeNiceIdentifier".capitalizedString will because "Someniceidentifier" which is not what we want
     let ns = string as NSString
     if ns.length > 0 {
-      let firstLetter = ns.substringToIndex(1)
-      let rest = ns.substringFromIndex(1)
-      return firstLetter.uppercaseString + rest
+      let firstLetter = ns.substring(to: 1)
+      let rest = ns.substring(from: 1)
+      return firstLetter.uppercased() + rest
     } else {
       return ""
     }
   })
-  return prefix + mappedParts.joinWithSeparator(replacement)
+  return prefix + mappedParts.joined(separator: replacement)
 }

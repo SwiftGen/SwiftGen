@@ -12,7 +12,7 @@ public final class AssetsCatalogParser {
 
   public init() {}
 
-  public func addImageName(name: String) -> Bool {
+  public func addImageName(_ name: String) -> Bool {
     if imageNames.contains(name) {
       return false
     } else {
@@ -21,6 +21,7 @@ public final class AssetsCatalogParser {
     }
   }
 
+//<<<<<<< ebeba437e22a83ec8eda50e505a4779c9d9dc5cd
   public func parseCatalog(path: String) {
     guard let items = loadAssetCatalogContents(path) else { return }
 
@@ -41,7 +42,7 @@ private enum AssetCatalog: String {
 extension AssetsCatalogParser {
   static let imageSetExtension = "imageset"
 
-  private func process(items: [[String: AnyObject]], prefix: String = "") {
+  private func processCatalog(items: [[String: AnyObject]], withPrefix: String = "") {
     for item in items {
       guard let filename = item[AssetCatalog.filename.rawValue] as? String else { continue }
       let path = Path(filename)
@@ -54,10 +55,11 @@ extension AssetsCatalogParser {
         // this is a group/folder
         let children = item[AssetCatalog.children.rawValue] as? [[String: AnyObject]] ?? []
 
-        if let providesNamespace = item[AssetCatalog.providesNamespace.rawValue] as? NSNumber where providesNamespace.boolValue {
+        if let providesNamespace = item[AssetCatalog.providesNamespace.rawValue] as? NSNumber,
+            providesNamespace.boolValue {
           process(children, prefix: "\(prefix)\(filename)/")
         } else {
-          process(children, prefix: prefix)
+            processCatalog(items: children, withPrefix: prefix)
         }
       }
     }
