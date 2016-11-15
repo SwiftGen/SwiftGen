@@ -18,7 +18,7 @@ private func identifierCharacterSets() -> (head: NSMutableCharacterSet, tail: NS
   let addChars: (NSMutableCharacterSet, String) -> Void = { (mcs, string) in
     mcs.addCharacters(in: string)
   }
- 
+
   let head = NSMutableCharacterSet()
 
   addRange(head, 0x41...0x5A) // A-Z
