@@ -39,15 +39,15 @@ private enum AssetCatalog: String {
 }
 
 extension AssetsCatalogParser {
-  static let ImageSet = "imageset"
+  static let ImageSetExtension = "imageset"
 
   private func process(items: [[String: AnyObject]], prefix: String = "") {
     for item in items {
       guard let filename = item[AssetCatalog.filename.rawValue] as? String else { continue }
       let path = Path(filename)
 
-      // this is a simple imageset
-      if path.`extension` == AssetsCatalogParser.ImageSet {
+      if path.`extension` == AssetsCatalogParser.ImageSetExtension {
+        // this is a simple imageset
         let imageName = path.lastComponentWithoutExtension
         addImageName("\(prefix)\(imageName)")
       } else {
@@ -68,7 +68,7 @@ extension AssetsCatalogParser {
 
 extension AssetsCatalogParser {
   private func loadAssetCatalogContents(path: String) -> [[String: AnyObject]]? {
-	let command = Command("xcrun", arguments: "actool", "--print-contents", path)
+    let command = Command("xcrun", arguments: "actool", "--print-contents", path)
     let output = command.execute()
 
     // try to parse plist
