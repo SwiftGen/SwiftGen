@@ -12,6 +12,7 @@
   storyboards) using the `import` flag. Multiple imports can be added by repeating
   this flag.  
   [David Jennes](https://github.com/djbe), [#175](https://github.com/AliSoftware/SwiftGen/pull/175) 
+* Remove the `key` param label from the `tr` function for Localized String in the swift3 template [AndrewSB](https://github.com/AndrewSB), [#190](https://github.com/AliSoftware/SwiftGen/pull/190)
 
 ## 3.0.1
 
