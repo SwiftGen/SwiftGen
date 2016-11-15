@@ -160,8 +160,7 @@ public final class StringsFileParser {
           let pos = (formatString as NSString).substring(with: posRange1)
           return (char, Int(pos))
         }
-        }
-    )
+    })
 
     // enumerate the conversion specifiers and their optionally forced position
     // and build the array of PlaceholderTypes accordingly

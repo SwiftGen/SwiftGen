@@ -52,7 +52,7 @@ public final class StoryboardParser {
         readyForFirstObject = true
       case let tag where (readyForFirstObject && tag != "viewControllerPlaceholder"):
         let customClass = attributeDict["customClass"]
-        if let objectID = attributeDict["id"] , objectID == initialViewControllerObjectID {
+        if let objectID = attributeDict["id"], objectID == initialViewControllerObjectID {
           initialScene = InitialScene(objectID: objectID, tag: tag, customClass: customClass)
         }
         if let storyboardID = attributeDict["storyboardIdentifier"] {

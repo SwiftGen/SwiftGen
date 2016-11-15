@@ -45,7 +45,7 @@ struct StringFilters {
     let scalars = string.unicodeScalars
     let start = scalars.startIndex
     var idx = start
-    while cs.contains(UnicodeScalar(scalars[idx].value)!) && idx <= scalars.endIndex {
+    while let scalar = UnicodeScalar(scalars[idx].value), cs.contains(scalar) && idx <= scalars.endIndex {
       idx = scalars.index(after: idx)
     }
     if idx > scalars.index(after: start) && idx < scalars.endIndex {

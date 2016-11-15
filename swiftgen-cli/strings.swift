@@ -19,7 +19,9 @@ let stringsCommand = command(
   do {
     try parser.parseFile(at: String(describing: path))
 
-    let templateRealPath = try findTemplate(prefix: "strings", templateShortName: templateName, templateFullPath: templatePath)
+    let templateRealPath = try findTemplate(
+      prefix: "strings", templateShortName: templateName, templateFullPath: templatePath
+    )
     let template = try GenumTemplate(path: templateRealPath)
     let context = parser.stencilContext(enumName: enumName, tableName: path.lastComponentWithoutExtension)
     let rendered = try template.render(context)

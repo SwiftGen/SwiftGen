@@ -18,7 +18,9 @@ let fontsCommand = command(
     let parser = FontsFileParser()
     do {
       parser.parseFonts(String(describing: path))
-      let templateRealPath = try findTemplate(prefix: "fonts", templateShortName: templateName, templateFullPath: templatePath)
+      let templateRealPath = try findTemplate(
+        prefix: "fonts", templateShortName: templateName, templateFullPath: templatePath
+      )
       let template = try GenumTemplate(path: templateRealPath)
       let context = parser.stencilContext(enumName: enumName)
       let rendered = try template.render(context)

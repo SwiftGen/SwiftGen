@@ -5,7 +5,7 @@
 //
 
 import Stencil
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -87,7 +87,8 @@ extension AssetsCatalogParser {
     - `initialScene`: `Dictionary` (absent if not specified)
        - `customClass`: `String` (absent if generic UIViewController/NSViewController)
        - `isBaseViewController`: `Bool`, indicate if the baseType is 'viewController' or anything else
-       - `baseType`: `String` (absent if class is a custom class). The base class type on which the initial scene is base.
+       - `baseType`: `String` (absent if class is a custom class).
+          The base class type on which the initial scene is base.
           Possible values include 'ViewController', 'NavigationController', 'TableViewController'…
     - `scenes`: `Array` (absent if empty)
        - `identifier`: `String`
@@ -178,7 +179,7 @@ extension StoryboardParser {
 extension StringsFileParser {
   public func stencilContext(enumName: String = "L10n", tableName: String = "Localizable") -> Context {
 
-    let entryToStringMapper = { (entry: Entry, keyPath: [String]) -> [String: AnyObject] in
+    let entryToStringMapper = { (entry: Entry, keyPath: [String]) -> [String: Any] in
       var keyStructure = entry.keyStructure
       Array(0..<keyPath.count).forEach { _ in keyStructure.removeFirst() }
       let keytail = keyStructure.joined(separator: ".")
@@ -191,9 +192,16 @@ extension StringsFileParser {
           "names": entry.types.indices.map { "p\($0)" },
           "typednames": entry.types.enumerated().map { "p\($0): \($1.rawValue)" }
         ]
-        return ["key": entry.key as AnyObject, "translation": entry.translation.newlineEscaped as AnyObject, "params": params as AnyObject, "keytail": keytail as AnyObject] as [String : AnyObject]
+        return ["key": entry.key,
+                "translation": entry.translation.newlineEscaped,
+                "params": params,
+                "keytail": keytail
+        ]
       } else {
-        return ["key": entry.key as AnyObject, "translation": entry.translation.newlineEscaped as AnyObject, "keytail": keytail as AnyObject]
+        return ["key": entry.key,
+                "translation": entry.translation.newlineEscaped,
+                "keytail": keytail
+        ]
       }
     }
 
@@ -216,24 +224,29 @@ extension StringsFileParser {
     return components.map { $0.capitalized }.joined(separator: "")
   }
 
-  typealias Mapper = (_ entry: Entry, _ keyPath: [String]) -> [String: AnyObject]
-  fileprivate func structure(_ entries: [Entry], keyPath: [String] = [], mapper: @escaping Mapper, currentLevel: Int, maxLevel: Int) -> [String: AnyObject] {
+  typealias Mapper = (_ entry: Entry, _ keyPath: [String]) -> [String: Any]
+  fileprivate func structure(
+    _ entries: [Entry],
+    keyPath: [String] = [],
+    mapper: @escaping Mapper,
+    currentLevel: Int,
+    maxLevel: Int) -> [String: Any] {
 
-    var structuredStrings: [String: AnyObject] = [:]
+    var structuredStrings: [String: Any] = [:]
 
     let strings = entries
       .filter { $0.keyStructure.count == keyPath.count+1 }
       .map { mapper($0, keyPath) }
 
     if !strings.isEmpty {
-      structuredStrings["strings"] = strings as AnyObject?
+      structuredStrings["strings"] = strings
     }
 
     if let lastKeyPathComponent = keyPath.last {
-      structuredStrings["name"] = lastKeyPathComponent as AnyObject?
+      structuredStrings["name"] = lastKeyPathComponent
     }
 
-    var subenums: [[String: AnyObject]] = []
+    var subenums: [[String: Any]] = []
     let nextLevelKeyPaths: [[String]] = entries
       .filter({ $0.keyStructure.count > keyPath.count+1 })
       .map({ Array($0.keyStructure.prefix(keyPath.count+1)) })
@@ -255,31 +268,41 @@ extension StringsFileParser {
       if currentLevel >= maxLevel {
         subenums.append(flattenedStrings(entries, keyPath: nextLevelKeyPath, mapper: mapper, level: currentLevel+1))
       } else {
-        subenums.append(structure(entriesInKeyPath, keyPath: nextLevelKeyPath, mapper: mapper, currentLevel: currentLevel+1, maxLevel: maxLevel))
+        subenums.append(
+            structure(entriesInKeyPath,
+                      keyPath: nextLevelKeyPath,
+                      mapper: mapper,
+                      currentLevel: currentLevel+1,
+                      maxLevel: maxLevel)
+        )
       }
     }
 
     if !subenums.isEmpty {
-      structuredStrings["subenums"] = subenums as AnyObject?
+      structuredStrings["subenums"] = subenums
     }
 
     return structuredStrings
   }
 
-  fileprivate func flattenedStrings(_ entries: [Entry], keyPath: [String], mapper: @escaping Mapper, level: Int) -> [String: AnyObject] {
+  fileprivate func flattenedStrings(
+    _ entries: [Entry],
+    keyPath: [String],
+    mapper: @escaping Mapper,
+    level: Int) -> [String: Any] {
 
-    var structuredStrings: [String: AnyObject] = [:]
+    var structuredStrings: [String: Any] = [:]
 
     let strings = entries
       .filter { $0.keyStructure.count >= keyPath.count+1 }
       .map { mapper($0, keyPath) }
 
     if !strings.isEmpty {
-      structuredStrings["strings"] = strings as AnyObject?
+      structuredStrings["strings"] = strings
     }
 
     if let lastKeyPathComponent = keyPath.last {
-      structuredStrings["name"] = lastKeyPathComponent as AnyObject?
+      structuredStrings["name"] = lastKeyPathComponent
     }
 
     return structuredStrings
@@ -298,8 +321,7 @@ extension StringsFileParser {
 extension FontsFileParser {
   public func stencilContext(enumName: String = "FontFamily") -> Context {
     // turn into array of dictionaries
-    let families = entries.map { (name: String, family: Set<Font>) -> [String:AnyObject] in
-
+    let families = entries.map { (name: String, family: Set<Font>) -> [String : Any] in
       let fonts = family.map { (font: Font) -> [String: String] in
         // Font
         return [
@@ -307,13 +329,13 @@ extension FontsFileParser {
           "fontName" : font.postScriptName
         ]
       }
-
       // Family
       return [
-        "name":name as AnyObject,
-        "fonts":fonts as AnyObject
+        "name" : name,
+        "fonts" : fonts
       ]
     }
+
     return Context(dictionary: ["enumName": enumName, "families" : families], namespace: GenumNamespace())
   }
 }

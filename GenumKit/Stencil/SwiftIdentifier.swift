@@ -13,12 +13,12 @@ import Foundation
 // swiftlint:disable function_body_length
 private func identifierCharacterSets() -> (head: NSMutableCharacterSet, tail: NSMutableCharacterSet) {
   let addRange: (NSMutableCharacterSet, CountableClosedRange<Int>) -> Void = { (mcs, range) in
-    mcs.addCharacters(in: NSRange(location: range.lowerBound, length: range.upperBound-range.lowerBound))
+    mcs.addCharacters(in: NSRange(location: range.lowerBound, length: range.count))
   }
   let addChars: (NSMutableCharacterSet, String) -> Void = { (mcs, string) in
     mcs.addCharacters(in: string)
   }
-
+ 
   let head = NSMutableCharacterSet()
 
   addRange(head, 0x41...0x5A) // A-Z

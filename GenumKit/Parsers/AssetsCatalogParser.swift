@@ -12,6 +12,7 @@ public final class AssetsCatalogParser {
 
   public init() {}
 
+  @discardableResult
   public func addImageName(_ name: String) -> Bool {
     if imageNames.contains(name) {
       return false

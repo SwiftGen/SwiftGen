@@ -35,7 +35,9 @@ let storyboardsCommand = command(
       templateFullPath: templatePath
     )
     let template = try GenumTemplate(path: templateRealPath)
-    let context = parser.stencilContext(sceneEnumName: sceneEnumName, segueEnumName: segueEnumName, extraImports: extraImports)
+    let context = parser.stencilContext(
+      sceneEnumName: sceneEnumName, segueEnumName: segueEnumName, extraImports: extraImports
+    )
     let rendered = try template.render(context)
     output.write(content: rendered, onlyIfChanged: true)
   } catch {
