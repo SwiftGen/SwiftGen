@@ -1,10 +1,10 @@
 import PathKit
 
 
-public class IncludeNode : NodeType {
-  public let templateName: Variable
+open class IncludeNode : NodeType {
+  open let templateName: Variable
 
-  public class func parse(parser: TokenParser, token: Token) throws -> NodeType {
+  open class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     let bits = token.components()
 
     guard bits.count == 2 else {
@@ -18,7 +18,7 @@ public class IncludeNode : NodeType {
     self.templateName = templateName
   }
 
-  public func render(context: Context) throws -> String {
+  open func render(_ context: Context) throws -> String {
     guard let loader = context["loader"] as? TemplateLoader else {
       throw TemplateSyntaxError("Template loader not in context")
     }
@@ -28,7 +28,7 @@ public class IncludeNode : NodeType {
     }
 
     guard let template = loader.loadTemplate(templateName) else {
-      let paths = loader.paths.map { $0.description }.joinWithSeparator(", ")
+      let paths = loader.paths.map { $0.description }.joined(separator: ", ")
       throw TemplateSyntaxError("'\(templateName)' template not found in \(paths)")
     }
 
