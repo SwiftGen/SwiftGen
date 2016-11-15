@@ -21,12 +21,11 @@ public final class AssetsCatalogParser {
     }
   }
 
-//<<<<<<< ebeba437e22a83ec8eda50e505a4779c9d9dc5cd
-  public func parseCatalog(path: String) {
-    guard let items = loadAssetCatalogContents(path) else { return }
+  public func parseCatalog(at path: String) {
+    guard let items = loadAssetCatalog(at: path) else { return }
 
     // process recursively
-    process(items)
+    processCatalog(items: items)
   }
 }
 
@@ -42,7 +41,7 @@ private enum AssetCatalog: String {
 extension AssetsCatalogParser {
   static let imageSetExtension = "imageset"
 
-  private func processCatalog(items: [[String: AnyObject]], withPrefix: String = "") {
+  fileprivate func processCatalog(items: [[String: AnyObject]], withPrefix prefix: String = "") {
     for item in items {
       guard let filename = item[AssetCatalog.filename.rawValue] as? String else { continue }
       let path = Path(filename)
@@ -57,7 +56,7 @@ extension AssetsCatalogParser {
 
         if let providesNamespace = item[AssetCatalog.providesNamespace.rawValue] as? NSNumber,
             providesNamespace.boolValue {
-          process(children, prefix: "\(prefix)\(filename)/")
+            processCatalog(items: children, withPrefix: "\(prefix)\(filename)/")
         } else {
             processCatalog(items: children, withPrefix: prefix)
         }
@@ -69,12 +68,13 @@ extension AssetsCatalogParser {
 // MARK: - ACTool
 
 extension AssetsCatalogParser {
-  private func loadAssetCatalogContents(path: String) -> [[String: AnyObject]]? {
+  fileprivate func loadAssetCatalog(at path: String) -> [[String: AnyObject]]? {
     let command = Command("xcrun", arguments: "actool", "--print-contents", path)
     let output = command.execute()
 
     // try to parse plist
-    guard let plist = try? NSPropertyListSerialization.propertyListWithData(output, options: .Immutable, format: nil) else { return nil }
+    guard let plist = try? PropertyListSerialization
+        .propertyList(from: output as Data, format: nil) else { return nil }
 
     // get first parsed catalog
     guard let contents = plist as? [String: AnyObject],

@@ -10,8 +10,7 @@ import Stencil
 open class GenumTemplate: Template {
   public override init(templateString: String) {
     let templateStringWithMarkedNewlines = templateString
-      .stringByReplacingOccurrencesOfString("\n\n", withString: "\n\u{000b}\n")
-      .stringByReplacingOccurrencesOfString("\n\n", withString: "\n\u{000b}\n")
+        .replacingOccurrences(of: "\n\n", with: "\n\u{000b}\n")
     super.init(templateString: templateStringWithMarkedNewlines)
   }
 

@@ -58,9 +58,9 @@ extension XCTestCase {
     }
     guard let dir = subDir else { return rsrcURL.path }
     #if swift(>=2.3)
-      return rsrcURL.URLByAppendingPathComponent(dir, isDirectory: true)!.path!
+      return rsrcURL.appendingPathComponent(dir, isDirectory: true).path
     #else
-      return rsrcURL.URLByAppendingPathComponent(dir, isDirectory: true).path!
+      return rsrcURL.URLByAppendingPathComponent(dir, isDirectory: true).path
     #endif
   }
 
@@ -78,9 +78,9 @@ extension XCTestCase {
     return path
   }
 
-  func fixtureString(_ name: String, encoding: UInt = String.Encoding.utf8) -> String {
+  func fixtureString(_ name: String, encoding: String.Encoding = .utf8) -> String {
     do {
-      return try NSString(contentsOfFile: fixturePath(name), encoding: encoding) as String
+      return try String(contentsOfFile: fixturePath(name), encoding: encoding) as String
     } catch let e {
       fatalError("Unable to load fixture content: \(e)")
     }

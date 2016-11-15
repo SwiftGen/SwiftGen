@@ -12,8 +12,8 @@ import Foundation
 // from: https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html#//apple_ref/doc/uid/TP40014097-CH30-ID410
 // swiftlint:disable function_body_length
 private func identifierCharacterSets() -> (head: NSMutableCharacterSet, tail: NSMutableCharacterSet) {
-  let addRange: (NSMutableCharacterSet, CountableRange<Int>) -> Void = { (mcs, range) in
-    mcs.addCharacters(in: NSRange(location: range.startIndex, length: range.endIndex-range.startIndex))
+  let addRange: (NSMutableCharacterSet, CountableClosedRange<Int>) -> Void = { (mcs, range) in
+    mcs.addCharacters(in: NSRange(location: range.lowerBound, length: range.upperBound-range.lowerBound))
   }
   let addChars: (NSMutableCharacterSet, String) -> Void = { (mcs, string) in
     mcs.addCharacters(in: string)
@@ -95,7 +95,7 @@ func swiftIdentifier(fromString string: String,
   let chars = string.unicodeScalars
   let firstChar = chars[chars.startIndex]
 
-  let prefix = !head.contains(UnicodeScalar(firstChar.value)) && tail.contains(UnicodeScalar(firstChar.value)) ? "_" : ""
+  let prefix = !head.longCharacterIsMember(firstChar.value) && tail.longCharacterIsMember(firstChar.value) ? "_" : ""
   let parts = string.components(separatedBy: tail.inverted)
   let replacement = underscores ? "_" : ""
   let mappedParts = parts.map({ (string: String) -> String in

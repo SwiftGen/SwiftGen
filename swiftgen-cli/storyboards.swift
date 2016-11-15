@@ -10,7 +10,7 @@ import GenumKit
 
 let storyboardsCommand = command(
   outputOption,
-  templateOption("storyboards"), templatePathOption,
+  templateOption(prefix: "storyboards"), templatePathOption,
   Option<String>("sceneEnumName", "StoryboardScene", flag: "e",
     description: "The name of the enum to generate for Scenes"),
   Option<String>("segueEnumName", "StoryboardSegue", flag: "g",
@@ -23,22 +23,22 @@ let storyboardsCommand = command(
 ) { output, templateName, templatePath, sceneEnumName, segueEnumName, extraImports, path in
   let parser = StoryboardParser()
   if path.`extension` == "storyboard" {
-    parser.addStoryboardAtPath(String(path))
+    parser.addStoryboardAtPath(String(describing: path))
   } else {
-    parser.parseDirectory(String(path))
+    parser.parseDirectory(String(describing: path))
   }
 
   do {
     let templateRealPath = try findTemplate(
-      "storyboards",
+      prefix: "storyboards",
       templateShortName: templateName,
       templateFullPath: templatePath
     )
     let template = try GenumTemplate(path: templateRealPath)
     let context = parser.stencilContext(sceneEnumName: sceneEnumName, segueEnumName: segueEnumName, extraImports: extraImports)
     let rendered = try template.render(context)
-    output.write(rendered, onlyIfChanged: true)
+    output.write(content: rendered, onlyIfChanged: true)
   } catch {
-    printError("error: failed to render template \(error)")
+    printError(string: "error: failed to render template \(error)")
   }
 }

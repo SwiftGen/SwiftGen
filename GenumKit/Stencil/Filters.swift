@@ -41,7 +41,6 @@ struct StringFilters {
    */
   static func lowerFirstWord(_ value: Any?) throws -> Any? {
     guard let string = value as? String else { throw FilterError.invalidInputType }
-
     let cs = CharacterSet.uppercaseLetters
     let scalars = string.unicodeScalars
     let start = scalars.startIndex

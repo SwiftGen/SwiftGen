@@ -104,26 +104,26 @@ extension StoryboardParser {
                                            segueEnumName: String = "StoryboardSegue",
                                            extraImports: [String] = []) -> Context {
     let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sorted(by: <)
-    let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:AnyObject] in
-      var sbMap: [String:AnyObject] = ["name": storyboardName as AnyObject]
+    let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:Any] in
+      var sbMap: [String:Any] = ["name": storyboardName]
       // Initial Scene
       if let initialScene = initialScenes[storyboardName] {
-        let initial: [String:AnyObject]
+        let initial: [String:Any]
         if let customClass = initialScene.customClass {
-          initial = ["customClass": customClass as AnyObject]
+          initial = ["customClass": customClass]
         } else {
           initial = [
-            "baseType": uppercaseFirst(initialScene.tag) as AnyObject,
-            "isBaseViewController": initialScene.tag == "viewController" as AnyObject
+            "baseType": uppercaseFirst(initialScene.tag),
+            "isBaseViewController": initialScene.tag == "viewController"
           ]
         }
-        sbMap["initialScene"] = initial as AnyObject?
+        sbMap["initialScene"] = initial
       }
       // All Scenes
       if let scenes = storyboardsScenes[storyboardName] {
         sbMap["scenes"] = scenes
           .sorted(by: {$0.storyboardID < $1.storyboardID})
-          .map { (scene: Scene) -> [String:AnyObject] in
+          .map { (scene: Scene) -> [String:Any] in
             if let customClass = scene.customClass {
                 return ["identifier": scene.storyboardID, "customClass": customClass]
             } else if scene.tag == "viewController" {
