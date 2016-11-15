@@ -322,19 +322,19 @@ extension FontsFileParser {
   public func stencilContext(enumName: String = "FontFamily") -> Context {
     // turn into array of dictionaries
     let families = entries.map { (name: String, family: Set<Font>) -> [String : Any] in
-      let fonts = family.map { (font: Font) -> [String: String] in
+      let fonts = family.map { (font: Font) -> [String : String] in
         // Font
         return [
           "style" : font.style,
           "fontName" : font.postScriptName
         ]
-      }
+      }.sorted { $0["fontName"] < $1["fontName"] }
       // Family
       return [
         "name" : name,
         "fonts" : fonts
       ]
-    }
+    }.sorted { $0["name"] as? String ?? "" < $1["name"] as? String ?? "" }
 
     return Context(dictionary: ["enumName": enumName, "families" : families], namespace: GenumNamespace())
   }
