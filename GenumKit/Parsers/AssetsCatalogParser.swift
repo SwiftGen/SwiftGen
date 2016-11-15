@@ -39,7 +39,7 @@ private enum AssetCatalog: String {
 }
 
 extension AssetsCatalogParser {
-  static let ImageSetExtension = "imageset"
+  static let imageSetExtension = "imageset"
 
   private func process(items: [[String: AnyObject]], prefix: String = "") {
     for item in items {
