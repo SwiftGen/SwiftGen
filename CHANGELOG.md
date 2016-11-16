@@ -4,18 +4,24 @@
 
 ## unreleased
 
-* Change swift 3 storyboard segue template's sender from `AnyObject` to `Any`. 
-  [Derek Ostrander](https://github.com/dostrander) [#174](https://github.com/AliSoftware/SwiftGen/issues/174)
-* Fix swift 3 storyboard templates to be compliant with swift 3 api design guidelines.
+* Change swift 3 storyboard segue template's sender from `AnyObject` to `Any`.  
+  [Derek Ostrander](https://github.com/dostrander)
+  [#174](https://github.com/AliSoftware/SwiftGen/issues/174)
+* Fix swift 3 storyboard templates to be compliant with swift 3 api design guidelines.  
   [Afonso](https://github.com/afonsograca)
+  [#174](https://github.com/AliSoftware/SwiftGen/pull/194)
 * Add option to add import statements at the top of the generated swift file (for
   storyboards) using the `import` flag. Multiple imports can be added by repeating
   this flag.  
-  [David Jennes](https://github.com/djbe), [#175](https://github.com/AliSoftware/SwiftGen/pull/175)
-* Remove the `key` param label from the `tr` function for Localized String in the swift3 template [AndrewSB](https://github.com/AndrewSB), [#190](https://github.com/AliSoftware/SwiftGen/pull/190)
+  [David Jennes](https://github.com/djbe)
+  [#175](https://github.com/AliSoftware/SwiftGen/pull/175)
+* Remove the `key` param label from the `tr` function for Localized String in the swift3 template.  
+  [AndrewSB](https://github.com/AndrewSB)
+  [#190](https://github.com/AliSoftware/SwiftGen/pull/190)
 * The `swiftgen images` command now uses the `actool` utility to parse asset catalogs,
-  ensuring that the parser correctly handles namespaced folders.
-  [David Jennes](https://github.com/djbe), [#199](https://github.com/AliSoftware/SwiftGen/pull/199)
+  ensuring that the parser correctly handles namespaced folders.  
+  [David Jennes](https://github.com/djbe)
+  [#199](https://github.com/AliSoftware/SwiftGen/pull/199)
 
 ## 3.0.1
 
