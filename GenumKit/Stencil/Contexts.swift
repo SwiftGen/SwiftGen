@@ -5,17 +5,6 @@
 //
 
 import Stencil
-fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
 
 private func uppercaseFirst(_ string: String) -> String {
   guard let first = string.characters.first else {
@@ -61,7 +50,7 @@ extension ColorsFileParser {
         "blue" : comps[2],
         "alpha": comps[3],
       ]
-    }).sorted { $0["name"] < $1["name"] }
+    }).sorted { $0["name"] ?? "" < $1["name"] ?? "" }
     return Context(dictionary: ["enumName": enumName, "colors": colorMap], namespace: GenumNamespace())
   }
 }
@@ -205,8 +194,15 @@ extension StringsFileParser {
       }
     }
 
-    let strings = entries.sorted() { $0.key < $1.key }.map { entryToStringMapper($0, []) }
-    let structuredStrings = structure(entries, mapper: entryToStringMapper, currentLevel: 0, maxLevel: 5)
+    let strings = entries
+        .sorted() { $0.key < $1.key }
+        .map { entryToStringMapper($0, []) }
+    let structuredStrings = structure(
+        entries: entries,
+        usingMapper: entryToStringMapper,
+        currentLevel: 0,
+        maxLevel: 5
+    )
 
     return Context(dictionary:
       [
@@ -226,9 +222,9 @@ extension StringsFileParser {
 
   typealias Mapper = (_ entry: Entry, _ keyPath: [String]) -> [String: Any]
   fileprivate func structure(
-    _ entries: [Entry],
-    keyPath: [String] = [],
-    mapper: @escaping Mapper,
+    entries: [Entry],
+    atKeyPath keyPath: [String] = [],
+    usingMapper mapper: @escaping Mapper,
     currentLevel: Int,
     maxLevel: Int) -> [String: Any] {
 
@@ -266,12 +262,18 @@ extension StringsFileParser {
         Array($0.keyStructure.map(normalize).prefix(nextLevelKeyPath.count)) == nextLevelKeyPath.map(normalize)
       }
       if currentLevel >= maxLevel {
-        subenums.append(flattenedStrings(entries, keyPath: nextLevelKeyPath, mapper: mapper, level: currentLevel+1))
+        subenums.append(
+            flattenedStrings(fromEnteries: entries,
+                             atKeyPath: nextLevelKeyPath,
+                             usingMapper: mapper,
+                             level: currentLevel+1
+            )
+        )
       } else {
         subenums.append(
-            structure(entriesInKeyPath,
-                      keyPath: nextLevelKeyPath,
-                      mapper: mapper,
+            structure(entries: entriesInKeyPath,
+                      atKeyPath: nextLevelKeyPath,
+                      usingMapper: mapper,
                       currentLevel: currentLevel+1,
                       maxLevel: maxLevel)
         )
@@ -286,9 +288,9 @@ extension StringsFileParser {
   }
 
   fileprivate func flattenedStrings(
-    _ entries: [Entry],
-    keyPath: [String],
-    mapper: @escaping Mapper,
+    fromEnteries entries: [Entry],
+    atKeyPath keyPath: [String],
+    usingMapper mapper: @escaping Mapper,
     level: Int) -> [String: Any] {
 
     var structuredStrings: [String: Any] = [:]
@@ -328,7 +330,7 @@ extension FontsFileParser {
           "style" : font.style,
           "fontName" : font.postScriptName
         ]
-      }.sorted { $0["fontName"] < $1["fontName"] }
+      }.sorted { $0["fontName"] ?? "" < $1["fontName"] ?? "" }
       // Family
       return [
         "name" : name,

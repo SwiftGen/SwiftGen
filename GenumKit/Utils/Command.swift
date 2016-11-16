@@ -27,7 +27,6 @@ struct Command {
     task.launch()
 
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
-
     return data
   }
 }

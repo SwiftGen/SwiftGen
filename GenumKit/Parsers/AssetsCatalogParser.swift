@@ -24,7 +24,6 @@ public final class AssetsCatalogParser {
 
   public func parseCatalog(at path: String) {
     guard let items = loadAssetCatalog(at: path) else { return }
-
     // process recursively
     processCatalog(items: items)
   }
@@ -57,9 +56,9 @@ extension AssetsCatalogParser {
 
         if let providesNamespace = item[AssetCatalog.providesNamespace.rawValue] as? NSNumber,
             providesNamespace.boolValue {
-            processCatalog(items: children, withPrefix: "\(prefix)\(filename)/")
+          processCatalog(items: children, withPrefix: "\(prefix)\(filename)/")
         } else {
-            processCatalog(items: children, withPrefix: prefix)
+          processCatalog(items: children, withPrefix: prefix)
         }
       }
     }
@@ -69,13 +68,13 @@ extension AssetsCatalogParser {
 // MARK: - ACTool
 
 extension AssetsCatalogParser {
-  fileprivate func loadAssetCatalog(at path: String) -> [[String: AnyObject]]? {
+  fileprivate func loadAssetCatalog(at path: String) -> [[String : AnyObject]]? {
     let command = Command("xcrun", arguments: "actool", "--print-contents", path)
-    let output = command.execute()
+    let output = command.execute() as Data
 
     // try to parse plist
     guard let plist = try? PropertyListSerialization
-        .propertyList(from: output as Data, format: nil) else { return nil }
+        .propertyList(from: output, format: nil) else { return nil }
 
     // get first parsed catalog
     guard let contents = plist as? [String: AnyObject],

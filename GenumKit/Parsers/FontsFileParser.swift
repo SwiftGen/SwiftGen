@@ -35,8 +35,8 @@ public func == (lhs: Font, rhs: Font) -> Bool {
 // MARK: CTFont
 
 extension CTFont {
-  static func parseFontInfo(_ fileURL: URL) -> [Font] {
-    let descs = CTFontManagerCreateFontDescriptorsFromURL(fileURL as CFURL) as NSArray?
+  static func parseFonts(at url: URL) -> [Font] {
+    let descs = CTFontManagerCreateFontDescriptorsFromURL(url as CFURL) as NSArray?
     guard let descRefs = (descs as? [CTFontDescriptor]) else { return [] }
 
     return descRefs.flatMap { (desc) -> Font? in
@@ -57,7 +57,7 @@ public final class FontsFileParser {
 
   public init() {}
 
-  public func parseFonts(_ path: String) {
+  public func parseFile(at path: String) {
     let url = URL(fileURLWithPath: path)
     if let dirEnum = FileManager.default.enumerator(at: url,
       includingPropertiesForKeys: [],
@@ -71,7 +71,7 @@ public final class FontsFileParser {
             continue
           }
           guard UTTypeConformsTo(uti as CFString, "public.font" as CFString) else { continue }
-          let fonts = CTFont.parseFontInfo(file)
+          let fonts = CTFont.parseFonts(at: file)
 
           fonts.forEach { addFont($0) }
         }

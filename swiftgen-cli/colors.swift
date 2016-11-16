@@ -22,19 +22,19 @@ let colorsCommand = command(
   switch path.`extension` {
   case "clr"?:
     let clrParser = ColorsCLRFileParser()
-    clrParser.parseFile(filePath)
+    clrParser.parseFile(at: filePath)
     parser = clrParser
   case "txt"?:
     let textParser = ColorsTextFileParser()
-    try textParser.parseFile(filePath)
+    try textParser.parseFile(at: filePath)
     parser = textParser
   case "xml"?:
     let textParser = ColorsXMLFileParser()
-    try textParser.parseFile(filePath)
+    try textParser.parseFile(at: filePath)
     parser = textParser
   case "json"?:
     let textParser = ColorsJSONFileParser()
-    try textParser.parseFile(filePath)
+    try textParser.parseFile(at: filePath)
     parser = textParser
   default:
     throw ArgumentError.invalidType(value: filePath, type: "CLR, TXT, XML or JSON file", argument: nil)

@@ -11,7 +11,6 @@ enum FilterError: Error {
 }
 
 struct StringFilters {
-//<<<<<<< ebeba437e22a83ec8eda50e505a4779c9d9dc5cd
   fileprivate static let reservedKeywords = ["associatedtype", "class", "deinit", "enum", "extension",
                                          "fileprivate", "func", "import", "init", "inout", "internal",
                                          "let", "open", "operator", "private", "protocol", "public",

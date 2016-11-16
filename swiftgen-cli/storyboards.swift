@@ -23,9 +23,9 @@ let storyboardsCommand = command(
 ) { output, templateName, templatePath, sceneEnumName, segueEnumName, extraImports, path in
   let parser = StoryboardParser()
   if path.`extension` == "storyboard" {
-    parser.addStoryboardAtPath(String(describing: path))
+    parser.addStoryboard(atPath: String(describing: path))
   } else {
-    parser.parseDirectory(String(describing: path))
+    parser.parseDirectory(at: String(describing: path))
   }
 
   do {

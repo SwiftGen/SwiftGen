@@ -86,7 +86,7 @@ public final class StoryboardParser {
     }
   }
 
-  public func addStoryboardAtPath(_ path: String) {
+  public func addStoryboard(atPath path: String) {
     let parser = XMLParser(contentsOf: URL(fileURLWithPath: path))
 
     let delegate = ParserDelegate()
@@ -99,11 +99,11 @@ public final class StoryboardParser {
     storyboardsSegues[storyboardName] = delegate.segues
   }
 
-  public func parseDirectory(_ path: String) {
+  public func parseDirectory(at path: String) {
     if let dirEnum = FileManager.default.enumerator(atPath: path) {
       while let subPath = dirEnum.nextObject() as? NSString {
         if subPath.pathExtension == "storyboard" {
-          self.addStoryboardAtPath((path as NSString).appendingPathComponent(subPath as String))
+          self.addStoryboard(atPath: (path as NSString).appendingPathComponent(subPath as String))
         }
       }
     }

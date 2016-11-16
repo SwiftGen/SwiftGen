@@ -15,11 +15,11 @@ open class GenumTemplate: Template {
   }
 
   open override func render(_ context: Context? = nil) throws -> String {
-    return try removeExtraLines(super.render(context))
+    return try removeExtraLines(from: super.render(context))
   }
 
   // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
-  fileprivate func removeExtraLines(_ str: String) -> String {
+  fileprivate func removeExtraLines(from str: String) -> String {
     let extraLinesRE: NSRegularExpression = {
       do {
         return try NSRegularExpression(pattern: "\\n([ \\t]*\\n)+", options: [])
