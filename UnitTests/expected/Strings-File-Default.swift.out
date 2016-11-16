@@ -19,6 +19,8 @@ enum L10n {
   case BananasOwner(Int, String)
   /// These are %3$@'s %1$d %2$@.
   case ObjectOwnership(Int, String, String)
+  /// Some Reserved Keyword there
+  case SettingsNavigationBarSelf
   /// Settings
   case SettingsNavigationBarTitleEvenDeeper
   /// User Profile Settings
@@ -47,6 +49,8 @@ extension L10n: CustomStringConvertible {
         return L10n.tr("bananas.owner", p0, p1)
       case .ObjectOwnership(let p0, let p1, let p2):
         return L10n.tr("ObjectOwnership", p0, p1, p2)
+      case .SettingsNavigationBarSelf:
+        return L10n.tr("settings.navigation-bar.self")
       case .SettingsNavigationBarTitleEvenDeeper:
         return L10n.tr("settings.navigation-bar.title.even.deeper")
       case .SETTINGSUSERPROFILESECTIONHEADERTITLE:

@@ -55,5 +55,6 @@ public class GenumNamespace: Namespace {
     self.registerFilter("hexToInt", filter: NumFilters.hexToInt)
     self.registerFilter("int255toFloat", filter: NumFilters.int255toFloat)
     self.registerFilter("percent", filter: NumFilters.percent)
+    self.registerFilter("escapeReservedKeywords", filter: StringFilters.escapeReservedKeywords)
   }
 }
