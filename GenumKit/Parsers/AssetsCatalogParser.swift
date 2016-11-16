@@ -46,7 +46,7 @@ extension AssetsCatalogParser {
       guard let filename = item[AssetCatalog.filename.rawValue] as? String else { continue }
       let path = Path(filename)
 
-      if path.`extension` == AssetsCatalogParser.ImageSetExtension {
+      if path.`extension` == AssetsCatalogParser.imageSetExtension {
         // this is a simple imageset
         let imageName = path.lastComponentWithoutExtension
         addImageName("\(prefix)\(imageName)")
