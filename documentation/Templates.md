@@ -75,6 +75,7 @@ Additionally to the nodes and filters provided by Stencil, SwiftGen provides som
 | `lowerFirstWord` | Lowercases the first word of a camelCase text; for example transforms `FooBar` to `fooBar` and `URLChooserController` to `urlChooserController`. |
 | `snakeToCamelCase` | Transforms snake_case (using an underscore to separate words, like `foo_bar_baz`) to CamelCase (`FooBarBaz`). |
 | `titlecase` | Uppercases the first letter of a string. This is quite similar to the `capitalize` filter bundled with Stencil, but doesn't force-lowercase the other letters, so while `fooBarBaz|capitalize` will return `Foobarbaz`, `fooBarBaz|titlecase` with return `FooBarBaz`. |
+| `escapeReservedKeywords` | Checks if the string is one of the reserved keywords and if so, escapes it using backticks. While given `foo_bar` it would return `foo_bar`, given `static`, it would return `\`static\``. |
 
 See also [the `GenumKit.GenumTemplate` source code](https://github.com/AliSoftware/SwiftGen/blob/master/GenumKit/Stencil/GenumTemplate.swift#L35-L42) and [the files in `GenumKit/Stencil`](https://github.com/AliSoftware/SwiftGen/tree/master/GenumKit/Stencil).
 

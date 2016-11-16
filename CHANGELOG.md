@@ -18,6 +18,9 @@
 * Remove the `key` param label from the `tr` function for Localized String in the swift3 template.  
   [AndrewSB](https://github.com/AndrewSB)
   [#190](https://github.com/AliSoftware/SwiftGen/pull/190)
+* Escape reserved swift keywords in the structured and dot-syntax generated strings code.  
+  [Afonso](https://github.com/afonsograca)
+  [#198](https://github.com/AliSoftware/SwiftGen/pull/198)
 * The `swiftgen images` command now uses the `actool` utility to parse asset catalogs,
   ensuring that the parser correctly handles namespaced folders.  
   [David Jennes](https://github.com/djbe)
