@@ -34,7 +34,7 @@ class StoryboardsiOSTests: XCTestCase {
 
   func testMessageStoryboardWithDefaults() {
     let parser = StoryboardParser()
-    parser.addStoryboard(atPath: self.fixturePath("Message.storyboard", subDirectory: StoryboardsDir.iOS))
+    parser.addStoryboard(at: self.fixturePath("Message.storyboard", subDirectory: StoryboardsDir.iOS))
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -45,7 +45,7 @@ class StoryboardsiOSTests: XCTestCase {
 
   func testMessageStoryboardWithLowercaseTemplate() {
     let parser = StoryboardParser()
-    parser.addStoryboard(atPath: self.fixturePath("Message.storyboard", subDirectory: StoryboardsDir.iOS))
+    parser.addStoryboard(at: self.fixturePath("Message.storyboard", subDirectory: StoryboardsDir.iOS))
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-lowercase.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -56,7 +56,7 @@ class StoryboardsiOSTests: XCTestCase {
 
   func testAnonymousStoryboardWithDefaults() {
     let parser = StoryboardParser()
-    parser.addStoryboard(atPath: self.fixturePath("Anonymous.storyboard", subDirectory: StoryboardsDir.iOS))
+    parser.addStoryboard(at: self.fixturePath("Anonymous.storyboard", subDirectory: StoryboardsDir.iOS))
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -91,7 +91,7 @@ class StoryboardsiOSTests: XCTestCase {
 
   func testAnonymousStoryboardWithSwift3() {
     let parser = StoryboardParser()
-    parser.addStoryboard(atPath: self.fixturePath("Anonymous.storyboard", subDirectory: StoryboardsDir.iOS))
+    parser.addStoryboard(at: self.fixturePath("Anonymous.storyboard", subDirectory: StoryboardsDir.iOS))
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -102,7 +102,7 @@ class StoryboardsiOSTests: XCTestCase {
 
   func testWizardsStoryboardsWithSwift3() {
     let parser = StoryboardParser()
-    parser.addStoryboard(atPath: self.fixturePath("Wizard.storyboard", subDirectory: StoryboardsDir.iOS))
+    parser.addStoryboard(at: self.fixturePath("Wizard.storyboard", subDirectory: StoryboardsDir.iOS))
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -113,7 +113,7 @@ class StoryboardsiOSTests: XCTestCase {
 
   func testAdditionalImport() {
     let parser = StoryboardParser()
-    parser.addStoryboard(atPath: self.fixturePath("AdditionalImport.storyboard", subDirectory: StoryboardsDir.iOS))
+    parser.addStoryboard(at: self.fixturePath("AdditionalImport.storyboard", subDirectory: StoryboardsDir.iOS))
 
     // additional import statements
     let extraImports = [
@@ -146,7 +146,7 @@ class StoryboardsOSXTests: XCTestCase {
 
   func testOSXMessageStoryboardWithDefaults() {
     let parser = StoryboardParser()
-    parser.addStoryboard(atPath: self.fixturePath("Message-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+    parser.addStoryboard(at: self.fixturePath("Message-osx.storyboard", subDirectory: StoryboardsDir.macOS))
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -157,7 +157,7 @@ class StoryboardsOSXTests: XCTestCase {
 
   func testOSXMessageStoryboardWithLowercaseTemplate() {
     let parser = StoryboardParser()
-    parser.addStoryboard(atPath: self.fixturePath("Message-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+    parser.addStoryboard(at: self.fixturePath("Message-osx.storyboard", subDirectory: StoryboardsDir.macOS))
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-lowercase.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -168,7 +168,7 @@ class StoryboardsOSXTests: XCTestCase {
 
   func testOSXAnonymousStoryboardWithDefaults() {
     let parser = StoryboardParser()
-    parser.addStoryboard(atPath: self.fixturePath("Anonymous-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+    parser.addStoryboard(at: self.fixturePath("Anonymous-osx.storyboard", subDirectory: StoryboardsDir.macOS))
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -191,7 +191,7 @@ class StoryboardsOSXTests: XCTestCase {
 
 	func testAdditionalImport() {
 		let parser = StoryboardParser()
-		parser.addStoryboard(atPath: self.fixturePath("AdditionalImport-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+		parser.addStoryboard(at: self.fixturePath("AdditionalImport-osx.storyboard", subDirectory: StoryboardsDir.macOS))
 
 		// additional import statements
 		let extraImports = [

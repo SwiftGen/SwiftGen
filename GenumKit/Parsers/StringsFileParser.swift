@@ -80,8 +80,8 @@ public final class StringsFileParser {
       }
     }
 
-    public static func placeholders(fromFormatString str: String) -> [PlaceholderType] {
-      return StringsFileParser.placeholders(fromFormatString:  str)
+    public static func placeholders(fromFormat str: String) -> [PlaceholderType] {
+      return StringsFileParser.placeholders(fromFormat:  str)
     }
   }
 
@@ -104,7 +104,7 @@ public final class StringsFileParser {
     }
 
     public init(key: String, translation: String) {
-      let types = PlaceholderType.placeholders(fromFormatString: translation)
+      let types = PlaceholderType.placeholders(fromFormat: translation)
       self.init(key: key, translation: translation, types: types)
     }
   }
@@ -134,7 +134,7 @@ public final class StringsFileParser {
   }()
 
   // "I give %d apples to %@" --> [.Int, .String]
-  fileprivate static func placeholders(fromFormatString formatString: String) -> [PlaceholderType] {
+  fileprivate static func placeholders(fromFormat formatString: String) -> [PlaceholderType] {
     let range = NSRange(location: 0, length: (formatString as NSString).length)
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier
