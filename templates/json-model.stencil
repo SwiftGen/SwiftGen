@@ -10,12 +10,13 @@ public final class {{ spec.type }}: DataModel, Equatable {
    {{ field.doc }}
    */
 {% endif %}
-  public let {{ field.name }}: {{field|paramType}}
+  public let {{ field.name }}: {% ifstrequal "array" field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% endif %}{% if field.optional %}?{% endif %}
 {% endfor %}
 
   // MARK: Initializers
 
-  public init({{ spec.fields|paramList|join }}) {
+{% map spec.fields with field set params %}{{ field.name }}: {% ifstrequal "array" field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% endif %}{% if field.optional %}?{% endif %}{% endmap %}
+  public init({{ params|join }}) {
 {% for field in spec.fields %}
     self.{{ field.name }} = {{ field.name }}
 {% endfor %}
@@ -96,7 +97,7 @@ public final class {{ spec.type }}: DataModel, Equatable {
 
   public final class Builder {
 {% for field in spec.fields %}
-    public var {{ field.name }}: {{field|paramType}}
+    public var {{ field.name }}: {% ifstrequal "array" field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% endif %}{% if field.optional %}?{% endif %}
 {% endfor %}
 
     public init(copy: {{spec.type}}) {
@@ -105,12 +106,14 @@ public final class {{ spec.type }}: DataModel, Equatable {
 {% endfor %}
     }
 
+{% map spec.fields with field set initializerList %}{{ field.name }}: {{ field.name }}{% endmap %}
     public func build() -> {{spec.type}} {
-      return {{spec.type}}({{ spec.fields|initializerList|join }})
+      return {{spec.type}}({{ initializerList|join }})
     }
   }
 }
 
+{% map spec.fields with field set equalityList %}lhs.{{ field.name }} == rhs.{{ field.name }}{% endmap %}
 public func ==(lhs: {{spec.type}}, rhs: {{spec.type}}) -> Bool {
-  return {{ spec.fields|equalityList|join&& }}
+  return {{ equalityList|join&& }}
 }
