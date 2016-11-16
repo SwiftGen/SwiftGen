@@ -15,6 +15,8 @@ enum L10n {
 
     case NavigationBar(NavigationBarL10n)
     enum NavigationBarL10n {
+      /// Some Reserved Keyword there
+      case `Self`
 
       case Title(TitleL10n)
       enum TitleL10n {
@@ -50,6 +52,8 @@ extension L10n: CustomStringConvertible {
           case .NavigationBar(let level2key):
 
             switch level2key {
+              case .`Self`:
+                return L10n.tr("settings.navigation-bar.self")
               case .Title(let level3key):
 
                 switch level3key {
