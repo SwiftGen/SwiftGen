@@ -84,7 +84,7 @@ private func identifierCharacterSets() -> (head: NSMutableCharacterSet, tail: NS
 }
 // swiftlint:enable function_body_length
 
-func swiftIdentifier(fromString string: String,
+func swiftIdentifier(from string: String,
                      forbiddenChars exceptions: String = "",
                      replaceWithUnderscores underscores: Bool = false) -> String {
 

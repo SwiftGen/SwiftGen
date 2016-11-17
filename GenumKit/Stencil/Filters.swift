@@ -30,7 +30,7 @@ struct StringFilters {
 
   static func stringToSwiftIdentifier(value: Any?) throws -> Any? {
     guard let value = value as? String else { throw FilterError.invalidInputType }
-    return swiftIdentifier(fromString: value, replaceWithUnderscores: true)
+    return swiftIdentifier(from: value, replaceWithUnderscores: true)
   }
 
   /* - If the string starts with only one uppercase letter, lowercase that first letter
