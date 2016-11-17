@@ -40,7 +40,7 @@ struct FontFamily {
 // Using the UIFont constructor…
 let helvetica = UIFont(font: FontFamily.Helvetica.Regular, size: 20.0)
 // Or using the enum value and its `font` method
-let helveticaNeue = FontFamily.HelveticaNeue.Regular.font(20.0)
+let helveticaNeue = FontFamily.HelveticaNeue.Regular.font(size: 20.0)
 
-let helveticaBoldBig = FontFamily.Helvetica.Bold.font(100.0)
+let helveticaBoldBig = FontFamily.Helvetica.Bold.font(size: 100.0)
 let helveticaNeueBoldSmall = UIFont(font: FontFamily.HelveticaNeue.Bold, size: 8.0)

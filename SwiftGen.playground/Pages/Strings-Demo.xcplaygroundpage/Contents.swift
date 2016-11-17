@@ -13,50 +13,46 @@
 import Foundation
 
 enum L10n {
-    case AlertTitle
-    case AlertMessage
-    case Greetings(String, Int)
-    case ApplesCount(Int)
-    case BananasOwner(Int, String)
-    case ObjectOwnership(Int, String, String)
+    case alertTitle
+    case alertMessage
+    case greetings(String, Int)
+    case applesCount(Int)
+    case bananasOwner(Int, String)
+    case objectOwnership(Int, String, String)
 }
 
-extension L10n: CustomStringConvertible {
+xtension L10n: CustomStringConvertible {
     var description: String { return self.string }
 
     var string: String {
         switch self {
-        case .AlertTitle:
-            return L10n.tr("alert_title")
-        case .AlertMessage:
-            return L10n.tr("alert_message")
-        case .Greetings(let p0, let p1):
-            return L10n.tr("greetings", p0, p1)
-        case .ApplesCount(let p0):
-            return L10n.tr("apples.count", p0)
-        case .BananasOwner(let p0, let p1):
-            return L10n.tr("bananas.owner", p0, p1)
-        case .ObjectOwnership(let p0, let p1, let p2):
-            return L10n.tr("object.ownership", p0, p1, p2)
+        case .alertTitle:
+            return L10n.tr(key: "alert_title")
+        case .alertMessage:
+            return L10n.tr(key: "alert_message")
+        case .greetings(let p0, let p1):
+            return L10n.tr(key: "greetings", p0, p1)
+        case .applesCount(let p0):
+            return L10n.tr(key: "apples.count", p0)
+        case .bananasOwner(let p0, let p1):
+            return L10n.tr(key: "bananas.owner", p0, p1)
         }
     }
 
-    private static func tr(key: String, _ args: CVarArgType...) -> String {
+    private static func tr(key: String, _ args: CVarArg...) -> String {
         let format = NSLocalizedString(key, comment: "")
-        return String(format: format, arguments: args)
+        return String(format: format, locale: Locale.current, arguments: args)
     }
 }
 
-func tr(key: L10n) -> String {
+func tr(_ key: L10n) -> String {
     return key.string
 }
-
-
 //: #### Usage example
 
-let alertTitle = tr(.AlertTitle)
-let hello1 = tr(.Greetings("David", 29))
-let hello2 = L10n.Greetings("Olivier", 32) // Prints as a string in the console because it's CustomStringConvertible
+let alertTitle = tr(.alertTitle)
+let hello1 = tr(.greetings("David", 29))
+let hello2 = L10n.greetings("Olivier", 32) // Prints as a string in the console because it's CustomStringConvertible
 
 // note the inversion of parameters' order due to usage of %1$d, %2$@ and %1$@ in Localizable.strings
-tr(.ObjectOwnership(3, "Apples", "John"))
+tr(.objectOwnership(3, "Apples", "John"))

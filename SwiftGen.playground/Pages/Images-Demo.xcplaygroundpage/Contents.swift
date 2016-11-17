@@ -13,8 +13,8 @@
 import UIKit
 
 enum Asset: String {
-    case Apple = "Apple"
-    case Banana = "Banana"
+    case apple = "Apple"
+    case banana = "Banana"
 
     var image: UIImage {
         return UIImage(asset: self)
@@ -30,6 +30,6 @@ extension UIImage {
 
 //: #### Usage Example
 
-let image = UIImage(asset: .Apple)
+let image = UIImage(asset: .apple)
 
-Asset.Banana.image
+Asset.banana.image
