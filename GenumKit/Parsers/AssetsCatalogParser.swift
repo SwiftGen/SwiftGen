@@ -8,15 +8,17 @@ import Foundation
 import PathKit
 
 public final class AssetsCatalogParser {
-  var imageNames = [String]()
+  var entries = [Entry]()
 
   public init() {}
 
   public func addImageName(name: String) -> Bool {
-    if imageNames.contains(name) {
+    let entry = Entry(name: name)
+
+    if (entries.contains { $0.name == name }) {
       return false
     } else {
-      imageNames.append(name)
+      entries.append(Entry(name: name))
       return true
     }
   }
@@ -25,7 +27,17 @@ public final class AssetsCatalogParser {
     guard let items = loadAssetCatalogContents(path) else { return }
 
     // process recursively
-    process(items)
+    entries = process(items)
+  }
+
+  struct Entry {
+    var name: String
+    var items: [Entry]?
+
+    init(name: String, items: [Entry]? = nil) {
+      self.name = name
+      self.items = items
+    }
   }
 }
 
@@ -41,7 +53,9 @@ private enum AssetCatalog: String {
 extension AssetsCatalogParser {
   static let imageSetExtension = "imageset"
 
-  private func process(items: [[String: AnyObject]], prefix: String = "") {
+  private func process(items: [[String: AnyObject]]) -> [Entry] {
+    var result = [Entry]()
+
     for item in items {
       guard let filename = item[AssetCatalog.filename.rawValue] as? String else { continue }
       let path = Path(filename)
@@ -49,18 +63,22 @@ extension AssetsCatalogParser {
       if path.`extension` == AssetsCatalogParser.imageSetExtension {
         // this is a simple imageset
         let imageName = path.lastComponentWithoutExtension
-        addImageName("\(prefix)\(imageName)")
+
+        result += [Entry(name: imageName)]
       } else {
         // this is a group/folder
         let children = item[AssetCatalog.children.rawValue] as? [[String: AnyObject]] ?? []
+        let processed = process(children)
 
         if let providesNamespace = item[AssetCatalog.providesNamespace.rawValue] as? NSNumber where providesNamespace.boolValue {
-          process(children, prefix: "\(prefix)\(filename)/")
+          result += [Entry(name: filename, items: processed)]
         } else {
-          process(children, prefix: prefix)
+          result += processed
         }
       }
     }
+
+    return result
   }
 }
 

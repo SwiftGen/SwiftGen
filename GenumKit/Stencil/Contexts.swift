@@ -62,7 +62,31 @@ extension ColorsFileParser {
 */
 extension AssetsCatalogParser {
   public func stencilContext(enumName enumName: String = "Asset") -> Context {
-    return Context(dictionary: ["enumName": enumName, "images": imageNames], namespace: GenumNamespace())
+    let images = flatten(entries)
+
+    return Context(
+      dictionary: [
+        "enumName": enumName,
+        "images": images
+      ],
+      namespace: GenumNamespace()
+    )
+  }
+
+  func flatten(entries: [Entry]) -> [String] {
+    var result = [String]()
+
+    for entry in entries {
+      if let items = entry.items {
+        result += flatten(items).map { item in
+          return "\(entry.name)/\(item)"
+        }
+      } else {
+        result += [entry.name]
+      }
+    }
+
+    return result
   }
 }
 
