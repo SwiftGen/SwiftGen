@@ -106,28 +106,6 @@ public final class StringsFileParser {
       let types = PlaceholderType.fromFormatString(translation)
       self.init(key: key, translation: translation, types: types)
     }
-
-    private static let lineRegEx: NSRegularExpression = {
-      do {
-        return try NSRegularExpression(pattern: "^\"([^\"]+)\"[ \t]*=[ \t]*\"(.*)\"[ \t]*;", options: [])
-      } catch {
-        fatalError("Error while building Regular Expression for strings file parsing")
-      }
-    }()
-
-    public init?(line: String) {
-      let range = NSRange(location: 0, length: (line as NSString).length)
-      if let match = Entry.lineRegEx.firstMatchInString(line, options: [], range: range) {
-        let key = (line as NSString).substringWithRange(match.rangeAtIndex(1))
-
-        let translation = (line as NSString).substringWithRange(match.rangeAtIndex(2))
-        let types = PlaceholderType.fromFormatString(translation)
-
-        self = Entry(key: key, translation: translation, types: types)
-      } else {
-        return nil
-      }
-    }
   }
 
 

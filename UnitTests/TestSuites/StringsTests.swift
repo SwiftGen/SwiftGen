@@ -37,22 +37,6 @@ class StringsTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
 
-  func testLinesWithDefaults() {
-    let parser = StringsFileParser()
-    if let e = StringsFileParser.Entry(line: "\"AppTitle\"    =   \"My awesome title\"  ; // Yeah") {
-      parser.addEntry(e)
-    }
-    if let e = StringsFileParser.Entry(line: "\"GreetingsAndAge\"=\"My name is %@, I am %d\";/* hello */") {
-      parser.addEntry(e)
-    }
-
-    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
-    let result = try! template.render(parser.stencilContext())
-
-    let expected = self.fixtureString("Strings-Lines-Default.swift.out")
-    XCTDiffStrings(result, expected)
-  }
-
   func testFileWithDefaults() {
     let parser = StringsFileParser()
     try! parser.parseStringsFile(fixturePath("Localizable.strings"))
