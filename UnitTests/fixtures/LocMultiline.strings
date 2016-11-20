@@ -1,0 +1,7 @@
+"SINGLELINE" = "single line";
+"MULTILINE" = "multi\
+line";
+"MULTILINE2" = "another\
+multi\
+    line";
+"SINGLELINE2"     = "another single line";

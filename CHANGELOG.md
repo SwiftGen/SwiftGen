@@ -4,6 +4,9 @@
 
 ## unreleased
 
+* Add support for multiline string in *.strings file.  
+  [Jeong Yonguk](https://github.com/alldne)
+  [#192](https://github.com/AliSoftware/SwiftGen/pull/192)
 * Change swift 3 storyboard segue template's sender from `AnyObject` to `Any`.  
   [Derek Ostrander](https://github.com/dostrander)
   [#197](https://github.com/AliSoftware/SwiftGen/pull/197)

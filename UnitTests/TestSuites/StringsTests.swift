@@ -64,6 +64,17 @@ class StringsTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
 
+  func testMultiline() {
+    let parser = StringsFileParser()
+    try! parser.parseStringsFile(fixturePath("LocMultiline.strings"))
+
+    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
+    let result = try! template.render(parser.stencilContext())
+
+    let expected = self.fixtureString("Strings-Multiline.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+
   func testUTF8FileWithDefaults() {
     let parser = StringsFileParser()
     try! parser.parseStringsFile(fixturePath("LocUTF8.strings"))
