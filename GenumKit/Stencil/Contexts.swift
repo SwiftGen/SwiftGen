@@ -186,7 +186,7 @@ extension StringsFileParser {
       }
     }
 
-    let strings = entries.map { entryToStringMapper($0, []) }
+    let strings = entries.sort { $0.key < $1.key }.map { entryToStringMapper($0, []) }
     let structuredStrings = structure(entries, mapper: entryToStringMapper, currentLevel: 0, maxLevel: 5)
 
     return Context(dictionary:

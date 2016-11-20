@@ -5,26 +5,26 @@ import Foundation
 // swiftlint:disable line_length
 
 enum L10n {
-  /// Title of the alert
-  case AlertTitle
+  /// These are %3$@'s %1$d %2$@.
+  case ObjectOwnership(Int, String, String)
+  /// User Profile Settings
+  case SETTINGSUSERPROFILESECTIONHEADERTITLE
   /// Some alert body there
   case AlertMessage
-  /// Hello, my name is %@ and I'm %d
-  case Greetings(String, Int)
+  /// Title of the alert
+  case AlertTitle
   /// You have %d apples
   case ApplesCount(Int)
   /// Those %d bananas belong to %@.
   case BananasOwner(Int, String)
-  /// These are %3$@'s %1$d %2$@.
-  case ObjectOwnership(Int, String, String)
+  /// Hello, my name is %@ and I'm %d
+  case Greetings(String, Int)
+  /// Here you can change some user profile settings.
+  case SeTTingsUSerProFileSectioNFooterText
   /// Some Reserved Keyword there
   case SettingsNavigationBarSelf
   /// Settings
   case SettingsNavigationBarTitleEvenDeeper
-  /// User Profile Settings
-  case SETTINGSUSERPROFILESECTIONHEADERTITLE
-  /// Here you can change some user profile settings.
-  case SeTTingsUSerProFileSectioNFooterText
   /// DeepSettings
   case SettingsNavigationBarTitleEvenDeeperThanWeCanHandle
 }
@@ -34,35 +34,35 @@ extension L10n: CustomStringConvertible {
 
   var string: String {
     switch self {
-      case .AlertTitle:
-        let format = NSLocalizedString("alert_title", comment: "")
+      case .ObjectOwnership(let p0, let p1, let p2):
+        let format = NSLocalizedString("ObjectOwnership", comment: "")
+        return L10n.tr(format, p0, p1, p2)
+      case .SETTINGSUSERPROFILESECTIONHEADERTITLE:
+        let format = NSLocalizedString("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE", comment: "")
         return L10n.tr(format)
       case .AlertMessage:
         let format = NSLocalizedString("alert_message", comment: "")
         return L10n.tr(format)
-      case .Greetings(let p0, let p1):
-        let format = NSLocalizedString("greetings", comment: "")
-        return L10n.tr(format, p0, p1)
+      case .AlertTitle:
+        let format = NSLocalizedString("alert_title", comment: "")
+        return L10n.tr(format)
       case .ApplesCount(let p0):
         let format = NSLocalizedString("apples.count", comment: "")
         return L10n.tr(format, p0)
       case .BananasOwner(let p0, let p1):
         let format = NSLocalizedString("bananas.owner", comment: "")
         return L10n.tr(format, p0, p1)
-      case .ObjectOwnership(let p0, let p1, let p2):
-        let format = NSLocalizedString("ObjectOwnership", comment: "")
-        return L10n.tr(format, p0, p1, p2)
+      case .Greetings(let p0, let p1):
+        let format = NSLocalizedString("greetings", comment: "")
+        return L10n.tr(format, p0, p1)
+      case .SeTTingsUSerProFileSectioNFooterText:
+        let format = NSLocalizedString("seTTings.uSer-proFile-sectioN.footer_text", comment: "")
+        return L10n.tr(format)
       case .SettingsNavigationBarSelf:
         let format = NSLocalizedString("settings.navigation-bar.self", comment: "")
         return L10n.tr(format)
       case .SettingsNavigationBarTitleEvenDeeper:
         let format = NSLocalizedString("settings.navigation-bar.title.even.deeper", comment: "")
-        return L10n.tr(format)
-      case .SETTINGSUSERPROFILESECTIONHEADERTITLE:
-        let format = NSLocalizedString("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE", comment: "")
-        return L10n.tr(format)
-      case .SeTTingsUSerProFileSectioNFooterText:
-        let format = NSLocalizedString("seTTings.uSer-proFile-sectioN.footer_text", comment: "")
         return L10n.tr(format)
       case .SettingsNavigationBarTitleEvenDeeperThanWeCanHandle:
         let format = NSLocalizedString("settings.navigation-bar.title.even.deeper.than.we.can.handle", comment: "")

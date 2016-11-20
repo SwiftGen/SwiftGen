@@ -7,12 +7,12 @@ import Foundation
 
 // swiftlint:disable type_body_length
 enum L10n {
-  /// single line
-  case SINGLELINE
   /// multi\nline
   case MULTILINE
   /// another\nmulti\n    line
   case MULTILINE2
+  /// single line
+  case SINGLELINE
   /// another single line
   case SINGLELINE2
 }
@@ -23,12 +23,12 @@ extension L10n: CustomStringConvertible {
 
   var string: String {
     switch self {
-      case .SINGLELINE:
-        return L10n.tr("SINGLELINE")
       case .MULTILINE:
         return L10n.tr("MULTILINE")
       case .MULTILINE2:
         return L10n.tr("MULTILINE2")
+      case .SINGLELINE:
+        return L10n.tr("SINGLELINE")
       case .SINGLELINE2:
         return L10n.tr("SINGLELINE2")
     }

@@ -7,26 +7,26 @@ import Foundation
 
 // swiftlint:disable type_body_length
 enum XCTLoc {
-  /// Title of the alert
-  case AlertTitle
+  /// These are %3$@'s %1$d %2$@.
+  case ObjectOwnership(Int, String, String)
+  /// User Profile Settings
+  case SETTINGSUSERPROFILESECTIONHEADERTITLE
   /// Some alert body there
   case AlertMessage
-  /// Hello, my name is %@ and I'm %d
-  case Greetings(String, Int)
+  /// Title of the alert
+  case AlertTitle
   /// You have %d apples
   case ApplesCount(Int)
   /// Those %d bananas belong to %@.
   case BananasOwner(Int, String)
-  /// These are %3$@'s %1$d %2$@.
-  case ObjectOwnership(Int, String, String)
+  /// Hello, my name is %@ and I'm %d
+  case Greetings(String, Int)
+  /// Here you can change some user profile settings.
+  case SeTTingsUSerProFileSectioNFooterText
   /// Some Reserved Keyword there
   case SettingsNavigationBarSelf
   /// Settings
   case SettingsNavigationBarTitleEvenDeeper
-  /// User Profile Settings
-  case SETTINGSUSERPROFILESECTIONHEADERTITLE
-  /// Here you can change some user profile settings.
-  case SeTTingsUSerProFileSectioNFooterText
   /// DeepSettings
   case SettingsNavigationBarTitleEvenDeeperThanWeCanHandle
 }
@@ -37,26 +37,26 @@ extension XCTLoc: CustomStringConvertible {
 
   var string: String {
     switch self {
-      case .AlertTitle:
-        return XCTLoc.tr("alert_title")
+      case .ObjectOwnership(let p0, let p1, let p2):
+        return XCTLoc.tr("ObjectOwnership", p0, p1, p2)
+      case .SETTINGSUSERPROFILESECTIONHEADERTITLE:
+        return XCTLoc.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
       case .AlertMessage:
         return XCTLoc.tr("alert_message")
-      case .Greetings(let p0, let p1):
-        return XCTLoc.tr("greetings", p0, p1)
+      case .AlertTitle:
+        return XCTLoc.tr("alert_title")
       case .ApplesCount(let p0):
         return XCTLoc.tr("apples.count", p0)
       case .BananasOwner(let p0, let p1):
         return XCTLoc.tr("bananas.owner", p0, p1)
-      case .ObjectOwnership(let p0, let p1, let p2):
-        return XCTLoc.tr("ObjectOwnership", p0, p1, p2)
+      case .Greetings(let p0, let p1):
+        return XCTLoc.tr("greetings", p0, p1)
+      case .SeTTingsUSerProFileSectioNFooterText:
+        return XCTLoc.tr("seTTings.uSer-proFile-sectioN.footer_text")
       case .SettingsNavigationBarSelf:
         return XCTLoc.tr("settings.navigation-bar.self")
       case .SettingsNavigationBarTitleEvenDeeper:
         return XCTLoc.tr("settings.navigation-bar.title.even.deeper")
-      case .SETTINGSUSERPROFILESECTIONHEADERTITLE:
-        return XCTLoc.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
-      case .SeTTingsUSerProFileSectioNFooterText:
-        return XCTLoc.tr("seTTings.uSer-proFile-sectioN.footer_text")
       case .SettingsNavigationBarTitleEvenDeeperThanWeCanHandle:
         return XCTLoc.tr("settings.navigation-bar.title.even.deeper.than.we.can.handle")
     }

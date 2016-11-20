@@ -11,18 +11,18 @@ import Foundation
 // swiftlint:disable valid_docs
 
 struct L10n {
-  /// Title of the alert
-  static let alertTitle = L10n.tr("alert_title")
-  /// Some alert body there
-  static let alertMessage = L10n.tr("alert_message")
-  /// Hello, my name is %@ and I'm %d
-  static func greetings(p0: String, p1: Int) -> String {
-    return L10n.tr("greetings", p0, p1)
-  }
   /// These are %3$@'s %1$d %2$@.
   static func objectOwnership(p0: Int, p1: String, p2: String) -> String {
     return L10n.tr("ObjectOwnership", p0, p1, p2)
   }
+  /// Title of the alert
+  static let alertTitle = L10n.tr("alert_title")
+  /// Hello, my name is %@ and I'm %d
+  static func greetings(p0: String, p1: Int) -> String {
+    return L10n.tr("greetings", p0, p1)
+  }
+  /// Some alert body there
+  static let alertMessage = L10n.tr("alert_message")
 
   struct Apples {
     /// You have %d apples

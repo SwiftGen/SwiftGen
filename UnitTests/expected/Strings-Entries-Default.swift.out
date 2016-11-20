@@ -7,10 +7,10 @@ import Foundation
 
 // swiftlint:disable type_body_length
 enum L10n {
-  /// My awesome title
-  case Title
   /// Hello, my name is %@ and I'm %d
   case Greetings(String, Int)
+  /// My awesome title
+  case Title
 }
 // swiftlint:enable type_body_length
 
@@ -19,10 +19,10 @@ extension L10n: CustomStringConvertible {
 
   var string: String {
     switch self {
-      case .Title:
-        return L10n.tr("Title")
       case .Greetings(let p0, let p1):
         return L10n.tr("Greetings", p0, p1)
+      case .Title:
+        return L10n.tr("Title")
     }
   }
 
