@@ -2,7 +2,7 @@
 
 ---
 
-## unreleased
+## 4.0.0
 
 * Add support for multiline string in *.strings file.  
   [Jeong Yonguk](https://github.com/alldne)

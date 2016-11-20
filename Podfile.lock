@@ -1,6 +1,6 @@
 PODS:
   - Commander (0.4.1)
-  - GenumKit (3.0.1):
+  - GenumKit (4.0.0):
     - Stencil (= 0.6.0-beta.1)
   - PathKit (0.6.0)
   - Stencil (0.6.0-beta.1):
@@ -26,7 +26,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Commander: 106cb704180eee0a5f9df2e9dbc090808b564636
-  GenumKit: 41eacec2d0ee737328687a54efcbb7d8ddcec8ac
+  GenumKit: 6b237cc3c14504d8f899aadaea1aa45f5c317476
   PathKit: b224b6d2c4e75b87f08f45e1c0c610a3195c94e5
   Stencil: ab5a29fd8a48d53bb24fb254659f9a1fb36dfe5b
 
