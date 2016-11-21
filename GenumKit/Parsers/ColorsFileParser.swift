@@ -52,7 +52,7 @@ fileprivate func parse(hex hexString: String) throws -> UInt32 {
 // MARK: - Text File Parser
 
 public final class ColorsTextFileParser: ColorsFileParser {
-  public fileprivate(set) var colors = [String : UInt32]()
+  public private(set) var colors = [String : UInt32]()
 
   public init() {}
 
@@ -95,7 +95,7 @@ public final class ColorsTextFileParser: ColorsFileParser {
     return dict
   }
 
-  fileprivate func colorValue(forKey key: String, onDict dict: [String : String]) -> String {
+  private func colorValue(forKey key: String, onDict dict: [String : String]) -> String {
     var currentKey = key
     var stringValue: String = ""
     while let value = dict[currentKey]?.trimmingCharacters(in: CharacterSet.whitespaces) {
@@ -125,7 +125,7 @@ public final class ColorsTextFileParser: ColorsFileParser {
 // MARK: - CLR File Parser
 
 public final class ColorsCLRFileParser: ColorsFileParser {
-  public fileprivate(set) var colors = [String: UInt32]()
+  public private(set) var colors = [String: UInt32]()
 
   public init() {}
 
@@ -162,11 +162,11 @@ public final class ColorsXMLFileParser: ColorsFileParser {
   static let colorTagName = "color"
   static let colorNameAttribute = "name"
 
-  public fileprivate(set) var colors = [String: UInt32]()
+  public private(set) var colors = [String: UInt32]()
 
   public init() {}
 
-  fileprivate class ParserDelegate: NSObject, XMLParserDelegate {
+  private class ParserDelegate: NSObject, XMLParserDelegate {
     var parsedColors = [String: UInt32]()
     var currentColorName: String? = nil
     var currentColorValue: String? = nil
@@ -208,7 +208,7 @@ public final class ColorsXMLFileParser: ColorsFileParser {
 // MARK: - JSON File Parser
 
 public final class ColorsJSONFileParser: ColorsFileParser {
-  public fileprivate(set) var colors = [String: UInt32]()
+  public private(set) var colors = [String: UInt32]()
 
   public init() {}
 

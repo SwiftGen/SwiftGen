@@ -30,7 +30,7 @@ public final class StoryboardParser {
 
   public init() {}
 
-  fileprivate class ParserDelegate: NSObject, XMLParserDelegate {
+  private class ParserDelegate: NSObject, XMLParserDelegate {
     var initialViewControllerObjectID: String?
     var initialScene: InitialScene?
     var scenes = Set<Scene>()

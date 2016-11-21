@@ -20,7 +20,7 @@ open class GenumTemplate: Template {
   }
 
   // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
-  fileprivate func removeExtraLines(from str: String) -> String {
+  private func removeExtraLines(from str: String) -> String {
     let extraLinesRE: NSRegularExpression = {
       do {
         return try NSRegularExpression(pattern: "\\n([ \\t]*\\n)+", options: [])

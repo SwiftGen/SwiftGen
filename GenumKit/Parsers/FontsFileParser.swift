@@ -78,7 +78,7 @@ public final class FontsFileParser {
     }
   }
 
-  fileprivate func addFont(_ font: Font) {
+  private func addFont(_ font: Font) {
     let familyName = font.familyName
     var entry = entries[familyName] ?? []
     entry.insert(font)

@@ -88,7 +88,7 @@ struct StringFilters {
 
   - returns: The string with its first character uppercased, and the rest of the string unchanged.
   */
-  fileprivate static func titlecase(_ string: String) -> String {
+  private static func titlecase(_ string: String) -> String {
     guard let first = string.unicodeScalars.first else { return string }
     return String(first).uppercased() + String(string.unicodeScalars.dropFirst())
   }
