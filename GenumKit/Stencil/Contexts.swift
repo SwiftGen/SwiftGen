@@ -180,9 +180,9 @@ extension StringsFileParser {
           "names": entry.types.indices.map { "p\($0)" },
           "typednames": entry.types.enumerate().map { "p\($0): \($1.rawValue)" }
         ]
-        return ["key": entry.key, "translation": entry.translation.newlineEscaped, "params": params, "keytail": keytail]
+        return ["key": entry.key.newlineEscaped, "translation": entry.translation.newlineEscaped, "params": params, "keytail": keytail]
       } else {
-        return ["key": entry.key, "translation": entry.translation.newlineEscaped, "keytail": keytail]
+        return ["key": entry.key.newlineEscaped, "translation": entry.translation.newlineEscaped, "keytail": keytail]
       }
     }
 
