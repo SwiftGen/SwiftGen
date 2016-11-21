@@ -81,4 +81,15 @@ class ImagesTests: XCTestCase {
     let expected = self.fixtureString("Images-File-CustomName.swift.out")
     XCTDiffStrings(result, expected)
   }
+
+	func testFileWithDotSyntaxSwift3() {
+		let parser = AssetsCatalogParser()
+		parser.parseCatalog(fixturePath("Images.xcassets"))
+
+		let template = GenumTemplate(templateString: fixtureString("images-dot-syntax-swift3.stencil"))
+		let result = try! template.render(parser.stencilContext())
+
+		let expected = self.fixtureString("Images-File-Dot-Syntax-Swift3.swift.out")
+		XCTDiffStrings(result, expected)
+	}
 }
