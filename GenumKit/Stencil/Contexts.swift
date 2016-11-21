@@ -63,11 +63,13 @@ extension ColorsFileParser {
 extension AssetsCatalogParser {
   public func stencilContext(enumName enumName: String = "Asset") -> Context {
     let images = flatten(entries)
+    let imagesStructured = structure(entries)
 
     return Context(
       dictionary: [
         "enumName": enumName,
-        "images": images
+        "images": images,
+        "structuredImages": imagesStructured
       ],
       namespace: GenumNamespace()
     )
@@ -87,6 +89,30 @@ extension AssetsCatalogParser {
     }
 
     return result
+  }
+
+  func structure(entries: [Entry], currentLevel: Int = 0, maxLevel: Int = 5) -> [[String: AnyObject]] {
+    return entries.map { entry in
+      if let items = entry.items {
+        if currentLevel >= maxLevel {
+          return [
+            "name": entry.name,
+            "items": flatten(items).map { item in
+              return ["name": item]
+            }
+          ]
+        } else {
+          return [
+            "name": entry.name,
+            "items": structure(items, currentLevel: currentLevel + 1, maxLevel: maxLevel)
+          ]
+        }
+      } else {
+        return [
+          "name": entry.name
+        ]
+      }
+    }
   }
 }
 
