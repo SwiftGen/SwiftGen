@@ -9,14 +9,14 @@ import Foundation
 // swiftlint:disable nesting
 
 enum L10n {
-  /// These are %3$@'s %1$d %2$@.
-  case ObjectOwnership(Int, String, String)
+  /// Some alert body there
+  case AlertMessage
   /// Title of the alert
   case AlertTitle
   /// Hello, my name is %@ and I'm %d
   case Greetings(String, Int)
-  /// Some alert body there
-  case AlertMessage
+  /// These are %3$@'s %1$d %2$@.
+  case ObjectOwnership(Int, String, String)
 
   case Apples(ApplesL10n)
   enum ApplesL10n {
@@ -60,10 +60,10 @@ enum L10n {
 
     case UserProfileSection(UserProfileSectionL10n)
     enum UserProfileSectionL10n {
-      /// User Profile Settings
-      case HEADERTITLE
       /// Here you can change some user profile settings.
       case FooterText
+      /// User Profile Settings
+      case HEADERTITLE
     }
   }
 }
@@ -73,14 +73,14 @@ extension L10n: CustomStringConvertible {
 
   var string: String {
     switch self {
-      case .ObjectOwnership(let p0, let p1, let p2):
-        return L10n.tr("ObjectOwnership", p0, p1, p2)
+      case .AlertMessage:
+        return L10n.tr("alert_message")
       case .AlertTitle:
         return L10n.tr("alert_title")
       case .Greetings(let p0, let p1):
         return L10n.tr("greetings", p0, p1)
-      case .AlertMessage:
-        return L10n.tr("alert_message")
+      case .ObjectOwnership(let p0, let p1, let p2):
+        return L10n.tr("ObjectOwnership", p0, p1, p2)
       case .Apples(let level1key):
 
         switch level1key {
@@ -121,10 +121,10 @@ extension L10n: CustomStringConvertible {
           case .UserProfileSection(let level2key):
 
             switch level2key {
-              case .HEADERTITLE:
-                return L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
               case .FooterText:
                 return L10n.tr("seTTings.uSer-proFile-sectioN.footer_text")
+              case .HEADERTITLE:
+                return L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
             }
         }
     }

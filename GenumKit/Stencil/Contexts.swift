@@ -195,7 +195,7 @@ extension StringsFileParser {
     }
 
     let strings = entries
-        .sorted() { $0.key < $1.key }
+        .sorted() { $0.key.lowercased() < $1.key.lowercased() }
         .map { entryToStringMapper($0, []) }
     let structuredStrings = structure(
         entries: entries,
@@ -215,13 +215,13 @@ extension StringsFileParser {
     )
   }
 
-  fileprivate func normalize(_ string: String) -> String {
+  private func normalize(_ string: String) -> String {
     let components = string.components(separatedBy: CharacterSet(charactersIn: "-_"))
     return components.map { $0.capitalized }.joined(separator: "")
   }
 
   typealias Mapper = (_ entry: Entry, _ keyPath: [String]) -> [String: Any]
-  fileprivate func structure(
+  private func structure(
     entries: [Entry],
     atKeyPath keyPath: [String] = [],
     usingMapper mapper: @escaping Mapper,
@@ -232,6 +232,7 @@ extension StringsFileParser {
 
     let strings = entries
       .filter { $0.keyStructure.count == keyPath.count+1 }
+      .sorted { $0.key.lowercased() < $1.key.lowercased() }
       .map { mapper($0, keyPath) }
 
     if !strings.isEmpty {
@@ -287,7 +288,7 @@ extension StringsFileParser {
     return structuredStrings
   }
 
-  fileprivate func flattenedStrings(
+  private func flattenedStrings(
     fromEnteries entries: [Entry],
     atKeyPath keyPath: [String],
     usingMapper mapper: @escaping Mapper,
