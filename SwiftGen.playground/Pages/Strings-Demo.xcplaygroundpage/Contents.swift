@@ -13,29 +13,32 @@
 import Foundation
 
 enum L10n {
-    case alertTitle
     case alertMessage
-    case greetings(String, Int)
+    case alertTitle
     case applesCount(Int)
     case bananasOwner(Int, String)
+    case greetings(String, Int)
     case objectOwnership(Int, String, String)
 }
+// swiftlint:enable type_body_length
 
-xtension L10n: CustomStringConvertible {
+extension L10n: CustomStringConvertible {
     var description: String { return self.string }
 
     var string: String {
         switch self {
-        case .alertTitle:
-            return L10n.tr(key: "alert_title")
         case .alertMessage:
             return L10n.tr(key: "alert_message")
-        case .greetings(let p0, let p1):
-            return L10n.tr(key: "greetings", p0, p1)
+        case .alertTitle:
+            return L10n.tr(key: "alert_title")
         case .applesCount(let p0):
             return L10n.tr(key: "apples.count", p0)
         case .bananasOwner(let p0, let p1):
             return L10n.tr(key: "bananas.owner", p0, p1)
+        case .greetings(let p0, let p1):
+            return L10n.tr(key: "greetings", p0, p1)
+        case .objectOwnership(let p0, let p1, let p2):
+            return L10n.tr(key: "ObjectOwnership", p0, p1, p2)
         }
     }
 
@@ -48,6 +51,7 @@ xtension L10n: CustomStringConvertible {
 func tr(_ key: L10n) -> String {
     return key.string
 }
+
 //: #### Usage example
 
 let alertTitle = tr(.alertTitle)

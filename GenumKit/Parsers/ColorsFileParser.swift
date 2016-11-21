@@ -8,7 +8,7 @@ import Foundation
 import AppKit.NSColor
 
 public protocol ColorsFileParser {
-  var colors: [String: UInt32] { get }
+  var colors: [String : UInt32] { get }
 }
 
 public enum ColorsParserError: Error, CustomStringConvertible {
@@ -40,7 +40,7 @@ fileprivate func parse(hex hexString: String) throws -> UInt32 {
     throw ColorsParserError.invalidHexColor(string: hexString, key: nil)
   }
 
-  let len = hexString.lengthOfBytes(using: String.Encoding.utf8) - prefixLen
+  let len = hexString.lengthOfBytes(using: .utf8) - prefixLen
   if len == 6 {
     // There were no alpha component, assume 0xff
     value = (value << 8) | 0xff

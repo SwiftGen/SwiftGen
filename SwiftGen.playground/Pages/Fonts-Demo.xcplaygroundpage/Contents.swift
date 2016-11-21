@@ -20,27 +20,29 @@ extension FontConvertible where Self: RawRepresentable, Self.RawValue == String 
 }
 
 extension UIFont {
-    convenience init!<FontType: FontConvertible where FontType: RawRepresentable, FontType.RawValue == String>(font: FontType, size: CGFloat) {
-        self.init(name: font.rawValue, size: size)
+    convenience init!<FontType: FontConvertible>
+        (font: FontType, size: CGFloat)
+        where FontType: RawRepresentable, FontType.RawValue == String {
+            self.init(name: font.rawValue, size: size)
     }
 }
 
 struct FontFamily {
     enum Helvetica: String, FontConvertible {
-        case Regular = "Helvetica"
-        case Bold = "Helvetica-Bold"
+        case regular = "Helvetica"
+        case bold = "Helvetica-Bold"
     }
     enum HelveticaNeue: String, FontConvertible {
-        case Regular = "HelveticaNeue"
-        case Bold = "HelveticaNeue-Bold"
+        case regular = "HelveticaNeue"
+        case bold = "HelveticaNeue-Bold"
     }
 }
 
 //: #### Usage Example
 // Using the UIFont constructor…
-let helvetica = UIFont(font: FontFamily.Helvetica.Regular, size: 20.0)
+let helvetica = UIFont(font: FontFamily.Helvetica.regular, size: 20.0)
 // Or using the enum value and its `font` method
-let helveticaNeue = FontFamily.HelveticaNeue.Regular.font(size: 20.0)
+let helveticaNeue = FontFamily.HelveticaNeue.regular.font(size: 20.0)
 
-let helveticaBoldBig = FontFamily.Helvetica.Bold.font(size: 100.0)
-let helveticaNeueBoldSmall = UIFont(font: FontFamily.HelveticaNeue.Bold, size: 8.0)
+let helveticaBoldBig = FontFamily.Helvetica.bold.font(size: 100.0)
+let helveticaNeueBoldSmall = UIFont(font: FontFamily.HelveticaNeue.bold, size: 8.0)

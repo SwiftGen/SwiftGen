@@ -33,7 +33,7 @@ enum ColorName {
     case articleTitle
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
     /// Alpha: 100% <br/> (0xff66ccff)
-    case cyan_Color
+    case cyanColor
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
     /// Alpha: 80% <br/> (0xffffffcc)
     case translucent
@@ -43,7 +43,7 @@ enum ColorName {
         case .articleBody: return 0x339666ff
         case .articleFootnote: return 0xff66ccff
         case .articleTitle: return 0x33fe66ff
-        case .cyan_Color: return 0xff66ccff
+        case .cyanColor: return 0xff66ccff
         case .translucent: return 0xffffffcc
         }
     }
