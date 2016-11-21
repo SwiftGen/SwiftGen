@@ -62,7 +62,7 @@ extension ColorsFileParser {
 */
 extension AssetsCatalogParser {
   public func stencilContext(enumName enumName: String = "Asset") -> Context {
-    let images = flatten(entries)
+    let images = justValues(entries)
     let imagesStructured = structure(entries)
 
     return Context(
@@ -75,16 +75,14 @@ extension AssetsCatalogParser {
     )
   }
 
-  func flatten(entries: [Entry]) -> [String] {
+  func justValues(entries: [Entry]) -> [String] {
     var result = [String]()
 
     for entry in entries {
       if let items = entry.items {
-        result += flatten(items).map { item in
-          return "\(entry.name)/\(item)"
-        }
+        result += justValues(items)
       } else {
-        result += [entry.name]
+        result += [entry.value!]
       }
     }
 
@@ -94,12 +92,10 @@ extension AssetsCatalogParser {
   func structure(entries: [Entry], currentLevel: Int = 0, maxLevel: Int = 5) -> [[String: AnyObject]] {
     return entries.map { entry in
       if let items = entry.items {
-        if currentLevel >= maxLevel {
+        if currentLevel + 1 >= maxLevel {
           return [
             "name": entry.name,
-            "items": flatten(items).map { item in
-              return ["name": item]
-            }
+            "items": flatten(items)
           ]
         } else {
           return [
@@ -109,10 +105,34 @@ extension AssetsCatalogParser {
         }
       } else {
         return [
-          "name": entry.name
+          "name": entry.name,
+          "value": entry.value!
         ]
       }
     }
+  }
+
+  func flatten(entries: [Entry]) -> [[String: AnyObject]] {
+    var result = [[String: AnyObject]]()
+
+    for entry in entries {
+      if let items = entry.items {
+        result += flatten(items).map { item in
+          return [
+            "name": "\(entry.name)/\(item["name"]!)",
+            "value": item["value"]!
+          ]
+        }
+      } else {
+        let t: [String: AnyObject] = [
+          "name": entry.name,
+          "value": entry.value!
+        ]
+        result += [t]
+      }
+    }
+
+    return result
   }
 }
 

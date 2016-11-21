@@ -13,12 +13,10 @@ public final class AssetsCatalogParser {
   public init() {}
 
   public func addImageName(name: String) -> Bool {
-    let entry = Entry(name: name)
-
     if (entries.contains { $0.name == name }) {
       return false
     } else {
-      entries.append(Entry(name: name))
+      entries.append(Entry(name: name, value: name))
       return true
     }
   }
@@ -32,9 +30,15 @@ public final class AssetsCatalogParser {
 
   struct Entry {
     var name: String
+    var value: String?
     var items: [Entry]?
 
-    init(name: String, items: [Entry]? = nil) {
+    init(name: String, value: String) {
+      self.name = name
+      self.value = value
+    }
+
+    init(name: String, items: [Entry]) {
       self.name = name
       self.items = items
     }
@@ -53,7 +57,7 @@ private enum AssetCatalog: String {
 extension AssetsCatalogParser {
   static let imageSetExtension = "imageset"
 
-  private func process(items: [[String: AnyObject]]) -> [Entry] {
+  private func process(items: [[String: AnyObject]], prefix: String = "") -> [Entry] {
     var result = [Entry]()
 
     for item in items {
@@ -64,16 +68,17 @@ extension AssetsCatalogParser {
         // this is a simple imageset
         let imageName = path.lastComponentWithoutExtension
 
-        result += [Entry(name: imageName)]
+        result += [Entry(name: imageName, value: "\(prefix)\(imageName)")]
       } else {
         // this is a group/folder
         let children = item[AssetCatalog.children.rawValue] as? [[String: AnyObject]] ?? []
-        let processed = process(children)
 
         if let providesNamespace = item[AssetCatalog.providesNamespace.rawValue] as? NSNumber where providesNamespace.boolValue {
+          let processed = process(children, prefix: "\(prefix)\(filename)/")
           result += [Entry(name: filename, items: processed)]
         } else {
-          result += processed
+          let processed = process(children, prefix: prefix)
+          result += [Entry(name: filename, items: processed)]
         }
       }
     }
