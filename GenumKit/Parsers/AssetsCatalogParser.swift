@@ -13,7 +13,7 @@ public final class AssetsCatalogParser {
   public init() {}
 
   @discardableResult
-  public func addImageName(_ name: String) -> Bool {
+    public func addImage(named name: String) -> Bool {
     if imageNames.contains(name) {
       return false
     } else {
@@ -49,7 +49,7 @@ extension AssetsCatalogParser {
       if path.`extension` == AssetsCatalogParser.imageSetExtension {
         // this is a simple imageset
         let imageName = path.lastComponentWithoutExtension
-        addImageName("\(prefix)\(imageName)")
+        addImage(named: "\(prefix)\(imageName)")
       } else {
         // this is a group/folder
         let children = item[AssetCatalog.children.rawValue] as? [[String: AnyObject]] ?? []

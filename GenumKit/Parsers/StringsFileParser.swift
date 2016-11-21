@@ -110,10 +110,9 @@ public final class StringsFileParser {
   }
 
 
-
   // MARK: - Private Helpers
 
-  fileprivate static let formatTypesRegEx: NSRegularExpression = {
+  private static let formatTypesRegEx: NSRegularExpression = {
     // %d/%i/%o/%u/%x with their optional length modifiers like in "%lld"
     let pattern_int = "(?:h|hh|l|ll|q|z|t|j)?([dioux])"
     // valid flags for float
@@ -134,7 +133,7 @@ public final class StringsFileParser {
   }()
 
   // "I give %d apples to %@" --> [.Int, .String]
-  fileprivate static func placeholders(fromFormat formatString: String) -> [PlaceholderType] {
+  private static func placeholders(fromFormat formatString: String) -> [PlaceholderType] {
     let range = NSRange(location: 0, length: (formatString as NSString).length)
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier

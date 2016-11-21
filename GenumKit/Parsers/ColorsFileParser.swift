@@ -24,7 +24,7 @@ public enum ColorsParserError: Error, CustomStringConvertible {
 
 // MARK: - Private Helpers
 
-fileprivate func parseHex(_ hexString: String) throws -> UInt32 {
+fileprivate func parse(hex hexString: String) throws -> UInt32 {
   let scanner = Scanner(string: hexString)
   let prefixLen: Int
   if scanner.scanString("#", into: nil) {
@@ -52,12 +52,12 @@ fileprivate func parseHex(_ hexString: String) throws -> UInt32 {
 // MARK: - Text File Parser
 
 public final class ColorsTextFileParser: ColorsFileParser {
-  public fileprivate(set) var colors = [String:UInt32]()
+  public fileprivate(set) var colors = [String : UInt32]()
 
   public init() {}
 
   public func addColor(named name: String, value: String) throws {
-    try addColor(named: name, value: parseHex(value))
+    try addColor(named: name, value: parse(hex: value))
   }
 
   public func addColor(named name: String, value: UInt32) {
@@ -66,7 +66,7 @@ public final class ColorsTextFileParser: ColorsFileParser {
 
   public func keyValueDict(fromPath path: String, withSeperator seperator: String = ":") throws -> [String:String] {
 
-    let content = try NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+    let content = try String(contentsOfFile: path, encoding: .utf8)
     let lines = content.components(separatedBy: CharacterSet.newlines)
     let whitespace = CharacterSet.whitespaces
     let skippedCharacters = NSMutableCharacterSet()
@@ -187,7 +187,7 @@ public final class ColorsXMLFileParser: ColorsFileParser {
                       namespaceURI: String?, qualifiedName qName: String?) {
       guard elementName == ColorsXMLFileParser.colorTagName else { return }
       guard let colorName = currentColorName, let colorValue = currentColorValue else { return }
-      parsedColors[colorName] = try? parseHex(colorValue) ?? UInt32(0)
+      parsedColors[colorName] = try? parse(hex: colorValue) ?? UInt32(0)
       currentColorName = nil
       currentColorValue = nil
     }
@@ -217,7 +217,7 @@ public final class ColorsJSONFileParser: ColorsFileParser {
       let json = try? JSONSerialization.jsonObject(with: JSONdata, options: []),
       let dict = json as? [String: String] {
         for (key, value) in dict {
-          colors[key] = try parseHex(value)
+          colors[key] = try parse(hex: value)
         }
     }
   }

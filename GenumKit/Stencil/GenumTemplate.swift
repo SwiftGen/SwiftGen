@@ -11,6 +11,7 @@ open class GenumTemplate: Template {
   public override init(templateString: String) {
     let templateStringWithMarkedNewlines = templateString
         .replacingOccurrences(of: "\n\n", with: "\n\u{000b}\n")
+        .replacingOccurrences(of: "\n\n", with: "\n\u{000b}\n")
     super.init(templateString: templateStringWithMarkedNewlines)
   }
 
