@@ -6,7 +6,7 @@ class FilterExpression : Resolvable {
   let variable: Variable
 
   init(token: String, parser: TokenParser) throws {
-    let bits = token.characters.split("|").map({ String($0).trim(" ") })
+    let bits = token.characters.split(separator: "|").map({ String($0).trim(character: " ") })
     if bits.isEmpty {
       filters = []
       variable = Variable("")
@@ -14,7 +14,7 @@ class FilterExpression : Resolvable {
     }
 
     variable = Variable(bits[0])
-    let filterBits = bits[1 ..< bits.endIndex]
+    let filterBits = bits[bits.indices.suffix(from: 1)]
 
     do {
       filters = try filterBits.map { try parser.findFilter($0) }
@@ -24,7 +24,7 @@ class FilterExpression : Resolvable {
     }
   }
 
-  func resolve(context: Context) throws -> Any? {
+  func resolve(_ context: Context) throws -> Any? {
     let result = try variable.resolve(context)
 
     return try filters.reduce(result) { x, y in
@@ -42,17 +42,17 @@ public struct Variable : Equatable, Resolvable {
     self.variable = variable
   }
 
-  private func lookup() -> [String] {
-    return variable.characters.split(".").map(String.init)
+  fileprivate func lookup() -> [String] {
+    return variable.characters.split(separator: ".").map(String.init)
   }
 
   /// Resolve the variable in the given context
-  public func resolve(context: Context) throws -> Any? {
+  public func resolve(_ context: Context) throws -> Any? {
     var current: Any? = context
 
     if (variable.hasPrefix("'") && variable.hasSuffix("'")) || (variable.hasPrefix("\"") && variable.hasSuffix("\"")) {
       // String literal
-      return variable[variable.startIndex.successor() ..< variable.endIndex.predecessor()]
+      return variable[variable.characters.index(after: variable.startIndex) ..< variable.characters.index(before: variable.endIndex)]
     }
 
     for bit in lookup() {
@@ -76,7 +76,7 @@ public struct Variable : Equatable, Resolvable {
 #if os(Linux)
         return nil
 #else
-        current = object.valueForKey(bit)
+        current = object.value(forKey: bit)
 #endif
       } else {
         return nil
@@ -92,7 +92,7 @@ public func ==(lhs: Variable, rhs: Variable) -> Bool {
 }
 
 
-func normalize(current: Any?) -> Any? {
+func normalize(_ current: Any?) -> Any? {
   if let current = current as? Normalizable {
     return current.normalize()
   }

@@ -57,7 +57,7 @@ class StringFiltersTests: XCTestCase {
     ]
 
     for (input, expected) in expectations {
-      let result = try! StringFilters.escapeReservedKeywords(input) as? String
+      let result = try! StringFilters.escapeReservedKeywords(value: input) as? String
       XCTAssertEqual(result, expected)
     }
   }

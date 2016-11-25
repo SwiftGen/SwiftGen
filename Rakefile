@@ -28,8 +28,7 @@ def version_select
   # Order by version and get the latest one
   vers = lambda { |path| `mdls -name kMDItemVersion -raw "#{path}"` }
   latest_xcode_version = xcodes.sort { |p1, p2| vers.call(p1) <=> vers.call(p2) }.last
-  # Force the use of this Xcode 8 and the Swift 2.3 Toolchain
-  %Q(DEVELOPER_DIR="#{latest_xcode_version}/Contents/Developer" TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3)
+  %Q(DEVELOPER_DIR="#{latest_xcode_version}/Contents/Developer" TOOLCHAINS=com.apple.dt.toolchain.XcodeDefault.xctoolchain)
 end
 
 def xcpretty(cmd)

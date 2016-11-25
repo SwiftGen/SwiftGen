@@ -12,7 +12,8 @@ public final class AssetsCatalogParser {
 
   public init() {}
 
-  public func addImageName(name: String) -> Bool {
+  @discardableResult
+  public func addImage(named name: String) -> Bool {
     if imageNames.contains(name) {
       return false
     } else {
@@ -21,11 +22,10 @@ public final class AssetsCatalogParser {
     }
   }
 
-  public func parseCatalog(path: String) {
-    guard let items = loadAssetCatalogContents(path) else { return }
-
+  public func parseCatalog(at path: String) {
+    guard let items = loadAssetCatalog(at: path) else { return }
     // process recursively
-    process(items)
+    processCatalog(items: items)
   }
 }
 
@@ -41,7 +41,7 @@ private enum AssetCatalog: String {
 extension AssetsCatalogParser {
   static let imageSetExtension = "imageset"
 
-  private func process(items: [[String: AnyObject]], prefix: String = "") {
+  fileprivate func processCatalog(items: [[String: AnyObject]], withPrefix prefix: String = "") {
     for item in items {
       guard let filename = item[AssetCatalog.filename.rawValue] as? String else { continue }
       let path = Path(filename)
@@ -49,15 +49,16 @@ extension AssetsCatalogParser {
       if path.`extension` == AssetsCatalogParser.imageSetExtension {
         // this is a simple imageset
         let imageName = path.lastComponentWithoutExtension
-        addImageName("\(prefix)\(imageName)")
+        addImage(named: "\(prefix)\(imageName)")
       } else {
         // this is a group/folder
         let children = item[AssetCatalog.children.rawValue] as? [[String: AnyObject]] ?? []
 
-        if let providesNamespace = item[AssetCatalog.providesNamespace.rawValue] as? NSNumber where providesNamespace.boolValue {
-          process(children, prefix: "\(prefix)\(filename)/")
+        if let providesNamespace = item[AssetCatalog.providesNamespace.rawValue] as? NSNumber,
+            providesNamespace.boolValue {
+          processCatalog(items: children, withPrefix: "\(prefix)\(filename)/")
         } else {
-          process(children, prefix: prefix)
+          processCatalog(items: children, withPrefix: prefix)
         }
       }
     }
@@ -67,12 +68,13 @@ extension AssetsCatalogParser {
 // MARK: - ACTool
 
 extension AssetsCatalogParser {
-  private func loadAssetCatalogContents(path: String) -> [[String: AnyObject]]? {
+  fileprivate func loadAssetCatalog(at path: String) -> [[String: AnyObject]]? {
     let command = Command("xcrun", arguments: "actool", "--print-contents", path)
-    let output = command.execute()
+    let output = command.execute() as Data
 
     // try to parse plist
-    guard let plist = try? NSPropertyListSerialization.propertyListWithData(output, options: .Immutable, format: nil) else { return nil }
+    guard let plist = try? PropertyListSerialization
+        .propertyList(from: output, format: nil) else { return nil }
 
     // get first parsed catalog
     guard let contents = plist as? [String: AnyObject],

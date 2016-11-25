@@ -39,7 +39,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithDefaults() {
     let parser = StringsFileParser()
-    try! parser.parseStringsFile(fixturePath("Localizable.strings"))
+    try! parser.parseFile(at :fixturePath("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -50,7 +50,7 @@ class StringsTests: XCTestCase {
 
   func testMultiline() {
     let parser = StringsFileParser()
-    try! parser.parseStringsFile(fixturePath("LocMultiline.strings"))
+    try! parser.parseFile(at: fixturePath("LocMultiline.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -61,7 +61,7 @@ class StringsTests: XCTestCase {
 
   func testUTF8FileWithDefaults() {
     let parser = StringsFileParser()
-    try! parser.parseStringsFile(fixturePath("LocUTF8.strings"))
+    try! parser.parseFile(at: fixturePath("LocUTF8.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -72,7 +72,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithCustomName() {
     let parser = StringsFileParser()
-    try! parser.parseStringsFile(fixturePath("Localizable.strings"))
+    try! parser.parseFile(at: fixturePath("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
     let result = try! template.render(parser.stencilContext(enumName: "XCTLoc"))
@@ -83,7 +83,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithSwift3() {
     let parser = StringsFileParser()
-    try! parser.parseStringsFile(fixturePath("Localizable.strings"))
+    try! parser.parseFile(at: fixturePath("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-swift3.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -94,7 +94,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithStructured() {
     let parser = StringsFileParser()
-    try! parser.parseStringsFile(fixturePath("Localizable.strings"))
+    try! parser.parseFile(at: fixturePath("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-structured.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -105,7 +105,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithStructuredOnly() {
     let parser = StringsFileParser()
-    try! parser.parseStringsFile(fixturePath("LocStructuredOnly.strings"))
+    try! parser.parseFile(at: fixturePath("LocStructuredOnly.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-structured.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -116,7 +116,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithDotSyntax() {
     let parser = StringsFileParser()
-    try! parser.parseStringsFile(fixturePath("Localizable.strings"))
+    try! parser.parseFile(at: fixturePath("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-dot-syntax.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -127,7 +127,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithDotSyntaxSwift3() {
     let parser = StringsFileParser()
-    try! parser.parseStringsFile(fixturePath("Localizable.strings"))
+    try! parser.parseFile(at: fixturePath("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-dot-syntax-swift3.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -138,7 +138,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithGenstringsTemplate() {
     let parser = StringsFileParser()
-    try! parser.parseStringsFile(fixturePath("Localizable.strings"))
+    try! parser.parseFile(at: fixturePath("Localizable.strings"))
     
     let template = GenumTemplate(templateString: fixtureString("strings-genstrings.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -150,48 +150,48 @@ class StringsTests: XCTestCase {
   ////////////////////////////////////////////////////////////////////////
 
   func testParseStringPlaceholder() {
-    let placeholders = StringsFileParser.PlaceholderType.fromFormatString("%@")
+    let placeholders = StringsFileParser.PlaceholderType.placeholders(fromFormat: "%@")
     XCTAssertEqual(placeholders, [.Object])
   }
 
   func testParseFloatPlaceholder() {
-    let placeholders = StringsFileParser.PlaceholderType.fromFormatString("%f")
+    let placeholders = StringsFileParser.PlaceholderType.placeholders(fromFormat: "%f")
     XCTAssertEqual(placeholders, [.Float])
   }
 
   func testParseDoublePlaceholders() {
-    let placeholders = StringsFileParser.PlaceholderType.fromFormatString("%g-%e")
+    let placeholders = StringsFileParser.PlaceholderType.placeholders(fromFormat: "%g-%e")
     XCTAssertEqual(placeholders, [.Float, .Float])
   }
 
   func testParseFloatWithPrecisionPlaceholders() {
-    let placeholders = StringsFileParser.PlaceholderType.fromFormatString("%1.2f : %.3f : %+3f : %-6.2f")
+    let placeholders = StringsFileParser.PlaceholderType.placeholders(fromFormat: "%1.2f : %.3f : %+3f : %-6.2f")
     XCTAssertEqual(placeholders, [.Float, .Float, .Float, .Float])
   }
 
   func testParseIntPlaceholders() {
-    let placeholders = StringsFileParser.PlaceholderType.fromFormatString("%d-%i-%o-%u-%x")
+    let placeholders = StringsFileParser.PlaceholderType.placeholders(fromFormat: "%d-%i-%o-%u-%x")
     XCTAssertEqual(placeholders, [.Int, .Int, .Int, .Int, .Int])
   }
 
   func testParseCCharAndStringPlaceholders() {
-    let placeholders = StringsFileParser.PlaceholderType.fromFormatString("%c-%s")
+    let placeholders = StringsFileParser.PlaceholderType.placeholders(fromFormat: "%c-%s")
     XCTAssertEqual(placeholders, [.Char, .CString])
   }
 
   func testParsePositionalPlaceholders() {
-    let placeholders = StringsFileParser.PlaceholderType.fromFormatString("%2$d-%4$f-%3$@-%c")
+    let placeholders = StringsFileParser.PlaceholderType.placeholders(fromFormat: "%2$d-%4$f-%3$@-%c")
     XCTAssertEqual(placeholders, [.Char, .Int, .Object, .Float])
   }
 
   func testParseComplexFormatPlaceholders() {
-    let placeholders = StringsFileParser.PlaceholderType.fromFormatString("%2$1.3d - %4$-.7f - %3$@ - %% - %5$+3c - %%")
+    let placeholders = StringsFileParser.PlaceholderType.placeholders(fromFormat: "%2$1.3d - %4$-.7f - %3$@ - %% - %5$+3c - %%")
     // positions 2, 4, 3, 5 set to Int, Float, Object, Char, and position 1 not matched, defaulting to Unknown
     XCTAssertEqual(placeholders, [.Unknown, .Int, .Object, .Float, .Char])
   }
 
   func testParseEscapePercentSign() {
-    let placeholders = StringsFileParser.PlaceholderType.fromFormatString("%%foo")
+    let placeholders = StringsFileParser.PlaceholderType.placeholders(fromFormat: "%%foo")
     // Must NOT map to [.Float]
     XCTAssertEqual(placeholders, [])
   }

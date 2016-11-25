@@ -11,19 +11,21 @@ import GenumKit
 
 let fontsCommand = command(
   outputOption,
-  templateOption("fonts"), templatePathOption,
+  templateOption(prefix: "fonts"), templatePathOption,
   Option<String>("enumName", "FontFamily", flag: "e", description: "The name of the enum to generate"),
   Argument<Path>("DIR", description: "Directory to parse.", validator: dirExists)
   ) { output, templateName, templatePath, enumName, path in
     let parser = FontsFileParser()
     do {
-      parser.parseFonts(String(path))
-      let templateRealPath = try findTemplate("fonts", templateShortName: templateName, templateFullPath: templatePath)
+      parser.parseFile(at: String(describing: path))
+      let templateRealPath = try findTemplate(
+        prefix: "fonts", templateShortName: templateName, templateFullPath: templatePath
+      )
       let template = try GenumTemplate(path: templateRealPath)
       let context = parser.stencilContext(enumName: enumName)
       let rendered = try template.render(context)
-      output.write(rendered, onlyIfChanged: true)
+      output.write(content: rendered, onlyIfChanged: true)
     } catch let error as NSError {
-      printError("error: \(error.localizedDescription)")
+      printError(string: "error: \(error.localizedDescription)")
     }
 }

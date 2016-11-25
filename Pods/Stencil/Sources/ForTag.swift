@@ -1,10 +1,10 @@
-public class ForNode : NodeType {
+open class ForNode : NodeType {
   let variable:Variable
   let loopVariable:String
   let nodes:[NodeType]
   let emptyNodes: [NodeType]
 
-  public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
+  open class func parse(_ parser:TokenParser, token:Token) throws -> NodeType {
     let components = token.components()
 
     guard components.count == 4 && components[2] == "in" else {
@@ -24,7 +24,7 @@ public class ForNode : NodeType {
 
     if token.contents == "empty" {
       emptyNodes = try parser.parse(until(["endfor"]))
-      parser.nextToken()
+      _ = parser.nextToken()
     }
 
     return ForNode(variable: variable, loopVariable: loopVariable, nodes: forNodes, emptyNodes:emptyNodes)
@@ -37,22 +37,22 @@ public class ForNode : NodeType {
     self.emptyNodes = emptyNodes
   }
 
-  public func render(context: Context) throws -> String {
+  open func render(_ context: Context) throws -> String {
     let values = try variable.resolve(context)
 
-    if let values = values as? [Any] where values.count > 0 {
+    if let values = values as? [Any] , values.count > 0 {
       let count = values.count
-      return try values.enumerate().map { index, item in
+      return try values.enumerated().map { index, item in
         let forContext: [String: Any] = [
           "first": index == 0,
           "last": index == (count - 1),
           "counter": index + 1,
         ]
 
-        return try context.push([loopVariable: item, "forloop": forContext]) {
+        return try context.push(dictionary: [loopVariable: item, "forloop": forContext]) {
           try renderNodes(nodes, context)
         }
-      }.joinWithSeparator("")
+      }.joined(separator: "")
     }
 
     return try context.push {

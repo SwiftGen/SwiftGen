@@ -25,9 +25,9 @@ class ColorsTextFileTests: XCTestCase {
   func testListWithDefaults() {
     let parser = ColorsTextFileParser()
     do {
-      try parser.addColorWithName("Text&Body Color", value: "0x999999")
-      try parser.addColorWithName("ArticleTitle", value: "#996600")
-      try parser.addColorWithName("ArticleBackground", value: "#ffcc0099")
+      try parser.addColor(named: "Text&Body Color", value: "0x999999")
+      try parser.addColor(named: "ArticleTitle", value: "#996600")
+      try parser.addColor(named: "ArticleBackground", value: "#ffcc0099")
     } catch {
       XCTFail("Failed with unexpected error \(error)")
     }
@@ -42,9 +42,9 @@ class ColorsTextFileTests: XCTestCase {
   func testListWithRawValueTemplate() {
     let parser = ColorsTextFileParser()
     do {
-      try parser.addColorWithName("Text&Body Color", value: "0x999999")
-      try parser.addColorWithName("ArticleTitle", value: "#996600")
-      try parser.addColorWithName("ArticleBackground", value: "#ffcc0099")
+      try parser.addColor(named: "Text&Body Color", value: "0x999999")
+      try parser.addColor(named: "ArticleTitle", value: "#996600")
+      try parser.addColor(named: "ArticleBackground", value: "#ffcc0099")
     } catch {
       XCTFail("Failed with unexpected error \(error)")
     }
@@ -58,7 +58,7 @@ class ColorsTextFileTests: XCTestCase {
 
   func testFileWithDefaults() {
     let parser = ColorsTextFileParser()
-    try! parser.parseFile(fixturePath("colors.txt"))
+    try! parser.parseFile(at: fixturePath("colors.txt"))
 
     let template = GenumTemplate(templateString: fixtureString("colors-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -69,7 +69,7 @@ class ColorsTextFileTests: XCTestCase {
 
   func testFileSwift3() {
     let parser = ColorsTextFileParser()
-    try! parser.parseFile(fixturePath("colors.txt"))
+    try! parser.parseFile(at: fixturePath("colors.txt"))
 
     let template = GenumTemplate(templateString: fixtureString("colors-swift3.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -80,7 +80,7 @@ class ColorsTextFileTests: XCTestCase {
 
   func testFileWithCustomName() {
     let parser = ColorsTextFileParser()
-    try! parser.parseFile(fixturePath("colors.txt"))
+    try! parser.parseFile(at: fixturePath("colors.txt"))
 
     let template = GenumTemplate(templateString: fixtureString("colors-default.stencil"))
     let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
@@ -92,9 +92,9 @@ class ColorsTextFileTests: XCTestCase {
   func testFileWithBadFormatting() {
     let parser = ColorsTextFileParser()
     do {
-      try parser.parseFile(fixturePath("colors-bad.txt"))
+      try parser.parseFile(at: fixturePath("colors-bad.txt"))
       XCTFail("Code did parse file successfully while it was expected to fail for bad formatting")
-    } catch ColorsParserError.InvalidHexColor(string: ":", key: "MX_WELCOME_BACKGROUND"?) {
+    } catch ColorsParserError.invalidHexColor(string: ":", key: "MX_WELCOME_BACKGROUND"?) {
       // That's the expected exception we want to happen
     } catch let error {
       XCTFail("Unexpected error occured while parsing: \(error)")
@@ -119,7 +119,7 @@ class ColorsCLRFileTests: XCTestCase {
 
   func testFileWithDefaults() {
     let parser = ColorsCLRFileParser()
-    parser.parseFile(fixturePath("colors.clr"))
+    parser.parseFile(at: fixturePath("colors.clr"))
 
     let template = GenumTemplate(templateString: fixtureString("colors-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -130,7 +130,7 @@ class ColorsCLRFileTests: XCTestCase {
 
   func testFileWithCustomName() {
     let parser = ColorsCLRFileParser()
-    parser.parseFile(fixturePath("colors.clr"))
+    parser.parseFile(at: fixturePath("colors.clr"))
 
     let template = GenumTemplate(templateString: fixtureString("colors-default.stencil"))
     let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
@@ -156,7 +156,7 @@ class ColorsXMLFileTests: XCTestCase {
   func testFileWithDefaults() {
     let parser = ColorsXMLFileParser()
     do {
-      try parser.parseFile(fixturePath("colors.xml"))
+      try parser.parseFile(at: fixturePath("colors.xml"))
     } catch {
       XCTFail("Exception while parsing file: \(error)")
     }
@@ -171,7 +171,7 @@ class ColorsXMLFileTests: XCTestCase {
   func testFileWithCustomName() {
     let parser = ColorsXMLFileParser()
     do {
-      try parser.parseFile(fixturePath("colors.xml"))
+      try parser.parseFile(at: fixturePath("colors.xml"))
     } catch {
       XCTFail("Exception while parsing file: \(error)")
     }
@@ -198,7 +198,7 @@ class ColorsJSONFileTests: XCTestCase {
   func testFileWithDefaults() {
     let parser = ColorsJSONFileParser()
     do {
-      try parser.parseFile(fixturePath("colors.json"))
+      try parser.parseFile(at: fixturePath("colors.json"))
     } catch {
       XCTFail("Exception while parsing file: \(error)")
     }
@@ -213,7 +213,7 @@ class ColorsJSONFileTests: XCTestCase {
   func testFileWithCustomName() {
     let parser = ColorsJSONFileParser()
     do {
-      try parser.parseFile(fixturePath("colors.json"))
+      try parser.parseFile(at: fixturePath("colors.json"))
     } catch {
       XCTFail("Exception while parsing file: \(error)")
     }
