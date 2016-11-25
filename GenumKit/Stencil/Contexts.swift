@@ -195,7 +195,7 @@ extension StringsFileParser {
     }
 
     let strings = entries
-        .sorted { $0.key.lowercased() < $1.key.lowercased() }
+        .sorted { $0.key.caseInsensitiveCompare($1.key) == .orderedAscending }
         .map { entryToStringMapper($0, []) }
     let structuredStrings = structure(
         entries: entries,
