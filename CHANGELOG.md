@@ -2,6 +2,12 @@
 
 ---
 
+## unreleased
+
+* Swift 3 migration.  
+  [ahtierney](https://github.com/ahtierney)
+  [#201](https://github.com/AliSoftware/SwiftGen/pull/201)
+
 ## 4.0.0
 
 * Add support for multiline string in *.strings file.  
@@ -28,9 +34,6 @@
   ensuring that the parser correctly handles namespaced folders.  
   [David Jennes](https://github.com/djbe)
   [#199](https://github.com/AliSoftware/SwiftGen/pull/199)
-* Swift 3 migration
-  [ahtierney](https://github.com/ahtierney)
-  [#201](https://github.com/AliSoftware/SwiftGen/pull/201)
 
 ## 3.0.1
 

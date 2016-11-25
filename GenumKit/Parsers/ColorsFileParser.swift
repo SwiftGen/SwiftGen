@@ -8,7 +8,7 @@ import Foundation
 import AppKit.NSColor
 
 public protocol ColorsFileParser {
-  var colors: [String : UInt32] { get }
+  var colors: [String: UInt32] { get }
 }
 
 public enum ColorsParserError: Error, CustomStringConvertible {
@@ -52,7 +52,7 @@ fileprivate func parse(hex hexString: String) throws -> UInt32 {
 // MARK: - Text File Parser
 
 public final class ColorsTextFileParser: ColorsFileParser {
-  public private(set) var colors = [String : UInt32]()
+  public private(set) var colors = [String: UInt32]()
 
   public init() {}
 
@@ -73,7 +73,7 @@ public final class ColorsTextFileParser: ColorsFileParser {
     skippedCharacters.formUnion(with: whitespace)
     skippedCharacters.formUnion(with: skippedCharacters as CharacterSet)
 
-    var dict: [String : String] = [:]
+    var dict: [String: String] = [:]
     for line in lines {
       let scanner = Scanner(string: line)
       scanner.charactersToBeSkipped = skippedCharacters as CharacterSet
@@ -95,7 +95,7 @@ public final class ColorsTextFileParser: ColorsFileParser {
     return dict
   }
 
-  private func colorValue(forKey key: String, onDict dict: [String : String]) -> String {
+  private func colorValue(forKey key: String, onDict dict: [String: String]) -> String {
     var currentKey = key
     var stringValue: String = ""
     while let value = dict[currentKey]?.trimmingCharacters(in: CharacterSet.whitespaces) {

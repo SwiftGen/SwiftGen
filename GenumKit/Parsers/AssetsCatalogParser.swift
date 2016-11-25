@@ -13,7 +13,7 @@ public final class AssetsCatalogParser {
   public init() {}
 
   @discardableResult
-    public func addImage(named name: String) -> Bool {
+  public func addImage(named name: String) -> Bool {
     if imageNames.contains(name) {
       return false
     } else {
@@ -68,7 +68,7 @@ extension AssetsCatalogParser {
 // MARK: - ACTool
 
 extension AssetsCatalogParser {
-  fileprivate func loadAssetCatalog(at path: String) -> [[String : AnyObject]]? {
+  fileprivate func loadAssetCatalog(at path: String) -> [[String: AnyObject]]? {
     let command = Command("xcrun", arguments: "actool", "--print-contents", path)
     let output = command.execute() as Data
 

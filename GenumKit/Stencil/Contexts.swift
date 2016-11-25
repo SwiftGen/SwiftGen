@@ -25,7 +25,7 @@ private extension String {
 
  - `enumName`: `String` — name of the enum to generate
  - `colors`: `Array` of:
-    - `name`: `String` — name of each color
+    - `name` : `String` — name of each color
     - `rgb`  : `String` — hex value of the form RRGGBB (like "ff6600")
     - `rgba` : `String` — hex value of the form RRGGBBAA (like "ff6600cc")
     - `red`  : `String` — hex value of the red component
@@ -43,9 +43,9 @@ extension ColorsFileParser {
 
       return [
         "name": name,
-        "rgba" : String(hexChars[0..<8]),
-        "rgb"  : String(hexChars[0..<6]),
-        "red"  : comps[0],
+        "rgba": String(hexChars[0..<8]),
+        "rgb": String(hexChars[0..<6]),
+        "red": comps[0],
         "green": comps[1],
         "blue" : comps[2],
         "alpha": comps[3],
@@ -174,7 +174,7 @@ extension StringsFileParser {
       let keytail = keyStructure.joined(separator: ".")
 
       if entry.types.count > 0 {
-        let params: [String : Any] = [
+        let params: [String: Any] = [
           "count": entry.types.count,
           "types": entry.types.map { $0.rawValue },
           "declarations": entry.types.indices.map { "let p\($0)" },
@@ -324,21 +324,21 @@ extension StringsFileParser {
 extension FontsFileParser {
   public func stencilContext(enumName: String = "FontFamily") -> Context {
     // turn into array of dictionaries
-    let families = entries.map { (name: String, family: Set<Font>) -> [String : Any] in
-      let fonts = family.map { (font: Font) -> [String : String] in
+    let families = entries.map { (name: String, family: Set<Font>) -> [String: Any] in
+      let fonts = family.map { (font: Font) -> [String: String] in
         // Font
         return [
-          "style" : font.style,
-          "fontName" : font.postScriptName
+          "style": font.style,
+          "fontName": font.postScriptName
         ]
       }.sorted { $0["fontName"] ?? "" < $1["fontName"] ?? "" }
       // Family
       return [
-        "name" : name,
-        "fonts" : fonts
+        "name": name,
+        "fonts": fonts
       ]
     }.sorted { $0["name"] as? String ?? "" < $1["name"] as? String ?? "" }
 
-    return Context(dictionary: ["enumName": enumName, "families" : families], namespace: GenumNamespace())
+    return Context(dictionary: ["enumName": enumName, "families": families], namespace: GenumNamespace())
   }
 }
