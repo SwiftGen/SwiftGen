@@ -11,42 +11,44 @@ import Stencil
 
 let colorsCommand = command(
   outputOption,
-  templateOption("colors"), templatePathOption,
+  templateOption(prefix: "colors"), templatePathOption,
   Option<String>("enumName", "ColorName", flag: "e", description: "The name of the enum to generate"),
   Argument<Path>("FILE", description: "Colors.txt|.clr|.xml|.json file to parse.", validator: fileExists)
 ) { output, templateName, templatePath, enumName, path in
 
-  let filePath = String(path)
+  let filePath = String(describing: path)
 
   let parser: ColorsFileParser
   switch path.`extension` {
   case "clr"?:
     let clrParser = ColorsCLRFileParser()
-    clrParser.parseFile(filePath)
+    clrParser.parseFile(at: filePath)
     parser = clrParser
   case "txt"?:
     let textParser = ColorsTextFileParser()
-    try textParser.parseFile(filePath)
+    try textParser.parseFile(at: filePath)
     parser = textParser
   case "xml"?:
     let textParser = ColorsXMLFileParser()
-    try textParser.parseFile(filePath)
+    try textParser.parseFile(at: filePath)
     parser = textParser
   case "json"?:
     let textParser = ColorsJSONFileParser()
-    try textParser.parseFile(filePath)
+    try textParser.parseFile(at: filePath)
     parser = textParser
   default:
-    throw ArgumentError.InvalidType(value: filePath, type: "CLR, TXT, XML or JSON file", argument: nil)
+    throw ArgumentError.invalidType(value: filePath, type: "CLR, TXT, XML or JSON file", argument: nil)
   }
 
   do {
-    let templateRealPath = try findTemplate("colors", templateShortName: templateName, templateFullPath: templatePath)
+    let templateRealPath = try findTemplate(
+      prefix: "colors", templateShortName: templateName, templateFullPath: templatePath
+    )
     let template = try GenumTemplate(path: templateRealPath)
     let context = parser.stencilContext(enumName: enumName)
     let rendered = try template.render(context)
-    output.write(rendered, onlyIfChanged: true)
+    output.write(content: rendered, onlyIfChanged: true)
   } catch {
-    printError("error: failed to render template \(error)")
+    printError(string: "error: failed to render template \(error)")
   }
 }

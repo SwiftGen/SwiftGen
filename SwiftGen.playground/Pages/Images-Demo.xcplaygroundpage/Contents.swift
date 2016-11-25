@@ -13,8 +13,14 @@
 import UIKit
 
 enum Asset: String {
-    case Apple = "Apple"
-    case Banana = "Banana"
+    case exoticBanana = "Exotic/Banana"
+    case exoticMango = "Exotic/Mango"
+    case lemon = "Lemon"
+    case roundApricot = "Round/Apricot"
+    case roundOrange = "Round/Orange"
+    case roundApple = "Round/Apple"
+    case roundDoubleCherry = "Round/Double/Cherry"
+    case roundTomato = "Round/Tomato"
 
     var image: UIImage {
         return UIImage(asset: self)
@@ -27,9 +33,8 @@ extension UIImage {
     }
 }
 
-
 //: #### Usage Example
 
-let image = UIImage(asset: .Apple)
+let image = UIImage(asset: .exoticBanana)
 
-Asset.Banana.image
+Asset.roundTomato.image

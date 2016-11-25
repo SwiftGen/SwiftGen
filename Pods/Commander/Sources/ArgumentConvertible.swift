@@ -1,25 +1,25 @@
-public enum ArgumentError: ErrorType, Equatable, CustomStringConvertible {
-  case MissingValue(argument: String?)
+public enum ArgumentError : Error, Equatable, CustomStringConvertible {
+  case missingValue(argument: String?)
 
   /// Value is not convertible to type
-  case InvalidType(value:String, type:String, argument:String?)
+  case invalidType(value:String, type:String, argument:String?)
 
   /// Unused Argument
-  case UnusedArgument(String)
+  case unusedArgument(String)
 
-  public var description: String {
+  public var description:String {
     switch self {
-    case .MissingValue(let key):
+    case .missingValue(let key):
       if let key = key {
         return "Missing value for `\(key)`"
       }
       return "Missing argument"
-    case .InvalidType(let value, let type, let argument):
+    case .invalidType(let value, let type, let argument):
       if let argument = argument {
         return "`\(value)` is not a valid `\(type)` for `\(argument)`"
       }
       return "`\(value)` is not a `\(type)`"
-    case .UnusedArgument(let argument):
+    case .unusedArgument(let argument):
       return "Unexpected argument `\(argument)`"
     }
   }
@@ -28,11 +28,11 @@ public enum ArgumentError: ErrorType, Equatable, CustomStringConvertible {
 
 public func == (lhs: ArgumentError, rhs: ArgumentError) -> Bool {
   switch (lhs, rhs) {
-  case let (.MissingValue(lhsKey), .MissingValue(rhsKey)):
+  case let (.missingValue(lhsKey), .missingValue(rhsKey)):
     return lhsKey == rhsKey
-  case let (.InvalidType(lhsValue, lhsType, lhsArgument), .InvalidType(rhsValue, rhsType, rhsArgument)):
+  case let (.invalidType(lhsValue, lhsType, lhsArgument), .invalidType(rhsValue, rhsType, rhsArgument)):
     return lhsValue == rhsValue && lhsType == rhsType && lhsArgument == rhsArgument
-  case let (.UnusedArgument(lhsArgument), .UnusedArgument(rhsArgument)):
+  case let (.unusedArgument(lhsArgument), .unusedArgument(rhsArgument)):
     return lhsArgument == rhsArgument
   default:
     return false
@@ -40,22 +40,18 @@ public func == (lhs: ArgumentError, rhs: ArgumentError) -> Bool {
 }
 
 
-public protocol ArgumentConvertible: CustomStringConvertible {
+public protocol ArgumentConvertible : CustomStringConvertible {
   /// Initialise the type with an ArgumentParser
   init(parser: ArgumentParser) throws
 }
 
-extension String : ArgumentConvertible, CustomStringConvertible {
+extension String : ArgumentConvertible {
   public init(parser: ArgumentParser) throws {
     if let value = parser.shift() {
-      self.init(value)
+      self.init(value)!
     } else {
-      throw ArgumentError.MissingValue(argument: nil)
+      throw ArgumentError.missingValue(argument: nil)
     }
-  }
-
-  public var description: String {
-    return self
   }
 }
 
@@ -65,10 +61,10 @@ extension Int : ArgumentConvertible {
       if let value = Int(value) {
         self.init(value)
       } else {
-        throw ArgumentError.InvalidType(value: value, type: "number", argument: nil)
+        throw ArgumentError.invalidType(value: value, type: "number", argument: nil)
       }
     } else {
-      throw ArgumentError.MissingValue(argument: nil)
+      throw ArgumentError.missingValue(argument: nil)
     }
   }
 }
@@ -80,10 +76,10 @@ extension Float : ArgumentConvertible {
       if let value = Float(value) {
         self.init(value)
       } else {
-        throw ArgumentError.InvalidType(value: value, type: "number", argument: nil)
+        throw ArgumentError.invalidType(value: value, type: "number", argument: nil)
       }
     } else {
-      throw ArgumentError.MissingValue(argument: nil)
+      throw ArgumentError.missingValue(argument: nil)
     }
   }
 }
@@ -95,10 +91,10 @@ extension Double : ArgumentConvertible {
       if let value = Double(value) {
         self.init(value)
       } else {
-        throw ArgumentError.InvalidType(value: value, type: "number", argument: nil)
+        throw ArgumentError.invalidType(value: value, type: "number", argument: nil)
       }
     } else {
-      throw ArgumentError.MissingValue(argument: nil)
+      throw ArgumentError.missingValue(argument: nil)
     }
   }
 }
@@ -111,7 +107,7 @@ extension Array where Element : ArgumentConvertible {
     while true {
       do {
         temp.append(try Element(parser: parser))
-      } catch ArgumentError.MissingValue {
+      } catch ArgumentError.missingValue {
         break
       } catch {
         throw error

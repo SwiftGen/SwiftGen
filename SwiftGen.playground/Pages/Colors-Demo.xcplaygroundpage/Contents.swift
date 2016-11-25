@@ -24,27 +24,27 @@ extension UIColor {
 enum ColorName {
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>
     /// Alpha: 100% <br/> (0x339666ff)
-    case ArticleBody
+    case articleBody
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
     /// Alpha: 100% <br/> (0xff66ccff)
-    case ArticleFootnote
+    case articleFootnote
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#33fe66"></span>
     /// Alpha: 100% <br/> (0x33fe66ff)
-    case ArticleTitle
+    case articleTitle
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
     /// Alpha: 100% <br/> (0xff66ccff)
-    case Cyan_Color
+    case cyanColor
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
     /// Alpha: 80% <br/> (0xffffffcc)
-    case Translucent
+    case translucent
 
     var rgbaValue: UInt32 {
         switch self {
-        case .ArticleBody: return 0x339666ff
-        case .ArticleFootnote: return 0xff66ccff
-        case .ArticleTitle: return 0x33fe66ff
-        case .Cyan_Color: return 0xff66ccff
-        case .Translucent: return 0xffffffcc
+        case .articleBody: return 0x339666ff
+        case .articleFootnote: return 0xff66ccff
+        case .articleTitle: return 0x33fe66ff
+        case .cyanColor: return 0xff66ccff
+        case .translucent: return 0xffffffcc
         }
     }
 
@@ -61,10 +61,10 @@ extension UIColor {
 
 //: #### Usage Example
 
-UIColor(named: .ArticleTitle)
-ColorName.ArticleBody.color
-UIColor(named: .ArticleBody)
-UIColor(named: .Translucent)
+UIColor(named: .articleTitle)
+ColorName.articleBody.color
+UIColor(named: .articleBody)
+UIColor(named: .translucent)
 /* Only possible if you used `enumBuilder.build(generateStringInit: true)` to generate the enum */
 //let orange = UIColor(hexString: "#ffcc88")
 let lightGreen = UIColor(rgbaValue: 0x00ff88ff)

@@ -2,6 +2,12 @@
 
 ---
 
+## unreleased
+
+* Swift 3 migration.  
+  [ahtierney](https://github.com/ahtierney)
+  [#201](https://github.com/AliSoftware/SwiftGen/pull/201)
+
 ## 4.0.0
 
 * Add support for multiline string in *.strings file.  

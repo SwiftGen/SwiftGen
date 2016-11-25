@@ -30,7 +30,7 @@ public final class StoryboardParser {
 
   public init() {}
 
-  private class ParserDelegate: NSObject, NSXMLParserDelegate {
+  private class ParserDelegate: NSObject, XMLParserDelegate {
     var initialViewControllerObjectID: String?
     var initialScene: InitialScene?
     var scenes = Set<Scene>()
@@ -39,7 +39,7 @@ public final class StoryboardParser {
     var readyForFirstObject = false
     var readyForConnections = false
 
-    @objc func parser(parser: NSXMLParser, didStartElement elementName: String,
+    @objc func parser(_ parser: XMLParser, didStartElement elementName: String,
                       namespaceURI: String?, qualifiedName qName: String?,
                       attributes attributeDict: [String: String]) {
 
@@ -52,7 +52,7 @@ public final class StoryboardParser {
         readyForFirstObject = true
       case let tag where (readyForFirstObject && tag != "viewControllerPlaceholder"):
         let customClass = attributeDict["customClass"]
-        if let objectID = attributeDict["id"] where objectID == initialViewControllerObjectID {
+        if let objectID = attributeDict["id"], objectID == initialViewControllerObjectID {
           initialScene = InitialScene(objectID: objectID, tag: tag, customClass: customClass)
         }
         if let storyboardID = attributeDict["storyboardIdentifier"] {
@@ -71,7 +71,7 @@ public final class StoryboardParser {
       }
     }
 
-    @objc func parser(parser: NSXMLParser, didEndElement elementName: String,
+    @objc func parser(_ parser: XMLParser, didEndElement elementName: String,
                       namespaceURI: String?, qualifiedName qName: String?) {
       switch elementName {
       case "scene":
@@ -86,24 +86,24 @@ public final class StoryboardParser {
     }
   }
 
-  public func addStoryboardAtPath(path: String) {
-    let parser = NSXMLParser(contentsOfURL: NSURL.fileURLWithPath(path))
+  public func addStoryboard(at path: String) {
+    let parser = XMLParser(contentsOf: URL(fileURLWithPath: path))
 
     let delegate = ParserDelegate()
     parser?.delegate = delegate
     parser?.parse()
 
-    let storyboardName = ((path as NSString).lastPathComponent as NSString).stringByDeletingPathExtension
+    let storyboardName = ((path as NSString).lastPathComponent as NSString).deletingPathExtension
     initialScenes[storyboardName] = delegate.initialScene
     storyboardsScenes[storyboardName] = delegate.scenes
     storyboardsSegues[storyboardName] = delegate.segues
   }
 
-  public func parseDirectory(path: String) {
-    if let dirEnum = NSFileManager.defaultManager().enumeratorAtPath(path) {
+  public func parseDirectory(at path: String) {
+    if let dirEnum = FileManager.default.enumerator(atPath: path) {
       while let subPath = dirEnum.nextObject() as? NSString {
         if subPath.pathExtension == "storyboard" {
-          self.addStoryboardAtPath((path as NSString).stringByAppendingPathComponent(subPath as String))
+          self.addStoryboard(at: (path as NSString).appendingPathComponent(subPath as String))
         }
       }
     }

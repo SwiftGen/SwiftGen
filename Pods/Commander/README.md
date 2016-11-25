@@ -119,10 +119,13 @@ Hello Kyle
 
 ##### Types of descriptors
 
-- Argument - A positional argument.
 - Option - An optional option with a value.
+- Options - A option with a value which can be used multiple times, your command is passed an array containing all option values.
 - Flag - A boolean, on/off flag.
+- Argument - A positional argument.
 - VaradicArgument - A varadic argument
+
+**NOTE**: *It's important to describe your arguments after options and flags so the parser can differentiate between `--option value` and `--flag argument`.*
 
 #### Using the argument parser
 

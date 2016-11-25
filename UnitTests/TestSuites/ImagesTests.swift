@@ -27,9 +27,9 @@ class ImagesTests: XCTestCase {
 
   func testEntriesWithDefaults() {
     let parser = AssetsCatalogParser()
-    parser.addImageName("Green-Apple")
-    parser.addImageName("Red apple")
-    parser.addImageName("2-pears")
+    parser.addImage(named: "Green-Apple")
+    parser.addImage(named: "Red apple")
+    parser.addImage(named: "2-pears")
 
     let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -40,7 +40,7 @@ class ImagesTests: XCTestCase {
 
   func testFileWithDefaults() {
     let parser = AssetsCatalogParser()
-    parser.parseCatalog(fixturePath("Images.xcassets"))
+    parser.parseCatalog(at: fixturePath("Images.xcassets"))
 
     let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -51,7 +51,7 @@ class ImagesTests: XCTestCase {
 
   func testFileWithSwift3() {
     let parser = AssetsCatalogParser()
-    parser.parseCatalog(fixturePath("Images.xcassets"))
+    parser.parseCatalog(at: fixturePath("Images.xcassets"))
 
     let template = GenumTemplate(templateString: fixtureString("images-swift3.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -62,7 +62,7 @@ class ImagesTests: XCTestCase {
 
   func testFileWithAllValuesTemplate() {
     let parser = AssetsCatalogParser()
-    parser.parseCatalog(fixturePath("Images.xcassets"))
+    parser.parseCatalog(at: fixturePath("Images.xcassets"))
 
     let template = GenumTemplate(templateString: fixtureString("images-allvalues.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -73,7 +73,7 @@ class ImagesTests: XCTestCase {
 
   func testFileWithCustomName() {
     let parser = AssetsCatalogParser()
-    parser.parseCatalog(fixturePath("Images.xcassets"))
+    parser.parseCatalog(at: fixturePath("Images.xcassets"))
 
     let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
     let result = try! template.render(parser.stencilContext(enumName: "XCTImages"))
@@ -84,7 +84,7 @@ class ImagesTests: XCTestCase {
 
 	func testFileWithDotSyntax() {
 		let parser = AssetsCatalogParser()
-		parser.parseCatalog(fixturePath("Images.xcassets"))
+		parser.parseCatalog(at: fixturePath("Images.xcassets"))
 
 		let template = GenumTemplate(templateString: fixtureString("images-dot-syntax.stencil"))
 		let result = try! template.render(parser.stencilContext())
@@ -95,7 +95,7 @@ class ImagesTests: XCTestCase {
 
 	func testFileWithDotSyntaxSwift3() {
 		let parser = AssetsCatalogParser()
-		parser.parseCatalog(fixturePath("Images.xcassets"))
+		parser.parseCatalog(at: fixturePath("Images.xcassets"))
 
 		let template = GenumTemplate(templateString: fixtureString("images-dot-syntax-swift3.stencil"))
 		let result = try! template.render(parser.stencilContext())
