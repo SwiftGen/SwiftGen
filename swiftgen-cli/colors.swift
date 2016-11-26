@@ -16,28 +16,26 @@ let colorsCommand = command(
   Argument<Path>("FILE", description: "Colors.txt|.clr|.xml|.json file to parse.", validator: fileExists)
 ) { output, templateName, templatePath, enumName, path in
 
-  let filePath = String(describing: path)
-
   let parser: ColorsFileParser
-  switch path.`extension` {
+  switch path.extension {
   case "clr"?:
     let clrParser = ColorsCLRFileParser()
-    clrParser.parseFile(at: filePath)
+    clrParser.parseFile(at: path)
     parser = clrParser
   case "txt"?:
     let textParser = ColorsTextFileParser()
-    try textParser.parseFile(at: filePath)
+    try textParser.parseFile(at: path)
     parser = textParser
   case "xml"?:
     let textParser = ColorsXMLFileParser()
-    try textParser.parseFile(at: filePath)
+    try textParser.parseFile(at: path)
     parser = textParser
   case "json"?:
     let textParser = ColorsJSONFileParser()
-    try textParser.parseFile(at: filePath)
+    try textParser.parseFile(at: path)
     parser = textParser
   default:
-    throw ArgumentError.invalidType(value: filePath, type: "CLR, TXT, XML or JSON file", argument: nil)
+		throw ArgumentError.invalidType(value: String(describing: path), type: "CLR, TXT, XML or JSON file", argument: nil)
   }
 
   do {
