@@ -22,13 +22,14 @@ let storyboardsCommand = command(
     validator: pathExists)
 ) { output, templateName, templatePath, sceneEnumName, segueEnumName, extraImports, path in
   let parser = StoryboardParser()
-  if path.`extension` == "storyboard" {
-    parser.addStoryboard(at: String(describing: path))
-  } else {
-    parser.parseDirectory(at: String(describing: path))
-  }
 
   do {
+    if path.extension == "storyboard" {
+      try parser.addStoryboard(at: path)
+    } else {
+      try parser.parseDirectory(at: path)
+    }
+
     let templateRealPath = try findTemplate(
       prefix: "storyboards",
       templateShortName: templateName,
@@ -41,6 +42,6 @@ let storyboardsCommand = command(
     let rendered = try template.render(context)
     output.write(content: rendered, onlyIfChanged: true)
   } catch {
-    printError(string: "error: failed to render template \(error)")
+    printError(string: "error: \(error.localizedDescription)")
   }
 }

@@ -17,7 +17,7 @@ let stringsCommand = command(
   let parser = StringsFileParser()
 
   do {
-    try parser.parseFile(at: String(describing: path))
+    try parser.parseFile(at: path)
 
     let templateRealPath = try findTemplate(
       prefix: "strings", templateShortName: templateName, templateFullPath: templatePath

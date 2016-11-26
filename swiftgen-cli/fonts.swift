@@ -17,7 +17,7 @@ let fontsCommand = command(
   ) { output, templateName, templatePath, enumName, path in
     let parser = FontsFileParser()
     do {
-      parser.parseFile(at: String(describing: path))
+      parser.parseFile(at: path)
       let templateRealPath = try findTemplate(
         prefix: "fonts", templateShortName: templateName, templateFullPath: templatePath
       )
