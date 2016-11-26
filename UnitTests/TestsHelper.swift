@@ -6,6 +6,7 @@
 
 import Foundation
 import XCTest
+import PathKit
 
 private let colorCode: (String) -> String = ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
 private let (msgColor, reset) = (colorCode("fg250,0,0"), colorCode(""))
@@ -52,35 +53,33 @@ func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #
 }
 
 extension XCTestCase {
-  func fixturesDir(subDirectory subDir: String? = nil) -> String {
+  func fixturesDir(subDirectory subDir: String? = nil) -> Path {
     guard let rsrcURL = Bundle(for: type(of: self)).resourceURL else {
       fatalError("Unable to find resource directory URL")
     }
-    guard let dir = subDir else { return rsrcURL.path }
-    #if swift(>=2.3)
-      return rsrcURL.appendingPathComponent(dir, isDirectory: true).path
-    #else
-      return rsrcURL.URLByAppendingPathComponent(dir, isDirectory: true).path
-    #endif
+    let rsrc = Path(rsrcURL.path)
+
+    guard let dir = subDir else { return rsrc }
+    return rsrc + dir
   }
 
-  func fixturePath(_ name: String, subDirectory: String? = nil) -> String {
+  func fixture(_ name: String, subDirectory: String? = nil) -> Path {
     guard let path = Bundle(for: type(of: self)).path(forResource: name, ofType: "", inDirectory: subDirectory) else {
       fatalError("Unable to find fixture \"\(name)\"")
     }
-    return path
+    return Path(path)
   }
 
-  func directoryPath() -> String {
+  func directory() -> Path {
     guard let path = Bundle(for: type(of: self)).resourcePath else {
       fatalError("Unable to get test bundle resource path")
     }
-    return path
+    return Path(path)
   }
 
   func fixtureString(_ name: String, encoding: String.Encoding = .utf8) -> String {
     do {
-      return try String(contentsOfFile: fixturePath(name), encoding: encoding) as String
+      return try fixture(name).read(encoding)
     } catch let e {
       fatalError("Unable to load fixture content: \(e)")
     }
