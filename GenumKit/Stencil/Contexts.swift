@@ -47,7 +47,7 @@ extension ColorsFileParser {
         "rgb": String(hexChars[0..<6]),
         "red": comps[0],
         "green": comps[1],
-        "blue" : comps[2],
+        "blue": comps[2],
         "alpha": comps[3],
       ]
     }).sorted { $0["name"] ?? "" < $1["name"] ?? "" }

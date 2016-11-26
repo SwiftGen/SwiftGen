@@ -22,7 +22,7 @@ public final class AssetsCatalogParser {
     }
   }
 
-  public func parseCatalog(at path: String) {
+  public func parseCatalog(at path: Path) {
     guard let items = loadAssetCatalog(at: path) else { return }
 
     // process recursively
@@ -93,8 +93,8 @@ extension AssetsCatalogParser {
 // MARK: - ACTool
 
 extension AssetsCatalogParser {
-  fileprivate func loadAssetCatalog(at path: String) -> [[String: AnyObject]]? {
-    let command = Command("xcrun", arguments: "actool", "--print-contents", path)
+  fileprivate func loadAssetCatalog(at path: Path) -> [[String: Any]]? {
+    let command = Command("xcrun", arguments: "actool", "--print-contents", String(describing: path))
     let output = command.execute() as Data
 
     // try to parse plist
@@ -102,12 +102,12 @@ extension AssetsCatalogParser {
         .propertyList(from: output, format: nil) else { return nil }
 
     // get first parsed catalog
-    guard let contents = plist as? [String: AnyObject],
-      let catalogs = contents[AssetCatalog.root.rawValue] as? [[String: AnyObject]],
+    guard let contents = plist as? [String: Any],
+      let catalogs = contents[AssetCatalog.root.rawValue] as? [[String: Any]],
       let catalog = catalogs.first else { return nil }
 
     // get list of children
-    guard let children = catalog[AssetCatalog.children.rawValue] as? [[String: AnyObject]] else { return nil }
+    guard let children = catalog[AssetCatalog.children.rawValue] as? [[String: Any]] else { return nil }
 
     return children
   }
