@@ -60,6 +60,7 @@ public final class FontsFileParser {
 
   public func parseFile(at path: Path) {
     // PathKit does not support support enumeration with options yet
+    // see: https://github.com/kylef/PathKit/pull/25
     let url = URL(fileURLWithPath: String(describing: path))
 
     if let dirEnum = FileManager.default.enumerator(at: url,

@@ -25,7 +25,7 @@ let templatesListCommand = command(
   var outputLines = Array<String>()
 
   let printTemplates = { (prefix: String, list: [Path]) in
-    for file in list where file.lastComponent.hasPrefix("\(prefix)-") && file.`extension` == "stencil" {
+    for file in list where file.lastComponent.hasPrefix("\(prefix)-") && file.extension == "stencil" {
       let basename = file.lastComponentWithoutExtension
       let idx = basename.index(basename.startIndex, offsetBy: prefix.characters.count+1)
       let name = basename[idx..<basename.endIndex]

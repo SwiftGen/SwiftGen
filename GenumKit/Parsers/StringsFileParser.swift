@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import PathKit
 
 public enum StringsFileParserError: Error, CustomStringConvertible {
   case FailureOnLoading(path: String)
@@ -30,9 +31,9 @@ public final class StringsFileParser {
   }
 
   // Localizable.strings files are generally UTF16, not UTF8!
-  public func parseFile(at path: String) throws {
-    guard let data = try? NSData(contentsOfFile: path) as Data else {
-      throw StringsFileParserError.FailureOnLoading(path: path)
+  public func parseFile(at path: Path) throws {
+    guard let data = try? path.read() else {
+      throw StringsFileParserError.FailureOnLoading(path: String(describing: path))
     }
 
     let plist = try PropertyListSerialization
