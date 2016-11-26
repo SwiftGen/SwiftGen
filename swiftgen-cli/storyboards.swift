@@ -17,17 +17,19 @@ let storyboardsCommand = command(
     description: "The name of the enum to generate for Segues"),
   VariadicOption<String>("import", [],
     description: "Additional imports to be added to the generated file"),
-  Argument<Path>("PATH",
+  VariadicArgument<Path>("PATH",
     description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard",
-    validator: pathExists)
-) { output, templateName, templatePath, sceneEnumName, segueEnumName, extraImports, path in
+    validator: pathsExist)
+) { output, templateName, templatePath, sceneEnumName, segueEnumName, extraImports, paths in
   let parser = StoryboardParser()
 
   do {
-    if path.extension == "storyboard" {
-      try parser.addStoryboard(at: path)
-    } else {
-      try parser.parseDirectory(at: path)
+    for path in paths {
+      if path.extension == "storyboard" {
+        try parser.addStoryboard(at: path)
+      } else {
+        try parser.parseDirectory(at: path)
+      }
     }
 
     let templateRealPath = try findTemplate(
