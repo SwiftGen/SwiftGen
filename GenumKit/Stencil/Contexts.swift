@@ -75,60 +75,62 @@ extension AssetsCatalogParser {
     )
   }
 
-  func justValues(entries: [Entry]) -> [String] {
+  private func justValues(entries: [Entry]) -> [String] {
     var result = [String]()
 
     for entry in entries {
-      if let items = entry.items {
+      switch entry {
+      case let .namespace(name: name, items: items):
         result += justValues(entries: items)
-      } else {
-        result += [entry.value]
+      case let .image(name: _, value: value):
+        result += [value]
       }
     }
 
     return result
   }
 
-  func structure(entries: [Entry], currentLevel: Int = 0, maxLevel: Int = 5) -> [[String: Any]] {
+  private func structure(entries: [Entry], currentLevel: Int = 0, maxLevel: Int = 5) -> [[String: Any]] {
     return entries.map { entry in
-      if let items = entry.items {
+      switch entry {
+      case let .namespace(name: name, items: items):
         if currentLevel + 1 >= maxLevel {
           return [
-            "name": entry.name,
+            "name": name,
             "items": flatten(entries: items)
           ]
         } else {
           return [
-            "name": entry.name,
+            "name": name,
             "items": structure(entries: items, currentLevel: currentLevel + 1, maxLevel: maxLevel)
           ]
         }
-      } else {
+      case let .image(name: name, value: value):
         return [
-          "name": entry.name,
-          "value": entry.value
+          "name": name,
+          "value": value
         ]
       }
     }
   }
 
-  func flatten(entries: [Entry]) -> [[String: Any]] {
+  private func flatten(entries: [Entry]) -> [[String: Any]] {
     var result = [[String: Any]]()
 
     for entry in entries {
-      if let items = entry.items {
+      switch entry {
+      case let .namespace(name: name, items: items):
         result += flatten(entries: items).map { item in
           return [
-            "name": "\(entry.name)/\(item["name"]!)",
+            "name": "\(name)/\(item["name"]!)",
             "value": item["value"]!
           ]
         }
-      } else {
-        let t: [String: Any] = [
-          "name": entry.name,
-          "value": entry.value
-        ]
-        result += [t]
+      case let .image(name: name, value: value):
+        result += [[
+          "name": name,
+          "value": value
+        ]]
       }
     }
 

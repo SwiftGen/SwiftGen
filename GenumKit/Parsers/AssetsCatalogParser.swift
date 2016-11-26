@@ -14,12 +14,18 @@ public final class AssetsCatalogParser {
 
   @discardableResult
   public func addImage(named name: String) -> Bool {
-    if (entries.contains { $0.name == name }) {
-      return false
-    } else {
-      entries.append(Entry(name: name, value: name))
+    let found = entries.contains {
+      if case let .image(imageName, _) = $0, imageName == name {
       return true
+    } else {
+      return false
     }
+  }
+
+  guard !found else { return false }
+  entries.append(Entry.image(name: name, value: name))
+
+    return true
   }
 
   public func parseCatalog(at path: Path) {
@@ -29,21 +35,9 @@ public final class AssetsCatalogParser {
     entries = process(items: items)
   }
 
-  struct Entry {
-    var name: String
-    var value: String
-    var items: [Entry]?
-
-    init(name: String, value: String) {
-      self.name = name
-      self.value = value
-    }
-
-    init(name: String, items: [Entry]) {
-      self.name = name
-      self.items = items
-      self.value = ""
-    }
+  enum Entry {
+  case image(name: String, value: String)
+  case namespace(name: String, items: [Entry])
   }
 }
 
@@ -70,18 +64,18 @@ extension AssetsCatalogParser {
         // this is a simple imageset
         let imageName = path.lastComponentWithoutExtension
 
-        result += [Entry(name: imageName, value: "\(prefix)\(imageName)")]
+        result += [.image(name: imageName, value: "\(prefix)\(imageName)")]
       } else {
         // this is a group/folder
         let children = item[AssetCatalog.children] as? [[String: Any]] ?? []
 
-        if let providesNamespace = item[AssetCatalog.providesNamespace] as? NSNumber,
-          providesNamespace.boolValue {
+        if let providesNamespace = item[AssetCatalog.providesNamespace] as? Bool,
+          providesNamespace {
           let processed = process(items: children, withPrefix: "\(prefix)\(filename)/")
-          result += [Entry(name: filename, items: processed)]
+          result += [.namespace(name: filename, items: processed)]
         } else {
           let processed = process(items: children, withPrefix: prefix)
-          result += [Entry(name: filename, items: processed)]
+          result += [.namespace(name: filename, items: processed)]
         }
       }
     }
