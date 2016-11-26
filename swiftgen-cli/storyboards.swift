@@ -16,7 +16,7 @@ let storyboardsCommand = command(
   Option<String>("segueEnumName", "StoryboardSegue", flag: "g",
     description: "The name of the enum to generate for Segues"),
   Options<String>("import", [], count: 0,
-		description: "Additional imports to be added to the generated file"),
+    description: "Additional imports to be added to the generated file"),
   Argument<Path>("PATH",
     description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard",
     validator: pathExists)

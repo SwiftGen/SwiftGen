@@ -187,22 +187,22 @@ class StoryboardsOSXTests: XCTestCase {
 
     let expected = self.fixtureString("Storyboards-osx-All-Default.swift.out")
     XCTDiffStrings(result, expected)
-	}
+  }
 
-	func testAdditionalImport() {
-		let parser = StoryboardParser()
-		parser.addStoryboard(at: self.fixturePath("AdditionalImport-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+  func testAdditionalImport() {
+    let parser = StoryboardParser()
+    parser.addStoryboard(at: self.fixturePath("AdditionalImport-osx.storyboard", subDirectory: StoryboardsDir.macOS))
 
-		// additional import statements
-		let extraImports = [
-			"DBPrefsWindowController"
-		]
+    // additional import statements
+    let extraImports = [
+      "DBPrefsWindowController"
+    ]
 
-		let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
-		let context = parser.stencilContext(sceneEnumName: "StoryboardScene", segueEnumName: "StoryboardSegue", extraImports: extraImports)
-		let result = try! template.render(context)
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
+    let context = parser.stencilContext(sceneEnumName: "StoryboardScene", segueEnumName: "StoryboardSegue", extraImports: extraImports)
+    let result = try! template.render(context)
 
-		let expected = self.fixtureString("Storyboards-osx-AdditionalImport-Default.swift.out")
-		XCTDiffStrings(result, expected)
-	}
+    let expected = self.fixtureString("Storyboards-osx-AdditionalImport-Default.swift.out")
+    XCTDiffStrings(result, expected)
+  }
 }
