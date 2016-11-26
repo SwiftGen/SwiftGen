@@ -6,6 +6,7 @@
 
 import Foundation
 import AppKit.NSColor
+import PathKit
 
 public protocol ColorsFileParser {
   var colors: [String: UInt32] { get }
@@ -64,9 +65,9 @@ public final class ColorsTextFileParser: ColorsFileParser {
     colors[name] = value
   }
 
-  public func keyValueDict(fromPath path: String, withSeperator seperator: String = ":") throws -> [String:String] {
+  public func keyValueDict(from path: Path, withSeperator seperator: String = ":") throws -> [String:String] {
 
-    let content = try String(contentsOfFile: path, encoding: .utf8)
+    let content = try path.read(.utf8)
     let lines = content.components(separatedBy: CharacterSet.newlines)
     let whitespace = CharacterSet.whitespaces
     let skippedCharacters = NSMutableCharacterSet()
@@ -110,8 +111,8 @@ public final class ColorsTextFileParser: ColorsFileParser {
   //  - One line per entry
   //  - Each line composed by the color name, then ":", then the color hex representation
   //  - Extra spaces will be skipped
-  public func parseFile(at path: String, separator: String = ":") throws {
-    let dict = try keyValueDict(fromPath: path, withSeperator: separator)
+  public func parseFile(at path: Path, separator: String = ":") throws {
+    let dict = try keyValueDict(from: path, withSeperator: separator)
     for key in dict.keys {
       do {
         try addColor(named: key, value: colorValue(forKey: key, onDict: dict))
@@ -129,8 +130,8 @@ public final class ColorsCLRFileParser: ColorsFileParser {
 
   public init() {}
 
-  public func parseFile(at path: String) {
-    if let colorsList = NSColorList(name: "UserColors", fromFile: path) {
+  public func parseFile(at path: Path) {
+    if let colorsList = NSColorList(name: "UserColors", fromFile: String(describing: path)) {
       for colorName in colorsList.allKeys {
         colors[colorName] = colorsList.color(withKey: colorName)?.rgbColor?.hexValue
       }
@@ -193,10 +194,8 @@ public final class ColorsXMLFileParser: ColorsFileParser {
     }
   }
 
-  public func parseFile(at path: String) throws {
-    guard let parser = XMLParser(contentsOf: URL(fileURLWithPath: path)) else {
-      throw NSError(domain: XMLParser.errorDomain, code: XMLParser.ErrorCode.internalError.rawValue, userInfo: nil)
-    }
+  public func parseFile(at path: Path) throws {
+    let parser = XMLParser(data: try path.read())
     let delegate = ParserDelegate()
     parser.delegate = delegate
     parser.parse()
@@ -212,9 +211,8 @@ public final class ColorsJSONFileParser: ColorsFileParser {
 
   public init() {}
 
-  public func parseFile(at path: String) throws {
-    if let JSONdata = try? Data(contentsOf: URL(fileURLWithPath: path)),
-      let json = try? JSONSerialization.jsonObject(with: JSONdata, options: []),
+  public func parseFile(at path: Path) throws {
+    if let json = try? JSONSerialization.jsonObject(with: try path.read(), options: []),
       let dict = json as? [String: String] {
         for (key, value) in dict {
           colors[key] = try parse(hex: value)

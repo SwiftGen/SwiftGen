@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import PathKit
 
 public final class StoryboardParser {
   struct InitialScene {
@@ -86,25 +87,25 @@ public final class StoryboardParser {
     }
   }
 
-  public func addStoryboard(at path: String) {
-    let parser = XMLParser(contentsOf: URL(fileURLWithPath: path))
+  public func addStoryboard(at path: Path) throws {
+    let parser = XMLParser(data: try path.read())
 
     let delegate = ParserDelegate()
-    parser?.delegate = delegate
-    parser?.parse()
+    parser.delegate = delegate
+    parser.parse()
 
-    let storyboardName = ((path as NSString).lastPathComponent as NSString).deletingPathExtension
+    let storyboardName = path.lastComponentWithoutExtension
     initialScenes[storyboardName] = delegate.initialScene
     storyboardsScenes[storyboardName] = delegate.scenes
     storyboardsSegues[storyboardName] = delegate.segues
   }
 
-  public func parseDirectory(at path: String) {
-    if let dirEnum = FileManager.default.enumerator(atPath: path) {
-      while let subPath = dirEnum.nextObject() as? NSString {
-        if subPath.pathExtension == "storyboard" {
-          self.addStoryboard(at: (path as NSString).appendingPathComponent(subPath as String))
-        }
+  public func parseDirectory(at path: Path) throws {
+    let iterator = path.makeIterator()
+
+    while let subPath = iterator.next() {
+      if subPath.extension == "storyboard" {
+        try addStoryboard(at: subPath)
       }
     }
   }

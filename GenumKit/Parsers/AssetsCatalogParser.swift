@@ -22,7 +22,7 @@ public final class AssetsCatalogParser {
     }
   }
 
-  public func parseCatalog(at path: String) {
+  public func parseCatalog(at path: Path) {
     guard let items = loadAssetCatalog(at: path) else { return }
 
     // process recursively
@@ -66,7 +66,7 @@ extension AssetsCatalogParser {
       guard let filename = item[AssetCatalog.filename] as? String else { continue }
       let path = Path(filename)
 
-      if path.`extension` == AssetsCatalogParser.imageSetExtension {
+      if path.extension == AssetsCatalogParser.imageSetExtension {
         // this is a simple imageset
         let imageName = path.lastComponentWithoutExtension
 
@@ -93,8 +93,8 @@ extension AssetsCatalogParser {
 // MARK: - ACTool
 
 extension AssetsCatalogParser {
-  fileprivate func loadAssetCatalog(at path: String) -> [[String: Any]]? {
-    let command = Command("xcrun", arguments: "actool", "--print-contents", path)
+  fileprivate func loadAssetCatalog(at path: Path) -> [[String: Any]]? {
+    let command = Command("xcrun", arguments: "actool", "--print-contents", String(describing: path))
     let output = command.execute() as Data
 
     // try to parse plist

@@ -7,6 +7,9 @@
 * Swift 3 migration.  
   [ahtierney](https://github.com/ahtierney)
   [#201](https://github.com/AliSoftware/SwiftGen/pull/201)
+* Consolidate use of PathKit internally.    
+  [David Jennes](https://github.com/djbe)
+  [#212](https://github.com/AliSoftware/SwiftGen/pull/212)
 
 ## 4.0.0
 
