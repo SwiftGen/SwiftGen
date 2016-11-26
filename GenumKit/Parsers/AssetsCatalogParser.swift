@@ -22,7 +22,7 @@ public final class AssetsCatalogParser {
     }
   }
 
-  public func parseCatalog(at path: Path) {
+  public func parseCatalog(at path: String) {
     guard let items = loadAssetCatalog(at: path) else { return }
 
     // process recursively
@@ -73,7 +73,7 @@ extension AssetsCatalogParser {
         result += [Entry(name: imageName, value: "\(prefix)\(imageName)")]
       } else {
         // this is a group/folder
-        let children = item[AssetCatalog.children.rawValue] as? [[String: AnyObject]] ?? []
+        let children = item[AssetCatalog.children.rawValue] as? [[String: Any]] ?? []
 
         if let providesNamespace = item[AssetCatalog.providesNamespace.rawValue] as? NSNumber,
           providesNamespace.boolValue {
@@ -93,8 +93,8 @@ extension AssetsCatalogParser {
 // MARK: - ACTool
 
 extension AssetsCatalogParser {
-  fileprivate func loadAssetCatalog(at path: Path) -> [[String: Any]]? {
-    let command = Command("xcrun", arguments: "actool", "--print-contents", String(describing: path))
+  fileprivate func loadAssetCatalog(at path: String) -> [[String: Any]]? {
+    let command = Command("xcrun", arguments: "actool", "--print-contents", path)
     let output = command.execute() as Data
 
     // try to parse plist

@@ -15,7 +15,7 @@ let imagesCommand = command(
   Argument<Path>("DIR", description: "Directory to scan for .imageset files.", validator: dirExists)
 ) { output, templateName, templatePath, enumName, path in
   let parser = AssetsCatalogParser()
-  parser.parseCatalog(at: path)
+  parser.parseCatalog(at: String(describing: path))
 
   do {
     let templateRealPath = try findTemplate(
