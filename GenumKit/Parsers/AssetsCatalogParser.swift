@@ -53,6 +53,40 @@ private enum AssetCatalog {
 extension AssetsCatalogParser {
   static let imageSetExtension = "imageset"
 
+  /**
+   This method recursively parses a tree of nodes (similar to a directory structure)
+   resulting from the `actool` utility.
+   
+   Each node in an asset catalog is either (there are more types, but we ignore those):
+   - An imageset, which is essentially a group containing a list of files (the latter is ignored).
+
+         <dict>
+           <key>children</key>
+           <array>
+             ...actual file items here (for example the 1x, 2x and 3x images)...
+           </array>
+           <key>filename</key>
+           <string>Tomato.imageset</string>
+         </dict>
+
+   - A group, containing sub items such as imagesets or groups. A group can provide a namespaced,
+     which means that all the sub items will have to be prefixed with their parent's name.
+
+         <dict>
+           <key>children</key>
+           <array>
+             ...sub items such as groups or imagesets...
+           </array>
+           <key>filename</key>
+           <string>Round</string>
+           <key>provides-namespace</key>
+           <true/>
+         </dict>
+   
+   - Parameter items: The array of items to recursively process.
+   - Parameter prefix: The prefix to prepend values with (from namespaced groups).
+   - Returns: An array of processed Entry items.
+  */
   fileprivate func process(items: [[String: Any]], withPrefix prefix: String = "") -> [Entry] {
     var result = [Entry]()
 
@@ -87,6 +121,34 @@ extension AssetsCatalogParser {
 // MARK: - ACTool
 
 extension AssetsCatalogParser {
+  /**
+   Try to parse an asset catalog using the `actool` utilty. While it supports parsing
+   multiple catalogs at once, we only use it to parse one at a time.
+
+   The output of the utility is a Plist and should be similar to this:
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+   <plist version="1.0">
+   <dict>
+     <key>com.apple.actool.catalog-contents</key>
+     <array>
+       <dict>
+			 <key>children</key>
+         <array>
+           ...
+         </array>
+			   <key>filename</key>
+			   <string>Images.xcassets</string>
+       </dict>
+     </array>
+   </dict>
+   </plist>
+   ```
+   
+   - Parameter path: The path to the catalog to parse.
+   - Returns: An array of dictionaries, representing the tree of nodes in the catalog.
+  */
   fileprivate func loadAssetCatalog(at path: Path) -> [[String: Any]]? {
     let command = Command("xcrun", arguments: "actool", "--print-contents", String(describing: path))
     let output = command.execute() as Data
