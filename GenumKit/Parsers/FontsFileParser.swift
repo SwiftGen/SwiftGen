@@ -7,6 +7,7 @@
 
 import Foundation
 import AppKit.NSFont
+import PathKit
 
 // MARK: Font
 
@@ -57,8 +58,10 @@ public final class FontsFileParser {
 
   public init() {}
 
-  public func parseFile(at path: String) {
-    let url = URL(fileURLWithPath: path)
+  public func parseFile(at path: Path) {
+    // PathKit does not support support enumeration with options yet
+    let url = URL(fileURLWithPath: String(describing: path))
+
     if let dirEnum = FileManager.default.enumerator(at: url,
       includingPropertiesForKeys: [],
       options: [.skipsHiddenFiles, .skipsPackageDescendants],
