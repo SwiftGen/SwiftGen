@@ -49,11 +49,11 @@ public final class AssetsCatalogParser {
 
 // MARK: - Plist processing
 
-private enum AssetCatalog: String {
-  case children = "children"
-  case filename = "filename"
-  case providesNamespace = "provides-namespace"
-  case root = "com.apple.actool.catalog-contents"
+private enum AssetCatalog {
+  static let children = "children"
+  static let filename = "filename"
+  static let providesNamespace = "provides-namespace"
+  static let root = "com.apple.actool.catalog-contents"
 }
 
 extension AssetsCatalogParser {
@@ -63,7 +63,7 @@ extension AssetsCatalogParser {
     var result = [Entry]()
 
     for item in items {
-      guard let filename = item[AssetCatalog.filename.rawValue] as? String else { continue }
+      guard let filename = item[AssetCatalog.filename] as? String else { continue }
       let path = Path(filename)
 
       if path.`extension` == AssetsCatalogParser.imageSetExtension {
@@ -73,9 +73,9 @@ extension AssetsCatalogParser {
         result += [Entry(name: imageName, value: "\(prefix)\(imageName)")]
       } else {
         // this is a group/folder
-        let children = item[AssetCatalog.children.rawValue] as? [[String: Any]] ?? []
+        let children = item[AssetCatalog.children] as? [[String: Any]] ?? []
 
-        if let providesNamespace = item[AssetCatalog.providesNamespace.rawValue] as? NSNumber,
+        if let providesNamespace = item[AssetCatalog.providesNamespace] as? NSNumber,
           providesNamespace.boolValue {
           let processed = process(items: children, withPrefix: "\(prefix)\(filename)/")
           result += [Entry(name: filename, items: processed)]
@@ -103,11 +103,11 @@ extension AssetsCatalogParser {
 
     // get first parsed catalog
     guard let contents = plist as? [String: Any],
-      let catalogs = contents[AssetCatalog.root.rawValue] as? [[String: Any]],
+      let catalogs = contents[AssetCatalog.root] as? [[String: Any]],
       let catalog = catalogs.first else { return nil }
 
     // get list of children
-    guard let children = catalog[AssetCatalog.children.rawValue] as? [[String: Any]] else { return nil }
+    guard let children = catalog[AssetCatalog.children] as? [[String: Any]] else { return nil }
 
     return children
   }
