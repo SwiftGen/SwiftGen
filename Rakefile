@@ -51,7 +51,7 @@ end
 def defaults(args)
   bindir = args.bindir.nil? || args.bindir.empty? ? Pathname.new('./build/swiftgen/bin') : Pathname.new(args.bindir)
   fmkdir = args.fmkdir.nil? || args.fmkdir.empty? ? bindir + '../lib' : Pathname.new(args.fmkdir)
-  tpldir = args.tpldir.nil? || args.tpldir.empty? ? bindir + '../templates' : Pathname.new(args.tpldir)
+  tpldir = args.tpldir.nil? || args.tpldir.empty? ? bindir + '../Resources/templates' : Pathname.new(args.tpldir)
   [bindir, fmkdir, tpldir].map(&:expand_path)
 end
 
@@ -91,7 +91,7 @@ end
 ## [ Install Tasks ] ##########################################################
 
 desc "Install the binary in $bindir, frameworks — without the Swift dylibs — in $fmkdir, and templates in $tpldir\n" \
-     "(defaults $bindir=./build/swiftgen/bin/, $fmkdir=$bindir/../lib, $tpldir=$bindir/../templates"
+     "(defaults $bindir=./build/swiftgen/bin/, $fmkdir=$bindir/../lib, $tpldir=$bindir/../Resources/templates"
 task 'install:light', [:bindir, :fmkdir, :tpldir] => :build do |_, args|
   (bindir, fmkdir, tpldir) = defaults(args)
 
@@ -112,7 +112,7 @@ task 'install:light', [:bindir, :fmkdir, :tpldir] => :build do |_, args|
 end
 
 desc "Install the binary in $bindir, frameworks — including Swift dylibs — in $fmkdir, and templates in $tpldir\n" \
-     "(defaults $bindir=./swiftgen/bin/, $fmkdir=$bindir/../lib, $tpldir=$bindir/../templates"
+     "(defaults $bindir=./swiftgen/bin/, $fmkdir=$bindir/../lib, $tpldir=$bindir/../Resources/templates"
 task :install, [:bindir, :fmkdir, :tpldir] => 'install:light' do |_, args|
   (bindir, fmkdir, tpldir) = defaults(args)
 
@@ -223,7 +223,7 @@ namespace :release do
     req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' => content_type})
     yield req if block_given?
     req.basic_auth 'AliSoftware', File.read('.apitoken').chomp
-      
+
     response = Net::HTTP.start(uri.host, uri.port, :use_ssl => (uri.scheme == 'https')) do |http|
       http.request(req)
     end
@@ -238,19 +238,19 @@ namespace :release do
   desc 'Upload the zipped binaries to a new GitHub release'
   task :github => :zip do
     v = podspec_version
-    
+
     changelog = `sed -n /'^## #{v}$'/,/'^## '/p CHANGELOG.md`.gsub(/^## .*$/,'').strip
     print_info "Releasing version #{v} on GitHub"
     puts changelog
-  
+
     json = post('https://api.github.com/repos/AliSoftware/SwiftGen/releases', 'application/json') do |req|
       req.body = { :tag_name => v, :name => v, :body => changelog, :draft => false, :prerelease => false }.to_json
     end
-    
+
     upload_url = json['upload_url'].gsub(/\{.*\}/,"?name=swiftgen-#{v}.zip")
     zipfile = "build/swiftgen-#{v}.zip"
     zipsize = File.size(zipfile)
-    
+
     print_info "Uploading ZIP (#{zipsize} bytes)"
     post(upload_url, 'application/zip') do |req|
       req.body_stream = File.open(zipfile, 'rb')

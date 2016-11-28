@@ -78,8 +78,9 @@ extension XCTestCase {
   }
 
   func fixtureString(_ name: String, encoding: String.Encoding = .utf8) -> String {
+    let subDir: String? = name.hasSuffix(".stencil") ? "templates" : nil
     do {
-      return try fixture(name).read(encoding)
+      return try fixture(name, subDirectory: subDir).read(encoding)
     } catch let e {
       fatalError("Unable to load fixture content: \(e)")
     }

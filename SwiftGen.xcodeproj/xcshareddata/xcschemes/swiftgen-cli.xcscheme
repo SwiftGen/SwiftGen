@@ -53,6 +53,15 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "234F7E6D1DEBD5C5001B3C10"
+            BuildableName = "swiftgen.app"
+            BlueprintName = "swiftgen"
+            ReferencedContainer = "container:SwiftGen.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -63,18 +72,19 @@
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
-      debugDocumentVersioning = "YES"
+      debugDocumentVersioning = "NO"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "09A87B401BCC9B8000D9B9F5"
-            BuildableName = "swiftgen"
+            BlueprintIdentifier = "234F7E6D1DEBD5C5001B3C10"
+            BuildableName = "swiftgen.app"
             BlueprintName = "swiftgen"
             ReferencedContainer = "container:SwiftGen.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "XcodeColors"
@@ -96,7 +106,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "09A87B401BCC9B8000D9B9F5"
             BuildableName = "swiftgen"
-            BlueprintName = "swiftgen"
+	    BlueprintName = "swiftgen"
             ReferencedContainer = "container:SwiftGen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
