@@ -14,14 +14,12 @@ let imagesCommand = command(
   Option<String>("enumName", "Asset", flag: "e", description: "The name of the enum to generate"),
   Argument<Path>("DIR", description: "Directory to scan for .imageset files.", validator: dirExists)
 ) { output, templateName, templatePath, enumName, path in
-  let parser = AssetsCatalogParser()
-
-  switch path.extension {
-  case "xcassets"?:
-    parser.parseCatalog(at: path)
-  default:
+  guard let `extension` = path.extension, `extension` == "xcassets" else {
     throw ArgumentError.invalidType(value: String(describing: path), type: "xcassets file", argument: nil)
   }
+
+  let parser = AssetsCatalogParser()
+  parser.parseCatalog(at: path)
 
   do {
     let templateRealPath = try findTemplate(
