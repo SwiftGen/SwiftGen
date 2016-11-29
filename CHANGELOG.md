@@ -23,8 +23,7 @@
   [Afonso](https://github.com/afonsograca)
   [#194](https://github.com/AliSoftware/SwiftGen/pull/194)
 * Add option to add import statements at the top of the generated swift file (for
-  storyboards) using the `import` flag. Multiple imports can be added by repeating
-  this flag.  
+  storyboards) using the `import` flag.  
   [David Jennes](https://github.com/djbe)
   [#175](https://github.com/AliSoftware/SwiftGen/pull/175)
 * Remove the `key` param label from the `tr` function for Localized String in the swift3 template.  
@@ -35,7 +34,9 @@
   [#198](https://github.com/AliSoftware/SwiftGen/pull/198)
 * The `swiftgen images` command now uses the `actool` utility to parse asset catalogs,
   ensuring that the parser correctly handles namespaced folders.  
-  [David Jennes](https://github.com/djbe)
+  ⚠️ Note that you now have to specify the exact path to your `.xcassets` assets catalogs
+  when using `swiftgen images` (and not just a directory to parse)
+  [David Jennes](https://github.com/djbe)
   [#199](https://github.com/AliSoftware/SwiftGen/pull/199)
 
 ## 3.0.1
