@@ -33,22 +33,22 @@ struct AssetType: ExpressibleByStringLiteral {
 }
 
 // swiftlint:disable type_body_length
-struct Asset {
+enum Asset {
 
-  struct Exotic {
+  enum Exotic {
     static let banana: AssetType = "Exotic/Banana"
     static let mango: AssetType = "Exotic/Mango"
   }
   static let lemon: AssetType = "Lemon"
 
-  struct Round {
+  enum Round {
     static let apricot: AssetType = "Round/Apricot"
     static let orange: AssetType = "Round/Orange"
 
-    struct Red {
+    enum Red {
       static let apple: AssetType = "Round/Apple"
 
-      struct Double {
+      enum Double {
         static let cherry: AssetType = "Round/Double/Cherry"
       }
       static let tomato: AssetType = "Round/Tomato"
