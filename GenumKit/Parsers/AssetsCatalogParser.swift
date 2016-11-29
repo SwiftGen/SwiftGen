@@ -16,14 +16,14 @@ public final class AssetsCatalogParser {
   public func addImage(named name: String) -> Bool {
     let found = entries.contains {
       if case let .image(imageName, _) = $0, imageName == name {
-      return true
-    } else {
-      return false
+        return true
+      } else {
+        return false
+      }
     }
-  }
 
-  guard !found else { return false }
-  entries.append(Entry.image(name: name, value: name))
+    guard !found else { return false }
+    entries.append(Entry.image(name: name, value: name))
 
     return true
   }
@@ -134,12 +134,12 @@ extension AssetsCatalogParser {
      <key>com.apple.actool.catalog-contents</key>
      <array>
        <dict>
-			 <key>children</key>
+         <key>children</key>
          <array>
            ...
          </array>
-			   <key>filename</key>
-			   <string>Images.xcassets</string>
+         <key>filename</key>
+         <string>Images.xcassets</string>
        </dict>
      </array>
    </dict>
