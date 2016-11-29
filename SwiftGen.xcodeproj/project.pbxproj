@@ -311,6 +311,7 @@
 			indentWidth = 2;
 			sourceTree = "<group>";
 			tabWidth = 2;
+			usesTabs = 0;
 		};
 		09030B6C1B6D254200275BF5 /* Products */ = {
 			isa = PBXGroup;

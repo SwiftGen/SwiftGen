@@ -10,6 +10,9 @@
 * Consolidate use of PathKit internally.    
   [David Jennes](https://github.com/djbe)
   [#212](https://github.com/AliSoftware/SwiftGen/pull/212)
+* Fix broken `import` option added in 4.0.0.  
+  [David Jennes](https://github.com/djbe)
+  [#214](https://github.com/AliSoftware/SwiftGen/pull/214)
 
 ## 4.0.0
 
