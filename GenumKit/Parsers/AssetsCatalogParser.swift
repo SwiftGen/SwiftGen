@@ -24,6 +24,7 @@ public final class AssetsCatalogParser {
 
   public func parseCatalog(at path: Path) {
     guard let items = loadAssetCatalog(at: path) else { return }
+
     // process recursively
     processCatalog(items: items)
   }
