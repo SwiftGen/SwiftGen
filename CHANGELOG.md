@@ -13,6 +13,9 @@
 * Fix broken `import` option added in 4.0.0.  
   [David Jennes](https://github.com/djbe)
   [#214](https://github.com/AliSoftware/SwiftGen/pull/214)
+* Images: dot-syntax template.  
+  [David Jennes](https://github.com/djbe)
+  [#206](https://github.com/AliSoftware/SwiftGen/pull/206)
 
 ## 4.0.0
 
