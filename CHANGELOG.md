@@ -38,7 +38,7 @@
 * The `swiftgen images` command now uses the `actool` utility to parse asset catalogs,
   ensuring that the parser correctly handles namespaced folders.  
   ⚠️ Note that you now have to specify the exact path to your `.xcassets` assets catalogs
-  when using `swiftgen images` (and not just a directory to parse)
+  when using `swiftgen images` (and not just a directory to parse).  
   [David Jennes](https://github.com/djbe)
   [#199](https://github.com/AliSoftware/SwiftGen/pull/199)
 
