@@ -14,7 +14,7 @@ let imagesCommand = command(
   Option<String>("enumName", "Asset", flag: "e", description: "The name of the enum to generate"),
   Argument<Path>("DIR", description: "Directory to scan for .imageset files.", validator: dirExists)
 ) { output, templateName, templatePath, enumName, path in
-  guard let `extension` = path.extension, `extension` == "xcassets" else {
+  guard path.extension == "xcassets" else {
     throw ArgumentError.invalidType(value: String(describing: path), type: "xcassets file", argument: nil)
   }
 
