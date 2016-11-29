@@ -120,10 +120,11 @@ Hello Kyle
 ##### Types of descriptors
 
 - Option - An optional option with a value.
-- Options - A option with a value which can be used multiple times, your command is passed an array containing all option values.
+- Options - A option with a value which can be used multiple times, your command is passed an array containing all option values. You need to specify ahead of time how many values you expect. Example: `--myOption value1 value2 value3` 
+- VariadicOption - Same as options, but instead of a fixed `count` of values, the user can just repeat the option with additional values. Example: `--myOption value1 --myOption value2`  
 - Flag - A boolean, on/off flag.
 - Argument - A positional argument.
-- VaradicArgument - A varadic argument
+- VariadicArgument - A variadic argument
 
 **NOTE**: *It's important to describe your arguments after options and flags so the parser can differentiate between `--option value` and `--flag argument`.*
 
