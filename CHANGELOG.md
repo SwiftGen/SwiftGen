@@ -13,6 +13,9 @@
 * Fix broken `import` option added in 4.0.0.  
   [David Jennes](https://github.com/djbe)
   [#214](https://github.com/AliSoftware/SwiftGen/pull/214)
+* Strings dot-syntax template: use `enum`s for namespacing instead of `struct`s.  
+  [David Jennes](https://github.com/djbe)
+  [#218](https://github.com/AliSoftware/SwiftGen/pull/218)
 
 ## 4.0.0
 
