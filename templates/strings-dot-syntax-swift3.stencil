@@ -11,7 +11,7 @@ import Foundation
 // swiftlint:disable variable_name
 // swiftlint:disable valid_docs
 
-struct {{enumName}} {
+enum {{enumName}} {
   {# ROOT LEVEL #}
   {% for string in structuredStrings.strings %}
   /// {{string.translation}}
@@ -26,7 +26,7 @@ struct {{enumName}} {
   {% if structuredStrings.subenums %}
   {% for subenum1 in structuredStrings.subenums %}
 
-  struct {{subenum1.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+  enum {{subenum1.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
     {# LEVEL 1 #}
     {% if subenum1.strings %}
     {% for string in subenum1.strings %}
@@ -43,7 +43,7 @@ struct {{enumName}} {
     {% if subenum1.subenums %}
     {% for subenum2 in subenum1.subenums %}
 
-    struct {{subenum2.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+    enum {{subenum2.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
       {# LEVEL 2 #}
       {% if subenum2.strings %}
       {% for string in subenum2.strings %}
@@ -60,7 +60,7 @@ struct {{enumName}} {
       {% if subenum2.subenums %}
       {% for subenum3 in subenum2.subenums %}
 
-      struct {{subenum3.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+      enum {{subenum3.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
         {# LEVEL 3 #}
         {% if subenum3.strings %}
         {% for string in subenum3.strings %}
@@ -77,7 +77,7 @@ struct {{enumName}} {
         {% if subenum3.subenums %}
         {% for subenum4 in subenum3.subenums %}
 
-        struct {{subenum4.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+        enum {{subenum4.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
           {# LEVEL 4 #}
           {% if subenum4.strings %}
           {% for string in subenum4.strings %}
@@ -94,7 +94,7 @@ struct {{enumName}} {
           {% if subenum4.subenums %}
           {% for subenum5 in subenum4.subenums %}
 
-          struct {{subenum5.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+          enum {{subenum5.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
             {# LEVEL 5 #}
             {% if subenum5.strings %}
             {% for string in subenum5.strings %}
@@ -111,7 +111,7 @@ struct {{enumName}} {
             {% if subenum5.subenums %}
             {% for subenum6 in subenum5.subenums %}
 
-            struct {{subenum6.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+            enum {{subenum6.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
               {# FALLBACK LEVEL #}
               {% if subenum6.strings %}
               {% for string in subenum6.strings %}
