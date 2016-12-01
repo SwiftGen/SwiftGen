@@ -7,6 +7,9 @@
 * Swift 3 migration.  
   [ahtierney](https://github.com/ahtierney)
   [#201](https://github.com/AliSoftware/SwiftGen/pull/201)
+* Escape newlines again in .strings file keys.  
+  [ChristopherRogers](https://github.com/ChristopherRogers)
+  [#208](https://github.com/AliSoftware/SwiftGen/pull/208)
 * Consolidate use of PathKit internally.    
   [David Jennes](https://github.com/djbe)
   [#212](https://github.com/AliSoftware/SwiftGen/pull/212)
