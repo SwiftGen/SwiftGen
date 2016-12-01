@@ -13,6 +13,9 @@
 * Fix broken `import` option added in 4.0.0.  
   [David Jennes](https://github.com/djbe)
   [#214](https://github.com/AliSoftware/SwiftGen/pull/214)
+* Show an error when the provided path to the `images` command is not an asset catalog.  
+  [David Jennes](https://github.com/djbe)
+  [#217](https://github.com/AliSoftware/SwiftGen/pull/217)
 * Strings dot-syntax template: use `enum`s for namespacing instead of `struct`s.  
   [David Jennes](https://github.com/djbe)
   [#218](https://github.com/AliSoftware/SwiftGen/pull/218)
