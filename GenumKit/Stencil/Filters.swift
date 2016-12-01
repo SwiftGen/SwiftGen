@@ -114,7 +114,9 @@ extension StringFilters {
 }
 
 struct ArrayFilters {
-  static func join(value: Any?) throws -> Any? {
+  /// Joins an array of values with a separator. By default, it uses `, `
+  /// but you can pass in a different value as an argument.
+  static func join(value: Any?, arguments: [Any?]) throws -> Any? {
     let strings: [String]
     if let array = value as? [Any] {
       strings = array.flatMap { $0 as? String }
@@ -125,21 +127,13 @@ struct ArrayFilters {
       throw FilterError.invalidInputType
     }
 
-    return strings.joined(separator: ", ")
-  }
-
-  static func joinAnd(value: Any?) throws -> Any? {
-    let strings: [String]
-    if let array = value as? [Any] {
-      strings = array.flatMap { $0 as? String }
-      guard array.count == strings.count else { throw FilterError.invalidInputType }
-    } else if let array = value as? [String] {
-      strings = array
+    let separator: String
+    if let customSeparator = arguments.first as? String {
+      separator = customSeparator
     } else {
-      throw FilterError.invalidInputType
+      separator = ", "
     }
-
-    return strings.joined(separator: " &&\n    ")
+    return strings.joined(separator: separator)
   }
 }
 

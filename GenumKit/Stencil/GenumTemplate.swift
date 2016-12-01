@@ -50,7 +50,6 @@ func genumNamespace() -> Namespace {
   namespace.registerTag("map", parser: MapNode.parse)
   namespace.registerFilter("swiftIdentifier", filter: StringFilters.stringToSwiftIdentifier)
   namespace.registerFilter("join", filter: ArrayFilters.join)
-  namespace.registerFilter("join&&", filter: ArrayFilters.joinAnd)
   namespace.registerFilter("lowerFirstWord", filter: StringFilters.lowerFirstWord)
   namespace.registerFilter("snakeToCamelCase", filter: StringFilters.snakeToCamelCase)
   namespace.registerFilter("snakeToCamelCaseNoPrefix", filter: StringFilters.snakeToCamelCaseNoPrefix)

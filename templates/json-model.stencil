@@ -119,5 +119,6 @@ public final class {{ spec.type }}: DataModel, Equatable {
 
 {% map spec.fields with field set equalityList %}lhs.{{ field.name }} == rhs.{{ field.name }}{% endmap %}
 public func == (lhs: {{spec.type}}, rhs: {{spec.type}}) -> Bool {
-  return {{ equalityList|join&& }}
+  return {{ equalityList|join:" &&
+    " }}
 }
