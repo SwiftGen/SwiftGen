@@ -18,7 +18,9 @@ let jsonCommand = command(
   let parser = JSONFileParser()
   do {
     try parser.parseFile(path: path)
-    let templateRealPath = try findTemplate(prefix: "json", templateShortName: templateName, templateFullPath: templatePath)
+    let templateRealPath = try findTemplate(prefix: "json",
+                                            templateShortName: templateName,
+                                            templateFullPath: templatePath)
     let template = try GenumTemplate(path: templateRealPath)
     let context = parser.stencilContext()
     let rendered = try template.render(context)

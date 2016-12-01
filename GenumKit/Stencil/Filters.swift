@@ -139,7 +139,7 @@ struct ArrayFilters {
       throw FilterError.invalidInputType
     }
 
-    return strings.joined(separator: " && ")
+    return strings.joined(separator: " &&\n    ")
   }
 }
 

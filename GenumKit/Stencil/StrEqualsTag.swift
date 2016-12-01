@@ -9,16 +9,18 @@
 import Foundation
 import Stencil
 
-public class StrEqualsNode : NodeType {
+public class StrEqualsNode: NodeType {
   public let lvariable: Variable
   public let rvariable: Variable
   public let trueNodes: [NodeType]
   public let falseNodes: [NodeType]
 
-  public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
+  public class func parse(parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
     guard components.count == 3 else {
-      throw TemplateSyntaxError("'ifstrequals' statements should use the following 'ifstrequals lvariable rvariable' `\(token.contents)`.")
+      let error = "'ifstrequals' statements should use the following " +
+      "'ifstrequals lvariable rvariable' `\(token.contents)`."
+      throw TemplateSyntaxError(error)
     }
     let lvariable = components[1]
     let rvariable = components[2]
@@ -39,10 +41,12 @@ public class StrEqualsNode : NodeType {
     return StrEqualsNode(lvariable: lvariable, rvariable: rvariable, trueNodes: trueNodes, falseNodes: falseNodes)
   }
 
-  public class func parse_ifnotstrequals(parser:TokenParser, token:Token) throws -> NodeType {
+  public class func parse_ifnotstrequals(parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
     guard components.count == 3 else {
-      throw TemplateSyntaxError("'ifnotstrequals' statements should use the following 'ifnotstrequals lvariable rvariable' `\(token.contents)`.")
+      let error = "'ifnotstrequals' statements should use the following " +
+      "'ifnotstrequals lvariable rvariable' `\(token.contents)`."
+      throw TemplateSyntaxError(error)
     }
     let lvariable = components[1]
     let rvariable = components[2]
@@ -63,7 +67,7 @@ public class StrEqualsNode : NodeType {
     return StrEqualsNode(lvariable: lvariable, rvariable: rvariable, trueNodes: trueNodes, falseNodes: falseNodes)
   }
 
-  public init(lvariable: String, rvariable:String, trueNodes:[NodeType], falseNodes:[NodeType]) {
+  public init(lvariable: String, rvariable: String, trueNodes: [NodeType], falseNodes: [NodeType]) {
     self.lvariable = Variable(lvariable)
     self.rvariable = Variable(rvariable)
     self.trueNodes = trueNodes

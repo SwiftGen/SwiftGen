@@ -57,12 +57,16 @@ public final class UnitTestClass: DataModel, Equatable {
 
   public static func make(withDictionary dictionary: NSDictionary) throws -> Self {
     let model = try self.init(dictionary: dictionary) { error in
-      throw NSError(domain: "com.swiftgen.modelParsing", code: 0, userInfo: [ "parseMessage": error ])
+      throw NSError(domain: "com.swiftgen.modelParsing",
+                    code: 0,
+                    userInfo: [ "parseMessage": error ])
     }
     if let model = model {
       return model
     } else {
-      throw NSError(domain: "com.swiftgen.modelParsing", code: 0, userInfo: [ "parseMessage": "Model returned nil with no error." ])
+      throw NSError(domain: "com.swiftgen.modelParsing",
+                    code: 0,
+                    userInfo: [ "parseMessage": "Model returned nil with no error." ])
     }
   }
 
@@ -116,6 +120,10 @@ public final class UnitTestClass: DataModel, Equatable {
   }
 }
 
-public func ==(lhs: UnitTestClass, rhs: UnitTestClass) -> Bool {
-  return lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && lhs.friends == rhs.friends && lhs.optFriends == rhs.optFriends && lhs.age == rhs.age
+public func == (lhs: UnitTestClass, rhs: UnitTestClass) -> Bool {
+  return lhs.firstName == rhs.firstName &&
+    lhs.lastName == rhs.lastName &&
+    lhs.friends == rhs.friends &&
+    lhs.optFriends == rhs.optFriends &&
+    lhs.age == rhs.age
 }

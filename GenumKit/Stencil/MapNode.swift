@@ -6,17 +6,19 @@
 
 import Stencil
 
-public class MapNode : NodeType {
+public class MapNode: NodeType {
   let variable: Variable
   let mapVariable: String
   let resultName: String
   let nodes: [NodeType]
 
-  public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
+  public class func parse(parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
 
     guard components.count == 6 && components[2] == "with" && components[4] == "set" else {
-      throw TemplateSyntaxError("'map' statements should use the following 'map array with element set varname' `\(token.contents)`.")
+      let error = "'map' statements should use the following " +
+      "'map array with element set varname' `\(token.contents)`."
+      throw TemplateSyntaxError(error)
     }
 
     let variable = components[1]

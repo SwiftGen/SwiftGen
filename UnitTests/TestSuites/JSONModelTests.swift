@@ -10,7 +10,7 @@ import XCTest
 @testable import GenumKit
 
 class ModelsTests: XCTestCase {
-  func testEmpty() {
+  func testFullModel() {
     let parser = JSONFileParser()
     _ = try? parser.parseFile(path: self.fixture("Model.json", subDirectory: "Models"))
 
