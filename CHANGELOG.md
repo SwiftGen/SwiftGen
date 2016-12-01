@@ -19,6 +19,9 @@
 * Strings dot-syntax template: use `enum`s for namespacing instead of `struct`s.  
   [David Jennes](https://github.com/djbe)
   [#218](https://github.com/AliSoftware/SwiftGen/pull/218)
+* Updated Stencil to [0.7](https://github.com/kylef/Stencil/releases/tag/0.7.0).  
+  [Kyle Fuller](https://github.com/kylef)
+  [#216](https://github.com/AliSoftware/SwiftGen/issues/216)
 
 ## 4.0.0
 

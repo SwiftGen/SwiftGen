@@ -1,6 +1,6 @@
 /// A container for template variables.
 public class Context {
-  var dictionaries: [[String: Any]]
+  var dictionaries: [[String: Any?]]
   let namespace: Namespace
 
   /// Initialise a Context with an optional dictionary and optional namespace
@@ -14,7 +14,7 @@ public class Context {
     self.namespace = namespace
   }
 
-  open subscript(key: String) -> Any? {
+  public subscript(key: String) -> Any? {
     /// Retrieves a variable's value, starting at the current context and going upwards
     get {
       for dictionary in Array(dictionaries.reversed()) {
@@ -47,9 +47,23 @@ public class Context {
   }
 
   /// Push a new level onto the context for the duration of the execution of the given closure
-  open func push<Result>(dictionary: [String: Any]? = nil, closure: (() throws -> Result)) rethrows -> Result {
+  public func push<Result>(dictionary: [String: Any]? = nil, closure: (() throws -> Result)) rethrows -> Result {
     push(dictionary)
     defer { _ = pop() }
     return try closure()
+  }
+
+  public func flatten() -> [String: Any] {
+    var accumulator: [String: Any] = [:]
+
+    for dictionary in dictionaries {
+      for (key, value) in dictionary {
+        if let value = value {
+          accumulator.updateValue(value, forKey: key)
+        }
+      }
+    }
+
+    return accumulator
   }
 }

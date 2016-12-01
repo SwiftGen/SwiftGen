@@ -1,37 +1,39 @@
 import Foundation
 
 
-/// Split a string by spaces leaving quoted phrases together
-func smartSplit(_ value: String) -> [String] {
-  var word = ""
-  var separator: Character = " "
-  var components: [String] = []
+extension String {
+  /// Split a string by a separator leaving quoted phrases together
+  func smartSplit(separator: Character = " ") -> [String] {
+    var word = ""
+    var components: [String] = []
+    var separate: Character = separator
 
-  for character in value.characters {
-    if character == separator {
-      if separator != " " {
-        word.append(separator)
-      }
+    for character in self.characters {
+      if character == separate {
+        if separate != separator {
+          word.append(separate)
+        }
 
-      if !word.isEmpty {
-        components.append(word)
-        word = ""
-      }
+        if !word.isEmpty {
+          components.append(word)
+          word = ""
+        }
 
-      separator = " "
-    } else {
-      if separator == " " && (character == "'" || character == "\"") {
-        separator = character
+        separate = separator
+      } else {
+        if separate == separator && (character == "'" || character == "\"") {
+          separate = character
+        }
+        word.append(character)
       }
-      word.append(character)
     }
-  }
 
-  if !word.isEmpty {
-    components.append(word)
-  }
+    if !word.isEmpty {
+      components.append(word)
+    }
 
-  return components
+    return components
+  }
 }
 
 
@@ -52,13 +54,13 @@ public enum Token : Equatable {
   public func components() -> [String] {
     switch self {
     case .block(let value):
-      return smartSplit(value)
+      return value.smartSplit()
     case .variable(let value):
-      return smartSplit(value)
+      return value.smartSplit()
     case .text(let value):
-      return smartSplit(value)
+      return value.smartSplit()
     case .comment(let value):
-      return smartSplit(value)
+      return value.smartSplit()
     }
   }
 

@@ -26,27 +26,27 @@ public func renderNodes(_ nodes:[NodeType], _ context:Context) throws -> String 
   return try nodes.map { try $0.render(context) }.joined(separator: "")
 }
 
-open class SimpleNode : NodeType {
-  let handler:(Context) throws -> String
+public class SimpleNode : NodeType {
+  public let handler:(Context) throws -> String
 
-  public init(handler:@escaping (Context) throws -> String) {
+  public init(handler: @escaping (Context) throws -> String) {
     self.handler = handler
   }
 
-  open func render(_ context: Context) throws -> String {
+  public func render(_ context: Context) throws -> String {
     return try handler(context)
   }
 }
 
 
-open class TextNode : NodeType {
-  open let text:String
+public class TextNode : NodeType {
+  public let text:String
 
   public init(text:String) {
     self.text = text
   }
 
-  open func render(_ context:Context) throws -> String {
+  public func render(_ context:Context) throws -> String {
     return self.text
   }
 }
@@ -57,8 +57,8 @@ public protocol Resolvable {
 }
 
 
-open class VariableNode : NodeType {
-  open let variable: Resolvable
+public class VariableNode : NodeType {
+  public let variable: Resolvable
 
   public init(variable: Resolvable) {
     self.variable = variable
@@ -68,7 +68,7 @@ open class VariableNode : NodeType {
     self.variable = Variable(variable)
   }
 
-  open func render(_ context: Context) throws -> String {
+  public func render(_ context: Context) throws -> String {
     let result = try variable.resolve(context)
 
     if let result = result as? String {
