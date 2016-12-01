@@ -1,10 +1,10 @@
-public class ForNode : NodeType {
-  let variable:Variable
+class ForNode : NodeType {
+  let resolvable: Resolvable
   let loopVariable:String
   let nodes:[NodeType]
   let emptyNodes: [NodeType]
 
-  public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
+  class func parse(_ parser:TokenParser, token:Token) throws -> NodeType {
     let components = token.components()
 
     guard components.count == 4 && components[2] == "in" else {
@@ -27,18 +27,19 @@ public class ForNode : NodeType {
       _ = parser.nextToken()
     }
 
-    return ForNode(variable: variable, loopVariable: loopVariable, nodes: forNodes, emptyNodes:emptyNodes)
+    let filter = try parser.compileFilter(variable)
+    return ForNode(resolvable: filter, loopVariable: loopVariable, nodes: forNodes, emptyNodes:emptyNodes)
   }
 
-  public init(variable:String, loopVariable:String, nodes:[NodeType], emptyNodes:[NodeType]) {
-    self.variable = Variable(variable)
+  init(resolvable: Resolvable, loopVariable:String, nodes:[NodeType], emptyNodes:[NodeType]) {
+    self.resolvable = resolvable
     self.loopVariable = loopVariable
     self.nodes = nodes
     self.emptyNodes = emptyNodes
   }
 
-  public func render(context: Context) throws -> String {
-    let values = try variable.resolve(context)
+  func render(_ context: Context) throws -> String {
+    let values = try resolvable.resolve(context)
 
     if let values = values as? [Any] , values.count > 0 {
       let count = values.count
@@ -52,7 +53,7 @@ public class ForNode : NodeType {
         return try context.push(dictionary: [loopVariable: item, "forloop": forContext]) {
           try renderNodes(nodes, context)
         }
-      }.joinWithSeparator("")
+      }.joined(separator: "")
     }
 
     return try context.push {

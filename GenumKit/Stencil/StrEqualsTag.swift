@@ -70,7 +70,7 @@ public class StrEqualsNode : NodeType {
     self.falseNodes = falseNodes
   }
 
-  public func render(context: Context) throws -> String {
+  public func render(_ context: Context) throws -> String {
     let lResult = try lvariable.resolve(context)
     let rResult = try rvariable.resolve(context)
     var truthy = false

@@ -118,11 +118,11 @@ struct ArrayFilters {
     let strings: [String]
     if let array = value as? [Any] {
       strings = array.flatMap { $0 as? String }
-      guard array.count == strings.count else { throw FilterError.InvalidInputType }
+      guard array.count == strings.count else { throw FilterError.invalidInputType }
     } else if let array = value as? [String] {
       strings = array
     } else {
-      throw FilterError.InvalidInputType
+      throw FilterError.invalidInputType
     }
 
     return strings.joined(separator: ", ")
@@ -132,14 +132,14 @@ struct ArrayFilters {
     let strings: [String]
     if let array = value as? [Any] {
       strings = array.flatMap { $0 as? String }
-      guard array.count == strings.count else { throw FilterError.InvalidInputType }
+      guard array.count == strings.count else { throw FilterError.invalidInputType }
     } else if let array = value as? [String] {
       strings = array
     } else {
-      throw FilterError.InvalidInputType
+      throw FilterError.invalidInputType
     }
 
-    return strings.joinWithSeparator(" && ")
+    return strings.joined(separator: " && ")
   }
 }
 

@@ -7,15 +7,17 @@
 //
 
 import Foundation
+import PathKit
 
 public final class JSONFileParser {
   public private(set) var json = [String: AnyObject]()
 
   public init() {}
 
-  public func parseFile(path: String) throws {
-    if let JSONdata = NSData(contentsOfFile: path),
-      let json = (try? NSJSONSerialization.JSONObjectWithData(JSONdata, options: [])) as? [String: AnyObject] {
+  public func parseFile(path: Path) throws {
+    let url = URL(fileURLWithPath: String(describing: path))
+    if let jsonData = try? Data(contentsOf: url),
+      let json = (try? JSONSerialization.jsonObject(with: jsonData, options: [])) as? [String: AnyObject] {
       self.json = json
     }
   }

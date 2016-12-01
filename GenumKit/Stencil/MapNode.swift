@@ -43,12 +43,12 @@ public class MapNode : NodeType {
     self.nodes = nodes
   }
 
-  public func render(context: Context) throws -> String {
+  public func render(_ context: Context) throws -> String {
     let values = try variable.resolve(context)
 
-    if let values = values as? [Any] where values.count > 0 {
-      let mappedValues: [String] = try values.enumerate().map { index, item in
-        return try context.push([mapVariable: item]) {
+    if let values = values as? [Any], values.count > 0 {
+      let mappedValues: [String] = try values.enumerated().map { index, item in
+        return try context.push(dictionary: [mapVariable: item]) {
           try renderNodes(nodes, context)
         }
       }

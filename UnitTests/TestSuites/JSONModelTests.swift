@@ -12,7 +12,7 @@ import XCTest
 class ModelsTests: XCTestCase {
   func testEmpty() {
     let parser = JSONFileParser()
-    _ = try? parser.parseFile(self.fixturePath("Model.json", subDirectory: "Models"))
+    _ = try? parser.parseFile(path: self.fixture("Model.json", subDirectory: "Models"))
 
     let template = GenumTemplate(templateString: fixtureString("json-model.stencil"))
     let result = try! template.render(parser.stencilContext())

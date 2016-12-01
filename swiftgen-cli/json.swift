@@ -11,19 +11,19 @@ import GenumKit
 
 let jsonCommand = command(
   outputOption,
-  templateOption("json"),
+  templateOption(prefix: "json"),
   templatePathOption,
   Argument<Path>("FILE", description: "JSON to parse", validator: fileExists)
 ) { output, templateName, templatePath, path in
   let parser = JSONFileParser()
   do {
-    try parser.parseFile(String(path))
-    let templateRealPath = try findTemplate("json", templateShortName: templateName, templateFullPath: templatePath)
+    try parser.parseFile(path: path)
+    let templateRealPath = try findTemplate(prefix: "json", templateShortName: templateName, templateFullPath: templatePath)
     let template = try GenumTemplate(path: templateRealPath)
     let context = parser.stencilContext()
     let rendered = try template.render(context)
-    output.write(rendered, onlyIfChanged: true)
+    output.write(content: rendered, onlyIfChanged: true)
   } catch let error as NSError {
-    printError("error: \(error.localizedDescription)")
+    printError(string: "error: \(error.localizedDescription)")
   }
 }
