@@ -14,7 +14,7 @@ let templatesListCommand = command(
   Option<String>("only", "", flag: "l",
   description: "If specified, only list templates valid for that specific subcommand") {
     guard allSubcommands.contains($0) else {
-      throw ArgumentError.InvalidType(value: $0, type: "subcommand", argument: "--only")
+      throw ArgumentError.invalidType(value: $0, type: "subcommand", argument: "--only")
     }
     return $0
   },
@@ -25,9 +25,9 @@ let templatesListCommand = command(
   var outputLines = Array<String>()
 
   let printTemplates = { (prefix: String, list: [Path]) in
-    for file in list where file.lastComponent.hasPrefix("\(prefix)-") && file.`extension` == "stencil" {
+    for file in list where file.lastComponent.hasPrefix("\(prefix)-") && file.extension == "stencil" {
       let basename = file.lastComponentWithoutExtension
-      let idx = basename.startIndex.advancedBy(prefix.characters.count+1)
+      let idx = basename.index(basename.startIndex, offsetBy: prefix.characters.count+1)
       let name = basename[idx..<basename.endIndex]
       outputLines.append("   - \(name)")
     }
@@ -45,13 +45,13 @@ let templatesListCommand = command(
   outputLines.append("---")
   outputLines.append("You can add custom templates in \(appSupportTemplatesPath).")
   outputLines.append("Simply name them 'subcmd-customname.stencil' where subcmd is one of the swiftgen subcommand,")
-  outputLines.append("namely " + allSubcommands.map({"\($0)-xxx.stencil"}).joinWithSeparator(", ") + ".")
+  outputLines.append("namely " + allSubcommands.map({"\($0)-xxx.stencil"}).joined(separator: ", ") + ".")
   outputLines.append("")
 
-  output.write(outputLines.joinWithSeparator("\n"))
+  output.write(content: outputLines.joined(separator: "\n"))
 }
 
-private func templatePathCommandGenerator(execute: (Path, OutputDestination) throws -> ()) -> CommandType {
+private func templatePathCommandGenerator(execute: @escaping (Path, OutputDestination) throws -> ()) -> CommandType {
   return command(
     Argument<String>("name",
       description: "the name of the template to find, like `colors` for the default one" +
@@ -60,26 +60,26 @@ private func templatePathCommandGenerator(execute: (Path, OutputDestination) thr
   ) { name, output in
     do {
       let (prefix, shortName): (String, String)
-      if let hyphenPos = name.characters.indexOf("-") {
+      if let hyphenPos = name.characters.index(of: "-") {
         prefix = String(name.characters[name.characters.startIndex..<hyphenPos])
-        shortName = String(name.characters[hyphenPos.successor()..<name.characters.endIndex])
+        shortName = String(name.characters[name.characters.index(after: hyphenPos)..<name.characters.endIndex])
       } else {
         prefix = name
         shortName = "default"
       }
-      let path = try findTemplate(prefix, templateShortName: shortName, templateFullPath: "")
+      let path = try findTemplate(prefix: prefix, templateShortName: shortName, templateFullPath: "")
       try execute(path, output)
     } catch {
-      printError("error: failed to read template: \(error)")
+      printError(string: "error: failed to read template: \(error)")
     }
   }
 }
 
 let templatesCatCommand = templatePathCommandGenerator { (path: Path, output: OutputDestination) in
   let content: String = try path.read()
-  output.write(content)
+  output.write(content: content)
 }
 
 let templatesWhichCommand = templatePathCommandGenerator { (path: Path, output: OutputDestination) in
-  output.write("\(path.description)\n")
+  output.write(content: "\(path.description)\n")
 }

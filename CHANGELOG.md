@@ -2,6 +2,24 @@
 
 ---
 
+## unreleased
+
+* Swift 3 migration.  
+  [ahtierney](https://github.com/ahtierney)
+  [#201](https://github.com/AliSoftware/SwiftGen/pull/201)
+* Consolidate use of PathKit internally.    
+  [David Jennes](https://github.com/djbe)
+  [#212](https://github.com/AliSoftware/SwiftGen/pull/212)
+* Fix broken `import` option added in 4.0.0.  
+  [David Jennes](https://github.com/djbe)
+  [#214](https://github.com/AliSoftware/SwiftGen/pull/214)
+* Show an error when the provided path to the `images` command is not an asset catalog.  
+  [David Jennes](https://github.com/djbe)
+  [#217](https://github.com/AliSoftware/SwiftGen/pull/217)
+* Strings dot-syntax template: use `enum`s for namespacing instead of `struct`s.  
+  [David Jennes](https://github.com/djbe)
+  [#218](https://github.com/AliSoftware/SwiftGen/pull/218)
+
 ## 4.0.0
 
 * Add support for multiline string in *.strings file.  
@@ -14,8 +32,7 @@
   [Afonso](https://github.com/afonsograca)
   [#194](https://github.com/AliSoftware/SwiftGen/pull/194)
 * Add option to add import statements at the top of the generated swift file (for
-  storyboards) using the `import` flag. Multiple imports can be added by repeating
-  this flag.  
+  storyboards) using the `import` flag.  
   [David Jennes](https://github.com/djbe)
   [#175](https://github.com/AliSoftware/SwiftGen/pull/175)
 * Remove the `key` param label from the `tr` function for Localized String in the swift3 template.  
@@ -26,7 +43,9 @@
   [#198](https://github.com/AliSoftware/SwiftGen/pull/198)
 * The `swiftgen images` command now uses the `actool` utility to parse asset catalogs,
   ensuring that the parser correctly handles namespaced folders.  
-  [David Jennes](https://github.com/djbe)
+  ⚠️ Note that you now have to specify the exact path to your `.xcassets` assets catalogs
+  when using `swiftgen images` (and not just a directory to parse).  
+  [David Jennes](https://github.com/djbe)
   [#199](https://github.com/AliSoftware/SwiftGen/pull/199)
 
 ## 3.0.1

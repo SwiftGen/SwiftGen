@@ -28,92 +28,124 @@ class StoryboardsiOSTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Storyboards-Empty.swift.out")
+    let expected = fixtureString("Storyboards-Empty.swift.out")
     XCTDiffStrings(result, expected)
   }
 
   func testMessageStoryboardWithDefaults() {
     let parser = StoryboardParser()
-    parser.addStoryboardAtPath(self.fixturePath("Message.storyboard", subDirectory: StoryboardsDir.iOS))
+    do {
+      try parser.addStoryboard(at: fixture("Message.storyboard", subDirectory: StoryboardsDir.iOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Storyboards-Message-Default.swift.out")
+    let expected = fixtureString("Storyboards-Message-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
   func testMessageStoryboardWithLowercaseTemplate() {
     let parser = StoryboardParser()
-    parser.addStoryboardAtPath(self.fixturePath("Message.storyboard", subDirectory: StoryboardsDir.iOS))
+    do {
+      try parser.addStoryboard(at: fixture("Message.storyboard", subDirectory: StoryboardsDir.iOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-lowercase.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Storyboards-Message-Lowercase.swift.out")
+    let expected = fixtureString("Storyboards-Message-Lowercase.swift.out")
     XCTDiffStrings(result, expected)
   }
 
   func testAnonymousStoryboardWithDefaults() {
     let parser = StoryboardParser()
-    parser.addStoryboardAtPath(self.fixturePath("Anonymous.storyboard", subDirectory: StoryboardsDir.iOS))
+    do {
+      try parser.addStoryboard(at: fixture("Anonymous.storyboard", subDirectory: StoryboardsDir.iOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Storyboards-Anonymous-Default.swift.out")
+    let expected = fixtureString("Storyboards-Anonymous-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
   func testAllStoryboardsWithDefaults() {
     let parser = StoryboardParser()
-    parser.parseDirectory(self.fixturesDir(subDirectory: StoryboardsDir.iOS))
+    do {
+      try parser.parseDirectory(at: fixturesDir(subDirectory: StoryboardsDir.iOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let ctx = parser.stencilContext()
     let result = try! template.render(ctx)
 
-    let expected = self.fixtureString("Storyboards-All-Default.swift.out")
+    let expected = fixtureString("Storyboards-All-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
   func testAllStoryboardsWithCustomName() {
     let parser = StoryboardParser()
-    parser.parseDirectory(self.fixturesDir(subDirectory: StoryboardsDir.iOS))
+    do {
+      try parser.parseDirectory(at: fixturesDir(subDirectory: StoryboardsDir.iOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
     let ctx = parser.stencilContext(sceneEnumName: "XCTStoryboardsScene", segueEnumName: "XCTStoryboardsSegue")
     let result = try! template.render(ctx)
 
-    let expected = self.fixtureString("Storyboards-All-CustomName.swift.out")
+    let expected = fixtureString("Storyboards-All-CustomName.swift.out")
     XCTDiffStrings(result, expected)
   }
 
   func testAnonymousStoryboardWithSwift3() {
     let parser = StoryboardParser()
-    parser.addStoryboardAtPath(self.fixturePath("Anonymous.storyboard", subDirectory: StoryboardsDir.iOS))
+    do {
+      try parser.addStoryboard(at: fixture("Anonymous.storyboard", subDirectory: StoryboardsDir.iOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Storyboards-Anonymous-Swift3.swift.out")
+    let expected = fixtureString("Storyboards-Anonymous-Swift3.swift.out")
     XCTDiffStrings(result, expected)
   }
 
   func testWizardsStoryboardsWithSwift3() {
     let parser = StoryboardParser()
-    parser.addStoryboardAtPath(self.fixturePath("Wizard.storyboard", subDirectory: StoryboardsDir.iOS))
+    do {
+      try parser.addStoryboard(at: fixture("Wizard.storyboard", subDirectory: StoryboardsDir.iOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Storyboards-Wizard-Swift3.swift.out")
+    let expected = fixtureString("Storyboards-Wizard-Swift3.swift.out")
     XCTDiffStrings(result, expected)
   }
 
   func testAdditionalImport() {
     let parser = StoryboardParser()
-    parser.addStoryboardAtPath(self.fixturePath("AdditionalImport.storyboard", subDirectory: StoryboardsDir.iOS))
+    do {
+      try parser.addStoryboard(at: fixture("AdditionalImport.storyboard", subDirectory: StoryboardsDir.iOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
 
     // additional import statements
     let extraImports = [
@@ -125,7 +157,7 @@ class StoryboardsiOSTests: XCTestCase {
     let context = parser.stencilContext(sceneEnumName: "StoryboardScene", segueEnumName: "StoryboardSegue", extraImports: extraImports)
     let result = try! template.render(context)
 
-    let expected = self.fixtureString("Storyboards-AdditionalImport-Swift3.swift.out")
+    let expected = fixtureString("Storyboards-AdditionalImport-Swift3.swift.out")
     XCTDiffStrings(result, expected)
   }
 }
@@ -140,58 +172,78 @@ class StoryboardsOSXTests: XCTestCase {
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Storyboards-osx-Empty.swift.out")
+    let expected = fixtureString("Storyboards-osx-Empty.swift.out")
     XCTDiffStrings(result, expected)
   }
 
   func testOSXMessageStoryboardWithDefaults() {
     let parser = StoryboardParser()
-    parser.addStoryboardAtPath(self.fixturePath("Message-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+    do {
+      try parser.addStoryboard(at: fixture("Message-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Storyboards-osx-Message-Default.swift.out")
+    let expected = fixtureString("Storyboards-osx-Message-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
   func testOSXMessageStoryboardWithLowercaseTemplate() {
     let parser = StoryboardParser()
-    parser.addStoryboardAtPath(self.fixturePath("Message-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+    do {
+      try parser.addStoryboard(at: fixture("Message-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-lowercase.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Storyboards-osx-Message-Lowercase.swift.out")
+    let expected = fixtureString("Storyboards-osx-Message-Lowercase.swift.out")
     XCTDiffStrings(result, expected)
   }
 
   func testOSXAnonymousStoryboardWithDefaults() {
     let parser = StoryboardParser()
-    parser.addStoryboardAtPath(self.fixturePath("Anonymous-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+    do {
+      try parser.addStoryboard(at: fixture("Anonymous-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
     let result = try! template.render(parser.stencilContext())
 
-    let expected = self.fixtureString("Storyboards-osx-Anonymous-Default.swift.out")
+    let expected = fixtureString("Storyboards-osx-Anonymous-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
 
   func testOSXAllStoryboardsWithDefaults() {
     let parser = StoryboardParser()
-    parser.parseDirectory(self.fixturesDir(subDirectory: StoryboardsDir.macOS))
+    do {
+      try parser.parseDirectory(at: fixturesDir(subDirectory: StoryboardsDir.macOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
 
     let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
     let ctx = parser.stencilContext()
     let result = try! template.render(ctx)
 
-    let expected = self.fixtureString("Storyboards-osx-All-Default.swift.out")
+    let expected = fixtureString("Storyboards-osx-All-Default.swift.out")
     XCTDiffStrings(result, expected)
 	}
 
 	func testAdditionalImport() {
 		let parser = StoryboardParser()
-		parser.addStoryboardAtPath(self.fixturePath("AdditionalImport-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+    do {
+      try parser.addStoryboard(at: fixture("AdditionalImport-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
 
 		// additional import statements
 		let extraImports = [
@@ -202,7 +254,7 @@ class StoryboardsOSXTests: XCTestCase {
 		let context = parser.stencilContext(sceneEnumName: "StoryboardScene", segueEnumName: "StoryboardSegue", extraImports: extraImports)
 		let result = try! template.render(context)
 
-		let expected = self.fixtureString("Storyboards-osx-AdditionalImport-Default.swift.out")
+		let expected = fixtureString("Storyboards-osx-AdditionalImport-Default.swift.out")
 		XCTDiffStrings(result, expected)
 	}
 }

@@ -1,35 +1,27 @@
 PODS:
-  - Commander (0.4.1)
+  - Commander (0.6.0)
   - GenumKit (4.0.0):
-    - Stencil (= 0.6.0-beta.1)
-  - PathKit (0.6.0)
-  - Stencil (0.6.0-beta.1):
-    - PathKit (~> 0.6.0)
+    - Stencil (= 0.6.0)
+  - PathKit (0.7.0)
+  - Stencil (0.6.0):
+    - PathKit (~> 0.7.0)
 
 DEPENDENCIES:
-  - Commander (~> 0.4.1)
+  - Commander (~> 0.6.0)
   - GenumKit (from `GenumKit`)
-  - PathKit (~> 0.6.0)
-  - Stencil (from `https://github.com/kylef/Stencil.git`, commit `f393efbd0bfe26ac26209d2d103907a3b5583f6b`)
+  - PathKit (~> 0.7.0)
+  - Stencil (~> 0.6.0)
 
 EXTERNAL SOURCES:
   GenumKit:
     :path: GenumKit
-  Stencil:
-    :commit: f393efbd0bfe26ac26209d2d103907a3b5583f6b
-    :git: https://github.com/kylef/Stencil.git
-
-CHECKOUT OPTIONS:
-  Stencil:
-    :commit: f393efbd0bfe26ac26209d2d103907a3b5583f6b
-    :git: https://github.com/kylef/Stencil.git
 
 SPEC CHECKSUMS:
-  Commander: 106cb704180eee0a5f9df2e9dbc090808b564636
-  GenumKit: 6b237cc3c14504d8f899aadaea1aa45f5c317476
-  PathKit: b224b6d2c4e75b87f08f45e1c0c610a3195c94e5
-  Stencil: ab5a29fd8a48d53bb24fb254659f9a1fb36dfe5b
+  Commander: fba7c96c9e787ecc8ebe0737be875e1e18ef47ff
+  GenumKit: ae5905aa595dd3ecd0adf42cdd686f28c5e5aecd
+  PathKit: f8260c3e41bf4d552f3603853e32a5b325a176d4
+  Stencil: c665353046bca0279f3503f88293f2eff5fc67a6
 
-PODFILE CHECKSUM: 02563ca3bd363e7a1b460b42df440c07193447e0
+PODFILE CHECKSUM: 23616596687360356baddcd2c9cdac5b900e2fcd
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0.beta.1

@@ -10,20 +10,26 @@ import GenumKit
 
 let imagesCommand = command(
   outputOption,
-  templateOption("images"), templatePathOption,
+  templateOption(prefix: "images"), templatePathOption,
   Option<String>("enumName", "Asset", flag: "e", description: "The name of the enum to generate"),
   Argument<Path>("DIR", description: "Directory to scan for .imageset files.", validator: dirExists)
 ) { output, templateName, templatePath, enumName, path in
+  guard path.extension == "xcassets" else {
+    throw ArgumentError.invalidType(value: String(describing: path), type: "xcassets file", argument: nil)
+  }
+
   let parser = AssetsCatalogParser()
-  parser.parseCatalog(String(path))
+  parser.parseCatalog(at: path)
 
   do {
-    let templateRealPath = try findTemplate("images", templateShortName: templateName, templateFullPath: templatePath)
+    let templateRealPath = try findTemplate(
+      prefix: "images", templateShortName: templateName, templateFullPath: templatePath
+    )
     let template = try GenumTemplate(path: templateRealPath)
     let context = parser.stencilContext(enumName: enumName)
     let rendered = try template.render(context)
-    output.write(rendered, onlyIfChanged: true)
+    output.write(content: rendered, onlyIfChanged: true)
   } catch {
-    printError("error: failed to render template \(error)")
+    printError(string: "error: failed to render template \(error)")
   }
 }

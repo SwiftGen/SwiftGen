@@ -9,22 +9,22 @@ import PathKit
 
 // MARK: Validators
 
-func checkPath(type: String, assertion: Path -> Bool) -> (Path throws -> Path) {
+func checkPath(type: String, assertion: @escaping (Path) -> Bool) -> ((Path) throws -> Path) {
   return { (path: Path) throws -> Path in
-    guard assertion(path) else { throw ArgumentError.InvalidType(value: path.description, type: type, argument: nil) }
+    guard assertion(path) else { throw ArgumentError.invalidType(value: path.description, type: type, argument: nil) }
     return path
   }
 }
-let pathExists = checkPath("path") { $0.exists }
-let fileExists = checkPath("file") { $0.isFile }
-let dirExists  = checkPath("directory") { $0.isDirectory }
+let pathExists = checkPath(type: "path") { $0.exists }
+let fileExists = checkPath(type: "file") { $0.isFile }
+let dirExists  = checkPath(type: "directory") { $0.isDirectory }
 
 // MARK: Path as Input Argument
 
 extension Path : ArgumentConvertible {
   public init(parser: ArgumentParser) throws {
     guard let path = parser.shift() else {
-      throw ArgumentError.MissingValue(argument: nil)
+      throw ArgumentError.missingValue(argument: nil)
     }
     self = Path(path)
   }
@@ -42,7 +42,7 @@ enum OutputDestination: ArgumentConvertible {
 
   init(parser: ArgumentParser) throws {
     guard let path = parser.shift() else {
-      throw ArgumentError.MissingValue(argument: nil)
+      throw ArgumentError.missingValue(argument: nil)
     }
     self = .File(Path(path))
   }
@@ -59,13 +59,13 @@ enum OutputDestination: ArgumentConvertible {
       print(content)
     case .File(let path):
       do {
-        if try onlyIfChanged && path.exists && path.read(NSUTF8StringEncoding) == content {
+        if try onlyIfChanged && path.exists && path.read(.utf8) == content {
           return print("Not writing the file as content is unchanged")
         }
         try path.write(content)
         print("File written: \(path)")
       } catch let e as NSError {
-        printError("error: \(e)")
+        printError(string: "error: \(e)")
       }
     }
   }
@@ -73,7 +73,7 @@ enum OutputDestination: ArgumentConvertible {
 
 // MARK: Template Arguments
 
-enum TemplateError: ErrorType, CustomStringConvertible {
+enum TemplateError: Error, CustomStringConvertible {
   case NamedTemplateNotFound(name: String)
   case TemplatePathNotFound(path: Path)
 
@@ -91,8 +91,8 @@ enum TemplateError: ErrorType, CustomStringConvertible {
 extension Path {
   static let applicationSupport: Path = {
     let paths = NSSearchPathForDirectoriesInDomains(
-      .ApplicationSupportDirectory,
-      .UserDomainMask, true
+      .applicationSupportDirectory,
+      .userDomainMask, true
     )
     guard let path = paths.first else {
       fatalError("Unable to locate the Application Support directory on your machine!")
@@ -102,7 +102,7 @@ extension Path {
 }
 
 let appSupportTemplatesPath = Path.applicationSupport + "SwiftGen/templates"
-let bundledTemplatesPath = Path(NSProcessInfo.processInfo().arguments[0]).parent() + templatesRelativePath
+let bundledTemplatesPath = Path(ProcessInfo.processInfo.arguments[0]).parent() + templatesRelativePath
 
 /**
  Returns the path of a template given its prefix and short name, or its full path.

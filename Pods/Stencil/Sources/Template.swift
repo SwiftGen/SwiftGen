@@ -6,13 +6,13 @@ let NSFileNoSuchFileError = 4
 #endif
 
 /// A class representing a template
-public class Template {
+open class Template {
   let tokens: [Token]
 
   /// Create a template with the given name inside the given bundle
-  public convenience init(named:String, inBundle bundle:NSBundle? = nil) throws {
-    let useBundle = bundle ??  NSBundle.mainBundle()
-    guard let url = useBundle.URLForResource(named, withExtension: nil) else {
+  public convenience init(named:String, inBundle bundle:Bundle? = nil) throws {
+    let useBundle = bundle ??  Bundle.main
+    guard let url = useBundle.url(forResource: named, withExtension: nil) else {
       throw NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError, userInfo: nil)
     }
 
@@ -20,8 +20,8 @@ public class Template {
   }
 
   /// Create a template with a file found at the given URL
-  public convenience init(URL:NSURL) throws {
-    try self.init(path: Path(URL.path!))
+  public convenience init(URL:Foundation.URL) throws {
+    try self.init(path: Path(URL.path))
   }
 
   /// Create a template with a file found at the given path
@@ -36,7 +36,7 @@ public class Template {
   }
 
   /// Render the given template
-  public func render(context: Context? = nil) throws -> String {
+  open func render(_ context: Context? = nil) throws -> String {
     let context = context ?? Context()
     let parser = TokenParser(tokens: tokens, namespace: context.namespace)
     let nodes = try parser.parse()

@@ -10,39 +10,39 @@ import XCTest
 class SwiftIdentifierTests: XCTestCase {
 
   func testBasicString() {
-    XCTAssertEqual(swiftIdentifier(fromString: "Hello"), "Hello")
+    XCTAssertEqual(swiftIdentifier(from: "Hello"), "Hello")
   }
 
   func testBasicStringWithForbiddenChars() {
-    XCTAssertEqual(swiftIdentifier(fromString: "Hello", forbiddenChars: "l"), "HeO")
+    XCTAssertEqual(swiftIdentifier(from: "Hello", forbiddenChars: "l"), "HeO")
   }
 
   func testBasicStringWithForbiddenCharsAndUnderscores() {
-    XCTAssertEqual(swiftIdentifier(fromString: "Hello", forbiddenChars: "l", replaceWithUnderscores: true), "He__O")
+    XCTAssertEqual(swiftIdentifier(from: "Hello", forbiddenChars: "l", replaceWithUnderscores: true), "He__O")
   }
 
   func testSpecialChars() {
-    XCTAssertEqual(swiftIdentifier(fromString: "This-is-42$hello@world"), "ThisIs42HelloWorld")
+    XCTAssertEqual(swiftIdentifier(from: "This-is-42$hello@world"), "ThisIs42HelloWorld")
   }
 
   func testKeepUppercaseAcronyms() {
-    XCTAssertEqual(swiftIdentifier(fromString: "some$URLDecoder"), "SomeURLDecoder")
+    XCTAssertEqual(swiftIdentifier(from: "some$URLDecoder"), "SomeURLDecoder")
   }
 
   func testEmojis() {
-    XCTAssertEqual(swiftIdentifier(fromString: "some😎🎉emoji"), "Some😎🎉emoji")
+    XCTAssertEqual(swiftIdentifier(from: "some😎🎉emoji"), "Some😎🎉emoji")
   }
 
   func testEmojis2() {
-    XCTAssertEqual(swiftIdentifier(fromString: "😎🎉"), "😎🎉")
+    XCTAssertEqual(swiftIdentifier(from: "😎🎉"), "😎🎉")
   }
 
   func testNumbersFirst() {
-    XCTAssertEqual(swiftIdentifier(fromString: "42hello"), "_42hello")
+    XCTAssertEqual(swiftIdentifier(from: "42hello"), "_42hello")
   }
 
   func testForbiddenChars() {
-    XCTAssertEqual(swiftIdentifier(fromString: "hello$world^this*contains%a=lot@of<forbidden>chars!does#it/still:work.anyway?"),
+    XCTAssertEqual(swiftIdentifier(from: "hello$world^this*contains%a=lot@of<forbidden>chars!does#it/still:work.anyway?"),
       "HelloWorldThisContainsALotOfForbiddenCharsDoesItStillWorkAnyway")
   }
 }

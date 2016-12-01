@@ -9,14 +9,14 @@ import Foundation
 enum L10n {
   /// multi\nline
   case MULTILINE
+  /// test
+  case MultiLineNKey
   /// another\nmulti\n    line
   case MULTILINE2
   /// single line
   case SINGLELINE
   /// another single line
   case SINGLELINE2
-  /// test
-  case MultiLineNKey
 }
 // swiftlint:enable type_body_length
 
@@ -27,14 +27,14 @@ extension L10n: CustomStringConvertible {
     switch self {
       case .MULTILINE:
         return L10n.tr("MULTILINE")
+      case .MultiLineNKey:
+        return L10n.tr("multiLine\nKey")
       case .MULTILINE2:
         return L10n.tr("MULTILINE2")
       case .SINGLELINE:
         return L10n.tr("SINGLELINE")
       case .SINGLELINE2:
         return L10n.tr("SINGLELINE2")
-      case .MultiLineNKey:
-        return L10n.tr("multiLine\nKey")
     }
   }
 

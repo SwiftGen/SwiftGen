@@ -14,10 +14,10 @@ public class Context {
     self.namespace = namespace
   }
 
-  public subscript(key: String) -> Any? {
+  open subscript(key: String) -> Any? {
     /// Retrieves a variable's value, starting at the current context and going upwards
     get {
-      for dictionary in Array(dictionaries.reverse()) {
+      for dictionary in Array(dictionaries.reversed()) {
         if let value = dictionary[key] {
           return value
         }
@@ -37,19 +37,19 @@ public class Context {
   }
 
   /// Push a new level into the Context
-  private func push(dictionary: [String: Any]? = nil) {
+  fileprivate func push(_ dictionary: [String: Any]? = nil) {
     dictionaries.append(dictionary ?? [:])
   }
 
   /// Pop the last level off of the Context
-  private func pop() -> [String: Any]? {
+  fileprivate func pop() -> [String: Any]? {
     return dictionaries.popLast()
   }
 
   /// Push a new level onto the context for the duration of the execution of the given closure
-  public func push<Result>(dictionary: [String: Any]? = nil, @noescape closure: (() throws -> Result)) rethrows -> Result {
+  open func push<Result>(dictionary: [String: Any]? = nil, closure: (() throws -> Result)) rethrows -> Result {
     push(dictionary)
-    defer { pop() }
+    defer { _ = pop() }
     return try closure()
   }
 }

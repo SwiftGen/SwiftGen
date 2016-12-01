@@ -16,18 +16,17 @@ struct Command {
     self.arguments += arguments
   }
 
-  func execute() -> NSData {
-    let task = NSTask()
+  func execute() -> Data {
+    let task = Process()
 
     task.launchPath = Command.Environment
     task.arguments = arguments
 
-    let pipe = NSPipe()
+    let pipe = Pipe()
     task.standardOutput = pipe
     task.launch()
 
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    
     return data
   }
 }

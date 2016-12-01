@@ -21,7 +21,7 @@ class FontsTests: XCTestCase {
 
   func testDefaults() {
     let parser = FontsFileParser()
-    parser.parseFonts(directoryPath())
+    parser.parseFile(at: directory())
 
     let template = GenumTemplate(templateString: fixtureString("fonts-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -31,7 +31,7 @@ class FontsTests: XCTestCase {
 
   func testDefaultsWithSwift3() {
     let parser = FontsFileParser()
-    parser.parseFonts(directoryPath())
+    parser.parseFile(at: directory())
 
     let template = GenumTemplate(templateString: fixtureString("fonts-swift3.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -41,7 +41,7 @@ class FontsTests: XCTestCase {
 
   func testCustomName() {
     let parser = FontsFileParser()
-    parser.parseFonts(directoryPath())
+    parser.parseFile(at: directory())
 
     let template = GenumTemplate(templateString: fixtureString("fonts-default.stencil"))
     let result = try! template.render(parser.stencilContext(enumName: "CustomFamily"))
@@ -51,7 +51,7 @@ class FontsTests: XCTestCase {
 
   func testCustomNameWithSwift3() {
     let parser = FontsFileParser()
-    parser.parseFonts(directoryPath())
+    parser.parseFile(at: directory())
 
     let template = GenumTemplate(templateString: fixtureString("fonts-swift3.stencil"))
     let result = try! template.render(parser.stencilContext(enumName: "CustomFamily"))

@@ -10,49 +10,49 @@ import Foundation
 // swiftlint:disable variable_name
 // swiftlint:disable valid_docs
 
-struct L10n {
-  /// These are %3$@'s %1$d %2$@.
-  static func ObjectOwnership(p0: Int, p1: String, p2: String) -> String {
-    return L10n.tr("ObjectOwnership", p0, p1, p2)
-  }
+enum L10n {
+  /// Some alert body there
+  static let AlertMessage = L10n.tr("alert_message")
   /// Title of the alert
   static let AlertTitle = L10n.tr("alert_title")
   /// Hello, my name is %@ and I'm %d
   static func Greetings(p0: String, p1: Int) -> String {
     return L10n.tr("greetings", p0, p1)
   }
-  /// Some alert body there
-  static let AlertMessage = L10n.tr("alert_message")
+  /// These are %3$@'s %1$d %2$@.
+  static func ObjectOwnership(p0: Int, p1: String, p2: String) -> String {
+    return L10n.tr("ObjectOwnership", p0, p1, p2)
+  }
 
-  struct Apples {
+  enum Apples {
     /// You have %d apples
     static func Count(p0: Int) -> String {
       return L10n.tr("apples.count", p0)
     }
   }
 
-  struct Bananas {
+  enum Bananas {
     /// Those %d bananas belong to %@.
     static func Owner(p0: Int, p1: String) -> String {
       return L10n.tr("bananas.owner", p0, p1)
     }
   }
 
-  struct Settings {
+  enum Settings {
 
-    struct NavigationBar {
+    enum NavigationBar {
       /// Some Reserved Keyword there
       static let `Self` = L10n.tr("settings.navigation-bar.self")
 
-      struct Title {
+      enum Title {
 
-        struct Even {
+        enum Even {
           /// Settings
           static let Deeper = L10n.tr("settings.navigation-bar.title.even.deeper")
 
-          struct Deeper {
+          enum Deeper {
 
-            struct Than {
+            enum Than {
               /// DeepSettings
               static let WeCanHandle = L10n.tr("settings.navigation-bar.title.even.deeper.than.we.can.handle")
             }
@@ -61,11 +61,11 @@ struct L10n {
       }
     }
 
-    struct UserProfileSection {
-      /// User Profile Settings
-      static let HEADERTITLE = L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
+    enum UserProfileSection {
       /// Here you can change some user profile settings.
       static let FooterText = L10n.tr("seTTings.uSer-proFile-sectioN.footer_text")
+      /// User Profile Settings
+      static let HEADERTITLE = L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
     }
   }
 }

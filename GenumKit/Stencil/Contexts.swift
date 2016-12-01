@@ -6,18 +6,18 @@
 
 import Stencil
 
-private func uppercaseFirst(string: String) -> String {
+private func uppercaseFirst(_ string: String) -> String {
   guard let first = string.characters.first else {
     return string
   }
-  return String(first).uppercaseString + String(string.characters.dropFirst())
+  return String(first).uppercased() + String(string.characters.dropFirst())
 }
 
 private extension String {
   var newlineEscaped: String {
     return self
-      .stringByReplacingOccurrencesOfString("\n", withString: "\\n")
-      .stringByReplacingOccurrencesOfString("\r", withString: "\\r")
+      .replacingOccurrences(of: "\n", with: "\\n")
+      .replacingOccurrences(of: "\r", with: "\\r")
   }
 }
 
@@ -25,7 +25,7 @@ private extension String {
 
  - `enumName`: `String` — name of the enum to generate
  - `colors`: `Array` of:
-    - `name`: `String` — name of each color
+    - `name` : `String` — name of each color
     - `rgb`  : `String` — hex value of the form RRGGBB (like "ff6600")
     - `rgba` : `String` — hex value of the form RRGGBBAA (like "ff6600cc")
     - `red`  : `String` — hex value of the red component
@@ -34,23 +34,23 @@ private extension String {
     - `alpha`: `String` — hex value of the alpha component
 */
 extension ColorsFileParser {
-  public func stencilContext(enumName enumName: String = "ColorName") -> Context {
+  public func stencilContext(enumName: String = "ColorName") -> Context {
     let colorMap = colors.map({ (color: (name: String, value: UInt32)) -> [String:String] in
-      let name = color.name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+      let name = color.name.trimmingCharacters(in: CharacterSet.whitespaces)
       let hex = "00000000" + String(color.value, radix: 16)
       let hexChars = Array(hex.characters.suffix(8))
       let comps = (0..<4).map { idx in String(hexChars[idx*2...idx*2+1]) }
 
       return [
         "name": name,
-        "rgba" : String(hexChars[0..<8]),
-        "rgb"  : String(hexChars[0..<6]),
-        "red"  : comps[0],
+        "rgba": String(hexChars[0..<8]),
+        "rgb": String(hexChars[0..<6]),
+        "red": comps[0],
         "green": comps[1],
         "blue" : comps[2],
         "alpha": comps[3],
       ]
-    }).sort { $0["name"] < $1["name"] }
+    }).sorted { $0["name"] ?? "" < $1["name"] ?? "" }
     return Context(dictionary: ["enumName": enumName, "colors": colorMap], namespace: GenumNamespace())
   }
 }
@@ -61,7 +61,7 @@ extension ColorsFileParser {
  - `images`: `Array<String>` — list of image names
 */
 extension AssetsCatalogParser {
-  public func stencilContext(enumName enumName: String = "Asset") -> Context {
+  public func stencilContext(enumName: String = "Asset") -> Context {
     return Context(dictionary: ["enumName": enumName, "images": imageNames], namespace: GenumNamespace())
   }
 }
@@ -76,7 +76,8 @@ extension AssetsCatalogParser {
     - `initialScene`: `Dictionary` (absent if not specified)
        - `customClass`: `String` (absent if generic UIViewController/NSViewController)
        - `isBaseViewController`: `Bool`, indicate if the baseType is 'viewController' or anything else
-       - `baseType`: `String` (absent if class is a custom class). The base class type on which the initial scene is base.
+       - `baseType`: `String` (absent if class is a custom class).
+          The base class type on which the initial scene is base.
           Possible values include 'ViewController', 'NavigationController', 'TableViewController'…
     - `scenes`: `Array` (absent if empty)
        - `identifier`: `String`
@@ -89,15 +90,15 @@ extension AssetsCatalogParser {
        - `class`: `String` (absent if generic UIStoryboardSegue)
 */
 extension StoryboardParser {
-  public func stencilContext(sceneEnumName sceneEnumName: String = "StoryboardScene",
+  public func stencilContext(sceneEnumName: String = "StoryboardScene",
                                            segueEnumName: String = "StoryboardSegue",
                                            extraImports: [String] = []) -> Context {
-    let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sort(<)
-    let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:AnyObject] in
-      var sbMap: [String:AnyObject] = ["name": storyboardName]
+    let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sorted(by: <)
+    let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:Any] in
+      var sbMap: [String:Any] = ["name": storyboardName]
       // Initial Scene
       if let initialScene = initialScenes[storyboardName] {
-        let initial: [String:AnyObject]
+        let initial: [String:Any]
         if let customClass = initialScene.customClass {
           initial = ["customClass": customClass]
         } else {
@@ -111,8 +112,8 @@ extension StoryboardParser {
       // All Scenes
       if let scenes = storyboardsScenes[storyboardName] {
         sbMap["scenes"] = scenes
-          .sort({$0.storyboardID < $1.storyboardID})
-          .map { (scene: Scene) -> [String:AnyObject] in
+          .sorted(by: {$0.storyboardID < $1.storyboardID})
+          .map { (scene: Scene) -> [String:Any] in
             if let customClass = scene.customClass {
                 return ["identifier": scene.storyboardID, "customClass": customClass]
             } else if scene.tag == "viewController" {
@@ -128,7 +129,7 @@ extension StoryboardParser {
       // All Segues
       if let segues = storyboardsSegues[storyboardName] {
         sbMap["segues"] = segues
-          .sort({$0.segueID < $1.segueID})
+          .sorted(by: {$0.segueID < $1.segueID})
           .map { (segue: Segue) -> [String:String] in
             ["identifier": segue.segueID, "customClass": segue.customClass ?? ""]
         }
@@ -165,29 +166,43 @@ extension StoryboardParser {
  - `structuredStrings`: `Dictionary` - contains strings structured by keys separated by '.' syntax
 */
 extension StringsFileParser {
-  public func stencilContext(enumName enumName: String = "L10n", tableName: String = "Localizable") -> Context {
+  public func stencilContext(enumName: String = "L10n", tableName: String = "Localizable") -> Context {
 
-    let entryToStringMapper = { (entry: Entry, keyPath: [String]) -> [String: AnyObject] in
+    let entryToStringMapper = { (entry: Entry, keyPath: [String]) -> [String: Any] in
       var keyStructure = entry.keyStructure
       Array(0..<keyPath.count).forEach { _ in keyStructure.removeFirst() }
-      let keytail = keyStructure.joinWithSeparator(".")
+      let keytail = keyStructure.joined(separator: ".")
 
       if entry.types.count > 0 {
-        let params = [
+        let params: [String: Any] = [
           "count": entry.types.count,
           "types": entry.types.map { $0.rawValue },
           "declarations": entry.types.indices.map { "let p\($0)" },
           "names": entry.types.indices.map { "p\($0)" },
-          "typednames": entry.types.enumerate().map { "p\($0): \($1.rawValue)" }
+          "typednames": entry.types.enumerated().map { "p\($0): \($1.rawValue)" }
         ]
-        return ["key": entry.key.newlineEscaped, "translation": entry.translation.newlineEscaped, "params": params, "keytail": keytail]
+        return ["key": entry.key.newlineEscaped,
+                "translation": entry.translation.newlineEscaped,
+                "params": params,
+                "keytail": keytail
+        ]
       } else {
-        return ["key": entry.key.newlineEscaped, "translation": entry.translation.newlineEscaped, "keytail": keytail]
+        return ["key": entry.key.newlineEscaped,
+                "translation": entry.translation.newlineEscaped,
+                "keytail": keytail
+        ]
       }
     }
 
-    let strings = entries.sort { $0.key < $1.key }.map { entryToStringMapper($0, []) }
-    let structuredStrings = structure(entries, mapper: entryToStringMapper, currentLevel: 0, maxLevel: 5)
+    let strings = entries
+        .sorted { $0.key.caseInsensitiveCompare($1.key) == .orderedAscending }
+        .map { entryToStringMapper($0, []) }
+    let structuredStrings = structure(
+        entries: entries,
+        usingMapper: entryToStringMapper,
+        currentLevel: 0,
+        maxLevel: 5
+    )
 
     return Context(dictionary:
       [
@@ -200,19 +215,25 @@ extension StringsFileParser {
     )
   }
 
-  private func normalize(string: String) -> String {
-    let components = string.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "-_"))
-    return components.map { $0.capitalizedString }.joinWithSeparator("")
+  private func normalize(_ string: String) -> String {
+    let components = string.components(separatedBy: CharacterSet(charactersIn: "-_"))
+    return components.map { $0.capitalized }.joined(separator: "")
   }
 
-  typealias Mapper = (entry: Entry, keyPath: [String]) -> [String: AnyObject]
-  private func structure(entries: [Entry], keyPath: [String] = [], mapper: Mapper, currentLevel: Int, maxLevel: Int) -> [String: AnyObject] {
+  typealias Mapper = (_ entry: Entry, _ keyPath: [String]) -> [String: Any]
+  private func structure(
+    entries: [Entry],
+    atKeyPath keyPath: [String] = [],
+    usingMapper mapper: @escaping Mapper,
+    currentLevel: Int,
+    maxLevel: Int) -> [String: Any] {
 
-    var structuredStrings: [String: AnyObject] = [:]
+    var structuredStrings: [String: Any] = [:]
 
     let strings = entries
       .filter { $0.keyStructure.count == keyPath.count+1 }
-      .map { mapper(entry: $0, keyPath: keyPath) }
+      .sorted { $0.key.lowercased() < $1.key.lowercased() }
+      .map { mapper($0, keyPath) }
 
     if !strings.isEmpty {
       structuredStrings["strings"] = strings
@@ -222,7 +243,7 @@ extension StringsFileParser {
       structuredStrings["name"] = lastKeyPathComponent
     }
 
-    var subenums: [[String: AnyObject]] = []
+    var subenums: [[String: Any]] = []
     let nextLevelKeyPaths: [[String]] = entries
       .filter({ $0.keyStructure.count > keyPath.count+1 })
       .map({ Array($0.keyStructure.prefix(keyPath.count+1)) })
@@ -231,20 +252,32 @@ extension StringsFileParser {
     let uniqueNextLevelKeyPaths = Array(Set(
       nextLevelKeyPaths.map { keyPath in
         keyPath.map({
-          $0.capitalizedString.stringByReplacingOccurrencesOfString("-", withString: "_")
-        }).joinWithSeparator(".")
+          $0.capitalized.replacingOccurrences(of: "-", with: "_")
+        }).joined(separator: ".")
       }))
-      .sort()
-      .map { $0.componentsSeparatedByString(".") }
+      .sorted()
+      .map { $0.components(separatedBy: ".") }
 
     for nextLevelKeyPath in uniqueNextLevelKeyPaths {
       let entriesInKeyPath = entries.filter {
         Array($0.keyStructure.map(normalize).prefix(nextLevelKeyPath.count)) == nextLevelKeyPath.map(normalize)
       }
       if currentLevel >= maxLevel {
-        subenums.append(flattenedStrings(entries, keyPath: nextLevelKeyPath, mapper: mapper, level: currentLevel+1))
+        subenums.append(
+            flattenedStrings(fromEnteries: entries,
+                             atKeyPath: nextLevelKeyPath,
+                             usingMapper: mapper,
+                             level: currentLevel+1
+            )
+        )
       } else {
-        subenums.append(structure(entriesInKeyPath, keyPath: nextLevelKeyPath, mapper: mapper, currentLevel: currentLevel+1, maxLevel: maxLevel))
+        subenums.append(
+            structure(entries: entriesInKeyPath,
+                      atKeyPath: nextLevelKeyPath,
+                      usingMapper: mapper,
+                      currentLevel: currentLevel+1,
+                      maxLevel: maxLevel)
+        )
       }
     }
 
@@ -255,13 +288,17 @@ extension StringsFileParser {
     return structuredStrings
   }
 
-  private func flattenedStrings(entries: [Entry], keyPath: [String], mapper: Mapper, level: Int) -> [String: AnyObject] {
+  private func flattenedStrings(
+    fromEnteries entries: [Entry],
+    atKeyPath keyPath: [String],
+    usingMapper mapper: @escaping Mapper,
+    level: Int) -> [String: Any] {
 
-    var structuredStrings: [String: AnyObject] = [:]
+    var structuredStrings: [String: Any] = [:]
 
     let strings = entries
       .filter { $0.keyStructure.count >= keyPath.count+1 }
-      .map { mapper(entry: $0, keyPath: keyPath) }
+      .map { mapper($0, keyPath) }
 
     if !strings.isEmpty {
       structuredStrings["strings"] = strings
@@ -285,24 +322,23 @@ extension StringsFileParser {
 */
 
 extension FontsFileParser {
-  public func stencilContext(enumName enumName: String = "FontFamily") -> Context {
+  public func stencilContext(enumName: String = "FontFamily") -> Context {
     // turn into array of dictionaries
-    let families = entries.map { (name: String, family: Set<Font>) -> [String:AnyObject] in
-
+    let families = entries.map { (name: String, family: Set<Font>) -> [String: Any] in
       let fonts = family.map { (font: Font) -> [String: String] in
         // Font
         return [
-          "style" : font.style,
-          "fontName" : font.postScriptName
+          "style": font.style,
+          "fontName": font.postScriptName
         ]
-      }
-
+      }.sorted { $0["fontName"] ?? "" < $1["fontName"] ?? "" }
       // Family
       return [
-        "name":name,
-        "fonts":fonts
+        "name": name,
+        "fonts": fonts
       ]
-    }
-    return Context(dictionary: ["enumName": enumName, "families" : families], namespace: GenumNamespace())
+    }.sorted { $0["name"] as? String ?? "" < $1["name"] as? String ?? "" }
+
+    return Context(dictionary: ["enumName": enumName, "families": families], namespace: GenumNamespace())
   }
 }

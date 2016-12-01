@@ -7,6 +7,7 @@
 
 import Foundation
 import AppKit.NSFont
+import PathKit
 
 // MARK: Font
 
@@ -35,15 +36,15 @@ public func == (lhs: Font, rhs: Font) -> Bool {
 // MARK: CTFont
 
 extension CTFont {
-  static func parseFontInfo(fileURL: NSURL) -> [Font] {
-    let descs = CTFontManagerCreateFontDescriptorsFromURL(fileURL) as NSArray?
-    guard let descRefs = (descs as? [CTFontDescriptorRef]) else { return [] }
+  static func parseFonts(at url: URL) -> [Font] {
+    let descs = CTFontManagerCreateFontDescriptorsFromURL(url as CFURL) as NSArray?
+    guard let descRefs = (descs as? [CTFontDescriptor]) else { return [] }
 
     return descRefs.flatMap { (desc) -> Font? in
-      let font = CTFontCreateWithFontDescriptorAndOptions(desc, 0.0, nil, [.PreventAutoActivation])
+      let font = CTFontCreateWithFontDescriptorAndOptions(desc, 0.0, nil, [.preventAutoActivation])
       let postScriptName = CTFontCopyPostScriptName(font) as String
       guard let familyName = CTFontCopyAttribute(font, kCTFontFamilyNameAttribute) as? String,
-        style = CTFontCopyAttribute(font, kCTFontStyleNameAttribute) as? String else { return nil }
+        let style = CTFontCopyAttribute(font, kCTFontStyleNameAttribute) as? String else { return nil }
 
       return Font(familyName: familyName, style: style, postScriptName: postScriptName)
     }
@@ -57,28 +58,31 @@ public final class FontsFileParser {
 
   public init() {}
 
-  public func parseFonts(path: String) {
-    let url = NSURL(fileURLWithPath: path)
-    if let dirEnum = NSFileManager.defaultManager().enumeratorAtURL(url,
+  public func parseFile(at path: Path) {
+    // PathKit does not support support enumeration with options yet
+    // see: https://github.com/kylef/PathKit/pull/25
+    let url = URL(fileURLWithPath: String(describing: path))
+
+    if let dirEnum = FileManager.default.enumerator(at: url,
       includingPropertiesForKeys: [],
-      options: [.SkipsHiddenFiles, .SkipsPackageDescendants],
+      options: [.skipsHiddenFiles, .skipsPackageDescendants],
       errorHandler: nil) {
         var value: AnyObject? = nil
-        while let file = dirEnum.nextObject() as? NSURL {
-          guard let _ = try? file.getResourceValue(&value, forKey: NSURLTypeIdentifierKey),
-          uti = value as? String else {
+        while let file = dirEnum.nextObject() as? URL {
+          guard let _ = try? (file as NSURL).getResourceValue(&value, forKey: URLResourceKey.typeIdentifierKey),
+          let uti = value as? String else {
             print("Unable to determine the Universal Type Identifier for file \(file)")
             continue
           }
-          guard UTTypeConformsTo(uti, "public.font") else { continue }
-          let fonts = CTFont.parseFontInfo(file)
+          guard UTTypeConformsTo(uti as CFString, "public.font" as CFString) else { continue }
+          let fonts = CTFont.parseFonts(at: file)
 
           fonts.forEach { addFont($0) }
         }
     }
   }
 
-  private func addFont(font: Font) {
+  private func addFont(_ font: Font) {
     let familyName = font.familyName
     var entry = entries[familyName] ?? []
     entry.insert(font)

@@ -1,7 +1,7 @@
 import Foundation
 
 
-public struct TemplateSyntaxError : ErrorType, Equatable, CustomStringConvertible {
+public struct TemplateSyntaxError : Error, Equatable, CustomStringConvertible {
   public let description:String
 
   public init(_ description:String) {
@@ -17,48 +17,48 @@ public func ==(lhs:TemplateSyntaxError, rhs:TemplateSyntaxError) -> Bool {
 
 public protocol NodeType {
   /// Render the node in the given context
-  func render(context:Context) throws -> String
+  func render(_ context:Context) throws -> String
 }
 
 
 /// Render the collection of nodes in the given context
-public func renderNodes(nodes:[NodeType], _ context:Context) throws -> String {
-  return try nodes.map { try $0.render(context) }.joinWithSeparator("")
+public func renderNodes(_ nodes:[NodeType], _ context:Context) throws -> String {
+  return try nodes.map { try $0.render(context) }.joined(separator: "")
 }
 
-public class SimpleNode : NodeType {
-  let handler:Context throws -> String
+open class SimpleNode : NodeType {
+  let handler:(Context) throws -> String
 
-  public init(handler:Context throws -> String) {
+  public init(handler:@escaping (Context) throws -> String) {
     self.handler = handler
   }
 
-  public func render(context: Context) throws -> String {
+  open func render(_ context: Context) throws -> String {
     return try handler(context)
   }
 }
 
 
-public class TextNode : NodeType {
-  public let text:String
+open class TextNode : NodeType {
+  open let text:String
 
   public init(text:String) {
     self.text = text
   }
 
-  public func render(context:Context) throws -> String {
+  open func render(_ context:Context) throws -> String {
     return self.text
   }
 }
 
 
 public protocol Resolvable {
-  func resolve(context: Context) throws -> Any?
+  func resolve(_ context: Context) throws -> Any?
 }
 
 
-public class VariableNode : NodeType {
-  public let variable: Resolvable
+open class VariableNode : NodeType {
+  open let variable: Resolvable
 
   public init(variable: Resolvable) {
     self.variable = variable
@@ -68,7 +68,7 @@ public class VariableNode : NodeType {
     self.variable = Variable(variable)
   }
 
-  public func render(context: Context) throws -> String {
+  open func render(_ context: Context) throws -> String {
     let result = try variable.resolve(context)
 
     if let result = result as? String {

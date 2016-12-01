@@ -46,6 +46,6 @@ let main = Group {
   $0.addCommand("fonts", "generate code for your UIFonts", fontsCommand)
 }
 
-let version = NSBundle(forClass: GenumKit.GenumTemplate.self)
+let version = Bundle(for: GenumKit.GenumTemplate.self)
   .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
 main.run("SwiftGen v\(version)")

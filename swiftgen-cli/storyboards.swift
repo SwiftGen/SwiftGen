@@ -10,35 +10,38 @@ import GenumKit
 
 let storyboardsCommand = command(
   outputOption,
-  templateOption("storyboards"), templatePathOption,
+  templateOption(prefix: "storyboards"), templatePathOption,
   Option<String>("sceneEnumName", "StoryboardScene", flag: "e",
     description: "The name of the enum to generate for Scenes"),
   Option<String>("segueEnumName", "StoryboardSegue", flag: "g",
     description: "The name of the enum to generate for Segues"),
-  Options<String>("import", [], count: 0,
+  VariadicOption<String>("import", [],
 		description: "Additional imports to be added to the generated file"),
   Argument<Path>("PATH",
     description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard",
     validator: pathExists)
 ) { output, templateName, templatePath, sceneEnumName, segueEnumName, extraImports, path in
   let parser = StoryboardParser()
-  if path.`extension` == "storyboard" {
-    parser.addStoryboardAtPath(String(path))
-  } else {
-    parser.parseDirectory(String(path))
-  }
 
   do {
+    if path.extension == "storyboard" {
+      try parser.addStoryboard(at: path)
+    } else {
+      try parser.parseDirectory(at: path)
+    }
+
     let templateRealPath = try findTemplate(
-      "storyboards",
+      prefix: "storyboards",
       templateShortName: templateName,
       templateFullPath: templatePath
     )
     let template = try GenumTemplate(path: templateRealPath)
-    let context = parser.stencilContext(sceneEnumName: sceneEnumName, segueEnumName: segueEnumName, extraImports: extraImports)
+    let context = parser.stencilContext(
+      sceneEnumName: sceneEnumName, segueEnumName: segueEnumName, extraImports: extraImports
+    )
     let rendered = try template.render(context)
-    output.write(rendered, onlyIfChanged: true)
+    output.write(content: rendered, onlyIfChanged: true)
   } catch {
-    printError("error: failed to render template \(error)")
+    printError(string: "error: \(error.localizedDescription)")
   }
 }

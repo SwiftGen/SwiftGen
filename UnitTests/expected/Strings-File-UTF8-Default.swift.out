@@ -7,10 +7,6 @@ import Foundation
 
 // swiftlint:disable type_body_length
 enum L10n {
-  /// Ce sont les %1$d %2$@ de %3$@.
-  case ObjectOwnership(Int, String, String)
-  /// Profil de l'utilisateur Paramètres
-  case SETTINGSUSERPROFILESECTIONHEADERTITLE
   /// Contenu détaillé de l'alerte
   case AlertMessage
   /// Titre de l'alerte
@@ -21,12 +17,16 @@ enum L10n {
   case BananasOwner(Int, String)
   /// Bonjour, mon nom est %@ et j'ai %d ans
   case Greetings(String, Int)
-  /// Ici, vous pouvez modifier certains paramètres de profil d'utilisateur.
-  case SeTTingsUSerProFileSectioNFooterText
+  /// Ce sont les %1$d %2$@ de %3$@.
+  case ObjectOwnership(Int, String, String)
   /// Quelques mots-clés réservés
   case SettingsNavigationBarSelf
   /// Paramètres
   case SettingsNavigationBarTitleEvenDeeper
+  /// Ici, vous pouvez modifier certains paramètres de profil d'utilisateur.
+  case SeTTingsUSerProFileSectioNFooterText
+  /// Profil de l'utilisateur Paramètres
+  case SETTINGSUSERPROFILESECTIONHEADERTITLE
 }
 // swiftlint:enable type_body_length
 
@@ -35,10 +35,6 @@ extension L10n: CustomStringConvertible {
 
   var string: String {
     switch self {
-      case .ObjectOwnership(let p0, let p1, let p2):
-        return L10n.tr("ObjectOwnership", p0, p1, p2)
-      case .SETTINGSUSERPROFILESECTIONHEADERTITLE:
-        return L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
       case .AlertMessage:
         return L10n.tr("alert_message")
       case .AlertTitle:
@@ -49,12 +45,16 @@ extension L10n: CustomStringConvertible {
         return L10n.tr("bananas.owner", p0, p1)
       case .Greetings(let p0, let p1):
         return L10n.tr("greetings", p0, p1)
-      case .SeTTingsUSerProFileSectioNFooterText:
-        return L10n.tr("seTTings.uSer-proFile-sectioN.footer_text")
+      case .ObjectOwnership(let p0, let p1, let p2):
+        return L10n.tr("ObjectOwnership", p0, p1, p2)
       case .SettingsNavigationBarSelf:
         return L10n.tr("settings.navigation-bar.self")
       case .SettingsNavigationBarTitleEvenDeeper:
         return L10n.tr("settings.navigation-bar.title.even.deeper")
+      case .SeTTingsUSerProFileSectioNFooterText:
+        return L10n.tr("seTTings.uSer-proFile-sectioN.footer_text")
+      case .SETTINGSUSERPROFILESECTIONHEADERTITLE:
+        return L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
     }
   }
 
