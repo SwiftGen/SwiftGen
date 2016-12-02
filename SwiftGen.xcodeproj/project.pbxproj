@@ -527,7 +527,7 @@
 			dependencies = (
 			);
 			name = swiftgen;
-			productName = "swiftgen";
+			productName = swiftgen;
 			productReference = 234F7E6E1DEBD5C5001B3C10 /* swiftgen.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -917,7 +917,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 920E71433B3570488CF5B052 /* Pods-UnitTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = UnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -932,7 +931,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 90843707F44D6F8153913604 /* Pods-UnitTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = UnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
