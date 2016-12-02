@@ -5,3 +5,5 @@ line";
 multi\
     line";
 "SINGLELINE2"     = "another single line";
+"multiLine\
+Key" = "test";

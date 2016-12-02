@@ -181,13 +181,13 @@ extension StringsFileParser {
           "names": entry.types.indices.map { "p\($0)" },
           "typednames": entry.types.enumerated().map { "p\($0): \($1.rawValue)" }
         ]
-        return ["key": entry.key,
+        return ["key": entry.key.newlineEscaped,
                 "translation": entry.translation.newlineEscaped,
                 "params": params,
                 "keytail": keytail
         ]
       } else {
-        return ["key": entry.key,
+        return ["key": entry.key.newlineEscaped,
                 "translation": entry.translation.newlineEscaped,
                 "keytail": keytail
         ]
