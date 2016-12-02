@@ -59,16 +59,12 @@ public final class {{ spec.type }}: DataModel, Equatable {
 
   public static func make(withDictionary dictionary: NSDictionary) throws -> Self {
     let model = try self.init(dictionary: dictionary) { error in
-      throw NSError(domain: "com.swiftgen.modelParsing",
-                    code: 0,
-                    userInfo: [ "parseMessage": error ])
+      throw ParseError(message: error)
     }
     if let model = model {
       return model
     } else {
-      throw NSError(domain: "com.swiftgen.modelParsing",
-                    code: 0,
-                    userInfo: [ "parseMessage": "Model returned nil with no error." ])
+      throw ParseError(message: "Model returned nil with no error.")
     }
   }
 

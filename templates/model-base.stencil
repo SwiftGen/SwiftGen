@@ -5,13 +5,13 @@ import Foundation
 /**
  This is a convenience class used by the model parsing to reduce the amount of generated code.
  */
-struct Parser {
+public struct Parser {
   /**
    The dictionary we are going to parse.
    */
-  let dictionary: NSDictionary?
+  public let dictionary: NSDictionary?
 
-  init(dictionary: NSDictionary?) {
+  public init(dictionary: NSDictionary?) {
     self.dictionary = dictionary
   }
 
@@ -20,7 +20,7 @@ struct Parser {
    If the key is missing it will return nil.
    Otherwise, it will attempt to parse the data value.
    */
-  func fetch<T: DataConvertible>(_ key: String, error: (String) throws -> Void) rethrows -> T? {
+  public func fetch<T: DataConvertible>(_ key: String, error: (String) throws -> Void) rethrows -> T? {
     guard let value = dictionary?[key] else  {
       return nil
     }
@@ -32,7 +32,7 @@ struct Parser {
    If the key is missing it will call the error block and return an empty array.
    Otherwise, it will attempt to parse the array.
    */
-  func fetch<T: DataConvertible>(_ key: String, error: (String) throws -> Void) rethrows -> [T] {
+  public func fetch<T: DataConvertible>(_ key: String, error: (String) throws -> Void) rethrows -> [T] {
     guard let fetched = dictionary?[key] else {
       try error("The key '\(key)' was not found.")
       return []
@@ -51,7 +51,7 @@ struct Parser {
    If the key is missing it will return nil.
    Otherwise, it will attempt to parse the array.
    */
-  func fetch<T: DataConvertible>(_ key: String, error: (String) throws -> Void) rethrows -> [T]? {
+  public func fetch<T: DataConvertible>(_ key: String, error: (String) throws -> Void) rethrows -> [T]? {
     let fetchedOptional = dictionary?[key]
     guard let fetched = fetchedOptional else {
       return nil
@@ -64,6 +64,13 @@ struct Parser {
       return nil
     }
   }
+}
+
+/*
+ A parse error thrown when parsing models.
+ **/
+public struct ParseError: Error {
+  public let message: String
 }
 
 /*
@@ -169,7 +176,7 @@ public func ==<T>(lhs: [T]?, rhs: [T]?) -> Bool {
   switch (lhs, rhs) {
   case (nil, nil):
     return true
-  case (.Some(let rhs), .Some(let lhs)):
+  case (.some(let rhs), .some(let lhs)):
     return lhs == rhs
   default:
     return false
