@@ -2,9 +2,30 @@ import Foundation
 import PathKit
 
 
+public protocol Loader {
+  func loadTemplate(name: String) throws -> Template?
+  func loadTemplate(names: [String]) throws -> Template?
+}
+
+
+extension Loader {
+  func loadTemplate(names: [String]) throws -> Template? {
+    for name in names {
+      let template = try loadTemplate(name: name)
+
+      if template != nil {
+        return template
+      }
+    }
+
+    return nil
+  }
+}
+
+
 // A class for loading a template from disk
-open class TemplateLoader {
-  open let paths: [Path]
+public class FileSystemLoader: Loader {
+  public let paths: [Path]
 
   public init(paths: [Path]) {
     self.paths = paths
@@ -16,19 +37,25 @@ open class TemplateLoader {
     }
   }
 
-  open func loadTemplate(_ templateName: String) -> Template? {
-    return loadTemplate([templateName])
+  public func loadTemplate(name: String) throws -> Template? {
+    for path in paths {
+      let templatePath = path + Path(name)
+
+      if templatePath.exists {
+        return try Template(path: templatePath)
+      }
+    }
+
+    return nil
   }
 
-  open func loadTemplate(_ templateNames: [String]) -> Template? {
+  public func loadTemplate(names: [String]) throws -> Template? {
     for path in paths {
-      for templateName in templateNames {
+      for templateName in names {
         let templatePath = path + Path(templateName)
 
         if templatePath.exists {
-          if let template = try? Template(path: templatePath) {
-            return template
-          }
+          return try Template(path: templatePath)
         }
       }
     }

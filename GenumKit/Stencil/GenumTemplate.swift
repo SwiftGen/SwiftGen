@@ -41,20 +41,19 @@ open class GenumTemplate: Template {
   }
 }
 
-// Register Genum-specific tags & filters
-open class GenumNamespace: Namespace {
-  public override init() {
-    super.init()
-    self.registerTag("set", parser: SetNode.parse)
-    self.registerFilter("swiftIdentifier", filter: StringFilters.stringToSwiftIdentifier)
-    self.registerFilter("join", filter: ArrayFilters.join)
-    self.registerFilter("lowerFirstWord", filter: StringFilters.lowerFirstWord)
-    self.registerFilter("snakeToCamelCase", filter: StringFilters.snakeToCamelCase)
-    self.registerFilter("snakeToCamelCaseNoPrefix", filter: StringFilters.snakeToCamelCaseNoPrefix)
-    self.registerFilter("titlecase", filter: StringFilters.titlecase)
-    self.registerFilter("hexToInt", filter: NumFilters.hexToInt)
-    self.registerFilter("int255toFloat", filter: NumFilters.int255toFloat)
-    self.registerFilter("percent", filter: NumFilters.percent)
-    self.registerFilter("escapeReservedKeywords", filter: StringFilters.escapeReservedKeywords)
-  }
+// Create Genum-specific namespace including custom tags & filters
+func genumNamespace() -> Namespace {
+  let namespace = Namespace()
+  namespace.registerTag("set", parser: SetNode.parse)
+  namespace.registerFilter("swiftIdentifier", filter: StringFilters.stringToSwiftIdentifier)
+  namespace.registerFilter("join", filter: ArrayFilters.join)
+  namespace.registerFilter("lowerFirstWord", filter: StringFilters.lowerFirstWord)
+  namespace.registerFilter("snakeToCamelCase", filter: StringFilters.snakeToCamelCase)
+  namespace.registerFilter("snakeToCamelCaseNoPrefix", filter: StringFilters.snakeToCamelCaseNoPrefix)
+  namespace.registerFilter("titlecase", filter: StringFilters.titlecase)
+  namespace.registerFilter("hexToInt", filter: NumFilters.hexToInt)
+  namespace.registerFilter("int255toFloat", filter: NumFilters.int255toFloat)
+  namespace.registerFilter("percent", filter: NumFilters.percent)
+  namespace.registerFilter("escapeReservedKeywords", filter: StringFilters.escapeReservedKeywords)
+  return namespace
 }

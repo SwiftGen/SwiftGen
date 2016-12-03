@@ -1,7 +1,7 @@
-public struct Lexer {
-  public let templateString: String
+struct Lexer {
+  let templateString: String
 
-  public init(templateString: String) {
+  init(templateString: String) {
     self.templateString = templateString
   }
 
@@ -24,7 +24,7 @@ public struct Lexer {
   }
 
   /// Returns an array of tokens from a given template string.
-  public func tokenize() -> [Token] {
+  func tokenize() -> [Token] {
     var tokens: [Token] = []
 
     let scanner = Scanner(templateString)
