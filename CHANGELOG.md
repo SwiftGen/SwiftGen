@@ -22,6 +22,9 @@
 * Strings dot-syntax template: use `enum`s for namespacing instead of `struct`s.  
   [David Jennes](https://github.com/djbe)
   [#218](https://github.com/AliSoftware/SwiftGen/pull/218)
+* Restructure project and build as .app.  
+  [ahtierney](https://github.com/ahtierney)
+  [#204](https://github.com/AliSoftware/SwiftGen/pull/204)
 
 ## 4.0.0
 
