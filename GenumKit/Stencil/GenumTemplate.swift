@@ -45,8 +45,6 @@ open class GenumTemplate: Template {
 func genumNamespace() -> Namespace {
   let namespace = Namespace()
   namespace.registerTag("set", parser: SetNode.parse)
-  namespace.registerTag("ifstrequal", parser: StrEqualsNode.parse)
-  namespace.registerTag("ifnotstrequal", parser: StrEqualsNode.parse_ifnotstrequals)
   namespace.registerTag("map", parser: MapNode.parse)
   namespace.registerFilter("swiftIdentifier", filter: StringFilters.stringToSwiftIdentifier)
   namespace.registerFilter("join", filter: ArrayFilters.join)
@@ -58,7 +56,5 @@ func genumNamespace() -> Namespace {
   namespace.registerFilter("int255toFloat", filter: NumFilters.int255toFloat)
   namespace.registerFilter("percent", filter: NumFilters.percent)
   namespace.registerFilter("escapeReservedKeywords", filter: StringFilters.escapeReservedKeywords)
-  namespace.registerTag("ifstrequal", parser: StrEqualsNode.parse)
-  namespace.registerTag("ifnotstrequal", parser: StrEqualsNode.parse_ifnotstrequals)
   return namespace
 }

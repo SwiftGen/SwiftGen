@@ -10,12 +10,12 @@ public final class {{ spec.type }}: DataModel, Equatable {
    {{ field.doc }}
    */
 {% endif %}
-  public let {{ field.name }}: {% ifstrequal "array" field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% endif %}{% if field.optional %}?{% endif %}
+  public let {{ field.name }}: {% if "array" == field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% endif %}{% if field.optional %}?{% endif %}
 {% endfor %}
 
   // MARK: Initializers
 
-{% map spec.fields with field set params %}{{ field.name }}: {% ifstrequal "array" field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% endif %}{% if field.optional %}?{% endif %}{% endmap %}
+{% map spec.fields with field set params %}{{ field.name }}: {% if "array" == field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% endif %}{% if field.optional %}?{% endif %}{% endmap %}
   public init({{ params|join }}) {
 {% for field in spec.fields %}
     self.{{ field.name }} = {{ field.name }}
@@ -40,7 +40,7 @@ public final class {{ spec.type }}: DataModel, Equatable {
 {% if field.optional %}
     self.{{ field.name }} = try parser.fetch("{{ field.name }}", error: error)
 {% else %}
-{% ifstrequal "array" field.type %}
+{% if "array" == field.type %}
     self.{{ field.name }} = try parser.fetch("{{ field.name }}", error: error)
 {% else %}
     guard let {{ field.name }}: {{ field.type|titlecase }} = try parser.fetch("{{ field.name }}", error: error) else {
@@ -82,7 +82,7 @@ public final class {{ spec.type }}: DataModel, Equatable {
   public func data() -> [String: Any] {
     var data = [String: Any]()
 {% for field in spec.fields %}
-    data["{{ field.name }}"] = {{ field.name }}{% if field.optional %}?{% endif %}{% ifstrequal "array" field.type %}.map { $0.dataRepresentation() }{% else %}.dataRepresentation(){% endif %}
+    data["{{ field.name }}"] = {{ field.name }}{% if field.optional %}?{% endif %}{% if "array" == field.type %}.map { $0.dataRepresentation() }{% else %}.dataRepresentation(){% endif %}
 {% endfor %}
     return data
   }
@@ -97,7 +97,7 @@ public final class {{ spec.type }}: DataModel, Equatable {
 
   public final class Builder {
 {% for field in spec.fields %}
-    public var {{ field.name }}: {% ifstrequal "array" field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% endif %}{% if field.optional %}?{% endif %}
+    public var {{ field.name }}: {% if "array" == field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% endif %}{% if field.optional %}?{% endif %}
 {% endfor %}
 
     public init(copy: {{spec.type}}) {
