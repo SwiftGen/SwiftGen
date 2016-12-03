@@ -6,7 +6,6 @@
 
 import Foundation
 
-
 // Official list of valid identifier characters
 // swiftlint:disable:next line_length
 // from: https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html#//apple_ref/doc/uid/TP40014097-CH30-ID410

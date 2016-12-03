@@ -10,8 +10,7 @@ import PathKit
 
 // MARK: Common
 
-let templatesRelativePath = "../templates"
-
+let templatesRelativePath = (Bundle.main.resourcePath ?? ".") + "/templates"
 
 func templateOption(prefix: String) -> Option<String> {
   return Option<String>(

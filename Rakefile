@@ -223,7 +223,7 @@ namespace :release do
     req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' => content_type})
     yield req if block_given?
     req.basic_auth 'AliSoftware', File.read('.apitoken').chomp
-      
+
     response = Net::HTTP.start(uri.host, uri.port, :use_ssl => (uri.scheme == 'https')) do |http|
       http.request(req)
     end
@@ -238,19 +238,19 @@ namespace :release do
   desc 'Upload the zipped binaries to a new GitHub release'
   task :github => :zip do
     v = podspec_version
-    
+
     changelog = `sed -n /'^## #{v}$'/,/'^## '/p CHANGELOG.md`.gsub(/^## .*$/,'').strip
     print_info "Releasing version #{v} on GitHub"
     puts changelog
-  
+
     json = post('https://api.github.com/repos/AliSoftware/SwiftGen/releases', 'application/json') do |req|
       req.body = { :tag_name => v, :name => v, :body => changelog, :draft => false, :prerelease => false }.to_json
     end
-    
+
     upload_url = json['upload_url'].gsub(/\{.*\}/,"?name=swiftgen-#{v}.zip")
     zipfile = "build/swiftgen-#{v}.zip"
     zipsize = File.size(zipfile)
-    
+
     print_info "Uploading ZIP (#{zipsize} bytes)"
     post(upload_url, 'application/zip') do |req|
       req.body_stream = File.open(zipfile, 'rb')

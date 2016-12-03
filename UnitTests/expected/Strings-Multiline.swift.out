@@ -9,6 +9,8 @@ import Foundation
 enum L10n {
   /// multi\nline
   case MULTILINE
+  /// test
+  case MultiLineNKey
   /// another\nmulti\n    line
   case MULTILINE2
   /// single line
@@ -25,6 +27,8 @@ extension L10n: CustomStringConvertible {
     switch self {
       case .MULTILINE:
         return L10n.tr("MULTILINE")
+      case .MultiLineNKey:
+        return L10n.tr("multiLine\nKey")
       case .MULTILINE2:
         return L10n.tr("MULTILINE2")
       case .SINGLELINE:
@@ -43,4 +47,3 @@ extension L10n: CustomStringConvertible {
 func tr(key: L10n) -> String {
   return key.string
 }
-
