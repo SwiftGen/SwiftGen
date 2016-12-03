@@ -19,7 +19,7 @@
 * Fix broken `import` option added in 4.0.0.  
   [David Jennes](https://github.com/djbe)
   [#214](https://github.com/AliSoftware/SwiftGen/pull/214)
-* Updated Stencil to [0.7.2](https://github.com/kylef/Stencil/releases/tag/0.7.2).  
+* Updated Stencil to [0.7.2](https://github.com/kylef/Stencil/releases/tag/0.7.0).  
   [Kyle Fuller](https://github.com/kylef)
   [#216](https://github.com/AliSoftware/SwiftGen/issues/216)
 * Show an error when the provided path to the `images` command is not an asset catalog.  
