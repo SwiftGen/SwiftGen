@@ -5,11 +5,11 @@ matrix:
     - osx_image: xcode8.1
 
 install:
- - gem install cocoapods
+ - bundle install
  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
- - scripts/install_swiftlint.sh
 
 script:
+ - scripts/install_swiftlint.sh
 # - PROJECT_DIR=. scripts/swiftlint-code.sh
  - rake tests
 # - PROJECT_DIR=. scripts/swiftlint-templates.sh
