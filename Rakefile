@@ -172,7 +172,7 @@ namespace :release do
   task :new => [:check_versions, :tests, :github, :cocoapods, :homebrew]
 
   def podspec_version(file = 'SwiftGen')
-    JSON.parse(`pod ipc spec #{file}.podspec`)["version"]
+    JSON.parse(`bundle exec pod ipc spec #{file}.podspec`)["version"]
   end
 
   def log_result(result, label, error_msg)
@@ -186,10 +186,15 @@ namespace :release do
 
   desc 'Check if all versions from the podspecs and CHANGELOG match'
   task :check_versions do
+    results = []
+
+    # Check if bundler is installed first, as we'll need it for the cocoapods task (and we prefer to fail early)
+    `which bundler`
+    results << log_result( $?.success?, 'Bundler installed', 'Please install bundler using `gem install bundler` and run `bundle install` first.')
+
     # Extract version from GenumKit.podspec
     version = podspec_version
     puts "#{'SwiftGen.podspec'.ljust(25)} \u{1F449}  #{version}"
-    results = []
 
     genumkit_version = podspec_version('GenumKit/GenumKit')
     results << log_result( genumkit_version == version, 'GenumKit version', 'Please make sure GenumKit.podspec has the same version as SwiftGen.podspec')
@@ -204,7 +209,7 @@ namespace :release do
     # Check if example project updated
     sample_project_pods = YAML.load_file('Podfile.lock')['PODS']
     sample_project_updated = sample_project_pods.reduce(false) { |a, e| a || (e.is_a?(Hash) && e.keys.include?("GenumKit (#{version})")) }
-    results << log_result(sample_project_updated, "Sample project updated", 'Please run pod update on the sample project')
+    results << log_result(sample_project_updated, "Sample project updated", 'Please run `bundle exec pod update` on the sample project')
 
     exit 1 unless results.all?
 
@@ -262,7 +267,7 @@ namespace :release do
   desc 'pod trunk push SwiftGen to CocoaPods'
   task :cocoapods do
     print_info "Pushing pod to CocoaPods Trunk"
-    sh 'pod trunk push SwiftGen.podspec'
+    sh 'bundle exec pod trunk push SwiftGen.podspec'
   end
 
   desc 'Release a new version on Homebrew and prepare a PR'

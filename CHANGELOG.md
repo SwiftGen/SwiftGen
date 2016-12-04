@@ -2,26 +2,26 @@
 
 ---
 
-## unreleased
+## master
 
-* Swift 3 migration.  
-  [ahtierney](https://github.com/ahtierney)
-  [#201](https://github.com/AliSoftware/SwiftGen/pull/201)
-* Restructure project and build as .app.  
-  [ahtierney](https://github.com/ahtierney)
-  [#204](https://github.com/AliSoftware/SwiftGen/pull/204)
+### Bug Fixes
+
+_None_
+
+### New Features
+
+_None_
+
+## 4.0.1
+
+### Bug Fixes
+
 * Escape newlines again in .strings file keys.  
   [ChristopherRogers](https://github.com/ChristopherRogers)
   [#208](https://github.com/AliSoftware/SwiftGen/pull/208)
-* Consolidate use of PathKit internally.    
-  [David Jennes](https://github.com/djbe)
-  [#212](https://github.com/AliSoftware/SwiftGen/pull/212)
 * Fix broken `import` option added in 4.0.0.  
   [David Jennes](https://github.com/djbe)
   [#214](https://github.com/AliSoftware/SwiftGen/pull/214)
-* Updated Stencil to [0.7.2](https://github.com/kylef/Stencil/releases/tag/0.7.0).  
-  [Kyle Fuller](https://github.com/kylef)
-  [#216](https://github.com/AliSoftware/SwiftGen/issues/216)
 * Show an error when the provided path to the `images` command is not an asset catalog.  
   [David Jennes](https://github.com/djbe)
   [#217](https://github.com/AliSoftware/SwiftGen/pull/217)
@@ -32,33 +32,54 @@
   [Loïs Di Qual](https://github.com/ldiqual)
   [#222](https://github.com/AliSoftware/SwiftGen/issues/222)
 
+### Internal changes
+
+* Swift 3 migration.  
+  [ahtierney](https://github.com/ahtierney)
+  [#201](https://github.com/AliSoftware/SwiftGen/pull/201)
+* Restructure the SwiftGen project to build as an `.app` during
+  developement, for easier debugging in Xcode.  
+  [ahtierney](https://github.com/ahtierney)
+  [#204](https://github.com/AliSoftware/SwiftGen/pull/204)
+* Consolidate the use of PathKit internally.    
+  [David Jennes](https://github.com/djbe)
+  [#212](https://github.com/AliSoftware/SwiftGen/pull/212)
+* Updated Stencil to [0.7.2](https://github.com/kylef/Stencil/releases/tag/0.7.0).  
+  [Kyle Fuller](https://github.com/kylef)
+  [#216](https://github.com/AliSoftware/SwiftGen/issues/216)
+
 ## 4.0.0
 
-* Add support for multiline string in *.strings file.  
-  [Jeong Yonguk](https://github.com/alldne)
-  [#192](https://github.com/AliSoftware/SwiftGen/pull/192)
+### Breaking Changes
+
 * Change swift 3 storyboard segue template's sender from `AnyObject` to `Any`.  
   [Derek Ostrander](https://github.com/dostrander)
   [#197](https://github.com/AliSoftware/SwiftGen/pull/197)
 * Fix swift 3 storyboard templates to be compliant with swift 3 api design guidelines.  
   [Afonso](https://github.com/afonsograca)
   [#194](https://github.com/AliSoftware/SwiftGen/pull/194)
-* Add option to add import statements at the top of the generated swift file (for
-  storyboards) using the `import` flag.  
-  [David Jennes](https://github.com/djbe)
-  [#175](https://github.com/AliSoftware/SwiftGen/pull/175)
 * Remove the `key` param label from the `tr` function for Localized String in the swift3 template.  
   [AndrewSB](https://github.com/AndrewSB)
   [#190](https://github.com/AliSoftware/SwiftGen/pull/190)
-* Escape reserved swift keywords in the structured and dot-syntax generated strings code.  
-  [Afonso](https://github.com/afonsograca)
-  [#198](https://github.com/AliSoftware/SwiftGen/pull/198)
 * The `swiftgen images` command now uses the `actool` utility to parse asset catalogs,
   ensuring that the parser correctly handles namespaced folders.  
   ⚠️ Note that you now have to specify the exact path to your `.xcassets` assets catalogs
   when using `swiftgen images` (and not just a directory to parse).  
   [David Jennes](https://github.com/djbe)
   [#199](https://github.com/AliSoftware/SwiftGen/pull/199)
+
+### New Features
+
+* Add support for multiline strings in `*.strings` file.  
+  [Jeong Yonguk](https://github.com/alldne)
+  [#192](https://github.com/AliSoftware/SwiftGen/pull/192)
+* Add option to add import statements at the top of the generated swift file (for
+  storyboards) using the `import` flag.  
+  [David Jennes](https://github.com/djbe)
+  [#175](https://github.com/AliSoftware/SwiftGen/pull/175)
+* Escape reserved swift keywords in the structured and dot-syntax generated strings code.  
+  [Afonso](https://github.com/afonsograca)
+  [#198](https://github.com/AliSoftware/SwiftGen/pull/198)
 
 ## 3.0.1
 
