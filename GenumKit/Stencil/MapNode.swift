@@ -25,7 +25,7 @@ public class MapNode: NodeType {
     let mapVariable = components[3]
     let resultName = components[5]
 
-    let forNodes = try parser.parse(until(["endmap", "empty"]))
+    let mapNodes = try parser.parse(until(["endmap", "empty"]))
 
     guard let token = parser.nextToken() else {
       throw TemplateSyntaxError("`endmap` was not found.")
@@ -35,7 +35,7 @@ public class MapNode: NodeType {
       parser.nextToken()
     }
 
-    return MapNode(variable: variable, mapVariable: mapVariable, resultName: resultName, nodes: forNodes)
+    return MapNode(variable: variable, mapVariable: mapVariable, resultName: resultName, nodes: mapNodes)
   }
 
   public init(variable: String, mapVariable: String, resultName: String, nodes: [NodeType]) {
@@ -49,7 +49,7 @@ public class MapNode: NodeType {
     let values = try variable.resolve(context)
 
     if let values = values as? [Any], values.count > 0 {
-      let mappedValues: [String] = try values.enumerated().map { index, item in
+      let mappedValues: [String] = try values.map { item in
         return try context.push(dictionary: [mapVariable: item]) {
           try renderNodes(nodes, context)
         }

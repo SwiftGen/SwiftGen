@@ -13,7 +13,7 @@ SwiftGen is a suite of tools written in Swift to auto-generate Swift code (or an
 * [`enums` for your Colors](#uicolor-and-nscolor).
 * [`enums` for your Fonts](#uifont-and-nsfont).
 * [`classes` for your models](#models)
-* [`any code` for your JSON spec](#json)
+* [`any code` for your JSON specs](#json)
 
 There are multiple benefits in using this:
 

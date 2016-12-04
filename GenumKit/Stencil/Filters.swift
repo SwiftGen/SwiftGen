@@ -127,12 +127,7 @@ struct ArrayFilters {
       throw FilterError.invalidInputType
     }
 
-    let separator: String
-    if let customSeparator = arguments.first as? String {
-      separator = customSeparator
-    } else {
-      separator = ", "
-    }
+    let separator = (arguments.first as? String) ?? ", "
     return strings.joined(separator: separator)
   }
 }
