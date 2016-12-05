@@ -10,7 +10,9 @@ _None_
 
 ### New Features
 
-_None_
+* Added a `strings-no-comments-swift3` template that does not include the default translation of each key.  
+  [Loïs Di Qual](https://github.com/ldiqual)
+  [#222](https://github.com/AliSoftware/SwiftGen/issues/222)
 
 ## 4.0.1
 
@@ -28,9 +30,6 @@ _None_
 * Strings dot-syntax template: use `enum`s for namespacing instead of `struct`s.  
   [David Jennes](https://github.com/djbe)
   [#218](https://github.com/AliSoftware/SwiftGen/pull/218)
-* Added a `strings-no-comments-swift3` template that does not include the default translation of each key.  
-  [Loïs Di Qual](https://github.com/ldiqual)
-  [#222](https://github.com/AliSoftware/SwiftGen/issues/222)
 
 ### Internal changes
 
