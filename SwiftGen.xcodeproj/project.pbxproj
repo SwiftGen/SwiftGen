@@ -79,6 +79,7 @@
 		93DA731D1BF34E26000A3C84 /* Strings-File-UTF8-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 93DA731C1BF34E26000A3C84 /* Strings-File-UTF8-Default.swift.out */; };
 		A1A31BAD1D7C841F00612B39 /* Strings-File-Dot-Syntax-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = A1A31BAC1D7C841F00612B39 /* Strings-File-Dot-Syntax-Swift3.swift.out */; };
 		A99DC0C5A2CECABB34A121C8 /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F17C8613373A017F0B70B5C /* Pods_swiftgen.framework */; };
+		C02DEF2F1DF39357003748C5 /* Strings-File-NoComments-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = C02DEF2E1DF39357003748C5 /* Strings-File-NoComments-Swift3.swift.out */; };
 		C126229CBD385F58FAF629D2 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C3A19C1BBD55A5644EDC18 /* Pods_UnitTests.framework */; };
 		C2265B591C8907CA00CA5C4F /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = C2265B581C8907CA00CA5C4F /* colors.json */; };
 		C24AFD0A1C924188005FE3EF /* Fonts-Dir-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = C24AFD091C924188005FE3EF /* Fonts-Dir-Empty.swift.out */; };
@@ -214,6 +215,7 @@
 		920E71433B3570488CF5B052 /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		93DA731C1BF34E26000A3C84 /* Strings-File-UTF8-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-UTF8-Default.swift.out"; sourceTree = "<group>"; };
 		A1A31BAC1D7C841F00612B39 /* Strings-File-Dot-Syntax-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-Dot-Syntax-Swift3.swift.out"; sourceTree = "<group>"; };
+		C02DEF2E1DF39357003748C5 /* Strings-File-NoComments-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Strings-File-NoComments-Swift3.swift.out"; sourceTree = "<group>"; };
 		C2265B581C8907CA00CA5C4F /* colors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colors.json; sourceTree = "<group>"; };
 		C24AFD011C91DE33005FE3EF /* fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = fonts.swift; sourceTree = "<group>"; tabWidth = 2; };
 		C24AFD091C924188005FE3EF /* Fonts-Dir-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Fonts-Dir-Empty.swift.out"; path = "UnitTests/expected/Fonts-Dir-Empty.swift.out"; sourceTree = SOURCE_ROOT; };
@@ -437,6 +439,7 @@
 		47CB53261CFC0ADF00AA19C0 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
+				C02DEF2E1DF39357003748C5 /* Strings-File-NoComments-Swift3.swift.out */,
 				EE97B1CB1DCF1C93005F5B90 /* Strings-Multiline.swift.out */,
 				4761E0351BDE753000B9B05F /* Strings-Empty.swift.out */,
 				09030C261B6D492E00275BF5 /* Strings-Entries-Default.swift.out */,
@@ -644,6 +647,7 @@
 				0902F5C11D6B86D00080F24D /* colors-bad.txt in Resources */,
 				47CB53391CFC0B2100AA19C0 /* ZapfDingbats.ttf in Resources */,
 				09A87B711BCCA5FC00D9B9F5 /* Localizable.strings in Resources */,
+				C02DEF2F1DF39357003748C5 /* Strings-File-NoComments-Swift3.swift.out in Resources */,
 				47CB533E1CFC170E00AA19C0 /* Storyboards-Anonymous-Swift3.swift.out in Resources */,
 				E2F749761D03CAE800EA0BC8 /* Storyboards-osx-Anonymous-Default.swift.out in Resources */,
 				09EB0A281BDC60F000B2CF79 /* Colors-File-Default.swift.out in Resources */,

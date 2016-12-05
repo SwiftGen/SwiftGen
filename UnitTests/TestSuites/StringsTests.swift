@@ -91,6 +91,17 @@ class StringsTests: XCTestCase {
     let expected = fixtureString("Strings-File-Swift3.swift.out")
     XCTDiffStrings(result, expected)
   }
+  
+  func testFileWithoutCommentsAndSwift3() {
+    let parser = StringsFileParser()
+    try! parser.parseFile(at: fixture("Localizable.strings"))
+    
+    let template = GenumTemplate(templateString: fixtureString("strings-no-comments-swift3.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = fixtureString("Strings-File-NoComments-Swift3.swift.out")
+    XCTDiffStrings(result, expected)
+  }
 
   func testFileWithStructured() {
     let parser = StringsFileParser()
