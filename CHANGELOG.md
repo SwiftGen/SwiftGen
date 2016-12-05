@@ -10,7 +10,9 @@ _None_
 
 ### New Features
 
-_None_
+* Added a `strings-no-comments-swift3` template that does not include the default translation of each key.  
+  [Loïs Di Qual](https://github.com/ldiqual)
+  [#222](https://github.com/AliSoftware/SwiftGen/issues/222)
 
 ## 4.0.1
 
