@@ -13,6 +13,9 @@ _None_
 * Added a `strings-no-comments-swift3` template that does not include the default translation of each key.  
   [Loïs Di Qual](https://github.com/ldiqual)
   [#222](https://github.com/AliSoftware/SwiftGen/issues/222)
+* Images: new dot-syntax template, use `dot-syntax-swift3` or `dot-syntax` (for Swift 2.3).  
+  [David Jennes](https://github.com/djbe)
+  [#206](https://github.com/AliSoftware/SwiftGen/pull/206)
 
 ## 4.0.1
 

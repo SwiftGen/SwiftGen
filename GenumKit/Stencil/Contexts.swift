@@ -47,7 +47,7 @@ extension ColorsFileParser {
         "rgb": String(hexChars[0..<6]),
         "red": comps[0],
         "green": comps[1],
-        "blue" : comps[2],
+        "blue": comps[2],
         "alpha": comps[3],
       ]
     }).sorted { $0["name"] ?? "" < $1["name"] ?? "" }
@@ -62,7 +62,79 @@ extension ColorsFileParser {
 */
 extension AssetsCatalogParser {
   public func stencilContext(enumName: String = "Asset") -> Context {
-    return Context(dictionary: ["enumName": enumName, "images": imageNames], namespace: genumNamespace())
+    let images = justValues(entries: entries)
+    let imagesStructured = structure(entries: entries)
+
+    return Context(
+      dictionary: [
+        "enumName": enumName,
+        "images": images,
+        "structuredImages": imagesStructured
+      ],
+      namespace: genumNamespace()
+    )
+  }
+
+  private func justValues(entries: [Entry]) -> [String] {
+    var result = [String]()
+
+    for entry in entries {
+      switch entry {
+      case let .namespace(name: name, items: items):
+        result += justValues(entries: items)
+      case let .image(name: _, value: value):
+        result += [value]
+      }
+    }
+
+    return result
+  }
+
+  private func structure(entries: [Entry], currentLevel: Int = 0, maxLevel: Int = 5) -> [[String: Any]] {
+    return entries.map { entry in
+      switch entry {
+      case let .namespace(name: name, items: items):
+        if currentLevel + 1 >= maxLevel {
+          return [
+            "name": name,
+            "items": flatten(entries: items)
+          ]
+        } else {
+          return [
+            "name": name,
+            "items": structure(entries: items, currentLevel: currentLevel + 1, maxLevel: maxLevel)
+          ]
+        }
+      case let .image(name: name, value: value):
+        return [
+          "name": name,
+          "value": value
+        ]
+      }
+    }
+  }
+
+  private func flatten(entries: [Entry]) -> [[String: Any]] {
+    var result = [[String: Any]]()
+
+    for entry in entries {
+      switch entry {
+      case let .namespace(name: name, items: items):
+        result += flatten(entries: items).map { item in
+          return [
+            "name": "\(name)/\(item["name"]!)",
+            "value": item["value"]!
+          ]
+        }
+      case let .image(name: name, value: value):
+        result += [[
+          "name": name,
+          "value": value
+        ]]
+      }
+    }
+
+    return result
   }
 }
 
@@ -140,7 +212,7 @@ extension StoryboardParser {
       dictionary: [
         "sceneEnumName": sceneEnumName,
         "segueEnumName": segueEnumName,
-		"extraImports": extraImports,
+        "extraImports": extraImports,
         "storyboards": storyboardsMap
       ],
       namespace: genumNamespace()

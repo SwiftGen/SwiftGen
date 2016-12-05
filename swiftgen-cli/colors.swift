@@ -35,7 +35,7 @@ let colorsCommand = command(
     try textParser.parseFile(at: path)
     parser = textParser
   default:
-		throw ArgumentError.invalidType(value: String(describing: path), type: "CLR, TXT, XML or JSON file", argument: nil)
+    throw ArgumentError.invalidType(value: path.description, type: "CLR, TXT, XML or JSON file", argument: nil)
   }
 
   do {

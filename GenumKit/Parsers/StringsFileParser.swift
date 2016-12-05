@@ -33,7 +33,7 @@ public final class StringsFileParser {
   // Localizable.strings files are generally UTF16, not UTF8!
   public func parseFile(at path: Path) throws {
     guard let data = try? path.read() else {
-      throw StringsFileParserError.FailureOnLoading(path: String(describing: path))
+      throw StringsFileParserError.FailureOnLoading(path: path.description)
     }
 
     let plist = try PropertyListSerialization

@@ -106,6 +106,10 @@
             argument = "fonts -t swift3 $(PROJECT_DIR)/UnitTests/fixtures/Fonts"
             isEnabled = "NO">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "templates list"
+            isEnabled = "NO">
+         </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>

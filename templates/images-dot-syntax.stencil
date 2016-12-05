@@ -1,0 +1,106 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+{% if structuredImages %}
+#if os(iOS) || os(tvOS) || os(watchOS)
+  import UIKit.UIImage
+  typealias Image = UIImage
+#elseif os(OSX)
+  import AppKit.NSImage
+  typealias Image = NSImage
+#endif
+
+// swiftlint:disable file_length
+// swiftlint:disable line_length
+// swiftlint:disable nesting
+
+struct {{enumName}}Type: StringLiteralConvertible {
+  private var value: String
+
+  var image: UIImage {
+    return UIImage(asset: self)
+  }
+
+  public init(stringLiteral value: String) {
+    self.value = value
+  }
+
+  public init(extendedGraphemeClusterLiteral value: String) {
+    self.init(stringLiteral: value)
+  }
+
+  public init(unicodeScalarLiteral value: String) {
+    self.init(stringLiteral: value)
+  }
+}
+
+// swiftlint:disable type_body_length
+enum {{enumName}} {
+  {# ROOT LEVEL #}
+  {% for image in structuredImages %}
+  {% ifnot image.items %}
+  static let {{image.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{image.value}}"
+  {% else %}
+
+  enum {{image.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+    {# LEVEL 1 #}
+    {% for subimage1 in image.items %}
+    {% ifnot subimage1.items %}
+    static let {{subimage1.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage1.value}}"
+    {% else %}
+
+    enum {{subimage1.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+      {# LEVEL 2 #}
+      {% for subimage2 in subimage1.items %}
+      {% ifnot subimage2.items %}
+      static let {{subimage2.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage2.value}}"
+      {% else %}
+
+      enum {{subimage2.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+        {# LEVEL 3 #}
+        {% for subimage3 in subimage2.items %}
+        {% ifnot subimage3.items %}
+        static let {{subimage3.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage3.value}}"
+        {% else %}
+
+        enum {{subimage3.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+          {# LEVEL 4 #}
+          {% for subimage4 in subimage3.items %}
+          {% ifnot subimage4.items %}
+          static let {{subimage4.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage4.value}}"
+          {% else %}
+
+          enum {{subimage4.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+            {# LEVEL 5 #}
+            {% for subimage5 in subimage4.items %}
+            {% ifnot subimage5.items %}
+            static let {{subimage5.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage5.value}}"
+            {% else %}
+            // This should not exist!
+            {% endif %}
+            {% endfor %}
+          }
+          {% endif %}
+          {% endfor %}
+        }
+        {% endif %}
+        {% endfor %}
+      }
+      {% endif %}
+      {% endfor %}
+    }
+    {% endif %}
+    {% endfor %}
+  }
+  {% endif %}
+  {% endfor %}
+}
+// swiftlint:enable type_body_length
+
+extension Image {
+  convenience init!(asset: {{enumName}}Type) {
+    self.init(named: asset.value)
+  }
+}
+{% else %}
+// No image found
+{% endif %}
