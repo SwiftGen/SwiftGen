@@ -30,7 +30,7 @@ enum Asset: String {
     Round_Orange,
     Round_Apple,
     Round_Double_Cherry,
-    Round_Tomato,
+    Round_Tomato
   ]
 
   var image: Image {

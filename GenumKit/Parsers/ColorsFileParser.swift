@@ -187,7 +187,15 @@ public final class ColorsXMLFileParser: ColorsFileParser {
                       namespaceURI: String?, qualifiedName qName: String?) {
       guard elementName == ColorsXMLFileParser.colorTagName else { return }
       guard let colorName = currentColorName, let colorValue = currentColorValue else { return }
-      parsedColors[colorName] = try? parse(hex: colorValue) ?? UInt32(0)
+
+      do {
+        parsedColors[colorName] = try parse(hex: colorValue)
+      } catch let e as ColorsParserError {
+        fatalError(e.description)
+      } catch {
+        fatalError("error: unknown color parser error")
+      }
+
       currentColorName = nil
       currentColorValue = nil
     }

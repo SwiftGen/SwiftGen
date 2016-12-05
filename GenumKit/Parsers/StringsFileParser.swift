@@ -39,7 +39,7 @@ public final class StringsFileParser {
     let plist = try PropertyListSerialization
         .propertyList(from: data, format: nil)
 
-    guard let dict = plist as? Dictionary<String, String> else {
+    guard let dict = plist as? [String: String] else {
       throw StringsFileParserError.InvalidFormat
     }
 
