@@ -6,8 +6,14 @@ let NSFileNoSuchFileError = 4
 #endif
 
 /// A class representing a template
-open class Template {
+open class Template: ExpressibleByStringLiteral {
   let tokens: [Token]
+
+  /// Create a template with a template string
+  public init(templateString: String) {
+    let lexer = Lexer(templateString: templateString)
+    tokens = lexer.tokenize()
+  }
 
   /// Create a template with the given name inside the given bundle
   public convenience init(named:String, inBundle bundle:Bundle? = nil) throws {
@@ -25,14 +31,23 @@ open class Template {
   }
 
   /// Create a template with a file found at the given path
-  public convenience init(path:Path) throws {
+  public convenience init(path: Path) throws {
     self.init(templateString: try path.read())
   }
 
-  /// Create a template with a template string
-  public init(templateString:String) {
-    let lexer = Lexer(templateString: templateString)
-    tokens = lexer.tokenize()
+  // Create a template with a template string literal
+  public convenience required init(stringLiteral value: String) {
+    self.init(templateString: value)
+  }
+
+  // Create a template with a template string literal
+  public convenience required init(extendedGraphemeClusterLiteral value: StringLiteralType) {
+    self.init(stringLiteral: value)
+  }
+
+  // Create a template with a template string literal
+  public convenience required init(unicodeScalarLiteral value: StringLiteralType) {
+    self.init(stringLiteral: value)
   }
 
   /// Render the given template

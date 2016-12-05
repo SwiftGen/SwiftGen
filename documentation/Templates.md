@@ -60,9 +60,9 @@ strings:
 
 ## Templates Format, Nodes and Filters
 
-Templates in SwiftGen are based on [Stencil](https://github.com/kylef/Stencil), a template engine inspired by Django and Mustache. The syntax of the templates [is explained in Stencil's README](https://github.com/kylef/Stencil#templates).
+Templates in SwiftGen are based on [Stencil](https://stencil.fuller.li/), a template engine inspired by Django and Mustache. The syntax of the templates [is explained in Stencil's documentation](https://stencil.fuller.li/en/latest/templates.html).
 
-Additionally to the nodes and filters provided by Stencil, SwiftGen provides some additional ones:
+Additionally to the [tags and filters](https://stencil.fuller.li/en/latest/builtins.html) provided by Stencil, SwiftGen provides some additional ones:
 
 | Node | Description |
 | ---- | ----------- |

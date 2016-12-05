@@ -2,10 +2,10 @@
 import Foundation
 
 
-open class NowNode : NodeType {
-  open let format:Variable
+class NowNode : NodeType {
+  let format:Variable
 
-  open class func parse(_ parser:TokenParser, token:Token) throws -> NodeType {
+  class func parse(_ parser:TokenParser, token:Token) throws -> NodeType {
     var format:Variable?
 
     let components = token.components()
@@ -19,11 +19,11 @@ open class NowNode : NodeType {
     return NowNode(format:format)
   }
 
-  public init(format:Variable?) {
+  init(format:Variable?) {
     self.format = format ?? Variable("\"yyyy-MM-dd 'at' HH:mm\"")
   }
 
-  open func render(_ context: Context) throws -> String {
+  func render(_ context: Context) throws -> String {
     let date = Date()
     let format = try self.format.resolve(context)
     var formatter:DateFormatter?

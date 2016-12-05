@@ -1,9 +1,9 @@
 class BlockContext {
   class var contextKey: String { return "block_context" }
 
-  var blocks: [String:BlockNode]
+  var blocks: [String: BlockNode]
 
-  init(blocks: [String:BlockNode]) {
+  init(blocks: [String: BlockNode]) {
     self.blocks = blocks
   }
 
@@ -42,10 +42,9 @@ class ExtendsNode : NodeType {
       throw TemplateSyntaxError("'extends' cannot appear more than once in the same template")
     }
 
-    let blockNodes = parsedNodes.filter { node in node is BlockNode }
+    let blockNodes = parsedNodes.flatMap { $0 as? BlockNode }
 
-    let nodes = blockNodes.reduce([String:BlockNode]()) { (accumulator, node:NodeType) -> [String:BlockNode] in
-      let node = (node as! BlockNode)
+    let nodes = blockNodes.reduce([String: BlockNode]()) { (accumulator, node) -> [String: BlockNode] in
       var dict = accumulator
       dict[node.name] = node
       return dict
@@ -60,7 +59,7 @@ class ExtendsNode : NodeType {
   }
 
   func render(_ context: Context) throws -> String {
-    guard let loader = context["loader"] as? TemplateLoader else {
+    guard let loader = context["loader"] as? Loader else {
       throw TemplateSyntaxError("Template loader not in context")
     }
 
@@ -68,12 +67,23 @@ class ExtendsNode : NodeType {
       throw TemplateSyntaxError("'\(self.templateName)' could not be resolved as a string")
     }
 
-    guard let template = loader.loadTemplate(templateName) else {
-      let paths:String = loader.paths.map { $0.description }.joined(separator: ", ")
-      throw TemplateSyntaxError("'\(templateName)' template not found in \(paths)")
+    guard let template = try loader.loadTemplate(name: templateName) else {
+      throw TemplateSyntaxError("'\(templateName)' template not found")
     }
 
-    let blockContext = BlockContext(blocks: blocks)
+    let blockContext: BlockContext
+    if let context = context[BlockContext.contextKey] as? BlockContext {
+      blockContext = context
+
+      for (key, value) in blocks {
+        if !blockContext.blocks.keys.contains(key) {
+          blockContext.blocks[key] = value
+        }
+      }
+    } else {
+      blockContext = BlockContext(blocks: blocks)
+    }
+
     return try context.push(dictionary: [BlockContext.contextKey: blockContext]) {
       return try template.render(context)
     }
@@ -89,7 +99,7 @@ class BlockNode : NodeType {
     let bits = token.components()
 
     guard bits.count == 2 else {
-      throw TemplateSyntaxError("'block' tag takes one argument, the template file to be included")
+      throw TemplateSyntaxError("'block' tag takes one argument, the block name")
     }
 
     let blockName = bits[1]

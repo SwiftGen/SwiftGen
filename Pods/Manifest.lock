@@ -1,16 +1,16 @@
 PODS:
   - Commander (0.6.0)
-  - GenumKit (4.0.0):
-    - Stencil (= 0.6.0)
+  - GenumKit (4.0.1):
+    - Stencil (= 0.7.2)
   - PathKit (0.7.0)
-  - Stencil (0.6.0):
+  - Stencil (0.7.2):
     - PathKit (~> 0.7.0)
 
 DEPENDENCIES:
   - Commander (~> 0.6.0)
   - GenumKit (from `GenumKit`)
   - PathKit (~> 0.7.0)
-  - Stencil (~> 0.6.0)
+  - Stencil (~> 0.7.2)
 
 EXTERNAL SOURCES:
   GenumKit:
@@ -18,10 +18,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Commander: fba7c96c9e787ecc8ebe0737be875e1e18ef47ff
-  GenumKit: ae5905aa595dd3ecd0adf42cdd686f28c5e5aecd
+  GenumKit: fdcf49b82d0c6d200dfdf3e637aacaa92d420612
   PathKit: f8260c3e41bf4d552f3603853e32a5b325a176d4
-  Stencil: c665353046bca0279f3503f88293f2eff5fc67a6
+  Stencil: 7eeda74c79617b2802fd2f1267ac75e7d42fe925
 
-PODFILE CHECKSUM: 23616596687360356baddcd2c9cdac5b900e2fcd
+PODFILE CHECKSUM: 4e3b43a2c60f20161e8251ff0c8329da2aa71cc0
 
 COCOAPODS: 1.2.0.beta.1

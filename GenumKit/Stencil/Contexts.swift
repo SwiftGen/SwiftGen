@@ -51,7 +51,7 @@ extension ColorsFileParser {
         "alpha": comps[3],
       ]
     }).sorted { $0["name"] ?? "" < $1["name"] ?? "" }
-    return Context(dictionary: ["enumName": enumName, "colors": colorMap], namespace: GenumNamespace())
+    return Context(dictionary: ["enumName": enumName, "colors": colorMap], namespace: genumNamespace())
   }
 }
 
@@ -71,7 +71,7 @@ extension AssetsCatalogParser {
         "images": images,
         "structuredImages": imagesStructured
       ],
-      namespace: GenumNamespace()
+      namespace: genumNamespace()
     )
   }
 
@@ -215,7 +215,7 @@ extension StoryboardParser {
         "extraImports": extraImports,
         "storyboards": storyboardsMap
       ],
-      namespace: GenumNamespace()
+      namespace: genumNamespace()
     )
   }
 }
@@ -253,13 +253,13 @@ extension StringsFileParser {
           "names": entry.types.indices.map { "p\($0)" },
           "typednames": entry.types.enumerated().map { "p\($0): \($1.rawValue)" }
         ]
-        return ["key": entry.key,
+        return ["key": entry.key.newlineEscaped,
                 "translation": entry.translation.newlineEscaped,
                 "params": params,
                 "keytail": keytail
         ]
       } else {
-        return ["key": entry.key,
+        return ["key": entry.key.newlineEscaped,
                 "translation": entry.translation.newlineEscaped,
                 "keytail": keytail
         ]
@@ -283,7 +283,7 @@ extension StringsFileParser {
         "strings": strings,
         "structuredStrings": structuredStrings
       ],
-      namespace: GenumNamespace()
+      namespace: genumNamespace()
     )
   }
 
@@ -411,6 +411,6 @@ extension FontsFileParser {
       ]
     }.sorted { $0["name"] as? String ?? "" < $1["name"] as? String ?? "" }
 
-    return Context(dictionary: ["enumName": enumName, "families": families], namespace: GenumNamespace())
+    return Context(dictionary: ["enumName": enumName, "families": families], namespace: genumNamespace())
   }
 }

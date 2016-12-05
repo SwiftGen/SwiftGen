@@ -1,0 +1,45 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+{% if strings %}
+import Foundation
+
+// swiftlint:disable file_length
+// swiftlint:disable line_length
+
+// swiftlint:disable type_body_length
+enum {{enumName}} {
+  {% for string in strings %}
+  case {{string.key|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}{% if string.params %}({{string.params.types|join}}){% endif %}
+  {% endfor %}
+}
+// swiftlint:enable type_body_length
+
+extension {{enumName}}: CustomStringConvertible {
+  var description: String { return self.string }
+
+  var string: String {
+    switch self {
+      {% for string in strings %}
+      {% if string.params %}
+      case .{{string.key|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}({{string.params.declarations|join}}):
+        return {{enumName}}.tr(key: "{{string.key}}", {{string.params.names|join}})
+      {% else %}
+      case .{{string.key|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}:
+        return {{enumName}}.tr(key: "{{string.key}}")
+      {% endif %}
+      {% endfor %}
+    }
+  }
+
+  private static func tr(key: String, _ args: CVarArg...) -> String {
+    let format = NSLocalizedString(key, comment: "")
+    return String(format: format, locale: Locale.current, arguments: args)
+  }
+}
+
+func tr(_ key: {{enumName}}) -> String {
+  return key.string
+}
+{% else %}
+// No string found
+{% endif %}

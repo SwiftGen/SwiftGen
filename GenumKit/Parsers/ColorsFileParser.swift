@@ -156,7 +156,6 @@ extension NSColor {
 
 }
 
-
 // MARK: - Android colors.xml File Parser
 
 public final class ColorsXMLFileParser: ColorsFileParser {

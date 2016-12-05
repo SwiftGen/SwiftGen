@@ -12,10 +12,9 @@ public func until(_ tags: [String]) -> ((TokenParser, Token) -> Bool) {
   }
 }
 
-public typealias Filter = (Any?) throws -> Any?
 
 /// A class for parsing an array of tokens and converts them into a collection of Node's
-open class TokenParser {
+public class TokenParser {
   public typealias TagParser = (TokenParser, Token) throws -> NodeType
 
   fileprivate var tokens: [Token]
@@ -27,11 +26,11 @@ open class TokenParser {
   }
 
   /// Parse the given tokens into nodes
-  open func parse() throws -> [NodeType] {
+  public func parse() throws -> [NodeType] {
     return try parse(nil)
   }
 
-  open func parse(_ parse_until:((_ parser:TokenParser, _ token:Token) -> (Bool))?) throws -> [NodeType] {
+  public func parse(_ parse_until:((_ parser:TokenParser, _ token:Token) -> (Bool))?) throws -> [NodeType] {
     var nodes = [NodeType]()
 
     while tokens.count > 0 {
@@ -65,7 +64,7 @@ open class TokenParser {
     return nodes
   }
 
-  open func nextToken() -> Token? {
+  public func nextToken() -> Token? {
     if tokens.count > 0 {
       return tokens.remove(at: 0)
     }
@@ -73,11 +72,11 @@ open class TokenParser {
     return nil
   }
 
-  open func prependToken(_ token:Token) {
+  public func prependToken(_ token:Token) {
     tokens.insert(token, at: 0)
   }
 
-  open func findFilter(_ name: String) throws -> Filter {
+  func findFilter(_ name: String) throws -> FilterType {
     if let filter = namespace.filters[name] {
       return filter
     }
@@ -85,7 +84,7 @@ open class TokenParser {
     throw TemplateSyntaxError("Invalid filter '\(name)'")
   }
 
-  func compileFilter(_ token: String) throws -> Resolvable {
+  public func compileFilter(_ token: String) throws -> Resolvable {
     return try FilterExpression(token: token, parser: self)
   }
 }

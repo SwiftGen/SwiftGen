@@ -110,7 +110,6 @@ public final class StringsFileParser {
     }
   }
 
-
   // MARK: - Private Helpers
 
   private static let formatTypesRegEx: NSRegularExpression = {

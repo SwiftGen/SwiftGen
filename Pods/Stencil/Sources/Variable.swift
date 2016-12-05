@@ -2,7 +2,7 @@ import Foundation
 
 
 class FilterExpression : Resolvable {
-  let filters: [Filter]
+  let filters: [(FilterType, [Variable])]
   let variable: Variable
 
   init(token: String, parser: TokenParser) throws {
@@ -17,7 +17,11 @@ class FilterExpression : Resolvable {
     let filterBits = bits[bits.indices.suffix(from: 1)]
 
     do {
-      filters = try filterBits.map { try parser.findFilter($0) }
+      filters = try filterBits.map {
+        let (name, arguments) = parseFilterComponents(token: $0)
+        let filter = try parser.findFilter(name)
+        return (filter, arguments)
+      }
     } catch {
       filters = []
       throw error
@@ -28,7 +32,8 @@ class FilterExpression : Resolvable {
     let result = try variable.resolve(context)
 
     return try filters.reduce(result) { x, y in
-      return try y(x)
+      let arguments = try y.1.map { try $0.resolve(context) }
+      return try y.0.invoke(value: x, arguments: arguments)
     }
   }
 }
@@ -64,7 +69,11 @@ public struct Variable : Equatable, Resolvable {
         current = dictionary[bit]
       } else if let array = current as? [Any] {
         if let index = Int(bit) {
-          current = array[index]
+          if index >= 0 && index < array.count {
+            current = array[index]
+          } else {
+            current = nil
+          }
         } else if bit == "first" {
           current = array.first
         } else if bit == "last" {
@@ -78,6 +87,13 @@ public struct Variable : Equatable, Resolvable {
 #else
         current = object.value(forKey: bit)
 #endif
+      } else if let value = current {
+        let mirror = Mirror(reflecting: value)
+        current = mirror.descendant(bit)
+
+        if current == nil {
+          return nil
+        }
       } else {
         return nil
       }
@@ -130,4 +146,14 @@ extension Dictionary : Normalizable {
 
     return dictionary
   }
+}
+
+func parseFilterComponents(token: String) -> (String, [Variable]) {
+  var components = token.smartSplit(separator: ":")
+  let name = components.removeFirst()
+  let variables = components
+    .joined(separator: ":")
+    .smartSplit(separator: ",")
+    .map { Variable($0) }
+  return (name, variables)
 }
