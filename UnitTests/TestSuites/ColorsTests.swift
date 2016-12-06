@@ -131,7 +131,8 @@ class ColorsCLRFileTests: XCTestCase {
 
   func testFileWithDefaults() {
     let parser = ColorsCLRFileParser()
-    parser.parseFile(at: fixture("colors.clr"))
+    try! parser.parseFile(at: fixture("colors.clr"))
+
 
     let template = GenumTemplate(templateString: fixtureString("colors-default.stencil"))
     let result = try! template.render(parser.stencilContext())
@@ -142,13 +143,25 @@ class ColorsCLRFileTests: XCTestCase {
 
   func testFileWithCustomName() {
     let parser = ColorsCLRFileParser()
-    parser.parseFile(at: fixture("colors.clr"))
+    try! parser.parseFile(at: fixture("colors.clr"))
 
     let template = GenumTemplate(templateString: fixtureString("colors-default.stencil"))
     let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
 
     let expected = fixtureString("Colors-File-CustomName.swift.out")
     XCTDiffStrings(result, expected)
+  }
+
+  func testFileWithBadFile() {
+    let parser = ColorsCLRFileParser()
+    do {
+      try parser.parseFile(at: fixture("colors-bad.clr"))
+      XCTFail("Code did parse file successfully while it was expected to fail for bad file")
+    } catch ColorsParserError.invalidFile {
+      // That's the expected exception we want to happen
+    } catch let error {
+      XCTFail("Unexpected error occured while parsing: \(error)")
+    }
   }
 }
 

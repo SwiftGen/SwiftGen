@@ -136,11 +136,13 @@ public final class ColorsCLRFileParser: ColorsFileParser {
 
   public init() {}
 
-  public func parseFile(at path: Path) {
+  public func parseFile(at path: Path) throws {
     if let colorsList = NSColorList(name: "UserColors", fromFile: path.description) {
       for colorName in colorsList.allKeys {
         colors[colorName] = colorsList.color(withKey: colorName)?.rgbColor?.hexValue
       }
+    } else {
+      throw ColorsParserError.invalidFile(reason: "Invalid color list")
     }
   }
 
