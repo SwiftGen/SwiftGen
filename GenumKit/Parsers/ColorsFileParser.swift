@@ -232,11 +232,20 @@ public final class ColorsJSONFileParser: ColorsFileParser {
   public init() {}
 
   public func parseFile(at path: Path) throws {
-    if let json = try? JSONSerialization.jsonObject(with: try path.read(), options: []),
-      let dict = json as? [String: String] {
-        for (key, value) in dict {
-          colors[key] = try parse(hex: value)
-        }
+    do {
+      let json = try JSONSerialization.jsonObject(with: try path.read(), options: [])
+
+      guard let dict = json as? [String: String] else {
+        throw ColorsParserError.invalidFile(reason: "Invalid structure, must be an object with string values.")
+      }
+
+      for (key, value) in dict {
+        colors[key] = try parse(hex: value, key: key)
+      }
+    } catch let error as ColorsParserError {
+      throw error
+    } catch let error {
+      throw ColorsParserError.invalidFile(reason: error.localizedDescription)
     }
   }
 }
