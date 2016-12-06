@@ -80,7 +80,7 @@ extension AssetsCatalogParser {
 
     for entry in entries {
       switch entry {
-      case let .namespace(name: name, items: items):
+      case let .namespace(name: _, items: items):
         result += justValues(entries: items)
       case let .image(name: _, value: value):
         result += [value]
