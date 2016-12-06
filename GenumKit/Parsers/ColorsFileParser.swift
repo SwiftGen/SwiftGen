@@ -14,18 +14,22 @@ public protocol ColorsFileParser {
 
 public enum ColorsParserError: Error, CustomStringConvertible {
   case invalidHexColor(string: String, key: String?)
+  case invalidFile(reason: String)
+
   public var description: String {
     switch self {
     case .invalidHexColor(string: let string, key: let key):
       let keyInfo = key.flatMap { k in " for key \"\(k)\"" } ?? ""
       return "error: Invalid hex color \"\(string)\" found\(keyInfo)."
+    case .invalidFile(reason: let reason):
+      return "error: Unable to parse file. \(reason)"
     }
   }
 }
 
 // MARK: - Private Helpers
 
-fileprivate func parse(hex hexString: String) throws -> UInt32 {
+fileprivate func parse(hex hexString: String, key: String? = nil) throws -> UInt32 {
   let scanner = Scanner(string: hexString)
   let prefixLen: Int
   if scanner.scanString("#", into: nil) {
@@ -38,7 +42,7 @@ fileprivate func parse(hex hexString: String) throws -> UInt32 {
 
   var value: UInt32 = 0
   guard scanner.scanHexInt32(&value) else {
-    throw ColorsParserError.invalidHexColor(string: hexString, key: nil)
+    throw ColorsParserError.invalidHexColor(string: hexString, key: key)
   }
 
   let len = hexString.lengthOfBytes(using: .utf8) - prefixLen
@@ -170,6 +174,7 @@ public final class ColorsXMLFileParser: ColorsFileParser {
     var parsedColors = [String: UInt32]()
     var currentColorName: String? = nil
     var currentColorValue: String? = nil
+    var colorParserError: Error? = nil
 
     @objc func parser(_ parser: XMLParser, didStartElement elementName: String,
                       namespaceURI: String?, qualifiedName qName: String?,
@@ -189,11 +194,12 @@ public final class ColorsXMLFileParser: ColorsFileParser {
       guard let colorName = currentColorName, let colorValue = currentColorValue else { return }
 
       do {
-        parsedColors[colorName] = try parse(hex: colorValue)
-      } catch let e as ColorsParserError {
-        fatalError(e.description)
+        parsedColors[colorName] = try parse(hex: colorValue, key: colorName)
+      } catch let error as ColorsParserError {
+        colorParserError = error
+        parser.abortParsing()
       } catch {
-        fatalError("error: unknown color parser error")
+        parser.abortParsing()
       }
 
       currentColorName = nil
@@ -205,8 +211,15 @@ public final class ColorsXMLFileParser: ColorsFileParser {
     let parser = XMLParser(data: try path.read())
     let delegate = ParserDelegate()
     parser.delegate = delegate
-    parser.parse()
-    colors = delegate.parsedColors
+
+    if parser.parse() {
+      colors = delegate.parsedColors
+    } else if let error = delegate.colorParserError {
+      throw error
+    } else {
+      let reason = parser.parserError?.localizedDescription ?? "Unknown XML parser error."
+      throw ColorsParserError.invalidFile(reason: reason)
+    }
   }
 
 }
