@@ -130,7 +130,7 @@ end
 desc "Run the Unit Tests"
 task :tests do
   print_info "Running Unit Tests"
-  xcrun %Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen-cli -sdk macosx test)
+  xcrun %Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen -sdk macosx test)
 end
 
 desc "Delete the build/ directory"

@@ -22,7 +22,7 @@ let templatesListCommand = command(
 ) { onlySubcommand, output in
   let customTemplates = (try? appSupportTemplatesPath.children()) ?? []
   let bundledTemplates = (try? bundledTemplatesPath.children()) ?? []
-  var outputLines = Array<String>()
+  var outputLines = [String]()
 
   let printTemplates = { (prefix: String, list: [Path]) in
     for file in list where file.lastComponent.hasPrefix("\(prefix)-") && file.extension == "stencil" {

@@ -19,7 +19,7 @@ enum {{enumName}}: String {
   {% endfor %}
 
   static let allValues = [{% for image in images %}
-    {{image|swiftIdentifier}},
+    {{image|swiftIdentifier}}{% if not forloop.last %},{% endif %}
   {% endfor %}]
 
   var image: Image {
