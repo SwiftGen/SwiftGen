@@ -235,26 +235,26 @@ class StoryboardsOSXTests: XCTestCase {
 
     let expected = fixtureString("Storyboards-osx-All-Default.swift.out")
     XCTDiffStrings(result, expected)
-	}
+  }
 
-	func testAdditionalImport() {
-		let parser = StoryboardParser()
+  func testAdditionalImport() {
+    let parser = StoryboardParser()
     do {
       try parser.addStoryboard(at: fixture("AdditionalImport-osx.storyboard", subDirectory: StoryboardsDir.macOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
 
-		// additional import statements
-		let extraImports = [
-			"DBPrefsWindowController"
-		]
+    // additional import statements
+    let extraImports = [
+      "DBPrefsWindowController"
+    ]
 
-		let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
-		let context = parser.stencilContext(sceneEnumName: "StoryboardScene", segueEnumName: "StoryboardSegue", extraImports: extraImports)
-		let result = try! template.render(context)
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
+    let context = parser.stencilContext(sceneEnumName: "StoryboardScene", segueEnumName: "StoryboardSegue", extraImports: extraImports)
+    let result = try! template.render(context)
 
-		let expected = fixtureString("Storyboards-osx-AdditionalImport-Default.swift.out")
-		XCTDiffStrings(result, expected)
-	}
+    let expected = fixtureString("Storyboards-osx-AdditionalImport-Default.swift.out")
+    XCTDiffStrings(result, expected)
+  }
 }
