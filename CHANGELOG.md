@@ -17,6 +17,12 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#206](https://github.com/AliSoftware/SwiftGen/pull/206)
 
+### Internal changes
+
+* Better error handling in the `colors` command.  
+  [David Jennes](https://github.com/djbe)
+  [#227](https://github.com/AliSoftware/SwiftGen/pull/227)
+
 ## 4.0.1
 
 ### Bug Fixes
