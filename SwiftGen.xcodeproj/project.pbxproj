@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0902F5C11D6B86D00080F24D /* colors-bad.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0902F5C01D6B86D00080F24D /* colors-bad.txt */; };
+		0902F5C11D6B86D00080F24D /* colors-bad-syntax.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0902F5C01D6B86D00080F24D /* colors-bad-syntax.txt */; };
 		0921FB9C1BE785DF00B488B5 /* Colors-List-RawValue.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 0921FB9B1BE785DF00B488B5 /* Colors-List-RawValue.swift.out */; };
 		0971F98F1D7C4401002531D5 /* Colors-Txt-File-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 0971F98E1D7C4401002531D5 /* Colors-Txt-File-Swift3.swift.out */; };
 		0971F9931D7C455A002531D5 /* Images-File-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 0971F9921D7C455A002531D5 /* Images-File-Swift3.swift.out */; };
@@ -91,6 +91,7 @@
 		DD0AB0FC1DF7323300978575 /* colors-bad-syntax.xml in Resources */ = {isa = PBXBuildFile; fileRef = DD0AB0FB1DF7323300978575 /* colors-bad-syntax.xml */; };
 		DD0AB0FF1DF7364700978575 /* colors-bad-syntax.json in Resources */ = {isa = PBXBuildFile; fileRef = DD0AB0FD1DF7364700978575 /* colors-bad-syntax.json */; };
 		DD0AB1001DF7364700978575 /* colors-bad-value.json in Resources */ = {isa = PBXBuildFile; fileRef = DD0AB0FE1DF7364700978575 /* colors-bad-value.json */; };
+		DD0AB1021DF752CD00978575 /* colors-bad-value.txt in Resources */ = {isa = PBXBuildFile; fileRef = DD0AB1011DF752CD00978575 /* colors-bad-value.txt */; };
 		DD445AEA1DF58C76006F0A3D /* Images-File-Dot-Syntax-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = DD445AE81DF58C76006F0A3D /* Images-File-Dot-Syntax-Swift3.swift.out */; };
 		DD445AEB1DF58C76006F0A3D /* Images-File-Dot-Syntax.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = DD445AE91DF58C76006F0A3D /* Images-File-Dot-Syntax.swift.out */; };
 		DD49E6E61DCFD7720091A3CA /* Storyboards-AdditionalImport-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = DD49E6E51DCFD7720091A3CA /* Storyboards-AdditionalImport-Swift3.swift.out */; };
@@ -140,7 +141,7 @@
 /* Begin PBXFileReference section */
 		0901413E1BCC64C9002E8617 /* storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = storyboards.swift; sourceTree = "<group>"; };
 		090141401BCC64FE002E8617 /* images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = images.swift; sourceTree = "<group>"; };
-		0902F5C01D6B86D00080F24D /* colors-bad.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "colors-bad.txt"; sourceTree = "<group>"; };
+		0902F5C01D6B86D00080F24D /* colors-bad-syntax.txt */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text; path = "colors-bad-syntax.txt"; sourceTree = "<group>"; };
 		09030BC01B6D2A8F00275BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09030BC91B6D2BB700275BF5 /* StoryboardsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = StoryboardsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		09030BD11B6D2E3900275BF5 /* ImagesTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ImagesTests.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -230,6 +231,7 @@
 		DD0AB0FB1DF7323300978575 /* colors-bad-syntax.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "colors-bad-syntax.xml"; sourceTree = "<group>"; };
 		DD0AB0FD1DF7364700978575 /* colors-bad-syntax.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "colors-bad-syntax.json"; sourceTree = "<group>"; };
 		DD0AB0FE1DF7364700978575 /* colors-bad-value.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "colors-bad-value.json"; sourceTree = "<group>"; };
+		DD0AB1011DF752CD00978575 /* colors-bad-value.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "colors-bad-value.txt"; sourceTree = "<group>"; };
 		DD445AE81DF58C76006F0A3D /* Images-File-Dot-Syntax-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-File-Dot-Syntax-Swift3.swift.out"; sourceTree = "<group>"; };
 		DD445AE91DF58C76006F0A3D /* Images-File-Dot-Syntax.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-File-Dot-Syntax.swift.out"; sourceTree = "<group>"; };
 		DD49E6E51DCFD7720091A3CA /* Storyboards-AdditionalImport-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-AdditionalImport-Swift3.swift.out"; sourceTree = "<group>"; };
@@ -330,7 +332,8 @@
 			isa = PBXGroup;
 			children = (
 				09030C1D1B6D473E00275BF5 /* colors.txt */,
-				0902F5C01D6B86D00080F24D /* colors-bad.txt */,
+				0902F5C01D6B86D00080F24D /* colors-bad-syntax.txt */,
+				DD0AB1011DF752CD00978575 /* colors-bad-value.txt */,
 				641CD33D1C3AE35A00D7FED9 /* colors.clr */,
 				097504261C78ED3400D1A01B /* colors.xml */,
 				DD0AB0FB1DF7323300978575 /* colors-bad-syntax.xml */,
@@ -601,6 +604,7 @@
 				82CC60381D22947500BA55E8 /* LocStructuredOnly.strings in Resources */,
 				47CB53351CFC0B2100AA19C0 /* SFNSDisplay-Regular.otf in Resources */,
 				0921FB9C1BE785DF00B488B5 /* Colors-List-RawValue.swift.out in Resources */,
+				DD0AB1021DF752CD00978575 /* colors-bad-value.txt in Resources */,
 				47CB53411CFC171600AA19C0 /* Strings-File-Swift3.swift.out in Resources */,
 				C25A54321CEE7C2200401BE5 /* Colors-Txt-File-Default.swift.out in Resources */,
 				E2F749741D03CAE800EA0BC8 /* Storyboards-osx-Empty.swift.out in Resources */,
@@ -644,7 +648,7 @@
 				4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */,
 				EE97B1CC1DCF1C93005F5B90 /* Strings-Multiline.swift.out in Resources */,
 				4761E0391BDE753000B9B05F /* Strings-Empty.swift.out in Resources */,
-				0902F5C11D6B86D00080F24D /* colors-bad.txt in Resources */,
+				0902F5C11D6B86D00080F24D /* colors-bad-syntax.txt in Resources */,
 				47CB53391CFC0B2100AA19C0 /* ZapfDingbats.ttf in Resources */,
 				09A87B711BCCA5FC00D9B9F5 /* Localizable.strings in Resources */,
 				C02DEF2F1DF39357003748C5 /* Strings-File-NoComments-Swift3.swift.out in Resources */,

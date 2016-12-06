@@ -1,5 +1,0 @@
-# Color template file
-
-MX_NOTIFICATIONS_UNREAD_BG_COLOR            :   0xcfe6f5FF
-
-MX_WELCOME_BACKGROUND:                      :   0x009AEDFF

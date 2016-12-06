@@ -89,12 +89,24 @@ class ColorsTextFileTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
 
-  func testFileWithBadFormatting() {
+  func testFileWithBadSyntax() {
     let parser = ColorsTextFileParser()
     do {
-      try parser.parseFile(at: fixture("colors-bad.txt"))
-      XCTFail("Code did parse file successfully while it was expected to fail for bad formatting")
-    } catch ColorsParserError.invalidHexColor(string: ":", key: "MX_WELCOME_BACKGROUND"?) {
+      try parser.parseFile(at: fixture("colors-bad-syntax.txt"))
+      XCTFail("Code did parse file successfully while it was expected to fail for bad syntax")
+    } catch ColorsParserError.invalidFile {
+      // That's the expected exception we want to happen
+    } catch let error {
+      XCTFail("Unexpected error occured while parsing: \(error)")
+    }
+  }
+
+  func testFileWithBadValue() {
+    let parser = ColorsTextFileParser()
+    do {
+      try parser.parseFile(at: fixture("colors-bad-value.txt"))
+      XCTFail("Code did parse file successfully while it was expected to fail for bad value")
+    } catch ColorsParserError.invalidHexColor(string: "thisIsn'tAColor", key: "ArticleTitle"?) {
       // That's the expected exception we want to happen
     } catch let error {
       XCTFail("Unexpected error occured while parsing: \(error)")

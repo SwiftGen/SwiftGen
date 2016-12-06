@@ -62,7 +62,7 @@ public final class ColorsTextFileParser: ColorsFileParser {
   public init() {}
 
   public func addColor(named name: String, value: String) throws {
-    try addColor(named: name, value: parse(hex: value))
+    try addColor(named: name, value: parse(hex: value, key: name))
   }
 
   public func addColor(named name: String, value: UInt32) {
@@ -116,13 +116,15 @@ public final class ColorsTextFileParser: ColorsFileParser {
   //  - Each line composed by the color name, then ":", then the color hex representation
   //  - Extra spaces will be skipped
   public func parseFile(at path: Path, separator: String = ":") throws {
-    let dict = try keyValueDict(from: path, withSeperator: separator)
-    for key in dict.keys {
-      do {
+    do {
+      let dict = try keyValueDict(from: path, withSeperator: separator)
+      for key in dict.keys {
         try addColor(named: key, value: colorValue(forKey: key, onDict: dict))
-      } catch ColorsParserError.invalidHexColor(let string, _) {
-        throw ColorsParserError.invalidHexColor(string: string, key: key)
       }
+    } catch let error as ColorsParserError {
+      throw error
+    } catch let error {
+      throw ColorsParserError.invalidFile(reason: error.localizedDescription)
     }
   }
 }
