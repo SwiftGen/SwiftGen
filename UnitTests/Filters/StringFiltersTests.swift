@@ -36,7 +36,7 @@ class StringFiltersTests: XCTestCase {
       "x": "X",
       "a__b__c": "ABC",
       "__y_z": "__YZ",
-      "PLEASE_STOP_SCREAMING!": "PLEASESTOPSCREAMING!"
+      "PLEASE_STOP_SCREAMING!": "PleaseStopScreaming!"
     ]
 
     for (input, expected) in expectations {

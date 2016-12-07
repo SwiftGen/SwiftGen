@@ -75,22 +75,38 @@ struct StringFilters {
 
   static func snakeToCamelCaseNoPrefix(_ value: Any?) throws -> Any? {
     guard let string = value as? String else { throw FilterError.invalidInputType }
-    let comps = string.components(separatedBy: "_")
+    let comps = snakecase(string).components(separatedBy: "_")
     return comps.map { titlecase($0) }.joined(separator: "")
   }
 
   /**
   This returns the string with its first parameter uppercased.
   - note: This is quite similar to `capitalise` except that this filter doesn't lowercase
-          the rest of the string but keep it untouched.
+          the rest of camel cased string but keeps it untouched.
 
   - parameter string: The string to titleCase
 
-  - returns: The string with its first character uppercased, and the rest of the string unchanged.
+  - returns: The string with its first character uppercased, and the rest of the string unchanged if camel cased.
   */
   private static func titlecase(_ string: String) -> String {
     guard let first = string.unicodeScalars.first else { return string }
-    return String(first).uppercased() + String(string.unicodeScalars.dropFirst())
+    return String(first).uppercased() + String(string.lowercased().unicodeScalars.dropFirst())
+  }
+
+  /**
+  This returns the snake cased variant of the string.
+  - parameter string: The string to snake_case
+   
+  - returns: The string snake cased from either snake_cased or camelCased string.
+  */
+  private static func snakecase(_ string: String) -> String {
+    let longUpperRegex = try! NSRegularExpression(pattern: "([A-Z\\d]+)([A-Z][a-z])", options: .dotMatchesLineSeparators)
+    let camelCasedRegex = try! NSRegularExpression(pattern: "([a-z\\d])([A-Z])", options: .dotMatchesLineSeparators)
+
+    let fullRange = NSRange(location: 0, length: string.unicodeScalars.count)
+    var snakecasedString = longUpperRegex.stringByReplacingMatches(in: string, options: .reportCompletion, range: fullRange, withTemplate: "$1_$2")
+    snakecasedString = camelCasedRegex.stringByReplacingMatches(in: snakecasedString, options: .reportCompletion, range: fullRange, withTemplate: "$1_$2")
+    return snakecasedString.replacingOccurrences(of: "-", with: "_")
   }
 }
 
