@@ -23,6 +23,12 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#227](https://github.com/AliSoftware/SwiftGen/pull/227)
 
+### Bug Fixes
+
+* Snake cased keys with uppercase letters are correctly camel cased again.
+  [Cihat Gündüz](https://github.com/Dschee)
+  [#226](https://github.com/AliSoftware/SwiftGen/issues/226)
+
 ## 4.0.1
 
 ### Bug Fixes
