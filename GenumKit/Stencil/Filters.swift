@@ -86,7 +86,7 @@ struct StringFilters {
 
   - parameter string: The string to titleCase
 
-  - returns: The string with its first character uppercased, and the rest of the string unchanged if camel cased.
+  - returns: The string with its first character uppercased, and the rest of the string is lowercased.
   */
   private static func titlecase(_ string: String) -> String {
     guard let first = string.unicodeScalars.first else { return string }
