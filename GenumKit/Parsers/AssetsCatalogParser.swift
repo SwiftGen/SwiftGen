@@ -8,36 +8,21 @@ import Foundation
 import PathKit
 
 public final class AssetsCatalogParser {
-  var entries = [Entry]()
+  typealias Catalog = [Entry]
+  var catalogs = [String: Catalog]()
 
   public init() {}
-
-  @discardableResult
-  public func addImage(named name: String) -> Bool {
-    let found = entries.contains {
-      if case let .image(imageName, _) = $0, imageName == name {
-        return true
-      } else {
-        return false
-      }
-    }
-
-    guard !found else { return false }
-    entries.append(Entry.image(name: name, value: name))
-
-    return true
-  }
 
   public func parseCatalog(at path: Path) {
     guard let items = loadAssetCatalog(at: path) else { return }
 
     // process recursively
-    entries = process(items: items)
+    catalogs[path.lastComponentWithoutExtension] = process(items: items)
   }
 
   enum Entry {
+  case group(name: String, items: [Entry])
   case image(name: String, value: String)
-  case namespace(name: String, items: [Entry])
   }
 }
 
@@ -85,10 +70,10 @@ extension AssetsCatalogParser {
    
    - Parameter items: The array of items to recursively process.
    - Parameter prefix: The prefix to prepend values with (from namespaced groups).
-   - Returns: An array of processed Entry items.
+   - Returns: An array of processed Entry items (a catalog).
   */
-  fileprivate func process(items: [[String: Any]], withPrefix prefix: String = "") -> [Entry] {
-    var result = [Entry]()
+  fileprivate func process(items: [[String: Any]], withPrefix prefix: String = "") -> Catalog {
+    var result = Catalog()
 
     for item in items {
       guard let filename = item[AssetCatalog.filename] as? String else { continue }
@@ -106,10 +91,10 @@ extension AssetsCatalogParser {
         if let providesNamespace = item[AssetCatalog.providesNamespace] as? Bool,
           providesNamespace {
           let processed = process(items: children, withPrefix: "\(prefix)\(filename)/")
-          result += [.namespace(name: filename, items: processed)]
+          result += [.group(name: filename, items: processed)]
         } else {
           let processed = process(items: children, withPrefix: prefix)
-          result += [.namespace(name: filename, items: processed)]
+          result += [.group(name: filename, items: processed)]
         }
       }
     }

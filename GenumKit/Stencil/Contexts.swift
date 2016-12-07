@@ -62,13 +62,18 @@ extension ColorsFileParser {
 */
 extension AssetsCatalogParser {
   public func stencilContext(enumName: String = "Asset") -> [String: Any] {
-    let images = justValues(entries: entries)
-    let imagesStructured = structure(entries: entries)
+    let images = catalogs.flatMap { justValues(entries: $1) }.sorted(by: <)
+    let structured = catalogs.keys.sorted(by: <).map { name -> [String: Any] in
+      return [
+        "name": name,
+        "assets": structure(entries: catalogs[name] ?? [])
+      ]
+    }
 
     return [
       "enumName": enumName,
       "images": images,
-      "structuredImages": imagesStructured
+      "catalogs": structured
     ]
   }
 
@@ -77,7 +82,7 @@ extension AssetsCatalogParser {
 
     for entry in entries {
       switch entry {
-      case let .namespace(name: _, items: items):
+      case let .group(name: _, items: items):
         result += justValues(entries: items)
       case let .image(name: _, value: value):
         result += [value]
@@ -90,7 +95,7 @@ extension AssetsCatalogParser {
   private func structure(entries: [Entry], currentLevel: Int = 0, maxLevel: Int = 5) -> [[String: Any]] {
     return entries.map { entry in
       switch entry {
-      case let .namespace(name: name, items: items):
+      case let .group(name: name, items: items):
         if currentLevel + 1 >= maxLevel {
           return [
             "name": name,
@@ -116,7 +121,7 @@ extension AssetsCatalogParser {
 
     for entry in entries {
       switch entry {
-      case let .namespace(name: name, items: items):
+      case let .group(name: name, items: items):
         result += flatten(entries: items).map { item in
           return [
             "name": "\(name)/\(item["name"]!)",
