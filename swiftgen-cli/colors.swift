@@ -20,7 +20,7 @@ let colorsCommand = command(
   switch path.extension {
   case "clr"?:
     let clrParser = ColorsCLRFileParser()
-    clrParser.parseFile(at: path)
+    try clrParser.parseFile(at: path)
     parser = clrParser
   case "txt"?:
     let textParser = ColorsTextFileParser()
