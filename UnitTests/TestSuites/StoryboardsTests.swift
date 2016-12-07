@@ -25,7 +25,7 @@ class StoryboardsiOSTests: XCTestCase {
   func testEmpty() {
     let parser = StoryboardParser()
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Storyboards-Empty.swift.out")
@@ -40,7 +40,7 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Storyboards-Message-Default.swift.out")
@@ -55,7 +55,7 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-lowercase.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-lowercase.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Storyboards-Message-Lowercase.swift.out")
@@ -70,7 +70,7 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Storyboards-Anonymous-Default.swift.out")
@@ -85,7 +85,7 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"), environment: genumEnvironment())
     let ctx = parser.stencilContext()
     let result = try! template.render(ctx)
 
@@ -101,7 +101,7 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-default.stencil"), environment: genumEnvironment())
     let ctx = parser.stencilContext(sceneEnumName: "XCTStoryboardsScene", segueEnumName: "XCTStoryboardsSegue")
     let result = try! template.render(ctx)
 
@@ -117,7 +117,7 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Storyboards-Anonymous-Swift3.swift.out")
@@ -132,7 +132,7 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Storyboards-Wizard-Swift3.swift.out")
@@ -153,7 +153,7 @@ class StoryboardsiOSTests: XCTestCase {
       "SlackTextViewController"
     ]
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-swift3.stencil"), environment: genumEnvironment())
     let context = parser.stencilContext(sceneEnumName: "StoryboardScene", segueEnumName: "StoryboardSegue", extraImports: extraImports)
     let result = try! template.render(context)
 
@@ -169,7 +169,7 @@ class StoryboardsOSXTests: XCTestCase {
   func testOSXEmpty() {
     let parser = StoryboardParser()
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Storyboards-osx-Empty.swift.out")
@@ -184,7 +184,7 @@ class StoryboardsOSXTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Storyboards-osx-Message-Default.swift.out")
@@ -199,7 +199,7 @@ class StoryboardsOSXTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-lowercase.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-lowercase.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Storyboards-osx-Message-Lowercase.swift.out")
@@ -214,7 +214,7 @@ class StoryboardsOSXTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Storyboards-osx-Anonymous-Default.swift.out")
@@ -229,7 +229,7 @@ class StoryboardsOSXTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"), environment: genumEnvironment())
     let ctx = parser.stencilContext()
     let result = try! template.render(ctx)
 
@@ -250,7 +250,7 @@ class StoryboardsOSXTests: XCTestCase {
       "DBPrefsWindowController"
     ]
 
-    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-default.stencil"), environment: genumEnvironment())
     let context = parser.stencilContext(sceneEnumName: "StoryboardScene", segueEnumName: "StoryboardSegue", extraImports: extraImports)
     let result = try! template.render(context)
 

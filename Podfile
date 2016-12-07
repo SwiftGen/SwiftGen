@@ -3,7 +3,7 @@ use_frameworks!
 
 def genumkit_pods
   pod 'PathKit', '~> 0.7.0', :inhibit_warnings => true
-  pod 'Stencil', '~> 0.7.2', :inhibit_warnings => true
+  pod 'Stencil', :git => 'https://github.com/kylef/Stencil', :inhibit_warnings => true
   pod 'GenumKit', :path => 'GenumKit'
 end
 

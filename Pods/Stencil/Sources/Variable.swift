@@ -1,6 +1,9 @@
 import Foundation
 
 
+typealias Number = Float
+
+
 class FilterExpression : Resolvable {
   let filters: [(FilterType, [Variable])]
   let variable: Variable
@@ -60,6 +63,11 @@ public struct Variable : Equatable, Resolvable {
       return variable[variable.characters.index(after: variable.startIndex) ..< variable.characters.index(before: variable.endIndex)]
     }
 
+    if let number = Number(variable) {
+      // Number literal
+      return number
+    }
+
     for bit in lookup() {
       current = normalize(current)
 
@@ -97,6 +105,12 @@ public struct Variable : Equatable, Resolvable {
       } else {
         return nil
       }
+    }
+
+    if let resolvable = current as? Resolvable {
+      current = try resolvable.resolve(context)
+    } else if let node = current as? NodeType {
+      current = try node.render(context)
     }
 
     return normalize(current)

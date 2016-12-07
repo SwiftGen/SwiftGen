@@ -21,7 +21,9 @@ let fontsCommand = command(
       let templateRealPath = try findTemplate(
         prefix: "fonts", templateShortName: templateName, templateFullPath: templatePath
       )
-      let template = try GenumTemplate(path: templateRealPath)
+
+      let environment = genumEnvironment()
+      let template = try GenumTemplate(path: templateRealPath, environment: environment)
       let context = parser.stencilContext(enumName: enumName)
       let rendered = try template.render(context)
       output.write(content: rendered, onlyIfChanged: true)

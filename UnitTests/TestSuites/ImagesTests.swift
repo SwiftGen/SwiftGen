@@ -19,7 +19,7 @@ class ImagesTests: XCTestCase {
   func testEmpty() {
     let parser = AssetsCatalogParser()
 
-    let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("images-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Images-Empty.swift.out")
@@ -32,7 +32,7 @@ class ImagesTests: XCTestCase {
     parser.addImage(named: "Red apple")
     parser.addImage(named: "2-pears")
 
-    let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("images-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Images-Entries-Default.swift.out")
@@ -43,7 +43,7 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: fixture("Images.xcassets"))
 
-    let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("images-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Images-File-Default.swift.out")
@@ -54,7 +54,7 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: fixture("Images.xcassets"))
 
-    let template = GenumTemplate(templateString: fixtureString("images-swift3.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("images-swift3.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Images-File-Swift3.swift.out")
@@ -65,7 +65,7 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: fixture("Images.xcassets"))
 
-    let template = GenumTemplate(templateString: fixtureString("images-allvalues.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("images-allvalues.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Images-File-AllValues.swift.out")
@@ -76,7 +76,7 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: fixture("Images.xcassets"))
 
-    let template = GenumTemplate(templateString: fixtureString("images-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("images-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTImages"))
 
     let expected = fixtureString("Images-File-CustomName.swift.out")
@@ -87,7 +87,7 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: fixture("Images.xcassets"))
 
-    let template = GenumTemplate(templateString: fixtureString("images-dot-syntax.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("images-dot-syntax.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Images-File-Dot-Syntax.swift.out")
@@ -98,7 +98,7 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: fixture("Images.xcassets"))
 
-    let template = GenumTemplate(templateString: fixtureString("images-dot-syntax-swift3.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("images-dot-syntax-swift3.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Images-File-Dot-Syntax-Swift3.swift.out")

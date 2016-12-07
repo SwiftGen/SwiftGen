@@ -18,7 +18,7 @@ class StringsTests: XCTestCase {
   func testEmpty() {
     let parser = StringsFileParser()
 
-    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-Empty.swift.out")
@@ -30,7 +30,7 @@ class StringsTests: XCTestCase {
     parser.addEntry(StringsFileParser.Entry(key: "Title", translation: "My awesome title"))
     parser.addEntry(StringsFileParser.Entry(key: "Greetings", translation: "Hello, my name is %@ and I'm %d", types: .Object, .Int))
 
-    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-Entries-Default.swift.out")
@@ -41,7 +41,7 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: fixture("Localizable.strings"))
 
-    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-Default.swift.out")
@@ -52,7 +52,7 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: fixture("LocMultiline.strings"))
 
-    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-Multiline.swift.out")
@@ -63,7 +63,7 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: fixture("LocUTF8.strings"))
 
-    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-UTF8-Default.swift.out")
@@ -74,7 +74,7 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: fixture("Localizable.strings"))
 
-    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTLoc"))
 
     let expected = fixtureString("Strings-File-CustomName.swift.out")
@@ -85,7 +85,7 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: fixture("Localizable.strings"))
 
-    let template = GenumTemplate(templateString: fixtureString("strings-swift3.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-swift3.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-Swift3.swift.out")
@@ -96,7 +96,7 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: fixture("Localizable.strings"))
     
-    let template = GenumTemplate(templateString: fixtureString("strings-no-comments-swift3.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-no-comments-swift3.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
     
     let expected = fixtureString("Strings-File-NoComments-Swift3.swift.out")
@@ -107,7 +107,7 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: fixture("Localizable.strings"))
 
-    let template = GenumTemplate(templateString: fixtureString("strings-structured.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-structured.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-Structured.swift.out")
@@ -118,7 +118,7 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: fixture("LocStructuredOnly.strings"))
 
-    let template = GenumTemplate(templateString: fixtureString("strings-structured.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-structured.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-Structured-Only.swift.out")
@@ -129,7 +129,7 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: fixture("Localizable.strings"))
 
-    let template = GenumTemplate(templateString: fixtureString("strings-dot-syntax.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-dot-syntax.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-Dot-Syntax.swift.out")
@@ -140,7 +140,7 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: fixture("Localizable.strings"))
 
-    let template = GenumTemplate(templateString: fixtureString("strings-dot-syntax-swift3.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-dot-syntax-swift3.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-Dot-Syntax-Swift3.swift.out")
@@ -151,7 +151,7 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: fixture("Localizable.strings"))
     
-    let template = GenumTemplate(templateString: fixtureString("strings-genstrings.stencil"))
+    let template = GenumTemplate(templateString: fixtureString("strings-genstrings.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
     
     let expected = fixtureString("Strings-Localizable-Genstrings.swift.out")
