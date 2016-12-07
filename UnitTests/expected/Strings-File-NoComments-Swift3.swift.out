@@ -17,7 +17,7 @@ enum L10n {
   case settingsNavigationBarTitleEvenDeeper
   case settingsNavigationBarTitleEvenDeeperThanWeCanHandle
   case seTTingsUSerProFileSectioNFooterText
-  case settingsuserprofilesectionheadertitle
+  case settingsUserProfileSectionHeaderTitle
 }
 // swiftlint:enable type_body_length
 
@@ -46,7 +46,7 @@ extension L10n: CustomStringConvertible {
         return L10n.tr(key: "settings.navigation-bar.title.even.deeper.than.we.can.handle")
       case .seTTingsUSerProFileSectioNFooterText:
         return L10n.tr(key: "seTTings.uSer-proFile-sectioN.footer_text")
-      case .settingsuserprofilesectionheadertitle:
+      case .settingsUserProfileSectionHeaderTitle:
         return L10n.tr(key: "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
     }
   }

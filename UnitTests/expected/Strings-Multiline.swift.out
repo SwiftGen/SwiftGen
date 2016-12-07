@@ -8,15 +8,15 @@ import Foundation
 // swiftlint:disable type_body_length
 enum L10n {
   /// multi\nline
-  case MULTILINE
+  case Multiline
   /// test
   case MultiLineNKey
   /// another\nmulti\n    line
-  case MULTILINE2
+  case Multiline2
   /// single line
-  case SINGLELINE
+  case Singleline
   /// another single line
-  case SINGLELINE2
+  case Singleline2
 }
 // swiftlint:enable type_body_length
 
@@ -25,15 +25,15 @@ extension L10n: CustomStringConvertible {
 
   var string: String {
     switch self {
-      case .MULTILINE:
+      case .Multiline:
         return L10n.tr("MULTILINE")
       case .MultiLineNKey:
         return L10n.tr("multiLine\nKey")
-      case .MULTILINE2:
+      case .Multiline2:
         return L10n.tr("MULTILINE2")
-      case .SINGLELINE:
+      case .Singleline:
         return L10n.tr("SINGLELINE")
-      case .SINGLELINE2:
+      case .Singleline2:
         return L10n.tr("SINGLELINE2")
     }
   }

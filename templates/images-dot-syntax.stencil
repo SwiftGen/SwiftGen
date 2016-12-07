@@ -41,35 +41,35 @@ enum {{enumName}} {
   static let {{image.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{image.value}}"
   {% else %}
 
-  enum {{image.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+  enum {{image.name|swiftIdentifier|snakeToCamelCase}} {
     {# LEVEL 1 #}
     {% for subimage1 in image.items %}
     {% ifnot subimage1.items %}
     static let {{subimage1.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage1.value}}"
     {% else %}
 
-    enum {{subimage1.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+    enum {{subimage1.name|swiftIdentifier|snakeToCamelCase}} {
       {# LEVEL 2 #}
       {% for subimage2 in subimage1.items %}
       {% ifnot subimage2.items %}
       static let {{subimage2.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage2.value}}"
       {% else %}
 
-      enum {{subimage2.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+      enum {{subimage2.name|swiftIdentifier|snakeToCamelCase}} {
         {# LEVEL 3 #}
         {% for subimage3 in subimage2.items %}
         {% ifnot subimage3.items %}
         static let {{subimage3.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage3.value}}"
         {% else %}
 
-        enum {{subimage3.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+        enum {{subimage3.name|swiftIdentifier|snakeToCamelCase}} {
           {# LEVEL 4 #}
           {% for subimage4 in subimage3.items %}
           {% ifnot subimage4.items %}
           static let {{subimage4.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage4.value}}"
           {% else %}
 
-          enum {{subimage4.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+          enum {{subimage4.name|swiftIdentifier|snakeToCamelCase}} {
             {# LEVEL 5 #}
             {% for subimage5 in subimage4.items %}
             {% ifnot subimage5.items %}

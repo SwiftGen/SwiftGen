@@ -26,7 +26,7 @@ enum L10n {
   /// Ici, vous pouvez modifier certains paramètres de profil d'utilisateur.
   case SeTTingsUSerProFileSectioNFooterText
   /// Profil de l'utilisateur Paramètres
-  case SETTINGSUSERPROFILESECTIONHEADERTITLE
+  case SettingsUserProfileSectionHeaderTitle
 }
 // swiftlint:enable type_body_length
 
@@ -53,7 +53,7 @@ extension L10n: CustomStringConvertible {
         return L10n.tr("settings.navigation-bar.title.even.deeper")
       case .SeTTingsUSerProFileSectioNFooterText:
         return L10n.tr("seTTings.uSer-proFile-sectioN.footer_text")
-      case .SETTINGSUSERPROFILESECTIONHEADERTITLE:
+      case .SettingsUserProfileSectionHeaderTitle:
         return L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
     }
   }
