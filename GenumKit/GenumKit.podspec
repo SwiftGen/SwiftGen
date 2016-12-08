@@ -25,6 +25,6 @@ Pod::Spec.new do |s|
 
   s.source_files = "**/*.swift"
 
-  s.dependency 'Stencil'
+  s.dependency 'Stencil', '~> 0.7.0'
   s.framework  = "Foundation"
 end
