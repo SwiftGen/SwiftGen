@@ -21,7 +21,7 @@ private extension String {
   }
 }
 
-/* MARK: - Stencil Context for Colors
+/* MARK: - Template context for Colors
 
  - `enumName`: `String` — name of the enum to generate
  - `colors`: `Array` of:
@@ -34,7 +34,7 @@ private extension String {
     - `alpha`: `String` — hex value of the alpha component
 */
 extension ColorsFileParser {
-  public func stencilContext(enumName: String = "ColorName") -> [String: Any] {
+  public func context(enumName: String = "ColorName") -> [String: Any] {
     let colorMap = colors.map({ (color: (name: String, value: UInt32)) -> [String:String] in
       let name = color.name.trimmingCharacters(in: CharacterSet.whitespaces)
       let hex = "00000000" + String(color.value, radix: 16)
@@ -55,13 +55,13 @@ extension ColorsFileParser {
   }
 }
 
-/* MARK: - Stencil Context for Images
+/* MARK: - Template context for Images
 
  - `enumName`: `String` — name of the enum to generate
  - `images`: `Array<String>` — list of image names
 */
 extension AssetsCatalogParser {
-  public func stencilContext(enumName: String = "Asset") -> [String: Any] {
+  public func context(enumName: String = "Asset") -> [String: Any] {
     let images = justValues(entries: entries)
     let imagesStructured = structure(entries: entries)
 
@@ -135,7 +135,7 @@ extension AssetsCatalogParser {
   }
 }
 
-/* MARK: - Stencil Context for Storyboards
+/* MARK: - Template context for Storyboards
 
  - `sceneEnumName`: `String`
  - `segueEnumName`: `String`
@@ -159,9 +159,9 @@ extension AssetsCatalogParser {
        - `class`: `String` (absent if generic UIStoryboardSegue)
 */
 extension StoryboardParser {
-  public func stencilContext(sceneEnumName: String = "StoryboardScene",
-                                           segueEnumName: String = "StoryboardSegue",
-                                           extraImports: [String] = []) -> [String: Any] {
+  public func context(sceneEnumName: String = "StoryboardScene",
+                      segueEnumName: String = "StoryboardSegue",
+                      extraImports: [String] = []) -> [String: Any] {
     let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sorted(by: <)
     let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:Any] in
       var sbMap: [String:Any] = ["name": storyboardName]
@@ -214,7 +214,7 @@ extension StoryboardParser {
   }
 }
 
-/* MARK: - Stencil Context for Strings
+/* MARK: - Template context for Strings
 
  - `enumName`: `String`
  - `tableName`: `String` - name of the `.strings` file (usually `"Localizable"`)
@@ -232,7 +232,7 @@ extension StoryboardParser {
  - `structuredStrings`: `Dictionary` - contains strings structured by keys separated by '.' syntax
 */
 extension StringsFileParser {
-  public func stencilContext(enumName: String = "L10n", tableName: String = "Localizable") -> [String: Any] {
+  public func context(enumName: String = "L10n", tableName: String = "Localizable") -> [String: Any] {
 
     let entryToStringMapper = { (entry: Entry, keyPath: [String]) -> [String: Any] in
       var keyStructure = entry.keyStructure
@@ -375,7 +375,7 @@ extension StringsFileParser {
   }
 }
 
-/* MARK: - Stencil Context for Fonts
+/* MARK: - Template context for Fonts
 - `enumName`: `String`
 - `families`: `Array`
   - `name`: `String`
@@ -385,7 +385,7 @@ extension StringsFileParser {
 */
 
 extension FontsFileParser {
-  public func stencilContext(enumName: String = "FontFamily") -> [String: Any] {
+  public func context(enumName: String = "FontFamily") -> [String: Any] {
     // turn into array of dictionaries
     let families = entries.map { (name: String, family: Set<Font>) -> [String: Any] in
       let fonts = family.map { (font: Font) -> [String: String] in

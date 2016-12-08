@@ -25,8 +25,8 @@ let imagesCommand = command(
     let templateRealPath = try findTemplate(
       prefix: "images", templateShortName: templateName, templateFullPath: templatePath
     )
-    let template = try GenumTemplate(path: templateRealPath, environment: genumEnvironment())
-    let context = parser.stencilContext(enumName: enumName)
+    let template = try GenumTemplate(templateString: templateRealPath.read(), environment: genumEnvironment())
+    let context = parser.context(enumName: enumName)
     let rendered = try template.render(context)
     output.write(content: rendered, onlyIfChanged: true)
   } catch {

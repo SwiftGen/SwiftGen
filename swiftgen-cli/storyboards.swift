@@ -35,8 +35,8 @@ let storyboardsCommand = command(
       templateShortName: templateName,
       templateFullPath: templatePath
     )
-    let template = try GenumTemplate(path: templateRealPath, environment: genumEnvironment())
-    let context = parser.stencilContext(
+    let template = try GenumTemplate(templateString: templateRealPath.read(), environment: genumEnvironment())
+    let context = parser.context(
       sceneEnumName: sceneEnumName, segueEnumName: segueEnumName, extraImports: extraImports
     )
     let rendered = try template.render(context)

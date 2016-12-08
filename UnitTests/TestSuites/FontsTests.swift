@@ -14,7 +14,7 @@ class FontsTests: XCTestCase {
   func testEmpty() {
     let parser = FontsFileParser()
     let template = GenumTemplate(templateString: fixtureString("fonts-default.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.stencilContext())
+    let result = try! template.render(parser.context())
     let expected = fixtureString("Fonts-Dir-Empty.swift.out")
     XCTDiffStrings(result, expected)
   }
@@ -24,7 +24,7 @@ class FontsTests: XCTestCase {
     parser.parseFile(at: directory())
 
     let template = GenumTemplate(templateString: fixtureString("fonts-default.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.stencilContext())
+    let result = try! template.render(parser.context())
     let expected = fixtureString("Fonts-Dir-Default.swift.out")
     XCTDiffStrings(result, expected)
   }
@@ -34,7 +34,7 @@ class FontsTests: XCTestCase {
     parser.parseFile(at: directory())
 
     let template = GenumTemplate(templateString: fixtureString("fonts-swift3.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.stencilContext())
+    let result = try! template.render(parser.context())
     let expected = fixtureString("Fonts-Dir-Default-Swift3.swift.out")
     XCTDiffStrings(result, expected)
   }
@@ -44,7 +44,7 @@ class FontsTests: XCTestCase {
     parser.parseFile(at: directory())
 
     let template = GenumTemplate(templateString: fixtureString("fonts-default.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.stencilContext(enumName: "CustomFamily"))
+    let result = try! template.render(parser.context(enumName: "CustomFamily"))
     let expected = fixtureString("Fonts-Dir-CustomName.swift.out")
     XCTDiffStrings(result, expected)
   }
@@ -54,7 +54,7 @@ class FontsTests: XCTestCase {
     parser.parseFile(at: directory())
 
     let template = GenumTemplate(templateString: fixtureString("fonts-swift3.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.stencilContext(enumName: "CustomFamily"))
+    let result = try! template.render(parser.context(enumName: "CustomFamily"))
     let expected = fixtureString("Fonts-Dir-CustomName-Swift3.swift.out")
     XCTDiffStrings(result, expected)
   }
