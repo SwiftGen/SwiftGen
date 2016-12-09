@@ -23,8 +23,8 @@ let fontsCommand = command(
       )
 
       let environment = genumEnvironment()
-      let template = try GenumTemplate(templateString: templateRealPath.read(), environment: environment)
-      let context = parser.context(enumName: enumName)
+      let template = try GenumTemplate(path: templateRealPath, environment: environment)
+      let context = parser.stencilContext(enumName: enumName)
       let rendered = try template.render(context)
       output.write(content: rendered, onlyIfChanged: true)
     } catch let error as NSError {

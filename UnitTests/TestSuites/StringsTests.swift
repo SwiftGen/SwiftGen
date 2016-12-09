@@ -19,7 +19,7 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
 
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.context())
+    let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-Empty.swift.out")
     XCTDiffStrings(result, expected)
@@ -31,7 +31,7 @@ class StringsTests: XCTestCase {
     parser.addEntry(StringsFileParser.Entry(key: "Greetings", translation: "Hello, my name is %@ and I'm %d", types: .Object, .Int))
 
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.context())
+    let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-Entries-Default.swift.out")
     XCTDiffStrings(result, expected)
@@ -42,7 +42,7 @@ class StringsTests: XCTestCase {
     try! parser.parseFile(at: fixture("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.context())
+    let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-Default.swift.out")
     XCTDiffStrings(result, expected)
@@ -53,7 +53,7 @@ class StringsTests: XCTestCase {
     try! parser.parseFile(at: fixture("LocMultiline.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.context())
+    let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-Multiline.swift.out")
     XCTDiffStrings(result, expected)
@@ -64,7 +64,7 @@ class StringsTests: XCTestCase {
     try! parser.parseFile(at: fixture("LocUTF8.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.context())
+    let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-UTF8-Default.swift.out")
     XCTDiffStrings(result, expected)
@@ -75,7 +75,7 @@ class StringsTests: XCTestCase {
     try! parser.parseFile(at: fixture("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-default.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.context(enumName: "XCTLoc"))
+    let result = try! template.render(parser.stencilContext(enumName: "XCTLoc"))
 
     let expected = fixtureString("Strings-File-CustomName.swift.out")
     XCTDiffStrings(result, expected)
@@ -86,7 +86,7 @@ class StringsTests: XCTestCase {
     try! parser.parseFile(at: fixture("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-swift3.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.context())
+    let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-Swift3.swift.out")
     XCTDiffStrings(result, expected)
@@ -97,7 +97,7 @@ class StringsTests: XCTestCase {
     try! parser.parseFile(at: fixture("Localizable.strings"))
     
     let template = GenumTemplate(templateString: fixtureString("strings-no-comments-swift3.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.context())
+    let result = try! template.render(parser.stencilContext())
     
     let expected = fixtureString("Strings-File-NoComments-Swift3.swift.out")
     XCTDiffStrings(result, expected)
@@ -108,7 +108,7 @@ class StringsTests: XCTestCase {
     try! parser.parseFile(at: fixture("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-structured.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.context())
+    let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-Structured.swift.out")
     XCTDiffStrings(result, expected)
@@ -119,7 +119,7 @@ class StringsTests: XCTestCase {
     try! parser.parseFile(at: fixture("LocStructuredOnly.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-structured.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.context())
+    let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-Structured-Only.swift.out")
     XCTDiffStrings(result, expected)
@@ -130,7 +130,7 @@ class StringsTests: XCTestCase {
     try! parser.parseFile(at: fixture("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-dot-syntax.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.context())
+    let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-Dot-Syntax.swift.out")
     XCTDiffStrings(result, expected)
@@ -141,7 +141,7 @@ class StringsTests: XCTestCase {
     try! parser.parseFile(at: fixture("Localizable.strings"))
 
     let template = GenumTemplate(templateString: fixtureString("strings-dot-syntax-swift3.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.context())
+    let result = try! template.render(parser.stencilContext())
 
     let expected = fixtureString("Strings-File-Dot-Syntax-Swift3.swift.out")
     XCTDiffStrings(result, expected)
@@ -152,7 +152,7 @@ class StringsTests: XCTestCase {
     try! parser.parseFile(at: fixture("Localizable.strings"))
     
     let template = GenumTemplate(templateString: fixtureString("strings-genstrings.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.context())
+    let result = try! template.render(parser.stencilContext())
     
     let expected = fixtureString("Strings-Localizable-Genstrings.swift.out")
     XCTDiffStrings(result, expected)

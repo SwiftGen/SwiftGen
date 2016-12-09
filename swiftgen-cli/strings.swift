@@ -22,8 +22,8 @@ let stringsCommand = command(
     let templateRealPath = try findTemplate(
       prefix: "strings", templateShortName: templateName, templateFullPath: templatePath
     )
-    let template = try GenumTemplate(templateString: templateRealPath.read(), environment: genumEnvironment())
-    let context = parser.context(enumName: enumName, tableName: path.lastComponentWithoutExtension)
+    let template = try GenumTemplate(path: templateRealPath, environment: genumEnvironment())
+    let context = parser.stencilContext(enumName: enumName, tableName: path.lastComponentWithoutExtension)
     let rendered = try template.render(context)
     output.write(content: rendered, onlyIfChanged: true)
   } catch let error as NSError {
