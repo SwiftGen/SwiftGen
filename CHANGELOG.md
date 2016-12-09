@@ -11,7 +11,7 @@ _None_
 ### New Features
 
 * Added a `storyboards-osx-swift3` template.
-  [FelixII](https://github.com/FelixII)
+  [Felix Lisczyk](https://github.com/FelixII)
   [#225](https://github.com/AliSoftware/SwiftGen/pull/225)
 * Added a `strings-no-comments-swift3` template that does not include the default translation of each key.  
   [Loïs Di Qual](https://github.com/ldiqual)
