@@ -205,6 +205,21 @@ class StoryboardsOSXTests: XCTestCase {
     let expected = fixtureString("Storyboards-osx-Message-Lowercase.swift.out")
     XCTDiffStrings(result, expected)
   }
+  
+  func testOSXMessageStoryboardWithSwift3() {
+    let parser = StoryboardParser()
+    do {
+      try parser.addStoryboard(at: fixture("Message-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
+    
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-swift3.stencil"))
+    let result = try! template.render(parser.stencilContext())
+    
+    let expected = fixtureString("Storyboards-osx-Message-Swift3.swift.out")
+    XCTDiffStrings(result, expected)
+  }
 
   func testOSXAnonymousStoryboardWithDefaults() {
     let parser = StoryboardParser()
@@ -237,7 +252,7 @@ class StoryboardsOSXTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
 
-  func testAdditionalImport() {
+  func testAdditionalImportWithDefaults() {
     let parser = StoryboardParser()
     do {
       try parser.addStoryboard(at: fixture("AdditionalImport-osx.storyboard", subDirectory: StoryboardsDir.macOS))
@@ -255,6 +270,27 @@ class StoryboardsOSXTests: XCTestCase {
     let result = try! template.render(context)
 
     let expected = fixtureString("Storyboards-osx-AdditionalImport-Default.swift.out")
+    XCTDiffStrings(result, expected)
+  }
+  
+  func testAdditionalImportWithSwift3() {
+    let parser = StoryboardParser()
+    do {
+      try parser.addStoryboard(at: fixture("AdditionalImport-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+    } catch {
+      print("Error: \(error.localizedDescription)")
+    }
+    
+    // additional import statements
+    let extraImports = [
+      "DBPrefsWindowController"
+    ]
+    
+    let template = GenumTemplate(templateString: fixtureString("storyboards-osx-swift3.stencil"))
+    let context = parser.stencilContext(sceneEnumName: "StoryboardScene", segueEnumName: "StoryboardSegue", extraImports: extraImports)
+    let result = try! template.render(context)
+    
+    let expected = fixtureString("Storyboards-osx-AdditionalImport-Swift3.swift.out")
     XCTDiffStrings(result, expected)
   }
 }
