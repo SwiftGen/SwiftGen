@@ -21,12 +21,12 @@ struct CallableBlock {
   }
 }
 
-open class FuncNode: NodeType {
-  open let variableName: String
-  open let parameters: [String]
-  open let nodes: [NodeType]
+class FuncNode: NodeType {
+  private let variableName: String
+  private let parameters: [String]
+  private let nodes: [NodeType]
 
-  open class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
+  class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
     guard components.count >= 2 else {
       throw TemplateSyntaxError("'func' tag takes at least one argument, the name of the variable to set")
@@ -42,24 +42,24 @@ open class FuncNode: NodeType {
     return FuncNode(variableName: variable, parameters: parameters, nodes: setNodes)
   }
 
-  public init(variableName: String, parameters: [String], nodes: [NodeType]) {
+  init(variableName: String, parameters: [String], nodes: [NodeType]) {
     self.variableName = variableName
     self.parameters = parameters
     self.nodes = nodes
   }
 
-  open func render(_ context: Context) throws -> String {
+  func render(_ context: Context) throws -> String {
     let result = CallableBlock(parameters: parameters, nodes: nodes)
     context[variableName] = result
     return ""
   }
 }
 
-open class CallNode: NodeType {
-  open let variableName: String
-  open let arguments: [Variable]
+class CallNode: NodeType {
+  private let variableName: String
+  private let arguments: [Variable]
 
-  open class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
+  class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
     guard components.count >= 2 else {
       throw TemplateSyntaxError("'call' tag takes at least one argument, the name of the block to call")
@@ -70,12 +70,12 @@ open class CallNode: NodeType {
     return CallNode(variableName: variable, arguments: arguments)
   }
 
-  public init(variableName: String, arguments: [Variable]) {
+  init(variableName: String, arguments: [Variable]) {
     self.variableName = variableName
     self.arguments = arguments
   }
 
-  open func render(_ context: Context) throws -> String {
+  func render(_ context: Context) throws -> String {
     guard let block = context[variableName] as? CallableBlock else {
       throw TemplateSyntaxError("Call to undefined block '\(variableName)'.")
     }
