@@ -53,8 +53,14 @@ enum L10n {
           enum Deeper {
 
             enum Than {
-              /// DeepSettings
-              static let WeCanHandle = L10n.tr("settings.navigation-bar.title.even.deeper.than.we.can.handle")
+
+              enum We {
+
+                enum Can {
+                  /// DeepSettings
+                  static let Handle = L10n.tr("settings.navigation-bar.title.even.deeper.than.we.can.handle")
+                }
+              }
             }
           }
         }

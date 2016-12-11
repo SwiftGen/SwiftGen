@@ -46,28 +46,28 @@ extension L10n: CustomStringConvertible {
 
   var string: String {
     switch self {
-      case .Settings(let level1key):
+      case .Settings(let levelSubKeySettings):
 
-        switch level1key {
-          case .NavigationBar(let level2key):
+        switch levelSubKeySettings {
+          case .NavigationBar(let levelSubSubKeyNavigationBar):
 
-            switch level2key {
+            switch levelSubSubKeyNavigationBar {
               case .`Self`:
                 return L10n.tr("settings.navigation-bar.self")
-              case .Title(let level3key):
+              case .Title(let levelSubSubSubKeyTitle):
 
-                switch level3key {
-                  case .Even(let level4key):
+                switch levelSubSubSubKeyTitle {
+                  case .Even(let levelSubSubSubSubKeyEven):
 
-                    switch level4key {
+                    switch levelSubSubSubSubKeyEven {
                       case .Deeper:
                         return L10n.tr("settings.navigation-bar.title.even.deeper")
                     }
                 }
             }
-          case .UserProfileSection(let level2key):
+          case .UserProfileSection(let levelSubSubKeyUserProfileSection):
 
-            switch level2key {
+            switch levelSubSubKeyUserProfileSection {
               case .FooterText:
                 return L10n.tr("seTTings.uSer-proFile-sectioN.footer_text")
               case .HEADERTITLE:
