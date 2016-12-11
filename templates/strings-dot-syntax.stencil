@@ -10,30 +10,30 @@ import Foundation
 // swiftlint:disable nesting
 // swiftlint:disable variable_name
 // swiftlint:disable valid_docs
-{% define recursiveBlock strings tb %}
-{{args.tb}}  {% for string in args.strings.strings %}
-{{args.tb}}  /// {{string.translation}}
-{{args.tb}}  {% if string.params %}
-{{args.tb}}  static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}({{string.params.typednames|join}}) -> String {
-{{args.tb}}    return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
-{{args.tb}}  }
-{{args.tb}}  {% else %}
-{{args.tb}}  static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
-{{args.tb}}  {% endif %}
-{{args.tb}}  {% endfor %}
-{{args.tb}}  {% if args.strings.subenums %}
-{{args.tb}}  {% for subenum in args.strings.subenums %}
+{% func recursiveBlock strings sp %}
+{{args.sp}}  {% for string in args.strings.strings %}
+{{args.sp}}  /// {{string.translation}}
+{{args.sp}}  {% if string.params %}
+{{args.sp}}  static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}({{string.params.typednames|join}}) -> String {
+{{args.sp}}    return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
+{{args.sp}}  }
+{{args.sp}}  {% else %}
+{{args.sp}}  static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
+{{args.sp}}  {% endif %}
+{{args.sp}}  {% endfor %}
+{{args.sp}}  {% if args.strings.subenums %}
+{{args.sp}}  {% for subenum in args.strings.subenums %}
 
-{{args.tb}}  enum {{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
-{{args.tb}}    {% set tb %}{{args.tb}}  {% endset %}
-{{args.tb}}    {% call recursiveBlock subenum tb %}
-{{args.tb}}  }
-{{args.tb}}  {% endfor %}
-{{args.tb}}  {% endif %}
-{% enddefine %}
+{{args.sp}}  enum {{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+{{args.sp}}    {% set sp %}{{args.sp}}  {% endset %}
+{{args.sp}}    {% call recursiveBlock subenum sp %}
+{{args.sp}}  }
+{{args.sp}}  {% endfor %}
+{{args.sp}}  {% endif %}
+{% endfunc %}
 
 enum {{enumName}} {
-  {% call recursiveBlock structuredStrings tb %}
+  {% call recursiveBlock structuredStrings sp %}
 }
 
 extension {{enumName}} {

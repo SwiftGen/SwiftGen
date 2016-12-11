@@ -21,7 +21,7 @@ struct CallableBlock {
   }
 }
 
-open class DefineNode: NodeType {
+open class FuncNode: NodeType {
   open let variableName: String
   open let parameters: [String]
   open let nodes: [NodeType]
@@ -29,17 +29,17 @@ open class DefineNode: NodeType {
   open class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
     guard components.count >= 2 else {
-      throw TemplateSyntaxError("'define' tag takes at least one argument, the name of the variable to set")
+      throw TemplateSyntaxError("'func' tag takes at least one argument, the name of the variable to set")
     }
     let variable = components[1]
     let parameters = Array(components.dropFirst(2))
 
-    let setNodes = try parser.parse(until(["enddefine"]))
+    let setNodes = try parser.parse(until(["endfunc"]))
     guard parser.nextToken() != nil else {
-      throw TemplateSyntaxError("`enddefine` was not found.")
+      throw TemplateSyntaxError("`endfunc` was not found.")
     }
 
-    return DefineNode(variableName: variable, parameters: parameters, nodes: setNodes)
+    return FuncNode(variableName: variable, parameters: parameters, nodes: setNodes)
   }
 
   public init(variableName: String, parameters: [String], nodes: [NodeType]) {

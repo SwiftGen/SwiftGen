@@ -10,55 +10,55 @@ import Foundation
 // swiftlint:disable nesting
 
 enum {{enumName}} {
-{% define enumBlock strings tb %}
-{{args.tb}}  {% for string in args.strings.strings %}
-{{args.tb}}  /// {{string.translation}}
-{{args.tb}}  case {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}{% if string.params %}({{string.params.types|join}}){% endif %}
-{{args.tb}}  {% endfor %}
-{{args.tb}}  {% if args.strings.subenums %}
-{{args.tb}}  {% for subenum in args.strings.subenums %}
+{% func enumBlock strings sp %}
+{{args.sp}}  {% for string in args.strings.strings %}
+{{args.sp}}  /// {{string.translation}}
+{{args.sp}}  case {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}{% if string.params %}({{string.params.types|join}}){% endif %}
+{{args.sp}}  {% endfor %}
+{{args.sp}}  {% if args.strings.subenums %}
+{{args.sp}}  {% for subenum in args.strings.subenums %}
 
-{{args.tb}}  case {{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}({{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase}}{{enumName}})
-{{args.tb}}  enum {{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase}}{{enumName}} {
-{{args.tb}}    {% set tb %}{{args.tb}}  {% endset %}
-{{args.tb}}    {% call enumBlock subenum tb %}
-{{args.tb}}  }
-{{args.tb}}  {% endfor %}
-{{args.tb}}  {% endif %}
-{% enddefine %}
-  {% call enumBlock structuredStrings tb %}
+{{args.sp}}  case {{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}({{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase}}{{enumName}})
+{{args.sp}}  enum {{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase}}{{enumName}} {
+{{args.sp}}    {% set sp %}{{args.sp}}  {% endset %}
+{{args.sp}}    {% call enumBlock subenum sp %}
+{{args.sp}}  }
+{{args.sp}}  {% endfor %}
+{{args.sp}}  {% endif %}
+{% endfunc %}
+  {% call enumBlock structuredStrings sp %}
 }
 
 extension {{enumName}}: CustomStringConvertible {
-{% define extensionBlock strings tb keySuffix %}
-{{args.tb}}  {% for string in args.strings.strings %}
-{{args.tb}}  {% if string.params %}
-{{args.tb}}  case .{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}({{string.params.declarations|join}}):
-{{args.tb}}    return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
-{{args.tb}}  {% else %}
-{{args.tb}}  case .{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}:
-{{args.tb}}    return {{enumName}}.tr("{{string.key}}")
-{{args.tb}}  {% endif %}
-{{args.tb}}  {% endfor %}
-{{args.tb}}  {% if args.strings.subenums %}
-{{args.tb}}  {% for subenum in args.strings.subenums %}
-{{args.tb}}  {% set subkey %}levelSub{{keySuffix}}Key{{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}{% endset %}
-{{args.tb}}  case .{{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}(let {{subkey}}):
+{% func extensionBlock strings sp keySuffix %}
+{{args.sp}}  {% for string in args.strings.strings %}
+{{args.sp}}  {% if string.params %}
+{{args.sp}}  case .{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}({{string.params.declarations|join}}):
+{{args.sp}}    return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
+{{args.sp}}  {% else %}
+{{args.sp}}  case .{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}:
+{{args.sp}}    return {{enumName}}.tr("{{string.key}}")
+{{args.sp}}  {% endif %}
+{{args.sp}}  {% endfor %}
+{{args.sp}}  {% if args.strings.subenums %}
+{{args.sp}}  {% for subenum in args.strings.subenums %}
+{{args.sp}}  {% set subkey %}levelSub{{keySuffix}}Key{{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}{% endset %}
+{{args.sp}}  case .{{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}(let {{subkey}}):
 
-{{args.tb}}    switch {{subkey}} {
-{{args.tb}}    {% set tb %}{{args.tb}}    {% endset %}
-{{args.tb}}    {% set keySuffix %}{{keySuffix}}Sub{% endset %}
-{{args.tb}}    {% call extensionBlock subenum tb keySuffix %}
-{{args.tb}}    }
-{{args.tb}}  {% endfor %}
-{{args.tb}}  {% endif %}
-{% enddefine %}
+{{args.sp}}    switch {{subkey}} {
+{{args.sp}}    {% set sp %}{{args.sp}}    {% endset %}
+{{args.sp}}    {% set keySuffix %}{{keySuffix}}Sub{% endset %}
+{{args.sp}}    {% call extensionBlock subenum sp keySuffix %}
+{{args.sp}}    }
+{{args.sp}}  {% endfor %}
+{{args.sp}}  {% endif %}
+{% endfunc %}
   var description: String { return self.string }
 
   var string: String {
     switch self {
-      {% set tb %}    {% endset %}
-      {% call extensionBlock structuredStrings tb keySuffix %}
+      {% set sp %}    {% endset %}
+      {% call extensionBlock structuredStrings sp keySuffix %}
     }
   }
 

@@ -32,7 +32,7 @@ struct {{enumName}}Type: ExpressibleByStringLiteral {
     self.init(stringLiteral: value)
   }
 }
-{% define recursiveBlock images sp %}
+{% func recursiveBlock images sp %}
 {{args.sp}}  {% for image in args.images %}
 {{args.sp}}  {% ifnot image.items %}
 {{args.sp}}  static let {{image.name|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}: AssetType = "{{image.value}}"
@@ -43,7 +43,7 @@ struct {{enumName}}Type: ExpressibleByStringLiteral {
 {{args.sp}}  }
 {{args.sp}}  {% endif %}
 {{args.sp}}  {% endfor %}
-{% enddefine %}
+{% endfunc %}
 
 // swiftlint:disable type_body_length
 enum {{enumName}} {
