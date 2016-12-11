@@ -12,12 +12,12 @@ import XCTest
 class ModelsTests: XCTestCase {
   func testFullModel() {
     let parser = JSONFileParser()
-    _ = try? parser.parseFile(path: self.fixture("Model.json", subDirectory: "Models"))
+    _ = try? parser.parseFile(path: Fixtures.path(for: "Model.json", subDirectory: "Models"))
 
-    let template = GenumTemplate(templateString: fixtureString("json-model.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "json-model.stencil"))
     let result = try! template.render(parser.stencilContext())
     print(result)
-    let expected = fixtureString("Models-Dir-Basic.swift.out")
+    let expected = Fixtures.string(for: "Models-Dir-Basic.swift.out")
     XCTDiffStrings(result, expected)
   }
 }
