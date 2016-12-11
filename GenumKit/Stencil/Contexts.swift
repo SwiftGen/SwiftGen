@@ -92,21 +92,14 @@ extension AssetsCatalogParser {
     return result
   }
 
-  private func structure(entries: [Entry], currentLevel: Int = 0, maxLevel: Int = 5) -> [[String: Any]] {
+  private func structure(entries: [Entry]) -> [[String: Any]] {
     return entries.map { entry in
       switch entry {
       case let .group(name: name, items: items):
-        if currentLevel + 1 >= maxLevel {
-          return [
-            "name": name,
-            "items": flatten(entries: items)
-          ]
-        } else {
-          return [
-            "name": name,
-            "items": structure(entries: items, currentLevel: currentLevel + 1, maxLevel: maxLevel)
-          ]
-        }
+        return [
+          "name": name,
+          "items": structure(entries: items)
+        ]
       case let .image(name: name, value: value):
         return [
           "name": name,
@@ -114,29 +107,6 @@ extension AssetsCatalogParser {
         ]
       }
     }
-  }
-
-  private func flatten(entries: [Entry]) -> [[String: Any]] {
-    var result = [[String: Any]]()
-
-    for entry in entries {
-      switch entry {
-      case let .group(name: name, items: items):
-        result += flatten(entries: items).map { item in
-          return [
-            "name": "\(name)/\(item["name"]!)",
-            "value": item["value"]!
-          ]
-        }
-      case let .image(name: name, value: value):
-        result += [[
-          "name": name,
-          "value": value
-        ]]
-      }
-    }
-
-    return result
   }
 }
 

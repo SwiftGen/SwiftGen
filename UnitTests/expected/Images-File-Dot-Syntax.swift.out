@@ -34,7 +34,6 @@ struct AssetType: StringLiteralConvertible {
 
 // swiftlint:disable type_body_length
 enum Asset {
-
   enum Exotic {
     static let Banana: AssetType = "Exotic/Banana"
     static let Mango: AssetType = "Exotic/Mango"
