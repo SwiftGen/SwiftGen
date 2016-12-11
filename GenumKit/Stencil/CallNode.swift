@@ -6,7 +6,7 @@
 
 import Stencil
 
-struct CallableBlock {
+struct CallableBlock: CustomStringConvertible {
   let parameters: [String]
   let nodes: [NodeType]
 
@@ -18,6 +18,10 @@ struct CallableBlock {
     }
 
     return result
+  }
+
+  public var description: String {
+    fatalError("`func` blocks must be called using the `call` tag")
   }
 }
 
