@@ -16,8 +16,8 @@ public final class JSONFileParser {
 
   public func parseFile(path: Path) throws {
     let url = URL(fileURLWithPath: String(describing: path))
-    if let jsonData = try? Data(contentsOf: url),
-      let json = (try? JSONSerialization.jsonObject(with: jsonData, options: [])) as? [String: AnyObject] {
+    let jsonData = try Data(contentsOf: url)
+    if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: AnyObject] {
       self.json = json
     }
   }
