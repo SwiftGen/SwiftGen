@@ -26,19 +26,6 @@ class ImagesTests: XCTestCase {
     XCTDiffStrings(result, expected)
   }
 
-  func testEntriesWithDefaults() {
-    let parser = AssetsCatalogParser()
-    parser.addImage(named: "Green-Apple")
-    parser.addImage(named: "Red apple")
-    parser.addImage(named: "2-pears")
-
-    let template = GenumTemplate(templateString: Fixtures.string(for: "images-default.stencil"), environment: genumEnvironment())
-    let result = try! template.render(parser.stencilContext())
-
-    let expected = Fixtures.string(for: "Images-Entries-Default.swift.out")
-    XCTDiffStrings(result, expected)
-  }
-
   func testFileWithDefaults() {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: Fixtures.path(for: "Images.xcassets"))

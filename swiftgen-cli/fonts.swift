@@ -13,11 +13,14 @@ let fontsCommand = command(
   outputOption,
   templateOption(prefix: "fonts"), templatePathOption,
   Option<String>("enumName", "FontFamily", flag: "e", description: "The name of the enum to generate"),
-  Argument<Path>("DIR", description: "Directory to parse.", validator: dirExists)
-  ) { output, templateName, templatePath, enumName, path in
+  VariadicArgument<Path>("DIR", description: "Directory to parse.", validator: dirsExist)
+  ) { output, templateName, templatePath, enumName, paths in
     let parser = FontsFileParser()
     do {
-      parser.parseFile(at: path)
+      for path in paths {
+        parser.parseFile(at: path)
+      }
+
       let templateRealPath = try findTemplate(
         prefix: "fonts", templateShortName: templateName, templateFullPath: templatePath
       )
