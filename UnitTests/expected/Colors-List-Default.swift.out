@@ -36,9 +36,12 @@ enum ColorName {
 
   var rgbaValue: UInt32 {
     switch self {
-    case .ArticleBackground: return 0xffcc0099
-    case .ArticleTitle: return 0x996600ff
-    case .Text_Body_Color: return 0x999999ff
+    case .ArticleBackground:
+      return 0xffcc0099
+    case .ArticleTitle:
+      return 0x996600ff
+    case .Text_Body_Color:
+      return 0x999999ff
     }
   }
 
