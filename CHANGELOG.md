@@ -25,6 +25,9 @@ _None_
 * Better error handling in the `colors` command.  
   [David Jennes](https://github.com/djbe)
   [#227](https://github.com/AliSoftware/SwiftGen/pull/227)
+* SwiftLint: Remove `switch_case_on_newline` warning for generated color file
+  [Mickael Titeca](https://github.com/MickaCapi)
+  [#239](https://github.com/AliSoftware/SwiftGen/pull/239)
 
 ## 4.0.1
 
