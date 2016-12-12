@@ -15,9 +15,12 @@ public final class AssetsCatalogParser {
 
   public func parseCatalog(at path: Path) {
     guard let items = loadAssetCatalog(at: path) else { return }
+    let name = path.lastComponentWithoutExtension
 
-    // process recursively
-    catalogs[path.lastComponentWithoutExtension] = process(items: items)
+    // process recursively (and append if already exists)
+    var catalog = catalogs[name] ?? Catalog()
+    catalog += process(items: items)
+    catalogs[name] = catalog
   }
 
   enum Entry {
