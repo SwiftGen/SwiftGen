@@ -2,6 +2,9 @@
 
 import Foundation
 import UIKit
+import CustomSegue
+import LocationPicker
+import SlackTextViewController
 
 // swiftlint:disable file_length
 // swiftlint:disable line_length
@@ -167,6 +170,9 @@ struct StoryboardScene {
 }
 
 struct StoryboardSegue {
+  enum AdditionalImport: String, StoryboardSegueType {
+    case Test = "test"
+  }
   enum Message: String, StoryboardSegueType {
     case CustomBack = "CustomBack"
     case Embed = "Embed"

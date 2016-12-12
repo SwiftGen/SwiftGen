@@ -12,22 +12,26 @@ public final class StoryboardParser {
     let objectID: String
     let tag: String
     let customClass: String?
+    let customModule: String?
   }
 
   struct Scene {
     let storyboardID: String
     let tag: String
     let customClass: String?
+    let customModule: String?
   }
 
   struct Segue {
     let segueID: String
     let customClass: String?
+    let customModule: String?
   }
 
   var initialScenes = [String: InitialScene]()
   var storyboardsScenes = [String: Set<Scene>]()
   var storyboardsSegues = [String: Set<Segue>]()
+  var modules = Set<String>()
 
   public init() {}
 
@@ -53,11 +57,18 @@ public final class StoryboardParser {
         readyForFirstObject = true
       case let tag where (readyForFirstObject && tag != "viewControllerPlaceholder"):
         let customClass = attributeDict["customClass"]
+        let customModule = attributeDict["customModule"]
         if let objectID = attributeDict["id"], objectID == initialViewControllerObjectID {
-          initialScene = InitialScene(objectID: objectID, tag: tag, customClass: customClass)
+          initialScene = InitialScene(objectID: objectID,
+                                      tag: tag,
+                                      customClass: customClass,
+                                      customModule: customModule)
         }
         if let storyboardID = attributeDict["storyboardIdentifier"] {
-          scenes.insert(Scene(storyboardID: storyboardID, tag: tag, customClass: customClass))
+          scenes.insert(Scene(storyboardID: storyboardID,
+                              tag: tag,
+                              customClass: customClass,
+                              customModule: customModule))
         }
         readyForFirstObject = false
       case "connections":
@@ -65,7 +76,8 @@ public final class StoryboardParser {
       case "segue" where readyForConnections:
         if let segueID = attributeDict["identifier"] {
           let customClass = attributeDict["customClass"]
-          segues.insert(Segue(segueID: segueID, customClass: customClass))
+          let customModule = attributeDict["customModule"]
+          segues.insert(Segue(segueID: segueID, customClass: customClass, customModule: customModule))
         }
       default:
         break
@@ -98,6 +110,8 @@ public final class StoryboardParser {
     initialScenes[storyboardName] = delegate.initialScene
     storyboardsScenes[storyboardName] = delegate.scenes
     storyboardsSegues[storyboardName] = delegate.segues
+
+    modules.formUnion(collectModules(initial: delegate.initialScene, scenes: delegate.scenes, segues: delegate.segues))
   }
 
   public func parseDirectory(at path: Path) throws {
@@ -109,26 +123,43 @@ public final class StoryboardParser {
       }
     }
   }
+
+  private func collectModules(initial: InitialScene?, scenes: Set<Scene>, segues: Set<Segue>) -> Set<String> {
+    var result = Set<String>()
+
+    if let module = initial?.customModule {
+      result.insert(module)
+    }
+    result.formUnion(Set<String>(scenes.flatMap { $0.customModule }))
+    result.formUnion(Set<String>(segues.flatMap { $0.customModule }))
+
+    return result
+  }
 }
 
 extension StoryboardParser.Scene: Equatable { }
 func == (lhs: StoryboardParser.Scene, rhs: StoryboardParser.Scene) -> Bool {
-  return lhs.storyboardID == rhs.storyboardID && lhs.tag == rhs.tag && lhs.customClass == rhs.customClass
+  return lhs.storyboardID == rhs.storyboardID &&
+    lhs.tag == rhs.tag &&
+    lhs.customClass == rhs.customClass &&
+    lhs.customModule == rhs.customModule
 }
 
 extension StoryboardParser.Scene: Hashable {
   var hashValue: Int {
-    return "\(storyboardID);\(tag);\(customClass)".hashValue
+    return "\(storyboardID);\(tag);\(customModule);\(customClass)".hashValue
   }
 }
 
 extension StoryboardParser.Segue: Equatable { }
 func == (lhs: StoryboardParser.Segue, rhs: StoryboardParser.Segue) -> Bool {
-  return lhs.segueID == rhs.segueID && lhs.customClass == rhs.customClass
+  return lhs.segueID == rhs.segueID &&
+    lhs.customClass == rhs.customClass &&
+    lhs.customModule == rhs.customModule
 }
 
 extension StoryboardParser.Segue: Hashable {
   var hashValue: Int {
-    return "\(segueID);\(customClass)".hashValue
+    return "\(segueID);\(customModule);\(customClass)".hashValue
   }
 }

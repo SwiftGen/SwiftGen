@@ -165,8 +165,7 @@ extension AssetsCatalogParser {
 */
 extension StoryboardParser {
   public func stencilContext(sceneEnumName: String = "StoryboardScene",
-                                           segueEnumName: String = "StoryboardSegue",
-                                           extraImports: [String] = []) -> [String: Any] {
+                                           segueEnumName: String = "StoryboardSegue") -> [String: Any] {
     let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sorted(by: <)
     let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:Any] in
       var sbMap: [String:Any] = ["name": storyboardName]
@@ -174,7 +173,7 @@ extension StoryboardParser {
       if let initialScene = initialScenes[storyboardName] {
         let initial: [String:Any]
         if let customClass = initialScene.customClass {
-          initial = ["customClass": customClass]
+          initial = ["customClass": customClass, "customModule": initialScene.customModule ?? ""]
         } else {
           initial = [
             "baseType": uppercaseFirst(initialScene.tag),
@@ -189,13 +188,17 @@ extension StoryboardParser {
           .sorted(by: {$0.storyboardID < $1.storyboardID})
           .map { (scene: Scene) -> [String:Any] in
             if let customClass = scene.customClass {
-                return ["identifier": scene.storyboardID, "customClass": customClass]
+              return [
+                "identifier": scene.storyboardID,
+                "customClass": customClass,
+                "customModule": scene.customModule ?? ""
+              ]
             } else if scene.tag == "viewController" {
-                return [
-                    "identifier": scene.storyboardID,
-                    "baseType": uppercaseFirst(scene.tag),
-                    "isBaseViewController": scene.tag == "viewController"
-                ]
+              return [
+                "identifier": scene.storyboardID,
+                "baseType": uppercaseFirst(scene.tag),
+                "isBaseViewController": scene.tag == "viewController"
+              ]
             }
             return ["identifier": scene.storyboardID, "baseType": uppercaseFirst(scene.tag)]
         }
@@ -205,7 +208,11 @@ extension StoryboardParser {
         sbMap["segues"] = segues
           .sorted(by: {$0.segueID < $1.segueID})
           .map { (segue: Segue) -> [String:String] in
-            ["identifier": segue.segueID, "customClass": segue.customClass ?? ""]
+            [
+              "identifier": segue.segueID,
+              "customClass": segue.customClass ?? "",
+              "customModule": segue.customModule ?? ""
+            ]
         }
       }
       return sbMap
@@ -213,8 +220,8 @@ extension StoryboardParser {
     return [
       "sceneEnumName": sceneEnumName,
       "segueEnumName": segueEnumName,
-      "extraImports": extraImports,
-      "storyboards": storyboardsMap
+      "storyboards": storyboardsMap,
+      "extraImports": modules.sorted()
     ]
   }
 }

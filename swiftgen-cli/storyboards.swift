@@ -15,8 +15,9 @@ let storyboardsCommand = command(
     description: "The name of the enum to generate for Scenes"),
   Option<String>("segueEnumName", "StoryboardSegue", flag: "g",
     description: "The name of the enum to generate for Segues"),
+  // Note: import option is deprecated.
   VariadicOption<String>("import", [],
-    description: "Additional imports to be added to the generated file"),
+    description: "Additional imports to be added to the generated file (DEPRECATED)"),
   VariadicArgument<Path>("PATH",
     description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard",
     validator: pathsExist)
@@ -39,7 +40,7 @@ let storyboardsCommand = command(
     )
     let template = try GenumTemplate(templateString: templateRealPath.read(), environment: genumEnvironment())
     let context = parser.stencilContext(
-      sceneEnumName: sceneEnumName, segueEnumName: segueEnumName, extraImports: extraImports
+      sceneEnumName: sceneEnumName, segueEnumName: segueEnumName
     )
     let rendered = try template.render(context)
     output.write(content: rendered, onlyIfChanged: true)
