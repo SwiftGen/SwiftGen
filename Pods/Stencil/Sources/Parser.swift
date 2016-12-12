@@ -18,11 +18,11 @@ public class TokenParser {
   public typealias TagParser = (TokenParser, Token) throws -> NodeType
 
   fileprivate var tokens: [Token]
-  fileprivate let namespace: Namespace
+  fileprivate let environment: Environment
 
-  public init(tokens: [Token], namespace: Namespace) {
+  public init(tokens: [Token], environment: Environment) {
     self.tokens = tokens
-    self.namespace = namespace
+    self.environment = environment
   }
 
   /// Parse the given tokens into nodes
@@ -42,19 +42,14 @@ public class TokenParser {
       case .variable:
         nodes.append(VariableNode(variable: try compileFilter(token.contents)))
       case .block:
-        let tag = token.components().first
-
         if let parse_until = parse_until , parse_until(self, token) {
           prependToken(token)
           return nodes
         }
 
-        if let tag = tag {
-          if let parser = namespace.tags[tag] {
-            nodes.append(try parser(self, token))
-          } else {
-            throw TemplateSyntaxError("Unknown template tag '\(tag)'")
-          }
+        if let tag = token.components().first {
+          let parser = try findTag(name: tag)
+          nodes.append(try parser(self, token))
         }
       case .comment:
         continue
@@ -76,15 +71,28 @@ public class TokenParser {
     tokens.insert(token, at: 0)
   }
 
-  func findFilter(_ name: String) throws -> FilterType {
-    if let filter = namespace.filters[name] {
-      return filter
+  func findTag(name: String) throws -> Extension.TagParser {
+    for ext in environment.extensions {
+      if let filter = ext.tags[name] {
+        return filter
+      }
     }
 
-    throw TemplateSyntaxError("Invalid filter '\(name)'")
+    throw TemplateSyntaxError("Unknown template tag '\(name)'")
+  }
+
+  func findFilter(_ name: String) throws -> FilterType {
+    for ext in environment.extensions {
+      if let filter = ext.filters[name] {
+        return filter
+      }
+    }
+
+    throw TemplateSyntaxError("Unknown filter '\(name)'")
   }
 
   public func compileFilter(_ token: String) throws -> Resolvable {
     return try FilterExpression(token: token, parser: self)
   }
+
 }
