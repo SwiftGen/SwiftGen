@@ -6,7 +6,7 @@
 
 import Stencil
 
-struct CallableBlock: CustomStringConvertible {
+private struct CallableBlock: NodeType {
   let parameters: [String]
   let nodes: [NodeType]
 
@@ -20,8 +20,8 @@ struct CallableBlock: CustomStringConvertible {
     return result
   }
 
-  public var description: String {
-    fatalError("`func` blocks must be called using the `call` tag")
+  func render(_ context: Context) throws -> String {
+    throw TemplateSyntaxError("A callable block must be called using the 'call' tag.")
   }
 }
 
@@ -33,7 +33,7 @@ class FuncNode: NodeType {
   class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
     guard components.count >= 2 else {
-      throw TemplateSyntaxError("'func' tag takes at least one argument, the name of the variable to set")
+      throw TemplateSyntaxError("'func' tag takes at least one argument, the name of the variable to set.")
     }
     let variable = components[1]
     let parameters = Array(components.dropFirst(2))
@@ -66,7 +66,7 @@ class CallNode: NodeType {
   class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
     guard components.count >= 2 else {
-      throw TemplateSyntaxError("'call' tag takes at least one argument, the name of the block to call")
+      throw TemplateSyntaxError("'call' tag takes at least one argument, the name of the block to call.")
     }
     let variable = components[1]
     let arguments = Array(components.dropFirst(2)).map { Variable($0) }
