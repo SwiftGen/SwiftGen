@@ -221,7 +221,10 @@ extension StoryboardParser {
       "sceneEnumName": sceneEnumName,
       "segueEnumName": segueEnumName,
       "storyboards": storyboardsMap,
-      "modules": modules.sorted()
+      "modules": modules.sorted(),
+
+      // NOTE: This is a deprecated variable
+      "extraImports": modules.sorted()
     ]
   }
 }
