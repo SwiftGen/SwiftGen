@@ -2,8 +2,8 @@
 
 import Foundation
 import Cocoa
-{% for import in extraImports %}
-import {{import}}
+{% for module in modules %}
+import {{module}}
 {% endfor %}
 
 // swiftlint:disable file_length
