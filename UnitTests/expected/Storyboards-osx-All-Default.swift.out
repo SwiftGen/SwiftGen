@@ -54,10 +54,10 @@ struct StoryboardScene {
     static let storyboardName = "AdditionalImport-osx"
 
     case PreferencesScene = "Preferences"
-    static func instantiatePreferences() -> DBPrefsWindowController {
-      guard let vc = StoryboardScene.AdditionalImport_Osx.PreferencesScene.controller() as? DBPrefsWindowController
+    static func instantiatePreferences() -> DBPrefsWindowController.DBPrefsWindowController {
+      guard let vc = StoryboardScene.AdditionalImport_Osx.PreferencesScene.controller() as? DBPrefsWindowController.DBPrefsWindowController
       else {
-        fatalError("ViewController 'Preferences' is not of the expected class DBPrefsWindowController.")
+        fatalError("ViewController 'Preferences' is not of the expected class DBPrefsWindowController.DBPrefsWindowController.")
       }
       return vc
     }

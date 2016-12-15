@@ -65,10 +65,10 @@ struct {{sceneEnumName}} {
 
     case {{sceneID}}Scene = "{{scene.identifier}}"
     {% if scene.customClass %}
-    static func instantiate{{sceneID|snakeToCamelCase}}() -> {{scene.customClass}} {
-      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.controller() as? {{scene.customClass}}
+    static func instantiate{{sceneID|snakeToCamelCase}}() -> {% if scene.customModule %}{{scene.customModule}}.{% endif %}{{scene.customClass}} {
+      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.controller() as? {% if scene.customModule %}{{scene.customModule}}.{% endif %}{{scene.customClass}}
       else {
-        fatalError("ViewController '{{scene.identifier}}' is not of the expected class {{scene.customClass}}.")
+        fatalError("ViewController '{{scene.identifier}}' is not of the expected class {% if scene.customModule %}{{scene.customModule}}.{% endif %}{{scene.customClass}}.")
       }
       return vc
     }
