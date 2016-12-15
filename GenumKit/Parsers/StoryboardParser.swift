@@ -147,7 +147,7 @@ func == (lhs: StoryboardParser.Scene, rhs: StoryboardParser.Scene) -> Bool {
 
 extension StoryboardParser.Scene: Hashable {
   var hashValue: Int {
-    return "\(storyboardID);\(tag);\(customModule);\(customClass)".hashValue
+    return storyboardID.hashValue ^ tag.hashValue ^ (customModule?.hashValue ?? 0) ^ (customClass?.hashValue ?? 0)
   }
 }
 
@@ -160,6 +160,6 @@ func == (lhs: StoryboardParser.Segue, rhs: StoryboardParser.Segue) -> Bool {
 
 extension StoryboardParser.Segue: Hashable {
   var hashValue: Int {
-    return "\(segueID);\(customModule);\(customClass)".hashValue
+    return segueID.hashValue ^ (customModule?.hashValue ?? 0) ^ (customClass?.hashValue ?? 0)
   }
 }
