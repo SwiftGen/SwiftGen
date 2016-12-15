@@ -34,7 +34,7 @@ struct {{enumName}}Type: StringLiteralConvertible {
 }
 {% func recursiveBlock images sp %}
 {{args.sp}}  {% for image in args.images %}
-{{args.sp}}  {% ifnot image.items %}
+{{args.sp}}  {% if not image.items %}
 {{args.sp}}  static let {{image.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{image.value}}"
 {{args.sp}}  {% else %}
 {{args.sp}}  enum {{image.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
