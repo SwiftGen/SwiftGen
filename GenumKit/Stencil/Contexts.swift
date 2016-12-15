@@ -205,15 +205,7 @@ extension StoryboardParser {
       }
       // All Segues
       if let segues = storyboardsSegues[storyboardName] {
-        sbMap["segues"] = segues
-          .sorted(by: {$0.segueID < $1.segueID})
-          .map { (segue: Segue) -> [String:String] in
-            [
-              "identifier": segue.segueID,
-              "customClass": segue.customClass ?? "",
-              "customModule": segue.customModule ?? ""
-            ]
-        }
+        sbMap["segues"] = segues.sorted(by: {$0.identifier < $1.identifier})
       }
       return sbMap
     }

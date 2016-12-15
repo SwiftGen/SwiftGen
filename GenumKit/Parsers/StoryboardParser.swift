@@ -23,7 +23,7 @@ public final class StoryboardParser {
   }
 
   struct Segue {
-    let segueID: String
+    let identifier: String
     let customClass: String?
     let customModule: String?
   }
@@ -77,7 +77,7 @@ public final class StoryboardParser {
         if let segueID = attributeDict["identifier"] {
           let customClass = attributeDict["customClass"]
           let customModule = attributeDict["customModule"]
-          segues.insert(Segue(segueID: segueID, customClass: customClass, customModule: customModule))
+          segues.insert(Segue(identifier: segueID, customClass: customClass, customModule: customModule))
         }
       default:
         break
@@ -153,13 +153,13 @@ extension StoryboardParser.Scene: Hashable {
 
 extension StoryboardParser.Segue: Equatable { }
 func == (lhs: StoryboardParser.Segue, rhs: StoryboardParser.Segue) -> Bool {
-  return lhs.segueID == rhs.segueID &&
+  return lhs.identifier == rhs.identifier &&
     lhs.customClass == rhs.customClass &&
     lhs.customModule == rhs.customModule
 }
 
 extension StoryboardParser.Segue: Hashable {
   var hashValue: Int {
-    return segueID.hashValue ^ (customModule?.hashValue ?? 0) ^ (customClass?.hashValue ?? 0)
+    return identifier.hashValue ^ (customModule?.hashValue ?? 0) ^ (customClass?.hashValue ?? 0)
   }
 }
