@@ -89,7 +89,7 @@ class CallNode: NodeType {
     }
     let blockContext = try block.context(context, arguments: arguments)
 
-    return try context.push(dictionary: ["args": blockContext]) {
+    return try context.push(dictionary: blockContext) {
       try renderNodes(block.nodes, context)
     }
   }

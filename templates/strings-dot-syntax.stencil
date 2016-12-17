@@ -11,25 +11,25 @@ import Foundation
 // swiftlint:disable variable_name
 // swiftlint:disable valid_docs
 {% func recursiveBlock strings sp %}
-{{args.sp}}  {% for string in args.strings.strings %}
-{{args.sp}}  /// {{string.translation}}
-{{args.sp}}  {% if string.params %}
-{{args.sp}}  static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}({{string.params.typednames|join}}) -> String {
-{{args.sp}}    return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
-{{args.sp}}  }
-{{args.sp}}  {% else %}
-{{args.sp}}  static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
-{{args.sp}}  {% endif %}
-{{args.sp}}  {% endfor %}
-{{args.sp}}  {% if args.strings.subenums %}
-{{args.sp}}  {% for subenum in args.strings.subenums %}
+{{sp}}  {% for string in strings.strings %}
+{{sp}}  /// {{string.translation}}
+{{sp}}  {% if string.params %}
+{{sp}}  static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}({{string.params.typednames|join}}) -> String {
+{{sp}}    return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
+{{sp}}  }
+{{sp}}  {% else %}
+{{sp}}  static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
+{{sp}}  {% endif %}
+{{sp}}  {% endfor %}
+{{sp}}  {% if strings.subenums %}
+{{sp}}  {% for subenum in strings.subenums %}
 
-{{args.sp}}  enum {{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
-{{args.sp}}    {% set sp %}{{args.sp}}  {% endset %}
-{{args.sp}}    {% call recursiveBlock subenum sp %}
-{{args.sp}}  }
-{{args.sp}}  {% endfor %}
-{{args.sp}}  {% endif %}
+{{sp}}  enum {{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+{{sp}}    {% set sp2 %}{{sp}}  {% endset %}
+{{sp}}    {% call recursiveBlock subenum sp2 %}
+{{sp}}  }
+{{sp}}  {% endfor %}
+{{sp}}  {% endif %}
 {% endfunc %}
 
 enum {{enumName}} {

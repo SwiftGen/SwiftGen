@@ -33,16 +33,16 @@ struct {{enumName}}Type: ExpressibleByStringLiteral {
   }
 }
 {% func recursiveBlock images sp %}
-{{args.sp}}  {% for image in args.images %}
-{{args.sp}}  {% if not image.items %}
-{{args.sp}}  static let {{image.name|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}: AssetType = "{{image.value}}"
-{{args.sp}}  {% else %}
-{{args.sp}}  enum {{image.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
-{{args.sp}}    {% set sp %}{{args.sp}}  {% endset %}
-{{args.sp}}    {% call recursiveBlock image.items sp %}
-{{args.sp}}  }
-{{args.sp}}  {% endif %}
-{{args.sp}}  {% endfor %}
+{{sp}}  {% for image in images %}
+{{sp}}  {% if not image.items %}
+{{sp}}  static let {{image.name|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}: AssetType = "{{image.value}}"
+{{sp}}  {% else %}
+{{sp}}  enum {{image.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+{{sp}}    {% set sp2 %}{{sp}}  {% endset %}
+{{sp}}    {% call recursiveBlock image.items sp2 %}
+{{sp}}  }
+{{sp}}  {% endif %}
+{{sp}}  {% endfor %}
 {% endfunc %}
 
 // swiftlint:disable type_body_length
