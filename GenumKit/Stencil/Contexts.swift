@@ -144,7 +144,7 @@ extension AssetsCatalogParser {
 
  - `sceneEnumName`: `String`
  - `segueEnumName`: `String`
- - `extraImports`: `Array` of `String`
+ - `modules`: `Array` of `String`
  - `storyboards`: `Array` of:
     - `name`: `String`
     - `initialScene`: `Dictionary` (absent if not specified)
