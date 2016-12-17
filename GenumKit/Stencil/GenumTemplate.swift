@@ -45,7 +45,7 @@ open class GenumTemplate: Template {
 func genumExtension() -> Extension {
   let namespace = Extension()
   namespace.registerTag("set", parser: SetNode.parse)
-  namespace.registerTag("func", parser: FuncNode.parse)
+  namespace.registerTag("macro", parser: MacroNode.parse)
   namespace.registerTag("call", parser: CallNode.parse)
   namespace.registerFilter("swiftIdentifier", filter: StringFilters.stringToSwiftIdentifier)
   namespace.registerFilter("join", filter: ArrayFilters.join)

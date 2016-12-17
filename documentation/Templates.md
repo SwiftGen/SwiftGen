@@ -67,8 +67,8 @@ Additionally to the [tags and filters](https://stencil.fuller.li/en/latest/built
 | Node | Description |
 | ---- | ----------- |
 | `{% set my_capture_variable %}`<br>`{% endset %}` | node pair allowing you to capture the rendering of nodes inside it, so you can reuse it later by reusing `{{ my_capture_variable }}`.<br>This is useful if you intend to reuse the same content at multiple places — like the `sceneID` is for the `storyboards-default.stencil` template for example. |
-| `{% func my_block a b c %}`<br>`{{a}} - {{b}} - {{c}}`<br>`{% endfunc %}` | node pair allowing you to define a reusable block of nodes inside (like a function), so you can reuse it later.<br>In contrast to the `set` tag, the capturing for `func` is lazy, it will only be processed when actually called. When processed, the block will provide all the defined parameters as variables with their corresponding names.<br>Similar to the `for` tag, this tag provides it's own context scope when called, so variables inside of it are not available outside of it. |
-| `{% call my_block a b c %}` | node allowing you to call a previously defined block. The number of arguments must match the definition of the block. Note that you can call a block from inside the block itself, which means you can recursively call the block. |
+| `{% macro my_block a b c %}`<br>`{{a}} - {{b}} - {{c}}`<br>`{% endmacro %}` | node pair allowing you to define a reusable block of nodes inside (like a function), so you can reuse it later.<br>In contrast to the `set` tag, the capturing for `macro` is lazy, it will only be processed when actually called. When processed, the block will provide all the defined parameters as variables with their corresponding names.<br>Similar to the `for` tag, this tag provides it's own context scope when called, so variables inside of it are not available outside of it. |
+| `{% call my_block a b c %}` | node allowing you to call a previously defined block. The number of arguments must match the definition of the block. Note that you can call a block from inside the block itself, allowing a form of recursion if need be. |
 
 | Filter | Description |
 | ------ | ----------- |

@@ -21,7 +21,7 @@ _None_
   Swift 2.3).  
   [David Jennes](https://github.com/djbe)
   [#206](https://github.com/AliSoftware/SwiftGen/pull/206)
-* Reworked the "dot-syntax" and "structured" templates to use the new `func`
+* Reworked the "dot-syntax" and "structured" templates to use the new `macro`
   and `call` tags, which greatly simplifies the templates, and also removes the
   limitation of 5-level deep structures.  
   [David Jennes](https://github.com/djbe)
@@ -38,8 +38,9 @@ _None_
 * Better error handling in the `colors` command.  
   [David Jennes](https://github.com/djbe)
   [#227](https://github.com/AliSoftware/SwiftGen/pull/227)
-* Stencil: added two new tags `func` and `call`, see the documentation for in
-  depth explanations on how to use them.  
+* Stencil: added two new tags `macro` and `call`, see the
+  [documentation](documentation/Templates.md). for in depth explanations on how
+  to use them.  
   [David Jennes](https://github.com/djbe)
   [#237](https://github.com/AliSoftware/SwiftGen/pull/237)
 * SwiftLint: Remove `switch_case_on_newline` warning for generated color file.  

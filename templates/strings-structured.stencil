@@ -10,7 +10,7 @@ import Foundation
 // swiftlint:disable nesting
 
 enum {{enumName}} {
-{% func enumBlock strings sp %}
+{% macro enumBlock strings sp %}
 {{sp}}  {% for string in strings.strings %}
 {{sp}}  /// {{string.translation}}
 {{sp}}  case {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}{% if string.params %}({{string.params.types|join}}){% endif %}
@@ -25,12 +25,12 @@ enum {{enumName}} {
 {{sp}}  }
 {{sp}}  {% endfor %}
 {{sp}}  {% endif %}
-{% endfunc %}
+{% endmacro %}
   {% call enumBlock structuredStrings sp %}
 }
 
 extension {{enumName}}: CustomStringConvertible {
-{% func extensionBlock strings sp keySuffix %}
+{% macro extensionBlock strings sp keySuffix %}
 {{sp}}  {% for string in strings.strings %}
 {{sp}}  {% if string.params %}
 {{sp}}  case .{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}({{string.params.declarations|join}}):
@@ -52,7 +52,7 @@ extension {{enumName}}: CustomStringConvertible {
 {{sp}}    }
 {{sp}}  {% endfor %}
 {{sp}}  {% endif %}
-{% endfunc %}
+{% endmacro %}
   var description: String { return self.string }
 
   var string: String {

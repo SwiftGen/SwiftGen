@@ -25,7 +25,7 @@ private struct CallableBlock: NodeType {
   }
 }
 
-class FuncNode: NodeType {
+class MacroNode: NodeType {
   private let variableName: String
   private let parameters: [String]
   private let nodes: [NodeType]
@@ -33,17 +33,17 @@ class FuncNode: NodeType {
   class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
     guard components.count >= 2 else {
-      throw TemplateSyntaxError("'func' tag takes at least one argument, the name of the variable to set.")
+      throw TemplateSyntaxError("'macro' tag takes at least one argument, the name of the variable to set.")
     }
     let variable = components[1]
     let parameters = Array(components.dropFirst(2))
 
-    let setNodes = try parser.parse(until(["endfunc"]))
+    let setNodes = try parser.parse(until(["endmacro"]))
     guard parser.nextToken() != nil else {
-      throw TemplateSyntaxError("`endfunc` was not found.")
+      throw TemplateSyntaxError("`endmacro` was not found.")
     }
 
-    return FuncNode(variableName: variable, parameters: parameters, nodes: setNodes)
+    return MacroNode(variableName: variable, parameters: parameters, nodes: setNodes)
   }
 
   init(variableName: String, parameters: [String], nodes: [NodeType]) {

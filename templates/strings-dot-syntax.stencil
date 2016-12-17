@@ -10,7 +10,7 @@ import Foundation
 // swiftlint:disable nesting
 // swiftlint:disable variable_name
 // swiftlint:disable valid_docs
-{% func recursiveBlock strings sp %}
+{% macro recursiveBlock strings sp %}
 {{sp}}  {% for string in strings.strings %}
 {{sp}}  /// {{string.translation}}
 {{sp}}  {% if string.params %}
@@ -30,7 +30,7 @@ import Foundation
 {{sp}}  }
 {{sp}}  {% endfor %}
 {{sp}}  {% endif %}
-{% endfunc %}
+{% endmacro %}
 
 enum {{enumName}} {
   {% call recursiveBlock structuredStrings sp %}
