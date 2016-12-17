@@ -15,7 +15,7 @@ class ColorsTextFileTests: XCTestCase {
   func testEmpty() {
     let parser = ColorsTextFileParser()
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Colors-Empty.swift.out")
@@ -32,7 +32,7 @@ class ColorsTextFileTests: XCTestCase {
       XCTFail("Failed with unexpected error \(error)")
     }
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Colors-List-Default.swift.out")
@@ -49,7 +49,7 @@ class ColorsTextFileTests: XCTestCase {
       XCTFail("Failed with unexpected error \(error)")
     }
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-rawValue.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-rawValue.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Colors-List-RawValue.swift.out")
@@ -60,7 +60,7 @@ class ColorsTextFileTests: XCTestCase {
     let parser = ColorsTextFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "colors.txt"))
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Colors-Txt-File-Default.swift.out")
@@ -71,7 +71,7 @@ class ColorsTextFileTests: XCTestCase {
     let parser = ColorsTextFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "colors.txt"))
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-swift3.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-swift3.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Colors-Txt-File-Swift3.swift.out")
@@ -82,7 +82,7 @@ class ColorsTextFileTests: XCTestCase {
     let parser = ColorsTextFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "colors.txt"))
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
 
     let expected = Fixtures.string(for: "Colors-Txt-File-CustomName.swift.out")
@@ -122,7 +122,7 @@ class ColorsCLRFileTests: XCTestCase {
   func testEmpty() {
     let parser = ColorsCLRFileParser()
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Colors-Empty.swift.out")
@@ -133,8 +133,7 @@ class ColorsCLRFileTests: XCTestCase {
     let parser = ColorsCLRFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "colors.clr"))
 
-
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Colors-File-Default.swift.out")
@@ -145,7 +144,7 @@ class ColorsCLRFileTests: XCTestCase {
     let parser = ColorsCLRFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "colors.clr"))
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
 
     let expected = Fixtures.string(for: "Colors-File-CustomName.swift.out")
@@ -171,7 +170,7 @@ class ColorsXMLFileTests: XCTestCase {
   func testEmpty() {
     let parser = ColorsXMLFileParser()
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Colors-Empty.swift.out")
@@ -186,7 +185,7 @@ class ColorsXMLFileTests: XCTestCase {
       XCTFail("Exception while parsing file: \(error)")
     }
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Colors-File-Default.swift.out")
@@ -201,7 +200,7 @@ class ColorsXMLFileTests: XCTestCase {
       XCTFail("Exception while parsing file: \(error)")
     }
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
 
     let expected = Fixtures.string(for: "Colors-File-CustomName.swift.out")
@@ -239,7 +238,7 @@ class ColorsJSONFileTests: XCTestCase {
   func testEmpty() {
     let parser = ColorsJSONFileParser()
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Colors-Empty.swift.out")
@@ -254,7 +253,7 @@ class ColorsJSONFileTests: XCTestCase {
       XCTFail("Exception while parsing file: \(error)")
     }
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Colors-File-Default.swift.out")
@@ -269,7 +268,7 @@ class ColorsJSONFileTests: XCTestCase {
       XCTFail("Exception while parsing file: \(error)")
     }
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"))
+    let template = GenumTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: genumEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
 
     let expected = Fixtures.string(for: "Colors-File-CustomName.swift.out")

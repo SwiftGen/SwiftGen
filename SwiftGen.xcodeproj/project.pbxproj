@@ -30,7 +30,6 @@
 		09EB0A271BDC60F000B2CF79 /* Colors-File-CustomName.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A1E1BDC60F000B2CF79 /* Colors-File-CustomName.swift.out */; };
 		09EB0A281BDC60F000B2CF79 /* Colors-File-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A1F1BDC60F000B2CF79 /* Colors-File-Default.swift.out */; };
 		09EB0A291BDC60F000B2CF79 /* Colors-List-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A201BDC60F000B2CF79 /* Colors-List-Default.swift.out */; };
-		09EB0A2A1BDC60F000B2CF79 /* Images-Entries-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A211BDC60F000B2CF79 /* Images-Entries-Default.swift.out */; };
 		09EB0A2B1BDC60F000B2CF79 /* Images-File-CustomName.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A221BDC60F000B2CF79 /* Images-File-CustomName.swift.out */; };
 		09EB0A2C1BDC60F000B2CF79 /* Images-File-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A231BDC60F000B2CF79 /* Images-File-Default.swift.out */; };
 		09EB0A2D1BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */; };
@@ -179,7 +178,6 @@
 		09EB0A1E1BDC60F000B2CF79 /* Colors-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-File-CustomName.swift.out"; sourceTree = "<group>"; };
 		09EB0A1F1BDC60F000B2CF79 /* Colors-File-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-File-Default.swift.out"; sourceTree = "<group>"; };
 		09EB0A201BDC60F000B2CF79 /* Colors-List-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-List-Default.swift.out"; sourceTree = "<group>"; };
-		09EB0A211BDC60F000B2CF79 /* Images-Entries-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-Entries-Default.swift.out"; sourceTree = "<group>"; };
 		09EB0A221BDC60F000B2CF79 /* Images-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-File-CustomName.swift.out"; sourceTree = "<group>"; };
 		09EB0A231BDC60F000B2CF79 /* Images-File-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-File-Default.swift.out"; sourceTree = "<group>"; };
 		09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-All-CustomName.swift.out"; sourceTree = "<group>"; };
@@ -431,7 +429,6 @@
 			isa = PBXGroup;
 			children = (
 				4761E0331BDE753000B9B05F /* Images-Empty.swift.out */,
-				09EB0A211BDC60F000B2CF79 /* Images-Entries-Default.swift.out */,
 				09EB0A231BDC60F000B2CF79 /* Images-File-Default.swift.out */,
 				DD445AE91DF58C76006F0A3D /* Images-File-Dot-Syntax.swift.out */,
 				DD445AE81DF58C76006F0A3D /* Images-File-Dot-Syntax-Swift3.swift.out */,
@@ -671,7 +668,6 @@
 				820D84AE1D1F9CAF00504948 /* Strings-File-Structured.swift.out in Resources */,
 				D7A14A8B1D64FE35002F4C65 /* Fonts-Dir-CustomName-Swift3.swift.out in Resources */,
 				09A87B6D1BCCA5F600D9B9F5 /* Strings-File-Default.swift.out in Resources */,
-				09EB0A2A1BDC60F000B2CF79 /* Images-Entries-Default.swift.out in Resources */,
 				D7A14A8C1D64FE35002F4C65 /* Fonts-Dir-Default-Swift3.swift.out in Resources */,
 				09A87B6E1BCCA5F600D9B9F5 /* Strings-File-CustomName.swift.out in Resources */,
 				3640FD561DF347E80000F3EC /* Models in Resources */,
@@ -991,7 +987,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1005,7 +1001,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1024,7 +1020,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.swiftgen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1043,7 +1039,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.swiftgen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

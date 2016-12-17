@@ -12,20 +12,23 @@ let imagesCommand = command(
   outputOption,
   templateOption(prefix: "images"), templatePathOption,
   Option<String>("enumName", "Asset", flag: "e", description: "The name of the enum to generate"),
-  Argument<Path>("DIR", description: "Directory to scan for .imageset files.", validator: dirExists)
-) { output, templateName, templatePath, enumName, path in
-  guard path.extension == "xcassets" else {
-    throw ArgumentError.invalidType(value: String(describing: path), type: "xcassets file", argument: nil)
-  }
-
+  VariadicArgument<Path>("PATHS", description: "Asset Catalog file(s)", validator: dirsExist)
+) { output, templateName, templatePath, enumName, paths in
   let parser = AssetsCatalogParser()
-  parser.parseCatalog(at: path)
+
+  for path in paths {
+    if path.extension == "xcassets" {
+      parser.parseCatalog(at: path)
+    } else {
+      throw ArgumentError.invalidType(value: String(describing: path), type: "xcassets file", argument: nil)
+    }
+  }
 
   do {
     let templateRealPath = try findTemplate(
       prefix: "images", templateShortName: templateName, templateFullPath: templatePath
     )
-    let template = try GenumTemplate(path: templateRealPath)
+    let template = try GenumTemplate(templateString: templateRealPath.read(), environment: genumEnvironment())
     let context = parser.stencilContext(enumName: enumName)
     let rendered = try template.render(context)
     output.write(content: rendered, onlyIfChanged: true)

@@ -8,15 +8,15 @@ import Stencil
 
 // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
 open class GenumTemplate: Template {
-  public override init(templateString: String) {
+  public required init(templateString: String, environment: Environment? = nil, name: String? = nil) {
     let templateStringWithMarkedNewlines = templateString
-      .replacingOccurrences(of: "\n\n", with: "\n\u{000b}\n")
-      .replacingOccurrences(of: "\n\n", with: "\n\u{000b}\n")
-    super.init(templateString: templateStringWithMarkedNewlines)
+        .replacingOccurrences(of: "\n\n", with: "\n\u{000b}\n")
+        .replacingOccurrences(of: "\n\n", with: "\n\u{000b}\n")
+    super.init(templateString: templateStringWithMarkedNewlines, environment: environment, name: name)
   }
 
-  open override func render(_ context: Context? = nil) throws -> String {
-    return try removeExtraLines(from: super.render(context))
+  open override func render(_ dictionary: [String: Any]? = nil) throws -> String {
+    return try removeExtraLines(from: super.render(dictionary))
   }
 
   // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
@@ -42,8 +42,8 @@ open class GenumTemplate: Template {
 }
 
 // Create Genum-specific namespace including custom tags & filters
-func genumNamespace() -> Namespace {
-  let namespace = Namespace()
+func genumExtension() -> Extension {
+  let namespace = Extension()
   namespace.registerTag("set", parser: SetNode.parse)
   namespace.registerTag("map", parser: MapNode.parse)
   namespace.registerFilter("swiftIdentifier", filter: StringFilters.stringToSwiftIdentifier)
@@ -57,4 +57,8 @@ func genumNamespace() -> Namespace {
   namespace.registerFilter("percent", filter: NumFilters.percent)
   namespace.registerFilter("escapeReservedKeywords", filter: StringFilters.escapeReservedKeywords)
   return namespace
+}
+
+public func genumEnvironment() -> Environment {
+  return Environment(extensions: [genumExtension()], templateClass: GenumTemplate.self)
 }

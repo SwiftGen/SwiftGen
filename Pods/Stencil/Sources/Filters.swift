@@ -1,35 +1,13 @@
-func toString(_ value: Any?) -> String? {
-  if let value = value as? String {
-    return value
-  } else if let value = value as? CustomStringConvertible {
-    return value.description
-  }
-
-  return nil
-}
-
 func capitalise(_ value: Any?) -> Any? {
-  if let value = toString(value) {
-    return value.capitalized
-  }
-
-  return value
+  return stringify(value).capitalized
 }
 
 func uppercase(_ value: Any?) -> Any? {
-  if let value = toString(value) {
-    return value.uppercased()
-  }
-
-  return value
+  return stringify(value).uppercased()
 }
 
 func lowercase(_ value: Any?) -> Any? {
-  if let value = toString(value) {
-    return value.lowercased()
-  }
-
-  return value
+  return stringify(value).lowercased()
 }
 
 func defaultFilter(value: Any?, arguments: [Any?]) -> Any? {
@@ -47,17 +25,17 @@ func defaultFilter(value: Any?, arguments: [Any?]) -> Any? {
 }
 
 func joinFilter(value: Any?, arguments: [Any?]) throws -> Any? {
-  guard arguments.count == 1 else {
+  guard arguments.count < 2 else {
     throw TemplateSyntaxError("'join' filter takes a single argument")
   }
 
-  guard let separator = arguments.first as? String else {
-    throw TemplateSyntaxError("'join' filter takes a separator as string")
+  let separator = stringify(arguments.first ?? "")
+
+  if let value = value as? [Any] {
+    return value
+      .map(stringify)
+      .joined(separator: separator)
   }
 
-  if let value = value as? [String] {
-    return value.joined(separator: separator)
-  }
-
-  return nil
+  return value
 }

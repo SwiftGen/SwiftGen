@@ -19,6 +19,10 @@ let pathExists = checkPath(type: "path") { $0.exists }
 let fileExists = checkPath(type: "file") { $0.isFile }
 let dirExists  = checkPath(type: "directory") { $0.isDirectory }
 
+let pathsExist = { (paths: [Path]) throws -> [Path] in try paths.map(pathExists) }
+let filesExist = { (paths: [Path]) throws -> [Path] in try paths.map(fileExists) }
+let dirsExist = { (paths: [Path]) throws -> [Path] in try paths.map(dirExists) }
+
 // MARK: Path as Input Argument
 
 extension Path : ArgumentConvertible {

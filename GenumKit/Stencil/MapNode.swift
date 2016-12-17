@@ -32,7 +32,7 @@ public class MapNode: NodeType {
     }
 
     if token.contents == "empty" {
-      parser.nextToken()
+      _ = parser.nextToken()
     }
 
     return MapNode(variable: variable, mapVariable: mapVariable, resultName: resultName, nodes: mapNodes)

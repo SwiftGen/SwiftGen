@@ -34,7 +34,7 @@ private extension String {
     - `alpha`: `String` — hex value of the alpha component
 */
 extension ColorsFileParser {
-  public func stencilContext(enumName: String = "ColorName") -> Context {
+  public func stencilContext(enumName: String = "ColorName") -> [String: Any] {
     let colorMap = colors.map({ (color: (name: String, value: UInt32)) -> [String:String] in
       let name = color.name.trimmingCharacters(in: CharacterSet.whitespaces)
       let hex = "00000000" + String(color.value, radix: 16)
@@ -51,7 +51,7 @@ extension ColorsFileParser {
         "alpha": comps[3]
       ]
     }).sorted { $0["name"] ?? "" < $1["name"] ?? "" }
-    return Context(dictionary: ["enumName": enumName, "colors": colorMap], namespace: genumNamespace())
+    return ["enumName": enumName, "colors": colorMap]
   }
 }
 
@@ -61,18 +61,20 @@ extension ColorsFileParser {
  - `images`: `Array<String>` — list of image names
 */
 extension AssetsCatalogParser {
-  public func stencilContext(enumName: String = "Asset") -> Context {
-    let images = justValues(entries: entries)
-    let imagesStructured = structure(entries: entries)
+  public func stencilContext(enumName: String = "Asset") -> [String: Any] {
+    let images = catalogs.flatMap { justValues(entries: $1) }.sorted(by: <)
+    let structured = catalogs.keys.sorted(by: <).map { name -> [String: Any] in
+      return [
+        "name": name,
+        "assets": structure(entries: catalogs[name] ?? [])
+      ]
+    }
 
-    return Context(
-      dictionary: [
-        "enumName": enumName,
-        "images": images,
-        "structuredImages": imagesStructured
-      ],
-      namespace: genumNamespace()
-    )
+    return [
+      "enumName": enumName,
+      "images": images,
+      "catalogs": structured
+    ]
   }
 
   private func justValues(entries: [Entry]) -> [String] {
@@ -80,7 +82,7 @@ extension AssetsCatalogParser {
 
     for entry in entries {
       switch entry {
-      case let .namespace(name: _, items: items):
+      case let .group(name: _, items: items):
         result += justValues(entries: items)
       case let .image(name: _, value: value):
         result += [value]
@@ -93,7 +95,7 @@ extension AssetsCatalogParser {
   private func structure(entries: [Entry], currentLevel: Int = 0, maxLevel: Int = 5) -> [[String: Any]] {
     return entries.map { entry in
       switch entry {
-      case let .namespace(name: name, items: items):
+      case let .group(name: name, items: items):
         if currentLevel + 1 >= maxLevel {
           return [
             "name": name,
@@ -119,7 +121,7 @@ extension AssetsCatalogParser {
 
     for entry in entries {
       switch entry {
-      case let .namespace(name: name, items: items):
+      case let .group(name: name, items: items):
         result += flatten(entries: items).map { item in
           return [
             "name": "\(name)/\(item["name"]!)",
@@ -164,7 +166,7 @@ extension AssetsCatalogParser {
 extension StoryboardParser {
   public func stencilContext(sceneEnumName: String = "StoryboardScene",
                                            segueEnumName: String = "StoryboardSegue",
-                                           extraImports: [String] = []) -> Context {
+                                           extraImports: [String] = []) -> [String: Any] {
     let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sorted(by: <)
     let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:Any] in
       var sbMap: [String:Any] = ["name": storyboardName]
@@ -208,15 +210,12 @@ extension StoryboardParser {
       }
       return sbMap
     }
-    return Context(
-      dictionary: [
-        "sceneEnumName": sceneEnumName,
-        "segueEnumName": segueEnumName,
-        "extraImports": extraImports,
-        "storyboards": storyboardsMap
-      ],
-      namespace: genumNamespace()
-    )
+    return [
+      "sceneEnumName": sceneEnumName,
+      "segueEnumName": segueEnumName,
+      "extraImports": extraImports,
+      "storyboards": storyboardsMap
+    ]
   }
 }
 
@@ -238,7 +237,7 @@ extension StoryboardParser {
  - `structuredStrings`: `Dictionary` - contains strings structured by keys separated by '.' syntax
 */
 extension StringsFileParser {
-  public func stencilContext(enumName: String = "L10n", tableName: String = "Localizable") -> Context {
+  public func stencilContext(enumName: String = "L10n", tableName: String = "Localizable") -> [String: Any] {
 
     let entryToStringMapper = { (entry: Entry, keyPath: [String]) -> [String: Any] in
       var keyStructure = entry.keyStructure
@@ -276,15 +275,12 @@ extension StringsFileParser {
         maxLevel: 5
     )
 
-    return Context(dictionary:
-      [
-        "enumName": enumName,
-        "tableName": tableName,
-        "strings": strings,
-        "structuredStrings": structuredStrings
-      ],
-      namespace: genumNamespace()
-    )
+    return [
+      "enumName": enumName,
+      "tableName": tableName,
+      "strings": strings,
+      "structuredStrings": structuredStrings
+    ]
   }
 
   private func normalize(_ string: String) -> String {
@@ -394,7 +390,7 @@ extension StringsFileParser {
 */
 
 extension FontsFileParser {
-  public func stencilContext(enumName: String = "FontFamily") -> Context {
+  public func stencilContext(enumName: String = "FontFamily") -> [String: Any] {
     // turn into array of dictionaries
     let families = entries.map { (name: String, family: Set<Font>) -> [String: Any] in
       let fonts = family.map { (font: Font) -> [String: String] in
@@ -411,14 +407,14 @@ extension FontsFileParser {
       ]
     }.sorted { $0["name"] as? String ?? "" < $1["name"] as? String ?? "" }
 
-    return Context(dictionary: ["enumName": enumName, "families": families], namespace: genumNamespace())
+    return ["enumName": enumName, "families": families]
   }
 }
 
 /* MARK: - Stencil Context for Models
  */
 extension JSONFileParser {
-    public func stencilContext() -> Context {
-        return Context(dictionary: ["spec": json], namespace: genumNamespace())
-    }
+  public func stencilContext() -> [String: Any] {
+    return ["spec": json]
+  }
 }

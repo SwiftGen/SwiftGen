@@ -19,35 +19,24 @@ There are {{ articles.count }} articles.
 ```
 
 ```swift
+import Stencil
+
 struct Article {
   let title: String
   let author: String
 }
 
-let context = Context(dictionary: [
+let context = [
   "articles": [
     Article(title: "Migrating from OCUnit to XCTest", author: "Kyle Fuller"),
     Article(title: "Memory Management with ARC", author: "Kyle Fuller"),
   ]
-])
+]
 
-do {
-  let template = try Template(named: "template.html")
-  let rendered = try template.render(context)
-  print(rendered)
-} catch {
-  print("Failed to render template \(error)")
-}
-```
+let environment = Environment(loader: FileSystemLoader(paths: ["templates/"])
+let rendered = try environment.renderTemplate(name: context)
 
-## Installation
-
-Installation with Swift Package Manager is recommended.
-
-### CocoaPods
-
-```ruby
-pod 'Stencil'
+print(rendered)
 ```
 
 ## Philosophy
@@ -62,8 +51,16 @@ Stencil follows the same philosophy of Django:
 
 ## The User Guide
 
-- [Templates](http://stencil.fuller.li/en/latest/templates.html)
+Resources for Stencil template authors to write Stencil templates:
+
+- [Language overview](http://stencil.fuller.li/en/latest/templates.html)
 - [Built-in template tags and filters](http://stencil.fuller.li/en/latest/builtins.html)
+
+Resources to help you integrate Stencil into a Swift project:
+
+- [Installation](http://stencil.fuller.li/en/latest/installation.html)
+- [Getting Started](http://stencil.fuller.li/en/latest/getting-started.html)
+- [API Reference](http://stencil.fuller.li/en/latest/api.html)
 - [Custom Template Tags and Filters](http://stencil.fuller.li/en/latest/custom-template-tags-and-filters.html)
 
 ## License

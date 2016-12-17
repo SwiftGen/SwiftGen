@@ -35,7 +35,8 @@ enum {{enumName}} {
   var rgbaValue: UInt32 {
     switch self {
     {% for color in colors %}
-    case .{{color.name|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}: return 0x{{color.rgba}}
+    case .{{color.name|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}:
+      return 0x{{color.rgba}}
     {% endfor %}
     }
   }

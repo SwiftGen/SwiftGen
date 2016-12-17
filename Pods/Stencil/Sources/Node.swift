@@ -70,15 +70,19 @@ public class VariableNode : NodeType {
 
   public func render(_ context: Context) throws -> String {
     let result = try variable.resolve(context)
-
-    if let result = result as? String {
-      return result
-    } else if let result = result as? CustomStringConvertible {
-      return result.description
-    } else if let result = result as? NSObject {
-      return result.description
-    }
-
-    return ""
+    return stringify(result)
   }
+}
+
+
+func stringify(_ result: Any?) -> String {
+  if let result = result as? String {
+    return result
+  } else if let result = result as? CustomStringConvertible {
+    return result.description
+  } else if let result = result as? NSObject {
+    return result.description
+  }
+
+  return ""
 }
