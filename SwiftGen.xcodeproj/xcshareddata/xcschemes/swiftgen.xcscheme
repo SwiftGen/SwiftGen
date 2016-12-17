@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0CD3766AE6946CB94DFAFD3057F49DC7"
+               BlueprintIdentifier = "1C2F903B0E9CCFCE5F927485EC01BB8E"
                BuildableName = "GenumKit.framework"
                BlueprintName = "GenumKit"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -102,6 +102,10 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "colors -t swift3 $(PROJECT_DIR)/UnitTests/fixtures/colors.xml"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "json -t model $(PROJECT_DIR)/UnitTests/fixtures/Models/Model.json"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument

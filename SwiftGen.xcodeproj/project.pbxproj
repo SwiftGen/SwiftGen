@@ -320,11 +320,11 @@
 			isa = PBXGroup;
 			children = (
 				09030BD81B6D2E5900275BF5 /* ColorsTests.swift */,
+				C2DBEADD1C8F87AD00E62C9E /* FontsTests.swift */,
 				09030BD11B6D2E3900275BF5 /* ImagesTests.swift */,
+				3640FD5A1DF348880000F3EC /* JSONModelTests.swift */,
 				09030BC91B6D2BB700275BF5 /* StoryboardsTests.swift */,
 				09030BD51B6D2E3900275BF5 /* StringsTests.swift */,
-				C2DBEADD1C8F87AD00E62C9E /* FontsTests.swift */,
-				3640FD5A1DF348880000F3EC /* JSONModelTests.swift */,
 			);
 			path = TestSuites;
 			sourceTree = "<group>";
@@ -332,12 +332,12 @@
 		09030C071B6D2FF600275BF5 /* expected */ = {
 			isa = PBXGroup;
 			children = (
-				3640FD571DF3481C0000F3EC /* JSON */,
 				47CB53231CFC0AC900AA19C0 /* Colors */,
+				C221E4A41C960A84001E04E5 /* Fonts */,
 				47CB53241CFC0AD000AA19C0 /* Images */,
+				3640FD571DF3481C0000F3EC /* JSON */,
 				47CB53251CFC0AD600AA19C0 /* Storyboards */,
 				47CB53261CFC0ADF00AA19C0 /* Strings */,
-				C221E4A41C960A84001E04E5 /* Fonts */,
 			);
 			path = expected;
 			sourceTree = "<group>";
@@ -356,15 +356,15 @@
 				C2265B581C8907CA00CA5C4F /* colors.json */,
 				DD0AB0FD1DF7364700978575 /* colors-bad-syntax.json */,
 				DD0AB0FE1DF7364700978575 /* colors-bad-value.json */,
+				47CB53291CFC0B2100AA19C0 /* Fonts */,
 				09030C2F1B6D4F8500275BF5 /* Images.xcassets */,
-				0996622F1D1C8D7300366642 /* Storyboards-iOS */,
-				0996622D1D1C8D4F00366642 /* Storyboards-OSX */,
-				3640FD551DF347E80000F3EC /* Models */,
 				09030C241B6D48FC00275BF5 /* Localizable.strings */,
 				82CC60371D22947500BA55E8 /* LocStructuredOnly.strings */,
 				09EB0A301BDC8F4100B2CF79 /* LocUTF8.strings */,
 				EEC8E1061DCB929D00E5DFF1 /* LocMultiline.strings */,
-				47CB53291CFC0B2100AA19C0 /* Fonts */,
+				3640FD551DF347E80000F3EC /* Models */,
+				0996622F1D1C8D7300366642 /* Storyboards-iOS */,
+				0996622D1D1C8D4F00366642 /* Storyboards-OSX */,
 			);
 			path = fixtures;
 			sourceTree = "<group>";
@@ -376,11 +376,11 @@
 				091150301BD31A3300EBC803 /* ArgumentsUtils.swift */,
 				0921FBA01BE7D6B900B488B5 /* templates.swift */,
 				09A87B751BCCC02C00D9B9F5 /* colors.swift */,
+				C24AFD011C91DE33005FE3EF /* fonts.swift */,
 				090141401BCC64FE002E8617 /* images.swift */,
+				3640FD531DF347B90000F3EC /* json.swift */,
 				0901413E1BCC64C9002E8617 /* storyboards.swift */,
 				09A87B731BCCBE6D00D9B9F5 /* strings.swift */,
-				C24AFD011C91DE33005FE3EF /* fonts.swift */,
-				3640FD531DF347B90000F3EC /* json.swift */,
 			);
 			path = "swiftgen-cli";
 			sourceTree = "<group>";
