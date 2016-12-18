@@ -1,0 +1,120 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+
+public final class {{ spec.type }}: DataModel, Equatable {
+
+  // MARK: Instance Variables
+
+{% for field in spec.fields %}
+{% if field.doc %}
+  /**
+   {{ field.doc }}
+   */
+{% endif %}
+  public let {{ field.name }}: {% if "array" == field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% endif %}{% if field.optional %}?{% endif %}
+{% endfor %}
+
+  // MARK: Initializers
+
+{% map spec.fields with field set params %}{{ field.name }}: {% if "array" == field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% endif %}{% if field.optional %}?{% endif %}{% endmap %}
+  public init({{ params|join }}) {
+{% for field in spec.fields %}
+    self.{{ field.name }} = {{ field.name }}
+{% endfor %}
+  }
+
+  public convenience init?(dictionary: [String: Any]) {
+    try? self.init(dictionary: dictionary, error: { _ in })
+  }
+
+  public convenience init?(dictionary: [String: Any], error: ((String) throws -> Void)) rethrows {
+    try? self.init(dictionary: dictionary as NSDictionary, error: error)
+  }
+
+  public convenience init?(dictionary: NSDictionary) {
+    try? self.init(dictionary: dictionary, error: { _ in })
+  }
+
+  public init?(dictionary: NSDictionary, error: ((String) throws -> Void)) rethrows {
+    let parser = Parser(dictionary: dictionary)
+{% for field in spec.fields %}
+{% if field.optional %}
+    self.{{ field.name }} = try parser.fetch("{{ field.name }}", error: error)
+{% else %}
+{% if "array" == field.type %}
+    self.{{ field.name }} = try parser.fetch("{{ field.name }}", error: error)
+{% else %}
+    guard let {{ field.name }}: {{ field.type|titlecase }} = try parser.fetch("{{ field.name }}", error: error) else {
+      try error("Required field '{{ field.name }}' is missing from type '{{ spec.type }}'")
+      return nil
+    }
+    self.{{ field.name }} = {{ field.name }}
+{% endif %}
+{% endif %}
+{% endfor %}
+  }
+
+  public static func make(withDictionary dictionary: [String: Any]) throws -> Self {
+    return try make(withDictionary: dictionary as NSDictionary)
+  }
+
+  public static func make(withDictionary dictionary: NSDictionary) throws -> Self {
+    let model = try self.init(dictionary: dictionary) { error in
+      throw ParseError(message: error)
+    }
+    if let model = model {
+      return model
+    } else {
+      throw ParseError(message: "Model returned nil with no error.")
+    }
+  }
+
+  public static func parse(data: Any, error: (String) throws -> Void) rethrows -> {{ spec.type }}? {
+    if let data = data as? NSDictionary {
+      return try self.init(dictionary: data, error: error)
+    } else {
+      try error("Models must be initialized with NSDictionary. Instead, got \(type(of: data))")
+      return nil
+    }
+  }
+
+  // MARK: Data
+
+  public func data() -> [String: Any] {
+    var data = [String: Any]()
+{% for field in spec.fields %}
+    data["{{ field.name }}"] = {{ field.name }}{% if field.optional %}?{% endif %}{% if "array" == field.type %}.map { $0.dataRepresentation() }{% else %}.dataRepresentation(){% endif %}
+{% endfor %}
+    return data
+  }
+
+  // MARK: Builder
+
+  public func map(update: (Builder)->()) -> {{ spec.type }} {
+    let builder = Builder(copy: self)
+    update(builder)
+    return builder.build()
+  }
+
+  public final class Builder {
+{% for field in spec.fields %}
+    public var {{ field.name }}: {% if "array" == field.type %}[{{ field.element|titlecase }}]{% else %}{{ field.type|titlecase }}{% endif %}{% if field.optional %}?{% endif %}
+{% endfor %}
+
+    public init(copy: {{spec.type}}) {
+{% for field in spec.fields %}
+      {{field.name}} = copy.{{field.name}}
+{% endfor %}
+    }
+
+{% map spec.fields with field set initializerList %}{{ field.name }}: {{ field.name }}{% endmap %}
+    public func build() -> {{spec.type}} {
+      return {{spec.type}}({{ initializerList|join }})
+    }
+  }
+}
+
+{% map spec.fields with field set equalityList %}lhs.{{ field.name }} == rhs.{{ field.name }}{% endmap %}
+public func == (lhs: {{spec.type}}, rhs: {{spec.type}}) -> Bool {
+  return {{ equalityList|join:" &&
+    " }}
+}

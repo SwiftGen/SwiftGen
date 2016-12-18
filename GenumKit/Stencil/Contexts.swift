@@ -412,3 +412,11 @@ extension FontsFileParser {
     return ["enumName": enumName, "families": families]
   }
 }
+
+/* MARK: - Stencil Context for Models
+ */
+extension JSONFileParser {
+  public func stencilContext() -> [String: Any] {
+    return ["spec": json]
+  }
+}

@@ -51,6 +51,9 @@ _None_
 * Strings dot-syntax template: use `enum`s for namespacing instead of `struct`s.  
   [David Jennes](https://github.com/djbe)
   [#218](https://github.com/AliSoftware/SwiftGen/pull/218)
+* Added model and JSON code generation.
+  [Peter Livesey](https://github.com/plivesey)
+  [#188](https://github.com/AliSoftware/SwiftGen/pull/188)
 
 ### Internal changes
 
