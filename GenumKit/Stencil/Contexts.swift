@@ -92,21 +92,14 @@ extension AssetsCatalogParser {
     return result
   }
 
-  private func structure(entries: [Entry], currentLevel: Int = 0, maxLevel: Int = 5) -> [[String: Any]] {
+  private func structure(entries: [Entry]) -> [[String: Any]] {
     return entries.map { entry in
       switch entry {
       case let .group(name: name, items: items):
-        if currentLevel + 1 >= maxLevel {
-          return [
-            "name": name,
-            "items": flatten(entries: items)
-          ]
-        } else {
-          return [
-            "name": name,
-            "items": structure(entries: items, currentLevel: currentLevel + 1, maxLevel: maxLevel)
-          ]
-        }
+        return [
+          "name": name,
+          "items": structure(entries: items)
+        ]
       case let .image(name: name, value: value):
         return [
           "name": name,
@@ -114,29 +107,6 @@ extension AssetsCatalogParser {
         ]
       }
     }
-  }
-
-  private func flatten(entries: [Entry]) -> [[String: Any]] {
-    var result = [[String: Any]]()
-
-    for entry in entries {
-      switch entry {
-      case let .group(name: name, items: items):
-        result += flatten(entries: items).map { item in
-          return [
-            "name": "\(name)/\(item["name"]!)",
-            "value": item["value"]!
-          ]
-        }
-      case let .image(name: name, value: value):
-        result += [[
-          "name": name,
-          "value": value
-        ]]
-      }
-    }
-
-    return result
   }
 }
 
@@ -272,9 +242,7 @@ extension StringsFileParser {
         .map { entryToStringMapper($0, []) }
     let structuredStrings = structure(
         entries: entries,
-        usingMapper: entryToStringMapper,
-        currentLevel: 0,
-        maxLevel: 5
+        usingMapper: entryToStringMapper
     )
 
     return [
@@ -294,9 +262,7 @@ extension StringsFileParser {
   private func structure(
     entries: [Entry],
     atKeyPath keyPath: [String] = [],
-    usingMapper mapper: @escaping Mapper,
-    currentLevel: Int,
-    maxLevel: Int) -> [String: Any] {
+    usingMapper mapper: @escaping Mapper) -> [String: Any] {
 
     var structuredStrings: [String: Any] = [:]
 
@@ -332,50 +298,15 @@ extension StringsFileParser {
       let entriesInKeyPath = entries.filter {
         Array($0.keyStructure.map(normalize).prefix(nextLevelKeyPath.count)) == nextLevelKeyPath.map(normalize)
       }
-      if currentLevel >= maxLevel {
-        subenums.append(
-            flattenedStrings(fromEnteries: entries,
-                             atKeyPath: nextLevelKeyPath,
-                             usingMapper: mapper,
-                             level: currentLevel+1
-            )
-        )
-      } else {
-        subenums.append(
-            structure(entries: entriesInKeyPath,
-                      atKeyPath: nextLevelKeyPath,
-                      usingMapper: mapper,
-                      currentLevel: currentLevel+1,
-                      maxLevel: maxLevel)
-        )
-      }
+      subenums.append(
+          structure(entries: entriesInKeyPath,
+                    atKeyPath: nextLevelKeyPath,
+                    usingMapper: mapper)
+      )
     }
 
     if !subenums.isEmpty {
       structuredStrings["subenums"] = subenums
-    }
-
-    return structuredStrings
-  }
-
-  private func flattenedStrings(
-    fromEnteries entries: [Entry],
-    atKeyPath keyPath: [String],
-    usingMapper mapper: @escaping Mapper,
-    level: Int) -> [String: Any] {
-
-    var structuredStrings: [String: Any] = [:]
-
-    let strings = entries
-      .filter { $0.keyStructure.count >= keyPath.count+1 }
-      .map { mapper($0, keyPath) }
-
-    if !strings.isEmpty {
-      structuredStrings["strings"] = strings
-    }
-
-    if let lastKeyPathComponent = keyPath.last {
-      structuredStrings["name"] = lastKeyPathComponent
     }
 
     return structuredStrings

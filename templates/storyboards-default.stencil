@@ -53,7 +53,7 @@ struct {{sceneEnumName}} {
   {% if storyboard.scenes %}
   enum {{storyboardName}}: String, StoryboardSceneType {
     static let storyboardName = "{{storyboard.name}}"
-    {% if storyboard.initialScene %}{% ifnot storyboard.initialScene.isBaseViewController %}
+    {% if storyboard.initialScene %}{% if not storyboard.initialScene.isBaseViewController %}
     {% set initialSceneClass %}{% if storyboard.initialScene.customClass %}{% if storyboard.initialScene.customModule %}{{storyboard.initialScene.customModule}}.{% endif %}{{storyboard.initialScene.customClass}}{% else %}UI{{storyboard.initialScene.baseType}}{% endif %}{% endset %}
 
     static func initialViewController() -> {{initialSceneClass}} {
@@ -67,7 +67,7 @@ struct {{sceneEnumName}} {
     {% set sceneID %}{{scene.identifier|swiftIdentifier}}{% endset %}
 
     case {{sceneID}}Scene = "{{scene.identifier}}"
-    {% ifnot scene.isBaseViewController %}
+    {% if not scene.isBaseViewController %}
     {% if scene.customClass %}
     static func instantiate{{sceneID|snakeToCamelCase}}() -> {% if scene.customModule %}{{scene.customModule}}.{% endif %}{{scene.customClass}} {
       guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}Scene.viewController() as? {% if scene.customModule %}{{scene.customModule}}.{% endif %}{{scene.customClass}}
@@ -95,7 +95,7 @@ struct {{sceneEnumName}} {
   {% else %}
   enum {{storyboardName}}: StoryboardSceneType {
     static let storyboardName = "{{storyboard.name}}"
-    {% if storyboard.initialScene %}{% ifnot storyboard.initialScene.isBaseViewController %}
+    {% if storyboard.initialScene %}{% if not storyboard.initialScene.isBaseViewController %}
     {% set initialSceneClass %}{% if storyboard.initialScene.customClass %}{% if storyboard.initialScene.customModule %}{{storyboard.initialScene.customModule}}.{% endif %}{{storyboard.initialScene.customClass}}{% else %}UI{{storyboard.initialScene.baseType}}{% endif %}{% endset %}
 
     static func initialViewController() -> {{initialSceneClass}} {

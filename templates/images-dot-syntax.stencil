@@ -32,79 +32,30 @@ struct {{enumName}}Type: StringLiteralConvertible {
     self.init(stringLiteral: value)
   }
 }
+{% macro recursiveBlock images sp %}
+{{sp}}  {% for image in images %}
+{{sp}}  {% if not image.items %}
+{{sp}}  static let {{image.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{image.value}}"
+{{sp}}  {% else %}
+{{sp}}  enum {{image.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+{{sp}}    {% set sp2 %}{{sp}}  {% endset %}
+{{sp}}    {% call recursiveBlock image.items sp2 %}
+{{sp}}  }
+{{sp}}  {% endif %}
+{{sp}}  {% endfor %}
+{% endmacro %}
 
 // swiftlint:disable type_body_length
 enum {{enumName}} {
-  {# for correct indentation #}
-  {% set tb %}{% if catalogs.count > 1 %}  {% endif %}{% endset %}
-
-  {# CATALOG LEVEL #}
+  {% if catalogs.count > 1 %}
   {% for catalog in catalogs %}
-  {% if catalogs.count > 1 %}
   enum {{catalog.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
-  {% endif %}
-{{tb}}  {# ASSETS ROOT LEVEL #}
-{{tb}}  {% for image in catalog.assets %}
-{{tb}}  {% ifnot image.items %}
-{{tb}}  static let {{image.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{image.value}}"
-{{tb}}  {% else %}
-{{tb}}
-{{tb}}  enum {{image.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
-{{tb}}    {# LEVEL 1 #}
-{{tb}}    {% for subimage1 in image.items %}
-{{tb}}    {% ifnot subimage1.items %}
-{{tb}}    static let {{subimage1.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage1.value}}"
-{{tb}}    {% else %}
-{{tb}}
-{{tb}}    enum {{subimage1.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
-{{tb}}      {# LEVEL 2 #}
-{{tb}}      {% for subimage2 in subimage1.items %}
-{{tb}}      {% ifnot subimage2.items %}
-{{tb}}      static let {{subimage2.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage2.value}}"
-{{tb}}      {% else %}
-{{tb}}
-{{tb}}      enum {{subimage2.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
-{{tb}}        {# LEVEL 3 #}
-{{tb}}        {% for subimage3 in subimage2.items %}
-{{tb}}        {% ifnot subimage3.items %}
-{{tb}}        static let {{subimage3.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage3.value}}"
-{{tb}}        {% else %}
-{{tb}}
-{{tb}}        enum {{subimage3.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
-{{tb}}          {# LEVEL 4 #}
-{{tb}}          {% for subimage4 in subimage3.items %}
-{{tb}}          {% ifnot subimage4.items %}
-{{tb}}          static let {{subimage4.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage4.value}}"
-{{tb}}          {% else %}
-{{tb}}
-{{tb}}          enum {{subimage4.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
-{{tb}}            {# LEVEL 5 #}
-{{tb}}            {% for subimage5 in subimage4.items %}
-{{tb}}            {% ifnot subimage5.items %}
-{{tb}}            static let {{subimage5.name|swiftIdentifier|snakeToCamelCase}}: AssetType = "{{subimage5.value}}"
-{{tb}}            {% else %}
-{{tb}}            // This should not exist!
-{{tb}}            {% endif %}
-{{tb}}            {% endfor %}
-{{tb}}          }
-{{tb}}          {% endif %}
-{{tb}}          {% endfor %}
-{{tb}}        }
-{{tb}}        {% endif %}
-{{tb}}        {% endfor %}
-{{tb}}      }
-{{tb}}      {% endif %}
-{{tb}}      {% endfor %}
-{{tb}}    }
-{{tb}}    {% endif %}
-{{tb}}    {% endfor %}
-{{tb}}  }
-{{tb}}  {% endif %}
-{{tb}}  {% endfor %}
-  {% if catalogs.count > 1 %}
+    {% call recursiveBlock catalog.assets "  " %}
   }
-  {% endif %}
   {% endfor %}
+  {% else %}
+  {% call recursiveBlock catalogs.first.assets "" %}
+  {% endif %}
 }
 // swiftlint:enable type_body_length
 
