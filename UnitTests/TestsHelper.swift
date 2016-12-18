@@ -52,9 +52,12 @@ func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #
   XCTFail(error, file: file, line: line)
 }
 
-extension XCTestCase {
-  func fixturesDir(subDirectory subDir: String? = nil) -> Path {
-    guard let rsrcURL = Bundle(for: type(of: self)).resourceURL else {
+class Fixtures {
+  private static let testBundle = Bundle(for: Fixtures.self)
+  private init() {}
+
+  static func directory(subDirectory subDir: String? = nil) -> Path {
+    guard let rsrcURL = testBundle.resourceURL else {
       fatalError("Unable to find resource directory URL")
     }
     let rsrc = Path(rsrcURL.path)
@@ -63,24 +66,17 @@ extension XCTestCase {
     return rsrc + dir
   }
 
-  func fixture(_ name: String, subDirectory: String? = nil) -> Path {
-    guard let path = Bundle(for: type(of: self)).path(forResource: name, ofType: "", inDirectory: subDirectory) else {
+  static func path(for name: String, subDirectory: String? = nil) -> Path {
+    guard let path = testBundle.path(forResource: name, ofType: "", inDirectory: subDirectory) else {
       fatalError("Unable to find fixture \"\(name)\"")
     }
     return Path(path)
   }
 
-  func directory() -> Path {
-    guard let path = Bundle(for: type(of: self)).resourcePath else {
-      fatalError("Unable to get test bundle resource path")
-    }
-    return Path(path)
-  }
-
-  func fixtureString(_ name: String, encoding: String.Encoding = .utf8) -> String {
+  static func string(for name: String, encoding: String.Encoding = .utf8) -> String {
     let subDir: String? = name.hasSuffix(".stencil") ? "templates" : nil
     do {
-      return try fixture(name, subDirectory: subDir).read(encoding)
+      return try path(for: name, subDirectory: subDir).read(encoding)
     } catch let e {
       fatalError("Unable to load fixture content: \(e)")
     }

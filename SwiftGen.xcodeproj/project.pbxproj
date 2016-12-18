@@ -30,7 +30,6 @@
 		09EB0A271BDC60F000B2CF79 /* Colors-File-CustomName.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A1E1BDC60F000B2CF79 /* Colors-File-CustomName.swift.out */; };
 		09EB0A281BDC60F000B2CF79 /* Colors-File-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A1F1BDC60F000B2CF79 /* Colors-File-Default.swift.out */; };
 		09EB0A291BDC60F000B2CF79 /* Colors-List-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A201BDC60F000B2CF79 /* Colors-List-Default.swift.out */; };
-		09EB0A2A1BDC60F000B2CF79 /* Images-Entries-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A211BDC60F000B2CF79 /* Images-Entries-Default.swift.out */; };
 		09EB0A2B1BDC60F000B2CF79 /* Images-File-CustomName.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A221BDC60F000B2CF79 /* Images-File-CustomName.swift.out */; };
 		09EB0A2C1BDC60F000B2CF79 /* Images-File-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A231BDC60F000B2CF79 /* Images-File-Default.swift.out */; };
 		09EB0A2D1BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */; };
@@ -87,6 +86,8 @@
 		D7A14A8B1D64FE35002F4C65 /* Fonts-Dir-CustomName-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = D7A14A891D64FE35002F4C65 /* Fonts-Dir-CustomName-Swift3.swift.out */; };
 		D7A14A8C1D64FE35002F4C65 /* Fonts-Dir-Default-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = D7A14A8A1D64FE35002F4C65 /* Fonts-Dir-Default-Swift3.swift.out */; };
 		D7C858DF1D5D4A4E00EA2C07 /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = D7C858DE1D5D4A4E00EA2C07 /* Avenir.ttc */; };
+		DCBB14621DFAAE6B00056062 /* Storyboards-osx-Message-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = DCBB14611DFAAE6B00056062 /* Storyboards-osx-Message-Swift3.swift.out */; };
+		DCBB14661DFAB4CF00056062 /* Storyboards-osx-AdditionalImport-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = DCBB14651DFAB4CF00056062 /* Storyboards-osx-AdditionalImport-Swift3.swift.out */; };
 		DD0AB0F81DF6F9AE00978575 /* colors-bad-value.xml in Resources */ = {isa = PBXBuildFile; fileRef = DD0AB0F71DF6F9AE00978575 /* colors-bad-value.xml */; };
 		DD0AB0FC1DF7323300978575 /* colors-bad-syntax.xml in Resources */ = {isa = PBXBuildFile; fileRef = DD0AB0FB1DF7323300978575 /* colors-bad-syntax.xml */; };
 		DD0AB0FF1DF7364700978575 /* colors-bad-syntax.json in Resources */ = {isa = PBXBuildFile; fileRef = DD0AB0FD1DF7364700978575 /* colors-bad-syntax.json */; };
@@ -173,7 +174,6 @@
 		09EB0A1E1BDC60F000B2CF79 /* Colors-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-File-CustomName.swift.out"; sourceTree = "<group>"; };
 		09EB0A1F1BDC60F000B2CF79 /* Colors-File-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-File-Default.swift.out"; sourceTree = "<group>"; };
 		09EB0A201BDC60F000B2CF79 /* Colors-List-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-List-Default.swift.out"; sourceTree = "<group>"; };
-		09EB0A211BDC60F000B2CF79 /* Images-Entries-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-Entries-Default.swift.out"; sourceTree = "<group>"; };
 		09EB0A221BDC60F000B2CF79 /* Images-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-File-CustomName.swift.out"; sourceTree = "<group>"; };
 		09EB0A231BDC60F000B2CF79 /* Images-File-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-File-Default.swift.out"; sourceTree = "<group>"; };
 		09EB0A241BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-All-CustomName.swift.out"; sourceTree = "<group>"; };
@@ -228,6 +228,8 @@
 		D7A14A8A1D64FE35002F4C65 /* Fonts-Dir-Default-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Fonts-Dir-Default-Swift3.swift.out"; path = "UnitTests/expected/Fonts-Dir-Default-Swift3.swift.out"; sourceTree = SOURCE_ROOT; };
 		D7C858DE1D5D4A4E00EA2C07 /* Avenir.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Avenir.ttc; sourceTree = "<group>"; };
 		D8AC6E8E60EADE4523EA68E9 /* Pods-swiftgen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.release.xcconfig"; sourceTree = "<group>"; };
+		DCBB14611DFAAE6B00056062 /* Storyboards-osx-Message-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-osx-Message-Swift3.swift.out"; sourceTree = "<group>"; };
+		DCBB14651DFAB4CF00056062 /* Storyboards-osx-AdditionalImport-Swift3.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-osx-AdditionalImport-Swift3.swift.out"; sourceTree = "<group>"; };
 		DD0AB0F71DF6F9AE00978575 /* colors-bad-value.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "colors-bad-value.xml"; sourceTree = "<group>"; };
 		DD0AB0FB1DF7323300978575 /* colors-bad-syntax.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "colors-bad-syntax.xml"; sourceTree = "<group>"; };
 		DD0AB0FD1DF7364700978575 /* colors-bad-syntax.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "colors-bad-syntax.json"; sourceTree = "<group>"; };
@@ -407,7 +409,6 @@
 			isa = PBXGroup;
 			children = (
 				4761E0331BDE753000B9B05F /* Images-Empty.swift.out */,
-				09EB0A211BDC60F000B2CF79 /* Images-Entries-Default.swift.out */,
 				09EB0A231BDC60F000B2CF79 /* Images-File-Default.swift.out */,
 				DD445AE91DF58C76006F0A3D /* Images-File-Dot-Syntax.swift.out */,
 				DD445AE81DF58C76006F0A3D /* Images-File-Dot-Syntax-Swift3.swift.out */,
@@ -423,12 +424,14 @@
 			children = (
 				DD49E6E51DCFD7720091A3CA /* Storyboards-AdditionalImport-Swift3.swift.out */,
 				DD49E6E71DD110F50091A3CA /* Storyboards-osx-AdditionalImport-Default.swift.out */,
+				DCBB14651DFAB4CF00056062 /* Storyboards-osx-AdditionalImport-Swift3.swift.out */,
 				4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */,
 				E2F749711D03CAE800EA0BC8 /* Storyboards-osx-Empty.swift.out */,
 				09EB0A261BDC60F000B2CF79 /* Storyboards-Message-Default.swift.out */,
 				E2F749721D03CAE800EA0BC8 /* Storyboards-osx-Message-Default.swift.out */,
 				470A14E21BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out */,
 				E29942C21D1C6560002A29C4 /* Storyboards-osx-Message-Lowercase.swift.out */,
+				DCBB14611DFAAE6B00056062 /* Storyboards-osx-Message-Swift3.swift.out */,
 				470A14EA1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Default.swift.out */,
 				E2F749731D03CAE800EA0BC8 /* Storyboards-osx-Anonymous-Default.swift.out */,
 				09EB0A251BDC60F000B2CF79 /* Storyboards-All-Default.swift.out */,
@@ -605,6 +608,7 @@
 				DD0AB0FC1DF7323300978575 /* colors-bad-syntax.xml in Resources */,
 				234F7EB01DEBDC1D001B3C10 /* templates in Resources */,
 				82CC60381D22947500BA55E8 /* LocStructuredOnly.strings in Resources */,
+				DCBB14661DFAB4CF00056062 /* Storyboards-osx-AdditionalImport-Swift3.swift.out in Resources */,
 				47CB53351CFC0B2100AA19C0 /* SFNSDisplay-Regular.otf in Resources */,
 				0921FB9C1BE785DF00B488B5 /* Colors-List-RawValue.swift.out in Resources */,
 				DD0AB1021DF752CD00978575 /* colors-bad-value.txt in Resources */,
@@ -644,7 +648,6 @@
 				820D84AE1D1F9CAF00504948 /* Strings-File-Structured.swift.out in Resources */,
 				D7A14A8B1D64FE35002F4C65 /* Fonts-Dir-CustomName-Swift3.swift.out in Resources */,
 				09A87B6D1BCCA5F600D9B9F5 /* Strings-File-Default.swift.out in Resources */,
-				09EB0A2A1BDC60F000B2CF79 /* Images-Entries-Default.swift.out in Resources */,
 				D7A14A8C1D64FE35002F4C65 /* Fonts-Dir-Default-Swift3.swift.out in Resources */,
 				09A87B6E1BCCA5F600D9B9F5 /* Strings-File-CustomName.swift.out in Resources */,
 				099662301D1C8D7300366642 /* Storyboards-iOS in Resources */,
@@ -668,6 +671,7 @@
 				47CB53321CFC0B2100AA19C0 /* SFNSDisplay-Black.otf in Resources */,
 				DD49E6E61DCFD7720091A3CA /* Storyboards-AdditionalImport-Swift3.swift.out in Resources */,
 				09EB0A2D1BDC60F000B2CF79 /* Storyboards-All-CustomName.swift.out in Resources */,
+				DCBB14621DFAAE6B00056062 /* Storyboards-osx-Message-Swift3.swift.out in Resources */,
 				DD0AB0FF1DF7364700978575 /* colors-bad-syntax.json in Resources */,
 				09EB0A271BDC60F000B2CF79 /* Colors-File-CustomName.swift.out in Resources */,
 				097504271C78ED3400D1A01B /* colors.xml in Resources */,

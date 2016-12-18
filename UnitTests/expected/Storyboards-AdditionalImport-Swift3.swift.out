@@ -2,6 +2,7 @@
 
 import Foundation
 import UIKit
+import CustomSegue
 import LocationPicker
 import SlackTextViewController
 
@@ -47,18 +48,18 @@ struct StoryboardScene {
   enum AdditionalImport: String, StoryboardSceneType {
     static let storyboardName = "AdditionalImport"
 
-    static func initialViewController() -> LocationPickerViewController {
-      guard let vc = storyboard().instantiateInitialViewController() as? LocationPickerViewController else {
+    static func initialViewController() -> LocationPicker.LocationPickerViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? LocationPicker.LocationPickerViewController else {
         fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
       }
       return vc
     }
 
     case someSlackViewControllerInstanceScene = "SomeSlackViewControllerInstance"
-    static func instantiateSomeSlackViewControllerInstance() -> SLKTextViewController {
-      guard let vc = StoryboardScene.AdditionalImport.someSlackViewControllerInstanceScene.viewController() as? SLKTextViewController
+    static func instantiateSomeSlackViewControllerInstance() -> SlackTextViewController.SLKTextViewController {
+      guard let vc = StoryboardScene.AdditionalImport.someSlackViewControllerInstanceScene.viewController() as? SlackTextViewController.SLKTextViewController
       else {
-        fatalError("ViewController 'SomeSlackViewControllerInstance' is not of the expected class SLKTextViewController.")
+        fatalError("ViewController 'SomeSlackViewControllerInstance' is not of the expected class SlackTextViewController.SLKTextViewController.")
       }
       return vc
     }

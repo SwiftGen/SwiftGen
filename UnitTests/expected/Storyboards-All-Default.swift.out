@@ -2,6 +2,9 @@
 
 import Foundation
 import UIKit
+import CustomSegue
+import LocationPicker
+import SlackTextViewController
 
 // swiftlint:disable file_length
 // swiftlint:disable line_length
@@ -45,18 +48,18 @@ struct StoryboardScene {
   enum AdditionalImport: String, StoryboardSceneType {
     static let storyboardName = "AdditionalImport"
 
-    static func initialViewController() -> LocationPickerViewController {
-      guard let vc = storyboard().instantiateInitialViewController() as? LocationPickerViewController else {
+    static func initialViewController() -> LocationPicker.LocationPickerViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? LocationPicker.LocationPickerViewController else {
         fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
       }
       return vc
     }
 
     case SomeSlackViewControllerInstanceScene = "SomeSlackViewControllerInstance"
-    static func instantiateSomeSlackViewControllerInstance() -> SLKTextViewController {
-      guard let vc = StoryboardScene.AdditionalImport.SomeSlackViewControllerInstanceScene.viewController() as? SLKTextViewController
+    static func instantiateSomeSlackViewControllerInstance() -> SlackTextViewController.SLKTextViewController {
+      guard let vc = StoryboardScene.AdditionalImport.SomeSlackViewControllerInstanceScene.viewController() as? SlackTextViewController.SLKTextViewController
       else {
-        fatalError("ViewController 'SomeSlackViewControllerInstance' is not of the expected class SLKTextViewController.")
+        fatalError("ViewController 'SomeSlackViewControllerInstance' is not of the expected class SlackTextViewController.SLKTextViewController.")
       }
       return vc
     }
@@ -167,6 +170,9 @@ struct StoryboardScene {
 }
 
 struct StoryboardSegue {
+  enum AdditionalImport: String, StoryboardSegueType {
+    case Test = "test"
+  }
   enum Message: String, StoryboardSegueType {
     case CustomBack = "CustomBack"
     case Embed = "Embed"

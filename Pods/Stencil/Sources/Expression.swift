@@ -202,7 +202,7 @@ class NumericExpression: Expression, InfixOperator, CustomStringConvertible {
     return ""
   }
 
-  func compare(lhs: Float80, rhs: Float80) -> Bool {
+  func compare(lhs: Number, rhs: Number) -> Bool {
     return false
   }
 }
@@ -213,7 +213,7 @@ class MoreThanExpression: NumericExpression {
     return ">"
   }
 
-  override func compare(lhs: Float80, rhs: Float80) -> Bool {
+  override func compare(lhs: Number, rhs: Number) -> Bool {
     return lhs > rhs
   }
 }
@@ -224,7 +224,7 @@ class MoreThanEqualExpression: NumericExpression {
     return ">="
   }
 
-  override func compare(lhs: Float80, rhs: Float80) -> Bool {
+  override func compare(lhs: Number, rhs: Number) -> Bool {
     return lhs >= rhs
   }
 }
@@ -235,7 +235,7 @@ class LessThanExpression: NumericExpression {
     return "<"
   }
 
-  override func compare(lhs: Float80, rhs: Float80) -> Bool {
+  override func compare(lhs: Number, rhs: Number) -> Bool {
     return lhs < rhs
   }
 }
@@ -246,7 +246,7 @@ class LessThanEqualExpression: NumericExpression {
     return "<="
   }
 
-  override func compare(lhs: Float80, rhs: Float80) -> Bool {
+  override func compare(lhs: Number, rhs: Number) -> Bool {
     return lhs <= rhs
   }
 }
@@ -263,37 +263,37 @@ class InequalityExpression: EqualityExpression {
 }
 
 
-func toNumber(value: Any) -> Float80? {
+func toNumber(value: Any) -> Number? {
     if let value = value as? Float {
-        return Float80(value)
+        return Number(value)
     } else if let value = value as? Double {
-        return Float80(value)
+        return Number(value)
     } else if let value = value as? UInt {
-        return Float80(value)
+        return Number(value)
     } else if let value = value as? Int {
-        return Float80(value)
+        return Number(value)
     } else if let value = value as? Int8 {
-        return Float80(value)
+        return Number(value)
     } else if let value = value as? Int16 {
-        return Float80(value)
+        return Number(value)
     } else if let value = value as? Int32 {
-        return Float80(value)
+        return Number(value)
     } else if let value = value as? Int64 {
-        return Float80(value)
+        return Number(value)
     } else if let value = value as? UInt8 {
-        return Float80(value)
+        return Number(value)
     } else if let value = value as? UInt16 {
-        return Float80(value)
+        return Number(value)
     } else if let value = value as? UInt32 {
-        return Float80(value)
+        return Number(value)
     } else if let value = value as? UInt64 {
-        return Float80(value)
-    } else if let value = value as? Float80 {
+        return Number(value)
+    } else if let value = value as? Number {
         return value
     } else if let value = value as? Float64 {
-        return Float80(value)
+        return Number(value)
     } else if let value = value as? Float32 {
-        return Float80(value)
+        return Number(value)
     }
 
     return nil

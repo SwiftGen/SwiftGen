@@ -48,13 +48,20 @@ enum ColorName {
 
   var rgbaValue: UInt32 {
     switch self {
-    case .articleBody: return 0x339666ff
-    case .articleFootnote: return 0xff66ccff
-    case .articleTitle: return 0x33fe66ff
-    case .cyanColor: return 0xff66ccff
-    case .namedValue: return 0xffffffcc
-    case .nestedNamedValue: return 0xffffffcc
-    case .translucent: return 0xffffffcc
+    case .articleBody:
+      return 0x339666ff
+    case .articleFootnote:
+      return 0xff66ccff
+    case .articleTitle:
+      return 0x33fe66ff
+    case .cyanColor:
+      return 0xff66ccff
+    case .namedValue:
+      return 0xffffffcc
+    case .nestedNamedValue:
+      return 0xffffffcc
+    case .translucent:
+      return 0xffffffcc
     }
   }
 

@@ -51,7 +51,16 @@ enum L10n {
 
             case Than(ThanL10n)
             enum ThanL10n {
-              // maximum level reached, please make sure not to use keys with so many levels
+
+              case We(WeL10n)
+              enum WeL10n {
+
+                case Can(CanL10n)
+                enum CanL10n {
+                  /// DeepSettings
+                  case Handle
+                }
+              }
             }
           }
         }
@@ -81,46 +90,58 @@ extension L10n: CustomStringConvertible {
         return L10n.tr("greetings", p0, p1)
       case .ObjectOwnership(let p0, let p1, let p2):
         return L10n.tr("ObjectOwnership", p0, p1, p2)
-      case .Apples(let level1key):
+      case .Apples(let levelSubKeyApples):
 
-        switch level1key {
+        switch levelSubKeyApples {
           case .Count(let p0):
             return L10n.tr("apples.count", p0)
         }
-      case .Bananas(let level1key):
+      case .Bananas(let levelSubKeyBananas):
 
-        switch level1key {
+        switch levelSubKeyBananas {
           case .Owner(let p0, let p1):
             return L10n.tr("bananas.owner", p0, p1)
         }
-      case .Settings(let level1key):
+      case .Settings(let levelSubKeySettings):
 
-        switch level1key {
-          case .NavigationBar(let level2key):
+        switch levelSubKeySettings {
+          case .NavigationBar(let levelSubSubKeyNavigationBar):
 
-            switch level2key {
+            switch levelSubSubKeyNavigationBar {
               case .`Self`:
                 return L10n.tr("settings.navigation-bar.self")
-              case .Title(let level3key):
+              case .Title(let levelSubSubSubKeyTitle):
 
-                switch level3key {
-                  case .Even(let level4key):
+                switch levelSubSubSubKeyTitle {
+                  case .Even(let levelSubSubSubSubKeyEven):
 
-                    switch level4key {
+                    switch levelSubSubSubSubKeyEven {
                       case .Deeper:
                         return L10n.tr("settings.navigation-bar.title.even.deeper")
-                      case .Deeper(let level5key):
+                      case .Deeper(let levelSubSubSubSubSubKeyDeeper):
 
-                        switch level5key {
-                          case .Than(let level6key):
-                            // maximum level reached, please make sure not to use keys with so many levels
+                        switch levelSubSubSubSubSubKeyDeeper {
+                          case .Than(let levelSubSubSubSubSubSubKeyThan):
+
+                            switch levelSubSubSubSubSubSubKeyThan {
+                              case .We(let levelSubSubSubSubSubSubSubKeyWe):
+
+                                switch levelSubSubSubSubSubSubSubKeyWe {
+                                  case .Can(let levelSubSubSubSubSubSubSubSubKeyCan):
+
+                                    switch levelSubSubSubSubSubSubSubSubKeyCan {
+                                      case .Handle:
+                                        return L10n.tr("settings.navigation-bar.title.even.deeper.than.we.can.handle")
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
-          case .UserProfileSection(let level2key):
+          case .UserProfileSection(let levelSubSubKeyUserProfileSection):
 
-            switch level2key {
+            switch levelSubSubKeyUserProfileSection {
               case .FooterText:
                 return L10n.tr("seTTings.uSer-proFile-sectioN.footer_text")
               case .HeaderTitle:

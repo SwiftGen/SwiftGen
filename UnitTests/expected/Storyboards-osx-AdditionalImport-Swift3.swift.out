@@ -17,7 +17,7 @@ extension StoryboardSceneType {
     return NSStoryboard(name: self.storyboardName, bundle: nil)
   }
 
-  static func initialController() -> AnyObject {
+  static func initialController() -> Any {
     guard let controller = storyboard().instantiateInitialController()
     else {
       fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
@@ -27,10 +27,10 @@ extension StoryboardSceneType {
 }
 
 extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
-  func controller() -> AnyObject {
-    return Self.storyboard().instantiateControllerWithIdentifier(self.rawValue)
+  func controller() -> Any {
+    return Self.storyboard().instantiateController(withIdentifier: self.rawValue)
   }
-  static func controller(identifier: Self) -> AnyObject {
+  static func controller(identifier: Self) -> Any {
     return identifier.controller()
   }
 }
@@ -38,14 +38,14 @@ extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == Str
 protocol StoryboardSegueType: RawRepresentable { }
 
 extension NSWindowController {
-  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
-    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  func performSegue<S: StoryboardSegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
+    performSegue(withIdentifier: segue.rawValue, sender: sender)
   }
 }
 
 extension NSViewController {
-  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
-    performSegueWithIdentifier(segue.rawValue, sender: sender)
+  func performSegue<S: StoryboardSegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
+    performSegue(withIdentifier: segue.rawValue, sender: sender)
   }
 }
 
@@ -53,13 +53,16 @@ struct StoryboardScene {
   enum AdditionalImport_Osx: String, StoryboardSceneType {
     static let storyboardName = "AdditionalImport-osx"
 
-    case PreferencesScene = "Preferences"
+    case preferencesScene = "Preferences"
     static func instantiatePreferences() -> DBPrefsWindowController.DBPrefsWindowController {
-      guard let vc = StoryboardScene.AdditionalImport_Osx.PreferencesScene.controller() as? DBPrefsWindowController.DBPrefsWindowController
+      guard let vc = StoryboardScene.AdditionalImport_Osx.preferencesScene.controller() as? DBPrefsWindowController.DBPrefsWindowController
       else {
         fatalError("ViewController 'Preferences' is not of the expected class DBPrefsWindowController.DBPrefsWindowController.")
       }
       return vc
     }
   }
+}
+
+struct StoryboardSegue {
 }

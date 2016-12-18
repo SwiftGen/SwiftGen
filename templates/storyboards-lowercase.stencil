@@ -2,8 +2,8 @@
 
 import Foundation
 import UIKit
-{% for import in extraImports %}
-import {{import}}
+{% for module in modules %}
+import {{module}}
 {% endfor %}
 
 // swiftlint:disable file_length
@@ -53,8 +53,8 @@ struct {{sceneEnumName}} {
   {% if storyboard.scenes %}
   enum {{storyboardName}}: String, StoryboardSceneType {
     static let storyboardName = "{{storyboard.name}}"
-    {% if storyboard.initialScene %}{% ifnot storyboard.initialScene.isBaseViewController %}
-    {% set initialSceneClass %}{% if storyboard.initialScene.customClass %}{{storyboard.initialScene.customClass}}{% else %}UI{{storyboard.initialScene.baseType}}{% endif %}{% endset %}
+    {% if storyboard.initialScene %}{% if not storyboard.initialScene.isBaseViewController %}
+    {% set initialSceneClass %}{% if storyboard.initialScene.customClass %}{% if storyboard.initialScene.customModule %}{{storyboard.initialScene.customModule}}.{% endif %}{{storyboard.initialScene.customClass}}{% else %}UI{{storyboard.initialScene.baseType}}{% endif %}{% endset %}
 
     static func initialViewController() -> {{initialSceneClass}} {
       guard let vc = storyboard().instantiateInitialViewController() as? {{initialSceneClass}} else {
@@ -67,12 +67,12 @@ struct {{sceneEnumName}} {
     {% set sceneID %}{{scene.identifier|swiftIdentifier|lowerFirstWord}}{% endset %}
 
     case {{sceneID}} = "{{scene.identifier}}"
-    {% ifnot scene.isBaseViewController %}
+    {% if not scene.isBaseViewController %}
     {% if scene.customClass %}
-    static func {{sceneID}}ViewController() -> {{scene.customClass}} {
-      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as? {{scene.customClass}}
+    static func {{sceneID}}ViewController() -> {% if scene.customModule %}{{scene.customModule}}.{% endif %}{{scene.customClass}} {
+      guard let vc = {{sceneEnumName}}.{{storyboardName}}.{{sceneID}}.viewController() as? {% if scene.customModule %}{{scene.customModule}}.{% endif %}{{scene.customClass}}
       else {
-        fatalError("ViewController '{{scene.identifier}}' is not of the expected class {{scene.customClass}}.")
+        fatalError("ViewController '{{scene.identifier}}' is not of the expected class {% if scene.customModule %}{{scene.customModule}}.{% endif %}{{scene.customClass}}.")
       }
       return vc
     }
@@ -95,8 +95,8 @@ struct {{sceneEnumName}} {
   {% else %}
   enum {{storyboardName}}: StoryboardSceneType {
     static let storyboardName = "{{storyboard.name}}"
-    {% if storyboard.initialScene %}{% ifnot storyboard.initialScene.isBaseViewController %}
-    {% set initialSceneClass %}{% if storyboard.initialScene.customClass %}{{storyboard.initialScene.customClass}}{% else %}UI{{storyboard.initialScene.baseType}}{% endif %}{% endset %}
+    {% if storyboard.initialScene %}{% if not storyboard.initialScene.isBaseViewController %}
+    {% set initialSceneClass %}{% if storyboard.initialScene.customClass %}{% if storyboard.initialScene.customModule %}{{storyboard.initialScene.customModule}}.{% endif %}{{storyboard.initialScene.customClass}}{% else %}UI{{storyboard.initialScene.baseType}}{% endif %}{% endset %}
 
     static func initialViewController() -> {{initialSceneClass}} {
       guard let vc = storyboard().instantiateInitialViewController() as? {{initialSceneClass}} else {
