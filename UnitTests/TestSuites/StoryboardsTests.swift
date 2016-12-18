@@ -147,15 +147,8 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    // additional import statements
-    let extraImports = [
-      "LocationPicker",
-      "SlackTextViewController"
-    ]
-
     let template = GenumTemplate(templateString: Fixtures.string(for: "storyboards-swift3.stencil"), environment: genumEnvironment())
-    let context = parser.stencilContext(sceneEnumName: "StoryboardScene", segueEnumName: "StoryboardSegue", extraImports: extraImports)
-    let result = try! template.render(context)
+    let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Storyboards-AdditionalImport-Swift3.swift.out")
     XCTDiffStrings(result, expected)
@@ -260,14 +253,8 @@ class StoryboardsOSXTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    // additional import statements
-    let extraImports = [
-      "DBPrefsWindowController"
-    ]
-
     let template = GenumTemplate(templateString: Fixtures.string(for: "storyboards-osx-default.stencil"), environment: genumEnvironment())
-    let context = parser.stencilContext(sceneEnumName: "StoryboardScene", segueEnumName: "StoryboardSegue", extraImports: extraImports)
-    let result = try! template.render(context)
+    let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Storyboards-osx-AdditionalImport-Default.swift.out")
     XCTDiffStrings(result, expected)
@@ -280,15 +267,9 @@ class StoryboardsOSXTests: XCTestCase {
     } catch {
       print("Error: \(error.localizedDescription)")
     }
-    
-    // additional import statements
-    let extraImports = [
-      "DBPrefsWindowController"
-    ]
-    
+
     let template = GenumTemplate(templateString: Fixtures.string(for: "storyboards-osx-swift3.stencil"), environment: genumEnvironment())
-    let context = parser.stencilContext(sceneEnumName: "StoryboardScene", segueEnumName: "StoryboardSegue", extraImports: extraImports)
-    let result = try! template.render(context)
+    let result = try! template.render(parser.stencilContext())
     
     let expected = Fixtures.string(for: "Storyboards-osx-AdditionalImport-Swift3.swift.out")
     XCTDiffStrings(result, expected)

@@ -19,6 +19,12 @@ _None_
 * Images: new dot-syntax template, use `dot-syntax-swift3` or `dot-syntax` (for Swift 2.3).  
   [David Jennes](https://github.com/djbe)
   [#206](https://github.com/AliSoftware/SwiftGen/pull/206)
+* Storyboards: automatically detect the correct modules that need to be
+  imported. The `--import` option has therefore been deprecated, as well as the
+  `extraImports` template variable. Instead use the the new `modules` variable,
+   which offers the same functionality.  
+  [David Jennes](https://github.com/djbe)
+  [#243](https://github.com/AliSoftware/SwiftGen/pull/243)
 
 ### Internal changes
 
