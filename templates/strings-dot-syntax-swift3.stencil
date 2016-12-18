@@ -20,7 +20,7 @@ enum {{enumName}} {
     return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
   }
   {% else %}
-  static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
+  static let `{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}}` = {{enumName}}.tr("{{string.key}}")
   {% endif %}
   {% endfor %}
   {% if structuredStrings.subenums %}
@@ -36,7 +36,7 @@ enum {{enumName}} {
       return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
     }
     {% else %}
-    static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
+    static let `{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}}` = {{enumName}}.tr("{{string.key}}")
     {% endif %}
     {% endfor %}
     {% endif %}
@@ -53,7 +53,7 @@ enum {{enumName}} {
         return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
       }
       {% else %}
-      static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
+      static let `{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}}` = {{enumName}}.tr("{{string.key}}")
       {% endif %}
       {% endfor %}
       {% endif %}
@@ -70,7 +70,7 @@ enum {{enumName}} {
           return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
         }
         {% else %}
-        static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
+        static let `{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}}` = {{enumName}}.tr("{{string.key}}")
         {% endif %}
         {% endfor %}
         {% endif %}
@@ -87,7 +87,7 @@ enum {{enumName}} {
             return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
           }
           {% else %}
-          static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
+          static let `{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}}` = {{enumName}}.tr("{{string.key}}")
           {% endif %}
           {% endfor %}
           {% endif %}
@@ -104,7 +104,7 @@ enum {{enumName}} {
               return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
             }
             {% else %}
-            static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
+            static let `{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}}` = {{enumName}}.tr("{{string.key}}")
             {% endif %}
             {% endfor %}
             {% endif %}
@@ -121,7 +121,7 @@ enum {{enumName}} {
                 return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
               }
               {% else %}
-              static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
+              static let `{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}}` = {{enumName}}.tr("{{string.key}}")
               {% endif %}
               {% endfor %}
               {% endif %}
