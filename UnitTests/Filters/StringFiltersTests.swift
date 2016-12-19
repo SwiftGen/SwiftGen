@@ -29,9 +29,9 @@ class StringFiltersTests: XCTestCase {
       "a__b__c": "a__b__c",
       "__y_z!": "__y_z!",
       "PLEASESTOPSCREAMING": "pleasestopscreaming",
-      "PLEASESTOPSCREAMING!": "pleasestopscreaminG!",
-      "PLEASE_STOP_SCREAMING": "pleasE_STOP_SCREAMING",
-      "PLEASE_STOP_SCREAMING!": "pleasE_STOP_SCREAMING!"
+      "PLEASESTOPSCREAMING!": "pleasestopscreaming!",
+      "PLEASE_STOP_SCREAMING": "please_STOP_SCREAMING",
+      "PLEASE_STOP_SCREAMING!": "please_STOP_SCREAMING!"
     ]
 
     for (input, expected) in expectations {

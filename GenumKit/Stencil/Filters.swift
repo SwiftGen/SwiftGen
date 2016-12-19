@@ -35,7 +35,8 @@ struct StringFilters {
 
   /* - If the string starts with only one uppercase letter, lowercase that first letter
    * - If the string starts with multiple uppercase letters, lowercase those first letters
-   *   up to the one before the last uppercase one
+   *   up to the one before the last uppercase one, but only if the last one is followed by
+   *   a lowercase character.
    * e.g. "PeoplePicker" gives "peoplePicker" but "URLChooser" gives "urlChooser"
    */
   static func lowerFirstWord(_ value: Any?) throws -> Any? {
@@ -47,7 +48,9 @@ struct StringFilters {
     while let scalar = UnicodeScalar(scalars[idx].value), cs.contains(scalar) && idx <= scalars.endIndex {
       idx = scalars.index(after: idx)
     }
-    if idx > scalars.index(after: start) && idx < scalars.endIndex {
+    if idx > scalars.index(after: start) && idx < scalars.endIndex,
+      let scalar = UnicodeScalar(scalars[idx].value),
+      CharacterSet.lowercaseLetters.contains(scalar) {
       idx = scalars.index(before: idx)
     }
     let transformed = String(scalars[start..<idx]).lowercased() + String(scalars[idx..<scalars.endIndex])
