@@ -7,7 +7,7 @@
 ### Bug Fixes
 
 * Strings: fix issue with `dot-syntax-swift3` where function definitions were
-  not swift3 guidelines compliant.  
+  not Swift 3 guidelines compliant.  
   [David Jennes](https://github.com/djbe)
   [#248](https://github.com/AliSoftware/SwiftGen/pull/248)
 
@@ -94,7 +94,7 @@
 * Fix swift 3 storyboard templates to be compliant with swift 3 api design guidelines.  
   [Afonso](https://github.com/afonsograca)
   [#194](https://github.com/AliSoftware/SwiftGen/pull/194)
-* Remove the `key` param label from the `tr` function for Localized String in the swift3 template.  
+* Remove the `key` param label from the `tr` function for Localized String in the Swift 3 template.  
   [AndrewSB](https://github.com/AndrewSB)
   [#190](https://github.com/AliSoftware/SwiftGen/pull/190)
 * The `swiftgen images` command now uses the `actool` utility to parse asset catalogs,
