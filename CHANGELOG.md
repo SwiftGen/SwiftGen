@@ -6,7 +6,10 @@
 
 ### Bug Fixes
 
-_None_
+* Strings: fix issue with `dot-syntax-swift3` where function definitions were
+  not swift3 guidelines compliant.  
+  [David Jennes](https://github.com/djbe)
+  [#248](https://github.com/AliSoftware/SwiftGen/pull/248)
 
 ### New Features
 
