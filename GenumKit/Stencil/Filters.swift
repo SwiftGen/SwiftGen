@@ -35,7 +35,8 @@ struct StringFilters {
 
   /* - If the string starts with only one uppercase letter, lowercase that first letter
    * - If the string starts with multiple uppercase letters, lowercase those first letters
-   *   up to the one before the last uppercase one
+   *   up to the one before the last uppercase one, but only if the last one is followed by
+   *   a lowercase character.
    * e.g. "PeoplePicker" gives "peoplePicker" but "URLChooser" gives "urlChooser"
    */
   static func lowerFirstWord(_ value: Any?) throws -> Any? {
@@ -47,7 +48,9 @@ struct StringFilters {
     while let scalar = UnicodeScalar(scalars[idx].value), cs.contains(scalar) && idx <= scalars.endIndex {
       idx = scalars.index(after: idx)
     }
-    if idx > scalars.index(after: start) && idx < scalars.endIndex {
+    if idx > scalars.index(after: start) && idx < scalars.endIndex,
+      let scalar = UnicodeScalar(scalars[idx].value),
+      CharacterSet.lowercaseLetters.contains(scalar) {
       idx = scalars.index(before: idx)
     }
     let transformed = String(scalars[start..<idx]).lowercased() + String(scalars[idx..<scalars.endIndex])
@@ -75,7 +78,7 @@ struct StringFilters {
 
   static func snakeToCamelCaseNoPrefix(_ value: Any?) throws -> Any? {
     guard let string = value as? String else { throw FilterError.invalidInputType }
-    let comps = snakecase(string).components(separatedBy: "_")
+    let comps = try snakecase(string).components(separatedBy: "_")
     return comps.map { $0.capitalized }.joined(separator: "")
   }
 
@@ -85,14 +88,20 @@ struct StringFilters {
    
   - returns: The string snake cased from either snake_cased or camelCased string.
   */
-  private static func snakecase(_ string: String) -> String {
-    let longUpperRegex = try! NSRegularExpression(pattern: "([A-Z\\d]+)([A-Z][a-z])", options: .dotMatchesLineSeparators)
-    let camelCasedRegex = try! NSRegularExpression(pattern: "([a-z\\d])([A-Z])", options: .dotMatchesLineSeparators)
+  private static func snakecase(_ string: String) throws -> String {
+    let longUpper = try NSRegularExpression(pattern: "([A-Z\\d]+)([A-Z][a-z])", options: .dotMatchesLineSeparators)
+    let camelCased = try NSRegularExpression(pattern: "([a-z\\d])([A-Z])", options: .dotMatchesLineSeparators)
 
     let fullRange = NSRange(location: 0, length: string.unicodeScalars.count)
-    var snakecasedString = longUpperRegex.stringByReplacingMatches(in: string, options: .reportCompletion, range: fullRange, withTemplate: "$1_$2")
-    snakecasedString = camelCasedRegex.stringByReplacingMatches(in: snakecasedString, options: .reportCompletion, range: fullRange, withTemplate: "$1_$2")
-    return snakecasedString.replacingOccurrences(of: "-", with: "_")
+    var result = longUpper.stringByReplacingMatches(in: string,
+                                                    options: .reportCompletion,
+                                                    range: fullRange,
+                                                    withTemplate: "$1_$2")
+    result = camelCased.stringByReplacingMatches(in: result,
+                                                 options: .reportCompletion,
+                                                 range: fullRange,
+                                                 withTemplate: "$1_$2")
+    return result.replacingOccurrences(of: "-", with: "_")
   }
 }
 

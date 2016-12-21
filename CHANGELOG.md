@@ -6,7 +6,13 @@
 
 ### Bug Fixes
 
-_None_
+* Strings: fix issue with `dot-syntax-swift3` where function definitions were
+  not Swift 3 guidelines compliant.  
+  [David Jennes](https://github.com/djbe)
+  [#248](https://github.com/AliSoftware/SwiftGen/pull/248)
+* Snake cased keys with uppercase letters are correctly camel cased again.
+  [Cihat Gündüz](https://github.com/Dschee)
+  [#226](https://github.com/AliSoftware/SwiftGen/issues/226)
 
 ### New Features
 
@@ -46,12 +52,10 @@ _None_
 * SwiftLint: Remove `switch_case_on_newline` warning for generated color file.  
   [Mickael Titeca](https://github.com/MickaCapi)
   [#239](https://github.com/AliSoftware/SwiftGen/pull/239)
-
-### Bug Fixes
-
-* Snake cased keys with uppercase letters are correctly camel cased again.
-  [Cihat Gündüz](https://github.com/Dschee)
-  [#226](https://github.com/AliSoftware/SwiftGen/issues/226)
+* Stencil: better string filter testing and fixed a small issue with
+  `lowerFirstWord`.  
+  [David Jennes](https://github.com/djbe)
+  [#245](https://github.com/AliSoftware/SwiftGen/pull/245)
 
 ## 4.0.1
 
@@ -97,7 +101,7 @@ _None_
 * Fix swift 3 storyboard templates to be compliant with swift 3 api design guidelines.  
   [Afonso](https://github.com/afonsograca)
   [#194](https://github.com/AliSoftware/SwiftGen/pull/194)
-* Remove the `key` param label from the `tr` function for Localized String in the swift3 template.  
+* Remove the `key` param label from the `tr` function for Localized String in the Swift 3 template.  
   [AndrewSB](https://github.com/AndrewSB)
   [#190](https://github.com/AliSoftware/SwiftGen/pull/190)
 * The `swiftgen images` command now uses the `actool` utility to parse asset catalogs,
