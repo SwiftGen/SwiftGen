@@ -49,6 +49,10 @@
 * SwiftLint: Remove `switch_case_on_newline` warning for generated color file.  
   [Mickael Titeca](https://github.com/MickaCapi)
   [#239](https://github.com/AliSoftware/SwiftGen/pull/239)
+* Stencil: better string filter testing and fixed a small issue with
+  `lowerFirstWord`.  
+  [David Jennes](https://github.com/djbe)
+  [#245](https://github.com/AliSoftware/SwiftGen/pull/245)
 
 ## 4.0.1
 
