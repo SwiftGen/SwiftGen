@@ -78,13 +78,25 @@ struct StringFilters {
 
   static func snakeToCamelCaseNoPrefix(_ value: Any?) throws -> Any? {
     guard let string = value as? String else { throw FilterError.invalidInputType }
-    let comps = try snakecase(string).components(separatedBy: "_")
-    return comps.map { $0.capitalized }.joined(separator: "")
+
+    if try containsAnyLowercasedChar(string) {
+      let comps = string.components(separatedBy: "_")
+      return comps.map { titlecase($0) }.joined(separator: "")
+    } else {
+      let comps = try snakecase(string).components(separatedBy: "_")
+      return comps.map { $0.capitalized }.joined(separator: "")
+    }
   }
 
   private static func titlecase(_ string: String) -> String {
     guard let first = string.unicodeScalars.first else { return string }
     return String(first).uppercased() + String(string.unicodeScalars.dropFirst())
+  }
+
+  private static func containsAnyLowercasedChar(_ string: String) throws -> Bool {
+    let lowercaseCharRegex = try NSRegularExpression(pattern: "[a-z]", options: .dotMatchesLineSeparators)
+    let fullRange = NSRange(location: 0, length: string.unicodeScalars.count)
+    return lowercaseCharRegex.firstMatch(in: string, options: .reportCompletion, range: fullRange) != nil
   }
 
   /**
