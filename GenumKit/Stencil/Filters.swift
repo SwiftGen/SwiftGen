@@ -98,14 +98,8 @@ struct StringFilters {
     let camelCased = try NSRegularExpression(pattern: "([a-z\\d])([A-Z])", options: .dotMatchesLineSeparators)
 
     let fullRange = NSRange(location: 0, length: string.unicodeScalars.count)
-    var result = longUpper.stringByReplacingMatches(in: string,
-                                                    options: .reportCompletion,
-                                                    range: fullRange,
-                                                    withTemplate: "$1_$2")
-    result = camelCased.stringByReplacingMatches(in: result,
-                                                 options: .reportCompletion,
-                                                 range: fullRange,
-                                                 withTemplate: "$1_$2")
+    var result = longUpper.stringByReplacingMatches(in: string, options: .reportCompletion, range: fullRange, withTemplate: "$1_$2")
+    result = camelCased.stringByReplacingMatches(in: result, options: .reportCompletion, range: fullRange, withTemplate: "$1_$2")
     return result.replacingOccurrences(of: "-", with: "_")
   }
 }
