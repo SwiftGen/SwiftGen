@@ -30,13 +30,13 @@ extension Font {
 }
 
 struct FontFamily {
-  enum SfNsDisplay: String, FontConvertible {
+  enum SFNSDisplay: String, FontConvertible {
     case black = ".SFNSDisplay-Black"
     case bold = ".SFNSDisplay-Bold"
     case heavy = ".SFNSDisplay-Heavy"
     case regular = ".SFNSDisplay-Regular"
   }
-  enum SfNsText: String, FontConvertible {
+  enum SFNSText: String, FontConvertible {
     case bold = ".SFNSText-Bold"
     case heavy = ".SFNSText-Heavy"
     case regular = ".SFNSText-Regular"

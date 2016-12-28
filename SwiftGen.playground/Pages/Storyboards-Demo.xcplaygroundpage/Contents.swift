@@ -60,9 +60,9 @@ struct StoryboardScene {
             return vc
         }
 
-        case acceptCguScene = "Accept-CGU"
-        static func instantiateAcceptCgu() -> UIViewController {
-            return StoryboardScene.Wizard.acceptCguScene.viewController()
+        case acceptCGUScene = "Accept-CGU"
+        static func instantiateAcceptCGU() -> UIViewController {
+            return StoryboardScene.Wizard.acceptCGUScene.viewController()
         }
 
         case createAccountScene = "CreateAccount"

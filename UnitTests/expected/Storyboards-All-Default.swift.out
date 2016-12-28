@@ -109,7 +109,7 @@ struct StoryboardScene {
     }
 
     case URLChooserScene = "URLChooser"
-    static func instantiateUrlChooser() -> XXPickerViewController {
+    static func instantiateURLChooser() -> XXPickerViewController {
       guard let vc = StoryboardScene.Message.URLChooserScene.viewController() as? XXPickerViewController
       else {
         fatalError("ViewController 'URLChooser' is not of the expected class XXPickerViewController.")
@@ -140,7 +140,7 @@ struct StoryboardScene {
     }
 
     case Accept_CGUScene = "Accept-CGU"
-    static func instantiateAcceptCgu() -> UIViewController {
+    static func instantiateAcceptCGU() -> UIViewController {
       return StoryboardScene.Wizard.Accept_CGUScene.viewController()
     }
 
