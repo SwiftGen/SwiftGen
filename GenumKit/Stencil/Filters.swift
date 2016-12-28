@@ -59,7 +59,7 @@ struct StringFilters {
 
   static func titlecase(_ value: Any?) throws -> Any? {
     guard let string = value as? String else { throw FilterError.invalidInputType }
-    return string.capitalized
+    return titlecase(string)
   }
 
   static func snakeToCamelCase(_ value: Any?) throws -> Any? {
@@ -80,6 +80,11 @@ struct StringFilters {
     guard let string = value as? String else { throw FilterError.invalidInputType }
     let comps = try snakecase(string).components(separatedBy: "_")
     return comps.map { $0.capitalized }.joined(separator: "")
+  }
+
+  private static func titlecase(_ string: String) -> String {
+    guard let first = string.unicodeScalars.first else { return string }
+    return String(first).uppercased() + String(string.unicodeScalars.dropFirst())
   }
 
   /**
