@@ -1,0 +1,26 @@
+{
+  "name": "StencilSwiftKit",
+  "version": "0.0.1",
+  "summary": "Stencil additions dedicated for Swift code generation",
+  "description": "TODO",
+  "homepage": "https://github.com/AliSoftware/StencilSwiftKit",
+  "license": "MIT",
+  "authors": {
+    "Olivier Halligon": "olivier@halligon.net"
+  },
+  "social_media_url": "https://twitter.com/aligatr",
+  "platforms": {
+    "osx": "10.9"
+  },
+  "source": {
+    "git": "https://github.com/AliSoftware/StencilSwiftKit.git",
+    "tag": "0.0.1"
+  },
+  "source_files": "Sources/**/*.swift",
+  "dependencies": {
+    "Stencil": [
+      "~> 0.7.0"
+    ]
+  },
+  "frameworks": "Foundation"
+}
