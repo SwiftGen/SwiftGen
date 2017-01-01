@@ -6,8 +6,9 @@
 
 import Commander
 import PathKit
-import GenumKit
 import Stencil
+import StencilSwiftKit
+import SwiftGenKit
 
 let colorsCommand = command(
   outputOption,
@@ -42,7 +43,7 @@ let colorsCommand = command(
     let templateRealPath = try findTemplate(
       prefix: "colors", templateShortName: templateName, templateFullPath: templatePath
     )
-    let template = try GenumTemplate(templateString: templateRealPath.read(), environment: genumEnvironment())
+    let template = try SwiftTemplate(templateString: templateRealPath.read(), environment: stencilSwiftEnvironment())
     let context = parser.stencilContext(enumName: enumName)
     let rendered = try template.render(context)
     output.write(content: rendered, onlyIfChanged: true)

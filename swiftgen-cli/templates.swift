@@ -6,7 +6,7 @@
 
 import Commander
 import PathKit
-import GenumKit
+//import GenumKit
 
 let allSubcommands = ["colors", "images", "storyboards", "strings", "fonts"]
 

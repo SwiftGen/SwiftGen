@@ -6,7 +6,8 @@
 
 import Commander
 import PathKit
-import GenumKit
+import StencilSwiftKit
+import SwiftGenKit
 
 let storyboardsCommand = command(
   outputOption,
@@ -38,7 +39,7 @@ let storyboardsCommand = command(
       templateShortName: templateName,
       templateFullPath: templatePath
     )
-    let template = try GenumTemplate(templateString: templateRealPath.read(), environment: genumEnvironment())
+    let template = try SwiftTemplate(templateString: templateRealPath.read(), environment: stencilSwiftEnvironment())
     let context = parser.stencilContext(
       sceneEnumName: sceneEnumName, segueEnumName: segueEnumName
     )

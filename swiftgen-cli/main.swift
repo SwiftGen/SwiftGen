@@ -5,8 +5,9 @@
 //
 
 import Commander
-import GenumKit
 import PathKit
+import StencilSwiftKit
+import SwiftGenKit
 
 // MARK: Common
 
@@ -45,6 +46,6 @@ let main = Group {
   $0.addCommand("fonts", "generate code for your UIFonts", fontsCommand)
 }
 
-let version = Bundle(for: GenumKit.GenumTemplate.self)
+let version = Bundle(for: SwiftTemplate.self)
   .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
 main.run("SwiftGen v\(version)")
