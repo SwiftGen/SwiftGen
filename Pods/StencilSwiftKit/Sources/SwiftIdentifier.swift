@@ -1,6 +1,6 @@
 //
-// GenumKit
-// Copyright (c) 2015 Olivier Halligon
+// StencilSwiftKit
+// Copyright (c) 2017 SwiftGen
 // MIT Licence
 //
 

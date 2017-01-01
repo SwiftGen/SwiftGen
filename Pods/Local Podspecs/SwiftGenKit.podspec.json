@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "summary": "The SwiftGen framework responsible for parsing assets and turn them in a dictionary representation suitable for Stencil templates",
   "description": "TODO",
-  "homepage": "https://github.com/AliSoftware/SwiftGenKit",
+  "homepage": "https://github.com/SwiftGen/SwiftGenKit",
   "license": "MIT",
   "authors": {
     "Olivier Halligon": "olivier@halligon.net"
@@ -13,7 +13,7 @@
     "osx": "10.9"
   },
   "source": {
-    "git": "https://github.com/AliSoftware/SwiftGenKit.git",
+    "git": "https://github.com/SwiftGen/SwiftGenKit.git",
     "tag": "0.0.1"
   },
   "source_files": "Sources/**/*.swift",

@@ -1,6 +1,6 @@
 //
-// GenumKit
-// Copyright (c) 2015 Olivier Halligon
+// SwiftGenKit
+// Copyright (c) 2017 SwiftGen
 // MIT Licence
 //
 
