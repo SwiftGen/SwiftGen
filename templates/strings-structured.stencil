@@ -13,13 +13,13 @@ enum {{enumName}} {
 {% macro enumBlock strings sp %}
 {{sp}}  {% for string in strings.strings %}
 {{sp}}  /// {{string.translation}}
-{{sp}}  case {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}{% if string.params %}({{string.params.types|join}}){% endif %}
+{{sp}}  case {{string.keytail|swiftIdentifier|snakeToCamelCase|escapeReservedKeywords}}{% if string.params %}({{string.params.types|join}}){% endif %}
 {{sp}}  {% endfor %}
 {{sp}}  {% if strings.subenums %}
 {{sp}}  {% for subenum in strings.subenums %}
 
-{{sp}}  case {{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}({{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase}}{{enumName}})
-{{sp}}  enum {{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase}}{{enumName}} {
+{{sp}}  case {{subenum.name|swiftIdentifier|snakeToCamelCase|escapeReservedKeywords}}({{subenum.name|swiftIdentifier|snakeToCamelCase}}{{enumName}})
+{{sp}}  enum {{subenum.name|swiftIdentifier|snakeToCamelCase}}{{enumName}} {
 {{sp}}    {% set sp2 %}{{sp}}  {% endset %}
 {{sp}}    {% call enumBlock subenum sp2 %}
 {{sp}}  }
@@ -33,17 +33,17 @@ extension {{enumName}}: CustomStringConvertible {
 {% macro extensionBlock strings sp keySuffix %}
 {{sp}}  {% for string in strings.strings %}
 {{sp}}  {% if string.params %}
-{{sp}}  case .{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}({{string.params.declarations|join}}):
+{{sp}}  case .{{string.keytail|swiftIdentifier|snakeToCamelCase|escapeReservedKeywords}}({{string.params.declarations|join}}):
 {{sp}}    return {{enumName}}.tr("{{string.key}}", {{string.params.names|join}})
 {{sp}}  {% else %}
-{{sp}}  case .{{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}:
+{{sp}}  case .{{string.keytail|swiftIdentifier|snakeToCamelCase|escapeReservedKeywords}}:
 {{sp}}    return {{enumName}}.tr("{{string.key}}")
 {{sp}}  {% endif %}
 {{sp}}  {% endfor %}
 {{sp}}  {% if strings.subenums %}
 {{sp}}  {% for subenum in strings.subenums %}
-{{sp}}  {% set subkey %}levelSub{{keySuffix}}Key{{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}{% endset %}
-{{sp}}  case .{{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase|escapeReservedKeywords}}(let {{subkey}}):
+{{sp}}  {% set subkey %}levelSub{{keySuffix}}Key{{subenum.name|swiftIdentifier|snakeToCamelCase|escapeReservedKeywords}}{% endset %}
+{{sp}}  case .{{subenum.name|swiftIdentifier|snakeToCamelCase|escapeReservedKeywords}}(let {{subkey}}):
 
 {{sp}}    switch {{subkey}} {
 {{sp}}    {% set sp2 %}{{sp}}    {% endset %}

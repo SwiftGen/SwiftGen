@@ -90,10 +90,10 @@ class StringFiltersTests: XCTestCase {
       "URLChooser": "URLChooser",
       "a__b__c": "ABC",
       "__y_z!": "__YZ!",
-      "PLEASESTOPSCREAMING": "PLEASESTOPSCREAMING",
-      "PLEASESTOPSCREAMING!": "PLEASESTOPSCREAMING!",
-      "PLEASE_STOP_SCREAMING": "PLEASESTOPSCREAMING",
-      "PLEASE_STOP_SCREAMING!": "PLEASESTOPSCREAMING!"
+      "PLEASESTOPSCREAMING": "Pleasestopscreaming",
+      "PLEASESTOPSCREAMING!": "Pleasestopscreaming!",
+      "PLEASE_STOP_SCREAMING": "PleaseStopScreaming",
+      "PLEASE_STOP_SCREAMING!": "PleaseStopScreaming!"
     ]
 
     for (input, expected) in expectations {
@@ -121,10 +121,10 @@ class StringFiltersTests: XCTestCase {
       "URLChooser": "URLChooser",
       "a__b__c": "ABC",
       "__y_z!": "YZ!",
-      "PLEASESTOPSCREAMING": "PLEASESTOPSCREAMING",
-      "PLEASESTOPSCREAMING!": "PLEASESTOPSCREAMING!",
-      "PLEASE_STOP_SCREAMING": "PLEASESTOPSCREAMING",
-      "PLEASE_STOP_SCREAMING!": "PLEASESTOPSCREAMING!"
+      "PLEASESTOPSCREAMING": "Pleasestopscreaming",
+      "PLEASESTOPSCREAMING!": "Pleasestopscreaming!",
+      "PLEASE_STOP_SCREAMING": "PleaseStopScreaming",
+      "PLEASE_STOP_SCREAMING!": "PleaseStopScreaming!"
     ]
 
     for (input, expected) in expectations {

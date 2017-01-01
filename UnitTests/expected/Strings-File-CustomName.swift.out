@@ -28,7 +28,7 @@ enum XCTLoc {
   /// Here you can change some user profile settings.
   case SeTTingsUSerProFileSectioNFooterText
   /// User Profile Settings
-  case SETTINGSUSERPROFILESECTIONHEADERTITLE
+  case SettingsUserProfileSectionHeaderTitle
 }
 // swiftlint:enable type_body_length
 
@@ -57,7 +57,7 @@ extension XCTLoc: CustomStringConvertible {
         return XCTLoc.tr("settings.navigation-bar.title.even.deeper.than.we.can.handle")
       case .SeTTingsUSerProFileSectioNFooterText:
         return XCTLoc.tr("seTTings.uSer-proFile-sectioN.footer_text")
-      case .SETTINGSUSERPROFILESECTIONHEADERTITLE:
+      case .SettingsUserProfileSectionHeaderTitle:
         return XCTLoc.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
     }
   }

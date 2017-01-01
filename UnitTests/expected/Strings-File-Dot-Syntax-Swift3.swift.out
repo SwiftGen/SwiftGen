@@ -71,7 +71,7 @@ enum L10n {
       /// Here you can change some user profile settings.
       static let footerText = L10n.tr("seTTings.uSer-proFile-sectioN.footer_text")
       /// User Profile Settings
-      static let headertitle = L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
+      static let headerTitle = L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
     }
   }
 }

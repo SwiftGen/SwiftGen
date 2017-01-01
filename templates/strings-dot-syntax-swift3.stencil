@@ -16,17 +16,17 @@ import Foundation
 {{sp}}  {% for string in strings.strings %}
 {{sp}}  /// {{string.translation}}
 {{sp}}  {% if string.params %}
-{{sp}}  static func {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}}({% call parametersBlock string.params %}) -> String {
+{{sp}}  static func {{string.keytail|swiftIdentifier|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}}({% call parametersBlock string.params %}) -> String {
 {{sp}}    return {{enumName}}.tr("{{string.key}}", {% call argumentsBlock string.params %})
 {{sp}}  }
 {{sp}}  {% else %}
-{{sp}}  static let {{string.keytail|swiftIdentifier|titlecase|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
+{{sp}}  static let {{string.keytail|swiftIdentifier|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
 {{sp}}  {% endif %}
 {{sp}}  {% endfor %}
 {{sp}}  {% if strings.subenums %}
 {{sp}}  {% for subenum in strings.subenums %}
 
-{{sp}}  enum {{subenum.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+{{sp}}  enum {{subenum.name|swiftIdentifier|snakeToCamelCase}} {
 {{sp}}    {% set sp2 %}{{sp}}  {% endset %}
 {{sp}}    {% call recursiveBlock subenum sp2 %}
 {{sp}}  }

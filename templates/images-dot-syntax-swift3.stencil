@@ -37,7 +37,7 @@ struct {{enumName}}Type: ExpressibleByStringLiteral {
 {{sp}}  {% if not image.items %}
 {{sp}}  static let {{image.name|swiftIdentifier|snakeToCamelCase|lowerFirstWord}}: AssetType = "{{image.value}}"
 {{sp}}  {% else %}
-{{sp}}  enum {{image.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+{{sp}}  enum {{image.name|swiftIdentifier|snakeToCamelCase}} {
 {{sp}}    {% set sp2 %}{{sp}}  {% endset %}
 {{sp}}    {% call recursiveBlock image.items sp2 %}
 {{sp}}  }
@@ -49,7 +49,7 @@ struct {{enumName}}Type: ExpressibleByStringLiteral {
 enum {{enumName}} {
   {% if catalogs.count > 1 %}
   {% for catalog in catalogs %}
-  enum {{catalog.name|swiftIdentifier|titlecase|snakeToCamelCase}} {
+  enum {{catalog.name|swiftIdentifier|snakeToCamelCase}} {
     {% call recursiveBlock catalog.assets "  " %}
   }
   {% endfor %}

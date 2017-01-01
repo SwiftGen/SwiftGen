@@ -72,7 +72,7 @@ enum L10n {
       /// Here you can change some user profile settings.
       case FooterText
       /// User Profile Settings
-      case HEADERTITLE
+      case HeaderTitle
     }
   }
 }
@@ -144,7 +144,7 @@ extension L10n: CustomStringConvertible {
             switch levelSubSubKeyUserProfileSection {
               case .FooterText:
                 return L10n.tr("seTTings.uSer-proFile-sectioN.footer_text")
-              case .HEADERTITLE:
+              case .HeaderTitle:
                 return L10n.tr("SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
             }
         }
