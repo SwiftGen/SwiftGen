@@ -5,7 +5,7 @@
 //
 
 import XCTest
-import GenumKit
+@testable import SwiftGenKit
 import PathKit
 
 /**

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import GenumKit
+@testable import SwiftGenKit
 import AppKit.NSFont
 
 class FontsTests: XCTestCase {

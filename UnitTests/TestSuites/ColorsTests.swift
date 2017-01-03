@@ -5,8 +5,8 @@
 //
 
 import XCTest
-import GenumKit
 import PathKit
+import SwiftGenKit
 
 // MARK: - Tests for TXT files
 

@@ -5,7 +5,7 @@
 //
 
 import XCTest
-@testable import GenumKit
+@testable import SwiftGenKit
 
 class SwiftIdentifierTests: XCTestCase {
 
