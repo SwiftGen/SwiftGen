@@ -1,6 +1,6 @@
 PODS:
   - Commander (0.6.0)
-  - GenumKit (4.0.1):
+  - GenumKit (4.1.0):
     - Stencil (~> 0.7.0)
   - PathKit (0.7.0)
   - Stencil (0.7.1):
@@ -20,12 +20,12 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Stencil:
-    :commit: fdde1dec029b25198e34129f10dc8dbc51028b5f
+    :commit: 39517b751462e04c52d141ffa50952b91bf2323c
     :git: https://github.com/kylef/Stencil
 
 SPEC CHECKSUMS:
   Commander: fba7c96c9e787ecc8ebe0737be875e1e18ef47ff
-  GenumKit: ba8072ec35b6bed19388e42ccc739e73ecb73db1
+  GenumKit: 2ec4cec8e09116bc14ef2baab3f5f93e78aeb489
   PathKit: f8260c3e41bf4d552f3603853e32a5b325a176d4
   Stencil: 4177c0cabcdc40dd9be9b7f701d710d0a121023a
 
