@@ -38,6 +38,16 @@
    which offers the same functionality.  
   [David Jennes](https://github.com/djbe)
   [#243](https://github.com/AliSoftware/SwiftGen/pull/243)
+* Support multiple input paths for some commands:  
+  [David Jennes](https://github.com/djbe)
+  [#213](https://github.com/AliSoftware/SwiftGen/pull/213)
+  * `fonts` accepts multiple input directories, all found fonts will be added
+    to the `families` template variable.
+  * `images` now supports multiple asset catalogs as input. Templates can now
+    use the `catalogs` variable to access each individual catalog.
+  * `storyboards` accepts multiple paths (to folders or `storyboard` files).
+    All found storyboards will be available in the `storyboards` template
+    variable.
 
 ### Internal changes
 
