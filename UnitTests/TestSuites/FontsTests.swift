@@ -8,7 +8,7 @@
 
 import XCTest
 import StencilSwiftKit
-@testable import SwiftGenKit
+import SwiftGenKit
 import AppKit.NSFont
 
 class FontsTests: XCTestCase {

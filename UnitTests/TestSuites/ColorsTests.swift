@@ -7,7 +7,7 @@
 import XCTest
 import PathKit
 import StencilSwiftKit
-@testable import SwiftGenKit
+import SwiftGenKit
 
 // MARK: - Tests for TXT files
 

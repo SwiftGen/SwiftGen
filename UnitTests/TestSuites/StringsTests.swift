@@ -6,7 +6,7 @@
 
 import XCTest
 import StencilSwiftKit
-@testable import SwiftGenKit
+import SwiftGenKit
 
 /**
  * Important: In order for the "*.strings" files in fixtures/ to be copied as-is in the test bundle

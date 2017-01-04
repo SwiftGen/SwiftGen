@@ -6,7 +6,7 @@
 
 import XCTest
 import StencilSwiftKit
-@testable import SwiftGenKit
+import SwiftGenKit
 import PathKit
 
 /**
