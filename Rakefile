@@ -62,13 +62,13 @@ desc "Build the CLI binary and its frameworks in #{BUILD_DIR}"
 task :build, [:bindir, :tpldir] => DEPENDENCIES.map { |dep| "dependencies:#{dep}" } do |_, args|
   (bindir, _, tpldir) = defaults(args)
   tpl_rel_path = tpldir.relative_path_from(bindir)
-  main = File.read('swiftgen-cli/main.swift')
-  File.write('swiftgen-cli/main.swift', main.gsub(/^let templatesRelativePath = .*$/, %Q(let templatesRelativePath = "#{tpl_rel_path}")))
+  main = File.read('SwiftGen/main.swift')
+  File.write('SwiftGen/main.swift', main.gsub(/^let templatesRelativePath = .*$/, %Q(let templatesRelativePath = "#{tpl_rel_path}")))
 
   print_info "Building Binary"
   frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
   search_paths = DEPENDENCIES.map { |fmk| "-F #{BUILD_DIR}/#{fmk}" }.join(" ")
-  xcrun %Q(-sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} #{search_paths}/ #{frameworks} swiftgen-cli/*.swift)
+  xcrun %Q(-sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} #{search_paths}/ #{frameworks} SwiftGen/*.swift)
 end
 
 namespace :dependencies do

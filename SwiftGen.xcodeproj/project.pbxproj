@@ -370,7 +370,8 @@
 				09A87B731BCCBE6D00D9B9F5 /* strings.swift */,
 				C24AFD011C91DE33005FE3EF /* fonts.swift */,
 			);
-			path = "swiftgen-cli";
+			name = "swiftgen-cli";
+			path = SwiftGen;
 			sourceTree = "<group>";
 		};
 		234F7E7B1DEBD6C5001B3C10 /* SupportingFiles */ = {
