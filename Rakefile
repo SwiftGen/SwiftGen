@@ -13,7 +13,7 @@ BIN_NAME = 'swiftgen'
 DEPENDENCIES = [:PathKit, :Stencil, :Commander, :GenumKit]
 CONFIGURATION = 'Release'
 BUILD_DIR = 'build/' + CONFIGURATION
-TEMPLATES_SRC_DIR = 'templates'
+TEMPLATES_SRC_DIR = 'Resources/templates'
 
 
 
