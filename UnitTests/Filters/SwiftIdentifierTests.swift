@@ -5,7 +5,7 @@
 //
 
 import XCTest
-@testable import SwiftGenKit
+@testable import StencilSwiftKit
 
 class SwiftIdentifierTests: XCTestCase {
 

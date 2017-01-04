@@ -5,6 +5,7 @@
 //
 
 import XCTest
+import StencilSwiftKit
 @testable import SwiftGenKit
 import PathKit
 
@@ -19,7 +20,7 @@ class ImagesTests: XCTestCase {
   func testEmpty() {
     let parser = AssetsCatalogParser()
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "images-default.stencil"), environment: genumEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Images-Empty.swift.out")
@@ -30,7 +31,7 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: Fixtures.path(for: "Images.xcassets"))
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "images-default.stencil"), environment: genumEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Images-File-Default.swift.out")
@@ -41,7 +42,7 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: Fixtures.path(for: "Images.xcassets"))
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "images-swift3.stencil"), environment: genumEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Images-File-Swift3.swift.out")
@@ -52,7 +53,7 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: Fixtures.path(for: "Images.xcassets"))
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "images-allvalues.stencil"), environment: genumEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-allvalues.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Images-File-AllValues.swift.out")
@@ -63,7 +64,7 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: Fixtures.path(for: "Images.xcassets"))
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "images-default.stencil"), environment: genumEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTImages"))
 
     let expected = Fixtures.string(for: "Images-File-CustomName.swift.out")
@@ -74,7 +75,7 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: Fixtures.path(for: "Images.xcassets"))
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "images-dot-syntax.stencil"), environment: genumEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-dot-syntax.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Images-File-Dot-Syntax.swift.out")
@@ -85,7 +86,7 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: Fixtures.path(for: "Images.xcassets"))
 
-    let template = GenumTemplate(templateString: Fixtures.string(for: "images-dot-syntax-swift3.stencil"), environment: genumEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-dot-syntax-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
     let expected = Fixtures.string(for: "Images-File-Dot-Syntax-Swift3.swift.out")
