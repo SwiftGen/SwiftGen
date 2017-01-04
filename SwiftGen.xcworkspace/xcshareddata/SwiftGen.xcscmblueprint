@@ -5,13 +5,13 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "F6B23AB03FE8E6614F80575DCBE446BDF71D704E" : 9223372036854775807,
-    "7927CD61A326B6BCE9045F50764CD728EA8172C1" : 9223372036854775807,
+    "804E0A642F9B0288E24EC6843BD9BD71D8BD7EA7" : 9223372036854775807,
     "AEF165BA8F93126FEE01F9EEA4D115525F732D3E" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C6422037-E808-4D25-9DD2-901D7D072F57",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "F6B23AB03FE8E6614F80575DCBE446BDF71D704E" : "SwiftGen\/",
-    "7927CD61A326B6BCE9045F50764CD728EA8172C1" : "StencilSwiftKit\/",
+    "804E0A642F9B0288E24EC6843BD9BD71D8BD7EA7" : "StencilSwiftKit\/",
     "AEF165BA8F93126FEE01F9EEA4D115525F732D3E" : "SwiftGenKit\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "SwiftGen",
@@ -21,7 +21,7 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:AliSoftware\/StencilSwiftKit.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7927CD61A326B6BCE9045F50764CD728EA8172C1"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "804E0A642F9B0288E24EC6843BD9BD71D8BD7EA7"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:AliSoftware\/SwiftGenKit.git",
