@@ -11,7 +11,6 @@
 		0971F98F1D7C4401002531D5 /* Colors-Txt-File-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 0971F98E1D7C4401002531D5 /* Colors-Txt-File-Swift3.swift.out */; };
 		0971F9931D7C455A002531D5 /* Images-File-Swift3.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 0971F9921D7C455A002531D5 /* Images-File-Swift3.swift.out */; };
 		09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030C171B6D43D400275BF5 /* TestsHelper.swift */; };
-		09A87B591BCCA2CF00D9B9F5 /* SwiftIdentifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E714711B6D711A007FF3CF /* SwiftIdentifierTests.swift */; };
 		09A87B5A1BCCA37200D9B9F5 /* StoryboardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BC91B6D2BB700275BF5 /* StoryboardsTests.swift */; };
 		09A87B5B1BCCA37800D9B9F5 /* ImagesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD11B6D2E3900275BF5 /* ImagesTests.swift */; };
 		09A87B5C1BCCA37F00D9B9F5 /* ColorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD81B6D2E5900275BF5 /* ColorsTests.swift */; };
@@ -39,7 +38,6 @@
 		470A14E31BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 470A14E21BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out */; };
 		470A14E61BEA68C40052EAC8 /* Images-File-AllValues.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 470A14E51BEA68C40052EAC8 /* Images-File-AllValues.swift.out */; };
 		470A14EB1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Default.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 470A14EA1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Default.swift.out */; };
-		4761E0311BDE6EEA00B9B05F /* StringFiltersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761E0301BDE6EEA00B9B05F /* StringFiltersTests.swift */; };
 		4761E0361BDE753000B9B05F /* Colors-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0321BDE753000B9B05F /* Colors-Empty.swift.out */; };
 		4761E0371BDE753000B9B05F /* Images-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0331BDE753000B9B05F /* Images-Empty.swift.out */; };
 		4761E0381BDE753000B9B05F /* Storyboards-Empty.swift.out in Resources */ = {isa = PBXBuildFile; fileRef = 4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */; };
@@ -163,7 +161,6 @@
 		09A87B751BCCC02C00D9B9F5 /* colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = colors.swift; sourceTree = "<group>"; };
 		09C7B2D31BCC382800D7F488 /* main.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; tabWidth = 2; };
 		09E7146D1B6D55B4007FF3CF /* SwiftGen.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftGen.playground; sourceTree = "<group>"; };
-		09E714711B6D711A007FF3CF /* SwiftIdentifierTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftIdentifierTests.swift; sourceTree = "<group>"; };
 		09EB0A1E1BDC60F000B2CF79 /* Colors-File-CustomName.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-File-CustomName.swift.out"; sourceTree = "<group>"; };
 		09EB0A1F1BDC60F000B2CF79 /* Colors-File-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-File-Default.swift.out"; sourceTree = "<group>"; };
 		09EB0A201BDC60F000B2CF79 /* Colors-List-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-List-Default.swift.out"; sourceTree = "<group>"; };
@@ -179,7 +176,6 @@
 		470A14E21BEA641E0052EAC8 /* Storyboards-Message-Lowercase.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Message-Lowercase.swift.out"; sourceTree = "<group>"; };
 		470A14E51BEA68C40052EAC8 /* Images-File-AllValues.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-File-AllValues.swift.out"; sourceTree = "<group>"; };
 		470A14EA1BEA6DAB0052EAC8 /* Storyboards-Anonymous-Default.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Anonymous-Default.swift.out"; sourceTree = "<group>"; };
-		4761E0301BDE6EEA00B9B05F /* StringFiltersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringFiltersTests.swift; sourceTree = "<group>"; };
 		4761E0321BDE753000B9B05F /* Colors-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colors-Empty.swift.out"; sourceTree = "<group>"; };
 		4761E0331BDE753000B9B05F /* Images-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Images-Empty.swift.out"; sourceTree = "<group>"; };
 		4761E0341BDE753000B9B05F /* Storyboards-Empty.swift.out */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Storyboards-Empty.swift.out"; sourceTree = "<group>"; };
@@ -299,7 +295,6 @@
 			isa = PBXGroup;
 			children = (
 				09030C171B6D43D400275BF5 /* TestsHelper.swift */,
-				4761E02F1BDE6EC000B9B05F /* Filters */,
 				09030BC71B6D2BA300275BF5 /* TestSuites */,
 				09030C071B6D2FF600275BF5 /* expected */,
 				09030BC01B6D2A8F00275BF5 /* Info.plist */,
@@ -353,15 +348,6 @@
 				234F7E771DEBD5C5001B3C10 /* Info.plist */,
 			);
 			name = SupportingFiles;
-			sourceTree = "<group>";
-		};
-		4761E02F1BDE6EC000B9B05F /* Filters */ = {
-			isa = PBXGroup;
-			children = (
-				09E714711B6D711A007FF3CF /* SwiftIdentifierTests.swift */,
-				4761E0301BDE6EEA00B9B05F /* StringFiltersTests.swift */,
-			);
-			path = Filters;
 			sourceTree = "<group>";
 		};
 		47CB53231CFC0AC900AA19C0 /* Colors */ = {
@@ -852,9 +838,7 @@
 				09A87B5B1BCCA37800D9B9F5 /* ImagesTests.swift in Sources */,
 				09A87B5A1BCCA37200D9B9F5 /* StoryboardsTests.swift in Sources */,
 				09A87B5D1BCCA38400D9B9F5 /* StringsTests.swift in Sources */,
-				09A87B591BCCA2CF00D9B9F5 /* SwiftIdentifierTests.swift in Sources */,
 				09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */,
-				4761E0311BDE6EEA00B9B05F /* StringFiltersTests.swift in Sources */,
 				09A87B5C1BCCA37F00D9B9F5 /* ColorsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
