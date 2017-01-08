@@ -50,7 +50,7 @@ let templatesListCommand = command(
   output.write(content: outputLines.joined(separator: "\n"))
 }
 
-private func templatePathCommandGenerator(execute: @escaping (Path, OutputDestination) throws -> ()) -> CommandType {
+private func templatePathCommandGenerator(execute: @escaping (Path, OutputDestination) throws -> Void) -> CommandType {
   return command(
     Argument<String>("name",
       description: "the name of the template to find, like `colors` for the default one" +

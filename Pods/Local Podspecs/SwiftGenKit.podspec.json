@@ -18,7 +18,7 @@
   },
   "source_files": "Sources/**/*.swift",
   "dependencies": {
-    "Stencil": [
+    "PathKit": [
       "~> 0.7.0"
     ]
   },

@@ -22,7 +22,7 @@ let storyboardsCommand = command(
   VariadicArgument<Path>("PATH",
     description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard",
     validator: pathsExist)
-) { output, templateName, templatePath, sceneEnumName, segueEnumName, extraImports, paths in
+) { output, templateName, templatePath, sceneEnumName, segueEnumName, _, paths in
   let parser = StoryboardParser()
 
   do {

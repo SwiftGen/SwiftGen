@@ -40,7 +40,7 @@ func findOperator(name: String) -> Operator? {
 enum IfToken {
   case infix(name: String, bindingPower: Int, op: InfixOperator.Type)
   case prefix(name: String, bindingPower: Int, op: PrefixOperator.Type)
-  case variable(Variable)
+  case variable(Resolvable)
   case end
 
   var bindingPower: Int {
@@ -99,8 +99,8 @@ final class IfExpressionParser {
   let tokens: [IfToken]
   var position: Int = 0
 
-  init(components: [String]) {
-    self.tokens = components.map { component in
+  init(components: [String], tokenParser: TokenParser) throws {
+    self.tokens = try components.map { component in
       if let op = findOperator(name: component) {
         switch op {
         case .infix(let name, let bindingPower, let cls):
@@ -110,7 +110,7 @@ final class IfExpressionParser {
         }
       }
 
-      return .variable(Variable(component))
+      return .variable(try tokenParser.compileFilter(component))
     }
   }
 
@@ -154,8 +154,8 @@ final class IfExpressionParser {
 }
 
 
-func parseExpression(components: [String]) throws -> Expression {
-  let parser = IfExpressionParser(components: components)
+func parseExpression(components: [String], tokenParser: TokenParser) throws -> Expression {
+  let parser = try IfExpressionParser(components: components, tokenParser: tokenParser)
   return try parser.parse()
 }
 
@@ -182,7 +182,7 @@ class IfNode : NodeType {
       _ = parser.nextToken()
     }
 
-    let expression = try parseExpression(components: components)
+    let expression = try parseExpression(components: components, tokenParser: parser)
     return IfNode(expression: expression, trueNodes: trueNodes, falseNodes: falseNodes)
   }
 
@@ -206,7 +206,7 @@ class IfNode : NodeType {
       _ = parser.nextToken()
     }
 
-    let expression = try parseExpression(components: components)
+    let expression = try parseExpression(components: components, tokenParser: parser)
     return IfNode(expression: expression, trueNodes: trueNodes, falseNodes: falseNodes)
   }
 

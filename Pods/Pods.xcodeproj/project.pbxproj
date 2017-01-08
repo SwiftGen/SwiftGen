@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02A1EA8FF67B4A0A20F7CF8282D25BBD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2497E0C37C035DB8276C0C7335E3FC93 /* Cocoa.framework */; };
 		04D84EAD8BB302C3CABC077FBBFBDD7A /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E69C83AD0247D8E5BF6ECFEEF5671AD /* Node.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		0605D342C5AEB9418E1A12782C13D089 /* SwiftGenKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4566C9EA20FD6AF6DC1BB30A24291BAF /* SwiftGenKit-dummy.m */; };
 		089D6407EB1EEFC90043E9E54AD49B20 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2497E0C37C035DB8276C0C7335E3FC93 /* Cocoa.framework */; };
@@ -22,7 +21,6 @@
 		2BDA487198DBCBC2FBE09A32F37AEA1D /* CallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D280E0A792BB10C982C19ED08DF8EF /* CallNode.swift */; };
 		2D6B0FDC9BEC1B8AF09D6428C7326F49 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2497E0C37C035DB8276C0C7335E3FC93 /* Cocoa.framework */; };
 		30A945A84A6345ED9D3E7F83738A995C /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49F04427F199B078AF4410AC641E03 /* Filters.swift */; };
-		3184C589CDCCC24F7E0F3DE234D51369 /* PathKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436538F42B0A2EC1C972F8EE47937E0 /* PathKit.framework */; };
 		36103BB1DD9C98F995E451E2A8420666 /* StencilSwiftKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BBF4734387EF48AF9824548EFA8EE70A /* StencilSwiftKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37031E332686C7ADC6A583177A6E0E8D /* CommandRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F714B2D4C4BBE3C3EC28DB1344722 /* CommandRunner.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		390C44BC73106DF84175F3E31541C70B /* PathKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436538F42B0A2EC1C972F8EE47937E0 /* PathKit.framework */; };
@@ -34,6 +32,7 @@
 		502EC22F3DEA4A0C90271711DE11374F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2497E0C37C035DB8276C0C7335E3FC93 /* Cocoa.framework */; };
 		517EE010AB1629E958371C35048E2C9C /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4366CF04FD75595FB668A9AA7C5FC487 /* Command.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		5245ABB6A66FF1DEC56583EF468DD7AA /* PathKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D5E21470AFE4E7B79DD17114EC853517 /* PathKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55AFB5E5C35B7DC57A0BD04AFA928233 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2497E0C37C035DB8276C0C7335E3FC93 /* Cocoa.framework */; };
 		56F771FE7637178C05C754DF2325800E /* StringsFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F6F9F155AAC1F55FA8E4D720F30A12 /* StringsFileParser.swift */; };
 		577AC9B4846DE6F0F43481B083B4520E /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D54D227019B7926C3479B793FC2DC /* Command.swift */; };
 		5F23238467C5B65882B069691B579B4C /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3740EE0A8A3C057934C6C051DA73EDEB /* Variable.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -47,6 +46,7 @@
 		83F1150B7894C7A3F02C6FEE02A0F16D /* ArgumentDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41EAC25B6FB6E013087B46F2C7ACB59 /* ArgumentDescription.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		89CCB926F397AC0865F3D01835967807 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF31A566F7B1AA7DEF9B0B92E673B325 /* Error.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8C933F3B70E62A3B04B01329E448F2B9 /* Commander-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 839C85CF60E937EA2D0FBBD00A436551 /* Commander-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8CFDE0D5F51ADDE8993C8FBBB0D4FD55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11F7F2E3F010D24453E40821938EF8EC /* Foundation.framework */; };
 		8F84945A514F9AE2C12B4A903E1313E4 /* AssetsCatalogParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38965621B8091E066B97293BDE8F79F /* AssetsCatalogParser.swift */; };
 		9088F369CAF894B2416E6F24B37D7E6B /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA884476F98F1D2DD88CDBB4D2D74C6 /* Tokenizer.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		90C63D7C7397FF6FD4BCBE15C011C15E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2497E0C37C035DB8276C0C7335E3FC93 /* Cocoa.framework */; };
@@ -55,9 +55,9 @@
 		92E6890A11714D5532D5A8CEAA43F9B3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2497E0C37C035DB8276C0C7335E3FC93 /* Cocoa.framework */; };
 		9A775C550D4F46043AB7E0655D6ECE36 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A1C1E39249A653113E25EB6E221C1F /* Environment.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		9F511F31EC6EC9813FB6005AA308B9CA /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689F3750B7896E258B9CEB939EF872E /* Group.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		9FCEB4C12EABF435CE027C3C4F8EC647 /* PathKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0436538F42B0A2EC1C972F8EE47937E0 /* PathKit.framework */; };
 		A37DD64F07BE74A71DAB4A0C038DE901 /* Commander-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8B57B33881B0DBA2DA81A271226A48 /* Commander-dummy.m */; };
 		A3CA5DB29EE9BD4761DDC334457C8A67 /* ForTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E22CA9215DCFE27617728E1E4A0468 /* ForTag.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		AC58AD9F269F7B336887366304F14338 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11F7F2E3F010D24453E40821938EF8EC /* Foundation.framework */; };
 		AC6E40F8449C9AC6C840A5A817170EB0 /* StoryboardParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80361CAD8520C13D049FF5FC46D283E4 /* StoryboardParser.swift */; };
 		B35F80568675C031B5B7CE6AB0210ECC /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E8C0CEB45090D00BF6195088AB2A9 /* Extension.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		B8DA05795FA571CF0DFD139355B6FC28 /* NowTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D906A1C80C85C6F0ED857459C973BA59 /* NowTag.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -75,7 +75,6 @@
 		EEB6742E0D926518ABE52357911603B6 /* ColorsFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0BA3EEBD3C812948D0C287D92BB629 /* ColorsFileParser.swift */; };
 		F294E1AF8E8C4B622F054C83C3286F1D /* Contexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB26FF3554C8F244E92CF287CF4A072 /* Contexts.swift */; };
 		F339A8495947DB022C2140AD824668BA /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372BE9547FA620AF32B5C8921FACE8B4 /* Lexer.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		FBB028E1E86FFA8558B7D878F995F099 /* Stencil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A68FA9661EC6B4BA5415DDD474F7F00 /* Stencil.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,13 +84,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = BBB46569A79C52426939AF96DA290CF9;
 			remoteInfo = PathKit;
-		};
-		233595AFE13B2B3F5D6CABD877EBFB8A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1A9A2D5EE6F005C238596367B39AEFB7;
-			remoteInfo = Stencil;
 		};
 		2EE20D9216F22F1FE568BA4DF70B9FA4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -286,6 +278,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		260BEC2FFF52946DFC17A8115283CCF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55AFB5E5C35B7DC57A0BD04AFA928233 /* Cocoa.framework in Frameworks */,
+				8CFDE0D5F51ADDE8993C8FBBB0D4FD55 /* Foundation.framework in Frameworks */,
+				9FCEB4C12EABF435CE027C3C4F8EC647 /* PathKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		507CFE04FE082677F97EFC2EEEBAC4B7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -300,17 +302,6 @@
 			files = (
 				2D6B0FDC9BEC1B8AF09D6428C7326F49 /* Cocoa.framework in Frameworks */,
 				28666A1BC5D5CBAAB00AB2ED8A7E50B6 /* PathKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5B5022A323BF0FEE289FFB673B8FCF7F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				02A1EA8FF67B4A0A20F7CF8282D25BBD /* Cocoa.framework in Frameworks */,
-				AC58AD9F269F7B336887366304F14338 /* Foundation.framework in Frameworks */,
-				3184C589CDCCC24F7E0F3DE234D51369 /* PathKit.framework in Frameworks */,
-				FBB028E1E86FFA8558B7D878F995F099 /* Stencil.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,14 +781,13 @@
 			buildConfigurationList = 14B87A6404DA7E51652A43BB56EB5F2F /* Build configuration list for PBXNativeTarget "SwiftGenKit" */;
 			buildPhases = (
 				9045539B53715A5FC6B13224CBBB6E9E /* Sources */,
-				5B5022A323BF0FEE289FFB673B8FCF7F /* Frameworks */,
+				260BEC2FFF52946DFC17A8115283CCF1 /* Frameworks */,
 				C7948013B3245404A450B0D93B956F54 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				1F0AA23B8ECC3A40F11F5B2EB640A1AC /* PBXTargetDependency */,
-				B45B8DCE3FBAEAA73B384E870EA126AA /* PBXTargetDependency */,
 			);
 			name = SwiftGenKit;
 			productName = SwiftGenKit;
@@ -996,12 +986,6 @@
 			name = PathKit;
 			target = BBB46569A79C52426939AF96DA290CF9 /* PathKit */;
 			targetProxy = 5B06C4A7973791E5205F49D282ACF80C /* PBXContainerItemProxy */;
-		};
-		B45B8DCE3FBAEAA73B384E870EA126AA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Stencil;
-			target = 1A9A2D5EE6F005C238596367B39AEFB7 /* Stencil */;
-			targetProxy = 233595AFE13B2B3F5D6CABD877EBFB8A /* PBXContainerItemProxy */;
 		};
 		C417996FF5B4DB697134B4E4D2E1C012 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

@@ -2,7 +2,7 @@
   "name": "StencilSwiftKit",
   "version": "0.0.1",
   "summary": "Stencil additions dedicated for Swift code generation",
-  "description": "TODO",
+  "description": "This pod contains some additional nodes and filters for\n[Stencil](https://github.com/kylef/Stencil).\nThese additional nodes & filters are mainly dedicated\nfor writing Stencil templates generating *Swift* code.",
   "homepage": "https://github.com/SwiftGen/StencilSwiftKit",
   "license": "MIT",
   "authors": {
