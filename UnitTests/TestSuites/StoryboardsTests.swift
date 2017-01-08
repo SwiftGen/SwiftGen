@@ -15,8 +15,8 @@ import SwiftGenKit
  */
 
 enum StoryboardsDir {
-  static let iOS = "Storyboards-iOS"
-  static let macOS = "Storyboards-OSX"
+  static let iOS = "fixtures/Storyboards-iOS"
+  static let macOS = "fixtures/Storyboards-OSX"
 }
 
 // MARK: iOS StoryboardTests
