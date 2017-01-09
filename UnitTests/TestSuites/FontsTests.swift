@@ -22,7 +22,7 @@ class FontsTests: XCTestCase {
 
   func testDefaults() {
     let parser = FontsFileParser()
-    parser.parseFile(at: Fixtures.directory())
+    parser.parseFile(at: Fixtures.directory(sub: .fonts))
 
     let template = SwiftTemplate(templateString: Fixtures.string(for: "fonts-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
@@ -32,7 +32,7 @@ class FontsTests: XCTestCase {
 
   func testDefaultsWithSwift3() {
     let parser = FontsFileParser()
-    parser.parseFile(at: Fixtures.directory())
+    parser.parseFile(at: Fixtures.directory(sub: .fonts))
 
     let template = SwiftTemplate(templateString: Fixtures.string(for: "fonts-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())

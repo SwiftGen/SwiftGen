@@ -49,12 +49,12 @@ extension NSViewController {
 }
 
 struct StoryboardScene {
-  enum Message_Osx: String, StoryboardSceneType {
-    static let storyboardName = "Message-osx"
+  enum Message: String, StoryboardSceneType {
+    static let storyboardName = "Message"
 
     case MessageDetailsScene = "MessageDetails"
     static func instantiateMessageDetails() -> NSViewController {
-      guard let vc = StoryboardScene.Message_Osx.MessageDetailsScene.controller() as? NSViewController
+      guard let vc = StoryboardScene.Message.MessageDetailsScene.controller() as? NSViewController
       else {
         fatalError("ViewController 'MessageDetails' is not of the expected class NSViewController.")
       }
@@ -63,7 +63,7 @@ struct StoryboardScene {
 
     case MessageListScene = "MessageList"
     static func instantiateMessageList() -> NSViewController {
-      guard let vc = StoryboardScene.Message_Osx.MessageListScene.controller() as? NSViewController
+      guard let vc = StoryboardScene.Message.MessageListScene.controller() as? NSViewController
       else {
         fatalError("ViewController 'MessageList' is not of the expected class NSViewController.")
       }
@@ -72,7 +72,7 @@ struct StoryboardScene {
 
     case MessageListFooterScene = "MessageListFooter"
     static func instantiateMessageListFooter() -> NSViewController {
-      guard let vc = StoryboardScene.Message_Osx.MessageListFooterScene.controller() as? NSViewController
+      guard let vc = StoryboardScene.Message.MessageListFooterScene.controller() as? NSViewController
       else {
         fatalError("ViewController 'MessageListFooter' is not of the expected class NSViewController.")
       }
@@ -81,7 +81,7 @@ struct StoryboardScene {
 
     case MessagesTabScene = "MessagesTab"
     static func instantiateMessagesTab() -> CustomTabViewController {
-      guard let vc = StoryboardScene.Message_Osx.MessagesTabScene.controller() as? CustomTabViewController
+      guard let vc = StoryboardScene.Message.MessagesTabScene.controller() as? CustomTabViewController
       else {
         fatalError("ViewController 'MessagesTab' is not of the expected class CustomTabViewController.")
       }
@@ -90,7 +90,7 @@ struct StoryboardScene {
 
     case SplitMessagesScene = "SplitMessages"
     static func instantiateSplitMessages() -> NSSplitViewController {
-      guard let vc = StoryboardScene.Message_Osx.SplitMessagesScene.controller() as? NSSplitViewController
+      guard let vc = StoryboardScene.Message.SplitMessagesScene.controller() as? NSSplitViewController
       else {
         fatalError("ViewController 'SplitMessages' is not of the expected class NSSplitViewController.")
       }
@@ -99,7 +99,7 @@ struct StoryboardScene {
 
     case WindowCtrlScene = "WindowCtrl"
     static func instantiateWindowCtrl() -> NSWindowController {
-      guard let vc = StoryboardScene.Message_Osx.WindowCtrlScene.controller() as? NSWindowController
+      guard let vc = StoryboardScene.Message.WindowCtrlScene.controller() as? NSWindowController
       else {
         fatalError("ViewController 'WindowCtrl' is not of the expected class NSWindowController.")
       }
@@ -109,7 +109,7 @@ struct StoryboardScene {
 }
 
 struct StoryboardSegue {
-  enum Message_Osx: String, StoryboardSegueType {
+  enum Message: String, StoryboardSegueType {
     case Custom = "Custom"
     case Embed = "Embed"
     case Modal = "Modal"

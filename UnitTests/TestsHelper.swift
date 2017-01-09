@@ -53,20 +53,33 @@ func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #
 }
 
 class Fixtures {
+  enum Directory: String {
+    case colors = "Colors"
+    case fonts = "Fonts"
+    case images = "Images"
+    case storyboardsiOS = "Storyboards-iOS"
+    case storyboardsMacOS = "Storyboards-macOS"
+    case strings = "Strings"
+  }
+  
   private static let testBundle = Bundle(for: Fixtures.self)
   private init() {}
 
-  static func directory(subDirectory subDir: String? = nil) -> Path {
+  static func directory(sub: Directory? = nil) -> Path {
     guard let rsrcURL = testBundle.resourceURL else {
       fatalError("Unable to find resource directory URL")
     }
-    let rsrc = Path(rsrcURL.path)
-
-    guard let dir = subDir else { return rsrc }
-    return rsrc + dir
+    let rsrc = Path(rsrcURL.path) + "Fixtures"
+    
+    guard let dir = sub else { return rsrc }
+    return rsrc + dir.rawValue
+  }
+  
+  static func path(for name: String, sub: Directory) -> Path {
+    return path(for: name, subDirectory: "Fixtures/\(sub.rawValue)")
   }
 
-  static func path(for name: String, subDirectory: String? = "fixtures") -> Path {
+  private static func path(for name: String, subDirectory: String? = nil) -> Path {
     guard let path = testBundle.path(forResource: name, ofType: "", inDirectory: subDirectory) else {
       fatalError("Unable to find fixture \"\(name)\"")
     }
@@ -74,7 +87,7 @@ class Fixtures {
   }
 
   static func string(for name: String, encoding: String.Encoding = .utf8) -> String {
-    let subDir: String? = name.hasSuffix(".stencil") ? "templates" : name.hasSuffix(".out") ? nil : "fixtures"
+    let subDir: String? = name.hasSuffix(".stencil") ? "templates" : nil
     do {
       return try path(for: name, subDirectory: subDir).read(encoding)
     } catch let e {

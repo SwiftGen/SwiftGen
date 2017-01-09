@@ -40,7 +40,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithDefaults() {
     let parser = StringsFileParser()
-    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings"))
+    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
@@ -51,7 +51,7 @@ class StringsTests: XCTestCase {
 
   func testMultiline() {
     let parser = StringsFileParser()
-    try! parser.parseFile(at: Fixtures.path(for: "LocMultiline.strings"))
+    try! parser.parseFile(at: Fixtures.path(for: "LocMultiline.strings", sub: .strings))
 
     let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
@@ -62,7 +62,7 @@ class StringsTests: XCTestCase {
 
   func testUTF8FileWithDefaults() {
     let parser = StringsFileParser()
-    try! parser.parseFile(at: Fixtures.path(for: "LocUTF8.strings"))
+    try! parser.parseFile(at: Fixtures.path(for: "LocUTF8.strings", sub: .strings))
 
     let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
@@ -73,7 +73,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithCustomName() {
     let parser = StringsFileParser()
-    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings"))
+    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTLoc"))
@@ -84,7 +84,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithSwift3() {
     let parser = StringsFileParser()
-    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings"))
+    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
@@ -95,7 +95,7 @@ class StringsTests: XCTestCase {
   
   func testFileWithoutCommentsAndSwift3() {
     let parser = StringsFileParser()
-    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings"))
+    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
     
     let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-no-comments-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
@@ -106,7 +106,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithStructured() {
     let parser = StringsFileParser()
-    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings"))
+    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-structured.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
@@ -117,7 +117,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithStructuredOnly() {
     let parser = StringsFileParser()
-    try! parser.parseFile(at: Fixtures.path(for: "LocStructuredOnly.strings"))
+    try! parser.parseFile(at: Fixtures.path(for: "LocStructuredOnly.strings", sub: .strings))
 
     let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-structured.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
@@ -128,7 +128,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithDotSyntax() {
     let parser = StringsFileParser()
-    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings"))
+    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-dot-syntax.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
@@ -139,7 +139,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithDotSyntaxSwift3() {
     let parser = StringsFileParser()
-    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings"))
+    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-dot-syntax-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
@@ -150,7 +150,7 @@ class StringsTests: XCTestCase {
 
   func testFileWithGenstringsTemplate() {
     let parser = StringsFileParser()
-    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings"))
+    try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
     
     let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-genstrings.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())

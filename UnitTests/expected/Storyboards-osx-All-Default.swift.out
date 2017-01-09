@@ -50,39 +50,39 @@ extension NSViewController {
 }
 
 struct StoryboardScene {
-  enum AdditionalImport_Osx: String, StoryboardSceneType {
-    static let storyboardName = "AdditionalImport-osx"
+  enum AdditionalImport: String, StoryboardSceneType {
+    static let storyboardName = "AdditionalImport"
 
     case PreferencesScene = "Preferences"
     static func instantiatePreferences() -> DBPrefsWindowController.DBPrefsWindowController {
-      guard let vc = StoryboardScene.AdditionalImport_Osx.PreferencesScene.controller() as? DBPrefsWindowController.DBPrefsWindowController
+      guard let vc = StoryboardScene.AdditionalImport.PreferencesScene.controller() as? DBPrefsWindowController.DBPrefsWindowController
       else {
         fatalError("ViewController 'Preferences' is not of the expected class DBPrefsWindowController.DBPrefsWindowController.")
       }
       return vc
     }
   }
-  enum Anonymous_Osx: StoryboardSceneType {
-    static let storyboardName = "Anonymous-osx"
+  enum Anonymous: StoryboardSceneType {
+    static let storyboardName = "Anonymous"
   }
-  enum Dependency_Osx: String, StoryboardSceneType {
-    static let storyboardName = "Dependency-osx"
+  enum Dependency: String, StoryboardSceneType {
+    static let storyboardName = "Dependency"
 
     case DependentScene = "Dependent"
     static func instantiateDependent() -> NSViewController {
-      guard let vc = StoryboardScene.Dependency_Osx.DependentScene.controller() as? NSViewController
+      guard let vc = StoryboardScene.Dependency.DependentScene.controller() as? NSViewController
       else {
         fatalError("ViewController 'Dependent' is not of the expected class NSViewController.")
       }
       return vc
     }
   }
-  enum Message_Osx: String, StoryboardSceneType {
-    static let storyboardName = "Message-osx"
+  enum Message: String, StoryboardSceneType {
+    static let storyboardName = "Message"
 
     case MessageDetailsScene = "MessageDetails"
     static func instantiateMessageDetails() -> NSViewController {
-      guard let vc = StoryboardScene.Message_Osx.MessageDetailsScene.controller() as? NSViewController
+      guard let vc = StoryboardScene.Message.MessageDetailsScene.controller() as? NSViewController
       else {
         fatalError("ViewController 'MessageDetails' is not of the expected class NSViewController.")
       }
@@ -91,7 +91,7 @@ struct StoryboardScene {
 
     case MessageListScene = "MessageList"
     static func instantiateMessageList() -> NSViewController {
-      guard let vc = StoryboardScene.Message_Osx.MessageListScene.controller() as? NSViewController
+      guard let vc = StoryboardScene.Message.MessageListScene.controller() as? NSViewController
       else {
         fatalError("ViewController 'MessageList' is not of the expected class NSViewController.")
       }
@@ -100,7 +100,7 @@ struct StoryboardScene {
 
     case MessageListFooterScene = "MessageListFooter"
     static func instantiateMessageListFooter() -> NSViewController {
-      guard let vc = StoryboardScene.Message_Osx.MessageListFooterScene.controller() as? NSViewController
+      guard let vc = StoryboardScene.Message.MessageListFooterScene.controller() as? NSViewController
       else {
         fatalError("ViewController 'MessageListFooter' is not of the expected class NSViewController.")
       }
@@ -109,7 +109,7 @@ struct StoryboardScene {
 
     case MessagesTabScene = "MessagesTab"
     static func instantiateMessagesTab() -> CustomTabViewController {
-      guard let vc = StoryboardScene.Message_Osx.MessagesTabScene.controller() as? CustomTabViewController
+      guard let vc = StoryboardScene.Message.MessagesTabScene.controller() as? CustomTabViewController
       else {
         fatalError("ViewController 'MessagesTab' is not of the expected class CustomTabViewController.")
       }
@@ -118,7 +118,7 @@ struct StoryboardScene {
 
     case SplitMessagesScene = "SplitMessages"
     static func instantiateSplitMessages() -> NSSplitViewController {
-      guard let vc = StoryboardScene.Message_Osx.SplitMessagesScene.controller() as? NSSplitViewController
+      guard let vc = StoryboardScene.Message.SplitMessagesScene.controller() as? NSSplitViewController
       else {
         fatalError("ViewController 'SplitMessages' is not of the expected class NSSplitViewController.")
       }
@@ -127,19 +127,19 @@ struct StoryboardScene {
 
     case WindowCtrlScene = "WindowCtrl"
     static func instantiateWindowCtrl() -> NSWindowController {
-      guard let vc = StoryboardScene.Message_Osx.WindowCtrlScene.controller() as? NSWindowController
+      guard let vc = StoryboardScene.Message.WindowCtrlScene.controller() as? NSWindowController
       else {
         fatalError("ViewController 'WindowCtrl' is not of the expected class NSWindowController.")
       }
       return vc
     }
   }
-  enum Placeholder_Osx: String, StoryboardSceneType {
-    static let storyboardName = "Placeholder-osx"
+  enum Placeholder: String, StoryboardSceneType {
+    static let storyboardName = "Placeholder"
 
     case DependentScene = "Dependent"
     static func instantiateDependent() -> NSControllerPlaceholder {
-      guard let vc = StoryboardScene.Placeholder_Osx.DependentScene.controller() as? NSControllerPlaceholder
+      guard let vc = StoryboardScene.Placeholder.DependentScene.controller() as? NSControllerPlaceholder
       else {
         fatalError("ViewController 'Dependent' is not of the expected class NSControllerPlaceholder.")
       }
@@ -148,7 +148,7 @@ struct StoryboardScene {
 
     case WindowScene = "Window"
     static func instantiateWindow() -> NSWindowController {
-      guard let vc = StoryboardScene.Placeholder_Osx.WindowScene.controller() as? NSWindowController
+      guard let vc = StoryboardScene.Placeholder.WindowScene.controller() as? NSWindowController
       else {
         fatalError("ViewController 'Window' is not of the expected class NSWindowController.")
       }
@@ -158,7 +158,7 @@ struct StoryboardScene {
 }
 
 struct StoryboardSegue {
-  enum Message_Osx: String, StoryboardSegueType {
+  enum Message: String, StoryboardSegueType {
     case Custom = "Custom"
     case Embed = "Embed"
     case Modal = "Modal"

@@ -49,8 +49,8 @@ extension NSViewController {
 }
 
 struct StoryboardScene {
-  enum Anonymous_Osx: StoryboardSceneType {
-    static let storyboardName = "Anonymous-osx"
+  enum Anonymous: StoryboardSceneType {
+    static let storyboardName = "Anonymous"
   }
 }
 

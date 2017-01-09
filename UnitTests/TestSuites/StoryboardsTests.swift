@@ -36,7 +36,7 @@ class StoryboardsiOSTests: XCTestCase {
   func testMessageStoryboardWithDefaults() {
     let parser = StoryboardParser()
     do {
-      try parser.addStoryboard(at: Fixtures.path(for: "Message.storyboard", subDirectory: StoryboardsDir.iOS))
+      try parser.addStoryboard(at: Fixtures.path(for: "Message.storyboard", sub: .storyboardsiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -51,7 +51,7 @@ class StoryboardsiOSTests: XCTestCase {
   func testMessageStoryboardWithLowercaseTemplate() {
     let parser = StoryboardParser()
     do {
-      try parser.addStoryboard(at: Fixtures.path(for: "Message.storyboard", subDirectory: StoryboardsDir.iOS))
+      try parser.addStoryboard(at: Fixtures.path(for: "Message.storyboard", sub: .storyboardsiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -66,7 +66,7 @@ class StoryboardsiOSTests: XCTestCase {
   func testAnonymousStoryboardWithDefaults() {
     let parser = StoryboardParser()
     do {
-      try parser.addStoryboard(at: Fixtures.path(for: "Anonymous.storyboard", subDirectory: StoryboardsDir.iOS))
+      try parser.addStoryboard(at: Fixtures.path(for: "Anonymous.storyboard", sub: .storyboardsiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -81,7 +81,7 @@ class StoryboardsiOSTests: XCTestCase {
   func testAllStoryboardsWithDefaults() {
     let parser = StoryboardParser()
     do {
-      try parser.parseDirectory(at: Fixtures.directory(subDirectory: StoryboardsDir.iOS))
+      try parser.parseDirectory(at: Fixtures.directory(sub: .storyboardsiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -97,7 +97,7 @@ class StoryboardsiOSTests: XCTestCase {
   func testAllStoryboardsWithCustomName() {
     let parser = StoryboardParser()
     do {
-      try parser.parseDirectory(at: Fixtures.directory(subDirectory: StoryboardsDir.iOS))
+      try parser.parseDirectory(at: Fixtures.directory(sub: .storyboardsiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -113,7 +113,7 @@ class StoryboardsiOSTests: XCTestCase {
   func testAnonymousStoryboardWithSwift3() {
     let parser = StoryboardParser()
     do {
-      try parser.addStoryboard(at: Fixtures.path(for: "Anonymous.storyboard", subDirectory: StoryboardsDir.iOS))
+      try parser.addStoryboard(at: Fixtures.path(for: "Anonymous.storyboard", sub: .storyboardsiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -128,7 +128,7 @@ class StoryboardsiOSTests: XCTestCase {
   func testWizardsStoryboardsWithSwift3() {
     let parser = StoryboardParser()
     do {
-      try parser.addStoryboard(at: Fixtures.path(for: "Wizard.storyboard", subDirectory: StoryboardsDir.iOS))
+      try parser.addStoryboard(at: Fixtures.path(for: "Wizard.storyboard", sub: .storyboardsiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -143,7 +143,7 @@ class StoryboardsiOSTests: XCTestCase {
   func testAdditionalImport() {
     let parser = StoryboardParser()
     do {
-      try parser.addStoryboard(at: Fixtures.path(for: "AdditionalImport.storyboard", subDirectory: StoryboardsDir.iOS))
+      try parser.addStoryboard(at: Fixtures.path(for: "AdditionalImport.storyboard", sub: .storyboardsiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -173,7 +173,7 @@ class StoryboardsOSXTests: XCTestCase {
   func testOSXMessageStoryboardWithDefaults() {
     let parser = StoryboardParser()
     do {
-      try parser.addStoryboard(at: Fixtures.path(for: "Message-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+      try parser.addStoryboard(at: Fixtures.path(for: "Message.storyboard", sub: .storyboardsMacOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -188,7 +188,7 @@ class StoryboardsOSXTests: XCTestCase {
   func testOSXMessageStoryboardWithLowercaseTemplate() {
     let parser = StoryboardParser()
     do {
-      try parser.addStoryboard(at: Fixtures.path(for: "Message-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+      try parser.addStoryboard(at: Fixtures.path(for: "Message.storyboard", sub: .storyboardsMacOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -203,7 +203,7 @@ class StoryboardsOSXTests: XCTestCase {
   func testOSXMessageStoryboardWithSwift3() {
     let parser = StoryboardParser()
     do {
-      try parser.addStoryboard(at: Fixtures.path(for: "Message-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+      try parser.addStoryboard(at: Fixtures.path(for: "Message.storyboard", sub: .storyboardsMacOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -218,7 +218,7 @@ class StoryboardsOSXTests: XCTestCase {
   func testOSXAnonymousStoryboardWithDefaults() {
     let parser = StoryboardParser()
     do {
-      try parser.addStoryboard(at: Fixtures.path(for: "Anonymous-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+      try parser.addStoryboard(at: Fixtures.path(for: "Anonymous.storyboard", sub: .storyboardsMacOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -233,7 +233,7 @@ class StoryboardsOSXTests: XCTestCase {
   func testOSXAllStoryboardsWithDefaults() {
     let parser = StoryboardParser()
     do {
-      try parser.parseDirectory(at: Fixtures.directory(subDirectory: StoryboardsDir.macOS))
+      try parser.parseDirectory(at: Fixtures.directory(sub: .storyboardsMacOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -249,7 +249,7 @@ class StoryboardsOSXTests: XCTestCase {
   func testAdditionalImportWithDefaults() {
     let parser = StoryboardParser()
     do {
-      try parser.addStoryboard(at: Fixtures.path(for: "AdditionalImport-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+      try parser.addStoryboard(at: Fixtures.path(for: "AdditionalImport.storyboard", sub: .storyboardsMacOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -264,7 +264,7 @@ class StoryboardsOSXTests: XCTestCase {
   func testAdditionalImportWithSwift3() {
     let parser = StoryboardParser()
     do {
-      try parser.addStoryboard(at: Fixtures.path(for: "AdditionalImport-osx.storyboard", subDirectory: StoryboardsDir.macOS))
+      try parser.addStoryboard(at: Fixtures.path(for: "AdditionalImport.storyboard", sub: .storyboardsMacOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
