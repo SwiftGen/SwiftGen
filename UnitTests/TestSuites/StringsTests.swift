@@ -19,10 +19,10 @@ class StringsTests: XCTestCase {
   func testEmpty() {
     let parser = StringsFileParser()
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Strings-Empty.swift.out")
+    let expected = Fixtures.output(for: "Empty.swift.out", sub: .strings)
     XCTDiffStrings(result, expected)
   }
 
@@ -31,10 +31,10 @@ class StringsTests: XCTestCase {
     parser.addEntry(StringsFileParser.Entry(key: "Title", translation: "My awesome title"))
     parser.addEntry(StringsFileParser.Entry(key: "Greetings", translation: "Hello, my name is %@ and I'm %d", types: .Object, .Int))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Strings-Entries-Default.swift.out")
+    let expected = Fixtures.output(for: "Entries-Default.swift.out", sub: .strings)
     XCTDiffStrings(result, expected)
   }
 
@@ -42,10 +42,10 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Strings-File-Default.swift.out")
+    let expected = Fixtures.output(for: "File-Default.swift.out", sub: .strings)
     XCTDiffStrings(result, expected)
   }
 
@@ -53,10 +53,10 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "LocMultiline.strings", sub: .strings))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Strings-Multiline.swift.out")
+    let expected = Fixtures.output(for: "Multiline.swift.out", sub: .strings)
     XCTDiffStrings(result, expected)
   }
 
@@ -64,10 +64,10 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "LocUTF8.strings", sub: .strings))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Strings-File-UTF8-Default.swift.out")
+    let expected = Fixtures.output(for: "File-UTF8-Default.swift.out", sub: .strings)
     XCTDiffStrings(result, expected)
   }
 
@@ -75,10 +75,10 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "strings-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTLoc"))
 
-    let expected = Fixtures.string(for: "Strings-File-CustomName.swift.out")
+    let expected = Fixtures.output(for: "File-CustomName.swift.out", sub: .strings)
     XCTDiffStrings(result, expected)
   }
 
@@ -86,10 +86,10 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-swift3.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "strings-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Strings-File-Swift3.swift.out")
+    let expected = Fixtures.output(for: "File-Swift3.swift.out", sub: .strings)
     XCTDiffStrings(result, expected)
   }
   
@@ -97,10 +97,10 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
     
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-no-comments-swift3.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "strings-no-comments-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
     
-    let expected = Fixtures.string(for: "Strings-File-NoComments-Swift3.swift.out")
+    let expected = Fixtures.output(for: "File-NoComments-Swift3.swift.out", sub: .strings)
     XCTDiffStrings(result, expected)
   }
 
@@ -108,10 +108,10 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-structured.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "strings-structured.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Strings-File-Structured.swift.out")
+    let expected = Fixtures.output(for: "File-Structured.swift.out", sub: .strings)
     XCTDiffStrings(result, expected)
   }
 
@@ -119,10 +119,10 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "LocStructuredOnly.strings", sub: .strings))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-structured.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "strings-structured.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Strings-File-Structured-Only.swift.out")
+    let expected = Fixtures.output(for: "File-Structured-Only.swift.out", sub: .strings)
     XCTDiffStrings(result, expected)
   }
 
@@ -130,10 +130,10 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-dot-syntax.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "strings-dot-syntax.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Strings-File-Dot-Syntax.swift.out")
+    let expected = Fixtures.output(for: "File-Dot-Syntax.swift.out", sub: .strings)
     XCTDiffStrings(result, expected)
   }
 
@@ -141,10 +141,10 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-dot-syntax-swift3.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "strings-dot-syntax-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Strings-File-Dot-Syntax-Swift3.swift.out")
+    let expected = Fixtures.output(for: "File-Dot-Syntax-Swift3.swift.out", sub: .strings)
     XCTDiffStrings(result, expected)
   }
 
@@ -152,10 +152,10 @@ class StringsTests: XCTestCase {
     let parser = StringsFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "Localizable.strings", sub: .strings))
     
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "strings-genstrings.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "strings-genstrings.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
     
-    let expected = Fixtures.string(for: "Strings-Localizable-Genstrings.swift.out")
+    let expected = Fixtures.output(for: "Localizable-Genstrings.swift.out", sub: .strings)
     XCTDiffStrings(result, expected)
   }
   

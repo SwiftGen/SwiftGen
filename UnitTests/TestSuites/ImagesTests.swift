@@ -20,10 +20,10 @@ class ImagesTests: XCTestCase {
   func testEmpty() {
     let parser = AssetsCatalogParser()
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "images-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Images-Empty.swift.out")
+    let expected = Fixtures.output(for: "Empty.swift.out", sub: .images)
     XCTDiffStrings(result, expected)
   }
 
@@ -31,10 +31,10 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: Fixtures.path(for: "Images.xcassets", sub: .images))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "images-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Images-File-Default.swift.out")
+    let expected = Fixtures.output(for: "File-Default.swift.out", sub: .images)
     XCTDiffStrings(result, expected)
   }
 
@@ -42,10 +42,10 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: Fixtures.path(for: "Images.xcassets", sub: .images))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-swift3.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "images-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Images-File-Swift3.swift.out")
+    let expected = Fixtures.output(for: "File-Swift3.swift.out", sub: .images)
     XCTDiffStrings(result, expected)
   }
 
@@ -53,10 +53,10 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: Fixtures.path(for: "Images.xcassets", sub: .images))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-allvalues.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "images-allvalues.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Images-File-AllValues.swift.out")
+    let expected = Fixtures.output(for: "File-AllValues.swift.out", sub: .images)
     XCTDiffStrings(result, expected)
   }
 
@@ -64,10 +64,10 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: Fixtures.path(for: "Images.xcassets", sub: .images))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "images-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTImages"))
 
-    let expected = Fixtures.string(for: "Images-File-CustomName.swift.out")
+    let expected = Fixtures.output(for: "File-CustomName.swift.out", sub: .images)
     XCTDiffStrings(result, expected)
   }
 
@@ -75,10 +75,10 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: Fixtures.path(for: "Images.xcassets", sub: .images))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-dot-syntax.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "images-dot-syntax.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Images-File-Dot-Syntax.swift.out")
+    let expected = Fixtures.output(for: "File-Dot-Syntax.swift.out", sub: .images)
     XCTDiffStrings(result, expected)
   }
 
@@ -86,10 +86,10 @@ class ImagesTests: XCTestCase {
     let parser = AssetsCatalogParser()
     parser.parseCatalog(at: Fixtures.path(for: "Images.xcassets", sub: .images))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "images-dot-syntax-swift3.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "images-dot-syntax-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Images-File-Dot-Syntax-Swift3.swift.out")
+    let expected = Fixtures.output(for: "File-Dot-Syntax-Swift3.swift.out", sub: .images)
     XCTDiffStrings(result, expected)
   }
 }

@@ -16,10 +16,10 @@ class ColorsTextFileTests: XCTestCase {
   func testEmpty() {
     let parser = ColorsTextFileParser()
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Colors-Empty.swift.out")
+    let expected = Fixtures.output(for: "Empty.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -33,10 +33,10 @@ class ColorsTextFileTests: XCTestCase {
       XCTFail("Failed with unexpected error \(error)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Colors-List-Default.swift.out")
+    let expected = Fixtures.output(for: "List-Default.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -50,10 +50,10 @@ class ColorsTextFileTests: XCTestCase {
       XCTFail("Failed with unexpected error \(error)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-rawValue.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-rawValue.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Colors-List-RawValue.swift.out")
+    let expected = Fixtures.output(for: "List-RawValue.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -61,10 +61,10 @@ class ColorsTextFileTests: XCTestCase {
     let parser = ColorsTextFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "colors.txt", sub: .colors))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Colors-Txt-File-Default.swift.out")
+    let expected = Fixtures.output(for: "Txt-File-Default.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -72,10 +72,10 @@ class ColorsTextFileTests: XCTestCase {
     let parser = ColorsTextFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "colors.txt", sub: .colors))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-swift3.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Colors-Txt-File-Swift3.swift.out")
+    let expected = Fixtures.output(for: "Txt-File-Swift3.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -83,10 +83,10 @@ class ColorsTextFileTests: XCTestCase {
     let parser = ColorsTextFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "colors.txt", sub: .colors))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
 
-    let expected = Fixtures.string(for: "Colors-Txt-File-CustomName.swift.out")
+    let expected = Fixtures.output(for: "Txt-File-CustomName.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -123,10 +123,10 @@ class ColorsCLRFileTests: XCTestCase {
   func testEmpty() {
     let parser = ColorsCLRFileParser()
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Colors-Empty.swift.out")
+    let expected = Fixtures.output(for: "Empty.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -134,10 +134,10 @@ class ColorsCLRFileTests: XCTestCase {
     let parser = ColorsCLRFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "colors.clr", sub: .colors))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Colors-File-Default.swift.out")
+    let expected = Fixtures.output(for: "File-Default.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -145,10 +145,10 @@ class ColorsCLRFileTests: XCTestCase {
     let parser = ColorsCLRFileParser()
     try! parser.parseFile(at: Fixtures.path(for: "colors.clr", sub: .colors))
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
 
-    let expected = Fixtures.string(for: "Colors-File-CustomName.swift.out")
+    let expected = Fixtures.output(for: "File-CustomName.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -171,10 +171,10 @@ class ColorsXMLFileTests: XCTestCase {
   func testEmpty() {
     let parser = ColorsXMLFileParser()
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Colors-Empty.swift.out")
+    let expected = Fixtures.output(for: "Empty.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -186,10 +186,10 @@ class ColorsXMLFileTests: XCTestCase {
       XCTFail("Exception while parsing file: \(error)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Colors-File-Default.swift.out")
+    let expected = Fixtures.output(for: "File-Default.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -201,10 +201,10 @@ class ColorsXMLFileTests: XCTestCase {
       XCTFail("Exception while parsing file: \(error)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
 
-    let expected = Fixtures.string(for: "Colors-File-CustomName.swift.out")
+    let expected = Fixtures.output(for: "File-CustomName.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -239,10 +239,10 @@ class ColorsJSONFileTests: XCTestCase {
   func testEmpty() {
     let parser = ColorsJSONFileParser()
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Colors-Empty.swift.out")
+    let expected = Fixtures.output(for: "Empty.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -254,10 +254,10 @@ class ColorsJSONFileTests: XCTestCase {
       XCTFail("Exception while parsing file: \(error)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Colors-File-Default.swift.out")
+    let expected = Fixtures.output(for: "File-Default.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 
@@ -269,10 +269,10 @@ class ColorsJSONFileTests: XCTestCase {
       XCTFail("Exception while parsing file: \(error)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "colors-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext(enumName: "XCTColors"))
 
-    let expected = Fixtures.string(for: "Colors-File-CustomName.swift.out")
+    let expected = Fixtures.output(for: "File-CustomName.swift.out", sub: .colors)
     XCTDiffStrings(result, expected)
   }
 

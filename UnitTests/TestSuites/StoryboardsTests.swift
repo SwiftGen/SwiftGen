@@ -26,10 +26,10 @@ class StoryboardsiOSTests: XCTestCase {
   func testEmpty() {
     let parser = StoryboardParser()
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Storyboards-Empty.swift.out")
+    let expected = Fixtures.output(for: "Empty.swift.out", sub: .storyboardsiOS)
     XCTDiffStrings(result, expected)
   }
 
@@ -41,10 +41,10 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Storyboards-Message-Default.swift.out")
+    let expected = Fixtures.output(for: "Message-Default.swift.out", sub: .storyboardsiOS)
     XCTDiffStrings(result, expected)
   }
 
@@ -56,10 +56,10 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-lowercase.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-lowercase.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Storyboards-Message-Lowercase.swift.out")
+    let expected = Fixtures.output(for: "Message-Lowercase.swift.out", sub: .storyboardsiOS)
     XCTDiffStrings(result, expected)
   }
 
@@ -71,10 +71,10 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Storyboards-Anonymous-Default.swift.out")
+    let expected = Fixtures.output(for: "Anonymous-Default.swift.out", sub: .storyboardsiOS)
     XCTDiffStrings(result, expected)
   }
 
@@ -86,11 +86,11 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-default.stencil"), environment: stencilSwiftEnvironment())
     let ctx = parser.stencilContext()
     let result = try! template.render(ctx)
 
-    let expected = Fixtures.string(for: "Storyboards-All-Default.swift.out")
+    let expected = Fixtures.output(for: "All-Default.swift.out", sub: .storyboardsiOS)
     XCTDiffStrings(result, expected)
   }
 
@@ -102,11 +102,11 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-default.stencil"), environment: stencilSwiftEnvironment())
     let ctx = parser.stencilContext(sceneEnumName: "XCTStoryboardsScene", segueEnumName: "XCTStoryboardsSegue")
     let result = try! template.render(ctx)
 
-    let expected = Fixtures.string(for: "Storyboards-All-CustomName.swift.out")
+    let expected = Fixtures.output(for: "All-CustomName.swift.out", sub: .storyboardsiOS)
     XCTDiffStrings(result, expected)
   }
 
@@ -118,10 +118,10 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-swift3.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Storyboards-Anonymous-Swift3.swift.out")
+    let expected = Fixtures.output(for: "Anonymous-Swift3.swift.out", sub: .storyboardsiOS)
     XCTDiffStrings(result, expected)
   }
 
@@ -133,10 +133,10 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-swift3.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Storyboards-Wizard-Swift3.swift.out")
+    let expected = Fixtures.output(for: "Wizard-Swift3.swift.out", sub: .storyboardsiOS)
     XCTDiffStrings(result, expected)
   }
 
@@ -148,10 +148,10 @@ class StoryboardsiOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-swift3.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Storyboards-AdditionalImport-Swift3.swift.out")
+    let expected = Fixtures.output(for: "AdditionalImport-Swift3.swift.out", sub: .storyboardsiOS)
     XCTDiffStrings(result, expected)
   }
 }
@@ -163,10 +163,10 @@ class StoryboardsOSXTests: XCTestCase {
   func testOSXEmpty() {
     let parser = StoryboardParser()
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-osx-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-osx-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Storyboards-osx-Empty.swift.out")
+    let expected = Fixtures.output(for: "Empty.swift.out", sub: .storyboardsMacOS)
     XCTDiffStrings(result, expected)
   }
 
@@ -178,10 +178,10 @@ class StoryboardsOSXTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-osx-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-osx-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Storyboards-osx-Message-Default.swift.out")
+    let expected = Fixtures.output(for: "Message-Default.swift.out", sub: .storyboardsMacOS)
     XCTDiffStrings(result, expected)
   }
 
@@ -193,10 +193,10 @@ class StoryboardsOSXTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-osx-lowercase.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-osx-lowercase.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Storyboards-osx-Message-Lowercase.swift.out")
+    let expected = Fixtures.output(for: "Message-Lowercase.swift.out", sub: .storyboardsMacOS)
     XCTDiffStrings(result, expected)
   }
   
@@ -208,10 +208,10 @@ class StoryboardsOSXTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
     
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-osx-swift3.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-osx-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
     
-    let expected = Fixtures.string(for: "Storyboards-osx-Message-Swift3.swift.out")
+    let expected = Fixtures.output(for: "Message-Swift3.swift.out", sub: .storyboardsMacOS)
     XCTDiffStrings(result, expected)
   }
 
@@ -223,10 +223,10 @@ class StoryboardsOSXTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-osx-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-osx-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Storyboards-osx-Anonymous-Default.swift.out")
+    let expected = Fixtures.output(for: "Anonymous-Default.swift.out", sub: .storyboardsMacOS)
     XCTDiffStrings(result, expected)
   }
 
@@ -238,11 +238,11 @@ class StoryboardsOSXTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-osx-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-osx-default.stencil"), environment: stencilSwiftEnvironment())
     let ctx = parser.stencilContext()
     let result = try! template.render(ctx)
 
-    let expected = Fixtures.string(for: "Storyboards-osx-All-Default.swift.out")
+    let expected = Fixtures.output(for: "All-Default.swift.out", sub: .storyboardsMacOS)
     XCTDiffStrings(result, expected)
   }
 
@@ -254,10 +254,10 @@ class StoryboardsOSXTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-osx-default.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-osx-default.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
 
-    let expected = Fixtures.string(for: "Storyboards-osx-AdditionalImport-Default.swift.out")
+    let expected = Fixtures.output(for: "AdditionalImport-Default.swift.out", sub: .storyboardsMacOS)
     XCTDiffStrings(result, expected)
   }
   
@@ -269,10 +269,10 @@ class StoryboardsOSXTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let template = SwiftTemplate(templateString: Fixtures.string(for: "storyboards-osx-swift3.stencil"), environment: stencilSwiftEnvironment())
+    let template = SwiftTemplate(templateString: Fixtures.template(for: "storyboards-osx-swift3.stencil"), environment: stencilSwiftEnvironment())
     let result = try! template.render(parser.stencilContext())
     
-    let expected = Fixtures.string(for: "Storyboards-osx-AdditionalImport-Swift3.swift.out")
+    let expected = Fixtures.output(for: "AdditionalImport-Swift3.swift.out", sub: .storyboardsMacOS)
     XCTDiffStrings(result, expected)
   }
 }
