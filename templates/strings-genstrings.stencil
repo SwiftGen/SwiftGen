@@ -20,11 +20,11 @@ extension {{enumName}}: CustomStringConvertible {
       {% for string in strings %}
       {% if string.params %}
       case .{{string.key|swiftIdentifier|snakeToCamelCase}}({{string.params.declarations|join}}):
-        let format = NSLocalizedString("{{string.key}}", comment: "")
+        let format = NSLocalizedString("{{string.key}}", bundle: stringsBundle, comment: "")
         return {{enumName}}.tr(format, {{string.params.names|join}})
       {% else %}
       case .{{string.key|swiftIdentifier|snakeToCamelCase}}:
-        let format = NSLocalizedString("{{string.key}}", comment: "")
+        let format = NSLocalizedString("{{string.key}}", bundle: stringsBundle, comment: "")
         return {{enumName}}.tr(format)
       {% endif %}
       {% endfor %}
@@ -39,6 +39,10 @@ extension {{enumName}}: CustomStringConvertible {
 func tr(key: {{enumName}}) -> String {
   return key.string
 }
+
+private final class BundleToken {}
+fileprivate let stringsBundle = Bundle(for: BundleToken.self)
+
 {% else %}
 // No string found
 {% endif %}
