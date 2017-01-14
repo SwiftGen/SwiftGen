@@ -8,10 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030C171B6D43D400275BF5 /* TestsHelper.swift */; };
-		09A87B5A1BCCA37200D9B9F5 /* StoryboardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BC91B6D2BB700275BF5 /* StoryboardsTests.swift */; };
-		09A87B5B1BCCA37800D9B9F5 /* ImagesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD11B6D2E3900275BF5 /* ImagesTests.swift */; };
-		09A87B5C1BCCA37F00D9B9F5 /* ColorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD81B6D2E5900275BF5 /* ColorsTests.swift */; };
-		09A87B5D1BCCA38400D9B9F5 /* StringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD51B6D2E3900275BF5 /* StringsTests.swift */; };
+		09A87B5C1BCCA37F00D9B9F5 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD81B6D2E5900275BF5 /* Tests.swift */; };
 		234F7E7D1DEBD765001B3C10 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7B2D31BCC382800D7F488 /* main.swift */; };
 		234F7E7E1DEBD765001B3C10 /* ArgumentsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091150301BD31A3300EBC803 /* ArgumentsUtils.swift */; };
 		234F7E7F1DEBD765001B3C10 /* templates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921FBA01BE7D6B900B488B5 /* templates.swift */; };
@@ -22,11 +19,7 @@
 		234F7E841DEBD765001B3C10 /* fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24AFD011C91DE33005FE3EF /* fonts.swift */; };
 		A99DC0C5A2CECABB34A121C8 /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F17C8613373A017F0B70B5C /* Pods_swiftgen.framework */; };
 		C126229CBD385F58FAF629D2 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C3A19C1BBD55A5644EDC18 /* Pods_UnitTests.framework */; };
-		C2DBEADE1C8F87AD00E62C9E /* FontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DBEADD1C8F87AD00E62C9E /* FontsTests.swift */; };
-		DD5F34E31E22CDAE00AEB5DA /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = DD5F34E21E22CDAE00AEB5DA /* Fixtures */; };
-		DD5F34E51E231D3400AEB5DA /* Expected in Resources */ = {isa = PBXBuildFile; fileRef = DD5F34E41E231D3400AEB5DA /* Expected */; };
 		DDC09D021E1D199A005C6EE6 /* templates in Resources */ = {isa = PBXBuildFile; fileRef = DDC09D011E1D199A005C6EE6 /* templates */; };
-		DDC09D531E1D1C0C005C6EE6 /* templates in Resources */ = {isa = PBXBuildFile; fileRef = DDC09D011E1D199A005C6EE6 /* templates */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -66,10 +59,7 @@
 		0901413E1BCC64C9002E8617 /* storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = storyboards.swift; sourceTree = "<group>"; };
 		090141401BCC64FE002E8617 /* images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = images.swift; sourceTree = "<group>"; };
 		09030BC01B6D2A8F00275BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		09030BC91B6D2BB700275BF5 /* StoryboardsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = StoryboardsTests.swift; sourceTree = "<group>"; tabWidth = 2; };
-		09030BD11B6D2E3900275BF5 /* ImagesTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ImagesTests.swift; sourceTree = "<group>"; tabWidth = 2; };
-		09030BD51B6D2E3900275BF5 /* StringsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsTests.swift; sourceTree = "<group>"; };
-		09030BD81B6D2E5900275BF5 /* ColorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsTests.swift; sourceTree = "<group>"; };
+		09030BD81B6D2E5900275BF5 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		09030C171B6D43D400275BF5 /* TestsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TestsHelper.swift; sourceTree = "<group>"; tabWidth = 2; };
 		091150301BD31A3300EBC803 /* ArgumentsUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgumentsUtils.swift; sourceTree = "<group>"; };
 		0921FBA01BE7D6B900B488B5 /* templates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = templates.swift; sourceTree = "<group>"; };
@@ -86,10 +76,7 @@
 		90843707F44D6F8153913604 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		920E71433B3570488CF5B052 /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C24AFD011C91DE33005FE3EF /* fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = fonts.swift; sourceTree = "<group>"; tabWidth = 2; };
-		C2DBEADD1C8F87AD00E62C9E /* FontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsTests.swift; sourceTree = "<group>"; };
 		D8AC6E8E60EADE4523EA68E9 /* Pods-swiftgen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.release.xcconfig"; sourceTree = "<group>"; };
-		DD5F34E21E22CDAE00AEB5DA /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
-		DD5F34E41E231D3400AEB5DA /* Expected */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Expected; sourceTree = "<group>"; };
 		DDC09D011E1D199A005C6EE6 /* templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = templates; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,7 +131,6 @@
 			children = (
 				09030C171B6D43D400275BF5 /* TestsHelper.swift */,
 				09030BC71B6D2BA300275BF5 /* TestSuites */,
-				DD5F34E41E231D3400AEB5DA /* Expected */,
 				09030BC01B6D2A8F00275BF5 /* Info.plist */,
 			);
 			path = UnitTests;
@@ -153,11 +139,7 @@
 		09030BC71B6D2BA300275BF5 /* TestSuites */ = {
 			isa = PBXGroup;
 			children = (
-				09030BD81B6D2E5900275BF5 /* ColorsTests.swift */,
-				09030BD11B6D2E3900275BF5 /* ImagesTests.swift */,
-				09030BC91B6D2BB700275BF5 /* StoryboardsTests.swift */,
-				09030BD51B6D2E3900275BF5 /* StringsTests.swift */,
-				C2DBEADD1C8F87AD00E62C9E /* FontsTests.swift */,
+				09030BD81B6D2E5900275BF5 /* Tests.swift */,
 			);
 			path = TestSuites;
 			sourceTree = "<group>";
@@ -198,7 +180,6 @@
 		DDC09C7D1E1D193F005C6EE6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DD5F34E21E22CDAE00AEB5DA /* Fixtures */,
 				DDC09D011E1D199A005C6EE6 /* templates */,
 			);
 			path = Resources;
@@ -223,7 +204,6 @@
 			buildConfigurationList = 09A87B551BCCA2C600D9B9F5 /* Build configuration list for PBXNativeTarget "UnitTests" */;
 			buildPhases = (
 				C3989F9D7584D08720E81BDA /* [CP] Check Pods Manifest.lock */,
-				0960B14D1D03D11100CF53E4 /* ⚠️ SwiftLint */,
 				0960B14C1D03D0EC00CF53E4 /* ⛏ Compile-Check Templates */,
 				09A87B4C1BCCA2C600D9B9F5 /* Sources */,
 				09A87B4D1BCCA2C600D9B9F5 /* Frameworks */,
@@ -308,9 +288,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD5F34E31E22CDAE00AEB5DA /* Fixtures in Resources */,
-				DD5F34E51E231D3400AEB5DA /* Expected in Resources */,
-				DDC09D531E1D1C0C005C6EE6 /* templates in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,21 +315,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PROJECT_DIR}\"/scripts/check_templates.sh";
-			showEnvVarsInLog = 0;
-		};
-		0960B14D1D03D11100CF53E4 /* ⚠️ SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "⚠️ SwiftLint";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}\"/scripts/swiftlint-templates.sh";
 			showEnvVarsInLog = 0;
 		};
 		234F7E7C1DEBD742001B3C10 /* ⚠️ SwiftLint */ = {
@@ -466,12 +428,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2DBEADE1C8F87AD00E62C9E /* FontsTests.swift in Sources */,
-				09A87B5B1BCCA37800D9B9F5 /* ImagesTests.swift in Sources */,
-				09A87B5A1BCCA37200D9B9F5 /* StoryboardsTests.swift in Sources */,
-				09A87B5D1BCCA38400D9B9F5 /* StringsTests.swift in Sources */,
 				09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */,
-				09A87B5C1BCCA37F00D9B9F5 /* ColorsTests.swift in Sources */,
+				09A87B5C1BCCA37F00D9B9F5 /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
