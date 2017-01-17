@@ -237,6 +237,8 @@ let ban = tr(.BananasOwner(2, "John"))
 
 This [script](https://gist.github.com/Lutzifer/3e7d967f73e38b57d4355f23274f303d) from [Lutzifer](https://github.com/Lutzifer/) can be run inside the project to transform `NSLocalizedString(...)` calls to the `tr(...)` syntax.
 
+This [script](https://gist.github.com/huguesbr/375730d567020da83836483074a67ff9) from [HuguesBR](https://github.com/huguesbr) can be run inside the (annotated) project to transform specific string (see detail in the gist) syntax `` to the `tr(...)` syntax as well as populating the `Localizable.strings`'s file
+
 
 ### Dot Syntax Support
 
