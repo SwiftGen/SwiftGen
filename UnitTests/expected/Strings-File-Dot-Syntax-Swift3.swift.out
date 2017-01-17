@@ -78,10 +78,12 @@ enum L10n {
 
 extension L10n {
   fileprivate static func tr(_ key: String, _ args: CVarArg...) -> String {
-    let format = NSLocalizedString(key, comment: "")
+    let format = NSLocalizedString(key, bundle: Bundle(for: BundleToken.self), comment: "")
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
+
+private final class BundleToken {}
 
 // swiftlint:enable type_body_length
 // swiftlint:enable nesting
