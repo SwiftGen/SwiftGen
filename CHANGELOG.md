@@ -16,6 +16,8 @@
 
 ### New Features
 
+* Added a script reference to simplify and automate localization of existing non localized project.  
+  [HuguesBR](https://github.com/HuguesBR)
 * Added a `storyboards-osx-swift3` template.  
   [Felix Lisczyk](https://github.com/FelixII)
   [#225](https://github.com/AliSoftware/SwiftGen/pull/225)
