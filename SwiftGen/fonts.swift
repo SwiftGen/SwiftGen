@@ -26,7 +26,8 @@ let fontsCommand = command(
         prefix: "fonts", templateShortName: templateName, templateFullPath: templatePath
       )
 
-      let template = try SwiftTemplate(templateString: templateRealPath.read(), environment: stencilSwiftEnvironment())
+      let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
+                                              environment: stencilSwiftEnvironment())
       let context = parser.stencilContext(enumName: enumName)
       let rendered = try template.render(context)
       output.write(content: rendered, onlyIfChanged: true)

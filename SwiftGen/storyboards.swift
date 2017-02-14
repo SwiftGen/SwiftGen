@@ -39,7 +39,8 @@ let storyboardsCommand = command(
       templateShortName: templateName,
       templateFullPath: templatePath
     )
-    let template = try SwiftTemplate(templateString: templateRealPath.read(), environment: stencilSwiftEnvironment())
+    let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
+                                            environment: stencilSwiftEnvironment())
     let context = parser.stencilContext(
       sceneEnumName: sceneEnumName, segueEnumName: segueEnumName
     )

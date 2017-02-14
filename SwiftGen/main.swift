@@ -46,6 +46,6 @@ let main = Group {
   $0.addCommand("fonts", "generate code for your UIFonts", fontsCommand)
 }
 
-let version = Bundle(for: SwiftTemplate.self)
+let version = Bundle.main
   .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
 main.run("SwiftGen v\(version)")
