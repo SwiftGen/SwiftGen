@@ -4,10 +4,15 @@
 // MIT Licence
 //
 
+import Foundation
 import Stencil
 
+#if os(Linux) && !swift(>=3.1)
+typealias NSRegularExpression = RegularExpression
+#endif
+
 // Workaround until Stencil fixes https://github.com/kylef/Stencil/issues/22
-open class SwiftTemplate: Template {
+open class StencilSwiftTemplate: Template {
   public required init(templateString: String, environment: Environment? = nil, name: String? = nil) {
     let templateStringWithMarkedNewlines = templateString
         .replacingOccurrences(of: "\n\n", with: "\n\u{000b}\n")
@@ -39,27 +44,4 @@ open class SwiftTemplate: Template {
       .replacingOccurrences(of: "\n\u{000b}\n", with: "\n\n")
     return unmarkedNewlines
   }
-}
-
-// Create StencilSwiftKit-specific namespace including custom tags & filters
-func stencilSwiftExtension() -> Extension {
-  let namespace = Extension()
-  namespace.registerTag("set", parser: SetNode.parse)
-  namespace.registerTag("macro", parser: MacroNode.parse)
-  namespace.registerTag("call", parser: CallNode.parse)
-  namespace.registerFilter("swiftIdentifier", filter: StringFilters.stringToSwiftIdentifier)
-  namespace.registerFilter("join", filter: ArrayFilters.join)
-  namespace.registerFilter("lowerFirstWord", filter: StringFilters.lowerFirstWord)
-  namespace.registerFilter("snakeToCamelCase", filter: StringFilters.snakeToCamelCase)
-  namespace.registerFilter("snakeToCamelCaseNoPrefix", filter: StringFilters.snakeToCamelCaseNoPrefix)
-  namespace.registerFilter("titlecase", filter: StringFilters.titlecase)
-  namespace.registerFilter("hexToInt", filter: NumFilters.hexToInt)
-  namespace.registerFilter("int255toFloat", filter: NumFilters.int255toFloat)
-  namespace.registerFilter("percent", filter: NumFilters.percent)
-  namespace.registerFilter("escapeReservedKeywords", filter: StringFilters.escapeReservedKeywords)
-  return namespace
-}
-
-public func stencilSwiftEnvironment() -> Environment {
-  return Environment(extensions: [stencilSwiftExtension()], templateClass: SwiftTemplate.self)
 }

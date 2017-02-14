@@ -4,6 +4,7 @@
 // MIT Licence
 //
 
+import Foundation
 import Stencil
 
 enum FilterError: Error {

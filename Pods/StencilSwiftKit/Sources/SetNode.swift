@@ -7,8 +7,8 @@
 import Stencil
 
 class SetNode: NodeType {
-  private let variableName: String
-  private let nodes: [NodeType]
+  let variableName: String
+  let nodes: [NodeType]
 
   class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     let comps = token.components()

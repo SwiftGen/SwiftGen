@@ -6,7 +6,7 @@
 
 import Stencil
 
-private struct CallableBlock: NodeType {
+struct CallableBlock: NodeType {
   let parameters: [String]
   let nodes: [NodeType]
 
@@ -26,9 +26,9 @@ private struct CallableBlock: NodeType {
 }
 
 class MacroNode: NodeType {
-  private let variableName: String
-  private let parameters: [String]
-  private let nodes: [NodeType]
+  let variableName: String
+  let parameters: [String]
+  let nodes: [NodeType]
 
   class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
@@ -60,8 +60,8 @@ class MacroNode: NodeType {
 }
 
 class CallNode: NodeType {
-  private let variableName: String
-  private let arguments: [Variable]
+  let variableName: String
+  let arguments: [Variable]
 
   class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()

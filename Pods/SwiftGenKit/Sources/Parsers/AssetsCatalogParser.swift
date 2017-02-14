@@ -36,11 +36,25 @@ private enum AssetCatalog {
   static let filename = "filename"
   static let providesNamespace = "provides-namespace"
   static let root = "com.apple.actool.catalog-contents"
+  
+  enum Extension {
+    static let imageSet = "imageset"
+	
+	/**
+	 * This is a list of supported asset catalog item types, for now we just
+	 * support `image set`s. If you want to add support for new types, just add
+	 * it to this whitelist, and add the necessary code to the
+	 * `process(items:withPrefix:)` method.
+	 *
+	 * Note: The `actool` utility that we use for parsing hase some issues. Check
+	 * this issue for more information:
+	 * https://github.com/SwiftGen/SwiftGen/issues/228
+	 */
+    static let supported = [imageSet]
+  }
 }
 
 extension AssetsCatalogParser {
-  static let imageSetExtension = "imageset"
-
   /**
    This method recursively parses a tree of nodes (similar to a directory structure)
    resulting from the `actool` utility.
@@ -82,12 +96,12 @@ extension AssetsCatalogParser {
       guard let filename = item[AssetCatalog.filename] as? String else { continue }
       let path = Path(filename)
 
-      if path.extension == AssetsCatalogParser.imageSetExtension {
+      if path.extension == AssetCatalog.Extension.imageSet {
         // this is a simple imageset
         let imageName = path.lastComponentWithoutExtension
 
         result += [.image(name: imageName, value: "\(prefix)\(imageName)")]
-      } else {
+      } else if path.extension == nil || AssetCatalog.Extension.supported.contains(path.extension ?? "") {
         // this is a group/folder
         let children = item[AssetCatalog.children] as? [[String: Any]] ?? []
 
