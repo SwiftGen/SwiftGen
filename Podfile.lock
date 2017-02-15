@@ -28,7 +28,7 @@ CHECKOUT OPTIONS:
     :commit: 99efba56e942270780a452e5dcdfa1a839839cf4
     :git: https://github.com/kylef/Stencil
   StencilSwiftKit:
-    :commit: 55bfb3f229fe61b17964f7fc6e6972dee1666573
+    :commit: fe471254f40d579091878997702a333b6f56b66a
     :git: https://github.com/SwiftGen/StencilSwiftKit
   SwiftGenKit:
     :commit: c7896a32f280b7e3a0d17837b0c9d6c5bb6d9702
