@@ -14,8 +14,9 @@ let colorsCommand = command(
   outputOption,
   templateOption(prefix: "colors"), templatePathOption,
   Option<String>("enumName", "ColorName", flag: "e", description: "The name of the enum to generate"),
+  VariadicOption<String>("param", [], description: "List of template parameters"),
   Argument<Path>("FILE", description: "Colors.txt|.clr|.xml|.json file to parse.", validator: fileExists)
-) { output, templateName, templatePath, enumName, path in
+) { output, templateName, templatePath, enumName, parameters, path in
 
   let parser: ColorsFileParser
   switch path.extension {
@@ -46,7 +47,8 @@ let colorsCommand = command(
     let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                             environment: stencilSwiftEnvironment())
     let context = parser.stencilContext(enumName: enumName)
-    let rendered = try template.render(context)
+    let enriched = try StencilContext.enrich(context: context, parameters: parameters)
+    let rendered = try template.render(enriched)
     output.write(content: rendered, onlyIfChanged: true)
   } catch {
     printError(string: "error: failed to render template \(error)")

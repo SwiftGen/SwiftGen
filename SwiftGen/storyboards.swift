@@ -19,10 +19,11 @@ let storyboardsCommand = command(
   // Note: import option is deprecated.
   VariadicOption<String>("import", [],
     description: "Additional imports to be added to the generated file (DEPRECATED)"),
+  VariadicOption<String>("param", [], description: "List of template parameters"),
   VariadicArgument<Path>("PATH",
     description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard",
     validator: pathsExist)
-) { output, templateName, templatePath, sceneEnumName, segueEnumName, _, paths in
+) { output, templateName, templatePath, sceneEnumName, segueEnumName, _, parameters, paths in
   let parser = StoryboardParser()
 
   do {
@@ -41,10 +42,10 @@ let storyboardsCommand = command(
     )
     let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                             environment: stencilSwiftEnvironment())
-    let context = parser.stencilContext(
-      sceneEnumName: sceneEnumName, segueEnumName: segueEnumName
-    )
-    let rendered = try template.render(context)
+    let context = parser.stencilContext(sceneEnumName: sceneEnumName,
+                                        segueEnumName: segueEnumName)
+    let enriched = try StencilContext.enrich(context: context, parameters: parameters)
+    let rendered = try template.render(enriched)
     output.write(content: rendered, onlyIfChanged: true)
   } catch {
     printError(string: "error: \(error.localizedDescription)")
