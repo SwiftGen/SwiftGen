@@ -12,6 +12,3 @@ script:
  - scripts/install_swiftlint.sh
 # - PROJECT_DIR=. scripts/swiftlint-code.sh
  - rake tests
-# - PROJECT_DIR=. scripts/swiftlint-templates.sh
-# - PROJECT_DIR=. scripts/check_templates.sh
- - pod lib lint GenumKit/GenumKit.podspec --quick
