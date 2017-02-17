@@ -204,7 +204,6 @@
 			buildConfigurationList = 09A87B551BCCA2C600D9B9F5 /* Build configuration list for PBXNativeTarget "UnitTests" */;
 			buildPhases = (
 				C3989F9D7584D08720E81BDA /* [CP] Check Pods Manifest.lock */,
-				0960B14C1D03D0EC00CF53E4 /* ⛏ Compile-Check Templates */,
 				09A87B4C1BCCA2C600D9B9F5 /* Sources */,
 				09A87B4D1BCCA2C600D9B9F5 /* Frameworks */,
 				09A87B4E1BCCA2C600D9B9F5 /* Resources */,
@@ -302,21 +301,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0960B14C1D03D0EC00CF53E4 /* ⛏ Compile-Check Templates */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "⛏ Compile-Check Templates";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}\"/scripts/check_templates.sh";
-			showEnvVarsInLog = 0;
-		};
 		234F7E7C1DEBD742001B3C10 /* ⚠️ SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
