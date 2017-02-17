@@ -6,6 +6,7 @@
 
 import Commander
 import PathKit
+import Stencil
 import StencilSwiftKit
 import SwiftGenKit
 
@@ -48,8 +49,14 @@ let main = Group {
 
 let version = Bundle.main
   .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
-let stencilSwiftKit = Bundle(for: StencilSwiftKit.StencilSwiftTemplate.self)
+let stencilVersion = Bundle(for: Stencil.Template.self)
   .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
-let swiftGenKit = Bundle(for: SwiftGenKit.AssetsCatalogParser.self)
+let stencilSwiftKitVersion = Bundle(for: StencilSwiftKit.StencilSwiftTemplate.self)
   .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
-main.run("SwiftGen v\(version) (StencilSwiftKit v\(stencilSwiftKit), SwiftGenKit v\(swiftGenKit))")
+let swiftGenKitVersion = Bundle(for: SwiftGenKit.AssetsCatalogParser.self)
+  .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
+
+main.run("SwiftGen v\(version) (" +
+  "Stencil v\(stencilVersion), " +
+  "StencilSwiftKit v\(stencilSwiftKitVersion), " +
+  "SwiftGenKit v\(swiftGenKitVersion))")
