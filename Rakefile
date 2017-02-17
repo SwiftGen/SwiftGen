@@ -196,9 +196,6 @@ namespace :release do
     version = podspec_version
     puts "#{'SwiftGen.podspec'.ljust(25)} \u{1F449}  #{version}"
 
-    genumkit_version = podspec_version('GenumKit/GenumKit')
-    results << log_result( genumkit_version == version, 'GenumKit version', 'Please make sure GenumKit.podspec has the same version as SwiftGen.podspec')
-
     # Check if entry present in CHANGELOG
     changelog_entry = system(%Q{grep -q '^## #{Regexp.quote(version)}$' CHANGELOG.md})
     results << log_result(changelog_entry, "CHANGELOG, Entry added", "Please add an entry for #{version} in CHANGELOG.md")
