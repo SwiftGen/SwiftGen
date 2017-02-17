@@ -11,6 +11,7 @@ public extension Extension {
     registerTag("set", parser: SetNode.parse)
     registerTag("macro", parser: MacroNode.parse)
     registerTag("call", parser: CallNode.parse)
+    registerTag("map", parser: MapNode.parse)
     registerFilter("swiftIdentifier", filter: StringFilters.stringToSwiftIdentifier)
     registerFilter("join", filter: ArrayFilters.join)
     registerFilter("lowerFirstWord", filter: StringFilters.lowerFirstWord)

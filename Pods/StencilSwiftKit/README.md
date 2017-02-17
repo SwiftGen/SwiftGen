@@ -19,6 +19,10 @@ _TODO: [Write more extension Documentation](https://github.com/SwiftGen/StencilS
 * `SetNode`
   * `{% set <Name> %}…{% endset %}`
   * Renders the nodes inside this block immediately, and stores the result in the `<Name`>  variable of the current context.
+* `MapNode`
+  * `{% map <Variable> into <Name> using <ItemName> %}…{% endmap %}`
+  * Apply a `map` operator to an array, and store the result into a new array variable `<Name>` in the current context.
+  * Inside the map loop, a `maploop` special variable is available (akin to the `forloop` variable in `for` nodes). It exposes `maploop.count`, `maploop.first`, `maploop.last` and `maploop.item`.
 
 ## Filters
 
@@ -72,7 +76,7 @@ will become
 ]
 ```
 
-For easier use, you can use the `enrich(context:parameters:)` function to add the following variables to a context:
+For easier use, you can use the `StencilContext.enrich(context:parameters:environment:)` function to add the following variables to a context:
 
 - `param`: the parsed parameters using the parser mentioned above.
 - `env`: a dictionary with all available environment variables (such as `PATH`).

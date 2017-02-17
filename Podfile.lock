@@ -3,9 +3,9 @@ PODS:
   - PathKit (0.7.0)
   - Stencil (0.7.1):
     - PathKit (~> 0.7.0)
-  - StencilSwiftKit (0.0.1):
+  - StencilSwiftKit (1.0.0):
     - Stencil (~> 0.7.0)
-  - SwiftGenKit (0.0.1):
+  - SwiftGenKit (1.0.0):
     - PathKit (~> 0.7.0)
 
 DEPENDENCIES:
@@ -28,18 +28,18 @@ CHECKOUT OPTIONS:
     :commit: 99efba56e942270780a452e5dcdfa1a839839cf4
     :git: https://github.com/kylef/Stencil
   StencilSwiftKit:
-    :commit: 5f557d3ed943d0f6b35eb22e86fb9331e7264967
+    :commit: b785d9c6806dc2f1eade27a24d79aba529f42176
     :git: https://github.com/SwiftGen/StencilSwiftKit
   SwiftGenKit:
-    :commit: c7896a32f280b7e3a0d17837b0c9d6c5bb6d9702
+    :commit: c0ea71a9d065df453f02f52db79c062bad06fe4f
     :git: https://github.com/SwiftGen/SwiftgenKit
 
 SPEC CHECKSUMS:
   Commander: fba7c96c9e787ecc8ebe0737be875e1e18ef47ff
   PathKit: f8260c3e41bf4d552f3603853e32a5b325a176d4
   Stencil: 4177c0cabcdc40dd9be9b7f701d710d0a121023a
-  StencilSwiftKit: e2caece14b65d144da6bbe513a73b01be4833e7b
-  SwiftGenKit: b76d69d0695c266d2aaed1295d11bb1a56bb454c
+  StencilSwiftKit: 4c70cacd750cb5eff121961f7a0958c003be66f1
+  SwiftGenKit: 26ad63367ff9ea8bcccc58944233e4959bb8ff5a
 
 PODFILE CHECKSUM: e68257df4d9a29267b11cd2008cc10ed4090c2de
 
