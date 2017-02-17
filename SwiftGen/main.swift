@@ -48,4 +48,8 @@ let main = Group {
 
 let version = Bundle.main
   .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
-main.run("SwiftGen v\(version)")
+let stencilSwiftKit = Bundle(for: StencilSwiftKit.StencilSwiftTemplate.self)
+  .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
+let swiftGenKit = Bundle(for: SwiftGenKit.AssetsCatalogParser.self)
+  .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
+main.run("SwiftGen v\(version) (StencilSwiftKit v\(stencilSwiftKit), SwiftGenKit v\(swiftGenKit))")
