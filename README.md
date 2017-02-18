@@ -1,6 +1,6 @@
 # SwiftGen
 
-[![Build Status](https://travis-ci.org/AliSoftware/SwiftGen.svg?branch=master)](https://travis-ci.org/AliSoftware/SwiftGen)
+[![Build Status](https://travis-ci.org/SwiftGen/SwiftGen.svg?branch=master)](https://travis-ci.org/AliSoftware/SwiftGen)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftGen.svg)](https://img.shields.io/cocoapods/v/SwiftGen.svg)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftGen.svg?style=flat)](http://cocoadocs.org/docsets/SwiftGen)
 
