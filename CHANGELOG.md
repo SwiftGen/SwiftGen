@@ -2,6 +2,67 @@
 
 ---
 
+## 4.2.0
+
+[SwiftGenKit 1.0.1](https://github.com/SwiftGen/SwiftGenKit/blob/1.0.1/CHANGELOG.md) • [StencilSwiftKit 1.0.0](https://github.com/SwiftGen/StencilSwiftKit/blob/1.0.0/CHANGELOG.md) • [templates 1.0.0](https://github.com/SwiftGen/templates/blob/1.0.0/CHANGELOG.md)
+
+### Bug Fixes
+
+ℹ️ **Don't forget to look at the CHANGELOGs of the other repositories too** (links at the top of this file) in addition to this one, **to see all the changes across all of SwiftGen**.
+
+Notable fixes from those other repositories:
+
+> * Storyboards templates don't `import` your app module anymore, removing that annoying warning.  
+>   [@djbe](https://github.com/djbe)
+>   [SwiftGen/templates/#19](https://github.com/SwiftGen/templates/pull/19)
+
+### New Features
+
+* You can now pass custom parameters to your templates using the `--param X=Y` syntax.  
+  [@djbe](https://github.com/djbe)
+  [#265](https://github.com/SwiftGen/SwiftGen/pull/265/commits/3a7971ccbf16c41f0b2341e71b8a1ffbcabebecf)
+  * This command-line option can be repeated at will and used to pass structured custom parameters (e.g. `--param tabs=2 --param foo.bar=1 --param foo.baz=2`).  
+  * You can then use them in your templates using e.g. `{{param.tabs}}`, `{{param.foo.bar}}` & `{{param.foo.baz}}`.  
+
+* Templates can now access environment variables via the `env` key of the Stencil context (e.g. `{{env.USER}}`, `{{env.LANG}}`).  
+  [@djbe](https://github.com/djbe)
+  [#265](https://github.com/SwiftGen/SwiftGen/pull/265/commits/3a7971ccbf16c41f0b2341e71b8a1ffbcabebecf)
+  * This is especially useful when integrating SwiftGen as a Script Build Phase in your Xcode project as you can then access Xcode Build Settings exposed as
+  environment variables by Xcode, e.g. `{{env.PRODUCT_MODULE_NAME}}`.  
+
+ℹ️ **Don't forget to look at the CHANGELOGs of the other repositories too** (links at the top of this file) in addition to this one, **to see all the changes across all of SwiftGen**.
+
+Notable new features from those other repositories:
+
+> * Use an explicit bundle parameter to support frameworks for all templates.  
+>   [@NachoSoto](https://github.com/NachoSoto)
+>   [@djbe](https://github.com/djbe)
+>   [#255](https://github.com/SwiftGen/SwiftGen/pull/255)
+>   [SwiftGen/templates/#17](https://github.com/SwiftGen/templates/pull/17)
+
+### Deprecations
+
+In preparation for an upcoming cleanup of SwiftGen to remove some legacy code as well as Stencil old variables, tags and filters, and change the default templates to Swift 3, **some things are being deprecated and will be removed in the next major version 5.0**.
+
+As a result, if you wrote custom templates, you should already prepare for the upcoming 5.0 by migrating your templates to use the new variables (already avaiable in SwiftGen 4.2 / SwiftGenKit 1.0).
+
+See [#244](https://github.com/SwiftGen/SwiftGen/issues/244) and [the Migration Guide in the Wiki](https://github.com/SwiftGen/SwiftGen/wiki/Migration-Guides) for a list of deprcations and their replacements.
+
+### Internal changes
+
+* SwiftGen has migrated to [its own GitHub organization](https://github.com/SwiftGen/SwiftGen) 🎉.  
+* SwiftGen has been split in multiple repositories and separate modules.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [@djbe](https://github.com/djbe)
+  [#240](https://github.com/SwiftGen/SwiftGen/issues/240)
+  [#265](https://github.com/SwiftGen/SwiftGen/pull/265)
+  * The present [SwiftGen](https://github.com/SwiftGen/SwiftGen) is the CLI parsing. It is in charge of calling the frameworks, feeding them appropriate parameters according to the command line arguments.
+  * [SwiftGenKit](https://github.com/SwiftGen/SwiftGenKit) is the framework responsible for parsing your assets/resources and turning them into a structured representation compatible with `Stencil` templates.
+  * [StencilSwiftKit](https://github.com/SwiftGen/StencilSwiftKit) is a framework adding some extensions to the template engine [Stencil](https://github.com/kylef/Stencil) used by SwiftGen. It adds some tags and filters as well as convenience methods shared both by SwiftGen itself and by [Sourcery](https://github.com/krzysztofzablocki/Sourcery).
+  * The SwiftGen templates has been moved into [a dedicated templates repo](https://github.com/SwiftGen/templates) so they can evolve and be unit-tested separately of SwiftGen.
+
+Note: The next minor version will focus on bringing more documentation for all this new structure and improve ease of future contributions.
+
 ## 4.1.0
 
 ### Bug Fixes
@@ -9,10 +70,12 @@
 * Strings: fix issue with `dot-syntax-swift3` where function definitions were
   not Swift 3 guidelines compliant.  
   [David Jennes](https://github.com/djbe)
-  [#248](https://github.com/AliSoftware/SwiftGen/pull/248)
+  [#241](https://github.com/SwiftGen/SwiftGen/issues/241)
+  [#247](https://github.com/AliSoftware/SwiftGen/pull/247)
 * Snake cased keys with uppercase letters are correctly camel cased again.
   [Cihat Gündüz](https://github.com/Dschee)
   [#226](https://github.com/AliSoftware/SwiftGen/issues/226)
+  [#233](https://github.com/SwiftGen/SwiftGen/pull/233)
 
 ### New Features
 
