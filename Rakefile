@@ -192,7 +192,7 @@ namespace :release do
     `which bundler`
     results << log_result( $?.success?, 'Bundler installed', 'Please install bundler using `gem install bundler` and run `bundle install` first.')
 
-    # Extract version from GenumKit.podspec
+    # Extract version from SwiftGen.podspec
     version = podspec_version
     puts "#{'SwiftGen.podspec'.ljust(25)} \u{1F449}  #{version}"
 

@@ -1,6 +1,6 @@
 # SwiftGen
 
-[![Build Status](https://travis-ci.org/SwiftGen/SwiftGen.svg?branch=master)](https://travis-ci.org/AliSoftware/SwiftGen)
+[![Build Status](https://travis-ci.org/SwiftGen/SwiftGen.svg?branch=master)](https://travis-ci.org/SwiftGen/SwiftGen)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftGen.svg)](https://img.shields.io/cocoapods/v/SwiftGen.svg)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftGen.svg?style=flat)](http://cocoadocs.org/docsets/SwiftGen)
 
@@ -79,10 +79,10 @@ You can use `--help` on `swiftgen` or one of its subcommand to see the detailed 
 
 ### Additional documentation
 
-You can also see in the [wiki](https://github.com/AliSoftware/SwiftGen/wiki) some additional documentation, about:
+You can also see in the [wiki](https://github.com/SwiftGen/SwiftGen/wiki) some additional documentation, about:
 
-* how to [integrate SwiftGen in your Continuous Integration](https://github.com/AliSoftware/SwiftGen/wiki/Continuous-Integration) (Travis-CI, CircleCI, Jenkins, …)
-* how to [integrate in your Xcode project](https://github.com/AliSoftware/SwiftGen/wiki/Integrate-SwiftGen-in-an-xcodeproj) so it rebuild the constants every time you build
+* how to [integrate SwiftGen in your Continuous Integration](https://github.com/SwiftGen/SwiftGen/wiki/Continuous-Integration) (Travis-CI, CircleCI, Jenkins, …)
+* how to [integrate in your Xcode project](https://github.com/SwiftGen/SwiftGen/wiki/Integrate-SwiftGen-in-an-xcodeproj) so it rebuild the constants every time you build
 * …and more.
 
 ## Choosing your template
