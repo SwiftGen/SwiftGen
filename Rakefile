@@ -245,7 +245,7 @@ namespace :release do
     print_info "Releasing version #{v} on GitHub"
     puts changelog
 
-    json = post('https://api.github.com/repos/AliSoftware/SwiftGen/releases', 'application/json') do |req|
+    json = post('https://api.github.com/repos/SwiftGen/SwiftGen/releases', 'application/json') do |req|
       req.body = { :tag_name => v, :name => v, :body => changelog, :draft => false, :prerelease => false }.to_json
     end
 
@@ -277,7 +277,7 @@ namespace :release do
       sh 'git pull'
       sh "git checkout -b swiftgen-#{tag} origin/master"
 
-      targz_url = "https://github.com/AliSoftware/SwiftGen/archive/#{tag}.tar.gz"
+      targz_url = "https://github.com/SwiftGen/SwiftGen/archive/#{tag}.tar.gz"
       sha256_res = `curl -L #{targz_url} | shasum -a 256`
       sha256 = /^[A-Fa-f0-9]+/.match(sha256_res)
       raise 'Unable to extract SHA256' if sha256.nil?
