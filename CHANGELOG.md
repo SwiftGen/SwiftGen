@@ -6,15 +6,16 @@
 
 [SwiftGenKit 1.0.1](https://github.com/SwiftGen/SwiftGenKit/blob/1.0.1/CHANGELOG.md) • [StencilSwiftKit 1.0.0](https://github.com/SwiftGen/StencilSwiftKit/blob/1.0.0/CHANGELOG.md) • [templates 1.0.0](https://github.com/SwiftGen/templates/blob/1.0.0/CHANGELOG.md)
 
+ℹ️ Don't forget to look at the CHANGELOGs of the other repositories too (links above) in addition to this one, to see all the changes across all of SwiftGen.
+
 ### Bug Fixes
 
-ℹ️ **Don't forget to look at the CHANGELOGs of the other repositories too** (links at the top of this file) in addition to this one, **to see all the changes across all of SwiftGen**.
+#### Notable bug fixes from other SwiftGen repositories
 
-Notable fixes from those other repositories:
-
-> * Storyboards templates don't `import` your app module anymore, removing that annoying warning.  
->   [@djbe](https://github.com/djbe)
->   [SwiftGen/templates/#19](https://github.com/SwiftGen/templates/pull/19)
+* Storyboards templates won't `import` your app module anymore,
+  removing that annoying warning.  
+  [@djbe](https://github.com/djbe)
+  [SwiftGen/templates/#19](https://github.com/SwiftGen/templates/pull/19)
 
 ### New Features
 
@@ -30,15 +31,13 @@ Notable fixes from those other repositories:
   * This is especially useful when integrating SwiftGen as a Script Build Phase in your Xcode project as you can then access Xcode Build Settings exposed as
   environment variables by Xcode, e.g. `{{env.PRODUCT_MODULE_NAME}}`.  
 
-ℹ️ **Don't forget to look at the CHANGELOGs of the other repositories too** (links at the top of this file) in addition to this one, **to see all the changes across all of SwiftGen**.
+#### Notable new features from other SwiftGen repositories
 
-Notable new features from those other repositories:
-
-> * Use an explicit bundle parameter to support frameworks for all templates.  
->   [@NachoSoto](https://github.com/NachoSoto)
->   [@djbe](https://github.com/djbe)
->   [#255](https://github.com/SwiftGen/SwiftGen/pull/255)
->   [SwiftGen/templates/#17](https://github.com/SwiftGen/templates/pull/17)
+* Use an explicit bundle parameter to support frameworks for all templates.  
+  [@NachoSoto](https://github.com/NachoSoto)
+  [@djbe](https://github.com/djbe)
+  [#255](https://github.com/SwiftGen/SwiftGen/pull/255)
+  [SwiftGen/templates/#17](https://github.com/SwiftGen/templates/pull/17)
 
 ### Deprecations
 
