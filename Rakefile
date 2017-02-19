@@ -203,11 +203,6 @@ namespace :release do
     changelog_master = system(%q{grep -qi '^## Master' CHANGELOG.md})
     results << log_result(!changelog_master, "CHANGELOG, No master", 'Please remove entry for master in CHANGELOG')
 
-    # Check if example project updated
-    sample_project_pods = YAML.load_file('Podfile.lock')['PODS']
-    sample_project_updated = sample_project_pods.reduce(false) { |a, e| a || (e.is_a?(Hash) && e.keys.include?("GenumKit (#{version})")) }
-    results << log_result(sample_project_updated, "Sample project updated", 'Please run `bundle exec pod update` on the sample project')
-
     exit 1 unless results.all?
 
     print "Release version #{version} [Y/n]? "
