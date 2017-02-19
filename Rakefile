@@ -272,13 +272,9 @@ namespace :release do
       sh 'git pull'
       sh "git checkout -b swiftgen-#{tag} origin/master"
 
-      targz_url = "https://github.com/SwiftGen/SwiftGen/archive/#{tag}.tar.gz"
-      sha256_res = `curl -L #{targz_url} | shasum -a 256`
-      sha256 = /^[A-Fa-f0-9]+/.match(sha256_res)
-      raise 'Unable to extract SHA256' if sha256.nil?
       formula_file = "#{formulas_dir}/Formula/swiftgen.rb"
       formula = File.read(formula_file)
-      new_formula = formula.gsub(/url "https:.*"$/, %Q(url "#{targz_url}")).gsub(/sha256 ".*"$/,%Q(sha256 "#{sha256.to_s}"))
+      new_formula = formula.gsub(%r(url "(.*)", :tag => ".*"), %Q(url "\\1", :tag => "#{tag}"))
       File.write(formula_file, new_formula)
 
       print_info "Checking Homebrew formula..."
