@@ -1,6 +1,0 @@
-framework module GenumKit {
-  umbrella header "GenumKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

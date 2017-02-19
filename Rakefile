@@ -10,10 +10,10 @@ require 'uri'
 ## [ Constants ] ##############################################################
 
 BIN_NAME = 'swiftgen'
-DEPENDENCIES = [:PathKit, :Stencil, :Commander, :GenumKit]
+DEPENDENCIES = [:PathKit, :Stencil, :Commander, :StencilSwiftKit, :SwiftGenKit]
 CONFIGURATION = 'Release'
 BUILD_DIR = 'build/' + CONFIGURATION
-TEMPLATES_SRC_DIR = 'templates'
+TEMPLATES_SRC_DIR = 'Resources/templates'
 
 
 
@@ -62,13 +62,13 @@ desc "Build the CLI binary and its frameworks in #{BUILD_DIR}"
 task :build, [:bindir, :tpldir] => DEPENDENCIES.map { |dep| "dependencies:#{dep}" } do |_, args|
   (bindir, _, tpldir) = defaults(args)
   tpl_rel_path = tpldir.relative_path_from(bindir)
-  main = File.read('swiftgen-cli/main.swift')
-  File.write('swiftgen-cli/main.swift', main.gsub(/^let templatesRelativePath = .*$/, %Q(let templatesRelativePath = "#{tpl_rel_path}")))
+  main = File.read('SwiftGen/main.swift')
+  File.write('SwiftGen/main.swift', main.gsub(/^let templatesRelativePath = .*$/, %Q(let templatesRelativePath = "#{tpl_rel_path}")))
 
   print_info "Building Binary"
   frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
   search_paths = DEPENDENCIES.map { |fmk| "-F #{BUILD_DIR}/#{fmk}" }.join(" ")
-  xcrun %Q(-sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} #{search_paths}/ #{frameworks} swiftgen-cli/*.swift)
+  xcrun %Q(-sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} #{search_paths}/ #{frameworks} SwiftGen/*.swift)
 end
 
 namespace :dependencies do
@@ -196,9 +196,6 @@ namespace :release do
     version = podspec_version
     puts "#{'SwiftGen.podspec'.ljust(25)} \u{1F449}  #{version}"
 
-    genumkit_version = podspec_version('GenumKit/GenumKit')
-    results << log_result( genumkit_version == version, 'GenumKit version', 'Please make sure GenumKit.podspec has the same version as SwiftGen.podspec')
-
     # Check if entry present in CHANGELOG
     changelog_entry = system(%Q{grep -q '^## #{Regexp.quote(version)}$' CHANGELOG.md})
     results << log_result(changelog_entry, "CHANGELOG, Entry added", "Please add an entry for #{version} in CHANGELOG.md")
@@ -248,7 +245,7 @@ namespace :release do
     print_info "Releasing version #{v} on GitHub"
     puts changelog
 
-    json = post('https://api.github.com/repos/AliSoftware/SwiftGen/releases', 'application/json') do |req|
+    json = post('https://api.github.com/repos/SwiftGen/SwiftGen/releases', 'application/json') do |req|
       req.body = { :tag_name => v, :name => v, :body => changelog, :draft => false, :prerelease => false }.to_json
     end
 
@@ -280,7 +277,7 @@ namespace :release do
       sh 'git pull'
       sh "git checkout -b swiftgen-#{tag} origin/master"
 
-      targz_url = "https://github.com/AliSoftware/SwiftGen/archive/#{tag}.tar.gz"
+      targz_url = "https://github.com/SwiftGen/SwiftGen/archive/#{tag}.tar.gz"
       sha256_res = `curl -L #{targz_url} | shasum -a 256`
       sha256 = /^[A-Fa-f0-9]+/.match(sha256_res)
       raise 'Unable to extract SHA256' if sha256.nil?

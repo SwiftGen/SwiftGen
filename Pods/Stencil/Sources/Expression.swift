@@ -31,18 +31,18 @@ final class StaticExpression: Expression, CustomStringConvertible {
 
 
 final class VariableExpression: Expression, CustomStringConvertible {
-  let variable: Variable
+  let variable: Resolvable
 
-  init(variable: Variable) {
+  init(variable: Resolvable) {
     self.variable = variable
   }
 
   var description: String {
-    return "(variable: \(variable.variable))"
+    return "(variable: \(variable))"
   }
 
   /// Resolves a variable in the given context as boolean
-  func resolve(context: Context, variable: Variable) throws -> Bool {
+  func resolve(context: Context, variable: Resolvable) throws -> Bool {
     let result = try variable.resolve(context)
     var truthy = false
 

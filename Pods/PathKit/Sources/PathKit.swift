@@ -22,6 +22,8 @@ public struct Path {
   internal var path: String
 
   internal static var fileManager = FileManager.default
+  
+  internal var fileSystemInfo: FileSystemInfo = DefaultFileSystemInfo()
 
   // MARK: Init
 
@@ -77,6 +79,19 @@ extension Path : CustomStringConvertible {
 }
 
 
+// MARK: Conversion
+
+extension Path {
+  public var string: String {
+    return self.path
+  }
+
+  public var url: URL {
+    return URL(fileURLWithPath: path)
+  }
+}
+
+
 // MARK: Hashable
 
 extension Path : Hashable {
@@ -114,6 +129,11 @@ extension Path {
       return normalize()
     }
 
+  let expandedPath = Path(NSString(string: self.path).expandingTildeInPath)
+  if expandedPath.isAbsolute {
+    return expandedPath.normalize()
+  }
+
     return (Path.current + self).normalize()
   }
 
@@ -133,12 +153,19 @@ extension Path {
   ///   representation.
   ///
   public func abbreviate() -> Path {
-#if os(Linux)
-    // TODO: actually de-normalize the path
-    return self
-#else
-    return Path(NSString(string: self.path).abbreviatingWithTildeInPath)
-#endif
+    let rangeOptions: String.CompareOptions = fileSystemInfo.isFSCaseSensitiveAt(path: self) ?
+      [.anchored] : [.anchored, .caseInsensitive]
+    let home = Path.home.string
+    guard let homeRange = self.path.range(of: home, options: rangeOptions) else { return self }
+    let withoutHome = Path(self.path.replacingCharacters(in: homeRange, with: ""))
+    
+    if withoutHome.path.isEmpty || withoutHome.path == Path.separator {
+        return Path("~")
+    } else if withoutHome.isAbsolute {
+        return Path("~" + withoutHome.path)
+    } else {
+        return Path("~") + withoutHome.path
+    }
   }
 
   /// Returns the path of the item pointed to by a symbolic link.
@@ -156,6 +183,30 @@ extension Path {
   }
 }
 
+internal protocol FileSystemInfo {
+  func isFSCaseSensitiveAt(path: Path) -> Bool
+}
+
+internal struct DefaultFileSystemInfo: FileSystemInfo {
+  func isFSCaseSensitiveAt(path: Path) -> Bool {
+    #if os(Linux)
+      // URL resourceValues(forKeys:) is not supported on non-darwin platforms...
+      // But we can (fairly?) safely assume for now that the Linux FS is case sensitive.
+      // TODO: refactor when/if resourceValues is available, or look into using something
+      // like stat or pathconf to determine if the mountpoint is case sensitive.
+      return true
+    #else
+      var isCaseSensitive = false
+      // Calling resourceValues will fail if the path does not exist on the filesystem, which
+      // makes sense, but means we can only guarantee the return value is correct if the
+      // path actually exists.
+      if let resourceValues = try? path.url.resourceValues(forKeys: [.volumeSupportsCaseSensitiveNamesKey]) {
+        isCaseSensitive = resourceValues.volumeSupportsCaseSensitiveNames ?? isCaseSensitive
+      }
+      return isCaseSensitive
+    #endif
+  }
+}
 
 // MARK: Path Components
 
@@ -452,7 +503,7 @@ extension Path {
   /// - Returns: the contents of the file at the specified path.
   ///
   public func read() throws -> Data {
-    return try Data(contentsOf: URL(fileURLWithPath: path), options: NSData.ReadingOptions(rawValue: 0))
+    return try Data(contentsOf: self.url, options: NSData.ReadingOptions(rawValue: 0))
   }
 
   /// Reads the file contents and encoded its bytes to string applying the given encoding.
@@ -474,7 +525,7 @@ extension Path {
   /// - Parameter data: the contents to write to file.
   ///
   public func write(_ data: Data) throws {
-    try data.write(to: URL(fileURLWithPath: normalize().path), options: .atomic)
+    try data.write(to: normalize().url, options: .atomic)
   }
 
   /// Reads the file.
@@ -569,29 +620,57 @@ extension Path {
 // MARK: SequenceType
 
 extension Path : Sequence {
+  public struct DirectoryEnumerationOptions : OptionSet {
+    public let rawValue: UInt
+    public init(rawValue: UInt) {
+      self.rawValue = rawValue
+    }
+
+    public static var skipsSubdirectoryDescendants = DirectoryEnumerationOptions(rawValue: FileManager.DirectoryEnumerationOptions.skipsSubdirectoryDescendants.rawValue)
+    public static var skipsPackageDescendants = DirectoryEnumerationOptions(rawValue: FileManager.DirectoryEnumerationOptions.skipsPackageDescendants.rawValue)
+    public static var skipsHiddenFiles = DirectoryEnumerationOptions(rawValue: FileManager.DirectoryEnumerationOptions.skipsHiddenFiles.rawValue)
+  }
+
+  /// Represents a path sequence with specific enumeration options
+  public struct PathSequence : Sequence {
+    private var path: Path
+    private var options: DirectoryEnumerationOptions
+    init(path: Path, options: DirectoryEnumerationOptions) {
+      self.path = path
+      self.options = options
+    }
+
+    public func makeIterator() -> DirectoryEnumerator {
+      return DirectoryEnumerator(path: path, options: options)
+    }
+  }
+  
   /// Enumerates the contents of a directory, returning the paths of all files and directories
   /// contained within that directory. These paths are relative to the directory.
   public struct DirectoryEnumerator : IteratorProtocol {
     public typealias Element = Path
 
     let path: Path
-    let directoryEnumerator: FileManager.DirectoryEnumerator
+    let directoryEnumerator: FileManager.DirectoryEnumerator?
 
-    init(path: Path) {
+    init(path: Path, options mask: DirectoryEnumerationOptions = []) {
+      let options = FileManager.DirectoryEnumerationOptions(rawValue: mask.rawValue)
       self.path = path
-      self.directoryEnumerator = Path.fileManager.enumerator(atPath: path.path)!
+      self.directoryEnumerator = Path.fileManager.enumerator(at: path.url, includingPropertiesForKeys: nil, options: options)
     }
 
     public func next() -> Path? {
-      if let next = directoryEnumerator.nextObject() as! String? {
-        return path + next
+      let next = directoryEnumerator?.nextObject()
+      
+      if let next = next as? URL {
+        return Path(next.path)
       }
       return nil
     }
 
     /// Skip recursion into the most recently obtained subdirectory.
     public func skipDescendants() {
-      directoryEnumerator.skipDescendants()
+      directoryEnumerator?.skipDescendants()
     }
   }
 
@@ -602,6 +681,17 @@ extension Path : Sequence {
   ///
   public func makeIterator() -> DirectoryEnumerator {
     return DirectoryEnumerator(path: self)
+  }
+
+  /// Perform a deep enumeration of a directory.
+  ///
+  /// - Parameter options: FileManager directory enumerator options.
+  ///
+  /// - Returns: a path sequence that can be used to perform a deep enumeration of the
+  ///   directory.
+  ///
+  public func iterateChildren(options: DirectoryEnumerationOptions = []) -> PathSequence {
+    return PathSequence(path: self, options: options)
   }
 }
 

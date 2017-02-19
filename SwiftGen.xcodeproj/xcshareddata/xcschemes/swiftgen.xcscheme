@@ -101,28 +101,28 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "colors -t swift3 $(PROJECT_DIR)/UnitTests/fixtures/colors.xml"
+            argument = "colors -t swift3 $(PROJECT_DIR)/Resources/Fixtures/Colors/colors.xml"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "images -t swift3 $(PROJECT_DIR)/UnitTests/fixtures/Images.xcassets"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "storyboards -t swift3 $(PROJECT_DIR)/UnitTests/fixtures/Storyboards-iOS"
+            argument = "fonts -t swift3 $(PROJECT_DIR)/Resources/Fixtures/Fonts"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "strings -t swift3 $(PROJECT_DIR)/UnitTests/fixtures/Localizable.strings"
+            argument = "images -t swift3 $(PROJECT_DIR)/Resources/Fixtures/Images/Images.xcassets"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "fonts -t swift3 $(PROJECT_DIR)/UnitTests/fixtures/Fonts"
+            argument = "storyboards -t swift3 $(PROJECT_DIR)/Resources/Fixtures/Storyboards-iOS"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "strings -t swift3 $(PROJECT_DIR)/Resources/Fixtures/Strings/Localizable.strings"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "templates list"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>

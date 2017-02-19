@@ -1,6 +1,6 @@
 # SwiftGen
 
-[![Build Status](https://travis-ci.org/AliSoftware/SwiftGen.svg?branch=master)](https://travis-ci.org/AliSoftware/SwiftGen)
+[![Build Status](https://travis-ci.org/SwiftGen/SwiftGen.svg?branch=master)](https://travis-ci.org/AliSoftware/SwiftGen)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftGen.svg)](https://img.shields.io/cocoapods/v/SwiftGen.svg)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftGen.svg?style=flat)](http://cocoadocs.org/docsets/SwiftGen)
 
@@ -621,8 +621,24 @@ let sameFont = NSFont(font: FontFamily.Helvetica.Bold, size: 16.0) // OS X
 
 # License
 
-This code and tool is under the MIT License. See `LICENSE` file in this repository.
+This code and tool is under the MIT License. See the `LICENSE` file in this repository.
 
-It also relies on [`Stencil`](https://github.com/kylef/Stencil/blob/master/LICENSE), [`Commander`](https://github.com/kylef/Commander/blob/master/LICENSE) and [`PathKit`](https://github.com/kylef/PathKit/blob/master/LICENSE) licenses.
 
-Any ideas and contributions welcome!
+## Attributions
+
+This tool is powered by
+
+- [Stencil](https://github.com/kylef/Stencil) and few other libs by [Kyle Fuller](https://github.com/kylef)
+- [SwiftGenKit](https://github.com/SwiftGen/SwiftGenKit) and [StencilSwiftKit](https://github.com/SwiftGen/StenclSwiftKit), our internal frameworks at SwiftGen
+
+It is currently mainly maintained by [@AliSoftware](https://github.com/AliSoftware) and [@djbe](https://github.com/djbe). But I couldn't thank enough all the other [contributors](https://github.com/SwiftGen/SwiftGen/graphs/contributors) to this tool along the different versions which helped make SwiftGen awesome! 🎉
+
+If you want to contribute, don't hesitate to open an Pull Request, or even join the team!
+
+## Other Libraries / Tools
+
+If you want to generate Swift code from your own Swift code (so meta!), like generate `Equatable` conformance to your types and a lot of other similar things, use [Sourcery](https://github.com/krzysztofzablocki/Sourcery).
+
+_SwiftGen and Sourcery are complementary tools. In fact, Sourcery uses `Stencil` too, as well as SwiftGen's `StencilSwiftKit` so you can use the exact same syntax for your templates for both!_
+
+You can also [follow me on twitter](http://twitter.com/aligatr) for news/updates about other projects I am creating, or [read my blog](https://alisoftware.github.io).
