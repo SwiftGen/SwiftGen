@@ -118,7 +118,7 @@ public final class FontsFileParser {
   }
 
   private func fontsXMLFileParser() {
-	guard let url = typoURL,
+	guard let url = fontsFileURL,
 		let parser = XMLParser(contentsOf: url) else { return }
 	
 	let delegate = ParserDelegate()
@@ -126,25 +126,24 @@ public final class FontsFileParser {
 	
 	if parser.parse()
 	{
-		typos = delegate.parsedTypo
+		fonts = delegate.parsedFont
 	}
   }
 
 
   private class ParserDelegate: NSObject, XMLParserDelegate {
-	var parsedTypo = [String: Font]()
-	var currentTypoName: String? = nil
+	var parsedFont = [String: Font]()
+	var currentFontName: String? = nil
 	var currentFamilyName: String? = nil
 	var currentStyleName: String? = nil
 	var currentSize: CGFloat = 0
-	var typoParserError: Error? = nil
 		
 	@objc func parser(_ parser: XMLParser, didStartElement elementName: String,
 	                  namespaceURI: String?, qualifiedName qName: String?,
 	                  attributes attributeDict: [String: String]) {
 			
 	  switch elementName {
-		case FontsFileParser.fontTagName:		currentTypoName = attributeDict[FontsFileParser.fontNameAttribute]
+		case FontsFileParser.fontTagName:		currentFontName = attributeDict[FontsFileParser.fontNameAttribute]
 		case FontsFileParser.familyTagName:		currentFamilyName = nil
 		case FontsFileParser.styleTagName:		currentStyleName = nil
 		case FontsFileParser.sizeTagName:		currentSize = 0
@@ -170,14 +169,14 @@ public final class FontsFileParser {
 			
 	  switch elementName {
 	    case FontsFileParser.fontTagName:
-			guard let typoName = currentTypoName,
+			guard let fontName = currentFontName,
 				let familyName = currentFamilyName,
 				let style = currentStyleName else { return }
 				
 			let font = Font(familyName: familyName, style: style, size: currentSize)
-			parsedTypo[typoName] = font
+			parsedFont[fontName] = font
 				
-			currentTypoName = nil
+			currentFontName = nil
 			currentFamilyName = nil
 			currentStyleName = nil
 			currentSize = 0

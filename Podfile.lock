@@ -22,7 +22,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftGenKit:
-    :commit: 0a528d3cf13f48eab41f53d406d7abf94d623623
+    :commit: d484a99cd4bf3d48a7e3b82eca79b801f3dfe233
     :git: https://github.com/AFcgi/SwiftGenKit
 
 SPEC CHECKSUMS:
