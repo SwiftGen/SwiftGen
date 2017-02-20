@@ -4,14 +4,24 @@
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftGen.svg)](https://img.shields.io/cocoapods/v/SwiftGen.svg)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftGen.svg?style=flat)](http://cocoadocs.org/docsets/SwiftGen)
 
-SwiftGen is a suite of tools written in Swift to auto-generate Swift code (or anything else actually) for various assets of your project:
+SwiftGen is a tool to auto-generate Swift code for ressources of your projects, to make them type-safe to use.
 
-* [`enums` for your Assets Catalogs images](#uiimage-and-nsimage)
-* [`enums` for your `Localizable.strings` strings](#localizablestrings).
-* [`enums` for your UIStoryboards and their Scenes](#uistoryboard)
-* [`enums` for your NSStoryboards and their Scenes](#nsstoryboard)
-* [`enums` for your Colors](#uicolor-and-nscolor).
-* [`enums` for your Fonts](#uifont-and-nsfont).
+<table border="0"><tr>
+  <td><img alt="SwiftGen Logo" src="Logo.png" /></td>
+  <td>
+    Generate code (enums, constants, etc) for:
+    <ul>
+      <li><a href="#uiimage-and-nsimage">Assets Catalogs images</a>
+      <li><a href="#localizablestrings"><tt>Localizable.strings</tt></a>
+      <li><a href="#uistoryboard">UIStoryboards and their Scenes</a>
+      <li><a href="#nsstoryboard">NSStoryboards and their Scenes</a>
+      <li><a href="#uicolor-and-nscolor">Colors</a>
+      <li><a href="#uifont-and-nsfont">Fonts</a>
+    </ul>
+  </td>
+</tr></table>
+
+<span style="float:none" />
 
 There are multiple benefits in using this:
 
@@ -19,6 +29,8 @@ There are multiple benefits in using this:
 * Free auto-completion
 * Avoid the risk to use an non-existing asset name
 * All this will be ensured by the compiler.
+
+Also, it's fully customizable thanks to Stencil templates, so even if it comes we predefined templates, you can make your own to generate whatever code fits your needs and your guidelines!
 
 ## Installation
 
