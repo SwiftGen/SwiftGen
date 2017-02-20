@@ -2,6 +2,10 @@ machine:
   xcode:
     version: 8.2
 
+checkout:
+  post:
+    - git submodule update --init --recursive
+
 dependencies:
   pre:
     - bundle install
@@ -11,4 +15,4 @@ dependencies:
 test:
   override:
     - rake lint
-    - rake build
+    - rake install

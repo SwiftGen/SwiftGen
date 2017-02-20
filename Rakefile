@@ -131,14 +131,14 @@ end
 
 desc "Install the binary in $bindir, frameworks — including Swift dylibs — in $fmkdir, and templates in $tpldir\n" \
      "(defaults $bindir=./swiftgen/bin/, $fmkdir=$bindir/../lib, $tpldir=$bindir/../templates"
-task :install, [:bindir, :fmkdir, :tpldir] => 'install:light' do |_, args|
+task :install, [:bindir, :fmkdir, :tpldir] => 'install:light' do |task, args|
   (bindir, fmkdir, tpldir) = defaults(args)
 
   print_info "Linking to standalone Swift dylibs"
-  xcrun %Q(swift-stdlib-tool --copy --scan-executable "#{bindir}/#{BIN_NAME}" --platform macosx --destination "#{fmkdir}")
+  xcrun(%Q(swift-stdlib-tool --copy --scan-executable "#{bindir}/#{BIN_NAME}" --platform macosx --destination "#{fmkdir}"), task)
   toolchain_dir = `#{version_select} xcrun -find swift-stdlib-tool`.chomp
   xcode_rpath = File.dirname(File.dirname(toolchain_dir)) + '/lib/swift/macosx'
-  xcrun %Q(install_name_tool -delete_rpath "#{xcode_rpath}" "#{bindir}/#{BIN_NAME}")
+  xcrun(%Q(install_name_tool -delete_rpath "#{xcode_rpath}" "#{bindir}/#{BIN_NAME}"), task)
 end
 
 
@@ -148,7 +148,7 @@ end
 desc "Run the Unit Tests"
 task :tests do
   print_info "Running Unit Tests"
-  xcrun %Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen -sdk macosx test)
+  xcrun(%Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen -sdk macosx test), task)
 end
 
 desc "Delete the build/ directory"
@@ -168,13 +168,13 @@ namespace :playground do
     sh 'mkdir SwiftGen.playground/Resources'
   end
   task :images do
-    xcrun %Q(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text UnitTests/fixtures/Images.xcassets)
+    xcrun(%Q(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text UnitTests/fixtures/Images.xcassets), task)
   end
   task :storyboard do
-    xcrun %Q(ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO UnitTests/fixtures/Storyboards-iOS/Wizard.storyboard)
+    xcrun(%Q(ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO UnitTests/fixtures/Storyboards-iOS/Wizard.storyboard), task)
   end
   task :strings do
-    xcrun %Q(plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings UnitTests/fixtures/Localizable.strings)
+    xcrun(%Q(plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings UnitTests/fixtures/Localizable.strings), task)
   end
 
   desc "Regenerate all the Playground resources based on the test fixtures.\nThis compiles the needed fixtures and place them in SwiftGen.playground/Resources"
