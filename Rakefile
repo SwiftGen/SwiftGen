@@ -31,16 +31,28 @@ def version_select
   %Q(DEVELOPER_DIR="#{latest_xcode_version}/Contents/Developer" TOOLCHAINS=com.apple.dt.toolchain.XcodeDefault.xctoolchain)
 end
 
-def xcpretty(cmd)
-  if `which xcpretty` && $?.success?
+def xcpretty(cmd, task)
+  name = task.name.gsub(/:/,"_")
+  if ENV['CI']
+    sh "set -o pipefail && #{cmd} | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\" | xcpretty --color --report junit --output \"#{ENV['CIRCLE_TEST_REPORTS']}/xcode/#{name}.xml\""
+  elsif `which xcpretty` && $?.success?
     sh "set -o pipefail && #{cmd} | xcpretty -c"
   else
     sh cmd
   end
 end
 
-def xcrun(cmd)
-  xcpretty "#{version_select} xcrun #{cmd}"
+def plain(cmd, task)
+  name = task.name.gsub(/:/,"_")
+  if ENV['CI']
+    sh "set -o pipefail && #{cmd} | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\""
+  else
+    sh cmd
+  end
+end
+
+def xcrun(cmd, task)
+  xcpretty("#{version_select} xcrun #{cmd}", task)
 end
 
 def print_info(str)
@@ -55,11 +67,17 @@ def defaults(args)
   [bindir, fmkdir, tpldir].map(&:expand_path)
 end
 
+## [ Lint Tasks ] #############################################################
+
+desc 'Lint the CLI code'
+task :lint do |task|
+  plain("PROJECT_DIR=. ./scripts/swiftlint-code.sh", task)
+end
 
 ## [ Build Tasks ] ############################################################
 
 desc "Build the CLI binary and its frameworks in #{BUILD_DIR}"
-task :build, [:bindir, :tpldir] => DEPENDENCIES.map { |dep| "dependencies:#{dep}" } do |_, args|
+task :build, [:bindir, :tpldir] => DEPENDENCIES.map { |dep| "dependencies:#{dep}" } do |task, args|
   (bindir, _, tpldir) = defaults(args)
   tpl_rel_path = tpldir.relative_path_from(bindir)
   main = File.read('SwiftGen/main.swift')
@@ -68,15 +86,15 @@ task :build, [:bindir, :tpldir] => DEPENDENCIES.map { |dep| "dependencies:#{dep}
   print_info "Building Binary"
   frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
   search_paths = DEPENDENCIES.map { |fmk| "-F #{BUILD_DIR}/#{fmk}" }.join(" ")
-  xcrun %Q(-sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} #{search_paths}/ #{frameworks} SwiftGen/*.swift)
+  xcrun(%Q(-sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} #{search_paths}/ #{frameworks} SwiftGen/*.swift), task)
 end
 
 namespace :dependencies do
   DEPENDENCIES.each do |fmk|
     # desc "Build #{fmk}.framework"
-    task fmk do
+    task fmk do |task|
       print_info "Building #{fmk}.framework"
-      xcrun %Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION})
+      xcrun(%Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION}), task)
     end
 end
 end

@@ -1,0 +1,14 @@
+machine:
+  xcode:
+    version: 8.2
+
+dependencies:
+  pre:
+    - bundle install
+    - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+    - Scripts/install_swiftlint.sh
+
+test:
+  override:
+    - rake lint
+    - rake test
