@@ -6,8 +6,10 @@
 
 SwiftGen is a tool to auto-generate Swift code for ressources of your projects, to make them type-safe to use.
 
-<table border="0"><tr border="0">
-  <td border="0">
+<table border="0"><tr>
+  <td>
+    <img alt="SwiftGen Logo" src="https://github.com/SwiftGen/Eve/raw/master/logo/logo-256.png" />
+  </td><td>
     Generate code (enums, constants, etc) for:
     <ul>
       <li><a href="#uiimage-and-nsimage">Assets Catalogs images</a>
@@ -17,9 +19,6 @@ SwiftGen is a tool to auto-generate Swift code for ressources of your projects, 
       <li><a href="#uicolor-and-nscolor">Colors</a>
       <li><a href="#uifont-and-nsfont">Fonts</a>
     </ul>
-  </td>
-  <td border="0">
-    <img alt="SwiftGen Logo" src="https://github.com/SwiftGen/Eve/raw/master/logo/logo-256.png" />
   </td>
 </tr></table>
 
