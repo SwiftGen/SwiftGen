@@ -11,8 +11,13 @@ dependencies:
     - bundle install
     - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
     - Scripts/install_swiftlint.sh
+    - if [[ $CIRCLE_BRANCH == master ]]; then pod setup; fi
+  cache_directories:
+    -  "~/.cocoapods/repos/master"
 
 test:
   override:
-    - rake lint
+    - rake lint:code
     - rake install
+  post:
+    - if [[ $CIRCLE_BRANCH == master ]]; then rake lint; fi
