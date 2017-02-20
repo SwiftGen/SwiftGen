@@ -11,4 +11,4 @@ dependencies:
 test:
   override:
     - rake lint
-    - rake test
+    - rake build
