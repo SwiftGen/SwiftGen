@@ -22,7 +22,7 @@ _None_
 
 ## 4.2.0
 
-  🔗 [SwiftGenKit 1.0.1](https://github.com/SwiftGen/SwiftGenKit/blob/1.0.1/CHANGELOG.md)
+• 🔗 [SwiftGenKit 1.0.1](https://github.com/SwiftGen/SwiftGenKit/blob/1.0.1/CHANGELOG.md)
 • 🔗 [StencilSwiftKit 1.0.0](https://github.com/SwiftGen/StencilSwiftKit/blob/1.0.0/CHANGELOG.md)
 • 🔗 [Stencil 0.8.0](https://github.com/kylef/Stencil/blob/0.8.0/CHANGELOG.md)
 • 🔗 [templates 1.0.0](https://github.com/SwiftGen/templates/blob/1.0.0/CHANGELOG.md)
@@ -45,7 +45,6 @@ _None_
   [#265](https://github.com/SwiftGen/SwiftGen/pull/265/commits/3a7971ccbf16c41f0b2341e71b8a1ffbcabebecf)
   * This command-line option can be repeated at will and used to pass structured custom parameters (e.g. `--param tabs=2 --param foo.bar=1 --param foo.baz=2`).  
   * You can then use them in your templates using e.g. `{{param.tabs}}`, `{{param.foo.bar}}` & `{{param.foo.baz}}`.  
-
 * Templates can now access environment variables via the `env` key of the Stencil context (e.g. `{{env.USER}}`, `{{env.LANG}}`).  
   [@djbe](https://github.com/djbe)
   [#265](https://github.com/SwiftGen/SwiftGen/pull/265/commits/3a7971ccbf16c41f0b2341e71b8a1ffbcabebecf)
