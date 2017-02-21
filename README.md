@@ -650,6 +650,8 @@ If you want to contribute, don't hesitate to open an Pull Request, or even join 
 
 ## Other Libraries / Tools
 
+If you want to also get rid of String-based APIs not only for your ressources, but also for `UITableViewCell`, `UICollectionViewCell` and XIB-based views, you should take a look I my Mixin [Reusable](https://github.com/AliSoftware/Reusable).
+
 If you want to generate Swift code from your own Swift code (so meta!), like generate `Equatable` conformance to your types and a lot of other similar things, use [Sourcery](https://github.com/krzysztofzablocki/Sourcery).
 
 _SwiftGen and Sourcery are complementary tools. In fact, Sourcery uses `Stencil` too, as well as SwiftGen's `StencilSwiftKit` so you can use the exact same syntax for your templates for both!_
