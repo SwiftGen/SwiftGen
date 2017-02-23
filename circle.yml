@@ -20,4 +20,4 @@ test:
     - rake lint:code
     - rake install
   post:
-    - if [[ $CIRCLE_BRANCH == master ]]; then rake lint; fi
+    - if [[ $CIRCLE_BRANCH == master ]]; then rake lint:pod; fi
