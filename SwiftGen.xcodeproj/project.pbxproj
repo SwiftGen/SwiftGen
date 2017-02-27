@@ -313,7 +313,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}\"/scripts/swiftlint-code.sh";
+			shellScript = "rake lint:code";
 		};
 		4811547A0A30F3C9A2E79956 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

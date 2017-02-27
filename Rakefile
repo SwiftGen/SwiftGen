@@ -10,71 +10,16 @@ DEPENDENCIES = [:PathKit, :Stencil, :Commander, :StencilSwiftKit, :SwiftGenKit]
 CONFIGURATION = 'Release'
 BUILD_DIR = 'build/' + CONFIGURATION
 TEMPLATES_SRC_DIR = 'Resources/templates'
-
+POD_NAME = 'SwiftGen'
 
 
 ## [ Utils ] ##################################################################
-
-def version_select
-  # Find all Xcode 8 versions on this computer
-  xcodes = `mdfind "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode' && kMDItemVersion = '8.*'"`.chomp.split("\n")
-  if xcodes.empty?
-    raise "\n[!!!] You need to have Xcode 8.x to compile SwiftGen.\n\n"
-  end
-  # Order by version and get the latest one
-  vers = lambda { |path| `mdls -name kMDItemVersion -raw "#{path}"` }
-  latest_xcode_version = xcodes.sort { |p1, p2| vers.call(p1) <=> vers.call(p2) }.last
-  %Q(DEVELOPER_DIR="#{latest_xcode_version}/Contents/Developer" TOOLCHAINS=com.apple.dt.toolchain.XcodeDefault.xctoolchain)
-end
-
-def xcpretty(cmd, task)
-  name = task.name.gsub(/:/,"_")
-  if ENV['CI']
-    sh "set -o pipefail && #{cmd} | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\" | xcpretty --color --report junit --output \"#{ENV['CIRCLE_TEST_REPORTS']}/xcode/#{name}.xml\""
-  elsif `which xcpretty` && $?.success?
-    sh "set -o pipefail && #{cmd} | xcpretty -c"
-  else
-    sh cmd
-  end
-end
-
-def plain(cmd, task)
-  name = task.name.gsub(/:/,"_")
-  if ENV['CI']
-    sh "set -o pipefail && #{cmd} | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\""
-  else
-    sh cmd
-  end
-end
-
-def xcrun(cmd, task)
-  xcpretty("#{version_select} xcrun #{cmd}", task)
-end
-
-def print_info(str)
-  (red,clr) = (`tput colors`.chomp.to_i >= 8) ? %W(\e[33m \e[m) : ["", ""]
-  puts red, "== #{str.chomp} ==", clr
-end
 
 def defaults(args)
   bindir = args.bindir.nil? || args.bindir.empty? ? Pathname.new('./build/swiftgen/bin') : Pathname.new(args.bindir)
   fmkdir = args.fmkdir.nil? || args.fmkdir.empty? ? bindir + '../lib' : Pathname.new(args.fmkdir)
   tpldir = args.tpldir.nil? || args.tpldir.empty? ? bindir + '../templates' : Pathname.new(args.tpldir)
   [bindir, fmkdir, tpldir].map(&:expand_path)
-end
-
-## [ Lint Tasks ] #############################################################
-
-namespace :lint do
-  desc 'Lint the CLI code'
-  task :code do |task|
-    plain("PROJECT_DIR=. ./scripts/swiftlint-code.sh", task)
-  end
-
-  desc 'Lint the Podspec'
-  task :pod do |task|
-    plain("pod lib lint SwiftGen.podspec --quick", task)
-  end
 end
 
 ## [ Build Tasks ] ############################################################
@@ -99,12 +44,7 @@ namespace :dependencies do
       print_info "Building #{fmk}.framework"
       xcrun(%Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION}), task)
     end
-end
-end
-
-desc "Build the CLI and link it so it can be run from #{BUILD_DIR}. Useful for testing without installing."
-task :link => :build do
-  sh %Q(install_name_tool -add_rpath "@executable_path" #{BUILD_DIR}/#{BIN_NAME})
+  end
 end
 
 
