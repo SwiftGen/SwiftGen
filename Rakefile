@@ -8,7 +8,7 @@ require 'yaml'
 BIN_NAME = 'swiftgen'
 DEPENDENCIES = [:PathKit, :Stencil, :Commander, :StencilSwiftKit, :SwiftGenKit]
 CONFIGURATION = 'Release'
-BUILD_DIR = 'build/' + CONFIGURATION
+BUILD_DIR = File.absolute_path('build/' + CONFIGURATION)
 TEMPLATES_SRC_DIR = 'Resources/templates'
 POD_NAME = 'SwiftGen'
 
@@ -33,8 +33,8 @@ task :build, [:bindir, :tpldir] => DEPENDENCIES.map { |dep| "dependencies:#{dep}
 
   Utils.print_info "Building Binary"
   frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
-  search_paths = DEPENDENCIES.map { |fmk| "-F #{BUILD_DIR}/#{fmk}" }.join(" ")
-  Utils.run(%Q(-sdk macosx swiftc -O -o #{BUILD_DIR}/#{BIN_NAME} #{search_paths}/ #{frameworks} SwiftGen/*.swift), task, xcrun: true)
+  search_paths = DEPENDENCIES.map { |fmk| %Q(-F "#{BUILD_DIR}/#{fmk}") }.join(" ")
+  Utils.run(%Q(-sdk macosx swiftc -O -o "#{BUILD_DIR}/#{BIN_NAME}" #{search_paths}/ #{frameworks} SwiftGen/*.swift), task, xcrun: true)
 end
 
 namespace :dependencies do
@@ -42,7 +42,7 @@ namespace :dependencies do
     # desc "Build #{fmk}.framework"
     task fmk do |task|
       Utils.print_info "Building #{fmk}.framework"
-      Utils.run(%Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION}), task, xcrun: true)
+      Utils.run(%Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme #{fmk} -configuration #{CONFIGURATION} CONFIGURATION_BUILD_DIR="#{BUILD_DIR}"), task, xcrun: true, xcpretty: true)
     end
   end
 end
@@ -111,13 +111,13 @@ namespace :playground do
     sh 'mkdir SwiftGen.playground/Resources'
   end
   task :images do
-    Utils.run(%Q(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text UnitTests/fixtures/Images.xcassets), task, xcrun: true)
+    Utils.run(%Q(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text Resources/Fixtures/Images/Images.xcassets), task, xcrun: true)
   end
   task :storyboard do
-    Utils.run(%Q(ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO UnitTests/fixtures/Storyboards-iOS/Wizard.storyboard), task, xcrun: true)
+    Utils.run(%Q(ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO Resources/Fixtures/Storyboards-iOS/Wizard.storyboard), task, xcrun: true)
   end
   task :strings do
-    Utils.run(%Q(plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings UnitTests/fixtures/Localizable.strings), task, xcrun: true)
+    Utils.run(%Q(plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings Resources/Fixtures/Strings/Localizable.strings), task, xcrun: true)
   end
 
   desc "Regenerate all the Playground resources based on the test fixtures.\nThis compiles the needed fixtures and place them in SwiftGen.playground/Resources"
