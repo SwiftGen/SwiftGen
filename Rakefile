@@ -35,7 +35,7 @@ task :build, [:bindir, :tpldir] => DEPENDENCIES.map { |dep| "dependencies:#{dep}
   Utils.print_info "Building Binary"
   frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
   search_paths = DEPENDENCIES.map { |fmk| %Q(-F "#{BUILD_DIR}/#{fmk}") }.join(" ")
-  Utils.run(%Q(-sdk macosx swiftc -O -o "#{BUILD_DIR}/#{BIN_NAME}" -F #{BUILD_DIR}/ #{frameworks} Sources/*.swift), task, xcrun: true)
+  Utils.run(%Q(-sdk macosx swiftc -O -o "#{BUILD_DIR}/#{BIN_NAME}" -F #{BUILD_DIR}/ #{frameworks} Sources/*.swift -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __info_plist -Xlinker "Sources/Info.plist"), task, xcrun: true)
 end
 
 namespace :dependencies do

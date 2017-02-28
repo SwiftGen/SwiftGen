@@ -48,7 +48,7 @@ let main = Group {
 }
 
 let version = Bundle.main
-  .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
+  .object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0.0"
 let stencilVersion = Bundle(for: Stencil.Template.self)
   .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
 let stencilSwiftKitVersion = Bundle(for: StencilSwiftKit.StencilSwiftTemplate.self)
