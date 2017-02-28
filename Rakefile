@@ -11,6 +11,7 @@ CONFIGURATION = 'Release'
 BUILD_DIR = File.absolute_path('build/' + CONFIGURATION)
 TEMPLATES_SRC_DIR = 'Resources/templates'
 POD_NAME = 'SwiftGen'
+TEST_PATH = "Tests/#{POD_NAME}Tests"
 
 
 ## [ Utils ] ##################################################################
@@ -28,13 +29,13 @@ desc "Build the CLI binary and its frameworks in #{BUILD_DIR}"
 task :build, [:bindir, :tpldir] => DEPENDENCIES.map { |dep| "dependencies:#{dep}" } do |task, args|
   (bindir, _, tpldir) = defaults(args)
   tpl_rel_path = tpldir.relative_path_from(bindir)
-  main = File.read('SwiftGen/main.swift')
-  File.write('SwiftGen/main.swift', main.gsub(/^let templatesRelativePath = .*$/, %Q(let templatesRelativePath = "#{tpl_rel_path}")))
+  main = File.read('Sources/main.swift')
+  File.write('Sources/main.swift', main.gsub(/^let templatesRelativePath = .*$/, %Q(let templatesRelativePath = "#{tpl_rel_path}")))
 
   Utils.print_info "Building Binary"
   frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
   search_paths = DEPENDENCIES.map { |fmk| %Q(-F "#{BUILD_DIR}/#{fmk}") }.join(" ")
-  Utils.run(%Q(-sdk macosx swiftc -O -o "#{BUILD_DIR}/#{BIN_NAME}" #{search_paths}/ #{frameworks} SwiftGen/*.swift), task, xcrun: true)
+  Utils.run(%Q(-sdk macosx swiftc -O -o "#{BUILD_DIR}/#{BIN_NAME}" -F #{BUILD_DIR}/ #{frameworks} Sources/*.swift), task, xcrun: true)
 end
 
 namespace :dependencies do
@@ -63,7 +64,7 @@ task 'install:light', [:bindir, :fmkdir, :tpldir] => :build do |_, args|
   Utils.print_info "Installing frameworks in #{fmkdir}"
   sh %Q(mkdir -p "#{fmkdir}")
   DEPENDENCIES.each do |fmk|
-    sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}/#{fmk}.framework" "#{fmkdir}")
+    sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}.framework" "#{fmkdir}")
   end
   sh %Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}")
 
