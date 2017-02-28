@@ -313,7 +313,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rake lint:code";
+			shellScript = "if [[ ! $CI ]]; then\n    rake lint:code\nfi";
 		};
 		4811547A0A30F3C9A2E79956 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
