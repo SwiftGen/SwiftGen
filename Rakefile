@@ -35,7 +35,7 @@ task :build, [:bindir, :tpldir] => DEPENDENCIES.map { |dep| "dependencies:#{dep}
   Utils.print_info "Building Binary"
   frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
   search_paths = DEPENDENCIES.map { |fmk| %Q(-F "#{BUILD_DIR}/#{fmk}") }.join(" ")
-  Utils.run(%Q(-sdk macosx swiftc -O -o "#{BUILD_DIR}/#{BIN_NAME}" -F #{BUILD_DIR}/ #{frameworks} Sources/*.swift -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __info_plist -Xlinker "Sources/Info.plist"), task, xcrun: true)
+  Utils.run(%Q(-sdk macosx swiftc -O -o "#{BUILD_DIR}/#{BIN_NAME}" #{search_paths}/ #{frameworks} Sources/*.swift -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __info_plist -Xlinker "Sources/Info.plist"), task, xcrun: true)
 end
 
 namespace :dependencies do
@@ -43,7 +43,7 @@ namespace :dependencies do
     # desc "Build #{fmk}.framework"
     task fmk do |task|
       Utils.print_info "Building #{fmk}.framework"
-      Utils.run(%Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme #{fmk} -configuration #{CONFIGURATION} CONFIGURATION_BUILD_DIR="#{BUILD_DIR}"), task, xcrun: true, xcpretty: true)
+      Utils.run(%Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION}), task, xcrun: true, xcpretty: true)
     end
   end
 end
@@ -64,7 +64,7 @@ task 'install:light', [:bindir, :fmkdir, :tpldir] => :build do |_, args|
   Utils.print_info "Installing frameworks in #{fmkdir}"
   sh %Q(mkdir -p "#{fmkdir}")
   DEPENDENCIES.each do |fmk|
-    sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}.framework" "#{fmkdir}")
+    sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}/#{fmk}.framework" "#{fmkdir}")
   end
   sh %Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}")
 
