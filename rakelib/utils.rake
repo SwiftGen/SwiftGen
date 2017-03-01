@@ -1,17 +1,20 @@
 class Utils
+  # formatter types
+  :xcpretty   # pass through xcpretty and store in artifacts
+  :raw        # store in artifacts
+  :to_string  # run using backticks and return output
 
   # run a command using xcrun and xcpretty if applicable
-  def self.run(cmd, task, subtask = '', xcrun: false, xcpretty: false, direct: false)
+  def self.run(cmd, task, subtask = '', xcrun: false, formatter: :raw)
     commands = xcrun ? [*cmd].map { |cmd|
       "#{version_select} xcrun #{cmd}"
     } : [*cmd]
 
-    if xcpretty
-      xcpretty(commands, task, subtask)
-    elsif !direct
-      plain(commands, task, subtask)
-    else
-      `#{commands.join(' && ')}`
+    case formatter
+    when :xcpretty then xcpretty(commands, task, subtask)
+    when :raw then plain(commands, task, subtask)
+    when :to_string then `#{commands.join(' && ')}`
+    else raise "Unknown formatter '#{formatter}'"
     end
   end
 

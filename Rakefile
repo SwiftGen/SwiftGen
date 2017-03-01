@@ -5,13 +5,13 @@ require 'yaml'
 
 ## [ Constants ] ##############################################################
 
+WORKSPACE = 'SwiftGen'
 BIN_NAME = 'swiftgen'
 DEPENDENCIES = [:PathKit, :Stencil, :Commander, :StencilSwiftKit, :SwiftGenKit]
 CONFIGURATION = 'Release'
 BUILD_DIR = File.absolute_path('build/' + CONFIGURATION)
 TEMPLATES_SRC_DIR = 'Resources/templates'
 POD_NAME = 'SwiftGen'
-TEST_PATH = "Tests/#{POD_NAME}Tests"
 
 
 ## [ Utils ] ##################################################################
@@ -43,7 +43,7 @@ namespace :dependencies do
     # desc "Build #{fmk}.framework"
     task fmk do |task|
       Utils.print_info "Building #{fmk}.framework"
-      Utils.run(%Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION}), task, xcrun: true, xcpretty: true)
+      Utils.run(%Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION}), task, xcrun: true, formatter: :xcpretty)
     end
   end
 end
@@ -80,7 +80,7 @@ task :install, [:bindir, :fmkdir, :tpldir] => 'install:light' do |task, args|
 
   Utils.print_info "Linking to standalone Swift dylibs"
   Utils.run(%Q(swift-stdlib-tool --copy --scan-executable "#{bindir}/#{BIN_NAME}" --platform macosx --destination "#{fmkdir}"), task, xcrun: true)
-  toolchain_dir = Utils.run('-find swift-stdlib-tool', task, xcrun: true, direct: true).chomp
+  toolchain_dir = Utils.run('-find swift-stdlib-tool', task, xcrun: true, formatter: :to_string).chomp
   xcode_rpath = File.dirname(File.dirname(toolchain_dir)) + '/lib/swift/macosx'
   Utils.run(%Q(install_name_tool -delete_rpath "#{xcode_rpath}" "#{bindir}/#{BIN_NAME}"), task, xcrun: true)
 end
@@ -92,7 +92,7 @@ end
 desc "Run the Unit Tests"
 task :tests do
   Utils.print_info "Running Unit Tests"
-  Utils.run(%Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen -sdk macosx test), task, xcrun: true, xcpretty: true)
+  Utils.run(%Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen -sdk macosx test), task, xcrun: true, formatter: :xcpretty)
 end
 
 desc "Delete the build/ directory"
