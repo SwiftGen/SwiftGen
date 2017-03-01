@@ -7,9 +7,7 @@ checkout:
     - git submodule update --init --recursive
 
 dependencies:
-  pre:
-    - bundle install
-    - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+  post:
     - rake lint:install
     - curl -sS https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash
 

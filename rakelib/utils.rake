@@ -29,9 +29,9 @@ class Utils
     command = [*cmd].join(' && ')
 
     if ENV['CI']
-      Rake.sh "set -o pipefail && (#{command}) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\" | xcpretty --color --report junit --output \"#{ENV['CIRCLE_TEST_REPORTS']}/xcode/#{name}.xml\""
+      Rake.sh "set -o pipefail && (#{command}) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\" | bundle exec xcpretty --color --report junit --output \"#{ENV['CIRCLE_TEST_REPORTS']}/xcode/#{name}.xml\""
     elsif system('which xcpretty > /dev/null')
-      Rake.sh "set -o pipefail && (#{command}) | xcpretty -c"
+      Rake.sh "set -o pipefail && (#{command}) | bundle exec xcpretty -c"
     else
       Rake.sh command
     end
