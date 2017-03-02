@@ -44,7 +44,7 @@ end
 
 desc "Install the binary in $bindir, frameworks in $fmkdir, and templates in $tpldir\n" \
      "(defaults $bindir=./build/swiftgen/bin/, $fmkdir=$bindir/../lib, $tpldir=$bindir/../templates"
-task :install, [:bindir, :fmkdir, :tpldir] => :build do |_, args|
+task :install, [:bindir, :fmkdir, :tpldir] => :build do |task, args|
   (bindir, fmkdir, tpldir) = defaults(args)
   generated_bundle_path = "#{BUILD_DIR}/Build/Products/#{CONFIGURATION}/swiftgen.app/Contents"
 
@@ -56,7 +56,7 @@ task :install, [:bindir, :fmkdir, :tpldir] => :build do |_, args|
 
   Utils.print_info "Installing frameworks in #{fmkdir}"
   Utils.run([
-    %Q(([ -d "#{fmkdir}" ] && rm -rf "#{fmkdir}")),
+    %Q(if [ -d "#{fmkdir}" ]; then rm -rf "#{fmkdir}"; fi),
     %Q(mkdir -p "#{fmkdir}"),
     %Q(cp -fR "#{generated_bundle_path}/Frameworks/" "#{fmkdir}"),
   ], task, 'copy_frameworks')
