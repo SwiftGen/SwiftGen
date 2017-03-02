@@ -1,3 +1,6 @@
+# Used constants:
+# none
+
 if File.directory? 'Tests/Expected'
   MODULE_INPUT_PATH = 'Fixtures/stub-env/Modules'
   MODULE_OUTPUT_PATH = 'Fixtures/stub-env'

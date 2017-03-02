@@ -1,3 +1,6 @@
+# Used constants:
+# none
+
 if File.file?('Package.swift')
     namespace :spm do
     desc 'Build using SPM'

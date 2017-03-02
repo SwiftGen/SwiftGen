@@ -1,3 +1,6 @@
+# Used constants:
+# - WORKSPACE
+
 namespace :lint do
   desc 'Install swiftlint'
   task :install do |task|

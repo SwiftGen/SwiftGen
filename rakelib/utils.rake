@@ -1,3 +1,6 @@
+# Used constants:
+# none
+
 class Utils
   # formatter types
   :xcpretty   # pass through xcpretty and store in artifacts

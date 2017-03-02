@@ -1,3 +1,6 @@
+# Used constants:
+# none
+
 namespace :changelog do
   desc 'Add the empty CHANGELOG entries after a new release'
   task :reset do |task|
