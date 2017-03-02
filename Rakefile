@@ -34,7 +34,11 @@ task :build, [:bindir, :tpldir] do |task, args|
   File.write('Sources/main.swift', main.gsub(/^let templatesRelativePath = .*$/, %Q(let templatesRelativePath = "#{tpl_rel_path}")))
 
   Utils.print_info "Building Binary"
-  Utils.run(%Q(xcodebuild -workspace #{WORKSPACE}.xcworkspace -scheme #{SCHEME} -configuration #{CONFIGURATION} -derivedDataPath #{BUILD_DIR}),
+  plist_file = File.absolute_path('Sources/Info.plist')
+  linker_flags = %Q(-Xlinker -sectcreate -Xlinker __TEXT -Xlinker __info_plist -Xlinker "#{plist_file}")
+  Utils.run(
+    %Q(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "#{SCHEME}" -configuration "#{CONFIGURATION}") +
+    %Q( -derivedDataPath "#{BUILD_DIR}" OTHER_LDFLAGS="#{linker_flags} \\$(inherited)"),
     task, xcrun: true, formatter: :xcpretty)
 end
 
