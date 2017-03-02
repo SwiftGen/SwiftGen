@@ -1,6 +1,7 @@
 #!/usr/bin/rake
 require 'pathname'
 require 'yaml'
+require 'shellwords'
 
 
 ## [ Constants ] ##############################################################
@@ -34,11 +35,10 @@ task :build, [:bindir, :tpldir] do |task, args|
   File.write('Sources/main.swift', main.gsub(/^let templatesRelativePath = .*$/, %Q(let templatesRelativePath = "#{tpl_rel_path}")))
 
   Utils.print_info "Building Binary"
-  plist_file = BUILD_DIR + 'Build/Products/Release/swiftgen.app/Contents/Info.plist' # Use the *processed* Info.plist
-  linker_flags = %Q(-sectcreate __TEXT __info_plist "#{plist_file}")
+  plist_file = (Pathname.new(BUILD_DIR) + 'Build/Products/Release/swiftgen.app/Contents/Info.plist').to_s
   Utils.run(
     %Q(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "#{SCHEME}" -configuration "#{CONFIGURATION}") +
-    %Q( -derivedDataPath "#{BUILD_DIR}" OTHER_LDFLAGS="#{linker_flags} \\$(inherited)"),
+    %Q( -derivedDataPath "#{BUILD_DIR}" SWIFTGEN_OTHER_LDFLAGS="-sectcreate __TEXT __info_plist #{plist_file.shellescape}"),
     task, xcrun: true, formatter: :xcpretty)
 end
 
