@@ -56,11 +56,12 @@ task :install, [:bindir, :fmkdir, :tpldir] => :build do |_, args|
 
   Utils.print_info "Installing frameworks in #{fmkdir}"
   Utils.run([
+    %Q(([ -d "#{fmkdir}" ] && rm -rf "#{fmkdir}")),
     %Q(mkdir -p "#{fmkdir}"),
     %Q(cp -fR "#{generated_bundle_path}/Frameworks/" "#{fmkdir}"),
   ], task, 'copy_frameworks')
 
-  Utils.print_info "Fixing @rpath to find frameworks"
+  Utils.print_info "Fixing binary's @rpath"
   Utils.run([
     %Q(install_name_tool -delete_rpath "@executable_path/../Frameworks" "#{bindir}/#{BIN_NAME}"),
     %Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}"),
@@ -71,6 +72,8 @@ task :install, [:bindir, :fmkdir, :tpldir] => :build do |_, args|
     %Q(mkdir -p "#{tpldir}"),
     %Q(cp -r "#{TEMPLATES_SRC_DIR}/" "#{tpldir}"),
   ], task, 'copy_templates')
+
+  Utils.print_info "Finished installing. Binary is available in: #{bindir}"
 end
 
 
@@ -79,7 +82,7 @@ end
 desc "Run the Unit Tests"
 task :tests do
   Utils.print_info "Running Unit Tests"
-  Utils.run(%Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen -sdk macosx test), task, xcrun: true, formatter: :xcpretty)
+  Utils.run(%Q(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "#{SCHEME}" -sdk macosx test), task, xcrun: true, formatter: :xcpretty)
 end
 
 desc "Delete the build directory\n" \
