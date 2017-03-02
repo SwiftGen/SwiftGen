@@ -34,7 +34,8 @@ task :build, [:bindir, :tpldir] do |task, args|
   File.write('Sources/main.swift', main.gsub(/^let templatesRelativePath = .*$/, %Q(let templatesRelativePath = "#{tpl_rel_path}")))
 
   Utils.print_info "Building Binary"
-  Utils.run(%Q(xcodebuild -workspace #{WORKSPACE}.xcworkspace -scheme #{SCHEME} -configuration #{CONFIGURATION} -derivedDataPath #{BUILD_DIR}), task, xcrun: true, formatter: :xcpretty)
+  Utils.run(%Q(xcodebuild -workspace #{WORKSPACE}.xcworkspace -scheme #{SCHEME} -configuration #{CONFIGURATION} -derivedDataPath #{BUILD_DIR}),
+    task, xcrun: true, formatter: :xcpretty)
 end
 
 desc "Install the binary in $bindir, frameworks in $fmkdir, and templates in $tpldir\n" \
@@ -44,20 +45,28 @@ task :install, [:bindir, :fmkdir, :tpldir] => :build do |_, args|
   generated_bundle_path = "#{BUILD_DIR}/Build/Products/#{CONFIGURATION}/swiftgen.app/Contents"
 
   Utils.print_info "Installing binary in #{bindir}"
-  sh %Q(mkdir -p "#{bindir}")
-  sh %Q(cp -f "#{generated_bundle_path}/MacOS/swiftgen" "#{bindir}/#{BIN_NAME}")
+  Utils.run([
+    %Q(mkdir -p "#{bindir}"),
+    %Q(cp -f "#{generated_bundle_path}/MacOS/swiftgen" "#{bindir}/#{BIN_NAME}"),
+  ], task, 'copy_binary')
 
   Utils.print_info "Installing frameworks in #{fmkdir}"
-  sh %Q(mkdir -p "#{fmkdir}")
-  sh %Q(cp -fR "#{generated_bundle_path}/Frameworks/" "#{fmkdir}")
+  Utils.run([
+    %Q(mkdir -p "#{fmkdir}"),
+    %Q(cp -fR "#{generated_bundle_path}/Frameworks/" "#{fmkdir}"),
+  ], task, 'copy_frameworks')
 
   Utils.print_info "Fixing @rpath to find frameworks"
-  Utils.run(%Q(install_name_tool -delete_rpath "@executable_path/../Frameworks" "#{bindir}/#{BIN_NAME}"), task, xcrun: true)
-  Utils.run(%Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}"), task, xcrun: true)
+  Utils.run([
+    %Q(install_name_tool -delete_rpath "@executable_path/../Frameworks" "#{bindir}/#{BIN_NAME}"),
+    %Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}"),
+  ], task, 'fix_rpath', xcrun: true)
  
   Utils.print_info "Installing templates in #{tpldir}"
-  sh %Q(mkdir -p "#{tpldir}")
-  sh %Q(cp -r "#{TEMPLATES_SRC_DIR}/" "#{tpldir}")
+  Utils.run([
+    %Q(mkdir -p "#{tpldir}"),
+    %Q(cp -r "#{TEMPLATES_SRC_DIR}/" "#{tpldir}"),
+  ], task, 'copy_templates')
 end
 
 
