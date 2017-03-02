@@ -35,7 +35,7 @@ task :build, [:bindir, :tpldir] do |task, args|
 
   Utils.print_info "Building Binary"
   plist_file = File.absolute_path('Sources/Info.plist')
-  linker_flags = %Q(-Xlinker -sectcreate -Xlinker __TEXT -Xlinker __info_plist -Xlinker "#{plist_file}")
+  linker_flags = %Q(-sectcreate __TEXT __info_plist "#{plist_file}")
   Utils.run(
     %Q(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "#{SCHEME}" -configuration "#{CONFIGURATION}") +
     %Q( -derivedDataPath "#{BUILD_DIR}" OTHER_LDFLAGS="#{linker_flags} \\$(inherited)"),
