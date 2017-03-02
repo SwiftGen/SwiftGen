@@ -30,15 +30,13 @@ desc "Build the CLI binary and its frameworks as an app bundle\n" \
      "(in #{BUILD_DIR})"
 task :build, [:bindir, :tpldir] do |task, args|
   (bindir, _, tpldir) = defaults(args)
-  tpl_rel_path = tpldir.relative_path_from(bindir)
-  main = File.read('Sources/main.swift')
-  File.write('Sources/main.swift', main.gsub(/^let templatesRelativePath = .*$/, %Q(let templatesRelativePath = "#{tpl_rel_path}")))
-
+  
   Utils.print_info "Building Binary"
   plist_file = (Pathname.new(BUILD_DIR) + 'Build/Products/Release/swiftgen.app/Contents/Info.plist').to_s
   Utils.run(
     %Q(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "#{SCHEME}" -configuration "#{CONFIGURATION}") +
-    %Q( -derivedDataPath "#{BUILD_DIR}" SWIFTGEN_OTHER_LDFLAGS="-sectcreate __TEXT __info_plist #{plist_file.shellescape}"),
+    %Q( -derivedDataPath "#{BUILD_DIR}" SWIFTGEN_OTHER_SWIFT_FLAGS="-D BUILDING_FOR_INSTALL") +
+    %Q( SWIFTGEN_OTHER_LDFLAGS="-sectcreate __TEXT __info_plist #{plist_file.shellescape}"),
     task, xcrun: true, formatter: :xcpretty)
 end
 

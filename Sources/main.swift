@@ -12,7 +12,11 @@ import SwiftGenKit
 
 // MARK: Common
 
+#if BUILDING_FOR_INSTALL
+let templatesRelativePath = "../templates"
+#else
 let templatesRelativePath = (Bundle.main.resourcePath ?? ".") + "/templates"
+#endif
 
 func templateOption(prefix: String) -> Option<String> {
   return Option<String>(

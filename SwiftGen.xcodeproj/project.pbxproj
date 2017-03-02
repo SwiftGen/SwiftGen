@@ -556,6 +556,7 @@
 					"$(inherited)",
 					"$(SWIFTGEN_OTHER_LDFLAGS)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) $(SWIFTGEN_OTHER_SWIFT_FLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.swiftgen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -579,6 +580,7 @@
 					"$(inherited)",
 					"$(SWIFTGEN_OTHER_LDFLAGS)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) $(SWIFTGEN_OTHER_SWIFT_FLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.swiftgen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
