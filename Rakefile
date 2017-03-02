@@ -6,10 +6,10 @@ require 'yaml'
 ## [ Constants ] ##############################################################
 
 WORKSPACE = 'SwiftGen'
-BIN_NAME = 'swiftgen'
-DEPENDENCIES = [:PathKit, :Stencil, :Commander, :StencilSwiftKit, :SwiftGenKit]
+SCHEME='swiftgen'
 CONFIGURATION = 'Release'
-BUILD_DIR = File.absolute_path('build/' + CONFIGURATION)
+BUILD_DIR = File.absolute_path('./build')
+BIN_NAME = 'swiftgen'
 TEMPLATES_SRC_DIR = 'Resources/templates'
 POD_NAME = 'SwiftGen'
 
@@ -17,7 +17,7 @@ POD_NAME = 'SwiftGen'
 ## [ Utils ] ##################################################################
 
 def defaults(args)
-  bindir = args.bindir.nil? || args.bindir.empty? ? Pathname.new('./build/swiftgen/bin') : Pathname.new(args.bindir)
+  bindir = args.bindir.nil? || args.bindir.empty? ? (Pathname.new(BUILD_DIR) + 'swiftgen/bin') : Pathname.new(args.bindir)
   fmkdir = args.fmkdir.nil? || args.fmkdir.empty? ? bindir + '../lib' : Pathname.new(args.fmkdir)
   tpldir = args.tpldir.nil? || args.tpldir.empty? ? bindir + '../templates' : Pathname.new(args.tpldir)
   [bindir, fmkdir, tpldir].map(&:expand_path)
@@ -25,66 +25,40 @@ end
 
 ## [ Build Tasks ] ############################################################
 
-desc "Build the CLI binary and its frameworks in #{BUILD_DIR}"
-task :build, [:bindir, :tpldir] => DEPENDENCIES.map { |dep| "dependencies:#{dep}" } do |task, args|
+desc "Build the CLI binary and its frameworks as an app bundle\n" \
+     "(in #{BUILD_DIR})"
+task :build, [:bindir, :tpldir] do |task, args|
   (bindir, _, tpldir) = defaults(args)
   tpl_rel_path = tpldir.relative_path_from(bindir)
   main = File.read('Sources/main.swift')
   File.write('Sources/main.swift', main.gsub(/^let templatesRelativePath = .*$/, %Q(let templatesRelativePath = "#{tpl_rel_path}")))
 
   Utils.print_info "Building Binary"
-  frameworks = DEPENDENCIES.map { |fmk| "-framework #{fmk}" }.join(" ")
-  search_paths = DEPENDENCIES.map { |fmk| %Q(-F "#{BUILD_DIR}/#{fmk}") }.join(" ")
-  Utils.run(%Q(-sdk macosx swiftc -O -o "#{BUILD_DIR}/#{BIN_NAME}" #{search_paths}/ #{frameworks} Sources/*.swift -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __info_plist -Xlinker "Sources/Info.plist"), task, xcrun: true)
+  Utils.run(%Q(xcodebuild -workspace #{WORKSPACE}.xcworkspace -scheme #{SCHEME} -configuration #{CONFIGURATION} -derivedDataPath #{BUILD_DIR}), task, xcrun: true, formatter: :xcpretty)
 end
 
-namespace :dependencies do
-  DEPENDENCIES.each do |fmk|
-    # desc "Build #{fmk}.framework"
-    task fmk do |task|
-      Utils.print_info "Building #{fmk}.framework"
-      Utils.run(%Q(xcodebuild -project Pods/Pods.xcodeproj -target #{fmk} -configuration #{CONFIGURATION}), task, xcrun: true, formatter: :xcpretty)
-    end
-  end
-end
-
-
-
-## [ Install Tasks ] ##########################################################
-
-desc "Install the binary in $bindir, frameworks — without the Swift dylibs — in $fmkdir, and templates in $tpldir\n" \
+desc "Install the binary in $bindir, frameworks in $fmkdir, and templates in $tpldir\n" \
      "(defaults $bindir=./build/swiftgen/bin/, $fmkdir=$bindir/../lib, $tpldir=$bindir/../templates"
-task 'install:light', [:bindir, :fmkdir, :tpldir] => :build do |_, args|
+task :install, [:bindir, :fmkdir, :tpldir] => :build do |_, args|
   (bindir, fmkdir, tpldir) = defaults(args)
+  generated_bundle_path = "#{BUILD_DIR}/Build/Products/#{CONFIGURATION}/swiftgen.app/Contents"
 
   Utils.print_info "Installing binary in #{bindir}"
   sh %Q(mkdir -p "#{bindir}")
-  sh %Q(cp -f "#{BUILD_DIR}/#{BIN_NAME}" "#{bindir}")
+  sh %Q(cp -f "#{generated_bundle_path}/MacOS/swiftgen" "#{bindir}/#{BIN_NAME}")
 
   Utils.print_info "Installing frameworks in #{fmkdir}"
   sh %Q(mkdir -p "#{fmkdir}")
-  DEPENDENCIES.each do |fmk|
-    sh %Q(cp -fr "#{BUILD_DIR}/#{fmk}/#{fmk}.framework" "#{fmkdir}")
-  end
-  sh %Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}")
+  sh %Q(cp -fR "#{generated_bundle_path}/Frameworks/" "#{fmkdir}")
 
+  Utils.print_info "Fixing @rpath to find frameworks"
+  Utils.run(%Q(install_name_tool -delete_rpath "@executable_path/../Frameworks" "#{bindir}/#{BIN_NAME}"), task, xcrun: true)
+  Utils.run(%Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}"), task, xcrun: true)
+ 
   Utils.print_info "Installing templates in #{tpldir}"
   sh %Q(mkdir -p "#{tpldir}")
   sh %Q(cp -r "#{TEMPLATES_SRC_DIR}/" "#{tpldir}")
 end
-
-desc "Install the binary in $bindir, frameworks — including Swift dylibs — in $fmkdir, and templates in $tpldir\n" \
-     "(defaults $bindir=./swiftgen/bin/, $fmkdir=$bindir/../lib, $tpldir=$bindir/../templates"
-task :install, [:bindir, :fmkdir, :tpldir] => 'install:light' do |task, args|
-  (bindir, fmkdir, tpldir) = defaults(args)
-
-  Utils.print_info "Linking to standalone Swift dylibs"
-  Utils.run(%Q(swift-stdlib-tool --copy --scan-executable "#{bindir}/#{BIN_NAME}" --platform macosx --destination "#{fmkdir}"), task, xcrun: true)
-  toolchain_dir = Utils.run('-find swift-stdlib-tool', task, xcrun: true, formatter: :to_string).chomp
-  xcode_rpath = File.dirname(File.dirname(toolchain_dir)) + '/lib/swift/macosx'
-  Utils.run(%Q(install_name_tool -delete_rpath "#{xcode_rpath}" "#{bindir}/#{BIN_NAME}"), task, xcrun: true)
-end
-
 
 
 ## [ Tests & Clean ] ##########################################################
@@ -95,9 +69,10 @@ task :tests do
   Utils.run(%Q(xcodebuild -workspace SwiftGen.xcworkspace -scheme swiftgen -sdk macosx test), task, xcrun: true, formatter: :xcpretty)
 end
 
-desc "Delete the build/ directory"
+desc "Delete the build directory\n" \
+     "(#{BUILD_DIR})"
 task :clean do
-  sh %Q(rm -fr build)
+  sh %Q(rm -fr #{BUILD_DIR})
 end
 
 task :default => [:build]
