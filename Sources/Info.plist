@@ -24,5 +24,7 @@
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2017 AliSoftware. All rights reserved.</string>
+	<key>TemplatePath</key>
+	<string>$(TEMPLATE_PATH)</string>
 </dict>
 </plist>
