@@ -14,6 +14,6 @@ dependencies:
 test:
   override:
     - rake lint:code
-    - rake install
+    - rake cli:install
   post:
     - rake pod:lint
