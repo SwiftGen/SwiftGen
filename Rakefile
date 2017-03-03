@@ -35,7 +35,7 @@ namespace :cli do
     tpl_rel_path = tpldir.relative_path_from(bindir)
     
     Utils.print_info "Building Binary"
-    plist_file = (Pathname.new(BUILD_DIR) + 'Build/Products/Release/swiftgen.app/Contents/Info.plist').to_s
+    plist_file = (Pathname.new(BUILD_DIR) + "Build/Products/#{CONFIGURATION}/swiftgen.app/Contents/Info.plist").to_s
     Utils.run(
       %Q(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "#{SCHEME_NAME}" -configuration "#{CONFIGURATION}") +
       %Q( -derivedDataPath "#{BUILD_DIR}" TEMPLATE_PATH="#{tpl_rel_path}") +
