@@ -22,9 +22,18 @@ class Utils
   end
 
   # print an info header
+  def self.print_header(str)
+    puts "== #{str.chomp} ==".format(:yellow, :bold)
+  end
+
+  # print an info message
   def self.print_info(str)
-    (red,clr) = (`tput colors`.chomp.to_i >= 8) ? %W(\e[33m \e[m) : ["", ""]
-    puts red, "== #{str.chomp} ==", clr
+    puts str.chomp.format(:green)
+  end
+
+  # print an error message
+  def self.print_error(str)
+    puts str.chomp.format(:red)
   end
 
   ## [ Private helper functions ] ##################################################
@@ -70,5 +79,45 @@ class Utils
     %Q(DEVELOPER_DIR="#{latest_xcode_version}/Contents/Developer")
   end
   private_class_method :version_select
+end
 
+
+class String
+  # colorization
+  FORMATTING = {
+    # text styling
+    :bold => 1,
+    :faint => 2,
+    :italic => 3,
+    :underline => 4,
+    # foreground colors
+    :black => 30,
+    :red => 31,
+    :green => 32,
+    :yellow => 33,
+    :blue => 34,
+    :magenta => 35,
+    :cyan => 36,
+    :white => 37,
+    # background colors
+    :bg_black => 40,
+    :bg_red => 41,
+    :bg_green => 42,
+    :bg_yellow => 43,
+    :bg_blue => 44,
+    :bg_magenta => 45,
+    :bg_cyan => 46,
+    :bg_white => 47
+  }
+
+  # only enable formatting if terminal supports it
+  if `tput colors`.chomp.to_i >= 8
+    def format(*styles)  
+      styles.reduce("") { |r, s| r << "\e[#{FORMATTING[s]}m" } << "#{self}\e[0m"
+    end
+  else
+    def format(*styles)  
+      self
+    end
+  end
 end

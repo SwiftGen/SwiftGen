@@ -34,7 +34,7 @@ namespace :cli do
     (bindir, _, tpldir) = defaults(args)
     tpl_rel_path = tpldir.relative_path_from(bindir)
     
-    Utils.print_info "Building Binary"
+    Utils.print_header "Building Binary"
     plist_file = (Pathname.new(BUILD_DIR) + "Build/Products/#{CONFIGURATION}/swiftgen.app/Contents/Info.plist").to_s
     Utils.run(
       %Q(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "#{SCHEME_NAME}" -configuration "#{CONFIGURATION}") +
@@ -49,26 +49,26 @@ namespace :cli do
     (bindir, fmkdir, tpldir) = defaults(args)
     generated_bundle_path = "#{BUILD_DIR}/Build/Products/#{CONFIGURATION}/swiftgen.app/Contents"
 
-    Utils.print_info "Installing binary in #{bindir}"
+    Utils.print_header "Installing binary in #{bindir}"
     Utils.run([
       %Q(mkdir -p "#{bindir}"),
       %Q(cp -f "#{generated_bundle_path}/MacOS/swiftgen" "#{bindir}/#{BIN_NAME}"),
     ], task, 'copy_binary')
 
-    Utils.print_info "Installing frameworks in #{fmkdir}"
+    Utils.print_header "Installing frameworks in #{fmkdir}"
     Utils.run([
       %Q(if [ -d "#{fmkdir}" ]; then rm -rf "#{fmkdir}"; fi),
       %Q(mkdir -p "#{fmkdir}"),
       %Q(cp -fR "#{generated_bundle_path}/Frameworks/" "#{fmkdir}"),
     ], task, 'copy_frameworks')
 
-    Utils.print_info "Fixing binary's @rpath"
+    Utils.print_header "Fixing binary's @rpath"
     Utils.run([
       %Q(install_name_tool -delete_rpath "@executable_path/../Frameworks" "#{bindir}/#{BIN_NAME}"),
       %Q(install_name_tool -add_rpath "@executable_path/#{fmkdir.relative_path_from(bindir)}" "#{bindir}/#{BIN_NAME}"),
     ], task, 'fix_rpath', xcrun: true)
    
-    Utils.print_info "Installing templates in #{tpldir}"
+    Utils.print_header "Installing templates in #{tpldir}"
     Utils.run([
       %Q(mkdir -p "#{tpldir}"),
       %Q(cp -r "#{TEMPLATES_SRC_DIR}/" "#{tpldir}"),
