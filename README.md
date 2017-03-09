@@ -642,7 +642,7 @@ This code and tool is under the MIT License. See the `LICENSE` file in this repo
 This tool is powered by
 
 - [Stencil](https://github.com/kylef/Stencil) and few other libs by [Kyle Fuller](https://github.com/kylef)
-- [SwiftGenKit](https://github.com/SwiftGen/SwiftGenKit) and [StencilSwiftKit](https://github.com/SwiftGen/StenclSwiftKit), our internal frameworks at SwiftGen
+- [SwiftGenKit](https://github.com/SwiftGen/SwiftGenKit) and [StencilSwiftKit](https://github.com/SwiftGen/StencilSwiftKit), our internal frameworks at SwiftGen
 
 It is currently mainly maintained by [@AliSoftware](https://github.com/AliSoftware) and [@djbe](https://github.com/djbe). But I couldn't thank enough all the other [contributors](https://github.com/SwiftGen/SwiftGen/graphs/contributors) to this tool along the different versions which helped make SwiftGen awesome! 🎉
 
