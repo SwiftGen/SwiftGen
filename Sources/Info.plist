@@ -17,16 +17,14 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>4.2.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>4.2.0</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2016 AliSoftware. All rights reserved.</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
+	<string>Copyright © 2017 AliSoftware. All rights reserved.</string>
+	<key>TemplatePath</key>
+	<string>$(TEMPLATE_PATH)</string>
 </dict>
 </plist>

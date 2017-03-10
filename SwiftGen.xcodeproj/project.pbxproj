@@ -69,7 +69,7 @@
 		09C7B2D31BCC382800D7F488 /* main.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; tabWidth = 2; };
 		09E7146D1B6D55B4007FF3CF /* SwiftGen.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftGen.playground; sourceTree = "<group>"; };
 		234F7E6E1DEBD5C5001B3C10 /* swiftgen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftgen.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		234F7E771DEBD5C5001B3C10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = SwiftGen/Info.plist; sourceTree = "<group>"; };
+		234F7E771DEBD5C5001B3C10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Sources/Info.plist; sourceTree = "<group>"; };
 		2FECAA9B5A99ECF32BC7C59C /* Pods-swiftgen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.debug.xcconfig"; sourceTree = "<group>"; };
 		3F17C8613373A017F0B70B5C /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80C3A19C1BBD55A5644EDC18 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,11 +103,10 @@
 		09030B621B6D254200275BF5 = {
 			isa = PBXGroup;
 			children = (
-				09C7B2D21BCC382800D7F488 /* swiftgen-cli */,
+				09C7B2D21BCC382800D7F488 /* Sources */,
 				DDC09C7D1E1D193F005C6EE6 /* Resources */,
-				09030BB51B6D286800275BF5 /* UnitTests */,
+				09030BB51B6D286800275BF5 /* Tests */,
 				09E7146D1B6D55B4007FF3CF /* SwiftGen.playground */,
-				234F7E7B1DEBD6C5001B3C10 /* SupportingFiles */,
 				09030B6C1B6D254200275BF5 /* Products */,
 				FB9FA6CF10F1D676B3B78092 /* Pods */,
 				C7673476E83FDF52B1DBB48C /* Frameworks */,
@@ -126,25 +125,25 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		09030BB51B6D286800275BF5 /* UnitTests */ = {
+		09030BB51B6D286800275BF5 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				09030BC71B6D2BA300275BF5 /* SwiftGenTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		09030BC71B6D2BA300275BF5 /* SwiftGenTests */ = {
 			isa = PBXGroup;
 			children = (
 				09030C171B6D43D400275BF5 /* TestsHelper.swift */,
-				09030BC71B6D2BA300275BF5 /* TestSuites */,
+				09030BD81B6D2E5900275BF5 /* Tests.swift */,
 				09030BC01B6D2A8F00275BF5 /* Info.plist */,
 			);
-			path = UnitTests;
+			path = SwiftGenTests;
 			sourceTree = "<group>";
 		};
-		09030BC71B6D2BA300275BF5 /* TestSuites */ = {
-			isa = PBXGroup;
-			children = (
-				09030BD81B6D2E5900275BF5 /* Tests.swift */,
-			);
-			path = TestSuites;
-			sourceTree = "<group>";
-		};
-		09C7B2D21BCC382800D7F488 /* swiftgen-cli */ = {
+		09C7B2D21BCC382800D7F488 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				09C7B2D31BCC382800D7F488 /* main.swift */,
@@ -156,16 +155,7 @@
 				09A87B731BCCBE6D00D9B9F5 /* strings.swift */,
 				C24AFD011C91DE33005FE3EF /* fonts.swift */,
 			);
-			name = "swiftgen-cli";
-			path = SwiftGen;
-			sourceTree = "<group>";
-		};
-		234F7E7B1DEBD6C5001B3C10 /* SupportingFiles */ = {
-			isa = PBXGroup;
-			children = (
-				234F7E771DEBD5C5001B3C10 /* Info.plist */,
-			);
-			name = SupportingFiles;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		C7673476E83FDF52B1DBB48C /* Frameworks */ = {
@@ -180,6 +170,7 @@
 		DDC09C7D1E1D193F005C6EE6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				234F7E771DEBD5C5001B3C10 /* Info.plist */,
 				DDC09D011E1D199A005C6EE6 /* templates */,
 			);
 			path = Resources;
@@ -313,7 +304,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}\"/scripts/swiftlint-code.sh";
+			shellScript = "if [[ ! $CI ]]; then\n    rake lint:code\nfi";
 		};
 		4811547A0A30F3C9A2E79956 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -477,7 +468,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -516,7 +507,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -525,12 +516,11 @@
 			baseConfigurationReference = 920E71433B3570488CF5B052 /* Pods-UnitTests.debug.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = UnitTests/Info.plist;
+				INFOPLIST_FILE = Tests/SwiftGenTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -539,12 +529,11 @@
 			baseConfigurationReference = 90843707F44D6F8153913604 /* Pods-UnitTests.release.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = UnitTests/Info.plist;
+				INFOPLIST_FILE = Tests/SwiftGenTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -558,13 +547,16 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = swiftgen/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(SWIFTGEN_OTHER_LDFLAGS)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.swiftgen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -578,12 +570,15 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = swiftgen/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(SWIFTGEN_OTHER_LDFLAGS)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.swiftgen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

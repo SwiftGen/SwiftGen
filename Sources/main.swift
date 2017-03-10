@@ -12,7 +12,14 @@ import SwiftGenKit
 
 // MARK: Common
 
-let templatesRelativePath = (Bundle.main.resourcePath ?? ".") + "/templates"
+let templatesRelativePath: String
+if let path = Bundle.main.object(forInfoDictionaryKey: "TemplatePath") as? String, !path.isEmpty {
+  templatesRelativePath = path
+} else if let path = Bundle.main.path(forResource: "templates", ofType: nil) {
+  templatesRelativePath = path
+} else {
+  templatesRelativePath = "../templates"
+}
 
 func templateOption(prefix: String) -> Option<String> {
   return Option<String>(
@@ -48,7 +55,7 @@ let main = Group {
 }
 
 let version = Bundle.main
-  .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
+  .object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0.0"
 let stencilVersion = Bundle(for: Stencil.Template.self)
   .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
 let stencilSwiftKitVersion = Bundle(for: StencilSwiftKit.StencilSwiftTemplate.self)

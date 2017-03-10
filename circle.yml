@@ -1,0 +1,21 @@
+machine:
+  xcode:
+    version: 8.2
+
+checkout:
+  post:
+    - git submodule update --init --recursive
+
+dependencies:
+  post:
+    - rake lint:install
+    - curl -sS https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash
+
+test:
+  override:
+    - rake lint:code
+    - rake cli:install[./standalone,./standalone/frameworks,./standalone/stencils]
+  post:
+    - ./standalone/swiftgen --version
+    - ./standalone/swiftgen templates list
+    - rake pod:lint
