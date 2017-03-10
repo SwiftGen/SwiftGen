@@ -32,6 +32,10 @@ This information will help us review and fix your issue faster.
 
 Before you start developing new features and creating pull requests; *first* create an issue discussing these changes so that we can help you define the scope and implementation. Once discussed we can guide you through developing and creating the pull requests in the right repositories, in the right order, to ensure a smooth flow. This is particularly necessary because the SwiftGen project is split up in multiple repositories, and some features might span multiple repositories.
 
+Each pull request will need to conform to some requirements, which should be automatically checked by our Danger bot. The main points are:
+- Please check your indentation settings (2 spaces, no tabs). We're not forcing you to use a certain coding style, just trying to keep the code layout consistent.
+- Ensure you've made a changelog entry, crediting yourself. Easiest if you just copy a previous entry to get the format right, if not, Danger bot will tell you.
+
 ## Project Setup
 
 Before you can start developing a fix or a new feature in this project you need to be aware of how this project is structured. Depending on the scope of the feature you want to develop, it might be easiest to checkout the [Eve repository](https://github.com/SwiftGen/Eve) and `bootstrap` it, which will checkout and initialize all repositories correctly.
