@@ -6,6 +6,7 @@ This document contains information and guidelines about contributing to this pro
 
 - [Asking Questions](#asking-questions)
 - [Reporting Issues](#reporting-issues)
+- [Creating Pull Requests](#creating-pull-requests)
 - [Project Setup](#project-setup)
 
 ## Asking Questions
@@ -18,6 +19,7 @@ A great way to contribute to the project is to send a detailed issue when you en
 
 When reporting issues, please include the following:
 
+- The version of SwiftGen you're using (`swiftgen --version`)
 - The version of Xcode you're using
 - The version of iOS or macOS you're targeting
 - The full output of any stack trace or compiler error
@@ -26,24 +28,24 @@ When reporting issues, please include the following:
 
 This information will help us review and fix your issue faster.
 
+## Creating Pull Requests
+
+Before you start developing new features and creating pull requests; *first* create an issue discussing these changes so that we can help you define the scope and implementation. Once discussed we can guide you through developing and creating the pull requests in the right repositories, in the right order, to ensure a smooth flow. This is particularly necessary because the SwiftGen project is split up in multiple repositories, and some features might span multiple repositories.
+
 ## Project Setup
 
-Before you can start developing a fix or a new feature in this project you need to be aware of how this project is structured. Especially since SwiftGen is a command line tool written in Swift some things need to be handled differently.
+Before you can start developing a fix or a new feature in this project you need to be aware of how this project is structured. Depending on the scope of the feature you want to develop, it might be easiest to checkout the [Eve repository](https://github.com/SwiftGen/Eve) and `bootstrap` it, which will checkout and initialize all repositories correctly.
 
 ### Requirements
 
 First you need to make sure your machine fulfills the following requirements:
 
-- You have [Homebrew](http://brew.sh), [CocoaPods](https://cocoapods.org) and [xcpretty](https://github.com/supermarin/xcpretty) installed
+- You have [Homebrew](http://brew.sh) and [Bundler](https://bundler.io) installed
 - You have [SwiftLint](https://github.com/realm/SwiftLint) installed – otherwise run `brew install swiftlint`
-- Install the dependencies by running `pod install` from the project root directory
+- Install the dependencies by running `bundler install` from the project root directory
 
-Note that `pod install` should succeed with two warnings stating "[...] target overrides the `EMBEDDED_CONTENT_CONTAINS_SWIFT` build setting [...]". This warnings are due to the command line nature of SwiftGen and can be safely ignored.
+Unless you're adding (or updating) dependencies, you won't have to run `pod install` as all dependencies are already checked in to the repository.
 
-### Building Correctly
+### Building & Running
 
-SwiftGen doesn't have an app bundle wrapping the binary executable, frameworks and resources like regular macOS `.app` bundles, but instead builds a standalone binary executable. But being written in Swift, it needs to be linked against the Swift dynamic libraries (various `libswiftXXX.dylib` libraries) and also has other dependencies (like Stencil & Commander frameworks) that it needs to be linked against too.
-
-All this means simply building the project won't result to such a binary like the one you receive when installing SwiftGen via Homebrew. Instead you need to run `rake install` from the projects root directory to build SwiftGen.
-
-Please note that there is also a test target within the project which builds just fine despite the above mentioned problems.
+The Xcode workspace, by default, is configured to run SwiftGen built as an app bundle, with some default parameters. You can switch (and modify) these by going to `Product > Scheme > Edit Scheme... > Arguments`, and checking (and unchecking) the command you want to test.
