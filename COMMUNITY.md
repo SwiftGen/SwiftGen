@@ -12,7 +12,7 @@ Everyone comes in with their own perspective on what a project could/should look
 
 #### Why do we give out push access?
 
-It can be overwhelming to offered the chance to wipe the source code for a project. Don't worry, we don't let you push to master. All code is peer-reviewed, and we have the convention that someone other than the submitter should merge non-trivial pull requests.
+It can be overwhelming to be offered the chance to wipe the source code for a project. Don't worry, we don't let you push to master. All code is peer-reviewed, and we have the convention that someone other than the submitter should merge non-trivial pull requests.
 
 As an organization contributor, you can merge other people's pull requests, or other contributors can merge yours. You won't be assigned a pull request, but you're welcome to jump in and take a code review on topics that interest you.
 
@@ -24,7 +24,7 @@ It's normal for a first pull request to be a potential fix for a problem, and mo
 
 We aim to keep all project discussion inside GitHub issues. This is to make sure valuable discussion is accessible via search. If you have questions about how to use the library, or how the project is running - GitHub issues are the goto tool for this project.
 
-For actualy contribution guidelines, you can always check our [contributing documentation](CONTRIBUTING.md).
+For actual contribution guidelines, you can always check our [contributing documentation](CONTRIBUTING.md).
 
 #### Our expectations on you as a contributor
 
