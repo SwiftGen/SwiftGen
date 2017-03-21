@@ -65,10 +65,10 @@ You can install to the default locations (no parameter) or to custom locations:
 
 ```sh
 # Binary is installed in `./swiftgen/bin`, frameworks in `./swiftgen/lib` and templates in `./swiftgen/templates`
-$ rake install
+$ rake cli:install
 # - OR -
 # Binary will be installed in `~/swiftgen/bin`, framworks in `~/swiftgen/fmk` and templates in `~/swiftgen/tpl`
-$ rake install[~/swiftgen/bin,~/swiftgen/fmk,~/swiftgen/tpl]
+$ rake cli:install[~/swiftgen/bin,~/swiftgen/fmk,~/swiftgen/tpl]
 ```
 </details>
 
