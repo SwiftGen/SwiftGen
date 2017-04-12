@@ -5,7 +5,8 @@ def common_pods
   pod 'Stencil', '~> 0.8.0', :inhibit_warnings => true
   pod 'PathKit', '~> 0.8.0', :inhibit_warnings => true
   pod 'StencilSwiftKit', '~> 1.0.0'
-  pod 'SwiftGenKit', '~> 1.0.1'
+#  pod 'SwiftGenKit', '~> 1.0.1'
+  pod 'SwiftGenKit', :git => 'https://github.com/AFcgi/SwiftGenKit', :branch => 'feature/font_file'
 end
 
 target 'swiftgen' do

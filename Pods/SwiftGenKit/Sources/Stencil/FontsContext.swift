@@ -33,7 +33,16 @@ extension FontsFileParser {
         "fonts": fonts
       ]
     }.sorted { $0["name"] as? String ?? "" < $1["name"] as? String ?? "" }
-
-    return ["enumName": enumName, "families": families]
+	
+	let fontNames = fonts.map { (name: String, fontfamily: Font) -> [String: Any] in
+	  return [
+		"name": name,
+		"family": fontfamily.familyName,
+		"style": fontfamily.style,
+		"size": fontfamily.size
+		]
+	}.sorted { $0["name"] as? String ?? "" < $1["name"] as? String ?? "" }
+	
+    return ["enumName": enumName, "families": families, "fonts": fontNames]
   }
 }

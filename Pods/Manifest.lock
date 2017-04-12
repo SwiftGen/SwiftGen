@@ -13,15 +13,25 @@ DEPENDENCIES:
   - PathKit (~> 0.8.0)
   - Stencil (~> 0.8.0)
   - StencilSwiftKit (~> 1.0.0)
-  - SwiftGenKit (~> 1.0.1)
+  - SwiftGenKit (from `https://github.com/AFcgi/SwiftGenKit`, branch `feature/font_file`)
+
+EXTERNAL SOURCES:
+  SwiftGenKit:
+    :branch: feature/font_file
+    :git: https://github.com/AFcgi/SwiftGenKit
+
+CHECKOUT OPTIONS:
+  SwiftGenKit:
+    :commit: fea17bbbfbf8d967af5ea11ee0b651043c264f48
+    :git: https://github.com/AFcgi/SwiftGenKit
 
 SPEC CHECKSUMS:
   Commander: fba7c96c9e787ecc8ebe0737be875e1e18ef47ff
   PathKit: dcab05d701474011aae0e40cf892298a831f63d6
   Stencil: 6669684db0262e6eb316ce233e7e02d6df0a6cd9
   StencilSwiftKit: 131bdb0b90b87664651011d922d50418d8d92e0c
-  SwiftGenKit: b790d9509b5c15bdd3a98f9e385c9f8f45f121ca
+  SwiftGenKit: 9b6f20360c33216663514b720016fa2d57cea478
 
-PODFILE CHECKSUM: 13a954ce68ecb59b509f7fdb7a6fdcf121dc40e8
+PODFILE CHECKSUM: 749588f9c107900785d0759e1b61480e76053d3c
 
 COCOAPODS: 1.2.0

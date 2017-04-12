@@ -15,11 +15,20 @@ public struct Font {
   let familyName: String
   let style: String
   let postScriptName: String
+  let size: CGFloat
 
   init(familyName: String, style: String, postScriptName: String) {
     self.familyName = familyName
     self.style = style
     self.postScriptName = postScriptName
+	self.size = 0
+  }
+	
+  init(familyName: String, style: String, size: CGFloat) {
+	self.familyName = familyName
+	self.style = style
+	self.postScriptName = ""
+	self.size = size
   }
 }
 
@@ -54,7 +63,16 @@ extension CTFont {
 // MARK: FontsFileParser
 
 public final class FontsFileParser {
+
+  static let fontTagName = "font"
+  static let fontNameAttribute = "name"
+  static let familyTagName = "family"
+  static let styleTagName = "style"
+  static let sizeTagName = "size"
+	
   public var entries: [String: Set<Font>] = [:]
+  public var fonts: [String: Font] = [:]
+  private var fontsFileURL: URL?
 
   public init() {}
 
@@ -74,12 +92,22 @@ public final class FontsFileParser {
             print("Unable to determine the Universal Type Identifier for file \(file)")
             continue
           }
-          guard UTTypeConformsTo(uti as CFString, "public.font" as CFString) else { continue }
+          guard UTTypeConformsTo(uti as CFString, "public.font" as CFString) else {
+			
+			if file.pathExtension.lowercased() == "xml" {
+			  fontsFileURL = file
+			}
+			
+			continue
+		  }
+			
           let fonts = CTFont.parseFonts(at: file)
 
           fonts.forEach { addFont($0) }
         }
-    }
+	}
+	
+	fontsXMLFileParser()
   }
 
   private func addFont(_ font: Font) {
@@ -88,4 +116,88 @@ public final class FontsFileParser {
     entry.insert(font)
     entries[familyName] = entry
   }
+
+  private func fontsXMLFileParser() {
+	guard let url = fontsFileURL,
+		let parser = XMLParser(contentsOf: url) else { return }
+	
+	let delegate = ParserDelegate()
+	parser.delegate = delegate
+	
+	if parser.parse()
+	{
+		fonts = delegate.parsedFont
+	}
+  }
+
+
+  private class ParserDelegate: NSObject, XMLParserDelegate {
+	var parsedFont = [String: Font]()
+	var currentFontName: String? = nil
+	var currentFamilyName: String? = nil
+	var currentStyleName: String? = nil
+	var currentSize: CGFloat = 0
+		
+	@objc func parser(_ parser: XMLParser, didStartElement elementName: String,
+	                  namespaceURI: String?, qualifiedName qName: String?,
+	                  attributes attributeDict: [String: String]) {
+			
+	  switch elementName {
+		case FontsFileParser.fontTagName:		currentFontName = attributeDict[FontsFileParser.fontNameAttribute]
+		case FontsFileParser.familyTagName:		currentFamilyName = nil
+		case FontsFileParser.styleTagName:		currentStyleName = nil
+		case FontsFileParser.sizeTagName:		currentSize = 0
+		default:								break
+	  }
+	}
+	
+	@objc func parser(_ parser: XMLParser, foundCharacters string: String) {
+			
+	  if currentFamilyName == nil {
+		currentFamilyName = string
+	  } else if currentStyleName == nil {
+		currentStyleName = string
+	  } else if currentSize == 0 {
+		if let number = NumberFormatter().number(from: string) {
+		  currentSize = CGFloat(number)
+		}
+	  }
+	}
+	
+	@objc func parser(_ parser: XMLParser, didEndElement elementName: String,
+	                  namespaceURI: String?, qualifiedName qName: String?) {
+			
+	  switch elementName {
+	    case FontsFileParser.fontTagName:
+			guard let fontName = currentFontName,
+				let familyName = currentFamilyName,
+				let style = currentStyleName else { return }
+				
+			let font = Font(familyName: familyName, style: style, size: currentSize)
+			parsedFont[fontName] = font
+				
+			currentFontName = nil
+			currentFamilyName = nil
+			currentStyleName = nil
+			currentSize = 0
+				
+		case FontsFileParser.familyTagName:		break
+		case FontsFileParser.styleTagName:		break
+		case FontsFileParser.sizeTagName:		break
+		default:								break
+	  }
+	}
+  }
 }
+
+public enum FontXMLParserError: Error, CustomStringConvertible {
+	case invalidFile(reason: String)
+	
+	public var description: String {
+		switch self {
+		case .invalidFile(reason: let reason):
+			return "error: Unable to parse file. \(reason)"
+		}
+	}
+}
+
