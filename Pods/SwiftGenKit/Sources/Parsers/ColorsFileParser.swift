@@ -176,9 +176,9 @@ public final class ColorsXMLFileParser: ColorsFileParser {
 
   private class ParserDelegate: NSObject, XMLParserDelegate {
     var parsedColors = [String: UInt32]()
-    var currentColorName: String? = nil
-    var currentColorValue: String? = nil
-    var colorParserError: Error? = nil
+    var currentColorName: String?
+    var currentColorValue: String?
+    var colorParserError: Error?
 
     @objc func parser(_ parser: XMLParser, didStartElement elementName: String,
                       namespaceURI: String?, qualifiedName qName: String?,

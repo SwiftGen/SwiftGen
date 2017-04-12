@@ -6,7 +6,6 @@
 
 import Foundation
 
-
 /*
 - `enumName`: `String`
 - `families`: `Array`

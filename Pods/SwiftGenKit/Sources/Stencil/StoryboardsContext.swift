@@ -37,7 +37,7 @@ private func uppercaseFirst(_ string: String) -> String {
 */
 extension StoryboardParser {
   public func stencilContext(sceneEnumName: String = "StoryboardScene",
-                                           segueEnumName: String = "StoryboardSegue") -> [String: Any] {
+                             segueEnumName: String = "StoryboardSegue") -> [String: Any] {
     let storyboards = Set(storyboardsScenes.keys).union(storyboardsSegues.keys).sorted(by: <)
     let storyboardsMap = storyboards.map { (storyboardName: String) -> [String:Any] in
       var sbMap: [String:Any] = ["name": storyboardName]
@@ -49,7 +49,7 @@ extension StoryboardParser {
         } else {
           initial = [
             "baseType": uppercaseFirst(initialScene.tag),
-            
+
             // NOTE: This is a deprecated variable
             "isBaseViewController": initialScene.tag == "viewController"
           ]
@@ -71,7 +71,7 @@ extension StoryboardParser {
               return [
                 "identifier": scene.storyboardID,
                 "baseType": uppercaseFirst(scene.tag),
-                
+
                 // NOTE: This is a deprecated variable
                 "isBaseViewController": scene.tag == "viewController"
               ]

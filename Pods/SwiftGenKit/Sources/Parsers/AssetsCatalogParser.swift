@@ -36,10 +36,10 @@ private enum AssetCatalog {
   static let filename = "filename"
   static let providesNamespace = "provides-namespace"
   static let root = "com.apple.actool.catalog-contents"
-  
+
   enum Extension {
     static let imageSet = "imageset"
-	
+
 	/**
 	 * This is a list of supported asset catalog item types, for now we just
 	 * support `image set`s. If you want to add support for new types, just add
