@@ -221,6 +221,7 @@
 			buildConfigurationList = 234F7E781DEBD5C5001B3C10 /* Build configuration list for PBXNativeTarget "swiftgen" */;
 			buildPhases = (
 				BE75D8128E36C265E04E39E6 /* [CP] Check Pods Manifest.lock */,
+				234F7E7C1DEBD742001B3C10 /* ⚠️ SwiftLint */,
 				234F7E6A1DEBD5C5001B3C10 /* Sources */,
 				234F7E6B1DEBD5C5001B3C10 /* Frameworks */,
 				234F7E6C1DEBD5C5001B3C10 /* Resources */,
@@ -294,6 +295,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		234F7E7C1DEBD742001B3C10 /* ⚠️ SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "⚠️ SwiftLint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ ! $CI ]]; then\n    rake lint:code\nfi";
+		};
 		4811547A0A30F3C9A2E79956 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
