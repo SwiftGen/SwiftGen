@@ -2,7 +2,7 @@
 //  plist.swift
 //  SwiftGen
 //
-//  Created by 鈴木 俊裕 on 4/12/17.
+//  Created by Toshihiro Suzuki on 4/12/17.
 //  Copyright © 2017 AliSoftware. All rights reserved.
 //
 
