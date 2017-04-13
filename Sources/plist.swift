@@ -16,16 +16,14 @@ let plistCommand = command(
   templateOption(prefix: "plist"),
   templatePathOption,
   VariadicOption<String>("param", [], description: "List of template parameters"),
-  VariadicArgument<Path>("PATHS", description: "Info.plist file(s)", validator: filesExist)
-) { output, templateName, templatePath, parameters, paths in
+  Argument<Path>("PATH", description: "Info.plist file", validator: fileExists)
+) { output, templateName, templatePath, parameters, path in
   let parser = PlistParser()
 
-  for path in paths {
-    if path.extension == "plist" {
-      parser.parse(at: path)
-    } else {
-      throw ArgumentError.invalidType(value: String(describing: path), type: "plist file", argument: nil)
-    }
+  if path.extension == "plist" {
+    parser.parse(at: path)
+  } else {
+    throw ArgumentError.invalidType(value: String(describing: path), type: "plist file", argument: nil)
   }
 
   do {
