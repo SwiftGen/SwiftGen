@@ -7,8 +7,15 @@
 import Foundation
 
 /*
- - `enumName`: `String` — name of the enum to generate
- - `images`: `Array<String>` — list of image names
+ - `catalogs`: `Array` — list of asset catalogs
+   - `name`  : `String` — the name of the catalog
+   - `assets`: `Array` — tree structure of items, each item is either a:
+     - group: this represents a folder
+		- `name` : `String` — name of the folder
+        - `items`: `Array` — list of items, can be either groups or images
+     - image: this represents an image asset
+        - `name` : `String` — name of the image
+        - `value`: `String` — the actual name for loading the image
 */
 extension AssetsCatalogParser {
   public func stencilContext(enumName: String = "Asset") -> [String: Any] {
@@ -21,11 +28,12 @@ extension AssetsCatalogParser {
     }
 
     return [
-      "enumName": enumName,
       "catalogs": structured,
 
       // NOTE: This is a deprecated variable
-      "images": images
+      "enumName": enumName,
+      "images": images,
+      "param": ["enumName": enumName]
     ]
   }
 

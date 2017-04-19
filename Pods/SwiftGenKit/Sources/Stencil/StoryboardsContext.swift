@@ -14,26 +14,25 @@ private func uppercaseFirst(_ string: String) -> String {
 }
 
 /*
- - `sceneEnumName`: `String`
- - `segueEnumName`: `String`
- - `modules`: `Array` of `String`
- - `storyboards`: `Array` of:
-    - `name`: `String`
+ - `modules`    : `Array<String>` — List of modules used by scenes and segues
+ - `storyboards`: `Array` — List of storyboards
+    - `name`: `String` — Name of the storyboard
     - `initialScene`: `Dictionary` (absent if not specified)
-       - `customClass`: `String` (absent if generic UIViewController/NSViewController)
-       - `isBaseViewController`: `Bool`, indicate if the baseType is 'viewController' or anything else
+       - `customClass` : `String` (absent if generic UIViewController/NSViewController)
+       - `customModule`: `String` (absent if no custom class)
        - `baseType`: `String` (absent if class is a custom class).
           The base class type on which the initial scene is base.
           Possible values include 'ViewController', 'NavigationController', 'TableViewController'…
     - `scenes`: `Array` (absent if empty)
-       - `identifier`: `String`
+       - `identifier` : `String`
        - `customClass`: `String` (absent if generic UIViewController/NSViewController)
-       - `isBaseViewController`: `Bool`, indicate if the baseType is 'ViewController' or anything else
-       - `baseType`: `String` (absent if class is a custom class). The base class type on which a scene is base.
+       - `customModule`: `String` (absent if no custom class)
+       - `baseType`: `String` (absent if class is a custom class).
+          The base class type on which a scene is base.
           Possible values include 'ViewController', 'NavigationController', 'TableViewController'…
     - `segues`: `Array` (absent if empty)
        - `identifier`: `String`
-       - `class`: `String` (absent if generic UIStoryboardSegue)
+       - `customClass`: `String` (absent if generic UIStoryboardSegue)
 */
 extension StoryboardParser {
   public func stencilContext(sceneEnumName: String = "StoryboardScene",
@@ -43,60 +42,81 @@ extension StoryboardParser {
       var sbMap: [String:Any] = ["name": storyboardName]
       // Initial Scene
       if let initialScene = initialScenes[storyboardName] {
-        let initial: [String:Any]
-        if let customClass = initialScene.customClass {
-          initial = ["customClass": customClass, "customModule": initialScene.customModule ?? ""]
-        } else {
-          initial = [
-            "baseType": uppercaseFirst(initialScene.tag),
-
-            // NOTE: This is a deprecated variable
-            "isBaseViewController": initialScene.tag == "viewController"
-          ]
-        }
-        sbMap["initialScene"] = initial
+        sbMap["initialScene"] = map(initialScene: initialScene)
       }
       // All Scenes
       if let scenes = storyboardsScenes[storyboardName] {
         sbMap["scenes"] = scenes
           .sorted(by: {$0.storyboardID < $1.storyboardID})
-          .map { (scene: Scene) -> [String:Any] in
-            if let customClass = scene.customClass {
-              return [
-                "identifier": scene.storyboardID,
-                "customClass": customClass,
-                "customModule": scene.customModule ?? ""
-              ]
-            } else if scene.tag == "viewController" {
-              return [
-                "identifier": scene.storyboardID,
-                "baseType": uppercaseFirst(scene.tag),
-
-                // NOTE: This is a deprecated variable
-                "isBaseViewController": scene.tag == "viewController"
-              ]
-            }
-            return ["identifier": scene.storyboardID, "baseType": uppercaseFirst(scene.tag)]
-        }
+          .map(map(scene:))
       }
       // All Segues
       if let segues = storyboardsSegues[storyboardName] {
-		sbMap["segues"] = segues
-			.sorted(by: {$0.identifier < $1.identifier})
-			.map { (segue: Segue) -> [String:String] in
-				["identifier": segue.identifier, "customClass": segue.customClass ?? ""]
-		}
+        sbMap["segues"] = segues
+          .sorted(by: {$0.identifier < $1.identifier})
+          .map(map(segue:))
       }
       return sbMap
     }
     return [
-      "sceneEnumName": sceneEnumName,
-      "segueEnumName": segueEnumName,
-      "storyboards": storyboardsMap,
       "modules": modules.sorted(),
+      "storyboards": storyboardsMap,
 
       // NOTE: This is a deprecated variable
-      "extraImports": modules.sorted()
+      "extraImports": modules.sorted(),
+      "param": [
+        "sceneEnumName": sceneEnumName,
+        "segueEnumName": segueEnumName
+      ],
+      "sceneEnumName": sceneEnumName,
+      "segueEnumName": segueEnumName
+    ]
+  }
+
+  private func map(initialScene scene: InitialScene) -> [String: Any] {
+    if let customClass = scene.customClass {
+      return [
+        "customClass": customClass,
+        "customModule": scene.customModule ?? ""
+      ]
+    } else {
+      return [
+        "baseType": uppercaseFirst(scene.tag),
+
+        // NOTE: This is a deprecated variable
+        "isBaseViewController": scene.tag == "viewController"
+      ]
+    }
+  }
+
+  private func map(scene: Scene) -> [String: Any] {
+    if let customClass = scene.customClass {
+      return [
+        "identifier": scene.storyboardID,
+        "customClass": customClass,
+        "customModule": scene.customModule ?? ""
+      ]
+    } else if scene.tag == "viewController" {
+      return [
+        "identifier": scene.storyboardID,
+        "baseType": uppercaseFirst(scene.tag),
+
+        // NOTE: This is a deprecated variable
+        "isBaseViewController": scene.tag == "viewController"
+      ]
+    } else {
+      return [
+        "identifier": scene.storyboardID,
+        "baseType": uppercaseFirst(scene.tag)
+      ]
+    }
+  }
+
+  private func map(segue: Segue) -> [String: Any] {
+    return [
+      "identifier": segue.identifier,
+      "customClass": segue.customClass ?? "",
+      "customModule": segue.customModule ?? ""
     ]
   }
 }
