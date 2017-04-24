@@ -22,6 +22,7 @@ _None_
   [David Jennes](https://github.com/djbe)
   [Olivier Halligon](https://github.com/alisoftware)
   [#269](https://github.com/SwiftGen/SwiftGenKit/issues/269)
+  [#291](https://github.com/SwiftGen/SwiftGenKit/issues/291)
 
 ## 4.2.0
 
