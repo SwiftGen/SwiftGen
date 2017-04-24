@@ -28,6 +28,6 @@ public extension Extension {
 public func stencilSwiftEnvironment() -> Environment {
   let ext = Extension()
   ext.registerStencilSwiftExtensions()
-	
+
   return Environment(extensions: [ext], templateClass: StencilSwiftTemplate.self)
 }

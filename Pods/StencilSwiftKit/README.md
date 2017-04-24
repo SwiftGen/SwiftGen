@@ -1,6 +1,6 @@
 # StencilSwiftKit
 
-[![Build Status](https://travis-ci.org/SwiftGen/StencilSwiftKit.svg?branch=master)](https://travis-ci.org/SwiftGen/StencilSwiftKit)
+[![CircleCI](https://circleci.com/gh/SwiftGen/StencilSwiftKit/tree/master.svg?style=svg)](https://circleci.com/gh/SwiftGen/StencilSwiftKit/tree/master)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/StencilSwiftKit.svg)](https://img.shields.io/cocoapods/v/StencilSwiftKit.svg)
 [![Platform](https://img.shields.io/cocoapods/p/StencilSwiftKit.svg?style=flat)](http://cocoadocs.org/docsets/StencilSwiftKit)
 ![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg)

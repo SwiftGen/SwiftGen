@@ -15,7 +15,7 @@ public enum ParametersError: Error {
 public enum Parameters {
   typealias Parameter = (key: String, value: Any)
   public typealias StringDict = [String: Any]
-  
+
   public static func parse(items: [String]) throws -> StringDict {
     let parameters: [Parameter] = try items.map { item in
       let parts = item.components(separatedBy: "=")
@@ -27,20 +27,20 @@ public enum Parameters {
         throw ParametersError.invalidSyntax(value: item)
       }
     }
-    
+
     return try parameters.reduce(StringDict()) {
       try parse(parameter: $1, result: $0)
     }
   }
-  
+
   private static func parse(parameter: Parameter, result: StringDict) throws -> StringDict {
     let parts = parameter.key.components(separatedBy: ".")
     let key = parts.first ?? ""
     var result = result
-    
+
     // validate key
     guard validate(key: key) else { throw ParametersError.invalidKey(key: parameter.key, value: parameter.value) }
-    
+
     // no sub keys, may need to convert to array if repeat key if possible
     if parts.count == 1 {
       if let current = result[key] as? [Any] {
@@ -56,22 +56,22 @@ public enum Parameters {
       guard result[key] is StringDict || result[key] == nil else {
         throw ParametersError.invalidStructure(key: key, oldValue: result[key] ?? "", newValue: parameter.value)
       }
-      
+
       // recurse into sub keys
       let current = result[key] as? StringDict ?? StringDict()
       let sub = (key: parts.suffix(from: 1).joined(separator: "."), value: parameter.value)
       result[key] = try parse(parameter: sub, result: current)
     }
-    
+
     return result
   }
-  
+
   // a valid key is not empty and only alphanumerical or dot
   private static func validate(key: String) -> Bool {
     return !key.isEmpty &&
       key.rangeOfCharacter(from: notAlphanumericsAndDot) == nil
   }
-  
+
   private static let notAlphanumericsAndDot: CharacterSet = {
     var result = CharacterSet.alphanumerics
     result.insert(".")
