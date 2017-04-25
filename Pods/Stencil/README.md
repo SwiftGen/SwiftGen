@@ -33,7 +33,7 @@ let context = [
   ]
 ]
 
-let environment = Environment(loader: FileSystemLoader(paths: ["templates/"])
+let environment = Environment(loader: FileSystemLoader(paths: ["templates/"]))
 let rendered = try environment.renderTemplate(name: context)
 
 print(rendered)
