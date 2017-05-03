@@ -69,7 +69,6 @@ class Utils
   # select the xcode version we want/support
   def self.version_select
     version = '8.*'
-    Rake.sh 'mdimport /Applications/Xcode* && sleep 1'
     xcodes = `mdfind "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode' && kMDItemVersion = '#{version}'"`.chomp.split("\n")
     if xcodes.empty?
       raise "\n[!!!] SwiftGen requires Xcode #{version}, but we were not able to find it. If it's already installed update your Spotlight index with 'mdimport /Applications/Xcode*'\n\n"
