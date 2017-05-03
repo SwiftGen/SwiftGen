@@ -20,7 +20,7 @@ _None_
 
 * Update StencilGenKit to 1.0.2 and update Circle CI to Xcode 8.3.  
   [Diogo Tridapalli](https://github.com/diogot)
-  [#](https://github.com/SwiftGen/SwiftGenKit/issues/)
+  [#295](https://github.com/SwiftGen/SwiftGenKit/issues/295)
 * Switch from Travis CI to Circle CI, clean up the Rakefile in the process.  
   [David Jennes](https://github.com/djbe)
   [Olivier Halligon](https://github.com/alisoftware)
