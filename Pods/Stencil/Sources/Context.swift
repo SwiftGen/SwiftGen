@@ -42,7 +42,7 @@ public class Context {
   }
 
   /// Pop the last level off of the Context
-  fileprivate func pop() -> [String: Any]? {
+  fileprivate func pop() -> [String: Any?]? {
     return dictionaries.popLast()
   }
 

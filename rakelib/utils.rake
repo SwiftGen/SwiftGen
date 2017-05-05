@@ -68,9 +68,10 @@ class Utils
 
   # select the xcode version we want/support
   def self.version_select
-    xcodes = `mdfind "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode' && kMDItemVersion = '8.*'"`.chomp.split("\n")
+    version = '8.*'
+    xcodes = `mdfind "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode' && kMDItemVersion = '#{version}'"`.chomp.split("\n")
     if xcodes.empty?
-      raise "\n[!!!] You need to have Xcode 8.x to compile SwiftGen.\n\n"
+      raise "\n[!!!] SwiftGen requires Xcode #{version}, but we were not able to find it. If it's already installed update your Spotlight index with 'mdimport /Applications/Xcode*'\n\n"
     end
     
     # Order by version and get the latest one
