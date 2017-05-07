@@ -35,7 +35,7 @@ let templatePathOption = Option<String>(
 )
 
 let outputOption = Option(
-  "output", OutputDestination.Console, flag: "o",
+  "output", OutputDestination.console, flag: "o",
   description: "The path to the file to generate (Omit to generate to stdout)"
 )
 
