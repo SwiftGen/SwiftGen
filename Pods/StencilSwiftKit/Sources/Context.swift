@@ -9,22 +9,35 @@
 import Foundation
 
 public enum StencilContext {
-  public static let environment = "env"
-  public static let parameters = "param"
+  public static let environmentKey = "env"
+  public static let parametersKey = "param"
 
-  /**
-   Enriches a stencil context with parsed parameters and environment variables
-   
-   - Parameter context: The stencil context
-   - Parameter parameters: List of strings, will be parsed using the `Parameters.parse(items:)` method
-   - Parameter environment: Environment variables, defaults to `ProcessInfo().environment`
-   */
-  public static func enrich(context: [String: Any], parameters: [String], environment: [String: String] = ProcessInfo().environment) throws -> [String: Any] {
+  /// Enriches a stencil context with parsed parameters and environment variables
+  ///
+  /// - Parameters:
+  ///   - context: The stencil context
+  ///   - parameters: List of strings, will be parsed using the `Parameters.parse(items:)` method
+  ///   - environment: Environment variables, defaults to `ProcessInfo().environment`
+  /// - Returns: The new Stencil context enriched with the parameters and env variables
+  /// - Throws: `Parameters.Error`
+  public static func enrich(context: [String: Any],
+                            parameters: [String],
+                            environment: [String: String] = ProcessInfo().environment) throws -> [String: Any] {
     var context = context
-    
-    context[StencilContext.environment] = environment
-    context[StencilContext.parameters] = try Parameters.parse(items: parameters)
-    
+
+    context[environmentKey] = merge(context[environmentKey], with: environment)
+    context[parametersKey] = merge(context[parametersKey], with: try Parameters.parse(items: parameters))
+
     return context
+  }
+
+  private static func merge(_ lhs: Any?, with rhs: [String: Any]) -> [String: Any] {
+    var result = lhs as? [String: Any] ?? [:]
+
+    for (key, value) in rhs {
+      result[key] = value
+    }
+
+    return result
   }
 }
