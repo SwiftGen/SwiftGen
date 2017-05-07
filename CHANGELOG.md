@@ -29,6 +29,11 @@ _None_
 * Fix remaining enum names not Swift 3 compliant.  
   [Liquidsoul](https://github.com/liquidsoul)
   [#297](https://github.com/SwiftGen/SwiftGen/issues/297)
+* Added the `CONTRIBUTING.md` file to help new contributors.  
+  [Olivier Halligon](https://github.com/alisoftware)
+  [Cihat Gündüz](https://github.com/Dschee)
+  [#149](https://github.com/SwiftGen/SwiftGen/pull/149)
+  [#298](https://github.com/SwiftGen/SwiftGen/pull/298)
 
 ## 4.2.0
 
