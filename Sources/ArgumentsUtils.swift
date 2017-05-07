@@ -41,27 +41,27 @@ func printError(string: String) {
 }
 
 enum OutputDestination: ArgumentConvertible {
-  case Console
-  case File(Path)
+  case console
+  case file(Path)
 
   init(parser: ArgumentParser) throws {
     guard let path = parser.shift() else {
       throw ArgumentError.missingValue(argument: nil)
     }
-    self = .File(Path(path))
+    self = .file(Path(path))
   }
   var description: String {
     switch self {
-    case .Console: return "(stdout)"
-    case .File(let path): return path.description
+    case .console: return "(stdout)"
+    case .file(let path): return path.description
     }
   }
 
   func write(content: String, onlyIfChanged: Bool = false) {
     switch self {
-    case .Console:
+    case .console:
       print(content)
-    case .File(let path):
+    case .file(let path):
       do {
         if try onlyIfChanged && path.exists && path.read(.utf8) == content {
           return print("Not writing the file as content is unchanged")
@@ -78,15 +78,15 @@ enum OutputDestination: ArgumentConvertible {
 // MARK: Template Arguments
 
 enum TemplateError: Error, CustomStringConvertible {
-  case NamedTemplateNotFound(name: String)
-  case TemplatePathNotFound(path: Path)
+  case namedTemplateNotFound(name: String)
+  case templatePathNotFound(path: Path)
 
   var description: String {
     switch self {
-    case .NamedTemplateNotFound(let name):
+    case .namedTemplateNotFound(let name):
       return "Template named \(name) not found. Use `swiftgen templates` to list available named templates " +
       "or use --templatePath to specify a template by its full path."
-    case .TemplatePathNotFound(let path):
+    case .templatePathNotFound(let path):
       return "Template not found at path \(path.description)."
     }
   }
@@ -129,7 +129,7 @@ func findTemplate(prefix: String, templateShortName: String, templateFullPath: S
   guard templateFullPath.isEmpty else {
     let fullPath = Path(templateFullPath)
     guard fullPath.isFile else {
-      throw TemplateError.TemplatePathNotFound(path: fullPath)
+      throw TemplateError.templatePathNotFound(path: fullPath)
     }
     return fullPath
   }
@@ -139,7 +139,7 @@ func findTemplate(prefix: String, templateShortName: String, templateFullPath: S
     path = bundledTemplatesPath + "\(prefix)-\(templateShortName).stencil"
   }
   guard path.isFile else {
-    throw TemplateError.NamedTemplateNotFound(name: templateShortName)
+    throw TemplateError.namedTemplateNotFound(name: templateShortName)
   }
   return path
 }

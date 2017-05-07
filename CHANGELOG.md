@@ -26,6 +26,9 @@ _None_
   [Olivier Halligon](https://github.com/alisoftware)
   [#269](https://github.com/SwiftGen/SwiftGenKit/issues/269)
   [#291](https://github.com/SwiftGen/SwiftGenKit/issues/291)
+* Fix remaining enum names not Swift 3 compliant.  
+  [Liquidsoul](https://github.com/liquidsoul)
+  [#297](https://github.com/SwiftGen/SwiftGen/issues/297)
 
 ## 4.2.0
 
