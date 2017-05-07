@@ -41,7 +41,7 @@ Each pull request will need to conform to some requirements, which should be aut
 - Please check your indentation settings (2 spaces, no tabs). We're not forcing you to use a certain coding style, just trying to keep the code layout consistent.
 - Ensure you've made a changelog entry, crediting yourself. Easiest if you just copy a previous entry to get the format right, if not, Danger bot will tell you.
 
-### Naming your branch appropriately
+### Naming Your Branch Appropriately
 
 To help us triaging the branches, we use the following naming convention:
 
@@ -49,7 +49,7 @@ To help us triaging the branches, we use the following naming convention:
 * Use `feature/breaking/xxx` (e.g. `feature/breaking/rename-context-keys`) for features that are breaking compatibility and will require us to bump the major version. (If you're not sure about that, just use `feature/xxx`)
 * Use `fix/xxx` (e.g. `fix/crash-when-no-image`) to fix issues and errors
 
-### Push Access to all contributors
+### Push Access to All Contributors
 
 Once your Pull Request get merged, we'll be happy to give you push access to the SwiftGen repositories to thank you for your contribution and to help the project grow. For more information about that policy, see the [COMMUNITY.md](COMMUNITY.md) document.
 
