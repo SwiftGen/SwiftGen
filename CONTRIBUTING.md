@@ -41,9 +41,9 @@ Each pull request will need to conform to some requirements, which should be aut
 
 Once your Pull Request get merged, we'll be happy to give you push access to the SwiftGen repositories to thank you for your contribution and to help the project grow. For more information about that policy, see the [COMMUNITY.md](COMMUNITY.md) document.
 
-## SwiftGen project organization
+## SwiftGen Project Organization
 
-SwiftGen is actually structured as a GitHub organization containing various projects. The while SwiftGen tool is build by assembling the various components of SwiftGen, hosted in their respective repositories in the organization.
+SwiftGen is actually structured as a GitHub organization containing various projects. The while SwiftGen tool is built by assembling the various components of SwiftGen, hosted in their respective repositories in the organization.
 
 Here's a recap of what each repository in the SwiftGen organization does:
 
@@ -51,7 +51,7 @@ Here's a recap of what each repository in the SwiftGen organization does:
 
 This is the repository containing only the code for the command-line interface of SwiftGen.
 
-It contains the Xcode project to build the MacOS command-line app which is only responsible for parsing its command-line arguments and then invoking the proper methods in the frameworks composing SwiftGen
+It contains the Xcode project to build the MacOS command-line app which is only responsible for parsing its command-line arguments and then invoking the proper methods in the frameworks composing SwiftGen.
 
 If you need to add new command-line options and flags, that's the place to do it.
 
@@ -69,19 +69,19 @@ You'll only make a PR on this repository if you need to add or fix filters or ta
 
 ### templates
 
-This repository contains both the templates that are bundled with SwiftGen on each new release (so that people have at least a set of sensible template to use wthout having to create their own), but also all the fixtures needed for our Unit Tests on each repositoies.
+This repository contains both the templates that are bundled with SwiftGen on each new release (so that people have at least a set of sensible templates to use wthout having to create their own), but also all the fixtures needed for our Unit Tests on each repository.
 
 If you want to fix or add templates, that's the place to do so. But you'll also need to do a Pull Request on that repo if you do some modifications to SwiftGenKit that would require new test fixtures or change the output of the unit tests.
 
 ### Eve
 
-This repository is not containing any framework or app, but is rather the parent meta-repository to rule them all. It contains a bunch of scripts to make it easier to work in the SwiftGen ecosystem, allowing you to clone all the necessary SwiftGen repositories at once and make it easier to make them work properly between each other, like make sure they are in sync, etc.
+This repository does not contain any framework or app, but is rather the parent meta-repository to rule them all. It contains a bunch of scripts to make it easier to work in the SwiftGen ecosystem, allowing you to clone all the necessary SwiftGen repositories at once and make it easier to make them work properly between each other, like make sure they are in sync, etc.
 
 It's unlikely you'll have to do a PR in this repository if you want to add features to SwiftGen, but you'll likely use this repository and its `Rakefile` to make a bunch of your contributor's life easier when working with all the SwiftGen repos at once.
 
 ## Project Setup
 
-Before you can start developing a fix or a new feature in this project you need to be aware of how this project is structured, as described above.
+Before you can start developing a fix or a new feature in this project you'll need to be aware of how this project is structured, as described above.
 
 Depending on the scope of the feature you want to develop, it might be easiest to checkout the [Eve repository](https://github.com/SwiftGen/Eve) and run `rake bootstrap` from there, which will checkout and initialize all repositories correctly and help you work inside the whole SwiftGen ecosystem.
 
@@ -89,7 +89,7 @@ Depending on the scope of the feature you want to develop, it might be easiest t
 
 First you need to make sure your machine fulfills the following requirements:
 
-- You have [SwiftLint](https://github.com/realm/SwiftLint) installed – otherwise run `brew install swiftlint`. This will help you keep code style consistency while contributing.
+- You have [SwiftLint](https://github.com/realm/SwiftLint) installed – otherwise run `brew install swiftlint`. This will help you keep your code style consistent with the project's while contributing.
 - For Core Contributors who plan to release new versions of SwiftGen, you'll also need:
   - To have [Homebrew](http://brew.sh) and [Bundler](https://bundler.io) installed
   - To install the project's tools dependencies by running `bundler install` from the project root directory
