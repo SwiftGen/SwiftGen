@@ -30,23 +30,69 @@ This information will help us review and fix your issue faster.
 
 ## Creating Pull Requests
 
-Before you start developing new features and creating pull requests; *first* create an issue discussing these changes so that we can help you define the scope and implementation. Once discussed we can guide you through developing and creating the pull requests in the right repositories, in the right order, to ensure a smooth flow. This is particularly necessary because the SwiftGen project is split up in multiple repositories, and some features might span multiple repositories.
+Before you start developing new features and creating pull requests; *first* create an issue discussing these changes so that we can help you define the scope and implementation. Once discussed we can guide you through developing and creating the pull requests in the right repositories, in the right order, to ensure a smooth flow.
+
+This is particularly necessary because the SwiftGen project is split up in multiple repositories, and some features might span multiple repositories.
 
 Each pull request will need to conform to some requirements, which should be automatically checked by our Danger bot. The main points are:
+
 - Please check your indentation settings (2 spaces, no tabs). We're not forcing you to use a certain coding style, just trying to keep the code layout consistent.
 - Ensure you've made a changelog entry, crediting yourself. Easiest if you just copy a previous entry to get the format right, if not, Danger bot will tell you.
 
+Once your Pull Request get merged, we'll be happy to give you push access to the SwiftGen repositories to thank you for your contribution and to help the project grow. For more information about that policy, see the [COMMUNITY.md](COMMUNITY.md) document.
+
+## SwiftGen project organization
+
+SwiftGen is actually structured as a GitHub organization containing various projects. The while SwiftGen tool is build by assembling the various components of SwiftGen, hosted in their respective repositories in the organization.
+
+Here's a recap of what each repository in the SwiftGen organization does:
+
+### SwiftGen
+
+This is the repository containing only the code for the command-line interface of SwiftGen.
+
+It contains the Xcode project to build the MacOS command-line app which is only responsible for parsing its command-line arguments and then invoking the proper methods in the frameworks composing SwiftGen
+
+If you need to add new command-line options and flags, that's the place to do it.
+
+### SwiftGenKit
+
+This repository contains the framework responsible for turning each kind of input resource (Asset Catalogs, Localizable strings files, Fonts, Storyboards…) into a structured dictionary — suitable to be used by Stencil.
+
+If you want to add a new parser for a new type of resource, or fix a bug in the way some resources are parsed, or add new keys to the dictionary generated (and used as the context for your templates), that's the place to do so.
+
+### StencilSwiftKit
+
+This repository contains the framework that enriches the `Stencil` template engine with some additional tags and filters that are useful when generating Swift code. This framework is actually used both by SwiftGen and [Sourcery](https://github.com/krzysztofzablocki/Sourcery).
+
+You'll only make a PR on this repository if you need to add or fix filters or tags that are not part of Stencil.
+
+### templates
+
+This repository contains both the templates that are bundled with SwiftGen on each new release (so that people have at least a set of sensible template to use wthout having to create their own), but also all the fixtures needed for our Unit Tests on each repositoies.
+
+If you want to fix or add templates, that's the place to do so. But you'll also need to do a Pull Request on that repo if you do some modifications to SwiftGenKit that would require new test fixtures or change the output of the unit tests.
+
+### Eve
+
+This repository is not containing any framework or app, but is rather the parent meta-repository to rule them all. It contains a bunch of scripts to make it easier to work in the SwiftGen ecosystem, allowing you to clone all the necessary SwiftGen repositories at once and make it easier to make them work properly between each other, like make sure they are in sync, etc.
+
+It's unlikely you'll have to do a PR in this repository if you want to add features to SwiftGen, but you'll likely use this repository and its `Rakefile` to make a bunch of your contributor's life easier when working with all the SwiftGen repos at once.
+
 ## Project Setup
 
-Before you can start developing a fix or a new feature in this project you need to be aware of how this project is structured. Depending on the scope of the feature you want to develop, it might be easiest to checkout the [Eve repository](https://github.com/SwiftGen/Eve) and `bootstrap` it, which will checkout and initialize all repositories correctly.
+Before you can start developing a fix or a new feature in this project you need to be aware of how this project is structured, as described above.
+
+Depending on the scope of the feature you want to develop, it might be easiest to checkout the [Eve repository](https://github.com/SwiftGen/Eve) and run `rake bootstrap` from there, which will checkout and initialize all repositories correctly and help you work inside the whole SwiftGen ecosystem.
 
 ### Requirements
 
 First you need to make sure your machine fulfills the following requirements:
 
-- You have [Homebrew](http://brew.sh) and [Bundler](https://bundler.io) installed
-- You have [SwiftLint](https://github.com/realm/SwiftLint) installed – otherwise run `brew install swiftlint`
-- Install the dependencies by running `bundler install` from the project root directory
+- You have [SwiftLint](https://github.com/realm/SwiftLint) installed – otherwise run `brew install swiftlint`. This will help you keep code style consistency while contributing.
+- For Core Contributors who plan to release new versions of SwiftGen, you'll also need:
+  - To have [Homebrew](http://brew.sh) and [Bundler](https://bundler.io) installed
+  - To install the project's tools dependencies by running `bundler install` from the project root directory
 
 Unless you're adding (or updating) dependencies, you won't have to run `pod install` as all dependencies are already checked in to the repository.
 
