@@ -12,10 +12,10 @@ import SwiftGenKit
 let storyboardsCommand = command(
   outputOption,
   templateOption(prefix: "storyboards"), templatePathOption,
-  Option<String>("sceneEnumName", "StoryboardScene", flag: "e",
-    description: "The name of the enum to generate for Scenes"),
-  Option<String>("segueEnumName", "StoryboardSegue", flag: "g",
-    description: "The name of the enum to generate for Segues"),
+  Option<String>("sceneEnumName", "", flag: "e",
+    description: "The name of the enum to generate for Scenes (DEPRECATED)"),
+  Option<String>("segueEnumName", "", flag: "g",
+    description: "The name of the enum to generate for Segues (DEPRECATED)"),
   // Note: import option is deprecated.
   VariadicOption<String>("import", [],
     description: "Additional imports to be added to the generated file (DEPRECATED)"),
@@ -24,6 +24,15 @@ let storyboardsCommand = command(
     description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard",
     validator: pathsExist)
 ) { output, templateName, templatePath, sceneEnumName, segueEnumName, _, parameters, paths in
+  // show error for old deprecated option
+  guard sceneEnumName.isEmpty else {
+    throw TemplateError.deprecated(option: "sceneEnumName",
+                                   replacement: "Please use '--param sceneEnumName=...' instead.")
+  }
+  guard segueEnumName.isEmpty else {
+    throw TemplateError.deprecated(option: "segueEnumName",
+                                   replacement: "Please use '--param segueEnumName=...' instead.")
+  }
   let parser = StoryboardParser()
 
   do {

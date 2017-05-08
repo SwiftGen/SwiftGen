@@ -13,10 +13,14 @@ import SwiftGenKit
 let colorsCommand = command(
   outputOption,
   templateOption(prefix: "colors"), templatePathOption,
-  Option<String>("enumName", "ColorName", flag: "e", description: "The name of the enum to generate"),
+  Option<String>("enumName", "", flag: "e", description: "The name of the enum to generate (DEPRECATED)"),
   VariadicOption<String>("param", [], description: "List of template parameters"),
   Argument<Path>("FILE", description: "Colors.txt|.clr|.xml|.json file to parse.", validator: fileExists)
 ) { output, templateName, templatePath, enumName, parameters, path in
+  // show error for old deprecated option
+  guard enumName.isEmpty else {
+    throw TemplateError.deprecated(option: "enumName", replacement: "Please use '--param enumName=...' instead.")
+  }
 
   let parser: ColorsFileParser
   switch path.extension {

@@ -80,6 +80,7 @@ enum OutputDestination: ArgumentConvertible {
 enum TemplateError: Error, CustomStringConvertible {
   case namedTemplateNotFound(name: String)
   case templatePathNotFound(path: Path)
+  case deprecated(option: String, replacement: String)
 
   var description: String {
     switch self {
@@ -88,6 +89,8 @@ enum TemplateError: Error, CustomStringConvertible {
       "or use --templatePath to specify a template by its full path."
     case .templatePathNotFound(let path):
       return "Template not found at path \(path.description)."
+    case .deprecated(let option, let replacement):
+      return "The option '--\(option)' has been deprecated. \(replacement)"
     }
   }
 }
