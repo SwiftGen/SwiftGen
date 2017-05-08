@@ -2,19 +2,17 @@
 
 ---
 
-## Master
+## 4.2.1
+
+• 🔗 [SwiftGenKit 1.1.0](https://github.com/SwiftGen/SwiftGenKit/blob/1.1.0/CHANGELOG.md)
+• 🔗 [StencilSwiftKit 1.0.2](https://github.com/SwiftGen/StencilSwiftKit/blob/1.0.2/CHANGELOG.md)
+• 🔗 [Stencil 0.9.0](https://github.com/kylef/Stencil/blob/0.9.0/CHANGELOG.md)
+• 🔗 [templates 1.1.0](https://github.com/SwiftGen/templates/blob/1.1.0/CHANGELOG.md)
 
 ### Bug Fixes
 
-_None_
-
-### Breaking Changes
-
-_None_
-
-### New Features
-
-_None_
+* Fix a bug in which the version of SwiftGen was reported as `v0.0` by `swiftgen --version`.  
+  [Olivier Halligon](https://github.com/alisoftware)
 
 ### Internal Changes
 

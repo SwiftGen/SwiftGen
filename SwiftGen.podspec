@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SwiftGen"
-  s.version      = "4.2.0"
+  s.version      = "4.2.1"
   s.summary      = "A collection of Swift tools to generate Swift code for your assets, storyboards, strings, …"
 
   s.description  = <<-DESC

@@ -137,7 +137,7 @@ public final class ColorsCLRFileParser: ColorsFileParser {
   public init() {}
 
   public func parseFile(at path: Path) throws {
-    if let colorsList = NSColorList(name: "UserColors", fromFile: path.description) {
+    if let colorsList = NSColorList(name: "UserColors", fromFile: path.string) {
       for colorName in colorsList.allKeys {
         colors[colorName] = colorsList.color(withKey: colorName)?.rgbColor?.hexValue
       }
@@ -151,6 +151,8 @@ public final class ColorsCLRFileParser: ColorsFileParser {
 extension NSColor {
 
   fileprivate var rgbColor: NSColor? {
+    guard colorSpace.colorSpaceModel != .RGB else { return self }
+
     return usingColorSpaceName(NSCalibratedRGBColorSpace)
   }
 
@@ -176,9 +178,9 @@ public final class ColorsXMLFileParser: ColorsFileParser {
 
   private class ParserDelegate: NSObject, XMLParserDelegate {
     var parsedColors = [String: UInt32]()
-    var currentColorName: String? = nil
-    var currentColorValue: String? = nil
-    var colorParserError: Error? = nil
+    var currentColorName: String?
+    var currentColorValue: String?
+    var colorParserError: Error?
 
     @objc func parser(_ parser: XMLParser, didStartElement elementName: String,
                       namespaceURI: String?, qualifiedName qName: String?,
