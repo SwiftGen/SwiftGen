@@ -51,8 +51,7 @@ let storyboardsCommand = command(
     )
     let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                             environment: stencilSwiftEnvironment())
-    let context = parser.stencilContext(sceneEnumName: sceneEnumName,
-                                        segueEnumName: segueEnumName)
+    let context = parser.stencilContext()
     let enriched = try StencilContext.enrich(context: context, parameters: parameters)
     let rendered = try template.render(enriched)
     output.write(content: rendered, onlyIfChanged: true)

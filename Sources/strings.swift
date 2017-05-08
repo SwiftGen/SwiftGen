@@ -30,7 +30,7 @@ let stringsCommand = command(
     )
     let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                             environment: stencilSwiftEnvironment())
-    let context = parser.stencilContext(enumName: enumName, tableName: path.lastComponentWithoutExtension)
+    let context = parser.stencilContext(tableName: path.lastComponentWithoutExtension)
     let enriched = try StencilContext.enrich(context: context, parameters: parameters)
     let rendered = try template.render(enriched)
     output.write(content: rendered, onlyIfChanged: true)

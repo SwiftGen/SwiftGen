@@ -150,10 +150,10 @@
 				091150301BD31A3300EBC803 /* ArgumentsUtils.swift */,
 				0921FBA01BE7D6B900B488B5 /* templates.swift */,
 				09A87B751BCCC02C00D9B9F5 /* colors.swift */,
+				C24AFD011C91DE33005FE3EF /* fonts.swift */,
 				090141401BCC64FE002E8617 /* images.swift */,
 				0901413E1BCC64C9002E8617 /* storyboards.swift */,
 				09A87B731BCCBE6D00D9B9F5 /* strings.swift */,
-				C24AFD011C91DE33005FE3EF /* fonts.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
