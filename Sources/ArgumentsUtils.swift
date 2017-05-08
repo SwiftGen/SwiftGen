@@ -80,6 +80,8 @@ enum OutputDestination: ArgumentConvertible {
 enum TemplateError: Error, CustomStringConvertible {
   case namedTemplateNotFound(name: String)
   case templatePathNotFound(path: Path)
+  case noTemplateFound
+  case multipleTemplateOptions(path: String, name: String)
   case deprecated(option: String, replacement: String)
 
   var description: String {
@@ -89,6 +91,15 @@ enum TemplateError: Error, CustomStringConvertible {
       "or use --templatePath to specify a template by its full path."
     case .templatePathNotFound(let path):
       return "Template not found at path \(path.description)."
+    case .noTemplateFound:
+      return "A template must be chosen either via its name using the '-t' / '--template' option" +
+      " or via its path using the '-p' / '--templatePath' option.\n" +
+      "There's no 'default' template anymore: you can still access a bundled template but " +
+      "you have to explicitly specify its name using '-t'.\n" +
+      "To list all the available named templates, you can use the 'swiftgen templates list' command."
+    case let .multipleTemplateOptions(path, name):
+      return "You need to choose EITHER a named template (--template option) " +
+      "OR a template path (option --templatePath). Found name '\(name)' and path '\(path)'"
     case .deprecated(let option, let replacement):
       return "The option '--\(option)' has been deprecated. \(replacement)"
     }
@@ -117,10 +128,11 @@ let bundledTemplatesPath = Path(ProcessInfo.processInfo.arguments[0]).parent() +
  * If `templateFullPath` is empty `""`, search the template named `prefix-templateShortName`
    in the Application Support directory first, then in the bundled templates,
    and returns the path if found (throws if none is found)
+ * If both or neither are empty, an error will be thrown
 
  - parameter prefix:            the prefix for the template, typically name of one of the SwiftGen subcommand
                                 like `strings`, `colors`, etc
- - parameter templateShortName: the short name of the template, might be `"default"` or any custom name
+ - parameter templateShortName: the short name of the template
  - parameter templateFullPath:  the full path of the template to find. If this is set to an existing file, it
                                 returns that Path without even using `prefix` and `templateShortName` parameters.
 
@@ -129,20 +141,24 @@ let bundledTemplatesPath = Path(ProcessInfo.processInfo.arguments[0]).parent() +
  - returns: The Path matching the template to find
  */
 func findTemplate(prefix: String, templateShortName: String, templateFullPath: String) throws -> Path {
-  guard templateFullPath.isEmpty else {
+  switch (templateFullPath, templateShortName) {
+  case ("", ""): throw TemplateError.noTemplateFound
+  case (_, ""):
     let fullPath = Path(templateFullPath)
     guard fullPath.isFile else {
       throw TemplateError.templatePathNotFound(path: fullPath)
     }
     return fullPath
+  case ("", _):
+    var path = appSupportTemplatesPath + "\(prefix)-\(templateShortName).stencil"
+    if !path.isFile {
+      path = bundledTemplatesPath + "\(prefix)-\(templateShortName).stencil"
+    }
+    guard path.isFile else {
+      throw TemplateError.namedTemplateNotFound(name: templateShortName)
+    }
+    return path
+  case (_, _):
+    throw TemplateError.multipleTemplateOptions(path: templateFullPath, name: templateShortName)
   }
-
-  var path = appSupportTemplatesPath + "\(prefix)-\(templateShortName).stencil"
-  if !path.isFile {
-    path = bundledTemplatesPath + "\(prefix)-\(templateShortName).stencil"
-  }
-  guard path.isFile else {
-    throw TemplateError.namedTemplateNotFound(name: templateShortName)
-  }
-  return path
 }
