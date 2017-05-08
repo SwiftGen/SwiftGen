@@ -10,7 +10,9 @@ _None_
 
 ### Breaking Changes
 
-_None_
+* Removed deprecated CLI options. Should you still use them, SwiftGen will return an error and show the new recommended CLI option to use instead.
+  [David Jennes](https://github.com/djbe)
+  [#301](https://github.com/SwiftGen/SwiftGenKit/issues/301)
 
 ### New Features
 
