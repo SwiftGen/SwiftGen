@@ -13,6 +13,9 @@ _None_
 * Removed deprecated CLI options. Should you still use them, SwiftGen will return an error and show the new recommended CLI option to use instead.
   [David Jennes](https://github.com/djbe)
   [#301](https://github.com/SwiftGen/SwiftGenKit/issues/301)
+* Disable default value for named template option and ensure that there is a template option.  
+  [Liquidsoul](https://github.com/liquidsoul)
+  [#283](https://github.com/SwiftGen/SwiftGen/issues/283)
 
 ### New Features
 
