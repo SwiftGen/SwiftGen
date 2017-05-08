@@ -2,6 +2,24 @@
 
 ---
 
+## Master
+
+### Bug Fixes
+
+_None_
+
+### Breaking Changes
+
+_None_
+
+### New Features
+
+_None_
+
+### Internal Changes
+
+_None_
+
 ## 4.2.1
 
 • 🔗 [SwiftGenKit 1.1.0](https://github.com/SwiftGen/SwiftGenKit/blob/1.1.0/CHANGELOG.md)
