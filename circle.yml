@@ -6,7 +6,7 @@ machine:
 
 checkout:
   post:
-    - git submodule update --init --recursive
+    - git submodule update --init --recursive || (rm -fr .git/config .git/modules && git submodule deinit -f . && git submodule update --init --recursive)
 
 dependencies:
   post:
