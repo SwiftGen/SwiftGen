@@ -8,14 +8,14 @@ import Foundation
 import PathKit
 
 public enum StringsFileParserError: Error, CustomStringConvertible {
-  case FailureOnLoading(path: String)
-  case InvalidFormat
+  case failureOnLoading(path: String)
+  case invalidFormat
 
   public var description: String {
     switch self {
-    case .FailureOnLoading(let path):
+    case .failureOnLoading(let path):
       return "Failed to load a file at \"\(path)\""
-    case .InvalidFormat:
+    case .invalidFormat:
       return "Invalid strings file"
     }
   }
@@ -33,14 +33,14 @@ public final class StringsFileParser {
   // Localizable.strings files are generally UTF16, not UTF8!
   public func parseFile(at path: Path) throws {
     guard let data = try? path.read() else {
-      throw StringsFileParserError.FailureOnLoading(path: path.description)
+      throw StringsFileParserError.failureOnLoading(path: path.string)
     }
 
     let plist = try PropertyListSerialization
         .propertyList(from: data, format: nil)
 
     guard let dict = plist as? [String: String] else {
-      throw StringsFileParserError.InvalidFormat
+      throw StringsFileParserError.invalidFormat
     }
 
     for (key, translation) in dict {

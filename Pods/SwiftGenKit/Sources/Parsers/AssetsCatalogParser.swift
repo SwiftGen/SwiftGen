@@ -36,10 +36,10 @@ private enum AssetCatalog {
   static let filename = "filename"
   static let providesNamespace = "provides-namespace"
   static let root = "com.apple.actool.catalog-contents"
-  
+
   enum Extension {
     static let imageSet = "imageset"
-	
+
 	/**
 	 * This is a list of supported asset catalog item types, for now we just
 	 * support `image set`s. If you want to add support for new types, just add
@@ -152,7 +152,7 @@ extension AssetsCatalogParser {
    - Returns: An array of dictionaries, representing the tree of nodes in the catalog.
   */
   fileprivate func loadAssetCatalog(at path: Path) -> [[String: Any]]? {
-    let command = Command("xcrun", arguments: "actool", "--print-contents", path.description)
+    let command = Command("xcrun", arguments: "actool", "--print-contents", path.string)
     let output = command.execute() as Data
 
     // try to parse plist
