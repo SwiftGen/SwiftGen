@@ -9,6 +9,11 @@
 • 🔗 [Stencil 0.9.0](https://github.com/kylef/Stencil/blob/0.9.0/CHANGELOG.md)
 • 🔗 [templates 1.1.0](https://github.com/SwiftGen/templates/blob/1.1.0/CHANGELOG.md)
 
+### Bug Fixes
+
+* Fix a bug in which the version of SwiftGen was reported as `v0.0` by `swiftgen --version`.  
+  [Olivier Halligon](https://github.com/alisoftware)
+
 ### Internal Changes
 
 * Update StencilGenKit to 1.0.2 and update Circle CI to Xcode 8.3.  
