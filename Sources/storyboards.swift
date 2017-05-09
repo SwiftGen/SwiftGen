@@ -10,8 +10,7 @@ import StencilSwiftKit
 import SwiftGenKit
 
 let storyboardsCommand = command(
-  outputOption,
-  templateOption(prefix: "storyboards"), templatePathOption,
+  outputOption, templateNameOption, templatePathOption, paramsOption,
   Option<String>("sceneEnumName", "", flag: "e",
     description: "The name of the enum to generate for Scenes (DEPRECATED)"),
   Option<String>("segueEnumName", "", flag: "g",
@@ -19,11 +18,10 @@ let storyboardsCommand = command(
   // Note: import option is deprecated.
   VariadicOption<String>("import", [],
     description: "Additional imports to be added to the generated file (DEPRECATED)"),
-  VariadicOption<String>("param", [], description: "List of template parameters"),
   VariadicArgument<Path>("PATH",
     description: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard",
     validator: pathsExist)
-) { output, templateName, templatePath, sceneEnumName, segueEnumName, _, parameters, paths in
+) { output, templateName, templatePath, parameters, sceneEnumName, segueEnumName, _, paths in
   // show error for old deprecated option
   guard sceneEnumName.isEmpty else {
     throw TemplateError.deprecated(option: "sceneEnumName",
