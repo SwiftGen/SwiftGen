@@ -94,8 +94,15 @@ swiftgen …
 <details>
 <summary><strong>Compile from source</strong> <em>(only recommended if you need features from master or want to test a PR)</em></summary>
 
-Alternatively, you can clone the repository and use `rake cli:install` to build the tool.  
-_With this solution you're sure to build and install the latest version from `master` and have access to features which might not have been released yet._
+This solution is when you want to build and install the latest version from `master` and have access to features which might not have been released yet.
+
+* If you have `homebrew` installed, you can use the following command to build and install the latest commit:
+
+```sh
+brew install swiftgen --HEAD
+```
+
+* Alternatively, you can clone the repository and use `rake cli:install` to build the tool and install it from any branch, which could be useful to test SwiftGen in a fork or a Pull Request branch.
 
 You can install to the default locations (no parameter) or to custom locations:
 
@@ -103,11 +110,11 @@ You can install to the default locations (no parameter) or to custom locations:
 # Binary is installed in `./swiftgen/bin`, frameworks in `./swiftgen/lib` and templates in `./swiftgen/templates`
 $ rake cli:install
 # - OR -
-# Binary will be installed in `~/swiftgen/bin`, framworks in `~/swiftgen/fmk` and templates in `~/swiftgen/tpl`
+# Binary will be installed in `~/swiftgen/bin`, frameworks in `~/swiftgen/fmk` and templates in `~/swiftgen/tpl`
 $ rake cli:install[~/swiftgen/bin,~/swiftgen/fmk,~/swiftgen/tpl]
 ```
 
-You can then invoke SwiftGen in your Script Build Phase using the path to the binary where you installed it:
+You can then invoke SwiftGen using the path to the binary where you installed it:
 
 ```sh
 ~/swiftgen/bin/swiftgen …
