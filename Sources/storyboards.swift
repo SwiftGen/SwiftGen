@@ -45,7 +45,7 @@ let storyboardsCommand = command(
     }
 
     let templateRealPath = try findTemplate(
-      prefix: "storyboards",
+      subcommand: "storyboards",
       templateShortName: templateName,
       templateFullPath: templatePath
     )

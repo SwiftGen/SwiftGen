@@ -28,7 +28,7 @@ let fontsCommand = command(
       }
 
       let templateRealPath = try findTemplate(
-        prefix: "fonts", templateShortName: templateName, templateFullPath: templatePath
+        subcommand: "fonts", templateShortName: templateName, templateFullPath: templatePath
       )
 
       let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),

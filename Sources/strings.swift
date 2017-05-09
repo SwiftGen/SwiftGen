@@ -26,7 +26,7 @@ let stringsCommand = command(
     try parser.parseFile(at: path)
 
     let templateRealPath = try findTemplate(
-      prefix: "strings", templateShortName: templateName, templateFullPath: templatePath
+      subcommand: "strings", templateShortName: templateName, templateFullPath: templatePath
     )
     let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                             environment: stencilSwiftEnvironment())

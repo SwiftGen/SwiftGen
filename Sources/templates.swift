@@ -66,7 +66,7 @@ private func templatePathCommandGenerator(execute: @escaping (Path, OutputDestin
         prefix = name
         shortName = "default"
       }
-      let path = try findTemplate(prefix: prefix, templateShortName: shortName, templateFullPath: "")
+      let path = try findTemplate(subcommand: prefix, templateShortName: shortName, templateFullPath: "")
       try execute(path, output)
     } catch {
       printError(string: "error: failed to read template: \(error)")

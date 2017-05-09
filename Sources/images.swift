@@ -32,7 +32,7 @@ let imagesCommand = command(
 
   do {
     let templateRealPath = try findTemplate(
-      prefix: "images", templateShortName: templateName, templateFullPath: templatePath
+      subcommand: "images", templateShortName: templateName, templateFullPath: templatePath
     )
     let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                             environment: stencilSwiftEnvironment())
