@@ -80,7 +80,7 @@ enum OutputDestination: ArgumentConvertible {
 enum TemplateError: Error, CustomStringConvertible {
   case namedTemplateNotFound(name: String)
   case templatePathNotFound(path: Path)
-  case noTemplateFound
+  case noTemplateProvided
   case multipleTemplateOptions(path: String, name: String)
   case deprecated(option: String, replacement: String)
 
@@ -91,7 +91,7 @@ enum TemplateError: Error, CustomStringConvertible {
       "or use --templatePath to specify a template by its full path."
     case .templatePathNotFound(let path):
       return "Template not found at path \(path.description)."
-    case .noTemplateFound:
+    case .noTemplateProvided:
       return "A template must be chosen either via its name using the '-t' / '--template' option" +
       " or via its path using the '-p' / '--templatePath' option.\n" +
       "There's no 'default' template anymore: you can still access a bundled template but " +
@@ -142,7 +142,7 @@ let bundledTemplatesPath = Path(ProcessInfo.processInfo.arguments[0]).parent() +
  */
 func findTemplate(prefix: String, templateShortName: String, templateFullPath: String) throws -> Path {
   switch (templateFullPath, templateShortName) {
-  case ("", ""): throw TemplateError.noTemplateFound
+  case ("", ""): throw TemplateError.noTemplateProvided
   case (_, ""):
     let fullPath = Path(templateFullPath)
     guard fullPath.isFile else {
