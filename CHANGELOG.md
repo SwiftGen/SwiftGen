@@ -20,7 +20,9 @@ _None_
 
 ### Internal Changes
 
-_None_
+* Improved installation instructions in the README.  
+  [Olivier Halligon](https://github.com/alisoftware)
+  [#303](https://github.com/SwiftGen/SwiftGenKit/issues/303)
 
 ## 4.2.1
 
