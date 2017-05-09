@@ -35,17 +35,44 @@ Also, it's fully customizable thanks to Stencil templates, so even if it comes w
 
 ## Installation
 
+There are multiple possibilities to install SwiftGen on your machine or in your project, depending on your preferences and needs:
+
 <details>
-<summary>Via CocoaPods</summary>
+<summary><strong>Download the ZIP</strong> for the latest release</summary>
+
+* [Go to the GitHub page for the latest release](https://github.com/SwiftGen/SwiftGen/releases/latest)
+* Download the `swiftgen-x.y.z.zip` file associated with that release
+* Extract the content of the zip archive in your project directory
+
+We recommend that you **unarchive the ZIP inside your project directory** and **commit its content** to git. This way, **all coworkers will use the same version of SwiftGen for this project**.
+
+If you unarchived the ZIP file in a folder e.g. called `swiftgen` at the root of your project directory, you can then invoke SwiftGen in your Script Build Phase using:
+
+```sh
+"$PROJECT_DIR"/swiftgen/bin/swiftgen …
+```
+
+---
+</details>
+<details>
+<summary>Via <strong>CocoaPods</strong></summary>
 
 If you're using CocoaPods, you can simply add `pod 'SwiftGen'` to your `Podfile`.
 
-This will download the `SwiftGen` binaries and dependencies in `Pods/` during your next `pod install` execution
-and will allow you to invoke it via `$PODS_ROOT/SwiftGen/bin/swiftgen` in your Script Build Phases.
-</details>
+This will download the `SwiftGen` binaries and dependencies in `Pods/` during your next `pod install` execution.
 
+Given that you can specify an exact version for `SwiftGen` in your `Podfile`, this allows you to ensure **all coworkers will use the same version of SwiftGen for this project**.
+
+You can then invoke SwiftGen in your Script Build Phase using:
+
+```sh
+$PODS_ROOT/SwiftGen/bin/swiftgen …
+```
+
+---
+</details>
 <details>
-<summary>Via Homebrew</summary>
+<summary>Via <strong>Homebrew</strong> <em>(system-wide installation)</em></summary>
 
 To install SwiftGen via [Homebrew](http://brew.sh), simply use:
 
@@ -53,13 +80,22 @@ To install SwiftGen via [Homebrew](http://brew.sh), simply use:
 $ brew update
 $ brew install swiftgen
 ```
+
+This will install SwiftGen **system-wide**. The same version of SwiftGen will be used for all projects on that machine, and you should make sure all your coworkers have the same version of SwiftGen installed on their machine too.
+
+You can then invoke `swiftgen` directly in your Script Build Phase (as it will be in your `$PATH` already):
+
+```sh
+swiftgen … 
+```
+
+---
 </details>
-
 <details>
-<summary>Compile from source</summary>
+<summary><strong>Compile from source</strong> <em>(only recommended if you need features from master or want to test a PR)</em></summary>
 
-Alternatively, you can clone the repository and use `rake install` to build the tool.  
-_With this solution you're sure to build and install the latest version from `master`._
+Alternatively, you can clone the repository and use `rake cli:install` to build the tool.  
+_With this solution you're sure to build and install the latest version from `master` and have access to features which might not have been released yet._
 
 You can install to the default locations (no parameter) or to custom locations:
 
@@ -70,6 +106,16 @@ $ rake cli:install
 # Binary will be installed in `~/swiftgen/bin`, framworks in `~/swiftgen/fmk` and templates in `~/swiftgen/tpl`
 $ rake cli:install[~/swiftgen/bin,~/swiftgen/fmk,~/swiftgen/tpl]
 ```
+
+You can then invoke SwiftGen in your Script Build Phase using the path to the binary where you installed it:
+
+```sh
+~/swiftgen/bin/swiftgen …
+```
+
+Or add the path to the `bin` folder to your `$PATH` and invoke `swiftgen` directly.
+
+---
 </details>
 
 ## Usage
