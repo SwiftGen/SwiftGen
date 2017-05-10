@@ -32,4 +32,21 @@ namespace :changelog do
       |
     HEADER
   end
+
+  desc 'Check if links to issues and PRs use matching numbers between text & link'
+  task :check do |task|
+    links = %r{\[\#([0-9]+)\]\(https://github.com/.*/(issues|pull)/([0-9]+)\)}
+    all_wrong_links = []
+    File.readlines('CHANGELOG.md').each_with_index do |line, idx|
+      wrong_links = line.scan(links)
+        .select { |m| m[0] != m[2] }
+        .map { |m| " - Line #{idx+1}, link text is ##{m[0]} but links points to #{m[2]}" }
+      all_wrong_links.concat(wrong_links)
+    end
+    if all_wrong_links.empty?
+      puts "\u{2705}  All links correct"
+    else
+      puts "\u{274C}  Some wrong links found:\n" + all_wrong_links.join("\n")
+    end
+  end
 end
