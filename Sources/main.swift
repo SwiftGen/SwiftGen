@@ -22,7 +22,7 @@ if let path = Bundle.main.object(forInfoDictionaryKey: "TemplatePath") as? Strin
 }
 
 let templateNameOption = Option<String>(
-  "template", "default", flag: "t",
+  "template", "", flag: "t",
   description: "The name of the template to use for code generation " +
     "(without the extension)."
 )
