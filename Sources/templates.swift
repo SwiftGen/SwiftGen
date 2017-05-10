@@ -46,7 +46,7 @@ let templatesListCommand = command(
   outputLines.append("template must be in the right subfolder, and must have the extension `.stencil`.")
   outputLines.append("")
   outputLines.append("For example, if you want to create a custom template named \"customname\" for the strings")
-  outputLines.append("command, place it in \"'(appSupportTemplatesPath)/strings/customname.stencil)\".")
+  outputLines.append("command, place it in \"\(appSupportTemplatesPath)/strings/customname.stencil\".")
   outputLines.append("")
 
   output.write(content: outputLines.joined(separator: "\n"))
