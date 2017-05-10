@@ -41,16 +41,22 @@ let templatesListCommand = command(
 
   outputLines.append("---")
   outputLines.append("You can add custom templates in \(appSupportTemplatesPath).")
-  outputLines.append("Simply place them in a subfolder of this path with as name one of the swiftgen subcommands,")
-  outputLines.append("namely " + allSubcommands.map({"'\($0)'"}).joined(separator: ", ") + ". Your template must be")
-  outputLines.append("in the right subfolder, and must have as extension '.stencil'. For example, if you created a")
-  outputLines.append("custom template for the strings command, place it in the following path:")
-  outputLines.append("strings/customname.stencil")
+  outputLines.append("Simply place them in a subfolder of this path named after the corresponding swiftgen")
+  outputLines.append("subcommand, namely " + allSubcommands.map({"'\($0)'"}).joined(separator: ", ") + ". Your")
+  outputLines.append("template must be in the right subfolder, and must have the extension `.stencil`.")
+  outputLines.append("")
+  outputLines.append("For example, if you want to create a custom template named \"customname\" for the strings")
+  outputLines.append("command, place it in \"'(appSupportTemplatesPath)/strings/customname.stencil)\".")
   outputLines.append("")
 
   output.write(content: outputLines.joined(separator: "\n"))
 }
 
+// Defines a 'generic' command for doing an operation on a named template. It'll receive the following
+// arguments from the user:
+// - 'subcommand'
+// - 'template'
+// These will then be converted into an actual template path, and passed to the result closure.
 private func templatePathCommandGenerator(execute: @escaping (Path, OutputDestination) throws -> Void) -> CommandType {
   return command(
     Argument<String>("subcommand",
