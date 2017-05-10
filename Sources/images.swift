@@ -10,12 +10,10 @@ import StencilSwiftKit
 import SwiftGenKit
 
 let imagesCommand = command(
-  outputOption,
-  templateOption(prefix: "images"), templatePathOption,
+  outputOption, templateNameOption, templatePathOption, paramsOption,
   Option<String>("enumName", "", flag: "e", description: "The name of the enum to generate (DEPRECATED)"),
-  VariadicOption<String>("param", [], description: "List of template parameters"),
   VariadicArgument<Path>("PATHS", description: "Asset Catalog file(s)", validator: dirsExist)
-) { output, templateName, templatePath, enumName, parameters, paths in
+) { output, templateName, templatePath, parameters, enumName, paths in
   // show error for old deprecated option
   guard enumName.isEmpty else {
     throw TemplateError.deprecated(option: "enumName", replacement: "Please use '--param enumName=...' instead.")
@@ -32,7 +30,7 @@ let imagesCommand = command(
 
   do {
     let templateRealPath = try findTemplate(
-      prefix: "images", templateShortName: templateName, templateFullPath: templatePath
+      subcommand: "images", templateShortName: templateName, templateFullPath: templatePath
     )
     let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                             environment: stencilSwiftEnvironment())

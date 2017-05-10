@@ -125,22 +125,22 @@ let bundledTemplatesPath = Path(ProcessInfo.processInfo.arguments[0]).parent() +
 /**
  Returns the path of a template given its prefix and short name, or its full path.
  * If `templateFullPath` is not empty, check that the path exists and return it (throws if it isn't an existing file)
- * If `templateFullPath` is empty `""`, search the template named `prefix-templateShortName`
+ * If `templateFullPath` is empty `""`, search the template named `templateShortName` in the folder `subcommand`
    in the Application Support directory first, then in the bundled templates,
    and returns the path if found (throws if none is found)
  * If both or neither are empty, an error will be thrown
 
- - parameter prefix:            the prefix for the template, typically name of one of the SwiftGen subcommand
+ - parameter subcommand         the folder for the template, typically name of one of the SwiftGen subcommand
                                 like `strings`, `colors`, etc
  - parameter templateShortName: the short name of the template
  - parameter templateFullPath:  the full path of the template to find. If this is set to an existing file, it
-                                returns that Path without even using `prefix` and `templateShortName` parameters.
+                                returns that Path without even using `subcommand` and `templateShortName` parameters.
 
  - throws: TemplateError
 
  - returns: The Path matching the template to find
  */
-func findTemplate(prefix: String, templateShortName: String, templateFullPath: String) throws -> Path {
+func findTemplate(subcommand: String, templateShortName: String, templateFullPath: String) throws -> Path {
   switch (!templateFullPath.isEmpty, !templateShortName.isEmpty) {
   case (false, false):
     throw TemplateError.noTemplateProvided
@@ -151,9 +151,9 @@ func findTemplate(prefix: String, templateShortName: String, templateFullPath: S
     }
     return fullPath
   case (false, true):
-    var path = appSupportTemplatesPath + "\(prefix)-\(templateShortName).stencil"
+    var path = appSupportTemplatesPath + subcommand + "\(templateShortName).stencil"
     if !path.isFile {
-      path = bundledTemplatesPath + "\(prefix)-\(templateShortName).stencil"
+      path = bundledTemplatesPath + subcommand + "\(templateShortName).stencil"
     }
     guard path.isFile else {
       throw TemplateError.namedTemplateNotFound(name: templateShortName)

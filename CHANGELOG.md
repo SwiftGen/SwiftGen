@@ -16,6 +16,9 @@ _None_
 * Disable default value for named template option and ensure that there is a template option.  
   [Liquidsoul](https://github.com/liquidsoul)
   [#283](https://github.com/SwiftGen/SwiftGen/issues/283)
+* Templates are now grouped by subcommand on the filesystem. This is only important if you had custom templates in the `Application Support` directory. To migrate your templates, place them in a subfolder with the name of the subcommand, and remove the prefix of the template filename.
+  [David Jennes](https://github.com/djbe)
+  [#304](https://github.com/SwiftGen/SwiftGenKit/issues/304)
 
 ### New Features
 
