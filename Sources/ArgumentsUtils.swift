@@ -141,15 +141,16 @@ let bundledTemplatesPath = Path(ProcessInfo.processInfo.arguments[0]).parent() +
  - returns: The Path matching the template to find
  */
 func findTemplate(prefix: String, templateShortName: String, templateFullPath: String) throws -> Path {
-  switch (templateFullPath, templateShortName) {
-  case ("", ""): throw TemplateError.noTemplateProvided
-  case (_, ""):
+  switch (!templateFullPath.isEmpty, !templateShortName.isEmpty) {
+  case (false, false):
+    throw TemplateError.noTemplateProvided
+  case (true, false):
     let fullPath = Path(templateFullPath)
     guard fullPath.isFile else {
       throw TemplateError.templatePathNotFound(path: fullPath)
     }
     return fullPath
-  case ("", _):
+  case (false, true):
     var path = appSupportTemplatesPath + "\(prefix)-\(templateShortName).stencil"
     if !path.isFile {
       path = bundledTemplatesPath + "\(prefix)-\(templateShortName).stencil"
@@ -158,7 +159,7 @@ func findTemplate(prefix: String, templateShortName: String, templateFullPath: S
       throw TemplateError.namedTemplateNotFound(name: templateShortName)
     }
     return path
-  case (_, _):
+  case (true, true):
     throw TemplateError.multipleTemplateOptions(path: templateFullPath, name: templateShortName)
   }
 }
