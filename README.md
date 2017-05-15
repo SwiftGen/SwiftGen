@@ -649,7 +649,7 @@ This way, no need to enter the color red, green, blue, alpha values each time an
 ## Info.plist
 
 ```sh
-swiftgen plist /path/to/Info.plist
+swiftgen plist -t default /path/to/Info.plist
 ```
 
 This will generate an `enum` for each Info.plist's keys, with a `InfoPlist` internal variable which allows access via subscript.
