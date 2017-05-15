@@ -13,7 +13,7 @@ import SwiftGenKit
 
 let plistCommand = command(
   outputOption,
-  templateOption(prefix: "plist"),
+  templateNameOption,
   templatePathOption,
   VariadicOption<String>("param", [], description: "List of template parameters"),
   Argument<Path>("PATH", description: "Info.plist file", validator: fileExists)
@@ -28,7 +28,7 @@ let plistCommand = command(
 
   do {
     let templateRealPath = try findTemplate(
-      prefix: "plist", templateShortName: templateName, templateFullPath: templatePath
+      subcommand: "plist", templateShortName: templateName, templateFullPath: templatePath
     )
     let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                             environment: stencilSwiftEnvironment())
