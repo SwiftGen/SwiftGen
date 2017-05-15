@@ -12,11 +12,13 @@ import PathKit
 // MARK: Font
 
 public struct Font {
+  let filePath: String
   let familyName: String
   let style: String
   let postScriptName: String
 
-  init(familyName: String, style: String, postScriptName: String) {
+  init(filePath: String, familyName: String, style: String, postScriptName: String) {
+    self.filePath = filePath
     self.familyName = familyName
     self.style = style
     self.postScriptName = postScriptName
@@ -33,11 +35,24 @@ public func == (lhs: Font, rhs: Font) -> Bool {
   return lhs.postScriptName == rhs.postScriptName
 }
 
+extension PathKit.Path {
+  /// Returns the Path relative to a parent directory.
+  /// If the argument passed as parent isn't a prefix of `self`, returns `nil`.
+  ///
+  /// - Parameter parent: The parent Path to get the relative path against
+  /// - Returns: The relative Path, or nil if parent was not a parent dir of self
+  func relative(to parent: Path) -> Path? {
+    let pc = parent.components
+    let fc = self.components
+    return fc.starts(with: pc) ? Path(components: fc.dropFirst(pc.count)) : nil
+  }
+}
+
 // MARK: CTFont
 
 extension CTFont {
-  static func parseFonts(at url: URL) -> [Font] {
-    let descs = CTFontManagerCreateFontDescriptorsFromURL(url as CFURL) as NSArray?
+  static func parse(file: Path, relativeTo parent: Path? = nil) -> [Font] {
+    let descs = CTFontManagerCreateFontDescriptorsFromURL(file.url as CFURL) as NSArray?
     guard let descRefs = (descs as? [CTFontDescriptor]) else { return [] }
 
     return descRefs.flatMap { (desc) -> Font? in
@@ -46,7 +61,13 @@ extension CTFont {
       guard let familyName = CTFontCopyAttribute(font, kCTFontFamilyNameAttribute) as? String,
         let style = CTFontCopyAttribute(font, kCTFontStyleNameAttribute) as? String else { return nil }
 
-      return Font(familyName: familyName, style: style, postScriptName: postScriptName)
+      let relPath = parent.flatMap({ file.relative(to: $0) }) ?? file
+      return Font(
+        filePath: relPath.string,
+        familyName: familyName,
+        style: style,
+        postScriptName: postScriptName
+      )
     }
   }
 }
@@ -59,26 +80,18 @@ public final class FontsFileParser {
   public init() {}
 
   public func parseFile(at path: Path) {
-    // PathKit does not support support enumeration with options yet
-    // see: https://github.com/kylef/PathKit/pull/25
-    let url = URL(fileURLWithPath: path.description)
-
-    if let dirEnum = FileManager.default.enumerator(at: url,
-      includingPropertiesForKeys: [],
-      options: [.skipsHiddenFiles, .skipsPackageDescendants],
-      errorHandler: nil) {
-        var value: AnyObject? = nil
-        while let file = dirEnum.nextObject() as? URL {
-          guard let _ = try? (file as NSURL).getResourceValue(&value, forKey: URLResourceKey.typeIdentifierKey),
-          let uti = value as? String else {
-            print("Unable to determine the Universal Type Identifier for file \(file)")
-            continue
-          }
-          guard UTTypeConformsTo(uti as CFString, "public.font" as CFString) else { continue }
-          let fonts = CTFont.parseFonts(at: file)
-
-          fonts.forEach { addFont($0) }
-        }
+    let dirChildren = path.iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
+    for file in dirChildren {
+      var value: AnyObject? = nil
+      let url = file.url as NSURL
+      guard let _ = try? url.getResourceValue(&value, forKey: URLResourceKey.typeIdentifierKey),
+        let uti = value as? String else {
+          print("Unable to determine the Universal Type Identifier for file \(file)")
+          continue
+      }
+      guard UTTypeConformsTo(uti as CFString, "public.font" as CFString) else { continue }
+      let fonts = CTFont.parse(file: file, relativeTo: path)
+      fonts.forEach { addFont($0) }
     }
   }
 

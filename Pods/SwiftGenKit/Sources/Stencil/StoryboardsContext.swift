@@ -14,25 +14,24 @@ private func uppercaseFirst(_ string: String) -> String {
 }
 
 /*
- - `modules`    : `Array<String>` — List of modules used by scenes and segues
+ - `modules`    : `Array<String>` — List of modules used by scenes and segues — typically used for "import" statements
  - `storyboards`: `Array` — List of storyboards
     - `name`: `String` — Name of the storyboard
     - `initialScene`: `Dictionary` (absent if not specified)
-       - `customClass` : `String` (absent if generic UIViewController/NSViewController)
-       - `customModule`: `String` (absent if no custom class)
-       - `baseType`: `String` (absent if class is a custom class).
-          The base class type on which the initial scene is base.
+       - `customClass` : `String` — The custom class of the scene (absent if generic UIViewController/NSViewController)
+       - `customModule`: `String` — The custom module of the scene (absent if no custom class)
+       - `baseType`: `String` — The base class type of the scene if not custom (absent if class is a custom class).
           Possible values include 'ViewController', 'NavigationController', 'TableViewController'…
     - `scenes`: `Array` (absent if empty)
-       - `identifier` : `String`
-       - `customClass`: `String` (absent if generic UIViewController/NSViewController)
-       - `customModule`: `String` (absent if no custom class)
-       - `baseType`: `String` (absent if class is a custom class).
-          The base class type on which a scene is base.
+       - `identifier` : `String` — The scene identifier
+       - `customClass`: `String` — The custom class of the scene (absent if generic UIViewController/NSViewController)
+       - `customModule`: `String` — The custom module of the scene (absent if no custom class)
+       - `baseType`: `String` — The base class type of the scene if not custom (absent if class is a custom class).
           Possible values include 'ViewController', 'NavigationController', 'TableViewController'…
     - `segues`: `Array` (absent if empty)
-       - `identifier`: `String`
-       - `customClass`: `String` (absent if generic UIStoryboardSegue)
+       - `identifier`: `String` — The segue identifier
+       - `customClass`: `String` — The custom class of the segue (absent if generic UIStoryboardSegue)
+       - `customModule`: `String` — The custom module of the segue (absent if no custom segue class)
 */
 extension StoryboardParser {
   public func stencilContext(sceneEnumName: String = "StoryboardScene",
@@ -60,16 +59,7 @@ extension StoryboardParser {
     }
     return [
       "modules": modules.sorted(),
-      "storyboards": storyboardsMap,
-
-      // NOTE: This is a deprecated variable
-      "extraImports": modules.sorted(),
-      "param": [
-        "sceneEnumName": sceneEnumName,
-        "segueEnumName": segueEnumName
-      ],
-      "sceneEnumName": sceneEnumName,
-      "segueEnumName": segueEnumName
+      "storyboards": storyboardsMap
     ]
   }
 
@@ -81,10 +71,7 @@ extension StoryboardParser {
       ]
     } else {
       return [
-        "baseType": uppercaseFirst(scene.tag),
-
-        // NOTE: This is a deprecated variable
-        "isBaseViewController": scene.tag == "viewController"
+        "baseType": uppercaseFirst(scene.tag)
       ]
     }
   }
@@ -99,10 +86,7 @@ extension StoryboardParser {
     } else if scene.tag == "viewController" {
       return [
         "identifier": scene.storyboardID,
-        "baseType": uppercaseFirst(scene.tag),
-
-        // NOTE: This is a deprecated variable
-        "isBaseViewController": scene.tag == "viewController"
+        "baseType": uppercaseFirst(scene.tag)
       ]
     } else {
       return [

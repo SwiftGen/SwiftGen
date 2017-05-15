@@ -10,7 +10,15 @@ _None_
 
 ### Breaking Changes
 
-_None_
+* Removed deprecated CLI options. Should you still use them, SwiftGen will return an error and show the new recommended CLI option to use instead.
+  [David Jennes](https://github.com/djbe)
+  [#301](https://github.com/SwiftGen/SwiftGenKit/issues/301)
+* Disable default value for named template option and ensure that there is a template option.  
+  [Liquidsoul](https://github.com/liquidsoul)
+  [#283](https://github.com/SwiftGen/SwiftGen/issues/283)
+* Templates are now grouped by subcommand on the filesystem. This is only important if you had custom templates in the `Application Support` directory. To migrate your templates, place them in a subfolder with the name of the subcommand, and remove the prefix of the template filename.
+  [David Jennes](https://github.com/djbe)
+  [#304](https://github.com/SwiftGen/SwiftGenKit/issues/304)
 
 ### New Features
 
@@ -20,19 +28,51 @@ _None_
 
 ### Internal Changes
 
+* Improved installation instructions in the README.  
+  [Olivier Halligon](https://github.com/alisoftware)
+  [#303](https://github.com/SwiftGen/SwiftGenKit/issues/303)
+
+## 4.2.1
+
+### Changes in other SwiftGen modules
+
+* [SwiftGenKit 1.1.0](https://github.com/SwiftGen/SwiftGenKit/blob/1.1.0/CHANGELOG.md)
+* [StencilSwiftKit 1.0.2](https://github.com/SwiftGen/StencilSwiftKit/blob/1.0.2/CHANGELOG.md)
+* [Stencil 0.9.0](https://github.com/kylef/Stencil/blob/0.9.0/CHANGELOG.md)
+* [templates 1.1.0](https://github.com/SwiftGen/templates/blob/1.1.0/CHANGELOG.md)
+
+### Bug Fixes
+
+* Fix a bug in which the version of SwiftGen was reported as `v0.0` by `swiftgen --version`.  
+  [Olivier Halligon](https://github.com/alisoftware)
+
+### Internal Changes
+
+* Update StencilGenKit to 1.0.2 and update Circle CI to Xcode 8.3.  
+  [Diogo Tridapalli](https://github.com/diogot)
+  [#295](https://github.com/SwiftGen/SwiftGenKit/issues/295)
 * Switch from Travis CI to Circle CI, clean up the Rakefile in the process.  
   [David Jennes](https://github.com/djbe)
   [Olivier Halligon](https://github.com/alisoftware)
   [#269](https://github.com/SwiftGen/SwiftGenKit/issues/269)
+  [#291](https://github.com/SwiftGen/SwiftGenKit/issues/291)
+* Fix remaining enum names not Swift 3 compliant.  
+  [Liquidsoul](https://github.com/liquidsoul)
+  [#297](https://github.com/SwiftGen/SwiftGen/issues/297)
+* Added the `CONTRIBUTING.md` file to help new contributors.  
+  [Olivier Halligon](https://github.com/alisoftware)
+  [Cihat Gündüz](https://github.com/Dschee)
+  [#149](https://github.com/SwiftGen/SwiftGen/pull/149)
+  [#298](https://github.com/SwiftGen/SwiftGen/pull/298)
 
 ## 4.2.0
 
-• 🔗 [SwiftGenKit 1.0.1](https://github.com/SwiftGen/SwiftGenKit/blob/1.0.1/CHANGELOG.md)
-• 🔗 [StencilSwiftKit 1.0.0](https://github.com/SwiftGen/StencilSwiftKit/blob/1.0.0/CHANGELOG.md)
-• 🔗 [Stencil 0.8.0](https://github.com/kylef/Stencil/blob/0.8.0/CHANGELOG.md)
-• 🔗 [templates 1.0.0](https://github.com/SwiftGen/templates/blob/1.0.0/CHANGELOG.md)
+### Changes in other SwiftGen modules
 
-ℹ️ Don't forget to look at the CHANGELOGs of the other repositories too (links above) in addition to this one, to see all the changes across all of SwiftGen.
+* [SwiftGenKit 1.0.1](https://github.com/SwiftGen/SwiftGenKit/blob/1.0.1/CHANGELOG.md)
+* [StencilSwiftKit 1.0.0](https://github.com/SwiftGen/StencilSwiftKit/blob/1.0.0/CHANGELOG.md)
+* [Stencil 0.8.0](https://github.com/kylef/Stencil/blob/0.8.0/CHANGELOG.md)
+* [templates 1.0.0](https://github.com/SwiftGen/templates/blob/1.0.0/CHANGELOG.md)
 
 ### Bug Fixes
 

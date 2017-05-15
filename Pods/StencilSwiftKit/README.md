@@ -1,42 +1,41 @@
 # StencilSwiftKit
 
-[![Build Status](https://travis-ci.org/SwiftGen/StencilSwiftKit.svg?branch=master)](https://travis-ci.org/SwiftGen/StencilSwiftKit)
+[![CircleCI](https://circleci.com/gh/SwiftGen/StencilSwiftKit/tree/master.svg?style=svg)](https://circleci.com/gh/SwiftGen/StencilSwiftKit/tree/master)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/StencilSwiftKit.svg)](https://img.shields.io/cocoapods/v/StencilSwiftKit.svg)
 [![Platform](https://img.shields.io/cocoapods/p/StencilSwiftKit.svg?style=flat)](http://cocoadocs.org/docsets/StencilSwiftKit)
 ![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg)
 
 `StencilSwiftKit` is a framework bringing additional [Stencil](https://github.com/kylef/Stencil) nodes & filters dedicated to Swift code generation.
 
-## Nodes
+## Tags
 
-_TODO: [Write more extension Documentation](https://github.com/SwiftGen/StencilSwiftKit/issues/4)_
-
-* `MacroNode` & `CallNode`
+* [Macro](Documentation/tag-macro.md) & [Call](Documentation/tag-call.md)
   * `{% macro <Name> <Params> %}…{% endmacro %}`
   * Defines a macro that will be replaced by the nodes inside of this block later when called
-  * `{% call <Name> <Params> %}`
-  * Calls a previously defined macro, passing it some parameters
-* `SetNode`
+  * `{% call <Name> <Args> %}`
+  * Calls a previously defined macro, passing it some arguments
+* [Set](Documentation/tag-set.md)
   * `{% set <Name> %}…{% endset %}`
-  * Renders the nodes inside this block immediately, and stores the result in the `<Name`>  variable of the current context.
-* `MapNode`
+  * Renders the nodes inside this block immediately, and stores the result in the `<Name>`  variable of the current context.
+* [Map](Documentation/tag-map.md)
   * `{% map <Variable> into <Name> using <ItemName> %}…{% endmap %}`
   * Apply a `map` operator to an array, and store the result into a new array variable `<Name>` in the current context.
-  * Inside the map loop, a `maploop` special variable is available (akin to the `forloop` variable in `for` nodes). It exposes `maploop.count`, `maploop.first`, `maploop.last` and `maploop.item`.
+  * Inside the map loop, a `maploop` special variable is available (akin to the `forloop` variable in `for` nodes). It exposes `maploop.counter`, `maploop.first`, `maploop.last` and `maploop.item`.
 
 ## Filters
 
-_TODO: [Write more extension Documentation](https://github.com/SwiftGen/StencilSwiftKit/issues/4)_
-
-* `swiftIdentifier`: Transforms an arbitrary string into a valid Swift identifier (using only valid characters for a Swift identifier as defined in the Swift language reference)
 * `join`: Deprecated. Will be removed now that the same filter exists in Stencil proper.
-* `lowerFirstWord`
-* `snakeToCamelCase` / `snakeToCamelCaseNoPrefix`
-* `titlecase`
-* `hexToInt`
-* `int255toFloat`
-* `percent`
-* `escapeReservedKeywords`: Escape keywods reserved in the Swift language, by wrapping them inside backticks so that the can be used as regular escape keywords in Swift code.
+* [String filters](Documentation/filters-strings.md):
+  * `escapeReservedKeywords`: Escape keywods reserved in the Swift language, by wrapping them inside backticks so that the can be used as regular escape keywords in Swift code.
+  * `lowerFirstWord`
+  * `snakeToCamelCase` / `snakeToCamelCaseNoPrefix`
+  * `camelToSnakeCase`: Transforms text from camelCase to snake_case. By default it converts to lower case, unless a single optional argument is set to "false", "no" or "0".
+  * `swiftIdentifier`: Transforms an arbitrary string into a valid Swift identifier (using only valid characters for a Swift identifier as defined in the Swift language reference)
+  * `titlecase`
+* [Number filters](Documentation/filters-numbers.md):
+  * `int255toFloat`
+  * `hexToInt`
+  * `percent`
 
 ## StencilSwiftTemplate
 

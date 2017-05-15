@@ -1,10 +1,12 @@
 machine:
   xcode:
-    version: 8.2
+    version: 8.3
+  pre:
+    - sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
 
 checkout:
   post:
-    - git submodule update --init --recursive
+    - git submodule update --init --recursive || (rm -fr .git/config .git/modules && git submodule deinit -f . && git submodule update --init --recursive)
 
 dependencies:
   post:

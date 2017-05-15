@@ -160,30 +160,59 @@ func parseExpression(components: [String], tokenParser: TokenParser) throws -> E
 }
 
 
+/// Represents an if condition and the associated nodes when the condition
+/// evaluates
+final class IfCondition {
+  let expression: Expression?
+  let nodes: [NodeType]
+
+  init(expression: Expression?, nodes: [NodeType]) {
+    self.expression = expression
+    self.nodes = nodes
+  }
+
+  func render(_ context: Context) throws -> String {
+    return try context.push {
+      return try renderNodes(nodes, context)
+    }
+  }
+}
+
+
 class IfNode : NodeType {
-  let expression: Expression
-  let trueNodes: [NodeType]
-  let falseNodes: [NodeType]
+  let conditions: [IfCondition]
 
   class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     var components = token.components()
     components.removeFirst()
-    var trueNodes = [NodeType]()
-    var falseNodes = [NodeType]()
 
-    trueNodes = try parser.parse(until(["endif", "else"]))
+    let expression = try parseExpression(components: components, tokenParser: parser)
+    let nodes = try parser.parse(until(["endif", "elif", "else"]))
+    var conditions: [IfCondition] = [
+      IfCondition(expression: expression, nodes: nodes)
+    ]
 
-    guard let token = parser.nextToken() else {
+    var token = parser.nextToken()
+    while let current = token, current.contents.hasPrefix("elif") {
+      var components = current.components()
+      components.removeFirst()
+      let expression = try parseExpression(components: components, tokenParser: parser)
+
+      let nodes = try parser.parse(until(["endif", "elif", "else"]))
+      token = parser.nextToken()
+      conditions.append(IfCondition(expression: expression, nodes: nodes))
+    }
+
+    if let current = token, current.contents == "else" {
+      conditions.append(IfCondition(expression: nil, nodes: try parser.parse(until(["endif"]))))
+      token = parser.nextToken()
+    }
+
+    guard let current = token, current.contents == "endif" else {
       throw TemplateSyntaxError("`endif` was not found.")
     }
 
-    if token.contents == "else" {
-      falseNodes = try parser.parse(until(["endif"]))
-      _ = parser.nextToken()
-    }
-
-    let expression = try parseExpression(components: components, tokenParser: parser)
-    return IfNode(expression: expression, trueNodes: trueNodes, falseNodes: falseNodes)
+    return IfNode(conditions: conditions)
   }
 
   class func parse_ifnot(_ parser: TokenParser, token: Token) throws -> NodeType {
@@ -207,24 +236,29 @@ class IfNode : NodeType {
     }
 
     let expression = try parseExpression(components: components, tokenParser: parser)
-    return IfNode(expression: expression, trueNodes: trueNodes, falseNodes: falseNodes)
+    return IfNode(conditions: [
+      IfCondition(expression: expression, nodes: trueNodes),
+      IfCondition(expression: nil, nodes: falseNodes),
+    ])
   }
 
-  init(expression: Expression, trueNodes: [NodeType], falseNodes: [NodeType]) {
-    self.expression = expression
-    self.trueNodes = trueNodes
-    self.falseNodes = falseNodes
+  init(conditions: [IfCondition]) {
+    self.conditions = conditions
   }
 
   func render(_ context: Context) throws -> String {
-    let truthy = try expression.evaluate(context: context)
+    for condition in conditions {
+      if let expression = condition.expression {
+        let truthy = try expression.evaluate(context: context)
 
-    return try context.push {
-      if truthy {
-        return try renderNodes(trueNodes, context)
+        if truthy {
+          return try condition.render(context)
+        }
       } else {
-        return try renderNodes(falseNodes, context)
+        return try condition.render(context)
       }
     }
+
+    return ""
   }
 }

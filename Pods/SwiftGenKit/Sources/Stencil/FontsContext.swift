@@ -8,10 +8,11 @@ import Foundation
 
 /*
  - `families`: `Array` — list of font families
-   - `name` : `String` — name of family
-   - `fonts`: `Array` — list of fonts in family
-     - `style`: `String` — font style
-     - `name` : `String` — font postscript name
+   - `name` : `String` — name of the font family
+   - `fonts`: `Array` — list of fonts in the font family
+     - `name` : `String` — the font's postscript name
+     - `path` : `String` — the path to the font, relative to the folder being scanned
+     - `style`: `String` — the designer's description of the font's style, like "bold", "oblique", …
 */
 
 extension FontsFileParser {
@@ -21,10 +22,11 @@ extension FontsFileParser {
       let fonts = family.map { (font: Font) -> [String: String] in
         // Font
         return [
-          "style": font.style,
-          "fontName": font.postScriptName
+          "name": font.postScriptName,
+          "path": font.filePath,
+          "style": font.style
         ]
-      }.sorted { $0["fontName"] ?? "" < $1["fontName"] ?? "" }
+      }.sorted { $0["name"] ?? "" < $1["name"] ?? "" }
       // Family
       return [
         "name": name,
@@ -33,11 +35,7 @@ extension FontsFileParser {
     }.sorted { $0["name"] as? String ?? "" < $1["name"] as? String ?? "" }
 
     return [
-      "families": families,
-
-      // NOTE: This is a deprecated variable
-      "enumName": enumName,
-      "param": ["enumName": enumName]
+      "families": families
     ]
   }
 }

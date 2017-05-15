@@ -1,7 +1,11 @@
 # Used constants:
 # none
 
+require 'json'
+
 class Utils
+  COLUMN_WIDTH = 30
+
   # formatter types
   :xcpretty   # pass through xcpretty and store in artifacts
   :raw        # store in artifacts
@@ -21,6 +25,17 @@ class Utils
     end
   end
 
+  def self.podspec_version(file = '*')
+    JSON.parse(`bundle exec pod ipc spec #{file}.podspec`)["version"]
+  end
+
+  def self.podfile_lock_version(pod)
+    require 'yaml'
+    root_pods = YAML.load_file('Podfile.lock')['PODS'].map { |n| n.is_a?(Hash) ? n.keys.first : n }
+    pod_vers = root_pods.select { |n| n.start_with?(pod) }.first # "SwiftGen (x.y.z)"
+    /\((.*)\)$/.match(pod_vers)[1] # Just the 'x.y.z' part
+  end
+
   # print an info header
   def self.print_header(str)
     puts "== #{str.chomp} ==".format(:yellow, :bold)
@@ -34,6 +49,21 @@ class Utils
   # print an error message
   def self.print_error(str)
     puts str.chomp.format(:red)
+  end
+
+  # format an info message in a 2 column table
+  def self.table_info(label, msg)
+    puts "#{label.ljust(COLUMN_WIDTH)} 👉  #{msg}"
+  end
+
+  # format a result message in a 2 column table
+  def self.table_result(result, label, error_msg)
+    if result
+      puts "#{label.ljust(COLUMN_WIDTH)} ✅"
+    else
+      puts "#{label.ljust(COLUMN_WIDTH)} ❌  - #{error_msg}"
+    end
+    result
   end
 
   ## [ Private helper functions ] ##################################################
@@ -68,9 +98,10 @@ class Utils
 
   # select the xcode version we want/support
   def self.version_select
-    xcodes = `mdfind "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode' && kMDItemVersion = '8.*'"`.chomp.split("\n")
+    version = '8.*'
+    xcodes = `mdfind "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode' && kMDItemVersion = '#{version}'"`.chomp.split("\n")
     if xcodes.empty?
-      raise "\n[!!!] You need to have Xcode 8.x to compile SwiftGen.\n\n"
+      raise "\n[!!!] SwiftGen requires Xcode #{version}, but we were not able to find it. If it's already installed update your Spotlight index with 'mdimport /Applications/Xcode*'\n\n"
     end
     
     # Order by version and get the latest one

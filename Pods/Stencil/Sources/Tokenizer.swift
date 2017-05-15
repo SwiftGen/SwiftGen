@@ -7,14 +7,18 @@ extension String {
     var word = ""
     var components: [String] = []
     var separate: Character = separator
+    var singleQuoteCount = 0
+    var doubleQuoteCount = 0
 
     for character in self.characters {
+      if character == "'" { singleQuoteCount += 1 }
+      else if character == "\"" { doubleQuoteCount += 1 }
+
       if character == separate {
+
         if separate != separator {
           word.append(separate)
-        }
-
-        if !word.isEmpty {
+        } else if singleQuoteCount % 2 == 0 && doubleQuoteCount % 2 == 0 && !word.isEmpty {
           components.append(word)
           word = ""
         }

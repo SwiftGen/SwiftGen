@@ -11,12 +11,14 @@ import StencilSwiftKit
 import SwiftGenKit
 
 let fontsCommand = command(
-  outputOption,
-  templateOption(prefix: "fonts"), templatePathOption,
-  Option<String>("enumName", "FontFamily", flag: "e", description: "The name of the enum to generate"),
-  VariadicOption<String>("param", [], description: "List of template parameters"),
+  outputOption, templateNameOption, templatePathOption, paramsOption,
+  Option<String>("enumName", "", flag: "e", description: "The name of the enum to generate (DEPRECATED)"),
   VariadicArgument<Path>("DIR", description: "Directory to parse.", validator: dirsExist)
-  ) { output, templateName, templatePath, enumName, parameters, paths in
+  ) { output, templateName, templatePath, parameters, enumName, paths in
+    // show error for old deprecated option
+    guard enumName.isEmpty else {
+      throw TemplateError.deprecated(option: "enumName", replacement: "Please use '--param enumName=...' instead.")
+    }
     let parser = FontsFileParser()
     do {
       for path in paths {
@@ -24,12 +26,12 @@ let fontsCommand = command(
       }
 
       let templateRealPath = try findTemplate(
-        prefix: "fonts", templateShortName: templateName, templateFullPath: templatePath
+        subcommand: "fonts", templateShortName: templateName, templateFullPath: templatePath
       )
 
       let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                               environment: stencilSwiftEnvironment())
-      let context = parser.stencilContext(enumName: enumName)
+      let context = parser.stencilContext()
       let enriched = try StencilContext.enrich(context: context, parameters: parameters)
       let rendered = try template.render(enriched)
       output.write(content: rendered, onlyIfChanged: true)

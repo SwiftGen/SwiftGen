@@ -152,7 +152,7 @@ extension AssetsCatalogParser {
    - Returns: An array of dictionaries, representing the tree of nodes in the catalog.
   */
   fileprivate func loadAssetCatalog(at path: Path) -> [[String: Any]]? {
-    let command = Command("xcrun", arguments: "actool", "--print-contents", path.description)
+    let command = Command("xcrun", arguments: "actool", "--print-contents", path.string)
     let output = command.execute() as Data
 
     // try to parse plist

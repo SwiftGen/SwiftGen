@@ -19,7 +19,7 @@ public enum ColorsParserError: Error, CustomStringConvertible {
   public var description: String {
     switch self {
     case .invalidHexColor(string: let string, key: let key):
-      let keyInfo = key.flatMap { k in " for key \"\(k)\"" } ?? ""
+      let keyInfo = key.flatMap { " for key \"\($0)\"" } ?? ""
       return "error: Invalid hex color \"\(string)\" found\(keyInfo)."
     case .invalidFile(reason: let reason):
       return "error: Unable to parse file. \(reason)"
@@ -137,7 +137,7 @@ public final class ColorsCLRFileParser: ColorsFileParser {
   public init() {}
 
   public func parseFile(at path: Path) throws {
-    if let colorsList = NSColorList(name: "UserColors", fromFile: path.description) {
+    if let colorsList = NSColorList(name: "UserColors", fromFile: path.string) {
       for colorName in colorsList.allKeys {
         colors[colorName] = colorsList.color(withKey: colorName)?.rgbColor?.hexValue
       }
@@ -151,6 +151,8 @@ public final class ColorsCLRFileParser: ColorsFileParser {
 extension NSColor {
 
   fileprivate var rgbColor: NSColor? {
+    guard colorSpace.colorSpaceModel != .RGB else { return self }
+
     return usingColorSpaceName(NSCalibratedRGBColorSpace)
   }
 

@@ -21,13 +21,11 @@ if let path = Bundle.main.object(forInfoDictionaryKey: "TemplatePath") as? Strin
   templatesRelativePath = "../templates"
 }
 
-func templateOption(prefix: String) -> Option<String> {
-  return Option<String>(
-    "template", "default", flag: "t",
-    description: "The name of the template to use for code generation " +
-      "(without the \"\(prefix)\" prefix nor extension)."
-  )
-}
+let templateNameOption = Option<String>(
+  "template", "", flag: "t",
+  description: "The name of the template to use for code generation " +
+    "(without the extension)."
+)
 
 let templatePathOption = Option<String>(
   "templatePath", "", flag: "p",
@@ -35,8 +33,13 @@ let templatePathOption = Option<String>(
 )
 
 let outputOption = Option(
-  "output", OutputDestination.Console, flag: "o",
+  "output", OutputDestination.console, flag: "o",
   description: "The path to the file to generate (Omit to generate to stdout)"
+)
+
+let paramsOption = VariadicOption<String>(
+  "param", [],
+  description: "List of template parameters"
 )
 
 // MARK: - Main
