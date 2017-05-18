@@ -27,6 +27,9 @@ public final class PlistParser {
 
   struct Meta {
     let key: String
+    init(key: String) {
+      self.key = format(key)
+    }
   }
 
   public init() {}

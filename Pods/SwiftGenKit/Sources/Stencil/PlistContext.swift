@@ -42,7 +42,7 @@ extension PlistParser {
 }
 
 extension PlistParser.Meta {
-  public func stencilContext() -> Any {
+  public func stencilContext() -> String {
     return key
   }
 }
