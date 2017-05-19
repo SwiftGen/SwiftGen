@@ -4,7 +4,7 @@
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftGen.svg)](https://img.shields.io/cocoapods/v/SwiftGen.svg)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftGen.svg?style=flat)](http://cocoadocs.org/docsets/SwiftGen)
 
-SwiftGen is a tool to auto-generate Swift code for ressources of your projects, to make them type-safe to use.
+SwiftGen is a tool to auto-generate Swift code for resources of your projects, to make them type-safe to use.
 
 <table border="0"><tr>
   <td>
@@ -31,7 +31,7 @@ There are multiple benefits in using this:
 * Avoid the risk to use an non-existing asset name
 * All this will be ensured by the compiler.
 
-Also, it's fully customizable thanks to Stencil templates, so even if it comes we predefined templates, you can make your own to generate whatever code fits your needs and your guidelines!
+Also, it's fully customizable thanks to Stencil templates, so even if it comes with predefined templates, you can make your own to generate whatever code fits your needs and your guidelines!
 
 ## Installation
 
