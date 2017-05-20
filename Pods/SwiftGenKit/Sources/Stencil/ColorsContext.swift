@@ -27,20 +27,12 @@ extension ColorsFileParser {
         "red": comps[0],
         "green": comps[1],
         "blue": comps[2],
-        "alpha": comps[3],
-
-        // NOTE: This is a deprecated variable
-        "rgba": String(hexChars[0..<8]),
-        "rgb": String(hexChars[0..<6])
+        "alpha": comps[3]
       ]
     }).sorted { $0["name"] ?? "" < $1["name"] ?? "" }
 
     return [
-      "colors": colorMap,
-
-      // NOTE: This is a deprecated variable
-      "enumName": enumName,
-      "param": ["enumName": enumName]
+      "colors": colorMap
     ]
   }
 }

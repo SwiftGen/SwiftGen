@@ -51,13 +51,13 @@ public final class StringsFileParser {
   // MARK: - Public Enum types
 
   public enum PlaceholderType: String {
-    case Object = "String"
-    case Float = "Float"
-    case Int = "Int"
-    case Char = "Character"
-    case CString = "UnsafePointer<unichar>"
-    case Pointer = "UnsafePointer<Void>"
-    case Unknown = "UnsafePointer<()>"
+    case object = "String"
+    case float = "Float"
+    case int = "Int"
+    case char = "Character"
+    case cString = "UnsafePointer<unichar>"
+    case pointer = "UnsafePointer<Void>"
+    case unknown = "UnsafePointer<()>"
 
     init?(formatChar char: Character) {
       guard let lcChar = String(char).lowercased().characters.first else {
@@ -65,17 +65,17 @@ public final class StringsFileParser {
       }
       switch lcChar {
       case "@":
-        self = .Object
+        self = .object
       case "a", "e", "f", "g":
-        self = .Float
+        self = .float
       case "d", "i", "o", "u", "x":
-        self = .Int
+        self = .int
       case "c":
-        self = .Char
+        self = .char
       case "s":
-        self = .CString
+        self = .cString
       case "p":
-        self = .Pointer
+        self = .pointer
       default:
         return nil
       }
@@ -176,7 +176,7 @@ public final class StringsFileParser {
         }
         if insertionPos > 0 {
           while list.count <= insertionPos-1 {
-            list.append(.Unknown)
+            list.append(.unknown)
           }
           list[insertionPos-1] = p
         }

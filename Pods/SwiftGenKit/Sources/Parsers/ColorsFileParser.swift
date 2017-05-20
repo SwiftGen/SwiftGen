@@ -19,7 +19,7 @@ public enum ColorsParserError: Error, CustomStringConvertible {
   public var description: String {
     switch self {
     case .invalidHexColor(string: let string, key: let key):
-      let keyInfo = key.flatMap { k in " for key \"\(k)\"" } ?? ""
+      let keyInfo = key.flatMap { " for key \"\($0)\"" } ?? ""
       return "error: Invalid hex color \"\(string)\" found\(keyInfo)."
     case .invalidFile(reason: let reason):
       return "error: Unable to parse file. \(reason)"

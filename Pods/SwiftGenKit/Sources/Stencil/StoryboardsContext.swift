@@ -59,16 +59,7 @@ extension StoryboardParser {
     }
     return [
       "modules": modules.sorted(),
-      "storyboards": storyboardsMap,
-
-      // NOTE: This is a deprecated variable
-      "extraImports": modules.sorted(),
-      "param": [
-        "sceneEnumName": sceneEnumName,
-        "segueEnumName": segueEnumName
-      ],
-      "sceneEnumName": sceneEnumName,
-      "segueEnumName": segueEnumName
+      "storyboards": storyboardsMap
     ]
   }
 
@@ -80,10 +71,7 @@ extension StoryboardParser {
       ]
     } else {
       return [
-        "baseType": uppercaseFirst(scene.tag),
-
-        // NOTE: This is a deprecated variable
-        "isBaseViewController": scene.tag == "viewController"
+        "baseType": uppercaseFirst(scene.tag)
       ]
     }
   }
@@ -98,10 +86,7 @@ extension StoryboardParser {
     } else if scene.tag == "viewController" {
       return [
         "identifier": scene.storyboardID,
-        "baseType": uppercaseFirst(scene.tag),
-
-        // NOTE: This is a deprecated variable
-        "isBaseViewController": scene.tag == "viewController"
+        "baseType": uppercaseFirst(scene.tag)
       ]
     } else {
       return [

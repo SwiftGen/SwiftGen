@@ -13,15 +13,25 @@ DEPENDENCIES:
   - PathKit (~> 0.8.0)
   - Stencil (~> 0.9.0)
   - StencilSwiftKit (~> 1.0.2)
-  - SwiftGenKit (~> 1.1.0)
+  - SwiftGenKit (from `git@github.com:toshi0383/SwiftGenKit`, branch `ts-plist-parser`)
+
+EXTERNAL SOURCES:
+  SwiftGenKit:
+    :branch: ts-plist-parser
+    :git: git@github.com:toshi0383/SwiftGenKit
+
+CHECKOUT OPTIONS:
+  SwiftGenKit:
+    :commit: 5e2f1f4c05581ceb2d3b6cad3329bb7663abdeee
+    :git: git@github.com:toshi0383/SwiftGenKit
 
 SPEC CHECKSUMS:
   Commander: fba7c96c9e787ecc8ebe0737be875e1e18ef47ff
   PathKit: dcab05d701474011aae0e40cf892298a831f63d6
   Stencil: 510f0b0518a366b67b6a9c5085a0399741b6d2f9
   StencilSwiftKit: 2c1391877b0bd92f25cac563b54c6d73f69f2eb9
-  SwiftGenKit: c3206780352e5391c18915109a5eaa092ef92b32
+  SwiftGenKit: 6bffbbb5e592d537e48930b28d01cf0bec9d771b
 
-PODFILE CHECKSUM: d537d67f735fbc834de71b537336b175eb434ff8
+PODFILE CHECKSUM: c29df96a68f5f02ee2e7038fb33b32b7ba1f2b65
 
 COCOAPODS: 1.2.1

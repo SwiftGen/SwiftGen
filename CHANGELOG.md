@@ -22,7 +22,9 @@ _None_
 
 ### New Features
 
-_None_
+* Introduce plist command.  
+  [@toshi0383](https://github.com/toshi0383)
+  * Easy access to Info.plist! e.g. `InfoPlist[.CFBundleIdentifier]`
 
 ### Internal Changes
 
