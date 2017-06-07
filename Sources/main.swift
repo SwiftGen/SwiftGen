@@ -21,25 +21,9 @@ if let path = Bundle.main.object(forInfoDictionaryKey: "TemplatePath") as? Strin
   templatesRelativePath = "../templates"
 }
 
-let templateNameOption = Option<String>(
-  "template", "", flag: "t",
-  description: "The name of the template to use for code generation " +
-    "(without the extension)."
-)
-
-let templatePathOption = Option<String>(
-  "templatePath", "", flag: "p",
-  description: "The path of the template to use for code generation. Overrides -t."
-)
-
 let outputOption = Option(
   "output", OutputDestination.console, flag: "o",
   description: "The path to the file to generate (Omit to generate to stdout)"
-)
-
-let paramsOption = VariadicOption<String>(
-  "param", [],
-  description: "List of template parameters"
 )
 
 // MARK: - Main
@@ -51,7 +35,7 @@ let main = Group {
     $0.addCommand("cat", "print content of a given named template", templatesCatCommand)
   }
   $0.addCommand("colors", "generate code for UIColors", colorsCommand)
-  $0.addCommand("images", "generate code for UIImages based on your Assets Catalog", imagesCommand)
+  $0.addCommand("images", "generate code for UIImages based on your Assets Catalog", assetCatalogCommand)
   $0.addCommand("storyboards", "generate code for your Storyboard scenes and segues", storyboardsCommand)
   $0.addCommand("strings", "generate code for your Localizable.strings", stringsCommand)
   $0.addCommand("fonts", "generate code for your UIFonts", fontsCommand)
