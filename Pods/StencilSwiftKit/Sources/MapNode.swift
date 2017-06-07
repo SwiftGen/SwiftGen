@@ -55,7 +55,7 @@ class MapNode: NodeType {
 
     if let values = values as? [Any], values.count > 0 {
       let mappedValues: [String] = try values.enumerated().map { (index, item) in
-				let mapContext = self.context(values: values, index: index, item: item)
+        let mapContext = self.context(values: values, index: index, item: item)
 
         return try context.push(dictionary: mapContext) {
           try renderNodes(nodes, context)
@@ -68,20 +68,20 @@ class MapNode: NodeType {
     return ""
   }
 
-	func context(values: [Any], index: Int, item: Any) -> [String: Any] {
-		var result: [String: Any] = [
-			"maploop": [
-				"counter": index,
-				"first": index == 0,
-				"last": index == (values.count - 1),
-				"item": item
-			]
-		]
+  func context(values: [Any], index: Int, item: Any) -> [String: Any] {
+    var result: [String: Any] = [
+      "maploop": [
+        "counter": index,
+        "first": index == 0,
+        "last": index == (values.count - 1),
+        "item": item
+      ]
+    ]
 
-		if let mapVariable = mapVariable {
-			result[mapVariable] = item
-		}
+    if let mapVariable = mapVariable {
+      result[mapVariable] = item
+    }
 
-		return result
-	}
+    return result
+  }
 }

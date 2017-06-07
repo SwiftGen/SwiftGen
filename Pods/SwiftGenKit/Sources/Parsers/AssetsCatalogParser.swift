@@ -7,166 +7,137 @@
 import Foundation
 import PathKit
 
-public final class AssetsCatalogParser {
-  typealias Catalog = [Entry]
-  var catalogs = [String: Catalog]()
-
-  public init() {}
-
-  public func parseCatalog(at path: Path) {
-    guard let items = loadAssetCatalog(at: path) else { return }
-    let name = path.lastComponentWithoutExtension
-
-    // process recursively (and append if already exists)
-    var catalog = catalogs[name] ?? Catalog()
-    catalog += process(items: items)
-    catalogs[name] = catalog
+struct Catalog {
+  enum Entry {
+    case group(name: String, items: [Entry])
+    case image(name: String, value: String)
   }
 
-  enum Entry {
-  case group(name: String, items: [Entry])
-  case image(name: String, value: String)
+  let name: String
+  let entries: [Entry]
+}
+
+public final class AssetsCatalogParser: Parser {
+  public enum Error: Swift.Error, CustomStringConvertible {
+    case invalidFile
+
+    public var description: String {
+      switch self {
+      case .invalidFile:
+        return "error: File must be an asset catalog"
+      }
+    }
+  }
+
+  var catalogs = [Catalog]()
+  public var warningHandler: Parser.MessageHandler?
+
+  public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
+    self.warningHandler = warningHandler
+  }
+
+  public func parse(path: Path) throws {
+    guard path.extension == AssetCatalog.extension else {
+      throw AssetsCatalogParser.Error.invalidFile
+    }
+
+    let name = path.lastComponentWithoutExtension
+    let entries = process(folder: path)
+
+    catalogs += [Catalog(name: name, entries: entries)]
   }
 }
 
 // MARK: - Plist processing
 
 private enum AssetCatalog {
-  static let children = "children"
-  static let filename = "filename"
-  static let providesNamespace = "provides-namespace"
-  static let root = "com.apple.actool.catalog-contents"
+  static let `extension` = "xcassets"
 
-  enum Extension {
+  enum Contents {
+    static let path = "Contents.json"
+    static let properties = "properties"
+    static let providesNamespace = "provides-namespace"
+  }
+
+  enum Item {
     static let imageSet = "imageset"
 
-	/**
-	 * This is a list of supported asset catalog item types, for now we just
-	 * support `image set`s. If you want to add support for new types, just add
-	 * it to this whitelist, and add the necessary code to the
-	 * `process(items:withPrefix:)` method.
-	 *
-	 * Note: The `actool` utility that we use for parsing hase some issues. Check
-	 * this issue for more information:
-	 * https://github.com/SwiftGen/SwiftGen/issues/228
-	 */
+    /**
+     * This is a list of supported asset catalog item types, for now we just
+     * support `image set`s. If you want to add support for new types, just add
+     * it to this whitelist, and add the necessary code to the
+     * `process(items:withPrefix:)` method.
+     */
     static let supported = [imageSet]
   }
 }
 
 extension AssetsCatalogParser {
   /**
-   This method recursively parses a tree of nodes (similar to a directory structure)
-   resulting from the `actool` utility.
-   
+   This method recursively parses a directory structure, processing each folder (files are ignored).
+  */
+  func process(folder: Path, withPrefix prefix: String = "") -> [Catalog.Entry] {
+    return (try? folder.children().flatMap {
+      process(item: $0, withPrefix: prefix)
+    }) ?? []
+  }
+
+  /**
    Each node in an asset catalog is either (there are more types, but we ignore those):
-   - An imageset, which is essentially a group containing a list of files (the latter is ignored).
-
-         <dict>
-           <key>children</key>
-           <array>
-             ...actual file items here (for example the 1x, 2x and 3x images)...
-           </array>
-           <key>filename</key>
-           <string>Tomato.imageset</string>
-         </dict>
-
-   - A group, containing sub items such as imagesets or groups. A group can provide a namespaced,
-     which means that all the sub items will have to be prefixed with their parent's name.
-
-         <dict>
-           <key>children</key>
-           <array>
-             ...sub items such as groups or imagesets...
-           </array>
-           <key>filename</key>
-           <string>Round</string>
-           <key>provides-namespace</key>
-           <true/>
-         </dict>
+     - An imageset, which is essentially a group containing a list of files (the latter is ignored).
    
-   - Parameter items: The array of items to recursively process.
+     - A group, containing sub items such as imagesets or groups. A group can provide a namespaced,
+       which means that all the sub items will have to be prefixed with their parent's name.
+
+         {
+           "properties" : {
+             "provides-namespace" : true
+           }
+         }
+
+   - Parameter folder: The directory path to recursively process.
    - Parameter prefix: The prefix to prepend values with (from namespaced groups).
    - Returns: An array of processed Entry items (a catalog).
   */
-  fileprivate func process(items: [[String: Any]], withPrefix prefix: String = "") -> Catalog {
-    var result = Catalog()
+  func process(item: Path, withPrefix prefix: String) -> Catalog.Entry? {
+    guard item.isDirectory else { return nil }
+    let type = item.extension ?? ""
 
-    for item in items {
-      guard let filename = item[AssetCatalog.filename] as? String else { continue }
-      let path = Path(filename)
+    switch (type, AssetCatalog.Item.supported.contains(type)) {
+    case (AssetCatalog.Item.imageSet, _):
+      let name = item.lastComponentWithoutExtension
+      return .image(name: name, value: "\(prefix)\(name)")
+    case ("", _), (_, true):
+      let filename = item.lastComponent
+      let subPrefix = isNamespaced(path: item) ? "\(prefix)\(filename)/" : prefix
 
-      if path.extension == AssetCatalog.Extension.imageSet {
-        // this is a simple imageset
-        let imageName = path.lastComponentWithoutExtension
+      return .group(
+        name: filename,
+        items: process(folder: item, withPrefix: subPrefix)
+      )
+    default:
+      return nil
+    }
+  }
 
-        result += [.image(name: imageName, value: "\(prefix)\(imageName)")]
-      } else if path.extension == nil || AssetCatalog.Extension.supported.contains(path.extension ?? "") {
-        // this is a group/folder
-        let children = item[AssetCatalog.children] as? [[String: Any]] ?? []
+  private func isNamespaced(path: Path) -> Bool {
+    if let contents = self.contents(for: path),
+      let properties = contents[AssetCatalog.Contents.properties] as? [String: Any],
+      let providesNamespace = properties[AssetCatalog.Contents.providesNamespace] as? Bool {
+      return providesNamespace
+    } else {
+      return false
+    }
+  }
 
-        if let providesNamespace = item[AssetCatalog.providesNamespace] as? Bool,
-          providesNamespace {
-          let processed = process(items: children, withPrefix: "\(prefix)\(filename)/")
-          result += [.group(name: filename, items: processed)]
-        } else {
-          let processed = process(items: children, withPrefix: prefix)
-          result += [.group(name: filename, items: processed)]
-        }
-      }
+  private func contents(for path: Path) -> [String: Any]? {
+    let contents = path + Path(AssetCatalog.Contents.path)
+
+    guard let data = try? contents.read(),
+      let json = try? JSONSerialization.jsonObject(with: data, options: []) else {
+        return nil
     }
 
-    return result
-  }
-}
-
-// MARK: - ACTool
-
-extension AssetsCatalogParser {
-  /**
-   Try to parse an asset catalog using the `actool` utilty. While it supports parsing
-   multiple catalogs at once, we only use it to parse one at a time.
-
-   The output of the utility is a Plist and should be similar to this:
-   ```xml
-   <?xml version="1.0" encoding="UTF-8"?>
-   <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-   <plist version="1.0">
-   <dict>
-     <key>com.apple.actool.catalog-contents</key>
-     <array>
-       <dict>
-         <key>children</key>
-         <array>
-           ...
-         </array>
-         <key>filename</key>
-         <string>Images.xcassets</string>
-       </dict>
-     </array>
-   </dict>
-   </plist>
-   ```
-   
-   - Parameter path: The path to the catalog to parse.
-   - Returns: An array of dictionaries, representing the tree of nodes in the catalog.
-  */
-  fileprivate func loadAssetCatalog(at path: Path) -> [[String: Any]]? {
-    let command = Command("xcrun", arguments: "actool", "--print-contents", path.string)
-    let output = command.execute() as Data
-
-    // try to parse plist
-    guard let plist = try? PropertyListSerialization
-        .propertyList(from: output, format: nil) else { return nil }
-
-    // get first parsed catalog
-    guard let contents = plist as? [String: Any],
-      let catalogs = contents[AssetCatalog.root] as? [[String: Any]],
-      let catalog = catalogs.first else { return nil }
-
-    // get list of children
-    guard let children = catalog[AssetCatalog.children] as? [[String: Any]] else { return nil }
-
-    return children
+    return json as? [String: Any]
   }
 }

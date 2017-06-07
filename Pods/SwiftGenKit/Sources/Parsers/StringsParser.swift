@@ -7,57 +7,65 @@
 import Foundation
 import PathKit
 
-public enum StringsFileParserError: Error, CustomStringConvertible {
+public enum StringsParserError: Error, CustomStringConvertible {
+  case duplicateTable(name: String)
   case failureOnLoading(path: String)
   case invalidFormat
+  case invalidPlaceholder(previous: StringsParser.PlaceholderType, new: StringsParser.PlaceholderType)
 
   public var description: String {
     switch self {
+    case .duplicateTable(let name):
+      return "Table \"\(name)\" already loaded, cannot add it again"
     case .failureOnLoading(let path):
       return "Failed to load a file at \"\(path)\""
     case .invalidFormat:
       return "Invalid strings file"
+    case .invalidPlaceholder(let previous, let new):
+      return "Invalid placeholder type \(new) (previous: \(previous))"
     }
   }
 }
 
-public final class StringsFileParser {
-  var entries = [Entry]()
+public final class StringsParser: Parser {
+  var tables = [String: [Entry]]()
+  public var warningHandler: Parser.MessageHandler?
 
-  public init() {}
-
-  public func addEntry(_ entry: Entry) {
-    entries.append(entry)
+  public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
+    self.warningHandler = warningHandler
   }
 
   // Localizable.strings files are generally UTF16, not UTF8!
-  public func parseFile(at path: Path) throws {
+  public func parse(path: Path) throws {
+    let name = path.lastComponentWithoutExtension
+
+    guard tables[name] == nil else {
+      throw StringsParserError.duplicateTable(name: name)
+    }
     guard let data = try? path.read() else {
-      throw StringsFileParserError.failureOnLoading(path: path.string)
+      throw StringsParserError.failureOnLoading(path: path.string)
     }
 
-    let plist = try PropertyListSerialization
-        .propertyList(from: data, format: nil)
-
+    let plist = try PropertyListSerialization.propertyList(from: data, format: nil)
     guard let dict = plist as? [String: String] else {
-      throw StringsFileParserError.invalidFormat
+      throw StringsParserError.invalidFormat
     }
 
-    for (key, translation) in dict {
-      addEntry(Entry(key: key, translation: translation))
+    tables[name] = try dict.map { key, translation in
+      try Entry(key: key, translation: translation)
     }
   }
 
   // MARK: - Public Enum types
 
   public enum PlaceholderType: String {
-    case Object = "String"
-    case Float = "Float"
-    case Int = "Int"
-    case Char = "Character"
-    case CString = "UnsafePointer<unichar>"
-    case Pointer = "UnsafePointer<Void>"
-    case Unknown = "UnsafePointer<()>"
+    case object = "String"
+    case float = "Float"
+    case int = "Int"
+    case char = "Character"
+    case cString = "UnsafePointer<unichar>"
+    case pointer = "UnsafePointer<Void>"
+    case unknown = "UnsafePointer<()>"
 
     init?(formatChar char: Character) {
       guard let lcChar = String(char).lowercased().characters.first else {
@@ -65,24 +73,24 @@ public final class StringsFileParser {
       }
       switch lcChar {
       case "@":
-        self = .Object
+        self = .object
       case "a", "e", "f", "g":
-        self = .Float
+        self = .float
       case "d", "i", "o", "u", "x":
-        self = .Int
+        self = .int
       case "c":
-        self = .Char
+        self = .char
       case "s":
-        self = .CString
+        self = .cString
       case "p":
-        self = .Pointer
+        self = .pointer
       default:
         return nil
       }
     }
 
-    public static func placeholders(fromFormat str: String) -> [PlaceholderType] {
-      return StringsFileParser.placeholders(fromFormat:  str)
+    public static func placeholders(fromFormat str: String) throws -> [PlaceholderType] {
+      return try StringsParser.placeholders(fromFormat:  str)
     }
   }
 
@@ -104,8 +112,8 @@ public final class StringsFileParser {
       self.init(key: key, translation: translation, types: types)
     }
 
-    public init(key: String, translation: String) {
-      let types = PlaceholderType.placeholders(fromFormat: translation)
+    public init(key: String, translation: String) throws {
+      let types = try PlaceholderType.placeholders(fromFormat: translation)
       self.init(key: key, translation: translation, types: types)
     }
   }
@@ -124,7 +132,7 @@ public final class StringsFileParser {
 
     do {
       return try NSRegularExpression(
-        pattern: "(?<!%)%\(position)\(precision)(@|\(pattern_int)|\(pattern_float)|[csp])",
+        pattern: "(?:^|(?<!%)(?:%%)*)%\(position)\(precision)(@|\(pattern_int)|\(pattern_float)|[csp])",
         options: [.caseInsensitive]
       )
     } catch {
@@ -133,7 +141,7 @@ public final class StringsFileParser {
   }()
 
   // "I give %d apples to %@" --> [.Int, .String]
-  private static func placeholders(fromFormat formatString: String) -> [PlaceholderType] {
+  private static func placeholders(fromFormat formatString: String) throws -> [PlaceholderType] {
     let range = NSRange(location: 0, length: (formatString as NSString).length)
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier
@@ -176,7 +184,11 @@ public final class StringsFileParser {
         }
         if insertionPos > 0 {
           while list.count <= insertionPos-1 {
-            list.append(.Unknown)
+            list.append(.unknown)
+          }
+          let previous = list[insertionPos-1]
+          guard previous == .unknown || previous == p else {
+            throw StringsParserError.invalidPlaceholder(previous: previous, new: p)
           }
           list[insertionPos-1] = p
         }

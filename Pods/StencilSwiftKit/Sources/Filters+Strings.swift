@@ -7,9 +7,9 @@
 import Foundation
 import Stencil
 
-// For retro-compatibility. Remove in next major.
-@available(*, deprecated, renamed: "Filters.Strings", message: "Use the Filters.Strings nested type instead")
-typealias StringFilters = Filters.Strings
+enum RemoveNewlinesModes: String {
+  case all, leading
+}
 
 extension Filters {
   enum Strings {
@@ -32,9 +32,9 @@ extension Filters {
       "right", "set", "Type", "unowned", "weak", "willSet"
     ]
 
-    static func stringToSwiftIdentifier(value: Any?) throws -> Any? {
+    static func swiftIdentifier(_ value: Any?) throws -> Any? {
       guard let value = value as? String else { throw Filters.Error.invalidInputType }
-      return swiftIdentifier(from: value, replaceWithUnderscores: true)
+      return StencilSwiftKit.swiftIdentifier(from: value, replaceWithUnderscores: true)
     }
 
     /* - If the string starts with only one uppercase letter, lowercase that first letter
@@ -66,30 +66,37 @@ extension Filters {
       return titlecase(string)
     }
 
-    static func snakeToCamelCase(_ value: Any?) throws -> Any? {
-      guard let string = value as? String else { throw Filters.Error.invalidInputType }
-      guard let noPrefix = try snakeToCamelCaseNoPrefix(value) else {
-        return nil
-      }
-      var prefixUnderscores = ""
-      for scalar in string.unicodeScalars {
-        guard scalar == "_" else { break }
-        prefixUnderscores += "_"
-      }
-
-      return prefixUnderscores + ("\(noPrefix)")
-    }
-
-    static func snakeToCamelCaseNoPrefix(_ value: Any?) throws -> Any? {
+    /// Converts snake_case to camelCase. Takes an optional Bool argument for removing any resulting
+    /// leading '_' characters, which defaults to false
+    ///
+    /// - Parameters:
+    ///   - value: the value to be processed
+    ///   - arguments: the arguments to the function; expecting zero or one boolean argument
+    /// - Returns: the camel case string
+    /// - Throws: FilterError.invalidInputType if the value parameter isn't a string
+    static func snakeToCamelCase(_ value: Any?, arguments: [Any?]) throws -> Any? {
+      let stripLeading = try Filters.parseBool(from: arguments, required: false) ?? false
       guard let string = value as? String else { throw Filters.Error.invalidInputType }
 
+      let unprefixed: String
       if try containsAnyLowercasedChar(string) {
         let comps = string.components(separatedBy: "_")
-        return comps.map { titlecase($0) }.joined(separator: "")
+        unprefixed = comps.map { titlecase($0) }.joined(separator: "")
       } else {
         let comps = try snakecase(string).components(separatedBy: "_")
-        return comps.map { $0.capitalized }.joined(separator: "")
+        unprefixed = comps.map { $0.capitalized }.joined(separator: "")
       }
+
+      // only if passed true, strip the prefix underscores
+      var prefixUnderscores = ""
+      if !stripLeading {
+        for scalar in string.unicodeScalars {
+          guard scalar == "_" else { break }
+          prefixUnderscores += "_"
+        }
+      }
+
+      return prefixUnderscores + unprefixed
     }
 
     /// Converts camelCase to snake_case. Takes an optional Bool argument for making the string lower case,
@@ -101,7 +108,7 @@ extension Filters {
     /// - Returns: the snake case string
     /// - Throws: FilterError.invalidInputType if the value parameter isn't a string
     static func camelToSnakeCase(_ value: Any?, arguments: [Any?]) throws -> Any? {
-      let toLower = try Filters.parseBool(from: arguments, index: 0, required: false) ?? true
+      let toLower = try Filters.parseBool(from: arguments, required: false) ?? true
       guard let string = value as? String else { throw Filters.Error.invalidInputType }
 
       let snakeCase = try snakecase(string)
@@ -116,7 +123,39 @@ extension Filters {
       return escapeReservedKeywords(in: string)
     }
 
+    /// Removes newlines and other whitespace from a string. Takes an optional Mode argument:
+    ///   - all (default): remove all newlines and whitespaces
+    ///   - leading: remove newlines and only leading whitespaces
+    ///
+    /// - Parameters:
+    ///   - value: the value to be processed
+    ///   - arguments: the arguments to the function; expecting zero or one mode argument
+    /// - Returns: the trimmed string
+    /// - Throws: FilterError.invalidInputType if the value parameter isn't a string
+    static func removeNewlines(_ value: Any?, arguments: [Any?]) throws -> Any? {
+      guard let string = value as? String else { throw Filters.Error.invalidInputType }
+      let mode = try Filters.parseEnum(from: arguments, default: RemoveNewlinesModes.all)
+
+      switch mode {
+      case .all:
+        return string
+          .components(separatedBy: .whitespacesAndNewlines)
+          .joined()
+      case .leading:
+        return string
+          .components(separatedBy: .newlines)
+          .map(removeLeadingWhitespaces(from:))
+          .joined()
+          .trimmingCharacters(in: .whitespaces)
+      }
+    }
+
     // MARK: - Private methods
+
+    private static func removeLeadingWhitespaces(from string: String) -> String {
+      let chars = string.unicodeScalars.drop { CharacterSet.whitespaces.contains($0) }
+      return String(chars)
+    }
 
     /// This returns the string with its first parameter uppercased.
     /// - note: This is quite similar to `capitalise` except that this filter doesn't

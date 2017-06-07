@@ -24,11 +24,10 @@
 
 ## Filters
 
-* `join`: Deprecated. Will be removed now that the same filter exists in Stencil proper.
 * [String filters](Documentation/filters-strings.md):
   * `escapeReservedKeywords`: Escape keywods reserved in the Swift language, by wrapping them inside backticks so that the can be used as regular escape keywords in Swift code.
   * `lowerFirstWord`
-  * `snakeToCamelCase` / `snakeToCamelCaseNoPrefix`
+  * `snakeToCamelCase`: Transforms text from snake_case to camelCase. By default it keeps leading underscores, unless a single optional argument is set to "true", "yes" or "1".
   * `camelToSnakeCase`: Transforms text from camelCase to snake_case. By default it converts to lower case, unless a single optional argument is set to "false", "no" or "0".
   * `swiftIdentifier`: Transforms an arbitrary string into a valid Swift identifier (using only valid characters for a Swift identifier as defined in the Swift language reference)
   * `titlecase`
