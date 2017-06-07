@@ -112,7 +112,6 @@ class Utils
   private_class_method :version_select
 end
 
-
 class String
   # colorization
   FORMATTING = {
