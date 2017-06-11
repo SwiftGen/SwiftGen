@@ -34,11 +34,11 @@ let main = Group {
     $0.addCommand("which", "print path of a given named template", templatesWhichCommand)
     $0.addCommand("cat", "print content of a given named template", templatesCatCommand)
   }
-  $0.addCommand("colors", "generate code for UIColors", colorsCommand)
-  $0.addCommand("images", "generate code for UIImages based on your Assets Catalog", assetCatalogCommand)
-  $0.addCommand("storyboards", "generate code for your Storyboard scenes and segues", storyboardsCommand)
-  $0.addCommand("strings", "generate code for your Localizable.strings", stringsCommand)
-  $0.addCommand("fonts", "generate code for your UIFonts", fontsCommand)
+
+  for parser in parsers {
+    let parserType = parser.parser
+    $0.addCommand(parserType.commandName, parserType.commandDescription, parser.command)
+  }
 }
 
 let version = Bundle.main

@@ -75,8 +75,12 @@ extension CTFont {
 // MARK: FontsFileParser
 
 public final class FontsParser: Parser {
-  public var entries: [String: Set<Font>] = [:]
+  var entries: [String: Set<Font>] = [:]
   public var warningHandler: Parser.MessageHandler?
+
+  public static let commandName = "fonts"
+  public static let commandDescription = "generate code for your fonts"
+  public static let commandPathDescription = "Directory(ies) to parse."
 
   public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
     self.warningHandler = warningHandler

@@ -26,10 +26,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   StencilSwiftKit:
-    :commit: 3b22d526051802cbb40d87fe35ba529f1801f15a
+    :commit: 10a138c481881024708d1add8d2356c7744712e9
     :git: git@github.com:SwiftGen/StencilSwiftKit.git
   SwiftGenKit:
-    :commit: 2b0f2255e8e97856105d758293863c33a4c63057
+    :commit: f9e99a8683d852d9b4b0699379e6c3c7c42319fd
     :git: git@github.com:SwiftGen/SwiftGenKit.git
 
 SPEC CHECKSUMS:

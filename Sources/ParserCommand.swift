@@ -27,115 +27,106 @@ let paramsOption = VariadicOption<String>(
   description: "List of template parameters"
 )
 
-func parserCommand(name: String,
-                   parser parserType: Parser.Type,
-                   pathDescription: String,
-                   pathValidator: @escaping PathValidator = pathsExist) -> CommandType {
+struct ParserCommand {
+  let parser: Parser.Type
+  let command: CommandType
 
-  return command(
-    outputOption,
-    templateNameOption,
-    templatePathOption,
-    paramsOption,
-    VariadicArgument<Path>("PATH", description: pathDescription, validator: pathValidator)
-  ) { output, templateName, templatePath, parameters, paths in
+  init(parser: Parser.Type) {
+    self.parser = parser
+    self.command = Commander.command(
+      outputOption,
+      templateNameOption,
+      templatePathOption,
+      paramsOption,
+      VariadicArgument<Path>("PATH", description: parser.commandPathDescription, validator: pathsExist)
+    ) { output, templateName, templatePath, parameters, paths in
 
-    try executeCommand(name: name,
-                       parserType: parserType,
-                       output: output,
-                       templateName: templateName,
-                       templatePath: templatePath,
-                       parameters: parameters,
-                       paths: paths)
+      try ParserCommand.execute(parserType: parser,
+                                output: output,
+                                templateName: templateName,
+                                templatePath: templatePath,
+                                parameters: parameters,
+                                paths: paths)
+    }
   }
-}
 
-func parserCommand(name: String,
-                   parser parserType: Parser.Type,
-                   pathDescription: String,
-                   pathValidator: @escaping PathValidator = pathsExist,
-                   deprecatedOption: Option<String>,
-                   deprecatedHandler: @escaping (String) throws -> Void) -> CommandType {
+  init(parser: Parser.Type,
+       deprecatedOption: Option<String>,
+       deprecatedHandler: @escaping (String) throws -> Void) {
+    self.parser = parser
+    self.command = Commander.command(
+      outputOption,
+      templateNameOption,
+      templatePathOption,
+      paramsOption,
+      deprecatedOption,
+      VariadicArgument<Path>("PATH", description: parser.commandPathDescription, validator: pathsExist)
+    ) { output, templateName, templatePath, parameters, deprecated, paths in
 
-  return command(
-    outputOption,
-    templateNameOption,
-    templatePathOption,
-    paramsOption,
-    deprecatedOption,
-    VariadicArgument<Path>("PATH", description: pathDescription, validator: pathValidator)
-  ) { output, templateName, templatePath, parameters, deprecated, paths in
+      try deprecatedHandler(deprecated)
 
-    try deprecatedHandler(deprecated)
-
-    try executeCommand(name: name,
-                       parserType: parserType,
-                       output: output,
-                       templateName: templateName,
-                       templatePath: templatePath,
-                       parameters: parameters,
-                       paths: paths)
+      try ParserCommand.execute(parserType: parser,
+                                output: output,
+                                templateName: templateName,
+                                templatePath: templatePath,
+                                parameters: parameters,
+                                paths: paths)
+    }
   }
-}
 
-// swiftlint:disable:next function_parameter_count
-func parserCommand(name: String,
-                   parser parserType: Parser.Type,
-                   pathDescription: String,
-                   pathValidator: @escaping PathValidator = pathsExist,
-                   deprecatedOption1: Option<String>,
-                   deprecatedOption2: Option<String>,
-                   deprecatedHandler: @escaping (String, String) throws -> Void) -> CommandType {
+  init(parser: Parser.Type,
+       deprecatedOption1: Option<String>,
+       deprecatedOption2: Option<String>,
+       deprecatedHandler: @escaping (String, String) throws -> Void) {
+    self.parser = parser
+    self.command = Commander.command(
+      outputOption,
+      templateNameOption,
+      templatePathOption,
+      paramsOption,
+      deprecatedOption1,
+      deprecatedOption2,
+      VariadicArgument<Path>("PATH", description: parser.commandPathDescription, validator: pathsExist)
+    ) { output, templateName, templatePath, parameters, deprecated1, deprecated2, paths in
 
-  return command(
-    outputOption,
-    templateNameOption,
-    templatePathOption,
-    paramsOption,
-    deprecatedOption1,
-    deprecatedOption2,
-    VariadicArgument<Path>("PATH", description: pathDescription, validator: pathValidator)
-  ) { output, templateName, templatePath, parameters, deprecated1, deprecated2, paths in
+      try deprecatedHandler(deprecated1, deprecated2)
 
-    try deprecatedHandler(deprecated1, deprecated2)
-
-    try executeCommand(name: name,
-                       parserType: parserType,
-                       output: output,
-                       templateName: templateName,
-                       templatePath: templatePath,
-                       parameters: parameters,
-                       paths: paths)
+      try ParserCommand.execute(parserType: parser,
+                                output: output,
+                                templateName: templateName,
+                                templatePath: templatePath,
+                                parameters: parameters,
+                                paths: paths)
+    }
   }
-}
 
-// swiftlint:disable:next function_parameter_count
-private func executeCommand(name: String,
-                            parserType: Parser.Type,
-                            output: OutputDestination,
-                            templateName: String,
-                            templatePath: String,
-                            parameters: [String],
-                            paths: [Path]) throws {
+  // swiftlint:disable:next function_parameter_count
+  private static func execute(parserType: Parser.Type,
+                              output: OutputDestination,
+                              templateName: String,
+                              templatePath: String,
+                              parameters: [String],
+                              paths: [Path]) throws {
 
-  let parser = try parserType.init(options: [:]) { msg, _, _ in
-    printError(string: msg)
-  }
-  try parser.parse(paths: paths)
+    let parser = try parserType.init(options: [:]) { msg, _, _ in
+      printError(string: msg)
+    }
+    try parser.parse(paths: paths)
 
-  do {
-    let templateRealPath = try findTemplate(subcommand: name,
-                                            templateShortName: templateName,
-                                            templateFullPath: templatePath)
+    do {
+      let templateRealPath = try findTemplate(subcommand: parserType.commandName,
+                                              templateShortName: templateName,
+                                              templateFullPath: templatePath)
 
-    let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
-                                            environment: stencilSwiftEnvironment())
+      let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
+                                              environment: stencilSwiftEnvironment())
 
-    let context = parser.stencilContext()
-    let enriched = try StencilContext.enrich(context: context, parameters: parameters)
-    let rendered = try template.render(enriched)
-    output.write(content: rendered, onlyIfChanged: true)
-  } catch {
-    printError(string: "error: failed to render template \(error)")
+      let context = parser.stencilContext()
+      let enriched = try StencilContext.enrich(context: context, parameters: parameters)
+      let rendered = try template.render(enriched)
+      output.write(content: rendered, onlyIfChanged: true)
+    } catch {
+      printError(string: "error: failed to render template \(error)")
+    }
   }
 }

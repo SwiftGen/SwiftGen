@@ -28,37 +28,26 @@ let storyboardsDeprecatedHandler: (String, String) throws -> Void = { deprecated
   }
 }
 
-let assetCatalogCommand = parserCommand(
-  name: "images",
+let assetCatalogCommand = ParserCommand(
   parser: AssetsCatalogParser.self,
-  pathDescription: "Asset Catalog file(s).",
-  pathValidator: dirsExist,
   deprecatedOption: deprecatedEnumOption,
   deprecatedHandler: commonDeprecatedHandler
 )
 
-let colorsCommand = parserCommand(
-  name: "colors",
+let colorsCommand = ParserCommand(
   parser: ColorsParser.self,
-  pathDescription: "Colors.txt|.clr|.xml|.json file(s) to parse.",
-  pathValidator: filesExist,
   deprecatedOption: deprecatedEnumOption,
   deprecatedHandler: commonDeprecatedHandler
 )
 
-let fontsCommand = parserCommand(
-  name: "fonts",
+let fontsCommand = ParserCommand(
   parser: FontsParser.self,
-  pathDescription: "Directory(ies) to parse.",
-  pathValidator: dirsExist,
   deprecatedOption: deprecatedEnumOption,
   deprecatedHandler: commonDeprecatedHandler
 )
 
-let storyboardsCommand = parserCommand(
-  name: "storyboards",
+let storyboardsCommand = ParserCommand(
   parser: StoryboardParser.self,
-  pathDescription: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard",
   deprecatedOption1: Option<String>("sceneEnumName", "", flag: "e",
                                     description: "The name of the enum to generate for Scenes (DEPRECATED)"),
   deprecatedOption2: Option<String>("segueEnumName", "", flag: "g",
@@ -66,11 +55,16 @@ let storyboardsCommand = parserCommand(
   deprecatedHandler: storyboardsDeprecatedHandler
 )
 
-let stringsCommand = parserCommand(
-  name: "strings",
+let stringsCommand = ParserCommand(
   parser: StringsParser.self,
-  pathDescription: "Strings file(s) to parse.",
-  pathValidator: filesExist,
   deprecatedOption: deprecatedEnumOption,
   deprecatedHandler: commonDeprecatedHandler
 )
+
+let parsers = [
+  assetCatalogCommand,
+  colorsCommand,
+  fontsCommand,
+  storyboardsCommand,
+  stringsCommand
+]

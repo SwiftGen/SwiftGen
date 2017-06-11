@@ -10,6 +10,12 @@ import PathKit
 public protocol Parser {
   init(options: [String: Any], warningHandler: MessageHandler?) throws
 
+  // Command info
+  static var commandName: String { get }
+  static var commandDescription: String { get }
+  static var commandPathDescription: String { get }
+
+  // Parsing and context generation
   func parse(path: Path) throws
   func parse(paths: [Path]) throws
   func stencilContext() -> [String: Any]
