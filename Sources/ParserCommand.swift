@@ -38,7 +38,7 @@ struct ParserCommand {
       templateNameOption,
       templatePathOption,
       paramsOption,
-      VariadicArgument<Path>("PATH", description: parser.commandPathDescription, validator: pathsExist)
+      VariadicArgument<Path>("PATH", description: parser.commandInfo.pathDescription, validator: pathsExist)
     ) { output, templateName, templatePath, parameters, paths in
 
       try ParserCommand.execute(parserType: parser,
@@ -60,7 +60,7 @@ struct ParserCommand {
       templatePathOption,
       paramsOption,
       deprecatedOption,
-      VariadicArgument<Path>("PATH", description: parser.commandPathDescription, validator: pathsExist)
+      VariadicArgument<Path>("PATH", description: parser.commandInfo.pathDescription, validator: pathsExist)
     ) { output, templateName, templatePath, parameters, deprecated, paths in
 
       try deprecatedHandler(deprecated)
@@ -86,7 +86,7 @@ struct ParserCommand {
       paramsOption,
       deprecatedOption1,
       deprecatedOption2,
-      VariadicArgument<Path>("PATH", description: parser.commandPathDescription, validator: pathsExist)
+      VariadicArgument<Path>("PATH", description: parser.commandInfo.pathDescription, validator: pathsExist)
     ) { output, templateName, templatePath, parameters, deprecated1, deprecated2, paths in
 
       try deprecatedHandler(deprecated1, deprecated2)
