@@ -35,9 +35,8 @@ let main = Group {
     $0.addCommand("cat", "print content of a given named template", templatesCatCommand)
   }
 
-  for parser in allParserCommands {
-    let parserType = parser.parserType
-    $0.addCommand(parserType.commandInfo.name, parserType.commandInfo.description, parser.command)
+  for parserType in allParserTypes {
+    $0.addCommand(parserType.commandInfo.name, parserType.commandInfo.description, parserType.command())
   }
 }
 

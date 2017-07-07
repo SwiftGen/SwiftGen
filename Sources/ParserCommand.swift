@@ -27,26 +27,22 @@ let paramsOption = VariadicOption<String>(
   description: "List of template parameters"
 )
 
-struct ParserCommand {
-  let parserType: Parser.Type
-  let command: CommandType
-
-  init(parserType: Parser.Type) {
-    self.parserType = parserType
-    self.command = Commander.command(
+extension Parser {
+  static func command() -> CommandType {
+    return Commander.command(
       outputOption,
       templateNameOption,
       templatePathOption,
       paramsOption,
-      VariadicArgument<Path>("PATH", description: parserType.commandInfo.pathDescription, validator: pathsExist)
+      VariadicArgument<Path>("PATH", description: self.commandInfo.pathDescription, validator: pathsExist)
     ) { output, templateName, templatePath, parameters, paths in
-      let parser = try parserType.init(options: [:]) { msg, _, _ in
+      let parser = try self.init(options: [:]) { msg, _, _ in
         printError(string: msg)
       }
       try parser.parse(paths: paths)
 
       do {
-        let templateRealPath = try findTemplate(subcommand: parserType.commandInfo.name,
+        let templateRealPath = try findTemplate(subcommand: self.commandInfo.name,
                                                 templateShortName: templateName,
                                                 templateFullPath: templatePath)
 

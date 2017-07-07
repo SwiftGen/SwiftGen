@@ -6,15 +6,12 @@
 //  Copyright © 2017 AliSoftware. All rights reserved.
 //
 
-import Commander
 import SwiftGenKit
 
-let allParsers: [Parser.Type] = [
+let allParserTypes: [Parser.Type] = [
   AssetsCatalogParser.self,
   ColorsParser.self,
   FontsParser.self,
   StoryboardParser.self,
   StringsParser.self
 ]
-
-let allParserCommands = allParsers.map({ ParserCommand(parserType: $0) })
