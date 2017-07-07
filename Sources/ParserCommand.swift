@@ -114,7 +114,7 @@ struct ParserCommand {
     try parser.parse(paths: paths)
 
     do {
-      let templateRealPath = try findTemplate(subcommand: parserType.commandName,
+      let templateRealPath = try findTemplate(subcommand: parserType.commandInfo.name,
                                               templateShortName: templateName,
                                               templateFullPath: templatePath)
 

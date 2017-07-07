@@ -37,7 +37,7 @@ let main = Group {
 
   for parser in parsers {
     let parserType = parser.parser
-    $0.addCommand(parserType.commandName, parserType.commandDescription, parser.command)
+    $0.addCommand(parserType.commandInfo.name, parserType.commandInfo.description, parser.command)
   }
 }
 
