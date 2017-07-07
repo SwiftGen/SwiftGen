@@ -28,105 +28,38 @@ let paramsOption = VariadicOption<String>(
 )
 
 struct ParserCommand {
-  let parser: Parser.Type
+  let parserType: Parser.Type
   let command: CommandType
 
-  init(parser: Parser.Type) {
-    self.parser = parser
+  init(parserType: Parser.Type) {
+    self.parserType = parserType
     self.command = Commander.command(
       outputOption,
       templateNameOption,
       templatePathOption,
       paramsOption,
-      VariadicArgument<Path>("PATH", description: parser.commandInfo.pathDescription, validator: pathsExist)
+      VariadicArgument<Path>("PATH", description: parserType.commandInfo.pathDescription, validator: pathsExist)
     ) { output, templateName, templatePath, parameters, paths in
+      let parser = try parserType.init(options: [:]) { msg, _, _ in
+        printError(string: msg)
+      }
+      try parser.parse(paths: paths)
 
-      try ParserCommand.execute(parserType: parser,
-                                output: output,
-                                templateName: templateName,
-                                templatePath: templatePath,
-                                parameters: parameters,
-                                paths: paths)
-    }
-  }
+      do {
+        let templateRealPath = try findTemplate(subcommand: parserType.commandInfo.name,
+                                                templateShortName: templateName,
+                                                templateFullPath: templatePath)
 
-  init(parser: Parser.Type,
-       deprecatedOption: Option<String>,
-       deprecatedHandler: @escaping (String) throws -> Void) {
-    self.parser = parser
-    self.command = Commander.command(
-      outputOption,
-      templateNameOption,
-      templatePathOption,
-      paramsOption,
-      deprecatedOption,
-      VariadicArgument<Path>("PATH", description: parser.commandInfo.pathDescription, validator: pathsExist)
-    ) { output, templateName, templatePath, parameters, deprecated, paths in
+        let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
+                                                environment: stencilSwiftEnvironment())
 
-      try deprecatedHandler(deprecated)
-
-      try ParserCommand.execute(parserType: parser,
-                                output: output,
-                                templateName: templateName,
-                                templatePath: templatePath,
-                                parameters: parameters,
-                                paths: paths)
-    }
-  }
-
-  init(parser: Parser.Type,
-       deprecatedOption1: Option<String>,
-       deprecatedOption2: Option<String>,
-       deprecatedHandler: @escaping (String, String) throws -> Void) {
-    self.parser = parser
-    self.command = Commander.command(
-      outputOption,
-      templateNameOption,
-      templatePathOption,
-      paramsOption,
-      deprecatedOption1,
-      deprecatedOption2,
-      VariadicArgument<Path>("PATH", description: parser.commandInfo.pathDescription, validator: pathsExist)
-    ) { output, templateName, templatePath, parameters, deprecated1, deprecated2, paths in
-
-      try deprecatedHandler(deprecated1, deprecated2)
-
-      try ParserCommand.execute(parserType: parser,
-                                output: output,
-                                templateName: templateName,
-                                templatePath: templatePath,
-                                parameters: parameters,
-                                paths: paths)
-    }
-  }
-
-  // swiftlint:disable:next function_parameter_count
-  private static func execute(parserType: Parser.Type,
-                              output: OutputDestination,
-                              templateName: String,
-                              templatePath: String,
-                              parameters: [String],
-                              paths: [Path]) throws {
-
-    let parser = try parserType.init(options: [:]) { msg, _, _ in
-      printError(string: msg)
-    }
-    try parser.parse(paths: paths)
-
-    do {
-      let templateRealPath = try findTemplate(subcommand: parserType.commandInfo.name,
-                                              templateShortName: templateName,
-                                              templateFullPath: templatePath)
-
-      let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
-                                              environment: stencilSwiftEnvironment())
-
-      let context = parser.stencilContext()
-      let enriched = try StencilContext.enrich(context: context, parameters: parameters)
-      let rendered = try template.render(enriched)
-      output.write(content: rendered, onlyIfChanged: true)
-    } catch {
-      printError(string: "error: failed to render template \(error)")
+        let context = parser.stencilContext()
+        let enriched = try StencilContext.enrich(context: context, parameters: parameters)
+        let rendered = try template.render(enriched)
+        output.write(content: rendered, onlyIfChanged: true)
+      } catch {
+        printError(string: "error: failed to render template \(error)")
+      }
     }
   }
 }
