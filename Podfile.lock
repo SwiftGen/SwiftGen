@@ -29,7 +29,7 @@ CHECKOUT OPTIONS:
     :commit: 10a138c481881024708d1add8d2356c7744712e9
     :git: git@github.com:SwiftGen/StencilSwiftKit.git
   SwiftGenKit:
-    :commit: f9e99a8683d852d9b4b0699379e6c3c7c42319fd
+    :commit: 968314c0e288a2f855eff088158d358b8a9663cd
     :git: git@github.com:SwiftGen/SwiftGenKit.git
 
 SPEC CHECKSUMS:

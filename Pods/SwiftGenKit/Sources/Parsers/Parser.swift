@@ -7,13 +7,17 @@
 import Foundation
 import PathKit
 
+public struct CommandInfo {
+  public var name: String
+  public var description: String
+  public var pathDescription: String
+}
+
 public protocol Parser {
   init(options: [String: Any], warningHandler: MessageHandler?) throws
 
   // Command info
-  static var commandName: String { get }
-  static var commandDescription: String { get }
-  static var commandPathDescription: String { get }
+  static var commandInfo: CommandInfo { get }
 
   // Parsing and context generation
   func parse(path: Path) throws

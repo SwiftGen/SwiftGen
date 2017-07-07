@@ -78,9 +78,11 @@ public final class FontsParser: Parser {
   var entries: [String: Set<Font>] = [:]
   public var warningHandler: Parser.MessageHandler?
 
-  public static let commandName = "fonts"
-  public static let commandDescription = "generate code for your fonts"
-  public static let commandPathDescription = "Directory(ies) to parse."
+  public static let commandInfo = CommandInfo(
+    name: "fonts",
+    description: "generate code for your fonts",
+    pathDescription: "Directory(ies) to parse."
+  )
 
   public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
     self.warningHandler = warningHandler

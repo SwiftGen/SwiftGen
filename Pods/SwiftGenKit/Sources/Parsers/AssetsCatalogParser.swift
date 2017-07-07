@@ -32,9 +32,11 @@ public final class AssetsCatalogParser: Parser {
   var catalogs = [Catalog]()
   public var warningHandler: Parser.MessageHandler?
 
-  public static let commandName = "assets"
-  public static let commandDescription = "generate code for items in your Assets Catalog(s)"
-  public static let commandPathDescription = "Asset Catalog file(s)."
+  public static let commandInfo = CommandInfo(
+    name: "assets",
+    description: "generate code for items in your Assets Catalog(s)",
+    pathDescription: "Asset Catalog file(s)."
+  )
 
   public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
     self.warningHandler = warningHandler
