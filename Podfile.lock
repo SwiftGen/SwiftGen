@@ -15,7 +15,17 @@ DEPENDENCIES:
   - PathKit (~> 0.8.0)
   - Stencil (~> 0.9.0)
   - StencilSwiftKit (~> 2.0)
-  - SwiftGenKit (~> 2.0)
+  - SwiftGenKit (from `https://github.com/SwiftGen/SwiftGenKit`, branch `feature/breaking/rename-subcommands`)
+
+EXTERNAL SOURCES:
+  SwiftGenKit:
+    :branch: feature/breaking/rename-subcommands
+    :git: https://github.com/SwiftGen/SwiftGenKit
+
+CHECKOUT OPTIONS:
+  SwiftGenKit:
+    :commit: c0278b82d5e8b76c4b5b8c002c50be4d8f9b5ee3
+    :git: https://github.com/SwiftGen/SwiftGenKit
 
 SPEC CHECKSUMS:
   Commander: fba7c96c9e787ecc8ebe0737be875e1e18ef47ff
@@ -23,8 +33,8 @@ SPEC CHECKSUMS:
   PathKit: dcab05d701474011aae0e40cf892298a831f63d6
   Stencil: 510f0b0518a366b67b6a9c5085a0399741b6d2f9
   StencilSwiftKit: b7a2b68d14544d510f21cf034f550cf07bb119bc
-  SwiftGenKit: cc5442a21a4567c85d37bcf93f307b8fc2416c8f
+  SwiftGenKit: 4d9749fbf0deb618641376711a72de44bdc54762
 
-PODFILE CHECKSUM: 677badba5684c50f1b2ab71abf7b875bdcd6ff40
+PODFILE CHECKSUM: dd9e97c31d462cae93c3b100c095aa354f9452f6
 
 COCOAPODS: 1.2.1

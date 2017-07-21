@@ -70,12 +70,6 @@ public final class StoryboardParser: Parser {
   var storyboards = [Storyboard]()
   public var warningHandler: Parser.MessageHandler?
 
-  public static let commandInfo = CommandInfo(
-    name: "storyboards",
-    description: "generate code for your storyboard scenes and segues",
-    pathDescription: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard"
-  )
-
   public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
     self.warningHandler = warningHandler
   }

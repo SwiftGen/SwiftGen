@@ -43,12 +43,6 @@ public final class ColorsParser: Parser {
   var palettes = [Palette]()
   public var warningHandler: Parser.MessageHandler?
 
-  public static let commandInfo = CommandInfo(
-    name: "colors",
-    description: "generate code for color palettes",
-    pathDescription: "Colors.txt|.clr|.xml|.json file(s) to parse."
-  )
-
   public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
     self.warningHandler = warningHandler
 

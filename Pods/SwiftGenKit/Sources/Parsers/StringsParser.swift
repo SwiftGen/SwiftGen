@@ -31,12 +31,6 @@ public final class StringsParser: Parser {
   var tables = [String: [Entry]]()
   public var warningHandler: Parser.MessageHandler?
 
-  public static let commandInfo = CommandInfo(
-    name: "strings",
-    description: "generate code for your Localizable.strings file(s)",
-    pathDescription: "Strings file(s) to parse."
-  )
-
   public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
     self.warningHandler = warningHandler
   }
