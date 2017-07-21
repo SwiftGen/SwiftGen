@@ -7,7 +7,7 @@
 import Commander
 import PathKit
 
-let allSubcommands = ["colors", "images", "storyboards", "strings", "fonts"]
+let allSubcommands = allParserCommands.map { $0.name }
 
 let templatesListCommand = command(
   Option<String>("only", "", flag: "l",
