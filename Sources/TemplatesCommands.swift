@@ -7,7 +7,7 @@
 import Commander
 import PathKit
 
-let allSubcommands = ["colors", "images", "storyboards", "strings", "fonts"]
+let allSubcommands = allParserCommands.map { $0.name }
 
 let templatesListCommand = command(
   Option<String>("only", "", flag: "l",
@@ -41,12 +41,8 @@ let templatesListCommand = command(
 
   outputLines.append("---")
   outputLines.append("You can add custom templates in \(appSupportTemplatesPath).")
-  outputLines.append("Simply place them in a subfolder of this path named after the corresponding swiftgen")
-  outputLines.append("subcommand, namely " + allSubcommands.map({"'\($0)'"}).joined(separator: ", ") + ". Your")
-  outputLines.append("template must be in the right subfolder, and must have the extension `.stencil`.")
-  outputLines.append("")
-  outputLines.append("For example, if you want to create a custom template named \"customname\" for the strings")
-  outputLines.append("command, place it in \"\(appSupportTemplatesPath)/strings/customname.stencil\".")
+  outputLines.append("You can also specify templates by path using `-p PATH` instead of `-t NAME`.")
+  outputLines.append("For more information, see the documentation on GitHub.")
   outputLines.append("")
 
   output.write(content: outputLines.joined(separator: "\n"))

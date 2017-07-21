@@ -1,9 +1,7 @@
 //
-//  ParserCommand.swift
-//  SwiftGen
-//
-//  Created by David Jennes on 07/06/2017.
-//  Copyright © 2017 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright (c) 2015 Olivier Halligon
+// MIT Licence
 //
 
 import Commander
@@ -27,22 +25,27 @@ let paramsOption = VariadicOption<String>(
   description: "List of template parameters"
 )
 
-extension Parser {
-  static func command() -> CommandType {
+public struct ParserCommand {
+  public let parserType: Parser.Type
+  public let name: String
+  public let description: String
+  public let pathDescription: String
+
+  func command() -> CommandType {
     return Commander.command(
       outputOption,
       templateNameOption,
       templatePathOption,
       paramsOption,
-      VariadicArgument<Path>("PATH", description: self.commandInfo.pathDescription, validator: pathsExist)
+      VariadicArgument<Path>("PATH", description: self.pathDescription, validator: pathsExist)
     ) { output, templateName, templatePath, parameters, paths in
-      let parser = try self.init(options: [:]) { msg, _, _ in
+      let parser = try self.parserType.init(options: [:]) { msg, _, _ in
         printError(string: msg)
       }
       try parser.parse(paths: paths)
 
       do {
-        let templateRealPath = try findTemplate(subcommand: self.commandInfo.name,
+        let templateRealPath = try findTemplate(subcommand: self.name,
                                                 templateShortName: templateName,
                                                 templateFullPath: templatePath)
 
@@ -53,8 +56,10 @@ extension Parser {
         let enriched = try StencilContext.enrich(context: context, parameters: parameters)
         let rendered = try template.render(enriched)
         output.write(content: rendered, onlyIfChanged: true)
-      } catch {
-        printError(string: "error: failed to render template \(error)")
+      } catch let error as TemplateError {
+        printError(string: "error: \(error)")
+      } catch let error {
+        printError(string: "error: failed to render template: \(error)")
       }
     }
   }
