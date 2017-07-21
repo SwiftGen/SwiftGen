@@ -12,12 +12,11 @@ SwiftGen is a tool to auto-generate Swift code for resources of your projects, t
   </td><td>
     Generate code (enums, constants, etc) for:
     <ul>
-      <li><a href="#uiimage-and-nsimage">Assets Catalogs images</a>
-      <li><a href="#localizablestrings"><tt>Localizable.strings</tt></a>
-      <li><a href="#uistoryboard">UIStoryboards and their Scenes</a>
-      <li><a href="#nsstoryboard">NSStoryboards and their Scenes</a>
-      <li><a href="#uicolor-and-nscolor">Colors</a>
-      <li><a href="#uifont-and-nsfont">Fonts</a>
+      <li><a href="#asset-catalog">Assets Catalogs images</a>
+      <li><a href="#colors">Colors</a>
+      <li><a href="#fonts">Fonts</a>
+      <li><a href="#storyboards">Storyboards and their Scenes</a>
+      <li><a href="#strings"><tt>Localizable.strings</tt></a>
     </ul>
   </td>
 </tr></table>
@@ -129,16 +128,16 @@ Or add the path to the `bin` folder to your `$PATH` and invoke `swiftgen` direct
 
 The tool is provided as a unique `swiftgen` binary command-line, with the following subcommands:
 
-* `swiftgen images [OPTIONS] DIR`
-* `swiftgen strings [OPTIONS] FILE`
-* `swiftgen storyboards [OPTIONS] DIR`
+* `swiftgen assets [OPTIONS] DIR`
 * `swiftgen colors [OPTIONS] FILE`
 * `swiftgen fonts [OPTIONS] DIR`
+* `swiftgen storyboards [OPTIONS] DIR`
+* `swiftgen strings [OPTIONS] FILE`
 
 Each subcommand has its own option and syntax, but some options are common to all:
 
 * `--output FILE` or `-o FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
-* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](documentation/Templates.md#using-a-name)) to generate the output.
+* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](https://github.com/SwiftGen/templates) to generate the output.
 * `--templatePath PATH` or `-p PATH`: define the Stencil template to use, using a full path.
 
 You can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
@@ -157,25 +156,25 @@ SwiftGen is based on templates (it uses [Stencil](https://github.com/kylef/Stenc
 
 ### Bundled templates vs. Custom ones
 
-SwiftGen comes bundled with some default templates for each of the subcommand (`colors`, `images`, `strings`, `storyboard`, `fonts`…), but you can also create your own templates if the defaults don't suit your coding conventions or needs. Simply store them in `~/Library/Application Support/SwiftGen/templates`, then use the `-t` / `--template` option to specify the name of the template to use, or store them somewhere else (like in your project repository) and use `-p` / `--templatePath` to specify a full path.
+SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `images`, `strings`, `storyboard`, `fonts`…), but you can also create your own templates if the bundled ones don't suit your coding conventions or needs. Simply store them in `~/Library/Application Support/SwiftGen/templates`, then use the `-t` / `--template` option to specify the name of the template to use, or store them somewhere else (like in your project repository) and use `-p` / `--templatePath` to specify a full path.
 
 💡 You can use the `swiftgen templates` command to list all the available templates (both custom and bundled templates) for each subcommand, list the template content and dupliate them to create your own.
 
 ### Templates bundled with SwiftGen include:
 
-* A `default` template, compatible with Swift 2
+* A `swift2` template, compatible with Swift 2
 * A `swift3` template, compatible with Swift 3
-* Other variants, like `structured` and `dot-syntax` / `dot-syntax-swift3` templates for Strings, or `osx` variant for ~~OS X~~ macOS Storyboards.
+* Other variants, like `flat-swift2/3` and `structured-swift2/3` templates for Strings.
 
-For more information about how to create your own templates, [see the dedicated documentation](documentation/Templates.md).
+For more information about how to create your own templates, [see the dedicated documentation](https://github.com/SwiftGen/templates/blob/master/Documentation/Creating-your-templates.md).
 
-> Don't hesitate to make PRs to share your improvements suggestions on the default templates 😉
+> Don't hesitate to make PRs to share your improvements suggestions on the bundled templates 😉
 
-## Swift 3 support
+## Swift 2 support
 
-As explained above, among other templates, Swift is bundled with a `swift3` template for each of its subcommands.
+As explained above, among other templates, Swift is bundled with a `swift2` template for each of its subcommands.
 
-If you're using Swift 3, don't forget to use `-t swift3` in your invocation of `swiftgen` to tell SwiftGen to use those Swift 3 templates and generate Swift 3 compatible code.
+If you're using Swift 2, we have to warn you that we can no longer provide full support for those templates, as we can no longer test the validity of the generated code. Should you encounter any issues, please don't hesitate to make PRs to share your fixes to the bundled templates.
 
 ## Playground
 
@@ -185,379 +184,45 @@ This allows you to have a quick look at how typical code generated by SwiftGen l
 
 ---
 
-## UIImage and NSImage
+## Asset Catalog
 
 ```sh
-swiftgen images /dir/to/search/for/imageset/assets
+swiftgen assets -t swift3 /dir/to/search/for/imageset/assets
 ```
 
 This will generate an `enum Asset` with one `case` per image asset in your assets catalog, so that you can use them as constants.
 
 <details>
-<summary>Example of code generated by the default template</summary>
+<summary>Example of code generated by the bundled template</summary>
 
 ```swift
-// The Image type below is typealias'ed to UIImage on iOS and NSImage on OSX
-enum Asset: String {
-  case Green_Apple = "Green-Apple"
-  case Red_Apple = "Red apple"
-  case _2_Pears = "2-pears"
-
-  var image: Image {
-    return Image(asset: self)
+enum Asset {
+  enum Exotic {
+    static let banana: AssetType = "Exotic/Banana"
+    static let mango: AssetType = "Exotic/Mango"
   }
+  static let `private`: AssetType = "private"
 }
 
-extension Image {
-  convenience init!(asset: Asset) {
-    self.init(named: asset.rawValue)
-  }
-}
 ```
 </details>
 
 ### Usage Example
 
 ```swift
-let image1 = UIImage(asset: .Banana)   // iOS Prefered way
-let image2 = NSImage(asset: .Banana)   // OS X Prefered way
-let image3 = Asset.Apple.image // Alternate way
+// You can create new images with the convenience constructor like this:
+let bananaImage = UIImage(asset: Asset.Exotic.banana)  // iOS
+let privateImage = NSImage(asset: Asset.private)  // macOS
+
+// Or as an alternative, you can refer to enum instance and call .image on it:
+let sameBananaImage = Asset.Exotic.banana.image
+let samePrivateImage = Asset.private.image
 ```
 
-## Localizable.strings
+## Colors
 
 ```sh
-swiftgen strings /path/to/Localizable.strings
-```
-
-This will generate a Swift `enum L10n` that will map all your `Localizable.strings` keys to an `enum case`. Additionaly, if it detects placeholders like `%@`,`%d`,`%f`, it will add associated values to that `case`.
-
-<details>
-<summary>Example of code generated by the default template</summary>
-
-Given the following `Localizable.strings` file:
-
-```swift
-"alert_title" = "Title of the alert";
-"alert_message" = "Some alert body there";
-"greetings" = "Hello, my name is %@ and I'm %d";
-"apples.count" = "You have %d apples";
-"bananas.owner" = "Those %d bananas belong to %@.";
-```
-
-> _Reminder: Don't forget to end each line in your `*.strings` files with a semicolon `;`! Now that in Swift code we don't need semi-colons, it's easy to forget it's still required by the `Localizable.strings` file format 😉_
-
-The generated code will contain this:
-
-```swift
-enum L10n {
-  /// Title of the alert
-  case AlertTitle
-  /// Some alert body there
-  case AlertMessage
-  /// Hello, my name is %@ and I'm %d
-  case Greetings(String, Int)
-  /// You have %d apples
-  case ApplesCount(Int)
-  /// Those %d bananas belong to %@.
-  case BananasOwner(Int, String)
-}
-
-extension L10n : CustomStringConvertible {
-  var description : String { return self.string }
-
-  var string : String {
-    /* Implementation Details */
-  }
-  ...
-}
-
-func tr(key: L10n) -> String {
-  return key.string
-}
-```
-</details>
-
-### Usage Example
-
-Once the code has been generated by the script, you can use it this way in your Swift code:
-
-```swift
-let title = L10n.AlertTitle.string
-// -> "Title of the Alert"
-
-// Alternative syntax, shorter
-let msg = tr(.AlertMessage)
-// -> "Some alert body there"
-
-// Strings with parameters
-let nbApples = tr(.ApplesCount(5))
-// -> "You have 5 apples"
-
-// More parameters of various types!
-let ban = tr(.BananasOwner(2, "John"))
-// -> "Those 2 bananas belong to John."
-```
-
-### Automatically replace NSLocalizedString(...) calls
-
-This [script](https://gist.github.com/Lutzifer/3e7d967f73e38b57d4355f23274f303d) from [Lutzifer](https://github.com/Lutzifer/) can be run inside the project to transform `NSLocalizedString(...)` calls to the `tr(...)` syntax.
-
-This [script](https://gist.github.com/huguesbr/375730d567020da83836483074a67ff9) from [HuguesBR](https://github.com/huguesbr) can be run inside the (annotated) project to transform specific string (see detail in the gist) syntax to the `tr(...)` syntax as well as populating the `Localizable.strings`'s file
-
-
-### Dot Syntax Support
-
-SwiftGen also has a template with dot syntax support. This is the recommended way of using the `strings` command in SwiftGen and will replace the current default in future versions.
-
-The main advantage of this is a much more useful auto-completion. To use the template simply add the `-t` option, either using the template `dot-syntax` for Swift 2 or `dot-syntax-swift3` if you're using Swift 3:
-
-```sh
-# Swift 2 compatible template
-swiftgen strings -t dot-syntax /path/to/Localizable.strings
-# Swift 3 compatible template
-swiftgen strings -t dot-syntax-swift3 /path/to/Localizable.strings
-```
-
-Given the same `Localizable.strings` as above the usage will now be:
-
-```swift
-let title = L10n.AlertTitle
-// -> "Title of the Alert"
-
-let nbApples = L10n.Apples.Count(5)
-// -> "You have 5 apples"
-
-let ban = L10n.Bananas.Owner(2, "John")
-// -> "Those 2 bananas belong to John."
-```
-
-Note that all dots within the key are converted to dots in code.
-
-The maximum number of dots supported is five (deeper levels are rendered without dots after the fifth level).
-
-
-## UIStoryboard
-
-```sh
-swiftgen storyboards /dir/to/search/for/storyboards
-```
-
-This will generate an `enum` for each of your `UIStoryboard`, with one `case` per storyboard scene.
-
-<details>
-<summary>Example of code generated by the default template</summary>
-
-The generated code will look like this:
-
-```swift
-protocol StoryboardSceneType {
-    static var storyboardName : String { get }
-}
-
-extension StoryboardSceneType {
-    static func storyboard() -> UIStoryboard {
-        return UIStoryboard(name: self.storyboardName, bundle: nil)
-    }
-
-    static func initialViewController() -> UIViewController {
-        return storyboard().instantiateInitialViewController()!
-    }
-}
-
-extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
-    func viewController() -> UIViewController {
-        return Self.storyboard().instantiateViewControllerWithIdentifier(self.rawValue)
-    }
-    static func viewController(identifier: Self) -> UIViewController {
-        return identifier.viewController()
-    }
-}
-
-protocol StoryboardSegueType : RawRepresentable { }
-
-extension UIViewController {
-  func performSegue<S : StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
-    performSegueWithIdentifier(segue.rawValue, sender: sender)
-  }
-}
-
-struct StoryboardScene {
-  enum Message : String, StoryboardSceneType {
-    static let storyboardName = "Message"
-
-    case Composer = "Composer"
-    static func composerViewController() -> UIViewController {
-      return Message.Composer.viewController()
-    }
-
-    case URLChooser = "URLChooser"
-    static func urlChooserViewController() -> XXPickerViewController {
-      return Message.URLChooser.viewController() as! XXPickerViewController
-    }
-  }
-  enum Wizard : String, StoryboardSceneType {
-    static let storyboardName = "Wizard"
-
-    case CreateAccount = "CreateAccount"
-    static func createAccountViewController() -> CreateAccViewController {
-        return Wizard.CreateAccount.viewController() as! CreateAccViewController
-    }
-
-    case ValidatePassword = "Validate_Password"
-    static func validatePasswordViewController() -> UIViewController {
-        return Wizard.ValidatePassword.viewController()
-    }
-  }
-}
-
-struct StoryboardSegue {
-  enum Message : String, StoryboardSegueType {
-    case Back = "Back"
-    case Custom = "Custom"
-    case NonCustom = "NonCustom"
-  }
-}
-```
-</details>
-
-### Usage Example
-
-```swift
-// Initial VC
-let initialVC = StoryboardScene.Wizard.initialViewController()
-// Generic ViewController constructor, returns a UIViewController instance
-let validateVC = StoryboardScene.Wizard.ValidatePassword.viewController()
-// Dedicated type var that returns the right type of VC (CreateAccViewController here)
-let createVC = StoryboardScene.Wizard.createAccountViewController()
-
-override func prepareForSegue(_ segue: UIStoryboardSegue, sender sender: AnyObject?) {
-  switch StoryboardSegue.Message(rawValue: segue.identifier)! {
-  case .Back:
-    // Prepare for your custom segue transition
-  case .Custom:
-    // Prepare for your custom segue transition
-  case .NonCustom:
-    // Prepare for your custom segue transition
-  }
-}
-
-initialVC.performSegue(StoryboardSegue.Message.Back)
-```
-
-## NSStoryboard
-
-```sh
-swiftgen storyboards --template storyboards-osx-default /dir/to/search/for/storyboards
-```
-
-This will generate an `enum` for each of your `NSStoryboard`, with one `case` per storyboard scene.
-
-<details>
-<summary>Example of code generated by the default template</summary>
-
-The generated code will look like this:
-
-```swift
-protocol StoryboardSceneType {
-  static var storyboardName: String { get }
-}
-
-extension StoryboardSceneType {
-  static func storyboard() -> NSStoryboard {
-    return NSStoryboard(name: self.storyboardName, bundle: nil)
-  }
-
-  static func initialController() -> AnyObject {
-    guard let controller = storyboard().instantiateInitialController()
-    else {
-      fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
-    }
-    return controller
-  }
-}
-
-extension StoryboardSceneType where Self: RawRepresentable, Self.RawValue == String {
-  func controller() -> AnyObject {
-    return Self.storyboard().instantiateControllerWithIdentifier(self.rawValue)
-  }
-  static func controller(identifier: Self) -> AnyObject {
-    return identifier.controller()
-  }
-}
-
-protocol StoryboardSegueType: RawRepresentable { }
-
-extension NSWindowController {
-  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
-    performSegueWithIdentifier(segue.rawValue, sender: sender)
-  }
-}
-
-extension NSViewController {
-  func performSegue<S: StoryboardSegueType where S.RawValue == String>(segue: S, sender: AnyObject? = nil) {
-    performSegueWithIdentifier(segue.rawValue, sender: sender)
-  }
-}
-
-struct StoryboardScene {
-  enum Anonymous_Osx: StoryboardSceneType {
-    static let storyboardName = "Anonymous-osx"
-  }
-  enum Message_Osx: String, StoryboardSceneType {
-    static let storyboardName = "Message-osx"
-
-    case MessagesTabScene = "MessagesTab"
-    static func instantiateMessagesTab() -> CustomTabViewController {
-      guard let vc = StoryboardScene.Message_Osx.MessagesTabScene.controller() as? CustomTabViewController
-      else {
-        fatalError("ViewController 'MessagesTab' is not of the expected class CustomTabViewController.")
-      }
-      return vc
-    }
-
-    case WindowCtrlScene = "WindowCtrl"
-    static func instantiateWindowCtrl() -> NSWindowController {
-      guard let vc = StoryboardScene.Message_Osx.WindowCtrlScene.controller() as? NSWindowController
-      else {
-        fatalError("ViewController 'WindowCtrl' is not of the expected class NSWindowController.")
-      }
-      return vc
-    }
-  }
-}
-
-struct StoryboardSegue {
-  enum Message_Osx: String, StoryboardSegueType {
-    case Custom = "Custom"
-    case Embed = "Embed"
-  }
-}
-```
-</details>
-
-### Usage Example
-
-```swift
-// Initial VC
-let initialVC = StoryboardScene.Message_Osx.initialController()
-// Dedicated type var that returns the right type of VC (CustomTabViewController here)
-let messageDetailsVC = StoryboardScene.Message_Osx.instantiateMessageTab()
-override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-    switch StoryboardSegue.Message_Osx(rawValue: segue.identifier!) {
-    case .Custom:
-    // Prepare for your custom segue transition
-    case .Embed:
-        // Prepare for your embed segue transition
-    }
-}
-initialVC.performSegue(StoryboardSegue.Message.Back)
-```
-
-## UIColor and NSColor
-
-```sh
-swiftgen colors /path/to/colors-file.txt
+swiftgen colors -t swift3 /path/to/colors-file.txt
 ```
 
 This will generate a `enum ColorName` with one `case` per color listed in the text file passed as argument.
@@ -572,13 +237,13 @@ The input file is expected to be either:
 For example you can use this command to generate colors from one of your system color lists:
 
 ```sh
-swiftgen colors ~/Library/Colors/MyColors.clr
+swiftgen colors -swift3 ~/Library/Colors/MyColors.clr
 ```
 
 Generated code will look the same as if you'd use text file.
 
 <details>
-<summary>Example of code generated by the default template</summary>
+<summary>Example of code generated by the bundled template</summary>
 
 Given the following `colors.txt` file:
 
@@ -593,34 +258,18 @@ Translucent      : ffffffcc
 The generated code will look like this:
 
 ```swift
-// The Color type below is typealias'ed to UIColor on iOS and NSColor on OSX
-extension Color {
-  /* Private Implementation details */
-  ...
-}
+struct ColorName {
+  let rgbaValue: UInt32
+  var color: Color { return Color(named: self) }
 
-enum ColorName {
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>
   /// Alpha: 100% <br/> (0x339666ff)
-  case ArticleBody
+  static let articleBody = ColorName(rgbaValue: 0x339666ff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
   /// Alpha: 100% <br/> (0xff66ccff)
-  case ArticleFootnote
-  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#33fe66"></span>
-  /// Alpha: 100% <br/> (0x33fe66ff)
-  case ArticleTitle
-  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
-  /// Alpha: 100% <br/> (0xff66ccff)
-  case Cyan_Color
-  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
-  /// Alpha: 80% <br/> (0xffffffcc)
-  case Translucent
-}
+  static let articleFootnote = ColorName(rgbaValue: 0xff66ccff)
 
-extension Color {
-  convenience init(named name: ColorName) {
-    self.init(rgbaValue: name.rgbaValue)
-  }
+  ...
 }
 ```
 </details>
@@ -628,45 +277,35 @@ extension Color {
 ### Usage Example
 
 ```swift
-// iOS
-UIColor(named: .ArticleBody)
-UIColor(named: .ArticleFootnote)
-UIColor(named: .ArticleTitle)
-UIColor(named: .Cyan_Color)
-UIColor(named: .Translucent)
+// You can create colors with the convenience constructor like this:
+let title = UIColor(named: .articleBody)  // iOS
+let footnote = NSColor(named: .articleFootnote) // macOS
 
-// OS X
-NSColor(named: .ArticleBody)
-NSColor(named: .ArticleFootnote)
-NSColor(named: .ArticleTitle)
-NSColor(named: .Cyan_Color)
-NSColor(named: .Translucent)
+// Or as an alternative, you can refer to enum instance and call .color on it:
+let sameTitle = ColorName.articleBody.color
+let sameFootnote = ColorName.articleFootnote.color
 ```
 
 This way, no need to enter the color red, green, blue, alpha values each time and create ugly constants in the global namespace for them.
 
-
-## UIFont and NSFont
+## Fonts
 
 ```sh
-swiftgen fonts /path/to/font/dir
+swiftgen fonts -t swift3 /path/to/font/dir
 ```
 
 This will recursively go through the specified directory, finding any typeface files (TTF, OTF, …), defining a `struct FontFamily` for each family, and an enum nested under that family that will represent the font styles.
 
 <detals>
-<summary>Example of code generated by the default template</summary>
+<summary>Example of code generated by the bundled template</summary>
 
 ```swift
-// The Font type below is typealias'ed to UIFont on iOS and NSFont on OSX
-struct FontFamily {
-  enum Helvetica: String {
-    case Regular = "Helvetica"
-    case Bold = "Helvetica-Bold"
-    case Thin = "Helvetica-Thin"
-    case Medium = "Helvetica-Medium"
-
-    func font(size: CGFloat) -> Font? { return Font(name:self.rawValue, size:size)}
+enum FontFamily {
+  enum SFNSDisplay: String, FontConvertible {
+    static let regular = FontConvertible(name: ".SFNSDisplay-Regular", family: ".SF NS Display", path: "SFNSDisplay-Regular.otf")
+  }
+  enum ZapfDingbats: String, FontConvertible {
+    static let regular = FontConvertible(name: "ZapfDingbatsITC", family: "Zapf Dingbats", path: "ZapfDingbats.ttf")
   }
 }
 ```
@@ -675,11 +314,164 @@ struct FontFamily {
 ### Usage
 
 ```swift
-// Helvetica Bold font of point size 16.0
-let font = FontFamily.Helvetica.Bold.font(16.0)
-// Another way to build the same font
-let sameFont = UIFont(font: FontFamily.Helvetica.Bold, size: 16.0) // iOS
-let sameFont = NSFont(font: FontFamily.Helvetica.Bold, size: 16.0) // OS X
+// You can create fonts with the convenience constructor like this:
+let displayRegular = UIFont(font: FontFamily.SFNSDisplay.regular, size: 20.0) // iOS
+let dingbats = NSFont(font: FontFamily.ZapfDingbats.regular, size: 20.0)  // macOS
+
+// Or as an alternative, you can refer to enum instance and call .font on it:
+let sameDisplayRegular = FontFamily.SFNSDisplay.regular.font(size: 20.0)
+let sameDingbats = FontFamily.ZapfDingbats.regular.font(size: 20.0)
+```
+
+## Storyboards
+
+```sh
+swiftgen storyboards -t swift3 /dir/to/search/for/storyboards
+```
+
+This will generate an `enum` for each of your `NSStoryboard`/`UIStoryboard`, with one `case` per storyboard scene.
+
+<details>
+<summary>Example of code generated by the bundled template</summary>
+
+The generated code will look like this:
+
+```swift
+enum StoryboardScene {
+  enum Dependency: StoryboardType {
+    static let storyboardName = "Dependency"
+
+    static let dependent = SceneType<UIViewController>(storyboard: Dependency.self, identifier: "Dependent")
+  }
+  enum Message: StoryboardType {
+    static let storyboardName = "Message"
+
+    static let messagesList = SceneType<UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
+  }
+}
+
+enum StoryboardSegue {
+  enum Message: String, SegueType {
+    case embed
+    case nonCustom
+  }
+}
+```
+</details>
+
+### Usage Example
+
+```swift
+// You can instantiate scenes using the `controller` property:
+let vc = StoryboardScene.Dependency.dependent.controller
+
+// You can perform segues using:
+vc.perform(segue: StoryboardSegue.Message.embed)
+
+// or match them (in prepareForSegue):
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+  switch StoryboardSegue.Message(rawValue: segue.identifier!)! {
+  case .embed:
+    // Prepare for your custom segue transition
+  case .nonCustom:
+    // Pass in information to the destination View Controller
+  }
+}
+```
+
+## Strings
+
+```sh
+swiftgen strings -t structured-swift3 /path/to/Localizable.strings
+```
+
+This will generate a Swift `enum L10n` that will map all your `Localizable.strings` (or other tables) keys to an `enum case`. Additionaly, if it detects placeholders like `%@`,`%d`,`%f`, it will add associated values to that `case`. Note that all dots within the key are converted to dots in code.
+
+<details>
+<summary>Example of code generated by the structured bundled template</summary>
+
+Given the following `Localizable.strings` file:
+
+```swift
+"alert_title" = "Title of the alert";
+"alert_message" = "Some alert body there";
+"apples.count" = "You have %d apples";
+"bananas.owner" = "Those %d bananas belong to %@.";
+```
+
+> _Reminder: Don't forget to end each line in your `*.strings` files with a semicolon `;`! Now that in Swift code we don't need semi-colons, it's easy to forget it's still required by the `Localizable.strings` file format 😉_
+
+The generated code will contain this:
+
+```swift
+enum L10n {
+  /// Some alert body there
+  static let alertMessage = L10n.tr("alert_message")
+  /// Title of the alert
+  static let alertTitle = L10n.tr("alert_title")
+
+  enum Apples {
+    /// You have %d apples
+    static func count(_ p1: Int) -> String {
+      return L10n.tr("apples.count", p1)
+    }
+  }
+
+  enum Bananas {
+    /// Those %d bananas belong to %@.
+    static func owner(_ p1: Int, _ p2: String) -> String {
+      return L10n.tr("bananas.owner", p1, p2)
+    }
+  }
+}
+```
+</details>
+
+### Usage Example
+
+Once the code has been generated by the script, you can use it this way in your Swift code:
+
+```swift
+// Simple strings
+let message = L10n.alertMessage
+let title = L10n.alertTitle
+
+// with parameters, note that each argument needs to be of the correct type
+let apples = L10n.Apples.count(3)
+let bananas = L10n.Bananas.owner(5, "Olivier")
+```
+
+### Flat Strings Support
+
+SwiftGen also has a template to support flat strings files (i.e. no dot syntax). The advantage is that your keys won't be mangled in any way, the disadvantage is worse auto-completion.
+
+<details>
+<summary>Example of code generated by the flat bundled template</summary>
+
+```swift
+enum L10n {
+  /// Some alert body there
+  case alertMessage
+  /// Title of the alert
+  case alertTitle
+  /// You have %d apples
+  case applesCount(Int)
+  /// Those %d bananas belong to %@.
+  case bananasOwner(Int, String)
+}
+```
+</details>
+
+Given the same `Localizable.strings` as above the usage will now be:
+
+```swift
+// Simple strings
+let message = L10n.alertMessage
+let title = L10n.alertTitle
+
+// with parameters, note that each argument needs to be of the correct type
+let apples = L10n.applesCount(3)
+let bananas = L10n.bananasOwner(5, "Olivier")
 ```
 
 ---
