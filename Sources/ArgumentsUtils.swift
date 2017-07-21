@@ -80,7 +80,6 @@ enum TemplateError: Error, CustomStringConvertible {
   case templatePathNotFound(path: Path)
   case noTemplateProvided
   case multipleTemplateOptions(path: String, name: String)
-  case deprecated(option: String, replacement: String)
 
   var description: String {
     switch self {
@@ -97,8 +96,6 @@ enum TemplateError: Error, CustomStringConvertible {
     case let .multipleTemplateOptions(path, name):
       return "You need to choose EITHER a named template (--template option) " +
       "OR a template path (option --templatePath). Found name '\(name)' and path '\(path)'"
-    case .deprecated(let option, let replacement):
-      return "The option '--\(option)' has been deprecated. \(replacement)"
     }
   }
 }
