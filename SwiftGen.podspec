@@ -6,10 +6,11 @@ Pod::Spec.new do |s|
 
   s.description  = <<-DESC
                    A collection of Swift tools to generate Swift code constants (enums or static lets) for:
-                   * image assets,
+                   * asset catalogs,
+                   * colors,
+                   * fonts
+                   * localized strings,
                    * storyboards,
-                   * colors
-                   * localized strings
                    * … and more
                    DESC
 
