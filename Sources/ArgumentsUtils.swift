@@ -90,11 +90,10 @@ enum TemplateError: Error, CustomStringConvertible {
     case .templatePathNotFound(let path):
       return "Template not found at path \(path.description)."
     case .noTemplateProvided:
-      return "A template must be chosen either via its name using the '-t' / '--template' option" +
-      " or via its path using the '-p' / '--templatePath' option.\n" +
-      "There's no 'default' template anymore: you can still access a bundled template but " +
-      "you have to explicitly specify its name using '-t'.\n" +
-      "To list all the available named templates, you can use the 'swiftgen templates list' command."
+      return "A template must be chosen either via its name using '-t' or via its path using '-p'.\n\n" +
+      "Note: there's no 'default' template anymore: you can still access a bundled template but " +
+      "you have to specify its name explicitly using '-t'.\n" +
+      "To list all the available named templates, use 'swiftgen templates list'."
     case let .multipleTemplateOptions(path, name):
       return "You need to choose EITHER a named template (--template option) " +
       "OR a template path (option --templatePath). Found name '\(name)' and path '\(path)'"

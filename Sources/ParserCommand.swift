@@ -56,8 +56,10 @@ public struct ParserCommand {
         let enriched = try StencilContext.enrich(context: context, parameters: parameters)
         let rendered = try template.render(enriched)
         output.write(content: rendered, onlyIfChanged: true)
-      } catch {
-        printError(string: "error: failed to render template \(error)")
+      } catch let error as TemplateError {
+        printError(string: "error: \(error)")
+      } catch let error {
+        printError(string: "error: failed to render template: \(error)")
       }
     }
   }
