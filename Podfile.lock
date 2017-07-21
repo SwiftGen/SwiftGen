@@ -4,9 +4,9 @@ PODS:
   - PathKit (0.8.0)
   - Stencil (0.9.0):
     - PathKit (~> 0.8.0)
-  - StencilSwiftKit (1.0.2):
+  - StencilSwiftKit (2.0.0):
     - Stencil (~> 0.9.0)
-  - SwiftGenKit (1.1.0):
+  - SwiftGenKit (2.0.0):
     - Kanna
     - PathKit (~> 0.8.0)
 
@@ -14,32 +14,17 @@ DEPENDENCIES:
   - Commander (~> 0.6.0)
   - PathKit (~> 0.8.0)
   - Stencil (~> 0.9.0)
-  - StencilSwiftKit (from `git@github.com:SwiftGen/StencilSwiftKit.git`)
-  - SwiftGenKit (from `git@github.com:SwiftGen/SwiftGenKit.git`, branch `feature/parser-protocol`)
-
-EXTERNAL SOURCES:
-  StencilSwiftKit:
-    :git: git@github.com:SwiftGen/StencilSwiftKit.git
-  SwiftGenKit:
-    :branch: feature/parser-protocol
-    :git: git@github.com:SwiftGen/SwiftGenKit.git
-
-CHECKOUT OPTIONS:
-  StencilSwiftKit:
-    :commit: 10a138c481881024708d1add8d2356c7744712e9
-    :git: git@github.com:SwiftGen/StencilSwiftKit.git
-  SwiftGenKit:
-    :commit: 968314c0e288a2f855eff088158d358b8a9663cd
-    :git: git@github.com:SwiftGen/SwiftGenKit.git
+  - StencilSwiftKit (~> 2.0)
+  - SwiftGenKit (~> 2.0)
 
 SPEC CHECKSUMS:
   Commander: fba7c96c9e787ecc8ebe0737be875e1e18ef47ff
   Kanna: 182789ab065e8f9a6ccc2a74ce6283d3401c0c4a
   PathKit: dcab05d701474011aae0e40cf892298a831f63d6
   Stencil: 510f0b0518a366b67b6a9c5085a0399741b6d2f9
-  StencilSwiftKit: 6d5b0c7fbb185edb24617fdd63ab0d9938569c8a
-  SwiftGenKit: e05a57c399688f1e37bd2fbed932c055efb34cf3
+  StencilSwiftKit: b7a2b68d14544d510f21cf034f550cf07bb119bc
+  SwiftGenKit: cc5442a21a4567c85d37bcf93f307b8fc2416c8f
 
-PODFILE CHECKSUM: 5e30f6fd0cd33c097bfa7a9a2e288fffc972aef0
+PODFILE CHECKSUM: 677badba5684c50f1b2ab71abf7b875bdcd6ff40
 
 COCOAPODS: 1.2.1

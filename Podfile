@@ -2,10 +2,10 @@ platform :osx, '10.9'
 use_frameworks!
 
 def common_pods
-  pod 'SwiftGenKit', :git => 'git@github.com:SwiftGen/SwiftGenKit.git', :branch => 'feature/parser-protocol'
+  pod 'SwiftGenKit', '~> 2.0'
   pod 'PathKit', '~> 0.8.0', :inhibit_warnings => true
   pod 'Stencil', '~> 0.9.0', :inhibit_warnings => true
-  pod 'StencilSwiftKit', :git => 'git@github.com:SwiftGen/StencilSwiftKit.git'
+  pod 'StencilSwiftKit', '~> 2.0'
 end
 
 target 'swiftgen' do
