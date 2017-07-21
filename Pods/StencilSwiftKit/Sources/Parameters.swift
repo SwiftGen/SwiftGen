@@ -6,10 +6,6 @@
 
 import Foundation
 
-// For retro-compatibility. Remove in next major.
-@available(*, deprecated, renamed: "Parameters.Error", message: "Use the Parameters.Error nested type instead")
-public typealias ParametersError = Parameters.Error
-
 /// Namespace to handle extra context parameters passed as a list of `foo=bar` strings.
 /// Typically used when parsing command-line arguments one by one
 /// (like `foo=bar pt.x=1 pt.y=2 values=1 values=2 values=3 flag`)

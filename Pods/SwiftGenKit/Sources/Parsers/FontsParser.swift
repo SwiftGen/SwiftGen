@@ -74,20 +74,29 @@ extension CTFont {
 
 // MARK: FontsFileParser
 
-public final class FontsFileParser {
-  public var entries: [String: Set<Font>] = [:]
+public final class FontsParser: Parser {
+  var entries: [String: Set<Font>] = [:]
+  public var warningHandler: Parser.MessageHandler?
 
-  public init() {}
+  public static let commandInfo = CommandInfo(
+    name: "fonts",
+    description: "generate code for your fonts",
+    pathDescription: "Directory(ies) to parse."
+  )
 
-  public func parseFile(at path: Path) {
+  public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
+    self.warningHandler = warningHandler
+  }
+
+  public func parse(path: Path) {
     let dirChildren = path.iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
     for file in dirChildren {
       var value: AnyObject? = nil
       let url = file.url as NSURL
-      guard let _ = try? url.getResourceValue(&value, forKey: URLResourceKey.typeIdentifierKey),
-        let uti = value as? String else {
-          print("Unable to determine the Universal Type Identifier for file \(file)")
-          continue
+      try? url.getResourceValue(&value, forKey: URLResourceKey.typeIdentifierKey)
+      guard let uti = value as? String else {
+        warningHandler?("Unable to determine the Universal Type Identifier for file \(file)", #file, #line)
+        continue
       }
       guard UTTypeConformsTo(uti as CFString, "public.font" as CFString) else { continue }
       let fonts = CTFont.parse(file: file, relativeTo: path)

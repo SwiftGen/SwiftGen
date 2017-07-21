@@ -28,60 +28,36 @@ private extension String {
        - `types`: `Array<String>` — defined only if localized string has parameter placeholders like `%d` and `%@` etc.
           Contains a list of types like `"String"`, `"Int"`, etc
 */
-extension StringsFileParser {
-  public func stencilContext(enumName: String = "L10n", tableName: String = "Localizable") -> [String: Any] {
-
+extension StringsParser {
+  public func stencilContext() -> [String: Any] {
     let entryToStringMapper = { (entry: Entry, keyPath: [String]) -> [String: Any] in
-      var keyStructure = entry.keyStructure
-      Array(0..<keyPath.count).forEach { _ in keyStructure.removeFirst() }
-      let levelName = keyStructure.joined(separator: ".")
+      let levelName = entry.keyStructure.last ?? ""
 
       var result: [String: Any] = [
         "name": levelName,
         "key": entry.key.newlineEscaped,
-        "translation": entry.translation.newlineEscaped,
-
-        // NOTE: keytail is deprecated
-        "keytail": levelName
+        "translation": entry.translation.newlineEscaped
       ]
 
       if entry.types.count > 0 {
         result["types"] = entry.types.map { $0.rawValue }
-
-        // NOTE: params is deprecated
-        result["params"] = [
-          "types": entry.types.map { $0.rawValue },
-          "count": entry.types.count,
-          "declarations": entry.types.indices.map { "let p\($0)" },
-          "names": entry.types.indices.map { "p\($0)" },
-          "typednames": entry.types.enumerated().map { "p\($0): \($1.rawValue)" }
-        ]
       }
 
       return result
     }
 
-    let strings = entries
-      .sorted { $0.key.caseInsensitiveCompare($1.key) == .orderedAscending }
-      .map { entryToStringMapper($0, []) }
-    let structuredStrings = structure(
-      entries: entries,
-      usingMapper: entryToStringMapper
-    )
-    let tables: [[String: Any]] = [[
-      "name": tableName,
-      "levels": structuredStrings
-    ]]
+    let tables = self.tables.map { name, entries in
+      return [
+        "name": name,
+        "levels": structure(
+          entries: entries,
+          usingMapper: entryToStringMapper
+        )
+      ]
+    }
 
     return [
-      "tables": tables,
-
-      // NOTE: These are deprecated variables
-      "enumName": enumName,
-      "param": ["enumName": enumName],
-      "strings": strings,
-      "structuredStrings": structuredStrings,
-      "tableName": tableName
+      "tables": tables
     ]
   }
 
@@ -139,9 +115,6 @@ extension StringsFileParser {
 
     if !children.isEmpty {
       structuredStrings["children"] = children
-
-      // NOTE: These are deprecated variables
-      structuredStrings["subenums"] = children
     }
 
     return structuredStrings

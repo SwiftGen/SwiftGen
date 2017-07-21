@@ -15,8 +15,8 @@ import Foundation
      - `style`: `String` — the designer's description of the font's style, like "bold", "oblique", …
 */
 
-extension FontsFileParser {
-  public func stencilContext(enumName: String = "FontFamily") -> [String: Any] {
+extension FontsParser {
+  public func stencilContext() -> [String: Any] {
     // turn into array of dictionaries
     let families = entries.map { (name: String, family: Set<Font>) -> [String: Any] in
       let fonts = family.map { (font: Font) -> [String: String] in
@@ -24,12 +24,9 @@ extension FontsFileParser {
         return [
           "name": font.postScriptName,
           "path": font.filePath,
-          "style": font.style,
-
-          // NOTE: This is a deprecated variable
-          "fontName": font.postScriptName
+          "style": font.style
         ]
-      }.sorted { $0["fontName"] ?? "" < $1["fontName"] ?? "" }
+      }.sorted { $0["name"] ?? "" < $1["name"] ?? "" }
       // Family
       return [
         "name": name,
@@ -38,11 +35,7 @@ extension FontsFileParser {
     }.sorted { $0["name"] as? String ?? "" < $1["name"] as? String ?? "" }
 
     return [
-      "families": families,
-
-      // NOTE: This is a deprecated variable
-      "enumName": enumName,
-      "param": ["enumName": enumName]
+      "families": families
     ]
   }
 }
