@@ -1,6 +1,8 @@
 # Used constants:
 # none
 
+require 'octokit'
+
 namespace :changelog do
   desc 'Add the empty CHANGELOG entries after a new release'
   task :reset do |task|
@@ -48,5 +50,16 @@ namespace :changelog do
     else
       puts "\u{274C}  Some wrong links found:\n" + all_wrong_links.join("\n")
     end
+  end
+
+  desc "Push the CHANGELOG's top section as a GitHub release"
+  task :push_github_release do
+    client = Utils.octokit_client
+    tag = Utils.top_changelog_version
+    body = Utils.top_changelog_entry
+
+    repo_url = `git remote -v | grep push`.split(' ')[1]
+    repo_name = File.basename(repo_url, '.git')
+    client.create_release("SwiftGen/#{repo_name}", tag, :body => body)
   end
 end
