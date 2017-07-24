@@ -132,7 +132,7 @@ The tool is provided as a unique `swiftgen` binary command-line, with the follow
 * `swiftgen fonts [OPTIONS] DIR1 …`
 * `swiftgen storyboards [OPTIONS] DIR1 …`
 * `swiftgen strings [OPTIONS] FILE1 …`
-* `swiftgen xcassets [OPTIONS] FILE1 …`
+* `swiftgen xcassets [OPTIONS] CATALOG1 …`
 
 Each subcommand has its own option and syntax, but some options are common to all:
 
