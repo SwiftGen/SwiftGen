@@ -19,7 +19,7 @@ _None_
 * Templates are now grouped by subcommand on the filesystem. This is only important if you had custom templates in the `Application Support` directory. To migrate your templates, place them in a subfolder with the name of the subcommand, and remove the prefix of the template filename.
   [David Jennes](https://github.com/djbe)
   [#304](https://github.com/SwiftGen/SwiftGen/issues/304)
-# The `images` command has been renamed to `xcassets` to better reflect it's functionality.  
+# The `images` command has been renamed to `xcassets` to better reflect its functionality.  
   [Olivier Halligon](https://github.com/alisoftware)
   [#317](https://github.com/SwiftGen/SwiftGen/issues/317)
 

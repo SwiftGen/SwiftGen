@@ -139,6 +139,7 @@ Each subcommand has its own option and syntax, but some options are common to al
 * `--output FILE` or `-o FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
 * `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](https://github.com/SwiftGen/templates) to generate the output.
 * `--templatePath PATH` or `-p PATH`: define the Stencil template to use, using a full path.
+* Note: you should specify one and one template when invoking SwiftGen. You have to use either `-t` or `-p` but should not use both at the same time (it wouldn't make sense anyway and you'll get an error if you try)
 * Each command supports multiple input files (or directories where applicable).
 
 You can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
@@ -159,13 +160,15 @@ SwiftGen is based on templates (it uses [Stencil](https://github.com/kylef/Stenc
 
 SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `fonts`, `storyboards`, `strings`, `xcassets`), but you can also create your own templates if the bundled ones don't suit your coding conventions or needs. Simply use the `-t` / `--template` option to specify the name of the template to use, or store them somewhere else (like in your project repository) and use `-p` / `--templatePath` to specify a full path.
 
-💡 You can use the `swiftgen templates` command to list all the available templates (both custom and bundled templates) for each subcommand, list the template content and dupliate them to create your own.
+💡 You can use the `swiftgen templates list` command to list all the available templates (both custom and bundled templates) for each subcommand, list the template content and dupliate them to create your own.
 
 ### Templates bundled with SwiftGen include:
 
 * A `swift2` template, compatible with Swift 2
 * A `swift3` template, compatible with Swift 3
 * Other variants, like `flat-swift2/3` and `structured-swift2/3` templates for Strings.
+
+ℹ️ [Templates compatible with Swift 4 will be coming soon](https://github.com/SwiftGen/templates/issues/63) — but you can already create your own custom one if you can't wait for the next release — that's the beauty of SwiftGen being based on templates after all
 
 For more information about how to create your own templates, [see the dedicated documentation](https://github.com/SwiftGen/templates/blob/master/Documentation/Creating-your-templates.md).
 
