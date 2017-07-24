@@ -12,38 +12,38 @@ import UIKit.UIColor
 typealias Color = UIColor
 
 extension Color {
-	convenience init(rgbaValue: UInt32) {
-		let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0
-		let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0
-		let blue  = CGFloat((rgbaValue >>  8) & 0xff) / 255.0
-		let alpha = CGFloat((rgbaValue      ) & 0xff) / 255.0
-		
-		self.init(red: red, green: green, blue: blue, alpha: alpha)
-	}
+  convenience init(rgbaValue: UInt32) {
+    let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0
+    let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0
+    let blue  = CGFloat((rgbaValue >>  8) & 0xff) / 255.0
+    let alpha = CGFloat((rgbaValue      ) & 0xff) / 255.0
+    
+    self.init(red: red, green: green, blue: blue, alpha: alpha)
+  }
 }
 
 struct ColorName {
-	let rgbaValue: UInt32
-	var color: Color { return Color(named: self) }
-	
-	/// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>
-	/// Alpha: 100% <br/> (0x339666ff)
-	static let articleBody = ColorName(rgbaValue: 0x339666ff)
-	/// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
-	/// Alpha: 100% <br/> (0xff66ccff)
-	static let articleFootnote = ColorName(rgbaValue: 0xff66ccff)
-	/// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#33fe66"></span>
-	/// Alpha: 100% <br/> (0x33fe66ff)
-	static let articleTitle = ColorName(rgbaValue: 0x33fe66ff)
-	/// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
-	/// Alpha: 80% <br/> (0xffffffcc)
-	static let `private` = ColorName(rgbaValue: 0xffffffcc)
+  let rgbaValue: UInt32
+  var color: Color { return Color(named: self) }
+  
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>
+  /// Alpha: 100% <br/> (0x339666ff)
+  static let articleBody = ColorName(rgbaValue: 0x339666ff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
+  /// Alpha: 100% <br/> (0xff66ccff)
+  static let articleFootnote = ColorName(rgbaValue: 0xff66ccff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#33fe66"></span>
+  /// Alpha: 100% <br/> (0x33fe66ff)
+  static let articleTitle = ColorName(rgbaValue: 0x33fe66ff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
+  /// Alpha: 80% <br/> (0xffffffcc)
+  static let `private` = ColorName(rgbaValue: 0xffffffcc)
 }
 
 extension Color {
-	convenience init(named color: ColorName) {
-		self.init(rgbaValue: color.rgbaValue)
-	}
+  convenience init(named color: ColorName) {
+    self.init(rgbaValue: color.rgbaValue)
+  }
 }
 
 //: #### Usage Example

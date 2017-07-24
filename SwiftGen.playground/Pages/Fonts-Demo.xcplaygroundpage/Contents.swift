@@ -12,28 +12,28 @@ import UIKit.UIFont
 typealias Font = UIFont
 
 struct FontConvertible {
-	let name: String
-	let family: String
-	let path: String
-	
-	func font(size: CGFloat) -> Font! {
-		return Font(font: self, size: size)
-	}
-	
-	func register() {
-		let bundle = Bundle(for: BundleToken.self)
-		
-		guard let url = bundle.url(forResource: path, withExtension: nil) else {
-			return
-		}
-		
-		var errorRef: Unmanaged<CFError>?
-		CTFontManagerRegisterFontsForURL(url as CFURL, .process, &errorRef)
-	}
+  let name: String
+  let family: String
+  let path: String
+  
+  func font(size: CGFloat) -> Font! {
+    return Font(font: self, size: size)
+  }
+  
+  func register() {
+    let bundle = Bundle(for: BundleToken.self)
+    
+    guard let url = bundle.url(forResource: path, withExtension: nil) else {
+      return
+    }
+    
+    var errorRef: Unmanaged<CFError>?
+    CTFontManagerRegisterFontsForURL(url as CFURL, .process, &errorRef)
+  }
 }
 
 extension Font {
-	convenience init!(font: FontConvertible, size: CGFloat) {
+  convenience init!(font: FontConvertible, size: CGFloat) {
     #if os(iOS) || os(tvOS) || os(watchOS)
     if UIFont.fontNames(forFamilyName: font.family).isEmpty {
       font.register()
@@ -54,8 +54,8 @@ struct FontFamily {
         static let bold = FontConvertible(name: "Helvetica-Bold", family: "Helvetica", path: "Helvetica-Bold.ttf")
     }
     enum HelveticaNeue {
-		static let regular = FontConvertible(name: "HelveticaNeue", family: "HelveticaNeue", path: "HelveticaNeue.ttf")
-		static let bold = FontConvertible(name: "HelveticaNeue-Bold", family: "HelveticaNeue", path: "HelveticaNeue-Bold.ttf")
+    static let regular = FontConvertible(name: "HelveticaNeue", family: "HelveticaNeue", path: "HelveticaNeue.ttf")
+    static let bold = FontConvertible(name: "HelveticaNeue-Bold", family: "HelveticaNeue", path: "HelveticaNeue-Bold.ttf")
     }
 }
 

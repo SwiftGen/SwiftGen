@@ -18,40 +18,40 @@ protocol StoryboardType {
 }
 
 extension StoryboardType {
-	static var storyboard: UIStoryboard {
-		return UIStoryboard(name: self.storyboardName, bundle: Bundle(for: BundleToken.self))
-	}
+  static var storyboard: UIStoryboard {
+    return UIStoryboard(name: self.storyboardName, bundle: Bundle(for: BundleToken.self))
+  }
 }
 
 struct SceneType<T: Any> {
-	let storyboard: StoryboardType.Type
-	let identifier: String
-	
-	var controller: T {
-		guard let controller = storyboard.storyboard.instantiateViewController(withIdentifier: identifier) as? T else {
-			fatalError("Controller '\(identifier)' is not of the expected class \(T.self).")
-		}
-		return controller
-	}
+  let storyboard: StoryboardType.Type
+  let identifier: String
+  
+  var controller: T {
+    guard let controller = storyboard.storyboard.instantiateViewController(withIdentifier: identifier) as? T else {
+      fatalError("Controller '\(identifier)' is not of the expected class \(T.self).")
+    }
+    return controller
+  }
 }
 
 struct InitialSceneType<T: Any> {
-	let storyboard: StoryboardType.Type
-	
-	var controller: T {
-		guard let controller = storyboard.storyboard.instantiateInitialViewController() as? T else {
-			fatalError("Controller is not of the expected class \(T.self).")
-		}
-		return controller
-	}
+  let storyboard: StoryboardType.Type
+  
+  var controller: T {
+    guard let controller = storyboard.storyboard.instantiateInitialViewController() as? T else {
+      fatalError("Controller is not of the expected class \(T.self).")
+    }
+    return controller
+  }
 }
 
 protocol SegueType: RawRepresentable { }
 
 extension UIViewController {
-	func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
-		performSegue(withIdentifier: segue.rawValue, sender: sender)
-	}
+  func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
+    performSegue(withIdentifier: segue.rawValue, sender: sender)
+  }
 }
 
 struct StoryboardScene {
@@ -62,11 +62,11 @@ struct StoryboardScene {
 
         static let acceptCGU = SceneType<UIViewController>(storyboard: Wizard.self, identifier: "Accept-CGU")
 
-		static let createAccount = SceneType<UIViewController>(storyboard: Wizard.self, identifier: "CreateAccount")
-		
-		static let preferences = SceneType<UITableViewController>(storyboard: Wizard.self, identifier: "Preferences")
-		
-		static let validatePassword = SceneType<UIViewController>(storyboard: Wizard.self, identifier: "Validate_Password")
+    static let createAccount = SceneType<UIViewController>(storyboard: Wizard.self, identifier: "CreateAccount")
+    
+    static let preferences = SceneType<UITableViewController>(storyboard: Wizard.self, identifier: "Preferences")
+    
+    static let validatePassword = SceneType<UIViewController>(storyboard: Wizard.self, identifier: "Validate_Password")
     }
 }
 
