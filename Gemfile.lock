@@ -2,14 +2,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.5)
-    activesupport (4.2.8)
+    activesupport (4.2.9)
       i18n (~> 0.7)
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
-    claide (1.0.1)
+    claide (1.0.2)
     cocoapods (1.2.1)
       activesupport (>= 4.0.2, < 5)
       claide (>= 1.0.1, < 2.0)
@@ -50,8 +50,8 @@ GEM
     fourflusher (2.0.1)
     fuzzy_match (2.0.4)
     gh_inspector (1.0.3)
-    i18n (0.8.1)
-    minitest (5.10.1)
+    i18n (0.8.6)
+    minitest (5.10.3)
     molinillo (0.5.7)
     multipart-post (2.0.0)
     nanaimo (0.2.3)
@@ -60,7 +60,8 @@ GEM
     octokit (4.7.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     public_suffix (2.0.5)
-    rouge (1.11.1)
+    rake (12.0.0)
+    rouge (2.0.7)
     ruby-macho (1.1.0)
     sawyer (0.8.1)
       addressable (>= 2.3.5, < 2.6)
@@ -68,20 +69,21 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
-    xcodeproj (1.4.4)
+    xcodeproj (1.5.1)
       CFPropertyList (~> 2.3.3)
-      claide (>= 1.0.1, < 2.0)
+      claide (>= 1.0.2, < 2.0)
       colored2 (~> 3.1)
       nanaimo (~> 0.2.3)
-    xcpretty (0.2.6)
-      rouge (~> 1.8)
+    xcpretty (0.2.8)
+      rouge (~> 2.0.7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   cocoapods (= 1.2.1)
-  octokit
+  octokit (~> 4.7)
+  rake
   xcpretty
 
 BUNDLED WITH

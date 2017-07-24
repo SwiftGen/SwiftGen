@@ -10,14 +10,14 @@ checkout:
 
 dependencies:
   post:
-    - rake lint:install
+    - bundle exec rake lint:install
     - curl -sS https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash
 
 test:
   override:
-    - rake lint:code
-    - rake cli:install[./standalone,./standalone/frameworks,./standalone/stencils]
+    - bundle exec rake lint:code
+    - bundle exec rake cli:install[./standalone,./standalone/frameworks,./standalone/stencils]
   post:
     - ./standalone/swiftgen --version
     - ./standalone/swiftgen templates list
-    - rake pod:lint
+    - bundle exec rake pod:lint
