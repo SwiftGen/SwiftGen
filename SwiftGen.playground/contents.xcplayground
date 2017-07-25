@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <playground version='6.0' target-platform='ios' display-mode='rendered'>
     <pages>
-        <page name='Strings-Demo'/>
-        <page name='Images-Demo'/>
-        <page name='Storyboards-Demo'/>
         <page name='Colors-Demo'/>
         <page name='Fonts-Demo'/>
+        <page name='Storyboards-Demo'/>
+        <page name='Strings-Demo'/>
+        <page name='XCAssets-Demo'/>
     </pages>
 </playground>
