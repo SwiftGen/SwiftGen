@@ -10,15 +10,18 @@ _None_
 
 ### Breaking Changes
 
-* Removed deprecated CLI options. Should you still use them, SwiftGen will return an error and show the new recommended CLI option to use instead.
+* Removed deprecated CLI options. Please consult the migration guide should you still use them.  
   [David Jennes](https://github.com/djbe)
-  [#301](https://github.com/SwiftGen/SwiftGenKit/issues/301)
+  [#301](https://github.com/SwiftGen/SwiftGen/issues/301)
 * Disable default value for named template option and ensure that there is a template option.  
   [Liquidsoul](https://github.com/liquidsoul)
   [#283](https://github.com/SwiftGen/SwiftGen/issues/283)
 * Templates are now grouped by subcommand on the filesystem. This is only important if you had custom templates in the `Application Support` directory. To migrate your templates, place them in a subfolder with the name of the subcommand, and remove the prefix of the template filename.
   [David Jennes](https://github.com/djbe)
-  [#304](https://github.com/SwiftGen/SwiftGenKit/issues/304)
+  [#304](https://github.com/SwiftGen/SwiftGen/issues/304)
+# The `images` command has been renamed to `xcassets` to better reflect its functionality.  
+  [Olivier Halligon](https://github.com/alisoftware)
+  [#317](https://github.com/SwiftGen/SwiftGen/issues/317)
 
 ### New Features
 
@@ -28,7 +31,7 @@ _None_
 
 * Improved installation instructions in the README.  
   [Olivier Halligon](https://github.com/alisoftware)
-  [#303](https://github.com/SwiftGen/SwiftGenKit/issues/303)
+  [#303](https://github.com/SwiftGen/SwiftGen/issues/303)
 
 ## 4.2.1
 

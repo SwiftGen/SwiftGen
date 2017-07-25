@@ -124,8 +124,8 @@ namespace :playground do
     sh 'rm -rf SwiftGen.playground/Resources'
     sh 'mkdir SwiftGen.playground/Resources'
   end
-  task :images do
-    Utils.run(%Q(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text Resources/Fixtures/Images/Images.xcassets), task, xcrun: true)
+  task :xcassets do
+    Utils.run(%Q(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text Resources/Fixtures/XCAssets/Images.xcassets), task, xcrun: true)
   end
   task :storyboard do
     Utils.run(%Q(ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO Resources/Fixtures/Storyboards-iOS/Wizard.storyboard), task, xcrun: true)
@@ -135,5 +135,5 @@ namespace :playground do
   end
 
   desc "Regenerate all the Playground resources based on the test fixtures.\nThis compiles the needed fixtures and place them in SwiftGen.playground/Resources"
-  task :resources => %w(clean images storyboard strings)
+  task :resources => %w(clean xcassets storyboard strings)
 end
