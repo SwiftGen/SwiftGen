@@ -8,6 +8,11 @@ namespace :lint do
   task :install do |task|
     next if check_version()
 
+    if not system('tty >/dev/null')
+      puts "warning: Unable to install SwiftLint #{SWIFTLINT_VERSION} without a terminal. Please run 'bundle exec rake lint:install' from a terminal."
+      next
+    end
+
     url = "https://github.com/realm/SwiftLint/releases/download/#{SWIFTLINT_VERSION}/SwiftLint.pkg"
     tmppath = '/tmp/SwiftLint.pkg'
 
