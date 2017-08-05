@@ -4,9 +4,9 @@
 
 ## 5.0.0
 
-⚠️ This major version is a big milestone in which a lot of refactoring and cleaning has been done. This means that you'll need to adapt your command line invocations and custom templates to work with this new major version
+⚠️ This major version is a big milestone in which a lot of refactoring and cleaning has been done. Many features added over previous releases have been reworked and unified, while also preparing SwiftGen for future additions. This means that you'll need to adapt your command line invocations and custom templates to work with this new major version.
 
-Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/MigrationGuide.md) for a list of changes you'll need to apply.
+Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/MigrationGuide.md#swiftgen-50-migration-guide) for a list of changes you'll need to apply.
 
 ### Breaking Changes
 
