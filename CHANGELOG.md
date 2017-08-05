@@ -8,6 +8,13 @@
 
 Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/MigrationGuide.md#swiftgen-50-migration-guide) for a list of changes you'll need to apply.
 
+### Changes in other SwiftGen modules
+
+* [SwiftGenKit 2.0.0](https://github.com/SwiftGen/SwiftGenKit/blob/2.0.0/CHANGELOG.md)
+* [StencilSwiftKit 2.0.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.0.0/CHANGELOG.md)
+* [Stencil 0.9.0](https://github.com/kylef/Stencil/blob/0.9.0/CHANGELOG.md)
+* [templates 2.0.0](https://github.com/SwiftGen/templates/blob/2.0.0/CHANGELOG.md)
+
 ### Breaking Changes
 
 * Removed deprecated CLI options. Please consult the migration guide should you still use them.  
@@ -16,7 +23,7 @@ Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blo
 * Disable default value for named template option and ensure that there is a template option.  
   [Liquidsoul](https://github.com/liquidsoul)
   [#283](https://github.com/SwiftGen/SwiftGen/issues/283)
-* Templates are now grouped by subcommand on the filesystem. This is only important if you had custom templates in the `Application Support` directory. To migrate your templates, place them in a subfolder with the name of the subcommand, and remove the prefix of the template filename.
+* Templates are now grouped by subcommand on the filesystem. This is only important if you had custom templates in the `Application Support` directory. To migrate your templates, place them in a subfolder with the name of the subcommand, and remove the prefix of the template filename.  
   [David Jennes](https://github.com/djbe)
   [#304](https://github.com/SwiftGen/SwiftGen/issues/304)
 * The `images` command has been renamed to `xcassets` to better reflect its functionality.  
@@ -133,7 +140,7 @@ Note: The next minor version will focus on bringing more documentation for all t
   [David Jennes](https://github.com/djbe)
   [#241](https://github.com/SwiftGen/SwiftGen/issues/241)
   [#247](https://github.com/SwiftGen/SwiftGen/pull/247)
-* Snake cased keys with uppercase letters are correctly camel cased again.
+* Snake cased keys with uppercase letters are correctly camel cased again.  
   [Cihat Gündüz](https://github.com/Dschee)
   [#226](https://github.com/SwiftGen/SwiftGen/issues/226)
   [#233](https://github.com/SwiftGen/SwiftGen/pull/233)
