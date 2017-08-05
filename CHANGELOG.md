@@ -2,11 +2,11 @@
 
 ---
 
-## Master
+## 5.0.0
 
-### Bug Fixes
+⚠️ This major version is a big milestone in which a lot of refactoring and cleaning has been done. This means that you'll need to adapt your command line invocations and custom templates to work with this new major version
 
-_None_
+Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/MigrationGuide.md) for a list of changes you'll need to apply.
 
 ### Breaking Changes
 
@@ -22,10 +22,6 @@ _None_
 * The `images` command has been renamed to `xcassets` to better reflect its functionality.  
   [Olivier Halligon](https://github.com/alisoftware)
   [#317](https://github.com/SwiftGen/SwiftGen/issues/317)
-
-### New Features
-
-_None_
 
 ### Internal Changes
 
