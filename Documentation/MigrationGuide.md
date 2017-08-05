@@ -26,13 +26,13 @@ Swift evolves so fast that deciding which template should be declared as the def
 
 Instead, you're now **required** to provide a template when invoking SwiftGen, either via `-t <templatename>` (you can see the list of available template names using the `swiftgen templates list` command) or via `-p <templatepath>`.
 
-ℹ️ The templates that were used as default template in SwiftGen 4.0 are still bundled with SwiftGen, but they have been renamed (mainly to `"swift2"` since the "default" template in SwiftGen 4 was the one we wrote back in Swift 2 times!) and you now have to explicitly tell which to use. See [below](##bundled-templates-have-been-renamed--cleaned) for more info.
+ℹ️ The templates that were used as default template in SwiftGen 4.0 are still bundled with SwiftGen, but they have been renamed (mainly to `"swift2"` since the "default" template in SwiftGen 4 was the one we wrote back in Swift 2 times!) and you now have to explicitly tell which to use. See [below](#bundled-templates-have-been-renamed--cleaned) for more info.
 
 ✅ **Most of you probably already use the `-t swift3` option** if you were writing Swift3 code, so **you won't need to change anything**. But in the unlikely event that you were still writing Swift2 and didn't specify a template, you'll then have to use `-t swift2` to force using this (previously default) template.
 
 ## Bundled Templates have been renamed & cleaned
 
-Some templates bundled with SwiftGen have been **renamed** to have a better naming consistency. Some others have been **removed** or **merged with others** (for example the storyboard templates between iOS & macOS are now merged into a single one compatible with both platforsm, other templates now use the `--param` feature to be customizable, removing the need to maintain 2 separate templates for some variants)
+Some templates bundled with SwiftGen have been **renamed** to have a better naming consistency. Some others have been **removed** or **merged with others** (for example the storyboard templates between iOS & macOS are now merged into a single one compatible with both platforms, other templates now use the `--param` feature to be customizable, removing the need to maintain 2 separate templates for some variants)
 
 Be sure to consult [the templates repo's own Migration Guide](https://github.com/SwiftGen/templates/blob/master/Documentation/MigrationGuide.md) to see the list of changes (renamings or removal) in templates bundled in SwiftGen.
 
