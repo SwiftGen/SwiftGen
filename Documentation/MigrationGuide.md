@@ -1,4 +1,4 @@
-## SwiftGen 5.0 Migration Guide
+# SwiftGen 5.0 Migration Guide
 
 If you're migrating from SwiftGen 4.x to SwiftGen 5.0, there might be some migration steps you'll need to use.
 
