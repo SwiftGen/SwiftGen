@@ -30,11 +30,39 @@ Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blo
   [Olivier Halligon](https://github.com/alisoftware)
   [#317](https://github.com/SwiftGen/SwiftGen/issues/317)
 
+#### Notable breaking changes from other SwiftGen repositories
+
+* Many deprecated templates have been removed (or merged), and others have been renamed to reflect new behaviours. Please check the [templates migration guide](https://github.com/SwiftGen/templates/blob/master/Documentation/MigrationGuide.md#deprecated-templates-in-20-swiftgen-50) for more information.  
+  [David Jennes](https://github.com/djbe)
+  [SwiftGen/templates#47](https://github.com/SwiftGen/templates/issues/47)
+* Removed deprecated template context variables, and restructured many others. Please check the [SwiftGenKit migration guide](https://github.com/SwiftGen/SwiftGenKit/blob/master/Documentation/MigrationGuide.md#swiftgenkit-20-swiftgen-50) for more information.  
+  [David Jennes](https://github.com/djbe)
+  [SwiftGen/SwiftGenKit#5](https://github.com/SwiftGen/SwiftGenKit/issues/5)
+* Some filters have been removed in favour of Stencil's built in versions, and other filters have been updated to accept parameters. Please consult the [StencilSwiftKit migration guide](https://github.com/SwiftGen/StencilSwiftKit/blob/master/Documentation/MigrationGuide.md#stencilswiftkit-20-swiftgen-50) for more information.  
+  [David Jennes](https://github.com/djbe)
+  [SwiftGen/StencilSwiftKit#5](https://github.com/SwiftGen/StencilSwiftKit/issues/5)
+  [SwiftGen/StencilSwiftKit#6](https://github.com/SwiftGen/StencilSwiftKit/issues/6)
+
+### New Features
+
+* Colors and strings commands now accept multiple input files. With these 2 additions, all swiftgen generator commands are able to handle multiple input files.  
+  [David Jennes](https://github.com/djbe)
+  [#313](https://github.com/SwiftGen/SwiftGen/issues/313)
+  [SwiftGen/SwiftGenKit#40](https://github.com/SwiftGen/SwiftGenKit/issues/40)
+  [SwiftGen/SwiftGenKit#41](https://github.com/SwiftGen/SwiftGenKit/issues/41)
+
 ### Internal Changes
 
 * Improved installation instructions in the README.  
   [Olivier Halligon](https://github.com/alisoftware)
   [#303](https://github.com/SwiftGen/SwiftGen/issues/303)
+
+#### Notable internal changes from other SwiftGen repositories
+
+* Switch back from `actool` to an internal parser to fix numerous issues with the former. This fixes issues a few people encountered when using asset catalogs that contained some of the less common set types.  
+  [David Jennes](https://github.com/djbe)
+  [#228](https://github.com/SwiftGen/SwiftGen/issues/228)
+  [SwiftGen/SwiftGenKit#43](https://github.com/SwiftGen/SwiftGenKit/issues/43)
 
 ## 4.2.1
 
@@ -85,7 +113,7 @@ Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blo
 * Storyboards templates won't `import` your app module anymore,
   removing that annoying warning.  
   [@djbe](https://github.com/djbe)
-  [SwiftGen/templates/#19](https://github.com/SwiftGen/templates/pull/19)
+  [SwiftGen/templates#19](https://github.com/SwiftGen/templates/pull/19)
 
 ### New Features
 
@@ -106,7 +134,7 @@ Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blo
   [@NachoSoto](https://github.com/NachoSoto)
   [@djbe](https://github.com/djbe)
   [#255](https://github.com/SwiftGen/SwiftGen/pull/255)
-  [SwiftGen/templates/#17](https://github.com/SwiftGen/templates/pull/17)
+  [SwiftGen/templates#17](https://github.com/SwiftGen/templates/pull/17)
 
 ### Deprecations
 
