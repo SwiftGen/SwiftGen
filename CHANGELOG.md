@@ -82,12 +82,11 @@ Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blo
 
 * Update StencilGenKit to 1.0.2 and update Circle CI to Xcode 8.3.  
   [Diogo Tridapalli](https://github.com/diogot)
-  [#295](https://github.com/SwiftGen/SwiftGenKit/issues/295)
+  [#295](https://github.com/SwiftGen/SwiftGen/issues/295)
 * Switch from Travis CI to Circle CI, clean up the Rakefile in the process.  
   [David Jennes](https://github.com/djbe)
   [Olivier Halligon](https://github.com/alisoftware)
-  [#269](https://github.com/SwiftGen/SwiftGenKit/issues/269)
-  [#291](https://github.com/SwiftGen/SwiftGenKit/issues/291)
+  [#269](https://github.com/SwiftGen/SwiftGen/pull/269)
 * Fix remaining enum names not Swift 3 compliant.  
   [Liquidsoul](https://github.com/liquidsoul)
   [#297](https://github.com/SwiftGen/SwiftGen/issues/297)

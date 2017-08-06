@@ -37,12 +37,17 @@ namespace :changelog do
 
   desc 'Check if links to issues and PRs use matching numbers between text & link'
   task :check do |task|
-    links = %r{\[\#([0-9]+)\]\(https://github.com/.*/(issues|pull)/([0-9]+)\)}
+    slug_re = '([a-zA-Z]*/[a-zA-Z]*)'
+    links = %r{\[#{slug_re}?\#([0-9]+)\]\(https://github.com/#{slug_re}/(issues|pull)/([0-9]+)\)}
     all_wrong_links = []
     File.readlines('CHANGELOG.md').each_with_index do |line, idx|
       wrong_links = line.scan(links)
-        .select { |m| m[0] != m[2] }
-        .map { |m| " - Line #{idx+1}, link text is ##{m[0]} but links points to #{m[2]}" }
+        .reject do |m|
+          (slug, num, url_slug, url_num) = [m[0] || 'SwiftGen/SwiftGen', m[1], m[2], m[4]]
+          (slug == url_slug) && (num == url_num)
+        end.map do |m|
+          " - Line #{idx+1}, link text is #{m[0]}##{m[1]} but links points to #{m[2]}##{m[4]}"
+        end
       all_wrong_links.concat(wrong_links)
     end
     if all_wrong_links.empty?
