@@ -37,7 +37,7 @@ namespace :changelog do
 
   desc 'Check if links to issues and PRs use matching numbers between text & link'
   task :check do |task|
-    current_repo = File.basename(`git rev-parse --show-toplevel`.chomp).freeze
+    current_repo = File.basename(`git remote get-url origin`.chomp, '.git').freeze
     slug_re = '([a-zA-Z]*/[a-zA-Z]*)'
     links = %r{\[#{slug_re}?\#([0-9]+)\]\(https://github.com/#{slug_re}/(issues|pull)/([0-9]+)\)}
     all_wrong_links = []
@@ -64,8 +64,7 @@ namespace :changelog do
     tag = Utils.top_changelog_version
     body = Utils.top_changelog_entry
 
-    repo_url = `git remote -v | grep push`.split(' ')[1]
-    repo_name = File.basename(repo_url, '.git')
+    repo_name = File.basename(`git remote get-url origin`.chomp, '.git').freeze
     client.create_release("SwiftGen/#{repo_name}", tag, :body => body)
   end
 end
