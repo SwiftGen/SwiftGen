@@ -27,7 +27,7 @@ struct SceneType<T: Any> {
   let storyboard: StoryboardType.Type
   let identifier: String
   
-  var controller: T {
+  func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateViewController(withIdentifier: identifier) as? T else {
       fatalError("Controller '\(identifier)' is not of the expected class \(T.self).")
     }
@@ -38,7 +38,7 @@ struct SceneType<T: Any> {
 struct InitialSceneType<T: Any> {
   let storyboard: StoryboardType.Type
   
-  var controller: T {
+  func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitialViewController() as? T else {
       fatalError("Controller is not of the expected class \(T.self).")
     }
@@ -80,11 +80,11 @@ private final class BundleToken {}
 
 //: #### Usage Example
 
-let createAccountVC = StoryboardScene.Wizard.createAccount.controller
+let createAccountVC = StoryboardScene.Wizard.createAccount.instantiate()
 type(of: createAccountVC)
 createAccountVC.title
 
-let validateVC = StoryboardScene.Wizard.validatePassword.controller
+let validateVC = StoryboardScene.Wizard.validatePassword.instantiate()
 validateVC.title
 
 let segue = StoryboardSegue.Wizard.showPassword
