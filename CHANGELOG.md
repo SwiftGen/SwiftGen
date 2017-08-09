@@ -27,7 +27,7 @@ Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blo
   [David Jennes](https://github.com/djbe)
   [#304](https://github.com/SwiftGen/SwiftGen/issues/304)
 * The `images` command has been renamed to `xcassets` to better reflect its functionality.  
-  [Olivier Halligon](https://github.com/alisoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#317](https://github.com/SwiftGen/SwiftGen/issues/317)
 
 #### Notable breaking changes from other SwiftGen repositories
@@ -35,6 +35,9 @@ Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blo
 * Many deprecated templates have been removed (or merged), and others have been renamed to reflect new behaviours. Please check the [templates migration guide](https://github.com/SwiftGen/templates/blob/master/Documentation/MigrationGuide.md#deprecated-templates-in-20-swiftgen-50) for more information.  
   [David Jennes](https://github.com/djbe)
   [SwiftGen/templates#47](https://github.com/SwiftGen/templates/issues/47)
+* There have been some breaking changes in the generated code for storyboards. Please check the [templates migration guide](https://github.com/SwiftGen/templates/blob/master/Documentation/MigrationGuide.md#deprecated-templates-in-20-swiftgen-50) for more information, where we also provide a compatibility template.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [SwiftGen/templates#65](https://github.com/SwiftGen/templates/issues/65)
 * Removed deprecated template context variables, and restructured many others. Please check the [SwiftGenKit migration guide](https://github.com/SwiftGen/SwiftGenKit/blob/master/Documentation/MigrationGuide.md#swiftgenkit-20-swiftgen-50) for more information.  
   [David Jennes](https://github.com/djbe)
   [SwiftGen/SwiftGenKit#5](https://github.com/SwiftGen/SwiftGenKit/issues/5)
@@ -54,7 +57,7 @@ Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blo
 ### Internal Changes
 
 * Improved installation instructions in the README.  
-  [Olivier Halligon](https://github.com/alisoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#303](https://github.com/SwiftGen/SwiftGen/issues/303)
 
 #### Notable internal changes from other SwiftGen repositories
@@ -76,7 +79,7 @@ Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blo
 ### Bug Fixes
 
 * Fix a bug in which the version of SwiftGen was reported as `v0.0` by `swiftgen --version`.  
-  [Olivier Halligon](https://github.com/alisoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
 
 ### Internal Changes
 
@@ -85,13 +88,13 @@ Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blo
   [#295](https://github.com/SwiftGen/SwiftGen/issues/295)
 * Switch from Travis CI to Circle CI, clean up the Rakefile in the process.  
   [David Jennes](https://github.com/djbe)
-  [Olivier Halligon](https://github.com/alisoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#269](https://github.com/SwiftGen/SwiftGen/pull/269)
 * Fix remaining enum names not Swift 3 compliant.  
   [Liquidsoul](https://github.com/liquidsoul)
   [#297](https://github.com/SwiftGen/SwiftGen/issues/297)
 * Added the `CONTRIBUTING.md` file to help new contributors.  
-  [Olivier Halligon](https://github.com/alisoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [Cihat Gündüz](https://github.com/Dschee)
   [#149](https://github.com/SwiftGen/SwiftGen/pull/149)
   [#298](https://github.com/SwiftGen/SwiftGen/pull/298)
