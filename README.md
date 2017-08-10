@@ -126,6 +126,8 @@ Or add the path to the `bin` folder to your `$PATH` and invoke `swiftgen` direct
 
 ## Usage
 
+> ❗️ If you're migrating from SwiftGen 4.x to SwiftGen 5.x, don't forget to [read the Migration Guide](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/MigrationGuide.md#swiftgen-50-migration-guide).
+
 The tool is provided as a unique `swiftgen` binary command-line, with the following subcommands:
 
 * `swiftgen colors [OPTIONS] FILE1 …`
@@ -137,44 +139,41 @@ The tool is provided as a unique `swiftgen` binary command-line, with the follow
 Each subcommand has its own option and syntax, but some options are common to all:
 
 * `--output FILE` or `-o FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
-* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](https://github.com/SwiftGen/templates) to generate the output.
+* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](https://github.com/SwiftGen/templates)) to generate the output.
 * `--templatePath PATH` or `-p PATH`: define the Stencil template to use, using a full path.
 * Note: you should specify one and one template when invoking SwiftGen. You have to use either `-t` or `-p` but should not use both at the same time (it wouldn't make sense anyway and you'll get an error if you try)
 * Each command supports multiple input files (or directories where applicable).
 
 You can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
 
-### Additional documentation
-
-You can also see in the [wiki](https://github.com/SwiftGen/SwiftGen/wiki) some additional documentation, about:
-
-* how to [integrate SwiftGen in your Continuous Integration](https://github.com/SwiftGen/SwiftGen/wiki/Continuous-Integration) (Travis-CI, CircleCI, Jenkins, …)
-* how to [integrate in your Xcode project](https://github.com/SwiftGen/SwiftGen/wiki/Integrate-SwiftGen-in-an-xcodeproj) so it rebuild the constants every time you build
-* …and more.
-
 ## Choosing your template
 
-SwiftGen is based on templates (it uses [Stencil](https://github.com/kylef/Stencil) as its template engine). This means that **you can choose the template that best fit your preferences to customize the generated code to your own conventions**.
+SwiftGen is based on templates (it uses [Stencil](https://github.com/kylef/Stencil) as its template engine). This means that **you can choose the template that fits the Swift version you're using** — and also the one that best fits your preferences — to **adapt the generated code to your own conventions and Swift version**.
 
 ### Bundled templates vs. Custom ones
 
-SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `fonts`, `storyboards`, `strings`, `xcassets`), but you can also create your own templates if the bundled ones don't suit your coding conventions or needs. Simply use the `-t` / `--template` option to specify the name of the template to use, or store them somewhere else (like in your project repository) and use `-p` / `--templatePath` to specify a full path.
+SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `fonts`, `storyboards`, `strings`, `xcassets`), which will fit most needs. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs. Simply either use the `-t` / `--template` option to specify the name of the template to use, or store them somewhere else (like in your project repository) and use `-p` / `--templatePath` to specify a full path.
 
 💡 You can use the `swiftgen templates list` command to list all the available templates (both custom and bundled templates) for each subcommand, list the template content and dupliate them to create your own.
 
-### Templates bundled with SwiftGen include:
+For more information about how to create your own templates, [see the dedicated documentation](https://github.com/SwiftGen/templates/blob/master/Documentation/Creating-your-templates.md).
+
+### Templates bundled with SwiftGen:
+
+As explained above, you can use `swiftgen templates list` to list all templates bundled with SwiftGen. For most SwiftGen subcommands, we provide, among others:
 
 * A `swift2` template, compatible with Swift 2
 * A `swift3` template, compatible with Swift 3
 * Other variants, like `flat-swift2/3` and `structured-swift2/3` templates for Strings.
 
-ℹ️ [Templates compatible with Swift 4 will be coming soon](https://github.com/SwiftGen/templates/issues/63) — but you can already create your own custom one if you can't wait for the next release — that's the beauty of SwiftGen being based on templates after all
+ℹ️ [Templates compatible with Swift 4 will be coming soon](https://github.com/SwiftGen/templates/issues/63); but you can already create your own custom one if you can't wait for the next release — that's the beauty of SwiftGen being based on templates after all.
 
-For more information about how to create your own templates, [see the dedicated documentation](https://github.com/SwiftGen/templates/blob/master/Documentation/Creating-your-templates.md).
+You can **find the documentation for each bundled template [here in the repo](https://github.com/SwiftGen/templates/tree/master/Documentation)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
+Each MarkDown file documents the Swift Version it's aimed for, the use case for that template (in which cases you might favor that template over others), the available `--param` parameters to customize it on invocation, and some code examples.
 
 > Don't hesitate to make PRs to share your improvements suggestions on the bundled templates 😉
 
-## Swift 2 support
+### Note about Swift 2 templates
 
 As explained above, among other templates, Swift is bundled with a `swift2` template for each of its subcommands.
 
@@ -184,7 +183,15 @@ If you're using Swift 2, we have to warn you that we can no longer provide full 
 
 The `SwiftGen.playground` available in this repository will allow you to play with the code that the tool typically generates, and see some examples of how you can take advantage of it.
 
-This allows you to have a quick look at how typical code generated by SwiftGen looks like, and how you will then use the generated enums in your code.
+This allows you to have a quick look at how typical code generated by SwiftGen looks like, and how you will then use the generated constants in your code.
+
+### Additional documentation
+
+You can also see in the [wiki](https://github.com/SwiftGen/SwiftGen/wiki) some additional documentation, about:
+
+* how to [integrate SwiftGen in your Continuous Integration](https://github.com/SwiftGen/SwiftGen/wiki/Continuous-Integration) (Travis-CI, CircleCI, Jenkins, …)
+* how to [integrate in your Xcode project](https://github.com/SwiftGen/SwiftGen/wiki/Integrate-SwiftGen-in-an-xcodeproj) so it rebuild the constants every time you build
+* …and more.
 
 ---
 
