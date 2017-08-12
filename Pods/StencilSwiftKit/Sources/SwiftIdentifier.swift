@@ -69,7 +69,7 @@ func swiftIdentifier(from string: String,
   let mappedParts = parts.map({ (string: String) -> String in
     // Can't use capitalizedString here because it will lowercase all letters after the first
     // e.g. "SomeNiceIdentifier".capitalizedString will because "Someniceidentifier" which is not what we want
-    let ns = string as NSString
+    let ns = NSString(string: string)
     if ns.length > 0 {
       let firstLetter = ns.substring(to: 1)
       let rest = ns.substring(from: 1)

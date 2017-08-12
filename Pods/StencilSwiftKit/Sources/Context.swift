@@ -22,7 +22,8 @@ public enum StencilContext {
   /// - Throws: `Parameters.Error`
   public static func enrich(context: [String: Any],
                             parameters: [String],
-                            environment: [String: String] = ProcessInfo().environment) throws -> [String: Any] {
+                            environment: [String: String] =
+                            ProcessInfo.processInfo.environment) throws -> [String: Any] {
     var context = context
 
     context[environmentKey] = merge(context[environmentKey], with: environment)
