@@ -1,8 +1,6 @@
 # Used constants:
 # none
 
-require 'octokit'
-
 namespace :changelog do
   desc 'Add the empty CHANGELOG entries after a new release'
   task :reset do |task|
@@ -60,6 +58,8 @@ namespace :changelog do
 
   desc "Push the CHANGELOG's top section as a GitHub release"
   task :push_github_release do
+    require 'octokit'
+
     client = Utils.octokit_client
     tag = Utils.top_changelog_version
     body = Utils.top_changelog_entry
