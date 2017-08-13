@@ -68,6 +68,8 @@ You can then invoke SwiftGen in your Script Build Phase using:
 $PODS_ROOT/SwiftGen/bin/swiftgen …
 ```
 
+_Note: SwiftGen isn't really a pod, as it's not a library your code will depend on at runtime; so the installation via CocoaPods is just a trick that installs the SwiftGen binaries in the Pods/ folder, but you won't see any swift files in the Pods/SwiftGen group in your Xcode's Pods.xcodeproj. That's normal: the SwiftGen binary is still present in that folder in the Finder._
+
 ---
 </details>
 <details>
@@ -87,6 +89,8 @@ You can then invoke `swiftgen` directly in your Script Build Phase (as it will b
 ```sh
 swiftgen … 
 ```
+
+_Note: SwiftGen needs Xcode 8.3 to build, so installing via Homebrew requires you to have Xcode 8.3 installed (which in turn requires macOS 10.12). If you use an earlier version of macOS, you'll have to use one of the other installation methods instead._
 
 ---
 </details>
