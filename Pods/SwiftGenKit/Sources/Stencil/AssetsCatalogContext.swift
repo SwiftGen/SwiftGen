@@ -10,10 +10,16 @@ import Foundation
  - `catalogs`: `Array` — list of asset catalogs
    - `name`  : `String` — the name of the catalog
    - `assets`: `Array` — tree structure of items, each item either
-     - represents a folder and has the following entries:
+     - represents a group and has the following entries:
+       - `type` : `String` — "group"
        - `name` : `String` — name of the folder
-       - `items`: `Array` — list of items, can be either folders or images
+       - `items`: `Array` — list of items, can be either groups, colors or images
+     - represents a color asset, and has the following entries:
+       - `type` : `String` — "color"
+       - `name` : `String` — name of the color
+       - `value`: `String` — the actual full name for loading the color
      - represents an image asset, and has the following entries:
+       - `type` : `String` — "image"
        - `name` : `String` — name of the image
        - `value`: `String` — the actual full name for loading the image
 */
@@ -38,11 +44,19 @@ extension AssetsCatalogParser {
       switch entry {
       case let .group(name: name, items: items):
         return [
+          "type": "group",
           "name": name,
           "items": structure(entries: items)
         ]
+      case let .color(name: name, value: value):
+        return [
+          "type": "color",
+          "name": name,
+          "value": value
+        ]
       case let .image(name: name, value: value):
         return [
+          "type": "image",
           "name": name,
           "value": value
         ]

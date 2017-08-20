@@ -10,6 +10,7 @@ import PathKit
 struct Catalog {
   enum Entry {
     case group(name: String, items: [Entry])
+    case color(name: String, value: String)
     case image(name: String, value: String)
   }
 
@@ -59,16 +60,18 @@ private enum AssetCatalog {
     static let providesNamespace = "provides-namespace"
   }
 
-  enum Item {
-    static let imageSet = "imageset"
-
-    /**
-     * This is a list of supported asset catalog item types, for now we just
-     * support `image set`s. If you want to add support for new types, just add
-     * it to this whitelist, and add the necessary code to the
-     * `process(items:withPrefix:)` method.
-     */
-    static let supported = [imageSet]
+  /**
+   * This is a list of supported asset catalog item types, for now we just
+   * support `image set`s and `color set`s. If you want to add support for
+   * new types, just add it to this whitelist, and add the necessary code to
+   * the `process(items:withPrefix:)` method.
+   *
+   * Use as reference:
+   * https://developer.apple.com/library/content/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format
+   */
+  enum Item: String {
+    case colorSet = "colorset"
+    case imageSet = "imageset"
   }
 }
 
@@ -84,6 +87,7 @@ extension AssetsCatalogParser {
 
   /**
    Each node in an asset catalog is either (there are more types, but we ignore those):
+     - A colorset, which is essentially a group containing a list of colors (the latter is ignored).
      - An imageset, which is essentially a group containing a list of files (the latter is ignored).
    
      - A group, containing sub items such as imagesets or groups. A group can provide a namespaced,
@@ -103,11 +107,15 @@ extension AssetsCatalogParser {
     guard item.isDirectory else { return nil }
     let type = item.extension ?? ""
 
-    switch (type, AssetCatalog.Item.supported.contains(type)) {
-    case (AssetCatalog.Item.imageSet, _):
+    switch AssetCatalog.Item(rawValue: type) {
+    case .colorSet?:
+      let name = item.lastComponentWithoutExtension
+      return .color(name: name, value: "\(prefix)\(name)")
+    case .imageSet?:
       let name = item.lastComponentWithoutExtension
       return .image(name: name, value: "\(prefix)\(name)")
-    case ("", _), (_, true):
+    case nil:
+      guard type == "" else { return nil }
       let filename = item.lastComponent
       let subPrefix = isNamespaced(path: item) ? "\(prefix)\(filename)/" : prefix
 
@@ -115,8 +123,6 @@ extension AssetsCatalogParser {
         name: filename,
         items: process(folder: item, withPrefix: subPrefix)
       )
-    default:
-      return nil
     }
   }
 

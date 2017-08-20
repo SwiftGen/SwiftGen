@@ -11,6 +11,10 @@ enum RemoveNewlinesModes: String {
   case all, leading
 }
 
+enum SwiftIdentifierModes: String {
+  case normal, pretty
+}
+
 extension Filters {
   enum Strings {
     fileprivate static let reservedKeywords = [
@@ -32,17 +36,63 @@ extension Filters {
       "right", "set", "Type", "unowned", "weak", "willSet"
     ]
 
-    static func swiftIdentifier(_ value: Any?) throws -> Any? {
-      guard let value = value as? String else { throw Filters.Error.invalidInputType }
-      return StencilSwiftKit.swiftIdentifier(from: value, replaceWithUnderscores: true)
+    /// Replaces in the given string the given substring with the replacement
+    /// "people picker", replacing "picker" with "life" gives "people life"
+    ///
+    /// - Parameters:
+    ///   - value: the value to be processed
+    ///   - arguments: the arguments to the function; expecting two arguments: substring, replacement
+    /// - Returns: the results string
+    /// - Throws: FilterError.invalidInputType if the value parameter or argunemts aren't string
+    static func replace(_ value: Any?, arguments: [Any?]) throws -> Any? {
+      guard let source = value as? String,
+            arguments.count == 2,
+            let substring = arguments[0] as? String,
+            let replacement = arguments[1] as? String else {
+        throw Filters.Error.invalidInputType
+      }
+      return source.replacingOccurrences(of: substring, with: replacement)
     }
 
-    /* - If the string starts with only one uppercase letter, lowercase that first letter
-     * - If the string starts with multiple uppercase letters, lowercase those first letters
-     *   up to the one before the last uppercase one, but only if the last one is followed by
-     *   a lowercase character.
-     * e.g. "PeoplePicker" gives "peoplePicker" but "URLChooser" gives "urlChooser"
-     */
+    /// Converts an arbitrary string to a valid swift identifier. Takes an optional Mode argument:
+    ///   - normal (default): uppercase the first character, prefix with an underscore if starting
+    ///     with a number, replace invalid characters by underscores
+    ///   - leading: same as the above, but apply the snaceToCamelCase filter first for a nicer
+    ///     identifier
+    ///
+    /// - Parameters:
+    ///   - value: the value to be processed
+    ///   - arguments: the arguments to the function; expecting zero or one mode argument
+    /// - Returns: the identifier string
+    /// - Throws: FilterError.invalidInputType if the value parameter isn't a string
+    static func swiftIdentifier(_ value: Any?, arguments: [Any?]) throws -> Any? {
+      guard var string = value as? String else { throw Filters.Error.invalidInputType }
+      let mode = try Filters.parseEnum(from: arguments, default: SwiftIdentifierModes.normal)
+
+      switch mode {
+      case .normal:
+        return SwiftIdentifier.identifier(from: string, replaceWithUnderscores: true)
+      case .pretty:
+        string = SwiftIdentifier.identifier(from: string, replaceWithUnderscores: true)
+        string = try snakeToCamelCase(string, stripLeading: true)
+        return SwiftIdentifier.prefixWithUnderscoreIfNeeded(string: string)
+      }
+    }
+
+    /// Lowers the first letter of the string
+    /// e.g. "People picker" gives "people picker", "Sports Stats" gives "sports Stats"
+    static func lowerFirstLetter(_ value: Any?) throws -> Any? {
+      guard let string = value as? String else { throw Filters.Error.invalidInputType }
+      let first = String(string.characters.prefix(1)).lowercased()
+      let other = String(string.characters.dropFirst(1))
+      return first + other
+    }
+
+    /// If the string starts with only one uppercase letter, lowercase that first letter
+    /// If the string starts with multiple uppercase letters, lowercase those first letters
+    /// up to the one before the last uppercase one, but only if the last one is followed by
+    /// a lowercase character.
+    /// e.g. "PeoplePicker" gives "peoplePicker" but "URLChooser" gives "urlChooser"
     static func lowerFirstWord(_ value: Any?) throws -> Any? {
       guard let string = value as? String else { throw Filters.Error.invalidInputType }
       let cs = CharacterSet.uppercaseLetters
@@ -61,7 +111,15 @@ extension Filters {
       return transformed
     }
 
-    static func titlecase(_ value: Any?) throws -> Any? {
+    /// Lowers the first letter of the string
+    /// e.g. "People picker" gives "people picker", "Sports Stats" gives "sports Stats"
+    /// 
+    /// - Parameters:
+    ///   - value: the value to uppercase first letter of
+    ///   - arguments: the arguments to the function; expecting zero
+    /// - Returns: the string with first letter being uppercased
+    /// - Throws: FilterError.invalidInputType if the value parameter isn't a string
+    static func upperFirstLetter(_ value: Any?) throws -> Any? {
       guard let string = value as? String else { throw Filters.Error.invalidInputType }
       return titlecase(string)
     }
@@ -78,25 +136,7 @@ extension Filters {
       let stripLeading = try Filters.parseBool(from: arguments, required: false) ?? false
       guard let string = value as? String else { throw Filters.Error.invalidInputType }
 
-      let unprefixed: String
-      if try containsAnyLowercasedChar(string) {
-        let comps = string.components(separatedBy: "_")
-        unprefixed = comps.map { titlecase($0) }.joined(separator: "")
-      } else {
-        let comps = try snakecase(string).components(separatedBy: "_")
-        unprefixed = comps.map { $0.capitalized }.joined(separator: "")
-      }
-
-      // only if passed true, strip the prefix underscores
-      var prefixUnderscores = ""
-      if !stripLeading {
-        for scalar in string.unicodeScalars {
-          guard scalar == "_" else { break }
-          prefixUnderscores += "_"
-        }
-      }
-
-      return prefixUnderscores + unprefixed
+      return try snakeToCamelCase(string, stripLeading: stripLeading)
     }
 
     /// Converts camelCase to snake_case. Takes an optional Bool argument for making the string lower case,
@@ -150,11 +190,101 @@ extension Filters {
       }
     }
 
+    /// Checks if the given string contains given substring
+    ///
+    /// - Parameters:
+    ///   - value: the string value to check if it contains substring
+    ///   - arguments: the arguments to the function; expecting one string argument - substring
+    /// - Returns: the result whether true or not
+    /// - Throws: FilterError.invalidInputType if the value parameter isn't a string or 
+    ///           if number of arguments is not one or if the given argument isn't a string
+    static func contains(_ value: Any?, arguments: [Any?]) throws -> Bool {
+      guard let string = value as? String else { throw Filters.Error.invalidInputType }
+      guard let substring = arguments.first as? String else { throw Filters.Error.invalidInputType }
+      return string.contains(substring)
+    }
+
+    /// Checks if the given string has given prefix
+    ///
+    /// - Parameters:
+    ///   - value: the string value to check if it has prefix
+    ///   - arguments: the arguments to the function; expecting one string argument - prefix
+    /// - Returns: the result whether true or not
+    /// - Throws: FilterError.invalidInputType if the value parameter isn't a string or
+    ///           if number of arguments is not one or if the given argument isn't a string
+    static func hasPrefix(_ value: Any?, arguments: [Any?]) throws -> Bool {
+      guard let string = value as? String else { throw Filters.Error.invalidInputType }
+      guard let prefix = arguments.first as? String else { throw Filters.Error.invalidInputType }
+      return string.hasPrefix(prefix)
+    }
+
+    /// Checks if the given string has given suffix
+    ///
+    /// - Parameters:
+    ///   - value: the string value to check if it has prefix
+    ///   - arguments: the arguments to the function; expecting one string argument - suffix
+    /// - Returns: the result whether true or not
+    /// - Throws: FilterError.invalidInputType if the value parameter isn't a string or
+    ///           if number of arguments is not one or if the given argument isn't a string
+    static func hasSuffix(_ value: Any?, arguments: [Any?]) throws -> Bool {
+      guard let string = value as? String else { throw Filters.Error.invalidInputType }
+      guard let suffix = arguments.first as? String else { throw Filters.Error.invalidInputType }
+      return string.hasSuffix(suffix)
+    }
+
+    /// Converts a file path to just the filename, stripping any path components before it.
+    ///
+    /// - Parameter value: the value to be processed
+    /// - Returns: the basename of the path
+    /// - Throws: FilterError.invalidInputType if the value parameter isn't a string
+    static func basename(_ value: Any?) throws -> Any? {
+      guard let string = value as? String else { throw Filters.Error.invalidInputType }
+      return (string as NSString).lastPathComponent
+    }
+
+    /// Converts a file path to just the path without the filename.
+    ///
+    /// - Parameter value: the value to be processed
+    /// - Returns: the dirname of the path
+    /// - Throws: FilterError.invalidInputType if the value parameter isn't a string
+    static func dirname(_ value: Any?) throws -> Any? {
+      guard let string = value as? String else { throw Filters.Error.invalidInputType }
+      return (string as NSString).deletingLastPathComponent
+    }
+
     // MARK: - Private methods
 
     private static func removeLeadingWhitespaces(from string: String) -> String {
       let chars = string.unicodeScalars.drop { CharacterSet.whitespaces.contains($0) }
       return String(chars)
+    }
+
+    /// Converts snake_case to camelCase, stripping prefix underscores if needed
+    ///
+    /// - Parameters:
+    ///   - string: the value to be processed
+    ///   - stripLeading: if false, will preserve leading underscores
+    /// - Returns: the camel case string
+    static func snakeToCamelCase(_ string: String, stripLeading: Bool) throws -> String {
+      let unprefixed: String
+      if try containsAnyLowercasedChar(string) {
+        let comps = string.components(separatedBy: "_")
+        unprefixed = comps.map { titlecase($0) }.joined(separator: "")
+      } else {
+        let comps = try snakecase(string).components(separatedBy: "_")
+        unprefixed = comps.map { $0.capitalized }.joined(separator: "")
+      }
+
+      // only if passed true, strip the prefix underscores
+      var prefixUnderscores = ""
+      if !stripLeading {
+        for scalar in string.unicodeScalars {
+          guard scalar == "_" else { break }
+          prefixUnderscores += "_"
+        }
+      }
+
+      return prefixUnderscores + unprefixed
     }
 
     /// This returns the string with its first parameter uppercased.

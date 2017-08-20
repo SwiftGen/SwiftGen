@@ -32,7 +32,7 @@ private let tailRanges: [CountableClosedRange<Int>] = [
   0x30...0x39, 0x300...0x36F, 0x1dc0...0x1dff, 0x20d0...0x20ff, 0xfe20...0xfe2f
 ]
 
-private func identifierCharacterSets() -> (head: NSMutableCharacterSet, tail: NSMutableCharacterSet) {
+private func identifierCharacterSets(exceptions: String) -> (head: NSMutableCharacterSet, tail: NSMutableCharacterSet) {
   let addRange: (NSMutableCharacterSet, CountableClosedRange<Int>) -> Void = { (mcs, range) in
     mcs.addCharacters(in: NSRange(location: range.lowerBound, length: range.count))
   }
@@ -41,6 +41,7 @@ private func identifierCharacterSets() -> (head: NSMutableCharacterSet, tail: NS
   for range in headRanges {
     addRange(head, range)
   }
+  head.removeCharacters(in: exceptions)
 
   guard let tail = head.mutableCopy() as? NSMutableCharacterSet else {
     fatalError("Internal error: mutableCopy() should have returned a valid NSMutableCharacterSet")
@@ -48,35 +49,46 @@ private func identifierCharacterSets() -> (head: NSMutableCharacterSet, tail: NS
   for range in tailRanges {
     addRange(tail, range)
   }
+  tail.removeCharacters(in: exceptions)
 
   return (head, tail)
 }
 
-func swiftIdentifier(from string: String,
-                     forbiddenChars exceptions: String = "",
-                     replaceWithUnderscores underscores: Bool = false) -> String {
+enum SwiftIdentifier {
+  static func identifier(from string: String,
+                         forbiddenChars exceptions: String = "",
+                         replaceWithUnderscores underscores: Bool = false) -> String {
 
-  let (head, tail) = identifierCharacterSets()
-  head.removeCharacters(in: exceptions)
-  tail.removeCharacters(in: exceptions)
+    let (_, tail) = identifierCharacterSets(exceptions: exceptions)
 
-  let chars = string.unicodeScalars
-  let firstChar = chars[chars.startIndex]
+    let parts = string.components(separatedBy: tail.inverted)
+    let replacement = underscores ? "_" : ""
+    let mappedParts = parts.map({ (string: String) -> String in
+      // Can't use capitalizedString here because it will lowercase all letters after the first
+      // e.g. "SomeNiceIdentifier".capitalizedString will because "Someniceidentifier" which is not what we want
+      let ns = NSString(string: string)
+      if ns.length > 0 {
+        let firstLetter = ns.substring(to: 1)
+        let rest = ns.substring(from: 1)
+        return firstLetter.uppercased() + rest
+      } else {
+        return ""
+      }
+    })
 
-  let prefix = !head.longCharacterIsMember(firstChar.value) && tail.longCharacterIsMember(firstChar.value) ? "_" : ""
-  let parts = string.components(separatedBy: tail.inverted)
-  let replacement = underscores ? "_" : ""
-  let mappedParts = parts.map({ (string: String) -> String in
-    // Can't use capitalizedString here because it will lowercase all letters after the first
-    // e.g. "SomeNiceIdentifier".capitalizedString will because "Someniceidentifier" which is not what we want
-    let ns = NSString(string: string)
-    if ns.length > 0 {
-      let firstLetter = ns.substring(to: 1)
-      let rest = ns.substring(from: 1)
-      return firstLetter.uppercased() + rest
-    } else {
-      return ""
-    }
-  })
-  return prefix + mappedParts.joined(separator: replacement)
+    let result = mappedParts.joined(separator: replacement)
+    return prefixWithUnderscoreIfNeeded(string: result, forbiddenChars: exceptions)
+  }
+
+  static func prefixWithUnderscoreIfNeeded(string: String,
+                                           forbiddenChars exceptions: String = "") -> String {
+
+    let (head, _) = identifierCharacterSets(exceptions: exceptions)
+
+    let chars = string.unicodeScalars
+    let firstChar = chars[chars.startIndex]
+    let prefix = !head.longCharacterIsMember(firstChar.value) ? "_" : ""
+
+    return prefix + string
+  }
 }
