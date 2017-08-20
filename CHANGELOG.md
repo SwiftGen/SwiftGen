@@ -12,19 +12,22 @@
 
 ### New Features
 
-* Swift 4 templates.  
+* Added Swift 4 templates. Use `-t swift4` or whatever variant you want to use
+  (see `swiftgen templates list` for the available names).  
   [David Jennes](https://github.com/djbe) 
   [SwiftGen/templates/#67](https://github.com/SwiftGen/templates/pull/67)
-* XCAssets: Added support for named colors.  
+* XCAssets: Added support for named colors. When using `swiftgen xcassets` the bundled templates
+  will now also include colors found in the Asset Catalog in addition to the images.  
   [David Jennes](https://github.com/djbe) 
   [SwiftGen/templates/#68](https://github.com/SwiftGen/templates/pull/68)
-* Fonts: the path to fonts will now default to just the font filename, but you can disable this behaviour by enabling the `preservePath` parameter.  
+* Fonts: the path to fonts will now default to just the font filename, but you can disable
+  this behaviour by enabling the `preservePath` parameter.  
   [David Jennes](https://github.com/djbe) 
   [SwiftGen/templates/#71](https://github.com/SwiftGen/templates/pull/71)
 * Colors: new template that uses `#colorLiteral`s.  
+  Use `swiftgen colors -t literals-swift3` / `swiftgen colors -t literals-swift4` to use them.  
   [David Jennes](https://github.com/djbe) 
   [SwiftGen/templates/#72](https://github.com/SwiftGen/templates/pull/72)
-
 
 ## 5.0.0
 
