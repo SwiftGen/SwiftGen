@@ -2,23 +2,32 @@
 
 ---
 
-## Master
+## 5.1.0
 
-### Bug Fixes
+### Changes in other SwiftGen modules
 
-_None_
-
-### Breaking Changes
-
-_None_
+* [SwiftGenKit 2.1.0](https://github.com/SwiftGen/SwiftGenKit/blob/2.1.0/CHANGELOG.md)
+* [StencilSwiftKit 2.1.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.1.0/CHANGELOG.md)
+* [templates 2.1.0](https://github.com/SwiftGen/templates/blob/2.1.0/CHANGELOG.md)
 
 ### New Features
 
-_None_
-
-### Internal Changes
-
-_None_
+* Added Swift 4 templates. Use `-t swift4` or whatever variant you want to use
+  (see `swiftgen templates list` for the available names).  
+  [David Jennes](https://github.com/djbe) 
+  [SwiftGen/templates/#67](https://github.com/SwiftGen/templates/pull/67)
+* XCAssets: Added support for named colors. When using `swiftgen xcassets` the bundled templates
+  will now also include colors found in the Asset Catalog in addition to the images.  
+  [David Jennes](https://github.com/djbe) 
+  [SwiftGen/templates/#68](https://github.com/SwiftGen/templates/pull/68)
+* Fonts: the path to fonts will now default to just the font filename, but you can disable
+  this behaviour by enabling the `preservePath` parameter.  
+  [David Jennes](https://github.com/djbe) 
+  [SwiftGen/templates/#71](https://github.com/SwiftGen/templates/pull/71)
+* Colors: new template that uses `#colorLiteral`s.  
+  Use `swiftgen colors -t literals-swift3` / `swiftgen colors -t literals-swift4` to use them.  
+  [David Jennes](https://github.com/djbe) 
+  [SwiftGen/templates/#72](https://github.com/SwiftGen/templates/pull/72)
 
 ## 5.0.0
 

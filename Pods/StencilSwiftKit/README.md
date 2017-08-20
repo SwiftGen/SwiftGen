@@ -25,13 +25,19 @@
 ## Filters
 
 * [String filters](Documentation/filters-strings.md):
+  * `basename`: Get the filename from a path.
   * `camelToSnakeCase`: Transforms text from camelCase to snake_case. By default it converts to lower case, unless a single optional argument is set to "false", "no" or "0".
+  * `contains`: Check if a string contains a specific substring.
+  * `dirname`: Get the path to the parent folder from a path.
   * `escapeReservedKeywords`: Escape keywords reserved in the Swift language, by wrapping them inside backticks so that the can be used as regular escape keywords in Swift code.
+  * `hasPrefix` / `hasSuffix`: Check if a string starts/ends with a specific substring.
+  * `lowerFirstLetter`: Lowercases only the first letter of a string.
   * `lowerFirstWord`: Lowercases only the first word of a string.
   * `removeNewlines`: Removes newlines and other whitespace characters, depending on the mode ("all" or "leading").
+  * `replace`: Replaces instances of a substring with a new string.
   * `snakeToCamelCase`: Transforms text from snake_case to camelCase. By default it keeps leading underscores, unless a single optional argument is set to "true", "yes" or "1".
-  * `swiftIdentifier`: Transforms an arbitrary string into a valid Swift identifier (using only valid characters for a Swift identifier as defined in the Swift language reference)
-  * `titlecase`: Uppercases only the first character
+  * `swiftIdentifier`: Transforms an arbitrary string into a valid Swift identifier (using only valid characters for a Swift identifier as defined in the Swift language reference). In "pretty" mode, it will also apply the snakeToCamelCase filter afterwards, and other manipulations if needed for a "prettier" but still valid identifier.
+  * `upperFirstLetter`: Uppercases only the first character
 * [Number filters](Documentation/filters-numbers.md):
   * `int255toFloat`
   * `hexToInt`
