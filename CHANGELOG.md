@@ -2,23 +2,17 @@
 
 ---
 
-## Master
+## 5.1.1
+
+### Changes in other SwiftGen modules
+
+* [templates 2.1.1](https://github.com/SwiftGen/templates/blob/2.1.1/CHANGELOG.md)
 
 ### Bug Fixes
 
-_None_
-
-### Breaking Changes
-
-_None_
-
-### New Features
-
-_None_
-
-### Internal Changes
-
-_None_
+* XCAssets: fixed some compatibility issues with the swift 3 template on Xcode 8, and with other templates.  
+  [David Jennes](https://github.com/djbe) 
+  [SwiftGen/templates#76](https://github.com/SwiftGen/templates/pull/76)
 
 ## 5.1.0
 
