@@ -2,7 +2,7 @@
 # none
 
 if File.file?('Package.swift')
-    namespace :spm do
+  namespace :spm do
     desc 'Build using SPM'
     task :build do |task|
       Utils.print_header 'Compile using SPM'

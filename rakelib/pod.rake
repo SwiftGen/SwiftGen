@@ -6,7 +6,7 @@ if defined?(POD_NAME) && File.file?("#{POD_NAME}.podspec")
     desc 'Lint the Pod'
     task :lint do |task|
       Utils.print_header 'Linting the pod spec'
-      Utils.run(%Q(bundle exec pod lib lint "#{POD_NAME}.podspec" --quick), task)
+      Utils.run(%(bundle exec pod lib lint "#{POD_NAME}.podspec" --quick), task)
     end
   end
 end

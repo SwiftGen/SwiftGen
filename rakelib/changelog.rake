@@ -3,7 +3,7 @@
 
 namespace :changelog do
   desc 'Add the empty CHANGELOG entries after a new release'
-  task :reset do |task|
+  task :reset do
     changelog = File.read('CHANGELOG.md')
     abort('A Master entry already exists') if changelog =~ /^##\s*Master$/
     changelog.sub!(/^##[^#]/, "#{header}\\0")
@@ -11,7 +11,7 @@ namespace :changelog do
   end
 
   def header
-    return <<-HEADER.gsub(/^\s*\|/,'')
+    <<-HEADER.gsub(/^\s*\|/, '')
       |## Master
       |
       |### Bug Fixes
@@ -34,20 +34,19 @@ namespace :changelog do
   end
 
   desc 'Check if links to issues and PRs use matching numbers between text & link'
-  task :check do |task|
+  task :check do
     current_repo = File.basename(`git remote get-url origin`.chomp, '.git').freeze
     slug_re = '([a-zA-Z]*/[a-zA-Z]*)'
     links = %r{\[#{slug_re}?\#([0-9]+)\]\(https://github.com/#{slug_re}/(issues|pull)/([0-9]+)\)}
     all_wrong_links = []
     File.readlines('CHANGELOG.md').each_with_index do |line, idx|
-      wrong_links = line.scan(links)
-        .reject do |m|
-          (slug, num, url_slug, url_num) = [m[0] || "SwiftGen/#{current_repo}", m[1], m[2], m[4]]
-          (slug == url_slug) && (num == url_num)
-        end.map do |m|
-          " - Line #{idx+1}, link text is #{m[0]}##{m[1]} but links points to #{m[2]}##{m[4]}"
-        end
-      all_wrong_links.concat(wrong_links)
+      wrong_links = line.scan(links).reject do |m|
+        slug = m[0] || "SwiftGen/#{current_repo}"
+        (slug == m[2]) && (m[1] == m[4])
+      end
+      all_wrong_links.concat wrong_links.map do |m|
+        " - Line #{idx + 1}, link text is #{m[0]}##{m[1]} but links points to #{m[2]}##{m[4]}"
+      end
     end
     if all_wrong_links.empty?
       puts "\u{2705}  All links correct"
@@ -65,6 +64,6 @@ namespace :changelog do
     body = Utils.top_changelog_entry
 
     repo_name = File.basename(`git remote get-url origin`.chomp, '.git').freeze
-    client.create_release("SwiftGen/#{repo_name}", tag, :body => body)
+    client.create_release("SwiftGen/#{repo_name}", tag, body: body)
   end
 end
