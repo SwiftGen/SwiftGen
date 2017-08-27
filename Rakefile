@@ -17,10 +17,15 @@ TEMPLATES_SRC_DIR = 'Resources/templates'.freeze
 
 ## [ Utils ] ##################################################################
 
+def path(str)
+  return nil if str.nil? || str.empty?
+  Pathname.new(str)
+end
+
 def defaults(args)
-  bindir = args.bindir.nil? || args.bindir.empty? ? (Pathname.new(BUILD_DIR) + 'swiftgen/bin') : Pathname.new(args.bindir)
-  fmkdir = args.fmkdir.nil? || args.fmkdir.empty? ? bindir + '../lib' : Pathname.new(args.fmkdir)
-  tpldir = args.tpldir.nil? || args.tpldir.empty? ? bindir + '../templates' : Pathname.new(args.tpldir)
+  bindir = path(args.bindir) || (Pathname.new(BUILD_DIR) + 'swiftgen/bin')
+  fmkdir = path(args.fmkdir) || (bindir + '../lib')
+  tpldir = path(args.tpldir) || (bindir + '../templates')
   [bindir, fmkdir, tpldir].map(&:expand_path)
 end
 
@@ -84,7 +89,7 @@ namespace :cli do
   end
 end
 
-task default: 'cli:build'
+task :default => 'cli:build'
 
 ## [ ChangeLog ] ##############################################################
 
@@ -125,15 +130,31 @@ namespace :playground do
     sh 'mkdir SwiftGen.playground/Resources'
   end
   task :xcassets do
-    Utils.run(%(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 --output-format=human-readable-text Resources/Fixtures/XCAssets/Images.xcassets), task, xcrun: true)
+    Utils.run(
+      %(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 ) +
+        %(--output-format=human-readable-text Resources/Fixtures/XCAssets/Images.xcassets),
+      task,
+      xcrun: true
+    )
   end
   task :storyboard do
-    Utils.run(%(ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO Resources/Fixtures/Storyboards-iOS/Wizard.storyboard), task, xcrun: true)
+    Utils.run(
+      %(ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO ) +
+        %(Resources/Fixtures/Storyboards-iOS/Wizard.storyboard),
+      task,
+      xcrun: true
+    )
   end
   task :strings do
-    Utils.run(%(plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings Resources/Fixtures/Strings/Localizable.strings), task, xcrun: true)
+    Utils.run(
+      %(plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings ) +
+        %(Resources/Fixtures/Strings/Localizable.strings),
+      task,
+      xcrun: true
+    )
   end
 
-  desc "Regenerate all the Playground resources based on the test fixtures.\nThis compiles the needed fixtures and place them in SwiftGen.playground/Resources"
-  task resources: %w[clean xcassets storyboard strings]
+  desc "Regenerate all the Playground resources based on the test fixtures.\n" \
+    'This compiles the needed fixtures and place them in SwiftGen.playground/Resources'
+  task :resources => %w[clean xcassets storyboard strings]
 end
