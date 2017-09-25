@@ -2,6 +2,15 @@
 
 ---
 
+## 5.1.2
+
+* Allows the SwiftGen source code to be built with Xcode 9.
+  This also has the nice side-effect of making the homebrew installation of SwiftGen also available for macOS 10.13.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [David Jennes](https://github.com/djbe)
+  [#330](https://github.com/SwiftGen/SwiftGen/issues/330)
+  [SwiftGen/Eve#10](https://github.com/SwiftGen/Eve/pull/10)
+
 ## 5.1.1
 
 ### Changes in other SwiftGen modules
