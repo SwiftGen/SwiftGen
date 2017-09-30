@@ -111,3 +111,5 @@ Unless you're adding (or updating) dependencies, you won't have to run `pod inst
 ### Building & Running
 
 The Xcode workspace, by default, is configured to run SwiftGen built as an app bundle, with some default parameters. You can switch (and modify) these by going to `Product > Scheme > Edit Scheme... > Arguments`, and checking (and unchecking) the command you want to test.
+
+If you made some updates in the SwiftGen CLI, you can test it by building your own version. Take a look at the `Compile from source` part of [the installation guide](https://github.com/SwiftGen/SwiftGen#installation).
