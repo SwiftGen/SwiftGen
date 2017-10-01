@@ -25,12 +25,7 @@ let paramsOption = VariadicOption<String>(
   description: "List of template parameters"
 )
 
-public struct ParserCommand {
-  public let parserType: Parser.Type
-  public let name: String
-  public let description: String
-  public let pathDescription: String
-
+extension ParserCommand {
   func command() -> CommandType {
     return Commander.command(
       outputOption,

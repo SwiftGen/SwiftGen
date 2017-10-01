@@ -10,41 +10,6 @@ import Stencil
 import StencilSwiftKit
 import SwiftGenKit
 
-// MARK: - All Parser Commands
-
-let allParserCommands: [ParserCommand] = [
-  ParserCommand(
-    parserType: AssetsCatalogParser.self,
-    name: "xcassets",
-    description: "generate code for items in your Assets Catalog(s)",
-    pathDescription: "Asset Catalog file(s)."
-  ),
-  ParserCommand(
-    parserType: ColorsParser.self,
-    name: "colors",
-    description: "generate code for color palettes",
-    pathDescription: "Colors.txt|.clr|.xml|.json file(s) to parse."
-  ),
-  ParserCommand(
-    parserType: StringsParser.self,
-    name: "strings",
-    description: "generate code for your Localizable.strings file(s)",
-    pathDescription: "Strings file(s) to parse."
-  ),
-  ParserCommand(
-    parserType: StoryboardParser.self,
-    name: "storyboards",
-    description: "generate code for your storyboard scenes and segues",
-    pathDescription: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard"
-  ),
-  ParserCommand(
-    parserType: FontsParser.self,
-    name: "fonts",
-    description: "generate code for your fonts",
-    pathDescription: "Directory(ies) to parse."
-  )
-]
-
 // MARK: Common
 
 let templatesRelativePath: String
@@ -64,6 +29,11 @@ let outputOption = Option(
 // MARK: - Main
 
 let main = Group {
+  $0.group("config", "manage and run configuration files") {
+    $0.addCommand("lint", "Lint the configuration file", configLintCommand)
+    $0.addCommand("run", "Run commands listed in the configuration file", configRunCommand)
+  }
+
   $0.group("templates", "manage custom templates") {
     $0.addCommand("list", "list bundled and custom templates", templatesListCommand)
     $0.addCommand("which", "print path of a given named template", templatesWhichCommand)

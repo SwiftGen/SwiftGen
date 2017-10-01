@@ -1,0 +1,8 @@
+output_dir: Common/Generated
+strings:
+  sources: Sources1/Folder
+  templateName: swift3
+  output: strings.swift
+  params:
+    foo: bar
+    baz: 42
