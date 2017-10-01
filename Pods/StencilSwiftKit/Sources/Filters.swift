@@ -13,6 +13,33 @@ enum Filters {
     case invalidOption(option: String)
   }
 
+  /// Parses filter input value for a string value, where accepted objects must conform to
+  /// `CustomStringConvertible`
+  ///
+  /// - Parameters:
+  ///   - value: an input value, may be nil
+  /// - Throws: Filters.Error.invalidInputType
+  static func parseString(from value: Any?) throws -> String {
+    guard let stringArg = value as? LosslessStringConvertible else {
+      throw Error.invalidInputType
+    }
+    return String(describing: stringArg)
+  }
+
+  /// Parses filter arguments for a string value, where accepted objects must conform to 
+  /// `CustomStringConvertible`
+  ///
+  /// - Parameters:
+  ///   - arguments: an array of argument values, may be empty
+  ///   - index: the index in the arguments array
+  /// - Throws: Filters.Error.invalidInputType
+  static func parseStringArgument(from arguments: [Any?], at index: Int = 0) throws -> String {
+    guard index < arguments.count, let stringArg = arguments[index] as? LosslessStringConvertible else {
+      throw Error.invalidInputType
+    }
+    return String(describing: stringArg)
+  }
+
   /// Parses filter arguments for a boolean value, where true can by any one of: "true", "yes", "1", and
   /// false can be any one of: "false", "no", "0". If optional is true it means that the argument on the filter is
   /// optional and it's not an error condition if the argument is missing or not the right type

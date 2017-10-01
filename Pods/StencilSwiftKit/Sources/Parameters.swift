@@ -31,17 +31,7 @@ public enum Parameters {
   /// - Returns: A structured dictionary matching the list of keys
   /// - Throws: `Parameters.Error`
   public static func parse(items: [String]) throws -> StringDict {
-    let parameters: [Parameter] = try items.map { item in
-      let parts = item.components(separatedBy: "=")
-      if parts.count >= 2 {
-        return (key: parts[0], value: parts.dropFirst().joined(separator: "="))
-      } else if let part = parts.first, parts.count == 1 && validate(key: part) {
-        return (key: part, value: true)
-      } else {
-        throw Error.invalidSyntax(value: item)
-      }
-    }
-
+    let parameters: [Parameter] = try items.map(createParameter)
     return try parameters.reduce(StringDict()) {
       try parse(parameter: $1, result: $0)
     }
@@ -60,33 +50,46 @@ public enum Parameters {
   private static func parse(parameter: Parameter, result: StringDict) throws -> StringDict {
     let parts = parameter.key.components(separatedBy: ".")
     let key = parts.first ?? ""
-    var result = result
 
     // validate key
     guard validate(key: key) else { throw Error.invalidKey(key: parameter.key, value: parameter.value) }
 
     // no sub keys, may need to convert to array if repeat key if possible
     if parts.count == 1 {
-      if let current = result[key] as? [Any] {
-        result[key] = current + [parameter.value]
-      } else if let current = result[key] as? String {
-        result[key] = [current, parameter.value]
-      } else if let current = result[key] {
-        throw Error.invalidStructure(key: key, oldValue: current, newValue: parameter.value)
-      } else {
-        result[key] = parameter.value
-      }
-    } else if parts.count > 1 {
-      guard result[key] is StringDict || result[key] == nil else {
-        throw Error.invalidStructure(key: key, oldValue: result[key] ?? "", newValue: parameter.value)
-      }
-
-      // recurse into sub keys
-      let current = result[key] as? StringDict ?? StringDict()
-      let sub = (key: parts.suffix(from: 1).joined(separator: "."), value: parameter.value)
-      result[key] = try parse(parameter: sub, result: current)
+      return try parse(key: key, parameter: parameter, result: result)
     }
 
+    guard result[key] is StringDict || result[key] == nil else {
+      throw Error.invalidStructure(key: key, oldValue: result[key] ?? "", newValue: parameter.value)
+    }
+
+    // recurse into sub keys
+    var result = result
+    let current = result[key] as? StringDict ?? StringDict()
+    let sub = (key: parts.suffix(from: 1).joined(separator: "."), value: parameter.value)
+    result[key] = try parse(parameter: sub, result: current)
+    return result
+  }
+
+  /// Parse a single `key=value` (or `key`) string and inserts it into
+  /// an existing StringDict dictionary being built.
+  ///
+  /// - Parameters:
+  ///   - parameter: The parameter/string (key/value pair) to parse, where key doesn't have sub keys
+  ///   - result: The dictionary currently being built and to which to add the value
+  /// - Returns: The new content of the dictionary being built after inserting the new parsed value
+  /// - Throws: `Parameters.Error`
+  private static func parse(key: String, parameter: Parameter, result: StringDict) throws -> StringDict {
+    var result = result
+    if let current = result[key] as? [Any] {
+      result[key] = current + [parameter.value]
+    } else if let current = result[key] as? String {
+      result[key] = [current, parameter.value]
+    } else if let current = result[key] {
+      throw Error.invalidStructure(key: key, oldValue: current, newValue: parameter.value)
+    } else {
+      result[key] = parameter.value
+    }
     return result
   }
 
@@ -101,4 +104,15 @@ public enum Parameters {
     result.insert(".")
     return result.inverted
   }()
+
+  private static func createParameter(from string: String) throws -> Parameter {
+    let parts = string.components(separatedBy: "=")
+    if parts.count >= 2 {
+      return (key: parts[0], value: parts.dropFirst().joined(separator: "="))
+    } else if let part = parts.first, parts.count == 1 && validate(key: part) {
+      return (key: part, value: true)
+    } else {
+      throw Error.invalidSyntax(value: string)
+    }
+  }
 }

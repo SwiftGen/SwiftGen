@@ -25,10 +25,7 @@ extension ConfigEntry {
                                               environment: stencilSwiftEnvironment())
 
       let context = parser.stencilContext()
-      // FIXME: Change StencilSwiftKit to accept a [String: Any] for parameters.
-      // For now we do this dirty trick waiting for a new version of StencilSwiftKit to be released.
-      let params = self.parameters.map({ (key, value) -> String in "\(key)=\(value)" })
-      let enriched = try StencilContext.enrich(context: context, parameters: params) // FIXME: self.parameters
+      let enriched = try StencilContext.enrich(context: context, parameters: self.parameters)
       let rendered = try template.render(enriched)
       let output = OutputDestination.file(self.output)
       output.write(content: rendered, onlyIfChanged: true)
@@ -63,7 +60,7 @@ let configRunCommand = command(
         entry.output = outPrefix + entry.output
       }
       guard let parserCmd = allParserCommands.first(where: { $0.name == cmd }) else {
-        throw ArgumentError.unusedArgument(cmd) // FIXME: Better error
+        throw ConfigError.missingEntry(key: cmd)
       }
       try entry.run(parserCommand: parserCmd)
     }

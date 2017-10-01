@@ -5,7 +5,7 @@ def common_pods
   pod 'SwiftGenKit', '~> 2.1'
   pod 'PathKit', '~> 0.8.0', inhibit_warnings: true
   pod 'Stencil', '~> 0.9.0', inhibit_warnings: true
-  pod 'StencilSwiftKit', '~> 2.1'
+  pod 'StencilSwiftKit', '~> 2.2'
   pod 'Yams', '~> 0.3'
 end
 
