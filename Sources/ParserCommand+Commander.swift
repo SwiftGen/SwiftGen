@@ -15,9 +15,10 @@ let templateNameOption = Option<String>(
   "(without the extension)."
 )
 
-let templatePathOption = Option<String>(
+let templatePathOption = Option<Path>(
   "templatePath", "", flag: "p",
-  description: "The path of the template to use for code generation. Overrides -t."
+  description: "The path of the template to use for code generation. Overrides -t.",
+  validator: checkPath(type: "template file") { $0.isFile }
 )
 
 let paramsOption = VariadicOption<String>(

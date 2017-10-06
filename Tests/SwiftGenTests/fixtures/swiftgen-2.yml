@@ -1,0 +1,13 @@
+input_dir: ../../../Resources/Fixtures/
+output_dir: /tmp/swiftgen/
+strings:
+  sources: Strings/Localizable.strings
+  templateName: structured-swift3
+  output: strings.swift
+xcassets:
+  - sources: XCAssets/Colors.xcassets
+    templateName: swift3
+    output: assets-colors.swift
+  - sources: XCAssets/Images.xcassets
+    templateName: swift3
+    output: assets-images.swift

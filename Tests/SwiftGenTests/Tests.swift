@@ -26,17 +26,19 @@ class Tests: XCTestCase {
         return XCTFail("Can't get strings only config entry")
       }
       XCTAssertEqual(str.sources, ["Sources1/Folder"])
-      XCTAssertEqual(str.templateName, "swift3")
+      XCTAssertEqual(str.templateName, "structured-swift3")
       XCTAssertEqual(str.output, "strings.swift")
-      XCTAssertEqual(str.parameters.count, 2)
-      guard let foo = str.parameters["foo"] as? String else {
-        return XCTFail("parameter foo of type String not found")
-      }
-      XCTAssertEqual(foo, "bar")
-      guard let baz = str.parameters["baz"] as? Int else {
-        return XCTFail("parameter baz of type Int not found")
-      }
-      XCTAssertEqual(baz, 42)
+      XCTAssertEqual(str.parameters["foo"] as? Int, 5)
+      let barParams = str.parameters["bar"] as? [String: Any]
+      XCTAssertEqual(barParams?["bar1"] as? Int, 1)
+      XCTAssertEqual(barParams?["bar2"] as? Int, 2)
+      let bar3Params = barParams?["bar3"] as? [Any]
+      XCTAssertEqual(bar3Params?.count, 3)
+      XCTAssertEqual(bar3Params?[0] as? Int, 3)
+      XCTAssertEqual(bar3Params?[1] as? Int, 4)
+      XCTAssertEqual((bar3Params?[2] as? [String: Int]) ?? [:], ["bar3a": 50])
+      let bazParams = str.parameters["baz"] as? [String]
+      XCTAssertEqual(bazParams ?? [], ["hello", "world"])
     } catch let e {
       XCTFail("Error: \(e)")
     }

@@ -25,10 +25,10 @@ struct ConfigEntry {
     static let output = "output"
   }
 
-  let sources: [Path]
-  let templatePath: String
-  let templateName: String
-  let parameters: [String: Any]
+  var sources: [Path]
+  var templatePath: Path?
+  var templateName: String?
+  var parameters: [String: Any]
   var output: Path
 
   init(yaml: [String: Any]) throws {
@@ -43,14 +43,26 @@ struct ConfigEntry {
       throw ConfigError.wrongType(key: Keys.sources)
     }
 
-    self.templatePath = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.templatePath) ?? ""
-    self.templateName = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.templateName) ?? ""
+    self.templatePath = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.templatePath)
+    self.templateName = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.templateName)
     self.parameters = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.params) ?? [:]
 
     guard let output: String = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.output) else {
       throw ConfigError.missingEntry(key: Keys.output)
     }
     self.output = Path(output)
+  }
+
+  mutating func makeRelativeTo(inputDir: Path?, outputDir: Path?) {
+    if let inputDir = inputDir {
+      self.sources = self.sources.map { $0.isRelative ? inputDir + $0 : $0 }
+      if let tplPath = self.templatePath, tplPath.isRelative {
+        self.templatePath = inputDir + tplPath
+      }
+    }
+    if let outputDir = outputDir, self.output.isRelative {
+      self.output = outputDir + self.output
+    }
   }
 
   private static func getOptionalField<T>(yaml: [String: Any], key: String) throws -> T? {
@@ -76,9 +88,11 @@ struct ConfigEntry {
 
 struct Config {
   enum Keys {
+    static let inputDir = "input_dir"
     static let outputDir = "output_dir"
   }
 
+  let inputDir: Path?
   let outputDir: Path?
   let commands: [String: [ConfigEntry]]
 
@@ -88,6 +102,7 @@ struct Config {
     guard let config = anyConfig as? [String: Any] else {
       throw ConfigError.wrongType(key: nil)
     }
+    self.inputDir = (config[Keys.inputDir] as? String).map({ Path($0) })
     self.outputDir = (config[Keys.outputDir] as? String).map({ Path($0) })
     var cmds: [String: [ConfigEntry]] = [:]
     for parserCmd in allParserCommands {
