@@ -11,9 +11,18 @@ import StencilSwiftKit
 import SwiftGenKit
 import Yams
 
-enum ConfigError: Error {
+enum ConfigError: Error, CustomStringConvertible {
   case missingEntry(key: String)
-  case wrongType(key: String?)
+  case wrongType(key: String?, expected: String, got: Any.Type)
+
+  var description: String {
+    switch self {
+    case .missingEntry(let key):
+      return "Missing entry for key \(key)"
+    case .wrongType(let key, let expected, let got):
+      return "Wrong type for key \(key ?? "root"): expected \(expected), got \(got)"
+    }
+  }
 }
 
 // MARK: - ConfigEntry
@@ -42,7 +51,7 @@ struct ConfigEntry {
     } else if let srcs = srcs as? [String] {
       self.sources = srcs.map({ Path($0) })
     } else {
-      throw ConfigError.wrongType(key: Keys.sources)
+      throw ConfigError.wrongType(key: Keys.sources, expected: "Path or array of Paths", got: type(of: srcs))
     }
 
     self.templatePath = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.templatePath)
@@ -73,7 +82,7 @@ struct ConfigEntry {
     } else if let e = yaml as? [[String: Any]] {
       return try e.map({ try ConfigEntry(yaml: $0) })
     } else {
-      throw ConfigError.wrongType(key: nil)
+      throw ConfigError.wrongType(key: nil, expected: "Dictionary or Array", got: type(of: yaml))
     }
   }
 
@@ -82,7 +91,7 @@ struct ConfigEntry {
       return nil
     }
     guard let typedValue = value as? T else {
-      throw ConfigError.wrongType(key: key)
+      throw ConfigError.wrongType(key: key, expected: String(describing: T), got: type(of: value))
     }
     return typedValue
   }
@@ -104,14 +113,22 @@ struct Config {
     let content: String = try file.read()
     let anyConfig = try Yams.load(yaml: content)
     guard let config = anyConfig as? [String: Any] else {
-      throw ConfigError.wrongType(key: nil)
+      throw ConfigError.wrongType(key: nil, expected: "Dictionary", got: type(of: anyConfig))
     }
     self.inputDir = (config[Keys.inputDir] as? String).map({ Path($0) })
     self.outputDir = (config[Keys.outputDir] as? String).map({ Path($0) })
     var cmds: [String: [ConfigEntry]] = [:]
     for parserCmd in allParserCommands {
       if let cmdEntry = config[parserCmd.name] {
-        cmds[parserCmd.name] = try ConfigEntry.parseCommandEntry(yaml: cmdEntry)
+        do {
+          cmds[parserCmd.name] = try ConfigEntry.parseCommandEntry(yaml: cmdEntry)
+        } catch let e as ConfigError {
+          // Prefix the name of the command for a better error message
+          if case .missingEntry(let key) = e {
+            throw ConfigError.missingEntry(key: "\(parserCmd.name).\(key)")
+          }
+          throw e
+        }
       }
     }
     self.commands = cmds

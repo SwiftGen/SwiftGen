@@ -13,6 +13,8 @@
 		0934050E1F815A8C00187787 /* ParserCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050D1F815A8C00187787 /* ParserCommands.swift */; };
 		0934050F1F815A9100187787 /* ParserCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050D1F815A8C00187787 /* ParserCommands.swift */; };
 		093405101F815B2500187787 /* swiftgen-1.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405071F81539100187787 /* swiftgen-1.yml */; };
+		093405131F87AA6A00187787 /* swiftgen-2.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405111F87AA6500187787 /* swiftgen-2.yml */; };
+		093405151F87AA9700187787 /* swiftgen-bad.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405141F87AA9700187787 /* swiftgen-bad.yml */; };
 		09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030C171B6D43D400275BF5 /* TestsHelper.swift */; };
 		09A87B5C1BCCA37F00D9B9F5 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD81B6D2E5900275BF5 /* Tests.swift */; };
 		234F7E7D1DEBD765001B3C10 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7B2D31BCC382800D7F488 /* main.swift */; };
@@ -67,6 +69,8 @@
 		093405071F81539100187787 /* swiftgen-1.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "swiftgen-1.yml"; sourceTree = "<group>"; };
 		0934050A1F8158B800187787 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		0934050D1F815A8C00187787 /* ParserCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserCommands.swift; sourceTree = "<group>"; };
+		093405111F87AA6500187787 /* swiftgen-2.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "swiftgen-2.yml"; sourceTree = "<group>"; };
+		093405141F87AA9700187787 /* swiftgen-bad.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "swiftgen-bad.yml"; sourceTree = "<group>"; };
 		09A87B501BCCA2C600D9B9F5 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09C7B2D31BCC382800D7F488 /* main.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; tabWidth = 2; };
 		09E7146D1B6D55B4007FF3CF /* SwiftGen.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftGen.playground; sourceTree = "<group>"; };
@@ -150,6 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				093405071F81539100187787 /* swiftgen-1.yml */,
+				093405111F87AA6500187787 /* swiftgen-2.yml */,
+				093405141F87AA9700187787 /* swiftgen-bad.yml */,
 			);
 			path = fixtures;
 			sourceTree = "<group>";
@@ -288,6 +294,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				093405131F87AA6A00187787 /* swiftgen-2.yml in Resources */,
 				093405101F815B2500187787 /* swiftgen-1.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDC09D021E1D199A005C6EE6 /* templates in Resources */,
+				093405151F87AA9700187787 /* swiftgen-bad.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

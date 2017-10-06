@@ -59,9 +59,10 @@ extension ConfigEntry {
     } else {
       tplFlag = ""
     }
-    let params = listValues(in: self.parameters).joined(separator: " ")
+    let params = listValues(in: self.parameters)
+    let paramsList = params.isEmpty ? "" : (" " + params.map({ "--param \($0)" }).joined(separator: " "))
     let sourcesList = self.sources.map({ $0.string }).joined(separator: " ")
-    return "swiftgen \(cmd) \(tplFlag) \(params) -o \(self.output) \(sourcesList)"
+    return "swiftgen \(cmd) \(tplFlag)\(paramsList) -o \(self.output) \(sourcesList)"
   }
 }
 
@@ -90,8 +91,18 @@ let configLintCommand = command(
                  description: "Path to the configuration file to use",
                  validator: checkPath(type: "config file") { $0.isFile })
 ) { file in
-  // TODO: Implement this
-  print("Linting \(file): not available yet")
+  print("Linting \(file)")
+  let config = try Config(file: file)
+  print("> Common parent directory used for all input paths:  \(config.inputDir ?? "<none>")")
+  print("> Common parent directory used for all output paths: \(config.outputDir ?? "<none>")")
+  for (cmd, entries) in config.commands {
+    let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
+    print("> \(entriesCount) for command \(cmd):")
+    for var entry in entries {
+      entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
+      print("  $ " + entry.commandLine(forCommand: cmd))
+    }
+  }
 }
 
 let configRunCommand = command(

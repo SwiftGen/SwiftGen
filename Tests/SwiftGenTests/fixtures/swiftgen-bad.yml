@@ -1,0 +1,9 @@
+strings:
+  template: invalidKey
+  output:
+    - bad
+    - entry
+foo:
+  sources: Bar
+  templateName: baz
+  output: Foo.swift
