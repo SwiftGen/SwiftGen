@@ -13,3 +13,8 @@ xcassets:
   - sources: XCAssets/Images.xcassets
     templateName: swift3
     output: assets-images.swift
+  - sources:
+      - XCAssets/Colors.xcassets
+      - XCAssets/Images.xcassets
+    templateName: swift3
+    output: assets-all.swift
