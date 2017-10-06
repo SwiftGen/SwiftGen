@@ -16,6 +16,8 @@ enum ConfigError: Error {
   case wrongType(key: String?)
 }
 
+// MARK: - ConfigEntry
+
 struct ConfigEntry {
   enum Keys {
     static let sources = "sources"
@@ -65,16 +67,6 @@ struct ConfigEntry {
     }
   }
 
-  private static func getOptionalField<T>(yaml: [String: Any], key: String) throws -> T? {
-    guard let value = yaml[key] else {
-      return nil
-    }
-    guard let typedValue = value as? T else {
-      throw ConfigError.wrongType(key: key)
-    }
-    return typedValue
-  }
-
   static func parseCommandEntry(yaml: Any) throws -> [ConfigEntry] {
     if let e = yaml as? [String: Any] {
       return [try ConfigEntry(yaml: e)]
@@ -84,7 +76,19 @@ struct ConfigEntry {
       throw ConfigError.wrongType(key: nil)
     }
   }
+
+  private static func getOptionalField<T>(yaml: [String: Any], key: String) throws -> T? {
+    guard let value = yaml[key] else {
+      return nil
+    }
+    guard let typedValue = value as? T else {
+      throw ConfigError.wrongType(key: key)
+    }
+    return typedValue
+  }
 }
+
+// MARK: - Config
 
 struct Config {
   enum Keys {

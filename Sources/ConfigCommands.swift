@@ -50,7 +50,7 @@ extension ConfigEntry {
 }
 
 extension ConfigEntry {
-  var commandLine: String {
+  func commandLine(forCommand cmd: String) -> String {
     let tplFlag: String
     if let name = self.templateName {
       tplFlag = "-t \(name)"
@@ -61,7 +61,7 @@ extension ConfigEntry {
     }
     let params = listValues(in: self.parameters).joined(separator: " ")
     let sourcesList = self.sources.map({ $0.string }).joined(separator: " ")
-    return "\(tplFlag) \(params) -o \(self.output) \(sourcesList)"
+    return "swiftgen \(cmd) \(tplFlag) \(params) -o \(self.output) \(sourcesList)"
   }
 }
 
@@ -114,7 +114,7 @@ let configRunCommand = command(
         }
         entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
         do {
-          if verbose { print("> swiftgen \(cmd) \(entry.commandLine)") }
+          if verbose { print(entry.commandLine(forCommand: cmd)) }
           try entry.checkPaths()
           try entry.run(parserCommand: parserCmd)
         } catch let e {
