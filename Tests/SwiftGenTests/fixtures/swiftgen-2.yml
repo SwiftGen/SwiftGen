@@ -4,6 +4,8 @@ strings:
   sources: Strings/Localizable.strings
   templateName: structured-swift3
   output: strings.swift
+  params:
+    enumName: Loc
 xcassets:
   - sources: XCAssets/Colors.xcassets
     templateName: swift3
