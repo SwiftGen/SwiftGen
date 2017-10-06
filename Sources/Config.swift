@@ -91,7 +91,7 @@ struct ConfigEntry {
       return nil
     }
     guard let typedValue = value as? T else {
-      throw ConfigError.wrongType(key: key, expected: String(describing: T), got: type(of: value))
+      throw ConfigError.wrongType(key: key, expected: String(describing: T.self), got: type(of: value))
     }
     return typedValue
   }
