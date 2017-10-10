@@ -16,7 +16,6 @@ extension ConfigEntry {
     for src in self.sources {
       guard src.exists else {
         throw ArgumentError.invalidType(value: src.string, type: "existing path", argument: nil)
-
       }
     }
     guard self.output.parent().exists else {
@@ -47,9 +46,7 @@ extension ConfigEntry {
       printError(string: "error: failed to render template: \(error)")
     }
   }
-}
 
-extension ConfigEntry {
   func commandLine(forCommand cmd: String) -> String {
     let tplFlag: String
     if let name = self.templateName {
@@ -107,7 +104,9 @@ let configRunCommand = command(
         }
         entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
         do {
-          if verbose { print(entry.commandLine(forCommand: cmd)) }
+          if verbose {
+            print(entry.commandLine(forCommand: cmd))
+          }
           try entry.checkPaths()
           try entry.run(parserCommand: parserCmd)
         } catch let e {
