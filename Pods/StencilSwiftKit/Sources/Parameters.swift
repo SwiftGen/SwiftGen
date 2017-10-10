@@ -37,6 +37,23 @@ public enum Parameters {
     }
   }
 
+  /// Flatten a dictionary into a list of "key.path=value" pairs.
+  /// This method recursively visits the object to build its flat representation.
+  ///
+  /// - Parameters:
+  ///   - dictionary: The dictionary to recursively flatten into key pairs
+  /// - Returns: The list of flatten "key.path=value" pair representations of the object
+  ///
+  /// - Note: flatten is the counterpart of parse. flatten(parse(x)) == parse(flatten(x)) == x
+  ///
+  /// - Example:
+  ///
+  ///       flatten(["a":["b":1,"c":[2,3]]])
+  ///       // ["a.b=1","a.c=2","a.c=3"]
+  public static func flatten(dictionary: StringDict) -> [String] {
+    return flatten(object: dictionary, keyPrefix: "")
+  }
+
   // MARK: - Private methods
 
   /// Parse a single `key=value` (or `key`) string and inserts it into
@@ -114,5 +131,33 @@ public enum Parameters {
     } else {
       throw Error.invalidSyntax(value: string)
     }
+  }
+
+  /// Flatten an object (dictionary, array or single object) into a list of keypath-type k=v pairs.
+  /// This method recursively visits the object to build the flat representation.
+  ///
+  /// - Parameters:
+  ///   - object: The object to recursively flatten
+  ///   - keyPrefix: The prefix to use when creating keys.
+  ///                This is used to build the keyPath via recusrive calls of this function.
+  ///                You should start the root call of this recursive function with an empty keyPrefix.
+  /// - Returns: The list of flatten "key.path=value" pair representations of the object
+  private static func flatten(object: Any, keyPrefix: String = "") -> [String] {
+    var values: [String] = []
+    switch object {
+    case is String, is Int, is Double:
+      values.append("\(keyPrefix)=\(object)")
+    case is Bool:
+      values.append(keyPrefix)
+    case let dict as [String: Any]:
+      for (key, value) in dict {
+        let fullKey = keyPrefix.isEmpty ? key : "\(keyPrefix).\(key)"
+        values += flatten(object: value, keyPrefix: fullKey)
+      }
+    case let array as [Any]:
+      values += array.flatMap { flatten(object: $0, keyPrefix: keyPrefix) }
+    default: break
+    }
+    return values
   }
 }

@@ -20,10 +20,13 @@ enum Filters {
   ///   - value: an input value, may be nil
   /// - Throws: Filters.Error.invalidInputType
   static func parseString(from value: Any?) throws -> String {
-    guard let stringArg = value as? LosslessStringConvertible else {
-      throw Error.invalidInputType
+    if let losslessString = value as? LosslessStringConvertible {
+        return String(describing: losslessString)
     }
-    return String(describing: stringArg)
+    if let string = value as? String {
+        return string
+    }
+    throw Error.invalidInputType
   }
 
   /// Parses filter arguments for a string value, where accepted objects must conform to 
@@ -34,10 +37,16 @@ enum Filters {
   ///   - index: the index in the arguments array
   /// - Throws: Filters.Error.invalidInputType
   static func parseStringArgument(from arguments: [Any?], at index: Int = 0) throws -> String {
-    guard index < arguments.count, let stringArg = arguments[index] as? LosslessStringConvertible else {
-      throw Error.invalidInputType
+    guard index < arguments.count else {
+        throw Error.invalidInputType
     }
-    return String(describing: stringArg)
+    if let losslessString = arguments[index] as? LosslessStringConvertible {
+        return String(describing: losslessString)
+    }
+    if let string = arguments[index] as? String {
+        return string
+    }
+    throw Error.invalidInputType
   }
 
   /// Parses filter arguments for a boolean value, where true can by any one of: "true", "yes", "1", and

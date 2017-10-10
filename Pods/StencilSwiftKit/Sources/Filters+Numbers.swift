@@ -11,7 +11,7 @@ extension Filters {
   enum Numbers {
     static func hexToInt(_ value: Any?) throws -> Any? {
       guard let value = value as? String else { throw Filters.Error.invalidInputType }
-      return Int(value, radix:  16)
+      return Int(value, radix: 16)
     }
 
     static func int255toFloat(_ value: Any?) throws -> Any? {

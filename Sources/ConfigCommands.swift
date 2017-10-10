@@ -59,29 +59,11 @@ extension ConfigEntry {
     } else {
       tplFlag = ""
     }
-    let params = listValues(in: self.parameters)
+    let params =  Parameters.flatten(dictionary: self.parameters)
     let paramsList = params.isEmpty ? "" : (" " + params.map({ "--param \($0)" }).joined(separator: " "))
     let sourcesList = self.sources.map({ $0.string }).joined(separator: " ")
     return "swiftgen \(cmd) \(tplFlag)\(paramsList) -o \(self.output) \(sourcesList)"
   }
-}
-
-// TODO: Move this to StencilSwiftKit.Parameters.listPairs() ?
-private func listValues(in object: Any, keyPrefix: String = "") -> [String] {
-  var values: [String] = []
-  switch object {
-  case is String, is Int, is Double:
-    values.append("\(keyPrefix)=\(object)")
-  case let dict as [String: Any]:
-    for (key, value) in dict {
-      let fullKey = keyPrefix.isEmpty ? key : "\(keyPrefix).\(key)"
-      values += listValues(in: value, keyPrefix: fullKey)
-    }
-  case let array as [Any]:
-    values += array.flatMap { listValues(in: $0, keyPrefix: keyPrefix) }
-  default: break
-  }
-  return values
 }
 
 // MARK: Commands
