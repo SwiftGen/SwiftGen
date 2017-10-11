@@ -1,19 +1,19 @@
 input_dir: ../../../Resources/Fixtures/
 output_dir: /tmp/swiftgen/
 strings:
-  sources: Strings/Localizable.strings
+  paths: Strings/Localizable.strings
   templateName: structured-swift3
   output: strings.swift
   params:
     enumName: Loc
 xcassets:
-  - sources: XCAssets/Colors.xcassets
+  - paths: XCAssets/Colors.xcassets
     templateName: swift3
     output: assets-colors.swift
-  - sources: XCAssets/Images.xcassets
+  - paths: XCAssets/Images.xcassets
     templateName: swift3
     output: assets-images.swift
-  - sources:
+  - paths:
       - XCAssets/Colors.xcassets
       - XCAssets/Images.xcassets
     templateName: swift3

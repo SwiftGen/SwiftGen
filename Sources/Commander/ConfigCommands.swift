@@ -13,9 +13,9 @@ import SwiftGenKit
 
 extension Config.Entry {
   func checkPaths() throws {
-    for src in self.sources {
-      guard src.exists else {
-        throw ArgumentError.invalidType(value: src.string, type: "existing path", argument: nil)
+    for inputPath in self.paths {
+      guard inputPath.exists else {
+        throw ArgumentError.invalidType(value: inputPath.string, type: "existing path", argument: nil)
       }
     }
     guard self.output.parent().exists else {
@@ -27,7 +27,7 @@ extension Config.Entry {
     let parser = try parserCommand.parserType.init(options: [:], warningHandler: { (msg, _, _) in
       printError(string: msg)
     })
-    try parser.parse(paths: self.sources)
+    try parser.parse(paths: self.paths)
     do {
       let templateRealPath = try self.template.resolvePath(forSubcommand: parserCommand.name)
       let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
@@ -54,8 +54,8 @@ extension Config.Entry {
     }()
     let params =  Parameters.flatten(dictionary: self.parameters)
     let paramsList = params.isEmpty ? "" : (" " + params.map({ "--param \($0)" }).joined(separator: " "))
-    let sourcesList = self.sources.map({ $0.string }).joined(separator: " ")
-    return "swiftgen \(cmd) \(tplFlag)\(paramsList) -o \(self.output) \(sourcesList)"
+    let inputPaths = self.paths.map({ $0.string }).joined(separator: " ")
+    return "swiftgen \(cmd) \(tplFlag)\(paramsList) -o \(self.output) \(inputPaths)"
   }
 }
 
@@ -76,8 +76,8 @@ let configLintCommand = command(
     for var entry in entries {
       entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
       let absolutePathError = "Absolute paths should be avoided in configuration files if possible"
-      for src in entry.sources where src.isAbsolute {
-        printError(string: "\(cmd).sources path \(src) is absolute. \(absolutePathError)")
+      for inputPath in entry.paths where inputPath.isAbsolute {
+        printError(string: "\(cmd).paths \(inputPath) is absolute. \(absolutePathError)")
       }
       if case TemplateRef.path(let tp) = entry.template, tp.isAbsolute {
         printError(string: "\(cmd).templatePath \(tp) is absolute. \(absolutePathError)")

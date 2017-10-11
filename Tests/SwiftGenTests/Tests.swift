@@ -25,7 +25,7 @@ class Tests: XCTestCase {
       guard let str = strings.first else {
         return XCTFail("Can't get strings only config entry")
       }
-      XCTAssertEqual(str.sources, ["Sources1/Folder"])
+      XCTAssertEqual(str.paths, ["Sources1/Folder"])
       if case TemplateRef.name("structured-swift3") = str.template { /* OK */ } else {
         XCTFail("Unexpected template")
       }

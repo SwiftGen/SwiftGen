@@ -4,6 +4,6 @@ strings:
     - bad
     - entry
 foo:
-  sources: Bar
+  paths: Bar
   templateName: baz
   output: Foo.swift

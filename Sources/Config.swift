@@ -52,28 +52,28 @@ struct Config {
 
   struct Entry {
     enum Keys {
-      static let sources = "sources"
+      static let paths = "paths"
       static let templateName = "templateName"
       static let templatePath = "templatePath"
       static let params = "params"
       static let output = "output"
     }
 
-    var sources: [Path]
+    var paths: [Path]
     var template: TemplateRef
     var parameters: [String: Any]
     var output: Path
 
     init(yaml: [String: Any]) throws {
-      guard let srcs = yaml[Keys.sources] else {
-        throw Config.Error.missingEntry(key: Keys.sources)
+      guard let srcs = yaml[Keys.paths] else {
+        throw Config.Error.missingEntry(key: Keys.paths)
       }
       if let srcs = srcs as? String {
-        self.sources = [Path(srcs)]
+        self.paths = [Path(srcs)]
       } else if let srcs = srcs as? [String] {
-        self.sources = srcs.map({ Path($0) })
+        self.paths = srcs.map({ Path($0) })
       } else {
-        throw Config.Error.wrongType(key: Keys.sources, expected: "Path or array of Paths", got: type(of: srcs))
+        throw Config.Error.wrongType(key: Keys.paths, expected: "Path or array of Paths", got: type(of: srcs))
       }
 
       let templateName: String? = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templateName)
@@ -90,7 +90,7 @@ struct Config {
 
     mutating func makeRelativeTo(inputDir: Path?, outputDir: Path?) {
       if let inputDir = inputDir {
-        self.sources = self.sources.map { $0.isRelative ? inputDir + $0 : $0 }
+        self.paths = self.paths.map { $0.isRelative ? inputDir + $0 : $0 }
       }
       if let outputDir = outputDir, self.output.isRelative {
         self.output = outputDir + self.output

@@ -1,6 +1,6 @@
 output_dir: Common/Generated
 strings:
-  sources: Sources1/Folder
+  paths: Sources1/Folder
   templateName: structured-swift3
   output: strings.swift
   params:
