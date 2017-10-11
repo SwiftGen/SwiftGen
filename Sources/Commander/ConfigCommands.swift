@@ -11,7 +11,7 @@ import PathKit
 import StencilSwiftKit
 import SwiftGenKit
 
-extension ConfigEntry {
+extension Config.Entry {
   func checkPaths() throws {
     for src in self.sources {
       guard src.exists else {
@@ -29,9 +29,7 @@ extension ConfigEntry {
     })
     try parser.parse(paths: self.sources)
     do {
-      let templateRealPath = try findTemplate(subcommand: parserCommand.name,
-                                              templateShortName: self.templateName ?? "",
-                                              templateFullPath: self.templatePath)
+      let templateRealPath = try self.template.resolvePath(forSubcommand: parserCommand.name)
       let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                               environment: stencilSwiftEnvironment())
 
@@ -40,7 +38,7 @@ extension ConfigEntry {
       let rendered = try template.render(enriched)
       let output = OutputDestination.file(self.output)
       output.write(content: rendered, onlyIfChanged: true)
-    } catch let error as TemplateError {
+    } catch let error as TemplateRef.Error {
       printError(string: "error: \(error)")
     } catch let error {
       printError(string: "error: failed to render template: \(error)")
@@ -48,14 +46,12 @@ extension ConfigEntry {
   }
 
   func commandLine(forCommand cmd: String) -> String {
-    let tplFlag: String
-    if let name = self.templateName {
-      tplFlag = "-t \(name)"
-    } else if let path = self.templatePath {
-      tplFlag = "-p \(path.string)"
-    } else {
-      tplFlag = ""
-    }
+    let tplFlag: String = {
+      switch self.template {
+      case .name(let name): return "-t \(name)"
+      case .path(let path): return "-p \(path.string)"
+      }
+    }()
     let params =  Parameters.flatten(dictionary: self.parameters)
     let paramsList = params.isEmpty ? "" : (" " + params.map({ "--param \($0)" }).joined(separator: " "))
     let sourcesList = self.sources.map({ $0.string }).joined(separator: " ")
@@ -83,16 +79,11 @@ let configLintCommand = command(
       for src in entry.sources where src.isAbsolute {
         printError(string: "\(cmd).sources path \(src) is absolute. \(absolutePathError)")
       }
-      if let tp = entry.templatePath, tp.isAbsolute {
+      if case TemplateRef.path(let tp) = entry.template, tp.isAbsolute {
         printError(string: "\(cmd).templatePath \(tp) is absolute. \(absolutePathError)")
       }
       if entry.output.isAbsolute {
         printError(string: "\(cmd).output path \(entry.output) is absolute. \(absolutePathError)")
-      }
-      if entry.templatePath == nil && (entry.templateName ?? "").isEmpty {
-        printError(string: "You should provide either a templateName or a templatePath for \(cmd).")
-      } else if entry.templatePath != nil && !(entry.templateName ?? "").isEmpty {
-        printError(string: "You should not provide both a templateName or a templatePath for \(cmd).")
       }
       print("  $ " + entry.commandLine(forCommand: cmd))
     }
@@ -115,7 +106,7 @@ let configRunCommand = command(
     for (cmd, entries) in config.commands {
       for var entry in entries {
         guard let parserCmd = allParserCommands.first(where: { $0.name == cmd }) else {
-          throw ConfigError.missingEntry(key: cmd)
+          throw Config.Error.missingEntry(key: cmd)
         }
         entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
         do {

@@ -26,7 +26,9 @@ class Tests: XCTestCase {
         return XCTFail("Can't get strings only config entry")
       }
       XCTAssertEqual(str.sources, ["Sources1/Folder"])
-      XCTAssertEqual(str.templateName, "structured-swift3")
+      if case TemplateRef.name("structured-swift3") = str.template { /* OK */ } else {
+        XCTFail("Unexpected template")
+      }
       XCTAssertEqual(str.output, "strings.swift")
       XCTAssertEqual(str.parameters["foo"] as? Int, 5)
       let barParams = str.parameters["bar"] as? [String: Any]

@@ -27,21 +27,27 @@ namespace :lint do
     desc 'Lint the code'
     task :code => :install do |task|
       Utils.print_header 'Linting the code'
-      Utils.run(%(swiftlint lint --no-cache --strict --path Sources), task)
+      config = Pathname.getwd + '.swiftlint.yml'
+      config = config.exist? ? "--config #{config}" : ''
+      Utils.run(%(swiftlint lint --no-cache --strict --path Sources #{config}), task)
     end
   end
 
   desc 'Lint the tests'
   task :tests => :install do |task|
     Utils.print_header 'Linting the unit test code'
-    Utils.run(%(swiftlint lint --no-cache --strict --path "Tests/#{WORKSPACE}Tests"), task)
+    config = Pathname.getwd + '.swiftlint.yml'
+    config = config.exist? ? "--config #{config}" : ''
+    Utils.run(%(swiftlint lint --no-cache --strict --path "Tests/#{WORKSPACE}Tests" #{config}), task)
   end
 
   if File.directory?('Tests/Expected')
     desc 'Lint the output'
     task :output => :install do |task|
       Utils.print_header 'Linting the template output code'
-      Utils.run(%(swiftlint lint --no-cache --strict --path Tests/Expected), task)
+      config = Pathname.getwd + '.swiftlint.yml'
+      config = config.exist? ? "--config #{config}" : ''
+      Utils.run(%(swiftlint lint --no-cache --strict --path Tests/Expected #{config}), task)
     end
   end
 

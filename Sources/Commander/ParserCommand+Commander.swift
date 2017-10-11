@@ -41,9 +41,9 @@ extension ParserCommand {
       try parser.parse(paths: paths)
 
       do {
-        let templateRealPath = try findTemplate(subcommand: self.name,
-                                                templateShortName: templateName,
+        let templateRef = try TemplateRef(templateShortName: templateName,
                                                 templateFullPath: templatePath)
+        let templateRealPath = try templateRef.resolvePath(forSubcommand: self.name)
 
         let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                                 environment: stencilSwiftEnvironment())
@@ -52,7 +52,7 @@ extension ParserCommand {
         let enriched = try StencilContext.enrich(context: context, parameters: parameters)
         let rendered = try template.render(enriched)
         output.write(content: rendered, onlyIfChanged: true)
-      } catch let error as TemplateError {
+      } catch let error as TemplateRef.Error {
         printError(string: "error: \(error)")
       } catch let error {
         printError(string: "error: failed to render template: \(error)")

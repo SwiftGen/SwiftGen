@@ -12,15 +12,6 @@ import SwiftGenKit
 
 // MARK: Common
 
-let templatesRelativePath: String
-if let path = Bundle.main.object(forInfoDictionaryKey: "TemplatePath") as? String, !path.isEmpty {
-  templatesRelativePath = path
-} else if let path = Bundle.main.path(forResource: "templates", ofType: nil) {
-  templatesRelativePath = path
-} else {
-  templatesRelativePath = "../templates"
-}
-
 let outputOption = Option(
   "output", OutputDestination.console, flag: "o",
   description: "The path to the file to generate (Omit to generate to stdout)"
