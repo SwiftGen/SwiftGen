@@ -79,6 +79,21 @@ let configLintCommand = command(
     print("> \(entriesCount) for command \(cmd):")
     for var entry in entries {
       entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
+      let absolutePathError = "Absolute paths should be avoided in configuration files if possible"
+      for src in entry.sources where src.isAbsolute {
+        printError(string: "\(cmd).sources path \(src) is absolute. \(absolutePathError)")
+      }
+      if let tp = entry.templatePath, tp.isAbsolute {
+        printError(string: "\(cmd).templatePath \(tp) is absolute. \(absolutePathError)")
+      }
+      if entry.output.isAbsolute {
+        printError(string: "\(cmd).output path \(entry.output) is absolute. \(absolutePathError)")
+      }
+      if entry.templatePath == nil && (entry.templateName ?? "").isEmpty {
+        printError(string: "You should provide either a templateName or a templatePath for \(cmd).")
+      } else if entry.templatePath != nil && !(entry.templateName ?? "").isEmpty {
+        printError(string: "You should not provide both a templateName or a templatePath for \(cmd).")
+      }
       print("  $ " + entry.commandLine(forCommand: cmd))
     }
   }

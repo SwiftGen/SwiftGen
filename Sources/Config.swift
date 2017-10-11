@@ -67,9 +67,6 @@ struct ConfigEntry {
   mutating func makeRelativeTo(inputDir: Path?, outputDir: Path?) {
     if let inputDir = inputDir {
       self.sources = self.sources.map { $0.isRelative ? inputDir + $0 : $0 }
-      if let tplPath = self.templatePath, tplPath.isRelative {
-        self.templatePath = inputDir + tplPath
-      }
     }
     if let outputDir = outputDir, self.output.isRelative {
       self.output = outputDir + self.output

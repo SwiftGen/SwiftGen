@@ -23,7 +23,7 @@ let dirsExist: PathValidator = { paths in try paths.map(checkPath(type: "directo
 
 // MARK: Path as Input Argument
 
-extension Path : ArgumentConvertible {
+extension Path: ArgumentConvertible {
   public init(parser: ArgumentParser) throws {
     guard let path = parser.shift() else {
       throw ArgumentError.missingValue(argument: nil)
