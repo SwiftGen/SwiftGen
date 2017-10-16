@@ -10,19 +10,18 @@ import StencilSwiftKit
 import SwiftGenKit
 
 let templateNameOption = Option<String>(
-  "template", "", flag: "t",
-  description: "The name of the template to use for code generation " +
-  "(without the extension)."
+  "template", default: "", flag: "t",
+  description: "The name of the template to use for code generation (without the extension)."
 )
 
 let templatePathOption = Option<Path>(
-  "templatePath", "", flag: "p",
+  "templatePath", default: "", flag: "p",
   description: "The path of the template to use for code generation. Overrides -t.",
   validator: checkPath(type: "template file") { $0.isFile }
 )
 
 let paramsOption = VariadicOption<String>(
-  "param", [],
+  "param", default: [],
   description: "List of template parameters"
 )
 

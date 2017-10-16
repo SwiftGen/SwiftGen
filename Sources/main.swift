@@ -13,7 +13,7 @@ import SwiftGenKit
 // MARK: Common
 
 let outputOption = Option(
-  "output", OutputDestination.console, flag: "o",
+  "output", default: OutputDestination.console, flag: "o",
   description: "The path to the file to generate (Omit to generate to stdout)"
 )
 

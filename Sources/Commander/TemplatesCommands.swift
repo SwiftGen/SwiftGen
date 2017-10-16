@@ -9,14 +9,17 @@ import PathKit
 
 let allSubcommands = allParserCommands.map { $0.name }
 
+private func isSubcommandName(name: String) throws -> String {
+  guard allSubcommands.contains(name) else {
+    throw ArgumentError.invalidType(value: name, type: "subcommand", argument: "--only")
+  }
+  return name
+}
+
 let templatesListCommand = command(
-  Option<String>("only", "", flag: "l",
-  description: "If specified, only list templates valid for that specific subcommand") {
-    guard allSubcommands.contains($0) else {
-      throw ArgumentError.invalidType(value: $0, type: "subcommand", argument: "--only")
-    }
-    return $0
-  },
+  Option<String>("only", default: "", flag: "l",
+                 description: "If specified, only list templates valid for that specific subcommand",
+                 validator: isSubcommandName),
   outputOption
 ) { onlySubcommand, output in
   var outputLines = [String]()

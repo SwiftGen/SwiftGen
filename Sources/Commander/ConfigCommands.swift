@@ -62,9 +62,9 @@ extension Config.Entry {
 // MARK: Commands
 
 let configLintCommand = command(
-  Option<Path>("config", "swiftgen.yml", flag: "c",
-                 description: "Path to the configuration file to use",
-                 validator: checkPath(type: "config file") { $0.isFile })
+  Option<Path>("config", default: "swiftgen.yml", flag: "c",
+               description: "Path to the configuration file to use",
+               validator: checkPath(type: "config file") { $0.isFile })
 ) { file in
   print("Linting \(file)")
   let config = try Config(file: file)
@@ -91,12 +91,11 @@ let configLintCommand = command(
 }
 
 let configRunCommand = command(
-    Option<Path>("config", "swiftgen.yml", flag: "c",
-                   description: "Path to the configuration file to use",
-                   validator: checkPath(type: "config file") { $0.isFile }),
-    Flag("verbose", flag: "v",
-         description: "Print each command being executed",
-         default: false)
+  Option<Path>("config", default: "swiftgen.yml", flag: "c",
+               description: "Path to the configuration file to use",
+               validator: checkPath(type: "config file") { $0.isFile }),
+  Flag("verbose", default: false, flag: "v",
+       description: "Print each command being executed")
 ) { file, verbose in
   let config = try Config(file: file)
   if verbose {
