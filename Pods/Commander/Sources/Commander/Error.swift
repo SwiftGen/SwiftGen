@@ -1,7 +1,7 @@
 #if os(Linux)
   import Glibc
 #else
-  import Darwin.libc
+  import Darwin
 #endif
 
 
@@ -12,7 +12,9 @@ protocol ANSIConvertible : Error, CustomStringConvertible {
 
 extension ANSIConvertible {
   func print() {
-    if isatty(fileno(stderr)) != 0 {
+    // Check if we are in any term env and the output is a tty.
+    if let termType = getenv("TERM"), String(cString: termType).lowercased() != "dumb" &&
+      isatty(fileno(stdout)) != 0 {
       fputs("\(ansiDescription)\n", stderr)
     } else {
       fputs("\(description)\n", stderr)

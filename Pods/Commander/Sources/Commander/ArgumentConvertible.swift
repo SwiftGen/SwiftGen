@@ -48,7 +48,7 @@ public protocol ArgumentConvertible : CustomStringConvertible {
 extension String : ArgumentConvertible {
   public init(parser: ArgumentParser) throws {
     if let value = parser.shift() {
-      self.init(value)!
+      self.init(value)
     } else {
       throw ArgumentError.missingValue(argument: nil)
     }

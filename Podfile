@@ -10,7 +10,7 @@ def common_pods
 end
 
 target 'swiftgen' do
-  pod 'Commander', '~> 0.6.0', inhibit_warnings: true
+  pod 'Commander', '~> 0.8', inhibit_warnings: true
   common_pods
 end
 

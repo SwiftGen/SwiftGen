@@ -48,48 +48,61 @@ open class Group : CommandType {
   }
 
   var commands = [SubCommand]()
+  public var commandNames: [String] {
+    return commands.map { $0.name }
+  }
 
   // When set, allows you to override the default unknown command behaviour
-  open var unknownCommand: ((_ name: String, _ parser: ArgumentParser) throws -> ())?
+  public var unknownCommand: ((_ name: String, _ parser: ArgumentParser) throws -> ())?
+
+  // When set, allows you to override the default no command behaviour
+  public var noCommand: ((_ path: String?, _ group: Group, _ parser: ArgumentParser) throws -> ())?
 
   /// Create a new group
   public init() {}
 
   /// Add a named sub-command to the group
-  open func addCommand(_ name: String, _ command: CommandType) {
+  public func addCommand(_ name: String, _ command: CommandType) {
     commands.append(SubCommand(name: name, description: nil, command: command))
   }
 
   /// Add a named sub-command to the group with a description
-  open func addCommand(_ name: String, _ description: String?, _ command: CommandType) {
+  public func addCommand(_ name: String, _ description: String?, _ command: CommandType) {
     commands.append(SubCommand(name: name, description: description, command: command))
   }
 
   /// Run the group command
-  open func run(_ parser: ArgumentParser) throws {
-    if let name = parser.shift() {
-      let command = commands.filter { $0.name == name }.first
-      if let command = command {
-        do {
-          try command.command.run(parser)
-        } catch GroupError.unknownCommand(let childName) {
-          throw GroupError.unknownCommand("\(name) \(childName)")
-        } catch GroupError.noCommand(let path, let group) {
-          if let path = path {
-            throw GroupError.noCommand("\(name) \(path)", group)
-          }
+  public func run(_ parser: ArgumentParser) throws {
+    guard let name = parser.shift() else {
+      if let noCommand = noCommand {
+        return try noCommand(nil, self, parser)
+      } else {
+        throw GroupError.noCommand(nil, self)
+      }
+    }
 
-          throw GroupError.noCommand(name, group)
-        } catch let error as Help {
-          throw error.reraise(name)
-        }
-      } else if let unknownCommand = unknownCommand {
-        try unknownCommand(name, parser)
+    guard let command = commands.first(where: { $0.name == name }) else {
+      if let unknownCommand = unknownCommand {
+        return try unknownCommand(name, parser)
       } else {
         throw GroupError.unknownCommand(name)
       }
-    } else {
-      throw GroupError.noCommand(nil, self)
+    }
+
+    do {
+      try command.command.run(parser)
+    } catch GroupError.unknownCommand(let childName) {
+      throw GroupError.unknownCommand("\(name) \(childName)")
+    } catch GroupError.noCommand(let path, let group) {
+      let path = (path == nil) ? name : "\(name) \(path!)"
+
+      if let noCommand = noCommand {
+        try noCommand(path, group, parser)
+      } else {
+        throw GroupError.noCommand(path, group)
+      }
+    } catch let error as Help {
+      throw error.reraise(name)
     }
   }
 }

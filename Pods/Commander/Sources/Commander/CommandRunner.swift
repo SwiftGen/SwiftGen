@@ -1,7 +1,7 @@
 #if os(Linux)
   import Glibc
 #else
-  import Darwin.libc
+  import Darwin
 #endif
 
 
