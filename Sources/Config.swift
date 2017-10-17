@@ -24,6 +24,9 @@ struct Config {
   let commands: [String: [Config.Entry]]
 
   init(file: Path) throws {
+    if !file.exists {
+      throw Config.Error.pathNotFound(path: file)
+    }
     let content: String = try file.read()
     let anyConfig = try Yams.load(yaml: content)
     guard let config = anyConfig as? [String: Any] else {
@@ -125,13 +128,16 @@ extension Config {
   enum Error: Swift.Error, CustomStringConvertible {
     case missingEntry(key: String)
     case wrongType(key: String?, expected: String, got: Any.Type)
+    case pathNotFound(path: Path)
 
     var description: String {
       switch self {
       case .missingEntry(let key):
-        return "Missing entry for key \(key)"
+        return "Missing entry for key \(key)."
       case .wrongType(let key, let expected, let got):
-        return "Wrong type for key \(key ?? "root"): expected \(expected), got \(got)"
+        return "Wrong type for key \(key ?? "root"): expected \(expected), got \(got)."
+      case .pathNotFound(let path):
+        return "File \(path) not found."
       }
     }
   }

@@ -15,11 +15,11 @@ extension Config.Entry {
   func checkPaths() throws {
     for inputPath in self.paths {
       guard inputPath.exists else {
-        throw ArgumentError.invalidType(value: inputPath.string, type: "existing path", argument: nil)
+        throw Config.Error.pathNotFound(path: inputPath)
       }
     }
     guard self.output.parent().exists else {
-      throw ArgumentError.invalidType(value: self.output.parent().string, type: "existing directory", argument: nil)
+      throw Config.Error.pathNotFound(path: self.output.parent())
     }
   }
 
@@ -98,6 +98,7 @@ let configRunCommand = command(
        description: "Print each command being executed")
 ) { file, verbose in
   let config = try Config(file: file)
+  
   if verbose {
     print("Executing configuration file \(file)")
   }

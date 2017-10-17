@@ -20,6 +20,9 @@ let outputOption = Option(
 // MARK: - Main
 
 let main = Group {
+  $0.noCommand = { (_, _, parser) in
+    try configRunCommand.run(parser)
+  }
   $0.group("config", "manage and run configuration files") {
     $0.addCommand("lint", "Lint the configuration file", configLintCommand)
     $0.addCommand("run", "Run commands listed in the configuration file", configRunCommand)
