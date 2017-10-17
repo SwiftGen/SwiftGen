@@ -98,7 +98,7 @@ let configRunCommand = command(
        description: "Print each command being executed")
 ) { file, verbose in
   let config = try Config(file: file)
-  
+
   if verbose {
     print("Executing configuration file \(file)")
   }
