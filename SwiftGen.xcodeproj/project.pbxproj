@@ -32,7 +32,7 @@
 		37DC60351F98D7DD00B7B31C /* config-invalid-structure.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC602A1F98D1D900B7B31C /* config-invalid-structure.yml */; };
 		37DC60361F98D7DD00B7B31C /* config-invalid-template.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC602E1F98D1D900B7B31C /* config-invalid-template.yml */; };
 		37DC60371F98D7DD00B7B31C /* config-missing-output.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC602C1F98D1D900B7B31C /* config-missing-output.yml */; };
-		37DC60381F98D7DD00B7B31C /* config-missing-sources.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC60311F98D1DA00B7B31C /* config-missing-sources.yml */; };
+		37DC60381F98D7DD00B7B31C /* config-missing-paths.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC60311F98D1DA00B7B31C /* config-missing-paths.yml */; };
 		37DC60391F98D7DD00B7B31C /* config-missing-template.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC602B1F98D1D900B7B31C /* config-missing-template.yml */; };
 		37DC603B1F98E74E00B7B31C /* config-absolute-paths-prefix.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */; };
 		A99DC0C5A2CECABB34A121C8 /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F17C8613373A017F0B70B5C /* Pods_swiftgen.framework */; };
@@ -102,7 +102,7 @@
 		37DC602E1F98D1D900B7B31C /* config-invalid-template.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-invalid-template.yml"; sourceTree = "<group>"; };
 		37DC602F1F98D1DA00B7B31C /* config-invalid-output.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-invalid-output.yml"; sourceTree = "<group>"; };
 		37DC60301F98D1DA00B7B31C /* config-absolute-paths-direct.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-absolute-paths-direct.yml"; sourceTree = "<group>"; };
-		37DC60311F98D1DA00B7B31C /* config-missing-sources.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-missing-sources.yml"; sourceTree = "<group>"; };
+		37DC60311F98D1DA00B7B31C /* config-missing-paths.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-missing-paths.yml"; sourceTree = "<group>"; };
 		37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-absolute-paths-prefix.yml"; sourceTree = "<group>"; };
 		3F17C8613373A017F0B70B5C /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80C3A19C1BBD55A5644EDC18 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,7 +184,7 @@
 				093405111F87AA6500187787 /* config-with-multi-entries.yml */,
 				37DC60301F98D1DA00B7B31C /* config-absolute-paths-direct.yml */,
 				37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */,
-				37DC60311F98D1DA00B7B31C /* config-missing-sources.yml */,
+				37DC60311F98D1DA00B7B31C /* config-missing-paths.yml */,
 				37DC602B1F98D1D900B7B31C /* config-missing-template.yml */,
 				37DC602D1F98D1D900B7B31C /* config-both-templates.yml */,
 				37DC602C1F98D1D900B7B31C /* config-missing-output.yml */,
@@ -343,7 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37DC60331F98D7DD00B7B31C /* config-both-templates.yml in Resources */,
-				37DC60381F98D7DD00B7B31C /* config-missing-sources.yml in Resources */,
+				37DC60381F98D7DD00B7B31C /* config-missing-paths.yml in Resources */,
 				37DC60341F98D7DD00B7B31C /* config-invalid-output.yml in Resources */,
 				093405131F87AA6A00187787 /* config-with-multi-entries.yml in Resources */,
 				37DC60391F98D7DD00B7B31C /* config-missing-template.yml in Resources */,

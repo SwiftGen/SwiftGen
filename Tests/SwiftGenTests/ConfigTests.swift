@@ -111,15 +111,15 @@ class ConfigTests: XCTestCase {
 
   func testReadInvalidConfigThrows() {
     let badConfigs = [
-      "config-missing-sources": "Missing entry for key strings.paths.",
+      "config-missing-paths": "Missing entry for key strings.paths.",
       "config-missing-template": "You must specify a template name (-t) or path (-p).\n\n" +
       "To list all the available named templates, use 'swiftgen templates list'.",
       "config-both-templates": "You need to choose EITHER a named template OR a template path. " +
       "Found name 'template' and path 'template.swift'",
       "config-missing-output": "Missing entry for key strings.output.",
-      "config-invalid-structure": "Wrong type for key paths: expected Path or array of Paths, got Array<Any>.",
-      "config-invalid-template": "Wrong type for key templateName: expected String, got Array<Any>.",
-      "config-invalid-output": "Wrong type for key output: expected String, got Array<Any>."
+      "config-invalid-structure": "Wrong type for key strings.paths: expected Path or array of Paths, got Array<Any>.",
+      "config-invalid-template": "Wrong type for key strings.templateName: expected String, got Array<Any>.",
+      "config-invalid-output": "Wrong type for key strings.output: expected String, got Array<Any>."
     ]
     for (configFile, expectedError) in badConfigs {
       do {
@@ -207,7 +207,7 @@ class ConfigTests: XCTestCase {
 
   func testLintMissingSources() {
     _testLint(
-      fixture: "config-missing-sources",
+      fixture: "config-missing-paths",
       expectedLogs: [(.error, "Missing entry for key strings.paths.")],
       assertionMessage: "Linter should warn when 'paths' key is missing"
     )
@@ -244,7 +244,7 @@ class ConfigTests: XCTestCase {
   func testLintInvalidStructure() {
     _testLint(
       fixture: "config-invalid-structure",
-      expectedLogs: [(.error, "Wrong type for key paths: expected Path or array of Paths, got Array<Any>.")],
+      expectedLogs: [(.error, "Wrong type for key strings.paths: expected Path or array of Paths, got Array<Any>.")],
       assertionMessage: "Linter should warn when config file structure is invalid"
     )
   }
@@ -252,7 +252,7 @@ class ConfigTests: XCTestCase {
   func testLintInvalidTemplateValue() {
     _testLint(
       fixture: "config-invalid-template",
-      expectedLogs: [(.error, "Wrong type for key templateName: expected String, got Array<Any>.")],
+      expectedLogs: [(.error, "Wrong type for key strings.templateName: expected String, got Array<Any>.")],
       assertionMessage: "Linter should warn when the 'template' key is of unexpected type"
     )
   }
@@ -260,7 +260,7 @@ class ConfigTests: XCTestCase {
   func testLintInvalidOutput() {
     _testLint(
       fixture: "config-invalid-output",
-      expectedLogs: [(.error, "Wrong type for key output: expected String, got Array<Any>.")],
+      expectedLogs: [(.error, "Wrong type for key strings.output: expected String, got Array<Any>.")],
       assertionMessage: "Linter should warn when the 'output' key is of unexpected type"
     )
   }

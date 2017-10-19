@@ -41,10 +41,7 @@ struct Config {
           cmds[parserCmd.name] = try Config.Entry.parseCommandEntry(yaml: cmdEntry)
         } catch let e as Config.Error {
           // Prefix the name of the command for a better error message
-          if case .missingEntry(let key) = e {
-            throw Config.Error.missingEntry(key: "\(parserCmd.name).\(key)")
-          }
-          throw e
+          throw e.withKeyPrefixed(by: parserCmd.name)
         }
       }
     }
@@ -179,6 +176,18 @@ extension Config {
         return "Wrong type for key \(key ?? "root"): expected \(expected), got \(got)."
       case .pathNotFound(let path):
         return "File \(path) not found."
+      }
+    }
+
+    func withKeyPrefixed(by prefix: String) -> Config.Error {
+      switch self {
+      case .missingEntry(let key):
+        return Config.Error.missingEntry(key: "\(prefix).\(key)")
+      case .wrongType(key: let key, expected: let expected, got: let got):
+        let fullKey = [prefix, key].flatMap({$0}).joined(separator: ".")
+        return Config.Error.wrongType(key: fullKey, expected: expected, got: got)
+      default:
+        return self
       }
     }
   }
