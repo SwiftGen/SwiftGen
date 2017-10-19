@@ -33,10 +33,11 @@ enum OutputDestination: ArgumentConvertible {
     case .file(let path):
       do {
         if try onlyIfChanged && path.exists && path.read(.utf8) == content {
-          return print("Not writing the file as content is unchanged")
+          logMessage(.info, "Not writing the file as content is unchanged")
+          return
         }
         try path.write(content)
-        print("File written: \(path)")
+        logMessage(.info, "File written: \(path)")
       } catch let e as NSError {
         logMessage(.error, e)
       }

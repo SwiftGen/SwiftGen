@@ -34,7 +34,7 @@ xcassets:
 
 > 💡 We advise against using _absolute_ paths — starting with `/` — in the configuration file, so that they won't rely on where the project was cloned on your machine._
 
-Here's a quick description of all possible _root_ keys. All of them are optional.
+Here's a quick description of all the possible _root_ keys. All of them are optional.
 
 | Key | Description | Intended usage |
 |-----|-------------|----------------|
@@ -69,7 +69,7 @@ Similarly to when you invoke each subcommand of SwiftGen manually:
 
 Running `swiftgen` without any subcommand or argument is actually a shortcut invocation which is equivalent to running `swiftgen config run`.
 
-If you need more control when using configuration file you can use some advanced features by using the real full `swiftgen config run` command to specify more options. In particular you can:
+If you need more control when using a configuration file, you can use some advanced features by using the full `swiftgen config run` command to specify more options. In particular you can:
 
 * Ask to use a different config file — instead of the default `swiftgen.yml` — using the `--config` flag.
 
@@ -77,9 +77,9 @@ If you need more control when using configuration file you can use some advanced
   swiftgen config run --config tools/swiftgen/swiftgen-config.yml
   ```
   
-* Enable the verbose mode, which will print every command being executed when executing it, using the `--verbose` flag
-  * This can allow you to control what is being run, by logging what happens
-  * This also allows you to know the equivalent command to type if you were to run each swiftgen command manually instead of using the config file — which can be useful if you need to debug or tweak a particular command in isolation for example
+* Enable the verbose mode, which will print every command being executed when executing it, using the `--verbose` flag. This allows your to:
+  * control what is being run, by logging what happens during execution
+  * know the equivalent command to type if you were to run each swiftgen command manually instead of using the config file — which can be useful if you need to debug or tweak a particular command in isolation for example
 
   ```sh
   swiftgen config run --verbose

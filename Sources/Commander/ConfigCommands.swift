@@ -46,17 +46,21 @@ extension Config.Entry {
   }
 }
 
-// MARK: Commands
+// MARK: - Commands
+
+// MARK: Lint
 
 let configLintCommand = command(
   Option<Path>("config", default: "swiftgen.yml", flag: "c",
                description: "Path to the configuration file to use",
                validator: checkPath(type: "config file") { $0.isFile })
 ) { file in
-  print("Linting \(file)")
+  logMessage(.info, "Linting \(file)")
   let config = try Config(file: file)
   config.lint { level, msg in logMessage(level, msg) }
 }
+
+// MARK: Run
 
 let configRunCommand = command(
   Option<Path>("config", default: "swiftgen.yml", flag: "c",
@@ -68,7 +72,7 @@ let configRunCommand = command(
   let config = try Config(file: file)
 
   if verbose {
-    print("Executing configuration file \(file)")
+    logMessage(.info, "Executing configuration file \(file)")
   }
   try file.parent().chdir {
     for (cmd, entries) in config.commands {
@@ -79,7 +83,7 @@ let configRunCommand = command(
         entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
         do {
           if verbose {
-            print(entry.commandLine(forCommand: cmd))
+            logMessage(.info, " $ " + entry.commandLine(forCommand: cmd))
           }
           try entry.checkPaths()
           try entry.run(parserCommand: parserCmd)
