@@ -1,14 +1,14 @@
 ## SwiftGen Configuration File
 
-In order to avoid invoking SwiftGen manually multiple times — one for each type of input / for each subcommand — and having to remember each flag and parameter to pass every time, you can instead use a YAML configuration file to make it easier to configure SwiftGen.
+In order to avoid invoking SwiftGen manually multiple times — one for each subcommand — and having to remember each arguments to pass every time, you can instead use a YAML configuration file to configure everything.
 
-Simply create a YAML file named `swiftgen.yml` (typically at the root of your repository) with the structure described below to specify the subcommands to use and their various paths and options to use.
+Simply create a YAML file named `swiftgen.yml` at the root of your repository with the structure described below, then just run `swiftgen` (without any argument).
 
-Then when you run `swiftgen` without any subcommand or argument, it will look for a `swiftgen.yml` file in the current directory and use it to know which commands to run and with which arguments.
+> For more options (using a different file, checking your config file for errors…), see further below.
 
 ## Configuration File Format
 
-The configuration file is a YAML file which looks like this:
+The configuration file is a YAML file structured like this (example):
 
 ```yaml
 input_dir: Sources/Resources
@@ -30,9 +30,11 @@ xcassets:
     output: assets-all.swift
 ```
 
-All relative paths specified in the configuration file (`input_dir`, `output_dir`, `paths`, `templatePath`, `output`) are relative to the configuration file itself. _As a side note, we advise against using absolute paths — starting with `/` — in the configuration file, so that they won't rely on where the project was cloned._
+ℹ️ All _relative_ paths specified in the configuration file (`input_dir`, `output_dir`, `paths`, `templatePath`, `output`) are relative to location of the _configuration file_ itself.
 
-Here's a quick description of all possible root keys. All of them are optional.
+> 💡 We advise against using _absolute_ paths — starting with `/` — in the configuration file, so that they won't rely on where the project was cloned on your machine._
+
+Here's a quick description of all possible _root_ keys. All of them are optional.
 
 | Key | Description | Intended usage |
 |-----|-------------|----------------|
@@ -46,12 +48,12 @@ Here's a quick description of all possible root keys. All of them are optional.
 
 Each key corresponding to a SwiftGen subcommands (`colors`, `fonts`, `storyboards`, `strings`, `xcassets`) expect the corresponding value to be:
 
-* Either a dictionary with the keys describe below, if you want to invoke the corresponding SwiftGen subcommand only once (most common use case)
-* Or an array of those dictionaries, in the less common case where you need to invoke that SwiftGen subcommand multiple times (for example to use one template with some input files and another template for other input files)
+* Either a dictionary, with the keys described below, if you want to invoke the corresponding SwiftGen subcommand only once (most common use case)
+* Or an array of those dictionaries, in the less common case where you need to invoke that SwiftGen subcommand multiple times (for example to use one template with some input files and another template for other input files…)
 
 | Subkey | Type | Description |
 |--------|------|-------------|
-| `paths` | Path or Array of Paths | The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command or your `Localizable.strings` file for the `strings` command, etc). |
+| `paths` | Path or Array of Paths | The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `Localizable.strings` file for the `strings` command, etc). |
 | `templateName` | String | The name of the template to use. If you provide a value for this, you shouldn't also provide a value for `templatePath`. |
 | `templatePath` | Path | The path to the template to use. If you provide a value for this, you shouldn't also provide a value for `templateName`. |
 | `output` | Path | The path of the output file to generate. _(Note: Any intermediate directory up to this file must already exist.)_ |
@@ -63,11 +65,11 @@ Similarly to when you invoke each subcommand of SwiftGen manually:
 * You must specify either `templateName` or `templatePath`, but not both, nor neither.
 * `params` is optional.
 
-## Using a different file
+## Advanced options for running the config file
 
-Running `swiftgen` without any subcommand or argument is actually a shortcut invocation which is equivalent to running `swiftgen config run`. If you need more control when using configuration file you can use some advanced features by using the real full `swiftgen config run` command to specify more options.
+Running `swiftgen` without any subcommand or argument is actually a shortcut invocation which is equivalent to running `swiftgen config run`.
 
-In particular you can:
+If you need more control when using configuration file you can use some advanced features by using the real full `swiftgen config run` command to specify more options. In particular you can:
 
 * Ask to use a different config file — instead of the default `swiftgen.yml` — using the `--config` flag.
 
@@ -76,7 +78,7 @@ In particular you can:
   ```
   
 * Enable the verbose mode, which will print every command being executed when executing it, using the `--verbose` flag
-  * This can allow you to control what is being run for logging what happens
+  * This can allow you to control what is being run, by logging what happens
   * This also allows you to know the equivalent command to type if you were to run each swiftgen command manually instead of using the config file — which can be useful if you need to debug or tweak a particular command in isolation for example
 
   ```sh
@@ -85,6 +87,14 @@ In particular you can:
 
 ## Linting the configuration file
 
-You can also use `swiftgen config lint` to lint the configuration file. Without any additional option this will lint the default `swiftgen.yml` configuration file, but you can specify a different configuration file using the `--config` flag, similarly to `swiftgen config run`
+You can also use `swiftgen config lint` to lint the configuration file.
 
-`swiftgen config lint` will ensure that the YAML file is a valid YAML, that each mandatory key in the YAML is present, and that each key is of the expected type. It will print a descriptive error in case there's something wrong, and describe the interpretation of content of the configuration file if everything is valid.
+Without any additional option this will lint the default `swiftgen.yml` configuration file, but you can specify a different configuration file using the `--config` flag, similarly to `swiftgen config run`
+
+`swiftgen config lint` will ensure that:
+
+* the YAML file is a valid YAML
+* each mandatory key in the YAML is present
+* each key is of the expected type.
+
+It will print a descriptive error in case there's something wrong, and describe the interpretation of the content of the configuration file if everything is valid.
