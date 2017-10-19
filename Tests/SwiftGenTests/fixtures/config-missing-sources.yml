@@ -1,0 +1,3 @@
+strings:
+  templateName: template
+  output: out.swift

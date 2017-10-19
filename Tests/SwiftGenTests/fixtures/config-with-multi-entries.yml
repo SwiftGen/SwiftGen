@@ -1,8 +1,8 @@
-input_dir: ../../../Resources/Fixtures/
-output_dir: /tmp/swiftgen/
+input_dir: Fixtures/
+output_dir: Generated/
 strings:
   paths: Strings/Localizable.strings
-  templateName: structured-swift3
+  templatePath: templates/custom-swift3
   output: strings.swift
   params:
     enumName: Loc
@@ -13,8 +13,9 @@ xcassets:
   - paths: XCAssets/Images.xcassets
     templateName: swift3
     output: assets-images.swift
+    params: { "enumName": "Pics" }
   - paths:
       - XCAssets/Colors.xcassets
       - XCAssets/Images.xcassets
-    templateName: swift3
+    templateName: swift4
     output: assets-all.swift

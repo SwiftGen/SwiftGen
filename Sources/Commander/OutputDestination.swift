@@ -38,7 +38,7 @@ enum OutputDestination: ArgumentConvertible {
         try path.write(content)
         print("File written: \(path)")
       } catch let e as NSError {
-        printError(string: "error: \(e)")
+        logMessage(.error, e)
       }
     }
   }

@@ -1,0 +1,8 @@
+strings:
+  paths:
+    - one
+    - two: three
+  templateName: template
+  output:
+    - bad
+    - entry

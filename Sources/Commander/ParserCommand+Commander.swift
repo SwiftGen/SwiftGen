@@ -35,7 +35,7 @@ extension ParserCommand {
       VariadicArgument<Path>("PATH", description: self.pathDescription, validator: pathsExist)
     ) { output, templateName, templatePath, parameters, paths in
       let parser = try self.parserType.init(options: [:]) { msg, _, _ in
-        printError(string: msg)
+        logMessage(.error, msg)
       }
       try parser.parse(paths: paths)
 
@@ -52,9 +52,9 @@ extension ParserCommand {
         let rendered = try template.render(enriched)
         output.write(content: rendered, onlyIfChanged: true)
       } catch let error as TemplateRef.Error {
-        printError(string: "error: \(error)")
+        logMessage(.error, error)
       } catch let error {
-        printError(string: "error: failed to render template: \(error)")
+        logMessage(.error, "failed to render template: \(error)")
       }
     }
   }

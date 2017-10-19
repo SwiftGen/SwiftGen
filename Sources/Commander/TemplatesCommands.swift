@@ -69,7 +69,7 @@ private func templatePathCommandGenerator(execute: @escaping (Path, OutputDestin
       let path = try template.resolvePath(forSubcommand: subcommand)
       try execute(path, output)
     } catch {
-      printError(string: "error: failed to read template: \(error)")
+      logMessage(.error, "failed to read template: \(error)")
     }
   }
 }

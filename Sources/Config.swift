@@ -79,9 +79,9 @@ struct Config {
         throw Config.Error.wrongType(key: Keys.paths, expected: "Path or array of Paths", got: type(of: srcs))
       }
 
-      let templateName: String? = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templateName)
-      let templatePath: Path? = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templatePath)
-      self.template = try TemplateRef(templateShortName: templateName ?? "", templateFullPath: templatePath)
+      let templateName: String = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templateName) ?? ""
+      let templatePath: Path? = (try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templatePath)).map { Path($0) }
+      self.template = try TemplateRef(templateShortName: templateName, templateFullPath: templatePath)
 
       self.parameters = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.params) ?? [:]
 
@@ -118,6 +118,47 @@ struct Config {
         throw Config.Error.wrongType(key: key, expected: String(describing: T.self), got: type(of: value))
       }
       return typedValue
+    }
+  }
+}
+
+// MARK: - Linting
+
+extension Config.Entry {
+  func commandLine(forCommand cmd: String) -> String {
+    let tplFlag: String = {
+      switch self.template {
+      case .name(let name): return "-t \(name)"
+      case .path(let path): return "-p \(path.string)"
+      }
+    }()
+    let params =  Parameters.flatten(dictionary: self.parameters)
+    let paramsList = params.isEmpty ? "" : (" " + params.map({ "--param \($0)" }).joined(separator: " "))
+    let inputPaths = self.paths.map({ $0.string }).joined(separator: " ")
+    return "swiftgen \(cmd) \(tplFlag)\(paramsList) -o \(self.output) \(inputPaths)"
+  }
+}
+
+extension Config {
+  func lint(logger: (LogLevel, String) -> Void = logMessage) {
+    logger(.info, "> Common parent directory used for all input paths:  \(self.inputDir ?? "<none>")")
+    logger(.info, "> Common parent directory used for all output paths: \(self.outputDir ?? "<none>")")
+    for (cmd, entries) in self.commands {
+      let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
+      logger(.info, "> \(entriesCount) for command \(cmd):")
+      for var entry in entries {
+          entry.makeRelativeTo(inputDir: self.inputDir, outputDir: self.outputDir)
+          for inputPath in entry.paths where inputPath.isAbsolute {
+            logger(.warning, "\(cmd).paths: \(inputPath) is an absolute path.")
+          }
+          if case TemplateRef.path(let tp) = entry.template, tp.isAbsolute {
+            logger(.warning, "\(cmd).templatePath: \(tp) is an absolute path.")
+          }
+          if entry.output.isAbsolute {
+            logger(.warning, "\(cmd).output: \(entry.output) is an absolute path.")
+          }
+          logger(.info, "  $ " + entry.commandLine(forCommand: cmd))
+      }
     }
   }
 }

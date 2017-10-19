@@ -75,13 +75,10 @@ extension TemplateRef.Error: CustomStringConvertible {
     case .templatePathNotFound(let path):
       return "Template not found at path \(path.description)."
     case .noTemplateProvided:
-      return "A template must be chosen either via its name using '-t' or via its path using '-p'.\n\n" +
-        "Note: there's no 'default' template anymore: you can still access a bundled template but " +
-        "you have to specify its name explicitly using '-t'.\n" +
+      return "You must specify a template name (-t) or path (-p).\n\n" +
       "To list all the available named templates, use 'swiftgen templates list'."
     case let .multipleTemplateOptions(path, name):
-      return "You need to choose EITHER a named template (--template option) " +
-      "OR a template path (option --templatePath). Found name '\(name)' and path '\(path)'"
+      return "You need to choose EITHER a named template OR a template path. Found name '\(name)' and path '\(path)'"
     }
   }
 }

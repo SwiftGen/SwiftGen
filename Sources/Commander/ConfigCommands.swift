@@ -25,7 +25,7 @@ extension Config.Entry {
 
   func run(parserCommand: ParserCommand) throws {
     let parser = try parserCommand.parserType.init(options: [:], warningHandler: { (msg, _, _) in
-      printError(string: msg)
+      logMessage(.error, msg)
     })
     try parser.parse(paths: self.paths)
     do {
@@ -39,23 +39,10 @@ extension Config.Entry {
       let output = OutputDestination.file(self.output)
       output.write(content: rendered, onlyIfChanged: true)
     } catch let error as TemplateRef.Error {
-      printError(string: "error: \(error)")
+      logMessage(.error, error)
     } catch let error {
-      printError(string: "error: failed to render template: \(error)")
+      logMessage(.error, "failed to render template: \(error)")
     }
-  }
-
-  func commandLine(forCommand cmd: String) -> String {
-    let tplFlag: String = {
-      switch self.template {
-      case .name(let name): return "-t \(name)"
-      case .path(let path): return "-p \(path.string)"
-      }
-    }()
-    let params =  Parameters.flatten(dictionary: self.parameters)
-    let paramsList = params.isEmpty ? "" : (" " + params.map({ "--param \($0)" }).joined(separator: " "))
-    let inputPaths = self.paths.map({ $0.string }).joined(separator: " ")
-    return "swiftgen \(cmd) \(tplFlag)\(paramsList) -o \(self.output) \(inputPaths)"
   }
 }
 
@@ -68,26 +55,7 @@ let configLintCommand = command(
 ) { file in
   print("Linting \(file)")
   let config = try Config(file: file)
-  print("> Common parent directory used for all input paths:  \(config.inputDir ?? "<none>")")
-  print("> Common parent directory used for all output paths: \(config.outputDir ?? "<none>")")
-  for (cmd, entries) in config.commands {
-    let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
-    print("> \(entriesCount) for command \(cmd):")
-    for var entry in entries {
-      entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
-      let absolutePathError = "Absolute paths should be avoided in configuration files if possible"
-      for inputPath in entry.paths where inputPath.isAbsolute {
-        printError(string: "\(cmd).paths \(inputPath) is absolute. \(absolutePathError)")
-      }
-      if case TemplateRef.path(let tp) = entry.template, tp.isAbsolute {
-        printError(string: "\(cmd).templatePath \(tp) is absolute. \(absolutePathError)")
-      }
-      if entry.output.isAbsolute {
-        printError(string: "\(cmd).output path \(entry.output) is absolute. \(absolutePathError)")
-      }
-      print("  $ " + entry.commandLine(forCommand: cmd))
-    }
-  }
+  config.lint { level, msg in logMessage(level, msg) }
 }
 
 let configRunCommand = command(
@@ -116,7 +84,7 @@ let configRunCommand = command(
           try entry.checkPaths()
           try entry.run(parserCommand: parserCmd)
         } catch let e {
-          printError(string: "\(e)")
+          logMessage(.error, String(describing: e))
         }
       }
     }

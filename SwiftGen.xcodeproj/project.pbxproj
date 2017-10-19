@@ -12,11 +12,10 @@
 		0934050C1F8158EE00187787 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050A1F8158B800187787 /* Config.swift */; };
 		0934050E1F815A8C00187787 /* ParserCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050D1F815A8C00187787 /* ParserCommands.swift */; };
 		0934050F1F815A9100187787 /* ParserCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050D1F815A8C00187787 /* ParserCommands.swift */; };
-		093405101F815B2500187787 /* swiftgen-1.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405071F81539100187787 /* swiftgen-1.yml */; };
-		093405131F87AA6A00187787 /* swiftgen-2.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405111F87AA6500187787 /* swiftgen-2.yml */; };
-		093405151F87AA9700187787 /* swiftgen-bad.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405141F87AA9700187787 /* swiftgen-bad.yml */; };
+		093405101F815B2500187787 /* config-with-params.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405071F81539100187787 /* config-with-params.yml */; };
+		093405131F87AA6A00187787 /* config-with-multi-entries.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405111F87AA6500187787 /* config-with-multi-entries.yml */; };
 		09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030C171B6D43D400275BF5 /* TestsHelper.swift */; };
-		09A87B5C1BCCA37F00D9B9F5 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD81B6D2E5900275BF5 /* Tests.swift */; };
+		09A87B5C1BCCA37F00D9B9F5 /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD81B6D2E5900275BF5 /* ConfigTests.swift */; };
 		234F7E7D1DEBD765001B3C10 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7B2D31BCC382800D7F488 /* main.swift */; };
 		234F7E7E1DEBD765001B3C10 /* Path+Commander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091150301BD31A3300EBC803 /* Path+Commander.swift */; };
 		234F7E7F1DEBD765001B3C10 /* TemplatesCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921FBA01BE7D6B900B488B5 /* TemplatesCommands.swift */; };
@@ -25,8 +24,17 @@
 		379C7E8A1F8ECA8900267096 /* TemplateRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E861F8ECA0C00267096 /* TemplateRef.swift */; };
 		379C7E8D1F8ECB2400267096 /* Path+AppSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E8C1F8ECB2400267096 /* Path+AppSupport.swift */; };
 		379C7E8E1F8ECB2D00267096 /* Path+AppSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E8C1F8ECB2400267096 /* Path+AppSupport.swift */; };
-		379C7E921F8ECC1A00267096 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E911F8ECC1A00267096 /* Utils.swift */; };
-		379C7E931F8ECC2400267096 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E911F8ECC1A00267096 /* Utils.swift */; };
+		379C7E921F8ECC1A00267096 /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E911F8ECC1A00267096 /* Logs.swift */; };
+		379C7E931F8ECC2400267096 /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E911F8ECC1A00267096 /* Logs.swift */; };
+		37DC60321F98D7DD00B7B31C /* config-absolute-paths-direct.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC60301F98D1DA00B7B31C /* config-absolute-paths-direct.yml */; };
+		37DC60331F98D7DD00B7B31C /* config-both-templates.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC602D1F98D1D900B7B31C /* config-both-templates.yml */; };
+		37DC60341F98D7DD00B7B31C /* config-invalid-output.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC602F1F98D1DA00B7B31C /* config-invalid-output.yml */; };
+		37DC60351F98D7DD00B7B31C /* config-invalid-structure.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC602A1F98D1D900B7B31C /* config-invalid-structure.yml */; };
+		37DC60361F98D7DD00B7B31C /* config-invalid-template.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC602E1F98D1D900B7B31C /* config-invalid-template.yml */; };
+		37DC60371F98D7DD00B7B31C /* config-missing-output.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC602C1F98D1D900B7B31C /* config-missing-output.yml */; };
+		37DC60381F98D7DD00B7B31C /* config-missing-sources.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC60311F98D1DA00B7B31C /* config-missing-sources.yml */; };
+		37DC60391F98D7DD00B7B31C /* config-missing-template.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC602B1F98D1D900B7B31C /* config-missing-template.yml */; };
+		37DC603B1F98E74E00B7B31C /* config-absolute-paths-prefix.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */; };
 		A99DC0C5A2CECABB34A121C8 /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F17C8613373A017F0B70B5C /* Pods_swiftgen.framework */; };
 		C126229CBD385F58FAF629D2 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C3A19C1BBD55A5644EDC18 /* Pods_UnitTests.framework */; };
 		DD906FA81EE777C600C29B8A /* ParserCommand+Commander.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD906FA71EE777C600C29B8A /* ParserCommand+Commander.swift */; };
@@ -68,16 +76,15 @@
 
 /* Begin PBXFileReference section */
 		09030BC01B6D2A8F00275BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		09030BD81B6D2E5900275BF5 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		09030BD81B6D2E5900275BF5 /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		09030C171B6D43D400275BF5 /* TestsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TestsHelper.swift; sourceTree = "<group>"; tabWidth = 2; };
 		091150301BD31A3300EBC803 /* Path+Commander.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Path+Commander.swift"; sourceTree = "<group>"; };
 		0921FBA01BE7D6B900B488B5 /* TemplatesCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplatesCommands.swift; sourceTree = "<group>"; };
 		093405041F8113AA00187787 /* ConfigCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCommands.swift; sourceTree = "<group>"; };
-		093405071F81539100187787 /* swiftgen-1.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "swiftgen-1.yml"; sourceTree = "<group>"; };
+		093405071F81539100187787 /* config-with-params.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-with-params.yml"; sourceTree = "<group>"; };
 		0934050A1F8158B800187787 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		0934050D1F815A8C00187787 /* ParserCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserCommands.swift; sourceTree = "<group>"; };
-		093405111F87AA6500187787 /* swiftgen-2.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "swiftgen-2.yml"; sourceTree = "<group>"; };
-		093405141F87AA9700187787 /* swiftgen-bad.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "swiftgen-bad.yml"; sourceTree = "<group>"; };
+		093405111F87AA6500187787 /* config-with-multi-entries.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-with-multi-entries.yml"; sourceTree = "<group>"; };
 		09A87B501BCCA2C600D9B9F5 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09C7B2D31BCC382800D7F488 /* main.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; tabWidth = 2; };
 		09E7146D1B6D55B4007FF3CF /* SwiftGen.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftGen.playground; sourceTree = "<group>"; };
@@ -87,7 +94,16 @@
 		379C7E861F8ECA0C00267096 /* TemplateRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateRef.swift; sourceTree = "<group>"; };
 		379C7E881F8ECA7000267096 /* OutputDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDestination.swift; sourceTree = "<group>"; };
 		379C7E8C1F8ECB2400267096 /* Path+AppSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+AppSupport.swift"; sourceTree = "<group>"; };
-		379C7E911F8ECC1A00267096 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		379C7E911F8ECC1A00267096 /* Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
+		37DC602A1F98D1D900B7B31C /* config-invalid-structure.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-invalid-structure.yml"; sourceTree = "<group>"; };
+		37DC602B1F98D1D900B7B31C /* config-missing-template.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-missing-template.yml"; sourceTree = "<group>"; };
+		37DC602C1F98D1D900B7B31C /* config-missing-output.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-missing-output.yml"; sourceTree = "<group>"; };
+		37DC602D1F98D1D900B7B31C /* config-both-templates.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-both-templates.yml"; sourceTree = "<group>"; };
+		37DC602E1F98D1D900B7B31C /* config-invalid-template.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-invalid-template.yml"; sourceTree = "<group>"; };
+		37DC602F1F98D1DA00B7B31C /* config-invalid-output.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-invalid-output.yml"; sourceTree = "<group>"; };
+		37DC60301F98D1DA00B7B31C /* config-absolute-paths-direct.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-absolute-paths-direct.yml"; sourceTree = "<group>"; };
+		37DC60311F98D1DA00B7B31C /* config-missing-sources.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-missing-sources.yml"; sourceTree = "<group>"; };
+		37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-absolute-paths-prefix.yml"; sourceTree = "<group>"; };
 		3F17C8613373A017F0B70B5C /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80C3A19C1BBD55A5644EDC18 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90843707F44D6F8153913604 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -155,7 +171,7 @@
 			children = (
 				093405061F81537400187787 /* fixtures */,
 				09030C171B6D43D400275BF5 /* TestsHelper.swift */,
-				09030BD81B6D2E5900275BF5 /* Tests.swift */,
+				09030BD81B6D2E5900275BF5 /* ConfigTests.swift */,
 				09030BC01B6D2A8F00275BF5 /* Info.plist */,
 			);
 			path = SwiftGenTests;
@@ -164,9 +180,17 @@
 		093405061F81537400187787 /* fixtures */ = {
 			isa = PBXGroup;
 			children = (
-				093405071F81539100187787 /* swiftgen-1.yml */,
-				093405111F87AA6500187787 /* swiftgen-2.yml */,
-				093405141F87AA9700187787 /* swiftgen-bad.yml */,
+				093405071F81539100187787 /* config-with-params.yml */,
+				093405111F87AA6500187787 /* config-with-multi-entries.yml */,
+				37DC60301F98D1DA00B7B31C /* config-absolute-paths-direct.yml */,
+				37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */,
+				37DC60311F98D1DA00B7B31C /* config-missing-sources.yml */,
+				37DC602B1F98D1D900B7B31C /* config-missing-template.yml */,
+				37DC602D1F98D1D900B7B31C /* config-both-templates.yml */,
+				37DC602C1F98D1D900B7B31C /* config-missing-output.yml */,
+				37DC602A1F98D1D900B7B31C /* config-invalid-structure.yml */,
+				37DC602E1F98D1D900B7B31C /* config-invalid-template.yml */,
+				37DC602F1F98D1DA00B7B31C /* config-invalid-output.yml */,
 			);
 			path = fixtures;
 			sourceTree = "<group>";
@@ -180,7 +204,7 @@
 				379C7E861F8ECA0C00267096 /* TemplateRef.swift */,
 				379C7E901F8ECB9700267096 /* Commander */,
 				0934050A1F8158B800187787 /* Config.swift */,
-				379C7E911F8ECC1A00267096 /* Utils.swift */,
+				379C7E911F8ECC1A00267096 /* Logs.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -318,8 +342,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				093405131F87AA6A00187787 /* swiftgen-2.yml in Resources */,
-				093405101F815B2500187787 /* swiftgen-1.yml in Resources */,
+				37DC60331F98D7DD00B7B31C /* config-both-templates.yml in Resources */,
+				37DC60381F98D7DD00B7B31C /* config-missing-sources.yml in Resources */,
+				37DC60341F98D7DD00B7B31C /* config-invalid-output.yml in Resources */,
+				093405131F87AA6A00187787 /* config-with-multi-entries.yml in Resources */,
+				37DC60391F98D7DD00B7B31C /* config-missing-template.yml in Resources */,
+				37DC60351F98D7DD00B7B31C /* config-invalid-structure.yml in Resources */,
+				093405101F815B2500187787 /* config-with-params.yml in Resources */,
+				37DC60361F98D7DD00B7B31C /* config-invalid-template.yml in Resources */,
+				37DC603B1F98E74E00B7B31C /* config-absolute-paths-prefix.yml in Resources */,
+				37DC60321F98D7DD00B7B31C /* config-absolute-paths-direct.yml in Resources */,
+				37DC60371F98D7DD00B7B31C /* config-missing-output.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +361,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDC09D021E1D199A005C6EE6 /* templates in Resources */,
-				093405151F87AA9700187787 /* swiftgen-bad.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,8 +514,8 @@
 			files = (
 				09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */,
 				379C7E8A1F8ECA8900267096 /* TemplateRef.swift in Sources */,
-				09A87B5C1BCCA37F00D9B9F5 /* Tests.swift in Sources */,
-				379C7E931F8ECC2400267096 /* Utils.swift in Sources */,
+				09A87B5C1BCCA37F00D9B9F5 /* ConfigTests.swift in Sources */,
+				379C7E931F8ECC2400267096 /* Logs.swift in Sources */,
 				379C7E8E1F8ECB2D00267096 /* Path+AppSupport.swift in Sources */,
 				0934050F1F815A9100187787 /* ParserCommands.swift in Sources */,
 				0934050C1F8158EE00187787 /* Config.swift in Sources */,
@@ -501,7 +533,7 @@
 				379C7E8D1F8ECB2400267096 /* Path+AppSupport.swift in Sources */,
 				0934050E1F815A8C00187787 /* ParserCommands.swift in Sources */,
 				DD906FA81EE777C600C29B8A /* ParserCommand+Commander.swift in Sources */,
-				379C7E921F8ECC1A00267096 /* Utils.swift in Sources */,
+				379C7E921F8ECC1A00267096 /* Logs.swift in Sources */,
 				379C7E871F8ECA0C00267096 /* TemplateRef.swift in Sources */,
 				093405051F8113AA00187787 /* ConfigCommands.swift in Sources */,
 				0934050B1F8158B800187787 /* Config.swift in Sources */,
