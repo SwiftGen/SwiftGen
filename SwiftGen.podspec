@@ -20,4 +20,5 @@ Pod::Spec.new do |s|
 
   s.source = { http: "https://github.com/SwiftGen/SwiftGen/releases/download/#{s.version}/swiftgen-#{s.version}.zip" }
   s.preserve_paths = '*'
+  s.exclude_files = '**/file.zip'
 end
