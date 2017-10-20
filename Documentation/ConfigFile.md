@@ -16,18 +16,18 @@ output_dir: Sources/Generated/
 strings:
   paths: Base.lproj/Localizable.strings
   templateName: structured-swift3
-  output: strings.swift
-  params:
-    enumName: Loc
+  output: L10n-Constants.swift
 xcassets:
-  - paths: Images.xcassets
+  - paths: Logos.xcassets
     templateName: swift3
-    output: assets-images.swift
+    output: Logos-Constants.swift
+    params:
+      enumName: Logos
   - paths:
       - Colors.xcassets
       - Images.xcassets
     templatePath: customswift3
-    output: assets-all.swift
+    output: Assets-Constants.swift
 ```
 
 ℹ️ All _relative_ paths specified in the configuration file (`input_dir`, `output_dir`, `paths`, `templatePath`, `output`) are relative to the location of the _configuration file_ itself.
