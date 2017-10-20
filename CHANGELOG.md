@@ -8,6 +8,7 @@
 
 * When installing SwiftGen via CocoaPods, the unneeded `file.zip` is not kept in `Pods/SwiftGen/` anymore _(freeing ~5MB on each install of SwiftGen made via CocoaPods!)_.  
   [Olivier Halligon](https://github.com/AliSoftware)
+  [#342](https://github.com/SwiftGen/SwiftGen/pull/342)
 
 ## 5.1.2
 
