@@ -30,7 +30,7 @@ xcassets:
     output: assets-all.swift
 ```
 
-ℹ️ All _relative_ paths specified in the configuration file (`input_dir`, `output_dir`, `paths`, `templatePath`, `output`) are relative to location of the _configuration file_ itself.
+ℹ️ All _relative_ paths specified in the configuration file (`input_dir`, `output_dir`, `paths`, `templatePath`, `output`) are relative to the location of the _configuration file_ itself.
 
 > 💡 We advise against using _absolute_ paths — starting with `/` — in the configuration file, so that they won't rely on where the project was cloned on your machine._
 
@@ -46,7 +46,7 @@ Here's a quick description of all the possible _root_ keys. All of them are opti
 | `strings` | Describe the parameters to run with the `strings` subcommand | See below for a detail of all the subkeys. |
 | `xcassets` | Describe the parameters to run with the `xcassets` subcommand | See below for a detail of all the subkeys. |
 
-Each key corresponding to a SwiftGen subcommands (`colors`, `fonts`, `storyboards`, `strings`, `xcassets`) expect the corresponding value to be:
+Each key corresponding to a SwiftGen subcommands (`colors`, `fonts`, `storyboards`, `strings`, `xcassets`) expects the corresponding value to be:
 
 * Either a dictionary, with the keys described below, if you want to invoke the corresponding SwiftGen subcommand only once (most common use case)
 * Or an array of those dictionaries, in the less common case where you need to invoke that SwiftGen subcommand multiple times (for example to use one template with some input files and another template for other input files…)
