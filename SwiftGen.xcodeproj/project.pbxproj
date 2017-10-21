@@ -10,12 +10,15 @@
 		093405051F8113AA00187787 /* ConfigCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093405041F8113AA00187787 /* ConfigCommands.swift */; };
 		0934050B1F8158B800187787 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050A1F8158B800187787 /* Config.swift */; };
 		0934050C1F8158EE00187787 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050A1F8158B800187787 /* Config.swift */; };
-		0934050E1F815A8C00187787 /* ParserCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050D1F815A8C00187787 /* ParserCommands.swift */; };
-		0934050F1F815A9100187787 /* ParserCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050D1F815A8C00187787 /* ParserCommands.swift */; };
+		0934050E1F815A8C00187787 /* ParserCLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050D1F815A8C00187787 /* ParserCLI.swift */; };
+		0934050F1F815A9100187787 /* ParserCLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050D1F815A8C00187787 /* ParserCLI.swift */; };
 		093405101F815B2500187787 /* config-with-params.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405071F81539100187787 /* config-with-params.yml */; };
 		093405131F87AA6A00187787 /* config-with-multi-entries.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405111F87AA6500187787 /* config-with-multi-entries.yml */; };
 		09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030C171B6D43D400275BF5 /* TestsHelper.swift */; };
-		09A87B5C1BCCA37F00D9B9F5 /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD81B6D2E5900275BF5 /* ConfigTests.swift */; };
+		09A87B5C1BCCA37F00D9B9F5 /* ConfigReadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD81B6D2E5900275BF5 /* ConfigReadTests.swift */; };
+		09D009FF1F9BB3450026A755 /* ConfigEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D009FE1F9BB3450026A755 /* ConfigEntry.swift */; };
+		09D00A011F9BB87F0026A755 /* ConfigEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D009FE1F9BB3450026A755 /* ConfigEntry.swift */; };
+		09D00A041F9BBE370026A755 /* ConfigLintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D00A021F9BBD9F0026A755 /* ConfigLintTests.swift */; };
 		234F7E7D1DEBD765001B3C10 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7B2D31BCC382800D7F488 /* main.swift */; };
 		234F7E7E1DEBD765001B3C10 /* Path+Commander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091150301BD31A3300EBC803 /* Path+Commander.swift */; };
 		234F7E7F1DEBD765001B3C10 /* TemplatesCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921FBA01BE7D6B900B488B5 /* TemplatesCommands.swift */; };
@@ -37,7 +40,7 @@
 		37DC603B1F98E74E00B7B31C /* config-absolute-paths-prefix.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */; };
 		A99DC0C5A2CECABB34A121C8 /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F17C8613373A017F0B70B5C /* Pods_swiftgen.framework */; };
 		C126229CBD385F58FAF629D2 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C3A19C1BBD55A5644EDC18 /* Pods_UnitTests.framework */; };
-		DD906FA81EE777C600C29B8A /* ParserCommand+Commander.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD906FA71EE777C600C29B8A /* ParserCommand+Commander.swift */; };
+		DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */; };
 		DDC09D021E1D199A005C6EE6 /* templates in Resources */ = {isa = PBXBuildFile; fileRef = DDC09D011E1D199A005C6EE6 /* templates */; };
 /* End PBXBuildFile section */
 
@@ -76,17 +79,19 @@
 
 /* Begin PBXFileReference section */
 		09030BC01B6D2A8F00275BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		09030BD81B6D2E5900275BF5 /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
+		09030BD81B6D2E5900275BF5 /* ConfigReadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigReadTests.swift; sourceTree = "<group>"; };
 		09030C171B6D43D400275BF5 /* TestsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TestsHelper.swift; sourceTree = "<group>"; tabWidth = 2; };
 		091150301BD31A3300EBC803 /* Path+Commander.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Path+Commander.swift"; sourceTree = "<group>"; };
 		0921FBA01BE7D6B900B488B5 /* TemplatesCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplatesCommands.swift; sourceTree = "<group>"; };
 		093405041F8113AA00187787 /* ConfigCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCommands.swift; sourceTree = "<group>"; };
 		093405071F81539100187787 /* config-with-params.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-with-params.yml"; sourceTree = "<group>"; };
 		0934050A1F8158B800187787 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		0934050D1F815A8C00187787 /* ParserCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserCommands.swift; sourceTree = "<group>"; };
+		0934050D1F815A8C00187787 /* ParserCLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserCLI.swift; sourceTree = "<group>"; };
 		093405111F87AA6500187787 /* config-with-multi-entries.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-with-multi-entries.yml"; sourceTree = "<group>"; };
 		09A87B501BCCA2C600D9B9F5 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09C7B2D31BCC382800D7F488 /* main.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; tabWidth = 2; };
+		09D009FE1F9BB3450026A755 /* ConfigEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigEntry.swift; sourceTree = "<group>"; };
+		09D00A021F9BBD9F0026A755 /* ConfigLintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigLintTests.swift; sourceTree = "<group>"; };
 		09E7146D1B6D55B4007FF3CF /* SwiftGen.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftGen.playground; sourceTree = "<group>"; };
 		234F7E6E1DEBD5C5001B3C10 /* swiftgen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftgen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		234F7E771DEBD5C5001B3C10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Sources/Info.plist; sourceTree = "<group>"; };
@@ -109,7 +114,7 @@
 		90843707F44D6F8153913604 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		920E71433B3570488CF5B052 /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D8AC6E8E60EADE4523EA68E9 /* Pods-swiftgen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.release.xcconfig"; sourceTree = "<group>"; };
-		DD906FA71EE777C600C29B8A /* ParserCommand+Commander.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ParserCommand+Commander.swift"; sourceTree = "<group>"; };
+		DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserCLICommands.swift; sourceTree = "<group>"; };
 		DDC09D011E1D199A005C6EE6 /* templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = templates; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,7 +176,8 @@
 			children = (
 				093405061F81537400187787 /* fixtures */,
 				09030C171B6D43D400275BF5 /* TestsHelper.swift */,
-				09030BD81B6D2E5900275BF5 /* ConfigTests.swift */,
+				09030BD81B6D2E5900275BF5 /* ConfigReadTests.swift */,
+				09D00A021F9BBD9F0026A755 /* ConfigLintTests.swift */,
 				09030BC01B6D2A8F00275BF5 /* Info.plist */,
 			);
 			path = SwiftGenTests;
@@ -199,14 +205,23 @@
 			isa = PBXGroup;
 			children = (
 				09C7B2D31BCC382800D7F488 /* main.swift */,
-				0934050D1F815A8C00187787 /* ParserCommands.swift */,
+				0934050D1F815A8C00187787 /* ParserCLI.swift */,
 				379C7E8C1F8ECB2400267096 /* Path+AppSupport.swift */,
 				379C7E861F8ECA0C00267096 /* TemplateRef.swift */,
 				379C7E901F8ECB9700267096 /* Commander */,
-				0934050A1F8158B800187787 /* Config.swift */,
+				09D00A001F9BB8730026A755 /* Config */,
 				379C7E911F8ECC1A00267096 /* Logs.swift */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		09D00A001F9BB8730026A755 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				0934050A1F8158B800187787 /* Config.swift */,
+				09D009FE1F9BB3450026A755 /* ConfigEntry.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		379C7E901F8ECB9700267096 /* Commander */ = {
@@ -214,7 +229,7 @@
 			children = (
 				091150301BD31A3300EBC803 /* Path+Commander.swift */,
 				379C7E881F8ECA7000267096 /* OutputDestination.swift */,
-				DD906FA71EE777C600C29B8A /* ParserCommand+Commander.swift */,
+				DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */,
 				0921FBA01BE7D6B900B488B5 /* TemplatesCommands.swift */,
 				093405041F8113AA00187787 /* ConfigCommands.swift */,
 			);
@@ -514,10 +529,12 @@
 			files = (
 				09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */,
 				379C7E8A1F8ECA8900267096 /* TemplateRef.swift in Sources */,
-				09A87B5C1BCCA37F00D9B9F5 /* ConfigTests.swift in Sources */,
+				09A87B5C1BCCA37F00D9B9F5 /* ConfigReadTests.swift in Sources */,
 				379C7E931F8ECC2400267096 /* Logs.swift in Sources */,
+				09D00A041F9BBE370026A755 /* ConfigLintTests.swift in Sources */,
+				09D00A011F9BB87F0026A755 /* ConfigEntry.swift in Sources */,
 				379C7E8E1F8ECB2D00267096 /* Path+AppSupport.swift in Sources */,
-				0934050F1F815A9100187787 /* ParserCommands.swift in Sources */,
+				0934050F1F815A9100187787 /* ParserCLI.swift in Sources */,
 				0934050C1F8158EE00187787 /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -530,9 +547,10 @@
 				234F7E7D1DEBD765001B3C10 /* main.swift in Sources */,
 				234F7E7E1DEBD765001B3C10 /* Path+Commander.swift in Sources */,
 				234F7E7F1DEBD765001B3C10 /* TemplatesCommands.swift in Sources */,
+				09D009FF1F9BB3450026A755 /* ConfigEntry.swift in Sources */,
 				379C7E8D1F8ECB2400267096 /* Path+AppSupport.swift in Sources */,
-				0934050E1F815A8C00187787 /* ParserCommands.swift in Sources */,
-				DD906FA81EE777C600C29B8A /* ParserCommand+Commander.swift in Sources */,
+				0934050E1F815A8C00187787 /* ParserCLI.swift in Sources */,
+				DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */,
 				379C7E921F8ECC1A00267096 /* Logs.swift in Sources */,
 				379C7E871F8ECA0C00267096 /* TemplateRef.swift in Sources */,
 				093405051F8113AA00187787 /* ConfigCommands.swift in Sources */,

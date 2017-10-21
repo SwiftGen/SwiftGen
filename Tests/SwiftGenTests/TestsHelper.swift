@@ -16,7 +16,7 @@ private let okCode = (num: colorCode("fg127,127,127"),
 private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
                       code: colorCode("fg250,250,250") + colorCode("bg127,0,0"))
 
-func diff(_ result: String, _ expected: String) -> String? {
+private func diff(_ result: String, _ expected: String) -> String? {
   guard result != expected else { return nil }
   var firstDiff: Int? = nil
   let nl = CharacterSet.newlines

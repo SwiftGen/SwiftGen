@@ -19,6 +19,7 @@ enum OutputDestination: ArgumentConvertible {
     }
     self = .file(Path(path))
   }
+
   var description: String {
     switch self {
     case .console: return "(stdout)"

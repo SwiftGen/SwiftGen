@@ -1,5 +1,5 @@
 //
-//  AllParserCommands.swift
+//  ParserCLI.swift
 //  swiftgen
 //
 //  Created by Olivier Halligon on 01/10/2017.
@@ -8,7 +8,8 @@
 
 import SwiftGenKit
 
-public struct ParserCommand {
+/// Describes the Command-Line Interface for each parser subcommands
+public struct ParserCLI {
   public let parserType: Parser.Type
   public let name: String
   public let description: String
@@ -17,32 +18,32 @@ public struct ParserCommand {
 
 // MARK: - All Parser Commands
 
-let allParserCommands: [ParserCommand] = [
-  ParserCommand(
+let allParserCommands: [ParserCLI] = [
+  .init(
     parserType: AssetsCatalogParser.self,
     name: "xcassets",
     description: "generate code for items in your Assets Catalog(s)",
     pathDescription: "Asset Catalog file(s)."
   ),
-  ParserCommand(
+  .init(
     parserType: ColorsParser.self,
     name: "colors",
     description: "generate code for color palettes",
     pathDescription: "Colors.txt|.clr|.xml|.json file(s) to parse."
   ),
-  ParserCommand(
+  .init(
     parserType: StringsParser.self,
     name: "strings",
     description: "generate code for your Localizable.strings file(s)",
     pathDescription: "Strings file(s) to parse."
   ),
-  ParserCommand(
+  .init(
     parserType: StoryboardParser.self,
     name: "storyboards",
     description: "generate code for your storyboard scenes and segues",
     pathDescription: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard"
   ),
-  ParserCommand(
+  .init(
     parserType: FontsParser.self,
     name: "fonts",
     description: "generate code for your fonts",

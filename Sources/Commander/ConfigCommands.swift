@@ -23,7 +23,7 @@ extension Config.Entry {
     }
   }
 
-  func run(parserCommand: ParserCommand) throws {
+  func run(parserCommand: ParserCLI) throws {
     let parser = try parserCommand.parserType.init(options: [:], warningHandler: { (msg, _, _) in
       logMessage(.error, msg)
     })

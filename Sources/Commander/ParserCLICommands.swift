@@ -9,23 +9,23 @@ import PathKit
 import StencilSwiftKit
 import SwiftGenKit
 
-let templateNameOption = Option<String>(
+private let templateNameOption = Option<String>(
   "template", default: "", flag: "t",
   description: "The name of the template to use for code generation (without the extension)."
 )
 
-let templatePathOption = Option<Path>(
+private let templatePathOption = Option<Path>(
   "templatePath", default: "", flag: "p",
   description: "The path of the template to use for code generation. Overrides -t.",
   validator: checkPath(type: "template file") { $0.isFile }
 )
 
-let paramsOption = VariadicOption<String>(
+private let paramsOption = VariadicOption<String>(
   "param", default: [],
   description: "List of template parameters"
 )
 
-extension ParserCommand {
+extension ParserCLI {
   func command() -> CommandType {
     return Commander.command(
       outputOption,
@@ -41,7 +41,7 @@ extension ParserCommand {
 
       do {
         let templateRef = try TemplateRef(templateShortName: templateName,
-                                                templateFullPath: templatePath)
+                                          templateFullPath: templatePath)
         let templateRealPath = try templateRef.resolvePath(forSubcommand: self.name)
 
         let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),

@@ -32,20 +32,19 @@ enum TemplateRef {
     }
   }
 
-  /**
-   Returns the path of a template
-   * If it's a `.path`, check that the path exists and return it (throws if it isn't an existing file)
-   * If it's a `.name`, search the named template in the folder `subcommand`
-   in the Application Support directory first, then in the bundled templates,
-   and returns the path if found (throws if none is found)
-
-   - parameter subcommand         the folder for the template, typically name of one of the SwiftGen subcommand
-   like `strings`, `colors`, etc
-
-   - throws: TemplateError
-
-   - returns: The Path matching the template found
-   */
+  /// Returns the path of a template
+  ///
+  /// * If it's a `.path`, check that the path exists and return it (throws if it isn't an existing file)
+  /// * If it's a `.name`, search the named template in the folder `subcommand`
+  ///   in the Application Support directory first, then in the bundled templates,
+  ///   and returns the path if found (throws if none is found)
+  ///
+  /// - Parameter subCmd: the folder to search for the template
+  ///                     typically the name of one of the SwiftGen subcommands
+  ///                     like `strings`, `colors`, etc
+  /// - Returns: The Path matching the template found
+  /// - Throws: TemplateRef.Error
+  ///
   func resolvePath(forSubcommand subCmd: String) throws -> Path {
     switch self {
     case .name(let templateShortName):
