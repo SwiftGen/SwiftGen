@@ -138,7 +138,7 @@ Or add the path to the `bin` folder to your `$PATH` and invoke `swiftgen` direct
 
 > ❗️ If you're migrating from SwiftGen 4.x to SwiftGen 5.x, don't forget to [read the Migration Guide](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/MigrationGuide.md#swiftgen-50-migration-guide).
 
-The tool is provided as a unique `swiftgen` binary command-line, with the following subcommands:
+The tool is provided as a unique `swiftgen` binary command-line, with the following subcommands available to parse various resource types:
 
 * `swiftgen colors [OPTIONS] FILE1 …`
 * `swiftgen fonts [OPTIONS] DIR1 …`
@@ -154,7 +154,34 @@ Each subcommand has its own option and syntax, but some options are common to al
 * Note: you should specify one and one template when invoking SwiftGen. You have to use either `-t` or `-p` but should not use both at the same time (it wouldn't make sense anyway and you'll get an error if you try)
 * Each command supports multiple input files (or directories where applicable).
 
-You can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
+There are also more subcommands not related to generate code but more oriented for help and configuration, namely:
+
+* The `swiftgen templates` subcommands helps you print, duplicate, find and manage templates (both bundled and custom)
+* The `swiftgen config` subcommands helps you manage configuration files (see below)
+* You can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
+
+### Using a configuration file
+
+Instead of having to invoke SwiftGen manually for each type or resource you want to generate code for, each time with the proper list of arguments, it's easier to use a configuration file.
+
+Simply create a `swiftgen.yml` YAML file to list all the subcommands to invoke, and for each subcommand, the list of arguments to pass to it. For example:
+
+```yaml
+strings:
+  paths: Resources/Base.lproj/Localizable.strings
+  templateName: structured-swift3
+  output: Generated/strings.swift
+xcassets:
+  paths:
+   - Resources/Images.xcassets
+   - Resources/MoreImages.xcassets
+  templateName: swift3
+  output: Generated/assets-images.swift
+```
+
+Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for short, and it will execute what's described in the configuration file
+
+To learn more about the configuration file — its more detailed syntax and possiblities, how to pass custom parameters, using `swiftgen config lint` to validate it, how to use alternate config files, and other tips — [see the dedicated documentation](Documentation/ConfigFile.md).
 
 ## Choosing your template
 

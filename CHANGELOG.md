@@ -4,6 +4,13 @@
 
 ## Master
 
+### New Features
+
+* You can now use a `swiftgen.yml` file to configure SwiftGen! 🎉  
+  Read more about it [in the dedicated documentation](Documentation/ConfigFile.md).  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#337](https://github.com/SwiftGen/SwiftGen/pull/337)
+
 ### Bug Fixes
 
 * When installing SwiftGen via CocoaPods, the unneeded `file.zip` is not kept in `Pods/SwiftGen/` anymore _(freeing ~5MB on each install of SwiftGen made via CocoaPods!)_.  
@@ -11,6 +18,8 @@
   [#342](https://github.com/SwiftGen/SwiftGen/pull/342)
 
 ## 5.1.2
+
+### Internal Changes
 
 * Allows the SwiftGen source code to be built with Xcode 9.
   This also has the nice side-effect of making the homebrew installation of SwiftGen also available for macOS 10.13.  

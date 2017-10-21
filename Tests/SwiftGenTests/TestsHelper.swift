@@ -16,18 +16,16 @@ private let okCode = (num: colorCode("fg127,127,127"),
 private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
                       code: colorCode("fg250,250,250") + colorCode("bg127,0,0"))
 
-func diff(_ result: String, _ expected: String) -> String? {
+private func diff(_ result: String, _ expected: String) -> String? {
   guard result != expected else { return nil }
   var firstDiff: Int? = nil
   let nl = CharacterSet.newlines
   let lhsLines = result.components(separatedBy: nl)
   let rhsLines = expected.components(separatedBy: nl)
 
-  for (idx, pair) in zip(lhsLines, rhsLines).enumerated() {
-    if pair.0 != pair.1 {
-      firstDiff = idx
-      break
-    }
+  for (idx, pair) in zip(lhsLines, rhsLines).enumerated() where pair.0 != pair.1 {
+    firstDiff = idx
+    break
   }
   if let badLineIdx = firstDiff {
     let slice = { (lines: [String], context: Int) -> ArraySlice<String> in
@@ -60,6 +58,26 @@ func diff(_ result: String, _ expected: String) -> String? {
 func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #file, line: UInt = #line) {
   guard let error = diff(result, expected) else { return }
   XCTFail(error, file: file, line: line)
+}
+
+func XCTAssertEqualDict(_ result: [String: Any]?, _ expected: [String: Any],
+                        file: StaticString = #file, line: UInt = #line) {
+  if let dict = result {
+    XCTAssertTrue(NSDictionary(dictionary: dict).isEqual(to: expected),
+                  "expected \(expected), got \(dict)", file: file, line: line)
+  } else {
+    XCTAssertNotNil(result, file: file, line: line)
+  }
+}
+
+extension TemplateRef: Equatable {
+  static func == (lhs: TemplateRef, rhs: TemplateRef) -> Bool {
+    switch (lhs, rhs) {
+    case (.name(let lname), .name(let rname)): return lname == rname
+    case (.path(let lpath), .path(let rpath)): return lpath == rpath
+    case (.name, .path), (.path, .name): return false
+    }
+  }
 }
 
 class Fixtures {

@@ -8,11 +8,20 @@ import Stencil
 
 public extension Extension {
   public func registerStencilSwiftExtensions() {
-    registerTag("set", parser: SetNode.parse)
-    registerTag("macro", parser: MacroNode.parse)
-    registerTag("call", parser: CallNode.parse)
-    registerTag("map", parser: MapNode.parse)
+    registerTags()
+    registerStringsFilters()
+    registerNumbersFilters()
+  }
 
+  // MARK: - Private
+
+  private func registerNumbersFilters() {
+    registerFilter("hexToInt", filter: Filters.Numbers.hexToInt)
+    registerFilter("int255toFloat", filter: Filters.Numbers.int255toFloat)
+    registerFilter("percent", filter: Filters.Numbers.percent)
+  }
+
+  private func registerStringsFilters() {
     registerFilter("basename", filter: Filters.Strings.basename)
     registerFilter("camelToSnakeCase", filter: Filters.Strings.camelToSnakeCase)
     registerFilter("contains", filter: Filters.Strings.contains)
@@ -28,10 +37,13 @@ public extension Extension {
     registerFilter("swiftIdentifier", filter: Filters.Strings.swiftIdentifier)
     registerFilter("titlecase", filter: Filters.Strings.upperFirstLetter)
     registerFilter("upperFirstLetter", filter: Filters.Strings.upperFirstLetter)
+  }
 
-    registerFilter("hexToInt", filter: Filters.Numbers.hexToInt)
-    registerFilter("int255toFloat", filter: Filters.Numbers.int255toFloat)
-    registerFilter("percent", filter: Filters.Numbers.percent)
+  private func registerTags() {
+    registerTag("set", parser: SetNode.parse)
+    registerTag("macro", parser: MacroNode.parse)
+    registerTag("call", parser: CallNode.parse)
+    registerTag("map", parser: MapNode.parse)
   }
 }
 

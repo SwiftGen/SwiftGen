@@ -8,3 +8,7 @@ opt_in_rules:
 line_length:
   warning: 120
   error: 200
+
+nesting:
+  type_level:
+    warning: 2

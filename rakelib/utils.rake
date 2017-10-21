@@ -142,7 +142,7 @@ class Utils
     latest_xcode = versions.sort_by { |a| a[:vers] }.last
 
     # Check if it's at least the right version
-    unless latest_xcode[:vers].to_f >= min_version
+    if latest_xcode.nil? || latest_xcode[:vers].to_f < min_version
       raise "\n[!!!] SwiftGen requires Xcode #{MIN_XCODE_VERSION}, but we were not able to find it. " \
         "If it's already installed update your Spotlight index with 'mdimport /Applications/Xcode*'\n\n"
     end

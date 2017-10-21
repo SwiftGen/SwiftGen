@@ -14,8 +14,8 @@ line interfaces in a composable way.
 ```swift
 import Commander
 
-let main = command {
-  print("Hello World")
+let main = command { (filename:String) in
+  print("Reading file \(filename)...")
 }
 
 main.run()
@@ -76,17 +76,33 @@ Goodbye.
 
 #### Describing arguments
 
-You can describe arguments and options for a command to auto-generate help,
-this is done by passing in descriptors of these arguments.
+You can describe positional arguments and options for a command to auto-generate help.
+This is done by passing in descriptors of these arguments.
 
-For example, to describe a command which takes two options, `--name` and
+For example, for fixed positional arguments with descriptions, you can use:
+
+```swift
+command(
+    Argument<String>("name", description: "Your name"),
+    Argument<String>("surname", description: "Your surname"),
+    Argument<Int>("count", description: "Number of times to print")
+) { name, surname, count in
+    for _ in 0..<count {
+        print("Hello \(name) \(surname)")
+    }
+   }.run()
+```
+
+Keep in mind you have to pass 3 required arguments.
+
+Another example, to describe a command which takes two (optional) options, `--name` and
 `--count` where the default value for name is `world` and the default value for
 count is `1`.
 
 ```swift
 command(
-  Option("name", "world"),
-  Option("count", 1, description: "The number of times to print.")
+  Option("name", default: "world"),
+  Option("count", default: 1, description: "The number of times to print.")
 ) { name, count in
   for _ in 0..<count {
     print("Hello \(name)")

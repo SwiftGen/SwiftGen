@@ -1,0 +1,17 @@
+output_dir: Common/Generated
+strings:
+  paths: Sources1/Folder
+  templateName: structured-swift3
+  output: strings.swift
+  params:
+    foo: 5
+    bar:
+      bar1: 1
+      bar2: 2
+      bar3:
+        - 3
+        - 4
+        - bar3a: 50
+    baz:
+      - hello
+      - world
