@@ -31,7 +31,7 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(entry.template, .name("structured-swift3"))
       XCTAssertEqualDict(entry.parameters, [
         "foo": 5,
-        "bar": ["bar1": 1, "bar2": 2, "bar3": [3, 4, ["bar3a": 50] as [AnyHashable: Any]]] as [AnyHashable: Any],
+        "bar": ["bar1": 1, "bar2": 2, "bar3": [3, 4, ["bar3a": 50]]],
         "baz": ["hello", "world"]
         ]
       )
