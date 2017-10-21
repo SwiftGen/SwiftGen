@@ -20,7 +20,9 @@ struct Config {
   let inputDir: Path?
   let outputDir: Path?
   let commands: [String: [Config.Entry]]
+}
 
+extension Config {
   init(file: Path) throws {
     if !file.exists {
       throw Config.Error.pathNotFound(path: file)

@@ -16,37 +16,31 @@ class ConfigReadTests: XCTestCase {
     let file = Path(path)
     do {
       let config = try Config(file: file)
+
+      XCTAssertNil(config.inputDir)
       XCTAssertEqual(config.outputDir, "Common/Generated")
+
       XCTAssertEqual(Array(config.commands.keys), ["strings"])
-      guard let stringsEntries = config.commands["strings"] else {
-        return XCTFail("Missing key 'strings'")
+      let stringEntries = config.commands["strings"]
+      XCTAssertEqual(stringEntries?.count, 1)
+      guard let entry = stringEntries?.first else {
+        return XCTFail("Expected a single strings entry")
       }
-      XCTAssertEqual(stringsEntries.count, 1)
-      guard let entry = stringsEntries.first else {
-        return XCTFail("Can't get strings only config entry")
-      }
+
       XCTAssertEqual(entry.paths, ["Sources1/Folder"])
-      if case TemplateRef.name("structured-swift3") = entry.template { /* OK */ } else {
-        XCTFail("Unexpected template")
-      }
+      XCTAssertEqual(entry.template, .name("structured-swift3"))
+      XCTAssertEqualDict(entry.parameters, [
+        "foo": 5,
+        "bar": ["bar1": 1, "bar2": 2, "bar3": [3, 4, ["bar3a": 50] as [AnyHashable: Any]]] as [AnyHashable: Any],
+        "baz": ["hello", "world"]
+        ]
+      )
       XCTAssertEqual(entry.output, "strings.swift")
-      XCTAssertEqual(entry.parameters["foo"] as? Int, 5)
-      let barParams = entry.parameters["bar"] as? [String: Any]
-      XCTAssertEqual(barParams?["bar1"] as? Int, 1)
-      XCTAssertEqual(barParams?["bar2"] as? Int, 2)
-      let bar3Params = barParams?["bar3"] as? [Any]
-      XCTAssertEqual(bar3Params?.count, 3)
-      XCTAssertEqual(bar3Params?[0] as? Int, 3)
-      XCTAssertEqual(bar3Params?[1] as? Int, 4)
-      XCTAssertEqual((bar3Params?[2] as? [String: Int]) ?? [:], ["bar3a": 50])
-      let bazParams = entry.parameters["baz"] as? [String]
-      XCTAssertEqual(bazParams ?? [], ["hello", "world"])
     } catch let e {
       XCTFail("Error: \(e)")
     }
   }
 
-  // swiftlint:disable function_body_length
   func testReadConfigWithMultiEntries() throws {
     guard let path = Bundle(for: type(of: self)).path(forResource: "config-with-multi-entries", ofType: "yml") else {
       fatalError("Fixture not found")
@@ -54,6 +48,7 @@ class ConfigReadTests: XCTestCase {
     let file = Path(path)
     do {
       let config = try Config(file: file)
+
       XCTAssertEqual(config.inputDir, "Fixtures/")
       XCTAssertEqual(config.outputDir, "Generated/")
 
@@ -61,53 +56,40 @@ class ConfigReadTests: XCTestCase {
 
       // strings
       guard let stringsEntries = config.commands["strings"] else {
-        return XCTFail("Missing key 'strings'")
+        return XCTFail("Expected a config entry for strings")
       }
       XCTAssertEqual(stringsEntries.count, 1)
-      guard let stringsEntry = stringsEntries.first else {
-        return XCTFail("Can't get strings only config entry")
-      }
-      XCTAssertEqual(stringsEntry.paths, ["Strings/Localizable.strings"])
-      if case TemplateRef.path(let tplPath) = stringsEntry.template,
-      tplPath == "templates/custom-swift3" { /* OK */ } else {
-        XCTFail("Unexpected template: \(stringsEntry.template)")
-      }
-      XCTAssertEqual(stringsEntry.output, "strings.swift")
-      XCTAssertEqual(Array(stringsEntry.parameters.keys), ["enumName"])
-      XCTAssertEqual(stringsEntry.parameters["enumName"] as? String, "Loc")
+
+      XCTAssertEqual(stringsEntries[0].paths, ["Strings/Localizable.strings"])
+      XCTAssertEqual(stringsEntries[0].template, .path("templates/custom-swift3"))
+      XCTAssertEqual(stringsEntries[0].output, "strings.swift")
+      XCTAssertEqualDict(stringsEntries[0].parameters, ["enumName": "Loc"])
 
       // xcassets
       guard let xcassetsEntries = config.commands["xcassets"] else {
-        return XCTFail("Missing key 'xcassets'")
+        return XCTFail("Expected a config entry for xcassets")
       }
       XCTAssertEqual(xcassetsEntries.count, 3)
+
       // > xcassets[0]
       XCTAssertEqual(xcassetsEntries[0].paths, ["XCAssets/Colors.xcassets"])
-      if case TemplateRef.name("swift3") = xcassetsEntries[0].template { /* OK */ } else {
-        XCTFail("Unexpected template: \(xcassetsEntries[0].template)")
-      }
+      XCTAssertEqual(xcassetsEntries[0].template, .name("swift3"))
       XCTAssertEqual(xcassetsEntries[0].output, "assets-colors.swift")
-      XCTAssertEqual(xcassetsEntries[0].parameters.count, 0)
+      XCTAssertEqualDict(xcassetsEntries[0].parameters, [:])
       // > xcassets[1]
       XCTAssertEqual(xcassetsEntries[1].paths, ["XCAssets/Images.xcassets"])
-      if case TemplateRef.name("swift3") = xcassetsEntries[1].template { /* OK */ } else {
-        XCTFail("Unexpected template: \(xcassetsEntries[1].template)")
-      }
+      XCTAssertEqual(xcassetsEntries[1].template, .name("swift3"))
       XCTAssertEqual(xcassetsEntries[1].output, "assets-images.swift")
-      XCTAssertEqual(xcassetsEntries[1].parameters.count, 1)
-      XCTAssertEqual(xcassetsEntries[1].parameters["enumName"] as? String, "Pics")
+      XCTAssertEqualDict(xcassetsEntries[1].parameters, ["enumName": "Pics"])
       // > xcassets[2]
       XCTAssertEqual(xcassetsEntries[2].paths, ["XCAssets/Colors.xcassets", "XCAssets/Images.xcassets"])
-      if case TemplateRef.name("swift4") = xcassetsEntries[2].template { /* OK */ } else {
-        XCTFail("Unexpected template: \(xcassetsEntries[2].template)")
-      }
+      XCTAssertEqual(xcassetsEntries[2].template, .name("swift4"))
       XCTAssertEqual(xcassetsEntries[2].output, "assets-all.swift")
-      XCTAssertEqual(xcassetsEntries[2].parameters.count, 0)
+      XCTAssertEqualDict(xcassetsEntries[2].parameters, [:])
     } catch let e {
       XCTFail("Error: \(e)")
     }
   }
-  // swiftlint:enable function_body_length
 
   func testReadInvalidConfigThrows() {
     let badConfigs = [

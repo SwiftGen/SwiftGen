@@ -60,6 +60,26 @@ func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #
   XCTFail(error, file: file, line: line)
 }
 
+func XCTAssertEqualDict(_ result: [String: Any]?, _ expected: [String: Any],
+                        file: StaticString = #file, line: UInt = #line) {
+  if let dict = result {
+    XCTAssertTrue(NSDictionary(dictionary: dict).isEqual(to: expected),
+                  "expected \(expected), got \(dict)", file: file, line: line)
+  } else {
+    XCTAssertNotNil(result, file: file, line: line)
+  }
+}
+
+extension TemplateRef: Equatable {
+  static func == (lhs: TemplateRef, rhs: TemplateRef) -> Bool {
+    switch (lhs, rhs) {
+    case (.name(let lname), .name(let rname)): return lname == rname
+    case (.path(let lpath), .path(let rpath)): return lpath == rpath
+    case (.name, .path), (.path, .name): return false
+    }
+  }
+}
+
 class Fixtures {
   enum Directory: String {
     case colors = "Colors"

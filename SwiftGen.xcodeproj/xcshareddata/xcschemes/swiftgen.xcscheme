@@ -113,11 +113,11 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "config lint --config $(PROJECT_DIR)/Tests/SwiftGenTests/fixtures/swiftgen-bad.yml"
+            argument = "config lint --config $(PROJECT_DIR)/Tests/SwiftGenTests/fixtures/config-missing-paths.yml"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "config run --verbose --config $(PROJECT_DIR)/Tests/SwiftGenTests/fixtures/swiftgen-2.yml"
+            argument = "config run --verbose --config $(PROJECT_DIR)/Tests/SwiftGenTests/fixtures/config-with-params.yml"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>

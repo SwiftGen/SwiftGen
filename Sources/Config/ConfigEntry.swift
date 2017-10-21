@@ -26,30 +26,6 @@ extension Config {
     var parameters: [String: Any]
     var output: Path
 
-    init(yaml: [String: Any]) throws {
-      guard let srcs = yaml[Keys.paths] else {
-        throw Config.Error.missingEntry(key: Keys.paths)
-      }
-      if let srcs = srcs as? String {
-        self.paths = [Path(srcs)]
-      } else if let srcs = srcs as? [String] {
-        self.paths = srcs.map({ Path($0) })
-      } else {
-        throw Config.Error.wrongType(key: Keys.paths, expected: "Path or array of Paths", got: type(of: srcs))
-      }
-
-      let templateName: String = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templateName) ?? ""
-      let templatePath: Path? = (try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templatePath)).map { Path($0) }
-      self.template = try TemplateRef(templateShortName: templateName, templateFullPath: templatePath)
-
-      self.parameters = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.params) ?? [:]
-
-      guard let output: String = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.output) else {
-        throw Config.Error.missingEntry(key: Keys.output)
-      }
-      self.output = Path(output)
-    }
-
     mutating func makeRelativeTo(inputDir: Path?, outputDir: Path?) {
       if let inputDir = inputDir {
         self.paths = self.paths.map { $0.isRelative ? inputDir + $0 : $0 }
@@ -58,26 +34,52 @@ extension Config {
         self.output = outputDir + self.output
       }
     }
+  }
+}
 
-    static func parseCommandEntry(yaml: Any) throws -> [Config.Entry] {
-      if let e = yaml as? [String: Any] {
-        return [try Config.Entry(yaml: e)]
-      } else if let e = yaml as? [[String: Any]] {
-        return try e.map({ try Config.Entry(yaml: $0) })
-      } else {
-        throw Config.Error.wrongType(key: nil, expected: "Dictionary or Array", got: type(of: yaml))
-      }
+extension Config.Entry {
+  init(yaml: [String: Any]) throws {
+    guard let srcs = yaml[Keys.paths] else {
+      throw Config.Error.missingEntry(key: Keys.paths)
+    }
+    if let srcs = srcs as? String {
+      self.paths = [Path(srcs)]
+    } else if let srcs = srcs as? [String] {
+      self.paths = srcs.map({ Path($0) })
+    } else {
+      throw Config.Error.wrongType(key: Keys.paths, expected: "Path or array of Paths", got: type(of: srcs))
     }
 
-    private static func getOptionalField<T>(yaml: [String: Any], key: String) throws -> T? {
-      guard let value = yaml[key] else {
-        return nil
-      }
-      guard let typedValue = value as? T else {
-        throw Config.Error.wrongType(key: key, expected: String(describing: T.self), got: type(of: value))
-      }
-      return typedValue
+    let templateName: String = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templateName) ?? ""
+    let templatePath: Path? = (try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templatePath)).map { Path($0) }
+    self.template = try TemplateRef(templateShortName: templateName, templateFullPath: templatePath)
+
+    self.parameters = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.params) ?? [:]
+
+    guard let output: String = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.output) else {
+      throw Config.Error.missingEntry(key: Keys.output)
     }
+    self.output = Path(output)
+  }
+
+  static func parseCommandEntry(yaml: Any) throws -> [Config.Entry] {
+    if let e = yaml as? [String: Any] {
+      return [try Config.Entry(yaml: e)]
+    } else if let e = yaml as? [[String: Any]] {
+      return try e.map({ try Config.Entry(yaml: $0) })
+    } else {
+      throw Config.Error.wrongType(key: nil, expected: "Dictionary or Array", got: type(of: yaml))
+    }
+  }
+
+  private static func getOptionalField<T>(yaml: [String: Any], key: String) throws -> T? {
+    guard let value = yaml[key] else {
+      return nil
+    }
+    guard let typedValue = value as? T else {
+      throw Config.Error.wrongType(key: key, expected: String(describing: T.self), got: type(of: value))
+    }
+    return typedValue
   }
 }
 
