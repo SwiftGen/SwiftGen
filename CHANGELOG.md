@@ -2,7 +2,13 @@
 
 ---
 
-## Master
+## 5.2.0
+
+### Changes in other SwiftGen modules
+
+* [SwiftGenKit 2.1.1](https://github.com/SwiftGen/SwiftGenKit/blob/2.1.1/CHANGELOG.md)  
+* [StencilSwiftKit 2.3.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.3.0/CHANGELOG.md)
+* [templates 2.2.0](https://github.com/SwiftGen/templates/blob/2.2.0/CHANGELOG.md)
 
 ### New Features
 
@@ -10,9 +16,24 @@
   Read more about it [in the dedicated documentation](Documentation/ConfigFile.md).  
   [Olivier Halligon](https://github.com/AliSoftware)
   [#337](https://github.com/SwiftGen/SwiftGen/pull/337)
+* Storyboards: Added a new `ignoreTargetModule` parameter if you're using storyboards in multiple targets, to avoid issues with the generated code.  
+  [Julien Quéré](https://github.com/juli1quere)
+  [SwiftGen/templates#36](https://github.com/SwiftGen/templates/pull/36)
 
 ### Bug Fixes
 
+* Fixes an issue in High Sierra where the output of the processed Catalog Entries was not ordered alphabetically.  
+  [Yusuke Kuroiwa](https://github.com/wakinchan)
+  [Francisco Diaz](https://github.com/fdiaz)
+  [SwiftGen/SwiftGenKit#57](https://github.com/SwiftGen/SwiftGenKit/pull/57)
+* Fonts: fix code which checks if a font is already registered.  
+  [Vladimir Burdukov](https://github.com/chipp)
+  [SwiftGen/templates#77](https://github.com/SwiftGen/templates/pull/77)
+* SwiftLint rules: Disabled the `superfluous_disable_command` rule
+  for all `swiftlint:disable` exceptions in all templates.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [SwiftGen/SwiftGen#334](https://github.com/SwiftGen/SwiftGen/issues/334)
+  [SwiftGen/templates#83](https://github.com/SwiftGen/templates/pull/83)
 * When installing SwiftGen via CocoaPods, the unneeded `file.zip` is not kept in `Pods/SwiftGen/` anymore _(freeing ~5MB on each install of SwiftGen made via CocoaPods!)_.  
   [Olivier Halligon](https://github.com/AliSoftware)
   [#342](https://github.com/SwiftGen/SwiftGen/pull/342)

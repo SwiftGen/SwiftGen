@@ -44,9 +44,9 @@ namespace :changelog do
         slug = m[0] || "SwiftGen/#{current_repo}"
         (slug == m[2]) && (m[1] == m[4])
       end
-      all_wrong_links.concat wrong_links.map do |m|
+      all_wrong_links.concat Array(wrong_links.map do |m|
         " - Line #{idx + 1}, link text is #{m[0]}##{m[1]} but links points to #{m[2]}##{m[4]}"
-      end
+      end)
     end
     if all_wrong_links.empty?
       puts "\u{2705}  All links correct"
