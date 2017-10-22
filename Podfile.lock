@@ -6,7 +6,7 @@ PODS:
     - PathKit (~> 0.8.0)
   - StencilSwiftKit (2.3.0):
     - Stencil (~> 0.9.0)
-  - SwiftGenKit (2.1.0):
+  - SwiftGenKit (2.1.1):
     - Kanna
     - PathKit (~> 0.8.0)
   - Yams (0.3.7)
@@ -24,7 +24,7 @@ SPEC CHECKSUMS:
   PathKit: dcab05d701474011aae0e40cf892298a831f63d6
   Stencil: 510f0b0518a366b67b6a9c5085a0399741b6d2f9
   StencilSwiftKit: bdbc7e5eeb2c6aaa00b44864a48eb8f1f5970e05
-  SwiftGenKit: 02fdf7975418826bc7aa580be5c76f5156c36931
+  SwiftGenKit: 1929a95b473825e79a874cd922d1f06d84194704
   Yams: 54731dac19bf3e499b8783ac482ca42ddf3efa4f
 
 PODFILE CHECKSUM: d922b82e69139c35e069573eb6e32989387076f8

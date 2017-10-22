@@ -80,7 +80,7 @@ extension AssetsCatalogParser {
    This method recursively parses a directory structure, processing each folder (files are ignored).
   */
   func process(folder: Path, withPrefix prefix: String = "") -> [Catalog.Entry] {
-    return (try? folder.children().flatMap {
+    return (try? folder.children().sorted(by: <).flatMap {
       process(item: $0, withPrefix: prefix)
     }) ?? []
   }
