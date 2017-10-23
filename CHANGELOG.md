@@ -2,6 +2,26 @@
 
 ---
 
+## Master
+
+### Bug Fixes
+
+* Fix SwiftGen no longer working using CLI parameters (instead of config file).  
+  [David Jennes](https://github.com/djbe) 
+  [#347](https://github.com/SwiftGen/SwiftGen/pull/347)
+
+### Breaking Changes
+
+_None_
+
+### New Features
+
+_None_
+
+### Internal Changes
+
+_None_
+
 ## 5.2.0
 
 ### Changes in other SwiftGen modules
