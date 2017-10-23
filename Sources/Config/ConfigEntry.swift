@@ -51,8 +51,8 @@ extension Config.Entry {
     }
 
     let templateName: String = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templateName) ?? ""
-    let templatePath: Path? = (try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templatePath)).map { Path($0) }
-    self.template = try TemplateRef(templateShortName: templateName, templateFullPath: templatePath)
+    let templatePath: String = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templatePath) ?? ""
+    self.template = try TemplateRef(templateShortName: templateName, templateFullPath: Path(templatePath))
 
     self.parameters = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.params) ?? [:]
 

@@ -19,16 +19,16 @@ enum TemplateRef {
     case multipleTemplateOptions(path: String, name: String)
   }
 
-  init(templateShortName: String, templateFullPath: Path?) throws {
-    switch (templateFullPath, !templateShortName.isEmpty) {
-    case (nil, false):
+  init(templateShortName: String, templateFullPath: Path) throws {
+    switch (!templateFullPath.string.isEmpty, !templateShortName.isEmpty) {
+    case (false, false):
       throw TemplateRef.Error.noTemplateProvided
-    case (nil, true):
+    case (false, true):
       self = .name(templateShortName)
-    case (let fullPath?, false):
-      self = .path(fullPath)
-    case (let fullPath?, true):
-      throw TemplateRef.Error.multipleTemplateOptions(path: fullPath.string, name: templateShortName)
+    case (true, false):
+      self = .path(templateFullPath)
+    case (true, true):
+      throw TemplateRef.Error.multipleTemplateOptions(path: templateFullPath.string, name: templateShortName)
     }
   }
 
