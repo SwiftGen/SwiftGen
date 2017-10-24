@@ -9,6 +9,9 @@
 * Fix SwiftGen no longer working using CLI parameters (instead of config file).  
   [David Jennes](https://github.com/djbe) 
   [#347](https://github.com/SwiftGen/SwiftGen/pull/347)
+* Errors now properly exit with a non-zero exit code.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#348](https://github.com/SwiftGen/SwiftGen/pull/348)
 
 ### Breaking Changes
 
