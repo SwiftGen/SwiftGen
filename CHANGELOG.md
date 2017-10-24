@@ -12,6 +12,10 @@
 * Errors now properly exit with a non-zero exit code.  
   [Olivier Halligon](https://github.com/AliSoftware)
   [#348](https://github.com/SwiftGen/SwiftGen/pull/348)
+* `swiftgen --help` prints the full help back again
+  (and not just the help of the default `config run` subcommand).  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#349](https://github.com/SwiftGen/SwiftGen/pull/349)
 
 ### Breaking Changes
 
