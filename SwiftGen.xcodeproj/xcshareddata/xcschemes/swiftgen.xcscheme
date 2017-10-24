@@ -114,6 +114,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "config lint --config $(PROJECT_DIR)/Tests/SwiftGenTests/fixtures/config-missing-paths.yml"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--help"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

@@ -20,8 +20,13 @@ let outputOption = Option(
 // MARK: - Main
 
 let main = Group {
-  $0.noCommand = { (_, _, parser) in
-    try configRunCommand.run(parser)
+  $0.noCommand = { (path, group, parser) in
+    if parser.hasOption("help") {
+      logMessage(.info, "Note: If you invoke swiftgen with no subcommand, it will default to `swiftgen config run`\n")
+      throw GroupError.noCommand(path, group)
+    } else {
+      try configRunCommand.run(parser)
+    }
   }
   $0.group("config", "manage and run configuration files") {
     $0.addCommand("lint", "Lint the configuration file", configLintCommand)
