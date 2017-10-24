@@ -11,13 +11,13 @@ import SwiftGenKit
 
 private let templateNameOption = Option<String>(
   "template", default: "", flag: "t",
-  description: "The name of the template to use for code generation (without the extension)."
+  description: "The name of the template to use for code generation. " +
+  "See `swiftgen templates list` for a list of available names"
 )
 
-private let templatePathOption = Option<Path>(
+private let templatePathOption = Option<String>(
   "templatePath", default: "", flag: "p",
-  description: "The path of the template to use for code generation. Overrides -t.",
-  validator: checkPath(type: "template file") { $0.isFile }
+  description: "The path of the template to use for code generation."
 )
 
 private let paramsOption = VariadicOption<String>(
@@ -34,12 +34,12 @@ extension ParserCLI {
       paramsOption,
       VariadicArgument<Path>("PATH", description: self.pathDescription, validator: pathsExist)
     ) { output, templateName, templatePath, parameters, paths in
-      let parser = try self.parserType.init(options: [:]) { msg, _, _ in
-        logMessage(.error, msg)
-      }
-      try parser.parse(paths: paths)
+      try ErrorPrettifier.execute {
+        let parser = try self.parserType.init(options: [:]) { msg, _, _ in
+          logMessage(.warning, msg)
+        }
+        try parser.parse(paths: paths)
 
-      do {
         let templateRef = try TemplateRef(templateShortName: templateName,
                                           templateFullPath: templatePath)
         let templateRealPath = try templateRef.resolvePath(forSubcommand: self.name)
@@ -50,11 +50,7 @@ extension ParserCLI {
         let context = parser.stencilContext()
         let enriched = try StencilContext.enrich(context: context, parameters: parameters)
         let rendered = try template.render(enriched)
-        output.write(content: rendered, onlyIfChanged: true)
-      } catch let error as TemplateRef.Error {
-        logMessage(.error, error)
-      } catch let error {
-        logMessage(.error, "failed to render template: \(error)")
+        try output.write(content: rendered, onlyIfChanged: true)
       }
     }
   }

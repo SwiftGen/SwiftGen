@@ -27,21 +27,17 @@ enum OutputDestination: ArgumentConvertible {
     }
   }
 
-  func write(content: String, onlyIfChanged: Bool = false) {
+  func write(content: String, onlyIfChanged: Bool = false) throws {
     switch self {
     case .console:
       print(content)
     case .file(let path):
-      do {
-        if try onlyIfChanged && path.exists && path.read(.utf8) == content {
-          logMessage(.info, "Not writing the file as content is unchanged")
-          return
-        }
-        try path.write(content)
-        logMessage(.info, "File written: \(path)")
-      } catch let e as NSError {
-        logMessage(.error, e)
+      if try onlyIfChanged && path.exists && path.read(.utf8) == content {
+        logMessage(.info, "Not writing the file as content is unchanged")
+        return
       }
+      try path.write(content)
+      logMessage(.info, "File written: \(path)")
     }
   }
 }

@@ -22,33 +22,35 @@ let templatesListCommand = command(
                  validator: isSubcommandName),
   outputOption
 ) { onlySubcommand, output in
-  var outputLines = [String]()
+  try ErrorPrettifier.execute {
+    var outputLines = [String]()
 
-  let printTemplates = { (subcommand: String, path: Path) in
-    guard let files = try? (path + subcommand).children() else { return }
+    let printTemplates = { (subcommand: String, path: Path) in
+      guard let files = try? (path + subcommand).children() else { return }
 
-    for file in files where file.extension == "stencil" {
-      let basename = file.lastComponentWithoutExtension
-      outputLines.append("   - \(basename)")
+      for file in files where file.extension == "stencil" {
+        let basename = file.lastComponentWithoutExtension
+        outputLines.append("   - \(basename)")
+      }
     }
+
+    let subcommandsToList = onlySubcommand.isEmpty ? allSubcommands : [onlySubcommand]
+    for subcommand in subcommandsToList {
+      outputLines.append("\(subcommand):")
+      outputLines.append("  custom:")
+      printTemplates(subcommand, appSupportTemplatesPath)
+      outputLines.append("  bundled:")
+      printTemplates(subcommand, bundledTemplatesPath)
+    }
+
+    outputLines.append("---")
+    outputLines.append("You can add custom templates in \(appSupportTemplatesPath).")
+    outputLines.append("You can also specify templates by path using `-p PATH` instead of `-t NAME`.")
+    outputLines.append("For more information, see the documentation on GitHub.")
+    outputLines.append("")
+
+    try output.write(content: outputLines.joined(separator: "\n"))
   }
-
-  let subcommandsToList = onlySubcommand.isEmpty ? allSubcommands : [onlySubcommand]
-  for subcommand in subcommandsToList {
-    outputLines.append("\(subcommand):")
-    outputLines.append("  custom:")
-    printTemplates(subcommand, appSupportTemplatesPath)
-    outputLines.append("  bundled:")
-    printTemplates(subcommand, bundledTemplatesPath)
-  }
-
-  outputLines.append("---")
-  outputLines.append("You can add custom templates in \(appSupportTemplatesPath).")
-  outputLines.append("You can also specify templates by path using `-p PATH` instead of `-t NAME`.")
-  outputLines.append("For more information, see the documentation on GitHub.")
-  outputLines.append("")
-
-  output.write(content: outputLines.joined(separator: "\n"))
 }
 
 // Defines a 'generic' command for doing an operation on a named template. It'll receive the following
@@ -64,21 +66,19 @@ private func templatePathCommandGenerator(execute: @escaping (Path, OutputDestin
       description: "the name of the template to find, like `swift3` or `dot-syntax`"),
     outputOption
   ) { subcommand, name, output in
-    do {
+    try ErrorPrettifier.execute {
       let template = TemplateRef.name(name)
       let path = try template.resolvePath(forSubcommand: subcommand)
       try execute(path, output)
-    } catch {
-      logMessage(.error, "failed to read template: \(error)")
     }
   }
 }
 
 let templatesCatCommand = templatePathCommandGenerator { (path: Path, output: OutputDestination) in
   let content: String = try path.read()
-  output.write(content: content)
+  try output.write(content: content)
 }
 
 let templatesWhichCommand = templatePathCommandGenerator { (path: Path, output: OutputDestination) in
-  output.write(content: "\(path.description)\n")
+  try output.write(content: "\(path.description)\n")
 }

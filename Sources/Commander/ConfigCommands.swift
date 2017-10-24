@@ -25,24 +25,18 @@ extension Config.Entry {
 
   func run(parserCommand: ParserCLI) throws {
     let parser = try parserCommand.parserType.init(options: [:], warningHandler: { (msg, _, _) in
-      logMessage(.error, msg)
+      logMessage(.warning, msg)
     })
     try parser.parse(paths: self.paths)
-    do {
-      let templateRealPath = try self.template.resolvePath(forSubcommand: parserCommand.name)
-      let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
-                                              environment: stencilSwiftEnvironment())
+    let templateRealPath = try self.template.resolvePath(forSubcommand: parserCommand.name)
+    let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
+                                            environment: stencilSwiftEnvironment())
 
-      let context = parser.stencilContext()
-      let enriched = try StencilContext.enrich(context: context, parameters: self.parameters)
-      let rendered = try template.render(enriched)
-      let output = OutputDestination.file(self.output)
-      output.write(content: rendered, onlyIfChanged: true)
-    } catch let error as TemplateRef.Error {
-      logMessage(.error, error)
-    } catch let error {
-      logMessage(.error, "failed to render template: \(error)")
-    }
+    let context = parser.stencilContext()
+    let enriched = try StencilContext.enrich(context: context, parameters: self.parameters)
+    let rendered = try template.render(enriched)
+    let output = OutputDestination.file(self.output)
+    try output.write(content: rendered, onlyIfChanged: true)
   }
 }
 
@@ -55,9 +49,11 @@ let configLintCommand = command(
                description: "Path to the configuration file to use",
                validator: checkPath(type: "config file") { $0.isFile })
 ) { file in
-  logMessage(.info, "Linting \(file)")
-  let config = try Config(file: file)
-  config.lint { level, msg in logMessage(level, msg) }
+  try ErrorPrettifier.execute {
+    logMessage(.info, "Linting \(file)")
+    let config = try Config(file: file)
+    config.lint { level, msg in logMessage(level, msg) }
+  }
 }
 
 // MARK: Run
@@ -69,26 +65,24 @@ let configRunCommand = command(
   Flag("verbose", default: false, flag: "v",
        description: "Print each command being executed")
 ) { file, verbose in
-  let config = try Config(file: file)
+  try ErrorPrettifier.execute {
+    let config = try Config(file: file)
 
-  if verbose {
-    logMessage(.info, "Executing configuration file \(file)")
-  }
-  try file.parent().chdir {
-    for (cmd, entries) in config.commands {
-      for var entry in entries {
-        guard let parserCmd = allParserCommands.first(where: { $0.name == cmd }) else {
-          throw Config.Error.missingEntry(key: cmd)
-        }
-        entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
-        do {
+    if verbose {
+      logMessage(.info, "Executing configuration file \(file)")
+    }
+    try file.parent().chdir {
+      for (cmd, entries) in config.commands {
+        for var entry in entries {
+          guard let parserCmd = allParserCommands.first(where: { $0.name == cmd }) else {
+            throw Config.Error.missingEntry(key: cmd)
+          }
+          entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
           if verbose {
             logMessage(.info, " $ " + entry.commandLine(forCommand: cmd))
           }
           try entry.checkPaths()
           try entry.run(parserCommand: parserCmd)
-        } catch let e {
-          logMessage(.error, String(describing: e))
         }
       }
     }
