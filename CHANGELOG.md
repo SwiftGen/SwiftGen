@@ -2,7 +2,7 @@
 
 ---
 
-## Master
+## 5.2.1
 
 ### Bug Fixes
 
@@ -16,18 +16,6 @@
   (and not just the help of the default `config run` subcommand).  
   [Olivier Halligon](https://github.com/AliSoftware)
   [#349](https://github.com/SwiftGen/SwiftGen/pull/349)
-
-### Breaking Changes
-
-_None_
-
-### New Features
-
-_None_
-
-### Internal Changes
-
-_None_
 
 ## 5.2.0
 
