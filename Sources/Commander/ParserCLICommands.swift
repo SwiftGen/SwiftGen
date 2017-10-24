@@ -34,12 +34,12 @@ extension ParserCLI {
       paramsOption,
       VariadicArgument<Path>("PATH", description: self.pathDescription, validator: pathsExist)
     ) { output, templateName, templatePath, parameters, paths in
-      let parser = try self.parserType.init(options: [:]) { msg, _, _ in
-        logMessage(.warning, msg)
-      }
-      try parser.parse(paths: paths)
+      try ErrorPrettifier.execute {
+        let parser = try self.parserType.init(options: [:]) { msg, _, _ in
+          logMessage(.warning, msg)
+        }
+        try parser.parse(paths: paths)
 
-      do {
         let templateRef = try TemplateRef(templateShortName: templateName,
                                           templateFullPath: templatePath)
         let templateRealPath = try templateRef.resolvePath(forSubcommand: self.name)
@@ -50,11 +50,7 @@ extension ParserCLI {
         let context = parser.stencilContext()
         let enriched = try StencilContext.enrich(context: context, parameters: parameters)
         let rendered = try template.render(enriched)
-        output.write(content: rendered, onlyIfChanged: true)
-      } catch let error as TemplateRef.Error {
-        logMessage(.error, error)
-      } catch let error {
-        logMessage(.error, "failed to render template: \(error)")
+        try output.write(content: rendered, onlyIfChanged: true)
       }
     }
   }
