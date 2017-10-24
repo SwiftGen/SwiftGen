@@ -51,3 +51,18 @@ func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
     fputs(ANSIColor.red.format("Error: \(string)\n"), stderr)
   }
 }
+
+struct ErrorPrettifier: Error, CustomStringConvertible {
+  let nsError: NSError
+  var description: String {
+    return "\(nsError.localizedDescription) (\(nsError.domain) code \(nsError.code))"
+  }
+
+  static func execute(closure: () throws -> Void ) rethrows {
+    do {
+      try closure()
+    } catch let e as NSError where e.domain == NSCocoaErrorDomain {
+      throw ErrorPrettifier(nsError: e)
+    }
+  }
+}
