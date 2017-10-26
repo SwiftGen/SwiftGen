@@ -1,9 +1,6 @@
 machine:
   xcode:
     version: 9.0
-  pre:
-    - sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
-    - mdimport /Applications/Xcode*
 
 checkout:
   post:

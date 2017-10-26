@@ -64,6 +64,8 @@ namespace :changelog do
     body = Utils.top_changelog_entry
 
     repo_name = File.basename(`git remote get-url origin`.chomp, '.git').freeze
-    client.create_release("SwiftGen/#{repo_name}", tag, body: body)
+    puts "Pushing release notes for tag #{tag}:"
+    puts body
+    client.create_release("SwiftGen/#{repo_name}", tag, name: tag, body: body)
   end
 end
