@@ -14,7 +14,7 @@ MIN_XCODE_VERSION = 9.0
 
 BUILD_DIR = File.absolute_path('./build')
 BIN_NAME = 'swiftgen'.freeze
-TEMPLATES_SRC_DIR = 'Resources/templates'.freeze
+TEMPLATES_SRC_DIR = 'templates'.freeze
 
 ## [ Utils ] ##################################################################
 
@@ -288,7 +288,7 @@ namespace :playground do
   task :xcassets do
     Utils.run(
       %(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 ) +
-        %(--output-format=human-readable-text Resources/Fixtures/XCAssets/Images.xcassets),
+        %(--output-format=human-readable-text Tests/Fixtures/XCAssets/Images.xcassets),
       task,
       xcrun: true
     )
@@ -296,7 +296,7 @@ namespace :playground do
   task :storyboard do
     Utils.run(
       %(ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO ) +
-        %(Resources/Fixtures/Storyboards-iOS/Wizard.storyboard),
+        %(Tests/Fixtures/Storyboards-iOS/Wizard.storyboard),
       task,
       xcrun: true
     )
@@ -304,7 +304,7 @@ namespace :playground do
   task :strings do
     Utils.run(
       %(plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings ) +
-        %(Resources/Fixtures/Strings/Localizable.strings),
+        %(Tests/Fixtures/Strings/Localizable.strings),
       task,
       xcrun: true
     )
