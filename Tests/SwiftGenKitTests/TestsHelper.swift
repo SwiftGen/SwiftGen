@@ -77,7 +77,7 @@ func XCTDiffContexts(_ result: [String: Any],
                      file: StaticString = #file,
                      line: UInt = #line) {
   if ProcessInfo().environment["GENERATE_CONTEXTS"] == "YES" {
-    let target = Path(#file).parent() + "Contexts" + directory.rawValue + name
+    let target = Path(#file).parent().parent() + "Contexts" + directory.rawValue + name
     guard (result as NSDictionary).write(to: target.url, atomically: true) else {
       fatalError("Unable to write context file \(target)")
     }

@@ -182,7 +182,7 @@ extension XCTestCase {
 
         // check if we should generate or not
         if ProcessInfo().environment["GENERATE_OUTPUT"] == "YES" {
-          let target = Path(#file).parent() + "Expected" + resourceDir.rawValue + outputFile
+          let target = Path(#file).parent().parent() + "Expected" + resourceDir.rawValue + outputFile
           do {
             try target.write(result)
           } catch {

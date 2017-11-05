@@ -218,8 +218,8 @@
 		DDDE50F81FAF6AD4004203BE /* TestsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsHelper.swift; sourceTree = "<group>"; };
 		DDDE50F91FAF6AD4004203BE /* StoryboardsiOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardsiOSTests.swift; sourceTree = "<group>"; };
 		DDDE50FA1FAF6AD4004203BE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DDDE519A1FAF6B0A004203BE /* Expected */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Expected; sourceTree = "<group>"; };
-		DDDE519B1FAF6B0A004203BE /* Contexts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Contexts; sourceTree = "<group>"; };
+		DDDE519A1FAF6B0A004203BE /* Expected */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Expected; path = ../Expected; sourceTree = "<group>"; };
+		DDDE519B1FAF6B0A004203BE /* Contexts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Contexts; path = ../Contexts; sourceTree = "<group>"; };
 		DDDE51B71FAF814A004203BE /* SwiftGenKit UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftGenKit UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDE51D91FAF81B9004203BE /* StringParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringParserTests.swift; sourceTree = "<group>"; };
 		DDDE51DA1FAF81B9004203BE /* StringsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsTests.swift; sourceTree = "<group>"; };
@@ -234,8 +234,8 @@
 		DDDE521E1FAF81BA004203BE /* StoryboardsiOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardsiOSTests.swift; sourceTree = "<group>"; };
 		DDDE521F1FAF81BA004203BE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DDDE52201FAF81BA004203BE /* AssetCatalogTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetCatalogTests.swift; sourceTree = "<group>"; };
-		DDDE52761FAF81DB004203BE /* Contexts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Contexts; sourceTree = "<group>"; };
-		DDDE52771FAF81DB004203BE /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
+		DDDE52761FAF81DB004203BE /* Contexts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Contexts; path = ../Contexts; sourceTree = "<group>"; };
+		DDDE52771FAF81DB004203BE /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fixtures; path = ../Fixtures; sourceTree = "<group>"; };
 		F8A27646BEAEAA5505D59B99 /* Pods-SwiftGen UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGen UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGen UnitTests/Pods-SwiftGen UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F8ECFEBCA1C3831123A7C752 /* Pods_SwiftGenKit_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftGenKit_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
