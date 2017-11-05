@@ -58,8 +58,8 @@ end
 
 ## [ Output compilation ] #####################################################
 
-MODULE_INPUT_PATH = 'Fixtures/stub-env/Modules'.freeze
-MODULE_OUTPUT_PATH = 'Fixtures/stub-env'.freeze
+MODULE_INPUT_PATH = 'Tests/Fixtures/stub-env/Modules'.freeze
+MODULE_OUTPUT_PATH = 'Tests/Fixtures/stub-env'.freeze
 SDKS = {
   macosx: 'x86_64-apple-macosx10.13',
   iphoneos: 'arm64-apple-ios11.0',
