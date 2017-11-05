@@ -316,7 +316,7 @@
 		09030BC71B6D2BA300275BF5 /* SwiftGenTests */ = {
 			isa = PBXGroup;
 			children = (
-				093405061F81537400187787 /* fixtures */,
+				093405061F81537400187787 /* Fixtures */,
 				09030C171B6D43D400275BF5 /* TestsHelper.swift */,
 				09030BD81B6D2E5900275BF5 /* ConfigReadTests.swift */,
 				09D00A021F9BBD9F0026A755 /* ConfigLintTests.swift */,
@@ -325,7 +325,7 @@
 			path = SwiftGenTests;
 			sourceTree = "<group>";
 		};
-		093405061F81537400187787 /* fixtures */ = {
+		093405061F81537400187787 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
 				093405071F81539100187787 /* config-with-params.yml */,
@@ -340,7 +340,7 @@
 				37DC602E1F98D1D900B7B31C /* config-invalid-template.yml */,
 				37DC602F1F98D1DA00B7B31C /* config-invalid-output.yml */,
 			);
-			path = fixtures;
+			path = Fixtures;
 			sourceTree = "<group>";
 		};
 		09C7B2D21BCC382800D7F488 /* Sources */ = {
