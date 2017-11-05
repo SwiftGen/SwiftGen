@@ -1,0 +1,16 @@
+{
+  "properties" : {
+    "duration" : 15,
+    "duration-type" : "fps",
+    "repetitions" : 0
+  },
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "frames" : [
+    {
+
+    }
+  ]
+}

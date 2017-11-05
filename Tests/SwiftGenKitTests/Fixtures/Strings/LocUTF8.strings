@@ -1,0 +1,14 @@
+﻿"alert_title" = "Titre de l'alerte";
+"alert_message" = "Contenu détaillé de l'alerte";
+
+"greetings" = "Bonjour, mon nom est %@ et j'ai %d ans";
+
+"apples.count" = "Vous avez %d pommes";
+"bananas.owner" = "Ces %d bananes appartiennent à %@.";
+
+"ObjectOwnership" = "Ce sont les %1$d %2$@ de %3$@.";
+
+"settings.navigation-bar.self" = "Quelques mots-clés réservés";
+"settings.navigation-bar.title.even.deeper" = "Paramètres";
+"SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE" = "Profil de l'utilisateur Paramètres";
+"seTTings.uSer-proFile-sectioN.footer_text" = "Ici, vous pouvez modifier certains paramètres de profil d'utilisateur.";

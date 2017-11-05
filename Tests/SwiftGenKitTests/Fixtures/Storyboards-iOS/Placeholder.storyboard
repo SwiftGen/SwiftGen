@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="pLX-BW-AFM">
+            <objects>
+                <navigationController storyboardIdentifier="Navigation" automaticallyAdjustsScrollViewInsets="NO" id="vaw-kE-oZq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="I6l-C6-XE2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nSe-wb-v43" kind="relationship" relationship="rootViewController" id="Dj0-Wm-kiW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ydo-eN-Zdk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="493" y="433"/>
+        </scene>
+        <!--Dependent-->
+        <scene sceneID="Kad-N6-YNh">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Dependent" storyboardName="Dependency" referencedIdentifier="Dependent" id="nSe-wb-v43" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Jya-rA-UMh"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UpQ-eS-OVx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1305" y="433"/>
+        </scene>
+    </scenes>
+</document>

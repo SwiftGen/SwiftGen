@@ -1,0 +1,29 @@
+{
+  "name": "SwiftGenKit",
+  "version": "2.1.1",
+  "summary": "The SwiftGen framework responsible for parsing assets and turn them in a dictionary representation suitable for Stencil templates",
+  "description": "This pod contains asset parsers for\n[SwiftGen](https://github.com/SwiftGen/SwiftGen), as well as\nmethods for converting the data into contexts for\n[Stencil](https://github.com/kylef/Stencil).",
+  "homepage": "https://github.com/SwiftGen/SwiftGenKit",
+  "license": "MIT",
+  "authors": {
+    "Olivier Halligon": "olivier@halligon.net"
+  },
+  "social_media_url": "https://twitter.com/aligatr",
+  "platforms": {
+    "osx": "10.9"
+  },
+  "source": {
+    "git": "https://github.com/SwiftGen/SwiftGenKit.git",
+    "tag": "2.1.1"
+  },
+  "source_files": "Sources/**/*.swift",
+  "dependencies": {
+    "Kanna": [
+
+    ],
+    "PathKit": [
+      "~> 0.8.0"
+    ]
+  },
+  "frameworks": "Foundation"
+}

@@ -47,9 +47,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "09A87B4F1BCCA2C600D9B9F5"
-               BuildableName = "SwiftGen UnitTests.xctest"
-               BlueprintName = "SwiftGen UnitTests"
+               BlueprintIdentifier = "DDDE519F1FAF814A004203BE"
+               BuildableName = "SwiftGenKit UnitTests.xctest"
+               BlueprintName = "SwiftGenKit UnitTests"
                ReferencedContainer = "container:SwiftGen.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -60,6 +60,16 @@
                BlueprintIdentifier = "DDDE50291FAF687A004203BE"
                BuildableName = "Templates UnitTests.xctest"
                BlueprintName = "Templates UnitTests"
+               ReferencedContainer = "container:SwiftGen.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "09A87B4F1BCCA2C600D9B9F5"
+               BuildableName = "SwiftGen UnitTests.xctest"
+               BlueprintName = "SwiftGen UnitTests"
                ReferencedContainer = "container:SwiftGen.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -144,6 +154,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "234F7E6D1DEBD5C5001B3C10"
+            BuildableName = "swiftgen.app"
+            BlueprintName = "swiftgen"
+            ReferencedContainer = "container:SwiftGen.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
