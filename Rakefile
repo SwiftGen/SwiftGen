@@ -7,7 +7,8 @@ require 'shellwords'
 
 WORKSPACE = 'SwiftGen'.freeze
 SCHEME_NAME = 'swiftgen'.freeze
-CONFIGURATION = 'Release'.freeze
+CONFIGURATION = 'Debug'.freeze
+RELEASE_CONFIGURATION = 'Release'.freeze
 POD_NAME = 'SwiftGen'.freeze
 MIN_XCODE_VERSION = 9.0
 
@@ -39,9 +40,9 @@ namespace :cli do
     tpl_rel_path = tpldir.relative_path_from(bindir)
 
     Utils.print_header 'Building Binary'
-    plist_file = (Pathname.new(BUILD_DIR) + "Build/Products/#{CONFIGURATION}/swiftgen.app/Contents/Info.plist").to_s
+    plist_file = (Pathname.new(BUILD_DIR) + "Build/Products/#{RELEASE_CONFIGURATION}/swiftgen.app/Contents/Info.plist").to_s
     Utils.run(
-      %(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "#{SCHEME_NAME}" -configuration "#{CONFIGURATION}") +
+      %(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "#{SCHEME_NAME}" -configuration "#{RELEASE_CONFIGURATION}") +
       %( -derivedDataPath "#{BUILD_DIR}" TEMPLATE_PATH="#{tpl_rel_path}") +
       %( SWIFTGEN_OTHER_LDFLAGS="-sectcreate __TEXT __info_plist #{plist_file.shellescape}"),
       task, xcrun: true, formatter: :xcpretty
@@ -52,7 +53,7 @@ namespace :cli do
        '(defaults $bindir=./build/swiftgen/bin/, $fmkdir=$bindir/../lib, $tpldir=$bindir/../templates'
   task :install, %i[bindir fmkdir tpldir] => :build do |task, args|
     (bindir, fmkdir, tpldir) = defaults(args)
-    generated_bundle_path = "#{BUILD_DIR}/Build/Products/#{CONFIGURATION}/swiftgen.app/Contents"
+    generated_bundle_path = "#{BUILD_DIR}/Build/Products/#{RELEASE_CONFIGURATION}/swiftgen.app/Contents"
 
     Utils.print_header "Installing binary in #{bindir}"
     Utils.run([
