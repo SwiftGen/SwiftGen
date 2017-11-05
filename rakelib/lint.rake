@@ -38,7 +38,9 @@ namespace :lint do
     Utils.print_header 'Linting the unit test code'
     config = Pathname.getwd + '.swiftlint.yml'
     config = config.exist? ? "--config #{config}" : ''
-    Utils.run(%(swiftlint lint --no-cache --strict --path "Tests/#{WORKSPACE}Tests" #{config}), task)
+    Dir.glob("Tests/*Tests").each { |folder|
+      Utils.run(%(swiftlint lint --no-cache --strict --path "#{folder}" #{config}), task)
+    }
   end
 
   if File.directory?('Tests/Expected')
