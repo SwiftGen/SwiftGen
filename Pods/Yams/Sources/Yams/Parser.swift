@@ -124,20 +124,7 @@ public final class Parser {
             // use native endian
             let isLittleEndian = 1 == 1.littleEndian
             yaml_parser_set_encoding(&parser, isLittleEndian ? YAML_UTF16LE_ENCODING : YAML_UTF16BE_ENCODING)
-            let encoding: String.Encoding
-            #if swift(>=3.1)
-                encoding = isLittleEndian ? .utf16LittleEndian : .utf16BigEndian
-            #else
-                /*
-                 ```
-                 "".data(using: .utf16LittleEndian).withUnsafeBytes { (bytes: UnsafePointer<UInt8>) in
-                    bytes == nil // true on Swift 3.0.2, false on Swift 3.1
-                 }
-                 ```
-                 for avoiding above, use `.utf16` if yaml is empty.
-                 */
-                encoding = yaml.isEmpty ? .utf16 : isLittleEndian ? .utf16LittleEndian : .utf16BigEndian
-            #endif
+            let encoding: String.Encoding = isLittleEndian ? .utf16LittleEndian : .utf16BigEndian
             data = yaml.data(using: encoding)!
             data.withUnsafeBytes { bytes in
                 yaml_parser_set_input_string(&parser, bytes, data.count)
@@ -278,7 +265,7 @@ extension Parser {
 }
 
 /// Representation of `yaml_event_t`
-fileprivate class Event {
+private class Event {
     var event = yaml_event_t()
     deinit { yaml_event_delete(&event) }
 
@@ -346,6 +333,6 @@ fileprivate class Event {
     }
 }
 
-fileprivate func string(from pointer: UnsafePointer<UInt8>!) -> String? {
+private func string(from pointer: UnsafePointer<UInt8>!) -> String? {
     return String.decodeCString(pointer, as: UTF8.self, repairingInvalidCodeUnits: true)?.result
 }

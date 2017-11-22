@@ -86,7 +86,7 @@ extension Node.Mapping: MutableCollection {
     }
 
     public func index(after index: Int) -> Int {
-        return pairs.index(after:index)
+        return pairs.index(after: index)
     }
 
     public subscript(index: Int) -> Element {

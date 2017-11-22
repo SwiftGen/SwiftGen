@@ -135,7 +135,7 @@ extension Node.Sequence: RangeReplaceableCollection {
     }
 
     public mutating func replaceSubrange<C>(_ subrange: Range<Int>, with newElements: C)
-        where C : Collection, C.Iterator.Element == Node {
+        where C: Collection, C.Iterator.Element == Node {
             nodes.replaceSubrange(subrange, with: newElements)
     }
 }
