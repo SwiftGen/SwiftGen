@@ -7,10 +7,10 @@
 import Foundation
 
 private func uppercaseFirst(_ string: String) -> String {
-  guard let first = string.characters.first else {
+  guard let first = string.first else {
     return string
   }
-  return String(first).uppercased() + String(string.characters.dropFirst())
+  return String(first).uppercased() + String(string.dropFirst())
 }
 
 /*
