@@ -182,7 +182,7 @@
 		137AB91838D0C022566A139C /* Pods-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit UnitTests/Pods-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1634E203F37E1AEB7AE01474 /* Pods-SwiftGenKit UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit UnitTests/Pods-SwiftGenKit UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		234F7E6E1DEBD5C5001B3C10 /* swiftgen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftgen.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		234F7E771DEBD5C5001B3C10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = "<group>"; };
+		234F7E771DEBD5C5001B3C10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/SwiftGen/Info.plist; sourceTree = "<group>"; };
 		2853A35146981A2DAFC26007 /* Pods-SwiftGen UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGen UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGen UnitTests/Pods-SwiftGen UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		2BC3662493CCB001CA734B62 /* Pods-Templates UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Templates UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Templates UnitTests/Pods-Templates UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		2FECAA9B5A99ECF32BC7C59C /* Pods-swiftgen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.debug.xcconfig"; sourceTree = "<group>"; };
@@ -346,13 +346,7 @@
 		09C7B2D21BCC382800D7F488 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				09C7B2D31BCC382800D7F488 /* main.swift */,
-				0934050D1F815A8C00187787 /* ParserCLI.swift */,
-				379C7E8C1F8ECB2400267096 /* Path+AppSupport.swift */,
-				379C7E861F8ECA0C00267096 /* TemplateRef.swift */,
-				379C7E901F8ECB9700267096 /* Commander */,
-				09D00A001F9BB8730026A755 /* Config */,
-				379C7E911F8ECC1A00267096 /* Logs.swift */,
+				DD428DF21FC50D34001649D6 /* SwiftGen */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -388,6 +382,20 @@
 				F8ECFEBCA1C3831123A7C752 /* Pods_SwiftGenKit_UnitTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DD428DF21FC50D34001649D6 /* SwiftGen */ = {
+			isa = PBXGroup;
+			children = (
+				09C7B2D31BCC382800D7F488 /* main.swift */,
+				0934050D1F815A8C00187787 /* ParserCLI.swift */,
+				379C7E8C1F8ECB2400267096 /* Path+AppSupport.swift */,
+				379C7E861F8ECA0C00267096 /* TemplateRef.swift */,
+				379C7E901F8ECB9700267096 /* Commander */,
+				09D00A001F9BB8730026A755 /* Config */,
+				379C7E911F8ECC1A00267096 /* Logs.swift */,
+			);
+			path = SwiftGen;
 			sourceTree = "<group>";
 		};
 		DDC09C7D1E1D193F005C6EE6 /* Resources */ = {
@@ -1096,7 +1104,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Sources/SwiftGen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_LDFLAGS = (
@@ -1120,7 +1128,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Sources/SwiftGen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_LDFLAGS = (
