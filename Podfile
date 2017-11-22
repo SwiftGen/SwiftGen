@@ -1,18 +1,13 @@
 platform :osx, '10.9'
 use_frameworks!
 
-def common_pods
-  pod 'PathKit', '~> 0.8.0', inhibit_warnings: true
-end
-
 def code_generation_pods
-  common_pods
+  pod 'PathKit', '~> 0.8.0'
   pod 'StencilSwiftKit', '~> 2.3'
 end
 
 def swiftgen_pods
   code_generation_pods
-  pod 'SwiftGenKit', path: 'SwiftGenKit'
   pod 'Yams', '~> 0.3'
 end
 
@@ -21,13 +16,16 @@ target 'swiftgen' do
   pod 'Commander', '~> 0.8'
 end
 
+target 'SwiftGenKit' do
+  podspec :path => 'SwiftGenKit.podspec'
+end
+
 target 'SwiftGen UnitTests' do
   swiftgen_pods
 end
 
 target 'SwiftGenKit UnitTests' do
-  common_pods
-  pod 'SwiftGenKit', path: 'SwiftGenKit'
+  pod 'PathKit', '~> 0.8.0'
 end
 
 target 'Templates UnitTests' do

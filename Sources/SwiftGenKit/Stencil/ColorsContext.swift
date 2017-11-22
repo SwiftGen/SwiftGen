@@ -39,7 +39,7 @@ extension ColorsParser {
   private func map(color name: String, value: UInt32) -> [String: String] {
     let name = name.trimmingCharacters(in: .whitespaces)
     let hex = "00000000" + String(value, radix: 16)
-    let hexChars = Array(hex.characters.suffix(8))
+    let hexChars = Array(hex.suffix(8))
     let comps = (0..<4).map { idx in String(hexChars[idx*2...idx*2+1]) }
 
     return [

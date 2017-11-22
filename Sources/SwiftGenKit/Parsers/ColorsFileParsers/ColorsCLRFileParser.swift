@@ -11,7 +11,7 @@ final class ColorsCLRFileParser: ColorsFileTypeParser {
   static let extensions = ["clr"]
 
   private enum Keys {
-    static let userColors = "UserColors"
+    static let userColors = NSColorList.Name("UserColors")
   }
 
   func parseFile(at path: Path) throws -> Palette {
@@ -19,7 +19,7 @@ final class ColorsCLRFileParser: ColorsFileTypeParser {
       var colors = [String: UInt32]()
 
       for colorName in colorsList.allKeys {
-        colors[colorName] = colorsList.color(withKey: colorName)?.hexValue
+        colors[colorName.rawValue] = colorsList.color(withKey: colorName)?.hexValue
       }
 
       let name = path.lastComponentWithoutExtension

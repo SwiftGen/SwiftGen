@@ -68,7 +68,7 @@ public final class StringsParser: Parser {
     case unknown = "UnsafePointer<()>"
 
     init?(formatChar char: Character) {
-      guard let lcChar = String(char).lowercased().characters.first else {
+      guard let lcChar = String(char).lowercased().first else {
         return nil
       }
       switch lcChar {
@@ -148,16 +148,16 @@ public final class StringsParser: Parser {
     let chars = formatTypesRegEx.matches(in: formatString, options: [], range: range)
       .map({ match -> (String, Int?) in
         let range: NSRange
-        if match.rangeAt(3).location != NSNotFound {
+        if match.range(at: 3).location != NSNotFound {
           // [dioux] are in range #3 because in #2 there may be length modifiers (like in "lld")
-          range = match.rangeAt(3)
+          range = match.range(at: 3)
         } else {
           // otherwise, no length modifier, the conversion specifier is in #2
-          range = match.rangeAt(2)
+          range = match.range(at: 2)
         }
         let char = (formatString as NSString).substring(with: range)
 
-        let posRange = match.rangeAt(1)
+        let posRange = match.range(at: 1)
         if posRange.location == NSNotFound {
           // No positional specifier
           return (char, nil)
@@ -174,7 +174,7 @@ public final class StringsParser: Parser {
     var list = [PlaceholderType]()
     var nextNonPositional = 1
     for (str, pos) in chars {
-      if let char = str.characters.first, let p = PlaceholderType(formatChar: char) {
+      if let char = str.first, let p = PlaceholderType(formatChar: char) {
         let insertionPos: Int
         if let pos = pos {
           insertionPos = pos

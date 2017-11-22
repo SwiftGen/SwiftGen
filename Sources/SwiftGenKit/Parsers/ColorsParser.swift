@@ -106,7 +106,7 @@ extension NSColor {
   var rgbColor: NSColor? {
     guard colorSpace.colorSpaceModel != .RGB else { return self }
 
-    return usingColorSpaceName(NSCalibratedRGBColorSpace)
+    return usingColorSpaceName(.calibratedRGB)
   }
 
   var hexValue: UInt32 {
