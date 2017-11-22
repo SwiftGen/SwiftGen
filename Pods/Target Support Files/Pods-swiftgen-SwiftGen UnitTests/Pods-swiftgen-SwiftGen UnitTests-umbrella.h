@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_SwiftGen_UnitTestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_SwiftGen_UnitTestsVersionString[];
+FOUNDATION_EXPORT double Pods_swiftgen_SwiftGen_UnitTestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_swiftgen_SwiftGen_UnitTestsVersionString[];
 

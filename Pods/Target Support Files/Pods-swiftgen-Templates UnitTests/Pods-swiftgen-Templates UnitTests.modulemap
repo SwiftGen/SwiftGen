@@ -1,0 +1,6 @@
+framework module Pods_swiftgen_Templates_UnitTests {
+  umbrella header "Pods-swiftgen-Templates UnitTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

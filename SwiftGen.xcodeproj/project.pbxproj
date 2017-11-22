@@ -22,6 +22,8 @@
 		234F7E7D1DEBD765001B3C10 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7B2D31BCC382800D7F488 /* main.swift */; };
 		234F7E7E1DEBD765001B3C10 /* Path+Commander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091150301BD31A3300EBC803 /* Path+Commander.swift */; };
 		234F7E7F1DEBD765001B3C10 /* TemplatesCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921FBA01BE7D6B900B488B5 /* TemplatesCommands.swift */; };
+		32C91AF83C42CE902ED9DAA1 /* Pods_swiftgen_SwiftGen_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE46C0974EFBBDEC1C40C605 /* Pods_swiftgen_SwiftGen_UnitTests.framework */; };
+		33D33EF71C72E9F42AEDFFC1 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E00474A6DF50E9798602EDB2 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */; };
 		379C7E871F8ECA0C00267096 /* TemplateRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E861F8ECA0C00267096 /* TemplateRef.swift */; };
 		379C7E891F8ECA7000267096 /* OutputDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E881F8ECA7000267096 /* OutputDestination.swift */; };
 		379C7E8A1F8ECA8900267096 /* TemplateRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E861F8ECA0C00267096 /* TemplateRef.swift */; };
@@ -42,6 +44,7 @@
 		7365C967EDB29CCF9A23D240 /* Pods_SwiftGen_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8B0E3902560E4CF6886907 /* Pods_SwiftGen_UnitTests.framework */; };
 		A99DC0C5A2CECABB34A121C8 /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F17C8613373A017F0B70B5C /* Pods_swiftgen.framework */; };
 		AD6DB869251A7D5FBFDCCDEB /* Pods_SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE27639274EB826C62E61517 /* Pods_SwiftGenKit.framework */; };
+		D2BC3F8D59EE1997615C69FE /* Pods_swiftgen_Templates_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 458F845C6A616E6AFF3E892C /* Pods_swiftgen_Templates_UnitTests.framework */; };
 		DD428DFF1FC50F56001649D6 /* SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */; };
 		DD428E001FC50F56001649D6 /* SwiftGenKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DD428E191FC50FBF001649D6 /* FontsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E071FC50FBF001649D6 /* FontsParser.swift */; };
@@ -230,12 +233,8 @@
 		09D00A021F9BBD9F0026A755 /* ConfigLintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigLintTests.swift; sourceTree = "<group>"; };
 		09E7146D1B6D55B4007FF3CF /* SwiftGen.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftGen.playground; sourceTree = "<group>"; };
 		11C767774E7B3E8C7192E4B3 /* Pods-SwiftGenKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit.debug.xcconfig"; sourceTree = "<group>"; };
-		137AB91838D0C022566A139C /* Pods-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit UnitTests/Pods-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		1634E203F37E1AEB7AE01474 /* Pods-SwiftGenKit UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit UnitTests/Pods-SwiftGenKit UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		234F7E6E1DEBD5C5001B3C10 /* swiftgen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftgen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		234F7E771DEBD5C5001B3C10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2853A35146981A2DAFC26007 /* Pods-SwiftGen UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGen UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGen UnitTests/Pods-SwiftGen UnitTests.release.xcconfig"; sourceTree = "<group>"; };
-		2BC3662493CCB001CA734B62 /* Pods-Templates UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Templates UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Templates UnitTests/Pods-Templates UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		2FECAA9B5A99ECF32BC7C59C /* Pods-swiftgen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.debug.xcconfig"; sourceTree = "<group>"; };
 		379C7E861F8ECA0C00267096 /* TemplateRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateRef.swift; sourceTree = "<group>"; };
 		379C7E881F8ECA7000267096 /* OutputDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDestination.swift; sourceTree = "<group>"; };
@@ -251,12 +250,17 @@
 		37DC60311F98D1DA00B7B31C /* config-missing-paths.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-missing-paths.yml"; sourceTree = "<group>"; };
 		37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-absolute-paths-prefix.yml"; sourceTree = "<group>"; };
 		3F17C8613373A017F0B70B5C /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		458F845C6A616E6AFF3E892C /* Pods_swiftgen_Templates_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen_Templates_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C8B0E3902560E4CF6886907 /* Pods_SwiftGen_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftGen_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FF421D2DBE488AAA80F24CD /* Pods-swiftgen-Templates UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen-Templates UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		80C3A19C1BBD55A5644EDC18 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		823A44FF7DA835A3040D1987 /* Pods-SwiftGenKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit.release.xcconfig"; sourceTree = "<group>"; };
-		90843707F44D6F8153913604 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
-		920E71433B3570488CF5B052 /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		CA8DF50C5FC85A82AE3731B0 /* Pods-Templates UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Templates UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Templates UnitTests/Pods-Templates UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8B43FFE4BD63BDC97FB5A0E2 /* Pods-swiftgen-Templates UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen-Templates UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9443BE290DFBE5BF33DC7CBF /* Pods-swiftgen-SwiftGen UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen-SwiftGen UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AD963940DA53F1038CA94806 /* Pods-swiftgen-SwiftGen UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen-SwiftGen UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests.release.xcconfig"; sourceTree = "<group>"; };
+		AE46C0974EFBBDEC1C40C605 /* Pods_swiftgen_SwiftGen_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen_SwiftGen_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1C1760D8085BFC56E48AD2B /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C27D33FD5F71B417E9FE5867 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		D1DA440B74FDF7492E436003 /* Pods_Templates_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Templates_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8AC6E8E60EADE4523EA68E9 /* Pods-swiftgen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.release.xcconfig"; sourceTree = "<group>"; };
 		DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftGenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,8 +309,8 @@
 		DDDE52201FAF81BA004203BE /* AssetCatalogTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetCatalogTests.swift; sourceTree = "<group>"; };
 		DDDE52761FAF81DB004203BE /* Contexts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Contexts; path = ../Contexts; sourceTree = "<group>"; };
 		DDDE52771FAF81DB004203BE /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fixtures; path = ../Fixtures; sourceTree = "<group>"; };
+		E00474A6DF50E9798602EDB2 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE27639274EB826C62E61517 /* Pods_SwiftGenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftGenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8A27646BEAEAA5505D59B99 /* Pods-SwiftGen UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGen UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGen UnitTests/Pods-SwiftGen UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F8ECFEBCA1C3831123A7C752 /* Pods_SwiftGenKit_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftGenKit_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -316,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7365C967EDB29CCF9A23D240 /* Pods_SwiftGen_UnitTests.framework in Frameworks */,
+				32C91AF83C42CE902ED9DAA1 /* Pods_swiftgen_SwiftGen_UnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53241160829DC36474E9F505 /* Pods_Templates_UnitTests.framework in Frameworks */,
+				D2BC3F8D59EE1997615C69FE /* Pods_swiftgen_Templates_UnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +356,7 @@
 			files = (
 				DDFB05E21FC5170F0019E199 /* SwiftGenKit.framework in Frameworks */,
 				E6EED7099D7FD4A86FE56D8D /* Pods_SwiftGenKit_UnitTests.framework in Frameworks */,
+				33D33EF71C72E9F42AEDFFC1 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +470,9 @@
 				D1DA440B74FDF7492E436003 /* Pods_Templates_UnitTests.framework */,
 				F8ECFEBCA1C3831123A7C752 /* Pods_SwiftGenKit_UnitTests.framework */,
 				EE27639274EB826C62E61517 /* Pods_SwiftGenKit.framework */,
+				E00474A6DF50E9798602EDB2 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */,
+				AE46C0974EFBBDEC1C40C605 /* Pods_swiftgen_SwiftGen_UnitTests.framework */,
+				458F845C6A616E6AFF3E892C /* Pods_swiftgen_Templates_UnitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -597,18 +607,16 @@
 		FB9FA6CF10F1D676B3B78092 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				920E71433B3570488CF5B052 /* Pods-UnitTests.debug.xcconfig */,
-				90843707F44D6F8153913604 /* Pods-UnitTests.release.xcconfig */,
 				2FECAA9B5A99ECF32BC7C59C /* Pods-swiftgen.debug.xcconfig */,
 				D8AC6E8E60EADE4523EA68E9 /* Pods-swiftgen.release.xcconfig */,
-				F8A27646BEAEAA5505D59B99 /* Pods-SwiftGen UnitTests.debug.xcconfig */,
-				2853A35146981A2DAFC26007 /* Pods-SwiftGen UnitTests.release.xcconfig */,
-				CA8DF50C5FC85A82AE3731B0 /* Pods-Templates UnitTests.debug.xcconfig */,
-				2BC3662493CCB001CA734B62 /* Pods-Templates UnitTests.release.xcconfig */,
-				137AB91838D0C022566A139C /* Pods-SwiftGenKit UnitTests.debug.xcconfig */,
-				1634E203F37E1AEB7AE01474 /* Pods-SwiftGenKit UnitTests.release.xcconfig */,
 				11C767774E7B3E8C7192E4B3 /* Pods-SwiftGenKit.debug.xcconfig */,
 				823A44FF7DA835A3040D1987 /* Pods-SwiftGenKit.release.xcconfig */,
+				C1C1760D8085BFC56E48AD2B /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */,
+				C27D33FD5F71B417E9FE5867 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig */,
+				9443BE290DFBE5BF33DC7CBF /* Pods-swiftgen-SwiftGen UnitTests.debug.xcconfig */,
+				AD963940DA53F1038CA94806 /* Pods-swiftgen-SwiftGen UnitTests.release.xcconfig */,
+				8B43FFE4BD63BDC97FB5A0E2 /* Pods-swiftgen-Templates UnitTests.debug.xcconfig */,
+				4FF421D2DBE488AAA80F24CD /* Pods-swiftgen-Templates UnitTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -915,7 +923,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SwiftGen UnitTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-swiftgen-SwiftGen UnitTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -933,7 +941,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Templates UnitTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-swiftgen-Templates UnitTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -946,20 +954,26 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Templates UnitTests/Pods-Templates UnitTests-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Commander/Commander.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 				"${BUILT_PRODUCTS_DIR}/PathKit/PathKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Stencil/Stencil.framework",
 				"${BUILT_PRODUCTS_DIR}/StencilSwiftKit/StencilSwiftKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Yams/Yams.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Commander.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PathKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stencil.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StencilSwiftKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Yams.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Templates UnitTests/Pods-Templates UnitTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DDDE50441FAF687A004203BE /* [CP] Copy Pods Resources */ = {
@@ -974,7 +988,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Templates UnitTests/Pods-Templates UnitTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DDDE51A01FAF814A004203BE /* [CP] Check Pods Manifest.lock */ = {
@@ -988,7 +1002,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SwiftGenKit UnitTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SwiftGenKit-SwiftGenKit UnitTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1001,16 +1015,18 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit UnitTests/Pods-SwiftGenKit UnitTests-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 				"${BUILT_PRODUCTS_DIR}/PathKit/PathKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PathKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit UnitTests/Pods-SwiftGenKit UnitTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DDDE51B01FAF814A004203BE /* [CP] Copy Pods Resources */ = {
@@ -1025,7 +1041,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit UnitTests/Pods-SwiftGenKit UnitTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DE127EA8748200EF28090721 /* [CP] Embed Pods Frameworks */ = {
@@ -1034,7 +1050,9 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGen UnitTests/Pods-SwiftGen UnitTests-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Commander/Commander.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 				"${BUILT_PRODUCTS_DIR}/PathKit/PathKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Stencil/Stencil.framework",
 				"${BUILT_PRODUCTS_DIR}/StencilSwiftKit/StencilSwiftKit.framework",
@@ -1042,6 +1060,8 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Commander.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PathKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stencil.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StencilSwiftKit.framework",
@@ -1049,7 +1069,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGen UnitTests/Pods-SwiftGen UnitTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E6B168DFED17C377CD98D29B /* [CP] Embed Pods Frameworks */ = {
@@ -1060,20 +1080,20 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Commander/Commander.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 				"${BUILT_PRODUCTS_DIR}/PathKit/PathKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Stencil/Stencil.framework",
 				"${BUILT_PRODUCTS_DIR}/StencilSwiftKit/StencilSwiftKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Yams/Yams.framework",
-				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Commander.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PathKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stencil.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StencilSwiftKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Yams.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1092,7 +1112,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGen UnitTests/Pods-SwiftGen UnitTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F0A0CBF584EF7BC6F875353C /* [CP] Check Pods Manifest.lock */ = {
@@ -1321,7 +1341,7 @@
 		};
 		09A87B561BCCA2C600D9B9F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F8A27646BEAEAA5505D59B99 /* Pods-SwiftGen UnitTests.debug.xcconfig */;
+			baseConfigurationReference = 9443BE290DFBE5BF33DC7CBF /* Pods-swiftgen-SwiftGen UnitTests.debug.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/SwiftGenTests/Info.plist;
@@ -1335,7 +1355,7 @@
 		};
 		09A87B571BCCA2C600D9B9F5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2853A35146981A2DAFC26007 /* Pods-SwiftGen UnitTests.release.xcconfig */;
+			baseConfigurationReference = AD963940DA53F1038CA94806 /* Pods-swiftgen-SwiftGen UnitTests.release.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/SwiftGenTests/Info.plist;
@@ -1445,7 +1465,7 @@
 		};
 		DDDE50491FAF687A004203BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA8DF50C5FC85A82AE3731B0 /* Pods-Templates UnitTests.debug.xcconfig */;
+			baseConfigurationReference = 8B43FFE4BD63BDC97FB5A0E2 /* Pods-swiftgen-Templates UnitTests.debug.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/TemplatesTests/Info.plist;
@@ -1459,7 +1479,7 @@
 		};
 		DDDE504A1FAF687A004203BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2BC3662493CCB001CA734B62 /* Pods-Templates UnitTests.release.xcconfig */;
+			baseConfigurationReference = 4FF421D2DBE488AAA80F24CD /* Pods-swiftgen-Templates UnitTests.release.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/TemplatesTests/Info.plist;
@@ -1473,7 +1493,7 @@
 		};
 		DDDE51B51FAF814A004203BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 137AB91838D0C022566A139C /* Pods-SwiftGenKit UnitTests.debug.xcconfig */;
+			baseConfigurationReference = C1C1760D8085BFC56E48AD2B /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/SwiftGenKitTests/Info.plist;
@@ -1487,7 +1507,7 @@
 		};
 		DDDE51B61FAF814A004203BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1634E203F37E1AEB7AE01474 /* Pods-SwiftGenKit UnitTests.release.xcconfig */;
+			baseConfigurationReference = C27D33FD5F71B417E9FE5867 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/SwiftGenKitTests/Info.plist;

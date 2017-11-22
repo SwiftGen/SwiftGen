@@ -1,35 +1,27 @@
 platform :osx, '10.9'
 use_frameworks!
 
-def code_generation_pods
-  pod 'PathKit', '~> 0.8.0'
-  pod 'StencilSwiftKit', '~> 2.3'
-end
-
-def swiftgen_pods
-  code_generation_pods
-  pod 'Yams', '~> 0.3'
-end
-
 target 'swiftgen' do
-  swiftgen_pods
   pod 'Commander', '~> 0.8'
+  pod 'StencilSwiftKit', '~> 2.3'
+  podspec :path => 'SwiftGenKit.podspec'
+  pod 'Yams', '~> 0.3'
+
+  target 'SwiftGen UnitTests' do
+    inherit! :complete
+  end
+
+  target 'Templates UnitTests' do
+    inherit! :complete
+  end
 end
 
 target 'SwiftGenKit' do
   podspec :path => 'SwiftGenKit.podspec'
-end
 
-target 'SwiftGen UnitTests' do
-  swiftgen_pods
-end
-
-target 'SwiftGenKit UnitTests' do
-  pod 'PathKit', '~> 0.8.0'
-end
-
-target 'Templates UnitTests' do
-  code_generation_pods
+  target 'SwiftGenKit UnitTests' do
+    inherit! :complete
+  end
 end
 
 post_install do |installer|
