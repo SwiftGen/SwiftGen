@@ -1,6 +1,6 @@
 //
 // SwiftGen
-// Copyright (c) 2015 Olivier Halligon
+// Copyright (c) 2017 Olivier Halligon
 // MIT Licence
 //
 
@@ -17,7 +17,7 @@ private let okCode = (num: colorCode("fg127,127,127"),
 private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
                       code: colorCode("fg250,250,250") + colorCode("bg127,0,0"))
 
-func diff(_ result: String, _ expected: String) -> String? {
+private func diff(_ result: String, _ expected: String) -> String? {
   guard result != expected else { return nil }
   var firstDiff: Int? = nil
   let nl = CharacterSet.newlines
@@ -68,11 +68,11 @@ class Fixtures {
   enum Directory: String {
     case colors = "Colors"
     case fonts = "Fonts"
-    case xcassets = "XCAssets"
     case storyboards = "Storyboards"
     case storyboardsiOS = "Storyboards-iOS"
     case storyboardsMacOS = "Storyboards-macOS"
     case strings = "Strings"
+    case xcassets = "XCAssets"
   }
 
   private static let testBundle = Bundle(for: Fixtures.self)
