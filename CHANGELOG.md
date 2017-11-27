@@ -2,6 +2,26 @@
 
 ---
 
+## Master
+
+### Bug Fixes
+
+_None_
+
+### Breaking Changes
+
+_None_
+
+### New Features
+
+_None_
+
+### Internal Changes
+
+* Merged the `SwiftGenKit` and `templates` repositories back into this repository for easier development and maintenance.  
+  [David Jennes](https://github.com/djbe) 
+  [#356](https://github.com/SwiftGen/SwiftGen/pull/356)
+
 ## 5.2.1
 
 ### Bug Fixes
