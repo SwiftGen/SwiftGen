@@ -21,6 +21,17 @@ _None_
 * Merged the `SwiftGenKit` and `templates` repositories back into this repository for easier development and maintenance.  
   [David Jennes](https://github.com/djbe) 
   [#356](https://github.com/SwiftGen/SwiftGen/pull/356)
+* XCAssets: exposed getter for image name string.  
+  [Abbey Jackson](https://github.com/abbeyjackson)
+  [SwiftGen/templates#85](https://github.com/SwiftGen/templates/pull/85)
+* XCAssets: exposed getter for color name string.  
+  [Stephan Diederich](https://github.com/diederich)
+  [SwiftGen/templates#87](https://github.com/SwiftGen/templates/pull/87)
+* Allows to set all properties as `public` by using `--param publicAccess` on all templates.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [SwiftGen/templates#84](https://github.com/SwiftGen/templates/pull/84)
+  [Txai Wieser](https://github.com/txaiwieser)
+  [SwiftGen/templates#81](https://github.com/SwiftGen/templates/pull/81)
 
 ## 5.2.1
 
