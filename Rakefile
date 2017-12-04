@@ -257,10 +257,8 @@ namespace :changelog do
     changelog = File.read('CHANGELOG.md')
     abort('Links seems to already exist for latest version entry') if /^### (.*)/.match(changelog)[1] == LINKS_SECTION_TITLE
     links = linked_changelogs(
-      swiftgenkit: Utils.podfile_lock_version('SwiftGenKit'),
       stencilswiftkit: Utils.podfile_lock_version('StencilSwiftKit'),
-      stencil: Utils.podfile_lock_version('Stencil'),
-      templates: Dir.chdir('Resources') { `git describe --abbrev=0 --tags`.chomp }
+      stencil: Utils.podfile_lock_version('Stencil')
     )
     changelog.sub!(/^##[^#].*$\n/, "\\0\n#{links}")
     File.write('CHANGELOG.md', changelog)
@@ -270,10 +268,8 @@ namespace :changelog do
     <<-LINKS.gsub(/^\s*\|/, '')
       |### #{LINKS_SECTION_TITLE}
       |
-      |* [SwiftGenKit #{swiftgenkit}](https://github.com/SwiftGen/SwiftGenKit/blob/#{swiftgenkit}/CHANGELOG.md)
       |* [StencilSwiftKit #{stencilswiftkit}](https://github.com/SwiftGen/StencilSwiftKit/blob/#{stencilswiftkit}/CHANGELOG.md)
       |* [Stencil #{stencil}](https://github.com/kylef/Stencil/blob/#{stencil}/CHANGELOG.md)
-      |* [templates #{templates}](https://github.com/SwiftGen/templates/blob/#{templates}/CHANGELOG.md)
     LINKS
   end
 end
