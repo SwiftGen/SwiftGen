@@ -37,7 +37,7 @@ namespace :generate do
   task :contexts => 'xcode:build' do |task|
     Utils.print_header 'Generating contexts...'
     Utils.run(
-      %(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "Generate SwiftGenKit Contexts" -configuration "#{CONFIGURATION}" test-without-building),
+      %(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "SwiftGenKit - Generate Contexts" -configuration "#{CONFIGURATION}" test-without-building),
       task,
       xcrun: true,
       formatter: :xcpretty
@@ -48,7 +48,7 @@ namespace :generate do
   task :output => 'xcode:build' do |task|
     Utils.print_header 'Generating expected test output files...'
     Utils.run(
-      %(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "Generate Templates Output" -configuration "#{CONFIGURATION}" test-without-building),
+      %(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "Templates - Generate Output" -configuration "#{CONFIGURATION}" test-without-building),
       task,
       xcrun: true,
       formatter: :xcpretty
