@@ -69,8 +69,8 @@
 		DDDE51961FAF6AD4004203BE /* StoryboardsMacOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE50F71FAF6AD4004203BE /* StoryboardsMacOSTests.swift */; };
 		DDDE51971FAF6AD4004203BE /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE50F81FAF6AD4004203BE /* TestsHelper.swift */; };
 		DDDE51981FAF6AD4004203BE /* StoryboardsiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE50F91FAF6AD4004203BE /* StoryboardsiOSTests.swift */; };
-		DDDE519C1FAF6B0A004203BE /* Expected in Resources */ = {isa = PBXBuildFile; fileRef = DDDE519A1FAF6B0A004203BE /* Expected */; };
-		DDDE519D1FAF6B0A004203BE /* Contexts in Resources */ = {isa = PBXBuildFile; fileRef = DDDE519B1FAF6B0A004203BE /* Contexts */; };
+		DDDE519C1FAF6B0A004203BE /* Generated in Resources */ = {isa = PBXBuildFile; fileRef = DDDE519A1FAF6B0A004203BE /* Generated */; };
+		DDDE519D1FAF6B0A004203BE /* StencilContexts in Resources */ = {isa = PBXBuildFile; fileRef = DDDE519B1FAF6B0A004203BE /* StencilContexts */; };
 		DDDE519E1FAF6D39004203BE /* templates in Resources */ = {isa = PBXBuildFile; fileRef = DDC09D011E1D199A005C6EE6 /* templates */; };
 		DDDE52391FAF81BA004203BE /* StringParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE51D91FAF81B9004203BE /* StringParserTests.swift */; };
 		DDDE523A1FAF81BA004203BE /* StringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE51DA1FAF81B9004203BE /* StringsTests.swift */; };
@@ -84,8 +84,8 @@
 		DDDE52721FAF81BA004203BE /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE521D1FAF81BA004203BE /* TestsHelper.swift */; };
 		DDDE52731FAF81BA004203BE /* StoryboardsiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE521E1FAF81BA004203BE /* StoryboardsiOSTests.swift */; };
 		DDDE52751FAF81BA004203BE /* AssetCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE52201FAF81BA004203BE /* AssetCatalogTests.swift */; };
-		DDDE52781FAF81DB004203BE /* Contexts in Resources */ = {isa = PBXBuildFile; fileRef = DDDE52761FAF81DB004203BE /* Contexts */; };
-		DDDE52791FAF81DB004203BE /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = DDDE52771FAF81DB004203BE /* Fixtures */; };
+		DDDE52781FAF81DB004203BE /* StencilContexts in Resources */ = {isa = PBXBuildFile; fileRef = DDDE52761FAF81DB004203BE /* StencilContexts */; };
+		DDDE52791FAF81DB004203BE /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = DDDE52771FAF81DB004203BE /* Resources */; };
 		DDFB05E21FC5170F0019E199 /* SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -291,8 +291,8 @@
 		DDDE50F81FAF6AD4004203BE /* TestsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsHelper.swift; sourceTree = "<group>"; };
 		DDDE50F91FAF6AD4004203BE /* StoryboardsiOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardsiOSTests.swift; sourceTree = "<group>"; };
 		DDDE50FA1FAF6AD4004203BE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DDDE519A1FAF6B0A004203BE /* Expected */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Expected; path = ../Expected; sourceTree = "<group>"; };
-		DDDE519B1FAF6B0A004203BE /* Contexts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Contexts; path = ../Contexts; sourceTree = "<group>"; };
+		DDDE519A1FAF6B0A004203BE /* Generated */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Generated; path = ../Fixtures/Generated; sourceTree = "<group>"; };
+		DDDE519B1FAF6B0A004203BE /* StencilContexts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StencilContexts; path = ../Fixtures/StencilContexts; sourceTree = "<group>"; };
 		DDDE51B71FAF814A004203BE /* SwiftGenKit UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftGenKit UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDE51D91FAF81B9004203BE /* StringParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringParserTests.swift; sourceTree = "<group>"; };
 		DDDE51DA1FAF81B9004203BE /* StringsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsTests.swift; sourceTree = "<group>"; };
@@ -307,8 +307,8 @@
 		DDDE521E1FAF81BA004203BE /* StoryboardsiOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardsiOSTests.swift; sourceTree = "<group>"; };
 		DDDE521F1FAF81BA004203BE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DDDE52201FAF81BA004203BE /* AssetCatalogTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetCatalogTests.swift; sourceTree = "<group>"; };
-		DDDE52761FAF81DB004203BE /* Contexts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Contexts; path = ../Contexts; sourceTree = "<group>"; };
-		DDDE52771FAF81DB004203BE /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fixtures; path = ../Fixtures; sourceTree = "<group>"; };
+		DDDE52761FAF81DB004203BE /* StencilContexts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StencilContexts; path = ../Fixtures/StencilContexts; sourceTree = "<group>"; };
+		DDDE52771FAF81DB004203BE /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = ../Fixtures/Resources; sourceTree = "<group>"; };
 		EE54F54191BF47C08ABEAB9B /* Pods-swiftgen-Templates UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen-Templates UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		EE9AB7101FCDF042A312FE6F /* Pods-SwiftGenKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit.debug.xcconfig"; sourceTree = "<group>"; };
 		F5CCE71BBB67D6589F2BD02F /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -401,7 +401,7 @@
 		09030BC71B6D2BA300275BF5 /* SwiftGenTests */ = {
 			isa = PBXGroup;
 			children = (
-				093405061F81537400187787 /* Fixtures */,
+				093405061F81537400187787 /* Configs */,
 				09030C171B6D43D400275BF5 /* TestsHelper.swift */,
 				09030BD81B6D2E5900275BF5 /* ConfigReadTests.swift */,
 				09D00A021F9BBD9F0026A755 /* ConfigLintTests.swift */,
@@ -410,7 +410,7 @@
 			path = SwiftGenTests;
 			sourceTree = "<group>";
 		};
-		093405061F81537400187787 /* Fixtures */ = {
+		093405061F81537400187787 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
 				093405071F81539100187787 /* config-with-params.yml */,
@@ -425,7 +425,8 @@
 				37DC602E1F98D1D900B7B31C /* config-invalid-template.yml */,
 				37DC602F1F98D1DA00B7B31C /* config-invalid-output.yml */,
 			);
-			path = Fixtures;
+			name = Configs;
+			path = ../Fixtures/Configs;
 			sourceTree = "<group>";
 		};
 		09C7B2D21BCC382800D7F488 /* Sources */ = {
@@ -561,8 +562,8 @@
 		DDDE504D1FAF6AD4004203BE /* TemplatesTests */ = {
 			isa = PBXGroup;
 			children = (
-				DDDE519B1FAF6B0A004203BE /* Contexts */,
-				DDDE519A1FAF6B0A004203BE /* Expected */,
+				DDDE519B1FAF6B0A004203BE /* StencilContexts */,
+				DDDE519A1FAF6B0A004203BE /* Generated */,
 				DDDE506D1FAF6AD4004203BE /* StringsTests.swift */,
 				DDDE506E1FAF6AD4004203BE /* FontsTests.swift */,
 				DDDE50F51FAF6AD4004203BE /* XCAssetsTests.swift */,
@@ -578,8 +579,8 @@
 		DDDE51B91FAF81B9004203BE /* SwiftGenKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				DDDE52761FAF81DB004203BE /* Contexts */,
-				DDDE52771FAF81DB004203BE /* Fixtures */,
+				DDDE52761FAF81DB004203BE /* StencilContexts */,
+				DDDE52771FAF81DB004203BE /* Resources */,
 				DDDE51D91FAF81B9004203BE /* StringParserTests.swift */,
 				DDDE51DA1FAF81B9004203BE /* StringsTests.swift */,
 				DDDE51DB1FAF81B9004203BE /* FontsTests.swift */,
@@ -826,8 +827,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDDE519D1FAF6B0A004203BE /* Contexts in Resources */,
-				DDDE519C1FAF6B0A004203BE /* Expected in Resources */,
+				DDDE519D1FAF6B0A004203BE /* StencilContexts in Resources */,
+				DDDE519C1FAF6B0A004203BE /* Generated in Resources */,
 				DDDE519E1FAF6D39004203BE /* templates in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -836,8 +837,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDDE52791FAF81DB004203BE /* Fixtures in Resources */,
-				DDDE52781FAF81DB004203BE /* Contexts in Resources */,
+				DDDE52791FAF81DB004203BE /* Resources in Resources */,
+				DDDE52781FAF81DB004203BE /* StencilContexts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

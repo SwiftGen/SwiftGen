@@ -58,8 +58,8 @@ end
 
 ## [ Output compilation ] #####################################################
 
-MODULE_INPUT_PATH = 'Tests/Fixtures/stub-env/Modules'.freeze
-MODULE_OUTPUT_PATH = 'Tests/Fixtures/stub-env'.freeze
+MODULE_INPUT_PATH = 'Tests/Fixtures/CompilationEnvironment/Modules'.freeze
+MODULE_OUTPUT_PATH = 'Tests/Fixtures/CompilationEnvironment'.freeze
 SDKS = {
   macosx: 'x86_64-apple-macosx10.13',
   iphoneos: 'arm64-apple-ios11.0',
@@ -109,7 +109,7 @@ namespace :output do
     Utils.print_header 'Compiling template output files'
 
     failures = []
-    Dir.glob('Tests/Expected/**/*.swift').each do |f|
+    Dir.glob('Tests/Fixtures/Generated/**/*.swift').each do |f|
       Utils.print_info "Compiling #{f}…\n"
       failures << f unless compile_file(f, task)
     end
@@ -284,7 +284,7 @@ namespace :playground do
   task :xcassets do
     Utils.run(
       %(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 ) +
-        %(--output-format=human-readable-text Tests/Fixtures/XCAssets/Images.xcassets),
+        %(--output-format=human-readable-text Tests/Fixtures/Resources/XCAssets/Images.xcassets),
       task,
       xcrun: true
     )
@@ -292,7 +292,7 @@ namespace :playground do
   task :storyboard do
     Utils.run(
       %(ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO ) +
-        %(Tests/Fixtures/Storyboards-iOS/Wizard.storyboard),
+        %(Tests/Fixtures/Resources/Storyboards-iOS/Wizard.storyboard),
       task,
       xcrun: true
     )
@@ -300,7 +300,7 @@ namespace :playground do
   task :strings do
     Utils.run(
       %(plutil -convert binary1 -o SwiftGen.playground/Resources/Localizable.strings ) +
-        %(Tests/Fixtures/Strings/Localizable.strings),
+        %(Tests/Fixtures/Resources/Strings/Localizable.strings),
       task,
       xcrun: true
     )

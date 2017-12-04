@@ -101,14 +101,14 @@ class Fixtures {
     guard let rsrcURL = testBundle.resourceURL else {
       fatalError("Unable to find resource directory URL")
     }
-    let rsrc = Path(rsrcURL.path) + "Fixtures"
+    let rsrc = Path(rsrcURL.path) + "Resources"
 
     guard let dir = sub else { return rsrc }
     return rsrc + dir.rawValue
   }
 
   static func path(for name: String, sub: Directory) -> Path {
-    return path(for: name, subDirectory: "Fixtures/\(sub.rawValue)")
+    return path(for: name, subDirectory: "Resources/\(sub.rawValue)")
   }
 
   private static func path(for name: String, subDirectory: String? = nil) -> Path {
@@ -123,7 +123,7 @@ class Fixtures {
   }
 
   static func output(for name: String, sub: Directory) -> String {
-    return string(for: name, subDirectory: "Expected/\(sub.rawValue)")
+    return string(for: name, subDirectory: "Generated/\(sub.rawValue)")
   }
 
   private static func string(for name: String, subDirectory: String) -> String {
