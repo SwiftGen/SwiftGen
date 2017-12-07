@@ -28,11 +28,11 @@ For actual contribution guidelines, you can always check our [contributing docum
 
 #### Our expectations on you as a contributor
 
-To quote [@alloy](https://github.com/alloy) from [this issue](https://github.com/Moya/Moya/issues/135):
+To quote [@alloy](https://github.com/alloy) from [this issue on Moya](https://github.com/Moya/Moya/issues/135):
 
 > Don't ever feel bad for not contributing to open source.
 
-We want contributors to provide ideas, keep the ship shipping and to take some of the load from others. It is non-obligatory; we’re here to get things done in an enjoyable way. :trophy:
+We want contributors to provide ideas, keep the ship shipping and to take some of the load from others. It is non-obligatory; we’re here to get things done in an enjoyable way. 🏆
 
 The fact that you'll have push access will allow you to:
 
@@ -48,6 +48,10 @@ If someone submits a pull request that's not perfect, and you are reviewing, it'
 
 Both [AliSoftware](https://github.com/AliSoftware) and [David Jennes](https://github.com/djbe) have contactable emails on their GitHub profiles, and are happy to talk about any problems.
 
+#### What about more high-level discussions about the repo itself?
+
+For more involved discussions that require the agreement or advice from all contributors, or to open a debate not on a specific feature but on a more global topic (project vision, etc), as a Core Contributor you also have access to [the team's forum on GitHub](https://github.com/orgs/SwiftGen/teams/corecontributors).
+
 #### Where can I get more info about this document?
 
-The original source of this document can be found at https://github.com/moya/contributors.
+The original source of this document can be found [here](https://github.com/moya/contributors).
