@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "09A87B4F1BCCA2C600D9B9F5"
-               BuildableName = "UnitTests.xctest"
-               BlueprintName = "UnitTests"
+               BuildableName = "SwiftGen UnitTests.xctest"
+               BlueprintName = "SwiftGen UnitTests"
                ReferencedContainer = "container:SwiftGen.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,9 +47,29 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DDDE519F1FAF814A004203BE"
+               BuildableName = "SwiftGenKit UnitTests.xctest"
+               BlueprintName = "SwiftGenKit UnitTests"
+               ReferencedContainer = "container:SwiftGen.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DDDE50291FAF687A004203BE"
+               BuildableName = "Templates UnitTests.xctest"
+               BlueprintName = "Templates UnitTests"
+               ReferencedContainer = "container:SwiftGen.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "09A87B4F1BCCA2C600D9B9F5"
-               BuildableName = "UnitTests.xctest"
-               BlueprintName = "UnitTests"
+               BuildableName = "SwiftGen UnitTests.xctest"
+               BlueprintName = "SwiftGen UnitTests"
                ReferencedContainer = "container:SwiftGen.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -89,23 +109,27 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "colors -t swift3 $(PROJECT_DIR)/Resources/Fixtures/Colors/colors.xml"
+            argument = "--help"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "colors -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/Colors/colors.xml"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "fonts -t swift3 $(PROJECT_DIR)/Resources/Fixtures/Fonts"
+            argument = "fonts -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/Fonts"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "images -t swift3 $(PROJECT_DIR)/Resources/Fixtures/Images/Images.xcassets"
+            argument = "xcassets -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Images.xcassets"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "storyboards -t swift3 $(PROJECT_DIR)/Resources/Fixtures/Storyboards-iOS"
+            argument = "storyboards -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/Storyboards-iOS"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "strings -t swift3 $(PROJECT_DIR)/Resources/Fixtures/Strings/Localizable.strings"
+            argument = "strings -t structured-swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/Strings/Localizable.strings"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
@@ -113,15 +137,11 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "config lint --config $(PROJECT_DIR)/Tests/SwiftGenTests/fixtures/config-missing-paths.yml"
+            argument = "config lint --config $(PROJECT_DIR)/Tests/Fixtures/Configs/config-missing-paths.yml"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--help"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "config run --verbose --config $(PROJECT_DIR)/Tests/SwiftGenTests/fixtures/config-with-params.yml"
+            argument = "config run --verbose --config $(PROJECT_DIR)/Tests/Fixtures/Configs/config-with-params.yml"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>

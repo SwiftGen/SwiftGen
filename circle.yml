@@ -14,6 +14,10 @@ dependencies:
 test:
   override:
     - bundle exec rake lint:code
+    - bundle exec rake lint:tests
+    - bundle exec rake lint:output
+    - bundle exec rake xcode:test
+    - bundle exec rake output:compile
     - bundle exec rake cli:install[./standalone,./standalone/frameworks,./standalone/stencils]
   post:
     - ./standalone/swiftgen --version

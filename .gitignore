@@ -5,7 +5,7 @@
 ## Build generated
 build/
 DerivedData/
-Fixtures/stub-env/**/*.swiftmodule
+Tests/Fixtures/CompilationEnvironment/**/*.swiftmodule
 
 ## Various settings
 *.pbxuser

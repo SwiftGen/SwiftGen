@@ -1,0 +1,6 @@
+framework module Pods_SwiftGenKit_SwiftGenKit_UnitTests {
+  umbrella header "Pods-SwiftGenKit-SwiftGenKit UnitTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

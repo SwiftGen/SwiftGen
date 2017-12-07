@@ -1,6 +1,6 @@
 //
 // SwiftGen
-// Copyright (c) 2015 Olivier Halligon
+// Copyright (c) 2017 Olivier Halligon
 // MIT Licence
 //
 
@@ -26,6 +26,9 @@ private func diff(_ result: String, _ expected: String) -> String? {
   for (idx, pair) in zip(lhsLines, rhsLines).enumerated() where pair.0 != pair.1 {
     firstDiff = idx
     break
+  }
+  if firstDiff == nil && lhsLines.count != rhsLines.count {
+    firstDiff = min(lhsLines.count, rhsLines.count)
   }
   if let badLineIdx = firstDiff {
     let slice = { (lines: [String], context: Int) -> ArraySlice<String> in
@@ -84,10 +87,11 @@ class Fixtures {
   enum Directory: String {
     case colors = "Colors"
     case fonts = "Fonts"
-    case images = "Images"
+    case storyboards = "Storyboards"
     case storyboardsiOS = "Storyboards-iOS"
     case storyboardsMacOS = "Storyboards-macOS"
     case strings = "Strings"
+    case xcassets = "XCAssets"
   }
 
   private static let testBundle = Bundle(for: Fixtures.self)
@@ -97,29 +101,29 @@ class Fixtures {
     guard let rsrcURL = testBundle.resourceURL else {
       fatalError("Unable to find resource directory URL")
     }
-    let rsrc = Path(rsrcURL.path) + "Fixtures"
+    let rsrc = Path(rsrcURL.path) + "Resources"
 
     guard let dir = sub else { return rsrc }
     return rsrc + dir.rawValue
   }
 
   static func path(for name: String, sub: Directory) -> Path {
-    return path(for: name, subDirectory: "Fixtures/\(sub.rawValue)")
+    return path(for: name, subDirectory: "Resources/\(sub.rawValue)")
   }
 
-  private static func path(for name: String, subDirectory: String) -> Path {
+  private static func path(for name: String, subDirectory: String? = nil) -> Path {
     guard let path = testBundle.path(forResource: name, ofType: "", inDirectory: subDirectory) else {
       fatalError("Unable to find fixture \"\(name)\"")
     }
     return Path(path)
   }
 
-  static func template(for name: String) -> String {
-    return string(for: name, subDirectory: "templates")
+  static func template(for name: String, sub: Directory) -> String {
+    return string(for: name, subDirectory: "templates/\(sub.rawValue.lowercased())")
   }
 
   static func output(for name: String, sub: Directory) -> String {
-    return string(for: name, subDirectory: "Expected/\(sub.rawValue)")
+    return string(for: name, subDirectory: "Generated/\(sub.rawValue)")
   }
 
   private static func string(for name: String, subDirectory: String) -> String {

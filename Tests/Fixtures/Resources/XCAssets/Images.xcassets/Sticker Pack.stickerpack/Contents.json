@@ -1,0 +1,17 @@
+{
+  "stickers" : [
+    {
+      "filename" : "Sticker.sticker"
+    },
+    {
+      "filename" : "Sticker Sequence.stickersequence"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "properties" : {
+    "grid-size" : "small"
+  }
+}

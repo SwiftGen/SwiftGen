@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="Dbo-xl-Peq">
+            <objects>
+                <windowController id="1P9-6c-uvR" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="b0r-9x-PfB">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="163" y="199" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+                    </window>
+                    <connections>
+                        <segue destination="QQb-OV-IBg" kind="relationship" relationship="window.shadowedContentViewController" id="Ics-Wd-Vef"/>
+                    </connections>
+                </windowController>
+                <customObject id="emQ-ax-yLV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-29" y="140"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="mil-Re-aUn">
+            <objects>
+                <splitViewController id="QQb-OV-IBg" sceneMemberID="viewController">
+                    <splitViewItems>
+                        <splitViewItem id="H8O-U7-guB"/>
+                        <splitViewItem id="dgf-qA-Mpo"/>
+                    </splitViewItems>
+                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="HmC-Pa-hEf">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </splitView>
+                    <connections>
+                        <segue destination="R2f-4N-xbc" kind="relationship" relationship="splitItems" id="X6W-e9-Enk"/>
+                        <segue destination="cIf-as-pTF" kind="relationship" relationship="splitItems" id="zs1-Tk-SMT"/>
+                    </connections>
+                </splitViewController>
+                <customObject id="6kQ-pC-l9L" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="549" y="135"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="io5-dC-RpZ">
+            <objects>
+                <viewController id="R2f-4N-xbc" sceneMemberID="viewController">
+                    <view key="view" id="ovi-QT-pQu">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fpq-6S-0QY">
+                                <rect key="frame" x="46" y="142" width="358" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="None of the scenes in this storyboard have a StoryboardID" placeholderString="" id="m9F-ea-7i7">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Fpq-6S-0QY" firstAttribute="centerX" secondItem="ovi-QT-pQu" secondAttribute="centerX" id="co4-4H-1Qq"/>
+                            <constraint firstItem="Fpq-6S-0QY" firstAttribute="centerY" secondItem="ovi-QT-pQu" secondAttribute="centerY" id="n7L-ih-p4O"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="w5a-0R-Snz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1219" y="-61"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tr7-gS-RI6">
+            <objects>
+                <viewController id="cIf-as-pTF" sceneMemberID="viewController">
+                    <view key="view" id="gUc-vx-Io9">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wfo-Pi-7oP">
+                                <rect key="frame" x="46" y="142" width="358" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="None of the scenes in this storyboard have a StoryboardID" placeholderString="" id="Xwr-dR-UkL">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Wfo-Pi-7oP" firstAttribute="centerX" secondItem="gUc-vx-Io9" secondAttribute="centerX" id="MEJ-RE-Q2O"/>
+                            <constraint firstItem="Wfo-Pi-7oP" firstAttribute="centerY" secondItem="gUc-vx-Io9" secondAttribute="centerY" id="e2V-6t-4dt"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="rLU-3f-8Fh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1219" y="297"/>
+        </scene>
+    </scenes>
+</document>
