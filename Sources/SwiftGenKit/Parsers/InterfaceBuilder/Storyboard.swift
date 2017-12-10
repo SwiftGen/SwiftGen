@@ -14,6 +14,7 @@ extension InterfaceBuilder {
     let initialScene: Scene?
     let scenes: Set<Scene>
     let segues: Set<Segue>
+    let placeholders: Set<ScenePlaceholder>
 
     var modules: Set<String> {
       var result: [String] = [platform.module] +
@@ -38,10 +39,7 @@ private enum XML {
   static func initialSceneXPath(identifier: String) -> String {
     "/document/scenes/scene/objects/*[@sceneMemberID=\"viewController\" and @id=\"\(identifier)\"]"
   }
-  static let sceneXPath = """
-    /document/scenes/scene/objects/*[@sceneMemberID=\"viewController\" and \
-    string-length(@storyboardIdentifier) > 0]
-    """
+  static let sceneXPath = "/document/scenes/scene/objects/*[@sceneMemberID=\"viewController\"]"
   static let segueXPath = "/document/scenes/scene//connections/segue[string(@identifier)]"
 
   static let placeholderTags = ["controllerPlaceholder", "viewControllerPlaceholder"]
@@ -67,12 +65,17 @@ extension InterfaceBuilder.Storyboard {
     }
 
     // Scenes
-    scenes = Set<InterfaceBuilder.Scene>(
-      document.xpath(XML.sceneXPath).compactMap {
-        guard !XML.placeholderTags.contains($0.tagName ?? "") else { return nil }
-        return InterfaceBuilder.Scene(with: $0, platform: platform)
+    var scenes = Set<InterfaceBuilder.Scene>()
+    var placeholders = Set<InterfaceBuilder.ScenePlaceholder>()
+    for node in document.xpath(XML.sceneXPath) {
+      if XML.placeholderTags.contains(node.tagName ?? "") {
+        placeholders.insert(InterfaceBuilder.ScenePlaceholder(with: node, storyboard: name))
+      } else {
+        scenes.insert(InterfaceBuilder.Scene(with: node, platform: platform))
       }
-    )
+    }
+    self.scenes = scenes
+    self.placeholders = placeholders
 
     // Segues
     segues = Set<InterfaceBuilder.Segue>(
