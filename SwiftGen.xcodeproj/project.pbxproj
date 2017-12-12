@@ -60,6 +60,7 @@
 		DD428E251FC50FBF001649D6 /* AssetsCatalogContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E151FC50FBF001649D6 /* AssetsCatalogContext.swift */; };
 		DD428E261FC50FBF001649D6 /* StoryboardsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E161FC50FBF001649D6 /* StoryboardsContext.swift */; };
 		DD428E271FC50FBF001649D6 /* StringsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E171FC50FBF001649D6 /* StringsContext.swift */; };
+		DD4738A81FE07596006CB6BB /* StencilContexts in Resources */ = {isa = PBXBuildFile; fileRef = DDDE52761FAF81DB004203BE /* StencilContexts */; };
 		DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */; };
 		DDC09D021E1D199A005C6EE6 /* templates in Resources */ = {isa = PBXBuildFile; fileRef = DDC09D011E1D199A005C6EE6 /* templates */; };
 		DDDE51131FAF6AD4004203BE /* StringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE506D1FAF6AD4004203BE /* StringsTests.swift */; };
@@ -70,7 +71,6 @@
 		DDDE51971FAF6AD4004203BE /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE50F81FAF6AD4004203BE /* TestsHelper.swift */; };
 		DDDE51981FAF6AD4004203BE /* StoryboardsiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE50F91FAF6AD4004203BE /* StoryboardsiOSTests.swift */; };
 		DDDE519C1FAF6B0A004203BE /* Generated in Resources */ = {isa = PBXBuildFile; fileRef = DDDE519A1FAF6B0A004203BE /* Generated */; };
-		DDDE519D1FAF6B0A004203BE /* StencilContexts in Resources */ = {isa = PBXBuildFile; fileRef = DDDE519B1FAF6B0A004203BE /* StencilContexts */; };
 		DDDE519E1FAF6D39004203BE /* templates in Resources */ = {isa = PBXBuildFile; fileRef = DDC09D011E1D199A005C6EE6 /* templates */; };
 		DDDE52391FAF81BA004203BE /* StringParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE51D91FAF81B9004203BE /* StringParserTests.swift */; };
 		DDDE523A1FAF81BA004203BE /* StringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE51DA1FAF81B9004203BE /* StringsTests.swift */; };
@@ -291,8 +291,7 @@
 		DDDE50F81FAF6AD4004203BE /* TestsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsHelper.swift; sourceTree = "<group>"; };
 		DDDE50F91FAF6AD4004203BE /* StoryboardsiOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardsiOSTests.swift; sourceTree = "<group>"; };
 		DDDE50FA1FAF6AD4004203BE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DDDE519A1FAF6B0A004203BE /* Generated */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Generated; path = ../Fixtures/Generated; sourceTree = "<group>"; };
-		DDDE519B1FAF6B0A004203BE /* StencilContexts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StencilContexts; path = ../Fixtures/StencilContexts; sourceTree = "<group>"; };
+		DDDE519A1FAF6B0A004203BE /* Generated */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Generated; sourceTree = "<group>"; };
 		DDDE51B71FAF814A004203BE /* SwiftGenKit UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftGenKit UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDE51D91FAF81B9004203BE /* StringParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringParserTests.swift; sourceTree = "<group>"; };
 		DDDE51DA1FAF81B9004203BE /* StringsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsTests.swift; sourceTree = "<group>"; };
@@ -307,8 +306,8 @@
 		DDDE521E1FAF81BA004203BE /* StoryboardsiOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardsiOSTests.swift; sourceTree = "<group>"; };
 		DDDE521F1FAF81BA004203BE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DDDE52201FAF81BA004203BE /* AssetCatalogTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetCatalogTests.swift; sourceTree = "<group>"; };
-		DDDE52761FAF81DB004203BE /* StencilContexts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StencilContexts; path = ../Fixtures/StencilContexts; sourceTree = "<group>"; };
-		DDDE52771FAF81DB004203BE /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = ../Fixtures/Resources; sourceTree = "<group>"; };
+		DDDE52761FAF81DB004203BE /* StencilContexts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StencilContexts; sourceTree = "<group>"; };
+		DDDE52771FAF81DB004203BE /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
 		EE54F54191BF47C08ABEAB9B /* Pods-swiftgen-Templates UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen-Templates UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		EE9AB7101FCDF042A312FE6F /* Pods-SwiftGenKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit.debug.xcconfig"; sourceTree = "<group>"; };
 		F5CCE71BBB67D6589F2BD02F /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -391,6 +390,7 @@
 		09030BB51B6D286800275BF5 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				DD4738A71FE07539006CB6BB /* Fixtures */,
 				09030BC71B6D2BA300275BF5 /* SwiftGenTests */,
 				DDDE51B91FAF81B9004203BE /* SwiftGenKitTests */,
 				DDDE504D1FAF6AD4004203BE /* TemplatesTests */,
@@ -549,6 +549,16 @@
 			path = Sources/SwiftGenKit;
 			sourceTree = "<group>";
 		};
+		DD4738A71FE07539006CB6BB /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				DDDE519A1FAF6B0A004203BE /* Generated */,
+				DDDE52771FAF81DB004203BE /* Resources */,
+				DDDE52761FAF81DB004203BE /* StencilContexts */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
 		DDC09C7D1E1D193F005C6EE6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -562,8 +572,6 @@
 		DDDE504D1FAF6AD4004203BE /* TemplatesTests */ = {
 			isa = PBXGroup;
 			children = (
-				DDDE519B1FAF6B0A004203BE /* StencilContexts */,
-				DDDE519A1FAF6B0A004203BE /* Generated */,
 				DDDE506D1FAF6AD4004203BE /* StringsTests.swift */,
 				DDDE506E1FAF6AD4004203BE /* FontsTests.swift */,
 				DDDE50F51FAF6AD4004203BE /* XCAssetsTests.swift */,
@@ -579,8 +587,6 @@
 		DDDE51B91FAF81B9004203BE /* SwiftGenKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				DDDE52761FAF81DB004203BE /* StencilContexts */,
-				DDDE52771FAF81DB004203BE /* Resources */,
 				DDDE51D91FAF81B9004203BE /* StringParserTests.swift */,
 				DDDE51DA1FAF81B9004203BE /* StringsTests.swift */,
 				DDDE51DB1FAF81B9004203BE /* FontsTests.swift */,
@@ -827,9 +833,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDDE519D1FAF6B0A004203BE /* StencilContexts in Resources */,
 				DDDE519C1FAF6B0A004203BE /* Generated in Resources */,
 				DDDE519E1FAF6D39004203BE /* templates in Resources */,
+				DD4738A81FE07596006CB6BB /* StencilContexts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
