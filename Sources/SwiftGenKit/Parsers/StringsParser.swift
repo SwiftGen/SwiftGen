@@ -37,22 +37,28 @@ public final class StringsParser: Parser {
 
   // Localizable.strings files are generally UTF16, not UTF8!
   public func parse(path: Path) throws {
-    let name = path.lastComponentWithoutExtension
+    if path.isDirectory {
+      try _ = path.children().map { childPath in
+        try parse(path: childPath)
+      }
+    } else {
+      let name = path.lastComponentWithoutExtension
 
-    guard tables[name] == nil else {
-      throw StringsParserError.duplicateTable(name: name)
-    }
-    guard let data = try? path.read() else {
-      throw StringsParserError.failureOnLoading(path: path.string)
-    }
+      guard tables[name] == nil else {
+        throw StringsParserError.duplicateTable(name: name)
+      }
+      guard let data = try? path.read() else {
+        throw StringsParserError.failureOnLoading(path: path.string)
+      }
 
-    let plist = try PropertyListSerialization.propertyList(from: data, format: nil)
-    guard let dict = plist as? [String: String] else {
-      throw StringsParserError.invalidFormat
-    }
+      let plist = try PropertyListSerialization.propertyList(from: data, format: nil)
+      guard let dict = plist as? [String: String] else {
+        throw StringsParserError.invalidFormat
+      }
 
-    tables[name] = try dict.map { key, translation in
-      try Entry(key: key, translation: translation)
+      tables[name] = try dict.map { key, translation in
+        try Entry(key: key, translation: translation)
+      }
     }
   }
 
