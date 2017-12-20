@@ -39,7 +39,9 @@ public final class StringsParser: Parser {
   public func parse(path: Path) throws {
     if path.isDirectory {
       try _ = path.children().map { childPath in
-        try parse(path: childPath)
+        if childPath.isDirectory || isStringsFile(name: childPath.lastComponent) {
+          try parse(path: childPath)
+        }
       }
     } else {
       let name = path.lastComponentWithoutExtension
@@ -60,6 +62,13 @@ public final class StringsParser: Parser {
         try Entry(key: key, translation: translation)
       }
     }
+  }
+
+  private func isStringsFile(name: String) -> Bool {
+    guard let fileExtension = NSURL(fileURLWithPath: name).pathExtension else {
+      return false
+    }
+    return fileExtension == "strings"
   }
 
   // MARK: - Public Enum types

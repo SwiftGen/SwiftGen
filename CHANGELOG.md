@@ -44,7 +44,7 @@ _None_
   [SwiftGen/templates#84](https://github.com/SwiftGen/templates/pull/84)
   [Txai Wieser](https://github.com/txaiwieser)
   [SwiftGen/templates#81](https://github.com/SwiftGen/templates/pull/81)
-  * Allow directory to be passed as input of strings parser.
+* Allow directory to be passed as input of strings parser.
   [Francesco De Marchi](https://github.com/pinoy4)
   [#371](https://github.com/SwiftGen/SwiftGen/pull/371)
 
