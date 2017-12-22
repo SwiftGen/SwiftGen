@@ -65,10 +65,7 @@ public final class StringsParser: Parser {
   }
 
   private func isStringsFile(name: String) -> Bool {
-    guard let fileExtension = NSURL(fileURLWithPath: name).pathExtension else {
-      return false
-    }
-    return fileExtension == "strings"
+    return NSURL(fileURLWithPath: name).pathExtension == "strings"
   }
 
   // MARK: - Public Enum types
