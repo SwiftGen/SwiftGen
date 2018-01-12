@@ -55,7 +55,7 @@ Once your Pull Request get merged, we'll be happy to give you push access to the
 
 ## SwiftGen Project Organization
 
-SwiftGen is actually structured as a GitHub organization containing various projects. The while SwiftGen tool is built by assembling the various components of SwiftGen, hosted in their respective repositories in the organization.
+SwiftGen is actually structured as a GitHub organization containing various projects. The whole SwiftGen tool is built by assembling the various components of SwiftGen, hosted in their respective repositories in the organization.
 
 Here's a recap of what each repository in the SwiftGen organization does:
 
