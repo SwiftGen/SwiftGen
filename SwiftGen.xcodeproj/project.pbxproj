@@ -43,6 +43,7 @@
 		6A1F55766EA11EAFC779A54D /* Pods_swiftgen_Templates_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5B6C235566A2764DB082A3 /* Pods_swiftgen_Templates_UnitTests.framework */; };
 		82D3EE8B9D4CB4F56FAB69E7 /* Pods_swiftgen_SwiftGen_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD9DB05E5E2AD16719217A83 /* Pods_swiftgen_SwiftGen_UnitTests.framework */; };
 		8A88803FDD468712B172EEE0 /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5CCE71BBB67D6589F2BD02F /* Pods_swiftgen.framework */; };
+		CC1B397A200D08AA00D36C6B /* CustomCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1B3979200D08AA00D36C6B /* CustomCommands.swift */; };
 		DD428DFF1FC50F56001649D6 /* SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */; };
 		DD428E001FC50F56001649D6 /* SwiftGenKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DD428E191FC50FBF001649D6 /* FontsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E071FC50FBF001649D6 /* FontsParser.swift */; };
@@ -261,6 +262,7 @@
 		B0EE5E67F265D5A9D3A3D1BE /* Pods-swiftgen-SwiftGen UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen-SwiftGen UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C791D79D3DA3CE1F7F4F34D7 /* Pods-swiftgen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.debug.xcconfig"; sourceTree = "<group>"; };
 		CBDB4DB0EA1AB2EFF27652BD /* Pods-swiftgen-Templates UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen-Templates UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CC1B3979200D08AA00D36C6B /* CustomCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCommands.swift; sourceTree = "<group>"; };
 		D1937BBBE70FB2C62FC255CB /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftGenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD428E071FC50FBF001649D6 /* FontsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsParser.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				091150301BD31A3300EBC803 /* Path+Commander.swift */,
 				379C7E881F8ECA7000267096 /* OutputDestination.swift */,
 				DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */,
+				CC1B3979200D08AA00D36C6B /* CustomCommands.swift */,
 				0921FBA01BE7D6B900B488B5 /* TemplatesCommands.swift */,
 				093405041F8113AA00187787 /* ConfigCommands.swift */,
 			);
@@ -1168,6 +1171,7 @@
 				379C7E921F8ECC1A00267096 /* Logs.swift in Sources */,
 				379C7E871F8ECA0C00267096 /* TemplateRef.swift in Sources */,
 				093405051F8113AA00187787 /* ConfigCommands.swift in Sources */,
+				CC1B397A200D08AA00D36C6B /* CustomCommands.swift in Sources */,
 				0934050B1F8158B800187787 /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

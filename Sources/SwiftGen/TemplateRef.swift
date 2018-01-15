@@ -45,9 +45,12 @@ enum TemplateRef {
   /// - Returns: The Path matching the template found
   /// - Throws: TemplateRef.Error
   ///
-  func resolvePath(forSubcommand subCmd: String) throws -> Path {
+  func resolvePath(forSubcommand subCmd: String? = nil) throws -> Path {
     switch self {
     case .name(let templateShortName):
+      guard let subCmd = subCmd else {
+        throw TemplateRef.Error.noTemplateProvided
+      }
       var path = appSupportTemplatesPath + subCmd + "\(templateShortName).stencil"
       if !path.isFile {
         path = bundledTemplatesPath + subCmd + "\(templateShortName).stencil"
