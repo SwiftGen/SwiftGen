@@ -14,7 +14,8 @@ _None_
 
 ### New Features
 
-_None_
+* Add a new `custom` command
+  [Philippe Bernery](https://github.com/pbernery)
 
 ### Internal Changes
 

@@ -42,6 +42,8 @@ let main = Group {
   for cmd in allParserCommands {
     $0.addCommand(cmd.name, cmd.description, cmd.command())
   }
+
+  $0.addCommand("custom", "generate code using a given template file", customCommand)
 }
 
 let version = Bundle.main
