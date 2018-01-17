@@ -32,6 +32,8 @@ _None_
   [SwiftGen/templates#84](https://github.com/SwiftGen/templates/pull/84)
   [Txai Wieser](https://github.com/txaiwieser)
   [SwiftGen/templates#81](https://github.com/SwiftGen/templates/pull/81)
+* Templates to generate ObjC source for .strings
+  [Eric Slosser](https://github.com/Mr-Fixit)
 
 ## 5.2.1
 
