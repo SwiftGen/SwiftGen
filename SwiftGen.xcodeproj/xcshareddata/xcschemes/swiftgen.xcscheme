@@ -139,6 +139,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "yaml $(PROJECT_DIR)/Tests/Fixtures/Resources/Yaml/root-mapping.yaml"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "templates list"
             isEnabled = "NO">
          </CommandLineArgument>
