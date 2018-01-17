@@ -30,6 +30,22 @@ class StringsTests: XCTestCase {
        suffix: "-publicAccess")
     ]
   }
+  
+  let variationsObjC: VariationGenerator = { name, context in
+    guard name == "localizable" else { return [(context: context, suffix: "")] }
+    
+    return [
+      (context: context,
+       suffix: ""),
+      (context: try StencilContext.enrich(context: context,
+                                          parameters: ["enumName=XCTLoc"]),
+       suffix: "-customname"),
+      (context: try StencilContext.enrich(context: context,
+                                          parameters: ["noComments"]),
+       suffix: "-no-comments"),
+    ]
+  }
+  
 
   func testFlatSwift2() {
     test(template: "flat-swift2",
@@ -71,5 +87,19 @@ class StringsTests: XCTestCase {
          contextNames: Contexts.all,
          directory: .strings,
          contextVariations: variations)
+  }
+  
+  func testObjectiveCHeader() {
+    test(template: "objc-h",
+         contextNames: Contexts.all,
+         directory: .strings,
+         contextVariations: variationsObjC)
+  }
+
+  func testObjectiveCSource() {
+    test(template: "objc-m",
+         contextNames: Contexts.all,
+         directory: .strings,
+         contextVariations: variationsObjC)
   }
 }

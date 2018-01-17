@@ -141,7 +141,7 @@ extension XCTestCase {
    
    - Parameter template: The name of the template (without the `stencil` extension)
    - Parameter contextNames: A list of context names (without the `plist` extension)
-   - Parameter directory: The directory to look for files in (correspons to de command)
+   - Parameter directory: The directory to look for files in (corresponds to the command)
    - Parameter resourceDirectory: The directory to look for files in (corresponds to the command)
    - Parameter contextVariations: Optional closure to generate context variations.
    */
