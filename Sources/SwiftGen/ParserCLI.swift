@@ -63,6 +63,12 @@ let allParserCommands: [ParserCLI] = [
     pathDescription: "JSON files (or directories that contain them) to parse."
   ),
   .init(
+    parserType: Plist.Parser.self,
+    name: "plist",
+    description: "generate code for custom plist flies",
+    pathDescription: "Plist files (or directories that contain them) to parse."
+  ),
+  .init(
     parserType: Strings.Parser.self,
     name: "strings",
     description: "generate code for your Localizable.strings file(s)",

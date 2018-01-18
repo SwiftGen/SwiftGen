@@ -78,6 +78,9 @@
 		DDB0B99B209CE4A300E467C2 /* YamlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B99A209CE4A300E467C2 /* YamlParser.swift */; };
 		DDB0B99D209CE4B100E467C2 /* YamlContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B99C209CE4B100E467C2 /* YamlContext.swift */; };
 		DDB0B99F209CE4E100E467C2 /* YamlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B99E209CE4E100E467C2 /* YamlTests.swift */; };
+		DDB0B9A2209CE7CD00E467C2 /* PlistParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B9A1209CE7CD00E467C2 /* PlistParser.swift */; };
+		DDB0B9A4209CE7E300E467C2 /* PlistContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B9A3209CE7E300E467C2 /* PlistContext.swift */; };
+		DDB0B9A6209CE7FC00E467C2 /* PlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B9A5209CE7FC00E467C2 /* PlistTests.swift */; };
 		DDC09D021E1D199A005C6EE6 /* templates in Resources */ = {isa = PBXBuildFile; fileRef = DDC09D011E1D199A005C6EE6 /* templates */; };
 		DDC335E47ABB50395E595AB0 /* Pods_swiftgen_SwiftGen_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8876ECE7B9852963F6B5 /* Pods_swiftgen_SwiftGen_UnitTests.framework */; };
 		DDC8211520967180007A55F3 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC8211420967180007A55F3 /* Path.swift */; };
@@ -329,6 +332,9 @@
 		DDB0B99A209CE4A300E467C2 /* YamlParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamlParser.swift; sourceTree = "<group>"; };
 		DDB0B99C209CE4B100E467C2 /* YamlContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamlContext.swift; sourceTree = "<group>"; };
 		DDB0B99E209CE4E100E467C2 /* YamlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamlTests.swift; sourceTree = "<group>"; };
+		DDB0B9A1209CE7CD00E467C2 /* PlistParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistParser.swift; sourceTree = "<group>"; };
+		DDB0B9A3209CE7E300E467C2 /* PlistContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistContext.swift; sourceTree = "<group>"; };
+		DDB0B9A5209CE7FC00E467C2 /* PlistTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistTests.swift; sourceTree = "<group>"; };
 		DDC09D011E1D199A005C6EE6 /* templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = templates; sourceTree = "<group>"; };
 		DDC8211420967180007A55F3 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		DDC82116209672E1007A55F3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -579,6 +585,7 @@
 				DD428E081FC50FBF001649D6 /* Colors */,
 				DD9F687D20955DEF004EB720 /* Fonts */,
 				DDCCACD5209550F60017FB43 /* InterfaceBuilder */,
+				DDB0B9A0209CE7CD00E467C2 /* Plist */,
 				DD9F68822095604E004EB720 /* Strings */,
 				DDB0B999209CE4A300E467C2 /* Yaml */,
 				DD428E0F1FC50FBF001649D6 /* Parser.swift */,
@@ -603,6 +610,7 @@
 				DD428E141FC50FBF001649D6 /* ColorsContext.swift */,
 				DD428E131FC50FBF001649D6 /* FontsContext.swift */,
 				DD428E161FC50FBF001649D6 /* InterfaceBuilderContext.swift */,
+				DDB0B9A3209CE7E300E467C2 /* PlistContext.swift */,
 				DD428E171FC50FBF001649D6 /* StringsContext.swift */,
 				DDB0B99C209CE4B100E467C2 /* YamlContext.swift */,
 			);
@@ -686,6 +694,14 @@
 			path = Yaml;
 			sourceTree = "<group>";
 		};
+		DDB0B9A0209CE7CD00E467C2 /* Plist */ = {
+			isa = PBXGroup;
+			children = (
+				DDB0B9A1209CE7CD00E467C2 /* PlistParser.swift */,
+			);
+			path = Plist;
+			sourceTree = "<group>";
+		};
 		DDC09C7D1E1D193F005C6EE6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -745,6 +761,7 @@
 				DDDE51DB1FAF81B9004203BE /* FontsTests.swift */,
 				DDDE521E1FAF81BA004203BE /* InterfaceBuilderiOSTests.swift */,
 				DDDE521C1FAF81BA004203BE /* InterfaceBuilderMacOSTests.swift */,
+				DDB0B9A5209CE7FC00E467C2 /* PlistTests.swift */,
 				DDDE51D91FAF81B9004203BE /* StringParserTests.swift */,
 				DDDE51DA1FAF81B9004203BE /* StringsTests.swift */,
 				DDDE521D1FAF81BA004203BE /* TestsHelper.swift */,
@@ -1333,6 +1350,7 @@
 				DD428E251FC50FBF001649D6 /* AssetsCatalogContext.swift in Sources */,
 				DD428E1A1FC50FBF001649D6 /* ColorsCLRFileParser.swift in Sources */,
 				DD428E241FC50FBF001649D6 /* ColorsContext.swift in Sources */,
+				DDB0B9A2209CE7CD00E467C2 /* PlistParser.swift in Sources */,
 				DD428E201FC50FBF001649D6 /* Parser.swift in Sources */,
 				DDB0B99B209CE4A300E467C2 /* YamlParser.swift in Sources */,
 				DDC82117209672E1007A55F3 /* String.swift in Sources */,
@@ -1344,6 +1362,7 @@
 				DD9F687B20955D51004EB720 /* AssetsCatalogParser.swift in Sources */,
 				DD428E191FC50FBF001649D6 /* FontsParser.swift in Sources */,
 				DDC8211520967180007A55F3 /* Path.swift in Sources */,
+				DDB0B9A4209CE7E300E467C2 /* PlistContext.swift in Sources */,
 				DD428E1C1FC50FBF001649D6 /* ColorsTXTFileParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1368,6 +1387,7 @@
 			files = (
 				DDDE52711FAF81BA004203BE /* InterfaceBuilderMacOSTests.swift in Sources */,
 				DDDE52731FAF81BA004203BE /* InterfaceBuilderiOSTests.swift in Sources */,
+				DDB0B9A6209CE7FC00E467C2 /* PlistTests.swift in Sources */,
 				DDDE52721FAF81BA004203BE /* TestsHelper.swift in Sources */,
 				DDDE523B1FAF81BA004203BE /* FontsTests.swift in Sources */,
 				DDDE523A1FAF81BA004203BE /* StringsTests.swift in Sources */,
