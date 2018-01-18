@@ -57,10 +57,22 @@ let allParserCommands: [ParserCLI] = [
     pathDescription: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard"
   ),
   .init(
+    parserType: Yaml.Parser.self,
+    name: "json",
+    description: "generate code for custom json configuration files",
+    pathDescription: "JSON files (or directories that contain them) to parse."
+  ),
+  .init(
     parserType: Strings.Parser.self,
     name: "strings",
     description: "generate code for your Localizable.strings file(s)",
     pathDescription: "Strings file(s) to parse."
+  ),
+  .init(
+    parserType: Yaml.Parser.self,
+    name: "yaml",
+    description: "generate code for custom yaml configuration files",
+    pathDescription: "YAML files (or directories that contain them) to parse."
   ),
 
   // Deprecated

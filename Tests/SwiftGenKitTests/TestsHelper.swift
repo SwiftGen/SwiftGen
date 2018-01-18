@@ -156,6 +156,7 @@ class Fixtures {
     case interfaceBuilderMacOS = "IB-macOS"
     case strings = "Strings"
     case xcassets = "XCAssets"
+    case yaml = "Yaml"
   }
 
   private static let testBundle = Bundle(for: Fixtures.self)

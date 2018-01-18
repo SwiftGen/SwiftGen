@@ -75,6 +75,9 @@
 		DD9F688620956074004EB720 /* PlaceholderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F688420956074004EB720 /* PlaceholderType.swift */; };
 		DDB0B9C2209E390700E467C2 /* ConfigOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B9C1209E390700E467C2 /* ConfigOutput.swift */; };
 		DDB0B9C3209E3D9900E467C2 /* ConfigOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B9C1209E390700E467C2 /* ConfigOutput.swift */; };
+		DDB0B99B209CE4A300E467C2 /* YamlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B99A209CE4A300E467C2 /* YamlParser.swift */; };
+		DDB0B99D209CE4B100E467C2 /* YamlContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B99C209CE4B100E467C2 /* YamlContext.swift */; };
+		DDB0B99F209CE4E100E467C2 /* YamlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B99E209CE4E100E467C2 /* YamlTests.swift */; };
 		DDC09D021E1D199A005C6EE6 /* templates in Resources */ = {isa = PBXBuildFile; fileRef = DDC09D011E1D199A005C6EE6 /* templates */; };
 		DDC335E47ABB50395E595AB0 /* Pods_swiftgen_SwiftGen_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8876ECE7B9852963F6B5 /* Pods_swiftgen_SwiftGen_UnitTests.framework */; };
 		DDC8211520967180007A55F3 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC8211420967180007A55F3 /* Path.swift */; };
@@ -323,6 +326,9 @@
 		DD9F688320956074004EB720 /* StringsEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsEntry.swift; sourceTree = "<group>"; };
 		DD9F688420956074004EB720 /* PlaceholderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderType.swift; sourceTree = "<group>"; };
 		DDB0B9C1209E390700E467C2 /* ConfigOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigOutput.swift; sourceTree = "<group>"; };
+		DDB0B99A209CE4A300E467C2 /* YamlParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamlParser.swift; sourceTree = "<group>"; };
+		DDB0B99C209CE4B100E467C2 /* YamlContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamlContext.swift; sourceTree = "<group>"; };
+		DDB0B99E209CE4E100E467C2 /* YamlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamlTests.swift; sourceTree = "<group>"; };
 		DDC09D011E1D199A005C6EE6 /* templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = templates; sourceTree = "<group>"; };
 		DDC8211420967180007A55F3 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		DDC82116209672E1007A55F3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -574,6 +580,7 @@
 				DD9F687D20955DEF004EB720 /* Fonts */,
 				DDCCACD5209550F60017FB43 /* InterfaceBuilder */,
 				DD9F68822095604E004EB720 /* Strings */,
+				DDB0B999209CE4A300E467C2 /* Yaml */,
 				DD428E0F1FC50FBF001649D6 /* Parser.swift */,
 			);
 			path = Parsers;
@@ -597,6 +604,7 @@
 				DD428E131FC50FBF001649D6 /* FontsContext.swift */,
 				DD428E161FC50FBF001649D6 /* InterfaceBuilderContext.swift */,
 				DD428E171FC50FBF001649D6 /* StringsContext.swift */,
+				DDB0B99C209CE4B100E467C2 /* YamlContext.swift */,
 			);
 			path = Stencil;
 			sourceTree = "<group>";
@@ -670,6 +678,14 @@
 			path = Strings;
 			sourceTree = "<group>";
 		};
+		DDB0B999209CE4A300E467C2 /* Yaml */ = {
+			isa = PBXGroup;
+			children = (
+				DDB0B99A209CE4A300E467C2 /* YamlParser.swift */,
+			);
+			path = Yaml;
+			sourceTree = "<group>";
+		};
 		DDC09C7D1E1D193F005C6EE6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -732,6 +748,7 @@
 				DDDE51D91FAF81B9004203BE /* StringParserTests.swift */,
 				DDDE51DA1FAF81B9004203BE /* StringsTests.swift */,
 				DDDE521D1FAF81BA004203BE /* TestsHelper.swift */,
+				DDB0B99E209CE4E100E467C2 /* YamlTests.swift */,
 				DDDE521F1FAF81BA004203BE /* Info.plist */,
 			);
 			path = SwiftGenKitTests;
@@ -1301,6 +1318,7 @@
 				DD9F687A20955D51004EB720 /* CatalogEntry.swift in Sources */,
 				DD428E261FC50FBF001649D6 /* InterfaceBuilderContext.swift in Sources */,
 				DD428E221FC50FBF001649D6 /* ColorsParser.swift in Sources */,
+				DDB0B99D209CE4B100E467C2 /* YamlContext.swift in Sources */,
 				DD9F687F20955E07004EB720 /* Font.swift in Sources */,
 				DD428E1B1FC50FBF001649D6 /* ColorsJSONFileParser.swift in Sources */,
 				DD9F688120955F57004EB720 /* CTFont.swift in Sources */,
@@ -1316,6 +1334,7 @@
 				DD428E1A1FC50FBF001649D6 /* ColorsCLRFileParser.swift in Sources */,
 				DD428E241FC50FBF001649D6 /* ColorsContext.swift in Sources */,
 				DD428E201FC50FBF001649D6 /* Parser.swift in Sources */,
+				DDB0B99B209CE4A300E467C2 /* YamlParser.swift in Sources */,
 				DDC82117209672E1007A55F3 /* String.swift in Sources */,
 				DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */,
 				DD9F687C20955D51004EB720 /* Catalog.swift in Sources */,
@@ -1355,6 +1374,7 @@
 				DDDE52391FAF81BA004203BE /* StringParserTests.swift in Sources */,
 				DDDE52751FAF81BA004203BE /* AssetCatalogTests.swift in Sources */,
 				DDDE523D1FAF81BA004203BE /* ColorsCLRFileTests.swift in Sources */,
+				DDB0B99F209CE4E100E467C2 /* YamlTests.swift in Sources */,
 				DDDE523F1FAF81BA004203BE /* ColorsXMLFileTests.swift in Sources */,
 				DDDE523C1FAF81BA004203BE /* ColorsJSONFileTests.swift in Sources */,
 				DDDE52701FAF81BA004203BE /* ColorsTextFileTests.swift in Sources */,
