@@ -25,6 +25,10 @@
 		234F7E7F1DEBD765001B3C10 /* TemplatesCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921FBA01BE7D6B900B488B5 /* TemplatesCommands.swift */; };
 		32091B001FDE42DB00B1E2B4 /* IdentifiersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32091AFF1FDE42DB00B1E2B4 /* IdentifiersParser.swift */; };
 		32091B021FDE5B8F00B1E2B4 /* IdentifiersContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32091B011FDE5B8F00B1E2B4 /* IdentifiersContext.swift */; };
+		32406FA11FE0B00A00DE2B75 /* IdentifiersiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32406FA01FE0B00A00DE2B75 /* IdentifiersiOSTests.swift */; };
+		32406FD11FE0D8AD00DE2B75 /* IdentifiersMacOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32406FD01FE0D8AD00DE2B75 /* IdentifiersMacOSTests.swift */; };
+		32406FD31FE0ECFB00DE2B75 /* IdentifiersiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32406FD21FE0ECFB00DE2B75 /* IdentifiersiOSTests.swift */; };
+		32406FD51FE0F81C00DE2B75 /* IdentifiersMacOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32406FD41FE0F81C00DE2B75 /* IdentifiersMacOSTests.swift */; };
 		379C7E871F8ECA0C00267096 /* TemplateRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E861F8ECA0C00267096 /* TemplateRef.swift */; };
 		379C7E891F8ECA7000267096 /* OutputDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E881F8ECA7000267096 /* OutputDestination.swift */; };
 		379C7E8A1F8ECA8900267096 /* TemplateRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E861F8ECA0C00267096 /* TemplateRef.swift */; };
@@ -243,6 +247,10 @@
 		24D0E9A6205497F0D1C00AAD /* Pods-SwiftGenKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit.release.xcconfig"; sourceTree = "<group>"; };
 		32091AFF1FDE42DB00B1E2B4 /* IdentifiersParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiersParser.swift; sourceTree = "<group>"; };
 		32091B011FDE5B8F00B1E2B4 /* IdentifiersContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiersContext.swift; sourceTree = "<group>"; };
+		32406FA01FE0B00A00DE2B75 /* IdentifiersiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiersiOSTests.swift; sourceTree = "<group>"; };
+		32406FD01FE0D8AD00DE2B75 /* IdentifiersMacOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiersMacOSTests.swift; sourceTree = "<group>"; };
+		32406FD21FE0ECFB00DE2B75 /* IdentifiersiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiersiOSTests.swift; sourceTree = "<group>"; };
+		32406FD41FE0F81C00DE2B75 /* IdentifiersMacOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiersMacOSTests.swift; sourceTree = "<group>"; };
 		379C7E861F8ECA0C00267096 /* TemplateRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateRef.swift; sourceTree = "<group>"; };
 		379C7E881F8ECA7000267096 /* OutputDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDestination.swift; sourceTree = "<group>"; };
 		379C7E8C1F8ECB2400267096 /* Path+AppSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+AppSupport.swift"; sourceTree = "<group>"; };
@@ -586,6 +594,8 @@
 				DDDE50F81FAF6AD4004203BE /* TestsHelper.swift */,
 				DDDE50F91FAF6AD4004203BE /* StoryboardsiOSTests.swift */,
 				DDDE50FA1FAF6AD4004203BE /* Info.plist */,
+				32406FD21FE0ECFB00DE2B75 /* IdentifiersiOSTests.swift */,
+				32406FD41FE0F81C00DE2B75 /* IdentifiersMacOSTests.swift */,
 			);
 			path = TemplatesTests;
 			sourceTree = "<group>";
@@ -606,6 +616,8 @@
 				DDDE521E1FAF81BA004203BE /* StoryboardsiOSTests.swift */,
 				DDDE521F1FAF81BA004203BE /* Info.plist */,
 				DDDE52201FAF81BA004203BE /* AssetCatalogTests.swift */,
+				32406FA01FE0B00A00DE2B75 /* IdentifiersiOSTests.swift */,
+				32406FD01FE0D8AD00DE2B75 /* IdentifiersMacOSTests.swift */,
 			);
 			path = SwiftGenKitTests;
 			sourceTree = "<group>";
@@ -1208,8 +1220,10 @@
 			files = (
 				DDDE51961FAF6AD4004203BE /* StoryboardsMacOSTests.swift in Sources */,
 				DDDE51981FAF6AD4004203BE /* StoryboardsiOSTests.swift in Sources */,
+				32406FD51FE0F81C00DE2B75 /* IdentifiersMacOSTests.swift in Sources */,
 				DDDE51971FAF6AD4004203BE /* TestsHelper.swift in Sources */,
 				DDDE51941FAF6AD4004203BE /* XCAssetsTests.swift in Sources */,
+				32406FD31FE0ECFB00DE2B75 /* IdentifiersiOSTests.swift in Sources */,
 				DDDE51951FAF6AD4004203BE /* ColorsTests.swift in Sources */,
 				DDDE51141FAF6AD4004203BE /* FontsTests.swift in Sources */,
 				DDDE51131FAF6AD4004203BE /* StringsTests.swift in Sources */,
@@ -1222,6 +1236,7 @@
 			files = (
 				DDDE52711FAF81BA004203BE /* StoryboardsMacOSTests.swift in Sources */,
 				DDDE52731FAF81BA004203BE /* StoryboardsiOSTests.swift in Sources */,
+				32406FD11FE0D8AD00DE2B75 /* IdentifiersMacOSTests.swift in Sources */,
 				DDDE52721FAF81BA004203BE /* TestsHelper.swift in Sources */,
 				DDDE523B1FAF81BA004203BE /* FontsTests.swift in Sources */,
 				DDDE523A1FAF81BA004203BE /* StringsTests.swift in Sources */,
@@ -1231,6 +1246,7 @@
 				DDDE523F1FAF81BA004203BE /* ColorsXMLFileTests.swift in Sources */,
 				DDDE523C1FAF81BA004203BE /* ColorsJSONFileTests.swift in Sources */,
 				DDDE52701FAF81BA004203BE /* ColorsTextFileTests.swift in Sources */,
+				32406FA11FE0B00A00DE2B75 /* IdentifiersiOSTests.swift in Sources */,
 				DDDE523E1FAF81BA004203BE /* ColorsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
