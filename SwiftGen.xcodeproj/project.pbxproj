@@ -23,6 +23,8 @@
 		234F7E7D1DEBD765001B3C10 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7B2D31BCC382800D7F488 /* main.swift */; };
 		234F7E7E1DEBD765001B3C10 /* Path+Commander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091150301BD31A3300EBC803 /* Path+Commander.swift */; };
 		234F7E7F1DEBD765001B3C10 /* TemplatesCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921FBA01BE7D6B900B488B5 /* TemplatesCommands.swift */; };
+		32091B001FDE42DB00B1E2B4 /* IdentifiersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32091AFF1FDE42DB00B1E2B4 /* IdentifiersParser.swift */; };
+		32091B021FDE5B8F00B1E2B4 /* IdentifiersContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32091B011FDE5B8F00B1E2B4 /* IdentifiersContext.swift */; };
 		379C7E871F8ECA0C00267096 /* TemplateRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E861F8ECA0C00267096 /* TemplateRef.swift */; };
 		379C7E891F8ECA7000267096 /* OutputDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E881F8ECA7000267096 /* OutputDestination.swift */; };
 		379C7E8A1F8ECA8900267096 /* TemplateRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E861F8ECA0C00267096 /* TemplateRef.swift */; };
@@ -239,6 +241,8 @@
 		234F7E6E1DEBD5C5001B3C10 /* swiftgen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftgen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		234F7E771DEBD5C5001B3C10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24D0E9A6205497F0D1C00AAD /* Pods-SwiftGenKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit.release.xcconfig"; sourceTree = "<group>"; };
+		32091AFF1FDE42DB00B1E2B4 /* IdentifiersParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiersParser.swift; sourceTree = "<group>"; };
+		32091B011FDE5B8F00B1E2B4 /* IdentifiersContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiersContext.swift; sourceTree = "<group>"; };
 		379C7E861F8ECA0C00267096 /* TemplateRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateRef.swift; sourceTree = "<group>"; };
 		379C7E881F8ECA7000267096 /* OutputDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDestination.swift; sourceTree = "<group>"; };
 		379C7E8C1F8ECB2400267096 /* Path+AppSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+AppSupport.swift"; sourceTree = "<group>"; };
@@ -504,6 +508,7 @@
 				DD428E0F1FC50FBF001649D6 /* Parser.swift */,
 				DD428E101FC50FBF001649D6 /* StringsParser.swift */,
 				DD428E111FC50FBF001649D6 /* ColorsParser.swift */,
+				32091AFF1FDE42DB00B1E2B4 /* IdentifiersParser.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -527,6 +532,7 @@
 				DD428E151FC50FBF001649D6 /* AssetsCatalogContext.swift */,
 				DD428E161FC50FBF001649D6 /* StoryboardsContext.swift */,
 				DD428E171FC50FBF001649D6 /* StringsContext.swift */,
+				32091B011FDE5B8F00B1E2B4 /* IdentifiersContext.swift */,
 			);
 			path = Stencil;
 			sourceTree = "<group>";
@@ -1187,7 +1193,9 @@
 				DD428E201FC50FBF001649D6 /* Parser.swift in Sources */,
 				DD428E1E1FC50FBF001649D6 /* AssetsCatalogParser.swift in Sources */,
 				DD428E271FC50FBF001649D6 /* StringsContext.swift in Sources */,
+				32091B021FDE5B8F00B1E2B4 /* IdentifiersContext.swift in Sources */,
 				DD428E211FC50FBF001649D6 /* StringsParser.swift in Sources */,
+				32091B001FDE42DB00B1E2B4 /* IdentifiersParser.swift in Sources */,
 				DD428E231FC50FBF001649D6 /* FontsContext.swift in Sources */,
 				DD428E191FC50FBF001649D6 /* FontsParser.swift in Sources */,
 				DD428E1C1FC50FBF001649D6 /* ColorsTXTFileParser.swift in Sources */,
