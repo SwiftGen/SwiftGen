@@ -14,7 +14,10 @@ _None_
 
 ### New Features
 
-_None_
+* Identifiers: generate accessibility identifiers using `swiftgen identifiers`.  
+  [Ian Keen](https://github.com/iankeen)
+  [#369](https://github.com/SwiftGen/SwiftGen/pull/369)
+
 
 ### Internal Changes
 
