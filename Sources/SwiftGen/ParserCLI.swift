@@ -48,5 +48,11 @@ let allParserCommands: [ParserCLI] = [
     name: "fonts",
     description: "generate code for your fonts",
     pathDescription: "Directory(ies) to parse."
+  ),
+  .init(
+    parserType: IdentifiersParser.self,
+    name: "identifiers",
+    description: "generate code for your accessibility identifiers",
+    pathDescription: "Directory to scan for .storyboard/.xib files. Can also be a path to a single .storyboard/.xib"
   )
 ]
