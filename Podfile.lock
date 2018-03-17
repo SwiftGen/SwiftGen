@@ -1,6 +1,6 @@
 PODS:
   - Commander (0.8.0)
-  - Kanna (2.2.1)
+  - Kanna (4.0.0)
   - PathKit (0.8.0)
   - Stencil (0.10.1):
     - PathKit (~> 0.8.0)
@@ -17,7 +17,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Commander: 6eda7635b133e239faa85bf75dcab88d6fd63aaa
-  Kanna: 182789ab065e8f9a6ccc2a74ce6283d3401c0c4a
+  Kanna: d5ae2a26472f7e7a474e7f36a9cd8aa2c8c63ad3
   PathKit: dcab05d701474011aae0e40cf892298a831f63d6
   Stencil: 40b382c52edab08f1e800e6144c1f04ae47a7a9a
   StencilSwiftKit: b2d282c788559bc19166eee070ffa513fedf8c05

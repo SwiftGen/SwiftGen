@@ -17,8 +17,11 @@ final class ColorsXMLFileParser: ColorsFileTypeParser {
   }
 
   func parseFile(at path: Path) throws -> Palette {
-    guard let document = Kanna.XML(xml: try path.read(), encoding: .utf8) else {
-      throw ColorsParserError.invalidFile(path: path, reason: "Unknown XML parser error.")
+    let document: Kanna.XMLDocument
+    do {
+      document = try Kanna.XML(xml: path.read(), encoding: .utf8)
+    } catch let error {
+      throw ColorsParserError.invalidFile(path: path, reason: "XML parser error: \(error).")
     }
 
     var colors = [String: UInt32]()
