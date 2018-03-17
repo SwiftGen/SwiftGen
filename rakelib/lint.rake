@@ -2,7 +2,7 @@
 # - WORKSPACE
 
 namespace :lint do
-  SWIFTLINT_VERSION = '0.23.1'.freeze
+  SWIFTLINT_VERSION = '0.25.0'.freeze
 
   desc 'Install swiftlint'
   task :install do |task|

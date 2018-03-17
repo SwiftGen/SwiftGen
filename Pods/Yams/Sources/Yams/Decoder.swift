@@ -17,7 +17,7 @@ public class YAMLDecoder {
             let node = try Yams.compose(yaml: yaml, .basic) ?? ""
             let decoder = _Decoder(referencing: node, userInfo: userInfo)
             let container = try decoder.singleValueContainer()
-            return try container.decode(T.self)
+            return try container.decode(type)
         } catch let error as DecodingError {
             throw error
         } catch {
@@ -62,9 +62,10 @@ struct _Decoder: Decoder { // swiftlint:disable:this type_name
     // MARK: -
 
     /// constuct `T` from `node`
-    fileprivate func construct<T: ScalarConstructible>() throws -> T {
-        guard let constructed = T.construct(from: node) else {
-            throw _typeMismatch(at: codingPath, expectation: T.self, reality: node)
+    fileprivate func construct<T: ScalarConstructible>(_ type: T.Type) throws -> T {
+        let scalar = try self.scalar()
+        guard let constructed = type.construct(from: scalar) else {
+            throw _typeMismatch(at: codingPath, expectation: type, reality: scalar)
         }
         return constructed
     }
@@ -72,6 +73,18 @@ struct _Decoder: Decoder { // swiftlint:disable:this type_name
     /// create a new `_Decoder` instance referencing `node` as `key` inheriting `userInfo`
     fileprivate func decoder(referencing node: Node, `as` key: CodingKey) -> _Decoder {
         return .init(referencing: node, userInfo: userInfo, codingPath: codingPath + [key])
+    }
+
+    /// returns `Node.Scalar` or throws `DecodingError.typeMismatch`
+    fileprivate func scalar() throws -> Node.Scalar {
+        switch node {
+        case .scalar(let scalar):
+            return scalar
+        case .mapping(let mapping):
+            throw _typeMismatch(at: codingPath, expectation: Node.Scalar.self, reality: mapping)
+        case .sequence(let sequence):
+            throw _typeMismatch(at: codingPath, expectation: Node.Scalar.self, reality: sequence)
+        }
     }
 }
 
@@ -91,27 +104,27 @@ struct _KeyedDecodingContainer<K: CodingKey> : KeyedDecodingContainerProtocol {
     // MARK: - Swift.KeyedDecodingContainerProtocol Methods
 
     var codingPath: [CodingKey] { return decoder.codingPath }
-    var allKeys: [Key] { return mapping.keys.flatMap { $0.string.flatMap(Key.init(stringValue:)) } }
+    var allKeys: [Key] { return mapping.keys.compactMap { $0.string.flatMap(Key.init(stringValue:)) } }
     func contains(_ key: Key) -> Bool { return mapping[key.stringValue] != nil }
 
     func decodeNil(forKey key: Key) throws -> Bool {
         return try node(for: key) == Node("null", Tag(.null))
     }
 
-    func decode(_ type: Bool.Type, forKey key: Key)   throws -> Bool { return try decoder(for: key).construct() }
-    func decode(_ type: Int.Type, forKey key: Key)    throws -> Int { return try decoder(for: key).construct() }
-    func decode(_ type: Int8.Type, forKey key: Key)   throws -> Int8 { return try decoder(for: key).construct() }
-    func decode(_ type: Int16.Type, forKey key: Key)  throws -> Int16 { return try decoder(for: key).construct() }
-    func decode(_ type: Int32.Type, forKey key: Key)  throws -> Int32 { return try decoder(for: key).construct() }
-    func decode(_ type: Int64.Type, forKey key: Key)  throws -> Int64 { return try decoder(for: key).construct() }
-    func decode(_ type: UInt.Type, forKey key: Key)   throws -> UInt { return try decoder(for: key).construct() }
-    func decode(_ type: UInt8.Type, forKey key: Key)  throws -> UInt8 { return try decoder(for: key).construct() }
-    func decode(_ type: UInt16.Type, forKey key: Key) throws -> UInt16 { return try decoder(for: key).construct() }
-    func decode(_ type: UInt32.Type, forKey key: Key) throws -> UInt32 { return try decoder(for: key).construct() }
-    func decode(_ type: UInt64.Type, forKey key: Key) throws -> UInt64 { return try decoder(for: key).construct() }
-    func decode(_ type: Float.Type, forKey key: Key)  throws -> Float { return try decoder(for: key).construct() }
-    func decode(_ type: Double.Type, forKey key: Key) throws -> Double { return try decoder(for: key).construct() }
-    func decode(_ type: String.Type, forKey key: Key) throws -> String { return try decoder(for: key).construct() }
+    func decode(_ type: Bool.Type, forKey key: Key)   throws -> Bool { return try decoder(for: key).construct(type) }
+    func decode(_ type: Int.Type, forKey key: Key)    throws -> Int { return try decoder(for: key).construct(type) }
+    func decode(_ type: Int8.Type, forKey key: Key)   throws -> Int8 { return try decoder(for: key).construct(type) }
+    func decode(_ type: Int16.Type, forKey key: Key)  throws -> Int16 { return try decoder(for: key).construct(type) }
+    func decode(_ type: Int32.Type, forKey key: Key)  throws -> Int32 { return try decoder(for: key).construct(type) }
+    func decode(_ type: Int64.Type, forKey key: Key)  throws -> Int64 { return try decoder(for: key).construct(type) }
+    func decode(_ type: UInt.Type, forKey key: Key)   throws -> UInt { return try decoder(for: key).construct(type) }
+    func decode(_ type: UInt8.Type, forKey key: Key)  throws -> UInt8 { return try decoder(for: key).construct(type) }
+    func decode(_ type: UInt16.Type, forKey key: Key) throws -> UInt16 { return try decoder(for: key).construct(type) }
+    func decode(_ type: UInt32.Type, forKey key: Key) throws -> UInt32 { return try decoder(for: key).construct(type) }
+    func decode(_ type: UInt64.Type, forKey key: Key) throws -> UInt64 { return try decoder(for: key).construct(type) }
+    func decode(_ type: Float.Type, forKey key: Key)  throws -> Float { return try decoder(for: key).construct(type) }
+    func decode(_ type: Double.Type, forKey key: Key) throws -> Double { return try decoder(for: key).construct(type) }
+    func decode(_ type: String.Type, forKey key: Key) throws -> String { return try decoder(for: key).construct(type) }
 
     func decode<T>(_ type: T.Type, forKey key: Key) throws -> T where T: Decodable {
         return try decoder(for: key).decode(type) // use SingleValueDecodingContainer's method
@@ -171,20 +184,20 @@ struct _UnkeyedDecodingContainer: UnkeyedDecodingContainer { // swiftlint:disabl
         }
     }
 
-    mutating func decode(_ type: Bool.Type)   throws -> Bool { return try construct() }
-    mutating func decode(_ type: Int.Type)    throws -> Int { return try construct() }
-    mutating func decode(_ type: Int8.Type)   throws -> Int8 { return try construct() }
-    mutating func decode(_ type: Int16.Type)  throws -> Int16 { return try construct() }
-    mutating func decode(_ type: Int32.Type)  throws -> Int32 { return try construct() }
-    mutating func decode(_ type: Int64.Type)  throws -> Int64 { return try construct() }
-    mutating func decode(_ type: UInt.Type)   throws -> UInt { return try construct() }
-    mutating func decode(_ type: UInt8.Type)  throws -> UInt8 { return try construct() }
-    mutating func decode(_ type: UInt16.Type) throws -> UInt16 { return try construct() }
-    mutating func decode(_ type: UInt32.Type) throws -> UInt32 { return try construct() }
-    mutating func decode(_ type: UInt64.Type) throws -> UInt64 { return try construct() }
-    mutating func decode(_ type: Float.Type)  throws -> Float { return try construct() }
-    mutating func decode(_ type: Double.Type) throws -> Double { return try construct() }
-    mutating func decode(_ type: String.Type) throws -> String { return try construct() }
+    mutating func decode(_ type: Bool.Type)   throws -> Bool { return try construct(type) }
+    mutating func decode(_ type: Int.Type)    throws -> Int { return try construct(type) }
+    mutating func decode(_ type: Int8.Type)   throws -> Int8 { return try construct(type) }
+    mutating func decode(_ type: Int16.Type)  throws -> Int16 { return try construct(type) }
+    mutating func decode(_ type: Int32.Type)  throws -> Int32 { return try construct(type) }
+    mutating func decode(_ type: Int64.Type)  throws -> Int64 { return try construct(type) }
+    mutating func decode(_ type: UInt.Type)   throws -> UInt { return try construct(type) }
+    mutating func decode(_ type: UInt8.Type)  throws -> UInt8 { return try construct(type) }
+    mutating func decode(_ type: UInt16.Type) throws -> UInt16 { return try construct(type) }
+    mutating func decode(_ type: UInt32.Type) throws -> UInt32 { return try construct(type) }
+    mutating func decode(_ type: UInt64.Type) throws -> UInt64 { return try construct(type) }
+    mutating func decode(_ type: Float.Type)  throws -> Float { return try construct(type) }
+    mutating func decode(_ type: Double.Type) throws -> Double { return try construct(type) }
+    mutating func decode(_ type: String.Type) throws -> String { return try construct(type) }
 
     mutating func decode<T>(_ type: T.Type) throws -> T where T: Decodable {
         try throwErrorIfAtEnd(type)
@@ -223,9 +236,9 @@ struct _UnkeyedDecodingContainer: UnkeyedDecodingContainer { // swiftlint:disabl
         if isAtEnd { throw _valueNotFound(at: codingPath + [currentKey], type, "Unkeyed container is at end.") }
     }
 
-    private mutating func construct<T: ScalarConstructible>() throws -> T {
-        try throwErrorIfAtEnd(T.self)
-        let decoded: T = try currentDecoder.construct()
+    private mutating func construct<T: ScalarConstructible>(_ type: T.Type) throws -> T {
+        try throwErrorIfAtEnd(type)
+        let decoded: T = try currentDecoder.construct(type)
         currentIndex += 1
         return decoded
     }
@@ -236,30 +249,33 @@ extension _Decoder: SingleValueDecodingContainer {
     // MARK: - Swift.SingleValueDecodingContainer Methods
 
     func decodeNil() -> Bool { return node.null == NSNull() }
-    func decode(_ type: Bool.Type)   throws -> Bool { return try construct() }
-    func decode(_ type: Int.Type)    throws -> Int { return try construct() }
-    func decode(_ type: Int8.Type)   throws -> Int8 { return try construct() }
-    func decode(_ type: Int16.Type)  throws -> Int16 { return try construct() }
-    func decode(_ type: Int32.Type)  throws -> Int32 { return try construct() }
-    func decode(_ type: Int64.Type)  throws -> Int64 { return try construct() }
-    func decode(_ type: UInt.Type)   throws -> UInt { return try construct() }
-    func decode(_ type: UInt8.Type)  throws -> UInt8 { return try construct() }
-    func decode(_ type: UInt16.Type) throws -> UInt16 { return try construct() }
-    func decode(_ type: UInt32.Type) throws -> UInt32 { return try construct() }
-    func decode(_ type: UInt64.Type) throws -> UInt64 { return try construct() }
-    func decode(_ type: Float.Type)  throws -> Float { return try construct() }
-    func decode(_ type: Double.Type) throws -> Double { return try construct() }
-    func decode(_ type: String.Type) throws -> String { return try construct() }
-    func decode<T>(_ type: T.Type)   throws -> T where T: Decodable { return try decode() ?? T(from: self) }
+    func decode(_ type: Bool.Type)   throws -> Bool { return try construct(type) }
+    func decode(_ type: Int.Type)    throws -> Int { return try construct(type) }
+    func decode(_ type: Int8.Type)   throws -> Int8 { return try construct(type) }
+    func decode(_ type: Int16.Type)  throws -> Int16 { return try construct(type) }
+    func decode(_ type: Int32.Type)  throws -> Int32 { return try construct(type) }
+    func decode(_ type: Int64.Type)  throws -> Int64 { return try construct(type) }
+    func decode(_ type: UInt.Type)   throws -> UInt { return try construct(type) }
+    func decode(_ type: UInt8.Type)  throws -> UInt8 { return try construct(type) }
+    func decode(_ type: UInt16.Type) throws -> UInt16 { return try construct(type) }
+    func decode(_ type: UInt32.Type) throws -> UInt32 { return try construct(type) }
+    func decode(_ type: UInt64.Type) throws -> UInt64 { return try construct(type) }
+    func decode(_ type: Float.Type)  throws -> Float { return try construct(type) }
+    func decode(_ type: Double.Type) throws -> Double { return try construct(type) }
+    func decode(_ type: String.Type) throws -> String { return try construct(type) }
+    func decode<T>(_ type: T.Type)   throws -> T where T: Decodable {
+        return try construct(type) ?? type.init(from: self)
+    }
 
     // MARK: -
 
-    private func decode<T>() throws -> T? {
-        guard let constructibleType = T.self as? ScalarConstructible.Type else {
+    private func construct<T>(_ type: T.Type) throws -> T? {
+        guard let constructibleType = type as? ScalarConstructible.Type else {
             return nil
         }
-        guard let value = constructibleType.construct(from: node) else {
-            throw _valueNotFound(at: codingPath, T.self, "Expected \(T.self) value but found null instead.")
+        let scalar = try self.scalar()
+        guard let value = constructibleType.construct(from: scalar) else {
+            throw _valueNotFound(at: codingPath, type, "Expected \(type) value but found \(scalar) instead.")
         }
         return value as? T
     }
@@ -284,16 +300,14 @@ private func _typeMismatch(at codingPath: [CodingKey], expectation: Any.Type, re
 }
 
 extension FixedWidthInteger where Self: SignedInteger {
-    public static func construct(from node: Node) -> Self? {
-        guard let int = Int.construct(from: node) else { return nil }
-        return Self.init(exactly: int)
+    public static func construct(from scalar: Node.Scalar) -> Self? {
+        return Int.construct(from: scalar).flatMap(Self.init(exactly:))
     }
 }
 
 extension FixedWidthInteger where Self: UnsignedInteger {
-    public static func construct(from node: Node) -> Self? {
-        guard let int = UInt.construct(from: node) else { return nil }
-        return Self.init(exactly: int)
+    public static func construct(from scalar: Node.Scalar) -> Self? {
+        return UInt.construct(from: scalar).flatMap(Self.init(exactly:))
     }
 }
 
@@ -307,15 +321,13 @@ extension UInt64: ScalarConstructible {}
 extension UInt8: ScalarConstructible {}
 
 extension Decimal: ScalarConstructible {
-    public static func construct(from node: Node) -> Decimal? {
-        assert(node.isScalar) // swiftlint:disable:next force_unwrapping
-        return Decimal(string: node.scalar!.string)
+    public static func construct(from scalar: Node.Scalar) -> Decimal? {
+        return Decimal(string: scalar.string)
     }
 }
 
 extension URL: ScalarConstructible {
-    public static func construct(from node: Node) -> URL? {
-        assert(node.isScalar) // swiftlint:disable:next force_unwrapping
-        return URL(string: node.scalar!.string)
+    public static func construct(from scalar: Node.Scalar) -> URL? {
+        return URL(string: scalar.string)
     }
 }

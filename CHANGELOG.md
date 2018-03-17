@@ -2,25 +2,15 @@
 
 ---
 
-## Master
+## 5.3.0
 
-### Bug Fixes
+### Changes in other SwiftGen modules
 
-_None_
-
-### Breaking Changes
-
-_None_
+* [StencilSwiftKit 2.4.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.4.0/CHANGELOG.md)
+* [Stencil 0.10.1](https://github.com/kylef/Stencil/blob/0.10.1/CHANGELOG.md)
 
 ### New Features
 
-_None_
-
-### Internal Changes
-
-* Merged the `SwiftGenKit` and `templates` repositories back into this repository for easier development and maintenance.  
-  [David Jennes](https://github.com/djbe) 
-  [#356](https://github.com/SwiftGen/SwiftGen/pull/356)
 * XCAssets: exposed getter for image name string.  
   [Abbey Jackson](https://github.com/abbeyjackson)
   [SwiftGen/templates#85](https://github.com/SwiftGen/templates/pull/85)
@@ -32,6 +22,12 @@ _None_
   [SwiftGen/templates#84](https://github.com/SwiftGen/templates/pull/84)
   [Txai Wieser](https://github.com/txaiwieser)
   [SwiftGen/templates#81](https://github.com/SwiftGen/templates/pull/81)
+
+### Internal Changes
+
+* Merged the `SwiftGenKit` and `templates` repositories back into this repository for easier development and maintenance.  
+  [David Jennes](https://github.com/djbe) 
+  [#356](https://github.com/SwiftGen/SwiftGen/pull/356)
 
 ## 5.2.1
 

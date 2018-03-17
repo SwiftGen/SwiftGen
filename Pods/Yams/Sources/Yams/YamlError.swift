@@ -13,35 +13,67 @@ import Foundation
 
 public enum YamlError: Swift.Error {
     // Used in `yaml_emitter_t` and `yaml_parser_t`
-    /// YAML_NO_ERROR. No error is produced.
-    case no // swiftlint:disable:this identifier_name
-    /// YAML_MEMORY_ERROR. Cannot allocate or reallocate a block of memory.
+    /// `YAML_NO_ERROR`. No error is produced.
+    case no
+    // swiftlint:disable:previous identifier_name
+
+    /// `YAML_MEMORY_ERROR`. Cannot allocate or reallocate a block of memory.
     case memory
 
     // Used in `yaml_parser_t`
-    /// YAML_READER_ERROR. Cannot read or decode the input stream.
+    /// `YAML_READER_ERROR`. Cannot read or decode the input stream.
+    /// - Parameters:
+    ///   - problem: Error description.
+    ///   - byteOffset: The byte about which the problem occured.
+    ///   - value: The problematic value (-1 is none).
+    ///   - yaml: YAML String which the problem occured while reading.
     case reader(problem: String, byteOffset: Int, value: Int32, yaml: String)
 
     // line and column start from 1, column is counted by unicodeScalars
-    /// YAML_SCANNER_ERROR. Cannot scan the input stream.
+    /// `YAML_SCANNER_ERROR`. Cannot scan the input stream.
+    /// - Parameters:
+    ///   - context: Error context.
+    ///   - problem: Error description.
+    ///   - mark: Problem position.
+    ///   - yaml: YAML String which the problem occured while scanning.
     case scanner(context: Context?, problem: String, Mark, yaml: String)
-    /// YAML_PARSER_ERROR. Cannot parse the input stream.
+
+    /// `YAML_PARSER_ERROR`. Cannot parse the input stream.
+    /// - Parameters:
+    ///   - context: Error context.
+    ///   - problem: Error description.
+    ///   - mark: Problem position.
+    ///   - yaml: YAML String which the problem occured while parsing.
     case parser(context: Context?, problem: String, Mark, yaml: String)
-    /// YAML_COMPOSER_ERROR. Cannot compose a YAML document.
+
+    /// `YAML_COMPOSER_ERROR`. Cannot compose a YAML document.
+    /// - Parameters:
+    ///   - context: Error context.
+    ///   - problem: Error description.
+    ///   - mark: Problem position.
+    ///   - yaml: YAML String which the problem occured while composing.
     case composer(context: Context?, problem: String, Mark, yaml: String)
 
     // Used in `yaml_emitter_t`
-    /// YAML_WRITER_ERROR. Cannot write to the output stream.
+    /// `YAML_WRITER_ERROR`. Cannot write to the output stream.
+    /// - Parameter problem: Error description.
     case writer(problem: String)
-    /// YAML_EMITTER_ERROR. Cannot emit a YAML stream.
+
+    /// `YAML_EMITTER_ERROR`. Cannot emit a YAML stream.
+    /// - Parameter problem: Error description.
     case emitter(problem: String)
 
-    // Used in `NodeRepresentable`
+    /// Used in `NodeRepresentable`
+    /// - Parameter problem: Error description.
     case representer(problem: String)
 
+    /// The error context
     public struct Context: CustomStringConvertible {
+        /// error context
         public let text: String
+        /// context position
         public let mark: Mark
+        /// A textual representation of this instance.
         public var description: String {
             return text + " in line \(mark.line), column \(mark.column)\n"
         }
@@ -100,6 +132,7 @@ extension YamlError {
 }
 
 extension YamlError: CustomStringConvertible {
+    /// A textual representation of this instance.
     public var description: String {
         switch self {
         case .no:
