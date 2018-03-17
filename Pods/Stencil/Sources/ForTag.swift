@@ -10,7 +10,7 @@ class ForNode : NodeType {
   class func parse(_ parser:TokenParser, token:Token) throws -> NodeType {
     let components = token.components()
 
-    guard components.count >= 2 && components[2] == "in" &&
+    guard components.count >= 3 && components[2] == "in" &&
         (components.count == 4 || (components.count >= 6 && components[4] == "where")) else {
       throw TemplateSyntaxError("'for' statements should use the following 'for x in y where condition' `\(token.contents)`.")
     }
@@ -90,6 +90,10 @@ class ForNode : NodeType {
       values = dictionary.map { ($0.key, $0.value) }
     } else if let array = resolved as? [Any] {
       values = array
+    } else if let range = resolved as? CountableClosedRange<Int> {
+      values = Array(range)
+    } else if let range = resolved as? CountableRange<Int> {
+      values = Array(range)
     } else {
       values = []
     }
@@ -110,6 +114,7 @@ class ForNode : NodeType {
           "first": index == 0,
           "last": index == (count - 1),
           "counter": index + 1,
+          "counter0": index,
         ]
 
         return try context.push(dictionary: ["forloop": forContext]) {

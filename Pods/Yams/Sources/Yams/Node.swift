@@ -56,27 +56,27 @@ extension Node {
     }
 
     public var bool: Bool? {
-        return Bool.construct(from: self)
+        return scalar.flatMap(Bool.construct)
     }
 
     public var float: Double? {
-        return Double.construct(from: self)
+        return scalar.flatMap(Double.construct)
     }
 
     public var null: NSNull? {
-        return NSNull.construct(from: self)
+        return scalar.flatMap(NSNull.construct)
     }
 
     public var int: Int? {
-        return Int.construct(from: self)
+        return scalar.flatMap(Int.construct)
     }
 
     public var binary: Data? {
-        return Data.construct(from: self)
+        return scalar.flatMap(Data.construct)
     }
 
     public var timestamp: Date? {
-        return Date.construct(from: self)
+        return scalar.flatMap(Date.construct)
     }
 
     // MARK: Typed accessor methods
@@ -86,19 +86,12 @@ extension Node {
         return sequence.map(Array.init) ?? []
     }
 
-    /// Typed Array using cast: e.g. `array() as [String]`
-    ///
-    /// - Returns: Array of `Type`
-    public func array<Type: ScalarConstructible>() -> [Type] {
-        return sequence?.flatMap(Type.construct) ?? []
-    }
-
     /// Typed Array using type parameter: e.g. `array(of: String.self)`
     ///
     /// - Parameter type: Type conforms to ScalarConstructible
     /// - Returns: Array of `Type`
-    public func array<Type: ScalarConstructible>(of type: Type.Type) -> [Type] {
-        return sequence?.flatMap(Type.construct) ?? []
+    public func array<Type: ScalarConstructible>(of type: Type.Type = Type.self) -> [Type] {
+        return sequence?.compactMap { $0.scalar.flatMap(type.construct) } ?? []
     }
 
     public subscript(node: Node) -> Node? {
@@ -140,10 +133,10 @@ extension Node {
 
     public subscript(string: String) -> Node? {
         get {
-            return self[Node(string)]
+            return self[Node(string, tag.copy(with: .implicit))]
         }
         set {
-            self[Node(string)] = newValue
+            self[Node(string, tag.copy(with: .implicit))] = newValue
         }
     }
 }
@@ -230,14 +223,6 @@ extension Node: ExpressibleByIntegerLiteral {
 
 extension Node: ExpressibleByStringLiteral {
     public init(stringLiteral value: String) {
-        self.init(value)
-    }
-
-    public init(extendedGraphemeClusterLiteral value: String) {
-        self.init(value)
-    }
-
-    public init(unicodeScalarLiteral value: String) {
         self.init(value)
     }
 }

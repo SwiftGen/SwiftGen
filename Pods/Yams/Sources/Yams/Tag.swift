@@ -23,10 +23,6 @@ public final class Tag {
         return Tag(.implicit)
     }
 
-    // internal
-    let constructor: Constructor
-    var name: Name
-
     public init(_ name: Name,
                 _ resolver: Resolver = .default,
                 _ constructor: Constructor = .default) {
@@ -34,6 +30,14 @@ public final class Tag {
         self.constructor = constructor
         self.name = name
     }
+
+    public func copy(with name: Name? = nil, resolver: Resolver? = nil, constructor: Constructor? = nil) -> Tag {
+        return .init(name ?? self.name, resolver ?? self.resolver, constructor ?? self.constructor)
+    }
+
+    // internal
+    let constructor: Constructor
+    var name: Name
 
     func resolved<T>(with value: T) -> Tag where T: TagResolvable {
         if name == .implicit {
@@ -66,14 +70,6 @@ extension Tag: Hashable {
 
 extension Tag.Name: ExpressibleByStringLiteral {
     public init(stringLiteral value: String) {
-        self.rawValue = value
-    }
-
-    public init(unicodeScalarLiteral value: String) {
-        self.rawValue = value
-    }
-
-    public init(extendedGraphemeClusterLiteral value: String) {
         self.rawValue = value
     }
 }

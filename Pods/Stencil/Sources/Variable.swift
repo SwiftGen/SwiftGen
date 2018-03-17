@@ -74,7 +74,11 @@ public struct Variable : Equatable, Resolvable {
       if let context = current as? Context {
         current = context[bit]
       } else if let dictionary = current as? [String: Any] {
-        current = dictionary[bit]
+        if bit == "count" {
+          current = dictionary.count
+        } else {
+          current = dictionary[bit]
+        }
       } else if let array = current as? [Any] {
         if let index = Int(bit) {
           if index >= 0 && index < array.count {
@@ -100,6 +104,10 @@ public struct Variable : Equatable, Resolvable {
         current = mirror.descendant(bit)
 
         if current == nil {
+          return nil
+          // mirror returns non-nil value even for nil-containing properties
+          // so we have to check if its value is actually nil or not
+        } else if let current = current, String(describing: current) == "nil" {
           return nil
         }
       } else {

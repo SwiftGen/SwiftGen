@@ -9,38 +9,50 @@
 import Foundation
 
 public final class Constructor {
-    public typealias Map = [Tag.Name: (Node) -> Any?]
+    public typealias ScalarMap = [Tag.Name: (Node.Scalar) -> Any?]
+    public typealias MappingMap = [Tag.Name: (Node.Mapping) -> Any?]
+    public typealias SequenceMap = [Tag.Name: (Node.Sequence) -> Any?]
 
-    public init(_ map: Map) {
-        methodMap = map
+    public init(_ scalarMap: ScalarMap = defaultScalarMap,
+                _ mappingMap: MappingMap = defaultMappingMap,
+                _ sequenceMap: SequenceMap = defaultSequenceMap) {
+        self.scalarMap = scalarMap
+        self.mappingMap = mappingMap
+        self.sequenceMap = sequenceMap
     }
 
     public func any(from node: Node) -> Any {
-        if let method = methodMap[node.tag.name], let result = method(node) {
-            return result
-        }
         switch node {
-        case .scalar:
-            return String._construct(from: node)
-        case .mapping:
-            return [AnyHashable: Any]._construct_mapping(from: node)
-        case .sequence:
-            return [Any].construct_seq(from: node)
+        case .scalar(let scalar):
+            if let method = scalarMap[node.tag.name], let result = method(scalar) {
+                return result
+            }
+            return String.construct(from: scalar)!
+        case .mapping(let mapping):
+            if let method = mappingMap[node.tag.name], let result = method(mapping) {
+                return result
+            }
+            return [AnyHashable: Any]._construct_mapping(from: mapping)
+        case .sequence(let sequence):
+            if let method = sequenceMap[node.tag.name], let result = method(sequence) {
+                return result
+            }
+            return [Any].construct_seq(from: sequence)
         }
     }
 
-    private let methodMap: Map
+    private let scalarMap: ScalarMap
+    private let mappingMap: MappingMap
+    private let sequenceMap: SequenceMap
 }
 
 extension Constructor {
-    public static let `default` = Constructor(defaultMap)
+    public static let `default` = Constructor()
 
     // We can not write extension of map because that is alias of specialized dictionary
-    public static let defaultMap: Map = [
+    public static let defaultScalarMap: ScalarMap = [
         // Failsafe Schema
-        .map: [AnyHashable: Any].construct_mapping,
         .str: String.construct,
-        .seq: [Any].construct_seq,
         // JSON Schema
         .bool: Bool.construct,
         .float: Double.construct,
@@ -48,26 +60,35 @@ extension Constructor {
         .int: Int.construct,
         // http://yaml.org/type/index.html
         .binary: Data.construct,
-        // .merge is supported in `[AnyHashable: Any].construct`.
-        .omap: [Any].construct_omap,
-        .pairs: [Any].construct_pairs,
-        .set: Set<AnyHashable>.construct_set,
         .timestamp: Date.construct
-        // .value is supported in `String.construct` and `[AnyHashable: Any].construct`.
+    ]
+
+    public static let defaultMappingMap: MappingMap = [
+        .map: [AnyHashable: Any].construct_mapping,
+        // http://yaml.org/type/index.html
+        .set: Set<AnyHashable>.construct_set
+        // .merge is supported in `[AnyHashable: Any].construct_mapping`.
+        // .value is supported in `String.construct` and `[AnyHashable: Any].construct_mapping`.
+    ]
+
+    public static let defaultSequenceMap: SequenceMap = [
+        .seq: [Any].construct_seq,
+        // http://yaml.org/type/index.html
+        .omap: [Any].construct_omap,
+        .pairs: [Any].construct_pairs
     ]
 }
 
 // MARK: - ScalarConstructible
 public protocol ScalarConstructible {
-    // We don't use overloading `init?(_ node: Node)`
+    // We don't use overloading `init?(_ scalar: Node.Scalar)`
     // because that causes difficulties on using `init` as closure
-    static func construct(from node: Node) -> Self?
+    static func construct(from scalar: Node.Scalar) -> Self?
 }
 
 extension Bool: ScalarConstructible {
-    public static func construct(from node: Node) -> Bool? {
-        assert(node.isScalar) // swiftlint:disable:next force_unwrapping
-        switch node.scalar!.string.lowercased() {
+    public static func construct(from scalar: Node.Scalar) -> Bool? {
+        switch scalar.string.lowercased() {
         case "true", "yes", "on":
             return true
         case "false", "no", "off":
@@ -79,30 +100,25 @@ extension Bool: ScalarConstructible {
 }
 
 extension Data: ScalarConstructible {
-    public static func construct(from node: Node) -> Data? {
-        assert(node.isScalar) // swiftlint:disable:next force_unwrapping
-        let data = Data(base64Encoded: node.scalar!.string, options: .ignoreUnknownCharacters)
-        return data
+    public static func construct(from scalar: Node.Scalar) -> Data? {
+        return Data(base64Encoded: scalar.string, options: .ignoreUnknownCharacters)
     }
 }
 
 extension Date: ScalarConstructible {
-    public static func construct(from node: Node) -> Date? {
-        assert(node.isScalar) // swiftlint:disable:next force_unwrapping
-        let scalar = node.scalar!.string
-
-        let range = NSRange(location: 0, length: scalar.utf16.count)
-        guard let result = timestampPattern.firstMatch(in: scalar, options: [], range: range),
+    public static func construct(from scalar: Node.Scalar) -> Date? {
+        let range = NSRange(location: 0, length: scalar.string.utf16.count)
+        guard let result = timestampPattern.firstMatch(in: scalar.string, options: [], range: range),
             result.range.location != NSNotFound else {
                 return nil
         }
         #if os(Linux) || swift(>=4.0)
             let components = (1..<result.numberOfRanges).map {
-                scalar.substring(with: result.range(at: $0))
+                scalar.string.substring(with: result.range(at: $0))
             }
         #else
             let components = (1..<result.numberOfRanges).map {
-                scalar.substring(with: result.rangeAt($0))
+                scalar.string.substring(with: result.rangeAt($0))
             }
         #endif
 
@@ -160,10 +176,8 @@ extension Double: ScalarConstructible {}
 extension Float: ScalarConstructible {}
 
 extension ScalarConstructible where Self: FloatingPoint & SexagesimalConvertible {
-    public static func construct(from node: Node) -> Self? {
-        assert(node.isScalar) // swiftlint:disable:next force_unwrapping
-        var scalar = node.scalar!.string
-        switch scalar {
+    public static func construct(from scalar: Node.Scalar) -> Self? {
+        switch scalar.string {
         case ".inf", ".Inf", ".INF", "+.inf", "+.Inf", "+.INF":
             return .infinity
         case "-.inf", "-.Inf", "-.INF":
@@ -171,19 +185,19 @@ extension ScalarConstructible where Self: FloatingPoint & SexagesimalConvertible
         case ".nan", ".NaN", ".NAN":
             return .nan
         default:
-            scalar = scalar.replacingOccurrences(of: "_", with: "")
-            if scalar.contains(":") {
-                return Self(sexagesimal: scalar)
+            let string = scalar.string.replacingOccurrences(of: "_", with: "")
+            if string.contains(":") {
+                return Self(sexagesimal: string)
             }
-            return .create(from: scalar)
+            return .create(from: string)
         }
     }
 }
 
 extension FixedWidthInteger where Self: SexagesimalConvertible {
-    fileprivate static func _construct(from node: Node) -> Self? {
-        assert(node.isScalar) // swiftlint:disable:next force_unwrapping
-        let scalarWithSign = node.scalar!.string.replacingOccurrences(of: "_", with: "")
+    fileprivate static func _construct(from scalar: Node.Scalar) -> Self? {
+        let scalarWithSign = scalar.string.replacingOccurrences(of: "_", with: "")
+
         if scalarWithSign == "0" {
             return 0
         }
@@ -214,39 +228,39 @@ extension FixedWidthInteger where Self: SexagesimalConvertible {
 }
 
 extension Int: ScalarConstructible {
-    public static func construct(from node: Node) -> Int? {
-        return _construct(from: node)
+    public static func construct(from scalar: Node.Scalar) -> Int? {
+        return _construct(from: scalar)
     }
 }
 
 extension UInt: ScalarConstructible {
-    public static func construct(from node: Node) -> UInt? {
-        return _construct(from: node)
+    public static func construct(from scalar: Node.Scalar) -> UInt? {
+        return _construct(from: scalar)
     }
 }
 
 extension String: ScalarConstructible {
-    public static func construct(from node: Node) -> String? {
-        return _construct(from: node)
+    public static func construct(from scalar: Node.Scalar) -> String? {
+        return scalar.string
     }
 
-    fileprivate static func _construct(from node: Node) -> String {
+    public static func construct(from node: Node) -> String? {
         // This will happen while `Dictionary.flatten_mapping()` if `node.tag.name` was `.value`
         if case let .mapping(mapping) = node {
             for (key, value) in mapping where key.tag.name == .value {
-                return _construct(from: value)
+                return construct(from: value)
             }
         }
-        assert(node.isScalar) // swiftlint:disable:next force_unwrapping
-        return node.scalar!.string
+
+        guard let string = node.scalar?.string else { return nil }
+        return string
     }
 }
 
 // MARK: - Types that can't conform to ScalarConstructible
 extension NSNull/*: ScalarConstructible*/ {
-    public static func construct(from node: Node) -> NSNull? {
-        guard let string = node.scalar?.string else { return nil }
-        switch string {
+    public static func construct(from scalar: Node.Scalar) -> NSNull? {
+        switch scalar.string {
         case "", "~", "null", "Null", "NULL":
             return NSNull()
         default:
@@ -257,24 +271,21 @@ extension NSNull/*: ScalarConstructible*/ {
 
 // MARK: mapping
 extension Dictionary {
-    public static func construct_mapping(from node: Node) -> [AnyHashable: Any]? {
-        return _construct_mapping(from: node)
+    public static func construct_mapping(from mapping: Node.Mapping) -> [AnyHashable: Any]? {
+        return _construct_mapping(from: mapping)
     }
 
-    fileprivate static func _construct_mapping(from node: Node) -> [AnyHashable: Any] {
-        assert(node.isMapping) // swiftlint:disable:next force_unwrapping
-        let mapping = flatten_mapping(node).mapping!
+    fileprivate static func _construct_mapping(from mapping: Node.Mapping) -> [AnyHashable: Any] {
+        let mapping = flatten_mapping(mapping)
         var dictionary = [AnyHashable: Any](minimumCapacity: mapping.count)
         mapping.forEach {
             // TODO: YAML supports keys other than str.
-            dictionary[String._construct(from: $0.key)] = node.tag.constructor.any(from: $0.value)
+            dictionary[String.construct(from: $0.key)!] = mapping.tag.constructor.any(from: $0.value)
         }
         return dictionary
     }
 
-    private static func flatten_mapping(_ node: Node) -> Node {
-        assert(node.isMapping) // swiftlint:disable:next force_unwrapping
-        let mapping = node.mapping!
+    private static func flatten_mapping(_ mapping: Node.Mapping) -> Node.Mapping {
         var pairs = Array(mapping)
         var merge = [(key: Node, value: Node)]()
         var index = pairs.startIndex
@@ -283,15 +294,11 @@ extension Dictionary {
             if pair.key.tag.name == .merge {
                 pairs.remove(at: index)
                 switch pair.value {
-                case .mapping:
-                    let flattened_node = flatten_mapping(pair.value)
-                    if let mapping = flattened_node.mapping {
-                        merge.append(contentsOf: mapping)
-                    }
+                case .mapping(let mapping):
+                    merge.append(contentsOf: flatten_mapping(mapping))
                 case let .sequence(sequence):
                     let submerge = sequence
-                        .filter { $0.isMapping } // TODO: Should raise error on other than mapping
-                        .flatMap { flatten_mapping($0).mapping }
+                        .compactMap { $0.mapping.map(flatten_mapping) }
                         .reversed()
                     submerge.forEach {
                         merge.append(contentsOf: $0)
@@ -306,15 +313,14 @@ extension Dictionary {
                 index += 1
             }
         }
-        return Node(merge + pairs, node.tag, mapping.style)
+        return Node.Mapping(merge + pairs, mapping.tag, mapping.style)
     }
 }
 
 extension Set {
-    public static func construct_set(from node: Node) -> Set<AnyHashable>? {
+    public static func construct_set(from mapping: Node.Mapping) -> Set<AnyHashable>? {
         // TODO: YAML supports Hashable elements other than str.
-        assert(node.isMapping) // swiftlint:disable:next force_unwrapping
-        return Set<AnyHashable>(node.mapping!.map({ String._construct(from: $0.key) as AnyHashable }))
+        return Set<AnyHashable>(mapping.map({ String.construct(from: $0.key)! as AnyHashable }))
         // Explicitly declaring the generic parameter as `<AnyHashable>` above is required,
         // because this is inside extension of `Set` and Swift 3.0.2 can't infer the type without that.
     }
@@ -322,28 +328,25 @@ extension Set {
 
 // MARK: sequence
 extension Array {
-    public static func construct_seq(from node: Node) -> [Any] {
-        // swiftlint:disable:next force_unwrapping
-        return node.sequence!.map(node.tag.constructor.any)
+    public static func construct_seq(from sequence: Node.Sequence) -> [Any] {
+        return sequence.map(sequence.tag.constructor.any)
     }
 
-    public static func construct_omap(from node: Node) -> [(Any, Any)] {
+    public static func construct_omap(from sequence: Node.Sequence) -> [(Any, Any)] {
         // Note: we do not check for duplicate keys.
-        assert(node.isSequence) // swiftlint:disable:next force_unwrapping
-        return node.sequence!.flatMap { subnode -> (Any, Any)? in
+        return sequence.compactMap { subnode -> (Any, Any)? in
             // TODO: Should raise error if subnode is not mapping or mapping.count != 1
             guard let (key, value) = subnode.mapping?.first else { return nil }
-            return (node.tag.constructor.any(from: key), node.tag.constructor.any(from: value))
+            return (sequence.tag.constructor.any(from: key), sequence.tag.constructor.any(from: value))
         }
     }
 
-    public static func construct_pairs(from node: Node) -> [(Any, Any)] {
+    public static func construct_pairs(from sequence: Node.Sequence) -> [(Any, Any)] {
         // Note: we do not check for duplicate keys.
-        assert(node.isSequence) // swiftlint:disable:next force_unwrapping
-        return node.sequence!.flatMap { subnode -> (Any, Any)? in
+        return sequence.compactMap { subnode -> (Any, Any)? in
             // TODO: Should raise error if subnode is not mapping or mapping.count != 1
             guard let (key, value) = subnode.mapping?.first else { return nil }
-            return (node.tag.constructor.any(from: key), node.tag.constructor.any(from: value))
+            return (sequence.tag.constructor.any(from: key), sequence.tag.constructor.any(from: value))
         }
     }
 }
@@ -413,7 +416,7 @@ fileprivate extension String {
         } else {
             sign = 1
         }
-        let digits = scalar.components(separatedBy: ":").flatMap(T.create).reversed()
+        let digits = scalar.components(separatedBy: ":").compactMap(T.create).reversed()
         let (_, value) = digits.reduce((1, 0) as (T, T)) { baseAndValue, digit in
             let value = baseAndValue.1 + (digit * baseAndValue.0)
             let base = baseAndValue.0 * 60
@@ -439,6 +442,21 @@ fileprivate extension Substring {
         let index = self.index(startIndex, offsetBy: offset)
         return self[index...]
     }
+}
+
+// MARK: - Unavailable
+
+extension Constructor {
+    @available(*, unavailable, message: "Use `Constructor.ScalarMap` instead")
+    public typealias Map = [Tag.Name: (Node) -> Any?]
+    
+    @available(*, unavailable, message: "Use `Constructor.defaultScalarMap` instead")
+    public static let defaultMap: ScalarMap = [:]
+}
+
+extension ScalarConstructible {
+    @available(*, unavailable, message: "Use `construct(from scalar: Node.Scalar)` instead")
+    static func construct(from scalar: Node) -> Self? { return nil }
 }
 
 // swiftlint:disable:this file_length

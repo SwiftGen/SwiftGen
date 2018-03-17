@@ -361,16 +361,14 @@ extension Emitter {
 
     fileprivate func serializeNode(_ node: Node) throws {
         switch node {
-        case .scalar: try serializeScalarNode(node)
-        case .sequence: try serializeSequenceNode(node)
-        case .mapping: try serializeMappingNode(node)
+        case .scalar(let scalar): try serializeScalar(scalar)
+        case .sequence(let sequence): try serializeSequence(sequence)
+        case .mapping(let mapping): try serializeMapping(mapping)
         }
     }
 
-    private func serializeScalarNode(_ node: Node) throws {
-        assert(node.isScalar) // swiftlint:disable:next force_unwrapping
-        let scalar = node.scalar!
-        var value = scalar.string.utf8CString, tag = node.tag.name.rawValue.utf8CString
+    private func serializeScalar(_ scalar: Node.Scalar) throws {
+        var value = scalar.string.utf8CString, tag = scalar.resolvedTag.name.rawValue.utf8CString
         let scalar_style = yaml_scalar_style_t(rawValue: scalar.style.rawValue)
         var event = yaml_event_t()
         _ = value.withUnsafeMutableBytes { value in
@@ -389,10 +387,9 @@ extension Emitter {
         try emit(&event)
     }
 
-    private func serializeSequenceNode(_ node: Node) throws {
-        assert(node.isSequence) // swiftlint:disable:next force_unwrapping
-        var sequence = node.sequence!, tag = node.tag.name.rawValue.utf8CString
-        let implicit: Int32 = node.tag.name == .seq ? 1 : 0
+    private func serializeSequence(_ sequence: Node.Sequence) throws {
+        var tag = sequence.resolvedTag.name.rawValue.utf8CString
+        let implicit: Int32 = sequence.tag.name == .seq ? 1 : 0
         let sequence_style = yaml_sequence_style_t(rawValue: sequence.style.rawValue)
         var event = yaml_event_t()
         _ = tag.withUnsafeMutableBytes { tag in
@@ -409,11 +406,9 @@ extension Emitter {
         try emit(&event)
     }
 
-    private func serializeMappingNode(_ node: Node) throws {
-        assert(node.isMapping) // swiftlint:disable:next force_unwrapping
-        let mapping = node.mapping!
-        var tag = node.tag.name.rawValue.utf8CString
-        let implicit: Int32 = node.tag.name == Tag.Name.map ? 1 : 0
+    private func serializeMapping(_ mapping: Node.Mapping) throws {
+        var tag = mapping.resolvedTag.name.rawValue.utf8CString
+        let implicit: Int32 = mapping.tag.name == .map ? 1 : 0
         let mapping_style = yaml_mapping_style_t(rawValue: mapping.style.rawValue)
         var event = yaml_event_t()
         _ = tag.withUnsafeMutableBytes { tag in

@@ -75,6 +75,33 @@ public class FileSystemLoader: Loader, CustomStringConvertible {
 }
 
 
+public class DictionaryLoader: Loader {
+  public let templates: [String: String]
+
+  public init(templates: [String: String]) {
+    self.templates = templates
+  }
+
+  public func loadTemplate(name: String, environment: Environment) throws -> Template {
+    if let content = templates[name] {
+      return environment.templateClass.init(templateString: content, environment: environment, name: name)
+    }
+
+    throw TemplateDoesNotExist(templateNames: [name], loader: self)
+  }
+
+  public func loadTemplate(names: [String], environment: Environment) throws -> Template {
+    for name in names {
+      if let content = templates[name] {
+        return environment.templateClass.init(templateString: content, environment: environment, name: name)
+      }
+    }
+
+    throw TemplateDoesNotExist(templateNames: names, loader: self)
+  }
+}
+
+
 extension Path {
   func safeJoin(path: Path) throws -> Path {
     let newPath = self + path

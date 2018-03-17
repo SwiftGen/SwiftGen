@@ -8,6 +8,8 @@ import Foundation
 import Stencil
 
 enum Filters {
+  typealias BooleanWithArguments = (Any?, [Any?]) throws -> Bool
+
   enum Error: Swift.Error {
     case invalidInputType
     case invalidOption(option: String)
