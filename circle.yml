@@ -1,6 +1,6 @@
 machine:
   xcode:
-    version: 9.0
+    version: 9.2
 
 checkout:
   post:
