@@ -2,6 +2,24 @@
 
 ---
 
+## Master
+
+### Bug Fixes
+
+_None_
+
+### Breaking Changes
+
+_None_
+
+### New Features
+
+_None_
+
+### Internal Changes
+
+_None_
+
 ## 5.3.0
 
 ### Changes in other SwiftGen modules
