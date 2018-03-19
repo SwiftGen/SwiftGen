@@ -22,8 +22,7 @@ public struct FontConvertible {
 
   public func register() {
     guard let url = url else { return }
-    var errorRef: Unmanaged<CFError>?
-    CTFontManagerRegisterFontsForURL(url as CFURL, .Process, &errorRef)
+    CTFontManagerRegisterFontsForURL(url as CFURL, .Process, nil)
   }
 
   fileprivate var url: NSURL? {
