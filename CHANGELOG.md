@@ -6,7 +6,9 @@
 
 ### Bug Fixes
 
-_None_
+* Fix memory leak in generated code for Fonts.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#394](https://github.com/SwiftGen/SwiftGen/issues/394)
 
 ### Breaking Changes
 
@@ -14,7 +16,9 @@ _None_
 
 ### New Features
 
-_None_
+* Add ability to list all custom fonts and register them using `FontFamily.registerAllCustomFonts`.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#394](https://github.com/SwiftGen/SwiftGen/issues/394)
 
 ### Internal Changes
 
