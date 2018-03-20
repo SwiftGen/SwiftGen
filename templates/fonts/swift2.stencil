@@ -24,8 +24,7 @@
 
   {{accessModifier}} func register() {
     guard let url = url else { return }
-    var errorRef: Unmanaged<CFError>?
-    CTFontManagerRegisterFontsForURL(url as CFURL, .Process, &errorRef)
+    CTFontManagerRegisterFontsForURL(url as CFURL, .Process, nil)
   }
 
   fileprivate var url: NSURL? {
@@ -64,8 +63,13 @@
     {% for font in family.fonts %}
     {{accessModifier}} static let {{font.style|swiftIdentifier:"pretty"|escapeReservedKeywords}} = FontConvertible("{{font.name}}", family: "{{family.name}}", path: "{% call transformPath font.path %}")
     {% endfor %}
+    {{accessModifier}} static let all: [FontConvertible] = [{% for font in family.fonts %}{{font.style|swiftIdentifier:"pretty"|escapeReservedKeywords}}{% if not forloop.last %}, {% endif %}{% endfor %}]
   }
   {% endfor %}
+  {{accessModifier}} static let allCustomFonts: [FontConvertible] = [{% for family in families %}{{family.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}.all{% if not forloop.last %}, {% endif %}{% endfor %}].flatMap { $0 }
+  {{accessModifier}} static func registerAllCustomFonts() {
+    allCustomFonts.forEach { $0.register() }
+  }
 }
 // swiftlint:enable identifier_name line_length type_body_length
 

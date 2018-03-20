@@ -22,8 +22,7 @@ internal struct FontConvertible {
 
   internal func register() {
     guard let url = url else { return }
-    var errorRef: Unmanaged<CFError>?
-    CTFontManagerRegisterFontsForURL(url as CFURL, .Process, &errorRef)
+    CTFontManagerRegisterFontsForURL(url as CFURL, .Process, nil)
   }
 
   fileprivate var url: NSURL? {
@@ -55,11 +54,13 @@ internal enum CustomFamily {
     internal static let Bold = FontConvertible(".SFNSDisplay-Bold", family: ".SF NS Display", path: "SFNSDisplay-Bold.otf")
     internal static let Heavy = FontConvertible(".SFNSDisplay-Heavy", family: ".SF NS Display", path: "SFNSDisplay-Heavy.otf")
     internal static let Regular = FontConvertible(".SFNSDisplay-Regular", family: ".SF NS Display", path: "SFNSDisplay-Regular.otf")
+    internal static let all: [FontConvertible] = [Black, Bold, Heavy, Regular]
   }
   internal enum SFNSText {
     internal static let Bold = FontConvertible(".SFNSText-Bold", family: ".SF NS Text", path: "SFNSText-Bold.otf")
     internal static let Heavy = FontConvertible(".SFNSText-Heavy", family: ".SF NS Text", path: "SFNSText-Heavy.otf")
     internal static let Regular = FontConvertible(".SFNSText-Regular", family: ".SF NS Text", path: "SFNSText-Regular.otf")
+    internal static let all: [FontConvertible] = [Bold, Heavy, Regular]
   }
   internal enum Avenir {
     internal static let Black = FontConvertible("Avenir-Black", family: "Avenir", path: "Avenir.ttc")
@@ -74,12 +75,19 @@ internal enum CustomFamily {
     internal static let MediumOblique = FontConvertible("Avenir-MediumOblique", family: "Avenir", path: "Avenir.ttc")
     internal static let Oblique = FontConvertible("Avenir-Oblique", family: "Avenir", path: "Avenir.ttc")
     internal static let Roman = FontConvertible("Avenir-Roman", family: "Avenir", path: "Avenir.ttc")
+    internal static let all: [FontConvertible] = [Black, BlackOblique, Book, BookOblique, Heavy, HeavyOblique, Light, LightOblique, Medium, MediumOblique, Oblique, Roman]
   }
   internal enum ZapfDingbats {
     internal static let Regular = FontConvertible("ZapfDingbatsITC", family: "Zapf Dingbats", path: "ZapfDingbats.ttf")
+    internal static let all: [FontConvertible] = [Regular]
   }
   internal enum Public {
     internal static let Internal = FontConvertible("private", family: "public", path: "class.ttf")
+    internal static let all: [FontConvertible] = [Internal]
+  }
+  internal static let allCustomFonts: [FontConvertible] = [SFNSDisplay.all, SFNSText.all, Avenir.all, ZapfDingbats.all, Public.all].flatMap { $0 }
+  internal static func registerAllCustomFonts() {
+    allCustomFonts.forEach { $0.register() }
   }
 }
 // swiftlint:enable identifier_name line_length type_body_length
