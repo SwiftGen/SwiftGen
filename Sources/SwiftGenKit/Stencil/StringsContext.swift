@@ -61,11 +61,6 @@ extension StringsParser {
     ]
   }
 
-  private func normalize(_ string: String) -> String {
-    let components = string.components(separatedBy: CharacterSet(charactersIn: "-_"))
-    return components.map { $0.capitalized }.joined()
-  }
-
   typealias Mapper = (_ entry: Entry, _ keyPath: [String]) -> [String: Any]
   private func structure(
     entries: [Entry],
@@ -92,19 +87,16 @@ extension StringsParser {
       .filter { $0.keyStructure.count > keyPath.count + 1 }
       .map { Array($0.keyStructure.prefix(keyPath.count + 1)) }
 
-    // make key paths unique
-    let uniqueNextLevelKeyPaths = Array(Set(
+    let sortedNextLevelKeyPaths = Array(Set(
       nextLevelKeyPaths.map { keyPath in
-        keyPath.map {
-          $0.capitalized.replacingOccurrences(of: "-", with: "_")
-        }.joined(separator: ".")
+        keyPath.joined(separator: ".")
       }))
       .sorted()
       .map { $0.components(separatedBy: ".") }
 
-    for nextLevelKeyPath in uniqueNextLevelKeyPaths {
+    for nextLevelKeyPath in sortedNextLevelKeyPaths {
       let entriesInKeyPath = entries.filter {
-        Array($0.keyStructure.map(normalize).prefix(nextLevelKeyPath.count)) == nextLevelKeyPath.map(normalize)
+        Array($0.keyStructure.prefix(nextLevelKeyPath.count)) == nextLevelKeyPath
       }
       children.append(
           structure(entries: entriesInKeyPath,
