@@ -10,8 +10,30 @@
 				<key>children</key>
 				<array>
 					<dict>
+						<key>children</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>USER_PROFILE_SECTION</string>
+								<key>strings</key>
+								<array>
+									<dict>
+										<key>key</key>
+										<string>SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE</string>
+										<key>name</key>
+										<string>HEADER_TITLE</string>
+										<key>translation</key>
+										<string>User Profile Settings</string>
+									</dict>
+								</array>
+							</dict>
+						</array>
 						<key>name</key>
-						<string>Apples</string>
+						<string>SETTINGS</string>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>apples</string>
 						<key>strings</key>
 						<array>
 							<dict>
@@ -30,7 +52,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>Bananas</string>
+						<string>bananas</string>
 						<key>strings</key>
 						<array>
 							<dict>
@@ -47,6 +69,28 @@
 								</array>
 							</dict>
 						</array>
+					</dict>
+					<dict>
+						<key>children</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>uSer-proFile-sectioN</string>
+								<key>strings</key>
+								<array>
+									<dict>
+										<key>key</key>
+										<string>seTTings.uSer-proFile-sectioN.footer_text</string>
+										<key>name</key>
+										<string>footer_text</string>
+										<key>translation</key>
+										<string>Here you can change some user profile settings.</string>
+									</dict>
+								</array>
+							</dict>
+						</array>
+						<key>name</key>
+						<string>seTTings</string>
 					</dict>
 					<dict>
 						<key>children</key>
@@ -83,7 +127,7 @@
 																										<array>
 																											<dict>
 																												<key>name</key>
-																												<string>Is</string>
+																												<string>is</string>
 																												<key>strings</key>
 																												<array>
 																													<dict>
@@ -98,39 +142,39 @@
 																											</dict>
 																										</array>
 																										<key>name</key>
-																										<string>This</string>
+																										<string>this</string>
 																									</dict>
 																								</array>
 																								<key>name</key>
-																								<string>Really</string>
+																								<string>really</string>
 																							</dict>
 																						</array>
 																						<key>name</key>
-																						<string>No</string>
+																						<string>no</string>
 																					</dict>
 																				</array>
 																				<key>name</key>
-																				<string>Handle</string>
+																				<string>handle</string>
 																			</dict>
 																		</array>
 																		<key>name</key>
-																		<string>Can</string>
+																		<string>can</string>
 																	</dict>
 																</array>
 																<key>name</key>
-																<string>We</string>
+																<string>we</string>
 															</dict>
 														</array>
 														<key>name</key>
-														<string>Than</string>
+														<string>than</string>
 													</dict>
 												</array>
 												<key>name</key>
-												<string>Deeper</string>
+												<string>deeper</string>
 											</dict>
 											<dict>
 												<key>name</key>
-												<string>Even</string>
+												<string>even</string>
 												<key>strings</key>
 												<array>
 													<dict>
@@ -145,11 +189,11 @@
 											</dict>
 										</array>
 										<key>name</key>
-										<string>Title</string>
+										<string>title</string>
 									</dict>
 								</array>
 								<key>name</key>
-								<string>Navigation_Bar</string>
+								<string>navigation-bar</string>
 								<key>strings</key>
 								<array>
 									<dict>
@@ -162,32 +206,9 @@
 									</dict>
 								</array>
 							</dict>
-							<dict>
-								<key>name</key>
-								<string>User_Profile_Section</string>
-								<key>strings</key>
-								<array>
-									<dict>
-										<key>key</key>
-										<string>seTTings.uSer-proFile-sectioN.footer_text</string>
-										<key>name</key>
-										<string>footer_text</string>
-										<key>translation</key>
-										<string>Here you can change some user profile settings.</string>
-									</dict>
-									<dict>
-										<key>key</key>
-										<string>SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE</string>
-										<key>name</key>
-										<string>HEADER_TITLE</string>
-										<key>translation</key>
-										<string>User Profile Settings</string>
-									</dict>
-								</array>
-							</dict>
 						</array>
 						<key>name</key>
-						<string>Settings</string>
+						<string>settings</string>
 					</dict>
 				</array>
 				<key>strings</key>

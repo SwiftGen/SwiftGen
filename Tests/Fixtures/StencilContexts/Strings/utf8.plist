@@ -10,8 +10,30 @@
 				<key>children</key>
 				<array>
 					<dict>
+						<key>children</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>USER_PROFILE_SECTION</string>
+								<key>strings</key>
+								<array>
+									<dict>
+										<key>key</key>
+										<string>SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE</string>
+										<key>name</key>
+										<string>HEADER_TITLE</string>
+										<key>translation</key>
+										<string>Profil de l'utilisateur Paramètres</string>
+									</dict>
+								</array>
+							</dict>
+						</array>
 						<key>name</key>
-						<string>Apples</string>
+						<string>SETTINGS</string>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>apples</string>
 						<key>strings</key>
 						<array>
 							<dict>
@@ -30,7 +52,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>Bananas</string>
+						<string>bananas</string>
 						<key>strings</key>
 						<array>
 							<dict>
@@ -52,6 +74,28 @@
 						<key>children</key>
 						<array>
 							<dict>
+								<key>name</key>
+								<string>uSer-proFile-sectioN</string>
+								<key>strings</key>
+								<array>
+									<dict>
+										<key>key</key>
+										<string>seTTings.uSer-proFile-sectioN.footer_text</string>
+										<key>name</key>
+										<string>footer_text</string>
+										<key>translation</key>
+										<string>Ici, vous pouvez modifier certains paramètres de profil d'utilisateur.</string>
+									</dict>
+								</array>
+							</dict>
+						</array>
+						<key>name</key>
+						<string>seTTings</string>
+					</dict>
+					<dict>
+						<key>children</key>
+						<array>
+							<dict>
 								<key>children</key>
 								<array>
 									<dict>
@@ -59,7 +103,7 @@
 										<array>
 											<dict>
 												<key>name</key>
-												<string>Even</string>
+												<string>even</string>
 												<key>strings</key>
 												<array>
 													<dict>
@@ -74,11 +118,11 @@
 											</dict>
 										</array>
 										<key>name</key>
-										<string>Title</string>
+										<string>title</string>
 									</dict>
 								</array>
 								<key>name</key>
-								<string>Navigation_Bar</string>
+								<string>navigation-bar</string>
 								<key>strings</key>
 								<array>
 									<dict>
@@ -91,32 +135,9 @@
 									</dict>
 								</array>
 							</dict>
-							<dict>
-								<key>name</key>
-								<string>User_Profile_Section</string>
-								<key>strings</key>
-								<array>
-									<dict>
-										<key>key</key>
-										<string>seTTings.uSer-proFile-sectioN.footer_text</string>
-										<key>name</key>
-										<string>footer_text</string>
-										<key>translation</key>
-										<string>Ici, vous pouvez modifier certains paramètres de profil d'utilisateur.</string>
-									</dict>
-									<dict>
-										<key>key</key>
-										<string>SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE</string>
-										<key>name</key>
-										<string>HEADER_TITLE</string>
-										<key>translation</key>
-										<string>Profil de l'utilisateur Paramètres</string>
-									</dict>
-								</array>
-							</dict>
 						</array>
 						<key>name</key>
-						<string>Settings</string>
+						<string>settings</string>
 					</dict>
 				</array>
 				<key>strings</key>

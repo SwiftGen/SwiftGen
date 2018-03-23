@@ -15,17 +15,17 @@ internal enum L10n {
   internal static func Private(p1: String, p2: Int) -> String {
     return L10n.tr("Localizable", "private", p1, p2)
   }
+  internal static let SettingsUserProfileSectionHeaderTitle = L10n.tr("Localizable", "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
   internal static func ApplesCount(p1: Int) -> String {
     return L10n.tr("Localizable", "apples.count", p1)
   }
   internal static func BananasOwner(p1: Int, p2: String) -> String {
     return L10n.tr("Localizable", "bananas.owner", p1, p2)
   }
+  internal static let SeTTingsUSerProFileSectioNFooterText = L10n.tr("Localizable", "seTTings.uSer-proFile-sectioN.footer_text")
   internal static let SettingsNavigationBarSelf = L10n.tr("Localizable", "settings.navigation-bar.self")
   internal static let SettingsNavigationBarTitleDeeperThanWeCanHandleNoReallyThisIsDeep = L10n.tr("Localizable", "settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep")
   internal static let SettingsNavigationBarTitleEvenDeeper = L10n.tr("Localizable", "settings.navigation-bar.title.even.deeper")
-  internal static let SeTTingsUSerProFileSectioNFooterText = L10n.tr("Localizable", "seTTings.uSer-proFile-sectioN.footer_text")
-  internal static let SettingsUserProfileSectionHeaderTitle = L10n.tr("Localizable", "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
 }
 // swiftlint:enable identifier_name line_length type_body_length
 

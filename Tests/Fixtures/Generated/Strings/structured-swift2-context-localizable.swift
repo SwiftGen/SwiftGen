@@ -20,6 +20,14 @@ internal enum L10n {
     return L10n.tr("Localizable", "private", p1, p2)
   }
 
+  internal enum Settings {
+
+    internal enum UserProfileSection {
+      /// User Profile Settings
+      internal static let HeaderTitle = L10n.tr("Localizable", "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
+    }
+  }
+
   internal enum Apples {
     /// You have %d apples
     internal static func Count(p1: Int) -> String {
@@ -31,6 +39,14 @@ internal enum L10n {
     /// Those %d bananas belong to %@.
     internal static func Owner(p1: Int, p2: String) -> String {
       return L10n.tr("Localizable", "bananas.owner", p1, p2)
+    }
+  }
+
+  internal enum SeTTings {
+
+    internal enum USerProFileSectioN {
+      /// Here you can change some user profile settings.
+      internal static let FooterText = L10n.tr("Localizable", "seTTings.uSer-proFile-sectioN.footer_text")
     }
   }
 
@@ -76,13 +92,6 @@ internal enum L10n {
           internal static let Deeper = L10n.tr("Localizable", "settings.navigation-bar.title.even.deeper")
         }
       }
-    }
-
-    internal enum UserProfileSection {
-      /// Here you can change some user profile settings.
-      internal static let FooterText = L10n.tr("Localizable", "seTTings.uSer-proFile-sectioN.footer_text")
-      /// User Profile Settings
-      internal static let HeaderTitle = L10n.tr("Localizable", "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
     }
   }
 }
