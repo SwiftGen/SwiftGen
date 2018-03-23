@@ -433,7 +433,9 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 ## Strings
 
 ```sh
-swiftgen strings -t structured-swift3 (/path/to/Localizable.strings | /path/to/dir)
+swiftgen strings -t structured-swift3 /path/to/Localizable.strings
+# OR
+swiftgen strings -t structured-swift4 /path/to/SomeLang.lproj
 ```
 
 Using `/path/to/Localizable.strings` this will generate a Swift `enum L10n` that will map all your `Localizable.strings` (or other tables) keys to an `enum case`. Using `/path/to/dir` this will recursively look for `strings` files in the specified directory and generate a Swift `enum L10n` as per the preceding command. Bear in mind that only one language can be used to generate the `enum` so do not pass a directory that includes multiple localizations of the same `strings` file.  
@@ -477,8 +479,6 @@ enum L10n {
   }
 }
 ```
-</details>
-
 </details>
 
 ### Usage Example

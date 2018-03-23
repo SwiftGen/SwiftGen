@@ -4,7 +4,7 @@
 
 The strings parser accepts a `strings` file, typically `Localizable.strings`, or a directory.  
 In case it is passed a file it will parse each string in this file, including the type information for formatting parameters.  
-In the case of a directory it will look recursively in the directory and parse each `strings` file it finds. Bear in mind that only one language can be used to generate the `enum` so do not pass a directory that includes multiple localizations of the same `strings` file.
+In the case of a directory it will look recursively in the directory and parse each `strings` file it finds. Bear in mind that only one language should be passed (to avoid parsing the same keys multiple times in different languages) so do not pass a directory that includes multiple `.lproj` folders with the same `strings` file.
 
 The strings file will be converted into a structured tree version, where each string is separated into components by the `.` character. We call this the `dot syntax`, each component representing a level. For example, the following strings:
 

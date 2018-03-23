@@ -12,7 +12,6 @@ public enum StringsParserError: Error, CustomStringConvertible {
   case failureOnLoading(path: String)
   case invalidFormat
   case invalidPlaceholder(previous: StringsParser.PlaceholderType, new: StringsParser.PlaceholderType)
-  case multipleLprojDirectories
 
   public var description: String {
     switch self {
@@ -24,8 +23,6 @@ public enum StringsParserError: Error, CustomStringConvertible {
       return "Invalid strings file"
     case .invalidPlaceholder(let previous, let new):
       return "Invalid placeholder type \(new) (previous: \(previous))"
-    case .multipleLprojDirectories:
-      return "Multiple .lproj directories found. Only one localization can be used to generate enum"
     }
   }
 }
@@ -42,8 +39,9 @@ public final class StringsParser: Parser {
   public func parse(path: Path) throws {
     if path.isDirectory {
 
-      if try hasMultipleLprojSubdirectories(path: path) {
-        throw StringsParserError.multipleLprojDirectories
+      if try hasMultipleLprojSubdirsWithDifferentLanguages(path: path) {
+        warningHandler?("Multiple .lproj directories found with different languages." +
+          "Duplicate keys will be parsed multiple times.", #file, #line)
       }
 
       try _ = path.children().map { childPath in
@@ -72,12 +70,21 @@ public final class StringsParser: Parser {
     }
   }
 
-  private func hasMultipleLprojSubdirectories(path: Path) throws -> Bool {
-    var numberOfLprojDirectories = 0
+  private func hasMultipleLprojSubdirsWithDifferentLanguages(path: Path) throws -> Bool {
+    var lprojSubdir: String?
     for childPath in try path.children() {
-      numberOfLprojDirectories += childPath.lastComponent.hasSuffix(".lproj") ? 1 : 0
+      if childPath.lastComponent.hasSuffix(".lproj") {
+        let currentLprojSubdir = childPath.lastComponent
+        // if we find two .lproj subdirectories with different languages
+        if currentLprojSubdir != lprojSubdir {
+          return true
+        }
+        lprojSubdir = currentLprojSubdir
+      } else if try hasMultipleLprojSubdirsWithDifferentLanguages(path: childPath) {
+        return true
+      }
     }
-    return numberOfLprojDirectories > 1
+    return false
   }
 
   private func isStringsFile(name: String) -> Bool {
