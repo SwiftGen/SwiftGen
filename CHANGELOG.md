@@ -12,7 +12,9 @@
 
 ### Breaking Changes
 
-_None_
+* Change `StringsContext.swift` to stop manipulating strings.
+  [Diego Chohfi](https://github.com/dchohfi)
+  [#257](https://github.com/SwiftGen/SwiftGen/issues/257)
 
 ### New Features
 
