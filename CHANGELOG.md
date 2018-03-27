@@ -28,6 +28,9 @@ _None_
 * Switched to using SwiftLint via CocoaPods instead of our own install scripts.  
   [David Jennes](https://github.com/djbe) 
   [#401](https://github.com/SwiftGen/SwiftGen/pull/401)
+* Enabled some extra SwiftLint rules for better code consistency.  
+  [David Jennes](https://github.com/djbe) 
+  [#402](https://github.com/SwiftGen/SwiftGen/pull/402)
 
 ## 5.3.0
 
