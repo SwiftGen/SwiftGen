@@ -6,6 +6,7 @@ PODS:
     - PathKit (~> 0.8.0)
   - StencilSwiftKit (2.4.0):
     - Stencil (~> 0.10)
+  - SwiftLint (0.25.0)
   - Yams (0.6.0)
 
 DEPENDENCIES:
@@ -13,6 +14,7 @@ DEPENDENCIES:
   - Kanna
   - PathKit (~> 0.8.0)
   - StencilSwiftKit (~> 2.3)
+  - SwiftLint (~> 0.25)
   - Yams (~> 0.3)
 
 SPEC CHECKSUMS:
@@ -21,8 +23,9 @@ SPEC CHECKSUMS:
   PathKit: dcab05d701474011aae0e40cf892298a831f63d6
   Stencil: 40b382c52edab08f1e800e6144c1f04ae47a7a9a
   StencilSwiftKit: b2d282c788559bc19166eee070ffa513fedf8c05
+  SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
   Yams: 5513c2dcf65e4a95c543b7632da9abce2d45db99
 
-PODFILE CHECKSUM: af8bb93883a5e893f78dee6c1d3be8f5aa4f512c
+PODFILE CHECKSUM: e12a76736805dcfb9ab338f7d545dc321caa85fb
 
 COCOAPODS: 1.4.0
