@@ -4,8 +4,8 @@
 // MIT Licence
 //
 
-import XCTest
 import PathKit
+import XCTest
 
 class ConfigReadTests: XCTestCase {
 
@@ -33,8 +33,7 @@ class ConfigReadTests: XCTestCase {
         "foo": 5,
         "bar": ["bar1": 1, "bar2": 2, "bar3": [3, 4, ["bar3a": 50]]],
         "baz": ["hello", "world"]
-        ]
-      )
+      ])
       XCTAssertEqual(entry.output, "strings.swift")
     } catch let e {
       XCTFail("Error: \(e)")
@@ -113,7 +112,8 @@ class ConfigReadTests: XCTestCase {
           "error \(expectedError) but didn't throw at all")
       } catch let e {
         XCTAssertEqual(
-          String(describing: e), expectedError,
+          String(describing: e),
+          expectedError,
           "Trying to parse config file \(configFile) should have thrown " +
           "error \(expectedError) but threw \(e) instead."
         )

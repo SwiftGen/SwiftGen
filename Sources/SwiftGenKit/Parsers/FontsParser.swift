@@ -5,8 +5,8 @@
 // MIT License
 //
 
-import Foundation
 import AppKit.NSFont
+import Foundation
 import PathKit
 
 // MARK: Font
@@ -55,13 +55,13 @@ extension CTFont {
     let descs = CTFontManagerCreateFontDescriptorsFromURL(file.url as CFURL) as NSArray?
     guard let descRefs = (descs as? [CTFontDescriptor]) else { return [] }
 
-    return descRefs.flatMap { (desc) -> Font? in
+    return descRefs.flatMap { desc -> Font? in
       let font = CTFontCreateWithFontDescriptorAndOptions(desc, 0.0, nil, [.preventAutoActivation])
       let postScriptName = CTFontCopyPostScriptName(font) as String
       guard let familyName = CTFontCopyAttribute(font, kCTFontFamilyNameAttribute) as? String,
         let style = CTFontCopyAttribute(font, kCTFontStyleNameAttribute) as? String else { return nil }
 
-      let relPath = parent.flatMap({ file.relative(to: $0) }) ?? file
+      let relPath = parent.flatMap { file.relative(to: $0) } ?? file
       return Font(
         filePath: relPath.string,
         familyName: familyName,

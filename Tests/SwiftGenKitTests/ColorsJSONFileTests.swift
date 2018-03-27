@@ -4,9 +4,9 @@
 // MIT Licence
 //
 
-import XCTest
 import PathKit
 @testable import SwiftGenKit
+import XCTest
 
 class ColorsJSONFileTests: XCTestCase {
   func testFileWithDefaults() throws {

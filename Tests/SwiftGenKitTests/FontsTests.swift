@@ -6,10 +6,10 @@
 //  Copyright © 2017 AliSoftware. All rights reserved.
 //
 
-import XCTest
-@testable import SwiftGenKit
-import PathKit
 import AppKit.NSFont
+import PathKit
+@testable import SwiftGenKit
+import XCTest
 
 class FontsTests: XCTestCase {
   func testEmpty() {

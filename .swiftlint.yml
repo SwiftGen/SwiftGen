@@ -2,7 +2,36 @@ disabled_rules:
  - type_name
 
 opt_in_rules:
+ - array_init
+ - attributes
+ - closure_end_indentation
+ - closure_spacing
+ - contains_over_first_not_nil
+ - discouraged_optional_boolean
+ - empty_count
+ - fatal_error_message
+ - first_where
  - force_unwrapping
+ - implicit_return
+ - implicitly_unwrapped_optional
+ - joined_default_parameter
+ - literal_expression_end_indentation
+ - multiline_arguments
+ - multiline_parameters
+ - operator_usage_whitespace
+ - overridden_super_call
+ - override_in_extension
+ - pattern_matching_keywords
+ - private_action
+ - private_outlet
+ - prohibited_super_call
+ - redundant_nil_coalescing
+ - sorted_first_last
+ - sorted_imports
+ - trailing_closure
+ - unneeded_parentheses_in_closure_argument
+ - vertical_parameter_alignment_on_call
+ - yoda_condition
 
 # Rules customization
 line_length:

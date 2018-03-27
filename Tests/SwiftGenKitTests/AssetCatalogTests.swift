@@ -4,9 +4,9 @@
 // MIT Licence
 //
 
-import XCTest
-import SwiftGenKit
 import PathKit
+import SwiftGenKit
+import XCTest
 
 class AssetCatalogTests: XCTestCase {
   func testEmpty() {

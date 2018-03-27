@@ -39,7 +39,7 @@ extension StringsParser {
         "translation": entry.translation.newlineEscaped
       ]
 
-      if entry.types.count > 0 {
+      if !entry.types.isEmpty {
         result["types"] = entry.types.map { $0.rawValue }
       }
 
@@ -47,7 +47,7 @@ extension StringsParser {
     }
 
     let tables = self.tables.map { name, entries in
-      return [
+      [
         "name": name,
         "levels": structure(
           entries: entries,
@@ -63,7 +63,7 @@ extension StringsParser {
 
   private func normalize(_ string: String) -> String {
     let components = string.components(separatedBy: CharacterSet(charactersIn: "-_"))
-    return components.map { $0.capitalized }.joined(separator: "")
+    return components.map { $0.capitalized }.joined()
   }
 
   typealias Mapper = (_ entry: Entry, _ keyPath: [String]) -> [String: Any]
@@ -75,7 +75,7 @@ extension StringsParser {
     var structuredStrings: [String: Any] = [:]
 
     let strings = entries
-      .filter { $0.keyStructure.count == keyPath.count+1 }
+      .filter { $0.keyStructure.count == keyPath.count + 1 }
       .sorted { $0.key.lowercased() < $1.key.lowercased() }
       .map { mapper($0, keyPath) }
 
@@ -89,15 +89,15 @@ extension StringsParser {
 
     var children: [[String: Any]] = []
     let nextLevelKeyPaths: [[String]] = entries
-      .filter({ $0.keyStructure.count > keyPath.count+1 })
-      .map({ Array($0.keyStructure.prefix(keyPath.count+1)) })
+      .filter { $0.keyStructure.count > keyPath.count + 1 }
+      .map { Array($0.keyStructure.prefix(keyPath.count + 1)) }
 
     // make key paths unique
     let uniqueNextLevelKeyPaths = Array(Set(
       nextLevelKeyPaths.map { keyPath in
-        keyPath.map({
+        keyPath.map {
           $0.capitalized.replacingOccurrences(of: "-", with: "_")
-        }).joined(separator: ".")
+        }.joined(separator: ".")
       }))
       .sorted()
       .map { $0.components(separatedBy: ".") }

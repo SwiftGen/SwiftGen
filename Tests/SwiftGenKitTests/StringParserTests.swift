@@ -4,8 +4,8 @@
 // MIT Licence
 //
 
-import XCTest
 import SwiftGenKit
+import XCTest
 
 class StringParserTests: XCTestCase {
   func testParseStringPlaceholder() throws {

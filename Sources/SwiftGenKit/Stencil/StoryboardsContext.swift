@@ -34,7 +34,7 @@ private func uppercaseFirst(_ string: String) -> String {
 extension StoryboardParser {
   public func stencilContext() -> [String: Any] {
     let storyboards = self.storyboards
-      .sorted { (lhs, rhs) in lhs.name < rhs.name }
+      .sorted { lhs, rhs in lhs.name < rhs.name }
       .map(map(storyboard:))
     return [
       "modules": modules.sorted(),

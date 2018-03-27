@@ -13,14 +13,16 @@ import SwiftGenKit
 // MARK: Common
 
 let outputOption = Option(
-  "output", default: OutputDestination.console, flag: "o",
+  "output",
+  default: OutputDestination.console,
+  flag: "o",
   description: "The path to the file to generate (Omit to generate to stdout)"
 )
 
 // MARK: - Main
 
 let main = Group {
-  $0.noCommand = { (path, group, parser) in
+  $0.noCommand = { path, group, parser in
     if parser.hasOption("help") {
       logMessage(.info, "Note: If you invoke swiftgen with no subcommand, it will default to `swiftgen config run`\n")
       throw GroupError.noCommand(path, group)

@@ -4,12 +4,15 @@
 // MIT Licence
 //
 
-import XCTest
 import PathKit
+import XCTest
 
 class ConfigLintTests: XCTestCase {
-  private func _testLint(fixture: String, expectedLogs: [(LogLevel, String)], assertionMessage: String,
-                         file: StaticString = #file, line: UInt = #line) {
+  private func _testLint(fixture: String,
+                         expectedLogs: [(LogLevel, String)],
+                         assertionMessage: String,
+                         file: StaticString = #file,
+                         line: UInt = #line) {
     guard let path = Bundle(for: type(of: self)).path(forResource: fixture, ofType: "yml") else {
       fatalError("Fixture \(fixture) not found")
     }
@@ -33,8 +36,9 @@ class ConfigLintTests: XCTestCase {
       missingLogs.isEmpty,
       "\(assertionMessage)\n" +
         "The following logs were expected but never received:\n" +
-        missingLogs.map({ "\($0) - \($1)" }).joined(separator: "\n"),
-      file: file, line: line
+        missingLogs.map { "\($0) - \($1)" }.joined(separator: "\n"),
+      file: file,
+      line: line
     )
   }
 

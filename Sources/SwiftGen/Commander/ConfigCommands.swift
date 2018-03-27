@@ -24,9 +24,9 @@ extension Config.Entry {
   }
 
   func run(parserCommand: ParserCLI) throws {
-    let parser = try parserCommand.parserType.init(options: [:], warningHandler: { (msg, _, _) in
+    let parser = try parserCommand.parserType.init(options: [:]) { msg, _, _ in
       logMessage(.warning, msg)
-    })
+    }
     try parser.parse(paths: self.paths)
     let templateRealPath = try self.template.resolvePath(forSubcommand: parserCommand.name)
     let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
@@ -45,7 +45,9 @@ extension Config.Entry {
 // MARK: Lint
 
 let configLintCommand = command(
-  Option<Path>("config", default: "swiftgen.yml", flag: "c",
+  Option<Path>("config",
+               default: "swiftgen.yml",
+               flag: "c",
                description: "Path to the configuration file to use",
                validator: checkPath(type: "config file") { $0.isFile })
 ) { file in
@@ -59,10 +61,14 @@ let configLintCommand = command(
 // MARK: Run
 
 let configRunCommand = command(
-  Option<Path>("config", default: "swiftgen.yml", flag: "c",
+  Option<Path>("config",
+               default: "swiftgen.yml",
+               flag: "c",
                description: "Path to the configuration file to use",
                validator: checkPath(type: "config file") { $0.isFile }),
-  Flag("verbose", default: false, flag: "v",
+  Flag("verbose",
+       default: false,
+       flag: "v",
        description: "Print each command being executed")
 ) { file, verbose in
   try ErrorPrettifier.execute {

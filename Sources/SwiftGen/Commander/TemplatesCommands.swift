@@ -17,7 +17,9 @@ private func isSubcommandName(name: String) throws -> String {
 }
 
 let templatesListCommand = command(
-  Option<String>("only", default: "", flag: "l",
+  Option<String>("only",
+                 default: "",
+                 flag: "l",
                  description: "If specified, only list templates valid for that specific subcommand",
                  validator: isSubcommandName),
   outputOption
@@ -60,9 +62,11 @@ let templatesListCommand = command(
 // These will then be converted into an actual template path, and passed to the result closure.
 private func templatePathCommandGenerator(execute: @escaping (Path, OutputDestination) throws -> Void) -> CommandType {
   return command(
-    Argument<String>("subcommand",
+    Argument<String>(
+      "subcommand",
       description: "the name of the subcommand for the template, like `colors`"),
-    Argument<String>("template",
+    Argument<String>(
+      "template",
       description: "the name of the template to find, like `swift3` or `dot-syntax`"),
     outputOption
   ) { subcommand, name, output in

@@ -28,11 +28,11 @@ extension AssetsCatalogParser {
     let catalogs = self.catalogs
       .sorted { lhs, rhs in lhs.name < rhs.name }
       .map { catalog -> [String: Any] in
-        return [
+        [
           "name": catalog.name,
           "assets": structure(entries: catalog.entries)
         ]
-    }
+      }
 
     return [
       "catalogs": catalogs
