@@ -639,6 +639,7 @@
 			buildConfigurationList = 09A87B551BCCA2C600D9B9F5 /* Build configuration list for PBXNativeTarget "SwiftGen UnitTests" */;
 			buildPhases = (
 				46464263FC5E8C22B47C0BCB /* [CP] Check Pods Manifest.lock */,
+				DD9F4766206ADC4C006B0DCA /* ⚠️ SwiftLint */,
 				09A87B4C1BCCA2C600D9B9F5 /* Sources */,
 				09A87B4D1BCCA2C600D9B9F5 /* Frameworks */,
 				09A87B4E1BCCA2C600D9B9F5 /* Resources */,
@@ -686,6 +687,7 @@
 			buildConfigurationList = DD428E011FC50F56001649D6 /* Build configuration list for PBXNativeTarget "SwiftGenKit" */;
 			buildPhases = (
 				3C77E1DB46FD97DA1A720A7E /* [CP] Check Pods Manifest.lock */,
+				DD9F4765206ADC29006B0DCA /* ⚠️ SwiftLint */,
 				DD428DF31FC50F56001649D6 /* Sources */,
 				DD428DF41FC50F56001649D6 /* Frameworks */,
 				DD428DF51FC50F56001649D6 /* Headers */,
@@ -706,11 +708,13 @@
 			buildConfigurationList = DDDE50481FAF687A004203BE /* Build configuration list for PBXNativeTarget "Templates UnitTests" */;
 			buildPhases = (
 				C44CC69B5D179B3BE467737C /* [CP] Check Pods Manifest.lock */,
+				DD9F4768206ADCD0006B0DCA /* ⚠️ SwiftLint */,
 				DDDE502B1FAF687A004203BE /* Sources */,
 				DDDE50351FAF687A004203BE /* Frameworks */,
 				DDDE50371FAF687A004203BE /* Resources */,
 				D523545564DCC237D6EE770B /* [CP] Embed Pods Frameworks */,
 				BE488BC166418F2E601C32FF /* [CP] Copy Pods Resources */,
+				DD9F4769206ADCD4006B0DCA /* ⚠️ SwiftLint (generated output) */,
 			);
 			buildRules = (
 				DDDE50451FAF687A004203BE /* PBXBuildRule */,
@@ -729,6 +733,7 @@
 			buildConfigurationList = DDDE51B41FAF814A004203BE /* Build configuration list for PBXNativeTarget "SwiftGenKit UnitTests" */;
 			buildPhases = (
 				08AE656536A8A1621DA57624 /* [CP] Check Pods Manifest.lock */,
+				DD9F4767206ADCB4006B0DCA /* ⚠️ SwiftLint */,
 				DDDE51A11FAF814A004203BE /* Sources */,
 				DDDE51A91FAF814A004203BE /* Frameworks */,
 				DDDE51AB1FAF814A004203BE /* Resources */,
@@ -881,7 +886,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  [[ -r ~/.profile ]] && source ~/.profile\n  if [[ `which bundler` ]]; then\n    bundle exec rake lint:code\n    bundle exec rake lint:tests\n  else\n    echo \"warning: bundler not found, can't lint code. Please install bundler then run bundle install.\"\n  fi\nfi";
+			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$PODS_ROOT/SwiftLint/swiftlint\" lint --strict --config \"${SRCROOT}/.swiftlint.yml\" --path \"${SRCROOT}/Sources/SwiftGen\"\nfi";
 		};
 		2C9D66D627FB898D3DA8D22E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1118,6 +1123,76 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		DD9F4765206ADC29006B0DCA /* ⚠️ SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "⚠️ SwiftLint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$PODS_ROOT/SwiftLint/swiftlint\" lint --strict --config \"${SRCROOT}/.swiftlint.yml\" --path \"${SRCROOT}/Sources/SwiftGenKit\"\nfi";
+		};
+		DD9F4766206ADC4C006B0DCA /* ⚠️ SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "⚠️ SwiftLint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$PODS_ROOT/SwiftLint/swiftlint\" lint --strict --config \"${SRCROOT}/.swiftlint.yml\" --path \"${SRCROOT}/Tests/SwiftGenTests\"\nfi";
+		};
+		DD9F4767206ADCB4006B0DCA /* ⚠️ SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "⚠️ SwiftLint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$PODS_ROOT/SwiftLint/swiftlint\" lint --strict --config \"${SRCROOT}/.swiftlint.yml\" --path \"${SRCROOT}/Tests/SwiftGenKitTests\"\nfi";
+		};
+		DD9F4768206ADCD0006B0DCA /* ⚠️ SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "⚠️ SwiftLint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$PODS_ROOT/SwiftLint/swiftlint\" lint --strict --config \"${SRCROOT}/.swiftlint.yml\" --path \"${SRCROOT}/Tests/TemplatesTests\"\nfi";
+		};
+		DD9F4769206ADCD4006B0DCA /* ⚠️ SwiftLint (generated output) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "⚠️ SwiftLint (generated output)";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$PODS_ROOT/SwiftLint/swiftlint\" lint --strict --config \"${SRCROOT}/.swiftlint.yml\" --path \"${SRCROOT}/Tests/Fixtures/Generated\"\nfi";
 		};
 		FBB073641159892604C35D32 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
