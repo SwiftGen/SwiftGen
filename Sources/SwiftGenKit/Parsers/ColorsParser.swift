@@ -20,8 +20,10 @@ public enum ColorsParserError: Error, CustomStringConvertible {
     case let .invalidFile(path, reason):
       return "error: Unable to parse file at \(path). \(reason)"
     case let .unsupportedFileType(path, supported):
-      return "error: Unsupported file type for \(path). " +
-        "The supported file types are: \(supported.joined(separator: ", "))"
+      return """
+        error: Unsupported file type for \(path). \
+        The supported file types are: \(supported.joined(separator: ", "))
+        """
     }
   }
 }

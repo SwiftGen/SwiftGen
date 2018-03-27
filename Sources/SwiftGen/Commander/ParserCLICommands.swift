@@ -13,8 +13,10 @@ private let templateNameOption = Option<String>(
   "template",
   default: "",
   flag: "t",
-  description: "The name of the template to use for code generation. " +
-  "See `swiftgen templates list` for a list of available names"
+  description: """
+    The name of the template to use for code generation. \
+    See `swiftgen templates list` for a list of available names
+    """
 )
 
 private let templatePathOption = Option<String>(

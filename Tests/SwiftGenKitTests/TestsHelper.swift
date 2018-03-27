@@ -70,7 +70,14 @@ func diff(_ result: [String: Any], _ expected: [String: Any], path: String = "")
     let lhs = result.keys.map { " - \($0): \(result[$0] ?? "")" }.joined(separator: "\n")
     let rhs = expected.keys.map { " - \($0): \(expected[$0] ?? "")" }.joined(separator: "\n")
     let path = (path != "") ? " at '\(path)'" : ""
-    return "\(msgColor)Keys do not match\(path):\(reset)\n>>>>>> result\n\(lhs)\n======\n\(rhs)\n<<<<<< expected"
+    return """
+      \(msgColor)Keys do not match\(path):\(reset)
+      >>>>>> result
+      \(lhs)
+      ======
+      \(rhs)
+      <<<<<< expected
+      """
   }
 
   // check values

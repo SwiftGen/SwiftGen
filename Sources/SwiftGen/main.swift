@@ -55,7 +55,9 @@ let stencilSwiftKitVersion = Bundle(for: StencilSwiftKit.StencilSwiftTemplate.se
 let swiftGenKitVersion = Bundle(for: SwiftGenKit.AssetsCatalogParser.self)
   .infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
 
-main.run("SwiftGen v\(version) (" +
-  "Stencil v\(stencilVersion), " +
-  "StencilSwiftKit v\(stencilSwiftKitVersion), " +
-  "SwiftGenKit v\(swiftGenKitVersion))")
+main.run("""
+  SwiftGen v\(version) (\
+  Stencil v\(stencilVersion), \
+  StencilSwiftKit v\(stencilSwiftKitVersion), \
+  SwiftGenKit v\(swiftGenKitVersion))
+  """)
