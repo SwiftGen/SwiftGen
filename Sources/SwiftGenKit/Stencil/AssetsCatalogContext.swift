@@ -42,19 +42,19 @@ extension AssetsCatalogParser {
   private func structure(entries: [Catalog.Entry]) -> [[String: Any]] {
     return entries.map { entry in
       switch entry {
-      case let .group(name: name, items: items):
+      case .group(let name, let items):
         return [
           "type": "group",
           "name": name,
           "items": structure(entries: items)
         ]
-      case let .color(name: name, value: value):
+      case .color(let name, let value):
         return [
           "type": "color",
           "name": name,
           "value": value
         ]
-      case let .image(name: name, value: value):
+      case .image(let name, let value):
         return [
           "type": "image",
           "name": name,

@@ -15,13 +15,13 @@ public enum StringsParserError: Error, CustomStringConvertible {
 
   public var description: String {
     switch self {
-    case let .duplicateTable(name):
+    case .duplicateTable(let name):
       return "Table \"\(name)\" already loaded, cannot add it again"
-    case let .failureOnLoading(path):
+    case .failureOnLoading(let path):
       return "Failed to load a file at \"\(path)\""
     case .invalidFormat:
       return "Invalid strings file"
-    case let .invalidPlaceholder(previous, new):
+    case .invalidPlaceholder(let previous, let new):
       return "Invalid placeholder type \(new) (previous: \(previous))"
     }
   }

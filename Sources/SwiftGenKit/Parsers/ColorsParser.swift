@@ -14,12 +14,12 @@ public enum ColorsParserError: Error, CustomStringConvertible {
 
   public var description: String {
     switch self {
-    case let .invalidHexColor(path, string, key):
+    case .invalidHexColor(let path, let string, let key):
       let keyInfo = key.flatMap { " for key \"\($0)\"" } ?? ""
       return "error: Invalid hex color \"\(string)\" found\(keyInfo) (\(path))."
-    case let .invalidFile(path, reason):
+    case .invalidFile(let path, let reason):
       return "error: Unable to parse file at \(path). \(reason)"
-    case let .unsupportedFileType(path, supported):
+    case .unsupportedFileType(let path, let supported):
       return """
         error: Unsupported file type for \(path). \
         The supported file types are: \(supported.joined(separator: ", "))

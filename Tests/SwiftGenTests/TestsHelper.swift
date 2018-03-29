@@ -80,8 +80,8 @@ func XCTAssertEqualDict(_ result: [String: Any]?,
 extension TemplateRef: Equatable {
   static func == (lhs: TemplateRef, rhs: TemplateRef) -> Bool {
     switch (lhs, rhs) {
-    case let (.name(lname), .name(rname)): return lname == rname
-    case let (.path(lpath), .path(rpath)): return lpath == rpath
+    case (.name(let lname), .name(let rname)): return lname == rname
+    case (.path(let lpath), .path(let rpath)): return lpath == rpath
     case (.name, .path), (.path, .name): return false
     }
   }

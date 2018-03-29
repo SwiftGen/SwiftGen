@@ -81,7 +81,7 @@ extension TemplateRef.Error: CustomStringConvertible {
 
         To list all the available named templates, use 'swiftgen templates list'.
         """
-    case let .multipleTemplateOptions(path, name):
+    case .multipleTemplateOptions(let path, let name):
       return "You need to choose EITHER a named template OR a template path. Found name '\(name)' and path '\(path)'"
     }
   }
