@@ -1,6 +1,3 @@
-disabled_rules:
- - type_name
-
 opt_in_rules:
  - array_init
  - attributes
