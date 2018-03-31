@@ -22,7 +22,9 @@ _None_
 
 ### Internal Changes
 
-_None_
+* Migrated to CircleCI 2.0.  
+  [David Jennes](https://github.com/djbe) 
+  [#403](https://github.com/SwiftGen/SwiftGen/pull/403)
 
 ## 5.3.0
 
