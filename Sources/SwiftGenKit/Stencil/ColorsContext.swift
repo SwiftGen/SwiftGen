@@ -19,7 +19,7 @@ import Foundation
 extension ColorsParser {
   public func stencilContext() -> [String: Any] {
     let palettes: [[String: Any]] = self.palettes
-      .sorted(by: { $0.name < $1.name })
+      .sorted { $0.name < $1.name }
       .map { palette in
         let colors = palette.colors
           .sorted { $0.key < $1.key }
@@ -29,7 +29,7 @@ extension ColorsParser {
           "name": palette.name,
           "colors": colors
         ]
-    }
+      }
 
     return [
       "palettes": palettes
@@ -40,7 +40,7 @@ extension ColorsParser {
     let name = name.trimmingCharacters(in: .whitespaces)
     let hex = "00000000" + String(value, radix: 16)
     let hexChars = Array(hex.suffix(8))
-    let comps = (0..<4).map { idx in String(hexChars[idx*2...idx*2+1]) }
+    let comps = (0..<4).map { idx in String(hexChars[(idx * 2)...(idx * 2 + 1)]) }
 
     return [
       "name": name,

@@ -4,12 +4,15 @@
 // MIT Licence
 //
 
-import XCTest
 import PathKit
+import XCTest
 
 class ConfigLintTests: XCTestCase {
-  private func _testLint(fixture: String, expectedLogs: [(LogLevel, String)], assertionMessage: String,
-                         file: StaticString = #file, line: UInt = #line) {
+  private func _testLint(fixture: String,
+                         expectedLogs: [(LogLevel, String)],
+                         assertionMessage: String,
+                         file: StaticString = #file,
+                         line: UInt = #line) {
     guard let path = Bundle(for: type(of: self)).path(forResource: fixture, ofType: "yml") else {
       fatalError("Fixture \(fixture) not found")
     }
@@ -31,10 +34,13 @@ class ConfigLintTests: XCTestCase {
     }
     XCTAssertTrue(
       missingLogs.isEmpty,
-      "\(assertionMessage)\n" +
-        "The following logs were expected but never received:\n" +
-        missingLogs.map({ "\($0) - \($1)" }).joined(separator: "\n"),
-      file: file, line: line
+      """
+      \(assertionMessage)
+      The following logs were expected but never received:
+      \(missingLogs.map { "\($0) - \($1)" }.joined(separator: "\n"))
+      """,
+      file: file,
+      line: line
     )
   }
 
@@ -81,8 +87,11 @@ class ConfigLintTests: XCTestCase {
   }
 
   func testLintMissingTemplateNameAndPath() {
-    let errorMsg = "You must specify a template name (-t) or path (-p).\n\n" +
-    "To list all the available named templates, use 'swiftgen templates list'."
+    let errorMsg = """
+      You must specify a template name (-t) or path (-p).
+
+      To list all the available named templates, use 'swiftgen templates list'.
+      """
     _testLint(
       fixture: "config-missing-template",
       expectedLogs: [(.error, errorMsg)],
@@ -91,8 +100,10 @@ class ConfigLintTests: XCTestCase {
   }
 
   func testLintBothTemplateNameAndPath() {
-    let errorMsg = "You need to choose EITHER a named template OR a template path. " +
-    "Found name 'template' and path 'template.swift'"
+    let errorMsg = """
+      You need to choose EITHER a named template OR a template path. \
+      Found name 'template' and path 'template.swift'
+      """
     _testLint(
       fixture: "config-both-templates",
       expectedLogs: [(.error, errorMsg)],

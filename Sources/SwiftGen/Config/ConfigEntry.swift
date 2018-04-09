@@ -93,9 +93,9 @@ extension Config.Entry {
       case .path(let path): return "-p \(path.string)"
       }
     }()
-    let params =  Parameters.flatten(dictionary: self.parameters)
-    let paramsList = params.isEmpty ? "" : (" " + params.map({ "--param \($0)" }).joined(separator: " "))
-    let inputPaths = self.paths.map({ $0.string }).joined(separator: " ")
+    let params = Parameters.flatten(dictionary: self.parameters)
+    let paramsList = params.isEmpty ? "" : (" " + params.map { "--param \($0)" }.joined(separator: " "))
+    let inputPaths = self.paths.map { $0.string }.joined(separator: " ")
     return "swiftgen \(cmd) \(tplFlag)\(paramsList) -o \(self.output) \(inputPaths)"
   }
 }

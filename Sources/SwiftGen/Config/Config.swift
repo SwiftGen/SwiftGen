@@ -32,8 +32,8 @@ extension Config {
     guard let config = anyConfig as? [String: Any] else {
       throw Config.Error.wrongType(key: nil, expected: "Dictionary", got: type(of: anyConfig))
     }
-    self.inputDir = (config[Keys.inputDir] as? String).map({ Path($0) })
-    self.outputDir = (config[Keys.outputDir] as? String).map({ Path($0) })
+    self.inputDir = (config[Keys.inputDir] as? String).map { Path($0) }
+    self.outputDir = (config[Keys.outputDir] as? String).map { Path($0) }
     var cmds: [String: [Config.Entry]] = [:]
     for parserCmd in allParserCommands {
       if let cmdEntry = config[parserCmd.name] {
@@ -98,8 +98,8 @@ extension Config {
       switch self {
       case .missingEntry(let key):
         return Config.Error.missingEntry(key: "\(prefix).\(key)")
-      case .wrongType(key: let key, expected: let expected, got: let got):
-        let fullKey = [prefix, key].flatMap({$0}).joined(separator: ".")
+      case .wrongType(let key, let expected, let got):
+        let fullKey = [prefix, key].flatMap({ $0 }).joined(separator: ".")
         return Config.Error.wrongType(key: fullKey, expected: expected, got: got)
       default:
         return self

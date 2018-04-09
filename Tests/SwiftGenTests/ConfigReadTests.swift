@@ -4,8 +4,8 @@
 // MIT Licence
 //
 
-import XCTest
 import PathKit
+import XCTest
 
 class ConfigReadTests: XCTestCase {
 
@@ -33,8 +33,7 @@ class ConfigReadTests: XCTestCase {
         "foo": 5,
         "bar": ["bar1": 1, "bar2": 2, "bar3": [3, 4, ["bar3a": 50]]],
         "baz": ["hello", "world"]
-        ]
-      )
+      ])
       XCTAssertEqual(entry.output, "strings.swift")
     } catch let e {
       XCTFail("Error: \(e)")
@@ -94,10 +93,15 @@ class ConfigReadTests: XCTestCase {
   func testReadInvalidConfigThrows() {
     let badConfigs = [
       "config-missing-paths": "Missing entry for key strings.paths.",
-      "config-missing-template": "You must specify a template name (-t) or path (-p).\n\n" +
-      "To list all the available named templates, use 'swiftgen templates list'.",
-      "config-both-templates": "You need to choose EITHER a named template OR a template path. " +
-      "Found name 'template' and path 'template.swift'",
+      "config-missing-template": """
+        You must specify a template name (-t) or path (-p).
+
+        To list all the available named templates, use 'swiftgen templates list'.
+        """,
+      "config-both-templates": """
+        You need to choose EITHER a named template OR a template path. \
+        Found name 'template' and path 'template.swift'
+        """,
       "config-missing-output": "Missing entry for key strings.output.",
       "config-invalid-structure": "Wrong type for key strings.paths: expected Path or array of Paths, got Array<Any>.",
       "config-invalid-template": "Wrong type for key strings.templateName: expected String, got Array<Any>.",
@@ -109,13 +113,18 @@ class ConfigReadTests: XCTestCase {
           fatalError("Fixture not found")
         }
         _ = try Config(file: Path(path))
-        XCTFail("Trying to parse config file \(configFile) should have thrown " +
-          "error \(expectedError) but didn't throw at all")
+        XCTFail("""
+          Trying to parse config file \(configFile) should have thrown \
+          error \(expectedError) but didn't throw at all
+          """)
       } catch let e {
         XCTAssertEqual(
-          String(describing: e), expectedError,
-          "Trying to parse config file \(configFile) should have thrown " +
-          "error \(expectedError) but threw \(e) instead."
+          String(describing: e),
+          expectedError,
+          """
+          Trying to parse config file \(configFile) should have thrown \
+          error \(expectedError) but threw \(e) instead.
+          """
         )
       }
     }

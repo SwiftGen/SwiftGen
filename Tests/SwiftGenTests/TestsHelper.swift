@@ -5,8 +5,8 @@
 //
 
 import Foundation
-import XCTest
 import PathKit
+import XCTest
 
 private let colorCode: (String) -> String =
   ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
@@ -32,14 +32,14 @@ private func diff(_ result: String, _ expected: String) -> String? {
   }
   if let badLineIdx = firstDiff {
     let slice = { (lines: [String], context: Int) -> ArraySlice<String> in
-      let start = max(0, badLineIdx-context)
-      let end = min(badLineIdx+context, lines.count-1)
+      let start = max(0, badLineIdx - context)
+      let end = min(badLineIdx + context, lines.count - 1)
       return lines[start...end]
     }
     let addLineNumbers = { (slice: ArraySlice) -> [String] in
       slice.enumerated().map { (idx: Int, line: String) in
         let num = idx + slice.startIndex
-        let lineNum = "\(num+1)".padding(toLength: 3, withPad: " ", startingAt: 0) + "|"
+        let lineNum = "\(num + 1)".padding(toLength: 3, withPad: " ", startingAt: 0) + "|"
         let clr = num == badLineIdx ? koCode : okCode
         return "\(clr.num)\(lineNum)\(reset)\(clr.code)\(line)\(reset)"
       }
@@ -63,11 +63,15 @@ func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #
   XCTFail(error, file: file, line: line)
 }
 
-func XCTAssertEqualDict(_ result: [String: Any]?, _ expected: [String: Any],
-                        file: StaticString = #file, line: UInt = #line) {
+func XCTAssertEqualDict(_ result: [String: Any]?,
+                        _ expected: [String: Any],
+                        file: StaticString = #file,
+                        line: UInt = #line) {
   if let dict = result {
     XCTAssertTrue(NSDictionary(dictionary: dict).isEqual(to: expected),
-                  "expected \(expected), got \(dict)", file: file, line: line)
+                  "expected \(expected), got \(dict)",
+                  file: file,
+                  line: line)
   } else {
     XCTAssertNotNil(result, file: file, line: line)
   }

@@ -5,8 +5,8 @@
 //
 
 import PathKit
-import XCTest
 @testable import SwiftGenKit
+import XCTest
 
 final class TestFileParser1: ColorsFileTypeParser {
   static let extensions = ["test1"]

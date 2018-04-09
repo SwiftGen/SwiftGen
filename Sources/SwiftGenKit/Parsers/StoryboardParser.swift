@@ -16,8 +16,10 @@ private enum XML {
       return "/document/scenes/scene/objects/*[@sceneMemberID=\"viewController\" and @id=\"\(identifier)\"]"
     }
     static func sceneXPath(initial: String) -> String {
-      return "/document/scenes/scene/objects/*[@sceneMemberID=\"viewController\" and " +
-        "string-length(@storyboardIdentifier) > 0]"
+      return """
+        /document/scenes/scene/objects/*[@sceneMemberID=\"viewController\" and \
+        string-length(@storyboardIdentifier) > 0]
+        """
     }
     static let placeholderTag = "viewControllerPlaceholder"
     static let customClassAttribute = "customClass"

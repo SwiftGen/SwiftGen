@@ -20,8 +20,10 @@ public enum ColorsParserError: Error, CustomStringConvertible {
     case .invalidFile(let path, let reason):
       return "error: Unable to parse file at \(path). \(reason)"
     case .unsupportedFileType(let path, let supported):
-      return "error: Unsupported file type for \(path). " +
-        "The supported file types are: \(supported.joined(separator: ", "))"
+      return """
+        error: Unsupported file type for \(path). \
+        The supported file types are: \(supported.joined(separator: ", "))
+        """
     }
   }
 }
@@ -66,8 +68,12 @@ public final class ColorsParser: Parser {
   func register(parser: ColorsFileTypeParser.Type) {
     for ext in parser.extensions {
       if let old = parsers[ext] {
-        warningHandler?("error: Parser \(parser) tried to register the file type '\(ext)' already" +
-          "registered by \(old).", #file, #line)
+        warningHandler?("""
+          error: Parser \(parser) tried to register the file type '\(ext)' already \
+          registered by \(old).
+          """,
+          #file,
+          #line)
       }
       parsers[ext] = parser
     }
@@ -112,9 +118,9 @@ extension NSColor {
   var hexValue: UInt32 {
     guard let rgb = rgbColor else { return 0 }
 
-    let hexRed   = UInt32(round(rgb.redComponent   * 0xFF)) << 24
+    let hexRed = UInt32(round(rgb.redComponent * 0xFF)) << 24
     let hexGreen = UInt32(round(rgb.greenComponent * 0xFF)) << 16
-    let hexBlue  = UInt32(round(rgb.blueComponent  * 0xFF)) << 8
+    let hexBlue = UInt32(round(rgb.blueComponent * 0xFF)) << 8
     let hexAlpha = UInt32(round(rgb.alphaComponent * 0xFF))
 
     return hexRed | hexGreen | hexBlue | hexAlpha

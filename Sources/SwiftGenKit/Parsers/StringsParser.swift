@@ -146,7 +146,7 @@ public final class StringsParser: Parser {
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier
     let chars = formatTypesRegEx.matches(in: formatString, options: [], range: range)
-      .map({ match -> (String, Int?) in
+      .map { match -> (String, Int?) in
         let range: NSRange
         if match.range(at: 3).location != NSNotFound {
           // [dioux] are in range #3 because in #2 there may be length modifiers (like in "lld")
@@ -163,11 +163,11 @@ public final class StringsParser: Parser {
           return (char, nil)
         } else {
           // Remove the "$" at the end of the positional specifier, and convert to Int
-          let posRange1 = NSRange(location: posRange.location, length: posRange.length-1)
+          let posRange1 = NSRange(location: posRange.location, length: posRange.length - 1)
           let pos = (formatString as NSString).substring(with: posRange1)
           return (char, Int(pos))
         }
-    })
+      }
 
     // enumerate the conversion specifiers and their optionally forced position
     // and build the array of PlaceholderTypes accordingly
@@ -183,14 +183,14 @@ public final class StringsParser: Parser {
           nextNonPositional += 1
         }
         if insertionPos > 0 {
-          while list.count <= insertionPos-1 {
+          while list.count <= insertionPos - 1 {
             list.append(.unknown)
           }
-          let previous = list[insertionPos-1]
+          let previous = list[insertionPos - 1]
           guard previous == .unknown || previous == p else {
             throw StringsParserError.invalidPlaceholder(previous: previous, new: p)
           }
-          list[insertionPos-1] = p
+          list[insertionPos - 1] = p
         }
       }
     }
