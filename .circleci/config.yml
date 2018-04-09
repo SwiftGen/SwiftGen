@@ -15,8 +15,8 @@ defaults:
   - &restore-gems
     restore_cache:
       keys:
-        - v1-gems-{{ checksum "Gemfile.lock" }}
-        - v1-gems-
+        - gems-{{ checksum "Gemfile.lock" }}
+        - gems-
   - &install-gems
     run:
       name: Bundle install
@@ -80,6 +80,7 @@ jobs:
             ./standalone/swiftgen templates list
       - store_test_results:
           path: /tmp/circleci-test-results
+      - *fetch-xcode-logs
       - *store-artifacts
 
   compile-output:
