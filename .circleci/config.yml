@@ -1,0 +1,129 @@
+defaults:
+  - &default-config
+    parallelism: 1
+    environment:
+      CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
+      CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
+      BUNDLE_PATH: vendor/bundle
+    macos:
+      xcode: "9.2.0"
+    shell: /bin/bash --login -eo pipefail
+  - &prepare-storage
+    run:
+      name: Create directories for artifacts and reports
+      command: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
+  - &restore-gems
+    restore_cache:
+      keys:
+        - gems-{{ checksum "Gemfile.lock" }}
+        - gems-
+  - &install-gems
+    run:
+      name: Bundle install
+      command: bundle check || bundle install
+      environment:
+        BUNDLE_JOBS: 4
+        BUNDLE_RETRY: 3
+  - &store-gems
+    save_cache:
+      key: v1-gems-{{ checksum "Gemfile.lock" }}
+      paths:
+        - vendor/bundle
+  - &fetch-xcode-logs
+    run:
+      name: Getting Xcode activity logs
+      command: find $HOME/Library/Developer/Xcode/DerivedData -name '*.xcactivitylog' -exec cp {} $CIRCLE_ARTIFACTS/xcactivitylog \; || true
+  - &store-artifacts
+    store_artifacts:
+      path: /tmp/circleci-artifacts
+
+    
+version: 2
+jobs:
+  lint:
+    <<: *default-config
+    steps:
+      - *prepare-storage
+      - checkout
+      - *restore-gems
+      - *install-gems
+      - *store-gems
+      - run:
+          name: Lint source code
+          command: bundle exec rake lint:code
+      - run:
+          name: Lint tests source code
+          command: bundle exec rake lint:tests
+      - run:
+          name: Lint generated output code
+          command: bundle exec rake lint:output
+      - *store-artifacts
+
+  build-and-test:
+    <<: *default-config
+    steps:
+      - *prepare-storage
+      - checkout
+      - *restore-gems
+      - *install-gems
+      - *store-gems
+      - run:
+          name: Run all tests
+          command: bundle exec rake xcode:test
+      - run:
+          name: Verify installation
+          command: bundle exec rake cli:install[./standalone,./standalone/frameworks,./standalone/stencils]
+      - run:
+          name: Check swiftgen binary
+          command: |
+            ./standalone/swiftgen --version
+            ./standalone/swiftgen templates list
+      - store_test_results:
+          path: /tmp/circleci-test-results
+      - *fetch-xcode-logs
+      - *store-artifacts
+
+  compile-output:
+    <<: *default-config
+    steps:
+      - *prepare-storage
+      - checkout
+      - *restore-gems
+      - *install-gems
+      - *store-gems
+      - run:
+          name: Compile generated code
+          command: bundle exec rake output:compile
+      - *store-artifacts
+
+  check-deploy:
+    <<: *default-config
+    steps:
+      - *prepare-storage
+      - checkout
+      - *restore-gems
+      - *install-gems
+      - *store-gems
+      - run:
+          name: Download podspec repo
+          command: curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+      - run:
+          name: Lint podspec
+          command: bundle exec rake pod:lint
+      - *store-artifacts
+
+
+workflows:
+  version: 2
+  lint-buildandtest-compileoutput-checkdeploy:
+    jobs:
+      - build-and-test
+      - lint
+      - compile-output:
+          requires:
+            - build-and-test
+            - lint
+      - check-deploy:
+          requires:
+            - build-and-test
+            - lint
