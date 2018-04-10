@@ -99,7 +99,7 @@ extension Config {
       case .missingEntry(let key):
         return Config.Error.missingEntry(key: "\(prefix).\(key)")
       case .wrongType(let key, let expected, let got):
-        let fullKey = [prefix, key].compactMap({ $0 }).joined(separator: ".")
+        let fullKey = [prefix, key].flatMap({ $0 }).joined(separator: ".")
         return Config.Error.wrongType(key: fullKey, expected: expected, got: got)
       default:
         return self

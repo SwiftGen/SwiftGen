@@ -104,7 +104,7 @@ public final class StoryboardParser: Parser {
     }
 
     // Scenes
-    let scenes = Set<Storyboard.Scene>(document.xpath(XML.Scene.sceneXPath(initial: initialSceneID)).compactMap {
+    let scenes = Set<Storyboard.Scene>(document.xpath(XML.Scene.sceneXPath(initial: initialSceneID)).flatMap {
       guard $0.tagName != XML.Scene.placeholderTag else { return nil }
       return Storyboard.Scene(with: $0)
     })
@@ -136,8 +136,8 @@ public final class StoryboardParser: Parser {
   }
 
   private func collectModules(from storyboard: Storyboard) -> [String] {
-    var result: [String] = storyboard.scenes.compactMap { $0.customModule } +
-      storyboard.segues.compactMap { $0.customModule }
+    var result: [String] = storyboard.scenes.flatMap { $0.customModule } +
+      storyboard.segues.flatMap { $0.customModule }
 
     if let module = storyboard.initialScene?.customModule {
       result += [module]
