@@ -35,8 +35,8 @@ class ConfigReadTests: XCTestCase {
         "baz": ["hello", "world"]
       ])
       XCTAssertEqual(entry.output, "strings.swift")
-    } catch let e {
-      XCTFail("Error: \(e)")
+    } catch let error {
+      XCTFail("Error: \(error)")
     }
   }
 
@@ -85,8 +85,8 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(xcassetsEntries[2].template, .name("swift4"))
       XCTAssertEqual(xcassetsEntries[2].output, "assets-all.swift")
       XCTAssertEqualDict(xcassetsEntries[2].parameters, [:])
-    } catch let e {
-      XCTFail("Error: \(e)")
+    } catch let error {
+      XCTFail("Error: \(error)")
     }
   }
 
@@ -117,13 +117,13 @@ class ConfigReadTests: XCTestCase {
           Trying to parse config file \(configFile) should have thrown \
           error \(expectedError) but didn't throw at all
           """)
-      } catch let e {
+      } catch let error {
         XCTAssertEqual(
-          String(describing: e),
+          String(describing: error),
           expectedError,
           """
           Trying to parse config file \(configFile) should have thrown \
-          error \(expectedError) but threw \(e) instead.
+          error \(expectedError) but threw \(error) instead.
           """
         )
       }

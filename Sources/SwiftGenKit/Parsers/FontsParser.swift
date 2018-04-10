@@ -42,9 +42,10 @@ extension PathKit.Path {
   /// - Parameter parent: The parent Path to get the relative path against
   /// - Returns: The relative Path, or nil if parent was not a parent dir of self
   func relative(to parent: Path) -> Path? {
-    let pc = parent.absolute().components
-    let fc = self.absolute().components
-    return fc.starts(with: pc) ? Path(components: fc.dropFirst(pc.count)) : nil
+    let parentComponents = parent.absolute().components
+    let currentComponents = self.absolute().components
+    return currentComponents.starts(with: parentComponents)
+      ? Path(components: currentComponents.dropFirst(parentComponents.count)) : nil
   }
 }
 
@@ -55,7 +56,7 @@ extension CTFont {
     let descs = CTFontManagerCreateFontDescriptorsFromURL(file.url as CFURL) as NSArray?
     guard let descRefs = (descs as? [CTFontDescriptor]) else { return [] }
 
-    return descRefs.flatMap { desc -> Font? in
+    return descRefs.compactMap { desc -> Font? in
       let font = CTFontCreateWithFontDescriptorAndOptions(desc, 0.0, nil, [.preventAutoActivation])
       let postScriptName = CTFontCopyPostScriptName(font) as String
       guard let familyName = CTFontCopyAttribute(font, kCTFontFamilyNameAttribute) as? String,

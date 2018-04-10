@@ -61,8 +61,8 @@ struct ErrorPrettifier: Error, CustomStringConvertible {
   static func execute(closure: () throws -> Void ) rethrows {
     do {
       try closure()
-    } catch let e as NSError where e.domain == NSCocoaErrorDomain {
-      throw ErrorPrettifier(nsError: e)
+    } catch let error as NSError where error.domain == NSCocoaErrorDomain {
+      throw ErrorPrettifier(nsError: error)
     }
   }
 }
