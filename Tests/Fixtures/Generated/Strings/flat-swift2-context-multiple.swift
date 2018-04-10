@@ -20,8 +20,6 @@ internal enum L10n {
     internal static func Private(p1: String, p2: Int) -> String {
       return L10n.tr("Localizable", "private", p1, p2)
     }
-    /// User Profile Settings
-    internal static let SettingsUserProfileSectionHeaderTitle = L10n.tr("Localizable", "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
     /// You have %d apples
     internal static func ApplesCount(p1: Int) -> String {
       return L10n.tr("Localizable", "apples.count", p1)
@@ -30,14 +28,16 @@ internal enum L10n {
     internal static func BananasOwner(p1: Int, p2: String) -> String {
       return L10n.tr("Localizable", "bananas.owner", p1, p2)
     }
-    /// Here you can change some user profile settings.
-    internal static let SeTTingsUSerProFileSectioNFooterText = L10n.tr("Localizable", "seTTings.uSer-proFile-sectioN.footer_text")
     /// Some Reserved Keyword there
     internal static let SettingsNavigationBarSelf = L10n.tr("Localizable", "settings.navigation-bar.self")
     /// DeepSettings
     internal static let SettingsNavigationBarTitleDeeperThanWeCanHandleNoReallyThisIsDeep = L10n.tr("Localizable", "settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep")
     /// Settings
     internal static let SettingsNavigationBarTitleEvenDeeper = L10n.tr("Localizable", "settings.navigation-bar.title.even.deeper")
+    /// Here you can change some user profile settings.
+    internal static let SettingsUserProfileSectionFooterText = L10n.tr("Localizable", "settings.user_profile_section.footer_text")
+    /// User Profile Settings
+    internal static let SettingsUserProfileSectionHEADERTITLE = L10n.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
   }
   internal enum LocMultiline {
     /// multi\nline

@@ -10,28 +10,6 @@
 				<key>children</key>
 				<array>
 					<dict>
-						<key>children</key>
-						<array>
-							<dict>
-								<key>name</key>
-								<string>USER_PROFILE_SECTION</string>
-								<key>strings</key>
-								<array>
-									<dict>
-										<key>key</key>
-										<string>SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE</string>
-										<key>name</key>
-										<string>HEADER_TITLE</string>
-										<key>translation</key>
-										<string>Profil de l'utilisateur Paramètres</string>
-									</dict>
-								</array>
-							</dict>
-						</array>
-						<key>name</key>
-						<string>SETTINGS</string>
-					</dict>
-					<dict>
 						<key>name</key>
 						<string>apples</string>
 						<key>strings</key>
@@ -74,28 +52,6 @@
 						<key>children</key>
 						<array>
 							<dict>
-								<key>name</key>
-								<string>uSer-proFile-sectioN</string>
-								<key>strings</key>
-								<array>
-									<dict>
-										<key>key</key>
-										<string>seTTings.uSer-proFile-sectioN.footer_text</string>
-										<key>name</key>
-										<string>footer_text</string>
-										<key>translation</key>
-										<string>Ici, vous pouvez modifier certains paramètres de profil d'utilisateur.</string>
-									</dict>
-								</array>
-							</dict>
-						</array>
-						<key>name</key>
-						<string>seTTings</string>
-					</dict>
-					<dict>
-						<key>children</key>
-						<array>
-							<dict>
 								<key>children</key>
 								<array>
 									<dict>
@@ -132,6 +88,29 @@
 										<string>self</string>
 										<key>translation</key>
 										<string>Quelques mots-clés réservés</string>
+									</dict>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>user-profile-section</string>
+								<key>strings</key>
+								<array>
+									<dict>
+										<key>key</key>
+										<string>settings.user-profile-section.footer_text</string>
+										<key>name</key>
+										<string>footer_text</string>
+										<key>translation</key>
+										<string>Ici, vous pouvez modifier certains paramètres de profil d'utilisateur.</string>
+									</dict>
+									<dict>
+										<key>key</key>
+										<string>settings.user-profile-section.HEADER_TITLE</string>
+										<key>name</key>
+										<string>HEADER_TITLE</string>
+										<key>translation</key>
+										<string>Profil de l'utilisateur Paramètres</string>
 									</dict>
 								</array>
 							</dict>

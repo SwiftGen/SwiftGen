@@ -10,28 +10,6 @@
 				<key>children</key>
 				<array>
 					<dict>
-						<key>children</key>
-						<array>
-							<dict>
-								<key>name</key>
-								<string>USER_PROFILE_SECTION</string>
-								<key>strings</key>
-								<array>
-									<dict>
-										<key>key</key>
-										<string>SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE</string>
-										<key>name</key>
-										<string>HEADER_TITLE</string>
-										<key>translation</key>
-										<string>User Profile Settings</string>
-									</dict>
-								</array>
-							</dict>
-						</array>
-						<key>name</key>
-						<string>SETTINGS</string>
-					</dict>
-					<dict>
 						<key>name</key>
 						<string>apples</string>
 						<key>strings</key>
@@ -69,28 +47,6 @@
 								</array>
 							</dict>
 						</array>
-					</dict>
-					<dict>
-						<key>children</key>
-						<array>
-							<dict>
-								<key>name</key>
-								<string>uSer-proFile-sectioN</string>
-								<key>strings</key>
-								<array>
-									<dict>
-										<key>key</key>
-										<string>seTTings.uSer-proFile-sectioN.footer_text</string>
-										<key>name</key>
-										<string>footer_text</string>
-										<key>translation</key>
-										<string>Here you can change some user profile settings.</string>
-									</dict>
-								</array>
-							</dict>
-						</array>
-						<key>name</key>
-						<string>seTTings</string>
 					</dict>
 					<dict>
 						<key>children</key>
@@ -203,6 +159,29 @@
 										<string>self</string>
 										<key>translation</key>
 										<string>Some Reserved Keyword there</string>
+									</dict>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>user_profile_section</string>
+								<key>strings</key>
+								<array>
+									<dict>
+										<key>key</key>
+										<string>settings.user_profile_section.footer_text</string>
+										<key>name</key>
+										<string>footer_text</string>
+										<key>translation</key>
+										<string>Here you can change some user profile settings.</string>
+									</dict>
+									<dict>
+										<key>key</key>
+										<string>settings.user_profile_section.HEADER_TITLE</string>
+										<key>name</key>
+										<string>HEADER_TITLE</string>
+										<key>translation</key>
+										<string>User Profile Settings</string>
 									</dict>
 								</array>
 							</dict>

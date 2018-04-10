@@ -20,14 +20,6 @@ internal enum XCTLoc {
     return XCTLoc.tr("Localizable", "private", p1, p2)
   }
 
-  internal enum Settings {
-
-    internal enum UserProfileSection {
-      /// User Profile Settings
-      internal static let headerTitle = XCTLoc.tr("Localizable", "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
-    }
-  }
-
   internal enum Apples {
     /// You have %d apples
     internal static func count(_ p1: Int) -> String {
@@ -39,14 +31,6 @@ internal enum XCTLoc {
     /// Those %d bananas belong to %@.
     internal static func owner(_ p1: Int, _ p2: String) -> String {
       return XCTLoc.tr("Localizable", "bananas.owner", p1, p2)
-    }
-  }
-
-  internal enum SeTTings {
-
-    internal enum USerProFileSectioN {
-      /// Here you can change some user profile settings.
-      internal static let footerText = XCTLoc.tr("Localizable", "seTTings.uSer-proFile-sectioN.footer_text")
     }
   }
 
@@ -92,6 +76,13 @@ internal enum XCTLoc {
           internal static let deeper = XCTLoc.tr("Localizable", "settings.navigation-bar.title.even.deeper")
         }
       }
+    }
+
+    internal enum UserProfileSection {
+      /// Here you can change some user profile settings.
+      internal static let footerText = XCTLoc.tr("Localizable", "settings.user_profile_section.footer_text")
+      /// User Profile Settings
+      internal static let headerTitle = XCTLoc.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
     }
   }
 }
