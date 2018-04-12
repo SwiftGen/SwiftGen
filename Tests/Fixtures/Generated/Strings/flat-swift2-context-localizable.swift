@@ -34,9 +34,9 @@ internal enum L10n {
   /// Settings
   internal static let SettingsNavigationBarTitleEvenDeeper = L10n.tr("Localizable", "settings.navigation-bar.title.even.deeper")
   /// Here you can change some user profile settings.
-  internal static let SeTTingsUSerProFileSectioNFooterText = L10n.tr("Localizable", "seTTings.uSer-proFile-sectioN.footer_text")
+  internal static let SettingsUserProfileSectionFooterText = L10n.tr("Localizable", "settings.user_profile_section.footer_text")
   /// User Profile Settings
-  internal static let SettingsUserProfileSectionHeaderTitle = L10n.tr("Localizable", "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
+  internal static let SettingsUserProfileSectionHEADERTITLE = L10n.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
 }
 // swiftlint:enable identifier_name line_length type_body_length
 

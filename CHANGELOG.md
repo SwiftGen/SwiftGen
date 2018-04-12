@@ -12,7 +12,9 @@
 
 ### Breaking Changes
 
-_None_
+* Don't normalize string keys while parsing, let all transformation be done on template side. This makes the developer responsible to keep the language file organized, duplications won't be removed.  
+  [Diego Chohfi](https://github.com/dchohfi)
+  [#257](https://github.com/SwiftGen/SwiftGen/issues/257)
 
 ### New Features
 

@@ -39,9 +39,9 @@ extension Config {
       if let cmdEntry = config[parserCmd.name] {
         do {
           cmds[parserCmd.name] = try Config.Entry.parseCommandEntry(yaml: cmdEntry)
-        } catch let e as Config.Error {
+        } catch let error as Config.Error {
           // Prefix the name of the command for a better error message
-          throw e.withKeyPrefixed(by: parserCmd.name)
+          throw error.withKeyPrefixed(by: parserCmd.name)
         }
       }
     }
@@ -63,8 +63,8 @@ extension Config {
           for inputPath in entry.paths where inputPath.isAbsolute {
             logger(.warning, "\(cmd).paths: \(inputPath) is an absolute path.")
           }
-          if case TemplateRef.path(let tp) = entry.template, tp.isAbsolute {
-            logger(.warning, "\(cmd).templatePath: \(tp) is an absolute path.")
+          if case TemplateRef.path(let templateRef) = entry.template, templateRef.isAbsolute {
+            logger(.warning, "\(cmd).templatePath: \(templateRef) is an absolute path.")
           }
           if entry.output.isAbsolute {
             logger(.warning, "\(cmd).output: \(entry.output) is an absolute path.")

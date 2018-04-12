@@ -81,9 +81,9 @@ internal enum L10n {
 
       internal enum UserProfileSection {
         /// Here you can change some user profile settings.
-        internal static let FooterText = L10n.tr("Localizable", "seTTings.uSer-proFile-sectioN.footer_text")
+        internal static let FooterText = L10n.tr("Localizable", "settings.user_profile_section.footer_text")
         /// User Profile Settings
-        internal static let HeaderTitle = L10n.tr("Localizable", "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
+        internal static let HeaderTitle = L10n.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
       }
     }
   }

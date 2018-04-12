@@ -70,8 +70,8 @@ internal enum L10n {
     }
 
     internal enum UserProfileSection {
-      internal static let FooterText = L10n.tr("Localizable", "seTTings.uSer-proFile-sectioN.footer_text")
-      internal static let HeaderTitle = L10n.tr("Localizable", "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
+      internal static let FooterText = L10n.tr("Localizable", "settings.user_profile_section.footer_text")
+      internal static let HeaderTitle = L10n.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
     }
   }
 }

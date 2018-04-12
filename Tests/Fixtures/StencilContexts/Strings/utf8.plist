@@ -11,7 +11,7 @@
 				<array>
 					<dict>
 						<key>name</key>
-						<string>Apples</string>
+						<string>apples</string>
 						<key>strings</key>
 						<array>
 							<dict>
@@ -30,7 +30,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>Bananas</string>
+						<string>bananas</string>
 						<key>strings</key>
 						<array>
 							<dict>
@@ -59,7 +59,7 @@
 										<array>
 											<dict>
 												<key>name</key>
-												<string>Even</string>
+												<string>even</string>
 												<key>strings</key>
 												<array>
 													<dict>
@@ -74,11 +74,11 @@
 											</dict>
 										</array>
 										<key>name</key>
-										<string>Title</string>
+										<string>title</string>
 									</dict>
 								</array>
 								<key>name</key>
-								<string>Navigation_Bar</string>
+								<string>navigation-bar</string>
 								<key>strings</key>
 								<array>
 									<dict>
@@ -93,12 +93,12 @@
 							</dict>
 							<dict>
 								<key>name</key>
-								<string>User_Profile_Section</string>
+								<string>user-profile-section</string>
 								<key>strings</key>
 								<array>
 									<dict>
 										<key>key</key>
-										<string>seTTings.uSer-proFile-sectioN.footer_text</string>
+										<string>settings.user-profile-section.footer_text</string>
 										<key>name</key>
 										<string>footer_text</string>
 										<key>translation</key>
@@ -106,7 +106,7 @@
 									</dict>
 									<dict>
 										<key>key</key>
-										<string>SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE</string>
+										<string>settings.user-profile-section.HEADER_TITLE</string>
 										<key>name</key>
 										<string>HEADER_TITLE</string>
 										<key>translation</key>
@@ -116,7 +116,7 @@
 							</dict>
 						</array>
 						<key>name</key>
-						<string>Settings</string>
+						<string>settings</string>
 					</dict>
 				</array>
 				<key>strings</key>

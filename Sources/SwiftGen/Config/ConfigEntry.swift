@@ -63,10 +63,10 @@ extension Config.Entry {
   }
 
   static func parseCommandEntry(yaml: Any) throws -> [Config.Entry] {
-    if let e = yaml as? [String: Any] {
-      return [try Config.Entry(yaml: e)]
-    } else if let e = yaml as? [[String: Any]] {
-      return try e.map({ try Config.Entry(yaml: $0) })
+    if let entry = yaml as? [String: Any] {
+      return [try Config.Entry(yaml: entry)]
+    } else if let entry = yaml as? [[String: Any]] {
+      return try entry.map({ try Config.Entry(yaml: $0) })
     } else {
       throw Config.Error.wrongType(key: nil, expected: "Dictionary or Array", got: type(of: yaml))
     }

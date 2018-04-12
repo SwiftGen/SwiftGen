@@ -122,9 +122,9 @@ public final class StringsParser: Parser {
 
   private static let formatTypesRegEx: NSRegularExpression = {
     // %d/%i/%o/%u/%x with their optional length modifiers like in "%lld"
-    let pattern_int = "(?:h|hh|l|ll|q|z|t|j)?([dioux])"
+    let patternInt = "(?:h|hh|l|ll|q|z|t|j)?([dioux])"
     // valid flags for float
-    let pattern_float = "[aefg]"
+    let patternFloat = "[aefg]"
     // like in "%3$" to make positional specifiers
     let position = "([1-9]\\d*\\$)?"
     // precision like in "%1.2f"
@@ -132,7 +132,7 @@ public final class StringsParser: Parser {
 
     do {
       return try NSRegularExpression(
-        pattern: "(?:^|(?<!%)(?:%%)*)%\(position)\(precision)(@|\(pattern_int)|\(pattern_float)|[csp])",
+        pattern: "(?:^|(?<!%)(?:%%)*)%\(position)\(precision)(@|\(patternInt)|\(patternFloat)|[csp])",
         options: [.caseInsensitive]
       )
     } catch {
@@ -174,7 +174,7 @@ public final class StringsParser: Parser {
     var list = [PlaceholderType]()
     var nextNonPositional = 1
     for (str, pos) in chars {
-      if let char = str.first, let p = PlaceholderType(formatChar: char) {
+      if let char = str.first, let placeholderType = PlaceholderType(formatChar: char) {
         let insertionPos: Int
         if let pos = pos {
           insertionPos = pos
@@ -187,10 +187,10 @@ public final class StringsParser: Parser {
             list.append(.unknown)
           }
           let previous = list[insertionPos - 1]
-          guard previous == .unknown || previous == p else {
-            throw StringsParserError.invalidPlaceholder(previous: previous, new: p)
+          guard previous == .unknown || previous == placeholderType else {
+            throw StringsParserError.invalidPlaceholder(previous: previous, new: placeholderType)
           }
-          list[insertionPos - 1] = p
+          list[insertionPos - 1] = placeholderType
         }
       }
     }

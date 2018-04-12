@@ -34,9 +34,9 @@ internal enum XCTLoc {
   /// Settings
   internal static let SettingsNavigationBarTitleEvenDeeper = XCTLoc.tr("Localizable", "settings.navigation-bar.title.even.deeper")
   /// Here you can change some user profile settings.
-  internal static let SeTTingsUSerProFileSectioNFooterText = XCTLoc.tr("Localizable", "seTTings.uSer-proFile-sectioN.footer_text")
+  internal static let SettingsUserProfileSectionFooterText = XCTLoc.tr("Localizable", "settings.user_profile_section.footer_text")
   /// User Profile Settings
-  internal static let SettingsUserProfileSectionHeaderTitle = XCTLoc.tr("Localizable", "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
+  internal static let SettingsUserProfileSectionHEADERTITLE = XCTLoc.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
 }
 // swiftlint:enable identifier_name line_length type_body_length
 

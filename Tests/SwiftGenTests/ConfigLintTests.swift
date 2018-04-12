@@ -25,11 +25,11 @@ class ConfigLintTests: XCTestCase {
           missingLogs.remove(at: idx)
         }
       }
-    } catch let e {
-      if let idx = missingLogs.index(where: { $0 == .error && $1 == String(describing: e) }) {
+    } catch let error {
+      if let idx = missingLogs.index(where: { $0 == .error && $1 == String(describing: error) }) {
         missingLogs.remove(at: idx)
       } else {
-        XCTFail("Unexpected error: \(e)", file: file, line: line)
+        XCTFail("Unexpected error: \(error)", file: file, line: line)
       }
     }
     XCTAssertTrue(

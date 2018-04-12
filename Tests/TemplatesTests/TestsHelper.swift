@@ -20,9 +20,9 @@ private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
 private func diff(_ result: String, _ expected: String) -> String? {
   guard result != expected else { return nil }
   var firstDiff: Int? = nil
-  let nl = CharacterSet.newlines
-  let lhsLines = result.components(separatedBy: nl)
-  let rhsLines = expected.components(separatedBy: nl)
+  let newLines = CharacterSet.newlines
+  let lhsLines = result.components(separatedBy: newLines)
+  let rhsLines = expected.components(separatedBy: newLines)
 
   for (idx, pair) in zip(lhsLines, rhsLines).enumerated() where pair.0 != pair.1 {
     firstDiff = idx
@@ -120,8 +120,8 @@ class Fixtures {
   private static func string(for name: String, subDirectory: String) -> String {
     do {
       return try path(for: name, subDirectory: subDirectory).read()
-    } catch let e {
-      fatalError("Unable to load fixture content: \(e)")
+    } catch let error {
+      fatalError("Unable to load fixture content: \(error)")
     }
   }
 }
