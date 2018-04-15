@@ -59,7 +59,7 @@ jobs:
           command: bundle exec rake lint:output
       - *store-artifacts
 
-  build-and-test:
+  xcode-build-and-test:
     <<: *default-config
     steps:
       - *prepare-storage
@@ -81,6 +81,22 @@ jobs:
       - store_test_results:
           path: /tmp/circleci-test-results
       - *fetch-xcode-logs
+      - *store-artifacts
+
+  spm-build-and-test:
+    <<: *default-config
+    steps:
+      - *prepare-storage
+      - checkout
+      - *restore-gems
+      - *install-gems
+      - *store-gems
+      - run:
+          name: Install libxml2
+          command: brew upgrade python && brew install libxml2 && brew link --force libxml2
+      - run:
+          name: Build with SPM
+          command: bundle exec rake spm:build
       - *store-artifacts
 
   compile-output:
@@ -117,13 +133,16 @@ workflows:
   version: 2
   lint-buildandtest-compileoutput-checkdeploy:
     jobs:
-      - build-and-test
       - lint
+      - spm-build-and-test
+      - xcode-build-and-test
       - compile-output:
           requires:
-            - build-and-test
             - lint
+            - spm-build-and-test
+            - xcode-build-and-test
       - check-deploy:
           requires:
-            - build-and-test
             - lint
+            - spm-build-and-test
+            - xcode-build-and-test
