@@ -11,33 +11,31 @@ import enum StencilSwiftKit.Parameters
 
 // MARK: - Config.Entry
 
-extension Config {
-  struct Entry {
-    enum Keys {
-      static let paths = "paths"
-      static let templateName = "templateName"
-      static let templatePath = "templatePath"
-      static let params = "params"
-      static let output = "output"
+struct ConfigEntry {
+  enum Keys {
+    static let paths = "paths"
+    static let templateName = "templateName"
+    static let templatePath = "templatePath"
+    static let params = "params"
+    static let output = "output"
+  }
+
+  var paths: [Path]
+  var template: TemplateRef
+  var parameters: [String: Any]
+  var output: Path
+
+  mutating func makeRelativeTo(inputDir: Path?, outputDir: Path?) {
+    if let inputDir = inputDir {
+      self.paths = self.paths.map { $0.isRelative ? inputDir + $0 : $0 }
     }
-
-    var paths: [Path]
-    var template: TemplateRef
-    var parameters: [String: Any]
-    var output: Path
-
-    mutating func makeRelativeTo(inputDir: Path?, outputDir: Path?) {
-      if let inputDir = inputDir {
-        self.paths = self.paths.map { $0.isRelative ? inputDir + $0 : $0 }
-      }
-      if let outputDir = outputDir, self.output.isRelative {
-        self.output = outputDir + self.output
-      }
+    if let outputDir = outputDir, self.output.isRelative {
+      self.output = outputDir + self.output
     }
   }
 }
 
-extension Config.Entry {
+extension ConfigEntry {
   init(yaml: [String: Any]) throws {
     guard let srcs = yaml[Keys.paths] else {
       throw Config.Error.missingEntry(key: Keys.paths)
@@ -50,23 +48,23 @@ extension Config.Entry {
       throw Config.Error.wrongType(key: Keys.paths, expected: "Path or array of Paths", got: type(of: srcs))
     }
 
-    let templateName: String = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templateName) ?? ""
-    let templatePath: String = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.templatePath) ?? ""
+    let templateName: String = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.templateName) ?? ""
+    let templatePath: String = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.templatePath) ?? ""
     self.template = try TemplateRef(templateShortName: templateName, templateFullPath: templatePath)
 
-    self.parameters = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.params) ?? [:]
+    self.parameters = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.params) ?? [:]
 
-    guard let output: String = try Config.Entry.getOptionalField(yaml: yaml, key: Keys.output) else {
+    guard let output: String = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.output) else {
       throw Config.Error.missingEntry(key: Keys.output)
     }
     self.output = Path(output)
   }
 
-  static func parseCommandEntry(yaml: Any) throws -> [Config.Entry] {
+  static func parseCommandEntry(yaml: Any) throws -> [ConfigEntry] {
     if let entry = yaml as? [String: Any] {
-      return [try Config.Entry(yaml: entry)]
+      return [try ConfigEntry(yaml: entry)]
     } else if let entry = yaml as? [[String: Any]] {
-      return try entry.map({ try Config.Entry(yaml: $0) })
+      return try entry.map({ try ConfigEntry(yaml: $0) })
     } else {
       throw Config.Error.wrongType(key: nil, expected: "Dictionary or Array", got: type(of: yaml))
     }
@@ -85,7 +83,7 @@ extension Config.Entry {
 
 /// Convert to CommandLine-equivalent string (for verbose mode, printing linting info, …)
 ///
-extension Config.Entry {
+extension ConfigEntry {
   func commandLine(forCommand cmd: String) -> String {
     let tplFlag: String = {
       switch self.template {

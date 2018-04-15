@@ -11,7 +11,7 @@ import PathKit
 import StencilSwiftKit
 import SwiftGenKit
 
-extension Config.Entry {
+extension ConfigEntry {
   func checkPaths() throws {
     for inputPath in self.paths {
       guard inputPath.exists else {

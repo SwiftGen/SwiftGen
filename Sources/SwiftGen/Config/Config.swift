@@ -19,7 +19,7 @@ struct Config {
 
   let inputDir: Path?
   let outputDir: Path?
-  let commands: [String: [Config.Entry]]
+  let commands: [String: [ConfigEntry]]
 }
 
 extension Config {
@@ -34,11 +34,11 @@ extension Config {
     }
     self.inputDir = (config[Keys.inputDir] as? String).map { Path($0) }
     self.outputDir = (config[Keys.outputDir] as? String).map { Path($0) }
-    var cmds: [String: [Config.Entry]] = [:]
+    var cmds: [String: [ConfigEntry]] = [:]
     for parserCmd in allParserCommands {
       if let cmdEntry = config[parserCmd.name] {
         do {
-          cmds[parserCmd.name] = try Config.Entry.parseCommandEntry(yaml: cmdEntry)
+          cmds[parserCmd.name] = try ConfigEntry.parseCommandEntry(yaml: cmdEntry)
         } catch let error as Config.Error {
           // Prefix the name of the command for a better error message
           throw error.withKeyPrefixed(by: parserCmd.name)
