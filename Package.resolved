@@ -1,0 +1,79 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Commander",
+        "repositoryURL": "https://github.com/kylef/Commander.git",
+        "state": {
+          "branch": null,
+          "revision": "e5b50ad7b2e91eeb828393e89b03577b16be7db9",
+          "version": "0.8.0"
+        }
+      },
+      {
+        "package": "Kanna",
+        "repositoryURL": "https://github.com/tid-kijyun/Kanna.git",
+        "state": {
+          "branch": null,
+          "revision": "44b169e1698d596f2eed698d8a67558fb0542b2a",
+          "version": "4.0.0"
+        }
+      },
+      {
+        "package": "PathKit",
+        "repositoryURL": "https://github.com/kylef/PathKit.git",
+        "state": {
+          "branch": null,
+          "revision": "fa81fa9e3a9f59645159c4ea45c0c46ee6558f71",
+          "version": "0.9.1"
+        }
+      },
+      {
+        "package": "Spectre",
+        "repositoryURL": "https://github.com/kylef/Spectre.git",
+        "state": {
+          "branch": null,
+          "revision": "e34d5687e1e9d865e3527dd58bc2f7464ef6d936",
+          "version": "0.8.0"
+        }
+      },
+      {
+        "package": "Stencil",
+        "repositoryURL": "https://github.com/kylef/Stencil.git",
+        "state": {
+          "branch": null,
+          "revision": "c2e25f25acfbe24442809c055141d8323af8f6cc",
+          "version": "0.11.0"
+        }
+      },
+      {
+        "package": "StencilSwiftKit",
+        "repositoryURL": "https://github.com/SwiftGen/StencilSwiftKit.git",
+        "state": {
+          "branch": "master",
+          "revision": "008100ad4ca1a89269a53f03f8a65c1e5ec2a052",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftClibxml2",
+        "repositoryURL": "https://github.com/tid-kijyun/SwiftClibxml2.git",
+        "state": {
+          "branch": null,
+          "revision": "c4e67cc970273fc2bee978d12e422974ff184de7",
+          "version": "1.0.2"
+        }
+      },
+      {
+        "package": "Yams",
+        "repositoryURL": "https://github.com/jpsim/Yams.git",
+        "state": {
+          "branch": null,
+          "revision": "6652aa7b793d3c8a075db0614acb575fcaecf457",
+          "version": "0.7.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

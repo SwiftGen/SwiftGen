@@ -5,6 +5,7 @@
 //
 
 import Commander
+import Foundation
 import PathKit
 import Stencil
 import StencilSwiftKit

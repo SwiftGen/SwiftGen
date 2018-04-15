@@ -6,6 +6,7 @@
 //  Copyright © 2017 AliSoftware. All rights reserved.
 //
 
+import Foundation
 import PathKit
 
 extension Path {

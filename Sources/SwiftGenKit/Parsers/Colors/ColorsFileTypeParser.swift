@@ -4,6 +4,7 @@
 // MIT Licence
 //
 
+import AppKit
 import Foundation
 import PathKit
 
