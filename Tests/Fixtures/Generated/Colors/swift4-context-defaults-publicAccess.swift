@@ -19,7 +19,11 @@ public extension Color {
     let blue  = CGFloat((rgbaValue >>  8) & 0xff) / 255.0
     let alpha = CGFloat((rgbaValue      ) & 0xff) / 255.0
 
-    self.init(red: red, green: green, blue: blue, alpha: alpha)
+    if #available(iOS 10.0, *) {
+      self.init(displayP3Red: red, green: green, blue: blue, alpha: alpha)
+    } else {
+      self.init(red: red, green: green, blue: blue, alpha: alpha)
+    }
   }
 }
 // swiftlint:enable operator_usage_whitespace
