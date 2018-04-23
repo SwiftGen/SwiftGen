@@ -86,6 +86,13 @@ internal enum StoryboardScene {
 
     internal static let urlChooser = SceneType<XXPickerViewController>(storyboard: Message.self, identifier: "URLChooser")
   }
+  internal enum NoPrefix: StoryboardType {
+    internal static let storyboardName = "NoPrefix"
+
+    internal static let item1 = SceneType<UIGlkViewController>(storyboard: NoPrefix.self, identifier: "item 1")
+
+    internal static let item2 = SceneType<UIAvPlayerViewController>(storyboard: NoPrefix.self, identifier: "item 2")
+  }
   internal enum Placeholder: StoryboardType {
     internal static let storyboardName = "Placeholder"
 

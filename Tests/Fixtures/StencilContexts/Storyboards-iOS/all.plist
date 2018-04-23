@@ -162,6 +162,29 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>NoPrefix</string>
+			<key>platform</key>
+			<string>iOS</string>
+			<key>scenes</key>
+			<array>
+				<dict>
+					<key>baseType</key>
+					<string>GlkViewController</string>
+					<key>identifier</key>
+					<string>item 1</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>AvPlayerViewController</string>
+					<key>identifier</key>
+					<string>item 2</string>
+				</dict>
+			</array>
+			<key>segues</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>Placeholder</string>
 			<key>platform</key>
 			<string>iOS</string>
