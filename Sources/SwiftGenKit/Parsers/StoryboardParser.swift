@@ -66,6 +66,51 @@ struct Storyboard {
   let initialScene: Scene?
   let scenes: Set<Scene>
   let segues: Set<Segue>
+
+  init(with document: Kanna.XMLDocument, name: String) {
+    self.name = name
+
+    // TargetRuntime
+    let targetRuntime = document.at_xpath(XML.Scene.targetRuntimeXPath)?.text ?? ""
+    platform = Storyboard.platformMap[targetRuntime] ?? targetRuntime
+    
+    // Initial VC
+    let initialSceneID = document.at_xpath(XML.Scene.initialVCXPath)?.text ?? ""
+    if let object = document.at_xpath(XML.Scene.initialSceneXPath(identifier: initialSceneID)) {
+      initialScene = Storyboard.Scene(with: object)
+    } else {
+      initialScene = nil
+    }
+
+    // Scenes
+    scenes = Set<Storyboard.Scene>(document.xpath(XML.Scene.sceneXPath(initial: initialSceneID)).compactMap {
+      guard $0.tagName != XML.Scene.placeholderTag else { return nil }
+      return Storyboard.Scene(with: $0)
+    })
+
+    // Segues
+    segues = Set<Storyboard.Segue>(document.xpath(XML.Segue.segueXPath).map {
+      Storyboard.Segue(with: $0)
+    })
+  }
+
+  private static let platformMap = [
+    "AppleTV": "tvOS",
+    "iOS.CocoaTouch": "iOS",
+    "MacOSX.Cocoa": "macOS",
+    "watchKit": "watchOS"
+  ]
+
+  var modules: Set<String> {
+    var result: [String] = scenes.compactMap { $0.customModule } +
+      segues.compactMap { $0.customModule }
+
+    if let module = initialScene?.customModule {
+      result += [module]
+    }
+
+    return Set(result)
+  }
 }
 
 public final class StoryboardParser: Parser {
@@ -96,54 +141,12 @@ public final class StoryboardParser: Parser {
       throw ColorsParserError.invalidFile(path: path, reason: "XML parser error: \(error).")
     }
 
-    // Initial VC
-    let initialSceneID = document.at_xpath(XML.Scene.initialVCXPath)?.text ?? ""
-    var initialScene: Storyboard.Scene? = nil
-    if let object = document.at_xpath(XML.Scene.initialSceneXPath(identifier: initialSceneID)) {
-      initialScene = Storyboard.Scene(with: object)
-    }
-
-    // Scenes
-    let scenes = Set<Storyboard.Scene>(document.xpath(XML.Scene.sceneXPath(initial: initialSceneID)).compactMap {
-      guard $0.tagName != XML.Scene.placeholderTag else { return nil }
-      return Storyboard.Scene(with: $0)
-    })
-
-    // Segues
-    let segues = Set<Storyboard.Segue>(document.xpath(XML.Segue.segueXPath).map {
-      Storyboard.Segue(with: $0)
-    })
-
-    // TargetRuntime
-    let mapping = [
-      "AppleTV": "tvOS",
-      "iOS.CocoaTouch": "iOS",
-      "MacOSX.Cocoa": "macOS",
-      "watchKit": "watchOS"
-    ]
-    let targetRuntime = document.at_xpath(XML.Scene.targetRuntimeXPath)?.text ?? ""
-    let platform = mapping[targetRuntime] ?? targetRuntime
-
-    storyboards += [Storyboard(name: path.lastComponentWithoutExtension,
-                               platform: platform,
-                               initialScene: initialScene,
-                               scenes: scenes,
-                               segues: segues)]
+    let name = path.lastComponentWithoutExtension
+    storyboards += [Storyboard(with: document, name: name)]
   }
 
   var modules: Set<String> {
-    return Set<String>(storyboards.flatMap(collectModules(from:)))
-  }
-
-  private func collectModules(from storyboard: Storyboard) -> [String] {
-    var result: [String] = storyboard.scenes.compactMap { $0.customModule } +
-      storyboard.segues.compactMap { $0.customModule }
-
-    if let module = storyboard.initialScene?.customModule {
-      result += [module]
-    }
-
-    return result
+    return Set<String>(storyboards.flatMap { $0.modules })
   }
 
   var platform: String? {
