@@ -68,6 +68,10 @@ import {{module}}
       {% endif %}
     {% endif %}
     {{scene.customClass}}
+  {% elif scene.baseType == "GlkViewController" %}
+    GLKViewController
+  {% elif scene.baseType == "AvPlayerViewController" %}
+    AVPlayerViewController
   {% else %}
     {{prefix}}{{scene.baseType}}
   {% endif %}
