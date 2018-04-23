@@ -21,7 +21,9 @@
 * Add ability to list all custom fonts and register them using `FontFamily.registerAllCustomFonts`.  
   [Olivier Halligon](https://github.com/AliSoftware)
   [#394](https://github.com/SwiftGen/SwiftGen/issues/394)
-
+* Add support for P3 display colorspace.  
+  [noppefoxwolf](https://github.com/noppefoxwolf)
+  [#413](https://github.com/SwiftGen/SwiftGen/pull/413)
 ### Internal Changes
 
 * Migrated to CircleCI 2.0.  
