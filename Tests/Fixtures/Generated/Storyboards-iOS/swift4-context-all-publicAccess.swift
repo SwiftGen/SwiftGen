@@ -89,9 +89,9 @@ public enum StoryboardScene {
   public enum NoPrefix: StoryboardType {
     public static let storyboardName = "NoPrefix"
 
-    public static let item1 = SceneType<UIGlkViewController>(storyboard: NoPrefix.self, identifier: "item 1")
+    public static let item1 = SceneType<GLKViewController>(storyboard: NoPrefix.self, identifier: "item 1")
 
-    public static let item2 = SceneType<UIAvPlayerViewController>(storyboard: NoPrefix.self, identifier: "item 2")
+    public static let item2 = SceneType<AVPlayerViewController>(storyboard: NoPrefix.self, identifier: "item 2")
   }
   public enum Placeholder: StoryboardType {
     public static let storyboardName = "Placeholder"

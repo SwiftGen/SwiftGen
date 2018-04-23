@@ -89,9 +89,9 @@ internal enum XCTStoryboardsScene {
   internal enum NoPrefix: StoryboardType {
     internal static let storyboardName = "NoPrefix"
 
-    internal static let item1 = SceneType<UIGlkViewController>(storyboard: NoPrefix.self, identifier: "item 1")
+    internal static let item1 = SceneType<GLKViewController>(storyboard: NoPrefix.self, identifier: "item 1")
 
-    internal static let item2 = SceneType<UIAvPlayerViewController>(storyboard: NoPrefix.self, identifier: "item 2")
+    internal static let item2 = SceneType<AVPlayerViewController>(storyboard: NoPrefix.self, identifier: "item 2")
   }
   internal enum Placeholder: StoryboardType {
     internal static let storyboardName = "Placeholder"
