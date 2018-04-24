@@ -7,7 +7,6 @@
 {% set controller %}{% if isAppKit %}Controller{% else %}ViewController{% endif %}{% endset %}
 // swiftlint:disable sorted_imports
 import Foundation
-import {% if isAppKit %}Cocoa{% else %}UIKit{% endif %}
 {% for module in modules where module != env.PRODUCT_MODULE_NAME and module != param.module %}
 import {{module}}
 {% endfor %}
@@ -64,20 +63,12 @@ import {{module}}
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 {% set sceneEnumName %}{{param.sceneEnumName|default:"StoryboardScene"}}{% endset %}
 {% macro className scene %}{% filter removeNewlines %}
-  {% if scene.customClass %}
-    {% if scene.customModule %}
-      {% if not param.ignoreTargetModule or scene.customModule != env.PRODUCT_MODULE_NAME and scene.customModule != param.module %}
-        {{scene.customModule}}.
-      {% endif %}
+  {% if scene.module %}
+    {% if not param.ignoreTargetModule or scene.module != env.PRODUCT_MODULE_NAME and scene.module != param.module %}
+      {{scene.module}}.
     {% endif %}
-    {{scene.customClass}}
-  {% elif scene.baseType == "GlkViewController" %}
-    GLKViewController
-  {% elif scene.baseType == "AvPlayerViewController" %}
-    AVPlayerViewController
-  {% else %}
-    {{prefix}}{{scene.baseType}}
   {% endif %}
+  {{scene.type}}
 {% endfilter %}{% endmacro %}
 {{accessModifier}} enum {{sceneEnumName}} {
   {% for storyboard in storyboards %}
