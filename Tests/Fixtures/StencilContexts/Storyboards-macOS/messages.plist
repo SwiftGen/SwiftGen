@@ -4,6 +4,7 @@
 <dict>
 	<key>modules</key>
 	<array>
+		<string>AppKit</string>
 		<string>FadeSegue</string>
 	</array>
 	<key>platform</key>
@@ -22,18 +23,30 @@
 					<string>ViewController</string>
 					<key>identifier</key>
 					<string>MessageDetails</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>ViewController</string>
 					<key>identifier</key>
 					<string>MessageList</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>ViewController</string>
 					<key>identifier</key>
 					<string>MessageListFooter</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSViewController</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -42,18 +55,30 @@
 					<string></string>
 					<key>identifier</key>
 					<string>MessagesTab</string>
+					<key>module</key>
+					<string></string>
+					<key>type</key>
+					<string>CustomTabViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>SplitViewController</string>
 					<key>identifier</key>
 					<string>SplitMessages</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSSplitViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>WindowController</string>
 					<key>identifier</key>
 					<string>WindowCtrl</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSWindowController</string>
 				</dict>
 			</array>
 			<key>segues</key>
@@ -65,6 +90,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Embed</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -73,6 +102,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Modal</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -81,6 +114,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Popover</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -89,6 +126,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Sheet</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -97,6 +138,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Show</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -105,6 +150,10 @@
 					<string>FadeSegue</string>
 					<key>identifier</key>
 					<string>public</string>
+					<key>module</key>
+					<string>FadeSegue</string>
+					<key>type</key>
+					<string>FadeSegue</string>
 				</dict>
 			</array>
 		</dict>

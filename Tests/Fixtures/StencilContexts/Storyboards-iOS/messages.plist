@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>modules</key>
-	<array/>
+	<array>
+		<string>UIKit</string>
+	</array>
 	<key>platform</key>
 	<string>iOS</string>
 	<key>storyboards</key>
@@ -15,6 +17,10 @@
 				<string>ViewController</string>
 				<key>identifier</key>
 				<string></string>
+				<key>module</key>
+				<string>UIKit</string>
+				<key>type</key>
+				<string>UIViewController</string>
 			</dict>
 			<key>name</key>
 			<string>Message</string>
@@ -27,18 +33,30 @@
 					<string>ViewController</string>
 					<key>identifier</key>
 					<string>Composer</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>TableViewController</string>
 					<key>identifier</key>
 					<string>MessagesList</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UITableViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>NavigationController</string>
 					<key>identifier</key>
 					<string>NavCtrl</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UINavigationController</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -47,6 +65,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>URLChooser</string>
+					<key>module</key>
+					<string></string>
+					<key>type</key>
+					<string>XXPickerViewController</string>
 				</dict>
 			</array>
 			<key>segues</key>
@@ -58,6 +80,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>CustomBack</string>
+					<key>module</key>
+					<string></string>
+					<key>type</key>
+					<string>CustomSegueClass2</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -66,6 +92,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Embed</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -74,6 +104,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>NonCustom</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -82,6 +116,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Show-NavCtrl</string>
+					<key>module</key>
+					<string></string>
+					<key>type</key>
+					<string>CustomSegueClass</string>
 				</dict>
 			</array>
 		</dict>

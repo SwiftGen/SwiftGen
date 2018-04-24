@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>modules</key>
-	<array/>
+	<array>
+		<string>UIKit</string>
+	</array>
 	<key>platform</key>
 	<string>iOS</string>
 	<key>storyboards</key>
@@ -15,6 +17,10 @@
 				<string>NavigationController</string>
 				<key>identifier</key>
 				<string></string>
+				<key>module</key>
+				<string>UIKit</string>
+				<key>type</key>
+				<string>UINavigationController</string>
 			</dict>
 			<key>name</key>
 			<string>Anonymous</string>
