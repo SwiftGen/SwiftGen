@@ -319,10 +319,10 @@ public final class Emitter {
     }
 
     // private
-    fileprivate var emitter = yaml_emitter_t()
+    private var emitter = yaml_emitter_t()
 
-    fileprivate enum State { case initialized, opened, closed }
-    fileprivate var state: State = .initialized
+    private enum State { case initialized, opened, closed }
+    private var state: State = .initialized
 
     private func applyOptionsToEmitter() {
         yaml_emitter_set_canonical(&emitter, options.canonical ? 1 : 0)
@@ -353,13 +353,13 @@ extension Emitter.Options {
 
 // MARK: implementation details
 extension Emitter {
-    fileprivate func emit(_ event: UnsafeMutablePointer<yaml_event_t>) throws {
+    private func emit(_ event: UnsafeMutablePointer<yaml_event_t>) throws {
         guard yaml_emitter_emit(&emitter, event) == 1 else {
             throw YamlError(from: emitter)
         }
     }
 
-    fileprivate func serializeNode(_ node: Node) throws {
+    private func serializeNode(_ node: Node) throws {
         switch node {
         case .scalar(let scalar): try serializeScalar(scalar)
         case .sequence(let sequence): try serializeSequence(sequence)

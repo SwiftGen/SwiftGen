@@ -1,14 +1,36 @@
 class BlockContext {
   class var contextKey: String { return "block_context" }
 
-  var blocks: [String: BlockNode]
+  var blocks: [String: [BlockNode]]
 
   init(blocks: [String: BlockNode]) {
-    self.blocks = blocks
+    self.blocks = [:]
+    blocks.forEach { (key, value) in
+      self.blocks[key] = [value]
+    }
   }
 
+  func push(_ block: BlockNode, forKey blockName: String) {
+    if var blocks = blocks[blockName] {
+      blocks.append(block)
+      self.blocks[blockName] = blocks
+    } else {
+      self.blocks[blockName] = [block]
+    }
+  }
+  
   func pop(_ blockName: String) -> BlockNode? {
-    return blocks.removeValue(forKey: blockName)
+    if var blocks = blocks[blockName] {
+      let block = blocks.removeFirst()
+      if blocks.isEmpty {
+        self.blocks.removeValue(forKey: blockName)
+      } else {
+        self.blocks[blockName] = blocks
+      }
+      return block
+    } else {
+      return nil
+    }
   }
 }
 
@@ -70,9 +92,7 @@ class ExtendsNode : NodeType {
       blockContext = context
 
       for (key, value) in blocks {
-        if !blockContext.blocks.keys.contains(key) {
-          blockContext.blocks[key] = value
-        }
+        blockContext.push(value, forKey: key)
       }
     } else {
       blockContext = BlockContext(blocks: blocks)
@@ -109,7 +129,11 @@ class BlockNode : NodeType {
 
   func render(_ context: Context) throws -> String {
     if let blockContext = context[BlockContext.contextKey] as? BlockContext, let node = blockContext.pop(name) {
-      return try context.push(dictionary: ["block": ["super": self]]) {
+      let newContext: [String: Any] = [
+        BlockContext.contextKey: blockContext,
+        "block": ["super": try self.render(context)]
+      ]
+      return try context.push(dictionary: newContext) {
         return try node.render(context)
       }
     }

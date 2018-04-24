@@ -105,6 +105,10 @@ final class InExpression: Expression, InfixOperator, CustomStringConvertible {
       
       if let lhs = lhsValue as? AnyHashable, let rhs = rhsValue as? [AnyHashable] {
         return rhs.contains(lhs)
+      } else if let lhs = lhsValue as? Int, let rhs = rhsValue as? CountableClosedRange<Int> {
+        return rhs.contains(lhs)
+      } else if let lhs = lhsValue as? Int, let rhs = rhsValue as? CountableRange<Int> {
+        return rhs.contains(lhs)
       } else if let lhs = lhsValue as? String, let rhs = rhsValue as? String {
         return rhs.contains(lhs)
       } else if lhsValue == nil && rhsValue == nil {

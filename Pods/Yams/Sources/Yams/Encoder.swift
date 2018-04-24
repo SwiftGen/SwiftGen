@@ -30,7 +30,7 @@ public class YAMLEncoder {
     }
 }
 
-class _Encoder: Swift.Encoder { // swiftlint:disable:this type_name
+private class _Encoder: Swift.Encoder {
     var node: Node = .unused
 
     init(userInfo: [CodingUserInfoKey: Any] = [:], codingPath: [CodingKey] = []) {
@@ -71,40 +71,40 @@ class _Encoder: Swift.Encoder { // swiftlint:disable:this type_name
 
     // MARK: -
 
-    fileprivate var mapping: Node.Mapping {
+    var mapping: Node.Mapping {
         get { return node.mapping ?? [:] }
         set { node.mapping = newValue }
     }
 
-    fileprivate var sequence: Node.Sequence {
+    var sequence: Node.Sequence {
         get { return node.sequence ?? [] }
         set { node.sequence = newValue }
     }
 
     /// Encode `ScalarRepresentable` to `node`
-    fileprivate func represent<T: ScalarRepresentable>(_ value: T) throws {
+    func represent<T: ScalarRepresentable>(_ value: T) throws {
         assertCanEncodeNewValue()
         node = try box(value)
     }
 
-    fileprivate func represent<T: ScalarRepresentableCustomizedForCodable>(_ value: T) throws {
+    func represent<T: ScalarRepresentableCustomizedForCodable>(_ value: T) throws {
         assertCanEncodeNewValue()
         node = value.representedForCodable()
     }
 
     /// create a new `_ReferencingEncoder` instance as `key` inheriting `userInfo`
-    fileprivate func encoder(for key: CodingKey) -> _ReferencingEncoder {
+    func encoder(for key: CodingKey) -> _ReferencingEncoder {
         return .init(referencing: self, key: key)
     }
 
     /// create a new `_ReferencingEncoder` instance at `index` inheriting `userInfo`
-    fileprivate func encoder(at index: Int) -> _ReferencingEncoder {
+    func encoder(at index: Int) -> _ReferencingEncoder {
         return .init(referencing: self, at: index)
     }
 
     /// Create `Node` from `ScalarRepresentable`.
     /// Errors throwed by `ScalarRepresentable` will be boxed into `EncodingError`
-    fileprivate func box(_ representable: ScalarRepresentable) throws -> Node {
+    private func box(_ representable: ScalarRepresentable) throws -> Node {
         do {
             return try representable.represented()
         } catch {
@@ -115,22 +115,22 @@ class _Encoder: Swift.Encoder { // swiftlint:disable:this type_name
         }
     }
 
-    fileprivate var canEncodeNewValue: Bool { return node == .unused }
+    private var canEncodeNewValue: Bool { return node == .unused }
 }
 
-class _ReferencingEncoder: _Encoder { // swiftlint:disable:this type_name
+private class _ReferencingEncoder: _Encoder {
     private enum Reference { case mapping(String), sequence(Int) }
 
     private let encoder: _Encoder
     private let reference: Reference
 
-    fileprivate init(referencing encoder: _Encoder, key: CodingKey) {
+    init(referencing encoder: _Encoder, key: CodingKey) {
         self.encoder = encoder
         reference = .mapping(key.stringValue)
         super.init(userInfo: encoder.userInfo, codingPath: encoder.codingPath + [key])
     }
 
-    fileprivate init(referencing encoder: _Encoder, at index: Int) {
+    init(referencing encoder: _Encoder, at index: Int) {
         self.encoder = encoder
         reference = .sequence(index)
         super.init(userInfo: encoder.userInfo, codingPath: encoder.codingPath + [_YAMLCodingKey(index: index)])
@@ -146,12 +146,11 @@ class _ReferencingEncoder: _Encoder { // swiftlint:disable:this type_name
     }
 }
 
-struct _KeyedEncodingContainer<K: CodingKey> : KeyedEncodingContainerProtocol { // swiftlint:disable:this type_name
-    typealias Key = K
+private struct _KeyedEncodingContainer<Key: CodingKey> : KeyedEncodingContainerProtocol {
 
     private let encoder: _Encoder
 
-    fileprivate init(referencing encoder: _Encoder) {
+    init(referencing encoder: _Encoder) {
         self.encoder = encoder
     }
 
@@ -192,10 +191,10 @@ struct _KeyedEncodingContainer<K: CodingKey> : KeyedEncodingContainerProtocol { 
     private func encoder(for key: CodingKey) -> _ReferencingEncoder { return encoder.encoder(for: key) }
 }
 
-struct _UnkeyedEncodingContainer: UnkeyedEncodingContainer { // swiftlint:disable:this type_name
+private struct _UnkeyedEncodingContainer: UnkeyedEncodingContainer {
     private let encoder: _Encoder
 
-    fileprivate init(referencing encoder: _Encoder) {
+    init(referencing encoder: _Encoder) {
         self.encoder = encoder
     }
 
@@ -279,7 +278,7 @@ extension _Encoder: SingleValueEncodingContainer {
     /// Asserts that a single value can be encoded at the current coding path
     /// (i.e. that one has not already been encoded through this container).
     /// `preconditionFailure()`s if one cannot be encoded.
-    fileprivate func assertCanEncodeNewValue() {
+    private func assertCanEncodeNewValue() {
         precondition(
             canEncodeNewValue,
             "Attempt to encode value through single value container when previously value already encoded."

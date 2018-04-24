@@ -17,7 +17,7 @@ to be installed.
 
 ### Swift Package Manager
 
-Add `.package(url: "https://github.com/jpsim/Yams.git", from: "0.6.0")` to your
+Add `.package(url: "https://github.com/jpsim/Yams.git", from: "0.7.0")` to your
 `Package.swift` file's `dependencies`.
 
 ### CocoaPods

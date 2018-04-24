@@ -18,7 +18,10 @@ public extension Extension {
   private func registerFilter(_ name: String, filter: @escaping Filters.BooleanWithArguments) {
     typealias GenericFilter = (Any?, [Any?]) throws -> Any?
     registerFilter(name, filter: filter as GenericFilter)
-    registerFilter("!\(name)", filter: { value, arguments in try !filter(value, arguments)} as GenericFilter)
+    // swiftlint:disable:next trailing_closure
+    registerFilter("!\(name)", filter: { value, arguments in
+      try !filter(value, arguments)
+    } as GenericFilter)
   }
 
   private func registerNumbersFilters() {

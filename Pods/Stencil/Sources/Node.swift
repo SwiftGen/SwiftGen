@@ -78,6 +78,8 @@ public class VariableNode : NodeType {
 func stringify(_ result: Any?) -> String {
   if let result = result as? String {
     return result
+  } else if let array = result as? [Any?] {
+    return unwrap(array).description
   } else if let result = result as? CustomStringConvertible {
     return result.description
   } else if let result = result as? NSObject {
@@ -85,4 +87,17 @@ func stringify(_ result: Any?) -> String {
   }
 
   return ""
+}
+
+func unwrap(_ array: [Any?]) -> [Any] {
+  return array.map { (item: Any?) -> Any in
+    if let item = item {
+      if let items = item as? [Any?] {
+        return unwrap(items)
+      } else {
+        return item
+      }
+    }
+    else { return item as Any }
+  }
 }

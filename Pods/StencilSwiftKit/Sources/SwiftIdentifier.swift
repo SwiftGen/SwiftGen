@@ -33,7 +33,7 @@ private let tailRanges: [CountableClosedRange<Int>] = [
 ]
 
 private func identifierCharacterSets(exceptions: String) -> (head: NSMutableCharacterSet, tail: NSMutableCharacterSet) {
-  let addRange: (NSMutableCharacterSet, CountableClosedRange<Int>) -> Void = { (mcs, range) in
+  let addRange: (NSMutableCharacterSet, CountableClosedRange<Int>) -> Void = { mcs, range in
     mcs.addCharacters(in: NSRange(location: range.lowerBound, length: range.count))
   }
 
@@ -63,7 +63,7 @@ enum SwiftIdentifier {
 
     let parts = string.components(separatedBy: tail.inverted)
     let replacement = underscores ? "_" : ""
-    let mappedParts = parts.map({ (string: String) -> String in
+    let mappedParts = parts.map { (string: String) -> String in
       // Can't use capitalizedString here because it will lowercase all letters after the first
       // e.g. "SomeNiceIdentifier".capitalizedString will because "Someniceidentifier" which is not what we want
       let ns = NSString(string: string)
@@ -74,7 +74,7 @@ enum SwiftIdentifier {
       } else {
         return ""
       }
-    })
+    }
 
     let result = mappedParts.joined(separator: replacement)
     return prefixWithUnderscoreIfNeeded(string: result, forbiddenChars: exceptions)

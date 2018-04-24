@@ -93,7 +93,7 @@ extension Date: ScalarRepresentable {
         #endif
     }
 
-    fileprivate var iso8601StringWithFullNanosecond: String {
+    private var iso8601StringWithFullNanosecond: String {
         let calendar = Calendar(identifier: .gregorian)
         let nanosecond = calendar.component(.nanosecond, from: self)
         if nanosecond != 0 {

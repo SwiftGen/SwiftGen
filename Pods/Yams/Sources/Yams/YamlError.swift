@@ -157,7 +157,7 @@ extension YamlError: CustomStringConvertible {
 }
 
 extension YamlError {
-    fileprivate func markAndSnippet(from yaml: String, _ byteOffset: Int) -> (Mark, String)? {
+    private func markAndSnippet(from yaml: String, _ byteOffset: Int) -> (Mark, String)? {
         #if USE_UTF8
             guard let (line, column, contents) = yaml.utf8LineNumberColumnAndContents(at: byteOffset)
                 else { return nil }

@@ -111,7 +111,7 @@ final class IfExpressionParser {
         }
       }
 
-      return .variable(try tokenParser.compileFilter(component))
+      return .variable(try tokenParser.compileResolvable(component))
     }
   }
 

@@ -75,8 +75,8 @@ extension Filters.Strings {
   /// e.g. "People picker" gives "people picker", "Sports Stats" gives "sports Stats"
   static func lowerFirstLetter(_ value: Any?) throws -> Any? {
     let string = try Filters.parseString(from: value)
-    let first = String(string.characters.prefix(1)).lowercased()
-    let other = String(string.characters.dropFirst(1))
+    let first = String(string.prefix(1)).lowercased()
+    let other = String(string.dropFirst(1))
     return first + other
   }
 
@@ -159,10 +159,10 @@ extension Filters.Strings {
     let unprefixed: String
     if try containsAnyLowercasedChar(string) {
       let comps = string.components(separatedBy: "_")
-      unprefixed = comps.map { upperFirstLetter($0) }.joined(separator: "")
+      unprefixed = comps.map { upperFirstLetter($0) }.joined()
     } else {
       let comps = try snakecase(string).components(separatedBy: "_")
-      unprefixed = comps.map { $0.capitalized }.joined(separator: "")
+      unprefixed = comps.map { $0.capitalized }.joined()
     }
 
     // only if passed true, strip the prefix underscores
