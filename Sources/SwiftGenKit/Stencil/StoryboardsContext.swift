@@ -6,13 +6,6 @@
 
 import Foundation
 
-private func uppercaseFirst(_ string: String) -> String {
-  guard let first = string.first else {
-    return string
-  }
-  return String(first).uppercased() + String(string.dropFirst())
-}
-
 /*
  - `modules`    : `Array<String>` — List of modules used by scenes and segues — typically used for "import" statements
  - `platform`   : `String` — Name of the target platform (only available if all storyboards target the same platform)
@@ -52,7 +45,7 @@ extension StoryboardParser {
       "segues": storyboard.segues
         .sorted { $0.identifier < $1.identifier }
         .map(map(segue:)),
-      "platform": storyboard.platform
+      "platform": storyboard.platform.name
     ]
 
     if let scene = storyboard.initialScene {
@@ -67,12 +60,16 @@ extension StoryboardParser {
       return [
         "identifier": scene.identifier,
         "customClass": customClass,
-        "customModule": scene.customModule ?? ""
+        "customModule": scene.customModule ?? "",
+        "type": scene.type,
+        "module": scene.module ?? ""
       ]
     } else {
       return [
         "identifier": scene.identifier,
-        "baseType": uppercaseFirst(scene.tag)
+        "baseType": uppercaseFirst(scene.tag),
+        "type": scene.type,
+        "module": scene.module ?? ""
       ]
     }
   }
@@ -81,7 +78,9 @@ extension StoryboardParser {
     return [
       "identifier": segue.identifier,
       "customClass": segue.customClass ?? "",
-      "customModule": segue.customModule ?? ""
+      "customModule": segue.customModule ?? "",
+      "type": segue.type,
+      "module": segue.module ?? ""
     ]
   }
 }

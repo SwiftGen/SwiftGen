@@ -8,6 +8,27 @@ import Foundation
 import Kanna
 import PathKit
 
+func uppercaseFirst(_ string: String) -> String {
+  guard let first = string.first else {
+    return string
+  }
+  return String(first).uppercased() + String(string.dropFirst())
+}
+
+public enum StoryboardParserError: Error, CustomStringConvertible {
+  case invalidFile(path: Path, reason: String)
+  case unsupportedTargetRuntime(target: String)
+
+  public var description: String {
+    switch self {
+    case .invalidFile(let path, let reason):
+      return "error: Unable to parse file at \(path). \(reason)"
+    case .unsupportedTargetRuntime(let target):
+      return "Unsupported target runtime `\(target)`."
+    }
+  }
+}
+
 private enum XML {
   enum Scene {
     static let initialVCXPath = "/*/@initialViewController"
@@ -35,17 +56,89 @@ private enum XML {
 }
 
 struct Storyboard {
+  enum Platform: String {
+    case tvOS = "AppleTV"
+    case iOS = "iOS.CocoaTouch"
+    case macOS = "MacOSX.Cocoa"
+    case watchOS = "watchKit"
+
+    var name: String {
+      switch self {
+      case .tvOS:
+        return "tvOS"
+      case .iOS:
+        return "iOS"
+      case .macOS:
+        return "macOS"
+      case .watchOS:
+        return "watchOS"
+      }
+    }
+
+    var prefix: String {
+      switch self {
+      case .iOS, .tvOS, .watchOS:
+        return "UI"
+      case .macOS:
+        return "NS"
+      }
+    }
+
+    var module: String {
+      switch self {
+      case .iOS, .tvOS, .watchOS:
+        return "UIKit"
+      case .macOS:
+        return "AppKit"
+      }
+    }
+  }
+
   struct Scene {
     let identifier: String
     let tag: String
     let customClass: String?
     let customModule: String?
+    let platform: Platform
 
-    init(with object: Kanna.XMLElement) {
+    init(with object: Kanna.XMLElement, platform: Platform) {
       identifier = object[XML.Scene.storyboardIdentifierAttribute] ?? ""
       tag = object.tagName ?? ""
       customClass = object[XML.Scene.customClassAttribute]
       customModule = object[XML.Scene.customModuleAttribute]
+      self.platform = platform
+    }
+
+    private static let tagTypeMap = [
+      "avPlayerViewController": "AVPlayerViewController",
+      "glkViewController": "GLKViewController"
+    ]
+
+    private static let tagModuleMap = [
+      "avPlayerViewController": "AVKit",
+      "glkViewController": "GLKit"
+    ]
+
+    var type: String {
+      if let customClass = customClass {
+        return customClass
+      } else if let type = Scene.tagTypeMap[tag] {
+        return type
+      } else {
+        return "\(platform.prefix)\(uppercaseFirst(tag))"
+      }
+    }
+
+    var module: String? {
+      if let customModule = customModule {
+        return customModule
+      } else if let type = Scene.tagModuleMap[tag] {
+        return type
+      } else if customClass == nil {
+        return platform.module
+      } else {
+        return nil
+      }
     }
   }
 
@@ -53,31 +146,54 @@ struct Storyboard {
     let identifier: String
     let customClass: String?
     let customModule: String?
+    let platform: Platform
 
-    init(with object: Kanna.XMLElement) {
+    init(with object: Kanna.XMLElement, platform: Platform) {
       identifier = object[XML.Segue.identifierAttribute] ?? ""
       customClass = object[XML.Segue.customClassAttribute]
       customModule = object[XML.Segue.customModuleAttribute]
+      self.platform = platform
+    }
+
+    var type: String {
+      if let customClass = customClass {
+        return customClass
+      } else {
+        return "\(platform.prefix)StoryboardSegue"
+      }
+    }
+
+    var module: String? {
+      if let customModule = customModule {
+        return customModule
+      } else if customClass == nil {
+        return platform.module
+      } else {
+        return nil
+      }
     }
   }
 
   let name: String
-  let platform: String
+  let platform: Platform
   let initialScene: Scene?
   let scenes: Set<Scene>
   let segues: Set<Segue>
 
-  init(with document: Kanna.XMLDocument, name: String) {
+  init(with document: Kanna.XMLDocument, name: String) throws {
     self.name = name
 
     // TargetRuntime
     let targetRuntime = document.at_xpath(XML.Scene.targetRuntimeXPath)?.text ?? ""
-    platform = Storyboard.platformMap[targetRuntime] ?? targetRuntime
-    
+    guard let platform = Platform(rawValue: targetRuntime) else {
+      throw StoryboardParserError.unsupportedTargetRuntime(target: targetRuntime)
+    }
+    self.platform = platform
+
     // Initial VC
     let initialSceneID = document.at_xpath(XML.Scene.initialVCXPath)?.text ?? ""
     if let object = document.at_xpath(XML.Scene.initialSceneXPath(identifier: initialSceneID)) {
-      initialScene = Storyboard.Scene(with: object)
+      initialScene = Storyboard.Scene(with: object, platform: platform)
     } else {
       initialScene = nil
     }
@@ -85,27 +201,20 @@ struct Storyboard {
     // Scenes
     scenes = Set<Storyboard.Scene>(document.xpath(XML.Scene.sceneXPath(initial: initialSceneID)).compactMap {
       guard $0.tagName != XML.Scene.placeholderTag else { return nil }
-      return Storyboard.Scene(with: $0)
+      return Storyboard.Scene(with: $0, platform: platform)
     })
 
     // Segues
     segues = Set<Storyboard.Segue>(document.xpath(XML.Segue.segueXPath).map {
-      Storyboard.Segue(with: $0)
+      Storyboard.Segue(with: $0, platform: platform)
     })
   }
 
-  private static let platformMap = [
-    "AppleTV": "tvOS",
-    "iOS.CocoaTouch": "iOS",
-    "MacOSX.Cocoa": "macOS",
-    "watchKit": "watchOS"
-  ]
-
   var modules: Set<String> {
-    var result: [String] = scenes.compactMap { $0.customModule } +
-      segues.compactMap { $0.customModule }
+    var result: [String] = scenes.compactMap { $0.module } +
+      segues.compactMap { $0.module }
 
-    if let module = initialScene?.customModule {
+    if let module = initialScene?.module {
       result += [module]
     }
 
@@ -134,15 +243,15 @@ public final class StoryboardParser: Parser {
   }
 
   func addStoryboard(at path: Path) throws {
-    let document: Kanna.XMLDocument
     do {
-      document = try Kanna.XML(xml: path.read(), encoding: .utf8)
-    } catch let error {
-      throw ColorsParserError.invalidFile(path: path, reason: "XML parser error: \(error).")
-    }
+      let document = try Kanna.XML(xml: path.read(), encoding: .utf8)
 
-    let name = path.lastComponentWithoutExtension
-    storyboards += [Storyboard(with: document, name: name)]
+      let name = path.lastComponentWithoutExtension
+      let storyboard = try Storyboard(with: document, name: name)
+      storyboards += [storyboard]
+    } catch let error {
+      throw StoryboardParserError.invalidFile(path: path, reason: "XML parser error: \(error).")
+    }
   }
 
   var modules: Set<String> {
@@ -150,7 +259,7 @@ public final class StoryboardParser: Parser {
   }
 
   var platform: String? {
-    let platforms = Set<String>(storyboards.map { $0.platform })
+    let platforms = Set<String>(storyboards.map { $0.platform.name })
 
     if platforms.count > 1 {
       return nil
