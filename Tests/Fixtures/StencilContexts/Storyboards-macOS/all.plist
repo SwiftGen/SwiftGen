@@ -221,16 +221,6 @@
 			<array>
 				<dict>
 					<key>baseType</key>
-					<string>ControllerPlaceholder</string>
-					<key>identifier</key>
-					<string>Dependent</string>
-					<key>module</key>
-					<string>AppKit</string>
-					<key>type</key>
-					<string>NSControllerPlaceholder</string>
-				</dict>
-				<dict>
-					<key>baseType</key>
 					<string>WindowController</string>
 					<key>identifier</key>
 					<string>Window</string>

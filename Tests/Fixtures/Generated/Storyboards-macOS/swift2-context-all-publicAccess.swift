@@ -83,8 +83,6 @@ public enum StoryboardScene {
   public enum Placeholder: StoryboardType {
     public static let storyboardName = "Placeholder"
 
-    public static let Dependent = SceneType<AppKit.NSControllerPlaceholder>(Placeholder.self, identifier: "Dependent")
-
     public static let Window = SceneType<AppKit.NSWindowController>(Placeholder.self, identifier: "Window")
   }
 }

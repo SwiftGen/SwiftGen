@@ -42,7 +42,7 @@ private enum XML {
         string-length(@storyboardIdentifier) > 0]
         """
     }
-    static let placeholderTag = "viewControllerPlaceholder"
+    static let placeholderTags = ["controllerPlaceholder", "viewControllerPlaceholder"]
     static let customClassAttribute = "customClass"
     static let customModuleAttribute = "customModule"
     static let storyboardIdentifierAttribute = "storyboardIdentifier"
@@ -200,7 +200,7 @@ struct Storyboard {
 
     // Scenes
     scenes = Set<Storyboard.Scene>(document.xpath(XML.Scene.sceneXPath(initial: initialSceneID)).compactMap {
-      guard $0.tagName != XML.Scene.placeholderTag else { return nil }
+      guard !XML.Scene.placeholderTags.contains($0.tagName ?? "") else { return nil }
       return Storyboard.Scene(with: $0, platform: platform)
     })
 
