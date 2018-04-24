@@ -2,7 +2,7 @@
 
 // swiftlint:disable sorted_imports
 import Foundation
-import Cocoa
+import AppKit
 import FadeSegue
 import PrefsWindowController
 
@@ -63,29 +63,29 @@ public enum StoryboardScene {
   public enum Dependency: StoryboardType {
     public static let storyboardName = "Dependency"
 
-    public static let Dependent = SceneType<NSViewController>(Dependency.self, identifier: "Dependent")
+    public static let Dependent = SceneType<AppKit.NSViewController>(Dependency.self, identifier: "Dependent")
   }
   public enum Message: StoryboardType {
     public static let storyboardName = "Message"
 
-    public static let MessageDetails = SceneType<NSViewController>(Message.self, identifier: "MessageDetails")
+    public static let MessageDetails = SceneType<AppKit.NSViewController>(Message.self, identifier: "MessageDetails")
 
-    public static let MessageList = SceneType<NSViewController>(Message.self, identifier: "MessageList")
+    public static let MessageList = SceneType<AppKit.NSViewController>(Message.self, identifier: "MessageList")
 
-    public static let MessageListFooter = SceneType<NSViewController>(Message.self, identifier: "MessageListFooter")
+    public static let MessageListFooter = SceneType<AppKit.NSViewController>(Message.self, identifier: "MessageListFooter")
 
     public static let MessagesTab = SceneType<CustomTabViewController>(Message.self, identifier: "MessagesTab")
 
-    public static let SplitMessages = SceneType<NSSplitViewController>(Message.self, identifier: "SplitMessages")
+    public static let SplitMessages = SceneType<AppKit.NSSplitViewController>(Message.self, identifier: "SplitMessages")
 
-    public static let WindowCtrl = SceneType<NSWindowController>(Message.self, identifier: "WindowCtrl")
+    public static let WindowCtrl = SceneType<AppKit.NSWindowController>(Message.self, identifier: "WindowCtrl")
   }
   public enum Placeholder: StoryboardType {
     public static let storyboardName = "Placeholder"
 
-    public static let Dependent = SceneType<NSControllerPlaceholder>(Placeholder.self, identifier: "Dependent")
+    public static let Dependent = SceneType<AppKit.NSControllerPlaceholder>(Placeholder.self, identifier: "Dependent")
 
-    public static let Window = SceneType<NSWindowController>(Placeholder.self, identifier: "Window")
+    public static let Window = SceneType<AppKit.NSWindowController>(Placeholder.self, identifier: "Window")
   }
 }
 

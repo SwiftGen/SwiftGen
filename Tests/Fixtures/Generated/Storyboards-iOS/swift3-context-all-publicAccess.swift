@@ -2,10 +2,12 @@
 
 // swiftlint:disable sorted_imports
 import Foundation
-import UIKit
+import AVKit
 import CustomSegue
+import GLKit
 import LocationPicker
 import SlackTextViewController
+import UIKit
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -63,50 +65,50 @@ public enum StoryboardScene {
   public enum Anonymous: StoryboardType {
     public static let storyboardName = "Anonymous"
 
-    public static let initialScene = InitialSceneType<UINavigationController>(storyboard: Anonymous.self)
+    public static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Anonymous.self)
   }
   public enum Dependency: StoryboardType {
     public static let storyboardName = "Dependency"
 
-    public static let dependent = SceneType<UIViewController>(storyboard: Dependency.self, identifier: "Dependent")
+    public static let dependent = SceneType<UIKit.UIViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
   public enum Message: StoryboardType {
     public static let storyboardName = "Message"
 
-    public static let initialScene = InitialSceneType<UIViewController>(storyboard: Message.self)
+    public static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: Message.self)
 
-    public static let composer = SceneType<UIViewController>(storyboard: Message.self, identifier: "Composer")
+    public static let composer = SceneType<UIKit.UIViewController>(storyboard: Message.self, identifier: "Composer")
 
-    public static let messagesList = SceneType<UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
+    public static let messagesList = SceneType<UIKit.UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
 
-    public static let navCtrl = SceneType<UINavigationController>(storyboard: Message.self, identifier: "NavCtrl")
+    public static let navCtrl = SceneType<UIKit.UINavigationController>(storyboard: Message.self, identifier: "NavCtrl")
 
     public static let urlChooser = SceneType<XXPickerViewController>(storyboard: Message.self, identifier: "URLChooser")
   }
   public enum NoPrefix: StoryboardType {
     public static let storyboardName = "NoPrefix"
 
-    public static let item1 = SceneType<GLKViewController>(storyboard: NoPrefix.self, identifier: "item 1")
+    public static let item1 = SceneType<GLKit.GLKViewController>(storyboard: NoPrefix.self, identifier: "item 1")
 
-    public static let item2 = SceneType<AVPlayerViewController>(storyboard: NoPrefix.self, identifier: "item 2")
+    public static let item2 = SceneType<AVKit.AVPlayerViewController>(storyboard: NoPrefix.self, identifier: "item 2")
   }
   public enum Placeholder: StoryboardType {
     public static let storyboardName = "Placeholder"
 
-    public static let navigation = SceneType<UINavigationController>(storyboard: Placeholder.self, identifier: "Navigation")
+    public static let navigation = SceneType<UIKit.UINavigationController>(storyboard: Placeholder.self, identifier: "Navigation")
   }
   public enum Wizard: StoryboardType {
     public static let storyboardName = "Wizard"
 
     public static let initialScene = InitialSceneType<CreateAccViewController>(storyboard: Wizard.self)
 
-    public static let acceptCGU = SceneType<UIViewController>(storyboard: Wizard.self, identifier: "Accept-CGU")
+    public static let acceptCGU = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "Accept-CGU")
 
     public static let createAccount = SceneType<CreateAccViewController>(storyboard: Wizard.self, identifier: "CreateAccount")
 
-    public static let preferences = SceneType<UITableViewController>(storyboard: Wizard.self, identifier: "Preferences")
+    public static let preferences = SceneType<UIKit.UITableViewController>(storyboard: Wizard.self, identifier: "Preferences")
 
-    public static let validatePassword = SceneType<UIViewController>(storyboard: Wizard.self, identifier: "Validate_Password")
+    public static let validatePassword = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "Validate_Password")
   }
 }
 

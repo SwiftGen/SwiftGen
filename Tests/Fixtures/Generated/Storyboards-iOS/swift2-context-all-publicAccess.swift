@@ -2,10 +2,12 @@
 
 // swiftlint:disable sorted_imports
 import Foundation
-import UIKit
+import AVKit
 import CustomSegue
+import GLKit
 import LocationPicker
 import SlackTextViewController
+import UIKit
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -63,50 +65,50 @@ public enum StoryboardScene {
   public enum Anonymous: StoryboardType {
     public static let storyboardName = "Anonymous"
 
-    public static let initialScene = InitialSceneType<UINavigationController>(Anonymous.self)
+    public static let initialScene = InitialSceneType<UIKit.UINavigationController>(Anonymous.self)
   }
   public enum Dependency: StoryboardType {
     public static let storyboardName = "Dependency"
 
-    public static let Dependent = SceneType<UIViewController>(Dependency.self, identifier: "Dependent")
+    public static let Dependent = SceneType<UIKit.UIViewController>(Dependency.self, identifier: "Dependent")
   }
   public enum Message: StoryboardType {
     public static let storyboardName = "Message"
 
-    public static let initialScene = InitialSceneType<UIViewController>(Message.self)
+    public static let initialScene = InitialSceneType<UIKit.UIViewController>(Message.self)
 
-    public static let Composer = SceneType<UIViewController>(Message.self, identifier: "Composer")
+    public static let Composer = SceneType<UIKit.UIViewController>(Message.self, identifier: "Composer")
 
-    public static let MessagesList = SceneType<UITableViewController>(Message.self, identifier: "MessagesList")
+    public static let MessagesList = SceneType<UIKit.UITableViewController>(Message.self, identifier: "MessagesList")
 
-    public static let NavCtrl = SceneType<UINavigationController>(Message.self, identifier: "NavCtrl")
+    public static let NavCtrl = SceneType<UIKit.UINavigationController>(Message.self, identifier: "NavCtrl")
 
     public static let URLChooser = SceneType<XXPickerViewController>(Message.self, identifier: "URLChooser")
   }
   public enum NoPrefix: StoryboardType {
     public static let storyboardName = "NoPrefix"
 
-    public static let Item1 = SceneType<GLKViewController>(NoPrefix.self, identifier: "item 1")
+    public static let Item1 = SceneType<GLKit.GLKViewController>(NoPrefix.self, identifier: "item 1")
 
-    public static let Item2 = SceneType<AVPlayerViewController>(NoPrefix.self, identifier: "item 2")
+    public static let Item2 = SceneType<AVKit.AVPlayerViewController>(NoPrefix.self, identifier: "item 2")
   }
   public enum Placeholder: StoryboardType {
     public static let storyboardName = "Placeholder"
 
-    public static let Navigation = SceneType<UINavigationController>(Placeholder.self, identifier: "Navigation")
+    public static let Navigation = SceneType<UIKit.UINavigationController>(Placeholder.self, identifier: "Navigation")
   }
   public enum Wizard: StoryboardType {
     public static let storyboardName = "Wizard"
 
     public static let initialScene = InitialSceneType<CreateAccViewController>(Wizard.self)
 
-    public static let AcceptCGU = SceneType<UIViewController>(Wizard.self, identifier: "Accept-CGU")
+    public static let AcceptCGU = SceneType<UIKit.UIViewController>(Wizard.self, identifier: "Accept-CGU")
 
     public static let CreateAccount = SceneType<CreateAccViewController>(Wizard.self, identifier: "CreateAccount")
 
-    public static let Preferences = SceneType<UITableViewController>(Wizard.self, identifier: "Preferences")
+    public static let Preferences = SceneType<UIKit.UITableViewController>(Wizard.self, identifier: "Preferences")
 
-    public static let ValidatePassword = SceneType<UIViewController>(Wizard.self, identifier: "Validate_Password")
+    public static let ValidatePassword = SceneType<UIKit.UIViewController>(Wizard.self, identifier: "Validate_Password")
   }
 }
 
