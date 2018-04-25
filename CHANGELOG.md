@@ -36,6 +36,9 @@
 * Updated to latest Xcode (9.3.0).  
   [David Jennes](https://github.com/djbe) 
   [#415](https://github.com/SwiftGen/SwiftGen/pull/415)
+* Update to Stencil 0.11.0, and use some of it's new filters in our templates.  
+  [David Jennes](https://github.com/djbe) 
+  [#416](https://github.com/SwiftGen/SwiftGen/pull/416)
 
 ## 5.3.0
 
