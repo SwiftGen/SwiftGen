@@ -29,28 +29,17 @@ internal enum L10n {
   }
 
   internal enum Settings {
-
     internal enum NavigationBar {
       internal static let `Self` = L10n.tr("Localizable", "settings.navigation-bar.self")
-
       internal enum Title {
-
         internal enum Deeper {
-
           internal enum Than {
-
             internal enum We {
-
               internal enum Can {
-
                 internal enum Handle {
-
                   internal enum No {
-
                     internal enum Really {
-
                       internal enum This {
-
                         internal enum Is {
                           internal static let Deep = L10n.tr("Localizable", "settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep")
                         }
@@ -62,13 +51,11 @@ internal enum L10n {
             }
           }
         }
-
         internal enum Even {
           internal static let Deeper = L10n.tr("Localizable", "settings.navigation-bar.title.even.deeper")
         }
       }
     }
-
     internal enum UserProfileSection {
       internal static let FooterText = L10n.tr("Localizable", "settings.user_profile_section.footer_text")
       internal static let HeaderTitle = L10n.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")

@@ -35,29 +35,18 @@ public enum L10n {
   }
 
   public enum Settings {
-
     public enum NavigationBar {
       /// Some Reserved Keyword there
       public static let `Self` = L10n.tr("Localizable", "settings.navigation-bar.self")
-
       public enum Title {
-
         public enum Deeper {
-
           public enum Than {
-
             public enum We {
-
               public enum Can {
-
                 public enum Handle {
-
                   public enum No {
-
                     public enum Really {
-
                       public enum This {
-
                         public enum Is {
                           /// DeepSettings
                           public static let Deep = L10n.tr("Localizable", "settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep")
@@ -70,14 +59,12 @@ public enum L10n {
             }
           }
         }
-
         public enum Even {
           /// Settings
           public static let Deeper = L10n.tr("Localizable", "settings.navigation-bar.title.even.deeper")
         }
       }
     }
-
     public enum UserProfileSection {
       /// Here you can change some user profile settings.
       public static let FooterText = L10n.tr("Localizable", "settings.user_profile_section.footer_text")
