@@ -10,7 +10,8 @@
   [Olivier Halligon](https://github.com/AliSoftware)
   [#394](https://github.com/SwiftGen/SwiftGen/issues/394)
 * Storyboards: ensure the templates handle `GLKViewController` and `AVPlayerViewController` correctly.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
+  [#404](https://github.com/SwiftGen/SwiftGen/issues/404)
   [#414](https://github.com/SwiftGen/SwiftGen/pull/414)
 
 ### Breaking Changes
@@ -28,13 +29,13 @@
 ### Internal Changes
 
 * Migrated to CircleCI 2.0.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#403](https://github.com/SwiftGen/SwiftGen/pull/403)
 * Switched to using SwiftLint via CocoaPods instead of our own install scripts.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#401](https://github.com/SwiftGen/SwiftGen/pull/401)
 * Enabled some extra SwiftLint rules for better code consistency.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#402](https://github.com/SwiftGen/SwiftGen/pull/402)
 * Updated to latest Xcode (9.3.0).  
   [David Jennes](https://github.com/djbe) 
@@ -67,7 +68,7 @@
 ### Internal Changes
 
 * Merged the `SwiftGenKit` and `templates` repositories back into this repository for easier development and maintenance.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#356](https://github.com/SwiftGen/SwiftGen/pull/356)
 
 ## 5.2.1
@@ -75,7 +76,7 @@
 ### Bug Fixes
 
 * Fix SwiftGen no longer working using CLI parameters (instead of config file).  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#347](https://github.com/SwiftGen/SwiftGen/pull/347)
 * Errors now properly exit with a non-zero exit code.  
   [Olivier Halligon](https://github.com/AliSoftware)
@@ -141,7 +142,7 @@
 ### Bug Fixes
 
 * XCAssets: fixed some compatibility issues with the swift 3 template on Xcode 8, and with other templates.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [SwiftGen/templates#76](https://github.com/SwiftGen/templates/pull/76)
 
 ## 5.1.0
@@ -156,19 +157,19 @@
 
 * Added Swift 4 templates. Use `-t swift4` or whatever variant you want to use
   (see `swiftgen templates list` for the available names).  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [SwiftGen/templates/#67](https://github.com/SwiftGen/templates/pull/67)
 * XCAssets: Added support for named colors. When using `swiftgen xcassets` the bundled templates
   will now also include colors found in the Asset Catalog in addition to the images.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [SwiftGen/templates/#68](https://github.com/SwiftGen/templates/pull/68)
 * Fonts: the path to fonts will now default to just the font filename, but you can disable
   this behaviour by enabling the `preservePath` parameter.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [SwiftGen/templates/#71](https://github.com/SwiftGen/templates/pull/71)
 * Colors: new template that uses `#colorLiteral`s.  
   Use `swiftgen colors -t literals-swift3` / `swiftgen colors -t literals-swift4` to use them.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [SwiftGen/templates/#72](https://github.com/SwiftGen/templates/pull/72)
 
 ## 5.0.0
