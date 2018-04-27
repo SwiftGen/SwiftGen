@@ -56,7 +56,7 @@ extension CTFont {
     let descs = CTFontManagerCreateFontDescriptorsFromURL(file.url as CFURL) as NSArray?
     guard let descRefs = (descs as? [CTFontDescriptor]) else { return [] }
 
-    return descRefs.flatMap { desc -> Font? in
+    return descRefs.compactMap { desc -> Font? in
       let font = CTFontCreateWithFontDescriptorAndOptions(desc, 0.0, nil, [.preventAutoActivation])
       let postScriptName = CTFontCopyPostScriptName(font) as String
       guard let familyName = CTFontCopyAttribute(font, kCTFontFamilyNameAttribute) as? String,
