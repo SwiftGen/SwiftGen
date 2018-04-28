@@ -10,7 +10,7 @@ import Foundation
 
 extension Node {
     public struct Sequence {
-        fileprivate var nodes: [Node]
+        private var nodes: [Node]
         public var tag: Tag
         public var style: Style
         public var mark: Mark?

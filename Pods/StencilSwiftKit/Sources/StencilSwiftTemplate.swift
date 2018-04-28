@@ -20,6 +20,7 @@ open class StencilSwiftTemplate: Template {
     super.init(templateString: templateStringWithMarkedNewlines, environment: environment, name: name)
   }
 
+  // swiftlint:disable:next discouraged_optional_collection
   open override func render(_ dictionary: [String: Any]? = nil) throws -> String {
     return try removeExtraLines(from: super.render(dictionary))
   }

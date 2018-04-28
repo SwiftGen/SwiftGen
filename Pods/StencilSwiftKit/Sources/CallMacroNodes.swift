@@ -84,8 +84,10 @@ class CallNode: NodeType {
       throw TemplateSyntaxError("Call to undefined block '\(variableName)'.")
     }
     guard block.parameters.count == arguments.count else {
-      throw TemplateSyntaxError("Block '\(variableName)' accepts \(block.parameters.count) parameters, " +
-        "\(arguments.count) given.")
+      throw TemplateSyntaxError("""
+        Block '\(variableName)' accepts \(block.parameters.count) parameters, \
+        \(arguments.count) given.
+        """)
     }
     let blockContext = try block.context(context, arguments: arguments)
 

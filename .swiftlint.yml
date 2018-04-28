@@ -5,7 +5,9 @@ opt_in_rules:
  - closure_spacing
  - contains_over_first_not_nil
  - discouraged_optional_boolean
+ - discouraged_optional_collection
  - empty_count
+ - empty_string
  - fatal_error_message
  - first_where
  - force_unwrapping

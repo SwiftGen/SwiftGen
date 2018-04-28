@@ -63,6 +63,12 @@ Resources to help you integrate Stencil into a Swift project:
 - [API Reference](http://stencil.fuller.li/en/latest/api.html)
 - [Custom Template Tags and Filters](http://stencil.fuller.li/en/latest/custom-template-tags-and-filters.html)
 
+## Projects that use Stencil
+
+[Sourcery](https://github.com/krzysztofzablocki/Sourcery),
+[SwiftGen](https://github.com/SwiftGen/SwiftGen),
+[Kitura](https://github.com/IBM-Swift/Kitura)
+
 ## License
 
 Stencil is licensed under the BSD license. See [LICENSE](LICENSE) for more

@@ -50,47 +50,45 @@
   }
   #endif
 }
-{% macro enumBlock assets sp %}
-{{sp}}  {% call casesBlock assets sp %}
-{{sp}}  {% if not param.noAllValues %}
+{% macro enumBlock assets %}
+  {% call casesBlock assets %}
+  {% if not param.noAllValues %}
 
-{{sp}}  // swiftlint:disable trailing_comma
-{{sp}}  {{accessModifier}} static let allColors: [{{colorType}}] = [
-{{sp}}    {% set sp2 %}{{sp}}  {% endset %}
-{{sp}}    {% call allValuesBlock assets "color" "" sp2 %}
-{{sp}}  ]
-{{sp}}  {{accessModifier}} static let allImages: [{{imageType}}] = [
-{{sp}}    {% set sp2 %}{{sp}}  {% endset %}
-{{sp}}    {% call allValuesBlock assets "image" "" sp2 %}
-{{sp}}  ]
-{{sp}}  // swiftlint:enable trailing_comma
-{{sp}}  @available(*, deprecated, renamed: "allImages")
-{{sp}}  {{accessModifier}} static let allValues: [{{enumName}}Type] = allImages
-{{sp}}  {% endif %}
+  // swiftlint:disable trailing_comma
+  {{accessModifier}} static let allColors: [{{colorType}}] = [
+    {% filter indent:2 %}{% call allValuesBlock assets "color" "" %}{% endfilter %}
+  ]
+  {{accessModifier}} static let allImages: [{{imageType}}] = [
+    {% filter indent:2 %}{% call allValuesBlock assets "image" "" %}{% endfilter %}
+  ]
+  // swiftlint:enable trailing_comma
+  @available(*, deprecated, renamed: "allImages")
+  {{accessModifier}} static let allValues: [{{enumName}}Type] = allImages
+  {% endif %}
 {% endmacro %}
-{% macro casesBlock assets sp %}
-{{sp}}  {% for asset in assets %}
-{{sp}}  {% if asset.type == "color" %}
-{{sp}}  {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{colorType}}(name: "{{asset.value}}")
-{{sp}}  {% elif asset.type == "image" %}
-{{sp}}  {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{imageType}}(name: "{{asset.value}}")
-{{sp}}  {% elif asset.items %}
-{{sp}}  {{accessModifier}} enum {{asset.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
-{{sp}}    {% set sp2 %}{{sp}}  {% endset %}
-{{sp}}    {% call casesBlock asset.items sp2 %}
-{{sp}}  }
-{{sp}}  {% endif %}
-{{sp}}  {% endfor %}
+{% macro casesBlock assets %}
+  {% for asset in assets %}
+  {% if asset.type == "color" %}
+  {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{colorType}}(name: "{{asset.value}}")
+  {% elif asset.type == "image" %}
+  {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{imageType}}(name: "{{asset.value}}")
+  {% elif asset.items %}
+  {{accessModifier}} enum {{asset.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+
+    {% filter indent:2 %}{% call casesBlock asset.items %}{% endfilter %}
+  }
+  {% endif %}
+  {% endfor %}
 {% endmacro %}
-{% macro allValuesBlock assets filter prefix sp %}
-{{sp}}  {% for asset in assets %}
-{{sp}}  {% if asset.type == filter %}
-{{sp}}  {{prefix}}{{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}},
-{{sp}}  {% elif asset.items %}
-{{sp}}  {% set prefix2 %}{{prefix}}{{asset.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}.{% endset %}
-{{sp}}  {% call allValuesBlock asset.items filter prefix2 sp %}
-{{sp}}  {% endif %}
-{{sp}}  {% endfor %}
+{% macro allValuesBlock assets filter prefix %}
+  {% for asset in assets %}
+  {% if asset.type == filter %}
+  {{prefix}}{{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}},
+  {% elif asset.items %}
+  {% set prefix2 %}{{prefix}}{{asset.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}.{% endset %}
+  {% call allValuesBlock asset.items filter prefix2 %}
+  {% endif %}
+  {% endfor %}
 {% endmacro %}
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
@@ -98,11 +96,11 @@
   {% if catalogs.count > 1 %}
   {% for catalog in catalogs %}
   {{accessModifier}} enum {{catalog.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
-    {% call enumBlock catalog.assets "  " %}
+    {% filter indent:2 %}{% call enumBlock catalog.assets %}{% endfilter %}
   }
   {% endfor %}
   {% else %}
-  {% call enumBlock catalogs.first.assets "" %}
+  {% call enumBlock catalogs.first.assets %}
   {% endif %}
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

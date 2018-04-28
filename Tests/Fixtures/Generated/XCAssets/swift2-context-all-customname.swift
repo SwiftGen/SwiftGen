@@ -47,7 +47,6 @@ internal enum XCTAssets {
       internal static let Primary = XCTColorAsset(name: "Vengo/Primary")
       internal static let Tint = XCTColorAsset(name: "Vengo/Tint")
     }
-
     // swiftlint:disable trailing_comma
     internal static let allColors: [XCTColorAsset] = [
       _24Vision.Background,
@@ -78,7 +77,6 @@ internal enum XCTAssets {
       }
     }
     internal static let Private = XCTImageAsset(name: "private")
-
     // swiftlint:disable trailing_comma
     internal static let allColors: [XCTColorAsset] = [
     ]

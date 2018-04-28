@@ -130,8 +130,8 @@ func pattern(_ string: String) -> NSRegularExpression {
     }
 }
 
-extension NSRegularExpression {
-    fileprivate func matches(in string: String) -> Bool {
+private extension NSRegularExpression {
+    func matches(in string: String) -> Bool {
         let range = NSRange(location: 0, length: string.utf16.count)
         if let match = firstMatch(in: string, options: [], range: range) {
             return match.range.location != NSNotFound

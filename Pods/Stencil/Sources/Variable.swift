@@ -60,12 +60,19 @@ public struct Variable : Equatable, Resolvable {
 
     if (variable.hasPrefix("'") && variable.hasSuffix("'")) || (variable.hasPrefix("\"") && variable.hasSuffix("\"")) {
       // String literal
-      return variable[variable.characters.index(after: variable.startIndex) ..< variable.characters.index(before: variable.endIndex)]
+      return String(variable[variable.characters.index(after: variable.startIndex) ..< variable.characters.index(before: variable.endIndex)])
     }
 
+    // Number literal
+    if let int = Int(variable) {
+      return int
+    }
     if let number = Number(variable) {
-      // Number literal
       return number
+    }
+    // Boolean literal
+    if let bool = Bool(variable) {
+      return bool
     }
 
     for bit in lookup() {
@@ -100,14 +107,8 @@ public struct Variable : Equatable, Resolvable {
         current = object.value(forKey: bit)
 #endif
       } else if let value = current {
-        let mirror = Mirror(reflecting: value)
-        current = mirror.descendant(bit)
-
+        current = Mirror(reflecting: value).getValue(for: bit)
         if current == nil {
-          return nil
-          // mirror returns non-nil value even for nil-containing properties
-          // so we have to check if its value is actually nil or not
-        } else if let current = current, String(describing: current) == "nil" {
           return nil
         }
       } else {
@@ -127,6 +128,42 @@ public struct Variable : Equatable, Resolvable {
 
 public func ==(lhs: Variable, rhs: Variable) -> Bool {
   return lhs.variable == rhs.variable
+}
+
+/// A structure used to represet range of two integer values expressed as `from...to`.
+/// Values should be numbers (they will be converted to integers).
+/// Rendering this variable produces array from range `from...to`.
+/// If `from` is more than `to` array will contain values of reversed range.
+public struct RangeVariable: Resolvable {
+  public let from: Resolvable
+  public let to: Resolvable
+
+  public init?(_ token: String, parser: TokenParser) throws {
+    let components = token.components(separatedBy: "...")
+    guard components.count == 2 else {
+      return nil
+    }
+
+    self.from = try parser.compileFilter(components[0])
+    self.to = try parser.compileFilter(components[1])
+  }
+
+  public func resolve(_ context: Context) throws -> Any? {
+    let fromResolved = try from.resolve(context)
+    let toResolved = try to.resolve(context)
+
+    guard let from = fromResolved.flatMap(toNumber(value:)).flatMap(Int.init) else {
+      throw TemplateSyntaxError("'from' value is not an Integer (\(fromResolved ?? "nil"))")
+    }
+
+    guard let to = toResolved.flatMap(toNumber(value:)).flatMap(Int.init) else {
+      throw TemplateSyntaxError("'to' value is not an Integer (\(toResolved ?? "nil") )")
+    }
+
+    let range = min(from, to)...max(from, to)
+    return from > to ? Array(range.reversed()) : Array(range)
+  }
+
 }
 
 
@@ -179,3 +216,40 @@ func parseFilterComponents(token: String) -> (String, [Variable]) {
     .map { Variable($0) }
   return (name, variables)
 }
+
+extension Mirror {
+  func getValue(for key: String) -> Any? {
+    let result = descendant(key) ?? Int(key).flatMap({ descendant($0) })
+    if result == nil {
+      // go through inheritance chain to reach superclass properties
+      return superclassMirror?.getValue(for: key)
+    } else if let result = result {
+      guard String(describing: result) != "nil" else {
+        // mirror returns non-nil value even for nil-containing properties
+        // so we have to check if its value is actually nil or not
+        return nil
+      }
+      if let result = (result as? AnyOptional)?.wrapped {
+        return result
+      } else {
+        return result
+      }
+    }
+    return result
+  }
+}
+
+protocol AnyOptional {
+  var wrapped: Any? { get }
+}
+
+extension Optional: AnyOptional {
+  var wrapped: Any? {
+    switch self {
+    case let .some(value): return value
+    case .none: return nil
+    }
+  }
+}
+
+

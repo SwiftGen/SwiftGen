@@ -20,45 +20,31 @@ internal enum L10n {
     internal static func `private`(_ p1: String, _ p2: Int) -> String {
       return L10n.tr("Localizable", "private", p1, p2)
     }
-
     internal enum Apples {
       /// You have %d apples
       internal static func count(_ p1: Int) -> String {
         return L10n.tr("Localizable", "apples.count", p1)
       }
     }
-
     internal enum Bananas {
       /// Those %d bananas belong to %@.
       internal static func owner(_ p1: Int, _ p2: String) -> String {
         return L10n.tr("Localizable", "bananas.owner", p1, p2)
       }
     }
-
     internal enum Settings {
-
       internal enum NavigationBar {
         /// Some Reserved Keyword there
         internal static let `self` = L10n.tr("Localizable", "settings.navigation-bar.self")
-
         internal enum Title {
-
           internal enum Deeper {
-
             internal enum Than {
-
               internal enum We {
-
                 internal enum Can {
-
                   internal enum Handle {
-
                     internal enum No {
-
                       internal enum Really {
-
                         internal enum This {
-
                           internal enum Is {
                             /// DeepSettings
                             internal static let deep = L10n.tr("Localizable", "settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep")
@@ -71,14 +57,12 @@ internal enum L10n {
               }
             }
           }
-
           internal enum Even {
             /// Settings
             internal static let deeper = L10n.tr("Localizable", "settings.navigation-bar.title.even.deeper")
           }
         }
       }
-
       internal enum UserProfileSection {
         /// Here you can change some user profile settings.
         internal static let footerText = L10n.tr("Localizable", "settings.user_profile_section.footer_text")

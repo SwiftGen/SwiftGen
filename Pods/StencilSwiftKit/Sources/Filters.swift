@@ -61,6 +61,7 @@ enum Filters {
   ///   - required: If true, the argument is required and function throws if missing.
   ///               If false, returns nil on missing args.
   /// - Throws: Filters.Error.invalidInputType
+  // swiftlint:disable discouraged_optional_boolean
   static func parseBool(from arguments: [Any?], at index: Int = 0, required: Bool = true) throws -> Bool? {
     guard index < arguments.count, let boolArg = arguments[index] as? String else {
       if required {
@@ -79,6 +80,7 @@ enum Filters {
       throw Error.invalidInputType
     }
   }
+  // swiftlint:enable discouraged_optional_boolean
 
   /// Parses filter arguments for an enum value (with a String rawvalue).
   ///

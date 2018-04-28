@@ -162,8 +162,8 @@ public final class Parser {
     }
 
     // MARK: private
-    fileprivate var anchors = [String: Node]()
-    fileprivate var parser = yaml_parser_t()
+    private var anchors = [String: Node]()
+    private var parser = yaml_parser_t()
 #if USE_UTF8
     private let utf8CString: ContiguousArray<CChar>
 #else
@@ -172,12 +172,12 @@ public final class Parser {
 }
 
 // MARK: implementation details
-extension Parser {
-    fileprivate var streamEndProduced: Bool {
+private extension Parser {
+    private var streamEndProduced: Bool {
         return parser.stream_end_produced != 0
     }
 
-    fileprivate func loadDocument() throws -> Node {
+    func loadDocument() throws -> Node {
         let node = try loadNode(from: parse())
         try parse() // Drop YAML_DOCUMENT_END_EVENT
         return node
@@ -199,7 +199,7 @@ extension Parser {
     }
 
     @discardableResult
-    fileprivate func parse() throws -> Event {
+    func parse() throws -> Event {
         let event = Event()
         guard yaml_parser_parse(&parser, &event.event) == 1 else {
             throw YamlError(from: parser, with: yaml)
@@ -287,9 +287,8 @@ private class Event {
         return Node.Scalar.Style(rawValue: event.data.scalar.style.rawValue)!
     }
     var scalarTag: String? {
-        guard event.data.scalar.plain_implicit == 0,
-            event.data.scalar.quoted_implicit == 0 else {
-                return nil
+        if event.data.scalar.quoted_implicit == 1 {
+            return Tag.Name.str.rawValue
         }
         return string(from: event.data.scalar.tag)
     }

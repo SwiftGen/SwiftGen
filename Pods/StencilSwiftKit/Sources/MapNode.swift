@@ -18,9 +18,10 @@ class MapNode: NodeType {
 
     guard components.count == 4 && components[2] == "into" ||
       components.count == 6 && components[2] == "into" && components[4] == "using" else {
-        let error = "'map' statements should use the following " +
-        "'map {array} into {varname} [using {element}]' `\(token.contents)`."
-        throw TemplateSyntaxError(error)
+        throw TemplateSyntaxError("""
+          'map' statements should use the following 'map {array} into \
+          {varname} [using {element}]' `\(token.contents)`.
+          """)
     }
 
     let variable = components[1]
@@ -53,8 +54,8 @@ class MapNode: NodeType {
   func render(_ context: Context) throws -> String {
     let values = try variable.resolve(context)
 
-    if let values = values as? [Any], values.count > 0 {
-      let mappedValues: [String] = try values.enumerated().map { (index, item) in
+    if let values = values as? [Any], !values.isEmpty {
+      let mappedValues: [String] = try values.enumerated().map { index, item in
         let mapContext = self.context(values: values, index: index, item: item)
 
         return try context.push(dictionary: mapContext) {

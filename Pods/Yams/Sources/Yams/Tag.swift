@@ -48,8 +48,8 @@ public final class Tag {
         return self
     }
 
-    // fileprivate
-    fileprivate let resolver: Resolver
+    // private
+    private let resolver: Resolver
 }
 
 extension Tag: CustomStringConvertible {

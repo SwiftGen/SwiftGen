@@ -47,7 +47,6 @@ public enum Asset {
       public static let Primary = ColorAsset(name: "Vengo/Primary")
       public static let Tint = ColorAsset(name: "Vengo/Tint")
     }
-
     // swiftlint:disable trailing_comma
     public static let allColors: [ColorAsset] = [
       _24Vision.Background,
@@ -78,7 +77,6 @@ public enum Asset {
       }
     }
     public static let Private = ImageAsset(name: "private")
-
     // swiftlint:disable trailing_comma
     public static let allColors: [ColorAsset] = [
     ]

@@ -69,7 +69,7 @@ func diff(_ result: [String: Any], _ expected: [String: Any], path: String = "")
   if Set(result.keys) != Set(expected.keys) {
     let lhs = result.keys.map { " - \($0): \(result[$0] ?? "")" }.joined(separator: "\n")
     let rhs = expected.keys.map { " - \($0): \(expected[$0] ?? "")" }.joined(separator: "\n")
-    let path = (path != "") ? " at '\(path)'" : ""
+    let path = (!path.isEmpty) ? " at '\(path)'" : ""
     return """
       \(msgColor)Keys do not match\(path):\(reset)
       >>>>>> result
@@ -93,7 +93,7 @@ func diff(_ result: [String: Any], _ expected: [String: Any], path: String = "")
 }
 
 func compare(_ lhs: Any, _ rhs: Any, key: String, path: String) -> String? {
-  let keyPath = (path == "") ? key : "\(path).\(key)"
+  let keyPath = (path.isEmpty) ? key : "\(path).\(key)"
 
   if let lhs = lhs as? Bool, let rhs = rhs as? Bool, lhs == rhs {
     return nil

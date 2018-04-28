@@ -10,7 +10,7 @@ import Foundation
 
 extension Node {
     public struct Mapping {
-        fileprivate var pairs: [Pair<Node>]
+        private var pairs: [Pair<Node>]
         public var tag: Tag
         public var style: Style
         public var mark: Mark?

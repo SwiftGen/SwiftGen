@@ -115,7 +115,7 @@ extension AssetsCatalogParser {
       let name = item.lastComponentWithoutExtension
       return .image(name: name, value: "\(prefix)\(name)")
     case nil:
-      guard type == "" else { return nil }
+      guard type.isEmpty else { return nil }
       let filename = item.lastComponent
       let subPrefix = isNamespaced(path: item) ? "\(prefix)\(filename)/" : prefix
 

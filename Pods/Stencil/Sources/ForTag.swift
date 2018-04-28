@@ -10,17 +10,21 @@ class ForNode : NodeType {
   class func parse(_ parser:TokenParser, token:Token) throws -> NodeType {
     let components = token.components()
 
-    guard components.count >= 3 && components[2] == "in" &&
-        (components.count == 4 || (components.count >= 6 && components[4] == "where")) else {
-      throw TemplateSyntaxError("'for' statements should use the following 'for x in y where condition' `\(token.contents)`.")
+    func hasToken(_ token: String, at index: Int) -> Bool {
+      return components.count > (index + 1) && components[index] == token
+    }
+    func endsOrHasToken(_ token: String, at index: Int) -> Bool {
+      return components.count == index || hasToken(token, at: index)
+    }
+
+    guard hasToken("in", at: 2) && endsOrHasToken("where", at: 4) else {
+      throw TemplateSyntaxError("'for' statements should use the syntax: `for <x> in <y> [where <condition>]")
     }
 
     let loopVariables = components[1].characters
       .split(separator: ",")
       .map(String.init)
       .map { $0.trimmingCharacters(in: CharacterSet.whitespaces) }
-
-    let variable = components[3]
 
     var emptyNodes = [NodeType]()
 
@@ -35,14 +39,13 @@ class ForNode : NodeType {
       _ = parser.nextToken()
     }
 
-    let filter = try parser.compileFilter(variable)
-    let `where`: Expression?
-    if components.count >= 6 {
-      `where` = try parseExpression(components: Array(components.suffix(from: 5)), tokenParser: parser)
-    } else {
-      `where` = nil
-    }
-    return ForNode(resolvable: filter, loopVariables: loopVariables, nodes: forNodes, emptyNodes:emptyNodes, where: `where`)
+    let resolvable = try parser.compileResolvable(components[3])
+
+    let `where` = hasToken("where", at: 4)
+      ? try parseExpression(components: Array(components.suffix(from: 5)), tokenParser: parser)
+      : nil
+
+    return ForNode(resolvable: resolvable, loopVariables: loopVariables, nodes: forNodes, emptyNodes:emptyNodes, where: `where`)
   }
 
   init(resolvable: Resolvable, loopVariables: [String], nodes:[NodeType], emptyNodes:[NodeType], where: Expression? = nil) {
@@ -53,25 +56,26 @@ class ForNode : NodeType {
     self.where = `where`
   }
 
-  func push<Result>(value: Any, context: Context, closure: () throws -> (Result)) rethrows -> Result {
+  func push<Result>(value: Any, context: Context, closure: () throws -> (Result)) throws -> Result {
     if loopVariables.isEmpty {
       return try context.push() {
         return try closure()
       }
     }
 
-    if let value = value as? (Any, Any) {
-      let first = loopVariables[0]
-
-      if loopVariables.count == 2 {
-        let second = loopVariables[1]
-
-        return try context.push(dictionary: [first: value.0, second: value.1]) {
-          return try closure()
-        }
+    let valueMirror = Mirror(reflecting: value)
+    if case .tuple? = valueMirror.displayStyle {
+      if loopVariables.count > Int(valueMirror.children.count) {
+        throw TemplateSyntaxError("Tuple '\(value)' has less values than loop variables")
       }
+      var variablesContext = [String: Any]()
+      valueMirror.children.prefix(loopVariables.count).enumerated().forEach({ (offset, element) in
+        if loopVariables[offset] != "_" {
+          variablesContext[loopVariables[offset]] = element.value
+        }
+      })
 
-      return try context.push(dictionary: [first: value.0]) {
+      return try context.push(dictionary: variablesContext) {
         return try closure()
       }
     }
@@ -94,6 +98,22 @@ class ForNode : NodeType {
       values = Array(range)
     } else if let range = resolved as? CountableRange<Int> {
       values = Array(range)
+    } else if let resolved = resolved {
+      let mirror = Mirror(reflecting: resolved)
+      switch mirror.displayStyle {
+      case .struct?, .tuple?:
+        values = Array(mirror.children)
+      case .class?:
+        var children = Array(mirror.children)
+        var currentMirror: Mirror? = mirror
+        while let superclassMirror = currentMirror?.superclassMirror {
+          children.append(contentsOf: superclassMirror.children)
+          currentMirror = superclassMirror
+        }
+        values = Array(children)
+      default:
+        values = []
+      }
     } else {
       values = []
     }
@@ -115,6 +135,7 @@ class ForNode : NodeType {
           "last": index == (count - 1),
           "counter": index + 1,
           "counter0": index,
+          "length": count
         ]
 
         return try context.push(dictionary: ["forloop": forContext]) {

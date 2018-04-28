@@ -2,12 +2,12 @@ PODS:
   - Commander (0.8.0)
   - Kanna (4.0.0)
   - PathKit (0.8.0)
-  - Stencil (0.10.1):
+  - Stencil (0.11.0):
     - PathKit (~> 0.8.0)
-  - StencilSwiftKit (2.4.0):
-    - Stencil (~> 0.10)
-  - SwiftLint (0.25.0)
-  - Yams (0.6.0)
+  - StencilSwiftKit (2.5.0):
+    - Stencil (~> 0.11)
+  - SwiftLint (0.25.1)
+  - Yams (0.7.0)
 
 DEPENDENCIES:
   - Commander (~> 0.8)
@@ -21,10 +21,10 @@ SPEC CHECKSUMS:
   Commander: 6eda7635b133e239faa85bf75dcab88d6fd63aaa
   Kanna: d5ae2a26472f7e7a474e7f36a9cd8aa2c8c63ad3
   PathKit: dcab05d701474011aae0e40cf892298a831f63d6
-  Stencil: 40b382c52edab08f1e800e6144c1f04ae47a7a9a
-  StencilSwiftKit: b2d282c788559bc19166eee070ffa513fedf8c05
-  SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
-  Yams: 5513c2dcf65e4a95c543b7632da9abce2d45db99
+  Stencil: a1873ecd92cbc053c6b391de7583b9f5bfbb3de6
+  StencilSwiftKit: 0be4d4897cf83e9c463caa14f4732454afb33ae6
+  SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
+  Yams: 9dfe90be5b942df6fa42ead8e6f0313e05600755
 
 PODFILE CHECKSUM: e12a76736805dcfb9ab338f7d545dc321caa85fb
 
