@@ -111,7 +111,8 @@ struct Storyboard {
 
     private static let tagTypeMap = [
       "avPlayerViewController": "AVPlayerViewController",
-      "glkViewController": "GLKViewController"
+      "glkViewController": "GLKViewController",
+      "pagecontroller": "NSPageController"
     ]
 
     private static let tagModuleMap = [

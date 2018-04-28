@@ -9,7 +9,7 @@
 * Fix memory leak in generated code for Fonts.  
   [Olivier Halligon](https://github.com/AliSoftware)
   [#394](https://github.com/SwiftGen/SwiftGen/issues/394)
-* Storyboards: ensure the templates handle `GLKViewController` and `AVPlayerViewController` correctly.  
+* Storyboards: ensure the templates handle `GLKViewController`, `AVPlayerViewController` and `NSPageController` correctly.  
   [David Jennes](https://github.com/djbe)
   [#404](https://github.com/SwiftGen/SwiftGen/issues/404)
   [#414](https://github.com/SwiftGen/SwiftGen/pull/414)

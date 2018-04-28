@@ -111,7 +111,7 @@
 					<key>module</key>
 					<string>AppKit</string>
 					<key>type</key>
-					<string>NSPagecontroller</string>
+					<string>NSPageController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>

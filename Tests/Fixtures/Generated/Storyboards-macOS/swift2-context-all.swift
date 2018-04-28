@@ -74,7 +74,7 @@ internal enum StoryboardScene {
 
     internal static let Item3 = SceneType<AppKit.NSViewController>(KnownTypes.self, identifier: "item 3")
 
-    internal static let Item4 = SceneType<AppKit.NSPagecontroller>(KnownTypes.self, identifier: "item 4")
+    internal static let Item4 = SceneType<AppKit.NSPageController>(KnownTypes.self, identifier: "item 4")
 
     internal static let Item5 = SceneType<AppKit.NSTabViewController>(KnownTypes.self, identifier: "item 5")
   }
