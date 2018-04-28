@@ -16,10 +16,99 @@ import {{module}}
 // MARK: - Storyboard Segues
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-{{accessModifier}} enum {{param.enumName|default:"StoryboardSegue"}} {
+{% macro moduleName item %}{% filter removeNewlines %}
+  {% if item.moduleIsPlaceholder %}
+    {{ env.PRODUCT_MODULE_NAME|default:param.module }}
+  {% else %}
+    {{ item.module }}
+  {% endif %}
+{% endfilter %}{% endmacro %}
+{% macro className item %}{% filter removeNewlines %}
+  {% set module %}{% call moduleName item %}{% endset %}
+  {% if module and ( not param.ignoreTargetModule or module != env.PRODUCT_MODULE_NAME and module != param.module ) %}
+    {{module}}.
+  {% endif %}
+  {{item.type}}
+{% endfilter %}{% endmacro %}
+{% set enumName %}{{param.enumName|default:"StoryboardSegue"}}{% endset %}
+{% set unnamedSegue %}{{param.unnamedSegueCaseName|default:"unnamedSegue"}}{% endset %}
+{% for scene in customSceneTypes where scene.segues %}
+{% set sceneClass %}{% call className scene %}{% endset %}
+{{accessModifier}} extension {{sceneClass}} {
+  {{accessModifier}} enum {{enumName}}: String {
+    {% for segue in scene.segues where segue.identifier %}
+    {% set segueID %}{{segue.identifier|swiftIdentifier:"pretty"|lowerFirstWord}}{% endset %}
+    case {{segueID|escapeReservedKeywords}}{% if segueID != segue.identifier %} = "{{segue.identifier}}"{% endif %}
+    {% endfor %}
+  }
+
+  {{accessModifier}} func perform(segue: {{enumName}}, sender: Any? = nil) {
+    performSegue(withIdentifier: segue.rawValue, sender: sender)
+  }
+
+  {{accessModifier}} enum Typed{{enumName}} {
+    {% set hasUnnamedSegue %}{% for segue in scene.segues where not scene.identifier %}1{% endfor %}{% endset %}
+    {% for segue in scene.segues where segue.identifier %}
+    {% set segueID %}{{segue.identifier|swiftIdentifier:"pretty"|lowerFirstWord}}{% endset %}
+    case {{segueID|escapeReservedKeywords}}{% filter removeNewlines:"leading" %}
+      {% if segue.customClass or segue.destination %}(
+        {% if segue.destination %}destination: {% call className segue.destination %}{% endif %}
+        {% if segue.customClass and segue.destination %}, {% endif %}
+        {% if segue.customClass %}segue: {% call className segue %}{% endif %}
+      ){% endif %}
+    {% endfilter %}
+    {% endfor %}
+    {% if hasUnnamedSegue %}
+    case {{unnamedSegue}}
+    {% endif %}
+
+    // swiftlint:disable cyclomatic_complexity
+    init(segue: {{prefix}}StoryboardSegue) {
+      switch segue.identifier ?? "" {
+      {% for segue in scene.segues where segue.identifier %}
+      case "{{segue.identifier}}":
+        {% if segue.customClass %}
+        {% set segueClass %}{% call className segue %}{% endset %}
+        guard let segue = segue as? {{segueClass}} else {
+          fatalError("Segue '{{segue.identifier}}' is not of the expected type {{segueClass}}.")
+        }
+        {% endif %}
+        {% if segue.destination %}
+        {% set destinationClass %}{% call className segue.destination %}{% endset %}
+        {% if destinationClass != "UIKit.UIViewController" %}
+        guard let vc = segue.destination{% if isAppKit %}Controller{% endif %} as? {{destinationClass}} else {
+          fatalError("Destination of segue '{{segue.identifier}}' is not of the expected type {{destinationClass}}.")
+        }
+        {% else %}
+        let vc = segue.destination{% if isAppKit %}Controller{% endif %}
+        {% endif %}
+        {% endif %}
+        {% set segueID %}{{segue.identifier|swiftIdentifier:"pretty"|lowerFirstWord}}{% endset %}
+        self = .{{segueID|escapeReservedKeywords}}{% filter removeNewlines:"leading" %}
+          {% if segue.customClass or segue.destination %}(
+            {% if segue.destination %}destination: vc{% endif %}
+            {% if segue.customClass and segue.destination %}, {% endif %}
+            {% if segue.customClass %}segue: segue{% endif %}
+          ){%endif %}
+        {% endfilter %}
+      {% endfor %}
+      {% if hasUnnamedSegue %}
+      case "":
+        self = .{{unnamedSegue}}
+      {% endif %}
+      default:
+        fatalError("Unrecognized segue '\(segue.identifier ?? "")' in {{sceneClass}}")
+      }
+    }
+    // swiftlint:enable cyclomatic_complexity
+  }
+}
+
+{% endfor %}
+{{accessModifier}} enum {{enumName}} {
   {% for storyboard in storyboards where storyboard.segues %}
   {{accessModifier}} enum {{storyboard.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}: String, SegueType {
-    {% for segue in storyboard.segues %}
+    {% for segue in storyboard.segues where segue.identifier %}
     {% set segueID %}{{segue.identifier|swiftIdentifier:"pretty"|lowerFirstWord}}{% endset %}
     case {{segueID|escapeReservedKeywords}}{% if segueID != segue.identifier %} = "{{segue.identifier}}"{% endif %}
     {% endfor %}

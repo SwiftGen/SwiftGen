@@ -42,7 +42,7 @@ import {{module}}
     {% set sceneClass %}{% call className storyboard.initialScene %}{% endset %}
     {{accessModifier}} static let initialScene = InitialSceneType<{{sceneClass}}>(storyboard: {{storyboardName}}.self)
     {% endif %}
-    {% for scene in storyboard.scenes %}
+    {% for scene in storyboard.scenes where scene.identifier %}
 
     {% set sceneID %}{{scene.identifier|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% endset %}
     {% set sceneClass %}{% call className scene %}{% endset %}
