@@ -16,6 +16,253 @@ import UIKit
 // MARK: - Storyboard Segues
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
+public extension SwiftGen.PickerViewController {
+  public enum StoryboardSegue: String {
+    case customBack = "CustomBack"
+    case embed = "Embed"
+    case nonCustom = "NonCustom"
+    case showNavCtrl = "Show-NavCtrl"
+  }
+
+  public func perform(segue: StoryboardSegue, sender: Any? = nil) {
+    let identifier = segue.rawValue
+    performSegue(withIdentifier: identifier, sender: sender)
+  }
+
+  public enum TypedStoryboardSegue {
+    case customBack(destination: UIKit.UIViewController, segue: SwiftGen.SlideLeftSegue)
+    case embed(destination: UIKit.UIViewController)
+    case nonCustom(destination: UIKit.UIViewController)
+    case showNavCtrl(destination: UIKit.UINavigationController, segue: SwiftGen.CustomSegueClass)
+    case unnamedSegue
+
+    // swiftlint:disable cyclomatic_complexity
+    init(segue: StoryboardSegue) {
+      switch segue.identifier ?? "" {
+      case "CustomBack":
+        guard let segue = segue as? SwiftGen.SlideLeftSegue else {
+          fatalError("Segue 'CustomBack' is not of the expected type SwiftGen.SlideLeftSegue.")
+        }
+        let vc = segue.destination
+        self = .customBack(destination: vc, segue: segue)
+      case "Embed":
+        let vc = segue.destination
+        self = .embed(destination: vc)
+      case "NonCustom":
+        let vc = segue.destination
+        self = .nonCustom(destination: vc)
+      case "Show-NavCtrl":
+        guard let segue = segue as? SwiftGen.CustomSegueClass else {
+          fatalError("Segue 'Show-NavCtrl' is not of the expected type SwiftGen.CustomSegueClass.")
+        }
+        guard let vc = segue.destination as? UIKit.UINavigationController else {
+          fatalError("Destination of segue 'Show-NavCtrl' is not of the expected type UIKit.UINavigationController.")
+        }
+        self = .showNavCtrl(destination: vc, segue: segue)
+      case "":
+        self = .unnamedSegue
+      default:
+        fatalError("Unrecognized segue '\(segue.identifier ?? "")' in SwiftGen.PickerViewController")
+      }
+    }
+    // swiftlint:enable cyclomatic_complexity
+  }
+}
+
+public extension ExtraModule.ValidatePasswordViewController {
+  public enum StoryboardSegue: String {
+    case showPassword = "ShowPassword"
+  }
+
+  public func perform(segue: StoryboardSegue, sender: Any? = nil) {
+    let identifier = segue.rawValue
+    performSegue(withIdentifier: identifier, sender: sender)
+  }
+
+  public enum TypedStoryboardSegue {
+    case showPassword(destination: ExtraModule.ValidatePasswordViewController)
+    case unnamedSegue
+
+    // swiftlint:disable cyclomatic_complexity
+    init(segue: StoryboardSegue) {
+      switch segue.identifier ?? "" {
+      case "ShowPassword":
+        guard let vc = segue.destination as? ExtraModule.ValidatePasswordViewController else {
+          fatalError("Destination of segue 'ShowPassword' is not of the expected type ExtraModule.ValidatePasswordViewController.")
+        }
+        self = .showPassword(destination: vc)
+      case "":
+        self = .unnamedSegue
+      default:
+        fatalError("Unrecognized segue '\(segue.identifier ?? "")' in ExtraModule.ValidatePasswordViewController")
+      }
+    }
+    // swiftlint:enable cyclomatic_complexity
+  }
+}
+
+public extension LocationPicker.LocationPickerViewController {
+  public enum StoryboardSegue: String {
+    case afterDelay = "After Delay"
+    case `open`
+    case `private`
+    case `public`
+  }
+
+  public func perform(segue: StoryboardSegue, sender: Any? = nil) {
+    let identifier = segue.rawValue
+    performSegue(withIdentifier: identifier, sender: sender)
+  }
+
+  public enum TypedStoryboardSegue {
+    case afterDelay(destination: SlackTextViewController.SLKTextViewController, segue: SwiftGen.SlideLeftSegue)
+    case `open`(destination: SlackTextViewController.SLKTextViewController, segue: SlackTextViewController.SLKCrossoverSegue)
+    case `private`(destination: SlackTextViewController.SLKTextViewController, segue: ExtraModule.SlideDownSegue)
+    case `public`(destination: SlackTextViewController.SLKTextViewController, segue: SwiftGen.SlideUpSegue)
+    case unnamedSegue
+
+    // swiftlint:disable cyclomatic_complexity
+    init(segue: StoryboardSegue) {
+      switch segue.identifier ?? "" {
+      case "After Delay":
+        guard let segue = segue as? SwiftGen.SlideLeftSegue else {
+          fatalError("Segue 'After Delay' is not of the expected type SwiftGen.SlideLeftSegue.")
+        }
+        guard let vc = segue.destination as? SlackTextViewController.SLKTextViewController else {
+          fatalError("Destination of segue 'After Delay' is not of the expected type SlackTextViewController.SLKTextViewController.")
+        }
+        self = .afterDelay(destination: vc, segue: segue)
+      case "open":
+        guard let segue = segue as? SlackTextViewController.SLKCrossoverSegue else {
+          fatalError("Segue 'open' is not of the expected type SlackTextViewController.SLKCrossoverSegue.")
+        }
+        guard let vc = segue.destination as? SlackTextViewController.SLKTextViewController else {
+          fatalError("Destination of segue 'open' is not of the expected type SlackTextViewController.SLKTextViewController.")
+        }
+        self = .`open`(destination: vc, segue: segue)
+      case "private":
+        guard let segue = segue as? ExtraModule.SlideDownSegue else {
+          fatalError("Segue 'private' is not of the expected type ExtraModule.SlideDownSegue.")
+        }
+        guard let vc = segue.destination as? SlackTextViewController.SLKTextViewController else {
+          fatalError("Destination of segue 'private' is not of the expected type SlackTextViewController.SLKTextViewController.")
+        }
+        self = .`private`(destination: vc, segue: segue)
+      case "public":
+        guard let segue = segue as? SwiftGen.SlideUpSegue else {
+          fatalError("Segue 'public' is not of the expected type SwiftGen.SlideUpSegue.")
+        }
+        guard let vc = segue.destination as? SlackTextViewController.SLKTextViewController else {
+          fatalError("Destination of segue 'public' is not of the expected type SlackTextViewController.SLKTextViewController.")
+        }
+        self = .`public`(destination: vc, segue: segue)
+      case "":
+        self = .unnamedSegue
+      default:
+        fatalError("Unrecognized segue '\(segue.identifier ?? "")' in LocationPicker.LocationPickerViewController")
+      }
+    }
+    // swiftlint:enable cyclomatic_complexity
+  }
+}
+
+public extension SlackTextViewController.SLKTextViewController {
+  public enum StoryboardSegue: String {
+    case afterDelay = "After Delay"
+    case `open`
+    case `private`
+    case `public`
+  }
+
+  public func perform(segue: StoryboardSegue, sender: Any? = nil) {
+    let identifier = segue.rawValue
+    performSegue(withIdentifier: identifier, sender: sender)
+  }
+
+  public enum TypedStoryboardSegue {
+    case afterDelay(destination: SlackTextViewController.SLKTextViewController, segue: SwiftGen.SlideLeftSegue)
+    case `open`(destination: SlackTextViewController.SLKTextViewController, segue: SlackTextViewController.SLKCrossoverSegue)
+    case `private`(destination: SlackTextViewController.SLKTextViewController, segue: ExtraModule.SlideDownSegue)
+    case `public`(destination: SlackTextViewController.SLKTextViewController, segue: SwiftGen.SlideUpSegue)
+    case unnamedSegue
+
+    // swiftlint:disable cyclomatic_complexity
+    init(segue: StoryboardSegue) {
+      switch segue.identifier ?? "" {
+      case "After Delay":
+        guard let segue = segue as? SwiftGen.SlideLeftSegue else {
+          fatalError("Segue 'After Delay' is not of the expected type SwiftGen.SlideLeftSegue.")
+        }
+        guard let vc = segue.destination as? SlackTextViewController.SLKTextViewController else {
+          fatalError("Destination of segue 'After Delay' is not of the expected type SlackTextViewController.SLKTextViewController.")
+        }
+        self = .afterDelay(destination: vc, segue: segue)
+      case "open":
+        guard let segue = segue as? SlackTextViewController.SLKCrossoverSegue else {
+          fatalError("Segue 'open' is not of the expected type SlackTextViewController.SLKCrossoverSegue.")
+        }
+        guard let vc = segue.destination as? SlackTextViewController.SLKTextViewController else {
+          fatalError("Destination of segue 'open' is not of the expected type SlackTextViewController.SLKTextViewController.")
+        }
+        self = .`open`(destination: vc, segue: segue)
+      case "private":
+        guard let segue = segue as? ExtraModule.SlideDownSegue else {
+          fatalError("Segue 'private' is not of the expected type ExtraModule.SlideDownSegue.")
+        }
+        guard let vc = segue.destination as? SlackTextViewController.SLKTextViewController else {
+          fatalError("Destination of segue 'private' is not of the expected type SlackTextViewController.SLKTextViewController.")
+        }
+        self = .`private`(destination: vc, segue: segue)
+      case "public":
+        guard let segue = segue as? SwiftGen.SlideUpSegue else {
+          fatalError("Segue 'public' is not of the expected type SwiftGen.SlideUpSegue.")
+        }
+        guard let vc = segue.destination as? SlackTextViewController.SLKTextViewController else {
+          fatalError("Destination of segue 'public' is not of the expected type SlackTextViewController.SLKTextViewController.")
+        }
+        self = .`public`(destination: vc, segue: segue)
+      case "":
+        self = .unnamedSegue
+      default:
+        fatalError("Unrecognized segue '\(segue.identifier ?? "")' in SlackTextViewController.SLKTextViewController")
+      }
+    }
+    // swiftlint:enable cyclomatic_complexity
+  }
+}
+
+public extension SwiftGen.CreateAccViewController {
+  public enum StoryboardSegue: String {
+    case showPassword = "ShowPassword"
+  }
+
+  public func perform(segue: StoryboardSegue, sender: Any? = nil) {
+    let identifier = segue.rawValue
+    performSegue(withIdentifier: identifier, sender: sender)
+  }
+
+  public enum TypedStoryboardSegue {
+    case showPassword(destination: ExtraModule.ValidatePasswordViewController)
+    case unnamedSegue
+
+    // swiftlint:disable cyclomatic_complexity
+    init(segue: StoryboardSegue) {
+      switch segue.identifier ?? "" {
+      case "ShowPassword":
+        guard let vc = segue.destination as? ExtraModule.ValidatePasswordViewController else {
+          fatalError("Destination of segue 'ShowPassword' is not of the expected type ExtraModule.ValidatePasswordViewController.")
+        }
+        self = .showPassword(destination: vc)
+      case "":
+        self = .unnamedSegue
+      default:
+        fatalError("Unrecognized segue '\(segue.identifier ?? "")' in SwiftGen.CreateAccViewController")
+      }
+    }
+    // swiftlint:enable cyclomatic_complexity
+  }
+}
+
 public enum StoryboardSegue {
   public enum AdditionalImport: String, SegueType {
     case afterDelay = "After Delay"
