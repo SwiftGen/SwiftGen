@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,6 +14,9 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="163" y="199" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+                        <connections>
+                            <outlet property="delegate" destination="iTF-24-C42" id="Mom-Hv-p7P"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="8Pf-JJ-Bj4" kind="relationship" relationship="window.shadowedContentViewController" id="zxt-bS-Xji"/>
@@ -34,8 +37,12 @@
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="wqk-6g-2UY">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="8Pf-JJ-Bj4" id="GvB-Ac-RVr"/>
+                        </connections>
                     </splitView>
                     <connections>
+                        <outlet property="splitView" destination="wqk-6g-2UY" id="bbG-9E-vtH"/>
                         <segue destination="3pk-bw-FlH" kind="relationship" relationship="splitItems" id="3ZF-gt-7HJ"/>
                         <segue destination="Lxj-cP-fFs" kind="relationship" relationship="splitItems" id="RKO-gC-l69"/>
                     </connections>
@@ -55,9 +62,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="message"/>
-                        <tabViewItems/>
+                        <connections>
+                            <outlet property="delegate" destination="3pk-bw-FlH" id="aGz-eQ-Sqy"/>
+                        </connections>
                     </tabView>
                     <connections>
+                        <outlet property="tabView" destination="mqV-o4-mzq" id="l2O-hb-CbK"/>
                         <segue destination="JyP-8A-Iz9" kind="relationship" relationship="tabItems" id="ToA-vU-P69"/>
                     </connections>
                 </tabViewController>
@@ -73,7 +83,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="VfK-Tf-7Nk">
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VfK-Tf-7Nk">
                                 <rect key="frame" x="48" y="205" width="354" height="85"/>
                                 <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="cRx-JR-wmP">
                                     <font key="font" metaFont="system"/>
@@ -120,7 +130,7 @@
                                     <segue destination="EHq-9a-j15" kind="embed" identifier="Embed" id="bkk-80-yU1"/>
                                 </connections>
                             </containerView>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="B9t-pY-9Yn">
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B9t-pY-9Yn">
                                 <rect key="frame" x="18" y="183" width="414" height="34"/>
                                 <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="This scene is volontarly unreachable to test that SwiftGen won't generate anything for it" id="aGE-IG-lcQ">
                                     <font key="font" metaFont="system"/>
@@ -177,7 +187,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="116" minWidth="40" maxWidth="1000" id="sgD-GB-vgl">
+                                                <tableColumn identifier="" width="116" minWidth="40" maxWidth="1000" id="sgD-GB-vgl">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -194,7 +204,7 @@
                                                             <rect key="frame" x="1" y="1" width="116" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dSN-cP-GI4">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dSN-cP-GI4">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="Xvk-GJ-27q">
@@ -210,7 +220,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn width="326" minWidth="40" maxWidth="1000" id="Nqi-cU-7HJ">
+                                                <tableColumn identifier="" width="326" minWidth="40" maxWidth="1000" id="Nqi-cU-7HJ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -227,7 +237,7 @@
                                                             <rect key="frame" x="120" y="1" width="326" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CM7-eb-Enb">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CM7-eb-Enb">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="oaX-E0-1cJ">
@@ -300,7 +310,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="and-Oo-071"/>
         <segue reference="bkk-80-yU1"/>
+        <segue reference="and-Oo-071"/>
     </inferredMetricsTieBreakers>
 </document>

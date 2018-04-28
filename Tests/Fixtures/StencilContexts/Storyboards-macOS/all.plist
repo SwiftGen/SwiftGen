@@ -68,6 +68,67 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>Known Types</string>
+			<key>platform</key>
+			<string>macOS</string>
+			<key>scenes</key>
+			<array>
+				<dict>
+					<key>baseType</key>
+					<string>WindowController</string>
+					<key>identifier</key>
+					<string>item 1</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSWindowController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>SplitViewController</string>
+					<key>identifier</key>
+					<string>item 2</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSSplitViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>ViewController</string>
+					<key>identifier</key>
+					<string>item 3</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>Pagecontroller</string>
+					<key>identifier</key>
+					<string>item 4</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSPagecontroller</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>TabViewController</string>
+					<key>identifier</key>
+					<string>item 5</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSTabViewController</string>
+				</dict>
+			</array>
+			<key>segues</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>Message</string>
 			<key>platform</key>
 			<string>macOS</string>

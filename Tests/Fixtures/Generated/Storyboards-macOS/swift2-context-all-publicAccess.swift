@@ -65,6 +65,19 @@ public enum StoryboardScene {
 
     public static let Dependent = SceneType<AppKit.NSViewController>(Dependency.self, identifier: "Dependent")
   }
+  public enum KnownTypes: StoryboardType {
+    public static let storyboardName = "Known Types"
+
+    public static let Item1 = SceneType<AppKit.NSWindowController>(KnownTypes.self, identifier: "item 1")
+
+    public static let Item2 = SceneType<AppKit.NSSplitViewController>(KnownTypes.self, identifier: "item 2")
+
+    public static let Item3 = SceneType<AppKit.NSViewController>(KnownTypes.self, identifier: "item 3")
+
+    public static let Item4 = SceneType<AppKit.NSPagecontroller>(KnownTypes.self, identifier: "item 4")
+
+    public static let Item5 = SceneType<AppKit.NSTabViewController>(KnownTypes.self, identifier: "item 5")
+  }
   public enum Message: StoryboardType {
     public static let storyboardName = "Message"
 

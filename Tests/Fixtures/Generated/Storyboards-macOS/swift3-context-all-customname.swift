@@ -65,6 +65,19 @@ internal enum XCTStoryboardsScene {
 
     internal static let dependent = SceneType<AppKit.NSViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
+  internal enum KnownTypes: StoryboardType {
+    internal static let storyboardName = "Known Types"
+
+    internal static let item1 = SceneType<AppKit.NSWindowController>(storyboard: KnownTypes.self, identifier: "item 1")
+
+    internal static let item2 = SceneType<AppKit.NSSplitViewController>(storyboard: KnownTypes.self, identifier: "item 2")
+
+    internal static let item3 = SceneType<AppKit.NSViewController>(storyboard: KnownTypes.self, identifier: "item 3")
+
+    internal static let item4 = SceneType<AppKit.NSPagecontroller>(storyboard: KnownTypes.self, identifier: "item 4")
+
+    internal static let item5 = SceneType<AppKit.NSTabViewController>(storyboard: KnownTypes.self, identifier: "item 5")
+  }
   internal enum Message: StoryboardType {
     internal static let storyboardName = "Message"
 

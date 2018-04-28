@@ -107,6 +107,107 @@
 			<array/>
 		</dict>
 		<dict>
+			<key>name</key>
+			<string>Known Types</string>
+			<key>platform</key>
+			<string>iOS</string>
+			<key>scenes</key>
+			<array>
+				<dict>
+					<key>baseType</key>
+					<string>GlkViewController</string>
+					<key>identifier</key>
+					<string>item 1</string>
+					<key>module</key>
+					<string>GLKit</string>
+					<key>type</key>
+					<string>GLKViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>AvPlayerViewController</string>
+					<key>identifier</key>
+					<string>item 2</string>
+					<key>module</key>
+					<string>AVKit</string>
+					<key>type</key>
+					<string>AVPlayerViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>TabBarController</string>
+					<key>identifier</key>
+					<string>item 3</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UITabBarController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>NavigationController</string>
+					<key>identifier</key>
+					<string>item 4</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UINavigationController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>SplitViewController</string>
+					<key>identifier</key>
+					<string>item 5</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UISplitViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>PageViewController</string>
+					<key>identifier</key>
+					<string>item 6</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIPageViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>TableViewController</string>
+					<key>identifier</key>
+					<string>item 7</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UITableViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>CollectionViewController</string>
+					<key>identifier</key>
+					<string>item 8</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UICollectionViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>ViewController</string>
+					<key>identifier</key>
+					<string>item 9</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIViewController</string>
+				</dict>
+			</array>
+			<key>segues</key>
+			<array/>
+		</dict>
+		<dict>
 			<key>initialScene</key>
 			<dict>
 				<key>baseType</key>
@@ -221,37 +322,6 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>NoPrefix</string>
-			<key>platform</key>
-			<string>iOS</string>
-			<key>scenes</key>
-			<array>
-				<dict>
-					<key>baseType</key>
-					<string>GlkViewController</string>
-					<key>identifier</key>
-					<string>item 1</string>
-					<key>module</key>
-					<string>GLKit</string>
-					<key>type</key>
-					<string>GLKViewController</string>
-				</dict>
-				<dict>
-					<key>baseType</key>
-					<string>AvPlayerViewController</string>
-					<key>identifier</key>
-					<string>item 2</string>
-					<key>module</key>
-					<string>AVKit</string>
-					<key>type</key>
-					<string>AVPlayerViewController</string>
-				</dict>
-			</array>
-			<key>segues</key>
-			<array/>
-		</dict>
-		<dict>
-			<key>name</key>
 			<string>Placeholder</string>
 			<key>platform</key>
 			<string>iOS</string>
@@ -295,7 +365,7 @@
 					<key>baseType</key>
 					<string>ViewController</string>
 					<key>identifier</key>
-					<string>Accept-CGU</string>
+					<string>Accept-ToS</string>
 					<key>module</key>
 					<string>UIKit</string>
 					<key>type</key>

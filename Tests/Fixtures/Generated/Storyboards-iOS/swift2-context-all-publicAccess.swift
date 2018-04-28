@@ -72,6 +72,27 @@ public enum StoryboardScene {
 
     public static let Dependent = SceneType<UIKit.UIViewController>(Dependency.self, identifier: "Dependent")
   }
+  public enum KnownTypes: StoryboardType {
+    public static let storyboardName = "Known Types"
+
+    public static let Item1 = SceneType<GLKit.GLKViewController>(KnownTypes.self, identifier: "item 1")
+
+    public static let Item2 = SceneType<AVKit.AVPlayerViewController>(KnownTypes.self, identifier: "item 2")
+
+    public static let Item3 = SceneType<UIKit.UITabBarController>(KnownTypes.self, identifier: "item 3")
+
+    public static let Item4 = SceneType<UIKit.UINavigationController>(KnownTypes.self, identifier: "item 4")
+
+    public static let Item5 = SceneType<UIKit.UISplitViewController>(KnownTypes.self, identifier: "item 5")
+
+    public static let Item6 = SceneType<UIKit.UIPageViewController>(KnownTypes.self, identifier: "item 6")
+
+    public static let Item7 = SceneType<UIKit.UITableViewController>(KnownTypes.self, identifier: "item 7")
+
+    public static let Item8 = SceneType<UIKit.UICollectionViewController>(KnownTypes.self, identifier: "item 8")
+
+    public static let Item9 = SceneType<UIKit.UIViewController>(KnownTypes.self, identifier: "item 9")
+  }
   public enum Message: StoryboardType {
     public static let storyboardName = "Message"
 
@@ -85,13 +106,6 @@ public enum StoryboardScene {
 
     public static let URLChooser = SceneType<XXPickerViewController>(Message.self, identifier: "URLChooser")
   }
-  public enum NoPrefix: StoryboardType {
-    public static let storyboardName = "NoPrefix"
-
-    public static let Item1 = SceneType<GLKit.GLKViewController>(NoPrefix.self, identifier: "item 1")
-
-    public static let Item2 = SceneType<AVKit.AVPlayerViewController>(NoPrefix.self, identifier: "item 2")
-  }
   public enum Placeholder: StoryboardType {
     public static let storyboardName = "Placeholder"
 
@@ -102,7 +116,7 @@ public enum StoryboardScene {
 
     public static let initialScene = InitialSceneType<CreateAccViewController>(Wizard.self)
 
-    public static let AcceptCGU = SceneType<UIKit.UIViewController>(Wizard.self, identifier: "Accept-CGU")
+    public static let AcceptToS = SceneType<UIKit.UIViewController>(Wizard.self, identifier: "Accept-ToS")
 
     public static let CreateAccount = SceneType<CreateAccViewController>(Wizard.self, identifier: "CreateAccount")
 

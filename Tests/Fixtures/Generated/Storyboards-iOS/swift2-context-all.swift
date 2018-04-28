@@ -72,6 +72,27 @@ internal enum StoryboardScene {
 
     internal static let Dependent = SceneType<UIKit.UIViewController>(Dependency.self, identifier: "Dependent")
   }
+  internal enum KnownTypes: StoryboardType {
+    internal static let storyboardName = "Known Types"
+
+    internal static let Item1 = SceneType<GLKit.GLKViewController>(KnownTypes.self, identifier: "item 1")
+
+    internal static let Item2 = SceneType<AVKit.AVPlayerViewController>(KnownTypes.self, identifier: "item 2")
+
+    internal static let Item3 = SceneType<UIKit.UITabBarController>(KnownTypes.self, identifier: "item 3")
+
+    internal static let Item4 = SceneType<UIKit.UINavigationController>(KnownTypes.self, identifier: "item 4")
+
+    internal static let Item5 = SceneType<UIKit.UISplitViewController>(KnownTypes.self, identifier: "item 5")
+
+    internal static let Item6 = SceneType<UIKit.UIPageViewController>(KnownTypes.self, identifier: "item 6")
+
+    internal static let Item7 = SceneType<UIKit.UITableViewController>(KnownTypes.self, identifier: "item 7")
+
+    internal static let Item8 = SceneType<UIKit.UICollectionViewController>(KnownTypes.self, identifier: "item 8")
+
+    internal static let Item9 = SceneType<UIKit.UIViewController>(KnownTypes.self, identifier: "item 9")
+  }
   internal enum Message: StoryboardType {
     internal static let storyboardName = "Message"
 
@@ -85,13 +106,6 @@ internal enum StoryboardScene {
 
     internal static let URLChooser = SceneType<XXPickerViewController>(Message.self, identifier: "URLChooser")
   }
-  internal enum NoPrefix: StoryboardType {
-    internal static let storyboardName = "NoPrefix"
-
-    internal static let Item1 = SceneType<GLKit.GLKViewController>(NoPrefix.self, identifier: "item 1")
-
-    internal static let Item2 = SceneType<AVKit.AVPlayerViewController>(NoPrefix.self, identifier: "item 2")
-  }
   internal enum Placeholder: StoryboardType {
     internal static let storyboardName = "Placeholder"
 
@@ -102,7 +116,7 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<CreateAccViewController>(Wizard.self)
 
-    internal static let AcceptCGU = SceneType<UIKit.UIViewController>(Wizard.self, identifier: "Accept-CGU")
+    internal static let AcceptToS = SceneType<UIKit.UIViewController>(Wizard.self, identifier: "Accept-ToS")
 
     internal static let CreateAccount = SceneType<CreateAccViewController>(Wizard.self, identifier: "CreateAccount")
 

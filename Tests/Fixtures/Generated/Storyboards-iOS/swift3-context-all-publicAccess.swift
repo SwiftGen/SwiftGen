@@ -72,6 +72,27 @@ public enum StoryboardScene {
 
     public static let dependent = SceneType<UIKit.UIViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
+  public enum KnownTypes: StoryboardType {
+    public static let storyboardName = "Known Types"
+
+    public static let item1 = SceneType<GLKit.GLKViewController>(storyboard: KnownTypes.self, identifier: "item 1")
+
+    public static let item2 = SceneType<AVKit.AVPlayerViewController>(storyboard: KnownTypes.self, identifier: "item 2")
+
+    public static let item3 = SceneType<UIKit.UITabBarController>(storyboard: KnownTypes.self, identifier: "item 3")
+
+    public static let item4 = SceneType<UIKit.UINavigationController>(storyboard: KnownTypes.self, identifier: "item 4")
+
+    public static let item5 = SceneType<UIKit.UISplitViewController>(storyboard: KnownTypes.self, identifier: "item 5")
+
+    public static let item6 = SceneType<UIKit.UIPageViewController>(storyboard: KnownTypes.self, identifier: "item 6")
+
+    public static let item7 = SceneType<UIKit.UITableViewController>(storyboard: KnownTypes.self, identifier: "item 7")
+
+    public static let item8 = SceneType<UIKit.UICollectionViewController>(storyboard: KnownTypes.self, identifier: "item 8")
+
+    public static let item9 = SceneType<UIKit.UIViewController>(storyboard: KnownTypes.self, identifier: "item 9")
+  }
   public enum Message: StoryboardType {
     public static let storyboardName = "Message"
 
@@ -85,13 +106,6 @@ public enum StoryboardScene {
 
     public static let urlChooser = SceneType<XXPickerViewController>(storyboard: Message.self, identifier: "URLChooser")
   }
-  public enum NoPrefix: StoryboardType {
-    public static let storyboardName = "NoPrefix"
-
-    public static let item1 = SceneType<GLKit.GLKViewController>(storyboard: NoPrefix.self, identifier: "item 1")
-
-    public static let item2 = SceneType<AVKit.AVPlayerViewController>(storyboard: NoPrefix.self, identifier: "item 2")
-  }
   public enum Placeholder: StoryboardType {
     public static let storyboardName = "Placeholder"
 
@@ -102,7 +116,7 @@ public enum StoryboardScene {
 
     public static let initialScene = InitialSceneType<CreateAccViewController>(storyboard: Wizard.self)
 
-    public static let acceptCGU = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "Accept-CGU")
+    public static let acceptToS = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "Accept-ToS")
 
     public static let createAccount = SceneType<CreateAccViewController>(storyboard: Wizard.self, identifier: "CreateAccount")
 
