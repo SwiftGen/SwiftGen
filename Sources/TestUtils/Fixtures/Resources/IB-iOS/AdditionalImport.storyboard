@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sCq-1b-U1T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sCq-1b-U1T">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -55,7 +55,7 @@
         <!--Text View Controller-->
         <scene sceneID="7Iv-Wo-KlP">
             <objects>
-                <viewController storyboardIdentifier="public" id="se3-pM-ewQ" customClass="SLKTextViewController" customModule="SlackTextViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="internal" id="se3-pM-ewQ" customClass="SLKTextViewController" customModule="SlackTextViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bZe-rr-B5m"/>
                         <viewControllerLayoutGuide type="bottom" id="xUW-hc-u7u"/>
@@ -73,7 +73,7 @@
         <!--Text View Controller-->
         <scene sceneID="zL2-OT-vrF">
             <objects>
-                <viewController storyboardIdentifier="public" id="t0K-MT-iCN" customClass="SLKTextViewController" customModule="SlackTextViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="private" id="t0K-MT-iCN" customClass="SLKTextViewController" customModule="SlackTextViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tQi-3j-stJ"/>
                         <viewControllerLayoutGuide type="bottom" id="sxz-Gx-cZD"/>

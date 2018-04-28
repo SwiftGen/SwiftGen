@@ -1,3 +1,243 @@
+customSceneTypes:
+- module: "<placeholder>"
+  moduleIsPlaceholder: true
+  segues:
+  - customClass: ""
+    customModule: ""
+    destination:
+      customClass: "PickerViewController"
+      customModule: "NotCurrentModule"
+      identifier: "URLChooser"
+      module: "NotCurrentModule"
+      moduleIsPlaceholder: true
+      type: "PickerViewController"
+    identifier: ""
+    kind: "show"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "TableViewController"
+      identifier: "MessagesList"
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UITableViewController"
+    identifier: ""
+    kind: "relationship"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  - customClass: "SlideLeftSegue"
+    customModule: "SwiftGen"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UIViewController"
+    identifier: "CustomBack"
+    kind: "custom"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "SlideLeftSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UIViewController"
+    identifier: "Embed"
+    kind: "embed"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: "Composer"
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UIViewController"
+    identifier: "NonCustom"
+    kind: "showDetail"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  - customClass: "CustomSegueClass"
+    customModule: "NotCurrentModule"
+    destination:
+      baseType: "NavigationController"
+      identifier: "NavCtrl"
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UINavigationController"
+    identifier: "Show-NavCtrl"
+    kind: "presentation"
+    module: "NotCurrentModule"
+    moduleIsPlaceholder: true
+    type: "CustomSegueClass"
+  type: "PickerViewController"
+- module: "ExtraModule"
+  moduleIsPlaceholder: false
+  segues:
+  - customClass: ""
+    customModule: ""
+    destination:
+      customClass: "ValidatePasswordViewController"
+      customModule: "ExtraModule"
+      identifier: "Validate_Password"
+      module: "ExtraModule"
+      moduleIsPlaceholder: false
+      type: "ValidatePasswordViewController"
+    identifier: "ShowPassword"
+    kind: "show"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  type: "ValidatePasswordViewController"
+- module: "LocationPicker"
+  moduleIsPlaceholder: false
+  segues:
+  - customClass: "SlideLeftSegue"
+    customModule: "SwiftGen"
+    destination:
+      customClass: "SLKTextViewController"
+      customModule: "SlackTextViewController"
+      identifier: "internal"
+      module: "SlackTextViewController"
+      moduleIsPlaceholder: false
+      type: "SLKTextViewController"
+    identifier: "After Delay"
+    kind: "custom"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "SlideLeftSegue"
+  - customClass: "SLKCrossoverSegue"
+    customModule: "SlackTextViewController"
+    destination:
+      customClass: "SLKTextViewController"
+      customModule: "SlackTextViewController"
+      identifier: "private"
+      module: "SlackTextViewController"
+      moduleIsPlaceholder: false
+      type: "SLKTextViewController"
+    identifier: "open"
+    kind: "custom"
+    module: "SlackTextViewController"
+    moduleIsPlaceholder: false
+    type: "SLKCrossoverSegue"
+  - customClass: "SlideDownSegue"
+    customModule: "ExtraModule"
+    destination:
+      customClass: "SLKTextViewController"
+      customModule: "SlackTextViewController"
+      identifier: "public"
+      module: "SlackTextViewController"
+      moduleIsPlaceholder: false
+      type: "SLKTextViewController"
+    identifier: "private"
+    kind: "custom"
+    module: "ExtraModule"
+    moduleIsPlaceholder: false
+    type: "SlideDownSegue"
+  - customClass: "SlideUpSegue"
+    customModule: "NotCurrentModule"
+    destination:
+      customClass: "SLKTextViewController"
+      customModule: "SlackTextViewController"
+      identifier: "internal"
+      module: "SlackTextViewController"
+      moduleIsPlaceholder: false
+      type: "SLKTextViewController"
+    identifier: "public"
+    kind: "custom"
+    module: "NotCurrentModule"
+    moduleIsPlaceholder: true
+    type: "SlideUpSegue"
+  type: "LocationPickerViewController"
+- module: "SlackTextViewController"
+  moduleIsPlaceholder: false
+  segues:
+  - customClass: "SlideLeftSegue"
+    customModule: "SwiftGen"
+    destination:
+      customClass: "SLKTextViewController"
+      customModule: "SlackTextViewController"
+      identifier: "internal"
+      module: "SlackTextViewController"
+      moduleIsPlaceholder: false
+      type: "SLKTextViewController"
+    identifier: "After Delay"
+    kind: "custom"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "SlideLeftSegue"
+  - customClass: "SLKCrossoverSegue"
+    customModule: "SlackTextViewController"
+    destination:
+      customClass: "SLKTextViewController"
+      customModule: "SlackTextViewController"
+      identifier: "private"
+      module: "SlackTextViewController"
+      moduleIsPlaceholder: false
+      type: "SLKTextViewController"
+    identifier: "open"
+    kind: "custom"
+    module: "SlackTextViewController"
+    moduleIsPlaceholder: false
+    type: "SLKCrossoverSegue"
+  - customClass: "SlideDownSegue"
+    customModule: "ExtraModule"
+    destination:
+      customClass: "SLKTextViewController"
+      customModule: "SlackTextViewController"
+      identifier: "public"
+      module: "SlackTextViewController"
+      moduleIsPlaceholder: false
+      type: "SLKTextViewController"
+    identifier: "private"
+    kind: "custom"
+    module: "ExtraModule"
+    moduleIsPlaceholder: false
+    type: "SlideDownSegue"
+  - customClass: "SlideUpSegue"
+    customModule: "NotCurrentModule"
+    destination:
+      customClass: "SLKTextViewController"
+      customModule: "SlackTextViewController"
+      identifier: "internal"
+      module: "SlackTextViewController"
+      moduleIsPlaceholder: false
+      type: "SLKTextViewController"
+    identifier: "public"
+    kind: "custom"
+    module: "NotCurrentModule"
+    moduleIsPlaceholder: true
+    type: "SlideUpSegue"
+  type: "SLKTextViewController"
+- module: "SwiftGen"
+  moduleIsPlaceholder: false
+  segues:
+  - customClass: ""
+    customModule: ""
+    destination:
+      customClass: "ValidatePasswordViewController"
+      customModule: "ExtraModule"
+      identifier: "Validate_Password"
+      module: "ExtraModule"
+      moduleIsPlaceholder: false
+      type: "ValidatePasswordViewController"
+    identifier: "ShowPassword"
+    kind: "show"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  type: "CreateAccViewController"
 modules:
 - "AVKit"
 - "ExtraModule"
@@ -20,6 +260,18 @@ storyboards:
   scenes:
   - customClass: "SLKTextViewController"
     customModule: "SlackTextViewController"
+    identifier: "internal"
+    module: "SlackTextViewController"
+    moduleIsPlaceholder: false
+    type: "SLKTextViewController"
+  - customClass: "SLKTextViewController"
+    customModule: "SlackTextViewController"
+    identifier: "private"
+    module: "SlackTextViewController"
+    moduleIsPlaceholder: false
+    type: "SLKTextViewController"
+  - customClass: "SLKTextViewController"
+    customModule: "SlackTextViewController"
     identifier: "public"
     module: "SlackTextViewController"
     moduleIsPlaceholder: false
@@ -27,25 +279,57 @@ storyboards:
   segues:
   - customClass: "SlideLeftSegue"
     customModule: "SwiftGen"
+    destination:
+      customClass: "SLKTextViewController"
+      customModule: "SlackTextViewController"
+      identifier: "internal"
+      module: "SlackTextViewController"
+      moduleIsPlaceholder: false
+      type: "SLKTextViewController"
     identifier: "After Delay"
+    kind: "custom"
     module: "SwiftGen"
     moduleIsPlaceholder: false
     type: "SlideLeftSegue"
   - customClass: "SLKCrossoverSegue"
     customModule: "SlackTextViewController"
+    destination:
+      customClass: "SLKTextViewController"
+      customModule: "SlackTextViewController"
+      identifier: "private"
+      module: "SlackTextViewController"
+      moduleIsPlaceholder: false
+      type: "SLKTextViewController"
     identifier: "open"
+    kind: "custom"
     module: "SlackTextViewController"
     moduleIsPlaceholder: false
     type: "SLKCrossoverSegue"
   - customClass: "SlideDownSegue"
     customModule: "ExtraModule"
+    destination:
+      customClass: "SLKTextViewController"
+      customModule: "SlackTextViewController"
+      identifier: "public"
+      module: "SlackTextViewController"
+      moduleIsPlaceholder: false
+      type: "SLKTextViewController"
     identifier: "private"
+    kind: "custom"
     module: "ExtraModule"
     moduleIsPlaceholder: false
     type: "SlideDownSegue"
   - customClass: "SlideUpSegue"
     customModule: "NotCurrentModule"
+    destination:
+      customClass: "SLKTextViewController"
+      customModule: "SlackTextViewController"
+      identifier: "internal"
+      module: "SlackTextViewController"
+      moduleIsPlaceholder: false
+      type: "SLKTextViewController"
     identifier: "public"
+    kind: "custom"
     module: "NotCurrentModule"
     moduleIsPlaceholder: true
     type: "SlideUpSegue"
@@ -151,25 +435,53 @@ storyboards:
   segues:
   - customClass: "SlideLeftSegue"
     customModule: "SwiftGen"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UIViewController"
     identifier: "CustomBack"
+    kind: "custom"
     module: "SwiftGen"
     moduleIsPlaceholder: false
     type: "SlideLeftSegue"
   - customClass: ""
     customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UIViewController"
     identifier: "Embed"
+    kind: "embed"
     module: "UIKit"
     moduleIsPlaceholder: false
     type: "UIStoryboardSegue"
   - customClass: ""
     customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: "Composer"
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UIViewController"
     identifier: "NonCustom"
+    kind: "showDetail"
     module: "UIKit"
     moduleIsPlaceholder: false
     type: "UIStoryboardSegue"
   - customClass: "CustomSegueClass"
     customModule: "NotCurrentModule"
+    destination:
+      baseType: "NavigationController"
+      identifier: "NavCtrl"
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UINavigationController"
     identifier: "Show-NavCtrl"
+    kind: "presentation"
     module: "NotCurrentModule"
     moduleIsPlaceholder: true
     type: "CustomSegueClass"
@@ -217,7 +529,15 @@ storyboards:
   segues:
   - customClass: ""
     customModule: ""
+    destination:
+      customClass: "ValidatePasswordViewController"
+      customModule: "ExtraModule"
+      identifier: "Validate_Password"
+      module: "ExtraModule"
+      moduleIsPlaceholder: false
+      type: "ValidatePasswordViewController"
     identifier: "ShowPassword"
+    kind: "show"
     module: "UIKit"
     moduleIsPlaceholder: false
     type: "UIStoryboardSegue"

@@ -1,3 +1,354 @@
+customSceneTypes:
+- module: "<placeholder>"
+  moduleIsPlaceholder: true
+  segues:
+  - customClass: ""
+    customModule: ""
+    destination:
+      customClass: "DetailsViewController"
+      customModule: "NotCurrentModule"
+      identifier: "MessageDetails"
+      module: "NotCurrentModule"
+      moduleIsPlaceholder: true
+      type: "DetailsViewController"
+    identifier: ""
+    kind: "relationship"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      customClass: "CustomTabViewController"
+      customModule: "SwiftGen"
+      identifier: "MessagesTab"
+      module: "SwiftGen"
+      moduleIsPlaceholder: false
+      type: "CustomTabViewController"
+    identifier: ""
+    kind: "relationship"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: "MessageList"
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: ""
+    kind: "relationship"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "SplitViewController"
+      identifier: "SplitMessages"
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSSplitViewController"
+    identifier: ""
+    kind: "relationship"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: "MessageListFooter"
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Embed"
+    kind: "embed"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: "SlowFadeSegue"
+    customModule: "PrefsWindowController"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Fade"
+    kind: "custom"
+    module: "PrefsWindowController"
+    moduleIsPlaceholder: false
+    type: "SlowFadeSegue"
+  - customClass: "LoginSegue"
+    customModule: "ExtraModule"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Login"
+    kind: "custom"
+    module: "ExtraModule"
+    moduleIsPlaceholder: false
+    type: "LoginSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Modal"
+    kind: "modal"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Popover"
+    kind: "popover"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Sheet"
+    kind: "sheet"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Show"
+    kind: "show"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: "RotateSegue"
+    customModule: "NotCurrentModule"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "private"
+    kind: "custom"
+    module: "NotCurrentModule"
+    moduleIsPlaceholder: true
+    type: "RotateSegue"
+  - customClass: "ZoomSegue"
+    customModule: "SwiftGen"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "public"
+    kind: "custom"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "ZoomSegue"
+  type: "DetailsViewController"
+- module: "SwiftGen"
+  moduleIsPlaceholder: false
+  segues:
+  - customClass: ""
+    customModule: ""
+    destination:
+      customClass: "DetailsViewController"
+      customModule: "NotCurrentModule"
+      identifier: "MessageDetails"
+      module: "NotCurrentModule"
+      moduleIsPlaceholder: true
+      type: "DetailsViewController"
+    identifier: ""
+    kind: "relationship"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      customClass: "CustomTabViewController"
+      customModule: "SwiftGen"
+      identifier: "MessagesTab"
+      module: "SwiftGen"
+      moduleIsPlaceholder: false
+      type: "CustomTabViewController"
+    identifier: ""
+    kind: "relationship"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: "MessageList"
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: ""
+    kind: "relationship"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "SplitViewController"
+      identifier: "SplitMessages"
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSSplitViewController"
+    identifier: ""
+    kind: "relationship"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: "MessageListFooter"
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Embed"
+    kind: "embed"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: "SlowFadeSegue"
+    customModule: "PrefsWindowController"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Fade"
+    kind: "custom"
+    module: "PrefsWindowController"
+    moduleIsPlaceholder: false
+    type: "SlowFadeSegue"
+  - customClass: "LoginSegue"
+    customModule: "ExtraModule"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Login"
+    kind: "custom"
+    module: "ExtraModule"
+    moduleIsPlaceholder: false
+    type: "LoginSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Modal"
+    kind: "modal"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Popover"
+    kind: "popover"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Sheet"
+    kind: "sheet"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "Show"
+    kind: "show"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: "RotateSegue"
+    customModule: "NotCurrentModule"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "private"
+    kind: "custom"
+    module: "NotCurrentModule"
+    moduleIsPlaceholder: true
+    type: "RotateSegue"
+  - customClass: "ZoomSegue"
+    customModule: "SwiftGen"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
+    identifier: "public"
+    kind: "custom"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "ZoomSegue"
+  type: "CustomTabViewController"
 modules:
 - "AppKit"
 - "ExtraModule"
@@ -43,55 +394,118 @@ storyboards:
   segues:
   - customClass: ""
     customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: "MessageListFooter"
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
     identifier: "Embed"
+    kind: "embed"
     module: "AppKit"
     moduleIsPlaceholder: false
     type: "NSStoryboardSegue"
   - customClass: "SlowFadeSegue"
     customModule: "PrefsWindowController"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
     identifier: "Fade"
+    kind: "custom"
     module: "PrefsWindowController"
     moduleIsPlaceholder: false
     type: "SlowFadeSegue"
   - customClass: "LoginSegue"
     customModule: "ExtraModule"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
     identifier: "Login"
+    kind: "custom"
     module: "ExtraModule"
     moduleIsPlaceholder: false
     type: "LoginSegue"
   - customClass: ""
     customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
     identifier: "Modal"
+    kind: "modal"
     module: "AppKit"
     moduleIsPlaceholder: false
     type: "NSStoryboardSegue"
   - customClass: ""
     customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
     identifier: "Popover"
+    kind: "popover"
     module: "AppKit"
     moduleIsPlaceholder: false
     type: "NSStoryboardSegue"
   - customClass: ""
     customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
     identifier: "Sheet"
+    kind: "sheet"
     module: "AppKit"
     moduleIsPlaceholder: false
     type: "NSStoryboardSegue"
   - customClass: ""
     customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
     identifier: "Show"
+    kind: "show"
     module: "AppKit"
     moduleIsPlaceholder: false
     type: "NSStoryboardSegue"
   - customClass: "RotateSegue"
     customModule: "NotCurrentModule"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
     identifier: "private"
+    kind: "custom"
     module: "NotCurrentModule"
     moduleIsPlaceholder: true
     type: "RotateSegue"
   - customClass: "ZoomSegue"
     customModule: "SwiftGen"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "AppKit"
+      moduleIsPlaceholder: false
+      type: "NSViewController"
     identifier: "public"
+    kind: "custom"
     module: "SwiftGen"
     moduleIsPlaceholder: false
     type: "ZoomSegue"
