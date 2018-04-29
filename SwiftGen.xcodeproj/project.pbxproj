@@ -60,6 +60,7 @@
 		DD428E271FC50FBF001649D6 /* StringsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E171FC50FBF001649D6 /* StringsContext.swift */; };
 		DD4738A81FE07596006CB6BB /* StencilContexts in Resources */ = {isa = PBXBuildFile; fileRef = DDDE52761FAF81DB004203BE /* StencilContexts */; };
 		DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */; };
+		DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */; };
 		DD9F687A20955D51004EB720 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687720955D51004EB720 /* Entry.swift */; };
 		DD9F687B20955D51004EB720 /* AssetsCatalogParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687820955D51004EB720 /* AssetsCatalogParser.swift */; };
 		DD9F687C20955D51004EB720 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687920955D51004EB720 /* Catalog.swift */; };
@@ -279,7 +280,7 @@
 		DD428E0E1FC50FBF001649D6 /* StoryboardParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryboardParser.swift; path = Sources/SwiftGenKit/Parsers/StoryboardParser/StoryboardParser.swift; sourceTree = SOURCE_ROOT; };
 		DD428E0F1FC50FBF001649D6 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		DD428E101FC50FBF001649D6 /* StringsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsParser.swift; sourceTree = "<group>"; };
-		DD428E111FC50FBF001649D6 /* ColorsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsParser.swift; sourceTree = "<group>"; };
+		DD428E111FC50FBF001649D6 /* ColorsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorsParser.swift; path = Sources/SwiftGenKit/Parsers/ColorsParser/ColorsParser.swift; sourceTree = SOURCE_ROOT; };
 		DD428E131FC50FBF001649D6 /* FontsContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsContext.swift; sourceTree = "<group>"; };
 		DD428E141FC50FBF001649D6 /* ColorsContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsContext.swift; sourceTree = "<group>"; };
 		DD428E151FC50FBF001649D6 /* AssetsCatalogContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsCatalogContext.swift; sourceTree = "<group>"; };
@@ -287,6 +288,7 @@
 		DD428E171FC50FBF001649D6 /* StringsContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsContext.swift; sourceTree = "<group>"; };
 		DD428E181FC50FBF001649D6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserCLICommands.swift; sourceTree = "<group>"; };
+		DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsFileTypeParser.swift; sourceTree = "<group>"; };
 		DD9F687720955D51004EB720 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		DD9F687820955D51004EB720 /* AssetsCatalogParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsCatalogParser.swift; sourceTree = "<group>"; };
 		DD9F687920955D51004EB720 /* Catalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
@@ -528,24 +530,22 @@
 			children = (
 				DD9F687620955D51004EB720 /* AssetsCatalogParser */,
 				DD428E071FC50FBF001649D6 /* FontsParser.swift */,
-				DD428E081FC50FBF001649D6 /* ColorsFileParsers */,
+				DD428E081FC50FBF001649D6 /* ColorsParser */,
 				DDCCACD5209550F60017FB43 /* StoryboardParser */,
 				DD428E101FC50FBF001649D6 /* StringsParser.swift */,
-				DD428E111FC50FBF001649D6 /* ColorsParser.swift */,
 				DD428E0F1FC50FBF001649D6 /* Parser.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
 		};
-		DD428E081FC50FBF001649D6 /* ColorsFileParsers */ = {
+		DD428E081FC50FBF001649D6 /* ColorsParser */ = {
 			isa = PBXGroup;
 			children = (
-				DD428E091FC50FBF001649D6 /* ColorsCLRFileParser.swift */,
-				DD428E0A1FC50FBF001649D6 /* ColorsJSONFileParser.swift */,
-				DD428E0B1FC50FBF001649D6 /* ColorsTXTFileParser.swift */,
-				DD428E0C1FC50FBF001649D6 /* ColorsXMLFileParser.swift */,
+				DD9F687520955D15004EB720 /* FileTypeParser */,
+				DD428E111FC50FBF001649D6 /* ColorsParser.swift */,
+				DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */,
 			);
-			path = ColorsFileParsers;
+			path = ColorsParser;
 			sourceTree = "<group>";
 		};
 		DD428E121FC50FBF001649D6 /* Stencil */ = {
@@ -586,6 +586,17 @@
 				DDDE52761FAF81DB004203BE /* StencilContexts */,
 			);
 			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		DD9F687520955D15004EB720 /* FileTypeParser */ = {
+			isa = PBXGroup;
+			children = (
+				DD428E091FC50FBF001649D6 /* ColorsCLRFileParser.swift */,
+				DD428E0A1FC50FBF001649D6 /* ColorsJSONFileParser.swift */,
+				DD428E0B1FC50FBF001649D6 /* ColorsTXTFileParser.swift */,
+				DD428E0C1FC50FBF001649D6 /* ColorsXMLFileParser.swift */,
+			);
+			name = FileTypeParser;
 			sourceTree = "<group>";
 		};
 		DD9F687620955D51004EB720 /* AssetsCatalogParser */ = {
@@ -1301,6 +1312,7 @@
 				DD428E1A1FC50FBF001649D6 /* ColorsCLRFileParser.swift in Sources */,
 				DD428E241FC50FBF001649D6 /* ColorsContext.swift in Sources */,
 				DD428E201FC50FBF001649D6 /* Parser.swift in Sources */,
+				DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */,
 				DD9F687C20955D51004EB720 /* Catalog.swift in Sources */,
 				DD428E271FC50FBF001649D6 /* StringsContext.swift in Sources */,
 				DD428E211FC50FBF001649D6 /* StringsParser.swift in Sources */,
