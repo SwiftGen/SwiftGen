@@ -12,7 +12,7 @@ import UIKit
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-// MARK: - Storyboards
+// MARK: - Storyboard Scenes
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 internal enum StoryboardScene {
@@ -86,21 +86,6 @@ internal enum StoryboardScene {
     internal static let validatePassword = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "Validate_Password")
   }
 }
-
-internal enum StoryboardSegue {
-  internal enum AdditionalImport: String, SegueType {
-    case `private`
-  }
-  internal enum Message: String, SegueType {
-    case customBack = "CustomBack"
-    case embed = "Embed"
-    case nonCustom = "NonCustom"
-    case showNavCtrl = "Show-NavCtrl"
-  }
-  internal enum Wizard: String, SegueType {
-    case showPassword = "ShowPassword"
-  }
-}
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
 
 // MARK: - Implementation Details
@@ -111,7 +96,8 @@ internal protocol StoryboardType {
 
 internal extension StoryboardType {
   static var storyboard: UIStoryboard {
-    return UIStoryboard(name: self.storyboardName, bundle: Bundle(for: BundleToken.self))
+    let name = self.storyboardName
+    return UIStoryboard(name: name, bundle: Bundle(for: BundleToken.self))
   }
 }
 
@@ -120,6 +106,7 @@ internal struct SceneType<T: UIViewController> {
   internal let identifier: String
 
   internal func instantiate() -> T {
+    let identifier = self.identifier
     guard let controller = storyboard.storyboard.instantiateViewController(withIdentifier: identifier) as? T else {
       fatalError("ViewController '\(identifier)' is not of the expected class \(T.self).")
     }
@@ -135,14 +122,6 @@ internal struct InitialSceneType<T: UIViewController> {
       fatalError("ViewController is not of the expected class \(T.self).")
     }
     return controller
-  }
-}
-
-internal protocol SegueType: RawRepresentable { }
-
-internal extension UIViewController {
-  func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
-    performSegue(withIdentifier: segue.rawValue, sender: sender)
   }
 }
 

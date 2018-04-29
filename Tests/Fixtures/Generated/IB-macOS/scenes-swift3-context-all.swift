@@ -10,10 +10,10 @@ import PrefsWindowController
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-// MARK: - Storyboards
+// MARK: - Storyboard Scenes
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-internal enum XCTStoryboardsScene {
+internal enum StoryboardScene {
   internal enum AdditionalImport: StoryboardType {
     internal static let storyboardName = "AdditionalImport"
 
@@ -61,17 +61,6 @@ internal enum XCTStoryboardsScene {
     internal static let window = SceneType<AppKit.NSWindowController>(storyboard: Placeholder.self, identifier: "Window")
   }
 }
-
-internal enum XCTStoryboardsSegue {
-  internal enum Message: String, SegueType {
-    case embed = "Embed"
-    case modal = "Modal"
-    case popover = "Popover"
-    case sheet = "Sheet"
-    case show = "Show"
-    case `public`
-  }
-}
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
 
 // MARK: - Implementation Details
@@ -106,14 +95,6 @@ internal struct InitialSceneType<T> {
       fatalError("Controller is not of the expected class \(T.self).")
     }
     return controller
-  }
-}
-
-internal protocol SegueType: RawRepresentable { }
-
-internal extension NSSeguePerforming {
-  func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
-    performSegue?(withIdentifier: segue.rawValue, sender: sender)
   }
 }
 
