@@ -34,7 +34,7 @@ class ColorParserTests: XCTestCase {
     let parser = ColorsParser()
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "empty.plist", sub: .colors)
+    XCTDiffContexts(result, expected: "empty", sub: .colors)
   }
 
   // MARK: - Dispatch
@@ -85,7 +85,7 @@ class ColorParserTests: XCTestCase {
     try parser.parse(path: Fixtures.path(for: "extra.txt", sub: .colors))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "multiple.plist", sub: .colors)
+    XCTDiffContexts(result, expected: "multiple", sub: .colors)
   }
 
   // MARK: - String parsing

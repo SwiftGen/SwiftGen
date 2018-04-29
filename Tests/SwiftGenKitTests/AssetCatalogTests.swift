@@ -13,7 +13,7 @@ class AssetCatalogTests: XCTestCase {
     let parser = AssetsCatalogParser()
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "empty.plist", sub: .xcassets)
+    XCTDiffContexts(result, expected: "empty", sub: .xcassets)
   }
 
   func testImages() throws {
@@ -21,7 +21,7 @@ class AssetCatalogTests: XCTestCase {
     try parser.parse(path: Fixtures.path(for: "Images.xcassets", sub: .xcassets))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "images.plist", sub: .xcassets)
+    XCTDiffContexts(result, expected: "images", sub: .xcassets)
   }
 
   func testColors() throws {
@@ -29,7 +29,7 @@ class AssetCatalogTests: XCTestCase {
     try parser.parse(path: Fixtures.path(for: "Colors.xcassets", sub: .xcassets))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "colors.plist", sub: .xcassets)
+    XCTDiffContexts(result, expected: "colors", sub: .xcassets)
   }
 
   func testAll() throws {
@@ -40,6 +40,6 @@ class AssetCatalogTests: XCTestCase {
     ])
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "all.plist", sub: .xcassets)
+    XCTDiffContexts(result, expected: "all", sub: .xcassets)
   }
 }

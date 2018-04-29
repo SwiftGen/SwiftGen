@@ -18,7 +18,7 @@ class StringsTests: XCTestCase {
     let parser = StringsParser()
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "empty.plist", sub: .strings)
+    XCTDiffContexts(result, expected: "empty", sub: .strings)
   }
 
   func testLocalizable() throws {
@@ -26,7 +26,7 @@ class StringsTests: XCTestCase {
     try parser.parse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "localizable.plist", sub: .strings)
+    XCTDiffContexts(result, expected: "localizable", sub: .strings)
   }
 
   func testMultiline() throws {
@@ -34,7 +34,7 @@ class StringsTests: XCTestCase {
     try parser.parse(path: Fixtures.path(for: "LocMultiline.strings", sub: .strings))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "multiline.plist", sub: .strings)
+    XCTDiffContexts(result, expected: "multiline", sub: .strings)
   }
 
   func testUTF8File() throws {
@@ -42,7 +42,7 @@ class StringsTests: XCTestCase {
     try parser.parse(path: Fixtures.path(for: "LocUTF8.strings", sub: .strings))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "utf8.plist", sub: .strings)
+    XCTDiffContexts(result, expected: "utf8", sub: .strings)
   }
 
   func testStructuredOnly() throws {
@@ -50,7 +50,7 @@ class StringsTests: XCTestCase {
     try parser.parse(path: Fixtures.path(for: "LocStructuredOnly.strings", sub: .strings))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "structuredonly.plist", sub: .strings)
+    XCTDiffContexts(result, expected: "structuredonly", sub: .strings)
   }
 
   func testMultipleFiles() throws {
@@ -59,7 +59,7 @@ class StringsTests: XCTestCase {
     try parser.parse(path: Fixtures.path(for: "LocMultiline.strings", sub: .strings))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "multiple.plist", sub: .strings)
+    XCTDiffContexts(result, expected: "multiple", sub: .strings)
   }
 
   func testMultipleFilesDuplicate() throws {

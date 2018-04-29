@@ -14,7 +14,7 @@ class ColorsJSONFileTests: XCTestCase {
     parser.palettes = [try ColorsJSONFileParser().parseFile(at: Fixtures.path(for: "colors.json", sub: .colors))]
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "defaults.plist", sub: .colors)
+    XCTDiffContexts(result, expected: "defaults", sub: .colors)
   }
 
   func testFileWithBadSyntax() {
