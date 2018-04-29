@@ -1,0 +1,50 @@
+modules:
+- UIKit
+platform: iOS
+storyboards:
+- initialScene:
+    baseType: ViewController
+    identifier: 
+    module: UIKit
+    type: UIViewController
+  name: Message
+  platform: iOS
+  scenes:
+  - baseType: ViewController
+    identifier: Composer
+    module: UIKit
+    type: UIViewController
+  - baseType: TableViewController
+    identifier: MessagesList
+    module: UIKit
+    type: UITableViewController
+  - baseType: NavigationController
+    identifier: NavCtrl
+    module: UIKit
+    type: UINavigationController
+  - customClass: XXPickerViewController
+    customModule: 
+    identifier: URLChooser
+    module: 
+    type: XXPickerViewController
+  segues:
+  - customClass: CustomSegueClass2
+    customModule: 
+    identifier: CustomBack
+    module: 
+    type: CustomSegueClass2
+  - customClass: 
+    customModule: 
+    identifier: Embed
+    module: UIKit
+    type: UIStoryboardSegue
+  - customClass: 
+    customModule: 
+    identifier: NonCustom
+    module: UIKit
+    type: UIStoryboardSegue
+  - customClass: CustomSegueClass
+    customModule: 
+    identifier: Show-NavCtrl
+    module: 
+    type: CustomSegueClass

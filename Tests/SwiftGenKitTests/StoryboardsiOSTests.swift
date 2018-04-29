@@ -19,7 +19,7 @@ class StoryboardsiOSTests: XCTestCase {
     let parser = StoryboardParser()
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "empty.plist", sub: .storyboardsiOS)
+    XCTDiffContexts(result, expected: "empty", sub: .storyboardsiOS)
   }
 
   func testMessageStoryboard() {
@@ -31,7 +31,7 @@ class StoryboardsiOSTests: XCTestCase {
     }
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "messages.plist", sub: .storyboardsiOS)
+    XCTDiffContexts(result, expected: "messages", sub: .storyboardsiOS)
   }
 
   func testAnonymousStoryboard() {
@@ -43,7 +43,7 @@ class StoryboardsiOSTests: XCTestCase {
     }
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "anonymous.plist", sub: .storyboardsiOS)
+    XCTDiffContexts(result, expected: "anonymous", sub: .storyboardsiOS)
   }
 
   func testAllStoryboards() {
@@ -55,6 +55,6 @@ class StoryboardsiOSTests: XCTestCase {
     }
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "all.plist", sub: .storyboardsiOS)
+    XCTDiffContexts(result, expected: "all", sub: .storyboardsiOS)
   }
 }

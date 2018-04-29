@@ -7,6 +7,7 @@
 import Foundation
 import PathKit
 import XCTest
+import Yams
 
 private let colorCode: (String) -> String =
   ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
@@ -130,13 +131,18 @@ func XCTDiffContexts(_ result: [String: Any],
                      sub directory: Fixtures.Directory,
                      file: StaticString = #file,
                      line: UInt = #line) {
+  let fileName = "\(name).yaml"
+
   if ProcessInfo().environment["GENERATE_CONTEXTS"] == "YES" {
-    let target = Path(#file).parent().parent() + "Fixtures/StencilContexts" + directory.rawValue + name
-    guard (result as NSDictionary).write(to: target.url, atomically: true) else {
-      fatalError("Unable to write context file \(target)")
+    let target = Path(#file).parent().parent() + "Fixtures/StencilContexts" + directory.rawValue + fileName
+    do {
+      let data = try Yams.dump(object: result)
+      try target.write(data)
+    } catch let error {
+      fatalError("Unable to write context file \(target): \(error)")
     }
   } else {
-    let expected = Fixtures.context(for: name, sub: directory)
+    let expected = Fixtures.context(for: fileName, sub: directory)
     guard let error = diff(result, expected) else { return }
     XCTFail(error, file: file, line: line)
   }
@@ -180,10 +186,12 @@ class Fixtures {
   static func context(for name: String, sub: Directory) -> [String: Any] {
     let path = self.path(for: name, subDirectory: "StencilContexts/\(sub.rawValue)")
 
-    guard let data = NSDictionary(contentsOf: path.url) as? [String: Any] else {
-      fatalError("Unable to load fixture content")
+    guard let data: String = try? path.read(),
+      let yaml = try? Yams.load(yaml: data, .basic),
+      let result = yaml as? [String: Any] else {
+        fatalError("Unable to load fixture content")
     }
 
-    return data
+    return result
   }
 }

@@ -14,7 +14,7 @@ class ColorsCLRFileTests: XCTestCase {
     parser.palettes = [try ColorsCLRFileParser().parseFile(at: Fixtures.path(for: "colors.clr", sub: .colors))]
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "defaults.plist", sub: .colors)
+    XCTDiffContexts(result, expected: "defaults", sub: .colors)
   }
 
   func testFileWithBadFile() {

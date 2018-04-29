@@ -14,7 +14,7 @@ class ColorsTextFileTests: XCTestCase {
     parser.palettes = [try ColorsTextFileParser().parseFile(at: Fixtures.path(for: "extra.txt", sub: .colors))]
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "extra.plist", sub: .colors)
+    XCTDiffContexts(result, expected: "extra", sub: .colors)
   }
 
   func testFileWithBadSyntax() {
