@@ -55,19 +55,19 @@ extension UIViewController {
 }
 
 struct StoryboardScene {
-    enum Wizard: StoryboardType {
-        static let storyboardName = "Wizard"
+  enum Wizard: StoryboardType {
+    static let storyboardName = "Wizard"
 
-        static let initialScene = InitialSceneType<UIViewController>(storyboard: Wizard.self)
+    internal static let initialScene = InitialSceneType<CreateAccViewController>(storyboard: Wizard.self)
 
-        static let acceptCGU = SceneType<UIViewController>(storyboard: Wizard.self, identifier: "Accept-CGU")
+    internal static let acceptToS = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "Accept-ToS")
 
-    static let createAccount = SceneType<UIViewController>(storyboard: Wizard.self, identifier: "CreateAccount")
-    
-    static let preferences = SceneType<UITableViewController>(storyboard: Wizard.self, identifier: "Preferences")
-    
-    static let validatePassword = SceneType<UIViewController>(storyboard: Wizard.self, identifier: "Validate_Password")
-    }
+    internal static let createAccount = SceneType<CreateAccViewController>(storyboard: Wizard.self, identifier: "CreateAccount")
+
+    internal static let preferences = SceneType<UIKit.UITableViewController>(storyboard: Wizard.self, identifier: "Preferences")
+
+    internal static let validatePassword = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "Validate_Password")
+  }
 }
 
 struct StoryboardSegue {
@@ -81,6 +81,7 @@ private final class BundleToken {}
 //: #### Usage Example
 
 let createAccountVC = StoryboardScene.Wizard.createAccount.instantiate()
+// Ideally this would have `CreateAccViewController` as type, but we can't seem to get playgrounds storyboards to play nice with our custom types
 type(of: createAccountVC)
 createAccountVC.title
 
