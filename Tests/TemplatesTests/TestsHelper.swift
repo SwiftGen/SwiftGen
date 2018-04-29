@@ -102,11 +102,13 @@ class Fixtures {
   static func context(for name: String, sub: Directory) -> [String: Any] {
     let path = self.path(for: name, subDirectory: "StencilContexts/\(sub.rawValue)")
 
-    guard let data = NSDictionary(contentsOf: path.url) as? [String: Any] else {
-      fatalError("Unable to load fixture content")
+    guard let data: String = try? path.read(),
+      let yaml = try? Yams.load(yaml: data),
+      let result = yaml as? [String: Any] else {
+        fatalError("Unable to load fixture content")
     }
 
-    return data
+    return result
   }
 
   static func template(for name: String, sub: Directory) -> String {
@@ -162,7 +164,7 @@ extension XCTestCase {
 
     for contextName in contextNames {
       print("Testing context '\(contextName)'...")
-      let context = Fixtures.context(for: "\(contextName).plist", sub: resourceDir)
+      let context = Fixtures.context(for: "\(contextName).yaml", sub: resourceDir)
 
       // generate context variations
       guard let variations = try? contextVariations(contextName, context) else {
