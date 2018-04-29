@@ -31,13 +31,6 @@ class ColorsTests: XCTestCase {
     }
   }
 
-  func testSwift2() {
-    test(template: "swift2",
-         contextNames: Contexts.all,
-         directory: .colors,
-         contextVariations: variations(customName: "XCTColors"))
-  }
-
   func testSwift3() {
     test(template: "swift3",
          contextNames: Contexts.all,
