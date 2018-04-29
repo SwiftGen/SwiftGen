@@ -11,7 +11,7 @@ public enum StringsParserError: Error, CustomStringConvertible {
   case duplicateTable(name: String)
   case failureOnLoading(path: String)
   case invalidFormat
-  case invalidPlaceholder(previous: PlaceholderType, new: PlaceholderType)
+  case invalidPlaceholder(previous: StringsParser.PlaceholderType, new: StringsParser.PlaceholderType)
 
   public var description: String {
     switch self {

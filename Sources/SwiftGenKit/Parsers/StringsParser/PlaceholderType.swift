@@ -6,39 +6,41 @@
 
 import Foundation
 
-public enum PlaceholderType: String {
-  case object = "String"
-  case float = "Float"
-  case int = "Int"
-  case char = "Character"
-  case cString = "UnsafePointer<unichar>"
-  case pointer = "UnsafePointer<Void>"
-  case unknown = "UnsafePointer<()>"
+extension StringsParser {
+  public enum PlaceholderType: String {
+    case object = "String"
+    case float = "Float"
+    case int = "Int"
+    case char = "Character"
+    case cString = "UnsafePointer<unichar>"
+    case pointer = "UnsafePointer<Void>"
+    case unknown = "UnsafePointer<()>"
 
-  init?(formatChar char: Character) {
-    guard let lcChar = String(char).lowercased().first else {
-      return nil
-    }
-    switch lcChar {
-    case "@":
-      self = .object
-    case "a", "e", "f", "g":
-      self = .float
-    case "d", "i", "o", "u", "x":
-      self = .int
-    case "c":
-      self = .char
-    case "s":
-      self = .cString
-    case "p":
-      self = .pointer
-    default:
-      return nil
+    init?(formatChar char: Character) {
+      guard let lcChar = String(char).lowercased().first else {
+        return nil
+      }
+      switch lcChar {
+      case "@":
+        self = .object
+      case "a", "e", "f", "g":
+        self = .float
+      case "d", "i", "o", "u", "x":
+        self = .int
+      case "c":
+        self = .char
+      case "s":
+        self = .cString
+      case "p":
+        self = .pointer
+      default:
+        return nil
+      }
     }
   }
 }
 
-extension PlaceholderType {
+extension StringsParser.PlaceholderType {
   private static let formatTypesRegEx: NSRegularExpression = {
     // %d/%i/%o/%u/%x with their optional length modifiers like in "%lld"
     let patternInt = "(?:h|hh|l|ll|q|z|t|j)?([dioux])"
@@ -60,7 +62,7 @@ extension PlaceholderType {
   }()
 
   // "I give %d apples to %@" --> [.Int, .String]
-  static func placeholders(fromFormat formatString: String) throws -> [PlaceholderType] {
+  static func placeholders(fromFormat formatString: String) throws -> [StringsParser.PlaceholderType] {
     let range = NSRange(location: 0, length: (formatString as NSString).length)
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier
@@ -90,10 +92,10 @@ extension PlaceholderType {
 
     // enumerate the conversion specifiers and their optionally forced position
     // and build the array of PlaceholderTypes accordingly
-    var list = [PlaceholderType]()
+    var list = [StringsParser.PlaceholderType]()
     var nextNonPositional = 1
     for (str, pos) in chars {
-      if let char = str.first, let placeholderType = PlaceholderType(formatChar: char) {
+      if let char = str.first, let placeholderType = StringsParser.PlaceholderType(formatChar: char) {
         let insertionPos: Int
         if let pos = pos {
           insertionPos = pos
