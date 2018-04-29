@@ -46,6 +46,9 @@
 * XCAssets: Dropped the deprecated `allValues` constant, use the type specific constants such as `allColors`, `allDataItems` and `allImages`. The default value of `imageAlias` has also been changed from `Image` to `AssetImageTypeAlias`, to be consistent with the other types.  
   [David Jennes](https://github.com/djbe) 
   [#482](https://github.com/SwiftGen/SwiftGen/pull/482)
+* Interface Builder: split up the storyboards template into 2 parts, one for scenes and one for segues.  
+  [David Jennes](https://github.com/djbe) 
+  [#419](https://github.com/SwiftGen/SwiftGen/pull/419)
 
 ### New Features
 
