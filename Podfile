@@ -28,6 +28,7 @@ target 'SwiftGenKit' do
 
   target 'SwiftGenKit UnitTests' do
     inherit! :complete
+    pod 'Yams', '~> 0.3'
   end
 end
 
