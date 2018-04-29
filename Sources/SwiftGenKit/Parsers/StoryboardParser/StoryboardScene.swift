@@ -7,13 +7,6 @@
 import Foundation
 import Kanna
 
-func uppercaseFirst(_ string: String) -> String {
-  guard let first = string.first else {
-    return string
-  }
-  return String(first).uppercased() + String(string.dropFirst())
-}
-
 extension Storyboard {
   struct Scene {
     let identifier: String
@@ -34,7 +27,7 @@ extension Storyboard {
       } else if let type = Scene.tagTypeMap[tag]?.type {
         return type
       } else {
-        return "\(platform.prefix)\(uppercaseFirst(tag))"
+        return "\(platform.prefix)\(tag.uppercasedFirst())"
       }
     }
 

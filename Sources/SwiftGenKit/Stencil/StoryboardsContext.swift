@@ -75,7 +75,7 @@ extension StoryboardParser {
     } else {
       return [
         "identifier": scene.identifier,
-        "baseType": uppercaseFirst(scene.tag),
+        "baseType": scene.tag.uppercasedFirst(),
         "type": scene.type,
         "module": scene.module ?? ""
       ]
