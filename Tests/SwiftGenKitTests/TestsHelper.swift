@@ -187,7 +187,7 @@ class Fixtures {
     let path = self.path(for: name, subDirectory: "StencilContexts/\(sub.rawValue)")
 
     guard let data: String = try? path.read(),
-      let yaml = try? Yams.load(yaml: data),
+      let yaml = try? Yams.load(yaml: data, .basic),
       let result = yaml as? [String: Any] else {
         fatalError("Unable to load fixture content")
     }
