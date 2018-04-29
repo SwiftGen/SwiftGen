@@ -23,20 +23,15 @@ extension Storyboard {
     let platform: Platform
 
     private static let tagTypeMap = [
-      "avPlayerViewController": "AVPlayerViewController",
-      "glkViewController": "GLKViewController",
-      "pagecontroller": "NSPageController"
-    ]
-
-    private static let tagModuleMap = [
-      "avPlayerViewController": "AVKit",
-      "glkViewController": "GLKit"
+      "avPlayerViewController": (type: "AVPlayerViewController", module: "AVKit"),
+      "glkViewController": (type: "GLKViewController", module: "GLKit"),
+      "pagecontroller": (type: "NSPageController", module: nil)
     ]
 
     var type: String {
       if let customClass = customClass {
         return customClass
-      } else if let type = Scene.tagTypeMap[tag] {
+      } else if let type = Scene.tagTypeMap[tag]?.type {
         return type
       } else {
         return "\(platform.prefix)\(uppercaseFirst(tag))"
@@ -46,7 +41,7 @@ extension Storyboard {
     var module: String? {
       if let customModule = customModule {
         return customModule
-      } else if let type = Scene.tagModuleMap[tag] {
+      } else if let type = Scene.tagTypeMap[tag]?.module {
         return type
       } else if customClass == nil {
         return platform.module
