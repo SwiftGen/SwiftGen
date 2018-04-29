@@ -28,27 +28,27 @@ $ swiftgen templates list
 colors:
   custom:
   bundled:
-   - swift2
    - swift3
+   - swift4
 storyboards:
   custom:
    - mytemplate
   bundled:
-   - swift2
    - swift3
+   - swift4
 strings:
   custom:
    - mycustomtemplate
   bundled:
-   - flat-swift2
    - flat-swift3
-   - structured-swift2
+   - flat-swift4
    - structured-swift3
+   - structured-swift4
 xcassets:
   custom:
   bundled:
-   - swift2
    - swift3
+   - swift4
 ```
 
 ## Printing a template, creating a new template
