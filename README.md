@@ -199,10 +199,9 @@ For more information about how to create your own templates, [see the dedicated 
 
 As explained above, you can use `swiftgen templates list` to list all templates bundled with SwiftGen. For most SwiftGen subcommands, we provide, among others:
 
-* A `swift2` template, compatible with Swift 2
 * A `swift3` template, compatible with Swift 3
 * A `swift4` template, compatible with Swift 4
-* Other variants, like `flat-swift2/3/4` and `structured-swift2/3/4` templates for Strings, etc.
+* Other variants, like `flat-swift3/4` and `structured-swift3/4` templates for Strings, etc.
 
 You can **find the documentation for each bundled template [here in the repo](https://github.com/SwiftGen/templates/tree/master/Documentation)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
 Each MarkDown file documents the Swift Version it's aimed for, the use case for that template (in which cases you might favor that template over others), the available `--param` parameters to customize it on invocation, and some code examples.

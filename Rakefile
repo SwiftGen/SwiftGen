@@ -157,7 +157,7 @@ namespace :output do
   def compile_file(f, task)
     toolchain = toolchain(f)
     if toolchain.nil?
-      puts "Unable to typecheck Swift 2 file #{f}"
+      puts "Unknown Swift toolchain for file #{f}"
       return true
     end
     sdks = sdks(f)

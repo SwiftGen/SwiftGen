@@ -57,14 +57,6 @@ class StoryboardsMacOSTests: XCTestCase {
     ]
   }
 
-  func testSwift2() {
-    test(template: "swift2",
-         contextNames: Contexts.all,
-         directory: .storyboards,
-         resourceDirectory: .storyboardsMacOS,
-         contextVariations: variations)
-  }
-
   func testSwift3() {
     test(template: "swift3",
          contextNames: Contexts.all,

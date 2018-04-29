@@ -19,6 +19,9 @@
 * Don't normalize string keys while parsing, let all transformation be done on template side. This makes the developer responsible to keep the language file organized, duplications won't be removed.  
   [Diego Chohfi](https://github.com/dchohfi)
   [#257](https://github.com/SwiftGen/SwiftGen/issues/257)
+* Remove Swift 2 support.  
+  [David Jennes](https://github.com/djbe) 
+  [#420](https://github.com/SwiftGen/SwiftGen/pull/420)
 
 ### New Features
 
