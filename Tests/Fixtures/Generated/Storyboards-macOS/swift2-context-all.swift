@@ -2,7 +2,7 @@
 
 // swiftlint:disable sorted_imports
 import Foundation
-import Cocoa
+import AppKit
 import FadeSegue
 import PrefsWindowController
 
@@ -63,29 +63,40 @@ internal enum StoryboardScene {
   internal enum Dependency: StoryboardType {
     internal static let storyboardName = "Dependency"
 
-    internal static let Dependent = SceneType<NSViewController>(Dependency.self, identifier: "Dependent")
+    internal static let Dependent = SceneType<AppKit.NSViewController>(Dependency.self, identifier: "Dependent")
+  }
+  internal enum KnownTypes: StoryboardType {
+    internal static let storyboardName = "Known Types"
+
+    internal static let Item1 = SceneType<AppKit.NSWindowController>(KnownTypes.self, identifier: "item 1")
+
+    internal static let Item2 = SceneType<AppKit.NSSplitViewController>(KnownTypes.self, identifier: "item 2")
+
+    internal static let Item3 = SceneType<AppKit.NSViewController>(KnownTypes.self, identifier: "item 3")
+
+    internal static let Item4 = SceneType<AppKit.NSPageController>(KnownTypes.self, identifier: "item 4")
+
+    internal static let Item5 = SceneType<AppKit.NSTabViewController>(KnownTypes.self, identifier: "item 5")
   }
   internal enum Message: StoryboardType {
     internal static let storyboardName = "Message"
 
-    internal static let MessageDetails = SceneType<NSViewController>(Message.self, identifier: "MessageDetails")
+    internal static let MessageDetails = SceneType<AppKit.NSViewController>(Message.self, identifier: "MessageDetails")
 
-    internal static let MessageList = SceneType<NSViewController>(Message.self, identifier: "MessageList")
+    internal static let MessageList = SceneType<AppKit.NSViewController>(Message.self, identifier: "MessageList")
 
-    internal static let MessageListFooter = SceneType<NSViewController>(Message.self, identifier: "MessageListFooter")
+    internal static let MessageListFooter = SceneType<AppKit.NSViewController>(Message.self, identifier: "MessageListFooter")
 
     internal static let MessagesTab = SceneType<CustomTabViewController>(Message.self, identifier: "MessagesTab")
 
-    internal static let SplitMessages = SceneType<NSSplitViewController>(Message.self, identifier: "SplitMessages")
+    internal static let SplitMessages = SceneType<AppKit.NSSplitViewController>(Message.self, identifier: "SplitMessages")
 
-    internal static let WindowCtrl = SceneType<NSWindowController>(Message.self, identifier: "WindowCtrl")
+    internal static let WindowCtrl = SceneType<AppKit.NSWindowController>(Message.self, identifier: "WindowCtrl")
   }
   internal enum Placeholder: StoryboardType {
     internal static let storyboardName = "Placeholder"
 
-    internal static let Dependent = SceneType<NSControllerPlaceholder>(Placeholder.self, identifier: "Dependent")
-
-    internal static let Window = SceneType<NSWindowController>(Placeholder.self, identifier: "Window")
+    internal static let Window = SceneType<AppKit.NSWindowController>(Placeholder.self, identifier: "Window")
   }
 }
 

@@ -10,6 +10,4 @@
 
   public class CustomTabViewController: NSWindowController {
   }
-  public class NSControllerPlaceholder: NSWindowController {
-  }
 #endif

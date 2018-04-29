@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Window Controller-->
@@ -14,6 +14,9 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="163" y="199" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+                        <connections>
+                            <outlet property="delegate" destination="1P9-6c-uvR" id="gNu-ff-Yv6"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="QQb-OV-IBg" kind="relationship" relationship="window.shadowedContentViewController" id="Ics-Wd-Vef"/>
@@ -34,8 +37,12 @@
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="HmC-Pa-hEf">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="QQb-OV-IBg" id="Cpa-9S-liy"/>
+                        </connections>
                     </splitView>
                     <connections>
+                        <outlet property="splitView" destination="HmC-Pa-hEf" id="jCN-27-LC9"/>
                         <segue destination="R2f-4N-xbc" kind="relationship" relationship="splitItems" id="X6W-e9-Enk"/>
                         <segue destination="cIf-as-pTF" kind="relationship" relationship="splitItems" id="zs1-Tk-SMT"/>
                     </connections>

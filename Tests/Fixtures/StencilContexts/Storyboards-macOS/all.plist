@@ -4,6 +4,7 @@
 <dict>
 	<key>modules</key>
 	<array>
+		<string>AppKit</string>
 		<string>FadeSegue</string>
 		<string>PrefsWindowController</string>
 	</array>
@@ -25,6 +26,10 @@
 					<string>PrefsWindowController</string>
 					<key>identifier</key>
 					<string>private</string>
+					<key>module</key>
+					<string>PrefsWindowController</string>
+					<key>type</key>
+					<string>DBPrefsWindowController</string>
 				</dict>
 			</array>
 			<key>segues</key>
@@ -52,6 +57,71 @@
 					<string>ViewController</string>
 					<key>identifier</key>
 					<string>Dependent</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSViewController</string>
+				</dict>
+			</array>
+			<key>segues</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Known Types</string>
+			<key>platform</key>
+			<string>macOS</string>
+			<key>scenes</key>
+			<array>
+				<dict>
+					<key>baseType</key>
+					<string>WindowController</string>
+					<key>identifier</key>
+					<string>item 1</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSWindowController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>SplitViewController</string>
+					<key>identifier</key>
+					<string>item 2</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSSplitViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>ViewController</string>
+					<key>identifier</key>
+					<string>item 3</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>Pagecontroller</string>
+					<key>identifier</key>
+					<string>item 4</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSPageController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>TabViewController</string>
+					<key>identifier</key>
+					<string>item 5</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSTabViewController</string>
 				</dict>
 			</array>
 			<key>segues</key>
@@ -69,18 +139,30 @@
 					<string>ViewController</string>
 					<key>identifier</key>
 					<string>MessageDetails</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>ViewController</string>
 					<key>identifier</key>
 					<string>MessageList</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>ViewController</string>
 					<key>identifier</key>
 					<string>MessageListFooter</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSViewController</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -89,18 +171,30 @@
 					<string></string>
 					<key>identifier</key>
 					<string>MessagesTab</string>
+					<key>module</key>
+					<string></string>
+					<key>type</key>
+					<string>CustomTabViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>SplitViewController</string>
 					<key>identifier</key>
 					<string>SplitMessages</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSSplitViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>WindowController</string>
 					<key>identifier</key>
 					<string>WindowCtrl</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSWindowController</string>
 				</dict>
 			</array>
 			<key>segues</key>
@@ -112,6 +206,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Embed</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -120,6 +218,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Modal</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -128,6 +230,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Popover</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -136,6 +242,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Sheet</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -144,6 +254,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Show</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -152,6 +266,10 @@
 					<string>FadeSegue</string>
 					<key>identifier</key>
 					<string>public</string>
+					<key>module</key>
+					<string>FadeSegue</string>
+					<key>type</key>
+					<string>FadeSegue</string>
 				</dict>
 			</array>
 		</dict>
@@ -164,15 +282,13 @@
 			<array>
 				<dict>
 					<key>baseType</key>
-					<string>ControllerPlaceholder</string>
-					<key>identifier</key>
-					<string>Dependent</string>
-				</dict>
-				<dict>
-					<key>baseType</key>
 					<string>WindowController</string>
 					<key>identifier</key>
 					<string>Window</string>
+					<key>module</key>
+					<string>AppKit</string>
+					<key>type</key>
+					<string>NSWindowController</string>
 				</dict>
 			</array>
 			<key>segues</key>

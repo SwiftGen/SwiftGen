@@ -4,9 +4,12 @@
 <dict>
 	<key>modules</key>
 	<array>
+		<string>AVKit</string>
 		<string>CustomSegue</string>
+		<string>GLKit</string>
 		<string>LocationPicker</string>
 		<string>SlackTextViewController</string>
+		<string>UIKit</string>
 	</array>
 	<key>platform</key>
 	<string>iOS</string>
@@ -21,6 +24,10 @@
 				<string>LocationPicker</string>
 				<key>identifier</key>
 				<string></string>
+				<key>module</key>
+				<string>LocationPicker</string>
+				<key>type</key>
+				<string>LocationPickerViewController</string>
 			</dict>
 			<key>name</key>
 			<string>AdditionalImport</string>
@@ -35,6 +42,10 @@
 					<string>SlackTextViewController</string>
 					<key>identifier</key>
 					<string>public</string>
+					<key>module</key>
+					<string>SlackTextViewController</string>
+					<key>type</key>
+					<string>SLKTextViewController</string>
 				</dict>
 			</array>
 			<key>segues</key>
@@ -46,6 +57,10 @@
 					<string>CustomSegue</string>
 					<key>identifier</key>
 					<string>private</string>
+					<key>module</key>
+					<string>CustomSegue</string>
+					<key>type</key>
+					<string>SlideDownSegue</string>
 				</dict>
 			</array>
 		</dict>
@@ -56,6 +71,10 @@
 				<string>NavigationController</string>
 				<key>identifier</key>
 				<string></string>
+				<key>module</key>
+				<string>UIKit</string>
+				<key>type</key>
+				<string>UINavigationController</string>
 			</dict>
 			<key>name</key>
 			<string>Anonymous</string>
@@ -78,6 +97,111 @@
 					<string>ViewController</string>
 					<key>identifier</key>
 					<string>Dependent</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIViewController</string>
+				</dict>
+			</array>
+			<key>segues</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Known Types</string>
+			<key>platform</key>
+			<string>iOS</string>
+			<key>scenes</key>
+			<array>
+				<dict>
+					<key>baseType</key>
+					<string>GlkViewController</string>
+					<key>identifier</key>
+					<string>item 1</string>
+					<key>module</key>
+					<string>GLKit</string>
+					<key>type</key>
+					<string>GLKViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>AvPlayerViewController</string>
+					<key>identifier</key>
+					<string>item 2</string>
+					<key>module</key>
+					<string>AVKit</string>
+					<key>type</key>
+					<string>AVPlayerViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>TabBarController</string>
+					<key>identifier</key>
+					<string>item 3</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UITabBarController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>NavigationController</string>
+					<key>identifier</key>
+					<string>item 4</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UINavigationController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>SplitViewController</string>
+					<key>identifier</key>
+					<string>item 5</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UISplitViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>PageViewController</string>
+					<key>identifier</key>
+					<string>item 6</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIPageViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>TableViewController</string>
+					<key>identifier</key>
+					<string>item 7</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UITableViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>CollectionViewController</string>
+					<key>identifier</key>
+					<string>item 8</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UICollectionViewController</string>
+				</dict>
+				<dict>
+					<key>baseType</key>
+					<string>ViewController</string>
+					<key>identifier</key>
+					<string>item 9</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIViewController</string>
 				</dict>
 			</array>
 			<key>segues</key>
@@ -90,6 +214,10 @@
 				<string>ViewController</string>
 				<key>identifier</key>
 				<string></string>
+				<key>module</key>
+				<string>UIKit</string>
+				<key>type</key>
+				<string>UIViewController</string>
 			</dict>
 			<key>name</key>
 			<string>Message</string>
@@ -102,18 +230,30 @@
 					<string>ViewController</string>
 					<key>identifier</key>
 					<string>Composer</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>TableViewController</string>
 					<key>identifier</key>
 					<string>MessagesList</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UITableViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>NavigationController</string>
 					<key>identifier</key>
 					<string>NavCtrl</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UINavigationController</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -122,6 +262,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>URLChooser</string>
+					<key>module</key>
+					<string></string>
+					<key>type</key>
+					<string>XXPickerViewController</string>
 				</dict>
 			</array>
 			<key>segues</key>
@@ -133,6 +277,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>CustomBack</string>
+					<key>module</key>
+					<string></string>
+					<key>type</key>
+					<string>CustomSegueClass2</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -141,6 +289,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Embed</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -149,6 +301,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>NonCustom</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIStoryboardSegue</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -157,6 +313,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>Show-NavCtrl</string>
+					<key>module</key>
+					<string></string>
+					<key>type</key>
+					<string>CustomSegueClass</string>
 				</dict>
 			</array>
 		</dict>
@@ -172,6 +332,10 @@
 					<string>NavigationController</string>
 					<key>identifier</key>
 					<string>Navigation</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UINavigationController</string>
 				</dict>
 			</array>
 			<key>segues</key>
@@ -186,6 +350,10 @@
 				<string></string>
 				<key>identifier</key>
 				<string>CreateAccount</string>
+				<key>module</key>
+				<string></string>
+				<key>type</key>
+				<string>CreateAccViewController</string>
 			</dict>
 			<key>name</key>
 			<string>Wizard</string>
@@ -197,7 +365,11 @@
 					<key>baseType</key>
 					<string>ViewController</string>
 					<key>identifier</key>
-					<string>Accept-CGU</string>
+					<string>Accept-ToS</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIViewController</string>
 				</dict>
 				<dict>
 					<key>customClass</key>
@@ -206,18 +378,30 @@
 					<string></string>
 					<key>identifier</key>
 					<string>CreateAccount</string>
+					<key>module</key>
+					<string></string>
+					<key>type</key>
+					<string>CreateAccViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>TableViewController</string>
 					<key>identifier</key>
 					<string>Preferences</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UITableViewController</string>
 				</dict>
 				<dict>
 					<key>baseType</key>
 					<string>ViewController</string>
 					<key>identifier</key>
 					<string>Validate_Password</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIViewController</string>
 				</dict>
 			</array>
 			<key>segues</key>
@@ -229,6 +413,10 @@
 					<string></string>
 					<key>identifier</key>
 					<string>ShowPassword</string>
+					<key>module</key>
+					<string>UIKit</string>
+					<key>type</key>
+					<string>UIStoryboardSegue</string>
 				</dict>
 			</array>
 		</dict>
