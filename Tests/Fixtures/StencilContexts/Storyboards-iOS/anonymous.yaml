@@ -1,0 +1,13 @@
+modules:
+- UIKit
+platform: iOS
+storyboards:
+- initialScene:
+    baseType: NavigationController
+    identifier: 
+    module: UIKit
+    type: UINavigationController
+  name: Anonymous
+  platform: iOS
+  scenes: []
+  segues: []
