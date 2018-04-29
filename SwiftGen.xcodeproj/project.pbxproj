@@ -64,6 +64,8 @@
 		DD9F687A20955D51004EB720 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687720955D51004EB720 /* Entry.swift */; };
 		DD9F687B20955D51004EB720 /* AssetsCatalogParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687820955D51004EB720 /* AssetsCatalogParser.swift */; };
 		DD9F687C20955D51004EB720 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687920955D51004EB720 /* Catalog.swift */; };
+		DD9F687F20955E07004EB720 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687E20955E07004EB720 /* Font.swift */; };
+		DD9F688120955F57004EB720 /* CTFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F688020955F57004EB720 /* CTFont.swift */; };
 		DDC09D021E1D199A005C6EE6 /* templates in Resources */ = {isa = PBXBuildFile; fileRef = DDC09D011E1D199A005C6EE6 /* templates */; };
 		DDC335E47ABB50395E595AB0 /* Pods_swiftgen_SwiftGen_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8876ECE7B9852963F6B5 /* Pods_swiftgen_SwiftGen_UnitTests.framework */; };
 		DDCCACDA209551240017FB43 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD6209551230017FB43 /* Storyboard.swift */; };
@@ -292,6 +294,8 @@
 		DD9F687720955D51004EB720 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		DD9F687820955D51004EB720 /* AssetsCatalogParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsCatalogParser.swift; sourceTree = "<group>"; };
 		DD9F687920955D51004EB720 /* Catalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
+		DD9F687E20955E07004EB720 /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		DD9F688020955F57004EB720 /* CTFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTFont.swift; sourceTree = "<group>"; };
 		DDC09D011E1D199A005C6EE6 /* templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = templates; sourceTree = "<group>"; };
 		DDCCACD6209551230017FB43 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		DDCCACD7209551230017FB43 /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
@@ -529,7 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				DD9F687620955D51004EB720 /* AssetsCatalogParser */,
-				DD428E071FC50FBF001649D6 /* FontsParser.swift */,
+				DD9F687D20955DEF004EB720 /* FontsParser */,
 				DD428E081FC50FBF001649D6 /* ColorsParser */,
 				DDCCACD5209550F60017FB43 /* StoryboardParser */,
 				DD428E101FC50FBF001649D6 /* StringsParser.swift */,
@@ -607,6 +611,16 @@
 				DD9F687920955D51004EB720 /* Catalog.swift */,
 			);
 			path = AssetsCatalogParser;
+			sourceTree = "<group>";
+		};
+		DD9F687D20955DEF004EB720 /* FontsParser */ = {
+			isa = PBXGroup;
+			children = (
+				DD9F688020955F57004EB720 /* CTFont.swift */,
+				DD9F687E20955E07004EB720 /* Font.swift */,
+				DD428E071FC50FBF001649D6 /* FontsParser.swift */,
+			);
+			path = FontsParser;
 			sourceTree = "<group>";
 		};
 		DDC09C7D1E1D193F005C6EE6 /* Resources */ = {
@@ -1301,7 +1315,9 @@
 				DD9F687A20955D51004EB720 /* Entry.swift in Sources */,
 				DD428E261FC50FBF001649D6 /* StoryboardsContext.swift in Sources */,
 				DD428E221FC50FBF001649D6 /* ColorsParser.swift in Sources */,
+				DD9F687F20955E07004EB720 /* Font.swift in Sources */,
 				DD428E1B1FC50FBF001649D6 /* ColorsJSONFileParser.swift in Sources */,
+				DD9F688120955F57004EB720 /* CTFont.swift in Sources */,
 				DDCCACDD209551240017FB43 /* Scene.swift in Sources */,
 				DDCCACDB209551240017FB43 /* Platform.swift in Sources */,
 				DD428E1D1FC50FBF001649D6 /* ColorsXMLFileParser.swift in Sources */,
