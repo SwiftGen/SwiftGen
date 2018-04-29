@@ -20,8 +20,7 @@ class InterfaceBuilderMacOSTests: XCTestCase {
       (context: context,
        suffix: ""),
       (context: try StencilContext.enrich(context: context,
-                                          parameters: ["sceneEnumName=XCTStoryboardsScene",
-                                                       "segueEnumName=XCTStoryboardsSegue"]),
+                                          parameters: ["enumName=XCTStoryboardCustom"]),
        suffix: "-customname"),
       (context: try StencilContext.enrich(context: context,
                                           parameters: [],
@@ -57,16 +56,32 @@ class InterfaceBuilderMacOSTests: XCTestCase {
     ]
   }
 
-  func testSwift3() {
-    test(template: "swift3",
+  func testScenesSwift3() {
+    test(template: "scenes-swift3",
          contextNames: Contexts.all,
          directory: .interfaceBuilder,
          resourceDirectory: .interfaceBuilderMacOS,
          contextVariations: variations)
   }
 
-  func testSwift4() {
-    test(template: "swift4",
+  func testSeguesSwift3() {
+    test(template: "segues-swift3",
+         contextNames: Contexts.all,
+         directory: .interfaceBuilder,
+         resourceDirectory: .interfaceBuilderMacOS,
+         contextVariations: variations)
+  }
+
+  func testScenesSwift4() {
+    test(template: "scenes-swift4",
+         contextNames: Contexts.all,
+         directory: .interfaceBuilder,
+         resourceDirectory: .interfaceBuilderMacOS,
+         contextVariations: variations)
+  }
+
+  func testSeguesSwift4() {
+    test(template: "segues-swift4",
          contextNames: Contexts.all,
          directory: .interfaceBuilder,
          resourceDirectory: .interfaceBuilderMacOS,
