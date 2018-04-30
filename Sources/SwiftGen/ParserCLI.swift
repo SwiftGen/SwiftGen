@@ -44,7 +44,7 @@ let allParserCommands: [ParserCLI] = [
     pathDescription: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard"
   ),
   .init(
-    parserType: FontsParser.self,
+    parserType: Fonts.Parser.self,
     name: "fonts",
     description: "generate code for your fonts",
     pathDescription: "Directory(ies) to parse."

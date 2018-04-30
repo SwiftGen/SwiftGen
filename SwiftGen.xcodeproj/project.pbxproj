@@ -542,7 +542,7 @@
 			isa = PBXGroup;
 			children = (
 				DD9F687620955D51004EB720 /* AssetsCatalog */,
-				DD9F687D20955DEF004EB720 /* FontsParser */,
+				DD9F687D20955DEF004EB720 /* Fonts */,
 				DD428E081FC50FBF001649D6 /* ColorsParser */,
 				DDCCACD5209550F60017FB43 /* StoryboardParser */,
 				DD9F68822095604E004EB720 /* StringsParser */,
@@ -564,9 +564,9 @@
 		DD428E121FC50FBF001649D6 /* Stencil */ = {
 			isa = PBXGroup;
 			children = (
-				DD428E131FC50FBF001649D6 /* FontsContext.swift */,
-				DD428E141FC50FBF001649D6 /* ColorsContext.swift */,
 				DD428E151FC50FBF001649D6 /* AssetsCatalogContext.swift */,
+				DD428E141FC50FBF001649D6 /* ColorsContext.swift */,
+				DD428E131FC50FBF001649D6 /* FontsContext.swift */,
 				DD428E161FC50FBF001649D6 /* StoryboardsContext.swift */,
 				DD428E171FC50FBF001649D6 /* StringsContext.swift */,
 			);
@@ -622,14 +622,14 @@
 			path = AssetsCatalog;
 			sourceTree = "<group>";
 		};
-		DD9F687D20955DEF004EB720 /* FontsParser */ = {
+		DD9F687D20955DEF004EB720 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
 				DD9F688020955F57004EB720 /* CTFont.swift */,
 				DD9F687E20955E07004EB720 /* Font.swift */,
 				DD428E071FC50FBF001649D6 /* FontsParser.swift */,
 			);
-			path = FontsParser;
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		DD9F68822095604E004EB720 /* StringsParser */ = {
