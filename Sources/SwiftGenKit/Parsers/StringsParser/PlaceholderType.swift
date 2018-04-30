@@ -5,59 +5,8 @@
 //
 
 import Foundation
-import PathKit
 
-public enum StringsParserError: Error, CustomStringConvertible {
-  case duplicateTable(name: String)
-  case failureOnLoading(path: String)
-  case invalidFormat
-  case invalidPlaceholder(previous: StringsParser.PlaceholderType, new: StringsParser.PlaceholderType)
-
-  public var description: String {
-    switch self {
-    case .duplicateTable(let name):
-      return "Table \"\(name)\" already loaded, cannot add it again"
-    case .failureOnLoading(let path):
-      return "Failed to load a file at \"\(path)\""
-    case .invalidFormat:
-      return "Invalid strings file"
-    case .invalidPlaceholder(let previous, let new):
-      return "Invalid placeholder type \(new) (previous: \(previous))"
-    }
-  }
-}
-
-public final class StringsParser: Parser {
-  var tables = [String: [Entry]]()
-  public var warningHandler: Parser.MessageHandler?
-
-  public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
-    self.warningHandler = warningHandler
-  }
-
-  // Localizable.strings files are generally UTF16, not UTF8!
-  public func parse(path: Path) throws {
-    let name = path.lastComponentWithoutExtension
-
-    guard tables[name] == nil else {
-      throw StringsParserError.duplicateTable(name: name)
-    }
-    guard let data = try? path.read() else {
-      throw StringsParserError.failureOnLoading(path: path.string)
-    }
-
-    let plist = try PropertyListSerialization.propertyList(from: data, format: nil)
-    guard let dict = plist as? [String: String] else {
-      throw StringsParserError.invalidFormat
-    }
-
-    tables[name] = try dict.map { key, translation in
-      try Entry(key: key, translation: translation)
-    }
-  }
-
-  // MARK: - Public Enum types
-
+extension StringsParser {
   public enum PlaceholderType: String {
     case object = "String"
     case float = "Float"
@@ -88,38 +37,10 @@ public final class StringsParser: Parser {
         return nil
       }
     }
-
-    public static func placeholders(fromFormat str: String) throws -> [PlaceholderType] {
-      return try StringsParser.placeholders(fromFormat: str)
-    }
   }
+}
 
-  public struct Entry {
-    let key: String
-    var keyStructure: [String] {
-        return key.components(separatedBy: CharacterSet(charactersIn: "."))
-    }
-    let translation: String
-    let types: [PlaceholderType]
-
-    public init(key: String, translation: String, types: [PlaceholderType]) {
-      self.key = key
-      self.translation = translation
-      self.types = types
-    }
-
-    public init(key: String, translation: String, types: PlaceholderType...) {
-      self.init(key: key, translation: translation, types: types)
-    }
-
-    public init(key: String, translation: String) throws {
-      let types = try PlaceholderType.placeholders(fromFormat: translation)
-      self.init(key: key, translation: translation, types: types)
-    }
-  }
-
-  // MARK: - Private Helpers
-
+extension StringsParser.PlaceholderType {
   private static let formatTypesRegEx: NSRegularExpression = {
     // %d/%i/%o/%u/%x with their optional length modifiers like in "%lld"
     let patternInt = "(?:h|hh|l|ll|q|z|t|j)?([dioux])"
@@ -141,7 +62,7 @@ public final class StringsParser: Parser {
   }()
 
   // "I give %d apples to %@" --> [.Int, .String]
-  private static func placeholders(fromFormat formatString: String) throws -> [PlaceholderType] {
+  static func placeholders(fromFormat formatString: String) throws -> [StringsParser.PlaceholderType] {
     let range = NSRange(location: 0, length: (formatString as NSString).length)
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier
@@ -171,10 +92,10 @@ public final class StringsParser: Parser {
 
     // enumerate the conversion specifiers and their optionally forced position
     // and build the array of PlaceholderTypes accordingly
-    var list = [PlaceholderType]()
+    var list = [StringsParser.PlaceholderType]()
     var nextNonPositional = 1
     for (str, pos) in chars {
-      if let char = str.first, let placeholderType = PlaceholderType(formatChar: char) {
+      if let char = str.first, let placeholderType = StringsParser.PlaceholderType(formatChar: char) {
         let insertionPos: Int
         if let pos = pos {
           insertionPos = pos

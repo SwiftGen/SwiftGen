@@ -30,7 +30,7 @@ private extension String {
 */
 extension StringsParser {
   public func stencilContext() -> [String: Any] {
-    let entryToStringMapper = { (entry: Entry, keyPath: [String]) -> [String: Any] in
+    let entryToStringMapper = { (entry: StringsEntry, keyPath: [String]) -> [String: Any] in
       let levelName = entry.keyStructure.last ?? ""
 
       var result: [String: Any] = [
@@ -61,9 +61,9 @@ extension StringsParser {
     ]
   }
 
-  typealias Mapper = (_ entry: Entry, _ keyPath: [String]) -> [String: Any]
+  typealias Mapper = (_ entry: StringsEntry, _ keyPath: [String]) -> [String: Any]
   private func structure(
-    entries: [Entry],
+    entries: [StringsEntry],
     atKeyPath keyPath: [String] = [],
     usingMapper mapper: @escaping Mapper) -> [String: Any] {
 

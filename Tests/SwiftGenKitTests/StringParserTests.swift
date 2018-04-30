@@ -4,7 +4,7 @@
 // MIT Licence
 //
 
-import SwiftGenKit
+@testable import SwiftGenKit
 import XCTest
 
 class StringParserTests: XCTestCase {
