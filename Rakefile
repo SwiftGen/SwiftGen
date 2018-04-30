@@ -289,10 +289,10 @@ namespace :playground do
       xcrun: true
     )
   end
-  task :storyboard do
+  task :ib do
     Utils.run(
       %(ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO ) +
-        %(Tests/Fixtures/Resources/Storyboards-iOS/Wizard.storyboard),
+        %(Tests/Fixtures/Resources/IB-iOS/Wizard.storyboard),
       task,
       xcrun: true
     )
@@ -308,5 +308,5 @@ namespace :playground do
 
   desc "Regenerate all the Playground resources based on the test fixtures.\n" \
     'This compiles the needed fixtures and place them in SwiftGen.playground/Resources'
-  task :resources => %w[clean xcassets storyboard strings]
+  task :resources => %w[clean xcassets ib strings]
 end

@@ -2,7 +2,7 @@
 //:
 //: * [Demo for `swiftgen colors`](Colors-Demo)
 //: * Demo for `swiftgen fonts`
-//: * [Demo for `swiftgen storyboards`](Storyboards-Demo)
+//: * [Demo for `swiftgen ib`](InterfaceBuilder-Demo)
 //: * [Demo for `swiftgen strings`](Strings-Demo)
 //: * [Demo for `swiftgen xcassets`](XCAssets-Demo)
 
