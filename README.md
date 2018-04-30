@@ -279,7 +279,7 @@ This will generate a `enum ColorName` with one `case` per color listed in the te
 
 The input file is expected to be either:
 
-* a [plain text file](https://github.com/SwiftGen/SwiftGen/blob/master/Tests/Fixtures/Resources/Colors/colors.txt), with one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`). Whitespaces are ignored.
+* a [plain text file](https://github.com/SwiftGen/SwiftGen/blob/master/Tests/Fixtures/Resources/Colors/colors.txt), with one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`) or the name of another color in the file. Whitespaces are ignored.
 * a [JSON file](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Resources/Colors/colors.json), representing a dictionary of names -> values, each value being the hex representation of the color
 * a [XML file](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Resources/Colors/colors.xml), expected to be the same format as the Android colors.xml files, containing tags `<color name="AColorName">AColorHexRepresentation</color>`
 * a [`*.clr` file](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/DrawColor/Concepts/AboutColorLists.html#//apple_ref/doc/uid/20000757-BAJHJEDI) used by Apple's Color Paletes.
