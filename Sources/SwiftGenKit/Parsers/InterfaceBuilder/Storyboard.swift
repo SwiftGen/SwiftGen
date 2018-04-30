@@ -7,7 +7,7 @@
 import Foundation
 import Kanna
 
-extension Storyboards {
+extension InterfaceBuilder {
   struct Storyboard {
     let name: String
     let platform: Platform
@@ -46,34 +46,34 @@ private enum XML {
   static let placeholderTags = ["controllerPlaceholder", "viewControllerPlaceholder"]
 }
 
-extension Storyboards.Storyboard {
+extension InterfaceBuilder.Storyboard {
   init(with document: Kanna.XMLDocument, name: String) throws {
     self.name = name
 
     // TargetRuntime
     let targetRuntime = document.at_xpath(XML.targetRuntimeXPath)?.text ?? ""
-    guard let platform = Storyboards.Platform(rawValue: targetRuntime) else {
-      throw Storyboards.ParserError.unsupportedTargetRuntime(target: targetRuntime)
+    guard let platform = InterfaceBuilder.Platform(rawValue: targetRuntime) else {
+      throw InterfaceBuilder.ParserError.unsupportedTargetRuntime(target: targetRuntime)
     }
     self.platform = platform
 
     // Initial VC
     let initialSceneID = document.at_xpath(XML.initialVCXPath)?.text ?? ""
     if let object = document.at_xpath(XML.initialSceneXPath(identifier: initialSceneID)) {
-      initialScene = Storyboards.Scene(with: object, platform: platform)
+      initialScene = InterfaceBuilder.Scene(with: object, platform: platform)
     } else {
       initialScene = nil
     }
 
     // Scenes
-    scenes = Set<Storyboards.Scene>(document.xpath(XML.sceneXPath).compactMap {
+    scenes = Set<InterfaceBuilder.Scene>(document.xpath(XML.sceneXPath).compactMap {
       guard !XML.placeholderTags.contains($0.tagName ?? "") else { return nil }
-      return Storyboards.Scene(with: $0, platform: platform)
+      return InterfaceBuilder.Scene(with: $0, platform: platform)
     })
 
     // Segues
-    segues = Set<Storyboards.Segue>(document.xpath(XML.segueXPath).map {
-      Storyboards.Segue(with: $0, platform: platform)
+    segues = Set<InterfaceBuilder.Segue>(document.xpath(XML.segueXPath).map {
+      InterfaceBuilder.Segue(with: $0, platform: platform)
     })
   }
 }

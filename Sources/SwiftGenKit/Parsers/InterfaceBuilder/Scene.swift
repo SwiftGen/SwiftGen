@@ -7,7 +7,7 @@
 import Foundation
 import Kanna
 
-extension Storyboards {
+extension InterfaceBuilder {
   struct Scene {
     let identifier: String
     let tag: String
@@ -53,8 +53,8 @@ private enum XML {
   static let storyboardIdentifierAttribute = "storyboardIdentifier"
 }
 
-extension Storyboards.Scene {
-  init(with object: Kanna.XMLElement, platform: Storyboards.Platform) {
+extension InterfaceBuilder.Scene {
+  init(with object: Kanna.XMLElement, platform: InterfaceBuilder.Platform) {
     identifier = object[XML.storyboardIdentifierAttribute] ?? ""
     tag = object.tagName ?? ""
     customClass = object[XML.customClassAttribute]
@@ -65,15 +65,15 @@ extension Storyboards.Scene {
 
 // MARK: - Hashable
 
-extension Storyboards.Scene: Equatable { }
-func == (lhs: Storyboards.Scene, rhs: Storyboards.Scene) -> Bool {
+extension InterfaceBuilder.Scene: Equatable { }
+func == (lhs: InterfaceBuilder.Scene, rhs: InterfaceBuilder.Scene) -> Bool {
   return lhs.identifier == rhs.identifier &&
     lhs.tag == rhs.tag &&
     lhs.customClass == rhs.customClass &&
     lhs.customModule == rhs.customModule
 }
 
-extension Storyboards.Scene: Hashable {
+extension InterfaceBuilder.Scene: Hashable {
   var hashValue: Int {
     return identifier.hashValue ^ tag.hashValue ^ (customModule?.hashValue ?? 0) ^ (customClass?.hashValue ?? 0)
   }
