@@ -119,15 +119,15 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "xcassets -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Images.xcassets"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "storyboards -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/Storyboards-iOS"
+            argument = "ib -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/Storyboards-iOS"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "strings -t structured-swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/Strings/Localizable.strings"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "xcassets -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Images.xcassets"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument

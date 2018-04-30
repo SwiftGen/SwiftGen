@@ -87,9 +87,9 @@ class Fixtures {
   enum Directory: String {
     case colors = "Colors"
     case fonts = "Fonts"
-    case storyboards = "Storyboards"
-    case storyboardsiOS = "Storyboards-iOS"
-    case storyboardsMacOS = "Storyboards-macOS"
+    case interfaceBuilder = "IB"
+    case interfaceBuilderiOS = "IB-iOS"
+    case interfaceBuilderMacOS = "IB-macOS"
     case strings = "Strings"
     case xcassets = "XCAssets"
   }
