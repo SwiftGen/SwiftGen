@@ -13,48 +13,47 @@ import XCTest
  * See Project -> Target "UnitTests" -> Build Rules -> « Files "*.storyboard" using PBXCp »
  */
 
-class StoryboardsiOSTests: XCTestCase {
-
+class InterfaceBuilderMacOSTests: XCTestCase {
   func testEmpty() {
-    let parser = Storyboards.Parser()
+    let parser = InterfaceBuilder.Parser()
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "empty", sub: .storyboardsiOS)
+    XCTDiffContexts(result, expected: "empty", sub: .interfaceBuilderMacOS)
   }
 
   func testMessageStoryboard() {
-    let parser = Storyboards.Parser()
+    let parser = InterfaceBuilder.Parser()
     do {
-      try parser.parse(path: Fixtures.path(for: "Message.storyboard", sub: .storyboardsiOS))
+      try parser.parse(path: Fixtures.path(for: "Message.storyboard", sub: .interfaceBuilderMacOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "messages", sub: .storyboardsiOS)
+    XCTDiffContexts(result, expected: "messages", sub: .interfaceBuilderMacOS)
   }
 
   func testAnonymousStoryboard() {
-    let parser = Storyboards.Parser()
+    let parser = InterfaceBuilder.Parser()
     do {
-      try parser.parse(path: Fixtures.path(for: "Anonymous.storyboard", sub: .storyboardsiOS))
+      try parser.parse(path: Fixtures.path(for: "Anonymous.storyboard", sub: .interfaceBuilderMacOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "anonymous", sub: .storyboardsiOS)
+    XCTDiffContexts(result, expected: "anonymous", sub: .interfaceBuilderMacOS)
   }
 
   func testAllStoryboards() {
-    let parser = Storyboards.Parser()
+    let parser = InterfaceBuilder.Parser()
     do {
-      try parser.parse(path: Fixtures.directory(sub: .storyboardsiOS))
+      try parser.parse(path: Fixtures.directory(sub: .interfaceBuilderMacOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "all", sub: .storyboardsiOS)
+    XCTDiffContexts(result, expected: "all", sub: .interfaceBuilderMacOS)
   }
 }
