@@ -61,27 +61,31 @@ Here's a recap of what each repository in the SwiftGen organization does:
 
 ### SwiftGen
 
-This is the repository containing only the code for the command-line interface of SwiftGen.
+This repository contains the following components:
 
-It contains the Xcode project to build the MacOS command-line app which is only responsible for parsing its command-line arguments and then invoking the proper methods in the frameworks composing SwiftGen.
+#### swiftgen
+
+The code for the command-line interface of SwiftGen.
+
+It is the main target of the Xcode project, to build the MacOS command-line app which is only responsible for parsing its command-line arguments and then invoking the proper methods in the frameworks composing SwiftGen. This component also has a corresponding unit tests target, for testing configuration parsing.
 
 If you need to add new command-line options and flags, that's the place to do it.
 
-### SwiftGenKit
+#### SwiftGenKit
 
-This repository contains the framework responsible for turning each kind of input resource (Asset Catalogs, Localizable strings files, Fonts, Storyboards…) into a structured dictionary — suitable to be used by Stencil.
+The framework responsible for turning each kind of input resource (Asset Catalogs, Localizable strings files, Fonts, Storyboards…) into a structured dictionary — suitable to be used by Stencil. It is a separate target in the Xcode project, with it's own corresponding unit tests target (to test resource parsing and context generation).
 
 If you want to add a new parser for a new type of resource, or fix a bug in the way some resources are parsed, or add new keys to the dictionary generated (and used as the context for your templates), that's the place to do so.
+
+#### templates
+
+Stored in it's dedicated folder, these are the templates bundled with SwiftGen on each new release (so that people have at least a set of sensible templates to use wthout having to create their own). This component also has a set of unit tests in the general project, to test the generation of source code from a given context.
 
 ### StencilSwiftKit
 
 This repository contains the framework that enriches the `Stencil` template engine with some additional tags and filters that are useful when generating Swift code. This framework is actually used both by SwiftGen and [Sourcery](https://github.com/krzysztofzablocki/Sourcery).
 
 You'll only make a PR on this repository if you need to add or fix filters or tags that are not part of Stencil.
-
-### templates
-
-This repository contains both the templates that are bundled with SwiftGen on each new release (so that people have at least a set of sensible templates to use wthout having to create their own), but also all the fixtures needed for our Unit Tests on each repository.
 
 If you want to fix or add templates, that's the place to do so. But you'll also need to do a Pull Request on that repo if you do some modifications to SwiftGenKit that would require new test fixtures or change the output of the unit tests.
 

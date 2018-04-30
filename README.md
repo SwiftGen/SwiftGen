@@ -149,7 +149,7 @@ The tool is provided as a unique `swiftgen` binary command-line, with the follow
 Each subcommand has its own option and syntax, but some options are common to all:
 
 * `--output FILE` or `-o FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
-* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](https://github.com/SwiftGen/templates)) to generate the output.
+* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](https://github.com/SwiftGen/SwiftGen/tree/master/Documentation/Templates)) to generate the output.
 * `--templatePath PATH` or `-p PATH`: define the Stencil template to use, using a full path.
 * Note: you should specify one and only one template when invoking SwiftGen. You have to use either `-t` or `-p` but should not use both at the same time (it wouldn't make sense anyway and you'll get an error if you try)
 * Each command supports multiple input files (or directories where applicable).
@@ -193,7 +193,7 @@ SwiftGen comes bundled with some templates for each of the subcommand (`colors`,
 
 💡 You can use the `swiftgen templates list` command to list all the available templates (both custom and bundled templates) for each subcommand, list the template content and dupliate them to create your own.
 
-For more information about how to create your own templates, [see the dedicated documentation](https://github.com/SwiftGen/templates/blob/master/Documentation/Creating-your-templates.md).
+For more information about how to create your own templates, [see the dedicated documentation](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/Creating-your-templates.md).
 
 ### Templates bundled with SwiftGen:
 
@@ -203,7 +203,7 @@ As explained above, you can use `swiftgen templates list` to list all templates 
 * A `swift4` template, compatible with Swift 4
 * Other variants, like `flat-swift3/4` and `structured-swift3/4` templates for Strings, etc.
 
-You can **find the documentation for each bundled template [here in the repo](https://github.com/SwiftGen/templates/tree/master/Documentation)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
+You can **find the documentation for each bundled template [here in the repo](https://github.com/SwiftGen/SwiftGen/tree/master/Documentation/Templates)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
 Each MarkDown file documents the Swift Version it's aimed for, the use case for that template (in which cases you might favor that template over others), the available `--param` parameters to customize it on invocation, and some code examples.
 
 > Don't hesitate to make PRs to share your improvements suggestions on the bundled templates 😉
@@ -279,9 +279,9 @@ This will generate a `enum ColorName` with one `case` per color listed in the te
 
 The input file is expected to be either:
 
-* a [plain text file](https://github.com/SwiftGen/templates/blob/master/Fixtures/Colors/colors.txt), with one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`). Whitespaces are ignored.
-* a [JSON file](https://github.com/SwiftGen/templates/blob/master/Fixtures/Colors/colors.json), representing a dictionary of names -> values, each value being the hex representation of the color
-* a [XML file](https://github.com/SwiftGen/templates/blob/master/Fixtures/Colors/colors.xml), expected to be the same format as the Android colors.xml files, containing tags `<color name="AColorName">AColorHexRepresentation</color>`
+* a [plain text file](https://github.com/SwiftGen/SwiftGen/blob/master/Tests/Fixtures/Resources/Colors/colors.txt), with one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`) or the name of another color in the file. Whitespaces are ignored.
+* a [JSON file](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Resources/Colors/colors.json), representing a dictionary of names -> values, each value being the hex representation of the color
+* a [XML file](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Resources/Colors/colors.xml), expected to be the same format as the Android colors.xml files, containing tags `<color name="AColorName">AColorHexRepresentation</color>`
 * a [`*.clr` file](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/DrawColor/Concepts/AboutColorLists.html#//apple_ref/doc/uid/20000757-BAJHJEDI) used by Apple's Color Paletes.
 
 For example you can use this command to generate colors from one of your system color lists:
