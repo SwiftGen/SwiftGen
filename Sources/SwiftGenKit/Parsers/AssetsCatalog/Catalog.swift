@@ -7,25 +7,27 @@
 import Foundation
 import PathKit
 
-struct Catalog {
-  let name: String
-  let entries: [Entry]
+extension AssetsCatalog {
+  struct Catalog {
+    let name: String
+    let entries: [Entry]
+  }
 }
 
 // MARK: - Parser
 
-extension Catalog {
+extension AssetsCatalog.Catalog {
   init(path: Path) {
     name = path.lastComponentWithoutExtension
-    entries = Catalog.process(folder: path)
+    entries = AssetsCatalog.Catalog.process(folder: path)
   }
 
   /**
    This method recursively parses a directory structure, processing each folder (files are ignored).
    */
-  static func process(folder: Path, withPrefix prefix: String = "") -> [Catalog.Entry] {
+  static func process(folder: Path, withPrefix prefix: String = "") -> [AssetsCatalog.Entry] {
     return (try? folder.children().sorted(by: <).compactMap {
-      Entry(path: $0, withPrefix: prefix)
+      AssetsCatalog.Entry(path: $0, withPrefix: prefix)
     }) ?? []
   }
 }

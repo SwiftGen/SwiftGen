@@ -23,7 +23,7 @@ import Foundation
        - `name` : `String` — name of the image
        - `value`: `String` — the actual full name for loading the image
 */
-extension AssetsCatalogParser {
+extension AssetsCatalog.Parser {
   public func stencilContext() -> [String: Any] {
     let catalogs = self.catalogs
       .sorted { lhs, rhs in lhs.name < rhs.name }
@@ -39,7 +39,7 @@ extension AssetsCatalogParser {
     ]
   }
 
-  private func structure(entries: [Catalog.Entry]) -> [[String: Any]] {
+  private func structure(entries: [AssetsCatalog.Entry]) -> [[String: Any]] {
     return entries.map { entry in
       switch entry {
       case .group(let name, let items):

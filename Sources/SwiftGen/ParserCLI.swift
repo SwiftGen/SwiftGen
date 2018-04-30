@@ -20,7 +20,7 @@ public struct ParserCLI {
 
 let allParserCommands: [ParserCLI] = [
   .init(
-    parserType: AssetsCatalogParser.self,
+    parserType: AssetsCatalog.Parser.self,
     name: "xcassets",
     description: "generate code for items in your Assets Catalog(s)",
     pathDescription: "Asset Catalog file(s)."

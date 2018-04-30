@@ -541,7 +541,7 @@
 		DD428E061FC50FBF001649D6 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
-				DD9F687620955D51004EB720 /* AssetsCatalogParser */,
+				DD9F687620955D51004EB720 /* AssetsCatalog */,
 				DD9F687D20955DEF004EB720 /* FontsParser */,
 				DD428E081FC50FBF001649D6 /* ColorsParser */,
 				DDCCACD5209550F60017FB43 /* StoryboardParser */,
@@ -612,14 +612,14 @@
 			name = FileTypeParser;
 			sourceTree = "<group>";
 		};
-		DD9F687620955D51004EB720 /* AssetsCatalogParser */ = {
+		DD9F687620955D51004EB720 /* AssetsCatalog */ = {
 			isa = PBXGroup;
 			children = (
 				DD9F687720955D51004EB720 /* CatalogEntry.swift */,
 				DD9F687820955D51004EB720 /* AssetsCatalogParser.swift */,
 				DD9F687920955D51004EB720 /* Catalog.swift */,
 			);
-			path = AssetsCatalogParser;
+			path = AssetsCatalog;
 			sourceTree = "<group>";
 		};
 		DD9F687D20955DEF004EB720 /* FontsParser */ = {
@@ -676,13 +676,13 @@
 		DDDE504D1FAF6AD4004203BE /* TemplatesTests */ = {
 			isa = PBXGroup;
 			children = (
-				DDDE506D1FAF6AD4004203BE /* StringsTests.swift */,
-				DDDE506E1FAF6AD4004203BE /* FontsTests.swift */,
-				DDDE50F51FAF6AD4004203BE /* XCAssetsTests.swift */,
 				DDDE50F61FAF6AD4004203BE /* ColorsTests.swift */,
+				DDDE506E1FAF6AD4004203BE /* FontsTests.swift */,
+				DDDE506D1FAF6AD4004203BE /* StringsTests.swift */,
+				DDDE50F91FAF6AD4004203BE /* StoryboardsiOSTests.swift */,
 				DDDE50F71FAF6AD4004203BE /* StoryboardsMacOSTests.swift */,
 				DDDE50F81FAF6AD4004203BE /* TestsHelper.swift */,
-				DDDE50F91FAF6AD4004203BE /* StoryboardsiOSTests.swift */,
+				DDDE50F51FAF6AD4004203BE /* XCAssetsTests.swift */,
 				DDDE50FA1FAF6AD4004203BE /* Info.plist */,
 			);
 			path = TemplatesTests;
@@ -691,19 +691,19 @@
 		DDDE51B91FAF81B9004203BE /* SwiftGenKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				DDDE52201FAF81BA004203BE /* AssetCatalogTests.swift */,
+				DDDE51DD1FAF81B9004203BE /* ColorsCLRFileTests.swift */,
+				DDDE51DC1FAF81B9004203BE /* ColorsJSONFileTests.swift */,
+				DDDE51DE1FAF81B9004203BE /* ColorsTests.swift */,
+				DDDE521B1FAF81BA004203BE /* ColorsTextFileTests.swift */,
+				DDDE51DF1FAF81B9004203BE /* ColorsXMLFileTests.swift */,
+				DDDE51DB1FAF81B9004203BE /* FontsTests.swift */,
+				DDDE521E1FAF81BA004203BE /* StoryboardsiOSTests.swift */,
+				DDDE521C1FAF81BA004203BE /* StoryboardsMacOSTests.swift */,
 				DDDE51D91FAF81B9004203BE /* StringParserTests.swift */,
 				DDDE51DA1FAF81B9004203BE /* StringsTests.swift */,
-				DDDE51DB1FAF81B9004203BE /* FontsTests.swift */,
-				DDDE51DC1FAF81B9004203BE /* ColorsJSONFileTests.swift */,
-				DDDE51DD1FAF81B9004203BE /* ColorsCLRFileTests.swift */,
-				DDDE51DE1FAF81B9004203BE /* ColorsTests.swift */,
-				DDDE51DF1FAF81B9004203BE /* ColorsXMLFileTests.swift */,
-				DDDE521B1FAF81BA004203BE /* ColorsTextFileTests.swift */,
-				DDDE521C1FAF81BA004203BE /* StoryboardsMacOSTests.swift */,
 				DDDE521D1FAF81BA004203BE /* TestsHelper.swift */,
-				DDDE521E1FAF81BA004203BE /* StoryboardsiOSTests.swift */,
 				DDDE521F1FAF81BA004203BE /* Info.plist */,
-				DDDE52201FAF81BA004203BE /* AssetCatalogTests.swift */,
 			);
 			path = SwiftGenKitTests;
 			sourceTree = "<group>";
