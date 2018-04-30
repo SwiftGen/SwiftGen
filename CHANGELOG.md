@@ -22,6 +22,9 @@
 * Remove Swift 2 support.  
   [David Jennes](https://github.com/djbe) 
   [#420](https://github.com/SwiftGen/SwiftGen/pull/420)
+* Renamed the `storyboards` command to `ib`, to better reflect it's purpose. An alias for `storyboards` still exists, but it will be removed at some point.  
+  [David Jennes](https://github.com/djbe) 
+  [#423](https://github.com/SwiftGen/SwiftGen/pull/423)
 
 ### New Features
 
