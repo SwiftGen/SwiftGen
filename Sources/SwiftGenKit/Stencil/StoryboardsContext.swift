@@ -32,7 +32,7 @@ import Foundation
        - `module`: `String` — The module of the segue, could be the value of `customModule`, or of an internal module
           such as GLKit depending on the base type (can be empty)
 */
-extension StoryboardParser {
+extension Storyboards.Parser {
   public func stencilContext() -> [String: Any] {
     let storyboards = self.storyboards
       .sorted { lhs, rhs in lhs.name < rhs.name }
@@ -44,7 +44,7 @@ extension StoryboardParser {
     ]
   }
 
-  private func map(storyboard: Storyboard) -> [String: Any] {
+  private func map(storyboard: Storyboards.Storyboard) -> [String: Any] {
     var result: [String: Any] = [
       "name": storyboard.name,
       "scenes": storyboard.scenes
@@ -63,7 +63,7 @@ extension StoryboardParser {
     return result
   }
 
-  private func map(scene: Storyboard.Scene) -> [String: Any] {
+  private func map(scene: Storyboards.Scene) -> [String: Any] {
     if let customClass = scene.customClass {
       return [
         "identifier": scene.identifier,
@@ -82,7 +82,7 @@ extension StoryboardParser {
     }
   }
 
-  private func map(segue: Storyboard.Segue) -> [String: Any] {
+  private func map(segue: Storyboards.Segue) -> [String: Any] {
     return [
       "identifier": segue.identifier,
       "customClass": segue.customClass ?? "",

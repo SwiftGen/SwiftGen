@@ -38,7 +38,7 @@ let allParserCommands: [ParserCLI] = [
     pathDescription: "Strings file(s) to parse."
   ),
   .init(
-    parserType: StoryboardParser.self,
+    parserType: Storyboards.Parser.self,
     name: "storyboards",
     description: "generate code for your storyboard scenes and segues",
     pathDescription: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard"

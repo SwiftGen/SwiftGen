@@ -49,7 +49,7 @@
 		DD428E1B1FC50FBF001649D6 /* ColorsJSONFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E0A1FC50FBF001649D6 /* ColorsJSONFileParser.swift */; };
 		DD428E1C1FC50FBF001649D6 /* ColorsTXTFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E0B1FC50FBF001649D6 /* ColorsTXTFileParser.swift */; };
 		DD428E1D1FC50FBF001649D6 /* ColorsXMLFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E0C1FC50FBF001649D6 /* ColorsXMLFileParser.swift */; };
-		DD428E1F1FC50FBF001649D6 /* StoryboardParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E0E1FC50FBF001649D6 /* StoryboardParser.swift */; };
+		DD428E1F1FC50FBF001649D6 /* StoryboardsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E0E1FC50FBF001649D6 /* StoryboardsParser.swift */; };
 		DD428E201FC50FBF001649D6 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E0F1FC50FBF001649D6 /* Parser.swift */; };
 		DD428E211FC50FBF001649D6 /* StringsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E101FC50FBF001649D6 /* StringsParser.swift */; };
 		DD428E221FC50FBF001649D6 /* ColorsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E111FC50FBF001649D6 /* ColorsParser.swift */; };
@@ -73,9 +73,9 @@
 		DDC8211520967180007A55F3 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC8211420967180007A55F3 /* Path.swift */; };
 		DDC82117209672E1007A55F3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC82116209672E1007A55F3 /* String.swift */; };
 		DDCCACDA209551240017FB43 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD6209551230017FB43 /* Storyboard.swift */; };
-		DDCCACDB209551240017FB43 /* StoryboardPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD7209551230017FB43 /* StoryboardPlatform.swift */; };
-		DDCCACDC209551240017FB43 /* StoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD8209551230017FB43 /* StoryboardSegue.swift */; };
-		DDCCACDD209551240017FB43 /* StoryboardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD9209551230017FB43 /* StoryboardScene.swift */; };
+		DDCCACDB209551240017FB43 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD7209551230017FB43 /* Platform.swift */; };
+		DDCCACDC209551240017FB43 /* Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD8209551230017FB43 /* Segue.swift */; };
+		DDCCACDD209551240017FB43 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD9209551230017FB43 /* Scene.swift */; };
 		DDDE51131FAF6AD4004203BE /* StringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE506D1FAF6AD4004203BE /* StringsTests.swift */; };
 		DDDE51141FAF6AD4004203BE /* FontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE506E1FAF6AD4004203BE /* FontsTests.swift */; };
 		DDDE51941FAF6AD4004203BE /* XCAssetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE50F51FAF6AD4004203BE /* XCAssetsTests.swift */; };
@@ -283,7 +283,7 @@
 		DD428E0A1FC50FBF001649D6 /* ColorsJSONFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsJSONFileParser.swift; sourceTree = "<group>"; };
 		DD428E0B1FC50FBF001649D6 /* ColorsTXTFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsTXTFileParser.swift; sourceTree = "<group>"; };
 		DD428E0C1FC50FBF001649D6 /* ColorsXMLFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsXMLFileParser.swift; sourceTree = "<group>"; };
-		DD428E0E1FC50FBF001649D6 /* StoryboardParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryboardParser.swift; path = Sources/SwiftGenKit/Parsers/StoryboardParser/StoryboardParser.swift; sourceTree = SOURCE_ROOT; };
+		DD428E0E1FC50FBF001649D6 /* StoryboardsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryboardsParser.swift; path = Sources/SwiftGenKit/Parsers/Storyboards/StoryboardsParser.swift; sourceTree = SOURCE_ROOT; };
 		DD428E0F1FC50FBF001649D6 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		DD428E101FC50FBF001649D6 /* StringsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsParser.swift; sourceTree = "<group>"; };
 		DD428E111FC50FBF001649D6 /* ColorsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorsParser.swift; path = Sources/SwiftGenKit/Parsers/Colors/ColorsParser.swift; sourceTree = SOURCE_ROOT; };
@@ -306,9 +306,9 @@
 		DDC8211420967180007A55F3 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		DDC82116209672E1007A55F3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		DDCCACD6209551230017FB43 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
-		DDCCACD7209551230017FB43 /* StoryboardPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardPlatform.swift; sourceTree = "<group>"; };
-		DDCCACD8209551230017FB43 /* StoryboardSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSegue.swift; sourceTree = "<group>"; };
-		DDCCACD9209551230017FB43 /* StoryboardScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardScene.swift; sourceTree = "<group>"; };
+		DDCCACD7209551230017FB43 /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
+		DDCCACD8209551230017FB43 /* Segue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segue.swift; sourceTree = "<group>"; };
+		DDCCACD9209551230017FB43 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		DDDE504B1FAF687A004203BE /* Templates UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Templates UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDE506D1FAF6AD4004203BE /* StringsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsTests.swift; sourceTree = "<group>"; };
 		DDDE506E1FAF6AD4004203BE /* FontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsTests.swift; sourceTree = "<group>"; };
@@ -544,7 +544,7 @@
 				DD9F687620955D51004EB720 /* AssetsCatalog */,
 				DD428E081FC50FBF001649D6 /* Colors */,
 				DD9F687D20955DEF004EB720 /* Fonts */,
-				DDCCACD5209550F60017FB43 /* StoryboardParser */,
+				DDCCACD5209550F60017FB43 /* Storyboards */,
 				DD9F68822095604E004EB720 /* StringsParser */,
 				DD428E0F1FC50FBF001649D6 /* Parser.swift */,
 			);
@@ -661,16 +661,16 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		DDCCACD5209550F60017FB43 /* StoryboardParser */ = {
+		DDCCACD5209550F60017FB43 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				DDCCACD7209551230017FB43 /* StoryboardPlatform.swift */,
-				DDCCACD9209551230017FB43 /* StoryboardScene.swift */,
-				DDCCACD8209551230017FB43 /* StoryboardSegue.swift */,
+				DDCCACD7209551230017FB43 /* Platform.swift */,
+				DDCCACD9209551230017FB43 /* Scene.swift */,
+				DDCCACD8209551230017FB43 /* Segue.swift */,
 				DDCCACD6209551230017FB43 /* Storyboard.swift */,
-				DD428E0E1FC50FBF001649D6 /* StoryboardParser.swift */,
+				DD428E0E1FC50FBF001649D6 /* StoryboardsParser.swift */,
 			);
-			path = StoryboardParser;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		DDDE504D1FAF6AD4004203BE /* TemplatesTests */ = {
@@ -1347,12 +1347,12 @@
 				DD9F687F20955E07004EB720 /* Font.swift in Sources */,
 				DD428E1B1FC50FBF001649D6 /* ColorsJSONFileParser.swift in Sources */,
 				DD9F688120955F57004EB720 /* CTFont.swift in Sources */,
-				DDCCACDD209551240017FB43 /* StoryboardScene.swift in Sources */,
-				DDCCACDB209551240017FB43 /* StoryboardPlatform.swift in Sources */,
+				DDCCACDD209551240017FB43 /* Scene.swift in Sources */,
+				DDCCACDB209551240017FB43 /* Platform.swift in Sources */,
 				DD428E1D1FC50FBF001649D6 /* ColorsXMLFileParser.swift in Sources */,
 				DDCCACDA209551240017FB43 /* Storyboard.swift in Sources */,
-				DD428E1F1FC50FBF001649D6 /* StoryboardParser.swift in Sources */,
-				DDCCACDC209551240017FB43 /* StoryboardSegue.swift in Sources */,
+				DD428E1F1FC50FBF001649D6 /* StoryboardsParser.swift in Sources */,
+				DDCCACDC209551240017FB43 /* Segue.swift in Sources */,
 				DD9F688620956074004EB720 /* PlaceholderType.swift in Sources */,
 				DD428E251FC50FBF001649D6 /* AssetsCatalogContext.swift in Sources */,
 				DD428E1A1FC50FBF001649D6 /* ColorsCLRFileParser.swift in Sources */,

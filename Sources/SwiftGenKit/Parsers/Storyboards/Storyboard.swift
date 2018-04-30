@@ -7,22 +7,24 @@
 import Foundation
 import Kanna
 
-struct Storyboard {
-  let name: String
-  let platform: Platform
-  let initialScene: Scene?
-  let scenes: Set<Scene>
-  let segues: Set<Segue>
+extension Storyboards {
+  struct Storyboard {
+    let name: String
+    let platform: Platform
+    let initialScene: Scene?
+    let scenes: Set<Scene>
+    let segues: Set<Segue>
 
-  var modules: Set<String> {
-    var result: [String] = scenes.compactMap { $0.module } +
-      segues.compactMap { $0.module }
+    var modules: Set<String> {
+      var result: [String] = scenes.compactMap { $0.module } +
+        segues.compactMap { $0.module }
 
-    if let module = initialScene?.module {
-      result += [module]
+      if let module = initialScene?.module {
+        result += [module]
+      }
+
+      return Set(result)
     }
-
-    return Set(result)
   }
 }
 
@@ -44,34 +46,34 @@ private enum XML {
   static let placeholderTags = ["controllerPlaceholder", "viewControllerPlaceholder"]
 }
 
-extension Storyboard {
+extension Storyboards.Storyboard {
   init(with document: Kanna.XMLDocument, name: String) throws {
     self.name = name
 
     // TargetRuntime
     let targetRuntime = document.at_xpath(XML.targetRuntimeXPath)?.text ?? ""
-    guard let platform = Platform(rawValue: targetRuntime) else {
-      throw StoryboardParserError.unsupportedTargetRuntime(target: targetRuntime)
+    guard let platform = Storyboards.Platform(rawValue: targetRuntime) else {
+      throw Storyboards.ParserError.unsupportedTargetRuntime(target: targetRuntime)
     }
     self.platform = platform
 
     // Initial VC
     let initialSceneID = document.at_xpath(XML.initialVCXPath)?.text ?? ""
     if let object = document.at_xpath(XML.initialSceneXPath(identifier: initialSceneID)) {
-      initialScene = Storyboard.Scene(with: object, platform: platform)
+      initialScene = Storyboards.Scene(with: object, platform: platform)
     } else {
       initialScene = nil
     }
 
     // Scenes
-    scenes = Set<Storyboard.Scene>(document.xpath(XML.sceneXPath).compactMap {
+    scenes = Set<Storyboards.Scene>(document.xpath(XML.sceneXPath).compactMap {
       guard !XML.placeholderTags.contains($0.tagName ?? "") else { return nil }
-      return Storyboard.Scene(with: $0, platform: platform)
+      return Storyboards.Scene(with: $0, platform: platform)
     })
 
     // Segues
-    segues = Set<Storyboard.Segue>(document.xpath(XML.segueXPath).map {
-      Storyboard.Segue(with: $0, platform: platform)
+    segues = Set<Storyboards.Segue>(document.xpath(XML.segueXPath).map {
+      Storyboards.Segue(with: $0, platform: platform)
     })
   }
 }
