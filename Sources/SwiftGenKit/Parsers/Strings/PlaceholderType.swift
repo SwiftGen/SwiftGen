@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension StringsParser {
+extension Strings {
   public enum PlaceholderType: String {
     case object = "String"
     case float = "Float"
@@ -40,7 +40,7 @@ extension StringsParser {
   }
 }
 
-extension StringsParser.PlaceholderType {
+extension Strings.PlaceholderType {
   private static let formatTypesRegEx: NSRegularExpression = {
     // %d/%i/%o/%u/%x with their optional length modifiers like in "%lld"
     let patternInt = "(?:h|hh|l|ll|q|z|t|j)?([dioux])"
@@ -62,7 +62,7 @@ extension StringsParser.PlaceholderType {
   }()
 
   // "I give %d apples to %@" --> [.Int, .String]
-  static func placeholders(fromFormat formatString: String) throws -> [StringsParser.PlaceholderType] {
+  static func placeholders(fromFormat formatString: String) throws -> [Strings.PlaceholderType] {
     let range = NSRange(location: 0, length: (formatString as NSString).length)
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier
@@ -92,10 +92,10 @@ extension StringsParser.PlaceholderType {
 
     // enumerate the conversion specifiers and their optionally forced position
     // and build the array of PlaceholderTypes accordingly
-    var list = [StringsParser.PlaceholderType]()
+    var list = [Strings.PlaceholderType]()
     var nextNonPositional = 1
     for (str, pos) in chars {
-      if let char = str.first, let placeholderType = StringsParser.PlaceholderType(formatChar: char) {
+      if let char = str.first, let placeholderType = Strings.PlaceholderType(formatChar: char) {
         let insertionPos: Int
         if let pos = pos {
           insertionPos = pos
@@ -109,7 +109,7 @@ extension StringsParser.PlaceholderType {
           }
           let previous = list[insertionPos - 1]
           guard previous == .unknown || previous == placeholderType else {
-            throw StringsParserError.invalidPlaceholder(previous: previous, new: placeholderType)
+            throw Strings.ParserError.invalidPlaceholder(previous: previous, new: placeholderType)
           }
           list[insertionPos - 1] = placeholderType
         }

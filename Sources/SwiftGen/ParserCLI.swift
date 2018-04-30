@@ -32,7 +32,7 @@ let allParserCommands: [ParserCLI] = [
     pathDescription: "Colors.txt|.clr|.xml|.json file(s) to parse."
   ),
   .init(
-    parserType: StringsParser.self,
+    parserType: Strings.Parser.self,
     name: "strings",
     description: "generate code for your Localizable.strings file(s)",
     pathDescription: "Strings file(s) to parse."

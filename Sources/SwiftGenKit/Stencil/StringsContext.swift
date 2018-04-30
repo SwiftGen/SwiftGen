@@ -28,9 +28,9 @@ private extension String {
        - `types`: `Array<String>` — defined only if localized string has parameter placeholders like `%d` and `%@` etc.
           Contains a list of types like `"String"`, `"Int"`, etc
 */
-extension StringsParser {
+extension Strings.Parser {
   public func stencilContext() -> [String: Any] {
-    let entryToStringMapper = { (entry: StringsEntry, keyPath: [String]) -> [String: Any] in
+    let entryToStringMapper = { (entry: Strings.Entry, keyPath: [String]) -> [String: Any] in
       let levelName = entry.keyStructure.last ?? ""
 
       var result: [String: Any] = [
@@ -61,9 +61,9 @@ extension StringsParser {
     ]
   }
 
-  typealias Mapper = (_ entry: StringsEntry, _ keyPath: [String]) -> [String: Any]
+  typealias Mapper = (_ entry: Strings.Entry, _ keyPath: [String]) -> [String: Any]
   private func structure(
-    entries: [StringsEntry],
+    entries: [Strings.Entry],
     atKeyPath keyPath: [String] = [],
     usingMapper mapper: @escaping Mapper) -> [String: Any] {
 

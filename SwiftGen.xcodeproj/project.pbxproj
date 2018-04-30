@@ -545,7 +545,7 @@
 				DD428E081FC50FBF001649D6 /* Colors */,
 				DD9F687D20955DEF004EB720 /* Fonts */,
 				DDCCACD5209550F60017FB43 /* Storyboards */,
-				DD9F68822095604E004EB720 /* StringsParser */,
+				DD9F68822095604E004EB720 /* Strings */,
 				DD428E0F1FC50FBF001649D6 /* Parser.swift */,
 			);
 			path = Parsers;
@@ -632,14 +632,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		DD9F68822095604E004EB720 /* StringsParser */ = {
+		DD9F68822095604E004EB720 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
 				DD9F688320956074004EB720 /* StringsEntry.swift */,
 				DD9F688420956074004EB720 /* PlaceholderType.swift */,
 				DD428E101FC50FBF001649D6 /* StringsParser.swift */,
 			);
-			path = StringsParser;
+			path = Strings;
 			sourceTree = "<group>";
 		};
 		DDC09C7D1E1D193F005C6EE6 /* Resources */ = {
