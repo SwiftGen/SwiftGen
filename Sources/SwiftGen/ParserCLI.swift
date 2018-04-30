@@ -26,7 +26,7 @@ let allParserCommands: [ParserCLI] = [
     pathDescription: "Asset Catalog file(s)."
   ),
   .init(
-    parserType: ColorsParser.self,
+    parserType: Colors.Parser.self,
     name: "colors",
     description: "generate code for color palettes",
     pathDescription: "Colors.txt|.clr|.xml|.json file(s) to parse."

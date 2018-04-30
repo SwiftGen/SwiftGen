@@ -286,7 +286,7 @@
 		DD428E0E1FC50FBF001649D6 /* StoryboardParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryboardParser.swift; path = Sources/SwiftGenKit/Parsers/StoryboardParser/StoryboardParser.swift; sourceTree = SOURCE_ROOT; };
 		DD428E0F1FC50FBF001649D6 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		DD428E101FC50FBF001649D6 /* StringsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsParser.swift; sourceTree = "<group>"; };
-		DD428E111FC50FBF001649D6 /* ColorsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorsParser.swift; path = Sources/SwiftGenKit/Parsers/ColorsParser/ColorsParser.swift; sourceTree = SOURCE_ROOT; };
+		DD428E111FC50FBF001649D6 /* ColorsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorsParser.swift; path = Sources/SwiftGenKit/Parsers/Colors/ColorsParser.swift; sourceTree = SOURCE_ROOT; };
 		DD428E131FC50FBF001649D6 /* FontsContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsContext.swift; sourceTree = "<group>"; };
 		DD428E141FC50FBF001649D6 /* ColorsContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsContext.swift; sourceTree = "<group>"; };
 		DD428E151FC50FBF001649D6 /* AssetsCatalogContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsCatalogContext.swift; sourceTree = "<group>"; };
@@ -542,8 +542,8 @@
 			isa = PBXGroup;
 			children = (
 				DD9F687620955D51004EB720 /* AssetsCatalog */,
+				DD428E081FC50FBF001649D6 /* Colors */,
 				DD9F687D20955DEF004EB720 /* Fonts */,
-				DD428E081FC50FBF001649D6 /* ColorsParser */,
 				DDCCACD5209550F60017FB43 /* StoryboardParser */,
 				DD9F68822095604E004EB720 /* StringsParser */,
 				DD428E0F1FC50FBF001649D6 /* Parser.swift */,
@@ -551,14 +551,14 @@
 			path = Parsers;
 			sourceTree = "<group>";
 		};
-		DD428E081FC50FBF001649D6 /* ColorsParser */ = {
+		DD428E081FC50FBF001649D6 /* Colors */ = {
 			isa = PBXGroup;
 			children = (
 				DD9F687520955D15004EB720 /* FileTypeParser */,
 				DD428E111FC50FBF001649D6 /* ColorsParser.swift */,
 				DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */,
 			);
-			path = ColorsParser;
+			path = Colors;
 			sourceTree = "<group>";
 		};
 		DD428E121FC50FBF001649D6 /* Stencil */ = {

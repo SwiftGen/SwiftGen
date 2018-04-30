@@ -10,8 +10,8 @@ import XCTest
 
 class ColorsCLRFileTests: XCTestCase {
   func testFileWithDefaults() throws {
-    let parser = ColorsParser()
-    parser.palettes = [try ColorsCLRFileParser().parseFile(at: Fixtures.path(for: "colors.clr", sub: .colors))]
+    let parser = Colors.Parser()
+    parser.palettes = [try Colors.CLRFileParser().parseFile(at: Fixtures.path(for: "colors.clr", sub: .colors))]
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "defaults", sub: .colors)
@@ -19,9 +19,9 @@ class ColorsCLRFileTests: XCTestCase {
 
   func testFileWithBadFile() {
     do {
-      _ = try ColorsCLRFileParser().parseFile(at: Fixtures.path(for: "bad.clr", sub: .colors))
+      _ = try Colors.CLRFileParser().parseFile(at: Fixtures.path(for: "bad.clr", sub: .colors))
       XCTFail("Code did parse file successfully while it was expected to fail for bad file")
-    } catch ColorsParserError.invalidFile {
+    } catch Colors.ParserError.invalidFile {
       // That's the expected exception we want to happen
     } catch let error {
       XCTFail("Unexpected error occured while parsing: \(error)")
