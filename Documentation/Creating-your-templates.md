@@ -72,4 +72,4 @@ Additionally to the [tags and filters](https://stencil.fuller.li/en/latest/built
 
 When SwiftGen generates your code, it provides a context (a dictionary) with the variables containing what assets/colors/strings/… the subcommand did detect, to render your Stencil template using those variables.
 
-A full documentation of the produced context for each command can be found in the [SwiftGenKit documentation](https://github.com/SwiftGen/SwiftGenKit#documentation).
+A full documentation of the produced context for each command can be found in the [SwiftGenKit documentation](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/SwiftGenKit%20Contexts/).
