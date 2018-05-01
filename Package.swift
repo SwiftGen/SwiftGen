@@ -27,13 +27,17 @@ let package = Package(
         ]),
         .target(name: "SwiftGenKit", dependencies: [
           "PathKit",
-          "StencilSwiftKit",
-        ]),
-        .testTarget(name: "SwiftGenTests", dependencies: [
-          "SwiftGen",
+          "StencilSwiftKit"
         ]),
         .testTarget(name: "SwiftGenKitTests", dependencies: [
-          "SwiftGenKit",
+          "SwiftGenKit"
+        ]),
+        .testTarget(name: "SwiftGenTests", dependencies: [
+          "SwiftGen"
+        ]),
+        .testTarget(name: "TemplatesTests", dependencies: [
+          "StencilSwiftKit",
+          "SwiftGenKit"
         ])
     ]
 )

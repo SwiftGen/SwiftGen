@@ -11,15 +11,6 @@ import Stencil
 import StencilSwiftKit
 import SwiftGenKit
 
-// MARK: Common
-
-let outputOption = Option(
-  "output",
-  default: OutputDestination.console,
-  flag: "o",
-  description: "The path to the file to generate (Omit to generate to stdout)"
-)
-
 // MARK: - Main
 
 let main = Group {
