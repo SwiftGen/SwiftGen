@@ -26,7 +26,7 @@ defaults:
         BUNDLE_RETRY: 3
   - &store-gems
     save_cache:
-      key: v1-gems-{{ checksum "Gemfile.lock" }}
+      key: gems-{{ checksum "Gemfile.lock" }}
       paths:
         - vendor/bundle
   - &fetch-xcode-logs
@@ -91,10 +91,19 @@ jobs:
       - *restore-gems
       - *install-gems
       - *store-gems
+      - restore_cache:
+          keys:
+            - homebrew-{{ checksum ".circleci/config.yml" }}
+            - homebrew-
       - run:
           name: Install libxml2
           command: brew upgrade python && brew install libxml2 && brew link --force libxml2
+      -  save_cache:
+          key: homebrew-{{ checksum ".circleci/config.yml" }}
+          paths:
+            - /usr/local/Homebrew
       - run:
+          # TODO: This should run the tests once SPM supports testing an executable
           name: Build with SPM
           command: bundle exec rake spm:build
       - *store-artifacts
