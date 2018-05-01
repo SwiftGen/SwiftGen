@@ -13,14 +13,14 @@ import XCTest
 
 class FontsTests: XCTestCase {
   func testEmpty() {
-    let parser = FontsParser()
+    let parser = Fonts.Parser()
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .fonts)
   }
 
   func testDefaults() {
-    let parser = FontsParser()
+    let parser = Fonts.Parser()
     parser.parse(path: Fixtures.directory(sub: .fonts))
 
     let result = parser.stencilContext()

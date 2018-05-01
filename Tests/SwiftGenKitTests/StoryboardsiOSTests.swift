@@ -16,14 +16,14 @@ import XCTest
 class StoryboardsiOSTests: XCTestCase {
 
   func testEmpty() {
-    let parser = StoryboardParser()
+    let parser = Storyboards.Parser()
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .storyboardsiOS)
   }
 
   func testMessageStoryboard() {
-    let parser = StoryboardParser()
+    let parser = Storyboards.Parser()
     do {
       try parser.parse(path: Fixtures.path(for: "Message.storyboard", sub: .storyboardsiOS))
     } catch {
@@ -35,7 +35,7 @@ class StoryboardsiOSTests: XCTestCase {
   }
 
   func testAnonymousStoryboard() {
-    let parser = StoryboardParser()
+    let parser = Storyboards.Parser()
     do {
       try parser.parse(path: Fixtures.path(for: "Anonymous.storyboard", sub: .storyboardsiOS))
     } catch {
@@ -47,7 +47,7 @@ class StoryboardsiOSTests: XCTestCase {
   }
 
   func testAllStoryboards() {
-    let parser = StoryboardParser()
+    let parser = Storyboards.Parser()
     do {
       try parser.parse(path: Fixtures.directory(sub: .storyboardsiOS))
     } catch {

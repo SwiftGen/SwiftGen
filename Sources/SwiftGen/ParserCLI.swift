@@ -20,31 +20,31 @@ public struct ParserCLI {
 
 let allParserCommands: [ParserCLI] = [
   .init(
-    parserType: AssetsCatalogParser.self,
+    parserType: AssetsCatalog.Parser.self,
     name: "xcassets",
     description: "generate code for items in your Assets Catalog(s)",
     pathDescription: "Asset Catalog file(s)."
   ),
   .init(
-    parserType: ColorsParser.self,
+    parserType: Colors.Parser.self,
     name: "colors",
     description: "generate code for color palettes",
     pathDescription: "Colors.txt|.clr|.xml|.json file(s) to parse."
   ),
   .init(
-    parserType: StringsParser.self,
+    parserType: Strings.Parser.self,
     name: "strings",
     description: "generate code for your Localizable.strings file(s)",
     pathDescription: "Strings file(s) to parse."
   ),
   .init(
-    parserType: StoryboardParser.self,
+    parserType: Storyboards.Parser.self,
     name: "storyboards",
     description: "generate code for your storyboard scenes and segues",
     pathDescription: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard"
   ),
   .init(
-    parserType: FontsParser.self,
+    parserType: Fonts.Parser.self,
     name: "fonts",
     description: "generate code for your fonts",
     pathDescription: "Directory(ies) to parse."

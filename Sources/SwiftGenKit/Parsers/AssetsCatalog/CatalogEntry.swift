@@ -7,7 +7,7 @@
 import Foundation
 import PathKit
 
-extension Catalog {
+extension AssetsCatalog {
   enum Entry {
     case group(name: String, items: [Entry])
     case color(name: String, value: String)
@@ -17,7 +17,7 @@ extension Catalog {
 
 // MARK: - Parser
 
-private enum AssetCatalog {
+private enum Constants {
   static let path = "Contents.json"
   static let properties = "properties"
   static let providesNamespace = "provides-namespace"
@@ -37,7 +37,7 @@ private enum AssetCatalog {
   }
 }
 
-extension Catalog.Entry {
+extension AssetsCatalog.Entry {
   /**
    Each node in an asset catalog is either (there are more types, but we ignore those):
      - A colorset, which is essentially a group containing a list of colors (the latter is ignored).
@@ -59,7 +59,7 @@ extension Catalog.Entry {
     guard path.isDirectory else { return nil }
     let type = path.extension ?? ""
 
-    switch AssetCatalog.Item(rawValue: type) {
+    switch Constants.Item(rawValue: type) {
     case .colorSet?:
       let name = path.lastComponentWithoutExtension
       self = .color(name: name, value: "\(prefix)\(name)")
@@ -69,11 +69,11 @@ extension Catalog.Entry {
     case nil:
       guard type.isEmpty else { return nil }
       let filename = path.lastComponent
-      let subPrefix = Catalog.Entry.isNamespaced(path: path) ? "\(prefix)\(filename)/" : prefix
+      let subPrefix = AssetsCatalog.Entry.isNamespaced(path: path) ? "\(prefix)\(filename)/" : prefix
 
       self = .group(
         name: filename,
-        items: Catalog.process(folder: path, withPrefix: subPrefix)
+        items: AssetsCatalog.Catalog.process(folder: path, withPrefix: subPrefix)
       )
     }
   }
@@ -81,12 +81,12 @@ extension Catalog.Entry {
 
 // MARK: - Private Helpers
 
-extension Catalog.Entry {
+extension AssetsCatalog.Entry {
   private static func isNamespaced(path: Path) -> Bool {
     let metadata = self.metadata(for: path)
 
-    if let properties = metadata[AssetCatalog.properties] as? [String: Any],
-      let providesNamespace = properties[AssetCatalog.providesNamespace] as? Bool {
+    if let properties = metadata[Constants.properties] as? [String: Any],
+      let providesNamespace = properties[Constants.providesNamespace] as? Bool {
       return providesNamespace
     } else {
       return false
@@ -94,7 +94,7 @@ extension Catalog.Entry {
   }
 
   private static func metadata(for path: Path) -> [String: Any] {
-    let contentsFile = path + Path(AssetCatalog.path)
+    let contentsFile = path + Path(Constants.path)
 
     guard let data = try? contentsFile.read(),
       let json = try? JSONSerialization.jsonObject(with: data, options: []) else {

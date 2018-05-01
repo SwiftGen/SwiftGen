@@ -7,7 +7,7 @@
 import Foundation
 import Kanna
 
-extension Storyboard {
+extension Storyboards {
   struct Segue {
     let identifier: String
     let customClass: String?
@@ -42,8 +42,8 @@ private enum XML {
   static let customModuleAttribute = "customModule"
 }
 
-extension Storyboard.Segue {
-  init(with object: Kanna.XMLElement, platform: Storyboard.Platform) {
+extension Storyboards.Segue {
+  init(with object: Kanna.XMLElement, platform: Storyboards.Platform) {
     identifier = object[XML.identifierAttribute] ?? ""
     customClass = object[XML.customClassAttribute]
     customModule = object[XML.customModuleAttribute]
@@ -53,14 +53,14 @@ extension Storyboard.Segue {
 
 // MARK: - Hashable
 
-extension Storyboard.Segue: Equatable { }
-func == (lhs: Storyboard.Segue, rhs: Storyboard.Segue) -> Bool {
+extension Storyboards.Segue: Equatable { }
+func == (lhs: Storyboards.Segue, rhs: Storyboards.Segue) -> Bool {
   return lhs.identifier == rhs.identifier &&
     lhs.customClass == rhs.customClass &&
     lhs.customModule == rhs.customModule
 }
 
-extension Storyboard.Segue: Hashable {
+extension Storyboards.Segue: Hashable {
   var hashValue: Int {
     return identifier.hashValue ^ (customModule?.hashValue ?? 0) ^ (customClass?.hashValue ?? 0)
   }

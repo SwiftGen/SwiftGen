@@ -52,6 +52,7 @@
 * Refactor the parsers as they're getting more complex.  
   [David Jennes](https://github.com/djbe) 
   [#417](https://github.com/SwiftGen/SwiftGen/pull/417)
+  [#422](https://github.com/SwiftGen/SwiftGen/pull/422)
 
 ## 5.3.0
 
