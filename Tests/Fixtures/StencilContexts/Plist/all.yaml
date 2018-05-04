@@ -1,6 +1,12 @@
 files:
 - documents:
   - data:
+    - value1
+    - value2
+  name: array
+  path: array.plist
+- documents:
+  - data:
       key1: value1
       key2:
         nestedKey2: nestedValue2

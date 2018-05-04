@@ -1,3 +1,7 @@
-root_array:
-- value1
-- value2
+files:
+- documents:
+  - data:
+    - value1
+    - value2
+  name: array
+  path: array.plist

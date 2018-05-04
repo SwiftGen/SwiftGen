@@ -20,7 +20,7 @@ class PlistTests: XCTestCase {
 
   func testArray() throws {
     let parser = Plist.Parser()
-    try parser.parse(path: Fixtures.path(for: "array.plist", sub: .plist))
+    try parser.parse(path: Fixtures.path(for: "array.plist", sub: .plistGood))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "array", sub: .plist)
@@ -28,7 +28,7 @@ class PlistTests: XCTestCase {
 
   func testDictionary() throws {
     let parser = Plist.Parser()
-    try parser.parse(path: Fixtures.path(for: "dictionary.plist", sub: .plist))
+    try parser.parse(path: Fixtures.path(for: "dictionary.plist", sub: .plistGood))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "dictionary", sub: .plist)
@@ -36,10 +36,11 @@ class PlistTests: XCTestCase {
 
   func testDirectoryInput() {
     do {
-      _ = try Plist.Parser().parse(path: Fixtures.directory(sub: .plist))
-      XCTFail("Code did parse directory successfully while it was expected to fail requiring that the input be a file")
-    } catch Plist.ParserError.directory {
-      // That's the expected exception we want to happen
+      let parser = Plist.Parser()
+      try parser.parse(path: Fixtures.directory(sub: .plistGood))
+
+      let result = parser.stencilContext()
+      XCTDiffContexts(result, expected: "all", sub: .plist)
     } catch let error {
       XCTFail("Unexpected error occured while parsing: \(error)")
     }
@@ -47,7 +48,7 @@ class PlistTests: XCTestCase {
 
   func testFileWithBadSyntax() {
     do {
-      _ = try Plist.Parser().parse(path: Fixtures.path(for: "bad-syntax.plist", sub: .plist))
+      _ = try Plist.Parser().parse(path: Fixtures.path(for: "syntax.plist", sub: .plistBad))
       XCTFail("Code did parse file successfully while it was expected to fail for bad syntax")
     } catch Plist.ParserError.invalidFile {
       // That's the expected exception we want to happen

@@ -82,6 +82,7 @@
 		DDB0B9A4209CE7E300E467C2 /* PlistContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B9A3209CE7E300E467C2 /* PlistContext.swift */; };
 		DDB0B9A6209CE7FC00E467C2 /* PlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B9A5209CE7FC00E467C2 /* PlistTests.swift */; };
 		DDB0B9A8209CF7A300E467C2 /* YamlFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B9A7209CF7A300E467C2 /* YamlFile.swift */; };
+		DDB0B9AC209D061C00E467C2 /* PlistFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B9AB209D061C00E467C2 /* PlistFile.swift */; };
 		DDC09D021E1D199A005C6EE6 /* templates in Resources */ = {isa = PBXBuildFile; fileRef = DDC09D011E1D199A005C6EE6 /* templates */; };
 		DDC335E47ABB50395E595AB0 /* Pods_swiftgen_SwiftGen_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8876ECE7B9852963F6B5 /* Pods_swiftgen_SwiftGen_UnitTests.framework */; };
 		DDC8211520967180007A55F3 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC8211420967180007A55F3 /* Path.swift */; };
@@ -337,6 +338,7 @@
 		DDB0B9A3209CE7E300E467C2 /* PlistContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistContext.swift; sourceTree = "<group>"; };
 		DDB0B9A5209CE7FC00E467C2 /* PlistTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistTests.swift; sourceTree = "<group>"; };
 		DDB0B9A7209CF7A300E467C2 /* YamlFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YamlFile.swift; sourceTree = "<group>"; };
+		DDB0B9AB209D061C00E467C2 /* PlistFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistFile.swift; sourceTree = "<group>"; };
 		DDC09D011E1D199A005C6EE6 /* templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = templates; sourceTree = "<group>"; };
 		DDC8211420967180007A55F3 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		DDC82116209672E1007A55F3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -700,6 +702,7 @@
 		DDB0B9A0209CE7CD00E467C2 /* Plist */ = {
 			isa = PBXGroup;
 			children = (
+				DDB0B9AB209D061C00E467C2 /* PlistFile.swift */,
 				DDB0B9A1209CE7CD00E467C2 /* PlistParser.swift */,
 			);
 			path = Plist;
@@ -1363,6 +1366,7 @@
 				DD428E211FC50FBF001649D6 /* StringsParser.swift in Sources */,
 				DD428E231FC50FBF001649D6 /* FontsContext.swift in Sources */,
 				DD9F687B20955D51004EB720 /* AssetsCatalogParser.swift in Sources */,
+				DDB0B9AC209D061C00E467C2 /* PlistFile.swift in Sources */,
 				DD428E191FC50FBF001649D6 /* FontsParser.swift in Sources */,
 				DDC8211520967180007A55F3 /* Path.swift in Sources */,
 				DDB0B9A8209CF7A300E467C2 /* YamlFile.swift in Sources */,
