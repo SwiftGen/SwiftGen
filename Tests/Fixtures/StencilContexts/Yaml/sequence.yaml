@@ -3,5 +3,9 @@ files:
   - data:
     - value1
     - value2
+    metadata:
+      element:
+        type: String
+      type: Array
   name: sequence
   path: sequence.yaml

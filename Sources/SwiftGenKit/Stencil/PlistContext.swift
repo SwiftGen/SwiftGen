@@ -34,6 +34,14 @@ extension NSArray: NodeRepresentable {
     - `path` : `String` — the path to the file, relative to the folder being scanned
     - `documents`: `Array` — List of documents. Plist files will only have 1 document
        - `data`: `Any` — The contents of the document
+       - `metadata`: `Dictionary` — Describes the structure of the document
+
+ The metadata has the following properties:
+ - `type`: `String` — The type of the object (Array, Dictionary, Int, Float, String, Bool, Date, Data)
+ - `properties`: `Array` — List of properties metadata (only if a dictionary, repeats this metadata structure)
+    - name: `String` — Name of the property (dictionary key)
+    - repeats the rest of the metadata structure
+ - `element`: `Dictionary` — Element metadata (only if an array, repeats this metadata structure)
  */
 extension Plist.Parser {
   public func stencilContext() -> [String: Any] {
@@ -58,7 +66,8 @@ extension Plist.Parser {
 
   private func map(document: Any) -> [String: Any] {
     return [
-      "data": document
+      "data": document,
+      "metadata": Metadata.generate(for: document)
     ]
   }
 }

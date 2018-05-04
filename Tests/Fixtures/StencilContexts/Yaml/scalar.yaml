@@ -1,5 +1,7 @@
 files:
 - documents:
   - data: value1
+    metadata:
+      type: String
   name: scalar
   path: scalar.yaml

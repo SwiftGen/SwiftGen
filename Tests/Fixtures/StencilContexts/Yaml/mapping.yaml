@@ -4,5 +4,15 @@ files:
       key1: value1
       key2:
         nestedKey2: nestedValue2
+    metadata:
+      properties:
+      - name: key1
+        type: String
+      - name: key2
+        properties:
+        - name: nestedKey2
+          type: String
+        type: Dictionary
+      type: Dictionary
   name: mapping
   path: mapping.yaml

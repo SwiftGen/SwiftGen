@@ -8,5 +8,19 @@ files:
         - 1
         - 2
         - 3
+    metadata:
+      properties:
+      - name: key1
+        type: String
+      - name: key2
+        type: String
+      - name: key3
+        properties:
+        - element:
+            type: String
+          name: nestedKey3
+          type: Array
+        type: Dictionary
+      type: Dictionary
   name: json
   path: json.json
