@@ -12,15 +12,12 @@ import Yams
 
 public enum Yaml {
   public enum ParserError: Error, CustomStringConvertible {
-    case directory
-    case invalidFile
+    case invalidFile(path: Path, reason: String)
 
     public var description: String {
       switch self {
-      case .directory:
-        return "The input was a directory, but must be a specifc file."
-      case .invalidFile:
-        return "The file could not be parsed as a valid yaml or json file."
+      case .invalidFile(let path, let reason):
+        return "Unable to parse file at \(path). \(reason)"
       }
     }
   }
@@ -28,32 +25,35 @@ public enum Yaml {
   // MARK: Yaml File Parser
 
   public final class Parser: SwiftGenKit.Parser {
-    var yamlMapping: [String: Any] = [:]
+    var files: [File] = []
     public var warningHandler: Parser.MessageHandler?
 
     public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
       self.warningHandler = warningHandler
     }
 
+    enum SupportedTypes {
+      static let json = "json"
+      static let yaml = "yaml"
+      static let yml = "yml"
+      static let all = [json, yaml, yml]
+
+      static func supports(extension: String) -> Bool {
+        return all.contains { $0.caseInsensitiveCompare(`extension`) == .orderedSame }
+      }
+    }
+
     public func parse(path: Path) throws {
-      guard path.isFile else {
-        throw ParserError.directory
-      }
+      if path.isFile {
+        let parentDir = path.absolute().parent()
+        files.append(try File(path: path, relativeTo: parentDir))
+      } else {
+        let dirChildren = path.iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
+        let parentDir = path.absolute()
 
-      guard let string: String = try? path.read() else {
-        throw ParserError.invalidFile
-      }
-
-      do {
-        if let loadedMapping = try Yams.load(yaml: string) as? [String: Any] {
-          yamlMapping = loadedMapping
-        } else if let loadedSequence = try Yams.load(yaml: string) as? [Any] {
-          yamlMapping = ["root_sequence": loadedSequence]
-        } else if let loadedScalar = try Yams.load(yaml: string) {
-          yamlMapping = ["root_scalar": loadedScalar]
+        for file in dirChildren where SupportedTypes.supports(extension: file.extension ?? "") {
+          files.append(try File(path: file, relativeTo: parentDir))
         }
-      } catch {
-        throw ParserError.invalidFile
       }
     }
   }

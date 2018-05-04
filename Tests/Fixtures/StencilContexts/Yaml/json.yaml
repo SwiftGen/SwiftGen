@@ -1,7 +1,12 @@
-key1: value1
-key2: 2
-key3:
-  nestedKey3:
-  - 1
-  - 2
-  - 3
+files:
+- documents:
+  - data:
+      key1: value1
+      key2: 2
+      key3:
+        nestedKey3:
+        - 1
+        - 2
+        - 3
+  name: json
+  path: json.json

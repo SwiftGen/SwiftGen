@@ -1,0 +1,39 @@
+files:
+- documents:
+  - data:
+    - Mark McGwire
+    - Sammy Sosa
+    - Ken Griffey
+  - data:
+    - Chicago Cubs
+    - St Louis Cardinals
+  name: documents
+  path: documents.yaml
+- documents:
+  - data:
+      key1: value1
+      key2: 2
+      key3:
+        nestedKey3:
+        - 1
+        - 2
+        - 3
+  name: json
+  path: json.json
+- documents:
+  - data:
+      key1: value1
+      key2:
+        nestedKey2: nestedValue2
+  name: mapping
+  path: mapping.yaml
+- documents:
+  - data: value1
+  name: scalar
+  path: scalar.yaml
+- documents:
+  - data:
+    - value1
+    - value2
+  name: sequence
+  path: sequence.yaml

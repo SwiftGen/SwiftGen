@@ -20,7 +20,7 @@ class YamlTests: XCTestCase {
 
   func testSequence() throws {
     let parser = Yaml.Parser()
-    try parser.parse(path: Fixtures.path(for: "sequence.yaml", sub: .yaml))
+    try parser.parse(path: Fixtures.path(for: "sequence.yaml", sub: .yamlGood))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "sequence", sub: .yaml)
@@ -28,7 +28,7 @@ class YamlTests: XCTestCase {
 
   func testMapping() throws {
     let parser = Yaml.Parser()
-    try parser.parse(path: Fixtures.path(for: "mapping.yaml", sub: .yaml))
+    try parser.parse(path: Fixtures.path(for: "mapping.yaml", sub: .yamlGood))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "mapping", sub: .yaml)
@@ -36,7 +36,7 @@ class YamlTests: XCTestCase {
 
   func testJSON() throws {
     let parser = Yaml.Parser()
-    try parser.parse(path: Fixtures.path(for: "json.json", sub: .yaml))
+    try parser.parse(path: Fixtures.path(for: "json.json", sub: .yamlGood))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "json", sub: .yaml)
@@ -44,18 +44,27 @@ class YamlTests: XCTestCase {
 
   func testScalar() throws {
     let parser = Yaml.Parser()
-    try parser.parse(path: Fixtures.path(for: "scalar.yaml", sub: .yaml))
+    try parser.parse(path: Fixtures.path(for: "scalar.yaml", sub: .yamlGood))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "scalar", sub: .yaml)
   }
 
+  func testMutlipleDocuments() throws {
+    let parser = Yaml.Parser()
+    try parser.parse(path: Fixtures.path(for: "documents.yaml", sub: .yamlGood))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "documents", sub: .yaml)
+  }
+
   func testDirectoryInput() {
     do {
-      _ = try Yaml.Parser().parse(path: Fixtures.directory(sub: .yaml))
-      XCTFail("Code did parse directory successfully while it was expected to fail requiring that the input be a file")
-    } catch Yaml.ParserError.directory {
-      // That's the expected exception we want to happen
+      let parser = Yaml.Parser()
+      try parser.parse(path: Fixtures.directory(sub: .yamlGood))
+
+      let result = parser.stencilContext()
+      XCTDiffContexts(result, expected: "all", sub: .yaml)
     } catch let error {
       XCTFail("Unexpected error occured while parsing: \(error)")
     }
@@ -63,7 +72,7 @@ class YamlTests: XCTestCase {
 
   func testFileWithBadSyntax() {
     do {
-      _ = try Yaml.Parser().parse(path: Fixtures.path(for: "bad-syntax.yaml", sub: .yaml))
+      _ = try Yaml.Parser().parse(path: Fixtures.path(for: "syntax.yaml", sub: .yamlBad))
       XCTFail("Code did parse file successfully while it was expected to fail for bad syntax")
     } catch Yaml.ParserError.invalidFile {
       // That's the expected exception we want to happen

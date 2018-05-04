@@ -1,1 +1,5 @@
-root_scalar: value1
+files:
+- documents:
+  - data: value1
+  name: scalar
+  path: scalar.yaml

@@ -1,3 +1,7 @@
-root_sequence:
-- value1
-- value2
+files:
+- documents:
+  - data:
+    - value1
+    - value2
+  name: sequence
+  path: sequence.yaml

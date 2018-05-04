@@ -158,6 +158,8 @@ class Fixtures {
     case strings = "Strings"
     case xcassets = "XCAssets"
     case yaml = "Yaml"
+    case yamlBad = "Yaml/bad"
+    case yamlGood = "Yaml/good"
   }
 
   private static let testBundle = Bundle(for: Fixtures.self)

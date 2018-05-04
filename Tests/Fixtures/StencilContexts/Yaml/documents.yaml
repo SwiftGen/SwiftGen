@@ -1,0 +1,11 @@
+files:
+- documents:
+  - data:
+    - Mark McGwire
+    - Sammy Sosa
+    - Ken Griffey
+  - data:
+    - Chicago Cubs
+    - St Louis Cardinals
+  name: documents
+  path: documents.yaml
