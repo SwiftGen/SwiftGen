@@ -42,6 +42,7 @@
 		80F8014301BF496E905CA2CF /* Pods_SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16DF0A0F13A222BCA7B60102 /* Pods_SwiftGenKit.framework */; };
 		9A35A2477F800A42E6A654C8 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5D3E5746871F59AC9CA625 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */; };
 		C580E102337633038E486585 /* Pods_swiftgen_Templates_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8031AB7FD88D5F010179EDC /* Pods_swiftgen_Templates_UnitTests.framework */; };
+		DD40284A209E56B50045FC76 /* config-with-multi-outputs.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */; };
 		DD428DFF1FC50F56001649D6 /* SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */; };
 		DD428E001FC50F56001649D6 /* SwiftGenKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DD428E191FC50FBF001649D6 /* FontsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E071FC50FBF001649D6 /* FontsParser.swift */; };
@@ -280,6 +281,7 @@
 		C00832FEC9F060E93DAD1228 /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8876ECE7B9852963F6B5 /* Pods_swiftgen_SwiftGen_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen_SwiftGen_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D662CF56C834C4E7CEA32364 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-with-multi-outputs.yml"; sourceTree = "<group>"; };
 		DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftGenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD428E071FC50FBF001649D6 /* FontsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsParser.swift; sourceTree = "<group>"; };
 		DD428E091FC50FBF001649D6 /* ColorsCLRFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsCLRFileParser.swift; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 			children = (
 				093405071F81539100187787 /* config-with-params.yml */,
 				093405111F87AA6500187787 /* config-with-multi-entries.yml */,
+				DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */,
 				37DC60301F98D1DA00B7B31C /* config-absolute-paths-direct.yml */,
 				37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */,
 				37DC60311F98D1DA00B7B31C /* config-missing-paths.yml */,
@@ -904,6 +907,7 @@
 				37DC60341F98D7DD00B7B31C /* config-invalid-output.yml in Resources */,
 				093405131F87AA6A00187787 /* config-with-multi-entries.yml in Resources */,
 				37DC60391F98D7DD00B7B31C /* config-missing-template.yml in Resources */,
+				DD40284A209E56B50045FC76 /* config-with-multi-outputs.yml in Resources */,
 				37DC60351F98D7DD00B7B31C /* config-invalid-structure.yml in Resources */,
 				093405101F815B2500187787 /* config-with-params.yml in Resources */,
 				37DC60361F98D7DD00B7B31C /* config-invalid-template.yml in Resources */,

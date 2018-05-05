@@ -102,6 +102,37 @@ class ConfigReadTests: XCTestCase {
     }
   }
 
+  func testReadConfigWithMultiOutputs() throws {
+    guard let path = Bundle(for: type(of: self)).path(forResource: "config-with-multi-outputs", ofType: "yml") else {
+      fatalError("Fixture not found")
+    }
+    let file = Path(path)
+    do {
+      let config = try Config(file: file)
+
+      XCTAssertEqual(config.inputDir, "Fixtures/")
+      XCTAssertEqual(config.outputDir, "Generated/")
+
+      XCTAssertEqual(Array(config.commands.keys), ["ib"])
+
+      // ib
+      guard let ibEntries = config.commands["ib"] else {
+        return XCTFail("Expected a config entry for ib")
+      }
+      XCTAssertEqual(ibEntries.count, 1)
+
+      XCTAssertEqual(ibEntries[0].paths, ["IB-iOS"])
+      XCTAssertEqualDict(ibEntries[0].parameters, [:])
+      XCTAssertEqual(ibEntries[0].outputs.count, 2)
+      XCTAssertEqual(ibEntries[0].outputs[0].template, .name("scenes-swift4"))
+      XCTAssertEqual(ibEntries[0].outputs[0].output, "ib-scenes.swift")
+      XCTAssertEqual(ibEntries[0].outputs[1].template, .name("segues-swift4"))
+      XCTAssertEqual(ibEntries[0].outputs[1].output, "ib-segues.swift")
+    } catch let error {
+      XCTFail("Error: \(error)")
+    }
+  }
+
   func testReadInvalidConfigThrows() {
     let badConfigs = [
       "config-missing-paths": "Missing entry for key strings.paths.",

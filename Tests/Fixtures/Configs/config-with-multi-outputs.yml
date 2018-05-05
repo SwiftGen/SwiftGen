@@ -1,0 +1,9 @@
+input_dir: Fixtures/
+output_dir: Generated/
+ib:
+  paths: IB-iOS
+  outputs:
+    - templateName: scenes-swift4
+      output: ib-scenes.swift
+    - templateName: segues-swift4
+      output: ib-segues.swift
