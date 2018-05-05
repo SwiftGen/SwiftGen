@@ -117,7 +117,7 @@ class ConfigLintTests: XCTestCase {
   func testLintMissingOutput() {
     _testLint(
       fixture: "config-missing-output",
-      expectedLogs: [(.error, "Missing entry for key strings.output.")],
+      expectedLogs: [(.error, "Missing entry for key strings.outputs.")],
       assertionMessage: "Linter should warn when 'output' key is missing"
     )
   }

@@ -31,13 +31,18 @@ class ConfigReadTests: XCTestCase {
       }
 
       XCTAssertEqual(entry.paths, ["Sources1/Folder"])
-      XCTAssertEqual(entry.template, .name("structured-swift3"))
       XCTAssertEqualDict(entry.parameters, [
         "foo": 5,
         "bar": ["bar1": 1, "bar2": 2, "bar3": [3, 4, ["bar3a": 50]]],
         "baz": ["hello", "world"]
       ])
-      XCTAssertEqual(entry.output, "strings.swift")
+
+      XCTAssertEqual(entry.outputs.count, 1)
+      guard let output = entry.outputs.first else {
+        return XCTFail("Expected a single strings entry output")
+      }
+      XCTAssertEqual(output.template, .name("structured-swift3"))
+      XCTAssertEqual(output.output, "strings.swift")
     } catch let error {
       XCTFail("Error: \(error)")
     }
@@ -63,9 +68,10 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(stringsEntries.count, 1)
 
       XCTAssertEqual(stringsEntries[0].paths, ["Strings/Localizable.strings"])
-      XCTAssertEqual(stringsEntries[0].template, .path("templates/custom-swift3"))
-      XCTAssertEqual(stringsEntries[0].output, "strings.swift")
       XCTAssertEqualDict(stringsEntries[0].parameters, ["enumName": "Loc"])
+      XCTAssertEqual(stringsEntries[0].outputs.count, 1)
+      XCTAssertEqual(stringsEntries[0].outputs[0].template, .path("templates/custom-swift3"))
+      XCTAssertEqual(stringsEntries[0].outputs[0].output, "strings.swift")
 
       // xcassets
       guard let xcassetsEntries = config.commands["xcassets"] else {
@@ -75,19 +81,22 @@ class ConfigReadTests: XCTestCase {
 
       // > xcassets[0]
       XCTAssertEqual(xcassetsEntries[0].paths, ["XCAssets/Colors.xcassets"])
-      XCTAssertEqual(xcassetsEntries[0].template, .name("swift3"))
-      XCTAssertEqual(xcassetsEntries[0].output, "assets-colors.swift")
       XCTAssertEqualDict(xcassetsEntries[0].parameters, [:])
+      XCTAssertEqual(xcassetsEntries[0].outputs.count, 1)
+      XCTAssertEqual(xcassetsEntries[0].outputs[0].template, .name("swift3"))
+      XCTAssertEqual(xcassetsEntries[0].outputs[0].output, "assets-colors.swift")
       // > xcassets[1]
       XCTAssertEqual(xcassetsEntries[1].paths, ["XCAssets/Images.xcassets"])
-      XCTAssertEqual(xcassetsEntries[1].template, .name("swift3"))
-      XCTAssertEqual(xcassetsEntries[1].output, "assets-images.swift")
       XCTAssertEqualDict(xcassetsEntries[1].parameters, ["enumName": "Pics"])
+      XCTAssertEqual(xcassetsEntries[1].outputs.count, 1)
+      XCTAssertEqual(xcassetsEntries[1].outputs[0].template, .name("swift3"))
+      XCTAssertEqual(xcassetsEntries[1].outputs[0].output, "assets-images.swift")
       // > xcassets[2]
       XCTAssertEqual(xcassetsEntries[2].paths, ["XCAssets/Colors.xcassets", "XCAssets/Images.xcassets"])
-      XCTAssertEqual(xcassetsEntries[2].template, .name("swift4"))
-      XCTAssertEqual(xcassetsEntries[2].output, "assets-all.swift")
       XCTAssertEqualDict(xcassetsEntries[2].parameters, [:])
+      XCTAssertEqual(xcassetsEntries[2].outputs.count, 1)
+      XCTAssertEqual(xcassetsEntries[2].outputs[0].template, .name("swift4"))
+      XCTAssertEqual(xcassetsEntries[2].outputs[0].output, "assets-all.swift")
     } catch let error {
       XCTFail("Error: \(error)")
     }
@@ -105,7 +114,7 @@ class ConfigReadTests: XCTestCase {
         You need to choose EITHER a named template OR a template path. \
         Found name 'template' and path 'template.swift'
         """,
-      "config-missing-output": "Missing entry for key strings.output.",
+      "config-missing-output": "Missing entry for key strings.outputs.",
       "config-invalid-structure": "Wrong type for key strings.paths: expected Path or array of Paths, got Array<Any>.",
       "config-invalid-template": "Wrong type for key strings.templateName: expected String, got Array<Any>.",
       "config-invalid-output": "Wrong type for key strings.output: expected String, got Array<Any>."

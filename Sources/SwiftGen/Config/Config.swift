@@ -59,17 +59,21 @@ extension Config {
       let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
       logger(.info, "> \(entriesCount) for command \(cmd):")
       for var entry in entries {
-          entry.makeRelativeTo(inputDir: self.inputDir, outputDir: self.outputDir)
-          for inputPath in entry.paths where inputPath.isAbsolute {
-            logger(.warning, "\(cmd).paths: \(inputPath) is an absolute path.")
-          }
-          if case TemplateRef.path(let templateRef) = entry.template, templateRef.isAbsolute {
+        entry.makeRelativeTo(inputDir: self.inputDir, outputDir: self.outputDir)
+        for inputPath in entry.paths where inputPath.isAbsolute {
+          logger(.warning, "\(cmd).paths: \(inputPath) is an absolute path.")
+        }
+        for entryOutput in entry.outputs {
+          if case TemplateRef.path(let templateRef) = entryOutput.template, templateRef.isAbsolute {
             logger(.warning, "\(cmd).templatePath: \(templateRef) is an absolute path.")
           }
-          if entry.output.isAbsolute {
-            logger(.warning, "\(cmd).output: \(entry.output) is an absolute path.")
+          if entryOutput.output.isAbsolute {
+            logger(.warning, "\(cmd).output: \(entryOutput.output) is an absolute path.")
           }
-          logger(.info, "  $ " + entry.commandLine(forCommand: cmd))
+        }
+        for item in entry.commandLine(forCommand: cmd) {
+          logMessage(.info, " $ \(item)")
+        }
       }
     }
   }

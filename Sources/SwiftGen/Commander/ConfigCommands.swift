@@ -11,6 +11,14 @@ import PathKit
 import StencilSwiftKit
 import SwiftGenKit
 
+extension ConfigEntryOutput {
+  func checkPaths() throws {
+    guard self.output.parent().exists else {
+      throw Config.Error.pathNotFound(path: self.output.parent())
+    }
+  }
+}
+
 extension ConfigEntry {
   func checkPaths() throws {
     for inputPath in self.paths {
@@ -18,8 +26,8 @@ extension ConfigEntry {
         throw Config.Error.pathNotFound(path: inputPath)
       }
     }
-    guard self.output.parent().exists else {
-      throw Config.Error.pathNotFound(path: self.output.parent())
+    for output in outputs {
+      try output.checkPaths()
     }
   }
 
@@ -28,15 +36,18 @@ extension ConfigEntry {
       logMessage(.warning, msg)
     }
     try parser.parse(paths: self.paths)
-    let templateRealPath = try self.template.resolvePath(forSubcommand: parserCommand.name)
-    let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
-                                            environment: stencilSwiftEnvironment())
-
     let context = parser.stencilContext()
     let enriched = try StencilContext.enrich(context: context, parameters: self.parameters)
-    let rendered = try template.render(enriched)
-    let output = OutputDestination.file(self.output)
-    try output.write(content: rendered, onlyIfChanged: true)
+
+    for entryOutput in outputs {
+      let templateRealPath = try entryOutput.template.resolvePath(forSubcommand: parserCommand.name)
+      let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
+                                              environment: stencilSwiftEnvironment())
+
+      let rendered = try template.render(enriched)
+      let output = OutputDestination.file(entryOutput.output)
+      try output.write(content: rendered, onlyIfChanged: true)
+    }
   }
 }
 
@@ -85,7 +96,9 @@ let configRunCommand = command(
           }
           entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
           if verbose {
-            logMessage(.info, " $ " + entry.commandLine(forCommand: cmd))
+            for item in entry.commandLine(forCommand: cmd) {
+              logMessage(.info, " $ \(item)")
+            }
           }
           try entry.checkPaths()
           try entry.run(parserCommand: parserCmd)
