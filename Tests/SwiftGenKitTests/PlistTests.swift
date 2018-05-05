@@ -34,6 +34,14 @@ class PlistTests: XCTestCase {
     XCTDiffContexts(result, expected: "dictionary", sub: .plist)
   }
 
+  func testInfo() throws {
+    let parser = Plist.Parser()
+    try parser.parse(path: Fixtures.path(for: "Info.plist", sub: .plistGood))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "info", sub: .plist)
+  }
+
   func testDirectoryInput() {
     do {
       let parser = Plist.Parser()

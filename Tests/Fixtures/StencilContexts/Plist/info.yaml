@@ -125,30 +125,3 @@ files:
       type: "Dictionary"
   name: "Info"
   path: "Info.plist"
-- documents:
-  - data:
-    - "value1"
-    - "value2"
-    metadata:
-      element:
-        type: "String"
-      type: "Array"
-  name: "array"
-  path: "array.plist"
-- documents:
-  - data:
-      key1: "value1"
-      key2:
-        nestedKey2: "nestedValue2"
-    metadata:
-      properties:
-      - name: "key1"
-        type: "String"
-      - name: "key2"
-        properties:
-        - name: "nestedKey2"
-          type: "String"
-        type: "Dictionary"
-      type: "Dictionary"
-  name: "dictionary"
-  path: "dictionary.plist"

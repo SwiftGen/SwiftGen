@@ -1,11 +1,11 @@
 files:
 - documents:
   - data:
-    - value1
-    - value2
+    - "value1"
+    - "value2"
     metadata:
       element:
-        type: String
-      type: Array
-  name: array
-  path: array.plist
+        type: "String"
+      type: "Array"
+  name: "array"
+  path: "array.plist"

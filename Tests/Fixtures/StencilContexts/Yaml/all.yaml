@@ -1,77 +1,77 @@
 files:
 - documents:
   - data:
-    - Mark McGwire
-    - Sammy Sosa
-    - Ken Griffey
+    - "Mark McGwire"
+    - "Sammy Sosa"
+    - "Ken Griffey"
     metadata:
       element:
-        type: String
-      type: Array
+        type: "String"
+      type: "Array"
   - data:
-    - Chicago Cubs
-    - St Louis Cardinals
+    - "Chicago Cubs"
+    - "St Louis Cardinals"
     metadata:
       element:
-        type: String
-      type: Array
-  name: documents
-  path: documents.yaml
+        type: "String"
+      type: "Array"
+  name: "documents"
+  path: "documents.yaml"
 - documents:
   - data:
-      key1: value1
-      key2: 2
+      key1: "value1"
+      key2: "2"
       key3:
         nestedKey3:
-        - 1
-        - 2
-        - 3
+        - "1"
+        - "2"
+        - "3"
     metadata:
       properties:
-      - name: key1
-        type: String
-      - name: key2
-        type: String
-      - name: key3
+      - name: "key1"
+        type: "String"
+      - name: "key2"
+        type: "String"
+      - name: "key3"
         properties:
         - element:
-            type: String
-          name: nestedKey3
-          type: Array
-        type: Dictionary
-      type: Dictionary
-  name: json
-  path: json.json
+            type: "String"
+          name: "nestedKey3"
+          type: "Array"
+        type: "Dictionary"
+      type: "Dictionary"
+  name: "json"
+  path: "json.json"
 - documents:
   - data:
-      key1: value1
+      key1: "value1"
       key2:
-        nestedKey2: nestedValue2
+        nestedKey2: "nestedValue2"
     metadata:
       properties:
-      - name: key1
-        type: String
-      - name: key2
+      - name: "key1"
+        type: "String"
+      - name: "key2"
         properties:
-        - name: nestedKey2
-          type: String
-        type: Dictionary
-      type: Dictionary
-  name: mapping
-  path: mapping.yaml
+        - name: "nestedKey2"
+          type: "String"
+        type: "Dictionary"
+      type: "Dictionary"
+  name: "mapping"
+  path: "mapping.yaml"
 - documents:
-  - data: value1
+  - data: "value1"
     metadata:
-      type: String
-  name: scalar
-  path: scalar.yaml
+      type: "String"
+  name: "scalar"
+  path: "scalar.yaml"
 - documents:
   - data:
-    - value1
-    - value2
+    - "value1"
+    - "value2"
     metadata:
       element:
-        type: String
-      type: Array
-  name: sequence
-  path: sequence.yaml
+        type: "String"
+      type: "Array"
+  name: "sequence"
+  path: "sequence.yaml"

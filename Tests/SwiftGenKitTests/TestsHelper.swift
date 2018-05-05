@@ -96,13 +96,13 @@ func diff(_ result: [String: Any], _ expected: [String: Any], path: String = "")
 func compare(_ lhs: Any, _ rhs: Any, key: String, path: String) -> String? {
   let keyPath = (path.isEmpty) ? key : "\(path).\(key)"
 
-  if let lhs = lhs as? Bool, let rhs = rhs as? Bool, lhs == rhs {
+  if let lhs = convertToNumber(lhs), let rhs = convertToNumber(rhs), lhs == rhs {
     return nil
-  } else if let lhs = lhs as? Int, let rhs = rhs as? Int, lhs == rhs {
+  } else if let lhs = convertToString(lhs), let rhs = convertToString(rhs), lhs == rhs {
     return nil
-  } else if let lhs = lhs as? Float, let rhs = rhs as? Float, lhs == rhs {
+  } else if let lhs = lhs as? Data, let rhs = rhs as? Data, lhs == rhs {
     return nil
-  } else if let lhs = lhs as? String, let rhs = rhs as? String, lhs == rhs {
+  } else if let lhs = lhs as? Date, let rhs = rhs as? Date, lhs == rhs {
     return nil
   } else if let lhs = lhs as? [Any], let rhs = rhs as? [Any], lhs.count == rhs.count {
     for (lhs, rhs) in zip(lhs, rhs) {
@@ -112,6 +112,8 @@ func compare(_ lhs: Any, _ rhs: Any, key: String, path: String) -> String? {
     }
   } else if let lhs = lhs as? [String: Any], let rhs = rhs as? [String: Any] {
     return diff(lhs, rhs, path: "\(keyPath)")
+  } else if let lhs = lhs as? String, lhs == "\(rhs)" {
+    return nil
   } else {
     return [
       "\(msgColor)Values do not match for '\(keyPath)':\(reset)",
@@ -124,6 +126,30 @@ func compare(_ lhs: Any, _ rhs: Any, key: String, path: String) -> String? {
   }
 
   return nil
+}
+
+func convertToNumber(_ value: Any) -> NSNumber? {
+  switch value {
+  case let value as Bool:
+    return value as NSNumber
+  case let value as Int:
+    return value as NSNumber
+  case let value as Double:
+    return value as NSNumber
+  default:
+    return nil
+  }
+}
+
+func convertToString(_ value: Any) -> String? {
+  switch value {
+  case let value as String:
+    return value
+  case is NSNull:
+    return ""
+  default:
+    return nil
+  }
 }
 
 func XCTDiffContexts(_ result: [String: Any],
@@ -159,9 +185,9 @@ class Fixtures {
     case plistGood = "Plist/good"
     case strings = "Strings"
     case xcassets = "XCAssets"
-    case yaml = "Yaml"
-    case yamlBad = "Yaml/bad"
-    case yamlGood = "Yaml/good"
+    case yaml = "YAML"
+    case yamlBad = "YAML/bad"
+    case yamlGood = "YAML/good"
   }
 
   private static let testBundle = Bundle(for: Fixtures.self)

@@ -7,26 +7,6 @@
 //
 
 import Foundation
-import Yams
-
-/*
- These extensions are needed otherwise Yams can't serialize Plist files (which
- internally still use Objective-C types)
- */
-
-extension NSDictionary: NodeRepresentable {
-  public func represented() throws -> Node {
-    guard let dictionary = self as? [AnyHashable: Any] else { fatalError("bla") }
-    return try dictionary.represented()
-  }
-}
-
-extension NSArray: NodeRepresentable {
-  public func represented() throws -> Node {
-    guard let array = self as? [Any] else { fatalError("bla") }
-    return try array.represented()
-  }
-}
 
 /*
  - `files`: `Array` — List of files
