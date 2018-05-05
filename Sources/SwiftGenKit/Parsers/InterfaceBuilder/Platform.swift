@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension Storyboards {
+extension InterfaceBuilder {
   enum Platform: String {
     case tvOS = "AppleTV"
     case iOS = "iOS.CocoaTouch"

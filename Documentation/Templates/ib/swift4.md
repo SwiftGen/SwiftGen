@@ -2,14 +2,14 @@
 
 | Name      | Description       |
 | --------- | ----------------- |
-| File name | storyboards/swift3.stencil |
-| Invocation example | `swiftgen storyboards -t swift3 …` |
-| Language | Swift 3 |
+| File name | ib/swift4.stencil |
+| Invocation example | `swiftgen ib -t swift4 …` |
+| Language | Swift 4 |
 | Author | Olivier Halligon |
 
 ## When to use it
 
-- When you need to generate *Swift 3* code
+- When you need to generate *Swift 4* code
 - The generated code supports both UIKit platforms (iOS, tvOS and watchOS) and AppKit platform (macOS)
 
 ## Customization
@@ -51,7 +51,7 @@ enum StoryboardSegue {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Storyboards-iOS/swift3-context-all.swift)
+[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/IB-iOS/swift4-context-all.swift)
 
 ## Usage example
 

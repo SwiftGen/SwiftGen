@@ -8,7 +8,7 @@ import Foundation
 import Kanna
 import PathKit
 
-public enum Storyboards {
+public enum InterfaceBuilder {
   public enum ParserError: Error, CustomStringConvertible {
     case invalidFile(path: Path, reason: String)
     case unsupportedTargetRuntime(target: String)

@@ -12,7 +12,7 @@ If you use the `--templatePath` (or `-p`) option, you'll need to specify the **f
 
 ### Using a name
 
-When you use the `--template` (or `-t`) option, you only specify a **template name**. SwiftGen then searches a matching template using the following rules (where `<subcommand>` is one of `colors`, `xcassets`, `storyboards` or `strings` depending on the subcommand you invoke):
+When you use the `--template` (or `-t`) option, you only specify a **template name**. SwiftGen then searches a matching template using the following rules (where `<subcommand>` is one of `colors`, `xcassets`, `ib` or `strings` depending on the subcommand you invoke):
 
 * It searches for a file named `<name>.stencil` in `~/Library/Application Support/SwiftGen/templates/<subcommand>/`, which is supposed to contain your own custom templates for that particular subcommand.
 * If it does not find one, it searches for a file named `<name>.stencil` in `<installdir>/share/swiftgen/templates/<subcommand>` which contains the templates bundled with SwiftGen for that particular subcommand.
@@ -30,7 +30,7 @@ colors:
   bundled:
    - swift3
    - swift4
-storyboards:
+ib:
   custom:
    - mytemplate
   bundled:

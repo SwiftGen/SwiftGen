@@ -7,7 +7,7 @@
 import StencilSwiftKit
 import XCTest
 
-class StoryboardsMacOSTests: XCTestCase {
+class InterfaceBuilderMacOSTests: XCTestCase {
   enum Contexts {
     static let all = ["empty", "all"]
   }
@@ -60,16 +60,16 @@ class StoryboardsMacOSTests: XCTestCase {
   func testSwift3() {
     test(template: "swift3",
          contextNames: Contexts.all,
-         directory: .storyboards,
-         resourceDirectory: .storyboardsMacOS,
+         directory: .interfaceBuilder,
+         resourceDirectory: .interfaceBuilderMacOS,
          contextVariations: variations)
   }
 
   func testSwift4() {
     test(template: "swift4",
          contextNames: Contexts.all,
-         directory: .storyboards,
-         resourceDirectory: .storyboardsMacOS,
+         directory: .interfaceBuilder,
+         resourceDirectory: .interfaceBuilderMacOS,
          contextVariations: variations)
   }
 }

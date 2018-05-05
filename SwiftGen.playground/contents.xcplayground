@@ -3,7 +3,7 @@
     <pages>
         <page name='Colors-Demo'/>
         <page name='Fonts-Demo'/>
-        <page name='Storyboards-Demo'/>
+        <page name='InterfaceBuilder-Demo'/>
         <page name='Strings-Demo'/>
         <page name='XCAssets-Demo'/>
     </pages>

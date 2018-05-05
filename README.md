@@ -21,7 +21,7 @@ SwiftGen is a tool to auto-generate Swift code for resources of your projects, t
       <li><a href="#asset-catalog">Assets Catalogs</a>
       <li><a href="#colors">Colors</a>
       <li><a href="#fonts">Fonts</a>
-      <li><a href="#storyboards">Storyboards and their Scenes</a>
+      <li><a href="#interface-builder">Interface Builder files</a>
       <li><a href="#strings"><tt>Localizable.strings</tt></a>
     </ul>
   </td>
@@ -142,7 +142,7 @@ The tool is provided as a unique `swiftgen` binary command-line, with the follow
 
 * `swiftgen colors [OPTIONS] FILE1 …`
 * `swiftgen fonts [OPTIONS] DIR1 …`
-* `swiftgen storyboards [OPTIONS] DIR1 …`
+* `swiftgen ib [OPTIONS] DIR1 …`
 * `swiftgen strings [OPTIONS] FILE1 …`
 * `swiftgen xcassets [OPTIONS] CATALOG1 …`
 
@@ -189,7 +189,7 @@ SwiftGen is based on templates (it uses [Stencil](https://github.com/kylef/Stenc
 
 ### Bundled templates vs. Custom ones
 
-SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `fonts`, `storyboards`, `strings`, `xcassets`), which will fit most needs. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs. Simply either use the `-t` / `--template` option to specify the name of the template to use, or store them somewhere else (like in your project repository) and use `-p` / `--templatePath` to specify a full path.
+SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `fonts`, `ib`, `strings`, `xcassets`), which will fit most needs. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs. Simply either use the `-t` / `--template` option to specify the name of the template to use, or store them somewhere else (like in your project repository) and use `-p` / `--templatePath` to specify a full path.
 
 💡 You can use the `swiftgen templates list` command to list all the available templates (both custom and bundled templates) for each subcommand, list the template content and dupliate them to create your own.
 
@@ -373,10 +373,10 @@ let sameDisplayRegular = FontFamily.SFNSDisplay.regular.font(size: 20.0)
 let sameDingbats = FontFamily.ZapfDingbats.regular.font(size: 20.0)
 ```
 
-## Storyboards
+## Interface Builder
 
 ```sh
-swiftgen storyboards -t swift3 /dir/to/search/for/storyboards
+swiftgen ib -t swift3 /dir/to/search/for/storyboards
 ```
 
 This will generate an `enum` for each of your `NSStoryboard`/`UIStoryboard`, with one `case` per storyboard scene.

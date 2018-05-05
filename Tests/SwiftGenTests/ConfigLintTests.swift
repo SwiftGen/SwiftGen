@@ -45,7 +45,7 @@ class ConfigLintTests: XCTestCase {
   }
 
   func testLint_AbsolutePathDirect() {
-    let commands = ["strings", "fonts", "storyboards", "colors", "xcassets"]
+    let commands = ["strings", "fonts", "ib", "colors", "xcassets"]
     let logs = commands.flatMap { (cmd: String) -> [(LogLevel, String)] in
       [
         (.warning, "\(cmd).paths: /\(cmd)/paths is an absolute path."),
@@ -62,7 +62,7 @@ class ConfigLintTests: XCTestCase {
   }
 
   func testLintAbsolutePathPrefix() {
-    let commands = ["strings", "fonts", "storyboards", "colors", "xcassets"]
+    let commands = ["strings", "fonts", "ib", "colors", "xcassets"]
     let logs = commands.flatMap { (cmd: String) -> [(LogLevel, String)] in
       [
         (.warning, "\(cmd).paths: /input/\(cmd)/paths is an absolute path."),

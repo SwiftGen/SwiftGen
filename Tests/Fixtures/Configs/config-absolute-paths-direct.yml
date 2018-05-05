@@ -8,10 +8,10 @@ fonts:
   templatePath: /fonts/templates.stencil
   output: /fonts/out.swift
 
-storyboards:
-  paths: /storyboards/paths
-  templatePath: /storyboards/templates.stencil
-  output: /storyboards/out.swift
+ib:
+  paths: /ib/paths
+  templatePath: /ib/templates.stencil
+  output: /ib/out.swift
 
 strings:
   paths: /strings/paths
