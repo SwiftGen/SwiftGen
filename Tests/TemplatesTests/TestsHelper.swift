@@ -72,6 +72,7 @@ class Fixtures {
     case interfaceBuilder = "IB"
     case interfaceBuilderiOS = "IB-iOS"
     case interfaceBuilderMacOS = "IB-macOS"
+    case plist = "Plist"
     case strings = "Strings"
     case xcassets = "XCAssets"
     case yaml = "YAML"

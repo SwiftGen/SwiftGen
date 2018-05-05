@@ -1,0 +1,97 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+
+{% if files %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set documentPrefix %}{{param.documentName|default:"Document"}}{% endset %}
+import Foundation
+
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+
+private func arrayFromPlist<T>(at path: String) -> [T] {
+  let bundle = Bundle(for: BundleToken.self)
+  guard let url = bundle.url(forResource: path, withExtension: nil),
+    let data = NSArray(contentsOf: url) as? [T] else {
+    fatalError("Unable to load PLIST at path: \(path)")
+  }
+  return data
+}
+
+private struct PlistDocument {
+  let data: [String: Any]
+
+  init(path: String) {
+    let bundle = Bundle(for: BundleToken.self)
+    guard let url = bundle.url(forResource: path, withExtension: nil),
+      let data = NSDictionary(contentsOf: url) as? [String: Any] else {
+        fatalError("Unable to load PLIST at path: \(path)")
+    }
+    self.data = data
+  }
+
+  subscript<T>(key: String) -> T {
+    guard let result = data[key] as? T else {
+      fatalError("Property '\(key)' is not of type \(T.self)")
+    }
+    return result
+  }
+}
+{% macro fileBlock file %}
+  {% if file.documents.count > 1 %}
+  {% for document in file.documents %}
+  {% set documentName %}{{documentPrefix}}{{forloop.counter}}{% endset %}
+  {{accessModifier}} enum {{documentName|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+    {% filter indent:2 %}{% call documentBlock file document %}{% endfilter %}
+  }
+  {% endfor %}
+  {% else %}
+  {% call documentBlock file file.documents.first %}
+  {% endif %}
+{% endmacro %}
+{% macro documentBlock file document %}
+  {% set rootType %}{% call typeBlock document.metadata %}{% endset %}
+  {% if document.metadata.type == "Array" %}
+  {{accessModifier}} static let items: {{rootType}} = arrayFromPlist(at: "{{file.path}}")
+  {% elif document.metadata.type == "Dictionary" %}
+  private static let _document = PlistDocument(path: "{{file.path}}")
+
+  {% for property in document.metadata.properties %}
+  {{accessModifier}} {% call propertyBlock property %}
+  {% endfor %}
+  {% else %}
+  // Unsupported root type `{{rootType}}`
+  {% endif %}
+{% endmacro %}
+{% macro typeBlock metadata %}{% filter removeNewlines:"leading" %}
+  {% if metadata.type == "Array" %}
+    [{% call typeBlock metadata.element %}]
+  {% elif metadata.type == "Dictionary" %}
+    [String: Any]
+  {% else %}
+    {{metadata.type}}
+  {% endif %}
+{% endfilter %}{% endmacro %}
+{% macro propertyBlock property %}{% filter removeNewlines:"leading" %}
+  {% set propertyName %}{{property.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% endset %}
+  {% set propertyType %}{% call typeBlock property %}{% endset %}
+  static let {{propertyName}}: {{propertyType}} = _document["{{property.name}}"]
+{% endfilter %}{% endmacro %}
+
+// swiftlint:disable identifier_name line_length type_body_length
+{{accessModifier}} enum {{param.enumName|default:"Plist"}} {
+  {% if files.count > 1 %}
+  {% for file in files %}
+  {{accessModifier}} enum {{file.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+    {% filter indent:2 %}{% call fileBlock file %}{% endfilter %}
+  }
+  {% endfor %}
+  {% else %}
+  {% call fileBlock files.first %}
+  {% endif %}
+}
+// swiftlint:enable identifier_name line_length type_body_length
+
+private final class BundleToken {}
+{% else %}
+// No files found
+{% endif %}
