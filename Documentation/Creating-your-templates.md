@@ -36,6 +36,16 @@ ib:
   bundled:
    - swift3
    - swift4
+json:
+  custom:
+  bundled:
+   - swift3
+   - swift4
+plist:
+  custom:
+  bundled:
+   - swift3
+   - swift4
 strings:
   custom:
    - mycustomtemplate
@@ -49,6 +59,9 @@ xcassets:
   bundled:
    - swift3
    - swift4
+yaml:
+  custom:
+  bundled:
 ```
 
 ## Printing a template, creating a new template
