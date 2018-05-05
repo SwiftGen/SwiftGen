@@ -15,19 +15,22 @@ input_dir: Sources/Resources
 output_dir: Sources/Generated/
 strings:
   paths: Base.lproj/Localizable.strings
-  templateName: structured-swift3
-  output: L10n-Constants.swift
+  outputs:
+    - templateName: structured-swift3
+      output: L10n-Constants.swift
 xcassets:
   - paths: Logos.xcassets
-    templateName: swift3
-    output: Logos-Constants.swift
     params:
       enumName: Logos
+    outputs:
+      - templateName: swift3
+        output: Logos-Constants.swift
   - paths:
       - Colors.xcassets
       - Images.xcassets
-    templatePath: customswift3
-    output: Assets-Constants.swift
+    outputs:
+      - templatePath: customswift3
+        output: Assets-Constants.swift
 ```
 
 ℹ️ All _relative_ paths specified in the configuration file (`input_dir`, `output_dir`, `paths`, `templatePath`, `output`) are relative to the location of the _configuration file_ itself.
@@ -54,14 +57,23 @@ Each key corresponding to a SwiftGen subcommands (`colors`, `fonts`, `storyboard
 | Subkey | Type | Description |
 |--------|------|-------------|
 | `paths` | Path or Array of Paths | The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `Localizable.strings` file for the `strings` command, etc). |
-| `templateName` | String | The name of the template to use. If you provide a value for this, you shouldn't also provide a value for `templatePath`. |
-| `templatePath` | Path | The path to the template to use. If you provide a value for this, you shouldn't also provide a value for `templateName`. |
-| `output` | Path | The path of the output file to generate. _(Note: Any intermediate directory up to this file must already exist.)_ |
 | `params` | Dictionary | Any optional parameter you want to pass to the template (similarly to `--param` in the CLI). |
+| `outputs` | Array | A list of output descriptions, composed of a template and a file output. |
+| `templateName` | String | ** Deprecated** The name of the template to use. If you provide a value for this, you shouldn't also provide a value for `templatePath`. |
+| `templatePath` | Path | ** Deprecated** The path to the template to use. If you provide a value for this, you shouldn't also provide a value for `templateName`. |
+| `output` | Path | ** Deprecated** The path of the output file to generate. _(Note: Any intermediate directory up to this file must already exist.)_ |
+
+The `outputs` parameter accepts either a dictionary, or an array of dictionaries, with the keys described below. Each such "output" will take the input files, and use the output template to generate a file at the given output path. This allows you to generate multiple outputs for the same input files (which will only be parsed once).
+
+| Subkey | Type | Description |
+|--------|------|-------------|
+| `templateName` | String | ** Deprecated** The name of the template to use. If you provide a value for this, you shouldn't also provide a value for `templatePath`. |
+| `templatePath` | Path | ** Deprecated** The path to the template to use. If you provide a value for this, you shouldn't also provide a value for `templateName`. |
+| `output` | Path | ** Deprecated** The path of the output file to generate. _(Note: Any intermediate directory up to this file must already exist.)_ |
 
 Similarly to when you invoke each subcommand of SwiftGen manually:
 
-* `paths` and `output` are mandatory.
+* `paths` and `outputs` are mandatory.
 * You must specify either `templateName` or `templatePath`, but not both, nor neither.
 * `params` is optional.
 
