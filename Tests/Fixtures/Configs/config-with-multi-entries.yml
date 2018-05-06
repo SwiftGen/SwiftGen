@@ -1,21 +1,25 @@
 input_dir: Fixtures/
 output_dir: Generated/
 strings:
-  paths: Strings/Localizable.strings
-  templatePath: templates/custom-swift3
-  output: strings.swift
-  params:
-    enumName: Loc
+  inputs: Strings/Localizable.strings
+  outputs:
+    templatePath: templates/custom-swift3
+    output: strings.swift
+    params:
+      enumName: Loc
 xcassets:
-  - paths: XCAssets/Colors.xcassets
-    templateName: swift3
-    output: assets-colors.swift
-  - paths: XCAssets/Images.xcassets
-    templateName: swift3
-    output: assets-images.swift
-    params: { "enumName": "Pics" }
-  - paths:
+  - inputs: XCAssets/Colors.xcassets
+    outputs:
+      templateName: swift3
+      output: assets-colors.swift
+  - inputs: XCAssets/Images.xcassets
+    outputs:
+      templateName: swift3
+      output: assets-images.swift
+      params: { "enumName": "Pics" }
+  - inputs:
       - XCAssets/Colors.xcassets
       - XCAssets/Images.xcassets
-    templateName: swift4
-    output: assets-all.swift
+    outputs:
+      templateName: swift4
+      output: assets-all.swift

@@ -60,7 +60,7 @@ extension Config {
       logger(.info, "> \(entriesCount) for command \(cmd):")
       for var entry in entries {
         entry.makeRelativeTo(inputDir: self.inputDir, outputDir: self.outputDir)
-        for inputPath in entry.paths where inputPath.isAbsolute {
+        for inputPath in entry.inputs where inputPath.isAbsolute {
           logger(.warning, "\(cmd).paths: \(inputPath) is an absolute path.")
         }
         for entryOutput in entry.outputs {

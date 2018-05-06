@@ -1,7 +1,7 @@
 input_dir: Fixtures/
 output_dir: Generated/
 ib:
-  paths: IB-iOS
+  inputs: IB-iOS
   outputs:
     - templateName: scenes-swift4
       output: ib-scenes.swift

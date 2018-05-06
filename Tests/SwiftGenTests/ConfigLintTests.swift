@@ -84,7 +84,7 @@ class ConfigLintTests: XCTestCase {
   func testLintMissingSources() {
     _testLint(
       fixture: "config-missing-paths",
-      expectedLogs: [(.error, "Missing entry for key strings.paths.")],
+      expectedLogs: [(.error, "Missing entry for key strings.inputs.")],
       assertionMessage: "Linter should warn when 'paths' key is missing"
     )
   }
@@ -117,7 +117,7 @@ class ConfigLintTests: XCTestCase {
   func testLintMissingOutput() {
     _testLint(
       fixture: "config-missing-output",
-      expectedLogs: [(.error, "Missing entry for key strings.outputs.")],
+      expectedLogs: [(.error, "Missing entry for key strings.outputs.output.")],
       assertionMessage: "Linter should warn when 'output' key is missing"
     )
   }
@@ -125,7 +125,9 @@ class ConfigLintTests: XCTestCase {
   func testLintInvalidStructure() {
     _testLint(
       fixture: "config-invalid-structure",
-      expectedLogs: [(.error, "Wrong type for key strings.paths: expected Path or array of Paths, got Array<Any>.")],
+      expectedLogs: [(.error, """
+        Wrong type for key strings.inputs: expected String or Array of String, got Array<Any>.
+        """)],
       assertionMessage: "Linter should warn when config file structure is invalid"
     )
   }
@@ -133,7 +135,7 @@ class ConfigLintTests: XCTestCase {
   func testLintInvalidTemplateValue() {
     _testLint(
       fixture: "config-invalid-template",
-      expectedLogs: [(.error, "Wrong type for key strings.templateName: expected String, got Array<Any>.")],
+      expectedLogs: [(.error, "Wrong type for key strings.outputs.templateName: expected String, got Array<Any>.")],
       assertionMessage: "Linter should warn when the 'template' key is of unexpected type"
     )
   }
@@ -141,7 +143,7 @@ class ConfigLintTests: XCTestCase {
   func testLintInvalidOutput() {
     _testLint(
       fixture: "config-invalid-output",
-      expectedLogs: [(.error, "Wrong type for key strings.output: expected String, got Array<Any>.")],
+      expectedLogs: [(.error, "Wrong type for key strings.outputs.output: expected String, got Array<Any>.")],
       assertionMessage: "Linter should warn when the 'output' key is of unexpected type"
     )
   }

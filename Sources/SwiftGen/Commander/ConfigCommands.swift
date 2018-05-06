@@ -21,7 +21,7 @@ extension ConfigEntryOutput {
 
 extension ConfigEntry {
   func checkPaths() throws {
-    for inputPath in self.paths {
+    for inputPath in self.inputs {
       guard inputPath.exists else {
         throw Config.Error.pathNotFound(path: inputPath)
       }
@@ -35,7 +35,7 @@ extension ConfigEntry {
     let parser = try parserCommand.parserType.init(options: [:]) { msg, _, _ in
       logMessage(.warning, msg)
     }
-    try parser.parse(paths: self.paths)
+    try parser.parse(paths: self.inputs)
     let context = parser.stencilContext()
 
     for entryOutput in outputs {

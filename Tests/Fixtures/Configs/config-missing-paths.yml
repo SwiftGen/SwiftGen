@@ -1,3 +1,4 @@
 strings:
-  templateName: template
-  output: out.swift
+  outputs:
+    templateName: template
+    output: out.swift

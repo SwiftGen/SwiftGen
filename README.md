@@ -168,12 +168,12 @@ Simply create a `swiftgen.yml` YAML file to list all the subcommands to invoke, 
 
 ```yaml
 strings:
-  paths: Resources/Base.lproj/Localizable.strings
+  inputs: Resources/Base.lproj/Localizable.strings
   outputs:
     - templateName: structured-swift3
       output: Generated/strings.swift
 xcassets:
-  paths:
+  inputs:
     - Resources/Images.xcassets
     - Resources/MoreImages.xcassets
   outputs:

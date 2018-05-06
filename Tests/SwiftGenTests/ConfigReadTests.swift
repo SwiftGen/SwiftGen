@@ -30,7 +30,7 @@ class ConfigReadTests: XCTestCase {
         return XCTFail("Expected a single strings entry")
       }
 
-      XCTAssertEqual(entry.paths, ["Sources1/Folder"])
+      XCTAssertEqual(entry.inputs, ["Sources1/Folder"])
 
       XCTAssertEqual(entry.outputs.count, 1)
       guard let output = entry.outputs.first else {
@@ -67,7 +67,7 @@ class ConfigReadTests: XCTestCase {
       }
       XCTAssertEqual(stringsEntries.count, 1)
 
-      XCTAssertEqual(stringsEntries[0].paths, ["Strings/Localizable.strings"])
+      XCTAssertEqual(stringsEntries[0].inputs, ["Strings/Localizable.strings"])
       XCTAssertEqual(stringsEntries[0].outputs.count, 1)
       XCTAssertEqual(stringsEntries[0].outputs[0].output, "strings.swift")
       XCTAssertEqualDict(stringsEntries[0].outputs[0].parameters, ["enumName": "Loc"])
@@ -80,19 +80,19 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(xcassetsEntries.count, 3)
 
       // > xcassets[0]
-      XCTAssertEqual(xcassetsEntries[0].paths, ["XCAssets/Colors.xcassets"])
+      XCTAssertEqual(xcassetsEntries[0].inputs, ["XCAssets/Colors.xcassets"])
       XCTAssertEqual(xcassetsEntries[0].outputs.count, 1)
       XCTAssertEqual(xcassetsEntries[0].outputs[0].output, "assets-colors.swift")
       XCTAssertEqualDict(xcassetsEntries[0].outputs[0].parameters, [:])
       XCTAssertEqual(xcassetsEntries[0].outputs[0].template, .name("swift3"))
       // > xcassets[1]
-      XCTAssertEqual(xcassetsEntries[1].paths, ["XCAssets/Images.xcassets"])
+      XCTAssertEqual(xcassetsEntries[1].inputs, ["XCAssets/Images.xcassets"])
       XCTAssertEqual(xcassetsEntries[1].outputs.count, 1)
       XCTAssertEqual(xcassetsEntries[1].outputs[0].output, "assets-images.swift")
       XCTAssertEqualDict(xcassetsEntries[1].outputs[0].parameters, ["enumName": "Pics"])
       XCTAssertEqual(xcassetsEntries[1].outputs[0].template, .name("swift3"))
       // > xcassets[2]
-      XCTAssertEqual(xcassetsEntries[2].paths, ["XCAssets/Colors.xcassets", "XCAssets/Images.xcassets"])
+      XCTAssertEqual(xcassetsEntries[2].inputs, ["XCAssets/Colors.xcassets", "XCAssets/Images.xcassets"])
       XCTAssertEqual(xcassetsEntries[2].outputs.count, 1)
       XCTAssertEqual(xcassetsEntries[2].outputs[0].output, "assets-all.swift")
       XCTAssertEqualDict(xcassetsEntries[2].outputs[0].parameters, [:])
@@ -121,7 +121,7 @@ class ConfigReadTests: XCTestCase {
       }
       XCTAssertEqual(ibEntries.count, 1)
 
-      XCTAssertEqual(ibEntries[0].paths, ["IB-iOS"])
+      XCTAssertEqual(ibEntries[0].inputs, ["IB-iOS"])
       // > outputs[0]
       XCTAssertEqual(ibEntries[0].outputs.count, 2)
       XCTAssertEqual(ibEntries[0].outputs[0].template, .name("scenes-swift4"))
@@ -138,7 +138,7 @@ class ConfigReadTests: XCTestCase {
 
   func testReadInvalidConfigThrows() {
     let badConfigs = [
-      "config-missing-paths": "Missing entry for key strings.paths.",
+      "config-missing-paths": "Missing entry for key strings.inputs.",
       "config-missing-template": """
         You must specify a template name (-t) or path (-p).
 
@@ -148,10 +148,12 @@ class ConfigReadTests: XCTestCase {
         You need to choose EITHER a named template OR a template path. \
         Found name 'template' and path 'template.swift'
         """,
-      "config-missing-output": "Missing entry for key strings.outputs.",
-      "config-invalid-structure": "Wrong type for key strings.paths: expected Path or array of Paths, got Array<Any>.",
-      "config-invalid-template": "Wrong type for key strings.templateName: expected String, got Array<Any>.",
-      "config-invalid-output": "Wrong type for key strings.output: expected String, got Array<Any>."
+      "config-missing-output": "Missing entry for key strings.outputs.output.",
+      "config-invalid-structure": """
+        Wrong type for key strings.inputs: expected String or Array of String, got Array<Any>.
+        """,
+      "config-invalid-template": "Wrong type for key strings.outputs.templateName: expected String, got Array<Any>.",
+      "config-invalid-output": "Wrong type for key strings.outputs.output: expected String, got Array<Any>."
     ]
     for (configFile, expectedError) in badConfigs {
       do {

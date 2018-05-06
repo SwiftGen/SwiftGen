@@ -16,19 +16,21 @@ import PathKit
 
 struct ConfigEntry {
   enum Keys {
+    static let inputs = "inputs"
     static let outputs = "outputs"
-    static let paths = "paths"
 
     // Legacy: remove this once we stop supporting the output key at subcommand level
     static let output = "output"
+    // Legacy: remove this once we sto supporting the old paths key (replaced by inputs)
+    static let paths = "paths"
   }
 
+  var inputs: [Path]
   var outputs: [ConfigEntryOutput]
-  var paths: [Path]
 
   mutating func makeRelativeTo(inputDir: Path?, outputDir: Path?) {
     if let inputDir = inputDir {
-      self.paths = self.paths.map { $0.isRelative ? inputDir + $0 : $0 }
+      self.inputs = self.inputs.map { $0.isRelative ? inputDir + $0 : $0 }
     }
     self.outputs = self.outputs.map {
       var output = $0
@@ -40,20 +42,16 @@ struct ConfigEntry {
 
 extension ConfigEntry {
   init(yaml: [String: Any]) throws {
-    guard let srcs = yaml[Keys.paths] else {
-      throw Config.Error.missingEntry(key: Keys.paths)
+    guard let inputs = yaml[Keys.inputs] ?? yaml[Keys.paths] else {
+      throw Config.Error.missingEntry(key: Keys.inputs)
     }
-    if let srcs = srcs as? String {
-      self.paths = [Path(srcs)]
-    } else if let srcs = srcs as? [String] {
-      self.paths = srcs.map({ Path($0) })
-    } else {
-      throw Config.Error.wrongType(key: Keys.paths, expected: "Path or array of Paths", got: type(of: srcs))
+    self.inputs = try ConfigEntry.parseValueOrArray(yaml: inputs, key: Keys.inputs) {
+      Path($0)
     }
 
-    if let data = yaml[Keys.outputs] {
+    if let outputs = yaml[Keys.outputs] {
       do {
-        self.outputs = try ConfigEntryOutput.parseCommandOutput(yaml: data)
+        self.outputs = try ConfigEntryOutput.parseCommandOutput(yaml: outputs)
       } catch let error as Config.Error {
         throw error.withKeyPrefixed(by: Keys.outputs)
       }
@@ -68,12 +66,8 @@ extension ConfigEntry {
   }
 
   static func parseCommandEntry(yaml: Any) throws -> [ConfigEntry] {
-    if let entry = yaml as? [String: Any] {
-      return [try ConfigEntry(yaml: entry)]
-    } else if let entries = yaml as? [[String: Any]] {
-      return try entries.map { try ConfigEntry(yaml: $0) }
-    } else {
-      throw Config.Error.wrongType(key: nil, expected: "Dictionary or Array", got: type(of: yaml))
+    return try ConfigEntry.parseValueOrArray(yaml: yaml) {
+      return try ConfigEntry(yaml: $0)
     }
   }
 
@@ -86,6 +80,16 @@ extension ConfigEntry {
     }
     return typedValue
   }
+
+  static func parseValueOrArray<T, U>(yaml: Any, key: String? = nil, parseValue: (T) throws -> U) throws -> [U] {
+    if let value = yaml as? T {
+      return [try parseValue(value)]
+    } else if let value = yaml as? [T] {
+      return try value.map { try parseValue($0) }
+    } else {
+      throw Config.Error.wrongType(key: key, expected: "\(T.self) or Array of \(T.self)", got: type(of: yaml))
+    }
+  }
 }
 
 /// Convert to CommandLine-equivalent string (for verbose mode, printing linting info, …)
@@ -93,7 +97,7 @@ extension ConfigEntry {
 extension ConfigEntry {
   func commandLine(forCommand cmd: String) -> [String] {
     return outputs.map {
-      $0.commandLine(forCommand: cmd, inputs: paths)
+      $0.commandLine(forCommand: cmd, inputs: inputs)
     }
   }
 }
