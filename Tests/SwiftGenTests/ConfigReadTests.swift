@@ -31,18 +31,18 @@ class ConfigReadTests: XCTestCase {
       }
 
       XCTAssertEqual(entry.paths, ["Sources1/Folder"])
-      XCTAssertEqualDict(entry.parameters, [
-        "foo": 5,
-        "bar": ["bar1": 1, "bar2": 2, "bar3": [3, 4, ["bar3a": 50]]],
-        "baz": ["hello", "world"]
-      ])
 
       XCTAssertEqual(entry.outputs.count, 1)
       guard let output = entry.outputs.first else {
         return XCTFail("Expected a single strings entry output")
       }
-      XCTAssertEqual(output.template, .name("structured-swift3"))
+      XCTAssertEqualDict(output.parameters, [
+        "foo": 5,
+        "bar": ["bar1": 1, "bar2": 2, "bar3": [3, 4, ["bar3a": 50]]],
+        "baz": ["hello", "world"]
+      ])
       XCTAssertEqual(output.output, "strings.swift")
+      XCTAssertEqual(output.template, .name("structured-swift3"))
     } catch let error {
       XCTFail("Error: \(error)")
     }
@@ -68,10 +68,10 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(stringsEntries.count, 1)
 
       XCTAssertEqual(stringsEntries[0].paths, ["Strings/Localizable.strings"])
-      XCTAssertEqualDict(stringsEntries[0].parameters, ["enumName": "Loc"])
       XCTAssertEqual(stringsEntries[0].outputs.count, 1)
-      XCTAssertEqual(stringsEntries[0].outputs[0].template, .path("templates/custom-swift3"))
       XCTAssertEqual(stringsEntries[0].outputs[0].output, "strings.swift")
+      XCTAssertEqualDict(stringsEntries[0].outputs[0].parameters, ["enumName": "Loc"])
+      XCTAssertEqual(stringsEntries[0].outputs[0].template, .path("templates/custom-swift3"))
 
       // xcassets
       guard let xcassetsEntries = config.commands["xcassets"] else {
@@ -81,22 +81,22 @@ class ConfigReadTests: XCTestCase {
 
       // > xcassets[0]
       XCTAssertEqual(xcassetsEntries[0].paths, ["XCAssets/Colors.xcassets"])
-      XCTAssertEqualDict(xcassetsEntries[0].parameters, [:])
       XCTAssertEqual(xcassetsEntries[0].outputs.count, 1)
-      XCTAssertEqual(xcassetsEntries[0].outputs[0].template, .name("swift3"))
       XCTAssertEqual(xcassetsEntries[0].outputs[0].output, "assets-colors.swift")
+      XCTAssertEqualDict(xcassetsEntries[0].outputs[0].parameters, [:])
+      XCTAssertEqual(xcassetsEntries[0].outputs[0].template, .name("swift3"))
       // > xcassets[1]
       XCTAssertEqual(xcassetsEntries[1].paths, ["XCAssets/Images.xcassets"])
-      XCTAssertEqualDict(xcassetsEntries[1].parameters, ["enumName": "Pics"])
       XCTAssertEqual(xcassetsEntries[1].outputs.count, 1)
-      XCTAssertEqual(xcassetsEntries[1].outputs[0].template, .name("swift3"))
       XCTAssertEqual(xcassetsEntries[1].outputs[0].output, "assets-images.swift")
+      XCTAssertEqualDict(xcassetsEntries[1].outputs[0].parameters, ["enumName": "Pics"])
+      XCTAssertEqual(xcassetsEntries[1].outputs[0].template, .name("swift3"))
       // > xcassets[2]
       XCTAssertEqual(xcassetsEntries[2].paths, ["XCAssets/Colors.xcassets", "XCAssets/Images.xcassets"])
-      XCTAssertEqualDict(xcassetsEntries[2].parameters, [:])
       XCTAssertEqual(xcassetsEntries[2].outputs.count, 1)
-      XCTAssertEqual(xcassetsEntries[2].outputs[0].template, .name("swift4"))
       XCTAssertEqual(xcassetsEntries[2].outputs[0].output, "assets-all.swift")
+      XCTAssertEqualDict(xcassetsEntries[2].outputs[0].parameters, [:])
+      XCTAssertEqual(xcassetsEntries[2].outputs[0].template, .name("swift4"))
     } catch let error {
       XCTFail("Error: \(error)")
     }
@@ -122,12 +122,15 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(ibEntries.count, 1)
 
       XCTAssertEqual(ibEntries[0].paths, ["IB-iOS"])
-      XCTAssertEqualDict(ibEntries[0].parameters, [:])
+      // > outputs[0]
       XCTAssertEqual(ibEntries[0].outputs.count, 2)
       XCTAssertEqual(ibEntries[0].outputs[0].template, .name("scenes-swift4"))
       XCTAssertEqual(ibEntries[0].outputs[0].output, "ib-scenes.swift")
+      XCTAssertEqualDict(ibEntries[0].outputs[0].parameters, ["enumName": "Scenes"])
+      // > outputs[1]
       XCTAssertEqual(ibEntries[0].outputs[1].template, .name("segues-swift4"))
       XCTAssertEqual(ibEntries[0].outputs[1].output, "ib-segues.swift")
+      XCTAssertEqualDict(ibEntries[0].outputs[1].parameters, [:])
     } catch let error {
       XCTFail("Error: \(error)")
     }

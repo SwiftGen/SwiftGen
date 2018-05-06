@@ -37,13 +37,13 @@ extension ConfigEntry {
     }
     try parser.parse(paths: self.paths)
     let context = parser.stencilContext()
-    let enriched = try StencilContext.enrich(context: context, parameters: self.parameters)
 
     for entryOutput in outputs {
       let templateRealPath = try entryOutput.template.resolvePath(forSubcommand: parserCommand.name)
       let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                               environment: stencilSwiftEnvironment())
 
+      let enriched = try StencilContext.enrich(context: context, parameters: entryOutput.parameters)
       let rendered = try template.render(enriched)
       let output = OutputDestination.file(entryOutput.output)
       try output.write(content: rendered, onlyIfChanged: true)

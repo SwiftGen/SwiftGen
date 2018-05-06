@@ -7,17 +7,20 @@
 //
 
 import PathKit
+import enum StencilSwiftKit.Parameters
 
 // MARK: - Config.Entry.Output
 
 struct ConfigEntryOutput {
   enum Keys {
+    static let output = "output"
+    static let params = "params"
     static let templateName = "templateName"
     static let templatePath = "templatePath"
-    static let output = "output"
   }
 
   var output: Path
+  var parameters: [String: Any]
   var template: TemplateRef
 
   mutating func makeRelativeTo(outputDir: Path?) {
@@ -29,14 +32,16 @@ struct ConfigEntryOutput {
 
 extension ConfigEntryOutput {
   init(yaml: [String: Any]) throws {
-    let templateName: String = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.templateName) ?? ""
-    let templatePath: String = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.templatePath) ?? ""
-    self.template = try TemplateRef(templateShortName: templateName, templateFullPath: templatePath)
-
     guard let output: String = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.output) else {
       throw Config.Error.missingEntry(key: Keys.output)
     }
     self.output = Path(output)
+
+    self.parameters = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.params) ?? [:]
+
+    let templateName: String = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.templateName) ?? ""
+    let templatePath: String = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.templatePath) ?? ""
+    self.template = try TemplateRef(templateShortName: templateName, templateFullPath: templatePath)
   }
 
   static func parseCommandOutput(yaml: Any) throws -> [ConfigEntryOutput] {
@@ -53,14 +58,22 @@ extension ConfigEntryOutput {
 /// Convert to CommandLine-equivalent string (for verbose mode, printing linting info, …)
 ///
 extension ConfigEntryOutput {
-  func commandLineFlags() -> (templateFlag: String, outputFlag: String) {
+  func commandLine(forCommand cmd: String, inputs: [Path]) -> String {
     let tplFlag: String = {
       switch self.template {
       case .name(let name): return "-t \(name)"
       case .path(let path): return "-p \(path.string)"
       }
     }()
+    let params = Parameters.flatten(dictionary: self.parameters)
 
-    return (templateFlag: tplFlag, outputFlag: "-o \(self.output)")
+    return [
+      "swiftgen",
+      cmd,
+      tplFlag,
+      params.map { "--param \($0)" }.joined(separator: " "),
+      "-o \(self.output)",
+      inputs.map { $0.string }.joined(separator: " ")
+    ].filter { !$0.isEmpty }.joined(separator: " ")
   }
 }

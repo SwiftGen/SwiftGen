@@ -7,7 +7,6 @@
 //
 
 import PathKit
-import enum StencilSwiftKit.Parameters
 
 // MARK: - Config.Entry
 
@@ -18,15 +17,13 @@ import enum StencilSwiftKit.Parameters
 struct ConfigEntry {
   enum Keys {
     static let outputs = "outputs"
-    static let params = "params"
     static let paths = "paths"
 
-    // deprecated
+    // Legacy: remove this once we stop supporting the output key at subcommand level
     static let output = "output"
   }
 
   var outputs: [ConfigEntryOutput]
-  var parameters: [String: Any]
   var paths: [Path]
 
   mutating func makeRelativeTo(inputDir: Path?, outputDir: Path?) {
@@ -56,19 +53,18 @@ extension ConfigEntry {
 
     if let data = yaml[Keys.outputs] {
       do {
-        outputs = try ConfigEntryOutput.parseCommandOutput(yaml: data)
+        self.outputs = try ConfigEntryOutput.parseCommandOutput(yaml: data)
       } catch let error as Config.Error {
         throw error.withKeyPrefixed(by: Keys.outputs)
       }
     } else if yaml[Keys.output] != nil {
+      // Legacy: remove this once we stop supporting the output key at subcommand level
       // The config still contains the old style where all properties command properties
       // are at the same level
-      outputs = try ConfigEntryOutput.parseCommandOutput(yaml: yaml)
+      self.outputs = try ConfigEntryOutput.parseCommandOutput(yaml: yaml)
     } else {
       throw Config.Error.missingEntry(key: Keys.outputs)
     }
-
-    self.parameters = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.params) ?? [:]
   }
 
   static func parseCommandEntry(yaml: Any) throws -> [ConfigEntry] {
@@ -96,13 +92,8 @@ extension ConfigEntry {
 ///
 extension ConfigEntry {
   func commandLine(forCommand cmd: String) -> [String] {
-    let params = Parameters.flatten(dictionary: self.parameters)
-    let paramsList = params.isEmpty ? "" : (" " + params.map { "--param \($0)" }.joined(separator: " "))
-    let inputPaths = self.paths.map { $0.string }.joined(separator: " ")
-
     return outputs.map {
-      let flags = $0.commandLineFlags()
-      return "swiftgen \(cmd) \(flags.templateFlag)\(paramsList) \(flags.outputFlag) \(inputPaths)"
+      $0.commandLine(forCommand: cmd, inputs: paths)
     }
   }
 }
