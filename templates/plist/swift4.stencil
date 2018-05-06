@@ -78,7 +78,7 @@ private struct PlistDocument {
 {% endfilter %}{% endmacro %}
 
 // swiftlint:disable identifier_name line_length type_body_length
-{{accessModifier}} enum {{param.enumName|default:"Plist"}} {
+{{accessModifier}} enum {{param.enumName|default:"PlistFiles"}} {
   {% if files.count > 1 %}
   {% for file in files %}
   {{accessModifier}} enum {{file.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {

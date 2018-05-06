@@ -31,7 +31,7 @@ private struct JSONDocument {
 }
 
 // swiftlint:disable identifier_name line_length type_body_length
-internal enum JSON {
+internal enum JSONFiles {
   internal enum Documents {
     internal enum Document1 {
       internal static let items: [String] = objectFromJSON(at: "documents.yaml")

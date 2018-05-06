@@ -18,7 +18,7 @@ You can customize some elements of this template by overriding the following par
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
 | `documentName` | `Document` | Allows you to change the prefix of the generated `enum` for each document. |
-| `enumName` | `Plist` | Allows you to change the name of the generated `enum` containing all files. |
+| `enumName` | `JSONFiles` | Allows you to change the name of the generated `enum` containing all files. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 
 ## Generated Code
@@ -26,7 +26,7 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-internal enum JSON {
+internal enum JSONFiles {
   internal enum Info {
     private static let _document = JSONDocument(path: "info.json")
     internal static let key1: String = _document["key1"]
@@ -45,8 +45,8 @@ internal enum JSON {
 
 ```swift
 // This will be an dictionary
-let foo = JSON.Info.key3
+let foo = JSONFiles.Info.key3
 
 // This will be an [Int]
-let bar = JSON.Sequence.items
+let bar = JSONFiles.Sequence.items
 ```

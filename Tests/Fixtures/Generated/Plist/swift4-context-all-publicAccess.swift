@@ -35,7 +35,7 @@ private struct PlistDocument {
 }
 
 // swiftlint:disable identifier_name line_length type_body_length
-public enum Plist {
+public enum PlistFiles {
   public enum Info {
     private static let _document = PlistDocument(path: "Info.plist")
     public static let cfBundleDevelopmentRegion: String = _document["CFBundleDevelopmentRegion"]

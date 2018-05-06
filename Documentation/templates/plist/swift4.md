@@ -18,7 +18,7 @@ You can customize some elements of this template by overriding the following par
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
 | `documentName` | `Document` | Allows you to change the prefix of the generated `enum` for each document. |
-| `enumName` | `Plist` | Allows you to change the name of the generated `enum` containing all files. |
+| `enumName` | `PlistFiles` | Allows you to change the name of the generated `enum` containing all files. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 
 ## Generated Code
@@ -26,7 +26,7 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-internal enum Plist {
+internal enum PlistFiles {
   internal enum Test {
     internal static let items: [String] = arrayFromPlist(at: "array.plist")
   }
@@ -44,8 +44,8 @@ internal enum Plist {
 
 ```swift
 // This will be an array
-let foo = Plist.Test.items
+let foo = PlistFiles.Test.items
 
 // This will be an Int
-let bar = Plist.Stuff.key1
+let bar = PlistFiles.Stuff.key1
 ```
