@@ -26,3 +26,52 @@ The metadata has the following properties:
     - name: `String` — Name of the property (dictionary key)
     - repeats the rest of the metadata structure
  - `element`: `Dictionary` — Element metadata (only if an array, repeats this metadata structure)
+
+## Example
+
+```yaml
+files:
+- documents:
+  - data:
+    - "Mark McGwire"
+    - "Sammy Sosa"
+    - "Ken Griffey"
+    metadata:
+      element:
+        type: "String"
+      type: "Array"
+  - data:
+    - "Chicago Cubs"
+    - "St Louis Cardinals"
+    metadata:
+      element:
+        type: "String"
+      type: "Array"
+  name: "documents"
+  path: "documents.yaml"
+- documents:
+  - data:
+      key1: "value1"
+      key2: "2"
+      key3:
+        nestedKey3:
+        - "1"
+        - "2"
+        - "3"
+    metadata:
+      properties:
+      - name: "key1"
+        type: "String"
+      - name: "key2"
+        type: "String"
+      - name: "key3"
+        properties:
+        - element:
+            type: "String"
+          name: "nestedKey3"
+          type: "Array"
+        type: "Dictionary"
+      type: "Dictionary"
+  name: "json"
+  path: "json.json"
+```

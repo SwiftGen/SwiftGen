@@ -24,3 +24,47 @@ The metadata has the following properties:
     - name: `String` — Name of the property (dictionary key)
     - repeats the rest of the metadata structure
  - `element`: `Dictionary` — Element metadata (only if an array, repeats this metadata structure)
+
+## Example
+
+```yaml
+files:
+- documents:
+  - data:
+      UILaunchStoryboardName: "LaunchScreen"
+      UIMainStoryboardFile: "Start"
+      User Ambiguous Integer: true
+      User Boolean: false
+      User Date: 2018-05-05T03:39:26Z
+      User Float: 3.14e+0
+      User Integer: 5
+    metadata:
+      properties:
+      - name: "UILaunchStoryboardName"
+        type: "String"
+      - name: "UIMainStoryboardFile"
+        type: "String"
+      - name: "User Ambiguous Integer"
+        type: "Bool"
+      - name: "User Boolean"
+        type: "Bool"
+      - name: "User Date"
+        type: "Date"
+      - name: "User Float"
+        type: "Double"
+      - name: "User Integer"
+        type: "Int"
+      type: "Dictionary"
+  name: "Info"
+  path: "Info.plist"
+- documents:
+  - data:
+    - "value1"
+    - "value2"
+    metadata:
+      element:
+        type: "String"
+      type: "Array"
+  name: "array"
+  path: "array.plist"
+```
