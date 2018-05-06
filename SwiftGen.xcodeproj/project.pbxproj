@@ -43,6 +43,9 @@
 		9A35A2477F800A42E6A654C8 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5D3E5746871F59AC9CA625 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */; };
 		C580E102337633038E486585 /* Pods_swiftgen_Templates_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8031AB7FD88D5F010179EDC /* Pods_swiftgen_Templates_UnitTests.framework */; };
 		DD40284A209E56B50045FC76 /* config-with-multi-outputs.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */; };
+		DD402850209FBF300045FC76 /* config-deprecated-paths.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */; };
+		DD402851209FBF300045FC76 /* config-deprecated-mixed-with-new.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD40284E209FBF300045FC76 /* config-deprecated-mixed-with-new.yml */; };
+		DD402852209FBF300045FC76 /* config-deprecated-output.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD40284F209FBF300045FC76 /* config-deprecated-output.yml */; };
 		DD428DFF1FC50F56001649D6 /* SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */; };
 		DD428E001FC50F56001649D6 /* SwiftGenKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DD428E191FC50FBF001649D6 /* FontsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E071FC50FBF001649D6 /* FontsParser.swift */; };
@@ -282,6 +285,9 @@
 		C29A8876ECE7B9852963F6B5 /* Pods_swiftgen_SwiftGen_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen_SwiftGen_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D662CF56C834C4E7CEA32364 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-with-multi-outputs.yml"; sourceTree = "<group>"; };
+		DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-deprecated-paths.yml"; sourceTree = "<group>"; };
+		DD40284E209FBF300045FC76 /* config-deprecated-mixed-with-new.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-deprecated-mixed-with-new.yml"; sourceTree = "<group>"; };
+		DD40284F209FBF300045FC76 /* config-deprecated-output.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-deprecated-output.yml"; sourceTree = "<group>"; };
 		DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftGenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD428E071FC50FBF001649D6 /* FontsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsParser.swift; sourceTree = "<group>"; };
 		DD428E091FC50FBF001649D6 /* ColorsCLRFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsCLRFileParser.swift; sourceTree = "<group>"; };
@@ -446,6 +452,9 @@
 		093405061F81537400187787 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
+				DD40284E209FBF300045FC76 /* config-deprecated-mixed-with-new.yml */,
+				DD40284F209FBF300045FC76 /* config-deprecated-output.yml */,
+				DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */,
 				093405071F81539100187787 /* config-with-params.yml */,
 				093405111F87AA6500187787 /* config-with-multi-entries.yml */,
 				DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */,
@@ -902,6 +911,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD402851209FBF300045FC76 /* config-deprecated-mixed-with-new.yml in Resources */,
+				DD402852209FBF300045FC76 /* config-deprecated-output.yml in Resources */,
 				37DC60331F98D7DD00B7B31C /* config-both-templates.yml in Resources */,
 				37DC60381F98D7DD00B7B31C /* config-missing-paths.yml in Resources */,
 				37DC60341F98D7DD00B7B31C /* config-invalid-output.yml in Resources */,
@@ -913,6 +924,7 @@
 				37DC60361F98D7DD00B7B31C /* config-invalid-template.yml in Resources */,
 				37DC603B1F98E74E00B7B31C /* config-absolute-paths-prefix.yml in Resources */,
 				37DC60321F98D7DD00B7B31C /* config-absolute-paths-direct.yml in Resources */,
+				DD402850209FBF300045FC76 /* config-deprecated-paths.yml in Resources */,
 				37DC60371F98D7DD00B7B31C /* config-missing-output.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

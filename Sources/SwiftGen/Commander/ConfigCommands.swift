@@ -65,7 +65,7 @@ let configLintCommand = command(
   try ErrorPrettifier.execute {
     logMessage(.info, "Linting \(file)")
     let config = try Config(file: file)
-    config.lint { level, msg in logMessage(level, msg) }
+    config.lint()
   }
 }
 

@@ -22,12 +22,14 @@ class ConfigLintTests: XCTestCase {
     var missingLogs = expectedLogs
     let configFile = Path(path)
     do {
-      let config = try Config(file: configFile)
-      config.lint { level, msg in
+      let logger = { (level: LogLevel, msg: String) -> Void in
         if let idx = missingLogs.index(where: { $0 == level && $1 == msg }) {
           missingLogs.remove(at: idx)
         }
       }
+
+      let config = try Config(file: configFile, logger: logger)
+      config.lint(logger: logger)
     } catch let error {
       if let idx = missingLogs.index(where: { $0 == .error && $1 == String(describing: error) }) {
         missingLogs.remove(at: idx)
@@ -145,6 +147,43 @@ class ConfigLintTests: XCTestCase {
       fixture: "config-invalid-output",
       expectedLogs: [(.error, "Wrong type for key strings.outputs.output: expected String, got Array<Any>.")],
       assertionMessage: "Linter should warn when the 'output' key is of unexpected type"
+    )
+  }
+
+  // MARK: - Deprecation warnings
+
+  func testLintDeprecatedPaths() {
+    _testLint(
+      fixture: "config-deprecated-paths",
+      expectedLogs: [(.warning, "strings: `paths` is a deprecated in favour of `inputs`.")],
+      assertionMessage: "Linter should warn about the deprecated 'paths' key"
+    )
+  }
+
+  func testLintDeprecatedOutput() {
+    _testLint(
+      fixture: "config-deprecated-output",
+      expectedLogs: [
+        (.warning, "strings: `output` is a deprecated in favour of `outputs.output`."),
+        (.warning, "strings: `params` is a deprecated in favour of `outputs.params`."),
+        (.warning, "strings: `templateName` is a deprecated in favour of `outputs.templateName`.")
+      ],
+      assertionMessage: "Linter should warn about the deprecated 'output', `params` and `templateName` keys"
+    )
+  }
+
+  func testLintDeprecateMixedWithNew() {
+    _testLint(
+      fixture: "config-deprecated-mixed-with-new",
+      expectedLogs: [
+        (.warning, "strings: `output` is a deprecated in favour of `outputs.output`."),
+        (.warning, "strings: `params` is a deprecated in favour of `outputs.params`."),
+        (.warning, "strings: `templateName` is a deprecated in favour of `outputs.templateName`."),
+        (.warning, "strings: `output` is a deprecated in favour of `outputs.output`."),
+        (.warning, "strings: `params` is a deprecated in favour of `outputs.params`."),
+        (.warning, "strings: `templatePath` is a deprecated in favour of `outputs.templatePath`.")
+      ],
+      assertionMessage: "Linter should warn about deprecated keys even if newer keys are available"
     )
   }
 }

@@ -23,7 +23,7 @@ struct Config {
 }
 
 extension Config {
-  init(file: Path) throws {
+  init(file: Path, logger: (LogLevel, String) -> Void = logMessage) throws {
     if !file.exists {
       throw Config.Error.pathNotFound(path: file)
     }
@@ -38,7 +38,11 @@ extension Config {
     for parserCmd in allParserCommands {
       if let cmdEntry = config[parserCmd.name] {
         do {
-          cmds[parserCmd.name] = try ConfigEntry.parseCommandEntry(yaml: cmdEntry)
+          cmds[parserCmd.name] = try ConfigEntry.parseCommandEntry(
+            yaml: cmdEntry,
+            cmd: parserCmd.name,
+            logger: logger
+          )
         } catch let error as Config.Error {
           // Prefix the name of the command for a better error message
           throw error.withKeyPrefixed(by: parserCmd.name)
