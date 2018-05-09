@@ -11,6 +11,10 @@ import enum StencilSwiftKit.Parameters
 
 // MARK: - Config.Entry
 
+// Note: there's a bug in SPM which causes compilation to fail because of the compilation order.
+// Once it is fixed, we should move `ConfigEntry` back into an extension of `Config`.
+// https://bugs.swift.org/browse/SR-5734
+
 struct ConfigEntry {
   enum Keys {
     static let paths = "paths"
