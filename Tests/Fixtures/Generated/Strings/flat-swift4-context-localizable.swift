@@ -4,9 +4,8 @@ import Foundation
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
-// swiftlint:disable function_parameter_count
 
-// swiftlint:disable identifier_name line_length type_body_length
+// swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 internal enum L10n {
   /// Some alert body there
   internal static let alertMessage = L10n.tr("Localizable", "alert_message")
@@ -39,7 +38,7 @@ internal enum L10n {
   /// User Profile Settings
   internal static let settingsUserProfileSectionHEADERTITLE = L10n.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
 }
-// swiftlint:enable identifier_name line_length type_body_length
+// swiftlint:enable function_parameter_count identifier_name line_length type_body_length
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {

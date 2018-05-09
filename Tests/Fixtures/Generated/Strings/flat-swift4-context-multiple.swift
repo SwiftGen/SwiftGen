@@ -4,9 +4,8 @@ import Foundation
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
-// swiftlint:disable function_parameter_count
 
-// swiftlint:disable identifier_name line_length type_body_length
+// swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 internal enum L10n {
   internal enum Localizable {
     /// Some alert body there
@@ -53,7 +52,7 @@ internal enum L10n {
     internal static let singleline2 = L10n.tr("LocMultiline", "SINGLELINE2")
   }
 }
-// swiftlint:enable identifier_name line_length type_body_length
+// swiftlint:enable function_parameter_count identifier_name line_length type_body_length
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
