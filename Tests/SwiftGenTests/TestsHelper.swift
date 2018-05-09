@@ -6,6 +6,9 @@
 
 import Foundation
 import PathKit
+#if canImport(SwiftGen)
+@testable import SwiftGen
+#endif
 import XCTest
 
 private let colorCode: (String) -> String =
@@ -74,7 +77,7 @@ func XCTAssertEqualDict(_ result: [String: Any],
 }
 
 extension TemplateRef: Equatable {
-  static func == (lhs: TemplateRef, rhs: TemplateRef) -> Bool {
+  public static func == (lhs: TemplateRef, rhs: TemplateRef) -> Bool {
     switch (lhs, rhs) {
     case (.name(let lname), .name(let rname)): return lname == rname
     case (.path(let lpath), .path(let rpath)): return lpath == rpath

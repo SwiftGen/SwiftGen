@@ -5,6 +5,9 @@
 //
 
 import PathKit
+#if canImport(SwiftGen)
+@testable import SwiftGen
+#endif
 import XCTest
 
 class ConfigLintTests: XCTestCase {

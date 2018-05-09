@@ -31,6 +31,9 @@
 * Add ability to list all custom fonts and register them using `FontFamily.registerAllCustomFonts`.  
   [Olivier Halligon](https://github.com/AliSoftware)
   [#394](https://github.com/SwiftGen/SwiftGen/issues/394)
+* Add support for Swift Package Manager and Mint.  
+  [Yonas Kolb](https://github.com/yonaskolb)
+  [#411](https://github.com/SwiftGen/SwiftGen/pull/411)
 
 ### Internal Changes
 
