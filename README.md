@@ -168,15 +168,17 @@ Simply create a `swiftgen.yml` YAML file to list all the subcommands to invoke, 
 
 ```yaml
 strings:
-  paths: Resources/Base.lproj/Localizable.strings
-  templateName: structured-swift3
-  output: Generated/strings.swift
+  inputs: Resources/Base.lproj/Localizable.strings
+  outputs:
+    - templateName: structured-swift3
+      output: Generated/strings.swift
 xcassets:
-  paths:
-   - Resources/Images.xcassets
-   - Resources/MoreImages.xcassets
-  templateName: swift3
-  output: Generated/assets-images.swift
+  inputs:
+    - Resources/Images.xcassets
+    - Resources/MoreImages.xcassets
+  outputs:
+    - templateName: swift3
+      output: Generated/assets-images.swift
 ```
 
 Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for short, and it will execute what's described in the configuration file

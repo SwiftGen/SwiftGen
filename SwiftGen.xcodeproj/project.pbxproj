@@ -42,6 +42,10 @@
 		80F8014301BF496E905CA2CF /* Pods_SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16DF0A0F13A222BCA7B60102 /* Pods_SwiftGenKit.framework */; };
 		9A35A2477F800A42E6A654C8 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5D3E5746871F59AC9CA625 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */; };
 		C580E102337633038E486585 /* Pods_swiftgen_Templates_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8031AB7FD88D5F010179EDC /* Pods_swiftgen_Templates_UnitTests.framework */; };
+		DD40284A209E56B50045FC76 /* config-with-multi-outputs.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */; };
+		DD402850209FBF300045FC76 /* config-deprecated-paths.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */; };
+		DD402851209FBF300045FC76 /* config-deprecated-mixed-with-new.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD40284E209FBF300045FC76 /* config-deprecated-mixed-with-new.yml */; };
+		DD402852209FBF300045FC76 /* config-deprecated-output.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD40284F209FBF300045FC76 /* config-deprecated-output.yml */; };
 		DD428DFF1FC50F56001649D6 /* SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */; };
 		DD428E001FC50F56001649D6 /* SwiftGenKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DD428E191FC50FBF001649D6 /* FontsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E071FC50FBF001649D6 /* FontsParser.swift */; };
@@ -69,6 +73,8 @@
 		DD9F688120955F57004EB720 /* CTFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F688020955F57004EB720 /* CTFont.swift */; };
 		DD9F688520956074004EB720 /* StringsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F688320956074004EB720 /* StringsEntry.swift */; };
 		DD9F688620956074004EB720 /* PlaceholderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F688420956074004EB720 /* PlaceholderType.swift */; };
+		DDB0B9C2209E390700E467C2 /* ConfigOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B9C1209E390700E467C2 /* ConfigOutput.swift */; };
+		DDB0B9C3209E3D9900E467C2 /* ConfigOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0B9C1209E390700E467C2 /* ConfigOutput.swift */; };
 		DDC09D021E1D199A005C6EE6 /* templates in Resources */ = {isa = PBXBuildFile; fileRef = DDC09D011E1D199A005C6EE6 /* templates */; };
 		DDC335E47ABB50395E595AB0 /* Pods_swiftgen_SwiftGen_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8876ECE7B9852963F6B5 /* Pods_swiftgen_SwiftGen_UnitTests.framework */; };
 		DDC8211520967180007A55F3 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC8211420967180007A55F3 /* Path.swift */; };
@@ -278,6 +284,10 @@
 		C00832FEC9F060E93DAD1228 /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8876ECE7B9852963F6B5 /* Pods_swiftgen_SwiftGen_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen_SwiftGen_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D662CF56C834C4E7CEA32364 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-with-multi-outputs.yml"; sourceTree = "<group>"; };
+		DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-deprecated-paths.yml"; sourceTree = "<group>"; };
+		DD40284E209FBF300045FC76 /* config-deprecated-mixed-with-new.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-deprecated-mixed-with-new.yml"; sourceTree = "<group>"; };
+		DD40284F209FBF300045FC76 /* config-deprecated-output.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-deprecated-output.yml"; sourceTree = "<group>"; };
 		DD428DF81FC50F56001649D6 /* SwiftGenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftGenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD428E071FC50FBF001649D6 /* FontsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsParser.swift; sourceTree = "<group>"; };
 		DD428E091FC50FBF001649D6 /* ColorsCLRFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsCLRFileParser.swift; sourceTree = "<group>"; };
@@ -304,6 +314,7 @@
 		DD9F688020955F57004EB720 /* CTFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTFont.swift; sourceTree = "<group>"; };
 		DD9F688320956074004EB720 /* StringsEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsEntry.swift; sourceTree = "<group>"; };
 		DD9F688420956074004EB720 /* PlaceholderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderType.swift; sourceTree = "<group>"; };
+		DDB0B9C1209E390700E467C2 /* ConfigOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigOutput.swift; sourceTree = "<group>"; };
 		DDC09D011E1D199A005C6EE6 /* templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = templates; sourceTree = "<group>"; };
 		DDC8211420967180007A55F3 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		DDC82116209672E1007A55F3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -441,8 +452,12 @@
 		093405061F81537400187787 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
+				DD40284E209FBF300045FC76 /* config-deprecated-mixed-with-new.yml */,
+				DD40284F209FBF300045FC76 /* config-deprecated-output.yml */,
+				DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */,
 				093405071F81539100187787 /* config-with-params.yml */,
 				093405111F87AA6500187787 /* config-with-multi-entries.yml */,
+				DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */,
 				37DC60301F98D1DA00B7B31C /* config-absolute-paths-direct.yml */,
 				37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */,
 				37DC60311F98D1DA00B7B31C /* config-missing-paths.yml */,
@@ -471,6 +486,7 @@
 			children = (
 				0934050A1F8158B800187787 /* Config.swift */,
 				09D009FE1F9BB3450026A755 /* ConfigEntry.swift */,
+				DDB0B9C1209E390700E467C2 /* ConfigOutput.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -895,16 +911,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD402851209FBF300045FC76 /* config-deprecated-mixed-with-new.yml in Resources */,
+				DD402852209FBF300045FC76 /* config-deprecated-output.yml in Resources */,
 				37DC60331F98D7DD00B7B31C /* config-both-templates.yml in Resources */,
 				37DC60381F98D7DD00B7B31C /* config-missing-paths.yml in Resources */,
 				37DC60341F98D7DD00B7B31C /* config-invalid-output.yml in Resources */,
 				093405131F87AA6A00187787 /* config-with-multi-entries.yml in Resources */,
 				37DC60391F98D7DD00B7B31C /* config-missing-template.yml in Resources */,
+				DD40284A209E56B50045FC76 /* config-with-multi-outputs.yml in Resources */,
 				37DC60351F98D7DD00B7B31C /* config-invalid-structure.yml in Resources */,
 				093405101F815B2500187787 /* config-with-params.yml in Resources */,
 				37DC60361F98D7DD00B7B31C /* config-invalid-template.yml in Resources */,
 				37DC603B1F98E74E00B7B31C /* config-absolute-paths-prefix.yml in Resources */,
 				37DC60321F98D7DD00B7B31C /* config-absolute-paths-direct.yml in Resources */,
+				DD402850209FBF300045FC76 /* config-deprecated-paths.yml in Resources */,
 				37DC60371F98D7DD00B7B31C /* config-missing-output.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1317,6 +1337,7 @@
 				379C7E8E1F8ECB2D00267096 /* Path+AppSupport.swift in Sources */,
 				0934050F1F815A9100187787 /* ParserCLI.swift in Sources */,
 				0934050C1F8158EE00187787 /* Config.swift in Sources */,
+				DDB0B9C3209E3D9900E467C2 /* ConfigOutput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1330,6 +1351,7 @@
 				234F7E7E1DEBD765001B3C10 /* Path+Commander.swift in Sources */,
 				234F7E7F1DEBD765001B3C10 /* TemplatesCommands.swift in Sources */,
 				09D009FF1F9BB3450026A755 /* ConfigEntry.swift in Sources */,
+				DDB0B9C2209E390700E467C2 /* ConfigOutput.swift in Sources */,
 				379C7E8D1F8ECB2400267096 /* Path+AppSupport.swift in Sources */,
 				0934050E1F815A8C00187787 /* ParserCLI.swift in Sources */,
 				DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */,

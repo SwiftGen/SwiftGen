@@ -1,6 +1,7 @@
 strings:
-  paths: input.strings
-  templateName:
-   - template1
-   - template2
-  output: out.swift
+  inputs: input.strings
+  outputs:
+    templateName:
+     - template1
+     - template2
+    output: out.swift

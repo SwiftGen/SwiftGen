@@ -1,0 +1,6 @@
+output_dir: Common/Generated
+strings:
+  paths: Sources2/Folder
+  outputs:
+    templateName: flat-swift4
+    output: test-strings.swift

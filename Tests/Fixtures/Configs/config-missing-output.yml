@@ -1,4 +1,5 @@
 strings:
-  paths: input.strings
-  templateName: template
+  inputs: input.strings
+  outputs:
+    templateName: template
 

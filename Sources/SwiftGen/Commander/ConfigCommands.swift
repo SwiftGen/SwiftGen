@@ -11,15 +11,23 @@ import PathKit
 import StencilSwiftKit
 import SwiftGenKit
 
+extension ConfigEntryOutput {
+  func checkPaths() throws {
+    guard self.output.parent().exists else {
+      throw Config.Error.pathNotFound(path: self.output.parent())
+    }
+  }
+}
+
 extension ConfigEntry {
   func checkPaths() throws {
-    for inputPath in self.paths {
+    for inputPath in self.inputs {
       guard inputPath.exists else {
         throw Config.Error.pathNotFound(path: inputPath)
       }
     }
-    guard self.output.parent().exists else {
-      throw Config.Error.pathNotFound(path: self.output.parent())
+    for output in outputs {
+      try output.checkPaths()
     }
   }
 
@@ -27,16 +35,19 @@ extension ConfigEntry {
     let parser = try parserCommand.parserType.init(options: [:]) { msg, _, _ in
       logMessage(.warning, msg)
     }
-    try parser.parse(paths: self.paths)
-    let templateRealPath = try self.template.resolvePath(forSubcommand: parserCommand.name)
-    let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
-                                            environment: stencilSwiftEnvironment())
-
+    try parser.parse(paths: self.inputs)
     let context = parser.stencilContext()
-    let enriched = try StencilContext.enrich(context: context, parameters: self.parameters)
-    let rendered = try template.render(enriched)
-    let output = OutputDestination.file(self.output)
-    try output.write(content: rendered, onlyIfChanged: true)
+
+    for entryOutput in outputs {
+      let templateRealPath = try entryOutput.template.resolvePath(forSubcommand: parserCommand.name)
+      let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
+                                              environment: stencilSwiftEnvironment())
+
+      let enriched = try StencilContext.enrich(context: context, parameters: entryOutput.parameters)
+      let rendered = try template.render(enriched)
+      let output = OutputDestination.file(entryOutput.output)
+      try output.write(content: rendered, onlyIfChanged: true)
+    }
   }
 }
 
@@ -54,7 +65,7 @@ let configLintCommand = command(
   try ErrorPrettifier.execute {
     logMessage(.info, "Linting \(file)")
     let config = try Config(file: file)
-    config.lint { level, msg in logMessage(level, msg) }
+    config.lint()
   }
 }
 
@@ -85,7 +96,9 @@ let configRunCommand = command(
           }
           entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
           if verbose {
-            logMessage(.info, " $ " + entry.commandLine(forCommand: cmd))
+            for item in entry.commandLine(forCommand: cmd) {
+              logMessage(.info, " $ \(item)")
+            }
           }
           try entry.checkPaths()
           try entry.run(parserCommand: parserCmd)
