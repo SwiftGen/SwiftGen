@@ -25,6 +25,9 @@ class JsonTests: XCTestCase {
                                           parameters: ["enumName=CustomJSON"]),
        suffix: "-customname"),
       (context: try StencilContext.enrich(context: context,
+                                          parameters: ["preservePath"]),
+       suffix: "-preservePath"),
+      (context: try StencilContext.enrich(context: context,
                                           parameters: ["publicAccess"]),
        suffix: "-publicAccess")
     ]

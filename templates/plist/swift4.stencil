@@ -51,9 +51,9 @@ private struct PlistDocument {
 {% macro documentBlock file document %}
   {% set rootType %}{% call typeBlock document.metadata %}{% endset %}
   {% if document.metadata.type == "Array" %}
-  {{accessModifier}} static let items: {{rootType}} = arrayFromPlist(at: "{{file.path}}")
+  {{accessModifier}} static let items: {{rootType}} = arrayFromPlist(at: "{% call transformPath file.path %}")
   {% elif document.metadata.type == "Dictionary" %}
-  private static let _document = PlistDocument(path: "{{file.path}}")
+  private static let _document = PlistDocument(path: "{% call transformPath file.path %}")
 
   {% for propertyName,property in document.metadata.properties %}
   {{accessModifier}} {% call propertyBlock property %}
@@ -75,6 +75,13 @@ private struct PlistDocument {
   {% set propertyName %}{{property.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% endset %}
   {% set propertyType %}{% call typeBlock property %}{% endset %}
   static let {{propertyName}}: {{propertyType}} = _document["{{property.name}}"]
+{% endfilter %}{% endmacro %}
+{% macro transformPath path %}{% filter removeNewlines %}
+  {% if param.preservePath %}
+    {{path}}
+  {% else %}
+    {{path|basename}}
+  {% endif %}
 {% endfilter %}{% endmacro %}
 
 // swiftlint:disable identifier_name line_length type_body_length

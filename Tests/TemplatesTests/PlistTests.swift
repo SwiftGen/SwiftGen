@@ -25,6 +25,9 @@ class PlistTests: XCTestCase {
                                           parameters: ["enumName=CustomPlist"]),
        suffix: "-customname"),
       (context: try StencilContext.enrich(context: context,
+                                          parameters: ["preservePath"]),
+       suffix: "-preservePath"),
+      (context: try StencilContext.enrich(context: context,
                                           parameters: ["publicAccess"]),
        suffix: "-publicAccess")
     ]
