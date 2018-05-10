@@ -6,13 +6,13 @@ files:
         nestedKey2: "nestedValue2"
     metadata:
       properties:
-      - name: "key1"
-        type: "String"
-      - name: "key2"
-        properties:
-        - name: "nestedKey2"
+        key1:
           type: "String"
-        type: "Dictionary"
+        key2:
+          properties:
+            nestedKey2:
+              type: "String"
+          type: "Dictionary"
       type: "Dictionary"
   name: "mapping"
   path: "mapping.yaml"

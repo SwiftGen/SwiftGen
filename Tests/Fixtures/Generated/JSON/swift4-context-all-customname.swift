@@ -42,14 +42,14 @@ internal enum CustomJSON {
   }
   internal enum Json {
     private static let _document = JSONDocument(path: "json.json")
-    internal static let key1: String = _document["key1"]
     internal static let key2: String = _document["key2"]
     internal static let key3: [String: Any] = _document["key3"]
+    internal static let key1: String = _document["key1"]
   }
   internal enum Mapping {
     private static let _document = JSONDocument(path: "mapping.yaml")
-    internal static let key1: String = _document["key1"]
     internal static let key2: [String: Any] = _document["key2"]
+    internal static let key1: String = _document["key1"]
   }
   internal enum Scalar {
     internal static let value: String = objectFromJSON(at: "scalar.yaml")

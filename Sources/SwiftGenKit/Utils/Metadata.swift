@@ -11,7 +11,6 @@ import Foundation
 enum Metadata {
   private enum Key {
     static let element = "element"
-    static let name = "name"
     static let properties = "properties"
     static let type = "type"
   }
@@ -57,14 +56,13 @@ enum Metadata {
     }
   }
 
-  private static func describe(dictionary: [String: Any]) -> [[String: Any]] {
-    return dictionary.sorted {
-      $0.key < $1.key
-    }.map { item -> [String: Any] in
-      Metadata.generate(for: item.value).merging([
-        Key.name: item.key
-      ]) { _, rhs in rhs }
-    }
+  private static func describe(dictionary: [String: Any]) -> [String: Any] {
+    return Dictionary(uniqueKeysWithValues: dictionary.map { item in
+      (
+        key: item.key,
+        value: Metadata.generate(for: item.value)
+      )
+    })
   }
 
   private static func describe(arrayElement array: [Any]) -> [String: Any] {

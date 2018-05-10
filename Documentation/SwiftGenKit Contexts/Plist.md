@@ -20,9 +20,7 @@ The output context has the following structure:
 The metadata has the following properties:
 
  - `type`: `String` — The type of the object (Array, Dictionary, Int, Float, String, Bool, Date, Data)
- - `properties`: `Array` — List of properties metadata (only if a dictionary, repeats this metadata structure)
-    - name: `String` — Name of the property (dictionary key)
-    - repeats the rest of the metadata structure
+ - `properties`: `Dictionary` — List of properties metadata (only if a dictionary, repeats this metadata structure)
  - `element`: `Dictionary` — Element metadata (only if an array, repeats this metadata structure)
 
 ## Example
@@ -40,20 +38,20 @@ files:
       User Integer: 5
     metadata:
       properties:
-      - name: "UILaunchStoryboardName"
-        type: "String"
-      - name: "UIMainStoryboardFile"
-        type: "String"
-      - name: "User Ambiguous Integer"
-        type: "Bool"
-      - name: "User Boolean"
-        type: "Bool"
-      - name: "User Date"
-        type: "Date"
-      - name: "User Float"
-        type: "Double"
-      - name: "User Integer"
-        type: "Int"
+        UILaunchStoryboardName:
+          type: "String"
+        UIMainStoryboardFile:
+          type: "String"
+        User Ambiguous Integer:
+          type: "Bool"
+        User Boolean:
+          type: "Bool"
+        User Date:
+          type: "Date"
+        User Float:
+          type: "Double"
+        User Integer:
+          type: "Int"
       type: "Dictionary"
   name: "Info"
   path: "Info.plist"

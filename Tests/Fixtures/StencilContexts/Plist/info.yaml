@@ -48,80 +48,80 @@ files:
       User Integer: 5
     metadata:
       properties:
-      - name: "CFBundleDevelopmentRegion"
-        type: "String"
-      - name: "CFBundleDisplayName"
-        type: "String"
-      - name: "CFBundleExecutable"
-        type: "String"
-      - name: "CFBundleIdentifier"
-        type: "String"
-      - name: "CFBundleInfoDictionaryVersion"
-        type: "String"
-      - name: "CFBundleName"
-        type: "String"
-      - name: "CFBundlePackageType"
-        type: "String"
-      - name: "CFBundleShortVersionString"
-        type: "String"
-      - name: "CFBundleSignature"
-        type: "String"
-      - name: "CFBundleVersion"
-        type: "String"
-      - name: "Fabric"
-        properties:
-        - name: "APIKey"
+        CFBundleDevelopmentRegion:
           type: "String"
-        - element:
-            type: "Dictionary"
-          name: "Kits"
+        CFBundleDisplayName:
+          type: "String"
+        CFBundleExecutable:
+          type: "String"
+        CFBundleIdentifier:
+          type: "String"
+        CFBundleInfoDictionaryVersion:
+          type: "String"
+        CFBundleName:
+          type: "String"
+        CFBundlePackageType:
+          type: "String"
+        CFBundleShortVersionString:
+          type: "String"
+        CFBundleSignature:
+          type: "String"
+        CFBundleVersion:
+          type: "String"
+        Fabric:
+          properties:
+            APIKey:
+              type: "String"
+            Kits:
+              element:
+                type: "Dictionary"
+              type: "Array"
+          type: "Dictionary"
+        ITSAppUsesNonExemptEncryption:
+          type: "Bool"
+        LSRequiresIPhoneOS:
+          type: "Bool"
+        NSAppTransportSecurity:
+          properties: {}
+          type: "Dictionary"
+        NSCameraUsageDescription:
+          type: "String"
+        NSPhotoLibraryUsageDescription:
+          type: "String"
+        UIBackgroundModes:
+          element:
+            type: "String"
           type: "Array"
-        type: "Dictionary"
-      - name: "ITSAppUsesNonExemptEncryption"
-        type: "Bool"
-      - name: "LSRequiresIPhoneOS"
-        type: "Bool"
-      - name: "NSAppTransportSecurity"
-        properties: []
-        type: "Dictionary"
-      - name: "NSCameraUsageDescription"
-        type: "String"
-      - name: "NSPhotoLibraryUsageDescription"
-        type: "String"
-      - element:
+        UILaunchStoryboardName:
           type: "String"
-        name: "UIBackgroundModes"
-        type: "Array"
-      - name: "UILaunchStoryboardName"
-        type: "String"
-      - name: "UIMainStoryboardFile"
-        type: "String"
-      - element:
+        UIMainStoryboardFile:
           type: "String"
-        name: "UIRequiredDeviceCapabilities"
-        type: "Array"
-      - name: "UIRequiresFullScreen"
-        type: "Bool"
-      - name: "UIStatusBarStyle"
-        type: "String"
-      - element:
+        UIRequiredDeviceCapabilities:
+          element:
+            type: "String"
+          type: "Array"
+        UIRequiresFullScreen:
+          type: "Bool"
+        UIStatusBarStyle:
           type: "String"
-        name: "UISupportedInterfaceOrientations"
-        type: "Array"
-      - element:
-          type: "String"
-        name: "UISupportedInterfaceOrientations~ipad"
-        type: "Array"
-      - name: "User Ambiguous Integer"
-        type: "Bool"
-      - name: "User Boolean"
-        type: "Bool"
-      - name: "User Date"
-        type: "Date"
-      - name: "User Float"
-        type: "Double"
-      - name: "User Integer"
-        type: "Int"
+        UISupportedInterfaceOrientations:
+          element:
+            type: "String"
+          type: "Array"
+        UISupportedInterfaceOrientations~ipad:
+          element:
+            type: "String"
+          type: "Array"
+        User Ambiguous Integer:
+          type: "Bool"
+        User Boolean:
+          type: "Bool"
+        User Date:
+          type: "Date"
+        User Float:
+          type: "Double"
+        User Integer:
+          type: "Int"
       type: "Dictionary"
   name: "Info"
   path: "Info.plist"

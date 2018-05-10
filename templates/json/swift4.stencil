@@ -51,7 +51,7 @@ private struct JSONDocument {
   {% elif document.metadata.type == "Dictionary" %}
   private static let _document = JSONDocument(path: "{{file.path}}")
 
-  {% for property in document.metadata.properties %}
+  {% for propertyName,property in document.metadata.properties %}
   {{accessModifier}} {% call propertyBlock property %}
   {% endfor %}
   {% else %}

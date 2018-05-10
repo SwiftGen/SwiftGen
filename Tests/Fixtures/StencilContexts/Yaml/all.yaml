@@ -28,17 +28,17 @@ files:
         - "3"
     metadata:
       properties:
-      - name: "key1"
-        type: "String"
-      - name: "key2"
-        type: "String"
-      - name: "key3"
-        properties:
-        - element:
-            type: "String"
-          name: "nestedKey3"
-          type: "Array"
-        type: "Dictionary"
+        key1:
+          type: "String"
+        key2:
+          type: "String"
+        key3:
+          properties:
+            nestedKey3:
+              element:
+                type: "String"
+              type: "Array"
+          type: "Dictionary"
       type: "Dictionary"
   name: "json"
   path: "json.json"
@@ -49,13 +49,13 @@ files:
         nestedKey2: "nestedValue2"
     metadata:
       properties:
-      - name: "key1"
-        type: "String"
-      - name: "key2"
-        properties:
-        - name: "nestedKey2"
+        key1:
           type: "String"
-        type: "Dictionary"
+        key2:
+          properties:
+            nestedKey2:
+              type: "String"
+          type: "Dictionary"
       type: "Dictionary"
   name: "mapping"
   path: "mapping.yaml"

@@ -22,9 +22,7 @@ The output context has the following structure:
 The metadata has the following properties:
 
  - `type`: `String` — The type of the object (Array, Dictionary, Int, Float, String, Bool, Date, Data)
- - `properties`: `Array` — List of properties metadata (only if a dictionary, repeats this metadata structure)
-    - name: `String` — Name of the property (dictionary key)
-    - repeats the rest of the metadata structure
+ - `properties`: `Dictionary` — List of properties metadata (only if a dictionary, repeats this metadata structure)
  - `element`: `Dictionary` — Element metadata (only if an array, repeats this metadata structure)
 
 ## Example
@@ -60,17 +58,17 @@ files:
         - "3"
     metadata:
       properties:
-      - name: "key1"
-        type: "String"
-      - name: "key2"
-        type: "String"
-      - name: "key3"
-        properties:
-        - element:
-            type: "String"
-          name: "nestedKey3"
-          type: "Array"
-        type: "Dictionary"
+        key1:
+          type: "String"
+        key2:
+          type: "String"
+        key3:
+          properties:
+            nestedKey3:
+              element:
+                type: "String"
+              type: "Array"
+          type: "Dictionary"
       type: "Dictionary"
   name: "json"
   path: "json.json"
