@@ -6,9 +6,6 @@
 
 import Foundation
 import PathKit
-#if canImport(SwiftGen)
-@testable import SwiftGen
-#endif
 import XCTest
 
 private let colorCode: (String) -> String =
