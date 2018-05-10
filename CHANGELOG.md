@@ -9,10 +9,14 @@
 * Fix memory leak in generated code for Fonts.  
   [Olivier Halligon](https://github.com/AliSoftware)
   [#394](https://github.com/SwiftGen/SwiftGen/issues/394)
-* Storyboards: ensure the templates handle `GLKViewController`, `AVPlayerViewController` and `NSPageController` correctly.  
+* Interface Builder: ensure the templates handle `GLKViewController`, `AVPlayerViewController` and `NSPageController` correctly.  
   [David Jennes](https://github.com/djbe)
   [#404](https://github.com/SwiftGen/SwiftGen/issues/404)
   [#414](https://github.com/SwiftGen/SwiftGen/pull/414)
+* Interface Builder: ensure the parser can handle files with and without "trait variations".  
+  [David Jennes](https://github.com/djbe)
+  [#367](https://github.com/SwiftGen/SwiftGen/issues/367)
+  [#429](https://github.com/SwiftGen/SwiftGen/pull/429)
 
 ### Breaking Changes
 

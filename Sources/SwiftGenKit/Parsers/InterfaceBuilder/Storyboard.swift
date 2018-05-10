@@ -52,7 +52,7 @@ extension InterfaceBuilder.Storyboard {
 
     // TargetRuntime
     let targetRuntime = document.at_xpath(XML.targetRuntimeXPath)?.text ?? ""
-    guard let platform = InterfaceBuilder.Platform(rawValue: targetRuntime) else {
+    guard let platform = InterfaceBuilder.Platform(runtime: targetRuntime) else {
       throw InterfaceBuilder.ParserError.unsupportedTargetRuntime(target: targetRuntime)
     }
     self.platform = platform
