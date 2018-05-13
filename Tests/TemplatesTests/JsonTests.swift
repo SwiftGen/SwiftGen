@@ -15,7 +15,41 @@ class JsonTests: XCTestCase {
   }
 
   // generate variations to test customname generation
-  let variations: VariationGenerator = { name, context in
+  let inlineVariations: VariationGenerator = { name, context in
+    guard name == "all" else { return [(context: context, suffix: "")] }
+
+    return [
+      (context: context,
+       suffix: ""),
+      (context: try StencilContext.enrich(context: context,
+                                          parameters: ["enumName=CustomJSON"]),
+       suffix: "-customname"),
+      (context: try StencilContext.enrich(context: context,
+                                          parameters: ["publicAccess"]),
+       suffix: "-publicAccess")
+    ]
+  }
+
+  func testInlineSwift3() {
+    test(template: "inline-swift3",
+         contextNames: Contexts.all,
+         directory: .json,
+         resourceDirectory: .yaml,
+         outputDirectory: .json,
+         contextVariations: inlineVariations)
+  }
+
+  func testInlineSwift4() {
+    test(template: "inline-swift4",
+         contextNames: Contexts.all,
+         directory: .json,
+         resourceDirectory: .yaml,
+         outputDirectory: .json,
+         contextVariations: inlineVariations)
+  }
+
+  // generate variations to test customname generation
+  let runtimeVariations: VariationGenerator = { name, context in
     guard name == "all" else { return [(context: context, suffix: "")] }
 
     return [
@@ -33,21 +67,21 @@ class JsonTests: XCTestCase {
     ]
   }
 
-  func testSwift3() {
-    test(template: "swift3",
+  func testRuntimeSwift3() {
+    test(template: "runtime-swift3",
          contextNames: Contexts.all,
          directory: .json,
          resourceDirectory: .yaml,
          outputDirectory: .json,
-         contextVariations: variations)
+         contextVariations: runtimeVariations)
   }
 
-  func testSwift4() {
-    test(template: "swift4",
+  func testRuntimeSwift4() {
+    test(template: "runtime-swift4",
          contextNames: Contexts.all,
          directory: .json,
          resourceDirectory: .yaml,
          outputDirectory: .json,
-         contextVariations: variations)
+         contextVariations: runtimeVariations)
   }
 }

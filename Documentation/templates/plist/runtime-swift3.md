@@ -2,14 +2,15 @@
 
 | Name      | Description       |
 | --------- | ----------------- |
-| File name | json/swift4.stencil |
-| Invocation example | `swiftgen json -t swift4 …` |
-| Language | Swift 4 |
+| File name | plist/runtime-swift3.stencil |
+| Invocation example | `swiftgen plist -t runtime-swift3 …` |
+| Language | Swift 3 |
 | Author | David Jennes |
 
 ## When to use it
 
-- When you need to generate *Swift 4* code
+- When you need to generate *Swift 3* code
+- Loads the data from the Plist file at runtime
 
 ## Customization
 
@@ -18,7 +19,7 @@ You can customize some elements of this template by overriding the following par
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
 | `documentName` | `Document` | Allows you to change the prefix of the generated `enum` for each document. |
-| `enumName` | `JSONFiles` | Allows you to change the name of the generated `enum` containing all files. |
+| `enumName` | `PlistFiles` | Allows you to change the name of the generated `enum` containing all files. |
 | `preservePath` | N/A | Setting this parameter will disable the basename filter applied to all file paths. Use this if you added your data folder as a "folder reference" in your Xcode project, making that folder hierarchy preserved once copied in the build app bundle. The path will be relative to the folder you provided to SwiftGen. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 
@@ -27,27 +28,26 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-internal enum JSONFiles {
-  internal enum Info {
-    private static let _document = JSONDocument(path: "info.json")
-    internal static let key1: String = _document["key1"]
-    internal static let key2: String = _document["key2"]
-    internal static let key3: [String: Any] = _document["key3"]
+internal enum PlistFiles {
+  internal enum Test {
+    internal static let items: [String] = arrayFromPlist(at: "array.plist")
   }
-  internal enum Sequence {
-    internal static let items: [Int] = objectFromJSON(at: "sequence.json")
+  internal enum Stuff {
+    private static let _document = PlistDocument(path: "dictionary.plist")
+    internal static let key1: Int = _document["key1"]
+    internal static let key2: [String: Any] = _document["key2"]
   }
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/SwiftGen/blob/master/Tests/Fixtures/Generated/JSON/swift4-context-all.swift)
+[Full generated code](https://github.com/SwiftGen/SwiftGen/blob/master/Tests/Fixtures/Generated/Plist/runtime-swift3-context-all.swift)
 
 ## Usage example
 
 ```swift
-// This will be an dictionary
-let foo = JSONFiles.Info.key3
+// This will be an array
+let foo = PlistFiles.Test.items
 
-// This will be an [Int]
-let bar = JSONFiles.Sequence.items
+// This will be an Int
+let bar = PlistFiles.Stuff.key1
 ```

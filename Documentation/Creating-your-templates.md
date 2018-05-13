@@ -39,13 +39,13 @@ ib:
 json:
   custom:
   bundled:
-   - swift3
-   - swift4
+   - runtime-swift3
+   - runtime-swift4
 plist:
   custom:
   bundled:
-   - swift3
-   - swift4
+   - runtime-swift3
+   - runtime-swift4
 strings:
   custom:
    - mycustomtemplate

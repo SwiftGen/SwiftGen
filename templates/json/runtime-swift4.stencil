@@ -8,25 +8,21 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-private func arrayFromPlist<T>(at path: String) -> [T] {
+private func objectFromJSON<T>(at path: String) -> T {
   let bundle = Bundle(for: BundleToken.self)
   guard let url = bundle.url(forResource: path, withExtension: nil),
-    let data = NSArray(contentsOf: url) as? [T] else {
-    fatalError("Unable to load PLIST at path: \(path)")
+    let json = try? JSONSerialization.jsonObject(with: Data(contentsOf: url), options: []),
+    let result = json as? T else {
+    fatalError("Unable to load JSON at path: \(path)")
   }
-  return data
+  return result
 }
 
-private struct PlistDocument {
+private struct JSONDocument {
   let data: [String: Any]
 
   init(path: String) {
-    let bundle = Bundle(for: BundleToken.self)
-    guard let url = bundle.url(forResource: path, withExtension: nil),
-      let data = NSDictionary(contentsOf: url) as? [String: Any] else {
-        fatalError("Unable to load PLIST at path: \(path)")
-    }
-    self.data = data
+    self.data = objectFromJSON(at: path)
   }
 
   subscript<T>(key: String) -> T {
@@ -51,15 +47,15 @@ private struct PlistDocument {
 {% macro documentBlock file document %}
   {% set rootType %}{% call typeBlock document.metadata %}{% endset %}
   {% if document.metadata.type == "Array" %}
-  {{accessModifier}} static let items: {{rootType}} = arrayFromPlist(at: "{% call transformPath file.path %}")
+  {{accessModifier}} static let items: {{rootType}} = objectFromJSON(at: "{% call transformPath file.path %}")
   {% elif document.metadata.type == "Dictionary" %}
-  private static let _document = PlistDocument(path: "{% call transformPath file.path %}")
+  private static let _document = JSONDocument(path: "{% call transformPath file.path %}")
 
-  {% for propertyName,property in document.metadata.properties %}
-  {{accessModifier}} {% call propertyBlock property %}
+  {% for key,value in document.metadata.properties %}
+  {{accessModifier}} {% call propertyBlock key value %}
   {% endfor %}
   {% else %}
-  // Unsupported root type `{{rootType}}`
+  {{accessModifier}} static let value: {{rootType}} = objectFromJSON(at: "{% call transformPath file.path %}")
   {% endif %}
 {% endmacro %}
 {% macro typeBlock metadata %}{% filter removeNewlines:"leading" %}
@@ -71,10 +67,10 @@ private struct PlistDocument {
     {{metadata.type}}
   {% endif %}
 {% endfilter %}{% endmacro %}
-{% macro propertyBlock property %}{% filter removeNewlines:"leading" %}
-  {% set propertyName %}{{property.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% endset %}
-  {% set propertyType %}{% call typeBlock property %}{% endset %}
-  static let {{propertyName}}: {{propertyType}} = _document["{{property.name}}"]
+{% macro propertyBlock key metadata %}{% filter removeNewlines:"leading" %}
+  {% set propertyName %}{{key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% endset %}
+  {% set propertyType %}{% call typeBlock metadata %}{% endset %}
+  static let {{propertyName}}: {{propertyType}} = _document["{{key}}"]
 {% endfilter %}{% endmacro %}
 {% macro transformPath path %}{% filter removeNewlines %}
   {% if param.preservePath %}
@@ -85,7 +81,7 @@ private struct PlistDocument {
 {% endfilter %}{% endmacro %}
 
 // swiftlint:disable identifier_name line_length type_body_length
-{{accessModifier}} enum {{param.enumName|default:"PlistFiles"}} {
+{{accessModifier}} enum {{param.enumName|default:"JSONFiles"}} {
   {% if files.count > 1 %}
   {% for file in files %}
   {{accessModifier}} enum {{file.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
