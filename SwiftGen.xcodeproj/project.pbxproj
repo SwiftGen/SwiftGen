@@ -45,6 +45,7 @@
 		DD15F101213C3DDF00D081C7 /* YamsSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F100213C3DDF00D081C7 /* YamsSerialization.swift */; };
 		DD15F103213C40A000D081C7 /* PlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F102213C409F00D081C7 /* PlistTests.swift */; };
 		DD15F105213C412F00D081C7 /* JsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F104213C412F00D081C7 /* JsonTests.swift */; };
+		DD15F107213C474600D081C7 /* YamlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F106213C474600D081C7 /* YamlTests.swift */; };
 		DD40284A209E56B50045FC76 /* config-with-multi-outputs.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */; };
 		DD402850209FBF300045FC76 /* config-deprecated-paths.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */; };
 		DD402851209FBF300045FC76 /* config-deprecated-mixed-with-new.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD40284E209FBF300045FC76 /* config-deprecated-mixed-with-new.yml */; };
@@ -307,6 +308,7 @@
 		DD15F100213C3DDF00D081C7 /* YamsSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamsSerialization.swift; sourceTree = "<group>"; };
 		DD15F102213C409F00D081C7 /* PlistTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistTests.swift; sourceTree = "<group>"; };
 		DD15F104213C412F00D081C7 /* JsonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonTests.swift; sourceTree = "<group>"; };
+		DD15F106213C474600D081C7 /* YamlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamlTests.swift; sourceTree = "<group>"; };
 		DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-with-multi-outputs.yml"; sourceTree = "<group>"; };
 		DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-deprecated-paths.yml"; sourceTree = "<group>"; };
 		DD40284E209FBF300045FC76 /* config-deprecated-mixed-with-new.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-deprecated-mixed-with-new.yml"; sourceTree = "<group>"; };
@@ -762,6 +764,7 @@
 				DDDE506D1FAF6AD4004203BE /* StringsTests.swift */,
 				DDDE50F81FAF6AD4004203BE /* TestsHelper.swift */,
 				DDDE50F51FAF6AD4004203BE /* XCAssetsTests.swift */,
+				DD15F106213C474600D081C7 /* YamlTests.swift */,
 				DDDE50FA1FAF6AD4004203BE /* Info.plist */,
 			);
 			path = TemplatesTests;
@@ -1395,6 +1398,7 @@
 			files = (
 				DDDE51961FAF6AD4004203BE /* InterfaceBuilderMacOSTests.swift in Sources */,
 				DDDE51981FAF6AD4004203BE /* InterfaceBuilderiOSTests.swift in Sources */,
+				DD15F107213C474600D081C7 /* YamlTests.swift in Sources */,
 				DD15F105213C412F00D081C7 /* JsonTests.swift in Sources */,
 				DD15F103213C40A000D081C7 /* PlistTests.swift in Sources */,
 				DDDE51971FAF6AD4004203BE /* TestsHelper.swift in Sources */,

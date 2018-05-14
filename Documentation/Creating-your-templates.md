@@ -39,11 +39,15 @@ ib:
 json:
   custom:
   bundled:
+   - inline-swift3
+   - inline-swift4
    - runtime-swift3
    - runtime-swift4
 plist:
   custom:
   bundled:
+   - inline-swift3
+   - inline-swift4
    - runtime-swift3
    - runtime-swift4
 strings:
@@ -61,6 +65,8 @@ xcassets:
    - swift4
 yaml:
   custom:
+   - inline-swift3
+   - inline-swift4
   bundled:
 ```
 

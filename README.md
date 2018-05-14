@@ -439,8 +439,8 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 ## JSON and YAML
 
 ```sh
-swiftgen json -t swift4 /path/to/json/dir-or-file
-swiftgen yaml -t swift4 /path/to/yaml/dir-or-file
+swiftgen json -t runtime-swift4 /path/to/json/dir-or-file
+swiftgen yaml -t inline-swift4 /path/to/yaml/dir-or-file
 ```
 
 This will parse the given file, or when given a directory, recursively search for JSON and YAML files. It will define an `enum` for each file (and documents in a file where needed), and type-safe constants for the content of the file.
@@ -478,7 +478,7 @@ let bar = JSONFiles.Sequence.items
 ## Plists
 
 ```sh
-swiftgen plist -t swift4 /path/to/plist/dir-or-file
+swiftgen plist -t runtime-swift4 /path/to/plist/dir-or-file
 ```
 
 This will parse the given file, or when given a directory, recursively search for Plist files. It will define an `enum` for each file (and documents in a file where needed), and type-safe constants for the content of the file.
