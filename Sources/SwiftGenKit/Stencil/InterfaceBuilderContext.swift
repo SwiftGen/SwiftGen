@@ -33,14 +33,15 @@ import Foundation
           such as GLKit depending on the base type (can be empty)
 */
 extension InterfaceBuilder.Parser {
-  public func stencilContext() -> [String: Any] {
+  public func stencilContext(testEnvironment isTestEnvironment: Bool) -> [String: Any] {
     let storyboards = self.storyboards
       .sorted { lhs, rhs in lhs.name < rhs.name }
       .map(map(storyboard:))
     return [
       "modules": modules.sorted(),
       "storyboards": storyboards,
-      "platform": platform ?? ""
+      "platform": platform ?? "",
+      "preferSwiftLintDisableAll": !isTestEnvironment
     ]
   }
 

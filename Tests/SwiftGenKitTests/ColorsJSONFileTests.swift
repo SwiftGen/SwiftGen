@@ -13,7 +13,7 @@ class ColorsJSONFileTests: XCTestCase {
     let parser = Colors.Parser()
     parser.palettes = [try Colors.JSONFileParser().parseFile(at: Fixtures.path(for: "colors.json", sub: .colors))]
 
-    let result = parser.stencilContext()
+    let result = parser.stencilContext(testEnvironment: true)
     XCTDiffContexts(result, expected: "defaults", sub: .colors)
   }
 

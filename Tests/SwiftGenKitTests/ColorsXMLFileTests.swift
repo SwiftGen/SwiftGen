@@ -13,7 +13,7 @@ class ColorsXMLFileTests: XCTestCase {
     let parser = Colors.Parser()
     parser.palettes = [try Colors.XMLFileParser().parseFile(at: Fixtures.path(for: "colors.xml", sub: .colors))]
 
-    let result = parser.stencilContext()
+    let result = parser.stencilContext(testEnvironment: true)
     XCTDiffContexts(result, expected: "defaults", sub: .colors)
   }
 

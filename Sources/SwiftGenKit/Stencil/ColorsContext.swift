@@ -17,7 +17,7 @@ import Foundation
      - `alpha`: `String` — hex value of the alpha component
 */
 extension Colors.Parser {
-  public func stencilContext() -> [String: Any] {
+  public func stencilContext(testEnvironment isTestEnvironment: Bool) -> [String: Any] {
     let palettes: [[String: Any]] = self.palettes
       .sorted { $0.name < $1.name }
       .map { palette in
@@ -32,7 +32,8 @@ extension Colors.Parser {
       }
 
     return [
-      "palettes": palettes
+      "palettes": palettes,
+      "preferSwiftLintDisableAll": !isTestEnvironment
     ]
   }
 

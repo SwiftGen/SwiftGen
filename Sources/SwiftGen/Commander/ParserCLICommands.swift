@@ -54,7 +54,7 @@ extension ParserCLI {
         let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                                 environment: stencilSwiftEnvironment())
 
-        let context = parser.stencilContext()
+        let context = parser.stencilContext(testEnvironment: false)
         let enriched = try StencilContext.enrich(context: context, parameters: parameters)
         let rendered = try template.render(enriched)
         try output.write(content: rendered, onlyIfChanged: true)

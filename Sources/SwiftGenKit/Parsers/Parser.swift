@@ -13,7 +13,7 @@ public protocol Parser {
   // Parsing and context generation
   func parse(path: Path) throws
   func parse(paths: [Path]) throws
-  func stencilContext() -> [String: Any]
+  func stencilContext(testEnvironment isTestEnvironment: Bool) -> [String: Any]
 
   /// This callback will be called when a Parser want to emit a diagnostics message
   /// You can set this on the usage-site to a closure that prints the diagnostics in any way you see fit

@@ -24,7 +24,7 @@ import Foundation
        - `value`: `String` — the actual full name for loading the image
 */
 extension AssetsCatalog.Parser {
-  public func stencilContext() -> [String: Any] {
+  public func stencilContext(testEnvironment isTestEnvironment: Bool) -> [String: Any] {
     let catalogs = self.catalogs
       .sorted { lhs, rhs in lhs.name < rhs.name }
       .map { catalog -> [String: Any] in
@@ -35,7 +35,8 @@ extension AssetsCatalog.Parser {
       }
 
     return [
-      "catalogs": catalogs
+      "catalogs": catalogs,
+      "preferSwiftLintDisableAll": !isTestEnvironment
     ]
   }
 

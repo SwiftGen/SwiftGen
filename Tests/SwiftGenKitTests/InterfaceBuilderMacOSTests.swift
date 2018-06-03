@@ -17,7 +17,7 @@ class InterfaceBuilderMacOSTests: XCTestCase {
   func testEmpty() {
     let parser = InterfaceBuilder.Parser()
 
-    let result = parser.stencilContext()
+    let result = parser.stencilContext(testEnvironment: true)
     XCTDiffContexts(result, expected: "empty", sub: .interfaceBuilderMacOS)
   }
 
@@ -29,7 +29,7 @@ class InterfaceBuilderMacOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let result = parser.stencilContext()
+    let result = parser.stencilContext(testEnvironment: true)
     XCTDiffContexts(result, expected: "messages", sub: .interfaceBuilderMacOS)
   }
 
@@ -41,7 +41,7 @@ class InterfaceBuilderMacOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let result = parser.stencilContext()
+    let result = parser.stencilContext(testEnvironment: true)
     XCTDiffContexts(result, expected: "anonymous", sub: .interfaceBuilderMacOS)
   }
 
@@ -53,7 +53,7 @@ class InterfaceBuilderMacOSTests: XCTestCase {
       print("Error: \(error.localizedDescription)")
     }
 
-    let result = parser.stencilContext()
+    let result = parser.stencilContext(testEnvironment: true)
     XCTDiffContexts(result, expected: "all", sub: .interfaceBuilderMacOS)
   }
 }

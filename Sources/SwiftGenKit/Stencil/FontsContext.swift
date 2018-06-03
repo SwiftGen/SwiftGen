@@ -16,7 +16,7 @@ import Foundation
 */
 
 extension Fonts.Parser {
-  public func stencilContext() -> [String: Any] {
+  public func stencilContext(testEnvironment isTestEnvironment: Bool) -> [String: Any] {
     // turn into array of dictionaries
     let families = entries.map { (name: String, family: Set<Fonts.Font>) -> [String: Any] in
       let fonts = family.map { (font: Fonts.Font) -> [String: String] in
@@ -35,7 +35,8 @@ extension Fonts.Parser {
     }.sorted { $0["name"] as? String ?? "" < $1["name"] as? String ?? "" }
 
     return [
-      "families": families
+      "families": families,
+      "preferSwiftLintDisableAll": !isTestEnvironment
     ]
   }
 }

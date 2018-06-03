@@ -29,7 +29,7 @@ private extension String {
           Contains a list of types like `"String"`, `"Int"`, etc
 */
 extension Strings.Parser {
-  public func stencilContext() -> [String: Any] {
+  public func stencilContext(testEnvironment isTestEnvironment: Bool) -> [String: Any] {
     let entryToStringMapper = { (entry: Strings.Entry, keyPath: [String]) -> [String: Any] in
       let levelName = entry.keyStructure.last ?? ""
 
@@ -57,7 +57,8 @@ extension Strings.Parser {
     }
 
     return [
-      "tables": tables
+      "tables": tables,
+      "preferSwiftLintDisableAll": !isTestEnvironment
     ]
   }
 
