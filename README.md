@@ -105,12 +105,12 @@ _Note: SwiftGen needs Xcode 8.3 to build, so installing via Homebrew requires yo
 
 To install SwiftGen via [Mint](https://github.com/yonaskolb/Mint), simply use:
 
-Note: Will work for Releases > 5.3.0 only.
-
 ```sh
 $ brew install libxml2
-$ mint install SwiftGen/SwiftGen --global=false
+$ mint install SwiftGen/SwiftGen --prevent-global
 ```
+
+Note: Will work for Releases > 5.3.0 only.
 
 ---
 </details>
