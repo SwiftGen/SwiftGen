@@ -34,7 +34,7 @@ import Foundation
   {% endfor %}
 {% endmacro %}
 
-// swiftlint:disable identifier_name line_length type_body_length
+// swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 {% set enumName %}{{param.enumName|default:"L10n"}}{% endset %}
 {{accessModifier}} enum {{enumName}} {
   {% if tables.count > 1 %}
@@ -47,7 +47,7 @@ import Foundation
   {% call recursiveBlock tables.first.name tables.first.levels %}
   {% endif %}
 }
-// swiftlint:enable identifier_name line_length type_body_length
+// swiftlint:enable function_parameter_count identifier_name line_length type_body_length
 
 extension {{enumName}} {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {

@@ -66,6 +66,9 @@
   [David Jennes](https://github.com/djbe) 
   [#417](https://github.com/SwiftGen/SwiftGen/pull/417)
   [#422](https://github.com/SwiftGen/SwiftGen/pull/422)
+* Disabled a SwiftLint rule for function parameter count.  
+  [Oleg Gorbatchev](https://github.com/gorbat-o)
+  [#428](https://github.com/SwiftGen/SwiftGen/pull/428)
 
 ## 5.3.0
 

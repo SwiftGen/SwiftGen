@@ -5,7 +5,8 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-// swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable nesting type_body_length type_name
 internal enum XCTLoc {
   /// Some alert body there
   internal static let alertMessage = XCTLoc.tr("Localizable", "alert_message")
@@ -73,7 +74,8 @@ internal enum XCTLoc {
     }
   }
 }
-// swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable nesting type_body_length type_name
 
 extension XCTLoc {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {

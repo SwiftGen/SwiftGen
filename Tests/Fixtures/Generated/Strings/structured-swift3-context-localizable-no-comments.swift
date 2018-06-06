@@ -5,7 +5,8 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-// swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
   internal static let alertMessage = L10n.tr("Localizable", "alert_message")
   internal static let alertTitle = L10n.tr("Localizable", "alert_title")
@@ -62,7 +63,8 @@ internal enum L10n {
     }
   }
 }
-// swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable nesting type_body_length type_name
 
 extension L10n {
   fileprivate static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
