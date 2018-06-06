@@ -1,5 +1,7 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
+{% if preferSwiftLintDisableAll %}// swiftlint:disable all{% endif %}
+
 {% if catalogs %}
 {% set colorAlias %}{{param.colorAliasName|default:"AssetColorTypeAlias"}}{% endset %}
 {% set imageAlias %}{{param.imageAliasName|default:"Image"}}{% endset %}
@@ -14,8 +16,10 @@
   {{accessModifier}} typealias {{imageAlias}} = UIImage
 #endif
 
+{% if not preferSwiftLintDisableAll %}
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
+{% endif %}
 
 {% set enumName %}{{param.enumName|default:"Asset"}}{% endset %}
 {% set imageType %}{{param.imageTypeName|default:"ImageAsset"}}{% endset %}
@@ -52,14 +56,18 @@
   {% call casesBlock assets %}
   {% if not param.noAllValues %}
 
+{% if not preferSwiftLintDisableAll %}
   // swiftlint:disable trailing_comma
+{% endif %}
   {{accessModifier}} static let allColors: [{{colorType}}] = [
     {% filter indent:2 %}{% call allValuesBlock assets "color" "" %}{% endfilter %}
   ]
   {{accessModifier}} static let allImages: [{{imageType}}] = [
     {% filter indent:2 %}{% call allValuesBlock assets "image" "" %}{% endfilter %}
   ]
+{% if not preferSwiftLintDisableAll %}
   // swiftlint:enable trailing_comma
+{% endif %}
   @available(*, deprecated, renamed: "allImages")
   {{accessModifier}} static let allValues: [{{enumName}}Type] = allImages
   {% endif %}
@@ -89,7 +97,9 @@
   {% endfor %}
 {% endmacro %}
 
+{% if not preferSwiftLintDisableAll %}
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
+{% endif %}
 {{accessModifier}} enum {{enumName}} {
   {% if catalogs.count > 1 %}
   {% for catalog in catalogs %}
@@ -101,7 +111,9 @@
   {% call enumBlock catalogs.first.assets %}
   {% endif %}
 }
+{% if not preferSwiftLintDisableAll %}
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
+{% endif %}
 
 {{accessModifier}} extension {{imageAlias}} {
   @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
