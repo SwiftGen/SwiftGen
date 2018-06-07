@@ -194,13 +194,13 @@ extension XCTestCase {
           }
 
           // check if we should generate or not
-          if ProcessInfo().environment["GENERATE_OUTPUT"] == "YES" && avoidSwiftLintDisableAll {
+          if ProcessInfo().environment["GENERATE_OUTPUT"] == "YES" {
             let avoidDisableAllPathComponent = avoidSwiftLintDisableAll ? "AvoidDisableAll/" : "DisableAll/"
             let target = Path(#file).parent().parent() +
               "Fixtures/Generated" +
               avoidDisableAllPathComponent +
               resourceDir.rawValue +
-              outputFile // TODO: Use Fixtures.output here
+              outputFile
             do {
               try target.write(result)
             } catch {
