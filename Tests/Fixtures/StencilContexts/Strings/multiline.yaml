@@ -1,3 +1,4 @@
+preferSwiftLintDisableAll: 
 tables:
 - levels:
     strings:

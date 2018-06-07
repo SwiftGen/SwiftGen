@@ -11,7 +11,6 @@ import UIKit
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
-
 public protocol StoryboardType {
   static var storyboardName: String { get }
 }

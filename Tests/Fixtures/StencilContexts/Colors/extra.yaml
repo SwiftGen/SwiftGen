@@ -36,3 +36,4 @@ palettes:
     name: private
     red: ff
   name: extra
+preferSwiftLintDisableAll: 

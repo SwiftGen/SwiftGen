@@ -72,3 +72,4 @@ families:
     path: Fonts/class.ttf
     style: internal
   name: public
+preferSwiftLintDisableAll: 

@@ -41,7 +41,7 @@ extension InterfaceBuilder.Parser {
       "modules": modules.sorted(),
       "storyboards": storyboards,
       "platform": platform ?? "",
-      "preferSwiftLintDisableAll": !isTestEnvironment
+      "preferSwiftLintDisableAll": isTestEnvironment ? "" : "yes"
     ]
   }
 

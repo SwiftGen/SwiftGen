@@ -6,6 +6,7 @@ modules:
 - SlackTextViewController
 - UIKit
 platform: iOS
+preferSwiftLintDisableAll: 
 storyboards:
 - initialScene:
     customClass: LocationPickerViewController

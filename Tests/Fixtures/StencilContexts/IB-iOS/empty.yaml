@@ -1,3 +1,4 @@
 modules: []
 platform: 
+preferSwiftLintDisableAll: 
 storyboards: []

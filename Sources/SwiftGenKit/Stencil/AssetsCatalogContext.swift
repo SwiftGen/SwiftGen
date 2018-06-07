@@ -36,7 +36,7 @@ extension AssetsCatalog.Parser {
 
     return [
       "catalogs": catalogs,
-      "preferSwiftLintDisableAll": !isTestEnvironment
+      "preferSwiftLintDisableAll": isTestEnvironment ? "" : "yes"
     ]
   }
 

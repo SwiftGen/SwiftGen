@@ -58,7 +58,7 @@ extension Strings.Parser {
 
     return [
       "tables": tables,
-      "preferSwiftLintDisableAll": !isTestEnvironment
+      "preferSwiftLintDisableAll": isTestEnvironment ? "" : "yes"
     ]
   }
 

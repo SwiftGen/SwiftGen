@@ -1,7 +1,9 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
-{% if preferSwiftLintDisableAll %}// swiftlint:disable all{% endif %}
+{% if preferSwiftLintDisableAll %}
+// swiftlint:disable all
 
+{% endif %}
 {% if platform and storyboards %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 {% set isAppKit %}{% if platform == "macOS" %}true{% endif %}{% endset %}
@@ -19,7 +21,6 @@ import {{module}}
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 {% endif %}
-
 {# This first part of the code is static, same every time whatever Storyboard you have #}
 {{accessModifier}} protocol StoryboardType {
   static var storyboardName: String { get }

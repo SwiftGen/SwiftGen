@@ -36,7 +36,7 @@ extension Fonts.Parser {
 
     return [
       "families": families,
-      "preferSwiftLintDisableAll": !isTestEnvironment
+      "preferSwiftLintDisableAll": isTestEnvironment ? "" : "yes"
     ]
   }
 }

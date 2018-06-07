@@ -33,7 +33,7 @@ extension Colors.Parser {
 
     return [
       "palettes": palettes,
-      "preferSwiftLintDisableAll": !isTestEnvironment
+      "preferSwiftLintDisableAll": isTestEnvironment ? "" : "yes"
     ]
   }
 
