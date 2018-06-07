@@ -1,5 +1,9 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
+{% if not avoidSwiftLintDisableAll %}
+// swiftlint:disable all
+
+{% endif %}
 {% if families %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 #if os(OSX)
@@ -10,8 +14,10 @@
   {{accessModifier}} typealias Font = UIFont
 #endif
 
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
+{% endif %}
 
 {{accessModifier}} struct FontConvertible {
   {{accessModifier}} let name: String
@@ -49,7 +55,9 @@
   }
 }
 
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable identifier_name line_length type_body_length
+{% endif %}
 {% macro transformPath path %}{% filter removeNewlines %}
   {% if param.preservePath %}
     {{path}}
@@ -71,7 +79,9 @@
     allCustomFonts.forEach { $0.register() }
   }
 }
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:enable identifier_name line_length type_body_length
+{% endif %}
 
 private final class BundleToken {}
 {% else %}

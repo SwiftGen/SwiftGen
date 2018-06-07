@@ -1,5 +1,9 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
+{% if not avoidSwiftLintDisableAll %}
+// swiftlint:disable all
+
+{% endif %}
 {% if palettes %}
 {% set colorAlias %}{{param.colorAliasName|default:"Color"}}{% endset %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
@@ -11,10 +15,12 @@
   {{accessModifier}} typealias {{colorAlias}} = UIColor
 #endif
 
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 // swiftlint:disable operator_usage_whitespace
+{% endif %}
 {{accessModifier}} extension {{colorAlias}} {
   convenience init(rgbaValue: UInt32) {
     let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0
@@ -25,9 +31,13 @@
     self.init(red: red, green: green, blue: blue, alpha: alpha)
   }
 }
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:enable operator_usage_whitespace
+{% endif %}
 
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable identifier_name line_length type_body_length
+{% endif %}
 {% set enumName %}{{param.enumName|default:"ColorName"}}{% endset %}
 {{accessModifier}} struct {{enumName}} {
   {{accessModifier}} let rgbaValue: UInt32
@@ -51,7 +61,9 @@
   {% call enumBlock palettes.first.colors %}
   {% endif %}
 }
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:enable identifier_name line_length type_body_length
+{% endif %}
 
 {{accessModifier}} extension {{colorAlias}} {
   convenience init(named color: {{enumName}}) {

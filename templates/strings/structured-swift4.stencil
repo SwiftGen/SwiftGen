@@ -1,11 +1,17 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
+{% if not avoidSwiftLintDisableAll %}
+// swiftlint:disable all
+
+{% endif %}
 {% if tables.count > 0 %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 import Foundation
 
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
+{% endif %}
 {% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
     _ p{{forloop.counter}}: {{type}}{% if not forloop.last %}, {% endif %}
@@ -37,8 +43,10 @@ import Foundation
   {% endfor %}
 {% endmacro %}
 
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
+{% endif %}
 {% set enumName %}{{param.enumName|default:"L10n"}}{% endset %}
 {{accessModifier}} enum {{enumName}} {
   {% if tables.count > 1 %}
@@ -51,8 +59,10 @@ import Foundation
   {% call recursiveBlock tables.first.name tables.first.levels %}
   {% endif %}
 }
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name
+{% endif %}
 
 extension {{enumName}} {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {

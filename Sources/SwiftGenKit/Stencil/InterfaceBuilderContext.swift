@@ -37,6 +37,7 @@ extension InterfaceBuilder.Parser {
     let storyboards = self.storyboards
       .sorted { lhs, rhs in lhs.name < rhs.name }
       .map(map(storyboard:))
+
     return [
       "modules": modules.sorted(),
       "storyboards": storyboards,
