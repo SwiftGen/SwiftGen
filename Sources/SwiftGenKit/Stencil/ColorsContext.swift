@@ -31,10 +31,16 @@ extension Colors.Parser {
         ]
       }
 
-    return [
-      "palettes": palettes,
-      "preferSwiftLintDisableAll": isTestEnvironment ? "" : "yes"
+    var context: [String: Any] = [
+      "palettes": palettes
     ]
+
+    if !isTestEnvironment {
+      // NOTE: Value being true doesn't matter; what matters is that it exists in the templating context
+      context["preferSwiftLintDisableAll"] = true
+    }
+
+    return context
   }
 
   private func map(color name: String, value: UInt32) -> [String: String] {

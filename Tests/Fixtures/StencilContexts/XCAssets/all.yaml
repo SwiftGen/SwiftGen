@@ -60,4 +60,3 @@ catalogs:
     type: image
     value: private
   name: Images
-preferSwiftLintDisableAll: 

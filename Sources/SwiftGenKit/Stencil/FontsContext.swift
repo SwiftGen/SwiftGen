@@ -34,9 +34,15 @@ extension Fonts.Parser {
       ]
     }.sorted { $0["name"] as? String ?? "" < $1["name"] as? String ?? "" }
 
-    return [
-      "families": families,
-      "preferSwiftLintDisableAll": isTestEnvironment ? "" : "yes"
+    var context: [String: Any] = [
+      "families": families
     ]
+
+    if !isTestEnvironment {
+      // NOTE: Value being true doesn't matter; what matters is that it exists in the templating context
+      context["preferSwiftLintDisableAll"] = true
+    }
+
+    return context
   }
 }

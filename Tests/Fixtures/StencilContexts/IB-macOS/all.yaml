@@ -3,7 +3,6 @@ modules:
 - FadeSegue
 - PrefsWindowController
 platform: macOS
-preferSwiftLintDisableAll: 
 storyboards:
 - name: AdditionalImport
   platform: macOS

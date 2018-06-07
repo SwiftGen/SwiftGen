@@ -34,10 +34,16 @@ extension AssetsCatalog.Parser {
         ]
       }
 
-    return [
-      "catalogs": catalogs,
-      "preferSwiftLintDisableAll": isTestEnvironment ? "" : "yes"
+    var context: [String: Any] = [
+      "catalogs": catalogs
     ]
+
+    if !isTestEnvironment {
+      // NOTE: Value being true doesn't matter; what matters is that it exists in the templating context
+      context["preferSwiftLintDisableAll"] = true
+    }
+
+    return context
   }
 
   private func structure(entries: [AssetsCatalog.Entry]) -> [[String: Any]] {

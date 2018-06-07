@@ -1,6 +1,5 @@
 modules: []
 platform: macOS
-preferSwiftLintDisableAll: 
 storyboards:
 - name: Anonymous
   platform: macOS

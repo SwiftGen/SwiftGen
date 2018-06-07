@@ -37,12 +37,19 @@ extension InterfaceBuilder.Parser {
     let storyboards = self.storyboards
       .sorted { lhs, rhs in lhs.name < rhs.name }
       .map(map(storyboard:))
-    return [
+
+    var context: [String: Any] = [
       "modules": modules.sorted(),
       "storyboards": storyboards,
-      "platform": platform ?? "",
-      "preferSwiftLintDisableAll": isTestEnvironment ? "" : "yes"
+      "platform": platform ?? ""
     ]
+
+    if !isTestEnvironment {
+      // NOTE: Value being true doesn't matter; what matters is that it exists in the templating context
+      context["preferSwiftLintDisableAll"] = true
+    }
+
+    return context
   }
 
   private func map(storyboard: InterfaceBuilder.Storyboard) -> [String: Any] {

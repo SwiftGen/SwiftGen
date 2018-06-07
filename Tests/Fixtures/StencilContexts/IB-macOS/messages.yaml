@@ -2,7 +2,6 @@ modules:
 - AppKit
 - FadeSegue
 platform: macOS
-preferSwiftLintDisableAll: 
 storyboards:
 - name: Message
   platform: macOS

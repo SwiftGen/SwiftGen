@@ -1,7 +1,6 @@
 modules:
 - UIKit
 platform: iOS
-preferSwiftLintDisableAll: 
 storyboards:
 - initialScene:
     baseType: ViewController

@@ -56,10 +56,16 @@ extension Strings.Parser {
       ]
     }
 
-    return [
-      "tables": tables,
-      "preferSwiftLintDisableAll": isTestEnvironment ? "" : "yes"
+    var context: [String: Any] = [
+      "tables": tables
     ]
+
+    if !isTestEnvironment {
+      // NOTE: Value being true doesn't matter; what matters is that it exists in the templating context
+      context["preferSwiftLintDisableAll"] = true
+    }
+
+    return context
   }
 
   typealias Mapper = (_ entry: Strings.Entry, _ keyPath: [String]) -> [String: Any]
