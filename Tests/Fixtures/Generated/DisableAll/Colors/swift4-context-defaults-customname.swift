@@ -10,7 +10,6 @@
   internal typealias XCTColor = UIColor
 #endif
 
-
 internal extension XCTColor {
   convenience init(rgbaValue: UInt32) {
     let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0

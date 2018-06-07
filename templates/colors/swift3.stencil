@@ -18,9 +18,7 @@
 {% if avoidSwiftLintDisableAll %}
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
-{% endif %}
 
-{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable operator_usage_whitespace
 {% endif %}
 {{accessModifier}} extension {{colorAlias}} {

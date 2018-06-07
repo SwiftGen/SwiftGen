@@ -10,7 +10,6 @@
   internal enum ColorName { }
 #endif
 
-
 internal extension ColorName {
   enum Colors {
     /// 0x339666ff (r: 51, g: 150, b: 102, a: 255)

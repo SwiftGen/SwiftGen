@@ -18,9 +18,7 @@
 {% if avoidSwiftLintDisableAll %}
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
-{% endif %}
 
-{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable identifier_name line_length type_body_length
 {% endif %}
 {{accessModifier}} extension {{enumName}} {
