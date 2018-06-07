@@ -41,6 +41,9 @@
 * The `swiftgen.yml` config file now accepts multiple outputs for each command, allowing you to generate multiple outputs from the same files and content. This also means that the `output` parameter is now deprecated, in favour of the `outputs` parameter, and it may be removed in a future version of SwiftGen. Similarly, the `paths` parameter has been renamed to `inputs` for consistency. You can always use `swiftgen config lint` to validate your configuration file.  
   [David Jennes](https://github.com/djbe) 
   [#424](https://github.com/SwiftGen/SwiftGen/pull/424)
+* Use `swiftlint:disable all` in generated files to avoid interference with SwiftLint rules custom to the host project.
+  [Frederick Pietschmann](https://github.com/fredpi)
+  [#409](https://github.com/SwiftGen/SwiftGen/issues/409)
 
 ### Internal Changes
 
