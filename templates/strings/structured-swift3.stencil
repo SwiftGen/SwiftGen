@@ -43,14 +43,9 @@ import Foundation
   {% endfor %}
 {% endmacro %}
 
-<<<<<<< HEAD
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
-=======
-{% if avoidSwiftLintDisableAll %}
-// swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
->>>>>>> Relocate SwiftLint flag injection
 {% endif %}
 {% set enumName %}{{param.enumName|default:"L10n"}}{% endset %}
 {{accessModifier}} enum {{enumName}} {
@@ -64,14 +59,9 @@ import Foundation
   {% call recursiveBlock tables.first.name tables.first.levels %}
   {% endif %}
 }
-<<<<<<< HEAD
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name
-=======
-{% if avoidSwiftLintDisableAll %}
-// swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
->>>>>>> Relocate SwiftLint flag injection
 {% endif %}
 
 extension {{enumName}} {

@@ -149,6 +149,7 @@ extension XCTestCase {
    - Parameter resourceDirectory: The directory to look for files in (corresponds to the command)
    - Parameter contextVariations: Optional closure to generate context variations.
    */
+  // swiftlint:disable:next function_body_length
   func test(template templateName: String,
             contextNames: [String],
             directory: Fixtures.Directory,
@@ -179,7 +180,8 @@ extension XCTestCase {
         if variations.count > 1 { print(" - Variation #\(index)... (expecting: \(outputFile))") }
 
         // Do two iterations: One using swiftlint:disable all, and one without
-        // TODO: Compare resulting texts after replacing all swiftlint:disable / enable lines
+        // Also store result of each iteration and compare afterwards
+        var results = [String]()
         let avoidSwiftLintDisableAllIterations = [false, true]
         for avoidSwiftLintDisableAll in avoidSwiftLintDisableAllIterations {
           if avoidSwiftLintDisableAll {
@@ -207,9 +209,25 @@ extension XCTestCase {
               fatalError("Unable to write output file \(target)")
             }
           } else {
+            results.append(result)
             let expected = Fixtures.output(for: outputFile, sub: resourceDir, avoidDisableAll: avoidSwiftLintDisableAll)
             XCTDiffStrings(result, expected, file: file, line: line)
           }
+        }
+
+        // Compare whetehr both versions match after removing all swiftlint comments
+        // Comparison should only happen on test, not on generation,
+        // so only add to results on test and check against emptyness
+        if results.count == 2 {
+          let results = results.map { result in
+            result.components(separatedBy: .newlines).filter { component in
+              !component.contains("swiftlint:disable") &&
+              !component.contains("swiftlint:enable") &&
+              !component.isEmpty
+            }.joined(separator: "\n")
+          }
+
+          XCTDiffStrings(results[0], results[1])
         }
       }
     }
