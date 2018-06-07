@@ -1,6 +1,6 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
-{% if preferSwiftLintDisableAll %}
+{% if not avoidSwiftLintDisableAll %}
 // swiftlint:disable all
 
 {% endif %}
@@ -8,7 +8,7 @@
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 import Foundation
 
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 {% endif %}
@@ -40,8 +40,13 @@ import Foundation
   {% endfor %}
 {% endmacro %}
 
+<<<<<<< HEAD
 {% if not preferSwiftLintDisableAll %}
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
+=======
+{% if avoidSwiftLintDisableAll %}
+// swiftlint:disable identifier_name line_length type_body_length
+>>>>>>> Relocate SwiftLint flag injection
 {% endif %}
 {% set enumName %}{{param.enumName|default:"L10n"}}{% endset %}
 {{accessModifier}} enum {{enumName}} {
@@ -55,8 +60,13 @@ import Foundation
   {% call recursiveBlock tables.first.name tables.first.levels %}
   {% endif %}
 }
+<<<<<<< HEAD
 {% if not preferSwiftLintDisableAll %}
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length
+=======
+{% if avoidSwiftLintDisableAll %}
+// swiftlint:enable identifier_name line_length type_body_length
+>>>>>>> Relocate SwiftLint flag injection
 {% endif %}
 
 extension {{enumName}} {

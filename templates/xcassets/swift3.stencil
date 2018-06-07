@@ -1,6 +1,6 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
-{% if preferSwiftLintDisableAll %}
+{% if not avoidSwiftLintDisableAll %}
 // swiftlint:disable all
 
 {% endif %}
@@ -18,7 +18,7 @@
   {{accessModifier}} typealias {{imageAlias}} = UIImage
 #endif
 
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 {% endif %}
@@ -60,7 +60,7 @@
   {% call casesBlock assets %}
   {% if not param.noAllValues %}
 
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
   // swiftlint:disable trailing_comma
 {% endif %}
   {{accessModifier}} static let allColors: [{{colorType}}] = [
@@ -69,7 +69,7 @@
   {{accessModifier}} static let allImages: [{{imageType}}] = [
     {% filter indent:2 %}{% call allValuesBlock assets "image" "" %}{% endfilter %}
   ]
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
   // swiftlint:enable trailing_comma
 {% endif %}
   @available(*, deprecated, renamed: "allImages")
@@ -101,7 +101,7 @@
   {% endfor %}
 {% endmacro %}
 
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 {% endif %}
 {{accessModifier}} enum {{enumName}} {
@@ -115,7 +115,7 @@
   {% call enumBlock catalogs.first.assets %}
   {% endif %}
 }
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 {% endif %}
 

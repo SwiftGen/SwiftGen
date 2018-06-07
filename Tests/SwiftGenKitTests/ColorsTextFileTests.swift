@@ -13,7 +13,7 @@ class ColorsTextFileTests: XCTestCase {
     let parser = Colors.Parser()
     parser.palettes = [try Colors.TextFileParser().parseFile(at: Fixtures.path(for: "extra.txt", sub: .colors))]
 
-    let result = parser.stencilContext(testEnvironment: true)
+    let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "extra", sub: .colors)
   }
 

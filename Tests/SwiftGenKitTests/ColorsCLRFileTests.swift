@@ -13,7 +13,7 @@ class ColorsCLRFileTests: XCTestCase {
     let parser = Colors.Parser()
     parser.palettes = [try Colors.CLRFileParser().parseFile(at: Fixtures.path(for: "colors.clr", sub: .colors))]
 
-    let result = parser.stencilContext(testEnvironment: true)
+    let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "defaults", sub: .colors)
   }
 

@@ -116,8 +116,9 @@ class Fixtures {
     return string(for: name, subDirectory: "templates/\(sub.rawValue.lowercased())")
   }
 
-  static func output(for name: String, sub: Directory) -> String {
-    return string(for: name, subDirectory: "Generated/\(sub.rawValue)")
+  static func output(for name: String, sub: Directory, avoidDisableAll: Bool) -> String {
+    let avoidDisableAllPathComponent = avoidDisableAll ? "AvoidDisableAll/" : "DisableAll/"
+    return string(for: name, subDirectory: "Generated/\(avoidDisableAllPathComponent)\(sub.rawValue)")
   }
 
   private static func string(for name: String, subDirectory: String) -> String {
@@ -174,26 +175,41 @@ extension XCTestCase {
 
       for (index, (context: context, suffix: suffix)) in variations.enumerated() {
         let outputFile = "\(templateName)-context-\(contextName)\(suffix).swift"
+        var context = context
         if variations.count > 1 { print(" - Variation #\(index)... (expecting: \(outputFile))") }
 
-        let result: String
-        do {
-          result = try template.render(context)
-        } catch let error {
-          fatalError("Unable to render template: \(error)")
-        }
-
-        // check if we should generate or not
-        if ProcessInfo().environment["GENERATE_OUTPUT"] == "YES" {
-          let target = Path(#file).parent().parent() + "Fixtures/Generated" + resourceDir.rawValue + outputFile
-          do {
-            try target.write(result)
-          } catch {
-            fatalError("Unable to write output file \(target)")
+        // Do two iterations: One using swiftlint:disable all, and one without
+        // TODO: Compare resulting texts after replacing all swiftlint:disable / enable lines
+        let avoidSwiftLintDisableAllIterations = [false, true]
+        for avoidSwiftLintDisableAll in avoidSwiftLintDisableAllIterations {
+          if avoidSwiftLintDisableAll {
+            context["avoidSwiftLintDisableAll"] = true
           }
-        } else {
-          let expected = Fixtures.output(for: outputFile, sub: resourceDir)
-          XCTDiffStrings(result, expected, file: file, line: line)
+
+          let result: String
+          do {
+            result = try template.render(context)
+          } catch let error {
+            fatalError("Unable to render template: \(error)")
+          }
+
+          // check if we should generate or not
+          if ProcessInfo().environment["GENERATE_OUTPUT"] == "YES" && avoidSwiftLintDisableAll {
+            let avoidDisableAllPathComponent = avoidSwiftLintDisableAll ? "AvoidDisableAll/" : "DisableAll/"
+            let target = Path(#file).parent().parent() +
+              "Fixtures/Generated" +
+              avoidDisableAllPathComponent +
+              resourceDir.rawValue +
+              outputFile // TODO: Use Fixtures.output here
+            do {
+              try target.write(result)
+            } catch {
+              fatalError("Unable to write output file \(target)")
+            }
+          } else {
+            let expected = Fixtures.output(for: outputFile, sub: resourceDir, avoidDisableAll: avoidSwiftLintDisableAll)
+            XCTDiffStrings(result, expected, file: file, line: line)
+          }
         }
       }
     }

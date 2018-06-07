@@ -33,7 +33,7 @@ class ColorParserTests: XCTestCase {
   func testEmpty() throws {
     let parser = Colors.Parser()
 
-    let result = parser.stencilContext(testEnvironment: true)
+    let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .colors)
   }
 
@@ -84,7 +84,7 @@ class ColorParserTests: XCTestCase {
     try parser.parse(path: Fixtures.path(for: "colors.clr", sub: .colors))
     try parser.parse(path: Fixtures.path(for: "extra.txt", sub: .colors))
 
-    let result = parser.stencilContext(testEnvironment: true)
+    let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "multiple", sub: .colors)
   }
 

@@ -1,6 +1,6 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
-{% if preferSwiftLintDisableAll %}
+{% if not avoidSwiftLintDisableAll %}
 // swiftlint:disable all
 
 {% endif %}
@@ -15,12 +15,12 @@
   {{accessModifier}} typealias {{colorAlias}} = UIColor
 #endif
 
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 {% endif %}
 
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable operator_usage_whitespace
 {% endif %}
 {{accessModifier}} extension {{colorAlias}} {
@@ -33,11 +33,11 @@
     self.init(red: red, green: green, blue: blue, alpha: alpha)
   }
 }
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:enable operator_usage_whitespace
 {% endif %}
 
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable identifier_name line_length type_body_length
 {% endif %}
 {% set enumName %}{{param.enumName|default:"ColorName"}}{% endset %}
@@ -63,7 +63,7 @@
   {% call enumBlock palettes.first.colors %}
   {% endif %}
 }
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:enable identifier_name line_length type_body_length
 {% endif %}
 

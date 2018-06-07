@@ -17,7 +17,7 @@ import Foundation
      - `alpha`: `String` — hex value of the alpha component
 */
 extension Colors.Parser {
-  public func stencilContext(testEnvironment isTestEnvironment: Bool) -> [String: Any] {
+  public func stencilContext() -> [String: Any] {
     let palettes: [[String: Any]] = self.palettes
       .sorted { $0.name < $1.name }
       .map { palette in
@@ -31,16 +31,9 @@ extension Colors.Parser {
         ]
       }
 
-    var context: [String: Any] = [
+    return [
       "palettes": palettes
     ]
-
-    if !isTestEnvironment {
-      // NOTE: Value being true doesn't matter; what matters is that it exists in the templating context
-      context["preferSwiftLintDisableAll"] = true
-    }
-
-    return context
   }
 
   private func map(color name: String, value: UInt32) -> [String: String] {

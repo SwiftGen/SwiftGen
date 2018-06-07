@@ -29,7 +29,7 @@ private extension String {
           Contains a list of types like `"String"`, `"Int"`, etc
 */
 extension Strings.Parser {
-  public func stencilContext(testEnvironment isTestEnvironment: Bool) -> [String: Any] {
+  public func stencilContext() -> [String: Any] {
     let entryToStringMapper = { (entry: Strings.Entry, keyPath: [String]) -> [String: Any] in
       let levelName = entry.keyStructure.last ?? ""
 
@@ -56,16 +56,9 @@ extension Strings.Parser {
       ]
     }
 
-    var context: [String: Any] = [
+    return [
       "tables": tables
     ]
-
-    if !isTestEnvironment {
-      // NOTE: Value being true doesn't matter; what matters is that it exists in the templating context
-      context["preferSwiftLintDisableAll"] = true
-    }
-
-    return context
   }
 
   typealias Mapper = (_ entry: Strings.Entry, _ keyPath: [String]) -> [String: Any]

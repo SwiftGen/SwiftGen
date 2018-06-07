@@ -16,7 +16,7 @@ import Foundation
 */
 
 extension Fonts.Parser {
-  public func stencilContext(testEnvironment isTestEnvironment: Bool) -> [String: Any] {
+  public func stencilContext() -> [String: Any] {
     // turn into array of dictionaries
     let families = entries.map { (name: String, family: Set<Fonts.Font>) -> [String: Any] in
       let fonts = family.map { (font: Fonts.Font) -> [String: String] in
@@ -34,15 +34,8 @@ extension Fonts.Parser {
       ]
     }.sorted { $0["name"] as? String ?? "" < $1["name"] as? String ?? "" }
 
-    var context: [String: Any] = [
+    return [
       "families": families
     ]
-
-    if !isTestEnvironment {
-      // NOTE: Value being true doesn't matter; what matters is that it exists in the templating context
-      context["preferSwiftLintDisableAll"] = true
-    }
-
-    return context
   }
 }

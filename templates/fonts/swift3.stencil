@@ -1,6 +1,6 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
-{% if preferSwiftLintDisableAll %}
+{% if not avoidSwiftLintDisableAll %}
 // swiftlint:disable all
 
 {% endif %}
@@ -14,7 +14,7 @@
   {{accessModifier}} typealias Font = UIFont
 #endif
 
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 {% endif %}
@@ -55,7 +55,7 @@
   }
 }
 
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable identifier_name line_length type_body_length
 {% endif %}
 {% macro transformPath path %}{% filter removeNewlines %}
@@ -79,7 +79,7 @@
     allCustomFonts.forEach { $0.register() }
   }
 }
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:enable identifier_name line_length type_body_length
 {% endif %}
 

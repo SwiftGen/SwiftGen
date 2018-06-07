@@ -24,7 +24,7 @@ import Foundation
        - `value`: `String` — the actual full name for loading the image
 */
 extension AssetsCatalog.Parser {
-  public func stencilContext(testEnvironment isTestEnvironment: Bool) -> [String: Any] {
+  public func stencilContext() -> [String: Any] {
     let catalogs = self.catalogs
       .sorted { lhs, rhs in lhs.name < rhs.name }
       .map { catalog -> [String: Any] in
@@ -34,16 +34,9 @@ extension AssetsCatalog.Parser {
         ]
       }
 
-    var context: [String: Any] = [
+    return [
       "catalogs": catalogs
     ]
-
-    if !isTestEnvironment {
-      // NOTE: Value being true doesn't matter; what matters is that it exists in the templating context
-      context["preferSwiftLintDisableAll"] = true
-    }
-
-    return context
   }
 
   private func structure(entries: [AssetsCatalog.Entry]) -> [[String: Any]] {

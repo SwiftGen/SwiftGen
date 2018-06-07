@@ -17,7 +17,7 @@ class StringsTests: XCTestCase {
   func testEmpty() {
     let parser = Strings.Parser()
 
-    let result = parser.stencilContext(testEnvironment: true)
+    let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .strings)
   }
 
@@ -25,7 +25,7 @@ class StringsTests: XCTestCase {
     let parser = Strings.Parser()
     try parser.parse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
-    let result = parser.stencilContext(testEnvironment: true)
+    let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "localizable", sub: .strings)
   }
 
@@ -33,7 +33,7 @@ class StringsTests: XCTestCase {
     let parser = Strings.Parser()
     try parser.parse(path: Fixtures.path(for: "LocMultiline.strings", sub: .strings))
 
-    let result = parser.stencilContext(testEnvironment: true)
+    let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "multiline", sub: .strings)
   }
 
@@ -41,7 +41,7 @@ class StringsTests: XCTestCase {
     let parser = Strings.Parser()
     try parser.parse(path: Fixtures.path(for: "LocUTF8.strings", sub: .strings))
 
-    let result = parser.stencilContext(testEnvironment: true)
+    let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "utf8", sub: .strings)
   }
 
@@ -49,7 +49,7 @@ class StringsTests: XCTestCase {
     let parser = Strings.Parser()
     try parser.parse(path: Fixtures.path(for: "LocStructuredOnly.strings", sub: .strings))
 
-    let result = parser.stencilContext(testEnvironment: true)
+    let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "structuredonly", sub: .strings)
   }
 
@@ -58,7 +58,7 @@ class StringsTests: XCTestCase {
     try parser.parse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
     try parser.parse(path: Fixtures.path(for: "LocMultiline.strings", sub: .strings))
 
-    let result = parser.stencilContext(testEnvironment: true)
+    let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "multiple", sub: .strings)
   }
 

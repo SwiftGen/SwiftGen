@@ -1,6 +1,6 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
-{% if preferSwiftLintDisableAll %}
+{% if not avoidSwiftLintDisableAll %}
 // swiftlint:disable all
 
 {% endif %}
@@ -9,7 +9,7 @@
 {% set isAppKit %}{% if platform == "macOS" %}true{% endif %}{% endset %}
 {% set prefix %}{% if isAppKit %}NS{% else %}UI{% endif %}{% endset %}
 {% set controller %}{% if isAppKit %}Controller{% else %}ViewController{% endif %}{% endset %}
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable sorted_imports
 {% endif %}
 import Foundation
@@ -17,7 +17,7 @@ import Foundation
 import {{module}}
 {% endfor %}
 
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 {% endif %}
@@ -64,7 +64,7 @@ import {{module}}
 }
 
 {# This is where the generation begins, this code depends on what you have in your Storyboards #}
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 {% endif %}
 {% set sceneEnumName %}{{param.sceneEnumName|default:"StoryboardScene"}}{% endset %}
@@ -106,7 +106,7 @@ import {{module}}
   }
   {% endfor %}
 }
-{% if not preferSwiftLintDisableAll %}
+{% if avoidSwiftLintDisableAll %}
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
 {% endif %}
 

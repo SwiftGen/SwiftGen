@@ -36,7 +36,7 @@ extension ConfigEntry {
       logMessage(.warning, msg)
     }
     try parser.parse(paths: self.inputs)
-    let context = parser.stencilContext(testEnvironment: false)
+    let context = parser.stencilContext()
 
     for entryOutput in outputs {
       let templateRealPath = try entryOutput.template.resolvePath(forSubcommand: parserCommand.name)
