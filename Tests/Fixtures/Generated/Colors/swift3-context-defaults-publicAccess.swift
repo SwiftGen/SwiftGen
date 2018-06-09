@@ -1,5 +1,7 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
+// swiftlint:disable all
+
 #if os(OSX)
   import AppKit.NSColor
   public typealias Color = NSColor
