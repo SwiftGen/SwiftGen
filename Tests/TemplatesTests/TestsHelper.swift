@@ -177,7 +177,14 @@ extension XCTestCase {
 
         let result: String
         do {
-          result = try template.render(context)
+          let renderedResult = try template.render(context)
+
+          // Remove `swiftlint:disable all` statement from result
+          // This is needed so that we can still verify the code follows all SwiftLINT guidelines
+          result = renderedResult.replacingOccurrences(
+            of: "// swiftlint:disable all\n\n",
+            with: ""
+          )
         } catch let error {
           fatalError("Unable to render template: \(error)")
         }
