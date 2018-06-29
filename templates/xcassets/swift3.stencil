@@ -75,7 +75,6 @@
   #endif
 }
 #endif
-
 {% set imageType %}{{param.imageTypeName|default:"ImageAsset"}}{% endset %}
 @available(*, deprecated, renamed: "{{imageType}}")
 {{accessModifier}} typealias {{enumName}}Type = {{imageType}}
