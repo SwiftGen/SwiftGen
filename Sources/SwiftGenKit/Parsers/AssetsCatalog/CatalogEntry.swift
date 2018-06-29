@@ -9,8 +9,9 @@ import PathKit
 
 extension AssetsCatalog {
   enum Entry {
-    case group(name: String, isNamespaced: Bool, items: [Entry])
     case color(name: String, value: String)
+    case data(name: String, value: String)
+    case group(name: String, isNamespaced: Bool, items: [Entry])
     case image(name: String, value: String)
   }
 }
@@ -24,15 +25,16 @@ private enum Constants {
 
   /**
    * This is a list of supported asset catalog item types, for now we just
-   * support `image set`s and `color set`s. If you want to add support for
+   * support `color set`s, `image set`s and `data set`s. If you want to add support for
    * new types, just add it to this whitelist, and add the necessary code to
-   * the `process(items:withPrefix:)` method.
+   * the `process(folder:withPrefix:)` method.
    *
    * Use as reference:
    * https://developer.apple.com/library/content/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format
    */
   enum Item: String {
     case colorSet = "colorset"
+    case dataSet = "dataset"
     case imageSet = "imageset"
   }
 }
@@ -41,6 +43,7 @@ extension AssetsCatalog.Entry {
   /**
    Each node in an asset catalog is either (there are more types, but we ignore those):
      - A colorset, which is essentially a group containing a list of colors (the latter is ignored).
+     - A dataset, which is essentially a group containing a list of files (the latter is ignored).
      - An imageset, which is essentially a group containing a list of files (the latter is ignored).
      - A group, containing sub items such as imagesets or groups. A group can provide a namespaced,
        which means that all the sub items will have to be prefixed with their parent's name.
@@ -63,6 +66,9 @@ extension AssetsCatalog.Entry {
     case .colorSet?:
       let name = path.lastComponentWithoutExtension
       self = .color(name: name, value: "\(prefix)\(name)")
+    case .dataSet?:
+      let name = path.lastComponentWithoutExtension
+      self = .data(name: name, value: "\(prefix)\(name)")
     case .imageSet?:
       let name = path.lastComponentWithoutExtension
       self = .image(name: name, value: "\(prefix)\(name)")

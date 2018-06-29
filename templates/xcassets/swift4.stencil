@@ -3,6 +3,7 @@
 
 {% if catalogs %}
 {% set colorAlias %}{{param.colorAliasName|default:"AssetColorTypeAlias"}}{% endset %}
+{% set dataAlias %}{{param.dataAliasName|default:"AssetDataTypeAlias"}}{% endset %}
 {% set imageAlias %}{{param.imageAliasName|default:"Image"}}{% endset %}
 {% set forceNamespaces %}{{param.forceProvidesNamespaces|default:"false"}}{% endset %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
@@ -14,6 +15,9 @@
   import UIKit.UIImage
   {{accessModifier}} typealias {{colorAlias}} = UIColor
   {{accessModifier}} typealias {{imageAlias}} = UIImage
+#endif
+#if os(iOS) || os(tvOS) || os(OSX)
+{{accessModifier}} typealias {{dataAlias}} = NSDataAsset
 #endif
 
 // swiftlint:disable superfluous_disable_command
@@ -43,6 +47,30 @@
     #endif
   }
 }
+
+#if os(iOS) || os(tvOS) || os(OSX)
+{% set dataType %}{{param.dataTypeName|default:"DataAsset"}}{% endset %}
+{{accessModifier}} struct {{dataType}} {
+  {{accessModifier}} fileprivate(set) var name: String
+
+  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  {{accessModifier}} var dataAsset: {{dataAlias}} {
+    return {{dataAlias}}(asset: self)
+  }
+}
+
+{{accessModifier}} extension {{dataAlias}} {
+  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  convenience init!(asset: {{dataType}}) {
+    let bundle = Bundle(for: BundleToken.self)
+    #if os(iOS) || os(tvOS)
+    self.init(name: asset.name, bundle: bundle)
+    #elseif os(OSX)
+    self.init(name: NSDataAsset.Name(asset.name), bundle: bundle)
+    #endif
+  }
+}
+#endif
 
 {% set imageType %}{{param.imageTypeName|default:"ImageAsset"}}{% endset %}
 @available(*, deprecated, renamed: "{{imageType}}")
@@ -80,7 +108,6 @@
     #endif
   }
 }
-
 {% macro enumBlock assets %}
   {% call casesBlock assets %}
   {% if not param.noAllValues %}
@@ -89,6 +116,11 @@
   {{accessModifier}} static let allColors: [{{colorType}}] = [
     {% filter indent:2 %}{% call allValuesBlock assets "color" "" %}{% endfilter %}
   ]
+  #if os(iOS) || os(tvOS) || os(OSX)
+  {{accessModifier}} static let allDataAssets: [{{dataType}}] = [
+    {% filter indent:2 %}{% call allValuesBlock assets "data" "" %}{% endfilter %}
+  ]
+  #endif
   {{accessModifier}} static let allImages: [{{imageType}}] = [
     {% filter indent:2 %}{% call allValuesBlock assets "image" "" %}{% endfilter %}
   ]
@@ -101,6 +133,8 @@
   {% for asset in assets %}
   {% if asset.type == "color" %}
   {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{colorType}}(name: "{{asset.value}}")
+  {% elif asset.type == "data" %}
+  {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{dataType}}(name: "{{asset.value}}")
   {% elif asset.type == "image" %}
   {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{imageType}}(name: "{{asset.value}}")
   {% elif asset.items %}
