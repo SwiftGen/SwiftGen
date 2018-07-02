@@ -182,7 +182,7 @@ extension XCTestCase {
           // Remove `swiftlint:disable all` statement from result
           // This is needed so that we can still verify the code follows all SwiftLINT guidelines
           result = renderedResult.replacingOccurrences(
-            of: "// swiftlint:disable all\n\n",
+            of: "// swiftlint:disable all\n",
             with: ""
           )
         } catch let error {
