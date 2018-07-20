@@ -36,6 +36,12 @@ public enum CoreData {
           throw ParserError.invalidFile(path: path, reason: "Current version of Core Data model could not be found.")
         }
         try parse(path: modelPath)
+      } else {
+        let dirChildren = path.iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
+
+        for file in dirChildren where file.extension == "xcdatamodeld" || file.extension == "xcdatamodel" {
+          try parse(path: file)
+        }
       }
     }
 
