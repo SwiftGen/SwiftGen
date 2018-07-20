@@ -26,6 +26,7 @@ You can customize some elements of this template by overriding the following par
 | `imageTypeName` | `ImageAsset` | Allows you to change the name of the struct type representing an image. |
 | `noAllValues` | N/A | Setting this parameter will disable generation of the `allColors` and `allImages` constants. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
+| `forceProvidesNamespaces` | `false` | If set to true, generates namespaces even for non namespacing asset folders (i.e. "Provides Namespace" is unchecked) |
 
 ## Generated Code
 
