@@ -39,6 +39,8 @@ public enum CoreData {
           throw ParserError.invalidFile(path: path, reason: "Current version of Core Data model could not be found.")
         }
         try parse(path: modelPath)
+      } else if path.extension == "xcdatamodel" {
+        try addModel(path: path)
       } else {
         let dirChildren = path.iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
 
@@ -62,6 +64,22 @@ public enum CoreData {
         return path + Path(currentVersionModelFilename)
       } else {
         return path.first { $0.extension == "xcdatamodel" }
+      }
+    }
+
+    private func addModel(path: Path) throws {
+      let contentsPath = path + "contents"
+      guard contentsPath.exists else {
+        throw ParserError.invalidFormat(reason: "Only models in Xcode 4.0+ format are supported")
+      }
+
+      do {
+        let document = try Kanna.XML(xml: contentsPath.read(), encoding: .utf8)
+
+        let model = try Model(with: document)
+        models.append(model)
+      } catch {
+        throw ParserError.invalidFile(path: path, reason: "XML parser error: \(error).")
       }
     }
   }
