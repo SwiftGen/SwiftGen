@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Kanna
 
 extension CoreData {
   public final class Entity {
@@ -39,3 +40,33 @@ extension CoreData {
   }
 }
 
+private enum XML {
+  static let nameAttribute = "name"
+  static let representedClassNameAttribute = "representedClassName"
+  static let isAbstractAttribute = "isAbstract"
+  static let superentityNameAttribute = "parentEntity"
+
+  static let attributesPath = "attribute"
+  static let relationshipsPath = "relationship"
+}
+
+extension CoreData.Entity {
+  convenience init(with object: Kanna.XMLElement) throws {
+    let name = object[XML.nameAttribute] ?? ""
+    let className = object[XML.representedClassNameAttribute] ?? "NSManagedObject"
+    let isAbstract = object[XML.isAbstractAttribute].flatMap(Bool.init(from:)) ?? false
+    let superentityName = object[XML.superentityNameAttribute]
+
+    let attributes = try object.xpath(XML.attributesPath).map(CoreData.Attribute.init(with:))
+    let relationships = try object.xpath(XML.relationshipsPath).map(CoreData.Relationship.init(with:))
+
+    self.init(
+      name: name,
+      className: className,
+      isAbstract: isAbstract,
+      superentityName: superentityName,
+      attributes: attributes,
+      relationships: relationships
+    )
+  }
+}
