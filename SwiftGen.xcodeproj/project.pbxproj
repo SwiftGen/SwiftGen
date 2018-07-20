@@ -41,6 +41,10 @@
 		5DE172C4BAE478DDAA63064F /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00832FEC9F060E93DAD1228 /* Pods_swiftgen.framework */; };
 		80F8014301BF496E905CA2CF /* Pods_SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16DF0A0F13A222BCA7B60102 /* Pods_SwiftGenKit.framework */; };
 		9A35A2477F800A42E6A654C8 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5D3E5746871F59AC9CA625 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */; };
+		C322627121012F42001AC9CD /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C322627021012F42001AC9CD /* Attribute.swift */; };
+		C32262732101324E001AC9CD /* Relationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32262722101324E001AC9CD /* Relationship.swift */; };
+		C350BE3820FFCD0F0043D7C5 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C350BE3720FFCD0F0043D7C5 /* Model.swift */; };
+		C350BE3A20FFCD750043D7C5 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C350BE3920FFCD750043D7C5 /* Entity.swift */; };
 		C38E571520FF8FB5009C9C23 /* CoreDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38E571420FF8FB5009C9C23 /* CoreDataParser.swift */; };
 		C38E571720FF906B009C9C23 /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38E571620FF906B009C9C23 /* CoreDataContext.swift */; };
 		C580E102337633038E486585 /* Pods_swiftgen_Templates_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8031AB7FD88D5F010179EDC /* Pods_swiftgen_Templates_UnitTests.framework */; };
@@ -293,6 +297,10 @@
 		A3D916CE5C9F4E2569D12C5A /* Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		C00832FEC9F060E93DAD1228 /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8876ECE7B9852963F6B5 /* Pods_swiftgen_SwiftGen_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen_SwiftGen_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C322627021012F42001AC9CD /* Attribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
+		C32262722101324E001AC9CD /* Relationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relationship.swift; sourceTree = "<group>"; };
+		C350BE3720FFCD0F0043D7C5 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		C350BE3920FFCD750043D7C5 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		C38E571420FF8FB5009C9C23 /* CoreDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataParser.swift; sourceTree = "<group>"; };
 		C38E571620FF906B009C9C23 /* CoreDataContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataContext.swift; sourceTree = "<group>"; };
 		D662CF56C834C4E7CEA32364 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -549,6 +557,10 @@
 			isa = PBXGroup;
 			children = (
 				C38E571420FF8FB5009C9C23 /* CoreDataParser.swift */,
+				C350BE3720FFCD0F0043D7C5 /* Model.swift */,
+				C350BE3920FFCD750043D7C5 /* Entity.swift */,
+				C322627021012F42001AC9CD /* Attribute.swift */,
+				C32262722101324E001AC9CD /* Relationship.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -1315,6 +1327,7 @@
 				DD9F687A20955D51004EB720 /* CatalogEntry.swift in Sources */,
 				DD428E261FC50FBF001649D6 /* InterfaceBuilderContext.swift in Sources */,
 				DD428E221FC50FBF001649D6 /* ColorsParser.swift in Sources */,
+				C350BE3A20FFCD750043D7C5 /* Entity.swift in Sources */,
 				DD9F687F20955E07004EB720 /* Font.swift in Sources */,
 				DD428E1B1FC50FBF001649D6 /* ColorsJSONFileParser.swift in Sources */,
 				DD9F688120955F57004EB720 /* CTFont.swift in Sources */,
@@ -1328,12 +1341,15 @@
 				DD9F688620956074004EB720 /* PlaceholderType.swift in Sources */,
 				DD428E251FC50FBF001649D6 /* AssetsCatalogContext.swift in Sources */,
 				DD428E1A1FC50FBF001649D6 /* ColorsCLRFileParser.swift in Sources */,
+				C350BE3820FFCD0F0043D7C5 /* Model.swift in Sources */,
+				C32262732101324E001AC9CD /* Relationship.swift in Sources */,
 				C38E571720FF906B009C9C23 /* CoreDataContext.swift in Sources */,
 				DD428E241FC50FBF001649D6 /* ColorsContext.swift in Sources */,
 				DD428E201FC50FBF001649D6 /* Parser.swift in Sources */,
 				DDC82117209672E1007A55F3 /* String.swift in Sources */,
 				DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */,
 				DD9F687C20955D51004EB720 /* Catalog.swift in Sources */,
+				C322627121012F42001AC9CD /* Attribute.swift in Sources */,
 				DD428E271FC50FBF001649D6 /* StringsContext.swift in Sources */,
 				C38E571520FF8FB5009C9C23 /* CoreDataParser.swift in Sources */,
 				DD428E211FC50FBF001649D6 /* StringsParser.swift in Sources */,
