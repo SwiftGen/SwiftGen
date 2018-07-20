@@ -9,7 +9,7 @@ import PathKit
 
 extension AssetsCatalog {
   enum Entry {
-    case group(name: String, items: [Entry])
+    case group(name: String, isNamespaced: Bool, items: [Entry])
     case color(name: String, value: String)
     case image(name: String, value: String)
   }
@@ -69,10 +69,12 @@ extension AssetsCatalog.Entry {
     case nil:
       guard type.isEmpty else { return nil }
       let filename = path.lastComponent
-      let subPrefix = AssetsCatalog.Entry.isNamespaced(path: path) ? "\(prefix)\(filename)/" : prefix
+      let isNamespaced = AssetsCatalog.Entry.isNamespaced(path: path)
+      let subPrefix = isNamespaced ? "\(prefix)\(filename)/" : prefix
 
       self = .group(
         name: filename,
+        isNamespaced: isNamespaced,
         items: AssetsCatalog.Catalog.process(folder: path, withPrefix: subPrefix)
       )
     }
