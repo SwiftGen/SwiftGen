@@ -1,0 +1,37 @@
+import CoreData
+import Foundation
+
+{% for model in models %}
+{% for entity in model.entities %}
+{% set superclass %}{{ entity.superentity.className | default:"NSManagedObject" }}{% endset %}
+{% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
+open class {{ entity.name }}: {{ superclass }} {
+
+    {{ override }}open class func entityName() -> String {
+        return "{{ entity.name }}"
+    }
+
+    {{ override }}open class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+        return NSEntityDescription.entity(forEntityName: self.entityName(), in: managedObjectContext)
+    }
+
+    {% for attribute in entity.attributes %}
+    @NSManaged
+    open var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional %}?{% else %}!{% endif %}
+
+    {% endfor %}
+    {% for relationship in entity.relationships %}
+    {% if relationship.isToMany %}
+    @NSManaged
+    open var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}NSSet{% endif %}
+
+    {% else %}
+    @NSManaged
+    open var {{ relationship.name }}: {{ relationship.destinationEntity.className }}{% if relationship.isOptional %}?{% endif %}
+
+    {% endif %}
+    {% endfor %}
+}
+
+{% endfor %}
+{% endfor %}
