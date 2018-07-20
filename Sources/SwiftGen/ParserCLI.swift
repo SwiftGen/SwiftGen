@@ -62,6 +62,12 @@ let allParserCommands: [ParserCLI] = [
     description: "generate code for your Localizable.strings file(s)",
     pathDescription: "Strings file(s) to parse."
   ),
+  .init(
+    parserType: CoreData.Parser.self,
+    name: "coredata",
+    description: "generate code for your Core Data models",
+    pathDescription: "Core Data models (.xcdatamodel or .xcdatamodeld) to parse."
+  ),
 
   // Deprecated
   .init(
