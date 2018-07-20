@@ -13,11 +13,14 @@ import PathKit
 public enum CoreData {
   public enum ParserError: Error, CustomStringConvertible {
     case invalidFile(path: Path, reason: String)
+    case invalidFormat(reason: String)
 
     public var description: String {
       switch self {
       case .invalidFile(let path, let reason):
         return "error: Unable to parse file at \(path). \(reason)"
+      case .invalidFormat(let reason):
+        return "error: Invalid format. \(reason)"
       }
     }
   }

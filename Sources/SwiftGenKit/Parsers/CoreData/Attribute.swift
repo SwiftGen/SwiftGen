@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Kanna
 
 extension CoreData {
   public struct Attribute {
@@ -38,3 +39,67 @@ extension CoreData {
   }
 }
 
+private enum XML {
+  static let nameAttribute = "name"
+  static let isIndexedAttribute = "indexed"
+  static let isOptionalAttribute = "optional"
+  static let isTransientAttribute = "transient"
+  static let usesScalarValueTypeAttribute = "usesScalarValueType"
+
+  static let attributeTypeAttribute = "attributeType"
+  static let customClassNameAttribute = "customClassName"
+}
+
+extension CoreData.Attribute {
+  init(with object: Kanna.XMLElement) throws {
+    name = object[XML.nameAttribute] ?? ""
+    isIndexed = object[XML.isIndexedAttribute].flatMap(Bool.init(from:)) ?? false
+    isOptional = object[XML.isOptionalAttribute].flatMap(Bool.init(from:)) ?? false
+    isTransient = object[XML.isTransientAttribute].flatMap(Bool.init(from:)) ?? false
+    usesScalarValueType = object[XML.usesScalarValueTypeAttribute].flatMap(Bool.init(from:)) ?? false
+
+    guard let nonoptionalType = object[XML.attributeTypeAttribute]
+                                  .flatMap(CoreData.AttributeType.init(rawValue:)) else {
+      throw CoreData.ParserError.invalidFormat(reason: "Missing required attribute type on attribute declaration")
+    }
+    type = nonoptionalType
+
+    customClassName = object[XML.customClassNameAttribute]
+
+    typeName = type.typeName(usesScalarValueType: usesScalarValueType, customClassName: customClassName)
+  }
+}
+
+extension CoreData.AttributeType {
+  // swiftlint:disable:next cyclomatic_complexity
+  func typeName(usesScalarValueType: Bool, customClassName: String?) -> String {
+    switch self {
+    case .binaryData:
+      return "Data"
+    case .boolean:
+      return usesScalarValueType ? "Bool" : "NSNumber"
+    case .date:
+      return "Date"
+    case .decimal:
+      return "NSDecimalNumber"
+    case .double:
+      return usesScalarValueType ? "Double" : "NSNumber"
+    case .float:
+      return usesScalarValueType ? "Float" : "NSNumber"
+    case .integer16:
+      return usesScalarValueType ? "Int16" : "NSNumber"
+    case .integer32:
+      return usesScalarValueType ? "Int32" : "NSNumber"
+    case .integer64:
+      return usesScalarValueType ? "Int64" : "NSNumber"
+    case .string:
+      return "String"
+    case .transformable:
+      return customClassName ?? "AnyObject"
+    case .URI:
+      return "URL"
+    case .UUID:
+      return "UUID"
+    }
+  }
+}
