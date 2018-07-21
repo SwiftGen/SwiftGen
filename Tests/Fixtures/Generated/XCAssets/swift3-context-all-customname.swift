@@ -33,6 +33,20 @@ internal struct XCTImageAsset {
   }
 }
 
+internal extension XCTImage {
+  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
+  @available(OSX, deprecated,
+    message: "This initializer is unsafe on macOS, please use the XCTImageAsset.image property")
+  convenience init!(asset: XCTImageAsset) {
+    #if os(iOS) || os(tvOS)
+    let bundle = Bundle(for: BundleToken.self)
+    self.init(named: asset.name, in: bundle, compatibleWith: nil)
+    #elseif os(OSX) || os(watchOS)
+    self.init(named: asset.name)
+    #endif
+  }
+}
+
 internal struct XCTColorAsset {
   internal fileprivate(set) var name: String
 
@@ -43,6 +57,24 @@ internal struct XCTColorAsset {
   }
   #endif
 }
+
+internal extension XCTColor {
+  #if swift(>=3.2)
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  convenience init!(asset: XCTColorAsset) {
+    let bundle = Bundle(for: BundleToken.self)
+    #if os(iOS) || os(tvOS)
+    self.init(named: asset.name, in: bundle, compatibleWith: nil)
+    #elseif os(OSX)
+    self.init(named: asset.name, bundle: bundle)
+    #elseif os(watchOS)
+    self.init(named: asset.name)
+    #endif
+  }
+  #endif
+}
+
+// MARK: Assets
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum XCTAssets {
@@ -104,35 +136,5 @@ internal enum XCTAssets {
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
-
-internal extension XCTImage {
-  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
-  @available(OSX, deprecated,
-    message: "This initializer is unsafe on macOS, please use the XCTImageAsset.image property")
-  convenience init!(asset: XCTImageAsset) {
-    #if os(iOS) || os(tvOS)
-    let bundle = Bundle(for: BundleToken.self)
-    self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX) || os(watchOS)
-    self.init(named: asset.name)
-    #endif
-  }
-}
-
-internal extension XCTColor {
-  #if swift(>=3.2)
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  convenience init!(asset: XCTColorAsset) {
-    let bundle = Bundle(for: BundleToken.self)
-    #if os(iOS) || os(tvOS)
-    self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX)
-    self.init(named: asset.name, bundle: bundle)
-    #elseif os(watchOS)
-    self.init(named: asset.name)
-    #endif
-  }
-  #endif
-}
 
 private final class BundleToken {}
