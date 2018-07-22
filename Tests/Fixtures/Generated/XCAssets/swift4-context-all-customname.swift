@@ -13,6 +13,29 @@
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
+internal struct XCTColorAsset {
+  internal fileprivate(set) var name: String
+
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  internal var color: XCTColor {
+    return XCTColor(asset: self)
+  }
+}
+
+internal extension XCTColor {
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  convenience init!(asset: XCTColorAsset) {
+    let bundle = Bundle(for: BundleToken.self)
+    #if os(iOS) || os(tvOS)
+    self.init(named: asset.name, in: bundle, compatibleWith: nil)
+    #elseif os(OSX)
+    self.init(named: NSColor.Name(asset.name), bundle: bundle)
+    #elseif os(watchOS)
+    self.init(named: asset.name)
+    #endif
+  }
+}
+
 @available(*, deprecated, renamed: "XCTImageAsset")
 internal typealias XCTAssetsType = XCTImageAsset
 
@@ -43,29 +66,6 @@ internal extension XCTImage {
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
     #elseif os(OSX)
     self.init(named: NSImage.Name(asset.name))
-    #elseif os(watchOS)
-    self.init(named: asset.name)
-    #endif
-  }
-}
-
-internal struct XCTColorAsset {
-  internal fileprivate(set) var name: String
-
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  internal var color: XCTColor {
-    return XCTColor(asset: self)
-  }
-}
-
-internal extension XCTColor {
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  convenience init!(asset: XCTColorAsset) {
-    let bundle = Bundle(for: BundleToken.self)
-    #if os(iOS) || os(tvOS)
-    self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX)
-    self.init(named: NSColor.Name(asset.name), bundle: bundle)
     #elseif os(watchOS)
     self.init(named: asset.name)
     #endif

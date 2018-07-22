@@ -13,6 +13,33 @@
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
+internal struct ColorAsset {
+  internal fileprivate(set) var name: String
+
+  #if swift(>=3.2)
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  internal var color: AssetColorTypeAlias {
+    return AssetColorTypeAlias(asset: self)
+  }
+  #endif
+}
+
+internal extension AssetColorTypeAlias {
+  #if swift(>=3.2)
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  convenience init!(asset: ColorAsset) {
+    let bundle = Bundle(for: BundleToken.self)
+    #if os(iOS) || os(tvOS)
+    self.init(named: asset.name, in: bundle, compatibleWith: nil)
+    #elseif os(OSX)
+    self.init(named: asset.name, bundle: bundle)
+    #elseif os(watchOS)
+    self.init(named: asset.name)
+    #endif
+  }
+  #endif
+}
+
 @available(*, deprecated, renamed: "ImageAsset")
 internal typealias AssetType = ImageAsset
 
@@ -45,33 +72,6 @@ internal extension Image {
     self.init(named: asset.name)
     #endif
   }
-}
-
-internal struct ColorAsset {
-  internal fileprivate(set) var name: String
-
-  #if swift(>=3.2)
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  internal var color: AssetColorTypeAlias {
-    return AssetColorTypeAlias(asset: self)
-  }
-  #endif
-}
-
-internal extension AssetColorTypeAlias {
-  #if swift(>=3.2)
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  convenience init!(asset: ColorAsset) {
-    let bundle = Bundle(for: BundleToken.self)
-    #if os(iOS) || os(tvOS)
-    self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX)
-    self.init(named: asset.name, bundle: bundle)
-    #elseif os(watchOS)
-    self.init(named: asset.name)
-    #endif
-  }
-  #endif
 }
 
 // MARK: Assets
