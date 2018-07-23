@@ -21,6 +21,8 @@ extension CoreData {
     public let isToMany: Bool
     public let isOrdered: Bool
 
+    public let userInfo: [String: String]
+
     public weak internal(set) var destinationEntity: Entity?
     public weak internal(set) var inverseRelationship: Relationship?
 
@@ -35,7 +37,8 @@ extension CoreData {
       isToMany: Bool,
       isOrdered: Bool,
       destinationEntityName: String,
-      inverseRelationshipInformation: InverseRelationshipInformation?
+      inverseRelationshipInformation: InverseRelationshipInformation?,
+      userInfo: [String: String]
       ) {
       self.name = name
       self.isIndexed = isIndexed
@@ -45,6 +48,7 @@ extension CoreData {
       self.isOrdered = isOrdered
       self.destinationEntityName = destinationEntityName
       self.inverseRelationshipInformation = inverseRelationshipInformation
+      self.userInfo = userInfo
     }
   }
 }
@@ -63,6 +67,8 @@ private enum XML {
     static let inverseRelationshipName = "inverseName"
     static let inverseRelationshipEntityName = "inverseEntity"
   }
+
+  static let userInfoPath = "userInfo"
 }
 
 extension CoreData.Relationship {
@@ -94,6 +100,8 @@ extension CoreData.Relationship {
       inverseRelationshipInformation = (name: name, entityName: entityName)
     }
 
+    let userInfo = try object.at_xpath(XML.userInfoPath).map { try CoreData.UserInfo.parse(from: $0) } ?? [:]
+
     self.init(
       name: name,
       isIndexed: isIndexed,
@@ -102,7 +110,8 @@ extension CoreData.Relationship {
       isToMany: isToMany,
       isOrdered: isOrdered,
       destinationEntityName: destinationEntityName,
-      inverseRelationshipInformation: inverseRelationshipInformation
+      inverseRelationshipInformation: inverseRelationshipInformation,
+      userInfo: userInfo
     )
   }
 }
