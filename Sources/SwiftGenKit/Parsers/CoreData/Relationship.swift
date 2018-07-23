@@ -11,7 +11,7 @@ import Kanna
 
 extension CoreData {
   public final class Relationship {
-    typealias InverseRelationshipInformation = (name: String, entityName: String)
+    public typealias InverseRelationship = (name: String, entityName: String)
 
     public let name: String
     public let isIndexed: Bool
@@ -23,11 +23,8 @@ extension CoreData {
 
     public let userInfo: [String: String]
 
-    public weak internal(set) var destinationEntity: Entity?
-    public weak internal(set) var inverseRelationship: Relationship?
-
-    let destinationEntityName: String
-    let inverseRelationshipInformation: InverseRelationshipInformation?
+    public let destinationEntity: String
+    public let inverseRelationship: InverseRelationship?
 
     init(
       name: String,
@@ -36,8 +33,8 @@ extension CoreData {
       isTransient: Bool,
       isToMany: Bool,
       isOrdered: Bool,
-      destinationEntityName: String,
-      inverseRelationshipInformation: InverseRelationshipInformation?,
+      destinationEntity: String,
+      inverseRelationship: InverseRelationship?,
       userInfo: [String: String]
       ) {
       self.name = name
@@ -46,8 +43,8 @@ extension CoreData {
       self.isTransient = isTransient
       self.isToMany = isToMany
       self.isOrdered = isOrdered
-      self.destinationEntityName = destinationEntityName
-      self.inverseRelationshipInformation = inverseRelationshipInformation
+      self.destinationEntity = destinationEntity
+      self.inverseRelationship = inverseRelationship
       self.userInfo = userInfo
     }
   }
@@ -63,7 +60,7 @@ private enum XML {
     static let isToMany = "toMany"
     static let isOrdered = "ordered"
 
-    static let destinationEntityName = "destinationEntity"
+    static let destinationEntity = "destinationEntity"
     static let inverseRelationshipName = "inverseName"
     static let inverseRelationshipEntityName = "inverseEntity"
   }
@@ -83,23 +80,23 @@ extension CoreData.Relationship {
     let isToMany = object[XML.Attributes.isToMany].flatMap(Bool.init(from:)) ?? false
     let isOrdered = object[XML.Attributes.isOrdered].flatMap(Bool.init(from:)) ?? false
 
-    guard let destinationEntityName = object[XML.Attributes.destinationEntityName] else {
+    guard let destinationEntity = object[XML.Attributes.destinationEntity] else {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required destination entity name")
     }
 
     let inverseRelationshipName = object[XML.Attributes.inverseRelationshipName]
     let inverseRelationshipEntityName = object[XML.Attributes.inverseRelationshipEntityName]
 
-    let inverseRelationshipInformation: InverseRelationshipInformation?
+    let inverseRelationship: InverseRelationship?
     switch (inverseRelationshipName, inverseRelationshipEntityName) {
     case (.none, .none):
-      inverseRelationshipInformation = nil
+      inverseRelationship = nil
     case (.none, _), (_, .none):
       throw CoreData.ParserError.invalidFormat(
         reason: "Both the name and entity name are required for inverse relationships"
       )
     case let (.some(name), .some(entityName)):
-      inverseRelationshipInformation = (name: name, entityName: entityName)
+      inverseRelationship = (name: name, entityName: entityName)
     }
 
     let userInfo = try object.at_xpath(XML.userInfoPath).map { try CoreData.UserInfo.parse(from: $0) } ?? [:]
@@ -111,8 +108,8 @@ extension CoreData.Relationship {
       isTransient: isTransient,
       isToMany: isToMany,
       isOrdered: isOrdered,
-      destinationEntityName: destinationEntityName,
-      inverseRelationshipInformation: inverseRelationshipInformation,
+      destinationEntity: destinationEntity,
+      inverseRelationship: inverseRelationship,
       userInfo: userInfo
     )
   }
