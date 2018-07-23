@@ -13,12 +13,15 @@ extension CoreData {
   public struct Model {
     public let entities: [Entity]
     public let configurations: [String: [Entity]]
+    public let fetchRequests: [FetchRequest]
+    public let fetchRequestsByEntityName: [String: [FetchRequest]]
   }
 }
 
 private enum XML {
   static let entitiesPath = "/model/entity"
   static let configurationsPath = "/model/configuration"
+  static let fetchRequestsPath = "/model/fetchRequest"
 }
 
 extension CoreData.Model {
@@ -66,5 +69,16 @@ extension CoreData.Model {
                                     return entity
                                   }
                                 }
+
+    fetchRequests = try document.xpath(XML.fetchRequestsPath).map(CoreData.FetchRequest.init(with:))
+    try fetchRequests.forEach { fetchRequest in
+      guard let entity = entitiesByName[fetchRequest.entityName] else {
+        throw CoreData.ParserError.invalidFormat(reason: "Unknown entity \(fetchRequest.entityName).")
+      }
+
+      fetchRequest.entity = entity
+    }
+
+    fetchRequestsByEntityName = Dictionary(grouping: fetchRequests) { $0.entityName }
   }
 }
