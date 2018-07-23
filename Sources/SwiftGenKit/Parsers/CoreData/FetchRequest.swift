@@ -25,12 +25,11 @@ extension CoreData {
     public let returnsObjectsAsFaults: Bool
     public let returnDistinctResults: Bool
 
-    public internal(set) weak var entity: Entity?
-    let entityName: String
+    public let entity: String
 
     init(
       name: String,
-      entityName: String,
+      entity: String,
       fetchLimit: Int,
       fetchBatchSize: Int,
       predicateString: String,
@@ -42,7 +41,7 @@ extension CoreData {
       returnDistinctResults: Bool
     ) {
       self.name = name
-      self.entityName = entityName
+      self.entity = entity
       self.fetchLimit = fetchLimit
       self.fetchBatchSize = fetchBatchSize
       self.predicateString = predicateString
@@ -85,7 +84,7 @@ extension CoreData.FetchRequest {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required fetch request name.")
     }
 
-    guard let entityName = object[XML.Attributes.entity] else {
+    guard let entity = object[XML.Attributes.entity] else {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required entity name.")
     }
 
@@ -104,7 +103,7 @@ extension CoreData.FetchRequest {
 
     self.init(
       name: name,
-      entityName: entityName,
+      entity: entity,
       fetchLimit: fetchLimit,
       fetchBatchSize: fetchBatchSize,
       predicateString: predicateString,
