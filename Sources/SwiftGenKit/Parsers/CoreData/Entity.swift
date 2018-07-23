@@ -58,7 +58,9 @@ private enum XML {
 
 extension CoreData.Entity {
   convenience init(with object: Kanna.XMLElement) throws {
-    let name = object[XML.Attributes.name] ?? ""
+    guard let name = object[XML.Attributes.name] else {
+      throw CoreData.ParserError.invalidFormat(reason: "Missing required entity name.")
+    }
     let className = object[XML.Attributes.representedClassName] ?? "NSManagedObject"
     let isAbstract = object[XML.Attributes.isAbstract].flatMap(Bool.init(from:)) ?? false
     let superentityName = object[XML.Attributes.superentityName]
