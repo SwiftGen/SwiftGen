@@ -32,7 +32,7 @@ extension CoreData.Parser {
       "userInfo": entity.userInfo,
       "superentity": entity.superentity as Any,
       "attributes": entity.attributes.map(map),
-      "relationshipts": entity.relationships.map(map)
+      "relationships": entity.relationships.map(map)
     ]
   }
 
@@ -59,7 +59,7 @@ extension CoreData.Parser {
       "isToMany": relationship.isToMany,
       "isOrdered": relationship.isOrdered,
       "destinationEntity": relationship.destinationEntity,
-      "inverseRelationshp": relationship.inverseRelationship.map {
+      "inverseRelationship": relationship.inverseRelationship.map {
         [
           "name": $0.name,
           "entityName": $0.entityName
