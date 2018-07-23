@@ -20,6 +20,8 @@ extension CoreData {
     public let type: AttributeType
     public let customClassName: String?
     public let typeName: String
+
+    public let userInfo: [String: String]
   }
 
   public enum AttributeType: String {
@@ -50,6 +52,8 @@ private enum XML {
     static let attributeType = "attributeType"
     static let customClassName = "customClassName"
   }
+
+  static let userInfoPath = "userInfo"
 }
 
 extension CoreData.Attribute {
@@ -69,6 +73,8 @@ extension CoreData.Attribute {
     customClassName = object[XML.Attributes.customClassName]
 
     typeName = type.typeName(usesScalarValueType: usesScalarValueType, customClassName: customClassName)
+
+    userInfo = try object.at_xpath(XML.userInfoPath).map { try CoreData.UserInfo.parse(from: $0) } ?? [:]
   }
 }
 

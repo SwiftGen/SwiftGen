@@ -14,6 +14,7 @@ extension CoreData {
     public let name: String
     public let className: String
     public let isAbstract: Bool
+    public let userInfo: [String: String]
 
     let superentityName: String?
 
@@ -27,7 +28,8 @@ extension CoreData {
       isAbstract: Bool,
       superentityName: String?,
       attributes: [Attribute],
-      relationships: [Relationship]
+      relationships: [Relationship],
+      userInfo: [String: String]
     ) {
       self.name = name
       self.className = className
@@ -36,6 +38,7 @@ extension CoreData {
       self.superentity = nil
       self.attributes = attributes
       self.relationships = relationships
+      self.userInfo = userInfo
     }
   }
 }
@@ -50,6 +53,7 @@ private enum XML {
 
   static let attributesPath = "attribute"
   static let relationshipsPath = "relationship"
+  static let userInfoPath = "userInfo"
 }
 
 extension CoreData.Entity {
@@ -62,13 +66,16 @@ extension CoreData.Entity {
     let attributes = try object.xpath(XML.attributesPath).map(CoreData.Attribute.init(with:))
     let relationships = try object.xpath(XML.relationshipsPath).map(CoreData.Relationship.init(with:))
 
+    let userInfo = try object.at_xpath(XML.userInfoPath).map { try CoreData.UserInfo.parse(from: $0) } ?? [:]
+
     self.init(
       name: name,
       className: className,
       isAbstract: isAbstract,
       superentityName: superentityName,
       attributes: attributes,
-      relationships: relationships
+      relationships: relationships,
+      userInfo: userInfo
     )
   }
 }
