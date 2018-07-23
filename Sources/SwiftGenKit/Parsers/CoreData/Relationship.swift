@@ -73,7 +73,9 @@ private enum XML {
 
 extension CoreData.Relationship {
   convenience init(with object: Kanna.XMLElement) throws {
-    let name = object[XML.Attributes.name] ?? ""
+    guard let name = object[XML.Attributes.name] else {
+      throw CoreData.ParserError.invalidFormat(reason: "Missing required relationship name.")
+    }
     let isIndexed = object[XML.Attributes.isIndexed].flatMap(Bool.init(from:)) ?? false
     let isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? false
     let isTransient = object[XML.Attributes.isTransient].flatMap(Bool.init(from:)) ?? false

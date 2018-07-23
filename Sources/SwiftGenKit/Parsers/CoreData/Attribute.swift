@@ -58,7 +58,11 @@ private enum XML {
 
 extension CoreData.Attribute {
   init(with object: Kanna.XMLElement) throws {
-    name = object[XML.Attributes.name] ?? ""
+    guard let attributeName = object[XML.Attributes.name] else {
+      throw CoreData.ParserError.invalidFormat(reason: "Missing required attribute name.")
+    }
+
+    name = attributeName
     isIndexed = object[XML.Attributes.isIndexed].flatMap(Bool.init(from:)) ?? false
     isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? false
     isTransient = object[XML.Attributes.isTransient].flatMap(Bool.init(from:)) ?? false
