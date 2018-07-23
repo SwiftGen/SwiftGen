@@ -50,35 +50,37 @@ extension CoreData {
 }
 
 private enum XML {
-  static let nameAttribute = "name"
-  static let isIndexedAttribute = "indexed"
-  static let isOptionalAttribute = "optional"
-  static let isTransientAttribute = "transient"
+  fileprivate enum Attributes {
+    static let name = "name"
+    static let isIndexed = "indexed"
+    static let isOptional = "optional"
+    static let isTransient = "transient"
 
-  static let isToManyAttribute = "toMany"
-  static let isOrderedAttribute = "ordered"
+    static let isToMany = "toMany"
+    static let isOrdered = "ordered"
 
-  static let destinationEntityNameAttribute = "destinationEntity"
-  static let inverseRelationshipNameAttribute = "inverseName"
-  static let inverseRelationshipEntityNameAttribute = "inverseEntity"
+    static let destinationEntityName = "destinationEntity"
+    static let inverseRelationshipName = "inverseName"
+    static let inverseRelationshipEntityName = "inverseEntity"
+  }
 }
 
 extension CoreData.Relationship {
   convenience init(with object: Kanna.XMLElement) throws {
-    let name = object[XML.nameAttribute] ?? ""
-    let isIndexed = object[XML.isIndexedAttribute].flatMap(Bool.init(from:)) ?? false
-    let isOptional = object[XML.isOptionalAttribute].flatMap(Bool.init(from:)) ?? false
-    let isTransient = object[XML.isTransientAttribute].flatMap(Bool.init(from:)) ?? false
+    let name = object[XML.Attributes.name] ?? ""
+    let isIndexed = object[XML.Attributes.isIndexed].flatMap(Bool.init(from:)) ?? false
+    let isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? false
+    let isTransient = object[XML.Attributes.isTransient].flatMap(Bool.init(from:)) ?? false
 
-    let isToMany = object[XML.isToManyAttribute].flatMap(Bool.init(from:)) ?? false
-    let isOrdered = object[XML.isOrderedAttribute].flatMap(Bool.init(from:)) ?? false
+    let isToMany = object[XML.Attributes.isToMany].flatMap(Bool.init(from:)) ?? false
+    let isOrdered = object[XML.Attributes.isOrdered].flatMap(Bool.init(from:)) ?? false
 
-    guard let destinationEntityName = object[XML.destinationEntityNameAttribute] else {
+    guard let destinationEntityName = object[XML.Attributes.destinationEntityName] else {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required destination entity name")
     }
 
-    let inverseRelationshipName = object[XML.inverseRelationshipNameAttribute]
-    let inverseRelationshipEntityName = object[XML.inverseRelationshipEntityNameAttribute]
+    let inverseRelationshipName = object[XML.Attributes.inverseRelationshipName]
+    let inverseRelationshipEntityName = object[XML.Attributes.inverseRelationshipEntityName]
 
     let inverseRelationshipInformation: InverseRelationshipInformation?
     switch (inverseRelationshipName, inverseRelationshipEntityName) {

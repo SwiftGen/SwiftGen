@@ -40,31 +40,33 @@ extension CoreData {
 }
 
 private enum XML {
-  static let nameAttribute = "name"
-  static let isIndexedAttribute = "indexed"
-  static let isOptionalAttribute = "optional"
-  static let isTransientAttribute = "transient"
-  static let usesScalarValueTypeAttribute = "usesScalarValueType"
+  fileprivate enum Attributes {
+    static let name = "name"
+    static let isIndexed = "indexed"
+    static let isOptional = "optional"
+    static let isTransient = "transient"
+    static let usesScalarValueType = "usesScalarValueType"
 
-  static let attributeTypeAttribute = "attributeType"
-  static let customClassNameAttribute = "customClassName"
+    static let attributeType = "attributeType"
+    static let customClassName = "customClassName"
+  }
 }
 
 extension CoreData.Attribute {
   init(with object: Kanna.XMLElement) throws {
-    name = object[XML.nameAttribute] ?? ""
-    isIndexed = object[XML.isIndexedAttribute].flatMap(Bool.init(from:)) ?? false
-    isOptional = object[XML.isOptionalAttribute].flatMap(Bool.init(from:)) ?? false
-    isTransient = object[XML.isTransientAttribute].flatMap(Bool.init(from:)) ?? false
-    usesScalarValueType = object[XML.usesScalarValueTypeAttribute].flatMap(Bool.init(from:)) ?? false
+    name = object[XML.Attributes.name] ?? ""
+    isIndexed = object[XML.Attributes.isIndexed].flatMap(Bool.init(from:)) ?? false
+    isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? false
+    isTransient = object[XML.Attributes.isTransient].flatMap(Bool.init(from:)) ?? false
+    usesScalarValueType = object[XML.Attributes.usesScalarValueType].flatMap(Bool.init(from:)) ?? false
 
-    guard let nonoptionalType = object[XML.attributeTypeAttribute]
+    guard let nonoptionalType = object[XML.Attributes.attributeType]
                                   .flatMap(CoreData.AttributeType.init(rawValue:)) else {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required attribute type on attribute declaration")
     }
     type = nonoptionalType
 
-    customClassName = object[XML.customClassNameAttribute]
+    customClassName = object[XML.Attributes.customClassName]
 
     typeName = type.typeName(usesScalarValueType: usesScalarValueType, customClassName: customClassName)
   }

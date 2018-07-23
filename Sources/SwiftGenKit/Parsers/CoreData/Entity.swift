@@ -41,10 +41,12 @@ extension CoreData {
 }
 
 private enum XML {
-  static let nameAttribute = "name"
-  static let representedClassNameAttribute = "representedClassName"
-  static let isAbstractAttribute = "isAbstract"
-  static let superentityNameAttribute = "parentEntity"
+  fileprivate enum Attributes {
+    static let name = "name"
+    static let representedClassName = "representedClassName"
+    static let isAbstract = "isAbstract"
+    static let superentityName = "parentEntity"
+  }
 
   static let attributesPath = "attribute"
   static let relationshipsPath = "relationship"
@@ -52,10 +54,10 @@ private enum XML {
 
 extension CoreData.Entity {
   convenience init(with object: Kanna.XMLElement) throws {
-    let name = object[XML.nameAttribute] ?? ""
-    let className = object[XML.representedClassNameAttribute] ?? "NSManagedObject"
-    let isAbstract = object[XML.isAbstractAttribute].flatMap(Bool.init(from:)) ?? false
-    let superentityName = object[XML.superentityNameAttribute]
+    let name = object[XML.Attributes.name] ?? ""
+    let className = object[XML.Attributes.representedClassName] ?? "NSManagedObject"
+    let isAbstract = object[XML.Attributes.isAbstract].flatMap(Bool.init(from:)) ?? false
+    let superentityName = object[XML.Attributes.superentityName]
 
     let attributes = try object.xpath(XML.attributesPath).map(CoreData.Attribute.init(with:))
     let relationships = try object.xpath(XML.relationshipsPath).map(CoreData.Relationship.init(with:))
