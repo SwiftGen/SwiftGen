@@ -12,12 +12,13 @@ import Kanna
 extension CoreData {
   public struct Model {
     public let entities: [Entity]
-
+    public let configurations: [String: [Entity]]
   }
 }
 
 private enum XML {
   static let entitiesPath = "/model/entity"
+  static let configurationsPath = "/model/configuration"
 }
 
 extension CoreData.Model {
@@ -53,5 +54,17 @@ extension CoreData.Model {
         }
       }
     }
+
+    configurations = try document.xpath(XML.configurationsPath)
+                                .reduce(into: ["Default": entities]) { configurations, element in
+                                  let (name, entityNames) = try CoreData.Configuration.parse(from: element)
+                                  configurations[name] = try entityNames.map { entityName in
+                                    guard let entity = entitiesByName[entityName] else {
+                                      throw CoreData.ParserError.invalidFormat(reason: "Unknown entity \(entityName).")
+                                    }
+
+                                    return entity
+                                  }
+                                }
   }
 }
