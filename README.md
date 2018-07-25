@@ -149,7 +149,7 @@ The tool is provided as a unique `swiftgen` binary command-line, with the follow
 Each subcommand has its own option and syntax, but some options are common to all:
 
 * `--output FILE` or `-o FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
-* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](https://github.com/SwiftGen/SwiftGen/tree/master/Documentation/Templates)) to generate the output.
+* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](./Documentation/templates)) to generate the output.
 * `--templatePath PATH` or `-p PATH`: define the Stencil template to use, using a full path.
 * Note: you should specify one and only one template when invoking SwiftGen. You have to use either `-t` or `-p` but should not use both at the same time (it wouldn't make sense anyway and you'll get an error if you try)
 * Each command supports multiple input files (or directories where applicable).
@@ -205,7 +205,7 @@ As explained above, you can use `swiftgen templates list` to list all templates 
 * A `swift4` template, compatible with Swift 4
 * Other variants, like `flat-swift3/4` and `structured-swift3/4` templates for Strings, etc.
 
-You can **find the documentation for each bundled template [here in the repo](https://github.com/SwiftGen/SwiftGen/tree/master/Documentation/Templates)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
+You can **find the documentation for each bundled template [here in the repo](./Documentation/templates)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
 Each MarkDown file documents the Swift Version it's aimed for, the use case for that template (in which cases you might favor that template over others), the available `--param` parameters to customize it on invocation, and some code examples.
 
 > Don't hesitate to make PRs to share your improvements suggestions on the bundled templates 😉
