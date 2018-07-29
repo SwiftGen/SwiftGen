@@ -4,7 +4,7 @@ platform: iOS
 storyboards:
 - initialScene:
     baseType: NavigationController
-    identifier: 
+    identifier: ""
     module: UIKit
     type: UINavigationController
   name: Anonymous

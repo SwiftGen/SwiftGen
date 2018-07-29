@@ -65,9 +65,9 @@ storyboards:
     module: AppKit
     type: NSViewController
   - customClass: CustomTabViewController
-    customModule: 
+    customModule: ""
     identifier: MessagesTab
-    module: 
+    module: ""
     type: CustomTabViewController
   - baseType: SplitViewController
     identifier: SplitMessages
@@ -78,28 +78,28 @@ storyboards:
     module: AppKit
     type: NSWindowController
   segues:
-  - customClass: 
-    customModule: 
+  - customClass: ""
+    customModule: ""
     identifier: Embed
     module: AppKit
     type: NSStoryboardSegue
-  - customClass: 
-    customModule: 
+  - customClass: ""
+    customModule: ""
     identifier: Modal
     module: AppKit
     type: NSStoryboardSegue
-  - customClass: 
-    customModule: 
+  - customClass: ""
+    customModule: ""
     identifier: Popover
     module: AppKit
     type: NSStoryboardSegue
-  - customClass: 
-    customModule: 
+  - customClass: ""
+    customModule: ""
     identifier: Sheet
     module: AppKit
     type: NSStoryboardSegue
-  - customClass: 
-    customModule: 
+  - customClass: ""
+    customModule: ""
     identifier: Show
     module: AppKit
     type: NSStoryboardSegue

@@ -4,7 +4,7 @@ platform: iOS
 storyboards:
 - initialScene:
     baseType: ViewController
-    identifier: 
+    identifier: ""
     module: UIKit
     type: UIViewController
   name: Message
@@ -23,28 +23,28 @@ storyboards:
     module: UIKit
     type: UINavigationController
   - customClass: XXPickerViewController
-    customModule: 
+    customModule: ""
     identifier: URLChooser
-    module: 
+    module: ""
     type: XXPickerViewController
   segues:
   - customClass: CustomSegueClass2
-    customModule: 
+    customModule: ""
     identifier: CustomBack
-    module: 
+    module: ""
     type: CustomSegueClass2
-  - customClass: 
-    customModule: 
+  - customClass: ""
+    customModule: ""
     identifier: Embed
     module: UIKit
     type: UIStoryboardSegue
-  - customClass: 
-    customModule: 
+  - customClass: ""
+    customModule: ""
     identifier: NonCustom
     module: UIKit
     type: UIStoryboardSegue
   - customClass: CustomSegueClass
-    customModule: 
+    customModule: ""
     identifier: Show-NavCtrl
-    module: 
+    module: ""
     type: CustomSegueClass

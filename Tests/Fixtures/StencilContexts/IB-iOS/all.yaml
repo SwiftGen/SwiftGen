@@ -10,7 +10,7 @@ storyboards:
 - initialScene:
     customClass: LocationPickerViewController
     customModule: LocationPicker
-    identifier: 
+    identifier: ""
     module: LocationPicker
     type: LocationPickerViewController
   name: AdditionalImport
@@ -29,7 +29,7 @@ storyboards:
     type: SlideDownSegue
 - initialScene:
     baseType: NavigationController
-    identifier: 
+    identifier: ""
     module: UIKit
     type: UINavigationController
   name: Anonymous
@@ -86,7 +86,7 @@ storyboards:
   segues: []
 - initialScene:
     baseType: ViewController
-    identifier: 
+    identifier: ""
     module: UIKit
     type: UIViewController
   name: Message
@@ -105,30 +105,30 @@ storyboards:
     module: UIKit
     type: UINavigationController
   - customClass: XXPickerViewController
-    customModule: 
+    customModule: ""
     identifier: URLChooser
-    module: 
+    module: ""
     type: XXPickerViewController
   segues:
   - customClass: CustomSegueClass2
-    customModule: 
+    customModule: ""
     identifier: CustomBack
-    module: 
+    module: ""
     type: CustomSegueClass2
-  - customClass: 
-    customModule: 
+  - customClass: ""
+    customModule: ""
     identifier: Embed
     module: UIKit
     type: UIStoryboardSegue
-  - customClass: 
-    customModule: 
+  - customClass: ""
+    customModule: ""
     identifier: NonCustom
     module: UIKit
     type: UIStoryboardSegue
   - customClass: CustomSegueClass
-    customModule: 
+    customModule: ""
     identifier: Show-NavCtrl
-    module: 
+    module: ""
     type: CustomSegueClass
 - name: Placeholder
   platform: iOS
@@ -140,9 +140,9 @@ storyboards:
   segues: []
 - initialScene:
     customClass: CreateAccViewController
-    customModule: 
+    customModule: ""
     identifier: CreateAccount
-    module: 
+    module: ""
     type: CreateAccViewController
   name: Wizard
   platform: iOS
@@ -152,9 +152,9 @@ storyboards:
     module: UIKit
     type: UIViewController
   - customClass: CreateAccViewController
-    customModule: 
+    customModule: ""
     identifier: CreateAccount
-    module: 
+    module: ""
     type: CreateAccViewController
   - baseType: TableViewController
     identifier: Preferences
@@ -165,8 +165,8 @@ storyboards:
     module: UIKit
     type: UIViewController
   segues:
-  - customClass: 
-    customModule: 
+  - customClass: ""
+    customModule: ""
     identifier: ShowPassword
     module: UIKit
     type: UIStoryboardSegue

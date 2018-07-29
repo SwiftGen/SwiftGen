@@ -34,7 +34,7 @@ tables:
                               translation: DeepSettings
                           name: this
                         name: really
-                      name: no
+                      name: "no"
                     name: handle
                   name: can
                 name: we
