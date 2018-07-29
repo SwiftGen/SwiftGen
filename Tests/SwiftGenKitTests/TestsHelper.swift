@@ -136,7 +136,7 @@ func XCTDiffContexts(_ result: [String: Any],
   if ProcessInfo().environment["GENERATE_CONTEXTS"] == "YES" {
     let target = Path(#file).parent().parent() + "Fixtures/StencilContexts" + directory.rawValue + fileName
     do {
-      let data = try Yams.dump(object: result)
+      let data = try Yams.serialize(node: YamsFix.represent(result))
       try target.write(data)
     } catch let error {
       fatalError("Unable to write context file \(target): \(error)")
@@ -187,11 +187,34 @@ class Fixtures {
     let path = self.path(for: name, subDirectory: "StencilContexts/\(sub.rawValue)")
 
     guard let data: String = try? path.read(),
-      let yaml = try? Yams.load(yaml: data, .basic),
+      let yaml = try? Yams.load(yaml: data),
       let result = yaml as? [String: Any] else {
         fatalError("Unable to load fixture content")
     }
 
     return result
+  }
+}
+
+// MARK: - Temporary fix until Yams fixes string dumping
+
+enum YamsFix {
+  static func represent(_ any: Any) throws -> Node {
+    switch any {
+    case let string as String:
+      // if the tag after resolving is not "str", then this string is ambiguous
+      let tag = Resolver.`default`.resolveTag(of: Node(string))
+      let style: Node.Scalar.Style = (tag != .str) ? .doubleQuoted : .any
+      return Node(string, .implicit, style)
+    case let array as [Any]:
+      return Node(try array.map(represent), Tag(.seq))
+    case let dictionary as [String: Any]:
+      let pairs = try dictionary.map { (Node($0.key), try represent($0.value)) }
+      return Node(pairs.sorted { $0.0 < $1.0 }, Tag(.map))
+    case let representable as NodeRepresentable:
+      return try representable.represented()
+    default:
+      throw YamlError.representer(problem: "Failed to represent \(any) as a Yams.Node")
+    }
   }
 }
