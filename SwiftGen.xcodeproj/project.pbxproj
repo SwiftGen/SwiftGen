@@ -218,6 +218,13 @@
 			remoteGlobalIDString = DD428DF71FC50F56001649D6;
 			remoteInfo = SwiftGenKit;
 		};
+		DDD2D70A210F578600D678E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 09030B631B6D254200275BF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD428DF71FC50F56001649D6;
+			remoteInfo = SwiftGenKit;
+		};
 		DDFB05E31FC517170019E199 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 09030B631B6D254200275BF5 /* Project object */;
@@ -827,6 +834,7 @@
 				DDDE50471FAF687A004203BE /* PBXBuildRule */,
 			);
 			dependencies = (
+				DDD2D70B210F578600D678E0 /* PBXTargetDependency */,
 			);
 			name = "Templates UnitTests";
 			productName = SwiftGenKitTests;
@@ -1366,6 +1374,11 @@
 			isa = PBXTargetDependency;
 			target = DD428DF71FC50F56001649D6 /* SwiftGenKit */;
 			targetProxy = DD7399B51FCA389A0086778A /* PBXContainerItemProxy */;
+		};
+		DDD2D70B210F578600D678E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD428DF71FC50F56001649D6 /* SwiftGenKit */;
+			targetProxy = DDD2D70A210F578600D678E0 /* PBXContainerItemProxy */;
 		};
 		DDFB05E41FC517170019E199 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
