@@ -83,6 +83,7 @@
 		DDCCACDB209551240017FB43 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD7209551230017FB43 /* Platform.swift */; };
 		DDCCACDC209551240017FB43 /* Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD8209551230017FB43 /* Segue.swift */; };
 		DDCCACDD209551240017FB43 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD9209551230017FB43 /* Scene.swift */; };
+		DDD2D709210F293E00D678E0 /* YAML.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD2D708210F293E00D678E0 /* YAML.swift */; };
 		DDDE51131FAF6AD4004203BE /* StringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE506D1FAF6AD4004203BE /* StringsTests.swift */; };
 		DDDE51141FAF6AD4004203BE /* FontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE506E1FAF6AD4004203BE /* FontsTests.swift */; };
 		DDDE51941FAF6AD4004203BE /* XCAssetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE50F51FAF6AD4004203BE /* XCAssetsTests.swift */; };
@@ -322,6 +323,7 @@
 		DDCCACD7209551230017FB43 /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		DDCCACD8209551230017FB43 /* Segue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segue.swift; sourceTree = "<group>"; };
 		DDCCACD9209551230017FB43 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		DDD2D708210F293E00D678E0 /* YAML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAML.swift; sourceTree = "<group>"; };
 		DDDE504B1FAF687A004203BE /* Templates UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Templates UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDE506D1FAF6AD4004203BE /* StringsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsTests.swift; sourceTree = "<group>"; };
 		DDDE506E1FAF6AD4004203BE /* FontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsTests.swift; sourceTree = "<group>"; };
@@ -676,6 +678,7 @@
 			children = (
 				DDC8211420967180007A55F3 /* Path.swift */,
 				DDC82116209672E1007A55F3 /* String.swift */,
+				DDD2D708210F293E00D678E0 /* YAML.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1298,6 +1301,7 @@
 				DD428E1D1FC50FBF001649D6 /* ColorsXMLFileParser.swift in Sources */,
 				DDCCACDA209551240017FB43 /* Storyboard.swift in Sources */,
 				DD428E1F1FC50FBF001649D6 /* InterfaceBuilderParser.swift in Sources */,
+				DDD2D709210F293E00D678E0 /* YAML.swift in Sources */,
 				DDCCACDC209551240017FB43 /* Segue.swift in Sources */,
 				DD9F688620956074004EB720 /* PlaceholderType.swift in Sources */,
 				DD428E251FC50FBF001649D6 /* AssetsCatalogContext.swift in Sources */,

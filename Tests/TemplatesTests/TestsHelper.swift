@@ -7,8 +7,8 @@
 import Foundation
 import PathKit
 import StencilSwiftKit
+import SwiftGenKit
 import XCTest
-import Yams
 
 private let colorCode: (String) -> String =
   ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
@@ -103,8 +103,7 @@ class Fixtures {
   static func context(for name: String, sub: Directory) -> [String: Any] {
     let path = self.path(for: name, subDirectory: "StencilContexts/\(sub.rawValue)")
 
-    guard let data: String = try? path.read(),
-      let yaml = try? Yams.load(yaml: data),
+    guard let yaml = try? YAML.read(path: path),
       let result = yaml as? [String: Any] else {
         fatalError("Unable to load fixture content")
     }

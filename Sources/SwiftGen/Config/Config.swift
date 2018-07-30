@@ -7,7 +7,7 @@
 //
 
 import PathKit
-import Yams
+import SwiftGenKit
 
 // MARK: - Config
 
@@ -27,8 +27,7 @@ extension Config {
     if !file.exists {
       throw Config.Error.pathNotFound(path: file)
     }
-    let content: String = try file.read()
-    let anyConfig = try Yams.load(yaml: content)
+    let anyConfig = try YAML.read(path: file)
     guard let config = anyConfig as? [String: Any] else {
       throw Config.Error.wrongType(key: nil, expected: "Dictionary", got: type(of: anyConfig))
     }
