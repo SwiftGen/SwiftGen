@@ -83,6 +83,7 @@
 		DDCCACDB209551240017FB43 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD7209551230017FB43 /* Platform.swift */; };
 		DDCCACDC209551240017FB43 /* Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD8209551230017FB43 /* Segue.swift */; };
 		DDCCACDD209551240017FB43 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD9209551230017FB43 /* Scene.swift */; };
+		DDD2D709210F293E00D678E0 /* YAML.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD2D708210F293E00D678E0 /* YAML.swift */; };
 		DDDE51131FAF6AD4004203BE /* StringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE506D1FAF6AD4004203BE /* StringsTests.swift */; };
 		DDDE51141FAF6AD4004203BE /* FontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE506E1FAF6AD4004203BE /* FontsTests.swift */; };
 		DDDE51941FAF6AD4004203BE /* XCAssetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE50F51FAF6AD4004203BE /* XCAssetsTests.swift */; };
@@ -217,6 +218,13 @@
 			remoteGlobalIDString = DD428DF71FC50F56001649D6;
 			remoteInfo = SwiftGenKit;
 		};
+		DDD2D70A210F578600D678E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 09030B631B6D254200275BF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD428DF71FC50F56001649D6;
+			remoteInfo = SwiftGenKit;
+		};
 		DDFB05E31FC517170019E199 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 09030B631B6D254200275BF5 /* Project object */;
@@ -322,6 +330,7 @@
 		DDCCACD7209551230017FB43 /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		DDCCACD8209551230017FB43 /* Segue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segue.swift; sourceTree = "<group>"; };
 		DDCCACD9209551230017FB43 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		DDD2D708210F293E00D678E0 /* YAML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAML.swift; sourceTree = "<group>"; };
 		DDDE504B1FAF687A004203BE /* Templates UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Templates UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDE506D1FAF6AD4004203BE /* StringsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsTests.swift; sourceTree = "<group>"; };
 		DDDE506E1FAF6AD4004203BE /* FontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsTests.swift; sourceTree = "<group>"; };
@@ -676,6 +685,7 @@
 			children = (
 				DDC8211420967180007A55F3 /* Path.swift */,
 				DDC82116209672E1007A55F3 /* String.swift */,
+				DDD2D708210F293E00D678E0 /* YAML.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -750,7 +760,6 @@
 				09A87B4D1BCCA2C600D9B9F5 /* Frameworks */,
 				09A87B4E1BCCA2C600D9B9F5 /* Resources */,
 				D3C83293B5D60F91CC5DF247 /* [CP] Embed Pods Frameworks */,
-				D90B41E10258A42C06FFF34A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 				09A87B721BCCA60900D9B9F5 /* PBXBuildRule */,
@@ -776,7 +785,6 @@
 				234F7E6C1DEBD5C5001B3C10 /* Resources */,
 				DD428E041FC50F56001649D6 /* Embed Frameworks */,
 				A99480F22B553BF8A273ED05 /* [CP] Embed Pods Frameworks */,
-				E0648ED58FCA066C81AAE8D9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -798,7 +806,6 @@
 				DD428DF41FC50F56001649D6 /* Frameworks */,
 				DD428DF51FC50F56001649D6 /* Headers */,
 				DD428DF61FC50F56001649D6 /* Resources */,
-				70B025E2238E83EB0D412E37 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -820,7 +827,6 @@
 				DDDE50371FAF687A004203BE /* Resources */,
 				D523545564DCC237D6EE770B /* [CP] Embed Pods Frameworks */,
 				DD9F4769206ADCD4006B0DCA /* ⚠️ SwiftLint (generated output) */,
-				81866428BCB07637BF228F70 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 				DDDE50451FAF687A004203BE /* PBXBuildRule */,
@@ -828,6 +834,7 @@
 				DDDE50471FAF687A004203BE /* PBXBuildRule */,
 			);
 			dependencies = (
+				DDD2D70B210F578600D678E0 /* PBXTargetDependency */,
 			);
 			name = "Templates UnitTests";
 			productName = SwiftGenKitTests;
@@ -844,7 +851,6 @@
 				DDDE51A91FAF814A004203BE /* Frameworks */,
 				DDDE51AB1FAF814A004203BE /* Resources */,
 				2C9D66D627FB898D3DA8D22E /* [CP] Embed Pods Frameworks */,
-				4EAEE7F4A92B1BD60A4E610E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 				DDDE51B11FAF814A004203BE /* PBXBuildRule */,
@@ -1056,21 +1062,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4EAEE7F4A92B1BD60A4E610E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		51B3E1E55873F072BF1E3406 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1087,36 +1078,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		70B025E2238E83EB0D412E37 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		81866428BCB07637BF228F70 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A99480F22B553BF8A273ED05 /* [CP] Embed Pods Frameworks */ = {
@@ -1221,21 +1182,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D90B41E10258A42C06FFF34A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DD9F4765206ADC29006B0DCA /* ⚠️ SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1306,21 +1252,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$SRCROOT/Scripts/SwiftLint.sh\" \"templates_generated\"\nfi";
 		};
-		E0648ED58FCA066C81AAE8D9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1378,6 +1309,7 @@
 				DD428E1D1FC50FBF001649D6 /* ColorsXMLFileParser.swift in Sources */,
 				DDCCACDA209551240017FB43 /* Storyboard.swift in Sources */,
 				DD428E1F1FC50FBF001649D6 /* InterfaceBuilderParser.swift in Sources */,
+				DDD2D709210F293E00D678E0 /* YAML.swift in Sources */,
 				DDCCACDC209551240017FB43 /* Segue.swift in Sources */,
 				DD9F688620956074004EB720 /* PlaceholderType.swift in Sources */,
 				DD428E251FC50FBF001649D6 /* AssetsCatalogContext.swift in Sources */,
@@ -1442,6 +1374,11 @@
 			isa = PBXTargetDependency;
 			target = DD428DF71FC50F56001649D6 /* SwiftGenKit */;
 			targetProxy = DD7399B51FCA389A0086778A /* PBXContainerItemProxy */;
+		};
+		DDD2D70B210F578600D678E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD428DF71FC50F56001649D6 /* SwiftGenKit */;
+			targetProxy = DDD2D70A210F578600D678E0 /* PBXContainerItemProxy */;
 		};
 		DDFB05E41FC517170019E199 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

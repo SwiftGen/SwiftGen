@@ -1,118 +1,118 @@
 modules:
-- AppKit
-- FadeSegue
-- PrefsWindowController
-platform: macOS
+- "AppKit"
+- "FadeSegue"
+- "PrefsWindowController"
+platform: "macOS"
 storyboards:
-- name: AdditionalImport
-  platform: macOS
+- name: "AdditionalImport"
+  platform: "macOS"
   scenes:
-  - customClass: DBPrefsWindowController
-    customModule: PrefsWindowController
-    identifier: private
-    module: PrefsWindowController
-    type: DBPrefsWindowController
+  - customClass: "DBPrefsWindowController"
+    customModule: "PrefsWindowController"
+    identifier: "private"
+    module: "PrefsWindowController"
+    type: "DBPrefsWindowController"
   segues: []
-- name: Anonymous
-  platform: macOS
+- name: "Anonymous"
+  platform: "macOS"
   scenes: []
   segues: []
-- name: Dependency
-  platform: macOS
+- name: "Dependency"
+  platform: "macOS"
   scenes:
-  - baseType: ViewController
-    identifier: Dependent
-    module: AppKit
-    type: NSViewController
+  - baseType: "ViewController"
+    identifier: "Dependent"
+    module: "AppKit"
+    type: "NSViewController"
   segues: []
-- name: Known Types
-  platform: macOS
+- name: "Known Types"
+  platform: "macOS"
   scenes:
-  - baseType: WindowController
-    identifier: item 1
-    module: AppKit
-    type: NSWindowController
-  - baseType: SplitViewController
-    identifier: item 2
-    module: AppKit
-    type: NSSplitViewController
-  - baseType: ViewController
-    identifier: item 3
-    module: AppKit
-    type: NSViewController
-  - baseType: Pagecontroller
-    identifier: item 4
-    module: AppKit
-    type: NSPageController
-  - baseType: TabViewController
-    identifier: item 5
-    module: AppKit
-    type: NSTabViewController
+  - baseType: "WindowController"
+    identifier: "item 1"
+    module: "AppKit"
+    type: "NSWindowController"
+  - baseType: "SplitViewController"
+    identifier: "item 2"
+    module: "AppKit"
+    type: "NSSplitViewController"
+  - baseType: "ViewController"
+    identifier: "item 3"
+    module: "AppKit"
+    type: "NSViewController"
+  - baseType: "Pagecontroller"
+    identifier: "item 4"
+    module: "AppKit"
+    type: "NSPageController"
+  - baseType: "TabViewController"
+    identifier: "item 5"
+    module: "AppKit"
+    type: "NSTabViewController"
   segues: []
-- name: Message
-  platform: macOS
+- name: "Message"
+  platform: "macOS"
   scenes:
-  - baseType: ViewController
-    identifier: MessageDetails
-    module: AppKit
-    type: NSViewController
-  - baseType: ViewController
-    identifier: MessageList
-    module: AppKit
-    type: NSViewController
-  - baseType: ViewController
-    identifier: MessageListFooter
-    module: AppKit
-    type: NSViewController
-  - customClass: CustomTabViewController
-    customModule: 
-    identifier: MessagesTab
-    module: 
-    type: CustomTabViewController
-  - baseType: SplitViewController
-    identifier: SplitMessages
-    module: AppKit
-    type: NSSplitViewController
-  - baseType: WindowController
-    identifier: WindowCtrl
-    module: AppKit
-    type: NSWindowController
+  - baseType: "ViewController"
+    identifier: "MessageDetails"
+    module: "AppKit"
+    type: "NSViewController"
+  - baseType: "ViewController"
+    identifier: "MessageList"
+    module: "AppKit"
+    type: "NSViewController"
+  - baseType: "ViewController"
+    identifier: "MessageListFooter"
+    module: "AppKit"
+    type: "NSViewController"
+  - customClass: "CustomTabViewController"
+    customModule: ""
+    identifier: "MessagesTab"
+    module: ""
+    type: "CustomTabViewController"
+  - baseType: "SplitViewController"
+    identifier: "SplitMessages"
+    module: "AppKit"
+    type: "NSSplitViewController"
+  - baseType: "WindowController"
+    identifier: "WindowCtrl"
+    module: "AppKit"
+    type: "NSWindowController"
   segues:
-  - customClass: 
-    customModule: 
-    identifier: Embed
-    module: AppKit
-    type: NSStoryboardSegue
-  - customClass: 
-    customModule: 
-    identifier: Modal
-    module: AppKit
-    type: NSStoryboardSegue
-  - customClass: 
-    customModule: 
-    identifier: Popover
-    module: AppKit
-    type: NSStoryboardSegue
-  - customClass: 
-    customModule: 
-    identifier: Sheet
-    module: AppKit
-    type: NSStoryboardSegue
-  - customClass: 
-    customModule: 
-    identifier: Show
-    module: AppKit
-    type: NSStoryboardSegue
-  - customClass: FadeSegue
-    customModule: FadeSegue
-    identifier: public
-    module: FadeSegue
-    type: FadeSegue
-- name: Placeholder
-  platform: macOS
+  - customClass: ""
+    customModule: ""
+    identifier: "Embed"
+    module: "AppKit"
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Modal"
+    module: "AppKit"
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Popover"
+    module: "AppKit"
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Sheet"
+    module: "AppKit"
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Show"
+    module: "AppKit"
+    type: "NSStoryboardSegue"
+  - customClass: "FadeSegue"
+    customModule: "FadeSegue"
+    identifier: "public"
+    module: "FadeSegue"
+    type: "FadeSegue"
+- name: "Placeholder"
+  platform: "macOS"
   scenes:
-  - baseType: WindowController
-    identifier: Window
-    module: AppKit
-    type: NSWindowController
+  - baseType: "WindowController"
+    identifier: "Window"
+    module: "AppKit"
+    type: "NSWindowController"
   segues: []

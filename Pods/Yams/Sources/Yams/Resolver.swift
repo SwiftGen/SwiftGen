@@ -8,22 +8,38 @@
 
 import Foundation
 
+/// Class used to resolve nodes to tags based on customizable rules.
 public final class Resolver {
+    /// Rule describing how to resolve tags from regex patterns.
     public struct Rule {
+        /// The tag name this rule applies to.
         public let tag: Tag.Name
-        let regexp: NSRegularExpression
+        internal let regexp: NSRegularExpression
+        /// The regex pattern used to resolve this rule.
         public var pattern: String { return regexp.pattern }
 
+        /// Create a rule with the specified tag name and regex pattern.
+        ///
+        /// - parameter tag: The tag name this rule should apply to.
+        /// - parameter pattern: The regex pattern used to resolve this rule.
+        ///
+        /// - throws: Throws an error if the regular expression pattern is invalid.
         public init(_ tag: Tag.Name, _ pattern: String) throws {
             self.tag = tag
             self.regexp = try .init(pattern: pattern, options: [])
         }
     }
 
+    /// The rules used by this resolver to resolve nodes to tags.
     public let rules: [Rule]
 
-    init(_ rules: [Rule] = []) { self.rules = rules }
+    internal init(_ rules: [Rule] = []) { self.rules = rules }
 
+    /// Resolve a tag name from a given node.
+    ///
+    /// - parameter node: Node whose tag should be resolved.
+    ///
+    /// - returns: The resolved tag name.
     public func resolveTag(of node: Node) -> Tag.Name {
         switch node {
         case let .scalar(scalar):
@@ -74,19 +90,28 @@ public final class Resolver {
     }
 }
 
+// MARK: Defaults
+
 extension Resolver {
+    /// Resolver with no rules.
     public static let basic = Resolver()
+    /// Resolver with a default set of rules.
     public static let `default` = Resolver([.bool, .int, .float, .merge, .null, .timestamp, .value])
 }
 
+// MARK: Default Resolver Rules
+
 extension Resolver.Rule {
-    // swiftlint:disable:next force_try
+    // swiftlint:disable force_try
+
+    /// Default bool resolver rule.
     public static let bool = try! Resolver.Rule(.bool, """
         ^(?:yes|Yes|YES|no|No|NO\
         |true|True|TRUE|false|False|FALSE\
         |on|On|ON|off|Off|OFF)$
         """)
-    // swiftlint:disable:next force_try
+
+    /// Default int resolver rule.
     public static let int = try! Resolver.Rule(.int, """
         ^(?:[-+]?0b[0-1_]+\
         |[-+]?0o?[0-7_]+\
@@ -94,7 +119,8 @@ extension Resolver.Rule {
         |[-+]?0x[0-9a-fA-F_]+\
         |[-+]?[1-9][0-9_]*(?::[0-5]?[0-9])+)$
         """)
-    // swiftlint:disable:next force_try
+
+    /// Default float resolver rule.
     public static let float = try! Resolver.Rule(.float, """
         ^(?:[-+]?(?:[0-9][0-9_]*)(?:\\.[0-9_]*)?(?:[eE][-+]?[0-9]+)?\
         |\\.[0-9_]+(?:[eE][-+][0-9]+)?\
@@ -102,15 +128,18 @@ extension Resolver.Rule {
         |[-+]?\\.(?:inf|Inf|INF)\
         |\\.(?:nan|NaN|NAN))$
         """)
-    // swiftlint:disable:next force_try
+
+    /// Default merge resolver rule.
     public static let merge = try! Resolver.Rule(.merge, "^(?:<<)$")
-    // swiftlint:disable:next force_try
+
+    /// Default null resolver rule.
     public static let null = try! Resolver.Rule(.null, """
         ^(?:~\
         |null|Null|NULL\
         |)$
         """)
-     // swiftlint:disable:next force_try
+
+    /// Default timestamp resolver rule.
     public static let timestamp = try! Resolver.Rule(.timestamp, """
         ^(?:[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\
         |[0-9][0-9][0-9][0-9]-[0-9][0-9]?-[0-9][0-9]?\
@@ -118,8 +147,11 @@ extension Resolver.Rule {
         :[0-9][0-9]:[0-9][0-9](?:\\.[0-9]*)?\
         (?:[ \\t]*(?:Z|[-+][0-9][0-9]?(?::[0-9][0-9])?))?)$
         """)
-    // swiftlint:disable:next force_try
+
+    /// Default value resolver rule.
     public static let value = try! Resolver.Rule(.value, "^(?:=)$")
+
+    // swiftlint:enable force_try
 }
 
 func pattern(_ string: String) -> NSRegularExpression {

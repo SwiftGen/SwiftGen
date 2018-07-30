@@ -6,8 +6,8 @@
 
 import Foundation
 import PathKit
+import SwiftGenKit
 import XCTest
-import Yams
 
 private let colorCode: (String) -> String =
   ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
@@ -136,8 +136,7 @@ func XCTDiffContexts(_ result: [String: Any],
   if ProcessInfo().environment["GENERATE_CONTEXTS"] == "YES" {
     let target = Path(#file).parent().parent() + "Fixtures/StencilContexts" + directory.rawValue + fileName
     do {
-      let data = try Yams.dump(object: result)
-      try target.write(data)
+      try YAML.write(object: result, to: target)
     } catch let error {
       fatalError("Unable to write context file \(target): \(error)")
     }
@@ -186,8 +185,7 @@ class Fixtures {
   static func context(for name: String, sub: Directory) -> [String: Any] {
     let path = self.path(for: name, subDirectory: "StencilContexts/\(sub.rawValue)")
 
-    guard let data: String = try? path.read(),
-      let yaml = try? Yams.load(yaml: data, .basic),
+    guard let yaml = try? YAML.read(path: path),
       let result = yaml as? [String: Any] else {
         fatalError("Unable to load fixture content")
     }

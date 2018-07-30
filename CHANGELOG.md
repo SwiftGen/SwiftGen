@@ -65,6 +65,7 @@
 * Store testing contexts as YAML files instead of PLISTs.  
   [David Jennes](https://github.com/djbe) 
   [#418](https://github.com/SwiftGen/SwiftGen/pull/418)
+  [#461](https://github.com/SwiftGen/SwiftGen/pull/461)
 * Refactor the parsers as they're getting more complex.  
   [David Jennes](https://github.com/djbe) 
   [#417](https://github.com/SwiftGen/SwiftGen/pull/417)

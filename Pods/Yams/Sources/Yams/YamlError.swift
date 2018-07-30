@@ -11,67 +11,70 @@ import CYaml
 #endif
 import Foundation
 
+/// Errors thrown by Yams APIs.
 public enum YamlError: Swift.Error {
     // Used in `yaml_emitter_t` and `yaml_parser_t`
     /// `YAML_NO_ERROR`. No error is produced.
     case no
-    // swiftlint:disable:previous identifier_name
 
     /// `YAML_MEMORY_ERROR`. Cannot allocate or reallocate a block of memory.
     case memory
 
     // Used in `yaml_parser_t`
     /// `YAML_READER_ERROR`. Cannot read or decode the input stream.
-    /// - Parameters:
-    ///   - problem: Error description.
-    ///   - byteOffset: The byte about which the problem occured.
-    ///   - value: The problematic value (-1 is none).
-    ///   - yaml: YAML String which the problem occured while reading.
+    ///
+    /// - parameter problem:    Error description.
+    /// - parameter byteOffset: The byte about which the problem occured.
+    /// - parameter value:      The problematic value (-1 is none).
+    /// - parameter yaml:       YAML String which the problem occured while reading.
     case reader(problem: String, byteOffset: Int, value: Int32, yaml: String)
 
     // line and column start from 1, column is counted by unicodeScalars
     /// `YAML_SCANNER_ERROR`. Cannot scan the input stream.
-    /// - Parameters:
-    ///   - context: Error context.
-    ///   - problem: Error description.
-    ///   - mark: Problem position.
-    ///   - yaml: YAML String which the problem occured while scanning.
+    ///
+    /// - parameter context: Error context.
+    /// - parameter problem: Error description.
+    /// - parameter mark:    Problem position.
+    /// - parameter yaml:    YAML String which the problem occured while scanning.
     case scanner(context: Context?, problem: String, Mark, yaml: String)
 
     /// `YAML_PARSER_ERROR`. Cannot parse the input stream.
-    /// - Parameters:
-    ///   - context: Error context.
-    ///   - problem: Error description.
-    ///   - mark: Problem position.
-    ///   - yaml: YAML String which the problem occured while parsing.
+    ///
+    /// - parameter context: Error context.
+    /// - parameter problem: Error description.
+    /// - parameter mark:    Problem position.
+    /// - parameter yaml:    YAML String which the problem occured while parsing.
     case parser(context: Context?, problem: String, Mark, yaml: String)
 
     /// `YAML_COMPOSER_ERROR`. Cannot compose a YAML document.
-    /// - Parameters:
-    ///   - context: Error context.
-    ///   - problem: Error description.
-    ///   - mark: Problem position.
-    ///   - yaml: YAML String which the problem occured while composing.
+    ///
+    /// - parameter context: Error context.
+    /// - parameter problem: Error description.
+    /// - parameter mark:    Problem position.
+    /// - parameter yaml:    YAML String which the problem occured while composing.
     case composer(context: Context?, problem: String, Mark, yaml: String)
 
     // Used in `yaml_emitter_t`
     /// `YAML_WRITER_ERROR`. Cannot write to the output stream.
-    /// - Parameter problem: Error description.
+    ///
+    /// - parameter problem: Error description.
     case writer(problem: String)
 
     /// `YAML_EMITTER_ERROR`. Cannot emit a YAML stream.
-    /// - Parameter problem: Error description.
+    ///
+    /// - parameter problem: Error description.
     case emitter(problem: String)
 
-    /// Used in `NodeRepresentable`
-    /// - Parameter problem: Error description.
+    /// Used in `NodeRepresentable`.
+    ///
+    /// - parameter problem: Error description.
     case representer(problem: String)
 
-    /// The error context
+    /// The error context.
     public struct Context: CustomStringConvertible {
-        /// error context
+        /// Context text.
         public let text: String
-        /// context position
+        /// Context position.
         public let mark: Mark
         /// A textual representation of this instance.
         public var description: String {
@@ -158,13 +161,13 @@ extension YamlError: CustomStringConvertible {
 
 extension YamlError {
     private func markAndSnippet(from yaml: String, _ byteOffset: Int) -> (Mark, String)? {
-        #if USE_UTF8
-            guard let (line, column, contents) = yaml.utf8LineNumberColumnAndContents(at: byteOffset)
-                else { return nil }
-        #else
-            guard let (line, column, contents) = yaml.utf16LineNumberColumnAndContents(at: byteOffset / 2)
-                else { return nil }
-        #endif
+#if USE_UTF8
+        guard let (line, column, contents) = yaml.utf8LineNumberColumnAndContents(at: byteOffset)
+            else { return nil }
+#else
+        guard let (line, column, contents) = yaml.utf16LineNumberColumnAndContents(at: byteOffset / 2)
+            else { return nil }
+#endif
         return (Mark(line: line + 1, column: column + 1), contents)
     }
 }
