@@ -8,11 +8,20 @@
 
 import Foundation
 
+/// Constructors are used to translate `Node`s to Swift values.
 public final class Constructor {
+    /// Maps `Tag.Name`s to `Node.Scalar`s.
     public typealias ScalarMap = [Tag.Name: (Node.Scalar) -> Any?]
+    /// Maps `Tag.Name`s to `Node.Mapping`s.
     public typealias MappingMap = [Tag.Name: (Node.Mapping) -> Any?]
+    /// Maps `Tag.Name`s to `Node.Sequence`s.
     public typealias SequenceMap = [Tag.Name: (Node.Sequence) -> Any?]
 
+    /// Initialize a `Constructor` with the specified maps, falling back to default maps.
+    ///
+    /// - parameter scalarMap:   Maps `Tag.Name`s to `Node.Scalar`s.
+    /// - parameter mappingMap:  Maps `Tag.Name`s to `Node.Mapping`s.
+    /// - parameter sequenceMap: Maps `Tag.Name`s to `Node.Sequence`s.
     public init(_ scalarMap: ScalarMap = defaultScalarMap,
                 _ mappingMap: MappingMap = defaultMappingMap,
                 _ sequenceMap: SequenceMap = defaultSequenceMap) {
@@ -21,6 +30,13 @@ public final class Constructor {
         self.sequenceMap = sequenceMap
     }
 
+    /// Constructs Swift values based on the maps this `Constructor` was initialized with.
+    ///
+    /// - parameter node: `Node` from which to extract an `Any` Swift value, if one was produced by the Node
+    ///                   type's relevant mapping on this `Constructor`.
+    ///
+    /// - returns: An `Any` Swift value, if one was produced by the Node type's relevant mapping on this
+    ///            `Constructor`.
     public func any(from node: Node) -> Any {
         switch node {
         case .scalar(let scalar):
@@ -46,10 +62,13 @@ public final class Constructor {
     private let sequenceMap: SequenceMap
 }
 
+// MARK: - Default Mappings
+
 extension Constructor {
+    /// The default `Constructor` to be used with APIs where none is explicitly provided.
     public static let `default` = Constructor()
 
-    // We can not write extension of map because that is alias of specialized dictionary
+    /// The default `Tag.Name` to `Node.Scalar` map.
     public static let defaultScalarMap: ScalarMap = [
         // Failsafe Schema
         .str: String.construct,
@@ -63,6 +82,7 @@ extension Constructor {
         .timestamp: Date.construct
     ]
 
+    /// The default `Tag.Name` to `Node.Mapping` map.
     public static let defaultMappingMap: MappingMap = [
         .map: [AnyHashable: Any].construct_mapping,
         // http://yaml.org/type/index.html
@@ -71,6 +91,7 @@ extension Constructor {
         // .value is supported in `String.construct` and `[AnyHashable: Any].construct_mapping`.
     ]
 
+    /// The default `Tag.Name` to `Node.Sequence` map.
     public static let defaultSequenceMap: SequenceMap = [
         .seq: [Any].construct_seq,
         // http://yaml.org/type/index.html
@@ -80,13 +101,28 @@ extension Constructor {
 }
 
 // MARK: - ScalarConstructible
+
+/// Types conforming to this protocol can be extracted `Node.Scalar`s.
 public protocol ScalarConstructible {
-    // We don't use overloading `init?(_ scalar: Node.Scalar)`
-    // because that causes difficulties on using `init` as closure
+    /// Construct an instance of `Self`, if possible, from the specified scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type `Self`, if possible.
+    ///
+    /// - returns: An instance of `Self`, if one was successfully extracted from the scalar.
+    ///
+    /// - note: We use static constructors to avoid overloading `init?(_ scalar: Node.Scalar)` which would
+    ///         cause callsite ambiguities when using `init` as closure.
     static func construct(from scalar: Node.Scalar) -> Self?
 }
 
+// MARK: - ScalarConstructible Bool Conformance
+
 extension Bool: ScalarConstructible {
+    /// Construct an instance of `Bool`, if possible, from the specified scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type `Bool`, if possible.
+    ///
+    /// - returns: An instance of `Bool`, if one was successfully extracted from the scalar.
     public static func construct(from scalar: Node.Scalar) -> Bool? {
         switch scalar.string.lowercased() {
         case "true", "yes", "on":
@@ -99,13 +135,27 @@ extension Bool: ScalarConstructible {
     }
 }
 
+// MARK: - ScalarConstructible Data Conformance
+
 extension Data: ScalarConstructible {
+    /// Construct an instance of `Data`, if possible, from the specified scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type `Data`, if possible.
+    ///
+    /// - returns: An instance of `Data`, if one was successfully extracted from the scalar.
     public static func construct(from scalar: Node.Scalar) -> Data? {
         return Data(base64Encoded: scalar.string, options: .ignoreUnknownCharacters)
     }
 }
 
+// MARK: - ScalarConstructible Date Conformance
+
 extension Date: ScalarConstructible {
+    /// Construct an instance of `Date`, if possible, from the specified scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type `Date`, if possible.
+    ///
+    /// - returns: An instance of `Date`, if one was successfully extracted from the scalar.
     public static func construct(from scalar: Node.Scalar) -> Date? {
         let range = NSRange(location: 0, length: scalar.string.utf16.count)
         guard let result = timestampPattern.firstMatch(in: scalar.string, options: [], range: range),
@@ -124,13 +174,15 @@ extension Date: ScalarConstructible {
         datecomponents.hour = components[3].flatMap { Int($0) }
         datecomponents.minute = components[4].flatMap { Int($0) }
         datecomponents.second = components[5].flatMap { Int($0) }
-        datecomponents.nanosecond = components[6].flatMap {
-            let length = $0.count
+        datecomponents.nanosecond = components[6].flatMap { fraction in
+            let length = fraction.count
             let nanosecond: Int?
             if length < 9 {
-                nanosecond = Int($0 + String(repeating: "0", count: 9 - length))
+                nanosecond = Int(fraction).map { number in
+                    repeatElement(10, count: 9 - length).reduce(number, *)
+                }
             } else {
-                nanosecond = Int($0[..<$0.index($0.startIndex, offsetBy: 9)])
+                nanosecond = Int(fraction[..<fraction.index(fraction.startIndex, offsetBy: 9)])
             }
             return nanosecond
         }
@@ -166,10 +218,21 @@ extension Date: ScalarConstructible {
     )
 }
 
+// MARK: - ScalarConstructible Double Conformance
 extension Double: ScalarConstructible {}
+// MARK: - ScalarConstructible Float Conformance
 extension Float: ScalarConstructible {}
 
+// MARK: - ScalarConstructible FloatingPoint Conformance
 extension ScalarConstructible where Self: FloatingPoint & SexagesimalConvertible {
+    /// Construct an instance of `FloatingPoint & SexagesimalConvertible`, if possible, from the specified
+    /// scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type
+    ///                     `FloatingPoint & SexagesimalConvertible`, if possible.
+    ///
+    /// - returns: An instance of `FloatingPoint & SexagesimalConvertible`, if one was successfully extracted
+    ///            from the scalar.
     public static func construct(from scalar: Node.Scalar) -> Self? {
         switch scalar.string {
         case ".inf", ".Inf", ".INF", "+.inf", "+.Inf", "+.INF":
@@ -221,23 +284,49 @@ private extension FixedWidthInteger where Self: SexagesimalConvertible {
     }
 }
 
+// MARK: - ScalarConstructible Int Conformance
+
 extension Int: ScalarConstructible {
+    /// Construct an instance of `Int`, if possible, from the specified scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type `Int`, if possible.
+    ///
+    /// - returns: An instance of `Int`, if one was successfully extracted from the scalar.
     public static func construct(from scalar: Node.Scalar) -> Int? {
         return _construct(from: scalar)
     }
 }
 
+// MARK: - ScalarConstructible UInt Conformance
+
 extension UInt: ScalarConstructible {
+    /// Construct an instance of `UInt`, if possible, from the specified scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type `UInt`, if possible.
+    ///
+    /// - returns: An instance of `UInt`, if one was successfully extracted from the scalar.
     public static func construct(from scalar: Node.Scalar) -> UInt? {
         return _construct(from: scalar)
     }
 }
 
+// MARK: - ScalarConstructible String Conformance
+
 extension String: ScalarConstructible {
+    /// Construct an instance of `String`, if possible, from the specified scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type `String`, if possible.
+    ///
+    /// - returns: An instance of `String`, if one was successfully extracted from the scalar.
     public static func construct(from scalar: Node.Scalar) -> String? {
         return scalar.string
     }
 
+    /// Construct an instance of `String`, if possible, from the specified `Node`.
+    ///
+    /// - parameter node: The `Node` from which to extract a value of type `String`, if possible.
+    ///
+    /// - returns: An instance of `String`, if one was successfully extracted from the node.
     public static func construct(from node: Node) -> String? {
         // This will happen while `Dictionary.flatten_mapping()` if `node.tag.name` was `.value`
         if case let .mapping(mapping) = node {
@@ -252,7 +341,13 @@ extension String: ScalarConstructible {
 }
 
 // MARK: - Types that can't conform to ScalarConstructible
+
 extension NSNull/*: ScalarConstructible*/ {
+    /// Construct an instance of `NSNull`, if possible, from the specified scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type `NSNull`, if possible.
+    ///
+    /// - returns: An instance of `NSNull`, if one was successfully extracted from the scalar.
     public static func construct(from scalar: Node.Scalar) -> NSNull? {
         switch scalar.string {
         case "", "~", "null", "Null", "NULL":
@@ -263,8 +358,14 @@ extension NSNull/*: ScalarConstructible*/ {
     }
 }
 
-// MARK: mapping
+// MARK: Mapping
+
 extension Dictionary {
+    /// Construct a `Dictionary`, if possible, from the specified mapping.
+    ///
+    /// - parameter mapping: The `Node.Mapping` from which to extract a `Dictionary`, if possible.
+    ///
+    /// - returns: An instance of `[AnyHashable: Any]`, if one was successfully extracted from the mapping.
     public static func construct_mapping(from mapping: Node.Mapping) -> [AnyHashable: Any]? {
         return _construct_mapping(from: mapping)
     }
@@ -314,20 +415,37 @@ private extension Dictionary {
 }
 
 extension Set {
+    /// Construct a `Set`, if possible, from the specified mapping.
+    ///
+    /// - parameter mapping: The `Node.Mapping` from which to extract a `Set`, if possible.
+    ///
+    /// - returns: An instance of `Set<AnyHashable>`, if one was successfully extracted from the mapping.
     public static func construct_set(from mapping: Node.Mapping) -> Set<AnyHashable>? {
         // TODO: YAML supports Hashable elements other than str.
         return Set<AnyHashable>(mapping.map({ String.construct(from: $0.key)! as AnyHashable }))
         // Explicitly declaring the generic parameter as `<AnyHashable>` above is required,
-        // because this is inside extension of `Set` and Swift 3.0.2 can't infer the type without that.
+        // because this is inside extension of `Set` and Swift 3.0.2 to 4.1.0 can't infer the type without
+        // that.
     }
 }
 
-// MARK: sequence
+// MARK: Sequence
+
 extension Array {
+    /// Construct an Array of `Any` from the specified `sequence`.
+    ///
+    /// - parameter sequence: Sequence to convert to `Array<Any>`.
+    ///
+    /// - returns: Array of `Any`.
     public static func construct_seq(from sequence: Node.Sequence) -> [Any] {
         return sequence.map(sequence.tag.constructor.any)
     }
 
+    /// Construct an "O-map" (array of `(Any, Any)` tuples) from the specified `sequence`.
+    ///
+    /// - parameter sequence: Sequence to convert to `Array<(Any, Any)>`.
+    ///
+    /// - returns: Array of `(Any, Any)` tuples.
     public static func construct_omap(from sequence: Node.Sequence) -> [(Any, Any)] {
         // Note: we do not check for duplicate keys.
         return sequence.compactMap { subnode -> (Any, Any)? in
@@ -337,6 +455,11 @@ extension Array {
         }
     }
 
+    /// Construct an array of `(Any, Any)` tuples from the specified `sequence`.
+    ///
+    /// - parameter sequence: Sequence to convert to `Array<(Any, Any)>`.
+    ///
+    /// - returns: Array of `(Any, Any)` tuples.
     public static func construct_pairs(from sequence: Node.Sequence) -> [(Any, Any)] {
         // Note: we do not check for duplicate keys.
         return sequence.compactMap { subnode -> (Any, Any)? in
@@ -360,17 +483,43 @@ private extension String {
     }
 }
 
-private extension String {
-    func substring(from offset: Int) -> Substring {
-        let index = self.index(startIndex, offsetBy: offset)
-        return self[index...]
+private extension StringProtocol {
+#if swift(>=4.1)
+    func substring(from offset: Int) -> SubSequence {
+        return self[index(startIndex, offsetBy: offset)...]
     }
+#else
+    func substring(from offset: IndexDistance) -> SubSequence {
+        return self[index(startIndex, offsetBy: offset)...]
+    }
+#endif
 }
 
 // MARK: - SexagesimalConvertible
+
+/// Confirming types are convertible to base 60 numeric values.
 public protocol SexagesimalConvertible: ExpressibleByIntegerLiteral {
+    /// Creates a sexagesimal numeric value from the given string.
+    ///
+    /// - parameter string: The string from which to parse a sexagesimal value.
+    ///
+    /// - returns: A sexagesimal numeric value, if one was successfully parsed.
     static func create(from string: String) -> Self?
+
+    /// Multiplies two sexagesimal numeric values.
+    ///
+    /// - parameter lhs: Left hand side multiplier.
+    /// - parameter rhs: Right hand side multiplier.
+    ///
+    /// - returns: The result of the multiplication.
     static func * (lhs: Self, rhs: Self) -> Self
+
+    /// Adds two sexagesimal numeric values.
+    ///
+    /// - parameter lhs: Left hand side adder.
+    /// - parameter rhs: Right hand side adder.
+    ///
+    /// - returns: The result of the addition.
     static func + (lhs: Self, rhs: Self) -> Self
 }
 
@@ -380,21 +529,39 @@ private extension SexagesimalConvertible {
     }
 }
 
+// MARK: Default String to `LosslessStringConvertible` conversion.
+
 extension SexagesimalConvertible where Self: LosslessStringConvertible {
+    /// Creates a sexagesimal numeric value from the given string.
+    ///
+    /// - parameter string: The string from which to parse a sexagesimal value.
+    ///
+    /// - returns: A sexagesimal numeric value, if one was successfully parsed.
     public static func create(from string: String) -> Self? {
         return Self(string)
     }
 }
 
+// MARK: Default String to `FixedWidthInteger` conversion.
+
 extension SexagesimalConvertible where Self: FixedWidthInteger {
+    /// Creates a sexagesimal numeric value from the given string.
+    ///
+    /// - parameter string: The string from which to parse a sexagesimal value.
+    ///
+    /// - returns: A sexagesimal numeric value, if one was successfully parsed.
     public static func create(from string: String) -> Self? {
         return Self(string, radix: 10)
     }
 }
 
+// MARK: - SexagesimalConvertible Double Conformance
 extension Double: SexagesimalConvertible {}
+// MARK: - SexagesimalConvertible Float Conformance
 extension Float: SexagesimalConvertible {}
+// MARK: - SexagesimalConvertible Int Conformance
 extension Int: SexagesimalConvertible {}
+// MARK: - SexagesimalConvertible Int Conformance
 extension UInt: SexagesimalConvertible {}
 
 private extension String {
@@ -419,24 +586,6 @@ private extension String {
             return (base, value)
         }
         return sign * value
-    }
-}
-
-private extension Substring {
-#if os(Linux)
-    func hasPrefix(_ prefix: String) -> Bool {
-        return String(self).hasPrefix(prefix)
-    }
-
-    func components(separatedBy separator: String) -> [String] {
-        return String(self).components(separatedBy: separator)
-    }
-#endif
-
-    func substring(from offset: Int) -> Substring {
-        if offset == 0 { return self }
-        let index = self.index(startIndex, offsetBy: offset)
-        return self[index...]
     }
 }
 

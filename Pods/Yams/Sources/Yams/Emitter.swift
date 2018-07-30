@@ -7,24 +7,26 @@
 //
 
 #if SWIFT_PACKAGE
-    import CYaml
+import CYaml
 #endif
 import Foundation
 
-/// Produce YAML String from objects
+/// Produce a YAML string from objects.
 ///
-/// - Parameters:
-///   - objects: Sequence of Object
-///   - canonical: output should be the "canonical" format as in the YAML specification.
-///   - indent: the intendation increment.
-///   - width: the preferred line width. @c -1 means unlimited.
-///   - allowUnicode: unescaped non-ASCII characters are allowed if true.
-///   - lineBreak: preferred line break.
-///   - explicitStart: explicit document start `---`
-///   - explicitEnd: explicit document end `...`
-///   - version: YAML version directive
-/// - Returns: YAML String
-/// - Throws: `YamlError`
+/// - parameter objects:       Sequence of Objects.
+/// - parameter canonical:     Output should be the "canonical" format as in the YAML specification.
+/// - parameter indent:        The intendation increment.
+/// - parameter width:         The preferred line width. @c -1 means unlimited.
+/// - parameter allowUnicode:  Unescaped non-ASCII characters are allowed if true.
+/// - parameter lineBreak:     Preferred line break.
+/// - parameter explicitStart: Explicit document start `---`.
+/// - parameter explicitEnd:   Explicit document end `...`.
+/// - parameter version:       YAML version directive.
+/// - parameter sortKeys:      Whether or not to sort Mapping keys in lexicographic order.
+///
+/// - returns: YAML string.
+///
+/// - throws: `YamlError`.
 public func dump<Objects>(
     objects: Objects,
     canonical: Bool = false,
@@ -37,40 +39,43 @@ public func dump<Objects>(
     version: (major: Int, minor: Int)? = nil,
     sortKeys: Bool = false) throws -> String
     where Objects: Sequence {
-        func representable(from object: Any) throws -> NodeRepresentable {
-            if let representable = object as? NodeRepresentable {
-                return representable
-            }
-            throw YamlError.emitter(problem: "\(object) does not conform to NodeRepresentable!")
+    func representable(from object: Any) throws -> NodeRepresentable {
+        if let representable = object as? NodeRepresentable {
+            return representable
         }
-        let nodes = try objects.map(representable(from:)).map { try $0.represented() }
-        return try serialize(
-            nodes: nodes,
-            canonical: canonical,
-            indent: indent,
-            width: width,
-            allowUnicode: allowUnicode,
-            lineBreak: lineBreak,
-            explicitStart: explicitStart,
-            explicitEnd: explicitEnd,
-            version: version,
-            sortKeys: sortKeys)
+        throw YamlError.emitter(problem: "\(object) does not conform to NodeRepresentable!")
+    }
+    let nodes = try objects.map(representable(from:)).map { try $0.represented() }
+    return try serialize(
+        nodes: nodes,
+        canonical: canonical,
+        indent: indent,
+        width: width,
+        allowUnicode: allowUnicode,
+        lineBreak: lineBreak,
+        explicitStart: explicitStart,
+        explicitEnd: explicitEnd,
+        version: version,
+        sortKeys: sortKeys
+    )
 }
 
-/// Produce YAML String from object
+/// Produce a YAML string from an object.
 ///
-/// - Parameters:
-///   - object: Object
-///   - canonical: output should be the "canonical" format as in the YAML specification.
-///   - indent: the intendation increment.
-///   - width: the preferred line width. @c -1 means unlimited.
-///   - allowUnicode: unescaped non-ASCII characters are allowed if true.
-///   - lineBreak: preferred line break.
-///   - explicitStart: explicit document start `---`
-///   - explicitEnd: explicit document end `...`
-///   - version: YAML version directive
-/// - Returns: YAML String
-/// - Throws: `YamlError`
+/// - parameter object:        Object.
+/// - parameter canonical:     Output should be the "canonical" format as in the YAML specification.
+/// - parameter indent:        The intendation increment.
+/// - parameter width:         The preferred line width. @c -1 means unlimited.
+/// - parameter allowUnicode:  Unescaped non-ASCII characters are allowed if true.
+/// - parameter lineBreak:     Preferred line break.
+/// - parameter explicitStart: Explicit document start `---`.
+/// - parameter explicitEnd:   Explicit document end `...`.
+/// - parameter version:       YAML version directive.
+/// - parameter sortKeys:      Whether or not to sort Mapping keys in lexicographic order.
+///
+/// - returns: YAML string.
+///
+/// - throws: `YamlError`.
 public func dump(
     object: Any?,
     canonical: Bool = false,
@@ -92,23 +97,26 @@ public func dump(
         explicitStart: explicitStart,
         explicitEnd: explicitEnd,
         version: version,
-        sortKeys: sortKeys)
+        sortKeys: sortKeys
+    )
 }
 
-/// Produce YAML String from `Node`
+/// Produce a YAML string from a `Node`.
 ///
-/// - Parameters:
-///   - nodes: Sequence of `Node`
-///   - canonical: output should be the "canonical" format as in the YAML specification.
-///   - indent: the intendation increment.
-///   - width: the preferred line width. @c -1 means unlimited.
-///   - allowUnicode: unescaped non-ASCII characters are allowed if true.
-///   - lineBreak: preferred line break.
-///   - explicitStart: explicit document start `---`
-///   - explicitEnd: explicit document end `...`
-///   - version: YAML version directive
-/// - Returns: YAML String
-/// - Throws: `YamlError`
+/// - parameter nodes:         Sequence of `Node`s.
+/// - parameter canonical:     Output should be the "canonical" format as in the YAML specification.
+/// - parameter indent:        The intendation increment.
+/// - parameter width:         The preferred line width. @c -1 means unlimited.
+/// - parameter allowUnicode:  Unescaped non-ASCII characters are allowed if true.
+/// - parameter lineBreak:     Preferred line break.
+/// - parameter explicitStart: Explicit document start `---`.
+/// - parameter explicitEnd:   Explicit document end `...`.
+/// - parameter version:       YAML version directive.
+/// - parameter sortKeys:      Whether or not to sort Mapping keys in lexicographic order.
+///
+/// - returns: YAML string.
+///
+/// - throws: `YamlError`.
 public func serialize<Nodes>(
     nodes: Nodes,
     canonical: Bool = false,
@@ -121,40 +129,43 @@ public func serialize<Nodes>(
     version: (major: Int, minor: Int)? = nil,
     sortKeys: Bool = false) throws -> String
     where Nodes: Sequence, Nodes.Iterator.Element == Node {
-        let emitter = Emitter(
-            canonical: canonical,
-            indent: indent,
-            width: width,
-            allowUnicode: allowUnicode,
-            lineBreak: lineBreak,
-            explicitStart: explicitStart,
-            explicitEnd: explicitEnd,
-            version: version,
-            sortKeys: sortKeys)
-        try emitter.open()
-        try nodes.forEach(emitter.serialize)
-        try emitter.close()
-        #if USE_UTF8
-            return String(data: emitter.data, encoding: .utf8)!
-        #else
-            return String(data: emitter.data, encoding: .utf16)!
-        #endif
+    let emitter = Emitter(
+        canonical: canonical,
+        indent: indent,
+        width: width,
+        allowUnicode: allowUnicode,
+        lineBreak: lineBreak,
+        explicitStart: explicitStart,
+        explicitEnd: explicitEnd,
+        version: version,
+        sortKeys: sortKeys
+    )
+    try emitter.open()
+    try nodes.forEach(emitter.serialize)
+    try emitter.close()
+#if USE_UTF8
+    return String(data: emitter.data, encoding: .utf8)!
+#else
+    return String(data: emitter.data, encoding: .utf16)!
+#endif
 }
 
-/// Produce YAML String from `Node`
+/// Produce a YAML string from a `Node`.
 ///
-/// - Parameters:
-///   - node: `Node`
-///   - canonical: output should be the "canonical" format as in the YAML specification.
-///   - indent: the intendation increment.
-///   - width: the preferred line width. @c -1 means unlimited.
-///   - allowUnicode: unescaped non-ASCII characters are allowed if true.
-///   - lineBreak: preferred line break.
-///   - explicitStart: explicit document start `---`
-///   - explicitEnd: explicit document end `...`
-///   - version: YAML version directive
-/// - Returns: YAML String
-/// - Throws: `YamlError`
+/// - parameter node:          `Node`.
+/// - parameter canonical:     Output should be the "canonical" format as in the YAML specification.
+/// - parameter indent:        The intendation increment.
+/// - parameter width:         The preferred line width. @c -1 means unlimited.
+/// - parameter allowUnicode:  Unescaped non-ASCII characters are allowed if true.
+/// - parameter lineBreak:     Preferred line break.
+/// - parameter explicitStart: Explicit document start `---`.
+/// - parameter explicitEnd:   Explicit document end `...`.
+/// - parameter version:       YAML version directive.
+/// - parameter sortKeys:      Whether or not to sort Mapping keys in lexicographic order.
+///
+/// - returns: YAML string.
+///
+/// - throws: `YamlError`.
 public func serialize(
     node: Node,
     canonical: Bool = false,
@@ -176,25 +187,30 @@ public func serialize(
         explicitStart: explicitStart,
         explicitEnd: explicitEnd,
         version: version,
-        sortKeys: sortKeys)
+        sortKeys: sortKeys
+    )
 }
 
+/// Class responsible for emitting libYAML events.
 public final class Emitter {
+    /// Line break options to use when emitting YAML.
     public enum LineBreak {
         /// Use CR for line breaks (Mac style).
-        case cr // swiftlint:disable:this identifier_name
+        case cr
         /// Use LN for line breaks (Unix style).
-        case ln // swiftlint:disable:this identifier_name
+        case ln
         /// Use CR LN for line breaks (DOS style).
         case crln
     }
 
-    public var data = Data()
+    /// Retrieve this Emitter's binary output.
+    public internal(set) var data = Data()
 
+    /// Configuration options to use when emitting YAML.
     public struct Options {
-        /// Set if the output should be in the "canonical" format as in the YAML specification.
+        /// Set if the output should be in the "canonical" format described in the YAML specification.
         public var canonical: Bool = false
-        /// Set the intendation increment.
+        /// Set the indentation value.
         public var indent: Int = 0
         /// Set the preferred line width. -1 means unlimited.
         public var width: Int = 0
@@ -207,19 +223,32 @@ public final class Emitter {
         var explicitStart: Bool = false
         var explicitEnd: Bool = false
 
-        /// The %YAML directive value or nil
+        /// The `%YAML` directive value or nil.
         public var version: (major: Int, minor: Int)?
 
         /// Set if emitter should sort keys in lexicographic order.
         public var sortKeys: Bool = false
     }
 
+    /// Configuration options to use when emitting YAML.
     public var options: Options {
         didSet {
             applyOptionsToEmitter()
         }
     }
 
+    /// Create an `Emitter` with the specified options.
+    ///
+    /// - parameter canonical:     Set if the output should be in the "canonical" format described in the YAML
+    ///                            specification.
+    /// - parameter indent:        Set the indentation value.
+    /// - parameter width:         Set the preferred line width. -1 means unlimited.
+    /// - parameter allowUnicode:  Set if unescaped non-ASCII characters are allowed.
+    /// - parameter lineBreak:     Set the preferred line break.
+    /// - parameter explicitStart: Explicit document start `---`.
+    /// - parameter explicitEnd:   Explicit document end `...`.
+    /// - parameter version:       The `%YAML` directive value or nil.
+    /// - parameter sortKeys:      Set if emitter should sort keys in lexicographic order.
     public init(canonical: Bool = false,
                 indent: Int = 0,
                 width: Int = 0,
@@ -249,27 +278,30 @@ public final class Emitter {
 
         applyOptionsToEmitter()
 
-        #if USE_UTF8
-            yaml_emitter_set_encoding(&emitter, YAML_UTF8_ENCODING)
-        #else
-            yaml_emitter_set_encoding(&emitter, isLittleEndian ? YAML_UTF16LE_ENCODING : YAML_UTF16BE_ENCODING)
-        #endif
+#if USE_UTF8
+        yaml_emitter_set_encoding(&emitter, YAML_UTF8_ENCODING)
+#else
+        yaml_emitter_set_encoding(&emitter, isLittleEndian ? YAML_UTF16LE_ENCODING : YAML_UTF16BE_ENCODING)
+#endif
     }
 
     deinit {
         yaml_emitter_delete(&emitter)
     }
 
+    /// Open & initialize the emmitter.
+    ///
+    /// - throws: `YamlError` if the `Emitter` was already opened or closed.
     public func open() throws {
         switch state {
         case .initialized:
             var event = yaml_event_t()
-            #if USE_UTF8
-                yaml_stream_start_event_initialize(&event, YAML_UTF8_ENCODING)
-            #else
-                let encoding = isLittleEndian ? YAML_UTF16LE_ENCODING : YAML_UTF16BE_ENCODING
-                yaml_stream_start_event_initialize(&event, encoding)
-            #endif
+#if USE_UTF8
+            yaml_stream_start_event_initialize(&event, YAML_UTF8_ENCODING)
+#else
+            let encoding = isLittleEndian ? YAML_UTF16LE_ENCODING : YAML_UTF16BE_ENCODING
+            yaml_stream_start_event_initialize(&event, encoding)
+#endif
             try emit(&event)
             state = .opened
         case .opened:
@@ -279,6 +311,9 @@ public final class Emitter {
         }
     }
 
+    /// Close the `Emitter.`
+    ///
+    /// - throws: `YamlError` if the `Emitter` hasn't yet been initialized.
     public func close() throws {
         switch state {
         case .initialized:
@@ -293,6 +328,11 @@ public final class Emitter {
         }
     }
 
+    /// Ingest a `Node` to include when emitting the YAML output.
+    ///
+    /// - parameter node: The `Node` to serialize.
+    ///
+    /// - throws: `YamlError` if the `Emitter` hasn't yet been opened or has been closed.
     public func serialize(node: Node) throws {
         switch state {
         case .initialized:
@@ -318,7 +358,7 @@ public final class Emitter {
         try emit(&event)
     }
 
-    // private
+    // MARK: Private
     private var emitter = yaml_emitter_t()
 
     private enum State { case initialized, opened, closed }
@@ -337,10 +377,24 @@ public final class Emitter {
     }
 }
 
+// MARK: - Options Initializer
+
 extension Emitter.Options {
-    // initializer without exposing internal properties
+    /// Create `Emitter.Options` with the specified values.
+    ///
+    /// - parameter canonical:     Set if the output should be in the "canonical" format described in the YAML
+    ///                            specification.
+    /// - parameter indent:        Set the indentation value.
+    /// - parameter width:         Set the preferred line width. -1 means unlimited.
+    /// - parameter allowUnicode:  Set if unescaped non-ASCII characters are allowed.
+    /// - parameter lineBreak:     Set the preferred line break.
+    /// - parameter explicitStart: Explicit document start `---`.
+    /// - parameter explicitEnd:   Explicit document end `...`.
+    /// - parameter version:       The `%YAML` directive value or nil.
+    /// - parameter sortKeys:      Set if emitter should sort keys in lexicographic order.
     public init(canonical: Bool = false, indent: Int = 0, width: Int = 0, allowUnicode: Bool = false,
-                lineBreak: Emitter.LineBreak = .ln, version: (major: Int, minor: Int)? = nil, sortKeys: Bool = false) {
+                lineBreak: Emitter.LineBreak = .ln, version: (major: Int, minor: Int)? = nil,
+                sortKeys: Bool = false) {
         self.canonical = canonical
         self.indent = indent
         self.width = width
@@ -351,7 +405,8 @@ extension Emitter.Options {
     }
 }
 
-// MARK: implementation details
+// MARK: Implementation Details
+
 extension Emitter {
     private func emit(_ event: UnsafeMutablePointer<yaml_event_t>) throws {
         guard yaml_emitter_emit(&emitter, event) == 1 else {

@@ -7,15 +7,25 @@ PODS:
   - StencilSwiftKit (2.5.0):
     - Stencil (~> 0.11)
   - SwiftLint (0.25.1)
-  - Yams (0.7.0)
+  - Yams (1.0.0)
 
 DEPENDENCIES:
   - Commander (~> 0.8)
   - Kanna
   - PathKit (~> 0.8.0)
-  - StencilSwiftKit (~> 2.3)
+  - StencilSwiftKit (~> 2.5)
   - SwiftLint (~> 0.25)
-  - Yams (~> 0.3)
+  - Yams (~> 1.0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Commander
+    - Kanna
+    - PathKit
+    - Stencil
+    - StencilSwiftKit
+    - SwiftLint
+    - Yams
 
 SPEC CHECKSUMS:
   Commander: 6eda7635b133e239faa85bf75dcab88d6fd63aaa
@@ -24,8 +34,8 @@ SPEC CHECKSUMS:
   Stencil: a1873ecd92cbc053c6b391de7583b9f5bfbb3de6
   StencilSwiftKit: 0be4d4897cf83e9c463caa14f4732454afb33ae6
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
-  Yams: 9dfe90be5b942df6fa42ead8e6f0313e05600755
+  Yams: a01cdee527b3a82a3e192255b34ad5aacdf96b8c
 
-PODFILE CHECKSUM: fece5b7c875595bf86a7fde01afa792f113d2fbe
+PODFILE CHECKSUM: a4d08cf94f89a7410523c6b360e053e89f612405
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
