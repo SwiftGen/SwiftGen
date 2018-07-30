@@ -1,21 +1,19 @@
 tables:
 - levels:
     strings:
-    - key: MULTILINE
-      name: MULTILINE
-      translation: multi\nline
-    - key: multiLine\nKey
-      name: 'multiLine
-
-        Key'
-      translation: test
-    - key: MULTILINE2
-      name: MULTILINE2
-      translation: another\nmulti\n    line
-    - key: SINGLELINE
-      name: SINGLELINE
-      translation: single line
-    - key: SINGLELINE2
-      name: SINGLELINE2
-      translation: another single line
-  name: LocMultiline
+    - key: "MULTILINE"
+      name: "MULTILINE"
+      translation: "multi\\nline"
+    - key: "multiLine\\nKey"
+      name: "multiLine\nKey"
+      translation: "test"
+    - key: "MULTILINE2"
+      name: "MULTILINE2"
+      translation: "another\\nmulti\\n    line"
+    - key: "SINGLELINE"
+      name: "SINGLELINE"
+      translation: "single line"
+    - key: "SINGLELINE2"
+      name: "SINGLELINE2"
+      translation: "another single line"
+  name: "LocMultiline"

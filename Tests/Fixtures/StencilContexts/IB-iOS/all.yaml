@@ -1,172 +1,172 @@
 modules:
-- AVKit
-- CustomSegue
-- GLKit
-- LocationPicker
-- SlackTextViewController
-- UIKit
-platform: iOS
+- "AVKit"
+- "CustomSegue"
+- "GLKit"
+- "LocationPicker"
+- "SlackTextViewController"
+- "UIKit"
+platform: "iOS"
 storyboards:
 - initialScene:
-    customClass: LocationPickerViewController
-    customModule: LocationPicker
+    customClass: "LocationPickerViewController"
+    customModule: "LocationPicker"
     identifier: ""
-    module: LocationPicker
-    type: LocationPickerViewController
-  name: AdditionalImport
-  platform: iOS
+    module: "LocationPicker"
+    type: "LocationPickerViewController"
+  name: "AdditionalImport"
+  platform: "iOS"
   scenes:
-  - customClass: SLKTextViewController
-    customModule: SlackTextViewController
-    identifier: public
-    module: SlackTextViewController
-    type: SLKTextViewController
+  - customClass: "SLKTextViewController"
+    customModule: "SlackTextViewController"
+    identifier: "public"
+    module: "SlackTextViewController"
+    type: "SLKTextViewController"
   segues:
-  - customClass: SlideDownSegue
-    customModule: CustomSegue
-    identifier: private
-    module: CustomSegue
-    type: SlideDownSegue
+  - customClass: "SlideDownSegue"
+    customModule: "CustomSegue"
+    identifier: "private"
+    module: "CustomSegue"
+    type: "SlideDownSegue"
 - initialScene:
-    baseType: NavigationController
+    baseType: "NavigationController"
     identifier: ""
-    module: UIKit
-    type: UINavigationController
-  name: Anonymous
-  platform: iOS
+    module: "UIKit"
+    type: "UINavigationController"
+  name: "Anonymous"
+  platform: "iOS"
   scenes: []
   segues: []
-- name: Dependency
-  platform: iOS
+- name: "Dependency"
+  platform: "iOS"
   scenes:
-  - baseType: ViewController
-    identifier: Dependent
-    module: UIKit
-    type: UIViewController
+  - baseType: "ViewController"
+    identifier: "Dependent"
+    module: "UIKit"
+    type: "UIViewController"
   segues: []
-- name: Known Types
-  platform: iOS
+- name: "Known Types"
+  platform: "iOS"
   scenes:
-  - baseType: GlkViewController
-    identifier: item 1
-    module: GLKit
-    type: GLKViewController
-  - baseType: AvPlayerViewController
-    identifier: item 2
-    module: AVKit
-    type: AVPlayerViewController
-  - baseType: TabBarController
-    identifier: item 3
-    module: UIKit
-    type: UITabBarController
-  - baseType: NavigationController
-    identifier: item 4
-    module: UIKit
-    type: UINavigationController
-  - baseType: SplitViewController
-    identifier: item 5
-    module: UIKit
-    type: UISplitViewController
-  - baseType: PageViewController
-    identifier: item 6
-    module: UIKit
-    type: UIPageViewController
-  - baseType: TableViewController
-    identifier: item 7
-    module: UIKit
-    type: UITableViewController
-  - baseType: CollectionViewController
-    identifier: item 8
-    module: UIKit
-    type: UICollectionViewController
-  - baseType: ViewController
-    identifier: item 9
-    module: UIKit
-    type: UIViewController
+  - baseType: "GlkViewController"
+    identifier: "item 1"
+    module: "GLKit"
+    type: "GLKViewController"
+  - baseType: "AvPlayerViewController"
+    identifier: "item 2"
+    module: "AVKit"
+    type: "AVPlayerViewController"
+  - baseType: "TabBarController"
+    identifier: "item 3"
+    module: "UIKit"
+    type: "UITabBarController"
+  - baseType: "NavigationController"
+    identifier: "item 4"
+    module: "UIKit"
+    type: "UINavigationController"
+  - baseType: "SplitViewController"
+    identifier: "item 5"
+    module: "UIKit"
+    type: "UISplitViewController"
+  - baseType: "PageViewController"
+    identifier: "item 6"
+    module: "UIKit"
+    type: "UIPageViewController"
+  - baseType: "TableViewController"
+    identifier: "item 7"
+    module: "UIKit"
+    type: "UITableViewController"
+  - baseType: "CollectionViewController"
+    identifier: "item 8"
+    module: "UIKit"
+    type: "UICollectionViewController"
+  - baseType: "ViewController"
+    identifier: "item 9"
+    module: "UIKit"
+    type: "UIViewController"
   segues: []
 - initialScene:
-    baseType: ViewController
+    baseType: "ViewController"
     identifier: ""
-    module: UIKit
-    type: UIViewController
-  name: Message
-  platform: iOS
+    module: "UIKit"
+    type: "UIViewController"
+  name: "Message"
+  platform: "iOS"
   scenes:
-  - baseType: ViewController
-    identifier: Composer
-    module: UIKit
-    type: UIViewController
-  - baseType: TableViewController
-    identifier: MessagesList
-    module: UIKit
-    type: UITableViewController
-  - baseType: NavigationController
-    identifier: NavCtrl
-    module: UIKit
-    type: UINavigationController
-  - customClass: XXPickerViewController
+  - baseType: "ViewController"
+    identifier: "Composer"
+    module: "UIKit"
+    type: "UIViewController"
+  - baseType: "TableViewController"
+    identifier: "MessagesList"
+    module: "UIKit"
+    type: "UITableViewController"
+  - baseType: "NavigationController"
+    identifier: "NavCtrl"
+    module: "UIKit"
+    type: "UINavigationController"
+  - customClass: "XXPickerViewController"
     customModule: ""
-    identifier: URLChooser
+    identifier: "URLChooser"
     module: ""
-    type: XXPickerViewController
+    type: "XXPickerViewController"
   segues:
-  - customClass: CustomSegueClass2
+  - customClass: "CustomSegueClass2"
     customModule: ""
-    identifier: CustomBack
+    identifier: "CustomBack"
     module: ""
-    type: CustomSegueClass2
+    type: "CustomSegueClass2"
   - customClass: ""
     customModule: ""
-    identifier: Embed
-    module: UIKit
-    type: UIStoryboardSegue
+    identifier: "Embed"
+    module: "UIKit"
+    type: "UIStoryboardSegue"
   - customClass: ""
     customModule: ""
-    identifier: NonCustom
-    module: UIKit
-    type: UIStoryboardSegue
-  - customClass: CustomSegueClass
+    identifier: "NonCustom"
+    module: "UIKit"
+    type: "UIStoryboardSegue"
+  - customClass: "CustomSegueClass"
     customModule: ""
-    identifier: Show-NavCtrl
+    identifier: "Show-NavCtrl"
     module: ""
-    type: CustomSegueClass
-- name: Placeholder
-  platform: iOS
+    type: "CustomSegueClass"
+- name: "Placeholder"
+  platform: "iOS"
   scenes:
-  - baseType: NavigationController
-    identifier: Navigation
-    module: UIKit
-    type: UINavigationController
+  - baseType: "NavigationController"
+    identifier: "Navigation"
+    module: "UIKit"
+    type: "UINavigationController"
   segues: []
 - initialScene:
-    customClass: CreateAccViewController
+    customClass: "CreateAccViewController"
     customModule: ""
-    identifier: CreateAccount
+    identifier: "CreateAccount"
     module: ""
-    type: CreateAccViewController
-  name: Wizard
-  platform: iOS
+    type: "CreateAccViewController"
+  name: "Wizard"
+  platform: "iOS"
   scenes:
-  - baseType: ViewController
-    identifier: Accept-ToS
-    module: UIKit
-    type: UIViewController
-  - customClass: CreateAccViewController
+  - baseType: "ViewController"
+    identifier: "Accept-ToS"
+    module: "UIKit"
+    type: "UIViewController"
+  - customClass: "CreateAccViewController"
     customModule: ""
-    identifier: CreateAccount
+    identifier: "CreateAccount"
     module: ""
-    type: CreateAccViewController
-  - baseType: TableViewController
-    identifier: Preferences
-    module: UIKit
-    type: UITableViewController
-  - baseType: ViewController
-    identifier: Validate_Password
-    module: UIKit
-    type: UIViewController
+    type: "CreateAccViewController"
+  - baseType: "TableViewController"
+    identifier: "Preferences"
+    module: "UIKit"
+    type: "UITableViewController"
+  - baseType: "ViewController"
+    identifier: "Validate_Password"
+    module: "UIKit"
+    type: "UIViewController"
   segues:
   - customClass: ""
     customModule: ""
-    identifier: ShowPassword
-    module: UIKit
-    type: UIStoryboardSegue
+    identifier: "ShowPassword"
+    module: "UIKit"
+    type: "UIStoryboardSegue"

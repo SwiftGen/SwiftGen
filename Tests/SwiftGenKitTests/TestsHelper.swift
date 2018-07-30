@@ -202,10 +202,7 @@ enum YamsFix {
   static func represent(_ any: Any) throws -> Node {
     switch any {
     case let string as String:
-      // if the tag after resolving is not "str", then this string is ambiguous
-      let tag = Resolver.`default`.resolveTag(of: Node(string))
-      let style: Node.Scalar.Style = (tag != .str) ? .doubleQuoted : .any
-      return Node(string, .implicit, style)
+      return Node(string, .implicit, .doubleQuoted)
     case let array as [Any]:
       return Node(try array.map(represent), Tag(.seq))
     case let dictionary as [String: Any]:

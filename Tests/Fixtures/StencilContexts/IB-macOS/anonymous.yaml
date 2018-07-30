@@ -1,7 +1,7 @@
 modules: []
-platform: macOS
+platform: "macOS"
 storyboards:
-- name: Anonymous
-  platform: macOS
+- name: "Anonymous"
+  platform: "macOS"
   scenes: []
   segues: []
