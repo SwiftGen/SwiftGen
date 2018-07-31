@@ -17,7 +17,7 @@ extension CoreData.Parser {
 
   private func map(_ model: CoreData.Model) -> [String: Any] {
     return [
-      "configurations": model.configurations.mapValues { $0.map(map) },
+      "configurations": model.configurations,
       "entities": model.entities.mapValues(map),
       "fetchRequests": model.fetchRequests.map(map),
       "fetchRequestsByEntityName": model.fetchRequestsByEntityName.mapValues { $0.map(map) }
@@ -30,7 +30,7 @@ extension CoreData.Parser {
       "className": entity.className,
       "isAbstract": entity.isAbstract,
       "userInfo": entity.userInfo,
-      "superentity": entity.superentity as Any,
+      "superentity": entity.superentity ?? "",
       "attributes": entity.attributes.map(map),
       "relationships": entity.relationships.map(map)
     ]
@@ -44,7 +44,7 @@ extension CoreData.Parser {
       "isTransient": attribute.isTransient,
       "usesScalarValueType": attribute.usesScalarValueType,
       "type": attribute.type.rawValue,
-      "customClassName": attribute.customClassName as Any,
+      "customClassName": attribute.customClassName ?? "",
       "typeName": attribute.typeName,
       "userInfo": attribute.userInfo
     ]
