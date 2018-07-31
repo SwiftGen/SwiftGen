@@ -1,11 +1,17 @@
 import CoreData
 import Foundation
 
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+// swiftlint:disable discouraged_optional_boolean
+
+// swiftlint:disable identifier_name line_length type_body_length
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 {% for model in models %}
-{% for entity in model.entities %}
-{% set superclass %}{{ entity.superentity.className | default:"NSManagedObject" }}{% endset %}
+{% for name, entity in model.entities %}
+{% set superclass %}{{ model.entities[entity.superentity].className | default:"NSManagedObject" }}{% endset %}
 {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
-open class {{ entity.name }}: {{ superclass }} {
+open {{ accessModifier }} class {{ entity.name }}: {{ superclass }} {
 
     {{ override }}open class func entityName() -> String {
         return "{{ entity.name }}"
@@ -16,18 +22,15 @@ open class {{ entity.name }}: {{ superclass }} {
     }
 
     {% for attribute in entity.attributes %}
-    @NSManaged
-    open var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional %}?{% else %}!{% endif %}
+    @NSManaged open var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional %}?{% else %}!{% endif %}
 
     {% endfor %}
     {% for relationship in entity.relationships %}
     {% if relationship.isToMany %}
-    @NSManaged
-    open var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}NSSet{% endif %}
+    @NSManaged open var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}NSSet{% endif %}
 
     {% else %}
-    @NSManaged
-    open var {{ relationship.name }}: {{ relationship.destinationEntity.className }}{% if relationship.isOptional %}?{% endif %}
+    @NSManaged open var {{ relationship.name }}: {{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}{% if relationship.isOptional %}?{% endif %}
 
     {% endif %}
     {% endfor %}
@@ -35,3 +38,4 @@ open class {{ entity.name }}: {{ superclass }} {
 
 {% endfor %}
 {% endfor %}
+// swiftlint:enable identifier_name line_length type_body_length
