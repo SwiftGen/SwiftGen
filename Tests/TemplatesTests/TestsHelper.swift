@@ -68,6 +68,7 @@ func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #
 class Fixtures {
   enum Directory: String {
     case colors = "Colors"
+    case coreData = "CoreData"
     case fonts = "Fonts"
     case interfaceBuilder = "IB"
     case interfaceBuilderiOS = "IB-iOS"

@@ -150,6 +150,7 @@ func XCTDiffContexts(_ result: [String: Any],
 class Fixtures {
   enum Directory: String {
     case colors = "Colors"
+    case coreData = "CoreData"
     case fonts = "Fonts"
     case interfaceBuilder = "IB"
     case interfaceBuilderiOS = "IB-iOS"
