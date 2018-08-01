@@ -17,6 +17,10 @@
   [David Jennes](https://github.com/djbe)
   [#367](https://github.com/SwiftGen/SwiftGen/issues/367)
   [#429](https://github.com/SwiftGen/SwiftGen/pull/429)
+* Restrict `SceneType` and `InitialSceneType` to UIViewController when not targeting AppKit. When targeting AppKit, remove superfluous `Any`.  
+  [Darron Schall](https://github.com/darronschall)
+  [#463](https://github.com/SwiftGen/SwiftGen/issues/463)
+  [#464](https://github.com/SwiftGen/SwiftGen/pull/464)
 
 ### Breaking Changes
 
