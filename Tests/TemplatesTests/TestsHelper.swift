@@ -7,8 +7,8 @@
 import Foundation
 import PathKit
 import StencilSwiftKit
+import SwiftGenKit
 import XCTest
-import Yams
 
 private let colorCode: (String) -> String =
   ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
@@ -68,6 +68,7 @@ func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #
 class Fixtures {
   enum Directory: String {
     case colors = "Colors"
+    case coreData = "CoreData"
     case fonts = "Fonts"
     case interfaceBuilder = "IB"
     case interfaceBuilderiOS = "IB-iOS"
@@ -103,8 +104,7 @@ class Fixtures {
   static func context(for name: String, sub: Directory) -> [String: Any] {
     let path = self.path(for: name, subDirectory: "StencilContexts/\(sub.rawValue)")
 
-    guard let data: String = try? path.read(),
-      let yaml = try? Yams.load(yaml: data, .basic),
+    guard let yaml = try? YAML.read(path: path),
       let result = yaml as? [String: Any] else {
         fatalError("Unable to load fixture content")
     }

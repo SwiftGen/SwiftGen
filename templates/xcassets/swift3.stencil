@@ -16,8 +16,36 @@
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
-
 {% set enumName %}{{param.enumName|default:"Asset"}}{% endset %}
+
+{% set colorType %}{{param.colorTypeName|default:"ColorAsset"}}{% endset %}
+{{accessModifier}} struct {{colorType}} {
+  {{accessModifier}} fileprivate(set) var name: String
+
+  #if swift(>=3.2)
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  {{accessModifier}} var color: {{colorAlias}} {
+    return {{colorAlias}}(asset: self)
+  }
+  #endif
+}
+
+{{accessModifier}} extension {{colorAlias}} {
+  #if swift(>=3.2)
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  convenience init!(asset: {{colorType}}) {
+    let bundle = Bundle(for: BundleToken.self)
+    #if os(iOS) || os(tvOS)
+    self.init(named: asset.name, in: bundle, compatibleWith: nil)
+    #elseif os(OSX)
+    self.init(named: asset.name, bundle: bundle)
+    #elseif os(watchOS)
+    self.init(named: asset.name)
+    #endif
+  }
+  #endif
+}
+
 {% set imageType %}{{param.imageTypeName|default:"ImageAsset"}}{% endset %}
 @available(*, deprecated, renamed: "{{imageType}}")
 {{accessModifier}} typealias {{enumName}}Type = {{imageType}}
@@ -39,17 +67,20 @@
   }
 }
 
-{% set colorType %}{{param.colorTypeName|default:"ColorAsset"}}{% endset %}
-{{accessModifier}} struct {{colorType}} {
-  {{accessModifier}} fileprivate(set) var name: String
-
-  #if swift(>=3.2)
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  {{accessModifier}} var color: {{colorAlias}} {
-    return {{colorAlias}}(asset: self)
+{{accessModifier}} extension {{imageAlias}} {
+  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
+  @available(OSX, deprecated,
+    message: "This initializer is unsafe on macOS, please use the {{imageType}}.image property")
+  convenience init!(asset: {{imageType}}) {
+    #if os(iOS) || os(tvOS)
+    let bundle = Bundle(for: BundleToken.self)
+    self.init(named: asset.name, in: bundle, compatibleWith: nil)
+    #elseif os(OSX) || os(watchOS)
+    self.init(named: asset.name)
+    #endif
   }
-  #endif
 }
+
 {% macro enumBlock assets %}
   {% call casesBlock assets %}
   {% if not param.noAllValues %}
@@ -90,6 +121,7 @@
   {% endif %}
   {% endfor %}
 {% endmacro %}
+// MARK: Assets
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 {{accessModifier}} enum {{enumName}} {
@@ -104,36 +136,6 @@
   {% endif %}
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
-
-{{accessModifier}} extension {{imageAlias}} {
-  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
-  @available(OSX, deprecated,
-    message: "This initializer is unsafe on macOS, please use the {{imageType}}.image property")
-  convenience init!(asset: {{imageType}}) {
-    #if os(iOS) || os(tvOS)
-    let bundle = Bundle(for: BundleToken.self)
-    self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX) || os(watchOS)
-    self.init(named: asset.name)
-    #endif
-  }
-}
-
-{{accessModifier}} extension {{colorAlias}} {
-  #if swift(>=3.2)
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  convenience init!(asset: {{colorType}}) {
-    let bundle = Bundle(for: BundleToken.self)
-    #if os(iOS) || os(tvOS)
-    self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX)
-    self.init(named: asset.name, bundle: bundle)
-    #elseif os(watchOS)
-    self.init(named: asset.name)
-    #endif
-  }
-  #endif
-}
 
 private final class BundleToken {}
 {% else %}

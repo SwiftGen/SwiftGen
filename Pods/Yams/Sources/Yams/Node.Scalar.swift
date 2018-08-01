@@ -8,18 +8,26 @@
 
 import Foundation
 
+// MARK: Node+Scalar
+
 extension Node {
+    /// Scalar node.
     public struct Scalar {
+        /// This node's string value.
         public var string: String {
             didSet {
                 tag = .implicit
             }
         }
+        /// This node's tag (its type).
         public var tag: Tag
+        /// The style to be used when emitting this node.
         public var style: Style
+        /// The location for this node.
         public var mark: Mark?
 
-        public enum Style: UInt32 { // swiftlint:disable:this nesting
+        /// The style to use when emitting a `Scalar`.
+        public enum Style: UInt32 {
             /// Let the emitter choose the style.
             case any = 0
             /// The plain scalar style.
@@ -36,6 +44,12 @@ extension Node {
             case folded
         }
 
+        /// Create a `Node.Scalar` using the specified parameters.
+        ///
+        /// - parameter string: The string to generate this scalar.
+        /// - parameter tag:    This scalar's `Tag`.
+        /// - parameter style:  The style to use when emitting this `Scalar`.
+        /// - parameter mark:   This scalar's `Mark`.
         public init(_ string: String, _ tag: Tag = .implicit, _ style: Style = .any, _ mark: Mark? = nil) {
             self.string = string
             self.tag = tag
@@ -44,6 +58,7 @@ extension Node {
         }
     }
 
+    /// Get or set the `Node.Scalar` value if this node is a `Node.scalar`.
     public var scalar: Scalar? {
         get {
             if case let .scalar(scalar) = self {
@@ -60,12 +75,14 @@ extension Node {
 }
 
 extension Node.Scalar: Comparable {
+    /// :nodoc:
     public static func < (lhs: Node.Scalar, rhs: Node.Scalar) -> Bool {
         return lhs.string < rhs.string
     }
 }
 
 extension Node.Scalar: Equatable {
+    /// :nodoc:
     public static func == (lhs: Node.Scalar, rhs: Node.Scalar) -> Bool {
         return lhs.string == rhs.string && lhs.resolvedTag == rhs.resolvedTag
     }

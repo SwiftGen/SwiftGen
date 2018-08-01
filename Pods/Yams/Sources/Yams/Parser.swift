@@ -7,19 +7,20 @@
 //
 
 #if SWIFT_PACKAGE
-    import CYaml
+import CYaml
 #endif
 import Foundation
 
 /// Parse all YAML documents in a String
 /// and produce corresponding Swift objects.
 ///
-/// - Parameters:
-///   - yaml: String
-///   - resolver: Resolver
-///   - constructor: Constructor
-/// - Returns: YamlSequence<Any>
-/// - Throws: YamlError
+/// - parameter yaml: String
+/// - parameter resolver: Resolver
+/// - parameter constructor: Constructor
+///
+/// - returns: YamlSequence<Any>
+///
+/// - throws: YamlError
 public func load_all(yaml: String,
                      _ resolver: Resolver = .default,
                      _ constructor: Constructor = .default) throws -> YamlSequence<Any> {
@@ -30,12 +31,13 @@ public func load_all(yaml: String,
 /// Parse the first YAML document in a String
 /// and produce the corresponding Swift object.
 ///
-/// - Parameters:
-///   - yaml: String
-///   - resolver: Resolver
-///   - constructor: Constructor
-/// - Returns: Any?
-/// - Throws: YamlError
+/// - parameter yaml: String
+/// - parameter resolver: Resolver
+/// - parameter constructor: Constructor
+///
+/// - returns: Any?
+///
+/// - throws: YamlError
 public func load(yaml: String,
                  _ resolver: Resolver = .default,
                  _ constructor: Constructor = .default) throws -> Any? {
@@ -45,12 +47,13 @@ public func load(yaml: String,
 /// Parse all YAML documents in a String
 /// and produce corresponding representation trees.
 ///
-/// - Parameters:
-///   - yaml: String
-///   - resolver: Resolver
-///   - constructor: Constructor
-/// - Returns: YamlSequence<Node>
-/// - Throws: YamlError
+/// - parameter yaml: String
+/// - parameter resolver: Resolver
+/// - parameter constructor: Constructor
+///
+/// - returns: YamlSequence<Node>
+///
+/// - throws: YamlError
 public func compose_all(yaml: String,
                         _ resolver: Resolver = .default,
                         _ constructor: Constructor = .default) throws -> YamlSequence<Node> {
@@ -61,22 +64,25 @@ public func compose_all(yaml: String,
 /// Parse the first YAML document in a String
 /// and produce the corresponding representation tree.
 ///
-/// - Parameters:
-///   - yaml: String
-///   - resolver: Resolver
-///   - constructor: Constructor
-/// - Returns: Node?
-/// - Throws: YamlError
+/// - parameter yaml: String
+/// - parameter resolver: Resolver
+/// - parameter constructor: Constructor
+///
+/// - returns: Node?
+///
+/// - throws: YamlError
 public func compose(yaml: String,
                     _ resolver: Resolver = .default,
                     _ constructor: Constructor = .default) throws -> Node? {
     return try Parser(yaml: yaml, resolver: resolver, constructor: constructor).singleRoot()
 }
 
-/// Sequence that holds error
+/// Sequence that holds an error.
 public struct YamlSequence<T>: Sequence, IteratorProtocol {
+    /// This sequence's error, if any.
     public private(set) var error: Swift.Error?
 
+    /// `Swift.Sequence.next()`.
     public mutating func next() -> T? {
         do {
             return try closure()
@@ -93,18 +99,22 @@ public struct YamlSequence<T>: Sequence, IteratorProtocol {
     private let closure: () throws -> T?
 }
 
+/// Parses YAML strings.
 public final class Parser {
-    // MARK: public
+    /// YAML string.
     public let yaml: String
+    /// Resolver.
     public let resolver: Resolver
+    /// Constructor.
     public let constructor: Constructor
 
     /// Set up Parser.
     ///
-    /// - Parameter string: YAML
-    /// - Parameter resolver: Resolver
-    /// - Parameter constructor: Constructor
-    /// - Throws: YamlError
+    /// - parameter string: YAML string.
+    /// - parameter resolver: Resolver, `.default` if omitted.
+    /// - parameter constructor: Constructor, `.default` if omitted.
+    ///
+    /// - throws: `YamlError`.
     public init(yaml string: String,
                 resolver: Resolver = .default,
                 constructor: Constructor = .default) throws {
@@ -113,23 +123,23 @@ public final class Parser {
         self.constructor = constructor
 
         yaml_parser_initialize(&parser)
-        #if USE_UTF8
-            yaml_parser_set_encoding(&parser, YAML_UTF8_ENCODING)
-            utf8CString = string.utf8CString
-            utf8CString.withUnsafeBytes { bytes in
-                let input = bytes.baseAddress?.assumingMemoryBound(to: UInt8.self)
-                yaml_parser_set_input_string(&parser, input, bytes.count - 1)
-            }
-        #else
-            // use native endian
-            let isLittleEndian = 1 == 1.littleEndian
-            yaml_parser_set_encoding(&parser, isLittleEndian ? YAML_UTF16LE_ENCODING : YAML_UTF16BE_ENCODING)
-            let encoding: String.Encoding = isLittleEndian ? .utf16LittleEndian : .utf16BigEndian
-            data = yaml.data(using: encoding)!
-            data.withUnsafeBytes { bytes in
-                yaml_parser_set_input_string(&parser, bytes, data.count)
-            }
-        #endif
+#if USE_UTF8
+        yaml_parser_set_encoding(&parser, YAML_UTF8_ENCODING)
+        utf8CString = string.utf8CString
+        utf8CString.withUnsafeBytes { bytes in
+            let input = bytes.baseAddress?.assumingMemoryBound(to: UInt8.self)
+            yaml_parser_set_input_string(&parser, input, bytes.count - 1)
+        }
+#else
+        // use native endian
+        let isLittleEndian = 1 == 1.littleEndian
+        yaml_parser_set_encoding(&parser, isLittleEndian ? YAML_UTF16LE_ENCODING : YAML_UTF16BE_ENCODING)
+        let encoding: String.Encoding = isLittleEndian ? .utf16LittleEndian : .utf16BigEndian
+        data = yaml.data(using: encoding)!
+        data.withUnsafeBytes { bytes in
+            yaml_parser_set_input_string(&parser, bytes, data.count)
+        }
+#endif
         try parse() // Drop YAML_STREAM_START_EVENT
     }
 
@@ -139,13 +149,19 @@ public final class Parser {
 
     /// Parse next document and return root Node.
     ///
-    /// - Returns: next Node
-    /// - Throws: YamlError
+    /// - returns: next Node.
+    ///
+    /// - throws: `YamlError`.
     public func nextRoot() throws -> Node? {
         guard !streamEndProduced, try parse().type != YAML_STREAM_END_EVENT else { return nil }
         return try loadDocument()
     }
 
+    /// Parses the document expecting a single root Node and returns it.
+    ///
+    /// - returns: Single root Node.
+    ///
+    /// - throws: `YamlError`.
     public func singleRoot() throws -> Node? {
         guard !streamEndProduced, try parse().type != YAML_STREAM_END_EVENT else { return nil }
         let node = try loadDocument()
@@ -161,7 +177,8 @@ public final class Parser {
         return node
     }
 
-    // MARK: private
+    // MARK: - Private Members
+
     private var anchors = [String: Node]()
     private var parser = yaml_parser_t()
 #if USE_UTF8
@@ -171,7 +188,7 @@ public final class Parser {
 #endif
 }
 
-// MARK: implementation details
+// MARK: Implementation Details
 private extension Parser {
     private var streamEndProduced: Bool {
         return parser.stream_end_produced != 0

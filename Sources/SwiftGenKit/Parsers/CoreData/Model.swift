@@ -12,7 +12,7 @@ import Kanna
 extension CoreData {
   public struct Model {
     public let entities: [String: Entity]
-    public let configurations: [String: [Entity]]
+    public let configurations: [String: [String]]
     public let fetchRequests: [FetchRequest]
     public let fetchRequestsByEntityName: [String: [FetchRequest]]
   }
@@ -31,15 +31,9 @@ extension CoreData.Model {
     entities = entitiesByName
 
     configurations = try document.xpath(XML.configurationsPath)
-                                .reduce(into: ["Default": allEntities]) { allConfigurations, element in
+                                .reduce(into: ["Default": Array(entitiesByName.keys)]) { allConfigurations, element in
                                   let (name, entityNames) = try CoreData.Configuration.parse(from: element)
-                                  allConfigurations[name] = try entityNames.map { entityName in
-                                    guard let entity = entitiesByName[entityName] else {
-                                      throw CoreData.ParserError.invalidFormat(reason: "Unnown entity \(entityName).")
-                                    }
-
-                                    return entity
-                                  }
+                                  allConfigurations[name] = entityNames
                                 }
 
     fetchRequests = try document.xpath(XML.fetchRequestsPath).map(CoreData.FetchRequest.init(with:))

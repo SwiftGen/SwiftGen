@@ -1,64 +1,64 @@
 modules:
-- AppKit
-- FadeSegue
-platform: macOS
+- "AppKit"
+- "FadeSegue"
+platform: "macOS"
 storyboards:
-- name: Message
-  platform: macOS
+- name: "Message"
+  platform: "macOS"
   scenes:
-  - baseType: ViewController
-    identifier: MessageDetails
-    module: AppKit
-    type: NSViewController
-  - baseType: ViewController
-    identifier: MessageList
-    module: AppKit
-    type: NSViewController
-  - baseType: ViewController
-    identifier: MessageListFooter
-    module: AppKit
-    type: NSViewController
-  - customClass: CustomTabViewController
-    customModule: 
-    identifier: MessagesTab
-    module: 
-    type: CustomTabViewController
-  - baseType: SplitViewController
-    identifier: SplitMessages
-    module: AppKit
-    type: NSSplitViewController
-  - baseType: WindowController
-    identifier: WindowCtrl
-    module: AppKit
-    type: NSWindowController
+  - baseType: "ViewController"
+    identifier: "MessageDetails"
+    module: "AppKit"
+    type: "NSViewController"
+  - baseType: "ViewController"
+    identifier: "MessageList"
+    module: "AppKit"
+    type: "NSViewController"
+  - baseType: "ViewController"
+    identifier: "MessageListFooter"
+    module: "AppKit"
+    type: "NSViewController"
+  - customClass: "CustomTabViewController"
+    customModule: ""
+    identifier: "MessagesTab"
+    module: ""
+    type: "CustomTabViewController"
+  - baseType: "SplitViewController"
+    identifier: "SplitMessages"
+    module: "AppKit"
+    type: "NSSplitViewController"
+  - baseType: "WindowController"
+    identifier: "WindowCtrl"
+    module: "AppKit"
+    type: "NSWindowController"
   segues:
-  - customClass: 
-    customModule: 
-    identifier: Embed
-    module: AppKit
-    type: NSStoryboardSegue
-  - customClass: 
-    customModule: 
-    identifier: Modal
-    module: AppKit
-    type: NSStoryboardSegue
-  - customClass: 
-    customModule: 
-    identifier: Popover
-    module: AppKit
-    type: NSStoryboardSegue
-  - customClass: 
-    customModule: 
-    identifier: Sheet
-    module: AppKit
-    type: NSStoryboardSegue
-  - customClass: 
-    customModule: 
-    identifier: Show
-    module: AppKit
-    type: NSStoryboardSegue
-  - customClass: FadeSegue
-    customModule: FadeSegue
-    identifier: public
-    module: FadeSegue
-    type: FadeSegue
+  - customClass: ""
+    customModule: ""
+    identifier: "Embed"
+    module: "AppKit"
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Modal"
+    module: "AppKit"
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Popover"
+    module: "AppKit"
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Sheet"
+    module: "AppKit"
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Show"
+    module: "AppKit"
+    type: "NSStoryboardSegue"
+  - customClass: "FadeSegue"
+    customModule: "FadeSegue"
+    identifier: "public"
+    module: "FadeSegue"
+    type: "FadeSegue"

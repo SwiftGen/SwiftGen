@@ -1,39 +1,39 @@
 catalogs:
 - assets:
   - items: []
-    name: Empty
-    type: group
+    name: "Empty"
+    type: "group"
   - items:
-    - name: Banana
-      type: image
-      value: Exotic/Banana
-    - name: Mango
-      type: image
-      value: Exotic/Mango
-    name: Exotic
-    type: group
+    - name: "Banana"
+      type: "image"
+      value: "Exotic/Banana"
+    - name: "Mango"
+      type: "image"
+      value: "Exotic/Mango"
+    name: "Exotic"
+    type: "group"
   - items:
-    - name: Apricot
-      type: image
-      value: Round/Apricot
+    - name: "Apricot"
+      type: "image"
+      value: "Round/Apricot"
     - items:
-      - name: Apple
-        type: image
-        value: Round/Apple
+      - name: "Apple"
+        type: "image"
+        value: "Round/Apple"
       - items:
-        - name: Cherry
-          type: image
-          value: Round/Double/Cherry
-        name: Double
-        type: group
-      - name: Tomato
-        type: image
-        value: Round/Tomato
-      name: Red
-      type: group
-    name: Round
-    type: group
-  - name: private
-    type: image
-    value: private
-  name: Images
+        - name: "Cherry"
+          type: "image"
+          value: "Round/Double/Cherry"
+        name: "Double"
+        type: "group"
+      - name: "Tomato"
+        type: "image"
+        value: "Round/Tomato"
+      name: "Red"
+      type: "group"
+    name: "Round"
+    type: "group"
+  - name: "private"
+    type: "image"
+    value: "private"
+  name: "Images"

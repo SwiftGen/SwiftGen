@@ -10,8 +10,9 @@ import Foundation
 import Kanna
 
 extension CoreData {
-  public final class FetchRequest {
+  public struct FetchRequest {
     public let name: String
+    public let entity: String
 
     public let fetchLimit: Int
     public let fetchBatchSize: Int
@@ -24,35 +25,6 @@ extension CoreData {
     public let includesPendingChanges: Bool
     public let returnsObjectsAsFaults: Bool
     public let returnDistinctResults: Bool
-
-    public let entity: String
-
-    init(
-      name: String,
-      entity: String,
-      fetchLimit: Int,
-      fetchBatchSize: Int,
-      predicateString: String,
-      resultType: ResultType,
-      includeSubentities: Bool,
-      includePropertyValues: Bool,
-      includesPendingChanges: Bool,
-      returnsObjectsAsFaults: Bool,
-      returnDistinctResults: Bool
-    ) {
-      self.name = name
-      self.entity = entity
-      self.fetchLimit = fetchLimit
-      self.fetchBatchSize = fetchBatchSize
-      self.predicateString = predicateString
-      self.resultType = resultType
-
-      self.includeSubentities = includeSubentities
-      self.includePropertyValues = includePropertyValues
-      self.includesPendingChanges = includesPendingChanges
-      self.returnsObjectsAsFaults = returnsObjectsAsFaults
-      self.returnDistinctResults = returnDistinctResults
-    }
 
     public enum ResultType: String {
       case object     = "0"
@@ -79,7 +51,7 @@ private enum XML {
 }
 
 extension CoreData.FetchRequest {
-  convenience init(with object: Kanna.XMLElement) throws {
+  init(with object: Kanna.XMLElement) throws {
     guard let name = object[XML.Attributes.name] else {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required fetch request name.")
     }
@@ -95,10 +67,10 @@ extension CoreData.FetchRequest {
     let resultType = object[XML.Attributes.resultType]
                       .flatMap(CoreData.FetchRequest.ResultType.init(rawValue:)) ?? .object
 
-    let includeSubentities = object[XML.Attributes.includeSubentities].flatMap(Bool.init(from:)) ?? false
-    let includePropertyValues = object[XML.Attributes.includePropertyValues].flatMap(Bool.init(from:)) ?? false
-    let includesPendingChanges = object[XML.Attributes.includesPendingChanges].flatMap(Bool.init(from:)) ?? false
-    let returnObjectsAsFaults = object[XML.Attributes.returnObjectsAsFaults].flatMap(Bool.init(from:)) ?? false
+    let includeSubentities = object[XML.Attributes.includeSubentities].flatMap(Bool.init(from:)) ?? true
+    let includePropertyValues = object[XML.Attributes.includePropertyValues].flatMap(Bool.init(from:)) ?? true
+    let includesPendingChanges = object[XML.Attributes.includesPendingChanges].flatMap(Bool.init(from:)) ?? true
+    let returnObjectsAsFaults = object[XML.Attributes.returnObjectsAsFaults].flatMap(Bool.init(from:)) ?? true
     let returnDistinctResults = object[XML.Attributes.returnDistinctResults].flatMap(Bool.init(from:)) ?? false
 
     self.init(
