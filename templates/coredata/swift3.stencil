@@ -3,7 +3,7 @@ import Foundation
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
-// swiftlint:disable discouraged_optional_boolean
+// swiftlint:disable attributes
 
 // swiftlint:disable identifier_name line_length type_body_length
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
@@ -11,31 +11,78 @@ import Foundation
 {% for name, entity in model.entities %}
 {% set superclass %}{{ model.entities[entity.superentity].className | default:"NSManagedObject" }}{% endset %}
 {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
+@objc({{ entity.name }})
 open {{ accessModifier }} class {{ entity.name }}: {{ superclass }} {
 
-    {{ override }}open class func entityName() -> String {
+    {{ override }}open {{ accessModifier }} class func entityName() -> String {
         return "{{ entity.name }}"
     }
 
-    {{ override }}open class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
-        return NSEntityDescription.entity(forEntityName: self.entityName(), in: managedObjectContext)
+    {{ override }}open {{ accessModifier }} class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+        return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
+    }
+
+    @nonobjc {{ accessModifier }} class func fetchRequest() -> NSFetchRequest<{{ entity.name }}> {
+        return NSFetchRequest<{{ entity.name }}>(entityName: entityName())
     }
 
     {% for attribute in entity.attributes %}
-    @NSManaged open var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional %}?{% else %}!{% endif %}
+    @NSManaged open {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.usesScalarValueType == false %}{% if attribute.isOptional %}?{% else %}!{% endif %}{% endif %}
 
     {% endfor %}
     {% for relationship in entity.relationships %}
     {% if relationship.isToMany %}
-    @NSManaged open var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}NSSet{% endif %}
+    @NSManaged open {{ accessModifier }} var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}NSSet{% endif %}
 
     {% else %}
-    @NSManaged open var {{ relationship.name }}: {{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}{% if relationship.isOptional %}?{% endif %}
+    @NSManaged open {{ accessModifier }} var {{ relationship.name }}: {{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}{% if relationship.isOptional %}?{% endif %}
 
     {% endif %}
     {% endfor %}
 }
 
+{% for relationship in entity.relationships %}
+{% if relationship.isToMany %}
+{% set destinationEntityClassName %}{{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}{% endset %}
+{% set collectionClassName %}{% if relationship.isOrdered %}NSOrderedSet{% else %}NSSet{% endif %}{% endset %}
+extension {{ entity.name }} {
+
+    {% if relationship.isOrdered %}
+    @objc(insertObject:in{{ relationship.name | upperFirstLetter }}AtIndex:)
+    @NSManaged public func insertInto{{ relationship.name | upperFirstLetter }}(_ value: {{ destinationEntityClassName }}, at idx: Int)
+
+    @objc(removeObjectFrom{{ relationship.name | upperFirstLetter }}AtIndex:)
+    @NSManaged public func removeFrom{{ relationship.name | upperFirstLetter }}(at idx: Int)
+
+    @objc(insert{{ relationship.name | upperFirstLetter }}:atIndexes:)
+    @NSManaged public func insertInto{{ relationship.name | upperFirstLetter }}(_ values: [{{ destinationEntityClassName }}], at indexes: NSIndexSet)
+
+    @objc(remove{{ relationship.name | upperFirstLetter }}AtIndexes:)
+    @NSManaged public func removeFrom{{ relationship.name | upperFirstLetter }}(at indexes: NSIndexSet)
+
+    @objc(replaceObjectIn{{ relationship.name | upperFirstLetter }}AtIndex:withObject:)
+    @NSManaged public func replace{{ relationship.name | upperFirstLetter }}(at idx: Int, with value: {{ destinationEntityClassName }})
+
+    @objc(replace{{ relationship.name | upperFirstLetter }}AtIndexes:withOneToMany:)
+    @NSManaged public func replace{{ relationship.name | upperFirstLetter }}(at indexes: NSIndexSet, with values: [{{ destinationEntityClassName }}])
+
+    {% endif %}
+    @objc(add{{ relationship.name | upperFirstLetter }}Object:)
+    @NSManaged public func addTo{{ relationship.name | upperFirstLetter }}(_ value: {{ destinationEntityClassName }})
+
+    @objc(remove{{ relationship.name | upperFirstLetter }}Object:)
+    @NSManaged public func removeFrom{{ relationship.name | upperFirstLetter }}(_ value: {{ destinationEntityClassName }})
+
+    @objc(add{{ relationship.name | upperFirstLetter }}:)
+    @NSManaged public func addTo{{ relationship.name | upperFirstLetter }}(_ values: {{ collectionClassName }})
+
+    @objc(remove{{ relationship.name | upperFirstLetter }}:)
+    @NSManaged public func removeFrom{{ relationship.name | upperFirstLetter }}(_ values: {{ collectionClassName }})
+
+}
+
+{% endif %}
+{% endfor %}
 {% endfor %}
 {% endfor %}
 // swiftlint:enable identifier_name line_length type_body_length
