@@ -20,6 +20,7 @@ extension CoreData {
 
     public let attributes: [Attribute]
     public let relationships: [Relationship]
+    public let fetchedProperties: [FetchedProperty]
 
     init(
       name: String,
@@ -28,6 +29,7 @@ extension CoreData {
       superentity: String?,
       attributes: [Attribute],
       relationships: [Relationship],
+      fetchedProperties: [FetchedProperty],
       userInfo: [String: String]
     ) {
       self.name = name
@@ -36,6 +38,7 @@ extension CoreData {
       self.superentity = superentity
       self.attributes = attributes
       self.relationships = relationships
+      self.fetchedProperties = fetchedProperties
       self.userInfo = userInfo
     }
   }
@@ -51,6 +54,7 @@ private enum XML {
 
   static let attributesPath = "attribute"
   static let relationshipsPath = "relationship"
+  static let fetchedPropertiesPath = "fetchedProperty"
   static let userInfoPath = "userInfo"
 }
 
@@ -65,6 +69,7 @@ extension CoreData.Entity {
 
     let attributes = try object.xpath(XML.attributesPath).map(CoreData.Attribute.init(with:))
     let relationships = try object.xpath(XML.relationshipsPath).map(CoreData.Relationship.init(with:))
+    let fetchedProperties = try object.xpath(XML.fetchedPropertiesPath).map(CoreData.FetchedProperty.init(with:))
 
     let userInfo = try object.at_xpath(XML.userInfoPath).map { try CoreData.UserInfo.parse(from: $0) } ?? [:]
 
@@ -75,6 +80,7 @@ extension CoreData.Entity {
       superentity: superentity,
       attributes: attributes,
       relationships: relationships,
+      fetchedProperties: fetchedProperties,
       userInfo: userInfo
     )
   }

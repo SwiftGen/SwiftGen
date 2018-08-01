@@ -53,6 +53,7 @@
 		C38E571520FF8FB5009C9C23 /* CoreDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38E571420FF8FB5009C9C23 /* CoreDataParser.swift */; };
 		C38E571720FF906B009C9C23 /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38E571620FF906B009C9C23 /* CoreDataContext.swift */; };
 		C3A264D52111007F00A7F61B /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A264D42111007F00A7F61B /* CoreDataTests.swift */; };
+		C3BAC3C92112006000B6875A /* FetchedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BAC3C82112006000B6875A /* FetchedProperty.swift */; };
 		C580E102337633038E486585 /* Pods_swiftgen_Templates_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8031AB7FD88D5F010179EDC /* Pods_swiftgen_Templates_UnitTests.framework */; };
 		DD40284A209E56B50045FC76 /* config-with-multi-outputs.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */; };
 		DD402850209FBF300045FC76 /* config-deprecated-paths.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */; };
@@ -315,6 +316,7 @@
 		C38E571420FF8FB5009C9C23 /* CoreDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataParser.swift; sourceTree = "<group>"; };
 		C38E571620FF906B009C9C23 /* CoreDataContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataContext.swift; sourceTree = "<group>"; };
 		C3A264D42111007F00A7F61B /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
+		C3BAC3C82112006000B6875A /* FetchedProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedProperty.swift; sourceTree = "<group>"; };
 		D662CF56C834C4E7CEA32364 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-with-multi-outputs.yml"; sourceTree = "<group>"; };
 		DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-deprecated-paths.yml"; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 				C350BE3720FFCD0F0043D7C5 /* Model.swift */,
 				C350BE3920FFCD750043D7C5 /* Entity.swift */,
 				C33A142821064E3400D3CBA6 /* FetchRequest.swift */,
+				C3BAC3C82112006000B6875A /* FetchedProperty.swift */,
 				C322627021012F42001AC9CD /* Attribute.swift */,
 				C32262722101324E001AC9CD /* Relationship.swift */,
 				C3031AA021062C9A00BF00DE /* UserInfo.swift */,
@@ -1341,6 +1344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3BAC3C92112006000B6875A /* FetchedProperty.swift in Sources */,
 				DD9F688520956074004EB720 /* StringsEntry.swift in Sources */,
 				DD9F687A20955D51004EB720 /* CatalogEntry.swift in Sources */,
 				DD428E261FC50FBF001649D6 /* InterfaceBuilderContext.swift in Sources */,

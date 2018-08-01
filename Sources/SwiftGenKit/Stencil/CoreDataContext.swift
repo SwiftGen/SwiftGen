@@ -32,7 +32,8 @@ extension CoreData.Parser {
       "userInfo": entity.userInfo,
       "superentity": entity.superentity ?? "",
       "attributes": entity.attributes.map(map),
-      "relationships": entity.relationships.map(map)
+      "relationships": entity.relationships.map(map),
+      "fetchedProperties": entity.fetchedProperties.map(map)
     ]
   }
 
@@ -66,6 +67,15 @@ extension CoreData.Parser {
         ]
       } as Any,
       "userInfo": relationship.userInfo
+    ]
+  }
+
+  private func map(_ fetchedProperty: CoreData.FetchedProperty) -> [String: Any] {
+    return [
+      "name": fetchedProperty.name,
+      "isOptional": fetchedProperty.isOptional,
+      "fetchRequest": map(fetchedProperty.fetchRequest),
+      "userInfo": fetchedProperty.userInfo
     ]
   }
 
