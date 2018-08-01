@@ -23,7 +23,7 @@ public extension StoryboardType {
   }
 }
 
-public struct SceneType<T: Any> {
+public struct SceneType<T: UIViewController> {
   public let storyboard: StoryboardType.Type
   public let identifier: String
 
@@ -36,7 +36,7 @@ public struct SceneType<T: Any> {
   }
 }
 
-public struct InitialSceneType<T: Any> {
+public struct InitialSceneType<T: UIViewController> {
   public let storyboard: StoryboardType.Type
 
   public func instantiate() -> T {
