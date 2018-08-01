@@ -10,7 +10,7 @@ import Foundation
 import Kanna
 
 extension CoreData {
-  public final class Relationship {
+  public struct Relationship {
     public typealias InverseRelationship = (name: String, entityName: String)
 
     public let name: String
@@ -25,28 +25,6 @@ extension CoreData {
 
     public let destinationEntity: String
     public let inverseRelationship: InverseRelationship?
-
-    init(
-      name: String,
-      isIndexed: Bool,
-      isOptional: Bool,
-      isTransient: Bool,
-      isToMany: Bool,
-      isOrdered: Bool,
-      destinationEntity: String,
-      inverseRelationship: InverseRelationship?,
-      userInfo: [String: String]
-      ) {
-      self.name = name
-      self.isIndexed = isIndexed
-      self.isOptional = isOptional
-      self.isTransient = isTransient
-      self.isToMany = isToMany
-      self.isOrdered = isOrdered
-      self.destinationEntity = destinationEntity
-      self.inverseRelationship = inverseRelationship
-      self.userInfo = userInfo
-    }
   }
 }
 
@@ -69,7 +47,7 @@ private enum XML {
 }
 
 extension CoreData.Relationship {
-  convenience init(with object: Kanna.XMLElement) throws {
+  init(with object: Kanna.XMLElement) throws {
     guard let name = object[XML.Attributes.name] else {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required relationship name.")
     }
@@ -108,9 +86,9 @@ extension CoreData.Relationship {
       isTransient: isTransient,
       isToMany: isToMany,
       isOrdered: isOrdered,
+      userInfo: userInfo,
       destinationEntity: destinationEntity,
-      inverseRelationship: inverseRelationship,
-      userInfo: userInfo
+      inverseRelationship: inverseRelationship
     )
   }
 }
