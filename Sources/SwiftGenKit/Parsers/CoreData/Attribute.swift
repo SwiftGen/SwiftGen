@@ -64,7 +64,7 @@ extension CoreData.Attribute {
 
     name = attributeName
     isIndexed = object[XML.Attributes.isIndexed].flatMap(Bool.init(from:)) ?? false
-    isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? true
+    isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? false
     isTransient = object[XML.Attributes.isTransient].flatMap(Bool.init(from:)) ?? false
     usesScalarValueType = object[XML.Attributes.usesScalarValueType].flatMap(Bool.init(from:)) ?? false
 

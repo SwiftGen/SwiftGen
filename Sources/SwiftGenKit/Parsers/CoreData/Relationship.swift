@@ -52,7 +52,7 @@ extension CoreData.Relationship {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required relationship name.")
     }
     let isIndexed = object[XML.Attributes.isIndexed].flatMap(Bool.init(from:)) ?? false
-    let isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? true
+    let isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? false
     let isTransient = object[XML.Attributes.isTransient].flatMap(Bool.init(from:)) ?? false
 
     let isToMany = object[XML.Attributes.isToMany].flatMap(Bool.init(from:)) ?? false
