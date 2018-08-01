@@ -19,7 +19,7 @@ internal extension StoryboardType {
   }
 }
 
-internal struct SceneType<T: Any> {
+internal struct SceneType<T> {
   internal let storyboard: StoryboardType.Type
   internal let identifier: String
 
@@ -31,7 +31,7 @@ internal struct SceneType<T: Any> {
   }
 }
 
-internal struct InitialSceneType<T: Any> {
+internal struct InitialSceneType<T> {
   internal let storyboard: StoryboardType.Type
 
   internal func instantiate() -> T {

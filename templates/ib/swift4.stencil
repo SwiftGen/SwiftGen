@@ -26,7 +26,7 @@ import {{module}}
   }
 }
 
-{{accessModifier}} struct SceneType<T: Any> {
+{{accessModifier}} struct SceneType<T{% if not isAppKit %}: UIViewController{% endif %}> {
   {{accessModifier}} let storyboard: StoryboardType.Type
   {{accessModifier}} let identifier: String
 
@@ -39,7 +39,7 @@ import {{module}}
   }
 }
 
-{{accessModifier}} struct InitialSceneType<T: Any> {
+{{accessModifier}} struct InitialSceneType<T{% if not isAppKit %}: UIViewController{% endif %}> {
   {{accessModifier}} let storyboard: StoryboardType.Type
 
   {{accessModifier}} func instantiate() -> T {
