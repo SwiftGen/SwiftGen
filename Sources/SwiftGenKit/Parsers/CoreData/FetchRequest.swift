@@ -95,10 +95,10 @@ extension CoreData.FetchRequest {
     let resultType = object[XML.Attributes.resultType]
                       .flatMap(CoreData.FetchRequest.ResultType.init(rawValue:)) ?? .object
 
-    let includeSubentities = object[XML.Attributes.includeSubentities].flatMap(Bool.init(from:)) ?? false
-    let includePropertyValues = object[XML.Attributes.includePropertyValues].flatMap(Bool.init(from:)) ?? false
-    let includesPendingChanges = object[XML.Attributes.includesPendingChanges].flatMap(Bool.init(from:)) ?? false
-    let returnObjectsAsFaults = object[XML.Attributes.returnObjectsAsFaults].flatMap(Bool.init(from:)) ?? false
+    let includeSubentities = object[XML.Attributes.includeSubentities].flatMap(Bool.init(from:)) ?? true
+    let includePropertyValues = object[XML.Attributes.includePropertyValues].flatMap(Bool.init(from:)) ?? true
+    let includesPendingChanges = object[XML.Attributes.includesPendingChanges].flatMap(Bool.init(from:)) ?? true
+    let returnObjectsAsFaults = object[XML.Attributes.returnObjectsAsFaults].flatMap(Bool.init(from:)) ?? true
     let returnDistinctResults = object[XML.Attributes.returnDistinctResults].flatMap(Bool.init(from:)) ?? false
 
     self.init(
