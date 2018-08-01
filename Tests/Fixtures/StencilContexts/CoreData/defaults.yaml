@@ -12,6 +12,7 @@ models:
     AbstractEntity:
       attributes: []
       className: "AbstractEntity"
+      fetchedProperties: []
       isAbstract: true
       name: "AbstractEntity"
       relationships: []
@@ -20,6 +21,7 @@ models:
     ChildEntity:
       attributes: []
       className: "ChildEntity"
+      fetchedProperties: []
       isAbstract: false
       name: "ChildEntity"
       relationships: []
@@ -165,6 +167,23 @@ models:
         userInfo: {}
         usesScalarValueType: false
       className: "MainEntity"
+      fetchedProperties:
+      - fetchRequest:
+          entity: "NewEntity"
+          fetchBatchSize: 0
+          fetchLimit: 0
+          includePropertyValues: true
+          includeSubentities: true
+          includesPendingChanges: true
+          name: "fetchedPropertyFetchRequest"
+          predicateString: ""
+          resultType: "Object"
+          returnDistinctResults: false
+          returnsObjectsAsFaults: true
+        isOptional: true
+        name: "fetchedProperty"
+        userInfo:
+          key: "value"
       isAbstract: false
       name: "MainEntity"
       relationships:
@@ -207,6 +226,7 @@ models:
     NewEntity:
       attributes: []
       className: "NewEntity"
+      fetchedProperties: []
       isAbstract: false
       name: "NewEntity"
       relationships: []
@@ -215,6 +235,7 @@ models:
     SecondaryEntity:
       attributes: []
       className: "SecondaryEntity"
+      fetchedProperties: []
       isAbstract: false
       name: "SecondaryEntity"
       relationships:
@@ -257,14 +278,14 @@ models:
   - entity: "MainEntity"
     fetchBatchSize: 0
     fetchLimit: 0
-    includePropertyValues: false
-    includeSubentities: false
-    includesPendingChanges: false
+    includePropertyValues: true
+    includeSubentities: true
+    includesPendingChanges: true
     name: "DictionaryFetchRequest"
     predicateString: ""
     resultType: "Dictionary"
     returnDistinctResults: false
-    returnsObjectsAsFaults: false
+    returnsObjectsAsFaults: true
   - entity: "MainEntity"
     fetchBatchSize: 0
     fetchLimit: 0
@@ -279,27 +300,27 @@ models:
   - entity: "MainEntity"
     fetchBatchSize: 0
     fetchLimit: 0
-    includePropertyValues: false
-    includeSubentities: false
-    includesPendingChanges: false
+    includePropertyValues: true
+    includeSubentities: true
+    includesPendingChanges: true
     name: "ObjectIDFetchRequest"
     predicateString: ""
     resultType: "Object ID"
     returnDistinctResults: false
-    returnsObjectsAsFaults: false
+    returnsObjectsAsFaults: true
   fetchRequestsByEntityName:
     MainEntity:
     - entity: "MainEntity"
       fetchBatchSize: 0
       fetchLimit: 0
-      includePropertyValues: false
-      includeSubentities: false
-      includesPendingChanges: false
+      includePropertyValues: true
+      includeSubentities: true
+      includesPendingChanges: true
       name: "DictionaryFetchRequest"
       predicateString: ""
       resultType: "Dictionary"
       returnDistinctResults: false
-      returnsObjectsAsFaults: false
+      returnsObjectsAsFaults: true
     - entity: "MainEntity"
       fetchBatchSize: 0
       fetchLimit: 0
@@ -314,11 +335,11 @@ models:
     - entity: "MainEntity"
       fetchBatchSize: 0
       fetchLimit: 0
-      includePropertyValues: false
-      includeSubentities: false
-      includesPendingChanges: false
+      includePropertyValues: true
+      includeSubentities: true
+      includesPendingChanges: true
       name: "ObjectIDFetchRequest"
       predicateString: ""
       resultType: "Object ID"
       returnDistinctResults: false
-      returnsObjectsAsFaults: false
+      returnsObjectsAsFaults: true
