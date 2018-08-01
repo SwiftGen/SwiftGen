@@ -74,6 +74,7 @@ open internal class MainEntity: NSManagedObject {
 
     @NSManaged open internal var oneToOne: SecondaryEntity?
 
+    @NSManaged open internal let fetchedProperty: [NewEntity]
 }
 
 extension MainEntity {

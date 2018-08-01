@@ -39,6 +39,9 @@ open {{ accessModifier }} class {{ entity.name }}: {{ superclass }} {
 
     {% endif %}
     {% endfor %}
+    {% for fetchedProperty in entity.fetchedProperties %}
+    @NSManaged open {{ accessModifier }} let {{ fetchedProperty.name }}: [{{ fetchedProperty.fetchRequest.entity }}]
+    {% endfor %}
 }
 
 {% for relationship in entity.relationships %}
