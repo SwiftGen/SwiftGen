@@ -125,6 +125,15 @@ models:
         isIndexed: false
         isOptional: true
         isTransient: false
+        name: "nonOptional"
+        type: "String"
+        typeName: "String"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
         name: "string"
         type: "String"
         typeName: "String"
@@ -176,10 +185,11 @@ models:
           includeSubentities: true
           includesPendingChanges: true
           name: "fetchedPropertyFetchRequest"
-          predicateString: ""
+          predicateString: "true == true"
           resultType: "Object"
           returnDistinctResults: false
           returnsObjectsAsFaults: true
+          substitutionVariables: {}
         isOptional: true
         name: "fetchedProperty"
         userInfo:
@@ -233,7 +243,16 @@ models:
       superentity: "AbstractEntity"
       userInfo: {}
     SecondaryEntity:
-      attributes: []
+      attributes:
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "name"
+        type: "String"
+        typeName: "String"
+        userInfo: {}
+        usesScalarValueType: false
       className: "SecondaryEntity"
       fetchedProperties: []
       isAbstract: false
@@ -286,6 +305,7 @@ models:
     resultType: "Dictionary"
     returnDistinctResults: false
     returnsObjectsAsFaults: true
+    substitutionVariables: {}
   - entity: "MainEntity"
     fetchBatchSize: 0
     fetchLimit: 0
@@ -293,10 +313,12 @@ models:
     includeSubentities: true
     includesPendingChanges: true
     name: "ObjectFetchRequest"
-    predicateString: "boolean == 0"
+    predicateString: "uuid == $UUID"
     resultType: "Object"
     returnDistinctResults: true
     returnsObjectsAsFaults: true
+    substitutionVariables:
+      UUID: "UUID"
   - entity: "MainEntity"
     fetchBatchSize: 0
     fetchLimit: 0
@@ -304,10 +326,12 @@ models:
     includeSubentities: true
     includesPendingChanges: true
     name: "ObjectIDFetchRequest"
-    predicateString: ""
+    predicateString: "oneToOne.name == $NAME"
     resultType: "Object ID"
     returnDistinctResults: false
     returnsObjectsAsFaults: true
+    substitutionVariables:
+      NAME: "String"
   fetchRequestsByEntityName:
     MainEntity:
     - entity: "MainEntity"
@@ -321,6 +345,7 @@ models:
       resultType: "Dictionary"
       returnDistinctResults: false
       returnsObjectsAsFaults: true
+      substitutionVariables: {}
     - entity: "MainEntity"
       fetchBatchSize: 0
       fetchLimit: 0
@@ -328,10 +353,12 @@ models:
       includeSubentities: true
       includesPendingChanges: true
       name: "ObjectFetchRequest"
-      predicateString: "boolean == 0"
+      predicateString: "uuid == $UUID"
       resultType: "Object"
       returnDistinctResults: true
       returnsObjectsAsFaults: true
+      substitutionVariables:
+        UUID: "UUID"
     - entity: "MainEntity"
       fetchBatchSize: 0
       fetchLimit: 0
@@ -339,7 +366,9 @@ models:
       includeSubentities: true
       includesPendingChanges: true
       name: "ObjectIDFetchRequest"
-      predicateString: ""
+      predicateString: "oneToOne.name == $NAME"
       resultType: "Object ID"
       returnDistinctResults: false
       returnsObjectsAsFaults: true
+      substitutionVariables:
+        NAME: "String"
