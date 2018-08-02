@@ -18,26 +18,26 @@ extension CoreData.Parser {
   private func map(_ model: CoreData.Model) -> [String: Any] {
     return [
       "configurations": model.configurations,
-      "entities": model.entities.mapValues(map),
-      "fetchRequests": model.fetchRequests.map(map),
-      "fetchRequestsByEntityName": model.fetchRequestsByEntityName.mapValues { $0.map(map) }
+      "entities": model.entities.mapValues { map($0, in: model) },
+      "fetchRequests": model.fetchRequests.map { map($0, in: model) },
+      "fetchRequestsByEntityName": model.fetchRequestsByEntityName.mapValues { $0.map { map($0, in: model) } }
     ]
   }
 
-  private func map(_ entity: CoreData.Entity) -> [String: Any] {
+  private func map(_ entity: CoreData.Entity, in model: CoreData.Model) -> [String: Any] {
     return [
       "name": entity.name,
       "className": entity.className,
       "isAbstract": entity.isAbstract,
       "userInfo": entity.userInfo,
       "superentity": entity.superentity ?? "",
-      "attributes": entity.attributes.map(map),
-      "relationships": entity.relationships.map(map),
-      "fetchedProperties": entity.fetchedProperties.map(map)
+      "attributes": entity.attributes.map { map($0, in: model) },
+      "relationships": entity.relationships.map { map($0, in: model) },
+      "fetchedProperties": entity.fetchedProperties.map { map($0, in: model) }
     ]
   }
 
-  private func map(_ attribute: CoreData.Attribute) -> [String: Any] {
+  private func map(_ attribute: CoreData.Attribute, in model: CoreData.Model) -> [String: Any] {
     return [
       "name": attribute.name,
       "isIndexed": attribute.isIndexed,
@@ -51,7 +51,7 @@ extension CoreData.Parser {
     ]
   }
 
-  private func map(_ relationship: CoreData.Relationship) -> [String: Any] {
+  private func map(_ relationship: CoreData.Relationship, in model: CoreData.Model) -> [String: Any] {
     return [
       "name": relationship.name,
       "isIndexed": relationship.isIndexed,
@@ -70,22 +70,31 @@ extension CoreData.Parser {
     ]
   }
 
-  private func map(_ fetchedProperty: CoreData.FetchedProperty) -> [String: Any] {
+  private func map(_ fetchedProperty: CoreData.FetchedProperty, in model: CoreData.Model) -> [String: Any] {
     return [
       "name": fetchedProperty.name,
       "isOptional": fetchedProperty.isOptional,
-      "fetchRequest": map(fetchedProperty.fetchRequest),
+      "fetchRequest": map(fetchedProperty.fetchRequest, in: model),
       "userInfo": fetchedProperty.userInfo
     ]
   }
 
-  private func map(_ fetchRequest: CoreData.FetchRequest) -> [String: Any] {
+  private func map(_ fetchRequest: CoreData.FetchRequest, in model: CoreData.Model) -> [String: Any] {
+    guard let entity = model.entities[fetchRequest.entity] else {
+      return [:]
+    }
+
     return [
       "name": fetchRequest.name,
       "entity": fetchRequest.entity,
       "fetchLimit": fetchRequest.fetchLimit,
       "fetchBatchSize": fetchRequest.fetchBatchSize,
       "predicateString": fetchRequest.predicateString,
+      "substitutionVariables": substitutionVariables(
+        in: fetchRequest.predicateString,
+        baseEntity: entity,
+        model: model
+      ),
       "resultType": map(fetchRequest.resultType),
       "includeSubentities": fetchRequest.includeSubentities,
       "includePropertyValues": fetchRequest.includePropertyValues,
@@ -104,5 +113,61 @@ extension CoreData.Parser {
     case .dictionary:
       return "Dictionary"
     }
+  }
+
+  private func substitutionVariables(
+    in predicateString: String,
+    baseEntity: CoreData.Entity,
+    model: CoreData.Model
+  ) -> [String: String] {
+    if predicateString.isEmpty { return [:] }
+    let predicate = NSPredicate(format: predicateString, argumentArray: nil)
+    return substitutionVariables(in: predicate, baseEntity: baseEntity, model: model)
+  }
+
+  private func substitutionVariables(
+    in predicate: NSPredicate,
+    baseEntity: CoreData.Entity,
+    model: CoreData.Model
+  ) -> [String: String] {
+    if let compoundPredicate = predicate as? NSCompoundPredicate {
+      return compoundPredicate.subpredicates.reduce(into: [:]) { variables, subpredicate in
+        guard let subpredicate = subpredicate as? NSPredicate else { return }
+        let subpredicateVariables = substitutionVariables(in: subpredicate, baseEntity: baseEntity, model: model)
+        variables.merge(subpredicateVariables) { existing, _ in existing }
+      }
+    } else if let comparisonPredicate = predicate as? NSComparisonPredicate {
+      let lhs = comparisonPredicate.leftExpression
+      let rhs = comparisonPredicate.rightExpression
+
+      guard rhs.expressionType == .variable else { return [:] }
+
+      let typeName = resolveType(forKeyPath: lhs.keyPath, baseEntity: baseEntity, in: model)
+      return [rhs.variable: typeName]
+    } else {
+      return [:]
+    }
+  }
+
+  private func resolveType(
+    forKeyPath keyPath: String,
+    baseEntity: CoreData.Entity,
+    in model: CoreData.Model
+  ) -> String {
+    let components = keyPath.split(separator: ".")
+
+    var entity = baseEntity
+    for component in components {
+      if let attribute = entity.attributes.first(where: { $0.name == component }) {
+        return attribute.typeName
+      } else if let relationship = entity.relationships.first(where: { $0.name == component }) {
+        guard let destinationEntity = model.entities[relationship.destinationEntity] else {
+          return ""
+        }
+        entity = destinationEntity
+      }
+    }
+
+    return entity.className
   }
 }
