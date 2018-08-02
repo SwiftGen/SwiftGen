@@ -10,9 +10,10 @@ import Foundation
 {% for model in models %}
 {% for name, entity in model.entities %}
 {% set superclass %}{{ model.entities[entity.superentity].className | default:"NSManagedObject" }}{% endset %}
+{% set entityClassName %}{{ entity.className | default:entity.name }}{% endset %}
 {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
-@objc({{ entity.name }})
-open {{ accessModifier }} class {{ entity.name }}: {{ superclass }} {
+@objc({{ entityClassName }})
+open {{ accessModifier }} class {{ entityClassName }}: {{ superclass }} {
 
     {{ override }}open {{ accessModifier }} class func entityName() -> String {
         return "{{ entity.name }}"
@@ -22,8 +23,8 @@ open {{ accessModifier }} class {{ entity.name }}: {{ superclass }} {
         return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
     }
 
-    @nonobjc {{ accessModifier }} class func fetchRequest() -> NSFetchRequest<{{ entity.name }}> {
-        return NSFetchRequest<{{ entity.name }}>(entityName: entityName())
+    @nonobjc {{ accessModifier }} class func fetchRequest() -> NSFetchRequest<{{ entityClassName }}> {
+        return NSFetchRequest<{{ entityClassName }}>(entityName: entityName())
     }
 
     {% for attribute in entity.attributes %}
@@ -48,7 +49,7 @@ open {{ accessModifier }} class {{ entity.name }}: {{ superclass }} {
 {% if relationship.isToMany %}
 {% set destinationEntityClassName %}{{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}{% endset %}
 {% set collectionClassName %}{% if relationship.isOrdered %}NSOrderedSet{% else %}NSSet{% endif %}{% endset %}
-extension {{ entity.name }} {
+extension {{ entityClassName }} {
 
     {% if relationship.isOrdered %}
     @objc(insertObject:in{{ relationship.name | upperFirstLetter }}AtIndex:)
@@ -86,6 +87,35 @@ extension {{ entity.name }} {
 
 {% endif %}
 {% endfor %}
+
+{% if model.fetchRequestsByEntityName[entity.name].count > 0 %}
+extension {{ entityClassName }} {
+
+    {% for fetchRequest in model.fetchRequestsByEntityName[entity.name] %}
+    {% set resultTypeName %}{% if fetchRequest.resultType == "Object" %}{{ entityClassName }}{% elif fetchRequest.resultType == "Object ID" %}NSManagedObjectID{% elif fetchRequest.resultType == "Dictionary" %}[String: Any]{% endif %}{% endset %}
+    class func fetch{{ fetchRequest.name | upperFirstLetter }}(managedObjectContext: NSManagedObjectContext{% for variableName, variableType in fetchRequest.substitutionVariables %}, {{ variableName | lowerFirstWord }}: {{ variableType }}{% endfor %}) throws -> [{{ resultTypeName }}] {
+        guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
+            fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
+        }
+        let model = persistentStoreCoordinator.model
+        let substitutionVariables: [String: Any] = [
+            {% for variableName, variableType in fetchRequest.substitutionVariables %}
+            "{{ variableName }}": {{ variableName | lowerFirstWord }}
+            {% empty %}
+            :
+            {% endfor %}
+        ]
+
+        guard let fetchRequest = model.fetchRequestFromTemplate(withName: "{{ fetchRequest.name }}", substitutionVariables: substitutionVariables) else {
+            fatalError("No fetch request template named '{{ fetchRequest.name }}' found.")
+        }
+
+        return try managedObjectContext.fetch(fetchRequest) as! [{{ resultTypeName }}]
+    }
+    {% endfor %}
+
+}
+{% endif %}
 {% endfor %}
 {% endfor %}
 // swiftlint:enable identifier_name line_length type_body_length
