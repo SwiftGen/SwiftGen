@@ -36,7 +36,7 @@ extension CoreData.FetchedProperty {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required fetched property name.")
     }
 
-    let isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? true
+    let isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? false
 
     guard let fetchRequest = try object.at_xpath(XML.fetchRequestPath).map(CoreData.FetchRequest.init(with:)) else {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required fetch request")
