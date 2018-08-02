@@ -23,6 +23,7 @@ open internal class ChildEntity: MainEntity {
 
 }
 
+
 @objc(MainEntity)
 open internal class MainEntity: NSManagedObject {
 
@@ -57,6 +58,8 @@ open internal class MainEntity: NSManagedObject {
     @NSManaged open internal var int32: Int32
 
     @NSManaged open internal var int64: Int64
+
+    @NSManaged open internal var nonOptional: String?
 
     @NSManaged open internal var string: String?
 
@@ -127,6 +130,20 @@ extension MainEntity {
 
 }
 
+
+extension MainEntity {
+
+    class func fetchDictionaryFetchRequest(managedObjectContext: NSManagedObjectContext) throws -> [MainEntity] {
+
+    }
+    class func fetchObjectFetchRequest(managedObjectContext: NSManagedObjectContext, UUID: UUID) throws -> [MainEntity] {
+
+    }
+    class func fetchObjectIDFetchRequest(managedObjectContext: NSManagedObjectContext, NAME: String) throws -> [MainEntity] {
+
+    }
+
+}
 @objc(SecondaryEntity)
 open internal class SecondaryEntity: NSManagedObject {
 
@@ -141,6 +158,8 @@ open internal class SecondaryEntity: NSManagedObject {
     @nonobjc internal class func fetchRequest() -> NSFetchRequest<SecondaryEntity> {
         return NSFetchRequest<SecondaryEntity>(entityName: entityName())
     }
+
+    @NSManaged open internal var name: String?
 
     @NSManaged open internal var manyToMany: NSSet
 
@@ -166,6 +185,7 @@ extension SecondaryEntity {
 
 }
 
+
 @objc(AbstractEntity)
 open internal class AbstractEntity: NSManagedObject {
 
@@ -183,6 +203,7 @@ open internal class AbstractEntity: NSManagedObject {
 
 }
 
+
 @objc(NewEntity)
 open internal class NewEntity: AbstractEntity {
 
@@ -199,5 +220,6 @@ open internal class NewEntity: AbstractEntity {
     }
 
 }
+
 
 // swiftlint:enable identifier_name line_length type_body_length

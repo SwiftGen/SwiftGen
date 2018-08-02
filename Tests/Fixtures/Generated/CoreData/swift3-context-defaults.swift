@@ -23,6 +23,7 @@ open internal class ChildEntity: MainEntity {
 
 }
 
+
 @objc(MainEntity)
 open internal class MainEntity: NSManagedObject {
 
@@ -57,6 +58,8 @@ open internal class MainEntity: NSManagedObject {
     @NSManaged open internal var int32: Int32
 
     @NSManaged open internal var int64: Int64
+
+    @NSManaged open internal var nonOptional: String?
 
     @NSManaged open internal var string: String?
 
@@ -127,6 +130,56 @@ extension MainEntity {
 
 }
 
+
+extension MainEntity {
+
+    class func fetchDictionaryFetchRequest(managedObjectContext: NSManagedObjectContext) throws -> [[String: Any]] {
+        guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
+            fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
+        }
+        let model = persistentStoreCoordinator.model
+        let substitutionVariables: [String: Any] = [
+            :
+        ]
+
+        guard let fetchRequest = model.fetchRequestFromTemplate(withName: "DictionaryFetchRequest", substitutionVariables: substitutionVariables) else {
+            fatalError("No fetch request template named 'DictionaryFetchRequest' found.")
+        }
+
+        return try managedObjectContext.fetch(fetchRequest) as! [[String: Any]]
+    }
+    class func fetchObjectFetchRequest(managedObjectContext: NSManagedObjectContext, uuid: UUID) throws -> [MainEntity] {
+        guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
+            fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
+        }
+        let model = persistentStoreCoordinator.model
+        let substitutionVariables: [String: Any] = [
+            "UUID": uuid
+        ]
+
+        guard let fetchRequest = model.fetchRequestFromTemplate(withName: "ObjectFetchRequest", substitutionVariables: substitutionVariables) else {
+            fatalError("No fetch request template named 'ObjectFetchRequest' found.")
+        }
+
+        return try managedObjectContext.fetch(fetchRequest) as! [MainEntity]
+    }
+    class func fetchObjectIDFetchRequest(managedObjectContext: NSManagedObjectContext, name: String) throws -> [NSManagedObjectID] {
+        guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
+            fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
+        }
+        let model = persistentStoreCoordinator.model
+        let substitutionVariables: [String: Any] = [
+            "NAME": name
+        ]
+
+        guard let fetchRequest = model.fetchRequestFromTemplate(withName: "ObjectIDFetchRequest", substitutionVariables: substitutionVariables) else {
+            fatalError("No fetch request template named 'ObjectIDFetchRequest' found.")
+        }
+
+        return try managedObjectContext.fetch(fetchRequest) as! [NSManagedObjectID]
+    }
+
+}
 @objc(SecondaryEntity)
 open internal class SecondaryEntity: NSManagedObject {
 
@@ -141,6 +194,8 @@ open internal class SecondaryEntity: NSManagedObject {
     @nonobjc internal class func fetchRequest() -> NSFetchRequest<SecondaryEntity> {
         return NSFetchRequest<SecondaryEntity>(entityName: entityName())
     }
+
+    @NSManaged open internal var name: String?
 
     @NSManaged open internal var manyToMany: NSSet
 
@@ -166,6 +221,7 @@ extension SecondaryEntity {
 
 }
 
+
 @objc(AbstractEntity)
 open internal class AbstractEntity: NSManagedObject {
 
@@ -183,6 +239,7 @@ open internal class AbstractEntity: NSManagedObject {
 
 }
 
+
 @objc(NewEntity)
 open internal class NewEntity: AbstractEntity {
 
@@ -199,5 +256,6 @@ open internal class NewEntity: AbstractEntity {
     }
 
 }
+
 
 // swiftlint:enable identifier_name line_length type_body_length
