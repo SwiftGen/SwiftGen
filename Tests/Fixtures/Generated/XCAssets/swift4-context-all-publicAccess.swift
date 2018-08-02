@@ -10,6 +10,9 @@
   public typealias AssetColorTypeAlias = UIColor
   public typealias Image = UIImage
 #endif
+#if os(iOS) || os(tvOS) || os(OSX)
+public typealias AssetDataTypeAlias = NSDataAsset
+#endif
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -36,6 +39,31 @@ public extension AssetColorTypeAlias {
     #endif
   }
 }
+
+public struct DataAsset {
+  public fileprivate(set) var name: String
+
+  #if os(iOS) || os(tvOS) || os(OSX)
+  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  public var data: AssetDataTypeAlias {
+    return AssetDataTypeAlias(asset: self)
+  }
+  #endif
+}
+
+#if os(iOS) || os(tvOS) || os(OSX)
+public extension AssetDataTypeAlias {
+  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  convenience init!(asset: DataAsset) {
+    let bundle = Bundle(for: BundleToken.self)
+    #if os(iOS) || os(tvOS)
+    self.init(name: asset.name, bundle: bundle)
+    #elseif os(OSX)
+    self.init(name: NSDataAsset.Name(asset.name), bundle: bundle)
+    #endif
+  }
+}
+#endif
 
 @available(*, deprecated, renamed: "ImageAsset")
 public typealias AssetType = ImageAsset
@@ -94,8 +122,30 @@ public enum Asset {
       Vengo.primary,
       Vengo.tint,
     ]
+    public static let allDataAssets: [DataAsset] = [
+    ]
     public static let allImages: [ImageAsset] = [
       orange,
+    ]
+    // swiftlint:enable trailing_comma
+    @available(*, deprecated, renamed: "allImages")
+    public static let allValues: [AssetType] = allImages
+  }
+  public enum Data {
+    public static let data = DataAsset(name: "Data")
+    public enum Json {
+      public static let data = DataAsset(name: "Json/Data")
+    }
+    public static let readme = DataAsset(name: "README")
+    // swiftlint:disable trailing_comma
+    public static let allColors: [ColorAsset] = [
+    ]
+    public static let allDataAssets: [DataAsset] = [
+      data,
+      Json.data,
+      readme,
+    ]
+    public static let allImages: [ImageAsset] = [
     ]
     // swiftlint:enable trailing_comma
     @available(*, deprecated, renamed: "allImages")
@@ -117,6 +167,8 @@ public enum Asset {
     public static let `private` = ImageAsset(name: "private")
     // swiftlint:disable trailing_comma
     public static let allColors: [ColorAsset] = [
+    ]
+    public static let allDataAssets: [DataAsset] = [
     ]
     public static let allImages: [ImageAsset] = [
       Exotic.banana,

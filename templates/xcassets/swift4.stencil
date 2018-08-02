@@ -48,17 +48,19 @@
   }
 }
 
-#if os(iOS) || os(tvOS) || os(OSX)
 {% set dataType %}{{param.dataTypeName|default:"DataAsset"}}{% endset %}
 {{accessModifier}} struct {{dataType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
+  #if os(iOS) || os(tvOS) || os(OSX)
   @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
-  {{accessModifier}} var dataAsset: {{dataAlias}} {
+  {{accessModifier}} var data: {{dataAlias}} {
     return {{dataAlias}}(asset: self)
   }
+  #endif
 }
 
+#if os(iOS) || os(tvOS) || os(OSX)
 {{accessModifier}} extension {{dataAlias}} {
   @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
   convenience init!(asset: {{dataType}}) {
@@ -108,6 +110,7 @@
     #endif
   }
 }
+
 {% macro enumBlock assets %}
   {% call casesBlock assets %}
   {% if not param.noAllValues %}
@@ -116,11 +119,9 @@
   {{accessModifier}} static let allColors: [{{colorType}}] = [
     {% filter indent:2 %}{% call allValuesBlock assets "color" "" %}{% endfilter %}
   ]
-  #if os(iOS) || os(tvOS) || os(OSX)
   {{accessModifier}} static let allDataAssets: [{{dataType}}] = [
     {% filter indent:2 %}{% call allValuesBlock assets "data" "" %}{% endfilter %}
   ]
-  #endif
   {{accessModifier}} static let allImages: [{{imageType}}] = [
     {% filter indent:2 %}{% call allValuesBlock assets "image" "" %}{% endfilter %}
   ]
