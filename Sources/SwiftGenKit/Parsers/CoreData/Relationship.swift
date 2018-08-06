@@ -21,7 +21,7 @@ extension CoreData {
     public let isToMany: Bool
     public let isOrdered: Bool
 
-    public let userInfo: [String: String]
+    public let userInfo: [String: Any]
 
     public let destinationEntity: String
     public let inverseRelationship: InverseRelationship?

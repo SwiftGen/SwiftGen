@@ -14,7 +14,7 @@ extension CoreData {
     public let name: String
     public let className: String
     public let isAbstract: Bool
-    public let userInfo: [String: String]
+    public let userInfo: [String: Any]
 
     let superentity: String?
 
@@ -30,7 +30,7 @@ extension CoreData {
       attributes: [Attribute],
       relationships: [Relationship],
       fetchedProperties: [FetchedProperty],
-      userInfo: [String: String]
+      userInfo: [String: Any]
     ) {
       self.name = name
       self.className = className

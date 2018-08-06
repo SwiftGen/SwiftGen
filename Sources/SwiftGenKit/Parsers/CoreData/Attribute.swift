@@ -21,7 +21,7 @@ extension CoreData {
     public let customClassName: String?
     public let typeName: String
 
-    public let userInfo: [String: String]
+    public let userInfo: [String: Any]
   }
 
   public enum AttributeType: String {

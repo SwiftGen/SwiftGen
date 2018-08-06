@@ -16,7 +16,7 @@ extension CoreData {
 
     public let fetchRequest: FetchRequest
 
-    public let userInfo: [String: String]
+    public let userInfo: [String: Any]
   }
 }
 
