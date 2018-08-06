@@ -10,7 +10,7 @@ import Foundation
 import Kanna
 
 extension CoreData {
-  public final class Entity {
+  public struct Entity {
     public let name: String
     public let className: String
     public let isAbstract: Bool
@@ -21,26 +21,6 @@ extension CoreData {
     public let attributes: [Attribute]
     public let relationships: [Relationship]
     public let fetchedProperties: [FetchedProperty]
-
-    init(
-      name: String,
-      className: String,
-      isAbstract: Bool,
-      superentity: String?,
-      attributes: [Attribute],
-      relationships: [Relationship],
-      fetchedProperties: [FetchedProperty],
-      userInfo: [String: Any]
-    ) {
-      self.name = name
-      self.className = className
-      self.isAbstract = isAbstract
-      self.superentity = superentity
-      self.attributes = attributes
-      self.relationships = relationships
-      self.fetchedProperties = fetchedProperties
-      self.userInfo = userInfo
-    }
   }
 }
 
@@ -59,7 +39,7 @@ private enum XML {
 }
 
 extension CoreData.Entity {
-  convenience init(with object: Kanna.XMLElement) throws {
+  init(with object: Kanna.XMLElement) throws {
     guard let name = object[XML.Attributes.name] else {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required entity name.")
     }
@@ -77,11 +57,11 @@ extension CoreData.Entity {
       name: name,
       className: className,
       isAbstract: isAbstract,
+      userInfo: userInfo,
       superentity: superentity,
       attributes: attributes,
       relationships: relationships,
-      fetchedProperties: fetchedProperties,
-      userInfo: userInfo
+      fetchedProperties: fetchedProperties
     )
   }
 }
