@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G2208" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AbstractEntity" representedClassName="AbstractEntity" isAbstract="YES" syncable="YES" codeGenerationType="class"/>
     <entity name="ChildEntity" representedClassName="ChildEntity" parentEntity="MainEntity" syncable="YES" codeGenerationType="class">
         <userInfo>
@@ -40,7 +40,14 @@
             <entry key="key" value="value"/>
         </userInfo>
     </entity>
-    <entity name="NewEntity" representedClassName="NewEntity" parentEntity="AbstractEntity" syncable="YES" codeGenerationType="class"/>
+    <entity name="NewEntity" representedClassName="NewEntity" parentEntity="AbstractEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="identifier"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
     <entity name="SecondaryEntity" representedClassName="SecondaryEntity" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="manyToMany" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="manyToMany" inverseEntity="MainEntity" syncable="YES"/>
@@ -57,7 +64,7 @@
         <element name="AbstractEntity" positionX="-9" positionY="162" width="128" height="45"/>
         <element name="ChildEntity" positionX="-36" positionY="126" width="128" height="45"/>
         <element name="MainEntity" positionX="-63" positionY="-18" width="128" height="359"/>
-        <element name="NewEntity" positionX="-27" positionY="144" width="128" height="45"/>
+        <element name="NewEntity" positionX="-27" positionY="144" width="128" height="60"/>
         <element name="SecondaryEntity" positionX="-54" positionY="108" width="128" height="105"/>
     </elements>
 </model>

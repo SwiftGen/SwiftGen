@@ -21,6 +21,7 @@ extension CoreData {
     public let attributes: [Attribute]
     public let relationships: [Relationship]
     public let fetchedProperties: [FetchedProperty]
+    public let uniquenessConstraints: [[String]]
   }
 }
 
@@ -36,6 +37,7 @@ private enum XML {
   static let relationshipsPath = "relationship"
   static let fetchedPropertiesPath = "fetchedProperty"
   static let userInfoPath = "userInfo"
+  static let uniquenessConstraintsPath = "uniquenessConstraints"
 }
 
 extension CoreData.Entity {
@@ -52,6 +54,9 @@ extension CoreData.Entity {
     let fetchedProperties = try object.xpath(XML.fetchedPropertiesPath).map(CoreData.FetchedProperty.init(with:))
 
     let userInfo = try object.at_xpath(XML.userInfoPath).map { try CoreData.UserInfo.parse(from: $0) } ?? [:]
+    let uniquenessConstraints = try object.at_xpath(XML.uniquenessConstraintsPath).map {
+      try CoreData.UniquenessConstraints.parse(from: $0)
+    } ?? []
 
     self.init(
       name: name,
@@ -61,7 +66,8 @@ extension CoreData.Entity {
       superentity: superentity,
       attributes: attributes,
       relationships: relationships,
-      fetchedProperties: fetchedProperties
+      fetchedProperties: fetchedProperties,
+      uniquenessConstraints: uniquenessConstraints
     )
   }
 }
