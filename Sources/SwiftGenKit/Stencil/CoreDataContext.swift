@@ -34,6 +34,11 @@ extension CoreData.Parser {
       "attributes": entity.attributes.map { map($0, in: model) },
       "relationships": entity.relationships.map { map($0, in: model) },
       "fetchedProperties": entity.fetchedProperties.map { map($0, in: model) },
+      "properties": entity.attributes.map { map($0, in: model) }
+                    + entity.relationships.map { map($0, in: model) }
+                    + entity.fetchedProperties.map { map($0, in: model) },
+      "storedProperties": entity.attributes.map { map($0, in: model) }
+                          + entity.relationships.map { map($0, in: model) },
       "uniquenessConstraints": entity.uniquenessConstraints
     ]
   }
@@ -41,6 +46,7 @@ extension CoreData.Parser {
   private func map(_ attribute: CoreData.Attribute, in model: CoreData.Model) -> [String: Any] {
     return [
       "name": attribute.name,
+      "propertyType": "attribute",
       "isIndexed": attribute.isIndexed,
       "isOptional": attribute.isOptional,
       "isTransient": attribute.isTransient,
@@ -55,6 +61,7 @@ extension CoreData.Parser {
   private func map(_ relationship: CoreData.Relationship, in model: CoreData.Model) -> [String: Any] {
     return [
       "name": relationship.name,
+      "propertyType": "relationship",
       "isIndexed": relationship.isIndexed,
       "isOptional": relationship.isOptional,
       "isTransient": relationship.isTransient,
@@ -74,6 +81,7 @@ extension CoreData.Parser {
   private func map(_ fetchedProperty: CoreData.FetchedProperty, in model: CoreData.Model) -> [String: Any] {
     return [
       "name": fetchedProperty.name,
+      "propertyType": "fetchedProperty",
       "isOptional": fetchedProperty.isOptional,
       "fetchRequest": map(fetchedProperty.fetchRequest, in: model),
       "userInfo": fetchedProperty.userInfo

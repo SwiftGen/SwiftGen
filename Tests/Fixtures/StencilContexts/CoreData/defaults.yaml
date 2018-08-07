@@ -15,8 +15,11 @@ models:
       fetchedProperties: []
       isAbstract: true
       name: "AbstractEntity"
+      properties: []
       relationships: []
+      storedProperties: []
       superentity: ""
+      uniquenessConstraints: []
       userInfo: {}
     ChildEntity:
       attributes: []
@@ -24,8 +27,11 @@ models:
       fetchedProperties: []
       isAbstract: false
       name: "ChildEntity"
+      properties: []
       relationships: []
+      storedProperties: []
       superentity: "MainEntity"
+      uniquenessConstraints: []
       userInfo:
         key: "value"
     MainEntity:
@@ -35,6 +41,7 @@ models:
         isOptional: true
         isTransient: false
         name: "binaryData"
+        propertyType: "attribute"
         type: "Binary"
         typeName: "Data"
         userInfo:
@@ -45,6 +52,7 @@ models:
         isOptional: true
         isTransient: false
         name: "boolean"
+        propertyType: "attribute"
         type: "Boolean"
         typeName: "Bool"
         userInfo: {}
@@ -54,6 +62,7 @@ models:
         isOptional: true
         isTransient: false
         name: "color"
+        propertyType: "attribute"
         type: "Transformable"
         typeName: "UIColor"
         userInfo: {}
@@ -63,6 +72,7 @@ models:
         isOptional: true
         isTransient: false
         name: "date"
+        propertyType: "attribute"
         type: "Date"
         typeName: "Date"
         userInfo: {}
@@ -72,6 +82,7 @@ models:
         isOptional: true
         isTransient: false
         name: "decimal"
+        propertyType: "attribute"
         type: "Decimal"
         typeName: "NSDecimalNumber"
         userInfo: {}
@@ -81,6 +92,7 @@ models:
         isOptional: true
         isTransient: false
         name: "double"
+        propertyType: "attribute"
         type: "Double"
         typeName: "Double"
         userInfo: {}
@@ -90,6 +102,7 @@ models:
         isOptional: true
         isTransient: false
         name: "float"
+        propertyType: "attribute"
         type: "Float"
         typeName: "Float"
         userInfo: {}
@@ -99,6 +112,7 @@ models:
         isOptional: true
         isTransient: false
         name: "int16"
+        propertyType: "attribute"
         type: "Integer 16"
         typeName: "Int16"
         userInfo: {}
@@ -108,6 +122,7 @@ models:
         isOptional: true
         isTransient: false
         name: "int32"
+        propertyType: "attribute"
         type: "Integer 32"
         typeName: "Int32"
         userInfo: {}
@@ -117,15 +132,17 @@ models:
         isOptional: true
         isTransient: false
         name: "int64"
+        propertyType: "attribute"
         type: "Integer 64"
         typeName: "Int64"
         userInfo: {}
         usesScalarValueType: true
       - customClassName: ""
         isIndexed: false
-        isOptional: true
+        isOptional: false
         isTransient: false
         name: "nonOptional"
+        propertyType: "attribute"
         type: "String"
         typeName: "String"
         userInfo: {}
@@ -135,6 +152,7 @@ models:
         isOptional: true
         isTransient: false
         name: "string"
+        propertyType: "attribute"
         type: "String"
         typeName: "String"
         userInfo: {}
@@ -144,6 +162,7 @@ models:
         isOptional: true
         isTransient: false
         name: "transformable"
+        propertyType: "attribute"
         type: "Transformable"
         typeName: "AnyObject"
         userInfo: {}
@@ -153,6 +172,7 @@ models:
         isOptional: true
         isTransient: true
         name: "transient"
+        propertyType: "attribute"
         type: "String"
         typeName: "String"
         userInfo: {}
@@ -162,6 +182,7 @@ models:
         isOptional: true
         isTransient: false
         name: "uri"
+        propertyType: "attribute"
         type: "URI"
         typeName: "URL"
         userInfo: {}
@@ -171,6 +192,7 @@ models:
         isOptional: true
         isTransient: false
         name: "uuid"
+        propertyType: "attribute"
         type: "UUID"
         typeName: "UUID"
         userInfo: {}
@@ -192,11 +214,173 @@ models:
           substitutionVariables: {}
         isOptional: true
         name: "fetchedProperty"
+        propertyType: "fetchedProperty"
         userInfo:
           key: "value"
       isAbstract: false
       name: "MainEntity"
-      relationships:
+      properties:
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "binaryData"
+        propertyType: "attribute"
+        type: "Binary"
+        typeName: "Data"
+        userInfo:
+          key: "value"
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "boolean"
+        propertyType: "attribute"
+        type: "Boolean"
+        typeName: "Bool"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: "UIColor"
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "color"
+        propertyType: "attribute"
+        type: "Transformable"
+        typeName: "UIColor"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "date"
+        propertyType: "attribute"
+        type: "Date"
+        typeName: "Date"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "decimal"
+        propertyType: "attribute"
+        type: "Decimal"
+        typeName: "NSDecimalNumber"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "double"
+        propertyType: "attribute"
+        type: "Double"
+        typeName: "Double"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "float"
+        propertyType: "attribute"
+        type: "Float"
+        typeName: "Float"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "int16"
+        propertyType: "attribute"
+        type: "Integer 16"
+        typeName: "Int16"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "int32"
+        propertyType: "attribute"
+        type: "Integer 32"
+        typeName: "Int32"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "int64"
+        propertyType: "attribute"
+        type: "Integer 64"
+        typeName: "Int64"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: false
+        isTransient: false
+        name: "nonOptional"
+        propertyType: "attribute"
+        type: "String"
+        typeName: "String"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "string"
+        propertyType: "attribute"
+        type: "String"
+        typeName: "String"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "transformable"
+        propertyType: "attribute"
+        type: "Transformable"
+        typeName: "AnyObject"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: true
+        name: "transient"
+        propertyType: "attribute"
+        type: "String"
+        typeName: "String"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "uri"
+        propertyType: "attribute"
+        type: "URI"
+        typeName: "URL"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "uuid"
+        propertyType: "attribute"
+        type: "UUID"
+        typeName: "UUID"
+        userInfo: {}
+        usesScalarValueType: false
       - destinationEntity: "SecondaryEntity"
         inverseRelationship:
           entityName: "SecondaryEntity"
@@ -207,6 +391,7 @@ models:
         isToMany: true
         isTransient: false
         name: "manyToMany"
+        propertyType: "relationship"
         userInfo: {}
       - destinationEntity: "SecondaryEntity"
         inverseRelationship:
@@ -218,6 +403,7 @@ models:
         isToMany: true
         isTransient: false
         name: "oneToMany"
+        propertyType: "relationship"
         userInfo: {}
       - destinationEntity: "SecondaryEntity"
         inverseRelationship:
@@ -229,26 +415,316 @@ models:
         isToMany: false
         isTransient: false
         name: "oneToOne"
+        propertyType: "relationship"
+        userInfo: {}
+      - fetchRequest:
+          entity: "NewEntity"
+          fetchBatchSize: 0
+          fetchLimit: 0
+          includePropertyValues: true
+          includeSubentities: true
+          includesPendingChanges: true
+          name: "fetchedPropertyFetchRequest"
+          predicateString: "true == true"
+          resultType: "Object"
+          returnDistinctResults: false
+          returnsObjectsAsFaults: true
+          substitutionVariables: {}
+        isOptional: true
+        name: "fetchedProperty"
+        propertyType: "fetchedProperty"
+        userInfo:
+          key: "value"
+      relationships:
+      - destinationEntity: "SecondaryEntity"
+        inverseRelationship:
+          entityName: "SecondaryEntity"
+          name: "manyToMany"
+        isIndexed: false
+        isOptional: true
+        isOrdered: false
+        isToMany: true
+        isTransient: false
+        name: "manyToMany"
+        propertyType: "relationship"
+        userInfo: {}
+      - destinationEntity: "SecondaryEntity"
+        inverseRelationship:
+          entityName: "SecondaryEntity"
+          name: "oneToMany"
+        isIndexed: false
+        isOptional: true
+        isOrdered: true
+        isToMany: true
+        isTransient: false
+        name: "oneToMany"
+        propertyType: "relationship"
+        userInfo: {}
+      - destinationEntity: "SecondaryEntity"
+        inverseRelationship:
+          entityName: "SecondaryEntity"
+          name: "oneToOne"
+        isIndexed: false
+        isOptional: true
+        isOrdered: false
+        isToMany: false
+        isTransient: false
+        name: "oneToOne"
+        propertyType: "relationship"
+        userInfo: {}
+      storedProperties:
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "binaryData"
+        propertyType: "attribute"
+        type: "Binary"
+        typeName: "Data"
+        userInfo:
+          key: "value"
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "boolean"
+        propertyType: "attribute"
+        type: "Boolean"
+        typeName: "Bool"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: "UIColor"
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "color"
+        propertyType: "attribute"
+        type: "Transformable"
+        typeName: "UIColor"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "date"
+        propertyType: "attribute"
+        type: "Date"
+        typeName: "Date"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "decimal"
+        propertyType: "attribute"
+        type: "Decimal"
+        typeName: "NSDecimalNumber"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "double"
+        propertyType: "attribute"
+        type: "Double"
+        typeName: "Double"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "float"
+        propertyType: "attribute"
+        type: "Float"
+        typeName: "Float"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "int16"
+        propertyType: "attribute"
+        type: "Integer 16"
+        typeName: "Int16"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "int32"
+        propertyType: "attribute"
+        type: "Integer 32"
+        typeName: "Int32"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "int64"
+        propertyType: "attribute"
+        type: "Integer 64"
+        typeName: "Int64"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: false
+        isTransient: false
+        name: "nonOptional"
+        propertyType: "attribute"
+        type: "String"
+        typeName: "String"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "string"
+        propertyType: "attribute"
+        type: "String"
+        typeName: "String"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "transformable"
+        propertyType: "attribute"
+        type: "Transformable"
+        typeName: "AnyObject"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: true
+        name: "transient"
+        propertyType: "attribute"
+        type: "String"
+        typeName: "String"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "uri"
+        propertyType: "attribute"
+        type: "URI"
+        typeName: "URL"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "uuid"
+        propertyType: "attribute"
+        type: "UUID"
+        typeName: "UUID"
+        userInfo: {}
+        usesScalarValueType: false
+      - destinationEntity: "SecondaryEntity"
+        inverseRelationship:
+          entityName: "SecondaryEntity"
+          name: "manyToMany"
+        isIndexed: false
+        isOptional: true
+        isOrdered: false
+        isToMany: true
+        isTransient: false
+        name: "manyToMany"
+        propertyType: "relationship"
+        userInfo: {}
+      - destinationEntity: "SecondaryEntity"
+        inverseRelationship:
+          entityName: "SecondaryEntity"
+          name: "oneToMany"
+        isIndexed: false
+        isOptional: true
+        isOrdered: true
+        isToMany: true
+        isTransient: false
+        name: "oneToMany"
+        propertyType: "relationship"
+        userInfo: {}
+      - destinationEntity: "SecondaryEntity"
+        inverseRelationship:
+          entityName: "SecondaryEntity"
+          name: "oneToOne"
+        isIndexed: false
+        isOptional: true
+        isOrdered: false
+        isToMany: false
+        isTransient: false
+        name: "oneToOne"
+        propertyType: "relationship"
         userInfo: {}
       superentity: ""
+      uniquenessConstraints: []
       userInfo:
         key: "value"
     NewEntity:
-      attributes: []
-      className: "NewEntity"
-      fetchedProperties: []
-      isAbstract: false
-      name: "NewEntity"
-      relationships: []
-      superentity: "AbstractEntity"
-      userInfo: {}
-    SecondaryEntity:
       attributes:
       - customClassName: ""
         isIndexed: false
         isOptional: true
         isTransient: false
+        name: "identifier"
+        propertyType: "attribute"
+        type: "UUID"
+        typeName: "UUID"
+        userInfo: {}
+        usesScalarValueType: false
+      className: "NewEntity"
+      fetchedProperties: []
+      isAbstract: false
+      name: "NewEntity"
+      properties:
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "identifier"
+        propertyType: "attribute"
+        type: "UUID"
+        typeName: "UUID"
+        userInfo: {}
+        usesScalarValueType: false
+      relationships: []
+      storedProperties:
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "identifier"
+        propertyType: "attribute"
+        type: "UUID"
+        typeName: "UUID"
+        userInfo: {}
+        usesScalarValueType: false
+      superentity: "AbstractEntity"
+      uniquenessConstraints:
+      - - "identifier"
+      userInfo: {}
+    SecondaryEntity:
+      attributes:
+      - customClassName: ""
+        isIndexed: false
+        isOptional: false
+        isTransient: false
         name: "name"
+        propertyType: "attribute"
         type: "String"
         typeName: "String"
         userInfo: {}
@@ -257,7 +733,17 @@ models:
       fetchedProperties: []
       isAbstract: false
       name: "SecondaryEntity"
-      relationships:
+      properties:
+      - customClassName: ""
+        isIndexed: false
+        isOptional: false
+        isTransient: false
+        name: "name"
+        propertyType: "attribute"
+        type: "String"
+        typeName: "String"
+        userInfo: {}
+        usesScalarValueType: false
       - destinationEntity: "MainEntity"
         inverseRelationship:
           entityName: "MainEntity"
@@ -268,6 +754,7 @@ models:
         isToMany: true
         isTransient: false
         name: "manyToMany"
+        propertyType: "relationship"
         userInfo: {}
       - destinationEntity: "MainEntity"
         inverseRelationship:
@@ -279,6 +766,7 @@ models:
         isToMany: false
         isTransient: false
         name: "oneToMany"
+        propertyType: "relationship"
         userInfo: {}
       - destinationEntity: "MainEntity"
         inverseRelationship:
@@ -290,8 +778,94 @@ models:
         isToMany: false
         isTransient: false
         name: "oneToOne"
+        propertyType: "relationship"
+        userInfo: {}
+      relationships:
+      - destinationEntity: "MainEntity"
+        inverseRelationship:
+          entityName: "MainEntity"
+          name: "manyToMany"
+        isIndexed: false
+        isOptional: true
+        isOrdered: false
+        isToMany: true
+        isTransient: false
+        name: "manyToMany"
+        propertyType: "relationship"
+        userInfo: {}
+      - destinationEntity: "MainEntity"
+        inverseRelationship:
+          entityName: "MainEntity"
+          name: "oneToMany"
+        isIndexed: false
+        isOptional: true
+        isOrdered: false
+        isToMany: false
+        isTransient: false
+        name: "oneToMany"
+        propertyType: "relationship"
+        userInfo: {}
+      - destinationEntity: "MainEntity"
+        inverseRelationship:
+          entityName: "MainEntity"
+          name: "oneToOne"
+        isIndexed: false
+        isOptional: true
+        isOrdered: false
+        isToMany: false
+        isTransient: false
+        name: "oneToOne"
+        propertyType: "relationship"
+        userInfo: {}
+      storedProperties:
+      - customClassName: ""
+        isIndexed: false
+        isOptional: false
+        isTransient: false
+        name: "name"
+        propertyType: "attribute"
+        type: "String"
+        typeName: "String"
+        userInfo: {}
+        usesScalarValueType: false
+      - destinationEntity: "MainEntity"
+        inverseRelationship:
+          entityName: "MainEntity"
+          name: "manyToMany"
+        isIndexed: false
+        isOptional: true
+        isOrdered: false
+        isToMany: true
+        isTransient: false
+        name: "manyToMany"
+        propertyType: "relationship"
+        userInfo: {}
+      - destinationEntity: "MainEntity"
+        inverseRelationship:
+          entityName: "MainEntity"
+          name: "oneToMany"
+        isIndexed: false
+        isOptional: true
+        isOrdered: false
+        isToMany: false
+        isTransient: false
+        name: "oneToMany"
+        propertyType: "relationship"
+        userInfo: {}
+      - destinationEntity: "MainEntity"
+        inverseRelationship:
+          entityName: "MainEntity"
+          name: "oneToOne"
+        isIndexed: false
+        isOptional: true
+        isOrdered: false
+        isToMany: false
+        isTransient: false
+        name: "oneToOne"
+        propertyType: "relationship"
         userInfo: {}
       superentity: ""
+      uniquenessConstraints: []
       userInfo: {}
   fetchRequests:
   - entity: "MainEntity"
