@@ -21,6 +21,7 @@ public struct FontConvertible {
   }
 
   public func register() {
+    // swiftlint:disable:next conditional_returns_on_newline
     guard let url = url else { return }
     CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
   }
