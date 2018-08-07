@@ -21,7 +21,7 @@
   [Darron Schall](https://github.com/darronschall)
   [#463](https://github.com/SwiftGen/SwiftGen/issues/463)
   [#464](https://github.com/SwiftGen/SwiftGen/pull/464)
-* Fonts: disable a warning in generated font files for projects with `conditional_returns_on_newlines` SwiftLint rule enabled.
+* Fonts: disable a warning in generated font files for projects with `conditional_returns_on_newlines` SwiftLint rule enabled.  
   [Ryan Davies](https://github.com/iotize)
   [#436](https://github.com/SwiftGen/SwiftGen/issues/436)
   [#465](https://github.com/SwiftGen/SwiftGen/pull/465)
