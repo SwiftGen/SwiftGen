@@ -23,9 +23,8 @@
   }
 
   {{accessModifier}} func register() {
-    // swiftlint:disable conditional_returns_on_newline
+    // swiftlint:disable:next conditional_returns_on_newline
     guard let url = url else { return }
-    // swiftlint:enable conditional_returns_on_newline
     CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
   }
 
