@@ -26,4 +26,8 @@ if [ -z "$selected_path" ]; then
 	exit 1
 fi
 
-"$SWIFTLINT" lint --strict --config "$CONFIG" --path "${PROJECT_DIR}/${selected_path}"
+if [ "$key" = "templates_generated" ]; then
+	find "${PROJECT_DIR}/${selected_path}" -name "*.swift" -exec sh -c "grep -v '// swiftlint:disable all' {} | swiftlint lint --use-stdin --quiet --strict --config \"$CONFIG\"" \;
+else
+	"$SWIFTLINT" lint --strict --config "$CONFIG" --path "${PROJECT_DIR}/${selected_path}"
+fi
