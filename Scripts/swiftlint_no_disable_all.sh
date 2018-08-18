@@ -1,2 +1,2 @@
 #!/bin/sh
-grep -v '// swiftlint:disable all' $1 | swiftlint --use-stdin --strict | sed s@"<nopath>"@"$1"@
+cat $1 | sed s@"swiftlint:disable all"@" --"@ | swiftlint --use-stdin --strict | sed s@"<nopath>"@"$1"@
