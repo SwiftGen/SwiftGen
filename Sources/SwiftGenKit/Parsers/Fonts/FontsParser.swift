@@ -23,7 +23,7 @@ public enum Fonts {
       let parentDir = path.absolute().parent()
 
       for file in dirChildren {
-        var value: AnyObject? = nil
+        var value: AnyObject?
         let url = file.url as NSURL
         try? url.getResourceValue(&value, forKey: URLResourceKey.typeIdentifierKey)
         guard let uti = value as? String else {
