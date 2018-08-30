@@ -33,7 +33,7 @@ import Foundation
     {% endfor %}
     {% for relationship in entity.relationships %}
     {% if relationship.isToMany %}
-    @NSManaged {{ accessModifier }} var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}NSSet{% endif %}
+    @NSManaged {{ accessModifier }} var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}Set<{{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}>{% endif %}
 
     {% else %}
     @NSManaged {{ accessModifier }} var {{ relationship.name }}: {{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}{% if relationship.isOptional %}?{% endif %}
@@ -48,7 +48,7 @@ import Foundation
 {% for relationship in entity.relationships %}
 {% if relationship.isToMany %}
 {% set destinationEntityClassName %}{{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}{% endset %}
-{% set collectionClassName %}{% if relationship.isOrdered %}NSOrderedSet{% else %}NSSet{% endif %}{% endset %}
+{% set collectionClassName %}{% if relationship.isOrdered %}NSOrderedSet{% else %}Set<{{ destinationEntityClassName }}>{% endif %}{% endset %}
 extension {{ entityClassName }} {
 
     {% if relationship.isOrdered %}
