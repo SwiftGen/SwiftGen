@@ -49,39 +49,40 @@ import Foundation
 {% if relationship.isToMany %}
 {% set destinationEntityClassName %}{{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}{% endset %}
 {% set collectionClassName %}{% if relationship.isOrdered %}NSOrderedSet{% else %}Set<{{ destinationEntityClassName }}>{% endif %}{% endset %}
+{% set relationshipName %}{{ relationship.name | upperFirstLetter }}{% endset %}
 extension {{ entityClassName }} {
 
     {% if relationship.isOrdered %}
-    @objc(insertObject:in{{ relationship.name | upperFirstLetter }}AtIndex:)
-    @NSManaged public func insertInto{{ relationship.name | upperFirstLetter }}(_ value: {{ destinationEntityClassName }}, at idx: Int)
+    @objc(insertObject:in{{ relationshipName }}AtIndex:)
+    @NSManaged public func insertInto{{ relationshipName }}(_ value: {{ destinationEntityClassName }}, at idx: Int)
 
-    @objc(removeObjectFrom{{ relationship.name | upperFirstLetter }}AtIndex:)
-    @NSManaged public func removeFrom{{ relationship.name | upperFirstLetter }}(at idx: Int)
+    @objc(removeObjectFrom{{ relationshipName }}AtIndex:)
+    @NSManaged public func removeFrom{{ relationshipName }}(at idx: Int)
 
-    @objc(insert{{ relationship.name | upperFirstLetter }}:atIndexes:)
-    @NSManaged public func insertInto{{ relationship.name | upperFirstLetter }}(_ values: [{{ destinationEntityClassName }}], at indexes: NSIndexSet)
+    @objc(insert{{ relationshipName }}:atIndexes:)
+    @NSManaged public func insertInto{{ relationshipName }}(_ values: [{{ destinationEntityClassName }}], at indexes: NSIndexSet)
 
-    @objc(remove{{ relationship.name | upperFirstLetter }}AtIndexes:)
-    @NSManaged public func removeFrom{{ relationship.name | upperFirstLetter }}(at indexes: NSIndexSet)
+    @objc(remove{{ relationshipName }}AtIndexes:)
+    @NSManaged public func removeFrom{{ relationshipName }}(at indexes: NSIndexSet)
 
-    @objc(replaceObjectIn{{ relationship.name | upperFirstLetter }}AtIndex:withObject:)
-    @NSManaged public func replace{{ relationship.name | upperFirstLetter }}(at idx: Int, with value: {{ destinationEntityClassName }})
+    @objc(replaceObjectIn{{ relationshipName }}AtIndex:withObject:)
+    @NSManaged public func replace{{ relationshipName }}(at idx: Int, with value: {{ destinationEntityClassName }})
 
-    @objc(replace{{ relationship.name | upperFirstLetter }}AtIndexes:withOneToMany:)
-    @NSManaged public func replace{{ relationship.name | upperFirstLetter }}(at indexes: NSIndexSet, with values: [{{ destinationEntityClassName }}])
+    @objc(replace{{ relationshipName }}AtIndexes:withOneToMany:)
+    @NSManaged public func replace{{ relationshipName }}(at indexes: NSIndexSet, with values: [{{ destinationEntityClassName }}])
 
     {% endif %}
-    @objc(add{{ relationship.name | upperFirstLetter }}Object:)
-    @NSManaged public func addTo{{ relationship.name | upperFirstLetter }}(_ value: {{ destinationEntityClassName }})
+    @objc(add{{ relationshipName }}Object:)
+    @NSManaged public func addTo{{ relationshipName }}(_ value: {{ destinationEntityClassName }})
 
-    @objc(remove{{ relationship.name | upperFirstLetter }}Object:)
-    @NSManaged public func removeFrom{{ relationship.name | upperFirstLetter }}(_ value: {{ destinationEntityClassName }})
+    @objc(remove{{ relationshipName }}Object:)
+    @NSManaged public func removeFrom{{ relationshipName }}(_ value: {{ destinationEntityClassName }})
 
-    @objc(add{{ relationship.name | upperFirstLetter }}:)
-    @NSManaged public func addTo{{ relationship.name | upperFirstLetter }}(_ values: {{ collectionClassName }})
+    @objc(add{{ relationshipName }}:)
+    @NSManaged public func addTo{{ relationshipName }}(_ values: {{ collectionClassName }})
 
-    @objc(remove{{ relationship.name | upperFirstLetter }}:)
-    @NSManaged public func removeFrom{{ relationship.name | upperFirstLetter }}(_ values: {{ collectionClassName }})
+    @objc(remove{{ relationshipName }}:)
+    @NSManaged public func removeFrom{{ relationshipName }}(_ values: {{ collectionClassName }})
 
 }
 
