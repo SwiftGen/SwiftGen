@@ -33,7 +33,7 @@ import libxmlKanna
 
 extension String.Encoding {
     var IANACharSetName: String? {
-        #if os(Linux)
+        #if os(Linux) && swift(>=4)
         switch self {
         case .ascii:
             return "us-ascii"
@@ -82,6 +82,55 @@ extension String.Encoding {
         default:
             return nil
         }
+        #elseif os(Linux) && swift(>=3)
+        switch self {
+        case String.Encoding.ascii:
+            return "us-ascii"
+        case String.Encoding.iso2022JP:
+            return "iso-2022-jp"
+        case String.Encoding.isoLatin1:
+            return "iso-8859-1"
+        case String.Encoding.isoLatin2:
+            return "iso-8859-2"
+        case String.Encoding.japaneseEUC:
+            return "euc-jp"
+        case String.Encoding.macOSRoman:
+            return "macintosh"
+        case String.Encoding.nextstep:
+            return "x-nextstep"
+        case String.Encoding.nonLossyASCII:
+            return nil
+        case String.Encoding.shiftJIS:
+            return "cp932"
+        case String.Encoding.symbol:
+            return "x-mac-symbol"
+        case String.Encoding.unicode:
+            return "utf-16"
+        case String.Encoding.utf16:
+            return "utf-16"
+        case String.Encoding.utf16BigEndian:
+            return "utf-16be"
+        case String.Encoding.utf32:
+            return "utf-32"
+        case String.Encoding.utf32BigEndian:
+            return "utf-32be"
+        case String.Encoding.utf32LittleEndian:
+            return "utf-32le"
+        case String.Encoding.utf8:
+            return "utf-8"
+        case String.Encoding.windowsCP1250:
+            return "windows-1250"
+        case String.Encoding.windowsCP1251:
+            return "windows-1251"
+        case String.Encoding.windowsCP1252:
+            return "windows-1252"
+        case String.Encoding.windowsCP1253:
+            return "windows-1253"
+        case String.Encoding.windowsCP1254:
+            return "windows-1254"
+        default:
+            return nil
+        }
         #else
         let cfenc = CFStringConvertNSStringEncodingToEncoding(self.rawValue)
         guard let cfencstr = CFStringConvertEncodingToIANACharSetName(cfenc) else {
@@ -108,11 +157,12 @@ internal final class libxmlHTMLDocument: HTMLDocument {
 
     var toHTML: String? {
         let buf = xmlBufferCreate()
+        let outputBuf = xmlOutputBufferCreateBuffer(buf, nil)
         defer {
+            xmlOutputBufferClose(outputBuf)
             xmlBufferFree(buf)
         }
 
-        let outputBuf = xmlOutputBufferCreateBuffer(buf, nil)
         htmlDocContentDumpOutput(outputBuf, docPtr, nil)
         let html = String(cString: UnsafePointer(xmlOutputBufferGetContent(outputBuf)))
         return html
@@ -239,11 +289,12 @@ internal final class libxmlXMLDocument: XMLDocument {
     
     var toHTML: String? {
         let buf = xmlBufferCreate()
+        let outputBuf = xmlOutputBufferCreateBuffer(buf, nil)
         defer {
+            xmlOutputBufferClose(outputBuf)
             xmlBufferFree(buf)
         }
 
-        let outputBuf = xmlOutputBufferCreateBuffer(buf, nil)
         htmlDocContentDumpOutput(outputBuf, docPtr, nil)
         let html = String(cString: UnsafePointer(xmlOutputBufferGetContent(outputBuf)))
         return html

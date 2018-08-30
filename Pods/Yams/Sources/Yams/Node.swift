@@ -186,6 +186,7 @@ extension Node {
 // MARK: Hashable
 
 extension Node: Hashable {
+#if !swift(>=4.1.50)
     /// This `Node`'s Hashable `hashValue`.
     public var hashValue: Int {
         switch self {
@@ -216,6 +217,7 @@ extension Node: Hashable {
             return false
         }
     }
+#endif
 }
 
 // MARK: Comparable
