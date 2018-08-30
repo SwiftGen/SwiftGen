@@ -3,7 +3,7 @@ public class Context {
   var dictionaries: [[String: Any?]]
 
   public let environment: Environment
-
+  
   init(dictionary: [String: Any]? = nil, environment: Environment? = nil) {
     if let dictionary = dictionary {
       dictionaries = [dictionary]

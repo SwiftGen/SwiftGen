@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import PathKit
 import Stencil
 
 // MARK: - Strings Filters
@@ -87,11 +88,11 @@ extension Filters.Strings {
   /// e.g. "PeoplePicker" gives "peoplePicker" but "URLChooser" gives "urlChooser"
   static func lowerFirstWord(_ value: Any?) throws -> Any? {
     let string = try Filters.parseString(from: value)
-    let cs = CharacterSet.uppercaseLetters
+    let characterSet = CharacterSet.uppercaseLetters
     let scalars = string.unicodeScalars
     let start = scalars.startIndex
     var idx = start
-    while let scalar = UnicodeScalar(scalars[idx].value), cs.contains(scalar) && idx <= scalars.endIndex {
+    while idx < scalars.endIndex, let scalar = UnicodeScalar(scalars[idx].value), characterSet.contains(scalar) {
       idx = scalars.index(after: idx)
     }
     if idx > scalars.index(after: start) && idx < scalars.endIndex,
@@ -294,7 +295,7 @@ extension Filters.Strings {
   /// - Throws: FilterError.invalidInputType if the value parameter isn't a string
   static func basename(_ value: Any?) throws -> Any? {
     let string = try Filters.parseString(from: value)
-    return (string as NSString).lastPathComponent
+    return Path(string).lastComponent
   }
 
   /// Converts a file path to just the path without the filename.
@@ -304,7 +305,18 @@ extension Filters.Strings {
   /// - Throws: FilterError.invalidInputType if the value parameter isn't a string
   static func dirname(_ value: Any?) throws -> Any? {
     let string = try Filters.parseString(from: value)
-    return (string as NSString).deletingLastPathComponent
+
+    #if os(Linux)
+    // `NSString.standardizingPath` crashes on Linux. Bug reference:
+    // https://github.com/apple/swift-corelibs-foundation/pull/1536
+    var result = NSString(string: string).deletingLastPathComponent
+    if result.isEmpty {
+      result = "."
+    }
+    return result
+    #else
+    return Path(string).parent().normalize().string
+    #endif
   }
 
   /// Removes newlines and other whitespace from a string. Takes an optional Mode argument:

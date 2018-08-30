@@ -37,10 +37,11 @@ public class TokenParser {
       let token = nextToken()!
 
       switch token {
-      case .text(let text):
+      case .text(let text, _):
         nodes.append(TextNode(text: text))
       case .variable:
-        nodes.append(VariableNode(variable: try compileResolvable(token.contents)))
+        let filter = try compileResolvable(token.contents, containedIn: token)
+        nodes.append(VariableNode(variable: filter, token: token))
       case .block:
         if let parse_until = parse_until , parse_until(self, token) {
           prependToken(token)
@@ -48,8 +49,13 @@ public class TokenParser {
         }
 
         if let tag = token.components().first {
-          let parser = try findTag(name: tag)
-          nodes.append(try parser(self, token))
+          do {
+            let parser = try findTag(name: tag)
+            let node = try parser(self, token)
+            nodes.append(node)
+          } catch {
+            throw error.withToken(token)
+          }
         }
       case .comment:
         continue
@@ -92,7 +98,7 @@ public class TokenParser {
     if suggestedFilters.isEmpty {
       throw TemplateSyntaxError("Unknown filter '\(name)'.")
     } else {
-      throw TemplateSyntaxError("Unknown filter '\(name)'. Found similar filters: \(suggestedFilters.map({ "'\($0)'" }).joined(separator: ", "))")
+      throw TemplateSyntaxError("Unknown filter '\(name)'. Found similar filters: \(suggestedFilters.map({ "'\($0)'" }).joined(separator: ", ")).")
     }
   }
 
@@ -110,13 +116,39 @@ public class TokenParser {
     return filtersWithDistance.filter({ $0.distance == minDistance }).map({ $0.filterName })
   }
 
+  public func compileFilter(_ filterToken: String, containedIn containingToken: Token) throws -> Resolvable {
+    do {
+      return try FilterExpression(token: filterToken, parser: self)
+    } catch {
+      guard var syntaxError = error as? TemplateSyntaxError, syntaxError.token == nil else {
+        throw error
+      }
+      // find offset of filter in the containing token so that only filter is highligted, not the whole token
+      if let filterTokenRange = containingToken.contents.range(of: filterToken) {
+        var rangeLine = containingToken.sourceMap.line
+        rangeLine.offset += containingToken.contents.distance(from: containingToken.contents.startIndex, to: filterTokenRange.lowerBound)
+        syntaxError.token = .variable(value: filterToken, at: SourceMap(filename: containingToken.sourceMap.filename, line: rangeLine))
+      } else {
+        syntaxError.token = containingToken
+      }
+      throw syntaxError
+    }
+  }
+
+  @available(*, deprecated, message: "Use compileFilter(_:containedIn:)")
   public func compileFilter(_ token: String) throws -> Resolvable {
     return try FilterExpression(token: token, parser: self)
   }
 
+  @available(*, deprecated, message: "Use compileResolvable(_:containedIn:)")
   public func compileResolvable(_ token: String) throws -> Resolvable {
     return try RangeVariable(token, parser: self)
       ?? compileFilter(token)
+  }
+
+  public func compileResolvable(_ token: String, containedIn containingToken: Token) throws -> Resolvable {
+    return try RangeVariable(token, parser: self, containedIn: containingToken)
+        ?? compileFilter(token, containedIn: containingToken)
   }
 
 }

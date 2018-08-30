@@ -28,6 +28,12 @@ enum Filters {
     if let string = value as? String {
         return string
     }
+    #if os(Linux)
+    if let string = value as? NSString {
+      return String(describing: string)
+    }
+    #endif
+
     throw Error.invalidInputType
   }
 

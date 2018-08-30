@@ -88,21 +88,21 @@ final class NotExpression: Expression, PrefixOperator, CustomStringConvertible {
 final class InExpression: Expression, InfixOperator, CustomStringConvertible {
   let lhs: Expression
   let rhs: Expression
-  
+
   init(lhs: Expression, rhs: Expression) {
     self.lhs = lhs
     self.rhs = rhs
   }
-  
+
   var description: String {
     return "(\(lhs) in \(rhs))"
   }
-  
+
   func evaluate(context: Context) throws -> Bool {
     if let lhs = lhs as? VariableExpression, let rhs = rhs as? VariableExpression {
       let lhsValue = try lhs.variable.resolve(context)
       let rhsValue = try rhs.variable.resolve(context)
-      
+
       if let lhs = lhsValue as? AnyHashable, let rhs = rhsValue as? [AnyHashable] {
         return rhs.contains(lhs)
       } else if let lhs = lhsValue as? Int, let rhs = rhsValue as? CountableClosedRange<Int> {
@@ -115,10 +115,10 @@ final class InExpression: Expression, InfixOperator, CustomStringConvertible {
         return true
       }
     }
-    
+
     return false
   }
-  
+
 }
 
 final class OrExpression: Expression, InfixOperator, CustomStringConvertible {
