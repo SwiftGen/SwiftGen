@@ -1,3 +1,5 @@
+// swiftlint:disable all
+
 import CoreData
 import Foundation
 
