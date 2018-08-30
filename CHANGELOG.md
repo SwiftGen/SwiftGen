@@ -67,6 +67,7 @@
 * Enabled some extra SwiftLint rules for better code consistency.  
   [David Jennes](https://github.com/djbe)
   [#402](https://github.com/SwiftGen/SwiftGen/pull/402)
+  [#476](https://github.com/SwiftGen/SwiftGen/pull/476)
 * Updated to latest Xcode (9.3.0).  
   [David Jennes](https://github.com/djbe) 
   [#415](https://github.com/SwiftGen/SwiftGen/pull/415)
