@@ -1,3 +1,4 @@
+// swiftlint:disable all
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
 {% if platform and storyboards %}
@@ -26,7 +27,7 @@ import {{module}}
   }
 }
 
-{{accessModifier}} struct SceneType<T: Any> {
+{{accessModifier}} struct SceneType<T{% if not isAppKit %}: UIViewController{% endif %}> {
   {{accessModifier}} let storyboard: StoryboardType.Type
   {{accessModifier}} let identifier: String
 
@@ -39,7 +40,7 @@ import {{module}}
   }
 }
 
-{{accessModifier}} struct InitialSceneType<T: Any> {
+{{accessModifier}} struct InitialSceneType<T{% if not isAppKit %}: UIViewController{% endif %}> {
   {{accessModifier}} let storyboard: StoryboardType.Type
 
   {{accessModifier}} func instantiate() -> T {

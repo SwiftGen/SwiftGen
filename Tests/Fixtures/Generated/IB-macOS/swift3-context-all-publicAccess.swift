@@ -1,3 +1,4 @@
+// swiftlint:disable all
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
 // swiftlint:disable sorted_imports
@@ -19,7 +20,7 @@ public extension StoryboardType {
   }
 }
 
-public struct SceneType<T: Any> {
+public struct SceneType<T> {
   public let storyboard: StoryboardType.Type
   public let identifier: String
 
@@ -31,7 +32,7 @@ public struct SceneType<T: Any> {
   }
 }
 
-public struct InitialSceneType<T: Any> {
+public struct InitialSceneType<T> {
   public let storyboard: StoryboardType.Type
 
   public func instantiate() -> T {

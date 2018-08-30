@@ -1,3 +1,4 @@
+// swiftlint:disable all
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
 #if os(OSX)
@@ -21,6 +22,7 @@ internal struct FontConvertible {
   }
 
   internal func register() {
+    // swiftlint:disable:next conditional_returns_on_newline
     guard let url = url else { return }
     CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
   }
