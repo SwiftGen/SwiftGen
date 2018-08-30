@@ -13,13 +13,13 @@ import Foundation
 {% set entityClassName %}{{ entity.className | default:entity.name }}{% endset %}
 {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
 @objc({{ entityClassName }})
-open {{ accessModifier }} class {{ entityClassName }}: {{ superclass }} {
+{{ accessModifier }} class {{ entityClassName }}: {{ superclass }} {
 
-    {{ override }}open {{ accessModifier }} class func entityName() -> String {
+    {{ override }}{{ accessModifier }} class func entityName() -> String {
         return "{{ entity.name }}"
     }
 
-    {{ override }}open {{ accessModifier }} class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+    {{ override }}{{ accessModifier }} class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
         return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
     }
 
@@ -28,20 +28,20 @@ open {{ accessModifier }} class {{ entityClassName }}: {{ superclass }} {
     }
 
     {% for attribute in entity.attributes %}
-    @NSManaged open {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.usesScalarValueType == false %}{% if attribute.isOptional %}?{% else %}!{% endif %}{% endif %}
+    @NSManaged {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.usesScalarValueType == false %}{% if attribute.isOptional %}?{% else %}!{% endif %}{% endif %}
 
     {% endfor %}
     {% for relationship in entity.relationships %}
     {% if relationship.isToMany %}
-    @NSManaged open {{ accessModifier }} var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}NSSet{% endif %}
+    @NSManaged {{ accessModifier }} var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}NSSet{% endif %}
 
     {% else %}
-    @NSManaged open {{ accessModifier }} var {{ relationship.name }}: {{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}{% if relationship.isOptional %}?{% endif %}
+    @NSManaged {{ accessModifier }} var {{ relationship.name }}: {{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}{% if relationship.isOptional %}?{% endif %}
 
     {% endif %}
     {% endfor %}
     {% for fetchedProperty in entity.fetchedProperties %}
-    @NSManaged open {{ accessModifier }} let {{ fetchedProperty.name }}: [{{ fetchedProperty.fetchRequest.entity }}]
+    @NSManaged {{ accessModifier }} let {{ fetchedProperty.name }}: [{{ fetchedProperty.fetchRequest.entity }}]
     {% endfor %}
 }
 
