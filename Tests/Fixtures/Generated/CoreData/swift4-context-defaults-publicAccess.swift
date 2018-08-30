@@ -1,3 +1,5 @@
+// swiftlint:disable all
+
 import CoreData
 import Foundation
 
@@ -7,13 +9,13 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length type_body_length
 @objc(ChildEntity)
-open public class ChildEntity: MainEntity {
+public class ChildEntity: MainEntity {
 
-    override open public class func entityName() -> String {
+    override public class func entityName() -> String {
         return "ChildEntity"
     }
 
-    override open public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+    override public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
         return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
     }
 
@@ -25,13 +27,13 @@ open public class ChildEntity: MainEntity {
 
 
 @objc(MainEntity)
-open public class MainEntity: NSManagedObject {
+public class MainEntity: NSManagedObject {
 
-    open public class func entityName() -> String {
+    public class func entityName() -> String {
         return "MainEntity"
     }
 
-    open public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+    public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
         return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
     }
 
@@ -39,45 +41,45 @@ open public class MainEntity: NSManagedObject {
         return NSFetchRequest<MainEntity>(entityName: entityName())
     }
 
-    @NSManaged open public var binaryData: Data?
+    @NSManaged public var binaryData: Data?
 
-    @NSManaged open public var boolean: Bool
+    @NSManaged public var boolean: Bool
 
-    @NSManaged open public var color: UIColor?
+    @NSManaged public var color: UIColor?
 
-    @NSManaged open public var date: Date?
+    @NSManaged public var date: Date?
 
-    @NSManaged open public var decimal: NSDecimalNumber?
+    @NSManaged public var decimal: NSDecimalNumber?
 
-    @NSManaged open public var double: Double
+    @NSManaged public var double: Double
 
-    @NSManaged open public var float: Float
+    @NSManaged public var float: Float
 
-    @NSManaged open public var int16: Int16
+    @NSManaged public var int16: Int16
 
-    @NSManaged open public var int32: Int32
+    @NSManaged public var int32: Int32
 
-    @NSManaged open public var int64: Int64
+    @NSManaged public var int64: Int64
 
-    @NSManaged open public var nonOptional: String?
+    @NSManaged public var nonOptional: String!
 
-    @NSManaged open public var string: String?
+    @NSManaged public var string: String?
 
-    @NSManaged open public var transformable: AnyObject?
+    @NSManaged public var transformable: AnyObject?
 
-    @NSManaged open public var transient: String?
+    @NSManaged public var transient: String?
 
-    @NSManaged open public var uri: URL?
+    @NSManaged public var uri: URL?
 
-    @NSManaged open public var uuid: UUID?
+    @NSManaged public var uuid: UUID?
 
-    @NSManaged open public var manyToMany: NSSet
+    @NSManaged public var manyToMany: Set<SecondaryEntity>
 
-    @NSManaged open public var oneToMany: NSOrderedSet
+    @NSManaged public var oneToMany: NSOrderedSet
 
-    @NSManaged open public var oneToOne: SecondaryEntity?
+    @NSManaged public var oneToOne: SecondaryEntity?
 
-    @NSManaged open public let fetchedProperty: [NewEntity]
+    @NSManaged public let fetchedProperty: [NewEntity]
 }
 
 extension MainEntity {
@@ -89,10 +91,10 @@ extension MainEntity {
     @NSManaged public func removeFromManyToMany(_ value: SecondaryEntity)
 
     @objc(addManyToMany:)
-    @NSManaged public func addToManyToMany(_ values: NSSet)
+    @NSManaged public func addToManyToMany(_ values: Set<SecondaryEntity>)
 
     @objc(removeManyToMany:)
-    @NSManaged public func removeFromManyToMany(_ values: NSSet)
+    @NSManaged public func removeFromManyToMany(_ values: Set<SecondaryEntity>)
 
 }
 
@@ -133,25 +135,61 @@ extension MainEntity {
 
 extension MainEntity {
 
-    class func fetchDictionaryFetchRequest(managedObjectContext: NSManagedObjectContext) throws -> [MainEntity] {
+    class func fetchDictionaryFetchRequest(managedObjectContext: NSManagedObjectContext) throws -> [[String: Any]] {
+        guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
+            fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
+        }
+        let model = persistentStoreCoordinator.model
+        let substitutionVariables: [String: Any] = [
+            :
+        ]
 
+        guard let fetchRequest = model.fetchRequestFromTemplate(withName: "DictionaryFetchRequest", substitutionVariables: substitutionVariables) else {
+            fatalError("No fetch request template named 'DictionaryFetchRequest' found.")
+        }
+
+        return try managedObjectContext.fetch(fetchRequest) as! [[String: Any]]
     }
-    class func fetchObjectFetchRequest(managedObjectContext: NSManagedObjectContext, UUID: UUID) throws -> [MainEntity] {
+    class func fetchObjectFetchRequest(managedObjectContext: NSManagedObjectContext, uuid: UUID) throws -> [MainEntity] {
+        guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
+            fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
+        }
+        let model = persistentStoreCoordinator.model
+        let substitutionVariables: [String: Any] = [
+            "UUID": uuid
+        ]
 
+        guard let fetchRequest = model.fetchRequestFromTemplate(withName: "ObjectFetchRequest", substitutionVariables: substitutionVariables) else {
+            fatalError("No fetch request template named 'ObjectFetchRequest' found.")
+        }
+
+        return try managedObjectContext.fetch(fetchRequest) as! [MainEntity]
     }
-    class func fetchObjectIDFetchRequest(managedObjectContext: NSManagedObjectContext, NAME: String) throws -> [MainEntity] {
+    class func fetchObjectIDFetchRequest(managedObjectContext: NSManagedObjectContext, name: String) throws -> [NSManagedObjectID] {
+        guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
+            fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
+        }
+        let model = persistentStoreCoordinator.model
+        let substitutionVariables: [String: Any] = [
+            "NAME": name
+        ]
 
+        guard let fetchRequest = model.fetchRequestFromTemplate(withName: "ObjectIDFetchRequest", substitutionVariables: substitutionVariables) else {
+            fatalError("No fetch request template named 'ObjectIDFetchRequest' found.")
+        }
+
+        return try managedObjectContext.fetch(fetchRequest) as! [NSManagedObjectID]
     }
 
 }
 @objc(SecondaryEntity)
-open public class SecondaryEntity: NSManagedObject {
+public class SecondaryEntity: NSManagedObject {
 
-    open public class func entityName() -> String {
+    public class func entityName() -> String {
         return "SecondaryEntity"
     }
 
-    open public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+    public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
         return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
     }
 
@@ -159,13 +197,13 @@ open public class SecondaryEntity: NSManagedObject {
         return NSFetchRequest<SecondaryEntity>(entityName: entityName())
     }
 
-    @NSManaged open public var name: String?
+    @NSManaged public var name: String!
 
-    @NSManaged open public var manyToMany: NSSet
+    @NSManaged public var manyToMany: Set<MainEntity>
 
-    @NSManaged open public var oneToMany: MainEntity?
+    @NSManaged public var oneToMany: MainEntity?
 
-    @NSManaged open public var oneToOne: MainEntity?
+    @NSManaged public var oneToOne: MainEntity?
 
 }
 
@@ -178,22 +216,22 @@ extension SecondaryEntity {
     @NSManaged public func removeFromManyToMany(_ value: MainEntity)
 
     @objc(addManyToMany:)
-    @NSManaged public func addToManyToMany(_ values: NSSet)
+    @NSManaged public func addToManyToMany(_ values: Set<MainEntity>)
 
     @objc(removeManyToMany:)
-    @NSManaged public func removeFromManyToMany(_ values: NSSet)
+    @NSManaged public func removeFromManyToMany(_ values: Set<MainEntity>)
 
 }
 
 
 @objc(AbstractEntity)
-open public class AbstractEntity: NSManagedObject {
+public class AbstractEntity: NSManagedObject {
 
-    open public class func entityName() -> String {
+    public class func entityName() -> String {
         return "AbstractEntity"
     }
 
-    open public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+    public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
         return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
     }
 
@@ -205,19 +243,21 @@ open public class AbstractEntity: NSManagedObject {
 
 
 @objc(NewEntity)
-open public class NewEntity: AbstractEntity {
+public class NewEntity: AbstractEntity {
 
-    override open public class func entityName() -> String {
+    override public class func entityName() -> String {
         return "NewEntity"
     }
 
-    override open public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+    override public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
         return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
     }
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<NewEntity> {
         return NSFetchRequest<NewEntity>(entityName: entityName())
     }
+
+    @NSManaged public var identifier: UUID?
 
 }
 
