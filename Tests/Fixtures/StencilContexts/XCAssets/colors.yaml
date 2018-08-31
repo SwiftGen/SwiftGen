@@ -1,6 +1,7 @@
 catalogs:
 - assets:
-  - items:
+  - isNamespaced: "true"
+    items:
     - name: "Background"
       type: "color"
       value: "24Vision/Background"
@@ -12,7 +13,8 @@ catalogs:
   - name: "Orange"
     type: "image"
     value: "Orange"
-  - items:
+  - isNamespaced: "true"
+    items:
     - name: "Primary"
       type: "color"
       value: "Vengo/Primary"

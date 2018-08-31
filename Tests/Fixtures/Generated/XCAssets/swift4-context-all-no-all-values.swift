@@ -95,13 +95,11 @@ internal enum Asset {
     }
     internal enum Round {
       internal static let apricot = ImageAsset(name: "Round/Apricot")
-      internal enum Red {
-        internal static let apple = ImageAsset(name: "Round/Apple")
-        internal enum Double {
-          internal static let cherry = ImageAsset(name: "Round/Double/Cherry")
-        }
-        internal static let tomato = ImageAsset(name: "Round/Tomato")
+      internal static let apple = ImageAsset(name: "Round/Apple")
+      internal enum Double {
+        internal static let cherry = ImageAsset(name: "Round/Double/Cherry")
       }
+      internal static let tomato = ImageAsset(name: "Round/Tomato")
     }
     internal static let `private` = ImageAsset(name: "private")
   }

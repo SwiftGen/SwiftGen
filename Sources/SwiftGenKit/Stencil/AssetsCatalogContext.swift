@@ -42,9 +42,10 @@ extension AssetsCatalog.Parser {
   private func structure(entries: [AssetsCatalog.Entry]) -> [[String: Any]] {
     return entries.map { entry in
       switch entry {
-      case .group(let name, let items):
+      case .group(let name, let isNamespaced, let items):
         return [
           "type": "group",
+          "isNamespaced": "\(isNamespaced)",
           "name": name,
           "items": structure(entries: items)
         ]

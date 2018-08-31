@@ -108,13 +108,11 @@ public enum Asset {
     }
     public enum Round {
       public static let apricot = ImageAsset(name: "Round/Apricot")
-      public enum Red {
-        public static let apple = ImageAsset(name: "Round/Apple")
-        public enum Double {
-          public static let cherry = ImageAsset(name: "Round/Double/Cherry")
-        }
-        public static let tomato = ImageAsset(name: "Round/Tomato")
+      public static let apple = ImageAsset(name: "Round/Apple")
+      public enum Double {
+        public static let cherry = ImageAsset(name: "Round/Double/Cherry")
       }
+      public static let tomato = ImageAsset(name: "Round/Tomato")
     }
     public static let `private` = ImageAsset(name: "private")
     // swiftlint:disable trailing_comma
@@ -124,9 +122,9 @@ public enum Asset {
       Exotic.banana,
       Exotic.mango,
       Round.apricot,
-      Round.Red.apple,
-      Round.Red.Double.cherry,
-      Round.Red.tomato,
+      Round.apple,
+      Round.Double.cherry,
+      Round.tomato,
       `private`,
     ]
     // swiftlint:enable trailing_comma

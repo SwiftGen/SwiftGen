@@ -31,7 +31,10 @@ class XCAssetsTests: XCTestCase {
        suffix: "-no-all-values"),
       (context: try StencilContext.enrich(context: context,
                                           parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+       suffix: "-publicAccess"),
+      (context: try StencilContext.enrich(context: context,
+                                          parameters: ["forceProvidesNamespaces"]),
+       suffix: "-forceNamespaces")
     ]
   }
 

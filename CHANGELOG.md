@@ -37,6 +37,9 @@
 * Renamed the `storyboards` command to `ib`, to better reflect it's purpose. An alias for `storyboards` still exists, but it will be removed at some point.  
   [David Jennes](https://github.com/djbe) 
   [#423](https://github.com/SwiftGen/SwiftGen/pull/423)
+* XCAssets: the generated templates won't namespace groups by default anymore, use the `forceProvidesNamespaces` flag to enable this behaviour again.  
+  [jechris](https://github.com/pjechris)
+  [#453](https://github.com/SwiftGen/SwiftGen/issues/453)
 
 ### New Features
 

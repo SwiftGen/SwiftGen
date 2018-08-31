@@ -110,13 +110,11 @@ internal enum XCTAssets {
     }
     internal enum Round {
       internal static let apricot = XCTImageAsset(name: "Round/Apricot")
-      internal enum Red {
-        internal static let apple = XCTImageAsset(name: "Round/Apple")
-        internal enum Double {
-          internal static let cherry = XCTImageAsset(name: "Round/Double/Cherry")
-        }
-        internal static let tomato = XCTImageAsset(name: "Round/Tomato")
+      internal static let apple = XCTImageAsset(name: "Round/Apple")
+      internal enum Double {
+        internal static let cherry = XCTImageAsset(name: "Round/Double/Cherry")
       }
+      internal static let tomato = XCTImageAsset(name: "Round/Tomato")
     }
     internal static let `private` = XCTImageAsset(name: "private")
     // swiftlint:disable trailing_comma
@@ -126,9 +124,9 @@ internal enum XCTAssets {
       Exotic.banana,
       Exotic.mango,
       Round.apricot,
-      Round.Red.apple,
-      Round.Red.Double.cherry,
-      Round.Red.tomato,
+      Round.apple,
+      Round.Double.cherry,
+      Round.tomato,
       `private`,
     ]
     // swiftlint:enable trailing_comma
