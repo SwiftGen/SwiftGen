@@ -16,14 +16,18 @@ The output context has the following structure:
  - `catalogs`: `Array` — list of asset catalogs
    - `name`  : `String` — the name of the catalog
    - `assets`: `Array` — tree structure of items, each item either
-     - represents a group and has the following entries:
-       - `type` : `String` — "group"
-       - `name` : `String` — name of the folder
-       - `items`: `Array` — list of items, can be either groups, colors or images
      - represents a color asset, and has the following entries:
        - `type` : `String` — "color"
        - `name` : `String` — name of the color
        - `value`: `String` — the actual full name for loading the color
+     - represents a data asset, and has the following entries:
+       - `type` : `String` — "data"
+       - `name` : `String` — name of the data asset
+       - `value`: `String` — the actual full name for loading the data asset
+     - represents a group and has the following entries:
+       - `type` : `String` — "group"
+       - `name` : `String` — name of the folder
+       - `items`: `Array` — list of items, can be either groups, colors or images
      - represents an image asset, and has the following entries:
        - `type` : `String` — "image"
        - `name` : `String` — name of the image
@@ -31,88 +35,59 @@ The output context has the following structure:
 
 ## Example
 
-```
-{
-  "catalogs": [
-    {
-      "name": "Images",
-      "assets": [
-        {
-          "name": "Exotic",
-          "type": "group",
-          "items": [
-            {
-              "value": "Exotic\/Banana",
-              "type": "image",
-              "name": "Banana"
-            },
-            {
-              "value": "Exotic\/Mango",
-              "type": "image",
-              "name": "Mango"
-            }
-          ]
-        },
-        {
-          "value": "Logo",
-          "type": "image",
-          "name": "Logo"
-        },
-        {
-          "value": "Primary Color",
-          "type": "color",
-          "name": "Primary Color"
-        },
-        {
-          "name": "Round",
-          "type": "group",
-          "items": [
-            {
-              "value": "Round\/Apricot",
-              "type": "image",
-              "name": "Apricot"
-            },
-            {
-              "value": "Round\/Orange",
-              "type": "image",
-              "name": "Orange"
-            },
-            {
-              "name": "Red",
-              "type": "group",
-              "items": [
-                {
-                  "value": "Round\/Apple",
-                  "type": "image",
-                  "name": "Apple"
-                },
-                {
-                  "name": "Double",
-                  "type": "group",
-                  "items": [
-                    {
-                      "value": "Round\/Double\/Cherry",
-                      "type": "image",
-                      "name": "Cherry"
-                    }
-                  ]
-                },
-                {
-                  "value": "Round\/Tint Color",
-                  "type": "color",
-                  "name": "Tint Color"
-                },
-                {
-                  "value": "Round\/Tomato",
-                  "type": "image",
-                  "name": "Tomato"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
+```yaml
+catalogs:
+- assets:
+  - isNamespaced: "true"
+    items:
+    - name: "Background"
+      type: "color"
+      value: "24Vision/Background"
+    - name: "Primary"
+      type: "color"
+      value: "24Vision/Primary"
+    name: "24Vision"
+    type: "group"
+  - name: "Orange"
+    type: "image"
+    value: "Orange"
+  name: "Colors"
+- assets:
+  - name: "Data"
+    type: "data"
+    value: "Data"
+  - isNamespaced: "true"
+    items: []
+    name: "Empty"
+    type: "group"
+  - isNamespaced: "true"
+    items:
+    - name: "Data"
+      type: "data"
+      value: "Json/Data"
+    name: "Json"
+    type: "group"
+  - name: "README"
+    type: "data"
+    value: "README"
+  name: "Data"
+- assets:
+  - isNamespaced: "true"
+    items:
+    - name: "Banana"
+      type: "image"
+      value: "Exotic/Banana"
+    - name: "Mango"
+      type: "image"
+      value: "Exotic/Mango"
+    name: "Exotic"
+    type: "group"
+  - isNamespaced: "true"
+    items:
+    - name: "Apricot"
+      type: "image"
+      value: "Round/Apricot"
+    name: "Round"
+    type: "group"
+  name: "Images"
 ```

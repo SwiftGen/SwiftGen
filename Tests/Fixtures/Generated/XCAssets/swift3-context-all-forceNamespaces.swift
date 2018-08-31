@@ -10,6 +10,9 @@
   internal typealias AssetColorTypeAlias = UIColor
   internal typealias Image = UIImage
 #endif
+#if os(iOS) || os(tvOS) || os(OSX)
+internal typealias AssetDataTypeAlias = NSDataAsset
+#endif
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -40,6 +43,31 @@ internal extension AssetColorTypeAlias {
   }
   #endif
 }
+
+internal struct DataAsset {
+  internal fileprivate(set) var name: String
+
+  #if os(iOS) || os(tvOS) || os(OSX)
+  #if swift(>=3.2)
+  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  internal var data: AssetDataTypeAlias {
+    return AssetDataTypeAlias(asset: self)
+  }
+  #endif
+  #endif
+}
+
+#if os(iOS) || os(tvOS) || os(OSX)
+internal extension AssetDataTypeAlias {
+  #if swift(>=3.2)
+  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  convenience init!(asset: DataAsset) {
+    let bundle = Bundle(for: BundleToken.self)
+    self.init(name: asset.name, bundle: bundle)
+  }
+  #endif
+}
+#endif
 
 @available(*, deprecated, renamed: "ImageAsset")
 internal typealias AssetType = ImageAsset
@@ -96,8 +124,30 @@ internal enum Asset {
       Vengo.primary,
       Vengo.tint,
     ]
+    internal static let allDataAssets: [DataAsset] = [
+    ]
     internal static let allImages: [ImageAsset] = [
       orange,
+    ]
+    // swiftlint:enable trailing_comma
+    @available(*, deprecated, renamed: "allImages")
+    internal static let allValues: [AssetType] = allImages
+  }
+  internal enum Data {
+    internal static let data = DataAsset(name: "Data")
+    internal enum Json {
+      internal static let data = DataAsset(name: "Json/Data")
+    }
+    internal static let readme = DataAsset(name: "README")
+    // swiftlint:disable trailing_comma
+    internal static let allColors: [ColorAsset] = [
+    ]
+    internal static let allDataAssets: [DataAsset] = [
+      data,
+      Json.data,
+      readme,
+    ]
+    internal static let allImages: [ImageAsset] = [
     ]
     // swiftlint:enable trailing_comma
     @available(*, deprecated, renamed: "allImages")
@@ -121,6 +171,8 @@ internal enum Asset {
     internal static let `private` = ImageAsset(name: "private")
     // swiftlint:disable trailing_comma
     internal static let allColors: [ColorAsset] = [
+    ]
+    internal static let allDataAssets: [DataAsset] = [
     ]
     internal static let allImages: [ImageAsset] = [
       Exotic.banana,

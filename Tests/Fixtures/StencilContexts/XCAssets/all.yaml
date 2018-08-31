@@ -25,6 +25,25 @@ catalogs:
     type: "group"
   name: "Colors"
 - assets:
+  - name: "Data"
+    type: "data"
+    value: "Data"
+  - isNamespaced: "true"
+    items: []
+    name: "Empty"
+    type: "group"
+  - isNamespaced: "true"
+    items:
+    - name: "Data"
+      type: "data"
+      value: "Json/Data"
+    name: "Json"
+    type: "group"
+  - name: "README"
+    type: "data"
+    value: "README"
+  name: "Data"
+- assets:
   - isNamespaced: "false"
     items: []
     name: "Empty"
