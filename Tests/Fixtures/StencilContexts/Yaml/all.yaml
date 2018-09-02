@@ -19,6 +19,16 @@ files:
   path: "documents.yaml"
 - documents:
   - data:
+    - "value1"
+    - "value2"
+    metadata:
+      element:
+        type: "String"
+      type: "Array"
+  name: "grocery-list"
+  path: "grocery-list.yaml"
+- documents:
+  - data:
       key1: "value1"
       key2: "2"
       key3:
@@ -65,13 +75,3 @@ files:
       type: "String"
   name: "scalar"
   path: "scalar.yaml"
-- documents:
-  - data:
-    - "value1"
-    - "value2"
-    metadata:
-      element:
-        type: "String"
-      type: "Array"
-  name: "sequence"
-  path: "sequence.yaml"

@@ -35,8 +35,8 @@ internal enum JSONFiles {
     internal static let key2: String = _document["key2"]
     internal static let key3: [String: Any] = _document["key3"]
   }
-  internal enum Sequence {
-    internal static let items: [Int] = objectFromJSON(at: "sequence.json")
+  internal enum GroceryList {
+    internal static let items: [String] = objectFromJSON(at: "grocery-list.json")
   }
 }
 ```
@@ -49,6 +49,6 @@ internal enum JSONFiles {
 // This will be an dictionary
 let foo = JSONFiles.Info.key3
 
-// This will be an [Int]
-let bar = JSONFiles.Sequence.items
+// This will be an [String]
+let bar = JSONFiles.GroceryList.items
 ```

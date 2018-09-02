@@ -15,6 +15,9 @@ public enum JSONFiles {
       public static let items: [String] = ["Chicago Cubs", "St Louis Cardinals"]
     }
   }
+  public enum GroceryList {
+    public static let items: [String] = ["value1", "value2"]
+  }
   public enum Json {
     public static let key2: String = "2"
     public static let key3: [String: Any] = ["nestedKey3": ["1", "2", "3"]]
@@ -26,9 +29,6 @@ public enum JSONFiles {
   }
   public enum Scalar {
     public static let value: String = "value1"
-  }
-  public enum Sequence {
-    public static let items: [String] = ["value1", "value2"]
   }
 }
 // swiftlint:enable identifier_name line_length type_body_length

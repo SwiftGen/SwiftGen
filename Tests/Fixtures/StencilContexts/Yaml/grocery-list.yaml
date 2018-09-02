@@ -7,5 +7,5 @@ files:
       element:
         type: "String"
       type: "Array"
-  name: "sequence"
-  path: "sequence.yaml"
+  name: "grocery-list"
+  path: "grocery-list.yaml"

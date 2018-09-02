@@ -20,10 +20,10 @@ class YamlTests: XCTestCase {
 
   func testSequence() throws {
     let parser = Yaml.Parser()
-    try parser.parse(path: Fixtures.path(for: "sequence.yaml", sub: .yamlGood))
+    try parser.parse(path: Fixtures.path(for: "grocery-list.yaml", sub: .yamlGood))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "sequence", sub: .yaml)
+    XCTDiffContexts(result, expected: "grocery-list", sub: .yaml)
   }
 
   func testMapping() throws {

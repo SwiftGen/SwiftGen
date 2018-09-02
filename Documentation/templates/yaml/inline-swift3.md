@@ -29,14 +29,20 @@ You can customize some elements of this template by overriding the following par
 
 ```swift
 internal enum YAMLFiles {
-  internal enum Info {
-    private static let _document = JSONDocument(path: "info.json")
-    internal static let key1: String = _document["key1"]
-    internal static let key2: String = _document["key2"]
-    internal static let key3: [String: Any] = _document["key3"]
+  internal enum Documents {
+    internal enum Document1 {
+      internal static let items: [String] = ["Mark McGwire", "Sammy Sosa", "Ken Griffey"]
   }
-  internal enum Sequence {
-    internal static let items: [Int] = objectFromJSON(at: "sequence.json")
+    internal enum Document2 {
+      internal static let items: [String] = ["Chicago Cubs", "St Louis Cardinals"]
+    }
+  }
+  internal enum Mapping {
+    internal static let key2: [String: Any] = ["nestedKey2": "nestedValue2"]
+    internal static let key1: String = "value1"
+  }
+  internal enum GroceryList {
+    internal static let items: [String] = ["value1", "value2"]
   }
 }
 ```
@@ -47,8 +53,8 @@ internal enum YAMLFiles {
 
 ```swift
 // This will be an dictionary
-let foo = JSONFiles.Info.key3
+let foo = JSONFiles.Mapping.key2
 
-// This will be an [Int]
-let bar = JSONFiles.Sequence.items
+// This will be an [String]
+let bar = JSONFiles.GroceryList.items
 ```

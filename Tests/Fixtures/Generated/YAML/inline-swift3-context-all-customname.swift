@@ -15,6 +15,9 @@ internal enum CustomYAML {
       internal static let items: [String] = ["Chicago Cubs", "St Louis Cardinals"]
     }
   }
+  internal enum GroceryList {
+    internal static let items: [String] = ["value1", "value2"]
+  }
   internal enum Json {
     internal static let key2: String = "2"
     internal static let key3: [String: Any] = ["nestedKey3": ["1", "2", "3"]]
@@ -26,9 +29,6 @@ internal enum CustomYAML {
   }
   internal enum Scalar {
     internal static let value: String = "value1"
-  }
-  internal enum Sequence {
-    internal static let items: [String] = ["value1", "value2"]
   }
 }
 // swiftlint:enable identifier_name line_length type_body_length

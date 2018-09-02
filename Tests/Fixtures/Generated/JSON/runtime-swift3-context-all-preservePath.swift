@@ -40,6 +40,9 @@ internal enum JSONFiles {
       internal static let items: [String] = objectFromJSON(at: "documents.yaml")
     }
   }
+  internal enum GroceryList {
+    internal static let items: [String] = objectFromJSON(at: "grocery-list.yaml")
+  }
   internal enum Json {
     private static let _document = JSONDocument(path: "json.json")
     internal static let key2: String = _document["key2"]
@@ -53,9 +56,6 @@ internal enum JSONFiles {
   }
   internal enum Scalar {
     internal static let value: String = objectFromJSON(at: "scalar.yaml")
-  }
-  internal enum Sequence {
-    internal static let items: [String] = objectFromJSON(at: "sequence.yaml")
   }
 }
 // swiftlint:enable identifier_name line_length type_body_length
