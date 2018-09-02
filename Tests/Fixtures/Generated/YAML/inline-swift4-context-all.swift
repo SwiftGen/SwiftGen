@@ -32,5 +32,3 @@ internal enum YAMLFiles {
   }
 }
 // swiftlint:enable identifier_name line_length type_body_length
-
-private final class BundleToken {}
