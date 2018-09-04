@@ -15,7 +15,52 @@ import {{module}}
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-{# This first part of the code is static, same every time whatever Storyboard you have #}
+// MARK: - Storyboards
+
+// swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
+{% set sceneEnumName %}{{param.sceneEnumName|default:"StoryboardScene"}}{% endset %}
+{% macro className scene %}{% filter removeNewlines %}
+  {% if scene.module %}
+    {% if not param.ignoreTargetModule or scene.module != env.PRODUCT_MODULE_NAME and scene.module != param.module %}
+      {{scene.module}}.
+    {% endif %}
+  {% endif %}
+  {{scene.type}}
+{% endfilter %}{% endmacro %}
+{{accessModifier}} enum {{sceneEnumName}} {
+  {% for storyboard in storyboards %}
+  {% set storyboardName %}{{storyboard.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}{% endset %}
+  {{accessModifier}} enum {{storyboardName}}: StoryboardType {
+    {{accessModifier}} static let storyboardName = "{{storyboard.name}}"
+    {% if storyboard.initialScene %}
+
+    {% set sceneClass %}{% call className storyboard.initialScene %}{% endset %}
+    {{accessModifier}} static let initialScene = InitialSceneType<{{sceneClass}}>(storyboard: {{storyboardName}}.self)
+    {% endif %}
+    {% for scene in storyboard.scenes %}
+
+    {% set sceneID %}{{scene.identifier|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% endset %}
+    {% set sceneClass %}{% call className scene %}{% endset %}
+    {{accessModifier}} static let {{sceneID}} = SceneType<{{sceneClass}}>(storyboard: {{storyboardName}}.self, identifier: "{{scene.identifier}}")
+    {% endfor %}
+  }
+  {% endfor %}
+}
+
+{{accessModifier}} enum {{param.segueEnumName|default:"StoryboardSegue"}} {
+  {% for storyboard in storyboards where storyboard.segues %}
+  {{accessModifier}} enum {{storyboard.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}: String, SegueType {
+    {% for segue in storyboard.segues %}
+    {% set segueID %}{{segue.identifier|swiftIdentifier:"pretty"|lowerFirstWord}}{% endset %}
+    case {{segueID|escapeReservedKeywords}}{% if segueID != segue.identifier %} = "{{segue.identifier}}"{% endif %}
+    {% endfor %}
+  }
+  {% endfor %}
+}
+// swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
+
+// MARK: - Implementation Details
+
 {{accessModifier}} protocol StoryboardType {
   static var storyboardName: String { get }
 }
@@ -59,49 +104,6 @@ import {{module}}
     performSegue{% if isAppKit %}?{% endif %}(withIdentifier: identifier, sender: sender)
   }
 }
-
-{# This is where the generation begins, this code depends on what you have in your Storyboards #}
-// swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-{% set sceneEnumName %}{{param.sceneEnumName|default:"StoryboardScene"}}{% endset %}
-{% macro className scene %}{% filter removeNewlines %}
-  {% if scene.module %}
-    {% if not param.ignoreTargetModule or scene.module != env.PRODUCT_MODULE_NAME and scene.module != param.module %}
-      {{scene.module}}.
-    {% endif %}
-  {% endif %}
-  {{scene.type}}
-{% endfilter %}{% endmacro %}
-{{accessModifier}} enum {{sceneEnumName}} {
-  {% for storyboard in storyboards %}
-  {% set storyboardName %}{{storyboard.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}{% endset %}
-  {{accessModifier}} enum {{storyboardName}}: StoryboardType {
-    {{accessModifier}} static let storyboardName = "{{storyboard.name}}"
-    {% if storyboard.initialScene %}
-
-    {% set sceneClass %}{% call className storyboard.initialScene %}{% endset %}
-    {{accessModifier}} static let initialScene = InitialSceneType<{{sceneClass}}>(storyboard: {{storyboardName}}.self)
-    {% endif %}
-    {% for scene in storyboard.scenes %}
-
-    {% set sceneID %}{{scene.identifier|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% endset %}
-    {% set sceneClass %}{% call className scene %}{% endset %}
-    {{accessModifier}} static let {{sceneID}} = SceneType<{{sceneClass}}>(storyboard: {{storyboardName}}.self, identifier: "{{scene.identifier}}")
-    {% endfor %}
-  }
-  {% endfor %}
-}
-
-{{accessModifier}} enum {{param.segueEnumName|default:"StoryboardSegue"}} {
-  {% for storyboard in storyboards where storyboard.segues %}
-  {{accessModifier}} enum {{storyboard.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}: String, SegueType {
-    {% for segue in storyboard.segues %}
-    {% set segueID %}{{segue.identifier|swiftIdentifier:"pretty"|lowerFirstWord}}{% endset %}
-    case {{segueID|escapeReservedKeywords}}{% if segueID != segue.identifier %} = "{{segue.identifier}}"{% endif %}
-    {% endfor %}
-  }
-  {% endfor %}
-}
-// swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
 
 private final class BundleToken {}
 {% elif storyboards %}

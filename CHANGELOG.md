@@ -61,6 +61,9 @@
 * XCAssets: Added support for `NSDataAssets`.  
   [Oliver Jones](https://github.com/orj)
   [#444](https://github.com/SwiftGen/SwiftGen/issues/444)
+* Organised the generated code in sections for better readability, with all generated constants at the top of the file.  
+  [David Jennes](https://github.com/djbe)
+  [#481](https://github.com/SwiftGen/SwiftGen/pull/481)
 
 ### Internal Changes
 

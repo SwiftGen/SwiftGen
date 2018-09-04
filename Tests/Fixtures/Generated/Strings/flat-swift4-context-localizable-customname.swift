@@ -6,6 +6,8 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
+// MARK: - Strings
+
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 internal enum XCTLoc {
   /// Some alert body there
@@ -40,6 +42,8 @@ internal enum XCTLoc {
   internal static let settingsUserProfileSectionHEADERTITLE = XCTLoc.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
 }
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length
+
+// MARK: - Implementation Details
 
 extension XCTLoc {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
