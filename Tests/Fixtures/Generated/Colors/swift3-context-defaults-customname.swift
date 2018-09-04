@@ -12,18 +12,7 @@
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-// swiftlint:disable operator_usage_whitespace
-internal extension XCTColor {
-  convenience init(rgbaValue: UInt32) {
-    let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0
-    let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0
-    let blue  = CGFloat((rgbaValue >>  8) & 0xff) / 255.0
-    let alpha = CGFloat((rgbaValue      ) & 0xff) / 255.0
-
-    self.init(red: red, green: green, blue: blue, alpha: alpha)
-  }
-}
-// swiftlint:enable operator_usage_whitespace
+// MARK: - Colors
 
 // swiftlint:disable identifier_name line_length type_body_length
 internal struct XCTColors {
@@ -44,6 +33,21 @@ internal struct XCTColors {
   internal static let `private` = XCTColors(rgbaValue: 0xffffffcc)
 }
 // swiftlint:enable identifier_name line_length type_body_length
+
+// MARK: - Implementation Details
+
+// swiftlint:disable operator_usage_whitespace
+internal extension XCTColor {
+  convenience init(rgbaValue: UInt32) {
+    let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0
+    let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0
+    let blue  = CGFloat((rgbaValue >>  8) & 0xff) / 255.0
+    let alpha = CGFloat((rgbaValue      ) & 0xff) / 255.0
+
+    self.init(red: red, green: green, blue: blue, alpha: alpha)
+  }
+}
+// swiftlint:enable operator_usage_whitespace
 
 internal extension XCTColor {
   convenience init(named color: XCTColors) {

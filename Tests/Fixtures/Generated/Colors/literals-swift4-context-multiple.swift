@@ -12,6 +12,8 @@
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
+// MARK: - Colors
+
 // swiftlint:disable identifier_name line_length type_body_length
 internal extension ColorName {
   enum Colors {

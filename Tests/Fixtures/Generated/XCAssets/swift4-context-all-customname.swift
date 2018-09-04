@@ -17,91 +17,7 @@ internal typealias XCTData = NSDataAsset
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-internal struct XCTColorAsset {
-  internal fileprivate(set) var name: String
-
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  internal var color: XCTColor {
-    return XCTColor(asset: self)
-  }
-}
-
-internal extension XCTColor {
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  convenience init!(asset: XCTColorAsset) {
-    let bundle = Bundle(for: BundleToken.self)
-    #if os(iOS) || os(tvOS)
-    self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX)
-    self.init(named: NSColor.Name(asset.name), bundle: bundle)
-    #elseif os(watchOS)
-    self.init(named: asset.name)
-    #endif
-  }
-}
-
-internal struct XCTDataAsset {
-  internal fileprivate(set) var name: String
-
-  #if os(iOS) || os(tvOS) || os(OSX)
-  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
-  internal var data: XCTData {
-    return XCTData(asset: self)
-  }
-  #endif
-}
-
-#if os(iOS) || os(tvOS) || os(OSX)
-internal extension XCTData {
-  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
-  convenience init!(asset: XCTDataAsset) {
-    let bundle = Bundle(for: BundleToken.self)
-    #if os(iOS) || os(tvOS)
-    self.init(name: asset.name, bundle: bundle)
-    #elseif os(OSX)
-    self.init(name: NSDataAsset.Name(asset.name), bundle: bundle)
-    #endif
-  }
-}
-#endif
-
-@available(*, deprecated, renamed: "XCTImageAsset")
-internal typealias XCTAssetsType = XCTImageAsset
-
-internal struct XCTImageAsset {
-  internal fileprivate(set) var name: String
-
-  internal var image: XCTImage {
-    let bundle = Bundle(for: BundleToken.self)
-    #if os(iOS) || os(tvOS)
-    let image = XCTImage(named: name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX)
-    let image = bundle.image(forResource: NSImage.Name(name))
-    #elseif os(watchOS)
-    let image = XCTImage(named: name)
-    #endif
-    guard let result = image else { fatalError("Unable to load image named \(name).") }
-    return result
-  }
-}
-
-internal extension XCTImage {
-  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
-  @available(OSX, deprecated,
-    message: "This initializer is unsafe on macOS, please use the XCTImageAsset.image property")
-  convenience init!(asset: XCTImageAsset) {
-    #if os(iOS) || os(tvOS)
-    let bundle = Bundle(for: BundleToken.self)
-    self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX)
-    self.init(named: NSImage.Name(asset.name))
-    #elseif os(watchOS)
-    self.init(named: asset.name)
-    #endif
-  }
-}
-
-// MARK: Assets
+// MARK: - Asset Catalogs
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum XCTAssets {
@@ -185,5 +101,91 @@ internal enum XCTAssets {
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
+
+// MARK: - Implementation Details
+
+internal struct XCTColorAsset {
+  internal fileprivate(set) var name: String
+
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  internal var color: XCTColor {
+    return XCTColor(asset: self)
+  }
+}
+
+internal extension XCTColor {
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  convenience init!(asset: XCTColorAsset) {
+    let bundle = Bundle(for: BundleToken.self)
+    #if os(iOS) || os(tvOS)
+    self.init(named: asset.name, in: bundle, compatibleWith: nil)
+    #elseif os(OSX)
+    self.init(named: NSColor.Name(asset.name), bundle: bundle)
+    #elseif os(watchOS)
+    self.init(named: asset.name)
+    #endif
+  }
+}
+
+internal struct XCTDataAsset {
+  internal fileprivate(set) var name: String
+
+  #if os(iOS) || os(tvOS) || os(OSX)
+  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  internal var data: XCTData {
+    return XCTData(asset: self)
+  }
+  #endif
+}
+
+#if os(iOS) || os(tvOS) || os(OSX)
+internal extension XCTData {
+  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  convenience init!(asset: XCTDataAsset) {
+    let bundle = Bundle(for: BundleToken.self)
+    #if os(iOS) || os(tvOS)
+    self.init(name: asset.name, bundle: bundle)
+    #elseif os(OSX)
+    self.init(name: NSDataAsset.Name(asset.name), bundle: bundle)
+    #endif
+  }
+}
+#endif
+
+@available(*, deprecated, renamed: "XCTImageAsset")
+internal typealias XCTAssetsType = XCTImageAsset
+
+internal struct XCTImageAsset {
+  internal fileprivate(set) var name: String
+
+  internal var image: XCTImage {
+    let bundle = Bundle(for: BundleToken.self)
+    #if os(iOS) || os(tvOS)
+    let image = XCTImage(named: name, in: bundle, compatibleWith: nil)
+    #elseif os(OSX)
+    let image = bundle.image(forResource: NSImage.Name(name))
+    #elseif os(watchOS)
+    let image = XCTImage(named: name)
+    #endif
+    guard let result = image else { fatalError("Unable to load image named \(name).") }
+    return result
+  }
+}
+
+internal extension XCTImage {
+  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
+  @available(OSX, deprecated,
+    message: "This initializer is unsafe on macOS, please use the XCTImageAsset.image property")
+  convenience init!(asset: XCTImageAsset) {
+    #if os(iOS) || os(tvOS)
+    let bundle = Bundle(for: BundleToken.self)
+    self.init(named: asset.name, in: bundle, compatibleWith: nil)
+    #elseif os(OSX)
+    self.init(named: NSImage.Name(asset.name))
+    #elseif os(watchOS)
+    self.init(named: asset.name)
+    #endif
+  }
+}
 
 private final class BundleToken {}
