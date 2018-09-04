@@ -43,7 +43,7 @@ import Foundation
     {% endif %}
     {% endfor %}
     {% for fetchedProperty in entity.fetchedProperties %}
-    @NSManaged {{ accessModifier }} let {{ fetchedProperty.name }}: [{{ fetchedProperty.fetchRequest.entity }}]
+    @NSManaged {{ accessModifier }} var {{ fetchedProperty.name }}: [{{ fetchedProperty.fetchRequest.entity }}]
     {% endfor %}
 }
 
@@ -100,7 +100,7 @@ extension {{ entityClassName }} {
         guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
             fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
         }
-        let model = persistentStoreCoordinator.model
+        let model = persistentStoreCoordinator.managedObjectModel
         let substitutionVariables: [String: Any] = [
             {% for variableName, variableType in fetchRequest.substitutionVariables %}
             "{{ variableName }}": {{ variableName | lowerFirstWord }}

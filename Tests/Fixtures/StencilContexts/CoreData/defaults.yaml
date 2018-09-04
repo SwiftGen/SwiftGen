@@ -36,6 +36,16 @@ models:
         key: "value"
     MainEntity:
       attributes:
+      - customClassName: "NSAttributedString"
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "attributedString"
+        propertyType: "attribute"
+        type: "Transformable"
+        typeName: "NSAttributedString"
+        userInfo: {}
+        usesScalarValueType: false
       - customClassName: ""
         isIndexed: false
         isOptional: true
@@ -57,16 +67,6 @@ models:
         typeName: "Bool"
         userInfo: {}
         usesScalarValueType: true
-      - customClassName: "UIColor"
-        isIndexed: false
-        isOptional: true
-        isTransient: false
-        name: "color"
-        propertyType: "attribute"
-        type: "Transformable"
-        typeName: "UIColor"
-        userInfo: {}
-        usesScalarValueType: false
       - customClassName: ""
         isIndexed: false
         isOptional: true
@@ -220,6 +220,16 @@ models:
       isAbstract: false
       name: "MainEntity"
       properties:
+      - customClassName: "NSAttributedString"
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "attributedString"
+        propertyType: "attribute"
+        type: "Transformable"
+        typeName: "NSAttributedString"
+        userInfo: {}
+        usesScalarValueType: false
       - customClassName: ""
         isIndexed: false
         isOptional: true
@@ -241,16 +251,6 @@ models:
         typeName: "Bool"
         userInfo: {}
         usesScalarValueType: true
-      - customClassName: "UIColor"
-        isIndexed: false
-        isOptional: true
-        isTransient: false
-        name: "color"
-        propertyType: "attribute"
-        type: "Transformable"
-        typeName: "UIColor"
-        userInfo: {}
-        usesScalarValueType: false
       - customClassName: ""
         isIndexed: false
         isOptional: true
@@ -473,6 +473,16 @@ models:
         propertyType: "relationship"
         userInfo: {}
       storedProperties:
+      - customClassName: "NSAttributedString"
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "attributedString"
+        propertyType: "attribute"
+        type: "Transformable"
+        typeName: "NSAttributedString"
+        userInfo: {}
+        usesScalarValueType: false
       - customClassName: ""
         isIndexed: false
         isOptional: true
@@ -494,16 +504,6 @@ models:
         typeName: "Bool"
         userInfo: {}
         usesScalarValueType: true
-      - customClassName: "UIColor"
-        isIndexed: false
-        isOptional: true
-        isTransient: false
-        name: "color"
-        propertyType: "attribute"
-        type: "Transformable"
-        typeName: "UIColor"
-        userInfo: {}
-        usesScalarValueType: false
       - customClassName: ""
         isIndexed: false
         isOptional: true

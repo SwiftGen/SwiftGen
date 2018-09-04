@@ -7,13 +7,13 @@
         </userInfo>
     </entity>
     <entity name="MainEntity" representedClassName="MainEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="attributedString" optional="YES" attributeType="Transformable" customClassName="NSAttributedString" syncable="YES"/>
         <attribute name="binaryData" optional="YES" attributeType="Binary" syncable="YES">
             <userInfo>
                 <entry key="key" value="value"/>
             </userInfo>
         </attribute>
         <attribute name="boolean" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="color" optional="YES" attributeType="Transformable" customClassName="UIColor" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="decimal" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="double" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>

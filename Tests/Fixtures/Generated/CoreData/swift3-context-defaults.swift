@@ -41,11 +41,11 @@ internal class MainEntity: NSManagedObject {
         return NSFetchRequest<MainEntity>(entityName: entityName())
     }
 
+    @NSManaged internal var attributedString: NSAttributedString?
+
     @NSManaged internal var binaryData: Data?
 
     @NSManaged internal var boolean: Bool
-
-    @NSManaged internal var color: UIColor?
 
     @NSManaged internal var date: Date?
 
@@ -79,7 +79,7 @@ internal class MainEntity: NSManagedObject {
 
     @NSManaged internal var oneToOne: SecondaryEntity?
 
-    @NSManaged internal let fetchedProperty: [NewEntity]
+    @NSManaged internal var fetchedProperty: [NewEntity]
 }
 
 extension MainEntity {
@@ -139,7 +139,7 @@ extension MainEntity {
         guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
             fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
         }
-        let model = persistentStoreCoordinator.model
+        let model = persistentStoreCoordinator.managedObjectModel
         let substitutionVariables: [String: Any] = [
             :
         ]
@@ -154,7 +154,7 @@ extension MainEntity {
         guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
             fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
         }
-        let model = persistentStoreCoordinator.model
+        let model = persistentStoreCoordinator.managedObjectModel
         let substitutionVariables: [String: Any] = [
             "UUID": uuid
         ]
@@ -169,7 +169,7 @@ extension MainEntity {
         guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
             fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
         }
-        let model = persistentStoreCoordinator.model
+        let model = persistentStoreCoordinator.managedObjectModel
         let substitutionVariables: [String: Any] = [
             "NAME": name
         ]
