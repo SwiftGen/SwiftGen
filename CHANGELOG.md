@@ -40,6 +40,9 @@
 * XCAssets: the generated templates won't namespace groups by default anymore, use the `forceProvidesNamespaces` flag to enable this behaviour again.  
   [jechris](https://github.com/pjechris)
   [#453](https://github.com/SwiftGen/SwiftGen/issues/453)
+* XCAssets: the templates won't generate any all-values accessors anymore by default. Use the `allValues` flag to enable this behaviour again. Note: this replaces the old `noAllValues` flag (with an inverse behaviour).  
+  [David Jennes](https://github.com/djbe) 
+  [#480](https://github.com/SwiftGen/SwiftGen/pull/480)
 
 ### New Features
 
