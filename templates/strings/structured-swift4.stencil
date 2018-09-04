@@ -7,6 +7,9 @@ import Foundation
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
+
+// MARK: - Strings
+
 {% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
     _ p{{forloop.counter}}: {{type}}{% if not forloop.last %}, {% endif %}
@@ -37,7 +40,6 @@ import Foundation
   }
   {% endfor %}
 {% endmacro %}
-
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 {% set enumName %}{{param.enumName|default:"L10n"}}{% endset %}
@@ -45,7 +47,7 @@ import Foundation
   {% if tables.count > 1 %}
   {% for table in tables %}
   {{accessModifier}} enum {{table.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
-  	{% filter indent:2 %}{% call recursiveBlock table.name table.levels %}{% endfilter %}
+    {% filter indent:2 %}{% call recursiveBlock table.name table.levels %}{% endfilter %}
   }
   {% endfor %}
   {% else %}
@@ -54,6 +56,8 @@ import Foundation
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name
+
+// MARK: - Implementation Details
 
 extension {{enumName}} {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
