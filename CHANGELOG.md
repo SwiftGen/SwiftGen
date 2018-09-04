@@ -37,6 +37,9 @@
 * Renamed the `storyboards` command to `ib`, to better reflect it's purpose. An alias for `storyboards` still exists, but it will be removed at some point.  
   [David Jennes](https://github.com/djbe) 
   [#423](https://github.com/SwiftGen/SwiftGen/pull/423)
+* XCAssets: the generated templates won't namespace groups by default anymore, use the `forceProvidesNamespaces` flag to enable this behaviour again.  
+  [jechris](https://github.com/pjechris)
+  [#453](https://github.com/SwiftGen/SwiftGen/issues/453)
 
 ### New Features
 
@@ -55,6 +58,9 @@
 * Use `swiftlint:disable all` in generated files to avoid interference with SwiftLint rules custom to the host project.  
   [Frederick Pietschmann](https://github.com/fredpi)
   [#409](https://github.com/SwiftGen/SwiftGen/issues/409)
+* XCAssets: Added support for `NSDataAssets`.  
+  [Oliver Jones](https://github.com/orj)
+  [#444](https://github.com/SwiftGen/SwiftGen/issues/444)
 * Adds support for generating code from Core Data models.  
   [Grant Butler](https://github.com/grantjbutler)
   [#455](https://github.com/SwiftGen/SwiftGen/pull/455)
@@ -70,12 +76,14 @@
 * Enabled some extra SwiftLint rules for better code consistency.  
   [David Jennes](https://github.com/djbe)
   [#402](https://github.com/SwiftGen/SwiftGen/pull/402)
+  [#476](https://github.com/SwiftGen/SwiftGen/pull/476)
 * Updated to latest Xcode (9.3.0).  
   [David Jennes](https://github.com/djbe) 
   [#415](https://github.com/SwiftGen/SwiftGen/pull/415)
-* Update to Stencil 0.11.0, and use some of it's new filters in our templates.  
+* Update to Stencil 0.12.1, and use some of it's new filters in our templates.  
   [David Jennes](https://github.com/djbe) 
   [#416](https://github.com/SwiftGen/SwiftGen/pull/416)
+  [#475](https://github.com/SwiftGen/SwiftGen/pull/475)
 * Store testing contexts as YAML files instead of PLISTs.  
   [David Jennes](https://github.com/djbe) 
   [#418](https://github.com/SwiftGen/SwiftGen/pull/418)

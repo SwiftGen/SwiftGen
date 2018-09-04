@@ -11,8 +11,6 @@ class FilterExpression : Resolvable {
   init(token: String, parser: TokenParser) throws {
     let bits = token.characters.split(separator: "|").map({ String($0).trim(character: " ") })
     if bits.isEmpty {
-      filters = []
-      variable = Variable("")
       throw TemplateSyntaxError("Variable tags must include at least 1 argument")
     }
 
@@ -50,8 +48,10 @@ public struct Variable : Equatable, Resolvable {
     self.variable = variable
   }
 
-  fileprivate func lookup() -> [String] {
-    return variable.characters.split(separator: ".").map(String.init)
+  // Split the lookup string and resolve references if possible
+  fileprivate func lookup(_ context: Context) throws -> [String] {
+    let keyPath = KeyPath(variable, in: context)
+    return try keyPath.parse()
   }
 
   /// Resolve the variable in the given context
@@ -75,7 +75,7 @@ public struct Variable : Equatable, Resolvable {
       return bool
     }
 
-    for bit in lookup() {
+    for bit in try lookup(context) {
       current = normalize(current)
 
       if let context = current as? Context {
@@ -101,11 +101,11 @@ public struct Variable : Equatable, Resolvable {
           current = array.count
         }
       } else if let object = current as? NSObject {  // NSKeyValueCoding
-#if os(Linux)
-        return nil
-#else
-        current = object.value(forKey: bit)
-#endif
+        #if os(Linux)
+          return nil
+        #else
+          current = object.value(forKey: bit)
+        #endif
       } else if let value = current {
         current = Mirror(reflecting: value).getValue(for: bit)
         if current == nil {
@@ -138,6 +138,7 @@ public struct RangeVariable: Resolvable {
   public let from: Resolvable
   public let to: Resolvable
 
+  @available(*, deprecated, message: "Use init?(_:parser:containedIn:)")
   public init?(_ token: String, parser: TokenParser) throws {
     let components = token.components(separatedBy: "...")
     guard components.count == 2 else {
@@ -146,6 +147,16 @@ public struct RangeVariable: Resolvable {
 
     self.from = try parser.compileFilter(components[0])
     self.to = try parser.compileFilter(components[1])
+  }
+
+  public init?(_ token: String, parser: TokenParser, containedIn containingToken: Token) throws {
+    let components = token.components(separatedBy: "...")
+    guard components.count == 2 else {
+      return nil
+    }
+
+    self.from = try parser.compileFilter(components[0], containedIn: containingToken)
+    self.to = try parser.compileFilter(components[1], containedIn: containingToken)
   }
 
   public func resolve(_ context: Context) throws -> Any? {
@@ -209,11 +220,11 @@ extension Dictionary : Normalizable {
 
 func parseFilterComponents(token: String) -> (String, [Variable]) {
   var components = token.smartSplit(separator: ":")
-  let name = components.removeFirst()
+  let name = components.removeFirst().trim(character: " ")
   let variables = components
     .joined(separator: ":")
     .smartSplit(separator: ",")
-    .map { Variable($0) }
+    .map { Variable($0.trim(character: " ")) }
   return (name, variables)
 }
 

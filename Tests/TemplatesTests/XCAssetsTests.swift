@@ -23,15 +23,20 @@ class XCAssetsTests: XCTestCase {
                                           parameters: ["enumName=XCTAssets",
                                                        "colorTypeName=XCTColorAsset",
                                                        "imageTypeName=XCTImageAsset",
+                                                       "dataTypeName=XCTDataAsset",
                                                        "colorAliasName=XCTColor",
-                                                       "imageAliasName=XCTImage"]),
+                                                       "imageAliasName=XCTImage",
+                                                       "dataAliasName=XCTData"]),
        suffix: "-customname"),
       (context: try StencilContext.enrich(context: context,
                                           parameters: ["noAllValues"]),
        suffix: "-no-all-values"),
       (context: try StencilContext.enrich(context: context,
                                           parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+       suffix: "-publicAccess"),
+      (context: try StencilContext.enrich(context: context,
+                                          parameters: ["forceProvidesNamespaces"]),
+       suffix: "-forceNamespaces")
     ]
   }
 

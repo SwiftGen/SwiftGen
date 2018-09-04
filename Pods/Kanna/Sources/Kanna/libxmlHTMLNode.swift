@@ -275,11 +275,16 @@ internal final class libxmlHTMLNode: XMLElement {
 
 private func libxmlGetNodeContent(_ nodePtr: xmlNodePtr) -> String? {
     let content = xmlNodeGetContent(nodePtr)
-    if let result  = String(validatingUTF8: UnsafeRawPointer(content!).assumingMemoryBound(to: CChar.self)) {
+    defer {
+        #if swift(>=4.1)
+        content?.deallocate()
+        #else
         content?.deallocate(capacity: 1)
+        #endif
+    }
+    if let result  = String(validatingUTF8: UnsafeRawPointer(content!).assumingMemoryBound(to: CChar.self)) {
         return result
     }
-    content?.deallocate(capacity: 1)
     return nil
 }
 

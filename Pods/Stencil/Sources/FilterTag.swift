@@ -1,6 +1,7 @@
 class FilterNode : NodeType {
   let resolvable: Resolvable
   let nodes: [NodeType]
+  let token: Token?
 
   class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     let bits = token.components()
@@ -15,20 +16,21 @@ class FilterNode : NodeType {
       throw TemplateSyntaxError("`endfilter` was not found.")
     }
 
-    let resolvable = try parser.compileFilter("filter_value|\(bits[1])")
-    return FilterNode(nodes: blocks, resolvable: resolvable)
+    let resolvable = try parser.compileFilter("filter_value|\(bits[1])", containedIn: token)
+    return FilterNode(nodes: blocks, resolvable: resolvable, token: token)
   }
 
-  init(nodes: [NodeType], resolvable: Resolvable) {
+  init(nodes: [NodeType], resolvable: Resolvable, token: Token) {
     self.nodes = nodes
     self.resolvable = resolvable
+    self.token = token
   }
 
   func render(_ context: Context) throws -> String {
     let value = try renderNodes(nodes, context)
 
     return try context.push(dictionary: ["filter_value": value]) {
-      return try VariableNode(variable: resolvable).render(context)
+      return try VariableNode(variable: resolvable, token: token).render(context)
     }
   }
 }

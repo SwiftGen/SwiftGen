@@ -8,28 +8,33 @@
 import Stencil
 
 class MapNode: NodeType {
-  let variable: Variable
+  let resolvable: Resolvable
   let resultName: String
   let mapVariable: String?
   let nodes: [NodeType]
+  let token: Token?
 
   class func parse(parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
 
-    guard components.count == 4 && components[2] == "into" ||
-      components.count == 6 && components[2] == "into" && components[4] == "using" else {
+    func hasToken(_ token: String, at index: Int) -> Bool {
+      return components.indices ~= index + 1 && components[index] == token
+    }
+
+    func endsOrHasToken(_ token: String, at index: Int) -> Bool {
+      return components.count == index || hasToken(token, at: index)
+    }
+
+    guard hasToken("into", at: 2) && endsOrHasToken("using", at: 4) else {
         throw TemplateSyntaxError("""
           'map' statements should use the following 'map {array} into \
-          {varname} [using {element}]' `\(token.contents)`.
+          {varname} [using {element}]'.
           """)
     }
 
-    let variable = components[1]
+    let resolvable = try parser.compileResolvable(components[1], containedIn: token)
     let resultName = components[3]
-    var mapVariable: String? = nil
-    if components.count > 4 {
-      mapVariable = components[5]
-    }
+    let mapVariable = hasToken("using", at: 4) ? components[5] : nil
 
     let mapNodes = try parser.parse(until(["endmap", "empty"]))
 
@@ -41,18 +46,25 @@ class MapNode: NodeType {
       _ = parser.nextToken()
     }
 
-    return MapNode(variable: variable, resultName: resultName, mapVariable: mapVariable, nodes: mapNodes)
+    return MapNode(
+      resolvable: resolvable,
+      resultName: resultName,
+      mapVariable: mapVariable,
+      nodes: mapNodes,
+      token: token
+    )
   }
 
-  init(variable: String, resultName: String, mapVariable: String?, nodes: [NodeType]) {
-    self.variable = Variable(variable)
+  init(resolvable: Resolvable, resultName: String, mapVariable: String?, nodes: [NodeType], token: Token? = nil) {
+    self.resolvable = resolvable
     self.resultName = resultName
     self.mapVariable = mapVariable
     self.nodes = nodes
+    self.token = token
   }
 
   func render(_ context: Context) throws -> String {
-    let values = try variable.resolve(context)
+    let values = try resolvable.resolve(context)
 
     if let values = values as? [Any], !values.isEmpty {
       let mappedValues: [String] = try values.enumerated().map { index, item in

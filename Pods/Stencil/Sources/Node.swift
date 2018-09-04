@@ -1,35 +1,31 @@
 import Foundation
 
-
-public struct TemplateSyntaxError : Error, Equatable, CustomStringConvertible {
-  public let description:String
-
-  public init(_ description:String) {
-    self.description = description
-  }
-}
-
-
-public func ==(lhs:TemplateSyntaxError, rhs:TemplateSyntaxError) -> Bool {
-  return lhs.description == rhs.description
-}
-
-
 public protocol NodeType {
   /// Render the node in the given context
   func render(_ context:Context) throws -> String
+
+  /// Reference to this node's token
+  var token: Token? { get }
 }
 
 
 /// Render the collection of nodes in the given context
 public func renderNodes(_ nodes:[NodeType], _ context:Context) throws -> String {
-  return try nodes.map { try $0.render(context) }.joined(separator: "")
+  return try nodes.map {
+    do {
+      return try $0.render(context)
+    } catch {
+      throw error.withToken($0.token)
+    }
+    }.joined(separator: "")
 }
 
 public class SimpleNode : NodeType {
   public let handler:(Context) throws -> String
+  public let token: Token?
 
-  public init(handler: @escaping (Context) throws -> String) {
+  public init(token: Token, handler: @escaping (Context) throws -> String) {
+    self.token = token
     self.handler = handler
   }
 
@@ -41,9 +37,11 @@ public class SimpleNode : NodeType {
 
 public class TextNode : NodeType {
   public let text:String
+  public let token: Token?
 
   public init(text:String) {
     self.text = text
+    self.token = nil
   }
 
   public func render(_ context:Context) throws -> String {
@@ -59,13 +57,16 @@ public protocol Resolvable {
 
 public class VariableNode : NodeType {
   public let variable: Resolvable
+  public var token: Token?
 
-  public init(variable: Resolvable) {
+  public init(variable: Resolvable, token: Token? = nil) {
     self.variable = variable
+    self.token = token
   }
 
-  public init(variable: String) {
+  public init(variable: String, token: Token? = nil) {
     self.variable = Variable(variable)
+    self.token = token
   }
 
   public func render(_ context: Context) throws -> String {

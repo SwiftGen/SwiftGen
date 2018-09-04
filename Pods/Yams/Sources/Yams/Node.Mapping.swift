@@ -73,6 +73,16 @@ extension Node.Mapping: Equatable {
     }
 }
 
+#if swift(>=4.1.50)
+extension Node.Mapping: Hashable {
+    /// :nodoc:
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(pairs)
+        hasher.combine(resolvedTag)
+    }
+}
+#endif
+
 extension Node.Mapping: ExpressibleByDictionaryLiteral {
     /// :nodoc:
     public init(dictionaryLiteral elements: (Node, Node)...) {
@@ -187,9 +197,11 @@ private struct Pair<Value: Comparable & Equatable>: Comparable, Equatable {
         self.value = value
     }
 
+#if !swift(>=4.1.50)
     static func == (lhs: Pair, rhs: Pair) -> Bool {
         return lhs.key == rhs.key && lhs.value == rhs.value
     }
+#endif
 
     static func < (lhs: Pair<Value>, rhs: Pair<Value>) -> Bool {
         return lhs.key < rhs.key
@@ -199,3 +211,7 @@ private struct Pair<Value: Comparable & Equatable>: Comparable, Equatable {
         return (key: pair.key, value: pair.value)
     }
 }
+
+#if swift(>=4.1.50)
+extension Pair: Hashable where Value: Hashable {}
+#endif

@@ -5,7 +5,8 @@
   },
   "data" : [
     {
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "filename" : "README.txt"
     }
   ]
 }

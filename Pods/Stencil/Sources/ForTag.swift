@@ -6,6 +6,7 @@ class ForNode : NodeType {
   let nodes:[NodeType]
   let emptyNodes: [NodeType]
   let `where`: Expression?
+  let token: Token?
 
   class func parse(_ parser:TokenParser, token:Token) throws -> NodeType {
     let components = token.components()
@@ -13,20 +14,25 @@ class ForNode : NodeType {
     func hasToken(_ token: String, at index: Int) -> Bool {
       return components.count > (index + 1) && components[index] == token
     }
+
     func endsOrHasToken(_ token: String, at index: Int) -> Bool {
       return components.count == index || hasToken(token, at: index)
     }
 
     guard hasToken("in", at: 2) && endsOrHasToken("where", at: 4) else {
-      throw TemplateSyntaxError("'for' statements should use the syntax: `for <x> in <y> [where <condition>]")
+      throw TemplateSyntaxError("'for' statements should use the syntax: `for <x> in <y> [where <condition>]`.")
     }
 
     let loopVariables = components[1].characters
       .split(separator: ",")
       .map(String.init)
-      .map { $0.trimmingCharacters(in: CharacterSet.whitespaces) }
+      .map { $0.trim(character: " ") }
 
-    var emptyNodes = [NodeType]()
+    let resolvable = try parser.compileResolvable(components[3], containedIn: token)
+
+    let `where` = hasToken("where", at: 4)
+      ? try parseExpression(components: Array(components.suffix(from: 5)), tokenParser: parser, token: token)
+      : nil
 
     let forNodes = try parser.parse(until(["endfor", "empty"]))
 
@@ -34,26 +40,22 @@ class ForNode : NodeType {
       throw TemplateSyntaxError("`endfor` was not found.")
     }
 
+    var emptyNodes = [NodeType]()
     if token.contents == "empty" {
       emptyNodes = try parser.parse(until(["endfor"]))
       _ = parser.nextToken()
     }
 
-    let resolvable = try parser.compileResolvable(components[3])
-
-    let `where` = hasToken("where", at: 4)
-      ? try parseExpression(components: Array(components.suffix(from: 5)), tokenParser: parser)
-      : nil
-
-    return ForNode(resolvable: resolvable, loopVariables: loopVariables, nodes: forNodes, emptyNodes:emptyNodes, where: `where`)
+    return ForNode(resolvable: resolvable, loopVariables: loopVariables, nodes: forNodes, emptyNodes: emptyNodes, where: `where`, token: token)
   }
 
-  init(resolvable: Resolvable, loopVariables: [String], nodes:[NodeType], emptyNodes:[NodeType], where: Expression? = nil) {
+  init(resolvable: Resolvable, loopVariables: [String], nodes: [NodeType], emptyNodes: [NodeType], where: Expression? = nil, token: Token? = nil) {
     self.resolvable = resolvable
     self.loopVariables = loopVariables
     self.nodes = nodes
     self.emptyNodes = emptyNodes
     self.where = `where`
+    self.token = token
   }
 
   func push<Result>(value: Any, context: Context, closure: () throws -> (Result)) throws -> Result {
@@ -143,7 +145,7 @@ class ForNode : NodeType {
             try renderNodes(nodes, context)
           }
         }
-      }.joined(separator: "")
+        }.joined(separator: "")
     }
 
     return try context.push {

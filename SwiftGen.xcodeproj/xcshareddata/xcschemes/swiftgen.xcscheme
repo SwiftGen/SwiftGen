@@ -135,6 +135,14 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "xcassets -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Data.xcassets"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "xcassets -t swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Data.xcassets"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "templates list"
             isEnabled = "NO">
          </CommandLineArgument>

@@ -11,7 +11,7 @@ end
 target 'swiftgen' do
   common_pods
   pod 'Commander', '~> 0.8'
-  pod 'StencilSwiftKit', '~> 2.5'
+  pod 'StencilSwiftKit', '~> 2.6'
 
   target 'SwiftGen UnitTests' do
     inherit! :complete

@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/tid-kijyun/Kanna.git",
         "state": {
           "branch": null,
-          "revision": "44b169e1698d596f2eed698d8a67558fb0542b2a",
-          "version": "4.0.0"
+          "revision": "5541695ce429124b7902fcaeff32f146ba99399e",
+          "version": "4.0.1"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/kylef/Stencil.git",
         "state": {
           "branch": null,
-          "revision": "c2e25f25acfbe24442809c055141d8323af8f6cc",
-          "version": "0.11.0"
+          "revision": "b476e50f89577f5848e8013dbf0a850abac892aa",
+          "version": "0.12.1"
         }
       },
       {
@@ -51,7 +51,7 @@
         "repositoryURL": "https://github.com/SwiftGen/StencilSwiftKit.git",
         "state": {
           "branch": "master",
-          "revision": "008100ad4ca1a89269a53f03f8a65c1e5ec2a052",
+          "revision": "85bc9efcccc8ee8068c2824442114e7b1f8ee990",
           "version": null
         }
       },
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/jpsim/Yams.git",
         "state": {
           "branch": null,
-          "revision": "6652aa7b793d3c8a075db0614acb575fcaecf457",
-          "version": "0.7.0"
+          "revision": "26ab35f50ea891e8edefcc9d975db2f6b67e1d68",
+          "version": "1.0.1"
         }
       }
     ]

@@ -10,6 +10,9 @@
   internal typealias AssetColorTypeAlias = UIColor
   internal typealias Image = UIImage
 #endif
+#if os(iOS) || os(tvOS) || os(OSX)
+internal typealias AssetDataTypeAlias = NSDataAsset
+#endif
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -36,6 +39,31 @@ internal extension AssetColorTypeAlias {
     #endif
   }
 }
+
+internal struct DataAsset {
+  internal fileprivate(set) var name: String
+
+  #if os(iOS) || os(tvOS) || os(OSX)
+  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  internal var data: AssetDataTypeAlias {
+    return AssetDataTypeAlias(asset: self)
+  }
+  #endif
+}
+
+#if os(iOS) || os(tvOS) || os(OSX)
+internal extension AssetDataTypeAlias {
+  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  convenience init!(asset: DataAsset) {
+    let bundle = Bundle(for: BundleToken.self)
+    #if os(iOS) || os(tvOS)
+    self.init(name: asset.name, bundle: bundle)
+    #elseif os(OSX)
+    self.init(name: NSDataAsset.Name(asset.name), bundle: bundle)
+    #endif
+  }
+}
+#endif
 
 @available(*, deprecated, renamed: "ImageAsset")
 internal typealias AssetType = ImageAsset
@@ -88,6 +116,13 @@ internal enum Asset {
       internal static let tint = ColorAsset(name: "Vengo/Tint")
     }
   }
+  internal enum Data {
+    internal static let data = DataAsset(name: "Data")
+    internal enum Json {
+      internal static let data = DataAsset(name: "Json/Data")
+    }
+    internal static let readme = DataAsset(name: "README")
+  }
   internal enum Images {
     internal enum Exotic {
       internal static let banana = ImageAsset(name: "Exotic/Banana")
@@ -95,13 +130,11 @@ internal enum Asset {
     }
     internal enum Round {
       internal static let apricot = ImageAsset(name: "Round/Apricot")
-      internal enum Red {
-        internal static let apple = ImageAsset(name: "Round/Apple")
-        internal enum Double {
-          internal static let cherry = ImageAsset(name: "Round/Double/Cherry")
-        }
-        internal static let tomato = ImageAsset(name: "Round/Tomato")
+      internal static let apple = ImageAsset(name: "Round/Apple")
+      internal enum Double {
+        internal static let cherry = ImageAsset(name: "Round/Double/Cherry")
       }
+      internal static let tomato = ImageAsset(name: "Round/Tomato")
     }
     internal static let `private` = ImageAsset(name: "private")
   }
