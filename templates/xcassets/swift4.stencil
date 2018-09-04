@@ -44,8 +44,6 @@
     {% filter indent:2 %}{% call allValuesBlock assets "image" "" %}{% endfilter %}
   ]
   // swiftlint:enable trailing_comma
-  @available(*, deprecated, renamed: "allImages")
-  {{accessModifier}} static let allValues: [{{enumName}}Type] = allImages
   {% endif %}
 {% endmacro %}
 {% macro casesBlock assets %}
@@ -145,9 +143,6 @@
   }
 }
 #endif
-
-@available(*, deprecated, renamed: "{{imageType}}")
-{{accessModifier}} typealias {{enumName}}Type = {{imageType}}
 
 {{accessModifier}} struct {{imageType}} {
   {{accessModifier}} fileprivate(set) var name: String
