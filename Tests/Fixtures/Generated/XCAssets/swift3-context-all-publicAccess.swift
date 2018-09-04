@@ -31,21 +31,6 @@ public enum Asset {
       public static let primary = ColorAsset(name: "Vengo/Primary")
       public static let tint = ColorAsset(name: "Vengo/Tint")
     }
-    // swiftlint:disable trailing_comma
-    public static let allColors: [ColorAsset] = [
-      _24Vision.background,
-      _24Vision.primary,
-      Vengo.primary,
-      Vengo.tint,
-    ]
-    public static let allDataAssets: [DataAsset] = [
-    ]
-    public static let allImages: [ImageAsset] = [
-      orange,
-    ]
-    // swiftlint:enable trailing_comma
-    @available(*, deprecated, renamed: "allImages")
-    public static let allValues: [AssetType] = allImages
   }
   public enum Data {
     public static let data = DataAsset(name: "Data")
@@ -53,19 +38,6 @@ public enum Asset {
       public static let data = DataAsset(name: "Json/Data")
     }
     public static let readme = DataAsset(name: "README")
-    // swiftlint:disable trailing_comma
-    public static let allColors: [ColorAsset] = [
-    ]
-    public static let allDataAssets: [DataAsset] = [
-      data,
-      Json.data,
-      readme,
-    ]
-    public static let allImages: [ImageAsset] = [
-    ]
-    // swiftlint:enable trailing_comma
-    @available(*, deprecated, renamed: "allImages")
-    public static let allValues: [AssetType] = allImages
   }
   public enum Images {
     public enum Exotic {
@@ -81,23 +53,6 @@ public enum Asset {
       public static let tomato = ImageAsset(name: "Round/Tomato")
     }
     public static let `private` = ImageAsset(name: "private")
-    // swiftlint:disable trailing_comma
-    public static let allColors: [ColorAsset] = [
-    ]
-    public static let allDataAssets: [DataAsset] = [
-    ]
-    public static let allImages: [ImageAsset] = [
-      Exotic.banana,
-      Exotic.mango,
-      Round.apricot,
-      Round.apple,
-      Round.Double.cherry,
-      Round.tomato,
-      `private`,
-    ]
-    // swiftlint:enable trailing_comma
-    @available(*, deprecated, renamed: "allImages")
-    public static let allValues: [AssetType] = allImages
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
