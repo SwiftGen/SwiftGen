@@ -39,7 +39,7 @@ enum L10n {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Strings/flat-swift4-context-localizable.swift)
+[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Generated/Strings/flat-swift4-context-localizable.swift)
 
 ## Usage example
 

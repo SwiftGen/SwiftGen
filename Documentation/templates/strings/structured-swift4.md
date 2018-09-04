@@ -55,7 +55,7 @@ enum L10n {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Strings/structured-swift4-context-localizable.swift)
+[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Generated/Strings/structured-swift4-context-localizable.swift)
 
 ## Usage example
 
