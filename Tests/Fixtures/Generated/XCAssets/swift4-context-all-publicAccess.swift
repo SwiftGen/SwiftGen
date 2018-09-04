@@ -10,9 +10,6 @@
   public typealias AssetColorTypeAlias = UIColor
   public typealias AssetImageTypeAlias = UIImage
 #endif
-#if os(iOS) || os(tvOS) || os(OSX)
-public typealias AssetDataTypeAlias = NSDataAsset
-#endif
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -87,15 +84,15 @@ public struct DataAsset {
 
   #if os(iOS) || os(tvOS) || os(OSX)
   @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
-  public var data: AssetDataTypeAlias {
-    return AssetDataTypeAlias(asset: self)
+  public var data: NSDataAsset {
+    return NSDataAsset(asset: self)
   }
   #endif
 }
 
 #if os(iOS) || os(tvOS) || os(OSX)
-public extension AssetDataTypeAlias {
-  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+@available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+public extension NSDataAsset {
   convenience init!(asset: DataAsset) {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)

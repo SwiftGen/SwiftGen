@@ -21,7 +21,6 @@ You can customize some elements of this template by overriding the following par
 | -------------- | ------------- | ----------- |
 | `enumName` | `Asset` | Allows you to change the name of the generated `enum` containing all assets. |
 | `colorAliasName` | `AssetColorTypeAlias` | Allows you to change the name of the generated `typealias` for the platform specific color type. |
-| `dataAliasName` | `AssetDataTypeAlias` | Allows you to change the name of the generated `typealias` for the data type. |
 | `imageAliasName` | `AssetImageTypeAlias` | Allows you to change the name of the generated `typealias` for the platform specific image type. |
 | `colorTypeName` | `ColorAsset` | Allows you to change the name of the struct type representing a color. |
 | `dataTypeName` | `DataAsset` | Allows you to change the name of the struct type representing a data asset. |

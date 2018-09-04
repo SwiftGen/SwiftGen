@@ -10,9 +10,6 @@
   internal typealias XCTColor = UIColor
   internal typealias XCTImage = UIImage
 #endif
-#if os(iOS) || os(tvOS) || os(OSX)
-internal typealias XCTData = NSDataAsset
-#endif
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -89,25 +86,21 @@ internal extension XCTColor {
 internal struct XCTDataAsset {
   internal fileprivate(set) var name: String
 
-  #if os(iOS) || os(tvOS) || os(OSX)
-  #if swift(>=3.2)
+  #if (os(iOS) || os(tvOS) || os(OSX)) && swift(>=3.2)
   @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
-  internal var data: XCTData {
-    return XCTData(asset: self)
+  internal var data: NSDataAsset {
+    return NSDataAsset(asset: self)
   }
-  #endif
   #endif
 }
 
-#if os(iOS) || os(tvOS) || os(OSX)
-internal extension XCTData {
-  #if swift(>=3.2)
-  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+#if (os(iOS) || os(tvOS) || os(OSX)) && swift(>=3.2)
+@available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+internal extension NSDataAsset {
   convenience init!(asset: XCTDataAsset) {
     let bundle = Bundle(for: BundleToken.self)
     self.init(name: asset.name, bundle: bundle)
   }
-  #endif
 }
 #endif
 
