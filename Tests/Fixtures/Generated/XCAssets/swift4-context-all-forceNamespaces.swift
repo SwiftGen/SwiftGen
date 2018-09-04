@@ -4,11 +4,11 @@
 #if os(OSX)
   import AppKit.NSImage
   internal typealias AssetColorTypeAlias = NSColor
-  internal typealias Image = NSImage
+  internal typealias AssetImageTypeAlias = NSImage
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIImage
   internal typealias AssetColorTypeAlias = UIColor
-  internal typealias Image = UIImage
+  internal typealias AssetImageTypeAlias = UIImage
 #endif
 #if os(iOS) || os(tvOS) || os(OSX)
 internal typealias AssetDataTypeAlias = NSDataAsset
@@ -109,27 +109,24 @@ internal extension AssetDataTypeAlias {
 }
 #endif
 
-@available(*, deprecated, renamed: "ImageAsset")
-internal typealias AssetType = ImageAsset
-
 internal struct ImageAsset {
   internal fileprivate(set) var name: String
 
-  internal var image: Image {
+  internal var image: AssetImageTypeAlias {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
-    let image = Image(named: name, in: bundle, compatibleWith: nil)
+    let image = AssetImageTypeAlias(named: name, in: bundle, compatibleWith: nil)
     #elseif os(OSX)
     let image = bundle.image(forResource: NSImage.Name(name))
     #elseif os(watchOS)
-    let image = Image(named: name)
+    let image = AssetImageTypeAlias(named: name)
     #endif
     guard let result = image else { fatalError("Unable to load image named \(name).") }
     return result
   }
 }
 
-internal extension Image {
+internal extension AssetImageTypeAlias {
   @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")

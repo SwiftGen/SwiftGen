@@ -111,9 +111,6 @@ internal extension XCTData {
 }
 #endif
 
-@available(*, deprecated, renamed: "XCTImageAsset")
-internal typealias XCTAssetsType = XCTImageAsset
-
 internal struct XCTImageAsset {
   internal fileprivate(set) var name: String
 
