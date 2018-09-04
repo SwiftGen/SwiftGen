@@ -43,6 +43,9 @@
 * XCAssets: the templates won't generate any all-values accessors anymore by default. Use the `allValues` flag to enable this behaviour again. Note: this replaces the old `noAllValues` flag (with an inverse behaviour).  
   [David Jennes](https://github.com/djbe) 
   [#480](https://github.com/SwiftGen/SwiftGen/pull/480)
+* XCAssets: Dropped the deprecated `allValues` constant, use the type specific constants such as `allColors`, `allDataItems` and `allImages`. The default value of `imageAlias` has also been changed from `Image` to `AssetImageTypeAlias`, to be consistent with the other types.  
+  [David Jennes](https://github.com/djbe) 
+  [#482](https://github.com/SwiftGen/SwiftGen/pull/482)
 
 ### New Features
 
