@@ -6,6 +6,7 @@
 * XCAssets #480: removed `noAllValues` parameter, replaced by `allValues` parameter.
 * XCAssets #482: removed deprecated `allValues` constant
 * XCAssets #482: changed x-platform image alias default from `Image` to `AssetImageTypeAlias`.
+* IB #419: Split up the templates into one for scenes and one for segues (in preparation for future templates for accessibility labels, ...).
 
 # Templates 2.1 Migration Guide
 
