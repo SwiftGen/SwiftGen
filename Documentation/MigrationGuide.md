@@ -1,3 +1,7 @@
+# Master
+
+*** Work In Progress — Will be consolidated once the release is ready ***
+
 # SwiftGen 5.1 Migration Guide
 
 ## Template functionality changes

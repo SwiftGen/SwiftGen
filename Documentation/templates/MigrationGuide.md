@@ -1,3 +1,7 @@
+# Master
+
+*** Work In Progress — Will be consolidated once the release is ready ***
+
 # Templates 2.1 Migration Guide
 
 ## Functionality changes in 2.1 (SwiftGen 5.1)
