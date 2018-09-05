@@ -2,11 +2,25 @@
 
 *** Work In Progress — Will be consolidated once the release is ready ***
 
+Breaking:
+
+* #420: Removed Swift 2 templates. Because it's old.
+* IB #423: Renamed `storyboards` to `ib`, so user template search paths changed.
+* XCAssets #453: All groups are no longer namespaced by default. To enable behaviour again: `forceProvidesNamespaces`
+* #409: All templates now have `swiftlint:disable all` at the top, so you no longer need to ignore the generated files, although this is still recommended.
+* #416 and #475: new Stencil/StencilSwiftKit, so new features for template writers.
 * XCAssets #480: no longer generate `allXXX` constants by default. Can be turned on again with `allValues` flag.
 * XCAssets #480: removed `noAllValues` parameter, replaced by `allValues` parameter.
 * XCAssets #482: removed deprecated `allValues` constant
 * XCAssets #482: changed x-platform image alias default from `Image` to `AssetImageTypeAlias`.
 * IB #419: Split up the templates into one for scenes and one for segues (in preparation for future templates for accessibility labels, ...).
+* IB #419: Added a handy initializer on `SegueType` for use in `prepareForSegue`.
+
+Improvements:
+
+* IB #485: Templates now handle the "Inherit module from target", you may not need the `--param  module=...` anymore.
+* Fonts #394: Added a `registerAllCustomFonts` function.
+* XCAssets #444: `NSDataAsset` support.
 
 # Templates 2.1 Migration Guide
 
