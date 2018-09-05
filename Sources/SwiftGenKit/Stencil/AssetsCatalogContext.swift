@@ -19,9 +19,10 @@ import Foundation
        - `name` : `String` — name of the data asset
        - `value`: `String` — the actual full name for loading the data asset
      - represents a group and has the following entries:
-       - `type` : `String` — "group"
-       - `name` : `String` — name of the folder
-       - `items`: `Array` — list of items, can be either groups, colors or images
+       - `type`        : `String` — "group"
+       - `name`        : `String` — name of the folder
+       - `isNameSpaced`: `Bool` - Whether this group provides a namespace for child items
+       - `items`       : `Array` — list of items, can be either groups, colors or images
      - represents an image asset, and has the following entries:
        - `type` : `String` — "image"
        - `name` : `String` — name of the image
