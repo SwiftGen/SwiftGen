@@ -70,14 +70,16 @@ extension InterfaceBuilder.Parser {
         "customClass": customClass,
         "customModule": scene.customModule ?? "",
         "type": scene.type,
-        "module": scene.module ?? ""
+        "module": scene.module ?? "",
+        "moduleIsPlaceholder": scene.moduleIsPlaceholder
       ]
     } else {
       return [
         "identifier": scene.identifier,
         "baseType": scene.tag.uppercasedFirst(),
         "type": scene.type,
-        "module": scene.module ?? ""
+        "module": scene.module ?? "",
+        "moduleIsPlaceholder": scene.moduleIsPlaceholder
       ]
     }
   }
@@ -88,7 +90,8 @@ extension InterfaceBuilder.Parser {
       "customClass": segue.customClass ?? "",
       "customModule": segue.customModule ?? "",
       "type": segue.type,
-      "module": segue.module ?? ""
+      "module": segue.module ?? "",
+      "moduleIsPlaceholder": segue.moduleIsPlaceholder
     ]
   }
 }
