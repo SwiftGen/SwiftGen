@@ -31,21 +31,6 @@ internal enum XCTAssets {
       internal static let primary = XCTColorAsset(name: "Vengo/Primary")
       internal static let tint = XCTColorAsset(name: "Vengo/Tint")
     }
-    // swiftlint:disable trailing_comma
-    internal static let allColors: [XCTColorAsset] = [
-      _24Vision.background,
-      _24Vision.primary,
-      Vengo.primary,
-      Vengo.tint,
-    ]
-    internal static let allDataAssets: [XCTDataAsset] = [
-    ]
-    internal static let allImages: [XCTImageAsset] = [
-      orange,
-    ]
-    // swiftlint:enable trailing_comma
-    @available(*, deprecated, renamed: "allImages")
-    internal static let allValues: [XCTAssetsType] = allImages
   }
   internal enum Data {
     internal static let data = XCTDataAsset(name: "Data")
@@ -53,19 +38,6 @@ internal enum XCTAssets {
       internal static let data = XCTDataAsset(name: "Json/Data")
     }
     internal static let readme = XCTDataAsset(name: "README")
-    // swiftlint:disable trailing_comma
-    internal static let allColors: [XCTColorAsset] = [
-    ]
-    internal static let allDataAssets: [XCTDataAsset] = [
-      data,
-      Json.data,
-      readme,
-    ]
-    internal static let allImages: [XCTImageAsset] = [
-    ]
-    // swiftlint:enable trailing_comma
-    @available(*, deprecated, renamed: "allImages")
-    internal static let allValues: [XCTAssetsType] = allImages
   }
   internal enum Images {
     internal enum Exotic {
@@ -81,23 +53,6 @@ internal enum XCTAssets {
       internal static let tomato = XCTImageAsset(name: "Round/Tomato")
     }
     internal static let `private` = XCTImageAsset(name: "private")
-    // swiftlint:disable trailing_comma
-    internal static let allColors: [XCTColorAsset] = [
-    ]
-    internal static let allDataAssets: [XCTDataAsset] = [
-    ]
-    internal static let allImages: [XCTImageAsset] = [
-      Exotic.banana,
-      Exotic.mango,
-      Round.apricot,
-      Round.apple,
-      Round.Double.cherry,
-      Round.tomato,
-      `private`,
-    ]
-    // swiftlint:enable trailing_comma
-    @available(*, deprecated, renamed: "allImages")
-    internal static let allValues: [XCTAssetsType] = allImages
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

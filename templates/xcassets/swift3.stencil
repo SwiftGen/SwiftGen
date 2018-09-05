@@ -31,7 +31,7 @@
 
 {% macro enumBlock assets %}
   {% call casesBlock assets %}
-  {% if not param.noAllValues %}
+  {% if param.allValues %}
 
   // swiftlint:disable trailing_comma
   {{accessModifier}} static let allColors: [{{colorType}}] = [
