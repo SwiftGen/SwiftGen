@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="262" y="234"/>
         </scene>
-        <!--Dependency-osx-->
+        <!--Dependent-->
         <scene sceneID="jeB-5h-7HV">
             <objects>
-                <controllerPlaceholder storyboardIdentifier="Dependent" storyboardName="Dependency-osx" id="EIJ-iL-tpR" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardIdentifier="Dependent" storyboardName="Dependency" referencedIdentifier="Dependent" id="EIJ-iL-tpR" sceneMemberID="viewController"/>
                 <customObject id="s9D-CE-7EV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="715.5" y="228"/>

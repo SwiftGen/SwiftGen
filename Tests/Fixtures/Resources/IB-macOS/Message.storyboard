@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -54,7 +54,7 @@
         <!--Custom Tab View Controller-->
         <scene sceneID="KL7-WW-1Vf">
             <objects>
-                <tabViewController storyboardIdentifier="MessagesTab" id="3pk-bw-FlH" customClass="CustomTabViewController" sceneMemberID="viewController">
+                <tabViewController storyboardIdentifier="MessagesTab" id="3pk-bw-FlH" customClass="CustomTabViewController" customModule="SwiftGen" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem id="cKo-D7-dmH"/>
                     </tabViewItems>
@@ -75,10 +75,10 @@
             </objects>
             <point key="canvasLocation" x="1952" y="400"/>
         </scene>
-        <!--View Controller-->
+        <!--Details View Controller-->
         <scene sceneID="GeB-EV-NfO">
             <objects>
-                <viewController storyboardIdentifier="MessageDetails" id="Lxj-cP-fFs" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MessageDetails" id="Lxj-cP-fFs" customClass="DetailsViewController" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Kr5-Lg-sHR">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -92,7 +92,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <segue destination="F1C-uo-ozY" kind="custom" identifier="public" customClass="FadeSegue" customModule="FadeSegue" id="and-Oo-071"/>
+                                    <segue destination="F1C-uo-ozY" kind="custom" identifier="Fade" customClass="SlowFadeSegue" customModule="PrefsWindowController" id="and-Oo-071"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -107,6 +107,9 @@
                         <segue destination="F1C-uo-ozY" kind="modal" identifier="Modal" id="v1X-lb-nhi"/>
                         <segue destination="F1C-uo-ozY" kind="sheet" identifier="Sheet" id="Kxp-Ra-zsP"/>
                         <segue destination="F1C-uo-ozY" kind="show" identifier="Show" id="zL6-jB-uO5"/>
+                        <segue destination="F1C-uo-ozY" kind="custom" identifier="Login" customClass="LoginSegue" customModule="ExtraModule" id="w80-yI-DNd"/>
+                        <segue destination="F1C-uo-ozY" kind="custom" identifier="private" customClass="RotateSegue" customModuleProvider="target" id="Q9w-dD-dDj"/>
+                        <segue destination="F1C-uo-ozY" kind="custom" identifier="public" customClass="ZoomSegue" customModule="SwiftGen" id="aFQ-Jc-W0a"/>
                     </connections>
                 </viewController>
                 <customObject id="l9k-hF-Sxp" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -310,7 +313,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bkk-80-yU1"/>
-        <segue reference="and-Oo-071"/>
+        <segue reference="rRd-wB-sdk"/>
+        <segue reference="Q9w-dD-dDj"/>
     </inferredMetricsTieBreakers>
 </document>
