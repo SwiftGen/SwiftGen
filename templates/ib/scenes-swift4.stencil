@@ -18,13 +18,21 @@ import {{module}}
 // MARK: - Storyboard Scenes
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-{% macro className scene %}{% filter removeNewlines %}
-  {% if scene.module %}
-    {% if not param.ignoreTargetModule or scene.module != env.PRODUCT_MODULE_NAME and scene.module != param.module %}
-      {{scene.module}}.
+{% macro moduleName item %}{% filter removeNewlines %}
+  {% if item.moduleIsPlaceholder %}
+    {{ env.PRODUCT_MODULE_NAME|default:param.module }}
+  {% else %}
+    {{ item.module }}
+  {% endif %}
+{% endfilter %}{% endmacro %}
+{% macro className item %}{% filter removeNewlines %}
+  {% set module %}{% call moduleName item %}{% endset %}
+  {% if module %}
+    {% if not param.ignoreTargetModule or module != env.PRODUCT_MODULE_NAME and module != param.module %}
+      {{module}}.
     {% endif %}
   {% endif %}
-  {{scene.type}}
+  {{item.type}}
 {% endfilter %}{% endmacro %}
 {{accessModifier}} enum {{param.enumName|default:"StoryboardScene"}} {
   {% for storyboard in storyboards %}
