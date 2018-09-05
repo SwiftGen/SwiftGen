@@ -42,6 +42,7 @@
 		80F8014301BF496E905CA2CF /* Pods_SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16DF0A0F13A222BCA7B60102 /* Pods_SwiftGenKit.framework */; };
 		9A35A2477F800A42E6A654C8 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5D3E5746871F59AC9CA625 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */; };
 		C580E102337633038E486585 /* Pods_swiftgen_Templates_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8031AB7FD88D5F010179EDC /* Pods_swiftgen_Templates_UnitTests.framework */; };
+		DD112CBA2141675900B11A5D /* InterfaceBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */; };
 		DD15F101213C3DDF00D081C7 /* YamsSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F100213C3DDF00D081C7 /* YamsSerialization.swift */; };
 		DD15F103213C40A000D081C7 /* PlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F102213C409F00D081C7 /* PlistTests.swift */; };
 		DD15F105213C412F00D081C7 /* JsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F104213C412F00D081C7 /* JsonTests.swift */; };
@@ -305,6 +306,7 @@
 		C00832FEC9F060E93DAD1228 /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8876ECE7B9852963F6B5 /* Pods_swiftgen_SwiftGen_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen_SwiftGen_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D662CF56C834C4E7CEA32364 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceBuilderTests.swift; sourceTree = "<group>"; };
 		DD15F100213C3DDF00D081C7 /* YamsSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamsSerialization.swift; sourceTree = "<group>"; };
 		DD15F102213C409F00D081C7 /* PlistTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistTests.swift; sourceTree = "<group>"; };
 		DD15F104213C412F00D081C7 /* JsonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonTests.swift; sourceTree = "<group>"; };
@@ -759,6 +761,7 @@
 				DDDE506E1FAF6AD4004203BE /* FontsTests.swift */,
 				DDDE50F91FAF6AD4004203BE /* InterfaceBuilderiOSTests.swift */,
 				DDDE50F71FAF6AD4004203BE /* InterfaceBuilderMacOSTests.swift */,
+				DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */,
 				DD15F104213C412F00D081C7 /* JsonTests.swift */,
 				DD15F102213C409F00D081C7 /* PlistTests.swift */,
 				DDDE506D1FAF6AD4004203BE /* StringsTests.swift */,
@@ -1402,6 +1405,7 @@
 				DD15F105213C412F00D081C7 /* JsonTests.swift in Sources */,
 				DD15F103213C40A000D081C7 /* PlistTests.swift in Sources */,
 				DDDE51971FAF6AD4004203BE /* TestsHelper.swift in Sources */,
+				DD112CBA2141675900B11A5D /* InterfaceBuilderTests.swift in Sources */,
 				DDDE51941FAF6AD4004203BE /* XCAssetsTests.swift in Sources */,
 				DDDE51951FAF6AD4004203BE /* ColorsTests.swift in Sources */,
 				DDDE51141FAF6AD4004203BE /* FontsTests.swift in Sources */,
