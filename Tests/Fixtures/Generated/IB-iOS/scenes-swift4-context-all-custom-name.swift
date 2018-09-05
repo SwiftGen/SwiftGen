@@ -16,7 +16,7 @@ import UIKit
 // MARK: - Storyboard Scenes
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-internal enum StoryboardScene {
+internal enum XCTStoryboardCustom {
   internal enum AdditionalImport: StoryboardType {
     internal static let storyboardName = "AdditionalImport"
 
@@ -97,7 +97,8 @@ internal protocol StoryboardType {
 
 internal extension StoryboardType {
   static var storyboard: UIStoryboard {
-    return UIStoryboard(name: self.storyboardName, bundle: Bundle(for: BundleToken.self))
+    let name = self.storyboardName
+    return UIStoryboard(name: name, bundle: Bundle(for: BundleToken.self))
   }
 }
 
@@ -106,6 +107,7 @@ internal struct SceneType<T: UIViewController> {
   internal let identifier: String
 
   internal func instantiate() -> T {
+    let identifier = self.identifier
     guard let controller = storyboard.storyboard.instantiateViewController(withIdentifier: identifier) as? T else {
       fatalError("ViewController '\(identifier)' is not of the expected class \(T.self).")
     }

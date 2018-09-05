@@ -4,7 +4,6 @@
 // swiftlint:disable sorted_imports
 import Foundation
 import AVKit
-import ExtraModule
 import GLKit
 import LocationPicker
 import SlackTextViewController

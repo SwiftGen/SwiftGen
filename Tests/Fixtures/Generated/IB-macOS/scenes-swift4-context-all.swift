@@ -4,7 +4,7 @@
 // swiftlint:disable sorted_imports
 import Foundation
 import AppKit
-import FadeSegue
+import ExtraModule
 import PrefsWindowController
 
 // swiftlint:disable superfluous_disable_command
@@ -25,7 +25,7 @@ internal enum StoryboardScene {
   internal enum Dependency: StoryboardType {
     internal static let storyboardName = "Dependency"
 
-    internal static let dependent = SceneType<AppKit.NSViewController>(storyboard: Dependency.self, identifier: "Dependent")
+    internal static let dependent = SceneType<ExtraModule.LoginViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
   internal enum KnownTypes: StoryboardType {
     internal static let storyboardName = "Known Types"
@@ -43,13 +43,13 @@ internal enum StoryboardScene {
   internal enum Message: StoryboardType {
     internal static let storyboardName = "Message"
 
-    internal static let messageDetails = SceneType<AppKit.NSViewController>(storyboard: Message.self, identifier: "MessageDetails")
+    internal static let messageDetails = SceneType<SwiftGen.DetailsViewController>(storyboard: Message.self, identifier: "MessageDetails")
 
     internal static let messageList = SceneType<AppKit.NSViewController>(storyboard: Message.self, identifier: "MessageList")
 
     internal static let messageListFooter = SceneType<AppKit.NSViewController>(storyboard: Message.self, identifier: "MessageListFooter")
 
-    internal static let messagesTab = SceneType<CustomTabViewController>(storyboard: Message.self, identifier: "MessagesTab")
+    internal static let messagesTab = SceneType<SwiftGen.CustomTabViewController>(storyboard: Message.self, identifier: "MessagesTab")
 
     internal static let splitMessages = SceneType<AppKit.NSSplitViewController>(storyboard: Message.self, identifier: "SplitMessages")
 

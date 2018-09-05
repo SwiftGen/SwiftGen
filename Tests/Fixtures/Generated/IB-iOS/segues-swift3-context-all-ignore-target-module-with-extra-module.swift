@@ -4,7 +4,6 @@
 // swiftlint:disable sorted_imports
 import Foundation
 import AVKit
-import ExtraModule
 import GLKit
 import LocationPicker
 import SlackTextViewController
@@ -41,8 +40,7 @@ internal protocol SegueType: RawRepresentable {}
 
 internal extension UIViewController {
   func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
-    let identifier = segue.rawValue
-    performSegue(withIdentifier: identifier, sender: sender)
+    performSegue(withIdentifier: segue.rawValue, sender: sender)
   }
 }
 

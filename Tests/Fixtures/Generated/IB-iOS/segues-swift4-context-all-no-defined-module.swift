@@ -8,6 +8,7 @@ import ExtraModule
 import GLKit
 import LocationPicker
 import SlackTextViewController
+import SwiftGen
 import UIKit
 
 // swiftlint:disable superfluous_disable_command

@@ -6,6 +6,7 @@ import Foundation
 import AppKit
 import ExtraModule
 import PrefsWindowController
+import SwiftGen
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -43,7 +44,7 @@ internal enum StoryboardScene {
   internal enum Message: StoryboardType {
     internal static let storyboardName = "Message"
 
-    internal static let messageDetails = SceneType<SwiftGen.DetailsViewController>(storyboard: Message.self, identifier: "MessageDetails")
+    internal static let messageDetails = SceneType<DetailsViewController>(storyboard: Message.self, identifier: "MessageDetails")
 
     internal static let messageList = SceneType<AppKit.NSViewController>(storyboard: Message.self, identifier: "MessageList")
 
@@ -71,7 +72,8 @@ internal protocol StoryboardType {
 
 internal extension StoryboardType {
   static var storyboard: NSStoryboard {
-    return NSStoryboard(name: self.storyboardName, bundle: Bundle(for: BundleToken.self))
+    let name = NSStoryboard.Name(self.storyboardName)
+    return NSStoryboard(name: name, bundle: Bundle(for: BundleToken.self))
   }
 }
 
@@ -80,6 +82,7 @@ internal struct SceneType<T> {
   internal let identifier: String
 
   internal func instantiate() -> T {
+    let identifier = NSStoryboard.SceneIdentifier(self.identifier)
     guard let controller = storyboard.storyboard.instantiateController(withIdentifier: identifier) as? T else {
       fatalError("Controller '\(identifier)' is not of the expected class \(T.self).")
     }

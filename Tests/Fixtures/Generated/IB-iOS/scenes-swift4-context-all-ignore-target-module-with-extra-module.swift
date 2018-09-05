@@ -4,7 +4,6 @@
 // swiftlint:disable sorted_imports
 import Foundation
 import AVKit
-import ExtraModule
 import GLKit
 import LocationPicker
 import SlackTextViewController
@@ -32,7 +31,7 @@ internal enum StoryboardScene {
   internal enum Dependency: StoryboardType {
     internal static let storyboardName = "Dependency"
 
-    internal static let dependent = SceneType<ExtraModule.ValidatePasswordViewController>(storyboard: Dependency.self, identifier: "Dependent")
+    internal static let dependent = SceneType<ValidatePasswordViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
   internal enum KnownTypes: StoryboardType {
     internal static let storyboardName = "Known Types"
@@ -66,7 +65,7 @@ internal enum StoryboardScene {
 
     internal static let navCtrl = SceneType<UIKit.UINavigationController>(storyboard: Message.self, identifier: "NavCtrl")
 
-    internal static let urlChooser = SceneType<SwiftGen.PickerViewController>(storyboard: Message.self, identifier: "URLChooser")
+    internal static let urlChooser = SceneType<PickerViewController>(storyboard: Message.self, identifier: "URLChooser")
   }
   internal enum Placeholder: StoryboardType {
     internal static let storyboardName = "Placeholder"
@@ -76,15 +75,15 @@ internal enum StoryboardScene {
   internal enum Wizard: StoryboardType {
     internal static let storyboardName = "Wizard"
 
-    internal static let initialScene = InitialSceneType<SwiftGen.CreateAccViewController>(storyboard: Wizard.self)
+    internal static let initialScene = InitialSceneType<CreateAccViewController>(storyboard: Wizard.self)
 
     internal static let acceptToS = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "Accept-ToS")
 
-    internal static let createAccount = SceneType<SwiftGen.CreateAccViewController>(storyboard: Wizard.self, identifier: "CreateAccount")
+    internal static let createAccount = SceneType<CreateAccViewController>(storyboard: Wizard.self, identifier: "CreateAccount")
 
     internal static let preferences = SceneType<UIKit.UITableViewController>(storyboard: Wizard.self, identifier: "Preferences")
 
-    internal static let validatePassword = SceneType<ExtraModule.ValidatePasswordViewController>(storyboard: Wizard.self, identifier: "Validate_Password")
+    internal static let validatePassword = SceneType<ValidatePasswordViewController>(storyboard: Wizard.self, identifier: "Validate_Password")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
@@ -97,7 +96,8 @@ internal protocol StoryboardType {
 
 internal extension StoryboardType {
   static var storyboard: UIStoryboard {
-    return UIStoryboard(name: self.storyboardName, bundle: Bundle(for: BundleToken.self))
+    let name = self.storyboardName
+    return UIStoryboard(name: name, bundle: Bundle(for: BundleToken.self))
   }
 }
 
@@ -106,6 +106,7 @@ internal struct SceneType<T: UIViewController> {
   internal let identifier: String
 
   internal func instantiate() -> T {
+    let identifier = self.identifier
     guard let controller = storyboard.storyboard.instantiateViewController(withIdentifier: identifier) as? T else {
       fatalError("ViewController '\(identifier)' is not of the expected class \(T.self).")
     }

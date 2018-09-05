@@ -4,7 +4,6 @@
 // swiftlint:disable sorted_imports
 import Foundation
 import AppKit
-import ExtraModule
 import PrefsWindowController
 
 // swiftlint:disable superfluous_disable_command

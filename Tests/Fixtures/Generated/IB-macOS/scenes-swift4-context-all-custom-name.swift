@@ -13,7 +13,7 @@ import PrefsWindowController
 // MARK: - Storyboard Scenes
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-internal enum StoryboardScene {
+internal enum XCTStoryboardCustom {
   internal enum AdditionalImport: StoryboardType {
     internal static let storyboardName = "AdditionalImport"
 
@@ -71,7 +71,8 @@ internal protocol StoryboardType {
 
 internal extension StoryboardType {
   static var storyboard: NSStoryboard {
-    return NSStoryboard(name: self.storyboardName, bundle: Bundle(for: BundleToken.self))
+    let name = NSStoryboard.Name(self.storyboardName)
+    return NSStoryboard(name: name, bundle: Bundle(for: BundleToken.self))
   }
 }
 
@@ -80,6 +81,7 @@ internal struct SceneType<T> {
   internal let identifier: String
 
   internal func instantiate() -> T {
+    let identifier = NSStoryboard.SceneIdentifier(self.identifier)
     guard let controller = storyboard.storyboard.instantiateController(withIdentifier: identifier) as? T else {
       fatalError("Controller '\(identifier)' is not of the expected class \(T.self).")
     }

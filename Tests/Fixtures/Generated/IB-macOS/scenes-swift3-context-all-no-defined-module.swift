@@ -6,6 +6,7 @@ import Foundation
 import AppKit
 import ExtraModule
 import PrefsWindowController
+import SwiftGen
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -43,7 +44,7 @@ internal enum StoryboardScene {
   internal enum Message: StoryboardType {
     internal static let storyboardName = "Message"
 
-    internal static let messageDetails = SceneType<SwiftGen.DetailsViewController>(storyboard: Message.self, identifier: "MessageDetails")
+    internal static let messageDetails = SceneType<DetailsViewController>(storyboard: Message.self, identifier: "MessageDetails")
 
     internal static let messageList = SceneType<AppKit.NSViewController>(storyboard: Message.self, identifier: "MessageList")
 

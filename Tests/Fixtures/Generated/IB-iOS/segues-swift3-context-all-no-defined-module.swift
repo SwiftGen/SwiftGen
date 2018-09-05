@@ -8,6 +8,7 @@ import ExtraModule
 import GLKit
 import LocationPicker
 import SlackTextViewController
+import SwiftGen
 import UIKit
 
 // swiftlint:disable superfluous_disable_command
@@ -41,8 +42,7 @@ internal protocol SegueType: RawRepresentable {}
 
 internal extension UIViewController {
   func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
-    let identifier = segue.rawValue
-    performSegue(withIdentifier: identifier, sender: sender)
+    performSegue(withIdentifier: segue.rawValue, sender: sender)
   }
 }
 

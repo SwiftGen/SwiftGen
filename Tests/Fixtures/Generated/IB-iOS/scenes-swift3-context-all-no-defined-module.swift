@@ -8,6 +8,7 @@ import ExtraModule
 import GLKit
 import LocationPicker
 import SlackTextViewController
+import SwiftGen
 import UIKit
 
 // swiftlint:disable superfluous_disable_command
@@ -66,7 +67,7 @@ internal enum StoryboardScene {
 
     internal static let navCtrl = SceneType<UIKit.UINavigationController>(storyboard: Message.self, identifier: "NavCtrl")
 
-    internal static let urlChooser = SceneType<SwiftGen.PickerViewController>(storyboard: Message.self, identifier: "URLChooser")
+    internal static let urlChooser = SceneType<PickerViewController>(storyboard: Message.self, identifier: "URLChooser")
   }
   internal enum Placeholder: StoryboardType {
     internal static let storyboardName = "Placeholder"
