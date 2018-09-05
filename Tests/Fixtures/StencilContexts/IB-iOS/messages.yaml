@@ -1,4 +1,5 @@
 modules:
+- "SwiftGen"
 - "UIKit"
 platform: "iOS"
 storyboards:
@@ -6,6 +7,7 @@ storyboards:
     baseType: "ViewController"
     identifier: ""
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UIViewController"
   name: "Message"
   platform: "iOS"
@@ -13,38 +15,46 @@ storyboards:
   - baseType: "ViewController"
     identifier: "Composer"
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UIViewController"
   - baseType: "TableViewController"
     identifier: "MessagesList"
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UITableViewController"
   - baseType: "NavigationController"
     identifier: "NavCtrl"
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UINavigationController"
-  - customClass: "XXPickerViewController"
+  - customClass: "PickerViewController"
     customModule: ""
     identifier: "URLChooser"
     module: ""
-    type: "XXPickerViewController"
+    moduleIsPlaceholder: true
+    type: "PickerViewController"
   segues:
-  - customClass: "CustomSegueClass2"
-    customModule: ""
+  - customClass: "SlideLeftSegue"
+    customModule: "SwiftGen"
     identifier: "CustomBack"
-    module: ""
-    type: "CustomSegueClass2"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "SlideLeftSegue"
   - customClass: ""
     customModule: ""
     identifier: "Embed"
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UIStoryboardSegue"
   - customClass: ""
     customModule: ""
     identifier: "NonCustom"
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UIStoryboardSegue"
   - customClass: "CustomSegueClass"
     customModule: ""
     identifier: "Show-NavCtrl"
     module: ""
+    moduleIsPlaceholder: true
     type: "CustomSegueClass"
