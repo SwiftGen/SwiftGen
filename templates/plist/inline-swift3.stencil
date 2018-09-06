@@ -7,6 +7,8 @@ import Foundation
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
+
+// MARK: - Plist Files
 {% macro fileBlock file %}
   {% if file.documents.count > 1 %}
   {% for document in file.documents %}

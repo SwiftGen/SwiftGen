@@ -5,6 +5,8 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
+// MARK: - YAML Files
+
 // swiftlint:disable identifier_name line_length type_body_length
 public enum YAMLFiles {
   public enum Documents {

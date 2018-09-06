@@ -5,30 +5,7 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-private func objectFromJSON<T>(at path: String) -> T {
-  let bundle = Bundle(for: BundleToken.self)
-  guard let url = bundle.url(forResource: path, withExtension: nil),
-    let json = try? JSONSerialization.jsonObject(with: Data(contentsOf: url), options: []),
-    let result = json as? T else {
-    fatalError("Unable to load JSON at path: \(path)")
-  }
-  return result
-}
-
-private struct JSONDocument {
-  let data: [String: Any]
-
-  init(path: String) {
-    self.data = objectFromJSON(at: path)
-  }
-
-  subscript<T>(key: String) -> T {
-    guard let result = data[key] as? T else {
-      fatalError("Property '\(key)' is not of type \(T.self)")
-    }
-    return result
-  }
-}
+// MARK: - JSON Files
 
 // swiftlint:disable identifier_name line_length type_body_length
 internal enum CustomJSON {
@@ -59,5 +36,32 @@ internal enum CustomJSON {
   }
 }
 // swiftlint:enable identifier_name line_length type_body_length
+
+// MARK: - Implementation Details
+
+private func objectFromJSON<T>(at path: String) -> T {
+  let bundle = Bundle(for: BundleToken.self)
+  guard let url = bundle.url(forResource: path, withExtension: nil),
+    let json = try? JSONSerialization.jsonObject(with: Data(contentsOf: url), options: []),
+    let result = json as? T else {
+    fatalError("Unable to load JSON at path: \(path)")
+  }
+  return result
+}
+
+private struct JSONDocument {
+  let data: [String: Any]
+
+  init(path: String) {
+    self.data = objectFromJSON(at: path)
+  }
+
+  subscript<T>(key: String) -> T {
+    guard let result = data[key] as? T else {
+      fatalError("Property '\(key)' is not of type \(T.self)")
+    }
+    return result
+  }
+}
 
 private final class BundleToken {}

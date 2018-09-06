@@ -5,6 +5,8 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
+// MARK: - Plist Files
+
 // swiftlint:disable identifier_name line_length type_body_length
 internal enum PlistFiles {
   internal enum Info {
