@@ -32,3 +32,85 @@ The output context has the following structure:
           class prefix such as `UI`)
        - `module`: `String` — The module of the segue, could be the value of `customModule`, or of an internal module
           such as GLKit depending on the base type (can be empty)
+
+## Example
+
+```yaml
+modules:
+- "AVKit"
+- "CustomSegue"
+- "GLKit"
+- "LocationPicker"
+- "SlackTextViewController"
+- "UIKit"
+platform: "iOS"
+storyboards:
+- initialScene:
+    baseType: "ViewController"
+    identifier: ""
+    module: "UIKit"
+    type: "UIViewController"
+  name: "Message"
+  platform: "iOS"
+  scenes:
+  - baseType: "ViewController"
+    identifier: "Composer"
+    module: "UIKit"
+    type: "UIViewController"
+  - baseType: "TableViewController"
+    identifier: "MessagesList"
+    module: "UIKit"
+    type: "UITableViewController"
+  - baseType: "NavigationController"
+    identifier: "NavCtrl"
+    module: "UIKit"
+    type: "UINavigationController"
+  - customClass: "XXPickerViewController"
+    customModule: ""
+    identifier: "URLChooser"
+    module: ""
+    type: "XXPickerViewController"
+  segues:
+  - customClass: "CustomSegueClass2"
+    customModule: ""
+    identifier: "CustomBack"
+    module: ""
+    type: "CustomSegueClass2"
+  - customClass: "CustomSegueClass"
+    customModule: ""
+    identifier: "Show-NavCtrl"
+    module: ""
+    type: "CustomSegueClass"
+- initialScene:
+    customClass: "CreateAccViewController"
+    customModule: ""
+    identifier: "CreateAccount"
+    module: ""
+    type: "CreateAccViewController"
+  name: "Wizard"
+  platform: "iOS"
+  scenes:
+  - baseType: "ViewController"
+    identifier: "Accept-ToS"
+    module: "UIKit"
+    type: "UIViewController"
+  - customClass: "CreateAccViewController"
+    customModule: ""
+    identifier: "CreateAccount"
+    module: ""
+    type: "CreateAccViewController"
+  - baseType: "TableViewController"
+    identifier: "Preferences"
+    module: "UIKit"
+    type: "UITableViewController"
+  - baseType: "ViewController"
+    identifier: "Validate_Password"
+    module: "UIKit"
+    type: "UIViewController"
+  segues:
+  - customClass: ""
+    customModule: ""
+    identifier: "ShowPassword"
+    module: "UIKit"
+    type: "UIStoryboardSegue"
+```

@@ -44,3 +44,57 @@ The output context has the following structure:
        - `translation`: `String` — the translation for that key in the strings file
        - `types`: `Array<String>` — defined only if localized string has parameter placeholders like `%d` and `%@` etc.
           Contains a list of types like `"String"`, `"Int"`, etc
+
+## Example
+
+```yaml
+tables:
+- levels:
+    children:
+    - name: "apples"
+      strings:
+      - key: "apples.count"
+        name: "count"
+        translation: "You have %d apples"
+        types:
+        - "Int"
+    - name: "bananas"
+      strings:
+      - key: "bananas.owner"
+        name: "owner"
+        translation: "Those %d bananas belong to %@."
+        types:
+        - "Int"
+        - "String"
+    - children:
+      - name: "user_profile_section"
+        strings:
+        - key: "settings.user_profile_section.footer_text"
+          name: "footer_text"
+          translation: "Here you can change some user profile settings."
+        - key: "settings.user_profile_section.HEADER_TITLE"
+          name: "HEADER_TITLE"
+          translation: "User Profile Settings"
+      name: "settings"
+    strings:
+    - key: "alert_message"
+      name: "alert_message"
+      translation: "Some alert body there"
+    - key: "alert_title"
+      name: "alert_title"
+      translation: "Title of the alert"
+    - key: "ObjectOwnership"
+      name: "ObjectOwnership"
+      translation: "These are %3$@'s %1$d %2$@."
+      types:
+      - "Int"
+      - "String"
+      - "String"
+    - key: "private"
+      name: "private"
+      translation: "Hello, my name is %@ and I'm %d"
+      types:
+      - "String"
+      - "Int"
+  name: "Localizable"
+```

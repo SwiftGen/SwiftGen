@@ -72,8 +72,11 @@ class Fixtures {
     case interfaceBuilder = "IB"
     case interfaceBuilderiOS = "IB-iOS"
     case interfaceBuilderMacOS = "IB-macOS"
+    case json = "JSON"
+    case plist = "Plist"
     case strings = "Strings"
     case xcassets = "XCAssets"
+    case yaml = "YAML"
   }
 
   private static let testBundle = Bundle(for: Fixtures.self)
@@ -151,6 +154,7 @@ extension XCTestCase {
             contextNames: [String],
             directory: Fixtures.Directory,
             resourceDirectory: Fixtures.Directory? = nil,
+            outputDirectory: Fixtures.Directory? = nil,
             file: StaticString = #file,
             line: UInt = #line,
             contextVariations: VariationGenerator? = nil) {
@@ -161,6 +165,7 @@ extension XCTestCase {
     // default values
     let contextVariations = contextVariations ?? { [(context: $1, suffix: "")] }
     let resourceDir = resourceDirectory ?? directory
+    let outputDir = outputDirectory ?? resourceDir
 
     for contextName in contextNames {
       print("Testing context '\(contextName)'...")
@@ -184,14 +189,14 @@ extension XCTestCase {
 
         // check if we should generate or not
         if ProcessInfo().environment["GENERATE_OUTPUT"] == "YES" {
-          let target = Path(#file).parent().parent() + "Fixtures/Generated" + resourceDir.rawValue + outputFile
+          let target = Path(#file).parent().parent() + "Fixtures/Generated" + outputDir.rawValue + outputFile
           do {
             try target.write(result)
           } catch {
             fatalError("Unable to write output file \(target)")
           }
         } else {
-          let expected = Fixtures.output(for: outputFile, sub: resourceDir)
+          let expected = Fixtures.output(for: outputFile, sub: outputDir)
           XCTDiffStrings(result, expected, file: file, line: line)
         }
       }

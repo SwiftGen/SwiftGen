@@ -1,0 +1,86 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+
+import Foundation
+
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+
+// MARK: - Plist Files
+
+// swiftlint:disable identifier_name line_length type_body_length
+internal enum PlistFiles {
+  internal enum Info {
+    private static let _document = PlistDocument(path: "Info.plist")
+    internal static let userDate: Date = _document["User Date"]
+    internal static let userFloat: Double = _document["User Float"]
+    internal static let cfBundleDevelopmentRegion: String = _document["CFBundleDevelopmentRegion"]
+    internal static let userAmbiguousInteger: Bool = _document["User Ambiguous Integer"]
+    internal static let cfBundleIdentifier: String = _document["CFBundleIdentifier"]
+    internal static let cfBundleShortVersionString: String = _document["CFBundleShortVersionString"]
+    internal static let cfBundleExecutable: String = _document["CFBundleExecutable"]
+    internal static let lsRequiresIPhoneOS: Bool = _document["LSRequiresIPhoneOS"]
+    internal static let uiSupportedInterfaceOrientationsIpad: [String] = _document["UISupportedInterfaceOrientations~ipad"]
+    internal static let cfBundleVersion: String = _document["CFBundleVersion"]
+    internal static let userInteger: Int = _document["User Integer"]
+    internal static let uiLaunchStoryboardName: String = _document["UILaunchStoryboardName"]
+    internal static let cfBundleInfoDictionaryVersion: String = _document["CFBundleInfoDictionaryVersion"]
+    internal static let uiRequiresFullScreen: Bool = _document["UIRequiresFullScreen"]
+    internal static let uiStatusBarStyle: String = _document["UIStatusBarStyle"]
+    internal static let cfBundleSignature: String = _document["CFBundleSignature"]
+    internal static let cfBundleDisplayName: String = _document["CFBundleDisplayName"]
+    internal static let nsAppTransportSecurity: [String: Any] = _document["NSAppTransportSecurity"]
+    internal static let uiSupportedInterfaceOrientations: [String] = _document["UISupportedInterfaceOrientations"]
+    internal static let userBoolean: Bool = _document["User Boolean"]
+    internal static let itsAppUsesNonExemptEncryption: Bool = _document["ITSAppUsesNonExemptEncryption"]
+    internal static let fabric: [String: Any] = _document["Fabric"]
+    internal static let nsCameraUsageDescription: String = _document["NSCameraUsageDescription"]
+    internal static let nsPhotoLibraryUsageDescription: String = _document["NSPhotoLibraryUsageDescription"]
+    internal static let uiBackgroundModes: [String] = _document["UIBackgroundModes"]
+    internal static let uiMainStoryboardFile: String = _document["UIMainStoryboardFile"]
+    internal static let cfBundlePackageType: String = _document["CFBundlePackageType"]
+    internal static let cfBundleName: String = _document["CFBundleName"]
+    internal static let uiRequiredDeviceCapabilities: [String] = _document["UIRequiredDeviceCapabilities"]
+  }
+  internal enum Array {
+    internal static let items: [String] = arrayFromPlist(at: "array.plist")
+  }
+  internal enum Dictionary {
+    private static let _document = PlistDocument(path: "dictionary.plist")
+    internal static let key2: [String: Any] = _document["key2"]
+    internal static let key1: String = _document["key1"]
+  }
+}
+// swiftlint:enable identifier_name line_length type_body_length
+
+// MARK: - Implementation Details
+
+private func arrayFromPlist<T>(at path: String) -> [T] {
+  let bundle = Bundle(for: BundleToken.self)
+  guard let url = bundle.url(forResource: path, withExtension: nil),
+    let data = NSArray(contentsOf: url) as? [T] else {
+    fatalError("Unable to load PLIST at path: \(path)")
+  }
+  return data
+}
+
+private struct PlistDocument {
+  let data: [String: Any]
+
+  init(path: String) {
+    let bundle = Bundle(for: BundleToken.self)
+    guard let url = bundle.url(forResource: path, withExtension: nil),
+      let data = NSDictionary(contentsOf: url) as? [String: Any] else {
+        fatalError("Unable to load PLIST at path: \(path)")
+    }
+    self.data = data
+  }
+
+  subscript<T>(key: String) -> T {
+    guard let result = data[key] as? T else {
+      fatalError("Property '\(key)' is not of type \(T.self)")
+    }
+    return result
+  }
+}
+
+private final class BundleToken {}

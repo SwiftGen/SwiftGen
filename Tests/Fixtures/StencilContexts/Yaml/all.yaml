@@ -1,0 +1,77 @@
+files:
+- documents:
+  - data:
+    - "Mark McGwire"
+    - "Sammy Sosa"
+    - "Ken Griffey"
+    metadata:
+      element:
+        type: "String"
+      type: "Array"
+  - data:
+    - "Chicago Cubs"
+    - "St Louis Cardinals"
+    metadata:
+      element:
+        type: "String"
+      type: "Array"
+  name: "documents"
+  path: "documents.yaml"
+- documents:
+  - data:
+    - "value1"
+    - "value2"
+    metadata:
+      element:
+        type: "String"
+      type: "Array"
+  name: "grocery-list"
+  path: "grocery-list.yaml"
+- documents:
+  - data:
+      key1: "value1"
+      key2: "2"
+      key3:
+        nestedKey3:
+        - "1"
+        - "2"
+        - "3"
+    metadata:
+      properties:
+        key1:
+          type: "String"
+        key2:
+          type: "String"
+        key3:
+          properties:
+            nestedKey3:
+              element:
+                type: "String"
+              type: "Array"
+          type: "Dictionary"
+      type: "Dictionary"
+  name: "json"
+  path: "json.json"
+- documents:
+  - data:
+      key1: "value1"
+      key2:
+        nestedKey2: "nestedValue2"
+    metadata:
+      properties:
+        key1:
+          type: "String"
+        key2:
+          properties:
+            nestedKey2:
+              type: "String"
+          type: "Dictionary"
+      type: "Dictionary"
+  name: "mapping"
+  path: "mapping.yaml"
+- documents:
+  - data: "value1"
+    metadata:
+      type: "String"
+  name: "scalar"
+  path: "scalar.yaml"

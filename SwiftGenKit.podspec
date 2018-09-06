@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.source       = { git: 'https://github.com/SwiftGen/SwiftGenKit.git', tag: s.version.to_s }
   s.source_files = 'Sources/**/*.swift'
 
-  s.dependency 'Kanna'
+  s.dependency 'Kanna', '~> 4.0.0'
   s.dependency 'PathKit', '~> 0.9.0'
   s.dependency 'Yams', '~> 1.0.0'
   s.framework = 'Foundation'

@@ -67,6 +67,15 @@
 * Organised the generated code in sections for better readability, with all generated constants at the top of the file.  
   [David Jennes](https://github.com/djbe)
   [#481](https://github.com/SwiftGen/SwiftGen/pull/481)
+* Added support for JSON, Plist and YAML files using the `swiftgen json`, `swiftgen plist` and `swiftgen yaml` commands. The parsed contexts and the generated files for each command have been kept quite similar, for easier switching between file formats.  
+  [John T McIntosh](https://github.com/johntmcintosh)
+  [Toshihiro Suzuki](https://github.com/toshi0383)
+  [Peter Livesey](https://github.com/plivesey)
+  [David Jennes](https://github.com/djbe)
+  [#379](https://github.com/SwiftGen/SwiftGen/pull/379)
+  [#359](https://github.com/SwiftGen/SwiftGen/issues/359)
+  [#288](https://github.com/SwiftGen/SwiftGen/pull/288)
+  [#188](https://github.com/SwiftGen/SwiftGen/pull/188)
 
 ### Internal Changes
 

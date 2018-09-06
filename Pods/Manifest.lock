@@ -11,7 +11,7 @@ PODS:
 
 DEPENDENCIES:
   - Commander (~> 0.8)
-  - Kanna
+  - Kanna (~> 4.0.0)
   - PathKit (~> 0.9.0)
   - StencilSwiftKit (~> 2.6)
   - SwiftLint (~> 0.25)
