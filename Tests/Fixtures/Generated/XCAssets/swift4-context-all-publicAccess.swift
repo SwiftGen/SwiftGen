@@ -4,14 +4,11 @@
 #if os(OSX)
   import AppKit.NSImage
   public typealias AssetColorTypeAlias = NSColor
-  public typealias Image = NSImage
+  public typealias AssetImageTypeAlias = NSImage
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIImage
   public typealias AssetColorTypeAlias = UIColor
-  public typealias Image = UIImage
-#endif
-#if os(iOS) || os(tvOS) || os(OSX)
-public typealias AssetDataTypeAlias = NSDataAsset
+  public typealias AssetImageTypeAlias = UIImage
 #endif
 
 // swiftlint:disable superfluous_disable_command
@@ -87,15 +84,15 @@ public struct DataAsset {
 
   #if os(iOS) || os(tvOS) || os(OSX)
   @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
-  public var data: AssetDataTypeAlias {
-    return AssetDataTypeAlias(asset: self)
+  public var data: NSDataAsset {
+    return NSDataAsset(asset: self)
   }
   #endif
 }
 
 #if os(iOS) || os(tvOS) || os(OSX)
-public extension AssetDataTypeAlias {
-  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+@available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+public extension NSDataAsset {
   convenience init!(asset: DataAsset) {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
@@ -107,27 +104,24 @@ public extension AssetDataTypeAlias {
 }
 #endif
 
-@available(*, deprecated, renamed: "ImageAsset")
-public typealias AssetType = ImageAsset
-
 public struct ImageAsset {
   public fileprivate(set) var name: String
 
-  public var image: Image {
+  public var image: AssetImageTypeAlias {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
-    let image = Image(named: name, in: bundle, compatibleWith: nil)
+    let image = AssetImageTypeAlias(named: name, in: bundle, compatibleWith: nil)
     #elseif os(OSX)
     let image = bundle.image(forResource: NSImage.Name(name))
     #elseif os(watchOS)
-    let image = Image(named: name)
+    let image = AssetImageTypeAlias(named: name)
     #endif
     guard let result = image else { fatalError("Unable to load image named \(name).") }
     return result
   }
 }
 
-public extension Image {
+public extension AssetImageTypeAlias {
   @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")

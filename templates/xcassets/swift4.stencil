@@ -7,8 +7,7 @@
 {% set dataType %}{{param.dataTypeName|default:"DataAsset"}}{% endset %}
 {% set imageType %}{{param.imageTypeName|default:"ImageAsset"}}{% endset %}
 {% set colorAlias %}{{param.colorAliasName|default:"AssetColorTypeAlias"}}{% endset %}
-{% set dataAlias %}{{param.dataAliasName|default:"AssetDataTypeAlias"}}{% endset %}
-{% set imageAlias %}{{param.imageAliasName|default:"Image"}}{% endset %}
+{% set imageAlias %}{{param.imageAliasName|default:"AssetImageTypeAlias"}}{% endset %}
 {% set forceNamespaces %}{{param.forceProvidesNamespaces|default:"false"}}{% endset %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 #if os(OSX)
@@ -19,9 +18,6 @@
   import UIKit.UIImage
   {{accessModifier}} typealias {{colorAlias}} = UIColor
   {{accessModifier}} typealias {{imageAlias}} = UIImage
-#endif
-#if os(iOS) || os(tvOS) || os(OSX)
-{{accessModifier}} typealias {{dataAlias}} = NSDataAsset
 #endif
 
 // swiftlint:disable superfluous_disable_command
@@ -44,8 +40,6 @@
     {% filter indent:2 %}{% call allValuesBlock assets "image" "" %}{% endfilter %}
   ]
   // swiftlint:enable trailing_comma
-  @available(*, deprecated, renamed: "allImages")
-  {{accessModifier}} static let allValues: [{{enumName}}Type] = allImages
   {% endif %}
 {% endmacro %}
 {% macro casesBlock assets %}
@@ -126,15 +120,15 @@
 
   #if os(iOS) || os(tvOS) || os(OSX)
   @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
-  {{accessModifier}} var data: {{dataAlias}} {
-    return {{dataAlias}}(asset: self)
+  {{accessModifier}} var data: NSDataAsset {
+    return NSDataAsset(asset: self)
   }
   #endif
 }
 
 #if os(iOS) || os(tvOS) || os(OSX)
-{{accessModifier}} extension {{dataAlias}} {
-  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+@available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+{{accessModifier}} extension NSDataAsset {
   convenience init!(asset: {{dataType}}) {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
@@ -145,9 +139,6 @@
   }
 }
 #endif
-
-@available(*, deprecated, renamed: "{{imageType}}")
-{{accessModifier}} typealias {{enumName}}Type = {{imageType}}
 
 {{accessModifier}} struct {{imageType}} {
   {{accessModifier}} fileprivate(set) var name: String
