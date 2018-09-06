@@ -44,9 +44,9 @@ storyboards:
     moduleIsPlaceholder: false
     type: "SlideDownSegue"
   - customClass: "SlideUpSegue"
-    customModule: ""
+    customModule: "NotCurrentModule"
     identifier: "public"
-    module: ""
+    module: "NotCurrentModule"
     moduleIsPlaceholder: true
     type: "SlideUpSegue"
 - initialScene:
@@ -143,9 +143,9 @@ storyboards:
     moduleIsPlaceholder: false
     type: "UINavigationController"
   - customClass: "PickerViewController"
-    customModule: ""
+    customModule: "NotCurrentModule"
     identifier: "URLChooser"
-    module: ""
+    module: "NotCurrentModule"
     moduleIsPlaceholder: true
     type: "PickerViewController"
   segues:
@@ -168,9 +168,9 @@ storyboards:
     moduleIsPlaceholder: false
     type: "UIStoryboardSegue"
   - customClass: "CustomSegueClass"
-    customModule: ""
+    customModule: "NotCurrentModule"
     identifier: "Show-NavCtrl"
-    module: ""
+    module: "NotCurrentModule"
     moduleIsPlaceholder: true
     type: "CustomSegueClass"
 - name: "Placeholder"

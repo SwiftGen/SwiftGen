@@ -25,7 +25,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <segue destination="TuC-8Y-xZ9" kind="custom" identifier="private" customClass="SlideDownSegue" customModule="ExtraModule" id="Ac7-Re-xKv"/>
-                        <segue destination="se3-pM-ewQ" kind="custom" identifier="public" customClass="SlideUpSegue" customModuleProvider="target" id="AZ7-JU-8Fy"/>
+                        <segue destination="se3-pM-ewQ" kind="custom" identifier="public" customClass="SlideUpSegue" customModule="NotCurrentModule" customModuleProvider="target" id="AZ7-JU-8Fy"/>
                         <segue destination="t0K-MT-iCN" kind="custom" identifier="open" customClass="SLKCrossoverSegue" customModule="SlackTextViewController" id="Q0c-hY-pwl"/>
                         <segue destination="se3-pM-ewQ" kind="custom" identifier="After Delay" customClass="SlideLeftSegue" customModule="SwiftGen" id="Mpg-uL-jzt"/>
                     </connections>

@@ -62,9 +62,9 @@ storyboards:
   platform: "macOS"
   scenes:
   - customClass: "DetailsViewController"
-    customModule: ""
+    customModule: "NotCurrentModule"
     identifier: "MessageDetails"
-    module: ""
+    module: "NotCurrentModule"
     moduleIsPlaceholder: true
     type: "DetailsViewController"
   - baseType: "ViewController"
@@ -137,9 +137,9 @@ storyboards:
     moduleIsPlaceholder: false
     type: "NSStoryboardSegue"
   - customClass: "RotateSegue"
-    customModule: ""
+    customModule: "NotCurrentModule"
     identifier: "private"
-    module: ""
+    module: "NotCurrentModule"
     moduleIsPlaceholder: true
     type: "RotateSegue"
   - customClass: "ZoomSegue"

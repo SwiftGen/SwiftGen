@@ -78,7 +78,7 @@
         <!--Details View Controller-->
         <scene sceneID="GeB-EV-NfO">
             <objects>
-                <viewController storyboardIdentifier="MessageDetails" id="Lxj-cP-fFs" customClass="DetailsViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MessageDetails" id="Lxj-cP-fFs" customClass="DetailsViewController" customModule="NotCurrentModule" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Kr5-Lg-sHR">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -108,7 +108,7 @@
                         <segue destination="F1C-uo-ozY" kind="sheet" identifier="Sheet" id="Kxp-Ra-zsP"/>
                         <segue destination="F1C-uo-ozY" kind="show" identifier="Show" id="zL6-jB-uO5"/>
                         <segue destination="F1C-uo-ozY" kind="custom" identifier="Login" customClass="LoginSegue" customModule="ExtraModule" id="w80-yI-DNd"/>
-                        <segue destination="F1C-uo-ozY" kind="custom" identifier="private" customClass="RotateSegue" customModuleProvider="target" id="Q9w-dD-dDj"/>
+                        <segue destination="F1C-uo-ozY" kind="custom" identifier="private" customClass="RotateSegue" customModule="NotCurrentModule" customModuleProvider="target" id="Q9w-dD-dDj"/>
                         <segue destination="F1C-uo-ozY" kind="custom" identifier="public" customClass="ZoomSegue" customModule="SwiftGen" id="aFQ-Jc-W0a"/>
                     </connections>
                 </viewController>

@@ -28,9 +28,9 @@ storyboards:
     moduleIsPlaceholder: false
     type: "UINavigationController"
   - customClass: "PickerViewController"
-    customModule: ""
+    customModule: "NotCurrentModule"
     identifier: "URLChooser"
-    module: ""
+    module: "NotCurrentModule"
     moduleIsPlaceholder: true
     type: "PickerViewController"
   segues:
@@ -53,8 +53,8 @@ storyboards:
     moduleIsPlaceholder: false
     type: "UIStoryboardSegue"
   - customClass: "CustomSegueClass"
-    customModule: ""
+    customModule: "NotCurrentModule"
     identifier: "Show-NavCtrl"
-    module: ""
+    module: "NotCurrentModule"
     moduleIsPlaceholder: true
     type: "CustomSegueClass"

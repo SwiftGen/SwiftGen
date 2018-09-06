@@ -22,7 +22,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <segue destination="6de-Ew-T2L" kind="presentation" identifier="Show-NavCtrl" customClass="CustomSegueClass" customModuleProvider="target" id="xFF-3Q-EbQ"/>
+                        <segue destination="6de-Ew-T2L" kind="presentation" identifier="Show-NavCtrl" customClass="CustomSegueClass" customModule="NotCurrentModule" customModuleProvider="target" id="xFF-3Q-EbQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gUd-OH-dp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -78,7 +78,7 @@
         <!--URL to share-->
         <scene sceneID="xq8-Pa-EzB">
             <objects>
-                <viewController storyboardIdentifier="URLChooser" title="URL to share" id="fbV-qd-GcD" customClass="PickerViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="URLChooser" title="URL to share" id="fbV-qd-GcD" customClass="PickerViewController" customModule="NotCurrentModule" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XcH-RB-9tn"/>
                         <viewControllerLayoutGuide type="bottom" id="5vl-V0-RgR"/>
