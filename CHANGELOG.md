@@ -25,6 +25,10 @@
   [Ryan Davies](https://github.com/iotize)
   [#436](https://github.com/SwiftGen/SwiftGen/issues/436)
   [#465](https://github.com/SwiftGen/SwiftGen/pull/465)
+* Interface Builder: the parser and templates now handle the "Inherit module from target" setting.  
+  [David Jennes](https://github.com/djbe)
+  [#435](https://github.com/SwiftGen/SwiftGen/issues/435)
+  [#485](https://github.com/SwiftGen/SwiftGen/pull/485)
 
 ### Breaking Changes
 
