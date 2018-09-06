@@ -35,7 +35,7 @@ enum StoryboardScene {
   enum Dependency: StoryboardType {
     static let storyboardName = "Dependency"
 
-    static let dependent = SceneType<UIViewController>(storyboard: Dependency.self, identifier: "Dependent")
+    static let dependent = SceneType<ExtraModule.ValidatePasswordViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
   enum Message: StoryboardType {
     static let storyboardName = "Message"

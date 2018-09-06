@@ -24,6 +24,8 @@ The output context has the following structure:
           class prefix such as `UI`)
        - `module`: `String` — The module of the scene, could be the value of `customModule`, or of an internal module
           such as GLKit depending on the base type (can be empty)
+       - `moduleIsPlaceholder`: `Bool` — This property is true if the user has checked the "Inherit module from target"
+          setting.
     - `segues`: `Array` - List of segues
        - `identifier`: `String` — The segue identifier
        - `customClass`: `String` — The custom class of the segue (absent if generic UIStoryboardSegue)
@@ -32,16 +34,19 @@ The output context has the following structure:
           class prefix such as `UI`)
        - `module`: `String` — The module of the segue, could be the value of `customModule`, or of an internal module
           such as GLKit depending on the base type (can be empty)
+       - `moduleIsPlaceholder`: `Bool` — This property is true if the user has checked the "Inherit module from target"
+          setting.
 
 ## Example
 
 ```yaml
 modules:
 - "AVKit"
-- "CustomSegue"
+- "ExtraModule"
 - "GLKit"
 - "LocationPicker"
 - "SlackTextViewController"
+- "SwiftGen"
 - "UIKit"
 platform: "iOS"
 storyboards:
@@ -49,6 +54,7 @@ storyboards:
     baseType: "ViewController"
     identifier: ""
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UIViewController"
   name: "Message"
   platform: "iOS"
@@ -56,36 +62,55 @@ storyboards:
   - baseType: "ViewController"
     identifier: "Composer"
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UIViewController"
   - baseType: "TableViewController"
     identifier: "MessagesList"
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UITableViewController"
   - baseType: "NavigationController"
     identifier: "NavCtrl"
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UINavigationController"
-  - customClass: "XXPickerViewController"
+  - customClass: "PickerViewController"
     customModule: ""
     identifier: "URLChooser"
     module: ""
-    type: "XXPickerViewController"
+    moduleIsPlaceholder: true
+    type: "PickerViewController"
   segues:
-  - customClass: "CustomSegueClass2"
-    customModule: ""
+  - customClass: "SlideLeftSegue"
+    customModule: "SwiftGen"
     identifier: "CustomBack"
-    module: ""
-    type: "CustomSegueClass2"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "SlideLeftSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Embed"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "NonCustom"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
   - customClass: "CustomSegueClass"
     customModule: ""
     identifier: "Show-NavCtrl"
     module: ""
+    moduleIsPlaceholder: true
     type: "CustomSegueClass"
 - initialScene:
     customClass: "CreateAccViewController"
-    customModule: ""
+    customModule: "SwiftGen"
     identifier: "CreateAccount"
-    module: ""
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
     type: "CreateAccViewController"
   name: "Wizard"
   platform: "iOS"
@@ -93,24 +118,30 @@ storyboards:
   - baseType: "ViewController"
     identifier: "Accept-ToS"
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UIViewController"
   - customClass: "CreateAccViewController"
-    customModule: ""
+    customModule: "SwiftGen"
     identifier: "CreateAccount"
-    module: ""
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
     type: "CreateAccViewController"
   - baseType: "TableViewController"
     identifier: "Preferences"
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UITableViewController"
-  - baseType: "ViewController"
+  - customClass: "ValidatePasswordViewController"
+    customModule: "ExtraModule"
     identifier: "Validate_Password"
-    module: "UIKit"
-    type: "UIViewController"
+    module: "ExtraModule"
+    moduleIsPlaceholder: false
+    type: "ValidatePasswordViewController"
   segues:
   - customClass: ""
     customModule: ""
     identifier: "ShowPassword"
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UIStoryboardSegue"
 ```
