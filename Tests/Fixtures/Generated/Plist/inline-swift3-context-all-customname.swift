@@ -7,7 +7,7 @@ import Foundation
 
 // MARK: - Plist Files
 
-// swiftlint:disable identifier_name line_length type_body_length
+// swiftlint:disable identifier_name line_length number_separator type_body_length
 internal enum CustomPlist {
   internal enum Info {
     internal static let userDate: Date = Date(timeIntervalSinceReferenceDate: 547184366)
@@ -48,4 +48,4 @@ internal enum CustomPlist {
     internal static let key1: String = "value1"
   }
 }
-// swiftlint:enable identifier_name line_length type_body_length
+// swiftlint:enable identifier_name line_length number_separator type_body_length

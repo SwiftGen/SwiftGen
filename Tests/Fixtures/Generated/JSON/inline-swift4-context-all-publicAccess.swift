@@ -7,7 +7,7 @@ import Foundation
 
 // MARK: - JSON Files
 
-// swiftlint:disable identifier_name line_length type_body_length
+// swiftlint:disable identifier_name line_length number_separator type_body_length
 public enum JSONFiles {
   public enum Documents {
     public enum Document1 {
@@ -33,4 +33,4 @@ public enum JSONFiles {
     public static let value: String = "value1"
   }
 }
-// swiftlint:enable identifier_name line_length type_body_length
+// swiftlint:enable identifier_name line_length number_separator type_body_length
