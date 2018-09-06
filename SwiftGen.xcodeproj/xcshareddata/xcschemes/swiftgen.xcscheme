@@ -111,35 +111,11 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "coredata --template swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/CoreData/Model.xcdatamodeld"
+            argument = "config lint --config $(PROJECT_DIR)/Tests/Fixtures/Configs/config-missing-paths.yml"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "colors -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/Colors/colors.xml"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "fonts -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/Fonts"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "ib -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/Storyboards-iOS"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "strings -t structured-swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/Strings/Localizable.strings"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "xcassets -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Images.xcassets"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "xcassets -t swift3 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Data.xcassets"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "xcassets -t swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Data.xcassets"
+            argument = "config run --verbose --config $(PROJECT_DIR)/Tests/Fixtures/Configs/config-with-params.yml"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
@@ -147,11 +123,39 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "config lint --config $(PROJECT_DIR)/Tests/Fixtures/Configs/config-missing-paths.yml"
+            argument = "coredata --template swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/CoreData/Model.xcdatamodeld"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "config run --verbose --config $(PROJECT_DIR)/Tests/Fixtures/Configs/config-with-params.yml"
+            argument = "colors -t swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/Colors/colors.xml"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "fonts -t swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/Fonts"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "ib -t swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/Storyboards-iOS"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "plist $(PROJECT_DIR)/Tests/Fixtures/Resources/Plist/good/Info.plist"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "strings -t structured-swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/Strings/Localizable.strings"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "xcassets -t swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Images.xcassets"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "xcassets -t swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Data.xcassets"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "yaml $(PROJECT_DIR)/Tests/Fixtures/Resources/YAML/good/documents.yaml"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>

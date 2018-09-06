@@ -1,0 +1,26 @@
+files:
+- documents:
+  - data:
+      key1: "value1"
+      key2: "2"
+      key3:
+        nestedKey3:
+        - "1"
+        - "2"
+        - "3"
+    metadata:
+      properties:
+        key1:
+          type: "String"
+        key2:
+          type: "String"
+        key3:
+          properties:
+            nestedKey3:
+              element:
+                type: "String"
+              type: "Array"
+          type: "Dictionary"
+      type: "Dictionary"
+  name: "json"
+  path: "json.json"

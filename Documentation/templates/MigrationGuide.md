@@ -1,3 +1,12 @@
+# Master
+
+*** Work In Progress — Will be consolidated once the release is ready ***
+
+* XCAssets #480: no longer generate `allXXX` constants by default. Can be turned on again with `allValues` flag.
+* XCAssets #480: removed `noAllValues` parameter, replaced by `allValues` parameter.
+* XCAssets #482: removed deprecated `allValues` constant
+* XCAssets #482: changed x-platform image alias default from `Image` to `AssetImageTypeAlias`.
+
 # Templates 2.1 Migration Guide
 
 ## Functionality changes in 2.1 (SwiftGen 5.1)

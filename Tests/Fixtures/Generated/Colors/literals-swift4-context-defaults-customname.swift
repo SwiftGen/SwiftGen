@@ -11,6 +11,8 @@
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
+// MARK: - Colors
+
 // swiftlint:disable identifier_name line_length type_body_length
 internal extension UIColor {
   /// 0x339666ff (r: 51, g: 150, b: 102, a: 255)

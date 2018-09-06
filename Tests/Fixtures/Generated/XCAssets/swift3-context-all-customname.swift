@@ -10,12 +10,51 @@
   internal typealias XCTColor = UIColor
   internal typealias XCTImage = UIImage
 #endif
-#if os(iOS) || os(tvOS) || os(OSX)
-internal typealias XCTData = NSDataAsset
-#endif
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
+
+// MARK: - Asset Catalogs
+
+// swiftlint:disable identifier_name line_length nesting type_body_length type_name
+internal enum XCTAssets {
+  internal enum Colors {
+    internal enum _24Vision {
+      internal static let background = XCTColorAsset(name: "24Vision/Background")
+      internal static let primary = XCTColorAsset(name: "24Vision/Primary")
+    }
+    internal static let orange = XCTImageAsset(name: "Orange")
+    internal enum Vengo {
+      internal static let primary = XCTColorAsset(name: "Vengo/Primary")
+      internal static let tint = XCTColorAsset(name: "Vengo/Tint")
+    }
+  }
+  internal enum Data {
+    internal static let data = XCTDataAsset(name: "Data")
+    internal enum Json {
+      internal static let data = XCTDataAsset(name: "Json/Data")
+    }
+    internal static let readme = XCTDataAsset(name: "README")
+  }
+  internal enum Images {
+    internal enum Exotic {
+      internal static let banana = XCTImageAsset(name: "Exotic/Banana")
+      internal static let mango = XCTImageAsset(name: "Exotic/Mango")
+    }
+    internal enum Round {
+      internal static let apricot = XCTImageAsset(name: "Round/Apricot")
+      internal static let apple = XCTImageAsset(name: "Round/Apple")
+      internal enum Double {
+        internal static let cherry = XCTImageAsset(name: "Round/Double/Cherry")
+      }
+      internal static let tomato = XCTImageAsset(name: "Round/Tomato")
+    }
+    internal static let `private` = XCTImageAsset(name: "private")
+  }
+}
+// swiftlint:enable identifier_name line_length nesting type_body_length type_name
+
+// MARK: - Implementation Details
 
 internal struct XCTColorAsset {
   internal fileprivate(set) var name: String
@@ -47,30 +86,23 @@ internal extension XCTColor {
 internal struct XCTDataAsset {
   internal fileprivate(set) var name: String
 
-  #if os(iOS) || os(tvOS) || os(OSX)
-  #if swift(>=3.2)
+  #if (os(iOS) || os(tvOS) || os(OSX)) && swift(>=3.2)
   @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
-  internal var data: XCTData {
-    return XCTData(asset: self)
+  internal var data: NSDataAsset {
+    return NSDataAsset(asset: self)
   }
-  #endif
   #endif
 }
 
-#if os(iOS) || os(tvOS) || os(OSX)
-internal extension XCTData {
-  #if swift(>=3.2)
-  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+#if (os(iOS) || os(tvOS) || os(OSX)) && swift(>=3.2)
+@available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+internal extension NSDataAsset {
   convenience init!(asset: XCTDataAsset) {
     let bundle = Bundle(for: BundleToken.self)
     self.init(name: asset.name, bundle: bundle)
   }
-  #endif
 }
 #endif
-
-@available(*, deprecated, renamed: "XCTImageAsset")
-internal typealias XCTAssetsType = XCTImageAsset
 
 internal struct XCTImageAsset {
   internal fileprivate(set) var name: String
@@ -102,90 +134,5 @@ internal extension XCTImage {
     #endif
   }
 }
-
-// MARK: Assets
-
-// swiftlint:disable identifier_name line_length nesting type_body_length type_name
-internal enum XCTAssets {
-  internal enum Colors {
-    internal enum _24Vision {
-      internal static let background = XCTColorAsset(name: "24Vision/Background")
-      internal static let primary = XCTColorAsset(name: "24Vision/Primary")
-    }
-    internal static let orange = XCTImageAsset(name: "Orange")
-    internal enum Vengo {
-      internal static let primary = XCTColorAsset(name: "Vengo/Primary")
-      internal static let tint = XCTColorAsset(name: "Vengo/Tint")
-    }
-    // swiftlint:disable trailing_comma
-    internal static let allColors: [XCTColorAsset] = [
-      _24Vision.background,
-      _24Vision.primary,
-      Vengo.primary,
-      Vengo.tint,
-    ]
-    internal static let allDataAssets: [XCTDataAsset] = [
-    ]
-    internal static let allImages: [XCTImageAsset] = [
-      orange,
-    ]
-    // swiftlint:enable trailing_comma
-    @available(*, deprecated, renamed: "allImages")
-    internal static let allValues: [XCTAssetsType] = allImages
-  }
-  internal enum Data {
-    internal static let data = XCTDataAsset(name: "Data")
-    internal enum Json {
-      internal static let data = XCTDataAsset(name: "Json/Data")
-    }
-    internal static let readme = XCTDataAsset(name: "README")
-    // swiftlint:disable trailing_comma
-    internal static let allColors: [XCTColorAsset] = [
-    ]
-    internal static let allDataAssets: [XCTDataAsset] = [
-      data,
-      Json.data,
-      readme,
-    ]
-    internal static let allImages: [XCTImageAsset] = [
-    ]
-    // swiftlint:enable trailing_comma
-    @available(*, deprecated, renamed: "allImages")
-    internal static let allValues: [XCTAssetsType] = allImages
-  }
-  internal enum Images {
-    internal enum Exotic {
-      internal static let banana = XCTImageAsset(name: "Exotic/Banana")
-      internal static let mango = XCTImageAsset(name: "Exotic/Mango")
-    }
-    internal enum Round {
-      internal static let apricot = XCTImageAsset(name: "Round/Apricot")
-      internal static let apple = XCTImageAsset(name: "Round/Apple")
-      internal enum Double {
-        internal static let cherry = XCTImageAsset(name: "Round/Double/Cherry")
-      }
-      internal static let tomato = XCTImageAsset(name: "Round/Tomato")
-    }
-    internal static let `private` = XCTImageAsset(name: "private")
-    // swiftlint:disable trailing_comma
-    internal static let allColors: [XCTColorAsset] = [
-    ]
-    internal static let allDataAssets: [XCTDataAsset] = [
-    ]
-    internal static let allImages: [XCTImageAsset] = [
-      Exotic.banana,
-      Exotic.mango,
-      Round.apricot,
-      Round.apple,
-      Round.Double.cherry,
-      Round.tomato,
-      `private`,
-    ]
-    // swiftlint:enable trailing_comma
-    @available(*, deprecated, renamed: "allImages")
-    internal static let allValues: [XCTAssetsType] = allImages
-  }
-}
-// swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 private final class BundleToken {}

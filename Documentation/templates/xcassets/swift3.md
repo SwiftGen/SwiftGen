@@ -21,14 +21,13 @@ You can customize some elements of this template by overriding the following par
 | -------------- | ------------- | ----------- |
 | `enumName` | `Asset` | Allows you to change the name of the generated `enum` containing all assets. |
 | `colorAliasName` | `AssetColorTypeAlias` | Allows you to change the name of the generated `typealias` for the platform specific color type. |
-| `dataAliasName` | `AssetDataTypeAlias` | Allows you to change the name of the generated `typealias` for the data type. |
-| `imageAliasName` | `Image` | Allows you to change the name of the generated `typealias` for the platform specific image type. |
+| `imageAliasName` | `AssetImageTypeAlias` | Allows you to change the name of the generated `typealias` for the platform specific image type. |
 | `colorTypeName` | `ColorAsset` | Allows you to change the name of the struct type representing a color. |
 | `dataTypeName` | `DataAsset` | Allows you to change the name of the struct type representing a data asset. |
 | `imageTypeName` | `ImageAsset` | Allows you to change the name of the struct type representing an image. |
-| `noAllValues` | N/A | Setting this parameter will disable generation of the `allColors` and `allImages` constants. |
+| `allValues` | N/A | Setting this parameter will enable the generation of the `allColors`, `allImages` and other such constants. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
-| `forceProvidesNamespaces` | `false` | If set to true, generates namespaces even for non namespacing asset folders (i.e. "Provides Namespace" is unchecked) |
+| `forceProvidesNamespaces` | N/A | If set, generates namespaces even for non namespacing asset folders (i.e. "Provides Namespace" is unchecked) |
 
 ## Generated Code
 

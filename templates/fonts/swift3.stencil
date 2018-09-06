@@ -14,6 +14,34 @@
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
+// MARK: - Fonts
+
+// swiftlint:disable identifier_name line_length type_body_length
+{% macro transformPath path %}{% filter removeNewlines %}
+  {% if param.preservePath %}
+    {{path}}
+  {% else %}
+    {{path|basename}}
+  {% endif %}
+{% endfilter %}{% endmacro %}
+{{accessModifier}} enum {{param.enumName|default:"FontFamily"}} {
+  {% for family in families %}
+  {{accessModifier}} enum {{family.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+    {% for font in family.fonts %}
+    {{accessModifier}} static let {{font.style|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = FontConvertible(name: "{{font.name}}", family: "{{family.name}}", path: "{% call transformPath font.path %}")
+    {% endfor %}
+    {{accessModifier}} static let all: [FontConvertible] = [{% for font in family.fonts %}{{font.style|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% if not forloop.last %}, {% endif %}{% endfor %}]
+  }
+  {% endfor %}
+  {{accessModifier}} static let allCustomFonts: [FontConvertible] = [{% for family in families %}{{family.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}.all{% if not forloop.last %}, {% endif %}{% endfor %}].flatMap { $0 }
+  {{accessModifier}} static func registerAllCustomFonts() {
+    allCustomFonts.forEach { $0.register() }
+  }
+}
+// swiftlint:enable identifier_name line_length type_body_length
+
+// MARK: - Implementation Details
+
 {{accessModifier}} struct FontConvertible {
   {{accessModifier}} let name: String
   {{accessModifier}} let family: String
@@ -50,30 +78,6 @@
     self.init(name: font.name, size: size)
   }
 }
-
-// swiftlint:disable identifier_name line_length type_body_length
-{% macro transformPath path %}{% filter removeNewlines %}
-  {% if param.preservePath %}
-    {{path}}
-  {% else %}
-    {{path|basename}}
-  {% endif %}
-{% endfilter %}{% endmacro %}
-{{accessModifier}} enum {{param.enumName|default:"FontFamily"}} {
-  {% for family in families %}
-  {{accessModifier}} enum {{family.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
-    {% for font in family.fonts %}
-    {{accessModifier}} static let {{font.style|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = FontConvertible(name: "{{font.name}}", family: "{{family.name}}", path: "{% call transformPath font.path %}")
-    {% endfor %}
-    {{accessModifier}} static let all: [FontConvertible] = [{% for font in family.fonts %}{{font.style|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% if not forloop.last %}, {% endif %}{% endfor %}]
-  }
-  {% endfor %}
-  {{accessModifier}} static let allCustomFonts: [FontConvertible] = [{% for family in families %}{{family.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}.all{% if not forloop.last %}, {% endif %}{% endfor %}].flatMap { $0 }
-  {{accessModifier}} static func registerAllCustomFonts() {
-    allCustomFonts.forEach { $0.register() }
-  }
-}
-// swiftlint:enable identifier_name line_length type_body_length
 
 private final class BundleToken {}
 {% else %}
