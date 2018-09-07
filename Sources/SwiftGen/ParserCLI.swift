@@ -85,7 +85,7 @@ let allParserCommands: [ParserCLI] = [
     name: "coredata",
     description: "generate code for your Core Data models",
     pathDescription: "Core Data models (.xcdatamodel or .xcdatamodeld) to parse."
-  )
+  ),
 
   // Deprecated
   .init(
