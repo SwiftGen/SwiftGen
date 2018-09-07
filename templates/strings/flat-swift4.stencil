@@ -3,6 +3,7 @@
 
 {% if tables.count > 0 %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set rootTypeName %}{{param.enumName|default:"L10n"}}{% endset %}
 import Foundation
 
 // swiftlint:disable superfluous_disable_command
@@ -27,10 +28,10 @@ import Foundation
   {% endif %}
   {% if string.types %}
   {{accessModifier}} static func {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}({% call parametersBlock string.types %}) -> String {
-    return {{enumName}}.tr("{{table}}", "{{string.key}}", {% call argumentsBlock string.types %})
+    return {{rootTypeName}}.tr("{{table}}", "{{string.key}}", {% call argumentsBlock string.types %})
   }
   {% else %}
-  {{accessModifier}} static let {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{table}}", "{{string.key}}")
+  {{accessModifier}} static let {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{rootTypeName}}.tr("{{table}}", "{{string.key}}")
   {% endif %}
   {% endfor %}
   {% for child in item.children %}
@@ -38,11 +39,21 @@ import Foundation
   {% endfor %}
 {% endmacro %}
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
-{% set enumName %}{{param.enumName|default:"L10n"}}{% endset %}
-{{accessModifier}} enum {{enumName}} {
+{% if param.objcCompatible %}
+@objcMembers
+{{accessModifier}} final class {{rootTypeName}}: NSObject {
+{% else %}
+{{accessModifier}} enum {{rootTypeName}} {
+{% endif %}
   {% if tables.count > 1 %}
   {% for table in tables %}
+  {% set typeName %}{{table.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}{% endset %}
+  {% if param.objcCompatible %}
+  @objcMembers @objc({{rootTypeName}}{{typeName}})
+  {{accessModifier}} final class {{typeName}}: NSObject {
+  {% else %}
   {{accessModifier}} enum {{table.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+  {% endif %}
     {% filter indent:2 %}{% call recursiveBlock table.name table.levels %}{% endfilter %}
   }
   {% endfor %}
@@ -54,7 +65,7 @@ import Foundation
 
 // MARK: - Implementation Details
 
-extension {{enumName}} {
+extension {{rootTypeName}} {
   private static func tr(_ table: String, _ key: String) -> String {
     return NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
   }
