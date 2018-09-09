@@ -11,6 +11,7 @@
 
 - When you need to generate *Swift 3* code for your storyboard *segues*.
 - The generated code supports both UIKit platforms (iOS, tvOS and watchOS) and AppKit platform (macOS).
+- Note: if you also need to generate code for your storyboard scenes, you can use [scenes-swift3](../scenes-swift3.md) in addition to this one.
 
 ## Customization
 
@@ -32,8 +33,10 @@ Note: the generated code may look differently depending on the platform the stor
 ```swift
 enum StoryboardSegue {
   enum Message: String, SegueType {
-    case embed
-    case nonCustom
+    case customBack = "CustomBack"
+    case embed = "Embed"
+    case nonCustom = "NonCustom"
+    case showNavCtrl = "Show-NavCtrl"
   }
 }
 ```
@@ -48,11 +51,14 @@ vc.perform(segue: StoryboardSegue.Message.embed)
 
 // or match them (in prepareForSegue):
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-  switch StoryboardSegue.Message(rawValue: segue.identifier!)! {
-  case .embed:
-    // Prepare for your custom segue transition
-  case .nonCustom:
-    // Pass in information to the destination View Controller
+  switch StoryboardSegue.Message(segue) {
+  case .embed?:
+    // Prepare for your custom segue transition, passing information to the destionation VC
+  case .customBack?:
+    // Prepare for your custom segue transition, passing information to the destionation VC
+  default:
+    // Other segues from other scenes, not handled by this VC
+    break
   }
 }
 ```

@@ -11,6 +11,7 @@
 
 - When you need to generate *Swift 4* code for your storyboard *scenes*.
 - The generated code supports both UIKit platforms (iOS, tvOS and watchOS) and AppKit platform (macOS).
+- Note: if you also need to generate code for your storyboard segues, you can use [segues-swift4](../segues-swift4.md) in addition to this one.
 
 ## Customization
 
