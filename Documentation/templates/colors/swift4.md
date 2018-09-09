@@ -40,7 +40,7 @@ struct ColorName {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Colors/swift4-context-defaults.swift)
+[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Generated/Colors/swift4-context-defaults.swift)
 
 ## Usage example
 
