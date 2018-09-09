@@ -27,12 +27,19 @@ internal enum StoryboardSegue {
 
 // MARK: - Implementation Details
 
-internal protocol SegueType: RawRepresentable { }
+internal protocol SegueType: RawRepresentable {}
 
 internal extension NSSeguePerforming {
   func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
     let identifier = NSStoryboardSegue.Identifier(segue.rawValue)
     performSegue?(withIdentifier: identifier, sender: sender)
+  }
+}
+
+internal extension SegueType where RawValue == String {
+  init?(_ segue: NSStoryboardSegue) {
+    guard let identifier = segue.identifier?.rawValue else { return nil }
+    self.init(rawValue: identifier)
   }
 }
 

@@ -34,12 +34,19 @@ public enum StoryboardSegue {
 
 // MARK: - Implementation Details
 
-public protocol SegueType: RawRepresentable { }
+public protocol SegueType: RawRepresentable {}
 
 public extension UIViewController {
   func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
     let identifier = segue.rawValue
     performSegue(withIdentifier: identifier, sender: sender)
+  }
+}
+
+public extension SegueType where RawValue == String {
+  init?(_ segue: UIStoryboardSegue) {
+    guard let identifier = segue.identifier else { return nil }
+    self.init(rawValue: identifier)
   }
 }
 

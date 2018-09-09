@@ -30,11 +30,18 @@ import {{module}}
 
 // MARK: - Implementation Details
 
-{{accessModifier}} protocol SegueType: RawRepresentable { }
+{{accessModifier}} protocol SegueType: RawRepresentable {}
 
 {{accessModifier}} extension {% if isAppKit %}NSSeguePerforming{% else %}UIViewController{% endif %} {
   func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
     performSegue{% if isAppKit %}?{% endif %}(withIdentifier: segue.rawValue, sender: sender)
+  }
+}
+
+{{accessModifier}} extension SegueType where RawValue == String {
+  init?(_ segue: {% if isAppKit %}NS{% else %}UI{% endif %}StoryboardSegue) {
+    guard let identifier = segue.identifier else { return nil }
+    self.init(rawValue: identifier)
   }
 }
 
