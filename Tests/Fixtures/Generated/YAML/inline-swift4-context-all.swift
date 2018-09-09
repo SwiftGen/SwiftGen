@@ -7,7 +7,7 @@ import Foundation
 
 // MARK: - YAML Files
 
-// swiftlint:disable identifier_name line_length type_body_length
+// swiftlint:disable identifier_name line_length number_separator type_body_length
 internal enum YAMLFiles {
   internal enum Documents {
     internal enum Document1 {
@@ -33,4 +33,4 @@ internal enum YAMLFiles {
     internal static let value: String = "value1"
   }
 }
-// swiftlint:enable identifier_name line_length type_body_length
+// swiftlint:enable identifier_name line_length number_separator type_body_length

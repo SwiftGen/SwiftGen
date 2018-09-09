@@ -83,7 +83,7 @@ extension ConfigEntry {
 
   static func parseCommandEntry(yaml: Any, cmd: String, logger: (LogLevel, String) -> Void) throws -> [ConfigEntry] {
     return try ConfigEntry.parseValueOrArray(yaml: yaml) {
-      return try ConfigEntry(yaml: $0, cmd: cmd, logger: logger)
+      try ConfigEntry(yaml: $0, cmd: cmd, logger: logger)
     }
   }
 

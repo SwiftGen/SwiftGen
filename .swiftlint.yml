@@ -1,13 +1,16 @@
 opt_in_rules:
+ - anyobject_protocol
  - array_init
  - attributes
  - closure_end_indentation
  - closure_spacing
  - contains_over_first_not_nil
+ - convenience_type
  - discouraged_optional_boolean
  - discouraged_optional_collection
  - empty_count
  - empty_string
+ - fallthrough
  - fatal_error_message
  - first_where
  - force_unwrapping
@@ -15,8 +18,12 @@ opt_in_rules:
  - implicitly_unwrapped_optional
  - joined_default_parameter
  - literal_expression_end_indentation
+ - lower_acl_than_parent
+ - modifier_order
  - multiline_arguments
+ - multiline_function_chains
  - multiline_parameters
+ - number_separator
  - operator_usage_whitespace
  - overridden_super_call
  - override_in_extension
@@ -27,6 +34,7 @@ opt_in_rules:
  - sorted_first_last
  - sorted_imports
  - trailing_closure
+ - unavailable_function
  - unneeded_parentheses_in_closure_argument
  - vertical_parameter_alignment_on_call
  - yoda_condition

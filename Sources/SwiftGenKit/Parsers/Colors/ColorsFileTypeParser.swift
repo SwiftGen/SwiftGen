@@ -15,7 +15,7 @@ extension Colors {
   }
 }
 
-protocol ColorsFileTypeParser: class {
+protocol ColorsFileTypeParser: AnyObject {
   static var extensions: [String] { get }
 
   init()

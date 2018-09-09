@@ -19,7 +19,7 @@ class ConfigReadTests: XCTestCase {
       XCTAssertNil(config.inputDir)
       XCTAssertEqual(config.outputDir, "Common/Generated")
 
-      XCTAssertEqual(Array(config.commands.keys), ["strings"])
+      XCTAssertEqual(config.commands.keys.sorted(), ["strings"])
       let stringEntries = config.commands["strings"]
       XCTAssertEqual(stringEntries?.count, 1)
       guard let entry = stringEntries?.first else {
@@ -55,7 +55,7 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(config.inputDir, "Fixtures/")
       XCTAssertEqual(config.outputDir, "Generated/")
 
-      XCTAssertEqual(Array(config.commands.keys), ["strings", "xcassets"])
+      XCTAssertEqual(config.commands.keys.sorted(), ["strings", "xcassets"])
 
       // strings
       guard let stringsEntries = config.commands["strings"] else {
@@ -109,7 +109,7 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(config.inputDir, "Fixtures/")
       XCTAssertEqual(config.outputDir, "Generated/")
 
-      XCTAssertEqual(Array(config.commands.keys), ["ib"])
+      XCTAssertEqual(config.commands.keys.sorted(), ["ib"])
 
       // ib
       guard let ibEntries = config.commands["ib"] else {
@@ -232,7 +232,7 @@ class ConfigReadTests: XCTestCase {
       XCTAssertNil(config.inputDir)
       XCTAssertEqual(config.outputDir, "Common/Generated")
 
-      XCTAssertEqual(Array(config.commands.keys), ["strings"])
+      XCTAssertEqual(config.commands.keys.sorted(), ["strings"])
       guard let stringEntries = config.commands["strings"] else {
         return XCTFail("Expected a config entry for strings")
       }

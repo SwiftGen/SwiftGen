@@ -55,7 +55,7 @@ import Foundation
   {% endif %}
 {% endfilter %}{% endmacro %}
 
-// swiftlint:disable identifier_name line_length type_body_length
+// swiftlint:disable identifier_name line_length number_separator type_body_length
 {{accessModifier}} enum {{param.enumName|default:"YAMLFiles"}} {
   {% if files.count > 1 %}
   {% for file in files %}
@@ -67,7 +67,7 @@ import Foundation
   {% call fileBlock files.first %}
   {% endif %}
 }
-// swiftlint:enable identifier_name line_length type_body_length
+// swiftlint:enable identifier_name line_length number_separator type_body_length
 {% else %}
 // No files found
 {% endif %}

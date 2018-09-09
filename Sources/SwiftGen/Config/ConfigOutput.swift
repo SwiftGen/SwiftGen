@@ -46,7 +46,7 @@ extension ConfigEntryOutput {
 
   static func parseCommandOutput(yaml: Any, logger: (LogLevel, String) -> Void) throws -> [ConfigEntryOutput] {
     return try ConfigEntry.parseValueOrArray(yaml: yaml) {
-      return try ConfigEntryOutput(yaml: $0, logger: logger)
+      try ConfigEntryOutput(yaml: $0, logger: logger)
     }
   }
 }

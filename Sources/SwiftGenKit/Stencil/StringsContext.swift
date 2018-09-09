@@ -46,15 +46,17 @@ extension Strings.Parser {
       return result
     }
 
-    let tables = self.tables.map { name, entries in
-      [
-        "name": name,
-        "levels": structure(
-          entries: entries,
-          usingMapper: entryToStringMapper
-        )
-      ]
-    }
+    let tables = self.tables
+      .sorted { $0.key.lowercased() < $1.key.lowercased() }
+      .map { name, entries in
+        [
+          "name": name,
+          "levels": structure(
+            entries: entries,
+            usingMapper: entryToStringMapper
+          )
+        ]
+      }
 
     return [
       "tables": tables
