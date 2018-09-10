@@ -85,21 +85,21 @@ namespace :output do
     Utils.print_header 'Compile output modules'
 
     # macOS
-    modules = %w[FadeSegue PrefsWindowController]
+    modules = %w[ExtraModule PrefsWindowController]
     modules.each do |m|
       Utils.print_info "Compiling module #{m}… (macos)"
       compile_module(m, :macosx, task)
     end
 
     # iOS
-    modules = %w[CustomSegue LocationPicker SlackTextViewController]
+    modules = %w[ExtraModule LocationPicker SlackTextViewController]
     modules.each do |m|
       Utils.print_info "Compiling module #{m}… (ios)"
       compile_module(m, :iphoneos, task)
     end
 
     # delete swiftdoc
-    Dir.glob("#{MODULE_OUTPUT_PATH}/*.swiftdoc").each do |f|
+    Dir.glob("#{MODULE_OUTPUT_PATH}/*/*.swiftdoc").each do |f|
       FileUtils.rm_rf(f)
     end
   end
@@ -130,7 +130,7 @@ namespace :output do
     commands = TOOLCHAINS.map do |_key, toolchain|
       %(--toolchain #{toolchain[:toolchain]} -sdk #{sdk} swiftc -swift-version #{toolchain[:version]} ) +
         %(-emit-module "#{MODULE_INPUT_PATH}/#{m}.swift" -module-name "#{m}" ) +
-        %(-emit-module-path "#{toolchain[:module_path]}" -target "#{target}")
+        %(-emit-module-path "#{toolchain[:module_path]}/#{sdk}" -target "#{target}")
     end
 
     Utils.run(commands, task, subtask, xcrun: true)
@@ -154,6 +154,26 @@ namespace :output do
     end
   end
 
+  def files(f)
+    if !(f.include?('iOS') || f.include?('macOS'))
+      [f]
+    elsif f.include?('public-access')
+      ["#{MODULE_OUTPUT_PATH}/PublicDefinitions.swift", f]
+    else
+      ["#{MODULE_OUTPUT_PATH}/Definitions.swift", f]
+    end
+  end
+
+  def flags(f)
+    if f.include?('ignore-target-module-with-extra-module')
+      ['-D', 'DEFINE_EXTRA_MODULE_TYPES']
+    elsif f.include?('with-extra-module') || f.include?('no-defined-module')
+      ['-D', 'DEFINE_NAMESPACED_EXTRA_MODULE_TYPES']
+    else
+      []
+    end
+  end
+
   def compile_file(f, task)
     toolchain = toolchain(f)
     if toolchain.nil?
@@ -161,17 +181,13 @@ namespace :output do
       return true
     end
     sdks = sdks(f)
-
-    defs = if f.include?('publicAccess')
-             ["#{MODULE_OUTPUT_PATH}/PublicDefinitions.swift"]
-           else
-             defs = ["#{MODULE_OUTPUT_PATH}/Definitions.swift"]
-           end
-    defs << "#{MODULE_OUTPUT_PATH}/ExtraDefinitions.swift" if f.include?('extra-definitions')
+    files = files(f)
+    flags = flags(f)
 
     commands = sdks.map do |sdk|
       %(--toolchain #{toolchain[:toolchain]} -sdk #{sdk} swiftc -swift-version #{toolchain[:version]} ) +
-        %(-typecheck -target #{SDKS[sdk]} -I #{toolchain[:module_path]} #{defs.join(' ')} #{f})
+        %(-typecheck -target #{SDKS[sdk]} -I "#{toolchain[:module_path]}/#{sdk}" #{flags.join(' ')} ) +
+        %(-module-name SwiftGen #{files.join(' ')})
     end
     subtask = File.basename(f, '.*')
 

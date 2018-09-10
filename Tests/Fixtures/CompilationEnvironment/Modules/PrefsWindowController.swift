@@ -1,4 +1,3 @@
 import Cocoa
 
-public class DBPrefsWindowController: NSWindowController {
-}
+public final class DBPrefsWindowController: NSWindowController {}

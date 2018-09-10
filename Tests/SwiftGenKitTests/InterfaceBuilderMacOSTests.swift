@@ -4,7 +4,7 @@
 // MIT Licence
 //
 
-import SwiftGenKit
+@testable import SwiftGenKit
 import XCTest
 
 /**
@@ -55,5 +55,18 @@ class InterfaceBuilderMacOSTests: XCTestCase {
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "all", sub: .interfaceBuilderMacOS)
+  }
+
+  // ensure we still have a test case for checking support of module placeholders
+  func testConsistencyOfModules() throws {
+    let fakeModuleName = "NotCurrentModule"
+
+    let parser = InterfaceBuilder.Parser()
+    try parser.parse(path: Fixtures.directory(sub: .interfaceBuilderMacOS))
+
+    XCTAssert(parser.storyboards.contains {
+      $0.scenes.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName } &&
+      $0.segues.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName }
+    })
   }
 }

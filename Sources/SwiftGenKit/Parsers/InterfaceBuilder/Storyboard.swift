@@ -16,10 +16,10 @@ extension InterfaceBuilder {
     let segues: Set<Segue>
 
     var modules: Set<String> {
-      var result: [String] = scenes.compactMap { $0.module } +
-        segues.compactMap { $0.module }
+      var result: [String] = scenes.filter { !$0.moduleIsPlaceholder }.compactMap { $0.module } +
+        segues.filter { !$0.moduleIsPlaceholder }.compactMap { $0.module }
 
-      if let module = initialScene?.module {
+      if let scene = initialScene, let module = scene.module, !scene.moduleIsPlaceholder {
         result += [module]
       }
 
