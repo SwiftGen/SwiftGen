@@ -3,8 +3,11 @@
 //: * [Demo for `swiftgen colors`](Colors-Demo)
 //: * [Demo for `swiftgen fonts`](Fonts-Demo)
 //: * Demo for `swiftgen ib`
+//: * [Demo for `swiftgen json`](JSON-Demo)
+//: * [Demo for `swiftgen plist`](Plist-Demo)
 //: * [Demo for `swiftgen strings`](Strings-Demo)
 //: * [Demo for `swiftgen xcassets`](XCAssets-Demo)
+//: * [Demo for `swiftgen yaml`](YAML-Demo)
 
 // setup code
 private final class BundleToken {}
@@ -52,8 +55,8 @@ internal enum StoryboardSegue {
     case showNavCtrl = "Show-NavCtrl"
   }
   internal enum Wizard: String, SegueType {
-        case showPassword = "ShowPassword"
-    }
+    case showPassword = "ShowPassword"
+  }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
 

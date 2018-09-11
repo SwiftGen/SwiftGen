@@ -3,8 +3,11 @@
 //: * [Demo for `swiftgen colors`](Colors-Demo)
 //: * [Demo for `swiftgen fonts`](Fonts-Demo)
 //: * [Demo for `swiftgen ib`](InterfaceBuilder-Demo)
+//: * [Demo for `swiftgen json`](JSON-Demo)
+//: * [Demo for `swiftgen plist`](Plist-Demo)
 //: * [Demo for `swiftgen strings`](Strings-Demo)
 //: * Demo for `swiftgen xcassets`
+//: * [Demo for `swiftgen yaml`](YAML-Demo)
 
 // setup code
 private final class BundleToken {}
