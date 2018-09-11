@@ -1,0 +1,8 @@
+{
+  "key1": "value1",
+  "key2": "2",
+  "key3": {
+    "nestedKey3": ["1", "2", "3"]
+  },
+  "key4": null
+}
