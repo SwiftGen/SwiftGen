@@ -21,7 +21,7 @@ The output context has the following structure:
 
 The metadata has the following properties:
 
- - `type`: `String` — The type of the object (Array, Dictionary, Int, Float, String, Bool, Date, Data)
+ - `type`: `String` — The type of the object (Array, Bool, Data, Date, Dictionary, Double, Int, String, Optional and Any)
  - `properties`: `Dictionary` — List of properties metadata (only if a dictionary, repeats this metadata structure)
  - `element`: `Dictionary` — Element metadata (only if an array, repeats this metadata structure)
 

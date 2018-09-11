@@ -9,7 +9,7 @@
 
 ## When to use it
 
-- When you need to generate *Swift 3* code
+- When you need to generate *Swift 3* code.
 
 ## Customization
 

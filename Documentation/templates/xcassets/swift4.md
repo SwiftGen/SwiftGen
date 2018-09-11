@@ -9,7 +9,7 @@
 
 ## When to use it
 
-- When you need to generate *Swift 4* code
+- When you need to generate *Swift 4* code.
 
 It also takes into account any namespacing folder in your Assets Catalogs (i.e. if you create a folder in your Assets Catalog, select it, and check the "Provides Namespace" checkbox on the Attributes Inspector panel on the right)
 

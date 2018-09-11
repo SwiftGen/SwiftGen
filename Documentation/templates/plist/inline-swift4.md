@@ -9,8 +9,8 @@
 
 ## When to use it
 
-- When you need to generate *Swift 4* code
-- Embeds the data from the Plist file directly in your Swift code
+- When you need to generate *Swift 4* code.
+- Embeds the data from the Plist file directly in your Swift code.
 
 ## Customization
 

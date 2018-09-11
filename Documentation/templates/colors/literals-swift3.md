@@ -9,9 +9,9 @@
 
 ## When to use it
 
-- When you need to generate *Swift 3* code
-- Supports _multiple_ color names with the _same_ value
-- Uses `#colorLiteral`s for easy preview of the actual color
+- When you need to generate *Swift 3* code.
+- Supports _multiple_ color names with the _same_ value.
+- Uses `#colorLiteral`s for easy preview of the actual color.
 
 ## Customization
 
