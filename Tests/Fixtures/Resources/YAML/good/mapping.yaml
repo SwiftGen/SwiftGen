@@ -1,3 +1,6 @@
 key1: value1
-key2: 
+key2: 1.0
+key3:
+  nestedKey1: nestedValue1
   nestedKey2: nestedValue2
+key4: null
