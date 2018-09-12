@@ -1,5 +1,6 @@
 import Foundation
 
+// Extra for playgrounds
 public var bundle: Bundle!
 
 // MARK: - Implementation Details

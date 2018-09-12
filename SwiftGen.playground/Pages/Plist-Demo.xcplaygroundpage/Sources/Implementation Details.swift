@@ -1,5 +1,8 @@
 import Foundation
 
+// Extra for playgrounds
+public var bundle: Bundle!
+
 // MARK: - Implementation Details
 
 public func arrayFromPlist<T>(at path: String) -> [T] {
@@ -28,5 +31,3 @@ public struct PlistDocument {
     return result
   }
 }
-
-public var bundle: Bundle!
