@@ -17,6 +17,7 @@ enum Metadata {
 
   private enum ValueType {
     static let any = "Any"
+    static let optional = "Optional"
     static let array = "Array"
     static let dictionary = "Dictionary"
     static let bool = "Bool"
@@ -51,6 +52,8 @@ enum Metadata {
         Key.type: ValueType.dictionary,
         Key.properties: Metadata.describe(dictionary: data)
       ]
+    case is NSNull, nil:
+      return [Key.type: ValueType.optional]
     default:
       return [Key.type: ValueType.any]
     }

@@ -9,8 +9,9 @@
 
 ## When to use it
 
-- When you need to generate *Swift 3* code
-- Loads the data from the Plist file at runtime
+- When you need to generate *Swift 3* code.
+- Loads the data from the Plist file in the current bundle at runtime.
+- If you need other functionality, such as loading a file in your `Documents` folder, or handling `Optional` properties, you should write your own custom template ([guide](../../Creating-your-templates.md)).
 
 ## Customization
 

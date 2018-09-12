@@ -85,6 +85,7 @@
   [#359](https://github.com/SwiftGen/SwiftGen/issues/359)
   [#288](https://github.com/SwiftGen/SwiftGen/pull/288)
   [#188](https://github.com/SwiftGen/SwiftGen/pull/188)
+  [#493](https://github.com/SwiftGen/SwiftGen/pull/493)
 
 ### Internal Changes
 
