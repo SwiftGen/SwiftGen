@@ -9,7 +9,7 @@
 
 ## When to use it
 
-- When you need to generate *Swift 4* code
+- When you need to generate *Swift 4* code.
 - If you use unstructured key names for your strings, or a structure that we don't support (yet). If you use "dot-syntax" keys, please check out the [structured-swift4](structured-swift4.md) template.
 
 ## Customization
@@ -39,7 +39,7 @@ enum L10n {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Strings/flat-swift4-context-localizable.swift)
+[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Generated/Strings/flat-swift4-context-localizable.swift)
 
 ## Usage example
 

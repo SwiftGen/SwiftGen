@@ -5,8 +5,9 @@
 //
 
 import Foundation
-import XCTest
 import PathKit
+import SwiftGenKit
+import XCTest
 
 private let colorCode: (String) -> String =
   ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
@@ -18,10 +19,10 @@ private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
 
 private func diff(_ result: String, _ expected: String) -> String? {
   guard result != expected else { return nil }
-  var firstDiff: Int? = nil
-  let nl = CharacterSet.newlines
-  let lhsLines = result.components(separatedBy: nl)
-  let rhsLines = expected.components(separatedBy: nl)
+  var firstDiff: Int?
+  let newLines = CharacterSet.newlines
+  let lhsLines = result.components(separatedBy: newLines)
+  let rhsLines = expected.components(separatedBy: newLines)
 
   for (idx, pair) in zip(lhsLines, rhsLines).enumerated() where pair.0 != pair.1 {
     firstDiff = idx
@@ -32,14 +33,14 @@ private func diff(_ result: String, _ expected: String) -> String? {
   }
   if let badLineIdx = firstDiff {
     let slice = { (lines: [String], context: Int) -> ArraySlice<String> in
-      let start = max(0, badLineIdx-context)
-      let end = min(badLineIdx+context, lines.count-1)
+      let start = max(0, badLineIdx - context)
+      let end = min(badLineIdx + context, lines.count - 1)
       return lines[start...end]
     }
     let addLineNumbers = { (slice: ArraySlice) -> [String] in
       slice.enumerated().map { (idx: Int, line: String) in
         let num = idx + slice.startIndex
-        let lineNum = "\(num+1)".padding(toLength: 3, withPad: " ", startingAt: 0) + "|"
+        let lineNum = "\(num + 1)".padding(toLength: 3, withPad: " ", startingAt: 0) + "|"
         let clr = num == badLineIdx ? koCode : okCode
         return "\(clr.num)\(lineNum)\(reset)\(clr.code)\(line)\(reset)"
       }
@@ -69,8 +70,15 @@ func diff(_ result: [String: Any], _ expected: [String: Any], path: String = "")
   if Set(result.keys) != Set(expected.keys) {
     let lhs = result.keys.map { " - \($0): \(result[$0] ?? "")" }.joined(separator: "\n")
     let rhs = expected.keys.map { " - \($0): \(expected[$0] ?? "")" }.joined(separator: "\n")
-    let path = (path != "") ? " at '\(path)'" : ""
-    return "\(msgColor)Keys do not match\(path):\(reset)\n>>>>>> result\n\(lhs)\n======\n\(rhs)\n<<<<<< expected"
+    let path = (!path.isEmpty) ? " at '\(path)'" : ""
+    return """
+      \(msgColor)Keys do not match\(path):\(reset)
+      >>>>>> result
+      \(lhs)
+      ======
+      \(rhs)
+      <<<<<< expected
+      """
   }
 
   // check values
@@ -86,15 +94,15 @@ func diff(_ result: [String: Any], _ expected: [String: Any], path: String = "")
 }
 
 func compare(_ lhs: Any, _ rhs: Any, key: String, path: String) -> String? {
-  let keyPath = (path == "") ? key : "\(path).\(key)"
+  let keyPath = (path.isEmpty) ? key : "\(path).\(key)"
 
-  if let lhs = lhs as? Bool, let rhs = rhs as? Bool, lhs == rhs {
+  if let lhs = convertToNumber(lhs), let rhs = convertToNumber(rhs), lhs == rhs {
     return nil
-  } else if let lhs = lhs as? Int, let rhs = rhs as? Int, lhs == rhs {
+  } else if let lhs = convertToString(lhs), let rhs = convertToString(rhs), lhs == rhs {
     return nil
-  } else if let lhs = lhs as? Float, let rhs = rhs as? Float, lhs == rhs {
+  } else if let lhs = lhs as? Data, let rhs = rhs as? Data, lhs == rhs {
     return nil
-  } else if let lhs = lhs as? String, let rhs = rhs as? String, lhs == rhs {
+  } else if let lhs = lhs as? Date, let rhs = rhs as? Date, lhs == rhs {
     return nil
   } else if let lhs = lhs as? [Any], let rhs = rhs as? [Any], lhs.count == rhs.count {
     for (lhs, rhs) in zip(lhs, rhs) {
@@ -104,6 +112,8 @@ func compare(_ lhs: Any, _ rhs: Any, key: String, path: String) -> String? {
     }
   } else if let lhs = lhs as? [String: Any], let rhs = rhs as? [String: Any] {
     return diff(lhs, rhs, path: "\(keyPath)")
+  } else if let lhs = lhs as? String, lhs == "\(rhs)" {
+    return nil
   } else {
     return [
       "\(msgColor)Values do not match for '\(keyPath)':\(reset)",
@@ -118,18 +128,46 @@ func compare(_ lhs: Any, _ rhs: Any, key: String, path: String) -> String? {
   return nil
 }
 
+func convertToNumber(_ value: Any) -> NSNumber? {
+  switch value {
+  case let value as Bool:
+    return value as NSNumber
+  case let value as Int:
+    return value as NSNumber
+  case let value as Double:
+    return value as NSNumber
+  default:
+    return nil
+  }
+}
+
+func convertToString(_ value: Any) -> String? {
+  switch value {
+  case let value as String:
+    return value
+  case is NSNull:
+    return ""
+  default:
+    return nil
+  }
+}
+
 func XCTDiffContexts(_ result: [String: Any],
                      expected name: String,
                      sub directory: Fixtures.Directory,
                      file: StaticString = #file,
                      line: UInt = #line) {
+  let fileName = "\(name).yaml"
+
   if ProcessInfo().environment["GENERATE_CONTEXTS"] == "YES" {
-    let target = Path(#file).parent().parent() + "Fixtures/StencilContexts" + directory.rawValue + name
-    guard (result as NSDictionary).write(to: target.url, atomically: true) else {
-      fatalError("Unable to write context file \(target)")
+    let target = Path(#file).parent().parent() + "Fixtures/StencilContexts" + directory.rawValue + fileName
+    do {
+      try YAML.write(object: result, to: target)
+    } catch let error {
+      fatalError("Unable to write context file \(target): \(error)")
     }
   } else {
-    let expected = Fixtures.context(for: name, sub: directory)
+    let expected = Fixtures.context(for: fileName, sub: directory)
     guard let error = diff(result, expected) else { return }
     XCTFail(error, file: file, line: line)
   }
@@ -139,11 +177,17 @@ class Fixtures {
   enum Directory: String {
     case colors = "Colors"
     case fonts = "Fonts"
-    case storyboards = "Storyboards"
-    case storyboardsiOS = "Storyboards-iOS"
-    case storyboardsMacOS = "Storyboards-macOS"
+    case interfaceBuilder = "IB"
+    case interfaceBuilderiOS = "IB-iOS"
+    case interfaceBuilderMacOS = "IB-macOS"
+    case plist = "Plist"
+    case plistBad = "Plist/bad"
+    case plistGood = "Plist/good"
     case strings = "Strings"
     case xcassets = "XCAssets"
+    case yaml = "YAML"
+    case yamlBad = "YAML/bad"
+    case yamlGood = "YAML/good"
   }
 
   private static let testBundle = Bundle(for: Fixtures.self)
@@ -173,10 +217,11 @@ class Fixtures {
   static func context(for name: String, sub: Directory) -> [String: Any] {
     let path = self.path(for: name, subDirectory: "StencilContexts/\(sub.rawValue)")
 
-    guard let data = NSDictionary(contentsOf: path.url) as? [String: Any] else {
-      fatalError("Unable to load fixture content")
+    guard let yaml = try? YAML.read(path: path),
+      let result = yaml as? [String: Any] else {
+        fatalError("Unable to load fixture content")
     }
 
-    return data
+    return result
   }
 }

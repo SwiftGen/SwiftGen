@@ -21,7 +21,9 @@ SwiftGen is a tool to auto-generate Swift code for resources of your projects, t
       <li><a href="#asset-catalog">Assets Catalogs</a>
       <li><a href="#colors">Colors</a>
       <li><a href="#fonts">Fonts</a>
-      <li><a href="#storyboards">Storyboards and their Scenes</a>
+      <li><a href="#interface-builder">Interface Builder files</a>
+      <li><a href="#json-and-YAML">JSON and YAML files</a>
+      <li><a href="#plist">Plists</a>
       <li><a href="#strings"><tt>Localizable.strings</tt></a>
     </ul>
   </td>
@@ -142,14 +144,17 @@ The tool is provided as a unique `swiftgen` binary command-line, with the follow
 
 * `swiftgen colors [OPTIONS] FILE1 …`
 * `swiftgen fonts [OPTIONS] DIR1 …`
-* `swiftgen storyboards [OPTIONS] DIR1 …`
+* `swiftgen ib [OPTIONS] DIR1 …`
+* `swiftgen json [OPTIONS] DIRORFILE1 …`
+* `swiftgen plist [OPTIONS] DIRORFILE1 …`
 * `swiftgen strings [OPTIONS] FILE1 …`
 * `swiftgen xcassets [OPTIONS] CATALOG1 …`
+* `swiftgen yaml [OPTIONS] DIRORFILE1 …`
 
 Each subcommand has its own option and syntax, but some options are common to all:
 
 * `--output FILE` or `-o FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
-* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](https://github.com/SwiftGen/templates)) to generate the output.
+* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](./Documentation/templates)) to generate the output.
 * `--templatePath PATH` or `-p PATH`: define the Stencil template to use, using a full path.
 * Note: you should specify one and only one template when invoking SwiftGen. You have to use either `-t` or `-p` but should not use both at the same time (it wouldn't make sense anyway and you'll get an error if you try)
 * Each command supports multiple input files (or directories where applicable).
@@ -168,20 +173,22 @@ Simply create a `swiftgen.yml` YAML file to list all the subcommands to invoke, 
 
 ```yaml
 strings:
-  paths: Resources/Base.lproj/Localizable.strings
-  templateName: structured-swift3
-  output: Generated/strings.swift
+  inputs: Resources/Base.lproj/Localizable.strings
+  outputs:
+    - templateName: structured-swift4
+      output: Generated/strings.swift
 xcassets:
-  paths:
-   - Resources/Images.xcassets
-   - Resources/MoreImages.xcassets
-  templateName: swift3
-  output: Generated/assets-images.swift
+  inputs:
+    - Resources/Images.xcassets
+    - Resources/MoreImages.xcassets
+  outputs:
+    - templateName: swift4
+      output: Generated/assets-images.swift
 ```
 
 Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for short, and it will execute what's described in the configuration file
 
-To learn more about the configuration file — its more detailed syntax and possiblities, how to pass custom parameters, using `swiftgen config lint` to validate it, how to use alternate config files, and other tips — [see the dedicated documentation](Documentation/ConfigFile.md).
+To learn more about the configuration file — its more detailed syntax and possibilities, how to pass custom parameters, using `swiftgen config lint` to validate it, how to use alternate config files, and other tips — [see the dedicated documentation](Documentation/ConfigFile.md).
 
 ## Choosing your template
 
@@ -189,22 +196,21 @@ SwiftGen is based on templates (it uses [Stencil](https://github.com/kylef/Stenc
 
 ### Bundled templates vs. Custom ones
 
-SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `fonts`, `storyboards`, `strings`, `xcassets`), which will fit most needs. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs. Simply either use the `-t` / `--template` option to specify the name of the template to use, or store them somewhere else (like in your project repository) and use `-p` / `--templatePath` to specify a full path.
+SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `fonts`, `ib`, `json`, `plist`, `strings`, `xcassets`, `yaml`), which will fit most needs. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs. Simply either use the `-t` / `--template` option to specify the name of the template to use, or store them somewhere else (like in your project repository) and use `-p` / `--templatePath` to specify a full path.
 
 💡 You can use the `swiftgen templates list` command to list all the available templates (both custom and bundled templates) for each subcommand, list the template content and dupliate them to create your own.
 
-For more information about how to create your own templates, [see the dedicated documentation](https://github.com/SwiftGen/templates/blob/master/Documentation/Creating-your-templates.md).
+For more information about how to create your own templates, [see the dedicated documentation](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/Creating-your-templates.md).
 
 ### Templates bundled with SwiftGen:
 
 As explained above, you can use `swiftgen templates list` to list all templates bundled with SwiftGen. For most SwiftGen subcommands, we provide, among others:
 
-* A `swift2` template, compatible with Swift 2
 * A `swift3` template, compatible with Swift 3
 * A `swift4` template, compatible with Swift 4
-* Other variants, like `flat-swift2/3/4` and `structured-swift2/3/4` templates for Strings, etc.
+* Other variants, like `flat-swift3/4` and `structured-swift3/4` templates for Strings, etc.
 
-You can **find the documentation for each bundled template [here in the repo](https://github.com/SwiftGen/templates/tree/master/Documentation)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
+You can **find the documentation for each bundled template [here in the repo](./Documentation/templates)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
 Each MarkDown file documents the Swift Version it's aimed for, the use case for that template (in which cases you might favor that template over others), the available `--param` parameters to customize it on invocation, and some code examples.
 
 > Don't hesitate to make PRs to share your improvements suggestions on the bundled templates 😉
@@ -238,7 +244,7 @@ You can also find other help & tutorial material on the internet, like [this cla
 ## Asset Catalog
 
 ```sh
-swiftgen xcassets -t swift3 /dir/to/search/for/imageset/assets
+swiftgen xcassets -t swift4 /dir/to/search/for/imageset/assets
 ```
 
 This will generate an `enum Asset` with one `case` per image set in your assets catalog, so that you can use them as constants.
@@ -273,22 +279,22 @@ let samePrivateImage = Asset.private.image
 ## Colors
 
 ```sh
-swiftgen colors -t swift3 /path/to/colors-file.txt
+swiftgen colors -t swift4 /path/to/colors-file.txt
 ```
 
 This will generate a `enum ColorName` with one `case` per color listed in the text file passed as argument.
 
 The input file is expected to be either:
 
-* a [plain text file](https://github.com/SwiftGen/templates/blob/master/Fixtures/Colors/colors.txt), with one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`). Whitespaces are ignored.
-* a [JSON file](https://github.com/SwiftGen/templates/blob/master/Fixtures/Colors/colors.json), representing a dictionary of names -> values, each value being the hex representation of the color
-* a [XML file](https://github.com/SwiftGen/templates/blob/master/Fixtures/Colors/colors.xml), expected to be the same format as the Android colors.xml files, containing tags `<color name="AColorName">AColorHexRepresentation</color>`
+* a [plain text file](https://github.com/SwiftGen/SwiftGen/blob/master/Tests/Fixtures/Resources/Colors/colors.txt), with one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`) or the name of another color in the file. Whitespaces are ignored.
+* a [JSON file](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Resources/Colors/colors.json), representing a dictionary of names -> values, each value being the hex representation of the color
+* a [XML file](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Resources/Colors/colors.xml), expected to be the same format as the Android colors.xml files, containing tags `<color name="AColorName">AColorHexRepresentation</color>`
 * a [`*.clr` file](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/DrawColor/Concepts/AboutColorLists.html#//apple_ref/doc/uid/20000757-BAJHJEDI) used by Apple's Color Paletes.
 
 For example you can use this command to generate colors from one of your system color lists:
 
 ```sh
-swiftgen colors -swift3 ~/Library/Colors/MyColors.clr
+swiftgen colors -swift4 ~/Library/Colors/MyColors.clr
 ```
 
 Generated code will look the same as if you'd use text file.
@@ -342,12 +348,12 @@ This way, no need to enter the color red, green, blue, alpha values each time an
 ## Fonts
 
 ```sh
-swiftgen fonts -t swift3 /path/to/font/dir
+swiftgen fonts -t swift4 /path/to/font/dir
 ```
 
 This will recursively go through the specified directory, finding any typeface files (TTF, OTF, …), defining a `struct FontFamily` for each family, and an enum nested under that family that will represent the font styles.
 
-<detals>
+<details>
 <summary>Example of code generated by the bundled template</summary>
 
 ```swift
@@ -362,7 +368,7 @@ enum FontFamily {
 ```
 </details>
 
-### Usage
+### Usage Example
 
 ```swift
 // You can create fonts with the convenience constructor like this:
@@ -374,13 +380,14 @@ let sameDisplayRegular = FontFamily.SFNSDisplay.regular.font(size: 20.0)
 let sameDingbats = FontFamily.ZapfDingbats.regular.font(size: 20.0)
 ```
 
-## Storyboards
+## Interface Builder
 
 ```sh
-swiftgen storyboards -t swift3 /dir/to/search/for/storyboards
+swiftgen ib -t scenes-swift4 /dir/to/search/for/storyboards
+swiftgen ib -t segues-swift4 /dir/to/search/for/storyboards
 ```
 
-This will generate an `enum` for each of your `NSStoryboard`/`UIStoryboard`, with one `case` per storyboard scene.
+This will generate an `enum` for each of your `NSStoryboard`/`UIStoryboard`, with respectively one `case` per storyboard scene or segue.
 
 <details>
 <summary>Example of code generated by the bundled template</summary>
@@ -388,6 +395,8 @@ This will generate an `enum` for each of your `NSStoryboard`/`UIStoryboard`, wit
 The generated code will look like this:
 
 ```swift
+// output from the scenes template
+
 enum StoryboardScene {
   enum Dependency: StoryboardType {
     static let storyboardName = "Dependency"
@@ -401,10 +410,14 @@ enum StoryboardScene {
   }
 }
 
+// output from the segues template
+
 enum StoryboardSegue {
   enum Message: String, SegueType {
-    case embed
-    case nonCustom
+    case customBack = "CustomBack"
+    case embed = "Embed"
+    case nonCustom = "NonCustom"
+    case showNavCtrl = "Show-NavCtrl"
   }
 }
 ```
@@ -421,19 +434,98 @@ vc.perform(segue: StoryboardSegue.Message.embed)
 
 // or match them (in prepareForSegue):
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-  switch StoryboardSegue.Message(rawValue: segue.identifier!)! {
-  case .embed:
-    // Prepare for your custom segue transition
-  case .nonCustom:
-    // Pass in information to the destination View Controller
+  switch StoryboardSegue.Message(segue) {
+  case .embed?:
+    // Prepare for your custom segue transition, passing information to the destionation VC
+  case .customBack?:
+    // Prepare for your custom segue transition, passing information to the destionation VC
+  default:
+    // Other segues from other scenes, not handled by this VC
+    break
   }
 }
+```
+
+## JSON and YAML
+
+```sh
+swiftgen json -t runtime-swift4 /path/to/json/dir-or-file
+swiftgen yaml -t inline-swift4 /path/to/yaml/dir-or-file
+```
+
+This will parse the given file, or when given a directory, recursively search for JSON and YAML files. It will define an `enum` for each file (and documents in a file where needed), and type-safe constants for the content of the file.
+
+Unlike other subcommands, this parser is intended to allow you to use more custom inputs (as the formats are quite open to your needs) to generate your code. This means that for these subcommands (and the `plist` one), you'll probably be more likely to use custom templates to generate code properly adapted/tuned to your inputs, rather than using the bundled templates. To read more about writing your own custom templates, see [see the dedicated documentation](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/Creating-your-templates.md).
+
+<details>
+<summary>Example of code generated by the bundled template</summary>
+
+```swift
+internal enum JSONFiles {
+  internal enum Info {
+    private static let _document = JSONDocument(path: "info.json")
+    internal static let key1: String = _document["key1"]
+    internal static let key2: String = _document["key2"]
+    internal static let key3: [String: Any] = _document["key3"]
+  }
+  internal enum Sequence {
+    internal static let items: [Int] = objectFromJSON(at: "sequence.json")
+  }
+}
+```
+</details>
+
+### Usage Example
+
+```swift
+// This will be an dictionary
+let foo = JSONFiles.Info.key3
+
+// This will be an [Int]
+let bar = JSONFiles.Sequence.items
+```
+
+## Plists
+
+```sh
+swiftgen plist -t runtime-swift4 /path/to/plist/dir-or-file
+```
+
+This will parse the given file, or when given a directory, recursively search for Plist files. It will define an `enum` for each file (and documents in a file where needed), and type-safe constants for the content of the file.
+
+Unlike other subcommands, this parser is intended to allow you to use more custom inputs (as the format is quite open to your needs) to generate your code. This means that for this subcommand (and the `json` and `yaml` ones), you'll probably be more likely to use custom templates to generate code properly adapted/tuned to your inputs, rather than using the bundled templates. To read more about writing your own custom templates, see [see the dedicated documentation](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/Creating-your-templates.md).
+
+<details>
+<summary>Example of code generated by the bundled template</summary>
+
+```swift
+internal enum PlistFiles {
+  internal enum Test {
+    internal static let items: [String] = arrayFromPlist(at: "array.plist")
+  }
+  internal enum Stuff {
+    private static let _document = PlistDocument(path: "dictionary.plist")
+    internal static let key1: Int = _document["key1"]
+    internal static let key2: [String: Any] = _document["key2"]
+  }
+}
+```
+</details>
+
+### Usage Example
+
+```swift
+// This will be an array
+let foo = PlistFiles.Test.items
+
+// This will be an Int
+let bar = PlistFiles.Stuff.key1
 ```
 
 ## Strings
 
 ```sh
-swiftgen strings -t structured-swift3 /path/to/Localizable.strings
+swiftgen strings -t structured-swift4 /path/to/Localizable.strings
 ```
 
 This will generate a Swift `enum L10n` that will map all your `Localizable.strings` (or other tables) keys to an `enum case`. Additionaly, if it detects placeholders like `%@`,`%d`,`%f`, it will add associated values to that `case`. Note that all dots within the key are converted to dots in code.

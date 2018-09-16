@@ -15,7 +15,7 @@ open class Extension {
   /// Registers a simple template tag with a name and a handler
   public func registerSimpleTag(_ name: String, handler: @escaping (Context) throws -> String) {
     registerTag(name, parser: { parser, token in
-      return SimpleNode(handler: handler)
+      return SimpleNode(token: token, handler: handler)
     })
   }
 
@@ -42,9 +42,9 @@ class DefaultExtension: Extension {
     registerTag("for", parser: ForNode.parse)
     registerTag("if", parser: IfNode.parse)
     registerTag("ifnot", parser: IfNode.parse_ifnot)
-#if !os(Linux)
-    registerTag("now", parser: NowNode.parse)
-#endif
+    #if !os(Linux)
+      registerTag("now", parser: NowNode.parse)
+    #endif
     registerTag("include", parser: IncludeNode.parse)
     registerTag("extends", parser: ExtendsNode.parse)
     registerTag("block", parser: BlockNode.parse)
@@ -57,6 +57,8 @@ class DefaultExtension: Extension {
     registerFilter("uppercase", filter: uppercase)
     registerFilter("lowercase", filter: lowercase)
     registerFilter("join", filter: joinFilter)
+    registerFilter("split", filter: splitFilter)
+    registerFilter("indent", filter: indentFilter)
   }
 }
 

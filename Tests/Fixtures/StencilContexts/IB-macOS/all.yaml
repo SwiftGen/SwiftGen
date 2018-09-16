@@ -1,0 +1,159 @@
+modules:
+- "AppKit"
+- "ExtraModule"
+- "PrefsWindowController"
+- "SwiftGen"
+platform: "macOS"
+storyboards:
+- name: "AdditionalImport"
+  platform: "macOS"
+  scenes:
+  - customClass: "DBPrefsWindowController"
+    customModule: "PrefsWindowController"
+    identifier: "private"
+    module: "PrefsWindowController"
+    moduleIsPlaceholder: false
+    type: "DBPrefsWindowController"
+  segues: []
+- name: "Anonymous"
+  platform: "macOS"
+  scenes: []
+  segues: []
+- name: "Dependency"
+  platform: "macOS"
+  scenes:
+  - customClass: "LoginViewController"
+    customModule: "ExtraModule"
+    identifier: "Dependent"
+    module: "ExtraModule"
+    moduleIsPlaceholder: false
+    type: "LoginViewController"
+  segues: []
+- name: "Known Types"
+  platform: "macOS"
+  scenes:
+  - baseType: "WindowController"
+    identifier: "item 1"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSWindowController"
+  - baseType: "SplitViewController"
+    identifier: "item 2"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSSplitViewController"
+  - baseType: "ViewController"
+    identifier: "item 3"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSViewController"
+  - baseType: "Pagecontroller"
+    identifier: "item 4"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSPageController"
+  - baseType: "TabViewController"
+    identifier: "item 5"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSTabViewController"
+  segues: []
+- name: "Message"
+  platform: "macOS"
+  scenes:
+  - customClass: "DetailsViewController"
+    customModule: "NotCurrentModule"
+    identifier: "MessageDetails"
+    module: "NotCurrentModule"
+    moduleIsPlaceholder: true
+    type: "DetailsViewController"
+  - baseType: "ViewController"
+    identifier: "MessageList"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSViewController"
+  - baseType: "ViewController"
+    identifier: "MessageListFooter"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSViewController"
+  - customClass: "CustomTabViewController"
+    customModule: "SwiftGen"
+    identifier: "MessagesTab"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "CustomTabViewController"
+  - baseType: "SplitViewController"
+    identifier: "SplitMessages"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSSplitViewController"
+  - baseType: "WindowController"
+    identifier: "WindowCtrl"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSWindowController"
+  segues:
+  - customClass: ""
+    customModule: ""
+    identifier: "Embed"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: "SlowFadeSegue"
+    customModule: "PrefsWindowController"
+    identifier: "Fade"
+    module: "PrefsWindowController"
+    moduleIsPlaceholder: false
+    type: "SlowFadeSegue"
+  - customClass: "LoginSegue"
+    customModule: "ExtraModule"
+    identifier: "Login"
+    module: "ExtraModule"
+    moduleIsPlaceholder: false
+    type: "LoginSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Modal"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Popover"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Sheet"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Show"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: "RotateSegue"
+    customModule: "NotCurrentModule"
+    identifier: "private"
+    module: "NotCurrentModule"
+    moduleIsPlaceholder: true
+    type: "RotateSegue"
+  - customClass: "ZoomSegue"
+    customModule: "SwiftGen"
+    identifier: "public"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "ZoomSegue"
+- name: "Placeholder"
+  platform: "macOS"
+  scenes:
+  - baseType: "WindowController"
+    identifier: "Window"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSWindowController"
+  segues: []

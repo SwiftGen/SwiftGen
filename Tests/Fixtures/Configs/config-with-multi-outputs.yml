@@ -1,0 +1,11 @@
+input_dir: Fixtures/
+output_dir: Generated/
+ib:
+  inputs: IB-iOS
+  outputs:
+    - templateName: scenes-swift4
+      output: ib-scenes.swift
+      params:
+        enumName: "Scenes"
+    - templateName: segues-swift4
+      output: ib-segues.swift

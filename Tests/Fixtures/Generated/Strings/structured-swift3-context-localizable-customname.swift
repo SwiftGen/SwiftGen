@@ -1,3 +1,4 @@
+// swiftlint:disable all
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
 import Foundation
@@ -5,7 +6,10 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-// swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// MARK: - Strings
+
+// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable nesting type_body_length type_name
 internal enum XCTLoc {
   /// Some alert body there
   internal static let alertMessage = XCTLoc.tr("Localizable", "alert_message")
@@ -35,29 +39,18 @@ internal enum XCTLoc {
   }
 
   internal enum Settings {
-
     internal enum NavigationBar {
       /// Some Reserved Keyword there
       internal static let `self` = XCTLoc.tr("Localizable", "settings.navigation-bar.self")
-
       internal enum Title {
-
         internal enum Deeper {
-
           internal enum Than {
-
             internal enum We {
-
               internal enum Can {
-
                 internal enum Handle {
-
                   internal enum No {
-
                     internal enum Really {
-
                       internal enum This {
-
                         internal enum Is {
                           /// DeepSettings
                           internal static let deep = XCTLoc.tr("Localizable", "settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep")
@@ -70,23 +63,24 @@ internal enum XCTLoc {
             }
           }
         }
-
         internal enum Even {
           /// Settings
           internal static let deeper = XCTLoc.tr("Localizable", "settings.navigation-bar.title.even.deeper")
         }
       }
     }
-
     internal enum UserProfileSection {
       /// Here you can change some user profile settings.
-      internal static let footerText = XCTLoc.tr("Localizable", "seTTings.uSer-proFile-sectioN.footer_text")
+      internal static let footerText = XCTLoc.tr("Localizable", "settings.user_profile_section.footer_text")
       /// User Profile Settings
-      internal static let headerTitle = XCTLoc.tr("Localizable", "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
+      internal static let headerTitle = XCTLoc.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
     }
   }
 }
-// swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable nesting type_body_length type_name
+
+// MARK: - Implementation Details
 
 extension XCTLoc {
   fileprivate static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {

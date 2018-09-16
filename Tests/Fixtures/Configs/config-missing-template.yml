@@ -1,4 +1,5 @@
 strings:
-  paths: input.strings
-  template: wrongKey
-  output: out.swift
+  inputs: input.strings
+  outputs:
+    template: wrongKey
+    output: out.swift

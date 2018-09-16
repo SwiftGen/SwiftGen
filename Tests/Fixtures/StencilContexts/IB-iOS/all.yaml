@@ -1,0 +1,223 @@
+modules:
+- "AVKit"
+- "ExtraModule"
+- "GLKit"
+- "LocationPicker"
+- "SlackTextViewController"
+- "SwiftGen"
+- "UIKit"
+platform: "iOS"
+storyboards:
+- initialScene:
+    customClass: "LocationPickerViewController"
+    customModule: "LocationPicker"
+    identifier: ""
+    module: "LocationPicker"
+    moduleIsPlaceholder: false
+    type: "LocationPickerViewController"
+  name: "AdditionalImport"
+  platform: "iOS"
+  scenes:
+  - customClass: "SLKTextViewController"
+    customModule: "SlackTextViewController"
+    identifier: "public"
+    module: "SlackTextViewController"
+    moduleIsPlaceholder: false
+    type: "SLKTextViewController"
+  segues:
+  - customClass: "SlideLeftSegue"
+    customModule: "SwiftGen"
+    identifier: "After Delay"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "SlideLeftSegue"
+  - customClass: "SLKCrossoverSegue"
+    customModule: "SlackTextViewController"
+    identifier: "open"
+    module: "SlackTextViewController"
+    moduleIsPlaceholder: false
+    type: "SLKCrossoverSegue"
+  - customClass: "SlideDownSegue"
+    customModule: "ExtraModule"
+    identifier: "private"
+    module: "ExtraModule"
+    moduleIsPlaceholder: false
+    type: "SlideDownSegue"
+  - customClass: "SlideUpSegue"
+    customModule: "NotCurrentModule"
+    identifier: "public"
+    module: "NotCurrentModule"
+    moduleIsPlaceholder: true
+    type: "SlideUpSegue"
+- initialScene:
+    baseType: "NavigationController"
+    identifier: ""
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UINavigationController"
+  name: "Anonymous"
+  platform: "iOS"
+  scenes: []
+  segues: []
+- name: "Dependency"
+  platform: "iOS"
+  scenes:
+  - customClass: "ValidatePasswordViewController"
+    customModule: "ExtraModule"
+    identifier: "Dependent"
+    module: "ExtraModule"
+    moduleIsPlaceholder: false
+    type: "ValidatePasswordViewController"
+  segues: []
+- name: "Known Types"
+  platform: "iOS"
+  scenes:
+  - baseType: "GlkViewController"
+    identifier: "item 1"
+    module: "GLKit"
+    moduleIsPlaceholder: false
+    type: "GLKViewController"
+  - baseType: "AvPlayerViewController"
+    identifier: "item 2"
+    module: "AVKit"
+    moduleIsPlaceholder: false
+    type: "AVPlayerViewController"
+  - baseType: "TabBarController"
+    identifier: "item 3"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UITabBarController"
+  - baseType: "NavigationController"
+    identifier: "item 4"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UINavigationController"
+  - baseType: "SplitViewController"
+    identifier: "item 5"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UISplitViewController"
+  - baseType: "PageViewController"
+    identifier: "item 6"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIPageViewController"
+  - baseType: "TableViewController"
+    identifier: "item 7"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UITableViewController"
+  - baseType: "CollectionViewController"
+    identifier: "item 8"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UICollectionViewController"
+  - baseType: "ViewController"
+    identifier: "item 9"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIViewController"
+  segues: []
+- initialScene:
+    baseType: "ViewController"
+    identifier: ""
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIViewController"
+  name: "Message"
+  platform: "iOS"
+  scenes:
+  - baseType: "ViewController"
+    identifier: "Composer"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIViewController"
+  - baseType: "TableViewController"
+    identifier: "MessagesList"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UITableViewController"
+  - baseType: "NavigationController"
+    identifier: "NavCtrl"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UINavigationController"
+  - customClass: "PickerViewController"
+    customModule: "NotCurrentModule"
+    identifier: "URLChooser"
+    module: "NotCurrentModule"
+    moduleIsPlaceholder: true
+    type: "PickerViewController"
+  segues:
+  - customClass: "SlideLeftSegue"
+    customModule: "SwiftGen"
+    identifier: "CustomBack"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "SlideLeftSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Embed"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "NonCustom"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  - customClass: "CustomSegueClass"
+    customModule: "NotCurrentModule"
+    identifier: "Show-NavCtrl"
+    module: "NotCurrentModule"
+    moduleIsPlaceholder: true
+    type: "CustomSegueClass"
+- name: "Placeholder"
+  platform: "iOS"
+  scenes:
+  - baseType: "NavigationController"
+    identifier: "Navigation"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UINavigationController"
+  segues: []
+- initialScene:
+    customClass: "CreateAccViewController"
+    customModule: "SwiftGen"
+    identifier: "CreateAccount"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "CreateAccViewController"
+  name: "Wizard"
+  platform: "iOS"
+  scenes:
+  - baseType: "ViewController"
+    identifier: "Accept-ToS"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIViewController"
+  - customClass: "CreateAccViewController"
+    customModule: "SwiftGen"
+    identifier: "CreateAccount"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "CreateAccViewController"
+  - baseType: "TableViewController"
+    identifier: "Preferences"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UITableViewController"
+  - customClass: "ValidatePasswordViewController"
+    customModule: "ExtraModule"
+    identifier: "Validate_Password"
+    module: "ExtraModule"
+    moduleIsPlaceholder: false
+    type: "ValidatePasswordViewController"
+  segues:
+  - customClass: ""
+    customModule: ""
+    identifier: "ShowPassword"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"

@@ -10,7 +10,7 @@ SCHEME_NAME = 'swiftgen'.freeze
 CONFIGURATION = 'Debug'.freeze
 RELEASE_CONFIGURATION = 'Release'.freeze
 POD_NAME = 'SwiftGen'.freeze
-MIN_XCODE_VERSION = 9.0
+MIN_XCODE_VERSION = 9.2
 
 BUILD_DIR = File.absolute_path('./build')
 BIN_NAME = 'swiftgen'.freeze
@@ -85,21 +85,21 @@ namespace :output do
     Utils.print_header 'Compile output modules'
 
     # macOS
-    modules = %w[FadeSegue PrefsWindowController]
+    modules = %w[ExtraModule PrefsWindowController]
     modules.each do |m|
       Utils.print_info "Compiling module #{m}… (macos)"
       compile_module(m, :macosx, task)
     end
 
     # iOS
-    modules = %w[CustomSegue LocationPicker SlackTextViewController]
+    modules = %w[ExtraModule LocationPicker SlackTextViewController]
     modules.each do |m|
       Utils.print_info "Compiling module #{m}… (ios)"
       compile_module(m, :iphoneos, task)
     end
 
     # delete swiftdoc
-    Dir.glob("#{MODULE_OUTPUT_PATH}/*.swiftdoc").each do |f|
+    Dir.glob("#{MODULE_OUTPUT_PATH}/*/*.swiftdoc").each do |f|
       FileUtils.rm_rf(f)
     end
   end
@@ -130,7 +130,7 @@ namespace :output do
     commands = TOOLCHAINS.map do |_key, toolchain|
       %(--toolchain #{toolchain[:toolchain]} -sdk #{sdk} swiftc -swift-version #{toolchain[:version]} ) +
         %(-emit-module "#{MODULE_INPUT_PATH}/#{m}.swift" -module-name "#{m}" ) +
-        %(-emit-module-path "#{toolchain[:module_path]}" -target "#{target}")
+        %(-emit-module-path "#{toolchain[:module_path]}/#{sdk}" -target "#{target}")
     end
 
     Utils.run(commands, task, subtask, xcrun: true)
@@ -154,24 +154,40 @@ namespace :output do
     end
   end
 
+  def files(f)
+    if !(f.include?('iOS') || f.include?('macOS'))
+      [f]
+    elsif f.include?('public-access')
+      ["#{MODULE_OUTPUT_PATH}/PublicDefinitions.swift", f]
+    else
+      ["#{MODULE_OUTPUT_PATH}/Definitions.swift", f]
+    end
+  end
+
+  def flags(f)
+    if f.include?('ignore-target-module-with-extra-module')
+      ['-D', 'DEFINE_EXTRA_MODULE_TYPES']
+    elsif f.include?('with-extra-module') || f.include?('no-defined-module')
+      ['-D', 'DEFINE_NAMESPACED_EXTRA_MODULE_TYPES']
+    else
+      []
+    end
+  end
+
   def compile_file(f, task)
     toolchain = toolchain(f)
     if toolchain.nil?
-      puts "Unable to typecheck Swift 2 file #{f}"
+      puts "Unknown Swift toolchain for file #{f}"
       return true
     end
     sdks = sdks(f)
-
-    defs = if f.include?('publicAccess')
-             ["#{MODULE_OUTPUT_PATH}/PublicDefinitions.swift"]
-           else
-             defs = ["#{MODULE_OUTPUT_PATH}/Definitions.swift"]
-           end
-    defs << "#{MODULE_OUTPUT_PATH}/ExtraDefinitions.swift" if f.include?('extra-definitions')
+    files = files(f)
+    flags = flags(f)
 
     commands = sdks.map do |sdk|
       %(--toolchain #{toolchain[:toolchain]} -sdk #{sdk} swiftc -swift-version #{toolchain[:version]} ) +
-        %(-typecheck -target #{SDKS[sdk]} -I #{toolchain[:module_path]} #{defs.join(' ')} #{f})
+        %(-typecheck -target #{SDKS[sdk]} -I "#{toolchain[:module_path]}/#{sdk}" #{flags.join(' ')} ) +
+        %(-module-name SwiftGen #{files.join(' ')})
     end
     subtask = File.basename(f, '.*')
 
@@ -283,19 +299,31 @@ namespace :playground do
   end
   task :xcassets do
     Utils.run(
-      %(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 7.0 ) +
-        %(--output-format=human-readable-text Tests/Fixtures/Resources/XCAssets/Images.xcassets),
+      %(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 11.0 ) +
+        %(--output-format=human-readable-text Tests/Fixtures/Resources/XCAssets/*.xcassets),
       task,
       xcrun: true
     )
   end
-  task :storyboard do
+  task :fonts do
+    sh %(cp Tests/Fixtures/Resources/Fonts/Avenir.ttc SwiftGen.playground/Resources/)
+    sh %(cp Tests/Fixtures/Resources/Fonts/ZapfDingbats.ttf SwiftGen.playground/Resources/)
+  end
+  task :ib do
     Utils.run(
       %(ibtool --compile SwiftGen.playground/Resources/Wizard.storyboardc --flatten=NO ) +
-        %(Tests/Fixtures/Resources/Storyboards-iOS/Wizard.storyboard),
+        %(Tests/Fixtures/Resources/IB-iOS/Wizard.storyboard),
       task,
       xcrun: true
     )
+  end
+  task :json do
+    sh %(cp Tests/Fixtures/Resources/YAML/good/json.json SwiftGen.playground/Resources/)
+  end
+  task :plist do
+    sh %(cp Tests/Fixtures/Resources/Plist/good/Info.plist SwiftGen.playground/Resources/TestInfo.plist)
+    sh %(cp Tests/Fixtures/Resources/Plist/good/array.plist SwiftGen.playground/Resources/)
+    sh %(cp Tests/Fixtures/Resources/Plist/good/dictionary.plist SwiftGen.playground/Resources/)
   end
   task :strings do
     Utils.run(
@@ -308,5 +336,5 @@ namespace :playground do
 
   desc "Regenerate all the Playground resources based on the test fixtures.\n" \
     'This compiles the needed fixtures and place them in SwiftGen.playground/Resources'
-  task :resources => %w[clean xcassets storyboard strings]
+  task :resources => %w[clean xcassets fonts ib json plist strings]
 end

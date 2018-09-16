@@ -1,0 +1,7 @@
+modules: []
+platform: "macOS"
+storyboards:
+- name: "Anonymous"
+  platform: "macOS"
+  scenes: []
+  segues: []

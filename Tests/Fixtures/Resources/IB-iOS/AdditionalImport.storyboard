@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sCq-1b-U1T">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Location Picker View Controller-->
+        <scene sceneID="1iN-a4-Pl6">
+            <objects>
+                <viewController id="sCq-1b-U1T" customClass="LocationPickerViewController" customModule="LocationPicker" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AF1-Pm-1gV"/>
+                        <viewControllerLayoutGuide type="bottom" id="E3P-fP-oWf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VyF-8E-nrt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KZX-mS-tuT"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <segue destination="TuC-8Y-xZ9" kind="custom" identifier="private" customClass="SlideDownSegue" customModule="ExtraModule" id="Ac7-Re-xKv"/>
+                        <segue destination="se3-pM-ewQ" kind="custom" identifier="public" customClass="SlideUpSegue" customModule="NotCurrentModule" customModuleProvider="target" id="AZ7-JU-8Fy"/>
+                        <segue destination="t0K-MT-iCN" kind="custom" identifier="open" customClass="SLKCrossoverSegue" customModule="SlackTextViewController" id="Q0c-hY-pwl"/>
+                        <segue destination="se3-pM-ewQ" kind="custom" identifier="After Delay" customClass="SlideLeftSegue" customModule="SwiftGen" id="Mpg-uL-jzt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v2R-VI-fT0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1305" y="433"/>
+        </scene>
+        <!--Text View Controller-->
+        <scene sceneID="yg3-tg-GNr">
+            <objects>
+                <viewController storyboardIdentifier="public" id="TuC-8Y-xZ9" customClass="SLKTextViewController" customModule="SlackTextViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="M6w-YY-zkB"/>
+                        <viewControllerLayoutGuide type="bottom" id="DvD-4b-cvd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Gc-7S-lDu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="heH-CC-QsF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2236" y="432"/>
+        </scene>
+        <!--Text View Controller-->
+        <scene sceneID="7Iv-Wo-KlP">
+            <objects>
+                <viewController storyboardIdentifier="public" id="se3-pM-ewQ" customClass="SLKTextViewController" customModule="SlackTextViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bZe-rr-B5m"/>
+                        <viewControllerLayoutGuide type="bottom" id="xUW-hc-u7u"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Jjn-hn-Qhc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XPD-YV-A87" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2236" y="1110"/>
+        </scene>
+        <!--Text View Controller-->
+        <scene sceneID="zL2-OT-vrF">
+            <objects>
+                <viewController storyboardIdentifier="public" id="t0K-MT-iCN" customClass="SLKTextViewController" customModule="SlackTextViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tQi-3j-stJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="sxz-Gx-cZD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4WR-UI-YpE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PhP-lm-Pfw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2236" y="-263"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Mpg-uL-jzt"/>
+    </inferredMetricsTieBreakers>
+</document>

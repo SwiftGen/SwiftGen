@@ -5,9 +5,10 @@
 //
 
 import Foundation
-import XCTest
 import PathKit
 import StencilSwiftKit
+import SwiftGenKit
+import XCTest
 
 private let colorCode: (String) -> String =
   ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
@@ -19,10 +20,10 @@ private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
 
 private func diff(_ result: String, _ expected: String) -> String? {
   guard result != expected else { return nil }
-  var firstDiff: Int? = nil
-  let nl = CharacterSet.newlines
-  let lhsLines = result.components(separatedBy: nl)
-  let rhsLines = expected.components(separatedBy: nl)
+  var firstDiff: Int?
+  let newLines = CharacterSet.newlines
+  let lhsLines = result.components(separatedBy: newLines)
+  let rhsLines = expected.components(separatedBy: newLines)
 
   for (idx, pair) in zip(lhsLines, rhsLines).enumerated() where pair.0 != pair.1 {
     firstDiff = idx
@@ -33,14 +34,14 @@ private func diff(_ result: String, _ expected: String) -> String? {
   }
   if let badLineIdx = firstDiff {
     let slice = { (lines: [String], context: Int) -> ArraySlice<String> in
-      let start = max(0, badLineIdx-context)
-      let end = min(badLineIdx+context, lines.count-1)
+      let start = max(0, badLineIdx - context)
+      let end = min(badLineIdx + context, lines.count - 1)
       return lines[start...end]
     }
     let addLineNumbers = { (slice: ArraySlice) -> [String] in
       slice.enumerated().map { (idx: Int, line: String) in
         let num = idx + slice.startIndex
-        let lineNum = "\(num+1)".padding(toLength: 3, withPad: " ", startingAt: 0) + "|"
+        let lineNum = "\(num + 1)".padding(toLength: 3, withPad: " ", startingAt: 0) + "|"
         let clr = num == badLineIdx ? koCode : okCode
         return "\(clr.num)\(lineNum)\(reset)\(clr.code)\(line)\(reset)"
       }
@@ -68,11 +69,14 @@ class Fixtures {
   enum Directory: String {
     case colors = "Colors"
     case fonts = "Fonts"
-    case storyboards = "Storyboards"
-    case storyboardsiOS = "Storyboards-iOS"
-    case storyboardsMacOS = "Storyboards-macOS"
+    case interfaceBuilder = "IB"
+    case interfaceBuilderiOS = "IB-iOS"
+    case interfaceBuilderMacOS = "IB-macOS"
+    case json = "JSON"
+    case plist = "Plist"
     case strings = "Strings"
     case xcassets = "XCAssets"
+    case yaml = "YAML"
   }
 
   private static let testBundle = Bundle(for: Fixtures.self)
@@ -102,11 +106,12 @@ class Fixtures {
   static func context(for name: String, sub: Directory) -> [String: Any] {
     let path = self.path(for: name, subDirectory: "StencilContexts/\(sub.rawValue)")
 
-    guard let data = NSDictionary(contentsOf: path.url) as? [String: Any] else {
-      fatalError("Unable to load fixture content")
+    guard let yaml = try? YAML.read(path: path),
+      let result = yaml as? [String: Any] else {
+        fatalError("Unable to load fixture content")
     }
 
-    return data
+    return result
   }
 
   static func template(for name: String, sub: Directory) -> String {
@@ -120,8 +125,8 @@ class Fixtures {
   private static func string(for name: String, subDirectory: String) -> String {
     do {
       return try path(for: name, subDirectory: subDirectory).read()
-    } catch let e {
-      fatalError("Unable to load fixture content: \(e)")
+    } catch let error {
+      fatalError("Unable to load fixture content: \(error)")
     }
   }
 }
@@ -149,6 +154,7 @@ extension XCTestCase {
             contextNames: [String],
             directory: Fixtures.Directory,
             resourceDirectory: Fixtures.Directory? = nil,
+            outputDirectory: Fixtures.Directory? = nil,
             file: StaticString = #file,
             line: UInt = #line,
             contextVariations: VariationGenerator? = nil) {
@@ -159,10 +165,11 @@ extension XCTestCase {
     // default values
     let contextVariations = contextVariations ?? { [(context: $1, suffix: "")] }
     let resourceDir = resourceDirectory ?? directory
+    let outputDir = outputDirectory ?? resourceDir
 
     for contextName in contextNames {
       print("Testing context '\(contextName)'...")
-      let context = Fixtures.context(for: "\(contextName).plist", sub: resourceDir)
+      let context = Fixtures.context(for: "\(contextName).yaml", sub: resourceDir)
 
       // generate context variations
       guard let variations = try? contextVariations(contextName, context) else {
@@ -182,14 +189,14 @@ extension XCTestCase {
 
         // check if we should generate or not
         if ProcessInfo().environment["GENERATE_OUTPUT"] == "YES" {
-          let target = Path(#file).parent().parent() + "Fixtures/Generated" + resourceDir.rawValue + outputFile
+          let target = Path(#file).parent().parent() + "Fixtures/Generated" + outputDir.rawValue + outputFile
           do {
             try target.write(result)
           } catch {
             fatalError("Unable to write output file \(target)")
           }
         } else {
-          let expected = Fixtures.output(for: outputFile, sub: resourceDir)
+          let expected = Fixtures.output(for: outputFile, sub: outputDir)
           XCTDiffStrings(result, expected, file: file, line: line)
         }
       }

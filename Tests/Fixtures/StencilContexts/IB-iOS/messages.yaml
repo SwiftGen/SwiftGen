@@ -1,0 +1,60 @@
+modules:
+- "SwiftGen"
+- "UIKit"
+platform: "iOS"
+storyboards:
+- initialScene:
+    baseType: "ViewController"
+    identifier: ""
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIViewController"
+  name: "Message"
+  platform: "iOS"
+  scenes:
+  - baseType: "ViewController"
+    identifier: "Composer"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIViewController"
+  - baseType: "TableViewController"
+    identifier: "MessagesList"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UITableViewController"
+  - baseType: "NavigationController"
+    identifier: "NavCtrl"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UINavigationController"
+  - customClass: "PickerViewController"
+    customModule: "NotCurrentModule"
+    identifier: "URLChooser"
+    module: "NotCurrentModule"
+    moduleIsPlaceholder: true
+    type: "PickerViewController"
+  segues:
+  - customClass: "SlideLeftSegue"
+    customModule: "SwiftGen"
+    identifier: "CustomBack"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "SlideLeftSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Embed"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "NonCustom"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  - customClass: "CustomSegueClass"
+    customModule: "NotCurrentModule"
+    identifier: "Show-NavCtrl"
+    module: "NotCurrentModule"
+    moduleIsPlaceholder: true
+    type: "CustomSegueClass"

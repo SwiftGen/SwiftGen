@@ -1,6 +1,7 @@
 strings:
-  paths: input.strings
-  templateName: template
-  output:
-    - bad
-    - entry
+  inputs: input.strings
+  outputs:
+    templateName: template
+    output:
+      - bad
+      - entry

@@ -12,7 +12,7 @@ If you use the `--templatePath` (or `-p`) option, you'll need to specify the **f
 
 ### Using a name
 
-When you use the `--template` (or `-t`) option, you only specify a **template name**. SwiftGen then searches a matching template using the following rules (where `<subcommand>` is one of `colors`, `xcassets`, `storyboards` or `strings` depending on the subcommand you invoke):
+When you use the `--template` (or `-t`) option, you only specify a **template name**. SwiftGen then searches a matching template using the following rules (where `<subcommand>` is one of `colors`, `xcassets`, `ib` or `strings` depending on the subcommand you invoke):
 
 * It searches for a file named `<name>.stencil` in `~/Library/Application Support/SwiftGen/templates/<subcommand>/`, which is supposed to contain your own custom templates for that particular subcommand.
 * If it does not find one, it searches for a file named `<name>.stencil` in `<installdir>/share/swiftgen/templates/<subcommand>` which contains the templates bundled with SwiftGen for that particular subcommand.
@@ -28,27 +28,46 @@ $ swiftgen templates list
 colors:
   custom:
   bundled:
-   - swift2
    - swift3
-storyboards:
+   - swift4
+ib:
   custom:
    - mytemplate
   bundled:
-   - swift2
    - swift3
+   - swift4
+json:
+  custom:
+  bundled:
+   - inline-swift3
+   - inline-swift4
+   - runtime-swift3
+   - runtime-swift4
+plist:
+  custom:
+  bundled:
+   - inline-swift3
+   - inline-swift4
+   - runtime-swift3
+   - runtime-swift4
 strings:
   custom:
    - mycustomtemplate
   bundled:
-   - flat-swift2
    - flat-swift3
-   - structured-swift2
+   - flat-swift4
    - structured-swift3
+   - structured-swift4
 xcassets:
   custom:
   bundled:
-   - swift2
    - swift3
+   - swift4
+yaml:
+  custom:
+   - inline-swift3
+   - inline-swift4
+  bundled:
 ```
 
 ## Printing a template, creating a new template
@@ -72,4 +91,4 @@ Additionally to the [tags and filters](https://stencil.fuller.li/en/latest/built
 
 When SwiftGen generates your code, it provides a context (a dictionary) with the variables containing what assets/colors/strings/… the subcommand did detect, to render your Stencil template using those variables.
 
-A full documentation of the produced context for each command can be found in the [SwiftGenKit documentation](https://github.com/SwiftGen/SwiftGenKit#documentation).
+A full documentation of the produced context for each command can be found in the [SwiftGenKit documentation](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/SwiftGenKit%20Contexts/).

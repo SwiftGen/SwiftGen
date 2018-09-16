@@ -7,7 +7,7 @@
 //
 
 import PathKit
-import Yams
+import SwiftGenKit
 
 // MARK: - Config
 
@@ -19,29 +19,32 @@ struct Config {
 
   let inputDir: Path?
   let outputDir: Path?
-  let commands: [String: [Config.Entry]]
+  let commands: [String: [ConfigEntry]]
 }
 
 extension Config {
-  init(file: Path) throws {
+  init(file: Path, logger: (LogLevel, String) -> Void = logMessage) throws {
     if !file.exists {
       throw Config.Error.pathNotFound(path: file)
     }
-    let content: String = try file.read()
-    let anyConfig = try Yams.load(yaml: content)
+    let anyConfig = try YAML.read(path: file)
     guard let config = anyConfig as? [String: Any] else {
       throw Config.Error.wrongType(key: nil, expected: "Dictionary", got: type(of: anyConfig))
     }
-    self.inputDir = (config[Keys.inputDir] as? String).map({ Path($0) })
-    self.outputDir = (config[Keys.outputDir] as? String).map({ Path($0) })
-    var cmds: [String: [Config.Entry]] = [:]
+    self.inputDir = (config[Keys.inputDir] as? String).map { Path($0) }
+    self.outputDir = (config[Keys.outputDir] as? String).map { Path($0) }
+    var cmds: [String: [ConfigEntry]] = [:]
     for parserCmd in allParserCommands {
       if let cmdEntry = config[parserCmd.name] {
         do {
-          cmds[parserCmd.name] = try Config.Entry.parseCommandEntry(yaml: cmdEntry)
-        } catch let e as Config.Error {
+          cmds[parserCmd.name] = try ConfigEntry.parseCommandEntry(
+            yaml: cmdEntry,
+            cmd: parserCmd.name,
+            logger: logger
+          )
+        } catch let error as Config.Error {
           // Prefix the name of the command for a better error message
-          throw e.withKeyPrefixed(by: parserCmd.name)
+          throw error.withKeyPrefixed(by: parserCmd.name)
         }
       }
     }
@@ -59,17 +62,21 @@ extension Config {
       let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
       logger(.info, "> \(entriesCount) for command \(cmd):")
       for var entry in entries {
-          entry.makeRelativeTo(inputDir: self.inputDir, outputDir: self.outputDir)
-          for inputPath in entry.paths where inputPath.isAbsolute {
-            logger(.warning, "\(cmd).paths: \(inputPath) is an absolute path.")
+        entry.makeRelativeTo(inputDir: self.inputDir, outputDir: self.outputDir)
+        for inputPath in entry.inputs where inputPath.isAbsolute {
+          logger(.warning, "\(cmd).paths: \(inputPath) is an absolute path.")
+        }
+        for entryOutput in entry.outputs {
+          if case TemplateRef.path(let templateRef) = entryOutput.template, templateRef.isAbsolute {
+            logger(.warning, "\(cmd).templatePath: \(templateRef) is an absolute path.")
           }
-          if case TemplateRef.path(let tp) = entry.template, tp.isAbsolute {
-            logger(.warning, "\(cmd).templatePath: \(tp) is an absolute path.")
+          if entryOutput.output.isAbsolute {
+            logger(.warning, "\(cmd).output: \(entryOutput.output) is an absolute path.")
           }
-          if entry.output.isAbsolute {
-            logger(.warning, "\(cmd).output: \(entry.output) is an absolute path.")
-          }
-          logger(.info, "  $ " + entry.commandLine(forCommand: cmd))
+        }
+        for item in entry.commandLine(forCommand: cmd) {
+          logMessage(.info, " $ \(item)")
+        }
       }
     }
   }
@@ -98,8 +105,8 @@ extension Config {
       switch self {
       case .missingEntry(let key):
         return Config.Error.missingEntry(key: "\(prefix).\(key)")
-      case .wrongType(key: let key, expected: let expected, got: let got):
-        let fullKey = [prefix, key].flatMap({$0}).joined(separator: ".")
+      case .wrongType(let key, let expected, let got):
+        let fullKey = [prefix, key].compactMap({ $0 }).joined(separator: ".")
         return Config.Error.wrongType(key: fullKey, expected: expected, got: got)
       default:
         return self

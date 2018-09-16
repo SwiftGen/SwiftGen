@@ -22,24 +22,22 @@ class XCAssetsTests: XCTestCase {
       (context: try StencilContext.enrich(context: context,
                                           parameters: ["enumName=XCTAssets",
                                                        "colorTypeName=XCTColorAsset",
+                                                       "dataTypeName=XCTDataAsset",
                                                        "imageTypeName=XCTImageAsset",
                                                        "colorAliasName=XCTColor",
+                                                       "dataAliasName=XCTData",
                                                        "imageAliasName=XCTImage"]),
        suffix: "-customname"),
       (context: try StencilContext.enrich(context: context,
-                                          parameters: ["noAllValues"]),
-       suffix: "-no-all-values"),
+                                          parameters: ["allValues"]),
+       suffix: "-allValues"),
       (context: try StencilContext.enrich(context: context,
                                           parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+       suffix: "-publicAccess"),
+      (context: try StencilContext.enrich(context: context,
+                                          parameters: ["forceProvidesNamespaces"]),
+       suffix: "-forceNamespaces")
     ]
-  }
-
-  func testSwift2() {
-    test(template: "swift2",
-         contextNames: Contexts.all,
-         directory: .xcassets,
-         contextVariations: variations)
   }
 
   func testSwift3() {

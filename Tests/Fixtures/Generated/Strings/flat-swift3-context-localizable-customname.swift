@@ -1,3 +1,4 @@
+// swiftlint:disable all
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
 import Foundation
@@ -5,7 +6,9 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-// swiftlint:disable identifier_name line_length type_body_length
+// MARK: - Strings
+
+// swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 internal enum XCTLoc {
   /// Some alert body there
   internal static let alertMessage = XCTLoc.tr("Localizable", "alert_message")
@@ -34,11 +37,13 @@ internal enum XCTLoc {
   /// Settings
   internal static let settingsNavigationBarTitleEvenDeeper = XCTLoc.tr("Localizable", "settings.navigation-bar.title.even.deeper")
   /// Here you can change some user profile settings.
-  internal static let seTTingsUSerProFileSectioNFooterText = XCTLoc.tr("Localizable", "seTTings.uSer-proFile-sectioN.footer_text")
+  internal static let settingsUserProfileSectionFooterText = XCTLoc.tr("Localizable", "settings.user_profile_section.footer_text")
   /// User Profile Settings
-  internal static let settingsUserProfileSectionHeaderTitle = XCTLoc.tr("Localizable", "SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE")
+  internal static let settingsUserProfileSectionHEADERTITLE = XCTLoc.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
 }
-// swiftlint:enable identifier_name line_length type_body_length
+// swiftlint:enable function_parameter_count identifier_name line_length type_body_length
+
+// MARK: - Implementation Details
 
 extension XCTLoc {
   fileprivate static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {

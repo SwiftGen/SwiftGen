@@ -1,26 +1,31 @@
 input_dir: /input
 output_dir: /output
 colors:
-  paths: colors/paths
-  templatePath: /templates/colors/templates.stencil
-  output: colors/out.swift
+  inputs: colors/paths
+  outputs:
+    templatePath: /templates/colors/templates.stencil
+    output: colors/out.swift
 
 fonts:
-  paths: fonts/paths
-  templatePath: /templates/fonts/templates.stencil
-  output: fonts/out.swift
+  inputs: fonts/paths
+  outputs:
+    templatePath: /templates/fonts/templates.stencil
+    output: fonts/out.swift
 
-storyboards:
-  paths: storyboards/paths
-  templatePath: /templates/storyboards/templates.stencil
-  output: storyboards/out.swift
+ib:
+  inputs: ib/paths
+  outputs:
+    templatePath: /templates/ib/templates.stencil
+    output: ib/out.swift
 
 strings:
-  paths: strings/paths
-  templatePath: /templates/strings/templates.stencil
-  output: strings/out.swift
+  inputs: strings/paths
+  outputs:
+    templatePath: /templates/strings/templates.stencil
+    output: strings/out.swift
 
 xcassets:
-  paths: xcassets/paths
-  templatePath: /templates/xcassets/templates.stencil
-  output: xcassets/out.swift
+  inputs: xcassets/paths
+  outputs:
+    templatePath: /templates/xcassets/templates.stencil
+    output: xcassets/out.swift

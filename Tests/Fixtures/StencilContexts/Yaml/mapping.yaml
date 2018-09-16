@@ -1,0 +1,27 @@
+files:
+- documents:
+  - data:
+      key1: "value1"
+      key2: 1e+0
+      key3:
+        nestedKey1: "nestedValue1"
+        nestedKey2: "nestedValue2"
+      key4: null
+    metadata:
+      properties:
+        key1:
+          type: "String"
+        key2:
+          type: "Double"
+        key3:
+          properties:
+            nestedKey1:
+              type: "String"
+            nestedKey2:
+              type: "String"
+          type: "Dictionary"
+        key4:
+          type: "Optional"
+      type: "Dictionary"
+  name: "mapping"
+  path: "mapping.yaml"

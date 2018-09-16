@@ -33,13 +33,6 @@ class FontsTests: XCTestCase {
     ]
   }
 
-  func testSwift2() {
-    test(template: "swift2",
-         contextNames: Contexts.all,
-         directory: .fonts,
-         contextVariations: variations)
-  }
-
   func testSwift3() {
     test(template: "swift3",
          contextNames: Contexts.all,

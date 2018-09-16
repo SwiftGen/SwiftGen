@@ -6,8 +6,8 @@
 //  Copyright © 2017 AliSoftware. All rights reserved.
 //
 
-import PathKit
 import Commander
+import PathKit
 
 enum OutputDestination: ArgumentConvertible {
   case console

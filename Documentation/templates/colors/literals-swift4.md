@@ -9,9 +9,9 @@
 
 ## When to use it
 
-- When you need to generate *Swift 4* code
-- Supports _multiple_ color names with the _same_ value
-- Uses `#colorLiteral`s for easy preview of the actual color
+- When you need to generate *Swift 4* code.
+- Supports _multiple_ color names with the _same_ value.
+- Uses `#colorLiteral`s for easy preview of the actual color.
 
 ## Customization
 
@@ -37,7 +37,7 @@ extension ColorName {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Colors/literals-swift4-context-defaults.swift)
+[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Generated/Colors/literals-swift4-context-defaults.swift)
 
 ## Usage example
 

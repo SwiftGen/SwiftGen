@@ -7,7 +7,8 @@ let NSFileNoSuchFileError = 4
 
 /// A class representing a template
 open class Template: ExpressibleByStringLiteral {
-  let environment: Environment
+  let templateString: String
+  internal(set) var environment: Environment
   let tokens: [Token]
 
   /// The name of the loaded Template if the Template was loaded from a Loader
@@ -17,8 +18,9 @@ open class Template: ExpressibleByStringLiteral {
   public required init(templateString: String, environment: Environment? = nil, name: String? = nil) {
     self.environment = environment ?? Environment()
     self.name = name
+    self.templateString = templateString
 
-    let lexer = Lexer(templateString: templateString)
+    let lexer = Lexer(templateName: name, templateString: templateString)
     tokens = lexer.tokenize()
   }
 

@@ -6,25 +6,25 @@
 //  Copyright © 2017 AliSoftware. All rights reserved.
 //
 
-import XCTest
-@testable import SwiftGenKit
-import PathKit
 import AppKit.NSFont
+import PathKit
+@testable import SwiftGenKit
+import XCTest
 
 class FontsTests: XCTestCase {
   func testEmpty() {
-    let parser = FontsParser()
+    let parser = Fonts.Parser()
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "empty.plist", sub: .fonts)
+    XCTDiffContexts(result, expected: "empty", sub: .fonts)
   }
 
   func testDefaults() {
-    let parser = FontsParser()
+    let parser = Fonts.Parser()
     parser.parse(path: Fixtures.directory(sub: .fonts))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "defaults.plist", sub: .fonts)
+    XCTDiffContexts(result, expected: "defaults", sub: .fonts)
   }
 
   // MARK: - Path relative(to:)

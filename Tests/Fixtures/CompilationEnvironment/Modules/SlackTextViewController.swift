@@ -1,4 +1,4 @@
 import UIKit
 
-public class SLKTextViewController: UIViewController {
-}
+public final class SLKCrossoverSegue: UIStoryboardSegue {}
+public final class SLKTextViewController: UIViewController {}

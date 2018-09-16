@@ -9,7 +9,7 @@
 
 ## When to use it
 
-- When you need to generate *Swift 4* code
+- When you need to generate *Swift 4* code.
 
 ## Customization
 
@@ -39,7 +39,7 @@ enum FontFamily {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Fonts/swift4-context-defaults.swift)
+[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Generated/Fonts/swift4-context-defaults.swift)
 
 ## Usage example
 

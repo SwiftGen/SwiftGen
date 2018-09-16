@@ -14,6 +14,7 @@ enum Operator {
 
 
 let operators: [Operator] = [
+  .infix("in", 5, InExpression.self),
   .infix("or", 6, OrExpression.self),
   .infix("and", 7, AndExpression.self),
   .prefix("not", 8, NotExpression.self),
@@ -52,7 +53,7 @@ enum IfToken {
     case .variable(_):
       return 0
     case .end:
-        return 0
+      return 0
     }
   }
 
@@ -99,7 +100,7 @@ final class IfExpressionParser {
   let tokens: [IfToken]
   var position: Int = 0
 
-  init(components: [String], tokenParser: TokenParser) throws {
+  init(components: [String], tokenParser: TokenParser, token: Token) throws {
     self.tokens = try components.map { component in
       if let op = findOperator(name: component) {
         switch op {
@@ -110,7 +111,7 @@ final class IfExpressionParser {
         }
       }
 
-      return .variable(try tokenParser.compileFilter(component))
+      return .variable(try tokenParser.compileResolvable(component, containedIn: token))
     }
   }
 
@@ -154,8 +155,8 @@ final class IfExpressionParser {
 }
 
 
-func parseExpression(components: [String], tokenParser: TokenParser) throws -> Expression {
-  let parser = try IfExpressionParser(components: components, tokenParser: tokenParser)
+func parseExpression(components: [String], tokenParser: TokenParser, token: Token) throws -> Expression {
+  let parser = try IfExpressionParser(components: components, tokenParser: tokenParser, token: token)
   return try parser.parse()
 }
 
@@ -181,49 +182,51 @@ final class IfCondition {
 
 class IfNode : NodeType {
   let conditions: [IfCondition]
+  let token: Token?
 
   class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     var components = token.components()
     components.removeFirst()
 
-    let expression = try parseExpression(components: components, tokenParser: parser)
+    let expression = try parseExpression(components: components, tokenParser: parser, token: token)
     let nodes = try parser.parse(until(["endif", "elif", "else"]))
     var conditions: [IfCondition] = [
       IfCondition(expression: expression, nodes: nodes)
     ]
 
-    var token = parser.nextToken()
-    while let current = token, current.contents.hasPrefix("elif") {
+    var nextToken = parser.nextToken()
+    while let current = nextToken, current.contents.hasPrefix("elif") {
       var components = current.components()
       components.removeFirst()
-      let expression = try parseExpression(components: components, tokenParser: parser)
+      let expression = try parseExpression(components: components, tokenParser: parser, token: current)
 
       let nodes = try parser.parse(until(["endif", "elif", "else"]))
-      token = parser.nextToken()
+      nextToken = parser.nextToken()
       conditions.append(IfCondition(expression: expression, nodes: nodes))
     }
 
-    if let current = token, current.contents == "else" {
+    if let current = nextToken, current.contents == "else" {
       conditions.append(IfCondition(expression: nil, nodes: try parser.parse(until(["endif"]))))
-      token = parser.nextToken()
+      nextToken = parser.nextToken()
     }
 
-    guard let current = token, current.contents == "endif" else {
+    guard let current = nextToken, current.contents == "endif" else {
       throw TemplateSyntaxError("`endif` was not found.")
     }
 
-    return IfNode(conditions: conditions)
+    return IfNode(conditions: conditions, token: token)
   }
 
   class func parse_ifnot(_ parser: TokenParser, token: Token) throws -> NodeType {
     var components = token.components()
     guard components.count == 2 else {
-      throw TemplateSyntaxError("'ifnot' statements should use the following 'ifnot condition' `\(token.contents)`.")
+      throw TemplateSyntaxError("'ifnot' statements should use the following syntax 'ifnot condition'.")
     }
     components.removeFirst()
     var trueNodes = [NodeType]()
     var falseNodes = [NodeType]()
 
+    let expression = try parseExpression(components: components, tokenParser: parser, token: token)
     falseNodes = try parser.parse(until(["endif", "else"]))
 
     guard let token = parser.nextToken() else {
@@ -235,15 +238,15 @@ class IfNode : NodeType {
       _ = parser.nextToken()
     }
 
-    let expression = try parseExpression(components: components, tokenParser: parser)
     return IfNode(conditions: [
       IfCondition(expression: expression, nodes: trueNodes),
       IfCondition(expression: nil, nodes: falseNodes),
-    ])
+      ], token: token)
   }
 
-  init(conditions: [IfCondition]) {
+  init(conditions: [IfCondition], token: Token? = nil) {
     self.conditions = conditions
+    self.token = token
   }
 
   func render(_ context: Context) throws -> String {

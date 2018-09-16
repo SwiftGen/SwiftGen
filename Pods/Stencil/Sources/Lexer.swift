@@ -1,26 +1,45 @@
+import Foundation
+
 struct Lexer {
+  let templateName: String?
   let templateString: String
 
-  init(templateString: String) {
+  init(templateName: String? = nil, templateString: String) {
+    self.templateName = templateName
     self.templateString = templateString
   }
 
-  func createToken(string:String) -> Token {
+  func createToken(string: String, at range: Range<String.Index>) -> Token {
     func strip() -> String {
+      guard string.characters.count > 4 else { return "" }
       let start = string.index(string.startIndex, offsetBy: 2)
       let end = string.index(string.endIndex, offsetBy: -2)
-      return string[start..<end].trim(character: " ")
+      let trimmed = String(string[start..<end])
+        .components(separatedBy: "\n")
+        .filter({ !$0.isEmpty })
+        .map({ $0.trim(character: " ") })
+        .joined(separator: " ")
+      return trimmed
     }
 
-    if string.hasPrefix("{{") {
-      return .variable(value: strip())
-    } else if string.hasPrefix("{%") {
-      return .block(value: strip())
-    } else if string.hasPrefix("{#") {
-      return .comment(value: strip())
+    if string.hasPrefix("{{") || string.hasPrefix("{%") || string.hasPrefix("{#") {
+      let value = strip()
+      let range = templateString.range(of: value, range: range) ?? range
+      let line = templateString.rangeLine(range)
+      let sourceMap = SourceMap(filename: templateName, line: line)
+
+      if string.hasPrefix("{{") {
+        return .variable(value: value, at: sourceMap)
+      } else if string.hasPrefix("{%") {
+        return .block(value: value, at: sourceMap)
+      } else if string.hasPrefix("{#") {
+        return .comment(value: value, at: sourceMap)
+      }
     }
 
-    return .text(value: string)
+    let line = templateString.rangeLine(range)
+    let sourceMap = SourceMap(filename: templateName, line: line)
+    return .text(value: string, at: sourceMap)
   }
 
   /// Returns an array of tokens from a given template string.
@@ -33,33 +52,37 @@ struct Lexer {
       "{{": "}}",
       "{%": "%}",
       "{#": "#}",
-    ]
+      ]
 
     while !scanner.isEmpty {
       if let text = scanner.scan(until: ["{{", "{%", "{#"]) {
         if !text.1.isEmpty {
-          tokens.append(createToken(string: text.1))
+          tokens.append(createToken(string: text.1, at: scanner.range))
         }
 
         let end = map[text.0]!
         let result = scanner.scan(until: end, returnUntil: true)
-        tokens.append(createToken(string: result))
+        tokens.append(createToken(string: result, at: scanner.range))
       } else {
-        tokens.append(createToken(string: scanner.content))
+        tokens.append(createToken(string: scanner.content, at: scanner.range))
         scanner.content = ""
       }
     }
 
     return tokens
   }
+
 }
 
-
 class Scanner {
+  let originalContent: String
   var content: String
+  var range: Range<String.Index>
 
   init(_ content: String) {
+    self.originalContent = content
     self.content = content
+    range = content.startIndex..<content.startIndex
   }
 
   var isEmpty: Bool {
@@ -67,29 +90,34 @@ class Scanner {
   }
 
   func scan(until: String, returnUntil: Bool = false) -> String {
+    var index = content.startIndex
+
     if until.isEmpty {
       return ""
     }
 
-    var index = content.startIndex
+    range = range.upperBound..<range.upperBound
     while index != content.endIndex {
       let substring = content.substring(from: index)
 
       if substring.hasPrefix(until) {
         let result = content.substring(to: index)
-        content = substring
 
         if returnUntil {
-          content = content.substring(from: until.endIndex)
+          range = range.lowerBound..<originalContent.index(range.upperBound, offsetBy: until.characters.count)
+          content = substring.substring(from: until.endIndex)
           return result + until
         }
 
+        content = substring
         return result
       }
 
       index = content.index(after: index)
+      range = range.lowerBound..<originalContent.index(after: range.upperBound)
     }
 
+    content = ""
     return ""
   }
 
@@ -99,6 +127,7 @@ class Scanner {
     }
 
     var index = content.startIndex
+    range = range.upperBound..<range.upperBound
     while index != content.endIndex {
       let substring = content.substring(from: index)
       for string in until {
@@ -110,6 +139,7 @@ class Scanner {
       }
 
       index = content.index(after: index)
+      range = range.lowerBound..<originalContent.index(after: range.upperBound)
     }
 
     return nil
@@ -147,6 +177,25 @@ extension String {
   func trim(character: Character) -> String {
     let first = findFirstNot(character: character) ?? startIndex
     let last = findLastNot(character: character) ?? endIndex
-    return self[first..<last]
+    return String(self[first..<last])
+  }
+
+  public func rangeLine(_ range: Range<String.Index>) -> RangeLine {
+    var lineNumber: UInt = 0
+    var offset: Int = 0
+    var lineContent = ""
+
+    for line in components(separatedBy: CharacterSet.newlines) {
+      lineNumber += 1
+      lineContent = line
+      if let rangeOfLine = self.range(of: line), rangeOfLine.contains(range.lowerBound) {
+        offset = distance(from: rangeOfLine.lowerBound, to: range.lowerBound)
+        break
+      }
+    }
+
+    return (lineContent, lineNumber, offset)
   }
 }
+
+public typealias RangeLine = (content: String, number: UInt, offset: Int)

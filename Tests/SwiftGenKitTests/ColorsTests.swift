@@ -5,42 +5,42 @@
 //
 
 import PathKit
-import XCTest
 @testable import SwiftGenKit
+import XCTest
 
 final class TestFileParser1: ColorsFileTypeParser {
   static let extensions = ["test1"]
-  func parseFile(at path: Path) throws -> Palette {
-    return Palette(name: "test1", colors: [:])
+  func parseFile(at path: Path) throws -> Colors.Palette {
+    return Colors.Palette(name: "test1", colors: [:])
   }
 }
 
 final class TestFileParser2: ColorsFileTypeParser {
   static let extensions = ["test2"]
-  func parseFile(at path: Path) throws -> Palette {
-    return Palette(name: "test2", colors: [:])
+  func parseFile(at path: Path) throws -> Colors.Palette {
+    return Colors.Palette(name: "test2", colors: [:])
   }
 }
 
 final class TestFileParser3: ColorsFileTypeParser {
   static let extensions = ["test1"]
-  func parseFile(at path: Path) throws -> Palette {
-    return Palette(name: "test3", colors: [:])
+  func parseFile(at path: Path) throws -> Colors.Palette {
+    return Colors.Palette(name: "test3", colors: [:])
   }
 }
 
 class ColorParserTests: XCTestCase {
   func testEmpty() throws {
-    let parser = ColorsParser()
+    let parser = Colors.Parser()
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "empty.plist", sub: .colors)
+    XCTDiffContexts(result, expected: "empty", sub: .colors)
   }
 
   // MARK: - Dispatch
 
   func testDispatchKnowExtension() throws {
-    let parser = ColorsParser()
+    let parser = Colors.Parser()
     parser.register(parser: TestFileParser1.self)
     parser.register(parser: TestFileParser2.self)
 
@@ -49,14 +49,14 @@ class ColorParserTests: XCTestCase {
   }
 
   func testDispatchUnknownExtension() throws {
-    let parser = ColorsParser()
+    let parser = Colors.Parser()
     parser.register(parser: TestFileParser1.self)
     parser.register(parser: TestFileParser2.self)
 
     do {
       try parser.parse(path: "someFile.unknown")
       XCTFail("Code did succeed while it was expected to fail for unknown extension")
-    } catch ColorsParserError.unsupportedFileType {
+    } catch Colors.ParserError.unsupportedFileType {
       // That's the expected exception we want to happen
     } catch let error {
       XCTFail("Unexpected error occured while parsing: \(error)")
@@ -66,7 +66,7 @@ class ColorParserTests: XCTestCase {
   func testDuplicateExtensionWarning() throws {
     var warned = false
 
-    let parser = ColorsParser()
+    let parser = Colors.Parser()
     parser.warningHandler = { message, file, line in
       warned = true
     }
@@ -80,33 +80,33 @@ class ColorParserTests: XCTestCase {
   // MARK: - Multiple palettes
 
   func testParseMultipleFiles() throws {
-    let parser = ColorsParser()
+    let parser = Colors.Parser()
     try parser.parse(path: Fixtures.path(for: "colors.clr", sub: .colors))
     try parser.parse(path: Fixtures.path(for: "extra.txt", sub: .colors))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "multiple.plist", sub: .colors)
+    XCTDiffContexts(result, expected: "multiple", sub: .colors)
   }
 
   // MARK: - String parsing
 
   func testStringNoPrefix() throws {
-    let color = try parse(hex: "FFFFFF", path: #file)
+    let color = try Colors.parse(hex: "FFFFFF", path: #file)
     XCTAssertEqual(color, 0xFFFFFFFF)
   }
 
   func testStringWithHash() throws {
-    let color = try parse(hex: "#FFFFFF", path: #file)
+    let color = try Colors.parse(hex: "#FFFFFF", path: #file)
     XCTAssertEqual(color, 0xFFFFFFFF)
   }
 
   func testStringWith0x() throws {
-    let color = try parse(hex: "0xFFFFFF", path: #file)
+    let color = try Colors.parse(hex: "0xFFFFFF", path: #file)
     XCTAssertEqual(color, 0xFFFFFFFF)
   }
 
   func testStringWithAlpha() throws {
-    let color = try parse(hex: "FFFFFFCC", path: #file)
+    let color = try Colors.parse(hex: "FFFFFFCC", path: #file)
     XCTAssertEqual(color, 0xFFFFFFCC)
   }
 

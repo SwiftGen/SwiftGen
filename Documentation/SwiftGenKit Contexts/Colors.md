@@ -21,3 +21,31 @@ The output context has the following structure:
      - `green`: `String` — hex value of the green component
      - `blue` : `String` — hex value of the blue component
      - `alpha`: `String` — hex value of the alpha component
+
+## Example
+
+```yaml
+palettes:
+- colors:
+  - alpha: "ff"
+    blue: "66"
+    green: "96"
+    name: "ArticleBody"
+    red: "33"
+  - alpha: "ff"
+    blue: "cc"
+    green: "66"
+    name: "ArticleFootnote"
+    red: "ff"
+  - alpha: "ff"
+    blue: "66"
+    green: "fe"
+    name: "ArticleTitle"
+    red: "33"
+  - alpha: "cc"
+    blue: "ff"
+    green: "ff"
+    name: "private"
+    red: "ff"
+  name: "colors"
+```

@@ -6,13 +6,15 @@
 //  Copyright © 2017 AliSoftware. All rights reserved.
 //
 
+import Foundation
 import PathKit
 
 extension Path {
   static let applicationSupport: Path = {
     let paths = NSSearchPathForDirectoriesInDomains(
       .applicationSupportDirectory,
-      .userDomainMask, true
+      .userDomainMask,
+      true
     )
     guard let path = paths.first else {
       fatalError("Unable to locate the Application Support directory on your machine!")

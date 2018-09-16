@@ -1,0 +1,19 @@
+files:
+- documents:
+  - data:
+    - "Mark McGwire"
+    - "Sammy Sosa"
+    - "Ken Griffey"
+    metadata:
+      element:
+        type: "String"
+      type: "Array"
+  - data:
+    - "Chicago Cubs"
+    - "St Louis Cardinals"
+    metadata:
+      element:
+        type: "String"
+      type: "Array"
+  name: "documents"
+  path: "documents.yaml"

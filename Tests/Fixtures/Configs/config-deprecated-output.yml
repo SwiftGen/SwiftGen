@@ -1,0 +1,7 @@
+output_dir: Common/Generated
+strings:
+  inputs: Stuff/Folder
+  templateName: structured-swift4
+  output: my-strings.swift
+  params:
+    foo: baz

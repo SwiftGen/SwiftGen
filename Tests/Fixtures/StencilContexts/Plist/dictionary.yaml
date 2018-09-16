@@ -1,0 +1,18 @@
+files:
+- documents:
+  - data:
+      key1: "value1"
+      key2:
+        nestedKey2: "nestedValue2"
+    metadata:
+      properties:
+        key1:
+          type: "String"
+        key2:
+          properties:
+            nestedKey2:
+              type: "String"
+          type: "Dictionary"
+      type: "Dictionary"
+  name: "dictionary"
+  path: "dictionary.plist"

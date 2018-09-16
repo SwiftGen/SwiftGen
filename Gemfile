@@ -2,7 +2,19 @@
 
 source 'https://rubygems.org'
 
-gem 'cocoapods', '1.3.1'
-gem 'octokit', '~> 4.7'
-gem 'rake'
-gem 'xcpretty'
+# The bare minimum for building, e.g. in Homebrew
+group :build do
+	gem 'rake', '~> 12.3'
+	gem 'xcpretty'
+end
+
+# In addition to :build, for contributing
+group :development do
+	gem 'cocoapods', '~> 1.5'
+	gem 'rubocop', '~> 0.58'
+end
+
+# For releasing to GitHub
+group :release do
+	gem 'octokit', '~> 4.9'
+end

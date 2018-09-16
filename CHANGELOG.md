@@ -6,21 +6,133 @@
 
 ### Bug Fixes
 
-_None_
+* Fix memory leak in generated code for Fonts.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#394](https://github.com/SwiftGen/SwiftGen/issues/394)
+* Interface Builder: ensure the templates handle `GLKViewController`, `AVPlayerViewController` and `NSPageController` correctly.  
+  [David Jennes](https://github.com/djbe)
+  [#404](https://github.com/SwiftGen/SwiftGen/issues/404)
+  [#414](https://github.com/SwiftGen/SwiftGen/pull/414)
+* Interface Builder: ensure the parser can handle files with and without "trait variations".  
+  [David Jennes](https://github.com/djbe)
+  [#367](https://github.com/SwiftGen/SwiftGen/issues/367)
+  [#429](https://github.com/SwiftGen/SwiftGen/pull/429)
+* Restrict `SceneType` and `InitialSceneType` to UIViewController when not targeting AppKit. When targeting AppKit, remove superfluous `Any`.  
+  [Darron Schall](https://github.com/darronschall)
+  [#463](https://github.com/SwiftGen/SwiftGen/issues/463)
+  [#464](https://github.com/SwiftGen/SwiftGen/pull/464)
+* Fonts: disable a warning in generated font files for projects with `conditional_returns_on_newlines` SwiftLint rule enabled.  
+  [Ryan Davies](https://github.com/iotize)
+  [#436](https://github.com/SwiftGen/SwiftGen/issues/436)
+  [#465](https://github.com/SwiftGen/SwiftGen/pull/465)
+* Interface Builder: the parser and templates now handle the "Inherit module from target" setting.  
+  [David Jennes](https://github.com/djbe)
+  [#435](https://github.com/SwiftGen/SwiftGen/issues/435)
+  [#485](https://github.com/SwiftGen/SwiftGen/pull/485)
 
 ### Breaking Changes
 
-_None_
+* Don't normalize string keys while parsing, let all transformation be done on template side. This makes the developer responsible to keep the language file organized, duplications won't be removed.  
+  [Diego Chohfi](https://github.com/dchohfi)
+  [#257](https://github.com/SwiftGen/SwiftGen/issues/257)
+* Remove Swift 2 support.  
+  [David Jennes](https://github.com/djbe) 
+  [#420](https://github.com/SwiftGen/SwiftGen/pull/420)
+* Renamed the `storyboards` command to `ib`, to better reflect it's purpose. An alias for `storyboards` still exists, but it will be removed at some point.  
+  [David Jennes](https://github.com/djbe) 
+  [#423](https://github.com/SwiftGen/SwiftGen/pull/423)
+* XCAssets: the generated templates won't namespace groups by default anymore, use the `forceProvidesNamespaces` flag to enable this behaviour again.  
+  [jechris](https://github.com/pjechris)
+  [#453](https://github.com/SwiftGen/SwiftGen/issues/453)
+* XCAssets: the templates won't generate any all-values accessors anymore by default. Use the `allValues` flag to enable this behaviour again. Note: this replaces the old `noAllValues` flag (with an inverse behaviour).  
+  [David Jennes](https://github.com/djbe) 
+  [#480](https://github.com/SwiftGen/SwiftGen/pull/480)
+* XCAssets: Dropped the deprecated `allValues` constant, use the type specific constants such as `allColors`, `allDataItems` and `allImages`. The default value of `imageAlias` has also been changed from `Image` to `AssetImageTypeAlias`, to be consistent with the other types.  
+  [David Jennes](https://github.com/djbe) 
+  [#482](https://github.com/SwiftGen/SwiftGen/pull/482)
+* Interface Builder: split up the storyboards template into 2 parts, one for scenes and one for segues.  
+  [David Jennes](https://github.com/djbe) 
+  [#419](https://github.com/SwiftGen/SwiftGen/pull/419)
 
 ### New Features
 
-_None_
+* Add ability to list all custom fonts and register them using `FontFamily.registerAllCustomFonts`.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#394](https://github.com/SwiftGen/SwiftGen/issues/394)
+* Add support for Swift Package Manager and Mint.  
+  [Yonas Kolb](https://github.com/yonaskolb)
+  [#411](https://github.com/SwiftGen/SwiftGen/pull/411)
+* The `swiftgen.yml` config file now accepts multiple outputs for each command, allowing you to generate multiple outputs from the same files and content. This also means that the `output` parameter is now deprecated, in favour of the `outputs` parameter, and it may be removed in a future version of SwiftGen. Similarly, the `paths` parameter has been renamed to `inputs` for consistency. You can always use `swiftgen config lint` to validate your configuration file.  
+  [David Jennes](https://github.com/djbe) 
+  [#424](https://github.com/SwiftGen/SwiftGen/pull/424)
+* Use `swiftlint:disable all` in generated files to avoid interference with SwiftLint rules custom to the host project.  
+  [Frederick Pietschmann](https://github.com/fredpi)
+  [#409](https://github.com/SwiftGen/SwiftGen/issues/409)
+* XCAssets: Added support for `NSDataAssets`.  
+  [Oliver Jones](https://github.com/orj)
+  [#444](https://github.com/SwiftGen/SwiftGen/issues/444)
+* Organised the generated code in sections for better readability, with all generated constants at the top of the file.  
+  [David Jennes](https://github.com/djbe)
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#456](https://github.com/SwiftGen/SwiftGen/pull/456)
+  [#481](https://github.com/SwiftGen/SwiftGen/pull/481)
+* Added support for JSON, Plist and YAML files using the `swiftgen json`, `swiftgen plist` and `swiftgen yaml` commands. The parsed contexts and the generated files for each command have been kept quite similar, for easier switching between file formats.  
+  [John T McIntosh](https://github.com/johntmcintosh)
+  [Toshihiro Suzuki](https://github.com/toshi0383)
+  [Peter Livesey](https://github.com/plivesey)
+  [David Jennes](https://github.com/djbe)
+  [#379](https://github.com/SwiftGen/SwiftGen/pull/379)
+  [#359](https://github.com/SwiftGen/SwiftGen/issues/359)
+  [#288](https://github.com/SwiftGen/SwiftGen/pull/288)
+  [#188](https://github.com/SwiftGen/SwiftGen/pull/188)
+  [#493](https://github.com/SwiftGen/SwiftGen/pull/493)
+* Updated the playgrounds with the new `json`, `plist` and `yaml` commands, and updated the other pages to reflect the template changes.  
+  [David Jennes](https://github.com/djbe)
+  [#495](https://github.com/SwiftGen/SwiftGen/pull/495)
 
 ### Internal Changes
 
-* Merged the `SwiftGenKit` and `templates` repositories back into this repository for easier development and maintenance.  
+* Migrated to CircleCI 2.0.  
+  [David Jennes](https://github.com/djbe)
+  [#403](https://github.com/SwiftGen/SwiftGen/pull/403)
+* Switched to using SwiftLint via CocoaPods instead of our own install scripts.  
+  [David Jennes](https://github.com/djbe)
+  [#401](https://github.com/SwiftGen/SwiftGen/pull/401)
+* Enabled some extra SwiftLint rules for better code consistency.  
+  [David Jennes](https://github.com/djbe)
+  [#402](https://github.com/SwiftGen/SwiftGen/pull/402)
+  [#476](https://github.com/SwiftGen/SwiftGen/pull/476)
+* Updated to latest Xcode (9.3.0).  
   [David Jennes](https://github.com/djbe) 
-  [#356](https://github.com/SwiftGen/SwiftGen/pull/356)
+  [#415](https://github.com/SwiftGen/SwiftGen/pull/415)
+* Update to Stencil 0.12.1, and use some of it's new filters in our templates.  
+  [David Jennes](https://github.com/djbe) 
+  [#416](https://github.com/SwiftGen/SwiftGen/pull/416)
+  [#475](https://github.com/SwiftGen/SwiftGen/pull/475)
+* Store testing contexts as YAML files instead of PLISTs.  
+  [David Jennes](https://github.com/djbe) 
+  [#418](https://github.com/SwiftGen/SwiftGen/pull/418)
+  [#461](https://github.com/SwiftGen/SwiftGen/pull/461)
+* Refactor the parsers as they're getting more complex.  
+  [David Jennes](https://github.com/djbe) 
+  [#417](https://github.com/SwiftGen/SwiftGen/pull/417)
+  [#422](https://github.com/SwiftGen/SwiftGen/pull/422)
+* Disabled a SwiftLint rule for function parameter count.  
+  [Oleg Gorbatchev](https://github.com/gorbat-o)
+  [#428](https://github.com/SwiftGen/SwiftGen/pull/428)
+* Fix missing link in the README.  
+  [Takeshi Fujiki](https://github.com/takecian)
+  [#459](https://github.com/SwiftGen/SwiftGen/issues/459)
+
+## 5.3.0
+
+### Changes in other SwiftGen modules
+
+* [StencilSwiftKit 2.4.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.4.0/CHANGELOG.md)
+* [Stencil 0.10.1](https://github.com/kylef/Stencil/blob/0.10.1/CHANGELOG.md)
+
+### New Features
+
 * XCAssets: exposed getter for image name string.  
   [Abbey Jackson](https://github.com/abbeyjackson)
   [SwiftGen/templates#85](https://github.com/SwiftGen/templates/pull/85)
@@ -36,12 +148,18 @@ _None_
   [Eric Slosser](https://github.com/Mr-Fixit)
   [SwiftGen/SwiftGen#378](https://github.com/SwiftGen/SwiftGen/pull/378)
 
+### Internal Changes
+
+* Merged the `SwiftGenKit` and `templates` repositories back into this repository for easier development and maintenance.  
+  [David Jennes](https://github.com/djbe)
+  [#356](https://github.com/SwiftGen/SwiftGen/pull/356)
+
 ## 5.2.1
 
 ### Bug Fixes
 
 * Fix SwiftGen no longer working using CLI parameters (instead of config file).  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#347](https://github.com/SwiftGen/SwiftGen/pull/347)
 * Errors now properly exit with a non-zero exit code.  
   [Olivier Halligon](https://github.com/AliSoftware)
@@ -107,7 +225,7 @@ _None_
 ### Bug Fixes
 
 * XCAssets: fixed some compatibility issues with the swift 3 template on Xcode 8, and with other templates.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [SwiftGen/templates#76](https://github.com/SwiftGen/templates/pull/76)
 
 ## 5.1.0
@@ -122,19 +240,19 @@ _None_
 
 * Added Swift 4 templates. Use `-t swift4` or whatever variant you want to use
   (see `swiftgen templates list` for the available names).  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [SwiftGen/templates/#67](https://github.com/SwiftGen/templates/pull/67)
 * XCAssets: Added support for named colors. When using `swiftgen xcassets` the bundled templates
   will now also include colors found in the Asset Catalog in addition to the images.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [SwiftGen/templates/#68](https://github.com/SwiftGen/templates/pull/68)
 * Fonts: the path to fonts will now default to just the font filename, but you can disable
   this behaviour by enabling the `preservePath` parameter.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [SwiftGen/templates/#71](https://github.com/SwiftGen/templates/pull/71)
 * Colors: new template that uses `#colorLiteral`s.  
   Use `swiftgen colors -t literals-swift3` / `swiftgen colors -t literals-swift4` to use them.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [SwiftGen/templates/#72](https://github.com/SwiftGen/templates/pull/72)
 
 ## 5.0.0

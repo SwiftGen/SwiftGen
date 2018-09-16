@@ -27,7 +27,7 @@ import Foundation
 #if SWIFT_PACKAGE
 import SwiftClibxml2
 #else
-import libxml2
+import libxmlKanna
 #endif
 
 /**
@@ -108,6 +108,16 @@ internal final class libxmlHTMLNode: XMLElement {
                 node.addChild(self)
             }
         }
+    }
+
+    var nextSibling: XMLElement? {
+        let val = xmlNextElementSibling(self.nodePtr)
+        return self.node(from: val)
+    }
+
+    var previousSibling: XMLElement? {
+        let val = xmlPreviousElementSibling(self.nodePtr)
+        return self.node(from: val)
     }
 
     fileprivate weak var weakDocument: XMLDocument?
@@ -200,7 +210,7 @@ internal final class libxmlHTMLNode: XMLElement {
     }
     
     func css(_ selector: String, namespaces: [String:String]?) -> XPathObject {
-        if let xpath = CSS.toXPath(selector) {
+        if let xpath = try? CSS.toXPath(selector) {
             if isRoot {
                 return self.xpath(xpath, namespaces: namespaces)
             } else {
@@ -252,15 +262,29 @@ internal final class libxmlHTMLNode: XMLElement {
         xmlUnlinkNode(node.nodePtr)
         xmlFree(node.nodePtr)
     }
+
+    private func node(from ptr: xmlNodePtr?) -> XMLElement? {
+        guard let doc = self.doc, let docPtr = self.docPtr, let nodePtr = ptr else {
+            return nil
+        }
+
+        let element = libxmlHTMLNode(document: doc, docPtr: docPtr, node: nodePtr)
+        return element
+    }
 }
 
 private func libxmlGetNodeContent(_ nodePtr: xmlNodePtr) -> String? {
     let content = xmlNodeGetContent(nodePtr)
-    if let result  = String(validatingUTF8: UnsafeRawPointer(content!).assumingMemoryBound(to: CChar.self)) {
+    defer {
+        #if swift(>=4.1)
+        content?.deallocate()
+        #else
         content?.deallocate(capacity: 1)
+        #endif
+    }
+    if let result  = String(validatingUTF8: UnsafeRawPointer(content!).assumingMemoryBound(to: CChar.self)) {
         return result
     }
-    content?.deallocate(capacity: 1)
     return nil
 }
 

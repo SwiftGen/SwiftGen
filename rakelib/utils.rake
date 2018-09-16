@@ -2,7 +2,6 @@
 # - MIN_XCODE_VERSION
 
 require 'json'
-require 'octokit'
 require 'pathname'
 
 # Utility functions to run Xcode commands, extract versionning info and logs messages
@@ -49,6 +48,7 @@ class Utils
     token   = File.exist?('.apitoken') && File.read('.apitoken')
     token ||= File.exist?('../.apitoken') && File.read('../.apitoken')
     Utils.print_error('No .apitoken file found') unless token
+    require 'octokit'
     Octokit::Client.new(access_token: token)
   end
 
@@ -100,7 +100,7 @@ class Utils
     name = (task.name + (subtask.empty? ? '' : "_#{subtask}")).gsub(/[:-]/, '_')
     command = [*cmd].join(' && ')
 
-    if ENV['CI']
+    if ENV['CIRCLECI']
       Rake.sh "set -o pipefail && (#{command}) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\" | " \
         "bundle exec xcpretty --color --report junit --output \"#{ENV['CIRCLE_TEST_REPORTS']}/xcode/#{name}.xml\""
     elsif system('which xcpretty > /dev/null')
@@ -116,7 +116,7 @@ class Utils
     name = (task.name + (subtask.empty? ? '' : "_#{subtask}")).gsub(/[:-]/, '_')
     command = [*cmd].join(' && ')
 
-    if ENV['CI']
+    if ENV['CIRCLECI']
       Rake.sh "set -o pipefail && (#{command}) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\""
     else
       Rake.sh command

@@ -1,4 +1,4 @@
-﻿"alert_title" = "Titre de l'alerte";
+"alert_title" = "Titre de l'alerte";
 "alert_message" = "Contenu détaillé de l'alerte";
 
 "greetings" = "Bonjour, mon nom est %@ et j'ai %d ans";
@@ -10,5 +10,5 @@
 
 "settings.navigation-bar.self" = "Quelques mots-clés réservés";
 "settings.navigation-bar.title.even.deeper" = "Paramètres";
-"SETTINGS.USER_PROFILE_SECTION.HEADER_TITLE" = "Profil de l'utilisateur Paramètres";
-"seTTings.uSer-proFile-sectioN.footer_text" = "Ici, vous pouvez modifier certains paramètres de profil d'utilisateur.";
+"settings.user-profile-section.HEADER_TITLE" = "Profil de l'utilisateur Paramètres";
+"settings.user-profile-section.footer_text" = "Ici, vous pouvez modifier certains paramètres de profil d'utilisateur.";

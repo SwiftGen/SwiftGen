@@ -10,18 +10,25 @@ import StencilSwiftKit
 import SwiftGenKit
 
 private let templateNameOption = Option<String>(
-  "template", default: "", flag: "t",
-  description: "The name of the template to use for code generation. " +
-  "See `swiftgen templates list` for a list of available names"
+  "template",
+  default: "",
+  flag: "t",
+  description: """
+    The name of the template to use for code generation. \
+    See `swiftgen templates list` for a list of available names
+    """
 )
 
 private let templatePathOption = Option<String>(
-  "templatePath", default: "", flag: "p",
+  "templatePath",
+  default: "",
+  flag: "p",
   description: "The path of the template to use for code generation."
 )
 
 private let paramsOption = VariadicOption<String>(
-  "param", default: [],
+  "param",
+  default: [],
   description: "List of template parameters"
 )
 
@@ -42,7 +49,7 @@ extension ParserCLI {
 
         let templateRef = try TemplateRef(templateShortName: templateName,
                                           templateFullPath: templatePath)
-        let templateRealPath = try templateRef.resolvePath(forSubcommand: self.name)
+        let templateRealPath = try templateRef.resolvePath(forSubcommand: self.templateFolder)
 
         let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
                                                 environment: stencilSwiftEnvironment())

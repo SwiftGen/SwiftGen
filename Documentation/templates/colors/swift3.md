@@ -9,8 +9,8 @@
 
 ## When to use it
 
-- When you need to generate *Swift 3* code
-- Supports _multiple_ color names with the _same_ value
+- When you need to generate *Swift 3* code.
+- Supports _multiple_ color names with the _same_ value.
 
 ## Customization
 
@@ -40,7 +40,7 @@ struct ColorName {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Colors/swift3-context-defaults.swift)
+[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Generated/Colors/swift3-context-defaults.swift)
 
 ## Usage example
 

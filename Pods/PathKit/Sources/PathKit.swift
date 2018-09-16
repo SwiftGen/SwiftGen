@@ -42,7 +42,7 @@ public struct Path {
       path = "."
     } else if components.first == Path.separator && components.count > 1 {
       let p = components.joined(separator: Path.separator)
-      path = p.substring(from: p.characters.index(after: p.startIndex))
+      path = String(p[p.index(after: p.startIndex)...])
     } else {
       path = components.joined(separator: Path.separator)
     }
@@ -221,7 +221,7 @@ extension Path {
 
   /// The last path component without file extension
   ///
-  /// - Note: This returns "." for "..".
+  /// - Note: This returns "." for ".." on Linux, and ".." on Apple platforms.
   ///
   /// - Returns: the last path component without file extension
   ///
@@ -276,10 +276,10 @@ extension Path {
     guard Path.fileManager.fileExists(atPath: normalize().path, isDirectory: &directory) else {
       return false
     }
-#if os(Linux)
-    return directory
-#else
+#if !os(Linux) || swift(>=4.1)
     return directory.boolValue
+#else
+    return directory
 #endif
   }
 
@@ -295,10 +295,10 @@ extension Path {
     guard Path.fileManager.fileExists(atPath: normalize().path, isDirectory: &directory) else {
       return false
     }
-#if os(Linux)
-  return !directory
-#else
+#if !os(Linux) || swift(>=4.1)
   return !directory.boolValue
+#else
+  return !directory
 #endif
   }
 
@@ -598,6 +598,15 @@ extension Path {
 #else
       let matchc = gt.gl_matchc
 #endif
+#if swift(>=4.1)
+      return (0..<Int(matchc)).compactMap { index in
+        if let path = String(validatingUTF8: gt.gl_pathv[index]!) {
+          return Path(path)
+        }
+
+        return nil
+      }
+#else
       return (0..<Int(matchc)).flatMap { index in
         if let path = String(validatingUTF8: gt.gl_pathv[index]!) {
           return Path(path)
@@ -605,6 +614,7 @@ extension Path {
 
         return nil
       }
+#endif
     }
 
     // GLOB_NOMATCH
@@ -765,8 +775,8 @@ internal func +(lhs: String, rhs: String) -> Path {
     rSlice = rSlice.filter { $0 != "." }.fullSlice
 
     // Eats up trailing components of the left and leading ".." of the right side
-    while lSlice.last != ".." && rSlice.first == ".." {
-      if (lSlice.count > 1 || lSlice.first != Path.separator) && !lSlice.isEmpty {
+    while lSlice.last != ".." && !lSlice.isEmpty && rSlice.first == ".." {
+      if lSlice.count > 1 || lSlice.first != Path.separator {
         // A leading "/" is never popped
         lSlice.removeLast()
       }

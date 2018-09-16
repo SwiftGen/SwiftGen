@@ -1,3 +1,7 @@
+# Master
+
+*** Work In Progress — Will be consolidated once the release is ready ***
+
 # SwiftGenKit 2.0 (SwiftGen 5.0) Migration Guide
 
 If you're migrating from SwiftGenKit 1.x to SwiftGenKit 2.0 — which is the case if you are migrating from SwiftGen 4.x to SwiftGen 5.0 — then you should be aware of the following changes in variable names generated in the output context by SwiftGenKit, and adapt your custom templates accordingly to change the name of the variables you use.

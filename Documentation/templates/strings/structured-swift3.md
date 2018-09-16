@@ -9,7 +9,7 @@
 
 ## When to use it
 
-- When you need to generate *Swift 3* code
+- When you need to generate *Swift 3* code.
 - If you use "structured" keys for your strings, that is components separated by the `.` character, for example:
 
 ```
@@ -55,7 +55,7 @@ enum L10n {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Strings/structured-swift3-context-localizable.swift)
+[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Generated/Strings/structured-swift3-context-localizable.swift)
 
 ## Usage example
 

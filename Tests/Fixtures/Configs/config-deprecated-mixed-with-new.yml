@@ -1,0 +1,24 @@
+output_dir: Common/Generated
+strings:
+- inputs: new-inputs1
+  paths: old-paths1
+  outputs:
+    templateName: new-templateName1
+    output: new-output1
+    params:
+      foo: new-param1
+  templateName: old-templateName1
+  output: old-output1
+  params:
+    foo: old-param1
+- inputs: new-inputs2
+  paths: old-paths2
+  outputs:
+    templatePath: new-templatePath2
+    output: new-output2
+    params:
+      foo: new-param2
+  templatePath: old-templateName2
+  output: old-output2
+  params:
+    foo: old-param2

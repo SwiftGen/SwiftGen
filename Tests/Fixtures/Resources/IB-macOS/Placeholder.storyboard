@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="eNa-6E-hop">
+            <objects>
+                <windowController storyboardIdentifier="Window" id="3Gn-1I-HiJ" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="sw7-rd-HiT">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="163" y="199" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+                        <connections>
+                            <outlet property="delegate" destination="3Gn-1I-HiJ" id="RGD-2K-T3Z"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="EIJ-iL-tpR" kind="relationship" relationship="window.shadowedContentViewController" id="wUy-rT-OAp"/>
+                    </connections>
+                </windowController>
+                <customObject id="BHg-iq-dVb" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="262" y="234"/>
+        </scene>
+        <!--Dependent-->
+        <scene sceneID="jeB-5h-7HV">
+            <objects>
+                <controllerPlaceholder storyboardIdentifier="Dependent" storyboardName="Dependency" referencedIdentifier="Dependent" id="EIJ-iL-tpR" sceneMemberID="viewController"/>
+                <customObject id="s9D-CE-7EV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="715.5" y="228"/>
+        </scene>
+    </scenes>
+</document>
