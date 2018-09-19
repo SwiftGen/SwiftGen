@@ -73,16 +73,6 @@ func XCTAssertEqualDict(_ result: [String: Any],
                 line: line)
 }
 
-extension TemplateRef: Equatable {
-  public static func == (lhs: TemplateRef, rhs: TemplateRef) -> Bool {
-    switch (lhs, rhs) {
-    case (.name(let lname), .name(let rname)): return lname == rname
-    case (.path(let lpath), .path(let rpath)): return lpath == rpath
-    case (.name, .path), (.path, .name): return false
-    }
-  }
-}
-
 class Fixtures {
   enum Directory: String {
     case colors = "Colors"

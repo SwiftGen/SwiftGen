@@ -69,21 +69,5 @@ extension InterfaceBuilder.Scene {
 
 // MARK: - Hashable
 
-extension InterfaceBuilder.Scene: Equatable { }
-func == (lhs: InterfaceBuilder.Scene, rhs: InterfaceBuilder.Scene) -> Bool {
-  return lhs.identifier == rhs.identifier &&
-    lhs.tag == rhs.tag &&
-    lhs.customClass == rhs.customClass &&
-    lhs.customModule == rhs.customModule &&
-    lhs.moduleIsPlaceholder == rhs.moduleIsPlaceholder &&
-    lhs.platform == rhs.platform
-}
-
-extension InterfaceBuilder.Scene: Hashable {
-  var hashValue: Int {
-    let part1: Int = identifier.hashValue ^ tag.hashValue
-    let part2: Int = (customModule?.hashValue ?? 0) ^ (customClass?.hashValue ?? 0)
-    let part3: Int = moduleIsPlaceholder.hashValue ^ platform.hashValue
-    return part1 ^ part2 ^ part3
-  }
-}
+extension InterfaceBuilder.Scene: Equatable {}
+extension InterfaceBuilder.Scene: Hashable {}

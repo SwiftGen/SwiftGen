@@ -54,7 +54,7 @@ extension Colors {
 
 extension NSColor {
   var rgbColor: NSColor? {
-    guard colorSpace.colorSpaceModel != .RGB else { return self }
+    guard colorSpace.colorSpaceModel != .rgb else { return self }
 
     return usingColorSpaceName(.calibratedRGB)
   }

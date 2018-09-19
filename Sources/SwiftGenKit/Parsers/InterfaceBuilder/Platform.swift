@@ -7,13 +7,11 @@
 import Foundation
 
 extension InterfaceBuilder {
-  enum Platform: String {
+  enum Platform: String, CaseIterable {
     case iOS = "iOS.CocoaTouch"
     case macOS = "MacOSX.Cocoa"
     case tvOS = "AppleTV"
     case watchOS = "watchKit"
-
-    static let allCases = [Platform.iOS, .macOS, .tvOS, .watchOS]
 
     init?(runtime: String) {
       // files without "trait variations" will have a runtime value of (for example):

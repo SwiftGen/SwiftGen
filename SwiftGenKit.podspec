@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/aligatr'
 
   s.platform = :osx, '10.9'
-  s.swift_version = '4.1'
+  s.swift_version = '4.2'
   s.cocoapods_version = '>= 1.4.0'
 
   s.source       = { git: 'https://github.com/SwiftGen/SwiftGenKit.git', tag: s.version.to_s }
