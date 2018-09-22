@@ -20,8 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
     NSInteger
   {% elif swiftType == "String" %}
     NSString*
-  {% else %} 
-    NSObject*
+  {% elif swiftType == "Float" %}
+    float
+  {% else %}
+    FIX_OBJC_STRING_DOT_STENCIL_PLEASE
   {% endif %}
 {% endmacro %}
 {% macro recursiveBlock table item sp %}
