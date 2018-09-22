@@ -177,7 +177,15 @@ extension XCTestCase {
       }
 
       for (index, (context: context, suffix: suffix)) in variations.enumerated() {
-        let outputFile = "\(templateName)-context-\(contextName)\(suffix).swift"
+        let outputSuffix = { () -> String in
+          if templateName.starts(with: "objc-h") {
+            return "h"
+          } else if templateName.starts(with: "objc-m") {
+            return "m"
+          }
+          return "swift"
+        }()
+        let outputFile = "\(templateName)-context-\(contextName)\(suffix).\(outputSuffix)"
         if variations.count > 1 { print(" - Variation #\(index)... (expecting: \(outputFile))") }
 
         let result: String

@@ -72,3 +72,5 @@ fastlane/test_output
 bin/
 Frameworks/
 Rome/
+
+Tests/Fixtures/Generated/
