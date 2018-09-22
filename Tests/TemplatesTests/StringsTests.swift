@@ -30,10 +30,10 @@ class StringsTests: XCTestCase {
        suffix: "-publicAccess")
     ]
   }
-  
+
   let variationsObjC: VariationGenerator = { name, context in
     guard name == "localizable" else { return [(context: context, suffix: "")] }
-    
+
     return [
       (context: context,
        suffix: ""),
@@ -42,10 +42,9 @@ class StringsTests: XCTestCase {
        suffix: "-customname"),
       (context: try StencilContext.enrich(context: context,
                                           parameters: ["noComments"]),
-       suffix: "-no-comments"),
+       suffix: "-no-comments")
     ]
   }
-  
 
   func testFlatSwift3() {
     test(template: "flat-swift3",
@@ -74,7 +73,7 @@ class StringsTests: XCTestCase {
          directory: .strings,
          contextVariations: variations)
   }
-  
+
   func testObjectiveCHeader() {
     test(template: "objc-h",
          contextNames: Contexts.all,
