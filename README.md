@@ -259,8 +259,11 @@ You can also find other help & tutorial material on the internet, like [this cla
 
 ## Asset Catalog
 
-```sh
-swiftgen xcassets -t swift4 /dir/to/search/for/imageset/assets
+```yaml
+xcassets:
+  inputs: /dir/to/search/for/imageset/assets
+  outputs:
+    templateName: swift4
 ```
 
 This will generate an `enum Asset` with one `case` per image set in your assets catalog, so that you can use them as constants.
@@ -294,8 +297,11 @@ let samePrivateImage = Asset.private.image
 
 ## Colors
 
-```sh
-swiftgen colors -t swift4 /path/to/colors-file.txt
+```yaml
+colors:
+  inputs: /path/to/colors-file.txt
+  outputs:
+    templateName: swift4
 ```
 
 This will generate a `enum ColorName` with one `case` per color listed in the text file passed as argument.
@@ -309,8 +315,11 @@ The input file is expected to be either:
 
 For example you can use this command to generate colors from one of your system color lists:
 
-```sh
-swiftgen colors -swift4 ~/Library/Colors/MyColors.clr
+```yaml
+colors:
+  inputs: ~/Library/Colors/MyColors.clr
+  outputs:
+    templateName: swift4
 ```
 
 Generated code will look the same as if you'd use text file.
@@ -363,8 +372,11 @@ This way, no need to enter the color red, green, blue, alpha values each time an
 
 ## Fonts
 
-```sh
-swiftgen fonts -t swift4 /path/to/font/dir
+```yaml
+fonts:
+  inputs: /path/to/font/dir
+  outputs:
+    templateName: swift4
 ```
 
 This will recursively go through the specified directory, finding any typeface files (TTF, OTF, …), defining a `struct FontFamily` for each family, and an enum nested under that family that will represent the font styles.
@@ -398,9 +410,12 @@ let sameDingbats = FontFamily.ZapfDingbats.regular.font(size: 20.0)
 
 ## Interface Builder
 
-```sh
-swiftgen ib -t scenes-swift4 /dir/to/search/for/storyboards
-swiftgen ib -t segues-swift4 /dir/to/search/for/storyboards
+```yaml
+ib:
+  inputs: /dir/to/search/for/storyboards
+  outputs:
+    - templateName: scenes-swift4
+    - templateName: segues-swift4
 ```
 
 This will generate an `enum` for each of your `NSStoryboard`/`UIStoryboard`, with respectively one `case` per storyboard scene or segue.
@@ -464,9 +479,15 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
 ## JSON and YAML
 
-```sh
-swiftgen json -t runtime-swift4 /path/to/json/dir-or-file
-swiftgen yaml -t inline-swift4 /path/to/yaml/dir-or-file
+```yaml
+json:
+  inputs: /path/to/json/dir-or-file
+  outputs:
+    templateName: runtime-swift4
+yaml:
+  inputs: /path/to/yaml/dir-or-file
+  outputs:
+    templateName: inline-swift4
 ```
 
 This will parse the given file, or when given a directory, recursively search for JSON and YAML files. It will define an `enum` for each file (and documents in a file where needed), and type-safe constants for the content of the file.
@@ -503,8 +524,11 @@ let bar = JSONFiles.Sequence.items
 
 ## Plists
 
-```sh
-swiftgen plist -t runtime-swift4 /path/to/plist/dir-or-file
+```yaml
+plist:
+  inputs: /path/to/plist/dir-or-file
+  outputs:
+    templateName: runtime-swift4
 ```
 
 This will parse the given file, or when given a directory, recursively search for Plist files. It will define an `enum` for each file (and documents in a file where needed), and type-safe constants for the content of the file.
@@ -540,8 +564,11 @@ let bar = PlistFiles.Stuff.key1
 
 ## Strings
 
-```sh
-swiftgen strings -t structured-swift4 /path/to/Localizable.strings
+```yaml
+fonts:
+  inputs: /path/to/Localizable.strings
+  outputs:
+    templateName: structured-swift4
 ```
 
 This will generate a Swift `enum L10n` that will map all your `Localizable.strings` (or other tables) keys to an `enum case`. Additionaly, if it detects placeholders like `%@`,`%d`,`%f`, it will add associated values to that `case`. Note that all dots within the key are converted to dots in code.
