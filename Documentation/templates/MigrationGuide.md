@@ -1,26 +1,102 @@
-# Master
+# SwiftGen 6.0 Migration Guide
 
-*** Work In Progress — Will be consolidated once the release is ready ***
+If you're moving from SwiftGen 5.x to SwiftGen 6.0, you'll need to be aware that some templates have been renamed, removed or merged with others. Follow this Migration Guide to use the new name for SwiftGen 6.x of the templates you were previously using with SwiftGen 5.x.
 
-Breaking:
+## Deprecated templates in SwiftGen 6.0
 
-* #420: Removed Swift 2 templates. Because it's old.
-* IB #423: Renamed `storyboards` to `ib`, so user template search paths changed.
-* XCAssets #453: All groups are no longer namespaced by default. To enable behaviour again: `forceProvidesNamespaces`
-* #409: All templates now have `swiftlint:disable all` at the top, so you no longer need to ignore the generated files, although this is still recommended.
-* #416 and #475: new Stencil/StencilSwiftKit, so new features for template writers.
-* XCAssets #480: no longer generate `allXXX` constants by default. Can be turned on again with `allValues` flag.
-* XCAssets #480: removed `noAllValues` parameter, replaced by `allValues` parameter.
-* XCAssets #482: removed deprecated `allValues` constant
-* XCAssets #482: changed x-platform image alias default from `Image` to `AssetImageTypeAlias`.
-* IB #419: Split up the templates into one for scenes and one for segues (in preparation for future templates for accessibility labels, ...).
-* IB #419: Added a handy initializer on `SegueType` for use in `prepareForSegue`.
+### Colors
 
-Improvements:
+| Old | New | Reason |
+| --- | --- | ------ |
+| `literals-swift3` | ✅ `literals-swift3` | |
+| `literals-swift4` | ✅ `literals-swift4` | |
+| `swift2` | ❌ _deleted_ | Really old Swift version |
+| `swift3` | ✅ `swift3` | |
+| `swift4` | ✅ `swift4` | |
 
-* IB #485: Templates now handle the "Inherit module from target", you may not need the `--param  module=...` anymore.
-* Fonts #394: Added a `registerAllCustomFonts` function.
-* XCAssets #444: `NSDataAsset` support.
+### Fonts
+
+| Old | New | Reason |
+| --- | --- | ------ |
+| `swift2` | ❌ _deleted_ | Really old Swift version |
+| `swift3` | ✅ `swift3` | |
+| `swift4` | ✅ `swift4` | |
+
+### Storyboards / IB
+
+The templates have been split up into separate templates for each specific functionality, in preparation of future functionalities such as accessibility identifiers.
+- One template to generate scene information.
+- One template to generate segue information.
+
+| Old | New | Reason |
+| --- | --- | ------ |
+| `swift2` | ❌ _deleted_ | Really old Swift version |
+| `swift3` | ➡️ `scenes-swift3`/`segues-swift3` | Split up into separate templates for the scenes and segues functionality |
+| `swift4` | ➡️ `scenes-swift4`/`segues-swift4` | Split up into separate templates for the scenes and segues functionality |
+
+⚠️ The `storybards` subcommand from SwiftGen 5.x has been renamed `ib` in SwiftGen 6.0, so be sure to put those templates in a `ib` subfolder and not an `storyboards` subfolder.
+
+### Strings
+
+| Old | New | Reason |
+| --- | --- | ------ |
+| `flat-swift2` | ❌ _deleted_ | Really old Swift version |
+| `flat-swift3` | ✅ `flat-swift3` | |
+| `flat-swift4` | ✅ `flat-swift4` | |
+| `structured-swift2` | ❌ _deleted_ | Really old Swift version |
+| `structured-swift3` | ✅ `structured-swift3` | |
+| `structured-swift4` | ✅ `structured-swift4` | |
+
+### XCAssets
+
+| Old | New | Reason |
+| --- | --- | ------ |
+| `swift2` | ❌ _deleted_ | Really old Swift version |
+| `swift3` | ✅ `swift3` | |
+| `swift4` | ✅ `swift4` | |
+
+## Functionality changes in SwiftGen 6.0
+
+All templates now have `swiftlint:disable all` at the top, so `swiftlint` users no longer need to ignore the generated files, although this is still highly recommended.
+
+SwiftGen 6.0 uses the latest Stencil and StencilSwiftKit libraries, so there are plenty of new features for template writers, such as variable subscripting, an `indent` filter, better error reporting, ...
+
+### Fonts
+
+The template now provides a `registerAllCustomFonts()` function, which can be useful if you use custom fonts in your Interface Builder files. Just call it when your application starts.
+
+### Storyboards / IB
+
+The segues template now generates a handy initializer on `SegueType` for use in `prepareForSegue`, for example:
+
+```swift
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+  switch StoryboardSegue.Message(segue) {
+  case .embed?:
+    // Prepare for your custom segue transition, passing information to the destionation VC
+  case .customBack?:
+    // Prepare for your custom segue transition, passing information to the destionation VC
+  default:
+    // Other segues from other scenes, not handled by this VC
+    break
+  }
+}
+```
+
+The templates now handle the "Inherit module from target" setting in Interface Builder, so you may no longer need to set the `module: ...` parameter anymore if you have multiple targets.
+
+### XCAssets
+
+All groups (folders) are no longer namespaced by default. A group will now only be namespaced if you've enabled the corresponding "provides namespace" for that group in Xcode. To enable the old behaviour again, use the `forceProvidesNamespaces` flag.
+
+The template now supports `NSDataAsset` sets, so you can now safely access items such as JSON files from your asset catalog.
+
+Some smaller changes:
+* The template no longer generates `allXXX` constants by default. This can be turned on again with the `allValues` flag.
+* Together with the previous item, the `noAllValues` flag has been removed in favour of the `allValues` flag.
+* The old `allValues` constant (which was an alias for `allImages`) has been removed, use `allImages` instead.
+* The deprecated `Image` typealias (to `UIImage`/`NSImage`) has been renamed to `AssetImageTypeAlias`.
+
 
 # Templates 2.1 Migration Guide
 
@@ -33,7 +109,12 @@ Improvements:
 
 The static `allValues` constant has been deprecated in favor of the `allImages` and `allColors` constants. This is because we've added support for named colors in asset catalogs.
 
+</details>
+
 # Templates 2.0 Migration Guide
+
+<details>
+<summary>Migration Guide</summary>
 
 If you're moving from SwiftGen 4.x to SwiftGen 5.0, you'll need to be aware that some templates have been renamed, removed or merged with others. Follow this Migration Guide to use the new name for SwiftGen 5.x of the templates you were previously using with SwiftGen 4.x.
 

@@ -1,14 +1,23 @@
-# Master
+# SwiftGen 6.0 Migration Guide
 
-*** Work In Progress — Will be consolidated once the release is ready ***
+## Changes for users
 
-Breaking:
+### Strings
 
-* Strings #257: don't normalize keys anymore (this can lead to dupe keys for string keys such as `abcNews` and `ABCNews`). It's up to the user to fix their strings files.
+The parser will no longer normalize string keys, which can lead to duplicate keys if your file contain similar keys but with different casing. For example, if your file contains:
 
-Improvements:
+```
+"abcNews.something" = "foo";
+"ABCNews.somethingElse" = "bar";
+```
 
-* XCAssets #453: added `isNamespaced` property to groups.
+SwiftGenKit will no longer consolidate these into one "abcNews" case. It is up to the user to fix this incorrect casing in their `strings` files.
+
+## Changes for template writers
+
+### XCAssets
+
+Groups now have an extra attribute `isNamespaced` that reflects the "provides namespace" setting in Xcode.
 
 # SwiftGenKit 2.0 (SwiftGen 5.0) Migration Guide
 
