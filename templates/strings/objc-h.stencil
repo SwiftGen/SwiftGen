@@ -1,4 +1,5 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// Template 'objc-string-h' by Eric Slosser
 
 {% if tables.count > 0 %}
 @import Foundation;
@@ -22,14 +23,14 @@ NS_ASSUME_NONNULL_BEGIN
     NSString*
   {% elif swiftType == "Float" %}
     float
-  {% else %}
-    FIX_OBJC_STRING_DOT_STENCIL_PLEASE
+ {% else %}
+    FIX_OBJC_STRING_H_DOT_STENCIL_PLEASE
   {% endif %}
 {% endmacro %}
 {% macro recursiveBlock table item sp %}
 {% for string in item.strings %}
 {% if string.types %}
-+ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}:{% call parametersBlock string.types %};{% if not param.noComments %}  // {{string.translation}}{% endif %}
++ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}:{% call parametersBlock string.types %}; {% if not param.noComments %} // {{string.key}} --> "{{string.translation}}"{% endif %}
 {% else %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}};{% if not param.noComments %} // {{string.key}} --> "{{string.translation}}"{% endif %}
 {% endif %}

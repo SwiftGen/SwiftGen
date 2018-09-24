@@ -1,4 +1,5 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// Template 'objc-string-m' by Eric Slosser
 
 
 #import "Localizable.h"
@@ -15,43 +16,44 @@ NSString* tr(NSString* key, ...) {
     return result;
 };
 
-
-@implementation Localized : NSObject
-+ (NSString*)alertMessage {  
+@implementation Localizable : NSObject
++ (NSString*)alertMessage {
     return tr(@"alert_message"); 
 }
-+ (NSString*)alertTitle {  
++ (NSString*)alertTitle {
     return tr(@"alert_title"); 
 }
-+ (NSString*)objectOwnership:(NSInteger)p1 and:(NSString*)p2 and:(NSString*)p3
-{  
++ (NSString*)objectOwnership:(NSInteger)p1 p1:(NSString*)p2 p2:(NSString*)p3
+{
     return tr(@"ObjectOwnership", p1, p2, p3); 
 }
-+ (NSString*)private:(NSString*)p1 and:(NSInteger)p2
-{  
++ (NSString*)private:(NSString*)p1 p1:(NSInteger)p2
+{
     return tr(@"private", p1, p2); 
 }
 + (NSString*)applesCount:(NSInteger)p1
-{  
+{
     return tr(@"apples.count", p1); 
 }
-+ (NSString*)bananasOwner:(NSInteger)p1 and:(NSString*)p2
-{  
++ (NSString*)bananasOwner:(NSInteger)p1 p1:(NSString*)p2
+{
     return tr(@"bananas.owner", p1, p2); 
 }
-+ (NSString*)settingsNavigationBarSelf {  
++ (NSString*)settingsNavigationBarSelf {
     return tr(@"settings.navigation-bar.self"); 
 }
-+ (NSString*)settingsNavigationBarTitleDeeperThanWeCanHandleNoReallyThisIsDeep {  
++ (NSString*)settingsNavigationBarTitleDeeperThanWeCanHandleNoReallyThisIsDeep {
     return tr(@"settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep"); 
 }
-+ (NSString*)settingsNavigationBarTitleEvenDeeper {  
++ (NSString*)settingsNavigationBarTitleEvenDeeper {
     return tr(@"settings.navigation-bar.title.even.deeper"); 
 }
-+ (NSString*)settingsUserProfileSectionFooterText {  
++ (NSString*)settingsUserProfileSectionFooterText {
     return tr(@"settings.user_profile_section.footer_text"); 
 }
-+ (NSString*)settingsUserProfileSectionHEADERTITLE {  
++ (NSString*)settingsUserProfileSectionHEADERTITLE {
     return tr(@"settings.user_profile_section.HEADER_TITLE"); 
 }
 @end
+
+#pragma clang diagnostic pop

@@ -1,4 +1,5 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// Template 'objc-string-m' by Eric Slosser
 
 {% if tables.count > 0 %}
 
@@ -18,7 +19,7 @@ NSString* tr(NSString* key, ...) {
 
 {% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
-    ({% call paramTranslate type %})p{{ forloop.counter }}{% if not forloop.last %} and:{% endif %}
+    ({% call paramTranslate type %})p{{ forloop.counter }}{% if not forloop.last %} p{{ forloop.counter }}:{% endif %}
   {% endfor %}
 {% endfilter %}{% endmacro %}
 {% macro argumentsBlock types %}{% filter removeNewlines:"leading" %}
@@ -34,33 +35,34 @@ NSString* tr(NSString* key, ...) {
   {% elif swiftType == "Float" %}
     float
   {% else %}
-    FIX_OBJC_STRING_DOT_STENCIL_PLEASE
+    FIX_OBJC_STRING_M_DOT_STENCIL_PLEASE
   {% endif %}
 {% endmacro %}
-{% macro recursiveBlock table item sp %}
+{% macro recursiveTableContents table item sp %}
 {{sp}}  {% for string in item.strings %}
 {{sp}}  {% if string.types %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}:{% call parametersBlock string.types %}
-{  
+{
     return tr(@"{{string.key}}", {% call argumentsBlock string.types %}); {% if not param.noComments %}// {{string.translation}}{% endif %}
 }
 {% else %}
-+ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}} {  
++ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}} {
     return tr(@"{{string.key}}"); {% if not param.noComments %}// {{string.translation}}{% endif %}
 }
 {{sp}}  {% endif %}
 {{sp}}  {% endfor %}
 {{sp}}  {% for child in item.children %}
-{{sp}}  {% call recursiveBlock table child sp %}
+{{sp}}  {% call recursiveTableContents table child sp %}
 {{sp}}  {% endfor %}
 {% endmacro %}
-
-{% set enumName %}{{param.enumName|default:"Localized"}}{% endset %}
-@implementation {{ enumName }} : NSObject
-  {% for table in tables %}
-    {% call recursiveBlock table.name table.levels "  " %}
-  {% endfor %}
+{% for table in tables %}
+        {% set tableName %}{{table.name|default:"Localized"}}{% endset %}
+@implementation {{ tableName }} : NSObject
+        {% call recursiveTableContents table.name table.levels "  " %}
 @end
+
+{% endfor %}
+#pragma clang diagnostic pop
 {% else %}
 // No string found
 {% endif %}
