@@ -12,6 +12,9 @@ Improvements:
 
 # SwiftGenKit 2.0 (SwiftGen 5.0) Migration Guide
 
+<details>
+<summary>Migration Guide</summary>
+
 If you're migrating from SwiftGenKit 1.x to SwiftGenKit 2.0 — which is the case if you are migrating from SwiftGen 4.x to SwiftGen 5.0 — then you should be aware of the following changes in variable names generated in the output context by SwiftGenKit, and adapt your custom templates accordingly to change the name of the variables you use.
 
 ## Changes for template writers
@@ -78,3 +81,5 @@ _📖 see the full context structure [in the documentation here](https://github.
 Previously the parser context generation method (`stencilContext()`) accepted parameters such as `enumName`, this has been removed in favor of the `--param` system.
 
 Templates will automatically receive a `param` object with parameters from the CLI invocation, and should provide default values in case no value was present in the invocation.
+
+</details>

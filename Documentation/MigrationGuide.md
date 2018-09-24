@@ -17,11 +17,19 @@ Improvements:
 
 # SwiftGen 5.1 Migration Guide
 
+<details>
+<summary>Migration Guide</summary>
+
 ## Template functionality changes
 
 Only a small change in the generated code that'll affect a tiny subset of users: the `allValues` variable has been deprecated. See the [templates Migration Guide](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/Templates/MigrationGuide.md#functionality-changes-in-21-swiftgen-51) for more information.
 
+</details>
+
 # SwiftGen 5.0 Migration Guide
+
+<details>
+<summary>Migration Guide</summary>
 
 If you're migrating from SwiftGen 4.x to SwiftGen 5.0, there might be some migration steps you'll need to use.
 
@@ -97,3 +105,5 @@ These are just a few of the changes to the structure of the variables passed by 
 ### Some SwiftGen-specific Stencil filters evolved
 
 Also, a few dedicated Stencil filters provided by SwiftGen (via StencilSwiftKit) have been renamed. Especially the `join` and `snakeToCamelCase` filters now take a parameter. See [StencilSwiftKit's own Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/master/Documentation/MigrationGuide.md#stencilswiftkit-20-swiftgen-50) for more info.
+
+</details>
