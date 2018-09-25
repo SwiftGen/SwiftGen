@@ -32,6 +32,9 @@
 * Strings: the parser now correctly handles formats such as `% d` and `%#x`.  
   [David Jennes](https://github.com/djbe)
   [#502](https://github.com/SwiftGen/SwiftGen/pull/502)
+* Strings: ensure strings without arguments are not processed using `String(format:)`.  
+  [David Jennes](https://github.com/djbe)
+  [#503](https://github.com/SwiftGen/SwiftGen/pull/503)
 
 ### Breaking Changes
 
