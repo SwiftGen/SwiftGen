@@ -138,7 +138,7 @@ class ConfigReadTests: XCTestCase {
     let badConfigs = [
       "config-missing-paths": "Missing entry for key strings.inputs.",
       "config-missing-template": """
-        You must specify a template name (-t) or path (-p).
+        You must specify a template by name (templateName) or path (templatePath).
 
         To list all the available named templates, use 'swiftgen templates list'.
         """,
