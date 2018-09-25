@@ -29,6 +29,9 @@
   [David Jennes](https://github.com/djbe)
   [#435](https://github.com/SwiftGen/SwiftGen/issues/435)
   [#485](https://github.com/SwiftGen/SwiftGen/pull/485)
+* Strings: the parser now correctly handles formats such as `% d` and `%#x`.  
+  [David Jennes](https://github.com/djbe)
+  [#502](https://github.com/SwiftGen/SwiftGen/pull/502)
 
 ### Breaking Changes
 

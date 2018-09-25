@@ -49,7 +49,7 @@ extension Strings.PlaceholderType {
     // like in "%3$" to make positional specifiers
     let position = "([1-9]\\d*\\$)?"
     // precision like in "%1.2f"
-    let precision = "[-+]?\\d?(?:\\.\\d)?"
+    let precision = "[-+# 0]?\\d?(?:\\.\\d)?"
 
     do {
       return try NSRegularExpression(
