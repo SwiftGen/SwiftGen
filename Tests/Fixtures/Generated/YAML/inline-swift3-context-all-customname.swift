@@ -21,16 +21,16 @@ internal enum CustomYAML {
     internal static let items: [String] = ["value1", "value2"]
   }
   internal enum Json {
+    internal static let key1: String = "value1"
     internal static let key2: String = "2"
     internal static let key3: [String: Any] = ["nestedKey3": ["1", "2", "3"]]
     internal static let key4: Any? = nil
-    internal static let key1: String = "value1"
   }
   internal enum Mapping {
+    internal static let key1: String = "value1"
     internal static let key2: Double = 1.0
     internal static let key3: [String: Any] = ["nestedKey1": "nestedValue1", "nestedKey2": "nestedValue2"]
     internal static let key4: Any? = nil
-    internal static let key1: String = "value1"
   }
   internal enum Scalar {
     internal static let value: String = "value1"

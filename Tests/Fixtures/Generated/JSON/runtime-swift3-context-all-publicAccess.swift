@@ -22,17 +22,17 @@ public enum JSONFiles {
   }
   public enum Json {
     private static let _document = JSONDocument(path: "json.json")
+    public static let key1: String = _document["key1"]
     public static let key2: String = _document["key2"]
     public static let key3: [String: Any] = _document["key3"]
     public static let key4: Any? = _document["key4"]
-    public static let key1: String = _document["key1"]
   }
   public enum Mapping {
     private static let _document = JSONDocument(path: "mapping.yaml")
+    public static let key1: String = _document["key1"]
     public static let key2: Double = _document["key2"]
     public static let key3: [String: Any] = _document["key3"]
     public static let key4: Any? = _document["key4"]
-    public static let key1: String = _document["key1"]
   }
   public enum Scalar {
     public static let value: String = objectFromJSON(at: "scalar.yaml")
