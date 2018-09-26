@@ -106,14 +106,15 @@
   [David Jennes](https://github.com/djbe)
   [#402](https://github.com/SwiftGen/SwiftGen/pull/402)
   [#476](https://github.com/SwiftGen/SwiftGen/pull/476)
-* Updated to latest Xcode (10.0.0).  
+* Updated to latest Xcode (10.0.0) and Swift 4.2.  
   [David Jennes](https://github.com/djbe) 
   [#415](https://github.com/SwiftGen/SwiftGen/pull/415)
   [#498](https://github.com/SwiftGen/SwiftGen/pull/498)
-* Update to Stencil 0.12.1, and use some of it's new filters in our templates.  
+* Update to Stencil 0.13.0, and use some of it's new filters in our templates.  
   [David Jennes](https://github.com/djbe) 
   [#416](https://github.com/SwiftGen/SwiftGen/pull/416)
   [#475](https://github.com/SwiftGen/SwiftGen/pull/475)
+  [#498](https://github.com/SwiftGen/SwiftGen/pull/498)
 * Store testing contexts as YAML files instead of PLISTs.  
   [David Jennes](https://github.com/djbe) 
   [#418](https://github.com/SwiftGen/SwiftGen/pull/418)
