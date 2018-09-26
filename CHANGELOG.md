@@ -4,6 +4,10 @@
 
 ## Master
 
+⚠️ This major version is a big milestone in which a lot of refactoring and cleaning has been done. Many features added over previous releases have been reworked and unified, while also preparing SwiftGen for future additions. This means that you'll need to adapt your configuration files (or command line invocations) and custom templates to work with this new major version.
+
+Read the [SwiftGen 6.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/MigrationGuide.md#swiftgen-60-migration-guide) for a list of changes you'll need to apply.
+
 ### Bug Fixes
 
 * Fix memory leak in generated code for Fonts.  

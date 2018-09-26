@@ -87,6 +87,10 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
 The templates now handle the "Inherit module from target" setting in Interface Builder, so you may no longer need to set the `module: ...` parameter anymore if you have multiple targets.
 
+### Strings
+
+A thing of note for some users is that the SwiftGen parser no longer consolidates keys with different casing. This may affect you if you have `strings` files with inconsistent keys. See the [contexts Migration Guide](../SwiftGen Contexts.md#swiftgen-60-migration-guide) for more information.
+
 ### XCAssets
 
 All groups (folders) are no longer namespaced by default. A group will now only be namespaced if you've enabled the corresponding "provides namespace" for that group in Xcode. To enable the old behaviour again, use the `forceProvidesNamespaces` parameter in your config file.

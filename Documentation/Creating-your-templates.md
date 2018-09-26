@@ -8,7 +8,7 @@ When you invoke SwiftGen, you can specify templates by name or by path.
 
 ### Using a full path
 
-If you use the `templatePath` configuration option, you'll need to specify the **relative path** to the template you want to use. This allows you to store your templates anywhere you want and name them anyhow you want, but can become quite annoying to type.
+If you use the `templatePath` configuration option, you'll need to specify the **relative path** to the template you want to use. This allows you to store your templates anywhere you want (typically in the same folder or git repository of the project in need of those custom templates).
 
 ### Using a name
 

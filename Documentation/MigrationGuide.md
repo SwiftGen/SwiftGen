@@ -2,11 +2,11 @@
 
 If you're migrating from SwiftGen 5.x to SwiftGen 6.0, there might be some migration steps you'll need to use.
 
-Below is a list of pointers to help you migrate to the new SwiftGen 6.0
+Below is a list of pointers to help you migrate to the new SwiftGen 6.0.
 
 ## `storyboards` command has been renamed
 
-The `storyboards` subcommand has been renamed `ib` (for Interface Builder). The new command `ib` will be able to parse `.xib` files in addition to `.storyboard` files in a future version (hence its new name).
+The `storyboards` subcommand has been renamed `ib`, for Interface Builder. This renaming was necessary to prepare for an upcoming feature of being able to parse `XIB` files too in a future release of SwiftGen.
 You should replace invocations in your config files with the new `ib` command name, or command line invocations of `swiftgen storyboards …` with `swiftgen ib …`.
 
 ❗️ See below: the bundled `storyboards` templates have been split up into one for scenes and one for segues.
@@ -23,7 +23,9 @@ The biggest change is that the `storyboards` (`ib`) templates have been split up
 
 ## Commands can have multiple outputs
 
-This is only available for users with a configuration file, not via command line invocation. For each command you can now have a list of `outputs`, each output with a template name (`templateName`) or path (`templatePath`), an output file to generate (`output`), and an optional list of parameters (`params`). For example:
+This is only available for users with a configuration file, not via command line invocation of a dedicated subcommand. For each command you can now have a list of `outputs`, each output with a template name (`templateName`) or path (`templatePath`), an output file to generate (`output`), and an optional list of parameters (`params`).
+
+This allows you to generate multiple different outputs for the same input (for example both scenes and segues of storyboards, or both `.h` and `.m` for and Objective-C template, or both Swift code constants and html code for your documentation, …). For example:
 
 ```yaml
 ib:
@@ -79,7 +81,7 @@ ib:
 
 ## New Features
 
-We've added many new features to SwiftGen since our last release.
+We've added many new features to SwiftGen since our last release, below are the most significant ones.
 
 ### Mint installation
 
