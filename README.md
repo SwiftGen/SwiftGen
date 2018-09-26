@@ -154,9 +154,11 @@ Or add the path to the `bin` folder to your `$PATH` and invoke `swiftgen` direct
 
 > ❗️ If you're migrating from older SwiftGen versions, don't forget to [read the Migration Guide](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/MigrationGuide.md).
 
-The tool is provided as a unique `swiftgen` binary command-line that accepts a configuration file, through which subcommands are invoked to parse various resources types and generate code.
+SwiftGen is provided as a single command-line tool which uses a configuration file to run various actions (subcommands).
 
-Simply create a `swiftgen.yml` YAML file to list all the subcommands to invoke, and for each subcommand, the list of arguments to pass to it. For example:
+Each action described in the configuration file (`strings`, `fonts`, `ib`, …) typically corresponds to a type of input resources to parse (strings files, IB files, Font files, JSON files, …), allowing you to generate constants for each types of those input files.
+
+To use SwiftGen, simply create a `swiftgen.yml` YAML file to list all the subcommands to invoke, and for each subcommand, the list of arguments to pass to it. For example:
 
 ```yaml
 strings:
@@ -177,15 +179,19 @@ Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for 
 
 To learn more about the configuration file — its more detailed syntax and possibilities, how to pass custom parameters, using `swiftgen config lint` to validate it, how to use alternate config files, and other tips — [see the dedicated documentation](Documentation/ConfigFile.md).
 
-There are also more subcommands not related to generating code but more oriented for help and other tasks, namely:
+To learn more about the configuration file — its more detailed syntax and possibilities, how to pass custom parameters, to lint/validate it, how to use alternate config files, and other tips — [see the dedicated documentation](Documentation/ConfigFile.md).
 
+There are also additional subcommands you can invoke from the command line to manage and configure SwiftGen:
+
+* The  `swiftgen config` subcommand to help you with the configuration file, especially `swiftgen config lint` to validate that your Config file is valid and has no errors
 * The `swiftgen templates` subcommands helps you print, duplicate, find and manage templates (both bundled and custom)
-* You can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
 
+Lastly, you can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
 
-### Directly invoking a subcommand
+<details>
+<summary><strong>Directly invoking a subcommand</strong></summary>
 
-While we no longer recommend it for performance reasons (if you have multiple outputs), you may prefer to not use a configuration file. You can directly invoke the available subcommands to parse various resource types:
+While we highly recommend the use a configuration file for performance reasons (especially if you have multiple outputs, but also because it's more flexible), it's also possible to directly invoke the available subcommands to parse various resource types:
 
 * `swiftgen colors [OPTIONS] FILE1 …`
 * `swiftgen fonts [OPTIONS] DIR1 …`
@@ -196,6 +202,8 @@ While we no longer recommend it for performance reasons (if you have multiple ou
 * `swiftgen xcassets [OPTIONS] CATALOG1 …`
 * `swiftgen yaml [OPTIONS] DIRORFILE1 …`
 
+One rare cases where this might be useful — as opposed to using a config file — is if you are working on a custom template and want to quickly test the specific subcommand you're working on at each iteration/version of your custom template, until you're happy with it.
+
 Each subcommand generally accepts the same options and syntax, and they mirror the options and parameters from the configuration file:
 
 * `--output FILE` or `-o FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
@@ -205,6 +213,7 @@ Each subcommand generally accepts the same options and syntax, and they mirror t
 * Each command supports multiple input files (or directories where applicable).
 * You can always use the `--help` flag to see what options a command accept, e.g. `swiftgen xcassets --help`.
 
+</details>
 
 ## Choosing your template
 
@@ -227,7 +236,7 @@ As explained above, you can use `swiftgen templates list` to list all templates 
 * Other variants, like `flat-swift3/4` and `structured-swift3/4` templates for Strings, etc.
 
 You can **find the documentation for each bundled template [here in the repo](./Documentation/templates)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
-Each MarkDown file documents the Swift Version it's aimed for, the use case for that template (in which cases you might favor that template over others), the available parameters to customize it on invocation, and some code examples.
+Each MarkDown file documents the Swift Version it's aimed for, the use case for that template (in which cases you might favor that template over others), the available parameters to customize it on invocation (using the `params:` key in your config file), and some code examples.
 
 > Don't hesitate to make PRs to share your improvements suggestions on the bundled templates 😉
 
@@ -264,6 +273,7 @@ xcassets:
   inputs: /dir/to/search/for/imageset/assets
   outputs:
     templateName: swift4
+    output: Assets.swift
 ```
 
 This will generate an `enum Asset` with one `case` per image set in your assets catalog, so that you can use them as constants.
@@ -302,6 +312,7 @@ colors:
   inputs: /path/to/colors-file.txt
   outputs:
     templateName: swift4
+    output: Colors.swift
 ```
 
 This will generate a `enum ColorName` with one `case` per color listed in the text file passed as argument.
@@ -320,6 +331,7 @@ colors:
   inputs: ~/Library/Colors/MyColors.clr
   outputs:
     templateName: swift4
+    output: Colors.swift
 ```
 
 Generated code will look the same as if you'd use text file.
@@ -377,6 +389,7 @@ fonts:
   inputs: /path/to/font/dir
   outputs:
     templateName: swift4
+    output: Fonts.swift
 ```
 
 This will recursively go through the specified directory, finding any typeface files (TTF, OTF, …), defining a `struct FontFamily` for each family, and an enum nested under that family that will represent the font styles.
@@ -415,7 +428,9 @@ ib:
   inputs: /dir/to/search/for/storyboards
   outputs:
     - templateName: scenes-swift4
+      output: Storyboard Scenes.swift
     - templateName: segues-swift4
+      output: Storyboard Segues.swift
 ```
 
 This will generate an `enum` for each of your `NSStoryboard`/`UIStoryboard`, with respectively one `case` per storyboard scene or segue.
@@ -484,10 +499,12 @@ json:
   inputs: /path/to/json/dir-or-file
   outputs:
     templateName: runtime-swift4
+    output: JSON.swift
 yaml:
   inputs: /path/to/yaml/dir-or-file
   outputs:
     templateName: inline-swift4
+    output: YAML.swift
 ```
 
 This will parse the given file, or when given a directory, recursively search for JSON and YAML files. It will define an `enum` for each file (and documents in a file where needed), and type-safe constants for the content of the file.
@@ -529,6 +546,7 @@ plist:
   inputs: /path/to/plist/dir-or-file
   outputs:
     templateName: runtime-swift4
+    output: Plist.swift
 ```
 
 This will parse the given file, or when given a directory, recursively search for Plist files. It will define an `enum` for each file (and documents in a file where needed), and type-safe constants for the content of the file.
@@ -569,6 +587,7 @@ fonts:
   inputs: /path/to/Localizable.strings
   outputs:
     templateName: structured-swift4
+    output: Strings.swift
 ```
 
 This will generate a Swift `enum L10n` that will map all your `Localizable.strings` (or other tables) keys to an `enum case`. Additionaly, if it detects placeholders like `%@`,`%d`,`%f`, it will add associated values to that `case`. Note that all dots within the key are converted to dots in code.

@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | plist/inline-swift4.stencil |
-| Configuration example | <pre>plist:<br />  inputs: path/to/plist/dir-or-file<br />  outputs:<br />    templateName: inline-swift4</pre> |
+| Configuration example | <pre>plist:<br />  inputs: path/to/plist/dir-or-file<br />  outputs:<br />    templateName: inline-swift4<br />    output: Plist.swift</pre> |
 | Language | Swift 4 |
 | Author | David Jennes |
 

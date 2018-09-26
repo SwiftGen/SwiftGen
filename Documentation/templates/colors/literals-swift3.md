@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | colors/literals-swift3.stencil |
-| Configuration example | <pre>colors:<br />  inputs: path/to/colors-file.txt<br />  outputs:<br />    templateName: literals-swift3</pre> |
+| Configuration example | <pre>colors:<br />  inputs: path/to/colors-file.txt<br />  outputs:<br />    templateName: literals-swift3<br />    output: Colors.swift</pre> |
 | Language | Swift 3 |
 | Author | Olivier Halligon |
 

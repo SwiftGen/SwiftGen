@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | plist/runtime-swift3.stencil |
-| Configuration example | <pre>plist:<br />  inputs: path/to/plist/dir-or-file<br />  outputs:<br />    templateName: runtime-swift3</pre> |
+| Configuration example | <pre>plist:<br />  inputs: path/to/plist/dir-or-file<br />  outputs:<br />    templateName: runtime-swift3<br />    output: Plist.swift</pre> |
 | Language | Swift 3 |
 | Author | David Jennes |
 

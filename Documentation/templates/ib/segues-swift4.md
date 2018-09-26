@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | ib/segues-swift4.stencil |
-| Configuration example | <pre>ib:<br />  inputs: dir/to/search/for/storyboards<br />  outputs:<br />    templateName: segues-swift4</pre> |
+| Configuration example | <pre>ib:<br />  inputs: dir/to/search/for/storyboards<br />  outputs:<br />    templateName: segues-swift4<br />    output: Storyboard Segues.swift</pre> |
 | Language | Swift 4 |
 | Author | Olivier Halligon |
 

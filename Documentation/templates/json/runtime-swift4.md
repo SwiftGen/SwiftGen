@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | json/runtime-swift4.stencil |
-| Configuration example | <pre>json:<br />  inputs: path/to/json/dir-or-file<br />  outputs:<br />    templateName: runtime-swift4</pre> |
+| Configuration example | <pre>json:<br />  inputs: path/to/json/dir-or-file<br />  outputs:<br />    templateName: runtime-swift4<br />    output: JSON.swift</pre> |
 | Language | Swift 4 |
 | Author | David Jennes |
 

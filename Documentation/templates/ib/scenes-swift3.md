@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | ib/scenes-swift3.stencil |
-| Configuration example | <pre>ib:<br />  inputs: dir/to/search/for/storyboards<br />  outputs:<br />    templateName: scenes-swift3</pre> |
+| Configuration example | <pre>ib:<br />  inputs: dir/to/search/for/storyboards<br />  outputs:<br />    templateName: scenes-swift3<br />    output: Storyboard Scenes.swift</pre> |
 | Language | Swift 3 |
 | Author | Olivier Halligon |
 

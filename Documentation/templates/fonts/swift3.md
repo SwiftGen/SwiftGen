@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | fonts/swift3.stencil |
-| Configuration example | <pre>fonts:<br />  inputs: path/to/font/dir<br />  outputs:<br />    templateName: swift3</pre> |
+| Configuration example | <pre>fonts:<br />  inputs: path/to/font/dir<br />  outputs:<br />    templateName: swift3<br />    output: Fonts.swift</pre> |
 | Language | Swift 3 |
 | Author | Olivier Halligon |
 

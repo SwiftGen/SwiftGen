@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | colors/swift4.stencil |
-| Configuration example | <pre>colors:<br />  inputs: path/to/colors-file.txt<br />  outputs:<br />    templateName: swift4</pre> |
+| Configuration example | <pre>colors:<br />  inputs: path/to/colors-file.txt<br />  outputs:<br />    templateName: swift4<br />    output: Colors.swift</pre> |
 | Language | Swift 4 |
 | Author | Olivier Halligon |
 

@@ -8,11 +8,11 @@ When you invoke SwiftGen, you can specify templates by name or by path.
 
 ### Using a full path
 
-If you use the `templatePath` configuration option, you'll need to specify the **full path** to the template you want to use. This allows you to store your templates anywhere you want and name them anyhow you want, but can become quite annoying to type.
+If you use the `templatePath` configuration option, you'll need to specify the **relative path** to the template you want to use. This allows you to store your templates anywhere you want and name them anyhow you want, but can become quite annoying to type.
 
 ### Using a name
 
-When you use the `templateName` configuration option, you only specify a **template name**. SwiftGen then searches a matching template using the following rules (where `<subcommand>` is one of `colors`, `ib`, `json`, `plist`, `strings`, `xcassets` or `yaml` depending on the subcommand you invoke):
+When you use the `templateName` configuration option, you only specify a **template name**. SwiftGen then searches a matching template using the following rules (where `<subcommand>` is one of `colors`, `ib`, `json`, `plist`, `strings`, `xcassets`, … depending on the subcommand you invoke):
 
 * It searches for a file named `<name>.stencil` in `~/Library/Application Support/SwiftGen/templates/<subcommand>/`, which is supposed to contain your own custom templates for that particular subcommand.
 * If it does not find one, it searches for a file named `<name>.stencil` in `<installdir>/share/swiftgen/templates/<subcommand>` which contains the templates bundled with SwiftGen for that particular subcommand.
@@ -72,14 +72,14 @@ yaml:
 
 ## Printing a template, creating a new template
 
-You can use the `swiftgen templates cat <subcommand> <templatename>` command to print the template of that given name for that given subcommand to `stdout`. e.g. `swiftgen templates cat fonts swift3` will print to your terminal the template that would be used if you invoke `fonts` with `template: swift3`.
+You can use the `swiftgen templates cat <subcommand> <templatename>` command to print the template of that given name for that given subcommand to `stdout`. e.g. `swiftgen templates cat fonts swift4` will print to your terminal the template that would be used if you invoke `fonts` with `template: swift4`.
 
 You can use this feature to easily create a new template from an existing one.
 In particular, the easiest way to create your own templates is to:
 
-* duplicate an existing template by dumping it into a new file like this: `swiftgen templates cat fonts swift3 >my-custom-fonts-template.stencil`
+* duplicate an existing template by dumping it into a new file like this: `swiftgen templates cat fonts swift4 >my-custom-fonts-template.stencil`
 * then edit the new `my-custom-fonts-template.stencil` file to make your modifications to that template
-* Once you've done this you can then simply use `templatePath: my-custom-fonts-template.stencil` to use you customized template!
+* Once you've done this you can then simply use `templatePath: my-custom-fonts-template.stencil` in your configuration file to use you customized template!
 
 ## Templates Format, Nodes and Filters
 

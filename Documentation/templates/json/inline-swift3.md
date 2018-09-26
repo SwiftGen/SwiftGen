@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | json/inline-swift3.stencil |
-| Configuration example | <pre>json:<br />  inputs: path/to/json/dir-or-file<br />  outputs:<br />    templateName: inline-swift3</pre> |
+| Configuration example | <pre>json:<br />  inputs: path/to/json/dir-or-file<br />  outputs:<br />    templateName: inline-swift3<br />    output: JSON.swift</pre> |
 | Language | Swift 3 |
 | Author | David Jennes |
 

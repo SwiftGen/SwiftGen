@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | yaml/inline-swift3.stencil |
-| Configuration example | <pre>yaml:<br />  inputs: path/to/yaml/dir-or-file<br />  outputs:<br />    templateName: swift3</pre> |
+| Configuration example | <pre>yaml:<br />  inputs: path/to/yaml/dir-or-file<br />  outputs:<br />    templateName: swift3<br />    output: YAML.swift</pre> |
 | Language | Swift 3 |
 | Author | David Jennes |
 

@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | strings/structured-swift4.stencil |
-| Configuration example | <pre>strings:<br />  inputs: path/to/Localizable.strings<br />  outputs:<br />    templateName: structured-swift4</pre> |
+| Configuration example | <pre>strings:<br />  inputs: path/to/Localizable.strings<br />  outputs:<br />    templateName: structured-swift4<br />    output: Strings.swift</pre> |
 | Language | Swift 4 |
 | Author | Olivier Halligon |
 

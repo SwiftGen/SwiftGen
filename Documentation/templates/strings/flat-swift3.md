@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | strings/flat-swift3.stencil |
-| Configuration example | <pre>strings:<br />  inputs: path/to/Localizable.strings<br />  outputs:<br />    templateName: flat-swift3</pre> |
+| Configuration example | <pre>strings:<br />  inputs: path/to/Localizable.strings<br />  outputs:<br />    templateName: flat-swift3<br />    output: Strings.swift</pre> |
 | Language | Swift 3 |
 | Author | Olivier Halligon |
 

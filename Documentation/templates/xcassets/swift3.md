@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | xcassets/swift3.stencil |
-| Configuration example | <pre>xcassets:<br />  inputs: dir/to/search/for/imageset/assets<br />  outputs:<br />    templateName: swift3</pre> |
+| Configuration example | <pre>xcassets:<br />  inputs: dir/to/search/for/imageset/assets<br />  outputs:<br />    templateName: swift3<br />    output: Assets.swift</pre> |
 | Language | Swift 3 |
 | Author | Olivier Halligon |
 

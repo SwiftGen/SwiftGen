@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | yaml/inline-swift4.stencil |
-| Configuration example | <pre>yaml:<br />  inputs: path/to/yaml/dir-or-file<br />  outputs:<br />    templateName: swift4</pre> |
+| Configuration example | <pre>yaml:<br />  inputs: path/to/yaml/dir-or-file<br />  outputs:<br />    templateName: swift4<br />    output: YAML.swift</pre> |
 | Language | Swift 4 |
 | Author | David Jennes |
 
