@@ -76,12 +76,13 @@ files:
   path: "Info.plist"
 - documents:
   - data:
-    - "value1"
-    - "value2"
+    - "Eggs"
+    - "Bread"
+    - "Milk"
     metadata:
       element:
         type: "String"
       type: "Array"
-  name: "array"
-  path: "array.plist"
+  name: "shopping-list"
+  path: "shopping-list.plist"
 ```

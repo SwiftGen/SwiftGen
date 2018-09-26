@@ -37,12 +37,14 @@ internal enum YAMLFiles {
       internal static let items: [String] = ["Chicago Cubs", "St Louis Cardinals"]
     }
   }
-  internal enum Mapping {
-    internal static let key2: [String: Any] = ["nestedKey2": "nestedValue2"]
-    internal static let key1: String = "value1"
-  }
   internal enum GroceryList {
-    internal static let items: [String] = ["value1", "value2"]
+    internal static let items: [String] = ["Eggs", "Bread", "Milk"]
+  }
+  internal enum Mapping {
+    internal static let car: Any? = nil
+    internal static let foo: [String: Any] = ["bar": "banana", "baz": "orange"]
+    internal static let hello: String = "world"
+    internal static let weight: Double = 33.3
   }
 }
 ```
@@ -53,7 +55,7 @@ internal enum YAMLFiles {
 
 ```swift
 // This will be an dictionary
-let foo = JSONFiles.Mapping.key2
+let foo = JSONFiles.Mapping.foo
 
 // This will be an [String]
 let bar = JSONFiles.GroceryList.items

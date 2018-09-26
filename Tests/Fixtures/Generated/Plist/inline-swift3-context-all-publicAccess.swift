@@ -40,12 +40,12 @@ public enum PlistFiles {
     public static let userFloat: Double = 3.14
     public static let userInteger: Int = 5
   }
-  public enum Array {
-    public static let items: [String] = ["value1", "value2"]
+  public enum Configuration {
+    public static let environment: String = "development"
+    public static let options: [String: Any] = ["Animation Style": "Party Mode"]
   }
-  public enum Dictionary {
-    public static let key1: String = "value1"
-    public static let key2: [String: Any] = ["nestedKey2": "nestedValue2"]
+  public enum ShoppingList {
+    public static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
 }
 // swiftlint:enable identifier_name line_length number_separator type_body_length

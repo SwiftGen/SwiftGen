@@ -40,12 +40,12 @@ internal enum CustomPlist {
     internal static let userFloat: Double = 3.14
     internal static let userInteger: Int = 5
   }
-  internal enum Array {
-    internal static let items: [String] = ["value1", "value2"]
+  internal enum Configuration {
+    internal static let environment: String = "development"
+    internal static let options: [String: Any] = ["Animation Style": "Party Mode"]
   }
-  internal enum Dictionary {
-    internal static let key1: String = "value1"
-    internal static let key2: [String: Any] = ["nestedKey2": "nestedValue2"]
+  internal enum ShoppingList {
+    internal static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
 }
 // swiftlint:enable identifier_name line_length number_separator type_body_length

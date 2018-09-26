@@ -51,27 +51,30 @@ files:
   path: "documents.yaml"
 - documents:
   - data:
-      key1: "value1"
-      key2: "2"
-      key3:
-        nestedKey3:
+      api-version: "2"
+      country: null
+      environment: "staging"
+      options:
+        screen-order:
         - "1"
         - "2"
         - "3"
     metadata:
       properties:
-        key1:
+        api-version:
           type: "String"
-        key2:
+        country:
+          type: "Optional"
+        environment:
           type: "String"
-        key3:
+        options:
           properties:
-            nestedKey3:
+            screen-order:
               element:
                 type: "String"
               type: "Array"
           type: "Dictionary"
       type: "Dictionary"
-  name: "json"
-  path: "json.json"
+  name: "configuration"
+  path: "configuration.json"
 ```

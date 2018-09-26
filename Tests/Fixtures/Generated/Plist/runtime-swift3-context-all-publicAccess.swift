@@ -41,13 +41,13 @@ public enum PlistFiles {
     public static let userFloat: Double = _document["User Float"]
     public static let userInteger: Int = _document["User Integer"]
   }
-  public enum Array {
-    public static let items: [String] = arrayFromPlist(at: "array.plist")
+  public enum Configuration {
+    private static let _document = PlistDocument(path: "configuration.plist")
+    public static let environment: String = _document["Environment"]
+    public static let options: [String: Any] = _document["Options"]
   }
-  public enum Dictionary {
-    private static let _document = PlistDocument(path: "dictionary.plist")
-    public static let key1: String = _document["key1"]
-    public static let key2: [String: Any] = _document["key2"]
+  public enum ShoppingList {
+    public static let items: [String] = arrayFromPlist(at: "shopping-list.plist")
   }
 }
 // swiftlint:enable identifier_name line_length type_body_length

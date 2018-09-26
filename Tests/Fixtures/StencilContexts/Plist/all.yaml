@@ -135,28 +135,29 @@ files:
   path: "Info.plist"
 - documents:
   - data:
-    - "value1"
-    - "value2"
+      Environment: "development"
+      Options:
+        Animation Style: "Party Mode"
+    metadata:
+      properties:
+        Environment:
+          type: "String"
+        Options:
+          properties:
+            Animation Style:
+              type: "String"
+          type: "Dictionary"
+      type: "Dictionary"
+  name: "configuration"
+  path: "configuration.plist"
+- documents:
+  - data:
+    - "Eggs"
+    - "Bread"
+    - "Milk"
     metadata:
       element:
         type: "String"
       type: "Array"
-  name: "array"
-  path: "array.plist"
-- documents:
-  - data:
-      key1: "value1"
-      key2:
-        nestedKey2: "nestedValue2"
-    metadata:
-      properties:
-        key1:
-          type: "String"
-        key2:
-          properties:
-            nestedKey2:
-              type: "String"
-          type: "Dictionary"
-      type: "Dictionary"
-  name: "dictionary"
-  path: "dictionary.plist"
+  name: "shopping-list"
+  path: "shopping-list.plist"

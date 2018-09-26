@@ -2,12 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>key1</key>
-	<string>value1</string>
-	<key>key2</key>
+	<key>Environment</key>
+	<string>development</string>
+	<key>Options</key>
 	<dict>
-		<key>nestedKey2</key>
-		<string>nestedValue2</string>
+		<key>Animation Style</key>
+		<string>Party Mode</string>
 	</dict>
 </dict>
 </plist>

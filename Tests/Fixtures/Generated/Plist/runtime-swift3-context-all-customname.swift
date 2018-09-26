@@ -41,13 +41,13 @@ internal enum CustomPlist {
     internal static let userFloat: Double = _document["User Float"]
     internal static let userInteger: Int = _document["User Integer"]
   }
-  internal enum Array {
-    internal static let items: [String] = arrayFromPlist(at: "array.plist")
+  internal enum Configuration {
+    private static let _document = PlistDocument(path: "configuration.plist")
+    internal static let environment: String = _document["Environment"]
+    internal static let options: [String: Any] = _document["Options"]
   }
-  internal enum Dictionary {
-    private static let _document = PlistDocument(path: "dictionary.plist")
-    internal static let key1: String = _document["key1"]
-    internal static let key2: [String: Any] = _document["key2"]
+  internal enum ShoppingList {
+    internal static let items: [String] = arrayFromPlist(at: "shopping-list.plist")
   }
 }
 // swiftlint:enable identifier_name line_length type_body_length
