@@ -89,6 +89,7 @@
   [#288](https://github.com/SwiftGen/SwiftGen/pull/288)
   [#188](https://github.com/SwiftGen/SwiftGen/pull/188)
   [#493](https://github.com/SwiftGen/SwiftGen/pull/493)
+  [#504](https://github.com/SwiftGen/SwiftGen/pull/504)
 * Updated the playgrounds with the new `json`, `plist` and `yaml` commands, and updated the other pages to reflect the template changes.  
   [David Jennes](https://github.com/djbe)
   [#495](https://github.com/SwiftGen/SwiftGen/pull/495)
