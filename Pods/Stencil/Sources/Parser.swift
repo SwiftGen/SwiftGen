@@ -40,8 +40,7 @@ public class TokenParser {
       case .text(let text, _):
         nodes.append(TextNode(text: text))
       case .variable:
-        let filter = try compileResolvable(token.contents, containedIn: token)
-        nodes.append(VariableNode(variable: filter, token: token))
+        try nodes.append(VariableNode.parse(self, token: token))
       case .block:
         if let parse_until = parse_until , parse_until(self, token) {
           prependToken(token)
@@ -98,7 +97,10 @@ public class TokenParser {
     if suggestedFilters.isEmpty {
       throw TemplateSyntaxError("Unknown filter '\(name)'.")
     } else {
-      throw TemplateSyntaxError("Unknown filter '\(name)'. Found similar filters: \(suggestedFilters.map({ "'\($0)'" }).joined(separator: ", ")).")
+      throw TemplateSyntaxError("""
+        Unknown filter '\(name)'. \
+        Found similar filters: \(suggestedFilters.map({ "'\($0)'" }).joined(separator: ", ")).
+        """)
     }
   }
 
@@ -108,7 +110,7 @@ public class TokenParser {
     let filtersWithDistance = allFilters
                 .map({ (filterName: $0, distance: $0.levenshteinDistance(name)) })
                 // do not suggest filters which names are shorter than the distance
-                .filter({ $0.filterName.characters.count > $0.distance })
+                .filter({ $0.filterName.count > $0.distance })
     guard let minDistance = filtersWithDistance.min(by: { $0.distance < $1.distance })?.distance else {
       return []
     }
@@ -125,9 +127,9 @@ public class TokenParser {
       }
       // find offset of filter in the containing token so that only filter is highligted, not the whole token
       if let filterTokenRange = containingToken.contents.range(of: filterToken) {
-        var rangeLine = containingToken.sourceMap.line
-        rangeLine.offset += containingToken.contents.distance(from: containingToken.contents.startIndex, to: filterTokenRange.lowerBound)
-        syntaxError.token = .variable(value: filterToken, at: SourceMap(filename: containingToken.sourceMap.filename, line: rangeLine))
+        var location = containingToken.sourceMap.location
+        location.lineOffset += containingToken.contents.distance(from: containingToken.contents.startIndex, to: filterTokenRange.lowerBound)
+        syntaxError.token = .variable(value: filterToken, at: SourceMap(filename: containingToken.sourceMap.filename, location: location))
       } else {
         syntaxError.token = containingToken
       }
@@ -167,10 +169,10 @@ extension String {
     // initialize v0 (the previous row of distances)
     // this row is A[0][i]: edit distance for an empty s
     // the distance is just the number of characters to delete from t
-    last = [Int](0...target.characters.count)
-    current = [Int](repeating: 0, count: target.characters.count + 1)
+    last = [Int](0...target.count)
+    current = [Int](repeating: 0, count: target.count + 1)
 
-    for i in 0..<self.characters.count {
+    for i in 0..<self.count {
       // calculate v1 (current row distances) from the previous row v0
 
       // first element of v1 is A[i+1][0]
@@ -178,7 +180,7 @@ extension String {
       current[0] = i + 1
 
       // use formula to fill in the rest of the row
-      for j in 0..<target.characters.count {
+      for j in 0..<target.count {
         current[j+1] = Swift.min(
           last[j+1] + 1,
           current[j] + 1,
@@ -190,7 +192,7 @@ extension String {
       last = current
     }
 
-    return current[target.characters.count]
+    return current[target.count]
   }
 
 }

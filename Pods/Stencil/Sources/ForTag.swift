@@ -23,7 +23,7 @@ class ForNode : NodeType {
       throw TemplateSyntaxError("'for' statements should use the syntax: `for <x> in <y> [where <condition>]`.")
     }
 
-    let loopVariables = components[1].characters
+    let loopVariables = components[1]
       .split(separator: ",")
       .map(String.init)
       .map { $0.trim(character: " ") }
@@ -93,7 +93,7 @@ class ForNode : NodeType {
     var values: [Any]
 
     if let dictionary = resolved as? [String: Any], !dictionary.isEmpty {
-      values = dictionary.map { ($0.key, $0.value) }
+      values = dictionary.sorted { $0.key < $1.key }
     } else if let array = resolved as? [Any] {
       values = array
     } else if let range = resolved as? CountableClosedRange<Int> {

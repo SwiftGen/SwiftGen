@@ -24,7 +24,7 @@ final class KeyPath {
       subscriptLevel = 0
     }
 
-    for c in variable.characters {
+    for c in variable {
       switch c {
       case "." where subscriptLevel == 0:
         try foundSeparator()
