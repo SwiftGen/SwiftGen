@@ -40,22 +40,22 @@ files:
     metadata:
       properties:
         Fabric:
+          type: "Dictionary"
           properties:
             APIKey:
               type: "String"
             Kits:
+              type: "Array"
               element:
+                type: "Dictionary"
                 items:
-                - properties:
+                - type: "Dictionary"
+                  properties:
                     KitInfo:
                       properties: {}
                       type: "Dictionary"
                     KitName:
                       type: "String"
-                  type: "Dictionary"
-                type: "Dictionary"
-              type: "Array"
-          type: "Dictionary"
         UILaunchStoryboardName:
           type: "String"
         UIMainStoryboardFile:
