@@ -34,7 +34,7 @@ The templates have been split up into separate templates for each specific funct
 | `swift3` | ➡️ `scenes-swift3`/`segues-swift3` | Split up into separate templates for the scenes and segues functionality |
 | `swift4` | ➡️ `scenes-swift4`/`segues-swift4` | Split up into separate templates for the scenes and segues functionality |
 
-⚠️ The `storybards` subcommand from SwiftGen 5.x has been renamed `ib` in SwiftGen 6.0, so be sure to put those templates in a `ib` subfolder and not an `storyboards` subfolder.
+⚠️ The `storybards` subcommand from SwiftGen 5.x has been renamed `ib` in SwiftGen 6.0, so be sure to put those templates in a `ib` subfolder and not an `storyboards` subfolder. Also be sure to read the paragraph in [the general Migration Guide](../MigrationGuide.md#commands-can-have-multiple-outputs) about how to generate multiple outputs (from multiple templates) for a single input (a single set of input IB files).
 
 ### Strings
 
@@ -59,11 +59,13 @@ The templates have been split up into separate templates for each specific funct
 
 All templates now have `swiftlint:disable all` at the top, so `swiftlint` users no longer need to ignore the generated files, although this is still highly recommended.
 
-SwiftGen 6.0 uses the latest Stencil and StencilSwiftKit libraries, so there are plenty of new features for template writers, such as variable subscripting, an `indent` filter, better error reporting, ...
+SwiftGen 6.0 uses the latest [Stencil](https://github.com/stencilproject/Stencil/blob/master/CHANGELOG.md#0131) and [StencilSwiftKit](https://github.com/SwiftGen/StencilSwiftKit/blob/master/CHANGELOG.md#270) libraries, so there are plenty of new features for template writers, such as variable subscripting, an `indent` filter, better error reporting, ...
 
 ### Fonts
 
-The template now provides a `registerAllCustomFonts()` function, which can be useful if you use custom fonts in your Interface Builder files. Just call it when your application starts.
+The template now provides a `registerAllCustomFonts()` function, which can be useful if you use custom fonts in your Interface Builder files. Just call it when your application starts. Otherwise, fonts will still auto-register when they're first used in code.
+
+Note that if you call this method, you don't need to list the custom fonts under the `UIAppFonts` key of your `Info.plist` anymore. Calling this method instead of listing your custom fonts in your `Info.plist` thus has two advantages: you don't have to maintain the list up-to-date anymore when you add/remove a custom font, and it also works well with custom fonts you might embed in your frameworks (which don't have that `UIAppFonts` key in their own `Info.plist`).
 
 ### Storyboards / IB
 
@@ -87,13 +89,13 @@ The templates now handle the "Inherit module from target" setting in Interface B
 
 ### XCAssets
 
-All groups (folders) are no longer namespaced by default. A group will now only be namespaced if you've enabled the corresponding "provides namespace" for that group in Xcode. To enable the old behaviour again, use the `forceProvidesNamespaces` flag.
+All groups (folders) are no longer namespaced by default. A group will now only be namespaced if you've enabled the corresponding "provides namespace" for that group in Xcode. To enable the old behaviour again, use the `forceProvidesNamespaces` parameter in your config file.
 
-The template now supports `NSDataAsset` sets, so you can now safely access items such as JSON files from your asset catalog.
+The template now supports `NSDataAsset` sets, so you can now safely access items such as JSON files or any other data files from your asset catalog.
 
 Some smaller changes:
-* The template no longer generates `allXXX` constants by default. This can be turned on again with the `allValues` flag.
-* Together with the previous item, the `noAllValues` flag has been removed in favour of the `allValues` flag.
+* The template no longer generates `allXXX` constants by default. This can be turned on again with the `allValues` parameter in your config file.
+* Together with the previous item, the `noAllValues` parameter has been removed in favour of the `allValues` parameter in your config file.
 * The old `allValues` constant (which was an alias for `allImages`) has been removed, use `allImages` instead.
 * The deprecated `Image` typealias (to `UIImage`/`NSImage`) has been renamed to `AssetImageTypeAlias`.
 

@@ -11,7 +11,7 @@ The parser will no longer normalize string keys, which can lead to duplicate key
 "ABCNews.somethingElse" = "bar";
 ```
 
-SwiftGenKit will no longer consolidate these into one "abcNews" case. It is up to the user to fix this incorrect casing in their `strings` files.
+SwiftGenKit will no longer consolidate these into one "abcNews" case. It is up to the user to fix this inconsistent casing in their `strings` files, or to adapt a custom template to take that into consideration.
 
 ## Changes for template writers
 

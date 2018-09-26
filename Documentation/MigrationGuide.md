@@ -6,7 +6,7 @@ Below is a list of pointers to help you migrate to the new SwiftGen 6.0
 
 ## `storyboards` command has been renamed
 
-The `storyboards` subcommand has been renamed `ib` (for Interface Builder).
+The `storyboards` subcommand has been renamed `ib` (for Interface Builder). The new command `ib` will be able to parse `.xib` files in addition to `.storyboard` files in a future version (hence its new name).
 You should replace invocations in your config files with the new `ib` command name, or command line invocations of `swiftgen storyboards …` with `swiftgen ib …`.
 
 ❗️ See below: the bundled `storyboards` templates have been split up into one for scenes and one for segues.
@@ -15,13 +15,15 @@ You should replace invocations in your config files with the new `ib` command na
 
 We've (finally) removed the bundled `swift2` templates. These have been deprecated for a while and were not being tested, so we're dropping them with this release. We assume most of you are already developing in a newer version of Swift (3 or 4).
 
-The biggest change is that the `storyboards` (`ib`) templates have been split up into separate templates, grouping functionality into a specific template. There's now a template for your scene information `scenes-swift3/4`, and a template for your segue information `segues-swift3/4`. We've split these up in preparation for more upcoming functionality, such as accessibility labels. To help you generating multiple outputs, see [below](#commands-can-have-multiple-outputs).
+A few minor template functionality changes have been made, mostly cleaning up some old code and old behaviours. The `xcassets` templates now support `NSDataAssets`, and they will now only group assets if the "Provides Namespace" checkbox is ticked for a group (you can change back to the old behaviour if needed). You can read more about it in the [templates Migration Guide](Templates/MigrationGuide.md#swiftgen-60-migration-guide).
 
-A few minor template functionality changes have been made, mostly cleaning up some old code and old behaviours, you can read more about it in the [templates Migration Guide](Templates/MigrationGuide.md#swiftgen-60-migration-guide).
+### Storyboards template has been split into scenes and segues templates
+
+The biggest change is that the `storyboards` (`ib`) templates have been split up into separate templates, grouping functionality into a specific template. There's now a template for your scene information `scenes-swift3/4`, and a template for your segue information `segues-swift3/4`. We've split these up in preparation for more upcoming functionality, such as accessibility labels. To learn how to use both templates at the same time for a single set of IB files, see below.
 
 ## Commands can have multiple outputs
 
-This is only available for users with a configuration file, not via command line invocation. For each command you can now have a list of `outputs`, each output with a template name (`templateName`) or path (`templatePath`), and a list of parameters (`params`). For example:
+This is only available for users with a configuration file, not via command line invocation. For each command you can now have a list of `outputs`, each output with a template name (`templateName`) or path (`templatePath`), an output file to generate (`output`), and an optional list of parameters (`params`). For example:
 
 ```yaml
 ib:
@@ -41,8 +43,8 @@ You'll notice that the configuration structure has changed a little bit, see bel
 
 Now that each command can have multiple outputs, we're deprecating the following configuration settings.
 
-- `output` has been renamed `outputs`, which now accepts one or more items.
-- `templateName`, `templatePath` and `params` have been moved down to the `outputs` level, so that each output can have a template name (or path) and parameters.
+- `output` has been renamed `outputs`, which now accepts one dictionary or an array of dictionaries (with the keys described next).
+- `templateName`, `templatePath`, `output` and `params` have been moved down to the `outputs` level, so that each output can have a template name (or path), an output file path, and optional parameters.
 - `paths` has been renamed to `inputs`.
 
 So if you had the following configuration:
@@ -64,7 +66,7 @@ It would become:
 colors:
   inputs: path/to/colors.json
   outputs:
-  	templateName: swift4
+    templateName: swift4
     output: Colors.swift
 ib:
   inputs: path/to/storyboards
@@ -77,7 +79,11 @@ ib:
 
 ## New Features
 
-We've added many new features to SwiftGen since our last release. For example, you can now install SwiftGen using Mint, see our [installation instructions](../README.md#installation) for more information.
+We've added many new features to SwiftGen since our last release.
+
+### Mint installation
+
+You can now install SwiftGen using Mint, see our [installation instructions](../README.md#installation) for more information.
 
 ### JSON, Plist and YAML support
 
@@ -86,7 +92,9 @@ You can read all about it in our [Read Me](../README.md). SwiftGen can now parse
 * `inline-swift3/4`: These templates embed the contents of the data into the swift file, so it doesn't have to be loaded at runtime.
 * `runtime-swift3/4`: With these templates, you can generate swift code that will load the underlying JSON/Plist file at runtime, and parses the content in a type-safe way.
 
-Please note that the bundled templates are only meant for the most basic uses for these data types. If you need to access these data files in a different way, using a different structure, or for a specific purpose, you may want to write your own templates. For more information, read the [creating your own templates](Creating-your-templates.md) documentation.
+Please note that the bundled templates are only meant for the most basic uses for these data types. If you need to access these data files in a different way, especially since you'll probably use some custom structure in your JSON/Plist/YAML files, you may want to write your own templates that better fit those structures (for example to write a template that expects specific keys in your custom YAML to generate code based on the values in those keys…).
+
+For more information, read the [creating your own templates](Creating-your-templates.md) documentation.
 
 ## If you wrote your own templates
 
