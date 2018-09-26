@@ -74,6 +74,14 @@ files:
               type: "String"
             Kits:
               element:
+                items:
+                - properties:
+                    KitInfo:
+                      properties: {}
+                      type: "Dictionary"
+                    KitName:
+                      type: "String"
+                  type: "Dictionary"
                 type: "Dictionary"
               type: "Array"
           type: "Dictionary"
