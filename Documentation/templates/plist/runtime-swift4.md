@@ -29,13 +29,13 @@ You can customize some elements of this template by overriding the following par
 
 ```swift
 internal enum PlistFiles {
-  internal enum Test {
-    internal static let items: [String] = arrayFromPlist(at: "array.plist")
+  internal enum Configuration {
+    private static let _document = PlistDocument(path: "configuration.plist")
+    internal static let environment: String = _document["Environment"]
+    internal static let options: [String: Any] = _document["Options"]
   }
-  internal enum Stuff {
-    private static let _document = PlistDocument(path: "dictionary.plist")
-    internal static let key1: Int = _document["key1"]
-    internal static let key2: [String: Any] = _document["key2"]
+  internal enum ShoppingList {
+    internal static let items: [String] = arrayFromPlist(at: "shopping-list.plist")
   }
 }
 ```
@@ -46,8 +46,8 @@ internal enum PlistFiles {
 
 ```swift
 // This will be an array
-let foo = PlistFiles.Test.items
+let foo = PlistFiles.ShoppingList.items
 
-// This will be an Int
-let bar = PlistFiles.Stuff.key1
+// This will be an String
+let bar = PlistFiles.Configuration.environment
 ```

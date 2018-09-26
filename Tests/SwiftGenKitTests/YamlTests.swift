@@ -36,18 +36,18 @@ class YamlTests: XCTestCase {
 
   func testJSON() throws {
     let parser = Yaml.Parser()
-    try parser.parse(path: Fixtures.path(for: "json.json", sub: .yamlGood))
+    try parser.parse(path: Fixtures.path(for: "configuration.json", sub: .yamlGood))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "json", sub: .yaml)
+    XCTDiffContexts(result, expected: "configuration", sub: .yaml)
   }
 
   func testScalar() throws {
     let parser = Yaml.Parser()
-    try parser.parse(path: Fixtures.path(for: "scalar.yaml", sub: .yamlGood))
+    try parser.parse(path: Fixtures.path(for: "version.yaml", sub: .yamlGood))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "scalar", sub: .yaml)
+    XCTDiffContexts(result, expected: "version", sub: .yaml)
   }
 
   func testMutlipleDocuments() throws {

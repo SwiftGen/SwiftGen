@@ -1,0 +1,8 @@
+{
+  "environment": "staging",
+  "api-version": "2",
+  "options": {
+    "screen-order": ["1", "2", "3"]
+  },
+  "country": null
+}

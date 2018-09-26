@@ -20,18 +20,18 @@ class PlistTests: XCTestCase {
 
   func testArray() throws {
     let parser = Plist.Parser()
-    try parser.parse(path: Fixtures.path(for: "array.plist", sub: .plistGood))
+    try parser.parse(path: Fixtures.path(for: "shopping-list.plist", sub: .plistGood))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "array", sub: .plist)
+    XCTDiffContexts(result, expected: "shopping-list", sub: .plist)
   }
 
   func testDictionary() throws {
     let parser = Plist.Parser()
-    try parser.parse(path: Fixtures.path(for: "dictionary.plist", sub: .plistGood))
+    try parser.parse(path: Fixtures.path(for: "configuration.plist", sub: .plistGood))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "dictionary", sub: .plist)
+    XCTDiffContexts(result, expected: "configuration", sub: .plist)
   }
 
   func testInfo() throws {

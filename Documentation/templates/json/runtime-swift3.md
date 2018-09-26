@@ -29,14 +29,18 @@ You can customize some elements of this template by overriding the following par
 
 ```swift
 internal enum JSONFiles {
-  internal enum Info {
-    private static let _document = JSONDocument(path: "info.json")
-    internal static let key1: String = _document["key1"]
-    internal static let key2: String = _document["key2"]
-    internal static let key3: [String: Any] = _document["key3"]
+  internal enum Configuration {
+    private static let _document = JSONDocument(path: "configuration.json")
+    internal static let apiVersion: String = _document["api-version"]
+    internal static let country: Any? = _document["country"]
+    internal static let environment: String = _document["environment"]
+    internal static let options: [String: Any] = _document["options"]
   }
   internal enum GroceryList {
-    internal static let items: [String] = objectFromJSON(at: "grocery-list.json")
+    internal static let items: [String] = objectFromJSON(at: "grocery-list.yaml")
+  }
+  internal enum Version {
+    internal static let value: String = objectFromJSON(at: "version.yaml")
   }
 }
 ```
@@ -47,7 +51,7 @@ internal enum JSONFiles {
 
 ```swift
 // This will be an dictionary
-let foo = JSONFiles.Info.key3
+let foo = JSONFiles.Configuration.options
 
 // This will be an [String]
 let bar = JSONFiles.GroceryList.items
