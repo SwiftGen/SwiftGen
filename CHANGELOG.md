@@ -8,6 +8,11 @@
 
 Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen-60-migration-guide) for a list of changes you'll need to apply.
 
+### Changes in other SwiftGen modules
+
+* [StencilSwiftKit 2.7.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.7.0/CHANGELOG.md)
+* [Stencil 0.13.1](https://github.com/kylef/Stencil/blob/0.13.1/CHANGELOG.md)
+
 ### Bug Fixes
 
 * Fix memory leak in generated code for Fonts.  
