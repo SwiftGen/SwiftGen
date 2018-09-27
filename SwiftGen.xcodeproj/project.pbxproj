@@ -98,6 +98,8 @@
 		DDCCACDC209551240017FB43 /* Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD8209551230017FB43 /* Segue.swift */; };
 		DDCCACDD209551240017FB43 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD9209551230017FB43 /* Scene.swift */; };
 		DDD2D709210F293E00D678E0 /* YAML.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD2D708210F293E00D678E0 /* YAML.swift */; };
+		DDDD4C6A215D21A800FC5DE1 /* config-deprecated-commands.yml in Resources */ = {isa = PBXBuildFile; fileRef = DDDD4C68215D215600FC5DE1 /* config-deprecated-commands.yml */; };
+		DDDD4C6B215D447700FC5DE1 /* templates in Resources */ = {isa = PBXBuildFile; fileRef = DDC09D011E1D199A005C6EE6 /* templates */; };
 		DDDE51131FAF6AD4004203BE /* StringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE506D1FAF6AD4004203BE /* StringsTests.swift */; };
 		DDDE51141FAF6AD4004203BE /* FontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE506E1FAF6AD4004203BE /* FontsTests.swift */; };
 		DDDE51941FAF6AD4004203BE /* XCAssetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE50F51FAF6AD4004203BE /* XCAssetsTests.swift */; };
@@ -359,6 +361,7 @@
 		DDCCACD8209551230017FB43 /* Segue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segue.swift; sourceTree = "<group>"; };
 		DDCCACD9209551230017FB43 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		DDD2D708210F293E00D678E0 /* YAML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAML.swift; sourceTree = "<group>"; };
+		DDDD4C68215D215600FC5DE1 /* config-deprecated-commands.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-deprecated-commands.yml"; sourceTree = "<group>"; };
 		DDDE504B1FAF687A004203BE /* Templates UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Templates UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDE506D1FAF6AD4004203BE /* StringsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsTests.swift; sourceTree = "<group>"; };
 		DDDE506E1FAF6AD4004203BE /* FontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsTests.swift; sourceTree = "<group>"; };
@@ -489,21 +492,22 @@
 		093405061F81537400187787 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
+				37DC60301F98D1DA00B7B31C /* config-absolute-paths-direct.yml */,
+				37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */,
+				37DC602D1F98D1D900B7B31C /* config-both-templates.yml */,
+				DDDD4C68215D215600FC5DE1 /* config-deprecated-commands.yml */,
 				DD40284E209FBF300045FC76 /* config-deprecated-mixed-with-new.yml */,
 				DD40284F209FBF300045FC76 /* config-deprecated-output.yml */,
 				DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */,
-				093405071F81539100187787 /* config-with-params.yml */,
-				093405111F87AA6500187787 /* config-with-multi-entries.yml */,
-				DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */,
-				37DC60301F98D1DA00B7B31C /* config-absolute-paths-direct.yml */,
-				37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */,
-				37DC60311F98D1DA00B7B31C /* config-missing-paths.yml */,
-				37DC602B1F98D1D900B7B31C /* config-missing-template.yml */,
-				37DC602D1F98D1D900B7B31C /* config-both-templates.yml */,
-				37DC602C1F98D1D900B7B31C /* config-missing-output.yml */,
+				37DC602F1F98D1DA00B7B31C /* config-invalid-output.yml */,
 				37DC602A1F98D1D900B7B31C /* config-invalid-structure.yml */,
 				37DC602E1F98D1D900B7B31C /* config-invalid-template.yml */,
-				37DC602F1F98D1DA00B7B31C /* config-invalid-output.yml */,
+				37DC60311F98D1DA00B7B31C /* config-missing-paths.yml */,
+				37DC602B1F98D1D900B7B31C /* config-missing-template.yml */,
+				37DC602C1F98D1D900B7B31C /* config-missing-output.yml */,
+				093405111F87AA6500187787 /* config-with-multi-entries.yml */,
+				DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */,
+				093405071F81539100187787 /* config-with-params.yml */,
 			);
 			name = Configs;
 			path = ../Fixtures/Configs;
@@ -983,6 +987,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD402851209FBF300045FC76 /* config-deprecated-mixed-with-new.yml in Resources */,
+				DDDD4C6A215D21A800FC5DE1 /* config-deprecated-commands.yml in Resources */,
 				DD402852209FBF300045FC76 /* config-deprecated-output.yml in Resources */,
 				37DC60331F98D7DD00B7B31C /* config-both-templates.yml in Resources */,
 				37DC60381F98D7DD00B7B31C /* config-missing-paths.yml in Resources */,
@@ -997,6 +1002,7 @@
 				37DC60321F98D7DD00B7B31C /* config-absolute-paths-direct.yml in Resources */,
 				DD402850209FBF300045FC76 /* config-deprecated-paths.yml in Resources */,
 				37DC60371F98D7DD00B7B31C /* config-missing-output.yml in Resources */,
+				DDDD4C6B215D447700FC5DE1 /* templates in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1301,7 +1307,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$SRCROOT/Scripts/SwiftLint.sh\" \"templates_tests\"\nfi";
+			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$SRCROOT/Scripts/SwiftLint.sh\" \"templates_tests\"\nfi\n";
 		};
 		DD9F4769206ADCD4006B0DCA /* ⚠️ SwiftLint (generated output) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1315,7 +1321,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$SRCROOT/Scripts/SwiftLint.sh\" \"templates_generated\"\nfi";
+			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$SRCROOT/Scripts/SwiftLint.sh\" \"templates_generated\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

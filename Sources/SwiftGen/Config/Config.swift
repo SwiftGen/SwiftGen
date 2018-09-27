@@ -55,29 +55,82 @@ extension Config {
 // MARK: - Linting
 
 extension Config {
+  // Deprecated
+  private static let deprecatedCommands = [
+    "storyboards": "ib"
+  ]
+
   func lint(logger: (LogLevel, String) -> Void = logMessage) {
-    logger(.info, "> Common parent directory used for all input paths:  \(self.inputDir ?? "<none>")")
+    logger(.info, "> Common parent directory used for all input paths:  \(inputDir ?? "<none>")")
+    if let inputDir = inputDir, !inputDir.exists {
+      logger(.error, "input_dir: Input directory \(inputDir) does not exist")
+    }
+
     logger(.info, "> Common parent directory used for all output paths: \(self.outputDir ?? "<none>")")
-    for (cmd, entries) in self.commands {
+    if let outputDir = outputDir, !outputDir.exists {
+      logger(.error, "output_dir: Output directory \(outputDir) does not exist")
+    }
+
+    for (cmd, entries) in commands {
+      if let replacement = Config.deprecatedCommands[cmd] {
+        logger(.warning, "`\(cmd)` action has been deprecated, please use `\(replacement)` instead.")
+      }
+
       let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
       logger(.info, "> \(entriesCount) for command \(cmd):")
-      for var entry in entries {
-        entry.makeRelativeTo(inputDir: self.inputDir, outputDir: self.outputDir)
-        for inputPath in entry.inputs where inputPath.isAbsolute {
-          logger(.warning, "\(cmd).paths: \(inputPath) is an absolute path.")
-        }
-        for entryOutput in entry.outputs {
-          if case TemplateRef.path(let templateRef) = entryOutput.template, templateRef.isAbsolute {
-            logger(.warning, "\(cmd).templatePath: \(templateRef) is an absolute path.")
-          }
-          if entryOutput.output.isAbsolute {
-            logger(.warning, "\(cmd).output: \(entryOutput.output) is an absolute path.")
-          }
-        }
-        for item in entry.commandLine(forCommand: cmd) {
-          logMessage(.info, " $ \(item)")
-        }
+      for entry in entries {
+        lint(cmd: cmd, entry: entry, logger: logger)
       }
+    }
+  }
+
+  private func lint(cmd: String, entry: ConfigEntry, logger: (LogLevel, String) -> Void = logMessage) {
+    var entry = entry
+    entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
+
+    for inputPath in entry.inputs {
+      if !inputPath.exists {
+        logger(.error, "\(cmd).inputs: \(inputPath) does not exist")
+      }
+      if inputPath.isAbsolute {
+        logger(.warning, """
+          \(cmd).inputs: \(inputPath) is an absolute path. Prefer relative paths for portability \
+          when sharing your project.
+          """)
+      }
+    }
+
+    for entryOutput in entry.outputs {
+      do {
+        let actualCmd = Config.deprecatedCommands[cmd] ?? cmd
+        _ = try entryOutput.template.resolvePath(forSubcommand: actualCmd)
+      } catch let error {
+        logger(.error, "\(cmd).outputs: \(error)")
+      }
+      if case TemplateRef.path(let templateRef) = entryOutput.template, templateRef.isAbsolute {
+        logger(.warning, """
+          \(cmd).outputs.templatePath: \(templateRef) is an absolute path. Prefer relative paths \
+          for portability when sharing your project.
+          """)
+      }
+
+      let outputParent = entryOutput.output.parent()
+      if !outputParent.exists {
+        logger(.error, """
+          \(cmd).outputs.output: \(outputParent) does not exist. Intermediate folders up to the \
+          output file must already exist to avoid misconfigurations, and won't be created for you.
+          """)
+      }
+      if entryOutput.output.isAbsolute {
+        logger(.warning, """
+          \(cmd).outputs.output: \(entryOutput.output) is an absolute path. Prefer relative paths \
+          for portability when sharing your project.
+          """)
+      }
+    }
+
+    for item in entry.commandLine(forCommand: cmd) {
+      logMessage(.info, " $ \(item)")
     }
   }
 }

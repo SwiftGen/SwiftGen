@@ -1,0 +1,6 @@
+output_dir: Common/Generated
+storyboards:
+  paths: Sources2/Folder
+  outputs:
+    templateName: scenes-swift4
+    output: test-scenes.swift
