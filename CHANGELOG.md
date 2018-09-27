@@ -788,8 +788,6 @@ stop working as expected. That's the main reason why the version has been bumped
 
 * Adding comments to generated color enums which allow you to see the color in the QuickHelp documentation
 
-![colors QuickHelp](documentation/ColorsQuickHelp.png)
-
 * The default translation of strings are now added as documentation comments to the enum cases.  
   _You can add translations to your own templates by using the `string.translation` variable._  
   [@MrAlek](https://github.com/MrAlek)
