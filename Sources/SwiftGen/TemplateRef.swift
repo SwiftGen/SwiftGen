@@ -70,7 +70,7 @@ extension TemplateRef.Error: CustomStringConvertible {
     switch self {
     case .namedTemplateNotFound(let name):
       return """
-        Template named \(name) not found. Use `swiftgen templates` to list available named templates \
+        Template named \(name) not found. Use `swiftgen templates list` to list available named templates \
         or use `templatePath` to specify a template by its full path.
         """
     case .templatePathNotFound(let path):
