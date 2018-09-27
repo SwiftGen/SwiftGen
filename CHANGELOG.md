@@ -13,38 +13,6 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 * [StencilSwiftKit 2.7.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.7.0/CHANGELOG.md)
 * [Stencil 0.13.1](https://github.com/kylef/Stencil/blob/0.13.1/CHANGELOG.md)
 
-### Bug Fixes
-
-* Fix memory leak in generated code for Fonts.  
-  [Olivier Halligon](https://github.com/AliSoftware)
-  [#394](https://github.com/SwiftGen/SwiftGen/issues/394)
-* Interface Builder: ensure the templates handle `GLKViewController`, `AVPlayerViewController` and `NSPageController` correctly.  
-  [David Jennes](https://github.com/djbe)
-  [#404](https://github.com/SwiftGen/SwiftGen/issues/404)
-  [#414](https://github.com/SwiftGen/SwiftGen/pull/414)
-* Interface Builder: ensure the parser can handle files with and without "trait variations".  
-  [David Jennes](https://github.com/djbe)
-  [#367](https://github.com/SwiftGen/SwiftGen/issues/367)
-  [#429](https://github.com/SwiftGen/SwiftGen/pull/429)
-* Restrict `SceneType` and `InitialSceneType` to UIViewController when not targeting AppKit. When targeting AppKit, remove superfluous `Any`.  
-  [Darron Schall](https://github.com/darronschall)
-  [#463](https://github.com/SwiftGen/SwiftGen/issues/463)
-  [#464](https://github.com/SwiftGen/SwiftGen/pull/464)
-* Fonts: disable a warning in generated font files for projects with `conditional_returns_on_newlines` SwiftLint rule enabled.  
-  [Ryan Davies](https://github.com/iotize)
-  [#436](https://github.com/SwiftGen/SwiftGen/issues/436)
-  [#465](https://github.com/SwiftGen/SwiftGen/pull/465)
-* Interface Builder: the parser and templates now handle the "Inherit module from target" setting.  
-  [David Jennes](https://github.com/djbe)
-  [#435](https://github.com/SwiftGen/SwiftGen/issues/435)
-  [#485](https://github.com/SwiftGen/SwiftGen/pull/485)
-* Strings: the parser now correctly handles formats such as `% d` and `%#x`.  
-  [David Jennes](https://github.com/djbe)
-  [#502](https://github.com/SwiftGen/SwiftGen/pull/502)
-* Strings: ensure strings without arguments are not processed using `String(format:)`.  
-  [David Jennes](https://github.com/djbe)
-  [#503](https://github.com/SwiftGen/SwiftGen/pull/503)
-
 ### Breaking Changes
 
 * Don't normalize string keys while parsing, let all transformation be done on template side. This makes the developer responsible to keep the language file organized, duplications won't be removed.  
@@ -108,6 +76,38 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 * Updated the playgrounds with the new `json`, `plist` and `yaml` commands, and updated the other pages to reflect the template changes.  
   [David Jennes](https://github.com/djbe)
   [#495](https://github.com/SwiftGen/SwiftGen/pull/495)
+
+### Bug Fixes
+
+* Fix memory leak in generated code for Fonts.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#394](https://github.com/SwiftGen/SwiftGen/issues/394)
+* Interface Builder: ensure the templates handle `GLKViewController`, `AVPlayerViewController` and `NSPageController` correctly.  
+  [David Jennes](https://github.com/djbe)
+  [#404](https://github.com/SwiftGen/SwiftGen/issues/404)
+  [#414](https://github.com/SwiftGen/SwiftGen/pull/414)
+* Interface Builder: ensure the parser can handle files with and without "trait variations".  
+  [David Jennes](https://github.com/djbe)
+  [#367](https://github.com/SwiftGen/SwiftGen/issues/367)
+  [#429](https://github.com/SwiftGen/SwiftGen/pull/429)
+* Restrict `SceneType` and `InitialSceneType` to UIViewController when not targeting AppKit. When targeting AppKit, remove superfluous `Any`.  
+  [Darron Schall](https://github.com/darronschall)
+  [#463](https://github.com/SwiftGen/SwiftGen/issues/463)
+  [#464](https://github.com/SwiftGen/SwiftGen/pull/464)
+* Fonts: disable a warning in generated font files for projects with `conditional_returns_on_newlines` SwiftLint rule enabled.  
+  [Ryan Davies](https://github.com/iotize)
+  [#436](https://github.com/SwiftGen/SwiftGen/issues/436)
+  [#465](https://github.com/SwiftGen/SwiftGen/pull/465)
+* Interface Builder: the parser and templates now handle the "Inherit module from target" setting.  
+  [David Jennes](https://github.com/djbe)
+  [#435](https://github.com/SwiftGen/SwiftGen/issues/435)
+  [#485](https://github.com/SwiftGen/SwiftGen/pull/485)
+* Strings: the parser now correctly handles formats such as `% d` and `%#x`.  
+  [David Jennes](https://github.com/djbe)
+  [#502](https://github.com/SwiftGen/SwiftGen/pull/502)
+* Strings: ensure strings without arguments are not processed using `String(format:)`.  
+  [David Jennes](https://github.com/djbe)
+  [#503](https://github.com/SwiftGen/SwiftGen/pull/503)
 
 ### Internal Changes
 
@@ -379,15 +379,6 @@ Read the [SwiftGen 5.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 * [Stencil 0.8.0](https://github.com/kylef/Stencil/blob/0.8.0/CHANGELOG.md)
 * [templates 1.0.0](https://github.com/SwiftGen/templates/blob/1.0.0/CHANGELOG.md)
 
-### Bug Fixes
-
-#### Notable bug fixes from other SwiftGen repositories
-
-* Storyboards templates won't `import` your app module anymore,
-  removing that annoying warning.  
-  [@djbe](https://github.com/djbe)
-  [SwiftGen/templates#19](https://github.com/SwiftGen/templates/pull/19)
-
 ### New Features
 
 * You can now pass custom parameters to your templates using the `--param X=Y` syntax.  
@@ -417,6 +408,15 @@ As a result, if you wrote custom templates, you should already prepare for the u
 
 See [#244](https://github.com/SwiftGen/SwiftGen/issues/244) and [the Migration Guide](Documentation/MigrationGuide.md) for a list of deprecations and their replacements.
 
+### Bug Fixes
+
+#### Notable bug fixes from other SwiftGen repositories
+
+* Storyboards templates won't `import` your app module anymore,
+  removing that annoying warning.  
+  [@djbe](https://github.com/djbe)
+  [SwiftGen/templates#19](https://github.com/SwiftGen/templates/pull/19)
+
 ### Internal changes
 
 * SwiftGen has migrated to [its own GitHub organization](https://github.com/SwiftGen/SwiftGen) 🎉.  
@@ -433,18 +433,6 @@ See [#244](https://github.com/SwiftGen/SwiftGen/issues/244) and [the Migration G
 Note: The next minor version will focus on bringing more documentation for all this new structure and improve ease of future contributions.
 
 ## 4.1.0
-
-### Bug Fixes
-
-* Strings: fix issue with `dot-syntax-swift3` where function definitions were
-  not Swift 3 guidelines compliant.  
-  [David Jennes](https://github.com/djbe)
-  [#241](https://github.com/SwiftGen/SwiftGen/issues/241)
-  [#247](https://github.com/SwiftGen/SwiftGen/pull/247)
-* Snake cased keys with uppercase letters are correctly camel cased again.  
-  [Cihat Gündüz](https://github.com/Dschee)
-  [#226](https://github.com/SwiftGen/SwiftGen/issues/226)
-  [#233](https://github.com/SwiftGen/SwiftGen/pull/233)
 
 ### New Features
 
@@ -482,6 +470,18 @@ Note: The next minor version will focus on bringing more documentation for all t
   * `storyboards` accepts multiple paths (to folders or `storyboard` files).
     All found storyboards will be available in the `storyboards` template
     variable.
+
+### Bug Fixes
+
+* Strings: fix issue with `dot-syntax-swift3` where function definitions were
+  not Swift 3 guidelines compliant.  
+  [David Jennes](https://github.com/djbe)
+  [#241](https://github.com/SwiftGen/SwiftGen/issues/241)
+  [#247](https://github.com/SwiftGen/SwiftGen/pull/247)
+* Snake cased keys with uppercase letters are correctly camel cased again.  
+  [Cihat Gündüz](https://github.com/Dschee)
+  [#226](https://github.com/SwiftGen/SwiftGen/issues/226)
+  [#233](https://github.com/SwiftGen/SwiftGen/pull/233)
 
 ### Internal changes
 

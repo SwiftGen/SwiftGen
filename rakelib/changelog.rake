@@ -14,15 +14,15 @@ namespace :changelog do
     <<-HEADER.gsub(/^\s*\|/, '')
       |## Master
       |
-      |### Bug Fixes
-      |
-      |_None_
-      |
       |### Breaking Changes
       |
       |_None_
       |
       |### New Features
+      |
+      |_None_
+      |
+      |### Bug Fixes
       |
       |_None_
       |
