@@ -20,6 +20,8 @@ import Foundation
  - `type`: `String` — The type of the object (Array, Dictionary, Int, Float, String, Bool, Date, Data)
  - `properties`: `Dictionary` — List of properties metadata (only if a dictionary, repeats this metadata structure)
  - `element`: `Dictionary` — Element metadata (only if an array, repeats this metadata structure)
+ - `items`: `Array` — List of metadata objects for each array element (only if the element.type is `Any`, `Dictionary`
+            or `Array`)
  */
 extension Yaml.Parser {
   public func stencilContext() -> [String: Any] {

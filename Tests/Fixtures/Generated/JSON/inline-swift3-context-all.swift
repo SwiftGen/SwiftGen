@@ -9,6 +9,12 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 internal enum JSONFiles {
+  internal enum Configuration {
+    internal static let apiVersion: String = "2"
+    internal static let country: Any? = nil
+    internal static let environment: String = "staging"
+    internal static let options: [String: Any] = ["screen-order": ["1", "2", "3"]]
+  }
   internal enum Documents {
     internal enum Document1 {
       internal static let items: [String] = ["Mark McGwire", "Sammy Sosa", "Ken Griffey"]
@@ -18,22 +24,16 @@ internal enum JSONFiles {
     }
   }
   internal enum GroceryList {
-    internal static let items: [String] = ["value1", "value2"]
-  }
-  internal enum Json {
-    internal static let key2: String = "2"
-    internal static let key3: [String: Any] = ["nestedKey3": ["1", "2", "3"]]
-    internal static let key4: Any? = nil
-    internal static let key1: String = "value1"
+    internal static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
   internal enum Mapping {
-    internal static let key2: Double = 1.0
-    internal static let key3: [String: Any] = ["nestedKey1": "nestedValue1", "nestedKey2": "nestedValue2"]
-    internal static let key4: Any? = nil
-    internal static let key1: String = "value1"
+    internal static let car: Any? = nil
+    internal static let foo: [String: Any] = ["bar": "banana", "baz": "orange"]
+    internal static let hello: String = "world"
+    internal static let weight: Double = 33.3
   }
-  internal enum Scalar {
-    internal static let value: String = "value1"
+  internal enum Version {
+    internal static let value: String = "1.2.3.beta.4"
   }
 }
 // swiftlint:enable identifier_name line_length number_separator type_body_length

@@ -89,6 +89,7 @@
   [#288](https://github.com/SwiftGen/SwiftGen/pull/288)
   [#188](https://github.com/SwiftGen/SwiftGen/pull/188)
   [#493](https://github.com/SwiftGen/SwiftGen/pull/493)
+  [#504](https://github.com/SwiftGen/SwiftGen/pull/504)
 * Updated the playgrounds with the new `json`, `plist` and `yaml` commands, and updated the other pages to reflect the template changes.  
   [David Jennes](https://github.com/djbe)
   [#495](https://github.com/SwiftGen/SwiftGen/pull/495)
@@ -105,13 +106,15 @@
   [David Jennes](https://github.com/djbe)
   [#402](https://github.com/SwiftGen/SwiftGen/pull/402)
   [#476](https://github.com/SwiftGen/SwiftGen/pull/476)
-* Updated to latest Xcode (9.3.0).  
+* Updated to latest Xcode (10.0.0) and Swift 4.2.  
   [David Jennes](https://github.com/djbe) 
   [#415](https://github.com/SwiftGen/SwiftGen/pull/415)
-* Update to Stencil 0.12.1, and use some of it's new filters in our templates.  
+  [#498](https://github.com/SwiftGen/SwiftGen/pull/498)
+* Update to Stencil 0.13.0, and use some of it's new filters in our templates.  
   [David Jennes](https://github.com/djbe) 
   [#416](https://github.com/SwiftGen/SwiftGen/pull/416)
   [#475](https://github.com/SwiftGen/SwiftGen/pull/475)
+  [#498](https://github.com/SwiftGen/SwiftGen/pull/498)
 * Store testing contexts as YAML files instead of PLISTs.  
   [David Jennes](https://github.com/djbe) 
   [#418](https://github.com/SwiftGen/SwiftGen/pull/418)

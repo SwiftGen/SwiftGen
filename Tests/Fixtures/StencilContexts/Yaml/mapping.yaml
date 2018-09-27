@@ -1,27 +1,27 @@
 files:
 - documents:
   - data:
-      key1: "value1"
-      key2: 1e+0
-      key3:
-        nestedKey1: "nestedValue1"
-        nestedKey2: "nestedValue2"
-      key4: null
+      car: null
+      foo:
+        bar: "banana"
+        baz: "orange"
+      hello: "world"
+      weight: 3.33e+1
     metadata:
       properties:
-        key1:
-          type: "String"
-        key2:
-          type: "Double"
-        key3:
+        car:
+          type: "Optional"
+        foo:
           properties:
-            nestedKey1:
+            bar:
               type: "String"
-            nestedKey2:
+            baz:
               type: "String"
           type: "Dictionary"
-        key4:
-          type: "Optional"
+        hello:
+          type: "String"
+        weight:
+          type: "Double"
       type: "Dictionary"
   name: "mapping"
   path: "mapping.yaml"

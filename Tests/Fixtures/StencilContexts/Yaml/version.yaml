@@ -1,0 +1,7 @@
+files:
+- documents:
+  - data: "1.2.3.beta.4"
+    metadata:
+      type: "String"
+  name: "version"
+  path: "version.yaml"

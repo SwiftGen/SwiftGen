@@ -37,11 +37,6 @@ public struct TemplateSyntaxError : Error, Equatable, CustomStringConvertible {
   public init(_ description: String) {
     self.init(reason: description)
   }
-
-  public static func ==(lhs:TemplateSyntaxError, rhs:TemplateSyntaxError) -> Bool {
-    return lhs.description == rhs.description && lhs.token == rhs.token && lhs.stackTrace == rhs.stackTrace
-  }
-
 }
 
 extension Error {
@@ -66,12 +61,17 @@ open class SimpleErrorReporter: ErrorReporter {
 
     func describe(token: Token) -> String {
       let templateName = token.sourceMap.filename ?? ""
-      let line = token.sourceMap.line
-      let highlight = "\(String(Array(repeating: " ", count: line.offset)))^\(String(Array(repeating: "~", count: max(token.contents.characters.count - 1, 0))))"
+      let location = token.sourceMap.location
+      let highlight = """
+        \(String(Array(repeating: " ", count: location.lineOffset)))\
+        ^\(String(Array(repeating: "~", count: max(token.contents.count - 1, 0))))
+        """
 
-      return "\(templateName)\(line.number):\(line.offset): error: \(templateError.reason)\n"
-        + "\(line.content)\n"
-        + "\(highlight)\n"
+      return """
+        \(templateName)\(location.lineNumber):\(location.lineOffset): error: \(templateError.reason)
+        \(location.content)
+        \(highlight)
+        """
     }
 
     var descriptions = templateError.stackTrace.reduce([]) { $0 + [describe(token: $1)] }

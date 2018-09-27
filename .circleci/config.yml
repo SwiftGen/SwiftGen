@@ -6,7 +6,7 @@ defaults:
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
       BUNDLE_PATH: vendor/bundle
     macos:
-      xcode: "9.3.0"
+      xcode: "10.0.0"
     shell: /bin/bash --login -eo pipefail
   - &prepare-storage
     run:
@@ -37,7 +37,7 @@ defaults:
     store_artifacts:
       path: /tmp/circleci-artifacts
 
-    
+
 version: 2
 jobs:
   lint:
@@ -97,7 +97,7 @@ jobs:
             - homebrew-
       - run:
           name: Install libxml2
-          command: brew upgrade python && brew install libxml2 && brew link --force libxml2
+          command: brew install libxml2 && brew link --force libxml2
       -  save_cache:
           key: homebrew-{{ checksum ".circleci/config.yml" }}
           paths:

@@ -22,6 +22,8 @@ The metadata has the following properties:
  - `type`: `String` — The type of the object (Array, Bool, Data, Date, Dictionary, Double, Int, String, Optional and Any)
  - `properties`: `Dictionary` — List of properties metadata (only if a dictionary, repeats this metadata structure)
  - `element`: `Dictionary` — Element metadata (only if an array, repeats this metadata structure)
+ - `items`: `Array` — List of metadata objects for each array element (only if the element.type is `Any`, `Dictionary`
+            or `Array`)
 
 ## Example
 
@@ -38,6 +40,23 @@ files:
       User Integer: 5
     metadata:
       properties:
+        Fabric:
+          type: "Dictionary"
+          properties:
+            APIKey:
+              type: "String"
+            Kits:
+              type: "Array"
+              element:
+                type: "Dictionary"
+                items:
+                - type: "Dictionary"
+                  properties:
+                    KitInfo:
+                      properties: {}
+                      type: "Dictionary"
+                    KitName:
+                      type: "String"
         UILaunchStoryboardName:
           type: "String"
         UIMainStoryboardFile:
@@ -57,12 +76,13 @@ files:
   path: "Info.plist"
 - documents:
   - data:
-    - "value1"
-    - "value2"
+    - "Eggs"
+    - "Bread"
+    - "Milk"
     metadata:
       element:
         type: "String"
       type: "Array"
-  name: "array"
-  path: "array.plist"
+  name: "shopping-list"
+  path: "shopping-list.plist"
 ```

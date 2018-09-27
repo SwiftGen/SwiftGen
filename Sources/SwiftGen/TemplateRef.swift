@@ -8,7 +8,7 @@
 
 import PathKit
 
-enum TemplateRef {
+enum TemplateRef: Equatable {
   case name(String)
   case path(Path)
 

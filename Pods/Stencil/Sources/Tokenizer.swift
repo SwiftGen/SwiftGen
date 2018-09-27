@@ -13,7 +13,7 @@ extension String {
     let specialCharacters = ",|:"
     func appendWord(_ word: String) {
       if components.count > 0 {
-        if let precedingChar = components.last?.characters.last, specialCharacters.characters.contains(precedingChar) {
+        if let precedingChar = components.last?.last, specialCharacters.contains(precedingChar) {
           components[components.count-1] += word
         } else if specialCharacters.contains(word) {
           components[components.count-1] += word
@@ -25,7 +25,7 @@ extension String {
       }
     }
 
-    for character in self.characters {
+    for character in self {
       if character == "'" { singleQuoteCount += 1 }
       else if character == "\"" { doubleQuoteCount += 1 }
 
@@ -57,17 +57,17 @@ extension String {
 
 public struct SourceMap: Equatable {
   public let filename: String?
-  public let line: RangeLine
+  public let location: ContentLocation
 
-  init(filename: String? = nil, line: RangeLine = ("", 0, 0)) {
+  init(filename: String? = nil, location: ContentLocation = ("", 0, 0)) {
     self.filename = filename
-    self.line = line
+    self.location = location
   }
 
   static let unknown = SourceMap()
 
   public static func ==(lhs: SourceMap, rhs: SourceMap) -> Bool {
-    return lhs.filename == rhs.filename && lhs.line == rhs.line
+    return lhs.filename == rhs.filename && lhs.location == rhs.location
   }
 }
 
@@ -113,22 +113,5 @@ public enum Token : Equatable {
          .comment(_, let sourceMap):
       return sourceMap
     }
-  }
-
-}
-
-
-public func == (lhs: Token, rhs: Token) -> Bool {
-  switch (lhs, rhs) {
-  case let (.text(lhsValue, lhsAt), .text(rhsValue, rhsAt)):
-    return lhsValue == rhsValue && lhsAt == rhsAt
-  case let (.variable(lhsValue, lhsAt), .variable(rhsValue, rhsAt)):
-    return lhsValue == rhsValue && lhsAt == rhsAt
-  case let (.block(lhsValue, lhsAt), .block(rhsValue, rhsAt)):
-    return lhsValue == rhsValue && lhsAt == rhsAt
-  case let (.comment(lhsValue, lhsAt), .comment(rhsValue, rhsAt)):
-    return lhsValue == rhsValue && lhsAt == rhsAt
-  default:
-    return false
   }
 }

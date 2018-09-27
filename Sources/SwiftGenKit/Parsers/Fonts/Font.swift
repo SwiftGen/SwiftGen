@@ -25,11 +25,14 @@ extension Fonts {
 
 // Right now the postScriptName is the value of the font we are looking up, so we do
 // equatable comparisons on that. If we ever care about the familyName or style it can be added
-extension Fonts.Font: Equatable { }
-func == (lhs: Fonts.Font, rhs: Fonts.Font) -> Bool {
-  return lhs.postScriptName == rhs.postScriptName
+extension Fonts.Font: Equatable {
+  static func == (lhs: Fonts.Font, rhs: Fonts.Font) -> Bool {
+    return lhs.postScriptName == rhs.postScriptName
+  }
 }
 
 extension Fonts.Font: Hashable {
-  var hashValue: Int { return postScriptName.hashValue }
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(postScriptName)
+  }
 }
