@@ -129,10 +129,21 @@ brew install swiftgen --HEAD
 
 * Alternatively, you can clone the repository and use `rake cli:install` to build the tool and install it from any branch, which could be useful to test SwiftGen in a fork or a Pull Request branch.
 
-You can install to the default locations (no parameter) or to custom locations:
+Some Ruby tools are used in the build process, and the system Ruby works well if you are running a recent macOS.  However, if you are using `rbenv` you can run `rbenv install` to make sure you have a matching version of Ruby installed.  
+
+Then install the Ruby Gems:
 
 ```sh
-# Binary is installed in `./swiftgen/bin`, frameworks in `./swiftgen/lib` and templates in `./swiftgen/templates`
+# Install bundle if it isn't installed
+gem install bundle
+# Install the Ruby gems from Gemfile
+bundle install
+```
+
+You can now install to the default locations (no parameter) or to custom locations:
+
+```sh
+# Binary is installed in `./build/swiftgen/bin`, frameworks in `./build/swiftgen/lib` and templates in `./build/swiftgen/templates`
 $ rake cli:install
 # - OR -
 # Binary will be installed in `~/swiftgen/bin`, frameworks in `~/swiftgen/fmk` and templates in `~/swiftgen/tpl`
