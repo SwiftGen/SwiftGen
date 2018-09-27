@@ -70,7 +70,9 @@
   [#424](https://github.com/SwiftGen/SwiftGen/pull/424)
 * Use `swiftlint:disable all` in generated files to avoid interference with SwiftLint rules custom to the host project.  
   [Frederick Pietschmann](https://github.com/fredpi)
+  [David Jennes](https://github.com/djbe)
   [#409](https://github.com/SwiftGen/SwiftGen/issues/409)
+  [#506](https://github.com/SwiftGen/SwiftGen/issues/506)
 * XCAssets: Added support for `NSDataAssets`.  
   [Oliver Jones](https://github.com/orj)
   [#444](https://github.com/SwiftGen/SwiftGen/issues/444)
