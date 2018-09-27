@@ -2,7 +2,7 @@
 
 ---
 
-## Master
+## 6.0.0
 
 ⚠️ This major version is a big milestone in which a lot of refactoring and cleaning has been done. Many features added over previous releases have been reworked and unified, while also preparing SwiftGen for future additions. This means that you'll need to adapt your configuration files (or command line invocations) and custom templates to work with this new major version.
 
