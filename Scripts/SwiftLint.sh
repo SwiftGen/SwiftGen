@@ -39,7 +39,7 @@ if [ "$key" = "templates_generated" ]; then
 	for f in `find "${PROJECT_DIR}/${selected_path}" -name '*.swift'`; do
 		temp_file="${scratch}${f#"$PROJECT_DIR"}"
 		mkdir -p $(dirname "$temp_file")
-		sed s@"swiftlint:disable all"@" --"@ "$f" > "$temp_file"
+		sed "s/swiftlint:disable all/ --/" "$f" > "$temp_file"
 	done
 
 	"$SWIFTLINT" lint --strict --config "$CONFIG" --path "$scratch" | sed s@"$scratch"@"${PROJECT_DIR}"@
