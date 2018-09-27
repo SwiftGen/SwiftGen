@@ -8,7 +8,7 @@ import PathKit
 import XCTest
 
 class ConfigReadTests: XCTestCase {
-  func testReadConfigWithParams() throws {
+  func testConfigWithParams() throws {
     guard let path = Bundle(for: type(of: self)).path(forResource: "config-with-params", ofType: "yml") else {
       fatalError("Fixture not found")
     }
@@ -44,7 +44,7 @@ class ConfigReadTests: XCTestCase {
     }
   }
 
-  func testReadConfigWithMultiEntries() throws {
+  func testConfigWithMultiEntries() throws {
     guard let path = Bundle(for: type(of: self)).path(forResource: "config-with-multi-entries", ofType: "yml") else {
       fatalError("Fixture not found")
     }
@@ -86,7 +86,7 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(xcassetsEntries[1].outputs.count, 1)
       XCTAssertEqual(xcassetsEntries[1].outputs[0].output, "assets-images.swift")
       XCTAssertEqualDict(xcassetsEntries[1].outputs[0].parameters, ["enumName": "Pics"])
-      XCTAssertEqual(xcassetsEntries[1].outputs[0].template, .name("swift3"))
+      XCTAssertEqual(xcassetsEntries[1].outputs[0].template, .name("custom-swift3"))
       // > xcassets[2]
       XCTAssertEqual(xcassetsEntries[2].inputs, ["XCAssets/Colors.xcassets", "XCAssets/Images.xcassets"])
       XCTAssertEqual(xcassetsEntries[2].outputs.count, 1)
@@ -98,7 +98,7 @@ class ConfigReadTests: XCTestCase {
     }
   }
 
-  func testReadConfigWithMultiOutputs() throws {
+  func testConfigWithMultiOutputs() throws {
     guard let path = Bundle(for: type(of: self)).path(forResource: "config-with-multi-outputs", ofType: "yml") else {
       fatalError("Fixture not found")
     }
@@ -134,7 +134,7 @@ class ConfigReadTests: XCTestCase {
 
   // MARK: - Invalid configs
 
-  func testReadInvalidConfigThrows() {
+  func testInvalidConfigThrows() {
     let badConfigs = [
       "config-missing-paths": "Missing entry for key strings.inputs.",
       "config-missing-template": """
@@ -178,7 +178,7 @@ class ConfigReadTests: XCTestCase {
 
   // MARK: - Deprecations
 
-  func testReadDeprecatedOutput() throws {
+  func testDeprecatedOutput() throws {
     guard let path = Bundle(for: type(of: self)).path(forResource: "config-deprecated-output", ofType: "yml") else {
       fatalError("Fixture not found")
     }
@@ -202,7 +202,7 @@ class ConfigReadTests: XCTestCase {
     }
   }
 
-  func testReadDeprecatedPaths() throws {
+  func testDeprecatedPaths() throws {
     guard let path = Bundle(for: type(of: self)).path(forResource: "config-deprecated-paths", ofType: "yml") else {
       fatalError("Fixture not found")
     }
@@ -220,7 +220,7 @@ class ConfigReadTests: XCTestCase {
     }
   }
 
-  func testReadDeprecatedUseNewerProperties() throws {
+  func testDeprecatedUseNewerProperties() throws {
     let bundle = Bundle(for: type(of: self))
     guard let path = bundle.path(forResource: "config-deprecated-mixed-with-new", ofType: "yml") else {
       fatalError("Fixture not found")

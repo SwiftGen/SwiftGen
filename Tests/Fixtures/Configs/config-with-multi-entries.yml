@@ -14,7 +14,7 @@ xcassets:
       output: assets-colors.swift
   - inputs: XCAssets/Images.xcassets
     outputs:
-      templateName: swift3
+      templateName: custom-swift3
       output: assets-images.swift
       params: { "enumName": "Pics" }
   - inputs:
