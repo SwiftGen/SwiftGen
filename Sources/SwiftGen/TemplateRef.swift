@@ -71,13 +71,13 @@ extension TemplateRef.Error: CustomStringConvertible {
     case .namedTemplateNotFound(let name):
       return """
         Template named \(name) not found. Use `swiftgen templates` to list available named templates \
-        or use --templatePath to specify a template by its full path.
+        or use `templatePath` to specify a template by its full path.
         """
     case .templatePathNotFound(let path):
       return "Template not found at path \(path.description)."
     case .noTemplateProvided:
       return """
-        You must specify a template name (-t) or path (-p).
+        You must specify a template by name (templateName) or path (templatePath).
 
         To list all the available named templates, use 'swiftgen templates list'.
         """

@@ -90,7 +90,7 @@ class ConfigLintTests: XCTestCase {
 
   func testLintMissingTemplateNameAndPath() {
     let errorMsg = """
-      You must specify a template name (-t) or path (-p).
+      You must specify a template by name (templateName) or path (templatePath).
 
       To list all the available named templates, use 'swiftgen templates list'.
       """
