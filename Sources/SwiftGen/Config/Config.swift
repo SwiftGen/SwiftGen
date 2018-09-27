@@ -86,7 +86,7 @@ extension Config {
 
   private func lint(cmd: String, entry: ConfigEntry, logger: (LogLevel, String) -> Void = logMessage) {
     var entry = entry
-    entry.makeRelativeTo(inputDir: inputDir, outputDir: outputDir)
+    entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
 
     for inputPath in entry.inputs {
       if !inputPath.exists {

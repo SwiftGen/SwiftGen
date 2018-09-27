@@ -94,7 +94,7 @@ let configRunCommand = command(
           guard let parserCmd = allParserCommands.first(where: { $0.name == cmd }) else {
             throw Config.Error.missingEntry(key: cmd)
           }
-          entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
+          entry.makingRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
           if verbose {
             for item in entry.commandLine(forCommand: cmd) {
               logMessage(.info, " $ \(item)")

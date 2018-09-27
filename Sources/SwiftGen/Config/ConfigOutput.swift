@@ -23,7 +23,7 @@ struct ConfigEntryOutput {
   var parameters: [String: Any]
   var template: TemplateRef
 
-  mutating func makeRelativeTo(outputDir: Path?) {
+  mutating func makingRelativeTo(outputDir: Path?) {
     if let outputDir = outputDir, self.output.isRelative {
       self.output = outputDir + self.output
     }
