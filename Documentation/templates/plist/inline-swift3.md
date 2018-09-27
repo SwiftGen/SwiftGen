@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | plist/inline-swift3.stencil |
-| Invocation example | `swiftgen plist -t inline-swift3 …` |
+| Configuration example | <pre>plist:<br />  inputs: path/to/plist/dir-or-file<br />  outputs:<br />    templateName: inline-swift3<br />    output: Plist.swift</pre> |
 | Language | Swift 3 |
 | Author | David Jennes |
 
@@ -14,7 +14,7 @@
 
 ## Customization
 
-You can customize some elements of this template by overriding the following parameters when invoking `swiftgen` in the command line, using `--param <paramName>=<newValue>`
+You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |

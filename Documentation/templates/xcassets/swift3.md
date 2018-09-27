@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | xcassets/swift3.stencil |
-| Invocation example | `swiftgen xcassets -t swift3 …` |
+| Configuration example | <pre>xcassets:<br />  inputs: dir/to/search/for/imageset/assets<br />  outputs:<br />    templateName: swift3<br />    output: Assets.swift</pre> |
 | Language | Swift 3 |
 | Author | Olivier Halligon |
 
@@ -15,7 +15,7 @@ It also takes into account any namespacing folder in your Assets Catalogs (i.e. 
 
 ## Customization
 
-You can customize some elements of this template by overriding the following parameters when invoking `swiftgen` in the command line, using `--param <paramName>=<newValue>`
+You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |

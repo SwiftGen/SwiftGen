@@ -1,8 +1,28 @@
-# Master
+# SwiftGen 6.0 Migration Guide
 
-*** Work In Progress — Will be consolidated once the release is ready ***
+## Changes for users
+
+### Strings
+
+The parser will no longer normalize string keys, which can lead to duplicate keys if your file contain similar keys but with different casing. For example, if your file contains:
+
+```
+"abcNews.something" = "foo";
+"ABCNews.somethingElse" = "bar";
+```
+
+SwiftGenKit will no longer consolidate these into one "abcNews" case. It is up to the user to fix this inconsistent casing in their `strings` files, or to adapt a custom template to take that into consideration.
+
+## Changes for template writers
+
+### XCAssets
+
+Groups now have an extra attribute `isNamespaced` that reflects the "provides namespace" setting in Xcode.
 
 # SwiftGenKit 2.0 (SwiftGen 5.0) Migration Guide
+
+<details>
+<summary>Migration Guide</summary>
 
 If you're migrating from SwiftGenKit 1.x to SwiftGenKit 2.0 — which is the case if you are migrating from SwiftGen 4.x to SwiftGen 5.0 — then you should be aware of the following changes in variable names generated in the output context by SwiftGenKit, and adapt your custom templates accordingly to change the name of the variables you use.
 
@@ -70,3 +90,5 @@ _📖 see the full context structure [in the documentation here](https://github.
 Previously the parser context generation method (`stencilContext()`) accepted parameters such as `enumName`, this has been removed in favor of the `--param` system.
 
 Templates will automatically receive a `param` object with parameters from the CLI invocation, and should provide default values in case no value was present in the invocation.
+
+</details>
