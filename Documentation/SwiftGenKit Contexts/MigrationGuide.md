@@ -92,3 +92,53 @@ Previously the parser context generation method (`stencilContext()`) accepted pa
 Templates will automatically receive a `param` object with parameters from the CLI invocation, and should provide default values in case no value was present in the invocation.
 
 </details>
+
+# SwiftGen 4.2 Migration Guide
+
+<details>
+<summary>Migration Guide</summary>
+
+## Deprecated context variables in SwiftGen 4.2 ##
+
+The following Stencil context variables have been renamed or replaced in SwiftGen 4.2.
+They will no longer be available after the next major release of SwiftGen 5.0.
+
+**If you wrote custom templates for SwiftGen, we advise you to migrate your template to use to these new context variables** instead of the old one so that they'll continue to work in 4.2 but also in the upcoming 5.0.
+
+### Colors ###
+
+- `enumName`: has been replaced by `param.enumName`, should provide default value.
+- `rgb` and `rgba` (for each color): can be composed from the other components.
+
+### Fonts ###
+
+- `enumName`: has been replaced by `param.enumName`, should provide default value.
+- `fontName` (for each font): has been replaced by the `name` property.
+
+### Images ###
+
+- `enumName`: has been replaced by `param.enumName`, should provide default value.
+- `images`: just old, `catalogs` contains the structured information.
+
+### Storyboards ###
+
+- `extraImports`: replaced by `modules` (https://github.com/AliSoftware/SwiftGen/pull/243)
+- `sceneEnumName`: has been replaced by `param. sceneEnumName`, should provide default value.
+- `segueEnumName`: has been replaced by `param. segueEnumName `, should provide default value.template using Stencil.
+- For each `scene`:
+  - `isBaseViewController`: removed. You can replace it with a test for `baseType == "ViewController"`.
+
+### Strings ###
+
+- `enumName`: has been replaced by `param.enumName`, should provide default value.
+- `strings` and `structuredStrings`: replaced by `tables` array, where each table has a structured `levels` property.
+- `tableName`: replaced by `tables` array, where each table has a `name` property.
+- for each `level`:
+  - `subenums`: renamed to `children`.
+- for each `string`:
+  - `keytail`: renamed to `name`.
+  - `params` structure with the `names`, `typednames`, `types`, `count` and `declarations` arrays: removed.
+  - These have been replaced by `types` which is an array of types. The previous variables
+ can now be reconstructed using template tags now that Stencil has become more powerful.
+
+</details>

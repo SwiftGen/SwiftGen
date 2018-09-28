@@ -197,3 +197,13 @@ These are just a few of the changes to the structure of the variables passed by 
 Also, a few dedicated Stencil filters provided by SwiftGen (via StencilSwiftKit) have been renamed. Especially the `join` and `snakeToCamelCase` filters now take a parameter. See [StencilSwiftKit's own Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/master/Documentation/MigrationGuide.md#stencilswiftkit-20-swiftgen-50) for more info.
 
 </details>
+
+
+# SwiftGen 4.2 Migration Guide
+
+<details>
+<summary>Migration Guide</summary>
+
+If you're still using SwiftGen 4.x, you should at least consider follow the [SwiftGen 4.2 Migration Guide](SwiftGenKit Contexts/MigrationGuide.md#swiftgen-42-migration-guide) to prepare your migration to SwiftGen 5.0 smoothly, by getting rid of deprecated variables in your contexts.
+
+</details>
