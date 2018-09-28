@@ -7,7 +7,7 @@ require 'English' # for $CHILD_STATUS to work
 
 namespace :release do
   desc 'Create a new release on GitHub, CocoaPods and Homebrew'
-  task :new => [:check_versions, 'swiftgen:tests', :github, :cocoapods, :homebrew]
+  task :new => [:check_versions, 'xcode:test', :github, :cocoapods, :homebrew]
 
   desc 'Check if all versions from the podspecs and CHANGELOG match'
   task :check_versions do
@@ -65,7 +65,7 @@ namespace :release do
   end
 
   desc 'Create a zip containing all the prebuilt binaries'
-  task :zip => ['swiftgen:clean', 'swiftgen:install'] do
+  task :zip => ['cli:clean', 'cli:install'] do
     `cp LICENSE README.md CHANGELOG.md build/swiftgen`
     `cd build/swiftgen; zip -r ../swiftgen-#{Utils.podspec_version}.zip .`
   end
