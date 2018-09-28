@@ -24,6 +24,12 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 internal enum JSONFilesInline {
+  internal enum Configuration {
+    internal static let apiVersion: String = "2"
+    internal static let country: Any? = nil
+    internal static let environment: String = "staging"
+    internal static let options: [String: Any] = ["screen-order": ["1", "2", "3"]]
+  }
   internal enum Documents {
     internal enum Document1 {
       internal static let items: [String] = ["Mark McGwire", "Sammy Sosa", "Ken Griffey"]
@@ -33,22 +39,16 @@ internal enum JSONFilesInline {
     }
   }
   internal enum GroceryList {
-    internal static let items: [String] = ["value1", "value2"]
-  }
-  internal enum Json {
-    internal static let key2: String = "2"
-    internal static let key3: [String: Any] = ["nestedKey3": ["1", "2", "3"]]
-    internal static let key4: Any? = nil
-    internal static let key1: String = "value1"
+    internal static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
   internal enum Mapping {
-    internal static let key2: Double = 1.0
-    internal static let key3: [String: Any] = ["nestedKey1": "nestedValue1", "nestedKey2": "nestedValue2"]
-    internal static let key4: Any? = nil
-    internal static let key1: String = "value1"
+    internal static let car: Any? = nil
+    internal static let foo: [String: Any] = ["bar": "banana", "baz": "orange"]
+    internal static let hello: String = "world"
+    internal static let weight: Double = 33.3
   }
-  internal enum Scalar {
-    internal static let value: String = "value1"
+  internal enum Version {
+    internal static let value: String = "1.2.3.beta.4"
   }
 }
 // swiftlint:enable identifier_name line_length number_separator type_body_length
@@ -62,12 +62,12 @@ internal enum JSONFilesInline {
 
 // swiftlint:disable identifier_name line_length type_body_length
 internal enum JSONFilesRuntime {
-  internal enum Json {
-    private static let _document = JSONDocument(path: "json.json")
-    internal static let key2: String = _document["key2"]
-    internal static let key3: [String: Any] = _document["key3"]
-    internal static let key4: Any? = _document["key4"]
-    internal static let key1: String = _document["key1"]
+  internal enum Configuration {
+    private static let _document = JSONDocument(path: "configuration.json")
+    internal static let apiVersion: String = _document["api-version"]
+    internal static let country: Any? = _document["country"]
+    internal static let environment: String = _document["environment"]
+    internal static let options: [String: Any] = _document["options"]
   }
 }
 // swiftlint:enable identifier_name line_length type_body_length
@@ -76,10 +76,9 @@ internal enum JSONFilesRuntime {
 
 // Access content embedded inline in Swift
 let list = JSONFilesInline.GroceryList.items
-let dictionary = JSONFilesInline.Mapping.key3
-let name = JSONFilesInline.Scalar.value
+let dictionary = JSONFilesInline.Configuration.options
+let name = JSONFilesInline.Version.value
 
 // Or access content by loading JSON file at runtime
-let stringValue = JSONFilesRuntime.Json.key1
-let doubleValue = JSONFilesRuntime.Json.key2
-let info = JSONFilesRuntime.Json.key3
+let stringValue = JSONFilesRuntime.Configuration.apiVersion
+let info = JSONFilesRuntime.Configuration.options
