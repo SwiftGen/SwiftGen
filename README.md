@@ -218,7 +218,7 @@ One rare cases where this might be useful — as opposed to using a config file 
 Each subcommand generally accepts the same options and syntax, and they mirror the options and parameters from the configuration file:
 
 * `--output FILE` or `-o FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
-* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](Documentation/templates)) to generate the output.
+* `--templateName NAME` or `-n NAME`: define the Stencil template to use (by name, see [here for more info](Documentation/templates)) to generate the output.
 * `--templatePath PATH` or `-p PATH`: define the Stencil template to use, using a full path.
 * Note: you should specify one and only one template when invoking SwiftGen. You have to use either `-t` or `-p` but should not use both at the same time (it wouldn't make sense anyway and you'll get an error if you try)
 * Each command supports multiple input files (or directories where applicable).

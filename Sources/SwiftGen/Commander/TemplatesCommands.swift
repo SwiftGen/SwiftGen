@@ -47,7 +47,7 @@ let templatesListCommand = command(
 
     outputLines.append("---")
     outputLines.append("You can add custom templates in \(appSupportTemplatesPath).")
-    outputLines.append("You can also specify templates by path using `-p PATH` instead of `-t NAME`.")
+    outputLines.append("You can also specify templates by path using `templatePath` instead of `templateName`.")
     outputLines.append("For more information, see the documentation on GitHub.")
     outputLines.append("")
 

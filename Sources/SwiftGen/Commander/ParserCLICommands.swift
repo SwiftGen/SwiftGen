@@ -9,10 +9,20 @@ import PathKit
 import StencilSwiftKit
 import SwiftGenKit
 
-private let templateNameOption = Option<String>(
+// deprecated option
+private let deprecatedTemplateNameOption = Option<String>(
   "template",
   default: "",
   flag: "t",
+  description: """
+    DEPRECATED, use `--templateName` instead
+    """
+)
+
+private let templateNameOption = Option<String>(
+  "templateName",
+  default: "",
+  flag: "n",
   description: """
     The name of the template to use for code generation. \
     See `swiftgen templates list` for a list of available names
@@ -36,18 +46,20 @@ extension ParserCLI {
   func command() -> CommandType {
     return Commander.command(
       outputOption,
+      deprecatedTemplateNameOption,
       templateNameOption,
       templatePathOption,
       paramsOption,
       VariadicArgument<Path>("PATH", description: self.pathDescription, validator: pathsExist)
-    ) { output, templateName, templatePath, parameters, paths in
+    ) { output, oldTemplateName, templateName, templatePath, parameters, paths in
       try ErrorPrettifier.execute {
         let parser = try self.parserType.init(options: [:]) { msg, _, _ in
           logMessage(.warning, msg)
         }
         try parser.parse(paths: paths)
 
-        let templateRef = try TemplateRef(templateShortName: templateName,
+        let resolvedlTemplateName = templateName.isEmpty ? oldTemplateName : templateName
+        let templateRef = try TemplateRef(templateShortName: resolvedlTemplateName,
                                           templateFullPath: templatePath)
         let templateRealPath = try templateRef.resolvePath(forSubcommand: self.templateFolder)
 

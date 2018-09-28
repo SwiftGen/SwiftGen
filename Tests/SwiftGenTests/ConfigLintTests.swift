@@ -187,9 +187,9 @@ class ConfigLintTests: XCTestCase {
         (.error, "xcassets.inputs: Fixtures/XCAssets/Images.xcassets does not exist"),
         (.error, "xcassets.inputs: Fixtures/XCAssets/Images.xcassets does not exist"),
         (.error, """
-          xcassets.outputs: Template named custom-swift3 not found. Use `swiftgen templates` to \
-          list available named templates or use `templatePath` to specify a template by its full \
-          path.
+          xcassets.outputs: Template named custom-swift3 not found. Use `swiftgen templates list` \
+          to list available named templates or use `templatePath` to specify a template by its \
+          full path.
           """),
         (.error, """
           xcassets.outputs.output: Generated does not exist. Intermediate folders up to the output \
