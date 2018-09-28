@@ -43,7 +43,7 @@ internal enum JSONFiles {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/SwiftGen/blob/master/Tests/Fixtures/Generated/JSON/inline-swift3-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/JSON/inline-swift3-context-all.swift)
 
 ## Usage example
 

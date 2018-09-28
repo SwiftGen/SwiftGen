@@ -1,4 +1,4 @@
-## SwiftGen Configuration File
+# SwiftGen Configuration File
 
 In order to avoid invoking SwiftGen manually multiple times — one for each subcommand — and having to remember each arguments to pass every time, you can instead use a YAML configuration file to configure everything.
 
