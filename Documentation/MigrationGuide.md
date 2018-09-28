@@ -27,9 +27,15 @@ You should replace invocations in your config files with the new `ib` command na
 
 ## Bundled Templates have been renamed & cleaned
 
+A few minor template functionality changes have been made, mostly cleaning up some old code and old behaviours. You can read more about it in the [templates Migration Guide](templates/MigrationGuide.md#swiftgen-60-migration-guide).
+
+### Removed Swift 2 support
+
 We've (finally) removed the bundled `swift2` templates. These have been deprecated for a while and were not being tested, so we're dropping them with this release. We assume most of you are already developing in a newer version of Swift (3 or 4).
 
-A few minor template functionality changes have been made, mostly cleaning up some old code and old behaviours. The `xcassets` templates now support `NSDataAssets`, and they will now only group assets if the "Provides Namespace" checkbox is ticked for a group (you can change back to the old behaviour if needed). You can read more about it in the [templates Migration Guide](templates/MigrationGuide.md#swiftgen-60-migration-guide).
+### Asset Catalog changes
+
+The `xcassets` templates now support `NSDataAssets`, and they will now only group assets if the "Provides Namespace" checkbox is ticked for a group (you can change back to the old behaviour if needed).
 
 ### Storyboards template has been split into scenes and segues templates
 
