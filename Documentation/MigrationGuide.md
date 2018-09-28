@@ -7,7 +7,7 @@ All the migration guides for SwiftGen are spread out over a few files, depending
 |-----------------|-----------------|---------|
 | SwiftGen Migration Guide (this file) | All users of SwiftGen | Changes in configuration, CLI parameters and global changes overview |
 | [Templates Migration Guide](templates/MigrationGuide.md) | Users of SwiftGen's bundled templates (`templateName` option) | Some templates may have been renamed, removed or merged, or their functionality may have changed |
-| [SwiftGenKit Migration Guide](SwiftGenKit Contexts/MigrationGuide.md) | Template writers | Changes in names of variables provided by SwiftGenKit to your templates |
+| [SwiftGenKit Migration Guide](SwiftGenKit%20Contexts/MigrationGuide.md) | Template writers | Changes in names of variables provided by SwiftGenKit to your templates |
 | [StencilSwiftKit Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/master/Documentation/MigrationGuide.md) | Template writers | Changes in extra filters and tags for use in templates |
 
 # SwiftGen 6.0 Migration Guide
@@ -114,7 +114,7 @@ For more information, read the [creating your own templates](Creating-your-templ
 
 SwiftGen 6.0 uses the latest Stencil and StencilSwiftKit libraries, so there are plenty of new features for template writers, such as variable subscripting, an `indent` filter, better error reporting, ...
 
-There have been a few minor context changes, see [SwiftGenKit's own Migration Guide](SwiftGenKit Contexts/MigrationGuide.md#swiftgenkit-20-swiftgen-50-migration-guide) for more information.
+There have been a few minor context changes, see [SwiftGenKit's own Migration Guide](SwiftGenKit%20Contexts/MigrationGuide.md#swiftgenkit-20-swiftgen-50-migration-guide) for more information.
 
 
 # SwiftGen 5.1 Migration Guide
@@ -202,7 +202,7 @@ For example:
 * for the `xcassets` command — previously named `images` — the root key isn't the `images` array anymore, but the `catalogs` key instead, listing all the Assets Catalogs that SwiftGen parsed;
 * for strings, now that SwiftGen support more than one `.strings` localizations table, the root key you iterate over isn't `strings` or `structuredStrings` but is not a `tables` array, and its structure has changed a bit.
 
-These are just a few of the changes to the structure of the variables passed by SwiftGenKit to your templates. To learn more about all the variables which have been renamed, removed or added and the new structures for each SwiftGen command, see [SwiftGenKit's own Migration Guide](SwiftGenKit Contexts/MigrationGuide.md#swiftgenkit-20-swiftgen-50-migration-guide).
+These are just a few of the changes to the structure of the variables passed by SwiftGenKit to your templates. To learn more about all the variables which have been renamed, removed or added and the new structures for each SwiftGen command, see [SwiftGenKit's own Migration Guide](SwiftGenKit%20Contexts/MigrationGuide.md#swiftgenkit-20-swiftgen-50-migration-guide).
 
 ### Some SwiftGen-specific Stencil filters evolved
 
@@ -216,6 +216,6 @@ Also, a few dedicated Stencil filters provided by SwiftGen (via StencilSwiftKit)
 <details>
 <summary>Migration Guide</summary>
 
-If you're still using SwiftGen 4.x, you should at least consider follow the [SwiftGen 4.2 Migration Guide](SwiftGenKit Contexts/MigrationGuide.md#swiftgen-42-migration-guide) to prepare your migration to SwiftGen 5.0 smoothly, by getting rid of deprecated variables in your contexts.
+If you're still using SwiftGen 4.x, you should at least consider follow the [SwiftGen 4.2 Migration Guide](SwiftGenKit%20Contexts/MigrationGuide.md#swiftgen-42-migration-guide) to prepare your migration to SwiftGen 5.0 smoothly, by getting rid of deprecated variables in your contexts.
 
 </details>

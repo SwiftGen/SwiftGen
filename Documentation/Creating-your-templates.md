@@ -1,6 +1,6 @@
 # Customize SwiftGen templates
 
-This document describes how to make your own templates for SwiftGen, so it can generate code more to your liking and code following your own coding conventions. For in depth documentation of the bundled templates, we refer you to the documentation for [each specific template](https://github.com/SwiftGen/templates/tree/master/Documentation).
+This document describes how to make your own templates for SwiftGen, so it can generate code more to your liking and code following your own coding conventions. For in depth documentation of the bundled templates, we refer you to the documentation for [each specific template](templates).
 
 ## Templates files on disk (Search Path priority)
 
@@ -91,4 +91,4 @@ Additionally to the [tags and filters](https://stencil.fuller.li/en/latest/built
 
 When SwiftGen generates your code, it provides a context (a dictionary) with the variables containing what assets/colors/strings/… the subcommand did detect, to render your Stencil template using those variables.
 
-A full documentation of the produced context for each command can be found in the [SwiftGenKit documentation](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/SwiftGenKit%20Contexts/).
+A full documentation of the produced context for each command can be found in the [SwiftGenKit documentation](SwiftGenKit%20Contexts).
