@@ -55,6 +55,29 @@ namespace :changelog do
     end
   end
 
+  LINKS_SECTION_TITLE = 'Changes in other SwiftGen modules'.freeze
+
+  desc 'Add links to other CHANGELOGs in the topmost SwiftGen CHANGELOG entry'
+  task :links do
+    changelog = File.read('CHANGELOG.md')
+    abort('Links seems to already exist for latest version entry') if /^### (.*)/.match(changelog)[1] == LINKS_SECTION_TITLE
+    links = linked_changelogs(
+      stencilswiftkit: Utils.podfile_lock_version('StencilSwiftKit'),
+      stencil: Utils.podfile_lock_version('Stencil')
+    )
+    changelog.sub!(/^##[^#].*$\n/, "\\0\n#{links}")
+    File.write('CHANGELOG.md', changelog)
+  end
+
+  def linked_changelogs(swiftgenkit: nil, stencilswiftkit: nil, stencil: nil, templates: nil)
+    <<-LINKS.gsub(/^\s*\|/, '')
+      |### #{LINKS_SECTION_TITLE}
+      |
+      |* [StencilSwiftKit #{stencilswiftkit}](https://github.com/SwiftGen/StencilSwiftKit/blob/#{stencilswiftkit}/CHANGELOG.md)
+      |* [Stencil #{stencil}](https://github.com/kylef/Stencil/blob/#{stencil}/CHANGELOG.md)
+    LINKS
+  end
+
   desc "Push the CHANGELOG's top section as a GitHub release"
   task :push_github_release do
     require 'octokit'

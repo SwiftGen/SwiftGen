@@ -3,6 +3,7 @@
 
 require 'json'
 require 'pathname'
+require 'plist'
 
 # Utility functions to run Xcode commands, extract versionning info and logs messages
 #
@@ -43,6 +44,11 @@ class Utils
     pod_vers = root_pods.select { |n| n.start_with?(pod) }.first # "SwiftGen (x.y.z)"
     /\((.*)\)$/.match(pod_vers)[1] # Just the 'x.y.z' part
   end
+
+  def self.plist_version
+    Plist.parse_xml('Sources/SwiftGen/Info.plist')['CFBundleVersion']
+  end
+
 
   def self.octokit_client
     token   = File.exist?('.apitoken') && File.read('.apitoken')
