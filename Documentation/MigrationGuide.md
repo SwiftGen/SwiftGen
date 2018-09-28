@@ -10,6 +10,8 @@ All the migration guides for SwiftGen are spread out over a few files, depending
 | [SwiftGenKit Migration Guide](SwiftGenKit%20Contexts/MigrationGuide.md) | Template writers | Changes in names of variables provided by SwiftGenKit to your templates |
 | [StencilSwiftKit Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/master/Documentation/MigrationGuide.md) | Template writers | Changes in extra filters and tags for use in templates |
 
+----
+
 # SwiftGen 6.0 Migration Guide
 
 If you're migrating from SwiftGen 5.x to SwiftGen 6.0, there might be some migration steps you'll need to use.
