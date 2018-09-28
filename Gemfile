@@ -17,4 +17,5 @@ end
 # For releasing to GitHub
 group :release do
 	gem 'octokit', '~> 4.9'
+	gem 'plist', '~> 3.2'
 end

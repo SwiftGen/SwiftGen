@@ -67,6 +67,7 @@ GEM
     parallel (1.12.1)
     parser (2.5.1.2)
       ast (~> 2.4.0)
+    plist (3.4.0)
     powerpack (0.1.2)
     public_suffix (3.0.3)
     rainbow (3.0.0)
@@ -104,9 +105,10 @@ PLATFORMS
 DEPENDENCIES
   cocoapods (~> 1.5)
   octokit (~> 4.9)
+  plist (~> 3.2)
   rake (~> 12.3)
   rubocop (~> 0.58)
   xcpretty
 
 BUNDLED WITH
-   1.16.1
+   1.16.5

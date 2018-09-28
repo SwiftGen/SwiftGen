@@ -3,6 +3,7 @@
 
 require 'json'
 require 'pathname'
+require 'plist'
 
 # Utility functions to run Xcode commands, extract versionning info and logs messages
 #

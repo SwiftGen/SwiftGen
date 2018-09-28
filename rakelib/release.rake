@@ -1,6 +1,8 @@
 # Used constants:
 # _none_
 
+require 'English' # for $CHILD_STATUS to work
+
 ## [ Release a new version ] ##################################################
 
 namespace :release do
@@ -24,13 +26,15 @@ namespace :release do
     Utils.table_info('SwiftGen.podspec', version)
 
     # Check StencilSwiftKit version too
-    lock_version = Utils.podfile_lock_version('StencilSwiftKit')
-    pod_version = Utils.podspec_version('StencilSwiftKit')
-    results << Utils.table_result(
-      lock_version == pod_version,
-      "#{'StencilSwiftKit'.ljust(Utils::COLUMN_WIDTH - 10)} (#{pod_version})",
-      "Please update StencilSwiftKit to latest version in your Podfile"
-    )
+    Dir.chdir('../StencilSwiftKit') do
+      lock_version = Utils.podfile_lock_version('StencilSwiftKit')
+      pod_version = Utils.podspec_version('StencilSwiftKit')
+      results << Utils.table_result(
+        lock_version == pod_version,
+        "#{'StencilSwiftKit'.ljust(Utils::COLUMN_WIDTH - 10)} (#{pod_version})",
+        "Please update StencilSwiftKit to latest version in your Podfile"
+      )
+    end
 
     # Check if version matches the Info.plist
     results << Utils.table_result(
