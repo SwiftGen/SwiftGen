@@ -76,6 +76,9 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 * Updated the playgrounds with the new `json`, `plist` and `yaml` commands, and updated the other pages to reflect the template changes.  
   [David Jennes](https://github.com/djbe)
   [#495](https://github.com/SwiftGen/SwiftGen/pull/495)
+* We're deprecating the old `--template` CLI option in favor of `--templateName`, to better match the naming of the other options and the configuration file. The old `--template` option will remain until the next major version.  
+  [David Jennes](https://github.com/djbe)
+  [#509](https://github.com/SwiftGen/SwiftGen/pull/509)
 
 ### Bug Fixes
 
