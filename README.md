@@ -163,7 +163,7 @@ Or add the path to the `bin` folder to your `$PATH` and invoke `swiftgen` direct
 
 ## Usage
 
-> ❗️ If you're migrating from older SwiftGen versions, don't forget to [read the Migration Guide](./Documentation/MigrationGuide.md).
+> ❗️ If you're migrating from older SwiftGen versions, don't forget to [read the Migration Guide](Documentation/MigrationGuide.md).
 
 SwiftGen is provided as a single command-line tool which uses a configuration file to run various actions (subcommands).
 
@@ -188,9 +188,9 @@ xcassets:
 
 Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for short, and it will execute what's described in the configuration file
 
-To learn more about the configuration file — its more detailed syntax and possibilities, how to pass custom parameters, using `swiftgen config lint` to validate it, how to use alternate config files, and other tips — [see the dedicated documentation](./Documentation/ConfigFile.md).
+To learn more about the configuration file — its more detailed syntax and possibilities, how to pass custom parameters, using `swiftgen config lint` to validate it, how to use alternate config files, and other tips — [see the dedicated documentation](Documentation/ConfigFile.md).
 
-To learn more about the configuration file — its more detailed syntax and possibilities, how to pass custom parameters, to lint/validate it, how to use alternate config files, and other tips — [see the dedicated documentation](./Documentation/ConfigFile.md).
+To learn more about the configuration file — its more detailed syntax and possibilities, how to pass custom parameters, to lint/validate it, how to use alternate config files, and other tips — [see the dedicated documentation](Documentation/ConfigFile.md).
 
 There are also additional subcommands you can invoke from the command line to manage and configure SwiftGen:
 
@@ -218,7 +218,7 @@ One rare cases where this might be useful — as opposed to using a config file 
 Each subcommand generally accepts the same options and syntax, and they mirror the options and parameters from the configuration file:
 
 * `--output FILE` or `-o FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
-* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](./Documentation/templates)) to generate the output.
+* `--template NAME` or `-t NAME`: define the Stencil template to use (by name, see [here for more info](Documentation/templates)) to generate the output.
 * `--templatePath PATH` or `-p PATH`: define the Stencil template to use, using a full path.
 * Note: you should specify one and only one template when invoking SwiftGen. You have to use either `-t` or `-p` but should not use both at the same time (it wouldn't make sense anyway and you'll get an error if you try)
 * Each command supports multiple input files (or directories where applicable).
@@ -236,7 +236,7 @@ SwiftGen comes bundled with some templates for each of the subcommand (`colors`,
 
 💡 You can use the `swiftgen templates list` command to list all the available templates (both custom and bundled templates) for each subcommand, list the template content and dupliate them to create your own.
 
-For more information about how to create your own templates, [see the dedicated documentation](./Documentation/Creating-your-templates.md).
+For more information about how to create your own templates, [see the dedicated documentation](Documentation/Creating-your-templates.md).
 
 ### Templates bundled with SwiftGen:
 
@@ -246,7 +246,7 @@ As explained above, you can use `swiftgen templates list` to list all templates 
 * A `swift4` template, compatible with Swift 4
 * Other variants, like `flat-swift3/4` and `structured-swift3/4` templates for Strings, etc.
 
-You can **find the documentation for each bundled template [here in the repo](./Documentation/templates)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
+You can **find the documentation for each bundled template [here in the repo](Documentation/templates)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
 Each MarkDown file documents the Swift Version it's aimed for, the use case for that template (in which cases you might favor that template over others), the available parameters to customize it on invocation (using the `params:` key in your config file), and some code examples.
 
 > Don't hesitate to make PRs to share your improvements suggestions on the bundled templates 😉
@@ -265,17 +265,16 @@ There are also a lot of documentation in the form of Markdown files in this repo
 
 Be sure to [check the "Documentation" folder](Documentation/) of each repository.
 
-Especially, in addition to the previously mentionned [Migration Guide](./Documentation/MigrationGuide.md) and [Configuration File](./Documentation/ConfigFile.md) documentation, the `Documentation/` folder in the SwiftGen repository also includes documentation on how to:
+Especially, in addition to the previously mentionned [Migration Guide](Documentation/MigrationGuide.md) and [Configuration File](Documentation/ConfigFile.md) documentation, the `Documentation/` folder in the SwiftGen repository also includes:
 
-* [Integrate SwiftGen in your Xcode project](./Documentation/Articles/Xcode-Integration.md) — so it rebuilds the constants every time you build
-* [Configure SwiftLint to help your developers use constants generated by SwiftGen](./Documentation/Articles/SwiftLint-Integration.md)
-* [Create a custom template](Creating-your-templates.md), and [watch a folder to auto-regenerate an output every time you save the template you're working on](./Documentation/Articles/Watch-a-folder-for-changes.md)
-* …and more
+* A [`Documentation/templates` subdirectory](Documentation/templates/) which details the documentation for each templates bundled with SwiftGen (when to use each template, what the output will look like, and custom parameters to adjust them, …)
+* A [`Documentation/SwiftGenKit Contexts` subdirectory](Documentation/SwiftGenKit%20Contexts/) which details the structure of the "Stencil Contexts", i.e. the Dictionary/YAML representation resulting of parsing your input files. This documentation is useful for people wanting to write their own templates, so that they know the structure and various keys available to write their template to construct the wanted generated output accordingly.
+* [Various articles](Documentation/Articles/) to provide good practice & tips on how to better take advantage of SwiftGen in your projects
+  * [Integrate SwiftGen in your Xcode project](Documentation/Articles/Xcode-Integration.md) — so it rebuilds the constants every time you build
+  * [Configure SwiftLint to help your developers use constants generated by SwiftGen](Documentation/Articles/SwiftLint-Integration.md)
+  * [Create a custom template](Creating-your-templates.md), and [watch a folder to auto-regenerate an output every time you save the template you're working on](Documentation/Articles/Watch-a-folder-for-changes.md)
+  * …and more
 
-That folder also contains:
-
-* A [`Documentation/templates` subdirectory](./Documentation/templates/) which details the documentation for each templates bundled with SwiftGen (when to use each template, what the output will look like, and custom parameters to adjust them, …)
-* A [`Documentation/SwiftGenKit Contexts` subdirectory](./Documentation/SwiftGenKit%20Contexts/) which details the structure of the "Stencil Contexts", i.e. the Dictionary/YAML representation resulting of parsing your input files. This documentation is useful for people wanting to write their own templates, so that they know the structure and various keys available to write their template to construct the wanted generated output accordingly.
 
 ### Tutorials
 

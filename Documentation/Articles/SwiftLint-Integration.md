@@ -1,13 +1,13 @@
 # Using SwiftLint to enfore the usage of SwiftGen in your codebase
 
-If you want to generate warnings (or even errors) in your Xcode project if your developers accidentally use the string-based Apple APIs instead of the SwiftGen generated constants in your code, you could leverage [SwiftLint](https://github.com/Realm/SwiftLint) to do that for you.
+If you want to generate warnings (or even errors) in your Xcode project if your developers accidentally use the string-based Apple APIs instead of the SwiftGen generated constants in your code, you can leverage [SwiftLint](https://github.com/Realm/SwiftLint) to do that for you.
 
 SwiftLint allows you to add custom rules to your `.swiftlint.yml` config file, based on Regular Expressions.
-You can use those to detect uses of things like `UIColor(red:green:blue:alpha:)` and suggest to use `Assets.xxx` instead, or detect uses of `NSLocalizedString` and suggest to use the `L10n` generated constants instead.
+You can use those to detect uses of things like `UIColor(red:green:blue:alpha:)` and suggest to use `Assets.xxx` instead, or detect uses of `NSLocalizedString` and suggest to replace them with the `L10n` generated constants, etc.
 
 ## Example configuration
 
-Here's an example of custom rules you could add to your `.swiftlint.yml` SwiftLint configuration file:
+Here's an example of custom rules you can add to your `.swiftlint.yml` SwiftLint configuration file:
 
 ```yaml
 custom_rules:
@@ -27,7 +27,7 @@ custom_rules:
     message: "Use FontFamily.<family>.<variant>.size(<size>) instead"
     severity: error
   swiftgen_storyboards:
-    name: "SwiftGen Storyboards"
+    name: "SwiftGen Storyboard Scenes"
     regex: '(UIStoryboard\(name: ?"?.+"?, ?bundle:.+\))|(instantiateViewController\(withIdentifier:.+?\))|(instantiateInitialViewController\(\))'
     message: "Use StoryboardScene.<storyboad>.<scene>.instantiate() instead"
     severity: error
@@ -40,8 +40,8 @@ custom_rules:
 
 Feel free to use this and adapt to your needs, especially:
 
-* This example makes SwiftLint generate _errors_ when it finds a match of an usage of the Apple API instead of the SwiftGen constants. Maybe instead you want to be less strict about it and use `severity: warning` instead in your project
-* The `message` this example configuration displays mention the name of the `enums` generated that the user should use. If you customised the name of such enum (typically with `params: { "enumName": "somethingElse" }` in your `swiftgen.yml` config file), you might want to adapt the messages reported by SwiftLint accordingly.
+* This example makes SwiftLint generate _errors_ when it finds an usage of the Apple API where a SwiftGen constant should be used instead. Maybe you prefer to be less strict about it and use `severity: warning` rather than error in your project
+* The `message` this example configuration displays mention the name of the `enums` generated that the user should use. If you've customised the name of such enum (typically with `params: { "enumName": "somethingElse" }` in your `swiftgen.yml` config file), you may want to adapt the messages reported by SwiftLint accordingly.
 
 ## Contribution
 

@@ -20,13 +20,13 @@ Then name the script phase anyway you like, and write the script invoking SwiftG
 For example, your Script Build Phase should look like this if you integrated SwiftGen via CocoaPods:
 
 ```sh
-"$PODS_ROOT"/SwiftGen/bin/swiftgen
+"$PODS_ROOT/SwiftGen/bin/swiftgen"
 ```
 
 Or like this if you downloaded SwiftGen via the ZIP installation method and unzipped it at the root of your repository:
 
 ```sh
-"$PROJECT_ROOT"/SwiftGen/bin/swiftgen
+"$PROJECT_ROOT/SwiftGen/bin/swiftgen"
 ```
 
 Or could look like this if you installed `swiftgen` system-wide with homebrew (adding some security in case your coworkers didn't install SwiftGen on their machine)
@@ -48,7 +48,7 @@ Note: Those script phase examples above all assume that you're [using a `swiftge
 
 When adding SwiftGen as a build phase in your project, if instead of using a Config file you invoked subcommands from the command line, then sometimes builds can cancel because Xcode doesn't like source code changes happening mid-build. It can also cause issues with `IBDesignable` views triggering looping builds when opening storyboards.
 
-To avoid this, we highly recommand using a `swiftgen.yml` configuration file instead of invoking the subcommands directly from the command line, or if you still want to invoke subcommands from the command line, be sure to use `--output` to specify the output file to write (instead of a `> output-file.swift` redirection for example). Specifying the output file (via the configuration file or via `--output`) — instead of outputing to `stdout` then using a redirection — allows SwiftGen to avoid re-writing the file to disk if the content is not modified.
+To avoid this, we highly recommand using a `swiftgen.yml` configuration file instead of invoking the subcommands directly from the command line, or if you still want to invoke subcommands from the command line, be sure to use `--output` to specify the output file to write (instead of a `> output-file.swift` redirection for example). Doing this allows SwiftGen to avoid re-writing the file to disk if the content is not modified.
 
 Typically don't use:
 ```sh
