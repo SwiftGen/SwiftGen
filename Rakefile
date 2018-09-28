@@ -3,6 +3,11 @@ require 'pathname'
 require 'yaml'
 require 'shellwords'
 
+if ENV['BUNDLE_GEMFILE'].nil?
+  puts "\u{274C} Please use bundle exec"
+  exit 1
+end
+
 ## [ Constants ] ##############################################################
 
 WORKSPACE = 'SwiftGen'.freeze
