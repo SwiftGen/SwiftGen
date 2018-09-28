@@ -44,6 +44,11 @@ class Utils
     /\((.*)\)$/.match(pod_vers)[1] # Just the 'x.y.z' part
   end
 
+  def self.plist_version
+    Plist.parse_xml('Sources/SwiftGen/Info.plist')['CFBundleVersion']
+  end
+
+
   def self.octokit_client
     token   = File.exist?('.apitoken') && File.read('.apitoken')
     token ||= File.exist?('../.apitoken') && File.read('../.apitoken')
