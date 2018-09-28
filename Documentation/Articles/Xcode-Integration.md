@@ -4,9 +4,7 @@ To integrate SwiftGen directly in an Xcode project, and make it generate the fil
 
 ## Adding SwiftGen as a Run Script Phase
 
-You can read [Apple's dedicated documentation which explains how to add a Run Script Phase (with illustrations) here](https://developer.apple.com/library/ios/recipes/xcode_help-project_editor/Articles/AddingaRunScriptBuildPhase.html)
-
-In short, it consists of these steps:
+To add a build phase to your target, follow these steps:
 
 * Select the project in the Project Navigator on the left of your Xcode window
 * Select your App Target in the list

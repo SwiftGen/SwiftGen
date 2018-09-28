@@ -45,4 +45,4 @@ Feel free to use this and adapt to your needs, especially:
 
 ## Contribution
 
-This example configuration is only an example/suggestion. It might not be perfect, we haven't tested _all_ the use cases, so maybe the regular expressions will have to be tuned/improved if you find a false positive or a use case that those didn't catch. If that's the case, don't hesitate to contribute by at least commenting on https://github.com/SwiftGen/SwiftGen/issues/446 to help us improve this!
+This example configuration is only an example/suggestion. It may not be perfect, we haven't tested _all_ the use cases, so maybe the regular expressions will have to be tuned/improved if you find a false positive or a use case that those didn't catch. If that's the case, don't hesitate to contribute by at least commenting on https://github.com/SwiftGen/SwiftGen/issues/446 to help us improve this!
