@@ -29,12 +29,12 @@ namespace :playground do
     )
   end
   task :json do
-    sh %(cp Tests/Fixtures/Resources/YAML/good/json.json SwiftGen.playground/Resources/)
+    sh %(cp Tests/Fixtures/Resources/YAML/good/configuration.json SwiftGen.playground/Resources/)
   end
   task :plist do
     sh %(cp Tests/Fixtures/Resources/Plist/good/Info.plist SwiftGen.playground/Resources/TestInfo.plist)
-    sh %(cp Tests/Fixtures/Resources/Plist/good/array.plist SwiftGen.playground/Resources/)
-    sh %(cp Tests/Fixtures/Resources/Plist/good/dictionary.plist SwiftGen.playground/Resources/)
+    sh %(cp Tests/Fixtures/Resources/Plist/good/shopping-list.plist SwiftGen.playground/Resources/)
+    sh %(cp Tests/Fixtures/Resources/Plist/good/configuration.plist SwiftGen.playground/Resources/)
   end
   task :strings do
     Utils.run(
