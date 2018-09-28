@@ -50,9 +50,9 @@ import Foundation
   {% set typeName %}{{table.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}{% endset %}
   {% if param.objcCompatible %}
   @objcMembers @objc({{rootTypeName}}{{typeName}})
-  {{accessModifier}} final class {{typeName}}: NSObject {
+  {{accessModifier}} final class {{typeName}}: NSObject { // swiftlint:disable:this attributes
   {% else %}
-  {{accessModifier}} enum {{table.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+  {{accessModifier}} enum {{typeName}} {
   {% endif %}
     {% filter indent:2 %}{% call recursiveBlock table.name table.levels %}{% endfilter %}
   }

@@ -12,7 +12,7 @@ import Foundation
 @objcMembers
 internal final class L10n: NSObject {
   @objcMembers @objc(L10nLocalizable)
-  internal final class Localizable: NSObject {
+  internal final class Localizable: NSObject { // swiftlint:disable:this attributes
     /// Some alert body there
     internal static let alertMessage = L10n.tr("Localizable", "alert_message")
     /// Title of the alert
@@ -45,7 +45,7 @@ internal final class L10n: NSObject {
     internal static let settingsUserProfileSectionHEADERTITLE = L10n.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
   }
   @objcMembers @objc(L10nLocMultiline)
-  internal final class LocMultiline: NSObject {
+  internal final class LocMultiline: NSObject { // swiftlint:disable:this attributes
     /// multi\nline
     internal static let multiline = L10n.tr("LocMultiline", "MULTILINE")
     /// test
@@ -63,6 +63,10 @@ internal final class L10n: NSObject {
 // MARK: - Implementation Details
 
 extension L10n {
+  private static func tr(_ table: String, _ key: String) -> String {
+    return NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
+  }
+
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
     let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
     return String(format: format, locale: Locale.current, arguments: args)
