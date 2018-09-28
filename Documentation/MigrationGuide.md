@@ -1,3 +1,17 @@
+
+# Migration Guides
+
+All the migration guides for SwiftGen are spread out over a few files, depending on the target audience.
+
+| Migration Guide | Target Audience | Abstract |
+|-----------------|-----------------|---------|
+| SwiftGen Migration Guide (this file) | All users of SwiftGen | Changes in configuration, CLI parameters and global changes overview |
+| [Templates Migration Guide](templates/MigrationGuide.md) | Users of SwiftGen's bundled templates (`templateName` option) | Some templates may have been renamed, removed or merged, or their functionality may have changed |
+| [SwiftGenKit Migration Guide](SwiftGenKit%20Contexts/MigrationGuide.md) | Template writers | Changes in names of variables provided by SwiftGenKit to your templates |
+| [StencilSwiftKit Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/master/Documentation/MigrationGuide.md) | Template writers | Changes in extra filters and tags for use in templates |
+
+----
+
 # SwiftGen 6.0 Migration Guide
 
 If you're migrating from SwiftGen 5.x to SwiftGen 6.0, there might be some migration steps you'll need to use.
@@ -13,9 +27,15 @@ You should replace invocations in your config files with the new `ib` command na
 
 ## Bundled Templates have been renamed & cleaned
 
+A few minor template functionality changes have been made, mostly cleaning up some old code and old behaviours. You can read more about it in the [templates Migration Guide](templates/MigrationGuide.md#swiftgen-60-migration-guide).
+
+### Removed Swift 2 support
+
 We've (finally) removed the bundled `swift2` templates. These have been deprecated for a while and were not being tested, so we're dropping them with this release. We assume most of you are already developing in a newer version of Swift (3 or 4).
 
-A few minor template functionality changes have been made, mostly cleaning up some old code and old behaviours. The `xcassets` templates now support `NSDataAssets`, and they will now only group assets if the "Provides Namespace" checkbox is ticked for a group (you can change back to the old behaviour if needed). You can read more about it in the [templates Migration Guide](Templates/MigrationGuide.md#swiftgen-60-migration-guide).
+### Asset Catalog changes
+
+The `xcassets` templates now support `NSDataAssets`, and they will now only group assets if the "Provides Namespace" checkbox is ticked for a group (you can change back to the old behaviour if needed).
 
 ### Storyboards template has been split into scenes and segues templates
 
@@ -102,7 +122,7 @@ For more information, read the [creating your own templates](Creating-your-templ
 
 SwiftGen 6.0 uses the latest Stencil and StencilSwiftKit libraries, so there are plenty of new features for template writers, such as variable subscripting, an `indent` filter, better error reporting, ...
 
-There have been a few minor context changes, see [SwiftGenKit's own Migration Guide](SwiftGenKit Contexts/MigrationGuide.md#swiftgenkit-20-swiftgen-50-migration-guide) for more information.
+There have been a few minor context changes, see [SwiftGenKit's own Migration Guide](SwiftGenKit%20Contexts/MigrationGuide.md#swiftgenkit-20-swiftgen-50-migration-guide) for more information.
 
 
 # SwiftGen 5.1 Migration Guide
@@ -112,7 +132,7 @@ There have been a few minor context changes, see [SwiftGenKit's own Migration Gu
 
 ## Template functionality changes
 
-Only a small change in the generated code that'll affect a tiny subset of users: the `allValues` variable has been deprecated. See the [templates Migration Guide](Templates/MigrationGuide.md#functionality-changes-in-21-swiftgen-51) for more information.
+Only a small change in the generated code that'll affect a tiny subset of users: the `allValues` variable has been deprecated. See the [templates Migration Guide](templates/MigrationGuide.md#functionality-changes-in-21-swiftgen-51) for more information.
 
 </details>
 
@@ -155,18 +175,18 @@ Instead, you're now **required** to provide a template when invoking SwiftGen, e
 
 Some templates bundled with SwiftGen have been **renamed** to have a better naming consistency. Some others have been **removed** or **merged with others** (for example the storyboard templates between iOS & macOS are now merged into a single one compatible with both platforms, other templates now use the `--param` feature to be customizable, removing the need to maintain 2 separate templates for some variants)
 
-Be sure to consult the [templates Migration Guide](Templates/MigrationGuide.md#templates-20-migration-guide) to see the list of changes (renamings or removal) in templates bundled in SwiftGen.
+Be sure to consult the [templates Migration Guide](templates/MigrationGuide.md#templates-20-migration-guide) to see the list of changes (renamings or removal) in templates bundled in SwiftGen.
 
 📖 Also, **each template bundled in SwiftGen has a dedicated documentation now**, listing what the template is for, what does the generated code looks like, when you might want to choose that template over another one, and the parameters (`--param X=Y`) supported by this template for customization via the command line.  
 This should help you choose the right template to use for your use case (or help you decide if you need to create your own if none of the provided ones fit your needs) and see what's customizable for each.
 
-📖 See [the dedicated documentation folder](Templates) for those templates documentation. This folder is organized the same way the templates are: one subfolder for each SwiftGen command (`colors`, `strings`, …), then one markdown file for each template name.
+📖 See [the dedicated documentation folder](templates) for those templates documentation. This folder is organized the same way the templates are: one subfolder for each SwiftGen command (`colors`, `strings`, …), then one markdown file for each template name.
 
 ### Breaking template functionality changes
 
 ❗️ The code generated by the `storyboards` templates is **not** backward compatible with the one generated by SwiftGen 4.x. This means that you'll need to adapt your codebase and call sites accordingly.
 
-Please read the [templates migration guide](Templates/MigrationGuide.md#functionality-changes-in-20-swiftgen-50) for more information, which includes a compatibility template. Essentially, you need to change calls like the following line:
+Please read the [templates migration guide](templates/MigrationGuide.md#functionality-changes-in-20-swiftgen-50) for more information, which includes a compatibility template. Essentially, you need to change calls like the following line:
 
 ```swift
 StoryboardScene.Message.instantiateMessageList()
@@ -190,10 +210,20 @@ For example:
 * for the `xcassets` command — previously named `images` — the root key isn't the `images` array anymore, but the `catalogs` key instead, listing all the Assets Catalogs that SwiftGen parsed;
 * for strings, now that SwiftGen support more than one `.strings` localizations table, the root key you iterate over isn't `strings` or `structuredStrings` but is not a `tables` array, and its structure has changed a bit.
 
-These are just a few of the changes to the structure of the variables passed by SwiftGenKit to your templates. To learn more about all the variables which have been renamed, removed or added and the new structures for each SwiftGen command, see [SwiftGenKit's own Migration Guide](SwiftGenKit Contexts/MigrationGuide.md#swiftgenkit-20-swiftgen-50-migration-guide).
+These are just a few of the changes to the structure of the variables passed by SwiftGenKit to your templates. To learn more about all the variables which have been renamed, removed or added and the new structures for each SwiftGen command, see [SwiftGenKit's own Migration Guide](SwiftGenKit%20Contexts/MigrationGuide.md#swiftgenkit-20-swiftgen-50-migration-guide).
 
 ### Some SwiftGen-specific Stencil filters evolved
 
 Also, a few dedicated Stencil filters provided by SwiftGen (via StencilSwiftKit) have been renamed. Especially the `join` and `snakeToCamelCase` filters now take a parameter. See [StencilSwiftKit's own Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/master/Documentation/MigrationGuide.md#stencilswiftkit-20-swiftgen-50) for more info.
+
+</details>
+
+
+# SwiftGen 4.2 Migration Guide
+
+<details>
+<summary>Migration Guide</summary>
+
+If you're still using SwiftGen 4.x, you should at least consider follow the [SwiftGen 4.2 Migration Guide](SwiftGenKit%20Contexts/MigrationGuide.md#swiftgen-42-migration-guide) to prepare your migration to SwiftGen 5.0 smoothly, by getting rid of deprecated variables in your contexts.
 
 </details>

@@ -47,7 +47,7 @@ enum StoryboardScene {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Fixtures/Generated/IB-iOS/scenes-swift4-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/IB-iOS/scenes-swift4-context-all.swift)
 
 ## Usage example
 

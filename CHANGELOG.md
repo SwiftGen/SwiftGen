@@ -6,7 +6,7 @@
 
 ⚠️ This major version is a big milestone in which a lot of refactoring and cleaning has been done. Many features added over previous releases have been reworked and unified, while also preparing SwiftGen for future additions. This means that you'll need to adapt your configuration files (or command line invocations) and custom templates to work with this new major version.
 
-Read the [SwiftGen 6.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/MigrationGuide.md#swiftgen-60-migration-guide) for a list of changes you'll need to apply.
+Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen-60-migration-guide) for a list of changes you'll need to apply.
 
 ### Bug Fixes
 
@@ -275,7 +275,7 @@ Read the [SwiftGen 6.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blo
 
 ⚠️ This major version is a big milestone in which a lot of refactoring and cleaning has been done. Many features added over previous releases have been reworked and unified, while also preparing SwiftGen for future additions. This means that you'll need to adapt your command line invocations and custom templates to work with this new major version.
 
-Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blob/master/Documentation/MigrationGuide.md#swiftgen-50-migration-guide) for a list of changes you'll need to apply.
+Read the [SwiftGen 5.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen-50-migration-guide) for a list of changes you'll need to apply.
 
 ### Changes in other SwiftGen modules
 
@@ -301,13 +301,13 @@ Read the [SwiftGen 5.0 Migration Guide](https://github.com/SwiftGen/SwiftGen/blo
 
 #### Notable breaking changes from other SwiftGen repositories
 
-* Many deprecated templates have been removed (or merged), and others have been renamed to reflect new behaviours. Please check the [templates migration guide](https://github.com/SwiftGen/templates/blob/master/Documentation/MigrationGuide.md#deprecated-templates-in-20-swiftgen-50) for more information.  
+* Many deprecated templates have been removed (or merged), and others have been renamed to reflect new behaviours. Please check the [templates migration guide](Documentation/templates/MigrationGuide.md#deprecated-templates-in-20-swiftgen-50) for more information.  
   [David Jennes](https://github.com/djbe)
   [SwiftGen/templates#47](https://github.com/SwiftGen/templates/issues/47)
-* There have been some breaking changes in the generated code for storyboards. Please check the [templates migration guide](https://github.com/SwiftGen/templates/blob/master/Documentation/MigrationGuide.md#deprecated-templates-in-20-swiftgen-50) for more information, where we also provide a compatibility template.  
+* There have been some breaking changes in the generated code for storyboards. Please check the [templates migration guide](Documentation/templates/MigrationGuide.md#deprecated-templates-in-20-swiftgen-50) for more information, where we also provide a compatibility template.  
   [Olivier Halligon](https://github.com/AliSoftware)
   [SwiftGen/templates#65](https://github.com/SwiftGen/templates/issues/65)
-* Removed deprecated template context variables, and restructured many others. Please check the [SwiftGenKit migration guide](https://github.com/SwiftGen/SwiftGenKit/blob/master/Documentation/MigrationGuide.md#swiftgenkit-20-swiftgen-50) for more information.  
+* Removed deprecated template context variables, and restructured many others. Please check the [SwiftGenKit migration guide](Documentation/SwiftGenKit%20Contexts/MigrationGuide.md#swiftgenkit-20-swiftgen-50) for more information.  
   [David Jennes](https://github.com/djbe)
   [SwiftGen/SwiftGenKit#5](https://github.com/SwiftGen/SwiftGenKit/issues/5)
 * Some filters have been removed in favour of Stencil's built in versions, and other filters have been updated to accept parameters. Please consult the [StencilSwiftKit migration guide](https://github.com/SwiftGen/StencilSwiftKit/blob/master/Documentation/MigrationGuide.md#stencilswiftkit-20-swiftgen-50) for more information.  
@@ -413,7 +413,7 @@ In preparation for an upcoming cleanup of SwiftGen to remove some legacy code as
 
 As a result, if you wrote custom templates, you should already prepare for the upcoming 5.0 by migrating your templates to use the new variables (already avaiable in SwiftGen 4.2 / SwiftGenKit 1.0).
 
-See [#244](https://github.com/SwiftGen/SwiftGen/issues/244) and [the Migration Guide in the Wiki](https://github.com/SwiftGen/SwiftGen/wiki/Migration-Guides) for a list of deprcations and their replacements.
+See [#244](https://github.com/SwiftGen/SwiftGen/issues/244) and [the Migration Guide](Documentation/MigrationGuide.md) for a list of deprecations and their replacements.
 
 ### Internal changes
 
@@ -629,7 +629,7 @@ Note: The next minor version will focus on bringing more documentation for all t
 
 > 💡 You can now **create your custom templates more easier than ever**, by cloning an existing template!
 >
-> e.g. to clone [the default `strings-default.stencil` template](https://github.com/SwiftGen/SwiftGen/blob/master/templates/strings-default.stencil):
+> e.g. to clone [the default `strings-default.stencil` template](https://github.com/SwiftGen/SwiftGen/blob/3.0.0/templates/strings-default.stencil):
 >
 > * use `swiftgen templates cat strings --output strings-custom.stencil`
 > * modify the cloned `strings-custom.stencil` template to your liking
@@ -790,8 +790,6 @@ stop working as expected. That's the main reason why the version has been bumped
 #### Enhancements
 
 * Adding comments to generated color enums which allow you to see the color in the QuickHelp documentation
-
-![colors QuickHelp](documentation/ColorsQuickHelp.png)
 
 * The default translation of strings are now added as documentation comments to the enum cases.  
   _You can add translations to your own templates by using the `string.translation` variable._  

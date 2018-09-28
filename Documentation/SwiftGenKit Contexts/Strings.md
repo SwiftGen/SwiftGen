@@ -2,7 +2,7 @@
 
 ## Input
 
-The strings parser accepts a `strings` file, typically `Localizable.strings`. It will parse each string in this file, including the type information for formatting parameters. 
+The strings parser accepts a `strings` file, typically `Localizable.strings`. It will parse each string in this file, including the type information for formatting parameters.
 
 The strings file will be converted into a structured tree version, where each string is separated into components by the `.` character. We call this the `dot syntax`, each component representing a level. For example, the following strings:
 
