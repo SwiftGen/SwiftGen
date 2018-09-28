@@ -31,6 +31,33 @@ class StringsTests: XCTestCase {
     ]
   }
 
+  let flatSwiftObjCCompatibleVariations: VariationGenerator = { name, context in
+    switch name {
+    case "empty":
+      return [(context: context, suffix: "")]
+    case "multiple":
+      return [
+        (context: try StencilContext.enrich(context: context,
+                                            parameters: ["objcCompatible"]),
+         suffix: "-objc-compatible")
+      ]
+    default:
+      break
+    }
+
+    return [
+      (context: try StencilContext.enrich(context: context,
+                                          parameters: ["objcCompatible", "enumName=XCTLoc"]),
+       suffix: "-objc-compatible-customname"),
+      (context: try StencilContext.enrich(context: context,
+                                          parameters: ["objcCompatible", "noComments"]),
+       suffix: "-objc-compatible-no-comments"),
+      (context: try StencilContext.enrich(context: context,
+                                          parameters: ["objcCompatible", "publicAccess"]),
+       suffix: "-objc-compatible-publicAccess")
+    ]
+  }
+
   func testFlatSwift3() {
     test(template: "flat-swift3",
          contextNames: Contexts.all,
@@ -43,6 +70,13 @@ class StringsTests: XCTestCase {
          contextNames: Contexts.all,
          directory: .strings,
          contextVariations: variations)
+  }
+
+  func testFlatSwift4ObjcCompatible() {
+    test(template: "flat-swift4",
+         contextNames: Contexts.all,
+         directory: .strings,
+         contextVariations: flatSwiftObjCCompatibleVariations)
   }
 
   func testStructuredSwift3() {

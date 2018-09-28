@@ -103,6 +103,9 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 * Updated the playgrounds with the new `json`, `plist` and `yaml` commands, and updated the other pages to reflect the template changes.  
   [David Jennes](https://github.com/djbe)
   [#495](https://github.com/SwiftGen/SwiftGen/pull/495)
+* Added option to generate Objective-C compatible Strings Swift code using `objcCompatible` parameter.
+  [Lukas Kukacka](https://github.com/lukaskukacka)
+  [#489](https://github.com/SwiftGen/SwiftGen/issues/489)
 
 ### Internal Changes
 
