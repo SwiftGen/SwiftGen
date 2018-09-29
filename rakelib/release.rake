@@ -2,6 +2,8 @@
 # _none_
 
 require 'English' # for $CHILD_STATUS to work
+require 'net/http'
+require 'uri'
 
 ## [ Release a new version ] ##################################################
 
