@@ -3,7 +3,6 @@
 
 require 'json'
 require 'pathname'
-require 'plist'
 
 # Utility functions to run Xcode commands, extract versionning info and logs messages
 #
@@ -46,6 +45,7 @@ class Utils
   end
 
   def self.plist_version
+    require 'plist'
     Plist.parse_xml('Sources/SwiftGen/Info.plist')['CFBundleVersion']
   end
 
