@@ -67,7 +67,7 @@ namespace :release do
   desc 'Create a zip containing all the prebuilt binaries'
   task :zip => ['cli:clean', 'cli:install'] do
     `cp LICENSE README.md CHANGELOG.md build/swiftgen`
-    `cd build/swiftgen; zip -r ../swiftgen-#{Utils.podspec_version}.zip .`
+    `cd build/swiftgen; zip -r ../swiftgen-#{Utils.podspec_version('SwiftGen')}.zip .`
   end
 
   def post(url, content_type)
@@ -90,7 +90,7 @@ namespace :release do
 
   desc 'Upload the zipped binaries to a new GitHub release'
   task :github => :zip do
-    v = Utils.podspec_version
+    v = Utils.podspec_version('SwiftGen')
 
     changelog = `sed -n /'^## #{v}$'/,/'^## '/p CHANGELOG.md`.gsub(/^## .*$/, '').strip
     Utils.print_header "Releasing version #{v} on GitHub"
@@ -121,7 +121,7 @@ namespace :release do
   desc 'Release a new version on Homebrew and prepare a PR'
   task :homebrew do
     Utils.print_header 'Updating Homebrew Formula'
-    tag = Utils.podspec_version
+    tag = Utils.podspec_version('SwiftGen')
     sh 'git pull --tags'
     revision = `git rev-list -1 #{tag}`.chomp
     formulas_dir = Bundler.with_clean_env { `brew --repository homebrew/core`.chomp }

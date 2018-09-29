@@ -34,7 +34,7 @@ class Utils
 
   ## [ Convenience Helpers ] ##################################################
 
-  def self.podspec_version(file = '*')
+  def self.podspec_version(file)
     JSON.parse(`bundle exec pod ipc spec #{file}.podspec`)['version']
   end
 
