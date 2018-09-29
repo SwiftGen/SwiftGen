@@ -57,6 +57,9 @@ jobs:
       - run:
           name: Lint generated output code
           command: bundle exec rake lint:output
+      - run:
+          name: Run Danger
+          command: bundle exec danger --verbose
       - *store-artifacts
 
   xcode-build-and-test:
