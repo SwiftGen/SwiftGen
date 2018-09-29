@@ -14,7 +14,9 @@ _None_
 
 ### Bug Fixes
 
-_None_
+* IB: Fix missing `import AppKit`/`import UIKit` in some rare cases.  
+  [David Jennes](https://github.com/djbe)
+  [#519](https://github.com/SwiftGen/SwiftGen/pull/519)
 
 ### Internal Changes
 
@@ -37,22 +39,22 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
   [Diego Chohfi](https://github.com/dchohfi)
   [#257](https://github.com/SwiftGen/SwiftGen/issues/257)
 * Remove Swift 2 support.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#420](https://github.com/SwiftGen/SwiftGen/pull/420)
 * Renamed the `storyboards` command to `ib`, to better reflect it's purpose. An alias for `storyboards` still exists, but it will be removed at some point.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#423](https://github.com/SwiftGen/SwiftGen/pull/423)
 * XCAssets: the generated templates won't namespace groups by default anymore, use the `forceProvidesNamespaces` flag to enable this behaviour again.  
   [jechris](https://github.com/pjechris)
   [#453](https://github.com/SwiftGen/SwiftGen/issues/453)
 * XCAssets: the templates won't generate any all-values accessors anymore by default. Use the `allValues` flag to enable this behaviour again. Note: this replaces the old `noAllValues` flag (with an inverse behaviour).  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#480](https://github.com/SwiftGen/SwiftGen/pull/480)
 * XCAssets: Dropped the deprecated `allValues` constant, use the type specific constants such as `allColors`, `allDataItems` and `allImages`. The default value of `imageAlias` has also been changed from `Image` to `AssetImageTypeAlias`, to be consistent with the other types.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#482](https://github.com/SwiftGen/SwiftGen/pull/482)
 * Interface Builder: split up the storyboards template into 2 parts, one for scenes and one for segues.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#419](https://github.com/SwiftGen/SwiftGen/pull/419)
 
 ### New Features
@@ -64,7 +66,7 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
   [Yonas Kolb](https://github.com/yonaskolb)
   [#411](https://github.com/SwiftGen/SwiftGen/pull/411)
 * The `swiftgen.yml` config file now accepts multiple outputs for each command, allowing you to generate multiple outputs from the same files and content. This also means that the `output` parameter is now deprecated, in favour of the `outputs` parameter, and it may be removed in a future version of SwiftGen. Similarly, the `paths` parameter has been renamed to `inputs` for consistency. You can always use `swiftgen config lint` to validate your configuration file.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#424](https://github.com/SwiftGen/SwiftGen/pull/424)
   [#510](https://github.com/SwiftGen/SwiftGen/pull/510)
 * Use `swiftlint:disable all` in generated files to avoid interference with SwiftLint rules custom to the host project.  
