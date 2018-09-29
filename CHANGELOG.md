@@ -17,6 +17,10 @@ _None_
 * IB: Fix missing `import AppKit`/`import UIKit` in some rare cases.  
   [David Jennes](https://github.com/djbe)
   [#519](https://github.com/SwiftGen/SwiftGen/pull/519)
+* IB: Fix issue with segues-swift4 template when compiled with Swift 4.2 on macOS.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#515](https://github.com/SwiftGen/SwiftGen/issues/515)
+  [#518](https://github.com/SwiftGen/SwiftGen/pull/518)
 
 ### Internal Changes
 
