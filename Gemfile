@@ -12,6 +12,7 @@ end
 group :development do
 	gem 'cocoapods', '~> 1.5'
 	gem 'rubocop', '~> 0.58'
+	gem 'danger'
 end
 
 # For releasing to GitHub
