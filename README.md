@@ -22,8 +22,8 @@ SwiftGen is a tool to auto-generate Swift code for resources of your projects, t
       <li><a href="#colors">Colors</a>
       <li><a href="#fonts">Fonts</a>
       <li><a href="#interface-builder">Interface Builder files</a>
-      <li><a href="#json-and-YAML">JSON and YAML files</a>
-      <li><a href="#plist">Plists</a>
+      <li><a href="#json-and-yaml">JSON and YAML files</a>
+      <li><a href="#plists">Plists</a>
       <li><a href="#strings">Localizable strings</a>
     </ul>
   </td>
