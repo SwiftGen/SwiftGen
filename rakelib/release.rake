@@ -142,7 +142,11 @@ namespace :release do
       Utils.print_header 'Checking Homebrew formula...'
       Bundler.with_clean_env do
         sh 'brew audit --strict --online swiftgen'
-        sh 'brew upgrade swiftgen'
+        if system('brew ls --versions swiftgen > /dev/null')
+          sh 'brew upgrade swiftgen' # Already installed, so try upgrade
+        else
+          sh 'brew install swiftgen' # Not installed, so install
+        end
         sh 'brew test swiftgen'
       end
 
