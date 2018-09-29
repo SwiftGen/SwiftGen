@@ -104,13 +104,13 @@ class Utils
   # run a command, pipe output through 'xcpretty' and store the output in CI artifacts
   def self.xcpretty(cmd, task, subtask)
     name = (task.name + (subtask.empty? ? '' : "_#{subtask}")).gsub(/[:-]/, '_')
-    command = [*cmd].join(' && ')
+    command = [*cmd].join(' && \\' + "\n")
 
     if ENV['CIRCLECI']
-      Rake.sh "set -o pipefail && (#{command}) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\" | " \
+      Rake.sh "set -o pipefail && (\\\n#{command} \\\n) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\" | " \
         "bundle exec xcpretty --color --report junit --output \"#{ENV['CIRCLE_TEST_REPORTS']}/xcode/#{name}.xml\""
     elsif system('which xcpretty > /dev/null')
-      Rake.sh "set -o pipefail && (#{command}) | bundle exec xcpretty -c"
+      Rake.sh "set -o pipefail && (\\\n#{command} \\\n) | bundle exec xcpretty -c"
     else
       Rake.sh command
     end
@@ -120,7 +120,7 @@ class Utils
   # run a command and store the output in CI artifacts
   def self.plain(cmd, task, subtask)
     name = (task.name + (subtask.empty? ? '' : "_#{subtask}")).gsub(/[:-]/, '_')
-    command = [*cmd].join(' && ')
+    command = [*cmd].join(' && \\' + "\n")
 
     if ENV['CIRCLECI']
       Rake.sh "set -o pipefail && (#{command}) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\""
