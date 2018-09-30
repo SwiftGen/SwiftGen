@@ -27,7 +27,7 @@ end
 
 # Encouragement message
 if need_fixes.empty?
-	markdown('You did a good job here! 🤝')
+	markdown('Seems like everything is in order 👍 You did a good job here! 🤝')
 else
 	markdown('Once you fix those tiny nitpickings above, we should be good to go! 🙌')
 end
