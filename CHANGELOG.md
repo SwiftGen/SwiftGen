@@ -28,6 +28,7 @@ _None_
 * Integrated Danger to help on contributions by giving automatic feedback.  
   [Olivier Halligon](https://github.com/AliSoftware)
   [#520](https://github.com/SwiftGen/SwiftGen/issues/520)
+  [#524](https://github.com/SwiftGen/SwiftGen/issues/524)
 
 ## 6.0.0
 

@@ -190,8 +190,6 @@ Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for 
 
 To learn more about the configuration file — its more detailed syntax and possibilities, how to pass custom parameters, using `swiftgen config lint` to validate it, how to use alternate config files, and other tips — [see the dedicated documentation](Documentation/ConfigFile.md).
 
-To learn more about the configuration file — its more detailed syntax and possibilities, how to pass custom parameters, to lint/validate it, how to use alternate config files, and other tips — [see the dedicated documentation](Documentation/ConfigFile.md).
-
 There are also additional subcommands you can invoke from the command line to manage and configure SwiftGen:
 
 * The  `swiftgen config` subcommand to help you with the configuration file, especially `swiftgen config lint` to validate that your Config file is valid and has no errors
@@ -334,7 +332,7 @@ This will generate a `enum ColorName` with one `case` per color listed in the te
 
 The input file is expected to be either:
 
-* a [plain text file](Tests/Fixtures/Resources/Colors/colors.txt), with one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`) or the name of another color in the file. Whitespaces are ignored.
+* a [plain text file](Tests/Fixtures/Resources/Colors/extra.txt), with one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`) or the name of another color in the file. Whitespaces are ignored.
 * a [JSON file](Tests/Fixtures/Resources/Colors/colors.json), representing a dictionary of names -> values, each value being the hex representation of the color
 * a [XML file](Tests/Fixtures/Resources/Colors/colors.xml), expected to be the same format as the Android colors.xml files, containing tags `<color name="AColorName">AColorHexRepresentation</color>`
 * a [`*.clr` file](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/DrawColor/Concepts/AboutColorLists.html#//apple_ref/doc/uid/20000757-BAJHJEDI) used by Apple's Color Palettes.
