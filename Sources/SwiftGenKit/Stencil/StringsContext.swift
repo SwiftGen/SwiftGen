@@ -31,10 +31,8 @@ private extension String {
 extension Strings.Parser {
   public func stencilContext() -> [String: Any] {
     let entryToStringMapper = { (entry: Strings.Entry, keyPath: [String]) -> [String: Any] in
-      let levelName = entry.keyStructure.last ?? ""
-
       var result: [String: Any] = [
-        "name": levelName,
+        "name": entry.keyStructure.last ?? "",
         "key": entry.key.newlineEscaped,
         "translation": entry.translation.newlineEscaped
       ]
@@ -91,10 +89,10 @@ extension Strings.Parser {
 
     let sortedNextLevelKeyPaths = Array(Set(
       nextLevelKeyPaths.map { keyPath in
-        keyPath.joined(separator: ".")
+        keyPath.joined(separator: Strings.Entry.separator)
       }))
       .sorted()
-      .map { $0.components(separatedBy: ".") }
+      .map { $0.components(separatedBy: Strings.Entry.separator) }
 
     for nextLevelKeyPath in sortedNextLevelKeyPaths {
       let entriesInKeyPath = entries.filter {
