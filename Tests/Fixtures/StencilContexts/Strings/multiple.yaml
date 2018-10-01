@@ -82,6 +82,23 @@ tables:
       - "Int"
   name: "Localizable"
 - levels:
+    children:
+    - name: "ending"
+      strings:
+      - key: "ending.with."
+        name: "with"
+        translation: "Ceci n'est pas une pipe."
+    - children:
+      - children:
+        - children:
+          - name: "empty"
+            strings:
+            - key: "..some..dots.and..empty..components.."
+              name: "components"
+              translation: "Veni, vidi, vici"
+          name: "and"
+        name: "dots"
+      name: "some"
     strings:
     - key: "MULTILINE"
       name: "MULTILINE"
