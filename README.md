@@ -190,8 +190,6 @@ Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for 
 
 To learn more about the configuration file — its more detailed syntax and possibilities, how to pass custom parameters, using `swiftgen config lint` to validate it, how to use alternate config files, and other tips — [see the dedicated documentation](Documentation/ConfigFile.md).
 
-To learn more about the configuration file — its more detailed syntax and possibilities, how to pass custom parameters, to lint/validate it, how to use alternate config files, and other tips — [see the dedicated documentation](Documentation/ConfigFile.md).
-
 There are also additional subcommands you can invoke from the command line to manage and configure SwiftGen:
 
 * The  `swiftgen config` subcommand to help you with the configuration file, especially `swiftgen config lint` to validate that your Config file is valid and has no errors
