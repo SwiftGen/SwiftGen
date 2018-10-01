@@ -22,6 +22,9 @@ _None_
   [Olivier Halligon](https://github.com/AliSoftware)
   [#515](https://github.com/SwiftGen/SwiftGen/issues/515)
   [#518](https://github.com/SwiftGen/SwiftGen/pull/518)
+* SPM/Mint: Update the Stencil version to 0.13.1.  
+  [David Jennes](https://github.com/djbe)
+  [#527](https://github.com/SwiftGen/SwiftGen/pull/527)
 
 ### Internal Changes
 
