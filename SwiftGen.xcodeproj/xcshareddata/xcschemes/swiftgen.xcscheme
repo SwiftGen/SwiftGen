@@ -111,6 +111,10 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "--version"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "config lint --config $(PROJECT_DIR)/Tests/Fixtures/Configs/config-missing-paths.yml"
             isEnabled = "NO">
          </CommandLineArgument>
