@@ -32,6 +32,9 @@ _None_
   [Olivier Halligon](https://github.com/AliSoftware)
   [#533](https://github.com/SwiftGen/SwiftGen/pull/533)
   [#516](https://github.com/SwiftGen/SwiftGen/issues/516)
+* Strings: Ensure the parser correctly handles keys ending with a `.`.  
+  [David Jennes](https://github.com/djbe)
+  [#531](https://github.com/SwiftGen/SwiftGen/pull/531)
 
 ### Internal Changes
 
