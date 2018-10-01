@@ -25,6 +25,13 @@ elsif !to_develop
     "not #{github.branch_for_base}")
 end
 
+# Check `lock` files
+podfile_changed = git.modified_files.include?('Podfile.lock')
+package_changed = git.modified_files.include?('Package.resolved')
+if podfile_changed ^ package_changed
+  need_fixes << warn("You should make sure that `Podfile.lock` and `Package.resolved` are changed in sync")
+end
+
 # Encouragement message
 if need_fixes.empty?
 	markdown('Seems like everything is in order 👍 You did a good job here! 🤝')
