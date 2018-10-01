@@ -25,6 +25,9 @@ _None_
 * SPM/Mint: Update the Stencil version to 0.13.1.  
   [David Jennes](https://github.com/djbe)
   [#527](https://github.com/SwiftGen/SwiftGen/pull/527)
+* Ensure the `templates` subcommand properly works with the deprecated `storyboards` subcommand.
+  [David Jennes](https://github.com/djbe)
+  [#529](https://github.com/SwiftGen/SwiftGen/pull/529)
 
 ### Internal Changes
 
