@@ -68,7 +68,11 @@ extension Strings.Parser {
     usingMapper mapper: @escaping Mapper) -> [String: Any] {
 
     var structuredStrings: [String: Any] = [:]
+    if let name = keyPath.last {
+      structuredStrings["name"] = name
+    }
 
+    // collect strings for this level
     let strings = entries
       .filter { $0.keyStructure.count == keyPath.count + 1 }
       .sorted { $0.key.lowercased() < $1.key.lowercased() }
@@ -78,32 +82,13 @@ extension Strings.Parser {
       structuredStrings["strings"] = strings
     }
 
-    if let lastKeyPathComponent = keyPath.last {
-      structuredStrings["name"] = lastKeyPathComponent
-    }
-
-    var children: [[String: Any]] = []
-    let nextLevelKeyPaths: [[String]] = entries
-      .filter { $0.keyStructure.count > keyPath.count + 1 }
-      .map { Array($0.keyStructure.prefix(keyPath.count + 1)) }
-
-    let sortedNextLevelKeyPaths = Array(Set(
-      nextLevelKeyPaths.map { keyPath in
-        keyPath.joined(separator: Strings.Entry.separator)
-      }))
-      .sorted()
-      .map { $0.components(separatedBy: Strings.Entry.separator) }
-
-    for nextLevelKeyPath in sortedNextLevelKeyPaths {
-      let entriesInKeyPath = entries.filter {
-        Array($0.keyStructure.prefix(nextLevelKeyPath.count)) == nextLevelKeyPath
+    // collect children for this level
+    let childEntries = entries.filter { $0.keyStructure.count > keyPath.count + 1 }
+    let children = Dictionary(grouping: childEntries) { $0.keyStructure[keyPath.count] }
+      .sorted { $0.key < $1.key }
+      .map { name, entries in
+        structure(entries: entries, atKeyPath: keyPath + [name], usingMapper: mapper)
       }
-      children.append(
-          structure(entries: entriesInKeyPath,
-                    atKeyPath: nextLevelKeyPath,
-                    usingMapper: mapper)
-      )
-    }
 
     if !children.isEmpty {
       structuredStrings["children"] = children
