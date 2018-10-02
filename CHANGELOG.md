@@ -28,6 +28,10 @@ _None_
 * Ensure the `templates` subcommand properly works with the deprecated `storyboards` subcommand.
   [David Jennes](https://github.com/djbe)
   [#529](https://github.com/SwiftGen/SwiftGen/pull/529)
+* Ensure configuration file errors show as red in Xcode.  
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#533](https://github.com/SwiftGen/SwiftGen/pull/533)
+  [#516](https://github.com/SwiftGen/SwiftGen/issues/516)
 
 ### Internal Changes
 
