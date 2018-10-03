@@ -9,7 +9,7 @@ require 'uri'
 
 namespace :release do
   desc 'Create a new release on GitHub, CocoaPods and Homebrew'
-  task :new => [:check_versions, 'xcode:test', :github, :cocoapods, :homebrew]
+  task :new => [:check_versions, :confirm, 'xcode:test', :github, :cocoapods, :homebrew]
 
   desc 'Check if all versions from the podspecs and CHANGELOG match'
   task :check_versions do
@@ -61,7 +61,10 @@ namespace :release do
     )
 
     exit 1 unless results.all?
+  end
 
+  task :confirm do
+    version = Utils.podspec_version('SwiftGen')
     print "Release version #{version} [Y/n]? "
     exit 2 unless STDIN.gets.chomp == 'Y'
   end
