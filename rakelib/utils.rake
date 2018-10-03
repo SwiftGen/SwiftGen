@@ -3,6 +3,7 @@
 
 require 'json'
 require 'pathname'
+require 'open3'
 
 # Utility functions to run Xcode commands, extract versionning info and logs messages
 #
@@ -34,7 +35,9 @@ class Utils
   ## [ Convenience Helpers ] ##################################################
 
   def self.podspec_version(file)
-    JSON.parse(`bundle exec pod ipc spec #{file}.podspec`)['version']
+    file += '.podspec' unless file.include?('.podspec')
+    json, _, _ = Open3.capture3('bundle', 'exec', 'pod', 'ipc', 'spec', file)
+    JSON.parse(json)['version']
   end
 
   def self.podfile_lock_version(pod)
@@ -42,6 +45,14 @@ class Utils
     root_pods = YAML.load_file('Podfile.lock')['PODS'].map { |n| n.is_a?(Hash) ? n.keys.first : n }
     pod_vers = root_pods.select { |n| n.start_with?(pod) }.first # "SwiftGen (x.y.z)"
     /\((.*)\)$/.match(pod_vers)[1] # Just the 'x.y.z' part
+  end
+
+  def self.pod_trunk_last_version(pod)
+    require 'yaml'
+    stdout, _, _ = Open3.capture3('bundle', 'exec', 'pod', 'trunk', 'info', pod)
+    stdout.sub!("\n#{pod}\n", '')
+    last_version_line = YAML.load(stdout).first['Versions'].last
+    /^[0-9.]*/.match(last_version_line)[0] # Just the 'x.y.z' part
   end
 
   def self.plist_version
@@ -59,12 +70,14 @@ class Utils
   end
 
   def self.top_changelog_version(changelog_file = 'CHANGELOG.md')
-    `grep -m 1 '^## ' "#{changelog_file}" | sed 's/## //'`.strip
+    header, _, _ = Open3.capture3('grep', '-m', '1', '^## ', changelog_file)
+    header.gsub('## ', '').strip
   end
 
   def self.top_changelog_entry(changelog_file = 'CHANGELOG.md')
     tag = top_changelog_version
-    `sed -n /'^## #{tag}$'/,/'^## '/p "#{changelog_file}"`.gsub(/^## .*$/, '').strip
+    stdout, _, _ = Open3.capture3('sed', '-n', "/^## #{tag}$/,/^## /p", changelog_file)
+    stdout.gsub(/^## .*$/, '').strip
   end
 
   ## [ Print info/errors ] ####################################################
@@ -169,7 +182,8 @@ class Utils
   # @return [Array<Hash>] A list of { :vers => ... , :path => ... } hashes
   #                       of all Xcodes found on the machine using Spotlight
   def self.all_xcode_versions
-    xcodes = `mdfind "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode'"`.chomp.split("\n")
+    mdfind_xcodes, _, _ = Open3.capture3('mdfind', "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode'")
+    xcodes = mdfind_xcodes.chomp.split("\n")
     xcodes.map do |path|
       { vers: Gem::Version.new(`mdls -name kMDItemVersion -raw "#{path}"`), path: path }
     end
