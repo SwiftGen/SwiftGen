@@ -2,15 +2,7 @@
 
 ---
 
-## Master
-
-### Breaking Changes
-
-_None_
-
-### New Features
-
-_None_
+## 6.0.1
 
 ### Bug Fixes
 
