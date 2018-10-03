@@ -86,6 +86,20 @@ internal enum L10n {
     internal static let singleline = L10n.tr("LocMultiline", "SINGLELINE")
     /// another single line
     internal static let singleline2 = L10n.tr("LocMultiline", "SINGLELINE2")
+    internal enum Ending {
+      /// Ceci n'est pas une pipe.
+      internal static let with = L10n.tr("LocMultiline", "ending.with.")
+    }
+    internal enum Some {
+      internal enum Dots {
+        internal enum And {
+          internal enum Empty {
+            /// Veni, vidi, vici
+            internal static let components = L10n.tr("LocMultiline", "..some..dots.and..empty..components..")
+          }
+        }
+      }
+    }
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
