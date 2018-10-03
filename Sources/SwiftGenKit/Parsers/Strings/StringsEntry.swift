@@ -18,7 +18,7 @@ extension Strings {
       self.key = key
       self.translation = translation
       self.types = types
-      keyStructure = Entry.split(key: key)
+      self.keyStructure = Entry.split(key: key)
     }
 
     init(key: String, translation: String, types: PlaceholderType...) {
