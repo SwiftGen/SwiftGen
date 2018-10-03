@@ -82,7 +82,8 @@ extension Strings.Parser {
       structuredStrings["strings"] = strings
     }
 
-    // collect children for this level
+    // collect children for this level, group them by name for the next level, sort them
+    // and then structure those grouped entries
     let childEntries = entries.filter { $0.keyStructure.count > keyPath.count + 1 }
     let children = Dictionary(grouping: childEntries) { $0.keyStructure[keyPath.count] }
       .sorted { $0.key < $1.key }

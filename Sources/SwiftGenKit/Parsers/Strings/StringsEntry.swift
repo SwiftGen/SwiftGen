@@ -18,7 +18,7 @@ extension Strings {
       self.key = key
       self.translation = translation
       self.types = types
-      keyStructure = Entry.explode(key: key)
+      keyStructure = Entry.split(key: key)
     }
 
     init(key: String, translation: String, types: PlaceholderType...) {
@@ -34,7 +34,7 @@ extension Strings {
 
     private static let separatorSet = CharacterSet(charactersIn: ".")
 
-    private static func explode(key: String) -> [String] {
+    private static func split(key: String) -> [String] {
       return key
         .components(separatedBy: Entry.separatorSet)
         .filter { !$0.isEmpty }
