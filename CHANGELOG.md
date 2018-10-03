@@ -4,6 +4,11 @@
 
 ## 6.0.1
 
+### Changes in other SwiftGen modules
+
+* [StencilSwiftKit 2.7.1](https://github.com/SwiftGen/StencilSwiftKit/blob/2.7.1/CHANGELOG.md)
+* [Stencil 0.13.1](https://github.com/kylef/Stencil/blob/0.13.1/CHANGELOG.md)
+
 ### Bug Fixes
 
 * IB: Fix missing `import AppKit`/`import UIKit` in some rare cases.  
