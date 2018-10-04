@@ -8,8 +8,7 @@ require 'open3'
 # Utility functions to run Xcode commands, extract versionning info and logs messages
 #
 class Utils
-  COLUMN1_WIDTH = 30
-  COLUMN2_WIDTH = 12
+  COLUMN_WIDTHS = [30, 12]
 
   ## [ Run commands ] #########################################################
 
@@ -100,21 +99,21 @@ class Utils
 
   # format an info message in a 2 column table
   def self.table_header(col1, col2)
-    puts "| #{col1.ljust(COLUMN1_WIDTH)} | #{col2.ljust(COLUMN2_WIDTH)} |"
-    puts "| #{'-' * COLUMN1_WIDTH} | #{'-' * COLUMN2_WIDTH} |"
+    puts "| #{col1.ljust(COLUMN_WIDTHS[0])} | #{col2.ljust(COLUMN_WIDTHS[1])} |"
+    puts "| #{'-' * COLUMN_WIDTHS[0]} | #{'-' * COLUMN_WIDTHS[1]} |"
   end
 
   # format an info message in a 2 column table
   def self.table_info(label, msg)
-    puts "| #{label.ljust(COLUMN1_WIDTH)} | 👉  #{msg.ljust(COLUMN2_WIDTH-4)} |"
+    puts "| #{label.ljust(COLUMN_WIDTHS[0])} | 👉  #{msg.ljust(COLUMN_WIDTHS[1]-4)} |"
   end
 
   # format a result message in a 2 column table
   def self.table_result(result, label, error_msg)
     if result
-      puts "| #{label.ljust(COLUMN1_WIDTH)} | #{'✅'.ljust(COLUMN2_WIDTH-1)} |"
+      puts "| #{label.ljust(COLUMN_WIDTHS[0])} | #{'✅'.ljust(COLUMN_WIDTHS[1]-1)} |"
     else
-      puts "| #{label.ljust(COLUMN1_WIDTH)} | ❌  - #{error_msg.ljust(COLUMN2_WIDTH-6)} |"
+      puts "| #{label.ljust(COLUMN_WIDTHS[0])} | ❌  - #{error_msg.ljust(COLUMN_WIDTHS[1]-6)} |"
     end
     result
   end

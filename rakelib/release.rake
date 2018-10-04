@@ -33,7 +33,7 @@ namespace :release do
     pod_version = Utils.pod_trunk_last_version('StencilSwiftKit')
     results << Utils.table_result(
       lock_version == pod_version,
-      "#{'StencilSwiftKit'.ljust(Utils::COLUMN1_WIDTH - 10)} (#{pod_version})",
+      "#{'StencilSwiftKit'.ljust(Utils::COLUMN_WIDTHS[0] - 10)} (#{pod_version})",
       "Please update StencilSwiftKit to latest version in your Podfile"
     )
 
