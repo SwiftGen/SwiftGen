@@ -2,15 +2,12 @@
 
 ---
 
-## Master
+## 6.0.1
 
-### Breaking Changes
+### Changes in other SwiftGen modules
 
-_None_
-
-### New Features
-
-_None_
+* [StencilSwiftKit 2.7.1](https://github.com/SwiftGen/StencilSwiftKit/blob/2.7.1/CHANGELOG.md)
+* [Stencil 0.13.1](https://github.com/kylef/Stencil/blob/0.13.1/CHANGELOG.md)
 
 ### Bug Fixes
 

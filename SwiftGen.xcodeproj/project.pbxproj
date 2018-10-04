@@ -1265,7 +1265,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$SRCROOT/Scripts/SwiftLint.sh\" \"swiftgenkit_sources\"\nfi";
+			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$SRCROOT/Scripts/SwiftLint.sh\" \"swiftgenkit_sources\"\nfi\n";
 		};
 		DD9F4766206ADC4C006B0DCA /* ⚠️ SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;

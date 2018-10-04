@@ -1,24 +1,25 @@
 # Used constants:
 # _none_
 
-require 'English' # for $CHILD_STATUS to work
 require 'net/http'
 require 'uri'
+require 'open3'
 
 ## [ Release a new version ] ##################################################
 
 namespace :release do
   desc 'Create a new release on GitHub, CocoaPods and Homebrew'
-  task :new => [:check_versions, 'xcode:test', :github, :cocoapods, :homebrew]
+  task :new => [:check_versions, :confirm, 'xcode:test', :github, :cocoapods, :homebrew]
 
   desc 'Check if all versions from the podspecs and CHANGELOG match'
   task :check_versions do
     results = []
 
+    Utils.table_header('Check', 'Status')
+
     # Check if bundler is installed first, as we'll need it for the cocoapods task (and we prefer to fail early)
-    `which bundler`
     results << Utils.table_result(
-      $CHILD_STATUS.success?,
+      Open3.capture3('which', 'bundler')[2].success?,
       'Bundler installed',
       'Please install bundler using `gem install bundler` and run `bundle install` first.'
     )
@@ -28,15 +29,13 @@ namespace :release do
     Utils.table_info('SwiftGen.podspec', version)
 
     # Check StencilSwiftKit version too
-    Dir.chdir('../StencilSwiftKit') do
-      lock_version = Utils.podfile_lock_version('StencilSwiftKit')
-      pod_version = Utils.podspec_version('StencilSwiftKit')
-      results << Utils.table_result(
-        lock_version == pod_version,
-        "#{'StencilSwiftKit'.ljust(Utils::COLUMN_WIDTH - 10)} (#{pod_version})",
-        "Please update StencilSwiftKit to latest version in your Podfile"
-      )
-    end
+    lock_version = Utils.podfile_lock_version('StencilSwiftKit')
+    pod_version = Utils.pod_trunk_last_version('StencilSwiftKit')
+    results << Utils.table_result(
+      lock_version == pod_version,
+      "#{'StencilSwiftKit'.ljust(Utils::COLUMN_WIDTHS[0] - 10)} (#{pod_version})",
+      "Please update StencilSwiftKit to latest version in your Podfile"
+    )
 
     # Check if version matches the Info.plist
     results << Utils.table_result(
@@ -61,7 +60,10 @@ namespace :release do
     )
 
     exit 1 unless results.all?
+  end
 
+  task :confirm do
+    version = Utils.podspec_version('SwiftGen')
     print "Release version #{version} [Y/n]? "
     exit 2 unless STDIN.gets.chomp == 'Y'
   end

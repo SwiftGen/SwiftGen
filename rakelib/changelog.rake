@@ -52,6 +52,7 @@ namespace :changelog do
       puts "\u{2705}  All links correct"
     else
       puts "\u{274C}  Some wrong links found:\n" + all_wrong_links.join("\n")
+      exit 1
     end
   end
 
