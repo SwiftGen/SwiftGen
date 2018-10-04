@@ -18,7 +18,7 @@ namespace :release do
     # Check if bundler is installed first, as we'll need it for the cocoapods task (and we prefer to fail early)
     
     results << Utils.table_result(
-      system('which bundler'),
+      Open3.capture3('which', 'bundler')[2].success?,
       'Bundler installed',
       'Please install bundler using `gem install bundler` and run `bundle install` first.'
     )
