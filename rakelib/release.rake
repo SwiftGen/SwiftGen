@@ -33,7 +33,7 @@ namespace :release do
     pod_version = Utils.pod_trunk_last_version('StencilSwiftKit')
     results << Utils.table_result(
       lock_version == pod_version,
-      "#{'StencilSwiftKit'.ljust(Utils::COLUMN_WIDTHS[0] - 10)} (#{pod_version})",
+      "StencilSwiftKit (latest: #{pod_version})",
       "Please update StencilSwiftKit to latest version in your Podfile"
     )
 
@@ -48,15 +48,15 @@ namespace :release do
     changelog_entry = system("grep -q '^## #{Regexp.quote(version)}$' CHANGELOG.md")
     results << Utils.table_result(
       changelog_entry,
-      'CHANGELOG, Entry added',
+      'CHANGELOG: Release entry added',
       "Please add an entry for #{version} in CHANGELOG.md"
     )
 
-    changelog_master = system("grep -qi '^## Master' CHANGELOG.md")
+    changelog_develop = system("grep -qi '^## Develop' CHANGELOG.md")
     results << Utils.table_result(
-      !changelog_master,
-      'CHANGELOG, No master',
-      'Please remove entry for master in CHANGELOG'
+      !changelog_develop,
+      'CHANGELOG: No develop entry',
+      'Please remove entry for develop in CHANGELOG'
     )
 
     exit 1 unless results.all?
