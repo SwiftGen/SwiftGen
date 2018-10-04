@@ -46,10 +46,6 @@ internal enum L10n {
 // MARK: - Implementation Details
 
 extension L10n {
-  private static func tr(_ table: String, _ key: String) -> String {
-    return NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
-  }
-
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
     let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
     return String(format: format, locale: Locale.current, arguments: args)

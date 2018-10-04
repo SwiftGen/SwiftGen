@@ -83,10 +83,6 @@ internal enum XCTLoc {
 // MARK: - Implementation Details
 
 extension XCTLoc {
-  fileprivate static func tr(_ table: String, _ key: String) -> String {
-    return NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
-  }
-
   fileprivate static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
     let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
     return String(format: format, locale: Locale.current, arguments: args)
