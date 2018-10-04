@@ -16,6 +16,7 @@ internal enum L10n {
   internal static func objectOwnership(_ p1: Int, _ p2: String, _ p3: String) -> String {
     return L10n.tr("Localizable", "ObjectOwnership", p1, p2, p3)
   }
+  internal static let percent = L10n.tr("Localizable", "percent")
   internal static func `private`(_ p1: String, _ p2: Int) -> String {
     return L10n.tr("Localizable", "private", p1, p2)
   }

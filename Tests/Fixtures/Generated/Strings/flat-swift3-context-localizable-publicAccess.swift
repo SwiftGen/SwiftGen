@@ -18,6 +18,8 @@ public enum L10n {
   public static func objectOwnership(_ p1: Int, _ p2: String, _ p3: String) -> String {
     return L10n.tr("Localizable", "ObjectOwnership", p1, p2, p3)
   }
+  /// This is a %% character.
+  public static let percent = L10n.tr("Localizable", "percent")
   /// Hello, my name is %@ and I'm %d
   public static func `private`(_ p1: String, _ p2: Int) -> String {
     return L10n.tr("Localizable", "private", p1, p2)

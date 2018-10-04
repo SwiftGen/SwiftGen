@@ -19,6 +19,8 @@ internal enum XCTLoc {
   internal static func objectOwnership(_ p1: Int, _ p2: String, _ p3: String) -> String {
     return XCTLoc.tr("Localizable", "ObjectOwnership", p1, p2, p3)
   }
+  /// This is a %% character.
+  internal static let percent = XCTLoc.tr("Localizable", "percent")
   /// Hello, my name is %@ and I'm %d
   internal static func `private`(_ p1: String, _ p2: Int) -> String {
     return XCTLoc.tr("Localizable", "private", p1, p2)
