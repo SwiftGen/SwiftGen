@@ -5,14 +5,14 @@ namespace :changelog do
   desc 'Add the empty CHANGELOG entries after a new release'
   task :reset do
     changelog = File.read('CHANGELOG.md')
-    abort('A Master entry already exists') if changelog =~ /^##\s*Master$/
+    abort('A Develop entry already exists') if changelog =~ /^##\s*Develop$/
     changelog.sub!(/^##[^#]/, "#{header}\\0")
     File.write('CHANGELOG.md', changelog)
   end
 
   def header
     <<-HEADER.gsub(/^\s*\|/, '')
-      |## Master
+      |## Develop
       |
       |### Breaking Changes
       |
