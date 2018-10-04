@@ -41,7 +41,11 @@ public extension NSSeguePerforming {
 
 public extension SegueType where RawValue == String {
   init?(_ segue: NSStoryboardSegue) {
+    #if swift(>=4.2)
+    guard let identifier = segue.identifier else { return nil }
+    #else
     guard let identifier = segue.identifier?.rawValue else { return nil }
+    #endif
     self.init(rawValue: identifier)
   }
 }

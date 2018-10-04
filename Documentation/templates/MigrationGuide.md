@@ -89,7 +89,7 @@ The templates now handle the "Inherit module from target" setting in Interface B
 
 ### Strings
 
-A thing of note for some users is that the SwiftGen parser no longer consolidates keys with different casing. This may affect you if you have `strings` files with inconsistent keys. See the [contexts Migration Guide](../SwiftGen Contexts.md#swiftgen-60-migration-guide) for more information.
+A thing of note for some users is that the SwiftGen parser no longer consolidates keys with different casing. This may affect you if you have `strings` files with inconsistent keys. See the [contexts Migration Guide](../SwiftGen%20Contexts.md#swiftgen-60-migration-guide) for more information.
 
 ### XCAssets
 

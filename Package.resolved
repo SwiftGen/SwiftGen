@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/kylef/Stencil.git",
         "state": {
           "branch": null,
-          "revision": "c7dbba41a5cf7ab5a5bdfb5f7855170d05c5f031",
-          "version": "0.13.0"
+          "revision": "0e9a78d6584e3812cd9c09494d5c7b483e8f533c",
+          "version": "0.13.1"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/SwiftGen/StencilSwiftKit.git",
         "state": {
           "branch": null,
-          "revision": "cf0f76b3911d4aee0f2496570461095d18d9d784",
-          "version": "2.7.0"
+          "revision": "a50ab97b9380fbf75fedaeac2da79f4d52464b8f",
+          "version": "2.7.1"
         }
       },
       {

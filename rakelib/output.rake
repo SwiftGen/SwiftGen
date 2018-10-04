@@ -33,18 +33,23 @@ MODULE_INPUT_PATH = 'Tests/Fixtures/CompilationEnvironment/Modules'.freeze
 MODULE_OUTPUT_PATH = 'Tests/Fixtures/CompilationEnvironment'.freeze
 SDKS = {
   macosx: 'x86_64-apple-macosx10.13',
-  iphoneos: 'arm64-apple-ios11.0',
-  watchos: 'armv7k-apple-watchos4.0',
-  appletvos: 'arm64-apple-tvos11.0'
+  iphoneos: 'arm64-apple-ios12.0',
+  watchos: 'armv7k-apple-watchos5.0',
+  appletvos: 'arm64-apple-tvos12.0'
 }.freeze
 TOOLCHAINS = {
   swift3: {
-    version: 3,
+    version: '3',
     module_path: "#{MODULE_OUTPUT_PATH}/swift3",
     toolchain: 'com.apple.dt.toolchain.XcodeDefault'
   },
   swift4: {
-    version: 4,
+    version: '4',
+    module_path: "#{MODULE_OUTPUT_PATH}/swift4",
+    toolchain: 'com.apple.dt.toolchain.XcodeDefault'
+  },
+  swift4_2: {
+    version: '4.2',
     module_path: "#{MODULE_OUTPUT_PATH}/swift4",
     toolchain: 'com.apple.dt.toolchain.XcodeDefault'
   }
@@ -107,11 +112,13 @@ namespace :output do
     Utils.run(commands, task, subtask, xcrun: true)
   end
 
-  def toolchain(f)
+  def toolchains(f)
     if f.include?('swift3')
-      TOOLCHAINS[:swift3]
+      [TOOLCHAINS[:swift3]]
     elsif f.include?('swift4')
-      TOOLCHAINS[:swift4]
+      [TOOLCHAINS[:swift4], TOOLCHAINS[:swift4_2]]
+    else
+      []
     end
   end
 
@@ -146,8 +153,8 @@ namespace :output do
   end
 
   def compile_file(f, task)
-    toolchain = toolchain(f)
-    if toolchain.nil?
+    toolchains = toolchains(f)
+    if toolchains.nil? || toolchains.empty?
       puts "Unknown Swift toolchain for file #{f}"
       return true
     end
@@ -155,10 +162,12 @@ namespace :output do
     files = files(f)
     flags = flags(f)
 
-    commands = sdks.map do |sdk|
-      %(--toolchain #{toolchain[:toolchain]} -sdk #{sdk} swiftc -swift-version #{toolchain[:version]} ) +
-        %(-typecheck -target #{SDKS[sdk]} -I "#{toolchain[:module_path]}/#{sdk}" #{flags.join(' ')} ) +
-        %(-module-name SwiftGen #{files.join(' ')})
+    commands = toolchains.flat_map do |toolchain|
+      sdks.map do |sdk|
+        %(--toolchain #{toolchain[:toolchain]} -sdk #{sdk} swiftc -swift-version #{toolchain[:version]} ) +
+          %(-typecheck -target #{SDKS[sdk]} -I "#{toolchain[:module_path]}/#{sdk}" #{flags.join(' ')} ) +
+          %(-module-name SwiftGen #{files.join(' ')})
+      end
     end
     subtask = File.basename(f, '.*')
 

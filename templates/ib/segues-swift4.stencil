@@ -41,7 +41,15 @@ import {{module}}
 
 {{accessModifier}} extension SegueType where RawValue == String {
   init?(_ segue: {% if isAppKit %}NS{% else %}UI{% endif %}StoryboardSegue) {
-    guard let identifier = segue.identifier{% if isAppKit %}?.rawValue{% endif %} else { return nil }
+    {% if isAppKit %}
+    #if swift(>=4.2)
+    guard let identifier = segue.identifier else { return nil }
+    #else
+    guard let identifier = segue.identifier?.rawValue else { return nil }
+    #endif
+    {% else %}
+    guard let identifier = segue.identifier else { return nil }
+    {% endif %}
     self.init(rawValue: identifier)
   }
 }
