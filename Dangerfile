@@ -19,25 +19,26 @@ is_release = github.branch_for_head.start_with?('release/')
 to_develop = github.branch_for_base == 'develop'
 to_master = github.branch_for_base == 'master'
 if is_release
+  message('This is a Release PR')
   need_fixes << warn("Release branches should be merged into 'master'") unless to_master
 
   require 'open3'
   
   stdout, _, status = Open3.capture3('bundle', 'exec', 'rake', 'changelog:check')
   markdown [
-  	'',
-  	"### ChangeLog check",
-  	'',
-  	stdout
+    '',
+    "### ChangeLog check",
+    '',
+    stdout
   ]
   need_fixes << warn('Please fix the CHANGELOG errors') unless status.success?
   
   stdout, _, status = Open3.capture3('bundle', 'exec', 'rake', 'release:check_versions')
   markdown [
-  	'',
-  	'### Release version check',
-  	'',
-  	stdout
+    '',
+    '### Release version check',
+    '',
+    stdout
   ]
   need_fixes << warn('Please fix the versions inconsistencies') unless status.success?
 elsif !to_develop
@@ -55,8 +56,8 @@ end
 # Encouragement message
 markdown ['', '---', '']
 if need_fixes.empty?
-	markdown('Seems like everything is in order 👍 You did a good job here! 🤝')
+  markdown('Seems like everything is in order 👍 You did a good job here! 🤝')
 else
-	markdown('Once you fix those tiny nitpickings above, we should be good to go! 🙌')
-	markdown('_Note: I will update this comment as you add new commits_')
+  markdown('Once you fix those tiny nitpickings above, we should be good to go! 🙌')
+  markdown('_Note: I will update this comment as you add new commits_')
 end
