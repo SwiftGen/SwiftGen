@@ -17,6 +17,9 @@ _None_
 * Strings: rolled back the changes in #503, to ensure `%%` is correctly unescaped.  
   [David Jennes](https://github.com/djbe)
   [#542](https://github.com/SwiftGen/SwiftGen/pull/542)
+* Strings: generate the correct types for `%c` and `%p`.  
+  [David Jennes](https://github.com/djbe)
+  [#543](https://github.com/SwiftGen/SwiftGen/pull/543)
 
 ### Internal Changes
 
