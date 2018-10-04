@@ -42,15 +42,17 @@ _None_
 * SPM/Mint: Update the Stencil version to 0.13.1.  
   [David Jennes](https://github.com/djbe)
   [#527](https://github.com/SwiftGen/SwiftGen/pull/527)
-* Ensure the `templates` subcommand properly works with the deprecated `storyboards` subcommand.
+* Ensure the `templates` subcommand properly works with the deprecated `storyboards` subcommand.  
   [David Jennes](https://github.com/djbe)
-  [#529](https://github.com/SwiftGen/SwiftGen/pull/529)
+  [#525](https://github.com/SwiftGen/SwiftGen/issues/525)
+  [#530](https://github.com/SwiftGen/SwiftGen/pull/530)
 * Ensure configuration file errors show as red in Xcode.  
   [Olivier Halligon](https://github.com/AliSoftware)
-  [#533](https://github.com/SwiftGen/SwiftGen/pull/533)
   [#516](https://github.com/SwiftGen/SwiftGen/issues/516)
+  [#533](https://github.com/SwiftGen/SwiftGen/pull/533)
 * Strings: Ensure the parser correctly handles keys ending with a `.` and empty key components.  
   [David Jennes](https://github.com/djbe)
+  [#528](https://github.com/SwiftGen/SwiftGen/issues/528)
   [#531](https://github.com/SwiftGen/SwiftGen/pull/531)
 
 ### Internal Changes
