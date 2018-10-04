@@ -83,6 +83,17 @@ tables:
       types:
       - "String"
       - "Int"
+    - key: "types"
+      name: "types"
+      translation: "Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString:
+        '%s', Pointer: '%p'"
+      types:
+      - "String"
+      - "CChar"
+      - "Int"
+      - "Float"
+      - "UnsafePointer<CChar>"
+      - "UnsafeRawPointer"
   name: "Localizable"
 - levels:
     children:
