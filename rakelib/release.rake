@@ -15,8 +15,9 @@ namespace :release do
   task :check_versions do
     results = []
 
+    Utils.table_header('Check', 'Status')
+
     # Check if bundler is installed first, as we'll need it for the cocoapods task (and we prefer to fail early)
-    
     results << Utils.table_result(
       Open3.capture3('which', 'bundler')[2].success?,
       'Bundler installed',
@@ -32,7 +33,7 @@ namespace :release do
     pod_version = Utils.pod_trunk_last_version('StencilSwiftKit')
     results << Utils.table_result(
       lock_version == pod_version,
-      "#{'StencilSwiftKit'.ljust(Utils::COLUMN_WIDTH - 10)} (#{pod_version})",
+      "#{'StencilSwiftKit'.ljust(Utils::COLUMN1_WIDTH - 10)} (#{pod_version})",
       "Please update StencilSwiftKit to latest version in your Podfile"
     )
 

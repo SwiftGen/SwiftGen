@@ -8,7 +8,8 @@ require 'open3'
 # Utility functions to run Xcode commands, extract versionning info and logs messages
 #
 class Utils
-  COLUMN_WIDTH = 30
+  COLUMN1_WIDTH = 30
+  COLUMN2_WIDTH = 12
 
   ## [ Run commands ] #########################################################
 
@@ -98,16 +99,22 @@ class Utils
   end
 
   # format an info message in a 2 column table
+  def self.table_header(col1, col2)
+    puts "| #{col1.ljust(COLUMN1_WIDTH)} | #{col2.ljust(COLUMN2_WIDTH)} |"
+    puts "| #{'-' * COLUMN1_WIDTH} | #{'-' * COLUMN2_WIDTH} |"
+  end
+
+  # format an info message in a 2 column table
   def self.table_info(label, msg)
-    puts "#{label.ljust(COLUMN_WIDTH)} 👉  #{msg}"
+    puts "| #{label.ljust(COLUMN1_WIDTH)} | 👉  #{msg.ljust(COLUMN2_WIDTH-4)} |"
   end
 
   # format a result message in a 2 column table
   def self.table_result(result, label, error_msg)
     if result
-      puts "#{label.ljust(COLUMN_WIDTH)} ✅"
+      puts "| #{label.ljust(COLUMN1_WIDTH)} | #{'✅'.ljust(COLUMN2_WIDTH-1)} |"
     else
-      puts "#{label.ljust(COLUMN_WIDTH)} ❌  - #{error_msg}"
+      puts "| #{label.ljust(COLUMN1_WIDTH)} | ❌  - #{error_msg.ljust(COLUMN2_WIDTH-6)} |"
     end
     result
   end
