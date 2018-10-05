@@ -11,10 +11,11 @@ extension Strings {
     case object = "String"
     case float = "Float"
     case int = "Int"
-    case char = "Character"
-    case cString = "UnsafePointer<unichar>"
-    case pointer = "UnsafePointer<Void>"
-    case unknown = "UnsafePointer<()>"
+    case char = "CChar"
+    case cString = "UnsafePointer<CChar>"
+    case pointer = "UnsafeRawPointer"
+
+    static let unknown = pointer
 
     init?(formatChar char: Character) {
       guard let lcChar = String(char).lowercased().first else {
