@@ -18,6 +18,8 @@ internal enum L10n {
   internal static func objectOwnership(_ p1: Int, _ p2: String, _ p3: String) -> String {
     return L10n.tr("Localizable", "ObjectOwnership", p1, p2, p3)
   }
+  /// This is a %% character.
+  internal static let percent = L10n.tr("Localizable", "percent")
   /// Hello, my name is %@ and I'm %d
   internal static func `private`(_ p1: String, _ p2: Int) -> String {
     return L10n.tr("Localizable", "private", p1, p2)
@@ -46,10 +48,6 @@ internal enum L10n {
 // MARK: - Implementation Details
 
 extension L10n {
-  private static func tr(_ table: String, _ key: String) -> String {
-    return NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
-  }
-
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
     let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
     return String(format: format, locale: Locale.current, arguments: args)

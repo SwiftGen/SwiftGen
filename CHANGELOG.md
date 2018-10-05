@@ -14,7 +14,9 @@ _None_
 
 ### Bug Fixes
 
-_None_
+* Strings: rolled back the changes in #503, to ensure `%%` is correctly unescaped.  
+  [David Jennes](https://github.com/djbe)
+  [#542](https://github.com/SwiftGen/SwiftGen/pull/542)
 
 ### Internal Changes
 
