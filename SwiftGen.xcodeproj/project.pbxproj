@@ -47,6 +47,7 @@
 		DD15F103213C40A000D081C7 /* PlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F102213C409F00D081C7 /* PlistTests.swift */; };
 		DD15F105213C412F00D081C7 /* JsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F104213C412F00D081C7 /* JsonTests.swift */; };
 		DD15F107213C474600D081C7 /* YamlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F106213C474600D081C7 /* YamlTests.swift */; };
+		DD2FA6BB2169401C0009CAA8 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2FA6BA2169401C0009CAA8 /* Version.swift */; };
 		DD40284A209E56B50045FC76 /* config-with-multi-outputs.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */; };
 		DD402850209FBF300045FC76 /* config-deprecated-paths.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */; };
 		DD402851209FBF300045FC76 /* config-deprecated-mixed-with-new.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD40284E209FBF300045FC76 /* config-deprecated-mixed-with-new.yml */; };
@@ -313,6 +314,7 @@
 		DD15F102213C409F00D081C7 /* PlistTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistTests.swift; sourceTree = "<group>"; };
 		DD15F104213C412F00D081C7 /* JsonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonTests.swift; sourceTree = "<group>"; };
 		DD15F106213C474600D081C7 /* YamlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamlTests.swift; sourceTree = "<group>"; };
+		DD2FA6BA2169401C0009CAA8 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-with-multi-outputs.yml"; sourceTree = "<group>"; };
 		DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-deprecated-paths.yml"; sourceTree = "<group>"; };
 		DD40284E209FBF300045FC76 /* config-deprecated-mixed-with-new.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-deprecated-mixed-with-new.yml"; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 				0934050D1F815A8C00187787 /* ParserCLI.swift */,
 				379C7E8C1F8ECB2400267096 /* Path+AppSupport.swift */,
 				379C7E861F8ECA0C00267096 /* TemplateRef.swift */,
+				DD2FA6BA2169401C0009CAA8 /* Version.swift */,
 			);
 			path = SwiftGen;
 			sourceTree = "<group>";
@@ -1330,6 +1333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				379C7E891F8ECA7000267096 /* OutputDestination.swift in Sources */,
+				DD2FA6BB2169401C0009CAA8 /* Version.swift in Sources */,
 				234F7E7D1DEBD765001B3C10 /* main.swift in Sources */,
 				DD59D13C2097E7B6000445E4 /* Common.swift in Sources */,
 				234F7E7E1DEBD765001B3C10 /* Path+Commander.swift in Sources */,
