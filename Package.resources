@@ -1,1 +1,5 @@
 templates
+Resources/Stencil-Info.plist
+Resources/StencilSwiftKit-Info.plist
+Resources/SwiftGen-Info.plist
+Resources/SwiftGenKit-Info.plist
