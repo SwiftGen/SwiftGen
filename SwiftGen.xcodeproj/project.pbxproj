@@ -283,7 +283,7 @@
 		147F5AC7164D085CBC376BE8 /* Pods-swiftgen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.release.xcconfig"; sourceTree = "<group>"; };
 		16DF0A0F13A222BCA7B60102 /* Pods_SwiftGenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftGenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		234F7E6E1DEBD5C5001B3C10 /* swiftgen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftgen.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		234F7E771DEBD5C5001B3C10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		234F7E771DEBD5C5001B3C10 /* SwiftGen-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SwiftGen-Info.plist"; sourceTree = "<group>"; };
 		2D945F4382BDE4E02F69E650 /* Pods-SwiftGenKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit.debug.xcconfig"; sourceTree = "<group>"; };
 		379C7E861F8ECA0C00267096 /* TemplateRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateRef.swift; sourceTree = "<group>"; };
 		379C7E881F8ECA7000267096 /* OutputDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDestination.swift; sourceTree = "<group>"; };
@@ -332,7 +332,7 @@
 		DD428E151FC50FBF001649D6 /* AssetsCatalogContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsCatalogContext.swift; sourceTree = "<group>"; };
 		DD428E161FC50FBF001649D6 /* InterfaceBuilderContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceBuilderContext.swift; sourceTree = "<group>"; };
 		DD428E171FC50FBF001649D6 /* StringsContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsContext.swift; sourceTree = "<group>"; };
-		DD428E181FC50FBF001649D6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD428E181FC50FBF001649D6 /* SwiftGenKit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SwiftGenKit-Info.plist"; sourceTree = "<group>"; };
 		DD59D13B2097E7B6000445E4 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserCLICommands.swift; sourceTree = "<group>"; };
 		DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsFileTypeParser.swift; sourceTree = "<group>"; };
@@ -353,7 +353,7 @@
 		DDB0B9AB209D061C00E467C2 /* PlistFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistFile.swift; sourceTree = "<group>"; };
 		DDB0B9B1209D169F00E467C2 /* Metadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
 		DDB0B9C1209E390700E467C2 /* ConfigOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigOutput.swift; sourceTree = "<group>"; };
-		DDC09D011E1D199A005C6EE6 /* templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = templates; sourceTree = "<group>"; };
+		DDC09D011E1D199A005C6EE6 /* templates */ = {isa = PBXFileReference; lastKnownFileType = folder; name = templates; path = ../templates; sourceTree = "<group>"; };
 		DDC8211420967180007A55F3 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		DDC82116209672E1007A55F3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		DDCCACD6209551230017FB43 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
@@ -637,24 +637,6 @@
 			path = Stencil;
 			sourceTree = "<group>";
 		};
-		DD428E291FC50FED001649D6 /* SwiftGen */ = {
-			isa = PBXGroup;
-			children = (
-				234F7E771DEBD5C5001B3C10 /* Info.plist */,
-			);
-			name = SwiftGen;
-			path = Sources/SwiftGen;
-			sourceTree = "<group>";
-		};
-		DD428E2A1FC50FF8001649D6 /* SwiftGenKit */ = {
-			isa = PBXGroup;
-			children = (
-				DD428E181FC50FBF001649D6 /* Info.plist */,
-			);
-			name = SwiftGenKit;
-			path = Sources/SwiftGenKit;
-			sourceTree = "<group>";
-		};
 		DD4738A71FE07539006CB6BB /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
@@ -727,11 +709,11 @@
 		DDC09C7D1E1D193F005C6EE6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DD428E291FC50FED001649D6 /* SwiftGen */,
-				DD428E2A1FC50FF8001649D6 /* SwiftGenKit */,
+				234F7E771DEBD5C5001B3C10 /* SwiftGen-Info.plist */,
+				DD428E181FC50FBF001649D6 /* SwiftGenKit-Info.plist */,
 				DDC09D011E1D199A005C6EE6 /* templates */,
 			);
-			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		DDC821132096716A007A55F3 /* Utils */ = {
@@ -1612,7 +1594,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Sources/SwiftGen/Info.plist;
+				INFOPLIST_FILE = "Resources/SwiftGen-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1635,7 +1617,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Sources/SwiftGen/Info.plist;
+				INFOPLIST_FILE = "Resources/SwiftGen-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1664,7 +1646,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Sources/SwiftGenKit/Info.plist;
+				INFOPLIST_FILE = "Resources/SwiftGenKit-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1692,7 +1674,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Sources/SwiftGenKit/Info.plist;
+				INFOPLIST_FILE = "Resources/SwiftGenKit-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
