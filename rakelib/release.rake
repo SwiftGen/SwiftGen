@@ -25,38 +25,57 @@ namespace :release do
     )
 
     # Extract version from SwiftGen.podspec
-    version = Utils.podspec_version('SwiftGen')
-    Utils.table_info('SwiftGen.podspec', version)
+    sg_version = Utils.podspec_version('SwiftGen')
+    Utils.table_info('SwiftGen.podspec', sg_version)
+
+    # Extract version from SwiftGenKit.podspec
+    sgk_version = Utils.podspec_version('SwiftGenKit')
+    Utils.table_info('SwiftGenKit.podspec', sgk_version)
+
+    results << Utils.table_result(
+      sg_version == sgk_version,
+      "SwiftGen & SwiftGenKit versions equal",
+      "Please ensure SwiftGen & SwiftGenKit use the same version numbers"
+    )
+
+    # Check if version matches the SwiftGen-Info.plist
+    sg_plist = Utils.plist_version('SwiftGen')
+    results << Utils.table_result(
+      sg_version == sg_plist[0] && sg_plist[0] == sg_plist[1],
+      'SwiftGen-Info.plist version matches',
+      'Please update the version numbers in the SwiftGen-Info.plist file'
+    )
+
+    # Check if version matches the SwiftGenKit-Info.plist
+    sgk_plist = Utils.plist_version('SwiftGenKit')
+    results << Utils.table_result(
+      sgk_version == sgk_plist[0] && sgk_plist[0] == sgk_plist[1],
+      'SwiftGenKit-Info.plist version matches',
+      'Please update the version numbers in the SwiftGenKit-Info.plist file'
+    )
 
     # Check StencilSwiftKit version too
     lock_version = Utils.podfile_lock_version('StencilSwiftKit')
     pod_version = Utils.pod_trunk_last_version('StencilSwiftKit')
     results << Utils.table_result(
       lock_version == pod_version,
-      "#{'StencilSwiftKit'.ljust(Utils::COLUMN_WIDTHS[0] - 10)} (#{pod_version})",
+      "StencilSwiftKit up-to-date (latest: #{pod_version})",
       "Please update StencilSwiftKit to latest version in your Podfile"
     )
 
-    # Check if version matches the Info.plist
-    results << Utils.table_result(
-      version == Utils.plist_version,
-      'Info.plist version matches',
-      'Please update the version numbers in the Info.plist file'
-    )
-
     # Check if entry present in CHANGELOG
-    changelog_entry = system("grep -q '^## #{Regexp.quote(version)}$' CHANGELOG.md")
+    changelog_entry = system("grep -q '^## #{Regexp.quote(sg_version)}$' CHANGELOG.md")
     results << Utils.table_result(
       changelog_entry,
-      'CHANGELOG, Entry added',
-      "Please add an entry for #{version} in CHANGELOG.md"
+      'CHANGELOG: Release entry added',
+      "Please add an entry for #{sg_version} in CHANGELOG.md"
     )
 
-    changelog_master = system("grep -qi '^## Master' CHANGELOG.md")
+    changelog_develop = system("grep -qi '^## Develop' CHANGELOG.md")
     results << Utils.table_result(
-      !changelog_master,
-      'CHANGELOG, No master',
-      'Please remove entry for master in CHANGELOG'
+      !changelog_develop,
+      'CHANGELOG: No develop entry',
+      'Please remove entry for develop in CHANGELOG'
     )
 
     exit 1 unless results.all?
@@ -144,11 +163,7 @@ namespace :release do
       Utils.print_header 'Checking Homebrew formula...'
       Bundler.with_clean_env do
         sh 'brew audit --strict --online swiftgen'
-        if system('brew ls --versions swiftgen > /dev/null')
-          sh 'brew upgrade swiftgen' # Already installed, so try upgrade
-        else
-          sh 'brew install swiftgen' # Not installed, so install
-        end
+        sh 'brew reinstall swiftgen'
         sh 'brew test swiftgen'
       end
 

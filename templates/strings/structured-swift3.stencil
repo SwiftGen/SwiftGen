@@ -17,7 +17,12 @@ import Foundation
 {% endfilter %}{% endmacro %}
 {% macro argumentsBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
-    p{{forloop.counter}}{{ ", " if not forloop.last }}
+    {% if type == "UnsafeRawPointer" %}
+    Int(bitPattern: p{{forloop.counter}})
+    {% else %}
+    p{{forloop.counter}}
+    {% endif %}
+    {{ ", " if not forloop.last }}
   {% endfor %}
 {% endfilter %}{% endmacro %}
 {% macro recursiveBlock table item %}
@@ -60,10 +65,6 @@ import Foundation
 // MARK: - Implementation Details
 
 extension {{enumName}} {
-  fileprivate static func tr(_ table: String, _ key: String) -> String {
-    return NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
-  }
-
   fileprivate static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
     let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
     return String(format: format, locale: Locale.current, arguments: args)

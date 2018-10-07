@@ -74,12 +74,26 @@ tables:
       - "Int"
       - "String"
       - "String"
+    - key: "percent"
+      name: "percent"
+      translation: "This is a %% character."
     - key: "private"
       name: "private"
       translation: "Hello, my name is %@ and I'm %d"
       types:
       - "String"
       - "Int"
+    - key: "types"
+      name: "types"
+      translation: "Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString:
+        '%s', Pointer: '%p'"
+      types:
+      - "String"
+      - "CChar"
+      - "Int"
+      - "Float"
+      - "UnsafePointer<CChar>"
+      - "UnsafeRawPointer"
   name: "Localizable"
 - levels:
     children:

@@ -1,18 +1,20 @@
 # Used constants:
 # none
 
+require_relative 'check_changelog'
+
 namespace :changelog do
   desc 'Add the empty CHANGELOG entries after a new release'
   task :reset do
     changelog = File.read('CHANGELOG.md')
-    abort('A Master entry already exists') if changelog =~ /^##\s*Master$/
+    abort('A Develop entry already exists') if changelog =~ /^##\s*Develop$/
     changelog.sub!(/^##[^#]/, "#{header}\\0")
     File.write('CHANGELOG.md', changelog)
   end
 
   def header
     <<-HEADER.gsub(/^\s*\|/, '')
-      |## Master
+      |## Develop
       |
       |### Breaking Changes
       |
@@ -35,23 +37,13 @@ namespace :changelog do
 
   desc 'Check if links to issues and PRs use matching numbers between text & link'
   task :check do
-    current_repo = File.basename(`git remote get-url origin`.chomp, '.git').freeze
-    slug_re = '([a-zA-Z]*/[a-zA-Z]*)'
-    links = %r{\[#{slug_re}?\#([0-9]+)\]\(https://github.com/#{slug_re}/(issues|pull)/([0-9]+)\)}
-    all_wrong_links = []
-    File.readlines('CHANGELOG.md').each_with_index do |line, idx|
-      wrong_links = line.scan(links).reject do |m|
-        slug = m[0] || "SwiftGen/#{current_repo}"
-        (slug == m[2]) && (m[1] == m[4])
-      end
-      all_wrong_links.concat Array(wrong_links.map do |m|
-        " - Line #{idx + 1}, link text is #{m[0]}##{m[1]} but links points to #{m[2]}##{m[4]}"
-      end)
-    end
-    if all_wrong_links.empty?
-      puts "\u{2705}  All links correct"
+    warnings = check_changelog()
+    if warnings.empty?
+      puts "\u{2705}  All entries seems OK (end with period + 2 spaces, correct links)"
     else
-      puts "\u{274C}  Some wrong links found:\n" + all_wrong_links.join("\n")
+      puts "\u{274C}  Some warnings were found:\n" + Array(warnings.map do |warning|
+        " - Line #{warning[:line]}: #{warning[:message]}"
+      end).join("\n")
       exit 1
     end
   end

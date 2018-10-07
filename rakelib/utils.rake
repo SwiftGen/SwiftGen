@@ -8,7 +8,7 @@ require 'open3'
 # Utility functions to run Xcode commands, extract versionning info and logs messages
 #
 class Utils
-  COLUMN_WIDTHS = [30, 12]
+  COLUMN_WIDTHS = [45, 12]
 
   ## [ Run commands ] #########################################################
 
@@ -55,9 +55,12 @@ class Utils
     /^[0-9.]*/.match(last_version_line)[0] # Just the 'x.y.z' part
   end
 
-  def self.plist_version
+  # @returns An array containing the CFBundleVersion & CFBundleShortVersionString
+  #          values for the Info.plist of the given library
+  def self.plist_version(lib)
     require 'plist'
-    Plist.parse_xml('Sources/SwiftGen/Info.plist')['CFBundleVersion']
+    plist = Plist.parse_xml("Resources/#{lib}-Info.plist")
+    [plist['CFBundleVersion'], plist['CFBundleShortVersionString']]
   end
 
 
