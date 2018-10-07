@@ -18,6 +18,7 @@ need_fixes = []
 # Check for a CHANGELOG entry
 declared_trivial = github.pr_title.include? '#trivial'
 has_changelog = git.modified_files.include?('CHANGELOG.md')
+changelog_msg = ''
 unless has_changelog || declared_trivial
   repo_url = github.pr_json['head']['repo']['html_url']
   pr_title = github.pr_title
@@ -30,7 +31,7 @@ unless has_changelog || declared_trivial
   need_fixes = fail("Please include a CHANGELOG entry to credit your work.  \nYou can find it at [CHANGELOG.md](#{repo_url}/blob/master/CHANGELOG.md).")
 
   changelog_msg = <<-CHANGELOG_FORMAT.gsub(/^ *\|/,'')
-  |Note: we use the following format for CHANGELOG entries:
+  |📝 We use the following format for CHANGELOG entries:
   |```
   | * #{pr_title}  
   |   [##{pr_number}](#{pr_url})
@@ -38,7 +39,7 @@ unless has_changelog || declared_trivial
   |```
   |:bulb: Don't forget to end the line describing your changes by a period and two spaces (`.  `).
   CHANGELOG_FORMAT
-  markdown(changelog_msg)
+  # changelog_msg is printed during the "Encouragement message" section, see below
 end
 
 changelog_warnings = check_changelog()
@@ -93,5 +94,6 @@ if need_fixes.empty?
   markdown('Seems like everything is in order 👍 You did a good job here! 🤝')
 else
   markdown('Once you fix those tiny nitpickings above, we should be good to go! 🙌')
-  markdown('_Note: I will update this comment as you add new commits_')
+  markdown(changelog_msg) unless changelog_msg.empty?
+  markdown('ℹ️ _I will update this comment as you add new commits_')
 end
