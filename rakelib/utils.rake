@@ -8,7 +8,7 @@ require 'open3'
 # Utility functions to run Xcode commands, extract versionning info and logs messages
 #
 class Utils
-  COLUMN_WIDTHS = [35, 12]
+  COLUMN_WIDTHS = [40, 12]
 
   ## [ Run commands ] #########################################################
 
