@@ -191,20 +191,20 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
   [#402](https://github.com/SwiftGen/SwiftGen/pull/402)
   [#476](https://github.com/SwiftGen/SwiftGen/pull/476)
 * Updated to latest Xcode (10.0.0) and Swift 4.2.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#415](https://github.com/SwiftGen/SwiftGen/pull/415)
   [#498](https://github.com/SwiftGen/SwiftGen/pull/498)
 * Update to Stencil 0.13.0, and use some of it's new filters in our templates.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#416](https://github.com/SwiftGen/SwiftGen/pull/416)
   [#475](https://github.com/SwiftGen/SwiftGen/pull/475)
   [#498](https://github.com/SwiftGen/SwiftGen/pull/498)
 * Store testing contexts as YAML files instead of PLISTs.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#418](https://github.com/SwiftGen/SwiftGen/pull/418)
   [#461](https://github.com/SwiftGen/SwiftGen/pull/461)
 * Refactor the parsers as they're getting more complex.  
-  [David Jennes](https://github.com/djbe) 
+  [David Jennes](https://github.com/djbe)
   [#417](https://github.com/SwiftGen/SwiftGen/pull/417)
   [#422](https://github.com/SwiftGen/SwiftGen/pull/422)
 * Disabled a SwiftLint rule for function parameter count.  
@@ -260,7 +260,7 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 
 ### Changes in other SwiftGen modules
 
-* [SwiftGenKit 2.1.1](https://github.com/SwiftGen/SwiftGenKit/blob/2.1.1/CHANGELOG.md)  
+* [SwiftGenKit 2.1.1](https://github.com/SwiftGen/SwiftGenKit/blob/2.1.1/CHANGELOG.md)
 * [StencilSwiftKit 2.3.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.3.0/CHANGELOG.md)
 * [templates 2.2.0](https://github.com/SwiftGen/templates/blob/2.2.0/CHANGELOG.md)
 
@@ -529,7 +529,7 @@ Note: The next minor version will focus on bringing more documentation for all t
    which offers the same functionality.  
   [David Jennes](https://github.com/djbe)
   [#243](https://github.com/SwiftGen/SwiftGen/pull/243)
-* Support multiple input paths for some commands:  
+* Support multiple input paths for some commands.  
   [David Jennes](https://github.com/djbe)
   [#213](https://github.com/SwiftGen/SwiftGen/pull/213)
   * `fonts` accepts multiple input directories, all found fonts will be added
@@ -597,7 +597,7 @@ Note: The next minor version will focus on bringing more documentation for all t
   developement, for easier debugging in Xcode.  
   [ahtierney](https://github.com/ahtierney)
   [#204](https://github.com/SwiftGen/SwiftGen/pull/204)
-* Consolidate the use of PathKit internally.    
+* Consolidate the use of PathKit internally.  
   [David Jennes](https://github.com/djbe)
   [#212](https://github.com/SwiftGen/SwiftGen/pull/212)
 * Updated Stencil to [0.7.2](https://github.com/kylef/Stencil/releases/tag/0.7.0).  
@@ -621,7 +621,7 @@ Note: The next minor version will focus on bringing more documentation for all t
   ensuring that the parser correctly handles namespaced folders.  
   ⚠️ Note that you now have to specify the exact path to your `.xcassets` assets catalogs
   when using `swiftgen images` (and not just a directory to parse).  
-  [David Jennes](https://github.com/djbe)
+  [David Jennes](https://github.com/djbe)
   [#199](https://github.com/SwiftGen/SwiftGen/pull/199)
 
 ### New Features
@@ -640,7 +640,7 @@ Note: The next minor version will focus on bringing more documentation for all t
 ## 3.0.1
 
 * Add support for Xcode 8 and Swift 2.3.  
-  _(Should still compile in Xcode 7.3 but the `Rakefile` to build, install and release requires Xcode 8)._  
+  _(Should still compile in Xcode 7.3 but the `Rakefile` to build, install and release requires Xcode 8)_.  
   [Valentin Knabel](https://github.com/vknabel)
   [Ignacio Romero Zurbuchen](https://github.com/dzenbot)
   [HanxuanZhou](https://github.com/GenoZhou)
@@ -688,7 +688,7 @@ Note: The next minor version will focus on bringing more documentation for all t
 * Now reports an error when it failed to parse a color in a color input file.  
   [Olivier Halligon](https://github.com/AliSoftware)
   [#162](https://github.com/SwiftGen/SwiftGen/issues/162)
-* New Strings template (available via `-t dot-syntax`), allowing string keys containing dots (like foo.bar.baz) to be organized as a hierarchy and accessible via dot syntax.
+* New Strings template (available via `-t dot-syntax`), allowing string keys containing dots (like foo.bar.baz) to be organized as a hierarchy and accessible via dot syntax.  
   [Cihat Gündüz](https://github.com/Dschee)
   [#159](https://github.com/SwiftGen/SwiftGen/pull/159)
 * Update Swift 3 templates to use lowercase enums.  
@@ -708,14 +708,12 @@ Note: The next minor version will focus on bringing more documentation for all t
 
 ### Important Notes
 
-* Some keys for various templates have changed to provide more flexibility and enable some new features in the templates. As a result, **if you created your own custom templates, they might not all be totally compatible with SwiftGen 3.0.0** (hence the new major version).
+- Some keys for various templates have changed to provide more flexibility and enable some new features in the templates. As a result, **if you created your own custom templates, they might not all be totally compatible with SwiftGen 3.0.0** (hence the new major version).
 Please read the [Custom Templates documentation](documentation/Templates.md) to find out the new Stencil context keys and update your custom templates accordingly.
 
 _If you're using one of the bundled templates, all of them have been updated appropriately._
 
-* Also **if you use Swift 3**, and thus use the `-t swift3` flag to use the Swift 3 templates, be advised those has been modified
-to take the latest Swift 3 modifications into account (including naming convensions) so your code might need to be updated
-according to match the latest Swift 3 recommendations.
+- Also **if you use Swift 3**, and thus use the `-t swift3` flag to use the Swift 3 templates, be advised those has been modified to take the latest Swift 3 modifications into account (including naming convensions) so your code might need to be updated according to match the latest Swift 3 recommendations.
 
 ## 2.0.0
 
@@ -780,10 +778,10 @@ stop working as expected. That's the main reason why the version has been bumped
 * Added support for TXT (`colors.txt`) files to have named value.  
   [Derek Ostrander](https://github.com/dostrander)
   [#118](https://github.com/SwiftGen/SwiftGen/pull/118)
-* Restructured image templates to work around an LLVM issue with nested types.    
+* Restructured image templates to work around an LLVM issue with nested types.  
   [Ken Grigsby](https://github.com/kgrigsby59)
   [#112](https://github.com/SwiftGen/SwiftGen/issues/112)
-* Added Swift 3 templates for storyboards and strings.    
+* Added Swift 3 templates for storyboards and strings.  
   [Andrew Breckenridge](https://github.com/AndrewSB)
   [#117](https://github.com/SwiftGen/SwiftGen/pull/117)
 
@@ -860,10 +858,10 @@ stop working as expected. That's the main reason why the version has been bumped
 
 #### Enhancements
 
-* Adding comments to generated color enums which allow you to see the color in the QuickHelp documentation
+* Adding comments to generated color enums which allow you to see the color in the QuickHelp documentation.  
 
 * The default translation of strings are now added as documentation comments to the enum cases.  
-  _You can add translations to your own templates by using the `string.translation` variable._  
+  _You can add translations to your own templates by using the `string.translation` variable_.  
   [@MrAlek](https://github.com/MrAlek)
   [#58](https://github.com/SwiftGen/SwiftGen/issues/58)
   [#60](https://github.com/SwiftGen/SwiftGen/pull/60)
@@ -912,7 +910,8 @@ SwiftGen now comes bundled with some alternate templates, especially `colors-raw
   [Viacheslav Karamov](https://github.com/vkaramov/)
   [#48](https://github.com/SwiftGen/SwiftGen/issues/48)
 * Introduced an `image-allvalues` template that exposes the list of all images in a `static let allValues` array.  
-  [Ahmed Mseddi](https://github.com/amseddi) & Guillaume Lagorce
+  [Ahmed Mseddi](https://github.com/amseddi)
+  & Guillaume Lagorce
   [#44](https://github.com/SwiftGen/SwiftGen/pull/44)
 * Fix issue with Storyboards without any StoryboardID (all scenes being anonymous) not extending `StoryboardScene`.  
   [#36](https://github.com/SwiftGen/SwiftGen/issues/36)
@@ -922,8 +921,8 @@ SwiftGen now comes bundled with some alternate templates, especially `colors-raw
 ### New Features: Templates
 
 * `SwiftGen` now uses [Stencil](https://github.com/kylef/Stencil) template engine to produce the generated code.
-* This means that the generate code will be easier to improve
-* This also means that **you can use your own templates** to generate code that better suits your needs and preferences, using `swiftgen … --template FILE …`
+* This means that the generate code will be easier to improve.
+* This also means that **you can use your own templates** to generate code that better suits your needs and preferences, using `swiftgen … --template FILE …`.
 
 ### Fixes
 
@@ -963,7 +962,7 @@ SwiftGen now comes bundled with some alternate templates, especially `colors-raw
 
 #### Fixes
 
-* Fix color parsing with absent alpha  
+* Fix color parsing with absent alpha.  
   [@Igor-Palaguta](https://github.com/Igor-Palaguta)
   [#28](https://github.com/SwiftGen/SwiftGen/pull/28)
 

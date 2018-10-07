@@ -25,8 +25,25 @@ namespace :release do
     )
 
     # Extract version from SwiftGen.podspec
-    version = Utils.podspec_version('SwiftGen')
-    Utils.table_info('SwiftGen.podspec', version)
+    sg_version = Utils.podspec_version('SwiftGen')
+    Utils.table_info('SwiftGen.podspec', sg_version)
+
+    # Extract version from SwiftGenKit.podspec
+    sgk_version = Utils.podspec_version('SwiftGenKit')
+    Utils.table_info('SwiftGenKit.podspec', sgk_version)
+
+    results << Utils.table_result(
+      sg_version == sgk_version,
+      "SwiftGen & SwiftGenKit versions match",
+      "Please ensure SwiftGen & SwiftGenKit use the same version numbers"
+    )
+
+    # Check if version matches the Info.plist
+    results << Utils.table_result(
+      sg_version == Utils.plist_version,
+      'Info.plist version matches',
+      'Please update the version numbers in the Info.plist file'
+    )
 
     # Check StencilSwiftKit version too
     lock_version = Utils.podfile_lock_version('StencilSwiftKit')
@@ -37,19 +54,12 @@ namespace :release do
       "Please update StencilSwiftKit to latest version in your Podfile"
     )
 
-    # Check if version matches the Info.plist
-    results << Utils.table_result(
-      version == Utils.plist_version,
-      'Info.plist version matches',
-      'Please update the version numbers in the Info.plist file'
-    )
-
     # Check if entry present in CHANGELOG
-    changelog_entry = system("grep -q '^## #{Regexp.quote(version)}$' CHANGELOG.md")
+    changelog_entry = system("grep -q '^## #{Regexp.quote(sg_version)}$' CHANGELOG.md")
     results << Utils.table_result(
       changelog_entry,
       'CHANGELOG: Release entry added',
-      "Please add an entry for #{version} in CHANGELOG.md"
+      "Please add an entry for #{sg_version} in CHANGELOG.md"
     )
 
     changelog_develop = system("grep -qi '^## Develop' CHANGELOG.md")
