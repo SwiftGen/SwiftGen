@@ -36,13 +36,17 @@ unless has_changelog || declared_trivial
   |   [##{pr_number}](#{pr_url})
   |   [@#{pr_author}](#{pr_author_url})
   |```
-  |:bulb: Don't forget to use 2 spaces after the full stop at the end of the line describing your changes.
+  |:bulb: Don't forget to end the line describing your changes by a period and two spaces (`.  `).
   CHANGELOG_FORMAT
   markdown(changelog_msg)
 end
 
-check_changelog.each do |warning|
-  need_fixes << warn(warning[:message], file: 'CHANGELOG.md', line: warning[:line])
+changelog_warnings = check_changelog()
+unless changelog_warnings.empty?
+  need_fixes << warn('Found some warnings in CHANGELOG.md')
+  changelog_warnings.each do |warning|
+    warn(warning[:message], file: 'CHANGELOG.md', line: warning[:line])
+  end
 end
 
 # Check for correct base branch

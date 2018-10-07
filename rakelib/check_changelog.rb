@@ -18,7 +18,7 @@ def check_changelog
     wrong_line_end = was_inside_entry && !inside_entry && !last_line_has_correct_ending
 
     all_warnings.concat [
-      { line: idx, message: 'line describing your entry should end with a period and 2 spaces.' }
+      { line: idx, message: 'Line describing your entry should end with a period and 2 spaces.' }
     ] if wrong_line_end
     last_line_has_correct_ending = line.end_with?('.  ') || line.end_with?('/CHANGELOG.md)')
 
@@ -27,7 +27,9 @@ def check_changelog
       (slug == m[2]) && (m[1] == m[4])
     end
     all_warnings.concat Array(wrong_links.map do |m|
-      { line: idx+1, message: "link text is #{m[0]}##{m[1]} but links points to #{m[2]}##{m[4]}." }
+      link_text = "#{m[0]}##{m[1]}"
+      link_url = "#{m[2]}##{m[4]}"
+      { line: idx+1, message: "Link text is #{link_text} but links points to #{link_url}." }
     end)
   end
   all_warnings
