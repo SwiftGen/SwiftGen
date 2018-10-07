@@ -20,6 +20,9 @@ _None_
 * Strings: generate the correct types for `%c` and `%p`.  
   [David Jennes](https://github.com/djbe)
   [#543](https://github.com/SwiftGen/SwiftGen/pull/543)
+* SPM/Mint: SwiftGen now provides correct version information, instead of "0.0".  
+  [David Jennes](https://github.com/djbe)
+  [#544](https://github.com/SwiftGen/SwiftGen/pull/544)
 
 ### Internal Changes
 
