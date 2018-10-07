@@ -32,7 +32,7 @@ if is_release
     '',
     stdout
   ]
-  need_fixes << warn('Please fix the CHANGELOG errors') unless status.success?
+  need_fixes << fail('Please fix the CHANGELOG errors') unless status.success?
   
   stdout, _, status = Open3.capture3('bundle', 'exec', 'rake', 'release:check_versions')
   markdown [
@@ -41,9 +41,9 @@ if is_release
     '',
     stdout
   ]
-  need_fixes << warn('Please fix the versions inconsistencies') unless status.success?
+  need_fixes << fail('Please fix the versions inconsistencies') unless status.success?
 elsif !to_develop
-  need_fixes << warn("Feature branches should start from and be merged into 'develop', " \
+  need_fixes << fail("Feature branches should start from and be merged into 'develop', " \
     "not #{github.branch_for_base}")
 end
 
