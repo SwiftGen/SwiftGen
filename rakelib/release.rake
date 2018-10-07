@@ -34,15 +34,24 @@ namespace :release do
 
     results << Utils.table_result(
       sg_version == sgk_version,
-      "SwiftGen & SwiftGenKit versions match",
+      "SwiftGen & SwiftGenKit versions equal",
       "Please ensure SwiftGen & SwiftGenKit use the same version numbers"
     )
 
-    # Check if version matches the Info.plist
+    # Check if version matches the SwiftGen-Info.plist
+    sg_plist = Utils.plist_version('SwiftGen')
     results << Utils.table_result(
-      sg_version == Utils.plist_version,
-      'Info.plist version matches',
-      'Please update the version numbers in the Info.plist file'
+      sg_version == sg_plist[0] && sg_plist[0] == sg_plist[1],
+      'SwiftGen-Info.plist version matches',
+      'Please update the version numbers in the SwiftGen-Info.plist file'
+    )
+
+    # Check if version matches the SwiftGenKit-Info.plist
+    sgk_plist = Utils.plist_version('SwiftGenKit')
+    results << Utils.table_result(
+      sgk_version == sgk_plist[0] && sgk_plist[0] == sgk_plist[1],
+      'SwiftGenKit-Info.plist version matches',
+      'Please update the version numbers in the SwiftGenKit-Info.plist file'
     )
 
     # Check StencilSwiftKit version too
@@ -50,7 +59,7 @@ namespace :release do
     pod_version = Utils.pod_trunk_last_version('StencilSwiftKit')
     results << Utils.table_result(
       lock_version == pod_version,
-      "StencilSwiftKit (latest: #{pod_version})",
+      "StencilSwiftKit up-to-date (latest: #{pod_version})",
       "Please update StencilSwiftKit to latest version in your Podfile"
     )
 
