@@ -38,22 +38,44 @@ namespace :changelog do
     current_repo = File.basename(`git remote get-url origin`.chomp, '.git').freeze
     slug_re = '([a-zA-Z]*/[a-zA-Z]*)'
     links = %r{\[#{slug_re}?\#([0-9]+)\]\(https://github.com/#{slug_re}/(issues|pull)/([0-9]+)\)}
+    all_wrong_line_endings = []
     all_wrong_links = []
+    inside_entry = false
+    last_line_has_correct_ending = false
     File.readlines('CHANGELOG.md').each_with_index do |line, idx|
+      line.chomp!
+      was_inside_entry = inside_entry
+      just_started_new_entry = line.start_with?('* ')
+      inside_entry = true if just_started_new_entry
+      inside_entry = false if /^  \[.*\]\(.*\)$/ =~ line # link-only line
+
+      # We just ended an entry's description by starting the links, but description didn't end with '.  '
+      wrong_line_end = was_inside_entry && !inside_entry && !last_line_has_correct_ending
+
+      last_line_has_correct_ending = line.end_with?('.  ') || line.end_with?('/CHANGELOG.md)')
+      all_wrong_line_endings.concat [
+        " - Line #{idx}: line describing your entry should end with a period and 2 spaces"
+      ] if wrong_line_end
+
       wrong_links = line.scan(links).reject do |m|
         slug = m[0] || "SwiftGen/#{current_repo}"
         (slug == m[2]) && (m[1] == m[4])
       end
       all_wrong_links.concat Array(wrong_links.map do |m|
-        " - Line #{idx + 1}, link text is #{m[0]}##{m[1]} but links points to #{m[2]}##{m[4]}"
+        " - Line #{idx + 1}: link text is #{m[0]}##{m[1]} but links points to #{m[2]}##{m[4]}"
       end)
+    end
+    if all_wrong_line_endings.empty?
+      puts "\u{2705}  All entries end with period + 2 spaces"
+    else
+      puts "\u{274C}  Some wrong line endings found:\n" + all_wrong_line_endings.join("\n")
     end
     if all_wrong_links.empty?
       puts "\u{2705}  All links correct"
     else
       puts "\u{274C}  Some wrong links found:\n" + all_wrong_links.join("\n")
-      exit 1
     end
+    exit 1 unless all_wrong_line_endings.empty? && all_wrong_links.empty?
   end
 
   LINKS_SECTION_TITLE = 'Changes in other SwiftGen modules'.freeze
