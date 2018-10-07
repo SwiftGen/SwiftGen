@@ -1,3 +1,5 @@
+require_relative 'rakelib/check_changelog'
+
 # Welcome message
 markdown("Hey 👋 I'm Eve, the friendly bot watching over SwiftGen 🤖\nThanks a lot for your contribution!")
 
@@ -13,6 +15,10 @@ need_fixes = []
 declared_trivial = github.pr_title.include? '#trivial'
 has_changelog = git.modified_files.include?('CHANGELOG.md') || declared_trivial
 need_fixes << warn('Please add a CHANGELOG entry to credit your work') unless has_changelog
+
+check_changelog.each do |warning|
+  warn(warning[:message], file: 'CHANGELOG.md', line: warning[:line])
+end
 
 # Check for correct base branch
 is_release = github.branch_for_head.start_with?('release/')
