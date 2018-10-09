@@ -49,7 +49,7 @@ internal extension Color {
 }
 // swiftlint:enable operator_usage_whitespace
 
-public extension Color {
+internal extension Color {
   convenience init(named color: ColorName) {
     self.init(rgbaValue: color.rgbaValue)
   }
