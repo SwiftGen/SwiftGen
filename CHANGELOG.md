@@ -14,7 +14,9 @@ _None_
 
 ### Bug Fixes
 
-_None_
+* Colors: Fix an issue where the `public` access modifier was not being added correctly in the `literals-swift3` and `literals-swift4` templates when the `publicAccess` parameter was specified. Also remove some uneccessary `public` access modifiers from the `swift3` and `swift4` templates.  
+  [Isaac Halvorson](https://github.com/hisaac)
+  [#549](https://github.com/SwiftGen/SwiftGen/pull/549)
 
 ### Internal Changes
 
