@@ -37,7 +37,7 @@ public struct ColorName {
 // MARK: - Implementation Details
 
 // swiftlint:disable operator_usage_whitespace
-public extension Color {
+internal extension Color {
   convenience init(rgbaValue: UInt32) {
     let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0
     let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0
@@ -49,7 +49,7 @@ public extension Color {
 }
 // swiftlint:enable operator_usage_whitespace
 
-public extension Color {
+internal extension Color {
   convenience init(named color: ColorName) {
     self.init(rgbaValue: color.rgbaValue)
   }
