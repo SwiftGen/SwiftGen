@@ -16,7 +16,7 @@ _None_
 
 * Colors: Fix an issue where the `public` access modifier was not being added correctly in the `literals` templates when the `publicAccess` parameter was specified.  
   [Isaac Halvorson](https://github.com/hisaac)
-  [#546](https://github.com/SwiftGen/SwiftGen/pull/546)
+  [#549](https://github.com/SwiftGen/SwiftGen/pull/549)
 
 ### Internal Changes
 
