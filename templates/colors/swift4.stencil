@@ -58,7 +58,7 @@ internal extension {{colorAlias}} {
 }
 // swiftlint:enable operator_usage_whitespace
 
-{{accessModifier}} extension {{colorAlias}} {
+internal extension {{colorAlias}} {
   convenience init(named color: {{enumName}}) {
     self.init(rgbaValue: color.rgbaValue)
   }
