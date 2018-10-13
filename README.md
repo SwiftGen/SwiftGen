@@ -66,7 +66,9 @@ If you unarchived the ZIP file in a folder e.g. called `swiftgen` at the root of
 
 If you're using CocoaPods, you can simply add `pod 'SwiftGen'` to your `Podfile`.
 
-This will download the `SwiftGen` binaries and dependencies in `Pods/` during your next `pod install` execution.
+This will download the `SwiftGen` binaries and dependencies in `Pods/SwiftGen/bin/swiftgen` during your next `pod install` execution.
+
+> 💡 _Don't forget to run `pod repo update` before your `pod install` if you haven't done it in a long time, to be sure to get the latest version of SwiftGen._
 
 Given that you can specify an exact version for `SwiftGen` in your `Podfile`, this allows you to ensure **all coworkers will use the same version of SwiftGen for this project**.
 
@@ -75,6 +77,8 @@ You can then invoke SwiftGen in your Script Build Phase using:
 ```sh
 $PODS_ROOT/SwiftGen/bin/swiftgen …
 ```
+
+> Similarly, be sure to use `Pods/SwiftGen/bin/swiftgen` instead of just `swiftgen` where we mention commands with `swiftgen` in the rest of the documentation.
 
 _Note: SwiftGen isn't really a pod, as it's not a library your code will depend on at runtime; so the installation via CocoaPods is just a trick that installs the SwiftGen binaries in the Pods/ folder, but you won't see any swift files in the Pods/SwiftGen group in your Xcode's Pods.xcodeproj. That's normal: the SwiftGen binary is still present in that folder in the Finder._
 
