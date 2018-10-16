@@ -104,7 +104,7 @@ If you need more control when using a configuration file, you can use some advan
 
 ## Linting the configuration file
 
-You can also use `swiftgen config lint` to lint the configuration file.
+You can also use `swiftgen config lint` (or `Pods/SwiftGen/bin/swiftgen config lint` if you installed it using CocoaPods) to lint the configuration file.
 
 Without any additional option this will lint the default `swiftgen.yml` configuration file, but you can specify a different configuration file using the `--config` flag, similarly to `swiftgen config run`
 
