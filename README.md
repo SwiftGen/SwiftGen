@@ -64,11 +64,9 @@ If you unarchived the ZIP file in a folder e.g. called `swiftgen` at the root of
 <details>
 <summary>Via <strong>CocoaPods</strong></summary>
 
-If you're using CocoaPods, you can simply add `pod 'SwiftGen'` to your `Podfile`.
+If you're using CocoaPods, simply add `pod 'SwiftGen', '~> 6.0'` to your `Podfile`.
 
-This will download the `SwiftGen` binaries and dependencies in `Pods/SwiftGen/bin/swiftgen` during your next `pod install` execution.
-
-> 💡 _Don't forget to run `pod repo update` before your `pod install` if you haven't done it in a long time, to be sure to get the latest version of SwiftGen._
+Then execute `pod install --repo-update` (or `pod update SwiftGen` if you want to update an existing SwiftGen installation) to download and install the `SwiftGen` binaries and dependencies in `Pods/SwiftGen/bin/swiftgen` next to your project.
 
 Given that you can specify an exact version for `SwiftGen` in your `Podfile`, this allows you to ensure **all coworkers will use the same version of SwiftGen for this project**.
 
