@@ -20,7 +20,9 @@ _None_
 
 ### Internal Changes
 
-_None_
+* Resolve path if the binary is a symbolic link in order to find bundled templates.  
+  [Liquidsoul](https://github.com/liquidsoul)
+  [#559](https://github.com/SwiftGen/SwiftGen/issues/559)
 
 ## 6.0.2
 
