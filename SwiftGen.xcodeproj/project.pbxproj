@@ -40,6 +40,7 @@
 		37DC603B1F98E74E00B7B31C /* config-absolute-paths-prefix.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */; };
 		5DE172C4BAE478DDAA63064F /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00832FEC9F060E93DAD1228 /* Pods_swiftgen.framework */; };
 		80F8014301BF496E905CA2CF /* Pods_SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16DF0A0F13A222BCA7B60102 /* Pods_SwiftGenKit.framework */; };
+		846BDF9321ADB71B00DDCEE9 /* config-with-env_placeholder.yml in Resources */ = {isa = PBXBuildFile; fileRef = 846BDF9221ADB71B00DDCEE9 /* config-with-env_placeholder.yml */; };
 		9A35A2477F800A42E6A654C8 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5D3E5746871F59AC9CA625 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */; };
 		C3031AA121062C9A00BF00DE /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3031AA021062C9A00BF00DE /* UserInfo.swift */; };
 		C322626F21012C42001AC9CD /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C322626E21012C42001AC9CD /* Bool.swift */; };
@@ -317,6 +318,7 @@
 		4D5D3E5746871F59AC9CA625 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8FC9E0F4B4EF9E07633BF2 /* Pods-swiftgen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.debug.xcconfig"; sourceTree = "<group>"; };
 		82F082E81A4B58973980744C /* Pods-swiftgen-Templates UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen-Templates UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests.release.xcconfig"; sourceTree = "<group>"; };
+		846BDF9221ADB71B00DDCEE9 /* config-with-env_placeholder.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-with-env_placeholder.yml"; sourceTree = "<group>"; };
 		8E21A4F5E016842E81316A0A /* Pods-swiftgen-Templates UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen-Templates UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		938C88DFF470538739F32902 /* Pods-swiftgen-SwiftGen UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen-SwiftGen UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		A3D916CE5C9F4E2569D12C5A /* Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 				37DC602C1F98D1D900B7B31C /* config-missing-output.yml */,
 				093405111F87AA6500187787 /* config-with-multi-entries.yml */,
 				DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */,
+				846BDF9221ADB71B00DDCEE9 /* config-with-env_placeholder.yml */,
 				093405071F81539100187787 /* config-with-params.yml */,
 			);
 			name = Configs;
@@ -1034,6 +1037,7 @@
 				37DC60341F98D7DD00B7B31C /* config-invalid-output.yml in Resources */,
 				093405131F87AA6A00187787 /* config-with-multi-entries.yml in Resources */,
 				37DC60391F98D7DD00B7B31C /* config-missing-template.yml in Resources */,
+				846BDF9321ADB71B00DDCEE9 /* config-with-env_placeholder.yml in Resources */,
 				DD40284A209E56B50045FC76 /* config-with-multi-outputs.yml in Resources */,
 				37DC60351F98D7DD00B7B31C /* config-invalid-structure.yml in Resources */,
 				093405101F815B2500187787 /* config-with-params.yml in Resources */,
