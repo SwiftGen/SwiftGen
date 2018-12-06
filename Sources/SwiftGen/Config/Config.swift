@@ -8,6 +8,7 @@
 
 import PathKit
 import SwiftGenKit
+import Foundation
 
 // MARK: - Config
 
