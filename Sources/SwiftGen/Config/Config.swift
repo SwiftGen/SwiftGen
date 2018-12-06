@@ -27,7 +27,20 @@ extension Config {
     if !file.exists {
       throw Config.Error.pathNotFound(path: file)
     }
-    let anyConfig = try YAML.read(path: file)
+    
+    // Read contents and replace env variables
+    var contents: String = try file.read()
+
+    ProcessInfo.processInfo.environment.keys.forEach { key in
+      guard let value = ProcessInfo.processInfo.environment[key] else {
+        return
+      }
+
+      contents = contents.replacingOccurrences(of: "${\(key)}", with: value)
+    }
+
+    let anyConfig = try YAML.decode(string: contents)
+
     guard let config = anyConfig as? [String: Any] else {
       throw Config.Error.wrongType(key: nil, expected: "Dictionary", got: type(of: anyConfig))
     }
