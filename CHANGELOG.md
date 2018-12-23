@@ -671,7 +671,7 @@ Note: The next minor version will focus on bringing more documentation for all t
   [Ignacio Romero Zurbuchen](https://github.com/dzenbot)
   [HanxuanZhou](https://github.com/GenoZhou)
   [Syo Ikeda](https://github.com/ikesyo)
-
+  
 
 ## 3.0.0
 
