@@ -19,6 +19,9 @@ _None_
   [#185](https://github.com/SwiftGen/SwiftGen/issues/185)
   [#191](https://github.com/SwiftGen/SwiftGen/pull/191)
   [#195](https://github.com/SwiftGen/SwiftGen/pull/195)
+* Expand environment variables in YAML files.  
+  [Wolfgang Lutz](https://github.com/lutzifer)
+  [#355](https://github.com/SwiftGen/SwiftGen/issues/#355)
 
 ### Bug Fixes
 
@@ -668,7 +671,7 @@ Note: The next minor version will focus on bringing more documentation for all t
   [Ignacio Romero Zurbuchen](https://github.com/dzenbot)
   [HanxuanZhou](https://github.com/GenoZhou)
   [Syo Ikeda](https://github.com/ikesyo)
-  
+
 
 ## 3.0.0
 
