@@ -31,13 +31,13 @@ struct ConfigEntry {
   var inputs: [Path]
   var outputs: [ConfigEntryOutput]
 
-  mutating func makeRelativeTo(inputDir: Path?, outputDir: Path?) {
+  mutating func makingRelativeTo(inputDir: Path?, outputDir: Path?) {
     if let inputDir = inputDir {
       self.inputs = self.inputs.map { $0.isRelative ? inputDir + $0 : $0 }
     }
     self.outputs = self.outputs.map {
       var output = $0
-      output.makeRelativeTo(outputDir: outputDir)
+      output.makingRelativeTo(outputDir: outputDir)
       return output
     }
   }
@@ -83,7 +83,7 @@ extension ConfigEntry {
 
   static func parseCommandEntry(yaml: Any, cmd: String, logger: (LogLevel, String) -> Void) throws -> [ConfigEntry] {
     return try ConfigEntry.parseValueOrArray(yaml: yaml) {
-      return try ConfigEntry(yaml: $0, cmd: cmd, logger: logger)
+      try ConfigEntry(yaml: $0, cmd: cmd, logger: logger)
     }
   }
 

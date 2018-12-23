@@ -26,8 +26,23 @@ if [ -z "$selected_path" ]; then
 	exit 1
 fi
 
+# temporary work directory
+scratch=`mktemp -d -t SwiftGen`
+function finish {
+  rm -rf "$scratch"
+}
+trap finish EXIT
+
+# actually run swiftlint
 if [ "$key" = "templates_generated" ]; then
-	find "${PROJECT_DIR}/${selected_path}" -name "*.swift" -exec ${PROJECT_DIR}/Scripts/swiftlint_no_disable_all.sh {} \;
+	# copy the generated output to a temp dir and strip the "swiftlint:disable:all"
+	for f in `find "${PROJECT_DIR}/${selected_path}" -name '*.swift'`; do
+		temp_file="${scratch}${f#"$PROJECT_DIR"}"
+		mkdir -p $(dirname "$temp_file")
+		sed "s/swiftlint:disable all/ --/" "$f" > "$temp_file"
+	done
+
+	"$SWIFTLINT" lint --strict --config "$CONFIG" --path "$scratch" | sed s@"$scratch"@"${PROJECT_DIR}"@
 else
 	"$SWIFTLINT" lint --strict --config "$CONFIG" --path "${PROJECT_DIR}/${selected_path}"
 fi

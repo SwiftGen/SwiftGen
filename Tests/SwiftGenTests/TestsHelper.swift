@@ -18,7 +18,7 @@ private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
 
 private func diff(_ result: String, _ expected: String) -> String? {
   guard result != expected else { return nil }
-  var firstDiff: Int? = nil
+  var firstDiff: Int?
   let newLines = CharacterSet.newlines
   let lhsLines = result.components(separatedBy: newLines)
   let rhsLines = expected.components(separatedBy: newLines)
@@ -71,16 +71,6 @@ func XCTAssertEqualDict(_ result: [String: Any],
                 "expected \(expected), got \(result)",
                 file: file,
                 line: line)
-}
-
-extension TemplateRef: Equatable {
-  public static func == (lhs: TemplateRef, rhs: TemplateRef) -> Bool {
-    switch (lhs, rhs) {
-    case (.name(let lname), .name(let rname)): return lname == rname
-    case (.path(let lpath), .path(let rpath)): return lpath == rpath
-    case (.name, .path), (.path, .name): return false
-    }
-  }
 }
 
 class Fixtures {

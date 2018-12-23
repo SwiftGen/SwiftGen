@@ -3,17 +3,17 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | fonts/swift3.stencil |
-| Invocation example | `swiftgen fonts -t swift3 …` |
+| Configuration example | <pre>fonts:<br />  inputs: path/to/font/dir<br />  outputs:<br />    templateName: swift3<br />    output: Fonts.swift</pre> |
 | Language | Swift 3 |
 | Author | Olivier Halligon |
 
 ## When to use it
 
-- When you need to generate *Swift 3* code
+- When you need to generate *Swift 3* code.
 
 ## Customization
 
-You can customize some elements of this template by overriding the following parameters when invoking `swiftgen` in the command line, using `--param <paramName>=<newValue>`
+You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
@@ -39,7 +39,7 @@ enum FontFamily {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Fonts/swift3-context-defaults.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Fonts/swift3-context-defaults.swift)
 
 ## Usage example
 

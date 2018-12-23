@@ -3,18 +3,19 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | plist/runtime-swift4.stencil |
-| Invocation example | `swiftgen plist -t runtime-swift4 …` |
+| Configuration example | <pre>plist:<br />  inputs: path/to/plist/dir-or-file<br />  outputs:<br />    templateName: runtime-swift4<br />    output: Plist.swift</pre> |
 | Language | Swift 4 |
 | Author | David Jennes |
 
 ## When to use it
 
-- When you need to generate *Swift 4* code
-- Loads the data from the Plist file at runtime
+- When you need to generate *Swift 4* code.
+- Loads the data from the Plist file in the current bundle at runtime.
+- If you need other functionality, such as loading a file in your `Documents` folder, or handling `Optional` properties, you should write your own custom template ([guide](../../Creating-your-templates.md)).
 
 ## Customization
 
-You can customize some elements of this template by overriding the following parameters when invoking `swiftgen` in the command line, using `--param <paramName>=<newValue>`
+You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
@@ -28,25 +29,25 @@ You can customize some elements of this template by overriding the following par
 
 ```swift
 internal enum PlistFiles {
-  internal enum Test {
-    internal static let items: [String] = arrayFromPlist(at: "array.plist")
+  internal enum Configuration {
+    private static let _document = PlistDocument(path: "configuration.plist")
+    internal static let environment: String = _document["Environment"]
+    internal static let options: [String: Any] = _document["Options"]
   }
-  internal enum Stuff {
-    private static let _document = PlistDocument(path: "dictionary.plist")
-    internal static let key1: Int = _document["key1"]
-    internal static let key2: [String: Any] = _document["key2"]
+  internal enum ShoppingList {
+    internal static let items: [String] = arrayFromPlist(at: "shopping-list.plist")
   }
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/SwiftGen/blob/master/Tests/Fixtures/Generated/Plist/runtime-swift4-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Plist/runtime-swift4-context-all.swift)
 
 ## Usage example
 
 ```swift
 // This will be an array
-let foo = PlistFiles.Test.items
+let foo = PlistFiles.ShoppingList.items
 
-// This will be an Int
-let bar = PlistFiles.Stuff.key1
+// This will be an String
+let bar = PlistFiles.Configuration.environment
 ```

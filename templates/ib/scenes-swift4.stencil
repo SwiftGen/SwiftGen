@@ -1,0 +1,98 @@
+// swiftlint:disable all
+// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+
+{% if platform and storyboards %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set isAppKit %}{% if platform == "macOS" %}true{% endif %}{% endset %}
+{% set prefix %}{% if isAppKit %}NS{% else %}UI{% endif %}{% endset %}
+{% set controller %}{% if isAppKit %}Controller{% else %}ViewController{% endif %}{% endset %}
+// swiftlint:disable sorted_imports
+import Foundation
+{% for module in modules where module != env.PRODUCT_MODULE_NAME and module != param.module %}
+import {{module}}
+{% endfor %}
+
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+
+// MARK: - Storyboard Scenes
+
+// swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
+{% macro moduleName item %}{% filter removeNewlines %}
+  {% if item.moduleIsPlaceholder %}
+    {{ env.PRODUCT_MODULE_NAME|default:param.module }}
+  {% else %}
+    {{ item.module }}
+  {% endif %}
+{% endfilter %}{% endmacro %}
+{% macro className item %}{% filter removeNewlines %}
+  {% set module %}{% call moduleName item %}{% endset %}
+  {% if module and ( not param.ignoreTargetModule or module != env.PRODUCT_MODULE_NAME and module != param.module ) %}
+    {{module}}.
+  {% endif %}
+  {{item.type}}
+{% endfilter %}{% endmacro %}
+{{accessModifier}} enum {{param.enumName|default:"StoryboardScene"}} {
+  {% for storyboard in storyboards %}
+  {% set storyboardName %}{{storyboard.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}{% endset %}
+  {{accessModifier}} enum {{storyboardName}}: StoryboardType {
+    {{accessModifier}} static let storyboardName = "{{storyboard.name}}"
+    {% if storyboard.initialScene %}
+
+    {% set sceneClass %}{% call className storyboard.initialScene %}{% endset %}
+    {{accessModifier}} static let initialScene = InitialSceneType<{{sceneClass}}>(storyboard: {{storyboardName}}.self)
+    {% endif %}
+    {% for scene in storyboard.scenes %}
+
+    {% set sceneID %}{{scene.identifier|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% endset %}
+    {% set sceneClass %}{% call className scene %}{% endset %}
+    {{accessModifier}} static let {{sceneID}} = SceneType<{{sceneClass}}>(storyboard: {{storyboardName}}.self, identifier: "{{scene.identifier}}")
+    {% endfor %}
+  }
+  {% endfor %}
+}
+// swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
+
+// MARK: - Implementation Details
+
+{{accessModifier}} protocol StoryboardType {
+  static var storyboardName: String { get }
+}
+
+{{accessModifier}} extension StoryboardType {
+  static var storyboard: {{prefix}}Storyboard {
+    let name = {% if isAppKit %}NSStoryboard.Name({% endif %}self.storyboardName{% if isAppKit %}){% endif %}
+    return {{prefix}}Storyboard(name: name, bundle: Bundle(for: BundleToken.self))
+  }
+}
+
+{{accessModifier}} struct SceneType<T{% if not isAppKit %}: UIViewController{% endif %}> {
+  {{accessModifier}} let storyboard: StoryboardType.Type
+  {{accessModifier}} let identifier: String
+
+  {{accessModifier}} func instantiate() -> T {
+    let identifier = {% if isAppKit %}NSStoryboard.SceneIdentifier({% endif %}self.identifier{% if isAppKit %}){% endif %}
+    guard let controller = storyboard.storyboard.instantiate{{controller}}(withIdentifier: identifier) as? T else {
+      fatalError("{{controller}} '\(identifier)' is not of the expected class \(T.self).")
+    }
+    return controller
+  }
+}
+
+{{accessModifier}} struct InitialSceneType<T{% if not isAppKit %}: UIViewController{% endif %}> {
+  {{accessModifier}} let storyboard: StoryboardType.Type
+
+  {{accessModifier}} func instantiate() -> T {
+    guard let controller = storyboard.storyboard.instantiateInitial{{controller}}() as? T else {
+      fatalError("{{controller}} is not of the expected class \(T.self).")
+    }
+    return controller
+  }
+}
+
+private final class BundleToken {}
+{% elif storyboards %}
+// Mixed AppKit and UIKit storyboard files found, please invoke swiftgen with these separately
+{% else %}
+// No storyboard found
+{% endif %}

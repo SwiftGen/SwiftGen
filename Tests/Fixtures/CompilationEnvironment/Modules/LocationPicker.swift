@@ -1,4 +1,3 @@
 import UIKit
 
-public class LocationPickerViewController: UIViewController {
-}
+public final class LocationPickerViewController: UIViewController {}

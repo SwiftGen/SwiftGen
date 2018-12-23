@@ -23,6 +23,8 @@ import Foundation
           class prefix such as `UI`)
        - `module`: `String` — The module of the scene, could be the value of `customModule`, or of an internal module
           such as GLKit depending on the base type (can be empty)
+       - `moduleIsPlaceholder`: `Bool` — This property is true if the user has checked the "Inherit module from target"
+          setting.
     - `segues`: `Array` - List of segues
        - `identifier`: `String` — The segue identifier
        - `customClass`: `String` — The custom class of the segue (absent if generic UIStoryboardSegue)
@@ -31,6 +33,8 @@ import Foundation
           class prefix such as `UI`)
        - `module`: `String` — The module of the segue, could be the value of `customModule`, or of an internal module
           such as GLKit depending on the base type (can be empty)
+       - `moduleIsPlaceholder`: `Bool` — This property is true if the user has checked the "Inherit module from target"
+          setting.
 */
 extension InterfaceBuilder.Parser {
   public func stencilContext() -> [String: Any] {
@@ -70,14 +74,16 @@ extension InterfaceBuilder.Parser {
         "customClass": customClass,
         "customModule": scene.customModule ?? "",
         "type": scene.type,
-        "module": scene.module ?? ""
+        "module": scene.module ?? "",
+        "moduleIsPlaceholder": scene.moduleIsPlaceholder
       ]
     } else {
       return [
         "identifier": scene.identifier,
         "baseType": scene.tag.uppercasedFirst(),
         "type": scene.type,
-        "module": scene.module ?? ""
+        "module": scene.module ?? "",
+        "moduleIsPlaceholder": scene.moduleIsPlaceholder
       ]
     }
   }
@@ -88,7 +94,8 @@ extension InterfaceBuilder.Parser {
       "customClass": segue.customClass ?? "",
       "customModule": segue.customModule ?? "",
       "type": segue.type,
-      "module": segue.module ?? ""
+      "module": segue.module ?? "",
+      "moduleIsPlaceholder": segue.moduleIsPlaceholder
     ]
   }
 }

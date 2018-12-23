@@ -3,13 +3,13 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | strings/structured-swift4.stencil |
-| Invocation example | `swiftgen strings -t structured-swift4 …` |
+| Configuration example | <pre>strings:<br />  inputs: path/to/Localizable.strings<br />  outputs:<br />    templateName: structured-swift4<br />    output: Strings.swift</pre> |
 | Language | Swift 4 |
 | Author | Olivier Halligon |
 
 ## When to use it
 
-- When you need to generate *Swift 4* code
+- When you need to generate *Swift 4* code.
 - If you use "structured" keys for your strings, that is components separated by the `.` character, for example:
 
 ```
@@ -20,7 +20,7 @@
 
 ## Customization
 
-You can customize some elements of this template by overriding the following parameters when invoking `swiftgen` in the command line, using `--param <paramName>=<newValue>`
+You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
@@ -55,7 +55,7 @@ enum L10n {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Strings/structured-swift4-context-localizable.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Strings/structured-swift4-context-localizable.swift)
 
 ## Usage example
 

@@ -82,28 +82,32 @@ let configRunCommand = command(
        flag: "v",
        description: "Print each command being executed")
 ) { file, verbose in
-  try ErrorPrettifier.execute {
-    let config = try Config(file: file)
+  do {
+    try ErrorPrettifier.execute {
+      let config = try Config(file: file)
 
-    if verbose {
-      logMessage(.info, "Executing configuration file \(file)")
-    }
-    try file.parent().chdir {
-      for (cmd, entries) in config.commands {
-        for var entry in entries {
-          guard let parserCmd = allParserCommands.first(where: { $0.name == cmd }) else {
-            throw Config.Error.missingEntry(key: cmd)
-          }
-          entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
-          if verbose {
-            for item in entry.commandLine(forCommand: cmd) {
-              logMessage(.info, " $ \(item)")
+      if verbose {
+        logMessage(.info, "Executing configuration file \(file)")
+      }
+      try file.parent().chdir {
+        for (cmd, entries) in config.commands {
+          for var entry in entries {
+            guard let parserCmd = allParserCommands.first(where: { $0.name == cmd }) else {
+              throw Config.Error.missingEntry(key: cmd)
             }
+            entry.makingRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
+            if verbose {
+              for item in entry.commandLine(forCommand: cmd) {
+                logMessage(.info, " $ \(item)")
+              }
+            }
+            try entry.checkPaths()
+            try entry.run(parserCommand: parserCmd)
           }
-          try entry.checkPaths()
-          try entry.run(parserCommand: parserCmd)
         }
       }
     }
+  } catch let error as Config.Error {
+    logMessage(.error, error)
   }
 }

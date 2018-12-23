@@ -3,18 +3,18 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | colors/swift3.stencil |
-| Invocation example | `swiftgen colors -t swift3 …` |
+| Configuration example | <pre>colors:<br />  inputs: path/to/colors-file.txt<br />  outputs:<br />    templateName: swift3<br />    output: Colors.swift</pre> |
 | Language | Swift 3 |
 | Author | Olivier Halligon |
 
 ## When to use it
 
-- When you need to generate *Swift 3* code
-- Supports _multiple_ color names with the _same_ value
+- When you need to generate *Swift 3* code.
+- Supports _multiple_ color names with the _same_ value.
 
 ## Customization
 
-You can customize some elements of this template by overriding the following parameters when invoking `swiftgen` in the command line, using `--param <paramName>=<newValue>`
+You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
@@ -40,7 +40,7 @@ struct ColorName {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Colors/swift3-context-defaults.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Colors/swift3-context-defaults.swift)
 
 ## Usage example
 

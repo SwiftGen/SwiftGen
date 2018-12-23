@@ -114,10 +114,9 @@ enum SwiftIdentifier {
   static func prefixWithUnderscoreIfNeeded(string: String,
                                            forbiddenChars exceptions: String = "") -> String {
 
-    let (head, _) = identifierCharacterSets(exceptions: exceptions)
+    guard let firstChar = string.unicodeScalars.first else { return "" }
 
-    let chars = string.unicodeScalars
-    let firstChar = chars[chars.startIndex]
+    let (head, _) = identifierCharacterSets(exceptions: exceptions)
     let prefix = !head.longCharacterIsMember(firstChar.value) ? "_" : ""
 
     return prefix + string

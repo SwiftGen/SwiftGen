@@ -36,18 +36,18 @@ let templatesListCommand = command(
       }
     }
 
-    let subcommandsToList = onlySubcommand.isEmpty ? allSubcommands : [onlySubcommand]
-    for subcommand in subcommandsToList {
-      outputLines.append("\(subcommand):")
+    let list = onlySubcommand.isEmpty ? allParserCommands : allParserCommands.filter { $0.name == onlySubcommand }
+    for subcommand in list {
+      outputLines.append("\(subcommand.name):")
       outputLines.append("  custom:")
-      printTemplates(subcommand, appSupportTemplatesPath)
+      printTemplates(subcommand.templateFolder, appSupportTemplatesPath)
       outputLines.append("  bundled:")
-      printTemplates(subcommand, bundledTemplatesPath)
+      printTemplates(subcommand.templateFolder, bundledTemplatesPath)
     }
 
     outputLines.append("---")
     outputLines.append("You can add custom templates in \(appSupportTemplatesPath).")
-    outputLines.append("You can also specify templates by path using `-p PATH` instead of `-t NAME`.")
+    outputLines.append("You can also specify templates by path using `templatePath` instead of `templateName`.")
     outputLines.append("For more information, see the documentation on GitHub.")
     outputLines.append("")
 
@@ -69,10 +69,11 @@ private func templatePathCommandGenerator(execute: @escaping (Path, OutputDestin
       "template",
       description: "the name of the template to find, like `swift3` or `dot-syntax`"),
     outputOption
-  ) { subcommand, name, output in
+  ) { subcommandName, templateName, output in
     try ErrorPrettifier.execute {
-      let template = TemplateRef.name(name)
-      let path = try template.resolvePath(forSubcommand: subcommand)
+      guard let subcommand = allParserCommands.first(where: { $0.name == subcommandName }) else { return }
+      let template = TemplateRef.name(templateName)
+      let path = try template.resolvePath(forSubcommand: subcommand.templateFolder)
       try execute(path, output)
     }
   }

@@ -3,18 +3,18 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | strings/flat-swift3.stencil |
-| Invocation example | `swiftgen strings -t flat-swift3 …` |
+| Configuration example | <pre>strings:<br />  inputs: path/to/Localizable.strings<br />  outputs:<br />    templateName: flat-swift3<br />    output: Strings.swift</pre> |
 | Language | Swift 3 |
 | Author | Olivier Halligon |
 
 ## When to use it
 
-- When you need to generate *Swift 3* code
+- When you need to generate *Swift 3* code.
 - If you use unstructured key names for your strings, or a structure that we don't support (yet). If you use "dot-syntax" keys, please check out the [structured-swift3](structured-swift3.md) template.
 
 ## Customization
 
-You can customize some elements of this template by overriding the following parameters when invoking `swiftgen` in the command line, using `--param <paramName>=<newValue>`
+You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
@@ -42,7 +42,7 @@ enum L10n {
   }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Strings/flat-swift3-context-localizable.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Strings/flat-swift3-context-localizable.swift)
 
 ## Usage example
 

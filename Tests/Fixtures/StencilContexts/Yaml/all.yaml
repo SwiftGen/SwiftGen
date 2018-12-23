@@ -1,6 +1,34 @@
 files:
 - documents:
   - data:
+      api-version: "2"
+      country: null
+      environment: "staging"
+      options:
+        screen-order:
+        - "1"
+        - "2"
+        - "3"
+    metadata:
+      properties:
+        api-version:
+          type: "String"
+        country:
+          type: "Optional"
+        environment:
+          type: "String"
+        options:
+          properties:
+            screen-order:
+              element:
+                type: "String"
+              type: "Array"
+          type: "Dictionary"
+      type: "Dictionary"
+  name: "configuration"
+  path: "configuration.json"
+- documents:
+  - data:
     - "Mark McGwire"
     - "Sammy Sosa"
     - "Ken Griffey"
@@ -19,8 +47,9 @@ files:
   path: "documents.yaml"
 - documents:
   - data:
-    - "value1"
-    - "value2"
+    - "Eggs"
+    - "Bread"
+    - "Milk"
     metadata:
       element:
         type: "String"
@@ -29,49 +58,33 @@ files:
   path: "grocery-list.yaml"
 - documents:
   - data:
-      key1: "value1"
-      key2: "2"
-      key3:
-        nestedKey3:
-        - "1"
-        - "2"
-        - "3"
+      car: null
+      foo:
+        bar: "banana"
+        baz: "orange"
+      hello: "world"
+      weight: 3.33e+1
     metadata:
       properties:
-        key1:
-          type: "String"
-        key2:
-          type: "String"
-        key3:
+        car:
+          type: "Optional"
+        foo:
           properties:
-            nestedKey3:
-              element:
-                type: "String"
-              type: "Array"
-          type: "Dictionary"
-      type: "Dictionary"
-  name: "json"
-  path: "json.json"
-- documents:
-  - data:
-      key1: "value1"
-      key2:
-        nestedKey2: "nestedValue2"
-    metadata:
-      properties:
-        key1:
-          type: "String"
-        key2:
-          properties:
-            nestedKey2:
+            bar:
+              type: "String"
+            baz:
               type: "String"
           type: "Dictionary"
+        hello:
+          type: "String"
+        weight:
+          type: "Double"
       type: "Dictionary"
   name: "mapping"
   path: "mapping.yaml"
 - documents:
-  - data: "value1"
+  - data: "1.2.3.beta.4"
     metadata:
       type: "String"
-  name: "scalar"
-  path: "scalar.yaml"
+  name: "version"
+  path: "version.yaml"

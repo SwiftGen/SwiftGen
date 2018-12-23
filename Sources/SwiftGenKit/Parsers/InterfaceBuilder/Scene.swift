@@ -13,6 +13,7 @@ extension InterfaceBuilder {
     let tag: String
     let customClass: String?
     let customModule: String?
+    let moduleIsPlaceholder: Bool
     let platform: Platform
 
     private static let tagTypeMap = [
@@ -50,7 +51,9 @@ extension InterfaceBuilder {
 private enum XML {
   static let customClassAttribute = "customClass"
   static let customModuleAttribute = "customModule"
+  static let customModuleProviderAttribute = "customModuleProvider"
   static let storyboardIdentifierAttribute = "storyboardIdentifier"
+  static let targetValue = "target"
 }
 
 extension InterfaceBuilder.Scene {
@@ -59,22 +62,12 @@ extension InterfaceBuilder.Scene {
     tag = object.tagName ?? ""
     customClass = object[XML.customClassAttribute]
     customModule = object[XML.customModuleAttribute]
+    moduleIsPlaceholder = object[XML.customModuleProviderAttribute] == XML.targetValue
     self.platform = platform
   }
 }
 
 // MARK: - Hashable
 
-extension InterfaceBuilder.Scene: Equatable { }
-func == (lhs: InterfaceBuilder.Scene, rhs: InterfaceBuilder.Scene) -> Bool {
-  return lhs.identifier == rhs.identifier &&
-    lhs.tag == rhs.tag &&
-    lhs.customClass == rhs.customClass &&
-    lhs.customModule == rhs.customModule
-}
-
-extension InterfaceBuilder.Scene: Hashable {
-  var hashValue: Int {
-    return identifier.hashValue ^ tag.hashValue ^ (customModule?.hashValue ?? 0) ^ (customClass?.hashValue ?? 0)
-  }
-}
+extension InterfaceBuilder.Scene: Equatable {}
+extension InterfaceBuilder.Scene: Hashable {}

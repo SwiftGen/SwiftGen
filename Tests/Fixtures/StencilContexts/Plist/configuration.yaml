@@ -1,0 +1,18 @@
+files:
+- documents:
+  - data:
+      Environment: "development"
+      Options:
+        Animation Style: "Party Mode"
+    metadata:
+      properties:
+        Environment:
+          type: "String"
+        Options:
+          properties:
+            Animation Style:
+              type: "String"
+          type: "Dictionary"
+      type: "Dictionary"
+  name: "configuration"
+  path: "configuration.plist"

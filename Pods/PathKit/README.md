@@ -19,13 +19,13 @@ let path = Path("/usr/bin") + Path("swift")
 #### Determine if a path is absolute
 
 ```swift
-path.isAbsolute()
+path.isAbsolute
 ```
 
 #### Determine if a path is relative
 
 ```swift
-path.isRelative()
+path.isRelative
 ```
 
 #### Determine if a file or directory exists at the path

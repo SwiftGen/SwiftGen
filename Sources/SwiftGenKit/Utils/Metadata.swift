@@ -11,12 +11,14 @@ import Foundation
 enum Metadata {
   private enum Key {
     static let element = "element"
+    static let items = "items"
     static let properties = "properties"
     static let type = "type"
   }
 
   private enum ValueType {
     static let any = "Any"
+    static let optional = "Optional"
     static let array = "Array"
     static let dictionary = "Dictionary"
     static let bool = "Bool"
@@ -51,6 +53,8 @@ enum Metadata {
         Key.type: ValueType.dictionary,
         Key.properties: Metadata.describe(dictionary: data)
       ]
+    case is NSNull, nil:
+      return [Key.type: ValueType.optional]
     default:
       return [Key.type: ValueType.any]
     }
@@ -78,17 +82,21 @@ enum Metadata {
       return [Key.type: ValueType.date]
     } else if array is [Data] {
       return [Key.type: ValueType.data]
-    } else if let array = array as? [[Any]] {
+    } else if array is [[Any]] {
       return [
         Key.type: ValueType.array,
-        Key.element: Metadata.describe(arrayElement: array)
+        Key.items: array.map { Metadata.generate(for: $0) }
       ]
     } else if array is [[String: Any]] {
       return [
-        Key.type: ValueType.dictionary
+        Key.type: ValueType.dictionary,
+        Key.items: array.map { Metadata.generate(for: $0) }
       ]
     } else {
-      return [Key.type: ValueType.any]
+      return [
+        Key.type: ValueType.any,
+        Key.items: array.map { Metadata.generate(for: $0) }
+      ]
     }
   }
 }

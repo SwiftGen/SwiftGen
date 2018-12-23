@@ -40,6 +40,8 @@ import Foundation
     [{% call typeBlock metadata.element %}]
   {% elif metadata.type == "Dictionary" %}
     [String: Any]
+  {% elif metadata.type == "Optional" %}
+    Any?
   {% else %}
     {{metadata.type}}
   {% endif %}

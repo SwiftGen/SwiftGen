@@ -12,12 +12,17 @@ import Foundation
 
 {% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
-    _ p{{forloop.counter}}: {{type}}{% if not forloop.last %}, {% endif %}
+    _ p{{forloop.counter}}: {{type}}{{ ", " if not forloop.last }}
   {% endfor %}
 {% endfilter %}{% endmacro %}
 {% macro argumentsBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
-    p{{forloop.counter}}{% if not forloop.last %}, {% endif %}
+    {% if type == "UnsafeRawPointer" %}
+    Int(bitPattern: p{{forloop.counter}})
+    {% else %}
+    p{{forloop.counter}}
+    {% endif %}
+    {{ ", " if not forloop.last }}
   {% endfor %}
 {% endfilter %}{% endmacro %}
 {% macro recursiveBlock table item %}

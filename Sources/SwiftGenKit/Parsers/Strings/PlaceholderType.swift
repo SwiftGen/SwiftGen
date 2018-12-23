@@ -11,10 +11,11 @@ extension Strings {
     case object = "String"
     case float = "Float"
     case int = "Int"
-    case char = "Character"
-    case cString = "UnsafePointer<unichar>"
-    case pointer = "UnsafePointer<Void>"
-    case unknown = "UnsafePointer<()>"
+    case char = "CChar"
+    case cString = "UnsafePointer<CChar>"
+    case pointer = "UnsafeRawPointer"
+
+    static let unknown = pointer
 
     init?(formatChar char: Character) {
       guard let lcChar = String(char).lowercased().first else {
@@ -49,7 +50,7 @@ extension Strings.PlaceholderType {
     // like in "%3$" to make positional specifiers
     let position = "([1-9]\\d*\\$)?"
     // precision like in "%1.2f"
-    let precision = "[-+]?\\d?(?:\\.\\d)?"
+    let precision = "[-+# 0]?\\d?(?:\\.\\d)?"
 
     do {
       return try NSRegularExpression(

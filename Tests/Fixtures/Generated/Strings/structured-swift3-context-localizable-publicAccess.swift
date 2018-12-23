@@ -19,9 +19,15 @@ public enum L10n {
   public static func objectOwnership(_ p1: Int, _ p2: String, _ p3: String) -> String {
     return L10n.tr("Localizable", "ObjectOwnership", p1, p2, p3)
   }
+  /// This is a %% character.
+  public static let percent = L10n.tr("Localizable", "percent")
   /// Hello, my name is %@ and I'm %d
   public static func `private`(_ p1: String, _ p2: Int) -> String {
     return L10n.tr("Localizable", "private", p1, p2)
+  }
+  /// Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString: '%s', Pointer: '%p'
+  public static func types(_ p1: String, _ p2: CChar, _ p3: Int, _ p4: Float, _ p5: UnsafePointer<CChar>, _ p6: UnsafeRawPointer) -> String {
+    return L10n.tr("Localizable", "types", p1, p2, p3, p4, p5, Int(bitPattern: p6))
   }
 
   public enum Apples {

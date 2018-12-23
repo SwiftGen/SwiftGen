@@ -15,7 +15,7 @@ extension Colors {
   }
 }
 
-protocol ColorsFileTypeParser: class {
+protocol ColorsFileTypeParser: AnyObject {
   static var extensions: [String] { get }
 
   init()
@@ -54,7 +54,7 @@ extension Colors {
 
 extension NSColor {
   var rgbColor: NSColor? {
-    guard colorSpace.colorSpaceModel != .RGB else { return self }
+    guard colorSpace.colorSpaceModel != .rgb else { return self }
 
     return usingColorSpaceName(.calibratedRGB)
   }

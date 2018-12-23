@@ -13,7 +13,7 @@ extension Colors {
     static let extensions = ["clr"]
 
     private enum Keys {
-      static let userColors = NSColorList.Name("UserColors")
+      static let userColors = "UserColors"
     }
 
     func parseFile(at path: Path) throws -> Palette {
@@ -21,7 +21,7 @@ extension Colors {
         var colors = [String: UInt32]()
 
         for colorName in colorsList.allKeys {
-          colors[colorName.rawValue] = colorsList.color(withKey: colorName)?.hexValue
+          colors[colorName] = colorsList.color(withKey: colorName)?.hexValue
         }
 
         let name = path.lastComponentWithoutExtension

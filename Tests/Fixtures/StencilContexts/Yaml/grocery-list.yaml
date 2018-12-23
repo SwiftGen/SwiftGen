@@ -1,8 +1,9 @@
 files:
 - documents:
   - data:
-    - "value1"
-    - "value2"
+    - "Eggs"
+    - "Bread"
+    - "Milk"
     metadata:
       element:
         type: "String"

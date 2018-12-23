@@ -64,7 +64,7 @@ class ExtendsNode : NodeType {
       throw TemplateSyntaxError("'extends' cannot appear more than once in the same template")
     }
 
-    let blockNodes = parsedNodes.flatMap { $0 as? BlockNode }
+    let blockNodes = parsedNodes.compactMap { $0 as? BlockNode }
 
     let nodes = blockNodes.reduce([String: BlockNode]()) { (accumulator, node) -> [String: BlockNode] in
       var dict = accumulator
@@ -159,8 +159,8 @@ class BlockNode : NodeType {
   }
 
   // child node is a block node from child template that extends this node (has the same name)
-  func childContext(_ child: BlockNode, blockContext: BlockContext, context: Context) throws -> [String: Any?] {
-    var childContext: [String: Any?] = [BlockContext.contextKey: blockContext]
+  func childContext(_ child: BlockNode, blockContext: BlockContext, context: Context) throws -> [String: Any] {
+    var childContext: [String: Any] = [BlockContext.contextKey: blockContext]
 
     if let blockSuperNode = child.nodes.first(where: {
       if case .variable(let variable, _)? = $0.token, variable == "block.super" { return true }

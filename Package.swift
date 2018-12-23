@@ -1,4 +1,4 @@
-// swift-tools-version:4.0
+// swift-tools-version:4.2
 import PackageDescription
 
 let package = Package(
@@ -10,9 +10,9 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/kylef/Commander.git", from: "0.8.0"),
         .package(url: "https://github.com/kylef/PathKit.git", from: "0.9.0"),
-        .package(url: "https://github.com/kylef/Stencil.git", from: "0.12.1"),
+        .package(url: "https://github.com/kylef/Stencil.git", from: "0.13.0"),
         .package(url: "https://github.com/jpsim/Yams.git", from: "1.0.0"),
-        .package(url: "https://github.com/SwiftGen/StencilSwiftKit.git", .branchItem("master")),
+        .package(url: "https://github.com/SwiftGen/StencilSwiftKit.git", from: "2.7.0"),
         .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "4.0.0"),
         .package(url: "https://github.com/tid-kijyun/SwiftClibxml2.git", from: "1.0.0")
     ],
@@ -22,12 +22,14 @@ let package = Package(
           "Kanna",
           "PathKit",
           "Stencil",
+          "StencilSwiftKit",
           "SwiftGenKit",
           "Yams"
         ]),
         .target(name: "SwiftGenKit", dependencies: [
+          "Kanna",
           "PathKit",
-          "StencilSwiftKit"
+          "Yams"
         ]),
         .testTarget(name: "SwiftGenKitTests", dependencies: [
           "SwiftGenKit"
@@ -39,5 +41,6 @@ let package = Package(
           "StencilSwiftKit",
           "SwiftGenKit"
         ])
-    ]
+    ],
+    swiftLanguageVersions: [.v4_2]
 )

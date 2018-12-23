@@ -1,20 +1,47 @@
 import Foundation
 
+typealias Line = (content: String, number: UInt, range: Range<String.Index>)
+
 struct Lexer {
   let templateName: String?
   let templateString: String
+  let lines: [Line]
+
+  /// The potential token start characters. In a template these appear after a
+  /// `{` character, for example `{{`, `{%`, `{#`, ...
+  private static let tokenChars: [Unicode.Scalar] = ["{", "%", "#"]
+
+  /// The token end characters, corresponding to their token start characters.
+  /// For example, a variable token starts with `{{` and ends with `}}`
+  private static let tokenCharMap: [Unicode.Scalar: Unicode.Scalar] = [
+    "{": "}",
+    "%": "%",
+    "#": "#"
+  ]
 
   init(templateName: String? = nil, templateString: String) {
     self.templateName = templateName
     self.templateString = templateString
+
+    self.lines = templateString.components(separatedBy: .newlines).enumerated().compactMap {
+      guard !$0.element.isEmpty else { return nil }
+      return (content: $0.element, number: UInt($0.offset + 1), templateString.range(of: $0.element)!)
+    }
   }
 
+  /// Create a token that will be passed on to the parser, with the given
+  /// content and a range. The content will be tested to see if it's a
+  /// `variable`, a `block` or a `comment`, otherwise it'll default to a simple
+  /// `text` token.
+  ///
+  /// - Parameters:
+  ///   - string: The content string of the token
+  ///   - range: The range within the template content, used for smart
+  ///            error reporting
   func createToken(string: String, at range: Range<String.Index>) -> Token {
     func strip() -> String {
-      guard string.characters.count > 4 else { return "" }
-      let start = string.index(string.startIndex, offsetBy: 2)
-      let end = string.index(string.endIndex, offsetBy: -2)
-      let trimmed = String(string[start..<end])
+      guard string.count > 4 else { return "" }
+      let trimmed = String(string.dropFirst(2).dropLast(2))
         .components(separatedBy: "\n")
         .filter({ !$0.isEmpty })
         .map({ $0.trim(character: " ") })
@@ -25,8 +52,8 @@ struct Lexer {
     if string.hasPrefix("{{") || string.hasPrefix("{%") || string.hasPrefix("{#") {
       let value = strip()
       let range = templateString.range(of: value, range: range) ?? range
-      let line = templateString.rangeLine(range)
-      let sourceMap = SourceMap(filename: templateName, line: line)
+      let location = rangeLocation(range)
+      let sourceMap = SourceMap(filename: templateName, location: location)
 
       if string.hasPrefix("{{") {
         return .variable(value: value, at: sourceMap)
@@ -37,31 +64,27 @@ struct Lexer {
       }
     }
 
-    let line = templateString.rangeLine(range)
-    let sourceMap = SourceMap(filename: templateName, line: line)
+    let location = rangeLocation(range)
+    let sourceMap = SourceMap(filename: templateName, location: location)
     return .text(value: string, at: sourceMap)
   }
 
-  /// Returns an array of tokens from a given template string.
+  /// Transforms the template into a list of tokens, that will eventually be
+  /// passed on to the parser.
+  ///
+  /// - Returns: The list of tokens (see `createToken(string: at:)`).
   func tokenize() -> [Token] {
     var tokens: [Token] = []
 
     let scanner = Scanner(templateString)
-
-    let map = [
-      "{{": "}}",
-      "{%": "%}",
-      "{#": "#}",
-      ]
-
     while !scanner.isEmpty {
-      if let text = scanner.scan(until: ["{{", "{%", "{#"]) {
-        if !text.1.isEmpty {
-          tokens.append(createToken(string: text.1, at: scanner.range))
+      if let (char, text) = scanner.scanForTokenStart(Lexer.tokenChars) {
+        if !text.isEmpty {
+          tokens.append(createToken(string: text, at: scanner.range))
         }
 
-        let end = map[text.0]!
-        let result = scanner.scan(until: end, returnUntil: true)
+        guard let end = Lexer.tokenCharMap[char] else { continue }
+        let result = scanner.scanForTokenEnd(end)
         tokens.append(createToken(string: result, at: scanner.range))
       } else {
         tokens.append(createToken(string: scanner.content, at: scanner.range))
@@ -72,12 +95,30 @@ struct Lexer {
     return tokens
   }
 
+  /// Finds the line matching the given range (for a token)
+  ///
+  /// - Parameter range: The range to search for.
+  /// - Returns: The content for that line, the line number and offset within
+  ///            the line.
+  func rangeLocation(_ range: Range<String.Index>) -> ContentLocation {
+    guard let line = self.lines.first(where: { $0.range.contains(range.lowerBound) }) else {
+      return ("", 0, 0)
+    }
+    let offset = templateString.distance(from: line.range.lowerBound, to: range.lowerBound)
+    return (line.content, line.number, offset)
+  }
+
 }
 
 class Scanner {
   let originalContent: String
   var content: String
   var range: Range<String.Index>
+
+  /// The start delimiter for a token.
+  private static let tokenStartDelimiter: Unicode.Scalar = "{"
+  /// And the corresponding end delimiter for a token.
+  private static let tokenEndDelimiter: Unicode.Scalar = "}"
 
   init(_ content: String) {
     self.originalContent = content
@@ -89,63 +130,68 @@ class Scanner {
     return content.isEmpty
   }
 
-  func scan(until: String, returnUntil: Bool = false) -> String {
-    var index = content.startIndex
+  /// Scans for the end of a token, with a specific ending character. If we're
+  /// searching for the end of a block token `%}`, this method receives a `%`.
+  /// The scanner will search for that `%` followed by a `}`.
+  ///
+  /// Note: if the end of a token is found, the `content` and `range`
+  /// properties are updated to reflect this. `content` will be set to what
+  /// remains of the template after the token. `range` will be set to the range
+  /// of the token within the template.
+  ///
+  /// - Parameter tokenChar: The token end character to search for.
+  /// - Returns: The content of a token, or "" if no token end was found.
+  func scanForTokenEnd(_ tokenChar: Unicode.Scalar) -> String {
+    var foundChar = false
 
-    if until.isEmpty {
-      return ""
-    }
-
-    range = range.upperBound..<range.upperBound
-    while index != content.endIndex {
-      let substring = content.substring(from: index)
-
-      if substring.hasPrefix(until) {
-        let result = content.substring(to: index)
-
-        if returnUntil {
-          range = range.lowerBound..<originalContent.index(range.upperBound, offsetBy: until.characters.count)
-          content = substring.substring(from: until.endIndex)
-          return result + until
-        }
-
-        content = substring
+    for (index, char) in content.unicodeScalars.enumerated() {
+      if foundChar && char == Scanner.tokenEndDelimiter {
+        let result = String(content.prefix(index + 1))
+        content = String(content.dropFirst(index + 1))
+        range = range.upperBound..<originalContent.index(range.upperBound, offsetBy: index + 1)
         return result
+      } else {
+        foundChar = (char == tokenChar)
       }
-
-      index = content.index(after: index)
-      range = range.lowerBound..<originalContent.index(after: range.upperBound)
     }
 
     content = ""
     return ""
   }
 
-  func scan(until: [String]) -> (String, String)? {
-    if until.isEmpty {
-      return nil
-    }
+  /// Scans for the start of a token, with a list of potential starting
+  /// characters. To scan for the start of variables (`{{`), blocks (`{%`) and
+  /// comments (`{#`), this method receives the characters `{`, `%` and `#`.
+  /// The scanner will search for a `{`, followed by one of the search
+  /// characters. It will give the found character, and the content that came
+  /// before the token.
+  ///
+  /// Note: if the start of a token is found, the `content` and `range`
+  /// properties are updated to reflect this. `content` will be set to what
+  /// remains of the template starting with the token. `range` will be set to
+  /// the start of the token within the template.
+  ///
+  /// - Parameter tokenChars: List of token start characters to search for.
+  /// - Returns: The found token start character, together with the content
+  ///            before the token, or nil of no token start was found.
+  func scanForTokenStart(_ tokenChars: [Unicode.Scalar]) -> (Unicode.Scalar, String)? {
+    var foundBrace = false
 
-    var index = content.startIndex
     range = range.upperBound..<range.upperBound
-    while index != content.endIndex {
-      let substring = content.substring(from: index)
-      for string in until {
-        if substring.hasPrefix(string) {
-          let result = content.substring(to: index)
-          content = substring
-          return (string, result)
-        }
+    for (index, char) in content.unicodeScalars.enumerated() {
+      if foundBrace && tokenChars.contains(char) {
+        let result = String(content.prefix(index - 1))
+        content = String(content.dropFirst(index - 1))
+        range = range.upperBound..<originalContent.index(range.upperBound, offsetBy: index - 1)
+        return (char, result)
+      } else {
+        foundBrace = (char == Scanner.tokenStartDelimiter)
       }
-
-      index = content.index(after: index)
-      range = range.lowerBound..<originalContent.index(after: range.upperBound)
     }
 
     return nil
   }
 }
-
 
 extension String {
   func findFirstNot(character: Character) -> String.Index? {
@@ -179,23 +225,6 @@ extension String {
     let last = findLastNot(character: character) ?? endIndex
     return String(self[first..<last])
   }
-
-  public func rangeLine(_ range: Range<String.Index>) -> RangeLine {
-    var lineNumber: UInt = 0
-    var offset: Int = 0
-    var lineContent = ""
-
-    for line in components(separatedBy: CharacterSet.newlines) {
-      lineNumber += 1
-      lineContent = line
-      if let rangeOfLine = self.range(of: line), rangeOfLine.contains(range.lowerBound) {
-        offset = distance(from: rangeOfLine.lowerBound, to: range.lowerBound)
-        break
-      }
-    }
-
-    return (lineContent, lineNumber, offset)
-  }
 }
 
-public typealias RangeLine = (content: String, number: UInt, offset: Int)
+public typealias ContentLocation = (content: String, lineNumber: UInt, lineOffset: Int)

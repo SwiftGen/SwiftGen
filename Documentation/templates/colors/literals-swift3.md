@@ -3,26 +3,26 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | colors/literals-swift3.stencil |
-| Invocation example | `swiftgen colors -t literals-swift3 …` |
+| Configuration example | <pre>colors:<br />  inputs: path/to/colors-file.txt<br />  outputs:<br />    templateName: literals-swift3<br />    output: Colors.swift</pre> |
 | Language | Swift 3 |
 | Author | Olivier Halligon |
 
 ## When to use it
 
-- When you need to generate *Swift 3* code
-- Supports _multiple_ color names with the _same_ value
-- Uses `#colorLiteral`s for easy preview of the actual color
+- When you need to generate *Swift 3* code.
+- Supports _multiple_ color names with the _same_ value.
+- Uses `#colorLiteral`s for easy preview of the actual color.
 
 ## Customization
 
-You can customize some elements of this template by overriding the following parameters when invoking `swiftgen` in the command line, using `--param <paramName>=<newValue>`
+You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
 | `enumName` | `ColorName` | Allows you to change the name of the generated `enum` containing all colors. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 
-Note: if you use `--param enumName=UIColor` (or `NSColor` on macOS) then the color constants will be generated as an extension of the `UIColor` (iOS) / `NSColor` (macOS) type directly without creating a separate `enum` type for namespacing those color constants.
+Note: if you use `enumName: UIColor` (or `NSColor` on macOS) then the color constants will be generated as an extension of the `UIColor` (iOS) / `NSColor` (macOS) type directly without creating a separate `enum` type for namespacing those color constants.
 
 ## Generated Code
 
@@ -37,7 +37,7 @@ extension ColorName {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/Colors/literals-swift3-context-defaults.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Colors/literals-swift3-context-defaults.swift)
 
 ## Usage example
 

@@ -3,19 +3,19 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | xcassets/swift4.stencil |
-| Invocation example | `swiftgen xcassets -t swift4 …` |
+| Configuration example | <pre>xcassets:<br />  inputs: dir/to/search/for/imageset/assets<br />  outputs:<br />    templateName: swift4<br />    output: Assets.swift</pre> |
 | Language | Swift 4 |
 | Author | Olivier Halligon |
 
 ## When to use it
 
-- When you need to generate *Swift 4* code
+- When you need to generate *Swift 4* code.
 
 It also takes into account any namespacing folder in your Assets Catalogs (i.e. if you create a folder in your Assets Catalog, select it, and check the "Provides Namespace" checkbox on the Attributes Inspector panel on the right)
 
 ## Customization
 
-You can customize some elements of this template by overriding the following parameters when invoking `swiftgen` in the command line, using `--param <paramName>=<newValue>`
+You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
@@ -51,7 +51,7 @@ enum Asset {
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/templates/blob/master/Tests/Expected/XCAssets/swift4-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/XCAssets/swift4-context-all.swift)
 
 ## Usage example
 

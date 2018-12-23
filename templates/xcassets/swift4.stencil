@@ -50,15 +50,13 @@
   {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{dataType}}(name: "{{asset.value}}")
   {% elif asset.type == "image" %}
   {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{imageType}}(name: "{{asset.value}}")
-  {% elif asset.items %}
-  {% if forceNamespaces == "true" or asset.isNamespaced == "true" %}
+  {% elif asset.items and ( forceNamespaces == "true" or asset.isNamespaced == "true" ) %}
   {{accessModifier}} enum {{asset.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
 
     {% filter indent:2 %}{% call casesBlock asset.items %}{% endfilter %}
   }
-  {% else %}
+  {% elif asset.items %}
   {% call casesBlock asset.items %}
-  {% endif %}
   {% endif %}
   {% endfor %}
 {% endmacro %}
@@ -66,13 +64,11 @@
   {% for asset in assets %}
   {% if asset.type == filter %}
   {{prefix}}{{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}},
-  {% elif asset.items %}
-  {% if forceNamespaces == "true" or asset.isNamespaced == "true" %}
+  {% elif asset.items and ( forceNamespaces == "true" or asset.isNamespaced == "true" ) %}
   {% set prefix2 %}{{prefix}}{{asset.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}.{% endset %}
   {% call allValuesBlock asset.items filter prefix2 %}
-  {% else %}
+  {% elif asset.items %}
   {% call allValuesBlock asset.items filter prefix %}
-  {% endif %}
   {% endif %}
   {% endfor %}
 {% endmacro %}

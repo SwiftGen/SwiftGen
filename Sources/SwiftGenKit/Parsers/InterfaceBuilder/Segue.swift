@@ -12,6 +12,7 @@ extension InterfaceBuilder {
     let identifier: String
     let customClass: String?
     let customModule: String?
+    let moduleIsPlaceholder: Bool
     let platform: Platform
 
     var type: String {
@@ -40,6 +41,8 @@ private enum XML {
   static let identifierAttribute = "identifier"
   static let customClassAttribute = "customClass"
   static let customModuleAttribute = "customModule"
+  static let customModuleProviderAttribute = "customModuleProvider"
+  static let targetValue = "target"
 }
 
 extension InterfaceBuilder.Segue {
@@ -47,21 +50,12 @@ extension InterfaceBuilder.Segue {
     identifier = object[XML.identifierAttribute] ?? ""
     customClass = object[XML.customClassAttribute]
     customModule = object[XML.customModuleAttribute]
+    moduleIsPlaceholder = object[XML.customModuleProviderAttribute] == XML.targetValue
     self.platform = platform
   }
 }
 
 // MARK: - Hashable
 
-extension InterfaceBuilder.Segue: Equatable { }
-func == (lhs: InterfaceBuilder.Segue, rhs: InterfaceBuilder.Segue) -> Bool {
-  return lhs.identifier == rhs.identifier &&
-    lhs.customClass == rhs.customClass &&
-    lhs.customModule == rhs.customModule
-}
-
-extension InterfaceBuilder.Segue: Hashable {
-  var hashValue: Int {
-    return identifier.hashValue ^ (customModule?.hashValue ?? 0) ^ (customClass?.hashValue ?? 0)
-  }
-}
+extension InterfaceBuilder.Segue: Equatable {}
+extension InterfaceBuilder.Segue: Hashable {}

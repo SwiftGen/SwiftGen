@@ -33,12 +33,6 @@ extension ParserCLI {
 
 let allParserCommands: [ParserCLI] = [
   .init(
-    parserType: AssetsCatalog.Parser.self,
-    name: "xcassets",
-    description: "generate code for items in your Assets Catalog(s)",
-    pathDescription: "Asset Catalog file(s)."
-  ),
-  .init(
     parserType: Colors.Parser.self,
     name: "colors",
     description: "generate code for color palettes",
@@ -73,6 +67,12 @@ let allParserCommands: [ParserCLI] = [
     name: "strings",
     description: "generate code for your Localizable.strings file(s)",
     pathDescription: "Strings file(s) to parse."
+  ),
+  .init(
+    parserType: AssetsCatalog.Parser.self,
+    name: "xcassets",
+    description: "generate code for items in your Assets Catalog(s)",
+    pathDescription: "Asset Catalog file(s)."
   ),
   .init(
     parserType: Yaml.Parser.self,

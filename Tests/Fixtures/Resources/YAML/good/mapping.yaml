@@ -1,3 +1,6 @@
-key1: value1
-key2: 
-  nestedKey2: nestedValue2
+hello: world
+weight: 33.3
+foo:
+  bar: banana
+  baz: orange
+car: null

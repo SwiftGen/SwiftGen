@@ -46,9 +46,9 @@ func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
   case .info:
     fputs(ANSIColor.green.format("\(string)\n"), stdout)
   case .warning:
-    fputs(ANSIColor.yellow.format("Warning: \(string)\n"), stderr)
+    fputs(ANSIColor.yellow.format("swiftgen: warning: \(string)\n"), stderr)
   case .error:
-    fputs(ANSIColor.red.format("Error: \(string)\n"), stderr)
+    fputs(ANSIColor.red.format("swiftgen: error: \(string)\n"), stderr)
   }
 }
 

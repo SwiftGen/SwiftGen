@@ -6,6 +6,7 @@ storyboards:
     baseType: "NavigationController"
     identifier: ""
     module: "UIKit"
+    moduleIsPlaceholder: false
     type: "UINavigationController"
   name: "Anonymous"
   platform: "iOS"

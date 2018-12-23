@@ -19,7 +19,7 @@ private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
 
 private func diff(_ result: String, _ expected: String) -> String? {
   guard result != expected else { return nil }
-  var firstDiff: Int? = nil
+  var firstDiff: Int?
   let newLines = CharacterSet.newlines
   let lhsLines = result.components(separatedBy: newLines)
   let rhsLines = expected.components(separatedBy: newLines)
