@@ -3,11 +3,11 @@ models:
     Custom:
     - "NewEntity"
     Default:
+    - "AbstractEntity"
     - "ChildEntity"
     - "MainEntity"
-    - "SecondaryEntity"
-    - "AbstractEntity"
     - "NewEntity"
+    - "SecondaryEntity"
   entities:
     AbstractEntity:
       attributes: []

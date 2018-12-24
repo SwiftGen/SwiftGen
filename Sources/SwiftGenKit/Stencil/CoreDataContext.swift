@@ -17,7 +17,7 @@ extension CoreData.Parser {
 
   private func map(_ model: CoreData.Model) -> [String: Any] {
     return [
-      "configurations": model.configurations,
+      "configurations": model.configurations.mapValues { $0.sorted() },
       "entities": model.entities.mapValues { map($0, in: model) },
       "fetchRequests": model.fetchRequests.map { map($0, in: model) },
       "fetchRequestsByEntityName": model.fetchRequestsByEntityName.mapValues { $0.map { map($0, in: model) } }
