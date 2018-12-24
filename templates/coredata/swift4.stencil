@@ -16,7 +16,6 @@ import Foundation
 {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
 @objc({{ entityClassName }})
 {{ accessModifier }} class {{ entityClassName }}: {{ superclass }} {
-
     {{ override }}{{ accessModifier }} class func entityName() -> String {
         return "{{ entity.name }}"
     }
@@ -29,22 +28,21 @@ import Foundation
         return NSFetchRequest<{{ entityClassName }}>(entityName: entityName())
     }
 
+    // swiftlint:disable implicitly_unwrapped_optional
     {% for attribute in entity.attributes %}
     @NSManaged {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.usesScalarValueType == false %}{% if attribute.isOptional %}?{% else %}!{% endif %}{% endif %}
-
     {% endfor %}
     {% for relationship in entity.relationships %}
     {% if relationship.isToMany %}
     @NSManaged {{ accessModifier }} var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}Set<{{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}>{% endif %}
-
     {% else %}
     @NSManaged {{ accessModifier }} var {{ relationship.name }}: {{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}{% if relationship.isOptional %}?{% endif %}
-
     {% endif %}
     {% endfor %}
     {% for fetchedProperty in entity.fetchedProperties %}
     @NSManaged {{ accessModifier }} var {{ fetchedProperty.name }}: [{{ fetchedProperty.fetchRequest.entity }}]
     {% endfor %}
+    // swiftlint:enable implicitly_unwrapped_optional
 }
 
 {% for relationship in entity.relationships %}
@@ -53,7 +51,6 @@ import Foundation
 {% set collectionClassName %}{% if relationship.isOrdered %}NSOrderedSet{% else %}Set<{{ destinationEntityClassName }}>{% endif %}{% endset %}
 {% set relationshipName %}{{ relationship.name | upperFirstLetter }}{% endset %}
 extension {{ entityClassName }} {
-
     {% if relationship.isOrdered %}
     @objc(insertObject:in{{ relationshipName }}AtIndex:)
     @NSManaged public func insertInto{{ relationshipName }}(_ value: {{ destinationEntityClassName }}, at idx: Int)
@@ -85,15 +82,12 @@ extension {{ entityClassName }} {
 
     @objc(remove{{ relationshipName }}:)
     @NSManaged public func removeFrom{{ relationshipName }}(_ values: {{ collectionClassName }})
-
 }
 
 {% endif %}
 {% endfor %}
-
 {% if model.fetchRequestsByEntityName[entity.name].count > 0 %}
 extension {{ entityClassName }} {
-
     {% for fetchRequest in model.fetchRequestsByEntityName[entity.name] %}
     {% set resultTypeName %}{% if fetchRequest.resultType == "Object" %}{{ entityClassName }}{% elif fetchRequest.resultType == "Object ID" %}NSManagedObjectID{% elif fetchRequest.resultType == "Dictionary" %}[String: Any]{% endif %}{% endset %}
     class func fetch{{ fetchRequest.name | upperFirstLetter }}(managedObjectContext: NSManagedObjectContext{% for variableName, variableType in fetchRequest.substitutionVariables %}, {{ variableName | lowerFirstWord }}: {{ variableType }}{% endfor %}) throws -> [{{ resultTypeName }}] {
@@ -113,11 +107,16 @@ extension {{ entityClassName }} {
             fatalError("No fetch request template named '{{ fetchRequest.name }}' found.")
         }
 
-        return try managedObjectContext.fetch(fetchRequest) as! [{{ resultTypeName }}]
-    }
-    {% endfor %}
+        guard let result = try managedObjectContext.fetch(fetchRequest) as? [{{ resultTypeName }}] else {
+            fatalError("Unable to cast fetch result to correct result type.")
+        }
 
+        return result
+    }
+
+    {% endfor %}
 }
+
 {% endif %}
 {% endfor %}
 {% endfor %}

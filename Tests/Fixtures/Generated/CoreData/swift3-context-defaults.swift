@@ -8,9 +8,26 @@ import Foundation
 // swiftlint:disable attributes
 
 // swiftlint:disable identifier_name line_length type_body_length
+@objc(AbstractEntity)
+internal class AbstractEntity: NSManagedObject {
+    internal class func entityName() -> String {
+        return "AbstractEntity"
+    }
+
+    internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+        return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
+    }
+
+    @nonobjc internal class func fetchRequest() -> NSFetchRequest<AbstractEntity> {
+        return NSFetchRequest<AbstractEntity>(entityName: entityName())
+    }
+
+    // swiftlint:disable implicitly_unwrapped_optional
+    // swiftlint:enable implicitly_unwrapped_optional
+}
+
 @objc(ChildEntity)
 internal class ChildEntity: MainEntity {
-
     override internal class func entityName() -> String {
         return "ChildEntity"
     }
@@ -23,12 +40,12 @@ internal class ChildEntity: MainEntity {
         return NSFetchRequest<ChildEntity>(entityName: entityName())
     }
 
+    // swiftlint:disable implicitly_unwrapped_optional
+    // swiftlint:enable implicitly_unwrapped_optional
 }
-
 
 @objc(MainEntity)
 internal class MainEntity: NSManagedObject {
-
     internal class func entityName() -> String {
         return "MainEntity"
     }
@@ -41,49 +58,31 @@ internal class MainEntity: NSManagedObject {
         return NSFetchRequest<MainEntity>(entityName: entityName())
     }
 
+    // swiftlint:disable implicitly_unwrapped_optional
     @NSManaged internal var attributedString: NSAttributedString?
-
     @NSManaged internal var binaryData: Data?
-
     @NSManaged internal var boolean: Bool
-
     @NSManaged internal var date: Date?
-
     @NSManaged internal var decimal: NSDecimalNumber?
-
     @NSManaged internal var double: Double
-
     @NSManaged internal var float: Float
-
     @NSManaged internal var int16: Int16
-
     @NSManaged internal var int32: Int32
-
     @NSManaged internal var int64: Int64
-
     @NSManaged internal var nonOptional: String!
-
     @NSManaged internal var string: String?
-
     @NSManaged internal var transformable: AnyObject?
-
     @NSManaged internal var transient: String?
-
     @NSManaged internal var uri: URL?
-
     @NSManaged internal var uuid: UUID?
-
     @NSManaged internal var manyToMany: Set<SecondaryEntity>
-
     @NSManaged internal var oneToMany: NSOrderedSet
-
     @NSManaged internal var oneToOne: SecondaryEntity?
-
     @NSManaged internal var fetchedProperty: [NewEntity]
+    // swiftlint:enable implicitly_unwrapped_optional
 }
 
 extension MainEntity {
-
     @objc(addManyToManyObject:)
     @NSManaged public func addToManyToMany(_ value: SecondaryEntity)
 
@@ -95,11 +94,9 @@ extension MainEntity {
 
     @objc(removeManyToMany:)
     @NSManaged public func removeFromManyToMany(_ values: Set<SecondaryEntity>)
-
 }
 
 extension MainEntity {
-
     @objc(insertObject:inOneToManyAtIndex:)
     @NSManaged public func insertIntoOneToMany(_ value: SecondaryEntity, at idx: Int)
 
@@ -129,12 +126,9 @@ extension MainEntity {
 
     @objc(removeOneToMany:)
     @NSManaged public func removeFromOneToMany(_ values: NSOrderedSet)
-
 }
 
-
 extension MainEntity {
-
     class func fetchDictionaryFetchRequest(managedObjectContext: NSManagedObjectContext) throws -> [[String: Any]] {
         guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
             fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
@@ -148,8 +142,13 @@ extension MainEntity {
             fatalError("No fetch request template named 'DictionaryFetchRequest' found.")
         }
 
-        return try managedObjectContext.fetch(fetchRequest) as! [[String: Any]]
+        guard let result = try managedObjectContext.fetch(fetchRequest) as? [[String: Any]] else {
+            fatalError("Unable to cast fetch result to correct result type.")
+        }
+
+        return result
     }
+
     class func fetchObjectFetchRequest(managedObjectContext: NSManagedObjectContext, uuid: UUID) throws -> [MainEntity] {
         guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
             fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
@@ -163,8 +162,13 @@ extension MainEntity {
             fatalError("No fetch request template named 'ObjectFetchRequest' found.")
         }
 
-        return try managedObjectContext.fetch(fetchRequest) as! [MainEntity]
+        guard let result = try managedObjectContext.fetch(fetchRequest) as? [MainEntity] else {
+            fatalError("Unable to cast fetch result to correct result type.")
+        }
+
+        return result
     }
+
     class func fetchObjectIDFetchRequest(managedObjectContext: NSManagedObjectContext, name: String) throws -> [NSManagedObjectID] {
         guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
             fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
@@ -178,73 +182,17 @@ extension MainEntity {
             fatalError("No fetch request template named 'ObjectIDFetchRequest' found.")
         }
 
-        return try managedObjectContext.fetch(fetchRequest) as! [NSManagedObjectID]
+        guard let result = try managedObjectContext.fetch(fetchRequest) as? [NSManagedObjectID] else {
+            fatalError("Unable to cast fetch result to correct result type.")
+        }
+
+        return result
     }
 
 }
-@objc(SecondaryEntity)
-internal class SecondaryEntity: NSManagedObject {
-
-    internal class func entityName() -> String {
-        return "SecondaryEntity"
-    }
-
-    internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
-        return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
-    }
-
-    @nonobjc internal class func fetchRequest() -> NSFetchRequest<SecondaryEntity> {
-        return NSFetchRequest<SecondaryEntity>(entityName: entityName())
-    }
-
-    @NSManaged internal var name: String!
-
-    @NSManaged internal var manyToMany: Set<MainEntity>
-
-    @NSManaged internal var oneToMany: MainEntity?
-
-    @NSManaged internal var oneToOne: MainEntity?
-
-}
-
-extension SecondaryEntity {
-
-    @objc(addManyToManyObject:)
-    @NSManaged public func addToManyToMany(_ value: MainEntity)
-
-    @objc(removeManyToManyObject:)
-    @NSManaged public func removeFromManyToMany(_ value: MainEntity)
-
-    @objc(addManyToMany:)
-    @NSManaged public func addToManyToMany(_ values: Set<MainEntity>)
-
-    @objc(removeManyToMany:)
-    @NSManaged public func removeFromManyToMany(_ values: Set<MainEntity>)
-
-}
-
-
-@objc(AbstractEntity)
-internal class AbstractEntity: NSManagedObject {
-
-    internal class func entityName() -> String {
-        return "AbstractEntity"
-    }
-
-    internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
-        return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
-    }
-
-    @nonobjc internal class func fetchRequest() -> NSFetchRequest<AbstractEntity> {
-        return NSFetchRequest<AbstractEntity>(entityName: entityName())
-    }
-
-}
-
 
 @objc(NewEntity)
 internal class NewEntity: AbstractEntity {
-
     override internal class func entityName() -> String {
         return "NewEntity"
     }
@@ -257,9 +205,45 @@ internal class NewEntity: AbstractEntity {
         return NSFetchRequest<NewEntity>(entityName: entityName())
     }
 
+    // swiftlint:disable implicitly_unwrapped_optional
     @NSManaged internal var identifier: UUID?
-
+    // swiftlint:enable implicitly_unwrapped_optional
 }
 
+@objc(SecondaryEntity)
+internal class SecondaryEntity: NSManagedObject {
+    internal class func entityName() -> String {
+        return "SecondaryEntity"
+    }
+
+    internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+        return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
+    }
+
+    @nonobjc internal class func fetchRequest() -> NSFetchRequest<SecondaryEntity> {
+        return NSFetchRequest<SecondaryEntity>(entityName: entityName())
+    }
+
+    // swiftlint:disable implicitly_unwrapped_optional
+    @NSManaged internal var name: String!
+    @NSManaged internal var manyToMany: Set<MainEntity>
+    @NSManaged internal var oneToMany: MainEntity?
+    @NSManaged internal var oneToOne: MainEntity?
+    // swiftlint:enable implicitly_unwrapped_optional
+}
+
+extension SecondaryEntity {
+    @objc(addManyToManyObject:)
+    @NSManaged public func addToManyToMany(_ value: MainEntity)
+
+    @objc(removeManyToManyObject:)
+    @NSManaged public func removeFromManyToMany(_ value: MainEntity)
+
+    @objc(addManyToMany:)
+    @NSManaged public func addToManyToMany(_ values: Set<MainEntity>)
+
+    @objc(removeManyToMany:)
+    @NSManaged public func removeFromManyToMany(_ values: Set<MainEntity>)
+}
 
 // swiftlint:enable identifier_name line_length type_body_length
