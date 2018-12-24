@@ -45,13 +45,15 @@ class ConfigReadTests: XCTestCase {
   }
 
   func testConfigWithENVS() throws {
-    guard let paramsConfigFilePath = Bundle(for: type(of: self)).path(forResource: "config-with-params", ofType: "yml") else {
+    guard let paramsConfigFilePath = Bundle(for: type(of: self)).path(
+      forResource: "config-with-params",
+      ofType: "yml"
+      ) else {
       fatalError("Fixture not found")
     }
 
-    // this test needs the env varibale for "SWIFTGEN_OUTPUT_DIR" set to "Common/Generated" in the test section of the swiftgen scheme
     guard let envConfigFilePath = Bundle(for: type(of: self)).path(
-      forResource: "config-with-env_placeholder",
+      forResource: "config-with-env-placeholder",
       ofType: "yml"
     ) else {
       fatalError("Fixture not found")
@@ -62,7 +64,7 @@ class ConfigReadTests: XCTestCase {
 
     do {
       let paramsConfig = try Config(file: paramsFile)
-      let envConfig = try Config(file: envFile)
+      let envConfig = try Config(file: envFile, env: ["SWIFTGEN_OUTPUT_DIR": "Common/Generated"])
 
       XCTAssertEqual(paramsConfig.outputDir, envConfig.outputDir)
     } catch let error {

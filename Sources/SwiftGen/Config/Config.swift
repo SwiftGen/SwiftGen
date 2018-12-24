@@ -6,9 +6,9 @@
 //  Copyright © 2017 AliSoftware. All rights reserved.
 //
 
+import Foundation
 import PathKit
 import SwiftGenKit
-import Foundation
 
 // MARK: - Config
 
@@ -24,23 +24,16 @@ struct Config {
 }
 
 extension Config {
-  init(file: Path, logger: (LogLevel, String) -> Void = logMessage) throws {
+  init(
+    file: Path,
+    env: [String: String] = ProcessInfo.processInfo.environment,
+    logger: (LogLevel, String) -> Void = logMessage
+  ) throws {
     if !file.exists {
       throw Config.Error.pathNotFound(path: file)
     }
-    
-    // Read contents and replace env variables
-    var contents: String = try file.read()
 
-    ProcessInfo.processInfo.environment.keys.forEach { key in
-      guard let value = ProcessInfo.processInfo.environment[key] else {
-        return
-      }
-
-      contents = contents.replacingOccurrences(of: "${\(key)}", with: value)
-    }
-
-    let anyConfig = try YAML.decode(string: contents)
+    let anyConfig = try YAML.read(path: file, env: env)
 
     guard let config = anyConfig as? [String: Any] else {
       throw Config.Error.wrongType(key: nil, expected: "Dictionary", got: type(of: anyConfig))

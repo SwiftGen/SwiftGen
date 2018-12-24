@@ -88,13 +88,6 @@
             ReferencedContainer = "container:SwiftGen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "SWIFTGEN_OUTPUT_DIR"
-            value = "Common/Generated"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
