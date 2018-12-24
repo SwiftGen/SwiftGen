@@ -28,14 +28,12 @@ extension CoreData.Model {
   init(with document: Kanna.XMLDocument) throws {
     let allEntities = try document.xpath(XML.entitiesPath).map(CoreData.Entity.init(with:))
     let entitiesByName = Dictionary(allEntities.map { ($0.name, $0) }) { first, _ in first }
+
     entities = entitiesByName
-
-    configurations = try document.xpath(XML.configurationsPath)
-                                .reduce(into: ["Default": Array(entitiesByName.keys)]) { allConfigurations, element in
-                                  let (name, entityNames) = try CoreData.Configuration.parse(from: element)
-                                  allConfigurations[name] = entityNames
-                                }
-
+    configurations = try CoreData.Configuration.parse(
+      from: document.xpath(XML.configurationsPath),
+      entityNames: Array(entitiesByName.keys)
+    )
     fetchRequests = try document.xpath(XML.fetchRequestsPath).map(CoreData.FetchRequest.init(with:))
     fetchRequestsByEntityName = Dictionary(grouping: fetchRequests) { $0.entity }
   }

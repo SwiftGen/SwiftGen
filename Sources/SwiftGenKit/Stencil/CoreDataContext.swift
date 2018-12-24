@@ -30,7 +30,7 @@ extension CoreData.Parser {
       "className": entity.className,
       "isAbstract": entity.isAbstract,
       "userInfo": entity.userInfo,
-      "superentity": entity.superentity ?? "",
+      "superEntity": entity.superEntity ?? "",
       "attributes": entity.attributes.map { map($0, in: model) },
       "relationships": entity.relationships.map { map($0, in: model) },
       "fetchedProperties": entity.fetchedProperties.map { map($0, in: model) },

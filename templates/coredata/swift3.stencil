@@ -11,7 +11,7 @@ import Foundation
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 {% for model in models %}
 {% for name, entity in model.entities %}
-{% set superclass %}{{ model.entities[entity.superentity].className | default:"NSManagedObject" }}{% endset %}
+{% set superclass %}{{ model.entities[entity.superEntity].className | default:"NSManagedObject" }}{% endset %}
 {% set entityClassName %}{{ entity.className | default:entity.name }}{% endset %}
 {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
 @objc({{ entityClassName }})

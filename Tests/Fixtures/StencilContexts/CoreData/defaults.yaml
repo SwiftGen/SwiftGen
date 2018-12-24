@@ -18,7 +18,7 @@ models:
       properties: []
       relationships: []
       storedProperties: []
-      superentity: ""
+      superEntity: ""
       uniquenessConstraints: []
       userInfo: {}
     ChildEntity:
@@ -30,7 +30,7 @@ models:
       properties: []
       relationships: []
       storedProperties: []
-      superentity: "MainEntity"
+      superEntity: "MainEntity"
       uniquenessConstraints: []
       userInfo:
         key: "value"
@@ -670,7 +670,7 @@ models:
         name: "oneToOne"
         propertyType: "relationship"
         userInfo: {}
-      superentity: ""
+      superEntity: ""
       uniquenessConstraints: []
       userInfo:
         key: "value"
@@ -713,7 +713,7 @@ models:
         typeName: "UUID"
         userInfo: {}
         usesScalarValueType: false
-      superentity: "AbstractEntity"
+      superEntity: "AbstractEntity"
       uniquenessConstraints:
       - - "identifier"
       userInfo: {}
@@ -864,7 +864,7 @@ models:
         name: "oneToOne"
         propertyType: "relationship"
         userInfo: {}
-      superentity: ""
+      superEntity: ""
       uniquenessConstraints: []
       userInfo: {}
   fetchRequests:

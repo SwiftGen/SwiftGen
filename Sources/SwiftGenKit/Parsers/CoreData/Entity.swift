@@ -15,9 +15,7 @@ extension CoreData {
     public let className: String
     public let isAbstract: Bool
     public let userInfo: [String: Any]
-
-    let superentity: String?
-
+    public let superEntity: String?
     public let attributes: [Attribute]
     public let relationships: [Relationship]
     public let fetchedProperties: [FetchedProperty]
@@ -30,7 +28,7 @@ private enum XML {
     static let name = "name"
     static let representedClassName = "representedClassName"
     static let isAbstract = "isAbstract"
-    static let superentity = "parentEntity"
+    static let superEntity = "parentEntity"
   }
 
   static let attributesPath = "attribute"
@@ -41,13 +39,16 @@ private enum XML {
 }
 
 extension CoreData.Entity {
+  static let defaultClassName = "NSManagedObject"
+
   init(with object: Kanna.XMLElement) throws {
     guard let name = object[XML.Attributes.name] else {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required entity name.")
     }
-    let className = object[XML.Attributes.representedClassName] ?? "NSManagedObject"
+
+    let className = object[XML.Attributes.representedClassName] ?? CoreData.Entity.defaultClassName
     let isAbstract = object[XML.Attributes.isAbstract].flatMap(Bool.init(from:)) ?? false
-    let superentity = object[XML.Attributes.superentity]
+    let superEntity = object[XML.Attributes.superEntity]
 
     let attributes = try object.xpath(XML.attributesPath).map(CoreData.Attribute.init(with:))
     let relationships = try object.xpath(XML.relationshipsPath).map(CoreData.Relationship.init(with:))
@@ -63,7 +64,7 @@ extension CoreData.Entity {
       className: className,
       isAbstract: isAbstract,
       userInfo: userInfo,
-      superentity: superentity,
+      superEntity: superEntity,
       attributes: attributes,
       relationships: relationships,
       fetchedProperties: fetchedProperties,

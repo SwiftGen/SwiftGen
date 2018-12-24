@@ -20,7 +20,18 @@ private enum XML {
 
 extension CoreData {
   enum Configuration {
-    static func parse(from object: Kanna.XMLElement) throws -> (String, [String]) {
+    static let defaultName = "Default"
+
+    static func parse(from objects: XPathObject, entityNames: [String]) throws -> [String: [String]] {
+      let defaultConfiguration = [CoreData.Configuration.defaultName: entityNames]
+
+      return try objects.reduce(into: defaultConfiguration) { allConfigurations, element in
+        let (name, entityNames) = try CoreData.Configuration.parse(from: element)
+        allConfigurations[name] = entityNames
+      }
+    }
+
+    private static func parse(from object: Kanna.XMLElement) throws -> (String, [String]) {
       guard let name = object[XML.Attributes.configurationName] else {
         throw CoreData.ParserError.invalidFormat(reason: "Missing required name for configuration.")
       }
