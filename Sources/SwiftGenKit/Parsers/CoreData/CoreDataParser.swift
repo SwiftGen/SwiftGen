@@ -75,7 +75,6 @@ public enum CoreData {
 
       do {
         let document = try Kanna.XML(xml: contentsPath.read(), encoding: .utf8)
-
         let model = try Model(with: document)
         models.append(model)
       } catch {

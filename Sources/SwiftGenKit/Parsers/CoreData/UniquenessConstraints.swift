@@ -26,6 +26,7 @@ extension CoreData {
           guard let value = $0[XML.Attributes.value] else {
             throw CoreData.ParserError.invalidFormat(reason: "Missing required uniqueness constraint value")
           }
+
           return value
         }
       }

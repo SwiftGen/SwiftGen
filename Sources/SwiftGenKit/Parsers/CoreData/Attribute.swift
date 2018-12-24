@@ -48,7 +48,6 @@ private enum XML {
     static let isOptional = "optional"
     static let isTransient = "transient"
     static let usesScalarValueType = "usesScalarValueType"
-
     static let attributeType = "attributeType"
     static let customClassName = "customClassName"
   }
@@ -62,22 +61,19 @@ extension CoreData.Attribute {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required attribute name.")
     }
 
+    guard let attributeType = object[XML.Attributes.attributeType]
+      .flatMap(CoreData.AttributeType.init(rawValue:)) else {
+        throw CoreData.ParserError.invalidFormat(reason: "Missing required attribute type on attribute declaration")
+    }
+
     name = attributeName
     isIndexed = object[XML.Attributes.isIndexed].flatMap(Bool.init(from:)) ?? false
     isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? false
     isTransient = object[XML.Attributes.isTransient].flatMap(Bool.init(from:)) ?? false
     usesScalarValueType = object[XML.Attributes.usesScalarValueType].flatMap(Bool.init(from:)) ?? false
-
-    guard let nonoptionalType = object[XML.Attributes.attributeType]
-                                  .flatMap(CoreData.AttributeType.init(rawValue:)) else {
-      throw CoreData.ParserError.invalidFormat(reason: "Missing required attribute type on attribute declaration")
-    }
-    type = nonoptionalType
-
+    type = attributeType
     customClassName = object[XML.Attributes.customClassName]
-
     typeName = type.typeName(usesScalarValueType: usesScalarValueType, customClassName: customClassName)
-
     userInfo = try object.at_xpath(XML.userInfoPath).map { try CoreData.UserInfo.parse(from: $0) } ?? [:]
   }
 }

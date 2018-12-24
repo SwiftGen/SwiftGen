@@ -17,7 +17,6 @@ extension CoreData {
     public let isIndexed: Bool
     public let isOptional: Bool
     public var isTransient: Bool
-
     public let isToMany: Bool
     public let isOrdered: Bool
 
@@ -34,10 +33,8 @@ private enum XML {
     static let isIndexed = "indexed"
     static let isOptional = "optional"
     static let isTransient = "transient"
-
     static let isToMany = "toMany"
     static let isOrdered = "ordered"
-
     static let destinationEntity = "destinationEntity"
     static let inverseRelationshipName = "inverseName"
     static let inverseRelationshipEntityName = "inverseEntity"
@@ -51,20 +48,19 @@ extension CoreData.Relationship {
     guard let name = object[XML.Attributes.name] else {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required relationship name.")
     }
-    let isIndexed = object[XML.Attributes.isIndexed].flatMap(Bool.init(from:)) ?? false
-    let isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? false
-    let isTransient = object[XML.Attributes.isTransient].flatMap(Bool.init(from:)) ?? false
-
-    let isToMany = object[XML.Attributes.isToMany].flatMap(Bool.init(from:)) ?? false
-    let isOrdered = object[XML.Attributes.isOrdered].flatMap(Bool.init(from:)) ?? false
 
     guard let destinationEntity = object[XML.Attributes.destinationEntity] else {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required destination entity name")
     }
 
+    let isIndexed = object[XML.Attributes.isIndexed].flatMap(Bool.init(from:)) ?? false
+    let isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? false
+    let isTransient = object[XML.Attributes.isTransient].flatMap(Bool.init(from:)) ?? false
+    let isToMany = object[XML.Attributes.isToMany].flatMap(Bool.init(from:)) ?? false
+    let isOrdered = object[XML.Attributes.isOrdered].flatMap(Bool.init(from:)) ?? false
+
     let inverseRelationshipName = object[XML.Attributes.inverseRelationshipName]
     let inverseRelationshipEntityName = object[XML.Attributes.inverseRelationshipEntityName]
-
     let inverseRelationship: InverseRelationship?
     switch (inverseRelationshipName, inverseRelationshipEntityName) {
     case (.none, .none):
