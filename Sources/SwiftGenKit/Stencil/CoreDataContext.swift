@@ -34,11 +34,6 @@ extension CoreData.Parser {
       "attributes": entity.attributes.map { map($0, in: model) },
       "relationships": entity.relationships.map { map($0, in: model) },
       "fetchedProperties": entity.fetchedProperties.map { map($0, in: model) },
-      "properties": entity.attributes.map { map($0, in: model) }
-                    + entity.relationships.map { map($0, in: model) }
-                    + entity.fetchedProperties.map { map($0, in: model) },
-      "storedProperties": entity.attributes.map { map($0, in: model) }
-                          + entity.relationships.map { map($0, in: model) },
       "uniquenessConstraints": entity.uniquenessConstraints
     ]
   }
