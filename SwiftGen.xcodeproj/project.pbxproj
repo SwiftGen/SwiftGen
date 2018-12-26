@@ -41,6 +41,20 @@
 		5DE172C4BAE478DDAA63064F /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00832FEC9F060E93DAD1228 /* Pods_swiftgen.framework */; };
 		80F8014301BF496E905CA2CF /* Pods_SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16DF0A0F13A222BCA7B60102 /* Pods_SwiftGenKit.framework */; };
 		9A35A2477F800A42E6A654C8 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5D3E5746871F59AC9CA625 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */; };
+		C3031AA121062C9A00BF00DE /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3031AA021062C9A00BF00DE /* UserInfo.swift */; };
+		C322626F21012C42001AC9CD /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C322626E21012C42001AC9CD /* Bool.swift */; };
+		C322627121012F42001AC9CD /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C322627021012F42001AC9CD /* Attribute.swift */; };
+		C32262732101324E001AC9CD /* Relationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32262722101324E001AC9CD /* Relationship.swift */; };
+		C33A1427210649A500D3CBA6 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A1426210649A500D3CBA6 /* Configuration.swift */; };
+		C33A142921064E3400D3CBA6 /* FetchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A142821064E3400D3CBA6 /* FetchRequest.swift */; };
+		C34FEA132110D6EC00136871 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34FEA112110D56800136871 /* CoreDataTests.swift */; };
+		C350BE3820FFCD0F0043D7C5 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C350BE3720FFCD0F0043D7C5 /* Model.swift */; };
+		C350BE3A20FFCD750043D7C5 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C350BE3920FFCD750043D7C5 /* Entity.swift */; };
+		C38E571520FF8FB5009C9C23 /* CoreDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38E571420FF8FB5009C9C23 /* CoreDataParser.swift */; };
+		C38E571720FF906B009C9C23 /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38E571620FF906B009C9C23 /* CoreDataContext.swift */; };
+		C3A264D52111007F00A7F61B /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A264D42111007F00A7F61B /* CoreDataTests.swift */; };
+		C3BAC3C92112006000B6875A /* FetchedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BAC3C82112006000B6875A /* FetchedProperty.swift */; };
+		C3E39E4C2118EC58004B1CF9 /* UniquenessConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E39E4B2118EC58004B1CF9 /* UniquenessConstraints.swift */; };
 		C580E102337633038E486585 /* Pods_swiftgen_Templates_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8031AB7FD88D5F010179EDC /* Pods_swiftgen_Templates_UnitTests.framework */; };
 		DD112CBA2141675900B11A5D /* InterfaceBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */; };
 		DD15F101213C3DDF00D081C7 /* YamsSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F100213C3DDF00D081C7 /* YamsSerialization.swift */; };
@@ -308,6 +322,20 @@
 		A3D916CE5C9F4E2569D12C5A /* Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		C00832FEC9F060E93DAD1228 /* Pods_swiftgen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8876ECE7B9852963F6B5 /* Pods_swiftgen_SwiftGen_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftgen_SwiftGen_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3031AA021062C9A00BF00DE /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		C322626E21012C42001AC9CD /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
+		C322627021012F42001AC9CD /* Attribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
+		C32262722101324E001AC9CD /* Relationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relationship.swift; sourceTree = "<group>"; };
+		C33A1426210649A500D3CBA6 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		C33A142821064E3400D3CBA6 /* FetchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequest.swift; sourceTree = "<group>"; };
+		C34FEA112110D56800136871 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
+		C350BE3720FFCD0F0043D7C5 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		C350BE3920FFCD750043D7C5 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		C38E571420FF8FB5009C9C23 /* CoreDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataParser.swift; sourceTree = "<group>"; };
+		C38E571620FF906B009C9C23 /* CoreDataContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataContext.swift; sourceTree = "<group>"; };
+		C3A264D42111007F00A7F61B /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
+		C3BAC3C82112006000B6875A /* FetchedProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedProperty.swift; sourceTree = "<group>"; };
+		C3E39E4B2118EC58004B1CF9 /* UniquenessConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniquenessConstraints.swift; sourceTree = "<group>"; };
 		D662CF56C834C4E7CEA32364 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceBuilderTests.swift; sourceTree = "<group>"; };
 		DD15F100213C3DDF00D081C7 /* YamsSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamsSerialization.swift; sourceTree = "<group>"; };
@@ -575,6 +603,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C38E571320FF8F8F009C9C23 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				C38E571420FF8FB5009C9C23 /* CoreDataParser.swift */,
+				C33A1426210649A500D3CBA6 /* Configuration.swift */,
+				C350BE3720FFCD0F0043D7C5 /* Model.swift */,
+				C350BE3920FFCD750043D7C5 /* Entity.swift */,
+				C33A142821064E3400D3CBA6 /* FetchRequest.swift */,
+				C3BAC3C82112006000B6875A /* FetchedProperty.swift */,
+				C322627021012F42001AC9CD /* Attribute.swift */,
+				C32262722101324E001AC9CD /* Relationship.swift */,
+				C3E39E4B2118EC58004B1CF9 /* UniquenessConstraints.swift */,
+				C3031AA021062C9A00BF00DE /* UserInfo.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		DD428DF21FC50D34001649D6 /* SwiftGen */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,6 +651,7 @@
 			children = (
 				DD9F687620955D51004EB720 /* AssetsCatalog */,
 				DD428E081FC50FBF001649D6 /* Colors */,
+				C38E571320FF8F8F009C9C23 /* CoreData */,
 				DD9F687D20955DEF004EB720 /* Fonts */,
 				DDCCACD5209550F60017FB43 /* InterfaceBuilder */,
 				DDB0B9A0209CE7CD00E467C2 /* Plist */,
@@ -631,6 +677,7 @@
 			children = (
 				DD428E151FC50FBF001649D6 /* AssetsCatalogContext.swift */,
 				DD428E141FC50FBF001649D6 /* ColorsContext.swift */,
+				C38E571620FF906B009C9C23 /* CoreDataContext.swift */,
 				DD428E131FC50FBF001649D6 /* FontsContext.swift */,
 				DD428E161FC50FBF001649D6 /* InterfaceBuilderContext.swift */,
 				DDB0B9A3209CE7E300E467C2 /* PlistContext.swift */,
@@ -726,6 +773,7 @@
 				DDC8211420967180007A55F3 /* Path.swift */,
 				DDC82116209672E1007A55F3 /* String.swift */,
 				DDD2D708210F293E00D678E0 /* YAML.swift */,
+				C322626E21012C42001AC9CD /* Bool.swift */,
 				DD15F100213C3DDF00D081C7 /* YamsSerialization.swift */,
 			);
 			path = Utils;
@@ -747,6 +795,7 @@
 			isa = PBXGroup;
 			children = (
 				DDDE50F61FAF6AD4004203BE /* ColorsTests.swift */,
+				C3A264D42111007F00A7F61B /* CoreDataTests.swift */,
 				DDDE506E1FAF6AD4004203BE /* FontsTests.swift */,
 				DDDE50F91FAF6AD4004203BE /* InterfaceBuilderiOSTests.swift */,
 				DDDE50F71FAF6AD4004203BE /* InterfaceBuilderMacOSTests.swift */,
@@ -771,6 +820,7 @@
 				DDDE51DE1FAF81B9004203BE /* ColorsTests.swift */,
 				DDDE521B1FAF81BA004203BE /* ColorsTextFileTests.swift */,
 				DDDE51DF1FAF81B9004203BE /* ColorsXMLFileTests.swift */,
+				C34FEA112110D56800136871 /* CoreDataTests.swift */,
 				DDDE51DB1FAF81B9004203BE /* FontsTests.swift */,
 				DDDE521E1FAF81BA004203BE /* InterfaceBuilderiOSTests.swift */,
 				DDDE521C1FAF81BA004203BE /* InterfaceBuilderMacOSTests.swift */,
@@ -807,6 +857,7 @@
 				09A87B4D1BCCA2C600D9B9F5 /* Frameworks */,
 				09A87B4E1BCCA2C600D9B9F5 /* Resources */,
 				D3C83293B5D60F91CC5DF247 /* [CP] Embed Pods Frameworks */,
+				5CE73CBD9905B2BBCDA10046 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 				09A87B721BCCA60900D9B9F5 /* PBXBuildRule */,
@@ -832,6 +883,7 @@
 				234F7E6C1DEBD5C5001B3C10 /* Resources */,
 				DD428E041FC50F56001649D6 /* Embed Frameworks */,
 				A99480F22B553BF8A273ED05 /* [CP] Embed Pods Frameworks */,
+				4FDF0616E5DB61E5FB1CD7BE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -853,6 +905,7 @@
 				DD428DF41FC50F56001649D6 /* Frameworks */,
 				DD428DF51FC50F56001649D6 /* Headers */,
 				DD428DF61FC50F56001649D6 /* Resources */,
+				60153109235742825B240B34 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -874,6 +927,7 @@
 				DDDE50371FAF687A004203BE /* Resources */,
 				D523545564DCC237D6EE770B /* [CP] Embed Pods Frameworks */,
 				DD9F4769206ADCD4006B0DCA /* ⚠️ SwiftLint (generated output) */,
+				06E30023A707E022266A3B85 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 				DDDE50451FAF687A004203BE /* PBXBuildRule */,
@@ -898,6 +952,7 @@
 				DDDE51A91FAF814A004203BE /* Frameworks */,
 				DDDE51AB1FAF814A004203BE /* Resources */,
 				2C9D66D627FB898D3DA8D22E /* [CP] Embed Pods Frameworks */,
+				3E6BE7EF6442EE9C6DC4078F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 				DDDE51B11FAF814A004203BE /* PBXBuildRule */,
@@ -1028,6 +1083,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		06E30023A707E022266A3B85 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		08AE656536A8A1621DA57624 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1100,6 +1170,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		3E6BE7EF6442EE9C6DC4078F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		46464263FC5E8C22B47C0BCB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1118,6 +1203,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4FDF0616E5DB61E5FB1CD7BE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		51B3E1E55873F072BF1E3406 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1134,6 +1234,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5CE73CBD9905B2BBCDA10046 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60153109235742825B240B34 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A99480F22B553BF8A273ED05 /* [CP] Embed Pods Frameworks */ = {
@@ -1354,12 +1484,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3BAC3C92112006000B6875A /* FetchedProperty.swift in Sources */,
 				DD9F688520956074004EB720 /* StringsEntry.swift in Sources */,
 				DD9F687A20955D51004EB720 /* CatalogEntry.swift in Sources */,
 				DD428E261FC50FBF001649D6 /* InterfaceBuilderContext.swift in Sources */,
 				DD428E221FC50FBF001649D6 /* ColorsParser.swift in Sources */,
+				C350BE3A20FFCD750043D7C5 /* Entity.swift in Sources */,
 				DDB0B99D209CE4B100E467C2 /* YamlContext.swift in Sources */,
 				DD9F687F20955E07004EB720 /* Font.swift in Sources */,
+				C33A142921064E3400D3CBA6 /* FetchRequest.swift in Sources */,
 				DD428E1B1FC50FBF001649D6 /* ColorsJSONFileParser.swift in Sources */,
 				DD9F688120955F57004EB720 /* CTFont.swift in Sources */,
 				DDCCACDD209551240017FB43 /* Scene.swift in Sources */,
@@ -1373,7 +1506,13 @@
 				DDCCACDC209551240017FB43 /* Segue.swift in Sources */,
 				DD9F688620956074004EB720 /* PlaceholderType.swift in Sources */,
 				DD428E251FC50FBF001649D6 /* AssetsCatalogContext.swift in Sources */,
+				C3031AA121062C9A00BF00DE /* UserInfo.swift in Sources */,
 				DD428E1A1FC50FBF001649D6 /* ColorsCLRFileParser.swift in Sources */,
+				C350BE3820FFCD0F0043D7C5 /* Model.swift in Sources */,
+				C32262732101324E001AC9CD /* Relationship.swift in Sources */,
+				C33A1427210649A500D3CBA6 /* Configuration.swift in Sources */,
+				C38E571720FF906B009C9C23 /* CoreDataContext.swift in Sources */,
+				C3E39E4C2118EC58004B1CF9 /* UniquenessConstraints.swift in Sources */,
 				DD428E241FC50FBF001649D6 /* ColorsContext.swift in Sources */,
 				DDB0B9A2209CE7CD00E467C2 /* PlistParser.swift in Sources */,
 				DD428E201FC50FBF001649D6 /* Parser.swift in Sources */,
@@ -1381,7 +1520,10 @@
 				DDC82117209672E1007A55F3 /* String.swift in Sources */,
 				DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */,
 				DD9F687C20955D51004EB720 /* Catalog.swift in Sources */,
+				C322627121012F42001AC9CD /* Attribute.swift in Sources */,
 				DD428E271FC50FBF001649D6 /* StringsContext.swift in Sources */,
+				C38E571520FF8FB5009C9C23 /* CoreDataParser.swift in Sources */,
+				C322626F21012C42001AC9CD /* Bool.swift in Sources */,
 				DD428E211FC50FBF001649D6 /* StringsParser.swift in Sources */,
 				DD428E231FC50FBF001649D6 /* FontsContext.swift in Sources */,
 				DD9F687B20955D51004EB720 /* AssetsCatalogParser.swift in Sources */,
@@ -1406,6 +1548,7 @@
 				DDDE51971FAF6AD4004203BE /* TestsHelper.swift in Sources */,
 				DD112CBA2141675900B11A5D /* InterfaceBuilderTests.swift in Sources */,
 				DDDE51941FAF6AD4004203BE /* XCAssetsTests.swift in Sources */,
+				C3A264D52111007F00A7F61B /* CoreDataTests.swift in Sources */,
 				DDDE51951FAF6AD4004203BE /* ColorsTests.swift in Sources */,
 				DDDE51141FAF6AD4004203BE /* FontsTests.swift in Sources */,
 				DDDE51131FAF6AD4004203BE /* StringsTests.swift in Sources */,
@@ -1418,6 +1561,7 @@
 			files = (
 				DDDE52711FAF81BA004203BE /* InterfaceBuilderMacOSTests.swift in Sources */,
 				DDDE52731FAF81BA004203BE /* InterfaceBuilderiOSTests.swift in Sources */,
+				C34FEA132110D6EC00136871 /* CoreDataTests.swift in Sources */,
 				DDB0B9A6209CE7FC00E467C2 /* PlistTests.swift in Sources */,
 				DDDE52721FAF81BA004203BE /* TestsHelper.swift in Sources */,
 				DDDE523B1FAF81BA004203BE /* FontsTests.swift in Sources */,

@@ -8,7 +8,7 @@ The interface builder parser accepts either a file or a directory, which it'll s
 
 The output context has the following structure:
 
- - `modules`    : `Array<String>` — List of modules used by scenes and segues — typically to be used for "import" statements
+ - `modules`    : `Array<String>` — List of modules used by scenes and segues — typically used for "import" statements
  - `platform`   : `String` — Name of the target platform (only available if all storyboards target the same platform)
  - `storyboards`: `Array` — List of storyboards
     - `name`: `String` — Name of the storyboard

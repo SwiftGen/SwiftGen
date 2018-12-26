@@ -10,7 +10,15 @@ _None_
 
 ### New Features
 
-_None_
+* Adds support for generating code from Core Data models.  
+  [Grant Butler](https://github.com/grantjbutler)
+  [David Jennes](https://github.com/djbe)
+  [Igor Palaguta](https://github.com/Igor-Palaguta)
+  [#455](https://github.com/SwiftGen/SwiftGen/pull/455)
+  [#45](https://github.com/SwiftGen/SwiftGen/issues/45)
+  [#185](https://github.com/SwiftGen/SwiftGen/issues/185)
+  [#191](https://github.com/SwiftGen/SwiftGen/pull/191)
+  [#195](https://github.com/SwiftGen/SwiftGen/pull/195)
 
 ### Bug Fixes
 

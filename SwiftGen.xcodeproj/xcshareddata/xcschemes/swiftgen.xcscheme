@@ -133,6 +133,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "coredata --template swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/CoreData/Model.xcdatamodeld"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "colors -t swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/Colors/colors.xml"
             isEnabled = "NO">
          </CommandLineArgument>
