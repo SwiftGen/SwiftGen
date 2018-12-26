@@ -11,46 +11,55 @@ import Foundation
 /*
  - `models`: `Array` — A list of parsed models, with each:
    - `configurations`: `Dictionary<Array<String>>` — Map of configurations and the corresponding list of entity names
-   - `entities`: `Dictionary` — All the entities in the model, with each:
+   - `entities`: `Dictionary` — Map of all the entities in the model, each key being the entity's name:
      - `name`: `String` - Entity name
      - `className`: `String` - Class name as specified by the user (usually the same as `name`)
      - `isAbstract`: `Bool` - Whether the entity is an abstract or not
      - `superEntity`: `String` - Name of the super (parent) entity
      - `uniquenessConstraints`: `Array<Array<String>>` - List of uniqueness constraints, each being a list of
        attributes
-     - `attributes`: `Array` - All the attributes, with each:
-       - `name`: `String` - Attribute name
-       - `customClassName`: `String` - Custom class name (if one has been defined)
-       - `isIndexed`: `Bool` - Whether the property is indexed or not.
-       - `isOptional`: `Bool` - Whether the property is optional or not.
-       - `isTransient`: `Bool` - Whether the property is transient or not.
-       - `propertyType`: `String` - Property type, will be "attribute"
-       - `type`: `String` - Type of the attribute (Transformable, Binary, Boolean, ...)
-       - `typeName`: `String` - Actual attribute type, based on the values for `type`, `usesScalarValueType` and
-         `customClassName`
-       - `usesScalarValueType`: `Bool` - Whether the property should use scalar value types or not.
-       - `userInfo`: `Dictionary` - Dictionary of keys/values defined by the user
-     - `relationships`: `Array` - All the relationships, with each:
-       - `name`: `String` - Relationship name
-       - `destinationEntity`: `String` - The name of the destination's entity.
-       - `inverseRelationship`: `Dictionary` - The inverse of this relationship:
-         - `name`: `String`: The name of the inverse relationship.
-         - `destinationEntity`: `String` - The name of the inverse relationship's entity.
-       - `isIndexed`: `Bool` - Whether the property is indexed or not.
-       - `isOptional`: `Bool` - Whether the property is optional or not.
-       - `isOrdered`: `Bool` - Whether the relationship is ordered or unordered.
-       - `isToMany`: `Bool` - Whether the relationship targets one or more instances.
-       - `isTransient`: `Bool` - Whether the property is transient or not.
-       - `propertyType`: `String` - Property type, will be "relationship"
-       - `userInfo`: `Dictionary` - Dictionary of keys/values defined by the user
-     - `fetchedProperties`: `Array` - List of fetched properties, with each:
-       - `name`: `String` - Fetched property name
-       - `fetchRequest`: `Dictionary` - The fetch request (see `Fetch Request`)
-       - `isOptional`: `Bool` - Whether the property is optional or not.
-       - `propertyType`: `String` - Property type, will be "fetchedProperty"
-       - `userInfo`: `Dictionary` - Dictionary of keys/values defined by the user
+     - `attributes`: `Array` - List of attributes (see `Entity Attribute`)
+     - `relationships`: `Array` - List of relationships (see `Entity Relationship`)
+     - `fetchedProperties`: `Array` - List of fetched properties (see `Entity Fetched Property`)
    - `fetchRequests`: `Dictionary` - All fetch requests, grouped by entity. Each key will be an entity name, each value
      will be a list of corresponding fetch requests (see `Fetch Request`)
+
+An `Entity Attribute` will have the following properties:
+
+ - `name`: `String` - Attribute name
+ - `customClassName`: `String` - Custom class name (if one has been defined)
+ - `isIndexed`: `Bool` - Whether the property is indexed or not.
+ - `isOptional`: `Bool` - Whether the property is optional or not.
+ - `isTransient`: `Bool` - Whether the property is transient or not.
+ - `propertyType`: `String` - Property type, will be "attribute"
+ - `type`: `String` - Type of the attribute (Transformable, Binary, Boolean, ...)
+ - `typeName`: `String` - Actual attribute type, based on the values for `type`, `usesScalarValueType` and
+   `customClassName`
+ - `usesScalarValueType`: `Bool` - Whether the property should use scalar value types or not.
+ - `userInfo`: `Dictionary` - Dictionary of keys/values defined by the user
+
+An `Entity Relationship` will have the following properties:
+
+ - `name`: `String` - Relationship name
+ - `destinationEntity`: `String` - The name of the destination's entity.
+ - `inverseRelationship`: `Dictionary` - The inverse of this relationship:
+   - `name`: `String`: The name of the inverse relationship.
+   - `destinationEntity`: `String` - The name of the inverse relationship's entity.
+ - `isIndexed`: `Bool` - Whether the property is indexed or not.
+ - `isOptional`: `Bool` - Whether the property is optional or not.
+ - `isOrdered`: `Bool` - Whether the relationship is ordered or unordered.
+ - `isToMany`: `Bool` - Whether the relationship targets one or more instances.
+ - `isTransient`: `Bool` - Whether the property is transient or not.
+ - `propertyType`: `String` - Property type, will be "relationship"
+ - `userInfo`: `Dictionary` - Dictionary of keys/values defined by the user
+
+An `Entity Fetched Property` will have the following properties:
+
+ - `name`: `String` - Fetched property name
+ - `fetchRequest`: `Dictionary` - The fetch request (see `Fetch Request`)
+ - `isOptional`: `Bool` - Whether the property is optional or not.
+ - `propertyType`: `String` - Property type, will be "fetchedProperty"
+ - `userInfo`: `Dictionary` - Dictionary of keys/values defined by the user
 
 A `Fetch Request` will have the following properties:
 
@@ -75,29 +84,29 @@ extension CoreData.Parser {
     ]
   }
 
-  private func map(_ model: CoreData.Model) -> [String: Any] {
+  private func map(model: CoreData.Model) -> [String: Any] {
     return [
       "configurations": model.configurations.mapValues { $0.sorted() },
-      "entities": model.entities.mapValues { map($0, in: model) },
-      "fetchRequests": model.fetchRequestsByEntityName.mapValues { $0.map { map($0, in: model) } }
+      "entities": model.entities.mapValues { map(entity: $0, in: model) },
+      "fetchRequests": model.fetchRequestsByEntityName.mapValues { $0.map { map(fetchRequest: $0, in: model) } }
     ]
   }
 
-  private func map(_ entity: CoreData.Entity, in model: CoreData.Model) -> [String: Any] {
+  private func map(entity: CoreData.Entity, in model: CoreData.Model) -> [String: Any] {
     return [
       "name": entity.name,
       "className": entity.className,
       "isAbstract": entity.isAbstract,
       "userInfo": entity.userInfo,
       "superEntity": entity.superEntity ?? "",
-      "attributes": entity.attributes.map { map($0, in: model) },
-      "relationships": entity.relationships.map { map($0, in: model) },
-      "fetchedProperties": entity.fetchedProperties.map { map($0, in: model) },
+      "attributes": entity.attributes.map { map(attribute: $0, in: model) },
+      "relationships": entity.relationships.map { map(relationship: $0, in: model) },
+      "fetchedProperties": entity.fetchedProperties.map { map(fetchedProperty: $0, in: model) },
       "uniquenessConstraints": entity.uniquenessConstraints
     ]
   }
 
-  private func map(_ attribute: CoreData.Attribute, in model: CoreData.Model) -> [String: Any] {
+  private func map(attribute: CoreData.Attribute, in model: CoreData.Model) -> [String: Any] {
     return [
       "name": attribute.name,
       "propertyType": "attribute",
@@ -112,7 +121,7 @@ extension CoreData.Parser {
     ]
   }
 
-  private func map(_ relationship: CoreData.Relationship, in model: CoreData.Model) -> [String: Any] {
+  private func map(relationship: CoreData.Relationship, in model: CoreData.Model) -> [String: Any] {
     return [
       "name": relationship.name,
       "propertyType": "relationship",
@@ -132,17 +141,17 @@ extension CoreData.Parser {
     ]
   }
 
-  private func map(_ fetchedProperty: CoreData.FetchedProperty, in model: CoreData.Model) -> [String: Any] {
+  private func map(fetchedProperty: CoreData.FetchedProperty, in model: CoreData.Model) -> [String: Any] {
     return [
       "name": fetchedProperty.name,
       "propertyType": "fetchedProperty",
       "isOptional": fetchedProperty.isOptional,
-      "fetchRequest": map(fetchedProperty.fetchRequest, in: model),
+      "fetchRequest": map(fetchRequest: fetchedProperty.fetchRequest, in: model),
       "userInfo": fetchedProperty.userInfo
     ]
   }
 
-  private func map(_ fetchRequest: CoreData.FetchRequest, in model: CoreData.Model) -> [String: Any] {
+  private func map(fetchRequest: CoreData.FetchRequest, in model: CoreData.Model) -> [String: Any] {
     guard let entity = model.entities[fetchRequest.entity] else {
       return [:]
     }
@@ -158,7 +167,7 @@ extension CoreData.Parser {
         baseEntity: entity,
         model: model
       ),
-      "resultType": map(fetchRequest.resultType),
+      "resultType": map(resultType: fetchRequest.resultType),
       "includeSubentities": fetchRequest.includeSubentities,
       "includePropertyValues": fetchRequest.includePropertyValues,
       "includesPendingChanges": fetchRequest.includesPendingChanges,
@@ -167,7 +176,7 @@ extension CoreData.Parser {
     ]
   }
 
-  private func map(_ resultType: CoreData.FetchRequest.ResultType) -> String {
+  private func map(resultType: CoreData.FetchRequest.ResultType) -> String {
     switch resultType {
     case .object:
       return "Object"
