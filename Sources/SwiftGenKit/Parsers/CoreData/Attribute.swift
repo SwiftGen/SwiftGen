@@ -16,11 +16,9 @@ extension CoreData {
     public let isOptional: Bool
     public let isTransient: Bool
     public let usesScalarValueType: Bool
-
     public let type: AttributeType
     public let customClassName: String?
     public let typeName: String
-
     public let userInfo: [String: Any]
   }
 

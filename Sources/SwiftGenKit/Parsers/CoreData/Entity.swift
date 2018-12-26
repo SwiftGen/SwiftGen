@@ -46,7 +46,11 @@ extension CoreData.Entity {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required entity name.")
     }
 
-    let className = object[XML.Attributes.representedClassName] ?? CoreData.Entity.defaultClassName
+    var className = object[XML.Attributes.representedClassName] ?? CoreData.Entity.defaultClassName
+    if className.first == "." {
+      // if set to "current product module", class name is prefixed with a '.'
+      className = String(className.dropFirst())
+    }
     let isAbstract = object[XML.Attributes.isAbstract].flatMap(Bool.init(from:)) ?? false
     let superEntity = object[XML.Attributes.superEntity]
 

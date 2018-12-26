@@ -13,13 +13,10 @@ extension CoreData {
   public struct FetchRequest {
     public let name: String
     public let entity: String
-
     public let fetchLimit: Int
     public let fetchBatchSize: Int
-
     public let predicateString: String
     public let resultType: ResultType
-
     public let includeSubentities: Bool
     public let includePropertyValues: Bool
     public let includesPendingChanges: Bool

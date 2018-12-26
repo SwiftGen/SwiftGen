@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18B75" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AbstractEntity" representedClassName="AbstractEntity" isAbstract="YES" syncable="YES" codeGenerationType="class"/>
     <entity name="ChildEntity" representedClassName="ChildEntity" parentEntity="MainEntity" syncable="YES" codeGenerationType="class">
         <userInfo>
@@ -42,13 +42,16 @@
     </entity>
     <entity name="NewEntity" representedClassName="NewEntity" parentEntity="AbstractEntity" syncable="YES" codeGenerationType="class">
         <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <fetchIndex name="byIdentifierIndex">
+            <fetchIndexElement property="identifier" type="Binary" order="ascending"/>
+        </fetchIndex>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="identifier"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="SecondaryEntity" representedClassName="SecondaryEntity" syncable="YES" codeGenerationType="class">
+    <entity name="SecondaryEntity" representedClassName=".SecondaryEntity" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="manyToMany" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="manyToMany" inverseEntity="MainEntity" syncable="YES"/>
         <relationship name="oneToMany" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="oneToMany" inverseEntity="MainEntity" syncable="YES"/>
