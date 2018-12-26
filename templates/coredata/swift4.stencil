@@ -86,9 +86,9 @@ extension {{ entityClassName }} {
 
 {% endif %}
 {% endfor %}
-{% if model.fetchRequestsByEntityName[entity.name].count > 0 %}
+{% if model.fetchRequests[entity.name].count > 0 %}
 extension {{ entityClassName }} {
-    {% for fetchRequest in model.fetchRequestsByEntityName[entity.name] %}
+    {% for fetchRequest in model.fetchRequests[entity.name] %}
     {% set resultTypeName %}{% if fetchRequest.resultType == "Object" %}{{ entityClassName }}{% elif fetchRequest.resultType == "Object ID" %}NSManagedObjectID{% elif fetchRequest.resultType == "Dictionary" %}[String: Any]{% endif %}{% endset %}
     class func fetch{{ fetchRequest.name | upperFirstLetter }}(managedObjectContext: NSManagedObjectContext{% for variableName, variableType in fetchRequest.substitutionVariables %}, {{ variableName | lowerFirstWord }}: {{ variableType }}{% endfor %}) throws -> [{{ resultTypeName }}] {
         guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {

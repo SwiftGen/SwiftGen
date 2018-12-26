@@ -334,45 +334,6 @@ models:
       uniquenessConstraints: []
       userInfo: {}
   fetchRequests:
-  - entity: "MainEntity"
-    fetchBatchSize: 0
-    fetchLimit: 0
-    includePropertyValues: true
-    includeSubentities: true
-    includesPendingChanges: true
-    name: "DictionaryFetchRequest"
-    predicateString: ""
-    resultType: "Dictionary"
-    returnDistinctResults: false
-    returnsObjectsAsFaults: true
-    substitutionVariables: {}
-  - entity: "MainEntity"
-    fetchBatchSize: 0
-    fetchLimit: 0
-    includePropertyValues: true
-    includeSubentities: true
-    includesPendingChanges: true
-    name: "ObjectFetchRequest"
-    predicateString: "uuid == $UUID"
-    resultType: "Object"
-    returnDistinctResults: true
-    returnsObjectsAsFaults: true
-    substitutionVariables:
-      UUID: "UUID"
-  - entity: "MainEntity"
-    fetchBatchSize: 0
-    fetchLimit: 0
-    includePropertyValues: true
-    includeSubentities: true
-    includesPendingChanges: true
-    name: "ObjectIDFetchRequest"
-    predicateString: "oneToOne.name == $NAME"
-    resultType: "Object ID"
-    returnDistinctResults: false
-    returnsObjectsAsFaults: true
-    substitutionVariables:
-      NAME: "String"
-  fetchRequestsByEntityName:
     MainEntity:
     - entity: "MainEntity"
       fetchBatchSize: 0
