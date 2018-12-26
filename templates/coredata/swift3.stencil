@@ -104,7 +104,12 @@ extension {{ entityClassName }} {
     [String: Any]
     {% endif %}
   {% endfilter %}{% endset %}
-  class func fetch{{ fetchRequest.name | upperFirstLetter }}(managedObjectContext: NSManagedObjectContext{% for variableName, variableType in fetchRequest.substitutionVariables %}, {{ variableName | lowerFirstWord }}: {{ variableType }}{% endfor %}) throws -> [{{ resultTypeName }}] {
+  class func fetch{{ fetchRequest.name | upperFirstLetter }}({% filter removeNewlines:"leading" %}
+    managedObjectContext: NSManagedObjectContext
+    {% for variableName, variableType in fetchRequest.substitutionVariables %}
+    , {{ variableName | lowerFirstWord }}: {{ variableType }}
+    {% endfor %}
+  {% endfilter %}) throws -> [{{ resultTypeName }}] {
     guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
       fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
     }

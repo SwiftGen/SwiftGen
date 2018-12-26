@@ -10,7 +10,8 @@ The output context has the following structure:
 
  - `models`: `Array` — A list of parsed models, with each:
    - `configurations`: `Dictionary<Array<String>>` — Map of configurations and the corresponding list of entity names
-   - `entities`: `Dictionary` — Map of all the entities in the model, each key being the entity's name:
+   - `entities`: `Dictionary` – Map of all the entities in the model, each key being the entity's name, and
+     corresponding value is a dictionary described below:
      - `name`: `String` - Entity name
      - `className`: `String` - Class name as specified by the user (usually the same as `name`)
      - `isAbstract`: `Bool` - Whether the entity is an abstract or not
