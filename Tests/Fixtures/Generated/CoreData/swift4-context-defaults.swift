@@ -8,6 +8,8 @@ import Foundation
 // swiftlint:disable attributes
 
 // swiftlint:disable identifier_name line_length type_body_length
+// MARK: - AbstractEntity
+
 @objc(AbstractEntity)
 internal class AbstractEntity: NSManagedObject {
     internal class func entityName() -> String {
@@ -26,6 +28,8 @@ internal class AbstractEntity: NSManagedObject {
     // swiftlint:enable implicitly_unwrapped_optional
 }
 
+// MARK: - ChildEntity
+
 @objc(ChildEntity)
 internal class ChildEntity: MainEntity {
     override internal class func entityName() -> String {
@@ -43,6 +47,8 @@ internal class ChildEntity: MainEntity {
     // swiftlint:disable implicitly_unwrapped_optional
     // swiftlint:enable implicitly_unwrapped_optional
 }
+
+// MARK: - MainEntity
 
 @objc(MainEntity)
 internal class MainEntity: NSManagedObject {
@@ -82,6 +88,8 @@ internal class MainEntity: NSManagedObject {
     // swiftlint:enable implicitly_unwrapped_optional
 }
 
+// MARK: Relationship ManyToMany
+
 extension MainEntity {
     @objc(addManyToManyObject:)
     @NSManaged public func addToManyToMany(_ value: SecondaryEntity)
@@ -95,6 +103,8 @@ extension MainEntity {
     @objc(removeManyToMany:)
     @NSManaged public func removeFromManyToMany(_ values: Set<SecondaryEntity>)
 }
+
+// MARK: Relationship OneToMany
 
 extension MainEntity {
     @objc(insertObject:inOneToManyAtIndex:)
@@ -127,6 +137,8 @@ extension MainEntity {
     @objc(removeOneToMany:)
     @NSManaged public func removeFromOneToMany(_ values: NSOrderedSet)
 }
+
+// MARK: Fetch Requests
 
 extension MainEntity {
     class func fetchDictionaryFetchRequest(managedObjectContext: NSManagedObjectContext) throws -> [[String: Any]] {
@@ -191,6 +203,8 @@ extension MainEntity {
 
 }
 
+// MARK: - NewEntity
+
 @objc(NewEntity)
 internal class NewEntity: AbstractEntity {
     override internal class func entityName() -> String {
@@ -209,6 +223,8 @@ internal class NewEntity: AbstractEntity {
     @NSManaged internal var identifier: UUID?
     // swiftlint:enable implicitly_unwrapped_optional
 }
+
+// MARK: - SecondaryEntity
 
 @objc(SecondaryEntity)
 internal class SecondaryEntity: NSManagedObject {
@@ -231,6 +247,8 @@ internal class SecondaryEntity: NSManagedObject {
     @NSManaged internal var oneToOne: MainEntity?
     // swiftlint:enable implicitly_unwrapped_optional
 }
+
+// MARK: Relationship ManyToMany
 
 extension SecondaryEntity {
     @objc(addManyToManyObject:)
