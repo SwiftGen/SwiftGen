@@ -39,6 +39,12 @@ let allParserCommands: [ParserCLI] = [
     pathDescription: "Colors.txt|.clr|.xml|.json file(s) to parse."
   ),
   .init(
+    parserType: CoreData.Parser.self,
+    name: "coredata",
+    description: "generate code for your Core Data models",
+    pathDescription: "Core Data models (.xcdatamodel or .xcdatamodeld) to parse."
+  ),
+  .init(
     parserType: Fonts.Parser.self,
     name: "fonts",
     description: "generate code for your fonts",
@@ -79,12 +85,6 @@ let allParserCommands: [ParserCLI] = [
     name: "yaml",
     description: "generate code for custom yaml configuration files",
     pathDescription: "YAML files (or directories that contain them) to parse."
-  ),
-  .init(
-    parserType: CoreData.Parser.self,
-    name: "coredata",
-    description: "generate code for your Core Data models",
-    pathDescription: "Core Data models (.xcdatamodel or .xcdatamodeld) to parse."
   ),
 
   // Deprecated
