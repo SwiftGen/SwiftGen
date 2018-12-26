@@ -10,7 +10,7 @@ import Foundation
 // swiftlint:disable identifier_name line_length type_body_length
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 {% for model in models %}
-{% for name, entity in model.entities %}
+{% for name, entity in model.entities where entity.shouldGenerateCode %}
 {% set superclass %}{{ model.entities[entity.superEntity].className | default:"NSManagedObject" }}{% endset %}
 {% set entityClassName %}{{ entity.className | default:entity.name }}{% endset %}
 {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}

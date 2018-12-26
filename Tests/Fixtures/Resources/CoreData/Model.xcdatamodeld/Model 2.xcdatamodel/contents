@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18B75" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="AbstractEntity" representedClassName="AbstractEntity" isAbstract="YES" syncable="YES" codeGenerationType="class"/>
-    <entity name="ChildEntity" representedClassName="ChildEntity" parentEntity="MainEntity" syncable="YES" codeGenerationType="class">
+    <entity name="AbstractEntity" representedClassName="AbstractEntity" isAbstract="YES" syncable="YES"/>
+    <entity name="AutoClassGen" representedClassName="AutoClassGen" syncable="YES" codeGenerationType="class"/>
+    <entity name="AutoExtensionGen" representedClassName="AutoExtensionGen" syncable="YES" codeGenerationType="category"/>
+    <entity name="ChildEntity" representedClassName="ChildEntity" parentEntity="MainEntity" syncable="YES">
         <userInfo>
             <entry key="key" value="value"/>
         </userInfo>
     </entity>
-    <entity name="MainEntity" representedClassName="MainEntity" syncable="YES" codeGenerationType="class">
+    <entity name="MainEntity" representedClassName="MainEntity" syncable="YES">
         <attribute name="attributedString" optional="YES" attributeType="Transformable" customClassName="NSAttributedString" syncable="YES"/>
         <attribute name="binaryData" optional="YES" attributeType="Binary" syncable="YES">
             <userInfo>
@@ -40,7 +42,7 @@
             <entry key="key" value="value"/>
         </userInfo>
     </entity>
-    <entity name="NewEntity" representedClassName="NewEntity" parentEntity="AbstractEntity" syncable="YES" codeGenerationType="class">
+    <entity name="NewEntity" representedClassName="NewEntity" parentEntity="AbstractEntity" syncable="YES">
         <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <fetchIndex name="byIdentifierIndex">
             <fetchIndexElement property="identifier" type="Binary" order="ascending"/>
@@ -51,7 +53,7 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="SecondaryEntity" representedClassName=".SecondaryEntity" syncable="YES" codeGenerationType="class">
+    <entity name="SecondaryEntity" representedClassName=".SecondaryEntity" syncable="YES">
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="manyToMany" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="manyToMany" inverseEntity="MainEntity" syncable="YES"/>
         <relationship name="oneToMany" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="oneToMany" inverseEntity="MainEntity" syncable="YES"/>
@@ -65,6 +67,8 @@
     </configuration>
     <elements>
         <element name="AbstractEntity" positionX="-9" positionY="162" width="128" height="45"/>
+        <element name="AutoClassGen" positionX="-36" positionY="135" width="128" height="45"/>
+        <element name="AutoExtensionGen" positionX="-27" positionY="144" width="128" height="45"/>
         <element name="ChildEntity" positionX="-36" positionY="126" width="128" height="45"/>
         <element name="MainEntity" positionX="-63" positionY="-18" width="128" height="359"/>
         <element name="NewEntity" positionX="-27" positionY="144" width="128" height="60"/>

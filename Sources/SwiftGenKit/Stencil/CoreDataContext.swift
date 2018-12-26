@@ -32,6 +32,7 @@ An `Entity Attribute` will have the following properties:
  - `isOptional`: `Bool` - Whether the property is optional or not.
  - `isTransient`: `Bool` - Whether the property is transient or not.
  - `propertyType`: `String` - Property type, will be "attribute"
+ - `shouldGenerateCode`: `Bool` - Whether the template should generate code or not (Xcode will take care of it)
  - `type`: `String` - Type of the attribute (Transformable, Binary, Boolean, ...)
  - `typeName`: `String` - Actual attribute type, based on the values for `type`, `usesScalarValueType` and
    `customClassName`
@@ -102,7 +103,8 @@ extension CoreData.Parser {
       "attributes": entity.attributes.map { map(attribute: $0, in: model) },
       "relationships": entity.relationships.map { map(relationship: $0, in: model) },
       "fetchedProperties": entity.fetchedProperties.map { map(fetchedProperty: $0, in: model) },
-      "uniquenessConstraints": entity.uniquenessConstraints
+      "uniquenessConstraints": entity.uniquenessConstraints,
+      "shouldGenerateCode": entity.shouldGenerateCode
     ]
   }
 

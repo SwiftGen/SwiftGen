@@ -4,6 +4,8 @@ models:
     - "NewEntity"
     Default:
     - "AbstractEntity"
+    - "AutoClassGen"
+    - "AutoExtensionGen"
     - "ChildEntity"
     - "MainEntity"
     - "NewEntity"
@@ -16,6 +18,29 @@ models:
       isAbstract: true
       name: "AbstractEntity"
       relationships: []
+      shouldGenerateCode: true
+      superEntity: ""
+      uniquenessConstraints: []
+      userInfo: {}
+    AutoClassGen:
+      attributes: []
+      className: "AutoClassGen"
+      fetchedProperties: []
+      isAbstract: false
+      name: "AutoClassGen"
+      relationships: []
+      shouldGenerateCode: false
+      superEntity: ""
+      uniquenessConstraints: []
+      userInfo: {}
+    AutoExtensionGen:
+      attributes: []
+      className: "AutoExtensionGen"
+      fetchedProperties: []
+      isAbstract: false
+      name: "AutoExtensionGen"
+      relationships: []
+      shouldGenerateCode: false
       superEntity: ""
       uniquenessConstraints: []
       userInfo: {}
@@ -26,6 +51,7 @@ models:
       isAbstract: false
       name: "ChildEntity"
       relationships: []
+      shouldGenerateCode: true
       superEntity: "MainEntity"
       uniquenessConstraints: []
       userInfo:
@@ -252,6 +278,7 @@ models:
         name: "oneToOne"
         propertyType: "relationship"
         userInfo: {}
+      shouldGenerateCode: true
       superEntity: ""
       uniquenessConstraints: []
       userInfo:
@@ -273,6 +300,7 @@ models:
       isAbstract: false
       name: "NewEntity"
       relationships: []
+      shouldGenerateCode: true
       superEntity: "AbstractEntity"
       uniquenessConstraints:
       - - "identifier"
@@ -330,6 +358,7 @@ models:
         name: "oneToOne"
         propertyType: "relationship"
         userInfo: {}
+      shouldGenerateCode: true
       superEntity: ""
       uniquenessConstraints: []
       userInfo: {}

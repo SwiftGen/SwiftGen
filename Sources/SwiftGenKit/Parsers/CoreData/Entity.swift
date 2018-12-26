@@ -20,6 +20,7 @@ extension CoreData {
     public let relationships: [Relationship]
     public let fetchedProperties: [FetchedProperty]
     public let uniquenessConstraints: [[String]]
+    public let shouldGenerateCode: Bool
   }
 }
 
@@ -29,6 +30,11 @@ private enum XML {
     static let representedClassName = "representedClassName"
     static let isAbstract = "isAbstract"
     static let superEntity = "parentEntity"
+    static let codeGenerationType = "codeGenerationType"
+  }
+  fileprivate enum Values {
+    static let categoryCodeGeneration = "category"
+    static let classCodeGeneration = "class"
   }
 
   static let attributesPath = "attribute"
@@ -53,6 +59,9 @@ extension CoreData.Entity {
     }
     let isAbstract = object[XML.Attributes.isAbstract].flatMap(Bool.init(from:)) ?? false
     let superEntity = object[XML.Attributes.superEntity]
+    let shouldGenerateCode = object[XML.Attributes.codeGenerationType].map {
+      $0 != XML.Values.categoryCodeGeneration && $0 != XML.Values.classCodeGeneration
+    } ?? true
 
     let attributes = try object.xpath(XML.attributesPath).map(CoreData.Attribute.init(with:))
     let relationships = try object.xpath(XML.relationshipsPath).map(CoreData.Relationship.init(with:))
@@ -72,7 +81,8 @@ extension CoreData.Entity {
       attributes: attributes,
       relationships: relationships,
       fetchedProperties: fetchedProperties,
-      uniquenessConstraints: uniquenessConstraints
+      uniquenessConstraints: uniquenessConstraints,
+      shouldGenerateCode: shouldGenerateCode
     )
   }
 }

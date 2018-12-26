@@ -11,6 +11,8 @@
 
 - When you need to generate *Swift 3* code.
 
+Note: the template will only generate code for entities that have set the `Codegen` property to "Manual/None". This is to avoid conflicts with Xcode, which will automatically generate code for the other options.
+
 ## Customization
 
 You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
