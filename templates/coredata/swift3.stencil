@@ -71,7 +71,7 @@ extension {{ entityClassName }} {
   @objc(replaceObjectIn{{ relationshipName }}AtIndex:withObject:)
   @NSManaged public func replace{{ relationshipName }}(at idx: Int, with value: {{ destinationEntityClassName }})
 
-  @objc(replace{{ relationshipName }}AtIndexes:withOneToMany:)
+  @objc(replace{{ relationshipName }}AtIndexes:with{{ relationshipName }}:)
   @NSManaged public func replace{{ relationshipName }}(at indexes: NSIndexSet, with values: [{{ destinationEntityClassName }}])
 
   {% endif %}
