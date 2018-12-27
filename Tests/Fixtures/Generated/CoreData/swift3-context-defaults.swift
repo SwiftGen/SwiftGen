@@ -72,11 +72,56 @@ internal class MainEntity: NSManagedObject {
   @NSManaged internal var boolean: Bool
   @NSManaged internal var date: Date?
   @NSManaged internal var decimal: NSDecimalNumber?
-  @NSManaged internal var double: Double
+  internal var double: Double? {
+    get {
+      let key = "double"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      return primitiveValue(forKey: key) as? Double
+    }
+    set {
+      let key = "double"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue, forKey: key)
+    }
+  }
   @NSManaged internal var float: Float
-  @NSManaged internal var int16: Int16
+  internal var int16: Int16? {
+    get {
+      let key = "int16"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      return primitiveValue(forKey: key) as? Int16
+    }
+    set {
+      let key = "int16"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue, forKey: key)
+    }
+  }
   @NSManaged internal var int32: Int32
-  @NSManaged internal var int64: Int64
+  internal var int64: Int64? {
+    get {
+      let key = "int64"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      return primitiveValue(forKey: key) as? Int64
+    }
+    set {
+      let key = "int64"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue, forKey: key)
+    }
+  }
   @NSManaged internal var nonOptional: String!
   @NSManaged internal var string: String?
   @NSManaged internal var transformable: AnyObject?
