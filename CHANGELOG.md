@@ -15,6 +15,7 @@ _None_
   [David Jennes](https://github.com/djbe)
   [Igor Palaguta](https://github.com/Igor-Palaguta)
   [#455](https://github.com/SwiftGen/SwiftGen/pull/455)
+  [#567](https://github.com/SwiftGen/SwiftGen/pull/567)
   [#45](https://github.com/SwiftGen/SwiftGen/issues/45)
   [#185](https://github.com/SwiftGen/SwiftGen/issues/185)
   [#191](https://github.com/SwiftGen/SwiftGen/pull/191)
