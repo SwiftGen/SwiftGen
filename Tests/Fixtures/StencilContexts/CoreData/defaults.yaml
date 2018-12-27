@@ -81,7 +81,7 @@ models:
         usesScalarValueType: false
       - customClassName: ""
         isIndexed: false
-        isOptional: true
+        isOptional: false
         isTransient: false
         name: "boolean"
         propertyType: "attribute"
@@ -121,7 +121,7 @@ models:
         usesScalarValueType: true
       - customClassName: ""
         isIndexed: false
-        isOptional: true
+        isOptional: false
         isTransient: false
         name: "float"
         propertyType: "attribute"
@@ -141,7 +141,7 @@ models:
         usesScalarValueType: true
       - customClassName: ""
         isIndexed: false
-        isOptional: true
+        isOptional: false
         isTransient: false
         name: "int32"
         propertyType: "attribute"
