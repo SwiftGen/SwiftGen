@@ -8,9 +8,9 @@ import Foundation
 // swiftlint:disable file_length
 // swiftlint:disable attributes
 // swiftlint:disable vertical_whitespace_closing_braces
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 
 // swiftlint:disable identifier_name line_length type_body_length
-{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 {% for model in models %}
 {% for name, entity in model.entities where entity.shouldGenerateCode %}
 {% set superclass %}{{ model.entities[entity.superEntity].className | default:"NSManagedObject" }}{% endset %}
@@ -34,7 +34,26 @@ import Foundation
 
   // swiftlint:disable implicitly_unwrapped_optional
   {% for attribute in entity.attributes %}
+  {% if attribute.usesScalarValueType and attribute.isOptional %}
+  {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}? {
+    get {
+      let key = "{{ attribute.name }}"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      return primitiveValue(forKey: key) as? {{ attribute.typeName }}
+    }
+    set {
+      let key = "{{ attribute.name }}"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue, forKey: key)
+    }
+  }
+  {% else %}
   @NSManaged {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.usesScalarValueType == false %}{% if attribute.isOptional %}?{% else %}!{% endif %}{% endif %}
+  {% endif %}
   {% endfor %}
   {% for relationship in entity.relationships %}
   {% if relationship.isToMany %}
