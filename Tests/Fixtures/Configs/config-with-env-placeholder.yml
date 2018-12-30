@@ -1,4 +1,4 @@
-output_dir: Common/Generated
+output_dir: ${SWIFTGEN_OUTPUT_DIR}
 strings:
   inputs: Sources1/Folder
   outputs:
@@ -14,5 +14,5 @@ strings:
           - 4
           - bar3a: 50
       baz:
-        - Hey
+        - ${HELLO}
         - $HELLO world

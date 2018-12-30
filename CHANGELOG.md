@@ -19,6 +19,9 @@ _None_
   [#185](https://github.com/SwiftGen/SwiftGen/issues/185)
   [#191](https://github.com/SwiftGen/SwiftGen/pull/191)
   [#195](https://github.com/SwiftGen/SwiftGen/pull/195)
+* Expand environment variables in YAML files.  
+  [Wolfgang Lutz](https://github.com/lutzifer)
+  [#355](https://github.com/SwiftGen/SwiftGen/issues/#355)
 
 ### Bug Fixes
 
