@@ -16,12 +16,12 @@ output_dir: Sources/Generated/
 strings:
   inputs: Base.lproj/Localizable.strings
   outputs:
-    - templateName: structured-swift3
+    - templateName: structured-swift4
       output: L10n-Constants.swift
 xcassets:
   - inputs: Logos.xcassets
     outputs:
-      - templateName: swift3
+      - templateName: swift4
         output: Logos-Constants.swift
         params:
           enumName: Logos
@@ -29,7 +29,7 @@ xcassets:
       - Colors.xcassets
       - Images.xcassets
     outputs:
-      - templatePath: customswift3
+      - templatePath: Resources/my-assets-custom-template.stencil
         output: Assets-Constants.swift
 ```
 
