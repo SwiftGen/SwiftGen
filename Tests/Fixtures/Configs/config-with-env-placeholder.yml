@@ -14,5 +14,5 @@ strings:
           - 4
           - bar3a: 50
       baz:
-        - hello
-        - world
+        - ${HELLO}
+        - $HELLO world
