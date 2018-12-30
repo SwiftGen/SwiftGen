@@ -62,8 +62,8 @@ public enum YAML {
   }
 }
 
-// Copied from /Source/SwiftLintFramework/Models/YamlParser.swift
-// of https://github.com/realm/SwiftLint/blob/d1dbc31aa9269364d6d7f43d2f99c82e12ceca6f
+// Copied from https://github.com/realm/SwiftLint/blob/0.29.2/Source/SwiftLintFramework/Models/YamlParser.swift
+
 private extension Constructor {
   static func swiftgenContructor(env: [String: String]) -> Constructor {
     return Constructor(customScalarMap(env: env))
@@ -72,8 +72,6 @@ private extension Constructor {
   static func customScalarMap(env: [String: String]) -> ScalarMap {
     var map = defaultScalarMap
     map[.str] = String.constructExpandingEnvVars(env: env)
-    map[.bool] = Bool.constructUsingOnlyTrueAndFalse
-
     return map
   }
 }
@@ -92,19 +90,5 @@ private extension String {
     }
 
     return result
-  }
-}
-
-private extension Bool {
-  // swiftlint:disable:next discouraged_optional_boolean
-  static func constructUsingOnlyTrueAndFalse(from scalar: Node.Scalar) -> Bool? {
-    switch scalar.string.lowercased() {
-    case "true":
-      return true
-    case "false":
-      return false
-    default:
-      return nil
-    }
   }
 }
