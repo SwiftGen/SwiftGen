@@ -52,7 +52,7 @@ import Foundation
     }
   }
   {% else %}
-  @NSManaged {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.usesScalarValueType == false %}{% if attribute.isOptional %}?{% else %}!{% endif %}{% endif %}
+  @NSManaged {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional %}?{% endif %}
   {% endif %}
   {% endfor %}
   {% for relationship in entity.relationships %}

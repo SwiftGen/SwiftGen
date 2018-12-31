@@ -144,7 +144,7 @@ internal class MainEntity: NSManagedObject {
     }
   }
   @NSManaged internal var optionalString: String?
-  @NSManaged internal var string: String!
+  @NSManaged internal var string: String
   @NSManaged internal var transformable: AnyObject?
   @NSManaged internal var transient: String?
   @NSManaged internal var uri: URL?
@@ -309,7 +309,7 @@ internal class SecondaryEntity: NSManagedObject {
   }
 
   // swiftlint:disable discouraged_optional_boolean
-  @NSManaged internal var name: String!
+  @NSManaged internal var name: String
   @NSManaged internal var manyToMany: Set<MainEntity>
   @NSManaged internal var oneToMany: MainEntity?
   @NSManaged internal var oneToOne: MainEntity?
