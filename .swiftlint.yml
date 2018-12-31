@@ -12,6 +12,7 @@ opt_in_rules:
  - empty_string
  - fallthrough
  - fatal_error_message
+ - file_header
  - first_where
  - force_unwrapping
  - implicit_return
@@ -40,6 +41,14 @@ opt_in_rules:
  - yoda_condition
 
 # Rules customization
+file_header:
+  required_pattern: |
+                    \/\/(
+                    \/\/ (SwiftGen(Kit)?|.* UnitTests)
+                    \/\/ Copyright © 2019 SwiftGen
+                    \/\/ MIT Licence
+                    \/\/| Generated using SwiftGen — https:\/\/github.com\/SwiftGen\/SwiftGen)
+
 line_length:
   warning: 120
   error: 200
