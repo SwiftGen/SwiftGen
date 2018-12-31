@@ -6,14 +6,10 @@
 
 import Foundation
 
-/*
- - `families`: `Array` — list of font families
-   - `name` : `String` — name of the font family
-   - `fonts`: `Array` — list of fonts in the font family
-     - `name` : `String` — the font's postscript name
-     - `path` : `String` — the path to the font, relative to the folder being scanned
-     - `style`: `String` — the designer's description of the font's style, like "bold", "oblique", …
-*/
+//
+// See the documentation file for a full description of this context's structure:
+// Documentation/SwiftGenKit Contexts/Fonts.md
+//
 
 extension Fonts.Parser {
   public func stencilContext() -> [String: Any] {

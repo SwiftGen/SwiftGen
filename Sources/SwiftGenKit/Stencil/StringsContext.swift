@@ -14,20 +14,11 @@ private extension String {
   }
 }
 
-/*
- - `tables`: `Array` — List of string tables
-   - `name`  : `String` — name of the `.strings` file (usually `"Localizable"`)
-   - `levels`: `Array` — Tree structure of strings (based on dot syntax), each level has:
-     - `name`    : `String` — name of the level (that is, part of the key split by `.` that we're describing)
-     - `children`: `Array` — list of sub-levels, repeating the same structure as a level
-     - `strings` : `Array` — list of strings at this level:
-       - `name` : `String` — contains only the last part of the key (after the last `.`)
-         (useful to do recursion when splitting keys against `.` for structured templates)
-       - `key`  : `String` — the full translation key, as it appears in the strings file
-       - `translation`: `String` — the translation for that key in the strings file
-       - `types`: `Array<String>` — defined only if localized string has parameter placeholders like `%d` and `%@` etc.
-          Contains a list of types like `"String"`, `"Int"`, etc
-*/
+//
+// See the documentation file for a full description of this context's structure:
+// Documentation/SwiftGenKit Contexts/Strings.md
+//
+
 extension Strings.Parser {
   public func stencilContext() -> [String: Any] {
     let entryToStringMapper = { (entry: Strings.Entry, keyPath: [String]) -> [String: Any] in

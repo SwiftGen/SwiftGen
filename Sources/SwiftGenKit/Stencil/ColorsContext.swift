@@ -6,16 +6,11 @@
 
 import Foundation
 
-/*
- - `palettes`: `Array` of:
-   - `name`: `String` — name of the palette
-   - `colors`: `Array` of:
-     - `name` : `String` — name of each color
-     - `red`  : `String` — hex value of the red component
-     - `green`: `String` — hex value of the green component
-     - `blue` : `String` — hex value of the blue component
-     - `alpha`: `String` — hex value of the alpha component
-*/
+//
+// See the documentation file for a full description of this context's structure:
+// Documentation/SwiftGenKit Contexts/Colors.md
+//
+
 extension Colors.Parser {
   public func stencilContext() -> [String: Any] {
     let palettes: [[String: Any]] = self.palettes
