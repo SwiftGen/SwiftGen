@@ -111,7 +111,7 @@ models:
         usesScalarValueType: false
       - customClassName: ""
         isIndexed: false
-        isOptional: true
+        isOptional: false
         isTransient: false
         name: "double"
         propertyType: "attribute"
@@ -131,7 +131,7 @@ models:
         usesScalarValueType: true
       - customClassName: ""
         isIndexed: false
-        isOptional: true
+        isOptional: false
         isTransient: false
         name: "int16"
         propertyType: "attribute"
@@ -151,7 +151,7 @@ models:
         usesScalarValueType: true
       - customClassName: ""
         isIndexed: false
-        isOptional: true
+        isOptional: false
         isTransient: false
         name: "int64"
         propertyType: "attribute"
@@ -161,9 +161,69 @@ models:
         usesScalarValueType: true
       - customClassName: ""
         isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "optionalBoolean"
+        propertyType: "attribute"
+        type: "Boolean"
+        typeName: "Bool"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "optionalDouble"
+        propertyType: "attribute"
+        type: "Double"
+        typeName: "Double"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
         isOptional: false
         isTransient: false
-        name: "nonOptional"
+        name: "optionalFloat"
+        propertyType: "attribute"
+        type: "Float"
+        typeName: "Float"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "optionalInt16"
+        propertyType: "attribute"
+        type: "Integer 16"
+        typeName: "Int16"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: false
+        isTransient: false
+        name: "optionalInt32"
+        propertyType: "attribute"
+        type: "Integer 32"
+        typeName: "Int32"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "optionalInt64"
+        propertyType: "attribute"
+        type: "Integer 64"
+        typeName: "Int64"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "optionalString"
         propertyType: "attribute"
         type: "String"
         typeName: "String"
@@ -171,7 +231,7 @@ models:
         usesScalarValueType: false
       - customClassName: ""
         isIndexed: false
-        isOptional: true
+        isOptional: false
         isTransient: false
         name: "string"
         propertyType: "attribute"

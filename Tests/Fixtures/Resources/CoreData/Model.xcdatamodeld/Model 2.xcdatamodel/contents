@@ -15,16 +15,22 @@
                 <entry key="key" value="value"/>
             </userInfo>
         </attribute>
-        <attribute name="boolean" optional="NO" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="boolean" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="decimal" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="double" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="float" optional="NO" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="int16" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="int32" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="int64" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="nonOptional" attributeType="String" syncable="YES"/>
-        <attribute name="string" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="double" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="float" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="int16" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="int32" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="int64" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="optionalBoolean" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="optionalDouble" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="optionalFloat" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="optionalInt16" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="optionalInt32" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="optionalInt64" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="optionalString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="string" attributeType="String" syncable="YES"/>
         <attribute name="transformable" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="transient" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="uri" optional="YES" attributeType="URI" syncable="YES"/>
@@ -70,7 +76,7 @@
         <element name="AutoClassGen" positionX="-36" positionY="135" width="128" height="45"/>
         <element name="AutoExtensionGen" positionX="-27" positionY="144" width="128" height="45"/>
         <element name="ChildEntity" positionX="-36" positionY="126" width="128" height="45"/>
-        <element name="MainEntity" positionX="-63" positionY="-18" width="128" height="359"/>
+        <element name="MainEntity" positionX="-63" positionY="-18" width="128" height="449"/>
         <element name="NewEntity" positionX="-27" positionY="144" width="128" height="60"/>
         <element name="SecondaryEntity" positionX="-54" positionY="108" width="128" height="105"/>
     </elements>
