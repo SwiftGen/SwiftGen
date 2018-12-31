@@ -1,9 +1,7 @@
 //
-//  YamlContext.swift
-//  SwiftGenKit
-//
-//  Created by John McIntosh on 1/17/18.
-//  Copyright © 2018 AliSoftware. All rights reserved.
+// SwiftGenKit
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import Foundation

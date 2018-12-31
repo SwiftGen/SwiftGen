@@ -1,10 +1,9 @@
 //
-//  YAML.swift
-//  SwiftGenKit
+// SwiftGenKit
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
-//  Created by David Jennes on 30/07/2018.
-//  Copyright © 2018 AliSoftware. All rights reserved.
-//
+
 import Foundation
 import PathKit
 import Yams

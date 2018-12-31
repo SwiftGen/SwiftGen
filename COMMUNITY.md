@@ -16,7 +16,7 @@ It can be overwhelming to be offered the chance to wipe the source code for a pr
 
 As an organization contributor, you can merge other people's pull requests, or other contributors can merge yours. You won't be assigned a pull request, but you're welcome to jump in and take a code review on topics that interest you.
 
-This project is not continuously deployed, there is space for debate after review too. Offering everyone the chance to revert, or make an amending pull request. If it feels right, merge. 
+This project is not continuously deployed, there is space for debate after review too. Offering everyone the chance to revert, or make an amending pull request. If it feels right, merge.
 
 #### How can we help you get comfortable contributing?
 

@@ -1,9 +1,7 @@
 //
-//  CoreDataTests.swift
-//  SwiftGen UnitTests
-//
-//  Created by Grant Butler on 7/31/18.
-//  Copyright © 2018 AliSoftware. All rights reserved.
+// SwiftGenKit UnitTests
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 @testable import SwiftGenKit

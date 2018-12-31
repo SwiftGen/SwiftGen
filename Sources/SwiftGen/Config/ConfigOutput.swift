@@ -1,9 +1,7 @@
 //
-//  ConfigOutput.swift
-//  swiftgen
-//
-//  Created by David Jennes on 05/05/2018.
-//  Copyright © 2018 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import PathKit

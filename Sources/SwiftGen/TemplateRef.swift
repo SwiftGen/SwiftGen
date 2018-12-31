@@ -1,9 +1,7 @@
 //
-//  TemplateRef.swift
-//  swiftgen
-//
-//  Created by Olivier HALLIGON on 11/10/2017.
-//  Copyright © 2017 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import PathKit
