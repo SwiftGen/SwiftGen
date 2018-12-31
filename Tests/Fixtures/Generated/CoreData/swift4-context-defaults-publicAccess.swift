@@ -149,8 +149,8 @@ public class MainEntity: NSManagedObject {
   @NSManaged public var transient: String?
   @NSManaged public var uri: URL?
   @NSManaged public var uuid: UUID?
-  @NSManaged public var manyToMany: Set<SecondaryEntity>
-  @NSManaged public var oneToMany: NSOrderedSet
+  @NSManaged public var manyToMany: Set<SecondaryEntity>?
+  @NSManaged public var oneToMany: NSOrderedSet?
   @NSManaged public var oneToOne: SecondaryEntity?
   @NSManaged public var fetchedProperty: [NewEntity]
   // swiftlint:enable discouraged_optional_boolean
@@ -310,7 +310,7 @@ public class SecondaryEntity: NSManagedObject {
 
   // swiftlint:disable discouraged_optional_boolean
   @NSManaged public var name: String
-  @NSManaged public var manyToMany: Set<MainEntity>
+  @NSManaged public var manyToMany: Set<MainEntity>?
   @NSManaged public var oneToMany: MainEntity?
   @NSManaged public var oneToOne: MainEntity?
   // swiftlint:enable discouraged_optional_boolean
