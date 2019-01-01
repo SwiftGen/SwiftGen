@@ -52,13 +52,14 @@ extension ConfigEntryOutput {
 /// Convert to CommandLine-equivalent string (for verbose mode, printing linting info, …)
 ///
 extension ConfigEntryOutput {
-  func commandLine(forCommand cmd: String, inputs: [Path]) -> String {
+  func commandLine(forCommand cmd: String, inputs: [Path], filter: String?) -> String {
     let tplFlag: String = {
       switch self.template {
       case .name(let name): return "-t \(name)"
       case .path(let path): return "-p \(path.string)"
       }
     }()
+    let filterFlag = filter.map { "--filter \($0)" } ?? ""
     let params = Parameters.flatten(dictionary: self.parameters)
 
     return [
@@ -67,6 +68,7 @@ extension ConfigEntryOutput {
       tplFlag,
       params.map { "--param \($0)" }.joined(separator: " "),
       "-o \(self.output)",
+      filterFlag,
       inputs.map { $0.string }.joined(separator: " ")
     ].filter { !$0.isEmpty }.joined(separator: " ")
   }
