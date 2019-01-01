@@ -55,8 +55,8 @@ extension ConfigEntryOutput {
   func commandLine(forCommand cmd: String, inputs: [Path], filter: String?) -> String {
     let tplFlag: String = {
       switch self.template {
-      case .name(let name): return "-t \(name)"
-      case .path(let path): return "-p \(path.string)"
+      case .name(let name): return "--templateName \(name)"
+      case .path(let path): return "--templatePath \(path.string)"
       }
     }()
     let filterFlag = filter.map { "--filter \($0)" } ?? ""
@@ -67,7 +67,7 @@ extension ConfigEntryOutput {
       cmd,
       tplFlag,
       params.map { "--param \($0)" }.joined(separator: " "),
-      "-o \(self.output)",
+      "--output \(self.output)",
       filterFlag,
       inputs.map { $0.string }.joined(separator: " ")
     ].filter { !$0.isEmpty }.joined(separator: " ")
