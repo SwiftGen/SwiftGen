@@ -25,6 +25,10 @@ _None_
 * Expand environment variables in YAML files.  
   [Wolfgang Lutz](https://github.com/lutzifer)
   [#355](https://github.com/SwiftGen/SwiftGen/issues/#355)
+* Each command now accepts a `filter` option, which accepts a regular expression for filtering input paths. The filter is applied to individual paths as well as when the command recurses into directories.  
+  [David Jennes](https://github.com/djbe)
+  [#383](https://github.com/SwiftGen/SwiftGen/issues/383)
+  [#570](https://github.com/SwiftGen/SwiftGen/pull/570)
 
 ### Bug Fixes
 
