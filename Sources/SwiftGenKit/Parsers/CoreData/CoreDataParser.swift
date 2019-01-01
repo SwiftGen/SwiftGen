@@ -23,6 +23,14 @@ public enum CoreData {
     }
   }
 
+  private enum Constants {
+    static let modelExtension = "xcdatamodel"
+    static let modelBundleExtension = "xcdatamodeld"
+    static let currentVersionFile = ".xccurrentversion"
+    static let currentVersionKey = "_XCCurrentVersionName"
+    static let contentsFile = "contents"
+  }
+
   public final class Parser: SwiftGenKit.Parser {
     public var warningHandler: Parser.MessageHandler?
     var models: [Model] = []
@@ -31,42 +39,40 @@ public enum CoreData {
       self.warningHandler = warningHandler
     }
 
-    public func parse(path: Path) throws {
-      if path.extension == "xcdatamodeld" {
+    public static let defaultFilter = ".*\\.xcdatamodeld?"
+
+    public func parse(path: Path, relativeTo parent: Path) throws {
+      if path.extension == Constants.modelBundleExtension {
         guard let modelPath = findCurrentModel(path: path) else {
           throw ParserError.invalidFile(path: path, reason: "Current version of Core Data model could not be found.")
         }
-        try parse(path: modelPath)
-      } else if path.extension == "xcdatamodel" {
+        try parse(path: modelPath, relativeTo: parent)
+      } else if path.extension == Constants.modelExtension {
         try addModel(path: path)
       } else {
-        let dirChildren = path.iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
-
-        for file in dirChildren where file.extension == "xcdatamodeld" || file.extension == "xcdatamodel" {
-          try parse(path: file)
-        }
+        throw ParserError.invalidFormat(reason: "Unknown file type for \(path)")
       }
     }
 
     private func findCurrentModel(path: Path) -> Path? {
-      let currentVersionPath = path + ".xccurrentversion"
+      let currentVersionPath = path + Constants.currentVersionFile
       if currentVersionPath.exists {
         guard let currentVersionDictionary = NSDictionary(contentsOf: currentVersionPath.url) else {
           return nil
         }
 
-        guard let currentVersionModelFilename = currentVersionDictionary["_XCCurrentVersionName"] as? String else {
+        guard let currentVersionModelFilename = currentVersionDictionary[Constants.currentVersionKey] as? String else {
           return nil
         }
 
         return path + Path(currentVersionModelFilename)
       } else {
-        return path.first { $0.extension == "xcdatamodel" }
+        return path.first { $0.extension == Constants.modelExtension }
       }
     }
 
     private func addModel(path: Path) throws {
-      let contentsPath = path + "contents"
+      let contentsPath = path + Constants.contentsFile
       guard contentsPath.exists else {
         throw ParserError.invalidFormat(reason: "Only models in Xcode 4.0+ format are supported")
       }

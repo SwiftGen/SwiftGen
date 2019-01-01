@@ -36,8 +36,10 @@ public enum Strings {
       self.warningHandler = warningHandler
     }
 
+    public static let defaultFilter = ".*\\.strings"
+
     // Localizable.strings files are generally UTF16, not UTF8!
-    public func parse(path: Path) throws {
+    public func parse(path: Path, relativeTo parent: Path) throws {
       let name = path.lastComponentWithoutExtension
 
       guard tables[name] == nil else {

@@ -17,27 +17,25 @@ public enum Fonts {
       self.warningHandler = warningHandler
     }
 
-    public func parse(path: Path) {
-      let dirChildren = path.iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
-      let parentDir = path.absolute().parent()
+    public static let defaultFilter = ".*\\.(?i:otf|ttc|ttf)"
 
-      for file in dirChildren {
-        var value: AnyObject?
-        let url = file.url as NSURL
-        try? url.getResourceValue(&value, forKey: URLResourceKey.typeIdentifierKey)
-        guard let uti = value as? String else {
-          warningHandler?("Unable to determine the Universal Type Identifier for file \(file)", #file, #line)
-          continue
-        }
-        guard UTTypeConformsTo(uti as CFString, "public.font" as CFString) else { continue }
-        let fonts = CTFont.parse(file: file, relativeTo: parentDir)
-        fonts.forEach { addFont($0) }
+    public func parse(path: Path, relativeTo parent: Path) throws {
+      guard let values = try? path.url.resourceValues(forKeys: [.typeIdentifierKey]),
+        let uti = values.typeIdentifier else {
+        warningHandler?("Unable to determine the Universal Type Identifier for file \(path)", #file, #line)
+        return
       }
+      guard UTTypeConformsTo(uti as CFString, kUTTypeFont) else {
+        warningHandler?("File is not a known font type: \(path)", #file, #line)
+        return
+      }
+
+      let fonts = CTFont.parse(file: path, relativeTo: parent)
+      fonts.forEach { addFont($0) }
     }
 
     private func addFont(_ font: Font) {
       let familyName = font.familyName
-
       entries[familyName, default: []].insert(font)
     }
   }

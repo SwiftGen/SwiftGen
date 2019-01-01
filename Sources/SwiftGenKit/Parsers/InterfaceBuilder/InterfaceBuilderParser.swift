@@ -31,16 +31,10 @@ public enum InterfaceBuilder {
       self.warningHandler = warningHandler
     }
 
-    public func parse(path: Path) throws {
-      if path.extension == "storyboard" {
-        try addStoryboard(at: path)
-      } else {
-        let dirChildren = path.iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
+    public static let defaultFilter = ".*\\.storyboard"
 
-        for file in dirChildren where file.extension == "storyboard" {
-          try addStoryboard(at: file)
-        }
-      }
+    public func parse(path: Path, relativeTo parent: Path) throws {
+      try addStoryboard(at: path)
     }
 
     func addStoryboard(at path: Path) throws {

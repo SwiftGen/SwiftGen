@@ -34,23 +34,33 @@ public enum Colors {
     var palettes = [Palette]()
     public var warningHandler: Parser.MessageHandler?
 
+    private static let subParsers: [ColorsFileTypeParser.Type] = [
+      CLRFileParser.self,
+      JSONFileParser.self,
+      TextFileParser.self,
+      XMLFileParser.self
+    ]
+
     public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
       self.warningHandler = warningHandler
 
-      register(parser: CLRFileParser.self)
-      register(parser: JSONFileParser.self)
-      register(parser: TextFileParser.self)
-      register(parser: XMLFileParser.self)
+      for parser in Parser.subParsers {
+        register(parser: parser)
+      }
     }
 
-    public func parse(path: Path) throws {
+    public static var defaultFilter: String {
+      let extensions = Parser.subParsers.flatMap { $0.extensions }.sorted().joined(separator: "|")
+      return ".*\\.(?i:\(extensions))"
+    }
+
+    public func parse(path: Path, relativeTo parent: Path) throws {
       guard let parserType = parsers[path.extension?.lowercased() ?? ""] else {
-        throw ParserError.unsupportedFileType(path: path, supported: Array(parsers.keys))
+        throw ParserError.unsupportedFileType(path: path, supported: Array(parsers.keys.sorted()))
       }
 
       let parser = parserType.init()
       let palette = try parser.parseFile(at: path)
-
       palettes += [palette]
     }
 
