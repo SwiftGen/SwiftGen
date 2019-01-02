@@ -1,8 +1,7 @@
 //
 // SwiftGenKit
-// Copyright (c) 2017 SwiftGen
-// Created by Derek Ostrander on 3/7/16.
-// MIT License
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import Foundation

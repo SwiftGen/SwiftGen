@@ -1,6 +1,6 @@
 //
-// SwiftGen
-// Copyright (c) 2017 Olivier Halligon
+// SwiftGen UnitTests
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 

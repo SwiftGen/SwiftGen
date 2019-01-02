@@ -1,9 +1,7 @@
 //
-//  FontsTests.swift
-//  SwiftGen
-//
-//  Created by Derek Ostrander on 3/8/16.
-//  Copyright © 2016 AliSoftware. All rights reserved.
+// Templates UnitTests
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import StencilSwiftKit

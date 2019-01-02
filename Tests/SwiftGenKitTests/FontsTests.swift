@@ -1,9 +1,7 @@
 //
-//  FontsTests.swift
-//  SwiftGenKit
-//
-//  Created by Derek Ostrander on 3/8/16.
-//  Copyright © 2017 AliSoftware. All rights reserved.
+// SwiftGenKit UnitTests
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import AppKit.NSFont

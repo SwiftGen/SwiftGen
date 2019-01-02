@@ -1,9 +1,7 @@
 //
-//  FetchRequest.swift
-//  SwiftGenKit
-//
-//  Created by Grant Butler on 7/23/18.
-//  Copyright © 2018 AliSoftware. All rights reserved.
+// SwiftGenKit
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import Foundation

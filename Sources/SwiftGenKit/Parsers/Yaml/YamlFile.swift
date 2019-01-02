@@ -1,9 +1,7 @@
 //
-//  DataFile.swift
-//  SwiftGenKit
-//
-//  Created by David Jennes on 04/05/2018.
-//  Copyright © 2018 AliSoftware. All rights reserved.
+// SwiftGenKit
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import Foundation

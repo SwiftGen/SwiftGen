@@ -1,9 +1,7 @@
 //
-//  ConfigEntry.swift
-//  swiftgen
-//
-//  Created by Olivier Halligon on 21/10/2017.
-//  Copyright © 2017 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import PathKit

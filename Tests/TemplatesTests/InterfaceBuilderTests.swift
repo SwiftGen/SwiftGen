@@ -1,9 +1,7 @@
 //
-//  InterfaceBuilderTestVariations.swift
-//  Templates UnitTests
-//
-//  Created by David Jennes on 05/09/2018.
-//  Copyright © 2018 AliSoftware. All rights reserved.
+// Templates UnitTests
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import StencilSwiftKit
