@@ -768,7 +768,7 @@ let bananas = L10n.bananasOwner(5, "Olivier")
 
 # Licence
 
-This code and tool is under the MIT Licence. See the `LICENSE` file in this repository.
+This code and tool is under the MIT Licence. See the `LICENCE` file in this repository.
 
 ## Attributions
 
