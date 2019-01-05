@@ -34,6 +34,8 @@ import Foundation
   {{accessModifier}} static func {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}({% call parametersBlock string.types %}) -> String {
     return {{enumName}}.tr("{{table}}", "{{string.key}}", {% call argumentsBlock string.types %})
   }
+  {% elif param.localizeFunction %}
+  {{accessModifier}} static var {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: String { return {{enumName}}.tr("{{table}}", "{{string.key}}") }
   {% else %}
   {{accessModifier}} static let {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{table}}", "{{string.key}}")
   {% endif %}
@@ -62,7 +64,7 @@ import Foundation
 extension {{enumName}} {
   fileprivate static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
     // swiftlint:disable:next nslocalizedstring_key
-    let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
+    let format = {{param.localizeFunction|default:"NSLocalizedString"}}(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
