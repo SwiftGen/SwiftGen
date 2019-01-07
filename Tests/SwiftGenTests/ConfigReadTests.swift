@@ -29,6 +29,7 @@ class ConfigReadTests: XCTestCase {
       }
 
       XCTAssertEqual(entry.inputs, ["Sources1/Folder"])
+      XCTAssertEqual(entry.filter, ".*\\.strings")
 
       XCTAssertEqual(entry.outputs.count, 1)
       guard let output = entry.outputs.first else {

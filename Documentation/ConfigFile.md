@@ -14,7 +14,8 @@ The configuration file is a YAML file structured like this (example):
 input_dir: Sources/Resources
 output_dir: Sources/Generated/
 strings:
-  inputs: Base.lproj/Localizable.strings
+  inputs: Base.lproj
+  filter: .*\.strings
   outputs:
     - templateName: structured-swift4
       output: L10n-Constants.swift
@@ -61,6 +62,7 @@ Each key corresponding to a SwiftGen subcommands (`colors`, `coredata`, `fonts`,
 | Subkey | Type | Description |
 |--------|------|-------------|
 | `inputs` | Path or Array of Paths | The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `Localizable.strings` file for the `strings` command, etc). |
+| `filter` | Regular Expression | The regular expression to apply to each input path, only paths matching the given filter will be used. Note that each command has a default built-in filter, which you can override with this option. |
 | `outputs` | Array | A list of output descriptions, composed of a template and a file output. |
 | `paths` | Path or Array of Paths | **Deprecated** The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `Localizable.strings` file for the `strings` command, etc). |
 | `templateName` | String | **Deprecated** The name of the template to use. If you provide a value for this, you shouldn't also provide a value for `templatePath`. |

@@ -1,7 +1,7 @@
 //
 // SwiftGenKit
 // Copyright © 2019 SwiftGen
-// MIT License
+// MIT Licence
 //
 
 import Foundation
