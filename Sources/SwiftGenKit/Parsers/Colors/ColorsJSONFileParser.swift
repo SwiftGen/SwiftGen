@@ -15,8 +15,10 @@ extension Colors {
       do {
         let json = try JSONSerialization.jsonObject(with: try path.read(), options: [])
         guard let dict = json as? [String: String] else {
-          throw ParserError.invalidFile(path: path,
-                                        reason: "Invalid structure, must be an object with string values.")
+          throw ParserError.invalidFile(
+            path: path,
+            reason: "Invalid structure, must be an object with string values."
+          )
         }
 
         var colors = [String: UInt32]()

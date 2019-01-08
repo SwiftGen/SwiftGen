@@ -19,23 +19,26 @@ class CoreDataTests: XCTestCase {
     return [
       (context: context,
        suffix: ""),
-      (context: try StencilContext.enrich(context: context,
-                                          parameters: ["publicAccess"]),
+      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
        suffix: "-publicAccess")
     ]
   }
 
   func testSwift3() {
-    test(template: "swift3",
-         contextNames: Contexts.all,
-         directory: .coreData,
-         contextVariations: variations)
+    test(
+      template: "swift3",
+      contextNames: Contexts.all,
+      directory: .coreData,
+      contextVariations: variations
+    )
   }
 
   func testSwift4() {
-    test(template: "swift4",
-         contextNames: Contexts.all,
-         directory: .coreData,
-         contextVariations: variations)
+    test(
+      template: "swift4",
+      contextNames: Contexts.all,
+      directory: .coreData,
+      contextVariations: variations
+    )
   }
 }

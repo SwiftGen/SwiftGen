@@ -63,14 +63,18 @@ func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #
   XCTFail(error, file: file, line: line)
 }
 
-func XCTAssertEqualDict(_ result: [String: Any],
-                        _ expected: [String: Any],
-                        file: StaticString = #file,
-                        line: UInt = #line) {
-  XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected),
-                "expected \(expected), got \(result)",
-                file: file,
-                line: line)
+func XCTAssertEqualDict(
+  _ result: [String: Any],
+  _ expected: [String: Any],
+  file: StaticString = #file,
+  line: UInt = #line
+) {
+  XCTAssertTrue(
+    NSDictionary(dictionary: result).isEqual(to: expected),
+    "expected \(expected), got \(result)",
+    file: file,
+    line: line
+  )
 }
 
 class Fixtures {

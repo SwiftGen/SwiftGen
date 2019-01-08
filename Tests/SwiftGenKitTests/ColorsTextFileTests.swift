@@ -38,5 +38,4 @@ class ColorsTextFileTests: XCTestCase {
       XCTFail("Unexpected error occured while parsing: \(error)")
     }
   }
-
 }

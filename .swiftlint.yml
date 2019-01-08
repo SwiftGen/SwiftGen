@@ -1,9 +1,13 @@
+swiftlint_version: 0.29.3
+
 opt_in_rules:
  - anyobject_protocol
  - array_init
  - attributes
+ - closure_body_length
  - closure_end_indentation
  - closure_spacing
+ - collection_alignment
  - contains_over_first_not_nil
  - convenience_type
  - discouraged_optional_boolean
@@ -15,15 +19,23 @@ opt_in_rules:
  - file_header
  - first_where
  - force_unwrapping
+ - identical_operands
  - implicit_return
  - implicitly_unwrapped_optional
+ - inert_defer
  - joined_default_parameter
+ - last_where
+ - legacy_hashing
+ - legacy_random
  - literal_expression_end_indentation
  - lower_acl_than_parent
  - modifier_order
  - multiline_arguments
+ - multiline_arguments_brackets
  - multiline_function_chains
+ - multiline_literal_brackets
  - multiline_parameters
+ - multiline_parameters_brackets
  - number_separator
  - operator_usage_whitespace
  - overridden_super_call
@@ -32,12 +44,19 @@ opt_in_rules:
  - private_outlet
  - prohibited_super_call
  - redundant_nil_coalescing
+ - redundant_objc_attribute
  - sorted_first_last
  - sorted_imports
+ - static_operator
+ - toggle_bool
  - trailing_closure
  - unavailable_function
  - unneeded_parentheses_in_closure_argument
+ - unused_control_flow_label
  - vertical_parameter_alignment_on_call
+ - vertical_whitespace_closing_braces
+ - vertical_whitespace_opening_braces
+ - xct_specific_matcher
  - yoda_condition
 
 # Rules customization

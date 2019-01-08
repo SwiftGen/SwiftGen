@@ -38,9 +38,11 @@ let main = Group {
   }
 }
 
-main.run("""
+main.run(
+  """
   SwiftGen v\(version) (\
   Stencil v\(stencilVersion), \
   StencilSwiftKit v\(stencilSwiftKitVersion), \
   SwiftGenKit v\(swiftGenKitVersion))
-  """)
+  """
+)

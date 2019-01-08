@@ -28,6 +28,7 @@ extension AssetsCatalog.Parser {
   }
 
   private func structure(entries: [AssetsCatalog.Entry]) -> [[String: Any]] {
+    // swiftlint:disable:next closure_body_length
     return entries.map { entry in
       switch entry {
       case .color(let name, let value):
