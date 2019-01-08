@@ -36,6 +36,6 @@ post_install do | installer |
   # copy Info.plist files
   pods_with_info_plist = %w(Stencil StencilSwiftKit)
   pods_with_info_plist.each do |pod|
-    FileUtils.cp_r("Pods/Target Support Files/#{pod}/Info.plist", "Resources/#{pod}-Info.plist")
+    FileUtils.cp_r("Pods/Target Support Files/#{pod}/#{pod}-Info.plist", "Resources/#{pod}-Info.plist")
   end
 end

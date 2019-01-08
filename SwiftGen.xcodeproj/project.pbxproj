@@ -860,7 +860,6 @@
 				09A87B4D1BCCA2C600D9B9F5 /* Frameworks */,
 				09A87B4E1BCCA2C600D9B9F5 /* Resources */,
 				D3C83293B5D60F91CC5DF247 /* [CP] Embed Pods Frameworks */,
-				5CE73CBD9905B2BBCDA10046 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 				09A87B721BCCA60900D9B9F5 /* PBXBuildRule */,
@@ -886,7 +885,6 @@
 				234F7E6C1DEBD5C5001B3C10 /* Resources */,
 				DD428E041FC50F56001649D6 /* Embed Frameworks */,
 				A99480F22B553BF8A273ED05 /* [CP] Embed Pods Frameworks */,
-				4FDF0616E5DB61E5FB1CD7BE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -908,7 +906,6 @@
 				DD428DF41FC50F56001649D6 /* Frameworks */,
 				DD428DF51FC50F56001649D6 /* Headers */,
 				DD428DF61FC50F56001649D6 /* Resources */,
-				60153109235742825B240B34 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -930,7 +927,6 @@
 				DDDE50371FAF687A004203BE /* Resources */,
 				D523545564DCC237D6EE770B /* [CP] Embed Pods Frameworks */,
 				DD9F4769206ADCD4006B0DCA /* ⚠️ SwiftLint (generated output) */,
-				06E30023A707E022266A3B85 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 				DDDE50451FAF687A004203BE /* PBXBuildRule */,
@@ -955,7 +951,6 @@
 				DDDE51A91FAF814A004203BE /* Frameworks */,
 				DDDE51AB1FAF814A004203BE /* Resources */,
 				2C9D66D627FB898D3DA8D22E /* [CP] Embed Pods Frameworks */,
-				3E6BE7EF6442EE9C6DC4078F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 				DDDE51B11FAF814A004203BE /* PBXBuildRule */,
@@ -1087,21 +1082,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		06E30023A707E022266A3B85 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		08AE656536A8A1621DA57624 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1140,7 +1120,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 				"${BUILT_PRODUCTS_DIR}/PathKit/PathKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Yams/Yams.framework",
@@ -1153,7 +1133,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3C77E1DB46FD97DA1A720A7E /* [CP] Check Pods Manifest.lock */ = {
@@ -1174,21 +1154,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3E6BE7EF6442EE9C6DC4078F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		46464263FC5E8C22B47C0BCB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1205,21 +1170,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4FDF0616E5DB61E5FB1CD7BE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		51B3E1E55873F072BF1E3406 /* [CP] Check Pods Manifest.lock */ = {
@@ -1240,43 +1190,13 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5CE73CBD9905B2BBCDA10046 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		60153109235742825B240B34 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A99480F22B553BF8A273ED05 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-swiftgen/Pods-swiftgen-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Commander/Commander.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 				"${BUILT_PRODUCTS_DIR}/PathKit/PathKit.framework",
@@ -1295,7 +1215,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-swiftgen/Pods-swiftgen-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C44CC69B5D179B3BE467737C /* [CP] Check Pods Manifest.lock */ = {
@@ -1322,7 +1242,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Commander/Commander.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 				"${BUILT_PRODUCTS_DIR}/PathKit/PathKit.framework",
@@ -1341,7 +1261,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-swiftgen-SwiftGen UnitTests/Pods-swiftgen-SwiftGen UnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D523545564DCC237D6EE770B /* [CP] Embed Pods Frameworks */ = {
@@ -1350,7 +1270,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Commander/Commander.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 				"${BUILT_PRODUCTS_DIR}/PathKit/PathKit.framework",
@@ -1369,7 +1289,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-swiftgen-Templates UnitTests/Pods-swiftgen-Templates UnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DD9F4765206ADC29006B0DCA /* ⚠️ SwiftLint */ = {
