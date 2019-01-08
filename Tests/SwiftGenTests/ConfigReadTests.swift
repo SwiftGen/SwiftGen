@@ -34,11 +34,14 @@ class ConfigReadTests: XCTestCase {
       guard let output = entry.outputs.first else {
         return XCTFail("Expected a single strings entry output")
       }
-      XCTAssertEqualDict(output.parameters, [
-        "foo": 5,
-        "bar": ["bar1": 1, "bar2": 2, "bar3": [3, 4, ["bar3a": 50]]],
-        "baz": ["Hey", "$HELLO world"]
-      ])
+      XCTAssertEqualDict(
+        output.parameters,
+        [
+          "foo": 5,
+          "bar": ["bar1": 1, "bar2": 2, "bar3": [3, 4, ["bar3a": 50]]],
+          "baz": ["Hey", "$HELLO world"]
+        ]
+      )
       XCTAssertEqual(output.output, "strings.swift")
       XCTAssertEqual(output.template, .name("structured-swift3"))
     } catch let error {
@@ -57,10 +60,10 @@ class ConfigReadTests: XCTestCase {
 
     do {
       let paramsConfig = try Config(file: paramsFile)
-      let envConfig = try Config(file: envFile, env: [
-        "SWIFTGEN_OUTPUT_DIR": "Common/Generated",
-        "HELLO": "Hey"
-      ])
+      let envConfig = try Config(
+        file: envFile,
+        env: ["SWIFTGEN_OUTPUT_DIR": "Common/Generated", "HELLO": "Hey"]
+      )
 
       XCTAssertEqual(paramsConfig.outputDir, envConfig.outputDir)
       guard let paramsList = paramsConfig.commands["strings"]?.first?.outputs.first?.parameters["baz"] as? [String],
@@ -188,10 +191,12 @@ class ConfigReadTests: XCTestCase {
           fatalError("Fixture not found")
         }
         _ = try Config(file: Path(path))
-        XCTFail("""
+        XCTFail(
+          """
           Trying to parse config file \(configFile) should have thrown \
           error \(expectedError) but didn't throw at all
-          """)
+          """
+        )
       } catch let error {
         XCTAssertEqual(
           String(describing: error),

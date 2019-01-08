@@ -59,12 +59,11 @@ enum Metadata {
   }
 
   private static func describe(dictionary: [String: Any]) -> [String: Any] {
-    return Dictionary(uniqueKeysWithValues: dictionary.map { item in
-      (
-        key: item.key,
-        value: Metadata.generate(for: item.value)
-      )
-    })
+    return Dictionary(
+      uniqueKeysWithValues: dictionary.map { item in
+        (key: item.key, value: Metadata.generate(for: item.value))
+      }
+    )
   }
 
   private static func describe(arrayElement array: [Any]) -> [String: Any] {

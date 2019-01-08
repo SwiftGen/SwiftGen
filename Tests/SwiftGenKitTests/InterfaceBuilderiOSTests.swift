@@ -64,9 +64,11 @@ class InterfaceBuilderiOSTests: XCTestCase {
     let parser = InterfaceBuilder.Parser()
     try parser.parse(path: Fixtures.directory(sub: .interfaceBuilderiOS))
 
-    XCTAssert(parser.storyboards.contains {
-      $0.scenes.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName } &&
-      $0.segues.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName }
-    })
+    XCTAssert(
+      parser.storyboards.contains {
+        $0.scenes.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName } &&
+        $0.segues.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName }
+      }
+    )
   }
 }

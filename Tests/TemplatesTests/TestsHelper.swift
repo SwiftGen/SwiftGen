@@ -151,17 +151,21 @@ extension XCTestCase {
    - Parameter resourceDirectory: The directory to look for files in (corresponds to the command)
    - Parameter contextVariations: Optional closure to generate context variations.
    */
-  func test(template templateName: String,
-            contextNames: [String],
-            directory: Fixtures.Directory,
-            resourceDirectory: Fixtures.Directory? = nil,
-            outputDirectory: Fixtures.Directory? = nil,
-            file: StaticString = #file,
-            line: UInt = #line,
-            contextVariations: VariationGenerator? = nil) {
+  func test(
+    template templateName: String,
+    contextNames: [String],
+    directory: Fixtures.Directory,
+    resourceDirectory: Fixtures.Directory? = nil,
+    outputDirectory: Fixtures.Directory? = nil,
+    file: StaticString = #file,
+    line: UInt = #line,
+    contextVariations: VariationGenerator? = nil
+  ) {
     let templateString = Fixtures.template(for: "\(templateName).stencil", sub: directory)
-    let template = StencilSwiftTemplate(templateString: templateString,
-                                        environment: stencilSwiftEnvironment())
+    let template = StencilSwiftTemplate(
+      templateString: templateString,
+      environment: stencilSwiftEnvironment()
+    )
 
     // default values
     let contextVariations = contextVariations ?? { [(context: $1, suffix: "")] }

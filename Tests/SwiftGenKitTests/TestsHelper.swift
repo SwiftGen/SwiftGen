@@ -65,7 +65,6 @@ func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #
 }
 
 func diff(_ result: [String: Any], _ expected: [String: Any], path: String = "") -> String? {
-
   // check keys
   if Set(result.keys) != Set(expected.keys) {
     let lhs = result.keys.map { " - \($0): \(result[$0] ?? "")" }.joined(separator: "\n")
@@ -152,11 +151,13 @@ func convertToString(_ value: Any) -> String? {
   }
 }
 
-func XCTDiffContexts(_ result: [String: Any],
-                     expected name: String,
-                     sub directory: Fixtures.Directory,
-                     file: StaticString = #file,
-                     line: UInt = #line) {
+func XCTDiffContexts(
+  _ result: [String: Any],
+  expected name: String,
+  sub directory: Fixtures.Directory,
+  file: StaticString = #file,
+  line: UInt = #line
+) {
   let fileName = "\(name).yaml"
 
   if ProcessInfo().environment["GENERATE_CONTEXTS"] == "YES" {

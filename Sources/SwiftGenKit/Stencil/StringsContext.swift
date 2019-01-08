@@ -56,8 +56,8 @@ extension Strings.Parser {
   private func structure(
     entries: [Strings.Entry],
     atKeyPath keyPath: [String] = [],
-    usingMapper mapper: @escaping Mapper) -> [String: Any] {
-
+    usingMapper mapper: @escaping Mapper
+  ) -> [String: Any] {
     var structuredStrings: [String: Any] = [:]
     if let name = keyPath.last {
       structuredStrings["name"] = name

@@ -59,12 +59,16 @@ extension ParserCLI {
         try parser.parse(paths: paths)
 
         let resolvedlTemplateName = templateName.isEmpty ? oldTemplateName : templateName
-        let templateRef = try TemplateRef(templateShortName: resolvedlTemplateName,
-                                          templateFullPath: templatePath)
+        let templateRef = try TemplateRef(
+          templateShortName: resolvedlTemplateName,
+          templateFullPath: templatePath
+        )
         let templateRealPath = try templateRef.resolvePath(forSubcommand: self.templateFolder)
 
-        let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
-                                                environment: stencilSwiftEnvironment())
+        let template = try StencilSwiftTemplate(
+          templateString: templateRealPath.read(),
+          environment: stencilSwiftEnvironment()
+        )
 
         let context = parser.stencilContext()
         let enriched = try StencilContext.enrich(context: context, parameters: parameters)

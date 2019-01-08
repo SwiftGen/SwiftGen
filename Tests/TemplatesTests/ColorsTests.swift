@@ -20,42 +20,50 @@ class ColorsTests: XCTestCase {
       return [
         (context: context,
          suffix: ""),
-        (context: try StencilContext.enrich(context: context,
-                                            parameters: ["enumName=\(customName)",
-                                                         "colorAliasName=XCTColor"]),
+        (context: try StencilContext.enrich(
+           context: context,
+           parameters: ["enumName=\(customName)", "colorAliasName=XCTColor"]
+         ),
          suffix: "-customname"),
-        (context: try StencilContext.enrich(context: context,
-                                            parameters: ["publicAccess"]),
+        (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
          suffix: "-publicAccess")
       ]
     }
   }
 
   func testSwift3() {
-    test(template: "swift3",
-         contextNames: Contexts.all,
-         directory: .colors,
-         contextVariations: variations(customName: "XCTColors"))
+    test(
+      template: "swift3",
+      contextNames: Contexts.all,
+      directory: .colors,
+      contextVariations: variations(customName: "XCTColors")
+    )
   }
 
   func testSwift4() {
-    test(template: "swift4",
-         contextNames: Contexts.all,
-         directory: .colors,
-         contextVariations: variations(customName: "XCTColors"))
+    test(
+      template: "swift4",
+      contextNames: Contexts.all,
+      directory: .colors,
+      contextVariations: variations(customName: "XCTColors")
+    )
   }
 
   func testLiteralsSwift3() {
-    test(template: "literals-swift3",
-         contextNames: Contexts.all,
-         directory: .colors,
-         contextVariations: variations(customName: "UIColor"))
+    test(
+      template: "literals-swift3",
+      contextNames: Contexts.all,
+      directory: .colors,
+      contextVariations: variations(customName: "UIColor")
+    )
   }
 
   func testLiteralsSwift4() {
-    test(template: "literals-swift4",
-         contextNames: Contexts.all,
-         directory: .colors,
-         contextVariations: variations(customName: "UIColor"))
+    test(
+      template: "literals-swift4",
+      contextNames: Contexts.all,
+      directory: .colors,
+      contextVariations: variations(customName: "UIColor")
+    )
   }
 }

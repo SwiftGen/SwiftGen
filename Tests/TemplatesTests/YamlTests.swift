@@ -19,26 +19,28 @@ class YamlTests: XCTestCase {
     return [
       (context: context,
        suffix: ""),
-      (context: try StencilContext.enrich(context: context,
-                                          parameters: ["enumName=CustomYAML"]),
+      (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomYAML"]),
        suffix: "-customname"),
-      (context: try StencilContext.enrich(context: context,
-                                          parameters: ["publicAccess"]),
+      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
        suffix: "-publicAccess")
     ]
   }
 
   func testInlineSwift3() {
-    test(template: "inline-swift3",
-         contextNames: Contexts.all,
-         directory: .yaml,
-         contextVariations: variations)
+    test(
+      template: "inline-swift3",
+      contextNames: Contexts.all,
+      directory: .yaml,
+      contextVariations: variations
+    )
   }
 
   func testInlineSwift4() {
-    test(template: "inline-swift4",
-         contextNames: Contexts.all,
-         directory: .yaml,
-         contextVariations: variations)
+    test(
+      template: "inline-swift4",
+      contextNames: Contexts.all,
+      directory: .yaml,
+      contextVariations: variations
+    )
   }
 }
