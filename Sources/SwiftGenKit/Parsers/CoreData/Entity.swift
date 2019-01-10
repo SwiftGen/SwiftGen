@@ -43,18 +43,22 @@ private enum XML {
 }
 
 extension CoreData.Entity {
-  static let defaultClassName = "NSManagedObject"
-
   init(with object: Kanna.XMLElement) throws {
     guard let name = object[XML.Attributes.name] else {
       throw CoreData.ParserError.invalidFormat(reason: "Missing required entity name.")
     }
 
-    var className = object[XML.Attributes.representedClassName] ?? CoreData.Entity.defaultClassName
-    if className.first == "." {
-      // if set to "current product module", class name is prefixed with a '.'
-      className = String(className.dropFirst())
+    // The module and the class name are stored in the same field, separated by a '.'. If the user chooses
+    // "current product module", the field is prefixed with a '.'. We actually do not want the module part of the type,
+    // so we need to remove it.
+    let classComponents = (object[XML.Attributes.representedClassName] ?? "").components(separatedBy: ".")
+    let className: String
+    if classComponents.count > 1 {
+      className = classComponents.dropFirst().joined(separator: ".")
+    } else {
+      className = classComponents.joined(separator: ".")
     }
+
     let isAbstract = object[XML.Attributes.isAbstract].flatMap(Bool.init(from:)) ?? false
     let superEntity = object[XML.Attributes.superEntity]
     let shouldGenerateCode = object[XML.Attributes.codeGenerationType].map {
