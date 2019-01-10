@@ -15,7 +15,12 @@ import Foundation
 
 // MARK: - {{ entity.name }}
 
+{% if entityClassName|contains:"." %}
+// Warning: '{{ entityClassName }}' cannot be a valid type name, skipping code generation.
+{% else %}
+{% if param.generateObjcName %}
 @objc({{ entityClassName }})
+{% endif %}
 {{ accessModifier }} class {{ entityClassName }}: {{ superclass }} {
   {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
   {{ override }}{{ accessModifier }} class func entityName() -> String {
@@ -154,6 +159,7 @@ extension {{ entityClassName }} {
 
   {% endfor %}
 }
+{% endif %}
 {% endif %}
 {% endfor %}
 {% endfor %}
