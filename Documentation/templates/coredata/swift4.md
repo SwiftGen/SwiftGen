@@ -19,6 +19,7 @@ You can customize some elements of this template by overriding the following par
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
+| `generateObjcName`| N/A | If set, the generated types will have an `@objc(...)` annotation with their class name. |
 | `publicAccess` | N/A | If set, the generated types will be marked as `public`. Otherwise, they'll be declared `internal`. |
 
 ## Generated Code
@@ -26,7 +27,6 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-@objc(MainEntity)
 internal class MainEntity: NSManagedObject {
   internal class func entityName() -> String {
     return "MainEntity"
