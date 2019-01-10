@@ -10,6 +10,7 @@ import Foundation
 
 // MARK: - AbstractEntity
 
+@objc(AbstractEntity)
 internal class AbstractEntity: NSManagedObject {
   internal class func entityName() -> String {
     return "AbstractEntity"
@@ -30,6 +31,7 @@ internal class AbstractEntity: NSManagedObject {
 
 // MARK: - ChildEntity
 
+@objc(ChildEntity)
 internal class ChildEntity: MainEntity {
   override internal class func entityName() -> String {
     return "ChildEntity"
@@ -54,6 +56,7 @@ internal class ChildEntity: MainEntity {
 
 // MARK: - MainEntity
 
+@objc(MainEntity)
 internal class MainEntity: NSManagedObject {
   internal class func entityName() -> String {
     return "MainEntity"
@@ -277,6 +280,7 @@ extension MainEntity {
 
 // MARK: - NewEntity
 
+@objc(NewEntity)
 internal class NewEntity: AbstractEntity {
   override internal class func entityName() -> String {
     return "NewEntity"
@@ -298,6 +302,7 @@ internal class NewEntity: AbstractEntity {
 
 // MARK: - SecondaryEntity
 
+@objc(SecondaryEntity)
 internal class SecondaryEntity: NSManagedObject {
   internal class func entityName() -> String {
     return "SecondaryEntity"

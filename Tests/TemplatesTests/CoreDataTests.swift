@@ -19,6 +19,8 @@ class CoreDataTests: XCTestCase {
     return [
       (context: context,
        suffix: ""),
+      (context: try StencilContext.enrich(context: context, parameters: ["generateObjcName"]),
+       suffix: "-generateObjcName"),
       (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
        suffix: "-publicAccess")
     ]

@@ -5,14 +5,11 @@ import CoreData
 import Foundation
 
 // swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
-// swiftlint:disable attributes
-// swiftlint:disable vertical_whitespace_closing_braces
-
+// swiftlint:disable attributes file_length vertical_whitespace_closing_braces
 // swiftlint:disable identifier_name line_length type_body_length
+
 // MARK: - AbstractEntity
 
-@objc(AbstractEntity)
 internal class AbstractEntity: NSManagedObject {
   internal class func entityName() -> String {
     return "AbstractEntity"
@@ -30,9 +27,9 @@ internal class AbstractEntity: NSManagedObject {
   // swiftlint:enable discouraged_optional_boolean
 }
 
+
 // MARK: - ChildEntity
 
-@objc(ChildEntity)
 internal class ChildEntity: MainEntity {
   override internal class func entityName() -> String {
     return "ChildEntity"
@@ -50,9 +47,13 @@ internal class ChildEntity: MainEntity {
   // swiftlint:enable discouraged_optional_boolean
 }
 
+
+// MARK: - ImpossibleType
+
+// Warning: 'We.Cannot.Handle.ImpossibleType' cannot be a valid type name, skipping code generation.
+
 // MARK: - MainEntity
 
-@objc(MainEntity)
 internal class MainEntity: NSManagedObject {
   internal class func entityName() -> String {
     return "MainEntity"
@@ -156,6 +157,7 @@ internal class MainEntity: NSManagedObject {
   // swiftlint:enable discouraged_optional_boolean
 }
 
+
 // MARK: Relationship ManyToMany
 
 extension MainEntity {
@@ -171,6 +173,7 @@ extension MainEntity {
   @objc(removeManyToMany:)
   @NSManaged public func removeFromManyToMany(_ values: Set<SecondaryEntity>)
 }
+
 
 // MARK: Relationship OneToMany
 
@@ -205,6 +208,7 @@ extension MainEntity {
   @objc(removeOneToMany:)
   @NSManaged public func removeFromOneToMany(_ values: NSOrderedSet)
 }
+
 
 // MARK: Fetch Requests
 
@@ -273,7 +277,6 @@ extension MainEntity {
 
 // MARK: - NewEntity
 
-@objc(NewEntity)
 internal class NewEntity: AbstractEntity {
   override internal class func entityName() -> String {
     return "NewEntity"
@@ -292,9 +295,9 @@ internal class NewEntity: AbstractEntity {
   // swiftlint:enable discouraged_optional_boolean
 }
 
+
 // MARK: - SecondaryEntity
 
-@objc(SecondaryEntity)
 internal class SecondaryEntity: NSManagedObject {
   internal class func entityName() -> String {
     return "SecondaryEntity"
@@ -315,6 +318,7 @@ internal class SecondaryEntity: NSManagedObject {
   @NSManaged internal var oneToOne: MainEntity?
   // swiftlint:enable discouraged_optional_boolean
 }
+
 
 // MARK: Relationship ManyToMany
 

@@ -3,6 +3,7 @@
     <entity name="AbstractEntity" representedClassName="AbstractEntity" isAbstract="YES" syncable="YES"/>
     <entity name="AutoClassGen" representedClassName="AutoClassGen" syncable="YES" codeGenerationType="class"/>
     <entity name="AutoExtensionGen" representedClassName="AutoExtensionGen" syncable="YES" codeGenerationType="category"/>
+    <entity name="ImpossibleType" representedClassName="Something.We.Cannot.Handle.ImpossibleType" syncable="YES"/>
     <entity name="ChildEntity" representedClassName="SwiftGen.ChildEntity" parentEntity="MainEntity" syncable="YES">
         <userInfo>
             <entry key="key" value="value"/>
