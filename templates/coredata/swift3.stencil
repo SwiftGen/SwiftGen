@@ -5,21 +5,19 @@ import CoreData
 import Foundation
 
 // swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
-// swiftlint:disable attributes
-// swiftlint:disable vertical_whitespace_closing_braces
-{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
-
+// swiftlint:disable attributes file_length vertical_whitespace_closing_braces
 // swiftlint:disable identifier_name line_length type_body_length
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 {% for model in models %}
 {% for name, entity in model.entities where entity.shouldGenerateCode %}
-{% set superclass %}{{ model.entities[entity.superEntity].className | default:"NSManagedObject" }}{% endset %}
-{% set entityClassName %}{{ entity.className | default:entity.name }}{% endset %}
-{% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
-// MARK: - {{ entityClassName }}
+{% set superclass %}{{ model.entities[entity.superEntity].className|default:"NSManagedObject" }}{% endset %}
+{% set entityClassName %}{{ entity.className|default:"NSManagedObject" }}{% endset %}
+
+// MARK: - {{ entity.name }}
 
 @objc({{ entityClassName }})
 {{ accessModifier }} class {{ entityClassName }}: {{ superclass }} {
+  {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
   {{ override }}{{ accessModifier }} class func entityName() -> String {
     return "{{ entity.name }}"
   }
@@ -57,9 +55,9 @@ import Foundation
   {% endfor %}
   {% for relationship in entity.relationships %}
   {% if relationship.isToMany %}
-  @NSManaged {{ accessModifier }} var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}Set<{{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}>{% endif %}{% if relationship.isOptional %}?{% endif %}
+  @NSManaged {{ accessModifier }} var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}Set<{{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}>{% endif %}{% if relationship.isOptional %}?{% endif %}
   {% else %}
-  @NSManaged {{ accessModifier }} var {{ relationship.name }}: {{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}{% if relationship.isOptional %}?{% endif %}
+  @NSManaged {{ accessModifier }} var {{ relationship.name }}: {{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}{% if relationship.isOptional %}?{% endif %}
   {% endif %}
   {% endfor %}
   {% for fetchedProperty in entity.fetchedProperties %}
@@ -69,9 +67,10 @@ import Foundation
 }
 
 {% for relationship in entity.relationships where relationship.isToMany %}
-{% set destinationEntityClassName %}{{ model.entities[relationship.destinationEntity].className | default:"NSManagedObject" }}{% endset %}
+{% set destinationEntityClassName %}{{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}{% endset %}
 {% set collectionClassName %}{% if relationship.isOrdered %}NSOrderedSet{% else %}Set<{{ destinationEntityClassName }}>{% endif %}{% endset %}
 {% set relationshipName %}{{ relationship.name | upperFirstLetter }}{% endset %}
+
 // MARK: Relationship {{ relationshipName }}
 
 extension {{ entityClassName }} {
@@ -110,6 +109,7 @@ extension {{ entityClassName }} {
 
 {% endfor %}
 {% if model.fetchRequests[entity.name].count > 0 %}
+
 // MARK: Fetch Requests
 
 extension {{ entityClassName }} {
@@ -154,7 +154,6 @@ extension {{ entityClassName }} {
 
   {% endfor %}
 }
-
 {% endif %}
 {% endfor %}
 {% endfor %}
