@@ -24,7 +24,7 @@ class ColorsTests: XCTestCase {
            context: context,
            parameters: ["enumName=\(customName)", "colorAliasName=XCTColor"]
          ),
-         suffix: "-customname"),
+         suffix: "-customName"),
         (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
          suffix: "-publicAccess")
       ]

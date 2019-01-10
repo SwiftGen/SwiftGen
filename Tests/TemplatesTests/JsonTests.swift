@@ -20,7 +20,7 @@ class JsonTests: XCTestCase {
       (context: context,
        suffix: ""),
       (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomJSON"]),
-       suffix: "-customname"),
+       suffix: "-customName"),
       (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
        suffix: "-publicAccess")
     ]

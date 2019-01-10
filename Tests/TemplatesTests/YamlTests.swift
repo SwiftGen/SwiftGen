@@ -20,7 +20,7 @@ class YamlTests: XCTestCase {
       (context: context,
        suffix: ""),
       (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomYAML"]),
-       suffix: "-customname"),
+       suffix: "-customName"),
       (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
        suffix: "-publicAccess")
     ]

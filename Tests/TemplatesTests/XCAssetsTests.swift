@@ -32,7 +32,7 @@ class XCAssetsTests: XCTestCase {
           "imageAliasName=XCTImage"
         ]
        ),
-       suffix: "-customname"),
+       suffix: "-customName"),
       (context: try StencilContext.enrich(context: context, parameters: ["allValues"]),
        suffix: "-allValues"),
       (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),

@@ -20,9 +20,9 @@ class FontsTests: XCTestCase {
       (context: context,
        suffix: ""),
       (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomFamily"]),
-       suffix: "-customname"),
+       suffix: "-customName"),
       (context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
-       suffix: "-preservepath"),
+       suffix: "-preservePath"),
       (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
        suffix: "-publicAccess")
     ]
