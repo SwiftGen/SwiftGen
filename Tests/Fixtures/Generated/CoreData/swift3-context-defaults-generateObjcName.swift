@@ -24,10 +24,17 @@ internal class AbstractEntity: NSManagedObject {
     return NSFetchRequest<AbstractEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable discouraged_optional_boolean
-  // swiftlint:enable discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
 
+// MARK: - AutoClassGen
+
+// Note: 'AutoClassGen' has codegen enabled for Xcode, skipping code generation.
+
+// MARK: - AutoExtensionGen
+
+// Note: 'AutoExtensionGen' has codegen enabled for Xcode, skipping code generation.
 
 // MARK: - ChildEntity
 
@@ -45,10 +52,9 @@ internal class ChildEntity: MainEntity {
     return NSFetchRequest<ChildEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable discouraged_optional_boolean
-  // swiftlint:enable discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
-
 
 // MARK: - ImpossibleType
 
@@ -70,7 +76,7 @@ internal class MainEntity: NSManagedObject {
     return NSFetchRequest<MainEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
   @NSManaged internal var attributedString: NSAttributedString?
   @NSManaged internal var binaryData: Data?
   @NSManaged internal var boolean: Bool
@@ -157,9 +163,8 @@ internal class MainEntity: NSManagedObject {
   @NSManaged internal var oneToMany: NSOrderedSet?
   @NSManaged internal var oneToOne: SecondaryEntity?
   @NSManaged internal var fetchedProperty: [NewEntity]
-  // swiftlint:enable discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
-
 
 // MARK: Relationship ManyToMany
 
@@ -176,7 +181,6 @@ extension MainEntity {
   @objc(removeManyToMany:)
   @NSManaged public func removeFromManyToMany(_ values: Set<SecondaryEntity>)
 }
-
 
 // MARK: Relationship OneToMany
 
@@ -211,7 +215,6 @@ extension MainEntity {
   @objc(removeOneToMany:)
   @NSManaged public func removeFromOneToMany(_ values: NSOrderedSet)
 }
-
 
 // MARK: Fetch Requests
 
@@ -294,11 +297,10 @@ internal class NewEntity: AbstractEntity {
     return NSFetchRequest<NewEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
   @NSManaged internal var identifier: UUID?
-  // swiftlint:enable discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
-
 
 // MARK: - SecondaryEntity
 
@@ -316,14 +318,13 @@ internal class SecondaryEntity: NSManagedObject {
     return NSFetchRequest<SecondaryEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
   @NSManaged internal var name: String
   @NSManaged internal var manyToMany: Set<MainEntity>?
   @NSManaged internal var oneToMany: MainEntity?
   @NSManaged internal var oneToOne: MainEntity?
-  // swiftlint:enable discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
-
 
 // MARK: Relationship ManyToMany
 
