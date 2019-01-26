@@ -32,7 +32,7 @@ import Foundation
     return NSFetchRequest<{{ entityClassName }}>(entityName: entityName())
   }
 
-  // swiftlint:disable implicitly_unwrapped_optional discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean
   {% for attribute in entity.attributes %}
   {% if attribute.usesScalarValueType and attribute.isOptional %}
   {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}? {
@@ -65,7 +65,7 @@ import Foundation
   {% for fetchedProperty in entity.fetchedProperties %}
   @NSManaged {{ accessModifier }} var {{ fetchedProperty.name }}: [{{ fetchedProperty.fetchRequest.entity }}]
   {% endfor %}
-  // swiftlint:enable implicitly_unwrapped_optional discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean
 }
 
 {% for relationship in entity.relationships %}

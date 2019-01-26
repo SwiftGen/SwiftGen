@@ -26,8 +26,8 @@ public class AbstractEntity: NSManagedObject {
     return NSFetchRequest<AbstractEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable implicitly_unwrapped_optional discouraged_optional_boolean
-  // swiftlint:enable implicitly_unwrapped_optional discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean
 }
 
 // MARK: - ChildEntity
@@ -46,8 +46,8 @@ public class ChildEntity: MainEntity {
     return NSFetchRequest<ChildEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable implicitly_unwrapped_optional discouraged_optional_boolean
-  // swiftlint:enable implicitly_unwrapped_optional discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean
 }
 
 // MARK: - MainEntity
@@ -66,7 +66,7 @@ public class MainEntity: NSManagedObject {
     return NSFetchRequest<MainEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable implicitly_unwrapped_optional discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean
   @NSManaged public var attributedString: NSAttributedString?
   @NSManaged public var binaryData: Data?
   @NSManaged public var boolean: Bool
@@ -153,7 +153,7 @@ public class MainEntity: NSManagedObject {
   @NSManaged public var oneToMany: NSOrderedSet
   @NSManaged public var oneToOne: SecondaryEntity?
   @NSManaged public var fetchedProperty: [NewEntity]
-  // swiftlint:enable implicitly_unwrapped_optional discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean
 }
 
 // MARK: Relationship ManyToMany
@@ -287,9 +287,9 @@ public class NewEntity: AbstractEntity {
     return NSFetchRequest<NewEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable implicitly_unwrapped_optional discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean
   @NSManaged public var identifier: UUID?
-  // swiftlint:enable implicitly_unwrapped_optional discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean
 }
 
 // MARK: - SecondaryEntity
@@ -308,12 +308,12 @@ public class SecondaryEntity: NSManagedObject {
     return NSFetchRequest<SecondaryEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable implicitly_unwrapped_optional discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean
   @NSManaged public var name: String!
   @NSManaged public var manyToMany: Set<MainEntity>
   @NSManaged public var oneToMany: MainEntity?
   @NSManaged public var oneToOne: MainEntity?
-  // swiftlint:enable implicitly_unwrapped_optional discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean
 }
 
 // MARK: Relationship ManyToMany
