@@ -53,8 +53,8 @@ internal class MainEntity: NSManagedObject {
 
 //: #### Usage Example
 
-let container = createContainer()
-let context = container.viewContext
+let container: NSPersistentContainer = createContainer()
+let context: NSManagedObjectContext = container.viewContext
 
 let item = MainEntity(context: context)
 item.date = Date()
