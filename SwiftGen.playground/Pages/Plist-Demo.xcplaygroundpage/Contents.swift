@@ -1,6 +1,7 @@
 //: #### Other pages
 //:
 //: * [Demo for `swiftgen colors`](Colors-Demo)
+//: * [Demo for `swiftgen coredata`](CoreData-Demo)
 //: * [Demo for `swiftgen fonts`](Fonts-Demo)
 //: * [Demo for `swiftgen ib`](InterfaceBuilder-Demo)
 //: * [Demo for `swiftgen json`](JSON-Demo)
