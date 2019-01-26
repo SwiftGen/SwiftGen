@@ -9,9 +9,9 @@ def first_match_in_file(file, re)
    File.foreach('README.md') do |line|
      m = re.match(line)
      return m if m
-   end  
+   end
    return nil
- end 
+ end
 
 ## [ Release a new version ] ##################################################
 
