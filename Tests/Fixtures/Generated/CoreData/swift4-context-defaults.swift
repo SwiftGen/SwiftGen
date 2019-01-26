@@ -26,8 +26,8 @@ internal class AbstractEntity: NSManagedObject {
     return NSFetchRequest<AbstractEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable implicitly_unwrapped_optional
-  // swiftlint:enable implicitly_unwrapped_optional
+  // swiftlint:disable discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean
 }
 
 // MARK: - ChildEntity
@@ -46,8 +46,8 @@ internal class ChildEntity: MainEntity {
     return NSFetchRequest<ChildEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable implicitly_unwrapped_optional
-  // swiftlint:enable implicitly_unwrapped_optional
+  // swiftlint:disable discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean
 }
 
 // MARK: - MainEntity
@@ -66,7 +66,7 @@ internal class MainEntity: NSManagedObject {
     return NSFetchRequest<MainEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable implicitly_unwrapped_optional
+  // swiftlint:disable discouraged_optional_boolean
   @NSManaged internal var attributedString: NSAttributedString?
   @NSManaged internal var binaryData: Data?
   @NSManaged internal var boolean: Bool
@@ -77,17 +77,83 @@ internal class MainEntity: NSManagedObject {
   @NSManaged internal var int16: Int16
   @NSManaged internal var int32: Int32
   @NSManaged internal var int64: Int64
-  @NSManaged internal var nonOptional: String!
-  @NSManaged internal var string: String?
+  internal var optionalBoolean: Bool? {
+    get {
+      let key = "optionalBoolean"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      return primitiveValue(forKey: key) as? Bool
+    }
+    set {
+      let key = "optionalBoolean"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue, forKey: key)
+    }
+  }
+  internal var optionalDouble: Double? {
+    get {
+      let key = "optionalDouble"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      return primitiveValue(forKey: key) as? Double
+    }
+    set {
+      let key = "optionalDouble"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue, forKey: key)
+    }
+  }
+  @NSManaged internal var optionalFloat: Float
+  internal var optionalInt16: Int16? {
+    get {
+      let key = "optionalInt16"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      return primitiveValue(forKey: key) as? Int16
+    }
+    set {
+      let key = "optionalInt16"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue, forKey: key)
+    }
+  }
+  @NSManaged internal var optionalInt32: Int32
+  internal var optionalInt64: Int64? {
+    get {
+      let key = "optionalInt64"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      return primitiveValue(forKey: key) as? Int64
+    }
+    set {
+      let key = "optionalInt64"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue, forKey: key)
+    }
+  }
+  @NSManaged internal var optionalString: String?
+  @NSManaged internal var string: String
   @NSManaged internal var transformable: AnyObject?
   @NSManaged internal var transient: String?
   @NSManaged internal var uri: URL?
   @NSManaged internal var uuid: UUID?
-  @NSManaged internal var manyToMany: Set<SecondaryEntity>
-  @NSManaged internal var oneToMany: NSOrderedSet
+  @NSManaged internal var manyToMany: Set<SecondaryEntity>?
+  @NSManaged internal var oneToMany: NSOrderedSet?
   @NSManaged internal var oneToOne: SecondaryEntity?
   @NSManaged internal var fetchedProperty: [NewEntity]
-  // swiftlint:enable implicitly_unwrapped_optional
+  // swiftlint:enable discouraged_optional_boolean
 }
 
 // MARK: Relationship ManyToMany
@@ -221,9 +287,9 @@ internal class NewEntity: AbstractEntity {
     return NSFetchRequest<NewEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable implicitly_unwrapped_optional
+  // swiftlint:disable discouraged_optional_boolean
   @NSManaged internal var identifier: UUID?
-  // swiftlint:enable implicitly_unwrapped_optional
+  // swiftlint:enable discouraged_optional_boolean
 }
 
 // MARK: - SecondaryEntity
@@ -242,12 +308,12 @@ internal class SecondaryEntity: NSManagedObject {
     return NSFetchRequest<SecondaryEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable implicitly_unwrapped_optional
-  @NSManaged internal var name: String!
-  @NSManaged internal var manyToMany: Set<MainEntity>
+  // swiftlint:disable discouraged_optional_boolean
+  @NSManaged internal var name: String
+  @NSManaged internal var manyToMany: Set<MainEntity>?
   @NSManaged internal var oneToMany: MainEntity?
   @NSManaged internal var oneToOne: MainEntity?
-  // swiftlint:enable implicitly_unwrapped_optional
+  // swiftlint:enable discouraged_optional_boolean
 }
 
 // MARK: Relationship ManyToMany
