@@ -17,9 +17,9 @@ class FontsTests: XCTestCase {
     XCTDiffContexts(result, expected: "empty", sub: .fonts)
   }
 
-  func testDefaults() {
+  func testDefaults() throws {
     let parser = Fonts.Parser()
-    parser.parse(path: Fixtures.directory(sub: .fonts))
+    try parser.searchAndParse(path: Fixtures.directory())
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "defaults", sub: .fonts)

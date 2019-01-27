@@ -43,6 +43,15 @@ private let paramsOption = VariadicOption<String>(
 )
 
 extension ParserCLI {
+  private var filterOption: Option<String> {
+    return Option<String>(
+      "filter",
+      default: parserType.defaultFilter,
+      flag: "f",
+      description: "The regular expression to filter input paths."
+    )
+  }
+
   func command() -> CommandType {
     return Commander.command(
       outputOption,
@@ -50,17 +59,19 @@ extension ParserCLI {
       templateNameOption,
       templatePathOption,
       paramsOption,
+      filterOption,
       VariadicArgument<Path>("PATH", description: self.pathDescription, validator: pathsExist)
-    ) { output, oldTemplateName, templateName, templatePath, parameters, paths in
+    ) { output, oldTemplateName, templateName, templatePath, parameters, filter, paths in
       try ErrorPrettifier.execute {
         let parser = try self.parserType.init(options: [:]) { msg, _, _ in
           logMessage(.warning, msg)
         }
-        try parser.parse(paths: paths)
+        let filter = try Filter(pattern: filter)
+        try parser.searchAndParse(paths: paths, filter: filter)
 
-        let resolvedlTemplateName = templateName.isEmpty ? oldTemplateName : templateName
+        let resolvedTemplateName = templateName.isEmpty ? oldTemplateName : templateName
         let templateRef = try TemplateRef(
-          templateShortName: resolvedlTemplateName,
+          templateShortName: resolvedTemplateName,
           templateFullPath: templatePath
         )
         let templateRealPath = try templateRef.resolvePath(forSubcommand: self.templateFolder)

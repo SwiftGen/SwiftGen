@@ -14,7 +14,8 @@ The configuration file is a YAML file structured like this (example):
 input_dir: Sources/Resources
 output_dir: Sources/Generated/
 strings:
-  inputs: Base.lproj/Localizable.strings
+  inputs: Base.lproj
+  filter: .+\.strings$
   outputs:
     - templateName: structured-swift4
       output: L10n-Constants.swift
@@ -35,7 +36,7 @@ xcassets:
 
 ℹ️ All _relative_ paths specified in the configuration file (`input_dir`, `output_dir`, `inputs`, `templatePath`, `output`) are relative to the location of the _configuration file_ itself.
 
-> 💡 We advise against using _absolute_ paths — starting with `/` — in the configuration file, so that they won't rely on where the project was cloned on your machine._
+> 💡 We advise against using _absolute_ paths — starting with `/` — in the configuration file, so that they won't rely on where the project was cloned on your machine.
 
 Here's a quick description of all the possible _root_ keys. All of them are optional.
 
@@ -61,12 +62,15 @@ Each key corresponding to a SwiftGen subcommands (`colors`, `coredata`, `fonts`,
 | Subkey | Type | Description |
 |--------|------|-------------|
 | `inputs` | Path or Array of Paths | The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `Localizable.strings` file for the `strings` command, etc). |
+| `filter` | Regular Expression | The regular expression to apply to each input path, only paths matching the given filter will be used. Filters are applied to actual (relative) paths, not just the filename. Note that each command has a default built-in filter, which you can override with this option. |
 | `outputs` | Array | A list of output descriptions, composed of a template and a file output. |
 | `paths` | Path or Array of Paths | **Deprecated** The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `Localizable.strings` file for the `strings` command, etc). |
 | `templateName` | String | **Deprecated** The name of the template to use. If you provide a value for this, you shouldn't also provide a value for `templatePath`. |
 | `templatePath` | Path | **Deprecated** The path to the template to use. If you provide a value for this, you shouldn't also provide a value for `templateName`. |
 | `output` | Path | **Deprecated** The path of the output file to generate. _(Note: Any intermediate directory up to this file must already exist.)_ |
 | `params` | Dictionary | **Deprecated** Any optional parameter you want to pass to the template (similarly to `--param` in the CLI). |
+
+> 💡 Note: For custom filters, use `.+` to match multiple characters (at least one), and don't forget to escape the dot (`\.`) if you want to match a literal dot like for an extension. Add `$` at the end to ensure the path ends with the extension you want. Regular expressions will be case sensitive by default, and not anchored to the start/end of a path. For example, use `.+\.xib$` to match files with a `.xib` extension. Use a tool such as [RegExr](https://regexr.com) to ensure you're using a valid regular expression.
 
 The `outputs` parameter accepts either a dictionary, or an array of dictionaries, with the keys described below. Each such "output" will take the input files, and use the output template to generate a file at the given output path. This allows you to generate multiple outputs for the same input files (which will only be parsed once).
 

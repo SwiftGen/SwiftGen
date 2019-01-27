@@ -18,7 +18,7 @@ class CoreDataTests: XCTestCase {
   func testDefaults() {
     let parser = CoreData.Parser()
     do {
-      try parser.parse(path: Fixtures.path(for: "Model.xcdatamodeld", sub: .coreData))
+      try parser.searchAndParse(path: Fixtures.path(for: "Model.xcdatamodeld", sub: .coreData))
     } catch {
       print("Error: \(error.localizedDescription)")
     }

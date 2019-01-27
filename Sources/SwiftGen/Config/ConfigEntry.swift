@@ -15,6 +15,7 @@ import PathKit
 struct ConfigEntry {
   enum Keys {
     static let inputs = "inputs"
+    static let filter = "filter"
     static let outputs = "outputs"
 
     // Legacy: remove this once we stop supporting the output key at subcommand level
@@ -27,6 +28,7 @@ struct ConfigEntry {
   }
 
   var inputs: [Path]
+  var filter: String?
   var outputs: [ConfigEntryOutput]
 
   mutating func makingRelativeTo(inputDir: Path?, outputDir: Path?) {
@@ -56,6 +58,8 @@ extension ConfigEntry {
     } else {
       throw Config.Error.missingEntry(key: Keys.inputs)
     }
+
+    filter = yaml[Keys.filter] as? String
 
     if let outputs = yaml[Keys.outputs] {
       do {
@@ -111,7 +115,7 @@ extension ConfigEntry {
 extension ConfigEntry {
   func commandLine(forCommand cmd: String) -> [String] {
     return outputs.map {
-      $0.commandLine(forCommand: cmd, inputs: inputs)
+      $0.commandLine(forCommand: cmd, inputs: inputs, filter: filter)
     }
   }
 }

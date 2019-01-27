@@ -55,7 +55,7 @@ let allParserCommands: [ParserCLI] = [
     pathDescription: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard"
   ),
   .init(
-    parserType: Yaml.Parser.self,
+    parserType: JSON.Parser.self,
     name: "json",
     description: "generate code for custom json configuration files",
     pathDescription: "JSON files (or directories that contain them) to parse."

@@ -24,7 +24,7 @@ class InterfaceBuilderiOSTests: XCTestCase {
   func testMessageStoryboard() {
     let parser = InterfaceBuilder.Parser()
     do {
-      try parser.parse(path: Fixtures.path(for: "Message.storyboard", sub: .interfaceBuilderiOS))
+      try parser.searchAndParse(path: Fixtures.path(for: "Message.storyboard", sub: .interfaceBuilderiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -36,7 +36,7 @@ class InterfaceBuilderiOSTests: XCTestCase {
   func testAnonymousStoryboard() {
     let parser = InterfaceBuilder.Parser()
     do {
-      try parser.parse(path: Fixtures.path(for: "Anonymous.storyboard", sub: .interfaceBuilderiOS))
+      try parser.searchAndParse(path: Fixtures.path(for: "Anonymous.storyboard", sub: .interfaceBuilderiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -48,7 +48,7 @@ class InterfaceBuilderiOSTests: XCTestCase {
   func testAllStoryboards() {
     let parser = InterfaceBuilder.Parser()
     do {
-      try parser.parse(path: Fixtures.directory(sub: .interfaceBuilderiOS))
+      try parser.searchAndParse(path: Fixtures.directory(sub: .interfaceBuilderiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -62,7 +62,7 @@ class InterfaceBuilderiOSTests: XCTestCase {
     let fakeModuleName = "NotCurrentModule"
 
     let parser = InterfaceBuilder.Parser()
-    try parser.parse(path: Fixtures.directory(sub: .interfaceBuilderiOS))
+    try parser.searchAndParse(path: Fixtures.directory(sub: .interfaceBuilderiOS))
 
     XCTAssert(
       parser.storyboards.contains {

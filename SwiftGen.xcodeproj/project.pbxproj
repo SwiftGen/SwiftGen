@@ -58,10 +58,12 @@
 		C3E39E4C2118EC58004B1CF9 /* UniquenessConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E39E4B2118EC58004B1CF9 /* UniquenessConstraints.swift */; };
 		C580E102337633038E486585 /* Pods_swiftgen_Templates_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8031AB7FD88D5F010179EDC /* Pods_swiftgen_Templates_UnitTests.framework */; };
 		DD112CBA2141675900B11A5D /* InterfaceBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */; };
+		DD132AF321FE62C200A71960 /* FilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD132AF121FE628A00A71960 /* FilterTests.swift */; };
 		DD15F101213C3DDF00D081C7 /* YamsSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F100213C3DDF00D081C7 /* YamsSerialization.swift */; };
 		DD15F103213C40A000D081C7 /* PlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F102213C409F00D081C7 /* PlistTests.swift */; };
 		DD15F105213C412F00D081C7 /* JsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F104213C412F00D081C7 /* JsonTests.swift */; };
 		DD15F107213C474600D081C7 /* YamlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F106213C474600D081C7 /* YamlTests.swift */; };
+		DD2F4DE021DAE7E6002E9B8C /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F4DDF21DAE7E6002E9B8C /* Filter.swift */; };
 		DD2FA6BB2169401C0009CAA8 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2FA6BA2169401C0009CAA8 /* Version.swift */; };
 		DD40284A209E56B50045FC76 /* config-with-multi-outputs.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */; };
 		DD402850209FBF300045FC76 /* config-deprecated-paths.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */; };
@@ -340,10 +342,12 @@
 		C3E39E4B2118EC58004B1CF9 /* UniquenessConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniquenessConstraints.swift; sourceTree = "<group>"; };
 		D662CF56C834C4E7CEA32364 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceBuilderTests.swift; sourceTree = "<group>"; };
+		DD132AF121FE628A00A71960 /* FilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTests.swift; sourceTree = "<group>"; };
 		DD15F100213C3DDF00D081C7 /* YamsSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamsSerialization.swift; sourceTree = "<group>"; };
 		DD15F102213C409F00D081C7 /* PlistTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistTests.swift; sourceTree = "<group>"; };
 		DD15F104213C412F00D081C7 /* JsonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonTests.swift; sourceTree = "<group>"; };
 		DD15F106213C474600D081C7 /* YamlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamlTests.swift; sourceTree = "<group>"; };
+		DD2F4DDF21DAE7E6002E9B8C /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		DD2FA6BA2169401C0009CAA8 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		DD402849209E56B50045FC76 /* config-with-multi-outputs.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-with-multi-outputs.yml"; sourceTree = "<group>"; };
 		DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-deprecated-paths.yml"; sourceTree = "<group>"; };
@@ -609,13 +613,13 @@
 		C38E571320FF8F8F009C9C23 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				C38E571420FF8FB5009C9C23 /* CoreDataParser.swift */,
-				C33A1426210649A500D3CBA6 /* Configuration.swift */,
-				C350BE3720FFCD0F0043D7C5 /* Model.swift */,
-				C350BE3920FFCD750043D7C5 /* Entity.swift */,
-				C33A142821064E3400D3CBA6 /* FetchRequest.swift */,
-				C3BAC3C82112006000B6875A /* FetchedProperty.swift */,
 				C322627021012F42001AC9CD /* Attribute.swift */,
+				C33A1426210649A500D3CBA6 /* Configuration.swift */,
+				C38E571420FF8FB5009C9C23 /* CoreDataParser.swift */,
+				C350BE3920FFCD750043D7C5 /* Entity.swift */,
+				C3BAC3C82112006000B6875A /* FetchedProperty.swift */,
+				C33A142821064E3400D3CBA6 /* FetchRequest.swift */,
+				C350BE3720FFCD0F0043D7C5 /* Model.swift */,
 				C32262722101324E001AC9CD /* Relationship.swift */,
 				C3E39E4B2118EC58004B1CF9 /* UniquenessConstraints.swift */,
 				C3031AA021062C9A00BF00DE /* UserInfo.swift */,
@@ -660,6 +664,7 @@
 				DDB0B9A0209CE7CD00E467C2 /* Plist */,
 				DD9F68822095604E004EB720 /* Strings */,
 				DDB0B999209CE4A300E467C2 /* Yaml */,
+				DD2F4DDF21DAE7E6002E9B8C /* Filter.swift */,
 				DD428E0F1FC50FBF001649D6 /* Parser.swift */,
 			);
 			path = Parsers;
@@ -824,6 +829,7 @@
 				DDDE521B1FAF81BA004203BE /* ColorsTextFileTests.swift */,
 				DDDE51DF1FAF81B9004203BE /* ColorsXMLFileTests.swift */,
 				C34FEA112110D56800136871 /* CoreDataTests.swift */,
+				DD132AF121FE628A00A71960 /* FilterTests.swift */,
 				DDDE51DB1FAF81B9004203BE /* FontsTests.swift */,
 				DDDE521E1FAF81BA004203BE /* InterfaceBuilderiOSTests.swift */,
 				DDDE521C1FAF81BA004203BE /* InterfaceBuilderMacOSTests.swift */,
@@ -1409,6 +1415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3BAC3C92112006000B6875A /* FetchedProperty.swift in Sources */,
+				DD2F4DE021DAE7E6002E9B8C /* Filter.swift in Sources */,
 				DD9F688520956074004EB720 /* StringsEntry.swift in Sources */,
 				DD9F687A20955D51004EB720 /* CatalogEntry.swift in Sources */,
 				DD428E261FC50FBF001649D6 /* InterfaceBuilderContext.swift in Sources */,
@@ -1488,6 +1495,7 @@
 				C34FEA132110D6EC00136871 /* CoreDataTests.swift in Sources */,
 				DDB0B9A6209CE7FC00E467C2 /* PlistTests.swift in Sources */,
 				DDDE52721FAF81BA004203BE /* TestsHelper.swift in Sources */,
+				DD132AF321FE62C200A71960 /* FilterTests.swift in Sources */,
 				DDDE523B1FAF81BA004203BE /* FontsTests.swift in Sources */,
 				DDDE523A1FAF81BA004203BE /* StringsTests.swift in Sources */,
 				DDDE52391FAF81BA004203BE /* StringParserTests.swift in Sources */,

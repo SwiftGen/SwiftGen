@@ -10,9 +10,11 @@ import PathKit
 public protocol Parser {
   init(options: [String: Any], warningHandler: MessageHandler?) throws
 
+  // regex for the default filter
+  static var defaultFilter: String { get }
+
   // Parsing and context generation
-  func parse(path: Path) throws
-  func parse(paths: [Path]) throws
+  func parse(path: Path, relativeTo parent: Path) throws
   func stencilContext() -> [String: Any]
 
   /// This callback will be called when a Parser want to emit a diagnostics message
@@ -23,9 +25,23 @@ public protocol Parser {
 }
 
 public extension Parser {
-  func parse(paths: [Path]) throws {
+  func searchAndParse(paths: [Path], filter: Filter) throws {
     for path in paths {
-      try parse(path: path)
+      try searchAndParse(path: path, filter: filter)
+    }
+  }
+
+  func searchAndParse(path: Path, filter: Filter) throws {
+    if path.matches(filter: filter) {
+      let parentDir = path.absolute().parent()
+      try parse(path: path, relativeTo: parentDir)
+    } else {
+      let dirChildren = path.iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
+      let parentDir = path.absolute()
+
+      for path in dirChildren where path.matches(filter: filter) {
+        try parse(path: path, relativeTo: parentDir)
+      }
     }
   }
 }

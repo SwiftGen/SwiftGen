@@ -44,7 +44,8 @@ class ColorParserTests: XCTestCase {
     parser.register(parser: TestFileParser1.self)
     parser.register(parser: TestFileParser2.self)
 
-    try parser.parse(path: "someFile.test1")
+    let filter = try Filter(pattern: ".*\\.(test1|test2)")
+    try parser.searchAndParse(path: "someFile.test1", filter: filter)
     XCTAssertEqual(parser.palettes.first?.name, "test1")
   }
 
@@ -54,7 +55,8 @@ class ColorParserTests: XCTestCase {
     parser.register(parser: TestFileParser2.self)
 
     do {
-      try parser.parse(path: "someFile.unknown")
+      let filter = try Filter(pattern: ".*\\.unknown")
+      try parser.searchAndParse(path: "someFile.unknown", filter: filter)
       XCTFail("Code did succeed while it was expected to fail for unknown extension")
     } catch Colors.ParserError.unsupportedFileType {
       // That's the expected exception we want to happen
@@ -81,8 +83,8 @@ class ColorParserTests: XCTestCase {
 
   func testParseMultipleFiles() throws {
     let parser = Colors.Parser()
-    try parser.parse(path: Fixtures.path(for: "colors.clr", sub: .colors))
-    try parser.parse(path: Fixtures.path(for: "extra.txt", sub: .colors))
+    try parser.searchAndParse(path: Fixtures.path(for: "colors.clr", sub: .colors))
+    try parser.searchAndParse(path: Fixtures.path(for: "extra.txt", sub: .colors))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "multiple", sub: .colors)
