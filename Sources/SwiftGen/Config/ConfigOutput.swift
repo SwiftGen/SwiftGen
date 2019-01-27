@@ -53,7 +53,7 @@ extension ConfigEntryOutput {
 ///
 extension ConfigEntryOutput {
   func commandLine(forCommand cmd: String, inputs: [Path], filter: String?) -> String {
-    let tplFlag: String = {
+    let templateFlag: String = {
       switch self.template {
       case .name(let name): return "--templateName \(name)"
       case .path(let path): return "--templatePath \(path.string)"
@@ -65,7 +65,7 @@ extension ConfigEntryOutput {
     return [
       "swiftgen",
       cmd,
-      tplFlag,
+      templateFlag,
       params.map { "--param \($0)" }.joined(separator: " "),
       "--output \(self.output)",
       filterFlag,

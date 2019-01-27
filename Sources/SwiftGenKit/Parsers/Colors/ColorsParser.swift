@@ -56,7 +56,7 @@ public enum Colors {
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       guard let parserType = parsers[path.extension?.lowercased() ?? ""] else {
-        throw ParserError.unsupportedFileType(path: path, supported: Array(parsers.keys.sorted()))
+        throw ParserError.unsupportedFileType(path: path, supported: parsers.keys.sorted())
       }
 
       let parser = parserType.init()

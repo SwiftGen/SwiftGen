@@ -39,7 +39,7 @@ extension Path {
   /// - Parameter filter: The regular expression to match
   /// - Returns: true if it matches
   func matches(filter: Filter) -> Bool {
-    let range = NSRange(location: 0, length: string.utf16.count)
+    let range = NSRange(string.startIndex..<string.endIndex, in: string)
     return filter.regex.firstMatch(in: string, options: [], range: range) != nil
   }
 }

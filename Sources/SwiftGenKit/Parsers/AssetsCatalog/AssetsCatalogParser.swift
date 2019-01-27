@@ -8,17 +8,6 @@ import Foundation
 import PathKit
 
 public enum AssetsCatalog {
-  public enum ParserError: Swift.Error, CustomStringConvertible {
-    case invalidFile
-
-    public var description: String {
-      switch self {
-      case .invalidFile:
-        return "error: File must be an asset catalog"
-      }
-    }
-  }
-
   public final class Parser: SwiftGenKit.Parser {
     var catalogs = [Catalog]()
     public var warningHandler: Parser.MessageHandler?
