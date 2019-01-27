@@ -58,6 +58,7 @@
 		C3E39E4C2118EC58004B1CF9 /* UniquenessConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E39E4B2118EC58004B1CF9 /* UniquenessConstraints.swift */; };
 		C580E102337633038E486585 /* Pods_swiftgen_Templates_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8031AB7FD88D5F010179EDC /* Pods_swiftgen_Templates_UnitTests.framework */; };
 		DD112CBA2141675900B11A5D /* InterfaceBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */; };
+		DD132AF321FE62C200A71960 /* FilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD132AF121FE628A00A71960 /* FilterTests.swift */; };
 		DD15F101213C3DDF00D081C7 /* YamsSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F100213C3DDF00D081C7 /* YamsSerialization.swift */; };
 		DD15F103213C40A000D081C7 /* PlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F102213C409F00D081C7 /* PlistTests.swift */; };
 		DD15F105213C412F00D081C7 /* JsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F104213C412F00D081C7 /* JsonTests.swift */; };
@@ -341,6 +342,7 @@
 		C3E39E4B2118EC58004B1CF9 /* UniquenessConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniquenessConstraints.swift; sourceTree = "<group>"; };
 		D662CF56C834C4E7CEA32364 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceBuilderTests.swift; sourceTree = "<group>"; };
+		DD132AF121FE628A00A71960 /* FilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTests.swift; sourceTree = "<group>"; };
 		DD15F100213C3DDF00D081C7 /* YamsSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YamsSerialization.swift; sourceTree = "<group>"; };
 		DD15F102213C409F00D081C7 /* PlistTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistTests.swift; sourceTree = "<group>"; };
 		DD15F104213C412F00D081C7 /* JsonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonTests.swift; sourceTree = "<group>"; };
@@ -827,6 +829,7 @@
 				DDDE521B1FAF81BA004203BE /* ColorsTextFileTests.swift */,
 				DDDE51DF1FAF81B9004203BE /* ColorsXMLFileTests.swift */,
 				C34FEA112110D56800136871 /* CoreDataTests.swift */,
+				DD132AF121FE628A00A71960 /* FilterTests.swift */,
 				DDDE51DB1FAF81B9004203BE /* FontsTests.swift */,
 				DDDE521E1FAF81BA004203BE /* InterfaceBuilderiOSTests.swift */,
 				DDDE521C1FAF81BA004203BE /* InterfaceBuilderMacOSTests.swift */,
@@ -1492,6 +1495,7 @@
 				C34FEA132110D6EC00136871 /* CoreDataTests.swift in Sources */,
 				DDB0B9A6209CE7FC00E467C2 /* PlistTests.swift in Sources */,
 				DDDE52721FAF81BA004203BE /* TestsHelper.swift in Sources */,
+				DD132AF321FE62C200A71960 /* FilterTests.swift in Sources */,
 				DDDE523B1FAF81BA004203BE /* FontsTests.swift in Sources */,
 				DDDE523A1FAF81BA004203BE /* StringsTests.swift in Sources */,
 				DDDE52391FAF81BA004203BE /* StringParserTests.swift in Sources */,
