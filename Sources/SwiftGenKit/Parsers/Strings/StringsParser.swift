@@ -36,7 +36,7 @@ public enum Strings {
       self.warningHandler = warningHandler
     }
 
-    public static let defaultFilter = ".+\\.strings$"
+    public static let defaultFilter = "[^/]\\.strings$"
 
     // Localizable.strings files are generally UTF16, not UTF8!
     public func parse(path: Path, relativeTo parent: Path) throws {

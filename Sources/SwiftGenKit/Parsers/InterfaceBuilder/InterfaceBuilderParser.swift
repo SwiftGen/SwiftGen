@@ -31,7 +31,7 @@ public enum InterfaceBuilder {
       self.warningHandler = warningHandler
     }
 
-    public static let defaultFilter = ".+\\.storyboard$"
+    public static let defaultFilter = "[^/]\\.storyboard$"
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       try addStoryboard(at: path)

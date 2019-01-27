@@ -51,7 +51,7 @@ public enum Colors {
 
     public static var defaultFilter: String {
       let extensions = Parser.subParsers.flatMap { $0.extensions }.sorted().joined(separator: "|")
-      return ".+\\.(?i:\(extensions))$"
+      return "[^/]\\.(?i:\(extensions))$"
     }
 
     public func parse(path: Path, relativeTo parent: Path) throws {
