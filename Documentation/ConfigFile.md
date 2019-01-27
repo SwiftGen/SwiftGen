@@ -62,7 +62,7 @@ Each key corresponding to a SwiftGen subcommands (`colors`, `coredata`, `fonts`,
 | Subkey | Type | Description |
 |--------|------|-------------|
 | `inputs` | Path or Array of Paths | The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `Localizable.strings` file for the `strings` command, etc). |
-| `filter` | Regular Expression | The regular expression to apply to each input path, only paths matching the given filter will be used. Note that each command has a default built-in filter, which you can override with this option. |
+| `filter` | Regular Expression | The regular expression to apply to each input path, only paths matching the given filter will be used. Filters are applied to actual (relative) paths, not just the filename. Note that each command has a default built-in filter, which you can override with this option. |
 | `outputs` | Array | A list of output descriptions, composed of a template and a file output. |
 | `paths` | Path or Array of Paths | **Deprecated** The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `Localizable.strings` file for the `strings` command, etc). |
 | `templateName` | String | **Deprecated** The name of the template to use. If you provide a value for this, you shouldn't also provide a value for `templatePath`. |
@@ -70,7 +70,7 @@ Each key corresponding to a SwiftGen subcommands (`colors`, `coredata`, `fonts`,
 | `output` | Path | **Deprecated** The path of the output file to generate. _(Note: Any intermediate directory up to this file must already exist.)_ |
 | `params` | Dictionary | **Deprecated** Any optional parameter you want to pass to the template (similarly to `--param` in the CLI). |
 
-> 💡 Note: For custom filters, use `.+` to match multiple characters (at least one), and don't forget to escape the dot (`\.`) if you want to match a literal dot like for an extension. Add `$` at the end to ensure the path ends with the extension you want. For example, use `.+\.xib$` to match files with a `.xib` extension. Use a tool such as [RegExr](https://regexr.com) to ensure you're using a valid regular expression.
+> 💡 Note: For custom filters, use `.+` to match multiple characters (at least one), and don't forget to escape the dot (`\.`) if you want to match a literal dot like for an extension. Add `$` at the end to ensure the path ends with the extension you want. Regular expressions will be case sensitive by default, and not anchored to the start/end of a path. For example, use `.+\.xib$` to match files with a `.xib` extension. Use a tool such as [RegExr](https://regexr.com) to ensure you're using a valid regular expression.
 
 The `outputs` parameter accepts either a dictionary, or an array of dictionaries, with the keys described below. Each such "output" will take the input files, and use the output template to generate a file at the given output path. This allows you to generate multiple outputs for the same input files (which will only be parsed once).
 
