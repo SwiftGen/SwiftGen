@@ -43,6 +43,7 @@ if [ "$key" = "templates_generated" ]; then
 	done
 
 	"$SWIFTLINT" lint --strict --config "$CONFIG" --path "$scratch" | sed s@"$scratch"@"${PROJECT_DIR}"@
+	exit ${PIPESTATUS[0]}
 else
 	"$SWIFTLINT" lint --strict --config "$CONFIG" --path "${PROJECT_DIR}/${selected_path}"
 fi

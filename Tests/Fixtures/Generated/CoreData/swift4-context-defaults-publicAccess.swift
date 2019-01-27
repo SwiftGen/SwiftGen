@@ -5,14 +5,11 @@ import CoreData
 import Foundation
 
 // swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
-// swiftlint:disable attributes
-// swiftlint:disable vertical_whitespace_closing_braces
-
+// swiftlint:disable attributes file_length vertical_whitespace_closing_braces
 // swiftlint:disable identifier_name line_length type_body_length
+
 // MARK: - AbstractEntity
 
-@objc(AbstractEntity)
 public class AbstractEntity: NSManagedObject {
   public class func entityName() -> String {
     return "AbstractEntity"
@@ -26,13 +23,20 @@ public class AbstractEntity: NSManagedObject {
     return NSFetchRequest<AbstractEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable discouraged_optional_boolean
-  // swiftlint:enable discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
+
+// MARK: - AutoClassGen
+
+// Note: 'AutoClassGen' has codegen enabled for Xcode, skipping code generation.
+
+// MARK: - AutoExtensionGen
+
+// Note: 'AutoExtensionGen' has codegen enabled for Xcode, skipping code generation.
 
 // MARK: - ChildEntity
 
-@objc(ChildEntity)
 public class ChildEntity: MainEntity {
   override public class func entityName() -> String {
     return "ChildEntity"
@@ -46,13 +50,16 @@ public class ChildEntity: MainEntity {
     return NSFetchRequest<ChildEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable discouraged_optional_boolean
-  // swiftlint:enable discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
+
+// MARK: - ImpossibleType
+
+// Warning: 'We.Cannot.Handle.ImpossibleType' cannot be a valid type name, skipping code generation.
 
 // MARK: - MainEntity
 
-@objc(MainEntity)
 public class MainEntity: NSManagedObject {
   public class func entityName() -> String {
     return "MainEntity"
@@ -66,7 +73,7 @@ public class MainEntity: NSManagedObject {
     return NSFetchRequest<MainEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
   @NSManaged public var attributedString: NSAttributedString?
   @NSManaged public var binaryData: Data?
   @NSManaged public var boolean: Bool
@@ -153,7 +160,7 @@ public class MainEntity: NSManagedObject {
   @NSManaged public var oneToMany: NSOrderedSet?
   @NSManaged public var oneToOne: SecondaryEntity?
   @NSManaged public var fetchedProperty: [NewEntity]
-  // swiftlint:enable discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
 
 // MARK: Relationship ManyToMany
@@ -273,7 +280,6 @@ extension MainEntity {
 
 // MARK: - NewEntity
 
-@objc(NewEntity)
 public class NewEntity: AbstractEntity {
   override public class func entityName() -> String {
     return "NewEntity"
@@ -287,14 +293,13 @@ public class NewEntity: AbstractEntity {
     return NSFetchRequest<NewEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
   @NSManaged public var identifier: UUID?
-  // swiftlint:enable discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
 
 // MARK: - SecondaryEntity
 
-@objc(SecondaryEntity)
 public class SecondaryEntity: NSManagedObject {
   public class func entityName() -> String {
     return "SecondaryEntity"
@@ -308,12 +313,12 @@ public class SecondaryEntity: NSManagedObject {
     return NSFetchRequest<SecondaryEntity>(entityName: entityName())
   }
 
-  // swiftlint:disable discouraged_optional_boolean
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
   @NSManaged public var name: String
   @NSManaged public var manyToMany: Set<MainEntity>?
   @NSManaged public var oneToMany: MainEntity?
   @NSManaged public var oneToOne: MainEntity?
-  // swiftlint:enable discouraged_optional_boolean
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
 
 // MARK: Relationship ManyToMany

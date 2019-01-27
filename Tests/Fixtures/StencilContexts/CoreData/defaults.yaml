@@ -7,6 +7,7 @@ models:
     - "AutoClassGen"
     - "AutoExtensionGen"
     - "ChildEntity"
+    - "ImpossibleType"
     - "MainEntity"
     - "NewEntity"
     - "SecondaryEntity"
@@ -56,6 +57,17 @@ models:
       uniquenessConstraints: []
       userInfo:
         key: "value"
+    ImpossibleType:
+      attributes: []
+      className: "We.Cannot.Handle.ImpossibleType"
+      fetchedProperties: []
+      isAbstract: false
+      name: "ImpossibleType"
+      relationships: []
+      shouldGenerateCode: true
+      superEntity: ""
+      uniquenessConstraints: []
+      userInfo: {}
     MainEntity:
       attributes:
       - customClassName: "NSAttributedString"

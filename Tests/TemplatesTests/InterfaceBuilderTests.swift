@@ -29,33 +29,33 @@ class InterfaceBuilderTests: XCTestCase {
 
       // test: enumName parameter
       (context: try StencilContext.enrich(context: context, parameters: ["enumName=XCTStoryboardCustom"]),
-       suffix: "-custom-name"),
+       suffix: "-customName"),
 
       // test: module parameter and PRODUCT_MODULE_NAME
       (context: bareContext,
-       suffix: "-no-defined-module"),
+       suffix: "-noDefinedModule"),
       (context: try StencilContext.enrich(context: bareContext, parameters: ["module=SwiftGen"]),
        suffix: ""),
       (context: try StencilContext.enrich(context: context, parameters: ["module=ExtraModule"]),
-       suffix: "-with-extra-module"),
+       suffix: "-withExtraModule"),
 
       // test: ignoreTargetModule parameter
       (context: try StencilContext.enrich(context: context, parameters: ["ignoreTargetModule"]),
-       suffix: "-ignore-target-module"),
+       suffix: "-ignoreTargetModule"),
       (context: try StencilContext.enrich(
         context: context,
         parameters: ["ignoreTargetModule"],
         environment: ["PRODUCT_MODULE_NAME": "Test"]
        ),
-       suffix: "-no-defined-module"),
+       suffix: "-noDefinedModule"),
       (context: try StencilContext.enrich(context: context, parameters: ["ignoreTargetModule", "module=Test"]),
-       suffix: "-ignore-target-module"),
+       suffix: "-ignoreTargetModule"),
       (context: try StencilContext.enrich(context: context, parameters: ["ignoreTargetModule", "module=ExtraModule"]),
-       suffix: "-ignore-target-module-with-extra-module"),
+       suffix: "-ignoreTargetModule-withExtraModule"),
 
       // test: publicAccess parameter
       (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-public-access")
+       suffix: "-publicAccess")
     ]
   }
 }
