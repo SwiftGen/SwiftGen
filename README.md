@@ -225,7 +225,7 @@ Each subcommand generally accepts the same options and syntax, and they mirror t
 * `--templatePath PATH` or `-p PATH`: define the Stencil template to use, using a full path.
 * Note: you should specify one and only one template when invoking SwiftGen. You have to use either `-t` or `-p` but should not use both at the same time (it wouldn't make sense anyway and you'll get an error if you try)
 * `--filter REGEX` or `-f REGEX`: the filter to apply to each input path. Each command has a default filter that you can override with this option.
-* Note: use `.+` to match multiple characters (at least one), and don't forget to escape the dot (`\.`) if you want to match a literal dot like for an extension. Add `$` at the end to ensure the path ends with the extension you want. For example, use `.+\.xib$` to match files with a `.xib` extension.
+* Note: use `.+` to match multiple characters (at least one), and don't forget to escape the dot (`\.`) if you want to match a literal dot like for an extension. Add `$` at the end to ensure the path ends with the extension you want. For example, use `.+\.xib$` to match files with a `.xib` extension. Use a tool such as [RegExr](https://regexr.com) to ensure you're using a valid regular expression.
 * Each command supports multiple input files (or directories where applicable).
 * You can always use the `--help` flag to see what options a command accept, e.g. `swiftgen xcassets --help`.
 
