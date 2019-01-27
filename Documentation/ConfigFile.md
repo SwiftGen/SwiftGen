@@ -15,7 +15,7 @@ input_dir: Sources/Resources
 output_dir: Sources/Generated/
 strings:
   inputs: Base.lproj
-  filter: .*\.strings
+  filter: .+\.strings$
   outputs:
     - templateName: structured-swift4
       output: L10n-Constants.swift
@@ -36,7 +36,7 @@ xcassets:
 
 ℹ️ All _relative_ paths specified in the configuration file (`input_dir`, `output_dir`, `inputs`, `templatePath`, `output`) are relative to the location of the _configuration file_ itself.
 
-> 💡 We advise against using _absolute_ paths — starting with `/` — in the configuration file, so that they won't rely on where the project was cloned on your machine._
+> 💡 We advise against using _absolute_ paths — starting with `/` — in the configuration file, so that they won't rely on where the project was cloned on your machine.
 
 Here's a quick description of all the possible _root_ keys. All of them are optional.
 
@@ -69,6 +69,8 @@ Each key corresponding to a SwiftGen subcommands (`colors`, `coredata`, `fonts`,
 | `templatePath` | Path | **Deprecated** The path to the template to use. If you provide a value for this, you shouldn't also provide a value for `templateName`. |
 | `output` | Path | **Deprecated** The path of the output file to generate. _(Note: Any intermediate directory up to this file must already exist.)_ |
 | `params` | Dictionary | **Deprecated** Any optional parameter you want to pass to the template (similarly to `--param` in the CLI). |
+
+> 💡 Note: For custom filters, use `.+` to match multiple characters (at least one), and don't forget to escape the dot (`\.`) if you want to match a literal dot like for an extension. Add `$` at the end to ensure the path ends with the extension you want. For example, use `.+\.xib$` to match files with a `.xib` extension.
 
 The `outputs` parameter accepts either a dictionary, or an array of dictionaries, with the keys described below. Each such "output" will take the input files, and use the output template to generate a file at the given output path. This allows you to generate multiple outputs for the same input files (which will only be parsed once).
 
