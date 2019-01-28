@@ -1,4 +1,4 @@
-swiftlint_version: 0.29.3
+swiftlint_version: 0.30.1
 
 opt_in_rules:
  - anyobject_protocol
@@ -36,6 +36,7 @@ opt_in_rules:
  - multiline_literal_brackets
  - multiline_parameters
  - multiline_parameters_brackets
+ - nslocalizedstring_key
  - number_separator
  - operator_usage_whitespace
  - overridden_super_call
@@ -48,6 +49,7 @@ opt_in_rules:
  - sorted_first_last
  - sorted_imports
  - static_operator
+ - strong_iboutlet
  - toggle_bool
  - trailing_closure
  - unavailable_function
