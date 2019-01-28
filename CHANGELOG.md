@@ -41,9 +41,10 @@ _None_
 * Resolve path if the binary is a symbolic link in order to find bundled templates.  
   [Liquidsoul](https://github.com/liquidsoul)
   [#559](https://github.com/SwiftGen/SwiftGen/issues/559)
-* Update to SwiftLint 0.29.3 and enable some extra SwiftLint rules.  
+* Update to SwiftLint 0.30.1 and enable some extra SwiftLint rules.  
   [David Jennes](https://github.com/djbe)
   [#574](https://github.com/SwiftGen/SwiftGen/pull/574)
+  [#583](https://github.com/SwiftGen/SwiftGen/pull/583)
 
 ## 6.0.2
 
