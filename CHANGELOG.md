@@ -2,11 +2,12 @@
 
 ---
 
-## Develop
+## 6.1.0
 
-### Breaking Changes
+### Changes in other SwiftGen modules
 
-_None_
+* [StencilSwiftKit 2.7.2](https://github.com/SwiftGen/StencilSwiftKit/blob/2.7.2/CHANGELOG.md)
+* [Stencil 0.13.1](https://github.com/kylef/Stencil/blob/0.13.1/CHANGELOG.md)
 
 ### New Features
 
@@ -22,9 +23,10 @@ _None_
   [#185](https://github.com/SwiftGen/SwiftGen/issues/185)
   [#191](https://github.com/SwiftGen/SwiftGen/pull/191)
   [#195](https://github.com/SwiftGen/SwiftGen/pull/195)
-* Expand environment variables in YAML files.  
+* Config: expand environment variables in YAML files.  
   [Wolfgang Lutz](https://github.com/lutzifer)
-  [#355](https://github.com/SwiftGen/SwiftGen/issues/#355)
+  [#355](https://github.com/SwiftGen/SwiftGen/issues/355)
+  [#564](https://github.com/SwiftGen/SwiftGen/pull/564)
 * Each command now accepts a `filter` option, which accepts a regular expression for filtering input paths. The filter is applied to individual paths as well as when the command recurses into directories.  
   [David Jennes](https://github.com/djbe)
   [#383](https://github.com/SwiftGen/SwiftGen/issues/383)
