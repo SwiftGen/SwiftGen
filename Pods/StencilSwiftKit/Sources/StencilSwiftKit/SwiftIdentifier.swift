@@ -1,6 +1,6 @@
 //
 // StencilSwiftKit
-// Copyright (c) 2017 SwiftGen
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -92,10 +92,11 @@ private func identifierCharacterSets(exceptions: String) -> (head: NSMutableChar
 }
 
 enum SwiftIdentifier {
-  static func identifier(from string: String,
-                         forbiddenChars exceptions: String = "",
-                         replaceWithUnderscores underscores: Bool = false) -> String {
-
+  static func identifier(
+    from string: String,
+    forbiddenChars exceptions: String = "",
+    replaceWithUnderscores underscores: Bool = false
+  ) -> String {
     let (_, tail) = identifierCharacterSets(exceptions: exceptions)
 
     let parts = string.components(separatedBy: tail.inverted)
@@ -111,9 +112,10 @@ enum SwiftIdentifier {
     return prefixWithUnderscoreIfNeeded(string: result, forbiddenChars: exceptions)
   }
 
-  static func prefixWithUnderscoreIfNeeded(string: String,
-                                           forbiddenChars exceptions: String = "") -> String {
-
+  static func prefixWithUnderscoreIfNeeded(
+    string: String,
+    forbiddenChars exceptions: String = ""
+  ) -> String {
     guard let firstChar = string.unicodeScalars.first else { return "" }
 
     let (head, _) = identifierCharacterSets(exceptions: exceptions)

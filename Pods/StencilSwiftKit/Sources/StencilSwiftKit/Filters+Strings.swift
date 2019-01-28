@@ -1,6 +1,6 @@
 //
 // StencilSwiftKit
-// Copyright (c) 2017 SwiftGen
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -209,14 +209,18 @@ extension Filters.Strings {
     let camelCased = try NSRegularExpression(pattern: "([a-z\\d])([A-Z])", options: .dotMatchesLineSeparators)
 
     let fullRange = NSRange(location: 0, length: string.unicodeScalars.count)
-    var result = longUpper.stringByReplacingMatches(in: string,
-                                                    options: .reportCompletion,
-                                                    range: fullRange,
-                                                    withTemplate: "$1_$2")
-    result = camelCased.stringByReplacingMatches(in: result,
-                                                 options: .reportCompletion,
-                                                 range: fullRange,
-                                                 withTemplate: "$1_$2")
+    var result = longUpper.stringByReplacingMatches(
+      in: string,
+      options: .reportCompletion,
+      range: fullRange,
+      withTemplate: "$1_$2"
+    )
+    result = camelCased.stringByReplacingMatches(
+      in: result,
+      options: .reportCompletion,
+      range: fullRange,
+      withTemplate: "$1_$2"
+    )
     return result.replacingOccurrences(of: "-", with: "_")
   }
 }

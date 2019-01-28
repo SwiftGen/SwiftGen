@@ -1,9 +1,7 @@
 //
-//  Context.swift
-//  Pods
-//
-//  Created by David Jennes on 14/02/2017.
-//
+// StencilSwiftKit
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import Foundation
@@ -20,10 +18,11 @@ public enum StencilContext {
   ///   - environment: Environment variables, defaults to `ProcessInfo().environment`
   /// - Returns: The new Stencil context enriched with the parameters and env variables
   /// - Throws: `Parameters.Error`
-  public static func enrich(context: [String: Any],
-                            parameters: [String],
-                            environment: [String: String] =
-                            ProcessInfo.processInfo.environment) throws -> [String: Any] {
+  public static func enrich(
+    context: [String: Any],
+    parameters: [String],
+    environment: [String: String] = ProcessInfo.processInfo.environment
+  ) throws -> [String: Any] {
     let params = try Parameters.parse(items: parameters)
     return try enrich(context: context, parameters: params, environment: environment)
   }
@@ -36,10 +35,11 @@ public enum StencilContext {
   ///   - environment: Environment variables, defaults to `ProcessInfo().environment`
   /// - Returns: The new Stencil context enriched with the parameters and env variables
   /// - Throws: `Parameters.Error`
-  public static func enrich(context: [String: Any],
-                            parameters: [String: Any],
-                            environment: [String: String] =
-                            ProcessInfo.processInfo.environment) throws -> [String: Any] {
+  public static func enrich(
+    context: [String: Any],
+    parameters: [String: Any],
+    environment: [String: String] = ProcessInfo.processInfo.environment
+  ) throws -> [String: Any] {
     var context = context
 
     context[environmentKey] = merge(context[environmentKey], with: environment)
