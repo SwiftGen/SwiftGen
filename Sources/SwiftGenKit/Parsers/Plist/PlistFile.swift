@@ -7,7 +7,7 @@
 import Foundation
 import PathKit
 
-public extension Plist {
+extension Plist {
   struct File {
     let path: Path
     let name: String

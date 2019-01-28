@@ -127,7 +127,8 @@ extension CoreData.Parser {
     baseEntity: CoreData.Entity,
     model: CoreData.Model
   ) -> [String: String] {
-    if predicateString.isEmpty { return [:] }
+    guard !predicateString.isEmpty else { return [:] }
+
     let predicate = NSPredicate(format: predicateString, argumentArray: nil)
     return substitutionVariables(in: predicate, baseEntity: baseEntity, model: model)
   }

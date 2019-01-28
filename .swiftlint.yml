@@ -8,12 +8,14 @@ opt_in_rules:
  - closure_end_indentation
  - closure_spacing
  - collection_alignment
+ - conditional_returns_on_newline
  - contains_over_first_not_nil
  - convenience_type
  - discouraged_optional_boolean
  - discouraged_optional_collection
  - empty_count
  - empty_string
+ - empty_xctest_method
  - fallthrough
  - fatal_error_message
  - file_header
@@ -22,10 +24,8 @@ opt_in_rules:
  - identical_operands
  - implicit_return
  - implicitly_unwrapped_optional
- - inert_defer
  - joined_default_parameter
  - last_where
- - legacy_hashing
  - legacy_random
  - literal_expression_end_indentation
  - lower_acl_than_parent
@@ -45,16 +45,15 @@ opt_in_rules:
  - private_outlet
  - prohibited_super_call
  - redundant_nil_coalescing
- - redundant_objc_attribute
  - sorted_first_last
  - sorted_imports
  - static_operator
  - strong_iboutlet
+ - switch_case_on_newline
  - toggle_bool
  - trailing_closure
  - unavailable_function
  - unneeded_parentheses_in_closure_argument
- - unused_control_flow_label
  - vertical_parameter_alignment_on_call
  - vertical_whitespace_closing_braces
  - vertical_whitespace_opening_braces
@@ -62,6 +61,9 @@ opt_in_rules:
  - yoda_condition
 
 # Rules customization
+conditional_returns_on_newline:
+  if_only: true
+
 file_header:
   required_pattern: |
                     \/\/(
