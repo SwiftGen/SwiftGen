@@ -6,7 +6,7 @@ require 'uri'
 require 'open3'
 
 def first_match_in_file(file, re)
-   File.foreach('README.md') do |line|
+   File.foreach(file) do |line|
      m = re.match(line)
      return m if m
    end
