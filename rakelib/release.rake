@@ -107,7 +107,7 @@ namespace :release do
 
   desc 'Create a zip containing all the prebuilt binaries'
   task :zip => ['cli:clean', 'cli:install'] do
-    `cp LICENSE README.md CHANGELOG.md build/swiftgen`
+    `cp LICENCE README.md CHANGELOG.md build/swiftgen`
     `cd build/swiftgen; zip -r ../swiftgen-#{Utils.podspec_version('SwiftGen')}.zip .`
   end
 
