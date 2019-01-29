@@ -55,8 +55,10 @@ extension ConfigEntryOutput {
   func commandLine(forCommand cmd: String, inputs: [Path], filter: String?) -> String {
     let templateFlag: String = {
       switch self.template {
-      case .name(let name): return "--templateName \(name)"
-      case .path(let path): return "--templatePath \(path.string)"
+      case .name(let name):
+        return "--templateName \(name)"
+      case .path(let path):
+        return "--templatePath \(path.string)"
       }
     }()
     let filterFlag = filter.map { "--filter \($0)" } ?? ""

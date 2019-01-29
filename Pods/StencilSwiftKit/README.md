@@ -85,3 +85,9 @@ For easier use, you can use the `StencilContext.enrich(context:parameters:enviro
 
 - `param`: the parsed parameters using the parser mentioned above.
 - `env`: a dictionary with all available environment variables (such as `PATH`).
+
+---
+
+# Licence
+
+This code and tool is under the MIT Licence. See the `LICENCE` file in this repository.

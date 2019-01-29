@@ -5,7 +5,7 @@ raise 'Please use bundle exec to run the pod command' unless defined?(Bundler)
 
 def common_pods
   podspec :path => 'SwiftGenKit.podspec'
-  pod 'SwiftLint', '~> 0.29'
+  pod 'SwiftLint', '~> 0.30'
 end
 
 target 'swiftgen' do

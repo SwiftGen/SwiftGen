@@ -1,6 +1,6 @@
 //
 // StencilSwiftKit
-// Copyright (c) 2017 SwiftGen
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -17,11 +17,11 @@ public extension Extension {
 
   private func registerFilter(_ name: String, filter: @escaping Filters.BooleanWithArguments) {
     typealias GenericFilter = (Any?, [Any?]) throws -> Any?
-    registerFilter(name, filter: filter as GenericFilter)
-    // swiftlint:disable:next trailing_closure
-    registerFilter("!\(name)", filter: { value, arguments in
+    let inverseFilter: GenericFilter = { value, arguments in
       try !filter(value, arguments)
-    } as GenericFilter)
+    }
+    registerFilter(name, filter: filter as GenericFilter)
+    registerFilter("!\(name)", filter: inverseFilter)
   }
 
   private func registerNumbersFilters() {

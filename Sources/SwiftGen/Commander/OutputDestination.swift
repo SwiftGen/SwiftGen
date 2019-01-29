@@ -20,8 +20,10 @@ enum OutputDestination: ArgumentConvertible {
 
   var description: String {
     switch self {
-    case .console: return "(stdout)"
-    case .file(let path): return path.description
+    case .console:
+      return "(stdout)"
+    case .file(let path):
+      return path.description
     }
   }
 
