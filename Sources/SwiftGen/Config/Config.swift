@@ -1,11 +1,10 @@
 //
-//  Config.swift
-//  swiftgen
-//
-//  Created by Olivier Halligon on 01/10/2017.
-//  Copyright © 2017 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
+import Foundation
 import PathKit
 import SwiftGenKit
 
@@ -23,11 +22,17 @@ struct Config {
 }
 
 extension Config {
-  init(file: Path, logger: (LogLevel, String) -> Void = logMessage) throws {
+  init(
+    file: Path,
+    env: [String: String] = ProcessInfo.processInfo.environment,
+    logger: (LogLevel, String) -> Void = logMessage
+  ) throws {
     if !file.exists {
       throw Config.Error.pathNotFound(path: file)
     }
-    let anyConfig = try YAML.read(path: file)
+
+    let anyConfig = try YAML.read(path: file, env: env)
+
     guard let config = anyConfig as? [String: Any] else {
       throw Config.Error.wrongType(key: nil, expected: "Dictionary", got: type(of: anyConfig))
     }
@@ -84,7 +89,7 @@ extension Config {
     }
   }
 
-  private func lint(cmd: String, entry: ConfigEntry, logger: (LogLevel, String) -> Void = logMessage) {
+  private func lint(cmd: String, entry: ConfigEntry, logger: (LogLevel, String) -> Void) {
     var entry = entry
     entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
 
@@ -93,44 +98,60 @@ extension Config {
         logger(.error, "\(cmd).inputs: \(inputPath) does not exist")
       }
       if inputPath.isAbsolute {
-        logger(.warning, """
+        logger(
+          .warning,
+          """
           \(cmd).inputs: \(inputPath) is an absolute path. Prefer relative paths for portability \
           when sharing your project.
-          """)
+          """
+        )
       }
     }
 
     for entryOutput in entry.outputs {
-      do {
-        let actualCmd = Config.deprecatedCommands[cmd] ?? cmd
-        _ = try entryOutput.template.resolvePath(forSubcommand: actualCmd)
-      } catch let error {
-        logger(.error, "\(cmd).outputs: \(error)")
-      }
-      if case TemplateRef.path(let templateRef) = entryOutput.template, templateRef.isAbsolute {
-        logger(.warning, """
-          \(cmd).outputs.templatePath: \(templateRef) is an absolute path. Prefer relative paths \
-          for portability when sharing your project.
-          """)
-      }
-
-      let outputParent = entryOutput.output.parent()
-      if !outputParent.exists {
-        logger(.error, """
-          \(cmd).outputs.output: \(outputParent) does not exist. Intermediate folders up to the \
-          output file must already exist to avoid misconfigurations, and won't be created for you.
-          """)
-      }
-      if entryOutput.output.isAbsolute {
-        logger(.warning, """
-          \(cmd).outputs.output: \(entryOutput.output) is an absolute path. Prefer relative paths \
-          for portability when sharing your project.
-          """)
-      }
+      lint(cmd: cmd, output: entryOutput, logger: logger)
     }
 
     for item in entry.commandLine(forCommand: cmd) {
       logMessage(.info, " $ \(item)")
+    }
+  }
+
+  private func lint(cmd: String, output entryOutput: ConfigEntryOutput, logger: (LogLevel, String) -> Void) {
+    do {
+      let actualCmd = Config.deprecatedCommands[cmd] ?? cmd
+      _ = try entryOutput.template.resolvePath(forSubcommand: actualCmd)
+    } catch let error {
+      logger(.error, "\(cmd).outputs: \(error)")
+    }
+    if case TemplateRef.path(let templateRef) = entryOutput.template, templateRef.isAbsolute {
+      logger(
+        .warning,
+        """
+        \(cmd).outputs.templatePath: \(templateRef) is an absolute path. Prefer relative paths \
+        for portability when sharing your project.
+        """
+      )
+    }
+
+    let outputParent = entryOutput.output.parent()
+    if !outputParent.exists {
+      logger(
+        .error,
+        """
+        \(cmd).outputs.output: \(outputParent) does not exist. Intermediate folders up to the \
+        output file must already exist to avoid misconfigurations, and won't be created for you.
+        """
+      )
+    }
+    if entryOutput.output.isAbsolute {
+      logger(
+        .warning,
+        """
+        \(cmd).outputs.output: \(entryOutput.output) is an absolute path. Prefer relative paths \
+        for portability when sharing your project.
+        """
+      )
     }
   }
 }

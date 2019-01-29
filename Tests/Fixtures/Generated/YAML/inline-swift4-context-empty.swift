@@ -1,3 +1,4 @@
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// swiftlint:disable all
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 // No files found

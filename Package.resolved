@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/tid-kijyun/Kanna.git",
         "state": {
           "branch": null,
-          "revision": "aec73a69619cf9bb540002a17793fb54633f372d",
-          "version": "4.0.2"
+          "revision": "0534d5d4917410870fcac8907e06f69b58a23417",
+          "version": "4.0.3"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/SwiftGen/StencilSwiftKit.git",
         "state": {
           "branch": null,
-          "revision": "a50ab97b9380fbf75fedaeac2da79f4d52464b8f",
-          "version": "2.7.1"
+          "revision": "dbf02bd6afe71b65ead2bd250aaf974abc688094",
+          "version": "2.7.2"
         }
       },
       {

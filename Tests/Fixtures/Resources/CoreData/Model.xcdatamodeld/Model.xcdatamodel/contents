@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ChildEntity" representedClassName="ChildEntity" parentEntity="MainEntity" syncable="YES" codeGenerationType="class"/>
+    <entity name="MainEntity" representedClassName="MainEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="binaryData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="boolean" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="color" optional="YES" attributeType="Transformable" customClassName="UIColor" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="decimal" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="double" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="float" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="int16" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="int32" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="int64" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="string" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transformable" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="uri" optional="YES" attributeType="URI" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="manyToMany" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SecondaryEntity" inverseName="manyToMany" inverseEntity="SecondaryEntity" syncable="YES"/>
+        <relationship name="oneToMany" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SecondaryEntity" inverseName="oneToMany" inverseEntity="SecondaryEntity" syncable="YES"/>
+        <relationship name="oneToOne" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SecondaryEntity" inverseName="oneToOne" inverseEntity="SecondaryEntity" syncable="YES"/>
+    </entity>
+    <entity name="SecondaryEntity" representedClassName="SecondaryEntity" syncable="YES" codeGenerationType="class">
+        <relationship name="manyToMany" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="manyToMany" inverseEntity="MainEntity" syncable="YES"/>
+        <relationship name="oneToMany" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="oneToMany" inverseEntity="MainEntity" syncable="YES"/>
+        <relationship name="oneToOne" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="oneToOne" inverseEntity="MainEntity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="MainEntity" positionX="-335" positionY="-288" width="128" height="300"/>
+        <element name="SecondaryEntity" positionX="-54" positionY="36" width="128" height="90"/>
+        <element name="ChildEntity" positionX="-135" positionY="-153" width="128" height="45"/>
+    </elements>
+</model>

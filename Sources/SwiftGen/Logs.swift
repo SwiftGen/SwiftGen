@@ -1,9 +1,7 @@
 //
-//  Logs.swift
-//  swiftgen
-//
-//  Created by Olivier HALLIGON on 12/10/2017.
-//  Copyright © 2017 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import Foundation

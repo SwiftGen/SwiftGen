@@ -135,7 +135,7 @@ namespace :output do
   def files(f)
     if !(f.include?('iOS') || f.include?('macOS'))
       [f]
-    elsif f.include?('public-access')
+    elsif f.include?('publicAccess')
       ["#{MODULE_OUTPUT_PATH}/PublicDefinitions.swift", f]
     else
       ["#{MODULE_OUTPUT_PATH}/Definitions.swift", f]
@@ -143,9 +143,9 @@ namespace :output do
   end
 
   def flags(f)
-    if f.include?('ignore-target-module-with-extra-module')
+    if f.include?('ignoreTargetModule-withExtraModule')
       ['-D', 'DEFINE_EXTRA_MODULE_TYPES']
-    elsif f.include?('with-extra-module') || f.include?('no-defined-module')
+    elsif f.include?('withExtraModule') || f.include?('noDefinedModule')
       ['-D', 'DEFINE_NAMESPACED_EXTRA_MODULE_TYPES']
     else
       []

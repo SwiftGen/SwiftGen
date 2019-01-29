@@ -1,9 +1,7 @@
 //
-//  Path+AppSupport.swift
-//  swiftgen
-//
-//  Created by Olivier HALLIGON on 11/10/2017.
-//  Copyright © 2017 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import Foundation
@@ -36,4 +34,15 @@ let templatesRelativePath: String = {
 private final class BundleToken {}
 
 let appSupportTemplatesPath = Path.applicationSupport + "SwiftGen/templates"
-let bundledTemplatesPath = Path(ProcessInfo.processInfo.arguments[0]).parent() + templatesRelativePath
+let binaryPath: Path = {
+  var binaryPath = Path(ProcessInfo.processInfo.arguments[0])
+  do {
+    while binaryPath.isSymlink {
+      binaryPath = try binaryPath.symlinkDestination()
+    }
+  } catch {
+    print("Warning: could not resolve symlink of \(binaryPath) with error \(error)")
+  }
+  return binaryPath
+}()
+let bundledTemplatesPath = binaryPath.parent() + templatesRelativePath

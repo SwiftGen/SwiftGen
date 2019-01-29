@@ -25,11 +25,7 @@ SOFTWARE.
 import Foundation
 import CoreFoundation
 
-#if SWIFT_PACKAGE
-import SwiftClibxml2
-#else
 import libxmlKanna
-#endif
 
 extension String.Encoding {
     var IANACharSetName: String? {

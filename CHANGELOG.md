@@ -2,9 +2,55 @@
 
 ---
 
+## 6.1.0
+
+### Changes in core dependencies of SwiftGen
+
+* [StencilSwiftKit 2.7.2](https://github.com/SwiftGen/StencilSwiftKit/blob/2.7.2/CHANGELOG.md)
+* [Stencil 0.13.1](https://github.com/kylef/Stencil/blob/0.13.1/CHANGELOG.md)
+
+### New Features
+
+* Adds support for generating code from Core Data models.  
+  [Grant Butler](https://github.com/grantjbutler)
+  [David Jennes](https://github.com/djbe)
+  [Igor Palaguta](https://github.com/Igor-Palaguta)
+  [#455](https://github.com/SwiftGen/SwiftGen/pull/455)
+  [#567](https://github.com/SwiftGen/SwiftGen/pull/567)
+  [#575](https://github.com/SwiftGen/SwiftGen/pull/575)
+  [#581](https://github.com/SwiftGen/SwiftGen/pull/581)
+  [#45](https://github.com/SwiftGen/SwiftGen/issues/45)
+  [#185](https://github.com/SwiftGen/SwiftGen/issues/185)
+  [#191](https://github.com/SwiftGen/SwiftGen/pull/191)
+  [#195](https://github.com/SwiftGen/SwiftGen/pull/195)
+* Config: expand environment variables in YAML files.  
+  [Wolfgang Lutz](https://github.com/lutzifer)
+  [#355](https://github.com/SwiftGen/SwiftGen/issues/355)
+  [#564](https://github.com/SwiftGen/SwiftGen/pull/564)
+* Each command now accepts a `filter` option, which accepts a regular expression for filtering input paths. The filter is applied to individual paths as well as when the command recurses into directories.  
+  [David Jennes](https://github.com/djbe)
+  [#383](https://github.com/SwiftGen/SwiftGen/issues/383)
+  [#570](https://github.com/SwiftGen/SwiftGen/pull/570)
+
+### Bug Fixes
+
+* Colors: Fix an issue where the `public` access modifier was not being added correctly in the `literals-swift3` and `literals-swift4` templates when the `publicAccess` parameter was specified. Also remove some uneccessary `public` access modifiers from the `swift3` and `swift4` templates.  
+  [Isaac Halvorson](https://github.com/hisaac)
+  [#549](https://github.com/SwiftGen/SwiftGen/pull/549)
+
+### Internal Changes
+
+* Resolve path if the binary is a symbolic link in order to find bundled templates.  
+  [Liquidsoul](https://github.com/liquidsoul)
+  [#559](https://github.com/SwiftGen/SwiftGen/issues/559)
+* Update to SwiftLint 0.30.1 and enable some extra SwiftLint rules.  
+  [David Jennes](https://github.com/djbe)
+  [#574](https://github.com/SwiftGen/SwiftGen/pull/574)
+  [#583](https://github.com/SwiftGen/SwiftGen/pull/583)
+
 ## 6.0.2
 
-### Changes in other SwiftGen modules
+### Changes in core dependencies of SwiftGen
 
 * [StencilSwiftKit 2.7.1](https://github.com/SwiftGen/StencilSwiftKit/blob/2.7.1/CHANGELOG.md)
 * [Stencil 0.13.1](https://github.com/kylef/Stencil/blob/0.13.1/CHANGELOG.md)
@@ -23,7 +69,7 @@
 
 ## 6.0.1
 
-### Changes in other SwiftGen modules
+### Changes in core dependencies of SwiftGen
 
 * [StencilSwiftKit 2.7.1](https://github.com/SwiftGen/StencilSwiftKit/blob/2.7.1/CHANGELOG.md)
 * [Stencil 0.13.1](https://github.com/kylef/Stencil/blob/0.13.1/CHANGELOG.md)
@@ -67,7 +113,7 @@
 
 Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen-60-migration-guide) for a list of changes you'll need to apply.
 
-### Changes in other SwiftGen modules
+### Changes in core dependencies of SwiftGen
 
 * [StencilSwiftKit 2.7.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.7.0/CHANGELOG.md)
 * [Stencil 0.13.1](https://github.com/kylef/Stencil/blob/0.13.1/CHANGELOG.md)
@@ -209,7 +255,7 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 
 ## 5.3.0
 
-### Changes in other SwiftGen modules
+### Changes in core dependencies of SwiftGen
 
 * [StencilSwiftKit 2.4.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.4.0/CHANGELOG.md)
 * [Stencil 0.10.1](https://github.com/kylef/Stencil/blob/0.10.1/CHANGELOG.md)
@@ -251,7 +297,7 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 
 ## 5.2.0
 
-### Changes in other SwiftGen modules
+### Changes in core dependencies of SwiftGen
 
 * [SwiftGenKit 2.1.1](https://github.com/SwiftGen/SwiftGenKit/blob/2.1.1/CHANGELOG.md)
 * [StencilSwiftKit 2.3.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.3.0/CHANGELOG.md)
@@ -298,7 +344,7 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 
 ## 5.1.1
 
-### Changes in other SwiftGen modules
+### Changes in core dependencies of SwiftGen
 
 * [templates 2.1.1](https://github.com/SwiftGen/templates/blob/2.1.1/CHANGELOG.md)
 
@@ -310,7 +356,7 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 
 ## 5.1.0
 
-### Changes in other SwiftGen modules
+### Changes in core dependencies of SwiftGen
 
 * [SwiftGenKit 2.1.0](https://github.com/SwiftGen/SwiftGenKit/blob/2.1.0/CHANGELOG.md)
 * [StencilSwiftKit 2.1.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.1.0/CHANGELOG.md)
@@ -341,7 +387,7 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 
 Read the [SwiftGen 5.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen-50-migration-guide) for a list of changes you'll need to apply.
 
-### Changes in other SwiftGen modules
+### Changes in core dependencies of SwiftGen
 
 * [SwiftGenKit 2.0.0](https://github.com/SwiftGen/SwiftGenKit/blob/2.0.0/CHANGELOG.md)
 * [StencilSwiftKit 2.0.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.0.0/CHANGELOG.md)
@@ -402,7 +448,7 @@ Read the [SwiftGen 5.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 
 ## 4.2.1
 
-### Changes in other SwiftGen modules
+### Changes in core dependencies of SwiftGen
 
 * [SwiftGenKit 1.1.0](https://github.com/SwiftGen/SwiftGenKit/blob/1.1.0/CHANGELOG.md)
 * [StencilSwiftKit 1.0.2](https://github.com/SwiftGen/StencilSwiftKit/blob/1.0.2/CHANGELOG.md)
@@ -434,7 +480,7 @@ Read the [SwiftGen 5.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 
 ## 4.2.0
 
-### Changes in other SwiftGen modules
+### Changes in core dependencies of SwiftGen
 
 * [SwiftGenKit 1.0.1](https://github.com/SwiftGen/SwiftGenKit/blob/1.0.1/CHANGELOG.md)
 * [StencilSwiftKit 1.0.0](https://github.com/SwiftGen/StencilSwiftKit/blob/1.0.0/CHANGELOG.md)

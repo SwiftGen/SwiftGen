@@ -1,6 +1,6 @@
 //
 // SwiftGen
-// Copyright (c) 2015 Olivier Halligon
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -38,9 +38,11 @@ let main = Group {
   }
 }
 
-main.run("""
+main.run(
+  """
   SwiftGen v\(version) (\
   Stencil v\(stencilVersion), \
   StencilSwiftKit v\(stencilSwiftKitVersion), \
   SwiftGenKit v\(swiftGenKitVersion))
-  """)
+  """
+)

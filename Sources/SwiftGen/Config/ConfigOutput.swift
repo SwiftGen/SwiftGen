@@ -1,9 +1,7 @@
 //
-//  ConfigOutput.swift
-//  swiftgen
-//
-//  Created by David Jennes on 05/05/2018.
-//  Copyright © 2018 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import PathKit
@@ -54,21 +52,25 @@ extension ConfigEntryOutput {
 /// Convert to CommandLine-equivalent string (for verbose mode, printing linting info, …)
 ///
 extension ConfigEntryOutput {
-  func commandLine(forCommand cmd: String, inputs: [Path]) -> String {
-    let tplFlag: String = {
+  func commandLine(forCommand cmd: String, inputs: [Path], filter: String?) -> String {
+    let templateFlag: String = {
       switch self.template {
-      case .name(let name): return "-t \(name)"
-      case .path(let path): return "-p \(path.string)"
+      case .name(let name):
+        return "--templateName \(name)"
+      case .path(let path):
+        return "--templatePath \(path.string)"
       }
     }()
+    let filterFlag = filter.map { "--filter \($0)" } ?? ""
     let params = Parameters.flatten(dictionary: self.parameters)
 
     return [
       "swiftgen",
       cmd,
-      tplFlag,
+      templateFlag,
       params.map { "--param \($0)" }.joined(separator: " "),
-      "-o \(self.output)",
+      "--output \(self.output)",
+      filterFlag,
       inputs.map { $0.string }.joined(separator: " ")
     ].filter { !$0.isEmpty }.joined(separator: " ")
   }

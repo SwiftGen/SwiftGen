@@ -1,6 +1,6 @@
 //
 // StencilSwiftKit
-// Copyright (c) 2017 SwiftGen
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -19,10 +19,12 @@ class SetNode: NodeType {
   class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
     guard components.count <= 3 else {
-      throw TemplateSyntaxError("""
+      throw TemplateSyntaxError(
+        """
         'set' tag takes at least one argument (the name of the variable to set) \
         and optionally the value expression.
-        """)
+        """
+      )
     }
 
     let variable = components[1]

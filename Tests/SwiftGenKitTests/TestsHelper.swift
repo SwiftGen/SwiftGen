@@ -1,6 +1,6 @@
 //
-// SwiftGen
-// Copyright (c) 2017 Olivier Halligon
+// SwiftGenKit UnitTests
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -65,7 +65,6 @@ func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #
 }
 
 func diff(_ result: [String: Any], _ expected: [String: Any], path: String = "") -> String? {
-
   // check keys
   if Set(result.keys) != Set(expected.keys) {
     let lhs = result.keys.map { " - \($0): \(result[$0] ?? "")" }.joined(separator: "\n")
@@ -152,11 +151,13 @@ func convertToString(_ value: Any) -> String? {
   }
 }
 
-func XCTDiffContexts(_ result: [String: Any],
-                     expected name: String,
-                     sub directory: Fixtures.Directory,
-                     file: StaticString = #file,
-                     line: UInt = #line) {
+func XCTDiffContexts(
+  _ result: [String: Any],
+  expected name: String,
+  sub directory: Fixtures.Directory,
+  file: StaticString = #file,
+  line: UInt = #line
+) {
   let fileName = "\(name).yaml"
 
   if ProcessInfo().environment["GENERATE_CONTEXTS"] == "YES" {
@@ -176,6 +177,7 @@ func XCTDiffContexts(_ result: [String: Any],
 class Fixtures {
   enum Directory: String {
     case colors = "Colors"
+    case coreData = "CoreData"
     case fonts = "Fonts"
     case interfaceBuilder = "IB"
     case interfaceBuilderiOS = "IB-iOS"
@@ -223,5 +225,18 @@ class Fixtures {
     }
 
     return result
+  }
+}
+
+extension Parser {
+  func searchAndParse(path: Path) throws {
+    let filter = try Filter(pattern: Self.defaultFilter)
+    try searchAndParse(path: path, filter: filter)
+  }
+
+  func searchAndParse(paths: [Path]) throws {
+    for path in paths {
+      try searchAndParse(path: path)
+    }
   }
 }

@@ -1,4 +1,3 @@
-
 # Migration Guides
 
 All the migration guides for SwiftGen are spread out over a few files, depending on the target audience.

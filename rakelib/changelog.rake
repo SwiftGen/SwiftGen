@@ -48,7 +48,7 @@ namespace :changelog do
     end
   end
 
-  LINKS_SECTION_TITLE = 'Changes in other SwiftGen modules'.freeze
+  LINKS_SECTION_TITLE = 'Changes in core dependencies of SwiftGen'.freeze
 
   desc 'Add links to other CHANGELOGs in the topmost SwiftGen CHANGELOG entry'
   task :links do

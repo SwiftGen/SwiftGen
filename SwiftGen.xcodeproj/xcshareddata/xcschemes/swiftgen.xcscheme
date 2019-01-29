@@ -40,7 +40,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "NO">
       <Testables>
          <TestableReference
             skipped = "NO"
@@ -130,6 +130,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "templates list"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "coredata --template swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/CoreData/Model.xcdatamodeld"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument

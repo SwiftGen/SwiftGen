@@ -20,6 +20,7 @@ SwiftGen is a tool to auto-generate Swift code for resources of your projects, t
     <ul>
       <li><a href="#asset-catalog">Assets Catalogs</a>
       <li><a href="#colors">Colors</a>
+      <li><a href="#core-data">Core Data</a>
       <li><a href="#fonts">Fonts</a>
       <li><a href="#interface-builder">Interface Builder files</a>
       <li><a href="#json-and-yaml">JSON and YAML files</a>
@@ -64,9 +65,9 @@ If you unarchived the ZIP file in a folder e.g. called `swiftgen` at the root of
 <details>
 <summary>Via <strong>CocoaPods</strong></summary>
 
-If you're using CocoaPods, you can simply add `pod 'SwiftGen'` to your `Podfile`.
+If you're using CocoaPods, simply add `pod 'SwiftGen', '~> 6.0'` to your `Podfile`.
 
-This will download the `SwiftGen` binaries and dependencies in `Pods/` during your next `pod install` execution.
+Then execute `pod install --repo-update` (or `pod update SwiftGen` if you want to update an existing SwiftGen installation) to download and install the `SwiftGen` binaries and dependencies in `Pods/SwiftGen/bin/swiftgen` next to your project.
 
 Given that you can specify an exact version for `SwiftGen` in your `Podfile`, this allows you to ensure **all coworkers will use the same version of SwiftGen for this project**.
 
@@ -75,6 +76,8 @@ You can then invoke SwiftGen in your Script Build Phase using:
 ```sh
 $PODS_ROOT/SwiftGen/bin/swiftgen …
 ```
+
+> Similarly, be sure to use `Pods/SwiftGen/bin/swiftgen` instead of just `swiftgen` where we mention commands with `swiftgen` in the rest of the documentation.
 
 _Note: SwiftGen isn't really a pod, as it's not a library your code will depend on at runtime; so the installation via CocoaPods is just a trick that installs the SwiftGen binaries in the Pods/ folder, but you won't see any swift files in the Pods/SwiftGen group in your Xcode's Pods.xcodeproj. That's normal: the SwiftGen binary is still present in that folder in the Finder._
 
@@ -173,7 +176,8 @@ To use SwiftGen, simply create a `swiftgen.yml` YAML file to list all the subcom
 
 ```yaml
 strings:
-  inputs: Resources/Base.lproj/Localizable.strings
+  inputs: Resources/Base.lproj
+  filter: .+\.strings$
   outputs:
     - templateName: structured-swift4
       output: Generated/strings.swift
@@ -202,13 +206,14 @@ Lastly, you can use `--help` on `swiftgen` or one of its subcommand to see the d
 
 While we highly recommend the use a configuration file for performance reasons (especially if you have multiple outputs, but also because it's more flexible), it's also possible to directly invoke the available subcommands to parse various resource types:
 
-* `swiftgen colors [OPTIONS] FILE1 …`
-* `swiftgen fonts [OPTIONS] DIR1 …`
-* `swiftgen ib [OPTIONS] DIR1 …`
+* `swiftgen colors [OPTIONS] DIRORFILE1 …`
+* `swiftgen coredata [OPTIONS] DIRORFILE1 …`
+* `swiftgen fonts [OPTIONS] DIRORFILE1 …`
+* `swiftgen ib [OPTIONS] DIRORFILE1 …`
 * `swiftgen json [OPTIONS] DIRORFILE1 …`
 * `swiftgen plist [OPTIONS] DIRORFILE1 …`
-* `swiftgen strings [OPTIONS] FILE1 …`
-* `swiftgen xcassets [OPTIONS] CATALOG1 …`
+* `swiftgen strings [OPTIONS] DIRORFILE1 …`
+* `swiftgen xcassets [OPTIONS] DIRORFILE1 …`
 * `swiftgen yaml [OPTIONS] DIRORFILE1 …`
 
 One rare cases where this might be useful — as opposed to using a config file — is if you are working on a custom template and want to quickly test the specific subcommand you're working on at each iteration/version of your custom template, until you're happy with it.
@@ -219,6 +224,8 @@ Each subcommand generally accepts the same options and syntax, and they mirror t
 * `--templateName NAME` or `-n NAME`: define the Stencil template to use (by name, see [here for more info](Documentation/templates)) to generate the output.
 * `--templatePath PATH` or `-p PATH`: define the Stencil template to use, using a full path.
 * Note: you should specify one and only one template when invoking SwiftGen. You have to use either `-t` or `-p` but should not use both at the same time (it wouldn't make sense anyway and you'll get an error if you try)
+* `--filter REGEX` or `-f REGEX`: the filter to apply to each input path. Filters are applied to actual (relative) paths, not just the filename. Each command has a default filter that you can override with this option.
+* Note: use `.+` to match multiple characters (at least one), and don't forget to escape the dot (`\.`) if you want to match a literal dot like for an extension. Add `$` at the end to ensure the path ends with the extension you want. Regular expressions will be case sensitive by default, and not anchored to the start/end of a path. For example, use `.+\.xib$` to match files with a `.xib` extension. Use a tool such as [RegExr](https://regexr.com) to ensure you're using a valid regular expression.
 * Each command supports multiple input files (or directories where applicable).
 * You can always use the `--help` flag to see what options a command accept, e.g. `swiftgen xcassets --help`.
 
@@ -230,7 +237,7 @@ SwiftGen is based on templates (it uses [Stencil](https://github.com/kylef/Stenc
 
 ### Bundled templates vs. Custom ones
 
-SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `fonts`, `ib`, `json`, `plist`, `strings`, `xcassets`, `yaml`), which will fit most needs. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs. Simply either use the `templateName` output option to specify the name of the template to use, or store them somewhere else (like in your project repository) and use `templatePath` output option to specify a full path.
+SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `coredata`, `fonts`, `ib`, `json`, `plist`, `strings`, `xcassets`, `yaml`), which will fit most needs. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs. Simply either use the `templateName` output option to specify the name of the template to use, or store them somewhere else (like in your project repository) and use `templatePath` output option to specify a full path.
 
 💡 You can use the `swiftgen templates list` command to list all the available templates (both custom and bundled templates) for each subcommand, list the template content and dupliate them to create your own.
 
@@ -394,6 +401,73 @@ let sameFootnote = ColorName.articleFootnote.color
 ```
 
 This way, no need to enter the color red, green, blue, alpha values each time and create ugly constants in the global namespace for them.
+
+## Core Data
+
+```yaml
+coredata:
+  inputs: /path/to/model.xcdatamodeld
+  outputs:
+    templateName: swift4
+    output: CoreData.swift
+```
+
+This will parse the specified core data model(s), generate a class for each entity in your model containing all the attributes, and a few extensions if needed for relationships and predefined fetch requests.
+
+<details>
+<summary>Example of code generated by the bundled template</summary>
+
+```swift
+internal class MainEntity: NSManagedObject {
+  internal class func entityName() -> String {
+    return "MainEntity"
+  }
+
+  internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+    return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
+  }
+
+  @nonobjc internal class func fetchRequest() -> NSFetchRequest<MainEntity> {
+    return NSFetchRequest<MainEntity>(entityName: entityName())
+  }
+
+  @NSManaged internal var attributedString: NSAttributedString?
+  @NSManaged internal var binaryData: Data?
+  @NSManaged internal var boolean: Bool
+  @NSManaged internal var date: Date?
+  @NSManaged internal var float: Float
+  @NSManaged internal var int64: Int64
+  @NSManaged internal var manyToMany: Set<SecondaryEntity>
+}
+
+// MARK: Relationship ManyToMany
+
+extension MainEntity {
+  @objc(addManyToManyObject:)
+  @NSManaged public func addToManyToMany(_ value: SecondaryEntity)
+
+  @objc(removeManyToManyObject:)
+  @NSManaged public func removeFromManyToMany(_ value: SecondaryEntity)
+
+  @objc(addManyToMany:)
+  @NSManaged public func addToManyToMany(_ values: Set<SecondaryEntity>)
+
+  @objc(removeManyToMany:)
+  @NSManaged public func removeFromManyToMany(_ values: Set<SecondaryEntity>)
+}
+```
+</details>
+
+### Usage Example
+
+```swift
+// Fetch all the instances of MainEntity
+let request = MainEntity.fetchRequest()
+let mainItems = try myContext.execute(request)
+
+// Type-safe relationships: `relatedItem` will be a `SecondaryEntity?` in this case
+let relatedItem = myMainItem.manyToMany.first
+```
 
 ## Fonts
 
@@ -596,7 +670,7 @@ let bar = PlistFiles.Stuff.key1
 ## Strings
 
 ```yaml
-fonts:
+strings:
   inputs: /path/to/Localizable.strings
   outputs:
     templateName: structured-swift4
@@ -694,9 +768,9 @@ let bananas = L10n.bananasOwner(5, "Olivier")
 
 ---
 
-# License
+# Licence
 
-This code and tool is under the MIT License. See the `LICENSE` file in this repository.
+This code and tool is under the MIT Licence. See the `LICENCE` file in this repository.
 
 ## Attributions
 

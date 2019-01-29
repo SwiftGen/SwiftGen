@@ -8,10 +8,13 @@ namespace :playground do
     sh 'rm -rf SwiftGen.playground/Resources'
     sh 'mkdir SwiftGen.playground/Resources'
   end
-  task :xcassets do
+
+  task :coredata do
+    sdk = Utils.run('--sdk iphonesimulator --show-sdk-path', task, xcrun: true, formatter: :to_string).strip
+    destination = File.expand_path('SwiftGen.playground/Resources', Dir.pwd)
     Utils.run(
-      %(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 11.0 ) +
-        %(--output-format=human-readable-text Tests/Fixtures/Resources/XCAssets/*.xcassets),
+      %(momc --sdkroot "#{sdk}" --iphonesimulator-deployment-target 12.0 ) +
+        %(Tests/Fixtures/Resources/CoreData/Model.xcdatamodeld "#{destination}"),
       task,
       xcrun: true
     )
@@ -44,8 +47,16 @@ namespace :playground do
       xcrun: true
     )
   end
+  task :xcassets do
+    Utils.run(
+      %(actool --compile SwiftGen.playground/Resources --platform iphoneos --minimum-deployment-target 11.0 ) +
+        %(--output-format=human-readable-text Tests/Fixtures/Resources/XCAssets/*.xcassets),
+      task,
+      xcrun: true
+    )
+  end
 
   desc "Regenerate all the Playground resources based on the test fixtures.\n" \
     'This compiles the needed fixtures and place them in SwiftGen.playground/Resources'
-  task :resources => %w[clean xcassets fonts ib json plist strings]
+  task :resources => %w[clean coredata fonts ib json plist strings xcassets]
 end

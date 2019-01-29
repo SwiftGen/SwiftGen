@@ -1,9 +1,7 @@
 //
-//  PlistParser.swift
-//  swiftgen
-//
-//  Created by John McIntosh on 1/17/18.
-//  Copyright © 2018 AliSoftware. All rights reserved.
+// SwiftGenKit
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import Foundation
@@ -31,27 +29,10 @@ public enum Plist {
       self.warningHandler = warningHandler
     }
 
-    enum SupportedTypes {
-      static let plist = "plist"
-      static let all = [plist]
+    public static let defaultFilter = "[^/]\\.(?i:plist)$"
 
-      static func supports(extension: String) -> Bool {
-        return all.contains { $0.caseInsensitiveCompare(`extension`) == .orderedSame }
-      }
-    }
-
-    public func parse(path: Path) throws {
-      if path.isFile {
-        let parentDir = path.absolute().parent()
-        files.append(try File(path: path, relativeTo: parentDir))
-      } else {
-        let dirChildren = path.iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
-        let parentDir = path.absolute()
-
-        for file in dirChildren where SupportedTypes.supports(extension: file.extension ?? "") {
-          files.append(try File(path: file, relativeTo: parentDir))
-        }
-      }
+    public func parse(path: Path, relativeTo parent: Path) throws {
+      files.append(try File(path: path, relativeTo: parent))
     }
   }
 }

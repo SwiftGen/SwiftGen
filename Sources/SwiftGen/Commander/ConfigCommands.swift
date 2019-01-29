@@ -1,9 +1,7 @@
 //
-//  ConfigCommands.swift
-//  swiftgen
-//
-//  Created by Olivier Halligon on 01/10/2017.
-//  Copyright © 2017 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import Commander
@@ -35,13 +33,16 @@ extension ConfigEntry {
     let parser = try parserCommand.parserType.init(options: [:]) { msg, _, _ in
       logMessage(.warning, msg)
     }
-    try parser.parse(paths: self.inputs)
+    let filter = try Filter(pattern: self.filter ?? parserCommand.parserType.defaultFilter)
+    try parser.searchAndParse(paths: inputs, filter: filter)
     let context = parser.stencilContext()
 
     for entryOutput in outputs {
       let templateRealPath = try entryOutput.template.resolvePath(forSubcommand: parserCommand.name)
-      let template = try StencilSwiftTemplate(templateString: templateRealPath.read(),
-                                              environment: stencilSwiftEnvironment())
+      let template = try StencilSwiftTemplate(
+        templateString: templateRealPath.read(),
+        environment: stencilSwiftEnvironment()
+      )
 
       let enriched = try StencilContext.enrich(context: context, parameters: entryOutput.parameters)
       let rendered = try template.render(enriched)
@@ -53,14 +54,18 @@ extension ConfigEntry {
 
 // MARK: - Commands
 
+private let configOption = Option<Path>(
+  "config",
+  default: "swiftgen.yml",
+  flag: "c",
+  description: "Path to the configuration file to use",
+  validator: checkPath(type: "config file") { $0.isFile }
+)
+
 // MARK: Lint
 
 let configLintCommand = command(
-  Option<Path>("config",
-               default: "swiftgen.yml",
-               flag: "c",
-               description: "Path to the configuration file to use",
-               validator: checkPath(type: "config file") { $0.isFile })
+  configOption
 ) { file in
   try ErrorPrettifier.execute {
     logMessage(.info, "Linting \(file)")
@@ -72,15 +77,8 @@ let configLintCommand = command(
 // MARK: Run
 
 let configRunCommand = command(
-  Option<Path>("config",
-               default: "swiftgen.yml",
-               flag: "c",
-               description: "Path to the configuration file to use",
-               validator: checkPath(type: "config file") { $0.isFile }),
-  Flag("verbose",
-       default: false,
-       flag: "v",
-       description: "Print each command being executed")
+  configOption,
+  Flag("verbose", default: false, flag: "v", description: "Print each command being executed")
 ) { file, verbose in
   do {
     try ErrorPrettifier.execute {

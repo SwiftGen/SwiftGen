@@ -1,9 +1,7 @@
 //
-//  Version.swift
-//  swiftgen
-//
-//  Created by David Jennes on 06/10/2018.
-//  Copyright © 2018 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import Foundation

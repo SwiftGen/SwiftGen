@@ -1,9 +1,7 @@
 //
-//  ParserCLI.swift
-//  swiftgen
-//
-//  Created by Olivier Halligon on 01/10/2017.
-//  Copyright © 2017 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import SwiftGenKit
@@ -39,6 +37,12 @@ let allParserCommands: [ParserCLI] = [
     pathDescription: "Colors.txt|.clr|.xml|.json file(s) to parse."
   ),
   .init(
+    parserType: CoreData.Parser.self,
+    name: "coredata",
+    description: "generate code for your Core Data models",
+    pathDescription: "Core Data models (.xcdatamodel or .xcdatamodeld) to parse."
+  ),
+  .init(
     parserType: Fonts.Parser.self,
     name: "fonts",
     description: "generate code for your fonts",
@@ -51,7 +55,7 @@ let allParserCommands: [ParserCLI] = [
     pathDescription: "Directory to scan for .storyboard files. Can also be a path to a single .storyboard"
   ),
   .init(
-    parserType: Yaml.Parser.self,
+    parserType: JSON.Parser.self,
     name: "json",
     description: "generate code for custom json configuration files",
     pathDescription: "JSON files (or directories that contain them) to parse."

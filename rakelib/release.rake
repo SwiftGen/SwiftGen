@@ -5,6 +5,14 @@ require 'net/http'
 require 'uri'
 require 'open3'
 
+def first_match_in_file(file, re)
+   File.foreach(file) do |line|
+     m = re.match(line)
+     return m if m
+   end
+   return nil
+ end
+
 ## [ Release a new version ] ##################################################
 
 namespace :release do
@@ -64,18 +72,28 @@ namespace :release do
     )
 
     # Check if entry present in CHANGELOG
-    changelog_entry = system("grep -q '^## #{Regexp.quote(sg_version)}$' CHANGELOG.md")
+    changelog_entry = first_match_in_file('CHANGELOG.md', /^## #{Regexp.quote(sg_version)}$/)
     results << Utils.table_result(
-      changelog_entry,
+      !changelog_entry.nil?,
       'CHANGELOG: Release entry added',
       "Please add an entry for #{sg_version} in CHANGELOG.md"
     )
 
-    changelog_develop = system("grep -qi '^## Develop' CHANGELOG.md")
+    changelog_develop = first_match_in_file('CHANGELOG.md', /^## Develop/)
     results << Utils.table_result(
-      !changelog_develop,
+      changelog_develop.nil?,
       'CHANGELOG: No develop entry',
       'Please remove entry for develop in CHANGELOG'
+    )
+
+    # Check README instructions
+    readme_pod_version = first_match_in_file('README.md', /pod 'SwiftGen', '(.*)'/) || ['0.0','0.0']
+    readme_requirement = Gem::Requirement.new(readme_pod_version[1])
+    readme_requirement_ok = readme_requirement.satisfied_by?(Gem::Version.new(sg_version))
+    results << Utils.table_result(
+      readme_requirement_ok,
+      "README: pod version #{readme_pod_version[1]}",
+      'Please update the README instructions with the right pod version'
     )
 
     exit 1 unless results.all?

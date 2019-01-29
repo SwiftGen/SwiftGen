@@ -30,6 +30,16 @@ colors:
   bundled:
    - swift3
    - swift4
+coredata:
+  custom:
+  bundled:
+   - swift3
+   - swift4
+fonts:
+  custom:
+  bundled:
+   - swift3
+   - swift4
 ib:
   custom:
    - mytemplate

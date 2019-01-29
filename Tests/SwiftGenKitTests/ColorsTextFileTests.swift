@@ -1,6 +1,6 @@
 //
-// SwiftGenKit
-// Copyright (c) 2017 Olivier Halligon
+// SwiftGenKit UnitTests
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -38,5 +38,4 @@ class ColorsTextFileTests: XCTestCase {
       XCTFail("Unexpected error occured while parsing: \(error)")
     }
   }
-
 }

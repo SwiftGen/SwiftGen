@@ -1,9 +1,7 @@
 //
-//  FontsTests.swift
-//  SwiftGenKit
-//
-//  Created by Derek Ostrander on 3/8/16.
-//  Copyright © 2017 AliSoftware. All rights reserved.
+// SwiftGenKit UnitTests
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import AppKit.NSFont
@@ -19,9 +17,9 @@ class FontsTests: XCTestCase {
     XCTDiffContexts(result, expected: "empty", sub: .fonts)
   }
 
-  func testDefaults() {
+  func testDefaults() throws {
     let parser = Fonts.Parser()
-    parser.parse(path: Fixtures.directory(sub: .fonts))
+    try parser.searchAndParse(path: Fixtures.directory())
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "defaults", sub: .fonts)
