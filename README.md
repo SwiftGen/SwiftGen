@@ -206,14 +206,14 @@ Lastly, you can use `--help` on `swiftgen` or one of its subcommand to see the d
 
 While we highly recommend the use a configuration file for performance reasons (especially if you have multiple outputs, but also because it's more flexible), it's also possible to directly invoke the available subcommands to parse various resource types:
 
-* `swiftgen colors [OPTIONS] FILE1 …`
-* `swiftgen coredata [OPTIONS] FILE1 …`
-* `swiftgen fonts [OPTIONS] DIR1 …`
-* `swiftgen ib [OPTIONS] DIR1 …`
+* `swiftgen colors [OPTIONS] DIRORFILE1 …`
+* `swiftgen coredata [OPTIONS] DIRORFILE1 …`
+* `swiftgen fonts [OPTIONS] DIRORFILE1 …`
+* `swiftgen ib [OPTIONS] DIRORFILE1 …`
 * `swiftgen json [OPTIONS] DIRORFILE1 …`
 * `swiftgen plist [OPTIONS] DIRORFILE1 …`
-* `swiftgen strings [OPTIONS] FILE1 …`
-* `swiftgen xcassets [OPTIONS] CATALOG1 …`
+* `swiftgen strings [OPTIONS] DIRORFILE1 …`
+* `swiftgen xcassets [OPTIONS] DIRORFILE1 …`
 * `swiftgen yaml [OPTIONS] DIRORFILE1 …`
 
 One rare cases where this might be useful — as opposed to using a config file — is if you are working on a custom template and want to quickly test the specific subcommand you're working on at each iteration/version of your custom template, until you're happy with it.

@@ -9,7 +9,8 @@ The core data parser accepts a `xcdatamodeld` (or `xcdatamodel`) file. The parse
 The output context has the following structure:
 
  - `models`: `Array` — A list of parsed models, with each:
-   - `configurations`: `Dictionary<Array<String>>` — Map of configurations and the corresponding list of entity names
+   - `configurations`: `Dictionary<String, Array<String>>` — Map of configuration names and the corresponding list of
+     entity names
    - `entities`: `Dictionary` – Map of all the entities in the model, each key being the entity's name, and
      corresponding value is a dictionary described below:
      - `name`: `String` - Entity name
