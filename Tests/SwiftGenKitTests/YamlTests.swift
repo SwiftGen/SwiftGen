@@ -59,7 +59,7 @@ class YamlTests: XCTestCase {
   func testDirectoryInput() {
     do {
       let parser = Yaml.Parser()
-      let filter = try Filter(pattern: ".*\\.(json|ya?ml)")
+      let filter = try Filter(pattern: "[^/]*\\.(json|ya?ml)$")
       try parser.searchAndParse(path: Fixtures.directory(sub: .yamlGood), filter: filter)
 
       let result = parser.stencilContext()
