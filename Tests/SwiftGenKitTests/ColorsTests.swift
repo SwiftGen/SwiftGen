@@ -44,7 +44,7 @@ class ColorParserTests: XCTestCase {
     parser.register(parser: TestFileParser1.self)
     parser.register(parser: TestFileParser2.self)
 
-    let filter = try Filter(pattern: ".*\\.(test1|test2)")
+    let filter = try Filter(pattern: ".*\\.(test1|test2)$")
     try parser.searchAndParse(path: "someFile.test1", filter: filter)
     XCTAssertEqual(parser.palettes.first?.name, "test1")
   }
@@ -55,7 +55,7 @@ class ColorParserTests: XCTestCase {
     parser.register(parser: TestFileParser2.self)
 
     do {
-      let filter = try Filter(pattern: ".*\\.unknown")
+      let filter = try Filter(pattern: ".*\\.unknown$")
       try parser.searchAndParse(path: "someFile.unknown", filter: filter)
       XCTFail("Code did succeed while it was expected to fail for unknown extension")
     } catch Colors.ParserError.unsupportedFileType {
