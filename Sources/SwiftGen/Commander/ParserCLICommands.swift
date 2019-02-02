@@ -9,38 +9,42 @@ import PathKit
 import StencilSwiftKit
 import SwiftGenKit
 
-// deprecated option
-private let deprecatedTemplateNameOption = Option<String>(
-  "template",
-  default: "",
-  flag: "t",
-  description: """
-    DEPRECATED, use `--templateName` instead
-    """
-)
+extension ParserCLI {
+  private enum CLIOption {
+    // deprecated option
+    static let deprecatedTemplateName = Option<String>(
+      "template",
+      default: "",
+      flag: "t",
+      description: """
+        DEPRECATED, use `--templateName` instead
+        """
+    )
 
-private let templateNameOption = Option<String>(
-  "templateName",
-  default: "",
-  flag: "n",
-  description: """
-    The name of the template to use for code generation. \
-    See `swiftgen templates list` for a list of available names
-    """
-)
+    static let templateName = Option<String>(
+      "templateName",
+      default: "",
+      flag: "n",
+      description: """
+        The name of the template to use for code generation. \
+        See `swiftgen templates list` for a list of available names
+        """
+    )
 
-private let templatePathOption = Option<String>(
-  "templatePath",
-  default: "",
-  flag: "p",
-  description: "The path of the template to use for code generation."
-)
+    static let templatePath = Option<String>(
+      "templatePath",
+      default: "",
+      flag: "p",
+      description: "The path of the template to use for code generation."
+    )
 
-private let paramsOption = VariadicOption<String>(
-  "param",
-  default: [],
-  description: "List of template parameters"
-)
+    static let params = VariadicOption<String>(
+      "param",
+      default: [],
+      description: "List of template parameters"
+    )
+  }
+}
 
 extension ParserCLI {
   private var filterOption: Option<String> {
@@ -54,14 +58,14 @@ extension ParserCLI {
 
   func command() -> CommandType {
     return Commander.command(
-      outputOption,
-      deprecatedTemplateNameOption,
-      templateNameOption,
-      templatePathOption,
-      paramsOption,
+      CLIOption.deprecatedTemplateName,
+      CLIOption.templateName,
+      CLIOption.templatePath,
+      CLIOption.params,
       filterOption,
+      OutputDestination.cliOption,
       VariadicArgument<Path>("PATH", description: self.pathDescription, validator: pathsExist)
-    ) { output, oldTemplateName, templateName, templatePath, parameters, filter, paths in
+    ) { oldTemplateName, templateName, templatePath, parameters, filter, output, paths in
       try ErrorPrettifier.execute {
         let parser = try self.parserType.init(options: [:]) { msg, _, _ in
           logMessage(.warning, msg)

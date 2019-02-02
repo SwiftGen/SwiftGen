@@ -25,8 +25,8 @@
 		379C7E871F8ECA0C00267096 /* TemplateRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E861F8ECA0C00267096 /* TemplateRef.swift */; };
 		379C7E891F8ECA7000267096 /* OutputDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E881F8ECA7000267096 /* OutputDestination.swift */; };
 		379C7E8A1F8ECA8900267096 /* TemplateRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E861F8ECA0C00267096 /* TemplateRef.swift */; };
-		379C7E8D1F8ECB2400267096 /* Path+AppSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E8C1F8ECB2400267096 /* Path+AppSupport.swift */; };
-		379C7E8E1F8ECB2D00267096 /* Path+AppSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E8C1F8ECB2400267096 /* Path+AppSupport.swift */; };
+		379C7E8D1F8ECB2400267096 /* Path+CommonLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E8C1F8ECB2400267096 /* Path+CommonLocations.swift */; };
+		379C7E8E1F8ECB2D00267096 /* Path+CommonLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E8C1F8ECB2400267096 /* Path+CommonLocations.swift */; };
 		379C7E921F8ECC1A00267096 /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E911F8ECC1A00267096 /* Logs.swift */; };
 		379C7E931F8ECC2400267096 /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E911F8ECC1A00267096 /* Logs.swift */; };
 		37DC60321F98D7DD00B7B31C /* config-absolute-paths-direct.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC60301F98D1DA00B7B31C /* config-absolute-paths-direct.yml */; };
@@ -86,7 +86,6 @@
 		DD428E261FC50FBF001649D6 /* InterfaceBuilderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E161FC50FBF001649D6 /* InterfaceBuilderContext.swift */; };
 		DD428E271FC50FBF001649D6 /* StringsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E171FC50FBF001649D6 /* StringsContext.swift */; };
 		DD4738A81FE07596006CB6BB /* StencilContexts in Resources */ = {isa = PBXBuildFile; fileRef = DDDE52761FAF81DB004203BE /* StencilContexts */; };
-		DD59D13C2097E7B6000445E4 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD59D13B2097E7B6000445E4 /* Common.swift */; };
 		DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */; };
 		DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */; };
 		DD9F687A20955D51004EB720 /* CatalogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687720955D51004EB720 /* CatalogEntry.swift */; };
@@ -305,7 +304,7 @@
 		2D945F4382BDE4E02F69E650 /* Pods-SwiftGenKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit.debug.xcconfig"; sourceTree = "<group>"; };
 		379C7E861F8ECA0C00267096 /* TemplateRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateRef.swift; sourceTree = "<group>"; };
 		379C7E881F8ECA7000267096 /* OutputDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDestination.swift; sourceTree = "<group>"; };
-		379C7E8C1F8ECB2400267096 /* Path+AppSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+AppSupport.swift"; sourceTree = "<group>"; };
+		379C7E8C1F8ECB2400267096 /* Path+CommonLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+CommonLocations.swift"; sourceTree = "<group>"; };
 		379C7E911F8ECC1A00267096 /* Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
 		37DC602A1F98D1D900B7B31C /* config-invalid-structure.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-invalid-structure.yml"; sourceTree = "<group>"; };
 		37DC602B1F98D1D900B7B31C /* config-missing-template.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-missing-template.yml"; sourceTree = "<group>"; };
@@ -369,7 +368,6 @@
 		DD428E161FC50FBF001649D6 /* InterfaceBuilderContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceBuilderContext.swift; sourceTree = "<group>"; };
 		DD428E171FC50FBF001649D6 /* StringsContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsContext.swift; sourceTree = "<group>"; };
 		DD428E181FC50FBF001649D6 /* SwiftGenKit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SwiftGenKit-Info.plist"; sourceTree = "<group>"; };
-		DD59D13B2097E7B6000445E4 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserCLICommands.swift; sourceTree = "<group>"; };
 		DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsFileTypeParser.swift; sourceTree = "<group>"; };
 		DD9F687720955D51004EB720 /* CatalogEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogEntry.swift; sourceTree = "<group>"; };
@@ -633,10 +631,9 @@
 				379C7E901F8ECB9700267096 /* Commander */,
 				09D00A001F9BB8730026A755 /* Config */,
 				09C7B2D31BCC382800D7F488 /* main.swift */,
-				DD59D13B2097E7B6000445E4 /* Common.swift */,
 				379C7E911F8ECC1A00267096 /* Logs.swift */,
 				0934050D1F815A8C00187787 /* ParserCLI.swift */,
-				379C7E8C1F8ECB2400267096 /* Path+AppSupport.swift */,
+				379C7E8C1F8ECB2400267096 /* Path+CommonLocations.swift */,
 				379C7E861F8ECA0C00267096 /* TemplateRef.swift */,
 				DD2FA6BA2169401C0009CAA8 /* Version.swift */,
 			);
@@ -1381,7 +1378,7 @@
 				379C7E931F8ECC2400267096 /* Logs.swift in Sources */,
 				09D00A041F9BBE370026A755 /* ConfigLintTests.swift in Sources */,
 				09D00A011F9BB87F0026A755 /* ConfigEntry.swift in Sources */,
-				379C7E8E1F8ECB2D00267096 /* Path+AppSupport.swift in Sources */,
+				379C7E8E1F8ECB2D00267096 /* Path+CommonLocations.swift in Sources */,
 				0934050F1F815A9100187787 /* ParserCLI.swift in Sources */,
 				0934050C1F8158EE00187787 /* Config.swift in Sources */,
 				DDB0B9C3209E3D9900E467C2 /* ConfigOutput.swift in Sources */,
@@ -1395,12 +1392,11 @@
 				379C7E891F8ECA7000267096 /* OutputDestination.swift in Sources */,
 				DD2FA6BB2169401C0009CAA8 /* Version.swift in Sources */,
 				234F7E7D1DEBD765001B3C10 /* main.swift in Sources */,
-				DD59D13C2097E7B6000445E4 /* Common.swift in Sources */,
 				234F7E7E1DEBD765001B3C10 /* Path+Commander.swift in Sources */,
 				234F7E7F1DEBD765001B3C10 /* TemplatesCommands.swift in Sources */,
 				09D009FF1F9BB3450026A755 /* ConfigEntry.swift in Sources */,
 				DDB0B9C2209E390700E467C2 /* ConfigOutput.swift in Sources */,
-				379C7E8D1F8ECB2400267096 /* Path+AppSupport.swift in Sources */,
+				379C7E8D1F8ECB2400267096 /* Path+CommonLocations.swift in Sources */,
 				0934050E1F815A8C00187787 /* ParserCLI.swift in Sources */,
 				DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */,
 				379C7E921F8ECC1A00267096 /* Logs.swift in Sources */,

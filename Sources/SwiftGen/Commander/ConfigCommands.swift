@@ -54,58 +54,60 @@ extension ConfigEntry {
 
 // MARK: - Commands
 
-private let configOption = Option<Path>(
-  "config",
-  default: "swiftgen.yml",
-  flag: "c",
-  description: "Path to the configuration file to use",
-  validator: checkPath(type: "config file") { $0.isFile }
-)
+enum ConfigCLI {
+  private static let configOption = Option<Path>(
+    "config",
+    default: "swiftgen.yml",
+    flag: "c",
+    description: "Path to the configuration file to use",
+    validator: checkPath(type: "config file") { $0.isFile }
+  )
 
-// MARK: Lint
+  // MARK: Lint
 
-let configLintCommand = command(
-  configOption
-) { file in
-  try ErrorPrettifier.execute {
-    logMessage(.info, "Linting \(file)")
-    let config = try Config(file: file)
-    config.lint()
-  }
-}
-
-// MARK: Run
-
-let configRunCommand = command(
-  configOption,
-  Flag("verbose", default: false, flag: "v", description: "Print each command being executed")
-) { file, verbose in
-  do {
+  static let lint = command(
+    configOption
+  ) { file in
     try ErrorPrettifier.execute {
+      logMessage(.info, "Linting \(file)")
       let config = try Config(file: file)
+      config.lint()
+    }
+  }
 
-      if verbose {
-        logMessage(.info, "Executing configuration file \(file)")
-      }
-      try file.parent().chdir {
-        for (cmd, entries) in config.commands {
-          for var entry in entries {
-            guard let parserCmd = allParserCommands.first(where: { $0.name == cmd }) else {
-              throw Config.Error.missingEntry(key: cmd)
-            }
-            entry.makingRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
-            if verbose {
-              for item in entry.commandLine(forCommand: cmd) {
-                logMessage(.info, " $ \(item)")
+  // MARK: Run
+
+  static let run = command(
+    configOption,
+    Flag("verbose", default: false, flag: "v", description: "Print each command being executed")
+  ) { file, verbose in
+    do {
+      try ErrorPrettifier.execute {
+        let config = try Config(file: file)
+
+        if verbose {
+          logMessage(.info, "Executing configuration file \(file)")
+        }
+        try file.parent().chdir {
+          for (cmd, entries) in config.commands {
+            for var entry in entries {
+              guard let parserCmd = ParserCLI.command(named: cmd) else {
+                throw Config.Error.missingEntry(key: cmd)
               }
+              entry.makingRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
+              if verbose {
+                for item in entry.commandLine(forCommand: cmd) {
+                  logMessage(.info, " $ \(item)")
+                }
+              }
+              try entry.checkPaths()
+              try entry.run(parserCommand: parserCmd)
             }
-            try entry.checkPaths()
-            try entry.run(parserCommand: parserCmd)
           }
         }
       }
+    } catch let error as Config.Error {
+      logMessage(.error, error)
     }
-  } catch let error as Config.Error {
-    logMessage(.error, error)
   }
 }
