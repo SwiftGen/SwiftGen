@@ -73,9 +73,9 @@ unless has_changelog || declared_trivial
   changelog_msg = <<-CHANGELOG_FORMAT.gsub(/^ *\|/,'')
   |📝 We use the following format for CHANGELOG entries:
   |```
-  | * #{pr_title}  
-  |   [##{pr_number}](#{pr_url})
-  |   [@#{pr_author}](#{pr_author_url})
+  |* #{pr_title}  
+  |  [##{pr_number}](#{pr_url})
+  |  [@#{pr_author}](#{pr_author_url})
   |```
   |:bulb: Don't forget to end the line describing your changes by a period and two spaces.
   CHANGELOG_FORMAT
