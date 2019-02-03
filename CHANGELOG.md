@@ -10,7 +10,9 @@ _None_
 
 ### New Features
 
-_None_
+* Command now accept an `options` dictionary, with which you can set internal parser settings to change its behaviour. See the commands' specific documentation for available options.  
+  [David Jennes](https://github.com/djbe)
+  [#587](https://github.com/SwiftGen/SwiftGen/pull/587)
 
 ### Bug Fixes
 
