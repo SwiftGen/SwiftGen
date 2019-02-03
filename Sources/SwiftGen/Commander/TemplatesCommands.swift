@@ -19,24 +19,20 @@ enum TemplatesCLI {
     OutputDestination.cliOption
   ) { onlySubcommand, output in
     try ErrorPrettifier.execute {
-      let list = onlySubcommand.isEmpty
+      let commandsList = onlySubcommand.isEmpty
         ? ParserCLI.allCommands
         : [ParserCLI.command(named: onlySubcommand)].compactMap { $0 }
-      var outputLines: [String] = []
-      for subcommand in list {
-        outputLines.append(templatesList(subcommand: subcommand))
-      }
 
-      outputLines.append(
-        """
+      let lines = commandsList.map(templatesList(subcommand:))
+      try output.write(content: lines.joined(separator: "\n"))
+      try output.write(
+        content: """
           ---
           You can add custom templates in \(Path.appSupportTemplates).
           You can also specify templates by path using `templatePath` instead of `templateName`.
           For more information, see the documentation on GitHub.
           """
       )
-
-      try output.write(content: outputLines.joined(separator: "\n"))
     }
   }
 
