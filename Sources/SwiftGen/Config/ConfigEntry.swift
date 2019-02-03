@@ -16,6 +16,7 @@ struct ConfigEntry {
   enum Keys {
     static let inputs = "inputs"
     static let filter = "filter"
+    static let options = "options"
     static let outputs = "outputs"
 
     // Legacy: remove this once we stop supporting the output key at subcommand level
@@ -29,6 +30,7 @@ struct ConfigEntry {
 
   var inputs: [Path]
   var filter: String?
+  var options: [String: Any]
   var outputs: [ConfigEntryOutput]
 
   mutating func makingRelativeTo(inputDir: Path?, outputDir: Path?) {
@@ -60,6 +62,7 @@ extension ConfigEntry {
     }
 
     filter = yaml[Keys.filter] as? String
+    options = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.options) ?? [:]
 
     if let outputs = yaml[Keys.outputs] {
       do {
@@ -115,7 +118,7 @@ extension ConfigEntry {
 extension ConfigEntry {
   func commandLine(forCommand cmd: String) -> [String] {
     return outputs.map {
-      $0.commandLine(forCommand: cmd, inputs: inputs, filter: filter)
+      $0.commandLine(forCommand: cmd, inputs: inputs, filter: filter, options: options)
     }
   }
 }
