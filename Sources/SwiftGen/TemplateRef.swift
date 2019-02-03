@@ -46,9 +46,9 @@ enum TemplateRef: Equatable {
   func resolvePath(forSubcommand subCmd: String) throws -> Path {
     switch self {
     case .name(let templateShortName):
-      var path = appSupportTemplatesPath + subCmd + "\(templateShortName).stencil"
+      var path = Path.appSupportTemplates + subCmd + "\(templateShortName).stencil"
       if !path.isFile {
-        path = bundledTemplatesPath + subCmd + "\(templateShortName).stencil"
+        path = Path.bundledTemplates + subCmd + "\(templateShortName).stencil"
       }
       guard path.isFile else {
         throw TemplateRef.Error.namedTemplateNotFound(name: templateShortName)

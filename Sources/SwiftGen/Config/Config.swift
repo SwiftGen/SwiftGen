@@ -39,7 +39,7 @@ extension Config {
     self.inputDir = (config[Keys.inputDir] as? String).map { Path($0) }
     self.outputDir = (config[Keys.outputDir] as? String).map { Path($0) }
     var cmds: [String: [ConfigEntry]] = [:]
-    for parserCmd in allParserCommands {
+    for parserCmd in ParserCLI.allCommands {
       if let cmdEntry = config[parserCmd.name] {
         do {
           cmds[parserCmd.name] = try ConfigEntry.parseCommandEntry(

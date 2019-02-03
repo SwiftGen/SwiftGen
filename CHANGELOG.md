@@ -18,7 +18,9 @@ _None_
 
 ### Internal Changes
 
-_None_
+* Refactoring: Reduce globals & rearrange CLI code.  
+  [#586](https://github.com/SwiftGen/SwiftGen/pull/586)
+  [@AliSoftware](https://github.com/AliSoftware)
 
 ## 6.1.0
 
