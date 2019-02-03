@@ -3,7 +3,7 @@
 ## Input
 
 The assets parser accepts one (or more) asset catalogs, which it'll parse for supported set types and groups. We currently support the following types:
-- Group Type
+- Group Type (folder)
 - Color Set Type (colorset)
 - Data Set Type (dataset)
 - Image Set Type (imageset)

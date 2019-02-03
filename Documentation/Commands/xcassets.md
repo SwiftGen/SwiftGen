@@ -3,7 +3,7 @@
 ## Input
 
 The assets parser accepts one (or more) asset catalogs, which it'll parse for supported set types and groups. We currently support the following types:
-- Group Type
+- Group Type (folder)
 - Color Set Type (colorset)
 - Data Set Type (dataset)
 - Image Set Type (imageset)
@@ -22,4 +22,5 @@ This parser currently doesn't accept any options.
 
 ## Templates
 
-[See here](../templates/xcassets) for a list of templates and their documentation. If you want to write custom templates, make sure to check the [stencil context documentation](../SwiftGenKit%20Contexts/Assets.md) to see what data is available after parsing.
+* [See here](../templates/xcassets) for a list of templates bundled with SwiftGen and their documentation.
+* If you want to write custom templates, make sure to check the [stencil context documentation](../SwiftGenKit%20Contexts/Assets.md) to see what data is available after parsing.
