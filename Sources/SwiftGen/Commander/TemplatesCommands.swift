@@ -54,21 +54,19 @@ enum TemplatesCLI {
 
 private extension TemplatesCLI {
   static func templatesList(subcommand: ParserCLI) -> String {
-    func templates(for subcommand: String, in path: Path) -> String {
-      guard let files = try? (path + subcommand).children() else { return "" }
-      let list = files
+    func templates(in path: Path) -> [String] {
+      guard let files = try? path.children() else { return [] }
+      return files.lazy
         .filter { $0.extension == "stencil" }
         .map { "   - \($0.lastComponentWithoutExtension)" }
-      return list.joined(separator: "\n")
     }
 
-    return """
-      \(subcommand.name):
-      custom:
-      \(templates(for: subcommand.templateFolder, in: Path.appSupportTemplates))
-      bundled:
-      \(templates(for: subcommand.templateFolder, in: Path.bundledTemplates))
-      """
+    var lines = ["\(subcommand.name):"]
+    lines.append("  custom:")
+    lines.append(contentsOf: templates(in: Path.appSupportTemplates + subcommand.templateFolder))
+    lines.append("  bundled:")
+    lines.append(contentsOf: templates(in: Path.bundledTemplates + subcommand.templateFolder))
+    return lines.joined(separator: "\n")
   }
 
   static func isSubcommandName(name: String) throws -> String {

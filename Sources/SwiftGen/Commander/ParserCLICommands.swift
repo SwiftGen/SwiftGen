@@ -43,26 +43,26 @@ extension ParserCLI {
       default: [],
       description: "List of template parameters"
     )
+
+    static func filter(for parser: ParserCLI) -> Option<String> {
+      return Option<String>(
+        "filter",
+        default: parser.parserType.defaultFilter,
+        flag: "f",
+        description: "The regular expression to filter input paths."
+      )
+    }
   }
 }
 
 extension ParserCLI {
-  private var filterOption: Option<String> {
-    return Option<String>(
-      "filter",
-      default: parserType.defaultFilter,
-      flag: "f",
-      description: "The regular expression to filter input paths."
-    )
-  }
-
   func command() -> CommandType {
     return Commander.command(
       CLIOption.deprecatedTemplateName,
       CLIOption.templateName,
       CLIOption.templatePath,
       CLIOption.params,
-      filterOption,
+      CLIOption.filter(for: self),
       OutputDestination.cliOption,
       VariadicArgument<Path>("PATH", description: self.pathDescription, validator: pathsExist)
     ) { oldTemplateName, templateName, templatePath, parameters, filter, output, paths in

@@ -55,18 +55,20 @@ extension ConfigEntry {
 // MARK: - Commands
 
 enum ConfigCLI {
-  private static let configOption = Option<Path>(
-    "config",
-    default: "swiftgen.yml",
-    flag: "c",
-    description: "Path to the configuration file to use",
-    validator: checkPath(type: "config file") { $0.isFile }
-  )
+  private enum CLIOption {
+    static let config = Option<Path>(
+      "config",
+      default: "swiftgen.yml",
+      flag: "c",
+      description: "Path to the configuration file to use",
+      validator: checkPath(type: "config file") { $0.isFile }
+    )
+  }
 
   // MARK: Lint
 
   static let lint = command(
-    configOption
+    CLIOption.config
   ) { file in
     try ErrorPrettifier.execute {
       logMessage(.info, "Linting \(file)")
@@ -78,7 +80,7 @@ enum ConfigCLI {
   // MARK: Run
 
   static let run = command(
-    configOption,
+    CLIOption.config,
     Flag("verbose", default: false, flag: "v", description: "Print each command being executed")
   ) { file, verbose in
     do {
