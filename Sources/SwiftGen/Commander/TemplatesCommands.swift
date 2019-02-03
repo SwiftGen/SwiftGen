@@ -58,6 +58,7 @@ private extension TemplatesCLI {
       guard let files = try? path.children() else { return [] }
       return files.lazy
         .filter { $0.extension == "stencil" }
+        .sorted()
         .map { "   - \($0.lastComponentWithoutExtension)" }
     }
 
