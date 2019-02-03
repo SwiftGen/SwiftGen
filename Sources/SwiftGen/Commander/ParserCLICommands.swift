@@ -21,6 +21,27 @@ extension ParserCLI {
         """
     )
 
+    static func filter(for parser: ParserCLI) -> Option<String> {
+      return Option<String>(
+        "filter",
+        default: parser.parserType.defaultFilter,
+        flag: "f",
+        description: "The regular expression to filter input paths."
+      )
+    }
+
+    static let options = VariadicOption<String>(
+      "option",
+      default: [],
+      description: "List of parser options"
+    )
+
+    static let params = VariadicOption<String>(
+      "param",
+      default: [],
+      description: "List of template parameters"
+    )
+
     static let templateName = Option<String>(
       "templateName",
       default: "",
@@ -37,21 +58,6 @@ extension ParserCLI {
       flag: "p",
       description: "The path of the template to use for code generation."
     )
-
-    static let params = VariadicOption<String>(
-      "param",
-      default: [],
-      description: "List of template parameters"
-    )
-
-    static func filter(for parser: ParserCLI) -> Option<String> {
-      return Option<String>(
-        "filter",
-        default: parser.parserType.defaultFilter,
-        flag: "f",
-        description: "The regular expression to filter input paths."
-      )
-    }
   }
 }
 
@@ -61,13 +67,15 @@ extension ParserCLI {
       CLIOption.deprecatedTemplateName,
       CLIOption.templateName,
       CLIOption.templatePath,
+      CLIOption.options,
       CLIOption.params,
       CLIOption.filter(for: self),
       OutputDestination.cliOption,
       VariadicArgument<Path>("PATH", description: self.pathDescription, validator: pathsExist)
-    ) { oldTemplateName, templateName, templatePath, parameters, filter, output, paths in
+    ) { oldTemplateName, templateName, templatePath, parserOptions, parameters, filter, output, paths in
       try ErrorPrettifier.execute {
-        let parser = try self.parserType.init(options: [:]) { msg, _, _ in
+        let options = try Parameters.parse(items: parserOptions)
+        let parser = try self.parserType.init(options: options) { msg, _, _ in
           logMessage(.warning, msg)
         }
         let filter = try Filter(pattern: filter)
