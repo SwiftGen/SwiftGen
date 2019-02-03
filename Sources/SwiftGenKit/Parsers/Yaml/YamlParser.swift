@@ -45,7 +45,7 @@ public enum Yaml {
 public enum JSON {
   public final class Parser: Yaml.Parser {
     override public class var defaultFilter: String {
-      return ".*\\.(?i:json)$"
+      return "[^/]\\.(?i:json)$"
     }
   }
 }

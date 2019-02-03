@@ -787,11 +787,11 @@
 		DDCCACD5209550F60017FB43 /* InterfaceBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				DD428E0E1FC50FBF001649D6 /* InterfaceBuilderParser.swift */,
 				DDCCACD7209551230017FB43 /* Platform.swift */,
 				DDCCACD9209551230017FB43 /* Scene.swift */,
 				DDCCACD8209551230017FB43 /* Segue.swift */,
 				DDCCACD6209551230017FB43 /* Storyboard.swift */,
-				DD428E0E1FC50FBF001649D6 /* InterfaceBuilderParser.swift */,
 			);
 			path = InterfaceBuilder;
 			sourceTree = "<group>";
