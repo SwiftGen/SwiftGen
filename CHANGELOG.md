@@ -28,9 +28,13 @@ _None_
 
 ### Bug Fixes
 
+* Assets: improved the performance for color assets by caching the resolved colors.  
+  [David Jennes](https://github.com/djbe)
+  [#578](https://github.com/SwiftGen/SwiftGen/issue/578)
+  [#589](https://github.com/SwiftGen/SwiftGen/pull/589)
 * Core Data: `entityName` is now correctly a `class var` instead of a `class func`.  
   [David Jennes](https://github.com/djbe)
-  [#589](https://github.com/SwiftGen/SwiftGen/pull/589)
+  [#590](https://github.com/SwiftGen/SwiftGen/pull/590)
 
 ### Internal Changes
 
