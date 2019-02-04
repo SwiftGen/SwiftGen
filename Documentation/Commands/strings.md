@@ -38,6 +38,10 @@ You can provide a custom filter using the `filter` option, it accepts any valid 
 
 This parser currently doesn't accept any options.
 
+| Option Name | Default Value | Description |
+| -------------- | ------------- | ----------- |
+| `separator` | `.` | Allows you to change the string used to separate keys into structured components (see the explanation above). |
+
 ## Templates
 
 * [See here](../templates/strings) for a list of templates bundled with SwiftGen and their documentation.
