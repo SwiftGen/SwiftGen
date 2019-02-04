@@ -12,16 +12,16 @@ import Foundation
 
 @objc(AbstractEntity)
 internal class AbstractEntity: NSManagedObject {
-  internal class func entityName() -> String {
+  internal class var entityName: String {
     return "AbstractEntity"
   }
 
   internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
-    return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
+    return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
   @nonobjc internal class func fetchRequest() -> NSFetchRequest<AbstractEntity> {
-    return NSFetchRequest<AbstractEntity>(entityName: entityName())
+    return NSFetchRequest<AbstractEntity>(entityName: entityName)
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
@@ -40,16 +40,16 @@ internal class AbstractEntity: NSManagedObject {
 
 @objc(ChildEntity)
 internal class ChildEntity: MainEntity {
-  override internal class func entityName() -> String {
+  override internal class var entityName: String {
     return "ChildEntity"
   }
 
   override internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
-    return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
+    return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
   @nonobjc internal class func fetchRequest() -> NSFetchRequest<ChildEntity> {
-    return NSFetchRequest<ChildEntity>(entityName: entityName())
+    return NSFetchRequest<ChildEntity>(entityName: entityName)
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
@@ -64,16 +64,16 @@ internal class ChildEntity: MainEntity {
 
 @objc(MainEntity)
 internal class MainEntity: NSManagedObject {
-  internal class func entityName() -> String {
+  internal class var entityName: String {
     return "MainEntity"
   }
 
   internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
-    return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
+    return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
   @nonobjc internal class func fetchRequest() -> NSFetchRequest<MainEntity> {
-    return NSFetchRequest<MainEntity>(entityName: entityName())
+    return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
@@ -285,16 +285,16 @@ extension MainEntity {
 
 @objc(NewEntity)
 internal class NewEntity: AbstractEntity {
-  override internal class func entityName() -> String {
+  override internal class var entityName: String {
     return "NewEntity"
   }
 
   override internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
-    return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
+    return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
   @nonobjc internal class func fetchRequest() -> NSFetchRequest<NewEntity> {
-    return NSFetchRequest<NewEntity>(entityName: entityName())
+    return NSFetchRequest<NewEntity>(entityName: entityName)
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
@@ -306,16 +306,16 @@ internal class NewEntity: AbstractEntity {
 
 @objc(SecondaryEntity)
 internal class SecondaryEntity: NSManagedObject {
-  internal class func entityName() -> String {
+  internal class var entityName: String {
     return "SecondaryEntity"
   }
 
   internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
-    return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
+    return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
   @nonobjc internal class func fetchRequest() -> NSFetchRequest<SecondaryEntity> {
-    return NSFetchRequest<SecondaryEntity>(entityName: entityName())
+    return NSFetchRequest<SecondaryEntity>(entityName: entityName)
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
