@@ -56,12 +56,14 @@ public enum Asset {
 
 // MARK: - Implementation Details
 
-public struct ColorAsset {
+public final class ColorAsset {
   public fileprivate(set) var name: String
 
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  public var color: AssetColorTypeAlias {
-    return AssetColorTypeAlias(asset: self)
+  public private(set) lazy var color: AssetColorTypeAlias = AssetColorTypeAlias(asset: self)
+
+  fileprivate init(name: String) {
+    self.name = name
   }
 }
 
