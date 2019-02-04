@@ -88,12 +88,14 @@
 
 // MARK: - Implementation Details
 
-{{accessModifier}} struct {{colorType}} {
+{{accessModifier}} final class {{colorType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  {{accessModifier}} var color: {{colorAlias}} {
-    return {{colorAlias}}(asset: self)
+  {{accessModifier}} private(set) lazy var color: {{colorAlias}} = {{colorAlias}}(asset: self)
+
+  fileprivate init(name: String) {
+    self.name = name
   }
 }
 
