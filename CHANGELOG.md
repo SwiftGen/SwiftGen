@@ -16,7 +16,9 @@ _None_
 
 ### Bug Fixes
 
-_None_
+* Core Data: `entityName` is now correctly a `class var` instead of a `class func`.  
+  [David Jennes](https://github.com/djbe)
+  [#589](https://github.com/SwiftGen/SwiftGen/pull/589)
 
 ### Internal Changes
 
