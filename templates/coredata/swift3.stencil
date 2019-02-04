@@ -27,16 +27,16 @@ import Foundation
 {% endif %}
 {{ accessModifier }} class {{ entityClassName }}: {{ superclass }} {
   {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
-  {{ override }}{{ accessModifier }} class func entityName() -> String {
+  {{ override }}{{ accessModifier }} class var entityName: String {
     return "{{ entity.name }}"
   }
 
   {{ override }}{{ accessModifier }} class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
-    return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
+    return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
   @nonobjc {{ accessModifier }} class func fetchRequest() -> NSFetchRequest<{{ entityClassName }}> {
-    return NSFetchRequest<{{ entityClassName }}>(entityName: entityName())
+    return NSFetchRequest<{{ entityClassName }}>(entityName: entityName)
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
