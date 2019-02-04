@@ -13,6 +13,10 @@ _None_
 * Each command now accepts an `options` dictionary, with which you can set internal parser settings to change its behaviour. See the commands' specific documentation for available options.  
   [David Jennes](https://github.com/djbe)
   [#587](https://github.com/SwiftGen/SwiftGen/pull/587)
+* Strings: the parser now accepts a `separator` option, used to split keys into structured components. The default separator remains `.`.  
+  [David Jennes](https://github.com/djbe)
+  [#576](https://github.com/SwiftGen/SwiftGen/issue/576)
+  [#588](https://github.com/SwiftGen/SwiftGen/pull/588)
 
 ### Bug Fixes
 
