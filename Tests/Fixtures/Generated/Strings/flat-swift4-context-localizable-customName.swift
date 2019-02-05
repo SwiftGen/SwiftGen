@@ -11,9 +11,9 @@ import Foundation
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 internal enum XCTLoc {
   /// Some alert body there
-  internal static let alertMessage = XCTLoc.tr("Localizable", "alert_message")
+  internal static let alertMessage = XCTLoc.tr("Localizable", "alert__message")
   /// Title of the alert
-  internal static let alertTitle = XCTLoc.tr("Localizable", "alert_title")
+  internal static let alertTitle = XCTLoc.tr("Localizable", "alert__title")
   /// These are %3$@'s %1$d %2$@.
   internal static func objectOwnership(_ p1: Int, _ p2: String, _ p3: String) -> String {
     return XCTLoc.tr("Localizable", "ObjectOwnership", p1, p2, p3)
@@ -43,9 +43,9 @@ internal enum XCTLoc {
   /// Settings
   internal static let settingsNavigationBarTitleEvenDeeper = XCTLoc.tr("Localizable", "settings.navigation-bar.title.even.deeper")
   /// Here you can change some user profile settings.
-  internal static let settingsUserProfileSectionFooterText = XCTLoc.tr("Localizable", "settings.user_profile_section.footer_text")
+  internal static let settingsUserProfileSectionFooterText = XCTLoc.tr("Localizable", "settings.user__profile_section.footer_text")
   /// User Profile Settings
-  internal static let settingsUserProfileSectionHEADERTITLE = XCTLoc.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
+  internal static let settingsUserProfileSectionHEADERTITLE = XCTLoc.tr("Localizable", "settings.user__profile_section.HEADER_TITLE")
 }
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length
 

@@ -11,9 +11,9 @@ import Foundation
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 public enum L10n {
   /// Some alert body there
-  public static let alertMessage = L10n.tr("Localizable", "alert_message")
+  public static let alertMessage = L10n.tr("Localizable", "alert__message")
   /// Title of the alert
-  public static let alertTitle = L10n.tr("Localizable", "alert_title")
+  public static let alertTitle = L10n.tr("Localizable", "alert__title")
   /// These are %3$@'s %1$d %2$@.
   public static func objectOwnership(_ p1: Int, _ p2: String, _ p3: String) -> String {
     return L10n.tr("Localizable", "ObjectOwnership", p1, p2, p3)
@@ -43,9 +43,9 @@ public enum L10n {
   /// Settings
   public static let settingsNavigationBarTitleEvenDeeper = L10n.tr("Localizable", "settings.navigation-bar.title.even.deeper")
   /// Here you can change some user profile settings.
-  public static let settingsUserProfileSectionFooterText = L10n.tr("Localizable", "settings.user_profile_section.footer_text")
+  public static let settingsUserProfileSectionFooterText = L10n.tr("Localizable", "settings.user__profile_section.footer_text")
   /// User Profile Settings
-  public static let settingsUserProfileSectionHEADERTITLE = L10n.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
+  public static let settingsUserProfileSectionHEADERTITLE = L10n.tr("Localizable", "settings.user__profile_section.HEADER_TITLE")
 }
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length
 
