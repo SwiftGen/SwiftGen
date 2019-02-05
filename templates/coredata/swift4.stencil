@@ -7,6 +7,8 @@ import CoreData
 import Foundation
 {% for import in param.extraImports %}
 import {{ import }}
+{% empty %}
+{% if param.extraImports %}import {{ param.extraImports }}{% endif %}
 {% endfor %}
 
 // swiftlint:disable attributes file_length vertical_whitespace_closing_braces

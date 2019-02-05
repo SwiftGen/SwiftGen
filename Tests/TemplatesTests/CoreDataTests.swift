@@ -27,7 +27,9 @@ class CoreDataTests: XCTestCase {
         context: context,
         parameters: ["extraImports=ExtraModule", "extraImports=Transformables"]
        ),
-       suffix: "-extraImports")
+       suffix: "-extraImports"),
+      (context: try StencilContext.enrich(context: context, parameters: ["extraImports=CoreLocation"]),
+       suffix: "-importCoreLocation")
     ]
   }
 
