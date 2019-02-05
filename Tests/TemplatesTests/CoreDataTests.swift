@@ -22,7 +22,12 @@ class CoreDataTests: XCTestCase {
       (context: try StencilContext.enrich(context: context, parameters: ["generateObjcName"]),
        suffix: "-generateObjcName"),
       (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+       suffix: "-publicAccess"),
+      (context: try StencilContext.enrich(
+        context: context,
+        parameters: ["extraImports=ExtraModule", "extraImports=Transformables"]
+       ),
+       suffix: "-extraImports")
     ]
   }
 
