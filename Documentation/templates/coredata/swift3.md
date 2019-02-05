@@ -19,6 +19,7 @@ You can customize some elements of this template by overriding the following par
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
+| `extraImports`| N/A | With this you can provide additional modules to import, for example if you have properties with types from external modules. |
 | `generateObjcName`| N/A | If set, the generated types will have an `@objc(...)` annotation with their class name. |
 | `publicAccess` | N/A | If set, the generated types will be marked as `public`. Otherwise, they'll be declared `internal`. |
 
