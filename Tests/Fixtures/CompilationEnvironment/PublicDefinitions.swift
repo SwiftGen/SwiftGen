@@ -1,3 +1,15 @@
+import Foundation
+
+// Common definitions
+
+#if DEFINE_EXTRA_MODULE_TYPES
+#else
+public final class CustomArray: NSArray {}
+public final class CustomPolyline: NSObject {}
+#endif
+
+// iOS specific definitions
+
 #if os(iOS)
 
 import UIKit
@@ -16,6 +28,8 @@ enum ExtraModule {
   public final class ValidatePasswordViewController: UIViewController {}
 }
 #endif
+
+// macOS specific definitions
 
 #elseif os(OSX)
 

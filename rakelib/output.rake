@@ -50,7 +50,7 @@ TOOLCHAINS = {
   },
   swift4_2: {
     version: '4.2',
-    module_path: "#{MODULE_OUTPUT_PATH}/swift4",
+    module_path: "#{MODULE_OUTPUT_PATH}/swift4.2",
     toolchain: 'com.apple.dt.toolchain.XcodeDefault'
   }
 }.freeze
@@ -60,18 +60,32 @@ namespace :output do
   task :modules do |task|
     Utils.print_header 'Compile output modules'
 
+    # appleTVOS
+    modules = %w[ExtraModule Transformables]
+    modules.each do |m|
+      Utils.print_info "Compiling module #{m}… (appletvos)"
+      compile_module(m, :appletvos, task)
+    end
+
+    # iOS
+    modules = %w[ExtraModule LocationPicker SlackTextViewController Transformables]
+    modules.each do |m|
+      Utils.print_info "Compiling module #{m}… (ios)"
+      compile_module(m, :iphoneos, task)
+    end
+
     # macOS
-    modules = %w[ExtraModule PrefsWindowController]
+    modules = %w[ExtraModule PrefsWindowController Transformables]
     modules.each do |m|
       Utils.print_info "Compiling module #{m}… (macos)"
       compile_module(m, :macosx, task)
     end
 
-    # iOS
-    modules = %w[ExtraModule LocationPicker SlackTextViewController]
+    # watchOS
+    modules = %w[ExtraModule Transformables]
     modules.each do |m|
-      Utils.print_info "Compiling module #{m}… (ios)"
-      compile_module(m, :iphoneos, task)
+      Utils.print_info "Compiling module #{m}… (watchos)"
+      compile_module(m, :watchos, task)
     end
 
     # delete swiftdoc
@@ -133,7 +147,7 @@ namespace :output do
   end
 
   def files(f)
-    if !(f.include?('iOS') || f.include?('macOS'))
+    if !(f.include?('CoreData') || f.include?('IB-iOS') || f.include?('IB-macOS'))
       [f]
     elsif f.include?('publicAccess')
       ["#{MODULE_OUTPUT_PATH}/PublicDefinitions.swift", f]
@@ -143,7 +157,7 @@ namespace :output do
   end
 
   def flags(f)
-    if f.include?('ignoreTargetModule-withExtraModule')
+    if f.include?('ignoreTargetModule-withExtraModule') || f.include?('extraImports')
       ['-D', 'DEFINE_EXTRA_MODULE_TYPES']
     elsif f.include?('withExtraModule') || f.include?('noDefinedModule')
       ['-D', 'DEFINE_NAMESPACED_EXTRA_MODULE_TYPES']
