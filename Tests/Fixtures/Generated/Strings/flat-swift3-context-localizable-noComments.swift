@@ -10,8 +10,8 @@ import Foundation
 
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 internal enum L10n {
-  internal static let alertMessage = L10n.tr("Localizable", "alert_message")
-  internal static let alertTitle = L10n.tr("Localizable", "alert_title")
+  internal static let alertMessage = L10n.tr("Localizable", "alert__message")
+  internal static let alertTitle = L10n.tr("Localizable", "alert__title")
   internal static func objectOwnership(_ p1: Int, _ p2: String, _ p3: String) -> String {
     return L10n.tr("Localizable", "ObjectOwnership", p1, p2, p3)
   }
@@ -31,8 +31,8 @@ internal enum L10n {
   internal static let settingsNavigationBarSelf = L10n.tr("Localizable", "settings.navigation-bar.self")
   internal static let settingsNavigationBarTitleDeeperThanWeCanHandleNoReallyThisIsDeep = L10n.tr("Localizable", "settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep")
   internal static let settingsNavigationBarTitleEvenDeeper = L10n.tr("Localizable", "settings.navigation-bar.title.even.deeper")
-  internal static let settingsUserProfileSectionFooterText = L10n.tr("Localizable", "settings.user_profile_section.footer_text")
-  internal static let settingsUserProfileSectionHEADERTITLE = L10n.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
+  internal static let settingsUserProfileSectionFooterText = L10n.tr("Localizable", "settings.user__profile_section.footer_text")
+  internal static let settingsUserProfileSectionHEADERTITLE = L10n.tr("Localizable", "settings.user__profile_section.HEADER_TITLE")
 }
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length
 

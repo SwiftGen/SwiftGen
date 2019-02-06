@@ -75,4 +75,12 @@ class StringsTests: XCTestCase {
       XCTFail("Unexpected error occured while parsing: \(error)")
     }
   }
+
+  func testCustomSeparator() throws {
+    let parser = Strings.Parser(options: ["separator": "__"])
+    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "custom-separator", sub: .strings)
+  }
 }

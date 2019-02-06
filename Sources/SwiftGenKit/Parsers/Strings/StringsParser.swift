@@ -28,12 +28,18 @@ public enum Strings {
     }
   }
 
+  private enum Option {
+    static let separator = "separator"
+  }
+
   public final class Parser: SwiftGenKit.Parser {
     var tables = [String: [Entry]]()
     public var warningHandler: Parser.MessageHandler?
+    private let keyStructureSeparator: String
 
     public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
       self.warningHandler = warningHandler
+      self.keyStructureSeparator = (options[Option.separator] as? String) ?? Entry.defaultSeparator
     }
 
     public static let defaultFilter = "[^/]\\.strings$"
@@ -55,7 +61,7 @@ public enum Strings {
       }
 
       tables[name] = try dict.map { key, translation in
-        try Entry(key: key, translation: translation)
+        try Entry(key: key, translation: translation, keyStructureSeparator: keyStructureSeparator)
       }
     }
   }

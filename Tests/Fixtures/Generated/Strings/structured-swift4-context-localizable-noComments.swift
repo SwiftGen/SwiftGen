@@ -11,8 +11,8 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
-  internal static let alertMessage = L10n.tr("Localizable", "alert_message")
-  internal static let alertTitle = L10n.tr("Localizable", "alert_title")
+  internal static let alertMessage = L10n.tr("Localizable", "alert__message")
+  internal static let alertTitle = L10n.tr("Localizable", "alert__title")
   internal static func objectOwnership(_ p1: Int, _ p2: String, _ p3: String) -> String {
     return L10n.tr("Localizable", "ObjectOwnership", p1, p2, p3)
   }
@@ -65,8 +65,8 @@ internal enum L10n {
       }
     }
     internal enum UserProfileSection {
-      internal static let footerText = L10n.tr("Localizable", "settings.user_profile_section.footer_text")
-      internal static let headerTitle = L10n.tr("Localizable", "settings.user_profile_section.HEADER_TITLE")
+      internal static let footerText = L10n.tr("Localizable", "settings.user__profile_section.footer_text")
+      internal static let headerTitle = L10n.tr("Localizable", "settings.user__profile_section.HEADER_TITLE")
     }
   }
 }
