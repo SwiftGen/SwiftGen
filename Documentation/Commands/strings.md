@@ -4,7 +4,7 @@
 
 The strings parser accepts a `strings` file, typically `Localizable.strings`. It will parse each string in this file, including the type information for formatting parameters.
 
-The strings file will be converted into a structured tree version, where each string is separated into components by the `.` character. We call this the `dot syntax`, each component representing a level. For example, the following strings:
+The strings file will be converted into a structured tree version, where each string is separated into components by the `.` character (note: you can choose another separator if you need, using the `separator` option, see [Customization](#customization) below). We call this the `dot syntax`, each component representing a level. For example, the following strings:
 
 ```
 "some.deep.structure"
@@ -40,7 +40,7 @@ This parser currently doesn't accept any options.
 
 | Option Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
-| `separator` | `.` | Allows you to change the string used to separate keys into structured components (see the explanation above). |
+| `separator` | `.` | Each key is separated into components using the given separator, to form a structure as described in the [explanation above](#input). |
 
 ## Templates
 
