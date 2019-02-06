@@ -21,6 +21,10 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#591](https://github.com/SwiftGen/SwiftGen/issue/591)
   [#592](https://github.com/SwiftGen/SwiftGen/pull/592)
+* Core Data: the built-in templates now support `enum` attributes. They'll check the "User Info" of an attribute for a `enumType` key, which should be set to the enum type name you want to use for that attribute.  
+  [David Jennes](https://github.com/djbe)
+  [#566](https://github.com/SwiftGen/SwiftGen/issue/566)
+  [#593](https://github.com/SwiftGen/SwiftGen/pull/593)
 
 ### Bug Fixes
 
