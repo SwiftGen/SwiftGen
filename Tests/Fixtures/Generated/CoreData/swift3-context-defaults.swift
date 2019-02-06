@@ -85,6 +85,25 @@ internal class MainEntity: NSManagedObject {
   @NSManaged internal var int16: Int16
   @NSManaged internal var int32: Int32
   @NSManaged internal var int64: Int64
+  internal var integerEnum: IntegerEnum? {
+    get {
+      let key = "integerEnum"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      guard let value = primitiveValue(forKey: key) as? IntegerEnum.RawValue else {
+        return nil
+      }
+      return IntegerEnum(rawValue: value)
+    }
+    set {
+      let key = "integerEnum"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue?.rawValue, forKey: key)
+    }
+  }
   internal var optionalBoolean: Bool? {
     get {
       let key = "optionalBoolean"
@@ -153,6 +172,25 @@ internal class MainEntity: NSManagedObject {
   }
   @NSManaged internal var optionalString: String?
   @NSManaged internal var string: String
+  internal var stringEnum: StringEnum? {
+    get {
+      let key = "stringEnum"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      guard let value = primitiveValue(forKey: key) as? StringEnum.RawValue else {
+        return nil
+      }
+      return StringEnum(rawValue: value)
+    }
+    set {
+      let key = "stringEnum"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue?.rawValue, forKey: key)
+    }
+  }
   @NSManaged internal var transformable: AnyObject?
   @NSManaged internal var transformableCustomArray: CustomArray?
   @NSManaged internal var transformableCustomPolyline: CustomPolyline?
