@@ -33,6 +33,8 @@
         <attribute name="optionalString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="string" attributeType="String" syncable="YES"/>
         <attribute name="transformable" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="transformableCustomArray" optional="YES" attributeType="Transformable" customClassName="CustomArray" syncable="YES"/>
+        <attribute name="transformableCustomPolyline" optional="YES" attributeType="Transformable" customClassName="CustomPolyline" syncable="YES"/>
         <attribute name="transient" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="uri" optional="YES" attributeType="URI" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>

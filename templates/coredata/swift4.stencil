@@ -1,10 +1,17 @@
 // swiftlint:disable all
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable sorted_imports
 import CoreData
 import Foundation
+{% for import in param.extraImports %}
+import {{ import }}
+{% empty %}
+{# If extraImports is a single String instead of an array, `for` considers it empty but we still have to check if there's a single String value #}
+{% if param.extraImports %}import {{ param.extraImports }}{% endif %}
+{% endfor %}
 
-// swiftlint:disable superfluous_disable_command
 // swiftlint:disable attributes file_length vertical_whitespace_closing_braces
 // swiftlint:disable identifier_name line_length type_body_length
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}

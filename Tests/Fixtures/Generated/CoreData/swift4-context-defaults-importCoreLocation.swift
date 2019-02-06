@@ -5,22 +5,23 @@
 // swiftlint:disable sorted_imports
 import CoreData
 import Foundation
+import CoreLocation
 
 // swiftlint:disable attributes file_length vertical_whitespace_closing_braces
 // swiftlint:disable identifier_name line_length type_body_length
 
 // MARK: - AbstractEntity
 
-public class AbstractEntity: NSManagedObject {
-  public class var entityName: String {
+internal class AbstractEntity: NSManagedObject {
+  internal class var entityName: String {
     return "AbstractEntity"
   }
 
-  public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+  internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc public class func fetchRequest() -> NSFetchRequest<AbstractEntity> {
+  @nonobjc internal class func fetchRequest() -> NSFetchRequest<AbstractEntity> {
     return NSFetchRequest<AbstractEntity>(entityName: entityName)
   }
 
@@ -38,16 +39,16 @@ public class AbstractEntity: NSManagedObject {
 
 // MARK: - ChildEntity
 
-public class ChildEntity: MainEntity {
-  override public class var entityName: String {
+internal class ChildEntity: MainEntity {
+  override internal class var entityName: String {
     return "ChildEntity"
   }
 
-  override public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+  override internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc public class func fetchRequest() -> NSFetchRequest<ChildEntity> {
+  @nonobjc internal class func fetchRequest() -> NSFetchRequest<ChildEntity> {
     return NSFetchRequest<ChildEntity>(entityName: entityName)
   }
 
@@ -61,31 +62,31 @@ public class ChildEntity: MainEntity {
 
 // MARK: - MainEntity
 
-public class MainEntity: NSManagedObject {
-  public class var entityName: String {
+internal class MainEntity: NSManagedObject {
+  internal class var entityName: String {
     return "MainEntity"
   }
 
-  public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+  internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc public class func fetchRequest() -> NSFetchRequest<MainEntity> {
+  @nonobjc internal class func fetchRequest() -> NSFetchRequest<MainEntity> {
     return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
-  @NSManaged public var attributedString: NSAttributedString?
-  @NSManaged public var binaryData: Data?
-  @NSManaged public var boolean: Bool
-  @NSManaged public var date: Date?
-  @NSManaged public var decimal: NSDecimalNumber?
-  @NSManaged public var double: Double
-  @NSManaged public var float: Float
-  @NSManaged public var int16: Int16
-  @NSManaged public var int32: Int32
-  @NSManaged public var int64: Int64
-  public var optionalBoolean: Bool? {
+  @NSManaged internal var attributedString: NSAttributedString?
+  @NSManaged internal var binaryData: Data?
+  @NSManaged internal var boolean: Bool
+  @NSManaged internal var date: Date?
+  @NSManaged internal var decimal: NSDecimalNumber?
+  @NSManaged internal var double: Double
+  @NSManaged internal var float: Float
+  @NSManaged internal var int16: Int16
+  @NSManaged internal var int32: Int32
+  @NSManaged internal var int64: Int64
+  internal var optionalBoolean: Bool? {
     get {
       let key = "optionalBoolean"
       willAccessValue(forKey: key)
@@ -101,7 +102,7 @@ public class MainEntity: NSManagedObject {
       setPrimitiveValue(newValue, forKey: key)
     }
   }
-  public var optionalDouble: Double? {
+  internal var optionalDouble: Double? {
     get {
       let key = "optionalDouble"
       willAccessValue(forKey: key)
@@ -117,8 +118,8 @@ public class MainEntity: NSManagedObject {
       setPrimitiveValue(newValue, forKey: key)
     }
   }
-  @NSManaged public var optionalFloat: Float
-  public var optionalInt16: Int16? {
+  @NSManaged internal var optionalFloat: Float
+  internal var optionalInt16: Int16? {
     get {
       let key = "optionalInt16"
       willAccessValue(forKey: key)
@@ -134,8 +135,8 @@ public class MainEntity: NSManagedObject {
       setPrimitiveValue(newValue, forKey: key)
     }
   }
-  @NSManaged public var optionalInt32: Int32
-  public var optionalInt64: Int64? {
+  @NSManaged internal var optionalInt32: Int32
+  internal var optionalInt64: Int64? {
     get {
       let key = "optionalInt64"
       willAccessValue(forKey: key)
@@ -151,18 +152,18 @@ public class MainEntity: NSManagedObject {
       setPrimitiveValue(newValue, forKey: key)
     }
   }
-  @NSManaged public var optionalString: String?
-  @NSManaged public var string: String
-  @NSManaged public var transformable: AnyObject?
-  @NSManaged public var transformableCustomArray: CustomArray?
-  @NSManaged public var transformableCustomPolyline: CustomPolyline?
-  @NSManaged public var transient: String?
-  @NSManaged public var uri: URL?
-  @NSManaged public var uuid: UUID?
-  @NSManaged public var manyToMany: Set<SecondaryEntity>?
-  @NSManaged public var oneToMany: NSOrderedSet?
-  @NSManaged public var oneToOne: SecondaryEntity?
-  @NSManaged public var fetchedProperty: [NewEntity]
+  @NSManaged internal var optionalString: String?
+  @NSManaged internal var string: String
+  @NSManaged internal var transformable: AnyObject?
+  @NSManaged internal var transformableCustomArray: CustomArray?
+  @NSManaged internal var transformableCustomPolyline: CustomPolyline?
+  @NSManaged internal var transient: String?
+  @NSManaged internal var uri: URL?
+  @NSManaged internal var uuid: UUID?
+  @NSManaged internal var manyToMany: Set<SecondaryEntity>?
+  @NSManaged internal var oneToMany: NSOrderedSet?
+  @NSManaged internal var oneToOne: SecondaryEntity?
+  @NSManaged internal var fetchedProperty: [NewEntity]
   // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
 
@@ -283,44 +284,44 @@ extension MainEntity {
 
 // MARK: - NewEntity
 
-public class NewEntity: AbstractEntity {
-  override public class var entityName: String {
+internal class NewEntity: AbstractEntity {
+  override internal class var entityName: String {
     return "NewEntity"
   }
 
-  override public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+  override internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc public class func fetchRequest() -> NSFetchRequest<NewEntity> {
+  @nonobjc internal class func fetchRequest() -> NSFetchRequest<NewEntity> {
     return NSFetchRequest<NewEntity>(entityName: entityName)
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
-  @NSManaged public var identifier: UUID?
+  @NSManaged internal var identifier: UUID?
   // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
 
 // MARK: - SecondaryEntity
 
-public class SecondaryEntity: NSManagedObject {
-  public class var entityName: String {
+internal class SecondaryEntity: NSManagedObject {
+  internal class var entityName: String {
     return "SecondaryEntity"
   }
 
-  public class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+  internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc public class func fetchRequest() -> NSFetchRequest<SecondaryEntity> {
+  @nonobjc internal class func fetchRequest() -> NSFetchRequest<SecondaryEntity> {
     return NSFetchRequest<SecondaryEntity>(entityName: entityName)
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
-  @NSManaged public var name: String
-  @NSManaged public var manyToMany: Set<MainEntity>?
-  @NSManaged public var oneToMany: MainEntity?
-  @NSManaged public var oneToOne: MainEntity?
+  @NSManaged internal var name: String
+  @NSManaged internal var manyToMany: Set<MainEntity>?
+  @NSManaged internal var oneToMany: MainEntity?
+  @NSManaged internal var oneToOne: MainEntity?
   // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
 

@@ -261,6 +261,26 @@ models:
         typeName: "AnyObject"
         userInfo: {}
         usesScalarValueType: false
+      - customClassName: "CustomArray"
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "transformableCustomArray"
+        propertyType: "attribute"
+        type: "Transformable"
+        typeName: "CustomArray"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: "CustomPolyline"
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "transformableCustomPolyline"
+        propertyType: "attribute"
+        type: "Transformable"
+        typeName: "CustomPolyline"
+        userInfo: {}
+        usesScalarValueType: false
       - customClassName: ""
         isIndexed: false
         isOptional: true

@@ -17,6 +17,10 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#576](https://github.com/SwiftGen/SwiftGen/issue/576)
   [#588](https://github.com/SwiftGen/SwiftGen/pull/588)
+* Core Data: the built-in templates now support an optional `extraImports` parameter. With this you can provide a list of modules to additionally import, for when you have properties with types from external modules.  
+  [David Jennes](https://github.com/djbe)
+  [#591](https://github.com/SwiftGen/SwiftGen/issue/591)
+  [#592](https://github.com/SwiftGen/SwiftGen/pull/592)
 
 ### Bug Fixes
 

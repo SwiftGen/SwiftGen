@@ -1,10 +1,11 @@
 // swiftlint:disable all
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable sorted_imports
 import CoreData
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
 // swiftlint:disable attributes file_length vertical_whitespace_closing_braces
 // swiftlint:disable identifier_name line_length type_body_length
 
@@ -156,6 +157,8 @@ internal class MainEntity: NSManagedObject {
   @NSManaged internal var optionalString: String?
   @NSManaged internal var string: String
   @NSManaged internal var transformable: AnyObject?
+  @NSManaged internal var transformableCustomArray: CustomArray?
+  @NSManaged internal var transformableCustomPolyline: CustomPolyline?
   @NSManaged internal var transient: String?
   @NSManaged internal var uri: URL?
   @NSManaged internal var uuid: UUID?
