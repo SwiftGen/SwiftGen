@@ -13,15 +13,15 @@ _None_
 * Each command now accepts an `options` dictionary, with which you can set internal parser settings to change its behaviour. See the commands' specific documentation for available options.  
   [David Jennes](https://github.com/djbe)
   [#587](https://github.com/SwiftGen/SwiftGen/pull/587)
-* Strings: the parser now accepts a `separator` option, used to split keys into structured components. The default separator remains `.`.  
+* Strings: the parser now accepts a `separator` option, used to split keys into structured components. The default separator remains `.`. For more information, check the [command's documentation](Documentation/Commands/strings.md#customization).  
   [David Jennes](https://github.com/djbe)
   [#576](https://github.com/SwiftGen/SwiftGen/issue/576)
   [#588](https://github.com/SwiftGen/SwiftGen/pull/588)
-* Core Data: the built-in templates now support an optional `extraImports` parameter. With this you can provide a list of modules to additionally import, for when you have properties with types from external modules.  
+* Core Data: the built-in templates now support an optional `extraImports` parameter. With this you can provide a list of modules to additionally import, for when you have properties with types from external modules. For more information, check the [template's documentation](Documentation/templates/coredata/swift4.md#customization).  
   [David Jennes](https://github.com/djbe)
   [#591](https://github.com/SwiftGen/SwiftGen/issue/591)
   [#592](https://github.com/SwiftGen/SwiftGen/pull/592)
-* Core Data: the built-in templates now support `enum` attributes. They'll check the "User Info" of an attribute for a `enumType` key, which should be set to the enum type name you want to use for that attribute.  
+* Core Data: the built-in templates now support `enum` attributes. They'll check the "User Info" of an attribute for a `enumType` key, which should be set to the enum type name you want to use for that attribute. For more information, check the [template's documentation](Documentation/templates/coredata/swift4.md#userinfo-keys).  
   [David Jennes](https://github.com/djbe)
   [#566](https://github.com/SwiftGen/SwiftGen/issue/566)
   [#593](https://github.com/SwiftGen/SwiftGen/pull/593)
