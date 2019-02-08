@@ -17,6 +17,7 @@ public enum AssetsCatalog {
     }
 
     public static let defaultFilter = "[^/]\\.xcassets$"
+    public static let allOptions = ParserOptionList()
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       let catalog = Catalog(path: path)

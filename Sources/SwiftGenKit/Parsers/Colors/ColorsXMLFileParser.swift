@@ -10,6 +10,10 @@ import PathKit
 
 extension Colors {
   final class XMLFileParser: ColorsFileTypeParser {
+    init(options: [String: Any] = [:]) {
+    }
+
+    static let allOptions = ParserOptionList()
     static let extensions = ["xml"]
 
     private enum XML {

@@ -9,9 +9,33 @@ import PathKit
 
 extension Colors {
   final class TextFileParser: ColorsFileTypeParser {
+    private var colors = [String: UInt32]()
+
+    init(options: [String: Any] = [:]) {
+    }
+
+    static let allOptions = ParserOptionList()
     static let extensions = ["txt"]
 
-    private var colors = [String: UInt32]()
+    // Text file expected to be:
+    //  - One line per entry
+    //  - Each line composed by the color name, then ":", then the color hex representation
+    //  - Extra spaces will be skipped
+    func parseFile(at path: Path) throws -> Palette {
+      do {
+        let dict = try keyValueDict(from: path, withSeperator: ":")
+        for key in dict.keys {
+          try addColor(named: key, value: colorValue(forKey: key, onDict: dict), path: path)
+        }
+      } catch let error as ParserError {
+        throw error
+      } catch let error {
+        throw ParserError.invalidFile(path: path, reason: error.localizedDescription)
+      }
+
+      let name = path.lastComponentWithoutExtension
+      return Palette(name: name, colors: colors)
+    }
 
     private func addColor(named name: String, value: String, path: Path) throws {
       try addColor(named: name, value: Colors.parse(hex: value, key: name, path: path))
@@ -21,7 +45,7 @@ extension Colors {
       colors[name] = value
     }
 
-    public func keyValueDict(from path: Path, withSeperator seperator: String = ":") throws -> [String: String] {
+    private func keyValueDict(from path: Path, withSeperator seperator: String = ":") throws -> [String: String] {
       let content = try path.read(.utf8)
       let lines = content.components(separatedBy: CharacterSet.newlines)
 
@@ -56,26 +80,6 @@ extension Colors {
       }
 
       return stringValue
-    }
-
-    // Text file expected to be:
-    //  - One line per entry
-    //  - Each line composed by the color name, then ":", then the color hex representation
-    //  - Extra spaces will be skipped
-    func parseFile(at path: Path) throws -> Palette {
-      do {
-        let dict = try keyValueDict(from: path, withSeperator: ":")
-        for key in dict.keys {
-          try addColor(named: key, value: colorValue(forKey: key, onDict: dict), path: path)
-        }
-      } catch let error as ParserError {
-        throw error
-      } catch let error {
-        throw ParserError.invalidFile(path: path, reason: error.localizedDescription)
-      }
-
-      let name = path.lastComponentWithoutExtension
-      return Palette(name: name, colors: colors)
     }
   }
 }

@@ -17,6 +17,10 @@ public struct ParserOptionList {
     self.options = options
   }
 
+  init(lists: [ParserOptionList]) {
+    self.options = lists.flatMap { $0.options }
+  }
+
   /// Check if the given dictionary of key values are all supported options.
   ///
   /// - Parameter options: a dictionary of options

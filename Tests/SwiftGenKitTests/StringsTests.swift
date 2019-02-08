@@ -14,15 +14,15 @@ import XCTest
  */
 
 class StringsTests: XCTestCase {
-  func testEmpty() {
-    let parser = Strings.Parser()
+  func testEmpty() throws {
+    let parser = try Strings.Parser()
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .strings)
   }
 
   func testLocalizable() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     let result = parser.stencilContext()
@@ -30,7 +30,7 @@ class StringsTests: XCTestCase {
   }
 
   func testMultiline() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "LocMultiline.strings", sub: .strings))
 
     let result = parser.stencilContext()
@@ -38,7 +38,7 @@ class StringsTests: XCTestCase {
   }
 
   func testUTF8File() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "LocUTF8.strings", sub: .strings))
 
     let result = parser.stencilContext()
@@ -46,7 +46,7 @@ class StringsTests: XCTestCase {
   }
 
   func testStructuredOnly() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "LocStructuredOnly.strings", sub: .strings))
 
     let result = parser.stencilContext()
@@ -54,7 +54,7 @@ class StringsTests: XCTestCase {
   }
 
   func testMultipleFiles() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
     try parser.searchAndParse(path: Fixtures.path(for: "LocMultiline.strings", sub: .strings))
 
@@ -63,7 +63,7 @@ class StringsTests: XCTestCase {
   }
 
   func testMultipleFilesDuplicate() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     do {
@@ -77,7 +77,7 @@ class StringsTests: XCTestCase {
   }
 
   func testCustomSeparator() throws {
-    let parser = Strings.Parser(options: ["separator": "__"])
+    let parser = try Strings.Parser(options: ["separator": "__"])
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     let result = parser.stencilContext()

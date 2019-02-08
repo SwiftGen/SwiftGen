@@ -9,6 +9,8 @@ import PathKit
 import XCTest
 
 final class TestFileParser1: ColorsFileTypeParser {
+  init(options: [String: Any]) {}
+  static let allOptions = ParserOptionList()
   static let extensions = ["test1"]
   func parseFile(at path: Path) throws -> Colors.Palette {
     return Colors.Palette(name: "test1", colors: [:])
@@ -16,6 +18,8 @@ final class TestFileParser1: ColorsFileTypeParser {
 }
 
 final class TestFileParser2: ColorsFileTypeParser {
+  init(options: [String: Any]) {}
+  static let allOptions = ParserOptionList()
   static let extensions = ["test2"]
   func parseFile(at path: Path) throws -> Colors.Palette {
     return Colors.Palette(name: "test2", colors: [:])
@@ -23,6 +27,8 @@ final class TestFileParser2: ColorsFileTypeParser {
 }
 
 final class TestFileParser3: ColorsFileTypeParser {
+  init(options: [String: Any]) {}
+  static let allOptions = ParserOptionList()
   static let extensions = ["test1"]
   func parseFile(at path: Path) throws -> Colors.Palette {
     return Colors.Palette(name: "test3", colors: [:])

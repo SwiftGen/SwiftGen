@@ -16,9 +16,11 @@ extension Colors {
 }
 
 protocol ColorsFileTypeParser: AnyObject {
+  init(options: [String: Any])
+
+  static var allOptions: ParserOptionList { get }
   static var extensions: [String] { get }
 
-  init()
   func parseFile(at path: Path) throws -> Colors.Palette
 }
 

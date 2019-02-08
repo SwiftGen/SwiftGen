@@ -43,6 +43,7 @@ public enum Strings {
     }
 
     public static let defaultFilter = "[^/]\\.strings$"
+    public static let allOptions = ParserOptionList()
 
     // Localizable.strings files are generally UTF16, not UTF8!
     public func parse(path: Path, relativeTo parent: Path) throws {
