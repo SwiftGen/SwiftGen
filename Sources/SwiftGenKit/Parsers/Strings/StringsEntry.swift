@@ -28,8 +28,6 @@ extension Strings {
 
     // MARK: - Structured keys
 
-    static let defaultSeparator = "."
-
     private static func split(key: String, separator: String) -> [String] {
       return key
         .components(separatedBy: separator)
