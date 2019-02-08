@@ -2,6 +2,13 @@ import Foundation
 
 // Common definitions
 
+public enum IntegerEnum: Int16 {
+  case test1
+}
+public enum StringEnum: String {
+  case test1
+}
+
 #if DEFINE_EXTRA_MODULE_TYPES
 #else
 public final class CustomArray: NSArray {}

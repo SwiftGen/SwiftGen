@@ -48,7 +48,27 @@ import {{ import }}
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
   {% for attribute in entity.attributes %}
-  {% if attribute.usesScalarValueType and attribute.isOptional %}
+  {% if attribute.userInfo.enumType %}
+  {{ accessModifier }} var {{ attribute.name }}: {{ attribute.userInfo.enumType }}? {
+    get {
+      let key = "{{ attribute.name }}"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      guard let value = primitiveValue(forKey: key) as? {{ attribute.userInfo.enumType }}.RawValue else {
+        return nil
+      }
+      return {{ attribute.userInfo.enumType }}(rawValue: value)
+    }
+    set {
+      let key = "{{ attribute.name }}"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue?.rawValue, forKey: key)
+    }
+  }
+  {% elif attribute.usesScalarValueType and attribute.isOptional %}
   {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}? {
     get {
       let key = "{{ attribute.name }}"
