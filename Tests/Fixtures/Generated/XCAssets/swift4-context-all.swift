@@ -56,12 +56,14 @@ internal enum Asset {
 
 // MARK: - Implementation Details
 
-internal struct ColorAsset {
+internal final class ColorAsset {
   internal fileprivate(set) var name: String
 
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  internal var color: AssetColorTypeAlias {
-    return AssetColorTypeAlias(asset: self)
+  internal private(set) lazy var color: AssetColorTypeAlias = AssetColorTypeAlias(asset: self)
+
+  fileprivate init(name: String) {
+    self.name = name
   }
 }
 

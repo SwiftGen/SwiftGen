@@ -56,12 +56,14 @@ internal enum XCTAssets {
 
 // MARK: - Implementation Details
 
-internal struct XCTColorAsset {
+internal final class XCTColorAsset {
   internal fileprivate(set) var name: String
 
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  internal var color: XCTColor {
-    return XCTColor(asset: self)
+  internal private(set) lazy var color: XCTColor = XCTColor(asset: self)
+
+  fileprivate init(name: String) {
+    self.name = name
   }
 }
 
