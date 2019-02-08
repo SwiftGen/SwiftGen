@@ -110,6 +110,8 @@
 		DDC335E47ABB50395E595AB0 /* Pods_swiftgen_SwiftGen_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8876ECE7B9852963F6B5 /* Pods_swiftgen_SwiftGen_UnitTests.framework */; };
 		DDC8211520967180007A55F3 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC8211420967180007A55F3 /* Path.swift */; };
 		DDC82117209672E1007A55F3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC82116209672E1007A55F3 /* String.swift */; };
+		DDCC331B220E3FE700982694 /* ParserOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCC331A220E3FE700982694 /* ParserOption.swift */; };
+		DDCC331D220E491600982694 /* ParserOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCC331C220E491600982694 /* ParserOptionList.swift */; };
 		DDCCACDA209551240017FB43 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD6209551230017FB43 /* Storyboard.swift */; };
 		DDCCACDB209551240017FB43 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD7209551230017FB43 /* Platform.swift */; };
 		DDCCACDC209551240017FB43 /* Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCCACD8209551230017FB43 /* Segue.swift */; };
@@ -390,6 +392,8 @@
 		DDC09D011E1D199A005C6EE6 /* templates */ = {isa = PBXFileReference; lastKnownFileType = folder; name = templates; path = ../templates; sourceTree = "<group>"; };
 		DDC8211420967180007A55F3 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		DDC82116209672E1007A55F3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		DDCC331A220E3FE700982694 /* ParserOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserOption.swift; sourceTree = "<group>"; };
+		DDCC331C220E491600982694 /* ParserOptionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserOptionList.swift; sourceTree = "<group>"; };
 		DDCCACD6209551230017FB43 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		DDCCACD7209551230017FB43 /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		DDCCACD8209551230017FB43 /* Segue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segue.swift; sourceTree = "<group>"; };
@@ -663,6 +667,8 @@
 				DDB0B999209CE4A300E467C2 /* Yaml */,
 				DD2F4DDF21DAE7E6002E9B8C /* Filter.swift */,
 				DD428E0F1FC50FBF001649D6 /* Parser.swift */,
+				DDCC331A220E3FE700982694 /* ParserOption.swift */,
+				DDCC331C220E491600982694 /* ParserOptionList.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -1434,6 +1440,7 @@
 				DD9F688620956074004EB720 /* PlaceholderType.swift in Sources */,
 				DD428E251FC50FBF001649D6 /* AssetsCatalogContext.swift in Sources */,
 				C3031AA121062C9A00BF00DE /* UserInfo.swift in Sources */,
+				DDCC331B220E3FE700982694 /* ParserOption.swift in Sources */,
 				DD428E1A1FC50FBF001649D6 /* ColorsCLRFileParser.swift in Sources */,
 				C350BE3820FFCD0F0043D7C5 /* Model.swift in Sources */,
 				C32262732101324E001AC9CD /* Relationship.swift in Sources */,
@@ -1448,6 +1455,7 @@
 				DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */,
 				DD9F687C20955D51004EB720 /* Catalog.swift in Sources */,
 				C322627121012F42001AC9CD /* Attribute.swift in Sources */,
+				DDCC331D220E491600982694 /* ParserOptionList.swift in Sources */,
 				DD428E271FC50FBF001649D6 /* StringsContext.swift in Sources */,
 				C38E571520FF8FB5009C9C23 /* CoreDataParser.swift in Sources */,
 				C322626F21012C42001AC9CD /* Bool.swift in Sources */,

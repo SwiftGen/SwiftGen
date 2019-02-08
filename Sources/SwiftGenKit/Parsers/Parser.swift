@@ -10,11 +10,21 @@ import PathKit
 public protocol Parser {
   init(options: [String: Any], warningHandler: MessageHandler?) throws
 
-  // regex for the default filter
+  /// Regex for the default filter
   static var defaultFilter: String { get }
 
-  // Parsing and context generation
+  /// List of supported options
+  static var allOptions: ParserOptionList { get }
+
+  /// Try to parse the file (or directory) at the given path, relative to some parent path.
+  ///
+  /// - Parameter path: The file/directory to parse
+  /// - Parameter parent: The parent path (may not be the direct parent)
   func parse(path: Path, relativeTo parent: Path) throws
+
+  /// Generate the stencil context from the parsed content.
+  ///
+  /// - Returns: A dictionary representing the parsed data 
   func stencilContext() -> [String: Any]
 
   /// This callback will be called when a Parser want to emit a diagnostics message
