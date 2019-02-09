@@ -75,7 +75,7 @@ extension MainEntity {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/CoreData/swift4-context-defaults.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/CoreData/swift4/defaults.swift)
 
 ## Usage example
 

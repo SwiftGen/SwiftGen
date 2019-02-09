@@ -49,7 +49,7 @@ internal enum YAMLFiles {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/YAML/inline-swift3-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/YAML/inline-swift3/all.swift)
 
 ## Usage example
 
