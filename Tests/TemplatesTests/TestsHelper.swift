@@ -119,8 +119,8 @@ class Fixtures {
     return string(for: name, subDirectory: "templates/\(sub.rawValue.lowercased())")
   }
 
-  static func output(for name: String, sub: Directory) -> String {
-    return string(for: name, subDirectory: "Generated/\(sub.rawValue)")
+  static func output(template: String, variation: String, sub: Directory) -> String {
+    return string(for: variation, subDirectory: "Generated/\(sub.rawValue)/\(template)")
   }
 
   private static func string(for name: String, subDirectory: String) -> String {
@@ -182,7 +182,7 @@ extension XCTestCase {
       }
 
       for (index, (context: context, suffix: suffix)) in variations.enumerated() {
-        let outputFile = "\(templateName)-context-\(contextName)\(suffix).swift"
+        let outputFile = "\(contextName)\(suffix).swift"
         if variations.count > 1 { print(" - Variation #\(index)... (expecting: \(outputFile))") }
 
         let result: String
@@ -194,14 +194,15 @@ extension XCTestCase {
 
         // check if we should generate or not
         if ProcessInfo().environment["GENERATE_OUTPUT"] == "YES" {
-          let target = Path(#file).parent().parent() + "Fixtures/Generated" + outputDir.rawValue + outputFile
+          let target = Path(#file).parent().parent() + "Fixtures/Generated" + outputDir.rawValue +
+            templateName + outputFile
           do {
             try target.write(result)
           } catch {
             fatalError("Unable to write output file \(target)")
           }
         } else {
-          let expected = Fixtures.output(for: outputFile, sub: outputDir)
+          let expected = Fixtures.output(template: templateName, variation: outputFile, sub: outputDir)
           XCTDiffStrings(result, expected, file: file, line: line)
         }
       }
