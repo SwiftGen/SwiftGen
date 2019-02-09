@@ -24,7 +24,7 @@ public struct ParserOptionList {
   /// Check if the given dictionary of key values are all supported options.
   ///
   /// - Parameter options: a dictionary of options
-  public func check(options: [String: Any]) throws {
+  func check(options: [String: Any]) throws {
     let known = Set(self.options.map { $0.key })
     for option in options where !known.contains(option.key) {
       throw Error.unknownOption(key: option.key, value: option.value)

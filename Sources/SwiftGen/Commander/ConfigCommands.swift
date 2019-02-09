@@ -50,8 +50,7 @@ extension ConfigEntry {
   }
 
   func run(parserCommand: ParserCLI) throws {
-    try parserCommand.parserType.allOptions.check(options: options)
-    let parser = try parserCommand.parserType.init(options: options) { msg, _, _ in
+    let parser = try parserCommand.parserType.createWith(options: options) { msg, _, _ in
       logMessage(.warning, msg)
     }
 

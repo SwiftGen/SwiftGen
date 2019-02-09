@@ -8,6 +8,11 @@ import Foundation
 import PathKit
 
 public protocol Parser {
+  /// Parser initializer. Please use the `createWith(options:warningHandler:)` factory method instead,
+  /// it'll ensure the safety of the provided options.
+  ///
+  /// - Parameter options: Dictionary of options, used to customize processing.
+  /// - Parameter warningHandler: Callback for logging issues.
   init(options: [String: Any], warningHandler: MessageHandler?) throws
 
   /// Regex for the default filter
@@ -35,12 +40,31 @@ public protocol Parser {
 }
 
 public extension Parser {
+  /// Factory method for safely creating a parser instance. Options will be checked against the list of
+  /// supported options (in `allOptions`).
+  ///
+  /// - Parameter options: Dictionary of options, checked against `allOptions`.
+  /// - Parameter warningHandler: Callback for logging issues.
+  /// - Returns: An instance of the parser.
+  static func createWith(options: [String: Any], warningHandler: MessageHandler?) throws -> Self {
+    try allOptions.check(options: options)
+    return try Self.init(options: options, warningHandler: warningHandler)
+  }
+
+  /// Recursively search through the given paths, parsing any file or folder that matches the given filter.
+  ///
+  /// - Parameter paths: The paths to search recursively through.
+  /// - Parameter filter: The filter to apply to each path.
   func searchAndParse(paths: [Path], filter: Filter) throws {
     for path in paths {
       try searchAndParse(path: path, filter: filter)
     }
   }
 
+  /// Recursively search through the given path, parsing any file or folder that matches the given filter.
+  ///
+  /// - Parameter path: The path to search recursively through.
+  /// - Parameter filter: The filter to apply to each path.
   func searchAndParse(path: Path, filter: Filter) throws {
     if path.matches(filter: filter) {
       let parentDir = path.absolute().parent()
