@@ -39,8 +39,11 @@ _None_
 ### Internal Changes
 
 * Refactoring: Reduce globals & rearrange CLI code.  
-  [#586](https://github.com/SwiftGen/SwiftGen/pull/586)
   [@AliSoftware](https://github.com/AliSoftware)
+  [#586](https://github.com/SwiftGen/SwiftGen/pull/586)
+* Moved generated test output files into subdirectories per template.  
+  [David Jennes](https://github.com/djbe)
+  [#598](https://github.com/SwiftGen/SwiftGen/pull/598)
 
 ## 6.1.0
 
