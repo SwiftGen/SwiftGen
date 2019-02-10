@@ -1,0 +1,90 @@
+// swiftlint:disable all
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
+
+{% if files %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set documentPrefix %}{{param.documentName|default:"Document"}}{% endset %}
+import Foundation
+
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+
+// MARK: - JSON Files
+{% macro fileBlock file %}
+  {% if file.documents.count > 1 %}
+  {% for document in file.documents %}
+  {% set documentName %}{{documentPrefix}}{{forloop.counter}}{% endset %}
+  {{accessModifier}} enum {{documentName|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+    {% filter indent:2 %}{% call documentBlock file document %}{% endfilter %}
+  }
+  {% endfor %}
+  {% else %}
+  {% call documentBlock file file.documents.first %}
+  {% endif %}
+{% endmacro %}
+{% macro documentBlock file document %}
+  {% set rootType %}{% call typeBlock document.metadata %}{% endset %}
+  {% if document.metadata.type == "Array" %}
+  {{accessModifier}} static let items: {{rootType}} = {{ document.data }}
+  {% elif document.metadata.type == "Dictionary" %}
+  {% for key,value in document.metadata.properties %}
+  {{accessModifier}} {% call propertyBlock key value document.data %}
+  {% endfor %}
+  {% else %}
+  {{accessModifier}} static let value: {{rootType}} = {% call valueBlock document.data document.metadata %}
+  {% endif %}
+{% endmacro %}
+{% macro typeBlock metadata %}{% filter removeNewlines:"leading" %}
+  {% if metadata.type == "Array" %}
+    [{% call typeBlock metadata.element %}]
+  {% elif metadata.type == "Dictionary" %}
+    [String: Any]
+  {% elif metadata.type == "Optional" %}
+    Any?
+  {% else %}
+    {{metadata.type}}
+  {% endif %}
+{% endfilter %}{% endmacro %}
+{% macro propertyBlock key metadata data %}{% filter removeNewlines:"leading" %}
+  {% set propertyName %}{{key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% endset %}
+  {% set propertyType %}{% call typeBlock metadata %}{% endset %}
+  static let {{propertyName}}: {{propertyType}} = {% call valueBlock data[key] metadata %}
+{% endfilter %}{% endmacro %}
+{% macro valueBlock value metadata %}{% filter removeNewlines:"leading" %}
+  {% if metadata.type == "String" %}
+    "{{ value }}"
+  {% elif metadata.type == "Optional" %}
+    nil
+  {% elif metadata.type == "Array" and metadata.element.items %}
+    [{% for itemMetadata in metadata.element.items %}
+      {% call valueBlock value[forloop.counter0] itemMetadata %}
+      {% if not forloop.last %}, {% endif %}
+    {% endfor %}]
+  {% elif metadata.type == "Dictionary" %}
+    [{% for key,value in value %}
+      "{{key}}": {% call valueBlock value metadata.properties[key] %}
+      {% if not forloop.last %}, {% endif %}
+    {% empty %}
+      :
+    {% endfor %}]
+  {% else %}
+    {{ value }}
+  {% endif %}
+{% endfilter %}{% endmacro %}
+
+// swiftlint:disable identifier_name line_length number_separator type_body_length
+{{accessModifier}} enum {{param.enumName|default:"JSONFiles"}} {
+  {% if files.count > 1 %}
+  {% for file in files %}
+  {{accessModifier}} enum {{file.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+    {% filter indent:2 %}{% call fileBlock file %}{% endfilter %}
+  }
+  {% endfor %}
+  {% else %}
+  {% call fileBlock files.first %}
+  {% endif %}
+}
+// swiftlint:enable identifier_name line_length number_separator type_body_length
+{% else %}
+// No files found
+{% endif %}
