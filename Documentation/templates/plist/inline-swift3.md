@@ -11,6 +11,7 @@
 
 - When you need to generate *Swift 3* code.
 - Embeds the data from the Plist file directly in your Swift code.
+- **Warning**: Swift 3 is no longer actively supported, so we cannot guarantee that there won't be issues with the generated code.
 
 ## Customization
 

@@ -12,6 +12,7 @@
 - When you need to generate *Swift 3* code.
 
 Note: the template will only generate code for entities that have set the `Codegen` property to "Manual/None". This is to avoid conflicts with Xcode, which will automatically generate code for the other options.
+- **Warning**: Swift 3 is no longer actively supported, so we cannot guarantee that there won't be issues with the generated code.
 
 ## Customization
 
