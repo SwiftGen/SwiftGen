@@ -13,7 +13,6 @@ extension Colors {
     init(options: [String: Any] = [:]) {
     }
 
-    static let allOptions = ParserOptionList()
     static let extensions = ["clr"]
 
     private enum Keys {

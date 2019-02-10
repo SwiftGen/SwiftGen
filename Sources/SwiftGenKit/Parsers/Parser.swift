@@ -79,3 +79,9 @@ public extension Parser {
     }
   }
 }
+
+public extension Parser {
+  static var allOptions: ParserOptionList {
+    return []
+  }
+}

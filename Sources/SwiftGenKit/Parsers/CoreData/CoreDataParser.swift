@@ -40,7 +40,6 @@ public enum CoreData {
     }
 
     public static let defaultFilter = "[^/]\\.xcdatamodeld?$"
-    public static let allOptions = ParserOptionList()
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       if path.extension == Constants.modelBundleExtension {

@@ -28,7 +28,7 @@ public enum Strings {
     }
   }
 
-  private enum Option {
+  public enum Option {
     static let separator = ParserOption(
       key: "separator",
       defaultValue: ".",
@@ -47,7 +47,7 @@ public enum Strings {
     }
 
     public static let defaultFilter = "[^/]\\.strings$"
-    public static let allOptions = ParserOptionList(options: [Option.separator])
+    public static let allOptions: ParserOptionList = [Option.separator]
 
     // Localizable.strings files are generally UTF16, not UTF8!
     public func parse(path: Path, relativeTo parent: Path) throws {

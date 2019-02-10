@@ -12,7 +12,6 @@ extension Colors {
     init(options: [String: Any] = [:]) {
     }
 
-    static let allOptions = ParserOptionList()
     static let extensions = ["json"]
 
     func parseFile(at path: Path) throws -> Palette {

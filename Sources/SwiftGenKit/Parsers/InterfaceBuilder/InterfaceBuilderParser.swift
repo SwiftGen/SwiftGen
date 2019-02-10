@@ -32,7 +32,6 @@ public enum InterfaceBuilder {
     }
 
     public static let defaultFilter = "[^/]\\.storyboard$"
-    public static let allOptions = ParserOptionList()
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       try addStoryboard(at: path)

@@ -34,8 +34,6 @@ public enum Yaml {
       return "[^/]\\.(?i:ya?ml)$"
     }
 
-    public static let allOptions = ParserOptionList()
-
     public func parse(path: Path, relativeTo parent: Path) throws {
       files.append(try File(path: path, relativeTo: parent))
     }

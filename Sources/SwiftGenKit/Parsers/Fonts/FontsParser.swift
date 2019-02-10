@@ -18,7 +18,6 @@ public enum Fonts {
     }
 
     public static let defaultFilter = "[^/]\\.(?i:otf|ttc|ttf)$"
-    public static let allOptions = ParserOptionList()
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       guard let values = try? path.url.resourceValues(forKeys: [.typeIdentifierKey]),

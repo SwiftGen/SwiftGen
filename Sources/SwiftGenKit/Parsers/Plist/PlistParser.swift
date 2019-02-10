@@ -30,7 +30,6 @@ public enum Plist {
     }
 
     public static let defaultFilter = "[^/]\\.(?i:plist)$"
-    public static let allOptions = ParserOptionList()
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       files.append(try File(path: path, relativeTo: parent))

@@ -14,7 +14,6 @@ extension Colors {
     init(options: [String: Any] = [:]) {
     }
 
-    static let allOptions = ParserOptionList()
     static let extensions = ["txt"]
 
     // Text file expected to be:

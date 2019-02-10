@@ -25,9 +25,9 @@ public struct ParserOptionList {
   ///
   /// - Parameter options: a dictionary of options
   func check(options: [String: Any]) throws {
-    let known = Set(self.options.map { $0.key })
-    for option in options where !known.contains(option.key) {
-      throw Error.unknownOption(key: option.key, value: option.value)
+    let knownKeys = Set(self.options.map { $0.key })
+    if let badOption = options.first(where: { !knownKeys.contains($0.key) }) {
+      throw Error.unknownOption(key: badOption.key, value: badOption.value)
     }
   }
 }
@@ -40,5 +40,11 @@ extension ParserOptionList: CustomStringConvertible {
       return "Supported options:\n" +
         options.map { "       - \($0)" }.joined(separator: "\n")
     }
+  }
+}
+
+extension ParserOptionList: ExpressibleByArrayLiteral {
+  public init(arrayLiteral elements: AnyParserOption...) {
+    self.init(options: elements)
   }
 }

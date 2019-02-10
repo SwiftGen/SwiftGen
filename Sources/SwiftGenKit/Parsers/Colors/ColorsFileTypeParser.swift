@@ -24,6 +24,12 @@ protocol ColorsFileTypeParser: AnyObject {
   func parseFile(at path: Path) throws -> Colors.Palette
 }
 
+extension ColorsFileTypeParser {
+  static var allOptions: ParserOptionList {
+    return []
+  }
+}
+
 // MARK: - Private Helpers
 
 extension Colors {
