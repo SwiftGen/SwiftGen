@@ -75,11 +75,11 @@ namespace :output do
     failures = []
     Dir.glob('Tests/Fixtures/Generated/*/*/').each do |folder|
       Utils.print_info "Loading config for #{folder}…\n"
-      config = CompilationConfiguration.load(folder)
-
-      Dir.glob("#{folder}*.swift").each do |file|
-        Utils.print_info "Compiling #{file}…\n"
-        failures << file unless compile_file(file, config, task)
+      if config = CompilationConfiguration.load(folder)
+        Dir.glob("#{folder}*.swift").each do |file|
+          Utils.print_info "Compiling #{file}…\n"
+          failures << file unless compile_file(file, config, task)
+        end
       end
     end
 

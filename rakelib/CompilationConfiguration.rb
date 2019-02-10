@@ -51,7 +51,12 @@ class CompilationConfiguration
   public
 
   def self.load(folder)
-    YAML.load_file("#{folder}#{COMPILATION_CONFIGURATION_FILE}")
+    config_file = "#{folder}#{COMPILATION_CONFIGURATION_FILE}"
+    if File.file?(config_file)
+      YAML.load_file(config_file)
+    else
+      nil
+    end
   end
 
   def commands_for(file)
