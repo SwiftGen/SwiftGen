@@ -16,7 +16,7 @@
 
 // swiftlint:disable identifier_name line_length type_body_length
 internal extension ColorName {
-  internal enum Colors {
+  enum Colors {
     /// 0x339666ff (r: 51, g: 150, b: 102, a: 255)
     internal static let articleBody = #colorLiteral(red: 0.2, green: 0.5882353, blue: 0.4, alpha: 1.0)
     /// 0xff66ccff (r: 255, g: 102, b: 204, a: 255)
@@ -26,7 +26,7 @@ internal extension ColorName {
     /// 0xffffffcc (r: 255, g: 255, b: 255, a: 204)
     internal static let `private` = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.8)
   }
-  internal enum Extra {
+  enum Extra {
     /// 0x339666ff (r: 51, g: 150, b: 102, a: 255)
     internal static let articleBody = #colorLiteral(red: 0.2, green: 0.5882353, blue: 0.4, alpha: 1.0)
     /// 0xff66ccff (r: 255, g: 102, b: 204, a: 255)

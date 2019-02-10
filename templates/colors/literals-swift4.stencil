@@ -20,20 +20,21 @@
 // swiftlint:disable identifier_name line_length type_body_length
 {{accessModifier}} extension {{enumName}} {
 {% macro h2f hex %}{{hex|hexToInt|int255toFloat}}{% endmacro %}
-{% macro enumBlock colors %}
+{% macro enumBlock colors accessPrefix %}
   {% for color in colors %}
   /// 0x{{color.red}}{{color.green}}{{color.blue}}{{color.alpha}} (r: {{color.red|hexToInt}}, g: {{color.green|hexToInt}}, b: {{color.blue|hexToInt}}, a: {{color.alpha|hexToInt}})
-  {{accessModifier}} static let {{color.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = #colorLiteral(red: {% call h2f color.red %}, green: {% call h2f color.green %}, blue: {% call h2f color.blue %}, alpha: {% call h2f color.alpha %})
+  {{accessPrefix}}static let {{color.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = #colorLiteral(red: {% call h2f color.red %}, green: {% call h2f color.green %}, blue: {% call h2f color.blue %}, alpha: {% call h2f color.alpha %})
   {% endfor %}
 {% endmacro %}
   {% if palettes.count > 1 %}
+  {% set accessPrefix %}{{accessModifier}} {% endset %}
   {% for palette in palettes %}
-  {{accessModifier}} enum {{palette.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
-    {% filter indent:2 %}{% call enumBlock palette.colors %}{% endfilter %}
+  enum {{palette.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+    {% filter indent:2 %}{% call enumBlock palette.colors accessPrefix %}{% endfilter %}
   }
   {% endfor %}
   {% else %}
-  {% call enumBlock palettes.first.colors %}
+  {% call enumBlock palettes.first.colors "" %}
   {% endif %}
 }
 // swiftlint:enable identifier_name line_length type_body_length
