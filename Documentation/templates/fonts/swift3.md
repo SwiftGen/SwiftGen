@@ -39,7 +39,7 @@ enum FontFamily {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Fonts/swift3-context-defaults.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Fonts/swift3/defaults.swift)
 
 ## Usage example
 

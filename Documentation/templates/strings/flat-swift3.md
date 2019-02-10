@@ -42,7 +42,7 @@ enum L10n {
   }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Strings/flat-swift3-context-localizable.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Strings/flat-swift3/localizable.swift)
 
 ## Usage example
 

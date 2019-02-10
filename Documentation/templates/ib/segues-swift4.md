@@ -41,7 +41,7 @@ enum StoryboardSegue {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/IB-iOS/swift4-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/IB-iOS/swift4/all.swift)
 
 ## Usage example
 
