@@ -94,14 +94,14 @@ namespace :output do
   end
 
   def compile_module(m, sdk, task)
-    commands = Module.commands_for(m, sdk)
+    commands = Module.commands_for_file(m, sdk)
     subtask = File.basename(m, '.*')
 
     Utils.run(commands, task, subtask, xcrun: true)
   end
 
   def compile_file(f, config, task)
-    commands = config.commands_for(f)
+    commands = config.commands_for_file(f)
     subtask = File.basename(f, '.*')
 
     begin

@@ -1,6 +1,6 @@
 require 'yaml'
 
-COMPILATION_CONFIGURATION_FILE = '.compilation-configuration.yml'.freeze
+COMPILATION_CONFIGURATION_FILE = 'compilation-configuration.yml'.freeze
 MODULE_INPUT_PATH = 'Tests/Fixtures/CompilationEnvironment/Modules'.freeze
 MODULE_OUTPUT_PATH = 'Tests/Fixtures/CompilationEnvironment'.freeze
 TOOLCHAIN = 'com.apple.dt.toolchain.XcodeDefault'.freeze
@@ -28,7 +28,7 @@ class Platform
 end
 
 class Module
-  def self.commands_for(file, platform)
+  def self.commands_for_file(file, platform)
     platform = Platform::ALL[platform]
 
     Platform::SWIFT_VERSIONS.map do |swift_version|
@@ -59,7 +59,7 @@ class CompilationConfiguration
     end
   end
 
-  def commands_for(file)
+  def commands_for_file(file)
     filename = File.basename(file)
 
     platforms(filename).flat_map do |platform|
