@@ -44,6 +44,15 @@ class PlistTests: XCTestCase {
     )
   }
 
+  func testInlineSwift5() {
+    test(
+      template: "inline-swift5",
+      contextNames: Contexts.all,
+      directory: .plist,
+      contextVariations: inlineVariations
+    )
+  }
+
   // generate variations to test customname generation
   let runtimeVariations: VariationGenerator = { name, context in
     guard name == "all" else { return [(context: context, suffix: "")] }
@@ -72,6 +81,15 @@ class PlistTests: XCTestCase {
   func testRuntimeSwift4() {
     test(
       template: "runtime-swift4",
+      contextNames: Contexts.all,
+      directory: .plist,
+      contextVariations: runtimeVariations
+    )
+  }
+
+  func testRuntimeSwift5() {
+    test(
+      template: "runtime-swift5",
       contextNames: Contexts.all,
       directory: .plist,
       contextVariations: runtimeVariations
