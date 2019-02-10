@@ -179,14 +179,14 @@ strings:
   inputs: Resources/Base.lproj
   filter: .+\.strings$
   outputs:
-    - templateName: structured-swift4
+    - templateName: structured-swift5
       output: Generated/strings.swift
 xcassets:
   inputs:
     - Resources/Images.xcassets
     - Resources/MoreImages.xcassets
   outputs:
-    - templateName: swift4
+    - templateName: swift5
       output: Generated/assets-images.swift
 ```
 
@@ -249,7 +249,8 @@ As explained above, you can use `swiftgen templates list` to list all templates 
 
 * A `swift3` template, compatible with Swift 3
 * A `swift4` template, compatible with Swift 4
-* Other variants, like `flat-swift3/4` and `structured-swift3/4` templates for Strings, etc.
+* A `swift5` template, compatible with Swift 5
+* Other variants, like `flat-swift3/4/5` and `structured-swift3/4/5` templates for Strings, etc.
 
 You can **find the documentation for each bundled template [here in the repo](Documentation/templates)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
 Each MarkDown file documents the Swift Version it's aimed for, the use case for that template (in which cases you might favor that template over others), the available parameters to customize it on invocation (using the `params:` key in your config file), and some code examples.
@@ -292,7 +293,7 @@ You can also find other help & tutorial material on the internet, like [this cla
 xcassets:
   inputs: /dir/to/search/for/imageset/assets
   outputs:
-    templateName: swift4
+    templateName: swift5
     output: Assets.swift
 ```
 
@@ -354,7 +355,7 @@ let paintings = Asset.Targets.paintings.referenceImages
 colors:
   inputs: /path/to/colors-file.txt
   outputs:
-    templateName: swift4
+    templateName: swift5
     output: Colors.swift
 ```
 
@@ -373,7 +374,7 @@ For example you can use this command to generate colors from one of your system 
 colors:
   inputs: ~/Library/Colors/MyColors.clr
   outputs:
-    templateName: swift4
+    templateName: swift5
     output: Colors.swift
 ```
 
@@ -431,7 +432,7 @@ This way, no need to enter the color red, green, blue, alpha values each time an
 coredata:
   inputs: /path/to/model.xcdatamodeld
   outputs:
-    templateName: swift4
+    templateName: swift5
     output: CoreData.swift
 ```
 
@@ -518,7 +519,7 @@ let relatedItem = myMainItem.manyToMany.first
 fonts:
   inputs: /path/to/font/dir
   outputs:
-    templateName: swift4
+    templateName: swift5
     output: Fonts.swift
 ```
 
@@ -557,9 +558,9 @@ let sameDingbats = FontFamily.ZapfDingbats.regular.font(size: 20.0)
 ib:
   inputs: /dir/to/search/for/storyboards
   outputs:
-    - templateName: scenes-swift4
+    - templateName: scenes-swift5
       output: Storyboard Scenes.swift
-    - templateName: segues-swift4
+    - templateName: segues-swift5
       output: Storyboard Segues.swift
 ```
 
@@ -628,12 +629,12 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 json:
   inputs: /path/to/json/dir-or-file
   outputs:
-    templateName: runtime-swift4
+    templateName: runtime-swift5
     output: JSON.swift
 yaml:
   inputs: /path/to/yaml/dir-or-file
   outputs:
-    templateName: inline-swift4
+    templateName: inline-swift5
     output: YAML.swift
 ```
 
@@ -675,7 +676,7 @@ let bar = JSONFiles.Sequence.items
 plist:
   inputs: /path/to/plist/dir-or-file
   outputs:
-    templateName: runtime-swift4
+    templateName: runtime-swift5
     output: Plist.swift
 ```
 
@@ -716,7 +717,7 @@ let bar = PlistFiles.Stuff.key1
 strings:
   inputs: /path/to/Localizable.strings
   outputs:
-    templateName: structured-swift4
+    templateName: structured-swift5
     output: Strings.swift
 ```
 

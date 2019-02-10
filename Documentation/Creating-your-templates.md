@@ -28,66 +28,84 @@ $ swiftgen templates list
 colors:
   custom:
   bundled:
+   - literals-swift3
+   - literals-swift4
+   - literals-swift5
    - swift3
    - swift4
+   - swift5
 coredata:
   custom:
   bundled:
    - swift3
    - swift4
+   - swift5
 fonts:
   custom:
   bundled:
    - swift3
    - swift4
+   - swift5
 ib:
   custom:
    - mytemplate
   bundled:
-   - swift3
-   - swift4
+   - scenes-swift3
+   - scenes-swift4
+   - scenes-swift5
+   - segues-swift3
+   - segues-swift4
+   - segues-swift5
 json:
   custom:
   bundled:
    - inline-swift3
    - inline-swift4
+   - inline-swift5
    - runtime-swift3
    - runtime-swift4
+   - runtime-swift5
 plist:
   custom:
   bundled:
    - inline-swift3
    - inline-swift4
+   - inline-swift5
    - runtime-swift3
    - runtime-swift4
+   - runtime-swift5
 strings:
   custom:
    - mycustomtemplate
   bundled:
    - flat-swift3
    - flat-swift4
+   - flat-swift5
    - structured-swift3
    - structured-swift4
+   - structured-swift5
 xcassets:
   custom:
   bundled:
    - swift3
    - swift4
+   - swift5
 yaml:
   custom:
    - inline-swift3
    - inline-swift4
+   - inline-swift5
   bundled:
 ```
 
 ## Printing a template, creating a new template
 
-You can use the `swiftgen templates cat <subcommand> <templatename>` command to print the template of that given name for that given subcommand to `stdout`. e.g. `swiftgen templates cat fonts swift4` will print to your terminal the template that would be used if you invoke `fonts` with `template: swift4`.
+You can use the `swiftgen templates cat <subcommand> <templatename>` command to print the template of that given name for that given subcommand to `stdout`. e.g. `swiftgen templates cat fonts swift5` will print to your terminal the template that would be used if you invoke `fonts` with `template: swift5`.
 
 You can use this feature to easily create a new template from an existing one.
 In particular, the easiest way to create your own templates is to:
 
-* duplicate an existing template by dumping it into a new file like this: `swiftgen templates cat fonts swift4 >my-custom-fonts-template.stencil`
+* duplicate an existing template by dumping it into a new file like this: `swiftgen templates cat fonts swift5 >my-custom-fonts-template.stencil`
 * then edit the new `my-custom-fonts-template.stencil` file to make your modifications to that template
 * Once you've done this you can then simply use `templatePath: my-custom-fonts-template.stencil` in your configuration file to use you customized template!
 
