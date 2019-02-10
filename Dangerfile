@@ -1,4 +1,5 @@
 require_relative 'rakelib/check_changelog'
+require 'yaml'
 
 # Welcome message
 markdown [
@@ -24,7 +25,7 @@ if is_release
   need_fixes << warn("Release branches should be merged into 'master'") unless to_master
 
   require 'open3'
-  
+
   stdout, _, status = Open3.capture3('bundle', 'exec', 'rake', 'changelog:check')
   markdown [
     '',
@@ -33,7 +34,7 @@ if is_release
     stdout
   ]
   need_fixes << fail('Please fix the CHANGELOG errors') unless status.success?
-  
+
   stdout, _, status = Open3.capture3('bundle', 'exec', 'rake', 'release:check_versions')
   markdown [
     '',
@@ -54,6 +55,13 @@ if podfile_changed ^ package_changed
   need_fixes << warn("You should make sure that `Podfile.lock` and `Package.resolved` are changed in sync")
 end
 
+# Check if DEPENDENCIES needs changes
+podfile_dependencies = YAML::load_file('Podfile.lock')['SPEC CHECKSUMS'].keys.sort
+documented_dependencies = File.open('DEPENDENCIES.md').grep(/### (.*)/) { $1 }.sort
+unless podfile_dependencies == documented_dependencies
+  need_fixes << fail("Each dependency should be documented in `DEPENDENCIES.md` with an explanation " \
+    "as to why it is needed, and a link to the dependency's license")
+end
 
 # Check for a CHANGELOG entry
 declared_trivial = github.pr_title.include? '#trivial'
