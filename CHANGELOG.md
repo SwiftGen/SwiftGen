@@ -47,6 +47,10 @@
 * Templates: Bundle now use static property on BundleToken for better performance.  
   [shuoli84](https://github.com/shuoli84)
   [#623](https://github.com/SwiftGen/SwiftGen/issues/623)
+* All commands now have built-in Swift 5 templates.  
+  [David Jennes](https://github.com/djbe)
+  [#595](https://github.com/SwiftGen/SwiftGen/issue/595)
+  [#600](https://github.com/SwiftGen/SwiftGen/pull/600)
 
 ### Bug Fixes
 
