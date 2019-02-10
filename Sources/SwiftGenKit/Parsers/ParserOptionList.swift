@@ -11,24 +11,32 @@ public struct ParserOptionList {
     case unknownOption(key: String, value: Any)
   }
 
-  private let options: [AnyParserOption]
+  let knownKeys: Set<String>
+  let options: [AnyParserOption]
 
   init(options: [AnyParserOption] = []) {
     self.options = options
+    self.knownKeys = Set(options.map { $0.key })
   }
 
   init(lists: [ParserOptionList]) {
-    self.options = lists.flatMap { $0.options }
+    self.init(options: lists.flatMap { $0.options })
   }
 
   /// Check if the given dictionary of key values are all supported options.
   ///
   /// - Parameter options: a dictionary of options
   func check(options: [String: Any]) throws {
-    let knownKeys = Set(self.options.map { $0.key })
     if let badOption = options.first(where: { !knownKeys.contains($0.key) }) {
       throw Error.unknownOption(key: badOption.key, value: badOption.value)
     }
+  }
+
+  /// Check if the given key is a known option
+  ///
+  /// - Parameter option: an option name
+  func has(option: AnyParserOption) -> Bool {
+    return knownKeys.contains(option.key)
   }
 }
 

@@ -10,15 +10,15 @@ import PathKit
 import XCTest
 
 class FontsTests: XCTestCase {
-  func testEmpty() {
-    let parser = Fonts.Parser()
+  func testEmpty() throws {
+    let parser = try Fonts.Parser()
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .fonts)
   }
 
   func testDefaults() throws {
-    let parser = Fonts.Parser()
+    let parser = try Fonts.Parser()
     try parser.searchAndParse(path: Fixtures.directory())
 
     let result = parser.stencilContext()

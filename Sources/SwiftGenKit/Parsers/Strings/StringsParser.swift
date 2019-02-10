@@ -37,13 +37,13 @@ public enum Strings {
   }
 
   public final class Parser: SwiftGenKit.Parser {
+    private let options: ParserOptionValues
     var tables = [String: [Entry]]()
     public var warningHandler: Parser.MessageHandler?
-    private let keyStructureSeparator: String
 
     public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
+      self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
       self.warningHandler = warningHandler
-      self.keyStructureSeparator = try Option.separator.get(from: options)
     }
 
     public static let defaultFilter = "[^/]\\.strings$"
@@ -66,7 +66,7 @@ public enum Strings {
       }
 
       tables[name] = try dict.map { key, translation in
-        try Entry(key: key, translation: translation, keyStructureSeparator: keyStructureSeparator)
+        try Entry(key: key, translation: translation, keyStructureSeparator: options[Option.separator])
       }
     }
   }

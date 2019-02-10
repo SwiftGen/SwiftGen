@@ -23,10 +23,12 @@ public enum Yaml {
   // MARK: Yaml File Parser
 
   public class Parser: SwiftGenKit.Parser {
+    private let options: ParserOptionValues
     var files: [File] = []
     public var warningHandler: Parser.MessageHandler?
 
-    public required init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
+    public required init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
+      self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
       self.warningHandler = warningHandler
     }
 

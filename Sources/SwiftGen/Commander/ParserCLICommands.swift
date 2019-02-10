@@ -77,7 +77,7 @@ extension ParserCLI {
     ) { oldTemplateName, templateName, templatePath, parserOptions, parameters, filter, output, paths in
       try ErrorPrettifier.execute {
         let options = try Parameters.parse(items: parserOptions)
-        let parser = try self.parserType.createWith(options: options) { msg, _, _ in
+        let parser = try self.parserType.init(options: options) { msg, _, _ in
           logMessage(.warning, msg)
         }
 

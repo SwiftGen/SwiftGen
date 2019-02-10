@@ -9,15 +9,15 @@ import PathKit
 import XCTest
 
 class PlistTests: XCTestCase {
-  func testEmpty() {
-    let parser = Plist.Parser()
+  func testEmpty() throws {
+    let parser = try Plist.Parser()
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .plist)
   }
 
   func testArray() throws {
-    let parser = Plist.Parser()
+    let parser = try Plist.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "shopping-list.plist", sub: .plistGood))
 
     let result = parser.stencilContext()
@@ -25,7 +25,7 @@ class PlistTests: XCTestCase {
   }
 
   func testDictionary() throws {
-    let parser = Plist.Parser()
+    let parser = try Plist.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "configuration.plist", sub: .plistGood))
 
     let result = parser.stencilContext()
@@ -33,7 +33,7 @@ class PlistTests: XCTestCase {
   }
 
   func testInfo() throws {
-    let parser = Plist.Parser()
+    let parser = try Plist.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Info.plist", sub: .plistGood))
 
     let result = parser.stencilContext()
@@ -42,7 +42,7 @@ class PlistTests: XCTestCase {
 
   func testDirectoryInput() {
     do {
-      let parser = Plist.Parser()
+      let parser = try Plist.Parser()
       try parser.searchAndParse(path: Fixtures.directory(sub: .plistGood))
 
       let result = parser.stencilContext()

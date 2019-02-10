@@ -16,7 +16,7 @@ extension Colors {
 }
 
 protocol ColorsFileTypeParser: AnyObject {
-  init(options: [String: Any])
+  init(options: ParserOptionValues)
 
   static var allOptions: ParserOptionList { get }
   static var extensions: [String] { get }

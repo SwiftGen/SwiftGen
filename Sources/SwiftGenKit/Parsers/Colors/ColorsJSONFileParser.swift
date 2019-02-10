@@ -9,7 +9,7 @@ import PathKit
 
 extension Colors {
   final class JSONFileParser: ColorsFileTypeParser {
-    init(options: [String: Any] = [:]) {
+    init(options: ParserOptionValues) {
     }
 
     static let extensions = ["json"]

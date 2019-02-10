@@ -9,15 +9,15 @@ import PathKit
 import XCTest
 
 class YamlTests: XCTestCase {
-  func testEmpty() {
-    let parser = Yaml.Parser()
+  func testEmpty() throws {
+    let parser = try Yaml.Parser()
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .yaml)
   }
 
   func testSequence() throws {
-    let parser = Yaml.Parser()
+    let parser = try Yaml.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "grocery-list.yaml", sub: .yamlGood))
 
     let result = parser.stencilContext()
@@ -25,7 +25,7 @@ class YamlTests: XCTestCase {
   }
 
   func testMapping() throws {
-    let parser = Yaml.Parser()
+    let parser = try Yaml.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "mapping.yaml", sub: .yamlGood))
 
     let result = parser.stencilContext()
@@ -33,7 +33,7 @@ class YamlTests: XCTestCase {
   }
 
   func testJSON() throws {
-    let parser = JSON.Parser()
+    let parser = try JSON.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "configuration.json", sub: .yamlGood))
 
     let result = parser.stencilContext()
@@ -41,7 +41,7 @@ class YamlTests: XCTestCase {
   }
 
   func testScalar() throws {
-    let parser = Yaml.Parser()
+    let parser = try Yaml.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "version.yaml", sub: .yamlGood))
 
     let result = parser.stencilContext()
@@ -49,7 +49,7 @@ class YamlTests: XCTestCase {
   }
 
   func testMutlipleDocuments() throws {
-    let parser = Yaml.Parser()
+    let parser = try Yaml.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "documents.yaml", sub: .yamlGood))
 
     let result = parser.stencilContext()
@@ -58,7 +58,7 @@ class YamlTests: XCTestCase {
 
   func testDirectoryInput() {
     do {
-      let parser = Yaml.Parser()
+      let parser = try Yaml.Parser()
       let filter = try Filter(pattern: "[^/]*\\.(json|ya?ml)$")
       try parser.searchAndParse(path: Fixtures.directory(sub: .yamlGood), filter: filter)
 

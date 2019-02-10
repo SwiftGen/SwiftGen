@@ -31,7 +31,7 @@ public enum Colors {
 
   public final class Parser: SwiftGenKit.Parser {
     private var parsers = [String: ColorsFileTypeParser.Type]()
-    private let options: [String: Any]
+    private let options: ParserOptionValues
     var palettes = [Palette]()
     public var warningHandler: Parser.MessageHandler?
 
@@ -42,8 +42,8 @@ public enum Colors {
       XMLFileParser.self
     ]
 
-    public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
-      self.options = options
+    public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
+      self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
       self.warningHandler = warningHandler
 
       for parser in Parser.subParsers {

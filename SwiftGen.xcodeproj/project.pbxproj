@@ -86,6 +86,7 @@
 		DD428E261FC50FBF001649D6 /* InterfaceBuilderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E161FC50FBF001649D6 /* InterfaceBuilderContext.swift */; };
 		DD428E271FC50FBF001649D6 /* StringsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E171FC50FBF001649D6 /* StringsContext.swift */; };
 		DD4738A81FE07596006CB6BB /* StencilContexts in Resources */ = {isa = PBXBuildFile; fileRef = DDDE52761FAF81DB004203BE /* StencilContexts */; };
+		DD48AD802210ACBD00336621 /* ParserOptionValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48AD7E2210AC5E00336621 /* ParserOptionValues.swift */; };
 		DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */; };
 		DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */; };
 		DD9F687A20955D51004EB720 /* CatalogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687720955D51004EB720 /* CatalogEntry.swift */; };
@@ -370,6 +371,7 @@
 		DD428E161FC50FBF001649D6 /* InterfaceBuilderContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceBuilderContext.swift; sourceTree = "<group>"; };
 		DD428E171FC50FBF001649D6 /* StringsContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsContext.swift; sourceTree = "<group>"; };
 		DD428E181FC50FBF001649D6 /* SwiftGenKit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SwiftGenKit-Info.plist"; sourceTree = "<group>"; };
+		DD48AD7E2210AC5E00336621 /* ParserOptionValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserOptionValues.swift; sourceTree = "<group>"; };
 		DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserCLICommands.swift; sourceTree = "<group>"; };
 		DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsFileTypeParser.swift; sourceTree = "<group>"; };
 		DD9F687720955D51004EB720 /* CatalogEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogEntry.swift; sourceTree = "<group>"; };
@@ -669,6 +671,7 @@
 				DD428E0F1FC50FBF001649D6 /* Parser.swift */,
 				DDCC331A220E3FE700982694 /* ParserOption.swift */,
 				DDCC331C220E491600982694 /* ParserOptionList.swift */,
+				DD48AD7E2210AC5E00336621 /* ParserOptionValues.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -1440,6 +1443,7 @@
 				DD9F688620956074004EB720 /* PlaceholderType.swift in Sources */,
 				DD428E251FC50FBF001649D6 /* AssetsCatalogContext.swift in Sources */,
 				C3031AA121062C9A00BF00DE /* UserInfo.swift in Sources */,
+				DD48AD802210ACBD00336621 /* ParserOptionValues.swift in Sources */,
 				DDCC331B220E3FE700982694 /* ParserOption.swift in Sources */,
 				DD428E1A1FC50FBF001649D6 /* ColorsCLRFileParser.swift in Sources */,
 				C350BE3820FFCD0F0043D7C5 /* Model.swift in Sources */,

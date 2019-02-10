@@ -40,17 +40,6 @@ public protocol Parser {
 }
 
 public extension Parser {
-  /// Factory method for safely creating a parser instance. Options will be checked against the list of
-  /// supported options (in `allOptions`).
-  ///
-  /// - Parameter options: Dictionary of options, checked against `allOptions`.
-  /// - Parameter warningHandler: Callback for logging issues.
-  /// - Returns: An instance of the parser.
-  static func createWith(options: [String: Any], warningHandler: MessageHandler?) throws -> Self {
-    try allOptions.check(options: options)
-    return try Self.init(options: options, warningHandler: warningHandler)
-  }
-
   /// Recursively search through the given paths, parsing any file or folder that matches the given filter.
   ///
   /// - Parameter paths: The paths to search recursively through.

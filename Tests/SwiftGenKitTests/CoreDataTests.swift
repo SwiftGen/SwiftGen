@@ -8,15 +8,15 @@
 import XCTest
 
 class CoreDataTests: XCTestCase {
-  func testEmpty() {
-    let parser = CoreData.Parser()
+  func testEmpty() throws {
+    let parser = try CoreData.Parser()
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .coreData)
   }
 
-  func testDefaults() {
-    let parser = CoreData.Parser()
+  func testDefaults() throws {
+    let parser = try CoreData.Parser()
     do {
       try parser.searchAndParse(path: Fixtures.path(for: "Model.xcdatamodeld", sub: .coreData))
     } catch {

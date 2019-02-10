@@ -14,15 +14,15 @@ import XCTest
  */
 
 class InterfaceBuilderiOSTests: XCTestCase {
-  func testEmpty() {
-    let parser = InterfaceBuilder.Parser()
+  func testEmpty() throws {
+    let parser = try InterfaceBuilder.Parser()
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .interfaceBuilderiOS)
   }
 
-  func testMessageStoryboard() {
-    let parser = InterfaceBuilder.Parser()
+  func testMessageStoryboard() throws {
+    let parser = try InterfaceBuilder.Parser()
     do {
       try parser.searchAndParse(path: Fixtures.path(for: "Message.storyboard", sub: .interfaceBuilderiOS))
     } catch {
@@ -33,8 +33,8 @@ class InterfaceBuilderiOSTests: XCTestCase {
     XCTDiffContexts(result, expected: "messages", sub: .interfaceBuilderiOS)
   }
 
-  func testAnonymousStoryboard() {
-    let parser = InterfaceBuilder.Parser()
+  func testAnonymousStoryboard() throws {
+    let parser = try InterfaceBuilder.Parser()
     do {
       try parser.searchAndParse(path: Fixtures.path(for: "Anonymous.storyboard", sub: .interfaceBuilderiOS))
     } catch {
@@ -45,8 +45,8 @@ class InterfaceBuilderiOSTests: XCTestCase {
     XCTDiffContexts(result, expected: "anonymous", sub: .interfaceBuilderiOS)
   }
 
-  func testAllStoryboards() {
-    let parser = InterfaceBuilder.Parser()
+  func testAllStoryboards() throws {
+    let parser = try InterfaceBuilder.Parser()
     do {
       try parser.searchAndParse(path: Fixtures.directory(sub: .interfaceBuilderiOS))
     } catch {
@@ -61,7 +61,7 @@ class InterfaceBuilderiOSTests: XCTestCase {
   func testConsistencyOfModules() throws {
     let fakeModuleName = "NotCurrentModule"
 
-    let parser = InterfaceBuilder.Parser()
+    let parser = try InterfaceBuilder.Parser()
     try parser.searchAndParse(path: Fixtures.directory(sub: .interfaceBuilderiOS))
 
     XCTAssert(
