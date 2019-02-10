@@ -12,6 +12,7 @@
 - When you need to generate *Swift 3* code.
 - Supports _multiple_ color names with the _same_ value.
 - Uses `#colorLiteral`s for easy preview of the actual color.
+- **Warning**: Swift 3 is no longer actively supported, so we cannot guarantee that there won't be issues with the generated code.
 
 ## Customization
 

@@ -10,6 +10,7 @@
 ## When to use it
 
 - When you need to generate *Swift 3* code.
+- **Warning**: Swift 3 is no longer actively supported, so we cannot guarantee that there won't be issues with the generated code.
 
 ## Customization
 

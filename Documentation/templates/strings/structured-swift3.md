@@ -18,6 +18,7 @@
 "hello.world"
 ```
 
+- **Warning**: Swift 3 is no longer actively supported, so we cannot guarantee that there won't be issues with the generated code.
 ## Customization
 
 You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
