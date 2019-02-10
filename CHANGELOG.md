@@ -44,6 +44,10 @@ _None_
 * Moved generated test output files into subdirectories per template.  
   [David Jennes](https://github.com/djbe)
   [#598](https://github.com/SwiftGen/SwiftGen/pull/598)
+* Compile generated output using configuration files for easier management.  
+  [David Jennes](https://github.com/djbe)
+  [#365](https://github.com/SwiftGen/SwiftGen/issues/365)
+  [#599](https://github.com/SwiftGen/SwiftGen/pull/599)
 
 ## 6.1.0
 
