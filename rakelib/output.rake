@@ -1,6 +1,8 @@
 # Used constants:
 #  - WORKSPACE
 
+require_relative 'CompilationConfiguration'
+
 ## [ Test Output Generation ] #################################################
 
 namespace :generate do
@@ -29,32 +31,6 @@ end
 
 ## [ Output compilation ] #####################################################
 
-MODULE_INPUT_PATH = 'Tests/Fixtures/CompilationEnvironment/Modules'.freeze
-MODULE_OUTPUT_PATH = 'Tests/Fixtures/CompilationEnvironment'.freeze
-SDKS = {
-  macosx: 'x86_64-apple-macosx10.13',
-  iphoneos: 'arm64-apple-ios12.0',
-  watchos: 'armv7k-apple-watchos5.0',
-  appletvos: 'arm64-apple-tvos12.0'
-}.freeze
-TOOLCHAINS = {
-  swift3: {
-    version: '3',
-    module_path: "#{MODULE_OUTPUT_PATH}/swift3",
-    toolchain: 'com.apple.dt.toolchain.XcodeDefault'
-  },
-  swift4: {
-    version: '4',
-    module_path: "#{MODULE_OUTPUT_PATH}/swift4",
-    toolchain: 'com.apple.dt.toolchain.XcodeDefault'
-  },
-  swift4_2: {
-    version: '4.2',
-    module_path: "#{MODULE_OUTPUT_PATH}/swift4.2",
-    toolchain: 'com.apple.dt.toolchain.XcodeDefault'
-  }
-}.freeze
-
 namespace :output do
   desc 'Compile modules'
   task :modules do |task|
@@ -64,34 +40,32 @@ namespace :output do
     modules = %w[ExtraModule Transformables]
     modules.each do |m|
       Utils.print_info "Compiling module #{m}… (appletvos)"
-      compile_module(m, :appletvos, task)
+      compile_module(m, 'tvOS', task)
     end
 
     # iOS
     modules = %w[ExtraModule LocationPicker SlackTextViewController Transformables]
     modules.each do |m|
       Utils.print_info "Compiling module #{m}… (ios)"
-      compile_module(m, :iphoneos, task)
+      compile_module(m, 'iOS', task)
     end
 
     # macOS
     modules = %w[ExtraModule PrefsWindowController Transformables]
     modules.each do |m|
       Utils.print_info "Compiling module #{m}… (macos)"
-      compile_module(m, :macosx, task)
+      compile_module(m, 'macOS', task)
     end
 
     # watchOS
     modules = %w[ExtraModule Transformables]
     modules.each do |m|
       Utils.print_info "Compiling module #{m}… (watchos)"
-      compile_module(m, :watchos, task)
+      compile_module(m, 'watchOS', task)
     end
 
     # delete swiftdoc
-    Dir.glob("#{MODULE_OUTPUT_PATH}/*/*.swiftdoc").each do |f|
-      FileUtils.rm_rf(f)
-    end
+    Module.remove_swiftdoc()
   end
 
   desc 'Compile output'
@@ -99,9 +73,14 @@ namespace :output do
     Utils.print_header 'Compiling template output files'
 
     failures = []
-    Dir.glob('Tests/Fixtures/Generated/**/*.swift').each do |f|
-      Utils.print_info "Compiling #{f}…\n"
-      failures << f unless compile_file(f, task)
+    Dir.glob('Tests/Fixtures/Generated/*/*/').each do |folder|
+      Utils.print_info "Loading config for #{folder}…\n"
+      config = CompilationConfiguration.load(folder)
+
+      Dir.glob("#{folder}*.swift").each do |file|
+        Utils.print_info "Compiling #{file}…\n"
+        failures << file unless compile_file(file, config, task)
+      end
     end
 
     Utils.print_header 'Compilation report'
@@ -115,74 +94,14 @@ namespace :output do
   end
 
   def compile_module(m, sdk, task)
-    target = SDKS[sdk]
+    commands = Module.commands_for(m, sdk)
     subtask = File.basename(m, '.*')
-    commands = TOOLCHAINS.map do |_key, toolchain|
-      %(--toolchain #{toolchain[:toolchain]} -sdk #{sdk} swiftc -swift-version #{toolchain[:version]} ) +
-        %(-emit-module "#{MODULE_INPUT_PATH}/#{m}.swift" -module-name "#{m}" ) +
-        %(-emit-module-path "#{toolchain[:module_path]}/#{sdk}" -target "#{target}")
-    end
 
     Utils.run(commands, task, subtask, xcrun: true)
   end
 
-  def toolchains(f)
-    if f.include?('swift3')
-      [TOOLCHAINS[:swift3]]
-    elsif f.include?('swift4')
-      [TOOLCHAINS[:swift4], TOOLCHAINS[:swift4_2]]
-    else
-      []
-    end
-  end
-
-  def sdks(f)
-    if f.include?('iOS')
-      [:iphoneos]
-    elsif f.include?('macOS')
-      [:macosx]
-    else
-      %i[iphoneos macosx appletvos watchos]
-    end
-  end
-
-  def files(f)
-    if !(f.include?('CoreData') || f.include?('IB-iOS') || f.include?('IB-macOS'))
-      [f]
-    elsif f.include?('publicAccess')
-      ["#{MODULE_OUTPUT_PATH}/PublicDefinitions.swift", f]
-    else
-      ["#{MODULE_OUTPUT_PATH}/Definitions.swift", f]
-    end
-  end
-
-  def flags(f)
-    if f.include?('ignoreTargetModule-withExtraModule') || f.include?('extraImports')
-      ['-D', 'DEFINE_EXTRA_MODULE_TYPES']
-    elsif f.include?('withExtraModule') || f.include?('noDefinedModule')
-      ['-D', 'DEFINE_NAMESPACED_EXTRA_MODULE_TYPES']
-    else
-      []
-    end
-  end
-
-  def compile_file(f, task)
-    toolchains = toolchains(f)
-    if toolchains.nil? || toolchains.empty?
-      puts "Unknown Swift toolchain for file #{f}"
-      return true
-    end
-    sdks = sdks(f)
-    files = files(f)
-    flags = flags(f)
-
-    commands = toolchains.flat_map do |toolchain|
-      sdks.map do |sdk|
-        %(--toolchain #{toolchain[:toolchain]} -sdk #{sdk} swiftc -swift-version #{toolchain[:version]} ) +
-          %(-typecheck -target #{SDKS[sdk]} -I "#{toolchain[:module_path]}/#{sdk}" #{flags.join(' ')} ) +
-          %(-module-name SwiftGen #{files.join(' ')})
-      end
-    end
+  def compile_file(f, config, task)
+    commands = config.commands_for(f)
     subtask = File.basename(f, '.*')
 
     begin
