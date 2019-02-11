@@ -1,5 +1,4 @@
 require_relative 'rakelib/check_changelog'
-require 'yaml'
 
 # Welcome message
 markdown [
@@ -59,10 +58,10 @@ end
 swiftgenkit_podspec_changed = git.modified_files.include?('SwiftGenKit.podspec')
 dependencies_doc_changed = git.modified_files.include?('DEPENDENCIES.md')
 if podfile_changed || swiftgenkit_podspec_changed || dependencies_doc_changed
-  stdout, _, status = Open3.capture3('bundle', 'exec', 'rake', 'dependencies:check')
+  stdout, _, status = Open3.capture3('bundle', 'exec', 'rake', 'dependencies:check[true]')
   unless status.success?
-    stdout.lines.map(&:chomp).each do |message|
-      need_fixes << fail(message)
+    stdout.lines.each do |message|
+      need_fixes << fail(message.chomp)
     end
   end  
 end
