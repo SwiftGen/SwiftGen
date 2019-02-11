@@ -27,6 +27,11 @@
   [David Jennes](https://github.com/djbe)
   [#566](https://github.com/SwiftGen/SwiftGen/issue/566)
   [#593](https://github.com/SwiftGen/SwiftGen/pull/593)
+* Strings: the built-in templates now accept a parameter for customizing the localization function.  
+  [Steven Magdy](https://github.com/StevenMagdy)
+  [426](https://github.com/SwiftGen/SwiftGen/issues/426)
+  [468](https://github.com/SwiftGen/SwiftGen/issues/468)
+  [573](https://github.com/SwiftGen/SwiftGen/pull/573)
 
 ### Bug Fixes
 

@@ -3,3 +3,7 @@ common:
   swift_versions:
     - 4
     - 4.2
+file_specific:
+  localizable-localizeFunction.swift:
+    files:
+      - Strings-LocalizeFunction.swift
