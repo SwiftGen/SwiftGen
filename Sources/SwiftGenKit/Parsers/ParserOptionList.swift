@@ -38,6 +38,21 @@ public struct ParserOptionList {
   func has(option: AnyParserOption) -> Bool {
     return knownKeys.contains(option.key)
   }
+
+  /// Verify the given dictionary and generate a list of messages for any issues.
+  ///
+  /// - Parameter dict: the dictionary to verify
+  /// - Returns: a list of messages if there are any issues
+  public func lint(options dict: [String: Any]) -> [String] {
+    let unknownKeys = Set(dict.keys).subtracting(knownKeys).map {
+      "\($0) is not a valid option."
+    }
+    let invalidValues = options.filter { !$0.check(dict: dict) }.map {
+      "Invalid value for option \($0)."
+    }
+
+    return unknownKeys + invalidValues
+  }
 }
 
 extension ParserOptionList: CustomStringConvertible {

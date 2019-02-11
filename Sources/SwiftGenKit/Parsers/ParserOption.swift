@@ -9,6 +9,9 @@ import Foundation
 /// A parser option, used to modify how it processes data.
 public protocol AnyParserOption {
   var key: String { get }
+
+  /// Check if the given dictionary contains a valid value for this option.
+  func check(dict: [String: Any]) -> Bool
 }
 
 /// A parser option of a specific value type
@@ -27,6 +30,11 @@ struct ParserOption<T>: AnyParserOption {
       throw OptionError.invalidType(key: key, expected: T.self, got: type(of: value), value: value)
     }
     return typed
+  }
+
+  func check(dict: [String: Any]) -> Bool {
+    guard let value = dict[key] else { return true }
+    return value is T
   }
 }
 

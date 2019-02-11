@@ -105,53 +105,65 @@ extension Config {
         logger(.warning, Message.deprecatedAction(cmd, for: replacement))
       }
 
-      let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
-      logger(.info, "> \(entriesCount) for command \(cmd):")
-      for entry in entries {
-        lint(cmd: cmd, entry: entry, logger: logger)
+      if let parserCmd = ParserCLI.command(named: cmd) {
+        let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
+        logger(.info, "> \(entriesCount) for command \(cmd):")
+        for entry in entries {
+          lint(cmd: parserCmd, entry: entry, logger: logger)
+        }
+      } else {
+        logger(.error, "Action `\(cmd)` does not exist.")
       }
     }
   }
 
-  private func lint(cmd: String, entry: ConfigEntry, logger: (LogLevel, String) -> Void) {
+  private func lint(cmd: ParserCLI, entry: ConfigEntry, logger: (LogLevel, String) -> Void) {
     var entry = entry
     entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
 
     for inputPath in entry.inputs {
       if !inputPath.exists {
-        logger(.error, "\(cmd).inputs: \(Message.doesntExist(inputPath))")
+        logger(.error, "\(cmd.name).inputs: \(Message.doesntExist(inputPath))")
       }
       if inputPath.isAbsolute {
-        logger(.warning, "\(cmd).inputs: \(Message.absolutePath(inputPath))")
+        logger(.warning, "\(cmd.name).inputs: \(Message.absolutePath(inputPath))")
       }
+    }
+
+    if let regex = entry.filter, (try? Filter(pattern: regex)) == nil {
+      logger(.error, "\(cmd.name).filter: \(regex) is not a valid regular expression.")
+    }
+
+    for issue in cmd.parserType.allOptions.lint(options: entry.options) {
+      logger(.error, "\(cmd.name).options: \(issue)")
     }
 
     for entryOutput in entry.outputs {
       lint(cmd: cmd, output: entryOutput, logger: logger)
     }
 
-    for item in entry.commandLine(forCommand: cmd) {
+    for item in entry.commandLine(forCommand: cmd.name) {
       logMessage(.info, " $ \(item)")
     }
   }
 
-  private func lint(cmd: String, output entryOutput: ConfigEntryOutput, logger: (LogLevel, String) -> Void) {
+  private func lint(cmd: ParserCLI, output entryOutput: ConfigEntryOutput, logger: (LogLevel, String) -> Void) {
     do {
-      let actualCmd = Config.deprecatedCommands[cmd] ?? cmd
+      let actualCmd = Config.deprecatedCommands[cmd.name] ?? cmd.name
       _ = try entryOutput.template.resolvePath(forSubcommand: actualCmd)
     } catch let error {
-      logger(.error, "\(cmd).outputs: \(error)")
+      logger(.error, "\(cmd.name).outputs: \(error)")
     }
     if case TemplateRef.path(let templateRef) = entryOutput.template, templateRef.isAbsolute {
-      logger(.warning, "\(cmd).outputs.templatePath: \(Message.absolutePath(templateRef))")
+      logger(.warning, "\(cmd.name).outputs.templatePath: \(Message.absolutePath(templateRef))")
     }
 
     let outputParent = entryOutput.output.parent()
     if !outputParent.exists {
-      logger(.error, "\(cmd).outputs.output: \(Message.doesntExistIntermediatesNeeded(outputParent))")
+      logger(.error, "\(cmd.name).outputs.output: \(Message.doesntExistIntermediatesNeeded(outputParent))")
     }
     if entryOutput.output.isAbsolute {
-      logger(.warning, "\(cmd).outputs.output: \(Message.absolutePath(entryOutput.output))")
+      logger(.warning, "\(cmd.name).outputs.output: \(Message.absolutePath(entryOutput.output))")
     }
   }
 }
