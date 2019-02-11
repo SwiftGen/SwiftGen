@@ -56,11 +56,18 @@ if podfile_changed ^ package_changed
 end
 
 # Check if DEPENDENCIES needs changes
-podfile_dependencies = YAML::load_file('Podfile.lock')['SPEC CHECKSUMS'].keys.sort
-documented_dependencies = File.open('DEPENDENCIES.md').grep(/### (.*)/) { $1 }.sort
-unless podfile_dependencies == documented_dependencies
-  need_fixes << fail("Each dependency should be documented in `DEPENDENCIES.md` with an explanation " \
-    "as to why it is needed, and a link to the dependency's license")
+deps_changed = !(git.modified_files & %w(Podfile.lock SwiftGenKit.podspec DEPENDENCIES.md)).empty?
+if deps_changed
+  require_relative 'rakelib/dependencies'
+  deps_diff = check_documented_dependencies()
+  deps_diff[:missing].each do |d|
+    need_fixes << fail("Dependency #{d} should be documented in `DEPENDENCIES.md` with an explanation " \
+      "as to why it is needed, and a link to the dependency's license")
+  end
+  deps_diff[:extra].each do |d|
+    need_fixes << fail("Dependency #{d} is documented in `DEPENDENCIES.md` but we don't seem to depend" \
+      "on it anymore")
+  end
 end
 
 # Check for a CHANGELOG entry
