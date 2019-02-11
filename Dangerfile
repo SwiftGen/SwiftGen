@@ -56,18 +56,15 @@ if podfile_changed ^ package_changed
 end
 
 # Check if DEPENDENCIES needs changes
-deps_changed = !(git.modified_files & %w(Podfile.lock SwiftGenKit.podspec DEPENDENCIES.md)).empty?
-if deps_changed
-  require_relative 'rakelib/dependencies'
-  deps_diff = check_documented_dependencies()
-  deps_diff[:missing].each do |d|
-    need_fixes << fail("Dependency #{d} should be documented in `DEPENDENCIES.md` with an explanation " \
-      "as to why it is needed, and a link to the dependency's license")
-  end
-  deps_diff[:extra].each do |d|
-    need_fixes << fail("Dependency #{d} is documented in `DEPENDENCIES.md` but we don't seem to depend" \
-      "on it anymore")
-  end
+swiftgenkit_podspec_changed = git.modified_files.include?('SwiftGenKit.podspec')
+dependencies_doc_changed = git.modified_files.include?('DEPENDENCIES.md')
+if podfile_changed || swiftgenkit_podspec_changed || dependencies_doc_changed
+  stdout, _, status = Open3.capture3('bundle', 'exec', 'rake', 'dependencies:check')
+  unless status.success?
+    stdout.lines.map(&:chomp).each do |message|
+      need_fixes << fail(message)
+    end
+  end  
 end
 
 # Check for a CHANGELOG entry
