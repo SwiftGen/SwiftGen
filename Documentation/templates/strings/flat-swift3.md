@@ -22,7 +22,7 @@ You can customize some elements of this template by overriding the following par
 | `enumName` | `L10n` | Allows you to change the name of the generated `enum` containing all string tables. |
 | `noComments` | N/A | Setting this parameter will disable the comments describing the translation of a key. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
-| `localizeFunction` | `NSLocalizedString` | Allows you to set your own custom localization function. Your custom function must have the same signature as the one provided by `Foundation`, i.e. `NSLocalizedString(_:tableName:bundle:comment:)` |
+| `localizeFunction` | `NSLocalizedString` | Allows you to set your own custom localization function. Your custom function must have the same signature as the one provided by `Foundation`, i.e. `yourFunctionName(_:tableName:bundle:comment:)` |
 
 ## Generated Code
 
