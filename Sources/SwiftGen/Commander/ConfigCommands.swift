@@ -9,6 +9,26 @@ import PathKit
 import StencilSwiftKit
 import SwiftGenKit
 
+extension Config {
+  fileprivate func run(cmd: String, verbose: Bool) throws {
+    guard let parserCmd = ParserCLI.command(named: cmd) else {
+      throw Config.Error.missingEntry(key: cmd)
+    }
+
+    for var entry in commands[cmd] ?? [] {
+      entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
+      if verbose {
+        for item in entry.commandLine(forCommand: cmd) {
+          logMessage(.info, " $ \(item)")
+        }
+      }
+
+      try entry.checkPaths()
+      try entry.run(parserCommand: parserCmd)
+    }
+  }
+}
+
 extension ConfigEntryOutput {
   func checkPaths() throws {
     guard self.output.parent().exists else {
@@ -91,32 +111,24 @@ enum ConfigCLI {
           logMessage(.info, "Executing configuration file \(file)")
         }
         try file.parent().chdir {
-          for (cmd, entries) in config.commands {
-            for var entry in entries {
-              guard let parserCmd = ParserCLI.command(named: cmd) else {
-                throw Config.Error.missingEntry(key: cmd)
-              }
-              entry.makingRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
-              if verbose {
-                for item in entry.commandLine(forCommand: cmd) {
-                  logMessage(.info, " $ \(item)")
-                }
-              }
-              try entry.checkPaths()
-              try entry.run(parserCommand: parserCmd)
-            }
+          for cmd in config.commands.keys.sorted() {
+            try config.run(cmd: cmd, verbose: verbose)
           }
         }
       }
     } catch let error as Config.Error {
       logMessage(.error, error)
-      logMessage(.info, """
-        It seems like there was an error running SwiftGen. Please verify that your configuration file is valid by running:
+      logMessage(
+        .error,
+        """
+        It seems like there was an error running SwiftGen. Please verify that your configuration file is valid by \
+        running:
         > swiftgen config lint
 
         If you have any other questions or issues, we have extensive documentation and an issue tracker on GitHub:
         > https://github.com/SwiftGen/SwiftGen
-        """)
+        """
+      )
     }
   }
 }
