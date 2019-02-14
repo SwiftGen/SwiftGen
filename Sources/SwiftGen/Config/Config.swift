@@ -60,6 +60,28 @@ extension Config {
 // MARK: - Linting
 
 extension Config {
+  enum Message {
+    static func absolutePath(_ path: CustomStringConvertible) -> String {
+      return """
+        \(path) is an absolute path. Prefer relative paths for portability when sharing your \
+        project (unless you are using environment variables).
+        """
+    }
+
+    static func deprecatedAction(_ action: String, for replacement: String) -> String {
+      return "`\(action)` action has been deprecated, please use `\(replacement)` instead."
+    }
+
+    static func doesntExist(_ path: CustomStringConvertible) -> String {
+      return "\(path) does not exist."
+    }
+
+    static let intermediateFolders = """
+      Intermediate folders up to the output file must already exist to avoid misconfigurations, \
+      and won't be created for you.
+      """
+  }
+
   // Deprecated
   private static let deprecatedCommands = [
     "storyboards": "ib"
@@ -68,17 +90,17 @@ extension Config {
   func lint(logger: (LogLevel, String) -> Void = logMessage) {
     logger(.info, "> Common parent directory used for all input paths:  \(inputDir ?? "<none>")")
     if let inputDir = inputDir, !inputDir.exists {
-      logger(.error, "input_dir: Input directory \(inputDir) does not exist")
+      logger(.error, "input_dir: Input directory \(Message.doesntExist(inputDir))")
     }
 
     logger(.info, "> Common parent directory used for all output paths: \(self.outputDir ?? "<none>")")
     if let outputDir = outputDir, !outputDir.exists {
-      logger(.error, "output_dir: Output directory \(outputDir) does not exist")
+      logger(.error, "output_dir: Output directory \(Message.doesntExist(outputDir))")
     }
 
     for (cmd, entries) in commands {
       if let replacement = Config.deprecatedCommands[cmd] {
-        logger(.warning, "`\(cmd)` action has been deprecated, please use `\(replacement)` instead.")
+        logger(.warning, Message.deprecatedAction(cmd, for: replacement))
       }
 
       let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
@@ -95,16 +117,10 @@ extension Config {
 
     for inputPath in entry.inputs {
       if !inputPath.exists {
-        logger(.error, "\(cmd).inputs: \(inputPath) does not exist")
+        logger(.error, "\(cmd).inputs: \(Message.doesntExist(inputPath))")
       }
       if inputPath.isAbsolute {
-        logger(
-          .warning,
-          """
-          \(cmd).inputs: \(inputPath) is an absolute path. Prefer relative paths for portability \
-          when sharing your project (unless you are using environment variables).
-          """
-        )
+        logger(.warning, "\(cmd).inputs: \(Message.absolutePath(inputPath))")
       }
     }
 
@@ -125,33 +141,15 @@ extension Config {
       logger(.error, "\(cmd).outputs: \(error)")
     }
     if case TemplateRef.path(let templateRef) = entryOutput.template, templateRef.isAbsolute {
-      logger(
-        .warning,
-        """
-        \(cmd).outputs.templatePath: \(templateRef) is an absolute path. Prefer relative paths \
-        for portability when sharing your project (unless you are using environment variables).
-        """
-      )
+      logger(.warning, "\(cmd).outputs.templatePath: \(Message.absolutePath(templateRef))")
     }
 
     let outputParent = entryOutput.output.parent()
     if !outputParent.exists {
-      logger(
-        .error,
-        """
-        \(cmd).outputs.output: \(outputParent) does not exist. Intermediate folders up to the \
-        output file must already exist to avoid misconfigurations, and won't be created for you.
-        """
-      )
+      logger(.error, "\(cmd).outputs.output: \(Message.doesntExist(outputParent)) \(Message.intermediateFolders)")
     }
     if entryOutput.output.isAbsolute {
-      logger(
-        .warning,
-        """
-        \(cmd).outputs.output: \(entryOutput.output) is an absolute path. Prefer relative paths \
-        for portability when sharing your project (unless you are using environment variables).
-        """
-      )
+      logger(.warning, "\(cmd).outputs.output: \(Message.absolutePath(entryOutput.output))")
     }
   }
 }

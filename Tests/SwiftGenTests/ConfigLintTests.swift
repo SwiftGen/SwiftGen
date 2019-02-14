@@ -55,19 +55,9 @@ class ConfigLintTests: XCTestCase {
     let commands = ["strings", "fonts", "ib", "colors", "xcassets"]
     let logs = commands.flatMap { (cmd: String) -> [(LogLevel, String)] in
       [
-        (.warning, """
-          \(cmd).inputs: /\(cmd)/paths is an absolute path. Prefer relative paths for portability \
-          when sharing your project (unless you are using environment variables).
-          """),
-        (.warning, """
-          \(cmd).outputs.templatePath: /\(cmd)/templates.stencil is an absolute path. Prefer \
-          relative paths for portability when sharing your project (unless you are using \
-          environment variables).
-          """),
-        (.warning, """
-          \(cmd).outputs.output: /\(cmd)/out.swift is an absolute path. Prefer relative paths for \
-          portability when sharing your project (unless you are using environment variables).
-          """)
+        (.warning, "\(cmd).inputs: \(Config.Message.absolutePath("/\(cmd)/paths"))"),
+        (.warning, "\(cmd).outputs.templatePath: \(Config.Message.absolutePath("/\(cmd)/templates.stencil"))"),
+        (.warning, "\(cmd).outputs.output: \(Config.Message.absolutePath("/\(cmd)/out.swift"))")
       ]
     }
 
@@ -82,20 +72,11 @@ class ConfigLintTests: XCTestCase {
     let commands = ["strings", "fonts", "ib", "colors", "xcassets"]
     let logs = commands.flatMap { (cmd: String) -> [(LogLevel, String)] in
       [
+        (.warning, "\(cmd).inputs: \(Config.Message.absolutePath("/input/\(cmd)/paths"))"),
         (.warning, """
-          \(cmd).inputs: /input/\(cmd)/paths is an absolute path. Prefer relative paths for \
-          portability when sharing your project (unless you are using environment variables).
+          \(cmd).outputs.templatePath: \(Config.Message.absolutePath("/templates/\(cmd)/templates.stencil"))
           """),
-        (.warning, """
-          \(cmd).outputs.templatePath: /templates/\(cmd)/templates.stencil is an absolute path. \
-          Prefer relative paths for portability when sharing your project (unless you are using \
-          environment variables).
-          """),
-        (.warning, """
-          \(cmd).outputs.output: /output/\(cmd)/out.swift is an absolute path. Prefer relative \
-          paths for portability when sharing your project (unless you are using environment \
-          variables).
-          """)
+        (.warning, "\(cmd).outputs.output: \(Config.Message.absolutePath("/output/\(cmd)/out.swift"))")
       ]
     }
 
