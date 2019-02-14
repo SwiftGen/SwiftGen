@@ -76,10 +76,12 @@ extension Config {
       return "\(path) does not exist."
     }
 
-    static let intermediateFolders = """
-      Intermediate folders up to the output file must already exist to avoid misconfigurations, \
-      and won't be created for you.
-      """
+    static func doesntExistIntermediatesNeeded(_ path: CustomStringConvertible) -> String {
+      return """
+        \(path) does not exist. Intermediate folders up to the output file must already exist to avoid \
+        misconfigurations, and won't be created for you.
+        """
+      }
   }
 
   // Deprecated
@@ -146,7 +148,7 @@ extension Config {
 
     let outputParent = entryOutput.output.parent()
     if !outputParent.exists {
-      logger(.error, "\(cmd).outputs.output: \(Message.doesntExist(outputParent)) \(Message.intermediateFolders)")
+      logger(.error, "\(cmd).outputs.output: \(Message.doesntExistIntermediatesNeeded(outputParent))")
     }
     if entryOutput.output.isAbsolute {
       logger(.warning, "\(cmd).outputs.output: \(Message.absolutePath(entryOutput.output))")

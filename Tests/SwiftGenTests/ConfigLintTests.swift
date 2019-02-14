@@ -160,35 +160,23 @@ class ConfigLintTests: XCTestCase {
     _testLint(
       fixture: "config-with-multi-entries",
       expectedLogs: [
-        (.error, "input_dir: Input directory Fixtures/ does not exist"),
-        (.error, "output_dir: Output directory Generated/ does not exist"),
-        (.error, "strings.inputs: Fixtures/Strings/Localizable.strings does not exist"),
+        (.error, "input_dir: Input directory \(Config.Message.doesntExist("Fixtures/"))"),
+        (.error, "output_dir: Output directory \(Config.Message.doesntExist("Generated/"))"),
+        (.error, "strings.inputs: \(Config.Message.doesntExist("Fixtures/Strings/Localizable.strings"))"),
         (.error, "strings.outputs: Template not found at path templates/custom-swift3."),
-        (.error, """
-          strings.outputs.output: Generated does not exist. Intermediate folders up to the output \
-          file must already exist to avoid misconfigurations, and won't be created for you.
-          """),
-        (.error, "xcassets.inputs: Fixtures/XCAssets/Colors.xcassets does not exist"),
-        (.error, "xcassets.inputs: Fixtures/XCAssets/Colors.xcassets does not exist"),
-        (.error, "xcassets.inputs: Fixtures/XCAssets/Images.xcassets does not exist"),
-        (.error, "xcassets.inputs: Fixtures/XCAssets/Images.xcassets does not exist"),
+        (.error, "strings.outputs.output: \(Config.Message.doesntExistIntermediatesNeeded("Generated"))"),
+        (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Colors.xcassets"))"),
+        (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Colors.xcassets"))"),
+        (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Images.xcassets"))"),
+        (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Images.xcassets"))"),
         (.error, """
           xcassets.outputs: Template named custom-swift3 not found. Use `swiftgen templates list` \
           to list available named templates or use `templatePath` to specify a template by its \
           full path.
           """),
-        (.error, """
-          xcassets.outputs.output: Generated does not exist. Intermediate folders up to the output \
-          file must already exist to avoid misconfigurations, and won't be created for you.
-          """),
-        (.error, """
-          xcassets.outputs.output: Generated does not exist. Intermediate folders up to the output \
-          file must already exist to avoid misconfigurations, and won't be created for you.
-          """),
-        (.error, """
-          xcassets.outputs.output: Generated does not exist. Intermediate folders up to the output \
-          file must already exist to avoid misconfigurations, and won't be created for you.
-          """)
+        (.error, "xcassets.outputs.output: \(Config.Message.doesntExistIntermediatesNeeded("Generated"))"),
+        (.error, "xcassets.outputs.output: \(Config.Message.doesntExistIntermediatesNeeded("Generated"))"),
+        (.error, "xcassets.outputs.output: \(Config.Message.doesntExistIntermediatesNeeded("Generated"))")
       ],
       unwantedLevels: [.warning, .error],
       assertionMessage: "Linter should show errors for invalid paths and templates"
@@ -200,7 +188,7 @@ class ConfigLintTests: XCTestCase {
   func testDeprecatedCommands() {
     _testLint(
       fixture: "config-deprecated-commands",
-      expectedLogs: [(.warning, "`storyboards` action has been deprecated, please use `ib` instead.")],
+      expectedLogs: [(.warning, Config.Message.deprecatedAction("storyboards", for: "ib"))],
       assertionMessage: "Linter should warn about deprecated commands"
     )
   }
