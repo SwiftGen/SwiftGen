@@ -102,7 +102,7 @@ extension Config {
           .warning,
           """
           \(cmd).inputs: \(inputPath) is an absolute path. Prefer relative paths for portability \
-          when sharing your project.
+          when sharing your project (unless you are using environment variables).
           """
         )
       }
@@ -129,7 +129,7 @@ extension Config {
         .warning,
         """
         \(cmd).outputs.templatePath: \(templateRef) is an absolute path. Prefer relative paths \
-        for portability when sharing your project.
+        for portability when sharing your project (unless you are using environment variables).
         """
       )
     }
@@ -149,7 +149,7 @@ extension Config {
         .warning,
         """
         \(cmd).outputs.output: \(entryOutput.output) is an absolute path. Prefer relative paths \
-        for portability when sharing your project.
+        for portability when sharing your project (unless you are using environment variables).
         """
       )
     }

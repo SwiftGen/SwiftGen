@@ -57,15 +57,16 @@ class ConfigLintTests: XCTestCase {
       [
         (.warning, """
           \(cmd).inputs: /\(cmd)/paths is an absolute path. Prefer relative paths for portability \
-          when sharing your project.
+          when sharing your project (unless you are using environment variables).
           """),
         (.warning, """
           \(cmd).outputs.templatePath: /\(cmd)/templates.stencil is an absolute path. Prefer \
-          relative paths for portability when sharing your project.
+          relative paths for portability when sharing your project (unless you are using \
+          environment variables).
           """),
         (.warning, """
           \(cmd).outputs.output: /\(cmd)/out.swift is an absolute path. Prefer relative paths for \
-          portability when sharing your project.
+          portability when sharing your project (unless you are using environment variables).
           """)
       ]
     }
@@ -83,15 +84,17 @@ class ConfigLintTests: XCTestCase {
       [
         (.warning, """
           \(cmd).inputs: /input/\(cmd)/paths is an absolute path. Prefer relative paths for \
-          portability when sharing your project.
+          portability when sharing your project (unless you are using environment variables).
           """),
         (.warning, """
           \(cmd).outputs.templatePath: /templates/\(cmd)/templates.stencil is an absolute path. \
-          Prefer relative paths for portability when sharing your project.
+          Prefer relative paths for portability when sharing your project (unless you are using \
+          environment variables).
           """),
         (.warning, """
           \(cmd).outputs.output: /output/\(cmd)/out.swift is an absolute path. Prefer relative \
-          paths for portability when sharing your project.
+          paths for portability when sharing your project (unless you are using environment \
+          variables).
           """)
       ]
     }
