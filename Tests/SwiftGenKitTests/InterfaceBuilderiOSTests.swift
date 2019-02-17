@@ -7,12 +7,6 @@
 @testable import SwiftGenKit
 import XCTest
 
-/**
- * Important: In order for the "*.storyboard" files in fixtures/ to be copied as-is in the test bundle
- * (as opposed to being compiled when the test bundle is compiled), a custom "Build Rule" has been added to the target.
- * See Project -> Target "UnitTests" -> Build Rules -> « Files "*.storyboard" using PBXCp »
- */
-
 class InterfaceBuilderiOSTests: XCTestCase {
   func testEmpty() throws {
     let parser = try InterfaceBuilder.Parser()
@@ -70,5 +64,18 @@ class InterfaceBuilderiOSTests: XCTestCase {
         $0.segues.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName }
       }
     )
+  }
+
+  // MARK: - Custom options
+
+  func testUnknownOption() throws {
+    do {
+      _ = try InterfaceBuilder.Parser(options: ["SomeOptionThatDoesntExist": "foo"])
+      XCTFail("Parser successfully created with an invalid option")
+    } catch ParserOptionList.Error.unknownOption {
+      // That's the expected exception we want to happen
+    } catch let error {
+      XCTFail("Unexpected error occured: \(error)")
+    }
   }
 }

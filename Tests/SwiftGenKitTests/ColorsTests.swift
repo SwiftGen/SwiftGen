@@ -129,4 +129,17 @@ class ColorParserTests: XCTestCase {
       XCTAssertEqual(color.hexValue, value)
     }
   }
+
+  // MARK: - Custom options
+
+  func testUnknownOption() throws {
+    do {
+      _ = try Colors.Parser(options: ["SomeOptionThatDoesntExist": "foo"])
+      XCTFail("Parser successfully created with an invalid option")
+    } catch ParserOptionList.Error.unknownOption {
+      // That's the expected exception we want to happen
+    } catch let error {
+      XCTFail("Unexpected error occured: \(error)")
+    }
+  }
 }

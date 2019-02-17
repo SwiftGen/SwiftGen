@@ -5,7 +5,7 @@
 //
 
 import PathKit
-import SwiftGenKit
+@testable import SwiftGenKit
 import XCTest
 
 class AssetCatalogTests: XCTestCase {
@@ -47,5 +47,18 @@ class AssetCatalogTests: XCTestCase {
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "all", sub: .xcassets)
+  }
+
+  // MARK: - Custom options
+
+  func testUnknownOption() throws {
+    do {
+      _ = try AssetsCatalog.Parser(options: ["SomeOptionThatDoesntExist": "foo"])
+      XCTFail("Parser successfully created with an invalid option")
+    } catch ParserOptionList.Error.unknownOption {
+      // That's the expected exception we want to happen
+    } catch let error {
+      XCTFail("Unexpected error occured: \(error)")
+    }
   }
 }

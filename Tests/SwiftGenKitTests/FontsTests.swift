@@ -25,6 +25,19 @@ class FontsTests: XCTestCase {
     XCTDiffContexts(result, expected: "defaults", sub: .fonts)
   }
 
+  // MARK: - Custom options
+
+  func testUnknownOption() throws {
+    do {
+      _ = try Fonts.Parser(options: ["SomeOptionThatDoesntExist": "foo"])
+      XCTFail("Parser successfully created with an invalid option")
+    } catch ParserOptionList.Error.unknownOption {
+      // That's the expected exception we want to happen
+    } catch let error {
+      XCTFail("Unexpected error occured: \(error)")
+    }
+  }
+
   // MARK: - Path relative(to:)
 
   func testPathRelativeTo_UnrelatedIsNil() throws {

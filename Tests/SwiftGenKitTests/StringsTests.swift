@@ -4,14 +4,8 @@
 // MIT Licence
 //
 
-import SwiftGenKit
+@testable import SwiftGenKit
 import XCTest
-
-/**
- * Important: In order for the "*.strings" files in fixtures/ to be copied as-is in the test bundle
- * (as opposed to being compiled when the test bundle is compiled), a custom "Build Rule" has been added to the target.
- * See Project -> Target "UnitTests" -> Build Rules -> « Files "*.strings" using PBXCp »
- */
 
 class StringsTests: XCTestCase {
   func testEmpty() throws {
@@ -76,11 +70,24 @@ class StringsTests: XCTestCase {
     }
   }
 
+  // MARK: - Custom options
+
   func testCustomSeparator() throws {
     let parser = try Strings.Parser(options: ["separator": "__"])
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "custom-separator", sub: .strings)
+  }
+
+  func testUnknownOption() throws {
+    do {
+      _ = try Strings.Parser(options: ["SomeOptionThatDoesntExist": "foo"])
+      XCTFail("Parser successfully created with an invalid option")
+    } catch ParserOptionList.Error.unknownOption {
+      // That's the expected exception we want to happen
+    } catch let error {
+      XCTFail("Unexpected error occured: \(error)")
+    }
   }
 }
