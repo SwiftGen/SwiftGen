@@ -50,23 +50,32 @@ import {{ import }}
   {% for attribute in entity.attributes %}
   {% if attribute.userInfo.RawType %}
   {% set rawType attribute.userInfo.RawType %}
-  {{ accessModifier }} var {{ attribute.name }}: {{ rawType }}? {
+  {% set unwrapOptional attribute.userInfo.unwrapOptional %}
+  {{ accessModifier }} var {{ attribute.name }}: {{ rawType }}{% if not unwrapOptional %}?{% endif %} {
     get {
       let key = "{{ attribute.name }}"
       willAccessValue(forKey: key)
       defer { didAccessValue(forKey: key) }
 
+      {% if unwrapOptional %}
+      guard let value = primitiveValue(forKey: key) as? {{ rawType }}.RawValue,
+        let result = {{ rawType }}(rawValue: value) else {
+        fatalError("Could not convert value for key '\(key)' to type '{{ rawType }}'")
+      }
+      return result
+      {% else %}
       guard let value = primitiveValue(forKey: key) as? {{ rawType }}.RawValue else {
         return nil
       }
       return {{ rawType }}(rawValue: value)
+      {% endif %}
     }
     set {
       let key = "{{ attribute.name }}"
       willChangeValue(forKey: key)
       defer { didChangeValue(forKey: key) }
 
-      setPrimitiveValue(newValue?.rawValue, forKey: key)
+      setPrimitiveValue(newValue{% if not unwrapOptional %}?{% endif %}.rawValue, forKey: key)
     }
   }
   {% elif attribute.usesScalarValueType and attribute.isOptional %}
