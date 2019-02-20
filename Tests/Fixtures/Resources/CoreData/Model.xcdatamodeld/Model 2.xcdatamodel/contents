@@ -27,6 +27,7 @@
         <attribute name="integerEnum" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
             <userInfo>
                 <entry key="RawType" value="IntegerEnum"/>
+                <entry key="unwrapOptional" value="true"/>
             </userInfo>
         </attribute>
         <attribute name="optionalBoolean" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
