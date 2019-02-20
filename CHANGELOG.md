@@ -24,10 +24,12 @@
   [David Jennes](https://github.com/djbe)
   [#591](https://github.com/SwiftGen/SwiftGen/issue/591)
   [#592](https://github.com/SwiftGen/SwiftGen/pull/592)
-* Core Data: the built-in templates now support `RawRepresentable` attributes (such as `enum`, `OptionSet`, …). They'll check the "User Info" of an attribute for a `RawType` key, which should be set to the type name you want to use for that attribute. For more information, check the [template's documentation](Documentation/templates/coredata/swift4.md#userinfo-keys).  
+* Core Data: the built-in templates now support `RawRepresentable` attributes (such as `enum`, `OptionSet`, …). They'll check the "User Info" of an attribute for a `RawType` key, which should be set to the type name you want to use for that attribute. To avoid optional attributes, you can also add the `unwrapOptional` user info key. For more information, check the [template's documentation](Documentation/templates/coredata/swift4.md#userinfo-keys).  
   [David Jennes](https://github.com/djbe)
   [#566](https://github.com/SwiftGen/SwiftGen/issue/566)
+  [#609](https://github.com/SwiftGen/SwiftGen/issue/609)
   [#593](https://github.com/SwiftGen/SwiftGen/pull/593)
+  [#610](https://github.com/SwiftGen/SwiftGen/pull/610)
 * Strings: the built-in templates now accept a parameter for customizing the localization function.  
   [Steven Magdy](https://github.com/StevenMagdy)
   [426](https://github.com/SwiftGen/SwiftGen/issues/426)
