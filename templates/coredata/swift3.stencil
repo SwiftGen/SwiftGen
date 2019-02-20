@@ -48,17 +48,18 @@ import {{ import }}
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
   {% for attribute in entity.attributes %}
-  {% if attribute.userInfo.enumType %}
-  {{ accessModifier }} var {{ attribute.name }}: {{ attribute.userInfo.enumType }}? {
+  {% if attribute.userInfo.RawType %}
+  {% set rawType attribute.userInfo.RawType %}
+  {{ accessModifier }} var {{ attribute.name }}: {{ rawType }}? {
     get {
       let key = "{{ attribute.name }}"
       willAccessValue(forKey: key)
       defer { didAccessValue(forKey: key) }
 
-      guard let value = primitiveValue(forKey: key) as? {{ attribute.userInfo.enumType }}.RawValue else {
+      guard let value = primitiveValue(forKey: key) as? {{ rawType }}.RawValue else {
         return nil
       }
-      return {{ attribute.userInfo.enumType }}(rawValue: value)
+      return {{ rawType }}(rawValue: value)
     }
     set {
       let key = "{{ attribute.name }}"

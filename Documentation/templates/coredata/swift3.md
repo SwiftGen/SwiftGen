@@ -30,7 +30,7 @@ This template also make use of UserInfo keys that you can set on your Data Model
 
 | Scope | UserInfo Key | Description |
 |-------|--------------|-------------|
-| Attribute | `enumType` | The name of the `enum` to associate to this attribute's type. The `enum` in question is expected to be declared in your code (SwiftGen won't generate it) or in an external module (see the`extraImports` parameter).<br />The `enum` must be `RawRepresentable` (e.g. `enum Foo: Int` or `enum Foo: String`) and its `RawValue` must match the attribute's type in your Data Model. |
+| Attribute | `RawType` | The name of the `RawRepresentable` type to associate to this attribute's type. The type in question is expected to be declared in your code (SwiftGen won't generate it) or in an external module (see the`extraImports` parameter).<br />The type must be `RawRepresentable` (e.g. `enum Foo: String` or `struct Foo: OptionSet`) and its `RawValue` must match the attribute's type in your Data Model. |
 
 ## Generated Code
 

@@ -26,7 +26,7 @@
         <attribute name="int64" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="integerEnum" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
             <userInfo>
-                <entry key="enumType" value="IntegerEnum"/>
+                <entry key="RawType" value="IntegerEnum"/>
             </userInfo>
         </attribute>
         <attribute name="optionalBoolean" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -39,7 +39,7 @@
         <attribute name="string" attributeType="String" syncable="YES"/>
         <attribute name="stringEnum" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
-                <entry key="enumType" value="StringEnum"/>
+                <entry key="RawType" value="StringEnum"/>
             </userInfo>
         </attribute>
         <attribute name="transformable" optional="YES" attributeType="Transformable" syncable="YES"/>
