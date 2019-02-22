@@ -1,9 +1,7 @@
 //
-//  Metadata.swift
-//  SwiftGenKit
-//
-//  Created by David Jennes on 05/05/2018.
-//  Copyright © 2018 AliSoftware. All rights reserved.
+// SwiftGenKit
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import Foundation
@@ -11,6 +9,7 @@ import Foundation
 enum Metadata {
   private enum Key {
     static let element = "element"
+    static let items = "items"
     static let properties = "properties"
     static let type = "type"
   }
@@ -28,6 +27,14 @@ enum Metadata {
     static let string = "String"
   }
 
+  /// Generate structured metadata information about the given data, describing the value's type. This also recurses
+  /// for complex types (such as arrays and dictionaries), describing the type information of sub-elements (such as an
+  /// array's element, or each of a dictionary's properties).
+  ///
+  /// Note: this is used for the Plist and YAML Stencil contexts
+  ///
+  /// - Parameter data: The value to describe
+  /// - Returns: Dictionary with type information about the value (for Stencil context)
   static func generate(for data: Any) -> [String: Any] {
     switch data {
     case is String:
@@ -60,12 +67,11 @@ enum Metadata {
   }
 
   private static func describe(dictionary: [String: Any]) -> [String: Any] {
-    return Dictionary(uniqueKeysWithValues: dictionary.map { item in
-      (
-        key: item.key,
-        value: Metadata.generate(for: item.value)
-      )
-    })
+    return Dictionary(
+      uniqueKeysWithValues: dictionary.map { item in
+        (key: item.key, value: Metadata.generate(for: item.value))
+      }
+    )
   }
 
   private static func describe(arrayElement array: [Any]) -> [String: Any] {
@@ -81,17 +87,21 @@ enum Metadata {
       return [Key.type: ValueType.date]
     } else if array is [Data] {
       return [Key.type: ValueType.data]
-    } else if let array = array as? [[Any]] {
+    } else if array is [[Any]] {
       return [
         Key.type: ValueType.array,
-        Key.element: Metadata.describe(arrayElement: array)
+        Key.items: array.map { Metadata.generate(for: $0) }
       ]
     } else if array is [[String: Any]] {
       return [
-        Key.type: ValueType.dictionary
+        Key.type: ValueType.dictionary,
+        Key.items: array.map { Metadata.generate(for: $0) }
       ]
     } else {
-      return [Key.type: ValueType.any]
+      return [
+        Key.type: ValueType.any,
+        Key.items: array.map { Metadata.generate(for: $0) }
+      ]
     }
   }
 }

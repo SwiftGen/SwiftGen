@@ -1,6 +1,6 @@
 //
-// SwiftGen
-// Copyright (c) 2017 Olivier Halligon
+// SwiftGen UnitTests
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -63,24 +63,18 @@ func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #
   XCTFail(error, file: file, line: line)
 }
 
-func XCTAssertEqualDict(_ result: [String: Any],
-                        _ expected: [String: Any],
-                        file: StaticString = #file,
-                        line: UInt = #line) {
-  XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected),
-                "expected \(expected), got \(result)",
-                file: file,
-                line: line)
-}
-
-extension TemplateRef: Equatable {
-  public static func == (lhs: TemplateRef, rhs: TemplateRef) -> Bool {
-    switch (lhs, rhs) {
-    case (.name(let lname), .name(let rname)): return lname == rname
-    case (.path(let lpath), .path(let rpath)): return lpath == rpath
-    case (.name, .path), (.path, .name): return false
-    }
-  }
+func XCTAssertEqualDict(
+  _ result: [String: Any],
+  _ expected: [String: Any],
+  file: StaticString = #file,
+  line: UInt = #line
+) {
+  XCTAssertTrue(
+    NSDictionary(dictionary: result).isEqual(to: expected),
+    "expected \(expected), got \(result)",
+    file: file,
+    line: line
+  )
 }
 
 class Fixtures {

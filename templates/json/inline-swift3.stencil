@@ -1,4 +1,5 @@
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// swiftlint:disable all
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if files %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
@@ -30,7 +31,7 @@ import Foundation
   {{accessModifier}} {% call propertyBlock key value document.data %}
   {% endfor %}
   {% else %}
-  {{accessModifier}} static let value: {{rootType}} = {% call valueBlock document.data rootType %}
+  {{accessModifier}} static let value: {{rootType}} = {% call valueBlock document.data document.metadata %}
   {% endif %}
 {% endmacro %}
 {% macro typeBlock metadata %}{% filter removeNewlines:"leading" %}
@@ -47,13 +48,25 @@ import Foundation
 {% macro propertyBlock key metadata data %}{% filter removeNewlines:"leading" %}
   {% set propertyName %}{{key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% endset %}
   {% set propertyType %}{% call typeBlock metadata %}{% endset %}
-  static let {{propertyName}}: {{propertyType}} = {% call valueBlock data[key] propertyType %}
+  static let {{propertyName}}: {{propertyType}} = {% call valueBlock data[key] metadata %}
 {% endfilter %}{% endmacro %}
-{% macro valueBlock value type %}{% filter removeNewlines:"leading" %}
-  {% if type == "String" %}
+{% macro valueBlock value metadata %}{% filter removeNewlines:"leading" %}
+  {% if metadata.type == "String" %}
     "{{ value }}"
-  {% elif type|hasSuffix:"?" %}
+  {% elif metadata.type == "Optional" %}
     nil
+  {% elif metadata.type == "Array" and metadata.element.items %}
+    [{% for itemMetadata in metadata.element.items %}
+      {% call valueBlock value[forloop.counter0] itemMetadata %}
+      {% if not forloop.last %}, {% endif %}
+    {% endfor %}]
+  {% elif metadata.type == "Dictionary" %}
+    [{% for key,value in value %}
+      "{{key}}": {% call valueBlock value metadata.properties[key] %}
+      {% if not forloop.last %}, {% endif %}
+    {% empty %}
+      :
+    {% endfor %}]
   {% else %}
     {{ value }}
   {% endif %}

@@ -1,5 +1,5 @@
 // swiftlint:disable all
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if palettes %}
 {% set colorAlias %}{{param.colorAliasName|default:"Color"}}{% endset %}
@@ -46,7 +46,7 @@
 // MARK: - Implementation Details
 
 // swiftlint:disable operator_usage_whitespace
-{{accessModifier}} extension {{colorAlias}} {
+internal extension {{colorAlias}} {
   convenience init(rgbaValue: UInt32) {
     let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0
     let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0

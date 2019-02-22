@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright (c) 2017 SwiftGen
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -57,19 +57,5 @@ extension InterfaceBuilder.Segue {
 
 // MARK: - Hashable
 
-extension InterfaceBuilder.Segue: Equatable { }
-func == (lhs: InterfaceBuilder.Segue, rhs: InterfaceBuilder.Segue) -> Bool {
-  return lhs.identifier == rhs.identifier &&
-    lhs.customClass == rhs.customClass &&
-    lhs.customModule == rhs.customModule &&
-    lhs.moduleIsPlaceholder == rhs.moduleIsPlaceholder &&
-    lhs.platform == rhs.platform
-}
-
-extension InterfaceBuilder.Segue: Hashable {
-  var hashValue: Int {
-    let part1: Int = identifier.hashValue ^ (customModule?.hashValue ?? 0) ^ (customClass?.hashValue ?? 0)
-    let part2: Int = moduleIsPlaceholder.hashValue ^ platform.hashValue
-    return part1 ^ part2
-  }
-}
+extension InterfaceBuilder.Segue: Equatable {}
+extension InterfaceBuilder.Segue: Hashable {}

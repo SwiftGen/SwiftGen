@@ -1,9 +1,7 @@
 //
-//  PlistTests.swift
-//  SwiftGenKit
-//
-//  Created by John McIntosh on 1/17/18.
-//  Copyright © 2018 AliSoftware. All rights reserved.
+// SwiftGenKit UnitTests
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import PathKit
@@ -20,23 +18,23 @@ class PlistTests: XCTestCase {
 
   func testArray() throws {
     let parser = Plist.Parser()
-    try parser.parse(path: Fixtures.path(for: "array.plist", sub: .plistGood))
+    try parser.searchAndParse(path: Fixtures.path(for: "shopping-list.plist", sub: .plistGood))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "array", sub: .plist)
+    XCTDiffContexts(result, expected: "shopping-list", sub: .plist)
   }
 
   func testDictionary() throws {
     let parser = Plist.Parser()
-    try parser.parse(path: Fixtures.path(for: "dictionary.plist", sub: .plistGood))
+    try parser.searchAndParse(path: Fixtures.path(for: "configuration.plist", sub: .plistGood))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "dictionary", sub: .plist)
+    XCTDiffContexts(result, expected: "configuration", sub: .plist)
   }
 
   func testInfo() throws {
     let parser = Plist.Parser()
-    try parser.parse(path: Fixtures.path(for: "Info.plist", sub: .plistGood))
+    try parser.searchAndParse(path: Fixtures.path(for: "Info.plist", sub: .plistGood))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "info", sub: .plist)
@@ -45,7 +43,7 @@ class PlistTests: XCTestCase {
   func testDirectoryInput() {
     do {
       let parser = Plist.Parser()
-      try parser.parse(path: Fixtures.directory(sub: .plistGood))
+      try parser.searchAndParse(path: Fixtures.directory(sub: .plistGood))
 
       let result = parser.stencilContext()
       XCTDiffContexts(result, expected: "all", sub: .plist)
@@ -56,7 +54,7 @@ class PlistTests: XCTestCase {
 
   func testFileWithBadSyntax() {
     do {
-      _ = try Plist.Parser().parse(path: Fixtures.path(for: "syntax.plist", sub: .plistBad))
+      _ = try Plist.Parser().searchAndParse(path: Fixtures.path(for: "syntax.plist", sub: .plistBad))
       XCTFail("Code did parse file successfully while it was expected to fail for bad syntax")
     } catch Plist.ParserError.invalidFile {
       // That's the expected exception we want to happen

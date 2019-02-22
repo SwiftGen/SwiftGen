@@ -24,11 +24,7 @@ SOFTWARE.
 */
 import Foundation
 
-#if SWIFT_PACKAGE
-import SwiftClibxml2
-#else
 import libxmlKanna
-#endif
 
 /**
 libxmlHTMLNode
@@ -72,10 +68,10 @@ internal final class libxmlHTMLNode: XMLElement {
     
     var tagName:   String? {
         get {
-            if nodePtr != nil {
-                return String(cString: UnsafePointer((nodePtr?.pointee.name)!))
+            guard let name = nodePtr?.pointee.name else {
+                return nil
             }
-            return nil
+            return String(cString: name)
         }
 
         set {

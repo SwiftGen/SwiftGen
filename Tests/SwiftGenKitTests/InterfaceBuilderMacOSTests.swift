@@ -1,6 +1,6 @@
 //
-// SwiftGenKit
-// Copyright (c) 2017 Olivier Halligon
+// SwiftGenKit UnitTests
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -24,7 +24,7 @@ class InterfaceBuilderMacOSTests: XCTestCase {
   func testMessageStoryboard() {
     let parser = InterfaceBuilder.Parser()
     do {
-      try parser.parse(path: Fixtures.path(for: "Message.storyboard", sub: .interfaceBuilderMacOS))
+      try parser.searchAndParse(path: Fixtures.path(for: "Message.storyboard", sub: .interfaceBuilderMacOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -36,7 +36,7 @@ class InterfaceBuilderMacOSTests: XCTestCase {
   func testAnonymousStoryboard() {
     let parser = InterfaceBuilder.Parser()
     do {
-      try parser.parse(path: Fixtures.path(for: "Anonymous.storyboard", sub: .interfaceBuilderMacOS))
+      try parser.searchAndParse(path: Fixtures.path(for: "Anonymous.storyboard", sub: .interfaceBuilderMacOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -48,7 +48,7 @@ class InterfaceBuilderMacOSTests: XCTestCase {
   func testAllStoryboards() {
     let parser = InterfaceBuilder.Parser()
     do {
-      try parser.parse(path: Fixtures.directory(sub: .interfaceBuilderMacOS))
+      try parser.searchAndParse(path: Fixtures.directory(sub: .interfaceBuilderMacOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -62,11 +62,13 @@ class InterfaceBuilderMacOSTests: XCTestCase {
     let fakeModuleName = "NotCurrentModule"
 
     let parser = InterfaceBuilder.Parser()
-    try parser.parse(path: Fixtures.directory(sub: .interfaceBuilderMacOS))
+    try parser.searchAndParse(path: Fixtures.directory(sub: .interfaceBuilderMacOS))
 
-    XCTAssert(parser.storyboards.contains {
-      $0.scenes.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName } &&
-      $0.segues.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName }
-    })
+    XCTAssert(
+      parser.storyboards.contains {
+        $0.scenes.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName } &&
+        $0.segues.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName }
+      }
+    )
   }
 }

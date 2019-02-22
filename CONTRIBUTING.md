@@ -41,9 +41,12 @@ Each pull request will need to conform to some requirements, which should be aut
 - Please check your indentation settings (2 spaces, no tabs). We're not forcing you to use a certain coding style, just trying to keep the code layout consistent.
 - Ensure you've made a changelog entry, crediting yourself. Easiest if you just copy a previous entry to get the format right, if not, Danger bot will tell you.
 
-### Naming Your Branch Appropriately
+### Following GitFlow branch naming convention
 
-To help us triaging the branches, we use the following naming convention:
+Your feature branches **should start from the `develop` branch**, not `master`.
+_(The `master` branch is reserved for released versions, while `develop` corresponds to the future version being worked on)_
+
+Also, to help us triaging the branches, we use the following naming convention:
 
 * Use `feature/xxx` (e.g. `feature/make-coffee`) for a non-breaking feature, which will not remove anything nor change the public API and won't require to bump to a major version
 * Use `feature/breaking/xxx` (e.g. `feature/breaking/rename-context-keys`) for features that are breaking compatibility and will require us to bump the major version. (If you're not sure about that, just use `feature/xxx`)

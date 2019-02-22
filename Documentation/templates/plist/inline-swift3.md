@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | plist/inline-swift3.stencil |
-| Invocation example | `swiftgen plist -t inline-swift3 …` |
+| Configuration example | <pre>plist:<br />  inputs: path/to/plist/dir-or-file<br />  outputs:<br />    templateName: inline-swift3<br />    output: Plist.swift</pre> |
 | Language | Swift 3 |
 | Author | David Jennes |
 
@@ -14,7 +14,7 @@
 
 ## Customization
 
-You can customize some elements of this template by overriding the following parameters when invoking `swiftgen` in the command line, using `--param <paramName>=<newValue>`
+You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
@@ -28,25 +28,24 @@ You can customize some elements of this template by overriding the following par
 
 ```swift
 internal enum PlistFiles {
-  internal enum Test {
-    internal static let items: [String] = arrayFromPlist(at: "array.plist")
+  internal enum Configuration {
+    internal static let environment: String = "development"
+    internal static let options: [String: Any] = ["Animation Style": "Party Mode"]
   }
-  internal enum Stuff {
-    private static let _document = PlistDocument(path: "dictionary.plist")
-    internal static let key1: Int = _document["key1"]
-    internal static let key2: [String: Any] = _document["key2"]
+  internal enum ShoppingList {
+    internal static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/SwiftGen/blob/master/Tests/Fixtures/Generated/Plist/inline-swift3-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Plist/inline-swift3-context-all.swift)
 
 ## Usage example
 
 ```swift
 // This will be an array
-let foo = PlistFiles.Test.items
+let foo = PlistFiles.ShoppingList.items
 
-// This will be an Int
-let bar = PlistFiles.Stuff.key1
+// This will be an String
+let bar = PlistFiles.Configuration.environment
 ```

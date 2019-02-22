@@ -10,7 +10,11 @@ class IncludeNode : NodeType {
     let bits = token.components()
 
     guard bits.count == 2 || bits.count == 3 else {
-      throw TemplateSyntaxError("'include' tag requires one argument, the template file to be included. A second optional argument can be used to specify the context that will be passed to the included file")
+      throw TemplateSyntaxError("""
+        'include' tag requires one argument, the template file to be included. \
+        A second optional argument can be used to specify the context that will \
+        be passed to the included file
+        """)
     }
 
     return IncludeNode(templateName: Variable(bits[1]), includeContext: bits.count == 3 ? bits[2] : nil, token: token)

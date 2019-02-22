@@ -74,7 +74,9 @@ func indentFilter(value: Any?, arguments: [Any?]) throws -> Any? {
   var indentWidth = 4
   if arguments.count > 0 {
     guard let value = arguments[0] as? Int else {
-      throw TemplateSyntaxError("'indent' filter width argument must be an Integer (\(String(describing: arguments[0])))")
+      throw TemplateSyntaxError("""
+        'indent' filter width argument must be an Integer (\(String(describing: arguments[0])))
+        """)
     }
     indentWidth = value
   }
@@ -82,7 +84,9 @@ func indentFilter(value: Any?, arguments: [Any?]) throws -> Any? {
   var indentationChar = " "
   if arguments.count > 1 {
     guard let value = arguments[1] as? String else {
-      throw TemplateSyntaxError("'indent' filter indentation argument must be a String (\(String(describing: arguments[1]))")
+      throw TemplateSyntaxError("""
+        'indent' filter indentation argument must be a String (\(String(describing: arguments[1]))
+        """)
     }
     indentationChar = value
   }

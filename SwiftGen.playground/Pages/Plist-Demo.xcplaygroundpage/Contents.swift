@@ -1,6 +1,7 @@
 //: #### Other pages
 //:
 //: * [Demo for `swiftgen colors`](Colors-Demo)
+//: * [Demo for `swiftgen coredata`](CoreData-Demo)
 //: * [Demo for `swiftgen fonts`](Fonts-Demo)
 //: * [Demo for `swiftgen ib`](InterfaceBuilder-Demo)
 //: * [Demo for `swiftgen json`](JSON-Demo)
@@ -26,19 +27,18 @@ import Foundation
 internal enum PlistFilesInline {
   internal enum Info {
     internal static let cfBundleDevelopmentRegion: String = "en"
-    internal static let cfBundleShortVersionString: String = "1.2.0"
-    internal static let uiLaunchStoryboardName: String = "LaunchScreen"
     internal static let cfBundleInfoDictionaryVersion: String = "6.0"
-    internal static let uiStatusBarStyle: String = "UIStatusBarStyleDefault"
-    internal static let uiSupportedInterfaceOrientations: [String] = ["UIInterfaceOrientationPortrait", "UIInterfaceOrientationPortraitUpsideDown", "UIInterfaceOrientationLandscapeRight", "UIInterfaceOrientationLandscapeLeft"]
+    internal static let cfBundleShortVersionString: String = "1.2.0"
+    internal static let fabric: [String: Any] = ["APIKey": "512345678900aaafffff", "Kits": [["KitInfo": [:], "KitName": "Crashlytics"]]]
+    internal static let uiLaunchStoryboardName: String = "LaunchScreen"
     internal static let uiMainStoryboardFile: String = "Start"
   }
-  internal enum Array {
-    internal static let items: [String] = ["value1", "value2"]
+  internal enum Configuration {
+    internal static let environment: String = "development"
+    internal static let options: [String: Any] = ["Animation Style": "Party Mode"]
   }
-  internal enum Dictionary {
-    internal static let key2: [String: Any] = ["nestedKey2": "nestedValue2"]
-    internal static let key1: String = "value1"
+  internal enum ShoppingList {
+    internal static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
 }
 // swiftlint:enable identifier_name line_length number_separator type_body_length
@@ -55,20 +55,19 @@ internal enum PlistFilesRuntime {
   internal enum Info {
     private static let _document = PlistDocument(path: "TestInfo.plist")
     internal static let cfBundleDevelopmentRegion: String = _document["CFBundleDevelopmentRegion"]
-    internal static let cfBundleShortVersionString: String = _document["CFBundleShortVersionString"]
-    internal static let uiLaunchStoryboardName: String = _document["UILaunchStoryboardName"]
     internal static let cfBundleInfoDictionaryVersion: String = _document["CFBundleInfoDictionaryVersion"]
-    internal static let uiStatusBarStyle: String = _document["UIStatusBarStyle"]
-    internal static let uiSupportedInterfaceOrientations: [String] = _document["UISupportedInterfaceOrientations"]
+    internal static let cfBundleShortVersionString: String = _document["CFBundleShortVersionString"]
+    internal static let fabric: [String: Any] = _document["Fabric"]
+    internal static let uiLaunchStoryboardName: String = _document["UILaunchStoryboardName"]
     internal static let uiMainStoryboardFile: String = _document["UIMainStoryboardFile"]
   }
-  internal enum Array {
-    internal static let items: [String] = arrayFromPlist(at: "array.plist")
+  internal enum Configuration {
+    private static let _document = PlistDocument(path: "configuration.plist")
+    internal static let environment: String = _document["Environment"]
+    internal static let options: [String: Any] = _document["Options"]
   }
-  internal enum Dictionary {
-    private static let _document = PlistDocument(path: "dictionary.plist")
-    internal static let key2: [String: Any] = _document["key2"]
-    internal static let key1: String = _document["key1"]
+  internal enum ShoppingList {
+    internal static let items: [String] = arrayFromPlist(at: "shopping-list.plist")
   }
 }
 // swiftlint:enable identifier_name line_length type_body_length
@@ -77,9 +76,9 @@ internal enum PlistFilesRuntime {
 
 // Access content embedded inline in Swift
 let region = PlistFilesInline.Info.cfBundleDevelopmentRegion
-let orientations = PlistFilesInline.Info.uiSupportedInterfaceOrientations
-let info = PlistFilesInline.Dictionary.key2
+let fabricKits = PlistFilesInline.Info.fabric["Kits"]
+let options = PlistFilesInline.Configuration.options
 
 // Or access content by loading Plist files at runtime
-let style = PlistFilesRuntime.Info.uiStatusBarStyle
-let items = PlistFilesRuntime.Array.items
+let style = PlistFilesRuntime.Info.uiMainStoryboardFile
+let items = PlistFilesRuntime.ShoppingList.items

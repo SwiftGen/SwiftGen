@@ -248,4 +248,4 @@ if let doc = try? Kanna.XML(xml: xml, encoding: .utf8) {
 
 License:
 =================
-The MIT License. See the LICENSE file for more infomation.
+The MIT License. See the LICENSE file for more information.

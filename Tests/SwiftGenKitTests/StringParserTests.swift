@@ -1,6 +1,6 @@
 //
-// SwiftGenKit
-// Copyright (c) 2017 Olivier Halligon
+// SwiftGenKit UnitTests
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -48,6 +48,18 @@ class StringParserTests: XCTestCase {
     let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format)
     // positions 2, 4, 3, 5 set to Int, Float, Object, Char, and position 1 not matched, defaulting to Unknown
     XCTAssertEqual(placeholders, [.unknown, .int, .object, .float, .char])
+  }
+
+  func testParseFlags() throws {
+    let formats = ["%-9d", "%+9d", "% 9d", "%#9d", "%09d"]
+    for format in formats {
+      let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format)
+      XCTAssertEqual(placeholders, [.int], "Failed to parse format \"\(format)\"")
+    }
+
+    let invalidFormat = "%_9d %_9f %_9@ %!9@"
+    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: invalidFormat)
+    XCTAssertEqual(placeholders, [])
   }
 
   func testParseDuplicateFormatPlaceholders() throws {

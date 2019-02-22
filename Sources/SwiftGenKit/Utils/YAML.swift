@@ -1,11 +1,10 @@
 //
-//  YAML.swift
-//  SwiftGenKit
-//
-//  Created by David Jennes on 30/07/2018.
-//  Copyright © 2018 AliSoftware. All rights reserved.
+// SwiftGenKit
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
+import Foundation
 import PathKit
 import Yams
 
@@ -14,17 +13,17 @@ public enum YAML {
   ///
   /// - parameter path: The path to the YAML file
   /// - returns: The decoded document
-  public static func read(path: Path) throws -> Any? {
+  public static func read(path: Path, env: [String: String] = [:]) throws -> Any? {
     let contents: String = try path.read()
-    return try decode(string: contents)
+    return try decode(string: contents, env: env)
   }
 
   /// Decode the contents of YAML string (only the first document).
   ///
   /// - parameter string: The YAML string
   /// - returns: The decoded document
-  public static func decode(string: String) throws -> Any? {
-    return try Yams.load(yaml: string)
+  public static func decode(string: String, env: [String: String] = [:]) throws -> Any? {
+    return try Yams.load(yaml: string, .default, Constructor.swiftgenContructor(env: env))
   }
 
   /// Encode the given object to YAML and write it to the given path
@@ -59,5 +58,36 @@ public enum YAML {
     default:
       throw YamlError.representer(problem: "Failed to represent \(object) as a Yams.Node")
     }
+  }
+}
+
+// Copied from https://github.com/realm/SwiftLint/blob/0.29.2/Source/SwiftLintFramework/Models/YamlParser.swift
+
+private extension Constructor {
+  static func swiftgenContructor(env: [String: String]) -> Constructor {
+    return Constructor(customScalarMap(env: env))
+  }
+
+  static func customScalarMap(env: [String: String]) -> ScalarMap {
+    var map = defaultScalarMap
+    map[.str] = String.constructExpandingEnvVars(env: env)
+    return map
+  }
+}
+
+private extension String {
+  static func constructExpandingEnvVars(env: [String: String]) -> (_ scalar: Node.Scalar) -> String? {
+    return { (scalar: Node.Scalar) -> String? in
+      scalar.string.expandingEnvVars(env: env)
+    }
+  }
+
+  func expandingEnvVars(env: [String: String]) -> String {
+    var result = self
+    for (key, value) in env {
+      result = result.replacingOccurrences(of: "${\(key)}", with: value)
+    }
+
+    return result
   }
 }

@@ -2,13 +2,13 @@
 
 ## Input
 
-The interface builder parser accepts either a file or a directory, which it'll search for `storyboard` files. The parser will load all the scenes and all the segues for each storyboard. It supports both AppKit (macOS) and UIKit (iOS, watchOS, tvOS) storyboards. 
+The interface builder parser accepts either a file or a directory, which it'll search for `storyboard` files. The parser will load all the scenes and all the segues for each storyboard. It supports both AppKit (macOS) and UIKit (iOS, watchOS, tvOS) storyboards.
 
 ## Output
 
 The output context has the following structure:
 
- - `modules`    : `Array<String>` — List of modules used by scenes and segues — typically to be used for "import" statements
+ - `modules`    : `Array<String>` — List of modules used by scenes and segues — typically used for "import" statements
  - `platform`   : `String` — Name of the target platform (only available if all storyboards target the same platform)
  - `storyboards`: `Array` — List of storyboards
     - `name`: `String` — Name of the storyboard

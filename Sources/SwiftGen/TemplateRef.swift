@@ -1,14 +1,12 @@
 //
-//  TemplateRef.swift
-//  swiftgen
-//
-//  Created by Olivier HALLIGON on 11/10/2017.
-//  Copyright © 2017 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import PathKit
 
-enum TemplateRef {
+enum TemplateRef: Equatable {
   case name(String)
   case path(Path)
 
@@ -70,14 +68,14 @@ extension TemplateRef.Error: CustomStringConvertible {
     switch self {
     case .namedTemplateNotFound(let name):
       return """
-        Template named \(name) not found. Use `swiftgen templates` to list available named templates \
-        or use --templatePath to specify a template by its full path.
+        Template named \(name) not found. Use `swiftgen templates list` to list available named templates \
+        or use `templatePath` to specify a template by its full path.
         """
     case .templatePathNotFound(let path):
       return "Template not found at path \(path.description)."
     case .noTemplateProvided:
       return """
-        You must specify a template name (-t) or path (-p).
+        You must specify a template by name (templateName) or path (templatePath).
 
         To list all the available named templates, use 'swiftgen templates list'.
         """

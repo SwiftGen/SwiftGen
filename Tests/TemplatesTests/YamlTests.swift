@@ -1,9 +1,7 @@
 //
-//  YamlTests.swift
-//  Templates UnitTests
-//
-//  Created by David Jennes on 14/05/2018.
-//  Copyright © 2018 AliSoftware. All rights reserved.
+// Templates UnitTests
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import StencilSwiftKit
@@ -21,26 +19,28 @@ class YamlTests: XCTestCase {
     return [
       (context: context,
        suffix: ""),
-      (context: try StencilContext.enrich(context: context,
-                                          parameters: ["enumName=CustomYAML"]),
-       suffix: "-customname"),
-      (context: try StencilContext.enrich(context: context,
-                                          parameters: ["publicAccess"]),
+      (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomYAML"]),
+       suffix: "-customName"),
+      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
        suffix: "-publicAccess")
     ]
   }
 
   func testInlineSwift3() {
-    test(template: "inline-swift3",
-         contextNames: Contexts.all,
-         directory: .yaml,
-         contextVariations: variations)
+    test(
+      template: "inline-swift3",
+      contextNames: Contexts.all,
+      directory: .yaml,
+      contextVariations: variations
+    )
   }
 
   func testInlineSwift4() {
-    test(template: "inline-swift4",
-         contextNames: Contexts.all,
-         directory: .yaml,
-         contextVariations: variations)
+    test(
+      template: "inline-swift4",
+      contextNames: Contexts.all,
+      directory: .yaml,
+      contextVariations: variations
+    )
   }
 }

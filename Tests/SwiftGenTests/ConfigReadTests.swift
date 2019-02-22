@@ -1,6 +1,6 @@
 //
-// SwiftGen
-// Copyright (c) 2015 Olivier Halligon
+// SwiftGen UnitTests
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -8,8 +8,10 @@ import PathKit
 import XCTest
 
 class ConfigReadTests: XCTestCase {
-  func testReadConfigWithParams() throws {
-    guard let path = Bundle(for: type(of: self)).path(forResource: "config-with-params", ofType: "yml") else {
+  lazy var bundle = Bundle(for: type(of: self))
+
+  func testConfigWithParams() throws {
+    guard let path = bundle.path(forResource: "config-with-params", ofType: "yml") else {
       fatalError("Fixture not found")
     }
     let file = Path(path)
@@ -27,16 +29,20 @@ class ConfigReadTests: XCTestCase {
       }
 
       XCTAssertEqual(entry.inputs, ["Sources1/Folder"])
+      XCTAssertEqual(entry.filter, ".*\\.strings")
 
       XCTAssertEqual(entry.outputs.count, 1)
       guard let output = entry.outputs.first else {
         return XCTFail("Expected a single strings entry output")
       }
-      XCTAssertEqualDict(output.parameters, [
-        "foo": 5,
-        "bar": ["bar1": 1, "bar2": 2, "bar3": [3, 4, ["bar3a": 50]]],
-        "baz": ["hello", "world"]
-      ])
+      XCTAssertEqualDict(
+        output.parameters,
+        [
+          "foo": 5,
+          "bar": ["bar1": 1, "bar2": 2, "bar3": [3, 4, ["bar3a": 50]]],
+          "baz": ["Hey", "$HELLO world"]
+        ]
+      )
       XCTAssertEqual(output.output, "strings.swift")
       XCTAssertEqual(output.template, .name("structured-swift3"))
     } catch let error {
@@ -44,8 +50,35 @@ class ConfigReadTests: XCTestCase {
     }
   }
 
-  func testReadConfigWithMultiEntries() throws {
-    guard let path = Bundle(for: type(of: self)).path(forResource: "config-with-multi-entries", ofType: "yml") else {
+  func testConfigWithENVS() throws {
+    guard let paramsConfigFilePath = bundle.path(forResource: "config-with-params", ofType: "yml"),
+      let envConfigFilePath = bundle.path(forResource: "config-with-env-placeholder", ofType: "yml") else {
+      fatalError("Fixture not found")
+    }
+
+    let paramsFile = Path(paramsConfigFilePath)
+    let envFile = Path(envConfigFilePath)
+
+    do {
+      let paramsConfig = try Config(file: paramsFile)
+      let envConfig = try Config(
+        file: envFile,
+        env: ["SWIFTGEN_OUTPUT_DIR": "Common/Generated", "HELLO": "Hey"]
+      )
+
+      XCTAssertEqual(paramsConfig.outputDir, envConfig.outputDir)
+      guard let paramsList = paramsConfig.commands["strings"]?.first?.outputs.first?.parameters["baz"] as? [String],
+        let envList = envConfig.commands["strings"]?.first?.outputs.first?.parameters["baz"] as? [String] else {
+        return XCTFail("Could not find strings entry output")
+      }
+      XCTAssertEqual(paramsList, envList)
+    } catch let error {
+      XCTFail("Error: \(error)")
+    }
+  }
+
+  func testConfigWithMultiEntries() throws {
+    guard let path = bundle.path(forResource: "config-with-multi-entries", ofType: "yml") else {
       fatalError("Fixture not found")
     }
     let file = Path(path)
@@ -86,7 +119,7 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(xcassetsEntries[1].outputs.count, 1)
       XCTAssertEqual(xcassetsEntries[1].outputs[0].output, "assets-images.swift")
       XCTAssertEqualDict(xcassetsEntries[1].outputs[0].parameters, ["enumName": "Pics"])
-      XCTAssertEqual(xcassetsEntries[1].outputs[0].template, .name("swift3"))
+      XCTAssertEqual(xcassetsEntries[1].outputs[0].template, .name("custom-swift3"))
       // > xcassets[2]
       XCTAssertEqual(xcassetsEntries[2].inputs, ["XCAssets/Colors.xcassets", "XCAssets/Images.xcassets"])
       XCTAssertEqual(xcassetsEntries[2].outputs.count, 1)
@@ -98,8 +131,8 @@ class ConfigReadTests: XCTestCase {
     }
   }
 
-  func testReadConfigWithMultiOutputs() throws {
-    guard let path = Bundle(for: type(of: self)).path(forResource: "config-with-multi-outputs", ofType: "yml") else {
+  func testConfigWithMultiOutputs() throws {
+    guard let path = bundle.path(forResource: "config-with-multi-outputs", ofType: "yml") else {
       fatalError("Fixture not found")
     }
     let file = Path(path)
@@ -134,11 +167,11 @@ class ConfigReadTests: XCTestCase {
 
   // MARK: - Invalid configs
 
-  func testReadInvalidConfigThrows() {
+  func testInvalidConfigThrows() {
     let badConfigs = [
       "config-missing-paths": "Missing entry for key strings.inputs.",
       "config-missing-template": """
-        You must specify a template name (-t) or path (-p).
+        You must specify a template by name (templateName) or path (templatePath).
 
         To list all the available named templates, use 'swiftgen templates list'.
         """,
@@ -155,14 +188,16 @@ class ConfigReadTests: XCTestCase {
     ]
     for (configFile, expectedError) in badConfigs {
       do {
-        guard let path = Bundle(for: type(of: self)).path(forResource: configFile, ofType: "yml") else {
+        guard let path = bundle.path(forResource: configFile, ofType: "yml") else {
           fatalError("Fixture not found")
         }
         _ = try Config(file: Path(path))
-        XCTFail("""
+        XCTFail(
+          """
           Trying to parse config file \(configFile) should have thrown \
           error \(expectedError) but didn't throw at all
-          """)
+          """
+        )
       } catch let error {
         XCTAssertEqual(
           String(describing: error),
@@ -178,8 +213,8 @@ class ConfigReadTests: XCTestCase {
 
   // MARK: - Deprecations
 
-  func testReadDeprecatedOutput() throws {
-    guard let path = Bundle(for: type(of: self)).path(forResource: "config-deprecated-output", ofType: "yml") else {
+  func testDeprecatedOutput() throws {
+    guard let path = bundle.path(forResource: "config-deprecated-output", ofType: "yml") else {
       fatalError("Fixture not found")
     }
     let file = Path(path)
@@ -202,8 +237,8 @@ class ConfigReadTests: XCTestCase {
     }
   }
 
-  func testReadDeprecatedPaths() throws {
-    guard let path = Bundle(for: type(of: self)).path(forResource: "config-deprecated-paths", ofType: "yml") else {
+  func testDeprecatedPaths() throws {
+    guard let path = bundle.path(forResource: "config-deprecated-paths", ofType: "yml") else {
       fatalError("Fixture not found")
     }
     let file = Path(path)
@@ -220,8 +255,7 @@ class ConfigReadTests: XCTestCase {
     }
   }
 
-  func testReadDeprecatedUseNewerProperties() throws {
-    let bundle = Bundle(for: type(of: self))
+  func testDeprecatedUseNewerProperties() throws {
     guard let path = bundle.path(forResource: "config-deprecated-mixed-with-new", ofType: "yml") else {
       fatalError("Fixture not found")
     }

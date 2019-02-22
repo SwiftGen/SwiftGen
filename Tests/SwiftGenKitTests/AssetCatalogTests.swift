@@ -1,6 +1,6 @@
 //
-// SwiftGenKit
-// Copyright (c) 2017 Olivier Halligon
+// SwiftGenKit UnitTests
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -18,7 +18,7 @@ class AssetCatalogTests: XCTestCase {
 
   func testImages() throws {
     let parser = AssetsCatalog.Parser()
-    try parser.parse(path: Fixtures.path(for: "Images.xcassets", sub: .xcassets))
+    try parser.searchAndParse(path: Fixtures.path(for: "Images.xcassets", sub: .xcassets))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "images", sub: .xcassets)
@@ -26,7 +26,7 @@ class AssetCatalogTests: XCTestCase {
 
   func testData() throws {
     let parser = AssetsCatalog.Parser()
-    try parser.parse(path: Fixtures.path(for: "Data.xcassets", sub: .xcassets))
+    try parser.searchAndParse(path: Fixtures.path(for: "Data.xcassets", sub: .xcassets))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "data", sub: .xcassets)
@@ -34,7 +34,7 @@ class AssetCatalogTests: XCTestCase {
 
   func testColors() throws {
     let parser = AssetsCatalog.Parser()
-    try parser.parse(path: Fixtures.path(for: "Colors.xcassets", sub: .xcassets))
+    try parser.searchAndParse(path: Fixtures.path(for: "Colors.xcassets", sub: .xcassets))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "colors", sub: .xcassets)
@@ -42,11 +42,8 @@ class AssetCatalogTests: XCTestCase {
 
   func testAll() throws {
     let parser = AssetsCatalog.Parser()
-    try parser.parse(paths: [
-      Fixtures.path(for: "Images.xcassets", sub: .xcassets),
-      Fixtures.path(for: "Colors.xcassets", sub: .xcassets),
-      Fixtures.path(for: "Data.xcassets", sub: .xcassets)
-    ])
+    let paths = ["Images.xcassets", "Colors.xcassets", "Data.xcassets"]
+    try parser.searchAndParse(paths: paths.map { Fixtures.path(for: $0, sub: .xcassets) })
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "all", sub: .xcassets)

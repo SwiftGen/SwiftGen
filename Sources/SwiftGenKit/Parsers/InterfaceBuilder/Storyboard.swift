@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright (c) 2017 SwiftGen
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -16,7 +16,8 @@ extension InterfaceBuilder {
     let segues: Set<Segue>
 
     var modules: Set<String> {
-      var result: [String] = scenes.filter { !$0.moduleIsPlaceholder }.compactMap { $0.module } +
+      var result: [String] = [platform.module] +
+        scenes.filter { !$0.moduleIsPlaceholder }.compactMap { $0.module } +
         segues.filter { !$0.moduleIsPlaceholder }.compactMap { $0.module }
 
       if let scene = initialScene, let module = scene.module, !scene.moduleIsPlaceholder {
@@ -66,14 +67,18 @@ extension InterfaceBuilder.Storyboard {
     }
 
     // Scenes
-    scenes = Set<InterfaceBuilder.Scene>(document.xpath(XML.sceneXPath).compactMap {
-      guard !XML.placeholderTags.contains($0.tagName ?? "") else { return nil }
-      return InterfaceBuilder.Scene(with: $0, platform: platform)
-    })
+    scenes = Set<InterfaceBuilder.Scene>(
+      document.xpath(XML.sceneXPath).compactMap {
+        guard !XML.placeholderTags.contains($0.tagName ?? "") else { return nil }
+        return InterfaceBuilder.Scene(with: $0, platform: platform)
+      }
+    )
 
     // Segues
-    segues = Set<InterfaceBuilder.Segue>(document.xpath(XML.segueXPath).map {
-      InterfaceBuilder.Segue(with: $0, platform: platform)
-    })
+    segues = Set<InterfaceBuilder.Segue>(
+      document.xpath(XML.segueXPath).map {
+        InterfaceBuilder.Segue(with: $0, platform: platform)
+      }
+    )
   }
 }

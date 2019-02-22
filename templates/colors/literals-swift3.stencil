@@ -1,5 +1,5 @@
 // swiftlint:disable all
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if palettes %}
 {% set enumName %}{{param.enumName|default:"ColorName"}}{% endset %}
@@ -23,12 +23,12 @@
 {% macro enumBlock colors %}
   {% for color in colors %}
   /// 0x{{color.red}}{{color.green}}{{color.blue}}{{color.alpha}} (r: {{color.red|hexToInt}}, g: {{color.green|hexToInt}}, b: {{color.blue|hexToInt}}, a: {{color.alpha|hexToInt}})
-  static let {{color.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = #colorLiteral(red: {% call h2f color.red %}, green: {% call h2f color.green %}, blue: {% call h2f color.blue %}, alpha: {% call h2f color.alpha %})
+  {{accessModifier}} static let {{color.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = #colorLiteral(red: {% call h2f color.red %}, green: {% call h2f color.green %}, blue: {% call h2f color.blue %}, alpha: {% call h2f color.alpha %})
   {% endfor %}
 {% endmacro %}
   {% if palettes.count > 1 %}
   {% for palette in palettes %}
-  enum {{palette.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+  {{accessModifier}} enum {{palette.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
     {% filter indent:2 %}{% call enumBlock palette.colors %}{% endfilter %}
   }
   {% endfor %}

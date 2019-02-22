@@ -1,6 +1,6 @@
 //
-// SwiftGen
-// Copyright (c) 2015 Olivier Halligon
+// Templates UnitTests
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -19,14 +19,11 @@ class StringsTests: XCTestCase {
     return [
       (context: context,
        suffix: ""),
-      (context: try StencilContext.enrich(context: context,
-                                          parameters: ["enumName=XCTLoc"]),
-       suffix: "-customname"),
-      (context: try StencilContext.enrich(context: context,
-                                          parameters: ["noComments"]),
-       suffix: "-no-comments"),
-      (context: try StencilContext.enrich(context: context,
-                                          parameters: ["publicAccess"]),
+      (context: try StencilContext.enrich(context: context, parameters: ["enumName=XCTLoc"]),
+       suffix: "-customName"),
+      (context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
+       suffix: "-noComments"),
+      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
        suffix: "-publicAccess")
     ]
   }
@@ -47,31 +44,39 @@ class StringsTests: XCTestCase {
   }
 
   func testFlatSwift3() {
-    test(template: "flat-swift3",
-         contextNames: Contexts.all,
-         directory: .strings,
-         contextVariations: variations)
+    test(
+      template: "flat-swift3",
+      contextNames: Contexts.all,
+      directory: .strings,
+      contextVariations: variations
+    )
   }
 
   func testFlatSwift4() {
-    test(template: "flat-swift4",
-         contextNames: Contexts.all,
-         directory: .strings,
-         contextVariations: variations)
+    test(
+      template: "flat-swift4",
+      contextNames: Contexts.all,
+      directory: .strings,
+      contextVariations: variations
+    )
   }
 
   func testStructuredSwift3() {
-    test(template: "structured-swift3",
-         contextNames: Contexts.all,
-         directory: .strings,
-         contextVariations: variations)
+    test(
+      template: "structured-swift3",
+      contextNames: Contexts.all,
+      directory: .strings,
+      contextVariations: variations
+    )
   }
 
   func testStructuredSwift4() {
-    test(template: "structured-swift4",
-         contextNames: Contexts.all,
-         directory: .strings,
-         contextVariations: variations)
+    test(
+      template: "structured-swift4",
+      contextNames: Contexts.all,
+      directory: .strings,
+      contextVariations: variations
+    )
   }
 
   func testObjectiveCHeader() {

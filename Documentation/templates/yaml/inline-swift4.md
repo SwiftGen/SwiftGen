@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | yaml/inline-swift4.stencil |
-| Invocation example | `swiftgen yaml -t inline-swift4 …` |
+| Configuration example | <pre>yaml:<br />  inputs: path/to/yaml/dir-or-file<br />  outputs:<br />    templateName: swift4<br />    output: YAML.swift</pre> |
 | Language | Swift 4 |
 | Author | David Jennes |
 
@@ -14,7 +14,7 @@
 
 ## Customization
 
-You can customize some elements of this template by overriding the following parameters when invoking `swiftgen` in the command line, using `--param <paramName>=<newValue>`
+You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
@@ -37,24 +37,25 @@ internal enum YAMLFiles {
       internal static let items: [String] = ["Chicago Cubs", "St Louis Cardinals"]
     }
   }
-  internal enum Mapping {
-    internal static let key2: [String: Any] = ["nestedKey2": "nestedValue2"]
-    internal static let key1: String = "value1"
-  }
-
   internal enum GroceryList {
-    internal static let items: [String] = ["value1", "value2"]
+    internal static let items: [String] = ["Eggs", "Bread", "Milk"]
+  }
+  internal enum Mapping {
+    internal static let car: Any? = nil
+    internal static let foo: [String: Any] = ["bar": "banana", "baz": "orange"]
+    internal static let hello: String = "world"
+    internal static let weight: Double = 33.3
   }
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/SwiftGen/blob/master/Tests/Fixtures/Generated/YAML/inline-swift4-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/YAML/inline-swift4-context-all.swift)
 
 ## Usage example
 
 ```swift
 // This will be an dictionary
-let foo = YAMLFiles.Mapping.key2
+let foo = YAMLFiles.Mapping.foo
 
 // This will be an [String]
 let bar = YAMLFiles.GroceryList.items

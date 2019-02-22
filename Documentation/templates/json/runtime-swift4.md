@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | json/runtime-swift4.stencil |
-| Invocation example | `swiftgen json -t runtime-swift4 …` |
+| Configuration example | <pre>json:<br />  inputs: path/to/json/dir-or-file<br />  outputs:<br />    templateName: runtime-swift4<br />    output: JSON.swift</pre> |
 | Language | Swift 4 |
 | Author | David Jennes |
 
@@ -15,7 +15,7 @@
 
 ## Customization
 
-You can customize some elements of this template by overriding the following parameters when invoking `swiftgen` in the command line, using `--param <paramName>=<newValue>`
+You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
@@ -29,25 +29,29 @@ You can customize some elements of this template by overriding the following par
 
 ```swift
 internal enum JSONFiles {
-  internal enum Info {
-    private static let _document = JSONDocument(path: "info.json")
-    internal static let key1: String = _document["key1"]
-    internal static let key2: String = _document["key2"]
-    internal static let key3: [String: Any] = _document["key3"]
+  internal enum Configuration {
+    private static let _document = JSONDocument(path: "configuration.json")
+    internal static let apiVersion: String = _document["api-version"]
+    internal static let country: Any? = _document["country"]
+    internal static let environment: String = _document["environment"]
+    internal static let options: [String: Any] = _document["options"]
   }
   internal enum GroceryList {
-    internal static let items: [String] = objectFromJSON(at: "grocery-list.json")
+    internal static let items: [String] = objectFromJSON(at: "grocery-list.yaml")
+  }
+  internal enum Version {
+    internal static let value: String = objectFromJSON(at: "version.yaml")
   }
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/SwiftGen/blob/master/Tests/Fixtures/Generated/JSON/runtime-swift4-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/JSON/runtime-swift4-context-all.swift)
 
 ## Usage example
 
 ```swift
 // This will be an dictionary
-let foo = JSONFiles.Info.key3
+let foo = JSONFiles.Configuration.options
 
 // This will be an [String]
 let bar = JSONFiles.GroceryList.items

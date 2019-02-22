@@ -1,6 +1,7 @@
 output_dir: Common/Generated
 strings:
   inputs: Sources1/Folder
+  filter: .*\.strings
   outputs:
     templateName: structured-swift3
     output: strings.swift
@@ -14,5 +15,5 @@ strings:
           - 4
           - bar3a: 50
       baz:
-        - hello
-        - world
+        - Hey
+        - $HELLO world

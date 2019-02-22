@@ -1,5 +1,5 @@
 // swiftlint:disable all
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if platform and storyboards %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
@@ -27,10 +27,8 @@ import {{module}}
 {% endfilter %}{% endmacro %}
 {% macro className item %}{% filter removeNewlines %}
   {% set module %}{% call moduleName item %}{% endset %}
-  {% if module %}
-    {% if not param.ignoreTargetModule or module != env.PRODUCT_MODULE_NAME and module != param.module %}
-      {{module}}.
-    {% endif %}
+  {% if module and ( not param.ignoreTargetModule or module != env.PRODUCT_MODULE_NAME and module != param.module ) %}
+    {{module}}.
   {% endif %}
   {{item.type}}
 {% endfilter %}{% endmacro %}

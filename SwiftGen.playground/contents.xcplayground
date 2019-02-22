@@ -2,6 +2,7 @@
 <playground version='6.0' target-platform='ios' display-mode='rendered'>
     <pages>
         <page name='Colors-Demo'/>
+        <page name='CoreData-Demo'/>
         <page name='Fonts-Demo'/>
         <page name='InterfaceBuilder-Demo'/>
         <page name='JSON-Demo'/>

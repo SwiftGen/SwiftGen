@@ -1,33 +1,16 @@
 //
 // SwiftGenKit
-// Copyright (c) 2017 SwiftGen
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
 import Foundation
 
-/*
- - `catalogs`: `Array` — list of asset catalogs
-   - `name`  : `String` — the name of the catalog
-   - `assets`: `Array` — tree structure of items, each item either
-     - represents a color asset, and has the following entries:
-       - `type` : `String` — "color"
-       - `name` : `String` — name of the color
-       - `value`: `String` — the actual full name for loading the color
-     - represents a data asset, and has the following entries:
-       - `type` : `String` — "data"
-       - `name` : `String` — name of the data asset
-       - `value`: `String` — the actual full name for loading the data asset
-     - represents a group and has the following entries:
-       - `type`        : `String` — "group"
-       - `name`        : `String` — name of the folder
-       - `isNameSpaced`: `Bool` - Whether this group provides a namespace for child items
-       - `items`       : `Array` — list of items, can be either groups, colors or images
-     - represents an image asset, and has the following entries:
-       - `type` : `String` — "image"
-       - `name` : `String` — name of the image
-       - `value`: `String` — the actual full name for loading the image
-*/
+//
+// See the documentation file for a full description of this context's structure:
+// Documentation/SwiftGenKit Contexts/Assets.md
+//
+
 extension AssetsCatalog.Parser {
   public func stencilContext() -> [String: Any] {
     let catalogs = self.catalogs
@@ -45,6 +28,7 @@ extension AssetsCatalog.Parser {
   }
 
   private func structure(entries: [AssetsCatalog.Entry]) -> [[String: Any]] {
+    // swiftlint:disable:next closure_body_length
     return entries.map { entry in
       switch entry {
       case .color(let name, let value):

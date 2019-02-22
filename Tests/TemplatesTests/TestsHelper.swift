@@ -1,6 +1,6 @@
 //
-// SwiftGen
-// Copyright (c) 2017 Olivier Halligon
+// Templates UnitTests
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -68,6 +68,7 @@ func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #
 class Fixtures {
   enum Directory: String {
     case colors = "Colors"
+    case coreData = "CoreData"
     case fonts = "Fonts"
     case interfaceBuilder = "IB"
     case interfaceBuilderiOS = "IB-iOS"
@@ -150,17 +151,21 @@ extension XCTestCase {
    - Parameter resourceDirectory: The directory to look for files in (corresponds to the command)
    - Parameter contextVariations: Optional closure to generate context variations.
    */
-  func test(template templateName: String,
-            contextNames: [String],
-            directory: Fixtures.Directory,
-            resourceDirectory: Fixtures.Directory? = nil,
-            outputDirectory: Fixtures.Directory? = nil,
-            file: StaticString = #file,
-            line: UInt = #line,
-            contextVariations: VariationGenerator? = nil) {
+  func test(
+    template templateName: String,
+    contextNames: [String],
+    directory: Fixtures.Directory,
+    resourceDirectory: Fixtures.Directory? = nil,
+    outputDirectory: Fixtures.Directory? = nil,
+    file: StaticString = #file,
+    line: UInt = #line,
+    contextVariations: VariationGenerator? = nil
+  ) {
     let templateString = Fixtures.template(for: "\(templateName).stencil", sub: directory)
-    let template = StencilSwiftTemplate(templateString: templateString,
-                                        environment: stencilSwiftEnvironment())
+    let template = StencilSwiftTemplate(
+      templateString: templateString,
+      environment: stencilSwiftEnvironment()
+    )
 
     // default values
     let contextVariations = contextVariations ?? { [(context: $1, suffix: "")] }

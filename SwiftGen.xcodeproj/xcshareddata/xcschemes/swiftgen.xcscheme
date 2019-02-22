@@ -40,10 +40,12 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "NO">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DDDE519F1FAF814A004203BE"
@@ -53,7 +55,9 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DDDE50291FAF687A004203BE"
@@ -63,7 +67,9 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "09A87B4F1BCCA2C600D9B9F5"
@@ -111,6 +117,10 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "--version"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "config lint --config $(PROJECT_DIR)/Tests/Fixtures/Configs/config-missing-paths.yml"
             isEnabled = "NO">
          </CommandLineArgument>
@@ -120,6 +130,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "templates list"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "coredata --template swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/CoreData/Model.xcdatamodeld"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument

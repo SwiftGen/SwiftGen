@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File name | json/inline-swift4.stencil |
-| Invocation example | `swiftgen json -t inline-swift4 …` |
+| Configuration example | <pre>json:<br />  inputs: path/to/json/dir-or-file<br />  outputs:<br />    templateName: inline-swift4<br />    output: JSON.swift</pre> |
 | Language | Swift 4 |
 | Author | David Jennes |
 
@@ -14,7 +14,7 @@
 
 ## Customization
 
-You can customize some elements of this template by overriding the following parameters when invoking `swiftgen` in the command line, using `--param <paramName>=<newValue>`
+You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
@@ -28,25 +28,28 @@ You can customize some elements of this template by overriding the following par
 
 ```swift
 internal enum JSONFiles {
-  internal enum Info {
-    private static let _document = JSONDocument(path: "info.json")
-    internal static let key1: String = _document["key1"]
-    internal static let key2: String = _document["key2"]
-    internal static let key3: [String: Any] = _document["key3"]
+  internal enum Configuration {
+    internal static let apiVersion: String = "2"
+    internal static let country: Any? = nil
+    internal static let environment: String = "staging"
+    internal static let options: [String: Any] = ["screen-order": ["1", "2", "3"]]
   }
   internal enum GroceryList {
-    internal static let items: [String] = objectFromJSON(at: "grocery-list.json")
+    internal static let items: [String] = ["Eggs", "Bread", "Milk"]
+  }
+  internal enum Version {
+    internal static let value: String = "1.2.3.beta.4"
   }
 }
 ```
 
-[Full generated code](https://github.com/SwiftGen/SwiftGen/blob/master/Tests/Fixtures/Generated/JSON/inline-swift4-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/JSON/inline-swift4-context-all.swift)
 
 ## Usage example
 
 ```swift
 // This will be an dictionary
-let foo = JSONFiles.Info.key3
+let foo = JSONFiles.Configuration.options
 
 // This will be an [String]
 let bar = JSONFiles.GroceryList.items

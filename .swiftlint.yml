@@ -1,28 +1,42 @@
+swiftlint_version: 0.30.1
+
 opt_in_rules:
  - anyobject_protocol
  - array_init
  - attributes
+ - closure_body_length
  - closure_end_indentation
  - closure_spacing
+ - collection_alignment
+ - conditional_returns_on_newline
  - contains_over_first_not_nil
  - convenience_type
  - discouraged_optional_boolean
  - discouraged_optional_collection
  - empty_count
  - empty_string
+ - empty_xctest_method
  - fallthrough
  - fatal_error_message
+ - file_header
  - first_where
  - force_unwrapping
+ - identical_operands
  - implicit_return
  - implicitly_unwrapped_optional
  - joined_default_parameter
+ - last_where
+ - legacy_random
  - literal_expression_end_indentation
  - lower_acl_than_parent
  - modifier_order
  - multiline_arguments
+ - multiline_arguments_brackets
  - multiline_function_chains
+ - multiline_literal_brackets
  - multiline_parameters
+ - multiline_parameters_brackets
+ - nslocalizedstring_key
  - number_separator
  - operator_usage_whitespace
  - overridden_super_call
@@ -33,13 +47,31 @@ opt_in_rules:
  - redundant_nil_coalescing
  - sorted_first_last
  - sorted_imports
+ - static_operator
+ - strong_iboutlet
+ - switch_case_on_newline
+ - toggle_bool
  - trailing_closure
  - unavailable_function
  - unneeded_parentheses_in_closure_argument
  - vertical_parameter_alignment_on_call
+ - vertical_whitespace_closing_braces
+ - vertical_whitespace_opening_braces
+ - xct_specific_matcher
  - yoda_condition
 
 # Rules customization
+conditional_returns_on_newline:
+  if_only: true
+
+file_header:
+  required_pattern: |
+                    \/\/(
+                    \/\/ (SwiftGen(Kit)?|.* UnitTests)
+                    \/\/ Copyright © 2019 SwiftGen
+                    \/\/ MIT Licence
+                    \/\/| Generated using SwiftGen — https:\/\/github.com\/SwiftGen\/SwiftGen)
+
 line_length:
   warning: 120
   error: 200

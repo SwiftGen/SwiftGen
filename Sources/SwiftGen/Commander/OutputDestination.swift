@@ -1,9 +1,7 @@
 //
-//  OutputDestination.swift
-//  swiftgen
-//
-//  Created by Olivier HALLIGON on 11/10/2017.
-//  Copyright © 2017 AliSoftware. All rights reserved.
+// SwiftGen
+// Copyright © 2019 SwiftGen
+// MIT Licence
 //
 
 import Commander
@@ -22,8 +20,10 @@ enum OutputDestination: ArgumentConvertible {
 
   var description: String {
     switch self {
-    case .console: return "(stdout)"
-    case .file(let path): return path.description
+    case .console:
+      return "(stdout)"
+    case .file(let path):
+      return path.description
     }
   }
 

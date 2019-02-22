@@ -1,6 +1,6 @@
 //
 // StencilSwiftKit
-// Copyright (c) 2017 SwiftGen
+// Copyright © 2019 SwiftGen
 // MIT Licence
 //
 
@@ -95,9 +95,11 @@ enum Filters {
   ///   - index: the index in the arguments array
   ///   - default: The default value should no argument be provided
   /// - Throws: Filters.Error.invalidInputType
-  static func parseEnum<T>(from arguments: [Any?], at index: Int = 0, default: T) throws -> T
-    where T: RawRepresentable, T.RawValue == String {
-
+  static func parseEnum<T>(
+    from arguments: [Any?],
+    at index: Int = 0,
+    default: T
+  ) throws -> T where T: RawRepresentable, T.RawValue == String {
     guard index < arguments.count else { return `default` }
     let arg = arguments[index].map(String.init(describing:)) ?? `default`.rawValue
 
