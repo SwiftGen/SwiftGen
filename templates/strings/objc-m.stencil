@@ -19,7 +19,7 @@ NSString* tr(NSString* key, ...) {
 
 {% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
-    ({% call paramTranslate type %})p{{ forloop.counter }}{% if not forloop.last %} p{{ forloop.counter }}:{% endif %}
+    ({% call paramTranslate type %})p{{ forloop.counter }}{% if not forloop.last %} and:{% endif %}
   {% endfor %}
 {% endfilter %}{% endmacro %}
 {% macro argumentsBlock types %}{% filter removeNewlines:"leading" %}
