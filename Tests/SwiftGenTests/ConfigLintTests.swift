@@ -23,7 +23,7 @@ class ConfigLintTests: XCTestCase {
     let configFile = Path(path)
     do {
       let logger = { (level: LogLevel, msg: String) -> Void in
-        if let idx = missingLogs.index(where: { $0 == level && $1 == msg }) {
+        if let idx = missingLogs.firstIndex(where: { $0 == level && $1 == msg }) {
           missingLogs.remove(at: idx)
         } else if unwantedLevels.contains(level) {
           XCTFail("Unexpected log: \(msg)")
@@ -33,7 +33,7 @@ class ConfigLintTests: XCTestCase {
       let config = try Config(file: configFile, logger: logger)
       config.lint(logger: logger)
     } catch let error {
-      if let idx = missingLogs.index(where: { $0 == .error && $1 == String(describing: error) }) {
+      if let idx = missingLogs.firstIndex(where: { $0 == .error && $1 == String(describing: error) }) {
         missingLogs.remove(at: idx)
       } else {
         XCTFail("Unexpected error: \(error)", file: file, line: line)
