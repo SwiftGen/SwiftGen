@@ -56,15 +56,6 @@
         }
       },
       {
-        "package": "SwiftClibxml2",
-        "repositoryURL": "https://github.com/tid-kijyun/SwiftClibxml2.git",
-        "state": {
-          "branch": null,
-          "revision": "c4e67cc970273fc2bee978d12e422974ff184de7",
-          "version": "1.0.2"
-        }
-      },
-      {
         "package": "Yams",
         "repositoryURL": "https://github.com/jpsim/Yams.git",
         "state": {
