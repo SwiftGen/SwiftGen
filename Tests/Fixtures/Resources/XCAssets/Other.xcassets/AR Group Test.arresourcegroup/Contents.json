@@ -1,0 +1,20 @@
+{
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "resources" : [
+    {
+      "filename" : "Reference Image 1.arreferenceimage"
+    },
+    {
+      "filename" : "Reference Image 2.arreferenceimage"
+    },
+    {
+      "filename" : "Reference Object 1.arobject"
+    },
+    {
+      "filename" : "Reference Object 2.arobject"
+    }
+  ]
+}
