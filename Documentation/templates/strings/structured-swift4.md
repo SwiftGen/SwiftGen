@@ -34,22 +34,22 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-enum L10n {
+internal enum L10n {
   /// Some alert body there
-  static let alertMessage = L10n.tr("alert_message")
+  internal static let alertMessage = L10n.tr("alert_message")
   /// Title of the alert
-  static let alertTitle = L10n.tr("alert_title")
+  internal static let alertTitle = L10n.tr("alert_title")
 
-  enum Apples {
+  internal enum Apples {
     /// You have %d apples
-    static func count(_ p1: Int) -> String {
+    internal static func count(_ p1: Int) -> String {
       return L10n.tr("apples.count", p1)
     }
   }
 
-  enum Bananas {
+  internal enum Bananas {
     /// Those %d bananas belong to %@.
-    static func owner(_ p1: Int, _ p2: Any) -> String {
+    internal static func owner(_ p1: Int, _ p2: Any) -> String {
       return L10n.tr("bananas.owner", p1, String(describing: p2))
     }
   }

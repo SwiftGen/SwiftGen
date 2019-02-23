@@ -39,16 +39,16 @@ This template also make use of UserInfo keys that you can set on your Data Model
 
 ```swift
 internal class MainEntity: NSManagedObject {
-  internal class func entityName() -> String {
+  internal class var entityName: String {
     return "MainEntity"
   }
 
   internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
-    return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
+    return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
   @nonobjc internal class func fetchRequest() -> NSFetchRequest<MainEntity> {
-    return NSFetchRequest<MainEntity>(entityName: entityName())
+    return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
   @NSManaged internal var attributedString: NSAttributedString?

@@ -30,11 +30,11 @@ Note: if you use `enumName: UIColor` (or `NSColor` on macOS) then the color cons
 **Extract:**
 
 ```swift
-extension ColorName {
+internal extension ColorName {
   /// 0x339666ff (r: 51, g: 150, b: 102, a: 255)
-  static let articleBody = #colorLiteral(red: 0.2, green: 0.588235, blue: 0.4, alpha: 1.0)
+  internal static let articleBody = #colorLiteral(red: 0.2, green: 0.588235, blue: 0.4, alpha: 1.0)
   /// 0xff66ccff (r: 255, g: 102, b: 204, a: 255)
-  static let articleFootnote = #colorLiteral(red: 1.0, green: 0.4, blue: 0.8, alpha: 1.0)
+  internal static let articleFootnote = #colorLiteral(red: 1.0, green: 0.4, blue: 0.8, alpha: 1.0)
 }
 ```
 
