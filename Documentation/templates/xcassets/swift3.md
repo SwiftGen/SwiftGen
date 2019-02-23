@@ -14,6 +14,8 @@
 
 It also takes into account any namespacing folder in your Assets Catalogs (i.e. if you create a folder in your Assets Catalog, select it, and check the "Provides Namespace" checkbox on the Attributes Inspector panel on the right)
 
+Note: the template will generate a sub-`enum` per catalog, except if there's only one catalog. As mentioned above, sub-`enum`s will only be generated for namespaced folders. You can override this behaviour with the `forceProvidesNamespaces` parameter described [below](#customization).
+
 ## Customization
 
 You can customize some elements of this template by overriding the following parameters when invoking `swiftgen`. See the [dedicated documentation](../../ConfigFile.md).
