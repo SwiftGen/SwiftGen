@@ -33,25 +33,14 @@ bundle = Bundle(for: BundleToken.self)
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
-  internal enum Colors {
-    internal enum _24Vision {
-      internal static let background = ColorAsset(name: "24Vision/Background")
-      internal static let primary = ColorAsset(name: "24Vision/Primary")
-    }
-    internal static let orange = ImageAsset(name: "Orange")
-    internal enum Vengo {
-      internal static let primary = ColorAsset(name: "Vengo/Primary")
-      internal static let tint = ColorAsset(name: "Vengo/Tint")
-    }
-  }
-  internal enum Data {
+  internal enum Files {
     internal static let data = DataAsset(name: "Data")
     internal enum Json {
       internal static let data = DataAsset(name: "Json/Data")
     }
     internal static let readme = DataAsset(name: "README")
   }
-  internal enum Images {
+  internal enum Food {
     internal enum Exotic {
       internal static let banana = ImageAsset(name: "Exotic/Banana")
       internal static let mango = ImageAsset(name: "Exotic/Mango")
@@ -66,19 +55,30 @@ internal enum Asset {
     }
     internal static let `private` = ImageAsset(name: "private")
   }
+  internal enum Styles {
+    internal enum _24Vision {
+      internal static let background = ColorAsset(name: "24Vision/Background")
+      internal static let primary = ColorAsset(name: "24Vision/Primary")
+    }
+    internal static let orange = ImageAsset(name: "Orange")
+    internal enum Vengo {
+      internal static let primary = ColorAsset(name: "Vengo/Primary")
+      internal static let tint = ColorAsset(name: "Vengo/Tint")
+    }
+  }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 //: #### Usage Example
 
 // colors
-let color1 = UIColor(asset: Asset.Colors.Vengo.primary)
-let color2 = Asset.Colors.Vengo.tint.color
+let color1 = UIColor(asset: Asset.Styles.Vengo.primary)
+let color2 = Asset.Styles.Vengo.tint.color
 
 // data
-let data1 = NSDataAsset(asset: Asset.Data.data)
-let data2 = Asset.Data.readme.data
+let data1 = NSDataAsset(asset: Asset.Files.data)
+let data2 = Asset.Files.readme.data
 
 // images
-let image1 = UIImage(asset: Asset.Images.Exotic.banana)
-let image2 = Asset.Images.Round.tomato.image
+let image1 = UIImage(asset: Asset.Food.Exotic.banana)
+let image2 = Asset.Food.Round.tomato.image
