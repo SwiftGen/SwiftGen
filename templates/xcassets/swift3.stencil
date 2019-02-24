@@ -12,17 +12,23 @@
 #if os(macOS)
   import AppKit
 #elseif os(iOS)
+{% if resourceCount.arresourcegroup > 0 %}
   import ARKit
+{% endif %}
   import UIKit
 #elseif os(tvOS) || os(watchOS)
   import UIKit
 #endif
 
 // Deprecated typealiases
+{% if resourceCount.color > 0 %}
 @available(*, deprecated, renamed: "{{colorType}}.Color", message: "This typealias will be removed in SwiftGen 7.0")
 {{accessModifier}} typealias {{param.colorAliasName|default:"AssetColorTypeAlias"}} = {{colorType}}.Color
+{% endif %}
+{% if resourceCount.image > 0 %}
 @available(*, deprecated, renamed: "{{imageType}}.Image", message: "This typealias will be removed in SwiftGen 7.0")
 {{accessModifier}} typealias {{param.imageAliasName|default:"AssetImageTypeAlias"}} = {{imageType}}.Image
+{% endif %}
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -34,18 +40,26 @@
   {% if param.allValues %}
 
   // swiftlint:disable trailing_comma
+  {% if resourceCount.arresourcegroup > 0 %}
   {{accessModifier}} static let allResourceGroups: [{{arResourceGroupType}}] = [
     {% filter indent:2 %}{% call allValuesBlock assets "arresourcegroup" "" %}{% endfilter %}
   ]
+  {% endif %}
+  {% if resourceCount.color > 0 %}
   {{accessModifier}} static let allColors: [{{colorType}}] = [
     {% filter indent:2 %}{% call allValuesBlock assets "color" "" %}{% endfilter %}
   ]
+  {% endif %}
+  {% if resourceCount.data > 0 %}
   {{accessModifier}} static let allDataAssets: [{{dataType}}] = [
     {% filter indent:2 %}{% call allValuesBlock assets "data" "" %}{% endfilter %}
   ]
+  {% endif %}
+  {% if resourceCount.image > 0 %}
   {{accessModifier}} static let allImages: [{{imageType}}] = [
     {% filter indent:2 %}{% call allValuesBlock assets "image" "" %}{% endfilter %}
   ]
+  {% endif %}
   // swiftlint:enable trailing_comma
   {% endif %}
 {% endmacro %}
@@ -61,7 +75,6 @@
   {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{imageType}}(name: "{{asset.value}}")
   {% elif asset.items and ( forceNamespaces == "true" or asset.isNamespaced == "true" ) %}
   {{accessModifier}} enum {{asset.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
-
     {% filter indent:2 %}{% call casesBlock asset.items %}{% endfilter %}
   }
   {% elif asset.items %}
@@ -97,6 +110,7 @@
 
 // MARK: - Implementation Details
 
+{% if resourceCount.arresourcegroup > 0 %}
 {{accessModifier}} struct {{arResourceGroupType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
@@ -131,6 +145,8 @@
 }
 #endif
 
+{% endif %}
+{% if resourceCount.color > 0 %}
 {{accessModifier}} final class {{colorType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
@@ -166,6 +182,8 @@
   #endif
 }
 
+{% endif %}
+{% if resourceCount.data > 0 %}
 {{accessModifier}} struct {{dataType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
@@ -187,6 +205,8 @@
 }
 #endif
 
+{% endif %}
+{% if resourceCount.image > 0 %}
 {{accessModifier}} struct {{imageType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
@@ -223,6 +243,7 @@
   }
 }
 
+{% endif %}
 private final class BundleToken {}
 {% else %}
 // No assets found
