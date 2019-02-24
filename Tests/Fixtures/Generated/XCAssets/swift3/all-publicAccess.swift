@@ -2,11 +2,16 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 #if os(macOS)
-  import AppKit.NSImage
+  import AppKit
   public typealias AssetColorTypeAlias = NSColor
   public typealias AssetImageTypeAlias = NSImage
-#elseif os(iOS) || os(tvOS) || os(watchOS)
-  import UIKit.UIImage
+#elseif os(iOS)
+  import ARKit
+  import UIKit
+  public typealias AssetColorTypeAlias = UIColor
+  public typealias AssetImageTypeAlias = UIImage
+#elseif os(tvOS) || os(watchOS)
+  import UIKit
   public typealias AssetColorTypeAlias = UIColor
   public typealias AssetImageTypeAlias = UIImage
 #endif
@@ -40,6 +45,8 @@ public enum Asset {
     }
     public static let `private` = ImageAsset(name: "private")
   }
+  public enum Other {
+  }
   public enum Styles {
     public enum _24Vision {
       public static let background = ColorAsset(name: "24Vision/Background")
@@ -51,10 +58,49 @@ public enum Asset {
       public static let tint = ColorAsset(name: "Vengo/Tint")
     }
   }
+  public enum Targets {
+    public static let bottles = ARResourceGroupAsset(name: "Bottles")
+    public static let paintings = ARResourceGroupAsset(name: "Paintings")
+    public static let posters = ARResourceGroupAsset(name: "Posters")
+  }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
+
+public struct ARResourceGroupAsset {
+  public fileprivate(set) var name: String
+
+  #if os(iOS) && swift(>=3.2)
+  @available(iOS 11.3, *)
+  public var referenceImages: Set<ARReferenceImage> {
+    return ARReferenceImage.referenceImages(in: self)
+  }
+
+  @available(iOS 12.0, *)
+  public var referenceObjects: Set<ARReferenceObject> {
+    return ARReferenceObject.referenceObjects(in: self)
+  }
+  #endif
+}
+
+#if os(iOS) && swift(>=3.2)
+@available(iOS 11.3, *)
+public extension ARReferenceImage {
+  static func referenceImages(in asset: ARResourceGroupAsset) -> Set<ARReferenceImage> {
+    let bundle = Bundle(for: BundleToken.self)
+    return referenceImages(inGroupNamed: asset.name, bundle: bundle) ?? Set()
+  }
+}
+
+@available(iOS 12.0, *)
+public extension ARReferenceObject {
+  static func referenceObjects(in asset: ARResourceGroupAsset) -> Set<ARReferenceObject> {
+    let bundle = Bundle(for: BundleToken.self)
+    return referenceObjects(inGroupNamed: asset.name, bundle: bundle) ?? Set()
+  }
+}
+#endif
 
 public final class ColorAsset {
   public fileprivate(set) var name: String

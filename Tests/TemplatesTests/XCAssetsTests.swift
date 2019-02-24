@@ -24,6 +24,7 @@ class XCAssetsTests: XCTestCase {
         context: context,
         parameters: [
           "enumName=XCTAssets",
+          "arResourceGroupTypeName=XCTARResourceGroup",
           "colorTypeName=XCTColorAsset",
           "dataTypeName=XCTDataAsset",
           "imageTypeName=XCTImageAsset",

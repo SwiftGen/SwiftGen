@@ -2,11 +2,16 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 #if os(macOS)
-  import AppKit.NSImage
+  import AppKit
   internal typealias XCTColor = NSColor
   internal typealias XCTImage = NSImage
-#elseif os(iOS) || os(tvOS) || os(watchOS)
-  import UIKit.UIImage
+#elseif os(iOS)
+  import ARKit
+  import UIKit
+  internal typealias XCTColor = UIColor
+  internal typealias XCTImage = UIImage
+#elseif os(tvOS) || os(watchOS)
+  import UIKit
   internal typealias XCTColor = UIColor
   internal typealias XCTImage = UIImage
 #endif
@@ -40,6 +45,8 @@ internal enum XCTAssets {
     }
     internal static let `private` = XCTImageAsset(name: "private")
   }
+  internal enum Other {
+  }
   internal enum Styles {
     internal enum _24Vision {
       internal static let background = XCTColorAsset(name: "24Vision/Background")
@@ -51,10 +58,49 @@ internal enum XCTAssets {
       internal static let tint = XCTColorAsset(name: "Vengo/Tint")
     }
   }
+  internal enum Targets {
+    internal static let bottles = XCTARResourceGroup(name: "Bottles")
+    internal static let paintings = XCTARResourceGroup(name: "Paintings")
+    internal static let posters = XCTARResourceGroup(name: "Posters")
+  }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
+
+internal struct XCTARResourceGroup {
+  internal fileprivate(set) var name: String
+
+  #if os(iOS)
+  @available(iOS 11.3, *)
+  internal var referenceImages: Set<ARReferenceImage> {
+    return ARReferenceImage.referenceImages(in: self)
+  }
+
+  @available(iOS 12.0, *)
+  internal var referenceObjects: Set<ARReferenceObject> {
+    return ARReferenceObject.referenceObjects(in: self)
+  }
+  #endif
+}
+
+#if os(iOS)
+@available(iOS 11.3, *)
+internal extension ARReferenceImage {
+  static func referenceImages(in asset: XCTARResourceGroup) -> Set<ARReferenceImage> {
+    let bundle = Bundle(for: BundleToken.self)
+    return referenceImages(inGroupNamed: asset.name, bundle: bundle) ?? Set()
+  }
+}
+
+@available(iOS 12.0, *)
+internal extension ARReferenceObject {
+  static func referenceObjects(in asset: XCTARResourceGroup) -> Set<ARReferenceObject> {
+    let bundle = Bundle(for: BundleToken.self)
+    return referenceObjects(inGroupNamed: asset.name, bundle: bundle) ?? Set()
+  }
+}
+#endif
 
 internal final class XCTColorAsset {
   internal fileprivate(set) var name: String

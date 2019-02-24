@@ -2,11 +2,16 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 #if os(macOS)
-  import AppKit.NSImage
+  import AppKit
   internal typealias AssetColorTypeAlias = NSColor
   internal typealias AssetImageTypeAlias = NSImage
-#elseif os(iOS) || os(tvOS) || os(watchOS)
-  import UIKit.UIImage
+#elseif os(iOS)
+  import ARKit
+  import UIKit
+  internal typealias AssetColorTypeAlias = UIColor
+  internal typealias AssetImageTypeAlias = UIImage
+#elseif os(tvOS) || os(watchOS)
+  import UIKit
   internal typealias AssetColorTypeAlias = UIColor
   internal typealias AssetImageTypeAlias = UIImage
 #endif
@@ -25,6 +30,8 @@ internal enum Asset {
     }
     internal static let readme = DataAsset(name: "README")
     // swiftlint:disable trailing_comma
+    internal static let allResourceGroups: [ARResourceGroupAsset] = [
+    ]
     internal static let allColors: [ColorAsset] = [
     ]
     internal static let allDataAssets: [DataAsset] = [
@@ -51,6 +58,8 @@ internal enum Asset {
     }
     internal static let `private` = ImageAsset(name: "private")
     // swiftlint:disable trailing_comma
+    internal static let allResourceGroups: [ARResourceGroupAsset] = [
+    ]
     internal static let allColors: [ColorAsset] = [
     ]
     internal static let allDataAssets: [DataAsset] = [
@@ -66,6 +75,18 @@ internal enum Asset {
     ]
     // swiftlint:enable trailing_comma
   }
+  internal enum Other {
+    // swiftlint:disable trailing_comma
+    internal static let allResourceGroups: [ARResourceGroupAsset] = [
+    ]
+    internal static let allColors: [ColorAsset] = [
+    ]
+    internal static let allDataAssets: [DataAsset] = [
+    ]
+    internal static let allImages: [ImageAsset] = [
+    ]
+    // swiftlint:enable trailing_comma
+  }
   internal enum Styles {
     internal enum _24Vision {
       internal static let background = ColorAsset(name: "24Vision/Background")
@@ -77,6 +98,8 @@ internal enum Asset {
       internal static let tint = ColorAsset(name: "Vengo/Tint")
     }
     // swiftlint:disable trailing_comma
+    internal static let allResourceGroups: [ARResourceGroupAsset] = [
+    ]
     internal static let allColors: [ColorAsset] = [
       _24Vision.background,
       _24Vision.primary,
@@ -90,10 +113,62 @@ internal enum Asset {
     ]
     // swiftlint:enable trailing_comma
   }
+  internal enum Targets {
+    internal static let bottles = ARResourceGroupAsset(name: "Bottles")
+    internal static let paintings = ARResourceGroupAsset(name: "Paintings")
+    internal static let posters = ARResourceGroupAsset(name: "Posters")
+    // swiftlint:disable trailing_comma
+    internal static let allResourceGroups: [ARResourceGroupAsset] = [
+      bottles,
+      paintings,
+      posters,
+    ]
+    internal static let allColors: [ColorAsset] = [
+    ]
+    internal static let allDataAssets: [DataAsset] = [
+    ]
+    internal static let allImages: [ImageAsset] = [
+    ]
+    // swiftlint:enable trailing_comma
+  }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
+
+internal struct ARResourceGroupAsset {
+  internal fileprivate(set) var name: String
+
+  #if os(iOS) && swift(>=3.2)
+  @available(iOS 11.3, *)
+  internal var referenceImages: Set<ARReferenceImage> {
+    return ARReferenceImage.referenceImages(in: self)
+  }
+
+  @available(iOS 12.0, *)
+  internal var referenceObjects: Set<ARReferenceObject> {
+    return ARReferenceObject.referenceObjects(in: self)
+  }
+  #endif
+}
+
+#if os(iOS) && swift(>=3.2)
+@available(iOS 11.3, *)
+internal extension ARReferenceImage {
+  static func referenceImages(in asset: ARResourceGroupAsset) -> Set<ARReferenceImage> {
+    let bundle = Bundle(for: BundleToken.self)
+    return referenceImages(inGroupNamed: asset.name, bundle: bundle) ?? Set()
+  }
+}
+
+@available(iOS 12.0, *)
+internal extension ARReferenceObject {
+  static func referenceObjects(in asset: ARResourceGroupAsset) -> Set<ARReferenceObject> {
+    let bundle = Bundle(for: BundleToken.self)
+    return referenceObjects(inGroupNamed: asset.name, bundle: bundle) ?? Set()
+  }
+}
+#endif
 
 internal final class ColorAsset {
   internal fileprivate(set) var name: String
