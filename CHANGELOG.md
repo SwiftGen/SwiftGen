@@ -41,6 +41,9 @@
 * Strings: templates to generate Objective-C. Please check [the template's documentation](Documentation/templates/string/objc.md) for more information.  
   [Eric Slosser](https://github.com/Mr-Fixit)
   [SwiftGen/SwiftGen#378](https://github.com/SwiftGen/SwiftGen/pull/378)
+* XCAssets: the parser now supports AR Resource Groups, together with reference images and objects.  
+  [David Jennes](https://github.com/djbe)
+  [#614](https://github.com/SwiftGen/SwiftGen/pull/614)
 
 ### Bug Fixes
 
