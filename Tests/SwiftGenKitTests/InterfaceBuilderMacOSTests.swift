@@ -7,22 +7,16 @@
 @testable import SwiftGenKit
 import XCTest
 
-/**
- * Important: In order for the "*.storyboard" files in fixtures/ to be copied as-is in the test bundle
- * (as opposed to being compiled when the test bundle is compiled), a custom "Build Rule" has been added to the target.
- * See Project -> Target "UnitTests" -> Build Rules -> « Files "*.storyboard" using PBXCp »
- */
-
 class InterfaceBuilderMacOSTests: XCTestCase {
-  func testEmpty() {
-    let parser = InterfaceBuilder.Parser()
+  func testEmpty() throws {
+    let parser = try InterfaceBuilder.Parser()
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .interfaceBuilderMacOS)
   }
 
-  func testMessageStoryboard() {
-    let parser = InterfaceBuilder.Parser()
+  func testMessageStoryboard() throws {
+    let parser = try InterfaceBuilder.Parser()
     do {
       try parser.searchAndParse(path: Fixtures.path(for: "Message.storyboard", sub: .interfaceBuilderMacOS))
     } catch {
@@ -33,8 +27,8 @@ class InterfaceBuilderMacOSTests: XCTestCase {
     XCTDiffContexts(result, expected: "messages", sub: .interfaceBuilderMacOS)
   }
 
-  func testAnonymousStoryboard() {
-    let parser = InterfaceBuilder.Parser()
+  func testAnonymousStoryboard() throws {
+    let parser = try InterfaceBuilder.Parser()
     do {
       try parser.searchAndParse(path: Fixtures.path(for: "Anonymous.storyboard", sub: .interfaceBuilderMacOS))
     } catch {
@@ -45,8 +39,8 @@ class InterfaceBuilderMacOSTests: XCTestCase {
     XCTDiffContexts(result, expected: "anonymous", sub: .interfaceBuilderMacOS)
   }
 
-  func testAllStoryboards() {
-    let parser = InterfaceBuilder.Parser()
+  func testAllStoryboards() throws {
+    let parser = try InterfaceBuilder.Parser()
     do {
       try parser.searchAndParse(path: Fixtures.directory(sub: .interfaceBuilderMacOS))
     } catch {
@@ -61,7 +55,7 @@ class InterfaceBuilderMacOSTests: XCTestCase {
   func testConsistencyOfModules() throws {
     let fakeModuleName = "NotCurrentModule"
 
-    let parser = InterfaceBuilder.Parser()
+    let parser = try InterfaceBuilder.Parser()
     try parser.searchAndParse(path: Fixtures.directory(sub: .interfaceBuilderMacOS))
 
     XCTAssert(
@@ -70,5 +64,19 @@ class InterfaceBuilderMacOSTests: XCTestCase {
         $0.segues.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName }
       }
     )
+  }
+
+  // MARK: - Custom options
+
+  func testUnknownOption() throws {
+    do {
+      _ = try InterfaceBuilder.Parser(options: ["SomeOptionThatDoesntExist": "foo"])
+      XCTFail("Parser successfully created with an invalid option")
+    } catch ParserOptionList.Error.unknownOption(let key, _) {
+      // That's the expected exception we want to happen
+      XCTAssertEqual(key, "SomeOptionThatDoesntExist", "Failed for unexpected option \(key)")
+    } catch let error {
+      XCTFail("Unexpected error occured: \(error)")
+    }
   }
 }

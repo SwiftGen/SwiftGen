@@ -50,9 +50,10 @@ extension ConfigEntry {
   }
 
   func run(parserCommand: ParserCLI) throws {
-    let parser = try parserCommand.parserType.init(options: [:]) { msg, _, _ in
+    let parser = try parserCommand.parserType.init(options: options) { msg, _, _ in
       logMessage(.warning, msg)
     }
+
     let filter = try Filter(pattern: self.filter ?? parserCommand.parserType.defaultFilter)
     try parser.searchAndParse(paths: inputs, filter: filter)
     let context = parser.stencilContext()

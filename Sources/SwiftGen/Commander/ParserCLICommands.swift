@@ -30,11 +30,13 @@ extension ParserCLI {
       )
     }
 
-    static let options = VariadicOption<String>(
-      "option",
-      default: [],
-      description: "List of parser options"
-    )
+    static func options(for parser: ParserCLI) -> VariadicOption<String> {
+      return VariadicOption<String>(
+        "option",
+        default: [],
+        description: "List of parser options. \(parser.parserType.allOptions)"
+      )
+    }
 
     static let params = VariadicOption<String>(
       "param",
@@ -67,7 +69,7 @@ extension ParserCLI {
       CLIOption.deprecatedTemplateName,
       CLIOption.templateName,
       CLIOption.templatePath,
-      CLIOption.options,
+      CLIOption.options(for: self),
       CLIOption.params,
       CLIOption.filter(for: self),
       OutputDestination.cliOption,
@@ -78,6 +80,7 @@ extension ParserCLI {
         let parser = try self.parserType.init(options: options) { msg, _, _ in
           logMessage(.warning, msg)
         }
+
         let filter = try Filter(pattern: filter)
         try parser.searchAndParse(paths: paths, filter: filter)
 

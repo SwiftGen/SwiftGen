@@ -4,25 +4,19 @@
 // MIT Licence
 //
 
-import SwiftGenKit
+@testable import SwiftGenKit
 import XCTest
 
-/**
- * Important: In order for the "*.strings" files in fixtures/ to be copied as-is in the test bundle
- * (as opposed to being compiled when the test bundle is compiled), a custom "Build Rule" has been added to the target.
- * See Project -> Target "UnitTests" -> Build Rules -> « Files "*.strings" using PBXCp »
- */
-
 class StringsTests: XCTestCase {
-  func testEmpty() {
-    let parser = Strings.Parser()
+  func testEmpty() throws {
+    let parser = try Strings.Parser()
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .strings)
   }
 
   func testLocalizable() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     let result = parser.stencilContext()
@@ -30,7 +24,7 @@ class StringsTests: XCTestCase {
   }
 
   func testMultiline() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "LocMultiline.strings", sub: .strings))
 
     let result = parser.stencilContext()
@@ -38,7 +32,7 @@ class StringsTests: XCTestCase {
   }
 
   func testUTF8File() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "LocUTF8.strings", sub: .strings))
 
     let result = parser.stencilContext()
@@ -46,7 +40,7 @@ class StringsTests: XCTestCase {
   }
 
   func testStructuredOnly() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "LocStructuredOnly.strings", sub: .strings))
 
     let result = parser.stencilContext()
@@ -54,7 +48,7 @@ class StringsTests: XCTestCase {
   }
 
   func testMultipleFiles() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
     try parser.searchAndParse(path: Fixtures.path(for: "LocMultiline.strings", sub: .strings))
 
@@ -63,7 +57,7 @@ class StringsTests: XCTestCase {
   }
 
   func testMultipleFilesDuplicate() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     do {
@@ -76,11 +70,25 @@ class StringsTests: XCTestCase {
     }
   }
 
+  // MARK: - Custom options
+
   func testCustomSeparator() throws {
-    let parser = Strings.Parser(options: ["separator": "__"])
+    let parser = try Strings.Parser(options: ["separator": "__"])
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "custom-separator", sub: .strings)
+  }
+
+  func testUnknownOption() throws {
+    do {
+      _ = try Strings.Parser(options: ["SomeOptionThatDoesntExist": "foo"])
+      XCTFail("Parser successfully created with an invalid option")
+    } catch ParserOptionList.Error.unknownOption(let key, _) {
+      // That's the expected exception we want to happen
+      XCTAssertEqual(key, "SomeOptionThatDoesntExist", "Failed for unexpected option \(key)")
+    } catch let error {
+      XCTFail("Unexpected error occured: \(error)")
+    }
   }
 }

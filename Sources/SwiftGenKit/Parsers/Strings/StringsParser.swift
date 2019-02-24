@@ -28,21 +28,26 @@ public enum Strings {
     }
   }
 
-  private enum Option {
-    static let separator = "separator"
+  public enum Option {
+    static let separator = ParserOption(
+      key: "separator",
+      defaultValue: ".",
+      help: "Separator used to split keys into components"
+    )
   }
 
   public final class Parser: SwiftGenKit.Parser {
+    private let options: ParserOptionValues
     var tables = [String: [Entry]]()
     public var warningHandler: Parser.MessageHandler?
-    private let keyStructureSeparator: String
 
-    public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
+    public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
+      self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
       self.warningHandler = warningHandler
-      self.keyStructureSeparator = (options[Option.separator] as? String) ?? Entry.defaultSeparator
     }
 
     public static let defaultFilter = "[^/]\\.strings$"
+    public static let allOptions: ParserOptionList = [Option.separator]
 
     // Localizable.strings files are generally UTF16, not UTF8!
     public func parse(path: Path, relativeTo parent: Path) throws {
@@ -61,7 +66,7 @@ public enum Strings {
       }
 
       tables[name] = try dict.map { key, translation in
-        try Entry(key: key, translation: translation, keyStructureSeparator: keyStructureSeparator)
+        try Entry(key: key, translation: translation, keyStructureSeparator: options[Option.separator])
       }
     }
   }
