@@ -55,8 +55,9 @@ class AssetCatalogTests: XCTestCase {
     do {
       _ = try AssetsCatalog.Parser(options: ["SomeOptionThatDoesntExist": "foo"])
       XCTFail("Parser successfully created with an invalid option")
-    } catch ParserOptionList.Error.unknownOption {
+    } catch ParserOptionList.Error.unknownOption(let key, _) {
       // That's the expected exception we want to happen
+      XCTAssertEqual(key, "SomeOptionThatDoesntExist", "Failed for unexpected option \(key)")
     } catch let error {
       XCTFail("Unexpected error occured: \(error)")
     }
