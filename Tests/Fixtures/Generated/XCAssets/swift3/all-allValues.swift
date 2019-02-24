@@ -3,18 +3,18 @@
 
 #if os(macOS)
   import AppKit
-  internal typealias AssetColorTypeAlias = NSColor
-  internal typealias AssetImageTypeAlias = NSImage
 #elseif os(iOS)
   import ARKit
   import UIKit
-  internal typealias AssetColorTypeAlias = UIColor
-  internal typealias AssetImageTypeAlias = UIImage
 #elseif os(tvOS) || os(watchOS)
   import UIKit
-  internal typealias AssetColorTypeAlias = UIColor
-  internal typealias AssetImageTypeAlias = UIImage
 #endif
+
+// Deprecated typealiases
+@available(*, deprecated, renamed: "ColorAsset.Color", message: "This typealias will be removed in SwiftGen 7.0")
+internal typealias AssetColorTypeAlias = ColorAsset.Color
+@available(*, deprecated, renamed: "ImageAsset.Image", message: "This typealias will be removed in SwiftGen 7.0")
+internal typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -173,9 +173,15 @@ internal extension ARReferenceObject {
 internal final class ColorAsset {
   internal fileprivate(set) var name: String
 
+  #if os(macOS)
+  internal typealias Color = NSColor
+  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  internal typealias Color = UIColor
+  #endif
+
   #if swift(>=3.2)
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
-  internal fileprivate(set) lazy var color: AssetColorTypeAlias = AssetColorTypeAlias(asset: self)
+  internal fileprivate(set) lazy var color: Color = Color(asset: self)
   #endif
 
   fileprivate init(name: String) {
@@ -183,7 +189,7 @@ internal final class ColorAsset {
   }
 }
 
-internal extension AssetColorTypeAlias {
+internal extension ColorAsset.Color {
   #if swift(>=3.2)
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
   convenience init!(asset: ColorAsset) {
@@ -223,21 +229,27 @@ internal extension NSDataAsset {
 internal struct ImageAsset {
   internal fileprivate(set) var name: String
 
-  internal var image: AssetImageTypeAlias {
+  #if os(macOS)
+  internal typealias Image = NSImage
+  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  internal typealias Image = UIImage
+  #endif
+
+  internal var image: Image {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
-    let image = AssetImageTypeAlias(named: name, in: bundle, compatibleWith: nil)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
     let image = bundle.image(forResource: name)
     #elseif os(watchOS)
-    let image = AssetImageTypeAlias(named: name)
+    let image = Image(named: name)
     #endif
     guard let result = image else { fatalError("Unable to load image named \(name).") }
     return result
   }
 }
 
-internal extension AssetImageTypeAlias {
+internal extension ImageAsset.Image {
   @available(macOS, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
   convenience init!(asset: ImageAsset) {

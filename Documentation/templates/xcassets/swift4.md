@@ -22,14 +22,14 @@ You can customize some elements of this template by overriding the following par
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
 | `enumName` | `Asset` | Allows you to change the name of the generated `enum` containing all assets. |
-| `colorAliasName` | `AssetColorTypeAlias` | Allows you to change the name of the generated `typealias` for the platform specific color type. |
-| `imageAliasName` | `AssetImageTypeAlias` | Allows you to change the name of the generated `typealias` for the platform specific image type. |
 | `colorTypeName` | `ColorAsset` | Allows you to change the name of the struct type representing a color. |
 | `dataTypeName` | `DataAsset` | Allows you to change the name of the struct type representing a data asset. |
 | `imageTypeName` | `ImageAsset` | Allows you to change the name of the struct type representing an image. |
 | `allValues` | N/A | Setting this parameter will enable the generation of the `allColors`, `allImages` and other such constants. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 | `forceProvidesNamespaces` | N/A | If set, generates namespaces even for non namespacing asset folders (i.e. "Provides Namespace" is unchecked) |
+| `colorAliasName` | `AssetColorTypeAlias` | **Deprecated** Allows you to change the name of the generated `typealias` for the platform specific color type. |
+| `imageAliasName` | `AssetImageTypeAlias` | **Deprecated** Allows you to change the name of the generated `typealias` for the platform specific image type. |
 
 ## Generated Code
 

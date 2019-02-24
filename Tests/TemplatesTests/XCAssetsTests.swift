@@ -28,8 +28,8 @@ class XCAssetsTests: XCTestCase {
           "colorTypeName=XCTColorAsset",
           "dataTypeName=XCTDataAsset",
           "imageTypeName=XCTImageAsset",
+          // deprecated parameters
           "colorAliasName=XCTColor",
-          "dataAliasName=XCTData",
           "imageAliasName=XCTImage"
         ]
        ),

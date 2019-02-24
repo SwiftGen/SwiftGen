@@ -7,24 +7,22 @@
 {% set colorType %}{{param.colorTypeName|default:"ColorAsset"}}{% endset %}
 {% set dataType %}{{param.dataTypeName|default:"DataAsset"}}{% endset %}
 {% set imageType %}{{param.imageTypeName|default:"ImageAsset"}}{% endset %}
-{% set colorAlias %}{{param.colorAliasName|default:"AssetColorTypeAlias"}}{% endset %}
-{% set imageAlias %}{{param.imageAliasName|default:"AssetImageTypeAlias"}}{% endset %}
 {% set forceNamespaces %}{{param.forceProvidesNamespaces|default:"false"}}{% endset %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 #if os(macOS)
   import AppKit
-  {{accessModifier}} typealias {{colorAlias}} = NSColor
-  {{accessModifier}} typealias {{imageAlias}} = NSImage
 #elseif os(iOS)
   import ARKit
   import UIKit
-  {{accessModifier}} typealias {{colorAlias}} = UIColor
-  {{accessModifier}} typealias {{imageAlias}} = UIImage
 #elseif os(tvOS) || os(watchOS)
   import UIKit
-  {{accessModifier}} typealias {{colorAlias}} = UIColor
-  {{accessModifier}} typealias {{imageAlias}} = UIImage
 #endif
+
+// Deprecated typealiases
+@available(*, deprecated, renamed: "{{colorType}}.Color", message: "This typealias will be removed in SwiftGen 7.0")
+{{accessModifier}} typealias {{param.colorAliasName|default:"AssetColorTypeAlias"}} = {{colorType}}.Color
+@available(*, deprecated, renamed: "{{imageType}}.Image", message: "This typealias will be removed in SwiftGen 7.0")
+{{accessModifier}} typealias {{param.imageAliasName|default:"AssetImageTypeAlias"}} = {{imageType}}.Image
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -136,15 +134,21 @@
 {{accessModifier}} final class {{colorType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
+  #if os(macOS)
+  {{accessModifier}} typealias Color = NSColor
+  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  {{accessModifier}} typealias Color = UIColor
+  #endif
+
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
-  {{accessModifier}} private(set) lazy var color: {{colorAlias}} = {{colorAlias}}(asset: self)
+  {{accessModifier}} private(set) lazy var color: Color = Color(asset: self)
 
   fileprivate init(name: String) {
     self.name = name
   }
 }
 
-{{accessModifier}} extension {{colorAlias}} {
+{{accessModifier}} extension {{colorType}}.Color {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
   convenience init!(asset: {{colorType}}) {
     let bundle = Bundle(for: BundleToken.self)
@@ -186,21 +190,27 @@
 {{accessModifier}} struct {{imageType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
-  {{accessModifier}} var image: {{imageAlias}} {
+  #if os(macOS)
+  {{accessModifier}} typealias Image = NSImage
+  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  {{accessModifier}} typealias Image = UIImage
+  #endif
+
+  {{accessModifier}} var image: Image {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
-    let image = {{imageAlias}}(named: name, in: bundle, compatibleWith: nil)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
     let image = bundle.image(forResource: NSImage.Name(name))
     #elseif os(watchOS)
-    let image = {{imageAlias}}(named: name)
+    let image = Image(named: name)
     #endif
     guard let result = image else { fatalError("Unable to load image named \(name).") }
     return result
   }
 }
 
-{{accessModifier}} extension {{imageAlias}} {
+{{accessModifier}} extension {{imageType}}.Image {
   @available(macOS, deprecated,
     message: "This initializer is unsafe on macOS, please use the {{imageType}}.image property")
   convenience init!(asset: {{imageType}}) {
