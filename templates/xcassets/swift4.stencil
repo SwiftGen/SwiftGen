@@ -3,6 +3,7 @@
 
 {% if catalogs %}
 {% set enumName %}{{param.enumName|default:"Asset"}}{% endset %}
+{% set arResourceGroupType %}{{param.arResourceGroupTypeName|default:"ARResourceGroupAsset"}}{% endset %}
 {% set colorType %}{{param.colorTypeName|default:"ColorAsset"}}{% endset %}
 {% set dataType %}{{param.dataTypeName|default:"DataAsset"}}{% endset %}
 {% set imageType %}{{param.imageTypeName|default:"ImageAsset"}}{% endset %}
@@ -11,11 +12,16 @@
 {% set forceNamespaces %}{{param.forceProvidesNamespaces|default:"false"}}{% endset %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 #if os(macOS)
-  import AppKit.NSImage
+  import AppKit
   {{accessModifier}} typealias {{colorAlias}} = NSColor
   {{accessModifier}} typealias {{imageAlias}} = NSImage
-#elseif os(iOS) || os(tvOS) || os(watchOS)
-  import UIKit.UIImage
+#elseif os(iOS)
+  import ARKit
+  import UIKit
+  {{accessModifier}} typealias {{colorAlias}} = UIColor
+  {{accessModifier}} typealias {{imageAlias}} = UIImage
+#elseif os(tvOS) || os(watchOS)
+  import UIKit
   {{accessModifier}} typealias {{colorAlias}} = UIColor
   {{accessModifier}} typealias {{imageAlias}} = UIImage
 #endif
@@ -30,6 +36,9 @@
   {% if param.allValues %}
 
   // swiftlint:disable trailing_comma
+  {{accessModifier}} static let allResourceGroups: [{{arResourceGroupType}}] = [
+    {% filter indent:2 %}{% call allValuesBlock assets "arresourcegroup" "" %}{% endfilter %}
+  ]
   {{accessModifier}} static let allColors: [{{colorType}}] = [
     {% filter indent:2 %}{% call allValuesBlock assets "color" "" %}{% endfilter %}
   ]
@@ -44,7 +53,9 @@
 {% endmacro %}
 {% macro casesBlock assets %}
   {% for asset in assets %}
-  {% if asset.type == "color" %}
+  {% if asset.type == "arresourcegroup" %}
+  {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{arResourceGroupType}}(name: "{{asset.value}}")
+  {% elif asset.type == "color" %}
   {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{colorType}}(name: "{{asset.value}}")
   {% elif asset.type == "data" %}
   {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{dataType}}(name: "{{asset.value}}")
@@ -87,6 +98,40 @@
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
+
+{{accessModifier}} struct {{arResourceGroupType}} {
+  {{accessModifier}} fileprivate(set) var name: String
+
+  #if os(iOS)
+  @available(iOS 11.3, *)
+  {{accessModifier}} var referenceImages: Set<ARReferenceImage> {
+    return ARReferenceImage.referenceImages(in: self)
+  }
+
+  @available(iOS 12.0, *)
+  {{accessModifier}} var referenceObjects: Set<ARReferenceObject> {
+    return ARReferenceObject.referenceObjects(in: self)
+  }
+  #endif
+}
+
+#if os(iOS)
+@available(iOS 11.3, *)
+{{accessModifier}} extension ARReferenceImage {
+  static func referenceImages(in asset: {{arResourceGroupType}}) -> Set<ARReferenceImage> {
+    let bundle = Bundle(for: BundleToken.self)
+    return referenceImages(inGroupNamed: asset.name, bundle: bundle) ?? Set()
+  }
+}
+
+@available(iOS 12.0, *)
+{{accessModifier}} extension ARReferenceObject {
+  static func referenceObjects(in asset: {{arResourceGroupType}}) -> Set<ARReferenceObject> {
+    let bundle = Bundle(for: BundleToken.self)
+    return referenceObjects(inGroupNamed: asset.name, bundle: bundle) ?? Set()
+  }
+}
+#endif
 
 {{accessModifier}} final class {{colorType}} {
   {{accessModifier}} fileprivate(set) var name: String
