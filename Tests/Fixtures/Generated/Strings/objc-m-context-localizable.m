@@ -23,19 +23,26 @@ NSString* tr(NSString* key, ...) {
 + (NSString*)alertTitle {
     return tr(@"alert_title"); // Title of the alert
 }
-+ (NSString*)objectOwnership:(NSInteger)p1 p1:(NSString*)p2 p2:(NSString*)p3
++ (NSString*)objectOwnership:(NSInteger)p1 and:(NSString*)p2 and:(NSString*)p3
 {
     return tr(@"ObjectOwnership", p1, p2, p3); // These are %3$@'s %1$d %2$@.
 }
-+ (NSString*)private:(NSString*)p1 p1:(NSInteger)p2
++ (NSString*)percent {
+    return tr(@"percent"); // This is a %% character.
+}
++ (NSString*)private:(NSString*)p1 and:(NSInteger)p2
 {
     return tr(@"private", p1, p2); // Hello, my name is %@ and I'm %d
+}
++ (NSString*)types:(NSString*)p1 and:(char)p2 and:(NSInteger)p3 and:(float)p4 and:(char*)p5 and:(void*)p6
+{
+    return tr(@"types", p1, p2, p3, p4, p5, p6); // Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString: '%s', Pointer: '%p'
 }
 + (NSString*)applesCount:(NSInteger)p1
 {
     return tr(@"apples.count", p1); // You have %d apples
 }
-+ (NSString*)bananasOwner:(NSInteger)p1 p1:(NSString*)p2
++ (NSString*)bananasOwner:(NSInteger)p1 and:(NSString*)p2
 {
     return tr(@"bananas.owner", p1, p2); // Those %d bananas belong to %@.
 }

@@ -28,14 +28,20 @@ NSString* tr(NSString* key, ...) {
   {% endfor %}
 {% endfilter %}{% endmacro %}
 {% macro paramTranslate swiftType %}
-  {% if swiftType == "Int" %}
+  {% if swiftType == "Float" %}
+    float
+  {% elif swiftType == "Int" %}
     NSInteger
+  {% elif swiftType == "CChar" %}
+    char
   {% elif swiftType == "String" %}
     NSString*
-  {% elif swiftType == "Float" %}
-    float
+  {% elif swiftType == "UnsafePointer<CChar>" %}
+    char*
+  {% elif swiftType == "UnsafeRawPointer" %}
+    void*
   {% else %}
-    FIX_OBJC_STRING_M_DOT_STENCIL_PLEASE
+    objc-m.stencil is missing '{{swiftType}}'
   {% endif %}
 {% endmacro %}
 {% macro recursiveTableContents table item sp %}

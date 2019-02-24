@@ -34,11 +34,9 @@ class StringsTests: XCTestCase {
     return [
       (context: context,
        suffix: ""),
-      (context: try StencilContext.enrich(context: context,
-                                          parameters: ["enumName=XCTLoc"]),
+      (context: try StencilContext.enrich(context: context, parameters: ["enumName=XCTLoc"]),
        suffix: "-customname"),
-      (context: try StencilContext.enrich(context: context,
-                                          parameters: ["noComments"]),
+      (context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
        suffix: "-no-comments")
     ]
   }
@@ -80,16 +78,20 @@ class StringsTests: XCTestCase {
   }
 
   func testObjectiveCHeader() {
-    test(template: "objc-h",
-         contextNames: Contexts.all,
-         directory: .strings,
-         contextVariations: variationsObjC)
+    test(
+      template: "objc-h",
+      contextNames: Contexts.all,
+      directory: .strings,
+      contextVariations: variationsObjC
+    )
   }
 
   func testObjectiveCSource() {
-    test(template: "objc-m",
-         contextNames: Contexts.all,
-         directory: .strings,
-         contextVariations: variationsObjC)
+    test(
+      template: "objc-m",
+      contextNames: Contexts.all,
+      directory: .strings,
+      contextVariations: variationsObjC
+    )
   }
 }

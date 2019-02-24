@@ -17,14 +17,20 @@ NS_ASSUME_NONNULL_BEGIN
   {% endfor %}
 {% endfilter %}{% endmacro %}
 {% macro paramTranslate swiftType %}
-  {% if swiftType == "Int" %}
+  {% if swiftType == "Float" %}
+    float
+  {% elif swiftType == "Int" %}
     NSInteger
+  {% elif swiftType == "CChar" %}
+    char
   {% elif swiftType == "String" %}
     NSString*
-  {% elif swiftType == "Float" %}
-    float
- {% else %}
-    FIX_OBJC_STRING_H_DOT_STENCIL_PLEASE
+  {% elif swiftType == "UnsafePointer<CChar>" %}
+    char*
+  {% elif swiftType == "UnsafeRawPointer" %}
+    void*
+  {% else %}
+    objc-h.stencil is missing '{{swiftType}}'
   {% endif %}
 {% endmacro %}
 {% macro recursiveBlock table item sp %}
