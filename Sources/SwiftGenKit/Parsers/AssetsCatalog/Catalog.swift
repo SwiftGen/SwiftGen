@@ -10,7 +10,7 @@ import PathKit
 extension AssetsCatalog {
   struct Catalog {
     let name: String
-    let entries: [Entry]
+    let entries: [AssetsCatalogEntry]
   }
 }
 
@@ -25,9 +25,9 @@ extension AssetsCatalog.Catalog {
   /**
    This method recursively parses a directory structure, processing each folder (files are ignored).
    */
-  static func process(folder: Path, withPrefix prefix: String = "") -> [AssetsCatalog.Entry] {
+  static func process(folder: Path, withPrefix prefix: String = "") -> [AssetsCatalogEntry] {
     return (try? folder.children().sorted(by: <).compactMap {
-      AssetsCatalog.Entry(path: $0, withPrefix: prefix)
+      AssetsCatalog.Entry.parse(path: $0, withPrefix: prefix)
     }) ?? []
   }
 }

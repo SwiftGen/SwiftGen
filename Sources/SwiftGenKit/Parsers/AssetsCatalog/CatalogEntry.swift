@@ -7,13 +7,25 @@
 import Foundation
 import PathKit
 
+protocol AssetsCatalogEntry {
+  var name: String { get }
+
+  // Used for converting to stencil context
+  var asDictionary: [String: Any] { get }
+}
+
 extension AssetsCatalog {
   enum Entry {
-    case arResourceGroup(name: String, value: String)
-    case color(name: String, value: String)
-    case data(name: String, value: String)
-    case group(name: String, isNamespaced: Bool, items: [Entry])
-    case image(name: String, value: String)
+    struct EntryWithValue: AssetsCatalogEntry {
+      let name: String
+      let value: String
+      let type: String
+    }
+    struct Group: AssetsCatalogEntry {
+      let name: String
+      let isNamespaced: Bool
+      let items: [AssetsCatalogEntry]
+    }
   }
 }
 
@@ -33,7 +45,7 @@ private enum Constants {
    * Use as reference:
    * https://developer.apple.com/library/content/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format
    */
-  enum Item: String {
+  enum Item: String, CaseIterable {
     case arResourceGroup = "arresourcegroup"
     case colorSet = "colorset"
     case dataSet = "dataset"
@@ -61,42 +73,55 @@ extension AssetsCatalog.Entry {
    - Parameter prefix: The prefix to prepend values with (from namespaced groups).
    - Returns: An array of processed Entry items (a catalog).
    */
-  init?(path: Path, withPrefix prefix: String) {
+  static func parse(path: Path, withPrefix prefix: String) -> AssetsCatalogEntry? {
     guard path.isDirectory else { return nil }
     let type = path.extension ?? ""
 
-    switch Constants.Item(rawValue: type) {
-    case .arResourceGroup?:
-      let name = path.lastComponentWithoutExtension
-      self = .arResourceGroup(name: name, value: "\(prefix)\(name)")
-    case .colorSet?:
-      let name = path.lastComponentWithoutExtension
-      self = .color(name: name, value: "\(prefix)\(name)")
-    case .dataSet?:
-      let name = path.lastComponentWithoutExtension
-      self = .data(name: name, value: "\(prefix)\(name)")
-    case .imageSet?:
-      let name = path.lastComponentWithoutExtension
-      self = .image(name: name, value: "\(prefix)\(name)")
-    case nil:
-      guard type.isEmpty else { return nil }
+    if let item = Constants.Item(rawValue: type) {
+      return AssetsCatalog.Entry.EntryWithValue(path: path, item: item, withPrefix: prefix)
+    } else if type.isEmpty {
+      // this is a group, they can't have any '.' in their name
       let filename = path.lastComponent
       let isNamespaced = AssetsCatalog.Entry.isNamespaced(path: path)
       let subPrefix = isNamespaced ? "\(prefix)\(filename)/" : prefix
 
-      self = .group(
+      return AssetsCatalog.Entry.Group(
         name: filename,
         isNamespaced: isNamespaced,
         items: AssetsCatalog.Catalog.process(folder: path, withPrefix: subPrefix)
       )
+    } else {
+      // Unknown extension
+      return nil
     }
   }
 }
 
 // MARK: - Private Helpers
 
+extension AssetsCatalog.Entry.EntryWithValue {
+  fileprivate init(path: Path, item: Constants.Item, withPrefix prefix: String) {
+    name = path.lastComponentWithoutExtension
+    value = "\(prefix)\(name)"
+    type = AssetsCatalog.Entry.EntryWithValue.type(for: item)
+  }
+
+  private static func type(for item: Constants.Item) -> String {
+    switch item {
+    case .arResourceGroup:
+      return "arresourcegroup"
+    case .colorSet:
+      return "color"
+    case .dataSet:
+      return "data"
+    case .imageSet:
+      return "image"
+    }
+  }
+}
+
 extension AssetsCatalog.Entry {
-  private static func isNamespaced(path: Path) -> Bool {
+  fileprivate static func isNamespaced(path: Path) -> Bool {
     let metadata = self.metadata(for: path)
 
     if let properties = metadata[Constants.properties] as? [String: Any],
