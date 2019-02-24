@@ -18,3 +18,5 @@ catalogs:
     type: "data"
     value: "README"
   name: "Files"
+resourceCount:
+  data: 3

@@ -16,6 +16,14 @@ class AssetCatalogTests: XCTestCase {
     XCTDiffContexts(result, expected: "empty", sub: .xcassets)
   }
 
+  func testARResourceGroups() throws {
+    let parser = try AssetsCatalog.Parser()
+    try parser.searchAndParse(path: Fixtures.path(for: "Targets.xcassets", sub: .xcassets))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "targets", sub: .xcassets)
+  }
+
   func testColors() throws {
     let parser = try AssetsCatalog.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Styles.xcassets", sub: .xcassets))
@@ -42,7 +50,7 @@ class AssetCatalogTests: XCTestCase {
 
   func testAll() throws {
     let parser = try AssetsCatalog.Parser()
-    let paths = ["Files.xcassets", "Food.xcassets", "Styles.xcassets"]
+    let paths = ["Files.xcassets", "Food.xcassets", "Styles.xcassets", "Targets.xcassets", "Other.xcassets"]
     try parser.searchAndParse(paths: paths.map { Fixtures.path(for: $0, sub: .xcassets) })
 
     let result = parser.stencilContext()

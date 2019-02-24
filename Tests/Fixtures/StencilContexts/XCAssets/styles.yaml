@@ -24,3 +24,6 @@ catalogs:
     name: "Vengo"
     type: "group"
   name: "Styles"
+resourceCount:
+  color: 4
+  image: 1
