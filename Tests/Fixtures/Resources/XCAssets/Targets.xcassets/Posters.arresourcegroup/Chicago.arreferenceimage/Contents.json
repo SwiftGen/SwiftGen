@@ -1,14 +1,12 @@
 {
   "images" : [
-    {
-      "idiom" : "universal"
-    }
+
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
   },
   "properties" : {
-    "width" : 0
+    "width" : 100
   }
 }

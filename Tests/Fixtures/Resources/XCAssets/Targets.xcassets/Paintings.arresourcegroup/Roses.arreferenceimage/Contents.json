@@ -1,7 +1,8 @@
 {
   "images" : [
     {
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "filename" : "roses-background-vintage-wallpaper.jpg"
     }
   ],
   "info" : {
@@ -9,6 +10,6 @@
     "author" : "xcode"
   },
   "properties" : {
-    "width" : 0
+    "width" : 5
   }
 }
