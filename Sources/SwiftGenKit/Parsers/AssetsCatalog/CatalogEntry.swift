@@ -9,6 +9,7 @@ import PathKit
 
 extension AssetsCatalog {
   enum Entry {
+    case arResourceGroup(name: String, value: String)
     case color(name: String, value: String)
     case data(name: String, value: String)
     case group(name: String, isNamespaced: Bool, items: [Entry])
@@ -33,6 +34,7 @@ private enum Constants {
    * https://developer.apple.com/library/content/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format
    */
   enum Item: String {
+    case arResourceGroup = "arresourcegroup"
     case colorSet = "colorset"
     case dataSet = "dataset"
     case imageSet = "imageset"
@@ -42,6 +44,7 @@ private enum Constants {
 extension AssetsCatalog.Entry {
   /**
    Each node in an asset catalog is either (there are more types, but we ignore those):
+     - An AR resource group, which can contain both AR reference images and objects.
      - A colorset, which is essentially a group containing a list of colors (the latter is ignored).
      - A dataset, which is essentially a group containing a list of files (the latter is ignored).
      - An imageset, which is essentially a group containing a list of files (the latter is ignored).
@@ -63,6 +66,9 @@ extension AssetsCatalog.Entry {
     let type = path.extension ?? ""
 
     switch Constants.Item(rawValue: type) {
+    case .arResourceGroup?:
+      let name = path.lastComponentWithoutExtension
+      self = .arResourceGroup(name: name, value: "\(prefix)\(name)")
     case .colorSet?:
       let name = path.lastComponentWithoutExtension
       self = .color(name: name, value: "\(prefix)\(name)")

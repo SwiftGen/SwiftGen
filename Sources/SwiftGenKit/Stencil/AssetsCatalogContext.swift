@@ -31,6 +31,12 @@ extension AssetsCatalog.Parser {
     // swiftlint:disable:next closure_body_length
     return entries.map { entry in
       switch entry {
+      case .arResourceGroup(let name, let value):
+        return [
+          "type": "arresourcegroup",
+          "name": name,
+          "value": value
+        ]
       case .color(let name, let value):
         return [
           "type": "color",
