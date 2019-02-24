@@ -35,7 +35,7 @@
 
 ### Bug Fixes
 
-* Assets: improved the performance for color assets by caching the resolved colors.  
+* XCAssets: improved the performance for color assets by caching the resolved colors.  
   [David Jennes](https://github.com/djbe)
   [#578](https://github.com/SwiftGen/SwiftGen/issue/578)
   [#589](https://github.com/SwiftGen/SwiftGen/pull/589)
@@ -55,6 +55,9 @@
   [David Jennes](https://github.com/djbe)
   [#365](https://github.com/SwiftGen/SwiftGen/issues/365)
   [#599](https://github.com/SwiftGen/SwiftGen/pull/599)
+* XCAssets: renamed the catalogs we use for sample code & testing to avoid some confusion.  
+  [David Jennes](https://github.com/djbe)
+  [#613](https://github.com/SwiftGen/SwiftGen/pull/613)
 
 ## 6.1.0
 

@@ -18,25 +18,14 @@
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum XCTAssets {
-  internal enum Colors {
-    internal enum _24Vision {
-      internal static let background = XCTColorAsset(name: "24Vision/Background")
-      internal static let primary = XCTColorAsset(name: "24Vision/Primary")
-    }
-    internal static let orange = XCTImageAsset(name: "Orange")
-    internal enum Vengo {
-      internal static let primary = XCTColorAsset(name: "Vengo/Primary")
-      internal static let tint = XCTColorAsset(name: "Vengo/Tint")
-    }
-  }
-  internal enum Data {
+  internal enum Files {
     internal static let data = XCTDataAsset(name: "Data")
     internal enum Json {
       internal static let data = XCTDataAsset(name: "Json/Data")
     }
     internal static let readme = XCTDataAsset(name: "README")
   }
-  internal enum Images {
+  internal enum Food {
     internal enum Exotic {
       internal static let banana = XCTImageAsset(name: "Exotic/Banana")
       internal static let mango = XCTImageAsset(name: "Exotic/Mango")
@@ -50,6 +39,17 @@ internal enum XCTAssets {
       internal static let tomato = XCTImageAsset(name: "Round/Tomato")
     }
     internal static let `private` = XCTImageAsset(name: "private")
+  }
+  internal enum Styles {
+    internal enum _24Vision {
+      internal static let background = XCTColorAsset(name: "24Vision/Background")
+      internal static let primary = XCTColorAsset(name: "24Vision/Primary")
+    }
+    internal static let orange = XCTImageAsset(name: "Orange")
+    internal enum Vengo {
+      internal static let primary = XCTColorAsset(name: "Vengo/Primary")
+      internal static let tint = XCTColorAsset(name: "Vengo/Tint")
+    }
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

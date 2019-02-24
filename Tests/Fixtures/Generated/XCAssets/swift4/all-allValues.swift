@@ -18,31 +18,7 @@
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
-  internal enum Colors {
-    internal enum _24Vision {
-      internal static let background = ColorAsset(name: "24Vision/Background")
-      internal static let primary = ColorAsset(name: "24Vision/Primary")
-    }
-    internal static let orange = ImageAsset(name: "Orange")
-    internal enum Vengo {
-      internal static let primary = ColorAsset(name: "Vengo/Primary")
-      internal static let tint = ColorAsset(name: "Vengo/Tint")
-    }
-    // swiftlint:disable trailing_comma
-    internal static let allColors: [ColorAsset] = [
-      _24Vision.background,
-      _24Vision.primary,
-      Vengo.primary,
-      Vengo.tint,
-    ]
-    internal static let allDataAssets: [DataAsset] = [
-    ]
-    internal static let allImages: [ImageAsset] = [
-      orange,
-    ]
-    // swiftlint:enable trailing_comma
-  }
-  internal enum Data {
+  internal enum Files {
     internal static let data = DataAsset(name: "Data")
     internal enum Json {
       internal static let data = DataAsset(name: "Json/Data")
@@ -60,7 +36,7 @@ internal enum Asset {
     ]
     // swiftlint:enable trailing_comma
   }
-  internal enum Images {
+  internal enum Food {
     internal enum Exotic {
       internal static let banana = ImageAsset(name: "Exotic/Banana")
       internal static let mango = ImageAsset(name: "Exotic/Mango")
@@ -87,6 +63,30 @@ internal enum Asset {
       Round.Double.cherry,
       Round.tomato,
       `private`,
+    ]
+    // swiftlint:enable trailing_comma
+  }
+  internal enum Styles {
+    internal enum _24Vision {
+      internal static let background = ColorAsset(name: "24Vision/Background")
+      internal static let primary = ColorAsset(name: "24Vision/Primary")
+    }
+    internal static let orange = ImageAsset(name: "Orange")
+    internal enum Vengo {
+      internal static let primary = ColorAsset(name: "Vengo/Primary")
+      internal static let tint = ColorAsset(name: "Vengo/Tint")
+    }
+    // swiftlint:disable trailing_comma
+    internal static let allColors: [ColorAsset] = [
+      _24Vision.background,
+      _24Vision.primary,
+      Vengo.primary,
+      Vengo.tint,
+    ]
+    internal static let allDataAssets: [DataAsset] = [
+    ]
+    internal static let allImages: [ImageAsset] = [
+      orange,
     ]
     // swiftlint:enable trailing_comma
   }

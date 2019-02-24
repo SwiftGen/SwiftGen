@@ -17,4 +17,4 @@ catalogs:
   - name: "README"
     type: "data"
     value: "README"
-  name: "Data"
+  name: "Files"

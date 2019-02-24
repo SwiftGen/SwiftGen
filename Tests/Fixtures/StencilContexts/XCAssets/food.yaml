@@ -41,4 +41,4 @@ catalogs:
   - name: "private"
     type: "image"
     value: "private"
-  name: "Images"
+  name: "Food"
