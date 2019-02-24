@@ -23,12 +23,29 @@ extension AssetsCatalog.Parser {
       }
 
     return [
-      "catalogs": catalogs
+      "catalogs": catalogs,
+      "resourceCount": AssetsCatalog.Parser.countTypes(catalogs: self.catalogs)
     ]
   }
 
   fileprivate static func structure(entries: [AssetsCatalogEntry]) -> [[String: Any]] {
     return entries.map { $0.asDictionary }
+  }
+
+  private static func countTypes(catalogs: [AssetsCatalog.Catalog]) -> [String: Int] {
+    var result: [String: Int] = [:]
+    countTypes(entries: catalogs.flatMap { $0.entries }, into: &result)
+    return result
+  }
+
+  private static func countTypes(entries: [AssetsCatalogEntry], into result: inout [String: Int]) {
+    for entry in entries {
+      if let entry = entry as? AssetsCatalog.Entry.EntryWithValue {
+        result[entry.type, default: 0] += 1
+      } else if let group = entry as? AssetsCatalog.Entry.Group {
+        AssetsCatalog.Parser.countTypes(entries: group.items, into: &result)
+      }
+    }
   }
 }
 
