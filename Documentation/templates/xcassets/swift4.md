@@ -22,6 +22,7 @@ You can customize some elements of this template by overriding the following par
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
 | `enumName` | `Asset` | Allows you to change the name of the generated `enum` containing all assets. |
+| `arResourceGroupTypeName` | `ARResourceGroupAsset` | Allows you to change the name of the struct type representing an AR resource group. |
 | `colorTypeName` | `ColorAsset` | Allows you to change the name of the struct type representing a color. |
 | `dataTypeName` | `DataAsset` | Allows you to change the name of the struct type representing a data asset. |
 | `imageTypeName` | `ImageAsset` | Allows you to change the name of the struct type representing an image. |
@@ -37,18 +38,26 @@ You can customize some elements of this template by overriding the following par
 
 ```swift
 enum Asset {
-  enum Docs {
-  	static let readme = DataAsset(value: "Readme")
+  enum Files {
+    static let data = DataAsset(value: "Data")
+    static let readme = DataAsset(value: "README")
   }
-  enum Exotic {
-    static let banana = ImageAsset(value: "Exotic/Banana")
-    static let mango = ImageAsset(value: "Exotic/Mango")
+  enum Food {
+    enum Exotic {
+      static let banana = ImageAsset(value: "Exotic/Banana")
+      static let mango = ImageAsset(value: "Exotic/Mango")
+    }
+    static let `private` = ImageAsset(value: "private")
   }
-  static let json = DataAsset(value: "JSON")
-  static let `private` = ImageAsset(value: "private")
-  enum Theme {
-  	static let primary = ColorAsset(value: "Theme/Primary")
-  	static let background = ColorAsset(value: "Theme/Background")
+  enum Styles {
+    enum Vengo {
+      static let primary = ColorAsset(value: "Vengo/Primary")
+      static let tint = ColorAsset(value: "Vengo/Tint")
+    }
+  }
+  enum Targets {
+    internal static let bottles = ARResourceGroupAsset(name: "Bottles")
+    internal static let paintings = ARResourceGroupAsset(name: "Paintings")
   }
 }
 ```
@@ -60,25 +69,25 @@ enum Asset {
 ```swift
 // You can create new images by referring to the enum instance and calling `.image` on it:
 let bananaImage = Asset.Exotic.banana.image
-let privateImage = Asset.private.image
-
-// Or as an alternative, you use the convenience constructor like this:
 let sameBananaImage = UIImage(asset: Asset.Exotic.banana)
+let privateImage = Asset.private.image
 let samePrivateImage = UIImage(asset: Asset.private)
 
-// You can create data items by referring to the enum instance and calling `.data` on it:
-let json = Asset.json.data
-let readme = Asset.Docs.readme.data
-
-// Or as an alternative, you use the convenience constructor like this:
-let sameJson = NSDataAsset(asset: Asset.json)
-let sameReadme = NSDataAsset(asset: Asset.Docs.readme)
-
 // You can create colors by referring to the enum instance and calling `.color` on it:
-let primaryColor = Asset.Theme.primary.color
-let backgroundColor = Asset.Theme.background.color
+let primaryColor = Asset.Styles.Vengo.primary.color
+let samePrimaryColor = UIColor(asset: Asset.Styles.Vengo.primary)
+let tintColor = Asset.Styles.Vengo.tint.color
+let sameTintColor = UIColor(asset: Asset.Styles.Vengo.tint)
 
-// Or as an alternative, you use the convenience constructor like this:
-let samePrimaryColor = UIColor(asset: Asset.Theme.primary)
-let sameBackgroundColor = UIColor(asset: Asset.Theme.background)
+// You can create data items by referring to the enum instance and calling `.data` on it:
+let data = Asset.data.data
+let sameData = NSDataAsset(asset: Asset.data)
+let readme = Asset.readme.data
+let sameReadme = NSDataAsset(asset: Asset.readme)
+
+// you can load an AR resource group's items using:
+let bottles = Asset.Targets.bottles.referenceObjects
+let sameBottles = ARReferenceImage.referenceImages(in: Asset.Targets.bottles)
+let paintings = Asset.Targets.paintings.referenceImages
+let samePosters = ARReferenceObject.referenceObjects(in: Asset.Targets.paintings)
 ```

@@ -303,26 +303,49 @@ This will generate an `enum Asset` with one `static let` per asset (image set, c
 
 ```swift
 enum Asset {
-  enum Exotic {
-    static let banana: AssetType = "Exotic/Banana"
-    static let mango: AssetType = "Exotic/Mango"
+  enum Files {
+    static let data = DataAsset(value: "Data")
+    static let readme = DataAsset(value: "README")
   }
-  static let `private`: AssetType = "private"
+  enum Food {
+    enum Exotic {
+      static let banana = ImageAsset(value: "Exotic/Banana")
+      static let mango = ImageAsset(value: "Exotic/Mango")
+    }
+    static let `private` = ImageAsset(value: "private")
+  }
+  enum Styles {
+    enum Vengo {
+      static let primary = ColorAsset(value: "Vengo/Primary")
+      static let tint = ColorAsset(value: "Vengo/Tint")
+    }
+  }
+  enum Targets {
+    internal static let bottles = ARResourceGroupAsset(name: "Bottles")
+    internal static let paintings = ARResourceGroupAsset(name: "Paintings")
+  }
 }
-
 ```
 </details>
 
 ### Usage Example
 
 ```swift
-// You can create new images with the convenience constructor like this:
-let bananaImage = UIImage(asset: Asset.Exotic.banana)  // iOS
-let privateImage = NSImage(asset: Asset.private)  // macOS
+// You can create new images by referring to the enum instance and calling `.image` on it:
+let bananaImage = Asset.Exotic.banana.image
+let privateImage = Asset.private.image
 
-// Or as an alternative, you can refer to enum instance and call .image on it:
-let sameBananaImage = Asset.Exotic.banana.image
-let samePrivateImage = Asset.private.image
+// You can create colors by referring to the enum instance and calling `.color` on it:
+let primaryColor = Asset.Styles.Vengo.primary.color
+let tintColor = Asset.Styles.Vengo.tint.color
+
+// You can create data items by referring to the enum instance and calling `.data` on it:
+let data = Asset.data.data
+let readme = Asset.readme.data
+
+// you can load an AR resource group's items using:
+let bottles = Asset.Targets.bottles.referenceObjects
+let paintings = Asset.Targets.paintings.referenceImages
 ```
 
 ## Colors
