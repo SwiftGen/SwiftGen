@@ -1,5 +1,4 @@
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
-// Template 'objc-string-h' by Eric Slosser
+* // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if tables.count > 0 %}
 @import Foundation;
@@ -36,7 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
 {% macro recursiveBlock table item sp %}
 {% for string in item.strings %}
 {% if string.types %}
-+ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}:{% call parametersBlock string.types %}; {% if not param.noComments %} // {{string.key}} --> "{{string.translation}}"{% endif %}
+{% if not param.noComments %}
+// {{string.key}} --> "{{string.translation}}"
+{% endif %}
++ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}:{% call parametersBlock string.types %};
 {% else %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}};{% if not param.noComments %} // {{string.key}} --> "{{string.translation}}"{% endif %}
 {% endif %}

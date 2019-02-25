@@ -1,5 +1,4 @@
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
-// Template 'objc-string-m' by Eric Slosser
+* // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if tables.count > 0 %}
 
@@ -49,11 +48,11 @@ NSString* tr(NSString* key, ...) {
 {{sp}}  {% if string.types %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}:{% call parametersBlock string.types %}
 {
-    return tr(@"{{string.key}}", {% call argumentsBlock string.types %}); {% if not param.noComments %}// {{string.translation}}{% endif %}
+    return tr(@"{{string.key}}", {% call argumentsBlock string.types %});
 }
 {% else %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}} {
-    return tr(@"{{string.key}}"); {% if not param.noComments %}// {{string.translation}}{% endif %}
+    return tr(@"{{string.key}}");
 }
 {{sp}}  {% endif %}
 {{sp}}  {% endfor %}
