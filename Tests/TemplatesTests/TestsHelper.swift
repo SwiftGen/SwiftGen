@@ -190,7 +190,7 @@ extension XCTestCase {
           }
           return "swift"
         }()
-        let outputFile = "\(templateName)-context-\(contextName)\(suffix).\(outputSuffix)"
+        let outputFile = "\(contextName)\(suffix).\(outputSuffix)"
         if variations.count > 1 { print(" - Variation #\(index)... (expecting: \(outputFile))") }
 
         let result: String

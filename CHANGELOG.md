@@ -331,7 +331,7 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
   [SwiftGen/templates#84](https://github.com/SwiftGen/templates/pull/84)
   [Txai Wieser](https://github.com/txaiwieser)
   [SwiftGen/templates#81](https://github.com/SwiftGen/templates/pull/81)
-* Templates to generate ObjC source for .strings
+* Templates to generate ObjC source for .strings.  
   [Eric Slosser](https://github.com/Mr-Fixit)
   [SwiftGen/SwiftGen#378](https://github.com/SwiftGen/SwiftGen/pull/378)
 
