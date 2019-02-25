@@ -18,10 +18,10 @@ NSString* tr(NSString* key, ...) {
 
 @implementation Localizable : NSObject
 + (NSString*)alertMessage {
-    return tr(@"alert_message"); // Some alert body there
+    return tr(@"alert__message"); // Some alert body there
 }
 + (NSString*)alertTitle {
-    return tr(@"alert_title"); // Title of the alert
+    return tr(@"alert__title"); // Title of the alert
 }
 + (NSString*)objectOwnership:(NSInteger)p1 and:(NSString*)p2 and:(NSString*)p3
 {
@@ -56,34 +56,10 @@ NSString* tr(NSString* key, ...) {
     return tr(@"settings.navigation-bar.title.even.deeper"); // Settings
 }
 + (NSString*)settingsUserProfileSectionFooterText {
-    return tr(@"settings.user_profile_section.footer_text"); // Here you can change some user profile settings.
+    return tr(@"settings.user__profile_section.footer_text"); // Here you can change some user profile settings.
 }
 + (NSString*)settingsUserProfileSectionHEADERTITLE {
-    return tr(@"settings.user_profile_section.HEADER_TITLE"); // User Profile Settings
-}
-@end
-
-@implementation LocMultiline : NSObject
-+ (NSString*)multiline {
-    return tr(@"MULTILINE"); // multi\nline
-}
-+ (NSString*)multiLineNKey {
-    return tr(@"multiLine\nKey"); // test
-}
-+ (NSString*)multiline2 {
-    return tr(@"MULTILINE2"); // another\nmulti\n    line
-}
-+ (NSString*)singleline {
-    return tr(@"SINGLELINE"); // single line
-}
-+ (NSString*)singleline2 {
-    return tr(@"SINGLELINE2"); // another single line
-}
-+ (NSString*)endingWith {
-    return tr(@"ending.with."); // Ceci n'est pas une pipe.
-}
-+ (NSString*)someDotsAndEmptyComponents {
-    return tr(@"..some..dots.and..empty..components.."); // Veni, vidi, vici
+    return tr(@"settings.user__profile_section.HEADER_TITLE"); // User Profile Settings
 }
 @end
 
