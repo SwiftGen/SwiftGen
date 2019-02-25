@@ -10,19 +10,33 @@ import PathKit
 import XCTest
 
 class FontsTests: XCTestCase {
-  func testEmpty() {
-    let parser = Fonts.Parser()
+  func testEmpty() throws {
+    let parser = try Fonts.Parser()
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .fonts)
   }
 
   func testDefaults() throws {
-    let parser = Fonts.Parser()
+    let parser = try Fonts.Parser()
     try parser.searchAndParse(path: Fixtures.directory())
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "defaults", sub: .fonts)
+  }
+
+  // MARK: - Custom options
+
+  func testUnknownOption() throws {
+    do {
+      _ = try Fonts.Parser(options: ["SomeOptionThatDoesntExist": "foo"])
+      XCTFail("Parser successfully created with an invalid option")
+    } catch ParserOptionList.Error.unknownOption(let key, _) {
+      // That's the expected exception we want to happen
+      XCTAssertEqual(key, "SomeOptionThatDoesntExist", "Failed for unexpected option \(key)")
+    } catch let error {
+      XCTFail("Unexpected error occured: \(error)")
+    }
   }
 
   // MARK: - Path relative(to:)

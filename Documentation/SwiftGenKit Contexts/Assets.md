@@ -3,7 +3,7 @@
 ## Input
 
 The assets parser accepts one (or more) asset catalogs, which it'll parse for supported set types and groups. We currently support the following types:
-- Group Type
+- Group Type (folder)
 - Color Set Type (colorset)
 - Data Set Type (dataset)
 - Image Set Type (imageset)
@@ -40,21 +40,6 @@ The output context has the following structure:
 ```yaml
 catalogs:
 - assets:
-  - isNamespaced: "true"
-    items:
-    - name: "Background"
-      type: "color"
-      value: "24Vision/Background"
-    - name: "Primary"
-      type: "color"
-      value: "24Vision/Primary"
-    name: "24Vision"
-    type: "group"
-  - name: "Orange"
-    type: "image"
-    value: "Orange"
-  name: "Colors"
-- assets:
   - name: "Data"
     type: "data"
     value: "Data"
@@ -72,7 +57,7 @@ catalogs:
   - name: "README"
     type: "data"
     value: "README"
-  name: "Data"
+  name: "Files"
 - assets:
   - isNamespaced: "true"
     items:
@@ -91,5 +76,20 @@ catalogs:
       value: "Round/Apricot"
     name: "Round"
     type: "group"
-  name: "Images"
+  name: "Food"
+- assets:
+  - isNamespaced: "true"
+    items:
+    - name: "Background"
+      type: "color"
+      value: "24Vision/Background"
+    - name: "Primary"
+      type: "color"
+      value: "24Vision/Primary"
+    name: "24Vision"
+    type: "group"
+  - name: "Orange"
+    type: "image"
+    value: "Orange"
+  name: "Styles"
 ```

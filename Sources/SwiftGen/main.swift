@@ -19,30 +19,30 @@ let main = Group {
       logMessage(.info, "Note: If you invoke swiftgen with no subcommand, it will default to `swiftgen config run`\n")
       throw GroupError.noCommand(path, group)
     } else {
-      try configRunCommand.run(parser)
+      try ConfigCLI.run.run(parser)
     }
   }
   $0.group("config", "manage and run configuration files") {
-    $0.addCommand("lint", "Lint the configuration file", configLintCommand)
-    $0.addCommand("run", "Run commands listed in the configuration file", configRunCommand)
+    $0.addCommand("lint", "Lint the configuration file", ConfigCLI.lint)
+    $0.addCommand("run", "Run commands listed in the configuration file", ConfigCLI.run)
   }
 
   $0.group("templates", "manage custom templates") {
-    $0.addCommand("list", "list bundled and custom templates", templatesListCommand)
-    $0.addCommand("which", "print path of a given named template", templatesWhichCommand)
-    $0.addCommand("cat", "print content of a given named template", templatesCatCommand)
+    $0.addCommand("list", "list bundled and custom templates", TemplatesCLI.list)
+    $0.addCommand("which", "print path of a given named template", TemplatesCLI.which)
+    $0.addCommand("cat", "print content of a given named template", TemplatesCLI.cat)
   }
 
-  for cmd in allParserCommands {
+  for cmd in ParserCLI.allCommands {
     $0.addCommand(cmd.name, cmd.description, cmd.command())
   }
 }
 
 main.run(
   """
-  SwiftGen v\(version) (\
-  Stencil v\(stencilVersion), \
-  StencilSwiftKit v\(stencilSwiftKitVersion), \
-  SwiftGenKit v\(swiftGenKitVersion))
+  SwiftGen v\(Version.swiftgen) (\
+  Stencil v\(Version.stencil), \
+  StencilSwiftKit v\(Version.stencilSwiftKit), \
+  SwiftGenKit v\(Version.swiftGenKit))
   """
 )

@@ -34,10 +34,14 @@ class Utils
 
   ## [ Convenience Helpers ] ##################################################
 
-  def self.podspec_version(file)
+  def self.podspec_as_json(file)
     file += '.podspec' unless file.include?('.podspec')
     json, _, _ = Open3.capture3('bundle', 'exec', 'pod', 'ipc', 'spec', file)
-    JSON.parse(json)['version']
+    JSON.parse(json)
+  end
+
+  def self.podspec_version(file)
+    self.podspec_as_json(file)['version']
   end
 
   def self.podfile_lock_version(pod)

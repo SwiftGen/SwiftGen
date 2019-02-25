@@ -11,6 +11,7 @@
 
 - When you need to generate *Swift 4* code.
 - Embeds the data from the YAML file directly in your Swift code.
+- **Warning**: Swift 3 is no longer actively supported, so we cannot guarantee that there won't be issues with the generated code.
 
 ## Customization
 
@@ -49,7 +50,7 @@ internal enum YAMLFiles {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/YAML/inline-swift3-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/YAML/inline-swift3/all.swift)
 
 ## Usage example
 

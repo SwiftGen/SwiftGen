@@ -12,6 +12,7 @@
 - When you need to generate *Swift 3* code for your storyboard *scenes*.
 - The generated code supports both UIKit platforms (iOS, tvOS and watchOS) and AppKit platform (macOS).
 - Note: if you also need to generate code for your storyboard segues, you can use [segues-swift3](../segues-swift3.md) in addition to this one.
+- **Warning**: Swift 3 is no longer actively supported, so we cannot guarantee that there won't be issues with the generated code.
 
 ## Customization
 
@@ -47,7 +48,7 @@ enum StoryboardScene {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/IB-iOS/scenes-swift3-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/IB-iOS/scenes-swift3/all.swift)
 
 ## Usage example
 

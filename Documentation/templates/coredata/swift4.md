@@ -19,8 +19,17 @@ You can customize some elements of this template by overriding the following par
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
+| `extraImports`| N/A | With this you can provide additional modules to import, for example if you have properties with types from external modules. |
 | `generateObjcName`| N/A | If set, the generated types will have an `@objc(...)` annotation with their class name. |
 | `publicAccess` | N/A | If set, the generated types will be marked as `public`. Otherwise, they'll be declared `internal`. |
+
+## UserInfo Keys
+
+This template also make use of UserInfo keys that you can set on your Data Model's entities, attributes, relationships and fetched properties:
+
+| Scope | UserInfo Key | Description |
+|-------|--------------|-------------|
+| Attribute | `enumType` | The name of the `enum` to associate to this attribute's type. The `enum` in question is expected to be declared in your code (SwiftGen won't generate it) or in an external module (see the`extraImports` parameter).<br />The `enum` must be `RawRepresentable` (e.g. `enum Foo: Int` or `enum Foo: String`) and its `RawValue` must match the attribute's type in your Data Model. |
 
 ## Generated Code
 
@@ -66,7 +75,7 @@ extension MainEntity {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/CoreData/swift4-context-defaults.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/CoreData/swift4/defaults.swift)
 
 ## Usage example
 

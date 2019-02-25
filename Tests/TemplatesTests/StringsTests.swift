@@ -24,7 +24,12 @@ class StringsTests: XCTestCase {
       (context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
        suffix: "-noComments"),
       (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+       suffix: "-publicAccess"),
+      (context: try StencilContext.enrich(
+        context: context,
+        parameters: ["localizeFunction=XCTLocFunc"]
+       ),
+       suffix: "-localizeFunction")
     ]
   }
 

@@ -5,47 +5,61 @@
 //
 
 import PathKit
-import SwiftGenKit
+@testable import SwiftGenKit
 import XCTest
 
 class AssetCatalogTests: XCTestCase {
-  func testEmpty() {
-    let parser = AssetsCatalog.Parser()
+  func testEmpty() throws {
+    let parser = try AssetsCatalog.Parser()
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "empty", sub: .xcassets)
   }
 
-  func testImages() throws {
-    let parser = AssetsCatalog.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Images.xcassets", sub: .xcassets))
+  func testColors() throws {
+    let parser = try AssetsCatalog.Parser()
+    try parser.searchAndParse(path: Fixtures.path(for: "Styles.xcassets", sub: .xcassets))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "images", sub: .xcassets)
+    XCTDiffContexts(result, expected: "styles", sub: .xcassets)
   }
 
   func testData() throws {
-    let parser = AssetsCatalog.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Data.xcassets", sub: .xcassets))
+    let parser = try AssetsCatalog.Parser()
+    try parser.searchAndParse(path: Fixtures.path(for: "Files.xcassets", sub: .xcassets))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "data", sub: .xcassets)
+    XCTDiffContexts(result, expected: "files", sub: .xcassets)
   }
 
-  func testColors() throws {
-    let parser = AssetsCatalog.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Colors.xcassets", sub: .xcassets))
+  func testImages() throws {
+    let parser = try AssetsCatalog.Parser()
+    try parser.searchAndParse(path: Fixtures.path(for: "Food.xcassets", sub: .xcassets))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "colors", sub: .xcassets)
+    XCTDiffContexts(result, expected: "food", sub: .xcassets)
   }
 
   func testAll() throws {
-    let parser = AssetsCatalog.Parser()
-    let paths = ["Images.xcassets", "Colors.xcassets", "Data.xcassets"]
+    let parser = try AssetsCatalog.Parser()
+    let paths = ["Files.xcassets", "Food.xcassets", "Styles.xcassets"]
     try parser.searchAndParse(paths: paths.map { Fixtures.path(for: $0, sub: .xcassets) })
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "all", sub: .xcassets)
+  }
+
+  // MARK: - Custom options
+
+  func testUnknownOption() throws {
+    do {
+      _ = try AssetsCatalog.Parser(options: ["SomeOptionThatDoesntExist": "foo"])
+      XCTFail("Parser successfully created with an invalid option")
+    } catch ParserOptionList.Error.unknownOption(let key, _) {
+      // That's the expected exception we want to happen
+      XCTAssertEqual(key, "SomeOptionThatDoesntExist", "Failed for unexpected option \(key)")
+    } catch let error {
+      XCTFail("Unexpected error occured: \(error)")
+    }
   }
 }

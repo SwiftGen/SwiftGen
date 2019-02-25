@@ -2,6 +2,64 @@
 
 ---
 
+## Develop
+
+### Breaking Changes
+
+* As Swift 3 is officially no longer maintained, we're deprecating the Swift 3 templates. The templates will remain available until the next major version of SwiftGen, but we can no longer guarantee that there won't be issues with the generated code.  
+  [David Jennes](https://github.com/djbe)
+  [#601](https://github.com/SwiftGen/SwiftGen/pull/601)
+
+### New Features
+
+* Each command now accepts an `options` dictionary, with which you can set internal parser settings to change its behaviour. See the commands' specific documentation for available options.  
+  [David Jennes](https://github.com/djbe)
+  [#587](https://github.com/SwiftGen/SwiftGen/pull/587)
+  [#597](https://github.com/SwiftGen/SwiftGen/pull/597)
+* Strings: the parser now accepts a `separator` option, used to split keys into structured components. The default separator remains `.`. For more information, check the [command's documentation](Documentation/Commands/strings.md#customization).  
+  [David Jennes](https://github.com/djbe)
+  [#576](https://github.com/SwiftGen/SwiftGen/issue/576)
+  [#588](https://github.com/SwiftGen/SwiftGen/pull/588)
+* Core Data: the built-in templates now support an optional `extraImports` parameter. With this you can provide a list of modules to additionally import, for when you have properties with types from external modules. For more information, check the [template's documentation](Documentation/templates/coredata/swift4.md#customization).  
+  [David Jennes](https://github.com/djbe)
+  [#591](https://github.com/SwiftGen/SwiftGen/issue/591)
+  [#592](https://github.com/SwiftGen/SwiftGen/pull/592)
+* Core Data: the built-in templates now support `enum` attributes. They'll check the "User Info" of an attribute for a `enumType` key, which should be set to the enum type name you want to use for that attribute. For more information, check the [template's documentation](Documentation/templates/coredata/swift4.md#userinfo-keys).  
+  [David Jennes](https://github.com/djbe)
+  [#566](https://github.com/SwiftGen/SwiftGen/issue/566)
+  [#593](https://github.com/SwiftGen/SwiftGen/pull/593)
+* Strings: the built-in templates now accept a parameter for customizing the localization function.  
+  [Steven Magdy](https://github.com/StevenMagdy)
+  [426](https://github.com/SwiftGen/SwiftGen/issues/426)
+  [468](https://github.com/SwiftGen/SwiftGen/issues/468)
+  [573](https://github.com/SwiftGen/SwiftGen/pull/573)
+
+### Bug Fixes
+
+* XCAssets: improved the performance for color assets by caching the resolved colors.  
+  [David Jennes](https://github.com/djbe)
+  [#578](https://github.com/SwiftGen/SwiftGen/issue/578)
+  [#589](https://github.com/SwiftGen/SwiftGen/pull/589)
+* Core Data: `entityName` is now correctly a `class var` instead of a `class func`.  
+  [David Jennes](https://github.com/djbe)
+  [#590](https://github.com/SwiftGen/SwiftGen/pull/590)
+
+### Internal Changes
+
+* Refactoring: Reduce globals & rearrange CLI code.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#586](https://github.com/SwiftGen/SwiftGen/pull/586)
+* Moved generated test output files into subdirectories per template.  
+  [David Jennes](https://github.com/djbe)
+  [#598](https://github.com/SwiftGen/SwiftGen/pull/598)
+* Compile generated output using configuration files for easier management.  
+  [David Jennes](https://github.com/djbe)
+  [#365](https://github.com/SwiftGen/SwiftGen/issues/365)
+  [#599](https://github.com/SwiftGen/SwiftGen/pull/599)
+* XCAssets: renamed the catalogs we use for sample code & testing to avoid some confusion.  
+  [David Jennes](https://github.com/djbe)
+  [#613](https://github.com/SwiftGen/SwiftGen/pull/613)
+
 ## 6.1.0
 
 ### Changes in core dependencies of SwiftGen

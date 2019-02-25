@@ -48,16 +48,16 @@ Note: Those script phase examples above all assume that you're [using a `swiftge
 
 When adding SwiftGen as a build phase in your project, if instead of using a Config file you invoked subcommands from the command line, then sometimes builds can cancel because Xcode doesn't like source code changes happening mid-build. It can also cause issues with `IBDesignable` views triggering looping builds when opening storyboards.
 
-To avoid this, we highly recommand using a `swiftgen.yml` configuration file instead of invoking the subcommands directly from the command line, or if you still want to invoke subcommands from the command line, be sure to use `--output` to specify the output file to write (instead of a `> output-file.swift` redirection for example). Doing this allows SwiftGen to avoid re-writing the file to disk if the content is not modified.
+To avoid this, **we highly recommand using a `swiftgen.yml` configuration file instead of invoking the subcommands directly from the command line**. But if you still want to invoke subcommands from the command line, be sure to use `--output` to specify the output file to write (instead of a `> output-file.swift` redirection for example). Doing this allows SwiftGen to avoid re-writing the file to disk if the content is not modified.
 
 Typically don't use:
 ```sh
-swiftgen xcassets Resources/Images.xcassets -t swift4 > "Constants/Assets+Generated.swift"
+swiftgen xcassets Resources/Images.xcassets --templateName swift4 > "Constants/Assets+Generated.swift"
 ```
 
 But use:
 ```sh
-swiftgen xcassets Resources/Images.xcassets -t swift4 --output "Constants/Assets+Generated.swift"
+swiftgen xcassets Resources/Images.xcassets --templateName swift4 --output "Constants/Assets+Generated.swift"
 ```
 
 Or even better, just use `swiftgen` in your Script Build Phase, and specify this in your `swiftgen.yml` config file:

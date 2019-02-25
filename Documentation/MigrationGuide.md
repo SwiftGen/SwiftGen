@@ -123,6 +123,9 @@ SwiftGen 6.0 uses the latest Stencil and StencilSwiftKit libraries, so there are
 
 There have been a few minor context changes, see [SwiftGenKit's own Migration Guide](SwiftGenKit%20Contexts/MigrationGuide.md#swiftgenkit-20-swiftgen-50-migration-guide) for more information.
 
+## Command Line invocation
+
+If you still invoked SwiftGen subcommands directly using command line flags and options (instead of a configuration file), be sure to use `--templateName` or `--templatePath` instead of the `--template`/`-t` option (which has been deprecated).
 
 # SwiftGen 5.1 Migration Guide
 

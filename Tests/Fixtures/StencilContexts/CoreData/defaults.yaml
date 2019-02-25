@@ -175,6 +175,17 @@ models:
         isIndexed: false
         isOptional: true
         isTransient: false
+        name: "integerEnum"
+        propertyType: "attribute"
+        type: "Integer 16"
+        typeName: "Int16"
+        userInfo:
+          enumType: "IntegerEnum"
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
         name: "optionalBoolean"
         propertyType: "attribute"
         type: "Boolean"
@@ -255,10 +266,41 @@ models:
         isIndexed: false
         isOptional: true
         isTransient: false
+        name: "stringEnum"
+        propertyType: "attribute"
+        type: "String"
+        typeName: "String"
+        userInfo:
+          enumType: "StringEnum"
+        usesScalarValueType: false
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
         name: "transformable"
         propertyType: "attribute"
         type: "Transformable"
         typeName: "AnyObject"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: "CustomArray"
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "transformableCustomArray"
+        propertyType: "attribute"
+        type: "Transformable"
+        typeName: "CustomArray"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: "CustomPolyline"
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "transformableCustomPolyline"
+        propertyType: "attribute"
+        type: "Transformable"
+        typeName: "CustomPolyline"
         userInfo: {}
         usesScalarValueType: false
       - customClassName: ""

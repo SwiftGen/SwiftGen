@@ -11,6 +11,7 @@
 
 - When you need to generate *Swift 3* code.
 - If you use unstructured key names for your strings, or a structure that we don't support (yet). If you use "dot-syntax" keys, please check out the [structured-swift3](structured-swift3.md) template.
+- **Warning**: Swift 3 is no longer actively supported, so we cannot guarantee that there won't be issues with the generated code.
 
 ## Customization
 
@@ -21,6 +22,7 @@ You can customize some elements of this template by overriding the following par
 | `enumName` | `L10n` | Allows you to change the name of the generated `enum` containing all string tables. |
 | `noComments` | N/A | Setting this parameter will disable the comments describing the translation of a key. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
+| `localizeFunction` | `NSLocalizedString` | Allows you to set your own custom localization function. Your custom function must have the same signature as the one provided by `Foundation`, i.e. `yourFunctionName(_:tableName:bundle:comment:)` |
 
 ## Generated Code
 
@@ -42,7 +44,7 @@ enum L10n {
   }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Strings/flat-swift3-context-localizable.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Strings/flat-swift3/localizable.swift)
 
 ## Usage example
 

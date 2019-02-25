@@ -10,9 +10,11 @@ import PathKit
 public enum AssetsCatalog {
   public final class Parser: SwiftGenKit.Parser {
     var catalogs = [Catalog]()
+    private let options: ParserOptionValues
     public var warningHandler: Parser.MessageHandler?
 
-    public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
+    public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
+      self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
       self.warningHandler = warningHandler
     }
 
