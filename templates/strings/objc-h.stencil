@@ -47,7 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 {% call recursiveBlock table child sp %}
 {% endfor %}
 {% endmacro %}
-{% set enumName %}{{param.enumName|default:"Localized"}}{% endset %}
 {% for table in tables %}
 @interface {{ table.name }} : NSObject
     {% call recursiveBlock table.name table.levels "  " %}
