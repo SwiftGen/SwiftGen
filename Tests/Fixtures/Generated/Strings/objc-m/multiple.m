@@ -1,7 +1,7 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 
-#import "multiple.h"
+#import "Localizable.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wformat-security"
