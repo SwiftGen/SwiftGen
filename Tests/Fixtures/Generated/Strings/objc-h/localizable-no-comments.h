@@ -1,4 +1,4 @@
-* // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 @import Foundation;
 

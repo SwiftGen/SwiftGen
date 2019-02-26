@@ -1,4 +1,4 @@
-* // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if tables.count > 0 %}
 
@@ -7,11 +7,18 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wformat-security"
 
-NSString* tr(NSString* key, ...) {
+@interface BundleToken : NSObject
+@end
+
+@implementation BundleToken
+@end
+
+NSString* tr(NSString* tableName, NSString* key, ...) {
     va_list args;
     va_start(args, key);
 
-    NSString *format = [NSBundle.mainBundle localizedStringForKey:key value:@"" table:nil];
+    NSBundle *bundle = [NSBundle bundleForClass:BundleToken.class];
+    NSString *format = [bundle localizedStringForKey:key value:@"" table:tableName];
     NSString *result = [[NSString alloc] initWithFormat:format arguments:args];
     return result;
 };
@@ -48,11 +55,11 @@ NSString* tr(NSString* key, ...) {
 {{sp}}  {% if string.types %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}:{% call parametersBlock string.types %}
 {
-    return tr(@"{{string.key}}", {% call argumentsBlock string.types %});
+    return tr(@"{{table}}", @"{{string.key}}", {% call argumentsBlock string.types %});
 }
 {% else %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}} {
-    return tr(@"{{string.key}}");
+    return tr(@"{{table}}", @"{{string.key}}");
 }
 {{sp}}  {% endif %}
 {{sp}}  {% endfor %}

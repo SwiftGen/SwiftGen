@@ -1,4 +1,4 @@
-* // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if tables.count > 0 %}
 @import Foundation;
@@ -34,13 +34,13 @@ NS_ASSUME_NONNULL_BEGIN
 {% endmacro %}
 {% macro recursiveBlock table item sp %}
 {% for string in item.strings %}
-{% if string.types %}
 {% if not param.noComments %}
 // {{string.key}} --> "{{string.translation}}"
 {% endif %}
+{% if string.types %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}:{% call parametersBlock string.types %};
 {% else %}
-+ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}};{% if not param.noComments %} // {{string.key}} --> "{{string.translation}}"{% endif %}
++ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}};
 {% endif %}
 {% endfor %}
 {% for child in item.children %}
