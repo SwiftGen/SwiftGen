@@ -1,7 +1,6 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if tables.count > 0 %}
-
 #import "{{ param.headerName|default:"Localizable" }}.h"
 
 @interface BundleToken : NSObject
