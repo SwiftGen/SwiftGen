@@ -1,3 +1,3 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
-// No string found
+// No strings found

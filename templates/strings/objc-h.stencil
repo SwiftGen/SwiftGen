@@ -1,7 +1,7 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if tables.count > 0 %}
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -56,5 +56,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 {% else %}
-// No string found
+// No strings found
 {% endif %}

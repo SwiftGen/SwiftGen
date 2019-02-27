@@ -3,13 +3,13 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File names | strings/objc-string-h.stencil & strings/objc-string-m.stencil |
-| Configuration example | <pre>strings:<br />  inputs: path/to/Localizable.strings<br />  outputs:<br />    templateName: objc-string-h<br />    output: Localizable.h</pre><br />    templateName: objc-string-m<br />    output: Localizable.m</pre> |
-| Language | ObjectiveC |
+| Configuration example | <pre>strings:<br />  inputs: path/to/Localizable.strings<br />  outputs:<br />    - templateName: objc-string-h<br />      output: Localizable.h</pre><br />    - templateName: objc-string-m<br />      output: Localizable.m</pre> |
+| Language | Objective-C |
 | Author | Eric Slosser |
 
 ## When to use it
 
-- When you need to generate *ObjectiveC* code.
+- When you need to generate *Objective-C* code.
 
 ## Customization
 
@@ -18,7 +18,7 @@ You can customize some elements of this template by overriding the following par
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
 | `noComments`   | N/A           | Setting this parameter will disable the comments describing the translation of a key. |
-
+| `headerName`   | "Localizable" | A generated .m file `#includes "{headerName}.h"` |
 
 ## Generated Code
 

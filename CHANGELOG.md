@@ -33,6 +33,9 @@
   [426](https://github.com/SwiftGen/SwiftGen/issues/426)
   [468](https://github.com/SwiftGen/SwiftGen/issues/468)
   [573](https://github.com/SwiftGen/SwiftGen/pull/573)
+* Strings: templates to generate Objective-C. Please check [the template's documentation](Documentation/templates/string/objc.md) for more information.
+  [Eric Slosser](https://github.com/Mr-Fixit)
+  [SwiftGen/SwiftGen#378](https://github.com/SwiftGen/SwiftGen/pull/378)
 
 ### Bug Fixes
 
@@ -331,9 +334,6 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
   [SwiftGen/templates#84](https://github.com/SwiftGen/templates/pull/84)
   [Txai Wieser](https://github.com/txaiwieser)
   [SwiftGen/templates#81](https://github.com/SwiftGen/templates/pull/81)
-* Templates to generate ObjC source for .strings.  
-  [Eric Slosser](https://github.com/Mr-Fixit)
-  [SwiftGen/SwiftGen#378](https://github.com/SwiftGen/SwiftGen/pull/378)
 
 ### Internal Changes
 

@@ -3,16 +3,16 @@
 
 #import "Localizable.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wformat-security"
-
 @interface BundleToken : NSObject
 @end
 
 @implementation BundleToken
 @end
 
-NSString* tr(NSString* tableName, NSString* key, ...) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wformat-security"
+
+static NSString* tr(NSString *tableName, NSString *key, ...) {
     va_list args;
     va_start(args, key);
 
@@ -21,6 +21,7 @@ NSString* tr(NSString* tableName, NSString* key, ...) {
     NSString *result = [[NSString alloc] initWithFormat:format arguments:args];
     return result;
 };
+#pragma clang diagnostic pop
 
 @implementation Localizable : NSObject
 + (NSString*)alertMessage {
@@ -93,4 +94,3 @@ NSString* tr(NSString* tableName, NSString* key, ...) {
 }
 @end
 
-#pragma clang diagnostic pop

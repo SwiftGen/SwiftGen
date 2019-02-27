@@ -159,7 +159,8 @@ extension XCTestCase {
     outputDirectory: Fixtures.Directory? = nil,
     file: StaticString = #file,
     line: UInt = #line,
-    contextVariations: VariationGenerator? = nil
+    contextVariations: VariationGenerator? = nil,
+    outputExtension: String = "swift"
   ) {
     let templateString = Fixtures.template(for: "\(templateName).stencil", sub: directory)
     let template = StencilSwiftTemplate(
@@ -182,15 +183,7 @@ extension XCTestCase {
       }
 
       for (index, (context: context, suffix: suffix)) in variations.enumerated() {
-        let outputSuffix = { () -> String in
-          if templateName.starts(with: "objc-h") {
-            return "h"
-          } else if templateName.starts(with: "objc-m") {
-            return "m"
-          }
-          return "swift"
-        }()
-        let outputFile = "\(contextName)\(suffix).\(outputSuffix)"
+        let outputFile = "\(contextName)\(suffix).\(outputExtension)"
         if variations.count > 1 { print(" - Variation #\(index)... (expecting: \(outputFile))") }
 
         let result: String

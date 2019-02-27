@@ -39,10 +39,10 @@ class StringsTests: XCTestCase {
     return [
       (context: context,
        suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["enumName=XCTLoc"]),
-       suffix: "-customname"),
       (context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
-       suffix: "-no-comments")
+       suffix: "-no-comments"),
+      (context: try StencilContext.enrich(context: context, parameters: ["headerName=L10N"]),
+       suffix: "-headerName")
     ]
   }
 
@@ -87,7 +87,8 @@ class StringsTests: XCTestCase {
       template: "objc-h",
       contextNames: Contexts.all,
       directory: .strings,
-      contextVariations: variationsObjC
+      contextVariations: variationsObjC,
+      outputExtension: "h"
     )
   }
 
@@ -96,7 +97,8 @@ class StringsTests: XCTestCase {
       template: "objc-m",
       contextNames: Contexts.all,
       directory: .strings,
-      contextVariations: variationsObjC
+      contextVariations: variationsObjC,
+      outputExtension: "m"
     )
   }
 }

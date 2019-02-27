@@ -1,6 +1,6 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

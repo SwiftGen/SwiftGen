@@ -2,10 +2,7 @@
 
 {% if tables.count > 0 %}
 
-#import "Localizable.h"
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wformat-security"
+#import "{{ param.headerName|default:"Localizable" }}.h"
 
 @interface BundleToken : NSObject
 @end
@@ -13,7 +10,10 @@
 @implementation BundleToken
 @end
 
-NSString* tr(NSString* tableName, NSString* key, ...) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wformat-security"
+
+static NSString* tr(NSString *tableName, NSString *key, ...) {
     va_list args;
     va_start(args, key);
 
@@ -22,6 +22,7 @@ NSString* tr(NSString* tableName, NSString* key, ...) {
     NSString *result = [[NSString alloc] initWithFormat:format arguments:args];
     return result;
 };
+#pragma clang diagnostic pop
 
 {% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
@@ -74,7 +75,6 @@ NSString* tr(NSString* tableName, NSString* key, ...) {
 @end
 
 {% endfor %}
-#pragma clang diagnostic pop
 {% else %}
-// No string found
+// No strings found
 {% endif %}
