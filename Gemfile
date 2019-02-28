@@ -11,7 +11,7 @@ end
 # In addition to :build, for contributing
 group :development do
 	gem 'cocoapods', '~> 1.6.0'
-	gem 'rubocop', '~> 0.64'
+	gem 'rubocop', '~> 0.65'
 	gem 'danger'
 end
 
