@@ -18,7 +18,7 @@ DEPENDENCIES:
   - Yams (~> 2.0.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Commander
     - Kanna
     - PathKit
@@ -38,4 +38,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 408250a09fbf699c1ae50882f4bb07a353f741ca
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4
