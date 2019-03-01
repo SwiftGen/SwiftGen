@@ -1,7 +1,7 @@
 // swiftlint:disable all
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
-#if os(OSX)
+#if os(macOS)
   import AppKit.NSImage
   internal typealias XCTColor = NSColor
   internal typealias XCTImage = NSImage
@@ -60,7 +60,7 @@ internal final class XCTColorAsset {
   internal fileprivate(set) var name: String
 
   #if swift(>=3.2)
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
   internal fileprivate(set) lazy var color: XCTColor = XCTColor(asset: self)
   #endif
 
@@ -71,12 +71,12 @@ internal final class XCTColorAsset {
 
 internal extension XCTColor {
   #if swift(>=3.2)
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
   convenience init!(asset: XCTColorAsset) {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX)
+    #elseif os(macOS)
     self.init(named: asset.name, bundle: bundle)
     #elseif os(watchOS)
     self.init(named: asset.name)
@@ -88,16 +88,16 @@ internal extension XCTColor {
 internal struct XCTDataAsset {
   internal fileprivate(set) var name: String
 
-  #if (os(iOS) || os(tvOS) || os(OSX)) && swift(>=3.2)
-  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  #if (os(iOS) || os(tvOS) || os(macOS)) && swift(>=3.2)
+  @available(iOS 9.0, macOS 10.11, *)
   internal var data: NSDataAsset {
     return NSDataAsset(asset: self)
   }
   #endif
 }
 
-#if (os(iOS) || os(tvOS) || os(OSX)) && swift(>=3.2)
-@available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+#if (os(iOS) || os(tvOS) || os(macOS)) && swift(>=3.2)
+@available(iOS 9.0, macOS 10.11, *)
 internal extension NSDataAsset {
   convenience init!(asset: XCTDataAsset) {
     let bundle = Bundle(for: BundleToken.self)
@@ -113,7 +113,7 @@ internal struct XCTImageAsset {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
     let image = XCTImage(named: name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX)
+    #elseif os(macOS)
     let image = bundle.image(forResource: name)
     #elseif os(watchOS)
     let image = XCTImage(named: name)
@@ -124,14 +124,13 @@ internal struct XCTImageAsset {
 }
 
 internal extension XCTImage {
-  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
-  @available(OSX, deprecated,
+  @available(macOS, deprecated,
     message: "This initializer is unsafe on macOS, please use the XCTImageAsset.image property")
   convenience init!(asset: XCTImageAsset) {
     #if os(iOS) || os(tvOS)
     let bundle = Bundle(for: BundleToken.self)
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX) || os(watchOS)
+    #elseif os(macOS) || os(watchOS)
     self.init(named: asset.name)
     #endif
   }
