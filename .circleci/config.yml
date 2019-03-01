@@ -161,16 +161,13 @@ workflows:
   version: 2
   lint-buildandtest-compileoutput-checkdeploy:
     jobs:
+      - check-deploy
       - lint
       - spm-build-and-test
       - xcode-build-and-test
       - compile-output:
           requires:
-            - lint
-            - spm-build-and-test
-            - xcode-build-and-test
-      - check-deploy:
-          requires:
+            - check-deploy
             - lint
             - spm-build-and-test
             - xcode-build-and-test
