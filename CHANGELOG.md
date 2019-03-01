@@ -89,6 +89,9 @@
 * Some CI fixes related to software versions.  
   [Patrick Nollet](https://github.com/PatrickNLT)
   [#645](https://github.com/SwiftGen/SwiftGen/pull/645)
+* Updated to CocoaPods 1.9.0.  
+  [David Jennes](https://github.com/djbe)
+  [#619](https://github.com/SwiftGen/SwiftGen/pull/619)
 
 ## 6.1.0
 
