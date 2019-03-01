@@ -180,7 +180,8 @@ models:
         type: "Integer 16"
         typeName: "Int16"
         userInfo:
-          enumType: "IntegerEnum"
+          RawType: "IntegerEnum"
+          unwrapOptional: true
         usesScalarValueType: true
       - customClassName: ""
         isIndexed: false
@@ -271,7 +272,7 @@ models:
         type: "String"
         typeName: "String"
         userInfo:
-          enumType: "StringEnum"
+          RawType: "StringEnum"
         usesScalarValueType: false
       - customClassName: ""
         isIndexed: false
