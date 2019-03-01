@@ -117,7 +117,7 @@
   {{accessModifier}} fileprivate(set) var name: String
 
   #if os(iOS) || os(tvOS) || os(OSX)
-  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  @available(iOS 9.0, OSX 10.11, *)
   {{accessModifier}} var data: NSDataAsset {
     return NSDataAsset(asset: self)
   }
@@ -125,7 +125,7 @@
 }
 
 #if os(iOS) || os(tvOS) || os(OSX)
-@available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+@available(iOS 9.0, OSX 10.11, *)
 {{accessModifier}} extension NSDataAsset {
   convenience init!(asset: {{dataType}}) {
     let bundle = Bundle(for: BundleToken.self)
@@ -156,7 +156,6 @@
 }
 
 {{accessModifier}} extension {{imageAlias}} {
-  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
     message: "This initializer is unsafe on macOS, please use the {{imageType}}.image property")
   convenience init!(asset: {{imageType}}) {

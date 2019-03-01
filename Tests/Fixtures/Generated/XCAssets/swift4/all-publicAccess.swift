@@ -85,7 +85,7 @@ public struct DataAsset {
   public fileprivate(set) var name: String
 
   #if os(iOS) || os(tvOS) || os(OSX)
-  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  @available(iOS 9.0, OSX 10.11, *)
   public var data: NSDataAsset {
     return NSDataAsset(asset: self)
   }
@@ -93,7 +93,7 @@ public struct DataAsset {
 }
 
 #if os(iOS) || os(tvOS) || os(OSX)
-@available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+@available(iOS 9.0, OSX 10.11, *)
 public extension NSDataAsset {
   convenience init!(asset: DataAsset) {
     let bundle = Bundle(for: BundleToken.self)
@@ -124,7 +124,6 @@ public struct ImageAsset {
 }
 
 public extension AssetImageTypeAlias {
-  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
   convenience init!(asset: ImageAsset) {

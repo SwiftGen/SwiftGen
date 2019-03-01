@@ -89,7 +89,7 @@ internal struct XCTDataAsset {
   internal fileprivate(set) var name: String
 
   #if (os(iOS) || os(tvOS) || os(OSX)) && swift(>=3.2)
-  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  @available(iOS 9.0, OSX 10.11, *)
   internal var data: NSDataAsset {
     return NSDataAsset(asset: self)
   }
@@ -97,7 +97,7 @@ internal struct XCTDataAsset {
 }
 
 #if (os(iOS) || os(tvOS) || os(OSX)) && swift(>=3.2)
-@available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+@available(iOS 9.0, OSX 10.11, *)
 internal extension NSDataAsset {
   convenience init!(asset: XCTDataAsset) {
     let bundle = Bundle(for: BundleToken.self)
@@ -124,7 +124,6 @@ internal struct XCTImageAsset {
 }
 
 internal extension XCTImage {
-  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
     message: "This initializer is unsafe on macOS, please use the XCTImageAsset.image property")
   convenience init!(asset: XCTImageAsset) {
