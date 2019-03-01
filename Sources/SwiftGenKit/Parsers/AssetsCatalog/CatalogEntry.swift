@@ -16,25 +16,25 @@ protocol AssetsCatalogEntry {
 
 extension AssetsCatalog {
   enum Entry {
-    struct EntryWithValue: AssetsCatalogEntry {
-      let name: String
-      let value: String
-      let type: String
-    }
     struct Group: AssetsCatalogEntry {
       let name: String
       let isNamespaced: Bool
       let items: [AssetsCatalogEntry]
+    }
+    struct Item: AssetsCatalogEntry {
+      let name: String
+      let value: String
+      let item: Constants.Item
     }
   }
 }
 
 // MARK: - Parser
 
-private enum Constants {
-  static let path = "Contents.json"
-  static let properties = "properties"
-  static let providesNamespace = "provides-namespace"
+enum Constants {
+  fileprivate static let path = "Contents.json"
+  fileprivate static let properties = "properties"
+  fileprivate static let providesNamespace = "provides-namespace"
 
   /**
    * This is a list of supported asset catalog item types, for now we just
@@ -78,7 +78,7 @@ extension AssetsCatalog.Entry {
     let type = path.extension ?? ""
 
     if let item = Constants.Item(rawValue: type) {
-      return AssetsCatalog.Entry.EntryWithValue(path: path, item: item, withPrefix: prefix)
+      return AssetsCatalog.Entry.Item(path: path, item: item, withPrefix: prefix)
     } else if type.isEmpty {
       // this is a group, they can't have any '.' in their name
       let filename = path.lastComponent
@@ -99,24 +99,11 @@ extension AssetsCatalog.Entry {
 
 // MARK: - Private Helpers
 
-extension AssetsCatalog.Entry.EntryWithValue {
+extension AssetsCatalog.Entry.Item {
   fileprivate init(path: Path, item: Constants.Item, withPrefix prefix: String) {
-    name = path.lastComponentWithoutExtension
-    value = "\(prefix)\(name)"
-    type = AssetsCatalog.Entry.EntryWithValue.type(for: item)
-  }
-
-  private static func type(for item: Constants.Item) -> String {
-    switch item {
-    case .arResourceGroup:
-      return "arresourcegroup"
-    case .colorSet:
-      return "color"
-    case .dataSet:
-      return "data"
-    case .imageSet:
-      return "image"
-    }
+    self.name = path.lastComponentWithoutExtension
+    self.value = "\(prefix)\(name)"
+    self.item = item
   }
 }
 

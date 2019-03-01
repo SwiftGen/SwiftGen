@@ -40,22 +40,12 @@ extension AssetsCatalog.Parser {
 
   private static func countTypes(entries: [AssetsCatalogEntry], into result: inout [String: Int]) {
     for entry in entries {
-      if let entry = entry as? AssetsCatalog.Entry.EntryWithValue {
-        result[entry.type, default: 0] += 1
+      if let entry = entry as? AssetsCatalog.Entry.Item {
+        result[entry.item.type, default: 0] += 1
       } else if let group = entry as? AssetsCatalog.Entry.Group {
         AssetsCatalog.Parser.countTypes(entries: group.items, into: &result)
       }
     }
-  }
-}
-
-extension AssetsCatalog.Entry.EntryWithValue {
-  var asDictionary: [String: Any] {
-    return [
-      "type": type,
-      "name": name,
-      "value": value
-    ]
   }
 }
 
@@ -67,5 +57,30 @@ extension AssetsCatalog.Entry.Group {
       "name": name,
       "items": AssetsCatalog.Parser.structure(entries: items)
     ]
+  }
+}
+
+extension AssetsCatalog.Entry.Item {
+  var asDictionary: [String: Any] {
+    return [
+      "type": item.type,
+      "name": name,
+      "value": value
+    ]
+  }
+}
+
+extension Constants.Item {
+  var type: String {
+    switch self {
+    case .arResourceGroup:
+      return "arresourcegroup"
+    case .colorSet:
+      return "color"
+    case .dataSet:
+      return "data"
+    case .imageSet:
+      return "image"
+    }
   }
 }
