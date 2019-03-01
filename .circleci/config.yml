@@ -143,12 +143,17 @@ jobs:
       - *restore-gems
       - *install-gems
       - *store-gems
-      - run:
-          name: Download podspec repo
-          command: curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+      - restore_cache:
+          keys:
+            - cocoapods-{{ checksum "Podfile.lock" }}
+            - cocoapods-
       - run:
           name: Lint podspec
           command: bundle exec rake pod:lint
+      -  save_cache:
+          key: cocoapods-{{ checksum "Podfile.lock" }}
+          paths:
+            - ~/.cocoapods
       - *store-artifacts
 
 
