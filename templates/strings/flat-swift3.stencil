@@ -12,12 +12,19 @@ import Foundation
 
 {% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
-    _ p{{forloop.counter}}: {{type}}{{ ", " if not forloop.last }}
+    {% if type == "String" %}
+    _ p{{forloop.counter}}: Any
+    {% else %}
+    _ p{{forloop.counter}}: {{type}}
+    {% endif %}
+    {{ ", " if not forloop.last }}
   {% endfor %}
 {% endfilter %}{% endmacro %}
 {% macro argumentsBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
-    {% if type == "UnsafeRawPointer" %}
+    {% if type == "String" %}
+    String(describing: p{{forloop.counter}})
+    {% elif type == "UnsafeRawPointer" %}
     Int(bitPattern: p{{forloop.counter}})
     {% else %}
     p{{forloop.counter}}
