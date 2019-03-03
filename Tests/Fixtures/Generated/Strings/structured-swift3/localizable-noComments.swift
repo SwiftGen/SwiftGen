@@ -13,15 +13,15 @@ import Foundation
 internal enum L10n {
   internal static let alertMessage = L10n.tr("Localizable", "alert__message")
   internal static let alertTitle = L10n.tr("Localizable", "alert__title")
-  internal static func objectOwnership(_ p1: Int, _ p2: String, _ p3: String) -> String {
-    return L10n.tr("Localizable", "ObjectOwnership", p1, p2, p3)
+  internal static func objectOwnership(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
+    return L10n.tr("Localizable", "ObjectOwnership", p1, String(describing: p2), String(describing: p3))
   }
   internal static let percent = L10n.tr("Localizable", "percent")
-  internal static func `private`(_ p1: String, _ p2: Int) -> String {
-    return L10n.tr("Localizable", "private", p1, p2)
+  internal static func `private`(_ p1: Any, _ p2: Int) -> String {
+    return L10n.tr("Localizable", "private", String(describing: p1), p2)
   }
-  internal static func types(_ p1: String, _ p2: CChar, _ p3: Int, _ p4: Float, _ p5: UnsafePointer<CChar>, _ p6: UnsafeRawPointer) -> String {
-    return L10n.tr("Localizable", "types", p1, p2, p3, p4, p5, Int(bitPattern: p6))
+  internal static func types(_ p1: Any, _ p2: CChar, _ p3: Int, _ p4: Float, _ p5: UnsafePointer<CChar>, _ p6: UnsafeRawPointer) -> String {
+    return L10n.tr("Localizable", "types", String(describing: p1), p2, p3, p4, p5, Int(bitPattern: p6))
   }
 
   internal enum Apples {
@@ -31,8 +31,8 @@ internal enum L10n {
   }
 
   internal enum Bananas {
-    internal static func owner(_ p1: Int, _ p2: String) -> String {
-      return L10n.tr("Localizable", "bananas.owner", p1, p2)
+    internal static func owner(_ p1: Int, _ p2: Any) -> String {
+      return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
     }
   }
 

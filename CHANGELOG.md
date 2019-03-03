@@ -45,6 +45,9 @@
 * Core Data: `entityName` is now correctly a `class var` instead of a `class func`.  
   [David Jennes](https://github.com/djbe)
   [#590](https://github.com/SwiftGen/SwiftGen/pull/590)
+* Strings: we now correctly generate the type `Any` (instead of `String`) for `%@` placeholders.  
+  [David Jennes](https://github.com/djbe)
+  [620](https://github.com/SwiftGen/SwiftGen/issues/620)
 
 ### Internal Changes
 
