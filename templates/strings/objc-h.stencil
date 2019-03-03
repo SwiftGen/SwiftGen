@@ -16,14 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
   {% endfor %}
 {% endfilter %}{% endmacro %}
 {% macro paramTranslate swiftType %}
-  {% if swiftType == "Float" %}
+  {% if swiftType == "Any" %}
+    id
+  {% elif swiftType == "CChar" %}
+    char
+  {% elif swiftType == "Float" %}
     float
   {% elif swiftType == "Int" %}
     NSInteger
-  {% elif swiftType == "CChar" %}
-    char
   {% elif swiftType == "String" %}
-    NSString*
+    id
   {% elif swiftType == "UnsafePointer<CChar>" %}
     char*
   {% elif swiftType == "UnsafeRawPointer" %}
@@ -32,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
     objc-h.stencil is missing '{{swiftType}}'
   {% endif %}
 {% endmacro %}
-{% macro recursiveBlock table item sp %}
+{% macro emitOneMethod table item %}
 {% for string in item.strings %}
 {% if not param.noComments %}
 // {{string.key}} --> "{{string.translation}}"
@@ -44,12 +46,12 @@ NS_ASSUME_NONNULL_BEGIN
 {% endif %}
 {% endfor %}
 {% for child in item.children %}
-{% call recursiveBlock table child sp %}
+{% call emitOneMethod table child %}
 {% endfor %}
 {% endmacro %}
 {% for table in tables %}
 @interface {{ table.name }} : NSObject
-    {% call recursiveBlock table.name table.levels "  " %}
+    {% call emitOneMethod table.name table.levels %}
 @end
 
 {% endfor %}

@@ -29,18 +29,18 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 + (NSString*)alertTitle {
     return tr(@"Localizable", @"alert__title");
 }
-+ (NSString*)objectOwnership:(NSInteger)p1 and:(NSString*)p2 and:(NSString*)p3
++ (NSString*)objectOwnership:(NSInteger)p1 and:(id)p2 and:(id)p3
 {
     return tr(@"Localizable", @"ObjectOwnership", p1, p2, p3);
 }
 + (NSString*)percent {
     return tr(@"Localizable", @"percent");
 }
-+ (NSString*)private:(NSString*)p1 and:(NSInteger)p2
++ (NSString*)private:(id)p1 and:(NSInteger)p2
 {
     return tr(@"Localizable", @"private", p1, p2);
 }
-+ (NSString*)types:(NSString*)p1 and:(char)p2 and:(NSInteger)p3 and:(float)p4 and:(char*)p5 and:(void*)p6
++ (NSString*)types:(id)p1 and:(char)p2 and:(NSInteger)p3 and:(float)p4 and:(char*)p5 and:(void*)p6
 {
     return tr(@"Localizable", @"types", p1, p2, p3, p4, p5, p6);
 }
@@ -48,7 +48,7 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 {
     return tr(@"Localizable", @"apples.count", p1);
 }
-+ (NSString*)bananasOwner:(NSInteger)p1 and:(NSString*)p2
++ (NSString*)bananasOwner:(NSInteger)p1 and:(id)p2
 {
     return tr(@"Localizable", @"bananas.owner", p1, p2);
 }
