@@ -50,9 +50,9 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
     objc-m.stencil is missing '{{swiftType}}'
   {% endif %}
 {% endmacro %}
-{% macro recursiveTableContents table item sp %}
-{{sp}}  {% for string in item.strings %}
-{{sp}}  {% if string.types %}
+{% macro tableContents table item %}
+  {% for string in item.strings %}
+  {% if string.types %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}:{% call parametersBlock string.types %}
 {
     return tr(@"{{table}}", @"{{string.key}}", {% call argumentsBlock string.types %});
@@ -61,16 +61,16 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}} {
     return tr(@"{{table}}", @"{{string.key}}");
 }
-{{sp}}  {% endif %}
-{{sp}}  {% endfor %}
-{{sp}}  {% for child in item.children %}
-{{sp}}  {% call recursiveTableContents table child sp %}
-{{sp}}  {% endfor %}
+  {% endif %}
+  {% endfor %}
+  {% for child in item.children %}
+  {% call tableContents table child %}
+  {% endfor %}
 {% endmacro %}
 {% for table in tables %}
         {% set tableName %}{{table.name|default:"Localized"}}{% endset %}
 @implementation {{ tableName }} : NSObject
-        {% call recursiveTableContents table.name table.levels "  " %}
+        {% call tableContents table.name table.levels %}
 @end
 
 {% endfor %}

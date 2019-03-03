@@ -1,6 +1,5 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
-
 #import "L10N.h"
 
 @interface BundleToken : NSObject

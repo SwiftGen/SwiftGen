@@ -1,6 +1,5 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
-
 #import "Localizable.h"
 
 @interface BundleToken : NSObject
