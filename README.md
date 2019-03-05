@@ -36,7 +36,7 @@ There are multiple benefits in using this:
 
 * Avoid any typo you could have when using a String
 * Free auto-completion
-* Avoid the risk to use an non-existing asset name
+* Avoid the risk of using a non-existing asset name
 * All this will be ensured by the compiler.
 
 Also, it's fully customizable thanks to Stencil templates, so even if it comes with predefined templates, you can make your own to generate whatever code fits your needs and your guidelines!
