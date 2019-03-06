@@ -35,6 +35,10 @@
   [426](https://github.com/SwiftGen/SwiftGen/issues/426)
   [468](https://github.com/SwiftGen/SwiftGen/issues/468)
   [573](https://github.com/SwiftGen/SwiftGen/pull/573)
+* Assets: there's a new template called `simple-swift4` which removes the need for the last call part like `.color` or `.image`. Also it adds a typealias for each catalog if multiple are used to prevent calls like `Asset.Colors` or `Asset.Images`. For more information, check the [template's documentation](Documentation/templates/xcassets/simple-swift4.md).  
+  [Cihat Gündüz](https://github.com/Dschee)
+  [603](https://github.com/SwiftGen/SwiftGen/issues/603)
+  [605](https://github.com/SwiftGen/SwiftGen/pull/605)
 
 ### Bug Fixes
 

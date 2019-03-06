@@ -59,4 +59,13 @@ class XCAssetsTests: XCTestCase {
       contextVariations: variations
     )
   }
+
+  func testSimpleSwift4() {
+    test(
+      template: "simple-swift4",
+      contextNames: Contexts.all,
+      directory: .xcassets,
+      contextVariations: variations
+    )
+  }
 }

@@ -169,6 +169,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "xcassets --templateName simple-swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Data.xcassets"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "yaml --templateName inline-swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/YAML/good/documents.yaml"
             isEnabled = "NO">
          </CommandLineArgument>
