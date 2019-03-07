@@ -147,7 +147,7 @@ extension XCTestCase {
    
    - Parameter template: The name of the template (without the `stencil` extension)
    - Parameter contextNames: A list of context names (without the `plist` extension)
-   - Parameter directory: The directory to look for files in (correspons to de command)
+   - Parameter directory: The directory to look for files in (corresponds to the command)
    - Parameter resourceDirectory: The directory to look for files in (corresponds to the command)
    - Parameter contextVariations: Optional closure to generate context variations.
    */
@@ -159,7 +159,8 @@ extension XCTestCase {
     outputDirectory: Fixtures.Directory? = nil,
     file: StaticString = #file,
     line: UInt = #line,
-    contextVariations: VariationGenerator? = nil
+    contextVariations: VariationGenerator? = nil,
+    outputExtension: String = "swift"
   ) {
     let templateString = Fixtures.template(for: "\(templateName).stencil", sub: directory)
     let template = StencilSwiftTemplate(
@@ -182,7 +183,7 @@ extension XCTestCase {
       }
 
       for (index, (context: context, suffix: suffix)) in variations.enumerated() {
-        let outputFile = "\(contextName)\(suffix).swift"
+        let outputFile = "\(contextName)\(suffix).\(outputExtension)"
         if variations.count > 1 { print(" - Variation #\(index)... (expecting: \(outputFile))") }
 
         let result: String
