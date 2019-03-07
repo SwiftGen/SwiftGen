@@ -15,26 +15,26 @@ public enum L10n {
   /// Title of the alert
   public static let alertTitle = L10n.tr("Localizable", "alert__title")
   /// These are %3$@'s %1$d %2$@.
-  public static func objectOwnership(_ p1: Int, _ p2: String, _ p3: String) -> String {
-    return L10n.tr("Localizable", "ObjectOwnership", p1, p2, p3)
+  public static func objectOwnership(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
+    return L10n.tr("Localizable", "ObjectOwnership", p1, String(describing: p2), String(describing: p3))
   }
   /// This is a %% character.
   public static let percent = L10n.tr("Localizable", "percent")
   /// Hello, my name is %@ and I'm %d
-  public static func `private`(_ p1: String, _ p2: Int) -> String {
-    return L10n.tr("Localizable", "private", p1, p2)
+  public static func `private`(_ p1: Any, _ p2: Int) -> String {
+    return L10n.tr("Localizable", "private", String(describing: p1), p2)
   }
   /// Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString: '%s', Pointer: '%p'
-  public static func types(_ p1: String, _ p2: CChar, _ p3: Int, _ p4: Float, _ p5: UnsafePointer<CChar>, _ p6: UnsafeRawPointer) -> String {
-    return L10n.tr("Localizable", "types", p1, p2, p3, p4, p5, Int(bitPattern: p6))
+  public static func types(_ p1: Any, _ p2: CChar, _ p3: Int, _ p4: Float, _ p5: UnsafePointer<CChar>, _ p6: UnsafeRawPointer) -> String {
+    return L10n.tr("Localizable", "types", String(describing: p1), p2, p3, p4, p5, Int(bitPattern: p6))
   }
   /// You have %d apples
   public static func applesCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "apples.count", p1)
   }
   /// Those %d bananas belong to %@.
-  public static func bananasOwner(_ p1: Int, _ p2: String) -> String {
-    return L10n.tr("Localizable", "bananas.owner", p1, p2)
+  public static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
   }
   /// Some Reserved Keyword there
   public static let settingsNavigationBarSelf = L10n.tr("Localizable", "settings.navigation-bar.self")

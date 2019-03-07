@@ -39,8 +39,8 @@ enum L10n {
     return L10n.tr("Localizable", "apples.count", p1)
   }
   /// Those %d bananas belong to %@.
-  static func bananasOwner(_ p1: Int, _ p2: String) -> String {
-    return L10n.tr("Localizable", "bananas.owner", p1, p2)
+  static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
   }
 ```
 

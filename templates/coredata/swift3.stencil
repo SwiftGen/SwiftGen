@@ -48,24 +48,34 @@ import {{ import }}
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
   {% for attribute in entity.attributes %}
-  {% if attribute.userInfo.enumType %}
-  {{ accessModifier }} var {{ attribute.name }}: {{ attribute.userInfo.enumType }}? {
+  {% if attribute.userInfo.RawType %}
+  {% set rawType attribute.userInfo.RawType %}
+  {% set unwrapOptional attribute.userInfo.unwrapOptional %}
+  {{ accessModifier }} var {{ attribute.name }}: {{ rawType }}{% if not unwrapOptional %}?{% endif %} {
     get {
       let key = "{{ attribute.name }}"
       willAccessValue(forKey: key)
       defer { didAccessValue(forKey: key) }
 
-      guard let value = primitiveValue(forKey: key) as? {{ attribute.userInfo.enumType }}.RawValue else {
+      {% if unwrapOptional %}
+      guard let value = primitiveValue(forKey: key) as? {{ rawType }}.RawValue,
+        let result = {{ rawType }}(rawValue: value) else {
+        fatalError("Could not convert value for key '\(key)' to type '{{ rawType }}'")
+      }
+      return result
+      {% else %}
+      guard let value = primitiveValue(forKey: key) as? {{ rawType }}.RawValue else {
         return nil
       }
-      return {{ attribute.userInfo.enumType }}(rawValue: value)
+      return {{ rawType }}(rawValue: value)
+      {% endif %}
     }
     set {
       let key = "{{ attribute.name }}"
       willChangeValue(forKey: key)
       defer { didChangeValue(forKey: key) }
 
-      setPrimitiveValue(newValue?.rawValue, forKey: key)
+      setPrimitiveValue(newValue{% if not unwrapOptional %}?{% endif %}.rawValue, forKey: key)
     }
   }
   {% elif attribute.usesScalarValueType and attribute.isOptional %}

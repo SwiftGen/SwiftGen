@@ -10,7 +10,7 @@
 {% set imageAlias %}{{param.imageAliasName|default:"AssetImageTypeAlias"}}{% endset %}
 {% set forceNamespaces %}{{param.forceProvidesNamespaces|default:"false"}}{% endset %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
-#if os(OSX)
+#if os(macOS)
   import AppKit.NSImage
   {{accessModifier}} typealias {{colorAlias}} = NSColor
   {{accessModifier}} typealias {{imageAlias}} = NSImage
@@ -91,7 +91,7 @@
 {{accessModifier}} final class {{colorType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
   {{accessModifier}} private(set) lazy var color: {{colorAlias}} = {{colorAlias}}(asset: self)
 
   fileprivate init(name: String) {
@@ -100,12 +100,12 @@
 }
 
 {{accessModifier}} extension {{colorAlias}} {
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
   convenience init!(asset: {{colorType}}) {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX)
+    #elseif os(macOS)
     self.init(named: NSColor.Name(asset.name), bundle: bundle)
     #elseif os(watchOS)
     self.init(named: asset.name)
@@ -116,22 +116,22 @@
 {{accessModifier}} struct {{dataType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
-  #if os(iOS) || os(tvOS) || os(OSX)
-  @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+  #if os(iOS) || os(tvOS) || os(macOS)
+  @available(iOS 9.0, macOS 10.11, *)
   {{accessModifier}} var data: NSDataAsset {
     return NSDataAsset(asset: self)
   }
   #endif
 }
 
-#if os(iOS) || os(tvOS) || os(OSX)
-@available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
+#if os(iOS) || os(tvOS) || os(macOS)
+@available(iOS 9.0, macOS 10.11, *)
 {{accessModifier}} extension NSDataAsset {
   convenience init!(asset: {{dataType}}) {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
     self.init(name: asset.name, bundle: bundle)
-    #elseif os(OSX)
+    #elseif os(macOS)
     self.init(name: NSDataAsset.Name(asset.name), bundle: bundle)
     #endif
   }
@@ -145,7 +145,7 @@
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
     let image = {{imageAlias}}(named: name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX)
+    #elseif os(macOS)
     let image = bundle.image(forResource: NSImage.Name(name))
     #elseif os(watchOS)
     let image = {{imageAlias}}(named: name)
@@ -156,14 +156,13 @@
 }
 
 {{accessModifier}} extension {{imageAlias}} {
-  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
-  @available(OSX, deprecated,
+  @available(macOS, deprecated,
     message: "This initializer is unsafe on macOS, please use the {{imageType}}.image property")
   convenience init!(asset: {{imageType}}) {
     #if os(iOS) || os(tvOS)
     let bundle = Bundle(for: BundleToken.self)
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(OSX)
+    #elseif os(macOS)
     self.init(named: NSImage.Name(asset.name))
     #elseif os(watchOS)
     self.init(named: asset.name)
