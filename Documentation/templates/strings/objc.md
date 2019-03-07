@@ -3,7 +3,7 @@
 | Name      | Description       |
 | --------- | ----------------- |
 | File names | strings/objc-string-h.stencil & strings/objc-string-m.stencil |
-| Configuration example | <pre>strings:<br />  inputs: path/to/Localizable.strings<br />  outputs:<br />    - templateName: objc-string-h<br />      output: Localizable.h<br />    - templateName: objc-string-m<br />      output: Localizable.m</pre> |
+| Configuration example | <pre>strings:<br />  inputs: path/to/Localizable.strings<br />  outputs:<br />    - templateName: objc-h<br />      output: Localizable.h<br />    - templateName: objc-m<br />      output: Localizable.m</pre> |
 | Language | Objective-C |
 | Author | Eric Slosser |
 
@@ -31,7 +31,7 @@ You can customize some elements of this template by overriding the following par
 // alert__title --> "Title of the alert"
 + (NSString*)alertTitle;
 // ObjectOwnership --> "These are %3$@'s %1$d %2$@."
-+ (NSString*)objectOwnership:(NSInteger)p1 and:(NSString*)p2 and:(NSString*)p3;
++ (NSString*)objectOwnershipWithValues:(NSInteger)p1 :(NSString*)p2 :(NSString*)p3;
 // percent --> "This is a %% character."
 + (NSString*)percent;
 ...
@@ -42,12 +42,12 @@ You can customize some elements of this template by overriding the following par
 
 ## Usage example
 
-```objc
+``` objc
 // simple strings
 NSString* message = Localizable.alertMessage
 NSString* title = Localizable.alertTitle
 
 // with parameters, note that each argument needs to be of the correct type
-NSString*  apples = [Localizable.applesCount:3];
-NSString*  bananas = [Localizable.bananasOwner:5 and:@"Olivier"];
+NSString*  apples = [Localizable.applesCountWithValue:3];
+NSString*  bananas = [Localizable.bananasOwnerWithValues:5 :@"Olivier"];
 ```

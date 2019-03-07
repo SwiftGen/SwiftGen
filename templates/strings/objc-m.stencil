@@ -28,7 +28,7 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 
 {% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
-    ({% call paramTranslate type %})p{{ forloop.counter }}{% if not forloop.last %} with:{% endif %}
+    ({% call paramTranslate type %})p{{ forloop.counter }}{% if not forloop.last %} :{% endif %}
   {% endfor %}
 {% endfilter %}{% endmacro %}
 {% macro argumentsBlock types %}{% filter removeNewlines:"leading" %}
@@ -58,7 +58,11 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 {% macro tableContents table item %}
   {% for string in item.strings %}
   {% if string.types %}
-+ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}:{% call parametersBlock string.types %}
+    {% if string.types.count == 1 %}
++ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValue:{% call parametersBlock string.types %}
+    {% else %}
++ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValues:{% call parametersBlock string.types %}
+    {% endif %}
 {
     return tr(@"{{table}}", @"{{string.key}}", {% call argumentsBlock string.types %});
 }
