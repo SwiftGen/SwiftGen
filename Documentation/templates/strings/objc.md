@@ -42,7 +42,7 @@ You can customize some elements of this template by overriding the following par
 
 ## Usage example
 
-``` objc
+```objc
 // simple strings
 NSString* message = Localizable.alertMessage
 NSString* title = Localizable.alertTitle
