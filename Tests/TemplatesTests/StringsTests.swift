@@ -41,7 +41,7 @@ class StringsTests: XCTestCase {
        suffix: ""),
       (context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
        suffix: "-no-comments"),
-      (context: try StencilContext.enrich(context: context, parameters: ["headerName=L10N"]),
+      (context: try StencilContext.enrich(context: context, parameters: ["headerName=headerName-from-parameter.h"]),
        suffix: "-headerName")
     ]
   }
