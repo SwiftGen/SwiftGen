@@ -13,19 +13,19 @@ public var bundle: Bundle!
 // MARK: - Implementation Details
 
 public struct ARResourceGroupAsset {
-	public fileprivate(set) var name: String
+  public fileprivate(set) var name: String
 
-	#if os(iOS)
-	@available(iOS 11.3, *)
-	public var referenceImages: Set<ARReferenceImage> {
-		return ARReferenceImage.referenceImages(in: self)
-	}
+  #if os(iOS)
+  @available(iOS 11.3, *)
+  public var referenceImages: Set<ARReferenceImage> {
+    return ARReferenceImage.referenceImages(in: self)
+  }
 
-	@available(iOS 12.0, *)
-	public var referenceObjects: Set<ARReferenceObject> {
-		return ARReferenceObject.referenceObjects(in: self)
-	}
-	#endif
+  @available(iOS 12.0, *)
+  public var referenceObjects: Set<ARReferenceObject> {
+    return ARReferenceObject.referenceObjects(in: self)
+  }
+  #endif
 
   // Extra for playgrounds
   public init(name: String) {
@@ -36,16 +36,16 @@ public struct ARResourceGroupAsset {
 #if os(iOS)
 @available(iOS 11.3, *)
 public extension ARReferenceImage {
-	static func referenceImages(in asset: ARResourceGroupAsset) -> Set<ARReferenceImage> {
-		return referenceImages(inGroupNamed: asset.name, bundle: bundle) ?? Set()
-	}
+  static func referenceImages(in asset: ARResourceGroupAsset) -> Set<ARReferenceImage> {
+    return referenceImages(inGroupNamed: asset.name, bundle: bundle) ?? Set()
+  }
 }
 
 @available(iOS 12.0, *)
 public extension ARReferenceObject {
-	static func referenceObjects(in asset: ARResourceGroupAsset) -> Set<ARReferenceObject> {
-		return referenceObjects(inGroupNamed: asset.name, bundle: bundle) ?? Set()
-	}
+  static func referenceObjects(in asset: ARResourceGroupAsset) -> Set<ARReferenceObject> {
+    return referenceObjects(inGroupNamed: asset.name, bundle: bundle) ?? Set()
+  }
 }
 #endif
 

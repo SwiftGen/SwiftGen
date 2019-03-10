@@ -68,7 +68,7 @@ internal enum Asset {
   enum Targets {
     internal static let bottles = ARResourceGroupAsset(name: "Bottles")
     internal static let paintings = ARResourceGroupAsset(name: "Paintings")
-	internal static let posters = ARResourceGroupAsset(name: "Posters")
+    internal static let posters = ARResourceGroupAsset(name: "Posters")
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
