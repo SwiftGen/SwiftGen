@@ -14,16 +14,16 @@ paths_templates_generated="Tests/Fixtures/Generated"
 
 # load selected group
 if [ $# -gt 0 ]; then
-	key="$1"
+  key="$1"
 else
-	echo "error: need group to lint."
-	exit 1
+  echo "error: need group to lint."
+  exit 1
 fi
 
 selected_path=`eval echo '$'paths_$key`
 if [ -z "$selected_path" ]; then
-	echo "error: need a valid group to lint."
-	exit 1
+  echo "error: need a valid group to lint."
+  exit 1
 fi
 
 # temporary work directory
@@ -35,15 +35,15 @@ trap finish EXIT
 
 # actually run swiftlint
 if [ "$key" = "templates_generated" ]; then
-	# copy the generated output to a temp dir and strip the "swiftlint:disable:all"
-	for f in `find "${PROJECT_DIR}/${selected_path}" -name '*.swift'`; do
-		temp_file="${scratch}${f#"$PROJECT_DIR"}"
-		mkdir -p $(dirname "$temp_file")
-		sed "s/swiftlint:disable all/ --/" "$f" > "$temp_file"
-	done
+  # copy the generated output to a temp dir and strip the "swiftlint:disable:all"
+  for f in `find "${PROJECT_DIR}/${selected_path}" -name '*.swift'`; do
+    temp_file="${scratch}${f#"$PROJECT_DIR"}"
+    mkdir -p $(dirname "$temp_file")
+    sed "s/swiftlint:disable all/ --/" "$f" > "$temp_file"
+  done
 
-	"$SWIFTLINT" lint --strict --config "$CONFIG" --path "$scratch" | sed s@"$scratch"@"${PROJECT_DIR}"@
-	exit ${PIPESTATUS[0]}
+  "$SWIFTLINT" lint --strict --config "$CONFIG" --path "$scratch" | sed s@"$scratch"@"${PROJECT_DIR}"@
+  exit ${PIPESTATUS[0]}
 else
-	"$SWIFTLINT" lint --strict --config "$CONFIG" --path "${PROJECT_DIR}/${selected_path}"
+  "$SWIFTLINT" lint --strict --config "$CONFIG" --path "${PROJECT_DIR}/${selected_path}"
 fi

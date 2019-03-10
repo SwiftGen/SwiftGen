@@ -18,45 +18,69 @@ extension AssetsCatalog.Parser {
       .map { catalog -> [String: Any] in
         [
           "name": catalog.name,
-          "assets": structure(entries: catalog.entries)
+          "assets": AssetsCatalog.Parser.structure(entries: catalog.entries)
         ]
       }
 
     return [
-      "catalogs": catalogs
+      "catalogs": catalogs,
+      "resourceCount": AssetsCatalog.Parser.countTypes(catalogs: self.catalogs)
     ]
   }
 
-  private func structure(entries: [AssetsCatalog.Entry]) -> [[String: Any]] {
-    // swiftlint:disable:next closure_body_length
-    return entries.map { entry in
-      switch entry {
-      case .color(let name, let value):
-        return [
-          "type": "color",
-          "name": name,
-          "value": value
-        ]
-      case .data(let name, let value):
-        return [
-          "type": "data",
-          "name": name,
-          "value": value
-        ]
-      case .group(let name, let isNamespaced, let items):
-        return [
-          "type": "group",
-          "isNamespaced": "\(isNamespaced)",
-          "name": name,
-          "items": structure(entries: items)
-        ]
-      case .image(let name, let value):
-        return [
-          "type": "image",
-          "name": name,
-          "value": value
-        ]
+  fileprivate static func structure(entries: [AssetsCatalogEntry]) -> [[String: Any]] {
+    return entries.map { $0.asDictionary }
+  }
+
+  private static func countTypes(catalogs: [AssetsCatalog.Catalog]) -> [String: Int] {
+    var result: [String: Int] = [:]
+    countTypes(entries: catalogs.flatMap { $0.entries }, into: &result)
+    return result
+  }
+
+  private static func countTypes(entries: [AssetsCatalogEntry], into result: inout [String: Int]) {
+    for entry in entries {
+      if let entry = entry as? AssetsCatalog.Entry.Item {
+        result[entry.item.typeName, default: 0] += 1
+      } else if let group = entry as? AssetsCatalog.Entry.Group {
+        AssetsCatalog.Parser.countTypes(entries: group.items, into: &result)
       }
+    }
+  }
+}
+
+extension AssetsCatalog.Entry.Group {
+  var asDictionary: [String: Any] {
+    return [
+      "type": "group",
+      "isNamespaced": "\(isNamespaced)",
+      "name": name,
+      "items": AssetsCatalog.Parser.structure(entries: items)
+    ]
+  }
+}
+
+extension AssetsCatalog.Entry.Item {
+  var asDictionary: [String: Any] {
+    return [
+      "type": item.typeName,
+      "name": name,
+      "value": value
+    ]
+  }
+}
+
+extension Constants.Item {
+  var typeName: String {
+    switch self {
+    case .arResourceGroup:
+      return "arresourcegroup"
+    case .colorSet:
+      return "color"
+    case .dataSet:
+      return "data"
+    case .imageSet:
+      return "image"
     }
   }
 }

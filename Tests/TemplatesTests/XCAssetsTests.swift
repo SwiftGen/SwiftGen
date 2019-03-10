@@ -9,7 +9,7 @@ import XCTest
 
 class XCAssetsTests: XCTestCase {
   enum Contexts {
-    static let all = ["empty", "all"]
+    static let all = ["empty", "all", "food"]
   }
 
   // generate variations to test customname generation
@@ -24,11 +24,12 @@ class XCAssetsTests: XCTestCase {
         context: context,
         parameters: [
           "enumName=XCTAssets",
+          "arResourceGroupTypeName=XCTARResourceGroup",
           "colorTypeName=XCTColorAsset",
           "dataTypeName=XCTDataAsset",
           "imageTypeName=XCTImageAsset",
+          // deprecated parameters
           "colorAliasName=XCTColor",
-          "dataAliasName=XCTData",
           "imageAliasName=XCTImage"
         ]
        ),

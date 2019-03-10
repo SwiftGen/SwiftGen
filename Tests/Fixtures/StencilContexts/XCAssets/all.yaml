@@ -61,6 +61,8 @@ catalogs:
     type: "image"
     value: "private"
   name: "Food"
+- assets: []
+  name: "Other"
 - assets:
   - isNamespaced: "true"
     items:
@@ -86,3 +88,19 @@ catalogs:
     name: "Vengo"
     type: "group"
   name: "Styles"
+- assets:
+  - name: "Bottles"
+    type: "arresourcegroup"
+    value: "Bottles"
+  - name: "Paintings"
+    type: "arresourcegroup"
+    value: "Paintings"
+  - name: "Posters"
+    type: "arresourcegroup"
+    value: "Posters"
+  name: "Targets"
+resourceCount:
+  arresourcegroup: 3
+  color: 4
+  data: 3
+  image: 8

@@ -9,6 +9,9 @@
 * As Swift 3 is officially no longer maintained, we're deprecating the Swift 3 templates. The templates will remain available until the next major version of SwiftGen, but we can no longer guarantee that there won't be issues with the generated code.  
   [David Jennes](https://github.com/djbe)
   [#601](https://github.com/SwiftGen/SwiftGen/pull/601)
+* XCAssets: the `colorAliasName` and `imageAliasName` template parameters are now deprecated and will be removed in the next major release.  
+  [David Jennes](https://github.com/djbe)
+  [#614](https://github.com/SwiftGen/SwiftGen/pull/614)
 
 ### New Features
 
@@ -38,6 +41,9 @@
 * Strings: templates to generate Objective-C. Please check [the template's documentation](Documentation/templates/string/objc.md) for more information.  
   [Eric Slosser](https://github.com/Mr-Fixit)
   [SwiftGen/SwiftGen#378](https://github.com/SwiftGen/SwiftGen/pull/378)
+* XCAssets: the parser now supports AR Resource Groups, together with reference images and objects.  
+  [David Jennes](https://github.com/djbe)
+  [#614](https://github.com/SwiftGen/SwiftGen/pull/614)
 
 ### Bug Fixes
 

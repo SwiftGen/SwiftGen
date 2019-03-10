@@ -62,11 +62,11 @@ item.boolean = true
 item.string = "test"
 
 do {
-	let newObjectsCount = context.insertedObjects.count
-	print("Preparing to save \(newObjectsCount)")
+  let newObjectsCount = context.insertedObjects.count
+  print("Preparing to save \(newObjectsCount)")
 
-	try context.save()
-	print("Saved")
+  try context.save()
+  print("Saved")
 } catch {
-	fatalError("Unresolved error \(error)")
+  fatalError("Unresolved error \(error)")
 }
