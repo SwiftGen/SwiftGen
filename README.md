@@ -460,6 +460,26 @@ internal class MainEntity: NSManagedObject {
   @NSManaged internal var date: Date?
   @NSManaged internal var float: Float
   @NSManaged internal var int64: Int64
+  internal var integerEnum: IntegerEnum {
+    get {
+      let key = "integerEnum"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      guard let value = primitiveValue(forKey: key) as? IntegerEnum.RawValue,
+        let result = IntegerEnum(rawValue: value) else {
+        fatalError("Could not convert value for key '\(key)' to type 'IntegerEnum'")
+      }
+      return result
+    }
+    set {
+      let key = "integerEnum"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue.rawValue, forKey: key)
+    }
+  }
   @NSManaged internal var manyToMany: Set<SecondaryEntity>
 }
 
