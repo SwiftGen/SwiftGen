@@ -65,7 +65,7 @@ internal enum Asset {
       internal static let tint = ColorAsset(name: "Vengo/Tint")
     }
   }
-  enum Targets {
+  internal enum Targets {
     internal static let bottles = ARResourceGroupAsset(name: "Bottles")
     internal static let paintings = ARResourceGroupAsset(name: "Paintings")
     internal static let posters = ARResourceGroupAsset(name: "Posters")

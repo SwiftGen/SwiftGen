@@ -31,18 +31,18 @@ Note: the generated code may look differently depending on the platform the stor
 **Extract:**
 
 ```swift
-enum StoryboardScene {
-  enum Dependency: StoryboardType {
-    static let storyboardName = "Dependency"
+internal enum StoryboardScene {
+  internal enum Dependency: StoryboardType {
+    internal static let storyboardName = "Dependency"
 
-    static let dependent = SceneType<ExtraModule.ValidatePasswordViewController>(storyboard: Dependency.self, identifier: "Dependent")
+    internal static let dependent = SceneType<ExtraModule.ValidatePasswordViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
-  enum Message: StoryboardType {
-    static let storyboardName = "Message"
+  internal enum Message: StoryboardType {
+    internal static let storyboardName = "Message"
 
     internal static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: Message.self)
 
-    static let messagesList = SceneType<UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
+    internal static let messagesList = SceneType<UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
   }
 }
 ```
