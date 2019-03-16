@@ -54,7 +54,13 @@ import {{module}}
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static var bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type
 {% elif storyboards %}
 // Mixed AppKit and UIKit storyboard files found, please invoke swiftgen with these separately
 {% else %}
