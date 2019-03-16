@@ -44,6 +44,9 @@
 * XCAssets: the parser now supports AR Resource Groups, together with reference images and objects.  
   [David Jennes](https://github.com/djbe)
   [#614](https://github.com/SwiftGen/SwiftGen/pull/614)
+* Templates: Bundle now use static property on BundleToken for better performance.  
+  [shuoli84](https://github.com/shuoli84)
+  [#623](https://github.com/SwiftGen/SwiftGen/issues/623)
 
 ### Bug Fixes
 
