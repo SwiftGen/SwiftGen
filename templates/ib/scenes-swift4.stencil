@@ -62,7 +62,7 @@ import {{module}}
 {{accessModifier}} extension StoryboardType {
   static var storyboard: {{prefix}}Storyboard {
     let name = {% if isAppKit %}NSStoryboard.Name({% endif %}self.storyboardName{% if isAppKit %}){% endif %}
-    return {{prefix}}Storyboard(name: name, bundle: Bundle(for: BundleToken.self))
+    return {{prefix}}Storyboard(name: name, bundle: BundleToken.bundle)
   }
 }
 
@@ -92,7 +92,7 @@ import {{module}}
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
-  static var bundle: Bundle = {
+  static let bundle: Bundle = {
     Bundle(for: BundleToken.self)
   }()
 }

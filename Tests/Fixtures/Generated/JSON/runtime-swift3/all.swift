@@ -70,7 +70,7 @@ private struct JSONDocument {
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
-  static var bundle: Bundle = {
+  static let bundle: Bundle = {
     Bundle(for: BundleToken.self)
   }()
 }
