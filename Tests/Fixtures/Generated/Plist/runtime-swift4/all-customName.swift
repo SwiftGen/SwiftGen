@@ -56,7 +56,7 @@ internal enum CustomPlist {
 // MARK: - Implementation Details
 
 private func arrayFromPlist<T>(at path: String) -> [T] {
-  let bundle = Bundle(for: BundleToken.self)
+  let bundle = BundleToken.bundle
   guard let url = bundle.url(forResource: path, withExtension: nil),
     let data = NSArray(contentsOf: url) as? [T] else {
     fatalError("Unable to load PLIST at path: \(path)")
@@ -68,7 +68,7 @@ private struct PlistDocument {
   let data: [String: Any]
 
   init(path: String) {
-    let bundle = Bundle(for: BundleToken.self)
+    let bundle = BundleToken.bundle
     guard let url = bundle.url(forResource: path, withExtension: nil),
       let data = NSDictionary(contentsOf: url) as? [String: Any] else {
         fatalError("Unable to load PLIST at path: \(path)")
@@ -84,4 +84,10 @@ private struct PlistDocument {
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type

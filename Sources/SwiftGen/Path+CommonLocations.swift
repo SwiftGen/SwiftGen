@@ -40,7 +40,7 @@ extension Path {
   private static let templatesRelativePath: String = {
     if let path = Bundle.main.object(forInfoDictionaryKey: "TemplatePath") as? String, !path.isEmpty {
       return path
-    } else if let path = Bundle(for: BundleToken.self).path(forResource: "templates", ofType: nil) {
+    } else if let path = BundleToken.bundle.path(forResource: "templates", ofType: nil) {
       return path
     } else {
       return "../templates"
@@ -48,4 +48,10 @@ extension Path {
   }()
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type

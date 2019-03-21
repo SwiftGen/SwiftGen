@@ -44,7 +44,7 @@ internal enum CustomJSON {
 // MARK: - Implementation Details
 
 private func objectFromJSON<T>(at path: String) -> T {
-  let bundle = Bundle(for: BundleToken.self)
+  let bundle = BundleToken.bundle
   guard let url = bundle.url(forResource: path, withExtension: nil),
     let json = try? JSONSerialization.jsonObject(with: Data(contentsOf: url), options: []),
     let result = json as? T else {
@@ -68,4 +68,10 @@ private struct JSONDocument {
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type

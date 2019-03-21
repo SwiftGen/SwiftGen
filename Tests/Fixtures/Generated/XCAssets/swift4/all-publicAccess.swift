@@ -88,7 +88,7 @@ public struct ARResourceGroupAsset {
 @available(iOS 11.3, *)
 public extension ARReferenceImage {
   static func referenceImages(in asset: ARResourceGroupAsset) -> Set<ARReferenceImage> {
-    let bundle = Bundle(for: BundleToken.self)
+    let bundle = BundleToken.bundle
     return referenceImages(inGroupNamed: asset.name, bundle: bundle) ?? Set()
   }
 }
@@ -96,7 +96,7 @@ public extension ARReferenceImage {
 @available(iOS 12.0, *)
 public extension ARReferenceObject {
   static func referenceObjects(in asset: ARResourceGroupAsset) -> Set<ARReferenceObject> {
-    let bundle = Bundle(for: BundleToken.self)
+    let bundle = BundleToken.bundle
     return referenceObjects(inGroupNamed: asset.name, bundle: bundle) ?? Set()
   }
 }
@@ -122,7 +122,7 @@ public final class ColorAsset {
 public extension ColorAsset.Color {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
   convenience init!(asset: ColorAsset) {
-    let bundle = Bundle(for: BundleToken.self)
+    let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS)
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
@@ -148,7 +148,7 @@ public struct DataAsset {
 @available(iOS 9.0, macOS 10.11, *)
 public extension NSDataAsset {
   convenience init!(asset: DataAsset) {
-    let bundle = Bundle(for: BundleToken.self)
+    let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS)
     self.init(name: asset.name, bundle: bundle)
     #elseif os(macOS)
@@ -168,7 +168,7 @@ public struct ImageAsset {
   #endif
 
   public var image: Image {
-    let bundle = Bundle(for: BundleToken.self)
+    let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
@@ -186,7 +186,7 @@ public extension ImageAsset.Image {
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
   convenience init!(asset: ImageAsset) {
     #if os(iOS) || os(tvOS)
-    let bundle = Bundle(for: BundleToken.self)
+    let bundle = BundleToken.bundle
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
     self.init(named: NSImage.Name(asset.name))
@@ -196,4 +196,10 @@ public extension ImageAsset.Image {
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type

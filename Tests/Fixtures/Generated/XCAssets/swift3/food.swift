@@ -48,7 +48,7 @@ internal struct ImageAsset {
   #endif
 
   internal var image: Image {
-    let bundle = Bundle(for: BundleToken.self)
+    let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
@@ -66,7 +66,7 @@ internal extension ImageAsset.Image {
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
   convenience init!(asset: ImageAsset) {
     #if os(iOS) || os(tvOS)
-    let bundle = Bundle(for: BundleToken.self)
+    let bundle = BundleToken.bundle
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
     #elseif os(macOS) || os(watchOS)
     self.init(named: asset.name)
@@ -74,4 +74,10 @@ internal extension ImageAsset.Image {
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type
