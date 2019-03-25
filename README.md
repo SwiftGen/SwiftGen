@@ -12,7 +12,7 @@ SwiftGen is a tool to auto-generate Swift code for resources of your projects, t
   </td><td>
     <ul>
         <li><a href="#installation">Installation</a>
-        <li><a href="#usage">Usage</a>
+        <li><a href="#configuration-file">Configuration File</a>
         <li><a href="#choosing-your-template">Choosing your template</a>
         <li><a href="#additional-documentation">Additional documentation</a>
     </ul>
@@ -164,13 +164,13 @@ Or add the path to the `bin` folder to your `$PATH` and invoke `swiftgen` direct
 ---
 </details>
 
-## Usage
+## Configuration File
 
 > ❗️ If you're migrating from older SwiftGen versions, don't forget to [read the Migration Guide](Documentation/MigrationGuide.md).
 
 SwiftGen is provided as a single command-line tool which uses a configuration file to run various actions (subcommands).
 
-Each action described in the configuration file (`strings`, `fonts`, `ib`, …) typically corresponds to a type of input resources to parse (strings files, IB files, Font files, JSON files, …), allowing you to generate constants for each types of those input files.
+Each action described in the [configuration file](Documentation/ConfigFile.md) (`strings`, `fonts`, `ib`, …) typically corresponds to a type of input resources to parse (strings files, IB files, Font files, JSON files, …), allowing you to generate constants for each types of those input files.
 
 To use SwiftGen, simply create a `swiftgen.yml` YAML file to list all the subcommands to invoke, and for each subcommand, the list of arguments to pass to it. For example:
 
@@ -192,7 +192,7 @@ xcassets:
 
 Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for short, and it will execute what's described in the configuration file
 
-To learn more about the configuration file — its more detailed syntax and possibilities, how to pass custom parameters, using `swiftgen config lint` to validate it, how to use alternate config files, and other tips — [see the dedicated documentation](Documentation/ConfigFile.md).
+[The dedicated documentation](Documentation/ConfigFile.md) explains the syntax and possibilities in details – like how to pass custom parameters, use `swiftgen config lint` to validate it, how to use alternate config files, and other tips.
 
 There are also additional subcommands you can invoke from the command line to manage and configure SwiftGen:
 
