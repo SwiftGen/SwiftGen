@@ -66,8 +66,11 @@ internal struct FontConvertible {
   internal let family: String
   internal let path: String
 
-  internal func font(size: CGFloat) -> Font! {
-    return Font(font: self, size: size)
+  internal func font(size: CGFloat) -> Font {
+    guard let font = Font(font: self, size: size) else {
+      fatalError("Unabble to initialize font '\(name)' (\(family))")
+    }
+    return font
   }
 
   internal func register() {
@@ -83,7 +86,7 @@ internal struct FontConvertible {
 }
 
 internal extension Font {
-  convenience init!(font: FontConvertible, size: CGFloat) {
+  convenience init?(font: FontConvertible, size: CGFloat) {
     #if os(iOS) || os(tvOS) || os(watchOS)
     if !UIFont.fontNames(forFamilyName: font.family).contains(font.name) {
       font.register()

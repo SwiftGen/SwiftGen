@@ -180,7 +180,12 @@ internal final class ColorAsset {
   #endif
 
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
-  internal private(set) lazy var color: Color = Color(asset: self)
+  internal private(set) lazy var color: Color = {
+    guard let color = Color(asset: self) else {
+      fatalError("Unable to load color asset named \(name).")
+    }
+    return color
+  }()
 
   fileprivate init(name: String) {
     self.name = name
@@ -189,7 +194,7 @@ internal final class ColorAsset {
 
 internal extension ColorAsset.Color {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
-  convenience init!(asset: ColorAsset) {
+  convenience init?(asset: ColorAsset) {
     let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS)
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
@@ -207,7 +212,10 @@ internal struct DataAsset {
   #if os(iOS) || os(tvOS) || os(macOS)
   @available(iOS 9.0, macOS 10.11, *)
   internal var data: NSDataAsset {
-    return NSDataAsset(asset: self)
+    guard let data = NSDataAsset(asset: self) else {
+      fatalError("Unable to load data asset named \(name).")
+    }
+    return data
   }
   #endif
 }
@@ -215,7 +223,7 @@ internal struct DataAsset {
 #if os(iOS) || os(tvOS) || os(macOS)
 @available(iOS 9.0, macOS 10.11, *)
 internal extension NSDataAsset {
-  convenience init!(asset: DataAsset) {
+  convenience init?(asset: DataAsset) {
     let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS)
     self.init(name: asset.name, bundle: bundle)
@@ -244,7 +252,9 @@ internal struct ImageAsset {
     #elseif os(watchOS)
     let image = Image(named: name)
     #endif
-    guard let result = image else { fatalError("Unable to load image named \(name).") }
+    guard let result = image else {
+      fatalError("Unable to load image asset named \(name).")
+    }
     return result
   }
 }
@@ -252,7 +262,7 @@ internal struct ImageAsset {
 internal extension ImageAsset.Image {
   @available(macOS, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
-  convenience init!(asset: ImageAsset) {
+  convenience init?(asset: ImageAsset) {
     #if os(iOS) || os(tvOS)
     let bundle = BundleToken.bundle
     self.init(named: asset.name, in: bundle, compatibleWith: nil)

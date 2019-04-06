@@ -47,8 +47,11 @@
   {{accessModifier}} let family: String
   {{accessModifier}} let path: String
 
-  {{accessModifier}} func font(size: CGFloat) -> Font! {
-    return Font(font: self, size: size)
+  {{accessModifier}} func font(size: CGFloat) -> Font {
+    guard let font = Font(font: self, size: size) else {
+      fatalError("Unabble to initialize font '\(name)' (\(family))")
+    }
+    return font
   }
 
   {{accessModifier}} func register() {
@@ -64,7 +67,7 @@
 }
 
 {{accessModifier}} extension Font {
-  convenience init!(font: FontConvertible, size: CGFloat) {
+  convenience init?(font: FontConvertible, size: CGFloat) {
     #if os(iOS) || os(tvOS) || os(watchOS)
     if !UIFont.fontNames(forFamilyName: font.family).contains(font.name) {
       font.register()
