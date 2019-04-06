@@ -9,7 +9,9 @@
 #if SWIFT_PACKAGE
 import CYaml
 #endif
+#if os(Linux)
 import CoreFoundation
+#endif
 import Foundation
 
 public extension Node {
@@ -18,7 +20,7 @@ public extension Node {
     /// - parameter representable: Value of `NodeRepresentable` to represent as a `Node`.
     ///
     /// - throws: `YamlError`.
-    public init<T: NodeRepresentable>(_ representable: T) throws {
+    init<T: NodeRepresentable>(_ representable: T) throws {
         self = try representable.represented()
     }
 }
@@ -97,13 +99,13 @@ extension Date: ScalarRepresentable {
     }
 
     private var iso8601String: String {
-        let calendar = Calendar(identifier: .gregorian)
-        let nanosecond = calendar.component(.nanosecond, from: self)
-#if os(Linux)
+#if !_runtime(_ObjC) && !swift(>=5.0)
         // swift-corelibs-foundation has bug with nanosecond.
         // https://bugs.swift.org/browse/SR-3158
         return iso8601Formatter.string(from: self)
 #else
+        let calendar = Calendar(identifier: .gregorian)
+        let nanosecond = calendar.component(.nanosecond, from: self)
         if nanosecond != 0 {
             return iso8601WithFractionalSecondFormatter.string(from: self)
                 .trimmingCharacters(in: characterSetZero) + "Z"

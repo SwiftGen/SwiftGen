@@ -6,8 +6,6 @@
 //  Copyright (c) 2016 Yams. All rights reserved.
 //
 
-import Foundation
-
 extension Node {
     /// A mapping is the YAML equivalent of a `Dictionary`.
     public struct Mapping {
@@ -184,7 +182,11 @@ extension Node.Mapping {
 
     /// Get the index of the specified `Node`, if it exists in the mapping.
     public func index(forKey key: Node) -> Index? {
+    #if swift(>=5.0)
+        return pairs.reversed().firstIndex(where: { $0.key == key }).map({ pairs.index(before: $0.base) })
+    #else
         return pairs.reversed().index(where: { $0.key == key }).map({ pairs.index(before: $0.base) })
+    #endif
     }
 }
 

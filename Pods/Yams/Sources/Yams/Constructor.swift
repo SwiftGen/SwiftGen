@@ -76,7 +76,7 @@ extension Constructor {
         .bool: Bool.construct,
         .float: Double.construct,
         .null: NSNull.construct,
-        .int: Int.construct,
+        .int: MemoryLayout<Int>.size == 8 ? Int.construct : { Int.construct(from: $0) ?? Int64.construct(from: $0) },
         // http://yaml.org/type/index.html
         .binary: Data.construct,
         .timestamp: Date.construct
@@ -306,6 +306,32 @@ extension UInt: ScalarConstructible {
     ///
     /// - returns: An instance of `UInt`, if one was successfully extracted from the scalar.
     public static func construct(from scalar: Node.Scalar) -> UInt? {
+        return _construct(from: scalar)
+    }
+}
+
+// MARK: - ScalarConstructible Int64 Conformance
+
+extension Int64: ScalarConstructible {
+    /// Construct an instance of `Int64`, if possible, from the specified scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type `Int64`, if possible.
+    ///
+    /// - returns: An instance of `Int64`, if one was successfully extracted from the scalar.
+    public static func construct(from scalar: Node.Scalar) -> Int64? {
+        return _construct(from: scalar)
+    }
+}
+
+// MARK: - ScalarConstructible UInt64 Conformance
+
+extension UInt64: ScalarConstructible {
+    /// Construct an instance of `UInt64`, if possible, from the specified scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type `UInt64`, if possible.
+    ///
+    /// - returns: An instance of `UInt64`, if one was successfully extracted from the scalar.
+    public static func construct(from scalar: Node.Scalar) -> UInt64? {
         return _construct(from: scalar)
     }
 }
@@ -561,8 +587,12 @@ extension Double: SexagesimalConvertible {}
 extension Float: SexagesimalConvertible {}
 // MARK: - SexagesimalConvertible Int Conformance
 extension Int: SexagesimalConvertible {}
-// MARK: - SexagesimalConvertible Int Conformance
+// MARK: - SexagesimalConvertible UInt Conformance
 extension UInt: SexagesimalConvertible {}
+// MARK: - SexagesimalConvertible Int64 Conformance
+extension Int64: SexagesimalConvertible {}
+// MARK: - SexagesimalConvertible UInt64 Conformance
+extension UInt64: SexagesimalConvertible {}
 
 private extension String {
     func sexagesimal<T>() -> T where T: SexagesimalConvertible {
