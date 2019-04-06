@@ -49,7 +49,7 @@ public extension ARReferenceObject {
 }
 #endif
 
-public struct ColorAsset {
+public final class ColorAsset {
   public fileprivate(set) var name: String
 
   #if os(OSX)
@@ -59,9 +59,12 @@ public struct ColorAsset {
   #endif
 
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  public var color: Color {
-    return Color(asset: self)
-  }
+  public private(set) lazy var color: Color = {
+    guard let color = Color(asset: self) else {
+      fatalError("Unable to load color asset named \(name).")
+    }
+    return color
+  }()
 
   // Extra for playgrounds
   public init(name: String) {
@@ -71,7 +74,7 @@ public struct ColorAsset {
 
 public extension ColorAsset.Color {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  convenience init!(asset: ColorAsset) {
+  convenience init?(asset: ColorAsset) {
     #if os(iOS) || os(tvOS)
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
     #elseif os(OSX)
@@ -88,7 +91,10 @@ public struct DataAsset {
   #if os(iOS) || os(tvOS) || os(OSX)
   @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
   public var data: NSDataAsset {
-    return NSDataAsset(asset: self)
+    guard let data = NSDataAsset(asset: self) else {
+      fatalError("Unable to load data asset named \(name).")
+    }
+    return data
   }
   #endif
 
@@ -101,7 +107,7 @@ public struct DataAsset {
 #if os(iOS) || os(tvOS) || os(OSX)
 @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
 public extension NSDataAsset {
-  convenience init!(asset: DataAsset) {
+  convenience init?(asset: DataAsset) {
     #if os(iOS) || os(tvOS)
     self.init(name: asset.name, bundle: bundle)
     #elseif os(OSX)
@@ -128,7 +134,9 @@ public struct ImageAsset {
     #elseif os(watchOS)
     let image = Image(named: name)
     #endif
-    guard let result = image else { fatalError("Unable to load image named \(name).") }
+    guard let result = image else {
+      fatalError("Unable to load image asset named \(name).")
+    }
     return result
   }
 
@@ -142,7 +150,7 @@ public extension ImageAsset.Image {
   @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
-  convenience init!(asset: ImageAsset) {
+  convenience init?(asset: ImageAsset) {
     #if os(iOS) || os(tvOS)
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
     #elseif os(OSX)
