@@ -12,12 +12,19 @@ import Foundation
 
 {% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
-    _ p{{forloop.counter}}: {{type}}{{ ", " if not forloop.last }}
+    {% if type == "String" %}
+    _ p{{forloop.counter}}: Any
+    {% else %}
+    _ p{{forloop.counter}}: {{type}}
+    {% endif %}
+    {{ ", " if not forloop.last }}
   {% endfor %}
 {% endfilter %}{% endmacro %}
 {% macro argumentsBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
-    {% if type == "UnsafeRawPointer" %}
+    {% if type == "String" %}
+    String(describing: p{{forloop.counter}})
+    {% elif type == "UnsafeRawPointer" %}
     Int(bitPattern: p{{forloop.counter}})
     {% else %}
     p{{forloop.counter}}
@@ -34,6 +41,9 @@ import Foundation
   {{accessModifier}} static func {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}({% call parametersBlock string.types %}) -> String {
     return {{enumName}}.tr("{{table}}", "{{string.key}}", {% call argumentsBlock string.types %})
   }
+  {% elif param.localizeFunction %}
+  {# custom localization function is mostly used for in-app lang selection, so we want the loc to be recomputed at each call for those (hence the computed var) #}
+  {{accessModifier}} static var {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: String { return {{enumName}}.tr("{{table}}", "{{string.key}}") }
   {% else %}
   {{accessModifier}} static let {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{table}}", "{{string.key}}")
   {% endif %}
@@ -62,12 +72,18 @@ import Foundation
 extension {{enumName}} {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
     // swiftlint:disable:next nslocalizedstring_key
-    let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
+    let format = {{param.localizeFunction|default:"NSLocalizedString"}}(key, tableName: table, bundle: BundleToken.bundle, comment: "")
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type
 {% else %}
 // No string found
 {% endif %}

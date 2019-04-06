@@ -8,6 +8,8 @@ Simply create a YAML file named `swiftgen.yml` at the root of your repository wi
 
 ## Configuration File Format
 
+### Global Structure
+
 The configuration file is a YAML file structured like this (example):
 
 ```yaml
@@ -38,6 +40,8 @@ xcassets:
 
 > 💡 We advise against using _absolute_ paths — starting with `/` — in the configuration file, so that they won't rely on where the project was cloned on your machine.
 
+### Keys details
+
 Here's a quick description of all the possible _root_ keys. All of them are optional.
 
 | Key | Description | Intended usage |
@@ -62,6 +66,7 @@ Each key corresponding to a SwiftGen subcommands (`colors`, `coredata`, `fonts`,
 | Subkey | Type | Description |
 |--------|------|-------------|
 | `inputs` | Path or Array of Paths | The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `Localizable.strings` file for the `strings` command, etc). |
+| `options` | Dictionary | Any optional list of settings for the parser, to change its behaviour. See the commands' specific documentation for available options. |
 | `filter` | Regular Expression | The regular expression to apply to each input path, only paths matching the given filter will be used. Filters are applied to actual (relative) paths, not just the filename. Note that each command has a default built-in filter, which you can override with this option. |
 | `outputs` | Array | A list of output descriptions, composed of a template and a file output. |
 | `paths` | Path or Array of Paths | **Deprecated** The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `Localizable.strings` file for the `strings` command, etc). |
@@ -86,6 +91,20 @@ Similarly to when you invoke each subcommand of SwiftGen manually:
 * `inputs` and `outputs` are mandatory.
 * You must specify either `templateName` or `templatePath`, but not both, nor neither.
 * `params` is optional.
+
+### Environment Variables
+
+You can use environment variables in your config file, by using the `${VARNAME}` syntax. Those environment variables will be expanded when SwiftGen parses the config file.
+
+If you're running `swiftgen` as part of a Script Build Phase in Xcode, this especially allows you to inject values coming from Xcode's build settings (as Xcode expose those as env vars) into your config file. For example:
+
+```yaml
+strings:
+  inputs: ${PROJECT_DIR}/${TARGET_NAME}/Resources/
+  outputs:
+    templateName: swift4
+    output: ${PROJECT_DIR}/${TARGET_NAME}/Constants/Strings-${TARGET_NAME}.swift
+```
 
 ## Advanced options for running the config file
 

@@ -52,7 +52,7 @@ extension ConfigEntryOutput {
 /// Convert to CommandLine-equivalent string (for verbose mode, printing linting info, …)
 ///
 extension ConfigEntryOutput {
-  func commandLine(forCommand cmd: String, inputs: [Path], filter: String?) -> String {
+  func commandLine(forCommand cmd: String, inputs: [Path], filter: String?, options: [String: Any]) -> String {
     let templateFlag: String = {
       switch self.template {
       case .name(let name):
@@ -62,13 +62,19 @@ extension ConfigEntryOutput {
       }
     }()
     let filterFlag = filter.map { "--filter \($0)" } ?? ""
-    let params = Parameters.flatten(dictionary: self.parameters)
+    let flatOptions = Parameters.flatten(dictionary: options)
+      .map { "--option \($0)" }
+      .joined(separator: " ")
+    let flatParams = Parameters.flatten(dictionary: self.parameters)
+      .map { "--param \($0)" }
+      .joined(separator: " ")
 
     return [
       "swiftgen",
       cmd,
       templateFlag,
-      params.map { "--param \($0)" }.joined(separator: " "),
+      flatOptions,
+      flatParams,
       "--output \(self.output)",
       filterFlag,
       inputs.map { $0.string }.joined(separator: " ")

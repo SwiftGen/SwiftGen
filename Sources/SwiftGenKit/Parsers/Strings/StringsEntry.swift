@@ -14,29 +14,23 @@ extension Strings {
     let types: [PlaceholderType]
     let keyStructure: [String]
 
-    init(key: String, translation: String, types: [PlaceholderType]) {
+    init(key: String, translation: String, types: [PlaceholderType], keyStructureSeparator: String) {
       self.key = key
       self.translation = translation
       self.types = types
-      self.keyStructure = Entry.split(key: key)
+      self.keyStructure = Entry.split(key: key, separator: keyStructureSeparator)
     }
 
-    init(key: String, translation: String, types: PlaceholderType...) {
-      self.init(key: key, translation: translation, types: types)
-    }
-
-    init(key: String, translation: String) throws {
+    init(key: String, translation: String, keyStructureSeparator: String) throws {
       let types = try PlaceholderType.placeholders(fromFormat: translation)
-      self.init(key: key, translation: translation, types: types)
+      self.init(key: key, translation: translation, types: types, keyStructureSeparator: keyStructureSeparator)
     }
 
     // MARK: - Structured keys
 
-    private static let separatorSet = CharacterSet(charactersIn: ".")
-
-    private static func split(key: String) -> [String] {
+    private static func split(key: String, separator: String) -> [String] {
       return key
-        .components(separatedBy: Entry.separatorSet)
+        .components(separatedBy: separator)
         .filter { !$0.isEmpty }
     }
   }

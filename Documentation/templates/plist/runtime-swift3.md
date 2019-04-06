@@ -12,6 +12,7 @@
 - When you need to generate *Swift 3* code.
 - Loads the data from the Plist file in the current bundle at runtime.
 - If you need other functionality, such as loading a file in your `Documents` folder, or handling `Optional` properties, you should write your own custom template ([guide](../../Creating-your-templates.md)).
+- **Warning**: Swift 3 is no longer actively supported, so we cannot guarantee that there won't be issues with the generated code.
 
 ## Customization
 
@@ -40,7 +41,7 @@ internal enum PlistFiles {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Plist/runtime-swift3-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Plist/runtime-swift3/all.swift)
 
 ## Usage example
 

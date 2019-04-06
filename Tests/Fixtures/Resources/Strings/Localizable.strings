@@ -1,5 +1,5 @@
-"alert_title" = "Title of the alert";
-"alert_message" = "Some alert body there";
+"alert__title" = "Title of the alert";
+"alert__message" = "Some alert body there";
 
 "percent" = "This is a %% character.";
 "private" = "Hello, my name is %@ and I'm %d";
@@ -12,7 +12,7 @@
 
 "settings.navigation-bar.self" = "Some Reserved Keyword there";
 "settings.navigation-bar.title.even.deeper" = "Settings";
-"settings.user_profile_section.HEADER_TITLE" = "User Profile Settings";
-"settings.user_profile_section.footer_text" = "Here you can change some user profile settings.";
+"settings.user__profile_section.HEADER_TITLE" = "User Profile Settings";
+"settings.user__profile_section.footer_text" = "Here you can change some user profile settings.";
 
 "settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep" = "DeepSettings";

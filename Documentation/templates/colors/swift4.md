@@ -27,20 +27,20 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-struct ColorName {
-  let rgbaValue: UInt32
-  var color: Color { return Color(named: self) }
+internal struct ColorName {
+  internal let rgbaValue: UInt32
+  internal var color: Color { return Color(named: self) }
 
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>
   /// Alpha: 100% <br/> (0x339666ff)
-  static let articleBody = ColorName(rgbaValue: 0x339666ff)
+  internal static let articleBody = ColorName(rgbaValue: 0x339666ff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
   /// Alpha: 100% <br/> (0xff66ccff)
-  static let articleFootnote = ColorName(rgbaValue: 0xff66ccff)
+  internal static let articleFootnote = ColorName(rgbaValue: 0xff66ccff)
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Colors/swift4-context-defaults.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Colors/swift4/defaults.swift)
 
 ## Usage example
 

@@ -31,6 +31,7 @@ public enum Colors {
 
   public final class Parser: SwiftGenKit.Parser {
     private var parsers = [String: ColorsFileTypeParser.Type]()
+    private let options: ParserOptionValues
     var palettes = [Palette]()
     public var warningHandler: Parser.MessageHandler?
 
@@ -41,7 +42,8 @@ public enum Colors {
       XMLFileParser.self
     ]
 
-    public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
+    public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
+      self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
       self.warningHandler = warningHandler
 
       for parser in Parser.subParsers {
@@ -54,12 +56,16 @@ public enum Colors {
       return "[^/]\\.(?i:\(extensions))$"
     }
 
+    public static var allOptions: ParserOptionList {
+      return ParserOptionList(lists: Parser.subParsers.map { $0.allOptions })
+    }
+
     public func parse(path: Path, relativeTo parent: Path) throws {
       guard let parserType = parsers[path.extension?.lowercased() ?? ""] else {
         throw ParserError.unsupportedFileType(path: path, supported: parsers.keys.sorted())
       }
 
-      let parser = parserType.init()
+      let parser = parserType.init(options: options)
       let palette = try parser.parseFile(at: path)
       palettes += [palette]
     }

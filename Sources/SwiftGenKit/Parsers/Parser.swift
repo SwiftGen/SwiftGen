@@ -8,13 +8,28 @@ import Foundation
 import PathKit
 
 public protocol Parser {
+  /// Parser initializer. Please use the `createWith(options:warningHandler:)` factory method instead,
+  /// it'll ensure the safety of the provided options.
+  ///
+  /// - Parameter options: Dictionary of options, used to customize processing.
+  /// - Parameter warningHandler: Callback for logging issues.
   init(options: [String: Any], warningHandler: MessageHandler?) throws
 
-  // regex for the default filter
+  /// Regex for the default filter
   static var defaultFilter: String { get }
 
-  // Parsing and context generation
+  /// List of supported options
+  static var allOptions: ParserOptionList { get }
+
+  /// Try to parse the file (or directory) at the given path, relative to some parent path.
+  ///
+  /// - Parameter path: The file/directory to parse
+  /// - Parameter parent: The parent path (may not be the direct parent)
   func parse(path: Path, relativeTo parent: Path) throws
+
+  /// Generate the stencil context from the parsed content.
+  ///
+  /// - Returns: A dictionary representing the parsed data 
   func stencilContext() -> [String: Any]
 
   /// This callback will be called when a Parser want to emit a diagnostics message
@@ -25,12 +40,20 @@ public protocol Parser {
 }
 
 public extension Parser {
+  /// Recursively search through the given paths, parsing any file or folder that matches the given filter.
+  ///
+  /// - Parameter paths: The paths to search recursively through.
+  /// - Parameter filter: The filter to apply to each path.
   func searchAndParse(paths: [Path], filter: Filter) throws {
     for path in paths {
       try searchAndParse(path: path, filter: filter)
     }
   }
 
+  /// Recursively search through the given path, parsing any file or folder that matches the given filter.
+  ///
+  /// - Parameter path: The path to search recursively through.
+  /// - Parameter filter: The filter to apply to each path.
   func searchAndParse(path: Path, filter: Filter) throws {
     if path.matches(filter: filter) {
       let parentDir = path.absolute().parent()
@@ -43,5 +66,11 @@ public extension Parser {
         try parse(path: path, relativeTo: parentDir)
       }
     }
+  }
+}
+
+public extension Parser {
+  static var allOptions: ParserOptionList {
+    return []
   }
 }

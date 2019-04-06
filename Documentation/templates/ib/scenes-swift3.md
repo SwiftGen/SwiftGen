@@ -12,6 +12,7 @@
 - When you need to generate *Swift 3* code for your storyboard *scenes*.
 - The generated code supports both UIKit platforms (iOS, tvOS and watchOS) and AppKit platform (macOS).
 - Note: if you also need to generate code for your storyboard segues, you can use [segues-swift3](../segues-swift3.md) in addition to this one.
+- **Warning**: Swift 3 is no longer actively supported, so we cannot guarantee that there won't be issues with the generated code.
 
 ## Customization
 
@@ -31,23 +32,23 @@ Note: the generated code may look differently depending on the platform the stor
 **Extract:**
 
 ```swift
-enum StoryboardScene {
-  enum Dependency: StoryboardType {
-    static let storyboardName = "Dependency"
+internal enum StoryboardScene {
+  internal enum Dependency: StoryboardType {
+    internal static let storyboardName = "Dependency"
 
-    static let dependent = SceneType<ExtraModule.ValidatePasswordViewController>(storyboard: Dependency.self, identifier: "Dependent")
+    internal static let dependent = SceneType<ExtraModule.ValidatePasswordViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
-  enum Message: StoryboardType {
-    static let storyboardName = "Message"
+  internal enum Message: StoryboardType {
+    internal static let storyboardName = "Message"
 
-    static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: Message.self)
+    internal static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: Message.self)
 
-    static let messagesList = SceneType<UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
+    internal static let messagesList = SceneType<UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
   }
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/IB-iOS/scenes-swift3-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/IB-iOS/scenes-swift3/all.swift)
 
 ## Usage example
 

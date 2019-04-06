@@ -12,7 +12,7 @@ SwiftGen is a tool to auto-generate Swift code for resources of your projects, t
   </td><td>
     <ul>
         <li><a href="#installation">Installation</a>
-        <li><a href="#usage">Usage</a>
+        <li><a href="#configuration-file">Configuration File</a>
         <li><a href="#choosing-your-template">Choosing your template</a>
         <li><a href="#additional-documentation">Additional documentation</a>
     </ul>
@@ -36,7 +36,7 @@ There are multiple benefits in using this:
 
 * Avoid any typo you could have when using a String
 * Free auto-completion
-* Avoid the risk to use an non-existing asset name
+* Avoid the risk of using a non-existing asset name
 * All this will be ensured by the compiler.
 
 Also, it's fully customizable thanks to Stencil templates, so even if it comes with predefined templates, you can make your own to generate whatever code fits your needs and your guidelines!
@@ -164,13 +164,13 @@ Or add the path to the `bin` folder to your `$PATH` and invoke `swiftgen` direct
 ---
 </details>
 
-## Usage
+## Configuration File
 
 > ❗️ If you're migrating from older SwiftGen versions, don't forget to [read the Migration Guide](Documentation/MigrationGuide.md).
 
 SwiftGen is provided as a single command-line tool which uses a configuration file to run various actions (subcommands).
 
-Each action described in the configuration file (`strings`, `fonts`, `ib`, …) typically corresponds to a type of input resources to parse (strings files, IB files, Font files, JSON files, …), allowing you to generate constants for each types of those input files.
+Each action described in the [configuration file](Documentation/ConfigFile.md) (`strings`, `fonts`, `ib`, …) typically corresponds to a type of input resources to parse (strings files, IB files, Font files, JSON files, …), allowing you to generate constants for each types of those input files.
 
 To use SwiftGen, simply create a `swiftgen.yml` YAML file to list all the subcommands to invoke, and for each subcommand, the list of arguments to pass to it. For example:
 
@@ -192,7 +192,7 @@ xcassets:
 
 Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for short, and it will execute what's described in the configuration file
 
-To learn more about the configuration file — its more detailed syntax and possibilities, how to pass custom parameters, using `swiftgen config lint` to validate it, how to use alternate config files, and other tips — [see the dedicated documentation](Documentation/ConfigFile.md).
+[The dedicated documentation](Documentation/ConfigFile.md) explains the syntax and possibilities in details – like how to pass custom parameters, use `swiftgen config lint` to validate it, how to use alternate config files, and other tips.
 
 There are also additional subcommands you can invoke from the command line to manage and configure SwiftGen:
 
@@ -237,9 +237,9 @@ SwiftGen is based on templates (it uses [Stencil](https://github.com/kylef/Stenc
 
 ### Bundled templates vs. Custom ones
 
-SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `coredata`, `fonts`, `ib`, `json`, `plist`, `strings`, `xcassets`, `yaml`), which will fit most needs. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs. Simply either use the `templateName` output option to specify the name of the template to use, or store them somewhere else (like in your project repository) and use `templatePath` output option to specify a full path.
+SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `coredata`, `fonts`, `ib`, `json`, `plist`, `strings`, `xcassets`, `yaml`), which will fit most needs; simply use the `templateName` output option to specify the name of the template to use. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs: just store them anywhere (like in your project repository) and use the `templatePath` output option instead of `templateName`, to specify their path.
 
-💡 You can use the `swiftgen templates list` command to list all the available templates (both custom and bundled templates) for each subcommand, list the template content and dupliate them to create your own.
+💡 You can use the `swiftgen templates list` command to list all the available templates (both custom and bundled templates) for each subcommand, and use `swiftgen templates cat` to show a template's content and duplicate it to create your own variation.
 
 For more information about how to create your own templates, [see the dedicated documentation](Documentation/Creating-your-templates.md).
 
@@ -296,33 +296,56 @@ xcassets:
     output: Assets.swift
 ```
 
-This will generate an `enum Asset` with one `case` per image set in your assets catalog, so that you can use them as constants.
+This will generate an `enum Asset` with one `static let` per asset (image set, color set, data set, …) in your assets catalog, so that you can use them as constants.
 
 <details>
 <summary>Example of code generated by the bundled template</summary>
 
 ```swift
-enum Asset {
-  enum Exotic {
-    static let banana: AssetType = "Exotic/Banana"
-    static let mango: AssetType = "Exotic/Mango"
+internal enum Asset {
+  internal enum Files {
+    internal static let data = DataAsset(value: "Data")
+    internal static let readme = DataAsset(value: "README")
   }
-  static let `private`: AssetType = "private"
+  internal enum Food {
+    internal enum Exotic {
+      internal static let banana = ImageAsset(value: "Exotic/Banana")
+      internal static let mango = ImageAsset(value: "Exotic/Mango")
+    }
+    internal static let `private` = ImageAsset(value: "private")
+  }
+  internal enum Styles {
+    internal enum Vengo {
+      internal static let primary = ColorAsset(value: "Vengo/Primary")
+      internal static let tint = ColorAsset(value: "Vengo/Tint")
+    }
+  }
+  internal enum Targets {
+    internal static let bottles = ARResourceGroupAsset(name: "Bottles")
+    internal static let paintings = ARResourceGroupAsset(name: "Paintings")
+  }
 }
-
 ```
 </details>
 
 ### Usage Example
 
 ```swift
-// You can create new images with the convenience constructor like this:
-let bananaImage = UIImage(asset: Asset.Exotic.banana)  // iOS
-let privateImage = NSImage(asset: Asset.private)  // macOS
+// You can create new images by referring to the enum instance and calling `.image` on it:
+let bananaImage = Asset.Exotic.banana.image
+let privateImage = Asset.private.image
 
-// Or as an alternative, you can refer to enum instance and call .image on it:
-let sameBananaImage = Asset.Exotic.banana.image
-let samePrivateImage = Asset.private.image
+// You can create colors by referring to the enum instance and calling `.color` on it:
+let primaryColor = Asset.Styles.Vengo.primary.color
+let tintColor = Asset.Styles.Vengo.tint.color
+
+// You can create data items by referring to the enum instance and calling `.data` on it:
+let data = Asset.data.data
+let readme = Asset.readme.data
+
+// you can load an AR resource group's items using:
+let bottles = Asset.Targets.bottles.referenceObjects
+let paintings = Asset.Targets.paintings.referenceImages
 ```
 
 ## Colors
@@ -335,7 +358,7 @@ colors:
     output: Colors.swift
 ```
 
-This will generate a `enum ColorName` with one `case` per color listed in the text file passed as argument.
+This will generate a `enum ColorName` with one `static let` per color listed in the text file passed as argument.
 
 The input file is expected to be either:
 
@@ -372,16 +395,16 @@ Translucent      : ffffffcc
 The generated code will look like this:
 
 ```swift
-struct ColorName {
-  let rgbaValue: UInt32
-  var color: Color { return Color(named: self) }
+internal struct ColorName {
+  internal let rgbaValue: UInt32
+  internal var color: Color { return Color(named: self) }
 
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>
   /// Alpha: 100% <br/> (0x339666ff)
-  static let articleBody = ColorName(rgbaValue: 0x339666ff)
+  internal static let articleBody = ColorName(rgbaValue: 0x339666ff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
   /// Alpha: 100% <br/> (0xff66ccff)
-  static let articleFootnote = ColorName(rgbaValue: 0xff66ccff)
+  internal static let articleFootnote = ColorName(rgbaValue: 0xff66ccff)
 
   ...
 }
@@ -419,16 +442,16 @@ This will parse the specified core data model(s), generate a class for each enti
 
 ```swift
 internal class MainEntity: NSManagedObject {
-  internal class func entityName() -> String {
+  internal class var entityName: String {
     return "MainEntity"
   }
 
   internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
-    return NSEntityDescription.entity(forEntityName: entityName(), in: managedObjectContext)
+    return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
   @nonobjc internal class func fetchRequest() -> NSFetchRequest<MainEntity> {
-    return NSFetchRequest<MainEntity>(entityName: entityName())
+    return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
   @NSManaged internal var attributedString: NSAttributedString?
@@ -437,6 +460,26 @@ internal class MainEntity: NSManagedObject {
   @NSManaged internal var date: Date?
   @NSManaged internal var float: Float
   @NSManaged internal var int64: Int64
+  internal var integerEnum: IntegerEnum {
+    get {
+      let key = "integerEnum"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      guard let value = primitiveValue(forKey: key) as? IntegerEnum.RawValue,
+        let result = IntegerEnum(rawValue: value) else {
+        fatalError("Could not convert value for key '\(key)' to type 'IntegerEnum'")
+      }
+      return result
+    }
+    set {
+      let key = "integerEnum"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue.rawValue, forKey: key)
+    }
+  }
   @NSManaged internal var manyToMany: Set<SecondaryEntity>
 }
 
@@ -485,12 +528,12 @@ This will recursively go through the specified directory, finding any typeface f
 <summary>Example of code generated by the bundled template</summary>
 
 ```swift
-enum FontFamily {
-  enum SFNSDisplay: String, FontConvertible {
-    static let regular = FontConvertible(name: ".SFNSDisplay-Regular", family: ".SF NS Display", path: "SFNSDisplay-Regular.otf")
+internal enum FontFamily {
+  internal enum SFNSDisplay: String, FontConvertible {
+    internal static let regular = FontConvertible(name: ".SFNSDisplay-Regular", family: ".SF NS Display", path: "SFNSDisplay-Regular.otf")
   }
-  enum ZapfDingbats: String, FontConvertible {
-    static let regular = FontConvertible(name: "ZapfDingbatsITC", family: "Zapf Dingbats", path: "ZapfDingbats.ttf")
+  internal enum ZapfDingbats: String, FontConvertible {
+    internal static let regular = FontConvertible(name: "ZapfDingbatsITC", family: "Zapf Dingbats", path: "ZapfDingbats.ttf")
   }
 }
 ```
@@ -520,7 +563,7 @@ ib:
       output: Storyboard Segues.swift
 ```
 
-This will generate an `enum` for each of your `NSStoryboard`/`UIStoryboard`, with respectively one `case` per storyboard scene or segue.
+This will generate an `enum` for each of your `NSStoryboard`/`UIStoryboard`, with respectively one `static let` per storyboard scene or segue.
 
 <details>
 <summary>Example of code generated by the bundled template</summary>
@@ -530,23 +573,23 @@ The generated code will look like this:
 ```swift
 // output from the scenes template
 
-enum StoryboardScene {
-  enum Dependency: StoryboardType {
-    static let storyboardName = "Dependency"
+internal enum StoryboardScene {
+  internal enum Dependency: StoryboardType {
+    internal static let storyboardName = "Dependency"
 
-    static let dependent = SceneType<UIViewController>(storyboard: Dependency.self, identifier: "Dependent")
+    internal static let dependent = SceneType<UIViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
-  enum Message: StoryboardType {
-    static let storyboardName = "Message"
+  internal enum Message: StoryboardType {
+    internal static let storyboardName = "Message"
 
-    static let messagesList = SceneType<UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
+    internal static let messagesList = SceneType<UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
   }
 }
 
 // output from the segues template
 
-enum StoryboardSegue {
-  enum Message: String, SegueType {
+internal enum StoryboardSegue {
+  internal enum Message: String, SegueType {
     case customBack = "CustomBack"
     case embed = "Embed"
     case nonCustom = "NonCustom"
@@ -696,23 +739,23 @@ Given the following `Localizable.strings` file:
 The generated code will contain this:
 
 ```swift
-enum L10n {
+internal enum L10n {
   /// Some alert body there
-  static let alertMessage = L10n.tr("alert_message")
+  internal static let alertMessage = L10n.tr("alert_message")
   /// Title of the alert
-  static let alertTitle = L10n.tr("alert_title")
+  internal static let alertTitle = L10n.tr("alert_title")
 
-  enum Apples {
+  internal enum Apples {
     /// You have %d apples
-    static func count(_ p1: Int) -> String {
+    internal static func count(_ p1: Int) -> String {
       return L10n.tr("apples.count", p1)
     }
   }
 
-  enum Bananas {
+  internal enum Bananas {
     /// Those %d bananas belong to %@.
-    static func owner(_ p1: Int, _ p2: String) -> String {
-      return L10n.tr("bananas.owner", p1, p2)
+    internal static func owner(_ p1: Int, _ p2: Any) -> String {
+      return L10n.tr("bananas.owner", p1, String(describing: p2))
     }
   }
 }
@@ -741,15 +784,19 @@ SwiftGen also has a template to support flat strings files (i.e. no dot syntax).
 <summary>Example of code generated by the flat bundled template</summary>
 
 ```swift
-enum L10n {
+internal enum L10n {
   /// Some alert body there
-  case alertMessage
+  internal static let alertMessage = L10n.tr("Localizable", "alert__message")
   /// Title of the alert
-  case alertTitle
+  internal static let alertTitle = L10n.tr("Localizable", "alert__title")
   /// You have %d apples
-  case applesCount(Int)
+  internal static func applesCount(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "apples.count", p1)
+  }
   /// Those %d bananas belong to %@.
-  case bananasOwner(Int, String)
+  internal static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
+  }
 }
 ```
 </details>

@@ -13,3 +13,7 @@ public final class LoginSegue: NSStoryboardSegue {}
 public final class LoginViewController: NSWindowController {}
 
 #endif
+
+import Foundation
+
+public final class CustomArray: NSArray {}

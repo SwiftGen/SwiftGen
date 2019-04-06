@@ -7,21 +7,34 @@
 import Foundation
 import PathKit
 
+protocol AssetsCatalogEntry {
+  var name: String { get }
+
+  // Used for converting to stencil context
+  var asDictionary: [String: Any] { get }
+}
+
 extension AssetsCatalog {
   enum Entry {
-    case color(name: String, value: String)
-    case data(name: String, value: String)
-    case group(name: String, isNamespaced: Bool, items: [Entry])
-    case image(name: String, value: String)
+    struct Group: AssetsCatalogEntry {
+      let name: String
+      let isNamespaced: Bool
+      let items: [AssetsCatalogEntry]
+    }
+    struct Item: AssetsCatalogEntry {
+      let name: String
+      let value: String
+      let item: Constants.Item
+    }
   }
 }
 
 // MARK: - Parser
 
-private enum Constants {
-  static let path = "Contents.json"
-  static let properties = "properties"
-  static let providesNamespace = "provides-namespace"
+enum Constants {
+  fileprivate static let path = "Contents.json"
+  fileprivate static let properties = "properties"
+  fileprivate static let providesNamespace = "provides-namespace"
 
   /**
    * This is a list of supported asset catalog item types, for now we just
@@ -32,7 +45,8 @@ private enum Constants {
    * Use as reference:
    * https://developer.apple.com/library/content/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format
    */
-  enum Item: String {
+  enum Item: String, CaseIterable {
+    case arResourceGroup = "arresourcegroup"
     case colorSet = "colorset"
     case dataSet = "dataset"
     case imageSet = "imageset"
@@ -42,6 +56,7 @@ private enum Constants {
 extension AssetsCatalog.Entry {
   /**
    Each node in an asset catalog is either (there are more types, but we ignore those):
+     - An AR resource group, which can contain both AR reference images and objects.
      - A colorset, which is essentially a group containing a list of colors (the latter is ignored).
      - A dataset, which is essentially a group containing a list of files (the latter is ignored).
      - An imageset, which is essentially a group containing a list of files (the latter is ignored).
@@ -58,39 +73,42 @@ extension AssetsCatalog.Entry {
    - Parameter prefix: The prefix to prepend values with (from namespaced groups).
    - Returns: An array of processed Entry items (a catalog).
    */
-  init?(path: Path, withPrefix prefix: String) {
+  static func parse(path: Path, withPrefix prefix: String) -> AssetsCatalogEntry? {
     guard path.isDirectory else { return nil }
     let type = path.extension ?? ""
 
-    switch Constants.Item(rawValue: type) {
-    case .colorSet?:
-      let name = path.lastComponentWithoutExtension
-      self = .color(name: name, value: "\(prefix)\(name)")
-    case .dataSet?:
-      let name = path.lastComponentWithoutExtension
-      self = .data(name: name, value: "\(prefix)\(name)")
-    case .imageSet?:
-      let name = path.lastComponentWithoutExtension
-      self = .image(name: name, value: "\(prefix)\(name)")
-    case nil:
-      guard type.isEmpty else { return nil }
+    if let item = Constants.Item(rawValue: type) {
+      return AssetsCatalog.Entry.Item(path: path, item: item, withPrefix: prefix)
+    } else if type.isEmpty {
+      // this is a group, they can't have any '.' in their name
       let filename = path.lastComponent
       let isNamespaced = AssetsCatalog.Entry.isNamespaced(path: path)
       let subPrefix = isNamespaced ? "\(prefix)\(filename)/" : prefix
 
-      self = .group(
+      return AssetsCatalog.Entry.Group(
         name: filename,
         isNamespaced: isNamespaced,
         items: AssetsCatalog.Catalog.process(folder: path, withPrefix: subPrefix)
       )
+    } else {
+      // Unknown extension
+      return nil
     }
   }
 }
 
 // MARK: - Private Helpers
 
+extension AssetsCatalog.Entry.Item {
+  fileprivate init(path: Path, item: Constants.Item, withPrefix prefix: String) {
+    self.name = path.lastComponentWithoutExtension
+    self.value = "\(prefix)\(name)"
+    self.item = item
+  }
+}
+
 extension AssetsCatalog.Entry {
-  private static func isNamespaced(path: Path) -> Bool {
+  fileprivate static func isNamespaced(path: Path) -> Bool {
     let metadata = self.metadata(for: path)
 
     if let properties = metadata[Constants.properties] as? [String: Any],

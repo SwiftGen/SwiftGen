@@ -11,6 +11,7 @@
 
 - When you need to generate *Swift 3* code.
 - If you use unstructured key names for your strings, or a structure that we don't support (yet). If you use "dot-syntax" keys, please check out the [structured-swift3](structured-swift3.md) template.
+- **Warning**: Swift 3 is no longer actively supported, so we cannot guarantee that there won't be issues with the generated code.
 
 ## Customization
 
@@ -21,28 +22,30 @@ You can customize some elements of this template by overriding the following par
 | `enumName` | `L10n` | Allows you to change the name of the generated `enum` containing all string tables. |
 | `noComments` | N/A | Setting this parameter will disable the comments describing the translation of a key. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
+| `localizeFunction` | `NSLocalizedString` | Allows you to set your own custom localization function. Your custom function must have the same signature as the one provided by `Foundation`, i.e. `yourFunctionName(_:tableName:bundle:comment:)` |
 
 ## Generated Code
 
 **Extract:**
 
 ```swift
-enum L10n {
+internal enum L10n {
   /// Some alert body there
-  static let alertMessage = L10n.tr("Localizable", "alert_message")
+  internal static let alertMessage = L10n.tr("Localizable", "alert_message")
   /// Title of the alert
-  static let alertTitle = L10n.tr("Localizable", "alert_title")
+  internal static let alertTitle = L10n.tr("Localizable", "alert_title")
   /// You have %d apples
-  static func applesCount(_ p1: Int) -> String {
+  internal static func applesCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "apples.count", p1)
   }
   /// Those %d bananas belong to %@.
-  static func bananasOwner(_ p1: Int, _ p2: String) -> String {
-    return L10n.tr("Localizable", "bananas.owner", p1, p2)
+  internal static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
   }
+}
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Strings/flat-swift3-context-localizable.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Strings/flat-swift3/localizable.swift)
 
 ## Usage example
 

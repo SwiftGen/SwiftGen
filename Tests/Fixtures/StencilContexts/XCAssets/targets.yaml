@@ -1,0 +1,14 @@
+catalogs:
+- assets:
+  - name: "Bottles"
+    type: "arresourcegroup"
+    value: "Bottles"
+  - name: "Paintings"
+    type: "arresourcegroup"
+    value: "Paintings"
+  - name: "Posters"
+    type: "arresourcegroup"
+    value: "Posters"
+  name: "Targets"
+resourceCount:
+  arresourcegroup: 3

@@ -1,11 +1,10 @@
 #if os(OSX)
-  import AppKit.NSImage
-  public typealias AssetColorTypeAlias = NSColor
-  public typealias AssetImageTypeAlias = NSImage
-#elseif os(iOS) || os(tvOS) || os(watchOS)
-  import UIKit.UIImage
-  public typealias AssetColorTypeAlias = UIColor
-  public typealias AssetImageTypeAlias = UIImage
+  import AppKit
+#elseif os(iOS)
+  import ARKit
+  import UIKit
+#elseif os(tvOS) || os(watchOS)
+  import UIKit
 #endif
 
 // Extra for playgrounds
@@ -13,12 +12,55 @@ public var bundle: Bundle!
 
 // MARK: - Implementation Details
 
+public struct ARResourceGroupAsset {
+  public fileprivate(set) var name: String
+
+  #if os(iOS)
+  @available(iOS 11.3, *)
+  public var referenceImages: Set<ARReferenceImage> {
+    return ARReferenceImage.referenceImages(in: self)
+  }
+
+  @available(iOS 12.0, *)
+  public var referenceObjects: Set<ARReferenceObject> {
+    return ARReferenceObject.referenceObjects(in: self)
+  }
+  #endif
+
+  // Extra for playgrounds
+  public init(name: String) {
+    self.name = name
+  }
+}
+
+#if os(iOS)
+@available(iOS 11.3, *)
+public extension ARReferenceImage {
+  static func referenceImages(in asset: ARResourceGroupAsset) -> Set<ARReferenceImage> {
+    return referenceImages(inGroupNamed: asset.name, bundle: bundle) ?? Set()
+  }
+}
+
+@available(iOS 12.0, *)
+public extension ARReferenceObject {
+  static func referenceObjects(in asset: ARResourceGroupAsset) -> Set<ARReferenceObject> {
+    return referenceObjects(inGroupNamed: asset.name, bundle: bundle) ?? Set()
+  }
+}
+#endif
+
 public struct ColorAsset {
   public fileprivate(set) var name: String
 
+  #if os(OSX)
+  public typealias Color = NSColor
+  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  public typealias Color = UIColor
+  #endif
+
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  public var color: AssetColorTypeAlias {
-    return AssetColorTypeAlias(asset: self)
+  public var color: Color {
+    return Color(asset: self)
   }
 
   // Extra for playgrounds
@@ -27,7 +69,7 @@ public struct ColorAsset {
   }
 }
 
-public extension AssetColorTypeAlias {
+public extension ColorAsset.Color {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
   convenience init!(asset: ColorAsset) {
     #if os(iOS) || os(tvOS)
@@ -72,13 +114,19 @@ public extension NSDataAsset {
 public struct ImageAsset {
   public fileprivate(set) var name: String
 
-  public var image: AssetImageTypeAlias {
+  #if os(OSX)
+  public typealias Image = NSImage
+  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  public typealias Image = UIImage
+  #endif
+
+  public var image: Image {
     #if os(iOS) || os(tvOS)
-    let image = AssetImageTypeAlias(named: name, in: bundle, compatibleWith: nil)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
     #elseif os(OSX)
     let image = bundle.image(forResource: NSImage.Name(name))
     #elseif os(watchOS)
-    let image = AssetImageTypeAlias(named: name)
+    let image = Image(named: name)
     #endif
     guard let result = image else { fatalError("Unable to load image named \(name).") }
     return result
@@ -90,7 +138,7 @@ public struct ImageAsset {
   }
 }
 
-public extension AssetImageTypeAlias {
+public extension ImageAsset.Image {
   @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")

@@ -9,6 +9,9 @@ import PathKit
 
 extension Colors {
   final class JSONFileParser: ColorsFileTypeParser {
+    init(options: ParserOptionValues) {
+    }
+
     static let extensions = ["json"]
 
     func parseFile(at path: Path) throws -> Palette {
