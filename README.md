@@ -57,7 +57,7 @@ We recommend that you **unarchive the ZIP inside your project directory** and **
 If you unarchived the ZIP file in a folder e.g. called `swiftgen` at the root of your project directory, you can then invoke SwiftGen in your Script Build Phase using:
 
 ```sh
-"$PROJECT_DIR/swiftgen/bin/swiftgen" …
+"${PROJECT_DIR}/swiftgen/bin/swiftgen" …
 ```
 
 ---
