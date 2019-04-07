@@ -57,7 +57,7 @@ We recommend that you **unarchive the ZIP inside your project directory** and **
 If you unarchived the ZIP file in a folder e.g. called `swiftgen` at the root of your project directory, you can then invoke SwiftGen in your Script Build Phase using:
 
 ```sh
-"$PROJECT_DIR"/swiftgen/bin/swiftgen …
+"${PROJECT_DIR}/swiftgen/bin/swiftgen" …
 ```
 
 ---
@@ -74,7 +74,7 @@ Given that you can specify an exact version for `SwiftGen` in your `Podfile`, th
 You can then invoke SwiftGen in your Script Build Phase using:
 
 ```sh
-$PODS_ROOT/SwiftGen/bin/swiftgen …
+"${PODS_ROOT}/SwiftGen/bin/swiftgen" …
 ```
 
 > Similarly, be sure to use `Pods/SwiftGen/bin/swiftgen` instead of just `swiftgen` where we mention commands with `swiftgen` in the rest of the documentation.
