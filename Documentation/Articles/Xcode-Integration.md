@@ -52,12 +52,12 @@ To avoid this, **we highly recommand using a `swiftgen.yml` configuration file i
 
 Typically don't use:
 ```sh
-swiftgen xcassets Resources/Images.xcassets --templateName swift4 > "Constants/Assets+Generated.swift"
+swiftgen xcassets Resources/Images.xcassets --templateName swift5 > "Constants/Assets+Generated.swift"
 ```
 
 But use:
 ```sh
-swiftgen xcassets Resources/Images.xcassets --templateName swift4 --output "Constants/Assets+Generated.swift"
+swiftgen xcassets Resources/Images.xcassets --templateName swift5 --output "Constants/Assets+Generated.swift"
 ```
 
 Or even better, just use `swiftgen` in your Script Build Phase, and specify this in your `swiftgen.yml` config file:
@@ -66,7 +66,7 @@ Or even better, just use `swiftgen` in your Script Build Phase, and specify this
 xcassets:
   inputs: Resources/Images.xcassets
   outputs:
-    templateName: swift4
+    templateName: swift5
     output: Constants/Assets+Generated.swift
 ```
 

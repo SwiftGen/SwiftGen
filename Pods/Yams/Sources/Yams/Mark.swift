@@ -6,8 +6,6 @@
 //  Copyright (c) 2017 Yams. All rights reserved.
 //
 
-import Foundation
-
 /// The pointer position.
 public struct Mark {
     /// Line number starting from 1.

@@ -50,4 +50,13 @@ class CoreDataTests: XCTestCase {
       contextVariations: variations
     )
   }
+
+  func testSwift5() {
+    test(
+      template: "swift5",
+      contextNames: Contexts.all,
+      directory: .coreData,
+      contextVariations: variations
+    )
+  }
 }

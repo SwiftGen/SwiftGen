@@ -43,4 +43,13 @@ class YamlTests: XCTestCase {
       contextVariations: variations
     )
   }
+
+  func testInlineSwift5() {
+    test(
+      template: "inline-swift5",
+      contextNames: Contexts.all,
+      directory: .yaml,
+      contextVariations: variations
+    )
+  }
 }

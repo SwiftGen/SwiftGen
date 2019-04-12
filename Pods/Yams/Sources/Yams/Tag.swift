@@ -9,7 +9,6 @@
 #if SWIFT_PACKAGE
 import CYaml
 #endif
-import Foundation
 
 /// Tags describe the the _type_ of a Node.
 public final class Tag {

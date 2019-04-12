@@ -44,4 +44,24 @@ class InterfaceBuilderiOSTests: InterfaceBuilderTests {
       contextVariations: variations
     )
   }
+
+  func testScenesSwift5() {
+    test(
+      template: "scenes-swift5",
+      contextNames: Contexts.all,
+      directory: .interfaceBuilder,
+      resourceDirectory: .interfaceBuilderiOS,
+      contextVariations: variations
+    )
+  }
+
+  func testSeguesSwift5() {
+    test(
+      template: "segues-swift5",
+      contextNames: Contexts.all,
+      directory: .interfaceBuilder,
+      resourceDirectory: .interfaceBuilderiOS,
+      contextVariations: variations
+    )
+  }
 }

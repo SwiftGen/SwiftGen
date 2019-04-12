@@ -6,8 +6,6 @@
 //  Copyright (c) 2017 Yams. All rights reserved.
 //
 
-import Foundation
-
 /// `Codable`-style `Encoder` that can be used to encode an `Encodable` type to a YAML string using optional
 /// user info mapping. Similar to `Foundation.JSONEncoder`.
 public class YAMLEncoder {

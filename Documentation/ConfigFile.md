@@ -19,12 +19,12 @@ strings:
   inputs: Base.lproj
   filter: .+\.strings$
   outputs:
-    - templateName: structured-swift4
+    - templateName: structured-swift5
       output: L10n-Constants.swift
 xcassets:
   - inputs: Logos.xcassets
     outputs:
-      - templateName: swift4
+      - templateName: swift5
         output: Logos-Constants.swift
         params:
           enumName: Logos

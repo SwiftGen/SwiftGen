@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/tid-kijyun/Kanna.git",
         "state": {
           "branch": null,
-          "revision": "0534d5d4917410870fcac8907e06f69b58a23417",
-          "version": "4.0.3"
+          "revision": "9b8f73f8c8e145dc496565bbf878a709793e7ba3",
+          "version": "5.0.0"
         }
       },
       {
@@ -56,21 +56,12 @@
         }
       },
       {
-        "package": "SwiftClibxml2",
-        "repositoryURL": "https://github.com/tid-kijyun/SwiftClibxml2.git",
-        "state": {
-          "branch": null,
-          "revision": "c4e67cc970273fc2bee978d12e422974ff184de7",
-          "version": "1.0.2"
-        }
-      },
-      {
         "package": "Yams",
         "repositoryURL": "https://github.com/jpsim/Yams.git",
         "state": {
           "branch": null,
-          "revision": "26ab35f50ea891e8edefcc9d975db2f6b67e1d68",
-          "version": "1.0.1"
+          "revision": "c947a306d2e80ecb2c0859047b35c73b8e1ca27f",
+          "version": "2.0.0"
         }
       }
     ]

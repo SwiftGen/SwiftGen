@@ -25,6 +25,26 @@ Features:
 Installation:
 =================
 
+### Swift 5
+##### CocoaPods
+Adding it to your `Podfile`:
+```ruby
+use_frameworks!
+pod 'Kanna', '~> 5.0.0'
+```
+
+##### Carthage
+Adding it to your `Cartfile`:
+
+```ogdl
+github "tid-kijyun/Kanna" ~> 5.0.0
+```
+
+1. In the project settings add `$(SDKROOT)/usr/include/libxml2` to the "header search paths" field
+
+##### Others(Swift PM and manual Installation)
+Please refer to the case of Swift 4.
+
 ### Swift 4
 ##### CocoaPods
 **:warning: CocoaPods (`1.1.0 or later`) is required.**
@@ -164,49 +184,6 @@ $ sudo apt-get install pkg-config
   [Modules](Modules)
 1. In the target settings add `$(SDKROOT)/usr/include/libxml2` to the `Search Paths > Header Search Paths` field
 1. In the target settings add `$(SRCROOT)/Modules` to the `Swift Compiler - Search Paths > Import Paths` field
-
-### Swift 2.x
-
-Three means of installation are supported:
-
-##### CocoaPods
-**:warning: CocoaPods (`0.39 or later`) is required.**
-
-Adding it to your `Podfile`:
-```ruby
-use_frameworks!
-pod 'Kanna', '~> 1.1.0'
-```
-
-##### Carthage
-Adding it to your `Cartfile`:
-
-```ogdl
-github "tid-kijyun/Kanna" ~> 1.1.0
-```
-
-##### Manual Installation
-1. Add these files to your project:  
-  [Kanna.swift](Source/Kanna.swift)  
-  [CSS.swift](Source/CSS.swift)  
-  [libxmlHTMLDocument.swift](Source/libxml/libxmlHTMLDocument.swift)  
-  [libxmlHTMLNode.swift](Source/libxml/libxmlHTMLNode.swift)  
-  [libxmlParserOption.swift](Source/libxml/libxmlParserOption.swift)  
-1. In the target settings add `$(SDKROOT)/usr/include/libxml2` to the `Search Paths > Header Search Paths` field
-1. In the target settings add `-lxml2` to the `Linking > Other Linker Flags` field
-1. Import `libxml` headers:
-
-  Copy the those import statements:
-
-  ```objective-c
-  #import <libxml/HTMLtree.h>
-  #import <libxml/xpath.h>
-  #import <libxml/xpathInternals.h>
-  ```
-  
-  and paste them into your [Modulename]-Bridging-Header.h
-
-*Note: With manual installation, this library doesn't need to be imported, or namespace-qualified in your code.*
 
 Synopsis:
 =================

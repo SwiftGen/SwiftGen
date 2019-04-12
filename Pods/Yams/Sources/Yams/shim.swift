@@ -16,7 +16,7 @@ extension Sequence {
 }
 #endif
 
-#if os(Linux) && !swift(>=4.2)
+#if !_runtime(_ObjC) && !swift(>=4.2)
 extension Substring {
     func hasPrefix(_ prefix: String) -> Bool {
         return String(self).hasPrefix(prefix)

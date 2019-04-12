@@ -48,6 +48,17 @@ class JsonTests: XCTestCase {
     )
   }
 
+  func testInlineSwift5() {
+    test(
+      template: "inline-swift5",
+      contextNames: Contexts.all,
+      directory: .json,
+      resourceDirectory: .yaml,
+      outputDirectory: .json,
+      contextVariations: inlineVariations
+    )
+  }
+
   // generate variations to test customname generation
   let runtimeVariations: VariationGenerator = { name, context in
     guard name == "all" else { return [(context: context, suffix: "")] }
@@ -78,6 +89,17 @@ class JsonTests: XCTestCase {
   func testRuntimeSwift4() {
     test(
       template: "runtime-swift4",
+      contextNames: Contexts.all,
+      directory: .json,
+      resourceDirectory: .yaml,
+      outputDirectory: .json,
+      contextVariations: runtimeVariations
+    )
+  }
+
+  func testRuntimeSwift5() {
+    test(
+      template: "runtime-swift5",
       contextNames: Contexts.all,
       directory: .json,
       resourceDirectory: .yaml,
