@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04345670226CCB70006F6349 /* StringsFileTypeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0434566F226CCB70006F6349 /* StringsFileTypeParser.swift */; };
+		04345673226CCBA4006F6349 /* StringsFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04345672226CCBA4006F6349 /* StringsFileParser.swift */; };
+		04345675226CCBC1006F6349 /* StringsDictFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04345674226CCBC1006F6349 /* StringsDictFileParser.swift */; };
 		093405051F8113AA00187787 /* ConfigCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093405041F8113AA00187787 /* ConfigCommands.swift */; };
 		0934050B1F8158B800187787 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050A1F8158B800187787 /* Config.swift */; };
 		0934050C1F8158EE00187787 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050A1F8158B800187787 /* Config.swift */; };
@@ -285,6 +288,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0434566F226CCB70006F6349 /* StringsFileTypeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsFileTypeParser.swift; sourceTree = "<group>"; };
+		04345672226CCBA4006F6349 /* StringsFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsFileParser.swift; sourceTree = "<group>"; };
+		04345674226CCBC1006F6349 /* StringsDictFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsDictFileParser.swift; sourceTree = "<group>"; };
 		09030BC01B6D2A8F00275BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09030BD81B6D2E5900275BF5 /* ConfigReadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigReadTests.swift; sourceTree = "<group>"; };
 		09030C171B6D43D400275BF5 /* TestsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TestsHelper.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -478,6 +484,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04345671226CCB81006F6349 /* FileTypeParser */ = {
+			isa = PBXGroup;
+			children = (
+				04345672226CCBA4006F6349 /* StringsFileParser.swift */,
+				04345674226CCBC1006F6349 /* StringsDictFileParser.swift */,
+			);
+			path = FileTypeParser;
+			sourceTree = "<group>";
+		};
 		09030B621B6D254200275BF5 = {
 			isa = PBXGroup;
 			children = (
@@ -745,9 +760,11 @@
 		DD9F68822095604E004EB720 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
+				04345671226CCB81006F6349 /* FileTypeParser */,
 				DD9F688320956074004EB720 /* StringsEntry.swift */,
 				DD9F688420956074004EB720 /* PlaceholderType.swift */,
 				DD428E101FC50FBF001649D6 /* StringsParser.swift */,
+				0434566F226CCB70006F6349 /* StringsFileTypeParser.swift */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -1014,6 +1031,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -1448,6 +1466,7 @@
 				DD428E1A1FC50FBF001649D6 /* ColorsCLRFileParser.swift in Sources */,
 				C350BE3820FFCD0F0043D7C5 /* Model.swift in Sources */,
 				C32262732101324E001AC9CD /* Relationship.swift in Sources */,
+				04345673226CCBA4006F6349 /* StringsFileParser.swift in Sources */,
 				C33A1427210649A500D3CBA6 /* Configuration.swift in Sources */,
 				C38E571720FF906B009C9C23 /* CoreDataContext.swift in Sources */,
 				C3E39E4C2118EC58004B1CF9 /* UniquenessConstraints.swift in Sources */,
@@ -1455,6 +1474,7 @@
 				DDB0B9A2209CE7CD00E467C2 /* PlistParser.swift in Sources */,
 				DD428E201FC50FBF001649D6 /* Parser.swift in Sources */,
 				DDB0B99B209CE4A300E467C2 /* YamlParser.swift in Sources */,
+				04345675226CCBC1006F6349 /* StringsDictFileParser.swift in Sources */,
 				DDC82117209672E1007A55F3 /* String.swift in Sources */,
 				DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */,
 				DD9F687C20955D51004EB720 /* Catalog.swift in Sources */,
@@ -1463,6 +1483,7 @@
 				DD428E271FC50FBF001649D6 /* StringsContext.swift in Sources */,
 				C38E571520FF8FB5009C9C23 /* CoreDataParser.swift in Sources */,
 				C322626F21012C42001AC9CD /* Bool.swift in Sources */,
+				04345670226CCB70006F6349 /* StringsFileTypeParser.swift in Sources */,
 				DD428E211FC50FBF001649D6 /* StringsParser.swift in Sources */,
 				DD428E231FC50FBF001649D6 /* FontsContext.swift in Sources */,
 				DD9F687B20955D51004EB720 /* AssetsCatalogParser.swift in Sources */,

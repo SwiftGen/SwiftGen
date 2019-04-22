@@ -13,6 +13,7 @@ public enum Strings {
     case failureOnLoading(path: String)
     case invalidFormat
     case invalidPlaceholder(previous: Strings.PlaceholderType, new: Strings.PlaceholderType)
+    case unsupportedFileType(path: Path, supported: [String])
 
     public var description: String {
       switch self {
@@ -24,6 +25,11 @@ public enum Strings {
         return "Invalid strings file"
       case .invalidPlaceholder(let previous, let new):
         return "Invalid placeholder type \(new) (previous: \(previous))"
+      case .unsupportedFileType(let path, let supported):
+        return """
+        error: Unsupported file type for \(path). \
+        The supported file types are: \(supported.joined(separator: ", "))
+        """
       }
     }
   }
@@ -38,35 +44,57 @@ public enum Strings {
 
   public final class Parser: SwiftGenKit.Parser {
     private let options: ParserOptionValues
+    private var parsers = [String: StringsFileTypeParser.Type]()
     var tables = [String: [Entry]]()
     public var warningHandler: Parser.MessageHandler?
 
+    private static let subParsers: [StringsFileTypeParser.Type] = [
+      StringsFileParser.self,
+      StringsDictFileParser.self
+    ]
+
     public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
-      self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
+       self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
       self.warningHandler = warningHandler
+
+      for parser in Parser.subParsers {
+        register(parser: parser)
+      }
     }
 
-    public static let defaultFilter = "[^/]\\.strings$"
     public static let allOptions: ParserOptionList = [Option.separator]
+    public static var defaultFilter: String {
+      let extensions = Parser.subParsers.flatMap { $0.extensions }.sorted().joined(separator: "|")
+      return "[^/]\\.(?i:\(extensions))$"
+    }
 
     // Localizable.strings files are generally UTF16, not UTF8!
     public func parse(path: Path, relativeTo parent: Path) throws {
+      guard let parserType = parsers[path.extension?.lowercased() ?? ""] else {
+        throw ParserError.unsupportedFileType(path: path, supported: parsers.keys.sorted())
+      }
+      
       let name = path.lastComponentWithoutExtension
-
       guard tables[name] == nil else {
         throw ParserError.duplicateTable(name: name)
       }
-      guard let data = try? path.read() else {
-        throw ParserError.failureOnLoading(path: path.string)
-      }
 
-      let plist = try PropertyListSerialization.propertyList(from: data, format: nil)
-      guard let dict = plist as? [String: String] else {
-        throw ParserError.invalidFormat
-      }
+      let parser = parserType.init()
+      let entries = try parser.parseFile(at: path)
+      tables[name] = entries
+    }
 
-      tables[name] = try dict.map { key, translation in
-        try Entry(key: key, translation: translation, keyStructureSeparator: options[Option.separator])
+    func register(parser: StringsFileTypeParser.Type) {
+      for ext in parser.extensions {
+        if let old = parsers[ext] {
+          warningHandler?("""
+            error: Parser \(parser) tried to register the file type '\(ext)' already \
+            registered by \(old).
+            """,
+            #file,
+            #line)
+        }
+        parsers[ext] = parser
       }
     }
   }
