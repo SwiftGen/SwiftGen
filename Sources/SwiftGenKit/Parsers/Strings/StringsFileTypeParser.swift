@@ -8,8 +8,10 @@ import Foundation
 import PathKit
 
 protocol StringsFileTypeParser: AnyObject {
+  init(options: ParserOptionValues)
+
+  static var allOptions: ParserOptionList { get }
   static var extensions: [String] { get }
 
-  init()
   func parseFile(at path: Path) throws -> [Strings.Entry]
 }

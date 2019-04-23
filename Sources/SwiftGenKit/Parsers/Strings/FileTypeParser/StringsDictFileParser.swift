@@ -9,8 +9,14 @@ import PathKit
 
 extension Strings {
   final class StringsDictFileParser: StringsFileTypeParser {
-    static let extensions = ["stringsdict"]
+    private let options: ParserOptionValues
 
+    init(options: ParserOptionValues) {
+      self.options = options
+    }
+
+    static let extensions = ["stringsdict"]
+    static let allOptions: ParserOptionList = [Option.separator]
     static let propertyListDecoder = PropertyListDecoder()
 
     func parseFile(at path: Path) throws -> [Strings.Entry] {
@@ -26,9 +32,14 @@ extension Strings {
 
       return try plurals.map { keyValuePair -> Entry in
         let (key, pluralEntry) = keyValuePair
-        let formatValueTypes = pluralEntry.variables.mapValues { "%\($0.valueTypeKey)" }.values
-        let placeholderTypes = try PlaceholderType.placeholders(fromFormat: Array(formatValueTypes).joined(separator: " "))
-        return Entry(key: key, translation: pluralEntry.translation ?? "", types: placeholderTypes)
+        let formatValueTypes = Array(pluralEntry.variables.mapValues { "%\($0.valueTypeKey)" }.values)
+        let placeholderTypes = try PlaceholderType.placeholders(fromFormat: formatValueTypes.joined(separator: " "))
+        return Entry(
+          key: key,
+          translation: pluralEntry.translation ?? "",
+          types: placeholderTypes,
+          keyStructureSeparator: options[Option.separator]
+        )
       }
     }
   }

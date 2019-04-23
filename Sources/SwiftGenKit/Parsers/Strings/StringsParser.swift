@@ -54,7 +54,7 @@ public enum Strings {
     ]
 
     public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
-       self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
+      self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
       self.warningHandler = warningHandler
 
       for parser in Parser.subParsers {
@@ -73,13 +73,13 @@ public enum Strings {
       guard let parserType = parsers[path.extension?.lowercased() ?? ""] else {
         throw ParserError.unsupportedFileType(path: path, supported: parsers.keys.sorted())
       }
-      
+
       let name = path.lastComponentWithoutExtension
       guard tables[name] == nil else {
         throw ParserError.duplicateTable(name: name)
       }
 
-      let parser = parserType.init()
+      let parser = parserType.init(options: options)
       let entries = try parser.parseFile(at: path)
       tables[name] = entries
     }

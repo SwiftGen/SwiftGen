@@ -71,7 +71,7 @@ class StringsTests: XCTestCase {
   }
 
   func testPlurals() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.stringsdict", sub: .strings))
 
     let result = parser.stencilContext()
@@ -79,7 +79,7 @@ class StringsTests: XCTestCase {
   }
 
   func testMultipleFilesDuplicateWithPlurals() throws {
-    let parser = Strings.Parser()
+    let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
     do {

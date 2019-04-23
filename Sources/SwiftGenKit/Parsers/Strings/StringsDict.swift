@@ -19,6 +19,7 @@ enum StringsDict: Decodable {
       let many: String?
       let other: String
 
+      // swiftlint:disable:next nesting
       enum CodingKeys: String, CodingKey {
         case specTypeKey = "NSStringFormatSpecTypeKey"
         case valueTypeKey = "NSStringFormatValueTypeKey"
@@ -53,7 +54,7 @@ enum StringsDict: Decodable {
     static let formatKey = CodingKeys.make(key: "NSStringLocalizedFormatKey")
     static let variableWidthRules = CodingKeys.make(key: "NSStringVariableWidthRuleType")
     static func make(key: String) -> CodingKeys {
-      return CodingKeys(stringValue: key)!
+      return CodingKeys(stringValue: key)! // swiftlint:disable:this force_unwrapping
     }
   }
 
@@ -68,7 +69,10 @@ enum StringsDict: Decodable {
     case let (.some(formatKey), .none):
       var variables = [String: StringsDict.PluralEntry.Variable]()
       for variableKey in try StringsDict.variableKeysFromFormatKey(formatKey) {
-        variables[variableKey] = try container.decodeIfPresent(StringsDict.PluralEntry.Variable.self, forKey: .make(key: variableKey))
+        variables[variableKey] = try container.decodeIfPresent(
+          StringsDict.PluralEntry.Variable.self,
+          forKey: .make(key: variableKey)
+        )
       }
       self = .pluralEntry(StringsDict.PluralEntry(formatKey: formatKey, variables: variables))
     case let (.none, .some(variableWidthRules)):

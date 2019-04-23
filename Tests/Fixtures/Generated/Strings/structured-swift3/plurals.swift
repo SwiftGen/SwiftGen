@@ -9,7 +9,7 @@ import Foundation
 // MARK: - Strings
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:disable nesting type_body_length type_name
+// swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
 
   internal enum Competition {
@@ -31,16 +31,22 @@ internal enum L10n {
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:enable nesting type_body_length type_name
+// swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
 
 // MARK: - Implementation Details
 
 extension L10n {
   fileprivate static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
     // swiftlint:disable:next nslocalizedstring_key
-    let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
+    let format = NSLocalizedString(key, tableName: table, bundle: BundleToken.bundle, comment: "")
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type
