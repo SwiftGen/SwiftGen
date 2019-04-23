@@ -9,7 +9,7 @@ import XCTest
 
 class StringsTests: XCTestCase {
   enum Contexts {
-    static let all = ["empty", "localizable", "multiple"]
+    static let all = ["empty", "localizable", "multiple", "plurals"]
   }
 
   // generate variations to test customname generation

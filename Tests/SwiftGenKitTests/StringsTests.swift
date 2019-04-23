@@ -70,6 +70,28 @@ class StringsTests: XCTestCase {
     }
   }
 
+  func testPlurals() throws {
+    let parser = Strings.Parser()
+    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.stringsdict", sub: .strings))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "plurals", sub: .strings)
+  }
+
+  func testMultipleFilesDuplicateWithPlurals() throws {
+    let parser = Strings.Parser()
+    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
+
+    do {
+      try parser.searchAndParse(path: Fixtures.path(for: "Localizable.stringsdict", sub: .strings))
+      XCTFail("Code did parse file successfully while it was expected to fail for duplicate file")
+    } catch Strings.ParserError.duplicateTable {
+      // That's the expected exception we want to happen
+    } catch let error {
+      XCTFail("Unexpected error occured while parsing: \(error)")
+    }
+  }
+
   // MARK: - Custom options
 
   func testCustomSeparator() throws {

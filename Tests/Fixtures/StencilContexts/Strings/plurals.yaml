@@ -1,0 +1,22 @@
+tables:
+- levels:
+    children:
+    - children:
+      - name: "event"
+        strings:
+        - key: "competition.event.number-of-matches"
+          name: "number-of-matches"
+          translation: "Plural case 'other': %ld matches"
+          types:
+          - "Int"
+      name: "competition"
+    - children:
+      - name: "subscription"
+        strings:
+        - key: "feed.subscription.count"
+          name: "count"
+          translation: "Plural case 'other': %ld subscriptions"
+          types:
+          - "Int"
+      name: "feed"
+  name: "Localizable"
