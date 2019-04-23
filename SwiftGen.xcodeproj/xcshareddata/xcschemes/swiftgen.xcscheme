@@ -161,6 +161,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+             argument = "strings --templateName structured-swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/Strings/Localizable.stringsdict"
+             isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "xcassets --templateName swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Images.xcassets"
             isEnabled = "NO">
          </CommandLineArgument>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0434566E226A66E9006F6349 /* StringsDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0434566D226A66E9006F6349 /* StringsDict.swift */; };
 		04345670226CCB70006F6349 /* StringsFileTypeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0434566F226CCB70006F6349 /* StringsFileTypeParser.swift */; };
 		04345673226CCBA4006F6349 /* StringsFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04345672226CCBA4006F6349 /* StringsFileParser.swift */; };
 		04345675226CCBC1006F6349 /* StringsDictFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04345674226CCBC1006F6349 /* StringsDictFileParser.swift */; };
@@ -288,6 +289,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0434566D226A66E9006F6349 /* StringsDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsDict.swift; sourceTree = "<group>"; };
 		0434566F226CCB70006F6349 /* StringsFileTypeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsFileTypeParser.swift; sourceTree = "<group>"; };
 		04345672226CCBA4006F6349 /* StringsFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsFileParser.swift; sourceTree = "<group>"; };
 		04345674226CCBC1006F6349 /* StringsDictFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsDictFileParser.swift; sourceTree = "<group>"; };
@@ -764,6 +766,7 @@
 				DD9F688320956074004EB720 /* StringsEntry.swift */,
 				DD9F688420956074004EB720 /* PlaceholderType.swift */,
 				DD428E101FC50FBF001649D6 /* StringsParser.swift */,
+				0434566D226A66E9006F6349 /* StringsDict.swift */,
 				0434566F226CCB70006F6349 /* StringsFileTypeParser.swift */,
 			);
 			path = Strings;
@@ -1492,6 +1495,7 @@
 				DDC8211520967180007A55F3 /* Path.swift in Sources */,
 				DDB0B9A8209CF7A300E467C2 /* YamlFile.swift in Sources */,
 				DDB0B9A4209CE7E300E467C2 /* PlistContext.swift in Sources */,
+				0434566E226A66E9006F6349 /* StringsDict.swift in Sources */,
 				DD428E1C1FC50FBF001649D6 /* ColorsTXTFileParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
