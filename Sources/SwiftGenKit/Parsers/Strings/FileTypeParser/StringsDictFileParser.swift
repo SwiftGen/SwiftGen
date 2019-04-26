@@ -32,8 +32,11 @@ extension Strings {
 
       return try plurals.map { keyValuePair -> Entry in
         let (key, pluralEntry) = keyValuePair
-        let formatValueTypes = Array(pluralEntry.variables.mapValues { "%\($0.valueTypeKey)" }.values)
-        let placeholderTypes = try PlaceholderType.placeholders(fromFormat: formatValueTypes.joined(separator: " "))
+        // swiftlint:disable:next todo
+        // TODO: this only considers the first format value type. If the formatKey of a plural contains
+        // different variables, it won't be able to create a fitting Entry
+        let formatValueType = "%\(pluralEntry.variables.first?.value.valueTypeKey ?? "")"
+        let placeholderTypes = try PlaceholderType.placeholders(fromFormat: formatValueType)
         return Entry(
           key: key,
           translation: pluralEntry.translation ?? "",
