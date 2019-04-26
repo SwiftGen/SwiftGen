@@ -51,6 +51,10 @@
   [David Jennes](https://github.com/djbe)
   [#595](https://github.com/SwiftGen/SwiftGen/issue/595)
   [#600](https://github.com/SwiftGen/SwiftGen/pull/600)
+* Strings: support for plurals declared in `.stringsdict` files.  
+  [Florian Fittschen](https://github.com/ffittschen)
+  [#184](https://github.com/SwiftGen/SwiftGen/issues/184)
+  [#634](https://github.com/SwiftGen/SwiftGen/pull/634)
 
 ### Bug Fixes
 
