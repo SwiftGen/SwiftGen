@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>multiple.placeholders.string-int</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@elements@</string>
+            <key>elements</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>zero</key>
+                <string>%@ has no rating</string>
+                <key>one</key>
+                <string>%@ has one rating</string>
+                <key>other</key>
+                <string>%@ has %d ratings</string>
+            </dict>
+        </dict>
+        <key>nested.formatkey-in-variable</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%1$#@geese@</string>
+            <key>geese</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>A goose landed on %2$#@goose_fields@</string>
+                <key>other</key>
+                <string>%1$d geese landed on %2$#@geese_fields@</string>
+            </dict>
+            <key>goose_fields</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>its own field</string>
+                <key>other</key>
+                <string>its own %3$d fields</string>
+            </dict>
+            <key>geese_fields</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>their shared field</string>
+                <key>other</key>
+                <string>their %3$d fields</string>
+            </dict>
+        </dict>
+        <key>multiple.variables.three-variables-in-formatkey</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@files@ (%#@bytes@, %#@minutes@)</string>
+            <key>files</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>%d file remaining</string>
+                <key>other</key>
+                <string>%d files remaining</string>
+            </dict>
+            <key>bytes</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>%d byte</string>
+                <key>other</key>
+                <string>%d bytes</string>
+            </dict>
+            <key>minutes</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>%d minute</string>
+                <key>other</key>
+                <string>%d minutes</string>
+            </dict>
+        </dict>
+    </dict>
+</plist>
