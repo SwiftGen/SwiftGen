@@ -24,7 +24,8 @@ extension Strings {
         throw ParserError.failureOnLoading(path: path.string)
       }
 
-      let plurals = try Strings.StringsDictFileParser.propertyListDecoder.decode([String: StringsDict].self, from: data)
+      let plurals = try Strings.StringsDictFileParser.propertyListDecoder
+        .decode([String: StringsDict].self, from: data)
         .compactMapValues { stringsDict -> StringsDict.PluralEntry? in
           guard case let .pluralEntry(pluralEntry) = stringsDict else { return nil }
           return pluralEntry
@@ -32,15 +33,14 @@ extension Strings {
 
       return try plurals.map { keyValuePair -> Entry in
         let (key, pluralEntry) = keyValuePair
-        // swiftlint:disable:next todo
-        // TODO: this only considers the first format value type. If the formatKey of a plural contains
-        // different variables, it won't be able to create a fitting Entry
-        let formatValueType = "%\(pluralEntry.variables.first?.value.valueTypeKey ?? "")"
-        let placeholderTypes = try PlaceholderType.placeholders(fromFormat: formatValueType)
+        let valueTypes = pluralEntry.variables.reduce(into: [String]()) { valueTypes, keyValuePair in
+          valueTypes.append("%\(keyValuePair.value.valueTypeKey)")
+        }
+
         return Entry(
           key: key,
           translation: pluralEntry.translation ?? "",
-          types: placeholderTypes,
+          types: try PlaceholderType.placeholders(fromFormat: valueTypes.joined(separator: " ")),
           keyStructureSeparator: options[Option.separator]
         )
       }
