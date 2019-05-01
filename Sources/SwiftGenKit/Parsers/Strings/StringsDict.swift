@@ -67,21 +67,34 @@ enum StringsDict: Decodable {
     case (.none, .none), (.some, .some):
       throw Strings.ParserError.invalidFormat
     case let (.some(formatKey), .none):
-      var variables = [String: StringsDict.PluralEntry.Variable]()
-      for variableKey in try StringsDict.variableKeysFromFormatKey(formatKey) {
-        variables[variableKey] = try container.decodeIfPresent(
-          StringsDict.PluralEntry.Variable.self,
-          forKey: .make(key: variableKey)
-        )
-      }
-      self = .pluralEntry(StringsDict.PluralEntry(formatKey: formatKey, variables: variables))
+      let variables = try StringsDict.decodeVariables(in: container, formatKey: formatKey)
+      self = .pluralEntry(PluralEntry(formatKey: formatKey, variables: variables))
     case let (.none, .some(variableWidthRules)):
-      self = .variableWidthEntry(StringsDict.VariableWidthEntry(rules: variableWidthRules))
+      self = .variableWidthEntry(VariableWidthEntry(rules: variableWidthRules))
     }
   }
 
+  private static func decodeVariables(
+    in container: KeyedDecodingContainer<StringsDict.CodingKeys>,
+    formatKey: String
+  ) throws -> [String: PluralEntry.Variable] {
+    var variables = [String: PluralEntry.Variable]()
+    for variableKey in try StringsDict.variableKeysFromFormatKey(formatKey) {
+      let variable = try container.decode(PluralEntry.Variable.self, forKey: .make(key: variableKey))
+      variables[variableKey] = variable
+
+      // Nested FormatKey in Variable. Check if one of the strings (zero, one, ...) contains format keys,
+      // decode them and add them to `variables`
+      let childVariableKeys = Set(try variable.formatStrings.flatMap { try StringsDict.variableKeysFromFormatKey($0) })
+      for variableKey in Array(childVariableKeys) {
+        variables[variableKey] = try container.decode(PluralEntry.Variable.self, forKey: .make(key: variableKey))
+      }
+    }
+    return variables
+  }
+
   private static func variableKeysFromFormatKey(_ formatKey: String) throws -> [String] {
-    let pattern = "%#@([\\w\\.\\p{Pd}]+)@"
+    let pattern = "%(?>\\d\\$)?#@([\\w\\.\\p{Pd}]+)@"
     let regex = try NSRegularExpression(pattern: pattern, options: [])
     let nsrange = NSRange(formatKey.startIndex..<formatKey.endIndex, in: formatKey)
     let matches = regex.matches(in: formatKey, options: [], range: nsrange)
@@ -109,5 +122,11 @@ extension StringsDict.PluralEntry {
     }
 
     return "Plural case 'other': \(result)"
+  }
+}
+
+extension StringsDict.PluralEntry.Variable {
+  var formatStrings: [String] {
+    return [zero, one, two, few, many, other].compactMap { $0 }
   }
 }

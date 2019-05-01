@@ -58,6 +58,66 @@
                 <string>their %3$d fields</string>
             </dict>
         </dict>
+        <key>nested.formatkey-in-variable-deep</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%1$#@first_level@</string>
+            <key>first_level</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>One first level %2$#@second_level@</string>
+                <key>other</key>
+                <string>%1$d first levels %2$#@second_levels@</string>
+            </dict>
+            <key>second_level</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>has one second level and %3$#@third_level@</string>
+                <key>other</key>
+                <string>has %2$d second levels and %3$#@third_level@</string>
+            </dict>
+            <key>second_levels</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>have one second level and %3$#@third_level@</string>
+                <key>other</key>
+                <string>have %2$d second levels and %3$#@third_level@</string>
+            </dict>
+            <key>third_level</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>has one third level</string>
+                <key>other</key>
+                <string>has %3$d third levels</string>
+            </dict>
+            <key>third_levels</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>have one third level</string>
+                <key>other</key>
+                <string>have %3$d third levels</string>
+            </dict>
+        </dict>
         <key>multiple.variables.three-variables-in-formatkey</key>
         <dict>
             <key>NSStringLocalizedFormatKey</key>
