@@ -53,6 +53,9 @@
   [#609](https://github.com/SwiftGen/SwiftGen/issue/609)
   [#593](https://github.com/SwiftGen/SwiftGen/pull/593)
   [#610](https://github.com/SwiftGen/SwiftGen/pull/610)
+* Fonts: extract all codepoints of a font and make available to templates. Useful for icon fonts.  
+  [Robbie Trencheny](https://github.com/robbiet480)
+  [#638](https://github.com/SwiftGen/SwiftGen/pull/638)
 * Strings: the built-in templates now accept a parameter for customizing the localization function.  
   [Steven Magdy](https://github.com/StevenMagdy)
   [426](https://github.com/SwiftGen/SwiftGen/issues/426)

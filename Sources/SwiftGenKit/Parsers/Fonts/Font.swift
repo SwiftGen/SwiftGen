@@ -12,12 +12,14 @@ extension Fonts {
     let familyName: String
     let style: String
     let postScriptName: String
+    let icons: [String: String]
 
-    init(filePath: String, familyName: String, style: String, postScriptName: String) {
+    init(filePath: String, familyName: String, style: String, postScriptName: String, icons: [String: String]) {
       self.filePath = filePath
       self.familyName = familyName
       self.style = style
       self.postScriptName = postScriptName
+      self.icons = icons
     }
   }
 }

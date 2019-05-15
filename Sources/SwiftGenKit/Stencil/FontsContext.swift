@@ -18,15 +18,17 @@ extension Fonts.Parser {
       .map { (name: String, family: Set<Fonts.Font>) -> [String: Any] in
         // Font
         let fonts = family
-          .map { (font: Fonts.Font) -> [String: String] in
+          .map { (font: Fonts.Font) -> [String: Any] in
             [
               "name": font.postScriptName,
               "path": font.filePath,
-              "style": font.style
+              "style": font.style,
+              // swiftlint:disable:next force_unwrapping
+              "icons": font.icons.map { ["name": $0.key, "unicode": $0.value] }.sorted { $0["name"]! < $1["name"]! }
             ]
           }
           .sorted {
-            $0["name"] ?? "" < $1["name"] ?? ""
+            ($0["name"] as? String) ?? "" < ($1["name"] as? String) ?? ""
           }
 
         // Family
