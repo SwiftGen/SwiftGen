@@ -26,6 +26,10 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 #pragma clang diagnostic pop
 
 @implementation Localizable : NSObject
++ (NSString*)applesCountWithValue:(NSInteger)p1
+{
+    return tr(@"Localizable", @"apples.count", p1);
+}
 + (NSString*)competitionEventNumberOfMatchesWithValue:(NSInteger)p1
 {
     return tr(@"Localizable", @"competition.event.number-of-matches", p1);

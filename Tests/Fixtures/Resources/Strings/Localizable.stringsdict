@@ -58,5 +58,23 @@
                 <string>%ld subscriptions</string>
             </dict>
         </dict>
+        <key>apples.count</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@apples@</string>
+            <key>apples</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>zero</key>
+                <string>You have zero apples</string>
+                <key>one</key>
+                <string>You have one apple</string>
+                <key>other</key>
+                <string>You have %d apples. Wow that is a lot!</string>
+            </dict>
+        </dict>
     </dict>
 </plist>

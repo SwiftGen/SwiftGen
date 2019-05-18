@@ -1,6 +1,13 @@
 tables:
 - levels:
     children:
+    - name: "apples"
+      strings:
+      - key: "apples.count"
+        name: "count"
+        translation: "Plural case 'other': You have %d apples. Wow that is a lot!"
+        types:
+        - "Int"
     - children:
       - name: "event"
         strings:

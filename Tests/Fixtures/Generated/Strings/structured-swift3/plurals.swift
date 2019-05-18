@@ -12,6 +12,13 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
 
+  internal enum Apples {
+    /// Plural case 'other': You have %d apples. Wow that is a lot!
+    internal static func count(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "apples.count", p1)
+    }
+  }
+
   internal enum Competition {
     internal enum Event {
       /// Plural case 'other': %ld matches
