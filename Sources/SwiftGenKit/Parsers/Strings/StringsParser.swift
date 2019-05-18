@@ -75,12 +75,24 @@ public enum Strings {
       }
 
       let name = path.lastComponentWithoutExtension
-      guard tables[name] == nil else {
-        throw ParserError.duplicateTable(name: name)
+      let tableExists = tables[name] != nil
+      let parser = parserType.init(options: options)
+
+      let entries: [Entry]
+      if tableExists {
+        guard parser.isAllowedToWriteToExistingTable else {
+          throw ParserError.duplicateTable(name: name)
+        }
+
+        let existingEntries = tables[name] ?? []
+        let newEntries = try parser.parseFile(at: path)
+        let mergedEntries = Array(Dictionary([existingEntries, newEntries].joined().map { ($0.key, $0) },
+                                             uniquingKeysWith: { $1 }).values)
+        entries = mergedEntries
+      } else {
+        entries = try parser.parseFile(at: path)
       }
 
-      let parser = parserType.init(options: options)
-      let entries = try parser.parseFile(at: path)
       tables[name] = entries
     }
 
@@ -97,5 +109,11 @@ public enum Strings {
         parsers[ext] = parser
       }
     }
+  }
+}
+
+extension StringsFileTypeParser {
+  fileprivate var isAllowedToWriteToExistingTable: Bool {
+    return self is Strings.StringsDictFileParser
   }
 }
