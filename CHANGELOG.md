@@ -64,6 +64,9 @@
 * Strings: we now correctly generate the type `Any` (instead of `String`) for `%@` placeholders.  
   [David Jennes](https://github.com/djbe)
   [620](https://github.com/SwiftGen/SwiftGen/issues/620)
+  * Add bundle detection in dynamic frameworks.  
+  [Patrick Nollet](https://github.com/PatrickNLT)
+  [#644](https://github.com/SwiftGen/SwiftGen/pull/644)
 
 ### Internal Changes
 

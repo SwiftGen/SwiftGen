@@ -209,7 +209,12 @@ internal extension XCTImageAsset.Image {
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    let bundle = Bundle(for: BundleToken.self)
+    if let path = Bundle.paths(forResourcesOfType: "bundle", inDirectory: bundle.bundlePath).first,
+        let bundle = Bundle(path: path) {
+      return bundle
+    }
+    return bundle
   }()
 }
 // swiftlint:enable convenience_type
