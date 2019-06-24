@@ -7,38 +7,60 @@
 import Foundation
 import PathKit
 
-enum StringsDict: Decodable {
-  struct PluralEntry: Codable {
-    struct Variable: Codable {
-      let specTypeKey: String
-      let valueTypeKey: String
-      let zero: String?
-      let one: String?
-      let two: String?
-      let few: String?
-      let many: String?
-      let other: String
-
-      // swiftlint:disable:next nesting
-      enum CodingKeys: String, CodingKey {
-        case specTypeKey = "NSStringFormatSpecTypeKey"
-        case valueTypeKey = "NSStringFormatValueTypeKey"
-
-        case zero, one, two, few, many, other
-      }
-    }
-
-    let formatKey: String
-    let variables: [String: Variable]
-  }
-
-  struct VariableWidthEntry {
-    let rules: [String: String]
-  }
-
+/// This enum represents the types of entries a `.stringsdict` file can contain.
+enum StringsDict {
   case pluralEntry(PluralEntry)
   case variableWidthEntry(VariableWidthEntry)
+}
 
+extension StringsDict {
+  /// Plural entries are used to define language plural rules.
+  ///
+  /// Reference: https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/StringsdictFileFormat/StringsdictFileFormat.html
+  // swiftlint:disable:previous line_length
+  struct PluralEntry: Codable {
+    /// A format string that contains variables.
+    /// Each variable is preceded by the %#@ characters and followed by the @ character.
+    let formatKey: String
+    /// A dictionary of key-value pairs specifying the rule (value) to use for each variable (key).
+    /// Every variable that is part of the `formatKey` must be contained in this dictionary.
+    let variables: [String: VariableRule]
+  }
+
+  /// Variable width entries are used to define width variations for a localized string.
+  ///
+  /// Reference: https://developer.apple.com/documentation/foundation/nsstring/1413104-variantfittingpresentationwidth
+  struct VariableWidthEntry: Codable {
+    let rules: [String: String]
+  }
+}
+
+extension StringsDict.PluralEntry {
+  struct VariableRule: Codable {
+    let specTypeKey: String
+    let valueTypeKey: String
+    let zero: String?
+    let one: String?
+    let two: String?
+    let few: String?
+    let many: String?
+    let other: String
+
+    private enum CodingKeys: String, CodingKey {
+      case specTypeKey = "NSStringFormatSpecTypeKey"
+      case valueTypeKey = "NSStringFormatValueTypeKey"
+
+      case zero, one, two, few, many, other
+    }
+  }
+}
+
+// - MARK: Decodable conformance
+
+extension StringsDict: Decodable {
+  // Custom CodingKeys struct to be able to parse dictionaries with dynamic keys.
+  // This is necessary, because each variable used in the formatKey is used as the key
+  // to another dictionary containing the rules for that variable.
   private struct CodingKeys: CodingKey {
     var intValue: Int?
     var stringValue: String
@@ -51,8 +73,11 @@ enum StringsDict: Decodable {
       self.stringValue = stringValue
     }
 
+    // fixed keys
     static let formatKey = CodingKeys.make(key: "NSStringLocalizedFormatKey")
     static let variableWidthRules = CodingKeys.make(key: "NSStringVariableWidthRuleType")
+
+    // factory method to create dynamic keys
     static func make(key: String) -> CodingKeys {
       return CodingKeys(stringValue: key)! // swiftlint:disable:this force_unwrapping
     }
@@ -63,38 +88,40 @@ enum StringsDict: Decodable {
     let formatKey = try container.decodeIfPresent(String.self, forKey: .formatKey)
     let variableWidthRules = try container.decodeIfPresent([String: String].self, forKey: .variableWidthRules)
 
+    // We either have a formatKey OR we have a variableWidthRule.
     switch (formatKey, variableWidthRules) {
     case (.none, .none), (.some, .some):
       throw Strings.ParserError.invalidFormat
     case let (.some(formatKey), .none):
-      let variables = try StringsDict.decodeVariables(in: container, formatKey: formatKey)
+      let variables = try StringsDict.decodeVariableRules(in: container, formatKey: formatKey)
       self = .pluralEntry(PluralEntry(formatKey: formatKey, variables: variables))
     case let (.none, .some(variableWidthRules)):
       self = .variableWidthEntry(VariableWidthEntry(rules: variableWidthRules))
     }
   }
 
-  private static func decodeVariables(
+  private static func decodeVariableRules(
     in container: KeyedDecodingContainer<StringsDict.CodingKeys>,
     formatKey: String
-  ) throws -> [String: PluralEntry.Variable] {
-    var variables = [String: PluralEntry.Variable]()
+  ) throws -> [String: PluralEntry.VariableRule] {
+    var variables = [String: PluralEntry.VariableRule]()
+
     for variableKey in try StringsDict.variableKeysFromFormatKey(formatKey) {
-      let variable = try container.decode(PluralEntry.Variable.self, forKey: .make(key: variableKey))
+      let variable = try container.decode(PluralEntry.VariableRule.self, forKey: .make(key: variableKey))
       variables[variableKey] = variable
 
       // Nested FormatKey in Variable. Check if one of the strings (zero, one, ...) contains format keys,
       // decode them and add them to `variables`
       let childVariableKeys = Set(try variable.formatStrings.flatMap { try StringsDict.variableKeysFromFormatKey($0) })
       for variableKey in Array(childVariableKeys) {
-        variables[variableKey] = try container.decode(PluralEntry.Variable.self, forKey: .make(key: variableKey))
+        variables[variableKey] = try container.decode(PluralEntry.VariableRule.self, forKey: .make(key: variableKey))
       }
     }
     return variables
   }
 
   private static func variableKeysFromFormatKey(_ formatKey: String) throws -> [String] {
-    let pattern = "%(?>\\d\\$)?#@([\\w\\.\\p{Pd}]+)@"
+    let pattern = #"%(?>\d\$)?#@([\w\.\p{Pd}]+)@"#
     let regex = try NSRegularExpression(pattern: pattern, options: [])
     let nsrange = NSRange(formatKey.startIndex..<formatKey.endIndex, in: formatKey)
     let matches = regex.matches(in: formatKey, options: [], range: nsrange)
@@ -113,6 +140,8 @@ enum StringsDict: Decodable {
   }
 }
 
+// - MARK: Helpers
+
 extension StringsDict.PluralEntry {
   var translation: String? {
     var result = formatKey
@@ -125,7 +154,7 @@ extension StringsDict.PluralEntry {
   }
 }
 
-extension StringsDict.PluralEntry.Variable {
+extension StringsDict.PluralEntry.VariableRule {
   var formatStrings: [String] {
     return [zero, one, two, few, many, other].compactMap { $0 }
   }
