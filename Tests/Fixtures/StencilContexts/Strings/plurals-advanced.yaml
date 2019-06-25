@@ -1,0 +1,38 @@
+tables:
+- levels:
+    children:
+    - children:
+      - name: "placeholders"
+        strings:
+        - key: "multiple.placeholders.string-int"
+          name: "string-int"
+          translation: "Plural case 'other': %@ has %d ratings"
+          types:
+          - "Int"
+      - name: "variables"
+        strings:
+        - key: "multiple.variables.three-variables-in-formatkey"
+          name: "three-variables-in-formatkey"
+          translation: "Plural case 'other': %d files remaining (%d bytes, %d minutes)"
+          types:
+          - "Int"
+          - "Int"
+          - "Int"
+      name: "multiple"
+    - name: "nested"
+      strings:
+      - key: "nested.formatkey-in-variable"
+        name: "formatkey-in-variable"
+        translation: "Plural case 'other': %1$#@geese@"
+        types:
+        - "Int"
+        - "Int"
+        - "Int"
+      - key: "nested.formatkey-in-variable-deep"
+        name: "formatkey-in-variable-deep"
+        translation: "Plural case 'other': %1$#@first_level@"
+        types:
+        - "Int"
+        - "Int"
+        - "Int"
+  name: "LocPluralAdvanced"

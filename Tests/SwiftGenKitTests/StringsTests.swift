@@ -78,6 +78,14 @@ class StringsTests: XCTestCase {
     XCTDiffContexts(result, expected: "plurals", sub: .strings)
   }
 
+  func testAdvancedPlurals() throws {
+    let parser = try Strings.Parser()
+    try parser.searchAndParse(path: Fixtures.path(for: "LocPluralAdvanced.stringsdict", sub: .strings))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "plurals-advanced", sub: .strings)
+  }
+
   func testSameTableWithPlurals() throws {
     let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
