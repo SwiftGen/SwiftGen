@@ -36,8 +36,13 @@ extension StringsDict {
 }
 
 extension StringsDict.PluralEntry {
+  /// A VariabeRule containes the actual localized plural strings for every possible plural case that
+  /// is available in a specific locale. Since some locales only support a subset of plural forms,
+  /// most of them are optional.
   struct VariableRule: Codable {
+    /// The only possible value is `NSStringPluralRuleType`.
     let specTypeKey: String
+    /// A string format specifier for a number, as in %d for an integer.
     let valueTypeKey: String
     let zero: String?
     let one: String?
@@ -120,6 +125,9 @@ extension StringsDict: Decodable {
     return variables
   }
 
+  /// Parses a format string and returns an array of discovered variable keys.
+  /// Every variable key that is contained within the format string is preceded
+  /// by the %#@ characters and followed by the @ character.
   private static func variableKeysFromFormatKey(_ formatKey: String) throws -> [String] {
     let pattern = #"%(?>\d\$)?#@([\w\.\p{Pd}]+)@"#
     let regex = try NSRegularExpression(pattern: pattern, options: [])
