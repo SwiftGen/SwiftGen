@@ -55,9 +55,9 @@ import Foundation
     Date(timeIntervalSinceReferenceDate: {{ value.timeIntervalSinceReferenceDate }})
   {% elif metadata.type == "Optional" %}
     nil
-  {% elif metadata.type == "Array" and metadata.element.items %}
-    [{% for itemMetadata in metadata.element.items %}
-      {% call valueBlock value[forloop.counter0] itemMetadata %}
+  {% elif metadata.type == "Array" and value %}
+    [{% for currentValue in value %}
+      {% call valueBlock currentValue metadata.element %}
       {% if not forloop.last %}, {% endif %}
     {% endfor %}]
   {% elif metadata.type == "Dictionary" %}

@@ -54,6 +54,9 @@
 
 ### Bug Fixes
 
+* Plist: Fix issue with Array in the Inline templates.  
+  [#687](https://github.com/SwiftGen/SwiftGen/pull/687)
+  [@fjtrujy](https://github.com/fjtrujy)
 * XCAssets: improved the performance for color assets by caching the resolved colors.  
   [David Jennes](https://github.com/djbe)
   [#578](https://github.com/SwiftGen/SwiftGen/issue/578)
