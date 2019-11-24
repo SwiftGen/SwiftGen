@@ -83,6 +83,9 @@
 * Update to SwiftLint 0.31.0 and enable some extra SwiftLint rules.  
   [David Jennes](https://github.com/djbe)
   [#617](https://github.com/SwiftGen/SwiftGen/pull/617)
+* Some CI fixes related to software versions.  
+  [Patrick Nollet](https://github.com/PatrickNLT)
+  [#645](https://github.com/SwiftGen/SwiftGen/pull/645)
 
 ## 6.1.0
 
