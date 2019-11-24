@@ -74,10 +74,10 @@ Given that you can specify an exact version for `SwiftGen` in your `Podfile`, th
 You can then invoke SwiftGen in your Script Build Phase using:
 
 ```sh
-if [[ -f "$PODS_ROOT"/SwiftGen/bin/swiftgen ]]; then
-  "$PODS_ROOT"/SwiftGen/bin/swiftgen …
+if [[ -f "${PODS_ROOT}/SwiftGen/bin/swiftgen" ]]; then
+  "${PODS_ROOT}/SwiftGen/bin/swiftgen" …
 else
-  echo "warning: SwiftGen is not installed. Run pod install --repo-update to install it."
+  echo "warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it."
 fi
 ```
 
