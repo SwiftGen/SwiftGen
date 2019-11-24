@@ -64,6 +64,9 @@
 * Strings: we now correctly generate the type `Any` (instead of `String`) for `%@` placeholders.  
   [David Jennes](https://github.com/djbe)
   [620](https://github.com/SwiftGen/SwiftGen/issues/620)
+* Colors: Reduce initializer type inference for improved compilation performance.  
+  [Markus Faßbender](https://github.com/dermaaarkus)
+  [#663](https://github.com/SwiftGen/SwiftGen/issues/663)
 
 ### Internal Changes
 
