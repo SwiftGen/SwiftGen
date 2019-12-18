@@ -61,18 +61,18 @@ internal struct ColorName {
 
 // MARK: - Implementation Details
 
-// swiftlint:disable operator_usage_whitespace
+// swiftlint:disable operator_usage_whitespace colon
 internal extension Color {
   convenience init(rgbaValue: UInt32) {
-    let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0
-    let green = CGFloat((rgbaValue >> 16) & 0xff) / 255.0
-    let blue  = CGFloat((rgbaValue >>  8) & 0xff) / 255.0
-    let alpha = CGFloat((rgbaValue      ) & 0xff) / 255.0
+    let red:   CGFloat = CGFloat((rgbaValue >> UInt32(24)) & UInt32(0xff)) / CGFloat(255.0)
+    let green: CGFloat = CGFloat((rgbaValue >> UInt32(16)) & UInt32(0xff)) / CGFloat(255.0)
+    let blue:  CGFloat = CGFloat((rgbaValue >> UInt32( 8)) & UInt32(0xff)) / CGFloat(255.0)
+    let alpha: CGFloat = CGFloat((rgbaValue              ) & UInt32(0xff)) / CGFloat(255.0)
 
     self.init(red: red, green: green, blue: blue, alpha: alpha)
   }
 }
-// swiftlint:enable operator_usage_whitespace
+// swiftlint:enable operator_usage_whitespace colon
 
 internal extension Color {
   convenience init(named color: ColorName) {
