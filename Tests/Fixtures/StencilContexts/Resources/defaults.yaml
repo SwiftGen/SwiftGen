@@ -1,0 +1,5 @@
+files:
+- name: "File"
+  ext: ""
+- name: "test"
+  ext: "txt"

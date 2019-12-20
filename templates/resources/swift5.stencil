@@ -1,0 +1,64 @@
+// swiftlint:disable all
+// Generated using SwiftGen - https://github.com/SwiftGen/SwiftGen
+
+{% if files.count > 0 %}
+{% set enumName %}{{param.enumName|default:"Resource"}}{% endset %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set resourceType %}{{param.resourceTypeName|default:"FileResource"}}{% endset %}
+import Foundation
+
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+
+// MARK: - Resource Files
+
+// swiftlint:disable identifier_name line_length number_separator type_body_length
+{{accessModifier}} enum {{enumName}} {
+  {% for file in files %}
+  {{accessModifier}} static let {{file.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% if file.ext %}{{file.ext|swiftIdentifier:"pretty"|capitalize|escapeReservedKeywords}}{% endif %} = {{resourceType}}(name: "{{file.name}}", ext: {% if file.ext %}"{{file.ext}}"{% else %}nil{% endif %})
+  {% endfor %}
+}
+
+// MARK: - Implementation Detailsh
+
+{{accessModifier}} struct {{resourceType}} {
+  {{accessModifier}} fileprivate(set) var name: String
+  {{accessModifier}} fileprivate(set) var ext: String?
+
+  {{accessModifier}} var url: URL {
+    return url(locale: nil)
+  }
+
+  {{accessModifier}} func url(locale: Locale?) -> URL {
+    let bundle = BundleToken.bundle
+    let url = bundle.url(forResource: name, withExtension: ext, subdirectory: nil, localization: locale?.identifier)
+    guard let result = url else {
+      fatalError("Could not locate file named \(name)\(ext ?? "")")
+    }
+    return result
+  }
+
+  {{accessModifier}} var path: String {
+    return path(locale: nil)
+  }
+
+  {{accessModifier}} func path(locale: Locale?) -> String {
+    let bundle = BundleToken.bundle
+    let path = bundle.path(forResource: name, ofType: ext, inDirectory: nil, forLocalization: locale?.identifier)
+    guard let result = path else {
+      fatalError("Could not locate file named \(name)\(ext ?? "")")
+    }
+    return result
+  }
+}
+
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type
+{% else %}
+// No files found
+{% endif %}

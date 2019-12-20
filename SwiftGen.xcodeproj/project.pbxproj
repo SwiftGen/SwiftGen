@@ -25,6 +25,7 @@
 		273EF7FD23785B8F00E212A7 /* ResourceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273EF7FB23785B1E00E212A7 /* ResourceParser.swift */; };
 		273EF80023785C3000E212A7 /* ResourceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273EF7FE23785C1E00E212A7 /* ResourceFile.swift */; };
 		273EF80323785FC900E212A7 /* ResourcesContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273EF80123785F9900E212A7 /* ResourcesContext.swift */; };
+		2753492A23AC7201004855E4 /* ResourcesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2753492823AC71D6004855E4 /* ResourcesTests.swift */; };
 		379C7E871F8ECA0C00267096 /* TemplateRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E861F8ECA0C00267096 /* TemplateRef.swift */; };
 		379C7E891F8ECA7000267096 /* OutputDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E881F8ECA7000267096 /* OutputDestination.swift */; };
 		379C7E8A1F8ECA8900267096 /* TemplateRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E861F8ECA0C00267096 /* TemplateRef.swift */; };
@@ -310,6 +311,7 @@
 		273EF7FB23785B1E00E212A7 /* ResourceParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceParser.swift; sourceTree = "<group>"; };
 		273EF7FE23785C1E00E212A7 /* ResourceFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceFile.swift; sourceTree = "<group>"; };
 		273EF80123785F9900E212A7 /* ResourcesContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesContext.swift; sourceTree = "<group>"; };
+		2753492823AC71D6004855E4 /* ResourcesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesTests.swift; sourceTree = "<group>"; };
 		2D945F4382BDE4E02F69E650 /* Pods-SwiftGenKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit.debug.xcconfig"; sourceTree = "<group>"; };
 		379C7E861F8ECA0C00267096 /* TemplateRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateRef.swift; sourceTree = "<group>"; };
 		379C7E881F8ECA7000267096 /* OutputDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDestination.swift; sourceTree = "<group>"; };
@@ -833,6 +835,7 @@
 				DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */,
 				DD15F104213C412F00D081C7 /* JsonTests.swift */,
 				DD15F102213C409F00D081C7 /* PlistTests.swift */,
+				2753492823AC71D6004855E4 /* ResourcesTests.swift */,
 				DDDE506D1FAF6AD4004203BE /* StringsTests.swift */,
 				DDDE50F81FAF6AD4004203BE /* TestsHelper.swift */,
 				DDDE50F51FAF6AD4004203BE /* XCAssetsTests.swift */,
@@ -1501,6 +1504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDDE51961FAF6AD4004203BE /* InterfaceBuilderMacOSTests.swift in Sources */,
+				2753492A23AC7201004855E4 /* ResourcesTests.swift in Sources */,
 				DDDE51981FAF6AD4004203BE /* InterfaceBuilderiOSTests.swift in Sources */,
 				DD15F107213C474600D081C7 /* YamlTests.swift in Sources */,
 				DD15F105213C412F00D081C7 /* JsonTests.swift in Sources */,

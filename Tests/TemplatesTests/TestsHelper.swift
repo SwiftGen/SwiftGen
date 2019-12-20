@@ -75,6 +75,7 @@ class Fixtures {
     case interfaceBuilderMacOS = "IB-macOS"
     case json = "JSON"
     case plist = "Plist"
+    case resources = "Resources"
     case strings = "Strings"
     case xcassets = "XCAssets"
     case yaml = "YAML"

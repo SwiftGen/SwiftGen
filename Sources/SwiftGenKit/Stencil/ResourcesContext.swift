@@ -7,9 +7,10 @@
 import Foundation
 
 extension Resource.Parser {
-  public func stencilContext() -> [String : Any] {
+  public func stencilContext() -> [String: Any] {
     let files = self.files
       .sorted { lhs, rhs in lhs.name < rhs.name }
+      .map(map(file:))
 
     return [
       "files": files
@@ -19,8 +20,7 @@ extension Resource.Parser {
   private func map(file: Resource.File) -> [String: Any] {
     return [
       "name": file.name,
-      "path": file.path,
-      "extension": file.ext ?? ""
+      "ext": file.ext ?? ""
     ]
   }
 }
