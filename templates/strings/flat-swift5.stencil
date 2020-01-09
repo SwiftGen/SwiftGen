@@ -55,7 +55,7 @@ import Foundation
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 {% set enumName %}{{param.enumName|default:"L10n"}}{% endset %}
 {{accessModifier}} enum {{enumName}} {
-  {% if tables.count > 1 %}
+  {% if tables.count > 1 or param.forceFileNameEnum %}
   {% for table in tables %}
   {{accessModifier}} enum {{table.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
     {% filter indent:2 %}{% call recursiveBlock table.name table.levels %}{% endfilter %}

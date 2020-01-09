@@ -28,6 +28,7 @@ You can customize some elements of this template by overriding the following par
 | `noComments` | N/A | Setting this parameter will disable the comments describing the translation of a key. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 | `localizeFunction` | `NSLocalizedString` | Allows you to set your own custom localization function. Your custom function must have the same signature as the one provided by `Foundation`, i.e. `yourFunctionName(_:tableName:bundle:comment:)` |
+| `forceFileNameEnum` | N/A | Setting this parameter will generate `enum` for file even if only single is provided. |
 
 ## Generated Code
 

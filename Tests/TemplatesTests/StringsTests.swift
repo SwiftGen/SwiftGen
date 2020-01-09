@@ -29,8 +29,17 @@ class StringsTests: XCTestCase {
         context: context,
         parameters: ["localizeFunction=XCTLocFunc"]
        ),
-       suffix: "-localizeFunction")
+       suffix: "-localizeFunction"),
+      (context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+       suffix: "-forceFileNameEnum")
     ]
+  }
+
+  private lazy var variationsSwift3: VariationGenerator = { name, context in
+    let notSupported = ["-forceFileNameEnum"]
+    return try self.variations(name, context).filter {
+      !notSupported.contains($0.suffix)
+    }
   }
 
   let variationsObjC: VariationGenerator = { name, context in
@@ -51,7 +60,7 @@ class StringsTests: XCTestCase {
       template: "flat-swift3",
       contextNames: Contexts.all,
       directory: .strings,
-      contextVariations: variations
+      contextVariations: variationsSwift3
     )
   }
 
@@ -78,7 +87,7 @@ class StringsTests: XCTestCase {
       template: "structured-swift3",
       contextNames: Contexts.all,
       directory: .strings,
-      contextVariations: variations
+      contextVariations: variationsSwift3
     )
   }
 
