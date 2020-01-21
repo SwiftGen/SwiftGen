@@ -41,9 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 {% endif %}
 {% if string.types %}
   {% if string.types.count == 1 %}
-+ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValue:{% call parametersBlock string.types %}
++ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValue:{% call parametersBlock string.types %};
   {% else %}
-+ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValues:{% call parametersBlock string.types %}
++ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValues:{% call parametersBlock string.types %};
   {% endif %}
 {% else %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}};
