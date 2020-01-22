@@ -109,7 +109,7 @@ jobs:
             - homebrew-
       - run:
           name: Install libxml2
-          command: brew install libxml2 && export PATH="/usr/local/opt/libxml2/bin:$PATH" && export LDFLAGS="-L/usr/local/opt/libxml2/lib" && export CPPFLAGS="-I/usr/local/opt/libxml2/include"
+          command: brew install libxml2 
       -  save_cache:
           key: homebrew-{{ checksum ".circleci/config.yml" }}
           paths:
