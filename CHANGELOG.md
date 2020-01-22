@@ -67,6 +67,9 @@
 * Colors: Reduce initializer type inference for improved compilation performance.  
   [Markus Faßbender](https://github.com/dermaaarkus)
   [#663](https://github.com/SwiftGen/SwiftGen/issues/663)
+* Strings: Fix objc template for strings which contain a substitution.  
+  [Olivier Destrebecq](https://github.com/otusweb)
+  [#673](https://github.com/SwiftGen/SwiftGen/issues/673)
 
 ### Internal Changes
 
