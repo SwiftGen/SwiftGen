@@ -109,7 +109,7 @@ jobs:
             - homebrew-
       - run:
           name: Install libxml2
-          command: brew install libxml2 
+          command: brew install --force libxml2
       -  save_cache:
           key: homebrew-{{ checksum ".circleci/config.yml" }}
           paths:
@@ -156,16 +156,10 @@ workflows:
   version: 2
   lint-buildandtest-compileoutput-checkdeploy:
     jobs:
-      - lint
       - spm-build-and-test
-      - xcode-build-and-test
       - compile-output:
           requires:
-            - lint
             - spm-build-and-test
-            - xcode-build-and-test
       - check-deploy:
           requires:
-            - lint
             - spm-build-and-test
-            - xcode-build-and-test
