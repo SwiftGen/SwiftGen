@@ -1,4 +1,4 @@
-swiftlint_version: 0.31.0
+swiftlint_version: 0.39.1
 
 opt_in_rules:
  - anyobject_protocol

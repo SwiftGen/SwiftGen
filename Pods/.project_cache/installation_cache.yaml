@@ -7,10 +7,10 @@ CACHE_KEYS:
       Commander:
         :debug: 2ecb7d38d7c0d9df1fe607abf06cbccc
         :release: 2ecb7d38d7c0d9df1fe607abf06cbccc
-    CHECKSUM: 6eda7635b133e239faa85bf75dcab88d6fd63aaa
+    CHECKSUM: 723330cf3697b604c00afb9db9576be81a03c501
     PROJECT_NAME: Commander
     SPECS:
-      - Commander (0.8.0)
+      - Commander (0.9.1)
   Kanna:
     BUILD_SETTINGS_CHECKSUM:
       Kanna:
@@ -72,10 +72,10 @@ CACHE_KEYS:
       SwiftLint:
         :debug: 1c745809f0563c8c5f3436c1fbfc0fd3
         :release: 1c745809f0563c8c5f3436c1fbfc0fd3
-    CHECKSUM: 7a0227733d786395817373b2d0ca799fd0093ff3
+    CHECKSUM: 55e96a4a4d537d4a3156859fc1c54bd24851a046
     PROJECT_NAME: SwiftLint
     SPECS:
-      - SwiftLint (0.31.0)
+      - SwiftLint (0.39.1)
   Yams:
     BUILD_SETTINGS_CHECKSUM:
       Yams:
