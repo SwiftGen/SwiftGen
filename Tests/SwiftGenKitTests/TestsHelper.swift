@@ -206,7 +206,7 @@ class Fixtures {
   }
 
   static func path(for name: String, sub: Directory) -> Path {
-    return path(for: name, subDirectory: "Resources/\(sub.rawValue)")
+    path(for: name, subDirectory: "Resources/\(sub.rawValue)")
   }
 
   private static func path(for name: String, subDirectory: String? = nil) -> Path {

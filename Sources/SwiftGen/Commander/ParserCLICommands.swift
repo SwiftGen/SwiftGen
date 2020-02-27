@@ -22,7 +22,7 @@ extension ParserCLI {
     )
 
     static func filter(for parser: ParserCLI) -> Option<String> {
-      return Option<String>(
+      Option<String>(
         "filter",
         default: parser.parserType.defaultFilter,
         flag: "f",
@@ -31,7 +31,7 @@ extension ParserCLI {
     }
 
     static func options(for parser: ParserCLI) -> VariadicOption<String> {
-      return VariadicOption<String>(
+      VariadicOption<String>(
         "option",
         default: [],
         description: "List of parser options. \(parser.parserType.allOptions)"
@@ -65,7 +65,7 @@ extension ParserCLI {
 
 extension ParserCLI {
   func command() -> CommandType {
-    return Commander.command(
+    Commander.command(
       CLIOption.deprecatedTemplateName,
       CLIOption.templateName,
       CLIOption.templatePath,

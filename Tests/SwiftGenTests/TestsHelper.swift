@@ -102,7 +102,7 @@ class Fixtures {
   }
 
   static func path(for name: String, sub: Directory) -> Path {
-    return path(for: name, subDirectory: "Resources/\(sub.rawValue)")
+    path(for: name, subDirectory: "Resources/\(sub.rawValue)")
   }
 
   private static func path(for name: String, subDirectory: String? = nil) -> Path {
@@ -113,11 +113,11 @@ class Fixtures {
   }
 
   static func template(for name: String, sub: Directory) -> String {
-    return string(for: name, subDirectory: "templates/\(sub.rawValue.lowercased())")
+    string(for: name, subDirectory: "templates/\(sub.rawValue.lowercased())")
   }
 
   static func output(for name: String, sub: Directory) -> String {
-    return string(for: name, subDirectory: "Generated/\(sub.rawValue)")
+    string(for: name, subDirectory: "Generated/\(sub.rawValue)")
   }
 
   private static func string(for name: String, subDirectory: String) -> String {

@@ -14,7 +14,7 @@ class ColorsTests: XCTestCase {
 
   // generate variations to test customname generation
   func variations(customName: String) -> VariationGenerator {
-    return { name, context in
+    { name, context in
       guard name == "defaults" else { return [(context: context, suffix: "")] }
 
       return [

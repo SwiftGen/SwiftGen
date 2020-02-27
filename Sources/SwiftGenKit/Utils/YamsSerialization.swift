@@ -33,7 +33,7 @@ extension NSArray: NodeRepresentable {
 
 extension NSDate: ScalarRepresentable {
   public func represented() -> Node.Scalar {
-    return (self as Date).represented()
+    (self as Date).represented()
   }
 }
 
@@ -48,13 +48,13 @@ extension NSDictionary: NodeRepresentable {
 
 extension NSData: ScalarRepresentable {
   public func represented() -> Node.Scalar {
-    return (self as Data).represented()
+    (self as Data).represented()
   }
 }
 
 extension NSNull: ScalarRepresentable {
   public func represented() -> Node.Scalar {
-    return Node.Scalar("null", Tag(.null))
+    Node.Scalar("null", Tag(.null))
   }
 }
 

@@ -23,7 +23,7 @@ public enum YAML {
   /// - parameter string: The YAML string
   /// - returns: The decoded document
   public static func decode(string: String, env: [String: String] = [:]) throws -> Any? {
-    return try Yams.load(yaml: string, .default, Constructor.swiftgenContructor(env: env))
+    try Yams.load(yaml: string, .default, Constructor.swiftgenContructor(env: env))
   }
 
   /// Encode the given object to YAML and write it to the given path
@@ -65,7 +65,7 @@ public enum YAML {
 
 private extension Constructor {
   static func swiftgenContructor(env: [String: String]) -> Constructor {
-    return Constructor(customScalarMap(env: env))
+    Constructor(customScalarMap(env: env))
   }
 
   static func customScalarMap(env: [String: String]) -> ScalarMap {
@@ -77,7 +77,7 @@ private extension Constructor {
 
 private extension String {
   static func constructExpandingEnvVars(env: [String: String]) -> (_ scalar: Node.Scalar) -> String? {
-    return { (scalar: Node.Scalar) -> String? in
+    { (scalar: Node.Scalar) -> String? in
       scalar.string.expandingEnvVars(env: env)
     }
   }

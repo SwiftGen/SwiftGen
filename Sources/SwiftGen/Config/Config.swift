@@ -62,22 +62,22 @@ extension Config {
 extension Config {
   enum Message {
     static func absolutePath(_ path: CustomStringConvertible) -> String {
-      return """
+      """
         \(path) is an absolute path. Prefer relative paths for portability when sharing your \
         project (unless you are using environment variables).
         """
     }
 
     static func deprecatedAction(_ action: String, for replacement: String) -> String {
-      return "`\(action)` action has been deprecated, please use `\(replacement)` instead."
+      "`\(action)` action has been deprecated, please use `\(replacement)` instead."
     }
 
     static func doesntExist(_ path: CustomStringConvertible) -> String {
-      return "\(path) does not exist."
+      "\(path) does not exist."
     }
 
     static func doesntExistIntermediatesNeeded(_ path: CustomStringConvertible) -> String {
-      return """
+      """
         \(path) does not exist. Intermediate folders up to the output file must already exist to avoid \
         misconfigurations, and won't be created for you.
         """

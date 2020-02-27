@@ -12,7 +12,7 @@ import SwiftGenKit
 
 enum Version {
   private static func getVersion(name: String, type: AnyClass) -> String {
-    return getVersion(name: name, bundle: Bundle(for: type))
+    getVersion(name: name, bundle: Bundle(for: type))
   }
 
   private static func getVersion(name: String, bundle: Bundle) -> String {

@@ -19,7 +19,7 @@ private enum XML {
 extension CoreData {
   public enum UniquenessConstraints {
     public static func parse(from object: Kanna.XMLElement) throws -> [[String]] {
-      return try object.xpath(XML.uniquenessConstraintPath).map { uniquenessConstraintElement in
+      try object.xpath(XML.uniquenessConstraintPath).map { uniquenessConstraintElement in
         try uniquenessConstraintElement.xpath(XML.constraintPath).map {
           guard let value = $0[XML.Attributes.value] else {
             throw CoreData.ParserError.invalidFormat(reason: "Missing required uniqueness constraint value")
