@@ -10,8 +10,7 @@ import LocationPicker
 import SlackTextViewController
 import UIKit
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Storyboard Scenes
 

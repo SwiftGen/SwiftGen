@@ -16,8 +16,7 @@ internal typealias XCTColor = XCTColorAsset.Color
 @available(*, deprecated, renamed: "XCTImageAsset.Image", message: "This typealias will be removed in SwiftGen 7.0")
 internal typealias XCTImage = XCTImageAsset.Image
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Asset Catalogs
 
