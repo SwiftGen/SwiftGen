@@ -17,14 +17,22 @@ class FontsTests: XCTestCase {
     guard name == "defaults" else { return [(context: context, suffix: "")] }
 
     return [
-      (context: context,
-       suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomFamily"]),
-       suffix: "-customName"),
-      (context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
-       suffix: "-preservePath"),
-      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+      (
+        context: context,
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomFamily"]),
+        suffix: "-customName"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
+        suffix: "-preservePath"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      )
     ]
   }
 

@@ -13,23 +13,31 @@ class ColorsTests: XCTestCase {
   }
 
   // generate variations to test customname generation
+  // swiftlint:disable opening_brace
   func variations(customName: String) -> VariationGenerator {
     { name, context in
       guard name == "defaults" else { return [(context: context, suffix: "")] }
 
       return [
-        (context: context,
-         suffix: ""),
-        (context: try StencilContext.enrich(
-           context: context,
-           parameters: ["enumName=\(customName)", "colorAliasName=XCTColor"]
-         ),
-         suffix: "-customName"),
-        (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-         suffix: "-publicAccess")
+        (
+          context: context,
+          suffix: ""
+        ),
+        (
+          context: try StencilContext.enrich(
+            context: context,
+            parameters: ["enumName=\(customName)", "colorAliasName=XCTColor"]
+          ),
+          suffix: "-customName"
+          ),
+        (
+          context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+          suffix: "-publicAccess"
+        )
       ]
     }
   }
+  // swiftlint:enable opening_brace
 
   func testSwift3() {
     test(

@@ -18,9 +18,9 @@ public enum YamsSerializationError: Error {
   }
 }
 
-/*
- These extensions are needed otherwise Yams can't serialize Objective-C types
- */
+///
+/// These extensions are needed otherwise Yams can't serialize Objective-C types
+///
 
 extension NSArray: NodeRepresentable {
   public func represented() throws -> Node {

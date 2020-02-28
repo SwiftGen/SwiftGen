@@ -76,11 +76,13 @@ private extension Constructor {
 }
 
 private extension String {
+  // swiftlint:disable opening_brace
   static func constructExpandingEnvVars(env: [String: String]) -> (_ scalar: Node.Scalar) -> String? {
     { (scalar: Node.Scalar) -> String? in
       scalar.string.expandingEnvVars(env: env)
     }
   }
+  // swiftlint:enable opening_brace
 
   func expandingEnvVars(env: [String: String]) -> String {
     var result = self

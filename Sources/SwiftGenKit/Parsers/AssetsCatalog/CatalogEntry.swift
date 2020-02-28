@@ -36,15 +36,15 @@ enum Constants {
   fileprivate static let properties = "properties"
   fileprivate static let providesNamespace = "provides-namespace"
 
-  /**
-   * This is a list of supported asset catalog item types, for now we just
-   * support `color set`s, `image set`s and `data set`s. If you want to add support for
-   * new types, just add it to this whitelist, and add the necessary code to
-   * the `process(folder:withPrefix:)` method.
-   *
-   * Use as reference:
-   * https://developer.apple.com/library/content/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format
-   */
+  ///
+  /// This is a list of supported asset catalog item types, for now we just
+  /// support `color set`s, `image set`s and `data set`s. If you want to add support for
+  /// new types, just add it to this whitelist, and add the necessary code to
+  /// the `process(folder:withPrefix:)` method.
+  ///
+  /// Use as reference:
+  /// https://developer.apple.com/library/content/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format
+  ///
   enum Item: String, CaseIterable {
     case arResourceGroup = "arresourcegroup"
     case colorSet = "colorset"
@@ -54,25 +54,25 @@ enum Constants {
 }
 
 extension AssetsCatalog.Entry {
-  /**
-   Each node in an asset catalog is either (there are more types, but we ignore those):
-     - An AR resource group, which can contain both AR reference images and objects.
-     - A colorset, which is essentially a group containing a list of colors (the latter is ignored).
-     - A dataset, which is essentially a group containing a list of files (the latter is ignored).
-     - An imageset, which is essentially a group containing a list of files (the latter is ignored).
-     - A group, containing sub items such as imagesets or groups. A group can provide a namespaced,
-       which means that all the sub items will have to be prefixed with their parent's name.
-
-         {
-           "properties" : {
-             "provides-namespace" : true
-           }
-         }
-
-   - Parameter path: The directory path to recursively process.
-   - Parameter prefix: The prefix to prepend values with (from namespaced groups).
-   - Returns: An array of processed Entry items (a catalog).
-   */
+  ///
+  /// Each node in an asset catalog is either (there are more types, but we ignore those):
+  /// - An AR resource group, which can contain both AR reference images and objects.
+  /// - A colorset, which is essentially a group containing a list of colors (the latter is ignored).
+  /// - A dataset, which is essentially a group containing a list of files (the latter is ignored).
+  /// - An imageset, which is essentially a group containing a list of files (the latter is ignored).
+  /// - A group, containing sub items such as imagesets or groups. A group can provide a namespaced,
+  ///   which means that all the sub items will have to be prefixed with their parent's name.
+  ///
+  ///     {
+  ///       "properties" : {
+  ///         "provides-namespace" : true
+  ///       }
+  ///     }
+  ///
+  /// - Parameter path: The directory path to recursively process.
+  /// - Parameter prefix: The prefix to prepend values with (from namespaced groups).
+  /// - Returns: An array of processed Entry items (a catalog).
+  ///
   static func parse(path: Path, withPrefix prefix: String) -> AssetsCatalogEntry? {
     guard path.isDirectory else { return nil }
     let type = path.extension ?? ""

@@ -17,12 +17,18 @@ class JsonTests: XCTestCase {
     guard name == "all" else { return [(context: context, suffix: "")] }
 
     return [
-      (context: context,
-       suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomJSON"]),
-       suffix: "-customName"),
-      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+      (
+        context: context,
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomJSON"]),
+        suffix: "-customName"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      )
     ]
   }
 
@@ -64,14 +70,22 @@ class JsonTests: XCTestCase {
     guard name == "all" else { return [(context: context, suffix: "")] }
 
     return [
-      (context: context,
-       suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomJSON"]),
-       suffix: "-customname"),
-      (context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
-       suffix: "-preservePath"),
-      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+      (
+        context: context,
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomJSON"]),
+        suffix: "-customname"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
+        suffix: "-preservePath"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      )
     ]
   }
 

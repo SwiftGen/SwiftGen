@@ -13,10 +13,14 @@ import XCTest
 private let colorCode: (String) -> String =
   ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
 private let (msgColor, reset) = (colorCode("fg250,0,0"), colorCode(""))
-private let okCode = (num: colorCode("fg127,127,127"),
-                      code: colorCode(""))
-private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
-                      code: colorCode("fg250,250,250") + colorCode("bg127,0,0"))
+private let okCode = (
+  num: colorCode("fg127,127,127"),
+  code: colorCode("")
+)
+private let koCode = (
+  num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
+  code: colorCode("fg250,250,250") + colorCode("bg127,0,0")
+)
 
 private func diff(_ result: String, _ expected: String) -> String? {
   guard result != expected else { return nil }
@@ -133,24 +137,24 @@ class Fixtures {
 }
 
 extension XCTestCase {
-  /**
-   Generate variations of a context.
-
-   - Parameter name: The name of the context
-   - Parameter context: The context itself
-   - Return: a tuple with a list of generated contexts, and a suffix to find the correct output file
-   */
+  ///
+  /// Generate variations of a context.
+  ///
+  /// - Parameter name: The name of the context
+  /// - Parameter context: The context itself
+  /// - Return: a tuple with a list of generated contexts, and a suffix to find the correct output file
+  ///
   typealias VariationGenerator = ((String, [String: Any]) throws -> [(context: [String: Any], suffix: String)])
 
-  /**
-   Test the given template against a list of contexts, comparing the output with files in the expected folder.
-   
-   - Parameter template: The name of the template (without the `stencil` extension)
-   - Parameter contextNames: A list of context names (without the `plist` extension)
-   - Parameter directory: The directory to look for files in (corresponds to the command)
-   - Parameter resourceDirectory: The directory to look for files in (corresponds to the command)
-   - Parameter contextVariations: Optional closure to generate context variations.
-   */
+  ///
+  /// Test the given template against a list of contexts, comparing the output with files in the expected folder.
+  ///
+  /// - Parameter template: The name of the template (without the `stencil` extension)
+  /// - Parameter contextNames: A list of context names (without the `plist` extension)
+  /// - Parameter directory: The directory to look for files in (corresponds to the command)
+  /// - Parameter resourceDirectory: The directory to look for files in (corresponds to the command)
+  /// - Parameter contextVariations: Optional closure to generate context variations.
+  ///
   func test(
     template templateName: String,
     contextNames: [String],
