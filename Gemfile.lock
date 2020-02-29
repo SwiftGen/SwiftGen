@@ -95,7 +95,7 @@ GEM
     powerpack (0.1.2)
     public_suffix (3.0.3)
     rainbow (3.0.0)
-    rake (12.3.2)
+    rake (12.3.3)
     rouge (2.0.7)
     rubocop (0.63.1)
       jaro_winkler (~> 1.5.1)
