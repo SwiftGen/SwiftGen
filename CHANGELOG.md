@@ -67,6 +67,8 @@
 * Colors: Reduce initializer type inference for improved compilation performance.  
   [Markus Faßbender](https://github.com/dermaaarkus)
   [#663](https://github.com/SwiftGen/SwiftGen/issues/663)
+* Config Lint: fix config lint not processing relative paths contianting ".." correctly.  
+  [Wolfgang Lutz](https://github.com/Lutzifer)
 
 ### Internal Changes
 
