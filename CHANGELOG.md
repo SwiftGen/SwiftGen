@@ -67,8 +67,9 @@
 * Colors: Reduce initializer type inference for improved compilation performance.  
   [Markus Faßbender](https://github.com/dermaaarkus)
   [#663](https://github.com/SwiftGen/SwiftGen/issues/663)
-* Config Lint: fix config lint not processing relative paths contianting ".." correctly.  
+* Config Lint: fix config lint not processing relative paths containing ".." correctly.  
   [Wolfgang Lutz](https://github.com/Lutzifer)
+  [#688](https://github.com/SwiftGen/SwiftGen/issues/688)
 
 ### Internal Changes
 
@@ -94,6 +95,9 @@
 * Updated to CocoaPods 1.9.0.  
   [David Jennes](https://github.com/djbe)
   [#619](https://github.com/SwiftGen/SwiftGen/pull/619)
+* Updated Pods and Gems dependencies.  
+  [David Jennes](https://github.com/djbe)
+  [#684](https://github.com/SwiftGen/SwiftGen/pull/684)
 
 ## 6.1.0
 

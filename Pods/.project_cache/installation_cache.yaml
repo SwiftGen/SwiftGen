@@ -7,19 +7,19 @@ CACHE_KEYS:
       Commander:
         :debug: 2ecb7d38d7c0d9df1fe607abf06cbccc
         :release: 2ecb7d38d7c0d9df1fe607abf06cbccc
-    CHECKSUM: 6eda7635b133e239faa85bf75dcab88d6fd63aaa
+    CHECKSUM: 723330cf3697b604c00afb9db9576be81a03c501
     PROJECT_NAME: Commander
     SPECS:
-      - Commander (0.8.0)
+      - Commander (0.9.1)
   Kanna:
     BUILD_SETTINGS_CHECKSUM:
       Kanna:
-        :debug: e65cb871c651a6642746f284ab601012
-        :release: e65cb871c651a6642746f284ab601012
-    CHECKSUM: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
+        :debug: 68b0de929c065ffbfd74417d290893b9
+        :release: 68b0de929c065ffbfd74417d290893b9
+    CHECKSUM: 2c4eddaaa4bfb9a1ed19e53c0b3d42ef02838046
     PROJECT_NAME: Kanna
     SPECS:
-      - Kanna (5.0.0)
+      - Kanna (5.2.2)
   PathKit:
     BUILD_SETTINGS_CHECKSUM:
       PathKit:
@@ -31,24 +31,24 @@ CACHE_KEYS:
       - PathKit (0.9.2)
   Pods-swiftgen:
     BUILD_SETTINGS_CHECKSUM:
-      Debug: 3b0551cb9140067512234b58bf357b65
-      Release: 3b0551cb9140067512234b58bf357b65
+      Debug: 1334813e2cfc38405156106405b0e912
+      Release: 1334813e2cfc38405156106405b0e912
   Pods-swiftgen-SwiftGen UnitTests:
     BUILD_SETTINGS_CHECKSUM:
-      Debug: 6f03ada9a9aa120afb6771fab8b7d2e1
-      Release: 6f03ada9a9aa120afb6771fab8b7d2e1
+      Debug: 2729ae914b23a3c1d9a23829e0c475ba
+      Release: 2729ae914b23a3c1d9a23829e0c475ba
   Pods-swiftgen-Templates UnitTests:
     BUILD_SETTINGS_CHECKSUM:
-      Debug: 6f03ada9a9aa120afb6771fab8b7d2e1
-      Release: 6f03ada9a9aa120afb6771fab8b7d2e1
+      Debug: 2729ae914b23a3c1d9a23829e0c475ba
+      Release: 2729ae914b23a3c1d9a23829e0c475ba
   Pods-SwiftGenKit:
     BUILD_SETTINGS_CHECKSUM:
-      Debug: 8b2b08bee50fe0936f17727dd006b036
-      Release: 8b2b08bee50fe0936f17727dd006b036
+      Debug: 8712259b2e3f81bacd37aa97043e827a
+      Release: 8712259b2e3f81bacd37aa97043e827a
   Pods-SwiftGenKit-SwiftGenKit UnitTests:
     BUILD_SETTINGS_CHECKSUM:
-      Debug: ce76144e59547d4597887427a44458ae
-      Release: ce76144e59547d4597887427a44458ae
+      Debug: fb0c248e9d7dc030a03cf7dab1d59fb5
+      Release: fb0c248e9d7dc030a03cf7dab1d59fb5
   Stencil:
     BUILD_SETTINGS_CHECKSUM:
       Stencil:
@@ -72,19 +72,19 @@ CACHE_KEYS:
       SwiftLint:
         :debug: 1c745809f0563c8c5f3436c1fbfc0fd3
         :release: 1c745809f0563c8c5f3436c1fbfc0fd3
-    CHECKSUM: 7a0227733d786395817373b2d0ca799fd0093ff3
+    CHECKSUM: 22ccbbe3b8008684be5955693bab135e0ed6a447
     PROJECT_NAME: SwiftLint
     SPECS:
-      - SwiftLint (0.31.0)
+      - SwiftLint (0.39.2)
   Yams:
     BUILD_SETTINGS_CHECKSUM:
       Yams:
         :debug: bd049f3173d31876da7ed672e2e00ece
         :release: bd049f3173d31876da7ed672e2e00ece
-    CHECKSUM: cb96472112d99e4b368f8dae9ab62e8a3eb8a3f9
+    CHECKSUM: 4199a97883e0369046e3fe882fcc95e559966370
     PROJECT_NAME: Yams
     SPECS:
-      - Yams (2.0.0)
+      - Yams (3.0.1)
 OBJECT_VERSION: 47
 PLUGINS:
   cocoapods-stats:

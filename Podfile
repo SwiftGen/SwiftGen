@@ -9,12 +9,12 @@ workspace 'SwiftGen.xcworkspace'
 
 def common_pods
   podspec :path => 'SwiftGenKit.podspec'
-  pod 'SwiftLint', '~> 0.31'
+  pod 'SwiftLint', '~> 0.39'
 end
 
 target 'swiftgen' do
   common_pods
-  pod 'Commander', '~> 0.8'
+  pod 'Commander', '~> 0.9'
   pod 'StencilSwiftKit', '~> 2.7'
 
   target 'SwiftGen UnitTests' do

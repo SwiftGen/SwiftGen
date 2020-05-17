@@ -13,13 +13,13 @@ import Foundation
 
 extension CoreData.Parser {
   public func stencilContext() -> [String: Any] {
-    return [
+    [
       "models": models.map(map)
     ]
   }
 
   private func map(model: CoreData.Model) -> [String: Any] {
-    return [
+    [
       "configurations": model.configurations.mapValues { $0.sorted() },
       "entities": model.entities.mapValues { map(entity: $0, in: model) },
       "fetchRequests": model.fetchRequestsByEntityName.mapValues { $0.map { map(fetchRequest: $0, in: model) } }
@@ -27,7 +27,7 @@ extension CoreData.Parser {
   }
 
   private func map(entity: CoreData.Entity, in model: CoreData.Model) -> [String: Any] {
-    return [
+    [
       "name": entity.name,
       "className": entity.className,
       "isAbstract": entity.isAbstract,
@@ -42,7 +42,7 @@ extension CoreData.Parser {
   }
 
   private func map(attribute: CoreData.Attribute, in model: CoreData.Model) -> [String: Any] {
-    return [
+    [
       "name": attribute.name,
       "propertyType": "attribute",
       "isIndexed": attribute.isIndexed,
@@ -57,7 +57,7 @@ extension CoreData.Parser {
   }
 
   private func map(relationship: CoreData.Relationship, in model: CoreData.Model) -> [String: Any] {
-    return [
+    [
       "name": relationship.name,
       "propertyType": "relationship",
       "isIndexed": relationship.isIndexed,
@@ -77,7 +77,7 @@ extension CoreData.Parser {
   }
 
   private func map(fetchedProperty: CoreData.FetchedProperty, in model: CoreData.Model) -> [String: Any] {
-    return [
+    [
       "name": fetchedProperty.name,
       "propertyType": "fetchedProperty",
       "isOptional": fetchedProperty.isOptional,

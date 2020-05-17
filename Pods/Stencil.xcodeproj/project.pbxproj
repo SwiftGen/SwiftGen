@@ -34,9 +34,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		094FAF3A2471A4A5003B3E89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BDE31901F826A4F26C3906F875868DFF /* PathKit */;
+			proxyType = 2;
+			remoteGlobalIDString = F0C5A5D2A379426D2C34FFE6EE704D85;
+			remoteInfo = PathKit;
+		};
 		9A434AC88D7EDA728BCCEB703A955B49 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = BDE31901F826A4F26C3906F875868DFF /* PathKit.xcodeproj */;
+			containerPortal = BDE31901F826A4F26C3906F875868DFF /* PathKit */;
 			proxyType = 1;
 			remoteGlobalIDString = B4C4433A0942F44A502A8BF212B71BAC;
 			remoteInfo = PathKit;
@@ -60,7 +67,7 @@
 		9414872313536EFD58EDCE4FAFADDE44 /* Expression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expression.swift; path = Sources/Expression.swift; sourceTree = "<group>"; };
 		96DC2B0C4A2813B488108F5584E79737 /* Stencil-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Stencil-Info.plist"; sourceTree = "<group>"; };
 		9A12ED4A4AFCC23246D644580F9F74CB /* Inheritence.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Inheritence.swift; path = Sources/Inheritence.swift; sourceTree = "<group>"; };
-		A7BB5C6FD5130837582EA52B2DA979CE /* Stencil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Stencil.framework; path = Stencil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7BB5C6FD5130837582EA52B2DA979CE /* Stencil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Stencil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A93995C271E9CBA2F692CA4CE07538A4 /* ForTag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ForTag.swift; path = Sources/ForTag.swift; sourceTree = "<group>"; };
 		AFC125111AA671B39E0A7F71036F480E /* FilterTag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FilterTag.swift; path = Sources/FilterTag.swift; sourceTree = "<group>"; };
 		B210004730C567CE06D9D2CE92AAC4FC /* Loader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Loader.swift; path = Sources/Loader.swift; sourceTree = "<group>"; };
@@ -90,6 +97,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		094FAF2A247199AD003B3E89 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				094FAF3B2471A4A5003B3E89 /* PathKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2BB602E2DCC492FCACBABBA7FC26B674 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,7 +162,6 @@
 				33186D90FAFC8841E79724B1894D3129 /* Variable.swift */,
 				2BB602E2DCC492FCACBABBA7FC26B674 /* Support Files */,
 			);
-			name = Stencil;
 			path = Stencil;
 			sourceTree = "<group>";
 		};
@@ -217,7 +231,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1140;
 			};
 			buildConfigurationList = 5E6CFC28719743075F6B08E5ECBA0D41 /* Build configuration list for PBXProject "Stencil" */;
 			compatibilityVersion = "Xcode 6.3";
@@ -232,6 +246,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 094FAF2A247199AD003B3E89 /* Products */;
 					ProjectRef = BDE31901F826A4F26C3906F875868DFF /* PathKit */;
 				},
 			);
@@ -241,6 +256,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		094FAF3B2471A4A5003B3E89 /* PathKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PathKit.framework;
+			remoteRef = 094FAF3A2471A4A5003B3E89 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B8F120692CB29E1FD7BD740CEFDA2B31 /* Resources */ = {
@@ -296,7 +321,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C4EDEAB8F77065520BD35CECC2AB2C01 /* Stencil.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -393,7 +417,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 30E8003D77B49F1B3741402D0F15BF81 /* Stencil.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -475,8 +498,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

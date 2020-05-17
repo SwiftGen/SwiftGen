@@ -18,28 +18,38 @@ class XCAssetsTests: XCTestCase {
     guard name == "all" else { return [(context: context, suffix: "")] }
 
     return [
-      (context: context,
-       suffix: ""),
-      (context: try StencilContext.enrich(
+      (
         context: context,
-        parameters: [
-          "enumName=XCTAssets",
-          "arResourceGroupTypeName=XCTARResourceGroup",
-          "colorTypeName=XCTColorAsset",
-          "dataTypeName=XCTDataAsset",
-          "imageTypeName=XCTImageAsset",
-          // deprecated parameters
-          "colorAliasName=XCTColor",
-          "imageAliasName=XCTImage"
-        ]
-       ),
-       suffix: "-customName"),
-      (context: try StencilContext.enrich(context: context, parameters: ["allValues"]),
-       suffix: "-allValues"),
-      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess"),
-      (context: try StencilContext.enrich(context: context, parameters: ["forceProvidesNamespaces"]),
-       suffix: "-forceNamespaces")
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(
+          context: context,
+          parameters: [
+            "enumName=XCTAssets",
+            "arResourceGroupTypeName=XCTARResourceGroup",
+            "colorTypeName=XCTColorAsset",
+            "dataTypeName=XCTDataAsset",
+            "imageTypeName=XCTImageAsset",
+            // deprecated parameters
+            "colorAliasName=XCTColor",
+            "imageAliasName=XCTImage"
+          ]
+        ),
+        suffix: "-customName"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["allValues"]),
+        suffix: "-allValues"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["forceProvidesNamespaces"]),
+        suffix: "-forceNamespaces"
+      )
     ]
   }
 

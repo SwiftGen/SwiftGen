@@ -31,7 +31,7 @@ public class YAMLDecoder {
                           from yaml: String,
                           userInfo: [CodingUserInfoKey: Any] = [:]) throws -> T where T: Swift.Decodable {
         do {
-            let node = try Parser(yaml: yaml, resolver: .basic, encoding: encoding).singleRoot() ?? ""
+            let node = try Parser(yaml: yaml, resolver: Resolver([.merge]), encoding: encoding).singleRoot() ?? ""
             let decoder = _Decoder(referencing: node, userInfo: userInfo)
             let container = try decoder.singleValueContainer()
             return try container.decode(type)
@@ -64,7 +64,7 @@ private struct _Decoder: Decoder {
     let userInfo: [CodingUserInfoKey: Any]
 
     func container<Key>(keyedBy type: Key.Type) throws -> KeyedDecodingContainer<Key> {
-        guard let mapping = node.mapping else {
+        guard let mapping = node.mapping?.flatten() else {
             throw _typeMismatch(at: codingPath, expectation: Node.Mapping.self, reality: node)
         }
         return .init(_KeyedDecodingContainer<Key>(decoder: self, wrapping: mapping))
@@ -99,7 +99,7 @@ private struct _Decoder: Decoder {
     }
 }
 
-private struct _KeyedDecodingContainer<Key: CodingKey> : KeyedDecodingContainerProtocol {
+private struct _KeyedDecodingContainer<Key: CodingKey>: KeyedDecodingContainerProtocol {
 
     private let decoder: _Decoder
     private let mapping: Node.Mapping

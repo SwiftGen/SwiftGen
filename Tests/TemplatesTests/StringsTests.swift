@@ -17,19 +17,29 @@ class StringsTests: XCTestCase {
     guard name == "localizable" else { return [(context: context, suffix: "")] }
 
     return [
-      (context: context,
-       suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["enumName=XCTLoc"]),
-       suffix: "-customName"),
-      (context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
-       suffix: "-noComments"),
-      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess"),
-      (context: try StencilContext.enrich(
+      (
         context: context,
-        parameters: ["localizeFunction=XCTLocFunc"]
-       ),
-       suffix: "-localizeFunction")
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["enumName=XCTLoc"]),
+        suffix: "-customName"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
+        suffix: "-noComments"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      ),
+      (
+        context: try StencilContext.enrich(
+          context: context,
+          parameters: ["localizeFunction=XCTLocFunc"]
+        ),
+        suffix: "-localizeFunction"
+      )
     ]
   }
 
@@ -37,12 +47,18 @@ class StringsTests: XCTestCase {
     guard name == "localizable" else { return [(context: context, suffix: "")] }
 
     return [
-      (context: context,
-       suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
-       suffix: "-no-comments"),
-      (context: try StencilContext.enrich(context: context, parameters: ["headerName=headerName-from-parameter.h"]),
-       suffix: "-headerName")
+      (
+        context: context,
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
+        suffix: "-no-comments"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["headerName=headerName-from-parameter.h"]),
+        suffix: "-headerName"
+      )
     ]
   }
 

@@ -1,6 +1,4 @@
-Kanna(鉋)
-=================
-
+# Kanna(鉋)
 Kanna(鉋) is an XML/HTML parser for cross-platform(macOS, iOS, tvOS, watchOS and Linux!).
 
 It was inspired by [Nokogiri](https://github.com/sparklemotion/nokogiri)(鋸).
@@ -15,78 +13,52 @@ It was inspired by [Nokogiri](https://github.com/sparklemotion/nokogiri)(鋸).
 :information_source: [Documentation](http://tid-kijyun.github.io/Kanna/)
 
 
-Features:
-=================
+## Features
 - [x] XPath 1.0 support for document searching
 - [x] CSS3 selector support for document searching
 - [x] Support for namespaces
 - [x] Comprehensive test suite
 
-Installation:
-=================
-
-### Swift 5
-##### CocoaPods
-Adding it to your `Podfile`:
+## Installation for Swift 5
+#### CocoaPods
+Add the following to your `Podfile`:
 ```ruby
 use_frameworks!
-pod 'Kanna', '~> 5.0.0'
+pod 'Kanna', '~> 5.2.2'
 ```
 
-##### Carthage
-Adding it to your `Cartfile`:
+#### Carthage
+Add the following to your `Cartfile`:
 
 ```ogdl
-github "tid-kijyun/Kanna" ~> 5.0.0
+github "tid-kijyun/Kanna" ~> 5.2.2
 ```
 
+For xcode 11.3 and earlier, the following settings are required.
 1. In the project settings add `$(SDKROOT)/usr/include/libxml2` to the "header search paths" field
 
-##### Others(Swift PM and manual Installation)
-Please refer to the case of Swift 4.
-
-### Swift 4
-##### CocoaPods
-**:warning: CocoaPods (`1.1.0 or later`) is required.**
-
-Adding it to your `Podfile`:
-```ruby
-use_frameworks!
-pod 'Kanna', '~> 4.0.0'
-```
-
-##### Carthage
-Adding it to your `Cartfile`:
-
-```ogdl
-github "tid-kijyun/Kanna" ~> 4.0.0
-```
-
-1. In the project settings add `$(SDKROOT)/usr/include/libxml2` to the "header search paths" field
-
-##### Swift Package Manager
-
-Installing libxml2 to your computer:
+#### Swift Package Manager
+1. Installing libxml2 to your computer:
 
 ```bash
-// macOS
+// macOS: For xcode 11.3 and earlier, the following settings are required.
 $ brew install libxml2
 $ brew link --force libxml2
 
-// Linux(Ubuntu)
+// Linux(Ubuntu):
 $ sudo apt-get install libxml2-dev
 ```
 
-Adding it to your `Package.swift`:
+2. Add the following to your `Package.swift`:
 
 ```swift
-// swift-tools-version:4.0
+// swift-tools-version:5.0
 import PackageDescription
 
 let package = Package(
     name: "YourProject",
     dependencies: [
-        .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "4.0.0")
+        .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.2"),
     ],
     targets: [
         .target(
@@ -102,79 +74,11 @@ $ swift build
 
 *Note: When a build error occurs, please try run the following command:*
 ```bash
-$ sudo apt-get install pkg-config
-```
-
-##### Manual Installation
-1. Add these files to your project:  
-  [Kanna.swift](Source/Kanna.swift)  
-  [CSS.swift](Source/CSS.swift)  
-  [libxmlHTMLDocument.swift](Source/libxml/libxmlHTMLDocument.swift)  
-  [libxmlHTMLNode.swift](Source/libxml/libxmlHTMLNode.swift)  
-  [libxmlParserOption.swift](Source/libxml/libxmlParserOption.swift)  
-  [Modules](Modules)
-1. In the target settings add `$(SDKROOT)/usr/include/libxml2` to the `Search Paths > Header Search Paths` field
-1. In the target settings add `$(SRCROOT)/Modules` to the `Swift Compiler - Search Paths > Import Paths` field
-
-
-### Swift 3.0
-For now, please use the `feature/v3.0.0` branch.
-
-##### CocoaPods
-**:warning: CocoaPods (`1.1.0 or later`) is required.**
-
-Adding it to your `Podfile`:
-```ruby
-use_frameworks!
-pod 'Kanna', :git => 'https://github.com/tid-kijyun/Kanna', :branch => 'feature/v3.0.0'
-```
-
-##### Carthage
-Adding it to your `Cartfile`:
-
-```ogdl
-github "tid-kijyun/Kanna" "feature/v3.0.0"
-```
-
-1. In the project settings add `$(SDKROOT)/usr/include/libxml2` to the "header search paths" field
-
-##### Swift Package Manager
-
-Installing libxml2 to your computer:
-
-```bash
-// macOS
-$ brew install libxml2
-$ brew link --force libxml2
-
 // Linux(Ubuntu)
-$ sudo apt-get install libxml2-dev
-```
-
-Adding it to your `Package.swift`:
-
-```swift
-import PackageDescription
-
-let package = Package(
-    name: "YourProject",
-    
-    dependencies: [
-        .Package(url: "https://github.com/tid-kijyun/Kanna.git", majorVersion: 2)
-    ]
-)
-```
-
-```bash
-$ swift build
-```
-
-*Note: When a build error occurs, please try run the following command:*
-```bash
 $ sudo apt-get install pkg-config
 ```
 
-##### Manual Installation
+#### Manual Installation
 1. Add these files to your project:  
   [Kanna.swift](Source/Kanna.swift)  
   [CSS.swift](Source/CSS.swift)  
@@ -185,9 +89,11 @@ $ sudo apt-get install pkg-config
 1. In the target settings add `$(SDKROOT)/usr/include/libxml2` to the `Search Paths > Header Search Paths` field
 1. In the target settings add `$(SRCROOT)/Modules` to the `Swift Compiler - Search Paths > Import Paths` field
 
-Synopsis:
-=================
 
+#### [Installation for swift 4](https://github.com/tid-kijyun/Kanna/blob/master/Documentation/InstallationForSwift4.md)
+#### [Installation for swift 3](https://github.com/tid-kijyun/Kanna/blob/master/Documentation/InstallationForSwift3.md)
+
+## Synopsis
 ```swift
 import Kanna
 
@@ -223,6 +129,10 @@ if let doc = try? Kanna.XML(xml: xml, encoding: .utf8) {
 }
 ```
 
-License:
-=================
+## Donation
+If you like Kanna, please donate via GitHub sponsors or PayPal.  
+It is used to improve and maintain the library.
+
+## License
 The MIT License. See the LICENSE file for more information.
+

@@ -27,7 +27,7 @@ extension ParserCLI {
   }
 
   static func command(named name: String) -> ParserCLI? {
-    return allCommands.first { $0.name == name }
+    allCommands.first { $0.name == name }
   }
 }
 

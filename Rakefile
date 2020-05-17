@@ -15,7 +15,7 @@ SCHEME_NAME = 'swiftgen'.freeze
 CONFIGURATION = 'Debug'.freeze
 RELEASE_CONFIGURATION = 'Release'.freeze
 POD_NAME = 'SwiftGen'.freeze
-MIN_XCODE_VERSION = 11.2
+MIN_XCODE_VERSION = 11.4
 
 BUILD_DIR = File.absolute_path('./build')
 BIN_NAME = 'swiftgen'.freeze

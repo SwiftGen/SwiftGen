@@ -24,38 +24,58 @@ class InterfaceBuilderTests: XCTestCase {
     )
 
     return [
-      (context: context,
-        suffix: ""),
+      (
+        context: context,
+        suffix: ""
+      ),
 
       // test: enumName parameter
-      (context: try StencilContext.enrich(context: context, parameters: ["enumName=XCTStoryboardCustom"]),
-       suffix: "-customName"),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["enumName=XCTStoryboardCustom"]),
+        suffix: "-customName"
+      ),
 
       // test: module parameter and PRODUCT_MODULE_NAME
-      (context: bareContext,
-       suffix: "-noDefinedModule"),
-      (context: try StencilContext.enrich(context: bareContext, parameters: ["module=SwiftGen"]),
-       suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["module=ExtraModule"]),
-       suffix: "-withExtraModule"),
+      (
+        context: bareContext,
+        suffix: "-noDefinedModule"
+      ),
+      (
+        context: try StencilContext.enrich(context: bareContext, parameters: ["module=SwiftGen"]),
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["module=ExtraModule"]),
+        suffix: "-withExtraModule"
+      ),
 
       // test: ignoreTargetModule parameter
-      (context: try StencilContext.enrich(context: context, parameters: ["ignoreTargetModule"]),
-       suffix: "-ignoreTargetModule"),
-      (context: try StencilContext.enrich(
-        context: context,
-        parameters: ["ignoreTargetModule"],
-        environment: ["PRODUCT_MODULE_NAME": "Test"]
-       ),
-       suffix: "-noDefinedModule"),
-      (context: try StencilContext.enrich(context: context, parameters: ["ignoreTargetModule", "module=Test"]),
-       suffix: "-ignoreTargetModule"),
-      (context: try StencilContext.enrich(context: context, parameters: ["ignoreTargetModule", "module=ExtraModule"]),
-       suffix: "-ignoreTargetModule-withExtraModule"),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["ignoreTargetModule"]),
+        suffix: "-ignoreTargetModule"
+      ),
+      (
+        context: try StencilContext.enrich(
+          context: context,
+          parameters: ["ignoreTargetModule"],
+          environment: ["PRODUCT_MODULE_NAME": "Test"]
+        ),
+        suffix: "-noDefinedModule"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["ignoreTargetModule", "module=Test"]),
+        suffix: "-ignoreTargetModule"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["ignoreTargetModule", "module=ExtraModule"]),
+        suffix: "-ignoreTargetModule-withExtraModule"
+      ),
 
       // test: publicAccess parameter
-      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      )
     ]
   }
 }

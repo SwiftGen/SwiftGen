@@ -36,7 +36,7 @@ public struct ParserOptionList {
   ///
   /// - Parameter option: an option name
   func has(option: AnyParserOption) -> Bool {
-    return knownKeys.contains(option.key)
+    knownKeys.contains(option.key)
   }
 
   /// Verify the given dictionary and generate a list of messages for any issues.
