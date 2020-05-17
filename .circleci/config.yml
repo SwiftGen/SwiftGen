@@ -104,18 +104,6 @@ jobs:
       - *restore-gems
       - *install-gems
       - *store-gems
-      # libxml2 is not needed anymore with latest Kanna and Xcode 11.4+
-      # - restore_cache:
-      #     keys:
-      #       - homebrew-{{ checksum ".circleci/config.yml" }}
-      #       - homebrew-
-      # - run:
-      #     name: Install libxml2
-      #     command: brew install libxml2 && brew link --force libxml2
-      # - save_cache:
-      #     key: homebrew-{{ checksum ".circleci/config.yml" }}
-      #     paths:
-      #       - /usr/local/Homebrew
       - run:
           # TODO: This should run the tests once SPM supports testing an executable
           name: Build with SPM
