@@ -92,6 +92,9 @@
 * Updated to CocoaPods 1.9.0.  
   [David Jennes](https://github.com/djbe)
   [#619](https://github.com/SwiftGen/SwiftGen/pull/619)
+* Updated Pods and Gems dependencies
+  [David Jennes](https://github.com/djbe)
+  [#684](https://github.com/SwiftGen/SwiftGen/pull/684)
 
 ## 6.1.0
 
