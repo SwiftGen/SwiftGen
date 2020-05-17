@@ -76,6 +76,9 @@
 * Config Lint: fix config lint not processing relative paths containing ".." correctly.  
   [Wolfgang Lutz](https://github.com/Lutzifer)
   [#688](https://github.com/SwiftGen/SwiftGen/issues/688)
+* Core Data: the generated code was missing `,` (comma) for fetch requests with multiple arguments.  
+  [David Jennes](https://github.com/djbe)
+  [#692](https://github.com/SwiftGen/SwiftGen/pull/692)
 
 ### Internal Changes
 
