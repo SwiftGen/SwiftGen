@@ -39,15 +39,6 @@ class ColorsTests: XCTestCase {
   }
   // swiftlint:enable opening_brace
 
-  func testSwift3() {
-    test(
-      template: "swift3",
-      contextNames: Contexts.all,
-      directory: .colors,
-      contextVariations: variations(customName: "XCTColors")
-    )
-  }
-
   func testSwift4() {
     test(
       template: "swift4",
@@ -63,15 +54,6 @@ class ColorsTests: XCTestCase {
       contextNames: Contexts.all,
       directory: .colors,
       contextVariations: variations(customName: "XCTColors")
-    )
-  }
-
-  func testLiteralsSwift3() {
-    test(
-      template: "literals-swift3",
-      contextNames: Contexts.all,
-      directory: .colors,
-      contextVariations: variations(customName: "UIColor")
     )
   }
 

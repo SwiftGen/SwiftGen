@@ -43,15 +43,6 @@ class CoreDataTests: XCTestCase {
     ]
   }
 
-  func testSwift3() {
-    test(
-      template: "swift3",
-      contextNames: Contexts.all,
-      directory: .coreData,
-      contextVariations: variations
-    )
-  }
-
   func testSwift4() {
     test(
       template: "swift4",
