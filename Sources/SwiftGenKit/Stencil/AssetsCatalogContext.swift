@@ -29,7 +29,7 @@ extension AssetsCatalog.Parser {
   }
 
   fileprivate static func structure(entries: [AssetsCatalogEntry]) -> [[String: Any]] {
-    return entries.map { $0.asDictionary }
+    entries.map { $0.asDictionary }
   }
 
   private static func countTypes(catalogs: [AssetsCatalog.Catalog]) -> [String: Int] {
@@ -51,7 +51,7 @@ extension AssetsCatalog.Parser {
 
 extension AssetsCatalog.Entry.Group {
   var asDictionary: [String: Any] {
-    return [
+    [
       "type": "group",
       "isNamespaced": "\(isNamespaced)",
       "name": name,
@@ -62,7 +62,7 @@ extension AssetsCatalog.Entry.Group {
 
 extension AssetsCatalog.Entry.Item {
   var asDictionary: [String: Any] {
-    return [
+    [
       "type": item.typeName,
       "name": name,
       "value": value

@@ -40,6 +40,6 @@ struct ParserOption<T>: AnyParserOption {
 
 extension ParserOption: CustomStringConvertible {
   public var description: String {
-    return "\(key) (\(T.self)) [default: \(defaultValue)]: \(help)"
+    "\(key) (\(T.self)) [default: \(defaultValue)]: \(help)"
   }
 }

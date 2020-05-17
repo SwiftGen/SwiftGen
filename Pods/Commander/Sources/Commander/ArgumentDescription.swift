@@ -27,6 +27,7 @@ extension ArgumentConvertible {
 }
 
 
+@available(*, deprecated, message: "use array as an ArgumentConvertible")
 public class VariadicArgument<T : ArgumentConvertible> : ArgumentDescriptor {
   public typealias ValueType = [T]
   public typealias Validator = (ValueType) throws -> ValueType
@@ -268,6 +269,31 @@ class BoxedArgumentDescriptor {
   let description: String?
   let `default`: String?
   let type: ArgumentType
+  let flag: Character?
+
+  var summary: String {
+    var line = ""
+
+    switch type {
+    case .argument:
+      line += "\(name)"
+    case .option:
+      if let flag = flag {
+        line += "-\(flag), "
+      }
+      line += "--\(name)"
+    }
+
+    if let `default` = `default` {
+      line += " [default: \(`default`)]"
+    }
+
+    if let description = description {
+      line += " - \(description)"
+    }
+
+    return line
+  }
 
   init<T : ArgumentDescriptor>(value: T) {
     name = value.name
@@ -276,13 +302,23 @@ class BoxedArgumentDescriptor {
 
     if let value = value as? Flag {
       `default` = value.`default`.description
+      flag = value.flag
     } else if let value = value as? Option<String> {
       `default` = value.`default`.description
+      flag = nil
     } else if let value = value as? Option<Int> {
       `default` = value.`default`.description
+      flag = nil
     } else {
-      // TODO, default for Option of generic type
-      `default` = nil
+      let mirror = Mirror(reflecting: value)
+
+      if let defaultDescendant = mirror.descendant("default"), let defaultConvertible = defaultDescendant as? CustomStringConvertible {
+        `default` = defaultConvertible.description
+      } else {
+        `default` = nil
+      }
+
+      flag = nil
     }
   }
 }
@@ -344,7 +380,8 @@ class Help : Error, ANSIConvertible, CustomStringConvertible {
     if let group = group {
       output.append("Commands:")
       output.append("")
-      for command in group.commands {
+      let commands = group.commands.sorted(by: { $0.name < $1.name })
+      for command in commands {
         if let description = command.description {
           output.append("    + \(command.name) - \(description)")
         } else {
@@ -355,32 +392,14 @@ class Help : Error, ANSIConvertible, CustomStringConvertible {
     } else if !arguments.isEmpty {
       output.append("Arguments:")
       output.append("")
-
-      output += arguments.map { argument in
-        if let description = argument.description {
-          return "    \(argument.name) - \(description)"
-        } else {
-          return "    \(argument.name)"
-        }
-      }
-
+      output += arguments.map { "    \($0.summary)" }
       output.append("")
     }
 
     if !options.isEmpty {
       output.append("Options:")
       for option in options {
-        var line = "    --\(option.name)"
-
-        if let `default` = option.default {
-          line += " [default: \(`default`)]"
-        }
-
-        if let description = option.description {
-          line += " - \(description)"
-        }
-
-        output.append(line)
+        output.append("    \(option.summary)")
       }
     }
 
@@ -406,7 +425,8 @@ class Help : Error, ANSIConvertible, CustomStringConvertible {
     if let group = group {
       output.append("Commands:")
       output.append("")
-      for command in group.commands {
+      let commands = group.commands.sorted(by: { $0.name < $1.name })
+      for command in commands {
         if let description = command.description {
           output.append("    + \(ANSI.green)\(command.name)\(ANSI.reset) - \(description)")
         } else {
@@ -432,7 +452,13 @@ class Help : Error, ANSIConvertible, CustomStringConvertible {
     if !options.isEmpty {
       output.append("Options:")
       for option in options {
-        var line = "    \(ANSI.blue)--\(option.name)\(ANSI.reset)"
+        var line = "    "
+
+        if let flag = option.flag {
+          line += "\(ANSI.blue)-\(flag)\(ANSI.reset), "
+        }
+
+        line += "\(ANSI.blue)--\(option.name)\(ANSI.reset)"
 
         if let `default` = option.default {
           line += " [default: \(`default`)]"

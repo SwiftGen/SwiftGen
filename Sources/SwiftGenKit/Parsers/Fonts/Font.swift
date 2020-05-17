@@ -26,7 +26,7 @@ extension Fonts {
 // equatable comparisons on that. If we ever care about the familyName or style it can be added
 extension Fonts.Font: Equatable {
   static func == (lhs: Fonts.Font, rhs: Fonts.Font) -> Bool {
-    return lhs.postScriptName == rhs.postScriptName
+    lhs.postScriptName == rhs.postScriptName
   }
 }
 

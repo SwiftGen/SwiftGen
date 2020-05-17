@@ -1,6 +1,0 @@
-module libxmlKanna [system] {
-    link "xml2"
-    umbrella header "libxml2-kanna.h"
-    export *
-    module * { export * }
-}

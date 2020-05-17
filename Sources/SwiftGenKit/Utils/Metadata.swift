@@ -67,7 +67,7 @@ enum Metadata {
   }
 
   private static func describe(dictionary: [String: Any]) -> [String: Any] {
-    return Dictionary(
+    Dictionary(
       uniqueKeysWithValues: dictionary.map { item in
         (key: item.key, value: Metadata.generate(for: item.value))
       }

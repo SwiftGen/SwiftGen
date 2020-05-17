@@ -1,7 +1,7 @@
 // swiftlint:disable all
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
-// swiftlint:disable superfluous_disable_command
+// swiftlint:disable superfluous_disable_command implicit_return
 // swiftlint:disable sorted_imports
 import CoreData
 import Foundation

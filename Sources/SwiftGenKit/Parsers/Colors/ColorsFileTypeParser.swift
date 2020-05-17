@@ -26,7 +26,7 @@ protocol ColorsFileTypeParser: AnyObject {
 
 extension ColorsFileTypeParser {
   static var allOptions: ParserOptionList {
-    return []
+    []
   }
 }
 
