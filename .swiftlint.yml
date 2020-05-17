@@ -1,4 +1,4 @@
-swiftlint_version: 0.39.1
+swiftlint_version: 0.39.2
 
 opt_in_rules:
  - anyobject_protocol
@@ -20,7 +20,7 @@ opt_in_rules:
  - empty_count
  - empty_string
  - empty_xctest_method
- - enum_case_associated_value_count
+ - enum_case_associated_values_count
  - fallthrough
  - fatal_error_message
  - file_header

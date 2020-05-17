@@ -72,10 +72,10 @@ CACHE_KEYS:
       SwiftLint:
         :debug: 1c745809f0563c8c5f3436c1fbfc0fd3
         :release: 1c745809f0563c8c5f3436c1fbfc0fd3
-    CHECKSUM: 55e96a4a4d537d4a3156859fc1c54bd24851a046
+    CHECKSUM: 22ccbbe3b8008684be5955693bab135e0ed6a447
     PROJECT_NAME: SwiftLint
     SPECS:
-      - SwiftLint (0.39.1)
+      - SwiftLint (0.39.2)
   Yams:
     BUILD_SETTINGS_CHECKSUM:
       Yams:
