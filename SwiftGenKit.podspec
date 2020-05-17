@@ -28,8 +28,8 @@ Pod::Spec.new do |s|
   }
   s.source_files = 'Sources/**/*.swift'
 
-  s.dependency 'Kanna', '~> 5.0.0'
-  s.dependency 'PathKit', '~> 0.9.0'
-  s.dependency 'Yams', '~> 2.0.0'
+  s.dependency 'Kanna', '~> 5.2'
+  s.dependency 'PathKit', '~> 0.9'
+  s.dependency 'Yams', '~> 2.0'
   s.framework = 'Foundation'
 end

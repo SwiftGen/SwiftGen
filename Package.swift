@@ -13,7 +13,7 @@ let package = Package(
         .package(url: "https://github.com/kylef/Stencil.git", from: "0.13.0"),
         .package(url: "https://github.com/jpsim/Yams.git", from: "2.0.0"),
         .package(url: "https://github.com/SwiftGen/StencilSwiftKit.git", from: "2.7.0"),
-        .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.0.0")
+        .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.2")
     ],
     targets: [
         .target(name: "SwiftGen", dependencies: [
