@@ -7,7 +7,7 @@ PODS:
   - StencilSwiftKit (2.7.2):
     - Stencil (~> 0.13.1)
   - SwiftLint (0.39.2)
-  - Yams (2.0.0)
+  - Yams (3.0.1)
 
 DEPENDENCIES:
   - Commander (~> 0.9)
@@ -15,7 +15,7 @@ DEPENDENCIES:
   - PathKit (~> 0.9)
   - StencilSwiftKit (~> 2.7)
   - SwiftLint (~> 0.39)
-  - Yams (~> 2.0)
+  - Yams (~> 3.0)
 
 SPEC REPOS:
   trunk:
@@ -34,7 +34,7 @@ SPEC CHECKSUMS:
   Stencil: b5128a0a43ece9225db5cbd94d6569fe6fba609b
   StencilSwiftKit: 9ebd42556b6c7396440f286b6c9aca1549c963ff
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
-  Yams: cb96472112d99e4b368f8dae9ab62e8a3eb8a3f9
+  Yams: 4199a97883e0369046e3fe882fcc95e559966370
 
 PODFILE CHECKSUM: b2f00ffca5a82ce8de396f67cf5bb161f152e7e0
 

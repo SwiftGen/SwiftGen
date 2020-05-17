@@ -30,6 +30,6 @@ Pod::Spec.new do |s|
 
   s.dependency 'Kanna', '~> 5.2'
   s.dependency 'PathKit', '~> 0.9'
-  s.dependency 'Yams', '~> 2.0'
+  s.dependency 'Yams', '~> 3.0'
   s.framework = 'Foundation'
 end

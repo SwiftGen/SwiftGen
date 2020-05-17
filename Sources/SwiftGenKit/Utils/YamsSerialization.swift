@@ -52,12 +52,6 @@ extension NSData: ScalarRepresentable {
   }
 }
 
-extension NSNull: ScalarRepresentable {
-  public func represented() -> Node.Scalar {
-    Node.Scalar("null", Tag(.null))
-  }
-}
-
 extension NSNumber: ScalarRepresentable {
   public func represented() -> Node.Scalar {
     if let value = Bool(exactly: self) {
