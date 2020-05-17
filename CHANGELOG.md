@@ -69,6 +69,7 @@
   [#663](https://github.com/SwiftGen/SwiftGen/issues/663)
 * Config Lint: fix config lint not processing relative paths containing ".." correctly.  
   [Wolfgang Lutz](https://github.com/Lutzifer)
+  [#688](https://github.com/SwiftGen/SwiftGen/issues/688)
 
 ### Internal Changes
 
