@@ -28,74 +28,69 @@ $ swiftgen templates list
 colors:
   custom:
   bundled:
-   - literals-swift3
    - literals-swift4
    - literals-swift5
-   - swift3
    - swift4
    - swift5
 coredata:
   custom:
   bundled:
-   - swift3
    - swift4
    - swift5
 fonts:
   custom:
   bundled:
-   - swift3
    - swift4
    - swift5
 ib:
   custom:
    - mytemplate
   bundled:
-   - scenes-swift3
    - scenes-swift4
    - scenes-swift5
-   - segues-swift3
    - segues-swift4
    - segues-swift5
 json:
   custom:
   bundled:
-   - inline-swift3
    - inline-swift4
    - inline-swift5
-   - runtime-swift3
    - runtime-swift4
    - runtime-swift5
 plist:
   custom:
   bundled:
-   - inline-swift3
    - inline-swift4
    - inline-swift5
-   - runtime-swift3
    - runtime-swift4
    - runtime-swift5
 strings:
   custom:
    - mycustomtemplate
   bundled:
-   - flat-swift3
    - flat-swift4
    - flat-swift5
-   - structured-swift3
+   - objc-h
+   - objc-m
    - structured-swift4
    - structured-swift5
 xcassets:
   custom:
   bundled:
-   - swift3
    - swift4
    - swift5
 yaml:
   custom:
-   - inline-swift3
+  bundled:
    - inline-swift4
    - inline-swift5
+storyboards:
+  custom:
   bundled:
+   - scenes-swift4
+   - scenes-swift5
+   - segues-swift4
+   - segues-swift5
 ```
 
 ## Printing a template, creating a new template
