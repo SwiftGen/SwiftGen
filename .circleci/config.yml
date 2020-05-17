@@ -6,7 +6,7 @@ defaults:
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
       BUNDLE_PATH: vendor/bundle
     macos:
-      xcode: "11.2.1"
+      xcode: "11.3.1"
     shell: /bin/bash --login -eo pipefail
   - &prepare-storage
     run:
@@ -143,12 +143,17 @@ jobs:
       - *restore-gems
       - *install-gems
       - *store-gems
-      - run:
-          name: Download podspec repo
-          command: curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+      - restore_cache:
+          keys:
+            - cocoapods-{{ checksum "Podfile.lock" }}
+            - cocoapods-
       - run:
           name: Lint podspec
           command: bundle exec rake pod:lint
+      -  save_cache:
+          key: cocoapods-{{ checksum "Podfile.lock" }}
+          paths:
+            - ~/.cocoapods
       - *store-artifacts
 
 
@@ -156,16 +161,13 @@ workflows:
   version: 2
   lint-buildandtest-compileoutput-checkdeploy:
     jobs:
+      - check-deploy
       - lint
       - spm-build-and-test
       - xcode-build-and-test
       - compile-output:
           requires:
-            - lint
-            - spm-build-and-test
-            - xcode-build-and-test
-      - check-deploy:
-          requires:
+            - check-deploy
             - lint
             - spm-build-and-test
             - xcode-build-and-test
