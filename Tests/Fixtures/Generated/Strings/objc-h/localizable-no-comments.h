@@ -7,12 +7,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Localizable : NSObject
 + (NSString*)alertMessage;
 + (NSString*)alertTitle;
-+ (NSString*)objectOwnershipWithValues:(NSInteger)p1 :(id)p2 :(id)p3
++ (NSString*)objectOwnershipWithValues:(NSInteger)p1 :(id)p2 :(id)p3;
 + (NSString*)percent;
-+ (NSString*)privateWithValues:(id)p1 :(NSInteger)p2
-+ (NSString*)typesWithValues:(id)p1 :(char)p2 :(NSInteger)p3 :(float)p4 :(char*)p5 :(void*)p6
-+ (NSString*)applesCountWithValue:(NSInteger)p1
-+ (NSString*)bananasOwnerWithValues:(NSInteger)p1 :(id)p2
++ (NSString*)privateWithValues:(id)p1 :(NSInteger)p2;
++ (NSString*)typesWithValues:(id)p1 :(char)p2 :(NSInteger)p3 :(float)p4 :(char*)p5 :(void*)p6;
++ (NSString*)applesCountWithValue:(NSInteger)p1;
++ (NSString*)bananasOwnerWithValues:(NSInteger)p1 :(id)p2;
 + (NSString*)settingsNavigationBarSelf;
 + (NSString*)settingsNavigationBarTitleDeeperThanWeCanHandleNoReallyThisIsDeep;
 + (NSString*)settingsNavigationBarTitleEvenDeeper;
