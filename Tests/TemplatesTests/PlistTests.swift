@@ -32,15 +32,6 @@ class PlistTests: XCTestCase {
     ]
   }
 
-  func testInlineSwift3() {
-    test(
-      template: "inline-swift3",
-      contextNames: Contexts.all,
-      directory: .plist,
-      contextVariations: inlineVariations
-    )
-  }
-
   func testInlineSwift4() {
     test(
       template: "inline-swift4",
@@ -81,15 +72,6 @@ class PlistTests: XCTestCase {
         suffix: "-publicAccess"
       )
     ]
-  }
-
-  func testRuntimeSwift3() {
-    test(
-      template: "runtime-swift3",
-      contextNames: Contexts.all,
-      directory: .plist,
-      contextVariations: runtimeVariations
-    )
   }
 
   func testRuntimeSwift4() {

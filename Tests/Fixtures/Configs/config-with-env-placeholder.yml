@@ -2,7 +2,7 @@ output_dir: ${SWIFTGEN_OUTPUT_DIR}
 strings:
   inputs: Sources1/Folder
   outputs:
-    templateName: structured-swift3
+    templateName: structured-swift5
     output: strings.swift
     params:
       foo: 5

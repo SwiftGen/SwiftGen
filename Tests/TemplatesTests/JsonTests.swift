@@ -32,17 +32,6 @@ class JsonTests: XCTestCase {
     ]
   }
 
-  func testInlineSwift3() {
-    test(
-      template: "inline-swift3",
-      contextNames: Contexts.all,
-      directory: .json,
-      resourceDirectory: .yaml,
-      outputDirectory: .json,
-      contextVariations: inlineVariations
-    )
-  }
-
   func testInlineSwift4() {
     test(
       template: "inline-swift4",
@@ -87,17 +76,6 @@ class JsonTests: XCTestCase {
         suffix: "-publicAccess"
       )
     ]
-  }
-
-  func testRuntimeSwift3() {
-    test(
-      template: "runtime-swift3",
-      contextNames: Contexts.all,
-      directory: .json,
-      resourceDirectory: .yaml,
-      outputDirectory: .json,
-      contextVariations: runtimeVariations
-    )
   }
 
   func testRuntimeSwift4() {
