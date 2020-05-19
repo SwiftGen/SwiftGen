@@ -511,9 +511,10 @@ models:
       includeSubentities: true
       includesPendingChanges: true
       name: "ObjectIDFetchRequest"
-      predicateString: "oneToOne.name == $NAME"
+      predicateString: "oneToOne.name == $NAME OR string == $NEEDLE"
       resultType: "Object ID"
       returnDistinctResults: false
       returnsObjectsAsFaults: true
       substitutionVariables:
         NAME: "String"
+        NEEDLE: "String"
