@@ -52,9 +52,11 @@
   [David Jennes](https://github.com/djbe)
   [#595](https://github.com/SwiftGen/SwiftGen/issue/595)
   [#600](https://github.com/SwiftGen/SwiftGen/pull/600)
-* Strings: new template option to force having the table name used in generated code even if there's only a single strings file.  
+* Most templates now accept a parameter to force having the file name used as namespace (`enum <FileName>`) in generated code _even if_ there's only one single input file.  
   [Viktoras Laukevičius](https://github.com/viktorasl)
   [#669](https://github.com/SwiftGen/SwiftGen/issue/669)
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#693](https://github.com/SwiftGen/SwiftGen/pull/693)
 
 ### Bug Fixes
 
