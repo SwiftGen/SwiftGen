@@ -52,7 +52,7 @@
   [David Jennes](https://github.com/djbe)
   [#595](https://github.com/SwiftGen/SwiftGen/issue/595)
   [#600](https://github.com/SwiftGen/SwiftGen/pull/600)
-* Strings: template option to force add file name `enum` structure even if only single file is provided (unsupported for swift3).  
+* Strings: new template option to force having the table name used in generated code even if there's only a single strings file.  
   [Viktoras Laukevičius](https://github.com/viktorasl)
   [#669](https://github.com/SwiftGen/SwiftGen/issue/669)
 
