@@ -23,7 +23,7 @@ extension Plist.Parser {
   }
 
   private func map(file: Plist.File) -> [String: Any] {
-    return [
+    [
       "name": file.name,
       "path": file.path.string,
       // Note: we wrap the document into a single-value array so that the structure of
@@ -33,7 +33,7 @@ extension Plist.Parser {
   }
 
   private func map(document: Any) -> [String: Any] {
-    return [
+    [
       "data": document,
       "metadata": Metadata.generate(for: document)
     ]

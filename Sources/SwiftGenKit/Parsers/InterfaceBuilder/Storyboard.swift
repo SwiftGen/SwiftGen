@@ -36,7 +36,7 @@ private enum XML {
   static let targetRuntimeXPath = "/*/@targetRuntime"
 
   static func initialSceneXPath(identifier: String) -> String {
-    return "/document/scenes/scene/objects/*[@sceneMemberID=\"viewController\" and @id=\"\(identifier)\"]"
+    "/document/scenes/scene/objects/*[@sceneMemberID=\"viewController\" and @id=\"\(identifier)\"]"
   }
   static let sceneXPath = """
     /document/scenes/scene/objects/*[@sceneMemberID=\"viewController\" and \

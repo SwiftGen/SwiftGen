@@ -17,29 +17,30 @@ class CoreDataTests: XCTestCase {
     guard name == "defaults" else { return [(context: context, suffix: "")] }
 
     return [
-      (context: context,
-       suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["generateObjcName"]),
-       suffix: "-generateObjcName"),
-      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess"),
-      (context: try StencilContext.enrich(
+      (
         context: context,
-        parameters: ["extraImports=ExtraModule", "extraImports=Transformables"]
-       ),
-       suffix: "-extraImports"),
-      (context: try StencilContext.enrich(context: context, parameters: ["extraImports=CoreLocation"]),
-       suffix: "-importCoreLocation")
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["generateObjcName"]),
+        suffix: "-generateObjcName"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      ),
+      (
+        context: try StencilContext.enrich(
+          context: context,
+          parameters: ["extraImports=ExtraModule", "extraImports=Transformables"]
+        ),
+        suffix: "-extraImports"
+        ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["extraImports=CoreLocation"]),
+        suffix: "-importCoreLocation"
+      )
     ]
-  }
-
-  func testSwift3() {
-    test(
-      template: "swift3",
-      contextNames: Contexts.all,
-      directory: .coreData,
-      contextVariations: variations
-    )
   }
 
   func testSwift4() {

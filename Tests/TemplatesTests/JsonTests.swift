@@ -17,24 +17,19 @@ class JsonTests: XCTestCase {
     guard name == "all" else { return [(context: context, suffix: "")] }
 
     return [
-      (context: context,
-       suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomJSON"]),
-       suffix: "-customName"),
-      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+      (
+        context: context,
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomJSON"]),
+        suffix: "-customName"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      )
     ]
-  }
-
-  func testInlineSwift3() {
-    test(
-      template: "inline-swift3",
-      contextNames: Contexts.all,
-      directory: .json,
-      resourceDirectory: .yaml,
-      outputDirectory: .json,
-      contextVariations: inlineVariations
-    )
   }
 
   func testInlineSwift4() {
@@ -64,26 +59,23 @@ class JsonTests: XCTestCase {
     guard name == "all" else { return [(context: context, suffix: "")] }
 
     return [
-      (context: context,
-       suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomJSON"]),
-       suffix: "-customname"),
-      (context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
-       suffix: "-preservePath"),
-      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+      (
+        context: context,
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomJSON"]),
+        suffix: "-customname"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
+        suffix: "-preservePath"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      )
     ]
-  }
-
-  func testRuntimeSwift3() {
-    test(
-      template: "runtime-swift3",
-      contextNames: Contexts.all,
-      directory: .json,
-      resourceDirectory: .yaml,
-      outputDirectory: .json,
-      contextVariations: runtimeVariations
-    )
   }
 
   func testRuntimeSwift4() {

@@ -44,7 +44,7 @@ class ConfigReadTests: XCTestCase {
         ]
       )
       XCTAssertEqual(output.output, "strings.swift")
-      XCTAssertEqual(output.template, .name("structured-swift3"))
+      XCTAssertEqual(output.template, .name("structured-swift5"))
     } catch let error {
       XCTFail("Error: \(error)")
     }
@@ -100,7 +100,7 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(stringsEntries[0].outputs.count, 1)
       XCTAssertEqual(stringsEntries[0].outputs[0].output, "strings.swift")
       XCTAssertEqualDict(stringsEntries[0].outputs[0].parameters, ["enumName": "Loc"])
-      XCTAssertEqual(stringsEntries[0].outputs[0].template, .path("templates/custom-swift3"))
+      XCTAssertEqual(stringsEntries[0].outputs[0].template, .path("templates/custom-swift5"))
 
       // xcassets
       guard let xcassetsEntries = config.commands["xcassets"] else {
@@ -113,19 +113,19 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(xcassetsEntries[0].outputs.count, 1)
       XCTAssertEqual(xcassetsEntries[0].outputs[0].output, "assets-colors.swift")
       XCTAssertEqualDict(xcassetsEntries[0].outputs[0].parameters, [:])
-      XCTAssertEqual(xcassetsEntries[0].outputs[0].template, .name("swift3"))
+      XCTAssertEqual(xcassetsEntries[0].outputs[0].template, .name("swift5"))
       // > xcassets[1]
       XCTAssertEqual(xcassetsEntries[1].inputs, ["XCAssets/Images.xcassets"])
       XCTAssertEqual(xcassetsEntries[1].outputs.count, 1)
       XCTAssertEqual(xcassetsEntries[1].outputs[0].output, "assets-images.swift")
       XCTAssertEqualDict(xcassetsEntries[1].outputs[0].parameters, ["enumName": "Pics"])
-      XCTAssertEqual(xcassetsEntries[1].outputs[0].template, .name("custom-swift3"))
+      XCTAssertEqual(xcassetsEntries[1].outputs[0].template, .name("custom-swift5"))
       // > xcassets[2]
       XCTAssertEqual(xcassetsEntries[2].inputs, ["XCAssets/Colors.xcassets", "XCAssets/Images.xcassets"])
       XCTAssertEqual(xcassetsEntries[2].outputs.count, 1)
       XCTAssertEqual(xcassetsEntries[2].outputs[0].output, "assets-all.swift")
       XCTAssertEqualDict(xcassetsEntries[2].outputs[0].parameters, [:])
-      XCTAssertEqual(xcassetsEntries[2].outputs[0].template, .name("swift4"))
+      XCTAssertEqual(xcassetsEntries[2].outputs[0].template, .name("swift5"))
     } catch let error {
       XCTFail("Error: \(error)")
     }
@@ -153,11 +153,11 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(ibEntries[0].inputs, ["IB-iOS"])
       // > outputs[0]
       XCTAssertEqual(ibEntries[0].outputs.count, 2)
-      XCTAssertEqual(ibEntries[0].outputs[0].template, .name("scenes-swift4"))
+      XCTAssertEqual(ibEntries[0].outputs[0].template, .name("scenes-swift5"))
       XCTAssertEqual(ibEntries[0].outputs[0].output, "ib-scenes.swift")
       XCTAssertEqualDict(ibEntries[0].outputs[0].parameters, ["enumName": "Scenes"])
       // > outputs[1]
-      XCTAssertEqual(ibEntries[0].outputs[1].template, .name("segues-swift4"))
+      XCTAssertEqual(ibEntries[0].outputs[1].template, .name("segues-swift5"))
       XCTAssertEqual(ibEntries[0].outputs[1].output, "ib-segues.swift")
       XCTAssertEqualDict(ibEntries[0].outputs[1].parameters, [:])
     } catch let error {

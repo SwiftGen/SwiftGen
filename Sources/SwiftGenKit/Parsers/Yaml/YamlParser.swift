@@ -33,7 +33,7 @@ public enum Yaml {
     }
 
     public class var defaultFilter: String {
-      return "[^/]\\.(?i:ya?ml)$"
+      "[^/]\\.(?i:ya?ml)$"
     }
 
     public func parse(path: Path, relativeTo parent: Path) throws {
@@ -47,7 +47,7 @@ public enum Yaml {
 public enum JSON {
   public final class Parser: Yaml.Parser {
     override public class var defaultFilter: String {
-      return "[^/]\\.(?i:json)$"
+      "[^/]\\.(?i:json)$"
     }
   }
 }

@@ -14,7 +14,7 @@ public final class Resolver {
     public struct Rule {
         /// The tag name this rule applies to.
         public let tag: Tag.Name
-        internal let regexp: NSRegularExpression
+        fileprivate let regexp: NSRegularExpression
         /// The regex pattern used to resolve this rule.
         public var pattern: String { return regexp.pattern }
 

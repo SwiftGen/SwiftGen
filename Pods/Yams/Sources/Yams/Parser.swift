@@ -351,8 +351,13 @@ private class Event {
         return string(from: event.data.scalar.anchor)
     }
     var scalarStyle: Node.Scalar.Style {
+#if os(Windows)
+        // swiftlint:disable:next force_unwrapping
+        return Node.Scalar.Style(rawValue: UInt32(event.data.scalar.style.rawValue))!
+#else
         // swiftlint:disable:next force_unwrapping
         return Node.Scalar.Style(rawValue: event.data.scalar.style.rawValue)!
+#endif
     }
     var scalarTag: String? {
         if event.data.scalar.quoted_implicit == 1 {
@@ -373,8 +378,13 @@ private class Event {
         return string(from: event.data.sequence_start.anchor)
     }
     var sequenceStyle: Node.Sequence.Style {
+#if os(Windows)
+        // swiftlint:disable:next force_unwrapping
+        return Node.Sequence.Style(rawValue: UInt32(event.data.sequence_start.style.rawValue))!
+#else
         // swiftlint:disable:next force_unwrapping
         return Node.Sequence.Style(rawValue: event.data.sequence_start.style.rawValue)!
+#endif
     }
     var sequenceTag: String? {
         return event.data.sequence_start.implicit != 0
@@ -386,8 +396,13 @@ private class Event {
         return string(from: event.data.scalar.anchor)
     }
     var mappingStyle: Node.Mapping.Style {
+#if os(Windows)
+        // swiftlint:disable:next force_unwrapping
+        return Node.Mapping.Style(rawValue: UInt32(event.data.mapping_start.style.rawValue))!
+#else
         // swiftlint:disable:next force_unwrapping
         return Node.Mapping.Style(rawValue: event.data.mapping_start.style.rawValue)!
+#endif
     }
     var mappingTag: String? {
         return event.data.mapping_start.implicit != 0

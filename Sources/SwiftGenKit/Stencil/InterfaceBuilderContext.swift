@@ -64,7 +64,7 @@ extension InterfaceBuilder.Parser {
   }
 
   private func map(segue: InterfaceBuilder.Segue) -> [String: Any] {
-    return [
+    [
       "identifier": segue.identifier,
       "customClass": segue.customClass ?? "",
       "customModule": segue.customModule ?? "",

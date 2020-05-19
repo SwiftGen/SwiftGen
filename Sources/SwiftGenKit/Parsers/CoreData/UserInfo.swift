@@ -19,7 +19,7 @@ private enum XML {
 extension CoreData {
   enum UserInfo {
     static func parse(from object: Kanna.XMLElement) throws -> [String: Any] {
-      return try object.xpath(XML.entriesPath).reduce(into: [:]) { userInfo, element in
+      try object.xpath(XML.entriesPath).reduce(into: [:]) { userInfo, element in
         guard let key = element[XML.Attributes.key] else {
           throw CoreData.ParserError.invalidFormat(reason: "Missing required 'key' attribute in user info.")
         }

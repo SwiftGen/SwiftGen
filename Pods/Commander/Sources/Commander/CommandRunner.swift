@@ -38,10 +38,10 @@ extension CommandType {
       error.print()
       exit(1)
     } catch let error as CustomStringConvertible {
-      fputs("\(ANSI.red)\(error.description)\(ANSI.reset)\n", stderr)
+      ANSI.red.print(error.description, to: stderr)
       exit(1)
     } catch {
-      fputs("\(ANSI.red)Unknown error occurred.\(ANSI.reset)\n", stderr)
+      ANSI.red.print("Unknown error occurred.", to: stderr)
       exit(1)
     }
 
