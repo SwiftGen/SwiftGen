@@ -28,6 +28,10 @@ class JsonTests: XCTestCase {
       (
         context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
         suffix: "-publicAccess"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
       )
     ]
   }
@@ -74,6 +78,10 @@ class JsonTests: XCTestCase {
       (
         context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
         suffix: "-publicAccess"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
       )
     ]
   }

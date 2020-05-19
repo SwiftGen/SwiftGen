@@ -30,7 +30,7 @@
   {{accessModifier}} static let {{color.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}(rgbaValue: {% call rgbaValue color %})
   {% endfor %}
 {% endmacro %}
-  {% if palettes.count > 1 %}
+  {% if palettes.count > 1 or param.forceFileNameEnum %}
   {% for palette in palettes %}
   {{accessModifier}} enum {{palette.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
     {% filter indent:2 %}{% call enumBlock palette.colors %}{% endfilter %}

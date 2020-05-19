@@ -74,7 +74,7 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 {{accessModifier}} enum {{param.enumName|default:"YAMLFiles"}} {
-  {% if files.count > 1 %}
+  {% if files.count > 1 or param.forceFileNameEnum %}
   {% for file in files %}
   {{accessModifier}} enum {{file.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
     {% filter indent:2 %}{% call fileBlock file %}{% endfilter %}

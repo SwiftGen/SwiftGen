@@ -49,6 +49,10 @@ class XCAssetsTests: XCTestCase {
       (
         context: try StencilContext.enrich(context: context, parameters: ["forceProvidesNamespaces"]),
         suffix: "-forceNamespaces"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
       )
     ]
   }
