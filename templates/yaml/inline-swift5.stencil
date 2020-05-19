@@ -58,12 +58,12 @@ import Foundation
   {% elif metadata.type == "Array" and metadata.element.items %}
     [{% for itemMetadata in metadata.element.items %}
       {% call valueBlock value[forloop.counter0] itemMetadata %}
-      {% if not forloop.last %}, {% endif %}
+      {{ ", " if not forloop.last }}
     {% endfor %}]
   {% elif metadata.type == "Dictionary" %}
     [{% for key,value in value %}
       "{{key}}": {% call valueBlock value metadata.properties[key] %}
-      {% if not forloop.last %}, {% endif %}
+      {{ ", " if not forloop.last }}
     {% empty %}
       :
     {% endfor %}]
