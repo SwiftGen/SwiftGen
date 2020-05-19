@@ -39,6 +39,10 @@ class StringsTests: XCTestCase {
           parameters: ["localizeFunction=XCTLocFunc"]
         ),
         suffix: "-localizeFunction"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
       )
     ]
   }
