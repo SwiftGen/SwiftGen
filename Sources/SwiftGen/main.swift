@@ -25,6 +25,7 @@ let main = Group {
   $0.group("config", "manage and run configuration files") {
     $0.addCommand("lint", "Lint the configuration file", ConfigCLI.lint)
     $0.addCommand("run", "Run commands listed in the configuration file", ConfigCLI.run)
+    $0.addCommand("init", "Create an initial configuration file", ConfigCLI.create)
   }
 
   $0.group("templates", "manage custom templates") {

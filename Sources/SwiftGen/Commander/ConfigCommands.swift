@@ -132,4 +132,20 @@ enum ConfigCLI {
       )
     }
   }
+
+  // MARK: Init/Create
+
+  static let create = command(
+    CLIOption.config,
+    Flag("nohelp", default: false, flag: "n", description: "Don't generate the introduction comment")
+  ) { file, noHelp in
+    guard !file.exists else {
+      logMessage(.error, "The file \(file) already exists")
+      return
+    }
+    try ErrorPrettifier.execute {
+      let content = Config.template(insertHelp: !noHelp, commentYAML: true)
+      try file.write(content)
+    }
+  }
 }
