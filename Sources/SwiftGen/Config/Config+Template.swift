@@ -13,7 +13,6 @@ extension Config {
         .map { $0.isEmpty ? "" : $0.hasPrefix("#") ? "#\($0)" : "# \($0)" }
         .joined(separator: "\n")
     }
-
     return content
   }
 
@@ -22,14 +21,16 @@ extension Config {
     """
     # Note: all of the config entries below are just examples with placeholders. Be sure to edit and adjust to your needs when uncommenting.
 
-    # In case all your config entries all use a common input/output parent directory, you can specify those here; every input/output paths in the rest of the config will then be expressed relative to these. Those two top-level keys are optional and default to "." (the directory of the config file).
-
+    # In case your config entries all use a common input/output parent directory, you can specify those here.
+    #   Every input/output paths in the rest of the config will then be expressed relative to these.
+    #   Those two top-level keys are optional and default to "." (the directory of the config file).
     input_dir: MyLib/Sources/
     output_dir: MyLib/Generated/
 
 
     # Generate constants for your localized strings.
     #   Be sure that SwiftGen only parses ONE locale (typically Base.lproj) – otherwise it will generate the same keys multiple times.
+    #   SwiftGen will parse all `.strings` files found in that folder.
     strings:
       inputs:
         - Resources/Base.lproj
@@ -39,7 +40,7 @@ extension Config {
 
 
     # Generate constants for your Assets Catalogs, including constants for images, colors, ARKit resources, etc.
-    #   This also shows how to provide additional parameters to your template to customise the output.
+    #   This example also shows how to provide additional parameters to your template to customise the output.
     xcassets:
       inputs:
         - Main.xcassets
@@ -53,10 +54,12 @@ extension Config {
 
     # Generate constants for your storyboards and XIBs.
     #   This one generates 2 output files, one containing the storyboard scenes, and another for the segues.
-    #   (You can remove the segues entry if you don't use segues in your IB files)
+    #    (You can remove the segues entry if you don't use segues in your IB files).
+    #   For `inputs` we can use "." here (aka "current directory", at least relative to `input_dir` = "MyLib/Sources"),
+    #    and SwiftGen will recursively find all `*.storyboard` and `*.xib` files in there.
     ib:
       inputs:
-        - . # SwiftGen will just search for all *.storyboard and *.xib files in the current directory
+        - .
       outputs:
         - templateName: scenes-swift5
           output: IB-Scenes+Generated.swift
