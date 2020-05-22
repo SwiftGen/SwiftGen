@@ -156,12 +156,8 @@ enum ConfigCLI {
   }
 
   static let doc = command {
-    guard let docURL = URL(
-      string: "https://github.com/SwiftGen/SwiftGen/tree/\(Version.swiftgen)/Documentation/ConfigFile.md"
-    ) else {
-      logMessage(.error, "Unable to build the URL to the config file documentation")
-      return
-    }
+    let docURL = gitHubDocURL(version: Version.swiftgen, path: "ConfigFile.md")
+    logMessage(.info, "Open documentation at: \(docURL)")
     NSWorkspace.shared.open(docURL)
   }
 }

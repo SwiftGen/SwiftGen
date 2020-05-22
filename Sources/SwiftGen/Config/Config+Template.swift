@@ -67,7 +67,7 @@ extension Config {
     # …
     #
     # For more info, use `swiftgen config doc` to open the documentation on GitHub.
-    # https://github.com/SwiftGen/SwiftGen/tree/\(version)/Documentation
+    # \(gitHubDocURL(version: version))
     """
   }
   // swiftlint:enable line_length function_body_length

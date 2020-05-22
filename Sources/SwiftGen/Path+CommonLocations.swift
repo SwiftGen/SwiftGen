@@ -48,6 +48,14 @@ extension Path {
   }()
 }
 
+/// URL to the Documentation on GitHub
+func gitHubDocURL(version: String, path: String = "") -> URL {
+  let type = path.isEmpty || path.hasSuffix("/") ? "tree" : "blob"
+  return URL(
+    string: "https://github.com/SwiftGen/SwiftGen/\(type)/\(version)/Documentation/\(path)"
+  )! //swiftlint:disable:this force_unwrapping
+}
+
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
