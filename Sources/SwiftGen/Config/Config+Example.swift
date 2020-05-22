@@ -5,8 +5,8 @@
 //
 
 extension Config {
-  static func template(versionForDocLink: String, commentAllLines: Bool = true) -> String {
-    var content = templateYAMLContent(version: versionForDocLink)
+  static func example(versionForDocLink: String, commentAllLines: Bool = true) -> String {
+    var content = exampleYAMLContent(version: versionForDocLink)
     if commentAllLines {
       content = content
         .split(separator: "\n", omittingEmptySubsequences: false)
@@ -17,7 +17,7 @@ extension Config {
   }
 
   // swiftlint:disable line_length function_body_length
-  private static func templateYAMLContent(version: String) -> String {
+  private static func exampleYAMLContent(version: String) -> String {
     """
     # Note: all of the config entries below are just examples with placeholders. Be sure to edit and adjust to your needs when uncommenting.
 

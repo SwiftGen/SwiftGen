@@ -139,16 +139,16 @@ enum ConfigCLI {
 
   static let create = command(
     CLIOption.configFile(checkExists: false),
-    Flag("open", default: true, description: "Open the config file for edition immediately after its creation")
+    Flag("open", default: true, description: "Open the configuration file for edition immediately after its creation")
   ) { file, shouldOpen in
     guard !file.exists else {
-      logMessage(.error, "The file \(file) already exists")
+      logMessage(.error, "The configuration file \(file) already exists")
       return
     }
     try ErrorPrettifier.execute {
-      let content = Config.template(versionForDocLink: Version.swiftgen, commentAllLines: true)
+      let content = Config.example(versionForDocLink: Version.swiftgen, commentAllLines: true)
       try file.write(content)
-      logMessage(.info, "Config file template created: \(file)")
+      logMessage(.info, "Example configuration file created: \(file)")
       if shouldOpen {
         NSWorkspace.shared.open(file.url)
       }

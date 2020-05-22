@@ -14,14 +14,14 @@
 		0934050F1F815A9100187787 /* ParserCLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934050D1F815A8C00187787 /* ParserCLI.swift */; };
 		093405101F815B2500187787 /* config-with-params.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405071F81539100187787 /* config-with-params.yml */; };
 		093405131F87AA6A00187787 /* config-with-multi-entries.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405111F87AA6500187787 /* config-with-multi-entries.yml */; };
-		0987AC7A2475802700388153 /* Config+Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0987AC792475802700388153 /* Config+Template.swift */; };
+		0987AC7A2475802700388153 /* Config+Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0987AC792475802700388153 /* Config+Example.swift */; };
 		09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030C171B6D43D400275BF5 /* TestsHelper.swift */; };
 		09A87B5C1BCCA37F00D9B9F5 /* ConfigReadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD81B6D2E5900275BF5 /* ConfigReadTests.swift */; };
 		09D009FF1F9BB3450026A755 /* ConfigEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D009FE1F9BB3450026A755 /* ConfigEntry.swift */; };
 		09D00A011F9BB87F0026A755 /* ConfigEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D009FE1F9BB3450026A755 /* ConfigEntry.swift */; };
 		09D00A041F9BBE370026A755 /* ConfigLintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D00A021F9BBD9F0026A755 /* ConfigLintTests.swift */; };
 		09F0B0BA2476EBF0003E0C75 /* ConfigInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F0B0B92476EBF0003E0C75 /* ConfigInitTests.swift */; };
-		09F0B0BB2476EC2B003E0C75 /* Config+Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0987AC792475802700388153 /* Config+Template.swift */; };
+		09F0B0BB2476EC2B003E0C75 /* Config+Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0987AC792475802700388153 /* Config+Example.swift */; };
 		234F7E7D1DEBD765001B3C10 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7B2D31BCC382800D7F488 /* main.swift */; };
 		234F7E7E1DEBD765001B3C10 /* Path+Commander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091150301BD31A3300EBC803 /* Path+Commander.swift */; };
 		234F7E7F1DEBD765001B3C10 /* TemplatesCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921FBA01BE7D6B900B488B5 /* TemplatesCommands.swift */; };
@@ -316,7 +316,7 @@
 		0934050A1F8158B800187787 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		0934050D1F815A8C00187787 /* ParserCLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserCLI.swift; sourceTree = "<group>"; };
 		093405111F87AA6500187787 /* config-with-multi-entries.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-with-multi-entries.yml"; sourceTree = "<group>"; };
-		0987AC792475802700388153 /* Config+Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config+Template.swift"; sourceTree = "<group>"; };
+		0987AC792475802700388153 /* Config+Example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config+Example.swift"; sourceTree = "<group>"; };
 		09A87B501BCCA2C600D9B9F5 /* SwiftGen UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftGen UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09C7B2D31BCC382800D7F488 /* main.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; tabWidth = 2; };
 		09D009FE1F9BB3450026A755 /* ConfigEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigEntry.swift; sourceTree = "<group>"; };
@@ -593,7 +593,7 @@
 				0934050A1F8158B800187787 /* Config.swift */,
 				09D009FE1F9BB3450026A755 /* ConfigEntry.swift */,
 				DDB0B9C1209E390700E467C2 /* ConfigOutput.swift */,
-				0987AC792475802700388153 /* Config+Template.swift */,
+				0987AC792475802700388153 /* Config+Example.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -1407,7 +1407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */,
-				09F0B0BB2476EC2B003E0C75 /* Config+Template.swift in Sources */,
+				09F0B0BB2476EC2B003E0C75 /* Config+Example.swift in Sources */,
 				379C7E8A1F8ECA8900267096 /* TemplateRef.swift in Sources */,
 				09A87B5C1BCCA37F00D9B9F5 /* ConfigReadTests.swift in Sources */,
 				379C7E931F8ECC2400267096 /* Logs.swift in Sources */,
@@ -1429,7 +1429,7 @@
 				DD2FA6BB2169401C0009CAA8 /* Version.swift in Sources */,
 				234F7E7D1DEBD765001B3C10 /* main.swift in Sources */,
 				234F7E7E1DEBD765001B3C10 /* Path+Commander.swift in Sources */,
-				0987AC7A2475802700388153 /* Config+Template.swift in Sources */,
+				0987AC7A2475802700388153 /* Config+Example.swift in Sources */,
 				234F7E7F1DEBD765001B3C10 /* TemplatesCommands.swift in Sources */,
 				09D009FF1F9BB3450026A755 /* ConfigEntry.swift in Sources */,
 				DDB0B9C2209E390700E467C2 /* ConfigOutput.swift in Sources */,
