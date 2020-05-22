@@ -5,85 +5,70 @@
 //
 
 extension Config {
-  static func template(insertHelpForVersion: String?, commentYAML: Bool = true) -> String {
-    func prefixLines(of text: String, with prefix: String) -> String {
-      text
-        .split(separator: "\n")
-        .map { "\(prefix)\($0)" }
+  static func template(versionForDocLink: String, commentAllLines: Bool = true) -> String {
+    var content = templateYAMLContent(version: versionForDocLink)
+    if commentAllLines {
+      content = content
+        .split(separator: "\n", omittingEmptySubsequences: false)
+        .map { $0.isEmpty ? "" : $0.hasPrefix("#") ? "#\($0)" : "# \($0)" }
         .joined(separator: "\n")
-    }
-
-    var content = "## SwiftGen sample config file. Uncomment and adjust to your needs\n\n"
-    content += commentYAML ? prefixLines(of: Config.templateYAMLContent, with: "# ") : Config.templateYAMLContent
-
-    if let v = insertHelpForVersion {
-      content += "\n" + prefixLines(of: Config.templateHelpText(version: v), with: "## ")
     }
 
     return content
   }
 
-  // swiftlint:disable line_length
-  static func templateHelpText(version: String) -> String {
+  // swiftlint:disable line_length function_body_length
+  private static func templateYAMLContent(version: String) -> String {
     """
+    # Note: all of the config entries below are just placeholders. Please edit and adjust to your needs when uncommenting.
 
-    ==== General Information ====
+    # If all your config entries use a common input/output directory for all your files, you can specify them here to avoid repeating those intermediate paths in every input/output paths. Those keys are totally optional, and only there for your convenience, so if your inputs and/or outputs are in totally different places you can omit those keys.
 
-    (1) For each command/parser that you want SwiftGen to run, the simplest config entry will look like this:
+    input_dir: MyLib/Sources/
+    output_dir: MyLib/Generated/
 
-    <parsername>:
+    # This generate constants for your localized strings.
+    #   Be sure that SwiftGen only parses one locale (typically Base.lproj) – otherwise it will generate the same keys multiple times
+    strings:
       inputs:
-        - <relative/path/to/file1.xyz>
-        - <relative/path/to/file2.xyz>
-        - <relative/path/to/folder>
+        - Resources/Base.lproj
       outputs:
-        templateName: <nameOfTemplateToUse>
-        output: <relative/path/to/output/file/to/generate.swift>
+        - templateName: structured-swift5
+          output: XCAssets+Generated.swift
 
-    (2) If you need to generate multiple outputs (using different templates, e.g. IB scenes + IB segues) for the same input, you can also provide a YAML array of those `templateName`+`output` dicts for the `outputs` key.
-
-    <parsername>:
+    # Generate constants for your Assets Catalogs, including constants for images, colors, ARKit resources, etc
+    xcassets:
       inputs:
-        - <relative/path/to/input/file.xyz>
+        - Main.xcassets
+        - ProFeatures.xcassets
       outputs:
-        - templateName: <template1>
-          output: <relative/path/to/output/file1.swift>
-        - templateName: <template2>
-          output: <relative/path/to/output/file2.swift>
-
-    (3) Some templates can take optional parameters via the `params` key to slightly customize their output to your needs. See the template's documentation to know the available parameters.
-
-    <parsername>:
-      inputs:
-        - <relative/path/to/input/file.xyz>
-      outputs:
-        - templateName: <template1>
+        - templateName: swift5
           params:
-            publicAccess: true
-            enumName: MyNamespace
-          output: <relative/path/to/output/file1.swift>
+            forceProvidesNamespaces: true # If you want a sub-namespace created for each folder/group used in your Asset Catalogs
+          output: XCAssets+Generated.swift
 
-    For more details, including creating and using your own custom templates for a project with `templatePath`, using the `filter` key to filter the input files to parse, or provide `options` to the parser, see the documentation: https://github.com/SwiftGen/SwiftGen/tree/\(version)/Documentation
+    # Generate constants for your storyboards and XIBs.
+    #   This one generates 2 output files, one containing the storyboard scenes, and another for the segues.
+    #   You can remove the segues output if you don't use segues in your IB files
+    ib:
+      inputs:
+        - . # SwiftGen will just search for all *.storyboard and *.xib files in the current directory
+      outputs:
+        - templateName: scenes-swift5
+          output: IB+Scenes.swift
+        - templateName: segues-swift5
+          output: IB+Segues.swift
 
+
+    # There are other parsers available you can use depending on your needs, for example:
+    #  - `fonts` (if you have custom ttf/ttc font files)
+    #  - `coredata` (for CoreData models)
+    #  - `json`, `yaml` and `plist` (to parse custom JSON/YAML/Plist files and generate code from their content)
+    # …
+    #
+    # For more info, use `swiftgen config doc` to open the documentation on GitHub.
+    # https://github.com/SwiftGen/SwiftGen/tree/\(version)/Documentation
     """
   }
-
-  static let templateYAMLContent = """
-    # If all your commands use a common input/output directory for all your files, you can specify them here
-    # to avoid repeating those intermediate paths in all commands
-
-    inputDir: MyLib/Sources/
-    outputDir: MyLib/Generated/
-
-    xcassets:
-      path: Deprecated
-      inputs:
-        - One
-        - Two
-      output: generated.swift
-      outputs:
-        - key: "This should not be a string"
-          key2: "nor an array"
-    """
-  // swiftlint:enable line_length
+  // swiftlint:enable line_length function_body_length
 }

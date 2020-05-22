@@ -118,6 +118,14 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "config init --config /tmp/swiftgen-dummy-config.yml"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "config doc"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "templates list"
             isEnabled = "NO">
          </CommandLineArgument>
