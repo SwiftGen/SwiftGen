@@ -35,7 +35,7 @@ extension Config {
         - Resources/Base.lproj
       outputs:
         - templateName: structured-swift5
-          output: XCAssets+Generated.swift
+          output: Strings+Generated.swift
 
 
     # Generate constants for your Assets Catalogs, including constants for images, colors, ARKit resources, etc.
@@ -53,15 +53,15 @@ extension Config {
 
     # Generate constants for your storyboards and XIBs.
     #   This one generates 2 output files, one containing the storyboard scenes, and another for the segues.
-    #   (You can remove the segues output if you don't use segues in your IB files)
+    #   (You can remove the segues entry if you don't use segues in your IB files)
     ib:
       inputs:
         - . # SwiftGen will just search for all *.storyboard and *.xib files in the current directory
       outputs:
         - templateName: scenes-swift5
-          output: IB+Scenes.swift
+          output: IB-Scenes+Generated.swift
         - templateName: segues-swift5
-          output: IB+Segues.swift
+          output: IB-Segues+Generated.swift
 
 
     # There are other parsers available for you to use depending on your needs, for example:
