@@ -80,20 +80,19 @@ public enum Strings {
       }
 
       let name = path.lastComponentWithoutExtension
-      let tableExists = tables[name] != nil
       let parser = parserType.init(options: options)
 
       let entries: [Entry]
-      if tableExists {
-        guard parser.isAllowedToWriteToExistingTable else {
-          throw ParserError.duplicateTable(name: name)
+      if let existingEntries = tables[name], !existingEntries.isEmpty {
+        let newEntries = try parser.parseFile(at: path)
+        let allEntries = [existingEntries, newEntries].joined()
+        let allKeys = allEntries.map { $0.key }
+
+        let mergedEntries = Dictionary(zip(allKeys, allEntries)) { existing, new in
+          parser.shouldOverwriteValuesInExistingTable ? new : existing
         }
 
-        let existingEntries = tables[name] ?? []
-        let newEntries = try parser.parseFile(at: path)
-        let mergedEntries = Array(Dictionary([existingEntries, newEntries].joined().map { ($0.key, $0) },
-                                             uniquingKeysWith: { $1 }).values)
-        entries = mergedEntries
+        entries = Array(mergedEntries.values)
       } else {
         entries = try parser.parseFile(at: path)
       }
