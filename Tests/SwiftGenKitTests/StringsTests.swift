@@ -86,13 +86,22 @@ class StringsTests: XCTestCase {
     XCTDiffContexts(result, expected: "plurals-advanced", sub: .strings)
   }
 
-  func testSameTableWithPlurals() throws {
+  func testSameTableWithPluralsParsingStringsFirst() throws {
     let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.stringsdict", sub: .strings))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "plurals-same-table", sub: .strings)
+    XCTDiffContexts(result, expected: "plurals-same-table-strings-first", sub: .strings)
+  }
+
+  func testSameTableWithPluralsParsingPluralsFirst() throws {
+    let parser = try Strings.Parser()
+    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.stringsdict", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "plurals-same-table-plurals-first", sub: .strings)
   }
 
   // MARK: - Custom options
