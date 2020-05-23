@@ -103,12 +103,14 @@ public enum Strings {
     func register(parser: StringsFileTypeParser.Type) {
       for ext in parser.extensions {
         if let old = parsers[ext] {
-          warningHandler?("""
+          warningHandler?(
+            """
             error: Parser \(parser) tried to register the file type '\(ext)' already \
             registered by \(old).
             """,
             #file,
-            #line)
+            #line
+          )
         }
         parsers[ext] = parser
       }

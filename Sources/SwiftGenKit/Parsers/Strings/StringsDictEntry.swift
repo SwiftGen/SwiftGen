@@ -117,7 +117,10 @@ extension StringsDict: Decodable {
       // decode them and add them to `variables`
       let childVariableKeys = Set(try variable.formatStrings.flatMap { try StringsDict.variableKeysFromFormatKey($0) })
       for variableKey in Array(childVariableKeys) {
-        variables[variableKey] = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableKey))
+        variables[variableKey] = try container.decode(
+          PluralEntry.VariableRule.self,
+          forKey: CodingKeys(key: variableKey)
+        )
       }
     }
     return variables
