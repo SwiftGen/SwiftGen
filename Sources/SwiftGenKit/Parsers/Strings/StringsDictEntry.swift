@@ -36,7 +36,7 @@ extension StringsDict {
 }
 
 extension StringsDict.PluralEntry {
-  /// A VariabeRule containes the actual localized plural strings for every possible plural case that
+  /// A VariableRule contains the actual localized plural strings for every possible plural case that
   /// is available in a specific locale. Since some locales only support a subset of plural forms,
   /// most of them are optional.
   struct VariableRule: Codable {
@@ -77,15 +77,13 @@ extension StringsDict: Decodable {
     init?(stringValue: String) {
       self.stringValue = stringValue
     }
+    init(key: String) {
+      self.stringValue = key
+    }
 
     // fixed keys
-    static let formatKey = CodingKeys.make(key: "NSStringLocalizedFormatKey")
-    static let variableWidthRules = CodingKeys.make(key: "NSStringVariableWidthRuleType")
-
-    // factory method to create dynamic keys
-    static func make(key: String) -> CodingKeys {
-      return CodingKeys(stringValue: key)! // swiftlint:disable:this force_unwrapping
-    }
+    static let formatKey = CodingKeys(key: "NSStringLocalizedFormatKey")
+    static let variableWidthRules = CodingKeys(key: "NSStringVariableWidthRuleType")
   }
 
   init(from coder: Decoder) throws {
@@ -112,14 +110,14 @@ extension StringsDict: Decodable {
     var variables = [String: PluralEntry.VariableRule]()
 
     for variableKey in try StringsDict.variableKeysFromFormatKey(formatKey) {
-      let variable = try container.decode(PluralEntry.VariableRule.self, forKey: .make(key: variableKey))
+      let variable = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableKey))
       variables[variableKey] = variable
 
       // Nested FormatKey in Variable. Check if one of the strings (zero, one, ...) contains format keys,
       // decode them and add them to `variables`
       let childVariableKeys = Set(try variable.formatStrings.flatMap { try StringsDict.variableKeysFromFormatKey($0) })
       for variableKey in Array(childVariableKeys) {
-        variables[variableKey] = try container.decode(PluralEntry.VariableRule.self, forKey: .make(key: variableKey))
+        variables[variableKey] = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableKey))
       }
     }
     return variables
