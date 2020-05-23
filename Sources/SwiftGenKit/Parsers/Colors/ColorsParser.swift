@@ -52,7 +52,12 @@ public enum Colors {
     }
 
     public static var defaultFilter: String {
-      let extensions = Parser.subParsers.flatMap { $0.extensions }.sorted().joined(separator: "|")
+      let extensions = Parser.subParsers
+        .flatMap { subParser in
+          subParser.extensions.map { NSRegularExpression.escapedPattern(for: $0) }
+        }
+        .sorted()
+        .joined(separator: "|")
       return "[^/]\\.(?i:\(extensions))$"
     }
 
