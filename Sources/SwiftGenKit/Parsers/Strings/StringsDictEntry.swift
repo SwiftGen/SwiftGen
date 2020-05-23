@@ -162,6 +162,6 @@ extension StringsDict.PluralEntry {
 
 extension StringsDict.PluralEntry.VariableRule {
   var formatStrings: [String] {
-    return [zero, one, two, few, many, other].compactMap { $0 }
+    [zero, one, two, few, many, other].compactMap { $0 }
   }
 }

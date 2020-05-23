@@ -114,6 +114,6 @@ public enum Strings {
 
 extension StringsFileTypeParser {
   fileprivate var isAllowedToWriteToExistingTable: Bool {
-    return self is Strings.StringsDictFileParser
+    self is Strings.StringsDictFileParser
   }
 }
