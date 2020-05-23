@@ -116,9 +116,3 @@ public enum Strings {
     }
   }
 }
-
-extension StringsFileTypeParser {
-  fileprivate var isAllowedToWriteToExistingTable: Bool {
-    self is Strings.StringsDictFileParser
-  }
-}

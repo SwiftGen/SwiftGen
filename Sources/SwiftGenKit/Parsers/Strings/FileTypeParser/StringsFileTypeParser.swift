@@ -10,6 +10,8 @@ import PathKit
 protocol StringsFileTypeParser: AnyObject {
   init(options: ParserOptionValues)
 
+  var shouldOverwriteValuesInExistingTable: Bool { get }
+
   static var allOptions: ParserOptionList { get }
   static var extensions: [String] { get }
 

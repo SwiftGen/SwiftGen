@@ -11,6 +11,8 @@ extension Strings {
   final class StringsFileParser: StringsFileTypeParser {
     private let options: ParserOptionValues
 
+    let shouldOverwriteValuesInExistingTable: Bool = false
+
     init(options: ParserOptionValues) {
       self.options = options
     }
