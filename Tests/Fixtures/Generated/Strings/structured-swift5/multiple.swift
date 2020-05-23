@@ -122,8 +122,6 @@ extension L10n {
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
-  static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
-  }()
+  static let bundle = Bundle(for: BundleToken.self)
 }
 // swiftlint:enable convenience_type
