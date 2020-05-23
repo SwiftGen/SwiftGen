@@ -163,14 +163,14 @@ class ConfigLintTests: XCTestCase {
         (.error, "input_dir: Input directory \(Config.Message.doesntExist("Fixtures/"))"),
         (.error, "output_dir: Output directory \(Config.Message.doesntExist("Generated/"))"),
         (.error, "strings.inputs: \(Config.Message.doesntExist("Fixtures/Strings/Localizable.strings"))"),
-        (.error, "strings.outputs: Template not found at path templates/custom-swift3."),
+        (.error, "strings.outputs: Template not found at path templates/custom-swift5."),
         (.error, "strings.outputs.output: \(Config.Message.doesntExistIntermediatesNeeded("Generated"))"),
         (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Colors.xcassets"))"),
         (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Colors.xcassets"))"),
         (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Images.xcassets"))"),
         (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Images.xcassets"))"),
         (.error, """
-          xcassets.outputs: Template named custom-swift3 not found. Use `swiftgen templates list` \
+          xcassets.outputs: Template named custom-swift5 not found. Use `swiftgen templates list` \
           to list available named templates or use `templatePath` to specify a template by its \
           full path.
           """),

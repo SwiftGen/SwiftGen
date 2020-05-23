@@ -52,7 +52,7 @@ public enum InterfaceBuilder {
     }
 
     var modules: Set<String> {
-      return Set<String>(storyboards.flatMap { $0.modules })
+      Set<String>(storyboards.flatMap { $0.modules })
     }
 
     var platform: String? {

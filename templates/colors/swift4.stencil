@@ -12,8 +12,7 @@
   {{accessModifier}} typealias {{colorAlias}} = UIColor
 #endif
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Colors
 
@@ -31,7 +30,7 @@
   {{accessModifier}} static let {{color.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}(rgbaValue: {% call rgbaValue color %})
   {% endfor %}
 {% endmacro %}
-  {% if palettes.count > 1 %}
+  {% if palettes.count > 1 or param.forceFileNameEnum %}
   {% for palette in palettes %}
   {{accessModifier}} enum {{palette.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
     {% filter indent:2 %}{% call enumBlock palette.colors %}{% endfilter %}

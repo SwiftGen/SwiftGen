@@ -87,7 +87,7 @@ extension ConfigEntry {
   }
 
   static func parseCommandEntry(yaml: Any, cmd: String, logger: (LogLevel, String) -> Void) throws -> [ConfigEntry] {
-    return try ConfigEntry.parseValueOrArray(yaml: yaml) {
+    try ConfigEntry.parseValueOrArray(yaml: yaml) {
       try ConfigEntry(yaml: $0, cmd: cmd, logger: logger)
     }
   }
@@ -117,7 +117,7 @@ extension ConfigEntry {
 ///
 extension ConfigEntry {
   func commandLine(forCommand cmd: String) -> [String] {
-    return outputs.map {
+    outputs.map {
       $0.commandLine(forCommand: cmd, inputs: inputs, filter: filter, options: options)
     }
   }

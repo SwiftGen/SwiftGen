@@ -79,9 +79,9 @@ private extension TemplatesCLI {
   // - 'template'
   // These will then be converted into an actual template path, and passed to the result closure.
   static func pathCommandGenerator(execute: @escaping (Path, OutputDestination) throws -> Void) -> CommandType {
-    return command(
+    command(
       Argument<String>("subcommand", description: "the name of the subcommand for the template, like `colors`"),
-      Argument<String>("template", description: "the name of the template to find, like `swift3` or `dot-syntax`"),
+      Argument<String>("template", description: "the name of the template to find, like `swift5` or `flat-swift5`"),
       OutputDestination.cliOption
     ) { subcommandName, templateName, output in
       try ErrorPrettifier.execute {

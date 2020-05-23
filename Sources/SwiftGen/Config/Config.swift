@@ -19,6 +19,8 @@ struct Config {
   let inputDir: Path?
   let outputDir: Path?
   let commands: [String: [ConfigEntry]]
+
+  let sourcePath: Path
 }
 
 extension Config {
@@ -30,6 +32,8 @@ extension Config {
     if !file.exists {
       throw Config.Error.pathNotFound(path: file)
     }
+
+    sourcePath = file.parent()
 
     let anyConfig = try YAML.read(path: file, env: env)
 
@@ -62,22 +66,22 @@ extension Config {
 extension Config {
   enum Message {
     static func absolutePath(_ path: CustomStringConvertible) -> String {
-      return """
+      """
         \(path) is an absolute path. Prefer relative paths for portability when sharing your \
         project (unless you are using environment variables).
         """
     }
 
     static func deprecatedAction(_ action: String, for replacement: String) -> String {
-      return "`\(action)` action has been deprecated, please use `\(replacement)` instead."
+      "`\(action)` action has been deprecated, please use `\(replacement)` instead."
     }
 
     static func doesntExist(_ path: CustomStringConvertible) -> String {
-      return "\(path) does not exist."
+      "\(path) does not exist."
     }
 
     static func doesntExistIntermediatesNeeded(_ path: CustomStringConvertible) -> String {
-      return """
+      """
         \(path) does not exist. Intermediate folders up to the output file must already exist to avoid \
         misconfigurations, and won't be created for you.
         """
@@ -122,11 +126,17 @@ extension Config {
     entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
 
     for inputPath in entry.inputs {
-      if !inputPath.exists {
-        logger(.error, "\(cmd.name).inputs: \(Message.doesntExist(inputPath))")
-      }
+      let finalPath: Path
+
       if inputPath.isAbsolute {
         logger(.warning, "\(cmd.name).inputs: \(Message.absolutePath(inputPath))")
+        finalPath = inputPath
+      } else {
+        finalPath = sourcePath + inputPath
+      }
+
+      if !finalPath.exists {
+        logger(.error, "\(cmd.name).inputs: \(Message.doesntExist(inputPath))")
       }
     }
 
@@ -159,7 +169,7 @@ extension Config {
     }
 
     let outputParent = entryOutput.output.parent()
-    if !outputParent.exists {
+    if !(sourcePath + outputParent).exists {
       logger(.error, "\(cmd.name).outputs.output: \(Message.doesntExistIntermediatesNeeded(outputParent))")
     }
     if entryOutput.output.isAbsolute {

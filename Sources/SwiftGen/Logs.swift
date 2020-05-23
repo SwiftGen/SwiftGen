@@ -26,7 +26,7 @@ enum ANSIColor: UInt8, CustomStringConvertible {
   case `default`
 
   var description: String {
-    return "\u{001B}[\(self.rawValue)m"
+    "\u{001B}[\(self.rawValue)m"
   }
 
   func format(_ string: String) -> String {
@@ -53,7 +53,7 @@ func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
 struct ErrorPrettifier: Error, CustomStringConvertible {
   let nsError: NSError
   var description: String {
-    return "\(nsError.localizedDescription) (\(nsError.domain) code \(nsError.code))"
+    "\(nsError.localizedDescription) (\(nsError.domain) code \(nsError.code))"
   }
 
   static func execute(closure: () throws -> Void ) rethrows {

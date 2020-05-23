@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18B75" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AbstractEntity" representedClassName="AbstractEntity" isAbstract="YES" syncable="YES"/>
     <entity name="AutoClassGen" representedClassName="AutoClassGen" syncable="YES" codeGenerationType="class"/>
     <entity name="AutoExtensionGen" representedClassName="AutoExtensionGen" syncable="YES" codeGenerationType="category"/>
-    <entity name="ImpossibleType" representedClassName="Something.We.Cannot.Handle.ImpossibleType" syncable="YES"/>
     <entity name="ChildEntity" representedClassName="SwiftGen.ChildEntity" parentEntity="MainEntity" syncable="YES">
         <userInfo>
             <entry key="key" value="value"/>
         </userInfo>
     </entity>
+    <entity name="ImpossibleType" representedClassName="Something.We.Cannot.Handle.ImpossibleType" syncable="YES"/>
     <entity name="MainEntity" representedClassName="MainEntity" syncable="YES">
-        <attribute name="attributedString" optional="YES" attributeType="Transformable" customClassName="NSAttributedString" syncable="YES"/>
-        <attribute name="binaryData" optional="YES" attributeType="Binary" syncable="YES">
+        <attribute name="attributedString" optional="YES" attributeType="Transformable" customClassName="NSAttributedString"/>
+        <attribute name="binaryData" optional="YES" attributeType="Binary">
             <userInfo>
                 <entry key="key" value="value"/>
             </userInfo>
         </attribute>
-        <attribute name="boolean" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="decimal" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="double" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="float" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="int16" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="int32" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="int64" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="integerEnum" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
+        <attribute name="boolean" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="decimal" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="double" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="float" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="int16" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="int32" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="int64" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="integerEnum" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES">
             <userInfo>
                 <entry key="RawType" value="IntegerEnum"/>
                 <entry key="unwrapOptional" value="true"/>
             </userInfo>
         </attribute>
-        <attribute name="optionalBoolean" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="optionalDouble" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="optionalFloat" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="optionalInt16" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="optionalInt32" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="optionalInt64" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="optionalString" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="string" attributeType="String" syncable="YES"/>
-        <attribute name="stringEnum" optional="YES" attributeType="String" syncable="YES">
+        <attribute name="optionalBoolean" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="optionalDouble" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="optionalFloat" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="optionalInt16" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="optionalInt32" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="optionalInt64" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="optionalString" optional="YES" attributeType="String"/>
+        <attribute name="string" attributeType="String"/>
+        <attribute name="stringEnum" optional="YES" attributeType="String">
             <userInfo>
                 <entry key="RawType" value="StringEnum"/>
             </userInfo>
         </attribute>
-        <attribute name="transformable" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="transformableCustomArray" optional="YES" attributeType="Transformable" customClassName="CustomArray" syncable="YES"/>
-        <attribute name="transformableCustomPolyline" optional="YES" attributeType="Transformable" customClassName="CustomPolyline" syncable="YES"/>
-        <attribute name="transient" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
-        <attribute name="uri" optional="YES" attributeType="URI" syncable="YES"/>
-        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="manyToMany" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SecondaryEntity" inverseName="manyToMany" inverseEntity="SecondaryEntity" syncable="YES"/>
-        <relationship name="oneToMany" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SecondaryEntity" inverseName="oneToMany" inverseEntity="SecondaryEntity" syncable="YES"/>
-        <relationship name="oneToOne" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SecondaryEntity" inverseName="oneToOne" inverseEntity="SecondaryEntity" syncable="YES"/>
-        <fetchedProperty name="fetchedProperty" optional="YES" syncable="YES">
+        <attribute name="transformable" optional="YES" attributeType="Transformable"/>
+        <attribute name="transformableCustomArray" optional="YES" attributeType="Transformable" customClassName="CustomArray"/>
+        <attribute name="transformableCustomPolyline" optional="YES" attributeType="Transformable" customClassName="CustomPolyline"/>
+        <attribute name="transient" optional="YES" transient="YES" attributeType="String"/>
+        <attribute name="uri" optional="YES" attributeType="URI"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="manyToMany" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SecondaryEntity" inverseName="manyToMany" inverseEntity="SecondaryEntity"/>
+        <relationship name="oneToMany" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SecondaryEntity" inverseName="oneToMany" inverseEntity="SecondaryEntity"/>
+        <relationship name="oneToOne" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SecondaryEntity" inverseName="oneToOne" inverseEntity="SecondaryEntity"/>
+        <fetchedProperty name="fetchedProperty" optional="YES">
             <fetchRequest name="fetchedPropertyFetchRequest" entity="NewEntity" predicateString="true == true"/>
             <userInfo>
                 <entry key="key" value="value"/>
@@ -63,7 +63,7 @@
         </userInfo>
     </entity>
     <entity name="NewEntity" representedClassName="NewEntity" parentEntity="AbstractEntity" syncable="YES">
-        <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <fetchIndex name="byIdentifierIndex">
             <fetchIndexElement property="identifier" type="Binary" order="ascending"/>
         </fetchIndex>
@@ -74,14 +74,14 @@
         </uniquenessConstraints>
     </entity>
     <entity name="SecondaryEntity" representedClassName=".SecondaryEntity" syncable="YES">
-        <attribute name="name" attributeType="String" syncable="YES"/>
-        <relationship name="manyToMany" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="manyToMany" inverseEntity="MainEntity" syncable="YES"/>
-        <relationship name="oneToMany" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="oneToMany" inverseEntity="MainEntity" syncable="YES"/>
-        <relationship name="oneToOne" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="oneToOne" inverseEntity="MainEntity" syncable="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="manyToMany" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="manyToMany" inverseEntity="MainEntity"/>
+        <relationship name="oneToMany" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="oneToMany" inverseEntity="MainEntity"/>
+        <relationship name="oneToOne" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MainEntity" inverseName="oneToOne" inverseEntity="MainEntity"/>
     </entity>
     <fetchRequest name="DictionaryFetchRequest" entity="MainEntity" resultType="2"/>
     <fetchRequest name="ObjectFetchRequest" entity="MainEntity" predicateString="uuid == $UUID" includeSubentities="YES" includePropertyValues="YES" includesPendingChanges="YES" returnObjectsAsFaults="YES" returnDistinctResults="YES"/>
-    <fetchRequest name="ObjectIDFetchRequest" entity="MainEntity" predicateString="oneToOne.name == $NAME" resultType="1"/>
+    <fetchRequest name="ObjectIDFetchRequest" entity="MainEntity" predicateString="oneToOne.name == $NAME OR string == $NEEDLE" resultType="1"/>
     <configuration name="Custom">
         <memberEntity name="NewEntity"/>
     </configuration>
@@ -89,6 +89,7 @@
         <element name="AbstractEntity" positionX="-9" positionY="162" width="128" height="45"/>
         <element name="AutoClassGen" positionX="-36" positionY="135" width="128" height="45"/>
         <element name="AutoExtensionGen" positionX="-27" positionY="144" width="128" height="45"/>
+        <element name="ImpossibleType" positionX="160" positionY="192" width="128" height="43"/>
         <element name="ChildEntity" positionX="-36" positionY="126" width="128" height="45"/>
         <element name="MainEntity" positionX="-63" positionY="-18" width="128" height="449"/>
         <element name="NewEntity" positionX="-27" positionY="144" width="128" height="60"/>

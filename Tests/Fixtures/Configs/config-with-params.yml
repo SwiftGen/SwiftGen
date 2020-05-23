@@ -3,7 +3,7 @@ strings:
   inputs: Sources1/Folder
   filter: .*\.strings
   outputs:
-    templateName: structured-swift3
+    templateName: structured-swift5
     output: strings.swift
     params:
       foo: 5

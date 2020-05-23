@@ -28,12 +28,12 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 
 {% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
-    ({% call paramTranslate type %})p{{ forloop.counter }}{% if not forloop.last %} :{% endif %}
+    ({% call paramTranslate type %})p{{ forloop.counter }}{{ " :" if not forloop.last }}
   {% endfor %}
 {% endfilter %}{% endmacro %}
 {% macro argumentsBlock types %}{% filter removeNewlines:"leading" %}
   {% for type in types %}
-    p{{forloop.counter}}{% if not forloop.last %}, {% endif %}
+    p{{forloop.counter}}{{ ", " if not forloop.last }}
   {% endfor %}
 {% endfilter %}{% endmacro %}
 {% macro paramTranslate swiftType %}

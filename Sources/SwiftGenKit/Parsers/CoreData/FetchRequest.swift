@@ -60,7 +60,7 @@ extension CoreData.FetchRequest {
 
     let predicateString = object[XML.Attributes.predicateString] ?? ""
     let resultType = object[XML.Attributes.resultType]
-                      .flatMap(CoreData.FetchRequest.ResultType.init(rawValue:)) ?? .object
+      .flatMap(CoreData.FetchRequest.ResultType.init(rawValue:)) ?? .object
 
     let includeSubentities = object[XML.Attributes.includeSubentities].flatMap(Bool.init(from:)) ?? true
     let includePropertyValues = object[XML.Attributes.includePropertyValues].flatMap(Bool.init(from:)) ?? true

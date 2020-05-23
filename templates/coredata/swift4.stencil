@@ -1,7 +1,7 @@
 // swiftlint:disable all
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
-// swiftlint:disable superfluous_disable_command
+// swiftlint:disable superfluous_disable_command implicit_return
 // swiftlint:disable sorted_imports
 import CoreData
 import Foundation
@@ -179,7 +179,7 @@ extension {{ entityClassName }} {
     let model = persistentStoreCoordinator.managedObjectModel
     let substitutionVariables: [String: Any] = [
       {% for variableName, variableType in fetchRequest.substitutionVariables %}
-      "{{ variableName }}": {{ variableName | lowerFirstWord }}
+      "{{ variableName }}": {{ variableName | lowerFirstWord }}{{ "," if not forloop.last }}
       {% empty %}
       :
       {% endfor %}

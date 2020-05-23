@@ -12,7 +12,7 @@ final class TestFileParser1: ColorsFileTypeParser {
   init(options: ParserOptionValues) {}
   static let extensions = ["test1"]
   func parseFile(at path: Path) throws -> Colors.Palette {
-    return Colors.Palette(name: "test1", colors: [:])
+    Colors.Palette(name: "test1", colors: [:])
   }
 }
 
@@ -20,7 +20,7 @@ final class TestFileParser2: ColorsFileTypeParser {
   init(options: ParserOptionValues) {}
   static let extensions = ["test2"]
   func parseFile(at path: Path) throws -> Colors.Palette {
-    return Colors.Palette(name: "test2", colors: [:])
+    Colors.Palette(name: "test2", colors: [:])
   }
 }
 
@@ -28,7 +28,7 @@ final class TestFileParser3: ColorsFileTypeParser {
   init(options: ParserOptionValues) {}
   static let extensions = ["test1"]
   func parseFile(at path: Path) throws -> Colors.Palette {
-    return Colors.Palette(name: "test3", colors: [:])
+    Colors.Palette(name: "test3", colors: [:])
   }
 }
 
