@@ -33,11 +33,11 @@ internal enum L10n {
   }
 
   internal enum Nested {
-    /// Plural case 'other': %1$#@geese@
+    /// Plural case 'other': %1$d geese landed on their %3$d fields
     internal static func formatkeyInVariable(_ p1: Int, _ p2: Int, _ p3: Int) -> String {
       return L10n.tr("LocPluralAdvanced", "nested.formatkey-in-variable", p1, p2, p3)
     }
-    /// Plural case 'other': %1$#@first_level@
+    /// Plural case 'other': %1$d first levels have %2$d second levels and %3$#@third_level@
     internal static func formatkeyInVariableDeep(_ p1: Int, _ p2: Int, _ p3: Int) -> String {
       return L10n.tr("LocPluralAdvanced", "nested.formatkey-in-variable-deep", p1, p2, p3)
     }

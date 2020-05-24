@@ -125,7 +125,11 @@ extension StringsDict: Decodable {
     }
     return variables
   }
+}
 
+// - MARK: Helpers
+
+extension StringsDict {
   /// Parses a format string and returns an array of discovered variable keys.
   /// Every variable key that is contained within the format string is preceded
   /// by the %#@ characters and followed by the @ character.
@@ -149,17 +153,61 @@ extension StringsDict: Decodable {
   }
 }
 
-// - MARK: Helpers
-
 extension StringsDict.PluralEntry {
   var translation: String? {
     var result = formatKey
-    variables.forEach { keyValuePair in
-      let (key, variable) = keyValuePair
-      result = result.replacingOccurrences(of: "%#@\(key)@", with: variable.other)
+
+    for intermediateResult in sequence(first: result, next: unfurlVariableKeysInFormatKey(_:)) {
+      result = intermediateResult
     }
 
     return "Plural case 'other': \(result)"
+  }
+
+  /// Unfurls any variable keys in a formatKey to get a possible translation for the `other` case.
+  ///
+  /// This method should be used in a recursive context, in which the output will be used as the input for the
+  /// next iteration.
+  ///
+  /// - Parameter formatKey: A format key containing variables.
+  /// - Returns: The format key in which all its variable keys are replaced with the content of the `other` translation,
+  ///  if the `formatKey` contained any variable keys, `nil` otherwise.
+  private func unfurlVariableKeysInFormatKey(_ formatKey: String) -> String? {
+    guard
+      let remainingVariableKeys = try? StringsDict.variableKeysFromFormatKey(formatKey),
+      !remainingVariableKeys.isEmpty
+    else {
+      return nil
+    }
+    var unfurledFormatKey = formatKey
+
+    for key in remainingVariableKeys {
+      guard let variable = variables[key] else { return nil }
+      let regexEscapedKey = NSRegularExpression.escapedPattern(for: key)
+      let pattern = #"(%(?>\d\$)?#@\#(regexEscapedKey)@)"#
+
+      guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
+      let nsrange = NSRange(unfurledFormatKey.startIndex..<unfurledFormatKey.endIndex, in: unfurledFormatKey)
+      let matches = regex.matches(in: unfurledFormatKey, options: [], range: nsrange)
+      let keyRanges = matches
+        .compactMap { match -> Range<String.Index>? in
+          let captureGroupRange = match.range(at: 1)
+          guard
+            captureGroupRange.location != NSNotFound,
+            let range = Range(captureGroupRange, in: unfurledFormatKey)
+          else {
+            return nil
+          }
+
+          return range
+        }
+
+      keyRanges.forEach { keyRange in
+        unfurledFormatKey.replaceSubrange(keyRange, with: variable.other)
+      }
+    }
+
+    return unfurledFormatKey
   }
 }
 

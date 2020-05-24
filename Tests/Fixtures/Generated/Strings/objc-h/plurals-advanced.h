@@ -11,9 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)multiplePlaceholdersAndVariablesStringIntWithValues:(id)p1 :(NSInteger)p2;
 // multiple.variables.three-variables-in-formatkey --> "Plural case 'other': %d files remaining (%d bytes, %d minutes)"
 + (NSString*)multipleVariablesThreeVariablesInFormatkeyWithValues:(NSInteger)p1 :(NSInteger)p2 :(NSInteger)p3;
-// nested.formatkey-in-variable --> "Plural case 'other': %1$#@geese@"
+// nested.formatkey-in-variable --> "Plural case 'other': %1$d geese landed on their %3$d fields"
 + (NSString*)nestedFormatkeyInVariableWithValues:(NSInteger)p1 :(NSInteger)p2 :(NSInteger)p3;
-// nested.formatkey-in-variable-deep --> "Plural case 'other': %1$#@first_level@"
+// nested.formatkey-in-variable-deep --> "Plural case 'other': %1$d first levels have %2$d second levels and %3$#@third_level@"
 + (NSString*)nestedFormatkeyInVariableDeepWithValues:(NSInteger)p1 :(NSInteger)p2 :(NSInteger)p3;
 @end
 

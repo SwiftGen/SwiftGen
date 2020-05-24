@@ -31,14 +31,15 @@ tables:
       strings:
       - key: "nested.formatkey-in-variable"
         name: "formatkey-in-variable"
-        translation: "Plural case 'other': %1$#@geese@"
+        translation: "Plural case 'other': %1$d geese landed on their %3$d fields"
         types:
         - "Int"
         - "Int"
         - "Int"
       - key: "nested.formatkey-in-variable-deep"
         name: "formatkey-in-variable-deep"
-        translation: "Plural case 'other': %1$#@first_level@"
+        translation: "Plural case 'other': %1$d first levels have %2$d second levels
+          and %3$#@third_level@"
         types:
         - "Int"
         - "Int"
