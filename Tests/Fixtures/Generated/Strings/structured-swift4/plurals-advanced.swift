@@ -18,6 +18,12 @@ internal enum L10n {
         return L10n.tr("LocPluralAdvanced", "multiple.placeholders.string-int", p1)
       }
     }
+    internal enum PlaceholdersAndVariables {
+      /// Plural case 'other': %@ has %d ratings
+      internal static func stringInt(_ p1: Any, _ p2: Int) -> String {
+        return L10n.tr("LocPluralAdvanced", "multiple.placeholders-and-variables.string-int", String(describing: p1), p2)
+      }
+    }
     internal enum Variables {
       /// Plural case 'other': %d files remaining (%d bytes, %d minutes)
       internal static func threeVariablesInFormatkey(_ p1: Int, _ p2: Int, _ p3: Int) -> String {

@@ -30,6 +30,10 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 {
     return tr(@"LocPluralAdvanced", @"multiple.placeholders.string-int", p1);
 }
++ (NSString*)multiplePlaceholdersAndVariablesStringIntWithValues:(id)p1 :(NSInteger)p2
+{
+    return tr(@"LocPluralAdvanced", @"multiple.placeholders-and-variables.string-int", p1, p2);
+}
 + (NSString*)multipleVariablesThreeVariablesInFormatkeyWithValues:(NSInteger)p1 :(NSInteger)p2 :(NSInteger)p3
 {
     return tr(@"LocPluralAdvanced", @"multiple.variables.three-variables-in-formatkey", p1, p2, p3);

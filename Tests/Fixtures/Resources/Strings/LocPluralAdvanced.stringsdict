@@ -20,6 +20,33 @@
                 <string>%@ has %d ratings</string>
             </dict>
         </dict>
+        <key>multiple.placeholders-and-variables.string-int</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@element@ %#@has_rating@</string>
+            <key>element</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>@</string>
+                <key>other</key>
+                <string>%@</string>
+            </dict>
+                <key>has_rating</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>zero</key>
+                <string>has no rating</string>
+                <key>one</key>
+                <string>has one rating</string>
+                <key>other</key>
+                <string>has %d ratings</string>
+            </dict>
+        </dict>
         <key>nested.formatkey-in-variable</key>
         <dict>
             <key>NSStringLocalizedFormatKey</key>

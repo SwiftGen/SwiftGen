@@ -13,6 +13,10 @@ internal enum L10n {
   internal static func multiplePlaceholdersStringInt(_ p1: Int) -> String {
     return L10n.tr("LocPluralAdvanced", "multiple.placeholders.string-int", p1)
   }
+  /// Plural case 'other': %@ has %d ratings
+  internal static func multiplePlaceholdersAndVariablesStringInt(_ p1: Any, _ p2: Int) -> String {
+    return L10n.tr("LocPluralAdvanced", "multiple.placeholders-and-variables.string-int", String(describing: p1), p2)
+  }
   /// Plural case 'other': %d files remaining (%d bytes, %d minutes)
   internal static func multipleVariablesThreeVariablesInFormatkey(_ p1: Int, _ p2: Int, _ p3: Int) -> String {
     return L10n.tr("LocPluralAdvanced", "multiple.variables.three-variables-in-formatkey", p1, p2, p3)
