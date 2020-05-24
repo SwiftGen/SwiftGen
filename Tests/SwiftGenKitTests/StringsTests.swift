@@ -58,16 +58,32 @@ class StringsTests: XCTestCase {
 
   func testMultipleFilesDuplicate() throws {
     let parser = try Strings.Parser()
+    var receivedWarning: String?
+    parser.warningHandler = { message, _, _ -> Void in
+      receivedWarning = message
+    }
+    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
-    do {
-      try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
-      XCTFail("Code did parse file successfully while it was expected to fail for duplicate file")
-    } catch Strings.ParserError.duplicateTable {
-      // That's the expected exception we want to happen
-    } catch let error {
-      XCTFail("Unexpected error occured while parsing: \(error)")
-    }
+    let errorMessage = try XCTUnwrap(receivedWarning)
+    let expectedMessage = #"""
+    Table "Localizable" already loaded by other parser, the parser for [.strings] files cannot modify existing keys:
+    ObjectOwnership
+    alert__message
+    alert__title
+    apples.count
+    bananas.owner
+    percent
+    private
+    settings.navigation-bar.self
+    settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep
+    settings.navigation-bar.title.even.deeper
+    settings.user__profile_section.HEADER_TITLE
+    settings.user__profile_section.footer_text
+    types
+    """#
+
+    XCTAssertEqual(errorMessage, expectedMessage)
   }
 
   func testPlurals() throws {
@@ -97,8 +113,20 @@ class StringsTests: XCTestCase {
 
   func testSameTableWithPluralsParsingPluralsFirst() throws {
     let parser = try Strings.Parser()
+    var receivedWarning: String?
+    parser.warningHandler = { message, _, _ -> Void in
+      receivedWarning = message
+    }
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.stringsdict", sub: .strings))
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
+
+    let errorMessage = try XCTUnwrap(receivedWarning)
+    let expectedMessage = #"""
+    Table "Localizable" already loaded by other parser, the parser for [.strings] files cannot modify existing keys:
+    apples.count
+    """#
+
+    XCTAssertEqual(errorMessage, expectedMessage)
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "plurals-same-table-plurals-first", sub: .strings)
