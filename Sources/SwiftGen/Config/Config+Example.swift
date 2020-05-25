@@ -8,6 +8,9 @@ extension Config {
   static func example(versionForDocLink: String, commentAllLines: Bool = true) -> String {
     var content = exampleYAMLContent(version: versionForDocLink)
     if commentAllLines {
+      // Comment all lines, except empty lines.
+      //  - If a line already starts with a "#" and is already a comment, prefix with an additional "#" to make it "## Blah"
+      //  - Otherwise, if the line is just supposed to be actual YAML content, prefix it with "# "
       content = content
         .split(separator: "\n", omittingEmptySubsequences: false)
         .map { $0.isEmpty ? "" : $0.hasPrefix("#") ? "#\($0)" : "# \($0)" }
@@ -29,7 +32,7 @@ extension Config {
 
 
     # Generate constants for your localized strings.
-    #   Be sure that SwiftGen only parses ONE locale (typically Base.lproj) – otherwise it will generate the same keys multiple times.
+    #   Be sure that SwiftGen only parses ONE locale (typically Base.lproj, or en.lproj, or whichever your development region is); otherwise it will generate the same keys multiple times.
     #   SwiftGen will parse all `.strings` files found in that folder.
     strings:
       inputs:
@@ -41,6 +44,8 @@ extension Config {
 
     # Generate constants for your Assets Catalogs, including constants for images, colors, ARKit resources, etc.
     #   This example also shows how to provide additional parameters to your template to customise the output.
+    #   - Especially the `forceProvidesNamespaces: true` param forces to create sub-namespace for each folder/group used in your Asset Catalogs, even the ones without "Provides Namespace". Without this param, SwiftGen only generates sub-namespaces for folders/groups which have the "Provides Namespace" box checked in the Inspector pane.
+    #   - To know which params are supported for a template, use `swiftgen template doc xcassets swift5` to open the template documentation on GitHub.
     xcassets:
       inputs:
         - Main.xcassets
@@ -48,7 +53,7 @@ extension Config {
       outputs:
         - templateName: swift5
           params:
-            forceProvidesNamespaces: true # If you want a sub-namespace created for each folder/group used in your Asset Catalogs
+            forceProvidesNamespaces: true
           output: XCAssets+Generated.swift
 
 
