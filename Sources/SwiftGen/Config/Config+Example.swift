@@ -9,7 +9,7 @@ extension Config {
     var content = exampleYAMLContent(version: versionForDocLink)
     if commentAllLines {
       // Comment all lines, except empty lines.
-      //  - If a line already starts with a "#" and is already a comment, prefix with an additional "#" to make it "## Blah"
+      //  - If a line is already a comment (starts with "#"), prefix with additional "#" to make it "## Blah"
       //  - Otherwise, if the line is just supposed to be actual YAML content, prefix it with "# "
       content = content
         .split(separator: "\n", omittingEmptySubsequences: false)
