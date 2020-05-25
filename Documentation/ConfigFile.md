@@ -1,10 +1,17 @@
 # SwiftGen Configuration File
 
-In order to avoid invoking SwiftGen manually multiple times — one for each subcommand — and having to remember each arguments to pass every time, you can instead use a YAML configuration file to configure everything.
+SwiftGen expects you to have a `swiftgen.yml` configuration file at the root of your repository, to specify which files to parse, what template to use, and where to write the generated files.
 
-Simply create a YAML file named `swiftgen.yml` at the root of your repository with the structure described below, then just run `swiftgen` (without any argument).
+## Creating a Config file
 
-> For more options (using a different file, checking your config file for errors…), see further below.
+To create your configuration file, you can use the **`swiftgen config init`** command.
+
+This will create (and open) an example configuration file that you can use for inspiration, with some typical entries commented out. All you have to do is to then uncomment the parts of the config that you need, adapt them to your project, and/or copy&paste the examples to add configuration for additional parsers.
+
+You can of course also create the `swiftgen.yml` configuration file manually from scratch, using the text editor of your choice. The file is just regular a YAML _(note: JSON, being a subset of YAML, is also supported)_
+
+
+For more options (like using a file at another path or with another name, checking your config file for errors, …), see further below.
 
 ## Configuration File Format
 
@@ -65,17 +72,17 @@ Each key corresponding to a SwiftGen subcommands (`colors`, `coredata`, `fonts`,
 
 | Subkey | Type | Description |
 |--------|------|-------------|
-| `inputs` | Path or Array of Paths | The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `Localizable.strings` file for the `strings` command, etc). |
+| `inputs` | Path or Array of Paths | The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `.lproj` or `Localizable.strings` file for the `strings` command, etc). |
 | `options` | Dictionary | Any optional list of settings for the parser, to change its behaviour. See the commands' specific documentation for available options. |
-| `filter` | Regular Expression | The regular expression to apply to each input path, only paths matching the given filter will be used. Filters are applied to actual (relative) paths, not just the filename. Note that each command has a default built-in filter, which you can override with this option. |
+| `filter` | Regular Expression | The regular expression to apply to each input path; only paths matching the given filter will be used. Filters are applied to actual (relative) paths, not just the filename. Note that each command has a default built-in filter (based on expected file extensions), so you generally don't need to specify that subkey in your config file; but it is useful if you want to override it with a custom filter. |
 | `outputs` | Array | A list of output descriptions, composed of a template and a file output. |
-| `paths` | Path or Array of Paths | **Deprecated** The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `Localizable.strings` file for the `strings` command, etc). |
-| `templateName` | String | **Deprecated** The name of the template to use. If you provide a value for this, you shouldn't also provide a value for `templatePath`. |
-| `templatePath` | Path | **Deprecated** The path to the template to use. If you provide a value for this, you shouldn't also provide a value for `templateName`. |
-| `output` | Path | **Deprecated** The path of the output file to generate. _(Note: Any intermediate directory up to this file must already exist.)_ |
-| `params` | Dictionary | **Deprecated** Any optional parameter you want to pass to the template (similarly to `--param` in the CLI). |
+| ~~`paths`~~ | Path or Array of Paths | **Deprecated** ~~The file(s)/dir(s) to parse (e.g. the path to your assets catalog for the `xcassets` command, or your `Localizable.strings` file for the `strings` command, etc).~~ |
+| ~~`templateName`~~ | String | **Deprecated** ~~The name of the template to use. If you provide a value for this, you shouldn't also provide a value for `templatePath`.~~ |
+| ~~`templatePath`~~ | Path | **Deprecated** ~~The path to the template to use. If you provide a value for this, you shouldn't also provide a value for `templateName`.~~ |
+| ~~`output`~~ | Path | **Deprecated** ~~The path of the output file to generate. _(Note: Any intermediate directory up to this file must already exist.)_~~ |
+| ~~`params`~~ | Dictionary | **Deprecated** ~~Any optional parameter you want to pass to the template (similarly to `--param` in the CLI).~~ |
 
-> 💡 Note: For custom filters, use `.+` to match multiple characters (at least one), and don't forget to escape the dot (`\.`) if you want to match a literal dot like for an extension. Add `$` at the end to ensure the path ends with the extension you want. Regular expressions will be case sensitive by default, and not anchored to the start/end of a path. For example, use `.+\.xib$` to match files with a `.xib` extension. Use a tool such as [RegExr](https://regexr.com) to ensure you're using a valid regular expression.
+> 💡 Tip: For custom file filters, use `.+` to match multiple characters (at least one), and don't forget to escape the dot (`\.`) if you want to match a literal dot like for an extension. Add `$` at the end to ensure the path ends with the extension you want. Regular expressions will be case sensitive by default, and not anchored to the start/end of a path. For example, use `.+\.xib$` to match files with a `.xib` extension. Use a tool such as [RegExr](https://regexr.com) to ensure you're using a valid regular expression.
 
 The `outputs` parameter accepts either a dictionary, or an array of dictionaries, with the keys described below. Each such "output" will take the input files, and use the output template to generate a file at the given output path. This allows you to generate multiple outputs for the same input files (which will only be parsed once).
 
@@ -84,9 +91,9 @@ The `outputs` parameter accepts either a dictionary, or an array of dictionaries
 | `templateName` | String | The name of the template to use. If you provide a value for this, you shouldn't also provide a value for `templatePath`. |
 | `templatePath` | Path | The path to the template to use. If you provide a value for this, you shouldn't also provide a value for `templateName`. |
 | `output` | Path | The path of the output file to generate. _(Note: Any intermediate directory up to this file must already exist.)_ |
-| `params` | Dictionary | Any optional parameter you want to pass to the template (similarly to `--param` in the CLI). |
+| `params` | Dictionary | Any optional parameter you want to pass to the template. See the template documentation in GitHub (or using `swiftgen template doc` command) to know the list of available params each template supports. |
 
-Similarly to when you invoke each subcommand of SwiftGen manually:
+Note that:
 
 * `inputs` and `outputs` are mandatory.
 * You must specify either `templateName` or `templatePath`, but not both, nor neither.
@@ -116,6 +123,12 @@ If you need more control when using a configuration file, you can use some advan
 
   ```sh
   swiftgen config run --config tools/swiftgen/swiftgen-config.yml
+  ```
+
+* When you want to create a new config file, you can also provide an alternate path where to create the file with a similar `--config` flag.
+
+  ```sh
+  swiftgen config init --config tools/swiftgen/swiftgen-config.yml
   ```
   
 * Enable the verbose mode, which will print every command being executed when executing it, using the `--verbose` flag. This allows your to:
