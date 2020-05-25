@@ -42,9 +42,9 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 {
     return tr(@"LocPluralAdvanced", @"nested.formatkey-in-variable", p1, p2, p3);
 }
-+ (NSString*)nestedFormatkeyInVariableDeepWithValues:(NSInteger)p1 :(NSInteger)p2 :(NSInteger)p3
++ (NSString*)nestedFormatkeyInVariableDeepWithValues:(NSInteger)p1 :(NSInteger)p2 :(NSInteger)p3 :(NSInteger)p4 :(NSInteger)p5
 {
-    return tr(@"LocPluralAdvanced", @"nested.formatkey-in-variable-deep", p1, p2, p3);
+    return tr(@"LocPluralAdvanced", @"nested.formatkey-in-variable-deep", p1, p2, p3, p4, p5);
 }
 @end
 

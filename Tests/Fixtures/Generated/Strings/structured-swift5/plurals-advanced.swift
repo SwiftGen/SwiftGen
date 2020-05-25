@@ -37,9 +37,9 @@ internal enum L10n {
     internal static func formatkeyInVariable(_ p1: Int, _ p2: Int, _ p3: Int) -> String {
       return L10n.tr("LocPluralAdvanced", "nested.formatkey-in-variable", p1, p2, p3)
     }
-    /// Plural case 'other': %1$d first levels have %2$d second levels and %3$#@third_level@
-    internal static func formatkeyInVariableDeep(_ p1: Int, _ p2: Int, _ p3: Int) -> String {
-      return L10n.tr("LocPluralAdvanced", "nested.formatkey-in-variable-deep", p1, p2, p3)
+    /// Plural case 'other': %1$d first levels have %2$d second levels and have %3$d third levels
+    internal static func formatkeyInVariableDeep(_ p1: Int, _ p2: Int, _ p3: Int, _ p4: Int, _ p5: Int) -> String {
+      return L10n.tr("LocPluralAdvanced", "nested.formatkey-in-variable-deep", p1, p2, p3, p4, p5)
     }
   }
 }

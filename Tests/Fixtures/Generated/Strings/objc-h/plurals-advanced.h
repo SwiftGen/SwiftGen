@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)multipleVariablesThreeVariablesInFormatkeyWithValues:(NSInteger)p1 :(NSInteger)p2 :(NSInteger)p3;
 // nested.formatkey-in-variable --> "Plural case 'other': %1$d geese landed on their %3$d fields"
 + (NSString*)nestedFormatkeyInVariableWithValues:(NSInteger)p1 :(NSInteger)p2 :(NSInteger)p3;
-// nested.formatkey-in-variable-deep --> "Plural case 'other': %1$d first levels have %2$d second levels and %3$#@third_level@"
-+ (NSString*)nestedFormatkeyInVariableDeepWithValues:(NSInteger)p1 :(NSInteger)p2 :(NSInteger)p3;
+// nested.formatkey-in-variable-deep --> "Plural case 'other': %1$d first levels have %2$d second levels and have %3$d third levels"
++ (NSString*)nestedFormatkeyInVariableDeepWithValues:(NSInteger)p1 :(NSInteger)p2 :(NSInteger)p3 :(NSInteger)p4 :(NSInteger)p5;
 @end
 
 

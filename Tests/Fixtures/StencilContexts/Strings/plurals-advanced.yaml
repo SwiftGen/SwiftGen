@@ -39,8 +39,10 @@ tables:
       - key: "nested.formatkey-in-variable-deep"
         name: "formatkey-in-variable-deep"
         translation: "Plural case 'other': %1$d first levels have %2$d second levels
-          and %3$#@third_level@"
+          and have %3$d third levels"
         types:
+        - "Int"
+        - "Int"
         - "Int"
         - "Int"
         - "Int"

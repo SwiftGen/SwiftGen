@@ -109,7 +109,7 @@
                 <key>one</key>
                 <string>has one second level and %3$#@third_level@</string>
                 <key>other</key>
-                <string>has %2$d second levels and %3$#@third_level@</string>
+                <string>has %2$d second levels and %3$#@third_levels@</string>
             </dict>
             <key>second_levels</key>
             <dict>
@@ -120,7 +120,7 @@
                 <key>one</key>
                 <string>have one second level and %3$#@third_level@</string>
                 <key>other</key>
-                <string>have %2$d second levels and %3$#@third_level@</string>
+                <string>have %2$d second levels and %3$#@third_levels@</string>
             </dict>
             <key>third_level</key>
             <dict>

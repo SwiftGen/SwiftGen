@@ -96,7 +96,7 @@ extension StringsDict: Decodable {
     case (.none, .none), (.some, .some):
       throw Strings.ParserError.invalidFormat
     case let (.some(formatKey), .none):
-      let variables = try StringsDict.decodeVariableRules(in: container, formatKey: formatKey)
+      let variables = StringsDict.decodeVariableRules(in: container, formatKey: formatKey)
       self = .pluralEntry(PluralEntry(formatKey: formatKey, variables: variables))
     case let (.none, .some(variableWidthRules)):
       self = .variableWidthEntry(VariableWidthEntry(rules: variableWidthRules))
@@ -106,49 +106,57 @@ extension StringsDict: Decodable {
   private static func decodeVariableRules(
     in container: KeyedDecodingContainer<StringsDict.CodingKeys>,
     formatKey: String
-  ) throws -> [String: PluralEntry.VariableRule] {
+  ) -> [String: PluralEntry.VariableRule] {
+    guard let variableKeyTuples = StringsDict.variableKeysFromFormatKey(formatKey) else { return [:] }
     var variables = [String: PluralEntry.VariableRule]()
 
-    for variableKey in try StringsDict.variableKeysFromFormatKey(formatKey) {
-      let variable = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableKey))
+    var childFormatStrings = [String]()
+    for variableKey in variableKeyTuples.map({ $0.key }) {
+      guard let variable = try? container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableKey)) else { continue }
       variables[variableKey] = variable
 
-      // Nested FormatKey in Variable. Check if one of the strings (zero, one, ...) contains format keys,
-      // decode them and add them to `variables`
-      let childVariableKeys = Set(try variable.formatStrings.flatMap { try StringsDict.variableKeysFromFormatKey($0) })
-      for variableKey in Array(childVariableKeys) {
-        variables[variableKey] = try container.decode(
-          PluralEntry.VariableRule.self,
-          forKey: CodingKeys(key: variableKey)
-        )
-      }
+      childFormatStrings.append(contentsOf: variable.formatStrings)
     }
-    return variables
+
+    if childFormatStrings.isEmpty {
+      return variables
+    } else {
+      // Execute decodeVariableRules recursively on the formatStrings of the decoded variables to capture variable keys
+      // that are nested in one of the strings (zero, one, ...).
+      return variables.merging(StringsDict.decodeVariableRules(in: container, formatKey: childFormatStrings.joined(separator: " ")), uniquingKeysWith: { existing, _ in existing })
+    }
   }
 }
 
 // - MARK: Helpers
 
 extension StringsDict {
-  /// Parses a format string and returns an array of discovered variable keys.
+  /// Parses variable keys and their ranges from a formatKey.
   /// Every variable key that is contained within the format string is preceded
-  /// by the %#@ characters and followed by the @ character.
-  private static func variableKeysFromFormatKey(_ formatKey: String) throws -> [String] {
-    let pattern = #"%(?>\d\$)?#@([\w\.\p{Pd}]+)@"#
-    let regex = try NSRegularExpression(pattern: pattern, options: [])
+  /// by the %#@ characters or by the positional variants, e.g. %1$#@, and followed by the @ character.
+  ///
+  /// - Parameter formatKey: The formatKey from which the variable keys should be parsed.
+  /// - Returns: An array of discovered variable keys and their range within the `formatKey`.
+  private static func variableKeysFromFormatKey(_ formatKey: String) -> [(key: String, range: Range<String.Index>)]? {
+    let pattern = #"(%(?>\d\$)?#@([\w\.\p{Pd}]+)@)"#
+    guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
     let nsrange = NSRange(formatKey.startIndex..<formatKey.endIndex, in: formatKey)
     let matches = regex.matches(in: formatKey, options: [], range: nsrange)
 
-    return matches.compactMap { match -> String? in
-      let captureGroupRange = match.range(at: 1)
+    return matches.compactMap { match -> (String, Range<String.Index>)? in
+      let rangeNSRange = match.range(at: 1)
+      let keyNSRange = match.range(at: 2)
+
       guard
-        captureGroupRange.location != NSNotFound,
-        let range = Range(captureGroupRange, in: formatKey)
+        rangeNSRange.location != NSNotFound,
+        keyNSRange.location != NSNotFound,
+        let rangeRange = Range(rangeNSRange, in: formatKey),
+        let keyRange = Range(keyNSRange, in: formatKey)
       else {
         return nil
       }
 
-      return String(formatKey[range])
+      return (String(formatKey[keyRange]), rangeRange)
     }
   }
 }
@@ -173,41 +181,14 @@ extension StringsDict.PluralEntry {
   /// - Returns: The format key in which all its variable keys are replaced with the content of the `other` translation,
   ///  if the `formatKey` contained any variable keys, `nil` otherwise.
   private func unfurlVariableKeysInFormatKey(_ formatKey: String) -> String? {
-    guard
-      let remainingVariableKeys = try? StringsDict.variableKeysFromFormatKey(formatKey),
-      !remainingVariableKeys.isEmpty
-    else {
+    guard let firstRemainingVariableKey = StringsDict.variableKeysFromFormatKey(formatKey)?.first else {
       return nil
     }
-    var unfurledFormatKey = formatKey
 
-    for key in remainingVariableKeys {
-      guard let variable = variables[key] else { return nil }
-      let regexEscapedKey = NSRegularExpression.escapedPattern(for: key)
-      let pattern = #"(%(?>\d\$)?#@\#(regexEscapedKey)@)"#
+    let (key, range) = firstRemainingVariableKey
+    guard let variable = variables[key] else { return nil }
 
-      guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
-      let nsrange = NSRange(unfurledFormatKey.startIndex..<unfurledFormatKey.endIndex, in: unfurledFormatKey)
-      let matches = regex.matches(in: unfurledFormatKey, options: [], range: nsrange)
-      let keyRanges = matches
-        .compactMap { match -> Range<String.Index>? in
-          let captureGroupRange = match.range(at: 1)
-          guard
-            captureGroupRange.location != NSNotFound,
-            let range = Range(captureGroupRange, in: unfurledFormatKey)
-          else {
-            return nil
-          }
-
-          return range
-        }
-
-      keyRanges.forEach { keyRange in
-        unfurledFormatKey.replaceSubrange(keyRange, with: variable.other)
-      }
-    }
-
-    return unfurledFormatKey
+    return formatKey.replacingCharacters(in: range, with: variable.other)
   }
 }
 
