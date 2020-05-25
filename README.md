@@ -1,10 +1,10 @@
 # SwiftGen
 
-[![CircleCI](https://circleci.com/gh/SwiftGen/SwiftGen/tree/master.svg?style=svg)](https://circleci.com/gh/SwiftGen/SwiftGen/tree/master)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftGen.svg)](https://img.shields.io/cocoapods/v/SwiftGen.svg)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftGen.svg?style=flat)](http://cocoadocs.org/docsets/SwiftGen)
+![Swift 4.x](https://img.shields.io/badge/Swift-4.x-orange) ![Swift 5.x](https://img.shields.io/badge/Swift-5.x-orange)
 
-SwiftGen is a tool to auto-generate Swift code for resources of your projects, to make them type-safe to use.
+SwiftGen is a tool to automatically generate Swift code for resources of your projects (like images, localised strings, etc), to make them type-safe to use.
 
 <table border="0"><tr>
   <td>
@@ -34,10 +34,10 @@ SwiftGen is a tool to auto-generate Swift code for resources of your projects, t
 
 There are multiple benefits in using this:
 
-* Avoid any typo you could have when using a String
+* Avoid any risk of typo when using a String
 * Free auto-completion
 * Avoid the risk of using a non-existing asset name
-* All this will be ensured by the compiler.
+* All this will be ensured by the compiler and thus avoid the risk of crashing at runtime.
 
 Also, it's fully customizable thanks to Stencil templates, so even if it comes with predefined templates, you can make your own to generate whatever code fits your needs and your guidelines!
 
@@ -83,7 +83,7 @@ fi
 
 > Similarly, be sure to use `Pods/SwiftGen/bin/swiftgen` instead of just `swiftgen` where we mention commands with `swiftgen` in the rest of the documentation.
 
-_Note: SwiftGen isn't really a pod, as it's not a library your code will depend on at runtime; so the installation via CocoaPods is just a trick that installs the SwiftGen binaries in the Pods/ folder, but you won't see any swift files in the Pods/SwiftGen group in your Xcode's Pods.xcodeproj. That's normal: the SwiftGen binary is still present in that folder in the Finder._
+_Note: SwiftGen isn't really a pod, as it's not a library your code will depend on at runtime; so the installation via CocoaPods is just a trick that installs the SwiftGen binaries in the Pods/ folder, but you won't see any swift files in the Pods/SwiftGen group in your Xcode's Pods.xcodeproj. That's normal; the SwiftGen binary is still present in that folder in the Finder._
 
 ---
 </details>
@@ -104,8 +104,6 @@ You can then invoke `swiftgen` directly in your Script Build Phase (as it will b
 ```sh
 swiftgen … 
 ```
-
-_Note: SwiftGen needs Xcode 8.3 to build, so installing via Homebrew requires you to have Xcode 8.3 installed (which in turn requires macOS 10.12). If you use an earlier version of macOS, you'll have to use one of the other installation methods instead._
 
 ---
 </details>
@@ -174,34 +172,38 @@ Or add the path to the `bin` folder to your `$PATH` and invoke `swiftgen` direct
 
 SwiftGen is provided as a single command-line tool which uses a configuration file to run various actions (subcommands).
 
+To create a sample configuration file as a starting point to adapt to your needs, run `swiftgen config init`.
+
 Each action described in the [configuration file](Documentation/ConfigFile.md) (`strings`, `fonts`, `ib`, …) typically corresponds to a type of input resources to parse (strings files, IB files, Font files, JSON files, …), allowing you to generate constants for each types of those input files.
 
-To use SwiftGen, simply create a `swiftgen.yml` YAML file to list all the subcommands to invoke, and for each subcommand, the list of arguments to pass to it. For example:
+To use SwiftGen, simply create a `swiftgen.yml` YAML file (either manually or using `swiftgen config init`) then edit it to adapt to your project. The config file should list all the subcommands to invoke, and for each subcommand, the list of inputs/outputs/templates/parameters to use for it.
+
+For example:
 
 ```yaml
 strings:
   inputs: Resources/Base.lproj
-  filter: .+\.strings$
   outputs:
     - templateName: structured-swift5
-      output: Generated/strings.swift
+      output: Generated/Strings.swift
 xcassets:
   inputs:
     - Resources/Images.xcassets
     - Resources/MoreImages.xcassets
+    - Resources/Colors.xcassets
   outputs:
     - templateName: swift5
-      output: Generated/assets-images.swift
+      output: Generated/Assets.swift
 ```
 
-Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for short, and it will execute what's described in the configuration file
+Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for short, and it will execute what's described in the configuration file.
 
-[The dedicated documentation](Documentation/ConfigFile.md) explains the syntax and possibilities in details – like how to pass custom parameters, use `swiftgen config lint` to validate it, how to use alternate config files, and other tips.
+[The dedicated documentation](Documentation/ConfigFile.md) explains the syntax and possibilities in details – like how to pass custom parameters to your templates, use `swiftgen config lint` to validate your config file, how to use alternate config files, and other tips.
 
 There are also additional subcommands you can invoke from the command line to manage and configure SwiftGen:
 
-* The  `swiftgen config` subcommand to help you with the configuration file, especially `swiftgen config lint` to validate that your Config file is valid and has no errors
-* The `swiftgen templates` subcommands helps you print, duplicate, find and manage templates (both bundled and custom)
+* The `swiftgen config` subcommand to help you with the configuration file, especially `swiftgen config init` to create a starting point for your config and `swiftgen config lint` to validate that your Config file is valid and has no errors
+* The `swiftgen templates` subcommands to help you print, duplicate, find and manage templates (both bundled and custom)
 
 Lastly, you can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
 
@@ -353,6 +355,9 @@ let paintings = Asset.Targets.paintings.referenceImages
 ```
 
 ## Colors
+
+> ❗️ We recommend to define your colors in your Assets Catalogs and use the `xcassets` parser (see above) to generate color constants, instead of using this `colors` parser described below.  
+> The `colors` parser below is mainly useful if you support older versions of iOS where colors can't be defined in Asset Catalogs, or if you want to use Android's `colors.xml` files as input.
 
 ```yaml
 colors:
