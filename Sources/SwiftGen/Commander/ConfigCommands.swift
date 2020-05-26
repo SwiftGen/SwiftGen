@@ -4,6 +4,7 @@
 // MIT Licence
 //
 
+import AppKit
 import Commander
 import PathKit
 import StencilSwiftKit
@@ -77,19 +78,21 @@ extension ConfigEntry {
 
 enum ConfigCLI {
   private enum CLIOption {
-    static let config = Option<Path>(
-      "config",
-      default: "swiftgen.yml",
-      flag: "c",
-      description: "Path to the configuration file to use",
-      validator: checkPath(type: "config file") { $0.isFile }
-    )
+    static func configFile(checkExists: Bool = true) -> Option<Path> {
+      Option<Path>(
+        "config",
+        default: "swiftgen.yml",
+        flag: "c",
+        description: "Path to the configuration file to use",
+        validator: checkExists ? checkPath(type: "config file") { $0.isFile } : nil
+      )
+    }
   }
 
   // MARK: Lint
 
   static let lint = command(
-    CLIOption.config
+    CLIOption.configFile()
   ) { file in
     try ErrorPrettifier.execute {
       logMessage(.info, "Linting \(file)")
@@ -101,7 +104,7 @@ enum ConfigCLI {
   // MARK: Run
 
   static let run = command(
-    CLIOption.config,
+    CLIOption.configFile(),
     Flag("verbose", default: false, flag: "v", description: "Print each command being executed")
   ) { file, verbose in
     do {
@@ -131,5 +134,31 @@ enum ConfigCLI {
         """
       )
     }
+  }
+
+  // MARK: Init/Create
+
+  static let create = command(
+    CLIOption.configFile(checkExists: false),
+    Flag("open", default: true, description: "Open the configuration file for editing immediately after its creation")
+  ) { file, shouldOpen in
+    guard !file.exists else {
+      logMessage(.error, "The configuration file \(file) already exists")
+      return
+    }
+    try ErrorPrettifier.execute {
+      let content = Config.example(versionForDocLink: Version.swiftgen, commentAllLines: true)
+      try file.write(content)
+      logMessage(.info, "Example configuration file created: \(file)")
+      if shouldOpen {
+        NSWorkspace.shared.open(file.url)
+      }
+    }
+  }
+
+  static let doc = command {
+    let docURL = gitHubDocURL(version: Version.swiftgen, path: "ConfigFile.md")
+    logMessage(.info, "Open documentation at: \(docURL)")
+    NSWorkspace.shared.open(docURL)
   }
 }
