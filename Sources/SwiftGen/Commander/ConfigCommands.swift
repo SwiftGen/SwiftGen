@@ -140,7 +140,7 @@ enum ConfigCLI {
 
   static let create = command(
     CLIOption.configFile(checkExists: false),
-    Flag("open", default: true, description: "Open the configuration file for edition immediately after its creation")
+    Flag("open", default: true, description: "Open the configuration file for editing immediately after its creation")
   ) { file, shouldOpen in
     guard !file.exists else {
       logMessage(.error, "The configuration file \(file) already exists")
