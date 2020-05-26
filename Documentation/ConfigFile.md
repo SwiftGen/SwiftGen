@@ -8,7 +8,7 @@ To create your configuration file, you can use the **`swiftgen config init`** co
 
 This will create (and open) an example configuration file that you can use for inspiration, with some typical entries commented out. All you have to do is to then uncomment the parts of the config that you need, adapt them to your project, and/or copy&paste the examples to add configuration for additional parsers.
 
-You can of course also create the `swiftgen.yml` configuration file manually from scratch, using the text editor of your choice. The file is just regular a YAML _(note: JSON, being a subset of YAML, is also supported)_
+You can of course also create the `swiftgen.yml` configuration file manually from scratch, using the text editor of your choice. The file just has to be in YAML format _(note: JSON, being a subset of YAML, is also supported)_ and provide the keys described below.
 
 
 For more options (like using a file at another path or with another name, checking your config file for errors, …), see further below.
