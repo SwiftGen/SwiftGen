@@ -91,7 +91,7 @@ The `outputs` parameter accepts either a dictionary, or an array of dictionaries
 | `templateName` | String | The name of the template to use. If you provide a value for this, you shouldn't also provide a value for `templatePath`. |
 | `templatePath` | Path | The path to the template to use. If you provide a value for this, you shouldn't also provide a value for `templateName`. |
 | `output` | Path | The path of the output file to generate. _(Note: Any intermediate directory up to this file must already exist.)_ |
-| `params` | Dictionary | Any optional parameter you want to pass to the template. See the template documentation in GitHub (or using `swiftgen template doc` command) to know the list of available params each template supports. |
+| `params` | Dictionary | Any optional parameter you want to pass to the template. See the template documentation in GitHub (or using `swiftgen template doc` command) for the list of available params each template supports. |
 
 Note that:
 
