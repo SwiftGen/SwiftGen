@@ -99,7 +99,7 @@ class ConfigLintTests: XCTestCase {
     let errorMsg = """
       You must specify a template by name (templateName) or path (templatePath).
 
-      To list all the available named templates, use 'swiftgen templates list'.
+      To list all the available named templates, use 'swiftgen template list'.
       """
     _testLint(
       fixture: "config-missing-template",
@@ -170,7 +170,7 @@ class ConfigLintTests: XCTestCase {
         (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Images.xcassets"))"),
         (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Images.xcassets"))"),
         (.error, """
-          xcassets.outputs: Template named custom-swift5 not found. Use `swiftgen templates list` \
+          xcassets.outputs: Template named custom-swift5 not found. Use `swiftgen template list` \
           to list available named templates or use `templatePath` to specify a template by its \
           full path.
           """),

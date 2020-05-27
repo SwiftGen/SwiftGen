@@ -13,6 +13,13 @@
 * XCAssets: the `colorAliasName` and `imageAliasName` template parameters are now deprecated and will be removed in the next major release.  
   [David Jennes](https://github.com/djbe)
   [#614](https://github.com/SwiftGen/SwiftGen/pull/614)
+  
+### Deprecations
+
+* The subcommand `swiftgen templates` has been renamed `swiftgen template` (singular); the plural form of the command has been deprecated and will be removed in next major version.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#697](https://github.com/SwiftGen/SwiftGen/pull/697)
+
 
 ### New Features
 

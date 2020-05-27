@@ -50,7 +50,7 @@ extension ParserCLI {
       flag: "n",
       description: """
         The name of the template to use for code generation. \
-        See `swiftgen templates list` for a list of available names
+        See `swiftgen template list` for a list of available names
         """
     )
 

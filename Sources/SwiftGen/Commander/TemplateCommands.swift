@@ -7,7 +7,7 @@
 import Commander
 import PathKit
 
-enum TemplatesCLI {
+enum TemplateCLI {
   static let list = command(
     Option<String>(
       "only",
@@ -48,7 +48,7 @@ enum TemplatesCLI {
 
 // MARK: Private Methods
 
-private extension TemplatesCLI {
+private extension TemplateCLI {
   static func templates(in path: Path) -> [Path] {
     guard let files = try? path.children() else { return [] }
     return files

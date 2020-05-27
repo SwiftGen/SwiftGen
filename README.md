@@ -203,7 +203,7 @@ Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for 
 There are also additional subcommands you can invoke from the command line to manage and configure SwiftGen:
 
 * The `swiftgen config` subcommand to help you with the configuration file, especially `swiftgen config init` to create a starting point for your config and `swiftgen config lint` to validate that your Config file is valid and has no errors
-* The `swiftgen templates` subcommands to help you print, duplicate, find and manage templates (both bundled and custom)
+* The `swiftgen template` subcommands to help you print, duplicate, find and manage templates (both bundled and custom)
 
 Lastly, you can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
 
@@ -245,19 +245,20 @@ SwiftGen is based on templates (it uses [Stencil](https://github.com/kylef/Stenc
 
 SwiftGen comes bundled with some templates for each of the parsers (`colors`, `coredata`, `fonts`, `ib`, `json`, `plist`, `strings`, `xcassets`, `yaml`), which will fit most needs; simply use the `templateName` output option to specify the name of the template to use. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs: just store them anywhere (like in your project repository) and use the `templatePath` output option instead of `templateName`, to specify their path.
 
-💡 You can use the `swiftgen templates list` command to list all the available templates (both custom and bundled templates) for each subcommand, and use `swiftgen templates cat` to show a template's content and duplicate it to create your own variation.
+💡 You can use the `swiftgen template list` command to list all the available templates (both custom and bundled templates) for each parser, and use `swiftgen template cat` to show a template's content and duplicate it to create your own variation.
 
 For more information about how to create your own templates, [see the dedicated documentation](Documentation/Creating-your-templates.md).
 
 ### Templates bundled with SwiftGen:
 
-As explained above, you can use `swiftgen templates list` to list all templates bundled with SwiftGen. For most SwiftGen subcommands, we provide, among others:
+As explained above, you can use `swiftgen template list` to list all templates bundled with SwiftGen. For most SwiftGen parsers, we provide, among others:
 
 * A `swift4` template, compatible with Swift 4
 * A `swift5` template, compatible with Swift 5
 * Other variants, like `flat-swift4/5` and `structured-swift4/5` templates for Strings, etc.
 
-You can **find the documentation for each bundled template [here in the repo](Documentation/templates)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
+You can **find the documentation for each bundled template [here in the repo](Documentation/templates)**, with documentation organized as one folder per SwiftGen parser, then one MarkDown file per template. You can also use `swiftgen template doc` to open that documentation page in your browser directly from your terminal.
+
 Each MarkDown file documents the Swift Version it's aimed for, the use case for that template (in which cases you might favor that template over others), the available parameters to customize it on invocation (using the `params:` key in your config file), and some code examples.
 
 > Don't hesitate to make PRs to share your improvements suggestions on the bundled templates 😉

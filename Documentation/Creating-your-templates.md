@@ -21,10 +21,10 @@ For example `templateName: foo` will search for a template named `foo.stencil` i
 
 ## List installed templates
 
-The `swiftgen templates list` command will list all the installed templates (as YAML output) for each subcommand, both for bundled templates and custom templates.
+The `swiftgen template list` command will list all the installed templates (as YAML output) for each parser, both for bundled templates and custom templates.
 
 ```bash
-$ swiftgen templates list
+$ swiftgen template list
 colors:
   custom:
   bundled:
@@ -95,12 +95,12 @@ storyboards:
 
 ## Printing a template, creating a new template
 
-You can use the `swiftgen templates cat <parser> <templatename>` command to print the template of that given name for that given parser to `stdout`. e.g. `swiftgen templates cat fonts swift5` will print to your terminal the template that would be used if you invoke `fonts` with `template: swift5`.
+You can use the `swiftgen template cat <parser> <templatename>` command to print the template of that given name for that given parser to `stdout`. e.g. `swiftgen template cat fonts swift5` will print to your terminal the template that would be used if you invoke `fonts` with `template: swift5`.
 
 You can use this feature to easily create a new template from an existing one.
 In particular, the easiest way to create your own templates is to:
 
-* duplicate an existing template by dumping it into a new file like this: `swiftgen templates cat fonts swift5 >my-custom-fonts-template.stencil`
+* duplicate an existing template by dumping it into a new file like this: `swiftgen template cat fonts swift5 >my-custom-fonts-template.stencil`
 * then edit the new `my-custom-fonts-template.stencil` file to make your modifications to that template
 * Once you've done this you can then simply use `templatePath: my-custom-fonts-template.stencil` in your configuration file to use you customized template!
 
