@@ -33,22 +33,21 @@ enum TemplateRef: Equatable {
   /// Returns the path of a template
   ///
   /// * If it's a `.path`, check that the path exists and return it (throws if it isn't an existing file)
-  /// * If it's a `.name`, search the named template in the folder `subcommand`
+  /// * If it's a `.name`, search the named template in the folder `parserName`
   ///   in the Application Support directory first, then in the bundled templates,
   ///   and returns the path if found (throws if none is found)
   ///
-  /// - Parameter subCmd: the folder to search for the template
-  ///                     typically the name of one of the SwiftGen subcommands
-  ///                     like `strings`, `colors`, etc
+  /// - Parameter parserName: The folder to search for the template.
+  ///                         Typically the name of one of the SwiftGen parsers like `strings`, `colors`, etc
   /// - Returns: The Path matching the template found
   /// - Throws: TemplateRef.Error
   ///
-  func resolvePath(forSubcommand subCmd: String) throws -> Path {
+  func resolvePath(forParser parser: ParserCLI) throws -> Path {
     switch self {
     case .name(let templateShortName):
-      var path = Path.appSupportTemplates + subCmd + "\(templateShortName).stencil"
+      var path = Path.appSupportTemplates + parser.templateFolder + "\(templateShortName).stencil"
       if !path.isFile {
-        path = Path.bundledTemplates + subCmd + "\(templateShortName).stencil"
+        path = Path.bundledTemplates + parser.templateFolder + "\(templateShortName).stencil"
       }
       guard path.isFile else {
         throw TemplateRef.Error.namedTemplateNotFound(name: templateShortName)

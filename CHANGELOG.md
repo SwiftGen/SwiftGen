@@ -511,7 +511,7 @@ Read the [SwiftGen 5.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 * Disable default value for named template option and ensure that there is a template option.  
   [Liquidsoul](https://github.com/liquidsoul)
   [#283](https://github.com/SwiftGen/SwiftGen/issues/283)
-* Templates are now grouped by subcommand on the filesystem. This is only important if you had custom templates in the `Application Support` directory. To migrate your templates, place them in a subfolder with the name of the subcommand, and remove the prefix of the template filename.  
+* Templates are now grouped by parser on the filesystem. This is only important if you had custom templates in the `Application Support` directory. To migrate your templates, place them in a subfolder with the name of the parser, and remove the prefix of the template filename.  
   [David Jennes](https://github.com/djbe)
   [#304](https://github.com/SwiftGen/SwiftGen/issues/304)
 * The `images` command has been renamed to `xcassets` to better reflect its functionality.  
@@ -810,7 +810,7 @@ Note: The next minor version will focus on bringing more documentation for all t
   * `swiftgen templates list` lists all the available templates
   * `swiftgen templates which <name>` prints the path to the template named `<name>`
   * `swiftgen templates cat <name>` prints the content to the template named `<name>`
-  * `<name>` here can be either a subcommand name like `colors` or a
+  * `<name>` here can be either a parser name like `colors` or a
     composed name `colors-rawValue` for a specific template.
 * Fix swift 3 renaming change in strings-swift3.stencil.  
   [Kilian Koeltzsch](https://github.com/kiliankoe)

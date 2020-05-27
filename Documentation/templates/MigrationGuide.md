@@ -34,7 +34,7 @@ The templates have been split up into separate templates for each specific funct
 | `swift3` | ➡️ `scenes-swift3`/`segues-swift3` | Split up into separate templates for the scenes and segues functionality |
 | `swift4` | ➡️ `scenes-swift4`/`segues-swift4` | Split up into separate templates for the scenes and segues functionality |
 
-⚠️ The `storybards` subcommand from SwiftGen 5.x has been renamed `ib` in SwiftGen 6.0, so be sure to put those templates in a `ib` subfolder and not an `storyboards` subfolder. Also be sure to read the paragraph in [the general Migration Guide](../MigrationGuide.md#commands-can-have-multiple-outputs) about how to generate multiple outputs (from multiple templates) for a single input (a single set of input IB files).
+⚠️ The `storybards` parser command from SwiftGen 5.x has been renamed `ib` in SwiftGen 6.0, so be sure to put those templates in a `ib` subfolder and not an `storyboards` subfolder. Also be sure to read the paragraph in [the general Migration Guide](../MigrationGuide.md#commands-can-have-multiple-outputs) about how to generate multiple outputs (from multiple templates) for a single input (a single set of input IB files).
 
 ### Strings
 
@@ -128,10 +128,10 @@ If you're moving from SwiftGen 4.x to SwiftGen 5.0, you'll need to be aware that
 
 The two general themes for this version are:
 
-- Templates now reside in the subfolder corresponding to their subcommand (`colors`, `fonts`, ...) instead of the filename being prefixed with it.
+- Templates now reside in the subfolder corresponding to their parser (`colors`, `fonts`, ...) instead of the filename being prefixed with it.
 - The `default` template doesn't exist anymore, templates now specify which swift version they support.
 
-Below is a list of renamed ("➡️") and removed ("❌") templates, grouped by subcommand. If your template hasn't been renamed or removed, you don't need to do anything ("✅"). You still might want to review the documentation for that template, as there might be new features you may be interested in.
+Below is a list of renamed ("➡️") and removed ("❌") templates, grouped by parser. If your template hasn't been renamed or removed, you don't need to do anything ("✅"). You still might want to review the documentation for that template, as there might be new features you may be interested in.
 
 ### Colors
 
@@ -158,7 +158,7 @@ Below is a list of renamed ("➡️") and removed ("❌") templates, grouped by 
 | `dot-syntax-swift3` | ➡️ `swift3` | |
 | `swift3` | ⚠️ `swift3` | Now integrates the recursive features of the previously named `dot-syntax-swift3` template |
 
-⚠️ The `images` subcommand from SwiftGen 4.x has been renamed `xcassets` in SwiftGen 5.0, so be sure to put those templates in a `xcassets` subfolder and not an `images` subfolder.
+⚠️ The `images` parser command from SwiftGen 4.x has been renamed `xcassets` in SwiftGen 5.0, so be sure to put those templates in a `xcassets` subfolder and not an `images` subfolder.
 
 ### Storyboards
 

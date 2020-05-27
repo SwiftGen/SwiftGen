@@ -13,17 +13,17 @@ enum TemplatesCLI {
       "only",
       default: "",
       flag: "l",
-      description: "If specified, only list templates valid for that specific subcommand",
+      description: "If specified, only list templates valid for that specific parser",
       validator: isSubcommandName
     ),
     OutputDestination.cliOption
-  ) { onlySubcommand, output in
+  ) { parserName, output in
     try ErrorPrettifier.execute {
-      let commandsList = onlySubcommand.isEmpty
+      let parsersList = parserName.isEmpty
         ? ParserCLI.allCommands
-        : [ParserCLI.command(named: onlySubcommand)].compactMap { $0 }
+        : [ParserCLI.command(named: parserName)].compactMap { $0 }
 
-      let lines = commandsList.map(templatesList(subcommand:))
+      let lines = parsersList.map(templatesFormattedList(parser:))
       try output.write(content: lines.joined(separator: "\n"))
       try output.write(
         content: """
@@ -49,20 +49,22 @@ enum TemplatesCLI {
 // MARK: Private Methods
 
 private extension TemplatesCLI {
-  static func templatesList(subcommand: ParserCLI) -> String {
-    func templates(in path: Path) -> [String] {
-      guard let files = try? path.children() else { return [] }
-      return files.lazy
-        .filter { $0.extension == "stencil" }
-        .sorted()
-        .map { "   - \($0.lastComponentWithoutExtension)" }
-    }
+  static func templates(in path: Path) -> [Path] {
+    guard let files = try? path.children() else { return [] }
+    return files
+      .filter { $0.extension == "stencil" }
+      .sorted()
+  }
 
-    var lines = ["\(subcommand.name):"]
+  static func templatesFormattedList(parser: ParserCLI) -> String {
+    func parserTemplates(in path: Path) -> [String] {
+      templates(in: path + parser.templateFolder).map { "   - \($0.lastComponentWithoutExtension)" }
+    }
+    var lines = ["\(parser.name):"]
     lines.append("  custom:")
-    lines.append(contentsOf: templates(in: Path.appSupportTemplates + subcommand.templateFolder))
+    lines.append(contentsOf: parserTemplates(in: Path.appSupportTemplates))
     lines.append("  bundled:")
-    lines.append(contentsOf: templates(in: Path.bundledTemplates + subcommand.templateFolder))
+    lines.append(contentsOf: parserTemplates(in: Path.bundledTemplates))
     return lines.joined(separator: "\n")
   }
 
@@ -75,19 +77,19 @@ private extension TemplatesCLI {
 
   // Defines a 'generic' command for doing an operation on a named template. It'll receive the following
   // arguments from the user:
-  // - 'subcommand'
+  // - 'parser'
   // - 'template'
   // These will then be converted into an actual template path, and passed to the result closure.
   static func pathCommandGenerator(execute: @escaping (Path, OutputDestination) throws -> Void) -> CommandType {
     command(
-      Argument<String>("subcommand", description: "the name of the subcommand for the template, like `colors`"),
+      Argument<String>("parser", description: "the name of the parser the template is for, like `xcassets`"),
       Argument<String>("template", description: "the name of the template to find, like `swift5` or `flat-swift5`"),
       OutputDestination.cliOption
-    ) { subcommandName, templateName, output in
+    ) { parserName, templateName, output in
       try ErrorPrettifier.execute {
-        guard let subcommand = ParserCLI.command(named: subcommandName) else { return }
+        guard let parser = ParserCLI.command(named: parserName) else { return }
         let template = TemplateRef.name(templateName)
-        let path = try template.resolvePath(forSubcommand: subcommand.templateFolder)
+        let path = try template.resolvePath(forParser: parser)
         try execute(path, output)
       }
     }

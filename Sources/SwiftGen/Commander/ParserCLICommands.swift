@@ -89,7 +89,7 @@ extension ParserCLI {
           templateShortName: resolvedTemplateName,
           templateFullPath: templatePath
         )
-        let templateRealPath = try templateRef.resolvePath(forSubcommand: self.templateFolder)
+        let templateRealPath = try templateRef.resolvePath(forParser: self)
 
         let template = try StencilSwiftTemplate(
           templateString: templateRealPath.read(),
