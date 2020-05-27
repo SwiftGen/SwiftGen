@@ -11,7 +11,7 @@ public extension JSON {
   struct File {
     let path: Path
     let name: String
-    let documents: [Any]
+    let document: Any
 
     init(path: Path, relativeTo parent: Path? = nil) throws {
       guard let data: Data = try? path.read() else {
@@ -22,8 +22,7 @@ public extension JSON {
       self.name = path.lastComponentWithoutExtension
 
       do {
-        let item = try JSONSerialization.jsonObject(with: data)
-        self.documents = [item]
+        self.document = try JSONSerialization.jsonObject(with: data)
       } catch let error {
         throw ParserError.invalidFile(path: path, reason: error.localizedDescription)
       }

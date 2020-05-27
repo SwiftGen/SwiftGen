@@ -26,7 +26,7 @@ extension JSON.Parser {
     [
       "name": file.name,
       "path": file.path.string,
-      "documents": file.documents.map(map(document:))
+      "documents": [map(document: file.document)]
     ]
   }
 
