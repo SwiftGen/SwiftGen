@@ -23,6 +23,8 @@ extension JSON.Parser {
   }
 
   private func map(file: JSON.File) -> [String: Any] {
+    // `documents` is an array for compability reasons with YAML and we'll be updated to be a single document in a
+    // future release
     [
       "name": file.name,
       "path": file.path.string,
