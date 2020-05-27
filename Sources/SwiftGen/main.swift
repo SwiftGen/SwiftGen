@@ -16,11 +16,15 @@ import SwiftGenKit
 // swiftlint:disable:next closure_body_length
 let main = Group {
   $0.noCommand = { path, group, parser in
-    if parser.hasOption("help") {
-      logMessage(.info, "Note: If you invoke swiftgen with no subcommand, it will default to `swiftgen config run`\n")
-      throw GroupError.noCommand(path, group)
-    } else {
+    if path == nil && !parser.hasOption("help") {
+      // `swiftgen` invoked with no subcommand AND no `--help` flag ==> run `swiftgen config run`
       try ConfigCLI.run.run(parser)
+    } else {
+      // invoked with either an incomplete subcommand (e.g. `swiftgen config`) OR with `--help` flag ==> show help
+      if path == nil { // no subcommand, so just `swiftgen --help`
+        logMessage(.info, "Note: If you invoke swiftgen with no subcommand, it will default to `swiftgen config run`\n")
+      }
+      throw GroupError.noCommand(path, group)
     }
   }
   $0.group("config", "manage and run configuration files") {
