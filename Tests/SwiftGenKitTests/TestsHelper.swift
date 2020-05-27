@@ -186,6 +186,7 @@ class Fixtures {
     case interfaceBuilder = "IB"
     case interfaceBuilderiOS = "IB-iOS"
     case interfaceBuilderMacOS = "IB-macOS"
+    case json = "JSON"
     case plist = "Plist"
     case plistBad = "Plist/bad"
     case plistGood = "Plist/good"

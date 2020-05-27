@@ -64,6 +64,7 @@
 		D4A93E27247E307400BE8651 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A93E26247E307400BE8651 /* JSONParser.swift */; };
 		D4A93E29247E307E00BE8651 /* JSONFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A93E28247E307E00BE8651 /* JSONFile.swift */; };
 		D4A93E2B247E313500BE8651 /* JSONContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A93E2A247E313500BE8651 /* JSONContext.swift */; };
+		D4A93E36247F29C700BE8651 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A93E35247F29C700BE8651 /* JSONTests.swift */; };
 		DD112CBA2141675900B11A5D /* InterfaceBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */; };
 		DD132AF321FE62C200A71960 /* FilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD132AF121FE628A00A71960 /* FilterTests.swift */; };
 		DD15F101213C3DDF00D081C7 /* YamsSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F100213C3DDF00D081C7 /* YamsSerialization.swift */; };
@@ -379,6 +380,7 @@
 		D4A93E26247E307400BE8651 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		D4A93E28247E307E00BE8651 /* JSONFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFile.swift; sourceTree = "<group>"; };
 		D4A93E2A247E313500BE8651 /* JSONContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONContext.swift; sourceTree = "<group>"; };
+		D4A93E35247F29C700BE8651 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		D662CF56C834C4E7CEA32364 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceBuilderTests.swift; sourceTree = "<group>"; };
 		DD132AF121FE628A00A71960 /* FilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTests.swift; sourceTree = "<group>"; };
@@ -896,6 +898,7 @@
 				DDDE51DB1FAF81B9004203BE /* FontsTests.swift */,
 				DDDE521E1FAF81BA004203BE /* InterfaceBuilderiOSTests.swift */,
 				DDDE521C1FAF81BA004203BE /* InterfaceBuilderMacOSTests.swift */,
+				D4A93E35247F29C700BE8651 /* JSONTests.swift */,
 				DDB0B9A5209CE7FC00E467C2 /* PlistTests.swift */,
 				DDDE51D91FAF81B9004203BE /* StringParserTests.swift */,
 				DDDE51DA1FAF81B9004203BE /* StringsTests.swift */,
@@ -1583,6 +1586,7 @@
 				DDDE523D1FAF81BA004203BE /* ColorsCLRFileTests.swift in Sources */,
 				DDB0B99F209CE4E100E467C2 /* YamlTests.swift in Sources */,
 				DDDE523F1FAF81BA004203BE /* ColorsXMLFileTests.swift in Sources */,
+				D4A93E36247F29C700BE8651 /* JSONTests.swift in Sources */,
 				DDDE523C1FAF81BA004203BE /* ColorsJSONFileTests.swift in Sources */,
 				DDDE52701FAF81BA004203BE /* ColorsTextFileTests.swift in Sources */,
 				DDDE523E1FAF81BA004203BE /* ColorsTests.swift in Sources */,
