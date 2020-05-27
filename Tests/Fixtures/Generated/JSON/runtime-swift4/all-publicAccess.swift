@@ -10,13 +10,6 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length type_body_length
 public enum JSONFiles {
-  public enum Configuration {
-    private static let _document = JSONDocument(path: "configuration.json")
-    public static let apiVersion: String = _document["api-version"]
-    public static let country: Any? = _document["country"]
-    public static let environment: String = _document["environment"]
-    public static let options: [String: Any] = _document["options"]
-  }
   public enum Documents {
     public enum Document1 {
       public static let items: [String] = objectFromJSON(at: "documents.yaml")

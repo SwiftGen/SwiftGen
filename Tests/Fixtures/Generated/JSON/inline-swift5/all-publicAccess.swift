@@ -10,12 +10,6 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 public enum JSONFiles {
-  public enum Configuration {
-    public static let apiVersion: String = "2"
-    public static let country: Any? = nil
-    public static let environment: String = "staging"
-    public static let options: [String: Any] = ["screen-order": ["1", "2", "3"]]
-  }
   public enum Documents {
     public enum Document1 {
       public static let items: [String] = ["Mark McGwire", "Sammy Sosa", "Ken Griffey"]
