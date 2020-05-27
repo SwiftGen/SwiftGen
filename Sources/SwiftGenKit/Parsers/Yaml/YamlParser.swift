@@ -22,7 +22,7 @@ public enum Yaml {
 
   // MARK: Yaml File Parser
 
-  public class Parser: SwiftGenKit.Parser {
+  public final class Parser: SwiftGenKit.Parser {
     private let options: ParserOptionValues
     var files: [File] = []
     public var warningHandler: Parser.MessageHandler?
@@ -32,9 +32,7 @@ public enum Yaml {
       self.warningHandler = warningHandler
     }
 
-    public class var defaultFilter: String {
-      "[^/]\\.(?i:ya?ml)$"
-    }
+    public static let defaultFilter = "[^/]\\.(?i:ya?ml)$"
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       files.append(try File(path: path, relativeTo: parent))

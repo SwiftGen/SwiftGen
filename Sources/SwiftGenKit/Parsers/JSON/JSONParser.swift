@@ -21,7 +21,7 @@ public enum JSON {
 
   // MARK: JSON File Parser
 
-  public class Parser: SwiftGenKit.Parser {
+  public final class Parser: SwiftGenKit.Parser {
     private let options: ParserOptionValues
     var files: [File] = []
     public var warningHandler: Parser.MessageHandler?
@@ -31,9 +31,7 @@ public enum JSON {
       self.warningHandler = warningHandler
     }
 
-    public class var defaultFilter: String {
-      "[^/]\\.(?i:json)$"
-    }
+    public static let defaultFilter = "[^/]\\.(?i:json)$"
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       files.append(try File(path: path, relativeTo: parent))
