@@ -4,24 +4,22 @@
 // MIT Licence
 //
 
+import AppKit
 import Commander
 import PathKit
 
 enum TemplateCLI {
   static let list = command(
-    Option<String>(
+    Option<ParserCLI?>(
       "only",
-      default: "",
+      default: nil,
       flag: "l",
-      description: "If specified, only list templates valid for that specific parser",
-      validator: isSubcommandName
+      description: "If specified, only list templates valid for that specific parser"
     ),
     OutputDestination.cliOption
-  ) { parserName, output in
+  ) { parser, output in
     try ErrorPrettifier.execute {
-      let parsersList = parserName.isEmpty
-        ? ParserCLI.allCommands
-        : [ParserCLI.command(named: parserName)].compactMap { $0 }
+      let parsersList = parser.map { [$0] } ?? ParserCLI.allCommands
 
       let lines = parsersList.map(templatesFormattedList(parser:))
       try output.write(content: lines.joined(separator: "\n"))
@@ -34,6 +32,33 @@ enum TemplateCLI {
           """
       )
     }
+  }
+
+  static let doc = command(
+    Argument<ParserCLI?>("parser", description: "the name of the parser the template is for, like `strings`"),
+    Argument<String?>("template", description: "the name of the template to find, like `swift5` or `flat-swift5`")
+  ) { parser, template in
+    var path = "templates/"
+    if let parser = parser {
+      path += "\(parser.name)/"
+
+      // If we also have a template argument, ensure that is one of the bundled templates for that parser
+      if let template = template {
+        let list = templates(in: Path.bundledTemplates + parser.templateFolder).map(\.lastComponentWithoutExtension)
+        guard list.contains(template) else {
+          throw ArgumentParserError(
+            """
+            If provided, the 2nd argument must be the name of a bundled template for the given parser, i.e. one of:
+            \(list.map { " - \($0)" }.joined(separator: "\n"))
+            """
+          )
+        }
+        path += "\(template).md"
+      }
+    }
+    let url = gitHubDocURL(version: Version.swiftgen, path: path)
+    logMessage(.info, "Opening documentation: \(url)")
+    NSWorkspace.shared.open(url)
   }
 
   static let cat = pathCommandGenerator { (path: Path, output: OutputDestination) in
@@ -68,13 +93,6 @@ private extension TemplateCLI {
     return lines.joined(separator: "\n")
   }
 
-  static func isSubcommandName(name: String) throws -> String {
-    guard ParserCLI.allCommands.contains(where: { $0.name == name }) else {
-      throw ArgumentError.invalidType(value: name, type: "subcommand", argument: "--only")
-    }
-    return name
-  }
-
   // Defines a 'generic' command for doing an operation on a named template. It'll receive the following
   // arguments from the user:
   // - 'parser'
@@ -82,16 +100,31 @@ private extension TemplateCLI {
   // These will then be converted into an actual template path, and passed to the result closure.
   static func pathCommandGenerator(execute: @escaping (Path, OutputDestination) throws -> Void) -> CommandType {
     command(
-      Argument<String>("parser", description: "the name of the parser the template is for, like `xcassets`"),
+      Argument<ParserCLI>("parser", description: "the name of the parser the template is for, like `xcassets`"),
       Argument<String>("template", description: "the name of the template to find, like `swift5` or `flat-swift5`"),
       OutputDestination.cliOption
-    ) { parserName, templateName, output in
+    ) { parser, templateName, output in
       try ErrorPrettifier.execute {
-        guard let parser = ParserCLI.command(named: parserName) else { return }
         let template = TemplateRef.name(templateName)
         let path = try template.resolvePath(forParser: parser)
         try execute(path, output)
       }
+    }
+  }
+}
+
+// MARK: Allow ParserCLI name as command line argument
+
+extension ParserCLI: ArgumentConvertible {
+  public init(parser: ArgumentParser) throws {
+    if let value = parser.shift() {
+      if let value = ParserCLI.command(named: value) {
+        self = value
+      } else {
+        throw ArgumentError.invalidType(value: value, type: "parser name", argument: nil)
+      }
+    } else {
+      throw ArgumentError.missingValue(argument: nil)
     }
   }
 }
