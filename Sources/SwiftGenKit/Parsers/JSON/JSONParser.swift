@@ -6,9 +6,8 @@
 
 import Foundation
 import PathKit
-import Yams
 
-public enum Yaml {
+public enum JSON {
   public enum ParserError: Error, CustomStringConvertible {
     case invalidFile(path: Path, reason: String)
 
@@ -20,7 +19,7 @@ public enum Yaml {
     }
   }
 
-  // MARK: Yaml File Parser
+  // MARK: JSON File Parser
 
   public class Parser: SwiftGenKit.Parser {
     private let options: ParserOptionValues
@@ -33,7 +32,7 @@ public enum Yaml {
     }
 
     public class var defaultFilter: String {
-      "[^/]\\.(?i:ya?ml)$"
+      "[^/]\\.(?i:json)$"
     }
 
     public func parse(path: Path, relativeTo parent: Path) throws {

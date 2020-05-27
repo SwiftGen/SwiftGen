@@ -164,6 +164,9 @@ _None_
 * Updated Pods and Gems dependencies.  
   [David Jennes](https://github.com/djbe)
   [#684](https://github.com/SwiftGen/SwiftGen/pull/684)
+* Use `JSONSerialization` for parsing JSONs, making `json` actions faster.  
+  [Marcelo Fabri](https://github.com/marcelofabri)
+  [#698](https://github.com/SwiftGen/SwiftGen/issues/698)
 
 ## 6.1.0
 
