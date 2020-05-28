@@ -210,17 +210,17 @@ Lastly, you can use `--help` on `swiftgen` or one of its subcommand to see the d
 <details>
 <summary><strong>Directly invoking a parser without a config file</strong></summary>
 
-While we highly recommend the use a configuration file for performance reasons (especially if you have multiple outputs, but also because it's more flexible), it's also possible to directly invoke the available parsers individually:
+While we highly recommend the use a configuration file for performance reasons (especially if you have multiple outputs, but also because it's more flexible), it's also possible to directly invoke the available parsers individually using `swiftgen run`:
 
-* `swiftgen colors [OPTIONS] DIRORFILE1 …`
-* `swiftgen coredata [OPTIONS] DIRORFILE1 …`
-* `swiftgen fonts [OPTIONS] DIRORFILE1 …`
-* `swiftgen ib [OPTIONS] DIRORFILE1 …`
-* `swiftgen json [OPTIONS] DIRORFILE1 …`
-* `swiftgen plist [OPTIONS] DIRORFILE1 …`
-* `swiftgen strings [OPTIONS] DIRORFILE1 …`
-* `swiftgen xcassets [OPTIONS] DIRORFILE1 …`
-* `swiftgen yaml [OPTIONS] DIRORFILE1 …`
+* `swiftgen run colors [OPTIONS] DIRORFILE1 …`
+* `swiftgen run coredata [OPTIONS] DIRORFILE1 …`
+* `swiftgen run fonts [OPTIONS] DIRORFILE1 …`
+* `swiftgen run ib [OPTIONS] DIRORFILE1 …`
+* `swiftgen run json [OPTIONS] DIRORFILE1 …`
+* `swiftgen run plist [OPTIONS] DIRORFILE1 …`
+* `swiftgen run strings [OPTIONS] DIRORFILE1 …`
+* `swiftgen run xcassets [OPTIONS] DIRORFILE1 …`
+* `swiftgen run yaml [OPTIONS] DIRORFILE1 …`
 
 One rare cases where this might be useful — as opposed to using a config file — is if you are working on a custom template and want to quickly test the specific parser you're working on at each iteration/version of your custom template, until you're happy with it.
 
@@ -233,7 +233,7 @@ Each parser command generally accepts the same options and syntax, and they mirr
 * `--filter REGEX` or `-f REGEX`: the filter to apply to each input path. Filters are applied to actual (relative) paths, not just the filename. Each command has a default filter that you can override with this option.
 * Note: use `.+` to match multiple characters (at least one), and don't forget to escape the dot (`\.`) if you want to match a literal dot like for an extension. Add `$` at the end to ensure the path ends with the extension you want. Regular expressions will be case sensitive by default, and not anchored to the start/end of a path. For example, use `.+\.xib$` to match files with a `.xib` extension. Use a tool such as [RegExr](https://regexr.com) to ensure you're using a valid regular expression.
 * Each command supports multiple input files (or directories where applicable).
-* You can always use the `--help` flag to see what options a command accept, e.g. `swiftgen xcassets --help`.
+* You can always use the `--help` flag to see what options a command accept, e.g. `swiftgen run xcassets --help`.
 
 </details>
 

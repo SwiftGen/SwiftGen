@@ -26,7 +26,7 @@ kicker -e "swiftgen" /path/to/your/project/resources
 And if you're writing a custom template, you can use a command similar to the following to watch the template file you're writing and auto-regenerate the output using that same template every time you modify it:
 
 ```sh
-kicker -e "swiftgen xcassets --templatePath /path/to/my/custom/template.stencil --output test-output.swift /path/to/Images.xcassets" /path/to/my/custom/template.stencil
+kicker -e "swiftgen run xcassets --templatePath /path/to/my/custom/template.stencil --output test-output.swift /path/to/Images.xcassets" /path/to/my/custom/template.stencil
 ```
 
-This use of kicker (or any other tool allowing to do similar watching of a folder) can allow you to edit custom templates like you use Swift Playgrounds: you can split your screen or your favorite text editor (Sublime Text, Atom, …) in 2 windows, one containing the template you edit, the other containing the output, and see the test output on the second window being updated live.
+This use of kicker (or any other tool allowing to do similar watching of a folder) can allow you to edit custom templates like you use Swift Playgrounds: you can split your screen or your favorite text editor (Sublime Text, Atom, …) in 2 windows, one containing the template you edit, the other containing the output, and see the test output on the second window being updated live every time you Cmd-S to save the template.

@@ -36,6 +36,13 @@ let main = Group {
     $0.addCommand("cat", "print content of a given named template", TemplateCLI.cat)
     $0.addCommand("doc", "open the documentation for templates on GitHub", TemplateCLI.doc)
   }
+
+  $0.group("run", "run individual parser commands, outside of a config file") {
+    for cmd in ParserCLI.allCommands {
+      $0.addCommand(cmd.name, cmd.description, cmd.command())
+    }
+  }
+
   // Deprecated: Remove this in SwiftGen 7.0
   $0.group("templates", "DEPRECATED - use `template` subcommand instead") {
     $0.addDeprecatedCommand("list", replacement: "template list", TemplateCLI.list)
@@ -43,11 +50,11 @@ let main = Group {
     $0.addDeprecatedCommand("cat", replacement: "template cat", TemplateCLI.cat)
     $0.addDeprecatedCommand("doc", replacement: "template doc", TemplateCLI.doc)
   }
-  // Deprecation end
 
   for cmd in ParserCLI.allCommands {
-    $0.addCommand(cmd.name, cmd.description, cmd.command())
+    $0.addDeprecatedCommand(cmd.name, replacement: "swiftgen run \(cmd.name)", cmd.command())
   }
+  // Deprecation end
 }
 
 main.run(

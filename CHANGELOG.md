@@ -16,6 +16,9 @@
   
 ### Deprecations
 
+* The use of `swiftgen <parser>` (e.g. `swiftgen strings`, `swiftgen xcassets`, …) command line for running individual parsers is now deprecated in favor of `swiftgen run <parser>`. See "New Features" below.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#705](https://github.com/SwiftGen/SwiftGen/pull/705)
 * The subcommand `swiftgen templates` has been renamed `swiftgen template` (singular); the plural form of the command has been deprecated and will be removed in next major version.  
   [@AliSoftware](https://github.com/AliSoftware)
   [#697](https://github.com/SwiftGen/SwiftGen/pull/697)
@@ -23,6 +26,9 @@
 
 ### New Features
 
+* The use of `swiftgen <parser>` command line for running individual parsers is now deprecated in favor of `swiftgen run <parser>`.  We still highly recommend to use a configuration file for flexibility and performance reasons in your projects, and only use `swiftgen run <parser>` for things like quick iterations when writing your own custom templates.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#705](https://github.com/SwiftGen/SwiftGen/pull/705)
 * You can now easily create a new config file using `swiftgen config init`. This will create an example and commented config file and open it to let you edit it to your needs.  _Note that the generated config file is static content which doesn't take the user's project into account (though that might change in the future)_.  
   [@AliSoftware](https://github.com/AliSoftware)
   [#694](https://github.com/SwiftGen/SwiftGen/pull/694)
