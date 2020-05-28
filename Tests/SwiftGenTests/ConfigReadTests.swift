@@ -173,7 +173,7 @@ class ConfigReadTests: XCTestCase {
       "config-missing-template": """
         You must specify a template by name (templateName) or path (templatePath).
 
-        To list all the available named templates, use 'swiftgen templates list'.
+        To list all the available named templates, use 'swiftgen template list'.
         """,
       "config-both-templates": """
         You need to choose EITHER a named template OR a template path. \

@@ -170,13 +170,13 @@ Or add the path to the `bin` folder to your `$PATH` and invoke `swiftgen` direct
 
 > ❗️ If you're migrating from older SwiftGen versions, don't forget to [read the Migration Guide](Documentation/MigrationGuide.md).
 
-SwiftGen is provided as a single command-line tool which uses a configuration file to run various actions (subcommands).
+SwiftGen is provided as a single command-line tool which uses a configuration file to define the various parsers to run (depending on the type of input files you need to parse) and their parameters.
 
 To create a sample configuration file as a starting point to adapt to your needs, run `swiftgen config init`.
 
-Each action described in the [configuration file](Documentation/ConfigFile.md) (`strings`, `fonts`, `ib`, …) typically corresponds to a type of input resources to parse (strings files, IB files, Font files, JSON files, …), allowing you to generate constants for each types of those input files.
+Each parser described in the [configuration file](Documentation/ConfigFile.md) (`strings`, `fonts`, `ib`, …) typically corresponds to a type of input resources to parse (strings files, IB files, Font files, JSON files, …), allowing you to generate constants for each types of those input files.
 
-To use SwiftGen, simply create a `swiftgen.yml` YAML file (either manually or using `swiftgen config init`) then edit it to adapt to your project. The config file should list all the subcommands to invoke, and for each subcommand, the list of inputs/outputs/templates/parameters to use for it.
+To use SwiftGen, simply create a `swiftgen.yml` YAML file (either manually or using `swiftgen config init`) then edit it to adapt to your project. The config file should list all the parsers to invoke, and for each parser, the list of inputs/outputs/templates/parameters to use for it.
 
 For example:
 
@@ -203,14 +203,14 @@ Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for 
 There are also additional subcommands you can invoke from the command line to manage and configure SwiftGen:
 
 * The `swiftgen config` subcommand to help you with the configuration file, especially `swiftgen config init` to create a starting point for your config and `swiftgen config lint` to validate that your Config file is valid and has no errors
-* The `swiftgen templates` subcommands to help you print, duplicate, find and manage templates (both bundled and custom)
+* The `swiftgen template` subcommands to help you print, duplicate, find and manage templates (both bundled and custom)
 
 Lastly, you can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
 
 <details>
-<summary><strong>Directly invoking a subcommand</strong></summary>
+<summary><strong>Directly invoking a parser without a config file</strong></summary>
 
-While we highly recommend the use a configuration file for performance reasons (especially if you have multiple outputs, but also because it's more flexible), it's also possible to directly invoke the available subcommands to parse various resource types:
+While we highly recommend the use a configuration file for performance reasons (especially if you have multiple outputs, but also because it's more flexible), it's also possible to directly invoke the available parsers individually:
 
 * `swiftgen colors [OPTIONS] DIRORFILE1 …`
 * `swiftgen coredata [OPTIONS] DIRORFILE1 …`
@@ -222,9 +222,9 @@ While we highly recommend the use a configuration file for performance reasons (
 * `swiftgen xcassets [OPTIONS] DIRORFILE1 …`
 * `swiftgen yaml [OPTIONS] DIRORFILE1 …`
 
-One rare cases where this might be useful — as opposed to using a config file — is if you are working on a custom template and want to quickly test the specific subcommand you're working on at each iteration/version of your custom template, until you're happy with it.
+One rare cases where this might be useful — as opposed to using a config file — is if you are working on a custom template and want to quickly test the specific parser you're working on at each iteration/version of your custom template, until you're happy with it.
 
-Each subcommand generally accepts the same options and syntax, and they mirror the options and parameters from the configuration file:
+Each parser command generally accepts the same options and syntax, and they mirror the options and parameters from the configuration file:
 
 * `--output FILE` or `-o FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
 * `--templateName NAME` or `-n NAME`: define the Stencil template to use (by name, see [here for more info](Documentation/templates)) to generate the output.
@@ -243,21 +243,22 @@ SwiftGen is based on templates (it uses [Stencil](https://github.com/kylef/Stenc
 
 ### Bundled templates vs. Custom ones
 
-SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `coredata`, `fonts`, `ib`, `json`, `plist`, `strings`, `xcassets`, `yaml`), which will fit most needs; simply use the `templateName` output option to specify the name of the template to use. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs: just store them anywhere (like in your project repository) and use the `templatePath` output option instead of `templateName`, to specify their path.
+SwiftGen comes bundled with some templates for each of the parsers (`colors`, `coredata`, `fonts`, `ib`, `json`, `plist`, `strings`, `xcassets`, `yaml`), which will fit most needs; simply use the `templateName` output option to specify the name of the template to use. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs: just store them anywhere (like in your project repository) and use the `templatePath` output option instead of `templateName`, to specify their path.
 
-💡 You can use the `swiftgen templates list` command to list all the available templates (both custom and bundled templates) for each subcommand, and use `swiftgen templates cat` to show a template's content and duplicate it to create your own variation.
+💡 You can use the `swiftgen template list` command to list all the available templates (both custom and bundled templates) for each parser, and use `swiftgen template cat` to show a template's content and duplicate it to create your own variation.
 
 For more information about how to create your own templates, [see the dedicated documentation](Documentation/Creating-your-templates.md).
 
 ### Templates bundled with SwiftGen:
 
-As explained above, you can use `swiftgen templates list` to list all templates bundled with SwiftGen. For most SwiftGen subcommands, we provide, among others:
+As explained above, you can use `swiftgen template list` to list all templates bundled with SwiftGen. For most SwiftGen parsers, we provide, among others:
 
 * A `swift4` template, compatible with Swift 4
 * A `swift5` template, compatible with Swift 5
 * Other variants, like `flat-swift4/5` and `structured-swift4/5` templates for Strings, etc.
 
-You can **find the documentation for each bundled template [here in the repo](Documentation/templates)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
+You can **find the documentation for each bundled template [here in the repo](Documentation/templates)**, with documentation organized as one folder per SwiftGen parser, then one MarkDown file per template. You can also use `swiftgen template doc` to open that documentation page in your browser directly from your terminal.
+
 Each MarkDown file documents the Swift Version it's aimed for, the use case for that template (in which cases you might favor that template over others), the available parameters to customize it on invocation (using the `params:` key in your config file), and some code examples.
 
 > Don't hesitate to make PRs to share your improvements suggestions on the bundled templates 😉
@@ -648,7 +649,7 @@ yaml:
 
 This will parse the given file, or when given a directory, recursively search for JSON and YAML files. It will define an `enum` for each file (and documents in a file where needed), and type-safe constants for the content of the file.
 
-Unlike other subcommands, this parser is intended to allow you to use more custom inputs (as the formats are quite open to your needs) to generate your code. This means that for these subcommands (and the `plist` one), you'll probably be more likely to use custom templates to generate code properly adapted/tuned to your inputs, rather than using the bundled templates. To read more about writing your own custom templates, see [see the dedicated documentation](Documentation/Creating-your-templates.md).
+Unlike other parsers, this one is intended to allow you to use more custom inputs (as the formats are quite open to your needs) to generate your code. This means that for these parsers (and the `plist` one), you'll probably be more likely to use custom templates to generate code properly adapted/tuned to your inputs, rather than using the bundled templates. To read more about writing your own custom templates, see [see the dedicated documentation](Documentation/Creating-your-templates.md).
 
 <details>
 <summary>Example of code generated by the bundled template</summary>
@@ -690,7 +691,7 @@ plist:
 
 This will parse the given file, or when given a directory, recursively search for Plist files. It will define an `enum` for each file (and documents in a file where needed), and type-safe constants for the content of the file.
 
-Unlike other subcommands, this parser is intended to allow you to use more custom inputs (as the format is quite open to your needs) to generate your code. This means that for this subcommand (and the `json` and `yaml` ones), you'll probably be more likely to use custom templates to generate code properly adapted/tuned to your inputs, rather than using the bundled templates. To read more about writing your own custom templates, see [see the dedicated documentation](Documentation/Creating-your-templates.md).
+Unlike other parsers, this one is intended to allow you to use more custom inputs (as the format is quite open to your needs) to generate your code. This means that for this parser (and the `json` and `yaml` ones), you'll probably be more likely to use custom templates to generate code properly adapted/tuned to your inputs, rather than using the bundled templates. To read more about writing your own custom templates, see [see the dedicated documentation](Documentation/Creating-your-templates.md).
 
 <details>
 <summary>Example of code generated by the bundled template</summary>

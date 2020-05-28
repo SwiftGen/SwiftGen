@@ -60,7 +60,7 @@ extension ConfigEntry {
     let context = parser.stencilContext()
 
     for entryOutput in outputs {
-      let templateRealPath = try entryOutput.template.resolvePath(forSubcommand: parserCommand.name)
+      let templateRealPath = try entryOutput.template.resolvePath(forParser: parserCommand)
       let template = try StencilSwiftTemplate(
         templateString: templateRealPath.read(),
         environment: stencilSwiftEnvironment()

@@ -13,12 +13,22 @@
 * XCAssets: the `colorAliasName` and `imageAliasName` template parameters are now deprecated and will be removed in the next major release.  
   [David Jennes](https://github.com/djbe)
   [#614](https://github.com/SwiftGen/SwiftGen/pull/614)
+  
+### Deprecations
+
+* The subcommand `swiftgen templates` has been renamed `swiftgen template` (singular); the plural form of the command has been deprecated and will be removed in next major version.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#697](https://github.com/SwiftGen/SwiftGen/pull/697)
+
 
 ### New Features
 
 * You can now easily create a new config file using `swiftgen config init`. This will create an example and commented config file and open it to let you edit it to your needs.  _Note that the generated config file is static content which doesn't take the user's project into account (though that might change in the future)_.  
   [@AliSoftware](https://github.com/AliSoftware)
   [#694](https://github.com/SwiftGen/SwiftGen/pull/694)
+* You can now use `swiftgen template doc [parser] [templateName]` on the command line to quickly open the documentation for templates on GitHub directly from your terminal.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#697](https://github.com/SwiftGen/SwiftGen/pull/697)
 * Each command now accepts an `options` dictionary, with which you can set internal parser settings to change its behaviour. See the commands' specific documentation for available options.  
   [David Jennes](https://github.com/djbe)
   [#587](https://github.com/SwiftGen/SwiftGen/pull/587)
@@ -511,7 +521,7 @@ Read the [SwiftGen 5.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 * Disable default value for named template option and ensure that there is a template option.  
   [Liquidsoul](https://github.com/liquidsoul)
   [#283](https://github.com/SwiftGen/SwiftGen/issues/283)
-* Templates are now grouped by subcommand on the filesystem. This is only important if you had custom templates in the `Application Support` directory. To migrate your templates, place them in a subfolder with the name of the subcommand, and remove the prefix of the template filename.  
+* Templates are now grouped by parser on the filesystem. This is only important if you had custom templates in the `Application Support` directory. To migrate your templates, place them in a subfolder with the name of the parser, and remove the prefix of the template filename.  
   [David Jennes](https://github.com/djbe)
   [#304](https://github.com/SwiftGen/SwiftGen/issues/304)
 * The `images` command has been renamed to `xcassets` to better reflect its functionality.  
@@ -810,7 +820,7 @@ Note: The next minor version will focus on bringing more documentation for all t
   * `swiftgen templates list` lists all the available templates
   * `swiftgen templates which <name>` prints the path to the template named `<name>`
   * `swiftgen templates cat <name>` prints the content to the template named `<name>`
-  * `<name>` here can be either a subcommand name like `colors` or a
+  * `<name>` here can be either a parser name like `colors` or a
     composed name `colors-rawValue` for a specific template.
 * Fix swift 3 renaming change in strings-swift3.stencil.  
   [Kilian Koeltzsch](https://github.com/kiliankoe)

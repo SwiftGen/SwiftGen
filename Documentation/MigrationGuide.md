@@ -19,7 +19,7 @@ Below is a list of pointers to help you migrate to the new SwiftGen 6.0.
 
 ## `storyboards` command has been renamed
 
-The `storyboards` subcommand has been renamed `ib`, for Interface Builder. This renaming was necessary to prepare for an upcoming feature of being able to parse `XIB` files too in a future release of SwiftGen.
+The `storyboards` parser command has been renamed `ib`, for Interface Builder. This renaming was necessary to prepare for an upcoming feature of being able to parse `XIB` files too in a future release of SwiftGen.
 You should replace invocations in your config files with the new `ib` command name, or command line invocations of `swiftgen storyboards …` with `swiftgen ib …`.
 
 ❗️ See below: the bundled `storyboards` templates have been split up into one for scenes and one for segues.
@@ -42,7 +42,7 @@ The biggest change is that the `storyboards` (`ib`) templates have been split up
 
 ## Commands can have multiple outputs
 
-This is only available for users with a configuration file, not via command line invocation of a dedicated subcommand. For each command you can now have a list of `outputs`, each output with a template name (`templateName`) or path (`templatePath`), an output file to generate (`output`), and an optional list of parameters (`params`).
+This is only available for users with a configuration file, not via command line invocation of a dedicated parser. For each command you can now have a list of `outputs`, each output with a template name (`templateName`) or path (`templatePath`), an output file to generate (`output`), and an optional list of parameters (`params`).
 
 This allows you to generate multiple different outputs for the same input (for example both scenes and segues of storyboards, or both `.h` and `.m` for and Objective-C template, or both Swift code constants and html code for your documentation, …). For example:
 
@@ -125,7 +125,7 @@ There have been a few minor context changes, see [SwiftGenKit's own Migration Gu
 
 ## Command Line invocation
 
-If you still invoked SwiftGen subcommands directly using command line flags and options (instead of a configuration file), be sure to use `--templateName` or `--templatePath` instead of the `--template`/`-t` option (which has been deprecated).
+If you still invoked SwiftGen parsers directly using command line flags and options (instead of a configuration file), be sure to use `--templateName` or `--templatePath` instead of the `--template`/`-t` option (which has been deprecated).
 
 # SwiftGen 5.1 Migration Guide
 
@@ -151,7 +151,7 @@ Below is a list of pointers to help you migrate to the new SwiftGen 5.0
 
 ### `images` command has been renamed
 
-The `images` subcommand has been renamed `xcassets`.
+The `images` parser command has been renamed `xcassets`.
 You should replace invocations of `swiftgen images …` by `swiftgen xcassets …`
 
 ### `--enumName` flag migrated to `--param`
