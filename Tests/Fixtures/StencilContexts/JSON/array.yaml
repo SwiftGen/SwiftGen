@@ -1,5 +1,28 @@
 files:
-- documents:
+- document:
+    data:
+    - id: "1"
+      name: "Anna"
+    - id: "2"
+      name: "Bob"
+    metadata:
+      element:
+        items:
+        - properties:
+            id:
+              type: "String"
+            name:
+              type: "String"
+          type: "Dictionary"
+        - properties:
+            id:
+              type: "String"
+            name:
+              type: "String"
+          type: "Dictionary"
+        type: "Dictionary"
+      type: "Array"
+  documents:
   - data:
     - id: "1"
       name: "Anna"

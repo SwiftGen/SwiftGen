@@ -23,12 +23,12 @@ extension JSON.Parser {
   }
 
   private func map(file: JSON.File) -> [String: Any] {
-    // `documents` is an array for compability reasons with YAML and we'll be updated to be a single document in a
-    // future release
-    [
+    let document = map(document: file.document)
+    return [
       "name": file.name,
       "path": file.path.string,
-      "documents": [map(document: file.document)]
+      "document": document,
+      "documents": [document] // For legacy/compatibility reasons; will be removed in 7.0
     ]
   }
 
