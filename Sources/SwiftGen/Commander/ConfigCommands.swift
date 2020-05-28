@@ -115,9 +115,7 @@ enum ConfigCLI {
           logMessage(.info, "Executing configuration file \(file)")
         }
         try file.parent().chdir {
-          for cmd in config.commands.keys.sorted() {
-            try config.run(cmd: cmd, verbose: verbose)
-          }
+          try config.runCommands(verbose: verbose)
         }
       }
     } catch let error as Config.Error {
@@ -160,5 +158,22 @@ enum ConfigCLI {
     let docURL = gitHubDocURL(version: Version.swiftgen, path: "ConfigFile.md")
     logMessage(.info, "Open documentation at: \(docURL)")
     NSWorkspace.shared.open(docURL)
+  }
+}
+
+private extension Config {
+  func runCommands(verbose: Bool) throws {
+    let errors = commands.keys.sorted().parallelCompactMap { cmd -> Swift.Error? in
+      do {
+        _ = try run(cmd: cmd, verbose: verbose)
+        return nil
+      } catch {
+        return error
+      }
+    }
+
+    if let error = errors.first {
+      throw error
+    }
   }
 }
