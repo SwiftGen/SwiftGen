@@ -26,7 +26,7 @@
 * You can now easily create a new config file using `swiftgen config init`. This will create an example and commented config file and open it to let you edit it to your needs.  _Note that the generated config file is static content which doesn't take the user's project into account (though that might change in the future)_.  
   [@AliSoftware](https://github.com/AliSoftware)
   [#694](https://github.com/SwiftGen/SwiftGen/pull/694)
-* You can now use `swiftgen template doc [parser] [templateName]` on the command line to quickly open the documentation for templates on GitHub direclty from your terminal.  
+* You can now use `swiftgen template doc [parser] [templateName]` on the command line to quickly open the documentation for templates on GitHub directly from your terminal.  
   [@AliSoftware](https://github.com/AliSoftware)
   [#697](https://github.com/SwiftGen/SwiftGen/pull/697)
 * Each command now accepts an `options` dictionary, with which you can set internal parser settings to change its behaviour. See the commands' specific documentation for available options.  
