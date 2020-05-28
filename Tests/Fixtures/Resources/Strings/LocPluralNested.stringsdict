@@ -2,124 +2,102 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
     <dict>
-        <key>multiple.placeholders.string-int</key>
+        <key>nested.formatkey-in-variable</key>
         <dict>
             <key>NSStringLocalizedFormatKey</key>
-            <string>%#@elements@</string>
-            <key>elements</key>
+            <string>%#@geese@</string>
+            <key>geese</key>
             <dict>
                 <key>NSStringFormatSpecTypeKey</key>
                 <string>NSStringPluralRuleType</string>
                 <key>NSStringFormatValueTypeKey</key>
                 <string>d</string>
-                <key>zero</key>
-                <string>%@ has no rating</string>
                 <key>one</key>
-                <string>%@ has one rating</string>
+                <string>A goose landed on %#@goose_fields@</string>
                 <key>other</key>
-                <string>%@ has %d ratings</string>
+                <string>%d geese landed on %#@geese_fields@</string>
+            </dict>
+            <key>goose_fields</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>its own field</string>
+                <key>other</key>
+                <string>its own %d fields</string>
+            </dict>
+            <key>geese_fields</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>their shared field</string>
+                <key>other</key>
+                <string>their %d fields</string>
             </dict>
         </dict>
-        <key>multiple.placeholders-and-variables.string-int</key>
+        <key>nested.formatkey-in-variable-deep</key>
         <dict>
             <key>NSStringLocalizedFormatKey</key>
-            <string>%#@element@ %#@has_rating@</string>
-            <key>element</key>
-            <dict>
-                <key>NSStringFormatSpecTypeKey</key>
-                <string>NSStringPluralRuleType</string>
-                <key>NSStringFormatValueTypeKey</key>
-                <string>@</string>
-                <key>other</key>
-                <string>%@</string>
-            </dict>
-                <key>has_rating</key>
-            <dict>
-                <key>NSStringFormatSpecTypeKey</key>
-                <string>NSStringPluralRuleType</string>
-                <key>NSStringFormatValueTypeKey</key>
-                <string>d</string>
-                <key>zero</key>
-                <string>has no rating</string>
-                <key>one</key>
-                <string>has one rating</string>
-                <key>other</key>
-                <string>has %d ratings</string>
-            </dict>
-        </dict>
-        <key>multiple.placeholders-and-variables.int-string-string</key>
-        <dict>
-            <key>NSStringLocalizedFormatKey</key>
-            <!-- Your <Grocery> list contains <3 items. You should buy them> <today>. -->
-            <string>Your %3$#@third@ list contains %1$#@first@ %2$#@second@.</string>
-            <key>first</key>
-            <dict>
-                <key>NSStringFormatSpecTypeKey</key>
-                <string>NSStringPluralRuleType</string>
-                <key>NSStringFormatValueTypeKey</key>
-                <string>d</string>
-                <key>zero</key>
-                <string>no items.</string>
-                <key>one</key>
-                <string>one item. You should buy it</string>
-                <key>other</key>
-                <string>%d items. You should buy them</string>
-            </dict>
-            <key>second</key>
-            <dict>
-                <key>NSStringFormatSpecTypeKey</key>
-                <string>NSStringPluralRuleType</string>
-                <key>NSStringFormatValueTypeKey</key>
-                <string>@</string>
-                <key>other</key>
-                <string>%@</string>
-            </dict>
-            <key>third</key>
-            <dict>
-                <key>NSStringFormatSpecTypeKey</key>
-                <string>NSStringPluralRuleType</string>
-                <key>NSStringFormatValueTypeKey</key>
-                <string>@</string>
-                <key>other</key>
-                <string>%@</string>
-            </dict>
-        </dict>
-        <key>multiple.variables.three-variables-in-formatkey</key>
-        <dict>
-            <key>NSStringLocalizedFormatKey</key>
-            <string>%#@files@ (%#@bytes@, %#@minutes@)</string>
-            <key>files</key>
+            <string>%1$#@first_level@</string>
+            <key>first_level</key>
             <dict>
                 <key>NSStringFormatSpecTypeKey</key>
                 <string>NSStringPluralRuleType</string>
                 <key>NSStringFormatValueTypeKey</key>
                 <string>d</string>
                 <key>one</key>
-                <string>%d file remaining</string>
+                <string>One first level %2$#@second_level@</string>
                 <key>other</key>
-                <string>%d files remaining</string>
+                <string>%1$d first levels %2$#@second_levels@</string>
             </dict>
-            <key>bytes</key>
+            <key>second_level</key>
             <dict>
                 <key>NSStringFormatSpecTypeKey</key>
                 <string>NSStringPluralRuleType</string>
                 <key>NSStringFormatValueTypeKey</key>
                 <string>d</string>
                 <key>one</key>
-                <string>%d byte</string>
+                <string>has one second level and %3$#@third_level@</string>
                 <key>other</key>
-                <string>%d bytes</string>
+                <string>has %2$d second levels and %3$#@third_levels@</string>
             </dict>
-            <key>minutes</key>
+            <key>second_levels</key>
             <dict>
                 <key>NSStringFormatSpecTypeKey</key>
                 <string>NSStringPluralRuleType</string>
                 <key>NSStringFormatValueTypeKey</key>
                 <string>d</string>
                 <key>one</key>
-                <string>%d minute</string>
+                <string>have one second level and %3$#@third_level@</string>
                 <key>other</key>
-                <string>%d minutes</string>
+                <string>have %2$d second levels and %3$#@third_levels@</string>
+            </dict>
+            <key>third_level</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>has one third level</string>
+                <key>other</key>
+                <string>has %3$d third levels</string>
+            </dict>
+            <key>third_levels</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>have one third level</string>
+                <key>other</key>
+                <string>have %3$d third levels</string>
             </dict>
         </dict>
     </dict>

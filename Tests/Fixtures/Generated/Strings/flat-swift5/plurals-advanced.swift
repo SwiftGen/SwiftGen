@@ -21,14 +21,6 @@ internal enum L10n {
   internal static func multipleVariablesThreeVariablesInFormatkey(_ p1: Int, _ p2: Int, _ p3: Int) -> String {
     return L10n.tr("LocPluralAdvanced", "multiple.variables.three-variables-in-formatkey", p1, p2, p3)
   }
-  /// Plural case 'other': %1$d geese landed on their %3$d fields
-  internal static func nestedFormatkeyInVariable(_ p1: Int, _ p2: Int, _ p3: Int) -> String {
-    return L10n.tr("LocPluralAdvanced", "nested.formatkey-in-variable", p1, p2, p3)
-  }
-  /// Plural case 'other': %1$d first levels have %2$d second levels and have %3$d third levels
-  internal static func nestedFormatkeyInVariableDeep(_ p1: Int, _ p2: Int, _ p3: Int, _ p4: Int, _ p5: Int) -> String {
-    return L10n.tr("LocPluralAdvanced", "nested.formatkey-in-variable-deep", p1, p2, p3, p4, p5)
-  }
 }
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length
 

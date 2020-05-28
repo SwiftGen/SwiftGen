@@ -102,6 +102,16 @@ class StringsTests: XCTestCase {
     XCTDiffContexts(result, expected: "plurals-advanced", sub: .strings)
   }
 
+// Commented out since nested format strings in plurals are not supported yet.
+//
+//  func testNestedPlurals() throws {
+//    let parser = try Strings.Parser()
+//    try parser.searchAndParse(path: Fixtures.path(for: "LocPluralNested.stringsdict", sub: .strings))
+//
+//    let result = parser.stencilContext()
+//    XCTDiffContexts(result, expected: "plurals-nested", sub: .strings)
+//  }
+
   func testSameTableWithPluralsParsingStringsFirst() throws {
     let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
