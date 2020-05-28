@@ -63,7 +63,7 @@
                 <key>one</key>
                 <string>one item. You should buy it</string>
                 <key>other</key>
-                <string>%d items. You should buy them</string>
+                <string>%1$d items. You should buy them</string>
             </dict>
             <key>second</key>
             <dict>
@@ -72,7 +72,7 @@
                 <key>NSStringFormatValueTypeKey</key>
                 <string>@</string>
                 <key>other</key>
-                <string>%@</string>
+                <string>%2$@</string>
             </dict>
             <key>third</key>
             <dict>
@@ -81,7 +81,7 @@
                 <key>NSStringFormatValueTypeKey</key>
                 <string>@</string>
                 <key>other</key>
-                <string>%@</string>
+                <string>%3$@</string>
             </dict>
         </dict>
         <key>multiple.variables.three-variables-in-formatkey</key>

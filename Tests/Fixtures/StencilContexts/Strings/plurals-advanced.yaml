@@ -11,6 +11,14 @@ tables:
           - "Int"
       - name: "placeholders-and-variables"
         strings:
+        - key: "multiple.placeholders-and-variables.int-string-string"
+          name: "int-string-string"
+          translation: "Plural case 'other': Your %3$@ list contains %1$d items. You
+            should buy them %2$@."
+          types:
+          - "Int"
+          - "String"
+          - "String"
         - key: "multiple.placeholders-and-variables.string-int"
           name: "string-int"
           translation: "Plural case 'other': %@ has %d ratings"

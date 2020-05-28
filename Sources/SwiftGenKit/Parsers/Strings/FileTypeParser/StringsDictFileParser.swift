@@ -35,8 +35,8 @@ extension Strings {
 
       return try plurals.map { keyValuePair -> Entry in
         let (key, pluralEntry) = keyValuePair
-        let valueTypes = pluralEntry.variables.reduce(into: [String]()) { valueTypes, keyValuePair in
-          valueTypes.append("%\(keyValuePair.value.valueTypeKey)")
+        let valueTypes = pluralEntry.variables.reduce(into: [String]()) { valueTypes, variable in
+          valueTypes.append("%\(variable.rule.valueTypeKey)")
         }
 
         return Entry(

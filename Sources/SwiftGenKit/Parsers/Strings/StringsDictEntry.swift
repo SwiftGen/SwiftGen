@@ -22,9 +22,9 @@ extension StringsDict {
     /// A format string that contains variables.
     /// Each variable is preceded by the %#@ characters and followed by the @ character.
     let formatKey: String
-    /// A dictionary of key-value pairs specifying the rule (value) to use for each variable (key).
+    /// An array of variables specifying the rules to use for each variable in the `formatKey`.
     /// Every variable that is part of the `formatKey` must be contained in this dictionary.
-    let variables: [String: VariableRule]
+    let variables: [Variable]
   }
 
   /// Variable width entries are used to define width variations for a localized string.
@@ -36,6 +36,12 @@ extension StringsDict {
 }
 
 extension StringsDict.PluralEntry {
+  /// `Variable`s are a key-value pair specifying the rule to use for each variable (key).
+  struct Variable: Codable {
+    let key: String
+    let rule: VariableRule
+  }
+
   /// A VariableRule contains the actual localized plural strings for every possible plural case that
   /// is available in a specific locale. Since some locales only support a subset of plural forms,
   /// most of them are optional.
@@ -106,13 +112,27 @@ extension StringsDict: Decodable {
   private static func decodeVariableRules(
     in container: KeyedDecodingContainer<StringsDict.CodingKeys>,
     formatKey: String
-  ) throws -> [String: PluralEntry.VariableRule] {
-    guard let variableKeyTuples = StringsDict.variableKeysFromFormatKey(formatKey) else { return [:] }
-    let variableKeys = variableKeyTuples.sorted(by: { $0.range.lowerBound < $1.range.lowerBound }).map { $0.key }
+  ) throws -> [PluralEntry.Variable] {
+    guard let variableKeyTuples = StringsDict.variableKeysFromFormatKey(formatKey) else { return [] }
+    let sortedVariableKeys = variableKeyTuples
+      .sorted { lhs, rhs in
+        // Sort by positional argument if present, otherwise by occurrence in the format key
+        switch (lhs.positionalArgument, rhs.positionalArgument, lhs.range.lowerBound, rhs.range.lowerBound) {
+        case let (.none, .none, lhs, rhs):
+          return lhs < rhs
+        case (.some, .none, _, _):
+          return true
+        case (.none, .some, _, _):
+          return false
+        case let (.some(lhs), .some(rhs), _, _):
+          return lhs < rhs
+        }
+      }
+      .map { $0.key }
 
-    return try variableKeys.reduce(into: [String: PluralEntry.VariableRule]()) { variables, variableKey in
-      let variable = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableKey))
-      variables[variableKey] = variable
+    return try sortedVariableKeys.reduce(into: [PluralEntry.Variable]()) { variables, variableKey in
+      let variableRule = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableKey))
+      variables.append(PluralEntry.Variable(key: variableKey, rule: variableRule))
     }
   }
 }
@@ -120,32 +140,40 @@ extension StringsDict: Decodable {
 // - MARK: Helpers
 
 extension StringsDict {
+  typealias VariableKeyResult = (key: String, range: Range<String.Index>, positionalArgument: Int?)
+
   /// Parses variable keys and their ranges from a formatKey.
   /// Every variable key that is contained within the format string is preceded
   /// by the %#@ characters or by the positional variants, e.g. %1$#@, and followed by the @ character.
   ///
   /// - Parameter formatKey: The formatKey from which the variable keys should be parsed.
   /// - Returns: An array of discovered variable keys and their range within the `formatKey`.
-  private static func variableKeysFromFormatKey(_ formatKey: String) -> [(key: String, range: Range<String.Index>)]? {
-    let pattern = #"(%(?>\d\$)?#@([\w\.\p{Pd}]+)@)"#
+  // swiftlint:disable:next discouraged_optional_collection
+  private static func variableKeysFromFormatKey(_ formatKey: String) -> [VariableKeyResult]? {
+    let pattern = #"(%(?>(\d)\$)?#@([\w\.\p{Pd}]+)@)"#
     guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
     let nsrange = NSRange(formatKey.startIndex..<formatKey.endIndex, in: formatKey)
     let matches = regex.matches(in: formatKey, options: [], range: nsrange)
 
-    return matches.compactMap { match -> (String, Range<String.Index>)? in
+    return matches.compactMap { match -> (String, Range<String.Index>, Int?)? in
+      // 1st capture group is the whole format string including delimeters
       let rangeNSRange = match.range(at: 1)
-      let keyNSRange = match.range(at: 2)
+      // 2nd capture group is the positional argument of the format string (Optional!)
+      let positionalArgumentNSRange = match.range(at: 2)
+      // 3rd capture group is the key, the string in between the delimeters
+      let keyNSRange = match.range(at: 3)
+
+      guard rangeNSRange.location != NSNotFound, let rangeRange = Range(rangeNSRange, in: formatKey) else { return nil }
+      guard keyNSRange.location != NSNotFound, let keyRange = Range(keyNSRange, in: formatKey) else { return nil }
 
       guard
-        rangeNSRange.location != NSNotFound,
-        keyNSRange.location != NSNotFound,
-        let rangeRange = Range(rangeNSRange, in: formatKey),
-        let keyRange = Range(keyNSRange, in: formatKey)
+        positionalArgumentNSRange.location != NSNotFound,
+        let positionalArgumentRange = Range(positionalArgumentNSRange, in: formatKey)
       else {
-        return nil
+        return (String(formatKey[keyRange]), rangeRange, nil)
       }
 
-      return (String(formatKey[keyRange]), rangeRange)
+      return (String(formatKey[keyRange]), rangeRange, Int(formatKey[positionalArgumentRange]))
     }
   }
 }
@@ -174,10 +202,10 @@ extension StringsDict.PluralEntry {
       return nil
     }
 
-    let (key, range) = firstRemainingVariableKey
-    guard let variable = variables[key] else { return nil }
+    let (key, range, _) = firstRemainingVariableKey
+    guard let variable = variables.first(where: { $0.key == key }) else { return nil }
 
-    return formatKey.replacingCharacters(in: range, with: variable.other)
+    return formatKey.replacingCharacters(in: range, with: variable.rule.other)
   }
 }
 
