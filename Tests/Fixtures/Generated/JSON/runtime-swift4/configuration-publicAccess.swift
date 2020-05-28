@@ -9,28 +9,13 @@ import Foundation
 // MARK: - JSON Files
 
 // swiftlint:disable identifier_name line_length type_body_length
-internal enum CustomJSON {
-  internal enum Documents {
-    internal enum Document1 {
-      internal static let items: [String] = objectFromJSON(at: "documents.yaml")
-    }
-    internal enum Document2 {
-      internal static let items: [String] = objectFromJSON(at: "documents.yaml")
-    }
-  }
-  internal enum GroceryList {
-    internal static let items: [String] = objectFromJSON(at: "grocery-list.yaml")
-  }
-  internal enum Mapping {
-    private static let _document = JSONDocument(path: "mapping.yaml")
-    internal static let car: Any? = _document["car"]
-    internal static let foo: [String: Any] = _document["foo"]
-    internal static let hello: String = _document["hello"]
-    internal static let weight: Double = _document["weight"]
-  }
-  internal enum Version {
-    internal static let value: String = objectFromJSON(at: "version.yaml")
-  }
+public enum JSONFiles {
+  private static let _document = JSONDocument(path: "configuration.json")
+
+  public static let apiVersion: String = _document["api-version"]
+  public static let country: Any? = _document["country"]
+  public static let environment: String = _document["environment"]
+  public static let options: [String: Any] = _document["options"]
 }
 // swiftlint:enable identifier_name line_length type_body_length
 
