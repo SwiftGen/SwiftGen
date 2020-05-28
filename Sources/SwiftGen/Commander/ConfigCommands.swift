@@ -60,7 +60,7 @@ extension ConfigEntry {
     let context = parser.stencilContext()
 
     for entryOutput in outputs {
-      let templateRealPath = try entryOutput.template.resolvePath(forSubcommand: parserCommand.name)
+      let templateRealPath = try entryOutput.template.resolvePath(forParser: parserCommand)
       let template = try StencilSwiftTemplate(
         templateString: templateRealPath.read(),
         environment: stencilSwiftEnvironment()
@@ -122,17 +122,7 @@ enum ConfigCLI {
       }
     } catch let error as Config.Error {
       logMessage(.error, error)
-      logMessage(
-        .error,
-        """
-        It seems like there was an error running SwiftGen. Please verify that your configuration file is valid by \
-        running:
-        > swiftgen config lint
-
-        If you have any other questions or issues, we have extensive documentation and an issue tracker on GitHub:
-        > https://github.com/SwiftGen/SwiftGen
-        """
-      )
+      logMessage(.error, configRunErrorMessageWithSuggestions)
     }
   }
 
@@ -162,3 +152,19 @@ enum ConfigCLI {
     NSWorkspace.shared.open(docURL)
   }
 }
+
+// MARK: Private
+
+private let configRunErrorMessageWithSuggestions =
+  """
+  It seems like there was an error running SwiftGen.
+
+  - Verify that your configuration file exists at the correct path, or create a new one using:
+  > swiftgen config init
+
+  - Verify that your configuration file is valid by running:
+  > swiftgen config lint
+
+  - If you have any other questions or issues, we have extensive documentation and an issue tracker on GitHub:
+  > https://github.com/SwiftGen/SwiftGen
+  """

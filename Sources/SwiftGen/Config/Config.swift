@@ -176,8 +176,8 @@ extension Config {
 
   private func lint(cmd: ParserCLI, output entryOutput: ConfigEntryOutput, logger: (LogLevel, String) -> Void) {
     do {
-      let actualCmd = Config.deprecatedCommands[cmd.name] ?? cmd.name
-      _ = try entryOutput.template.resolvePath(forSubcommand: actualCmd)
+      let actualCmd = Config.deprecatedCommands[cmd.name].flatMap(ParserCLI.command(named:)) ?? cmd
+      _ = try entryOutput.template.resolvePath(forParser: actualCmd)
     } catch let error {
       logger(.error, "\(cmd.name).outputs: \(error)")
     }

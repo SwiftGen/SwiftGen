@@ -127,7 +127,7 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "templates list"
+            argument = "template list"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
