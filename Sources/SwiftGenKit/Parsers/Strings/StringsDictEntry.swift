@@ -96,7 +96,7 @@ extension StringsDict: Decodable {
     case (.none, .none), (.some, .some):
       throw Strings.ParserError.invalidFormat
     case let (.some(formatKey), .none):
-      let variables = StringsDict.decodeVariableRules(in: container, formatKey: formatKey)
+      let variables = try StringsDict.decodeVariableRules(in: container, formatKey: formatKey)
       self = .pluralEntry(PluralEntry(formatKey: formatKey, variables: variables))
     case let (.none, .some(variableWidthRules)):
       self = .variableWidthEntry(VariableWidthEntry(rules: variableWidthRules))
@@ -106,24 +106,13 @@ extension StringsDict: Decodable {
   private static func decodeVariableRules(
     in container: KeyedDecodingContainer<StringsDict.CodingKeys>,
     formatKey: String
-  ) -> [String: PluralEntry.VariableRule] {
+  ) throws -> [String: PluralEntry.VariableRule] {
     guard let variableKeyTuples = StringsDict.variableKeysFromFormatKey(formatKey) else { return [:] }
-    var variables = [String: PluralEntry.VariableRule]()
+    let variableKeys = variableKeyTuples.sorted(by: { $0.range.lowerBound < $1.range.lowerBound }).map { $0.key }
 
-    var childFormatStrings = [String]()
-    for variableKey in variableKeyTuples.map({ $0.key }) {
-      guard let variable = try? container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableKey)) else { continue }
+    return try variableKeys.reduce(into: [String: PluralEntry.VariableRule]()) { variables, variableKey in
+      let variable = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableKey))
       variables[variableKey] = variable
-
-      childFormatStrings.append(contentsOf: variable.formatStrings)
-    }
-
-    if childFormatStrings.isEmpty {
-      return variables
-    } else {
-      // Execute decodeVariableRules recursively on the formatStrings of the decoded variables to capture variable keys
-      // that are nested in one of the strings (zero, one, ...).
-      return variables.merging(StringsDict.decodeVariableRules(in: container, formatKey: childFormatStrings.joined(separator: " ")), uniquingKeysWith: { existing, _ in existing })
     }
   }
 }
