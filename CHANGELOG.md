@@ -76,6 +76,9 @@
   [#669](https://github.com/SwiftGen/SwiftGen/issue/669)
   [@AliSoftware](https://github.com/AliSoftware)
   [#693](https://github.com/SwiftGen/SwiftGen/pull/693)
+* Commands are now executed in parallel, making SwiftGen faster when multiple parsers are used.  
+  [Marcelo Fabri](https://github.com/marcelofabri)
+  [#699](https://github.com/SwiftGen/SwiftGen/issues/699)
 
 ### Bug Fixes
 
