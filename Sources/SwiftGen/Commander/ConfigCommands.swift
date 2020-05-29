@@ -165,7 +165,7 @@ private extension Config {
   func runCommands(verbose: Bool) throws {
     let errors = commands.keys.sorted().parallelCompactMap { cmd -> Swift.Error? in
       do {
-        _ = try run(cmd: cmd, verbose: verbose)
+        try run(cmd: cmd, verbose: verbose)
         return nil
       } catch {
         return error

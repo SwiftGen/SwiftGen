@@ -61,6 +61,7 @@ private let outputQueue: DispatchQueue = {
     target: .global(qos: .userInteractive)
   )
 
+  // Make sure all the logs are printed before exiting the program
   #if !os(Linux)
   atexit_b {
     queue.sync(flags: .barrier) {}

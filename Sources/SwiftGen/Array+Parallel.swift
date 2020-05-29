@@ -6,7 +6,7 @@
 
 import Foundation
 
-// Based on https://github.com/realm/SwiftLint/blob/0.39.2/Source/SwiftLintFramework/Extensions/Array+SwiftLint.swift#
+// Based on https://github.com/realm/SwiftLint/blob/0.39.2/Source/SwiftLintFramework/Extensions/Array+SwiftLint.swift
 
 extension Array {
   func parallelFlatMap<T>(transform: (Element) -> [T]) -> [T] {
