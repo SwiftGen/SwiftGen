@@ -26,14 +26,19 @@ extension Yaml.Parser {
     [
       "name": file.name,
       "path": file.path.string,
-      "documents": file.documents.map(map(document:))
+      "documents": file.documents.map(Document.init)
     ]
   }
 
-  private func map(document: Any) -> [String: Any] {
-    [
-      "data": document,
-      "metadata": Metadata.generate(for: document)
-    ]
+  // We need to use a `NSObject` subclass + `@objc` to make Stencil use KVC to access this property,
+  // and thus allow that `lazy var` not to be resolved by Stencil too early or before it's accessed in the template
+  final class Document: NSObject {
+    @objc let data: Any
+    @objc private(set) lazy var metadata: [String: Any] = Metadata.generate(for: data)
+
+    init(data: Any) {
+      self.data = data
+      super.init()
+    }
   }
 }

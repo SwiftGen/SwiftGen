@@ -6,7 +6,7 @@
 
 import Foundation
 import PathKit
-import SwiftGenKit
+@testable import SwiftGenKit
 import XCTest
 
 private let colorCode: (String) -> String =
@@ -113,7 +113,7 @@ func compare(_ lhs: Any, _ rhs: Any, key: String, path: String) -> String? {
         return error
       }
     }
-  } else if let lhs = lhs as? [String: Any], let rhs = rhs as? [String: Any] {
+  } else if let lhs = convertToDictionary(lhs), let rhs = convertToDictionary(rhs) {
     return diff(lhs, rhs, path: "\(keyPath)")
   } else if let lhs = lhs as? String, lhs == "\(rhs)" {
     return nil
@@ -150,6 +150,20 @@ func convertToString(_ value: Any) -> String? {
     return value
   case is NSNull:
     return ""
+  default:
+    return nil
+  }
+}
+
+func convertToDictionary(_ value: Any) -> [String: Any]? {
+  switch value {
+  case let value as [String: Any]:
+    return value
+  case let value as Yaml.Parser.Document:
+    return [
+      "data": value.data,
+      "metadata": value.metadata
+    ]
   default:
     return nil
   }
