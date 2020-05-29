@@ -82,6 +82,9 @@
 
 ### Bug Fixes
 
+* SwiftGen now properly shows a better help message and the command usage when running an incomplete command, instead of complaining about a config file.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#706](https://github.com/SwiftGen/SwiftGen/pull/706)
 * XCAssets: improved the performance for color assets by caching the resolved colors.  
   [David Jennes](https://github.com/djbe)
   [#578](https://github.com/SwiftGen/SwiftGen/issue/578)

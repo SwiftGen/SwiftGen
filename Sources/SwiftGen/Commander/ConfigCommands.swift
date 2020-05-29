@@ -120,17 +120,7 @@ enum ConfigCLI {
       }
     } catch let error as Config.Error {
       logMessage(.error, error)
-      logMessage(
-        .error,
-        """
-        It seems like there was an error running SwiftGen. Please verify that your configuration file is valid by \
-        running:
-        > swiftgen config lint
-
-        If you have any other questions or issues, we have extensive documentation and an issue tracker on GitHub:
-        > https://github.com/SwiftGen/SwiftGen
-        """
-      )
+      logMessage(.error, configRunErrorMessageWithSuggestions)
     }
   }
 
@@ -161,6 +151,8 @@ enum ConfigCLI {
   }
 }
 
+// MARK: Private
+
 private extension Config {
   func runCommands(verbose: Bool) throws {
     let errors = commands.keys.sorted().parallelCompactMap { cmd -> Swift.Error? in
@@ -179,3 +171,17 @@ private extension Config {
     }
   }
 }
+
+private let configRunErrorMessageWithSuggestions =
+  """
+  It seems like there was an error running SwiftGen.
+
+  - Verify that your configuration file exists at the correct path, or create a new one using:
+  > swiftgen config init
+
+  - Verify that your configuration file is valid by running:
+  > swiftgen config lint
+
+  - If you have any other questions or issues, we have extensive documentation and an issue tracker on GitHub:
+  > https://github.com/SwiftGen/SwiftGen
+  """
