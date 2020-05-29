@@ -172,8 +172,10 @@ private extension Config {
       }
     }
 
-    if let error = errors.first {
-      throw error
+    if errors.count == 1 {
+      throw errors[0]
+    } else if errors.count > 1 {
+      throw Error.multipleErrors(errors)
     }
   }
 }

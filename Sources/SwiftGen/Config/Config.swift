@@ -202,6 +202,7 @@ extension Config {
     case missingEntry(key: String)
     case wrongType(key: String?, expected: String, got: Any.Type)
     case pathNotFound(path: Path)
+    case multipleErrors([Swift.Error])
 
     var description: String {
       switch self {
@@ -211,6 +212,8 @@ extension Config {
         return "Wrong type for key \(key ?? "root"): expected \(expected), got \(got)."
       case .pathNotFound(let path):
         return "File \(path) not found."
+      case .multipleErrors(let errors):
+        return errors.map { $0.localizedDescription }.joined(separator: "\n")
       }
     }
 
