@@ -49,7 +49,7 @@ This parser currently doesn't accept any options.
 
 ## Plurals
 
-SwiftGen supports non-nested definitions of plurals in `.stringsdict` files.
+SwiftGen supports definitions of plurals in `.stringsdict` files. (Note: only non-nested plural variables are supported for now)
 
 ### Supported
 
@@ -100,7 +100,7 @@ This example should cover the most common use case of plurals that is also suppo
         <key>other</key>
         <string>%@</string>
     </dict>
-        <key>has_rating</key>
+    <key>has_rating</key>
     <dict>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
@@ -171,6 +171,8 @@ _Note:_ To have the correct sorting of the parameters of the generated method, i
 
 <summary>Nested format keys in variables</summary>
 
+Note: in practice this should hopefully be very rare. Especially, if you're using tools like Lokalize, PhraseApp, POEditor, or similar to export your `stringsdict`, it's unlikely that they'll ever generate that kind of convoluted structure for your `stringsdict`.
+
 ```xml
 <key>nested.formatkey-in-variable</key>
 <dict>
@@ -183,6 +185,8 @@ _Note:_ To have the correct sorting of the parameters of the generated method, i
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
+        <!-- This uses a nested key, i.e. you're referencing goose_fields variable inside the definition of geese variable -->
+        <!-- This is currently not properly supported as it's not parsed recursively by SwiftGen. -->
         <string>A goose landed on %#@goose_fields@</string>
         <key>other</key>
         <string>%d geese landed on %#@geese_fields@</string>
