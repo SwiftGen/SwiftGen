@@ -18,8 +18,11 @@ public enum Strings {
     public var description: String {
       switch self {
       case .duplicateKeysInTable(let name, let extensions, let keys):
-        // swiftlint:disable:next line_length
-        return "Table \"\(name)\" already loaded by other parser, the parser for [\(extensions.map({ ".\($0)" }).joined(separator: ", "))] files cannot modify existing keys:\n\(keys.joined(separator: "\n"))"
+        return """
+        Table \"\(name)\" already loaded by other parser, \
+        the parser for [\(extensions.map({ ".\($0)" }).joined(separator: ", "))] files \
+        cannot modify existing keys:\n\(keys.joined(separator: "\n"))
+        """
       case .failureOnLoading(let path):
         return "Failed to load a file at \"\(path)\""
       case .invalidFormat:
