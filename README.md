@@ -734,7 +734,6 @@ Given the following `Localizable.strings` file:
 ```swift
 "alert_title" = "Title of the alert";
 "alert_message" = "Some alert body there";
-"apples.count" = "You have %d apples";
 "bananas.owner" = "Those %d bananas belong to %@.";
 ```
 
@@ -792,8 +791,7 @@ internal enum L10n {
   }
 }
 ```
-
-If you look closely, you can see that the `apples.count` is present in the `Localizable.strings` and the `Localizable.stringsdict`. In this case, SwiftGen will use the plural to generate the method signatures, because Foundation behaves the same way when passing a key that is used in both files to a method to receive a localized string.
+Note that if the same key is present in both, the `.strings` and the `.stringsdict` files, SwiftGen will only consider the one in the `.stringsdict` file because that's also how Foundation behaves.
 
 </details>
 
