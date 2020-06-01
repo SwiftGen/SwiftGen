@@ -163,13 +163,9 @@ extension StringsDict {
       // 3rd capture group is the key, the string in between the delimeters
       let keyNSRange = match.range(at: 3)
 
-      guard rangeNSRange.location != NSNotFound, let rangeRange = Range(rangeNSRange, in: formatKey) else { return nil }
-      guard keyNSRange.location != NSNotFound, let keyRange = Range(keyNSRange, in: formatKey) else { return nil }
-
-      guard
-        positionalArgumentNSRange.location != NSNotFound,
-        let positionalArgumentRange = Range(positionalArgumentNSRange, in: formatKey)
-      else {
+      guard let rangeRange = Range(rangeNSRange, in: formatKey) else { return nil }
+      guard let keyRange = Range(keyNSRange, in: formatKey) else { return nil }
+      guard let positionalArgumentRange = Range(positionalArgumentNSRange, in: formatKey) else {
         return (String(formatKey[keyRange]), rangeRange, nil)
       }
 
