@@ -26,24 +26,31 @@ extension Strings {
         throw ParserError.failureOnLoading(path: path.string)
       }
 
-      let plurals = try Strings.StringsDictFileParser.propertyListDecoder
-        .decode([String: StringsDict].self, from: data)
-        .compactMapValues { stringsDict -> StringsDict.PluralEntry? in
-          guard case let .pluralEntry(pluralEntry) = stringsDict else { return nil }
-          return pluralEntry
-        }
+      do {
+        let plurals = try Strings.StringsDictFileParser.propertyListDecoder
+          .decode([String: StringsDict].self, from: data)
+          .compactMapValues { stringsDict -> StringsDict.PluralEntry? in
+            guard case let .pluralEntry(pluralEntry) = stringsDict else { return nil }
+            return pluralEntry
+          }
 
-      return try plurals.map { keyValuePair -> Entry in
-        let (key, pluralEntry) = keyValuePair
-        let valueTypes = pluralEntry.variables.reduce(into: [String]()) { valueTypes, variable in
-          valueTypes.append("%\(variable.rule.valueTypeKey)")
-        }
+        return try plurals.map { keyValuePair -> Entry in
+          let (key, pluralEntry) = keyValuePair
+          let valueTypes = pluralEntry.variables.reduce(into: [String]()) { valueTypes, variable in
+            valueTypes.append("%\(variable.rule.valueTypeKey)")
+          }
 
-        return Entry(
-          key: key,
-          translation: pluralEntry.translation ?? "",
-          types: try PlaceholderType.placeholders(fromFormat: valueTypes.joined(separator: " ")),
-          keyStructureSeparator: options[Option.separator]
+          return Entry(
+            key: key,
+            translation: pluralEntry.translation ?? "",
+            types: try PlaceholderType.placeholders(fromFormat: valueTypes.joined(separator: " ")),
+            keyStructureSeparator: options[Option.separator]
+          )
+        }
+      } catch DecodingError.keyNotFound(let codingKey, let context) {
+        throw ParserError.invalidPluralFormat(
+          missingVariableKey: codingKey.stringValue,
+          pluralKey: context.codingPath.first?.stringValue ?? ""
         )
       }
     }

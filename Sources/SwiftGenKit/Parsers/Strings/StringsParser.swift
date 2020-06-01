@@ -12,6 +12,7 @@ public enum Strings {
     case duplicateKeysInTable(name: String, extensions: [String], keys: [String])
     case failureOnLoading(path: String)
     case invalidFormat
+    case invalidPluralFormat(missingVariableKey: String, pluralKey: String)
     case invalidPlaceholder(previous: Strings.PlaceholderType, new: Strings.PlaceholderType)
     case unsupportedFileType(path: Path, supported: [String])
 
@@ -27,6 +28,11 @@ public enum Strings {
         return "Failed to load a file at \"\(path)\""
       case .invalidFormat:
         return "Invalid strings file"
+      case .invalidPluralFormat(let missingVariableKey, let pluralKey):
+        return """
+        The variable \"\(missingVariableKey)\" referenced in the NSStringLocalizedFormatKey is not \
+        defined in the variables of the plural key \"\(pluralKey)\"
+        """
       case .invalidPlaceholder(let previous, let new):
         return "Invalid placeholder type \(new) (previous: \(previous))"
       case .unsupportedFileType(let path, let supported):

@@ -142,6 +142,28 @@ class StringsTests: XCTestCase {
     XCTDiffContexts(result, expected: "plurals-same-table-plurals-first", sub: .strings)
   }
 
+  func testInconsistentPluralDefinitionWhenInvalidFormatKey() throws {
+    let parser = try Strings.Parser()
+
+    XCTAssertThrowsError(
+      try parser.searchAndParse(path: Fixtures.path(for: "LocPluralBroken.stringsdict", sub: .strings)),
+      "Expected an error to be thrown"
+    ) { error in
+      guard let parserError = error as? Strings.ParserError else {
+        XCTFail("Expected a Strings.ParserError")
+        return
+      }
+
+      guard case .invalidPluralFormat(let missingVariableKey, let pluralKey) = parserError else {
+        XCTFail("Expected an invalidPluralFormat error")
+        return
+      }
+
+      XCTAssertEqual(missingVariableKey, "hat_bewertung")
+      XCTAssertEqual(pluralKey, "plural.missing-variable")
+    }
+  }
+
   // MARK: - Custom options
 
   func testCustomSeparator() throws {
