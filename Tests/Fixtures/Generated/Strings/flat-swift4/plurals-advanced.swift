@@ -9,10 +9,6 @@ import Foundation
 
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 internal enum L10n {
-  /// Plural case 'other': %@ has %d ratings
-  internal static func multiplePlaceholdersStringInt(_ p1: Int) -> String {
-    return L10n.tr("LocPluralAdvanced", "multiple.placeholders.string-int", p1)
-  }
   /// Plural case 'other': Your %3$@ list contains %1$d items. You should buy them %2$@.
   internal static func multiplePlaceholdersAndVariablesIntStringString(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
     return L10n.tr("LocPluralAdvanced", "multiple.placeholders-and-variables.int-string-string", p1, String(describing: p2), String(describing: p3))

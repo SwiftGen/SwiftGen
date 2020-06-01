@@ -5,8 +5,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LocPluralAdvanced : NSObject
-// multiple.placeholders.string-int --> "Plural case 'other': %@ has %d ratings"
-+ (NSString*)multiplePlaceholdersStringIntWithValue:(NSInteger)p1;
 // multiple.placeholders-and-variables.int-string-string --> "Plural case 'other': Your %3$@ list contains %1$d items. You should buy them %2$@."
 + (NSString*)multiplePlaceholdersAndVariablesIntStringStringWithValues:(NSInteger)p1 :(id)p2 :(id)p3;
 // multiple.placeholders-and-variables.string-int --> "Plural case 'other': %@ has %d ratings"

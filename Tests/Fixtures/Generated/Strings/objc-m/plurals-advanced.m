@@ -26,10 +26,6 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 #pragma clang diagnostic pop
 
 @implementation LocPluralAdvanced : NSObject
-+ (NSString*)multiplePlaceholdersStringIntWithValue:(NSInteger)p1
-{
-    return tr(@"LocPluralAdvanced", @"multiple.placeholders.string-int", p1);
-}
 + (NSString*)multiplePlaceholdersAndVariablesIntStringStringWithValues:(NSInteger)p1 :(id)p2 :(id)p3
 {
     return tr(@"LocPluralAdvanced", @"multiple.placeholders-and-variables.int-string-string", p1, p2, p3);

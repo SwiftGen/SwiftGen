@@ -2,13 +2,6 @@ tables:
 - levels:
     children:
     - children:
-      - name: "placeholders"
-        strings:
-        - key: "multiple.placeholders.string-int"
-          name: "string-int"
-          translation: "Plural case 'other': %@ has %d ratings"
-          types:
-          - "Int"
       - name: "placeholders-and-variables"
         strings:
         - key: "multiple.placeholders-and-variables.int-string-string"

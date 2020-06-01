@@ -12,12 +12,6 @@ import Foundation
 internal enum L10n {
 
   internal enum Multiple {
-    internal enum Placeholders {
-      /// Plural case 'other': %@ has %d ratings
-      internal static func stringInt(_ p1: Int) -> String {
-        return L10n.tr("LocPluralAdvanced", "multiple.placeholders.string-int", p1)
-      }
-    }
     internal enum PlaceholdersAndVariables {
       /// Plural case 'other': Your %3$@ list contains %1$d items. You should buy them %2$@.
       internal static func intStringString(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
