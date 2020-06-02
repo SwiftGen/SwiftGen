@@ -791,7 +791,7 @@ internal enum L10n {
   }
 }
 ```
-Note that if the same key is present in both, the `.strings` and the `.stringsdict` files, SwiftGen will only consider the one in the `.stringsdict` file because that's also how Foundation behaves.
+Note that if the same key is present in both the `.strings` and the `.stringsdict` files, SwiftGen will only consider the one in the `.stringsdict` file because that's also how Foundation behaves at runtime.
 
 </details>
 
