@@ -35,30 +35,33 @@ internal struct ColorName {
 
 // MARK: - Implementation Details
 
-// swiftlint:disable operator_usage_whitespace
 internal extension Color {
   convenience init(rgbaValue: UInt32) {
-    let components = rgbaValue.normalizedRGBAComponents
+    let components = RGBAComponents(rgbaValue: rgbaValue).normalized
     self.init(red: components[0], green: components[1], blue: components[2], alpha: components[3])
   }
 }
-// swiftlint:enable operator_usage_whitespace
 
-fileprivate extension UInt32 {
-  var rgbaComponents: [CGFloat] {
-    let shifts: [UInt32] = [
-      self >> 24, // red
-      self >> 16, // green
-      self >> 8,  // blue
-      self        // alpha
+fileprivate struct RGBAComponents {
+  let rgbaValue: UInt32
+
+  private var shifts: [UInt32] {
+    [
+      rgbaValue >> 24, // red
+      rgbaValue >> 16, // green
+      rgbaValue >> 8,  // blue
+      rgbaValue        // alpha
     ]
-    return shifts.map {
+  }
+
+  private var components: [CGFloat] {
+    shifts.map {
       CGFloat($0 & 0xff)
     }
   }
 
-  var normalizedRGBAComponents: [CGFloat] {
-    rgbaComponents.map { $0 / 255.0 }
+  var normalized: [CGFloat] {
+    components.map { $0 / 255.0 }
   }
 }
 
