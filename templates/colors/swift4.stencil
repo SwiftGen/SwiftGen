@@ -44,14 +44,12 @@
 
 // MARK: - Implementation Details
 
-// swiftlint:disable operator_usage_whitespace
 internal extension {{colorAlias}} {
   convenience init(rgbaValue: UInt32) {
     let components = rgbaValue.normalizedRGBAComponents
     self.init(red: components[0], green: components[1], blue: components[2], alpha: components[3])
   }
 }
-// swiftlint:enable operator_usage_whitespace
 
 fileprivate extension UInt32 {
   var rgbaComponents: [CGFloat] {
