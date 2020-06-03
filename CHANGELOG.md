@@ -103,7 +103,8 @@
   [#692](https://github.com/SwiftGen/SwiftGen/pull/692)
 * Colors: Fix compile time warning when long expression type checking is enabled.  
   [Ryan Mason-Davies](https://github.com/iotize)
-  [#704](https://github.com/SwiftGen/SwiftGen/issues/704) [#710](https://github.com/SwiftGen/SwiftGen/pull/710)
+  [#704](https://github.com/SwiftGen/SwiftGen/issues/704)
+  [#710](https://github.com/SwiftGen/SwiftGen/pull/710)
 
 ### Internal Changes
 
