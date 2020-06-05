@@ -19,6 +19,7 @@ extension Strings {
 
     static let extensions = ["strings"]
     static let allOptions: ParserOptionList = [Option.separator]
+    static let propertyListDecoder = PropertyListDecoder()
 
     // Localizable.strings files are generally UTF16, not UTF8!
     func parseFile(at path: Path) throws -> [Strings.Entry] {
@@ -26,10 +27,8 @@ extension Strings {
         throw ParserError.failureOnLoading(path: path.string)
       }
 
-      let plist = try PropertyListSerialization.propertyList(from: data, format: nil)
-      guard let dict = plist as? [String: String] else {
-        throw ParserError.invalidFormat
-      }
+      let dict = try Strings.StringsFileParser.propertyListDecoder
+        .decode([String: String].self, from: data)
 
       return try dict.map { key, translation in
         try Entry(key: key, translation: translation, keyStructureSeparator: options[Option.separator])
