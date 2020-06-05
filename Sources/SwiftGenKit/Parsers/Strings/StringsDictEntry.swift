@@ -104,37 +104,14 @@ extension StringsDict: Decodable {
     case (.none, .none), (.some, .some):
       throw Strings.ParserError.invalidFormat
     case let (.some(formatKey), .none):
-      let variables = try StringsDict.decodeVariableRules(in: container, formatKey: formatKey)
+      let sortedVariableNames = StringsDict.sortedVariableNamesFromFormatKey(formatKey: formatKey)
+      let variables = try sortedVariableNames.reduce(into: [PluralEntry.Variable]()) { variables, variableName in
+        let variableRule = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableName))
+        variables.append(PluralEntry.Variable(name: variableName, rule: variableRule))
+      }
       self = .pluralEntry(PluralEntry(formatKey: formatKey, variables: variables))
     case let (.none, .some(variableWidthRules)):
       self = .variableWidthEntry(VariableWidthEntry(rules: variableWidthRules))
-    }
-  }
-
-  private static func decodeVariableRules(
-    in container: KeyedDecodingContainer<StringsDict.CodingKeys>,
-    formatKey: String
-  ) throws -> [PluralEntry.Variable] {
-    guard let variableNameResults = StringsDict.variableNamesFromFormatKey(formatKey) else { return [] }
-    let sortedVariableNames = variableNameResults
-      .sorted { lhs, rhs in
-        // Sort by positional argument if present, otherwise by occurrence in the format key
-        switch (lhs.positionalArgument, rhs.positionalArgument, lhs.range.lowerBound, rhs.range.lowerBound) {
-        case let (.none, .none, lhs, rhs):
-          return lhs < rhs
-        case (.some, .none, _, _):
-          return true
-        case (.none, .some, _, _):
-          return false
-        case let (.some(lhs), .some(rhs), _, _):
-          return lhs < rhs
-        }
-      }
-      .map { $0.name }
-
-    return try sortedVariableNames.reduce(into: [PluralEntry.Variable]()) { variables, variableName in
-      let variableRule = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableName))
-      variables.append(PluralEntry.Variable(name: variableName, rule: variableRule))
     }
   }
 }
@@ -173,6 +150,27 @@ extension StringsDict {
 
       return (String(formatKey[nameRange]), fullMatchRange, Int(formatKey[positionalArgumentRange]))
     }
+  }
+
+  private static func sortedVariableNamesFromFormatKey(formatKey: String) -> [String] {
+    guard let variableNameResults = StringsDict.variableNamesFromFormatKey(formatKey) else { return [] }
+    let sortedVariableNames = variableNameResults
+      .sorted { lhs, rhs in
+        // Sort by positional argument if present, otherwise by occurrence in the format key
+        switch (lhs.positionalArgument, rhs.positionalArgument, lhs.range.lowerBound, rhs.range.lowerBound) {
+        case let (.none, .none, lhs, rhs):
+          return lhs < rhs
+        case (.some, .none, _, _):
+          return true
+        case (.none, .some, _, _):
+          return false
+        case let (.some(lhs), .some(rhs), _, _):
+          return lhs < rhs
+        }
+      }
+      .map { $0.name }
+
+    return sortedVariableNames
   }
 }
 
