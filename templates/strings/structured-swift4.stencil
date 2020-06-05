@@ -55,7 +55,7 @@ import Foundation
   {% endfor %}
 {% endmacro %}
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
+// swiftlint:disable nesting type_body_length type_name
 {% set enumName %}{{param.enumName|default:"L10n"}}{% endset %}
 {{accessModifier}} enum {{enumName}} {
   {% if tables.count > 1 or param.forceFileNameEnum %}
@@ -69,7 +69,7 @@ import Foundation
   {% endif %}
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
+// swiftlint:enable nesting type_body_length type_name
 
 // MARK: - Implementation Details
 
