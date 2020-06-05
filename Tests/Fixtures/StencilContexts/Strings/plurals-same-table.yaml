@@ -5,7 +5,7 @@ tables:
       strings:
       - key: "apples.count"
         name: "count"
-        translation: "Plural case 'other': You have %d apples. Wow that is a lot!"
+        translation: "Plural format key: \"%#@apples@\""
         types:
         - "Int"
     - name: "bananas"
@@ -21,7 +21,7 @@ tables:
         strings:
         - key: "competition.event.number-of-matches"
           name: "number-of-matches"
-          translation: "Plural case 'other': %ld matches"
+          translation: "Plural format key: \"%#@Matches@\""
           types:
           - "Int"
       name: "competition"
@@ -30,7 +30,7 @@ tables:
         strings:
         - key: "feed.subscription.count"
           name: "count"
-          translation: "Plural case 'other': %ld subscriptions"
+          translation: "Plural format key: \"%#@Subscriptions@\""
           types:
           - "Int"
       name: "feed"

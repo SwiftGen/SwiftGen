@@ -17,13 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)privateWithValues:(id)p1 :(NSInteger)p2;
 // types --> "Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString: '%s', Pointer: '%p'"
 + (NSString*)typesWithValues:(id)p1 :(char)p2 :(NSInteger)p3 :(float)p4 :(char*)p5 :(void*)p6;
-// apples.count --> "Plural case 'other': You have %d apples. Wow that is a lot!"
+// apples.count --> "Plural format key: "%#@apples@""
 + (NSString*)applesCountWithValue:(NSInteger)p1;
 // bananas.owner --> "Those %d bananas belong to %@."
 + (NSString*)bananasOwnerWithValues:(NSInteger)p1 :(id)p2;
-// competition.event.number-of-matches --> "Plural case 'other': %ld matches"
+// competition.event.number-of-matches --> "Plural format key: "%#@Matches@""
 + (NSString*)competitionEventNumberOfMatchesWithValue:(NSInteger)p1;
-// feed.subscription.count --> "Plural case 'other': %ld subscriptions"
+// feed.subscription.count --> "Plural format key: "%#@Subscriptions@""
 + (NSString*)feedSubscriptionCountWithValue:(NSInteger)p1;
 // settings.navigation-bar.self --> "Some Reserved Keyword there"
 + (NSString*)settingsNavigationBarSelf;

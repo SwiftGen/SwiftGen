@@ -6,15 +6,15 @@ tables:
         strings:
         - key: "multiple.placeholders-and-variables.int-string-string"
           name: "int-string-string"
-          translation: "Plural case 'other': Your %3$@ list contains %1$d items. You
-            should buy them %2$@."
+          translation: "Plural format key: \"Your %3$#@third@ list contains %1$#@first@
+            %2$#@second@.\""
           types:
           - "Int"
           - "String"
           - "String"
         - key: "multiple.placeholders-and-variables.string-int"
           name: "string-int"
-          translation: "Plural case 'other': %@ has %d ratings"
+          translation: "Plural format key: \"%#@element@ %#@has_rating@\""
           types:
           - "String"
           - "Int"
@@ -22,7 +22,7 @@ tables:
         strings:
         - key: "multiple.variables.three-variables-in-formatkey"
           name: "three-variables-in-formatkey"
-          translation: "Plural case 'other': %d files remaining (%d bytes, %d minutes)"
+          translation: "Plural format key: \"%#@files@ (%#@bytes@, %#@minutes@)\""
           types:
           - "Int"
           - "Int"

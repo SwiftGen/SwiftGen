@@ -36,15 +36,16 @@ extension Strings {
           }
 
         return try plurals.map { keyValuePair -> Entry in
+          // Extract the placeholders (`NSStringFormatValueTypeKey`) from the different variable definitions
+          // into a single flattened list of placeholders
           let (key, pluralEntry) = keyValuePair
-          // extract the placeholders (`NSStringFormatValueTypeKey`) from the different variable definitions into a single flattened list of placeholders
           let valueTypes = pluralEntry.variables.reduce(into: [String]()) { valueTypes, variable in
             valueTypes.append("%\(variable.rule.valueTypeKey)")
           }
 
           return Entry(
             key: key,
-            translation: pluralEntry.translation ?? "",
+            translation: "Plural format key: \"\(pluralEntry.formatKey)\"",
             types: try PlaceholderType.placeholders(fromFormat: valueTypes.joined(separator: " ")),
             keyStructureSeparator: options[Option.separator]
           )

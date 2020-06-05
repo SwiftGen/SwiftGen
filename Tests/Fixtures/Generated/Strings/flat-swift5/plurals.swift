@@ -9,15 +9,15 @@ import Foundation
 
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 internal enum L10n {
-  /// Plural case 'other': You have %d apples. Wow that is a lot!
+  /// Plural format key: "%#@apples@"
   internal static func applesCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "apples.count", p1)
   }
-  /// Plural case 'other': %ld matches
+  /// Plural format key: "%#@Matches@"
   internal static func competitionEventNumberOfMatches(_ p1: Int) -> String {
     return L10n.tr("Localizable", "competition.event.number-of-matches", p1)
   }
-  /// Plural case 'other': %ld subscriptions
+  /// Plural format key: "%#@Subscriptions@"
   internal static func feedSubscriptionCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "feed.subscription.count", p1)
   }

@@ -5,11 +5,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Localizable : NSObject
-// apples.count --> "Plural case 'other': You have %d apples. Wow that is a lot!"
+// apples.count --> "Plural format key: "%#@apples@""
 + (NSString*)applesCountWithValue:(NSInteger)p1;
-// competition.event.number-of-matches --> "Plural case 'other': %ld matches"
+// competition.event.number-of-matches --> "Plural format key: "%#@Matches@""
 + (NSString*)competitionEventNumberOfMatchesWithValue:(NSInteger)p1;
-// feed.subscription.count --> "Plural case 'other': %ld subscriptions"
+// feed.subscription.count --> "Plural format key: "%#@Subscriptions@""
 + (NSString*)feedSubscriptionCountWithValue:(NSInteger)p1;
 @end
 

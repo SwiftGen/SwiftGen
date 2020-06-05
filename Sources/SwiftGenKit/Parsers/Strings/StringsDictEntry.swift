@@ -104,7 +104,7 @@ extension StringsDict: Decodable {
     case (.none, .none), (.some, .some):
       throw Strings.ParserError.invalidFormat
     case let (.some(formatKey), .none):
-      let sortedVariableNames = StringsDict.sortedVariableNamesFromFormatKey(formatKey: formatKey)
+      let sortedVariableNames = StringsDict.variableNamesFromFormatKey(formatKey)
       let variables = try sortedVariableNames.reduce(into: [PluralEntry.Variable]()) { variables, variableName in
         let variableRule = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableName))
         variables.append(PluralEntry.Variable(name: variableName, rule: variableRule))
@@ -127,14 +127,13 @@ extension StringsDict {
   ///
   /// - Parameter formatKey: The formatKey from which the variable names should be parsed.
   /// - Returns: An array of discovered variable names, their range within the `formatKey` and the positional argument.
-  // swiftlint:disable:next discouraged_optional_collection
-  private static func variableNamesFromFormatKey(_ formatKey: String) -> [VariableNameResult]? {
+  private static func variableNamesFromFormatKey(_ formatKey: String) -> [String] {
     let pattern = #"(%(?>(\d)\$)?#@([\w\.\p{Pd}]+)@)"#
-    guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
+    guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return [] }
     let nsrange = NSRange(formatKey.startIndex..<formatKey.endIndex, in: formatKey)
     let matches = regex.matches(in: formatKey, options: [], range: nsrange)
 
-    return matches.compactMap { match -> (String, Range<String.Index>, Int?)? in
+    let variableNameResults = matches.compactMap { match -> VariableNameResult? in
       // 1st capture group is the whole format string including delimeters
       let fullMatchNSRange = match.range(at: 1)
       // 2nd capture group is the positional argument of the format string (Optional!)
@@ -150,11 +149,8 @@ extension StringsDict {
 
       return (String(formatKey[nameRange]), fullMatchRange, Int(formatKey[positionalArgumentRange]))
     }
-  }
 
-  private static func sortedVariableNamesFromFormatKey(formatKey: String) -> [String] {
-    guard let variableNameResults = StringsDict.variableNamesFromFormatKey(formatKey) else { return [] }
-    let sortedVariableNames = variableNameResults
+    return variableNameResults
       .sorted { lhs, rhs in
         // Sort by positional argument if present, otherwise by occurrence in the format key
         switch (lhs.positionalArgument, rhs.positionalArgument, lhs.range.lowerBound, rhs.range.lowerBound) {
@@ -169,38 +165,5 @@ extension StringsDict {
         }
       }
       .map { $0.name }
-
-    return sortedVariableNames
-  }
-}
-
-extension StringsDict.PluralEntry {
-  var translation: String? {
-    var result = formatKey
-
-    for intermediateResult in sequence(first: result, next: unfurlVariableNamesInFormatKey(_:)) {
-      result = intermediateResult
-    }
-
-    return "Plural case 'other': \(result)"
-  }
-
-  /// Unfurls any variables in a `NSStringLocalizedFormatKey` to get a possible translation for the `other` case.
-  ///
-  /// This method should be used in a recursive context, in which the output will be used as the input for the
-  /// next iteration.
-  ///
-  /// - Parameter formatKey: A format key containing variables.
-  /// - Returns: The format key in which all its variables are replaced with the content of the `other` translation,
-  ///  if the `formatKey` contained any variables, `nil` otherwise.
-  private func unfurlVariableNamesInFormatKey(_ formatKey: String) -> String? {
-    guard let firstRemainingVariableName = StringsDict.variableNamesFromFormatKey(formatKey)?.first else {
-      return nil
-    }
-
-    let (name, range, _) = firstRemainingVariableName
-    guard let variable = variables.first(where: { $0.name == name }) else { return nil }
-
-    return formatKey.replacingCharacters(in: range, with: variable.rule.other)
   }
 }

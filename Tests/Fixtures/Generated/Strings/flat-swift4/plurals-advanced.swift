@@ -9,15 +9,15 @@ import Foundation
 
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 internal enum L10n {
-  /// Plural case 'other': Your %3$@ list contains %1$d items. You should buy them %2$@.
+  /// Plural format key: "Your %3$#@third@ list contains %1$#@first@ %2$#@second@."
   internal static func multiplePlaceholdersAndVariablesIntStringString(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
     return L10n.tr("LocPluralAdvanced", "multiple.placeholders-and-variables.int-string-string", p1, String(describing: p2), String(describing: p3))
   }
-  /// Plural case 'other': %@ has %d ratings
+  /// Plural format key: "%#@element@ %#@has_rating@"
   internal static func multiplePlaceholdersAndVariablesStringInt(_ p1: Any, _ p2: Int) -> String {
     return L10n.tr("LocPluralAdvanced", "multiple.placeholders-and-variables.string-int", String(describing: p1), p2)
   }
-  /// Plural case 'other': %d files remaining (%d bytes, %d minutes)
+  /// Plural format key: "%#@files@ (%#@bytes@, %#@minutes@)"
   internal static func multipleVariablesThreeVariablesInFormatkey(_ p1: Int, _ p2: Int, _ p3: Int) -> String {
     return L10n.tr("LocPluralAdvanced", "multiple.variables.three-variables-in-formatkey", p1, p2, p3)
   }

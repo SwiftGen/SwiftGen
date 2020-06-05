@@ -13,17 +13,17 @@ internal enum L10n {
 
   internal enum Multiple {
     internal enum PlaceholdersAndVariables {
-      /// Plural case 'other': Your %3$@ list contains %1$d items. You should buy them %2$@.
+      /// Plural format key: "Your %3$#@third@ list contains %1$#@first@ %2$#@second@."
       internal static func intStringString(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
         return L10n.tr("LocPluralAdvanced", "multiple.placeholders-and-variables.int-string-string", p1, String(describing: p2), String(describing: p3))
       }
-      /// Plural case 'other': %@ has %d ratings
+      /// Plural format key: "%#@element@ %#@has_rating@"
       internal static func stringInt(_ p1: Any, _ p2: Int) -> String {
         return L10n.tr("LocPluralAdvanced", "multiple.placeholders-and-variables.string-int", String(describing: p1), p2)
       }
     }
     internal enum Variables {
-      /// Plural case 'other': %d files remaining (%d bytes, %d minutes)
+      /// Plural format key: "%#@files@ (%#@bytes@, %#@minutes@)"
       internal static func threeVariablesInFormatkey(_ p1: Int, _ p2: Int, _ p3: Int) -> String {
         return L10n.tr("LocPluralAdvanced", "multiple.variables.three-variables-in-formatkey", p1, p2, p3)
       }

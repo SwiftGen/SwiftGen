@@ -30,7 +30,7 @@ internal enum L10n {
   }
 
   internal enum Apples {
-    /// Plural case 'other': You have %d apples. Wow that is a lot!
+    /// Plural format key: "%#@apples@"
     internal static func count(_ p1: Int) -> String {
       return L10n.tr("Localizable", "apples.count", p1)
     }
@@ -45,7 +45,7 @@ internal enum L10n {
 
   internal enum Competition {
     internal enum Event {
-      /// Plural case 'other': %ld matches
+      /// Plural format key: "%#@Matches@"
       internal static func numberOfMatches(_ p1: Int) -> String {
         return L10n.tr("Localizable", "competition.event.number-of-matches", p1)
       }
@@ -54,7 +54,7 @@ internal enum L10n {
 
   internal enum Feed {
     internal enum Subscription {
-      /// Plural case 'other': %ld subscriptions
+      /// Plural format key: "%#@Subscriptions@"
       internal static func count(_ p1: Int) -> String {
         return L10n.tr("Localizable", "feed.subscription.count", p1)
       }

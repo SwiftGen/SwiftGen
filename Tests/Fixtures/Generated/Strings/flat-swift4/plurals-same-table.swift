@@ -27,7 +27,7 @@ internal enum L10n {
   internal static func types(_ p1: Any, _ p2: CChar, _ p3: Int, _ p4: Float, _ p5: UnsafePointer<CChar>, _ p6: UnsafeRawPointer) -> String {
     return L10n.tr("Localizable", "types", String(describing: p1), p2, p3, p4, p5, Int(bitPattern: p6))
   }
-  /// Plural case 'other': You have %d apples. Wow that is a lot!
+  /// Plural format key: "%#@apples@"
   internal static func applesCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "apples.count", p1)
   }
@@ -35,11 +35,11 @@ internal enum L10n {
   internal static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
     return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
   }
-  /// Plural case 'other': %ld matches
+  /// Plural format key: "%#@Matches@"
   internal static func competitionEventNumberOfMatches(_ p1: Int) -> String {
     return L10n.tr("Localizable", "competition.event.number-of-matches", p1)
   }
-  /// Plural case 'other': %ld subscriptions
+  /// Plural format key: "%#@Subscriptions@"
   internal static func feedSubscriptionCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "feed.subscription.count", p1)
   }
