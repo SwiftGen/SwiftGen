@@ -30,12 +30,14 @@ extension Strings {
         let plurals = try Strings.StringsDictFileParser.propertyListDecoder
           .decode([String: StringsDict].self, from: data)
           .compactMapValues { stringsDict -> StringsDict.PluralEntry? in
+            // We only support .pluralEntry (and not .variableWidthEntry) for now, so filter out the rest
             guard case let .pluralEntry(pluralEntry) = stringsDict else { return nil }
             return pluralEntry
           }
 
         return try plurals.map { keyValuePair -> Entry in
           let (key, pluralEntry) = keyValuePair
+          // extract the placeholders (`NSStringFormatValueTypeKey`) from the different variable definitions into a single flattened list of placeholders
           let valueTypes = pluralEntry.variables.reduce(into: [String]()) { valueTypes, variable in
             valueTypes.append("%\(variable.rule.valueTypeKey)")
           }
