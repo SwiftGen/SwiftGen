@@ -43,10 +43,17 @@ extension Strings {
             valueTypes.append("%\(variable.rule.valueTypeKey)")
           }
 
+          let formatKeyOnlyPlaceholders = try PlaceholderType.placeholders(
+            fromFormat: pluralEntry.formatKeyWithoutVariables
+          )
+          let valueTypePlaceholders = try PlaceholderType.placeholders(
+            fromFormat: valueTypes.joined(separator: " ")
+          )
+
           return Entry(
             key: key,
             translation: "Plural format key: \"\(pluralEntry.formatKey)\"",
-            types: try PlaceholderType.placeholders(fromFormat: valueTypes.joined(separator: " ")),
+            types: formatKeyOnlyPlaceholders + valueTypePlaceholders,
             keyStructureSeparator: options[Option.separator]
           )
         }

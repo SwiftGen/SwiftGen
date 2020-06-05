@@ -6,15 +6,15 @@ tables:
         strings:
         - key: "multiple.placeholders-and-variables.int-string-string"
           name: "int-string-string"
-          translation: "Plural format key: \"Your %3$#@third@ list contains %1$#@first@
-            %2$#@second@.\""
+          translation: "Plural format key: \"Your %3$@ list contains %1$#@first@ %2$@.\""
           types:
+          - "UnsafeRawPointer"
+          - "String"
+          - "String"
           - "Int"
-          - "String"
-          - "String"
         - key: "multiple.placeholders-and-variables.string-int"
           name: "string-int"
-          translation: "Plural format key: \"%#@element@ %#@has_rating@\""
+          translation: "Plural format key: \"%@ %#@has_rating@\""
           types:
           - "String"
           - "Int"

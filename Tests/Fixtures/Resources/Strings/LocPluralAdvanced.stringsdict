@@ -5,17 +5,8 @@
         <key>multiple.placeholders-and-variables.string-int</key>
         <dict>
             <key>NSStringLocalizedFormatKey</key>
-            <string>%#@element@ %#@has_rating@</string>
-            <key>element</key>
-            <dict>
-                <key>NSStringFormatSpecTypeKey</key>
-                <string>NSStringPluralRuleType</string>
-                <key>NSStringFormatValueTypeKey</key>
-                <string>@</string>
-                <key>other</key>
-                <string>%@</string>
-            </dict>
-                <key>has_rating</key>
+            <string>%@ %#@has_rating@</string>
+            <key>has_rating</key>
             <dict>
                 <key>NSStringFormatSpecTypeKey</key>
                 <string>NSStringPluralRuleType</string>
@@ -33,7 +24,7 @@
         <dict>
             <key>NSStringLocalizedFormatKey</key>
             <!-- Your <Grocery> list contains <3 items. You should buy them> <today>. -->
-            <string>Your %3$#@third@ list contains %1$#@first@ %2$#@second@.</string>
+            <string>Your %3$@ list contains %1$#@first@ %2$@.</string>
             <key>first</key>
             <dict>
                 <key>NSStringFormatSpecTypeKey</key>
@@ -41,29 +32,11 @@
                 <key>NSStringFormatValueTypeKey</key>
                 <string>d</string>
                 <key>zero</key>
-                <string>no items.</string>
+                <string>no items. Add one</string>
                 <key>one</key>
                 <string>one item. You should buy it</string>
                 <key>other</key>
                 <string>%1$d items. You should buy them</string>
-            </dict>
-            <key>second</key>
-            <dict>
-                <key>NSStringFormatSpecTypeKey</key>
-                <string>NSStringPluralRuleType</string>
-                <key>NSStringFormatValueTypeKey</key>
-                <string>@</string>
-                <key>other</key>
-                <string>%2$@</string>
-            </dict>
-            <key>third</key>
-            <dict>
-                <key>NSStringFormatSpecTypeKey</key>
-                <string>NSStringPluralRuleType</string>
-                <key>NSStringFormatValueTypeKey</key>
-                <string>@</string>
-                <key>other</key>
-                <string>%3$@</string>
             </dict>
         </dict>
         <key>multiple.variables.three-variables-in-formatkey</key>

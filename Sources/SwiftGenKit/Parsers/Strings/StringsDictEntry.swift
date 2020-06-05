@@ -104,7 +104,7 @@ extension StringsDict: Decodable {
     case (.none, .none), (.some, .some):
       throw Strings.ParserError.invalidFormat
     case let (.some(formatKey), .none):
-      let sortedVariableNames = StringsDict.variableNamesFromFormatKey(formatKey)
+      let sortedVariableNames = StringsDict.variableNamesFromFormatKey(formatKey)?.map { $0.name } ?? []
       let variables = try sortedVariableNames.reduce(into: [PluralEntry.Variable]()) { variables, variableName in
         let variableRule = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableName))
         variables.append(PluralEntry.Variable(name: variableName, rule: variableRule))
@@ -127,9 +127,10 @@ extension StringsDict {
   ///
   /// - Parameter formatKey: The formatKey from which the variable names should be parsed.
   /// - Returns: An array of discovered variable names, their range within the `formatKey` and the positional argument.
-  private static func variableNamesFromFormatKey(_ formatKey: String) -> [String] {
+  // swiftlint:disable:next discouraged_optional_collection
+  private static func variableNamesFromFormatKey(_ formatKey: String) -> [VariableNameResult]? {
     let pattern = #"(%(?>(\d)\$)?#@([\w\.\p{Pd}]+)@)"#
-    guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return [] }
+    guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
     let nsrange = NSRange(formatKey.startIndex..<formatKey.endIndex, in: formatKey)
     let matches = regex.matches(in: formatKey, options: [], range: nsrange)
 
@@ -164,6 +165,38 @@ extension StringsDict {
           return lhs < rhs
         }
       }
-      .map { $0.name }
+  }
+}
+
+extension StringsDict.PluralEntry {
+  var formatKeyWithoutVariables: String {
+    var result = formatKey
+
+    for intermediateResult in sequence(first: result, next: removeFirstVariableInFormatKey(_:)) {
+      result = intermediateResult
+    }
+
+    return result
+  }
+
+  /// Removes the first encountered variable in a `NSStringLocalizedFormatKey`.
+  ///
+  /// This method should be used in a recursive context, in which the output will be used as the input for the
+  /// next iteration.
+  ///
+  /// - Parameter formatKey: A format key containing variables.
+  /// - Returns: The format key in which the first encountered variable is removed,
+  ///  if the `formatKey` contained any variables, `nil` otherwise.
+  private func removeFirstVariableInFormatKey(_ formatKey: String) -> String? {
+    guard let firstRemainingVariableName = StringsDict.variableNamesFromFormatKey(formatKey)?.first else {
+      return nil
+    }
+
+    let range = firstRemainingVariableName.range
+    guard range.lowerBound >= formatKey.indices.startIndex, range.upperBound <= formatKey.indices.endIndex else {
+      return nil
+    }
+
+    return formatKey.replacingCharacters(in: range, with: " ")
   }
 }
