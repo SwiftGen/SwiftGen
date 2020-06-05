@@ -14,8 +14,7 @@ class StringsTests: XCTestCase {
       "localizable",
       "multiple",
       "plurals",
-      "plurals-same-table-strings-first",
-      "plurals-same-table-plurals-first",
+      "plurals-same-table",
       "plurals-advanced"
     ]
   }

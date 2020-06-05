@@ -118,7 +118,7 @@ class StringsTests: XCTestCase {
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.stringsdict", sub: .strings))
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "plurals-same-table-strings-first", sub: .strings)
+    XCTDiffContexts(result, expected: "plurals-same-table", sub: .strings)
   }
 
   func testSameTableWithPluralsParsingPluralsFirst() throws {
@@ -139,7 +139,7 @@ class StringsTests: XCTestCase {
     XCTAssertEqual(errorMessage, expectedMessage)
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "plurals-same-table-plurals-first", sub: .strings)
+    XCTDiffContexts(result, expected: "plurals-same-table", sub: .strings)
   }
 
   func testInconsistentPluralDefinitionWhenInvalidFormatKey() throws {
