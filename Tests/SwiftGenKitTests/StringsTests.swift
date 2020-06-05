@@ -58,14 +58,13 @@ class StringsTests: XCTestCase {
 
   func testMultipleFilesDuplicate() throws {
     let parser = try Strings.Parser()
-    var receivedWarning: String?
+    var receivedWarnings = [String]()
     parser.warningHandler = { message, _, _ -> Void in
-      receivedWarning = message
+      receivedWarnings.append(message)
     }
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
-    let errorMessage = try XCTUnwrap(receivedWarning)
     let expectedMessage = #"""
     Table "Localizable" already loaded by other parser, the parser for [.strings] files cannot modify existing keys:
     ObjectOwnership
@@ -83,7 +82,7 @@ class StringsTests: XCTestCase {
     types
     """#
 
-    XCTAssertEqual(errorMessage, expectedMessage)
+    XCTAssertEqual(receivedWarnings, [expectedMessage])
   }
 
   func testPlurals() throws {
@@ -123,20 +122,19 @@ class StringsTests: XCTestCase {
 
   func testSameTableWithPluralsParsingPluralsFirst() throws {
     let parser = try Strings.Parser()
-    var receivedWarning: String?
+    var receivedWarnings = [String]()
     parser.warningHandler = { message, _, _ -> Void in
-      receivedWarning = message
+      receivedWarnings.append(message)
     }
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.stringsdict", sub: .strings))
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
 
-    let errorMessage = try XCTUnwrap(receivedWarning)
     let expectedMessage = #"""
     Table "Localizable" already loaded by other parser, the parser for [.strings] files cannot modify existing keys:
     apples.count
     """#
 
-    XCTAssertEqual(errorMessage, expectedMessage)
+    XCTAssertEqual(receivedWarnings, [expectedMessage])
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "plurals-same-table", sub: .strings)
