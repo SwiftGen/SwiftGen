@@ -30,15 +30,17 @@ extension StringsDict {
   /// Variable width entries are used to define width variations for a localized string.
   ///
   /// Reference: https://developer.apple.com/documentation/foundation/nsstring/1413104-variantfittingpresentationwidth
+  ///
+  /// Note: SwiftGen doesn't yet support parsing those VariableWidth entries
   struct VariableWidthEntry: Codable {
     let rules: [String: String]
   }
 }
 
 extension StringsDict.PluralEntry {
-  /// `Variable`s are a key-value pair specifying the rule to use for each variable (key).
+  /// `Variable`s are a key-value pair specifying the rule to use for each variable (name).
   struct Variable: Codable {
-    let key: String
+    let name: String
     let rule: VariableRule
   }
 
@@ -113,8 +115,8 @@ extension StringsDict: Decodable {
     in container: KeyedDecodingContainer<StringsDict.CodingKeys>,
     formatKey: String
   ) throws -> [PluralEntry.Variable] {
-    guard let variableKeyTuples = StringsDict.variableKeysFromFormatKey(formatKey) else { return [] }
-    let sortedVariableKeys = variableKeyTuples
+    guard let variableNameResults = StringsDict.variableNamesFromFormatKey(formatKey) else { return [] }
+    let sortedVariableNames = variableNameResults
       .sorted { lhs, rhs in
         // Sort by positional argument if present, otherwise by occurrence in the format key
         switch (lhs.positionalArgument, rhs.positionalArgument, lhs.range.lowerBound, rhs.range.lowerBound) {
@@ -128,11 +130,11 @@ extension StringsDict: Decodable {
           return lhs < rhs
         }
       }
-      .map { $0.key }
+      .map { $0.name }
 
-    return try sortedVariableKeys.reduce(into: [PluralEntry.Variable]()) { variables, variableKey in
-      let variableRule = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableKey))
-      variables.append(PluralEntry.Variable(key: variableKey, rule: variableRule))
+    return try sortedVariableNames.reduce(into: [PluralEntry.Variable]()) { variables, variableName in
+      let variableRule = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableName))
+      variables.append(PluralEntry.Variable(name: variableName, rule: variableRule))
     }
   }
 }
@@ -140,16 +142,16 @@ extension StringsDict: Decodable {
 // - MARK: Helpers
 
 extension StringsDict {
-  typealias VariableKeyResult = (key: String, range: Range<String.Index>, positionalArgument: Int?)
+  typealias VariableNameResult = (name: String, range: Range<String.Index>, positionalArgument: Int?)
 
-  /// Parses variable keys and their ranges from a formatKey.
-  /// Every variable key that is contained within the format string is preceded
+  /// Parses variable names and their ranges from a `NSStringLocalizedFormatKey`.
+  /// Every variable name that is contained within the format key is preceded
   /// by the %#@ characters or by the positional variants, e.g. %1$#@, and followed by the @ character.
   ///
-  /// - Parameter formatKey: The formatKey from which the variable keys should be parsed.
-  /// - Returns: An array of discovered variable keys and their range within the `formatKey`.
+  /// - Parameter formatKey: The formatKey from which the variable names should be parsed.
+  /// - Returns: An array of discovered variable names, their range within the `formatKey` and the positional argument.
   // swiftlint:disable:next discouraged_optional_collection
-  private static func variableKeysFromFormatKey(_ formatKey: String) -> [VariableKeyResult]? {
+  private static func variableNamesFromFormatKey(_ formatKey: String) -> [VariableNameResult]? {
     let pattern = #"(%(?>(\d)\$)?#@([\w\.\p{Pd}]+)@)"#
     guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
     let nsrange = NSRange(formatKey.startIndex..<formatKey.endIndex, in: formatKey)
@@ -178,35 +180,29 @@ extension StringsDict.PluralEntry {
   var translation: String? {
     var result = formatKey
 
-    for intermediateResult in sequence(first: result, next: unfurlVariableKeysInFormatKey(_:)) {
+    for intermediateResult in sequence(first: result, next: unfurlVariableNamesInFormatKey(_:)) {
       result = intermediateResult
     }
 
     return "Plural case 'other': \(result)"
   }
 
-  /// Unfurls any variable keys in a formatKey to get a possible translation for the `other` case.
+  /// Unfurls any variables in a `NSStringLocalizedFormatKey` to get a possible translation for the `other` case.
   ///
   /// This method should be used in a recursive context, in which the output will be used as the input for the
   /// next iteration.
   ///
   /// - Parameter formatKey: A format key containing variables.
-  /// - Returns: The format key in which all its variable keys are replaced with the content of the `other` translation,
-  ///  if the `formatKey` contained any variable keys, `nil` otherwise.
-  private func unfurlVariableKeysInFormatKey(_ formatKey: String) -> String? {
-    guard let firstRemainingVariableKey = StringsDict.variableKeysFromFormatKey(formatKey)?.first else {
+  /// - Returns: The format key in which all its variables are replaced with the content of the `other` translation,
+  ///  if the `formatKey` contained any variables, `nil` otherwise.
+  private func unfurlVariableNamesInFormatKey(_ formatKey: String) -> String? {
+    guard let firstRemainingVariableName = StringsDict.variableNamesFromFormatKey(formatKey)?.first else {
       return nil
     }
 
-    let (key, range, _) = firstRemainingVariableKey
-    guard let variable = variables.first(where: { $0.key == key }) else { return nil }
+    let (name, range, _) = firstRemainingVariableName
+    guard let variable = variables.first(where: { $0.name == name }) else { return nil }
 
     return formatKey.replacingCharacters(in: range, with: variable.rule.other)
-  }
-}
-
-extension StringsDict.PluralEntry.VariableRule {
-  var formatStrings: [String] {
-    [zero, one, two, few, many, other].compactMap { $0 }
   }
 }
