@@ -159,19 +159,19 @@ extension StringsDict {
 
     return matches.compactMap { match -> (String, Range<String.Index>, Int?)? in
       // 1st capture group is the whole format string including delimeters
-      let rangeNSRange = match.range(at: 1)
+      let fullMatchNSRange = match.range(at: 1)
       // 2nd capture group is the positional argument of the format string (Optional!)
       let positionalArgumentNSRange = match.range(at: 2)
-      // 3rd capture group is the key, the string in between the delimeters
-      let keyNSRange = match.range(at: 3)
+      // 3rd capture group is the name of the variable, the string in between the delimeters
+      let nameNSRange = match.range(at: 3)
 
-      guard let rangeRange = Range(rangeNSRange, in: formatKey) else { return nil }
-      guard let keyRange = Range(keyNSRange, in: formatKey) else { return nil }
+      guard let fullMatchRange = Range(fullMatchNSRange, in: formatKey) else { return nil }
+      guard let nameRange = Range(nameNSRange, in: formatKey) else { return nil }
       guard let positionalArgumentRange = Range(positionalArgumentNSRange, in: formatKey) else {
-        return (String(formatKey[keyRange]), rangeRange, nil)
+        return (String(formatKey[nameRange]), fullMatchRange, nil)
       }
 
-      return (String(formatKey[keyRange]), rangeRange, Int(formatKey[positionalArgumentRange]))
+      return (String(formatKey[nameRange]), fullMatchRange, Int(formatKey[positionalArgumentRange]))
     }
   }
 }
