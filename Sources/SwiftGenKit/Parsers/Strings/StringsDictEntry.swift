@@ -104,8 +104,8 @@ extension StringsDict: Decodable {
     case (.none, .none), (.some, .some):
       throw Strings.ParserError.invalidFormat
     case let (.some(formatKey), .none):
-      let sortedVariableNames = StringsDict.variableNamesFromFormatKey(formatKey)?.map { $0.name } ?? []
-      let variables = try sortedVariableNames.reduce(into: [PluralEntry.Variable]()) { variables, variableName in
+      let variableNames = StringsDict.variableNamesFromFormatKey(formatKey)?.map { $0.name } ?? []
+      let variables = try variableNames.reduce(into: [PluralEntry.Variable]()) { variables, variableName in
         let variableRule = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableName))
         variables.append(PluralEntry.Variable(name: variableName, rule: variableRule))
       }
@@ -134,7 +134,7 @@ extension StringsDict {
     let nsrange = NSRange(formatKey.startIndex..<formatKey.endIndex, in: formatKey)
     let matches = regex.matches(in: formatKey, options: [], range: nsrange)
 
-    let variableNameResults = matches.compactMap { match -> VariableNameResult? in
+    return matches.compactMap { match -> VariableNameResult? in
       // 1st capture group is the whole format string including delimeters
       let fullMatchNSRange = match.range(at: 1)
       // 2nd capture group is the positional argument of the format string (Optional!)
@@ -150,21 +150,6 @@ extension StringsDict {
 
       return (String(formatKey[nameRange]), fullMatchRange, Int(formatKey[positionalArgumentRange]))
     }
-
-    return variableNameResults
-      .sorted { lhs, rhs in
-        // Sort by positional argument if present, otherwise by occurrence in the format key
-        switch (lhs.positionalArgument, rhs.positionalArgument, lhs.range.lowerBound, rhs.range.lowerBound) {
-        case let (.none, .none, lhs, rhs):
-          return lhs < rhs
-        case (.some, .none, _, _):
-          return true
-        case (.none, .some, _, _):
-          return false
-        case let (.some(lhs), .some(rhs), _, _):
-          return lhs < rhs
-        }
-      }
   }
 }
 
