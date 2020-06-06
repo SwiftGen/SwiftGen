@@ -169,34 +169,44 @@ extension StringsDict {
 }
 
 extension StringsDict.PluralEntry {
-  var formatKeyWithoutVariables: String {
+  // Extract the placeholders (`NSStringFormatValueTypeKey`) from the different variable definitions
+  // into a single flattened list of placeholders
+  var formatKeyWithVariableValueTypes: String {
     var result = formatKey
 
-    for intermediateResult in sequence(first: result, next: removeFirstVariableInFormatKey(_:)) {
+    for intermediateResult in sequence(first: result, next: replaceFirstVariableInFormatKey(_:)) {
       result = intermediateResult
     }
 
     return result
   }
 
-  /// Removes the first encountered variable in a `NSStringLocalizedFormatKey`.
+  /// Replaces the first encountered variable in a `NSStringLocalizedFormatKey` with its `NSStringFormatValueTypeKey`.
   ///
   /// This method should be used in a recursive context, in which the output will be used as the input for the
   /// next iteration.
   ///
   /// - Parameter formatKey: A format key containing variables.
-  /// - Returns: The format key in which the first encountered variable is removed,
-  ///  if the `formatKey` contained any variables, `nil` otherwise.
-  private func removeFirstVariableInFormatKey(_ formatKey: String) -> String? {
-    guard let firstRemainingVariableName = StringsDict.variableNamesFromFormatKey(formatKey)?.first else {
+  /// - Returns: The format key in which the first encountered variable is replaced
+  /// with its `NSStringFormatValueTypeKey` if the `formatKey` contained any variables, `nil` otherwise.
+  private func replaceFirstVariableInFormatKey(_ formatKey: String) -> String? {
+    guard let variableNameResult = StringsDict.variableNamesFromFormatKey(formatKey)?.first else {
       return nil
     }
 
-    let range = firstRemainingVariableName.range
+    let (name, range, positionalArgument) = variableNameResult
+    guard let variable = variables.first(where: { $0.name == name }) else { return nil }
     guard range.lowerBound >= formatKey.indices.startIndex, range.upperBound <= formatKey.indices.endIndex else {
       return nil
     }
 
-    return formatKey.replacingCharacters(in: range, with: " ")
+    let variablePlaceholder: String
+    if let positionalArgument = positionalArgument {
+      variablePlaceholder = "%\(positionalArgument)$\(variable.rule.valueTypeKey)"
+    } else {
+      variablePlaceholder = "%\(variable.rule.valueTypeKey)"
+    }
+
+    return formatKey.replacingCharacters(in: range, with: variablePlaceholder)
   }
 }
