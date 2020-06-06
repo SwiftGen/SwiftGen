@@ -5,16 +5,7 @@
 	<key>plural.missing-variable</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@element@ %#@hat_bewertung@</string>
-		<key>element</key>
-		<dict>
-			<key>NSStringFormatSpecTypeKey</key>
-			<string>NSStringPluralRuleType</string>
-			<key>NSStringFormatValueTypeKey</key>
-			<string>@</string>
-			<key>other</key>
-			<string>%@</string>
-		</dict>
+		<string>%#@hat_bewertung@</string>
 		<key>has_rating</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>

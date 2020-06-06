@@ -100,26 +100,69 @@ class StringsTests: XCTestCase {
     XCTDiffContexts(result, expected: "plurals-same-table", sub: .strings)
   }
 
-  func testInconsistentPluralDefinitionWhenInvalidFormatKey() throws {
+  func testErrorWhenMissingVariableInPluralDefinition() throws {
     let parser = try Strings.Parser()
 
     XCTAssertThrowsError(
-      try parser.searchAndParse(path: Fixtures.path(for: "LocPluralBroken.stringsdict", sub: .strings)),
+      try parser.searchAndParse(path: Fixtures.path(for: "LocPluralErrorMissingVariable.stringsdict", sub: .strings)),
       "Expected an error to be thrown"
     ) { error in
-      guard let parserError = error as? Strings.ParserError else {
-        XCTFail("Expected a Strings.ParserError")
-        return
-      }
-
-      guard case .invalidPluralFormat(let missingVariableKey, let pluralKey) = parserError else {
-        XCTFail("Expected an invalidPluralFormat error")
+      guard
+        let parserError = error as? Strings.ParserError,
+        case .invalidPluralFormat(let missingVariableKey, let pluralKey) = parserError
+      else {
+        XCTFail("Unexpected error occured while parsing: \(error)")
         return
       }
 
       XCTAssertEqual(missingVariableKey, "hat_bewertung")
       XCTAssertEqual(pluralKey, "plural.missing-variable")
     }
+  }
+
+  func testErrorWhenWrongPositionalValueInFormatKey() throws {
+    let parser = try Strings.Parser()
+
+    XCTAssertThrowsError(
+      try parser.searchAndParse(path: Fixtures.path(for: "LocPluralErrorPlaceholders.stringsdict", sub: .strings)),
+      "Expected an error to be thrown"
+    ) { error in
+      guard
+        let parserError = error as? Strings.ParserError,
+        case .invalidPlaceholder(previous: .object, new: .int) = parserError
+      else {
+        XCTFail("Unexpected error occured while parsing: \(error)")
+        return
+      }
+    }
+  }
+
+  func testErrorWhenInvalidValueInVariable() throws {
+    let parser = try Strings.Parser()
+
+    XCTAssertThrowsError(
+      try parser.searchAndParse(path: Fixtures.path(for: "LocPluralErrorInvalidVariableValue.stringsdict", sub: .strings)),
+      "Expected an error to be thrown"
+    ) { error in
+      guard
+        let parserError = error as? Strings.ParserError,
+        case .invalidVariableRuleValueType(let variableName, let valueType) = parserError
+      else {
+        XCTFail("Unexpected error occured while parsing: \(error)")
+        return
+      }
+
+      XCTAssertEqual(variableName, "variable")
+      XCTAssertEqual(valueType, "@")
+    }
+  }
+
+  func testUnsupportedPluralDefinition() throws {
+    let parser = try Strings.Parser()
+    try parser.searchAndParse(path: Fixtures.path(for: "LocPluralUnsupported.stringsdict", sub: .strings))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "plurals-unsupported", sub: .strings)
   }
 
   // MARK: - Custom options

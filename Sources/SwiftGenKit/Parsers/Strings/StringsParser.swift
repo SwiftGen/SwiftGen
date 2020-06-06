@@ -13,6 +13,7 @@ public enum Strings {
     case invalidFormat
     case invalidPluralFormat(missingVariableKey: String, pluralKey: String)
     case invalidPlaceholder(previous: Strings.PlaceholderType, new: Strings.PlaceholderType)
+    case invalidVariableRuleValueType(variableName: String, valueType: String)
     case unsupportedFileType(path: Path, supported: [String])
 
     public var description: String {
@@ -28,6 +29,11 @@ public enum Strings {
         """
       case .invalidPlaceholder(let previous, let new):
         return "Invalid placeholder type \(new) (previous: \(previous))"
+      case .invalidVariableRuleValueType(let variableName, let valueType):
+        return """
+        error: The variable \"\(variableName)\" has sepcified \"\(valueType)\" as its NSStringFormatValueTypeKey. \
+        The Stringsdict file format only supports format specifiers for a number.
+        """
       case .unsupportedFileType(let path, let supported):
         return """
         error: Unsupported file type for \(path). \

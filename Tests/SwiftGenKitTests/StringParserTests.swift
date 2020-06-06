@@ -68,13 +68,53 @@ class StringParserTests: XCTestCase {
   }
 
   func testParseErrorOnTypeMismatch() throws {
-    do {
-      _ = try Strings.PlaceholderType.placeholders(fromFormat: "Text: %1$@; %1$ld.")
-      XCTFail("Code did parse string successfully while it was expected to fail for bad syntax")
-    } catch Strings.ParserError.invalidPlaceholder {
-      // That's the expected exception we want to happen
-    } catch let error {
-      XCTFail("Unexpected error occured while parsing: \(error)")
+    XCTAssertThrowsError(
+      try Strings.PlaceholderType.placeholders(fromFormat: "Text: %1$@; %1$ld."),
+      "Code did parse string successfully while it was expected to fail for bad syntax"
+    ) { error in
+      guard
+        let parserError = error as? Strings.ParserError,
+        case .invalidPlaceholder = parserError // That's the expected exception we want to happen
+      else {
+        XCTFail("Unexpected error occured while parsing: \(error)")
+        return
+      }
+    }
+  }
+
+  func testParseErrorOnWrongPositionalValue() throws {
+    XCTAssertThrowsError(
+      try Strings.PlaceholderType.placeholders(fromFormat: "%@ %1$d"),
+      "Code did parse string successfully while it was expected to fail for bad syntax"
+    ) { error in
+      guard
+        let parserError = error as? Strings.ParserError,
+        case .invalidPlaceholder(previous: .object, new: .int) = parserError
+      else {
+        XCTFail("Unexpected error occured while parsing: \(error)")
+        return
+      }
+    }
+  }
+
+  func testParseErrorOnNonPositionalAfterPositional() throws {
+    let formatStrings = [
+      "%1$d %@",
+      "%@ %2$d %@"
+    ]
+    for formatString in formatStrings {
+      XCTAssertThrowsError(
+        try Strings.PlaceholderType.placeholders(fromFormat: formatString),
+        "Code did parse string successfully while it was expected to fail for bad syntax"
+      ) { error in
+        guard
+          let parserError = error as? Strings.ParserError,
+          case .invalidPlaceholder(previous: .int, new: .object) = parserError
+        else {
+          XCTFail("Unexpected error occured while parsing: \(error)")
+          return
+        }
+      }
     }
   }
 

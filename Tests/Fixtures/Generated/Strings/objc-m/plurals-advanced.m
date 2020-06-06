@@ -26,13 +26,25 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 #pragma clang diagnostic pop
 
 @implementation LocPluralAdvanced : NSObject
++ (NSString*)mixedPlaceholdersAndVariablesPositionalstringPositional3intWithValues:(id)p1 :(void*)p2 :(NSInteger)p3
+{
+    return tr(@"LocPluralAdvanced", @"mixed.placeholders-and-variables.positionalstring-positional3int", p1, p2, p3);
+}
++ (NSString*)mixedPlaceholdersAndVariablesStringIntWithValues:(id)p1 :(NSInteger)p2
+{
+    return tr(@"LocPluralAdvanced", @"mixed.placeholders-and-variables.string-int", p1, p2);
+}
++ (NSString*)mixedPlaceholdersAndVariablesStringPositional2intWithValues:(id)p1 :(NSInteger)p2
+{
+    return tr(@"LocPluralAdvanced", @"mixed.placeholders-and-variables.string-positional2int", p1, p2);
+}
++ (NSString*)mixedPlaceholdersAndVariablesStringPositional3intWithValues:(id)p1 :(void*)p2 :(NSInteger)p3
+{
+    return tr(@"LocPluralAdvanced", @"mixed.placeholders-and-variables.string-positional3int", p1, p2, p3);
+}
 + (NSString*)multiplePlaceholdersAndVariablesIntStringStringWithValues:(NSInteger)p1 :(id)p2 :(id)p3
 {
     return tr(@"LocPluralAdvanced", @"multiple.placeholders-and-variables.int-string-string", p1, p2, p3);
-}
-+ (NSString*)multiplePlaceholdersAndVariablesStringIntWithValues:(id)p1 :(NSInteger)p2
-{
-    return tr(@"LocPluralAdvanced", @"multiple.placeholders-and-variables.string-int", p1, p2);
 }
 + (NSString*)multipleVariablesThreeVariablesInFormatkeyWithValues:(NSInteger)p1 :(NSInteger)p2 :(NSInteger)p3
 {

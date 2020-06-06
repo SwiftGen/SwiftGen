@@ -107,6 +107,13 @@ extension StringsDict: Decodable {
       let variableNames = StringsDict.variableNamesFromFormatKey(formatKey)?.map { $0.name } ?? []
       let variables = try variableNames.reduce(into: [PluralEntry.Variable]()) { variables, variableName in
         let variableRule = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableName))
+        // Combination of the format specifiers of the `PlaceholderType.float` and `PlaceholderType.int`.
+        guard ["a", "e", "f", "g", "d", "i", "o", "u", "x"].contains(variableRule.valueTypeKey.suffix(1)) else {
+          throw Strings.ParserError.invalidVariableRuleValueType(
+            variableName: variableName,
+            valueType: variableRule.valueTypeKey
+          )
+        }
         variables.append(PluralEntry.Variable(name: variableName, rule: variableRule))
       }
       self = .pluralEntry(PluralEntry(formatKey: formatKey, variables: variables))

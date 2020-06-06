@@ -15,7 +15,8 @@ class StringsTests: XCTestCase {
       "multiple",
       "plurals",
       "plurals-same-table",
-      "plurals-advanced"
+      "plurals-advanced",
+      "plurals-unsupported"
     ]
   }
 
