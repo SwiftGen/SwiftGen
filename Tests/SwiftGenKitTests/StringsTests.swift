@@ -141,6 +141,7 @@ class StringsTests: XCTestCase {
     let parser = try Strings.Parser()
 
     XCTAssertThrowsError(
+      // swiftlint:disable:next line_length
       try parser.searchAndParse(path: Fixtures.path(for: "LocPluralErrorInvalidVariableValue.stringsdict", sub: .strings)),
       "Expected an error to be thrown"
     ) { error in

@@ -63,7 +63,10 @@ extension Strings.PlaceholderType {
   }()
 
   // "I give %d apples to %@" --> [.Int, .String]
-  static func placeholders(fromFormat formatString: String) throws -> [Strings.PlaceholderType] {
+  static func placeholders(
+    fromFormat formatString: String,
+    normalizePositionals: Bool = false
+  ) throws -> [Strings.PlaceholderType] {
     let range = NSRange(location: 0, length: (formatString as NSString).length)
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier
@@ -91,6 +94,22 @@ extension Strings.PlaceholderType {
         }
       }
 
+    if normalizePositionals {
+      return try placeholderTypesFromCharsNormalized(chars)
+    } else {
+      return try placeholderTypesFromChars(chars)
+    }
+  }
+
+  /// Creates an array of `PlaceholderType` from an array of format chars and their optional positional specifier
+  ///
+  /// This method will insert `.unknown` placeholders if a positional specifier is missing.
+  /// E.g. "%2$d %3$d" will result in `[.unknown, .int, .int]`
+  ///
+  /// - Parameter chars: An array of format chars and their optional positional specifier
+  /// - Throws: `Strings.ParserError.invalidPlaceholder` in case a `PlaceholderType` would be overwritten
+  /// - Returns: An array of `PlaceholderType`
+  static func placeholderTypesFromChars(_ chars: [(String, Int?)]) throws -> [Strings.PlaceholderType] {
     // enumerate the conversion specifiers and their optionally forced position
     // and build the array of PlaceholderTypes accordingly
     var list = [Strings.PlaceholderType]()
@@ -117,5 +136,41 @@ extension Strings.PlaceholderType {
       }
     }
     return list
+  }
+
+  /// Creates an array of `PlaceholderType` from an array of format chars and their optional positional specifier
+  ///
+  /// This method will normalize placeholders if a positional specifier is missing.
+  /// E.g. "%2$d %3$d" will result in `[.int, .int]`
+  /// This behavior is closer to the how Foundation handles strings with format specifiers during runtime.
+  ///
+  /// - Parameter chars: An array of format chars and their optional positional specifier
+  /// - Throws: `Strings.ParserError.invalidPlaceholder` in case a `PlaceholderType` would be overwritten
+  /// - Returns: An array of `PlaceholderType`
+  static func placeholderTypesFromCharsNormalized(_ chars: [(String, Int?)]) throws -> [Strings.PlaceholderType] {
+    var list = [Int: Strings.PlaceholderType]()
+    var nextNonPositional = 1
+
+    for (str, pos) in chars {
+      guard let char = str.first, let placeholderType = Strings.PlaceholderType(formatChar: char) else { continue }
+      let insertionPos: Int
+      if let pos = pos {
+        insertionPos = pos
+      } else {
+        insertionPos = nextNonPositional
+        nextNonPositional += 1
+      }
+      guard insertionPos > 0 else { continue }
+
+      if let existingEntry = list[insertionPos] {
+        throw Strings.ParserError.invalidPlaceholder(previous: existingEntry, new: placeholderType)
+      } else {
+        list[insertionPos] = placeholderType
+      }
+    }
+
+    return list
+      .sorted { $0.0 < $1.0 } // Sort by key, i.e. the positional value
+      .map { $0.value }
   }
 }
