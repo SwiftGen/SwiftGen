@@ -56,35 +56,6 @@ class StringsTests: XCTestCase {
     XCTDiffContexts(result, expected: "multiple", sub: .strings)
   }
 
-  func testMultipleFilesDuplicate() throws {
-    let parser = try Strings.Parser()
-    var receivedWarnings = [String]()
-    parser.warningHandler = { message, _, _ -> Void in
-      receivedWarnings.append(message)
-    }
-    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
-    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
-
-    let expectedMessage = #"""
-    Table "Localizable" already loaded by other parser, the parser for [.strings] files cannot modify existing keys:
-    ObjectOwnership
-    alert__message
-    alert__title
-    apples.count
-    bananas.owner
-    percent
-    private
-    settings.navigation-bar.self
-    settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep
-    settings.navigation-bar.title.even.deeper
-    settings.user__profile_section.HEADER_TITLE
-    settings.user__profile_section.footer_text
-    types
-    """#
-
-    XCTAssertEqual(receivedWarnings, [expectedMessage])
-  }
-
   func testPlurals() throws {
     let parser = try Strings.Parser()
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.stringsdict", sub: .strings))
@@ -122,19 +93,8 @@ class StringsTests: XCTestCase {
 
   func testSameTableWithPluralsParsingPluralsFirst() throws {
     let parser = try Strings.Parser()
-    var receivedWarnings = [String]()
-    parser.warningHandler = { message, _, _ -> Void in
-      receivedWarnings.append(message)
-    }
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.stringsdict", sub: .strings))
     try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
-
-    let expectedMessage = #"""
-    Table "Localizable" already loaded by other parser, the parser for [.strings] files cannot modify existing keys:
-    apples.count
-    """#
-
-    XCTAssertEqual(receivedWarnings, [expectedMessage])
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "plurals-same-table", sub: .strings)

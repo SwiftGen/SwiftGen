@@ -9,7 +9,6 @@ import PathKit
 
 public enum Strings {
   public enum ParserError: Error, CustomStringConvertible {
-    case duplicateKeysInTable(name: String, extensions: [String], keys: [String])
     case failureOnLoading(path: String)
     case invalidFormat
     case invalidPluralFormat(missingVariableKey: String, pluralKey: String)
@@ -18,12 +17,6 @@ public enum Strings {
 
     public var description: String {
       switch self {
-      case .duplicateKeysInTable(let name, let extensions, let keys):
-        return """
-        Table \"\(name)\" already loaded by other parser, \
-        the parser for [\(extensions.map({ ".\($0)" }).joined(separator: ", "))] files \
-        cannot modify existing keys:\n\(keys.joined(separator: "\n"))
-        """
       case .failureOnLoading(let path):
         return "Failed to load a file at \"\(path)\""
       case .invalidFormat:
@@ -97,23 +90,8 @@ public enum Strings {
         let newEntries = try parser.parseFile(at: path)
         let allEntries = [existingEntries, newEntries].joined()
         let allKeys = allEntries.map { $0.key }
-
-        var duplicateKeys = [String]()
         let mergedEntries = Dictionary(zip(allKeys, allEntries)) { existing, new in
-          duplicateKeys.append(existing.key)
-          return parser.shouldOverwriteValuesInExistingTable ? new : existing
-        }
-
-        if !duplicateKeys.isEmpty && !parser.shouldOverwriteValuesInExistingTable {
-          warningHandler?(
-            ParserError.duplicateKeysInTable(
-              name: name,
-              extensions: parserType.extensions,
-              keys: duplicateKeys.sorted()
-            ).description,
-            #file,
-            #line
-          )
+          parser.shouldOverwriteValuesInExistingTable ? new : existing
         }
 
         entries = Array(mergedEntries.values)
