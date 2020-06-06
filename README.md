@@ -777,7 +777,7 @@ internal enum L10n {
   internal static let alertTitle = L10n.tr("alert_title")
 
   internal enum Apples {
-    /// Plural case 'other': You have %d apples. Wow that is a lot!
+    /// Plural format key: "%#@apples@"
     internal static func count(_ p1: Int) -> String {
       return L10n.tr("apples.count", p1)
     }
@@ -822,7 +822,7 @@ internal enum L10n {
   internal static let alertMessage = L10n.tr("Localizable", "alert__message")
   /// Title of the alert
   internal static let alertTitle = L10n.tr("Localizable", "alert__title")
-  /// Plural case 'other': You have %d apples. Wow that is a lot!
+  /// Plural format key: "%#@apples@"
   internal static func applesCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "apples.count", p1)
   }

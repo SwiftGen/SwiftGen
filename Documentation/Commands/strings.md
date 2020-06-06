@@ -84,22 +84,13 @@ This example should cover the most common use case of plurals that is also suppo
 
 <details>
 
-<summary>Multiple variables with different types in format key</summary>
+<summary>Mixed placeholders and variables in format key</summary>
 
 ```xml
-<key>multiple.placeholders-and-variables.string-int</key>
+<key>mixed.placeholders-and-variables.string-int</key>
 <dict>
     <key>NSStringLocalizedFormatKey</key>
-    <string>%#@element@ %#@has_rating@</string>
-    <key>element</key>
-    <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>@</string>
-        <key>other</key>
-        <string>%@</string>
-    </dict>
+    <string>%@ %#@has_rating@</string>
     <key>has_rating</key>
     <dict>
         <key>NSStringFormatSpecTypeKey</key>
@@ -122,13 +113,12 @@ This example should cover the most common use case of plurals that is also suppo
 
 <summary>Variables with positional arguments in format key</summary>
 
-_Note:_ To have the correct sorting of the parameters of the generated method, in this case `Int, String, String`, it is required to use matching positional arguments for the format key and the placeholder in the rules of the variable.
-
 ```xml
 <key>multiple.placeholders-and-variables.int-string-string</key>
 <dict>
     <key>NSStringLocalizedFormatKey</key>
-    <string>Your %3$#@third@ list contains %1$#@first@ %2$#@second@.</string>
+    <!-- Your <Grocery> list contains <3 items. You should buy them> <today>. -->
+    <string>Your %3$@ list contains %1$#@first@ %2$@.</string>
     <key>first</key>
     <dict>
         <key>NSStringFormatSpecTypeKey</key>
@@ -136,29 +126,58 @@ _Note:_ To have the correct sorting of the parameters of the generated method, i
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>zero</key>
-        <string>no items.</string>
+        <string>no items. Add one</string>
         <key>one</key>
         <string>one item. You should buy it</string>
         <key>other</key>
         <string>%1$d items. You should buy them</string>
     </dict>
-    <key>second</key>
+</dict>
+```
+
+</details>
+
+<details>
+
+<summary>Multiple variables in format key</summary>
+
+```xml
+<key>multiple.variables.three-variables-in-formatkey</key>
+<dict>
+    <key>NSStringLocalizedFormatKey</key>
+    <string>%#@files@ (%#@bytes@, %#@minutes@)</string>
+    <key>files</key>
     <dict>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
-        <string>@</string>
+        <string>d</string>
+        <key>one</key>
+        <string>%d file remaining</string>
         <key>other</key>
-        <string>%2$@</string>
+        <string>%d files remaining</string>
     </dict>
-    <key>third</key>
+    <key>bytes</key>
     <dict>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
-        <string>@</string>
+        <string>d</string>
+        <key>one</key>
+        <string>%d byte</string>
         <key>other</key>
-        <string>%3$@</string>
+        <string>%d bytes</string>
+    </dict>
+    <key>minutes</key>
+    <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>%d minute</string>
+        <key>other</key>
+        <string>%d minutes</string>
     </dict>
 </dict>
 ```
@@ -212,6 +231,40 @@ Note: in practice this should hopefully be very rare. Especially, if you're usin
         <string>their shared field</string>
         <key>other</key>
         <string>their %d fields</string>
+    </dict>
+</dict>
+```
+
+</details>
+
+
+<details>
+
+<summary>Placeholders that are only used in the variables but not in the format key</summary>
+
+This plural entry is would work with plain `NSLocalizedString`, as Foundation will pass the whole list of arguments
+to each substituted format specifier, e.g. in this case passing a `String` and an `Int` would 
+work with `NSLocalizedString`. SwiftGen only parses the `NSStringLocalizedFormatKey` to find possible placeholders,
+because parsing all possible plural rules for placeholders as well could result in different amounts 
+of placeholders for different amounts or different languages.
+
+```xml
+<key>unsupported-use.placeholders-in-variable-rule.string-int</key>
+<dict>
+    <key>NSStringLocalizedFormatKey</key>
+    <string>%#@elements@</string>
+    <key>elements</key>
+    <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>zero</key>
+        <string>%@ has no rating</string>
+        <key>one</key>
+        <string>%@ has one rating</string>
+        <key>other</key>
+        <string>%@ has %d ratings</string>
     </dict>
 </dict>
 ```
