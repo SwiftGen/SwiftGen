@@ -33,12 +33,29 @@ extension Config {
       throw Config.Error.pathNotFound(path: file)
     }
 
-    sourcePath = file.parent()
-
     let anyConfig = try YAML.read(path: file, env: env)
+    try self.init(yaml: anyConfig, sourcePath: file.parent(), logger: logger)
+  }
 
-    guard let config = anyConfig as? [String: Any] else {
-      throw Config.Error.wrongType(key: nil, expected: "Dictionary", got: type(of: anyConfig))
+  init(
+    content: String,
+    env: [String: String],
+    sourcePath: Path,
+    logger: (LogLevel, String) -> Void
+  ) throws {
+    let anyConfig = try YAML.decode(string: content, env: env)
+    try self.init(yaml: anyConfig, sourcePath: sourcePath, logger: logger)
+  }
+
+  private init(
+    yaml: Any?,
+    sourcePath: Path,
+    logger: (LogLevel, String) -> Void
+  ) throws {
+    self.sourcePath = sourcePath
+
+    guard let config = yaml as? [String: Any] else {
+      throw Config.Error.wrongType(key: nil, expected: "Dictionary", got: type(of: yaml))
     }
     self.inputDir = (config[Keys.inputDir] as? String).map { Path($0) }
     self.outputDir = (config[Keys.outputDir] as? String).map { Path($0) }
@@ -159,8 +176,8 @@ extension Config {
 
   private func lint(cmd: ParserCLI, output entryOutput: ConfigEntryOutput, logger: (LogLevel, String) -> Void) {
     do {
-      let actualCmd = Config.deprecatedCommands[cmd.name] ?? cmd.name
-      _ = try entryOutput.template.resolvePath(forSubcommand: actualCmd)
+      let actualCmd = Config.deprecatedCommands[cmd.name].flatMap(ParserCLI.command(named:)) ?? cmd
+      _ = try entryOutput.template.resolvePath(forParser: actualCmd)
     } catch let error {
       logger(.error, "\(cmd.name).outputs: \(error)")
     }
