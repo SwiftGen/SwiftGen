@@ -9,7 +9,6 @@ tables:
           translation: "Plural format key: \"%1$@ %3$#@has_rating@\""
           types:
           - "String"
-          - "UnsafeRawPointer"
           - "Int"
         - key: "mixed.placeholders-and-variables.string-int"
           name: "string-int"
@@ -28,7 +27,6 @@ tables:
           translation: "Plural format key: \"%@ %3$#@has_rating@\""
           types:
           - "String"
-          - "UnsafeRawPointer"
           - "Int"
       name: "mixed"
     - children:

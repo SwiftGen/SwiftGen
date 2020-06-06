@@ -10,8 +10,8 @@ import Foundation
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 internal enum L10n {
   /// Plural format key: "%1$@ %3$#@has_rating@"
-  internal static func mixedPlaceholdersAndVariablesPositionalstringPositional3int(_ p1: Any, _ p2: UnsafeRawPointer, _ p3: Int) -> String {
-    return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.positionalstring-positional3int", String(describing: p1), Int(bitPattern: p2), p3)
+  internal static func mixedPlaceholdersAndVariablesPositionalstringPositional3int(_ p1: Any, _ p2: Int) -> String {
+    return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.positionalstring-positional3int", String(describing: p1), p2)
   }
   /// Plural format key: "%@ %#@has_rating@"
   internal static func mixedPlaceholdersAndVariablesStringInt(_ p1: Any, _ p2: Int) -> String {
@@ -22,8 +22,8 @@ internal enum L10n {
     return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.string-positional2int", String(describing: p1), p2)
   }
   /// Plural format key: "%@ %3$#@has_rating@"
-  internal static func mixedPlaceholdersAndVariablesStringPositional3int(_ p1: Any, _ p2: UnsafeRawPointer, _ p3: Int) -> String {
-    return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.string-positional3int", String(describing: p1), Int(bitPattern: p2), p3)
+  internal static func mixedPlaceholdersAndVariablesStringPositional3int(_ p1: Any, _ p2: Int) -> String {
+    return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.string-positional3int", String(describing: p1), p2)
   }
   /// Plural format key: "Your %3$@ list contains %1$#@first@ %2$@."
   internal static func multiplePlaceholdersAndVariablesIntStringString(_ p1: Int, _ p2: Any, _ p3: Any) -> String {

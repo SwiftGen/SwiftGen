@@ -14,8 +14,8 @@ internal enum L10n {
   internal enum Mixed {
     internal enum PlaceholdersAndVariables {
       /// Plural format key: "%1$@ %3$#@has_rating@"
-      internal static func positionalstringPositional3int(_ p1: Any, _ p2: UnsafeRawPointer, _ p3: Int) -> String {
-        return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.positionalstring-positional3int", String(describing: p1), Int(bitPattern: p2), p3)
+      internal static func positionalstringPositional3int(_ p1: Any, _ p2: Int) -> String {
+        return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.positionalstring-positional3int", String(describing: p1), p2)
       }
       /// Plural format key: "%@ %#@has_rating@"
       internal static func stringInt(_ p1: Any, _ p2: Int) -> String {
@@ -26,8 +26,8 @@ internal enum L10n {
         return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.string-positional2int", String(describing: p1), p2)
       }
       /// Plural format key: "%@ %3$#@has_rating@"
-      internal static func stringPositional3int(_ p1: Any, _ p2: UnsafeRawPointer, _ p3: Int) -> String {
-        return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.string-positional3int", String(describing: p1), Int(bitPattern: p2), p3)
+      internal static func stringPositional3int(_ p1: Any, _ p2: Int) -> String {
+        return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.string-positional3int", String(describing: p1), p2)
       }
     }
   }

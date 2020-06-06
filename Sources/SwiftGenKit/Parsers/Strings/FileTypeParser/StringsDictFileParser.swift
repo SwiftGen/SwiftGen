@@ -40,7 +40,10 @@ extension Strings {
           return Entry(
             key: key,
             translation: "Plural format key: \"\(pluralEntry.formatKey)\"",
-            types: try PlaceholderType.placeholders(fromFormat: pluralEntry.formatKeyWithVariableValueTypes),
+            types: try PlaceholderType.placeholders(
+              fromFormat: pluralEntry.formatKeyWithVariableValueTypes,
+              normalizePositionals: true
+            ),
             keyStructureSeparator: options[Option.separator]
           )
         }
