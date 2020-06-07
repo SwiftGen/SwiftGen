@@ -9,7 +9,7 @@ import XCTest
 
 class YamlTests: XCTestCase {
   enum Contexts {
-    static let all = ["empty", "all"]
+    static let all = ["empty", "array", "all"]
   }
 
   // generate variations to test customname generation

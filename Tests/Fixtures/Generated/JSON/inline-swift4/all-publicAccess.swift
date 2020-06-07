@@ -10,6 +10,9 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 public enum JSONFiles {
+  public enum Array {
+    public static let items: [[String: Any]] = [[AnyHashable("id"): 1, AnyHashable("name"): "Anna"], [AnyHashable("id"): 2, AnyHashable("name"): "Bob"]]
+  }
   public enum Configuration {
     public static let apiVersion: String = "2"
     public static let country: Any? = nil

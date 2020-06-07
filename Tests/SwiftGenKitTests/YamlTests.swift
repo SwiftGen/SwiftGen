@@ -56,6 +56,14 @@ class YamlTests: XCTestCase {
     XCTDiffContexts(result, expected: "documents", sub: .yaml)
   }
 
+  func testArray() throws {
+    let parser = try Yaml.Parser()
+    try parser.searchAndParse(path: Fixtures.path(for: "array.yaml", sub: .yamlGood))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "array", sub: .yaml)
+  }
+
   func testDirectoryInput() {
     do {
       let parser = try Yaml.Parser()

@@ -1,6 +1,31 @@
 files:
 - documents:
   - data:
+    - id: 1
+      name: "Anna"
+    - id: 2
+      name: "Bob"
+    metadata:
+      element:
+        items:
+        - properties:
+            id:
+              type: "Int"
+            name:
+              type: "String"
+          type: "Dictionary"
+        - properties:
+            id:
+              type: "Int"
+            name:
+              type: "String"
+          type: "Dictionary"
+        type: "Dictionary"
+      type: "Array"
+  name: "array"
+  path: "array.yaml"
+- documents:
+  - data:
       api-version: "2"
       country: null
       environment: "staging"

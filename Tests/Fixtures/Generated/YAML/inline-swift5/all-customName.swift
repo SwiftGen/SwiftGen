@@ -10,6 +10,9 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 internal enum CustomYAML {
+  internal enum Array {
+    internal static let items: [[String: Any]] = [[AnyHashable("id"): 1, AnyHashable("name"): "Anna"], [AnyHashable("id"): 2, AnyHashable("name"): "Bob"]]
+  }
   internal enum Configuration {
     internal static let apiVersion: String = "2"
     internal static let country: Any? = nil
