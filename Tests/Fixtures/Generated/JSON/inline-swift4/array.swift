@@ -10,6 +10,6 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 internal enum JSONFiles {
-  internal static let items: [[String: Any]] = [[AnyHashable("id"): "1", AnyHashable("name"): "Anna"], [AnyHashable("name"): "Bob", AnyHashable("id"): "2"]]
+  internal static let items: [String] = ["Anna", "Bob"]
 }
 // swiftlint:enable identifier_name line_length number_separator type_body_length

@@ -10,7 +10,7 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length type_body_length
 internal enum JSONFiles {
-  internal static let items: [[String: Any]] = objectFromJSON(at: "array.json")
+  internal static let items: [String] = objectFromJSON(at: "array.json")
 }
 // swiftlint:enable identifier_name line_length type_body_length
 
