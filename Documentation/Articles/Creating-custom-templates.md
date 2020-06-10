@@ -7,7 +7,7 @@ SwiftGen is shipped with built-in templates that generally covers most of people
 
 Before creating your own templates, you might want to check if there isn't already a build-in template fulfilling your needs. Some of our built-in templates already provide parameters that you can use in your config file to slightly modify their behavior and output.
 
-You can [check the documentation of the bundled templates](templates/) (or use `swiftgen template doc <parser> <templatename>` to open the documentation from your terminal) to see what parameters each template does support, and see if one already fit your needs.
+You can [check the documentation of the bundled templates](../templates/) (or use `swiftgen template doc <parser> <templatename>` to open the documentation from your terminal) to see what parameters each template does support, and see if one already fit your needs.
 
 Note: you can use the `swiftgen template list` command to list all the installed templates for each parser and pick one to start with.
 
@@ -59,4 +59,4 @@ When SwiftGen generates your code, it provides what we call a context (basically
 > ```
 
 
-A full documentation of the produced context for each command can be found in the [SwiftGenKit documentation](SwiftGenKit%20Contexts).
+A full documentation of the produced context for each command can be found in the [SwiftGenKit documentation](../SwiftGenKit%20Contexts/).
