@@ -15,7 +15,7 @@ Note: you can use the `swiftgen template list` command to list all the installed
 
 If none of the built-in templates match your needs even with the various parameters they support, you might want to consider creating your own template.
 
-The easiest way to create your own custom template is to duplicate an existing template then modify it. You can use `swiftgen template cat <parser> <templatename> to help you with that:
+The easiest way to create your own custom template is to duplicate an existing template then modify it. You can use `swiftgen template cat <parser> <templatename>` to help you with that:
 
 * Start by choosing the built-in template that would be the best fitting starting point for your case
 * Use `swiftgen template cat` to dump its content into a new file, e.g. `swiftgen template cat fonts swift5 >my-custom-fonts-template.stencil`
@@ -28,7 +28,7 @@ See below for the Stencil format and syntax used to write template in SwiftGen.
 
 Because getting the exact result you want generally needs you to iterate and test the intermediate result over and over, it could be useful to have a good iterative process to check your templates.
 
-For this, you could [use a tool like `kicker`](Articles/Watch-a-folder-for-changes.md) that could help you automatically re-run `swiftgen` every time you save your changes to your custom template while working on it.  
+For this, you could [use a tool like `kicker`](Watch-a-folder-for-changes.md) that could help you automatically re-run `swiftgen` every time you save your changes to your custom template while working on it.  
 That way, you can keep your favorite editor open in Split mode for example, with the template on one side and the result on the other, and let `kicker` update the generated result every time you save your template
 
 ## Templates Format, Nodes and Filters
@@ -44,18 +44,18 @@ When SwiftGen generates your code, it provides what we call a context (basically
 > This is part of the architecture of SwiftGen, where SwiftGen first parses your resources (like asset catalogs or strings files etc) into those "contexts" (abstract structures) and then inject those contexts to your templates to transform those into your generated code
 > 
 > ```
->                                      +----------+
->                                      | Template |
->                                      +-----+----+
-> +---------------+        +---------+       |      +------------+
-> | Resource file |        | Stencil |       v      | Generated  |
-> | (e.g. Assets) | -----> | Context | ------+----->| Swift code |
-> +---------------+        +---------+              +------------+
+>                                          +----------+
+>                                          | Template |
+>                                          +-----+----+
+> +---------------+        +-------------+       |      +------------+
+> | Resource file |        | SwiftGenKit |       v      | Generated  |
+> | (e.g. Assets) | -----> |   Context   | ------+----->| Swift code |
+> +---------------+        +-------------+              +------------+
 > 
-> \_ _ _ _ _ _ _ _ _ _ _ _ _ _/   \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _/
->       SwiftGenKit framework          Stencil framework
-> \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _/
->                      SwiftGen Command Line
+> \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _/   \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _/
+>      SwiftGenKit framework                 Stencil framework
+> \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _/
+>                        SwiftGen Command Line
 > ```
 
 
