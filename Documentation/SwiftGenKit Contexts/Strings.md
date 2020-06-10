@@ -4,7 +4,7 @@
 
 The strings parser accepts a `strings` file, typically `Localizable.strings`. It will parse each string in this file, including the type information for formatting parameters.
 
-The strings file will be converted into a structured tree version, where each string is separated into components by the `.` character (note: you can choose another separator if you need, using the `separator` option, see [Command Customization](../Commands/strings.md#customization)). We call this the `dot syntax`, each component representing a level. For example, the following strings:
+The strings file will be converted into a structured tree version, where each string is separated into components by the `.` character (note: you can choose another separator if you need, using the `separator` option, see [Command Customization](../Parsers/strings.md#customization)). We call this the `dot syntax`, each component representing a level. For example, the following strings:
 
 ```
 "some.deep.structure"
