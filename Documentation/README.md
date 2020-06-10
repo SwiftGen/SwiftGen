@@ -48,7 +48,7 @@ That parsed data ("context") is then fed to our template engine (Stencil) alongs
 > +---------------+        +-------------+              +------------+
 > 
 > \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _/   \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _/
->      SwiftGenKit framework                 Stencil framework
+>      SwiftGenKit framework             Stencil Template Engine
 > \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _/
 >                        SwiftGen Command Line
 > ```

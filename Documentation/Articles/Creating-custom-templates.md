@@ -53,7 +53,7 @@ When SwiftGen generates your code, it provides what we call a context (basically
 > +---------------+        +-------------+              +------------+
 > 
 > \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _/   \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _/
->      SwiftGenKit framework                 Stencil framework
+>      SwiftGenKit framework             Stencil Template Engine
 > \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _/
 >                        SwiftGen Command Line
 > ```
