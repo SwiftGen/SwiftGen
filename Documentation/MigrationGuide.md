@@ -7,7 +7,7 @@ All the migration guides for SwiftGen are spread out over a few files, depending
 | SwiftGen Migration Guide (this file) | All users of SwiftGen | Changes in configuration, CLI parameters and global changes overview |
 | [Templates Migration Guide](templates/MigrationGuide.md) | Users of SwiftGen's bundled templates (`templateName` option) | Some templates may have been renamed, removed or merged, or their functionality may have changed |
 | [SwiftGenKit Migration Guide](SwiftGenKit%20Contexts/MigrationGuide.md) | Template writers | Changes in names of variables provided by SwiftGenKit to your templates |
-| [StencilSwiftKit Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/master/Documentation/MigrationGuide.md) | Template writers | Changes in extra filters and tags for use in templates |
+| [StencilSwiftKit Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/stable/Documentation/MigrationGuide.md) | Template writers | Changes in extra filters and tags for use in templates |
 
 ----
 
@@ -216,7 +216,7 @@ These are just a few of the changes to the structure of the variables passed by 
 
 ### Some SwiftGen-specific Stencil filters evolved
 
-Also, a few dedicated Stencil filters provided by SwiftGen (via StencilSwiftKit) have been renamed. Especially the `join` and `snakeToCamelCase` filters now take a parameter. See [StencilSwiftKit's own Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/master/Documentation/MigrationGuide.md#stencilswiftkit-20-swiftgen-50) for more info.
+Also, a few dedicated Stencil filters provided by SwiftGen (via StencilSwiftKit) have been renamed. Especially the `join` and `snakeToCamelCase` filters now take a parameter. See [StencilSwiftKit's own Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/stable/Documentation/MigrationGuide.md#stencilswiftkit-20-swiftgen-50) for more info.
 
 </details>
 
