@@ -1,108 +1,35 @@
 # Customize SwiftGen templates
 
-This document describes how to make your own templates for SwiftGen, so it can generate code more to your liking and code following your own coding conventions. For in depth documentation of the bundled templates, we refer you to the documentation for [each specific template](templates).
+SwiftGen is shipped with built-in templates that generally covers most of people's needs. But sometimes, you might want to adapt the output of SwiftGen to cover some special needs you might have. That's why SwiftGen is built on a system of templates that you can customize.
 
-## Templates files on disk (Search Path priority)
 
-When you invoke SwiftGen, you can specify templates by name or by path.
+## Check parameters of built-in templates first
 
-### Using a full path
+Before creating your own templates, you might want to check if there isn't already a build-in template fulfilling your needs. Some of our built-in templates already provide parameters that you can use in your config file to slightly modify their behavior and output.
 
-If you use the `templatePath` configuration option, you'll need to specify the **relative path** to the template you want to use. This allows you to store your templates anywhere you want (typically in the same folder or git repository of the project in need of those custom templates).
+You can [check the documentation of the bundled templates](templates/) (or use `swiftgen template doc <parser> <templatename>` to open the documentation from your terminal) to see what parameters each template does support, and see if one already fit your needs.
 
-### Using a name
+Note: you can use the `swiftgen template list` command to list all the installed templates for each parser and pick one to start with.
 
-When you use the `templateName` configuration option, you only specify a **template name**. SwiftGen then searches a matching template using the following rules (where `<parser>` is one of `colors`, `ib`, `json`, `plist`, `strings`, `xcassets`, … depending on the parser you invoke):
+## Creating your own custom template
 
-* It searches for a file named `<name>.stencil` in `~/Library/Application Support/SwiftGen/templates/<parser>/`, which is supposed to contain your own custom templates for that particular parser.
-* If it does not find one, it searches for a file named `<name>.stencil` in `<installdir>/share/swiftgen/templates/<parser>` which contains the templates bundled with SwiftGen for that particular parser.
+If none of the built-in templates match your needs even with the various parameters they support, you might want to consider creating your own template.
 
-For example `templateName: foo` will search for a template named `foo.stencil` in Application Support, then in `/usr/local/share/SwiftGen/templates/xcassets` (assuming you installed SwiftGen using Homebrew in `/usr/local`)
+The easiest way to create your own custom template is to duplicate an existing template then modify it. You can use `swiftgen template cat <parser> <templatename> to help you with that:
 
-## List installed templates
+* Start by choosing the built-in template that would be the best fitting starting point for your case
+* Use `swiftgen template cat` to dump its content into a new file, e.g. `swiftgen template cat fonts swift5 >my-custom-fonts-template.stencil`
+* Edit the new file (`my-custom-fonts-template.stencil`) to make your modifications to that template.
+* Once you are happy with your new custom template, you can simply use `templatePath: my-custom-fonts-template.stencil` in your configuration file to use your customized template
 
-The `swiftgen template list` command will list all the installed templates (as YAML output) for each parser, both for bundled templates and custom templates.
+See below for the Stencil format and syntax used to write template in SwiftGen.
 
-```bash
-$ swiftgen template list
-colors:
-  custom:
-  bundled:
-   - literals-swift4
-   - literals-swift5
-   - swift4
-   - swift5
-coredata:
-  custom:
-  bundled:
-   - swift4
-   - swift5
-fonts:
-  custom:
-  bundled:
-   - swift4
-   - swift5
-ib:
-  custom:
-   - mytemplate
-  bundled:
-   - scenes-swift4
-   - scenes-swift5
-   - segues-swift4
-   - segues-swift5
-json:
-  custom:
-  bundled:
-   - inline-swift4
-   - inline-swift5
-   - runtime-swift4
-   - runtime-swift5
-plist:
-  custom:
-  bundled:
-   - inline-swift4
-   - inline-swift5
-   - runtime-swift4
-   - runtime-swift5
-strings:
-  custom:
-   - mycustomtemplate
-  bundled:
-   - flat-swift4
-   - flat-swift5
-   - objc-h
-   - objc-m
-   - structured-swift4
-   - structured-swift5
-xcassets:
-  custom:
-  bundled:
-   - swift4
-   - swift5
-yaml:
-  custom:
-  bundled:
-   - inline-swift4
-   - inline-swift5
-storyboards:
-  custom:
-  bundled:
-   - scenes-swift4
-   - scenes-swift5
-   - segues-swift4
-   - segues-swift5
-```
+### Tip: Iterative process when working on your templates
 
-## Printing a template, creating a new template
+Because getting the exact result you want generally needs you to iterate and test the intermediate result over and over, it could be useful to have a good iterative process to check your templates.
 
-You can use the `swiftgen template cat <parser> <templatename>` command to print the template of that given name for that given parser to `stdout`. e.g. `swiftgen template cat fonts swift5` will print to your terminal the template that would be used if you invoke `fonts` with `template: swift5`.
-
-You can use this feature to easily create a new template from an existing one.
-In particular, the easiest way to create your own templates is to:
-
-* duplicate an existing template by dumping it into a new file like this: `swiftgen template cat fonts swift5 >my-custom-fonts-template.stencil`
-* then edit the new `my-custom-fonts-template.stencil` file to make your modifications to that template
-* Once you've done this you can then simply use `templatePath: my-custom-fonts-template.stencil` in your configuration file to use you customized template!
+For this, you could [use a tool like `kicker`](Articles/Watch-a-folder-for-changes.md) that could help you automatically re-run `swiftgen` every time you save your changes to your custom template while working on it.  
+That way, you can keep your favorite editor open in Split mode for example, with the template on one side and the result on the other, and let `kicker` update the generated result every time you save your template
 
 ## Templates Format, Nodes and Filters
 
@@ -112,6 +39,24 @@ Additionally to the [tags and filters](https://stencil.fuller.li/en/latest/built
 
 ## Templates Contexts
 
-When SwiftGen generates your code, it provides a context (a dictionary) with the variables containing what assets/colors/strings/… the parser did detect, to render your Stencil template using those variables.
+When SwiftGen generates your code, it provides what we call a context (basically a dictionary of variables) with the variables containing what assets/colors/strings/… the parser did detect, to render your Stencil template using those variables.
+
+> This is part of the architecture of SwiftGen, where SwiftGen first parses your resources (like asset catalogs or strings files etc) into those "contexts" (abstract structures) and then inject those contexts to your templates to transform those into your generated code
+> 
+> ```
+>                                      +----------+
+>                                      | Template |
+>                                      +-----+----+
+> +---------------+        +---------+       |      +------------+
+> | Resource file |        | Stencil |       v      | Generated  |
+> | (e.g. Assets) | -----> | Context | ------+----->| Swift code |
+> +---------------+        +---------+              +------------+
+> 
+> \_ _ _ _ _ _ _ _ _ _ _ _ _ _/   \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _/
+>       SwiftGenKit framework          Stencil framework
+> \_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _/
+>                      SwiftGen Command Line
+> ```
+
 
 A full documentation of the produced context for each command can be found in the [SwiftGenKit documentation](SwiftGenKit%20Contexts).
