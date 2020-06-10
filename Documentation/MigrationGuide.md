@@ -115,7 +115,7 @@ You can read all about it in our [Read Me](../README.md). SwiftGen can now parse
 
 Please note that the bundled templates are only meant for the most basic uses for these data types. If you need to access these data files in a different way, especially since you'll probably use some custom structure in your JSON/Plist/YAML files, you may want to write your own templates that better fit those structures (for example to write a template that expects specific keys in your custom YAML to generate code based on the values in those keys…).
 
-For more information, read the [creating your own templates](Creating-your-templates.md) documentation.
+For more information, read the [creating your own templates](Articles/Creating-custom-templates.md) documentation.
 
 ## If you wrote your own templates
 
