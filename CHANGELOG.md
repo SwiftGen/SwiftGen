@@ -104,6 +104,9 @@
 
 ### Internal Changes
 
+* Documentation: Improved doc for creating custom templates, and added a Documentation Table of Contents.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#713](https://github.com/SwiftGen/SwiftGen/pull/713)
 * Refactoring: Reduce globals & rearrange CLI code.  
   [@AliSoftware](https://github.com/AliSoftware)
   [#586](https://github.com/SwiftGen/SwiftGen/pull/586)
