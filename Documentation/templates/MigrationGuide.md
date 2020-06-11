@@ -59,7 +59,7 @@ The templates have been split up into separate templates for each specific funct
 
 All templates now have `swiftlint:disable all` at the top, so `swiftlint` users no longer need to ignore the generated files, although this is still highly recommended.
 
-SwiftGen 6.0 uses the latest [Stencil](https://github.com/stencilproject/Stencil/blob/master/CHANGELOG.md#0131) and [StencilSwiftKit](https://github.com/SwiftGen/StencilSwiftKit/blob/master/CHANGELOG.md#270) libraries, so there are plenty of new features for template writers, such as variable subscripting, an `indent` filter, better error reporting, ...
+SwiftGen 6.0 uses the latest [Stencil](https://github.com/stencilproject/Stencil/blob/master/CHANGELOG.md#0131) and [StencilSwiftKit](https://github.com/SwiftGen/StencilSwiftKit/blob/stable/CHANGELOG.md#270) libraries, so there are plenty of new features for template writers, such as variable subscripting, an `indent` filter, better error reporting, ...
 
 ### Fonts
 
