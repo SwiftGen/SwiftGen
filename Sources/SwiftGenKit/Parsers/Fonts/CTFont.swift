@@ -10,7 +10,7 @@ import Foundation
 import PathKit
 
 extension CTFont {
-  static func parse(file: Path, relativeTo parent: Path? = nil) -> [Fonts.Font] {
+  static func parse(file: Path, relativeTo parent: Path? = nil, extractCodePoints: Bool = false) -> [Fonts.Font] {
     let descs = CTFontManagerCreateFontDescriptorsFromURL(file.url as CFURL) as NSArray?
     guard let descRefs = (descs as? [CTFontDescriptor]) else { return [] }
 
@@ -26,32 +26,36 @@ extension CTFont {
       let characterSet = CTFontCopyCharacterSet(font) as CharacterSet
       let cgFont = CTFontCopyGraphicsFont(font, nil)
 
-      let icons: [String: String] = Dictionary(
-        uniqueKeysWithValues: characterSet.codePoints.compactMap { unicode -> (String, String)? in
-          guard let unicodeScalar = UnicodeScalar(unicode) else { return nil }
-          let uniChar = UniChar(unicodeScalar.value)
+      var icons: [String: String] = [:]
 
-          var codePoint: [UniChar] = [uniChar]
-          var glyphs: [CGGlyph] = [0, 0]
+      if extractCodePoints {
+        icons = Dictionary(
+          uniqueKeysWithValues: characterSet.codePoints.compactMap { unicode -> (String, String)? in
+            guard let unicodeScalar = UnicodeScalar(unicode) else { return nil }
+            let uniChar = UniChar(unicodeScalar.value)
 
-          // Gets the Glyph
-          CTFontGetGlyphsForCharacters(font, &codePoint, &glyphs, 1)
+            var codePoint: [UniChar] = [uniChar]
+            var glyphs: [CGGlyph] = [0, 0]
 
-          if glyphs.isEmpty {
-            return nil
+            // Gets the Glyph
+            CTFontGetGlyphsForCharacters(font, &codePoint, &glyphs, 1)
+
+            if glyphs.isEmpty {
+              return nil
+            }
+
+            // Gets the name of the Glyph, to be used as key
+            guard let name = cgFont.name(for: glyphs[0]) else {
+              print("Failed to get glyph name for: \(unicode)")
+              return nil
+            }
+
+            let key = String(name)
+            let value = String(format: "%X", unicode)
+            return (key, value)
           }
-
-          // Gets the name of the Glyph, to be used as key
-          guard let name = cgFont.name(for: glyphs[0]) else {
-            print("Failed to get glyph name for: \(unicode)")
-            return nil
-          }
-
-          let key = String(name)
-          let value = String(format: "%X", unicode)
-          return (key, value)
-        }
-      )
+        )
+      }
 
       return Fonts.Font(
         filePath: relPath.string,
