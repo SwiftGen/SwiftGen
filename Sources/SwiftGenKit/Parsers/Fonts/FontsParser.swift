@@ -9,6 +9,14 @@ import Foundation
 import PathKit
 
 public enum Fonts {
+  public enum Option {
+    static let codePoints = ParserOption(
+      key: "codePoints",
+      defaultValue: "false",
+      help: "If enabled, will extract code points from the font. Only useful for icon fonts."
+    )
+  }
+
   public final class Parser: SwiftGenKit.Parser {
     var entries: [String: Set<Font>] = [:]
     private let options: ParserOptionValues
@@ -20,6 +28,7 @@ public enum Fonts {
     }
 
     public static let defaultFilter = "[^/]\\.(?i:otf|ttc|ttf)$"
+    public static let allOptions: ParserOptionList = [Option.codePoints]
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       guard let values = try? path.url.resourceValues(forKeys: [.typeIdentifierKey]),
@@ -32,7 +41,13 @@ public enum Fonts {
         return
       }
 
-      let fonts = CTFont.parse(file: path, relativeTo: parent)
+      let getCodePoints: Bool = self.options[Option.codePoints] == "true"
+
+      let fonts = CTFont.parse(
+        file: path,
+        relativeTo: parent,
+        extractCodePoints: getCodePoints
+      )
       fonts.forEach { addFont($0) }
     }
 
