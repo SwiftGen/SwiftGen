@@ -39,6 +39,15 @@ class FontsTests: XCTestCase {
     }
   }
 
+  func testCodePointExtractionOption() throws {
+    let parser = try Fonts.Parser(options: ["codePoints": true])
+    let filter = try Filter(pattern: "MaterialDesignIcons.ttf")
+    try parser.searchAndParse(path: Fixtures.directory(), filter: filter)
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "icons", sub: .fonts)
+  }
+
   // MARK: - Path relative(to:)
 
   func testPathRelativeTo_UnrelatedIsNil() throws {

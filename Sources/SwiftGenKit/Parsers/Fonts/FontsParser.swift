@@ -41,7 +41,7 @@ public enum Fonts {
         return
       }
 
-      let fonts = CTFont.parse(file: path, relativeTo: parent)
+      let fonts = CTFont.parse(file: path, relativeTo: parent, extractCodePoints: self.options[Option.codePoints])
       fonts.forEach { addFont($0) }
     }
 
