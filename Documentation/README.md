@@ -1,6 +1,6 @@
-# SwiftGen documentation
+# SwiftGen Documentation
 
-This directory contains documentation for various topics of SwiftGen
+This directory contains documentation for various topics related to SwiftGen, such as in-depth documentation about parsers and templates, but also articles with tips & tricks on how to best use SwiftGen in your workflow.
 
 ## General Documentation
 
@@ -24,7 +24,7 @@ This directory contains documentation for various topics of SwiftGen
 
 SwiftGen uses parsers to parse different type of input files, like asset catalogs, strings files, font files, etc.
 
-You can find the documentation for each parser in [Documentation/Parsers/](Parsers/), each describing the type of input file the parser supports, as well as the default filter it uses and potential options that can be configured for that parser.
+You can find the documentation for each parser in [Documentation/Parsers/](Parsers/), each describing the type of input file the parser supports, as well as the default file name filter it uses, and potential options that can be configured for that parser.
 
 ## [Templates Documentation](templates/)
 
@@ -35,7 +35,7 @@ The documentation for each template, their intended use, and their supported par
 
 ## [Contexts Documentation](SwiftGenKit%20Contexts/)
 
-The way SwiftGen works is to parse your input files (resources like Asset Catalogs, Strings files, etc) using those parsers described above, and transform them into a structured dictionary – that we call SwiftGenKit Contexts – representing the parsed data.
+The way SwiftGen works is to parse your input files (resources like Asset Catalogs, Strings files, etc) using those parsers described above, and transform them into a structured dictionary – that we call a "SwiftGenKit Context" – representing the parsed data.
 
 That parsed data ("Context") is then fed to our template engine (Stencil), alongside a template, to finally produce the generated code that you will use in your projects.
 
