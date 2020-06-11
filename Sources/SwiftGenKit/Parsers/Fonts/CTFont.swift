@@ -29,32 +29,32 @@ extension CTFont {
       var icons: [String: String] = [:]
 
       if extractCodePoints {
-        icons = Dictionary(
-          uniqueKeysWithValues: characterSet.codePoints.compactMap { unicode -> (String, String)? in
-            guard let unicodeScalar = UnicodeScalar(unicode) else { return nil }
-            let uniChar = UniChar(unicodeScalar.value)
+        for unicode in characterSet.codePoints {
+          guard let unicodeScalar = UnicodeScalar(unicode) else { continue }
 
-            var codePoint: [UniChar] = [uniChar]
-            var glyphs: [CGGlyph] = [0, 0]
+          let utf16codepoints = Array(Character(unicodeScalar).utf16)
 
-            // Gets the Glyph
-            CTFontGetGlyphsForCharacters(font, &codePoint, &glyphs, 1)
+          var glyphs = [CGGlyph](repeating: 0, count: utf16codepoints.count)
 
-            if glyphs.isEmpty {
-              return nil
-            }
-
-            // Gets the name of the Glyph, to be used as key
-            guard let name = cgFont.name(for: glyphs[0]) else {
-              print("Failed to get glyph name for: \(unicode)")
-              return nil
-            }
-
-            let key = String(name)
-            let value = String(format: "%X", unicode)
-            return (key, value)
+          // Gets the Glyph
+          guard CTFontGetGlyphsForCharacters(font, utf16codepoints, &glyphs, utf16codepoints.count) == true else {
+            print("Failed to get glyph for character", unicode, utf16codepoints, unicodeScalar)
+            continue
           }
-        )
+
+          if glyphs.isEmpty {
+            print("Glyph set was empty!")
+            continue
+          }
+
+          // Gets the name of the Glyph, to be used as key
+          guard let name = cgFont.name(for: glyphs[0]) else {
+            print("Failed to get glyph name for:", unicode, utf16codepoints, unicodeScalar)
+            continue
+          }
+
+          icons[String(name)] = String(format: "%04X", unicode)
+        }
       }
 
       return Fonts.Font(
