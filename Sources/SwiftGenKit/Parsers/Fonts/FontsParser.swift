@@ -12,7 +12,7 @@ public enum Fonts {
   public enum Option {
     static let codePoints = ParserOption(
       key: "codePoints",
-      defaultValue: false,
+      defaultValue: "false",
       help: "If enabled, will extract code points from the font. Only useful for icon fonts."
     )
   }
@@ -41,7 +41,13 @@ public enum Fonts {
         return
       }
 
-      let fonts = CTFont.parse(file: path, relativeTo: parent, extractCodePoints: self.options[Option.codePoints])
+      let getCodePoints: Bool = self.options[Option.codePoints] == "true"
+
+      let fonts = CTFont.parse(
+        file: path,
+        relativeTo: parent,
+        extractCodePoints: getCodePoints
+      )
       fonts.forEach { addFont($0) }
     }
 
