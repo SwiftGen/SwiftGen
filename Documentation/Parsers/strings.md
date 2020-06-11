@@ -36,8 +36,6 @@ You can provide a custom filter using the `filter` option, it accepts any valid 
 
 ## Customization
 
-This parser currently doesn't accept any options.
-
 | Option Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
 | `separator` | `.` | Each key is separated into components using the given separator, to form a structure as described in the [explanation above](#input). |

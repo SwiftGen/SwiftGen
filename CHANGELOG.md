@@ -39,7 +39,7 @@
   [David Jennes](https://github.com/djbe)
   [#587](https://github.com/SwiftGen/SwiftGen/pull/587)
   [#597](https://github.com/SwiftGen/SwiftGen/pull/597)
-* Strings: the parser now accepts a `separator` option, used to split keys into structured components. The default separator remains `.`. For more information, check the [command's documentation](Documentation/Commands/strings.md#customization).  
+* Strings: the parser now accepts a `separator` option, used to split keys into structured components. The default separator remains `.`. For more information, check the [command's documentation](Documentation/Parsers/strings.md#customization).  
   [David Jennes](https://github.com/djbe)
   [#576](https://github.com/SwiftGen/SwiftGen/issue/576)
   [#588](https://github.com/SwiftGen/SwiftGen/pull/588)
@@ -104,6 +104,9 @@
 
 ### Internal Changes
 
+* Documentation: Improved doc for creating custom templates, and added a Documentation Table of Contents.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#713](https://github.com/SwiftGen/SwiftGen/pull/713)
 * Refactoring: Reduce globals & rearrange CLI code.  
   [@AliSoftware](https://github.com/AliSoftware)
   [#586](https://github.com/SwiftGen/SwiftGen/pull/586)
