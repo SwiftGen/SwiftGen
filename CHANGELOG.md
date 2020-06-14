@@ -35,7 +35,7 @@
 * You can now use `swiftgen template doc [parser] [templateName]` on the command line to quickly open the documentation for templates on GitHub directly from your terminal.  
   [@AliSoftware](https://github.com/AliSoftware)
   [#697](https://github.com/SwiftGen/SwiftGen/pull/697)
-* Each parser now accepts an `options` dictionary, with which you can set internal parser settings to change its behaviour. See the parser' specific documentation for available options.  
+* Each parser now accepts an `options` dictionary, with which you can set internal parser settings to change its behaviour. See the parser's specific documentation for available options.  
   [David Jennes](https://github.com/djbe)
   [#587](https://github.com/SwiftGen/SwiftGen/pull/587)
   [#597](https://github.com/SwiftGen/SwiftGen/pull/597)
