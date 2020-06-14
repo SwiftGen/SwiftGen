@@ -13,7 +13,7 @@
 * XCAssets: the `colorAliasName` and `imageAliasName` template parameters are now deprecated and will be removed in the next major release.  
   [David Jennes](https://github.com/djbe)
   [#614](https://github.com/SwiftGen/SwiftGen/pull/614)
-  
+
 ### Deprecations
 
 * The use of `swiftgen <parser>` (e.g. `swiftgen strings`, `swiftgen xcassets`, …) command line for running individual parsers is now deprecated in favor of `swiftgen run <parser>`. See "New Features" below.  
@@ -53,11 +53,12 @@
   [#609](https://github.com/SwiftGen/SwiftGen/issues/609)
   [#593](https://github.com/SwiftGen/SwiftGen/pull/593)
   [#610](https://github.com/SwiftGen/SwiftGen/pull/610)
-* Strings: the built-in templates now accept a parameter for customizing the localization function.  
+* Strings: the built-in templates now accept a parameter `lookupFunction` for customizing the localization function, check the [template documentation](Documentation/templates/string/) for more information.  
   [Steven Magdy](https://github.com/StevenMagdy)
   [426](https://github.com/SwiftGen/SwiftGen/issues/426)
   [468](https://github.com/SwiftGen/SwiftGen/issues/468)
   [573](https://github.com/SwiftGen/SwiftGen/pull/573)
+  [716](https://github.com/SwiftGen/SwiftGen/pull/716)
 * Strings: templates to generate Objective-C. Please check [the template's documentation](Documentation/templates/string/objc.md) for more information.  
   [Eric Slosser](https://github.com/Mr-Fixit)
   [SwiftGen/SwiftGen#378](https://github.com/SwiftGen/SwiftGen/pull/378)
