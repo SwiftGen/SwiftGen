@@ -88,12 +88,19 @@ let image1 = UIImage(asset: Asset.Food.Exotic.banana)
 let image2 = Asset.Food.Round.tomato.image
 
 import PlaygroundSupport
-// Show alternating tomato and banana in playground's liveView
+// Show fruits animated in the playground's liveView
 PlaygroundPage.current.liveView = {
-  let assets = [Asset.Food.Round.tomato, Asset.Food.Exotic.banana]
+  let assets = [
+    Asset.Food.Exotic.banana,
+    Asset.Food.Exotic.mango,
+    Asset.Food.Round.apricot,
+    Asset.Food.Round.apple,
+    Asset.Food.Round.tomato,
+    Asset.Food.Round.Double.cherry
+  ]
   let iv = UIImageView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
   iv.animationImages = assets.map(\.image)
-  iv.animationDuration = 2
+  iv.animationDuration = TimeInterval(assets.count)/2 // 0.5s per image
   iv.startAnimating()
   return iv
 }()
