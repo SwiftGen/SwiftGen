@@ -15,7 +15,7 @@ All the migration guides for SwiftGen are spread out over a few files, depending
 
 ## Deprecation of Application Support lookup for named templates
 
-In previous versions of SwiftGen, SwiftGen looked for named templates inside `~/Library/Application Support` before looking for bundled templates. This feature was little known and complexified both code and documentation, in addition to making your project dependent on what was installed on your machine. This is why it has been is deprecated in SwiftGen 6.2 and will be removed in 7.0.
+In previous versions of SwiftGen, SwiftGen looked for named templates inside `~/Library/Application Support` before looking for bundled templates. This feature was little known and made the documentation quite confusing, in addition to making your project dependent on what was installed on your machine. This is why it has been is deprecated in SwiftGen 6.2 and will be removed in 7.0.
 
 In the unlikely case you used this feature, you should start using `templatePath:` instead of `templateName:` to point to those custom templates. We also suggest you to move those custom templates from `~/Library/Application Support` into your project folders instead, to ensure that your projects and SwiftGen configuration will work on every machine and not be dependent on the machine you run SwiftGen on.
 
@@ -25,15 +25,15 @@ In the unlikely case you used this feature, you should start using `templatePath
 
 The invocation of individual parsers via the command line (`swiftgen <parser>`, e.g. `swiftgen colors …`, `swiftgen strings …`) is deprecated in favor of using the `swiftgen run <parser>` subcommand instead.
 
-The `swiftgen <parser>` command will be completely removed in SwiftGen 7.0, only leaving `swiftgen run <parser>` available
+The `swiftgen <parser>` command will be completely removed in SwiftGen 7.0, only leaving the `swiftgen run <parser>` subcommand.
 
 > Note that for flexibility and performance reasons, it is still recommended to use a configuration file instead of invoking individual parsers from the command line like that for normal use; the usage of `swiftgen run <parser>` should only be used for isolated uses, like when you're iterating while working on a custom template.
 
 #### `swiftgen templates` renamed `swiftgen template`
 
-The command to manage templates (list bundled templates, print their content to generate custom variations, open documentation…) has been renamed `swiftgen template` (singular).
+The command to manage templates (list bundled templates, print their content to generate custom templates, open documentation…) has been renamed `swiftgen template` (singular).
 
-`swiftgen templates` (plural) is thus deprecated and will be removed in SwiftGen 7.0
+`swiftgen templates` (plural) is thus deprecated and will be removed in SwiftGen 7.0.
  
 # Migrating to SwiftGen 6.0
 
