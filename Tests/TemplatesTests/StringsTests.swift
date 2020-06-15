@@ -36,9 +36,9 @@ class StringsTests: XCTestCase {
       (
         context: try StencilContext.enrich(
           context: context,
-          parameters: ["localizeFunction=XCTLocFunc"]
+          parameters: ["lookupFunction=XCTLocFunc(forKey:table:)"]
         ),
-        suffix: "-localizeFunction"
+        suffix: "-lookupFunction"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
