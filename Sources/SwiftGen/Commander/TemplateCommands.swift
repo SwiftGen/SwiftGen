@@ -26,9 +26,8 @@ enum TemplateCLI {
       try output.write(
         content: """
           ---
-          You can add custom templates in \(Path.appSupportTemplates).
-          You can also specify templates by path using `templatePath` instead of `templateName`.
-          For more information, see the documentation on GitHub.
+          You can also specify custom templates by path, using `templatePath` instead of `templateName`.
+          For more information, see the documentation on GitHub or use `swiftgen template doc`.
           """
       )
     }
@@ -86,8 +85,8 @@ private extension TemplateCLI {
       templates(in: path + parser.templateFolder).map { "   - \($0.lastComponentWithoutExtension)" }
     }
     var lines = ["\(parser.name):"]
-    lines.append("  custom:")
-    lines.append(contentsOf: parserTemplates(in: Path.appSupportTemplates))
+    lines.append("  custom (deprecated):")
+    lines.append(contentsOf: parserTemplates(in: Path.deprecatedAppSupportTemplates))
     lines.append("  bundled:")
     lines.append(contentsOf: parserTemplates(in: Path.bundledTemplates))
     return lines.joined(separator: "\n")

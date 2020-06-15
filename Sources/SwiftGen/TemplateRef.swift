@@ -45,8 +45,18 @@ enum TemplateRef: Equatable {
   func resolvePath(forParser parser: ParserCLI) throws -> Path {
     switch self {
     case .name(let templateShortName):
-      var path = Path.appSupportTemplates + parser.templateFolder + "\(templateShortName).stencil"
-      if !path.isFile {
+      var path = Path.deprecatedAppSupportTemplates + parser.templateFolder + "\(templateShortName).stencil"
+      if path.isFile {
+        logMessage(
+          .warning,
+          """
+          Referring to templates in Application Support by name is deprecated and will be removed in SwiftGen 7.0.
+          For custom templates, please use `templatePath` instead of `templateName` to point to them.
+          We also recommend you move your custom templates from \(Path.deprecatedAppSupportTemplates)
+          to your project's folder so that your project is able to run independently on all machines.
+          """
+        )
+      } else {
         path = Path.bundledTemplates + parser.templateFolder + "\(templateShortName).stencil"
       }
       guard path.isFile else {
