@@ -89,8 +89,7 @@ internal enum L10n {
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    // swiftlint:disable:next nslocalizedstring_key
-    let format = XCTLocFunc(key, tableName: table, bundle: BundleToken.bundle, comment: "")
+    let format = XCTLocFunc(forKey:table:)(key, table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
