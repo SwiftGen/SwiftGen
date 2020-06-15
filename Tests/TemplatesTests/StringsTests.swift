@@ -57,7 +57,7 @@ class StringsTests: XCTestCase {
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
-        suffix: "-no-comments"
+        suffix: "-noComments"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["headerName=headerName-from-parameter.h"]),
