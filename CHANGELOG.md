@@ -22,7 +22,9 @@
 * The subcommand `swiftgen templates` has been renamed `swiftgen template` (singular); the plural form of the command has been deprecated and will be removed in next major version.  
   [@AliSoftware](https://github.com/AliSoftware)
   [#697](https://github.com/SwiftGen/SwiftGen/pull/697)
-
+* The ability for SwiftGen to search custom named templates in `~/Library/Application Support` has been deprecated and will be removed in SwiftGen 7.0. This little known feature made SwiftGen dependent on the machine it was running on. Use `templatePath` to reference custom templates by path instead.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#717](https://github.com/SwiftGen/SwiftGen/pull/717)
 
 ### New Features
 
