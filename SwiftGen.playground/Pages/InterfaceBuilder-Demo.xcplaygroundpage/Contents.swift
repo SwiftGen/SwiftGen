@@ -96,10 +96,12 @@ you can easily switch or directly compare the passed in `segue` with the corresp
 segues for a specific storyboard.
 *******************************************************************************/
 //override func prepareForSegue(_ segue: UIStoryboardSegue, sender sender: AnyObject?) {
-//  switch UIStoryboard.Segue.Message(segue) {
-//  case .custom?:
+//  switch StoryboardSegue.Message(segue) {
+//  case .showNavCtrl?:
 //    // Prepare for your custom segue transition
 //  case .nonCustom?:
 //    // Pass in information to the destination View Controller
+//  default:
+//    break // not the expected segue
 //  }
 //}
