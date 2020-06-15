@@ -25,7 +25,7 @@ In the unlikely case you used this feature, you should start using `templatePath
 
 The invocation of individual parsers via the command line (`swiftgen <parser>`, e.g. `swiftgen colors …`, `swiftgen strings …`) is deprecated in favor of using the `swiftgen run <parser>` subcommand instead.
 
-The `swiftgen <parser>` command will be completely removed in SwiftGen 7.0, only leaving the `swiftgen run <parser>` subcommand.
+The `swiftgen <parser>` commands will be completely removed in SwiftGen 7.0, only leaving the `swiftgen run <parser>` subcommands.
 
 > Note that for flexibility and performance reasons, it is still recommended to use a configuration file instead of invoking individual parsers from the command line like that for normal use; the usage of `swiftgen run <parser>` should only be used for isolated uses, like when you're iterating while working on a custom template.
 
