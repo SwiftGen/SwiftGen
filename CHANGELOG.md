@@ -10,12 +10,12 @@
   [David Jennes](https://github.com/djbe)
   [#601](https://github.com/SwiftGen/SwiftGen/pull/601)
   [#691](https://github.com/SwiftGen/SwiftGen/pull/691)
-* XCAssets: the `colorAliasName` and `imageAliasName` template parameters are now deprecated and will be removed in the next major release.  
-  [David Jennes](https://github.com/djbe)
-  [#614](https://github.com/SwiftGen/SwiftGen/pull/614)
   
 ### Deprecations
 
+* XCAssets: the `colorAliasName` and `imageAliasName` template parameters are now deprecated and will be removed in the next major release.  
+  [David Jennes](https://github.com/djbe)
+  [#614](https://github.com/SwiftGen/SwiftGen/pull/614)
 * The use of `swiftgen <parser>` (e.g. `swiftgen strings`, `swiftgen xcassets`, …) command line for running individual parsers is now deprecated in favor of `swiftgen run <parser>`. See "New Features" below.  
   [@AliSoftware](https://github.com/AliSoftware)
   [#705](https://github.com/SwiftGen/SwiftGen/pull/705)
@@ -26,7 +26,7 @@
 
 ### New Features
 
-* The use of `swiftgen <parser>` command line for running individual parsers is now deprecated in favor of `swiftgen run <parser>`.  We still highly recommend to use a configuration file for flexibility and performance reasons in your projects, and only use `swiftgen run <parser>` for things like quick iterations when writing your own custom templates.  
+* Invoking individual parsers from the command line is now done via `swiftgen run <parser>`.  We still highly recommend to use a configuration file for flexibility and performance reasons in your projects, and only use `swiftgen run <parser>` for things like quick iterations when writing your own custom templates.  
   [@AliSoftware](https://github.com/AliSoftware)
   [#705](https://github.com/SwiftGen/SwiftGen/pull/705)
 * You can now easily create a new config file using `swiftgen config init`. This will create an example and commented config file and open it to let you edit it to your needs.  _Note that the generated config file is static content which doesn't take the user's project into account (though that might change in the future)_.  
@@ -120,7 +120,7 @@
 * XCAssets: renamed the catalogs we use for sample code & testing to avoid some confusion.  
   [David Jennes](https://github.com/djbe)
   [#613](https://github.com/SwiftGen/SwiftGen/pull/613)
-* Update to SwiftLint 0.31.0 and enable some extra SwiftLint rules.  
+* Update SwiftLint and enable some extra SwiftLint rules.  
   [David Jennes](https://github.com/djbe)
   [#617](https://github.com/SwiftGen/SwiftGen/pull/617)
 * Some CI fixes related to software versions.  
