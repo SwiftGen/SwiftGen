@@ -67,7 +67,7 @@ internal extension Color {
   }
 }
 
-fileprivate struct RGBAComponents {
+private struct RGBAComponents {
   let rgbaValue: UInt32
 
   private var shifts: [UInt32] {
