@@ -50,7 +50,7 @@ enum TemplateRef: Equatable {
         logMessage(
           .warning,
           """
-          Refering templates in Application Support by name will be deprecated in SwiftGen 7.0.
+          Referring templates in Application Support by name will be deprecated in SwiftGen 7.0.
           For custom templates, please use `templatePath` instead of `templateName` to point to them.
           We also recommend you move your custom templates from \(Path.deprecatedAppSupportTemplates)
           to your project's folder so that your project is able to run independently on all machines.
