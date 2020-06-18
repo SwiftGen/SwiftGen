@@ -2,7 +2,7 @@
 
 ---
 
-## Develop
+## 6.2.0
 
 ### Breaking Changes
 
