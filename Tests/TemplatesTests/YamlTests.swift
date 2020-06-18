@@ -17,27 +17,37 @@ class YamlTests: XCTestCase {
     guard name == "all" else { return [(context: context, suffix: "")] }
 
     return [
-      (context: context,
-       suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomYAML"]),
-       suffix: "-customName"),
-      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+      (
+        context: context,
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomYAML"]),
+        suffix: "-customName"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
+      )
     ]
   }
 
-  func testInlineSwift3() {
+  func testInlineSwift4() {
     test(
-      template: "inline-swift3",
+      template: "inline-swift4",
       contextNames: Contexts.all,
       directory: .yaml,
       contextVariations: variations
     )
   }
 
-  func testInlineSwift4() {
+  func testInlineSwift5() {
     test(
-      template: "inline-swift4",
+      template: "inline-swift5",
       contextNames: Contexts.all,
       directory: .yaml,
       contextVariations: variations

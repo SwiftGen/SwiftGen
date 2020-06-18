@@ -1,0 +1,46 @@
+catalogs:
+- assets:
+  - isNamespaced: "false"
+    items: []
+    name: "Empty"
+    type: "group"
+  - isNamespaced: "true"
+    items:
+    - name: "Banana"
+      type: "image"
+      value: "Exotic/Banana"
+    - name: "Mango"
+      type: "image"
+      value: "Exotic/Mango"
+    name: "Exotic"
+    type: "group"
+  - isNamespaced: "true"
+    items:
+    - name: "Apricot"
+      type: "image"
+      value: "Round/Apricot"
+    - isNamespaced: "false"
+      items:
+      - name: "Apple"
+        type: "image"
+        value: "Round/Apple"
+      - isNamespaced: "true"
+        items:
+        - name: "Cherry"
+          type: "image"
+          value: "Round/Double/Cherry"
+        name: "Double"
+        type: "group"
+      - name: "Tomato"
+        type: "image"
+        value: "Round/Tomato"
+      name: "Red"
+      type: "group"
+    name: "Round"
+    type: "group"
+  - name: "private"
+    type: "image"
+    value: "private"
+  name: "Food"
+resourceCount:
+  image: 7

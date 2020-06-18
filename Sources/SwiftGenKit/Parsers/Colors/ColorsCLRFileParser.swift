@@ -10,6 +10,9 @@ import PathKit
 
 extension Colors {
   final class CLRFileParser: ColorsFileTypeParser {
+    init(options: ParserOptionValues) {
+    }
+
     static let extensions = ["clr"]
 
     private enum Keys {

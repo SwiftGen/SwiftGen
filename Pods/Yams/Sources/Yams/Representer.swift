@@ -6,10 +6,9 @@
 //  Copyright (c) 2017 Yams. All rights reserved.
 //
 
-#if SWIFT_PACKAGE
-import CYaml
-#endif
+#if os(Linux)
 import CoreFoundation
+#endif
 import Foundation
 
 public extension Node {
@@ -18,7 +17,7 @@ public extension Node {
     /// - parameter representable: Value of `NodeRepresentable` to represent as a `Node`.
     ///
     /// - throws: `YamlError`.
-    public init<T: NodeRepresentable>(_ representable: T) throws {
+    init<T: NodeRepresentable>(_ representable: T) throws {
         self = try representable.represented()
     }
 }
@@ -54,9 +53,7 @@ extension Dictionary: NodeRepresentable {
 }
 
 private func represent(_ value: Any) throws -> Node {
-    if let string = value as? String {
-        return Node(string)
-    } else if let representable = value as? NodeRepresentable {
+    if let representable = value as? NodeRepresentable {
         return try representable.represented()
     }
     throw YamlError.representer(problem: "Failed to represent \(value)")
@@ -73,6 +70,13 @@ extension ScalarRepresentable {
     /// This value's `Node.scalar` representation.
     public func represented() throws -> Node {
         return .scalar(represented())
+    }
+}
+
+extension NSNull: ScalarRepresentable {
+    /// This value's `Node.scalar` representation.
+    public func represented() -> Node.Scalar {
+        return .init("null", Tag(.null))
     }
 }
 
@@ -97,31 +101,38 @@ extension Date: ScalarRepresentable {
     }
 
     private var iso8601String: String {
-        let calendar = Calendar(identifier: .gregorian)
-        let nanosecond = calendar.component(.nanosecond, from: self)
-#if os(Linux)
-        // swift-corelibs-foundation has bug with nanosecond.
-        // https://bugs.swift.org/browse/SR-3158
-        return iso8601Formatter.string(from: self)
-#else
-        if nanosecond != 0 {
-            return iso8601WithFractionalSecondFormatter.string(from: self)
-                .trimmingCharacters(in: characterSetZero) + "Z"
-        } else {
-            return iso8601Formatter.string(from: self)
-        }
-#endif
+        let (integral, millisecond) = timeIntervalSinceReferenceDate.separateFractionalSecond(withPrecision: 3)
+        guard millisecond != 0 else { return iso8601Formatter.string(from: self) }
+
+        let dateWithoutMillisecond = Date(timeIntervalSinceReferenceDate: integral)
+        return iso8601WithoutZFormatter.string(from: dateWithoutMillisecond) +
+            String(format: ".%03d", millisecond).trimmingCharacters(in: characterSetZero) + "Z"
     }
 
     private var iso8601StringWithFullNanosecond: String {
-        let calendar = Calendar(identifier: .gregorian)
-        let nanosecond = calendar.component(.nanosecond, from: self)
-        if nanosecond != 0 {
-            return iso8601WithoutZFormatter.string(from: self) +
-                String(format: ".%09d", nanosecond).trimmingCharacters(in: characterSetZero) + "Z"
-        } else {
-            return iso8601Formatter.string(from: self)
-        }
+        let (integral, nanosecond) = timeIntervalSinceReferenceDate.separateFractionalSecond(withPrecision: 9)
+        guard nanosecond != 0 else { return iso8601Formatter.string(from: self) }
+
+        let dateWithoutNanosecond = Date(timeIntervalSinceReferenceDate: integral)
+        return iso8601WithoutZFormatter.string(from: dateWithoutNanosecond) +
+            String(format: ".%09d", nanosecond).trimmingCharacters(in: characterSetZero) + "Z"
+    }
+}
+
+private extension TimeInterval {
+    /// Separates the time interval into integral and fractional components, then rounds the `fractional`
+    /// component to `precision` number of digits.
+    ///
+    /// - returns: Tuple of integral part and converted fractional part
+    func separateFractionalSecond(withPrecision precision: Int) -> (integral: TimeInterval, fractional: Int) {
+        var integral = 0.0
+        let fractional = modf(self, &integral)
+        let radix = pow(10.0, Double(precision))
+        let rounded = Int((fractional * radix).rounded())
+        let quotient = rounded / Int(radix)
+        return quotient != 0 ? // carry-up?
+            (integral + TimeInterval(quotient), rounded % Int(radix)) :
+            (integral, rounded)
     }
 }
 
@@ -139,15 +150,6 @@ private let iso8601WithoutZFormatter: DateFormatter = {
     var formatter = DateFormatter()
     formatter.locale = Locale(identifier: "en_US_POSIX")
     formatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss"
-    formatter.timeZone = TimeZone(secondsFromGMT: 0)
-    return formatter
-}()
-
-// DateFormatter truncates Fractional Second to 10^-4
-private let iso8601WithFractionalSecondFormatter: DateFormatter = {
-    var formatter = DateFormatter()
-    formatter.locale = Locale(identifier: "en_US_POSIX")
-    formatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSSS"
     formatter.timeZone = TimeZone(secondsFromGMT: 0)
     return formatter
 }()
@@ -232,11 +234,19 @@ extension URL: ScalarRepresentable {
 extension String: ScalarRepresentable {
     /// This value's `Node.scalar` representation.
     public func represented() -> Node.Scalar {
-        return .init(self)
+        let scalar = Node.Scalar(self)
+        return scalar.resolvedTag.name == .str ? scalar : .init(self, Tag(.str), .singleQuoted)
     }
 }
 
-/// MARK: - ScalarRepresentableCustomizedForCodable
+extension UUID: ScalarRepresentable {
+    /// This value's `Node.scalar` representation.
+    public func represented() -> Node.Scalar {
+        return .init(uuidString)
+    }
+}
+
+// MARK: - ScalarRepresentableCustomizedForCodable
 
 /// Types conforming to this protocol can be encoded by `YamlEncoder`.
 public protocol YAMLEncodable: Encodable {
@@ -266,6 +276,7 @@ extension UInt32: YAMLEncodable {}
 extension UInt64: YAMLEncodable {}
 extension URL: YAMLEncodable {}
 extension String: YAMLEncodable {}
+extension UUID: YAMLEncodable {}
 
 extension Date: YAMLEncodable {
     /// Returns this value wrapped in a `Node.scalar`.

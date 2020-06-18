@@ -6,8 +6,6 @@
 //  Copyright (c) 2016 Yams. All rights reserved.
 //
 
-import Foundation
-
 // MARK: Node+Scalar
 
 extension Node {

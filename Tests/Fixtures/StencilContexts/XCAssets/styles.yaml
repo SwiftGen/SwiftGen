@@ -1,0 +1,29 @@
+catalogs:
+- assets:
+  - isNamespaced: "true"
+    items:
+    - name: "Background"
+      type: "color"
+      value: "24Vision/Background"
+    - name: "Primary"
+      type: "color"
+      value: "24Vision/Primary"
+    name: "24Vision"
+    type: "group"
+  - name: "Orange"
+    type: "image"
+    value: "Orange"
+  - isNamespaced: "true"
+    items:
+    - name: "Primary"
+      type: "color"
+      value: "Vengo/Primary"
+    - name: "Tint"
+      type: "color"
+      value: "Vengo/Tint"
+    name: "Vengo"
+    type: "group"
+  name: "Styles"
+resourceCount:
+  color: 4
+  image: 1

@@ -1,0 +1,31 @@
+--- !ruby/object:CompilationConfiguration
+common:
+  swift_versions:
+    - 5
+  platforms:
+    - macOS
+file_specific:
+  all.swift:
+    files:
+      - IB-macOS-Definitions.swift
+  all-customName.swift:
+    files:
+      - IB-macOS-Definitions.swift
+  all-ignoreTargetModule-withExtraModule.swift:
+    files:
+      - IB-macOS-Definitions.swift
+      - IB-macOS-Login.swift
+  all-ignoreTargetModule.swift:
+    files:
+      - IB-macOS-Definitions.swift
+  all-noDefinedModule.swift:
+    files:
+      - IB-macOS-Definitions.swift
+      - IB-macOS-NamespacedLogin.swift
+  all-publicAccess.swift:
+    files:
+      - IB-macOS-Definitions.swift
+  all-withExtraModule.swift:
+    files:
+      - IB-macOS-Definitions.swift
+      - IB-macOS-NamespacedLogin.swift

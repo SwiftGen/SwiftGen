@@ -17,22 +17,23 @@ class PlistTests: XCTestCase {
     guard name == "all" else { return [(context: context, suffix: "")] }
 
     return [
-      (context: context,
-       suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomPlist"]),
-       suffix: "-customname"),
-      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+      (
+        context: context,
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomPlist"]),
+        suffix: "-customname"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
+      )
     ]
-  }
-
-  func testInlineSwift3() {
-    test(
-      template: "inline-swift3",
-      contextNames: Contexts.all,
-      directory: .plist,
-      contextVariations: inlineVariations
-    )
   }
 
   func testInlineSwift4() {
@@ -44,34 +45,55 @@ class PlistTests: XCTestCase {
     )
   }
 
+  func testInlineSwift5() {
+    test(
+      template: "inline-swift5",
+      contextNames: Contexts.all,
+      directory: .plist,
+      contextVariations: inlineVariations
+    )
+  }
+
   // generate variations to test customname generation
   let runtimeVariations: VariationGenerator = { name, context in
     guard name == "all" else { return [(context: context, suffix: "")] }
 
     return [
-      (context: context,
-       suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomPlist"]),
-       suffix: "-customName"),
-      (context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
-       suffix: "-preservePath"),
-      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+      (
+        context: context,
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomPlist"]),
+        suffix: "-customName"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
+        suffix: "-preservePath"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
+      )
     ]
   }
 
-  func testRuntimeSwift3() {
+  func testRuntimeSwift4() {
     test(
-      template: "runtime-swift3",
+      template: "runtime-swift4",
       contextNames: Contexts.all,
       directory: .plist,
       contextVariations: runtimeVariations
     )
   }
 
-  func testRuntimeSwift4() {
+  func testRuntimeSwift5() {
     test(
-      template: "runtime-swift4",
+      template: "runtime-swift5",
       contextNames: Contexts.all,
       directory: .plist,
       contextVariations: runtimeVariations

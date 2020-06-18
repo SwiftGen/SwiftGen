@@ -23,7 +23,7 @@ extension Yaml.Parser {
   }
 
   private func map(file: Yaml.File) -> [String: Any] {
-    return [
+    [
       "name": file.name,
       "path": file.path.string,
       "documents": file.documents.map(map(document:))
@@ -31,7 +31,7 @@ extension Yaml.Parser {
   }
 
   private func map(document: Any) -> [String: Any] {
-    return [
+    [
       "data": document,
       "metadata": Metadata.generate(for: document)
     ]

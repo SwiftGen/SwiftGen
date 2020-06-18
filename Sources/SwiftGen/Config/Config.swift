@@ -19,6 +19,8 @@ struct Config {
   let inputDir: Path?
   let outputDir: Path?
   let commands: [String: [ConfigEntry]]
+
+  let sourcePath: Path
 }
 
 extension Config {
@@ -32,14 +34,33 @@ extension Config {
     }
 
     let anyConfig = try YAML.read(path: file, env: env)
+    try self.init(yaml: anyConfig, sourcePath: file.parent(), logger: logger)
+  }
 
-    guard let config = anyConfig as? [String: Any] else {
-      throw Config.Error.wrongType(key: nil, expected: "Dictionary", got: type(of: anyConfig))
+  init(
+    content: String,
+    env: [String: String],
+    sourcePath: Path,
+    logger: (LogLevel, String) -> Void
+  ) throws {
+    let anyConfig = try YAML.decode(string: content, env: env)
+    try self.init(yaml: anyConfig, sourcePath: sourcePath, logger: logger)
+  }
+
+  private init(
+    yaml: Any?,
+    sourcePath: Path,
+    logger: (LogLevel, String) -> Void
+  ) throws {
+    self.sourcePath = sourcePath
+
+    guard let config = yaml as? [String: Any] else {
+      throw Config.Error.wrongType(key: nil, expected: "Dictionary", got: type(of: yaml))
     }
     self.inputDir = (config[Keys.inputDir] as? String).map { Path($0) }
     self.outputDir = (config[Keys.outputDir] as? String).map { Path($0) }
     var cmds: [String: [ConfigEntry]] = [:]
-    for parserCmd in allParserCommands {
+    for parserCmd in ParserCLI.allCommands {
       if let cmdEntry = config[parserCmd.name] {
         do {
           cmds[parserCmd.name] = try ConfigEntry.parseCommandEntry(
@@ -60,6 +81,30 @@ extension Config {
 // MARK: - Linting
 
 extension Config {
+  enum Message {
+    static func absolutePath(_ path: CustomStringConvertible) -> String {
+      """
+        \(path) is an absolute path. Prefer relative paths for portability when sharing your \
+        project (unless you are using environment variables).
+        """
+    }
+
+    static func deprecatedAction(_ action: String, for replacement: String) -> String {
+      "`\(action)` action has been deprecated, please use `\(replacement)` instead."
+    }
+
+    static func doesntExist(_ path: CustomStringConvertible) -> String {
+      "\(path) does not exist."
+    }
+
+    static func doesntExistIntermediatesNeeded(_ path: CustomStringConvertible) -> String {
+      """
+        \(path) does not exist. Intermediate folders up to the output file must already exist to avoid \
+        misconfigurations, and won't be created for you.
+        """
+      }
+  }
+
   // Deprecated
   private static let deprecatedCommands = [
     "storyboards": "ib"
@@ -68,90 +113,84 @@ extension Config {
   func lint(logger: (LogLevel, String) -> Void = logMessage) {
     logger(.info, "> Common parent directory used for all input paths:  \(inputDir ?? "<none>")")
     if let inputDir = inputDir, !inputDir.exists {
-      logger(.error, "input_dir: Input directory \(inputDir) does not exist")
+      logger(.error, "input_dir: Input directory \(Message.doesntExist(inputDir))")
     }
 
     logger(.info, "> Common parent directory used for all output paths: \(self.outputDir ?? "<none>")")
     if let outputDir = outputDir, !outputDir.exists {
-      logger(.error, "output_dir: Output directory \(outputDir) does not exist")
+      logger(.error, "output_dir: Output directory \(Message.doesntExist(outputDir))")
     }
 
     for (cmd, entries) in commands {
       if let replacement = Config.deprecatedCommands[cmd] {
-        logger(.warning, "`\(cmd)` action has been deprecated, please use `\(replacement)` instead.")
+        logger(.warning, Message.deprecatedAction(cmd, for: replacement))
       }
 
-      let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
-      logger(.info, "> \(entriesCount) for command \(cmd):")
-      for entry in entries {
-        lint(cmd: cmd, entry: entry, logger: logger)
+      if let parserCmd = ParserCLI.command(named: cmd) {
+        let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
+        logger(.info, "> \(entriesCount) for command \(cmd):")
+        for entry in entries {
+          lint(cmd: parserCmd, entry: entry, logger: logger)
+        }
+      } else {
+        logger(.error, "Action `\(cmd)` does not exist.")
       }
     }
   }
 
-  private func lint(cmd: String, entry: ConfigEntry, logger: (LogLevel, String) -> Void) {
+  private func lint(cmd: ParserCLI, entry: ConfigEntry, logger: (LogLevel, String) -> Void) {
     var entry = entry
     entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
 
     for inputPath in entry.inputs {
-      if !inputPath.exists {
-        logger(.error, "\(cmd).inputs: \(inputPath) does not exist")
-      }
+      let finalPath: Path
+
       if inputPath.isAbsolute {
-        logger(
-          .warning,
-          """
-          \(cmd).inputs: \(inputPath) is an absolute path. Prefer relative paths for portability \
-          when sharing your project.
-          """
-        )
+        logger(.warning, "\(cmd.name).inputs: \(Message.absolutePath(inputPath))")
+        finalPath = inputPath
+      } else {
+        finalPath = sourcePath + inputPath
       }
+
+      if !finalPath.exists {
+        logger(.error, "\(cmd.name).inputs: \(Message.doesntExist(inputPath))")
+      }
+    }
+
+    if let regex = entry.filter, (try? Filter(pattern: regex)) == nil {
+      logger(.error, "\(cmd.name).filter: \(regex) is not a valid regular expression.")
+    }
+
+    for issue in cmd.parserType.allOptions.lint(options: entry.options) {
+      logger(.error, "\(cmd.name).options: \(issue)")
     }
 
     for entryOutput in entry.outputs {
       lint(cmd: cmd, output: entryOutput, logger: logger)
     }
 
-    for item in entry.commandLine(forCommand: cmd) {
+    for item in entry.commandLine(forCommand: cmd.name) {
       logMessage(.info, " $ \(item)")
     }
   }
 
-  private func lint(cmd: String, output entryOutput: ConfigEntryOutput, logger: (LogLevel, String) -> Void) {
+  private func lint(cmd: ParserCLI, output entryOutput: ConfigEntryOutput, logger: (LogLevel, String) -> Void) {
     do {
-      let actualCmd = Config.deprecatedCommands[cmd] ?? cmd
-      _ = try entryOutput.template.resolvePath(forSubcommand: actualCmd)
+      let actualCmd = Config.deprecatedCommands[cmd.name].flatMap(ParserCLI.command(named:)) ?? cmd
+      _ = try entryOutput.template.resolvePath(forParser: actualCmd)
     } catch let error {
-      logger(.error, "\(cmd).outputs: \(error)")
+      logger(.error, "\(cmd.name).outputs: \(error)")
     }
     if case TemplateRef.path(let templateRef) = entryOutput.template, templateRef.isAbsolute {
-      logger(
-        .warning,
-        """
-        \(cmd).outputs.templatePath: \(templateRef) is an absolute path. Prefer relative paths \
-        for portability when sharing your project.
-        """
-      )
+      logger(.warning, "\(cmd.name).outputs.templatePath: \(Message.absolutePath(templateRef))")
     }
 
     let outputParent = entryOutput.output.parent()
-    if !outputParent.exists {
-      logger(
-        .error,
-        """
-        \(cmd).outputs.output: \(outputParent) does not exist. Intermediate folders up to the \
-        output file must already exist to avoid misconfigurations, and won't be created for you.
-        """
-      )
+    if !(sourcePath + outputParent).exists {
+      logger(.error, "\(cmd.name).outputs.output: \(Message.doesntExistIntermediatesNeeded(outputParent))")
     }
     if entryOutput.output.isAbsolute {
-      logger(
-        .warning,
-        """
-        \(cmd).outputs.output: \(entryOutput.output) is an absolute path. Prefer relative paths \
-        for portability when sharing your project.
-        """
-      )
+      logger(.warning, "\(cmd.name).outputs.output: \(Message.absolutePath(entryOutput.output))")
     }
   }
 }

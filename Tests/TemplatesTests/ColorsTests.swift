@@ -13,32 +13,35 @@ class ColorsTests: XCTestCase {
   }
 
   // generate variations to test customname generation
+  // swiftlint:disable opening_brace
   func variations(customName: String) -> VariationGenerator {
-    return { name, context in
+    { name, context in
       guard name == "defaults" else { return [(context: context, suffix: "")] }
 
       return [
-        (context: context,
-         suffix: ""),
-        (context: try StencilContext.enrich(
-           context: context,
-           parameters: ["enumName=\(customName)", "colorAliasName=XCTColor"]
-         ),
-         suffix: "-customName"),
-        (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-         suffix: "-publicAccess")
+        (
+          context: context,
+          suffix: ""
+        ),
+        (
+          context: try StencilContext.enrich(
+            context: context,
+            parameters: ["enumName=\(customName)", "colorAliasName=XCTColor"]
+          ),
+          suffix: "-customName"
+          ),
+        (
+          context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+          suffix: "-publicAccess"
+        ),
+        (
+          context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+          suffix: "-forceFileNameEnum"
+        )
       ]
     }
   }
-
-  func testSwift3() {
-    test(
-      template: "swift3",
-      contextNames: Contexts.all,
-      directory: .colors,
-      contextVariations: variations(customName: "XCTColors")
-    )
-  }
+  // swiftlint:enable opening_brace
 
   func testSwift4() {
     test(
@@ -49,18 +52,27 @@ class ColorsTests: XCTestCase {
     )
   }
 
-  func testLiteralsSwift3() {
+  func testSwift5() {
     test(
-      template: "literals-swift3",
+      template: "swift5",
       contextNames: Contexts.all,
       directory: .colors,
-      contextVariations: variations(customName: "UIColor")
+      contextVariations: variations(customName: "XCTColors")
     )
   }
 
   func testLiteralsSwift4() {
     test(
       template: "literals-swift4",
+      contextNames: Contexts.all,
+      directory: .colors,
+      contextVariations: variations(customName: "UIColor")
+    )
+  }
+
+  func testLiteralsSwift5() {
+    test(
+      template: "literals-swift5",
       contextNames: Contexts.all,
       directory: .colors,
       contextVariations: variations(customName: "UIColor")

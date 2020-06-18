@@ -1,0 +1,89 @@
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
+
+{% if tables.count > 0 %}
+#import "{{ param.headerName|default:"Localizable.h" }}"
+
+@interface BundleToken : NSObject
+@end
+
+@implementation BundleToken
+@end
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wformat-security"
+
+static NSString* tr(NSString *tableName, NSString *key, ...) {
+
+    NSBundle *bundle = [NSBundle bundleForClass:BundleToken.class];
+    NSString *format = [bundle localizedStringForKey:key value:nil table:tableName];
+    NSLocale *locale = [NSLocale currentLocale];
+
+    va_list args;
+    va_start(args, key);
+    NSString *result = [[NSString alloc] initWithFormat:format locale:locale arguments:args];
+    va_end(args);
+
+    return result;
+};
+#pragma clang diagnostic pop
+
+{% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
+  {% for type in types %}
+    ({% call paramTranslate type %})p{{ forloop.counter }}{{ " :" if not forloop.last }}
+  {% endfor %}
+{% endfilter %}{% endmacro %}
+{% macro argumentsBlock types %}{% filter removeNewlines:"leading" %}
+  {% for type in types %}
+    p{{forloop.counter}}{{ ", " if not forloop.last }}
+  {% endfor %}
+{% endfilter %}{% endmacro %}
+{% macro paramTranslate swiftType %}
+  {% if swiftType == "Any" %}
+    id
+  {% elif swiftType == "CChar" %}
+    char
+  {% elif swiftType == "Float" %}
+    float
+  {% elif swiftType == "Int" %}
+    NSInteger
+  {% elif swiftType == "String" %}
+    id
+  {% elif swiftType == "UnsafePointer<CChar>" %}
+    char*
+  {% elif swiftType == "UnsafeRawPointer" %}
+    void*
+  {% else %}
+    objc-m.stencil is missing '{{swiftType}}'
+  {% endif %}
+{% endmacro %}
+{% macro tableContents table item %}
+  {% for string in item.strings %}
+  {% if string.types %}
+    {% if string.types.count == 1 %}
++ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValue:{% call parametersBlock string.types %}
+    {% else %}
++ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValues:{% call parametersBlock string.types %}
+    {% endif %}
+{
+    return tr(@"{{table}}", @"{{string.key}}", {% call argumentsBlock string.types %});
+}
+{% else %}
++ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}} {
+    return tr(@"{{table}}", @"{{string.key}}");
+}
+  {% endif %}
+  {% endfor %}
+  {% for child in item.children %}
+  {% call tableContents table child %}
+  {% endfor %}
+{% endmacro %}
+{% for table in tables %}
+        {% set tableName %}{{table.name|default:"Localized"}}{% endset %}
+@implementation {{ tableName }} : NSObject
+        {% call tableContents table.name table.levels %}
+@end
+
+{% endfor %}
+{% else %}
+// No strings found
+{% endif %}

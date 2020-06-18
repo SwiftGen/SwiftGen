@@ -31,8 +31,8 @@ Note: the generated code may look differently depending on the platform the stor
 **Extract:**
 
 ```swift
-enum StoryboardSegue {
-  enum Message: String, SegueType {
+internal enum StoryboardSegue {
+  internal enum Message: String, SegueType {
     case customBack = "CustomBack"
     case embed = "Embed"
     case nonCustom = "NonCustom"
@@ -41,7 +41,7 @@ enum StoryboardSegue {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/IB-iOS/swift4-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/IB-iOS/swift4/all.swift)
 
 ## Usage example
 

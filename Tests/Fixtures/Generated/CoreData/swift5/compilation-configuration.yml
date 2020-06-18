@@ -1,0 +1,24 @@
+--- !ruby/object:CompilationConfiguration
+common:
+  swift_versions:
+    - 5
+file_specific:
+  defaults.swift:
+    files:
+      - CoreData-Definitions.swift
+      - CoreData-ModuleTypes.swift
+  defaults-extraImports.swift:
+    files:
+      - CoreData-Definitions.swift
+  defaults-generateObjcName.swift:
+    files:
+      - CoreData-Definitions.swift
+      - CoreData-ModuleTypes.swift
+  defaults-importCoreLocation.swift:
+    files:
+      - CoreData-Definitions.swift
+      - CoreData-ModuleTypes.swift
+  defaults-publicAccess.swift:
+    files:
+      - CoreData-Definitions.swift
+      - CoreData-ModuleTypes.swift

@@ -22,10 +22,12 @@ public enum Plist {
   // MARK: Plist File Parser
 
   public final class Parser: SwiftGenKit.Parser {
+    private let options: ParserOptionValues
     var files: [File] = []
     public var warningHandler: Parser.MessageHandler?
 
-    public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) {
+    public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
+      self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
       self.warningHandler = warningHandler
     }
 

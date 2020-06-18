@@ -26,7 +26,9 @@ enum OutputDestination: ArgumentConvertible {
       return path.description
     }
   }
+}
 
+extension OutputDestination {
   func write(content: String, onlyIfChanged: Bool = false) throws {
     switch self {
     case .console:
@@ -40,4 +42,15 @@ enum OutputDestination: ArgumentConvertible {
       logMessage(.info, "File written: \(path)")
     }
   }
+}
+
+// MARK: Commander
+
+extension OutputDestination {
+  static let cliOption = Option(
+    "output",
+    default: OutputDestination.console,
+    flag: "o",
+    description: "The path to the file to generate (Omit to generate to stdout)"
+  )
 }

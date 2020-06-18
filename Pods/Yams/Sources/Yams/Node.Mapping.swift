@@ -6,8 +6,6 @@
 //  Copyright (c) 2016 Yams. All rights reserved.
 //
 
-import Foundation
-
 extension Node {
     /// A mapping is the YAML equivalent of a `Dictionary`.
     public struct Mapping {
@@ -139,6 +137,41 @@ extension Node.Mapping: TagResolvable {
     static let defaultTagName = Tag.Name.map
 }
 
+// MARK: - Merge support
+
+extension Node.Mapping {
+    func flatten() -> Node.Mapping {
+        var pairs = Array(self)
+        var merge = [(key: Node, value: Node)]()
+        var index = pairs.startIndex
+        while index < pairs.count {
+            let pair = pairs[index]
+            if pair.key.tag.name == .merge {
+                pairs.remove(at: index)
+                switch pair.value {
+                case .mapping(let mapping):
+                    merge.append(contentsOf: mapping.flatten())
+                case let .sequence(sequence):
+                    let submerge = sequence
+                        .compactMap { $0.mapping.map { $0.flatten() } }
+                        .reversed()
+                    submerge.forEach {
+                        merge.append(contentsOf: $0)
+                    }
+                default:
+                    break // TODO: Should raise error on other than mapping or sequence
+                }
+            } else if pair.key.tag.name == .value {
+                pair.key.tag.name = .str
+                index += 1
+            } else {
+                index += 1
+            }
+        }
+        return Node.Mapping(merge + pairs, tag, style)
+    }
+}
+
 // MARK: - Dictionary-like APIs
 
 extension Node.Mapping {
@@ -147,7 +180,7 @@ extension Node.Mapping {
         return lazy.map { $0.key }
     }
 
-    /// This mapping's keys. Similar to `Dictionary.keys`.
+    /// This mapping's values. Similar to `Dictionary.values`.
     public var values: LazyMapCollection<Node.Mapping, Node> {
         return lazy.map { $0.value }
     }
@@ -184,7 +217,11 @@ extension Node.Mapping {
 
     /// Get the index of the specified `Node`, if it exists in the mapping.
     public func index(forKey key: Node) -> Index? {
+    #if swift(>=5.0)
+        return pairs.reversed().firstIndex(where: { $0.key == key }).map({ pairs.index(before: $0.base) })
+    #else
         return pairs.reversed().index(where: { $0.key == key }).map({ pairs.index(before: $0.base) })
+    #endif
     }
 }
 

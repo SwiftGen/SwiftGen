@@ -11,32 +11,15 @@ import Foundation
 extension String {
     typealias LineNumberColumnAndContents = (lineNumber: Int, column: Int, contents: String)
 
-    /// line number, column and contents at utf8 offset.
+    /// line number, column and contents at offset.
     ///
     /// - parameter offset: Int
     ///
     /// - returns: lineNumber: line number start from 0,
     ///            column: utf16 column start from 0,
     ///            contents: substring of line
-    func utf8LineNumberColumnAndContents(at offset: Int) -> LineNumberColumnAndContents? {
-        guard let index = utf8
-            .index(utf8.startIndex, offsetBy: offset, limitedBy: utf8.endIndex)?
-            .samePosition(in: self) else { return nil }
-        return lineNumberColumnAndContents(at: index)
-    }
-
-    /// line number, column and contents at utf16 offset.
-    ///
-    /// - parameter offset: Int
-    ///
-    /// - returns: lineNumber: line number start from 0,
-    ///            column: utf16 column start from 0,
-    ///            contents: substring of line
-    func utf16LineNumberColumnAndContents(at offset: Int) -> LineNumberColumnAndContents? {
-        guard let index = utf16
-            .index(utf16.startIndex, offsetBy: offset, limitedBy: utf16.endIndex)?
-            .samePosition(in: self) else { return nil }
-        return lineNumberColumnAndContents(at: index)
+    func lineNumberColumnAndContents(at offset: Int) -> LineNumberColumnAndContents? {
+        return index(startIndex, offsetBy: offset, limitedBy: endIndex).flatMap(lineNumberColumnAndContents)
     }
 
     /// line number, column and contents at Index.

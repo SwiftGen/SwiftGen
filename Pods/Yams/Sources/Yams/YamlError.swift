@@ -9,10 +9,9 @@
 #if SWIFT_PACKAGE
 import CYaml
 #endif
-import Foundation
 
 /// Errors thrown by Yams APIs.
-public enum YamlError: Swift.Error {
+public enum YamlError: Error {
     // Used in `yaml_emitter_t` and `yaml_parser_t`
     /// `YAML_NO_ERROR`. No error is produced.
     case no
@@ -23,11 +22,11 @@ public enum YamlError: Swift.Error {
     // Used in `yaml_parser_t`
     /// `YAML_READER_ERROR`. Cannot read or decode the input stream.
     ///
-    /// - parameter problem:    Error description.
-    /// - parameter byteOffset: The byte about which the problem occured.
-    /// - parameter value:      The problematic value (-1 is none).
-    /// - parameter yaml:       YAML String which the problem occured while reading.
-    case reader(problem: String, byteOffset: Int, value: Int32, yaml: String)
+    /// - parameter problem: Error description.
+    /// - parameter offset:  The offset from `yaml.startIndex` at which the problem occured.
+    /// - parameter value:   The problematic value (-1 is none).
+    /// - parameter yaml:    YAML String which the problem occured while reading.
+    case reader(problem: String, offset: Int?, value: Int32, yaml: String)
 
     // line and column start from 1, column is counted by unicodeScalars
     /// `YAML_SCANNER_ERROR`. Cannot scan the input stream.
@@ -81,6 +80,13 @@ public enum YamlError: Swift.Error {
             return text + " in line \(mark.line), column \(mark.column)\n"
         }
     }
+
+#if swift(>=4.1.50)
+    @available(*, unavailable, renamed: "reader(problem:offset:value:yaml:)")
+    public static func reader(problem: String, byteOffset: Int, value: Int32, yaml: String) {
+        fatalError("unavailable")
+    }
+#endif
 }
 
 extension YamlError {
@@ -101,8 +107,19 @@ extension YamlError {
         case YAML_MEMORY_ERROR:
             self = .memory
         case YAML_READER_ERROR:
+            let index: String.Index?
+            if parser.encoding == YAML_UTF8_ENCODING {
+                index = yaml.utf8
+                    .index(yaml.utf8.startIndex, offsetBy: parser.problem_offset, limitedBy: yaml.utf8.endIndex)?
+                    .samePosition(in: yaml)
+            } else {
+                index = yaml.utf16
+                    .index(yaml.utf16.startIndex, offsetBy: parser.problem_offset / 2, limitedBy: yaml.utf16.endIndex)?
+                    .samePosition(in: yaml)
+            }
+            let offset = index.map { yaml.distance(from: yaml.startIndex, to: $0) }
             self = .reader(problem: String(cString: parser.problem),
-                           byteOffset: parser.problem_offset,
+                           offset: offset,
                            value: parser.problem_value,
                            yaml: yaml)
         case YAML_SCANNER_ERROR:
@@ -142,11 +159,13 @@ extension YamlError: CustomStringConvertible {
             return "No error is produced"
         case .memory:
             return "Memory error"
-        case let .reader(problem, byteOffset, value, yaml):
-            guard let (mark, contents) = markAndSnippet(from: yaml, byteOffset)
-                else { return "\(problem) at byte offset: \(byteOffset), value: \(value)" }
+        case let .reader(problem, offset, value, yaml):
+            guard let (line, column, contents) = offset.flatMap(yaml.lineNumberColumnAndContents(at:)) else {
+                return "\(problem) at offset: \(String(describing: offset)), value: \(value)"
+            }
+            let mark = Mark(line: line + 1, column: column + 1)
             return "\(mark): error: reader: \(problem):\n" + contents.endingWithNewLine
-                + String(repeating: " ", count: mark.column - 1) + "^"
+                + String(repeating: " ", count: column) + "^"
         case let .scanner(context, problem, mark, yaml):
             return "\(mark): error: scanner: \(context?.description ?? "")\(problem):\n" + mark.snippet(from: yaml)
         case let .parser(context, problem, mark, yaml):
@@ -156,18 +175,5 @@ extension YamlError: CustomStringConvertible {
         case let .writer(problem), let .emitter(problem), let .representer(problem):
             return problem
         }
-    }
-}
-
-extension YamlError {
-    private func markAndSnippet(from yaml: String, _ byteOffset: Int) -> (Mark, String)? {
-#if USE_UTF8
-        guard let (line, column, contents) = yaml.utf8LineNumberColumnAndContents(at: byteOffset)
-            else { return nil }
-#else
-        guard let (line, column, contents) = yaml.utf16LineNumberColumnAndContents(at: byteOffset / 2)
-            else { return nil }
-#endif
-        return (Mark(line: line + 1, column: column + 1), contents)
     }
 }

@@ -2,6 +2,147 @@
 
 ---
 
+## 6.2.0
+
+### Breaking Changes
+
+* As Swift 3 is officially no longer maintained, we're obsoleting the Swift 3 templates and they are no longer included with SwiftGen. You can still use the old swift 3 templates by getting them from older SwiftGen versions, or from GitHub by browsing older tags.  
+  [David Jennes](https://github.com/djbe)
+  [#601](https://github.com/SwiftGen/SwiftGen/pull/601)
+  [#691](https://github.com/SwiftGen/SwiftGen/pull/691)
+
+### Deprecations
+
+* XCAssets: the `colorAliasName` and `imageAliasName` template parameters are now deprecated and will be removed in the next major release.  
+  [David Jennes](https://github.com/djbe)
+  [#614](https://github.com/SwiftGen/SwiftGen/pull/614)
+* The use of `swiftgen <parser>` (e.g. `swiftgen strings`, `swiftgen xcassets`, …) command line for running individual parsers is now deprecated in favor of `swiftgen run <parser>`. See "New Features" below.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#705](https://github.com/SwiftGen/SwiftGen/pull/705)
+* The subcommand `swiftgen templates` has been renamed `swiftgen template` (singular); the plural form of the command has been deprecated and will be removed in next major version.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#697](https://github.com/SwiftGen/SwiftGen/pull/697)
+* The ability for SwiftGen to search custom named templates in `~/Library/Application Support` has been deprecated and will be removed in SwiftGen 7.0. This little known feature made SwiftGen dependent on the machine it was running on. Use `templatePath` to reference custom templates by path instead.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#717](https://github.com/SwiftGen/SwiftGen/pull/717)
+
+### New Features
+
+* Invoking individual parsers from the command line is now done via `swiftgen run <parser>`.  We still highly recommend to use a configuration file for flexibility and performance reasons in your projects, and only use `swiftgen run <parser>` for things like quick iterations when writing your own custom templates.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#705](https://github.com/SwiftGen/SwiftGen/pull/705)
+* You can now easily create a new config file using `swiftgen config init`. This will create an example and commented config file and open it to let you edit it to your needs.  _Note that the generated config file is static content which doesn't take the user's project into account (though that might change in the future)_.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#694](https://github.com/SwiftGen/SwiftGen/pull/694)
+* You can now use `swiftgen template doc [parser] [templateName]` on the command line to quickly open the documentation for templates on GitHub directly from your terminal.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#697](https://github.com/SwiftGen/SwiftGen/pull/697)
+* Each parser now accepts an `options` dictionary, with which you can set internal parser settings to change its behaviour. See the parser's specific documentation for available options.  
+  [David Jennes](https://github.com/djbe)
+  [#587](https://github.com/SwiftGen/SwiftGen/pull/587)
+  [#597](https://github.com/SwiftGen/SwiftGen/pull/597)
+* Strings: the parser now accepts a `separator` option, used to split keys into structured components. The default separator remains `.`. For more information, check the [parser's documentation](Documentation/Parsers/strings.md#customization).  
+  [David Jennes](https://github.com/djbe)
+  [#576](https://github.com/SwiftGen/SwiftGen/issues/576)
+  [#588](https://github.com/SwiftGen/SwiftGen/pull/588)
+* Core Data: the built-in templates now support an optional `extraImports` parameter. With this you can provide a list of modules to additionally import, for when you have properties with types from external modules. For more information, check the [template's documentation](Documentation/templates/coredata/swift4.md#customization).  
+  [David Jennes](https://github.com/djbe)
+  [#591](https://github.com/SwiftGen/SwiftGen/issues/591)
+  [#592](https://github.com/SwiftGen/SwiftGen/pull/592)
+* Core Data: the built-in templates now support `RawRepresentable` attributes (such as `enum`, `OptionSet`, …). They'll check the "User Info" of an attribute for a `RawType` key, which should be set to the type name you want to use for that attribute. To avoid optional attributes, you can also add the `unwrapOptional` user info key. For more information, check the [template's documentation](Documentation/templates/coredata/swift4.md#userinfo-keys).  
+  [David Jennes](https://github.com/djbe)
+  [#566](https://github.com/SwiftGen/SwiftGen/issues/566)
+  [#609](https://github.com/SwiftGen/SwiftGen/issues/609)
+  [#593](https://github.com/SwiftGen/SwiftGen/pull/593)
+  [#610](https://github.com/SwiftGen/SwiftGen/pull/610)
+* Strings: the built-in templates now accept a parameter `lookupFunction` for customizing the localization function, check the [template documentation](Documentation/templates/string/) for more information.  
+  [Steven Magdy](https://github.com/StevenMagdy)
+  [426](https://github.com/SwiftGen/SwiftGen/issues/426)
+  [468](https://github.com/SwiftGen/SwiftGen/issues/468)
+  [573](https://github.com/SwiftGen/SwiftGen/pull/573)
+  [716](https://github.com/SwiftGen/SwiftGen/pull/716)
+* Strings: templates to generate Objective-C. Please check [the template's documentation](Documentation/templates/string/objc.md) for more information.  
+  [Eric Slosser](https://github.com/Mr-Fixit)
+  [SwiftGen/SwiftGen#378](https://github.com/SwiftGen/SwiftGen/pull/378)
+* XCAssets: the parser now supports AR Resource Groups, together with reference images and objects.  
+  [David Jennes](https://github.com/djbe)
+  [#614](https://github.com/SwiftGen/SwiftGen/pull/614)
+* Templates: Bundle now use static property on BundleToken for better performance.  
+  [shuoli84](https://github.com/shuoli84)
+  [#623](https://github.com/SwiftGen/SwiftGen/issues/623)
+* All parsers now have built-in Swift 5 templates.  
+  [David Jennes](https://github.com/djbe)
+  [#595](https://github.com/SwiftGen/SwiftGen/issues/595)
+  [#600](https://github.com/SwiftGen/SwiftGen/pull/600)
+* Most templates now accept a parameter to force having the file name used as namespace (`enum <FileName>`) in generated code _even if_ there's only one single input file.  
+  [Viktoras Laukevičius](https://github.com/viktorasl)
+  [#669](https://github.com/SwiftGen/SwiftGen/issues/669)
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#693](https://github.com/SwiftGen/SwiftGen/pull/693)
+
+### Bug Fixes
+
+* SwiftGen now properly shows a better help message and the command usage when running an incomplete command, instead of complaining about a config file.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#706](https://github.com/SwiftGen/SwiftGen/pull/706)
+* XCAssets: improved the performance for color assets by caching the resolved colors.  
+  [David Jennes](https://github.com/djbe)
+  [#578](https://github.com/SwiftGen/SwiftGen/issues/578)
+  [#589](https://github.com/SwiftGen/SwiftGen/pull/589)
+* Core Data: `entityName` is now correctly a `class var` instead of a `class func`.  
+  [David Jennes](https://github.com/djbe)
+  [#590](https://github.com/SwiftGen/SwiftGen/pull/590)
+* Strings: we now correctly generate the type `Any` (instead of `String`) for `%@` placeholders.  
+  [David Jennes](https://github.com/djbe)
+  [620](https://github.com/SwiftGen/SwiftGen/issues/620)
+* Colors: Reduce initializer type inference for improved compilation performance.  
+  [Markus Faßbender](https://github.com/dermaaarkus)
+  [#663](https://github.com/SwiftGen/SwiftGen/issues/663)
+* Config Lint: fix config lint not processing relative paths containing ".." correctly.  
+  [Wolfgang Lutz](https://github.com/Lutzifer)
+  [#688](https://github.com/SwiftGen/SwiftGen/issues/688)
+* Core Data: the generated code was missing `,` (comma) for fetch requests with multiple arguments.  
+  [David Jennes](https://github.com/djbe)
+  [#692](https://github.com/SwiftGen/SwiftGen/pull/692)
+* Colors: Fix compile time warning when long expression type checking is enabled.  
+  [Ryan Mason-Davies](https://github.com/iotize)
+  [#704](https://github.com/SwiftGen/SwiftGen/issues/704)
+  [#710](https://github.com/SwiftGen/SwiftGen/pull/710)
+
+### Internal Changes
+
+* The main branch of the repository has been renamed from `master` to `stable`. If you pointed your `Podfile` or dependency managment tool to `master` instead of an official release/tag, you will have to update the branch name in your dependency file.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#714](https://github.com/SwiftGen/SwiftGen/pull/714)
+* Documentation: Improved doc for creating custom templates, and added a Documentation Table of Contents.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#713](https://github.com/SwiftGen/SwiftGen/pull/713)
+* Refactoring: Reduce globals & rearrange CLI code.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#586](https://github.com/SwiftGen/SwiftGen/pull/586)
+* Moved generated test output files into subdirectories per template.  
+  [David Jennes](https://github.com/djbe)
+  [#598](https://github.com/SwiftGen/SwiftGen/pull/598)
+* Compile generated output using configuration files for easier management.  
+  [David Jennes](https://github.com/djbe)
+  [#365](https://github.com/SwiftGen/SwiftGen/issues/365)
+  [#599](https://github.com/SwiftGen/SwiftGen/pull/599)
+* XCAssets: renamed the catalogs we use for sample code & testing to avoid some confusion.  
+  [David Jennes](https://github.com/djbe)
+  [#613](https://github.com/SwiftGen/SwiftGen/pull/613)
+* Update SwiftLint and enable some extra SwiftLint rules.  
+  [David Jennes](https://github.com/djbe)
+  [#617](https://github.com/SwiftGen/SwiftGen/pull/617)
+* Some CI fixes related to software versions.  
+  [Patrick Nollet](https://github.com/PatrickNLT)
+  [#645](https://github.com/SwiftGen/SwiftGen/pull/645)
+* Updated to CocoaPods 1.9.0.  
+  [David Jennes](https://github.com/djbe)
+  [#619](https://github.com/SwiftGen/SwiftGen/pull/619)
+* Updated Pods and Gems dependencies.  
+  [David Jennes](https://github.com/djbe)
+  [#684](https://github.com/SwiftGen/SwiftGen/pull/684)
+
 ## 6.1.0
 
 ### Changes in core dependencies of SwiftGen
@@ -27,7 +168,7 @@
   [Wolfgang Lutz](https://github.com/lutzifer)
   [#355](https://github.com/SwiftGen/SwiftGen/issues/355)
   [#564](https://github.com/SwiftGen/SwiftGen/pull/564)
-* Each command now accepts a `filter` option, which accepts a regular expression for filtering input paths. The filter is applied to individual paths as well as when the command recurses into directories.  
+* Each parser now accepts a `filter` option, which accepts a regular expression for filtering input paths. The filter is applied to individual paths as well as when the parser recurses into directories.  
   [David Jennes](https://github.com/djbe)
   [#383](https://github.com/SwiftGen/SwiftGen/issues/383)
   [#570](https://github.com/SwiftGen/SwiftGen/pull/570)
@@ -150,7 +291,7 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 * Add support for Swift Package Manager and Mint.  
   [Yonas Kolb](https://github.com/yonaskolb)
   [#411](https://github.com/SwiftGen/SwiftGen/pull/411)
-* The `swiftgen.yml` config file now accepts multiple outputs for each command, allowing you to generate multiple outputs from the same files and content. This also means that the `output` parameter is now deprecated, in favour of the `outputs` parameter, and it may be removed in a future version of SwiftGen. Similarly, the `paths` parameter has been renamed to `inputs` for consistency. You can always use `swiftgen config lint` to validate your configuration file.  
+* The `swiftgen.yml` config file now accepts multiple outputs for each parser, allowing you to generate multiple outputs from the same files and content. This also means that the `output` parameter is now deprecated, in favour of the `outputs` parameter, and it may be removed in a future version of SwiftGen. Similarly, the `paths` parameter has been renamed to `inputs` for consistency. You can always use `swiftgen config lint` to validate your configuration file.  
   [David Jennes](https://github.com/djbe)
   [#424](https://github.com/SwiftGen/SwiftGen/pull/424)
   [#510](https://github.com/SwiftGen/SwiftGen/pull/510)
@@ -167,7 +308,7 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
   [Olivier Halligon](https://github.com/AliSoftware)
   [#456](https://github.com/SwiftGen/SwiftGen/pull/456)
   [#481](https://github.com/SwiftGen/SwiftGen/pull/481)
-* Added support for JSON, Plist and YAML files using the `swiftgen json`, `swiftgen plist` and `swiftgen yaml` commands. The parsed contexts and the generated files for each command have been kept quite similar, for easier switching between file formats.  
+* Added support for JSON, Plist and YAML files using the `swiftgen json`, `swiftgen plist` and `swiftgen yaml` commands. The parsed contexts and the generated files for each parser have been kept quite similar, for easier switching between file formats.  
   [John T McIntosh](https://github.com/johntmcintosh)
   [Toshihiro Suzuki](https://github.com/toshi0383)
   [Peter Livesey](https://github.com/plivesey)
@@ -178,7 +319,7 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
   [#188](https://github.com/SwiftGen/SwiftGen/pull/188)
   [#493](https://github.com/SwiftGen/SwiftGen/pull/493)
   [#504](https://github.com/SwiftGen/SwiftGen/pull/504)
-* Updated the playgrounds with the new `json`, `plist` and `yaml` commands, and updated the other pages to reflect the template changes.  
+* Updated the playgrounds with the new `json`, `plist` and `yaml` parsers, and updated the other pages to reflect the template changes.  
   [David Jennes](https://github.com/djbe)
   [#495](https://github.com/SwiftGen/SwiftGen/pull/495)
 * We're deprecating the old `--template` CLI option in favor of `--templateName`, to better match the naming of the other options and the configuration file. The old `--template` option will remain until the next major version.  
@@ -402,7 +543,7 @@ Read the [SwiftGen 5.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 * Disable default value for named template option and ensure that there is a template option.  
   [Liquidsoul](https://github.com/liquidsoul)
   [#283](https://github.com/SwiftGen/SwiftGen/issues/283)
-* Templates are now grouped by subcommand on the filesystem. This is only important if you had custom templates in the `Application Support` directory. To migrate your templates, place them in a subfolder with the name of the subcommand, and remove the prefix of the template filename.  
+* Templates are now grouped by parser on the filesystem. This is only important if you had custom templates in the `Application Support` directory. To migrate your templates, place them in a subfolder with the name of the parser, and remove the prefix of the template filename.  
   [David Jennes](https://github.com/djbe)
   [#304](https://github.com/SwiftGen/SwiftGen/issues/304)
 * The `images` command has been renamed to `xcassets` to better reflect its functionality.  
@@ -420,7 +561,7 @@ Read the [SwiftGen 5.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 * Removed deprecated template context variables, and restructured many others. Please check the [SwiftGenKit migration guide](Documentation/SwiftGenKit%20Contexts/MigrationGuide.md#swiftgenkit-20-swiftgen-50) for more information.  
   [David Jennes](https://github.com/djbe)
   [SwiftGen/SwiftGenKit#5](https://github.com/SwiftGen/SwiftGenKit/issues/5)
-* Some filters have been removed in favour of Stencil's built in versions, and other filters have been updated to accept parameters. Please consult the [StencilSwiftKit migration guide](https://github.com/SwiftGen/StencilSwiftKit/blob/master/Documentation/MigrationGuide.md#stencilswiftkit-20-swiftgen-50) for more information.  
+* Some filters have been removed in favour of Stencil's built in versions, and other filters have been updated to accept parameters. Please consult the [StencilSwiftKit migration guide](https://github.com/SwiftGen/StencilSwiftKit/blob/stable/Documentation/MigrationGuide.md#stencilswiftkit-20-swiftgen-50) for more information.  
   [David Jennes](https://github.com/djbe)
   [SwiftGen/StencilSwiftKit#5](https://github.com/SwiftGen/StencilSwiftKit/issues/5)
   [SwiftGen/StencilSwiftKit#6](https://github.com/SwiftGen/StencilSwiftKit/issues/6)
@@ -701,7 +842,7 @@ Note: The next minor version will focus on bringing more documentation for all t
   * `swiftgen templates list` lists all the available templates
   * `swiftgen templates which <name>` prints the path to the template named `<name>`
   * `swiftgen templates cat <name>` prints the content to the template named `<name>`
-  * `<name>` here can be either a subcommand name like `colors` or a
+  * `<name>` here can be either a parser name like `colors` or a
     composed name `colors-rawValue` for a specific template.
 * Fix swift 3 renaming change in strings-swift3.stencil.  
   [Kilian Koeltzsch](https://github.com/kiliankoe)

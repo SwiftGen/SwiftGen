@@ -27,35 +27,37 @@ You can customize some elements of this template by overriding the following par
 | `enumName` | `L10n` | Allows you to change the name of the generated `enum` containing all string tables. |
 | `noComments` | N/A | Setting this parameter will disable the comments describing the translation of a key. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
+| `lookupFunction` | N/A | Allows you to set your own custom localization function. The function needs to accepts 2 parameters: the localization key (`String`), and the localization table (`String`). If the function has named parameters, you must provide the complete function signature, including those named parameters – e.g. `yourFunctionName(forKey:table:)`. |
+| `forceFileNameEnum` | N/A | Setting this parameter will generate an `enum <FileName>` _even if_ only one FileName was provided as input. |
 
 ## Generated Code
 
 **Extract:**
 
 ```swift
-enum L10n {
+internal enum L10n {
   /// Some alert body there
-  static let alertMessage = L10n.tr("alert_message")
+  internal static let alertMessage = L10n.tr("alert_message")
   /// Title of the alert
-  static let alertTitle = L10n.tr("alert_title")
+  internal static let alertTitle = L10n.tr("alert_title")
 
-  enum Apples {
+  internal enum Apples {
     /// You have %d apples
-    static func count(_ p1: Int) -> String {
+    internal static func count(_ p1: Int) -> String {
       return L10n.tr("apples.count", p1)
     }
   }
 
-  enum Bananas {
+  internal enum Bananas {
     /// Those %d bananas belong to %@.
-    static func owner(_ p1: Int, _ p2: String) -> String {
-      return L10n.tr("bananas.owner", p1, p2)
+    internal static func owner(_ p1: Int, _ p2: Any) -> String {
+      return L10n.tr("bananas.owner", p1, String(describing: p2))
     }
   }
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Strings/structured-swift4-context-localizable.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Strings/structured-swift4/localizable.swift)
 
 ## Usage example
 

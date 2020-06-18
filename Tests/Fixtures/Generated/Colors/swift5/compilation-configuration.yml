@@ -1,0 +1,4 @@
+--- !ruby/object:CompilationConfiguration
+common:
+  swift_versions:
+    - 5

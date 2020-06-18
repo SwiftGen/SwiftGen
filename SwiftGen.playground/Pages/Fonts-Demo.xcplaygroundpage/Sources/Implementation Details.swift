@@ -13,8 +13,11 @@ public struct FontConvertible {
   public let family: String
   public let path: String
 
-  public func font(size: CGFloat) -> Font! {
-    return Font(font: self, size: size)
+  public func font(size: CGFloat) -> Font {
+    guard let font = Font(font: self, size: size) else {
+      fatalError("Unabble to initialize font '\(name)' (\(family))")
+    }
+    return font
   }
 
   public func register() {
@@ -24,7 +27,7 @@ public struct FontConvertible {
   }
 
   fileprivate var url: URL? {
-    let bundle = Bundle(for: BundleToken.self)
+    let bundle = BundleToken.bundle
     return bundle.url(forResource: path, withExtension: nil)
   }
 
@@ -37,7 +40,7 @@ public struct FontConvertible {
 }
 
 public extension Font {
-  public convenience init!(font: FontConvertible, size: CGFloat) {
+  convenience init?(font: FontConvertible, size: CGFloat) {
     #if os(iOS) || os(tvOS) || os(watchOS)
     if !UIFont.fontNames(forFamilyName: font.family).contains(font.name) {
       font.register()
@@ -52,4 +55,10 @@ public extension Font {
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type

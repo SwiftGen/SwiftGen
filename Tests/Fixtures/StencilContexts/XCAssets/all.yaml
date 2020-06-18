@@ -1,30 +1,5 @@
 catalogs:
 - assets:
-  - isNamespaced: "true"
-    items:
-    - name: "Background"
-      type: "color"
-      value: "24Vision/Background"
-    - name: "Primary"
-      type: "color"
-      value: "24Vision/Primary"
-    name: "24Vision"
-    type: "group"
-  - name: "Orange"
-    type: "image"
-    value: "Orange"
-  - isNamespaced: "true"
-    items:
-    - name: "Primary"
-      type: "color"
-      value: "Vengo/Primary"
-    - name: "Tint"
-      type: "color"
-      value: "Vengo/Tint"
-    name: "Vengo"
-    type: "group"
-  name: "Colors"
-- assets:
   - name: "Data"
     type: "data"
     value: "Data"
@@ -42,7 +17,7 @@ catalogs:
   - name: "README"
     type: "data"
     value: "README"
-  name: "Data"
+  name: "Files"
 - assets:
   - isNamespaced: "false"
     items: []
@@ -85,4 +60,47 @@ catalogs:
   - name: "private"
     type: "image"
     value: "private"
-  name: "Images"
+  name: "Food"
+- assets: []
+  name: "Other"
+- assets:
+  - isNamespaced: "true"
+    items:
+    - name: "Background"
+      type: "color"
+      value: "24Vision/Background"
+    - name: "Primary"
+      type: "color"
+      value: "24Vision/Primary"
+    name: "24Vision"
+    type: "group"
+  - name: "Orange"
+    type: "image"
+    value: "Orange"
+  - isNamespaced: "true"
+    items:
+    - name: "Primary"
+      type: "color"
+      value: "Vengo/Primary"
+    - name: "Tint"
+      type: "color"
+      value: "Vengo/Tint"
+    name: "Vengo"
+    type: "group"
+  name: "Styles"
+- assets:
+  - name: "Bottles"
+    type: "arresourcegroup"
+    value: "Bottles"
+  - name: "Paintings"
+    type: "arresourcegroup"
+    value: "Paintings"
+  - name: "Posters"
+    type: "arresourcegroup"
+    value: "Posters"
+  name: "Targets"
+resourceCount:
+  arresourcegroup: 3
+  color: 4
+  data: 3
+  image: 8

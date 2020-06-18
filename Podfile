@@ -1,16 +1,20 @@
+raise 'Please use bundle exec to run the pod command' unless defined?(Bundler)
+
+install! 'cocoapods',
+  :generate_multiple_pod_projects => true,
+  :incremental_installation => true
 platform :osx, '10.9'
 use_frameworks!
-
-raise 'Please use bundle exec to run the pod command' unless defined?(Bundler)
+workspace 'SwiftGen.xcworkspace'
 
 def common_pods
   podspec :path => 'SwiftGenKit.podspec'
-  pod 'SwiftLint', '~> 0.30'
+  pod 'SwiftLint', '~> 0.39'
 end
 
 target 'swiftgen' do
   common_pods
-  pod 'Commander', '~> 0.8'
+  pod 'Commander', '~> 0.9'
   pod 'StencilSwiftKit', '~> 2.7'
 
   target 'SwiftGen UnitTests' do

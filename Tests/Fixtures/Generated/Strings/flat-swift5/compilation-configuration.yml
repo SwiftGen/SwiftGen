@@ -1,0 +1,8 @@
+--- !ruby/object:CompilationConfiguration
+common:
+  swift_versions:
+    - 5
+file_specific:
+  localizable-lookupFunction.swift:
+    files:
+      - Strings-LocalizeFunction.swift

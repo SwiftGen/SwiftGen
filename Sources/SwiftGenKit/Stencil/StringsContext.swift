@@ -8,7 +8,7 @@ import Foundation
 
 private extension String {
   var newlineEscaped: String {
-    return self
+    self
       .replacingOccurrences(of: "\n", with: "\\n")
       .replacingOccurrences(of: "\r", with: "\\r")
   }

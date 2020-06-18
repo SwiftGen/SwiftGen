@@ -18,13 +18,13 @@ need_fixes = []
 # Check for correct base branch
 is_release = github.branch_for_head.start_with?('release/')
 to_develop = github.branch_for_base == 'develop'
-to_master = github.branch_for_base == 'master'
+to_stable = github.branch_for_base == 'stable'
 if is_release
   message('This is a Release PR')
-  need_fixes << warn("Release branches should be merged into 'master'") unless to_master
+  need_fixes << warn('Release branches should be merged into the `stable` branch') unless to_stable
 
   require 'open3'
-  
+
   stdout, _, status = Open3.capture3('bundle', 'exec', 'rake', 'changelog:check')
   markdown [
     '',
@@ -33,7 +33,7 @@ if is_release
     stdout
   ]
   need_fixes << fail('Please fix the CHANGELOG errors') unless status.success?
-  
+
   stdout, _, status = Open3.capture3('bundle', 'exec', 'rake', 'release:check_versions')
   markdown [
     '',
@@ -54,6 +54,17 @@ if podfile_changed ^ package_changed
   need_fixes << warn("You should make sure that `Podfile.lock` and `Package.resolved` are changed in sync")
 end
 
+# Check if DEPENDENCIES needs changes
+swiftgenkit_podspec_changed = git.modified_files.include?('SwiftGenKit.podspec')
+dependencies_doc_changed = git.modified_files.include?('DEPENDENCIES.md')
+if podfile_changed || swiftgenkit_podspec_changed || dependencies_doc_changed
+  stdout, _, status = Open3.capture3('bundle', 'exec', 'rake', 'dependencies:check[true]')
+  unless status.success?
+    stdout.lines.each do |message|
+      need_fixes << fail(message.chomp)
+    end
+  end  
+end
 
 # Check for a CHANGELOG entry
 declared_trivial = github.pr_title.include? '#trivial'
@@ -68,14 +79,14 @@ unless has_changelog || declared_trivial
   pr_author = github.pr_author
   pr_author_url = "https://github.com/#{pr_author}"
 
-  need_fixes = fail("Please include a CHANGELOG entry to credit your work.  \nYou can find it at [CHANGELOG.md](#{repo_url}/blob/master/CHANGELOG.md).")
+  need_fixes = fail("Please include a CHANGELOG entry to credit your work.  \nYou can find it at [CHANGELOG.md](#{repo_url}/blob/#{github.branch_for_head}/CHANGELOG.md).")
 
   changelog_msg = <<-CHANGELOG_FORMAT.gsub(/^ *\|/,'')
   |📝 We use the following format for CHANGELOG entries:
   |```
-  | * #{pr_title}  
-  |   [##{pr_number}](#{pr_url})
-  |   [@#{pr_author}](#{pr_author_url})
+  |* #{pr_title}  
+  |  [##{pr_number}](#{pr_url})
+  |  [@#{pr_author}](#{pr_author_url})
   |```
   |:bulb: Don't forget to end the line describing your changes by a period and two spaces.
   CHANGELOG_FORMAT

@@ -21,6 +21,7 @@ You can customize some elements of this template by overriding the following par
 | -------------- | ------------- | ----------- |
 | `enumName` | `ColorName` | Allows you to change the name of the generated `enum` containing all colors. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
+| `forceFileNameEnum` | N/A | Setting this parameter will generate an `enum <FileName>` _even if_ only one FileName was provided as input. |
 
 Note: if you use `enumName: UIColor` (or `NSColor` on macOS) then the color constants will be generated as an extension of the `UIColor` (iOS) / `NSColor` (macOS) type directly without creating a separate `enum` type for namespacing those color constants.
 
@@ -29,7 +30,7 @@ Note: if you use `enumName: UIColor` (or `NSColor` on macOS) then the color cons
 **Extract:**
 
 ```swift
-extension ColorName {
+internal extension ColorName {
   /// 0x339666ff (r: 51, g: 150, b: 102, a: 255)
   static let articleBody = #colorLiteral(red: 0.2, green: 0.588235, blue: 0.4, alpha: 1.0)
   /// 0xff66ccff (r: 255, g: 102, b: 204, a: 255)
@@ -37,7 +38,7 @@ extension ColorName {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Colors/literals-swift4-context-defaults.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Colors/literals-swift4/defaults.swift)
 
 ## Usage example
 

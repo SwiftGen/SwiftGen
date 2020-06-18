@@ -76,7 +76,7 @@ extension Constructor {
         .bool: Bool.construct,
         .float: Double.construct,
         .null: NSNull.construct,
-        .int: Int.construct,
+        .int: MemoryLayout<Int>.size == 8 ? Int.construct : { Int.construct(from: $0) ?? Int64.construct(from: $0) },
         // http://yaml.org/type/index.html
         .binary: Data.construct,
         .timestamp: Date.construct
@@ -113,6 +113,19 @@ public protocol ScalarConstructible {
     /// - note: We use static constructors to avoid overloading `init?(_ scalar: Node.Scalar)` which would
     ///         cause callsite ambiguities when using `init` as closure.
     static func construct(from scalar: Node.Scalar) -> Self?
+}
+
+// MARK: - ScalarConstructible UUID Conformance
+
+extension UUID: ScalarConstructible {
+    /// Construct an instance of `UUID`, if possible, from the specified scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type `UUID`, if possible.
+    ///
+    /// - returns: An instance of `UUID`, if one was successfully extracted from the scalar.
+    public static func construct(from scalar: Node.Scalar) -> UUID? {
+        return UUID(uuidString: scalar.string)
+    }
 }
 
 // MARK: - ScalarConstructible Bool Conformance
@@ -167,24 +180,24 @@ extension Date: ScalarConstructible {
         }
 
         var datecomponents = DateComponents()
-        datecomponents.calendar = Calendar(identifier: .gregorian)
+        datecomponents.calendar = gregorianCalendar
         datecomponents.year = components[0].flatMap { Int($0) }
         datecomponents.month = components[1].flatMap { Int($0) }
         datecomponents.day = components[2].flatMap { Int($0) }
         datecomponents.hour = components[3].flatMap { Int($0) }
         datecomponents.minute = components[4].flatMap { Int($0) }
         datecomponents.second = components[5].flatMap { Int($0) }
-        datecomponents.nanosecond = components[6].flatMap { fraction in
+        let nanoseconds: TimeInterval? = components[6].flatMap { fraction in
             let length = fraction.count
-            let nanosecond: Int?
+            let nanoseconds: Int?
             if length < 9 {
-                nanosecond = Int(fraction).map { number in
+                nanoseconds = Int(fraction).map { number in
                     repeatElement(10, count: 9 - length).reduce(number, *)
                 }
             } else {
-                nanosecond = Int(fraction[..<fraction.index(fraction.startIndex, offsetBy: 9)])
+                nanoseconds = Int(fraction.prefix(9))
             }
-            return nanosecond
+            return nanoseconds.map { Double($0) / 1_000_000_000.0 }
         }
         datecomponents.timeZone = {
             var seconds = 0
@@ -199,9 +212,10 @@ extension Date: ScalarConstructible {
             }
             return TimeZone(secondsFromGMT: seconds)
         }()
-        // Using `DateComponents.date` causes `NSUnimplemented()` crash on Linux at swift-3.0.2-RELEASE
-        return NSCalendar(identifier: .gregorian)?.date(from: datecomponents)
+        return datecomponents.date.map { nanoseconds.map($0.addingTimeInterval) ?? $0 }
     }
+
+    private static let gregorianCalendar = Calendar(identifier: .gregorian)
 
     private static let timestampPattern: NSRegularExpression = pattern([
         "^([0-9][0-9][0-9][0-9])",          // year
@@ -273,9 +287,9 @@ private extension FixedWidthInteger where Self: SexagesimalConvertible {
             ("0", 8)
         ]
 
-        let scalar = scalarWithSign.substring(from: hasSign ? 1 : 0)
+        let scalar = scalarWithSign.dropFirst(hasSign ? 1 : 0)
         for (prefix, radix) in prefixToRadix where scalar.hasPrefix(prefix) {
-            return Self(signPrefix + scalar.substring(from: prefix.count), radix: radix)
+            return Self(signPrefix + scalar.dropFirst(prefix.count), radix: radix)
         }
         if scalar.contains(":") {
             return Self(sexagesimal: scalarWithSign)
@@ -310,6 +324,32 @@ extension UInt: ScalarConstructible {
     }
 }
 
+// MARK: - ScalarConstructible Int64 Conformance
+
+extension Int64: ScalarConstructible {
+    /// Construct an instance of `Int64`, if possible, from the specified scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type `Int64`, if possible.
+    ///
+    /// - returns: An instance of `Int64`, if one was successfully extracted from the scalar.
+    public static func construct(from scalar: Node.Scalar) -> Int64? {
+        return _construct(from: scalar)
+    }
+}
+
+// MARK: - ScalarConstructible UInt64 Conformance
+
+extension UInt64: ScalarConstructible {
+    /// Construct an instance of `UInt64`, if possible, from the specified scalar.
+    ///
+    /// - parameter scalar: The `Node.Scalar` from which to extract a value of type `UInt64`, if possible.
+    ///
+    /// - returns: An instance of `UInt64`, if one was successfully extracted from the scalar.
+    public static func construct(from scalar: Node.Scalar) -> UInt64? {
+        return _construct(from: scalar)
+    }
+}
+
 // MARK: - ScalarConstructible String Conformance
 
 extension String: ScalarConstructible {
@@ -335,8 +375,7 @@ extension String: ScalarConstructible {
             }
         }
 
-        guard let string = node.scalar?.string else { return nil }
-        return string
+        return node.scalar?.string
     }
 }
 
@@ -373,44 +412,20 @@ extension Dictionary {
 
 private extension Dictionary {
     static func _construct_mapping(from mapping: Node.Mapping) -> [AnyHashable: Any] {
-        let mapping = flatten_mapping(mapping)
+        let mapping = mapping.flatten()
+        // TODO: YAML supports keys other than str.
+#if swift(>=5.0)
+        return [AnyHashable: Any](
+            mapping.map { (String.construct(from: $0.key)!, mapping.tag.constructor.any(from: $0.value)) },
+            uniquingKeysWith: { _, second in second }
+        )
+#else
         var dictionary = [AnyHashable: Any](minimumCapacity: mapping.count)
         mapping.forEach {
-            // TODO: YAML supports keys other than str.
             dictionary[String.construct(from: $0.key)!] = mapping.tag.constructor.any(from: $0.value)
         }
         return dictionary
-    }
-
-    private static func flatten_mapping(_ mapping: Node.Mapping) -> Node.Mapping {
-        var pairs = Array(mapping)
-        var merge = [(key: Node, value: Node)]()
-        var index = pairs.startIndex
-        while index < pairs.count {
-            let pair = pairs[index]
-            if pair.key.tag.name == .merge {
-                pairs.remove(at: index)
-                switch pair.value {
-                case .mapping(let mapping):
-                    merge.append(contentsOf: flatten_mapping(mapping))
-                case let .sequence(sequence):
-                    let submerge = sequence
-                        .compactMap { $0.mapping.map(flatten_mapping) }
-                        .reversed()
-                    submerge.forEach {
-                        merge.append(contentsOf: $0)
-                    }
-                default:
-                    break // TODO: Should raise error on other than mapping or sequence
-                }
-            } else if pair.key.tag.name == .value {
-                pair.key.tag.name = .str
-                index += 1
-            } else {
-                index += 1
-            }
-        }
-        return Node.Mapping(merge + pairs, mapping.tag, mapping.style)
+#endif
     }
 }
 
@@ -424,8 +439,7 @@ extension Set {
         // TODO: YAML supports Hashable elements other than str.
         return Set<AnyHashable>(mapping.map({ String.construct(from: $0.key)! as AnyHashable }))
         // Explicitly declaring the generic parameter as `<AnyHashable>` above is required,
-        // because this is inside extension of `Set` and Swift 3.0.2 to 4.1.0 can't infer the type without
-        // that.
+        // because this is inside extension of `Set` and Swift can't infer the type without that.
     }
 }
 
@@ -481,18 +495,6 @@ private extension String {
         }
         return self[lowerBound..<upperBound]
     }
-}
-
-private extension StringProtocol {
-#if swift(>=4.1)
-    func substring(from offset: Int) -> SubSequence {
-        return self[index(startIndex, offsetBy: offset)...]
-    }
-#else
-    func substring(from offset: IndexDistance) -> SubSequence {
-        return self[index(startIndex, offsetBy: offset)...]
-    }
-#endif
 }
 
 // MARK: - SexagesimalConvertible
@@ -561,8 +563,12 @@ extension Double: SexagesimalConvertible {}
 extension Float: SexagesimalConvertible {}
 // MARK: - SexagesimalConvertible Int Conformance
 extension Int: SexagesimalConvertible {}
-// MARK: - SexagesimalConvertible Int Conformance
+// MARK: - SexagesimalConvertible UInt Conformance
 extension UInt: SexagesimalConvertible {}
+// MARK: - SexagesimalConvertible Int64 Conformance
+extension Int64: SexagesimalConvertible {}
+// MARK: - SexagesimalConvertible UInt64 Conformance
+extension UInt64: SexagesimalConvertible {}
 
 private extension String {
     func sexagesimal<T>() -> T where T: SexagesimalConvertible {
@@ -572,9 +578,9 @@ private extension String {
         let sign: T
         if scalar.hasPrefix("-") {
             sign = -1
-            scalar = String(scalar.substring(from: 1))
+            scalar = String(scalar.dropFirst())
         } else if scalar.hasPrefix("+") {
-            scalar = String(scalar.substring(from: 1))
+            scalar = String(scalar.dropFirst())
             sign = 1
         } else {
             sign = 1

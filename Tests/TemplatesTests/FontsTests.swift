@@ -17,29 +17,37 @@ class FontsTests: XCTestCase {
     guard name == "defaults" else { return [(context: context, suffix: "")] }
 
     return [
-      (context: context,
-       suffix: ""),
-      (context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomFamily"]),
-       suffix: "-customName"),
-      (context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
-       suffix: "-preservePath"),
-      (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-       suffix: "-publicAccess")
+      (
+        context: context,
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomFamily"]),
+        suffix: "-customName"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
+        suffix: "-preservePath"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      )
     ]
   }
 
-  func testSwift3() {
+  func testSwift4() {
     test(
-      template: "swift3",
+      template: "swift4",
       contextNames: Contexts.all,
       directory: .fonts,
       contextVariations: variations
     )
   }
 
-  func testSwift4() {
+  func testSwift5() {
     test(
-      template: "swift4",
+      template: "swift5",
       contextNames: Contexts.all,
       directory: .fonts,
       contextVariations: variations

@@ -1,0 +1,22 @@
+catalogs:
+- assets:
+  - name: "Data"
+    type: "data"
+    value: "Data"
+  - isNamespaced: "true"
+    items: []
+    name: "Empty"
+    type: "group"
+  - isNamespaced: "true"
+    items:
+    - name: "Data"
+      type: "data"
+      value: "Json/Data"
+    name: "Json"
+    type: "group"
+  - name: "README"
+    type: "data"
+    value: "README"
+  name: "Files"
+resourceCount:
+  data: 3

@@ -11,7 +11,7 @@
 
 - When you need to generate *Swift 4* code.
 - Loads the data from the JSON file in the current bundle at runtime.
-- If you need other functionality, such as loading a file in your `Documents` folder, or handling `Optional` properties, you should write your own custom template ([guide](../../Creating-your-templates.md)).
+- If you need other functionality, such as loading a file in your `Documents` folder, or handling `Optional` properties, you should write your own custom template ([guide](../../Articles/Creating-custom-templates.md)).
 
 ## Customization
 
@@ -22,6 +22,7 @@ You can customize some elements of this template by overriding the following par
 | `enumName` | `JSONFiles` | Allows you to change the name of the generated `enum` containing all files. |
 | `preservePath` | N/A | Setting this parameter will disable the basename filter applied to all file paths. Use this if you added your data folder as a "folder reference" in your Xcode project, making that folder hierarchy preserved once copied in the build app bundle. The path will be relative to the folder you provided to SwiftGen. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
+| `forceFileNameEnum` | N/A | Setting this parameter will generate an `enum <FileName>` _even if_ only one FileName was provided as input. |
 
 ## Generated Code
 
@@ -45,7 +46,7 @@ internal enum JSONFiles {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/JSON/runtime-swift4-context-all.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/JSON/runtime-swift4/all.swift)
 
 ## Usage example
 

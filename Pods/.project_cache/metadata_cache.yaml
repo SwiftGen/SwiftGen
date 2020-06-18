@@ -1,0 +1,48 @@
+Commander:
+  LABEL: Commander
+  PROJECT_PATH: Commander.xcodeproj
+  UUID: 4A50E2BE2DE9BE847A6934E7C2C10389
+Kanna:
+  LABEL: Kanna
+  PROJECT_PATH: Kanna.xcodeproj
+  UUID: 198F9A3E9BE876E12EA9A48C2A5867A5
+PathKit:
+  LABEL: PathKit
+  PROJECT_PATH: PathKit.xcodeproj
+  UUID: B4C4433A0942F44A502A8BF212B71BAC
+Pods-swiftgen:
+  LABEL: Pods-swiftgen
+  PROJECT_PATH: Pods.xcodeproj
+  UUID: D9F70A587EB971CE8EE18AD59C45740C
+Pods-swiftgen-SwiftGen UnitTests:
+  LABEL: Pods-swiftgen-SwiftGen UnitTests
+  PROJECT_PATH: Pods.xcodeproj
+  UUID: 71753FE0C6DBB5E29C7114B388A2B54E
+Pods-swiftgen-Templates UnitTests:
+  LABEL: Pods-swiftgen-Templates UnitTests
+  PROJECT_PATH: Pods.xcodeproj
+  UUID: C8B2A4370B691CBF2D6F365754F20A00
+Pods-SwiftGenKit:
+  LABEL: Pods-SwiftGenKit
+  PROJECT_PATH: Pods.xcodeproj
+  UUID: 6A090638D2E71AB7338D42FCD0807818
+Pods-SwiftGenKit-SwiftGenKit UnitTests:
+  LABEL: Pods-SwiftGenKit-SwiftGenKit UnitTests
+  PROJECT_PATH: Pods.xcodeproj
+  UUID: 7C9240DED13B29AAB756AC52B7B2F32D
+Stencil:
+  LABEL: Stencil
+  PROJECT_PATH: Stencil.xcodeproj
+  UUID: 9107B3F2331D60BA08A1A2603425733F
+StencilSwiftKit:
+  LABEL: StencilSwiftKit
+  PROJECT_PATH: StencilSwiftKit.xcodeproj
+  UUID: 6E666B761CEFBCA6E567F287EBE49D13
+SwiftLint:
+  LABEL: SwiftLint
+  PROJECT_PATH: SwiftLint.xcodeproj
+  UUID: DF739ADE66FA54F9BBFF97A8CB609E34
+Yams:
+  LABEL: Yams
+  PROJECT_PATH: Yams.xcodeproj
+  UUID: 1A02B50228A8EE851568FFB6A9533223

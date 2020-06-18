@@ -9,63 +9,78 @@ import PathKit
 import StencilSwiftKit
 import SwiftGenKit
 
-// deprecated option
-private let deprecatedTemplateNameOption = Option<String>(
-  "template",
-  default: "",
-  flag: "t",
-  description: """
-    DEPRECATED, use `--templateName` instead
-    """
-)
-
-private let templateNameOption = Option<String>(
-  "templateName",
-  default: "",
-  flag: "n",
-  description: """
-    The name of the template to use for code generation. \
-    See `swiftgen templates list` for a list of available names
-    """
-)
-
-private let templatePathOption = Option<String>(
-  "templatePath",
-  default: "",
-  flag: "p",
-  description: "The path of the template to use for code generation."
-)
-
-private let paramsOption = VariadicOption<String>(
-  "param",
-  default: [],
-  description: "List of template parameters"
-)
-
 extension ParserCLI {
-  private var filterOption: Option<String> {
-    return Option<String>(
-      "filter",
-      default: parserType.defaultFilter,
-      flag: "f",
-      description: "The regular expression to filter input paths."
+  private enum CLIOption {
+    // deprecated option
+    static let deprecatedTemplateName = Option<String>(
+      "template",
+      default: "",
+      flag: "t",
+      description: """
+        DEPRECATED, use `--templateName` instead
+        """
+    )
+
+    static func filter(for parser: ParserCLI) -> Option<String> {
+      Option<String>(
+        "filter",
+        default: parser.parserType.defaultFilter,
+        flag: "f",
+        description: "The regular expression to filter input paths."
+      )
+    }
+
+    static func options(for parser: ParserCLI) -> VariadicOption<String> {
+      VariadicOption<String>(
+        "option",
+        default: [],
+        description: "List of parser options. \(parser.parserType.allOptions)"
+      )
+    }
+
+    static let params = VariadicOption<String>(
+      "param",
+      default: [],
+      description: "List of template parameters"
+    )
+
+    static let templateName = Option<String>(
+      "templateName",
+      default: "",
+      flag: "n",
+      description: """
+        The name of the template to use for code generation. \
+        See `swiftgen template list` for a list of available names
+        """
+    )
+
+    static let templatePath = Option<String>(
+      "templatePath",
+      default: "",
+      flag: "p",
+      description: "The path of the template to use for code generation."
     )
   }
+}
 
+extension ParserCLI {
   func command() -> CommandType {
-    return Commander.command(
-      outputOption,
-      deprecatedTemplateNameOption,
-      templateNameOption,
-      templatePathOption,
-      paramsOption,
-      filterOption,
-      VariadicArgument<Path>("PATH", description: self.pathDescription, validator: pathsExist)
-    ) { output, oldTemplateName, templateName, templatePath, parameters, filter, paths in
+    Commander.command(
+      CLIOption.deprecatedTemplateName,
+      CLIOption.templateName,
+      CLIOption.templatePath,
+      CLIOption.options(for: self),
+      CLIOption.params,
+      CLIOption.filter(for: self),
+      OutputDestination.cliOption,
+      Argument<[Path]>("PATH", description: self.pathDescription, validator: pathsExist)
+    ) { oldTemplateName, templateName, templatePath, parserOptions, parameters, filter, output, paths in
       try ErrorPrettifier.execute {
-        let parser = try self.parserType.init(options: [:]) { msg, _, _ in
+        let options = try Parameters.parse(items: parserOptions)
+        let parser = try self.parserType.init(options: options) { msg, _, _ in
           logMessage(.warning, msg)
         }
+
         let filter = try Filter(pattern: filter)
         try parser.searchAndParse(paths: paths, filter: filter)
 
@@ -74,7 +89,7 @@ extension ParserCLI {
           templateShortName: resolvedTemplateName,
           templateFullPath: templatePath
         )
-        let templateRealPath = try templateRef.resolvePath(forSubcommand: self.templateFolder)
+        let templateRealPath = try templateRef.resolvePath(forParser: self)
 
         let template = try StencilSwiftTemplate(
           templateString: templateRealPath.read(),

@@ -23,7 +23,7 @@ class ConfigLintTests: XCTestCase {
     let configFile = Path(path)
     do {
       let logger = { (level: LogLevel, msg: String) -> Void in
-        if let idx = missingLogs.index(where: { $0 == level && $1 == msg }) {
+        if let idx = missingLogs.firstIndex(where: { $0 == level && $1 == msg }) {
           missingLogs.remove(at: idx)
         } else if unwantedLevels.contains(level) {
           XCTFail("Unexpected log: \(msg)")
@@ -33,7 +33,7 @@ class ConfigLintTests: XCTestCase {
       let config = try Config(file: configFile, logger: logger)
       config.lint(logger: logger)
     } catch let error {
-      if let idx = missingLogs.index(where: { $0 == .error && $1 == String(describing: error) }) {
+      if let idx = missingLogs.firstIndex(where: { $0 == .error && $1 == String(describing: error) }) {
         missingLogs.remove(at: idx)
       } else {
         XCTFail("Unexpected error: \(error)", file: file, line: line)
@@ -55,18 +55,9 @@ class ConfigLintTests: XCTestCase {
     let commands = ["strings", "fonts", "ib", "colors", "xcassets"]
     let logs = commands.flatMap { (cmd: String) -> [(LogLevel, String)] in
       [
-        (.warning, """
-          \(cmd).inputs: /\(cmd)/paths is an absolute path. Prefer relative paths for portability \
-          when sharing your project.
-          """),
-        (.warning, """
-          \(cmd).outputs.templatePath: /\(cmd)/templates.stencil is an absolute path. Prefer \
-          relative paths for portability when sharing your project.
-          """),
-        (.warning, """
-          \(cmd).outputs.output: /\(cmd)/out.swift is an absolute path. Prefer relative paths for \
-          portability when sharing your project.
-          """)
+        (.warning, "\(cmd).inputs: \(Config.Message.absolutePath("/\(cmd)/paths"))"),
+        (.warning, "\(cmd).outputs.templatePath: \(Config.Message.absolutePath("/\(cmd)/templates.stencil"))"),
+        (.warning, "\(cmd).outputs.output: \(Config.Message.absolutePath("/\(cmd)/out.swift"))")
       ]
     }
 
@@ -81,18 +72,11 @@ class ConfigLintTests: XCTestCase {
     let commands = ["strings", "fonts", "ib", "colors", "xcassets"]
     let logs = commands.flatMap { (cmd: String) -> [(LogLevel, String)] in
       [
+        (.warning, "\(cmd).inputs: \(Config.Message.absolutePath("/input/\(cmd)/paths"))"),
         (.warning, """
-          \(cmd).inputs: /input/\(cmd)/paths is an absolute path. Prefer relative paths for \
-          portability when sharing your project.
+          \(cmd).outputs.templatePath: \(Config.Message.absolutePath("/templates/\(cmd)/templates.stencil"))
           """),
-        (.warning, """
-          \(cmd).outputs.templatePath: /templates/\(cmd)/templates.stencil is an absolute path. \
-          Prefer relative paths for portability when sharing your project.
-          """),
-        (.warning, """
-          \(cmd).outputs.output: /output/\(cmd)/out.swift is an absolute path. Prefer relative \
-          paths for portability when sharing your project.
-          """)
+        (.warning, "\(cmd).outputs.output: \(Config.Message.absolutePath("/output/\(cmd)/out.swift"))")
       ]
     }
 
@@ -115,7 +99,7 @@ class ConfigLintTests: XCTestCase {
     let errorMsg = """
       You must specify a template by name (templateName) or path (templatePath).
 
-      To list all the available named templates, use 'swiftgen templates list'.
+      To list all the available named templates, use 'swiftgen template list'.
       """
     _testLint(
       fixture: "config-missing-template",
@@ -176,35 +160,23 @@ class ConfigLintTests: XCTestCase {
     _testLint(
       fixture: "config-with-multi-entries",
       expectedLogs: [
-        (.error, "input_dir: Input directory Fixtures/ does not exist"),
-        (.error, "output_dir: Output directory Generated/ does not exist"),
-        (.error, "strings.inputs: Fixtures/Strings/Localizable.strings does not exist"),
-        (.error, "strings.outputs: Template not found at path templates/custom-swift3."),
+        (.error, "input_dir: Input directory \(Config.Message.doesntExist("Fixtures/"))"),
+        (.error, "output_dir: Output directory \(Config.Message.doesntExist("Generated/"))"),
+        (.error, "strings.inputs: \(Config.Message.doesntExist("Fixtures/Strings/Localizable.strings"))"),
+        (.error, "strings.outputs: Template not found at path templates/custom-swift5."),
+        (.error, "strings.outputs.output: \(Config.Message.doesntExistIntermediatesNeeded("Generated"))"),
+        (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Colors.xcassets"))"),
+        (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Colors.xcassets"))"),
+        (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Images.xcassets"))"),
+        (.error, "xcassets.inputs: \(Config.Message.doesntExist("Fixtures/XCAssets/Images.xcassets"))"),
         (.error, """
-          strings.outputs.output: Generated does not exist. Intermediate folders up to the output \
-          file must already exist to avoid misconfigurations, and won't be created for you.
-          """),
-        (.error, "xcassets.inputs: Fixtures/XCAssets/Colors.xcassets does not exist"),
-        (.error, "xcassets.inputs: Fixtures/XCAssets/Colors.xcassets does not exist"),
-        (.error, "xcassets.inputs: Fixtures/XCAssets/Images.xcassets does not exist"),
-        (.error, "xcassets.inputs: Fixtures/XCAssets/Images.xcassets does not exist"),
-        (.error, """
-          xcassets.outputs: Template named custom-swift3 not found. Use `swiftgen templates list` \
+          xcassets.outputs: Template named custom-swift5 not found. Use `swiftgen template list` \
           to list available named templates or use `templatePath` to specify a template by its \
           full path.
           """),
-        (.error, """
-          xcassets.outputs.output: Generated does not exist. Intermediate folders up to the output \
-          file must already exist to avoid misconfigurations, and won't be created for you.
-          """),
-        (.error, """
-          xcassets.outputs.output: Generated does not exist. Intermediate folders up to the output \
-          file must already exist to avoid misconfigurations, and won't be created for you.
-          """),
-        (.error, """
-          xcassets.outputs.output: Generated does not exist. Intermediate folders up to the output \
-          file must already exist to avoid misconfigurations, and won't be created for you.
-          """)
+        (.error, "xcassets.outputs.output: \(Config.Message.doesntExistIntermediatesNeeded("Generated"))"),
+        (.error, "xcassets.outputs.output: \(Config.Message.doesntExistIntermediatesNeeded("Generated"))"),
+        (.error, "xcassets.outputs.output: \(Config.Message.doesntExistIntermediatesNeeded("Generated"))")
       ],
       unwantedLevels: [.warning, .error],
       assertionMessage: "Linter should show errors for invalid paths and templates"
@@ -216,7 +188,7 @@ class ConfigLintTests: XCTestCase {
   func testDeprecatedCommands() {
     _testLint(
       fixture: "config-deprecated-commands",
-      expectedLogs: [(.warning, "`storyboards` action has been deprecated, please use `ib` instead.")],
+      expectedLogs: [(.warning, Config.Message.deprecatedAction("storyboards", for: "ib"))],
       assertionMessage: "Linter should warn about deprecated commands"
     )
   }

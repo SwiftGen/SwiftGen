@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/kylef/Commander.git",
         "state": {
           "branch": null,
-          "revision": "e5b50ad7b2e91eeb828393e89b03577b16be7db9",
-          "version": "0.8.0"
+          "revision": "4b6133c3071d521489a80c38fb92d7983f19d438",
+          "version": "0.9.1"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/tid-kijyun/Kanna.git",
         "state": {
           "branch": null,
-          "revision": "0534d5d4917410870fcac8907e06f69b58a23417",
-          "version": "4.0.3"
+          "revision": "609367a2cd84827a33383cf7923cb4fe8f69ee0a",
+          "version": "5.2.2"
         }
       },
       {
@@ -56,21 +56,12 @@
         }
       },
       {
-        "package": "SwiftClibxml2",
-        "repositoryURL": "https://github.com/tid-kijyun/SwiftClibxml2.git",
-        "state": {
-          "branch": null,
-          "revision": "c4e67cc970273fc2bee978d12e422974ff184de7",
-          "version": "1.0.2"
-        }
-      },
-      {
         "package": "Yams",
         "repositoryURL": "https://github.com/jpsim/Yams.git",
         "state": {
           "branch": null,
-          "revision": "26ab35f50ea891e8edefcc9d975db2f6b67e1d68",
-          "version": "1.0.1"
+          "revision": "81a65c4069c28011ee432f2858ba0de49b086677",
+          "version": "3.0.1"
         }
       }
     ]

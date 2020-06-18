@@ -35,7 +35,7 @@ public extension Yaml {
           throw error
         }
       } catch let error {
-          throw ParserError.invalidFile(path: path, reason: error.localizedDescription)
+        throw ParserError.invalidFile(path: path, reason: error.localizedDescription)
       }
     }
   }

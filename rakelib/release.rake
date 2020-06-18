@@ -175,8 +175,8 @@ namespace :release do
       formula = File.read(formula_file)
 
       new_formula = formula
-                    .gsub(/:tag => ".*"/, %(:tag => "#{tag}"))
-                    .gsub(/:revision => ".*"/, %(:revision => "#{revision}"))
+                    .gsub(/(:tag\s+=>\s+)".*"/, %(\\1"#{tag}"))
+                    .gsub(/(:revision\s+=>\s+)".*"/, %(\\1"#{revision}"))
       File.write(formula_file, new_formula)
       Utils.print_header 'Checking Homebrew formula...'
       Bundler.with_clean_env do
