@@ -122,9 +122,9 @@ $ mint install SwiftGen/SwiftGen
 </details>
 
 <details>
-<summary><strong>Compile from source</strong> <em>(only recommended if you need features from master or want to test a PR)</em></summary>
+<summary><strong>Compile from source</strong> <em>(only recommended if you need features from the `stable` branch or want to test a PR)</em></summary>
 
-This solution is when you want to build and install the latest version from `master` and have access to features which might not have been released yet.
+This solution is when you want to build and install the latest version from `stable` and have access to features which might not have been released yet.
 
 * If you have `homebrew` installed, you can use the following command to build and install the latest commit:
 

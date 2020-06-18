@@ -18,10 +18,10 @@ need_fixes = []
 # Check for correct base branch
 is_release = github.branch_for_head.start_with?('release/')
 to_develop = github.branch_for_base == 'develop'
-to_master = github.branch_for_base == 'master'
+to_stable = github.branch_for_base == 'stable'
 if is_release
   message('This is a Release PR')
-  need_fixes << warn("Release branches should be merged into 'master'") unless to_master
+  need_fixes << warn('Release branches should be merged into the `stable` branch') unless to_stable
 
   require 'open3'
 
@@ -79,7 +79,7 @@ unless has_changelog || declared_trivial
   pr_author = github.pr_author
   pr_author_url = "https://github.com/#{pr_author}"
 
-  need_fixes = fail("Please include a CHANGELOG entry to credit your work.  \nYou can find it at [CHANGELOG.md](#{repo_url}/blob/master/CHANGELOG.md).")
+  need_fixes = fail("Please include a CHANGELOG entry to credit your work.  \nYou can find it at [CHANGELOG.md](#{repo_url}/blob/develop/CHANGELOG.md).")
 
   changelog_msg = <<-CHANGELOG_FORMAT.gsub(/^ *\|/,'')
   |📝 We use the following format for CHANGELOG entries:

@@ -43,8 +43,8 @@ Each pull request will need to conform to some requirements, which should be aut
 
 ### Following GitFlow branch naming convention
 
-Your feature branches **should start from the `develop` branch**, not `master`.
-_(The `master` branch is reserved for released versions, while `develop` corresponds to the future version being worked on)_
+Your feature branches **should start from the `develop` branch**, not the `stable` branch.
+_(The `stable` branch is reserved for released versions, while `develop` corresponds to the future version being worked on)_
 
 Also, to help us triaging the branches, we use the following naming convention:
 
