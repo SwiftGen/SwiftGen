@@ -79,7 +79,7 @@ unless has_changelog || declared_trivial
   pr_author = github.pr_author
   pr_author_url = "https://github.com/#{pr_author}"
 
-  need_fixes = fail("Please include a CHANGELOG entry to credit your work.  \nYou can find it at [CHANGELOG.md](#{repo_url}/blob/develop/CHANGELOG.md).")
+  need_fixes = fail("Please include a CHANGELOG entry to credit your work.  \nYou can find it at [CHANGELOG.md](#{repo_url}/blob/#{github.branch_for_head}/CHANGELOG.md).")
 
   changelog_msg = <<-CHANGELOG_FORMAT.gsub(/^ *\|/,'')
   |📝 We use the following format for CHANGELOG entries:
