@@ -49,7 +49,11 @@ namespace :cli do
     Utils.run(
       %(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "#{SCHEME_NAME}" -configuration "#{RELEASE_CONFIGURATION}") +
       %( -derivedDataPath "#{BUILD_DIR}" TEMPLATE_PATH="#{tpl_rel_path}") +
-      %( SWIFTGEN_OTHER_LDFLAGS="-sectcreate __TEXT __info_plist #{plist_file.shellescape}"),
+      %( SWIFTGEN_OTHER_LDFLAGS="-sectcreate __TEXT __info_plist #{plist_file.shellescape}") +
+      # Note: "-Wl,-headerpad_max_install_names" is needed to fix a bug when Homebrew tries to update the dylib ID of linked frameworks
+      #  - See: https://github.com/Homebrew/homebrew-core/pull/32403
+      #  - See also: https://github.com/Carthage/Carthage/commit/899d8a5da15979fd0fede39fe57b56c7ff532abe for similar fix in Carthage's Makefile
+      %( 'OTHER_LDFLAGS=$(inherited) -Wl,-headerpad_max_install_names' ),
       task, xcrun: true, formatter: :xcpretty
     )
   end

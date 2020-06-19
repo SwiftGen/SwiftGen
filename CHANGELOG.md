@@ -2,7 +2,7 @@
 
 ---
 
-## Develop
+## 6.2.0
 
 ### Breaking Changes
 
@@ -111,6 +111,9 @@
 
 ### Internal Changes
 
+* The main branch of the repository has been renamed from `master` to `stable`. If you pointed your `Podfile` or dependency managment tool to `master` instead of an official release/tag, you will have to update the branch name in your dependency file.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#714](https://github.com/SwiftGen/SwiftGen/pull/714)
 * Documentation: Improved doc for creating custom templates, and added a Documentation Table of Contents.  
   [@AliSoftware](https://github.com/AliSoftware)
   [#713](https://github.com/SwiftGen/SwiftGen/pull/713)
