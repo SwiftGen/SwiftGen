@@ -14,7 +14,7 @@ _None_
 
 ### Bug Fixes
 
-* Plist: Fix issue with Array in the Inline templates.  
+* Plist/JSON/YAML: Fix issue with homogeneous `Array`s in the Inline templates (such as `[String`]).  
   [#687](https://github.com/SwiftGen/SwiftGen/pull/687)
   [@fjtrujy](https://github.com/fjtrujy)
 
