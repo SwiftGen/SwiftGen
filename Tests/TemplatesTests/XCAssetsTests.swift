@@ -49,17 +49,12 @@ class XCAssetsTests: XCTestCase {
       (
         context: try StencilContext.enrich(context: context, parameters: ["forceProvidesNamespaces"]),
         suffix: "-forceNamespaces"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
       )
     ]
-  }
-
-  func testSwift3() {
-    test(
-      template: "swift3",
-      contextNames: Contexts.all,
-      directory: .xcassets,
-      contextVariations: variations
-    )
   }
 
   func testSwift4() {

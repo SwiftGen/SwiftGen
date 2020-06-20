@@ -26,7 +26,7 @@
   {{accessPrefix}}static let {{color.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = #colorLiteral(red: {% call h2f color.red %}, green: {% call h2f color.green %}, blue: {% call h2f color.blue %}, alpha: {% call h2f color.alpha %})
   {% endfor %}
 {% endmacro %}
-  {% if palettes.count > 1 %}
+  {% if palettes.count > 1 or param.forceFileNameEnum %}
   {% set accessPrefix %}{{accessModifier}} {% endset %}
   {% for palette in palettes %}
   enum {{palette.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {

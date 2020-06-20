@@ -7,19 +7,46 @@ All the migration guides for SwiftGen are spread out over a few files, depending
 | SwiftGen Migration Guide (this file) | All users of SwiftGen | Changes in configuration, CLI parameters and global changes overview |
 | [Templates Migration Guide](templates/MigrationGuide.md) | Users of SwiftGen's bundled templates (`templateName` option) | Some templates may have been renamed, removed or merged, or their functionality may have changed |
 | [SwiftGenKit Migration Guide](SwiftGenKit%20Contexts/MigrationGuide.md) | Template writers | Changes in names of variables provided by SwiftGenKit to your templates |
-| [StencilSwiftKit Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/master/Documentation/MigrationGuide.md) | Template writers | Changes in extra filters and tags for use in templates |
+| [StencilSwiftKit Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/stable/Documentation/MigrationGuide.md) | Template writers | Changes in extra filters and tags for use in templates |
 
 ----
 
-# SwiftGen 6.0 Migration Guide
+# Migrating to SwiftGen 6.2
+
+## Deprecation of Application Support lookup for named templates
+
+In previous versions of SwiftGen, SwiftGen looked for named templates inside `~/Library/Application Support` before looking for bundled templates. This feature was little known and made the documentation quite confusing, in addition to making your project dependent on what was installed on your machine. This is why it has been is deprecated in SwiftGen 6.2 and will be removed in 7.0.
+
+In the unlikely case you used this feature, you should start using `templatePath:` instead of `templateName:` to point to those custom templates. We also suggest you to move those custom templates from `~/Library/Application Support` into your project folders instead, to ensure that your projects and SwiftGen configuration will work on every machine and not be dependent on the machine you run SwiftGen on.
+
+## Command line invocation changes
+
+#### `swiftgen <parser>` deprecated in favor of `swiftgen run <parser>`
+
+The invocation of individual parsers via the command line (`swiftgen <parser>`, e.g. `swiftgen colors …`, `swiftgen strings …`) is deprecated in favor of using the `swiftgen run <parser>` subcommand instead.
+
+The `swiftgen <parser>` commands will be completely removed in SwiftGen 7.0, only leaving the `swiftgen run <parser>` subcommands.
+
+> Note that for flexibility and performance reasons, it is still recommended to use a configuration file instead of invoking individual parsers from the command line like that for normal use; the usage of `swiftgen run <parser>` should only be used for isolated uses, like when you're iterating while working on a custom template.
+
+#### `swiftgen templates` renamed `swiftgen template`
+
+The command to manage templates (list bundled templates, print their content to generate custom templates, open documentation…) has been renamed `swiftgen template` (singular).
+
+`swiftgen templates` (plural) is thus deprecated and will be removed in SwiftGen 7.0.
+ 
+# Migrating to SwiftGen 6.0
 
 If you're migrating from SwiftGen 5.x to SwiftGen 6.0, there might be some migration steps you'll need to use.
 
 Below is a list of pointers to help you migrate to the new SwiftGen 6.0.
 
+<details>
+<summary>Migration Guide</summary>
+
 ## `storyboards` command has been renamed
 
-The `storyboards` subcommand has been renamed `ib`, for Interface Builder. This renaming was necessary to prepare for an upcoming feature of being able to parse `XIB` files too in a future release of SwiftGen.
+The `storyboards` parser command has been renamed `ib`, for Interface Builder. This renaming was necessary to prepare for an upcoming feature of being able to parse `XIB` files too in a future release of SwiftGen.
 You should replace invocations in your config files with the new `ib` command name, or command line invocations of `swiftgen storyboards …` with `swiftgen ib …`.
 
 ❗️ See below: the bundled `storyboards` templates have been split up into one for scenes and one for segues.
@@ -42,7 +69,7 @@ The biggest change is that the `storyboards` (`ib`) templates have been split up
 
 ## Commands can have multiple outputs
 
-This is only available for users with a configuration file, not via command line invocation of a dedicated subcommand. For each command you can now have a list of `outputs`, each output with a template name (`templateName`) or path (`templatePath`), an output file to generate (`output`), and an optional list of parameters (`params`).
+This is only available for users with a configuration file, not via command line invocation of a dedicated parser. For each command you can now have a list of `outputs`, each output with a template name (`templateName`) or path (`templatePath`), an output file to generate (`output`), and an optional list of parameters (`params`).
 
 This allows you to generate multiple different outputs for the same input (for example both scenes and segues of storyboards, or both `.h` and `.m` for and Objective-C template, or both Swift code constants and html code for your documentation, …). For example:
 
@@ -115,7 +142,7 @@ You can read all about it in our [Read Me](../README.md). SwiftGen can now parse
 
 Please note that the bundled templates are only meant for the most basic uses for these data types. If you need to access these data files in a different way, especially since you'll probably use some custom structure in your JSON/Plist/YAML files, you may want to write your own templates that better fit those structures (for example to write a template that expects specific keys in your custom YAML to generate code based on the values in those keys…).
 
-For more information, read the [creating your own templates](Creating-your-templates.md) documentation.
+For more information, read the [creating your own templates](Articles/Creating-custom-templates.md) documentation.
 
 ## If you wrote your own templates
 
@@ -125,9 +152,11 @@ There have been a few minor context changes, see [SwiftGenKit's own Migration Gu
 
 ## Command Line invocation
 
-If you still invoked SwiftGen subcommands directly using command line flags and options (instead of a configuration file), be sure to use `--templateName` or `--templatePath` instead of the `--template`/`-t` option (which has been deprecated).
+If you still invoked SwiftGen parsers directly using command line flags and options (instead of a configuration file), be sure to use `--templateName` or `--templatePath` instead of the `--template`/`-t` option (which has been deprecated).
 
-# SwiftGen 5.1 Migration Guide
+</details>
+
+# Migrating to SwiftGen 5.1
 
 <details>
 <summary>Migration Guide</summary>
@@ -138,7 +167,7 @@ Only a small change in the generated code that'll affect a tiny subset of users:
 
 </details>
 
-# SwiftGen 5.0 Migration Guide
+# Migrating to SwiftGen 5.0
 
 <details>
 <summary>Migration Guide</summary>
@@ -151,7 +180,7 @@ Below is a list of pointers to help you migrate to the new SwiftGen 5.0
 
 ### `images` command has been renamed
 
-The `images` subcommand has been renamed `xcassets`.
+The `images` parser command has been renamed `xcassets`.
 You should replace invocations of `swiftgen images …` by `swiftgen xcassets …`
 
 ### `--enumName` flag migrated to `--param`
@@ -216,12 +245,12 @@ These are just a few of the changes to the structure of the variables passed by 
 
 ### Some SwiftGen-specific Stencil filters evolved
 
-Also, a few dedicated Stencil filters provided by SwiftGen (via StencilSwiftKit) have been renamed. Especially the `join` and `snakeToCamelCase` filters now take a parameter. See [StencilSwiftKit's own Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/master/Documentation/MigrationGuide.md#stencilswiftkit-20-swiftgen-50) for more info.
+Also, a few dedicated Stencil filters provided by SwiftGen (via StencilSwiftKit) have been renamed. Especially the `join` and `snakeToCamelCase` filters now take a parameter. See [StencilSwiftKit's own Migration Guide](https://github.com/SwiftGen/StencilSwiftKit/blob/stable/Documentation/MigrationGuide.md#stencilswiftkit-20-swiftgen-50) for more info.
 
 </details>
 
 
-# SwiftGen 4.2 Migration Guide
+# Migrating to SwiftGen 4.2
 
 <details>
 <summary>Migration Guide</summary>

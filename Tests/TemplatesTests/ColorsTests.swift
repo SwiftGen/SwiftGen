@@ -33,20 +33,15 @@ class ColorsTests: XCTestCase {
         (
           context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
           suffix: "-publicAccess"
+        ),
+        (
+          context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+          suffix: "-forceFileNameEnum"
         )
       ]
     }
   }
   // swiftlint:enable opening_brace
-
-  func testSwift3() {
-    test(
-      template: "swift3",
-      contextNames: Contexts.all,
-      directory: .colors,
-      contextVariations: variations(customName: "XCTColors")
-    )
-  }
 
   func testSwift4() {
     test(
@@ -63,15 +58,6 @@ class ColorsTests: XCTestCase {
       contextNames: Contexts.all,
       directory: .colors,
       contextVariations: variations(customName: "XCTColors")
-    )
-  }
-
-  func testLiteralsSwift3() {
-    test(
-      template: "literals-swift3",
-      contextNames: Contexts.all,
-      directory: .colors,
-      contextVariations: variations(customName: "UIColor")
     )
   }
 

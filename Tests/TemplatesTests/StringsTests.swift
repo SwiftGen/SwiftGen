@@ -36,9 +36,13 @@ class StringsTests: XCTestCase {
       (
         context: try StencilContext.enrich(
           context: context,
-          parameters: ["localizeFunction=XCTLocFunc"]
+          parameters: ["lookupFunction=XCTLocFunc(forKey:table:)"]
         ),
-        suffix: "-localizeFunction"
+        suffix: "-lookupFunction"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
       )
     ]
   }
@@ -53,22 +57,13 @@ class StringsTests: XCTestCase {
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
-        suffix: "-no-comments"
+        suffix: "-noComments"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["headerName=headerName-from-parameter.h"]),
         suffix: "-headerName"
       )
     ]
-  }
-
-  func testFlatSwift3() {
-    test(
-      template: "flat-swift3",
-      contextNames: Contexts.all,
-      directory: .strings,
-      contextVariations: variations
-    )
   }
 
   func testFlatSwift4() {
@@ -83,15 +78,6 @@ class StringsTests: XCTestCase {
   func testFlatSwift5() {
     test(
       template: "flat-swift5",
-      contextNames: Contexts.all,
-      directory: .strings,
-      contextVariations: variations
-    )
-  }
-
-  func testStructuredSwift3() {
-    test(
-      template: "structured-swift3",
       contextNames: Contexts.all,
       directory: .strings,
       contextVariations: variations

@@ -40,7 +40,7 @@ import Foundation
   {{accessModifier}} static func {{string.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}({% call parametersBlock string.types %}) -> String {
     return {{enumName}}.tr("{{table}}", "{{string.key}}", {% call argumentsBlock string.types %})
   }
-  {% elif param.localizeFunction %}
+  {% elif param.lookupFunction %}
   {# custom localization function is mostly used for in-app lang selection, so we want the loc to be recomputed at each call for those (hence the computed var) #}
   {{accessModifier}} static var {{string.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: String { return {{enumName}}.tr("{{table}}", "{{string.key}}") }
   {% else %}
@@ -58,7 +58,7 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name
 {% set enumName %}{{param.enumName|default:"L10n"}}{% endset %}
 {{accessModifier}} enum {{enumName}} {
-  {% if tables.count > 1 %}
+  {% if tables.count > 1 or param.forceFileNameEnum %}
   {% for table in tables %}
   {{accessModifier}} enum {{table.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
     {% filter indent:2 %}{% call recursiveBlock table.name table.levels %}{% endfilter %}
@@ -75,8 +75,11 @@ import Foundation
 
 extension {{enumName}} {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    // swiftlint:disable:next nslocalizedstring_key
-    let format = {{param.localizeFunction|default:"NSLocalizedString"}}(key, tableName: table, bundle: BundleToken.bundle, comment: "")
+    {% if param.lookupFunction %}
+    let format = {{ param.lookupFunction }}(key, table)
+    {% else %}
+    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
+    {% endif %}
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }

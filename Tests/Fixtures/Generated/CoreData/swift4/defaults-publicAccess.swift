@@ -298,13 +298,14 @@ extension MainEntity {
     return result
   }
 
-  class func fetchObjectIDFetchRequest(managedObjectContext: NSManagedObjectContext, name: String) throws -> [NSManagedObjectID] {
+  class func fetchObjectIDFetchRequest(managedObjectContext: NSManagedObjectContext, name: String, needle: String) throws -> [NSManagedObjectID] {
     guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
       fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
     }
     let model = persistentStoreCoordinator.managedObjectModel
     let substitutionVariables: [String: Any] = [
-      "NAME": name
+      "NAME": name,
+      "NEEDLE": needle
     ]
 
     guard let fetchRequest = model.fetchRequestFromTemplate(withName: "ObjectIDFetchRequest", substitutionVariables: substitutionVariables) else {

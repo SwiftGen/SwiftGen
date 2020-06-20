@@ -1,10 +1,10 @@
 # SwiftGen
 
-[![CircleCI](https://circleci.com/gh/SwiftGen/SwiftGen/tree/master.svg?style=svg)](https://circleci.com/gh/SwiftGen/SwiftGen/tree/master)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftGen.svg)](https://img.shields.io/cocoapods/v/SwiftGen.svg)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftGen.svg?style=flat)](http://cocoadocs.org/docsets/SwiftGen)
+![Swift 4.x](https://img.shields.io/badge/Swift-4.x-orange) ![Swift 5.x](https://img.shields.io/badge/Swift-5.x-orange)
 
-SwiftGen is a tool to auto-generate Swift code for resources of your projects, to make them type-safe to use.
+SwiftGen is a tool to automatically generate Swift code for resources of your projects (like images, localised strings, etc), to make them type-safe to use.
 
 <table border="0"><tr>
   <td>
@@ -34,10 +34,10 @@ SwiftGen is a tool to auto-generate Swift code for resources of your projects, t
 
 There are multiple benefits in using this:
 
-* Avoid any typo you could have when using a String
+* Avoid any risk of typo when using a String
 * Free auto-completion
 * Avoid the risk of using a non-existing asset name
-* All this will be ensured by the compiler.
+* All this will be ensured by the compiler and thus avoid the risk of crashing at runtime.
 
 Also, it's fully customizable thanks to Stencil templates, so even if it comes with predefined templates, you can make your own to generate whatever code fits your needs and your guidelines!
 
@@ -83,7 +83,7 @@ fi
 
 > Similarly, be sure to use `Pods/SwiftGen/bin/swiftgen` instead of just `swiftgen` where we mention commands with `swiftgen` in the rest of the documentation.
 
-_Note: SwiftGen isn't really a pod, as it's not a library your code will depend on at runtime; so the installation via CocoaPods is just a trick that installs the SwiftGen binaries in the Pods/ folder, but you won't see any swift files in the Pods/SwiftGen group in your Xcode's Pods.xcodeproj. That's normal: the SwiftGen binary is still present in that folder in the Finder._
+_Note: SwiftGen isn't really a pod, as it's not a library your code will depend on at runtime; so the installation via CocoaPods is just a trick that installs the SwiftGen binaries in the Pods/ folder, but you won't see any swift files in the Pods/SwiftGen group in your Xcode's Pods.xcodeproj. That's normal; the SwiftGen binary is still present in that folder in the Finder._
 
 ---
 </details>
@@ -105,8 +105,6 @@ You can then invoke `swiftgen` directly in your Script Build Phase (as it will b
 swiftgen … 
 ```
 
-_Note: SwiftGen needs Xcode 8.3 to build, so installing via Homebrew requires you to have Xcode 8.3 installed (which in turn requires macOS 10.12). If you use an earlier version of macOS, you'll have to use one of the other installation methods instead._
-
 ---
 </details>
 <details>
@@ -124,9 +122,9 @@ $ mint install SwiftGen/SwiftGen
 </details>
 
 <details>
-<summary><strong>Compile from source</strong> <em>(only recommended if you need features from master or want to test a PR)</em></summary>
+<summary><strong>Compile from source</strong> <em>(only recommended if you need features from the `stable` branch or want to test a PR)</em></summary>
 
-This solution is when you want to build and install the latest version from `master` and have access to features which might not have been released yet.
+This solution is when you want to build and install the latest version from `stable` and have access to features which might not have been released yet.
 
 * If you have `homebrew` installed, you can use the following command to build and install the latest commit:
 
@@ -172,57 +170,61 @@ Or add the path to the `bin` folder to your `$PATH` and invoke `swiftgen` direct
 
 > ❗️ If you're migrating from older SwiftGen versions, don't forget to [read the Migration Guide](Documentation/MigrationGuide.md).
 
-SwiftGen is provided as a single command-line tool which uses a configuration file to run various actions (subcommands).
+SwiftGen is provided as a single command-line tool which uses a configuration file to define the various parsers to run (depending on the type of input files you need to parse) and their parameters.
 
-Each action described in the [configuration file](Documentation/ConfigFile.md) (`strings`, `fonts`, `ib`, …) typically corresponds to a type of input resources to parse (strings files, IB files, Font files, JSON files, …), allowing you to generate constants for each types of those input files.
+To create a sample configuration file as a starting point to adapt to your needs, run `swiftgen config init`.
 
-To use SwiftGen, simply create a `swiftgen.yml` YAML file to list all the subcommands to invoke, and for each subcommand, the list of arguments to pass to it. For example:
+Each parser described in the [configuration file](Documentation/ConfigFile.md) (`strings`, `fonts`, `ib`, …) typically corresponds to a type of input resources to parse (strings files, IB files, Font files, JSON files, …), allowing you to generate constants for each types of those input files.
+
+To use SwiftGen, simply create a `swiftgen.yml` YAML file (either manually or using `swiftgen config init`) then edit it to adapt to your project. The config file should list all the parsers to invoke, and for each parser, the list of inputs/outputs/templates/parameters to use for it.
+
+For example:
 
 ```yaml
 strings:
   inputs: Resources/Base.lproj
-  filter: .+\.strings$
   outputs:
     - templateName: structured-swift5
-      output: Generated/strings.swift
+      output: Generated/Strings.swift
 xcassets:
   inputs:
     - Resources/Images.xcassets
     - Resources/MoreImages.xcassets
+    - Resources/Colors.xcassets
   outputs:
     - templateName: swift5
-      output: Generated/assets-images.swift
+      output: Generated/Assets.swift
 ```
 
-Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for short, and it will execute what's described in the configuration file
+Then you just have to invoke `swiftgen config run`, or even just `swiftgen` for short, and it will execute what's described in the configuration file.
 
-[The dedicated documentation](Documentation/ConfigFile.md) explains the syntax and possibilities in details – like how to pass custom parameters, use `swiftgen config lint` to validate it, how to use alternate config files, and other tips.
+[The dedicated documentation](Documentation/ConfigFile.md) explains the syntax and possibilities in details – like how to pass custom parameters to your templates, use `swiftgen config lint` to validate your config file, how to use alternate config files, and other tips.
 
 There are also additional subcommands you can invoke from the command line to manage and configure SwiftGen:
 
-* The  `swiftgen config` subcommand to help you with the configuration file, especially `swiftgen config lint` to validate that your Config file is valid and has no errors
-* The `swiftgen templates` subcommands helps you print, duplicate, find and manage templates (both bundled and custom)
+* The `swiftgen config` subcommand to help you with the configuration file, especially `swiftgen config init` to create a starting point for your config and `swiftgen config lint` to validate that your Config file is valid and has no errors
+* The `swiftgen template` subcommands to help you print, duplicate, find and manage templates bundled with SwiftGen
 
 Lastly, you can use `--help` on `swiftgen` or one of its subcommand to see the detailed usage.
 
 <details>
-<summary><strong>Directly invoking a subcommand</strong></summary>
+<summary><strong>Directly invoking a parser without a config file</strong></summary>
 
-While we highly recommend the use a configuration file for performance reasons (especially if you have multiple outputs, but also because it's more flexible), it's also possible to directly invoke the available subcommands to parse various resource types:
+While we highly recommend the use a configuration file for performance reasons (especially if you have multiple outputs, but also because it's more flexible), it's also possible to directly invoke the available parsers individually using `swiftgen run`:
 
-* `swiftgen colors [OPTIONS] DIRORFILE1 …`
-* `swiftgen coredata [OPTIONS] DIRORFILE1 …`
-* `swiftgen fonts [OPTIONS] DIRORFILE1 …`
-* `swiftgen ib [OPTIONS] DIRORFILE1 …`
-* `swiftgen json [OPTIONS] DIRORFILE1 …`
-* `swiftgen plist [OPTIONS] DIRORFILE1 …`
-* `swiftgen strings [OPTIONS] DIRORFILE1 …`
-* `swiftgen xcassets [OPTIONS] DIRORFILE1 …`
-* `swiftgen yaml [OPTIONS] DIRORFILE1 …`
+* `swiftgen run colors [OPTIONS] DIRORFILE1 …`
+* `swiftgen run coredata [OPTIONS] DIRORFILE1 …`
+* `swiftgen run fonts [OPTIONS] DIRORFILE1 …`
+* `swiftgen run ib [OPTIONS] DIRORFILE1 …`
+* `swiftgen run json [OPTIONS] DIRORFILE1 …`
+* `swiftgen run plist [OPTIONS] DIRORFILE1 …`
+* `swiftgen run strings [OPTIONS] DIRORFILE1 …`
+* `swiftgen run xcassets [OPTIONS] DIRORFILE1 …`
+* `swiftgen run yaml [OPTIONS] DIRORFILE1 …`
 
-One rare cases where this might be useful — as opposed to using a config file — is if you are working on a custom template and want to quickly test the specific subcommand you're working on at each iteration/version of your custom template, until you're happy with it.
+One rare cases where this might be useful — as opposed to using a config file — is if you are working on a custom template and want to quickly test the specific parser you're working on at each iteration/version of your custom template, until you're happy with it.
 
-Each subcommand generally accepts the same options and syntax, and they mirror the options and parameters from the configuration file:
+Each parser command generally accepts the same options and syntax, and they mirror the options and parameters from the configuration file:
 
 * `--output FILE` or `-o FILE`: set the file where to write the generated code. If omitted, the generated code will be printed on `stdout`.
 * `--templateName NAME` or `-n NAME`: define the Stencil template to use (by name, see [here for more info](Documentation/templates)) to generate the output.
@@ -231,7 +233,7 @@ Each subcommand generally accepts the same options and syntax, and they mirror t
 * `--filter REGEX` or `-f REGEX`: the filter to apply to each input path. Filters are applied to actual (relative) paths, not just the filename. Each command has a default filter that you can override with this option.
 * Note: use `.+` to match multiple characters (at least one), and don't forget to escape the dot (`\.`) if you want to match a literal dot like for an extension. Add `$` at the end to ensure the path ends with the extension you want. Regular expressions will be case sensitive by default, and not anchored to the start/end of a path. For example, use `.+\.xib$` to match files with a `.xib` extension. Use a tool such as [RegExr](https://regexr.com) to ensure you're using a valid regular expression.
 * Each command supports multiple input files (or directories where applicable).
-* You can always use the `--help` flag to see what options a command accept, e.g. `swiftgen xcassets --help`.
+* You can always use the `--help` flag to see what options a command accept, e.g. `swiftgen run xcassets --help`.
 
 </details>
 
@@ -241,22 +243,22 @@ SwiftGen is based on templates (it uses [Stencil](https://github.com/kylef/Stenc
 
 ### Bundled templates vs. Custom ones
 
-SwiftGen comes bundled with some templates for each of the subcommand (`colors`, `coredata`, `fonts`, `ib`, `json`, `plist`, `strings`, `xcassets`, `yaml`), which will fit most needs; simply use the `templateName` output option to specify the name of the template to use. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs: just store them anywhere (like in your project repository) and use the `templatePath` output option instead of `templateName`, to specify their path.
+SwiftGen comes bundled with some templates for each of the parsers (`colors`, `coredata`, `fonts`, `ib`, `json`, `plist`, `strings`, `xcassets`, `yaml`), which will fit most needs; simply use the `templateName` output option to specify the name of the template to use. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs: just store them anywhere (like in your project repository) and use the `templatePath` output option instead of `templateName`, to specify their path.
 
-💡 You can use the `swiftgen templates list` command to list all the available templates (both custom and bundled templates) for each subcommand, and use `swiftgen templates cat` to show a template's content and duplicate it to create your own variation.
+💡 You can use the `swiftgen template list` command to list all the available bundled templates for each parser, and use `swiftgen template cat` to show a template's content and duplicate it to create your own variation.
 
 For more information about how to create your own templates, [see the dedicated documentation](Documentation/Creating-your-templates.md).
 
 ### Templates bundled with SwiftGen:
 
-As explained above, you can use `swiftgen templates list` to list all templates bundled with SwiftGen. For most SwiftGen subcommands, we provide, among others:
+As explained above, you can use `swiftgen template list` to list all templates bundled with SwiftGen. For most SwiftGen parsers, we provide, among others:
 
-* A `swift3` template, compatible with Swift 3
 * A `swift4` template, compatible with Swift 4
 * A `swift5` template, compatible with Swift 5
-* Other variants, like `flat-swift3/4/5` and `structured-swift3/4/5` templates for Strings, etc.
+* Other variants, like `flat-swift4/5` and `structured-swift4/5` templates for Strings, etc.
 
-You can **find the documentation for each bundled template [here in the repo](Documentation/templates)**, with documentation organized as one folder per SwiftGen subcommand, then one MarkDown file per template.  
+You can **find the documentation for each bundled template [here in the repo](Documentation/templates)**, with documentation organized as one folder per SwiftGen parser, then one MarkDown file per template. You can also use `swiftgen template doc` to open that documentation page in your browser directly from your terminal.
+
 Each MarkDown file documents the Swift Version it's aimed for, the use case for that template (in which cases you might favor that template over others), the available parameters to customize it on invocation (using the `params:` key in your config file), and some code examples.
 
 > Don't hesitate to make PRs to share your improvements suggestions on the bundled templates 😉
@@ -282,7 +284,7 @@ Especially, in addition to the previously mentioned [Migration Guide](Documentat
 * [Various articles](Documentation/Articles/) to provide best practices & tips on how to better take advantage of SwiftGen in your projects:
   * [Integrate SwiftGen in your Xcode project](Documentation/Articles/Xcode-Integration.md) — so it rebuilds the constants every time you build
   * [Configure SwiftLint to help your developers use constants generated by SwiftGen](Documentation/Articles/SwiftLint-Integration.md)
-  * [Create a custom template](Documentation/Creating-your-templates.md), and [watch a folder to auto-regenerate an output every time you save the template you're working on](Documentation/Articles/Watch-a-folder-for-changes.md)
+  * [Create a custom template](Documentation/Articles/Creating-custom-templates.md), and [watch a folder to auto-regenerate an output every time you save the template you're working on](Documentation/Articles/Watch-a-folder-for-changes.md)
   * …and more
 
 ### Tutorials
@@ -290,6 +292,8 @@ Especially, in addition to the previously mentioned [Migration Guide](Documentat
 You can also find other help & tutorial material on the internet, like [this classroom about Code Generation I gave at FrenchKit in Sept'17](https://github.com/FrenchKit/Mastering-code-generation-Classroom) — and its wiki detailing a step-by-step tutorial about installing and using SwiftGen (and Sourcery too)
 
 ---
+
+# Available Parsers
 
 ## Asset Catalog
 
@@ -354,6 +358,9 @@ let paintings = Asset.Targets.paintings.referenceImages
 ```
 
 ## Colors
+
+> ❗️ We recommend to define your colors in your Assets Catalogs and use the `xcassets` parser (see above) to generate color constants, instead of using this `colors` parser described below.  
+> The `colors` parser below is mainly useful if you support older versions of iOS where colors can't be defined in Asset Catalogs, or if you want to use Android's `colors.xml` files as input.
 
 ```yaml
 colors:
@@ -644,7 +651,7 @@ yaml:
 
 This will parse the given file, or when given a directory, recursively search for JSON and YAML files. It will define an `enum` for each file (and documents in a file where needed), and type-safe constants for the content of the file.
 
-Unlike other subcommands, this parser is intended to allow you to use more custom inputs (as the formats are quite open to your needs) to generate your code. This means that for these subcommands (and the `plist` one), you'll probably be more likely to use custom templates to generate code properly adapted/tuned to your inputs, rather than using the bundled templates. To read more about writing your own custom templates, see [see the dedicated documentation](Documentation/Creating-your-templates.md).
+Unlike other parsers, this one is intended to allow you to use more custom inputs (as the formats are quite open to your needs) to generate your code. This means that for these parsers (and the `plist` one), you'll probably be more likely to use custom templates to generate code properly adapted/tuned to your inputs, rather than using the bundled templates. To read more about writing your own custom templates, see [see the dedicated documentation](Documentation/Creating-your-templates.md).
 
 <details>
 <summary>Example of code generated by the bundled template</summary>
@@ -667,7 +674,7 @@ internal enum JSONFiles {
 ### Usage Example
 
 ```swift
-// This will be an dictionary
+// This will be a dictionary
 let foo = JSONFiles.Info.key3
 
 // This will be an [Int]
@@ -686,7 +693,7 @@ plist:
 
 This will parse the given file, or when given a directory, recursively search for Plist files. It will define an `enum` for each file (and documents in a file where needed), and type-safe constants for the content of the file.
 
-Unlike other subcommands, this parser is intended to allow you to use more custom inputs (as the format is quite open to your needs) to generate your code. This means that for this subcommand (and the `json` and `yaml` ones), you'll probably be more likely to use custom templates to generate code properly adapted/tuned to your inputs, rather than using the bundled templates. To read more about writing your own custom templates, see [see the dedicated documentation](Documentation/Creating-your-templates.md).
+Unlike other parsers, this one is intended to allow you to use more custom inputs (as the format is quite open to your needs) to generate your code. This means that for this parser (and the `json` and `yaml` ones), you'll probably be more likely to use custom templates to generate code properly adapted/tuned to your inputs, rather than using the bundled templates. To read more about writing your own custom templates, see [see the dedicated documentation](Documentation/Creating-your-templates.md).
 
 <details>
 <summary>Example of code generated by the bundled template</summary>
@@ -725,7 +732,9 @@ strings:
     output: Strings.swift
 ```
 
-This will generate a Swift `enum L10n` that will map all your `Localizable.strings` (or other tables) keys to a `static let` constant. And if it detects placeholders like `%@`,`%d`,`%f`, it will generate a `static func` with the proper argument types instead, to provide type-safe formatting. Note that all dots within the key are converted to dots in code.
+This will generate a Swift `enum L10n` that will map all your `Localizable.strings` (or other tables) keys to a `static let` constant. And if it detects placeholders like `%@`,`%d`,`%f`, it will generate a `static func` with the proper argument types instead, to provide type-safe formatting.
+
+> Note that all dots within the key names are converted to dots in code (by using nested enums). You can provide a different separator than `.` to split key names into substructures by using a parser option – see [the parser documentation](Documentation/Parsers/strings.md).
 
 <details>
 <summary>Example of code generated by the structured bundled template</summary>
@@ -783,7 +792,7 @@ let bananas = L10n.Bananas.owner(5, "Olivier")
 
 ### Flat Strings Support
 
-SwiftGen also has a template to support flat strings files (i.e. no dot syntax). The advantage is that your keys won't be mangled in any way, the disadvantage is worse auto-completion.
+SwiftGen also has a template to support flat strings files (i.e. without splitting the keys in substructures using "dot syntax"). The advantage is that your keys won't be mangled in any way; the disadvantage is that auto-completion won't be as nice.
 
 <details>
 <summary>Example of code generated by the flat bundled template</summary>

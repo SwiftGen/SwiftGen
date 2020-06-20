@@ -175,7 +175,9 @@ internal struct XCTImageAsset {
     #elseif os(watchOS)
     let image = Image(named: name)
     #endif
-    guard let result = image else { fatalError("Unable to load image named \(name).") }
+    guard let result = image else {
+      fatalError("Unable to load image named \(name).")
+    }
     return result
   }
 }

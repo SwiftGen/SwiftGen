@@ -28,17 +28,12 @@ class PlistTests: XCTestCase {
       (
         context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
         suffix: "-publicAccess"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
       )
     ]
-  }
-
-  func testInlineSwift3() {
-    test(
-      template: "inline-swift3",
-      contextNames: Contexts.all,
-      directory: .plist,
-      contextVariations: inlineVariations
-    )
   }
 
   func testInlineSwift4() {
@@ -79,17 +74,12 @@ class PlistTests: XCTestCase {
       (
         context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
         suffix: "-publicAccess"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
       )
     ]
-  }
-
-  func testRuntimeSwift3() {
-    test(
-      template: "runtime-swift3",
-      contextNames: Contexts.all,
-      directory: .plist,
-      contextVariations: runtimeVariations
-    )
   }
 
   func testRuntimeSwift4() {

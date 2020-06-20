@@ -36,15 +36,6 @@ class FontsTests: XCTestCase {
     ]
   }
 
-  func testSwift3() {
-    test(
-      template: "swift3",
-      contextNames: Contexts.all,
-      directory: .fonts,
-      contextVariations: variations
-    )
-  }
-
   func testSwift4() {
     test(
       template: "swift4",
