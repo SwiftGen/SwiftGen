@@ -31,6 +31,7 @@ internal enum JSONFiles {
     internal static let car: Any? = nil
     internal static let foo: [String: Any] = ["bar": "banana", "baz": "orange"]
     internal static let hello: String = "world"
+    internal static let names: [String] = ["John", "Peter", "Nick"]
     internal static let weight: Double = 33.3
   }
   internal enum Version {
