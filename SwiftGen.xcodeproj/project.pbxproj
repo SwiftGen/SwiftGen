@@ -1151,8 +1151,9 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$SRCROOT/Scripts/SwiftLint.sh\" \"swiftgen_sources\"\nfi";
+			shellPath = "/bin/sh -e";
+			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$SRCROOT/Scripts/SwiftLint.sh\" \"swiftgen_sources\"\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		2C9D66D627FB898D3DA8D22E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1343,8 +1344,9 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
+			shellPath = "/bin/sh -e";
 			shellScript = "if [[ ! $CI && ! $NO_CODE_LINT ]]; then\n  \"$SRCROOT/Scripts/SwiftLint.sh\" \"swiftgenkit_sources\"\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		DD9F4766206ADC4C006B0DCA /* ⚠️ SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
