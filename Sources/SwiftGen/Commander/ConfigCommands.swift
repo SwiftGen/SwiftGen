@@ -135,9 +135,11 @@ enum ConfigCLI {
 
 private extension Config {
   func runCommands(verbose: Bool) throws {
-    let errors = commands.keys.sorted().parallelCompactMap { cmd -> Swift.Error? in
+    let commandsAndEntries = try collectCommandsAndEntries()
+
+    let errors = commandsAndEntries.parallelCompactMap { cmd, entry -> Swift.Error? in
       do {
-        try run(cmd: cmd, verbose: verbose)
+        try run(cmd: cmd, entry: entry, verbose: verbose)
         return nil
       } catch {
         return error
@@ -151,39 +153,32 @@ private extension Config {
     }
   }
 
-  func run(cmd: String, verbose: Bool) throws {
-    guard let parserCmd = ParserCLI.command(named: cmd) else {
-      throw Config.Error.missingEntry(key: cmd)
-    }
-
-    let errors = (commands[cmd] ?? []).parallelCompactMap { entry -> Swift.Error? in
-      do {
-        try run(entry: entry, cmd: cmd, parserCmd: parserCmd, verbose: verbose)
-        return nil
-      } catch {
-        return error
-      }
-    }
-
-    if errors.count == 1 {
-      throw errors[0]
-    } else if errors.count > 1 {
-      throw Error.multipleErrors(errors)
-    }
-  }
-
-  func run(entry: ConfigEntry, cmd: String, parserCmd: ParserCLI, verbose: Bool) throws {
+  func run(cmd: ParserCLI, entry: ConfigEntry, verbose: Bool) throws {
     var entry = entry
 
     entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
     if verbose {
-      for item in entry.commandLine(forCommand: cmd) {
+      for item in entry.commandLine(forCommand: cmd.name) {
         logMessage(.info, " $ \(item)")
       }
     }
 
     try entry.checkPaths()
-    try entry.run(parserCommand: parserCmd)
+    try entry.run(parserCommand: cmd)
+  }
+
+  /// Flatten all commands and their corresponding entries into 1 list
+  func collectCommandsAndEntries() throws -> [(ParserCLI, ConfigEntry)] {
+    try commands.keys.sorted()
+      .compactMap { cmd in
+        guard let parserCmd = ParserCLI.command(named: cmd) else {
+          throw Config.Error.missingEntry(key: cmd)
+        }
+        return parserCmd
+      }
+      .flatMap { cmd in
+        (commands[cmd.name] ?? []).map { (cmd, $0) }
+      }
   }
 }
 
