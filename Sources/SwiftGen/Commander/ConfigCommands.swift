@@ -10,26 +10,6 @@ import PathKit
 import StencilSwiftKit
 import SwiftGenKit
 
-extension Config {
-  fileprivate func run(cmd: String, verbose: Bool) throws {
-    guard let parserCmd = ParserCLI.command(named: cmd) else {
-      throw Config.Error.missingEntry(key: cmd)
-    }
-
-    for var entry in commands[cmd] ?? [] {
-      entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
-      if verbose {
-        for item in entry.commandLine(forCommand: cmd) {
-          logMessage(.info, " $ \(item)")
-        }
-      }
-
-      try entry.checkPaths()
-      try entry.run(parserCommand: parserCmd)
-    }
-  }
-}
-
 extension ConfigEntryOutput {
   func checkPaths() throws {
     guard self.output.parent().exists else {
@@ -124,7 +104,7 @@ enum ConfigCLI {
     }
   }
 
-  // MARK: Init/Create
+  // MARK: - Init/Create
 
   static let create = command(
     CLIOption.configFile(checkExists: false),
@@ -151,7 +131,7 @@ enum ConfigCLI {
   }
 }
 
-// MARK: Private
+// MARK: - Parallel commands
 
 private extension Config {
   func runCommands(verbose: Bool) throws {
@@ -170,7 +150,44 @@ private extension Config {
       throw Error.multipleErrors(errors)
     }
   }
+
+  func run(cmd: String, verbose: Bool) throws {
+    guard let parserCmd = ParserCLI.command(named: cmd) else {
+      throw Config.Error.missingEntry(key: cmd)
+    }
+
+    let errors = (commands[cmd] ?? []).parallelCompactMap { entry -> Swift.Error? in
+      do {
+        try run(entry: entry, cmd: cmd, parserCmd: parserCmd, verbose: verbose)
+        return nil
+      } catch {
+        return error
+      }
+    }
+
+    if errors.count == 1 {
+      throw errors[0]
+    } else if errors.count > 1 {
+      throw Error.multipleErrors(errors)
+    }
+  }
+
+  func run(entry: ConfigEntry, cmd: String, parserCmd: ParserCLI, verbose: Bool) throws {
+    var entry = entry
+
+    entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
+    if verbose {
+      for item in entry.commandLine(forCommand: cmd) {
+        logMessage(.info, " $ \(item)")
+      }
+    }
+
+    try entry.checkPaths()
+    try entry.run(parserCommand: parserCmd)
+  }
 }
+
+// MARK: - Private
 
 private let configRunErrorMessageWithSuggestions =
   """
