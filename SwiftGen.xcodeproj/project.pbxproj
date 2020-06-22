@@ -91,7 +91,12 @@
 		DD428E271FC50FBF001649D6 /* StringsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E171FC50FBF001649D6 /* StringsContext.swift */; };
 		DD4738A81FE07596006CB6BB /* StencilContexts in Resources */ = {isa = PBXBuildFile; fileRef = DDDE52761FAF81DB004203BE /* StencilContexts */; };
 		DD48AD802210ACBD00336621 /* ParserOptionValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48AD7E2210AC5E00336621 /* ParserOptionValues.swift */; };
+		DD75551824A0FDBD00E61756 /* ConfigRunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD75551624A0FD8600E61756 /* ConfigRunTests.swift */; };
 		DD75551B24A103CB00E61756 /* Config+Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD75551A24A103CB00E61756 /* Config+Run.swift */; };
+		DD75551C24A1040600E61756 /* Config+Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD75551A24A103CB00E61756 /* Config+Run.swift */; };
+		DD75551D24A104B400E61756 /* Array+Parallel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F73736247F621800554A9C /* Array+Parallel.swift */; };
+		DD75551E24A104D800E61756 /* OutputDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E881F8ECA7000267096 /* OutputDestination.swift */; };
+		DD75552024A105C000E61756 /* config-invalid-parsers.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD75551F24A105C000E61756 /* config-invalid-parsers.yml */; };
 		DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */; };
 		DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */; };
 		DD9F687A20955D51004EB720 /* CatalogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687720955D51004EB720 /* CatalogEntry.swift */; };
@@ -398,6 +403,9 @@
 		DD428E171FC50FBF001649D6 /* StringsContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsContext.swift; sourceTree = "<group>"; };
 		DD428E181FC50FBF001649D6 /* SwiftGenKit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SwiftGenKit-Info.plist"; sourceTree = "<group>"; };
 		DD48AD7E2210AC5E00336621 /* ParserOptionValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserOptionValues.swift; sourceTree = "<group>"; };
+		DD75551624A0FD8600E61756 /* ConfigRunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigRunTests.swift; sourceTree = "<group>"; };
+		DD75551A24A103CB00E61756 /* Config+Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config+Run.swift"; sourceTree = "<group>"; };
+		DD75551F24A105C000E61756 /* config-invalid-parsers.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "config-invalid-parsers.yml"; sourceTree = "<group>"; };
 		DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserCLICommands.swift; sourceTree = "<group>"; };
 		DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsFileTypeParser.swift; sourceTree = "<group>"; };
 		DD9F687720955D51004EB720 /* CatalogEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogEntry.swift; sourceTree = "<group>"; };
@@ -547,10 +555,11 @@
 			isa = PBXGroup;
 			children = (
 				093405061F81537400187787 /* Configs */,
-				09030C171B6D43D400275BF5 /* TestsHelper.swift */,
-				09030BD81B6D2E5900275BF5 /* ConfigReadTests.swift */,
-				09D00A021F9BBD9F0026A755 /* ConfigLintTests.swift */,
 				09F0B0B92476EBF0003E0C75 /* ConfigInitTests.swift */,
+				09D00A021F9BBD9F0026A755 /* ConfigLintTests.swift */,
+				09030BD81B6D2E5900275BF5 /* ConfigReadTests.swift */,
+				DD75551624A0FD8600E61756 /* ConfigRunTests.swift */,
+				09030C171B6D43D400275BF5 /* TestsHelper.swift */,
 				09030BC01B6D2A8F00275BF5 /* Info.plist */,
 			);
 			path = SwiftGenTests;
@@ -567,6 +576,7 @@
 				DD40284F209FBF300045FC76 /* config-deprecated-output.yml */,
 				DD40284D209FBF300045FC76 /* config-deprecated-paths.yml */,
 				37DC602F1F98D1DA00B7B31C /* config-invalid-output.yml */,
+				DD75551F24A105C000E61756 /* config-invalid-parsers.yml */,
 				37DC602A1F98D1D900B7B31C /* config-invalid-structure.yml */,
 				37DC602E1F98D1D900B7B31C /* config-invalid-template.yml */,
 				37DC60311F98D1DA00B7B31C /* config-missing-paths.yml */,
@@ -605,11 +615,11 @@
 		379C7E901F8ECB9700267096 /* Commander */ = {
 			isa = PBXGroup;
 			children = (
-				091150301BD31A3300EBC803 /* Path+Commander.swift */,
+				093405041F8113AA00187787 /* ConfigCommands.swift */,
 				379C7E881F8ECA7000267096 /* OutputDestination.swift */,
 				DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */,
+				091150301BD31A3300EBC803 /* Path+Commander.swift */,
 				0921FBA01BE7D6B900B488B5 /* TemplateCommands.swift */,
-				093405041F8113AA00187787 /* ConfigCommands.swift */,
 			);
 			path = Commander;
 			sourceTree = "<group>";
@@ -666,12 +676,12 @@
 				379C7E901F8ECB9700267096 /* Commander */,
 				09D00A001F9BB8730026A755 /* Config */,
 				09C7B2D31BCC382800D7F488 /* main.swift */,
+				D4F73736247F621800554A9C /* Array+Parallel.swift */,
 				379C7E911F8ECC1A00267096 /* Logs.swift */,
 				0934050D1F815A8C00187787 /* ParserCLI.swift */,
 				379C7E8C1F8ECB2400267096 /* Path+CommonLocations.swift */,
 				379C7E861F8ECA0C00267096 /* TemplateRef.swift */,
 				DD2FA6BA2169401C0009CAA8 /* Version.swift */,
-				D4F73736247F621800554A9C /* Array+Parallel.swift */,
 			);
 			path = SwiftGen;
 			sourceTree = "<group>";
@@ -1073,6 +1083,7 @@
 				37DC60381F98D7DD00B7B31C /* config-missing-paths.yml in Resources */,
 				37DC60341F98D7DD00B7B31C /* config-invalid-output.yml in Resources */,
 				093405131F87AA6A00187787 /* config-with-multi-entries.yml in Resources */,
+				DD75552024A105C000E61756 /* config-invalid-parsers.yml in Resources */,
 				37DC60391F98D7DD00B7B31C /* config-missing-template.yml in Resources */,
 				846BDF9321ADB71B00DDCEE9 /* config-with-env-placeholder.yml in Resources */,
 				DD40284A209E56B50045FC76 /* config-with-multi-outputs.yml in Resources */,
@@ -1418,10 +1429,14 @@
 				379C7E8A1F8ECA8900267096 /* TemplateRef.swift in Sources */,
 				09A87B5C1BCCA37F00D9B9F5 /* ConfigReadTests.swift in Sources */,
 				379C7E931F8ECC2400267096 /* Logs.swift in Sources */,
+				DD75551E24A104D800E61756 /* OutputDestination.swift in Sources */,
+				DD75551D24A104B400E61756 /* Array+Parallel.swift in Sources */,
 				09D00A041F9BBE370026A755 /* ConfigLintTests.swift in Sources */,
 				09D00A011F9BB87F0026A755 /* ConfigEntry.swift in Sources */,
 				379C7E8E1F8ECB2D00267096 /* Path+CommonLocations.swift in Sources */,
 				0934050F1F815A9100187787 /* ParserCLI.swift in Sources */,
+				DD75551C24A1040600E61756 /* Config+Run.swift in Sources */,
+				DD75551824A0FDBD00E61756 /* ConfigRunTests.swift in Sources */,
 				0934050C1F8158EE00187787 /* Config.swift in Sources */,
 				DDB0B9C3209E3D9900E467C2 /* ConfigOutput.swift in Sources */,
 				09F0B0BA2476EBF0003E0C75 /* ConfigInitTests.swift in Sources */,
