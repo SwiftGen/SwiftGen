@@ -10,12 +10,12 @@ import StencilSwiftKit
 import SwiftGenKit
 
 extension Config {
-  func runActions(verbose: Bool) throws {
+  func runActions(verbose: Bool, logger: @escaping (LogLevel, String) -> Void = logMessage) throws {
     let commandsAndEntries = try collectCommandsAndEntries()
 
     let errors = commandsAndEntries.parallelCompactMap { cmd, entry -> Swift.Error? in
       do {
-        try run(cmd: cmd, entry: entry, verbose: verbose)
+        try run(cmd: cmd, entry: entry, verbose: verbose, logger: logger)
         return nil
       } catch {
         return error
@@ -29,18 +29,23 @@ extension Config {
     }
   }
 
-  private func run(cmd: ParserCLI, entry: ConfigEntry, verbose: Bool) throws {
+  private func run(
+    cmd: ParserCLI,
+    entry: ConfigEntry,
+    verbose: Bool,
+    logger: @escaping (LogLevel, String) -> Void
+  ) throws {
     var entry = entry
 
     entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
     if verbose {
       for item in entry.commandLine(forCommand: cmd.name) {
-        logMessage(.info, " $ \(item)")
+        logger(.info, " $ \(item)")
       }
     }
 
     try entry.checkPaths()
-    try entry.run(parserCommand: cmd)
+    try entry.run(parserCommand: cmd, logger: logger)
   }
 
   /// Flatten all commands and their corresponding entries into 1 list
@@ -59,9 +64,9 @@ extension Config {
 }
 
 extension ConfigEntry {
-  func run(parserCommand: ParserCLI) throws {
+  func run(parserCommand: ParserCLI, logger: @escaping (LogLevel, String) -> Void) throws {
     let parser = try parserCommand.parserType.init(options: options) { msg, _, _ in
-      logMessage(.warning, msg)
+      logger(.warning, msg)
     }
 
     let filter = try Filter(pattern: self.filter ?? parserCommand.parserType.defaultFilter)
@@ -69,7 +74,7 @@ extension ConfigEntry {
     let context = parser.stencilContext()
 
     for entryOutput in outputs {
-      let templateRealPath = try entryOutput.template.resolvePath(forParser: parserCommand)
+      let templateRealPath = try entryOutput.template.resolvePath(forParser: parserCommand, logger: logger)
       let template = try StencilSwiftTemplate(
         templateString: templateRealPath.read(),
         environment: stencilSwiftEnvironment()
@@ -78,7 +83,7 @@ extension ConfigEntry {
       let enriched = try StencilContext.enrich(context: context, parameters: entryOutput.parameters)
       let rendered = try template.render(enriched)
       let output = OutputDestination.file(entryOutput.output)
-      try output.write(content: rendered, onlyIfChanged: true)
+      try output.write(content: rendered, onlyIfChanged: true, logger: logger)
     }
   }
 }
