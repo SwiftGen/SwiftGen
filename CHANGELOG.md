@@ -18,7 +18,7 @@ _None_
 
 ### Internal Changes
 
-* Commands are now executed in parallel, making SwiftGen faster when multiple parsers are used.  
+* Parsers are now executed in parallel, making SwiftGen faster when multiple parsers are used. Note: only applies when using a configuration file.  
   [Marcelo Fabri](https://github.com/marcelofabri)
   [#699](https://github.com/SwiftGen/SwiftGen/issues/699)
 

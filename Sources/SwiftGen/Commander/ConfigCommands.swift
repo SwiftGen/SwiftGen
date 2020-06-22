@@ -170,9 +170,9 @@ private extension Config {
   /// Flatten all commands and their corresponding entries into 1 list
   func collectCommandsAndEntries() throws -> [(ParserCLI, ConfigEntry)] {
     try commands.keys.sorted()
-      .compactMap { cmd in
+      .map { cmd in
         guard let parserCmd = ParserCLI.command(named: cmd) else {
-          throw Config.Error.missingEntry(key: cmd)
+          throw Config.Error.unknownParser(name: cmd)
         }
         return parserCmd
       }

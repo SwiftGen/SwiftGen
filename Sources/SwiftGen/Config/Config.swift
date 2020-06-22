@@ -200,20 +200,23 @@ extension Config {
 extension Config {
   enum Error: Swift.Error, CustomStringConvertible {
     case missingEntry(key: String)
-    case wrongType(key: String?, expected: String, got: Any.Type)
-    case pathNotFound(path: Path)
     case multipleErrors([Swift.Error])
+    case pathNotFound(path: Path)
+    case unknownParser(name: String)
+    case wrongType(key: String?, expected: String, got: Any.Type)
 
     var description: String {
       switch self {
       case .missingEntry(let key):
         return "Missing entry for key \(key)."
-      case .wrongType(let key, let expected, let got):
-        return "Wrong type for key \(key ?? "root"): expected \(expected), got \(got)."
-      case .pathNotFound(let path):
-        return "File \(path) not found."
       case .multipleErrors(let errors):
         return errors.map { $0.localizedDescription }.joined(separator: "\n")
+      case .pathNotFound(let path):
+        return "File \(path) not found."
+      case .unknownParser(let name):
+        return "Parser `\(name)` does not exist."
+      case .wrongType(let key, let expected, let got):
+        return "Wrong type for key \(key ?? "root"): expected \(expected), got \(got)."
       }
     }
 

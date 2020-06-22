@@ -42,7 +42,7 @@ enum ANSIColor: UInt8, CustomStringConvertible {
 // Based on https://github.com/realm/SwiftLint/blob/0.39.2/Source/SwiftLintFramework/Extensions/QueuedPrint.swift
 
 func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
-  outputQueue.async {
+  logQueue.async {
     switch level {
     case .info:
       fputs(ANSIColor.green.format("\(string)\n"), stdout)
@@ -54,9 +54,9 @@ func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
   }
 }
 
-private let outputQueue: DispatchQueue = {
+private let logQueue: DispatchQueue = {
   let queue = DispatchQueue(
-    label: "swiftgen.outputQueue",
+    label: "swiftgen.log.queue",
     qos: .userInteractive,
     target: .global(qos: .userInteractive)
   )
