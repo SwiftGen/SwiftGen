@@ -91,6 +91,7 @@
 		DD428E271FC50FBF001649D6 /* StringsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD428E171FC50FBF001649D6 /* StringsContext.swift */; };
 		DD4738A81FE07596006CB6BB /* StencilContexts in Resources */ = {isa = PBXBuildFile; fileRef = DDDE52761FAF81DB004203BE /* StencilContexts */; };
 		DD48AD802210ACBD00336621 /* ParserOptionValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48AD7E2210AC5E00336621 /* ParserOptionValues.swift */; };
+		DD75551B24A103CB00E61756 /* Config+Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD75551A24A103CB00E61756 /* Config+Run.swift */; };
 		DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */; };
 		DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */; };
 		DD9F687A20955D51004EB720 /* CatalogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687720955D51004EB720 /* CatalogEntry.swift */; };
@@ -593,9 +594,10 @@
 			isa = PBXGroup;
 			children = (
 				0934050A1F8158B800187787 /* Config.swift */,
+				0987AC792475802700388153 /* Config+Example.swift */,
+				DD75551A24A103CB00E61756 /* Config+Run.swift */,
 				09D009FE1F9BB3450026A755 /* ConfigEntry.swift */,
 				DDB0B9C1209E390700E467C2 /* ConfigOutput.swift */,
-				0987AC792475802700388153 /* Config+Example.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -1441,6 +1443,7 @@
 				DDB0B9C2209E390700E467C2 /* ConfigOutput.swift in Sources */,
 				379C7E8D1F8ECB2400267096 /* Path+CommonLocations.swift in Sources */,
 				0934050E1F815A8C00187787 /* ParserCLI.swift in Sources */,
+				DD75551B24A103CB00E61756 /* Config+Run.swift in Sources */,
 				DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */,
 				379C7E921F8ECC1A00267096 /* Logs.swift in Sources */,
 				379C7E871F8ECA0C00267096 /* TemplateRef.swift in Sources */,

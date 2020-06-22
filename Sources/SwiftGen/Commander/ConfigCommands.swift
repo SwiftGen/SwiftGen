@@ -10,50 +10,6 @@ import PathKit
 import StencilSwiftKit
 import SwiftGenKit
 
-extension ConfigEntryOutput {
-  func checkPaths() throws {
-    guard self.output.parent().exists else {
-      throw Config.Error.pathNotFound(path: self.output.parent())
-    }
-  }
-}
-
-extension ConfigEntry {
-  func checkPaths() throws {
-    for inputPath in self.inputs {
-      guard inputPath.exists else {
-        throw Config.Error.pathNotFound(path: inputPath)
-      }
-    }
-    for output in outputs {
-      try output.checkPaths()
-    }
-  }
-
-  func run(parserCommand: ParserCLI) throws {
-    let parser = try parserCommand.parserType.init(options: options) { msg, _, _ in
-      logMessage(.warning, msg)
-    }
-
-    let filter = try Filter(pattern: self.filter ?? parserCommand.parserType.defaultFilter)
-    try parser.searchAndParse(paths: inputs, filter: filter)
-    let context = parser.stencilContext()
-
-    for entryOutput in outputs {
-      let templateRealPath = try entryOutput.template.resolvePath(forParser: parserCommand)
-      let template = try StencilSwiftTemplate(
-        templateString: templateRealPath.read(),
-        environment: stencilSwiftEnvironment()
-      )
-
-      let enriched = try StencilContext.enrich(context: context, parameters: entryOutput.parameters)
-      let rendered = try template.render(enriched)
-      let output = OutputDestination.file(entryOutput.output)
-      try output.write(content: rendered, onlyIfChanged: true)
-    }
-  }
-}
-
 // MARK: - Commands
 
 enum ConfigCLI {
@@ -95,7 +51,7 @@ enum ConfigCLI {
           logMessage(.info, "Executing configuration file \(file)")
         }
         try file.parent().chdir {
-          try config.runCommands(verbose: verbose)
+          try config.runActions(verbose: verbose)
         }
       }
     } catch let error as Config.Error {
@@ -104,7 +60,7 @@ enum ConfigCLI {
     }
   }
 
-  // MARK: - Init/Create
+  // MARK: Init/Create
 
   static let create = command(
     CLIOption.configFile(checkExists: false),
@@ -128,57 +84,6 @@ enum ConfigCLI {
     let docURL = gitHubDocURL(version: Version.swiftgen, path: "ConfigFile.md")
     logMessage(.info, "Open documentation at: \(docURL)")
     NSWorkspace.shared.open(docURL)
-  }
-}
-
-// MARK: - Parallel commands
-
-private extension Config {
-  func runCommands(verbose: Bool) throws {
-    let commandsAndEntries = try collectCommandsAndEntries()
-
-    let errors = commandsAndEntries.parallelCompactMap { cmd, entry -> Swift.Error? in
-      do {
-        try run(cmd: cmd, entry: entry, verbose: verbose)
-        return nil
-      } catch {
-        return error
-      }
-    }
-
-    if errors.count == 1 {
-      throw errors[0]
-    } else if errors.count > 1 {
-      throw Error.multipleErrors(errors)
-    }
-  }
-
-  func run(cmd: ParserCLI, entry: ConfigEntry, verbose: Bool) throws {
-    var entry = entry
-
-    entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
-    if verbose {
-      for item in entry.commandLine(forCommand: cmd.name) {
-        logMessage(.info, " $ \(item)")
-      }
-    }
-
-    try entry.checkPaths()
-    try entry.run(parserCommand: cmd)
-  }
-
-  /// Flatten all commands and their corresponding entries into 1 list
-  func collectCommandsAndEntries() throws -> [(ParserCLI, ConfigEntry)] {
-    try commands.keys.sorted()
-      .map { cmd in
-        guard let parserCmd = ParserCLI.command(named: cmd) else {
-          throw Config.Error.unknownParser(name: cmd)
-        }
-        return parserCmd
-      }
-      .flatMap { cmd in
-        (commands[cmd.name] ?? []).map { (cmd, $0) }
-      }
   }
 }
 
