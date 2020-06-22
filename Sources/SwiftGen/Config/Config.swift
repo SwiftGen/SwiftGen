@@ -11,9 +11,9 @@ import SwiftGenKit
 // MARK: - Config
 
 struct Config {
-  enum Keys {
-    static let inputDir = "input_dir"
-    static let outputDir = "output_dir"
+  enum Keys: String {
+    case inputDir = "input_dir"
+    case outputDir = "output_dir"
   }
 
   let inputDir: Path?
@@ -57,11 +57,13 @@ extension Config {
     guard let config = yaml as? [String: Any] else {
       throw Config.Error.wrongType(key: nil, expected: "Dictionary", got: type(of: yaml))
     }
-    self.inputDir = (config[Keys.inputDir] as? String).map { Path($0) }
-    self.outputDir = (config[Keys.outputDir] as? String).map { Path($0) }
+    self.inputDir = (config[Keys.inputDir.rawValue] as? String).map { Path($0) }
+    self.outputDir = (config[Keys.outputDir.rawValue] as? String).map { Path($0) }
+
     var cmds: [String: [ConfigEntry]] = [:]
-    for parserCmd in ParserCLI.allCommands {
-      if let cmdEntry = config[parserCmd.name] {
+    var errors: [Error] = []
+    for (cmdName, cmdEntry) in config.filter({ Keys(rawValue: $0.0) == nil }).sorted(by: { $0.0 < $1.0 }) {
+      if let parserCmd = ParserCLI.command(named: cmdName) {
         do {
           cmds[parserCmd.name] = try ConfigEntry.parseCommandEntry(
             yaml: cmdEntry,
@@ -70,11 +72,18 @@ extension Config {
           )
         } catch let error as Config.Error {
           // Prefix the name of the command for a better error message
-          throw error.withKeyPrefixed(by: parserCmd.name)
+          errors.append(error.withKeyPrefixed(by: parserCmd.name))
         }
+      } else {
+        errors.append(Config.Error.unknownParser(name: cmdName))
       }
     }
-    self.commands = cmds
+
+    if errors.isEmpty {
+      self.commands = cmds
+    } else {
+      throw Error.multipleErrors(errors)
+    }
   }
 }
 
@@ -210,7 +219,7 @@ extension Config {
       case .missingEntry(let key):
         return "Missing entry for key \(key)."
       case .multipleErrors(let errors):
-        return errors.map { $0.localizedDescription }.joined(separator: "\n")
+        return errors.map { String(describing: $0) }.joined(separator: "\n")
       case .pathNotFound(let path):
         return "File \(path) not found."
       case .unknownParser(let name):
