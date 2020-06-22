@@ -89,8 +89,8 @@ extension Config {
         """
     }
 
-    static func deprecatedAction(_ action: String, for replacement: String) -> String {
-      "`\(action)` action has been deprecated, please use `\(replacement)` instead."
+    static func deprecatedParser(_ parser: String, for replacement: String) -> String {
+      "`\(parser)` parser has been deprecated, please use `\(replacement)` instead."
     }
 
     static func doesntExist(_ path: CustomStringConvertible) -> String {
@@ -123,7 +123,7 @@ extension Config {
 
     for (cmd, entries) in commands {
       if let replacement = Config.deprecatedCommands[cmd] {
-        logger(.warning, Message.deprecatedAction(cmd, for: replacement))
+        logger(.warning, Message.deprecatedParser(cmd, for: replacement))
       }
 
       if let parserCmd = ParserCLI.command(named: cmd) {
@@ -133,7 +133,7 @@ extension Config {
           lint(cmd: parserCmd, entry: entry, logger: logger)
         }
       } else {
-        logger(.error, "Action `\(cmd)` does not exist.")
+        logger(.error, "Parser `\(cmd)` does not exist.")
       }
     }
   }

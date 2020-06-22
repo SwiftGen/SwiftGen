@@ -188,7 +188,7 @@ class ConfigLintTests: XCTestCase {
   func testDeprecatedCommands() {
     _testLint(
       fixture: "config-deprecated-commands",
-      expectedLogs: [(.warning, Config.Message.deprecatedAction("storyboards", for: "ib"))],
+      expectedLogs: [(.warning, Config.Message.deprecatedParser("storyboards", for: "ib"))],
       assertionMessage: "Linter should warn about deprecated commands"
     )
   }
