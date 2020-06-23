@@ -18,7 +18,7 @@ class ConfigInitTests: XCTestCase {
 
       XCTAssertEqual(config.inputDir, "MyLib/Sources/")
       XCTAssertEqual(config.outputDir, "MyLib/Generated/")
-      XCTAssertEqual(Set(config.commands.keys), ["strings", "xcassets", "ib"])
+      XCTAssertEqual(config.commandNames, ["strings", "xcassets", "ib"])
 
       // Lint the config to check it doesn't have any lint errors other than the ones from placeholder values
       let expectedErrors = [

@@ -11,9 +11,7 @@ import SwiftGenKit
 
 extension Config {
   func runActions(verbose: Bool, logger: (LogLevel, String) -> Void = logMessage) throws {
-    let commandsAndEntries = try collectCommandsAndEntries()
-
-    let errors = commandsAndEntries.parallelCompactMap { cmd, entry -> Swift.Error? in
+    let errors = commands.parallelCompactMap { cmd, entry -> Swift.Error? in
       do {
         try run(cmd: cmd, entry: entry, verbose: verbose, logger: logger)
         return nil
@@ -46,20 +44,6 @@ extension Config {
 
     try entry.checkPaths()
     try entry.run(parserCommand: cmd, logger: logger)
-  }
-
-  /// Flatten all commands and their corresponding entries into 1 list
-  private func collectCommandsAndEntries() throws -> [(ParserCLI, ConfigEntry)] {
-    try commands.keys.sorted()
-      .map { cmd in
-        guard let parserCmd = ParserCLI.command(named: cmd) else {
-          throw Config.Error.unknownParser(name: cmd)
-        }
-        return parserCmd
-      }
-      .flatMap { cmd in
-        (commands[cmd.name] ?? []).map { (cmd, $0) }
-      }
   }
 }
 

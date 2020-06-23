@@ -18,8 +18,7 @@ struct Config {
 
   let inputDir: Path?
   let outputDir: Path?
-  let commands: [String: [ConfigEntry]]
-
+  let commands: [(command: ParserCLI, entry: ConfigEntry)]
   let sourcePath: Path
 }
 
@@ -60,16 +59,17 @@ extension Config {
     self.inputDir = (config[Keys.inputDir.rawValue] as? String).map { Path($0) }
     self.outputDir = (config[Keys.outputDir.rawValue] as? String).map { Path($0) }
 
-    var cmds: [String: [ConfigEntry]] = [:]
+    var cmds: [(ParserCLI, ConfigEntry)] = []
     var errors: [Error] = []
     for (cmdName, cmdEntry) in config.filter({ Keys(rawValue: $0.0) == nil }).sorted(by: { $0.0 < $1.0 }) {
       if let parserCmd = ParserCLI.command(named: cmdName) {
         do {
-          cmds[parserCmd.name] = try ConfigEntry.parseCommandEntry(
+          cmds += try ConfigEntry.parseCommandEntry(
             yaml: cmdEntry,
             cmd: parserCmd.name,
             logger: logger
           )
+            .map { (parserCmd, $0) }
         } catch let error as Config.Error {
           // Prefix the name of the command for a better error message
           errors.append(error.withKeyPrefixed(by: parserCmd.name))
@@ -130,19 +130,18 @@ extension Config {
       logger(.error, "output_dir: Output directory \(Message.doesntExist(outputDir))")
     }
 
-    for (cmd, entries) in commands {
-      if let replacement = Config.deprecatedCommands[cmd] {
-        logger(.warning, Message.deprecatedParser(cmd, for: replacement))
+    let groupedCommands: [ParserCLI: [ConfigEntry]] = Dictionary(grouping: commands) { $0.command }
+      .mapValues { $0.map { $0.entry } }
+
+    for (cmd, entries) in groupedCommands {
+      if let replacement = Config.deprecatedCommands[cmd.name] {
+        logger(.warning, Message.deprecatedParser(cmd.name, for: replacement))
       }
 
-      if let parserCmd = ParserCLI.command(named: cmd) {
-        let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
-        logger(.info, "> \(entriesCount) for command \(cmd):")
-        for entry in entries {
-          lint(cmd: parserCmd, entry: entry, logger: logger)
-        }
-      } else {
-        logger(.error, "Parser `\(cmd)` does not exist.")
+      let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
+      logger(.info, "> \(entriesCount) for command \(cmd.name):")
+      for entry in entries {
+        lint(cmd: cmd, entry: entry, logger: logger)
       }
     }
   }
