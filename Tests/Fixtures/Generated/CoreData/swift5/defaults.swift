@@ -20,7 +20,7 @@ internal class AbstractEntity: NSManagedObject {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<AbstractEntity> {
+  @nonobjc internal class func createFetchRequest() -> NSFetchRequest<AbstractEntity> {
     return NSFetchRequest<AbstractEntity>(entityName: entityName)
   }
 
@@ -47,7 +47,7 @@ internal class ChildEntity: MainEntity {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<ChildEntity> {
+  @nonobjc internal class func createFetchRequest() -> NSFetchRequest<ChildEntity> {
     return NSFetchRequest<ChildEntity>(entityName: entityName)
   }
 
@@ -70,7 +70,7 @@ internal class MainEntity: NSManagedObject {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<MainEntity> {
+  @nonobjc internal class func createFetchRequest() -> NSFetchRequest<MainEntity> {
     return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
@@ -332,7 +332,7 @@ internal class NewEntity: AbstractEntity {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<NewEntity> {
+  @nonobjc internal class func createFetchRequest() -> NSFetchRequest<NewEntity> {
     return NSFetchRequest<NewEntity>(entityName: entityName)
   }
 
@@ -352,7 +352,7 @@ internal class SecondaryEntity: NSManagedObject {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<SecondaryEntity> {
+  @nonobjc internal class func createFetchRequest() -> NSFetchRequest<SecondaryEntity> {
     return NSFetchRequest<SecondaryEntity>(entityName: entityName)
   }
 
