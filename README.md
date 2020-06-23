@@ -120,7 +120,6 @@ $ mint install SwiftGen/SwiftGen
 ```
 ---
 </details>
-
 <details>
 <summary><strong>Compile from source</strong> <em>(only recommended if you need features from the `stable` branch or want to test a PR)</em></summary>
 
@@ -165,6 +164,16 @@ Or add the path to the `bin` folder to your `$PATH` and invoke `swiftgen` direct
 
 ---
 </details>
+
+### Known Installation Issues On macOS Before 10.14.4
+
+Starting with [SwiftGen 6.2.1](https://github.com/SwiftGen/SwiftGen/releases/6.2.1), if you get an error similar to `dyld: Symbol not found: _$s11SubSequenceSlTl` when running SwiftGen, you'll need to install the [Swift 5 Runtime Support for Command Line Tools](https://support.apple.com/kb/DL1998).
+
+Alternatively, you can:
+
+- Update to macOS 10.14.4 or later
+- Install Xcode 10.2 or later at `/Applications/Xcode.app`
+- Rebuild SwiftGen from source using Xcode 10.2 or later
 
 ## Configuration File
 
