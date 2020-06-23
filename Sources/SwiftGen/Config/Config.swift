@@ -149,7 +149,7 @@ extension Config {
 
   private func lint(cmd: ParserCLI, entry: ConfigEntry, logger: (LogLevel, String) -> Void) {
     var entry = entry
-    entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
+    entry.makeRelativeTo(inputDir: inputDir, outputDir: outputDir)
 
     for inputPath in entry.inputs {
       let finalPath: Path

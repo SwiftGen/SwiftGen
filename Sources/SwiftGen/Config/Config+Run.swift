@@ -37,7 +37,7 @@ extension Config {
   ) throws {
     var entry = entry
 
-    entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
+    entry.makeRelativeTo(inputDir: inputDir, outputDir: outputDir)
     if verbose {
       for item in entry.commandLine(forCommand: cmd.name) {
         logger(.info, " $ \(item)")
