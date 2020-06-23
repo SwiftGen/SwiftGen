@@ -21,6 +21,11 @@ internal class AbstractEntity: NSManagedObject {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
+  @available(*, deprecated, renamed: "createFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `createFetchRequest()` instead.")
+  @nonobjc internal class func fetchRequest() -> NSFetchRequest<AbstractEntity> {
+    return NSFetchRequest<AbstractEntity>(entityName: entityName)
+  }
+
   @nonobjc internal class func createFetchRequest() -> NSFetchRequest<AbstractEntity> {
     return NSFetchRequest<AbstractEntity>(entityName: entityName)
   }
@@ -49,6 +54,11 @@ internal class ChildEntity: MainEntity {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
+  @available(*, deprecated, renamed: "createFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `createFetchRequest()` instead.")
+  @nonobjc internal class func fetchRequest() -> NSFetchRequest<ChildEntity> {
+    return NSFetchRequest<ChildEntity>(entityName: entityName)
+  }
+
   @nonobjc internal class func createFetchRequest() -> NSFetchRequest<ChildEntity> {
     return NSFetchRequest<ChildEntity>(entityName: entityName)
   }
@@ -71,6 +81,11 @@ internal class MainEntity: NSManagedObject {
 
   internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
+  }
+
+  @available(*, deprecated, renamed: "createFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `createFetchRequest()` instead.")
+  @nonobjc internal class func fetchRequest() -> NSFetchRequest<MainEntity> {
+    return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
   @nonobjc internal class func createFetchRequest() -> NSFetchRequest<MainEntity> {
@@ -336,6 +351,11 @@ internal class NewEntity: AbstractEntity {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
+  @available(*, deprecated, renamed: "createFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `createFetchRequest()` instead.")
+  @nonobjc internal class func fetchRequest() -> NSFetchRequest<NewEntity> {
+    return NSFetchRequest<NewEntity>(entityName: entityName)
+  }
+
   @nonobjc internal class func createFetchRequest() -> NSFetchRequest<NewEntity> {
     return NSFetchRequest<NewEntity>(entityName: entityName)
   }
@@ -355,6 +375,11 @@ internal class SecondaryEntity: NSManagedObject {
 
   internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
+  }
+
+  @available(*, deprecated, renamed: "createFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `createFetchRequest()` instead.")
+  @nonobjc internal class func fetchRequest() -> NSFetchRequest<SecondaryEntity> {
+    return NSFetchRequest<SecondaryEntity>(entityName: entityName)
   }
 
   @nonobjc internal class func createFetchRequest() -> NSFetchRequest<SecondaryEntity> {
