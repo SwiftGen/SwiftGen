@@ -8,6 +8,7 @@
 
 * CoreData: Changes `fetchRequest` auto-generated method to `createFetchRequest` to avoid ambiguous function usage.  
   [David Rothera](https://github.com/davidrothera)
+  [#726](https://github.com/SwiftGen/SwiftGen/pull/726)
 
 ### New Features
 
