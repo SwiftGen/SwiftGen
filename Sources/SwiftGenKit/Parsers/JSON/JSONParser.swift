@@ -31,7 +31,7 @@ public enum JSON {
       self.warningHandler = warningHandler
     }
 
-    public static let defaultFilter = "[^/]\\.(?i:json)$"
+    public static let defaultFilter = filterRegex(forExtensions: ["json"])
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       files.append(try File(path: path, relativeTo: parent))

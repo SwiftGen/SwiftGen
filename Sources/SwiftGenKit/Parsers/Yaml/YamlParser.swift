@@ -32,7 +32,7 @@ public enum Yaml {
       self.warningHandler = warningHandler
     }
 
-    public static let defaultFilter = "[^/]\\.(?i:ya?ml)$"
+    public static let defaultFilter = filterRegex(forExtensions: ["yaml", "yml"])
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       files.append(try File(path: path, relativeTo: parent))

@@ -19,7 +19,7 @@ public enum Fonts {
       self.warningHandler = warningHandler
     }
 
-    public static let defaultFilter = "[^/]\\.(?i:otf|ttc|ttf)$"
+    public static let defaultFilter = filterRegex(forExtensions: ["otf", "ttc", "ttf"])
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       guard let values = try? path.url.resourceValues(forKeys: [.typeIdentifierKey]),
