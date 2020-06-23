@@ -21,36 +21,17 @@ final class ConfigLintTests: XCTestCase {
     guard let path = bundle.path(forResource: fixture, ofType: "yml") else {
       fatalError("Fixture \(fixture) not found")
     }
-    var missingLogs = expectedLogs
     let configFile = Path(path)
-    do {
-      let logger = { (level: LogLevel, msg: String) -> Void in
-        if let idx = missingLogs.firstIndex(where: { $0 == level && $1 == msg }) {
-          missingLogs.remove(at: idx)
-        } else if unwantedLevels.contains(level) {
-          XCTFail("Unexpected log: \(msg)", file: file, line: line)
-        }
-      }
+    let logger = TestLogger(expectedLogs: expectedLogs, unwantedLevels: unwantedLevels, file: file, line: line)
 
-      let config = try Config(file: configFile, logger: logger)
-      config.lint(logger: logger)
+    do {
+      let config = try Config(file: configFile, logger: logger.log)
+      config.lint(logger: logger.log)
     } catch let error {
-      if let idx = missingLogs.firstIndex(where: { $0 == .error && $1 == String(describing: error) }) {
-        missingLogs.remove(at: idx)
-      } else {
-        XCTFail("Unexpected error: \(error)", file: file, line: line)
-      }
+      logger.handleError(error)
     }
-    XCTAssertTrue(
-      missingLogs.isEmpty,
-      """
-      \(assertionMessage)
-      The following logs were expected but never received:
-      \(missingLogs.map { "\($0) - \($1)" }.joined(separator: "\n"))
-      """,
-      file: file,
-      line: line
-    )
+
+    logger.waitAndAssert(message: assertionMessage)
   }
 
   func testAbsolutePathDirect() {

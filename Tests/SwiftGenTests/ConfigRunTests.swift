@@ -22,51 +22,21 @@ final class ConfigRunTests: XCTestCase {
     guard let path = bundle.path(forResource: fixture, ofType: "yml") else {
       fatalError("Fixture \(fixture) not found")
     }
-    var missingLogs = expectedLogs
     let configFile = Path(path)
-    let logQueue = DispatchQueue(label: "swiftgen.log.queue")
-
-    func log(level: LogLevel, msg: String) {
-      logQueue.async {
-        if let idx = missingLogs.firstIndex(where: { $0 == level && $1 == msg }) {
-          missingLogs.remove(at: idx)
-        } else if unwantedLevels.contains(level) {
-          XCTFail("Unexpected log: \(msg)", file: file, line: line)
-        }
-      }
-    }
-
-    func handleError(_ error: Error) {
-      if let idx = missingLogs.firstIndex(where: { $0 == .error && $1 == String(describing: error) }) {
-        missingLogs.remove(at: idx)
-      } else {
-        XCTFail("Unexpected error: \(error)", file: file, line: line)
-      }
-    }
+    let logger = TestLogger(expectedLogs: expectedLogs, unwantedLevels: unwantedLevels, file: file, line: line)
 
     do {
-      let config = try Config(file: configFile, logger: log)
-
+      let config = try Config(file: configFile, logger: logger.log)
       try configFile.parent().chdir {
-        try config.runActions(verbose: true, logger: log)
+        try config.runActions(verbose: true, logger: logger.log)
       }
     } catch Config.Error.multipleErrors(let errors) {
-      errors.forEach(handleError)
+      errors.forEach(logger.handleError)
     } catch let error {
-      handleError(error)
+      logger.handleError(error)
     }
 
-    logQueue.sync(flags: .barrier) {}
-    XCTAssertTrue(
-      missingLogs.isEmpty,
-      """
-      \(assertionMessage)
-      The following logs were expected but never received:
-      \(missingLogs.map { "\($0) - \($1)" }.joined(separator: "\n"))
-      """,
-      file: file,
-      line: line
-    )
+    logger.waitAndAssert(message: assertionMessage)
   }
 
   func testMultipleErrors() {
