@@ -7,13 +7,13 @@
 import StencilSwiftKit
 import XCTest
 
-class StringsTests: XCTestCase {
-  enum Contexts {
+final class StringsTests: XCTestCase {
+  private enum Contexts {
     static let all = ["empty", "localizable", "multiple"]
   }
 
   // generate variations to test customname generation
-  let variations: VariationGenerator = { name, context in
+  private let variations: VariationGenerator = { name, context in
     guard name == "localizable" else { return [(context: context, suffix: "")] }
 
     return [

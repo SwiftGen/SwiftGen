@@ -1,0 +1,10 @@
+foo:
+  inputs: Sources1/Folder
+  outputs:
+    templateName: swift5
+    output: foo.swift
+bar:
+  inputs: Sources1/Folder
+  outputs:
+    templateName: swift5
+    output: bar.swift

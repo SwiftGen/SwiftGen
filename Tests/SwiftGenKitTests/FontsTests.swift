@@ -9,7 +9,7 @@ import PathKit
 @testable import SwiftGenKit
 import XCTest
 
-class FontsTests: XCTestCase {
+final class FontsTests: XCTestCase {
   func testEmpty() throws {
     let parser = try Fonts.Parser()
 

@@ -39,16 +39,37 @@ enum ANSIColor: UInt8, CustomStringConvertible {
   }
 }
 
+// Based on https://github.com/realm/SwiftLint/blob/0.39.2/Source/SwiftLintFramework/Extensions/QueuedPrint.swift
+
 func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
-  switch level {
-  case .info:
-    fputs(ANSIColor.green.format("\(string)\n"), stdout)
-  case .warning:
-    fputs(ANSIColor.yellow.format("swiftgen: warning: \(string)\n"), stderr)
-  case .error:
-    fputs(ANSIColor.red.format("swiftgen: error: \(string)\n"), stderr)
+  logQueue.async {
+    switch level {
+    case .info:
+      fputs(ANSIColor.green.format("\(string)\n"), stdout)
+    case .warning:
+      fputs(ANSIColor.yellow.format("swiftgen: warning: \(string)\n"), stderr)
+    case .error:
+      fputs(ANSIColor.red.format("swiftgen: error: \(string)\n"), stderr)
+    }
   }
 }
+
+private let logQueue: DispatchQueue = {
+  let queue = DispatchQueue(
+    label: "swiftgen.log.queue",
+    qos: .userInteractive,
+    target: .global(qos: .userInteractive)
+  )
+
+  // Make sure all the logs are printed before exiting the program
+  #if !os(Linux)
+  atexit_b {
+    queue.sync(flags: .barrier) {}
+  }
+  #endif
+
+  return queue
+}()
 
 struct ErrorPrettifier: Error, CustomStringConvertible {
   let nsError: NSError

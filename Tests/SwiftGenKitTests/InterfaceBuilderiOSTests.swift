@@ -7,7 +7,7 @@
 @testable import SwiftGenKit
 import XCTest
 
-class InterfaceBuilderiOSTests: XCTestCase {
+final class InterfaceBuilderiOSTests: XCTestCase {
   func testEmpty() throws {
     let parser = try InterfaceBuilder.Parser()
 
