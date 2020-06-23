@@ -28,7 +28,7 @@ final class ConfigRunTests: XCTestCase {
     do {
       let config = try Config(file: configFile, logger: logger.log)
       try configFile.parent().chdir {
-        try config.runActions(verbose: true, logger: logger.log)
+        try config.runCommands(verbose: true, logger: logger.log)
       }
     } catch Config.Error.multipleErrors(let errors) {
       errors.forEach(logger.handleError)

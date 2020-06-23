@@ -10,10 +10,10 @@ import StencilSwiftKit
 import SwiftGenKit
 
 extension Config {
-  func runActions(verbose: Bool, logger: (LogLevel, String) -> Void = logMessage) throws {
+  func runCommands(verbose: Bool, logger: (LogLevel, String) -> Void = logMessage) throws {
     let errors = commands.parallelCompactMap { cmd, entry -> Swift.Error? in
       do {
-        try run(cmd: cmd, entry: entry, verbose: verbose, logger: logger)
+        try run(parserCommand: cmd, entry: entry, verbose: verbose, logger: logger)
         return nil
       } catch {
         return error
@@ -28,7 +28,7 @@ extension Config {
   }
 
   private func run(
-    cmd: ParserCLI,
+    parserCommand: ParserCLI,
     entry: ConfigEntry,
     verbose: Bool,
     logger: (LogLevel, String) -> Void
@@ -37,13 +37,13 @@ extension Config {
 
     entry.makeRelativeTo(inputDir: inputDir, outputDir: outputDir)
     if verbose {
-      for item in entry.commandLine(forCommand: cmd.name) {
+      for item in entry.commandLine(forCommand: parserCommand.name) {
         logger(.info, " $ \(item)")
       }
     }
 
     try entry.checkPaths()
-    try entry.run(parserCommand: cmd, logger: logger)
+    try entry.run(parserCommand: parserCommand, logger: logger)
   }
 }
 

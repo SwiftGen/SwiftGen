@@ -51,7 +51,7 @@ enum ConfigCLI {
           logMessage(.info, "Executing configuration file \(file)")
         }
         try file.parent().chdir {
-          try config.runActions(verbose: verbose)
+          try config.runCommands(verbose: verbose)
         }
       }
     } catch let error as Config.Error {
