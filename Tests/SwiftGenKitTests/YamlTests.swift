@@ -8,7 +8,7 @@ import PathKit
 @testable import SwiftGenKit
 import XCTest
 
-class YamlTests: XCTestCase {
+final class YamlTests: XCTestCase {
   func testEmpty() throws {
     let parser = try Yaml.Parser()
 

@@ -8,7 +8,7 @@ import PathKit
 @testable import SwiftGenKit
 import XCTest
 
-class PlistTests: XCTestCase {
+final class PlistTests: XCTestCase {
   func testEmpty() throws {
     let parser = try Plist.Parser()
 

@@ -11,15 +11,14 @@ import SwiftGenKit
 // MARK: - Config
 
 struct Config {
-  enum Keys {
-    static let inputDir = "input_dir"
-    static let outputDir = "output_dir"
+  enum Keys: String {
+    case inputDir = "input_dir"
+    case outputDir = "output_dir"
   }
 
   let inputDir: Path?
   let outputDir: Path?
-  let commands: [String: [ConfigEntry]]
-
+  let commands: [(command: ParserCLI, entry: ConfigEntry)]
   let sourcePath: Path
 }
 
@@ -57,24 +56,34 @@ extension Config {
     guard let config = yaml as? [String: Any] else {
       throw Config.Error.wrongType(key: nil, expected: "Dictionary", got: type(of: yaml))
     }
-    self.inputDir = (config[Keys.inputDir] as? String).map { Path($0) }
-    self.outputDir = (config[Keys.outputDir] as? String).map { Path($0) }
-    var cmds: [String: [ConfigEntry]] = [:]
-    for parserCmd in ParserCLI.allCommands {
-      if let cmdEntry = config[parserCmd.name] {
+    self.inputDir = (config[Keys.inputDir.rawValue] as? String).map { Path($0) }
+    self.outputDir = (config[Keys.outputDir.rawValue] as? String).map { Path($0) }
+
+    var cmds: [(ParserCLI, ConfigEntry)] = []
+    var errors: [Error] = []
+    for (cmdName, cmdEntry) in config.filter({ Keys(rawValue: $0.0) == nil }).sorted(by: { $0.0 < $1.0 }) {
+      if let parserCmd = ParserCLI.command(named: cmdName) {
         do {
-          cmds[parserCmd.name] = try ConfigEntry.parseCommandEntry(
+          cmds += try ConfigEntry.parseCommandEntry(
             yaml: cmdEntry,
             cmd: parserCmd.name,
             logger: logger
           )
+            .map { (parserCmd, $0) }
         } catch let error as Config.Error {
           // Prefix the name of the command for a better error message
-          throw error.withKeyPrefixed(by: parserCmd.name)
+          errors.append(error.withKeyPrefixed(by: parserCmd.name))
         }
+      } else {
+        errors.append(Config.Error.unknownParser(name: cmdName))
       }
     }
-    self.commands = cmds
+
+    if errors.isEmpty {
+      self.commands = cmds
+    } else {
+      throw Error.multipleErrors(errors)
+    }
   }
 }
 
@@ -89,8 +98,8 @@ extension Config {
         """
     }
 
-    static func deprecatedAction(_ action: String, for replacement: String) -> String {
-      "`\(action)` action has been deprecated, please use `\(replacement)` instead."
+    static func deprecatedParser(_ parser: String, for replacement: String) -> String {
+      "`\(parser)` parser has been deprecated, please use `\(replacement)` instead."
     }
 
     static func doesntExist(_ path: CustomStringConvertible) -> String {
@@ -121,26 +130,25 @@ extension Config {
       logger(.error, "output_dir: Output directory \(Message.doesntExist(outputDir))")
     }
 
-    for (cmd, entries) in commands {
-      if let replacement = Config.deprecatedCommands[cmd] {
-        logger(.warning, Message.deprecatedAction(cmd, for: replacement))
+    let groupedCommands: [ParserCLI: [ConfigEntry]] = Dictionary(grouping: commands) { $0.command }
+      .mapValues { $0.map { $0.entry } }
+
+    for (cmd, entries) in groupedCommands {
+      if let replacement = Config.deprecatedCommands[cmd.name] {
+        logger(.warning, Message.deprecatedParser(cmd.name, for: replacement))
       }
 
-      if let parserCmd = ParserCLI.command(named: cmd) {
-        let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
-        logger(.info, "> \(entriesCount) for command \(cmd):")
-        for entry in entries {
-          lint(cmd: parserCmd, entry: entry, logger: logger)
-        }
-      } else {
-        logger(.error, "Action `\(cmd)` does not exist.")
+      let entriesCount = "\(entries.count) " + (entries.count > 1 ? "entries" : "entry")
+      logger(.info, "> \(entriesCount) for command \(cmd.name):")
+      for entry in entries {
+        lint(cmd: cmd, entry: entry, logger: logger)
       }
     }
   }
 
   private func lint(cmd: ParserCLI, entry: ConfigEntry, logger: (LogLevel, String) -> Void) {
     var entry = entry
-    entry.makingRelativeTo(inputDir: inputDir, outputDir: outputDir)
+    entry.makeRelativeTo(inputDir: inputDir, outputDir: outputDir)
 
     for inputPath in entry.inputs {
       let finalPath: Path
@@ -177,7 +185,7 @@ extension Config {
   private func lint(cmd: ParserCLI, output entryOutput: ConfigEntryOutput, logger: (LogLevel, String) -> Void) {
     do {
       let actualCmd = Config.deprecatedCommands[cmd.name].flatMap(ParserCLI.command(named:)) ?? cmd
-      _ = try entryOutput.template.resolvePath(forParser: actualCmd)
+      _ = try entryOutput.template.resolvePath(forParser: actualCmd, logger: logger)
     } catch let error {
       logger(.error, "\(cmd.name).outputs: \(error)")
     }
@@ -200,17 +208,23 @@ extension Config {
 extension Config {
   enum Error: Swift.Error, CustomStringConvertible {
     case missingEntry(key: String)
-    case wrongType(key: String?, expected: String, got: Any.Type)
+    case multipleErrors([Swift.Error])
     case pathNotFound(path: Path)
+    case unknownParser(name: String)
+    case wrongType(key: String?, expected: String, got: Any.Type)
 
     var description: String {
       switch self {
       case .missingEntry(let key):
         return "Missing entry for key \(key)."
-      case .wrongType(let key, let expected, let got):
-        return "Wrong type for key \(key ?? "root"): expected \(expected), got \(got)."
+      case .multipleErrors(let errors):
+        return errors.map { String(describing: $0) }.joined(separator: "\n")
       case .pathNotFound(let path):
         return "File \(path) not found."
+      case .unknownParser(let name):
+        return "Parser `\(name)` does not exist."
+      case .wrongType(let key, let expected, let got):
+        return "Wrong type for key \(key ?? "root"): expected \(expected), got \(got)."
       }
     }
 

@@ -8,7 +8,7 @@ import PathKit
 @testable import SwiftGenKit
 import XCTest
 
-final class TestFileParser1: ColorsFileTypeParser {
+private final class TestFileParser1: ColorsFileTypeParser {
   init(options: ParserOptionValues) {}
   static let extensions = ["test1"]
   func parseFile(at path: Path) throws -> Colors.Palette {
@@ -16,7 +16,7 @@ final class TestFileParser1: ColorsFileTypeParser {
   }
 }
 
-final class TestFileParser2: ColorsFileTypeParser {
+private final class TestFileParser2: ColorsFileTypeParser {
   init(options: ParserOptionValues) {}
   static let extensions = ["test2"]
   func parseFile(at path: Path) throws -> Colors.Palette {
@@ -24,7 +24,7 @@ final class TestFileParser2: ColorsFileTypeParser {
   }
 }
 
-final class TestFileParser3: ColorsFileTypeParser {
+private final class TestFileParser3: ColorsFileTypeParser {
   init(options: ParserOptionValues) {}
   static let extensions = ["test1"]
   func parseFile(at path: Path) throws -> Colors.Palette {
@@ -32,7 +32,7 @@ final class TestFileParser3: ColorsFileTypeParser {
   }
 }
 
-class ColorParserTests: XCTestCase {
+final class ColorParserTests: XCTestCase {
   func testEmpty() throws {
     let parser = try Colors.Parser()
 
