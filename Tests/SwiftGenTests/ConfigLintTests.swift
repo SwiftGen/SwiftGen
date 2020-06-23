@@ -7,8 +7,10 @@
 import PathKit
 import XCTest
 
-class ConfigLintTests: XCTestCase {
-  private func _testLint(
+final class ConfigLintTests: XCTestCase {
+  private lazy var bundle = Bundle(for: type(of: self))
+
+  private func testLint(
     fixture: String,
     expectedLogs: [(LogLevel, String)],
     unwantedLevels: Set<LogLevel> = [],
@@ -16,7 +18,7 @@ class ConfigLintTests: XCTestCase {
     file: StaticString = #file,
     line: UInt = #line
   ) {
-    guard let path = Bundle(for: type(of: self)).path(forResource: fixture, ofType: "yml") else {
+    guard let path = bundle.path(forResource: fixture, ofType: "yml") else {
       fatalError("Fixture \(fixture) not found")
     }
     var missingLogs = expectedLogs
@@ -61,7 +63,7 @@ class ConfigLintTests: XCTestCase {
       ]
     }
 
-    _testLint(
+    testLint(
       fixture: "config-absolute-paths-direct",
       expectedLogs: logs,
       assertionMessage: "Linter should warn when paths are absolute."
@@ -80,7 +82,7 @@ class ConfigLintTests: XCTestCase {
       ]
     }
 
-    _testLint(
+    testLint(
       fixture: "config-absolute-paths-prefix",
       expectedLogs: logs,
       assertionMessage: "Linter should warn when paths are absolute."
@@ -88,7 +90,7 @@ class ConfigLintTests: XCTestCase {
   }
 
   func testMissingSources() {
-    _testLint(
+    testLint(
       fixture: "config-missing-paths",
       expectedLogs: [(.error, "Missing entry for key strings.inputs.")],
       assertionMessage: "Linter should warn when 'paths' key is missing"
@@ -101,7 +103,7 @@ class ConfigLintTests: XCTestCase {
 
       To list all the available named templates, use 'swiftgen template list'.
       """
-    _testLint(
+    testLint(
       fixture: "config-missing-template",
       expectedLogs: [(.error, errorMsg)],
       assertionMessage: "Linter should warn when neither 'templateName' nor 'templatePath' keys are present"
@@ -113,7 +115,7 @@ class ConfigLintTests: XCTestCase {
       You need to choose EITHER a named template OR a template path. \
       Found name 'template' and path 'template.swift'
       """
-    _testLint(
+    testLint(
       fixture: "config-both-templates",
       expectedLogs: [(.error, errorMsg)],
       assertionMessage: "Linter should warn when both 'templateName' and 'templatePath' keys are present"
@@ -121,7 +123,7 @@ class ConfigLintTests: XCTestCase {
   }
 
   func testMissingOutput() {
-    _testLint(
+    testLint(
       fixture: "config-missing-output",
       expectedLogs: [(.error, "Missing entry for key strings.outputs.output.")],
       assertionMessage: "Linter should warn when 'output' key is missing"
@@ -129,7 +131,7 @@ class ConfigLintTests: XCTestCase {
   }
 
   func testInvalidStructure() {
-    _testLint(
+    testLint(
       fixture: "config-invalid-structure",
       expectedLogs: [
         (.error, "Wrong type for key strings.inputs: expected String or Array of String, got Array<Any>.")
@@ -139,7 +141,7 @@ class ConfigLintTests: XCTestCase {
   }
 
   func testInvalidTemplateValue() {
-    _testLint(
+    testLint(
       fixture: "config-invalid-template",
       expectedLogs: [(.error, "Wrong type for key strings.outputs.templateName: expected String, got Array<Any>.")],
       assertionMessage: "Linter should warn when the 'template' key is of unexpected type"
@@ -147,7 +149,7 @@ class ConfigLintTests: XCTestCase {
   }
 
   func testInvalidOutput() {
-    _testLint(
+    testLint(
       fixture: "config-invalid-output",
       expectedLogs: [(.error, "Wrong type for key strings.outputs.output: expected String, got Array<Any>.")],
       assertionMessage: "Linter should warn when the 'output' key is of unexpected type"
@@ -157,7 +159,7 @@ class ConfigLintTests: XCTestCase {
   // MARK: - Path validation
 
   func testInvalidPaths() {
-    _testLint(
+    testLint(
       fixture: "config-with-multi-entries",
       expectedLogs: [
         (.error, "input_dir: Input directory \(Config.Message.doesntExist("Fixtures/"))"),
@@ -186,7 +188,7 @@ class ConfigLintTests: XCTestCase {
   // MARK: - Deprecation warnings
 
   func testDeprecatedCommands() {
-    _testLint(
+    testLint(
       fixture: "config-deprecated-commands",
       expectedLogs: [(.warning, Config.Message.deprecatedParser("storyboards", for: "ib"))],
       assertionMessage: "Linter should warn about deprecated commands"
@@ -194,7 +196,7 @@ class ConfigLintTests: XCTestCase {
   }
 
   func testDeprecatedPaths() {
-    _testLint(
+    testLint(
       fixture: "config-deprecated-paths",
       expectedLogs: [(.warning, "strings: `paths` is a deprecated in favour of `inputs`.")],
       assertionMessage: "Linter should warn about the deprecated 'paths' key"
@@ -202,7 +204,7 @@ class ConfigLintTests: XCTestCase {
   }
 
   func testDeprecatedOutput() {
-    _testLint(
+    testLint(
       fixture: "config-deprecated-output",
       expectedLogs: [
         (.warning, "strings: `output` is a deprecated in favour of `outputs.output`."),
@@ -214,7 +216,7 @@ class ConfigLintTests: XCTestCase {
   }
 
   func testDeprecateMixedWithNew() {
-    _testLint(
+    testLint(
       fixture: "config-deprecated-mixed-with-new",
       expectedLogs: [
         (.warning, "strings: `output` is a deprecated in favour of `outputs.output`."),

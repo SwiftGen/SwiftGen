@@ -8,8 +8,10 @@ import PathKit
 import XCTest
 import Yams
 
-class ConfigRunTests: XCTestCase {
-  private func _testRun(
+final class ConfigRunTests: XCTestCase {
+  private lazy var bundle = Bundle(for: type(of: self))
+
+  private func testRun(
     fixture: String,
     expected expectedLogs: [(LogLevel, String)],
     unwanted unwantedLevels: Set<LogLevel> = [],
@@ -17,7 +19,7 @@ class ConfigRunTests: XCTestCase {
     file: StaticString = #file,
     line: UInt = #line
   ) {
-    guard let path = Bundle(for: type(of: self)).path(forResource: fixture, ofType: "yml") else {
+    guard let path = bundle.path(forResource: fixture, ofType: "yml") else {
       fatalError("Fixture \(fixture) not found")
     }
     var missingLogs = expectedLogs
@@ -73,7 +75,7 @@ class ConfigRunTests: XCTestCase {
       (.error, "Parser `foo` does not exist.")
     ]
 
-    _testRun(fixture: "config-invalid-parsers", expected: logs, assertion: "Run should fail for non-existing parsers.")
+    testRun(fixture: "config-invalid-parsers", expected: logs, assertion: "Run should fail for non-existing parsers.")
   }
 
   func testMultipleEntries() {
@@ -90,7 +92,7 @@ class ConfigRunTests: XCTestCase {
     ]
     // swiftlint:enable line_length
 
-    _testRun(
+    testRun(
       fixture: "config-with-multi-entries",
       expected: logs,
       assertion: "Expect multiple errors and run information"

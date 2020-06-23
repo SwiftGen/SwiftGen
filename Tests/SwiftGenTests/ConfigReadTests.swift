@@ -7,8 +7,8 @@
 import PathKit
 import XCTest
 
-class ConfigReadTests: XCTestCase {
-  lazy var bundle = Bundle(for: type(of: self))
+final class ConfigReadTests: XCTestCase {
+  private lazy var bundle = Bundle(for: type(of: self))
 
   func testConfigWithParams() throws {
     guard let path = bundle.path(forResource: "config-with-params", ofType: "yml") else {

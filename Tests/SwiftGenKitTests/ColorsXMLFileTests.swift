@@ -8,7 +8,7 @@ import PathKit
 @testable import SwiftGenKit
 import XCTest
 
-class ColorsXMLFileTests: XCTestCase {
+final class ColorsXMLFileTests: XCTestCase {
   func testFileWithDefaults() throws {
     let parser = try Colors.Parser()
     let xmlParser = Colors.XMLFileParser(options: try ParserOptionValues(options: [:], available: []))
