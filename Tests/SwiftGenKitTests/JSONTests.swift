@@ -32,6 +32,19 @@ class JSONTests: XCTestCase {
     XCTDiffContexts(result, expected: "array", sub: .json)
   }
 
+  func testDirectoryInput() {
+    do {
+      let parser = try JSON.Parser()
+      let filter = try Filter(pattern: "[^/]*\\.json$")
+      try parser.searchAndParse(path: Fixtures.directory(sub: .json), filter: filter)
+
+      let result = parser.stencilContext()
+      XCTDiffContexts(result, expected: "all", sub: .json)
+    } catch let error {
+      XCTFail("Unexpected error occured while parsing: \(error)")
+    }
+  }
+
   // MARK: - Custom options
 
   func testUnknownOption() throws {

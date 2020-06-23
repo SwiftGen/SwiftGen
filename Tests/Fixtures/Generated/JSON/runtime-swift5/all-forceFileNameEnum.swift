@@ -10,12 +10,16 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length type_body_length
 internal enum JSONFiles {
-  private static let _document = JSONDocument(path: "configuration.json")
-
-  internal static let apiVersion: String = _document["api-version"]
-  internal static let country: Any? = _document["country"]
-  internal static let environment: String = _document["environment"]
-  internal static let options: [String: Any] = _document["options"]
+  internal enum Array {
+    internal static let items: [String] = objectFromJSON(at: "array.json")
+  }
+  internal enum Configuration {
+    private static let _document = JSONDocument(path: "configuration.json")
+    internal static let apiVersion: String = _document["api-version"]
+    internal static let country: Any? = _document["country"]
+    internal static let environment: String = _document["environment"]
+    internal static let options: [String: Any] = _document["options"]
+  }
 }
 // swiftlint:enable identifier_name line_length type_body_length
 

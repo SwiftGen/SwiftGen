@@ -9,12 +9,12 @@ import XCTest
 
 final class JsonTests: XCTestCase {
   private enum Contexts {
-    static let all = ["empty", "array", "configuration"]
+    static let all = ["empty", "array", "configuration", "all"]
   }
 
   // generate variations to test customname generation
   private let inlineVariations: VariationGenerator = { name, context in
-    guard name == "configuration" else { return [(context: context, suffix: "")] }
+    guard name == "all" else { return [(context: context, suffix: "")] }
 
     return [
       (
@@ -56,7 +56,7 @@ final class JsonTests: XCTestCase {
 
   // generate variations to test customname generation
   private let runtimeVariations: VariationGenerator = { name, context in
-    guard name == "configuration" else { return [(context: context, suffix: "")] }
+    guard name == "all" else { return [(context: context, suffix: "")] }
 
     return [
       (

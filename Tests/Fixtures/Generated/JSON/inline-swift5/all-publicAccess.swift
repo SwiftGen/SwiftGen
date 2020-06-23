@@ -9,10 +9,15 @@ import Foundation
 // MARK: - JSON Files
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
-internal enum CustomJSON {
-  internal static let apiVersion: String = "2"
-  internal static let country: Any? = nil
-  internal static let environment: String = "staging"
-  internal static let options: [String: Any] = ["screen-order": ["1", "2", "3"]]
+public enum JSONFiles {
+  public enum Array {
+    public static let items: [String] = ["Anna", "Bob"]
+  }
+  public enum Configuration {
+    public static let apiVersion: String = "2"
+    public static let country: Any? = nil
+    public static let environment: String = "staging"
+    public static let options: [String: Any] = ["screen-order": ["1", "2", "3"]]
+  }
 }
 // swiftlint:enable identifier_name line_length number_separator type_body_length
