@@ -6,7 +6,8 @@
 
 ### Breaking Changes
 
-_None_
+* CoreData: Changes `fetchRequest` auto-generated method to `createFetchRequest` to avoid ambiguous function usage.  
+  [David Rothera](https://github.com/davidrothera)
 
 ### New Features
 
