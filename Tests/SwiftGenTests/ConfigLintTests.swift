@@ -26,7 +26,7 @@ class ConfigLintTests: XCTestCase {
         if let idx = missingLogs.firstIndex(where: { $0 == level && $1 == msg }) {
           missingLogs.remove(at: idx)
         } else if unwantedLevels.contains(level) {
-          XCTFail("Unexpected log: \(msg)")
+          XCTFail("Unexpected log: \(msg)", file: file, line: line)
         }
       }
 

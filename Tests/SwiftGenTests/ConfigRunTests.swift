@@ -23,16 +23,18 @@ class ConfigRunTests: XCTestCase {
     var missingLogs = expectedLogs
     let configFile = Path(path)
     let logQueue = DispatchQueue(label: "swiftgen.log.queue")
-    let logger = { (level: LogLevel, msg: String) -> Void in
+
+    func log(level: LogLevel, msg: String) {
       logQueue.async {
         if let idx = missingLogs.firstIndex(where: { $0 == level && $1 == msg }) {
           missingLogs.remove(at: idx)
         } else if unwantedLevels.contains(level) {
-          XCTFail("Unexpected log: \(msg)")
+          XCTFail("Unexpected log: \(msg)", file: file, line: line)
         }
       }
     }
-    let errorHandler = { (error: Error) -> Void in
+
+    func handleError(_ error: Error) {
       if let idx = missingLogs.firstIndex(where: { $0 == .error && $1 == String(describing: error) }) {
         missingLogs.remove(at: idx)
       } else {
@@ -41,15 +43,15 @@ class ConfigRunTests: XCTestCase {
     }
 
     do {
-      let config = try Config(file: configFile, logger: logger)
+      let config = try Config(file: configFile, logger: log)
 
       try configFile.parent().chdir {
-        try config.runActions(verbose: true, logger: logger)
+        try config.runActions(verbose: true, logger: log)
       }
     } catch Config.Error.multipleErrors(let errors) {
-      errors.forEach(errorHandler)
+      errors.forEach(handleError)
     } catch let error {
-      errorHandler(error)
+      handleError(error)
     }
 
     logQueue.sync(flags: .barrier) {}
