@@ -14,7 +14,9 @@ _None_
 
 ### Bug Fixes
 
-_None_
+* Prevent generating `default.profraw` (code coverage) files.  
+  [David Jennes](https://github.com/djbe)
+  [#722](https://github.com/SwiftGen/SwiftGen/pull/722)
 
 ### Internal Changes
 
