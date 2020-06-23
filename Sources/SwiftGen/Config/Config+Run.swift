@@ -10,7 +10,7 @@ import StencilSwiftKit
 import SwiftGenKit
 
 extension Config {
-  func runActions(verbose: Bool, logger: @escaping (LogLevel, String) -> Void = logMessage) throws {
+  func runActions(verbose: Bool, logger: (LogLevel, String) -> Void = logMessage) throws {
     let commandsAndEntries = try collectCommandsAndEntries()
 
     let errors = commandsAndEntries.parallelCompactMap { cmd, entry -> Swift.Error? in
@@ -33,7 +33,7 @@ extension Config {
     cmd: ParserCLI,
     entry: ConfigEntry,
     verbose: Bool,
-    logger: @escaping (LogLevel, String) -> Void
+    logger: (LogLevel, String) -> Void
   ) throws {
     var entry = entry
 
@@ -64,14 +64,16 @@ extension Config {
 }
 
 extension ConfigEntry {
-  func run(parserCommand: ParserCLI, logger: @escaping (LogLevel, String) -> Void) throws {
-    let parser = try parserCommand.parserType.init(options: options) { msg, _, _ in
-      logger(.warning, msg)
-    }
+  func run(parserCommand: ParserCLI, logger: (LogLevel, String) -> Void) throws {
+    let context: [String: Any] = try withoutActuallyEscaping(logger) { logger in
+      let parser = try parserCommand.parserType.init(options: options) { msg, _, _ in
+        logger(.warning, msg)
+      }
 
-    let filter = try Filter(pattern: self.filter ?? parserCommand.parserType.defaultFilter)
-    try parser.searchAndParse(paths: inputs, filter: filter)
-    let context = parser.stencilContext()
+      let filter = try Filter(pattern: self.filter ?? parserCommand.parserType.defaultFilter)
+      try parser.searchAndParse(paths: inputs, filter: filter)
+      return parser.stencilContext()
+    }
 
     for entryOutput in outputs {
       let templateRealPath = try entryOutput.template.resolvePath(forParser: parserCommand, logger: logger)
