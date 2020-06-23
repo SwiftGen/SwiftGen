@@ -42,7 +42,7 @@ import {{ import }}
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc {{ accessModifier }} class func fetchRequest() -> NSFetchRequest<{{ entityClassName }}> {
+  @nonobjc {{ accessModifier }} class func createFetchRequest() -> NSFetchRequest<{{ entityClassName }}> {
     return NSFetchRequest<{{ entityClassName }}>(entityName: entityName)
   }
 
