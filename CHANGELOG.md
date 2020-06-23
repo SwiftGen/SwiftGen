@@ -41,6 +41,10 @@ _None_
   [Marcelo Fabri](https://github.com/marcelofabri)
   [#698](https://github.com/SwiftGen/SwiftGen/issues/698)
 
+* Lazily evaluate `metadata` in JSON/YAML parsers, making SwiftGen faster if the `metadata` field is not used in a template.  
+  [Marcelo Fabri](https://github.com/marcelofabri)
+  [#700](https://github.com/SwiftGen/SwiftGen/issues/700)
+
 ## 6.2.0
 
 ### Breaking Changes
