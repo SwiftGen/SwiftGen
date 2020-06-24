@@ -9,7 +9,7 @@ import XCTest
 
 final class JsonTests: XCTestCase {
   private enum Contexts {
-    static let all = ["empty", "array", "configuration", "all"]
+    static let all = ["empty", "all"]
   }
 
   // generate variations to test customname generation
