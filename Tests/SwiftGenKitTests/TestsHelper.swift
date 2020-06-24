@@ -159,13 +159,33 @@ func convertToDictionary(_ value: Any) -> [String: Any]? {
   switch value {
   case let value as [String: Any]:
     return value
-  case let value as Yaml.Parser.Document:
-    return [
-      "data": value.data,
-      "metadata": value.metadata
-    ]
+  case let value as NSObject:
+    return convertNSObjectToDictionary(value)
   default:
     return nil
+  }
+}
+
+func convertNSObjectToDictionary(_ object: NSObject) -> [String: Any] {
+  var result: [(String, Any)] = []
+  var mirror: Mirror? = Mirror(reflecting: object)
+
+  repeat {
+    // ensure we can property handle lazy variables
+    // we use `object.value(forKey:)` to force load lazy variables
+    result += mirror?.children
+      .compactMap { $0.label?.deletingPrefix("$__lazy_storage_$_") }
+      .map { ($0, object.value(forKey: $0) as Any) } ?? []
+    mirror = mirror?.superclassMirror
+  } while mirror != nil
+
+  return Dictionary.init(uniqueKeysWithValues: result)
+}
+
+extension String {
+  func deletingPrefix(_ prefix: String) -> String {
+    guard hasPrefix(prefix) else { return self }
+    return String(dropFirst(prefix.count))
   }
 }
 
