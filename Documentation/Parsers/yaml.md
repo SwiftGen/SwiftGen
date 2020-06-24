@@ -1,4 +1,4 @@
-# YAML (and JSON) parser
+# YAML parser
 
 ## Input
 
@@ -22,4 +22,4 @@ This parser currently doesn't accept any options.
 ## Templates
 
 * [See here](../templates/yaml) for a list of templates bundled with SwiftGen and their documentation.
-* If you want to write custom templates, make sure to check the [stencil context documentation](../SwiftGenKit%20Contexts/Yaml.md) to see what data is available after parsing.
+* If you want to write custom templates, make sure to check the [stencil context documentation](../SwiftGenKit%20Contexts/yaml.md) to see what data is available after parsing.

@@ -8,7 +8,7 @@ import Foundation
 
 //
 // See the documentation file for a full description of this context's structure:
-// Documentation/SwiftGenKit Contexts/Json.md
+// Documentation/SwiftGenKit Contexts/json.md
 //
 
 extension JSON.Parser {
