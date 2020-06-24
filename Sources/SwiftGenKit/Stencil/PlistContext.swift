@@ -28,7 +28,7 @@ extension Plist.Parser {
       "name": file.name,
       "path": file.path.string,
       "document": document,
-      "documents": [document] // For legacy/compatibility reasons; will be removed in 7.0
+      "documents": [document] // Deprecated: remains for legacy/compatibility reasons; will be removed in 7.0
     ]
   }
 
