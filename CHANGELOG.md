@@ -23,6 +23,9 @@ _None_
 * Parsers are now executed in parallel, making SwiftGen faster when multiple parsers are used. Note: only applies when using a configuration file.  
   [Marcelo Fabri](https://github.com/marcelofabri)
   [#699](https://github.com/SwiftGen/SwiftGen/issues/699)
+* Use `JSONSerialization` instead of `Yams` for parsing JSONs, making the `json` parser faster.  
+  [Marcelo Fabri](https://github.com/marcelofabri)
+  [#698](https://github.com/SwiftGen/SwiftGen/issues/698)
 
 ## 6.2.0
 
@@ -164,9 +167,6 @@ _None_
 * Updated Pods and Gems dependencies.  
   [David Jennes](https://github.com/djbe)
   [#684](https://github.com/SwiftGen/SwiftGen/pull/684)
-* Use `JSONSerialization` instead of `Yams` for parsing JSONs, making the `json` parser faster.  
-  [Marcelo Fabri](https://github.com/marcelofabri)
-  [#698](https://github.com/SwiftGen/SwiftGen/issues/698)
 
 ## 6.1.0
 
