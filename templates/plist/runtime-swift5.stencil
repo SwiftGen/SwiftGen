@@ -3,7 +3,6 @@
 
 {% if files %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
-{% set documentPrefix %}{{param.documentName|default:"Document"}}{% endset %}
 import Foundation
 
 // swiftlint:disable superfluous_disable_command
@@ -11,16 +10,7 @@ import Foundation
 
 // MARK: - Plist Files
 {% macro fileBlock file %}
-  {% if file.documents.count > 1 %}
-  {% for document in file.documents %}
-  {% set documentName %}{{documentPrefix}}{{forloop.counter}}{% endset %}
-  {{accessModifier}} enum {{documentName|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
-    {% filter indent:2 %}{% call documentBlock file document %}{% endfilter %}
-  }
-  {% endfor %}
-  {% else %}
-  {% call documentBlock file file.documents.first %}
-  {% endif %}
+  {% call documentBlock file file.document %}
 {% endmacro %}
 {% macro documentBlock file document %}
   {% set rootType %}{% call typeBlock document.metadata %}{% endset %}

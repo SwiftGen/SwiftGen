@@ -8,6 +8,13 @@
 
 _None_
 
+### Deprecations
+
+* JSON & Plist: if you wrote your own templates, know that the `documents` property of a file has been deprecated in favour of `document`. The old `documents` property will be removed in the next major release.  
+  [David Jennes](https://github.com/djbe)
+  [#702](https://github.com/SwiftGen/SwiftGen/pull/702)
+  [#732](https://github.com/SwiftGen/SwiftGen/pull/732)
+
 ### New Features
 
 _None_
