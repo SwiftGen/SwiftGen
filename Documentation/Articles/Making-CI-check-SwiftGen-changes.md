@@ -1,6 +1,6 @@
 # Using SwiftGen in Continuous Integration
 
-The recommended way to use SwiftGen is to [add it as a Script Build Phase in your Xcode project](Xcode-Integration.md), so that your constants are always updated automatically if needed every time you build your project. 
+The recommended way to use SwiftGen is to [add it as a Script Build Phase in your Xcode project](Xcode-Integration.md), so that your constants are always updated automatically if needed every time you build your project.
 
 But some people don't like that (for example they don't want to risk adding compilation time… even if SwiftGen is optimized to be very fast and don't change the generated files if no changes has been made) and prefer to run SwiftGen manually in their terminal when the modify things.
 
