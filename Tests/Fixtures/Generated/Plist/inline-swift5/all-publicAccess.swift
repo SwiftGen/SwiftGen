@@ -43,6 +43,7 @@ public enum PlistFiles {
   }
   public enum Configuration {
     public static let environment: String = "development"
+    public static let names: [String] = ["John", "Peter", "Nick"]
     public static let options: [String: Any] = ["Animation Style": "Party Mode"]
   }
   public enum ShoppingList {

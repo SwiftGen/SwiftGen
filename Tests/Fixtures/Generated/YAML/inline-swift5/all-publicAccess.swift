@@ -25,6 +25,7 @@ public enum YAMLFiles {
     public static let car: Any? = nil
     public static let foo: [String: Any] = ["bar": "banana", "baz": "orange"]
     public static let hello: String = "world"
+    public static let names: [String] = ["John", "Peter", "Nick"]
     public static let weight: Double = 33.3
   }
   public enum Version {
