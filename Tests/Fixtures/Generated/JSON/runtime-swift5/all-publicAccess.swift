@@ -33,6 +33,7 @@ public enum JSONFiles {
     public static let car: Any? = _document["car"]
     public static let foo: [String: Any] = _document["foo"]
     public static let hello: String = _document["hello"]
+    public static let names: [String] = _document["names"]
     public static let weight: Double = _document["weight"]
   }
   public enum Version {

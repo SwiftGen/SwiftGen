@@ -63,6 +63,10 @@ files:
         bar: "banana"
         baz: "orange"
       hello: "world"
+      names:
+      - "John"
+      - "Peter"
+      - "Nick"
       weight: 3.33e+1
     metadata:
       properties:
@@ -77,6 +81,10 @@ files:
           type: "Dictionary"
         hello:
           type: "String"
+        names:
+          element:
+            type: "String"
+          type: "Array"
         weight:
           type: "Double"
       type: "Dictionary"

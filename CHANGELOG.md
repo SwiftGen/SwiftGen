@@ -17,6 +17,9 @@ _None_
 * Prevent generating `default.profraw` (code coverage) files.  
   [David Jennes](https://github.com/djbe)
   [#722](https://github.com/SwiftGen/SwiftGen/pull/722)
+* Plist/JSON/YAML: Fix issue with homogeneous `Array`s in the Inline templates (such as `[String`]).  
+  [#687](https://github.com/SwiftGen/SwiftGen/pull/687)
+  [@fjtrujy](https://github.com/fjtrujy)
 
 ### Internal Changes
 

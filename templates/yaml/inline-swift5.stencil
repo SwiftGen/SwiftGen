@@ -55,9 +55,9 @@ import Foundation
     "{{ value }}"
   {% elif metadata.type == "Optional" %}
     nil
-  {% elif metadata.type == "Array" and metadata.element.items %}
-    [{% for itemMetadata in metadata.element.items %}
-      {% call valueBlock value[forloop.counter0] itemMetadata %}
+  {% elif metadata.type == "Array" and value %}
+    [{% for value in value %}
+      {% call valueBlock value metadata.element.items[forloop.counter0]|default:metadata.element %}
       {{ ", " if not forloop.last }}
     {% endfor %}]
   {% elif metadata.type == "Dictionary" %}
