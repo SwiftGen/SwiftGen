@@ -37,7 +37,7 @@ internal class MainEntity: NSManagedObject {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<MainEntity> {
+  @nonobjc internal class func createFetchRequest() -> NSFetchRequest<MainEntity> {
     return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
@@ -117,4 +117,12 @@ do {
   print("Saved")
 } catch {
   fatalError("Unresolved error \(error)")
+}
+
+do {
+    let fetchRequest = MainEntity.createFetchRequest()
+    let count = try context.count(for: fetchRequest)
+    print("Found \(count) assets")
+} catch {
+    fatalError("Unresolved error \(error)")
 }

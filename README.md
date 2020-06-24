@@ -462,7 +462,7 @@ internal class MainEntity: NSManagedObject {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<MainEntity> {
+  @nonobjc internal class func createFetchRequest() -> NSFetchRequest<MainEntity> {
     return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
@@ -517,7 +517,7 @@ extension MainEntity {
 
 ```swift
 // Fetch all the instances of MainEntity
-let request = MainEntity.fetchRequest()
+let request = MainEntity.createFetchRequest()
 let mainItems = try myContext.execute(request)
 
 // Type-safe relationships: `relatedItem` will be a `SecondaryEntity?` in this case
