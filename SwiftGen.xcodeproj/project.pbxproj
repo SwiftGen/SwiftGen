@@ -61,6 +61,10 @@
 		C3E39E4C2118EC58004B1CF9 /* UniquenessConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E39E4B2118EC58004B1CF9 /* UniquenessConstraints.swift */; };
 		C580E102337633038E486585 /* Pods_swiftgen_Templates_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8031AB7FD88D5F010179EDC /* Pods_swiftgen_Templates_UnitTests.framework */; };
 		D4F73738247F62FD00554A9C /* Array+Parallel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F73736247F621800554A9C /* Array+Parallel.swift */; };
+		D4A93E27247E307400BE8651 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A93E26247E307400BE8651 /* JSONParser.swift */; };
+		D4A93E29247E307E00BE8651 /* JSONFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A93E28247E307E00BE8651 /* JSONFile.swift */; };
+		D4A93E2B247E313500BE8651 /* JSONContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A93E2A247E313500BE8651 /* JSONContext.swift */; };
+		D4A93E36247F29C700BE8651 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A93E35247F29C700BE8651 /* JSONTests.swift */; };
 		DD112CBA2141675900B11A5D /* InterfaceBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */; };
 		DD132AF321FE62C200A71960 /* FilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD132AF121FE628A00A71960 /* FilterTests.swift */; };
 		DD15F101213C3DDF00D081C7 /* YamsSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15F100213C3DDF00D081C7 /* YamsSerialization.swift */; };
@@ -373,6 +377,10 @@
 		C3BAC3C82112006000B6875A /* FetchedProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedProperty.swift; sourceTree = "<group>"; };
 		C3E39E4B2118EC58004B1CF9 /* UniquenessConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniquenessConstraints.swift; sourceTree = "<group>"; };
 		D4F73736247F621800554A9C /* Array+Parallel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Parallel.swift"; sourceTree = "<group>"; };
+		D4A93E26247E307400BE8651 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
+		D4A93E28247E307E00BE8651 /* JSONFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFile.swift; sourceTree = "<group>"; };
+		D4A93E2A247E313500BE8651 /* JSONContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONContext.swift; sourceTree = "<group>"; };
+		D4A93E35247F29C700BE8651 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		D662CF56C834C4E7CEA32364 /* Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit-SwiftGenKit UnitTests/Pods-SwiftGenKit-SwiftGenKit UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD112CB92141675800B11A5D /* InterfaceBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceBuilderTests.swift; sourceTree = "<group>"; };
 		DD132AF121FE628A00A71960 /* FilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTests.swift; sourceTree = "<group>"; };
@@ -670,6 +678,15 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		D4A93E25247E305200BE8651 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				D4A93E26247E307400BE8651 /* JSONParser.swift */,
+				D4A93E28247E307E00BE8651 /* JSONFile.swift */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
 		DD428DF21FC50D34001649D6 /* SwiftGen */ = {
 			isa = PBXGroup;
 			children = (
@@ -704,6 +721,7 @@
 				C38E571320FF8F8F009C9C23 /* CoreData */,
 				DD9F687D20955DEF004EB720 /* Fonts */,
 				DDCCACD5209550F60017FB43 /* InterfaceBuilder */,
+				D4A93E25247E305200BE8651 /* JSON */,
 				DDB0B9A0209CE7CD00E467C2 /* Plist */,
 				DD9F68822095604E004EB720 /* Strings */,
 				DDB0B999209CE4A300E467C2 /* Yaml */,
@@ -734,6 +752,7 @@
 				C38E571620FF906B009C9C23 /* CoreDataContext.swift */,
 				DD428E131FC50FBF001649D6 /* FontsContext.swift */,
 				DD428E161FC50FBF001649D6 /* InterfaceBuilderContext.swift */,
+				D4A93E2A247E313500BE8651 /* JSONContext.swift */,
 				DDB0B9A3209CE7E300E467C2 /* PlistContext.swift */,
 				DD428E171FC50FBF001649D6 /* StringsContext.swift */,
 				DDB0B99C209CE4B100E467C2 /* YamlContext.swift */,
@@ -879,6 +898,7 @@
 				DDDE51DB1FAF81B9004203BE /* FontsTests.swift */,
 				DDDE521E1FAF81BA004203BE /* InterfaceBuilderiOSTests.swift */,
 				DDDE521C1FAF81BA004203BE /* InterfaceBuilderMacOSTests.swift */,
+				D4A93E35247F29C700BE8651 /* JSONTests.swift */,
 				DDB0B9A5209CE7FC00E467C2 /* PlistTests.swift */,
 				DDDE51D91FAF81B9004203BE /* StringParserTests.swift */,
 				DDDE51DA1FAF81B9004203BE /* StringsTests.swift */,
@@ -1478,6 +1498,7 @@
 				DD428E261FC50FBF001649D6 /* InterfaceBuilderContext.swift in Sources */,
 				DD428E221FC50FBF001649D6 /* ColorsParser.swift in Sources */,
 				C350BE3A20FFCD750043D7C5 /* Entity.swift in Sources */,
+				D4A93E29247E307E00BE8651 /* JSONFile.swift in Sources */,
 				DDB0B99D209CE4B100E467C2 /* YamlContext.swift in Sources */,
 				DD9F687F20955E07004EB720 /* Font.swift in Sources */,
 				C33A142921064E3400D3CBA6 /* FetchRequest.swift in Sources */,
@@ -1489,6 +1510,7 @@
 				DD15F101213C3DDF00D081C7 /* YamsSerialization.swift in Sources */,
 				DDB0B9B2209D169F00E467C2 /* Metadata.swift in Sources */,
 				DDCCACDA209551240017FB43 /* Storyboard.swift in Sources */,
+				D4A93E2B247E313500BE8651 /* JSONContext.swift in Sources */,
 				DD428E1F1FC50FBF001649D6 /* InterfaceBuilderParser.swift in Sources */,
 				DDD2D709210F293E00D678E0 /* YAML.swift in Sources */,
 				DDCCACDC209551240017FB43 /* Segue.swift in Sources */,
@@ -1509,6 +1531,7 @@
 				DDB0B99B209CE4A300E467C2 /* YamlParser.swift in Sources */,
 				DDC82117209672E1007A55F3 /* String.swift in Sources */,
 				DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */,
+				D4A93E27247E307400BE8651 /* JSONParser.swift in Sources */,
 				DD9F687C20955D51004EB720 /* Catalog.swift in Sources */,
 				C322627121012F42001AC9CD /* Attribute.swift in Sources */,
 				DDCC331D220E491600982694 /* ParserOptionList.swift in Sources */,
@@ -1563,6 +1586,7 @@
 				DDDE523D1FAF81BA004203BE /* ColorsCLRFileTests.swift in Sources */,
 				DDB0B99F209CE4E100E467C2 /* YamlTests.swift in Sources */,
 				DDDE523F1FAF81BA004203BE /* ColorsXMLFileTests.swift in Sources */,
+				D4A93E36247F29C700BE8651 /* JSONTests.swift in Sources */,
 				DDDE523C1FAF81BA004203BE /* ColorsJSONFileTests.swift in Sources */,
 				DDDE52701FAF81BA004203BE /* ColorsTextFileTests.swift in Sources */,
 				DDDE523E1FAF81BA004203BE /* ColorsTests.swift in Sources */,

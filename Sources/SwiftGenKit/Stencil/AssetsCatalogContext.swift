@@ -8,7 +8,7 @@ import Foundation
 
 //
 // See the documentation file for a full description of this context's structure:
-// Documentation/SwiftGenKit Contexts/Assets.md
+// Documentation/SwiftGenKit Contexts/xcassets.md
 //
 
 extension AssetsCatalog.Parser {

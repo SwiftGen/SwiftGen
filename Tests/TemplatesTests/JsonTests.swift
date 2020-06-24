@@ -41,8 +41,6 @@ final class JsonTests: XCTestCase {
       template: "inline-swift4",
       contextNames: Contexts.all,
       directory: .json,
-      resourceDirectory: .yaml,
-      outputDirectory: .json,
       contextVariations: inlineVariations
     )
   }
@@ -52,8 +50,6 @@ final class JsonTests: XCTestCase {
       template: "inline-swift5",
       contextNames: Contexts.all,
       directory: .json,
-      resourceDirectory: .yaml,
-      outputDirectory: .json,
       contextVariations: inlineVariations
     )
   }
@@ -91,8 +87,6 @@ final class JsonTests: XCTestCase {
       template: "runtime-swift4",
       contextNames: Contexts.all,
       directory: .json,
-      resourceDirectory: .yaml,
-      outputDirectory: .json,
       contextVariations: runtimeVariations
     )
   }
@@ -102,8 +96,6 @@ final class JsonTests: XCTestCase {
       template: "runtime-swift5",
       contextNames: Contexts.all,
       directory: .json,
-      resourceDirectory: .yaml,
-      outputDirectory: .json,
       contextVariations: runtimeVariations
     )
   }
