@@ -14,9 +14,6 @@ The output context has the following structure:
     - `document`: `Dictionary` - Describes the structure of the document
        - `data`: `Any` — The contents of the document
        - `metadata`: `Dictionary` — Describes the structure of the document
-    - `documents`: `Array` — List of documents. JSON files will only have 1 document. This is provided for compability reasons and **will be removed in the future** (use `document` instead).
-       - `data`: `Any` — The contents of the document
-       - `metadata`: `Dictionary` — Describes the structure of the document
 
 The metadata has the following properties:
 
