@@ -23,19 +23,12 @@ extension Plist.Parser {
   }
 
   private func map(file: Plist.File) -> [String: Any] {
-    let document = map(document: file.document)
-    return [
+    [
       "name": file.name,
       "path": file.path.string,
-      "document": document,
-      "documents": [document] // Deprecated: remains for legacy/compatibility reasons; will be removed in 7.0
-    ]
-  }
-
-  private func map(document: Any) -> [String: Any] {
-    [
-      "data": document,
-      "metadata": Metadata.generate(for: document)
+      "document": StencilContextLazyDocument(data: file.document),
+      // Deprecated: remains for legacy/compatibility reasons; will be removed in 7.0
+      "documents": [StencilContextLazyDocument(data: file.document)]
     ]
   }
 }
