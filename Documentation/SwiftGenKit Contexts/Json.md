@@ -2,7 +2,9 @@
 
 ## Input
 
-The JSON parser accepts mutiple files or directories (which it'll recursively search). Each file will be loaded into the context, but the parser will also generate metadata about the structure of the file.
+The JSON parser accepts multiple files or directories (which it'll recursively search). Each file's content will be loaded into the context, but the parser will also generate metadata about the structure of the file.
+
+Note: The JSON, YAML and Plist parsers provide a similar context structure, so you can easily switch input formats while keeping the same template.
 
 ## Output
 
@@ -35,44 +37,10 @@ files:
       element:
         type: "String"
       type: "Array"
-  documents:
-  - data:
-    - "Anna"
-    - "Bob"
-    metadata:
-      element:
-        type: "String"
-      type: "Array"
   name: "array"
   path: "array.json"
 - document:
     data:
-      api-version: "2"
-      country: null
-      environment: "staging"
-      options:
-        screen-order:
-        - "1"
-        - "2"
-        - "3"
-    metadata:
-      properties:
-        api-version:
-          type: "String"
-        country:
-          type: "Optional"
-        environment:
-          type: "String"
-        options:
-          properties:
-            screen-order:
-              element:
-                type: "String"
-              type: "Array"
-          type: "Dictionary"
-      type: "Dictionary"
-  documents:
-  - data:
       api-version: "2"
       country: null
       environment: "staging"

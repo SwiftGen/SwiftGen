@@ -2,9 +2,9 @@
 
 ## Input
 
-The PList parser accepts mutiple files or directories (which it'll recursively search). Each file will be loaded into the context, but the parser will also generate metadata about the structure of the file.
+The PList parser accepts multiple files or directories (which it'll recursively search). Each file's content will be loaded into the context, but the parser will also generate metadata about the structure of the file.
 
-Note: The JSON, YAML and Plist parsers provide the same context structure, so you can easily switch input formats while keeping the same template.
+Note: The JSON, YAML and Plist parsers provide a similar context structure, so you can easily switch input formats while keeping the same template.
 
 ## Output
 

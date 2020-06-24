@@ -2,9 +2,11 @@
 
 ## Input
 
-The YAML parser accepts mutiple files or directories (which it'll recursively search). Each file will be loaded into the context, but the parser will also generate metadata about the structure of the file.
+The YAML parser accepts multiple files or directories (which it'll recursively search). Each file's content will be loaded into the context, but the parser will also generate metadata about the structure of the file.
 
 YAML files can contain multiple documents, which is why each file can contain multiple `documents` in the structure below.
+
+Note: The JSON, YAML and Plist parsers provide a similar context structure, so you can easily switch input formats while keeping the same template.
 
 ## Output
 
