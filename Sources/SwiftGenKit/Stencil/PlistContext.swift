@@ -23,12 +23,12 @@ extension Plist.Parser {
   }
 
   private func map(file: Plist.File) -> [String: Any] {
-    [
+    let document = map(document: file.document)
+    return [
       "name": file.name,
       "path": file.path.string,
-      // Note: we wrap the document into a single-value array so that the structure of
-      // this context is identical to the one produced by the YAML parser
-      "documents": [map(document: file.document)]
+      "document": document,
+      "documents": [document] // For legacy/compatibility reasons; will be removed in 7.0
     ]
   }
 
