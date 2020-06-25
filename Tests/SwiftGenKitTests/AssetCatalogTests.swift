@@ -8,7 +8,7 @@ import PathKit
 @testable import SwiftGenKit
 import XCTest
 
-class AssetCatalogTests: XCTestCase {
+final class AssetCatalogTests: XCTestCase {
   func testEmpty() throws {
     let parser = try AssetsCatalog.Parser()
 

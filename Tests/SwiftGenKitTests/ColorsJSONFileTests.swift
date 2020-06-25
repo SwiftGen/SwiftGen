@@ -8,7 +8,7 @@ import PathKit
 @testable import SwiftGenKit
 import XCTest
 
-class ColorsJSONFileTests: XCTestCase {
+final class ColorsJSONFileTests: XCTestCase {
   func testFileWithDefaults() throws {
     let parser = try Colors.Parser()
     let jsonParser = Colors.JSONFileParser(options: try ParserOptionValues(options: [:], available: []))

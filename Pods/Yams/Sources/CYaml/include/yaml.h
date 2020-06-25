@@ -232,7 +232,7 @@ typedef enum yaml_token_type_e {
 
     /** A BLOCK-SEQUENCE-START token. */
     YAML_BLOCK_SEQUENCE_START_TOKEN,
-    /** A BLOCK-SEQUENCE-END token. */
+    /** A BLOCK-MAPPING-START token. */
     YAML_BLOCK_MAPPING_START_TOKEN,
     /** A BLOCK-END token. */
     YAML_BLOCK_END_TOKEN,
@@ -552,7 +552,7 @@ yaml_document_end_event_initialize(yaml_event_t *event, int implicit);
  */
 
 YAML_DECLARE(int)
-yaml_alias_event_initialize(yaml_event_t *event, yaml_char_t *anchor);
+yaml_alias_event_initialize(yaml_event_t *event, const yaml_char_t *anchor);
 
 /**
  * Create a SCALAR event.
@@ -578,8 +578,8 @@ yaml_alias_event_initialize(yaml_event_t *event, yaml_char_t *anchor);
 
 YAML_DECLARE(int)
 yaml_scalar_event_initialize(yaml_event_t *event,
-        yaml_char_t *anchor, yaml_char_t *tag,
-        yaml_char_t *value, int length,
+        const yaml_char_t *anchor, const yaml_char_t *tag,
+        const yaml_char_t *value, int length,
         int plain_implicit, int quoted_implicit,
         yaml_scalar_style_t style);
 
@@ -601,7 +601,7 @@ yaml_scalar_event_initialize(yaml_event_t *event,
 
 YAML_DECLARE(int)
 yaml_sequence_start_event_initialize(yaml_event_t *event,
-        yaml_char_t *anchor, yaml_char_t *tag, int implicit,
+        const yaml_char_t *anchor, const yaml_char_t *tag, int implicit,
         yaml_sequence_style_t style);
 
 /**
@@ -633,7 +633,7 @@ yaml_sequence_end_event_initialize(yaml_event_t *event);
 
 YAML_DECLARE(int)
 yaml_mapping_start_event_initialize(yaml_event_t *event,
-        yaml_char_t *anchor, yaml_char_t *tag, int implicit,
+        const yaml_char_t *anchor, const yaml_char_t *tag, int implicit,
         yaml_mapping_style_t style);
 
 /**
@@ -896,7 +896,7 @@ yaml_document_get_root_node(yaml_document_t *document);
 
 YAML_DECLARE(int)
 yaml_document_add_scalar(yaml_document_t *document,
-        yaml_char_t *tag, yaml_char_t *value, int length,
+        const yaml_char_t *tag, const yaml_char_t *value, int length,
         yaml_scalar_style_t style);
 
 /**
@@ -913,7 +913,7 @@ yaml_document_add_scalar(yaml_document_t *document,
 
 YAML_DECLARE(int)
 yaml_document_add_sequence(yaml_document_t *document,
-        yaml_char_t *tag, yaml_sequence_style_t style);
+        const yaml_char_t *tag, yaml_sequence_style_t style);
 
 /**
  * Create a MAPPING node and attach it to the document.
@@ -929,7 +929,7 @@ yaml_document_add_sequence(yaml_document_t *document,
 
 YAML_DECLARE(int)
 yaml_document_add_mapping(yaml_document_t *document,
-        yaml_char_t *tag, yaml_mapping_style_t style);
+        const yaml_char_t *tag, yaml_mapping_style_t style);
 
 /**
  * Add an item to a SEQUENCE node.
@@ -1517,6 +1517,18 @@ typedef enum yaml_emitter_state_e {
     YAML_EMIT_END_STATE
 } yaml_emitter_state_t;
 
+
+/* This is needed for C++ */
+
+typedef struct yaml_anchors_s {
+    /** The number of references. */
+    int references;
+    /** The anchor id. */
+    int anchor;
+    /** If the node has been emitted? */
+    int serialized;
+} yaml_anchors_t;
+
 /**
  * The emitter structure.
  *
@@ -1742,14 +1754,7 @@ typedef struct yaml_emitter_s {
     int closed;
 
     /** The information associated with the document nodes. */
-    struct {
-        /** The number of references. */
-        int references;
-        /** The anchor id. */
-        int anchor;
-        /** If the node has been emitted? */
-        int serialized;
-    } *anchors;
+    yaml_anchors_t *anchors;
 
     /** The last assigned anchor id. */
     int last_anchor_id;
@@ -1853,7 +1858,7 @@ YAML_DECLARE(void)
 yaml_emitter_set_canonical(yaml_emitter_t *emitter, int canonical);
 
 /**
- * Set the intendation increment.
+ * Set the indentation increment.
  *
  * @param[in,out]   emitter     An emitter object.
  * @param[in]       indent      The indentation increment (1 < . < 10).
@@ -1940,8 +1945,8 @@ yaml_emitter_close(yaml_emitter_t *emitter);
  *
  * The documen object may be generated using the yaml_parser_load() function
  * or the yaml_document_initialize() function.  The emitter takes the
- * responsibility for the document object and destoys its content after
- * it is emitted. The document object is destroyedeven if the function fails.
+ * responsibility for the document object and destroys its content after
+ * it is emitted. The document object is destroyed even if the function fails.
  *
  * @param[in,out]   emitter     An emitter object.
  * @param[in,out]   document    A document object.

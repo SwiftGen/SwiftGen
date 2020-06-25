@@ -33,7 +33,7 @@ struct ConfigEntry {
   var options: [String: Any]
   var outputs: [ConfigEntryOutput]
 
-  mutating func makingRelativeTo(inputDir: Path?, outputDir: Path?) {
+  mutating func makeRelativeTo(inputDir: Path?, outputDir: Path?) {
     if let inputDir = inputDir {
       self.inputs = self.inputs.map { $0.isRelative ? inputDir + $0 : $0 }
     }
@@ -87,7 +87,7 @@ extension ConfigEntry {
   }
 
   static func parseCommandEntry(yaml: Any, cmd: String, logger: (LogLevel, String) -> Void) throws -> [ConfigEntry] {
-    return try ConfigEntry.parseValueOrArray(yaml: yaml) {
+    try ConfigEntry.parseValueOrArray(yaml: yaml) {
       try ConfigEntry(yaml: $0, cmd: cmd, logger: logger)
     }
   }
@@ -117,7 +117,7 @@ extension ConfigEntry {
 ///
 extension ConfigEntry {
   func commandLine(forCommand cmd: String) -> [String] {
-    return outputs.map {
+    outputs.map {
       $0.commandLine(forCommand: cmd, inputs: inputs, filter: filter, options: options)
     }
   }

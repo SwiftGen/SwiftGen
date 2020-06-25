@@ -12,10 +12,14 @@ import XCTest
 private let colorCode: (String) -> String =
   ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
 private let (msgColor, reset) = (colorCode("fg250,0,0"), colorCode(""))
-private let okCode = (num: colorCode("fg127,127,127"),
-                      code: colorCode(""))
-private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
-                      code: colorCode("fg250,250,250") + colorCode("bg127,0,0"))
+private let okCode = (
+  num: colorCode("fg127,127,127"),
+  code: colorCode("")
+)
+private let koCode = (
+  num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
+  code: colorCode("fg250,250,250") + colorCode("bg127,0,0")
+)
 
 private func diff(_ result: String, _ expected: String) -> String? {
   guard result != expected else { return nil }
@@ -182,6 +186,7 @@ class Fixtures {
     case interfaceBuilder = "IB"
     case interfaceBuilderiOS = "IB-iOS"
     case interfaceBuilderMacOS = "IB-macOS"
+    case json = "JSON"
     case plist = "Plist"
     case plistBad = "Plist/bad"
     case plistGood = "Plist/good"
@@ -206,7 +211,7 @@ class Fixtures {
   }
 
   static func path(for name: String, sub: Directory) -> Path {
-    return path(for: name, subDirectory: "Resources/\(sub.rawValue)")
+    path(for: name, subDirectory: "Resources/\(sub.rawValue)")
   }
 
   private static func path(for name: String, subDirectory: String? = nil) -> Path {

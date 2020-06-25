@@ -16,8 +16,7 @@ public typealias AssetColorTypeAlias = ColorAsset.Color
 @available(*, deprecated, renamed: "ImageAsset.Image", message: "This typealias will be removed in SwiftGen 7.0")
 public typealias AssetImageTypeAlias = ImageAsset.Image
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Asset Catalogs
 
@@ -176,7 +175,9 @@ public struct ImageAsset {
     #elseif os(watchOS)
     let image = Image(named: name)
     #endif
-    guard let result = image else { fatalError("Unable to load image named \(name).") }
+    guard let result = image else {
+      fatalError("Unable to load image named \(name).")
+    }
     return result
   }
 }

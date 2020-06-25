@@ -7,38 +7,41 @@
 import StencilSwiftKit
 import XCTest
 
-class ColorsTests: XCTestCase {
-  enum Contexts {
+final class ColorsTests: XCTestCase {
+  private enum Contexts {
     static let all = ["empty", "defaults", "multiple"]
   }
 
   // generate variations to test customname generation
-  func variations(customName: String) -> VariationGenerator {
-    return { name, context in
+  // swiftlint:disable opening_brace
+  private func variations(customName: String) -> VariationGenerator {
+    { name, context in
       guard name == "defaults" else { return [(context: context, suffix: "")] }
 
       return [
-        (context: context,
-         suffix: ""),
-        (context: try StencilContext.enrich(
-           context: context,
-           parameters: ["enumName=\(customName)", "colorAliasName=XCTColor"]
-         ),
-         suffix: "-customName"),
-        (context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-         suffix: "-publicAccess")
+        (
+          context: context,
+          suffix: ""
+        ),
+        (
+          context: try StencilContext.enrich(
+            context: context,
+            parameters: ["enumName=\(customName)", "colorAliasName=XCTColor"]
+          ),
+          suffix: "-customName"
+          ),
+        (
+          context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+          suffix: "-publicAccess"
+        ),
+        (
+          context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+          suffix: "-forceFileNameEnum"
+        )
       ]
     }
   }
-
-  func testSwift3() {
-    test(
-      template: "swift3",
-      contextNames: Contexts.all,
-      directory: .colors,
-      contextVariations: variations(customName: "XCTColors")
-    )
-  }
+  // swiftlint:enable opening_brace
 
   func testSwift4() {
     test(
@@ -55,15 +58,6 @@ class ColorsTests: XCTestCase {
       contextNames: Contexts.all,
       directory: .colors,
       contextVariations: variations(customName: "XCTColors")
-    )
-  }
-
-  func testLiteralsSwift3() {
-    test(
-      template: "literals-swift3",
-      contextNames: Contexts.all,
-      directory: .colors,
-      contextVariations: variations(customName: "UIColor")
     )
   }
 

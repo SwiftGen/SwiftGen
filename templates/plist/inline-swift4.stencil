@@ -3,7 +3,6 @@
 
 {% if files %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
-{% set documentPrefix %}{{param.documentName|default:"Document"}}{% endset %}
 import Foundation
 
 // swiftlint:disable superfluous_disable_command
@@ -11,16 +10,7 @@ import Foundation
 
 // MARK: - Plist Files
 {% macro fileBlock file %}
-  {% if file.documents.count > 1 %}
-  {% for document in file.documents %}
-  {% set documentName %}{{documentPrefix}}{{forloop.counter}}{% endset %}
-  {{accessModifier}} enum {{documentName|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
-    {% filter indent:2 %}{% call documentBlock file document %}{% endfilter %}
-  }
-  {% endfor %}
-  {% else %}
-  {% call documentBlock file file.documents.first %}
-  {% endif %}
+  {% call documentBlock file file.document %}
 {% endmacro %}
 {% macro documentBlock file document %}
   {% set rootType %}{% call typeBlock document.metadata %}{% endset %}
@@ -55,15 +45,15 @@ import Foundation
     Date(timeIntervalSinceReferenceDate: {{ value.timeIntervalSinceReferenceDate }})
   {% elif metadata.type == "Optional" %}
     nil
-  {% elif metadata.type == "Array" and metadata.element.items %}
-    [{% for itemMetadata in metadata.element.items %}
-      {% call valueBlock value[forloop.counter0] itemMetadata %}
-      {% if not forloop.last %}, {% endif %}
+  {% elif metadata.type == "Array" and value %}
+    [{% for value in value %}
+      {% call valueBlock value metadata.element.items[forloop.counter0]|default:metadata.element %}
+      {{ ", " if not forloop.last }}
     {% endfor %}]
   {% elif metadata.type == "Dictionary" %}
     [{% for key,value in value %}
       "{{key}}": {% call valueBlock value metadata.properties[key] %}
-      {% if not forloop.last %}, {% endif %}
+      {{ ", " if not forloop.last }}
     {% empty %}
       :
     {% endfor %}]
@@ -74,7 +64,7 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 {{accessModifier}} enum {{param.enumName|default:"PlistFiles"}} {
-  {% if files.count > 1 %}
+  {% if files.count > 1 or param.forceFileNameEnum %}
   {% for file in files %}
   {{accessModifier}} enum {{file.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
     {% filter indent:2 %}{% call fileBlock file %}{% endfilter %}

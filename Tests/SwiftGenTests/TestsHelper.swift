@@ -11,10 +11,14 @@ import XCTest
 private let colorCode: (String) -> String =
   ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
 private let (msgColor, reset) = (colorCode("fg250,0,0"), colorCode(""))
-private let okCode = (num: colorCode("fg127,127,127"),
-                      code: colorCode(""))
-private let koCode = (num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
-                      code: colorCode("fg250,250,250") + colorCode("bg127,0,0"))
+private let okCode = (
+  num: colorCode("fg127,127,127"),
+  code: colorCode("")
+)
+private let koCode = (
+  num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
+  code: colorCode("fg250,250,250") + colorCode("bg127,0,0")
+)
 
 private func diff(_ result: String, _ expected: String) -> String? {
   guard result != expected else { return nil }
@@ -102,7 +106,7 @@ class Fixtures {
   }
 
   static func path(for name: String, sub: Directory) -> Path {
-    return path(for: name, subDirectory: "Resources/\(sub.rawValue)")
+    path(for: name, subDirectory: "Resources/\(sub.rawValue)")
   }
 
   private static func path(for name: String, subDirectory: String? = nil) -> Path {
@@ -113,11 +117,11 @@ class Fixtures {
   }
 
   static func template(for name: String, sub: Directory) -> String {
-    return string(for: name, subDirectory: "templates/\(sub.rawValue.lowercased())")
+    string(for: name, subDirectory: "templates/\(sub.rawValue.lowercased())")
   }
 
   static func output(for name: String, sub: Directory) -> String {
-    return string(for: name, subDirectory: "Generated/\(sub.rawValue)")
+    string(for: name, subDirectory: "Generated/\(sub.rawValue)")
   }
 
   private static func string(for name: String, subDirectory: String) -> String {
@@ -126,5 +130,68 @@ class Fixtures {
     } catch let error {
       fatalError("Unable to load fixture content: \(error)")
     }
+  }
+}
+
+extension Config {
+  var commandNames: Set<String> {
+    Set(commands.map { $0.command.name })
+  }
+
+  func entries(for cmd: String) -> [ConfigEntry] {
+    commands.filter { $0.command.name == cmd }.map { $0.entry }
+  }
+}
+
+final class TestLogger {
+  private let queue = DispatchQueue(label: "swiftgen.log.queue")
+  private let unwantedLevels: Set<LogLevel>
+  private let file: StaticString
+  private let line: UInt
+  private var missingLogs: [(LogLevel, String)]
+
+  init(
+    expectedLogs: [(LogLevel, String)],
+    unwantedLevels: Set<LogLevel> = [],
+    file: StaticString,
+    line: UInt
+  ) {
+    self.missingLogs = expectedLogs
+    self.unwantedLevels = unwantedLevels
+    self.file = file
+    self.line = line
+  }
+
+  func log(level: LogLevel, msg: String) {
+    queue.async {
+      if let idx = self.missingLogs.firstIndex(where: { $0 == level && $1 == msg }) {
+        self.missingLogs.remove(at: idx)
+      } else if self.unwantedLevels.contains(level) {
+        XCTFail("Unexpected log: \(msg)", file: self.file, line: self.line)
+      }
+    }
+  }
+
+  func handleError(_ error: Error) {
+    if let idx = missingLogs.firstIndex(where: { $0 == .error && $1 == String(describing: error) }) {
+      missingLogs.remove(at: idx)
+    } else {
+      XCTFail("Unexpected error: \(error)", file: file, line: line)
+    }
+  }
+
+  func waitAndAssert(message: String) {
+    queue.sync(flags: .barrier) {}
+
+    XCTAssertTrue(
+      missingLogs.isEmpty,
+      """
+      \(message)
+      The following logs were expected but never received:
+      \(missingLogs.map { "\($0) - \($1)" }.joined(separator: "\n"))
+      """,
+      file: file,
+      line: line
+    )
   }
 }

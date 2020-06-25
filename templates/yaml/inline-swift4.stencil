@@ -55,15 +55,15 @@ import Foundation
     "{{ value }}"
   {% elif metadata.type == "Optional" %}
     nil
-  {% elif metadata.type == "Array" and metadata.element.items %}
-    [{% for itemMetadata in metadata.element.items %}
-      {% call valueBlock value[forloop.counter0] itemMetadata %}
-      {% if not forloop.last %}, {% endif %}
+  {% elif metadata.type == "Array" and value %}
+    [{% for value in value %}
+      {% call valueBlock value metadata.element.items[forloop.counter0]|default:metadata.element %}
+      {{ ", " if not forloop.last }}
     {% endfor %}]
   {% elif metadata.type == "Dictionary" %}
     [{% for key,value in value %}
       "{{key}}": {% call valueBlock value metadata.properties[key] %}
-      {% if not forloop.last %}, {% endif %}
+      {{ ", " if not forloop.last }}
     {% empty %}
       :
     {% endfor %}]
@@ -74,7 +74,7 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 {{accessModifier}} enum {{param.enumName|default:"YAMLFiles"}} {
-  {% if files.count > 1 %}
+  {% if files.count > 1 or param.forceFileNameEnum %}
   {% for file in files %}
   {{accessModifier}} enum {{file.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
     {% filter indent:2 %}{% call fileBlock file %}{% endfilter %}

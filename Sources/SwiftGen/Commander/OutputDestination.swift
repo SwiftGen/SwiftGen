@@ -29,7 +29,7 @@ enum OutputDestination: ArgumentConvertible {
 }
 
 extension OutputDestination {
-  func write(content: String, onlyIfChanged: Bool = false) throws {
+  func write(content: String, onlyIfChanged: Bool = false, logger: (LogLevel, String) -> Void = logMessage) throws {
     switch self {
     case .console:
       print(content)

@@ -3,23 +3,23 @@ output_dir: Generated/
 strings:
   inputs: Strings/Localizable.strings
   outputs:
-    templatePath: templates/custom-swift3
+    templatePath: templates/custom-swift5
     output: strings.swift
     params:
       enumName: Loc
 xcassets:
   - inputs: XCAssets/Colors.xcassets
     outputs:
-      templateName: swift3
+      templateName: swift5
       output: assets-colors.swift
   - inputs: XCAssets/Images.xcassets
     outputs:
-      templateName: custom-swift3
+      templateName: custom-swift5
       output: assets-images.swift
       params: { "enumName": "Pics" }
   - inputs:
       - XCAssets/Colors.xcassets
       - XCAssets/Images.xcassets
     outputs:
-      templateName: swift4
+      templateName: swift5
       output: assets-all.swift

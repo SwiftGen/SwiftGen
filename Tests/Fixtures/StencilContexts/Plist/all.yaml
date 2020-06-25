@@ -1,5 +1,137 @@
 files:
-- documents:
+- document:
+    data:
+      CFBundleDevelopmentRegion: "en"
+      CFBundleDisplayName: "${PRODUCT_NAME}"
+      CFBundleExecutable: "${EXECUTABLE_NAME}"
+      CFBundleIdentifier: "$(PRODUCT_BUNDLE_IDENTIFIER)"
+      CFBundleInfoDictionaryVersion: "6.0"
+      CFBundleName: "${PRODUCT_NAME}"
+      CFBundlePackageType: "APPL"
+      CFBundleShortVersionString: "1.2.0"
+      CFBundleSignature: "????"
+      CFBundleVersion: "0"
+      Fabric:
+        APIKey: "512345678900aaafffff"
+        Kits:
+        - KitInfo: {}
+          KitName: "Crashlytics"
+      ITSAppUsesNonExemptEncryption: false
+      LSRequiresIPhoneOS: true
+      NSAppTransportSecurity: {}
+      NSCameraUsageDescription: "24 Vision needs access to your camera for uploading
+        photos for caes, or for your profile picture."
+      NSPhotoLibraryUsageDescription: "24 Vision needs access to your photo library
+        for uploading photos for caes, or for your profile picture."
+      UIBackgroundModes:
+      - "remote-notification"
+      UILaunchStoryboardName: "LaunchScreen"
+      UIMainStoryboardFile: "Start"
+      UIRequiredDeviceCapabilities:
+      - "armv7"
+      UIRequiresFullScreen: true
+      UIStatusBarStyle: "UIStatusBarStyleDefault"
+      UISupportedInterfaceOrientations:
+      - "UIInterfaceOrientationPortrait"
+      - "UIInterfaceOrientationPortraitUpsideDown"
+      - "UIInterfaceOrientationLandscapeRight"
+      - "UIInterfaceOrientationLandscapeLeft"
+      UISupportedInterfaceOrientations~ipad:
+      - "UIInterfaceOrientationLandscapeLeft"
+      - "UIInterfaceOrientationLandscapeRight"
+      - "UIInterfaceOrientationPortraitUpsideDown"
+      - "UIInterfaceOrientationPortrait"
+      User Ambiguous Integer: true
+      User Boolean: false
+      User Date: 2018-05-05T03:39:26Z
+      User Float: 3.14e+0
+      User Integer: 5
+    metadata:
+      properties:
+        CFBundleDevelopmentRegion:
+          type: "String"
+        CFBundleDisplayName:
+          type: "String"
+        CFBundleExecutable:
+          type: "String"
+        CFBundleIdentifier:
+          type: "String"
+        CFBundleInfoDictionaryVersion:
+          type: "String"
+        CFBundleName:
+          type: "String"
+        CFBundlePackageType:
+          type: "String"
+        CFBundleShortVersionString:
+          type: "String"
+        CFBundleSignature:
+          type: "String"
+        CFBundleVersion:
+          type: "String"
+        Fabric:
+          properties:
+            APIKey:
+              type: "String"
+            Kits:
+              element:
+                items:
+                - properties:
+                    KitInfo:
+                      properties: {}
+                      type: "Dictionary"
+                    KitName:
+                      type: "String"
+                  type: "Dictionary"
+                type: "Dictionary"
+              type: "Array"
+          type: "Dictionary"
+        ITSAppUsesNonExemptEncryption:
+          type: "Bool"
+        LSRequiresIPhoneOS:
+          type: "Bool"
+        NSAppTransportSecurity:
+          properties: {}
+          type: "Dictionary"
+        NSCameraUsageDescription:
+          type: "String"
+        NSPhotoLibraryUsageDescription:
+          type: "String"
+        UIBackgroundModes:
+          element:
+            type: "String"
+          type: "Array"
+        UILaunchStoryboardName:
+          type: "String"
+        UIMainStoryboardFile:
+          type: "String"
+        UIRequiredDeviceCapabilities:
+          element:
+            type: "String"
+          type: "Array"
+        UIRequiresFullScreen:
+          type: "Bool"
+        UIStatusBarStyle:
+          type: "String"
+        UISupportedInterfaceOrientations:
+          element:
+            type: "String"
+          type: "Array"
+        UISupportedInterfaceOrientations~ipad:
+          element:
+            type: "String"
+          type: "Array"
+        User Ambiguous Integer:
+          type: "Bool"
+        User Boolean:
+          type: "Bool"
+        User Date:
+          type: "Date"
+        User Float:
+          type: "Double"
+        User Integer:
+          type: "Int"
+      type: "Dictionary"
+  documents:
   - data:
       CFBundleDevelopmentRegion: "en"
       CFBundleDisplayName: "${PRODUCT_NAME}"
@@ -133,15 +265,46 @@ files:
       type: "Dictionary"
   name: "Info"
   path: "Info.plist"
-- documents:
-  - data:
+- document:
+    data:
       Environment: "development"
+      Names:
+      - "John"
+      - "Peter"
+      - "Nick"
       Options:
         Animation Style: "Party Mode"
     metadata:
       properties:
         Environment:
           type: "String"
+        Names:
+          element:
+            type: "String"
+          type: "Array"
+        Options:
+          properties:
+            Animation Style:
+              type: "String"
+          type: "Dictionary"
+      type: "Dictionary"
+  documents:
+  - data:
+      Environment: "development"
+      Names:
+      - "John"
+      - "Peter"
+      - "Nick"
+      Options:
+        Animation Style: "Party Mode"
+    metadata:
+      properties:
+        Environment:
+          type: "String"
+        Names:
+          element:
+            type: "String"
+          type: "Array"
         Options:
           properties:
             Animation Style:
@@ -150,7 +313,16 @@ files:
       type: "Dictionary"
   name: "configuration"
   path: "configuration.plist"
-- documents:
+- document:
+    data:
+    - "Eggs"
+    - "Bread"
+    - "Milk"
+    metadata:
+      element:
+        type: "String"
+      type: "Array"
+  documents:
   - data:
     - "Eggs"
     - "Bread"

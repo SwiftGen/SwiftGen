@@ -178,10 +178,18 @@ namespace :release do
                     .gsub(/(:tag\s+=>\s+)".*"/, %(\\1"#{tag}"))
                     .gsub(/(:revision\s+=>\s+)".*"/, %(\\1"#{revision}"))
       File.write(formula_file, new_formula)
+
+      Utils.print_info "Formula has been auto-updated. Do you need to also do manual updates to it before continuing [y/n]?"
+      if STDIN.gets.chomp.downcase == 'y'
+        sh "open", formula_file
+        puts "Once you've finished editing the formula file, press enter to continue."
+        STDIN.gets.chomp
+      end
+
       Utils.print_header 'Checking Homebrew formula...'
       Bundler.with_clean_env do
         sh 'brew audit --strict --online swiftgen'
-        sh 'brew reinstall swiftgen'
+        sh 'brew reinstall swiftgen --build-from-source'
         sh 'brew test swiftgen'
       end
 

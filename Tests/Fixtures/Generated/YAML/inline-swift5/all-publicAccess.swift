@@ -10,12 +10,6 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 public enum YAMLFiles {
-  public enum Configuration {
-    public static let apiVersion: String = "2"
-    public static let country: Any? = nil
-    public static let environment: String = "staging"
-    public static let options: [String: Any] = ["screen-order": ["1", "2", "3"]]
-  }
   public enum Documents {
     public enum Document1 {
       public static let items: [String] = ["Mark McGwire", "Sammy Sosa", "Ken Griffey"]
@@ -31,6 +25,7 @@ public enum YAMLFiles {
     public static let car: Any? = nil
     public static let foo: [String: Any] = ["bar": "banana", "baz": "orange"]
     public static let hello: String = "world"
+    public static let names: [String] = ["John", "Peter", "Nick"]
     public static let weight: Double = 33.3
   }
   public enum Version {

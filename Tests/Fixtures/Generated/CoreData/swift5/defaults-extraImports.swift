@@ -1,7 +1,7 @@
 // swiftlint:disable all
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
-// swiftlint:disable superfluous_disable_command
+// swiftlint:disable superfluous_disable_command implicit_return
 // swiftlint:disable sorted_imports
 import CoreData
 import Foundation
@@ -300,13 +300,14 @@ extension MainEntity {
     return result
   }
 
-  class func fetchObjectIDFetchRequest(managedObjectContext: NSManagedObjectContext, name: String) throws -> [NSManagedObjectID] {
+  class func fetchObjectIDFetchRequest(managedObjectContext: NSManagedObjectContext, name: String, needle: String) throws -> [NSManagedObjectID] {
     guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
       fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
     }
     let model = persistentStoreCoordinator.managedObjectModel
     let substitutionVariables: [String: Any] = [
-      "NAME": name
+      "NAME": name,
+      "NEEDLE": needle
     ]
 
     guard let fetchRequest = model.fetchRequestFromTemplate(withName: "ObjectIDFetchRequest", substitutionVariables: substitutionVariables) else {

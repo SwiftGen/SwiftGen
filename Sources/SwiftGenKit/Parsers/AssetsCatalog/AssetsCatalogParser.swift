@@ -18,7 +18,7 @@ public enum AssetsCatalog {
       self.warningHandler = warningHandler
     }
 
-    public static let defaultFilter = "[^/]\\.xcassets$"
+    public static let defaultFilter = filterRegex(forExtensions: ["xcassets"])
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       let catalog = Catalog(path: path)

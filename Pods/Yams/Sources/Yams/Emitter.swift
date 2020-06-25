@@ -330,15 +330,15 @@ public final class Emitter {
             throw YamlError.emitter(problem: "serializer is closed")
         }
         var event = yaml_event_t()
-        var versionDirective: UnsafeMutablePointer<yaml_version_directive_t>?
-        var versionDirectiveValue = yaml_version_directive_t()
         if let (major, minor) = options.version {
-            versionDirectiveValue.major = Int32(major)
-            versionDirectiveValue.minor = Int32(minor)
-            versionDirective = UnsafeMutablePointer(&versionDirectiveValue)
+            var versionDirective = yaml_version_directive_t(major: Int32(major), minor: Int32(minor))
+            // TODO: Support tags
+            yaml_document_start_event_initialize(&event, &versionDirective, nil, nil, options.explicitStart ? 0 : 1)
+        } else {
+            // TODO: Support tags
+            yaml_document_start_event_initialize(&event, nil, nil, nil, options.explicitStart ? 0 : 1)
         }
-        // TODO: Support tags
-        yaml_document_start_event_initialize(&event, versionDirective, nil, nil, options.explicitStart ? 0 : 1)
+
         try emit(&event)
         try serializeNode(node)
         yaml_document_end_event_initialize(&event, options.explicitEnd ? 0 : 1)
@@ -411,7 +411,11 @@ extension Emitter {
 
     private func serializeScalar(_ scalar: Node.Scalar) throws {
         var value = scalar.string.utf8CString, tag = scalar.resolvedTag.name.rawValue.utf8CString
+#if os(Windows)
+        let scalarStyle = yaml_scalar_style_t(rawValue: Int32(scalar.style.rawValue))
+#else
         let scalarStyle = yaml_scalar_style_t(rawValue: scalar.style.rawValue)
+#endif
         var event = yaml_event_t()
         _ = value.withUnsafeMutableBytes { value in
             tag.withUnsafeMutableBytes { tag in
@@ -432,7 +436,11 @@ extension Emitter {
     private func serializeSequence(_ sequence: Node.Sequence) throws {
         var tag = sequence.resolvedTag.name.rawValue.utf8CString
         let implicit: Int32 = sequence.tag.name == .seq ? 1 : 0
+#if os(Windows)
+        let sequenceStyle = yaml_sequence_style_t(rawValue: Int32(sequence.style.rawValue))
+#else
         let sequenceStyle = yaml_sequence_style_t(rawValue: sequence.style.rawValue)
+#endif
         var event = yaml_event_t()
         _ = tag.withUnsafeMutableBytes { tag in
             yaml_sequence_start_event_initialize(
@@ -451,7 +459,11 @@ extension Emitter {
     private func serializeMapping(_ mapping: Node.Mapping) throws {
         var tag = mapping.resolvedTag.name.rawValue.utf8CString
         let implicit: Int32 = mapping.tag.name == .map ? 1 : 0
+#if os(Windows)
+        let mappingStyle = yaml_mapping_style_t(rawValue: Int32(mapping.style.rawValue))
+#else
         let mappingStyle = yaml_mapping_style_t(rawValue: mapping.style.rawValue)
+#endif
         var event = yaml_event_t()
         _ = tag.withUnsafeMutableBytes { tag in
             yaml_mapping_start_event_initialize(

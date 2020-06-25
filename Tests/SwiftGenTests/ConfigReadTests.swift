@@ -7,8 +7,8 @@
 import PathKit
 import XCTest
 
-class ConfigReadTests: XCTestCase {
-  lazy var bundle = Bundle(for: type(of: self))
+final class ConfigReadTests: XCTestCase {
+  private lazy var bundle = Bundle(for: type(of: self))
 
   func testConfigWithParams() throws {
     guard let path = bundle.path(forResource: "config-with-params", ofType: "yml") else {
@@ -21,10 +21,10 @@ class ConfigReadTests: XCTestCase {
       XCTAssertNil(config.inputDir)
       XCTAssertEqual(config.outputDir, "Common/Generated")
 
-      XCTAssertEqual(config.commands.keys.sorted(), ["strings"])
-      let stringEntries = config.commands["strings"]
-      XCTAssertEqual(stringEntries?.count, 1)
-      guard let entry = stringEntries?.first else {
+      XCTAssertEqual(config.commandNames, ["strings"])
+      let stringEntries = config.entries(for: "strings")
+      XCTAssertEqual(stringEntries.count, 1)
+      guard let entry = stringEntries.first else {
         return XCTFail("Expected a single strings entry")
       }
 
@@ -44,7 +44,7 @@ class ConfigReadTests: XCTestCase {
         ]
       )
       XCTAssertEqual(output.output, "strings.swift")
-      XCTAssertEqual(output.template, .name("structured-swift3"))
+      XCTAssertEqual(output.template, .name("structured-swift5"))
     } catch let error {
       XCTFail("Error: \(error)")
     }
@@ -67,8 +67,8 @@ class ConfigReadTests: XCTestCase {
       )
 
       XCTAssertEqual(paramsConfig.outputDir, envConfig.outputDir)
-      guard let paramsList = paramsConfig.commands["strings"]?.first?.outputs.first?.parameters["baz"] as? [String],
-        let envList = envConfig.commands["strings"]?.first?.outputs.first?.parameters["baz"] as? [String] else {
+      guard let paramsList = paramsConfig.entries(for: "strings").first?.outputs.first?.parameters["baz"] as? [String],
+        let envList = envConfig.entries(for: "strings").first?.outputs.first?.parameters["baz"] as? [String] else {
         return XCTFail("Could not find strings entry output")
       }
       XCTAssertEqual(paramsList, envList)
@@ -88,44 +88,40 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(config.inputDir, "Fixtures/")
       XCTAssertEqual(config.outputDir, "Generated/")
 
-      XCTAssertEqual(config.commands.keys.sorted(), ["strings", "xcassets"])
+      XCTAssertEqual(config.commandNames, ["strings", "xcassets"])
 
       // strings
-      guard let stringsEntries = config.commands["strings"] else {
-        return XCTFail("Expected a config entry for strings")
-      }
-      XCTAssertEqual(stringsEntries.count, 1)
+      let stringsEntries = config.entries(for: "strings")
+      XCTAssertEqual(stringsEntries.count, 1, "Expected a config entry for strings")
 
       XCTAssertEqual(stringsEntries[0].inputs, ["Strings/Localizable.strings"])
       XCTAssertEqual(stringsEntries[0].outputs.count, 1)
       XCTAssertEqual(stringsEntries[0].outputs[0].output, "strings.swift")
       XCTAssertEqualDict(stringsEntries[0].outputs[0].parameters, ["enumName": "Loc"])
-      XCTAssertEqual(stringsEntries[0].outputs[0].template, .path("templates/custom-swift3"))
+      XCTAssertEqual(stringsEntries[0].outputs[0].template, .path("templates/custom-swift5"))
 
       // xcassets
-      guard let xcassetsEntries = config.commands["xcassets"] else {
-        return XCTFail("Expected a config entry for xcassets")
-      }
-      XCTAssertEqual(xcassetsEntries.count, 3)
+      let xcassetsEntries = config.entries(for: "xcassets")
+      XCTAssertEqual(xcassetsEntries.count, 3, "Expected a config entry for xcassets")
 
       // > xcassets[0]
       XCTAssertEqual(xcassetsEntries[0].inputs, ["XCAssets/Colors.xcassets"])
       XCTAssertEqual(xcassetsEntries[0].outputs.count, 1)
       XCTAssertEqual(xcassetsEntries[0].outputs[0].output, "assets-colors.swift")
       XCTAssertEqualDict(xcassetsEntries[0].outputs[0].parameters, [:])
-      XCTAssertEqual(xcassetsEntries[0].outputs[0].template, .name("swift3"))
+      XCTAssertEqual(xcassetsEntries[0].outputs[0].template, .name("swift5"))
       // > xcassets[1]
       XCTAssertEqual(xcassetsEntries[1].inputs, ["XCAssets/Images.xcassets"])
       XCTAssertEqual(xcassetsEntries[1].outputs.count, 1)
       XCTAssertEqual(xcassetsEntries[1].outputs[0].output, "assets-images.swift")
       XCTAssertEqualDict(xcassetsEntries[1].outputs[0].parameters, ["enumName": "Pics"])
-      XCTAssertEqual(xcassetsEntries[1].outputs[0].template, .name("custom-swift3"))
+      XCTAssertEqual(xcassetsEntries[1].outputs[0].template, .name("custom-swift5"))
       // > xcassets[2]
       XCTAssertEqual(xcassetsEntries[2].inputs, ["XCAssets/Colors.xcassets", "XCAssets/Images.xcassets"])
       XCTAssertEqual(xcassetsEntries[2].outputs.count, 1)
       XCTAssertEqual(xcassetsEntries[2].outputs[0].output, "assets-all.swift")
       XCTAssertEqualDict(xcassetsEntries[2].outputs[0].parameters, [:])
-      XCTAssertEqual(xcassetsEntries[2].outputs[0].template, .name("swift4"))
+      XCTAssertEqual(xcassetsEntries[2].outputs[0].template, .name("swift5"))
     } catch let error {
       XCTFail("Error: \(error)")
     }
@@ -142,22 +138,20 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(config.inputDir, "Fixtures/")
       XCTAssertEqual(config.outputDir, "Generated/")
 
-      XCTAssertEqual(config.commands.keys.sorted(), ["ib"])
+      XCTAssertEqual(config.commandNames, ["ib"])
 
       // ib
-      guard let ibEntries = config.commands["ib"] else {
-        return XCTFail("Expected a config entry for ib")
-      }
-      XCTAssertEqual(ibEntries.count, 1)
+      let ibEntries = config.entries(for: "ib")
+      XCTAssertEqual(ibEntries.count, 1, "Expected a config entry for ib")
 
       XCTAssertEqual(ibEntries[0].inputs, ["IB-iOS"])
       // > outputs[0]
       XCTAssertEqual(ibEntries[0].outputs.count, 2)
-      XCTAssertEqual(ibEntries[0].outputs[0].template, .name("scenes-swift4"))
+      XCTAssertEqual(ibEntries[0].outputs[0].template, .name("scenes-swift5"))
       XCTAssertEqual(ibEntries[0].outputs[0].output, "ib-scenes.swift")
       XCTAssertEqualDict(ibEntries[0].outputs[0].parameters, ["enumName": "Scenes"])
       // > outputs[1]
-      XCTAssertEqual(ibEntries[0].outputs[1].template, .name("segues-swift4"))
+      XCTAssertEqual(ibEntries[0].outputs[1].template, .name("segues-swift5"))
       XCTAssertEqual(ibEntries[0].outputs[1].output, "ib-segues.swift")
       XCTAssertEqualDict(ibEntries[0].outputs[1].parameters, [:])
     } catch let error {
@@ -173,7 +167,7 @@ class ConfigReadTests: XCTestCase {
       "config-missing-template": """
         You must specify a template by name (templateName) or path (templatePath).
 
-        To list all the available named templates, use 'swiftgen templates list'.
+        To list all the available named templates, use 'swiftgen template list'.
         """,
       "config-both-templates": """
         You need to choose EITHER a named template OR a template path. \
@@ -221,7 +215,7 @@ class ConfigReadTests: XCTestCase {
     do {
       let config = try Config(file: file)
 
-      guard let entry = config.commands["strings"]?.first else {
+      guard let entry = config.entries(for: "strings").first else {
         return XCTFail("Strings entry not found")
       }
 
@@ -245,7 +239,7 @@ class ConfigReadTests: XCTestCase {
     do {
       let config = try Config(file: file)
 
-      guard let entry = config.commands["strings"]?.first else {
+      guard let entry = config.entries(for: "strings").first else {
         return XCTFail("Strings entry not found")
       }
 
@@ -266,11 +260,9 @@ class ConfigReadTests: XCTestCase {
       XCTAssertNil(config.inputDir)
       XCTAssertEqual(config.outputDir, "Common/Generated")
 
-      XCTAssertEqual(config.commands.keys.sorted(), ["strings"])
-      guard let stringEntries = config.commands["strings"] else {
-        return XCTFail("Expected a config entry for strings")
-      }
-      XCTAssertEqual(stringEntries.count, 2)
+      XCTAssertEqual(config.commandNames, ["strings"])
+      let stringEntries = config.entries(for: "strings")
+      XCTAssertEqual(stringEntries.count, 2, "Expected 2 config entry for strings")
 
       // > strings[0]
       XCTAssertEqual(stringEntries[0].inputs, ["new-inputs1"])

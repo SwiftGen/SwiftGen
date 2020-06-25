@@ -46,7 +46,7 @@ public enum Strings {
       self.warningHandler = warningHandler
     }
 
-    public static let defaultFilter = "[^/]\\.strings$"
+    public static let defaultFilter = filterRegex(forExtensions: ["strings"])
     public static let allOptions: ParserOptionList = [Option.separator]
 
     // Localizable.strings files are generally UTF16, not UTF8!

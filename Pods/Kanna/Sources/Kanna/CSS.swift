@@ -23,8 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 import Foundation
-
-import libxmlKanna
+import libxml2
 
 typealias AKRegularExpression  = NSRegularExpression
 #if os(Linux) && swift(>=4)
@@ -50,10 +49,11 @@ public enum CSS {
     
     @return XPath
     */
-    public static func toXPath(_ css: String) throws -> String {
+    public static func toXPath(_ css: String, isRoot: Bool = true) throws -> String {
         let selectorGroups = css.components(separatedBy: ",")
+        let prefix = isRoot ? "" : "."
         return try selectorGroups
-            .map { try toXPath(selector: $0) }
+            .map { prefix.appending(try toXPath(selector: $0)) }
             .joined(separator: " | ")
     }
 
@@ -106,13 +106,11 @@ public enum CSS {
 private func firstMatch(_ pattern: String) -> (String) -> AKTextCheckingResult? {
     return { str in
         let length = str.utf16.count
-        do {
-            let regex = try AKRegularExpression(pattern: pattern, options: .caseInsensitive)
-            if let result = regex.firstMatch(in: str, options: .reportProgress, range: NSRange(location: 0, length: length)) {
-                return result
-            }
-        } catch _ {
-
+        guard let regex = try? AKRegularExpression(pattern: pattern, options: .caseInsensitive) else {
+            return nil
+        }
+        if let result = regex.firstMatch(in: str, options: .reportProgress, range: NSRange(location: 0, length: length)) {
+            return result
         }
         return nil
     }
@@ -134,11 +132,11 @@ private func nth(prefix: String, a: Int, b: Int) -> String {
 
 // a(n) + b | a(n) - b
 private func nth_child(a: Int, b: Int) -> String {
-    return nth(prefix: "preceding", a: a, b: b)
+    nth(prefix: "preceding", a: a, b: b)
 }
 
 private func nth_last_child(a: Int, b: Int) -> String {
-    return nth(prefix: "following", a: a, b: b)
+    nth(prefix: "following", a: a, b: b)
 }
 
 private let escapePattern = "(?:\\\\([!\"#\\$%&\'\\(\\)\\*\\+,\\./:;<=>\\?@\\[\\\\\\]\\^`\\{\\|\\}~]))"
@@ -172,23 +170,23 @@ private func substringWithRangeAtIndex(_ result: AKTextCheckingResult, str: Stri
 }
 
 private func escapeCSS(_ text: String) -> String {
-    return text.replacingOccurrences(of: escapePattern, with: "$1", options: .regularExpression, range: nil)
+    text.replacingOccurrences(of: escapePattern, with: "$1", options: .regularExpression, range: nil)
 }
 
 private func getElement(_ str: inout String, skip: Bool = true) -> String {
     if let result = matchElement(str) {
         let (text, text2) = (escapeCSS(substringWithRangeAtIndex(result, str: str, at: 1)),
                              escapeCSS(substringWithRangeAtIndex(result, str: str, at: 5)))
-        
+
         if skip {
             str = String(str[str.index(str.startIndex, offsetBy: result.range.length)..<str.endIndex])
         }
-        
+
         // tag with namespace
         if !text.isEmpty && !text2.isEmpty {
             return "\(text):\(text2)"
         }
-        
+
         // tag
         if !text.isEmpty {
             return text
@@ -204,7 +202,7 @@ private func getClassId(_ str: inout String, skip: Bool = true) -> String? {
         if skip {
             str = String(str[str.index(str.startIndex, offsetBy: result.range.length)..<str.endIndex])
         }
-        
+
         if attr.hasPrefix("#") {
             return "@id = '\(text)'"
         } else if attr.hasPrefix(".") {
@@ -223,7 +221,7 @@ private func getAttribute(_ str: inout String, skip: Bool = true) -> String? {
         if skip {
             str = String(str[str.index(str.startIndex, offsetBy: result.range.length)..<str.endIndex])
         }
-        
+
         switch expr {
         case "!=":
             return "@\(attr) != \(text)"
@@ -245,7 +243,7 @@ private func getAttribute(_ str: inout String, skip: Bool = true) -> String? {
         if skip {
             str = String(str[str.index(str.startIndex, offsetBy: result.range.length)..<str.endIndex])
         }
-        
+
         return "@\(atr)"
     } else if str.hasPrefix("[") {
         // bad syntax attribute
@@ -257,7 +255,7 @@ private func getAttribute(_ str: inout String, skip: Bool = true) -> String? {
         if skip {
             str = String(str[str.index(str.startIndex, offsetBy: result.range.length)..<str.endIndex])
         }
-        
+
         switch one {
         case "first-child":
             return "count(preceding-sibling::*) = 0"
@@ -279,7 +277,7 @@ private func getAttribute(_ str: inout String, skip: Bool = true) -> String? {
             if let sub = matchSubNthChild(one) {
                 let (nth, arg1) = (substringWithRangeAtIndex(sub, str: one, at: 1),
                                    substringWithRangeAtIndex(sub, str: one, at: 2))
-                
+
                 let nthFunc = (nth == "nth-child") ? nth_child : nth_last_child
                 if arg1 == "odd" {
                     return nthFunc(2, 1)
@@ -292,7 +290,7 @@ private func getAttribute(_ str: inout String, skip: Bool = true) -> String? {
                 let (nth, arg1, arg2) = (substringWithRangeAtIndex(sub, str: one, at: 1),
                                          substringWithRangeAtIndex(sub, str: one, at: 2),
                                          substringWithRangeAtIndex(sub, str: one, at: 3))
-                
+
                 let nthFunc = (nth == "nth-child") ? nth_child : nth_last_child
                 let a: Int = (arg1 == "-") ? -1 : Int(arg1)!
                 let b: Int = (arg2.isEmpty) ? 0 : Int(arg2)!
@@ -323,7 +321,7 @@ private func getAttrNot(_ str: inout String, skip: Bool = true) -> String? {
         if skip {
             str = String(str[str.index(str.startIndex, offsetBy: result.range.length)..<str.endIndex])
         }
-        
+
         if let attr = getAttribute(&one, skip: false) {
             return attr
         } else if let sub = matchElement(one) {
@@ -350,7 +348,7 @@ private func genCombinator(_ str: inout String, skip: Bool = true) -> String? {
         if skip {
             str = String(str[str.index(str.startIndex, offsetBy: result.range.length)..<str.endIndex])
         }
-        
+
         switch one {
         case ">":
             return "/"

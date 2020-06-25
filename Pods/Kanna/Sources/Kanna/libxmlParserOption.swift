@@ -23,23 +23,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 import Foundation
-
-import libxmlKanna
+import libxml2
 
 /*
 Libxml2HTMLParserOptions
 */
-public struct Libxml2HTMLParserOptions : OptionSet {
+public struct Libxml2HTMLParserOptions: OptionSet {
     public typealias RawValue = UInt
     private var value: UInt = 0
     init(_ value: UInt) { self.value = value }
-    private init(_ opt: htmlParserOption) { self.value = UInt(opt.rawValue) }
+    private init(_ opt: htmlParserOption) { value = UInt(opt.rawValue) }
     public init(rawValue value: UInt) { self.value = value }
-    public init(nilLiteral: ()) { self.value = 0 }
-    public static var allZeros: Libxml2HTMLParserOptions { return .init(0) }
-    static func fromMask(raw: UInt) -> Libxml2HTMLParserOptions { return .init(raw) }
-    public var rawValue: UInt { return self.value }
-    
+    public init(nilLiteral: ()) { value = 0 }
+    public static var allZeros: Libxml2HTMLParserOptions { .init(0) }
+    static func fromMask(raw: UInt) -> Libxml2HTMLParserOptions { .init(raw) }
+    public var rawValue: UInt { value }
+
     public static let STRICT     = Libxml2HTMLParserOptions(0)
     public static let RECOVER    = Libxml2HTMLParserOptions(HTML_PARSE_RECOVER)
     public static let NODEFDTD   = Libxml2HTMLParserOptions(HTML_PARSE_NODEFDTD)
@@ -60,13 +59,13 @@ public struct Libxml2XMLParserOptions: OptionSet {
     public typealias RawValue = UInt
     private var value: UInt = 0
     init(_ value: UInt) { self.value = value }
-    private init(_ opt: xmlParserOption) { self.value = UInt(opt.rawValue) }
+    private init(_ opt: xmlParserOption) { value = UInt(opt.rawValue) }
     public init(rawValue value: UInt) { self.value = value }
-    public init(nilLiteral: ()) { self.value = 0 }
-    public static var allZeros: Libxml2XMLParserOptions { return .init(0) }
-    static func fromMask(raw: UInt) -> Libxml2XMLParserOptions { return .init(raw) }
-    public var rawValue: UInt { return self.value }
-    
+    public init(nilLiteral: ()) { value = 0 }
+    public static var allZeros: Libxml2XMLParserOptions { .init(0) }
+    static func fromMask(raw: UInt) -> Libxml2XMLParserOptions { .init(raw) }
+    public var rawValue: UInt { value }
+
     public static let STRICT     = Libxml2XMLParserOptions(0)
     public static let RECOVER    = Libxml2XMLParserOptions(XML_PARSE_RECOVER)
     public static let NOENT      = Libxml2XMLParserOptions(XML_PARSE_NOENT)

@@ -52,12 +52,12 @@ public enum Colors {
     }
 
     public static var defaultFilter: String {
-      let extensions = Parser.subParsers.flatMap { $0.extensions }.sorted().joined(separator: "|")
-      return "[^/]\\.(?i:\(extensions))$"
+      let extensions = Parser.subParsers.flatMap { $0.extensions }.sorted()
+      return filterRegex(forExtensions: extensions)
     }
 
     public static var allOptions: ParserOptionList {
-      return ParserOptionList(lists: Parser.subParsers.map { $0.allOptions })
+      ParserOptionList(lists: Parser.subParsers.map { $0.allOptions })
     }
 
     public func parse(path: Path, relativeTo parent: Path) throws {
@@ -73,12 +73,14 @@ public enum Colors {
     func register(parser: ColorsFileTypeParser.Type) {
       for ext in parser.extensions {
         if let old = parsers[ext] {
-          warningHandler?("""
+          warningHandler?(
+            """
             error: Parser \(parser) tried to register the file type '\(ext)' already \
             registered by \(old).
             """,
             #file,
-            #line)
+            #line
+          )
         }
         parsers[ext] = parser
       }

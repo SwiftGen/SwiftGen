@@ -29,7 +29,7 @@ extension Strings {
     // MARK: - Structured keys
 
     private static func split(key: String, separator: String) -> [String] {
-      return key
+      key
         .components(separatedBy: separator)
         .filter { !$0.isEmpty }
     }

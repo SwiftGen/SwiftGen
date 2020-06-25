@@ -15,7 +15,7 @@ SCHEME_NAME = 'swiftgen'.freeze
 CONFIGURATION = 'Debug'.freeze
 RELEASE_CONFIGURATION = 'Release'.freeze
 POD_NAME = 'SwiftGen'.freeze
-MIN_XCODE_VERSION = 11.2
+MIN_XCODE_VERSION = 11.4
 
 BUILD_DIR = File.absolute_path('./build')
 BIN_NAME = 'swiftgen'.freeze
@@ -49,7 +49,11 @@ namespace :cli do
     Utils.run(
       %(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "#{SCHEME_NAME}" -configuration "#{RELEASE_CONFIGURATION}") +
       %( -derivedDataPath "#{BUILD_DIR}" TEMPLATE_PATH="#{tpl_rel_path}") +
-      %( SWIFTGEN_OTHER_LDFLAGS="-sectcreate __TEXT __info_plist #{plist_file.shellescape}"),
+      %( SWIFTGEN_OTHER_LDFLAGS="-sectcreate __TEXT __info_plist #{plist_file.shellescape}") +
+      # Note: "-Wl,-headerpad_max_install_names" is needed to fix a bug when Homebrew tries to update the dylib ID of linked frameworks
+      #  - See: https://github.com/Homebrew/homebrew-core/pull/32403
+      #  - See also: https://github.com/Carthage/Carthage/commit/899d8a5da15979fd0fede39fe57b56c7ff532abe for similar fix in Carthage's Makefile
+      %( 'OTHER_LDFLAGS=$(inherited) -Wl,-headerpad_max_install_names' ),
       task, xcrun: true, formatter: :xcpretty
     )
   end
@@ -72,6 +76,15 @@ namespace :cli do
                 %(mkdir -p "#{fmkdir}"),
                 %(cp -fR "#{generated_bundle_path}/Frameworks/" "#{fmkdir}")
               ], task, 'copy_frameworks')
+
+    # Hack: remove swift libraries on 10.14.4 or higher, to avoid issues with brew
+    macOS_version = Gem::Version.new(`sw_vers -productVersion`)
+    if macOS_version >= Gem::Version.new('10.14.4')
+      Utils.print_header "Removing bundled swift libraries from #{fmkdir}"
+      Utils.run([
+                  %(rm "#{fmkdir}"/libswift*.dylib)
+                ], task, 'remove_bundled_swift')
+    end
 
     Utils.print_header "Fixing binary's @rpath"
     Utils.run([

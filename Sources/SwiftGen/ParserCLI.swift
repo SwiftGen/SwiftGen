@@ -27,7 +27,18 @@ extension ParserCLI {
   }
 
   static func command(named name: String) -> ParserCLI? {
-    return allCommands.first { $0.name == name }
+    allCommands.first { $0.name == name }
+  }
+}
+
+// We consider the name as the identifier of a ParserCLI
+extension ParserCLI: Hashable {
+  public static func == (lhs: ParserCLI, rhs: ParserCLI) -> Bool {
+    lhs.name == rhs.name
+  }
+
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(name)
   }
 }
 

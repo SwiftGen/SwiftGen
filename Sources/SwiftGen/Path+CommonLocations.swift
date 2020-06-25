@@ -20,7 +20,8 @@ extension Path {
     return binaryPath
   }()
 
-  static let applicationSupport: Path = {
+  // Deprecated: Remove this in SwiftGen 7.0
+  static let deprecatedApplicationSupport: Path = {
     let paths = NSSearchPathForDirectoriesInDomains(
       .applicationSupportDirectory,
       .userDomainMask,
@@ -32,7 +33,8 @@ extension Path {
     return Path(path)
   }()
 
-  static let appSupportTemplates = Path.applicationSupport + "SwiftGen/templates"
+  // Deprecated: Remove this in SwiftGen 7.0
+  static let deprecatedAppSupportTemplates = Path.deprecatedApplicationSupport + "SwiftGen/templates"
   static let bundledTemplates = binary.parent() + templatesRelativePath
 
   // MARK: Private
@@ -46,6 +48,14 @@ extension Path {
       return "../templates"
     }
   }()
+}
+
+/// URL to the Documentation on GitHub
+func gitHubDocURL(version: String, path: String = "") -> URL {
+  let type = path.isEmpty || path.hasSuffix("/") ? "tree" : "blob"
+  return URL(
+    string: "https://github.com/SwiftGen/SwiftGen/\(type)/\(version)/Documentation/\(path)"
+  )! //swiftlint:disable:this force_unwrapping
 }
 
 // swiftlint:disable convenience_type

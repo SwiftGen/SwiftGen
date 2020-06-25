@@ -33,7 +33,7 @@ public enum InterfaceBuilder {
       self.warningHandler = warningHandler
     }
 
-    public static let defaultFilter = "[^/]\\.storyboard$"
+    public static let defaultFilter = filterRegex(forExtensions: ["storyboard"])
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       try addStoryboard(at: path)
@@ -52,7 +52,7 @@ public enum InterfaceBuilder {
     }
 
     var modules: Set<String> {
-      return Set<String>(storyboards.flatMap { $0.modules })
+      Set<String>(storyboards.flatMap { $0.modules })
     }
 
     var platform: String? {

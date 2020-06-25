@@ -11,6 +11,7 @@
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
+// swiftlint:disable implicit_return
 
 // MARK: - Fonts
 

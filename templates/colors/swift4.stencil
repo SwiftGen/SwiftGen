@@ -12,8 +12,7 @@
   {{accessModifier}} typealias {{colorAlias}} = UIColor
 #endif
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Colors
 
@@ -31,7 +30,7 @@
   {{accessModifier}} static let {{color.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}(rgbaValue: {% call rgbaValue color %})
   {% endfor %}
 {% endmacro %}
-  {% if palettes.count > 1 %}
+  {% if palettes.count > 1 or param.forceFileNameEnum %}
   {% for palette in palettes %}
   {{accessModifier}} enum {{palette.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
     {% filter indent:2 %}{% call enumBlock palette.colors %}{% endfilter %}
@@ -45,18 +44,35 @@
 
 // MARK: - Implementation Details
 
-// swiftlint:disable operator_usage_whitespace colon
 internal extension {{colorAlias}} {
   convenience init(rgbaValue: UInt32) {
-    let red:   CGFloat = CGFloat((rgbaValue >> UInt32(24)) & UInt32(0xff)) / CGFloat(255.0)
-    let green: CGFloat = CGFloat((rgbaValue >> UInt32(16)) & UInt32(0xff)) / CGFloat(255.0)
-    let blue:  CGFloat = CGFloat((rgbaValue >> UInt32( 8)) & UInt32(0xff)) / CGFloat(255.0)
-    let alpha: CGFloat = CGFloat((rgbaValue              ) & UInt32(0xff)) / CGFloat(255.0)
-
-    self.init(red: red, green: green, blue: blue, alpha: alpha)
+    let components = RGBAComponents(rgbaValue: rgbaValue).normalized
+    self.init(red: components[0], green: components[1], blue: components[2], alpha: components[3])
   }
 }
-// swiftlint:enable operator_usage_whitespace colon
+
+private struct RGBAComponents {
+  let rgbaValue: UInt32
+
+  private var shifts: [UInt32] {
+    [
+      rgbaValue >> 24, // red
+      rgbaValue >> 16, // green
+      rgbaValue >> 8,  // blue
+      rgbaValue        // alpha
+    ]
+  }
+
+  private var components: [CGFloat] {
+    shifts.map {
+      CGFloat($0 & 0xff)
+    }
+  }
+
+  var normalized: [CGFloat] {
+    components.map { $0 / 255.0 }
+  }
+}
 
 {{accessModifier}} extension {{colorAlias}} {
   convenience init(named color: {{enumName}}) {

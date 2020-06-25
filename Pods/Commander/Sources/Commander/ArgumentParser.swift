@@ -1,4 +1,4 @@
-private enum Arg : CustomStringConvertible {
+private enum Arg : CustomStringConvertible, Equatable {
   /// A positional argument
   case argument(String)
 
@@ -6,7 +6,7 @@ private enum Arg : CustomStringConvertible {
   case option(String)
 
   /// A flag
-  case flag(Set<Character>)
+  case flag([Character])
 
   var description:String {
     switch self {
@@ -32,6 +32,11 @@ private enum Arg : CustomStringConvertible {
 }
 
 
+private func == (lhs: Arg, rhs: Arg) -> Bool {
+  return lhs.description == rhs.description
+}
+
+
 public struct ArgumentParserError : Error, Equatable, CustomStringConvertible {
   public let description: String
 
@@ -53,7 +58,19 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
 
   /// Initialises the ArgumentParser with an array of arguments
   public init(arguments: [String]) {
-    self.arguments = arguments.map { argument in
+    let splitArguments = arguments.split(maxSplits: 1, omittingEmptySubsequences: false) { $0 == "--" }
+
+    let unfixedArguments: [String]
+    let fixedArguments: [String]
+    if splitArguments.count == 2, let prefix = splitArguments.first, let suffix = splitArguments.last {
+      unfixedArguments = Array(prefix)
+      fixedArguments = Array(suffix)
+    } else {
+      unfixedArguments = arguments
+      fixedArguments = []
+    }
+
+    self.arguments = unfixedArguments.map { argument in
       if argument.first == "-" {
         let flags = argument[argument.index(after: argument.startIndex)..<argument.endIndex]
 
@@ -61,12 +78,12 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
           let option = flags[flags.index(after: flags.startIndex)..<flags.endIndex]
           return .option(String(option))
         }
-
-        return .flag(Set(flags))
+        return .flag(Array(String(flags)))
       }
 
       return .argument(argument)
     }
+    self.arguments.append(contentsOf: fixedArguments.map { .argument($0) })
   }
 
   public init(parser: ArgumentParser) throws {
@@ -77,8 +94,8 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
     return arguments.map { $0.description }.joined(separator: " ")
   }
 
-  public var isEmpty:Bool {
-    return arguments.isEmpty
+  public var isEmpty: Bool {
+    return arguments.first { $0 != .argument("") } == nil
   }
 
   public var remainder:[String] {
@@ -176,7 +193,7 @@ public final class ArgumentParser : ArgumentConvertible, CustomStringConvertible
       case .flag(let option):
         var options = option
         if options.contains(flag) {
-          options.remove(flag)
+          options.removeAll(where: { $0 == flag })
           arguments.remove(at: index)
 
           if !options.isEmpty {
