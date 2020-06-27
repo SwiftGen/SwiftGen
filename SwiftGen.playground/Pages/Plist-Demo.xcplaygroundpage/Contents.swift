@@ -41,6 +41,7 @@ internal enum PlistFilesInline {
   }
   internal enum Configuration {
     internal static let environment: String = "development"
+    internal static let names: [String] = ["John", "Peter", "Nick"]
     internal static let options: [String: Any] = ["Animation Style": "Party Mode"]
   }
   internal enum ShoppingList {
@@ -70,6 +71,7 @@ internal enum PlistFilesRuntime {
   internal enum Configuration {
     private static let _document = PlistDocument(path: "configuration.plist")
     internal static let environment: String = _document["Environment"]
+    internal static let names: [String] = _document["Names"]
     internal static let options: [String: Any] = _document["Options"]
   }
   internal enum ShoppingList {
