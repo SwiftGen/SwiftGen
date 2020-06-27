@@ -12,7 +12,6 @@ protocol StringsFileTypeParser: AnyObject {
 
   var shouldOverwriteValuesInExistingTable: Bool { get }
 
-  static var allOptions: ParserOptionList { get }
   static var extensions: [String] { get }
 
   func parseFile(at path: Path) throws -> [Strings.Entry]

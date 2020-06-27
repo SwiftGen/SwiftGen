@@ -18,8 +18,6 @@ extension Strings {
     }
 
     static let extensions = ["stringsdict"]
-    static let allOptions: ParserOptionList = [Option.separator]
-    static let propertyListDecoder = PropertyListDecoder()
 
     func parseFile(at path: Path) throws -> [Strings.Entry] {
       guard let data = try? path.read() else {
@@ -27,7 +25,7 @@ extension Strings {
       }
 
       do {
-        let plurals = try Strings.StringsDictFileParser.propertyListDecoder
+        let plurals = try PropertyListDecoder()
           .decode([String: StringsDict].self, from: data)
           .compactMapValues { stringsDict -> StringsDict.PluralEntry? in
             // We only support .pluralEntry (and not .variableWidthEntry) for now, so filter out the rest

@@ -77,7 +77,6 @@ public enum Strings {
       return filterRegex(forExtensions: extensions)
     }
 
-    // Localizable.strings files are generally UTF16, not UTF8!
     public func parse(path: Path, relativeTo parent: Path) throws {
       guard let parserType = parsers[path.extension?.lowercased() ?? ""] else {
         throw ParserError.unsupportedFileType(path: path, supported: parsers.keys.sorted())
