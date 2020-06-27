@@ -2,7 +2,7 @@
 
 ---
 
-## Develop
+## 6.2.1
 
 There are no major changes in this release, although JSON & Plist template writers may want to read the [small migration guide](Documentation/SwiftGenKit%20Contexts/MigrationGuide.md##swiftgen-621-migration-guide) to prepare for upcoming context changes.
 
