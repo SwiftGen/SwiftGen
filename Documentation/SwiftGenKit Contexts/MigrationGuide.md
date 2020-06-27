@@ -1,4 +1,17 @@
+# SwiftGen 6.2.1 Migration Guide
+
+## Changes for template writers
+
+### JSON and Plist
+
+The `documents` variable of each "file" is now considered as deprecated, it's replacement is `document`. The `documents` variable is still available, but will be removed in SwiftGen 7.0.
+
+Initially we provided `documents` to keep the (context) data model the same for the JSON, Plist and YAML parsers, even though only YAML files can have multiple documents in one file. We've decided to forgo that approach, as our contexts should match the underlying content.
+
 # SwiftGen 6.0 Migration Guide
+
+<details>
+<summary>Migration Guide</summary>
 
 ## Changes for users
 
@@ -12,6 +25,8 @@ The parser will no longer normalize string keys, which can lead to duplicate key
 ```
 
 SwiftGenKit will no longer consolidate these into one "abcNews" case. It is up to the user to fix this inconsistent casing in their `strings` files, or to adapt a custom template to take that into consideration.
+
+</details>
 
 ## Changes for template writers
 
