@@ -1,5 +1,7 @@
 require_relative 'rakelib/check_changelog'
 
+is_release = github.branch_for_head.start_with?('release/')
+
 # Welcome message
 markdown [
   "Hey 👋 I'm Eve, the friendly bot watching over SwiftGen 🤖",
@@ -11,12 +13,11 @@ markdown [
 warn('PR is classed as Work in Progress') if github.pr_title.include? '[WIP]'
 
 # Warn when there is a big PR
-warn('Big PR') if git.lines_of_code > 500
+warn('Big PR') if git.lines_of_code > 500 && !is_release
 
 need_fixes = []
 
 # Check for correct base branch
-is_release = github.branch_for_head.start_with?('release/')
 to_develop = github.branch_for_base == 'develop'
 to_stable = github.branch_for_base == 'stable'
 if is_release
@@ -63,7 +64,7 @@ if podfile_changed || swiftgenkit_podspec_changed || dependencies_doc_changed
     stdout.lines.each do |message|
       need_fixes << fail(message.chomp)
     end
-  end  
+  end
 end
 
 # Check for a CHANGELOG entry
