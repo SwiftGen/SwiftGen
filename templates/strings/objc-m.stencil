@@ -15,11 +15,12 @@
 static NSString* tr(NSString *tableName, NSString *key, ...) {
 
     NSBundle *bundle = [NSBundle bundleForClass:BundleToken.class];
-    NSString *format = [bundle localizedStringForKey:key value:@"" table:tableName];
+    NSString *format = [bundle localizedStringForKey:key value:nil table:tableName];
+    NSLocale *locale = [NSLocale currentLocale];
 
     va_list args;
     va_start(args, key);
-    NSString *result = [[NSString alloc] initWithFormat:format arguments:args];
+    NSString *result = [[NSString alloc] initWithFormat:format locale:locale arguments:args];
     va_end(args);
 
     return result;

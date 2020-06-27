@@ -26,7 +26,7 @@ Use this file to track all dependencies required by this project.
 ### StencilSwiftKit
 
 - Additional tags/filters for Stencil, developed and maintained by the SwiftGen project.
-- License: [MIT](https://github.com/SwiftGen/StencilSwiftKit/blob/master/LICENCE)
+- License: [MIT](https://github.com/SwiftGen/StencilSwiftKit/blob/stable/LICENCE)
 
 ### SwiftLint
 

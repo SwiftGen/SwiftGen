@@ -7,8 +7,8 @@
 import StencilSwiftKit
 import XCTest
 
-class StringsTests: XCTestCase {
-  enum Contexts {
+final class StringsTests: XCTestCase {
+  private enum Contexts {
     static let all = [
       "empty",
       "localizable",
@@ -21,7 +21,7 @@ class StringsTests: XCTestCase {
   }
 
   // generate variations to test customname generation
-  let variations: VariationGenerator = { name, context in
+  private let variations: VariationGenerator = { name, context in
     guard name == "localizable" else { return [(context: context, suffix: "")] }
 
     return [
@@ -44,9 +44,9 @@ class StringsTests: XCTestCase {
       (
         context: try StencilContext.enrich(
           context: context,
-          parameters: ["localizeFunction=XCTLocFunc"]
+          parameters: ["lookupFunction=XCTLocFunc(forKey:table:)"]
         ),
-        suffix: "-localizeFunction"
+        suffix: "-lookupFunction"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
@@ -65,7 +65,7 @@ class StringsTests: XCTestCase {
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
-        suffix: "-no-comments"
+        suffix: "-noComments"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["headerName=headerName-from-parameter.h"]),

@@ -1,0 +1,19 @@
+files:
+- document:
+    data:
+    - "Anna"
+    - "Bob"
+    metadata:
+      element:
+        type: "String"
+      type: "Array"
+  documents:
+  - data:
+    - "Anna"
+    - "Bob"
+    metadata:
+      element:
+        type: "String"
+      type: "Array"
+  name: "array"
+  path: "array.json"

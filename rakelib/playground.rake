@@ -32,7 +32,8 @@ namespace :playground do
     )
   end
   task :json do
-    sh %(cp Tests/Fixtures/Resources/YAML/good/configuration.json SwiftGen.playground/Resources/)
+    sh %(cp Tests/Fixtures/Resources/JSON/array.json SwiftGen.playground/Resources/)
+    sh %(cp Tests/Fixtures/Resources/JSON/configuration.json SwiftGen.playground/Resources/)
   end
   task :plist do
     sh %(cp Tests/Fixtures/Resources/Plist/good/Info.plist SwiftGen.playground/Resources/TestInfo.plist)

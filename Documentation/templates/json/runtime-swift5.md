@@ -11,7 +11,7 @@
 
 - When you need to generate *Swift 5* code.
 - Loads the data from the JSON file in the current bundle at runtime.
-- If you need other functionality, such as loading a file in your `Documents` folder, or handling `Optional` properties, you should write your own custom template ([guide](../../Creating-your-templates.md)).
+- If you need other functionality, such as loading a file in your `Documents` folder, or handling `Optional` properties, you should write your own custom template ([guide](../../Articles/Creating-custom-templates.md)).
 
 ## Customization
 
@@ -30,18 +30,15 @@ You can customize some elements of this template by overriding the following par
 
 ```swift
 internal enum JSONFiles {
+  internal enum Array {
+    internal static let items: [String] = objectFromJSON(at: "array.json")
+  }
   internal enum Configuration {
     private static let _document = JSONDocument(path: "configuration.json")
     internal static let apiVersion: String = _document["api-version"]
     internal static let country: Any? = _document["country"]
     internal static let environment: String = _document["environment"]
     internal static let options: [String: Any] = _document["options"]
-  }
-  internal enum GroceryList {
-    internal static let items: [String] = objectFromJSON(at: "grocery-list.yaml")
-  }
-  internal enum Version {
-    internal static let value: String = objectFromJSON(at: "version.yaml")
   }
 }
 ```
@@ -55,5 +52,5 @@ internal enum JSONFiles {
 let foo = JSONFiles.Configuration.options
 
 // This will be an [String]
-let bar = JSONFiles.GroceryList.items
+let bar = JSONFiles.Array.items
 ```

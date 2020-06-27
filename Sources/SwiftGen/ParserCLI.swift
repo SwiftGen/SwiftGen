@@ -31,6 +31,17 @@ extension ParserCLI {
   }
 }
 
+// We consider the name as the identifier of a ParserCLI
+extension ParserCLI: Hashable {
+  public static func == (lhs: ParserCLI, rhs: ParserCLI) -> Bool {
+    lhs.name == rhs.name
+  }
+
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(name)
+  }
+}
+
 // MARK: - All Parser Commands
 
 extension ParserCLI {

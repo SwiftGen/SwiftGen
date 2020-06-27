@@ -4,7 +4,7 @@
 // MIT Licence
 //
 
-class InterfaceBuilderMacOSTests: InterfaceBuilderTests {
+final class InterfaceBuilderMacOSTests: InterfaceBuilderTests {
   func testScenesSwift4() {
     test(
       template: "scenes-swift4",
