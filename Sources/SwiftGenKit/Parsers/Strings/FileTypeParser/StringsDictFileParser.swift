@@ -11,17 +11,16 @@ extension Strings {
   final class StringsDictFileParser: StringsFileTypeParser {
     private let options: ParserOptionValues
 
-    let shouldOverwriteValuesInExistingTable: Bool = true
-
     init(options: ParserOptionValues) {
       self.options = options
     }
 
+    static let priority: Int = 2
     static let extensions = ["stringsdict"]
 
     func parseFile(at path: Path) throws -> [Strings.Entry] {
       guard let data = try? path.read() else {
-        throw ParserError.failureOnLoading(path: path.string)
+        throw ParserError.failureOnLoading(path: path)
       }
 
       do {

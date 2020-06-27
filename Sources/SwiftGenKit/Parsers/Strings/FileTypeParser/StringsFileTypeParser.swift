@@ -10,8 +10,7 @@ import PathKit
 protocol StringsFileTypeParser: AnyObject {
   init(options: ParserOptionValues)
 
-  var shouldOverwriteValuesInExistingTable: Bool { get }
-
+  static var priority: Int { get }
   static var extensions: [String] { get }
 
   func parseFile(at path: Path) throws -> [Strings.Entry]

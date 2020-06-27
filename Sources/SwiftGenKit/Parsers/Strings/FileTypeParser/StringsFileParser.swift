@@ -11,18 +11,17 @@ extension Strings {
   final class StringsFileParser: StringsFileTypeParser {
     private let options: ParserOptionValues
 
-    let shouldOverwriteValuesInExistingTable: Bool = false
-
     init(options: ParserOptionValues) {
       self.options = options
     }
 
+    static let priority: Int = 1
     static let extensions = ["strings"]
 
     // Localizable.strings files are generally UTF16, not UTF8!
     func parseFile(at path: Path) throws -> [Strings.Entry] {
       guard let data = try? path.read() else {
-        throw ParserError.failureOnLoading(path: path.string)
+        throw ParserError.failureOnLoading(path: path)
       }
 
       let dict = try PropertyListDecoder()
