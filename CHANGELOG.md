@@ -4,9 +4,7 @@
 
 ## Develop
 
-### Breaking Changes
-
-_None_
+There are no major changes in this release, although JSON & Plist template writers may want to read the [small migration guide](Documentation/SwiftGenKit%20Contexts/MigrationGuide.md##swiftgen-621-migration-guide) to prepare for upcoming context changes.
 
 ### Deprecations
 
@@ -14,10 +12,6 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#702](https://github.com/SwiftGen/SwiftGen/pull/702)
   [#732](https://github.com/SwiftGen/SwiftGen/pull/732)
-
-### New Features
-
-_None_
 
 ### Bug Fixes
 
@@ -45,6 +39,10 @@ _None_
   [#700](https://github.com/SwiftGen/SwiftGen/issues/700)
 
 ## 6.2.0
+
+⚠️ This minor version contains a lot of deprecations that may apply to your configuration and how you use SwiftGen. With the exception of `swift3` templates (which have been removed), everything should still work as before. But be warned that all features marked as deprecated will be removed in SwiftGen 7.0.
+
+Read the [SwiftGen 6.2 Migration Guide](Documentation/MigrationGuide.md#migrating-to-swiftgen-62) for a list of changes you'll need to apply.
 
 ### Breaking Changes
 
