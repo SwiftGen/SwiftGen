@@ -26,12 +26,8 @@ final class StringsTests: XCTestCase {
         suffix: "-customName"
       ),
       (
-        context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
-        suffix: "-noComments"
-      ),
-      (
-        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-        suffix: "-publicAccess"
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
       ),
       (
         context: try StencilContext.enrich(
@@ -41,8 +37,12 @@ final class StringsTests: XCTestCase {
         suffix: "-lookupFunction"
       ),
       (
-        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
-        suffix: "-forceFileNameEnum"
+        context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
+        suffix: "-noComments"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
       )
     ]
   }
