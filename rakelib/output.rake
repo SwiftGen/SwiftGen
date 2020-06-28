@@ -64,8 +64,9 @@ namespace :output do
       compile_module(m, 'watchOS', task)
     end
 
-    # delete swiftdoc
+    # delete unneeded files
     Module.remove_swiftdoc()
+    Module.remove_swiftsourceinfo()
   end
 
   desc 'Compile output'

@@ -45,6 +45,12 @@ class Module
       FileUtils.rm_rf(file)
     end
   end
+
+  def self.remove_swiftsourceinfo()
+    Dir.glob("#{MODULE_OUTPUT_PATH}/*/*.swiftsourceinfo").each do |file|
+      FileUtils.rm_rf(file)
+    end
+  end
 end
 
 class CompilationConfiguration

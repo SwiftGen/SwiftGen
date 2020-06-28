@@ -2,3 +2,7 @@
 common:
   swift_versions:
     - 5
+file_specific:
+  defaults-customBundle.swift:
+    files:
+      - Common-CustomBundle.swift
