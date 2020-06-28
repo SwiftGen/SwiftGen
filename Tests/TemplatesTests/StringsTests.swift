@@ -22,6 +22,10 @@ final class StringsTests: XCTestCase {
         suffix: ""
       ),
       (
+        context: try StencilContext.enrich(context: context, parameters: ["bundle=ResourcesBundle.bundle"]),
+        suffix: "-customBundle"
+      ),
+      (
         context: try StencilContext.enrich(context: context, parameters: ["enumName=XCTLoc"]),
         suffix: "-customName"
       ),
@@ -54,6 +58,10 @@ final class StringsTests: XCTestCase {
       (
         context: context,
         suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["bundle=[ResourcesBundle bundle]"]),
+        suffix: "-customBundle"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["noComments"]),
