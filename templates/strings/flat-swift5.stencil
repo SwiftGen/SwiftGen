@@ -78,6 +78,7 @@ extension {{enumName}} {
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
+{% if not param.lookupFunction %}
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
@@ -86,6 +87,7 @@ private final class BundleToken {
   }()
 }
 // swiftlint:enable convenience_type
+{% endif %}
 {% else %}
 // No string found
 {% endif %}
