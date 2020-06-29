@@ -100,6 +100,47 @@ final class StringsTests: XCTestCase {
     XCTDiffContexts(result, expected: "plurals-same-table", sub: .strings)
   }
 
+  func testErrorWhenSameTableWithDifferentPath() throws {
+    let parser = try Strings.Parser()
+    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
+
+    XCTAssertThrowsError(
+      try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings)),
+      "Expected an error to be thrown"
+    ) { error in
+      guard
+        let parserError = error as? Strings.ParserError,
+        case .duplicateTableFile(let path, let existing) = parserError
+      else {
+        XCTFail("Unexpected error occured while parsing: \(error)")
+        return
+      }
+
+      XCTAssertEqual(path, existing)
+    }
+  }
+
+  func testErrorWhenUnsupportedFileType() throws {
+    let parser = try Strings.Parser()
+    let filter = try Filter(pattern: Strings.Parser.filterRegex(forExtensions: ["clr"]))
+
+    XCTAssertThrowsError(
+      try parser.searchAndParse(path: Fixtures.path(for: "colors.clr", sub: .colors), filter: filter),
+      "Expected an error to be thrown"
+    ) { error in
+      guard
+        let parserError = error as? Strings.ParserError,
+        case .unsupportedFileType(let path, let supported) = parserError
+      else {
+        XCTFail("Unexpected error occured while parsing: \(error)")
+        return
+      }
+
+      XCTAssertEqual(path.lastComponent, "colors.clr")
+      XCTAssertEqual(supported, ["strings", "stringsdict"])
+    }
+  }
+
   func testErrorWhenMissingVariableInPluralDefinition() throws {
     let parser = try Strings.Parser()
 
