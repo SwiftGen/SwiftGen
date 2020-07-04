@@ -37,7 +37,7 @@ internal class MainEntity: NSManagedObject {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc internal class func createFetchRequest() -> NSFetchRequest<MainEntity> {
+  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<MainEntity> {
     return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
@@ -120,7 +120,7 @@ do {
 }
 
 do {
-    let fetchRequest = MainEntity.createFetchRequest()
+    let fetchRequest = MainEntity.makeFetchRequest()
     let count = try context.count(for: fetchRequest)
     print("Found \(count) assets")
 } catch {

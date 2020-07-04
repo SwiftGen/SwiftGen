@@ -10,7 +10,7 @@ _None_
 
 ### New Features
 
-* CoreData: Deprecates `fetchRequest()` and adds `createFetchRequest()` to avoid ambiguous function usage.  
+* CoreData: Deprecates `fetchRequest()` and adds `makeFetchRequest()` to avoid ambiguous function usage.  
 [David Rothera](https://github.com/davidrothera)
 [#726](https://github.com/SwiftGen/SwiftGen/pull/726)
 
