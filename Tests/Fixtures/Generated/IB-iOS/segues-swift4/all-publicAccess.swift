@@ -52,11 +52,3 @@ public extension SegueType where RawValue == String {
     self.init(rawValue: identifier)
   }
 }
-
-// swiftlint:disable convenience_type
-private final class BundleToken {
-  static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
-  }()
-}
-// swiftlint:enable convenience_type
