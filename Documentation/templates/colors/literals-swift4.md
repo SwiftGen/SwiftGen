@@ -20,8 +20,8 @@ You can customize some elements of this template by overriding the following par
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
 | `enumName` | `ColorName` | Allows you to change the name of the generated `enum` containing all colors. |
-| `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 | `forceFileNameEnum` | N/A | Setting this parameter will generate an `enum <FileName>` _even if_ only one FileName was provided as input. |
+| `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 
 Note: if you use `enumName: UIColor` (or `NSColor` on macOS) then the color constants will be generated as an extension of the `UIColor` (iOS) / `NSColor` (macOS) type directly without creating a separate `enum` type for namespacing those color constants.
 
