@@ -68,7 +68,7 @@ func XCTDiffStrings(_ result: String, _ expected: String, file: StaticString = #
   XCTFail(error, file: file, line: line)
 }
 
-func diff(_ result: [String: Any], _ expected: [String: Any], path: String = "") -> String? {
+private func diff(_ result: [String: Any], _ expected: [String: Any], path: String = "") -> String? {
   // check keys
   if Set(result.keys) != Set(expected.keys) {
     let lhs = result.keys.map { " - \($0): \(result[$0] ?? "")" }.joined(separator: "\n")
@@ -96,7 +96,7 @@ func diff(_ result: [String: Any], _ expected: [String: Any], path: String = "")
   return nil
 }
 
-func compare(_ lhs: Any, _ rhs: Any, key: String, path: String) -> String? {
+private func compare(_ lhs: Any, _ rhs: Any, key: String, path: String) -> String? {
   let keyPath = (path.isEmpty) ? key : "\(path).\(key)"
 
   if let lhs = convertToNumber(lhs), let rhs = convertToNumber(rhs), lhs == rhs {
@@ -131,7 +131,7 @@ func compare(_ lhs: Any, _ rhs: Any, key: String, path: String) -> String? {
   return nil
 }
 
-func convertToNumber(_ value: Any) -> NSNumber? {
+private func convertToNumber(_ value: Any) -> NSNumber? {
   switch value {
   case let value as Bool:
     return value as NSNumber
@@ -144,7 +144,7 @@ func convertToNumber(_ value: Any) -> NSNumber? {
   }
 }
 
-func convertToString(_ value: Any) -> String? {
+private func convertToString(_ value: Any) -> String? {
   switch value {
   case let value as String:
     return value
@@ -155,7 +155,7 @@ func convertToString(_ value: Any) -> String? {
   }
 }
 
-func convertToDictionary(_ value: Any) -> [String: Any]? {
+private func convertToDictionary(_ value: Any) -> [String: Any]? {
   switch value {
   case let value as [String: Any]:
     return value
@@ -166,13 +166,15 @@ func convertToDictionary(_ value: Any) -> [String: Any]? {
   }
 }
 
-func convertNSObjectToDictionary(_ object: NSObject) -> [String: Any] {
+private func convertNSObjectToDictionary(_ object: NSObject) -> [String: Any] {
   var result: [(String, Any)] = []
   var mirror: Mirror? = Mirror(reflecting: object)
 
   repeat {
-    // ensure we can property handle lazy variables
-    // we use `object.value(forKey:)` to force load lazy variables
+    // At runtime when mirroring, labels for lazy vars get the "$__lazy_storage_$_" prefix
+    // so we need to delete the prefix to handle those lazy var cases.
+    // We use `object.value(forKey:) to force load lazy variables because `someMirrorChild.value`
+    // evaluates to `nil` for lazy variables and doesn't trigger the lazy var evaluation.
     result += mirror?.children
       .compactMap { $0.label?.deletingPrefix("$__lazy_storage_$_") }
       .map { ($0, object.value(forKey: $0) as Any) } ?? []
@@ -182,7 +184,7 @@ func convertNSObjectToDictionary(_ object: NSObject) -> [String: Any] {
   return Dictionary.init(uniqueKeysWithValues: result)
 }
 
-extension String {
+private extension String {
   func deletingPrefix(_ prefix: String) -> String {
     guard hasPrefix(prefix) else { return self }
     return String(dropFirst(prefix.count))
