@@ -24,7 +24,7 @@ _None_
 * Prevent generating `default.profraw` (code coverage) files.  
   [David Jennes](https://github.com/djbe)
   [#722](https://github.com/SwiftGen/SwiftGen/pull/722)
-* Plist/JSON/YAML: Fix issue with homogeneous `Array`s in the Inline templates (such as `[String`]).  
+* JSON/Plist/YAML: Fix issue with homogeneous `Array`s in the Inline templates (such as `[String`]).  
   [#687](https://github.com/SwiftGen/SwiftGen/pull/687)
   [@fjtrujy](https://github.com/fjtrujy)
 * Avoid breaking the system swift installation when installing SwiftGen via Homebrew on macOS 10.14.4 or higher.  
@@ -40,6 +40,9 @@ _None_
 * Use `JSONSerialization` instead of `Yams` for parsing JSONs, making the `json` parser faster.  
   [Marcelo Fabri](https://github.com/marcelofabri)
   [#698](https://github.com/SwiftGen/SwiftGen/issues/698)
+* JSON/Plist/YAML: Lazily evaluate `metadata` of documents, making SwiftGen faster if the `metadata` field is never used in a template.  
+  [Marcelo Fabri](https://github.com/marcelofabri)
+  [#700](https://github.com/SwiftGen/SwiftGen/issues/700)
 
 ## 6.2.0
 

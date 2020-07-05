@@ -23,19 +23,14 @@ extension JSON.Parser {
   }
 
   private func map(file: JSON.File) -> [String: Any] {
-    let document = map(document: file.document)
+    let document = StencilContextLazyDocument(data: file.document)
+
     return [
       "name": file.name,
       "path": file.path.string,
       "document": document,
-      "documents": [document] // Deprecated: remains for legacy/compatibility reasons; will be removed in 7.0
-    ]
-  }
-
-  private func map(document: Any) -> [String: Any] {
-    [
-      "data": document,
-      "metadata": Metadata.generate(for: document)
+      // Deprecated: remains for legacy/compatibility reasons; will be removed in 7.0
+      "documents": [document]
     ]
   }
 }
