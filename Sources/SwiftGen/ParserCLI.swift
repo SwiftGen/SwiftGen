@@ -1,6 +1,6 @@
 //
 // SwiftGen
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -28,6 +28,17 @@ extension ParserCLI {
 
   static func command(named name: String) -> ParserCLI? {
     allCommands.first { $0.name == name }
+  }
+}
+
+// We consider the name as the identifier of a ParserCLI
+extension ParserCLI: Hashable {
+  public static func == (lhs: ParserCLI, rhs: ParserCLI) -> Bool {
+    lhs.name == rhs.name
+  }
+
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(name)
   }
 }
 

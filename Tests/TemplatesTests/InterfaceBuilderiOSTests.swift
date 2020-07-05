@@ -1,10 +1,10 @@
 //
 // Templates UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
-class InterfaceBuilderiOSTests: InterfaceBuilderTests {
+final class InterfaceBuilderiOSTests: InterfaceBuilderTests {
   func testScenesSwift4() {
     test(
       template: "scenes-swift4",

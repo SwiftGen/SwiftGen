@@ -109,7 +109,7 @@ If you're running `swiftgen` as part of a Script Build Phase in Xcode, this espe
 strings:
   inputs: ${PROJECT_DIR}/${TARGET_NAME}/Resources/
   outputs:
-    templateName: swift4
+    templateName: structured-swift5
     output: ${PROJECT_DIR}/${TARGET_NAME}/Constants/Strings-${TARGET_NAME}.swift
 ```
 

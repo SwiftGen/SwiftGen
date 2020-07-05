@@ -45,6 +45,7 @@ internal enum CustomPlist {
   internal enum Configuration {
     private static let _document = PlistDocument(path: "configuration.plist")
     internal static let environment: String = _document["Environment"]
+    internal static let names: [String] = _document["Names"]
     internal static let options: [String: Any] = _document["Options"]
   }
   internal enum ShoppingList {

@@ -1,14 +1,14 @@
 //
 // SwiftGen UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
 import PathKit
 import XCTest
 
-class ConfigReadTests: XCTestCase {
-  lazy var bundle = Bundle(for: type(of: self))
+final class ConfigReadTests: XCTestCase {
+  private lazy var bundle = Bundle(for: type(of: self))
 
   func testConfigWithParams() throws {
     guard let path = bundle.path(forResource: "config-with-params", ofType: "yml") else {
@@ -21,10 +21,10 @@ class ConfigReadTests: XCTestCase {
       XCTAssertNil(config.inputDir)
       XCTAssertEqual(config.outputDir, "Common/Generated")
 
-      XCTAssertEqual(config.commands.keys.sorted(), ["strings"])
-      let stringEntries = config.commands["strings"]
-      XCTAssertEqual(stringEntries?.count, 1)
-      guard let entry = stringEntries?.first else {
+      XCTAssertEqual(config.commandNames, ["strings"])
+      let stringEntries = config.entries(for: "strings")
+      XCTAssertEqual(stringEntries.count, 1)
+      guard let entry = stringEntries.first else {
         return XCTFail("Expected a single strings entry")
       }
 
@@ -67,8 +67,8 @@ class ConfigReadTests: XCTestCase {
       )
 
       XCTAssertEqual(paramsConfig.outputDir, envConfig.outputDir)
-      guard let paramsList = paramsConfig.commands["strings"]?.first?.outputs.first?.parameters["baz"] as? [String],
-        let envList = envConfig.commands["strings"]?.first?.outputs.first?.parameters["baz"] as? [String] else {
+      guard let paramsList = paramsConfig.entries(for: "strings").first?.outputs.first?.parameters["baz"] as? [String],
+        let envList = envConfig.entries(for: "strings").first?.outputs.first?.parameters["baz"] as? [String] else {
         return XCTFail("Could not find strings entry output")
       }
       XCTAssertEqual(paramsList, envList)
@@ -88,13 +88,11 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(config.inputDir, "Fixtures/")
       XCTAssertEqual(config.outputDir, "Generated/")
 
-      XCTAssertEqual(config.commands.keys.sorted(), ["strings", "xcassets"])
+      XCTAssertEqual(config.commandNames, ["strings", "xcassets"])
 
       // strings
-      guard let stringsEntries = config.commands["strings"] else {
-        return XCTFail("Expected a config entry for strings")
-      }
-      XCTAssertEqual(stringsEntries.count, 1)
+      let stringsEntries = config.entries(for: "strings")
+      XCTAssertEqual(stringsEntries.count, 1, "Expected a config entry for strings")
 
       XCTAssertEqual(stringsEntries[0].inputs, ["Strings/Localizable.strings"])
       XCTAssertEqual(stringsEntries[0].outputs.count, 1)
@@ -103,10 +101,8 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(stringsEntries[0].outputs[0].template, .path("templates/custom-swift5"))
 
       // xcassets
-      guard let xcassetsEntries = config.commands["xcassets"] else {
-        return XCTFail("Expected a config entry for xcassets")
-      }
-      XCTAssertEqual(xcassetsEntries.count, 3)
+      let xcassetsEntries = config.entries(for: "xcassets")
+      XCTAssertEqual(xcassetsEntries.count, 3, "Expected a config entry for xcassets")
 
       // > xcassets[0]
       XCTAssertEqual(xcassetsEntries[0].inputs, ["XCAssets/Colors.xcassets"])
@@ -142,13 +138,11 @@ class ConfigReadTests: XCTestCase {
       XCTAssertEqual(config.inputDir, "Fixtures/")
       XCTAssertEqual(config.outputDir, "Generated/")
 
-      XCTAssertEqual(config.commands.keys.sorted(), ["ib"])
+      XCTAssertEqual(config.commandNames, ["ib"])
 
       // ib
-      guard let ibEntries = config.commands["ib"] else {
-        return XCTFail("Expected a config entry for ib")
-      }
-      XCTAssertEqual(ibEntries.count, 1)
+      let ibEntries = config.entries(for: "ib")
+      XCTAssertEqual(ibEntries.count, 1, "Expected a config entry for ib")
 
       XCTAssertEqual(ibEntries[0].inputs, ["IB-iOS"])
       // > outputs[0]
@@ -221,7 +215,7 @@ class ConfigReadTests: XCTestCase {
     do {
       let config = try Config(file: file)
 
-      guard let entry = config.commands["strings"]?.first else {
+      guard let entry = config.entries(for: "strings").first else {
         return XCTFail("Strings entry not found")
       }
 
@@ -245,7 +239,7 @@ class ConfigReadTests: XCTestCase {
     do {
       let config = try Config(file: file)
 
-      guard let entry = config.commands["strings"]?.first else {
+      guard let entry = config.entries(for: "strings").first else {
         return XCTFail("Strings entry not found")
       }
 
@@ -266,11 +260,9 @@ class ConfigReadTests: XCTestCase {
       XCTAssertNil(config.inputDir)
       XCTAssertEqual(config.outputDir, "Common/Generated")
 
-      XCTAssertEqual(config.commands.keys.sorted(), ["strings"])
-      guard let stringEntries = config.commands["strings"] else {
-        return XCTFail("Expected a config entry for strings")
-      }
-      XCTAssertEqual(stringEntries.count, 2)
+      XCTAssertEqual(config.commandNames, ["strings"])
+      let stringEntries = config.entries(for: "strings")
+      XCTAssertEqual(stringEntries.count, 2, "Expected 2 config entry for strings")
 
       // > strings[0]
       XCTAssertEqual(stringEntries[0].inputs, ["new-inputs1"])

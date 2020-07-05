@@ -1,6 +1,6 @@
 //
 // SwiftGenKit UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -8,7 +8,7 @@ import PathKit
 @testable import SwiftGenKit
 import XCTest
 
-class YamlTests: XCTestCase {
+final class YamlTests: XCTestCase {
   func testEmpty() throws {
     let parser = try Yaml.Parser()
 
@@ -30,14 +30,6 @@ class YamlTests: XCTestCase {
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "mapping", sub: .yaml)
-  }
-
-  func testJSON() throws {
-    let parser = try JSON.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "configuration.json", sub: .yamlGood))
-
-    let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "configuration", sub: .yaml)
   }
 
   func testScalar() throws {

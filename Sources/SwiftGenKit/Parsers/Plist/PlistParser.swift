@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -31,7 +31,7 @@ public enum Plist {
       self.warningHandler = warningHandler
     }
 
-    public static let defaultFilter = "[^/]\\.(?i:plist)$"
+    public static let defaultFilter = filterRegex(forExtensions: ["plist"])
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       files.append(try File(path: path, relativeTo: parent))

@@ -1,13 +1,13 @@
 //
 // SwiftGenKit UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
 @testable import SwiftGenKit
 import XCTest
 
-class InterfaceBuilderMacOSTests: XCTestCase {
+final class InterfaceBuilderMacOSTests: XCTestCase {
   func testEmpty() throws {
     let parser = try InterfaceBuilder.Parser()
 

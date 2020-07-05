@@ -1,6 +1,6 @@
 //
 // SwiftGen
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -42,12 +42,12 @@ enum TemplateRef: Equatable {
   /// - Returns: The Path matching the template found
   /// - Throws: TemplateRef.Error
   ///
-  func resolvePath(forParser parser: ParserCLI) throws -> Path {
+  func resolvePath(forParser parser: ParserCLI, logger: (LogLevel, String) -> Void = logMessage) throws -> Path {
     switch self {
     case .name(let templateShortName):
       var path = Path.deprecatedAppSupportTemplates + parser.templateFolder + "\(templateShortName).stencil"
       if path.isFile {
-        logMessage(
+        logger(
           .warning,
           """
           Referring to templates in Application Support by name is deprecated and will be removed in SwiftGen 7.0.

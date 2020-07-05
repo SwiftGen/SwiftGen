@@ -189,7 +189,7 @@ namespace :release do
       Utils.print_header 'Checking Homebrew formula...'
       Bundler.with_clean_env do
         sh 'brew audit --strict --online swiftgen'
-        sh 'brew reinstall swiftgen'
+        sh 'brew reinstall swiftgen --build-from-source'
         sh 'brew test swiftgen'
       end
 

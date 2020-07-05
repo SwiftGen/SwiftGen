@@ -1,6 +1,6 @@
 //
 // SwiftGenKit UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -8,7 +8,7 @@ import PathKit
 @testable import SwiftGenKit
 import XCTest
 
-class FilterTests: XCTestCase {
+final class FilterTests: XCTestCase {
   func testBasicRegex() throws {
     let filter = try Filter(pattern: ".+\\.strings$")
 

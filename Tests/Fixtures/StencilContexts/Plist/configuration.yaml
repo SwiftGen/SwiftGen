@@ -1,13 +1,44 @@
 files:
-- documents:
-  - data:
+- document:
+    data:
       Environment: "development"
+      Names:
+      - "John"
+      - "Peter"
+      - "Nick"
       Options:
         Animation Style: "Party Mode"
     metadata:
       properties:
         Environment:
           type: "String"
+        Names:
+          element:
+            type: "String"
+          type: "Array"
+        Options:
+          properties:
+            Animation Style:
+              type: "String"
+          type: "Dictionary"
+      type: "Dictionary"
+  documents:
+  - data:
+      Environment: "development"
+      Names:
+      - "John"
+      - "Peter"
+      - "Nick"
+      Options:
+        Animation Style: "Party Mode"
+    metadata:
+      properties:
+        Environment:
+          type: "String"
+        Names:
+          element:
+            type: "String"
+          type: "Array"
         Options:
           properties:
             Animation Style:

@@ -45,6 +45,7 @@ public enum PlistFiles {
   public enum Configuration {
     private static let _document = PlistDocument(path: "configuration.plist")
     public static let environment: String = _document["Environment"]
+    public static let names: [String] = _document["Names"]
     public static let options: [String: Any] = _document["Options"]
   }
   public enum ShoppingList {

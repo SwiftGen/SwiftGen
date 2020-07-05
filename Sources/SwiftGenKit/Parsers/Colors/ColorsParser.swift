@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -52,8 +52,8 @@ public enum Colors {
     }
 
     public static var defaultFilter: String {
-      let extensions = Parser.subParsers.flatMap { $0.extensions }.sorted().joined(separator: "|")
-      return "[^/]\\.(?i:\(extensions))$"
+      let extensions = Parser.subParsers.flatMap { $0.extensions }.sorted()
+      return filterRegex(forExtensions: extensions)
     }
 
     public static var allOptions: ParserOptionList {

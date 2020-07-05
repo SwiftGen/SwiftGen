@@ -1,6 +1,6 @@
 //
 // SwiftGenKit UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -8,7 +8,7 @@ import PathKit
 @testable import SwiftGenKit
 import XCTest
 
-class ColorsTextFileTests: XCTestCase {
+final class ColorsTextFileTests: XCTestCase {
   func testFileWithDefaults() throws {
     let parser = try Colors.Parser()
     let txtParser = Colors.TextFileParser(options: try ParserOptionValues(options: [:], available: []))

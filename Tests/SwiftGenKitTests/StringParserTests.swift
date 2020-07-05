@@ -1,13 +1,13 @@
 //
 // SwiftGenKit UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
 @testable import SwiftGenKit
 import XCTest
 
-class StringParserTests: XCTestCase {
+final class StringParserTests: XCTestCase {
   func testParseStringPlaceholder() throws {
     let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "%@")
     XCTAssertEqual(placeholders, [.object])

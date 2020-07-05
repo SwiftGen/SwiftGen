@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -8,7 +8,7 @@ import Foundation
 
 //
 // See the documentation file for a full description of this context's structure:
-// Documentation/SwiftGenKit Contexts/Plist.md
+// Documentation/SwiftGenKit Contexts/plist.md
 //
 
 extension Plist.Parser {
@@ -23,19 +23,14 @@ extension Plist.Parser {
   }
 
   private func map(file: Plist.File) -> [String: Any] {
-    [
+    let document = StencilContextLazyDocument(data: file.document)
+
+    return [
       "name": file.name,
       "path": file.path.string,
-      // Note: we wrap the document into a single-value array so that the structure of
-      // this context is identical to the one produced by the YAML parser
-      "documents": [map(document: file.document)]
-    ]
-  }
-
-  private func map(document: Any) -> [String: Any] {
-    [
-      "data": document,
-      "metadata": Metadata.generate(for: document)
+      "document": document,
+      // Deprecated: remains for legacy/compatibility reasons; will be removed in 7.0
+      "documents": [document]
     ]
   }
 }

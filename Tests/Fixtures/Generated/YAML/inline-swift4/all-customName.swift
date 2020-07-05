@@ -10,12 +10,6 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 internal enum CustomYAML {
-  internal enum Configuration {
-    internal static let apiVersion: String = "2"
-    internal static let country: Any? = nil
-    internal static let environment: String = "staging"
-    internal static let options: [String: Any] = ["screen-order": ["1", "2", "3"]]
-  }
   internal enum Documents {
     internal enum Document1 {
       internal static let items: [String] = ["Mark McGwire", "Sammy Sosa", "Ken Griffey"]
@@ -31,6 +25,7 @@ internal enum CustomYAML {
     internal static let car: Any? = nil
     internal static let foo: [String: Any] = ["bar": "banana", "baz": "orange"]
     internal static let hello: String = "world"
+    internal static let names: [String] = ["John", "Peter", "Nick"]
     internal static let weight: Double = 33.3
   }
   internal enum Version {
