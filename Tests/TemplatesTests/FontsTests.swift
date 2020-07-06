@@ -22,7 +22,14 @@ final class FontsTests: XCTestCase {
         suffix: ""
       ),
       (
-        context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomFamily"]),
+        context: try StencilContext.enrich(
+          context: context,
+          parameters: [
+            "enumName=CustomFamily",
+            "fontTypeName=MyFontConvertible",
+            "fontAliasName=MyFont"
+          ]
+        ),
         suffix: "-customName"
       ),
       (

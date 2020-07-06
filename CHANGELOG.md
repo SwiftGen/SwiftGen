@@ -8,9 +8,21 @@
 
 _None_
 
+### Deprecations
+
+* Fonts: the generated `Font` typealias (to `UIFont`/`NSFont`) is deprecated and will be removed in the next major release.  
+  [David Jennes](https://github.com/djbe)
+  [#728](https://github.com/SwiftGen/SwiftGen/pull/728)
+
 ### New Features
 
-_None_
+* Fonts: the templates now support a new `fontTypeName` template parameter that you can use to change the name of the `struct` representing a font to something else.  
+  [David Jennes](https://github.com/djbe)
+  [#728](https://github.com/SwiftGen/SwiftGen/pull/728)
+* Fonts: the templates now support a new `fontAliasName` that you can use to change the `typealias`'s name from `Font` to something else. For example: this is useful when working with SwiftUI which already defines a `Font` type. Note that as this `typealias` is deprecated (see deprecations above), this template parameter will also be removed in the next major release.  
+  [David Jennes](https://github.com/djbe)
+  [#647](https://github.com/SwiftGen/SwiftGen/issues/647)
+  [#728](https://github.com/SwiftGen/SwiftGen/pull/728)
 
 ### Bug Fixes
 

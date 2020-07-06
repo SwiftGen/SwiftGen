@@ -3,13 +3,16 @@
 
 {% if families %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set fontType %}{{param.fontTypeName|default:"FontConvertible"}}{% endset %}
 #if os(OSX)
   import AppKit.NSFont
-  {{accessModifier}} typealias Font = NSFont
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIFont
-  {{accessModifier}} typealias Font = UIFont
 #endif
+
+// Deprecated typealiases
+@available(*, deprecated, renamed: "{{fontType}}.Font", message: "This typealias will be removed in SwiftGen 7.0")
+{{accessModifier}} typealias {{param.fontAliasName|default:"Font"}} = {{fontType}}.Font
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -29,12 +32,12 @@
   {% for family in families %}
   {{accessModifier}} enum {{family.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
     {% for font in family.fonts %}
-    {{accessModifier}} static let {{font.style|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = FontConvertible(name: "{{font.name}}", family: "{{family.name}}", path: "{% call transformPath font.path %}")
+    {{accessModifier}} static let {{font.style|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{fontType}}(name: "{{font.name}}", family: "{{family.name}}", path: "{% call transformPath font.path %}")
     {% endfor %}
-    {{accessModifier}} static let all: [FontConvertible] = [{% for font in family.fonts %}{{font.style|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{{ ", " if not forloop.last }}{% endfor %}]
+    {{accessModifier}} static let all: [{{fontType}}] = [{% for font in family.fonts %}{{font.style|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{{ ", " if not forloop.last }}{% endfor %}]
   }
   {% endfor %}
-  {{accessModifier}} static let allCustomFonts: [FontConvertible] = [{% for family in families %}{{family.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}.all{{ ", " if not forloop.last }}{% endfor %}].flatMap { $0 }
+  {{accessModifier}} static let allCustomFonts: [{{fontType}}] = [{% for family in families %}{{family.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}.all{{ ", " if not forloop.last }}{% endfor %}].flatMap { $0 }
   {{accessModifier}} static func registerAllCustomFonts() {
     allCustomFonts.forEach { $0.register() }
   }
@@ -43,10 +46,16 @@
 
 // MARK: - Implementation Details
 
-{{accessModifier}} struct FontConvertible {
+{{accessModifier}} struct {{fontType}} {
   {{accessModifier}} let name: String
   {{accessModifier}} let family: String
   {{accessModifier}} let path: String
+
+  #if os(OSX)
+  {{accessModifier}} typealias Font = NSFont
+  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  {{accessModifier}} typealias Font = UIFont
+  #endif
 
   {{accessModifier}} func font(size: CGFloat) -> Font! {
     return Font(font: self, size: size)
@@ -64,8 +73,8 @@
   }
 }
 
-{{accessModifier}} extension Font {
-  convenience init!(font: FontConvertible, size: CGFloat) {
+{{accessModifier}} extension {{fontType}}.Font {
+  convenience init?(font: {{fontType}}, size: CGFloat) {
     #if os(iOS) || os(tvOS) || os(watchOS)
     if !UIFont.fontNames(forFamilyName: font.family).contains(font.name) {
       font.register()
