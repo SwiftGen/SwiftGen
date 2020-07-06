@@ -43,6 +43,7 @@ internal enum PlistFiles {
   }
   internal enum Configuration {
     internal static let environment: String = "development"
+    internal static let names: [String] = ["John", "Peter", "Nick"]
     internal static let options: [String: Any] = ["Animation Style": "Party Mode"]
   }
   internal enum ShoppingList {

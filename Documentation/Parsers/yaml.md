@@ -1,8 +1,8 @@
-# YAML (and JSON) parser
+# YAML parser
 
 ## Input
 
-The YAML parser accepts mutiple files or directories (which it'll recursively search). Each file will be loaded into the context, but the parser will also generate metadata about the structure of the file.
+The YAML parser accepts multiple files or directories (which it'll recursively search). Each file's content will be loaded into the context, but the parser will also generate metadata about the structure of the file.
 
 YAML files can contain multiple documents, which is why each file can contain multiple `documents` in the structure below.
 
@@ -22,4 +22,4 @@ This parser currently doesn't accept any options.
 ## Templates
 
 * [See here](../templates/yaml) for a list of templates bundled with SwiftGen and their documentation.
-* If you want to write custom templates, make sure to check the [stencil context documentation](../SwiftGenKit%20Contexts/Yaml.md) to see what data is available after parsing.
+* If you want to write custom templates, make sure to check the [stencil context documentation](../SwiftGenKit%20Contexts/yaml.md) to see what data is available after parsing.

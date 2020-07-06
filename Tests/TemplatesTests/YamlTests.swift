@@ -1,19 +1,19 @@
 //
 // Templates UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
 import StencilSwiftKit
 import XCTest
 
-class YamlTests: XCTestCase {
-  enum Contexts {
+final class YamlTests: XCTestCase {
+  private enum Contexts {
     static let all = ["empty", "all"]
   }
 
   // generate variations to test customname generation
-  let variations: VariationGenerator = { name, context in
+  private let variations: VariationGenerator = { name, context in
     guard name == "all" else { return [(context: context, suffix: "")] }
 
     return [
@@ -26,12 +26,12 @@ class YamlTests: XCTestCase {
         suffix: "-customName"
       ),
       (
-        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-        suffix: "-publicAccess"
-      ),
-      (
         context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
         suffix: "-forceFileNameEnum"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
       )
     ]
   }

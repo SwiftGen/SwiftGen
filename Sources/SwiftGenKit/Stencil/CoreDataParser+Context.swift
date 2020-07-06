@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -8,7 +8,7 @@ import Foundation
 
 //
 // See the documentation file for a full description of this context's structure:
-// Documentation/SwiftGenKit Contexts/CoreData.md
+// Documentation/SwiftGenKit Contexts/coredata.md
 //
 
 extension CoreData.Parser {

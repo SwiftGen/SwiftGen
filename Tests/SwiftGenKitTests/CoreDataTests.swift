@@ -1,13 +1,13 @@
 //
 // SwiftGenKit UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
 @testable import SwiftGenKit
 import XCTest
 
-class CoreDataTests: XCTestCase {
+final class CoreDataTests: XCTestCase {
   func testEmpty() throws {
     let parser = try CoreData.Parser()
 

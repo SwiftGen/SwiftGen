@@ -77,6 +77,15 @@ namespace :cli do
                 %(cp -fR "#{generated_bundle_path}/Frameworks/" "#{fmkdir}")
               ], task, 'copy_frameworks')
 
+    # Hack: remove swift libraries on 10.14.4 or higher, to avoid issues with brew
+    macOS_version = Gem::Version.new(`sw_vers -productVersion`)
+    if macOS_version >= Gem::Version.new('10.14.4')
+      Utils.print_header "Removing bundled swift libraries from #{fmkdir}"
+      Utils.run([
+                  %(rm "#{fmkdir}"/libswift*.dylib)
+                ], task, 'remove_bundled_swift')
+    end
+
     Utils.print_header "Fixing binary's @rpath"
     Utils.run([
                 %(install_name_tool -delete_rpath "@executable_path/../Frameworks" "#{bindir}/#{BIN_NAME}"),

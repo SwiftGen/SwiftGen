@@ -1,20 +1,20 @@
 //
 // Templates UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
 import StencilSwiftKit
 import XCTest
 
-class ColorsTests: XCTestCase {
-  enum Contexts {
+final class ColorsTests: XCTestCase {
+  private enum Contexts {
     static let all = ["empty", "defaults", "multiple"]
   }
 
   // generate variations to test customname generation
   // swiftlint:disable opening_brace
-  func variations(customName: String) -> VariationGenerator {
+  private func variations(customName: String) -> VariationGenerator {
     { name, context in
       guard name == "defaults" else { return [(context: context, suffix: "")] }
 

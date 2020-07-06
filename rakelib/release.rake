@@ -116,7 +116,7 @@ namespace :release do
     req = Net::HTTP::Post.new(uri)
     req['Content-Type'] = content_type unless content_type.nil?
     yield req if block_given?
-    req.basic_auth 'AliSoftware', File.read('.apitoken').chomp
+    req.basic_auth 'SwiftGen', File.read('.apitoken').chomp
 
     response = Net::HTTP.start(uri.host, uri.port, :use_ssl => (uri.scheme == 'https')) do |http|
       http.request(req)
@@ -196,8 +196,8 @@ namespace :release do
       Utils.print_header 'Pushing to Homebrew'
       sh "git add #{formula_file}"
       sh "git commit -m 'swiftgen #{tag}'"
-      sh "git push -u AliSoftware swiftgen-#{tag}"
-      sh "open 'https://github.com/Homebrew/homebrew-core/compare/master...AliSoftware:swiftgen-#{tag}?expand=1'"
+      sh "git push -u SwiftGen swiftgen-#{tag}"
+      sh "open 'https://github.com/Homebrew/homebrew-core/compare/master...SwiftGen:swiftgen-#{tag}?expand=1'"
     end
   end
 end

@@ -3,11 +3,13 @@
 
 #if os(OSX)
   import AppKit.NSFont
-  internal typealias Font = NSFont
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIFont
-  internal typealias Font = UIFont
 #endif
+
+// Deprecated typealiases
+@available(*, deprecated, renamed: "FontConvertible.Font", message: "This typealias will be removed in SwiftGen 7.0")
+internal typealias Font = FontConvertible.Font
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -66,6 +68,12 @@ internal struct FontConvertible {
   internal let family: String
   internal let path: String
 
+  #if os(OSX)
+  internal typealias Font = NSFont
+  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  internal typealias Font = UIFont
+  #endif
+
   internal func font(size: CGFloat) -> Font {
     guard let font = Font(font: self, size: size) else {
       fatalError("Unabble to initialize font '\(name)' (\(family))")
@@ -85,7 +93,7 @@ internal struct FontConvertible {
   }
 }
 
-internal extension Font {
+internal extension FontConvertible.Font {
   convenience init?(font: FontConvertible, size: CGFloat) {
     #if os(iOS) || os(tvOS) || os(watchOS)
     if !UIFont.fontNames(forFamilyName: font.family).contains(font.name) {

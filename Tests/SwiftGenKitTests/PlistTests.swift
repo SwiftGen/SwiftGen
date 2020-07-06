@@ -1,6 +1,6 @@
 //
 // SwiftGenKit UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -8,7 +8,7 @@ import PathKit
 @testable import SwiftGenKit
 import XCTest
 
-class PlistTests: XCTestCase {
+final class PlistTests: XCTestCase {
   func testEmpty() throws {
     let parser = try Plist.Parser()
 

@@ -1,5 +1,14 @@
 files:
-- documents:
+- document:
+    data:
+    - "Eggs"
+    - "Bread"
+    - "Milk"
+    metadata:
+      element:
+        type: "String"
+      type: "Array"
+  documents:
   - data:
     - "Eggs"
     - "Bread"

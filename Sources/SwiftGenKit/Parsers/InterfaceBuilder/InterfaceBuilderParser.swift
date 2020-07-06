@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -33,7 +33,7 @@ public enum InterfaceBuilder {
       self.warningHandler = warningHandler
     }
 
-    public static let defaultFilter = "[^/]\\.storyboard$"
+    public static let defaultFilter = filterRegex(forExtensions: ["storyboard"])
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       try addStoryboard(at: path)
