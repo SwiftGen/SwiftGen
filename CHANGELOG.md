@@ -23,6 +23,9 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#647](https://github.com/SwiftGen/SwiftGen/issues/647)
   [#728](https://github.com/SwiftGen/SwiftGen/pull/728)
+* CoreData: Deprecates `fetchRequest()` and adds `makeFetchRequest()` to avoid ambiguous function usage.  
+  [David Rothera](https://github.com/davidrothera)
+  [#726](https://github.com/SwiftGen/SwiftGen/pull/726)
 
 ### Bug Fixes
 

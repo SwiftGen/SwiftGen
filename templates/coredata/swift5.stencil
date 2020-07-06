@@ -42,7 +42,12 @@ import {{ import }}
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
+  @available(*, deprecated, renamed: "makeFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `makeFetchRequest()` instead.")
   @nonobjc {{ accessModifier }} class func fetchRequest() -> NSFetchRequest<{{ entityClassName }}> {
+    return NSFetchRequest<{{ entityClassName }}>(entityName: entityName)
+  }
+
+  @nonobjc {{ accessModifier }} class func makeFetchRequest() -> NSFetchRequest<{{ entityClassName }}> {
     return NSFetchRequest<{{ entityClassName }}>(entityName: entityName)
   }
 
