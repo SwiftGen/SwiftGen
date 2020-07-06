@@ -5,9 +5,9 @@
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 {% set fontType %}{{param.fontTypeName|default:"FontConvertible"}}{% endset %}
 #if os(OSX)
-import AppKit.NSFont
+  import AppKit.NSFont
 #elseif os(iOS) || os(tvOS) || os(watchOS)
-import UIKit.UIFont
+  import UIKit.UIFont
 #endif
 
 // Deprecated typealiases

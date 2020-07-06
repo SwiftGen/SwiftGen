@@ -2,9 +2,9 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 #if os(OSX)
-import AppKit.NSFont
+  import AppKit.NSFont
 #elseif os(iOS) || os(tvOS) || os(watchOS)
-import UIKit.UIFont
+  import UIKit.UIFont
 #endif
 
 // Deprecated typealiases
