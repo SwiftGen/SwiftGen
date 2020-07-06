@@ -9,5 +9,11 @@
 		<key>Animation Style</key>
 		<string>Party Mode</string>
 	</dict>
+	<key>Names</key>
+	<array>
+		<string>John</string>
+		<string>Peter</string>
+		<string>Nick</string>
+	</array>
 </dict>
 </plist>

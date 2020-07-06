@@ -2,11 +2,9 @@
 
 ---
 
-## Develop
+## 6.2.1
 
-### Breaking Changes
-
-_None_
+There are no major changes in this release, although JSON & Plist template writers may want to read the [small migration guide](Documentation/SwiftGenKit%20Contexts/MigrationGuide.md##swiftgen-621-migration-guide) to prepare for upcoming context changes.
 
 ### Deprecations
 
@@ -14,10 +12,6 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#702](https://github.com/SwiftGen/SwiftGen/pull/702)
   [#732](https://github.com/SwiftGen/SwiftGen/pull/732)
-
-### New Features
-
-_None_
 
 ### Bug Fixes
 
@@ -45,6 +39,10 @@ _None_
   [#700](https://github.com/SwiftGen/SwiftGen/issues/700)
 
 ## 6.2.0
+
+⚠️ This minor version contains a lot of deprecations that may apply to your configuration and how you use SwiftGen. With the exception of `swift3` templates (which have been removed), everything should still work as before. But be warned that all features marked as deprecated will be removed in SwiftGen 7.0.
+
+Read the [SwiftGen 6.2 Migration Guide](Documentation/MigrationGuide.md#migrating-to-swiftgen-62) for a list of changes you'll need to apply.
 
 ### Breaking Changes
 
@@ -97,13 +95,13 @@ _None_
   [#609](https://github.com/SwiftGen/SwiftGen/issues/609)
   [#593](https://github.com/SwiftGen/SwiftGen/pull/593)
   [#610](https://github.com/SwiftGen/SwiftGen/pull/610)
-* Strings: the built-in templates now accept a parameter `lookupFunction` for customizing the localization function, check the [template documentation](Documentation/templates/string/) for more information.  
+* Strings: the built-in templates now accept a parameter `lookupFunction` for customizing the localization function, check the [template documentation](Documentation/templates/strings/) for more information.  
   [Steven Magdy](https://github.com/StevenMagdy)
   [426](https://github.com/SwiftGen/SwiftGen/issues/426)
   [468](https://github.com/SwiftGen/SwiftGen/issues/468)
   [573](https://github.com/SwiftGen/SwiftGen/pull/573)
   [716](https://github.com/SwiftGen/SwiftGen/pull/716)
-* Strings: templates to generate Objective-C. Please check [the template's documentation](Documentation/templates/string/objc.md) for more information.  
+* Strings: templates to generate Objective-C. Please check [the template's documentation](Documentation/templates/strings/objc.md) for more information.  
   [Eric Slosser](https://github.com/Mr-Fixit)
   [SwiftGen/SwiftGen#378](https://github.com/SwiftGen/SwiftGen/pull/378)
 * XCAssets: the parser now supports AR Resource Groups, together with reference images and objects.  
@@ -294,7 +292,7 @@ _None_
 
 ⚠️ This major version is a big milestone in which a lot of refactoring and cleaning has been done. Many features added over previous releases have been reworked and unified, while also preparing SwiftGen for future additions. This means that you'll need to adapt your configuration files (or command line invocations) and custom templates to work with this new major version.
 
-Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen-60-migration-guide) for a list of changes you'll need to apply.
+Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#migrating-to-swiftgen-60) for a list of changes you'll need to apply.
 
 ### Changes in core dependencies of SwiftGen
 
@@ -568,7 +566,7 @@ Read the [SwiftGen 6.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 
 ⚠️ This major version is a big milestone in which a lot of refactoring and cleaning has been done. Many features added over previous releases have been reworked and unified, while also preparing SwiftGen for future additions. This means that you'll need to adapt your command line invocations and custom templates to work with this new major version.
 
-Read the [SwiftGen 5.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen-50-migration-guide) for a list of changes you'll need to apply.
+Read the [SwiftGen 5.0 Migration Guide](Documentation/MigrationGuide.md#migrating-to-swiftgen-50) for a list of changes you'll need to apply.
 
 ### Changes in core dependencies of SwiftGen
 
@@ -600,7 +598,7 @@ Read the [SwiftGen 5.0 Migration Guide](Documentation/MigrationGuide.md#swiftgen
 * There have been some breaking changes in the generated code for storyboards. Please check the [templates migration guide](Documentation/templates/MigrationGuide.md#deprecated-templates-in-20-swiftgen-50) for more information, where we also provide a compatibility template.  
   [Olivier Halligon](https://github.com/AliSoftware)
   [SwiftGen/templates#65](https://github.com/SwiftGen/templates/issues/65)
-* Removed deprecated template context variables, and restructured many others. Please check the [SwiftGenKit migration guide](Documentation/SwiftGenKit%20Contexts/MigrationGuide.md#swiftgenkit-20-swiftgen-50) for more information.  
+* Removed deprecated template context variables, and restructured many others. Please check the [SwiftGenKit migration guide](Documentation/SwiftGenKit%20Contexts/MigrationGuide.md#swiftgenkit-20-swiftgen-50-migration-guide) for more information.  
   [David Jennes](https://github.com/djbe)
   [SwiftGen/SwiftGenKit#5](https://github.com/SwiftGen/SwiftGenKit/issues/5)
 * Some filters have been removed in favour of Stencil's built in versions, and other filters have been updated to accept parameters. Please consult the [StencilSwiftKit migration guide](https://github.com/SwiftGen/StencilSwiftKit/blob/stable/Documentation/MigrationGuide.md#stencilswiftkit-20-swiftgen-50) for more information.  
@@ -780,7 +778,7 @@ Note: The next minor version will focus on bringing more documentation for all t
   [David Jennes](https://github.com/djbe)
   [#227](https://github.com/SwiftGen/SwiftGen/pull/227)
 * Stencil: added two new tags `macro` and `call`, see the
-  [documentation](documentation/Templates.md). for in depth explanations on how
+  [documentation](https://github.com/SwiftGen/SwiftGen/blob/4.1.0/documentation/Templates.md). for in depth explanations on how
   to use them.  
   [David Jennes](https://github.com/djbe)
   [#237](https://github.com/SwiftGen/SwiftGen/pull/237)
@@ -931,7 +929,7 @@ Note: The next minor version will focus on bringing more documentation for all t
 ### Important Notes
 
 - Some keys for various templates have changed to provide more flexibility and enable some new features in the templates. As a result, **if you created your own custom templates, they might not all be totally compatible with SwiftGen 3.0.0** (hence the new major version).
-Please read the [Custom Templates documentation](documentation/Templates.md) to find out the new Stencil context keys and update your custom templates accordingly.
+Please read the [Custom Templates documentation](https://github.com/SwiftGen/SwiftGen/blob/4.1.0/documentation/Templates.md) to find out the new Stencil context keys and update your custom templates accordingly.
 
 _If you're using one of the bundled templates, all of them have been updated appropriately._
 
@@ -1110,7 +1108,7 @@ stop working as expected. That's the main reason why the version has been bumped
   [#50](https://github.com/SwiftGen/SwiftGen/pull/50)
   * Now the `-t` flag expect a template name (defaults to `default`), and will search a matching template in `Application Support` first, then in the templates bundled with SwiftGen.  
   * You can still specify a template by path using `-p`.  
-  * For more info, see [this dedicated documentation](documentation/Templates.md).  
+  * For more info, see [this dedicated documentation](https://github.com/SwiftGen/SwiftGen/blob/4.1.0/documentation/Templates.md).  
 * You can now list all templates available (both bundled templates and custom ones) using the `swiftgen templates` command.  
   [#42](https://github.com/SwiftGen/SwiftGen/issues/42)
   [#50](https://github.com/SwiftGen/SwiftGen/pull/50)

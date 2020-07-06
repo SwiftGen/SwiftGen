@@ -248,7 +248,7 @@ Each parser command generally accepts the same options and syntax, and they mirr
 
 ## Choosing your template
 
-SwiftGen is based on templates (it uses [Stencil](https://github.com/kylef/Stencil) as its template engine). This means that **you can choose the template that fits the Swift version you're using** — and also the one that best fits your preferences — to **adapt the generated code to your own conventions and Swift version**.
+SwiftGen is based on templates (it uses [Stencil](https://github.com/stencilproject/Stencil) as its template engine). This means that **you can choose the template that fits the Swift version you're using** — and also the one that best fits your preferences — to **adapt the generated code to your own conventions and Swift version**.
 
 ### Bundled templates vs. Custom ones
 
@@ -846,7 +846,7 @@ This code and tool is under the MIT Licence. See the `LICENCE` file in this repo
 
 This tool is powered by
 
-- [Stencil](https://github.com/kylef/Stencil) and few other libs by [Kyle Fuller](https://github.com/kylef)
+- [Stencil](https://github.com/stencilproject/Stencil) and few other libs by [Kyle Fuller](https://github.com/kylef)
 - SwiftGenKit and [StencilSwiftKit](https://github.com/SwiftGen/StencilSwiftKit), our internal frameworks at SwiftGen
 
 It is currently mainly maintained by [@AliSoftware](https://github.com/AliSoftware) and [@djbe](https://github.com/djbe). But I couldn't thank enough all the other [contributors](https://github.com/SwiftGen/SwiftGen/graphs/contributors) to this tool along the different versions which helped make SwiftGen awesome! 🎉
