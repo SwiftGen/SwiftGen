@@ -86,8 +86,7 @@ public struct FontConvertible {
   }
 
   fileprivate var url: URL? {
-    let bundle = BundleToken.bundle
-    return bundle.url(forResource: path, withExtension: nil)
+    return BundleToken.bundle.url(forResource: path, withExtension: nil)
   }
 }
 

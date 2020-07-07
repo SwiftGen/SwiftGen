@@ -68,8 +68,7 @@
   }
 
   fileprivate var url: URL? {
-    let bundle = BundleToken.bundle
-    return bundle.url(forResource: path, withExtension: nil)
+    return {{param.bundle|default:"BundleToken.bundle"}}.url(forResource: path, withExtension: nil)
   }
 }
 
@@ -88,6 +87,7 @@
     self.init(name: font.name, size: size)
   }
 }
+{% if not param.bundle %}
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
@@ -96,6 +96,7 @@ private final class BundleToken {
   }()
 }
 // swiftlint:enable convenience_type
+{% endif %}
 {% else %}
 // No fonts found
 {% endif %}

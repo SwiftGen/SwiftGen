@@ -17,6 +17,7 @@ You can customize some elements of this template by overriding the following par
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
+| `bundle` | `BundleToken.bundle` | Allows you to set from which bundle font files are loaded from. By default, it'll point to the same bundle as where the generated code is. |
 | `enumName` | `FontFamily` | Allows you to change the name of the generated `enum` containing all font families. |
 | `fontTypeName` | `FontConvertible` | Allows you to change the name of the struct type representing a font. |
 | `preservePath` | N/A | Setting this parameter will disable the basename filter applied to all font paths. Use this if you added your font folder as a "folder reference" in your Xcode project, making that folder hierarchy preserved once copied in the build app bundle. The path will be relative to the folder you provided to SwiftGen. |

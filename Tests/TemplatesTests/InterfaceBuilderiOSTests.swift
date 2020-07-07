@@ -11,7 +11,7 @@ final class InterfaceBuilderiOSTests: InterfaceBuilderTests {
       contextNames: Contexts.all,
       directory: .interfaceBuilder,
       resourceDirectory: .interfaceBuilderiOS,
-      contextVariations: variations
+      contextVariations: sceneVariations
     )
   }
 
@@ -21,7 +21,7 @@ final class InterfaceBuilderiOSTests: InterfaceBuilderTests {
       contextNames: Contexts.all,
       directory: .interfaceBuilder,
       resourceDirectory: .interfaceBuilderiOS,
-      contextVariations: variations
+      contextVariations: segueVariations
     )
   }
 
@@ -31,7 +31,7 @@ final class InterfaceBuilderiOSTests: InterfaceBuilderTests {
       contextNames: Contexts.all,
       directory: .interfaceBuilder,
       resourceDirectory: .interfaceBuilderiOS,
-      contextVariations: variations
+      contextVariations: sceneVariations
     )
   }
 
@@ -41,7 +41,7 @@ final class InterfaceBuilderiOSTests: InterfaceBuilderTests {
       contextNames: Contexts.all,
       directory: .interfaceBuilder,
       resourceDirectory: .interfaceBuilderiOS,
-      contextVariations: variations
+      contextVariations: segueVariations
     )
   }
 }

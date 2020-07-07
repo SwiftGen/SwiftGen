@@ -108,8 +108,8 @@
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
-
 {% if resourceCount.arresourcegroup > 0 %}
+
 {{accessModifier}} struct {{arResourceGroupType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
@@ -130,7 +130,7 @@
 @available(iOS 11.3, *)
 {{accessModifier}} extension ARReferenceImage {
   static func referenceImages(in asset: {{arResourceGroupType}}) -> Set<ARReferenceImage> {
-    let bundle = BundleToken.bundle
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
     return referenceImages(inGroupNamed: asset.name, bundle: bundle) ?? Set()
   }
 }
@@ -138,14 +138,14 @@
 @available(iOS 12.0, *)
 {{accessModifier}} extension ARReferenceObject {
   static func referenceObjects(in asset: {{arResourceGroupType}}) -> Set<ARReferenceObject> {
-    let bundle = BundleToken.bundle
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
     return referenceObjects(inGroupNamed: asset.name, bundle: bundle) ?? Set()
   }
 }
 #endif
-
 {% endif %}
 {% if resourceCount.color > 0 %}
+
 {{accessModifier}} final class {{colorType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
@@ -166,7 +166,7 @@
 {{accessModifier}} extension {{colorType}}.Color {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
   convenience init!(asset: {{colorType}}) {
-    let bundle = BundleToken.bundle
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
     #if os(iOS) || os(tvOS)
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
@@ -176,9 +176,9 @@
     #endif
   }
 }
-
 {% endif %}
 {% if resourceCount.data > 0 %}
+
 {{accessModifier}} struct {{dataType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
@@ -194,7 +194,7 @@
 @available(iOS 9.0, macOS 10.11, *)
 {{accessModifier}} extension NSDataAsset {
   convenience init!(asset: {{dataType}}) {
-    let bundle = BundleToken.bundle
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
     #if os(iOS) || os(tvOS)
     self.init(name: asset.name, bundle: bundle)
     #elseif os(macOS)
@@ -203,9 +203,9 @@
   }
 }
 #endif
-
 {% endif %}
 {% if resourceCount.image > 0 %}
+
 {{accessModifier}} struct {{imageType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
@@ -216,7 +216,7 @@
   #endif
 
   {{accessModifier}} var image: Image {
-    let bundle = BundleToken.bundle
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
@@ -237,7 +237,7 @@
     message: "This initializer is unsafe on macOS, please use the {{imageType}}.image property")
   convenience init!(asset: {{imageType}}) {
     #if os(iOS) || os(tvOS)
-    let bundle = BundleToken.bundle
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
     self.init(named: NSImage.Name(asset.name))
@@ -246,8 +246,9 @@
     #endif
   }
 }
-
 {% endif %}
+{% if not param.bundle %}
+
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
@@ -255,6 +256,7 @@ private final class BundleToken {
   }()
 }
 // swiftlint:enable convenience_type
+{% endif %}
 {% else %}
 // No assets found
 {% endif %}

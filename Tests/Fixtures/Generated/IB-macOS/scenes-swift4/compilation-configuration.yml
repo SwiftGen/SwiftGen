@@ -9,6 +9,10 @@ file_specific:
   all.swift:
     files:
       - IB-macOS-Definitions.swift
+  all-customBundle.swift:
+    files:
+      - IB-macOS-Definitions.swift
+      - Common-CustomBundle.swift
   all-customName.swift:
     files:
       - IB-macOS-Definitions.swift

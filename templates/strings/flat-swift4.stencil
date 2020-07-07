@@ -73,12 +73,12 @@ extension {{enumName}} {
     {% if param.lookupFunction %}
     let format = {{ param.lookupFunction }}(key, table)
     {% else %}
-    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
+    let format = {{param.bundle|default:"BundleToken.bundle"}}.localizedString(forKey: key, value: nil, table: table)
     {% endif %}
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
-{% if not param.lookupFunction %}
+{% if not param.bundle and not param.lookupFunction %}
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
