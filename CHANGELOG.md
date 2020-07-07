@@ -56,7 +56,7 @@ There are no major changes in this release, although JSON & Plist template write
   [@fjtrujy](https://github.com/fjtrujy)
 * Avoid breaking the system swift installation when installing SwiftGen via Homebrew on macOS 10.14.4 or higher.  
   [David Jennes](https://github.com/djbe)
-  [#686](https://github.com/SwiftGen/SwiftGen/issue/686)
+  [#686](https://github.com/SwiftGen/SwiftGen/issues/686)
   [#730](https://github.com/SwiftGen/SwiftGen/pull/730)
 
 ### Internal Changes
