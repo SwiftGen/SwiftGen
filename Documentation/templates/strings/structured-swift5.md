@@ -27,7 +27,7 @@ You can customize some elements of this template by overriding the following par
 | `bundle` | `BundleToken.bundle` | Allows you to set from which bundle strings are loaded from. By default, it'll point to the same bundle as where the generated code is. Note: ignored if `lookupFunction` parameter is set. |
 | `enumName` | `L10n` | Allows you to change the name of the generated `enum` containing all string tables. |
 | `forceFileNameEnum` | N/A | Setting this parameter will generate an `enum <FileName>` _even if_ only one FileName was provided as input. |
-| `lookupFunction` | N/A | Allows you to set your own custom localization function. The function needs to have as signature: `(key: String, table: String) -> String`. The parameters of your function can have any name (or even no external name), but if it has named parameters, you must provide the complete function signature, including those named parameters – e.g. `yourFunctionName(forKey:table:)`. Note: overrides `bundle` parameter. |
+| `lookupFunction` | N/A | Allows you to set your own custom localization function. The function needs to have as signature: `(key: String, table: String) -> String`. The parameters of your function can have any name (or even no external name), but if it has named parameters, you must provide the complete function signature, including those named parameters – e.g. `yourFunctionName(forKey:table:)`. Note: if you define this parameter, the `bundle` parameter will be ignored. |
 | `noComments` | N/A | Setting this parameter will disable the comments describing the translation of a key. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 
