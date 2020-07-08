@@ -3,6 +3,9 @@ common:
   swift_versions:
     - 5
 file_specific:
+  localizable-customBundle.swift:
+    files:
+      - Common-CustomBundle.swift
   localizable-lookupFunction.swift:
     files:
       - Strings-LocalizeFunction.swift

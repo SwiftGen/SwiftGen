@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -26,14 +26,7 @@ extension Yaml.Parser {
     [
       "name": file.name,
       "path": file.path.string,
-      "documents": file.documents.map(map(document:))
-    ]
-  }
-
-  private func map(document: Any) -> [String: Any] {
-    [
-      "data": document,
-      "metadata": Metadata.generate(for: document)
+      "documents": file.documents.map(StencilContextLazyDocument.init)
     ]
   }
 }

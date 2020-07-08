@@ -19,10 +19,11 @@ You can customize some elements of this template by overriding the following par
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
+| `bundle` | `BundleToken.bundle` | Allows you to set from which bundle JSON files are loaded from. By default, it'll point to the same bundle as where the generated code is. |
 | `enumName` | `JSONFiles` | Allows you to change the name of the generated `enum` containing all files. |
+| `forceFileNameEnum` | N/A | Setting this parameter will generate an `enum <FileName>` _even if_ only one FileName was provided as input. |
 | `preservePath` | N/A | Setting this parameter will disable the basename filter applied to all file paths. Use this if you added your data folder as a "folder reference" in your Xcode project, making that folder hierarchy preserved once copied in the build app bundle. The path will be relative to the folder you provided to SwiftGen. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
-| `forceFileNameEnum` | N/A | Setting this parameter will generate an `enum <FileName>` _even if_ only one FileName was provided as input. |
 
 ## Generated Code
 

@@ -1,6 +1,6 @@
 //
 // Templates UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -26,12 +26,12 @@ final class YamlTests: XCTestCase {
         suffix: "-customName"
       ),
       (
-        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-        suffix: "-publicAccess"
-      ),
-      (
         context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
         suffix: "-forceFileNameEnum"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
       )
     ]
   }

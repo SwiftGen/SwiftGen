@@ -105,6 +105,7 @@
 		DD75551D24A104B400E61756 /* Array+Parallel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F73736247F621800554A9C /* Array+Parallel.swift */; };
 		DD75551E24A104D800E61756 /* OutputDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C7E881F8ECA7000267096 /* OutputDestination.swift */; };
 		DD75552024A105C000E61756 /* config-invalid-parsers.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD75551F24A105C000E61756 /* config-invalid-parsers.yml */; };
+		DD75554024A396B100E61756 /* ContextHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD75553E24A395D700E61756 /* ContextHelpers.swift */; };
 		DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */; };
 		DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */; };
 		DD9F687A20955D51004EB720 /* CatalogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F687720955D51004EB720 /* CatalogEntry.swift */; };
@@ -422,6 +423,7 @@
 		DD75551624A0FD8600E61756 /* ConfigRunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigRunTests.swift; sourceTree = "<group>"; };
 		DD75551A24A103CB00E61756 /* Config+Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config+Run.swift"; sourceTree = "<group>"; };
 		DD75551F24A105C000E61756 /* config-invalid-parsers.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "config-invalid-parsers.yml"; sourceTree = "<group>"; };
+		DD75553E24A395D700E61756 /* ContextHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextHelpers.swift; sourceTree = "<group>"; };
 		DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserCLICommands.swift; sourceTree = "<group>"; };
 		DD9F687320955D0B004EB720 /* ColorsFileTypeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsFileTypeParser.swift; sourceTree = "<group>"; };
 		DD9F687720955D51004EB720 /* CatalogEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogEntry.swift; sourceTree = "<group>"; };
@@ -767,6 +769,7 @@
 			children = (
 				DD428E151FC50FBF001649D6 /* AssetsCatalogParser+Context.swift */,
 				DD428E141FC50FBF001649D6 /* ColorsParser+Context.swift */,
+				DD75553E24A395D700E61756 /* ContextHelpers.swift */,
 				C38E571620FF906B009C9C23 /* CoreDataParser+Context.swift */,
 				DD428E131FC50FBF001649D6 /* FontsParser+Context.swift */,
 				DD428E161FC50FBF001649D6 /* InterfaceBuilderParser+Context.swift */,
@@ -1566,6 +1569,7 @@
 				DD428E231FC50FBF001649D6 /* FontsParser+Context.swift in Sources */,
 				DD9F687B20955D51004EB720 /* AssetsCatalogParser.swift in Sources */,
 				DDB0B9AC209D061C00E467C2 /* PlistFile.swift in Sources */,
+				DD75554024A396B100E61756 /* ContextHelpers.swift in Sources */,
 				DD428E191FC50FBF001649D6 /* FontsParser.swift in Sources */,
 				DDC8211520967180007A55F3 /* Path.swift in Sources */,
 				DDB0B9A8209CF7A300E467C2 /* YamlFile.swift in Sources */,

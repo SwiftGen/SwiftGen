@@ -4,6 +4,9 @@ common:
     - 4
     - 4.2
 file_specific:
+  localizable-customBundle.swift:
+    files:
+      - Common-CustomBundle.swift
   localizable-lookupFunction.swift:
     files:
       - Strings-LocalizeFunction.swift

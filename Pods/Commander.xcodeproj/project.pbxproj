@@ -38,7 +38,7 @@
 		830DDD3E8BB387DF2E89A2F2D077A70C /* Command.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Command.swift; path = Sources/Commander/Command.swift; sourceTree = "<group>"; };
 		A20940B8DCE6B7F491A94685480A7546 /* Commander-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Commander-Info.plist"; sourceTree = "<group>"; };
 		B3BBAABFC759EEFFD5F5213D1B2BAB67 /* Commander-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Commander-dummy.m"; sourceTree = "<group>"; };
-		B49E487DEBA8FA84AC1F0519289E8510 /* Commander.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Commander.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B49E487DEBA8FA84AC1F0519289E8510 /* Commander.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Commander.framework; path = Commander.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF7A6A7FCB74B912A9D9690FFDD44745 /* Commander-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Commander-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +116,7 @@
 				5EB3257DD085600A6C8541DBE4337B9D /* Group.swift */,
 				59394CDBAEAD722A9136E38F554867BC /* Support Files */,
 			);
+			name = Commander;
 			path = Commander;
 			sourceTree = "<group>";
 		};
@@ -158,7 +159,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = F1B89DDDC5CE48FDB90600343376F1FE /* Build configuration list for PBXProject "Commander" */;
 			compatibilityVersion = "Xcode 6.3";
@@ -262,7 +263,8 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -272,6 +274,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2F8529FAE6D2386E11A21B14252F7FB9 /* Commander.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -368,6 +371,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3D3096F1E05829A4E66D4B3307AD079D /* Commander.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";

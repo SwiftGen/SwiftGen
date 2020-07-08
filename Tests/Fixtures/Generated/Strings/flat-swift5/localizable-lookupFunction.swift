@@ -56,9 +56,3 @@ extension L10n {
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
-
-// swiftlint:disable convenience_type
-private final class BundleToken {
-  static let bundle = Bundle(for: BundleToken.self)
-}
-// swiftlint:enable convenience_type

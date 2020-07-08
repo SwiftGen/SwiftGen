@@ -12,7 +12,6 @@
 #pragma clang diagnostic ignored "-Wformat-security"
 
 static NSString* tr(NSString *tableName, NSString *key, ...) {
-
     NSBundle *bundle = [NSBundle bundleForClass:BundleToken.class];
     NSString *format = [bundle localizedStringForKey:key value:nil table:tableName];
     NSLocale *locale = [NSLocale currentLocale];

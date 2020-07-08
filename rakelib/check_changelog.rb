@@ -11,9 +11,12 @@ def check_changelog
   current_repo = File.basename(`git remote get-url origin`.chomp, '.git').freeze
   slug_re = '([a-zA-Z]*/[a-zA-Z]*)'
   links = %r{\[#{slug_re}?\#([0-9]+)\]\(https://github.com/#{slug_re}/(issues|pull)/([0-9]+)\)}
+  links_typos = %r{https://github.com/#{slug_re}/(issue|pulls)/([0-9]+)}
+
   all_warnings = []
   inside_entry = false
   last_line_has_correct_ending = false
+
   File.readlines('CHANGELOG.md').each_with_index do |line, idx|
     line.chomp! # Remove \n the end, it's easier for checks below
     was_inside_entry = inside_entry
@@ -44,6 +47,12 @@ def check_changelog
       link_text = "#{m[0]}##{m[1]}"
       link_url = "#{m[2]}##{m[4]}"
       { line: idx+1, message: "Link text is #{link_text} but links points to #{link_url}." }
+    end)
+
+    # Flag common typos in GitHub issue/PR URLs
+    typo_links = line.scan(links_typos)
+    all_warnings.concat Array(typo_links.map do |m|
+      { line: idx+1, message: "This looks like a GitHub link URL with a typo. Issue links should use `/issues/123` (plural) and PR links should use `/pull/123` (singular)." }
     end)
   end
   all_warnings

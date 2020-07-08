@@ -1,6 +1,6 @@
 //
 // Templates UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -26,12 +26,12 @@ final class JsonTests: XCTestCase {
         suffix: "-customName"
       ),
       (
-        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-        suffix: "-publicAccess"
-      ),
-      (
         context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
         suffix: "-forceFileNameEnum"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
       )
     ]
   }
@@ -64,8 +64,16 @@ final class JsonTests: XCTestCase {
         suffix: ""
       ),
       (
+        context: try StencilContext.enrich(context: context, parameters: ["bundle=ResourcesBundle.bundle"]),
+        suffix: "-customBundle"
+      ),
+      (
         context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomJSON"]),
         suffix: "-customname"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
@@ -74,10 +82,6 @@ final class JsonTests: XCTestCase {
       (
         context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
         suffix: "-publicAccess"
-      ),
-      (
-        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
-        suffix: "-forceFileNameEnum"
       )
     ]
   }
