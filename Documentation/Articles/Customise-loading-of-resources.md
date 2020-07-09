@@ -23,13 +23,11 @@ Let's say you have the following Swift code somewhere in your app:
 ```swift
 final class MyAwesomePod {
   // This is the bundle where your code resides in
-  static let bundle: Bundle = {
-    Bundle(for: MyAwesomePod.self)
-  }()
+  static let bundle = Bundle(for: MyAwesomePod.self)
 
   // Your resources bundle is inside that bundle
   static let resourcesBundle: Bundle = {
-	guard let url = bundle.url(forResource: "MyAwesomePodResources", withExtension: "bundle"),
+  guard let url = bundle.url(forResource: "MyAwesomePodResources", withExtension: "bundle"),
       let bundle = Bundle(url: url) else {
       fatalError("Can't find 'MyAwesomePodResources' bundle")
     }
