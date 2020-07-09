@@ -25,7 +25,7 @@ You can customize some elements of this template by overriding the following par
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 | `fontAliasName` | `Font` | **Deprecated** Allows you to change the name of the `typealias` representing a font. Useful when working with SwiftUI, which defines it's own `Font` type. |
 
-1. _If you don't provide a `lookupFunction`, we will call `url(forResource:withExtension:)` on the `bundle` parameter instead._
+1. _If you don't provide a `lookupFunction`, we will use `url(forResource:withExtension:)` on the `bundle` parameter instead._
 
 ## Generated Code
 

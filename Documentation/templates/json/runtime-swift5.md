@@ -26,7 +26,7 @@ You can customize some elements of this template by overriding the following par
 | `preservePath` | N/A | Setting this parameter will disable the basename filter applied to all file paths. Use this if you added your data folder as a "folder reference" in your Xcode project, making that folder hierarchy preserved once copied in the build app bundle. The path will be relative to the folder you provided to SwiftGen. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 
-1. _If you don't provide a `lookupFunction`, we will call `url(forResource:withExtension:)` on the `bundle` parameter instead._
+1. _If you don't provide a `lookupFunction`, we will use `url(forResource:withExtension:)` on the `bundle` parameter instead._
 
 ## Generated Code
 

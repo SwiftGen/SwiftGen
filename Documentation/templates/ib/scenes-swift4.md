@@ -26,7 +26,7 @@ You can customize some elements of this template by overriding the following par
 | `module` | N/A | By default, the template will import the needed modules for custom classes, but won’t import the target’s module to avoid an import warning — using the `PRODUCT_MODULE_NAME` environment variable to detect it. Should you need to ignore an additional module, you can provide it here. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 
-1. _If you don't provide a `lookupFunction`, we will call `NS/UIStoryboard(name:bundle:)` with the `bundle` parameter instead._
+1. _If you don't provide a `lookupFunction`, we will use `NS/UIStoryboard(name:bundle:)` with the `bundle` parameter instead._
 
 ## Generated Code
 

@@ -31,7 +31,7 @@ You can customize some elements of this template by overriding the following par
 | `noComments` | N/A | Setting this parameter will disable the comments describing the translation of a key. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 
-1. _If you don't provide a `lookupFunction`, we will call `localizedString(forKey:value:table:)` on the `bundle` parameter instead._
+1. _If you don't provide a `lookupFunction`, we will use `localizedString(forKey:value:table:)` on the `bundle` parameter instead._
 
 ## Generated Code
 
