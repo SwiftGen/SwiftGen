@@ -71,7 +71,11 @@
 
   fileprivate var url: URL? {
     // swiftlint:disable:next implicit_return
+    {% if param.lookupFunction %}
+    return {{param.lookupFunction}}(name, family, path)
+    {% else %}
     return {{param.bundle|default:"BundleToken.bundle"}}.url(forResource: path, withExtension: nil)
+    {% endif %}
   }
 }
 
@@ -90,7 +94,7 @@
     self.init(name: font.name, size: size)
   }
 }
-{% if not param.bundle %}
+{% if not param.bundle and not param.lookupFunction %}
 
 // swiftlint:disable convenience_type
 private final class BundleToken {

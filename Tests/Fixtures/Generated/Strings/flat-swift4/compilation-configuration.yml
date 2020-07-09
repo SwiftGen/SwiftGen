@@ -9,4 +9,4 @@ file_specific:
       - Common-CustomBundle.swift
   localizable-lookupFunction.swift:
     files:
-      - Strings-LocalizeFunction.swift
+      - Common-LookupFunction.swift

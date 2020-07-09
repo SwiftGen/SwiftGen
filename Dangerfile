@@ -2,6 +2,7 @@ require_relative 'rakelib/check_changelog'
 
 is_release = github.branch_for_head.start_with?('release/')
 
+################################################
 # Welcome message
 markdown [
   "Hey 👋 I'm Eve, the friendly bot watching over SwiftGen 🤖",
@@ -9,14 +10,20 @@ markdown [
   '', '---', ''
 ]
 
+need_fixes = []
+
+
+
+################################################
 # Make it more obvious that a PR is a work in progress and shouldn't be merged yet
 warn('PR is classed as Work in Progress') if github.pr_title.include? '[WIP]'
 
 # Warn when there is a big PR
 warn('Big PR') if git.lines_of_code > 500 && !is_release
 
-need_fixes = []
 
+
+################################################
 # Check for correct base branch
 to_develop = github.branch_for_base == 'develop'
 to_stable = github.branch_for_base == 'stable'
@@ -48,6 +55,9 @@ elsif !to_develop
     "not #{github.branch_for_base}")
 end
 
+
+
+################################################
 # Check `lock` files
 podfile_changed = git.modified_files.include?('Podfile.lock')
 package_changed = git.modified_files.include?('Package.resolved')
@@ -67,6 +77,9 @@ if podfile_changed || swiftgenkit_podspec_changed || dependencies_doc_changed
   end
 end
 
+
+
+################################################
 # Check for a CHANGELOG entry
 declared_trivial = github.pr_title.include? '#trivial'
 has_changelog = git.modified_files.include?('CHANGELOG.md')
@@ -102,6 +115,28 @@ unless changelog_warnings.empty?
   end
 end
 
+
+
+################################################
+# Check Documentation TOC update
+doc_dir_structure_modified = (git.added_files + git.deleted_files + git.renamed_files.map(&:values)).any? { |path| path.start_with?('Documentation/') }
+if doc_dir_structure_modified
+  doc_files = Dir.chdir('Documentation') { Dir['{Articles/,}*{/,.md}'] } - ['README.md'] # folders + .md files immediately in either `Documentation/` or `Documentation/Articles/`
+  toc_links = File.read('Documentation/README.md').scan(%r{\[.*\]\((.*)\)}).map(&:first).uniq # Extract markdown links from TOC
+    .reject { |s| s.start_with?('http') }.map { |s| CGI.unescape(s) } # only keep local links, and remove any percent escapes
+
+  (doc_files - toc_links).each do |doc_not_linked|
+    fail("The documentation file #{github.html_link(doc_not_linked)} is not referenced in the #{github.html_link('Documentation/README.md')}. Please add a link to it.")
+  end
+  
+  (toc_links - doc_files).each do |bad_link|
+    fail("The #{github.html_link('Documentation/README.md')} contains a link to \`#{bad_link}\` but that file doesn't exist. Maybe it was renamed or deleted?")
+  end
+end
+
+
+
+################################################
 # Encouragement message
 if need_fixes.empty?
   markdown('Seems like everything is in order 👍 You did a good job here! 🤝')

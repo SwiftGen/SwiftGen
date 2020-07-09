@@ -7,3 +7,6 @@ file_specific:
   all-customBundle.swift:
     files:
       - Common-CustomBundle.swift
+  all-lookupFunction.swift:
+    files:
+      - Common-LookupFunction.swift

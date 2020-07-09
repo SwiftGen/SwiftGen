@@ -43,7 +43,7 @@ extension Config {
 
 
     # Generate constants for your Assets Catalogs, including constants for images, colors, ARKit resources, etc.
-    #   This example also shows how to provide additional parameters to your template to customise the output.
+    #   This example also shows how to provide additional parameters to your template to customize the output.
     #   - Especially the `forceProvidesNamespaces: true` param forces to create sub-namespace for each folder/group used in your Asset Catalogs, even the ones without "Provides Namespace". Without this param, SwiftGen only generates sub-namespaces for folders/groups which have the "Provides Namespace" box checked in the Inspector pane.
     #   - To know which params are supported for a template, use `swiftgen template doc xcassets swift5` to open the template documentation on GitHub.
     xcassets:

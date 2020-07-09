@@ -41,7 +41,7 @@ custom_rules:
 Feel free to use this and adapt to your needs, especially:
 
 * This example makes SwiftLint generate _errors_ when it finds an usage of the Apple API where a SwiftGen constant should be used instead. Maybe you prefer to be less strict about it and use `severity: warning` rather than error in your project
-* The `message` this example configuration displays mention the name of the `enums` generated that the user should use. If you've customised the name of such enum (typically with `params: { "enumName": "somethingElse" }` in your `swiftgen.yml` config file), you may want to adapt the messages reported by SwiftLint accordingly.
+* The `message` this example configuration displays mention the name of the `enums` generated that the user should use. If you've customized the name of such enum (typically with `params: { "enumName": "somethingElse" }` in your `swiftgen.yml` config file), you may want to adapt the messages reported by SwiftLint accordingly.
 
 ## Contribution
 

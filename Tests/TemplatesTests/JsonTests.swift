@@ -76,6 +76,13 @@ final class JsonTests: XCTestCase {
         suffix: "-forceFileNameEnum"
       ),
       (
+        context: try StencilContext.enrich(
+          context: context,
+          parameters: ["lookupFunction=myJSONFinder(path:)"]
+        ),
+        suffix: "-lookupFunction"
+      ),
+      (
         context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
         suffix: "-preservePath"
       ),
