@@ -20,9 +20,9 @@ This directory contains documentation for various topics related to SwiftGen, su
 * Learn how to [create your own custom templates](Articles/Creating-custom-templates.md) to customize the code SwiftGen generates
 * Iterate quickly when creating custom templates by [watching a file or folder for changes](Articles/Watch-a-folder-for-changes.md)
 
-### Customise loading of resources
+### Customize loading of resources
 
-Most of the SwiftGen provided templates generate code that allows you to load resources at runtime, but in some cases you may want to modify how these resources are loaded. The built-in templates [can be configured to handle these cases](Articles/Customise-loading-of-resources.md) without resorting to custom templates.
+Most of the SwiftGen provided templates generate code that allows you to load resources at runtime, but in some cases you may want to modify how these resources are loaded. The built-in templates [can be configured to handle these cases](Articles/Customize-loading-of-resources.md) without resorting to custom templates.
 
 ## [Parsers Documentation](Parsers/)
 

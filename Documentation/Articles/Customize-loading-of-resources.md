@@ -1,4 +1,4 @@
-# Customise loading of resources
+# Customize loading of resources
 
 By default, the built-in templates provided by SwiftGen will load resources from the same bundle as where the generated code is located at:
 - If your generated code is in the main app, it will load resources from the `main` bundle.
@@ -27,7 +27,7 @@ final class MyAwesomePod {
 
   // Your resources bundle is inside that bundle
   static let resourcesBundle: Bundle = {
-  guard let url = bundle.url(forResource: "MyAwesomePodResources", withExtension: "bundle"),
+    guard let url = bundle.url(forResource: "MyAwesomePodResources", withExtension: "bundle"),
       let bundle = Bundle(url: url) else {
       fatalError("Can't find 'MyAwesomePodResources' bundle")
     }
@@ -37,10 +37,18 @@ final class MyAwesomePod {
 ```
 
 You want SwiftGen to generate code to load resources from `MyAwesomePod.resourcesBundle`. Update your configuration file and add the `bundle` parameter, like so:
+Since you want SwiftGen to generate code to load resources (localized strings and fonts for example) from `MyAwesomePod.resourcesBundle`, you can update your configuration file to add the `bundle` parameter, like so:
 
 ```yaml
 input_dir: Resources
 output_dir: Sources
+fonts:
+  inputs: Fonts
+  outputs:
+    templateName: swift5
+    output: Generated/Fonts.swift
+    params:
+      bundle: MyAwesomePod.resourcesBundle
 strings:
   inputs: en.lproj/Localizable.strings
   outputs:
@@ -50,13 +58,15 @@ strings:
       bundle: MyAwesomePod.resourcesBundle
 ```
 
-Run SwiftGen again to update the generated coide, and voila! Your generated code now works with a resources bundle.
+Run SwiftGen again to update the generated code, and voila! Your generated code will now load the localised strings and fonts from that resources bundle instead of the bundle where the generated code is.
+
+Consult each [templates documentation](../templates/) to learn more about this parameter and ensure it's supported by the template you want to use.
 
 ## Override the lookup function
 
-If you need a more advanced solution than which bundle is used for loading resources, you can override the "lookup function".
+If you need a more advanced solution than just changing the bundle used for loading resources, you can override the "lookup function".
 
-For example you may want to override the way localisation strings are loaded, if you want to override the device's language by some language chosen in your app.
+For example you may want to override the way localisation strings are loaded, if you want to override the device's language by some language chosen in your app. Another use case is if your project is organised in multiple white-label app targets, all using the same framework, and you want to allow the app target to override a translation otherwise provided by the common framework, etc…
 
 Another more complex example: lets say you have a system where you have a set strings localisation files for your application. These are of course embedded in your application as they always are. But you also want to be able to update these translations on-the-fly, by having your app regularly check and download newer versions of these translation files.
 
@@ -97,4 +107,8 @@ strings:
       lookupFunction: TranslationService.shared.lookupTranslation(forKey:inTable:)
 ```
 
-Note that we provided the full signature of the function. The signature of this `lookupFunction` will change depending on which parser & template you're using. Check the dedicated [template documentation](../templates) for more information.
+Note that we provided the full signature of the function.
+
+- The signature of this `lookupFunction` depends on which parser & template you're using. It will be different for `strings` templates vs `font` templates for example.
+- Note that this parameter currently is not available for `xcassets` templates (because XCAssets don't have just one but multiple methods used depending on the asset type).
+- Check [each template's dedicated documentation](../templates/) for more information.
