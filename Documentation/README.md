@@ -37,7 +37,7 @@ The documentation for each template, their intended use, and their supported par
 
 The way SwiftGen works is to parse your input files (resources like Asset Catalogs, Strings files, etc) using those parsers described above, and transform them into a structured dictionary – that we call a "SwiftGenKit Context" – representing the parsed data.
 
-That parsed data ("Context") is then fed to our template engine (Stencil), alongside a template, to finally produce the generated code that you will use in your projects.
+That parsed data ("Context") is then fed to our template engine ([Stencil](https://github.com/stencilproject/Stencil)), alongside a template, to finally produce the generated code that you will use in your projects.
 
 > ```
 >                                          +----------+
