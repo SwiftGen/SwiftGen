@@ -54,4 +54,47 @@ Run SwiftGen again to update the generated coide, and voila! Your generated code
 
 ## Override the lookup function
 
-TODO
+If you need a more advanced solution than which bundle is used for loading resources, you can override the "lookup function".
+
+For example you may want to override the way localisation strings are loaded, if you want to override the device's language by some language chosen in your app.
+
+Another more complex example: lets say you have a system where you have a set strings localisation files for your application. These are of course embedded in your application as they always are. But you also want to be able to update these translations on-the-fly, by having your app regularly check and download newer versions of these translation files.
+
+### Solution
+
+What you want is SwiftGen to first check the updated translations if available, and otherwise fallback to the embedded translations.
+
+Let's say you have the following Swift code somewhere in your app:
+
+```swift
+final class TranslationService {
+  static let shared = TranslationService()
+
+  private typealias TranslationTable = [String: String]
+  private var updatedTables: [String: TranslationTable] = [:]
+
+  func lookupTranslation(forKey key: String, inTable table: String) -> String {
+    if let table = updatedTables[table], let translation = table[key] {
+      return translation
+    } else {
+      return Bundle.main.localizedString(forKey: key, value: nil, table: table)
+    }
+  }
+}
+```
+
+We leave the implementation of how to update and load `updatedTables` as an exercise to the reader. You now want SwiftGen to use the `lookupTranslation` function. Update your configuration file and add the `lookupFunction` parameter, like so:
+
+```yaml
+input_dir: Resources
+output_dir: Sources
+strings:
+  inputs: en.lproj/Localizable.strings
+  outputs:
+    templateName: structured-swift5
+    output: Generated/Strings.swift
+    params:
+      lookupFunction: TranslationService.shared.lookupTranslation(forKey:inTable:)
+```
+
+Note that we provided the full signature of the function. The signature of this `lookupFunction` will change depending on which parser & template you're using. Check the dedicated [template documentation](../templates) for more information.
