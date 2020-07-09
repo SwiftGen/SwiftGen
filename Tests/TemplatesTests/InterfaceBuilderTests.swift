@@ -94,6 +94,15 @@ class InterfaceBuilderTests: XCTestCase {
       (
         context: try StencilContext.enrich(context: context, parameters: ["bundle=ResourcesBundle.bundle"]),
         suffix: "-customBundle"
+      ),
+
+      // test: lookup function parameter
+      (
+        context: try StencilContext.enrich(
+          context: context,
+          parameters: ["lookupFunction=myStoryboardFinder(name:)"]
+        ),
+        suffix: "-lookupFunction"
       )
     ]
   }

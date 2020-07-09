@@ -23,6 +23,10 @@ file_specific:
   all-ignoreTargetModule.swift:
     files:
       - IB-macOS-Definitions.swift
+  all-lookupFunction.swift:
+    files:
+      - IB-macOS-Definitions.swift
+      - Common-LookupFunction.swift
   all-noDefinedModule.swift:
     files:
       - IB-macOS-Definitions.swift

@@ -26,13 +26,16 @@ _None_
 * CoreData: Deprecates `fetchRequest()` and adds `makeFetchRequest()` to avoid ambiguous function usage.  
   [David Rothera](https://github.com/davidrothera)
   [#726](https://github.com/SwiftGen/SwiftGen/pull/726)
-* XCassets: image assets now load faster on macOS if they're in the `main` bundle. MacOS only provides a caching mechanism for images in the `main` bundle, for other cases you may need to provide your own caching mechanism as needed.  
+* XCAssets: image assets now load faster on macOS if they're in the `main` bundle. MacOS only provides a caching mechanism for images in the `main` bundle, for other cases you may need to provide your own caching mechanism as needed.  
   [David Jennes](https://github.com/djbe)
   [#648](https://github.com/SwiftGen/SwiftGen/issues/648)
   [#733](https://github.com/SwiftGen/SwiftGen/pull/733)
 * Fonts/IB/JSON/Plist/Strings/XCAssets: all templates that load data at runtime from a bundle now support a `bundle` template parameter, which you can use to override the bundle from which resources are loaded. Check out the [template specific documentation](Documentation/templates/) for more information.  
   [David Jennes](https://github.com/djbe)
   [#737](https://github.com/SwiftGen/SwiftGen/pull/737)
+* Fonts/IB/JSON/Plist: Similar to the `strings` templates, these templates now support a `lookupFunction` template parameter, which allows you to provide your own resource lookup mechanism at runtime. Check the [template specific documentation](Documentation/templates/) for more information.  
+  [David Jennes](https://github.com/djbe)
+  [#738](https://github.com/SwiftGen/SwiftGen/pull/738)
 
 ### Bug Fixes
 
