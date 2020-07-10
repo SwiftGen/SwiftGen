@@ -126,47 +126,59 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "template cat strings structured-swift5"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "template doc strings structured-swift5"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "template list"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "colors --templateName swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/Colors/colors.xml"
+            argument = "template which strings structured-swift5"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "coredata --templateName swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/CoreData/Model.xcdatamodeld"
+            argument = "run colors --templateName swift5 $(PROJECT_DIR)/Tests/Fixtures/Resources/Colors/colors.xml"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "fonts --templateName swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/Fonts"
+            argument = "run coredata --templateName swift5 $(PROJECT_DIR)/Tests/Fixtures/Resources/CoreData/Model.xcdatamodeld"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "ib --templateName scenes-swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/IB-iOS"
+            argument = "run fonts --templateName swift5 $(PROJECT_DIR)/Tests/Fixtures/Resources/Fonts"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "ib --templateName segues-swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/IB-iOS"
+            argument = "run ib --templateName scenes-swift5 $(PROJECT_DIR)/Tests/Fixtures/Resources/IB-iOS"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "plist --templateName inline-swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/Plist/good/Info.plist"
+            argument = "run ib --templateName segues-swift5 $(PROJECT_DIR)/Tests/Fixtures/Resources/IB-iOS"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "strings --templateName structured-swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/Strings/Localizable.strings"
+            argument = "run json --templateName inline-swift5 $(PROJECT_DIR)/Tests/Fixtures/Resources/JSON/configuration.json"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "xcassets --templateName swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Images.xcassets"
+            argument = "run plist --templateName inline-swift5 $(PROJECT_DIR)/Tests/Fixtures/Resources/Plist/good/Info.plist"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "xcassets --templateName swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Data.xcassets"
+            argument = "run strings --templateName structured-swift5 $(PROJECT_DIR)/Tests/Fixtures/Resources/Strings/Localizable.strings"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "yaml --templateName inline-swift4 $(PROJECT_DIR)/Tests/Fixtures/Resources/YAML/good/documents.yaml"
+            argument = "run xcassets --templateName swift5 $(PROJECT_DIR)/Tests/Fixtures/Resources/XCAssets/Food.xcassets"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "run yaml --templateName inline-swift5 $(PROJECT_DIR)/Tests/Fixtures/Resources/YAML/good/documents.yaml"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
