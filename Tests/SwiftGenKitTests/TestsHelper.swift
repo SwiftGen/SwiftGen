@@ -167,30 +167,32 @@ private func convertToDictionary(_ value: Any) -> [String: Any]? {
   switch value {
   case let value as [String: Any]:
     return value
-  case let value as NSObject:
-    return convertNSObjectToDictionary(value)
+  case let value as NSObject & ContextConvertible:
+    return value.convertToDictionary()
   default:
     return nil
   }
 }
 
-private func convertNSObjectToDictionary(_ object: NSObject) -> [String: Any] {
-  var result: [(String, Any)] = []
-  var mirror: Mirror? = Mirror(reflecting: object)
+extension ContextConvertible where Self: NSObject {
+  func convertToDictionary() -> [String: Any] {
+    var result: [(String, Any)] = []
+    var mirror: Mirror? = Mirror(reflecting: self)
 
-  repeat {
-    // At runtime when mirroring, labels for lazy vars get the "$__lazy_storage_$_" prefix
-    // so we need to delete the prefix to handle those lazy var cases.
-    // We use `object.value(forKey:) to force load lazy variables because `someMirrorChild.value`
-    // evaluates to `nil` for lazy variables and doesn't trigger the lazy var evaluation.
-    result += mirror?.children
-      .compactMap { $0.label?.deletingPrefix("$__lazy_storage_$_") }
-      .filter { !$0.hasPrefix("_") }
-      .map { ($0, object.value(forKey: $0) as Any) } ?? []
-    mirror = mirror?.superclassMirror
-  } while mirror != nil
+    repeat {
+      // At runtime when mirroring, labels for lazy vars get the "$__lazy_storage_$_" prefix
+      // so we need to delete the prefix to handle those lazy var cases.
+      // We use `object.value(forKey:) to force load lazy variables because `someMirrorChild.value`
+      // evaluates to `nil` for lazy variables and doesn't trigger the lazy var evaluation.
+      result += mirror?.children
+        .compactMap { $0.label?.deletingPrefix("$__lazy_storage_$_") }
+        .filter { !$0.hasPrefix("_") }
+        .map { ($0, self.value(forKey: $0) as Any) } ?? []
+      mirror = mirror?.superclassMirror
+    } while mirror != nil
 
-  return Dictionary.init(uniqueKeysWithValues: result)
+    return Dictionary(uniqueKeysWithValues: result)
+  }
 }
 
 private extension String {
