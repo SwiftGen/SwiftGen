@@ -6,7 +6,7 @@
 
 import Foundation
 import PathKit
-@testable import SwiftGenKit
+import SwiftGenKit
 import XCTest
 
 private let colorCode: (String) -> String =
@@ -99,14 +99,14 @@ private func diff(_ result: [String: Any], _ expected: [String: Any], path: Stri
 private func compare(_ lhs: Any, _ rhs: Any, key: String, path: String) -> String? {
   let keyPath = (path.isEmpty) ? key : "\(path).\(key)"
 
-  if let lhs = convertToNumber(lhs), let rhs = convertToNumber(rhs), lhs == rhs {
-    return nil
-  } else if let lhs = convertToString(lhs), let rhs = convertToString(rhs), lhs == rhs {
-    return nil
-  } else if let lhs = lhs as? Data, let rhs = rhs as? Data, lhs == rhs {
-    return nil
-  } else if let lhs = lhs as? Date, let rhs = rhs as? Date, lhs == rhs {
-    return nil
+  if let lhs = convertToNumber(lhs), let rhs = convertToNumber(rhs) {
+    return compare(lhs, rhs, keyPath: keyPath)
+  } else if let lhs = convertToString(lhs), let rhs = convertToString(rhs) {
+    return compare(lhs, rhs, keyPath: keyPath)
+  } else if let lhs = lhs as? Data, let rhs = rhs as? Data {
+    return compare(lhs, rhs, keyPath: keyPath)
+  } else if let lhs = lhs as? Date, let rhs = rhs as? Date {
+    return compare(lhs, rhs, keyPath: keyPath)
   } else if let lhs = lhs as? [Any], let rhs = rhs as? [Any], lhs.count == rhs.count {
     for (lhs, rhs) in zip(lhs, rhs) {
       if let error = compare(lhs, rhs, key: key, path: path) {
@@ -118,17 +118,25 @@ private func compare(_ lhs: Any, _ rhs: Any, key: String, path: String) -> Strin
   } else if let lhs = lhs as? String, lhs == "\(rhs)" {
     return nil
   } else {
-    return [
-      "\(msgColor)Values do not match for '\(keyPath)':\(reset)",
-      ">>>>>> result",
-      "\(lhs)",
-      "======",
-      "\(rhs)",
-      "<<<<<< expected"
-    ].joined(separator: "\n")
+    return compare(String(describing: lhs), String(describing: rhs), keyPath: keyPath)
   }
 
   return nil
+}
+
+private func compare<T: Equatable>(_ lhs: T, _ rhs: T, keyPath: String) -> String? {
+  if lhs == rhs {
+    return nil
+  } else {
+    return """
+    \(msgColor)Values do not match for '\(keyPath)':\(reset)
+    >>>>>> result
+    \(lhs)
+    ======
+    \(rhs)
+    <<<<<< expected
+    """
+  }
 }
 
 private func convertToNumber(_ value: Any) -> NSNumber? {
@@ -177,6 +185,7 @@ private func convertNSObjectToDictionary(_ object: NSObject) -> [String: Any] {
     // evaluates to `nil` for lazy variables and doesn't trigger the lazy var evaluation.
     result += mirror?.children
       .compactMap { $0.label?.deletingPrefix("$__lazy_storage_$_") }
+      .filter { !$0.hasPrefix("_") }
       .map { ($0, object.value(forKey: $0) as Any) } ?? []
     mirror = mirror?.superclassMirror
   } while mirror != nil
