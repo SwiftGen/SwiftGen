@@ -240,11 +240,8 @@ Note: in practice this should hopefully be very rare. Especially, if you're usin
 
 <summary>Placeholders that are only used in the variables but not in the format key</summary>
 
-This plural entry is would work with plain `NSLocalizedString`, as Foundation will pass the whole list of arguments
-to each substituted format specifier, e.g. in this case passing a `String` and an `Int` would 
-work with `NSLocalizedString`. SwiftGen only parses the `NSStringLocalizedFormatKey` to find possible placeholders,
-because parsing all possible plural rules for placeholders as well could result in different amounts 
-of placeholders for different amounts or different languages.
+This plural entry would work with plain `NSLocalizedString`, as Foundation will pass the whole list of arguments to each substituted format specifier – e.g. in this case passing a `String` and an `Int` would work with `NSLocalizedString`.  
+But SwiftGen only parses the `NSStringLocalizedFormatKey` in a `stringsdict` to find possible placeholders, because parsing all possible plural rules for placeholders as well could result in different amounts of placeholders for different amounts or different languages.
 
 ```xml
 <key>unsupported-use.placeholders-in-variable-rule.string-int</key>

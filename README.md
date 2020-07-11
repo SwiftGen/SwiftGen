@@ -773,7 +773,7 @@ And the following `Localizable.stringsdict` file:
             <key>NSStringFormatValueTypeKey</key>
             <string>d</string>
             <key>zero</key>
-            <string>You have zero apples</string>
+            <string>You have no apples</string>
             <key>one</key>
             <string>You have one apple</string>
             <key>other</key>
