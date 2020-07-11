@@ -37,8 +37,7 @@ extension Strings {
             key: key,
             translation: "Plural format key: \"\(pluralEntry.formatKey)\"",
             types: try PlaceholderType.placeholders(
-              fromFormat: pluralEntry.formatKeyWithVariableValueTypes,
-              normalizePositionals: true
+              fromFormat: pluralEntry.formatKeyWithVariableValueTypes
             ),
             keyStructureSeparator: options[Option.separator]
           )

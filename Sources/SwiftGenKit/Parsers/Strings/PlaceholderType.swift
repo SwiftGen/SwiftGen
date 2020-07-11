@@ -15,8 +15,6 @@ extension Strings {
     case cString = "UnsafePointer<CChar>"
     case pointer = "UnsafeRawPointer"
 
-    static let unknown = pointer
-
     init?(formatChar char: Character) {
       guard let lcChar = String(char).lowercased().first else {
         return nil
@@ -63,10 +61,7 @@ extension Strings.PlaceholderType {
   }()
 
   // "I give %d apples to %@" --> [.int, .string]
-  static func placeholders(
-    fromFormat formatString: String,
-    normalizePositionals: Bool = false
-  ) throws -> [Strings.PlaceholderType] {
+  static func placeholders(fromFormat formatString: String) throws -> [Strings.PlaceholderType] {
     let range = NSRange(location: 0, length: (formatString as NSString).length)
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier
@@ -94,22 +89,19 @@ extension Strings.PlaceholderType {
         }
       }
 
-    return try placeholderTypesFromChars(chars, normalizePositionals: normalizePositionals)
+    return try placeholderTypes(fromChars: chars)
   }
 
   /// Creates an array of `PlaceholderType` from an array of format chars and their optional positional specifier
   ///
+  /// - Note: Any position that doesn't have a placeholder defined will be stripped out, shifting the position of
+  ///         the remaining placeholders. This is to match how Foundation behaves at runtime.
+  ///         i.e. a string of `"%2$@ %3$d"` will end up with `[.object, .int]` since no placeholder
+  ///         is defined for position 1.
   /// - Parameter chars: An array of format chars and their optional positional specifier
-  /// - Parameter normalizePositionals: defines how to treat undefined positions
-  ///     - if true, undefined placeholders will be omitted and the remaining placeholder will have their
-  ///       position shifted accordingly. This is how Foundation behaves at runtime.
-  ///     - if false, undefined placeholders will be replaced with the `.unknown` value
   /// - Throws: `Strings.ParserError.invalidPlaceholder` in case a `PlaceholderType` would be overwritten
   /// - Returns: An array of `PlaceholderType`
-  private static func placeholderTypesFromChars(
-    _ chars: [(String, Int?)],
-    normalizePositionals: Bool
-  ) throws -> [Strings.PlaceholderType] {
+  private static func placeholderTypes(fromChars chars: [(String, Int?)]) throws -> [Strings.PlaceholderType] {
     var list = [Int: Strings.PlaceholderType]()
     var nextNonPositional = 1
 
@@ -131,15 +123,9 @@ extension Strings.PlaceholderType {
       }
     }
 
-    if normalizePositionals {
-      // Omit any holes (i.e. position without a placeholder defined)
-      return list
-        .sorted { $0.0 < $1.0 } // Sort by key, i.e. the positional value
-        .map { $0.value }
-    } else {
-      // Replace any holes with .unknown
-      guard let maxIndex = list.keys.max() else { return [] }
-      return (1...maxIndex).map { list[$0] ?? .unknown }
-    }
+    // Omit any holes (i.e. position without a placeholder defined)
+    return list
+      .sorted { $0.0 < $1.0 } // Sort by key, i.e. the positional value
+      .map { $0.value }
   }
 }

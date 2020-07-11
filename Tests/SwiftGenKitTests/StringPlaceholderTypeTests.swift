@@ -46,14 +46,14 @@ final class StringPlaceholderTypeTests: XCTestCase {
   func testParseComplexFormatPlaceholders() throws {
     let format = "%2$1.3d - %4$-.7f - %3$@ - %% - %5$+3c - %%"
     let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format)
-    // positions 2, 4, 3, 5 set to Int, Float, Object, Char, and position 1 not matched, defaulting to Unknown
-    XCTAssertEqual(placeholders, [.unknown, .int, .object, .float, .char])
+    // positions 2, 4, 3, 5 set to .int, .float, .object, .char ; position 1 not matched
+    XCTAssertEqual(placeholders, [.int, .object, .float, .char])
   }
 
   func testParseInterleavedPositionalAndNonPositionalPlaceholders() throws {
     let format = "%@ %7$d %@ %@ %8$d %@ %@"
     let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format)
-    XCTAssertEqual(placeholders, [.object, .object, .object, .object, .object, .unknown, .int, .int])
+    XCTAssertEqual(placeholders, [.object, .object, .object, .object, .object, /* ?, */ .int, .int])
   }
 
   func testParseFlags() throws {
@@ -122,28 +122,5 @@ final class StringPlaceholderTypeTests: XCTestCase {
     let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "%%%foo")
     // Should map to [.float]
     XCTAssertEqual(placeholders, [.float])
-  }
-
-  // MARK: - Normalizing Positionals
-
-  func testParsePositionalPlaceholdersNormalized() throws {
-    let placeholders = try Strings.PlaceholderType.placeholders(
-      fromFormat: "%2$d-%4$f-%3$@-%c",
-      normalizePositionals: true
-    )
-    XCTAssertEqual(placeholders, [.char, .int, .object, .float])
-  }
-
-  func testParseComplexFormatPlaceholdersNormalized() throws {
-    let format = "%2$1.3d - %4$-.7f - %3$@ - %% - %5$+3c - %%"
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format, normalizePositionals: true)
-    // positions 2, 4, 3, 5 set to Int, Float, Object, Char, and position 1 not matched
-    XCTAssertEqual(placeholders, [.int, .object, .float, .char])
-  }
-
-  func testParseInterleavedPositionalAndNonPositionalPlaceholdersNormalized() throws {
-    let format = "%@ %7$d %@ %@ %8$d %@ %@"
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format, normalizePositionals: true)
-    XCTAssertEqual(placeholders, [.object, .object, .object, .object, .object, .int, .int])
   }
 }
