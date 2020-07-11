@@ -11,7 +11,7 @@ public enum Strings {
   public enum ParserError: Error, CustomStringConvertible {
     case duplicateTableFile(path: Path, existing: Path)
     case failureOnLoading(path: Path)
-    case invalidFormat
+    case invalidFormat(reason: String)
     case invalidPlaceholder(previous: Strings.PlaceholderType, new: Strings.PlaceholderType)
     case invalidPluralFormat(missingVariableKey: String, pluralKey: String)
     case invalidVariableRuleValueType(variableName: String, valueType: String)
@@ -26,8 +26,8 @@ public enum Strings {
         """
       case .failureOnLoading(let path):
         return "Failed to load a file at \"\(path)\""
-      case .invalidFormat:
-        return "Invalid strings file"
+      case .invalidFormat(let reason):
+        return "Invalid format. \(reason)"
       case .invalidPlaceholder(let previous, let new):
         return "Invalid placeholder type \(new) (previous: \(previous))"
       case .invalidPluralFormat(let missingVariableKey, let pluralKey):

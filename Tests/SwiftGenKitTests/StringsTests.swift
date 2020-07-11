@@ -141,6 +141,31 @@ final class StringsTests: XCTestCase {
     }
   }
 
+  func testErrorWhenBothPluralAndVariableWidthKeys() throws {
+    let parser = try Strings.Parser()
+
+    XCTAssertThrowsError(
+      try parser.searchAndParse(path: Fixtures.path(for: "LocPluralErrorBothTypeKeys.stringsdict", sub: .strings)),
+      "Expected an error to be thrown"
+    ) { error in
+      guard
+        let parserError = error as? Strings.ParserError,
+        case .invalidFormat(let reason) = parserError
+      else {
+        XCTFail("Unexpected error occured while parsing: \(error)")
+        return
+      }
+
+      XCTAssertEqual(
+        reason,
+        """
+        Entry "competition.tab.favorite-players" expects either "NSStringLocalizedFormatKey" or \
+        "NSStringVariableWidthRuleType" but got either neither or both
+        """
+      )
+    }
+  }
+
   func testErrorWhenMissingVariableInPluralDefinition() throws {
     let parser = try Strings.Parser()
 

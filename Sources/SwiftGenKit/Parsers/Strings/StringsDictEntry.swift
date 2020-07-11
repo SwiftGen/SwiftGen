@@ -50,7 +50,7 @@ extension StringsDict.PluralEntry {
   struct VariableRule: Codable {
     /// The only possible value is `NSStringPluralRuleType`.
     let specTypeKey: String
-    /// A string format specifier for a number, as in %d for an integer.
+    /// A string format specifier for a number, but without the `%` prefix; as in `d` for an integer.
     let valueTypeKey: String
     let zero: String?
     let one: String?
@@ -102,7 +102,13 @@ extension StringsDict: Decodable {
     // We either have a formatKey OR we have a variableWidthRule.
     switch (formatKey, variableWidthRules) {
     case (.none, .none), (.some, .some):
-      throw Strings.ParserError.invalidFormat
+      let entry = coder.codingPath.last?.stringValue ?? "<unknown>"
+      throw Strings.ParserError.invalidFormat(
+        reason: """
+        Entry "\(entry)" expects either "\(CodingKeys.formatKey.stringValue)" or \
+        "\(CodingKeys.variableWidthRules.stringValue)" but got either neither or both
+        """
+      )
     case let (.some(formatKey), .none):
       let variableNames = StringsDict.variableNamesFromFormatKey(formatKey)?.map { $0.name } ?? []
       let variables = try variableNames.reduce(into: [PluralEntry.Variable]()) { variables, variableName in
