@@ -119,7 +119,7 @@ end
 
 ################################################
 # Check Documentation TOC update
-doc_dir_structure_modified = (git.added_files + git.deleted_files + git.renamed_files.map(&:values)).any? { |path| path.start_with?('Documentation/') }
+doc_dir_structure_modified = (git.added_files + git.deleted_files + git.renamed_files.map(&:values)).flatten.any? { |path| path.start_with?('Documentation/') }
 if doc_dir_structure_modified
   doc_files = Dir.chdir('Documentation') { Dir['{Articles/,}*{/,.md}'] } - ['README.md'] # folders + .md files immediately in either `Documentation/` or `Documentation/Articles/`
   toc_links = File.read('Documentation/README.md').scan(%r{\[.*\]\((.*)\)}).map(&:first).uniq # Extract markdown links from TOC
