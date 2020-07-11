@@ -62,7 +62,7 @@ extension Strings.PlaceholderType {
     }
   }()
 
-  // "I give %d apples to %@" --> [.Int, .String]
+  // "I give %d apples to %@" --> [.int, .string]
   static func placeholders(
     fromFormat formatString: String,
     normalizePositionals: Bool = false
@@ -94,60 +94,22 @@ extension Strings.PlaceholderType {
         }
       }
 
-    if normalizePositionals {
-      return try placeholderTypesFromCharsNormalized(chars)
-    } else {
-      return try placeholderTypesFromChars(chars)
-    }
+    return try placeholderTypesFromChars(chars, normalizePositionals: normalizePositionals)
   }
 
   /// Creates an array of `PlaceholderType` from an array of format chars and their optional positional specifier
   ///
-  /// This method will insert `.unknown` placeholders if a positional specifier is missing.
-  /// E.g. "%2$d %3$d" will result in `[.unknown, .int, .int]`
-  ///
   /// - Parameter chars: An array of format chars and their optional positional specifier
+  /// - Parameter normalizePositionals: defines how to treat undefined positions
+  ///     - if true, undefined placeholders will be omitted and the remaining placeholder will have their
+  ///       position shifted accordingly. This is how Foundation behaves at runtime.
+  ///     - if false, undefined placeholders will be replaced with the `.unknown` value
   /// - Throws: `Strings.ParserError.invalidPlaceholder` in case a `PlaceholderType` would be overwritten
   /// - Returns: An array of `PlaceholderType`
-  static func placeholderTypesFromChars(_ chars: [(String, Int?)]) throws -> [Strings.PlaceholderType] {
-    // enumerate the conversion specifiers and their optionally forced position
-    // and build the array of PlaceholderTypes accordingly
-    var list = [Strings.PlaceholderType]()
-    var nextNonPositional = 1
-    for (str, pos) in chars {
-      if let char = str.first, let placeholderType = Strings.PlaceholderType(formatChar: char) {
-        let insertionPos: Int
-        if let pos = pos {
-          insertionPos = pos
-        } else {
-          insertionPos = nextNonPositional
-          nextNonPositional += 1
-        }
-        if insertionPos > 0 {
-          while list.count <= insertionPos - 1 {
-            list.append(.unknown)
-          }
-          let previous = list[insertionPos - 1]
-          guard previous == .unknown || previous == placeholderType else {
-            throw Strings.ParserError.invalidPlaceholder(previous: previous, new: placeholderType)
-          }
-          list[insertionPos - 1] = placeholderType
-        }
-      }
-    }
-    return list
-  }
-
-  /// Creates an array of `PlaceholderType` from an array of format chars and their optional positional specifier
-  ///
-  /// This method will normalize placeholders if a positional specifier is missing.
-  /// E.g. "%2$d %3$d" will result in `[.int, .int]`
-  /// This behavior is closer to the how Foundation handles strings with format specifiers during runtime.
-  ///
-  /// - Parameter chars: An array of format chars and their optional positional specifier
-  /// - Throws: `Strings.ParserError.invalidPlaceholder` in case a `PlaceholderType` would be overwritten
-  /// - Returns: An array of `PlaceholderType`
-  static func placeholderTypesFromCharsNormalized(_ chars: [(String, Int?)]) throws -> [Strings.PlaceholderType] {
+  private static func placeholderTypesFromChars(
+    _ chars: [(String, Int?)],
+    normalizePositionals: Bool
+  ) throws -> [Strings.PlaceholderType] {
     var list = [Int: Strings.PlaceholderType]()
     var nextNonPositional = 1
 
@@ -162,15 +124,22 @@ extension Strings.PlaceholderType {
       }
       guard insertionPos > 0 else { continue }
 
-      if let existingEntry = list[insertionPos] {
+      if let existingEntry = list[insertionPos], existingEntry != placeholderType {
         throw Strings.ParserError.invalidPlaceholder(previous: existingEntry, new: placeholderType)
       } else {
         list[insertionPos] = placeholderType
       }
     }
 
-    return list
-      .sorted { $0.0 < $1.0 } // Sort by key, i.e. the positional value
-      .map { $0.value }
+    if normalizePositionals {
+      // Omit any holes (i.e. position without a placeholder defined)
+      return list
+        .sorted { $0.0 < $1.0 } // Sort by key, i.e. the positional value
+        .map { $0.value }
+    } else {
+      // Replace any holes with .unknown
+      guard let maxIndex = list.keys.max() else { return [] }
+      return (1...maxIndex).map { list[$0] ?? .unknown }
+    }
   }
 }

@@ -7,7 +7,7 @@
 @testable import SwiftGenKit
 import XCTest
 
-final class StringParserTests: XCTestCase {
+final class StringPlaceholderTypeTests: XCTestCase {
   func testParseStringPlaceholder() throws {
     let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "%@")
     XCTAssertEqual(placeholders, [.object])
