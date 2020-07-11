@@ -15,7 +15,6 @@ extension Strings {
       self.options = options
     }
 
-    static let priority: Int = 1
     static let extensions = ["strings"]
 
     // Localizable.strings files are generally UTF16, not UTF8!

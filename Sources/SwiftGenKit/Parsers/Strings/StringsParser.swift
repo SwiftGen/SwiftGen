@@ -122,13 +122,14 @@ public enum Strings {
       tableFiles.mapValues(collectEntries(in:))
     }
 
-    /// Collect all entries spread over multiple files for a table into one collection. Entries from higher priority
-    /// parsers will be chosen over other entries (from lower priority parsers) with the same key.
+    /// Collect all entries spread over multiple files for a table into one collection. Entries from parsers with
+    /// higher index in the subParsers array (i.e. closer to the end) will be chosen over other entries
+    /// (from parsers earlier in the the array) with the same key.
     private func collectEntries(in files: [File]) -> [Entry] {
       // sort files by parser priority (higher priority first)
       let files = files.sorted { lhs, rhs in
-        let lhsPriority = parsers[lhs.path.extension?.lowercased() ?? ""]?.priority ?? 0
-        let rhsPriority = parsers[rhs.path.extension?.lowercased() ?? ""]?.priority ?? 0
+        let lhsPriority = Parser.subParsers.firstIndex { $0.supports(path: lhs.path) } ?? 0
+        let rhsPriority = Parser.subParsers.firstIndex { $0.supports(path: rhs.path) } ?? 0
         return lhsPriority > rhsPriority
       }
 

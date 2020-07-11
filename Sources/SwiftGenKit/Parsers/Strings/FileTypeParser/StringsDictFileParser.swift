@@ -15,7 +15,6 @@ extension Strings {
       self.options = options
     }
 
-    static let priority: Int = 2
     static let extensions = ["stringsdict"]
 
     func parseFile(at path: Path) throws -> [Strings.Entry] {
