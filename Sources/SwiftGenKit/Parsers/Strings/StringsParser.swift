@@ -61,22 +61,18 @@ public enum Strings {
     private typealias File = (path: Path, entries: [Entry])
 
     private let options: ParserOptionValues
-    private var parsers = [String: StringsFileTypeParser.Type]()
     private var tableFiles = [String: [File]]()
     public var warningHandler: Parser.MessageHandler?
 
+    /// This list must be ordered by priority, higher priority first
     private static let subParsers: [StringsFileTypeParser.Type] = [
-      StringsFileParser.self,
-      StringsDictFileParser.self
+      StringsDictFileParser.self,
+      StringsFileParser.self
     ]
 
     public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
       self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
       self.warningHandler = warningHandler
-
-      for parser in Parser.subParsers {
-        register(parser: parser)
-      }
     }
 
     public static let allOptions: ParserOptionList = [Option.separator]
@@ -86,36 +82,25 @@ public enum Strings {
     }
 
     public func parse(path: Path, relativeTo parent: Path) throws {
-      guard let fileExtension = path.extension?.lowercased(), let parserType = parsers[fileExtension] else {
-        throw ParserError.unsupportedFileType(path: path, supported: parsers.keys.sorted())
+      guard let parserType = Parser.subParsers.first(where: { $0.supports(path: path) }) else {
+        throw ParserError.unsupportedFileType(path: path, supported: Parser.subParsers.flatMap { $0.extensions })
       }
 
       let name = path.lastComponentWithoutExtension
       let parser = parserType.init(options: options)
 
       var files = tableFiles[name] ?? []
-      if let existing = files.first(where: { $0.path.extension?.lowercased() == fileExtension }) {
+      let previouslyParsedFile = files.first {
+        $0.path.lastComponent.compare(path.lastComponent, options: .caseInsensitive) == .orderedSame
+      }
+      if let existing = previouslyParsedFile {
+        // 2nd we try to parse a file with that name, e.g. same filename from 2 different .lprojs
         throw ParserError.duplicateTableFile(path: path, existing: existing.path)
       } else {
-        files.append((path: path, entries: try parser.parseFile(at: path)))
+        let entries = try parser.parseFile(at: path)
+        files.append((path: path, entries: entries))
       }
       tableFiles[name] = files
-    }
-
-    func register(parser: StringsFileTypeParser.Type) {
-      for ext in parser.extensions {
-        if let old = parsers[ext] {
-          warningHandler?(
-            """
-            error: Parser \(parser) tried to register the file type '\(ext)' already \
-            registered by \(old).
-            """,
-            #file,
-            #line
-          )
-        }
-        parsers[ext] = parser
-      }
     }
 
     var tables: [String: [Entry]] {
@@ -123,14 +108,14 @@ public enum Strings {
     }
 
     /// Collect all entries spread over multiple files for a table into one collection. Entries from parsers with
-    /// higher index in the subParsers array (i.e. closer to the end) will be chosen over other entries
-    /// (from parsers earlier in the the array) with the same key.
+    /// lower index in the subParsers array (i.e. closer to the start) will be chosen over other entries
+    /// (from parsers listed later in the the array) with the same key.
     private func collectEntries(in files: [File]) -> [Entry] {
       // sort files by parser priority (higher priority first)
       let files = files.sorted { lhs, rhs in
         let lhsPriority = Parser.subParsers.firstIndex { $0.supports(path: lhs.path) } ?? 0
         let rhsPriority = Parser.subParsers.firstIndex { $0.supports(path: rhs.path) } ?? 0
-        return lhsPriority > rhsPriority
+        return lhsPriority < rhsPriority
       }
 
       // reduce lists of entries into one list, ignoring duplicate keys of later lists
