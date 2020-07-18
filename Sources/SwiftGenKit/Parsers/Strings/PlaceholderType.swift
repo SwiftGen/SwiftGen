@@ -46,7 +46,7 @@ extension Strings.PlaceholderType {
     // valid flags for float
     let patternFloat = "[aefg]"
     // like in "%3$" to make positional specifiers
-    let position = "([1-9]\\d*\\$)?"
+    let position = "(\\d+\\$)?"
     // precision like in "%1.2f"
     let precision = "[-+# 0]?\\d?(?:\\.\\d)?"
 
@@ -66,7 +66,7 @@ extension Strings.PlaceholderType {
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier
     let chars = formatTypesRegEx.matches(in: formatString, options: [], range: range)
-      .map { match -> (String, Int?) in
+      .compactMap { match -> (String, Int?)? in
         let range: NSRange
         if match.range(at: 3).location != NSNotFound {
           // [dioux] are in range #3 because in #2 there may be length modifiers (like in "lld")
@@ -84,8 +84,12 @@ extension Strings.PlaceholderType {
         } else {
           // Remove the "$" at the end of the positional specifier, and convert to Int
           let posRange1 = NSRange(location: posRange.location, length: posRange.length - 1)
-          let pos = (formatString as NSString).substring(with: posRange1)
-          return (char, Int(pos))
+          let posString = (formatString as NSString).substring(with: posRange1)
+          let pos = Int(posString)
+          if let pos = pos, pos <= 0 {
+            return nil // Foundation renders "%0$@" not as a placeholder but as the "0@" literal
+          }
+          return (char, pos)
         }
       }
 

@@ -142,7 +142,7 @@ extension StringsDict {
   /// - Returns: An array of discovered variable names, their range within the `formatKey` and the positional argument.
   // swiftlint:disable:next discouraged_optional_collection
   private static func variableNamesFromFormatKey(_ formatKey: String) -> [VariableNameResult]? {
-    let pattern = #"(%(?>(\d)\$)?#@([\w\.\p{Pd}]+)@)"#
+    let pattern = #"(%(?>(\d+)\$)?#@([\w\.\p{Pd}]+)@)"#
     guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
     let nsrange = NSRange(formatKey.startIndex..<formatKey.endIndex, in: formatKey)
     let matches = regex.matches(in: formatKey, options: [], range: nsrange)
