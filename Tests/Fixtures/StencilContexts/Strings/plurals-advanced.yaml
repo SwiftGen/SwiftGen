@@ -2,6 +2,43 @@ tables:
 - levels:
     children:
     - children:
+      - children:
+        - name: "plurals"
+          strings:
+          - key: "many.placeholders.plurals.base"
+            name: "base"
+            translation: "Plural format key: \"%@ - %#@d2@ - %#@f3@ - %5$#@d5@ - %04$#@f4@
+              - %6$#@d6@ - %007$@ - %8$3.2#@f8@ - %11$#@f11@ - %9$@ - %10$#@d10@\""
+            types:
+            - "String"
+            - "Int"
+            - "Float"
+            - "Float"
+            - "Int"
+            - "Int"
+            - "String"
+            - "String"
+            - "Int"
+            - "Float"
+          - key: "many.placeholders.plurals.zero"
+            name: "zero"
+            translation: "Plural format key: \"%@ - %#@d2@ - %0$#@zero@ - %#@f3@ -
+              %5$#@d5@ - %04$#@f4@ - %6$#@d6@ - %007$@ - %8$3.2#@f8@ - %11$#@f11@
+              - %9$@ - %10$#@d10@\""
+            types:
+            - "String"
+            - "Int"
+            - "Float"
+            - "Float"
+            - "Int"
+            - "Int"
+            - "String"
+            - "String"
+            - "Int"
+            - "Float"
+        name: "placeholders"
+      name: "many"
+    - children:
       - name: "placeholders-and-variables"
         strings:
         - key: "mixed.placeholders-and-variables.positionalstring-positional3int"

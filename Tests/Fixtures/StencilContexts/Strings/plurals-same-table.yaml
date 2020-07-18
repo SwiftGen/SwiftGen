@@ -35,6 +35,41 @@ tables:
           - "Int"
       name: "feed"
     - children:
+      - name: "placeholders"
+        strings:
+        - key: "many.placeholders.base"
+          name: "base"
+          translation: "%@ %d %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d"
+          types:
+          - "String"
+          - "Int"
+          - "Float"
+          - "Float"
+          - "Int"
+          - "Int"
+          - "String"
+          - "Float"
+          - "String"
+          - "Int"
+          - "Float"
+        - key: "many.placeholders.zero"
+          name: "zero"
+          translation: "%@ %d %0$@ %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@
+            %10$d"
+          types:
+          - "String"
+          - "Int"
+          - "Float"
+          - "Float"
+          - "Int"
+          - "Int"
+          - "String"
+          - "Float"
+          - "String"
+          - "Int"
+          - "Float"
+      name: "many"
+    - children:
       - children:
         - children:
           - children:
