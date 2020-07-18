@@ -110,7 +110,7 @@ extension StringsDict: Decodable {
         """
       )
     case let (.some(formatKey), .none):
-      let variableNames = StringsDict.variableNamesFromFormatKey(formatKey)?.map { $0.name } ?? []
+      let variableNames = StringsDict.variableNamesFromFormatKey(formatKey).map { $0.name } ?? []
       let variables = try variableNames.reduce(into: [PluralEntry.Variable]()) { variables, variableName in
         let variableRule = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableName))
         // Combination of the format specifiers of the `PlaceholderType.float` and `PlaceholderType.int`.
@@ -140,20 +140,21 @@ extension StringsDict {
   ///
   /// - Parameter formatKey: The formatKey from which the variable names should be parsed.
   /// - Returns: An array of discovered variable names, their range within the `formatKey` and the positional argument.
-  // swiftlint:disable:next discouraged_optional_collection
-  private static func variableNamesFromFormatKey(_ formatKey: String) -> [VariableNameResult]? {
-    let pattern = #"(%(?>(\d+)\$)?#@([\w\.\p{Pd}]+)@)"#
-    guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
+  private static func variableNamesFromFormatKey(_ formatKey: String) -> [VariableNameResult] {
+    let pattern = #"%(?>(\d+)\$)?#@([\w\.\p{Pd}]+)@"#
+    guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
+      fatalError("Unable to compile regular expression when parsing StringsDict entries")
+    }
     let nsrange = NSRange(formatKey.startIndex..<formatKey.endIndex, in: formatKey)
     let matches = regex.matches(in: formatKey, options: [], range: nsrange)
 
     return matches.compactMap { match -> VariableNameResult? in
-      // 1st capture group is the whole format string including delimeters
-      let fullMatchNSRange = match.range(at: 1)
-      // 2nd capture group is the positional argument of the format string (Optional!)
-      let positionalArgumentNSRange = match.range(at: 2)
-      // 3rd capture group is the name of the variable, the string in between the delimeters
-      let nameNSRange = match.range(at: 3)
+      // the whole format string including delimeters
+      let fullMatchNSRange = match.range(at: 0)
+      // 1nd capture group is the positional argument of the format string (Optional!)
+      let positionalArgumentNSRange = match.range(at: 1)
+      // 2rd capture group is the name of the variable, the string in between the delimeters
+      let nameNSRange = match.range(at: 2)
 
       guard let fullMatchRange = Range(fullMatchNSRange, in: formatKey) else { return nil }
       guard let nameRange = Range(nameNSRange, in: formatKey) else { return nil }
@@ -188,7 +189,7 @@ extension StringsDict.PluralEntry {
   /// - Returns: The format key in which the first encountered variable is replaced
   /// with its `NSStringFormatValueTypeKey` if the `formatKey` contained any variables, `nil` otherwise.
   private func replaceFirstVariableInFormatKey(_ formatKey: String) -> String? {
-    guard let variableNameResult = StringsDict.variableNamesFromFormatKey(formatKey)?.first else {
+    guard let variableNameResult = StringsDict.variableNamesFromFormatKey(formatKey).first else {
       return nil
     }
 
