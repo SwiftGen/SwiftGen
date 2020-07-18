@@ -16,3 +16,6 @@
 "settings.user__profile_section.footer_text" = "Here you can change some user profile settings.";
 
 "settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep" = "DeepSettings";
+
+"many.placeholders.base" = "%@ %d %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d";
+"many.placeholders.zero" = "%@ %d %0$@ %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d";

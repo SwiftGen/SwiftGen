@@ -50,6 +50,26 @@ final class StringPlaceholderTypeTests: XCTestCase {
     XCTAssertEqual(placeholders, [.int, .object, .float, .char])
   }
 
+  func testParseManyPlaceholders() throws {
+    let format = "%@ - %d - %f - %5$d - %04$f - %6$d - %007$@ - %8$3.2f - %11$1.2f - %9$@ - %10$d"
+    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format)
+    XCTAssertEqual(
+      placeholders,
+      [.object, .int, .float, .float, .int, .int, .object, .float, .object, .int, .float]
+    )
+  }
+
+  func testParseManyPlaceholdersWithZeroPos() throws {
+    // %0$@ is interpreted by Foundation not as a placeholder (because invalid 0 position)
+    // but instead rendered as a "0@" literal.
+    let format = "%@ - %d - %0$@ - %f - %5$d - %04$f - %6$d - %007$@ - %8$3.2f - %11$1.2f - %9$@ - %10$d"
+    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format)
+    XCTAssertEqual(
+      placeholders,
+      [.object, .int, .float, .float, .int, .int, .object, .float, .object, .int, .float]
+    )
+  }
+
   func testParseInterleavedPositionalAndNonPositionalPlaceholders() throws {
     let format = "%@ %7$d %@ %@ %8$d %@ %@"
     let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format)
@@ -72,6 +92,60 @@ final class StringPlaceholderTypeTests: XCTestCase {
     let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "Text: %1$@; %1$@.")
     XCTAssertEqual(placeholders, [.object])
   }
+
+  private func pluralVariable(
+    _ name: String,
+    type: String,
+    one: String,
+    other: String
+  ) -> StringsDict.PluralEntry.Variable {
+    .init(name: name, rule: .init(
+      specTypeKey: "NSStringPluralRuleType",
+      valueTypeKey: type,
+      zero: nil,
+      one: one,
+      two: nil,
+      few: nil,
+      many: nil,
+      other: other
+      )
+    )
+  }
+
+  func testStringsDictPlaceholdersConversion() throws {
+    let entry = StringsDict.PluralEntry(
+      formatKey:
+      """
+      %@ - %#@d2@ - %0$#@zero@ - %#@f3@ - %5$#@d5@ - %04$#@f4@ - %6$#@d6@ - %007$@
+      - %8$#@f8@ - %11$#@f11@ - %9$@ - %10$#@d10@
+      """,
+      variables: [
+        pluralVariable("zero", type: "d", one: "unused", other: "unused"),
+        pluralVariable("d2", type: "d", one: "%d two", other: "%d twos"),
+        pluralVariable("f3", type: "f", one: "%f three", other: "%f threes"),
+        pluralVariable("f4", type: "f", one: "%f four", other: "%f fours"),
+        pluralVariable("d5", type: "d", one: "%d five", other: "%d fives"),
+        pluralVariable("d6", type: "d", one: "%d six", other: "%d sixes"),
+        pluralVariable("f8", type: "f", one: "%f eight", other: "%f eights"),
+        pluralVariable("d10", type: "d", one: "%d ten", other: "%d tens"),
+        pluralVariable("f11", type: "f", one: "%f eleven", other: "%f elevens")
+      ]
+    )
+
+    let converted = entry.formatKeyWithVariableValueTypes
+    XCTAssertEqual(
+      converted,
+      "%@ - %d - %0$d - %f - %5$d - %4$f - %6$d - %007$@\n- %8$f - %11$f - %9$@ - %10$d"
+    )
+
+    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: converted)
+    XCTAssertEqual(
+      placeholders,
+      [.object, .int, .float, .float, .int, .int, .object, .float, .object, .int, .float]
+    )
+  }
+
+  // MARK: - Testing Errors
 
   func testParseErrorOnTypeMismatch() throws {
     XCTAssertThrowsError(
@@ -111,6 +185,8 @@ final class StringPlaceholderTypeTests: XCTestCase {
       }
     }
   }
+
+  // MARK: - Testing Percent Escapes
 
   func testParseEvenEscapePercentSign() throws {
     let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "%%foo")
