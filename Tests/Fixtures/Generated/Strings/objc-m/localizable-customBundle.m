@@ -49,6 +49,14 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 {
     return tr(@"Localizable", @"bananas.owner", p1, p2);
 }
++ (NSString*)manyPlaceholdersBaseWithValues:(id)p1 :(NSInteger)p2 :(float)p3 :(float)p4 :(NSInteger)p5 :(NSInteger)p6 :(id)p7 :(float)p8 :(id)p9 :(NSInteger)p10 :(float)p11
+{
+    return tr(@"Localizable", @"many.placeholders.base", p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
+}
++ (NSString*)manyPlaceholdersZeroWithValues:(id)p1 :(NSInteger)p2 :(float)p3 :(float)p4 :(NSInteger)p5 :(NSInteger)p6 :(id)p7 :(float)p8 :(id)p9 :(NSInteger)p10 :(float)p11
+{
+    return tr(@"Localizable", @"many.placeholders.zero", p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
+}
 + (NSString*)settingsNavigationBarSelf {
     return tr(@"Localizable", @"settings.navigation-bar.self");
 }

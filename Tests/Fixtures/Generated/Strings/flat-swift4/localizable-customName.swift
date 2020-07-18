@@ -35,6 +35,14 @@ internal enum XCTLoc {
   internal static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
     return XCTLoc.tr("Localizable", "bananas.owner", p1, String(describing: p2))
   }
+  /// %@ %d %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d
+  internal static func manyPlaceholdersBase(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Float, _ p9: Any, _ p10: Int, _ p11: Float) -> String {
+    return XCTLoc.tr("Localizable", "many.placeholders.base", String(describing: p1), p2, p3, p4, p5, p6, String(describing: p7), p8, String(describing: p9), p10, p11)
+  }
+  /// %@ %d %0$@ %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d
+  internal static func manyPlaceholdersZero(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Float, _ p9: Any, _ p10: Int, _ p11: Float) -> String {
+    return XCTLoc.tr("Localizable", "many.placeholders.zero", String(describing: p1), p2, p3, p4, p5, p6, String(describing: p7), p8, String(describing: p9), p10, p11)
+  }
   /// Some Reserved Keyword there
   internal static let settingsNavigationBarSelf = XCTLoc.tr("Localizable", "settings.navigation-bar.self")
   /// DeepSettings

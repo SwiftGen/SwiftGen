@@ -25,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)competitionEventNumberOfMatchesWithValue:(NSInteger)p1;
 // feed.subscription.count --> "Plural format key: "%#@Subscriptions@""
 + (NSString*)feedSubscriptionCountWithValue:(NSInteger)p1;
+// many.placeholders.base --> "%@ %d %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d"
++ (NSString*)manyPlaceholdersBaseWithValues:(id)p1 :(NSInteger)p2 :(float)p3 :(float)p4 :(NSInteger)p5 :(NSInteger)p6 :(id)p7 :(float)p8 :(id)p9 :(NSInteger)p10 :(float)p11;
+// many.placeholders.zero --> "%@ %d %0$@ %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d"
++ (NSString*)manyPlaceholdersZeroWithValues:(id)p1 :(NSInteger)p2 :(float)p3 :(float)p4 :(NSInteger)p5 :(NSInteger)p6 :(id)p7 :(float)p8 :(id)p9 :(NSInteger)p10 :(float)p11;
 // settings.navigation-bar.self --> "Some Reserved Keyword there"
 + (NSString*)settingsNavigationBarSelf;
 // settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep --> "DeepSettings"

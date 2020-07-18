@@ -9,6 +9,14 @@ import Foundation
 
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 internal enum L10n {
+  /// Plural format key: "%@ - %#@d2@ - %#@f3@ - %5$#@d5@ - %04$#@f4@ - %6$#@d6@ - %007$@ - %8$3.2#@f8@ - %11$#@f11@ - %9$@ - %10$#@d10@"
+  internal static func manyPlaceholdersPluralsBase(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Any, _ p9: Int, _ p10: Float) -> String {
+    return L10n.tr("LocPluralAdvanced", "many.placeholders.plurals.base", String(describing: p1), p2, p3, p4, p5, p6, String(describing: p7), String(describing: p8), p9, p10)
+  }
+  /// Plural format key: "%@ - %#@d2@ - %0$#@zero@ - %#@f3@ - %5$#@d5@ - %04$#@f4@ - %6$#@d6@ - %007$@ - %8$3.2#@f8@ - %11$#@f11@ - %9$@ - %10$#@d10@"
+  internal static func manyPlaceholdersPluralsZero(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Any, _ p9: Int, _ p10: Float) -> String {
+    return L10n.tr("LocPluralAdvanced", "many.placeholders.plurals.zero", String(describing: p1), p2, p3, p4, p5, p6, String(describing: p7), String(describing: p8), p9, p10)
+  }
   /// Plural format key: "%1$@ %3$#@has_rating@"
   internal static func mixedPlaceholdersAndVariablesPositionalstringPositional3int(_ p1: Any, _ p2: Int) -> String {
     return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.positionalstring-positional3int", String(describing: p1), p2)
