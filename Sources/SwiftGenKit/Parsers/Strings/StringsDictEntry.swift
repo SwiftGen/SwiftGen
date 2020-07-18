@@ -151,9 +151,9 @@ extension StringsDict {
     return matches.compactMap { match -> VariableNameResult? in
       // the whole format string including delimeters
       let fullMatchNSRange = match.range(at: 0)
-      // 1nd capture group is the positional argument of the format string (Optional!)
+      // 1st capture group is the positional argument of the format string (Optional!)
       let positionalArgumentNSRange = match.range(at: 1)
-      // 2rd capture group is the name of the variable, the string in between the delimeters
+      // 2nd capture group is the name of the variable, the string in between the delimeters
       let nameNSRange = match.range(at: 2)
 
       guard let fullMatchRange = Range(fullMatchNSRange, in: formatKey) else { return nil }
