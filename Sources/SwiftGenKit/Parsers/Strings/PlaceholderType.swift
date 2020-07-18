@@ -60,8 +60,10 @@ extension Strings.PlaceholderType {
     }
   }()
 
-  // "I give %d apples to %@" --> [.int, .string]
-  static func placeholders(fromFormat formatString: String) throws -> [Strings.PlaceholderType] {
+  /// Extracts the list of PlaceholderTypes from a format key
+  ///
+  /// Example: "I give %d apples to %@" --> [.int, .string]
+  static func placeholderTypes(fromFormat formatString: String) throws -> [Strings.PlaceholderType] {
     let range = NSRange(location: 0, length: (formatString as NSString).length)
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier

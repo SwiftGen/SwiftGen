@@ -110,7 +110,7 @@ extension StringsDict: Decodable {
         """
       )
     case let (.some(formatKey), .none):
-      let variableNames = StringsDict.variableNamesFromFormatKey(formatKey).map { $0.name } ?? []
+      let variableNames = StringsDict.variableNames(fromFormatKey: formatKey).map(\.name)
       let variables = try variableNames.reduce(into: [PluralEntry.Variable]()) { variables, variableName in
         let variableRule = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableName))
         // Combination of the format specifiers of the `PlaceholderType.float` and `PlaceholderType.int`.
@@ -140,7 +140,7 @@ extension StringsDict {
   ///
   /// - Parameter formatKey: The formatKey from which the variable names should be parsed.
   /// - Returns: An array of discovered variable names, their range within the `formatKey` and the positional argument.
-  private static func variableNamesFromFormatKey(_ formatKey: String) -> [VariableNameResult] {
+  private static func variableNames(fromFormatKey formatKey: String) -> [VariableNameResult] {
     let pattern = #"%(?>(\d+)\$)?#@([\w\.\p{Pd}]+)@"#
     guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
       fatalError("Unable to compile regular expression when parsing StringsDict entries")
@@ -189,7 +189,7 @@ extension StringsDict.PluralEntry {
   /// - Returns: The format key in which the first encountered variable is replaced
   /// with its `NSStringFormatValueTypeKey` if the `formatKey` contained any variables, `nil` otherwise.
   private func replaceFirstVariableInFormatKey(_ formatKey: String) -> String? {
-    guard let variableNameResult = StringsDict.variableNamesFromFormatKey(formatKey).first else {
+    guard let variableNameResult = StringsDict.variableNames(fromFormatKey: formatKey).first else {
       return nil
     }
 

@@ -9,50 +9,50 @@ import XCTest
 
 final class StringPlaceholderTypeTests: XCTestCase {
   func testParseStringPlaceholder() throws {
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "%@")
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: "%@")
     XCTAssertEqual(placeholders, [.object])
   }
 
   func testParseFloatPlaceholder() throws {
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "%f")
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: "%f")
     XCTAssertEqual(placeholders, [.float])
   }
 
   func testParseDoublePlaceholders() throws {
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "%g-%e")
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: "%g-%e")
     XCTAssertEqual(placeholders, [.float, .float])
   }
 
   func testParseFloatWithPrecisionPlaceholders() throws {
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "%1.2f : %.3f : %+3f : %-6.2f")
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: "%1.2f : %.3f : %+3f : %-6.2f")
     XCTAssertEqual(placeholders, [.float, .float, .float, .float])
   }
 
   func testParseIntPlaceholders() throws {
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "%d-%i-%o-%u-%x")
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: "%d-%i-%o-%u-%x")
     XCTAssertEqual(placeholders, [.int, .int, .int, .int, .int])
   }
 
   func testParseCCharAndStringPlaceholders() throws {
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "%c-%s")
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: "%c-%s")
     XCTAssertEqual(placeholders, [.char, .cString])
   }
 
   func testParsePositionalPlaceholders() throws {
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "%2$d-%4$f-%3$@-%c")
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: "%2$d-%4$f-%3$@-%c")
     XCTAssertEqual(placeholders, [.char, .int, .object, .float])
   }
 
   func testParseComplexFormatPlaceholders() throws {
     let format = "%2$1.3d - %4$-.7f - %3$@ - %% - %5$+3c - %%"
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format)
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: format)
     // positions 2, 4, 3, 5 set to .int, .float, .object, .char ; position 1 not matched
     XCTAssertEqual(placeholders, [.int, .object, .float, .char])
   }
 
   func testParseManyPlaceholders() throws {
     let format = "%@ - %d - %f - %5$d - %04$f - %6$d - %007$@ - %8$3.2f - %11$1.2f - %9$@ - %10$d"
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format)
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: format)
     XCTAssertEqual(
       placeholders,
       [.object, .int, .float, .float, .int, .int, .object, .float, .object, .int, .float]
@@ -63,7 +63,7 @@ final class StringPlaceholderTypeTests: XCTestCase {
     // %0$@ is interpreted by Foundation not as a placeholder (because invalid 0 position)
     // but instead rendered as a "0@" literal.
     let format = "%@ - %d - %0$@ - %f - %5$d - %04$f - %6$d - %007$@ - %8$3.2f - %11$1.2f - %9$@ - %10$d"
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format)
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: format)
     XCTAssertEqual(
       placeholders,
       [.object, .int, .float, .float, .int, .int, .object, .float, .object, .int, .float]
@@ -72,24 +72,24 @@ final class StringPlaceholderTypeTests: XCTestCase {
 
   func testParseInterleavedPositionalAndNonPositionalPlaceholders() throws {
     let format = "%@ %7$d %@ %@ %8$d %@ %@"
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format)
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: format)
     XCTAssertEqual(placeholders, [.object, .object, .object, .object, .object, /* ?, */ .int, .int])
   }
 
   func testParseFlags() throws {
     let formats = ["%-9d", "%+9d", "% 9d", "%#9d", "%09d"]
     for format in formats {
-      let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: format)
+      let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: format)
       XCTAssertEqual(placeholders, [.int], "Failed to parse format \"\(format)\"")
     }
 
     let invalidFormat = "%_9d %_9f %_9@ %!9@"
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: invalidFormat)
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: invalidFormat)
     XCTAssertEqual(placeholders, [])
   }
 
   func testParseDuplicateFormatPlaceholders() throws {
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "Text: %1$@; %1$@.")
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: "Text: %1$@; %1$@.")
     XCTAssertEqual(placeholders, [.object])
   }
 
@@ -138,7 +138,7 @@ final class StringPlaceholderTypeTests: XCTestCase {
       "%@ - %d - %0$d - %f - %5$d - %4$f - %6$d - %007$@\n- %8$f - %11$f - %9$@ - %10$d"
     )
 
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: converted)
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: converted)
     XCTAssertEqual(
       placeholders,
       [.object, .int, .float, .float, .int, .int, .object, .float, .object, .int, .float]
@@ -149,7 +149,7 @@ final class StringPlaceholderTypeTests: XCTestCase {
 
   func testParseErrorOnTypeMismatch() throws {
     XCTAssertThrowsError(
-      try Strings.PlaceholderType.placeholders(fromFormat: "Text: %1$@; %1$ld."),
+      try Strings.PlaceholderType.placeholderTypes(fromFormat: "Text: %1$@; %1$ld."),
       "Code did parse string successfully while it was expected to fail for bad syntax"
     ) { error in
       guard
@@ -172,7 +172,7 @@ final class StringPlaceholderTypeTests: XCTestCase {
     ]
     for (formatString, expectedFormats) in formatStrings {
       XCTAssertThrowsError(
-        try Strings.PlaceholderType.placeholders(fromFormat: formatString),
+        try Strings.PlaceholderType.placeholderTypes(fromFormat: formatString),
         "Code did parse string successfully while it was expected to fail for bad syntax"
       ) { error in
         guard
@@ -189,13 +189,13 @@ final class StringPlaceholderTypeTests: XCTestCase {
   // MARK: - Testing Percent Escapes
 
   func testParseEvenEscapePercentSign() throws {
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "%%foo")
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: "%%foo")
     // Must NOT map to [.float]
     XCTAssertEqual(placeholders, [])
   }
 
   func testParseOddEscapePercentSign() throws {
-    let placeholders = try Strings.PlaceholderType.placeholders(fromFormat: "%%%foo")
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: "%%%foo")
     // Should map to [.float]
     XCTAssertEqual(placeholders, [.float])
   }
