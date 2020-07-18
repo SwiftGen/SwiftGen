@@ -139,6 +139,8 @@ private func compare<T: Equatable>(_ lhs: T, _ rhs: T, keyPath: String) -> Strin
   }
 }
 
+// MARK: Converting structures to YAML/Plist-compatible values
+
 private func convertToNumber(_ value: Any) -> NSNumber? {
   switch value {
   case let value as Bool:
@@ -202,6 +204,35 @@ private extension String {
   }
 }
 
+private extension Dictionary where Key == String {
+  func convertedToContext() -> [String: Any] {
+    self.mapValues(convertToContext)
+  }
+}
+
+private extension Array {
+  func convertedToContext() -> [Any] {
+    self.map(convertToContext)
+  }
+}
+
+/// Recursive dig into the object to convert any `ContextConvertible`
+/// into a context-compatible structure (Dict, Array, …)
+private func convertToContext(_ object: Any) -> Any {
+  switch object {
+  case let array as [Any]:
+    return array.convertedToContext()
+  case let dict as [String: Any]:
+    return dict.convertedToContext()
+  case let convertible as NSObject & ContextConvertible:
+    return convertible.convertToDictionary()
+  default:
+    return object
+  }
+}
+
+// MARK: Compare contexts
+
 func XCTDiffContexts(
   _ result: [String: Any],
   expected name: String,
@@ -214,7 +245,7 @@ func XCTDiffContexts(
   if ProcessInfo().environment["GENERATE_CONTEXTS"] == "YES" {
     let target = Path(#file).parent().parent() + "Fixtures/StencilContexts" + directory.rawValue + fileName
     do {
-      try YAML.write(object: result, to: target)
+      try YAML.write(object: result.convertedToContext(), to: target)
     } catch let error {
       fatalError("Unable to write context file \(target): \(error)")
     }
@@ -224,6 +255,8 @@ func XCTDiffContexts(
     XCTFail(error, file: file, line: line)
   }
 }
+
+// MARK: Safe access to fixtures
 
 class Fixtures {
   enum Directory: String {
@@ -280,7 +313,7 @@ class Fixtures {
   }
 }
 
-extension Parser {
+extension SwiftGenKit.Parser {
   func searchAndParse(path: Path) throws {
     let filter = try Filter(pattern: Self.defaultFilter)
     try searchAndParse(path: path, filter: filter)
