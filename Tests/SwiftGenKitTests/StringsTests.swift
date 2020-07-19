@@ -102,10 +102,12 @@ final class StringsTests: XCTestCase {
 
   func testErrorWhenSameTableWithDifferentPath() throws {
     let parser = try Strings.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
+    let path1 = Fixtures.path(for: "Localizable.strings", sub: .strings)
+    try parser.searchAndParse(path: path1)
 
+    let path2 = Fixtures.path(for: "en.lproj/Localizable.strings", sub: .strings)
     XCTAssertThrowsError(
-      try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings)),
+      try parser.searchAndParse(path: path2),
       "Expected an error to be thrown"
     ) { error in
       guard
@@ -116,7 +118,8 @@ final class StringsTests: XCTestCase {
         return
       }
 
-      XCTAssertEqual(path, existing)
+      XCTAssertEqual(path, path2)
+      XCTAssertEqual(existing, path1)
     }
   }
 
