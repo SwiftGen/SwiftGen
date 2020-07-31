@@ -1,6 +1,6 @@
 //
 // Templates UnitTests
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
@@ -23,6 +23,14 @@ final class XCAssetsTests: XCTestCase {
         suffix: ""
       ),
       (
+        context: try StencilContext.enrich(context: context, parameters: ["allValues"]),
+        suffix: "-allValues"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["bundle=ResourcesBundle.bundle"]),
+        suffix: "-customBundle"
+      ),
+      (
         context: try StencilContext.enrich(
           context: context,
           parameters: [
@@ -39,20 +47,16 @@ final class XCAssetsTests: XCTestCase {
         suffix: "-customName"
       ),
       (
-        context: try StencilContext.enrich(context: context, parameters: ["allValues"]),
-        suffix: "-allValues"
-      ),
-      (
-        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-        suffix: "-publicAccess"
+        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
+        suffix: "-forceFileNameEnum"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["forceProvidesNamespaces"]),
         suffix: "-forceNamespaces"
       ),
       (
-        context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
-        suffix: "-forceFileNameEnum"
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
       )
     ]
   }

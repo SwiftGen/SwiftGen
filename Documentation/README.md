@@ -20,6 +20,10 @@ This directory contains documentation for various topics related to SwiftGen, su
 * Learn how to [create your own custom templates](Articles/Creating-custom-templates.md) to customize the code SwiftGen generates
 * Iterate quickly when creating custom templates by [watching a file or folder for changes](Articles/Watch-a-folder-for-changes.md)
 
+### Customize loading of resources
+
+Most of the SwiftGen provided templates generate code that allows you to load resources at runtime, but in some cases you may want to modify how these resources are loaded. The built-in templates [can be configured to handle these cases](Articles/Customize-loading-of-resources.md) without resorting to custom templates.
+
 ## [Parsers Documentation](Parsers/)
 
 SwiftGen uses parsers to parse different type of input files, like asset catalogs, strings files, font files, etc.
@@ -37,7 +41,7 @@ The documentation for each template, their intended use, and their supported par
 
 The way SwiftGen works is to parse your input files (resources like Asset Catalogs, Strings files, etc) using those parsers described above, and transform them into a structured dictionary – that we call a "SwiftGenKit Context" – representing the parsed data.
 
-That parsed data ("Context") is then fed to our template engine (Stencil), alongside a template, to finally produce the generated code that you will use in your projects.
+That parsed data ("Context") is then fed to our template engine ([Stencil](https://github.com/stencilproject/Stencil)), alongside a template, to finally produce the generated code that you will use in your projects.
 
 > ```
 >                                          +----------+

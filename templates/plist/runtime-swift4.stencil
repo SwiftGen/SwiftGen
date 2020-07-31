@@ -65,8 +65,11 @@ import Foundation
 // MARK: - Implementation Details
 
 private func arrayFromPlist<T>(at path: String) -> [T] {
-  let bundle = BundleToken.bundle
-  guard let url = bundle.url(forResource: path, withExtension: nil),
+  {% if param.lookupFunction %}
+  guard let url = {{param.lookupFunction}}(path),
+  {% else %}
+  guard let url = {{param.bundle|default:"BundleToken.bundle"}}.url(forResource: path, withExtension: nil),
+  {% endif %}
     let data = NSArray(contentsOf: url) as? [T] else {
     fatalError("Unable to load PLIST at path: \(path)")
   }
@@ -77,8 +80,11 @@ private struct PlistDocument {
   let data: [String: Any]
 
   init(path: String) {
-    let bundle = BundleToken.bundle
-    guard let url = bundle.url(forResource: path, withExtension: nil),
+    {% if param.lookupFunction %}
+    guard let url = {{param.lookupFunction}}(path),
+    {% else %}
+    guard let url = {{param.bundle|default:"BundleToken.bundle"}}.url(forResource: path, withExtension: nil),
+    {% endif %}
       let data = NSDictionary(contentsOf: url) as? [String: Any] else {
         fatalError("Unable to load PLIST at path: \(path)")
     }
@@ -92,6 +98,7 @@ private struct PlistDocument {
     return result
   }
 }
+{% if not param.bundle and not param.lookupFunction %}
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
@@ -100,6 +107,7 @@ private final class BundleToken {
   }()
 }
 // swiftlint:enable convenience_type
+{% endif %}
 {% else %}
 // No files found
 {% endif %}

@@ -2,19 +2,20 @@
 
 {% if tables.count > 0 %}
 #import "{{ param.headerName|default:"Localizable.h" }}"
+{% if not param.bundle %}
 
 @interface BundleToken : NSObject
 @end
 
 @implementation BundleToken
 @end
+{% endif %}
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wformat-security"
 
 static NSString* tr(NSString *tableName, NSString *key, ...) {
-
-    NSBundle *bundle = [NSBundle bundleForClass:BundleToken.class];
+    NSBundle *bundle = {{param.bundle|default:"[NSBundle bundleForClass:BundleToken.class]"}};
     NSString *format = [bundle localizedStringForKey:key value:nil table:tableName];
     NSLocale *locale = [NSLocale currentLocale];
 

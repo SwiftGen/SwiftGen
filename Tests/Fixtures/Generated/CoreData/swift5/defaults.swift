@@ -20,7 +20,12 @@ internal class AbstractEntity: NSManagedObject {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
+  @available(*, deprecated, renamed: "makeFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `makeFetchRequest()` instead.")
   @nonobjc internal class func fetchRequest() -> NSFetchRequest<AbstractEntity> {
+    return NSFetchRequest<AbstractEntity>(entityName: entityName)
+  }
+
+  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<AbstractEntity> {
     return NSFetchRequest<AbstractEntity>(entityName: entityName)
   }
 
@@ -47,7 +52,12 @@ internal class ChildEntity: MainEntity {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
+  @available(*, deprecated, renamed: "makeFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `makeFetchRequest()` instead.")
   @nonobjc internal class func fetchRequest() -> NSFetchRequest<ChildEntity> {
+    return NSFetchRequest<ChildEntity>(entityName: entityName)
+  }
+
+  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<ChildEntity> {
     return NSFetchRequest<ChildEntity>(entityName: entityName)
   }
 
@@ -70,7 +80,12 @@ internal class MainEntity: NSManagedObject {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
+  @available(*, deprecated, renamed: "makeFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `makeFetchRequest()` instead.")
   @nonobjc internal class func fetchRequest() -> NSFetchRequest<MainEntity> {
+    return NSFetchRequest<MainEntity>(entityName: entityName)
+  }
+
+  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<MainEntity> {
     return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
@@ -332,7 +347,12 @@ internal class NewEntity: AbstractEntity {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
+  @available(*, deprecated, renamed: "makeFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `makeFetchRequest()` instead.")
   @nonobjc internal class func fetchRequest() -> NSFetchRequest<NewEntity> {
+    return NSFetchRequest<NewEntity>(entityName: entityName)
+  }
+
+  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<NewEntity> {
     return NSFetchRequest<NewEntity>(entityName: entityName)
   }
 
@@ -352,7 +372,12 @@ internal class SecondaryEntity: NSManagedObject {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
+  @available(*, deprecated, renamed: "makeFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `makeFetchRequest()` instead.")
   @nonobjc internal class func fetchRequest() -> NSFetchRequest<SecondaryEntity> {
+    return NSFetchRequest<SecondaryEntity>(entityName: entityName)
+  }
+
+  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<SecondaryEntity> {
     return NSFetchRequest<SecondaryEntity>(entityName: entityName)
   }
 

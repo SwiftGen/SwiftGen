@@ -11,6 +11,10 @@ file_specific:
   all.swift:
     files:
       - IB-iOS-Definitions.swift
+  all-customBundle.swift:
+    files:
+      - IB-iOS-Definitions.swift
+      - Common-CustomBundle.swift
   all-customName.swift:
     files:
       - IB-iOS-Definitions.swift
@@ -21,6 +25,10 @@ file_specific:
   all-ignoreTargetModule.swift:
     files:
       - IB-iOS-Definitions.swift
+  all-lookupFunction.swift:
+    files:
+      - IB-iOS-Definitions.swift
+      - Common-LookupFunction.swift
   all-noDefinedModule.swift:
     files:
       - IB-iOS-Definitions.swift

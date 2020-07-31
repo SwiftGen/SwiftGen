@@ -26,8 +26,7 @@ internal enum CustomJSON {
 // MARK: - Implementation Details
 
 private func objectFromJSON<T>(at path: String) -> T {
-  let bundle = BundleToken.bundle
-  guard let url = bundle.url(forResource: path, withExtension: nil),
+  guard let url = BundleToken.bundle.url(forResource: path, withExtension: nil),
     let json = try? JSONSerialization.jsonObject(with: Data(contentsOf: url), options: []),
     let result = json as? T else {
     fatalError("Unable to load JSON at path: \(path)")
