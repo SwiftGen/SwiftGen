@@ -37,7 +37,7 @@ public enum Strings {
         """
       case .invalidVariableRuleValueType(let variableName, let valueType):
         return """
-        The variable \"\(variableName)\" has sepcified \"\(valueType)\" as its NSStringFormatValueTypeKey. \
+        The variable \"\(variableName)\" has specified \"\(valueType)\" as its NSStringFormatValueTypeKey. \
         The Stringsdict file format only supports format specifiers for a number.
         """
       case .unsupportedFileType(let path, let supported):
