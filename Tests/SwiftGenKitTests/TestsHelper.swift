@@ -188,7 +188,6 @@ extension ContextConvertible where Self: NSObject {
       // evaluates to `nil` for lazy variables and doesn't trigger the lazy var evaluation.
       result += mirror?.children
         .compactMap { $0.label?.deletingPrefix("$__lazy_storage_$_") }
-        .filter { !$0.hasPrefix("_") }
         .map { ($0, self.value(forKey: $0) as Any) } ?? []
       mirror = mirror?.superclassMirror
     } while mirror != nil
