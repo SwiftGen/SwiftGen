@@ -94,7 +94,7 @@ public enum Strings {
         $0.path.lastComponent.compare(path.lastComponent, options: .caseInsensitive) == .orderedSame
       }
       if let existing = previouslyParsedFile {
-        // 2nd we try to parse a file with that name, e.g. same filename from 2 different .lprojs
+        // 2nd time we try to parse a file with that name, e.g. same filename from 2 different .lprojs
         throw ParserError.duplicateTableFile(path: path, existing: existing.path)
       } else {
         let entries = try parser.parseFile(at: path)
