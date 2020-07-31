@@ -29,21 +29,21 @@
 			<key>25</key>
 			<string>Favorite Players</string>
 		</dict>
-    <key>NSStringLocalizedFormatKey</key>
-    <string>%#@Matches@</string>
-    <key>Matches</key>
-    <dict>
-      <key>NSStringFormatSpecTypeKey</key>
-      <string>NSStringPluralRuleType</string>
-      <key>NSStringFormatValueTypeKey</key>
-      <string>ld</string>
-      <key>zero</key>
-      <string>No players</string>
-      <key>one</key>
-      <string>%ld player</string>
-      <key>other</key>
-      <string>%ld players</string>
-    </dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@Matches@</string>
+		<key>Matches</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>ld</string>
+			<key>zero</key>
+			<string>No players</string>
+			<key>one</key>
+			<string>%ld player</string>
+			<key>other</key>
+			<string>%ld players</string>
+		</dict>
 	</dict>
 	<key>competition.tab.favorite-teams</key>
 	<dict>

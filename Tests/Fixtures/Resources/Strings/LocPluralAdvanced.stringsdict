@@ -77,7 +77,7 @@
 	<key>multiple.placeholders-and-variables.int-string-string</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-            <!-- Your <Grocery> list contains <3 items. You should buy them> <today>. -->
+		<!-- Your <Grocery> list contains <3 items. You should buy them> <today>. -->
 		<string>Your %3$@ list contains %1$#@first@ %2$@.</string>
 		<key>first</key>
 		<dict>
