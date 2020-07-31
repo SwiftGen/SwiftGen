@@ -1,12 +1,12 @@
 //
 // SwiftGenKit
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
 import Foundation
 
-extension Resource.Parser {
+extension Files.Parser {
   public func stencilContext() -> [String: Any] {
     let files = self.files
       .sorted { lhs, rhs in lhs.name < rhs.name }
@@ -17,10 +17,12 @@ extension Resource.Parser {
     ]
   }
 
-  private func map(file: Resource.File) -> [String: Any] {
-    return [
+  private func map(file: Files.File) -> [String: Any] {
+    [
       "name": file.name,
-      "ext": file.ext ?? ""
+      "ext": file.ext ?? "",
+      "path": file.path,
+      "mimeType": file.mimeType
     ]
   }
 }

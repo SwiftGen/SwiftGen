@@ -1,13 +1,14 @@
 //
 // SwiftGenKit
-// Copyright © 2019 SwiftGen
+// Copyright © 2020 SwiftGen
 // MIT Licence
 //
 
+import CoreServices
 import Foundation
 import PathKit
 
-public enum Resource {
+public enum Files {
   public enum ParserError: Error, CustomStringConvertible {
     case invalidFile(path: Path, reason: String)
 
@@ -31,10 +32,16 @@ public enum Resource {
       self.warningHandler = warningHandler
     }
 
-    public static var defaultFilter: String = ""
+    public static var defaultFilter: String = ".*"
 
     public func parse(path: Path, relativeTo parent: Path) throws {
-      files.append(try File(path: path, relativeTo: parent))
+      if path.isDirectory {
+        try path.children().forEach { childPath in
+          try parse(path: childPath, relativeTo: parent)
+        }
+      } else {
+        files.append(try File(path: path, relativeTo: parent))
+      }
     }
   }
 }

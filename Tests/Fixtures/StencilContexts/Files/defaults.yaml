@@ -1,0 +1,9 @@
+files:
+- name: "File"
+  ext: ""
+  path: "Files"
+  mimeType: "application/octet-stream"
+- name: "test"
+  ext: "txt"
+  path: "Files"
+  mimeType: "text/plain"
