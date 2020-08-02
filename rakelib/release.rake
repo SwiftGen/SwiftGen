@@ -197,8 +197,11 @@ namespace :release do
       Utils.print_header 'Pushing to Homebrew'
       sh "git add #{formula_file}"
       sh "git commit -m 'swiftgen #{tag}'"
+      # Add remote pointing to our fork, if it doesn't exist yet, then push the new branch to it before opening the PR
+      sh 'git remote add SwiftGen https://github.com/SwiftGen/homebrew-core 2>/dev/null || true'
       sh "git push -u SwiftGen swiftgen-#{tag}"
       sh "open 'https://github.com/Homebrew/homebrew-core/compare/master...SwiftGen:swiftgen-#{tag}?expand=1'"
+      sh 'git checkout master'
     end
   end
 end
