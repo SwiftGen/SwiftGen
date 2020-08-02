@@ -30,10 +30,10 @@
   [David Jennes](https://github.com/djbe)
   [#648](https://github.com/SwiftGen/SwiftGen/issues/648)
   [#733](https://github.com/SwiftGen/SwiftGen/pull/733)
-* Fonts/IB/JSON/Plist/Strings/XCAssets: all templates that load data at runtime from a bundle now support a `bundle` template parameter, which you can use to override the bundle from which resources are loaded. Check out the [template specific documentation](Documentation/templates/) for more information.  
+* Fonts/IB/JSON/Plist/Strings/XCAssets: all templates that load data at runtime from a bundle now support a `bundle` template parameter, which you can use to override the bundle from which resources are loaded. Check out the [template specific documentation](Documentation/templates/) for more information. For an in-depth explanation, also check the [customize loading of resources](Documentation/Articles/Customize-loading-of-resources.md) article.  
   [David Jennes](https://github.com/djbe)
   [#737](https://github.com/SwiftGen/SwiftGen/pull/737)
-* Fonts/IB/JSON/Plist: Similar to the `strings` templates, these templates now support a `lookupFunction` template parameter, which allows you to provide your own resource lookup mechanism at runtime. Check the [template specific documentation](Documentation/templates/) for more information.  
+* Fonts/IB/JSON/Plist: Similar to the `strings` templates, these templates now support a `lookupFunction` template parameter, which allows you to provide your own resource lookup mechanism at runtime. Check the [template specific documentation](Documentation/templates/) for more information. For an in-depth explanation, also check the [customize loading of resources](Documentation/Articles/Customize-loading-of-resources.md) article.  
   [David Jennes](https://github.com/djbe)
   [#738](https://github.com/SwiftGen/SwiftGen/pull/738)
 
