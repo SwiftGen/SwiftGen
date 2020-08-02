@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This analyze the CHANGELOG.md file and report warnings on its content
 #
 # It checks:

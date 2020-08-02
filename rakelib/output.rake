@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Used constants:
 #  - WORKSPACE
 
@@ -76,7 +78,8 @@ namespace :output do
     failures = []
     Dir.glob('Tests/Fixtures/Generated/*/*/').each do |folder|
       Utils.print_info "Loading config for #{folder}…\n"
-      if config = CompilationConfiguration.load(folder)
+      config = CompilationConfiguration.load(folder)
+      unless config.nil?
         Dir.glob("#{folder}*.swift").each do |file|
           Utils.print_info "Compiling #{file}…\n"
           failures << file unless compile_file(file, config, task)
