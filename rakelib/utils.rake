@@ -238,7 +238,7 @@ class String
   # only enable formatting if terminal supports it
   if `tput colors`.chomp.to_i >= 8
     def format(*styles)
-      styles.reduce('') { |r, s| r << "\e[#{FORMATTING[s]}m" } << "#{self}\e[0m"
+      styles.map { |s| "\e[#{FORMATTING[s]}m" }.join + self + "\e[0m"
     end
   else
     def format(*_styles)
