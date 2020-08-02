@@ -2,11 +2,7 @@
 
 ---
 
-## Develop
-
-### Breaking Changes
-
-_None_
+## 6.3.0
 
 ### Deprecations
 
@@ -46,10 +42,6 @@ _None_
 * Strings: fix incorrect interpretation of format placeholders when there were missing positional parameters (e.g. `"%2$@"` without a `%1$…` defined).  
   [@AliSoftware](https://github.com/AliSoftware)
   [#634](https://github.com/SwiftGen/SwiftGen/pull/634)
-
-### Internal Changes
-
-_None_
 
 ## 6.2.1
 
