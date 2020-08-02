@@ -1,31 +1,24 @@
+########################################
+# Personal Preferences
+
 # It's ok to add some spaces between stuff to make it more readable!
 Layout/TrailingEmptyLines:
   Enabled: false
 
-# Method/Class length
-Metrics/ClassLength:
-  Max: 150
-Metrics/MethodLength:
-  Max: 50
-Metrics/BlockLength:
-  Enabled: false
-Layout/LineLength:
-  Max: 180
-
-# Complexity
-Metrics/CyclomaticComplexity:
-  Enabled: false
-Metrics/PerceivedComplexity:
-  Enabled: false
-Metrics/AbcSize:
+# Personal preference (we don't find `json, = Open3.capture3(…)` with the `x, = ` syntax super readable)
+Style/TrailingUnderscoreVariable:
   Enabled: false
 
-# File name
+########################################
+# Some specific files exceptions
+
+# podspecs are ruby with a special extension
 Naming/FileName:
   Exclude:
     - '*.podspec'
 
 # Rake uses `task :x => [deps]`, we don't want to convert it to `task x: [deps]`
+# Podfile also has specific DSL so it's ok to not be strict about Hash syntax there
 Style/HashSyntax:
   Exclude:
     - 'Podfile'
@@ -36,6 +29,27 @@ Style/HashSyntax:
 Style/SignalException:
   Exclude:
     - 'Dangerfile'
+
+########################################
+# Metrics
+
+Metrics/ClassLength:
+  Max: 150
+Metrics/MethodLength:
+  Max: 50
+Metrics/BlockLength:
+  Enabled: false
+Layout/LineLength:
+  Max: 180
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+
+########################################
 
 # Enable new cops of recent rucocop updates by default
 AllCops:

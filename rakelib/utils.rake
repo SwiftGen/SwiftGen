@@ -38,7 +38,7 @@ class Utils
 
   def self.podspec_as_json(file)
     file += '.podspec' unless file.include?('.podspec')
-    json, = Open3.capture3('bundle', 'exec', 'pod', 'ipc', 'spec', file)
+    json, _, _ = Open3.capture3('bundle', 'exec', 'pod', 'ipc', 'spec', file)
     JSON.parse(json)
   end
 
@@ -55,7 +55,7 @@ class Utils
 
   def self.pod_trunk_last_version(pod)
     require 'yaml'
-    stdout, = Open3.capture3('bundle', 'exec', 'pod', 'trunk', 'info', pod)
+    stdout, _, _ = Open3.capture3('bundle', 'exec', 'pod', 'trunk', 'info', pod)
     stdout.sub!("\n#{pod}\n", '')
     last_version_line = YAML.safe_load(stdout).first['Versions'].last
     /^[0-9.]*/.match(last_version_line)[0] # Just the 'x.y.z' part
@@ -78,13 +78,13 @@ class Utils
   end
 
   def self.top_changelog_version(changelog_file = 'CHANGELOG.md')
-    header, = Open3.capture3('grep', '-m', '1', '^## ', changelog_file)
+    header, _, _ = Open3.capture3('grep', '-m', '1', '^## ', changelog_file)
     header.gsub('## ', '').strip
   end
 
   def self.top_changelog_entry(changelog_file = 'CHANGELOG.md')
     tag = top_changelog_version
-    stdout, = Open3.capture3('sed', '-n', "/^## #{tag}$/,/^## /p", changelog_file)
+    stdout, _, _ = Open3.capture3('sed', '-n', "/^## #{tag}$/,/^## /p", changelog_file)
     stdout.gsub(/^## .*$/, '').strip
   end
 
@@ -196,7 +196,7 @@ class Utils
   # @return [Array<Hash>] A list of { :vers => ... , :path => ... } hashes
   #                       of all Xcodes found on the machine using Spotlight
   def self.all_xcode_versions
-    mdfind_xcodes, = Open3.capture3('mdfind', "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode'")
+    mdfind_xcodes, _, _ = Open3.capture3('mdfind', "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode'")
     xcodes = mdfind_xcodes.chomp.split("\n")
     xcodes.map do |path|
       { vers: Gem::Version.new(`mdls -name kMDItemVersion -raw "#{path}"`), path: path }
