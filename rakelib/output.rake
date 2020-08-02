@@ -3,7 +3,7 @@
 # Used constants:
 #  - WORKSPACE
 
-require_relative 'CompilationConfiguration'
+require_relative 'compilation_configuration'
 
 ## [ Test Output Generation ] #################################################
 
@@ -97,22 +97,22 @@ namespace :output do
     exit failures.empty?
   end
 
-  def compile_module(m, sdk, task)
-    commands = Module.commands_for_file(m, sdk)
-    subtask = File.basename(m, '.*')
+  def compile_module(module_name, sdk, task)
+    commands = Module.commands_for_file(module_name, sdk)
+    subtask = File.basename(module_name, '.*')
 
     Utils.run(commands, task, subtask, xcrun: true)
   end
 
-  def compile_file(f, config, task)
-    commands = config.commands_for_file(f)
-    subtask = File.basename(f, '.*')
+  def compile_file(file_name, config, task)
+    commands = config.commands_for_file(file_name)
+    subtask = File.basename(file_name, '.*')
 
     begin
       Utils.run(commands, task, subtask, xcrun: true)
       true
     rescue StandardError
-      Utils.print_error "Failed to compile #{f}!"
+      Utils.print_error "Failed to compile #{file_name}!"
       false
     end
   end

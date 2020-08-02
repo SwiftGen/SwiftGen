@@ -81,8 +81,8 @@ namespace :cli do
               ], task, 'copy_frameworks')
 
     # HACK: remove swift libraries on 10.14.4 or higher, to avoid issues with brew
-    macOS_version = Gem::Version.new(`sw_vers -productVersion`)
-    if macOS_version >= Gem::Version.new('10.14.4')
+    macos_version = Gem::Version.new(`sw_vers -productVersion`)
+    if macos_version >= Gem::Version.new('10.14.4')
       Utils.print_header "Removing bundled swift libraries from #{fmkdir}"
       Utils.run([
                   %(rm "#{fmkdir}"/libswift*.dylib)

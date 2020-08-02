@@ -21,8 +21,6 @@ warn('PR is classed as Work in Progress') if github.pr_title.include? '[WIP]'
 # Warn when there is a big PR
 warn('Big PR') if git.lines_of_code > 500 && !is_release
 
-
-
 ################################################
 # Check for correct base branch
 to_develop = github.branch_for_base == 'develop'
@@ -55,15 +53,15 @@ elsif !to_develop
     "not #{github.branch_for_base}")
 end
 
-
-
 ################################################
 # Check `lock` files
 podfile_changed = git.modified_files.include?('Podfile.lock')
 package_changed = git.modified_files.include?('Package.resolved')
+# rubocop:disable Style/IfUnlessModifier
 if podfile_changed ^ package_changed
   need_fixes << warn('You should make sure that `Podfile.lock` and `Package.resolved` are changed in sync')
 end
+# rubocop:enable Style/IfUnlessModifier
 
 # Check if DEPENDENCIES needs changes
 swiftgenkit_podspec_changed = git.modified_files.include?('SwiftGenKit.podspec')
@@ -76,8 +74,6 @@ if podfile_changed || swiftgenkit_podspec_changed || dependencies_doc_changed
     end
   end
 end
-
-
 
 ################################################
 # Check for a CHANGELOG entry
@@ -115,8 +111,6 @@ unless changelog_warnings.empty?
   end
 end
 
-
-
 ################################################
 # Check Documentation TOC update
 doc_dir_structure_modified = (git.added_files + git.deleted_files + git.renamed_files.map(&:values)).flatten.any? { |path| path.start_with?('Documentation/') }
@@ -128,13 +122,11 @@ if doc_dir_structure_modified
   (doc_files - toc_links).each do |doc_not_linked|
     fail("The documentation file #{github.html_link(doc_not_linked)} is not referenced in the #{github.html_link('Documentation/README.md')}. Please add a link to it.")
   end
-  
+
   (toc_links - doc_files).each do |bad_link|
     fail("The #{github.html_link('Documentation/README.md')} contains a link to \`#{bad_link}\` but that file doesn't exist. Maybe it was renamed or deleted?")
   end
 end
-
-
 
 ################################################
 # Encouragement message

@@ -55,9 +55,7 @@ namespace :changelog do
   desc 'Add links to other CHANGELOGs in the topmost SwiftGen CHANGELOG entry'
   task :links do
     changelog = File.read('CHANGELOG.md')
-    if /^### (.*)/.match(changelog)[1] == LINKS_SECTION_TITLE
-      abort('Links seems to already exist for latest version entry')
-    end
+    abort('Links seems to already exist for latest version entry') if /^### (.*)/.match(changelog)[1] == LINKS_SECTION_TITLE
     links = linked_changelogs(
       stencilswiftkit: Utils.podfile_lock_version('StencilSwiftKit'),
       stencil: Utils.podfile_lock_version('Stencil')
@@ -66,7 +64,7 @@ namespace :changelog do
     File.write('CHANGELOG.md', changelog)
   end
 
-  def linked_changelogs(swiftgenkit: nil, stencilswiftkit: nil, stencil: nil, templates: nil)
+  def linked_changelogs(stencilswiftkit: nil, stencil: nil)
     <<-LINKS.gsub(/^\s*\|/, '')
       |### #{LINKS_SECTION_TITLE}
       |

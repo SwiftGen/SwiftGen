@@ -7,13 +7,12 @@ require 'net/http'
 require 'uri'
 require 'open3'
 
-def first_match_in_file(file, re)
+def first_match_in_file(file, regexp)
   File.foreach(file) do |line|
-    m = re.match(line)
+    m = regexp.match(line)
     return m if m
   end
-  nil
- end
+end
 
 ## [ Release a new version ] ##################################################
 

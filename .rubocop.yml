@@ -1,0 +1,40 @@
+# It's ok to add some spaces between stuff to make it more readable!
+Layout/TrailingEmptyLines:
+  Enabled: false
+
+# Method/Class length
+Metrics/ClassLength:
+  Max: 150
+Metrics/MethodLength:
+  Max: 50
+Metrics/BlockLength:
+  Enabled: false
+Layout/LineLength:
+  Max: 180
+
+# Complexity
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+
+# File name
+Naming/FileName:
+  Exclude:
+    - 'SwiftGen.podspec'
+    - 'SwiftGenKit.podspec'
+    - 'rakelib/CompilationConfiguration.rb'
+
+# Rake uses `task :x => [deps]`, we don't want to convert it to `task x: [deps]`
+Style/HashSyntax:
+  Exclude:
+    - 'Podfile'
+    - 'Rakefile'
+    - 'rakelib/*.rake'
+
+# Danger uses `fail` as a keyword, we don't want rubocop to replace it with `raise`
+Style/SignalException:
+  Exclude:
+    - 'Dangerfile'
