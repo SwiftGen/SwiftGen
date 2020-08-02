@@ -23,9 +23,7 @@ Metrics/AbcSize:
 # File name
 Naming/FileName:
   Exclude:
-    - 'SwiftGen.podspec'
-    - 'SwiftGenKit.podspec'
-    - 'rakelib/CompilationConfiguration.rb'
+    - '*.podspec'
 
 # Rake uses `task :x => [deps]`, we don't want to convert it to `task x: [deps]`
 Style/HashSyntax:
@@ -38,3 +36,7 @@ Style/HashSyntax:
 Style/SignalException:
   Exclude:
     - 'Dangerfile'
+
+# Enable new cops of recent rucocop updates by default
+AllCops:
+  NewCops: enable

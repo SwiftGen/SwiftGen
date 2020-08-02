@@ -22,9 +22,9 @@ class Utils
   # run a command using xcrun and xcpretty if applicable
   def self.run(command, task, subtask = '', xcrun: false, formatter: :raw)
     commands = if xcrun
-                 [*command].map { |cmd| "#{version_select} xcrun #{cmd}" }
+                 Array(command).map { |cmd| "#{version_select} xcrun #{cmd}" }
                else
-                 [*command]
+                 Array(command)
                end
     case formatter
     when :xcpretty then xcpretty(commands, task, subtask)
@@ -131,7 +131,7 @@ class Utils
   # run a command, pipe output through 'xcpretty' and store the output in CI artifacts
   def self.xcpretty(cmd, task, subtask)
     name = (task.name + (subtask.empty? ? '' : "_#{subtask}")).gsub(/[:-]/, '_')
-    command = [*cmd].join(' && \\' + "\n")
+    command = Array(cmd).join(' && \\' + "\n")
 
     if ENV['CIRCLECI']
       Rake.sh "set -o pipefail && (\\\n#{command} \\\n) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\" | " \
@@ -147,7 +147,7 @@ class Utils
   # run a command and store the output in CI artifacts
   def self.plain(cmd, task, subtask)
     name = (task.name + (subtask.empty? ? '' : "_#{subtask}")).gsub(/[:-]/, '_')
-    command = [*cmd].join(' && \\' + "\n")
+    command = Array(cmd).join(' && \\' + "\n")
 
     if ENV['CIRCLECI']
       Rake.sh "set -o pipefail && (#{command}) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\""
