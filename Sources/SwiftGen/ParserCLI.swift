@@ -85,7 +85,7 @@ extension ParserCLI {
     .init(
       parserType: Strings.Parser.self,
       name: "strings",
-      description: "generate code for your Localizable.strings file(s)",
+      description: "generate code for your Localizable.strings or Localizable.stringsdict file(s)",
       pathDescription: "Strings file(s) to parse."
     ),
     .init(

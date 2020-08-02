@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>competition.event.number-of-matches</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@Matches@</string>
+		<key>Matches</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>ld</string>
+			<key>zero</key>
+			<string>No matches</string>
+			<key>one</key>
+			<string>%ld match</string>
+			<key>other</key>
+			<string>%ld matches</string>
+		</dict>
+	</dict>
+	<key>competition.tab.favorite-players</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>20</key>
+			<string>Fav. Players</string>
+			<key>25</key>
+			<string>Favorite Players</string>
+		</dict>
+	</dict>
+	<key>competition.tab.favorite-teams</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>20</key>
+			<string>Fav. Teams</string>
+			<key>25</key>
+			<string>Favorite Teams</string>
+		</dict>
+	</dict>
+	<key>feed.subscription.count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@Subscriptions@</string>
+		<key>Subscriptions</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>ld</string>
+			<key>zero</key>
+			<string>No subscriptions yet</string>
+			<key>one</key>
+			<string>%ld subscription</string>
+			<key>other</key>
+			<string>%ld subscriptions</string>
+		</dict>
+	</dict>
+	<key>apples.count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@apples@</string>
+		<key>apples</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>You have zero apples</string>
+			<key>one</key>
+			<string>You have one apple</string>
+			<key>other</key>
+			<string>You have %d apples. Wow that is a lot!</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

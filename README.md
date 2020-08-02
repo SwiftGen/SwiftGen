@@ -735,13 +735,13 @@ let bar = PlistFiles.Stuff.key1
 
 ```yaml
 strings:
-  inputs: /path/to/Localizable.strings
+  inputs: /path/to/language.lproj
   outputs:
     templateName: structured-swift5
     output: Strings.swift
 ```
 
-This will generate a Swift `enum L10n` that will map all your `Localizable.strings` (or other tables) keys to a `static let` constant. And if it detects placeholders like `%@`,`%d`,`%f`, it will generate a `static func` with the proper argument types instead, to provide type-safe formatting.
+This will generate a Swift `enum L10n` that will map all your `Localizable.strings` and `Localizable.stringsdict` (or other tables) keys to a `static let` constant. And if it detects placeholders like `%@`,`%d`,`%f`, it will generate a `static func` with the proper argument types instead, to provide type-safe formatting.
 
 > Note that all dots within the key names are converted to dots in code (by using nested enums). You can provide a different separator than `.` to split key names into substructures by using a parser option – see [the parser documentation](Documentation/Parsers/strings.md).
 
@@ -753,8 +753,35 @@ Given the following `Localizable.strings` file:
 ```swift
 "alert_title" = "Title of the alert";
 "alert_message" = "Some alert body there";
-"apples.count" = "You have %d apples";
 "bananas.owner" = "Those %d bananas belong to %@.";
+```
+
+And the following `Localizable.stringsdict` file:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+  <dict>
+    <key>apples.count</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@apples@</string>
+        <key>apples</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>zero</key>
+            <string>You have no apples</string>
+            <key>one</key>
+            <string>You have one apple</string>
+            <key>other</key>
+            <string>You have %d apples. Wow that is a lot!</string>
+        </dict>
+    </dict>
+  </dict>
+</plist>
 ```
 
 > _Reminder: Don't forget to end each line in your `*.strings` files with a semicolon `;`! Now that in Swift code we don't need semi-colons, it's easy to forget it's still required by the `Localizable.strings` file format 😉_
@@ -769,7 +796,7 @@ internal enum L10n {
   internal static let alertTitle = L10n.tr("alert_title")
 
   internal enum Apples {
-    /// You have %d apples
+    /// Plural format key: "%#@apples@"
     internal static func count(_ p1: Int) -> String {
       return L10n.tr("apples.count", p1)
     }
@@ -783,6 +810,8 @@ internal enum L10n {
   }
 }
 ```
+Note that if the same key is present in both the `.strings` and the `.stringsdict` files, SwiftGen will only consider the one in the `.stringsdict` file, as that's also how Foundation behaves at runtime.
+
 </details>
 
 ### Usage Example
@@ -812,7 +841,7 @@ internal enum L10n {
   internal static let alertMessage = L10n.tr("Localizable", "alert__message")
   /// Title of the alert
   internal static let alertTitle = L10n.tr("Localizable", "alert__title")
-  /// You have %d apples
+  /// Plural format key: "%#@apples@"
   internal static func applesCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "apples.count", p1)
   }
@@ -824,7 +853,7 @@ internal enum L10n {
 ```
 </details>
 
-Given the same `Localizable.strings` as above the usage will now be:
+Given the same `Localizable.strings` and `Localizable.stringsdict` as above the usage will now be:
 
 ```swift
 // Simple strings

@@ -16,6 +16,10 @@ _None_
 
 ### New Features
 
+* Strings: support for plurals declared in `.stringsdict` files.  
+  [Florian Fittschen](https://github.com/ffittschen)
+  [#184](https://github.com/SwiftGen/SwiftGen/issues/184)
+  [#634](https://github.com/SwiftGen/SwiftGen/pull/634)
 * Fonts: the templates now support a new `fontTypeName` template parameter that you can use to change the name of the `struct` representing a font to something else.  
   [David Jennes](https://github.com/djbe)
   [#728](https://github.com/SwiftGen/SwiftGen/pull/728)
@@ -39,7 +43,9 @@ _None_
 
 ### Bug Fixes
 
-_None_
+* Strings: fix incorrect interpretation of format placeholders when there were missing positional parameters (e.g. `"%2$@"` without a `%1$…` defined).  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#634](https://github.com/SwiftGen/SwiftGen/pull/634)
 
 ### Internal Changes
 

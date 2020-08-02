@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>unsupported-use.placeholders-in-variable-rule.string-int</key>
+	<!-- Would theoretically work if called with a String followed by an Int in the CVarArgs -->
+	<!-- but we cannot parse it (yet) to generate a method that accepts `[.object, .int]` placeholders -->
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@elements@</string>
+		<key>elements</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%@ has no rating</string>
+			<key>one</key>
+			<string>%@ has one rating</string>
+			<key>other</key>
+			<string>%@ has %d ratings</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

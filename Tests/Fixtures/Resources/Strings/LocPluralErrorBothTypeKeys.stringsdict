@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>competition.event.number-of-matches</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@Matches@</string>
+		<key>Matches</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>ld</string>
+			<key>zero</key>
+			<string>No matches</string>
+			<key>one</key>
+			<string>%ld match</string>
+			<key>other</key>
+			<string>%ld matches</string>
+		</dict>
+	</dict>
+	<key>competition.tab.favorite-players</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>20</key>
+			<string>Fav. Players</string>
+			<key>25</key>
+			<string>Favorite Players</string>
+		</dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@Matches@</string>
+		<key>Matches</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>ld</string>
+			<key>zero</key>
+			<string>No players</string>
+			<key>one</key>
+			<string>%ld player</string>
+			<key>other</key>
+			<string>%ld players</string>
+		</dict>
+	</dict>
+	<key>competition.tab.favorite-teams</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>20</key>
+			<string>Fav. Teams</string>
+			<key>25</key>
+			<string>Favorite Teams</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

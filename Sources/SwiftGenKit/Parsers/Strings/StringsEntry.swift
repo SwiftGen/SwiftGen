@@ -22,7 +22,7 @@ extension Strings {
     }
 
     init(key: String, translation: String, keyStructureSeparator: String) throws {
-      let types = try PlaceholderType.placeholders(fromFormat: translation)
+      let types = try PlaceholderType.placeholderTypes(fromFormat: translation)
       self.init(key: key, translation: translation, types: types, keyStructureSeparator: keyStructureSeparator)
     }
 
