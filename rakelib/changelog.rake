@@ -39,7 +39,7 @@ namespace :changelog do
 
   desc 'Check if links to issues and PRs use matching numbers between text & link'
   task :check do
-    warnings = check_changelog()
+    warnings = check_changelog
     if warnings.empty?
       puts "\u{2705}  All entries seems OK (end with period + 2 spaces, correct links)"
     else
@@ -50,12 +50,14 @@ namespace :changelog do
     end
   end
 
-  LINKS_SECTION_TITLE = 'Changes in core dependencies of SwiftGen'.freeze
+  LINKS_SECTION_TITLE = 'Changes in core dependencies of SwiftGen'
 
   desc 'Add links to other CHANGELOGs in the topmost SwiftGen CHANGELOG entry'
   task :links do
     changelog = File.read('CHANGELOG.md')
-    abort('Links seems to already exist for latest version entry') if /^### (.*)/.match(changelog)[1] == LINKS_SECTION_TITLE
+    if /^### (.*)/.match(changelog)[1] == LINKS_SECTION_TITLE
+      abort('Links seems to already exist for latest version entry')
+    end
     links = linked_changelogs(
       stencilswiftkit: Utils.podfile_lock_version('StencilSwiftKit'),
       stencil: Utils.podfile_lock_version('Stencil')

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Pod::Spec.new do |s|
   s.name         = 'SwiftGen'
   s.version      = '6.2.1'
@@ -11,7 +13,7 @@ Pod::Spec.new do |s|
                    * localized strings,
                    * storyboards,
                    * … and more
-                   DESC
+  DESC
 
   s.homepage     = 'https://github.com/SwiftGen/SwiftGen'
   s.license      = 'MIT'

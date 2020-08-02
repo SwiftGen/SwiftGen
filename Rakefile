@@ -1,4 +1,6 @@
 #!/usr/bin/rake
+# frozen_string_literal: true
+
 require 'pathname'
 require 'yaml'
 require 'shellwords'
@@ -10,21 +12,22 @@ end
 
 ## [ Constants ] ##############################################################
 
-WORKSPACE = 'SwiftGen'.freeze
-SCHEME_NAME = 'swiftgen'.freeze
-CONFIGURATION = 'Debug'.freeze
-RELEASE_CONFIGURATION = 'Release'.freeze
-POD_NAME = 'SwiftGen'.freeze
+WORKSPACE = 'SwiftGen'
+SCHEME_NAME = 'swiftgen'
+CONFIGURATION = 'Debug'
+RELEASE_CONFIGURATION = 'Release'
+POD_NAME = 'SwiftGen'
 MIN_XCODE_VERSION = 11.4
 
 BUILD_DIR = File.absolute_path('./build')
-BIN_NAME = 'swiftgen'.freeze
-TEMPLATES_SRC_DIR = 'templates'.freeze
+BIN_NAME = 'swiftgen'
+TEMPLATES_SRC_DIR = 'templates'
 
 ## [ Utils ] ##################################################################
 
 def path(str)
   return nil if str.nil? || str.empty?
+
   Pathname.new(str)
 end
 
@@ -77,7 +80,7 @@ namespace :cli do
                 %(cp -fR "#{generated_bundle_path}/Frameworks/" "#{fmkdir}")
               ], task, 'copy_frameworks')
 
-    # Hack: remove swift libraries on 10.14.4 or higher, to avoid issues with brew
+    # HACK: remove swift libraries on 10.14.4 or higher, to avoid issues with brew
     macOS_version = Gem::Version.new(`sw_vers -productVersion`)
     if macOS_version >= Gem::Version.new('10.14.4')
       Utils.print_header "Removing bundled swift libraries from #{fmkdir}"

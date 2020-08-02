@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'rakelib/check_changelog'
 
 is_release = github.branch_for_head.start_with?('release/')
@@ -6,13 +8,11 @@ is_release = github.branch_for_head.start_with?('release/')
 # Welcome message
 markdown [
   "Hey 👋 I'm Eve, the friendly bot watching over SwiftGen 🤖",
-  "Thanks a lot for your contribution!",
+  'Thanks a lot for your contribution!',
   '', '---', ''
 ]
 
 need_fixes = []
-
-
 
 ################################################
 # Make it more obvious that a PR is a work in progress and shouldn't be merged yet
@@ -36,7 +36,7 @@ if is_release
   stdout, _, status = Open3.capture3('bundle', 'exec', 'rake', 'changelog:check')
   markdown [
     '',
-    "### ChangeLog check",
+    '### ChangeLog check',
     '',
     stdout
   ]
@@ -62,7 +62,7 @@ end
 podfile_changed = git.modified_files.include?('Podfile.lock')
 package_changed = git.modified_files.include?('Package.resolved')
 if podfile_changed ^ package_changed
-  need_fixes << warn("You should make sure that `Podfile.lock` and `Package.resolved` are changed in sync")
+  need_fixes << warn('You should make sure that `Podfile.lock` and `Package.resolved` are changed in sync')
 end
 
 # Check if DEPENDENCIES needs changes
@@ -95,7 +95,7 @@ unless has_changelog || declared_trivial
 
   need_fixes = fail("Please include a CHANGELOG entry to credit your work.  \nYou can find it at [CHANGELOG.md](#{repo_url}/blob/#{github.branch_for_head}/CHANGELOG.md).")
 
-  changelog_msg = <<-CHANGELOG_FORMAT.gsub(/^ *\|/,'')
+  changelog_msg = <<-CHANGELOG_FORMAT.gsub(/^ *\|/, '')
   |📝 We use the following format for CHANGELOG entries:
   |```
   |* #{pr_title}  
@@ -107,7 +107,7 @@ unless has_changelog || declared_trivial
   # changelog_msg is printed during the "Encouragement message" section, see below
 end
 
-changelog_warnings = check_changelog()
+changelog_warnings = check_changelog
 unless changelog_warnings.empty?
   need_fixes << warn('Found some warnings in CHANGELOG.md')
   changelog_warnings.each do |warning|
@@ -122,8 +122,8 @@ end
 doc_dir_structure_modified = (git.added_files + git.deleted_files + git.renamed_files.map(&:values)).flatten.any? { |path| path.start_with?('Documentation/') }
 if doc_dir_structure_modified
   doc_files = Dir.chdir('Documentation') { Dir['{Articles/,}*{/,.md}'] } - ['README.md'] # folders + .md files immediately in either `Documentation/` or `Documentation/Articles/`
-  toc_links = File.read('Documentation/README.md').scan(%r{\[.*\]\((.*)\)}).map(&:first).uniq # Extract markdown links from TOC
-    .reject { |s| s.start_with?('http') }.map { |s| CGI.unescape(s) } # only keep local links, and remove any percent escapes
+  toc_links = File.read('Documentation/README.md').scan(/\[.*\]\((.*)\)/).map(&:first).uniq # Extract markdown links from TOC
+                  .reject { |s| s.start_with?('http') }.map { |s| CGI.unescape(s) } # only keep local links, and remove any percent escapes
 
   (doc_files - toc_links).each do |doc_not_linked|
     fail("The documentation file #{github.html_link(doc_not_linked)} is not referenced in the #{github.html_link('Documentation/README.md')}. Please add a link to it.")

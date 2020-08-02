@@ -10,7 +10,7 @@ require 'open3'
 # Utility functions to run Xcode commands, extract versionning info and logs messages
 #
 class Utils
-  COLUMN_WIDTHS = [45, 12]
+  COLUMN_WIDTHS = [45, 12].freeze
 
   ## [ Run commands ] #########################################################
 
@@ -38,12 +38,12 @@ class Utils
 
   def self.podspec_as_json(file)
     file += '.podspec' unless file.include?('.podspec')
-    json, _, _ = Open3.capture3('bundle', 'exec', 'pod', 'ipc', 'spec', file)
+    json, = Open3.capture3('bundle', 'exec', 'pod', 'ipc', 'spec', file)
     JSON.parse(json)
   end
 
   def self.podspec_version(file)
-    self.podspec_as_json(file)['version']
+    podspec_as_json(file)['version']
   end
 
   def self.podfile_lock_version(pod)
@@ -55,9 +55,9 @@ class Utils
 
   def self.pod_trunk_last_version(pod)
     require 'yaml'
-    stdout, _, _ = Open3.capture3('bundle', 'exec', 'pod', 'trunk', 'info', pod)
+    stdout, = Open3.capture3('bundle', 'exec', 'pod', 'trunk', 'info', pod)
     stdout.sub!("\n#{pod}\n", '')
-    last_version_line = YAML.load(stdout).first['Versions'].last
+    last_version_line = YAML.safe_load(stdout).first['Versions'].last
     /^[0-9.]*/.match(last_version_line)[0] # Just the 'x.y.z' part
   end
 
@@ -69,7 +69,6 @@ class Utils
     [plist['CFBundleVersion'], plist['CFBundleShortVersionString']]
   end
 
-
   def self.octokit_client
     token   = File.exist?('.apitoken') && File.read('.apitoken')
     token ||= File.exist?('../.apitoken') && File.read('../.apitoken')
@@ -79,13 +78,13 @@ class Utils
   end
 
   def self.top_changelog_version(changelog_file = 'CHANGELOG.md')
-    header, _, _ = Open3.capture3('grep', '-m', '1', '^## ', changelog_file)
+    header, = Open3.capture3('grep', '-m', '1', '^## ', changelog_file)
     header.gsub('## ', '').strip
   end
 
   def self.top_changelog_entry(changelog_file = 'CHANGELOG.md')
     tag = top_changelog_version
-    stdout, _, _ = Open3.capture3('sed', '-n', "/^## #{tag}$/,/^## /p", changelog_file)
+    stdout, = Open3.capture3('sed', '-n', "/^## #{tag}$/,/^## /p", changelog_file)
     stdout.gsub(/^## .*$/, '').strip
   end
 
@@ -114,15 +113,15 @@ class Utils
 
   # format an info message in a 2 column table
   def self.table_info(label, msg)
-    puts "| #{label.ljust(COLUMN_WIDTHS[0])} | 👉  #{msg.ljust(COLUMN_WIDTHS[1]-4)} |"
+    puts "| #{label.ljust(COLUMN_WIDTHS[0])} | 👉  #{msg.ljust(COLUMN_WIDTHS[1] - 4)} |"
   end
 
   # format a result message in a 2 column table
   def self.table_result(result, label, error_msg)
     if result
-      puts "| #{label.ljust(COLUMN_WIDTHS[0])} | #{'✅'.ljust(COLUMN_WIDTHS[1]-1)} |"
+      puts "| #{label.ljust(COLUMN_WIDTHS[0])} | #{'✅'.ljust(COLUMN_WIDTHS[1] - 1)} |"
     else
-      puts "| #{label.ljust(COLUMN_WIDTHS[0])} | ❌  - #{error_msg.ljust(COLUMN_WIDTHS[1]-6)} |"
+      puts "| #{label.ljust(COLUMN_WIDTHS[0])} | ❌  - #{error_msg.ljust(COLUMN_WIDTHS[1] - 6)} |"
     end
     result
   end
@@ -181,7 +180,7 @@ class Utils
     return '' if version_req.satisfied_by? Gem::Version.new(current_xcode_version)
 
     supported_versions = all_xcode_versions.select { |app| version_req.satisfied_by?(app[:vers]) }
-    latest_supported_xcode = supported_versions.sort_by { |app| app[:vers] }.last
+    latest_supported_xcode = supported_versions.max_by { |app| app[:vers] }
 
     # Check if it's at least the right version
     if latest_supported_xcode.nil?
@@ -197,7 +196,7 @@ class Utils
   # @return [Array<Hash>] A list of { :vers => ... , :path => ... } hashes
   #                       of all Xcodes found on the machine using Spotlight
   def self.all_xcode_versions
-    mdfind_xcodes, _, _ = Open3.capture3('mdfind', "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode'")
+    mdfind_xcodes, = Open3.capture3('mdfind', "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode'")
     xcodes = mdfind_xcodes.chomp.split("\n")
     xcodes.map do |path|
       { vers: Gem::Version.new(`mdls -name kMDItemVersion -raw "#{path}"`), path: path }

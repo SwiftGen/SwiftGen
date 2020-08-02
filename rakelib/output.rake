@@ -67,8 +67,8 @@ namespace :output do
     end
 
     # delete unneeded files
-    Module.remove_swiftdoc()
-    Module.remove_swiftsourceinfo()
+    Module.remove_swiftdoc
+    Module.remove_swiftsourceinfo
   end
 
   desc 'Compile output'
@@ -79,11 +79,11 @@ namespace :output do
     Dir.glob('Tests/Fixtures/Generated/*/*/').each do |folder|
       Utils.print_info "Loading config for #{folder}…\n"
       config = CompilationConfiguration.load(folder)
-      unless config.nil?
-        Dir.glob("#{folder}*.swift").each do |file|
-          Utils.print_info "Compiling #{file}…\n"
-          failures << file unless compile_file(file, config, task)
-        end
+      next if config.nil?
+
+      Dir.glob("#{folder}*.swift").each do |file|
+        Utils.print_info "Compiling #{file}…\n"
+        failures << file unless compile_file(file, config, task)
       end
     end
 
@@ -110,10 +110,10 @@ namespace :output do
 
     begin
       Utils.run(commands, task, subtask, xcrun: true)
-      return true
-    rescue
+      true
+    rescue StandardError
       Utils.print_error "Failed to compile #{f}!"
-      return false
+      false
     end
   end
 end

@@ -9,13 +9,13 @@ namespace :dependencies do
   desc 'Check if the DEPENDENCIES.md file and Podfile.lock + SwiftGenKit.podspec are in sync'
   # options: Use 'check[plain]' to avoid coloring and dashes. Useful for using in Dangerfile.
   task :check, [:plain] do |_, args|
-    podfile_deps = YAML::load_file('Podfile.lock')['PODS'].map do |entry|
+    podfile_deps = YAML.load_file('Podfile.lock')['PODS'].map do |entry|
       key = entry.is_a?(Hash) ? entry.keys.first : entry
-      key.gsub(/ \([0-9.]*\)$/,'')
+      key.gsub(/ \([0-9.]*\)$/, '')
     end
     swiftgenkit_deps = Utils.podspec_as_json('SwiftGenKit')['dependencies'].keys
     all_core_deps = (podfile_deps + swiftgenkit_deps).uniq
-    documented_deps = File.open('DEPENDENCIES.md').grep(/### (.*)/) { $1 }
+    documented_deps = File.open('DEPENDENCIES.md').grep(/### (.*)/) { Regexp.last_match(1) }
 
     missing_deps = (all_core_deps - documented_deps).sort
     extra_deps = (documented_deps - all_core_deps).sort
@@ -27,7 +27,7 @@ namespace :dependencies do
         "as to why it is needed, and a link to the dependency's license"
     end + extra_deps.map do |d|
       "Dependency \`#{d}\` is documented in \`DEPENDENCIES.md\` but we don't seem to depend " \
-        "on it anymore"
+        'on it anymore'
     end
 
     if args[:plain] == 'true'
