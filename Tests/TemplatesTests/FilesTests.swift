@@ -7,7 +7,7 @@
 import StencilSwiftKit
 import XCTest
 
-class FilesTests: XCTestCase {
+final class FilesTests: XCTestCase {
   private enum Contexts {
     static let all = ["empty", "defaults"]
   }

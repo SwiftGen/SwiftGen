@@ -1,5 +1,5 @@
 // swiftlint:disable all
-// Generated using SwiftGen - https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if files.count > 0 %}
 {% set enumName %}{{param.enumName|default:"Files"}}{% endset %}
@@ -58,9 +58,7 @@ import Foundation
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
-  static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
-  }()
+  static let bundle: Bundle = Bundle(for: BundleToken.self)
 }
 // swiftlint:enable convenience_type
 {% else %}
