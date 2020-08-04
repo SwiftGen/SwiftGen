@@ -3,6 +3,7 @@
 require_relative 'rakelib/check_changelog'
 
 is_release = github.branch_for_head.start_with?('release/')
+is_hotfix = github.branch_for_head.start_with?('hotfix/')
 
 ################################################
 # Welcome message
@@ -48,6 +49,8 @@ if is_release
     stdout
   ]
   need_fixes << fail('Please fix the versions inconsistencies') unless status.success?
+elsif is_hotfix
+  message('This is a Hotfix PR')
 elsif !to_develop
   need_fixes << fail("Feature branches should start from and be merged into 'develop', " \
     "not #{github.branch_for_base}")
