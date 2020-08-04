@@ -35,6 +35,14 @@ public enum L10n {
   public static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
     return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
   }
+  /// %@ %d %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d
+  public static func manyPlaceholdersBase(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Float, _ p9: Any, _ p10: Int, _ p11: Float) -> String {
+    return L10n.tr("Localizable", "many.placeholders.base", String(describing: p1), p2, p3, p4, p5, p6, String(describing: p7), p8, String(describing: p9), p10, p11)
+  }
+  /// %@ %d %0$@ %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d
+  public static func manyPlaceholdersZero(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Float, _ p9: Any, _ p10: Int, _ p11: Float) -> String {
+    return L10n.tr("Localizable", "many.placeholders.zero", String(describing: p1), p2, p3, p4, p5, p6, String(describing: p7), p8, String(describing: p9), p10, p11)
+  }
   /// Some Reserved Keyword there
   public static let settingsNavigationBarSelf = L10n.tr("Localizable", "settings.navigation-bar.self")
   /// DeepSettings
@@ -59,8 +67,6 @@ extension L10n {
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
-  static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
-  }()
+  static let bundle = Bundle(for: BundleToken.self)
 }
 // swiftlint:enable convenience_type

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Used constants:
 # - MIN_XCODE_VERSION
 
@@ -8,7 +10,7 @@ require 'open3'
 # Utility functions to run Xcode commands, extract versionning info and logs messages
 #
 class Utils
-  COLUMN_WIDTHS = [45, 12]
+  COLUMN_WIDTHS = [45, 12].freeze
 
   ## [ Run commands ] #########################################################
 
@@ -20,9 +22,9 @@ class Utils
   # run a command using xcrun and xcpretty if applicable
   def self.run(command, task, subtask = '', xcrun: false, formatter: :raw)
     commands = if xcrun
-                 [*command].map { |cmd| "#{version_select} xcrun #{cmd}" }
+                 Array(command).map { |cmd| "#{version_select} xcrun #{cmd}" }
                else
-                 [*command]
+                 Array(command)
                end
     case formatter
     when :xcpretty then xcpretty(commands, task, subtask)
@@ -41,7 +43,7 @@ class Utils
   end
 
   def self.podspec_version(file)
-    self.podspec_as_json(file)['version']
+    podspec_as_json(file)['version']
   end
 
   def self.podfile_lock_version(pod)
@@ -55,7 +57,7 @@ class Utils
     require 'yaml'
     stdout, _, _ = Open3.capture3('bundle', 'exec', 'pod', 'trunk', 'info', pod)
     stdout.sub!("\n#{pod}\n", '')
-    last_version_line = YAML.load(stdout).first['Versions'].last
+    last_version_line = YAML.safe_load(stdout).first['Versions'].last
     /^[0-9.]*/.match(last_version_line)[0] # Just the 'x.y.z' part
   end
 
@@ -66,7 +68,6 @@ class Utils
     plist = Plist.parse_xml("Resources/#{lib}-Info.plist")
     [plist['CFBundleVersion'], plist['CFBundleShortVersionString']]
   end
-
 
   def self.octokit_client
     token   = File.exist?('.apitoken') && File.read('.apitoken')
@@ -112,15 +113,15 @@ class Utils
 
   # format an info message in a 2 column table
   def self.table_info(label, msg)
-    puts "| #{label.ljust(COLUMN_WIDTHS[0])} | 👉  #{msg.ljust(COLUMN_WIDTHS[1]-4)} |"
+    puts "| #{label.ljust(COLUMN_WIDTHS[0])} | 👉  #{msg.ljust(COLUMN_WIDTHS[1] - 4)} |"
   end
 
   # format a result message in a 2 column table
   def self.table_result(result, label, error_msg)
     if result
-      puts "| #{label.ljust(COLUMN_WIDTHS[0])} | #{'✅'.ljust(COLUMN_WIDTHS[1]-1)} |"
+      puts "| #{label.ljust(COLUMN_WIDTHS[0])} | #{'✅'.ljust(COLUMN_WIDTHS[1] - 1)} |"
     else
-      puts "| #{label.ljust(COLUMN_WIDTHS[0])} | ❌  - #{error_msg.ljust(COLUMN_WIDTHS[1]-6)} |"
+      puts "| #{label.ljust(COLUMN_WIDTHS[0])} | ❌  - #{error_msg.ljust(COLUMN_WIDTHS[1] - 6)} |"
     end
     result
   end
@@ -130,7 +131,7 @@ class Utils
   # run a command, pipe output through 'xcpretty' and store the output in CI artifacts
   def self.xcpretty(cmd, task, subtask)
     name = (task.name + (subtask.empty? ? '' : "_#{subtask}")).gsub(/[:-]/, '_')
-    command = [*cmd].join(' && \\' + "\n")
+    command = Array(cmd).join(' && \\' + "\n")
 
     if ENV['CIRCLECI']
       Rake.sh "set -o pipefail && (\\\n#{command} \\\n) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\" | " \
@@ -146,7 +147,7 @@ class Utils
   # run a command and store the output in CI artifacts
   def self.plain(cmd, task, subtask)
     name = (task.name + (subtask.empty? ? '' : "_#{subtask}")).gsub(/[:-]/, '_')
-    command = [*cmd].join(' && \\' + "\n")
+    command = Array(cmd).join(' && \\' + "\n")
 
     if ENV['CIRCLECI']
       Rake.sh "set -o pipefail && (#{command}) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\""
@@ -179,7 +180,7 @@ class Utils
     return '' if version_req.satisfied_by? Gem::Version.new(current_xcode_version)
 
     supported_versions = all_xcode_versions.select { |app| version_req.satisfied_by?(app[:vers]) }
-    latest_supported_xcode = supported_versions.sort_by { |app| app[:vers] }.last
+    latest_supported_xcode = supported_versions.max_by { |app| app[:vers] }
 
     # Check if it's at least the right version
     if latest_supported_xcode.nil?
@@ -237,7 +238,7 @@ class String
   # only enable formatting if terminal supports it
   if `tput colors`.chomp.to_i >= 8
     def format(*styles)
-      styles.reduce('') { |r, s| r << "\e[#{FORMATTING[s]}m" } << "#{self}\e[0m"
+      styles.map { |s| "\e[#{FORMATTING[s]}m" }.join + self + "\e[0m"
     end
   else
     def format(*_styles)

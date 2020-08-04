@@ -1,0 +1,29 @@
+tables:
+- levels:
+    children:
+    - name: "apples"
+      strings:
+      - key: "apples.count"
+        name: "count"
+        translation: "Plural format key: \"%#@apples@\""
+        types:
+        - "Int"
+    - children:
+      - name: "event"
+        strings:
+        - key: "competition.event.number-of-matches"
+          name: "number-of-matches"
+          translation: "Plural format key: \"%#@Matches@\""
+          types:
+          - "Int"
+      name: "competition"
+    - children:
+      - name: "subscription"
+        strings:
+        - key: "feed.subscription.count"
+          name: "count"
+          translation: "Plural format key: \"%#@Subscriptions@\""
+          types:
+          - "Int"
+      name: "feed"
+  name: "Localizable"

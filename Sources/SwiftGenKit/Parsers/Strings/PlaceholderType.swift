@@ -15,8 +15,6 @@ extension Strings {
     case cString = "UnsafePointer<CChar>"
     case pointer = "UnsafeRawPointer"
 
-    static let unknown = pointer
-
     init?(formatChar char: Character) {
       guard let lcChar = String(char).lowercased().first else {
         return nil
@@ -48,7 +46,7 @@ extension Strings.PlaceholderType {
     // valid flags for float
     let patternFloat = "[aefg]"
     // like in "%3$" to make positional specifiers
-    let position = "([1-9]\\d*\\$)?"
+    let position = "(\\d+\\$)?"
     // precision like in "%1.2f"
     let precision = "[-+# 0]?\\d?(?:\\.\\d)?"
 
@@ -62,13 +60,15 @@ extension Strings.PlaceholderType {
     }
   }()
 
-  // "I give %d apples to %@" --> [.Int, .String]
-  static func placeholders(fromFormat formatString: String) throws -> [Strings.PlaceholderType] {
+  /// Extracts the list of PlaceholderTypes from a format key
+  ///
+  /// Example: "I give %d apples to %@" --> [.int, .string]
+  static func placeholderTypes(fromFormat formatString: String) throws -> [Strings.PlaceholderType] {
     let range = NSRange(location: 0, length: (formatString as NSString).length)
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier
     let chars = formatTypesRegEx.matches(in: formatString, options: [], range: range)
-      .map { match -> (String, Int?) in
+      .compactMap { match -> (String, Int?)? in
         let range: NSRange
         if match.range(at: 3).location != NSNotFound {
           // [dioux] are in range #3 because in #2 there may be length modifiers (like in "lld")
@@ -86,36 +86,52 @@ extension Strings.PlaceholderType {
         } else {
           // Remove the "$" at the end of the positional specifier, and convert to Int
           let posRange1 = NSRange(location: posRange.location, length: posRange.length - 1)
-          let pos = (formatString as NSString).substring(with: posRange1)
-          return (char, Int(pos))
+          let posString = (formatString as NSString).substring(with: posRange1)
+          let pos = Int(posString)
+          if let pos = pos, pos <= 0 {
+            return nil // Foundation renders "%0$@" not as a placeholder but as the "0@" literal
+          }
+          return (char, pos)
         }
       }
 
-    // enumerate the conversion specifiers and their optionally forced position
-    // and build the array of PlaceholderTypes accordingly
-    var list = [Strings.PlaceholderType]()
+    return try placeholderTypes(fromChars: chars)
+  }
+
+  /// Creates an array of `PlaceholderType` from an array of format chars and their optional positional specifier
+  ///
+  /// - Note: Any position that doesn't have a placeholder defined will be stripped out, shifting the position of
+  ///         the remaining placeholders. This is to match how Foundation behaves at runtime.
+  ///         i.e. a string of `"%2$@ %3$d"` will end up with `[.object, .int]` since no placeholder
+  ///         is defined for position 1.
+  /// - Parameter chars: An array of format chars and their optional positional specifier
+  /// - Throws: `Strings.ParserError.invalidPlaceholder` in case a `PlaceholderType` would be overwritten
+  /// - Returns: An array of `PlaceholderType`
+  private static func placeholderTypes(fromChars chars: [(String, Int?)]) throws -> [Strings.PlaceholderType] {
+    var list = [Int: Strings.PlaceholderType]()
     var nextNonPositional = 1
+
     for (str, pos) in chars {
-      if let char = str.first, let placeholderType = Strings.PlaceholderType(formatChar: char) {
-        let insertionPos: Int
-        if let pos = pos {
-          insertionPos = pos
-        } else {
-          insertionPos = nextNonPositional
-          nextNonPositional += 1
-        }
-        if insertionPos > 0 {
-          while list.count <= insertionPos - 1 {
-            list.append(.unknown)
-          }
-          let previous = list[insertionPos - 1]
-          guard previous == .unknown || previous == placeholderType else {
-            throw Strings.ParserError.invalidPlaceholder(previous: previous, new: placeholderType)
-          }
-          list[insertionPos - 1] = placeholderType
-        }
+      guard let char = str.first, let placeholderType = Strings.PlaceholderType(formatChar: char) else { continue }
+      let insertionPos: Int
+      if let pos = pos {
+        insertionPos = pos
+      } else {
+        insertionPos = nextNonPositional
+        nextNonPositional += 1
+      }
+      guard insertionPos > 0 else { continue }
+
+      if let existingEntry = list[insertionPos], existingEntry != placeholderType {
+        throw Strings.ParserError.invalidPlaceholder(previous: existingEntry, new: placeholderType)
+      } else {
+        list[insertionPos] = placeholderType
       }
     }
+
+    // Omit any holes (i.e. position without a placeholder defined)
     return list
+      .sorted { $0.0 < $1.0 } // Sort by key, i.e. the positional value
+      .map { $0.value }
   }
 }

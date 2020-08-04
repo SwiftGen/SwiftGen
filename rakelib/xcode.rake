@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Used constants:
 # - CONFIGURATION
 # - SCHEME_NAME

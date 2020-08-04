@@ -27,6 +27,10 @@ final class XCAssetsTests: XCTestCase {
         suffix: "-allValues"
       ),
       (
+        context: try StencilContext.enrich(context: context, parameters: ["bundle=ResourcesBundle.bundle"]),
+        suffix: "-customBundle"
+      ),
+      (
         context: try StencilContext.enrich(
           context: context,
           parameters: [

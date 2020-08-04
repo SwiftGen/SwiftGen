@@ -1,10 +1,14 @@
+# frozen_string_literal: true
+
 require 'yaml'
 
-COMPILATION_CONFIGURATION_FILE = 'compilation-configuration.yml'.freeze
-MODULE_INPUT_PATH = 'Tests/Fixtures/CompilationEnvironment/Modules'.freeze
-MODULE_OUTPUT_PATH = 'Tests/Fixtures/CompilationEnvironment'.freeze
-TOOLCHAIN = 'com.apple.dt.toolchain.XcodeDefault'.freeze
+COMPILATION_CONFIGURATION_FILE = 'compilation-configuration.yml'
+MODULE_INPUT_PATH = 'Tests/Fixtures/CompilationEnvironment/Modules'
+MODULE_OUTPUT_PATH = 'Tests/Fixtures/CompilationEnvironment'
+TOOLCHAIN = 'com.apple.dt.toolchain.XcodeDefault'
 
+# Define a Platform's associated sdk and target triple
+#
 class Platform
   private
 
@@ -24,9 +28,11 @@ class Platform
     'watchOS' => Platform.new('watchos', 'armv7k-apple-watchos5.0')
   }.freeze
 
-  SWIFT_VERSIONS = [4, 4.2, 5]
+  SWIFT_VERSIONS = [4, 4.2, 5].freeze
 end
 
+# Helper methods to manipulate Swift Modules
+#
 class Module
   def self.commands_for_file(file, platform)
     platform = Platform::ALL[platform]
@@ -40,23 +46,26 @@ class Module
     end
   end
 
-  def self.remove_swiftdoc()
+  def self.remove_swiftdoc
     Dir.glob("#{MODULE_OUTPUT_PATH}/*/*.swiftdoc").each do |file|
+      FileUtils.rm_rf(file)
+    end
+  end
+
+  def self.remove_swiftsourceinfo
+    Dir.glob("#{MODULE_OUTPUT_PATH}/*/*.swiftsourceinfo").each do |file|
       FileUtils.rm_rf(file)
     end
   end
 end
 
+# Loads the `COMPILATION_CONFIGURATION_FILE` YAML files
+# and use them to help determine the parameters to use when compiling a file
+#
 class CompilationConfiguration
-  public
-
   def self.load(folder)
     config_file = "#{folder}#{COMPILATION_CONFIGURATION_FILE}"
-    if File.file?(config_file)
-      YAML.load_file(config_file)
-    else
-      nil
-    end
+    YAML.load_file(config_file) if File.file?(config_file)
   end
 
   def commands_for_file(file)
@@ -66,18 +75,16 @@ class CompilationConfiguration
       swift_versions(filename).map do |swift_version|
         module_path = "#{MODULE_OUTPUT_PATH}/swift#{swift_version}/#{platform.sdk}"
         definitions = definitions(filename).join(' ')
-        extraFiles = files(filename).join(' ')
+        extra_files = files(filename).join(' ')
 
         %(--toolchain #{TOOLCHAIN} -sdk #{platform.sdk} swiftc -swift-version #{swift_version} ) +
           %(-typecheck -target "#{platform.target}" -I "#{module_path}" #{definitions} ) +
-          %(-module-name SwiftGen #{extraFiles} #{file})
+          %(-module-name SwiftGen #{extra_files} #{file})
       end
     end
   end
 
   private
-
-  attr_accessor :common, :file_specific
 
   def common
     @common || {}

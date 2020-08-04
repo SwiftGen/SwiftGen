@@ -1,0 +1,2 @@
+"duplicate" = "should not be parsed";
+"because" = "Localizable.strings from the root fixture has already been parsed";

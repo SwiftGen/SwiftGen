@@ -1,0 +1,150 @@
+tables:
+- levels:
+    children:
+    - name: "apples"
+      strings:
+      - key: "apples.count"
+        name: "count"
+        translation: "Plural format key: \"%#@apples@\""
+        types:
+        - "Int"
+    - name: "bananas"
+      strings:
+      - key: "bananas.owner"
+        name: "owner"
+        translation: "Those %d bananas belong to %@."
+        types:
+        - "Int"
+        - "String"
+    - children:
+      - name: "event"
+        strings:
+        - key: "competition.event.number-of-matches"
+          name: "number-of-matches"
+          translation: "Plural format key: \"%#@Matches@\""
+          types:
+          - "Int"
+      name: "competition"
+    - children:
+      - name: "subscription"
+        strings:
+        - key: "feed.subscription.count"
+          name: "count"
+          translation: "Plural format key: \"%#@Subscriptions@\""
+          types:
+          - "Int"
+      name: "feed"
+    - children:
+      - name: "placeholders"
+        strings:
+        - key: "many.placeholders.base"
+          name: "base"
+          translation: "%@ %d %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d"
+          types:
+          - "String"
+          - "Int"
+          - "Float"
+          - "Float"
+          - "Int"
+          - "Int"
+          - "String"
+          - "Float"
+          - "String"
+          - "Int"
+          - "Float"
+        - key: "many.placeholders.zero"
+          name: "zero"
+          translation: "%@ %d %0$@ %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@
+            %10$d"
+          types:
+          - "String"
+          - "Int"
+          - "Float"
+          - "Float"
+          - "Int"
+          - "Int"
+          - "String"
+          - "Float"
+          - "String"
+          - "Int"
+          - "Float"
+      name: "many"
+    - children:
+      - children:
+        - children:
+          - children:
+            - children:
+              - children:
+                - children:
+                  - children:
+                    - children:
+                      - children:
+                        - children:
+                          - name: "is"
+                            strings:
+                            - key: "settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep"
+                              name: "deep"
+                              translation: "DeepSettings"
+                          name: "this"
+                        name: "really"
+                      name: "no"
+                    name: "handle"
+                  name: "can"
+                name: "we"
+              name: "than"
+            name: "deeper"
+          - name: "even"
+            strings:
+            - key: "settings.navigation-bar.title.even.deeper"
+              name: "deeper"
+              translation: "Settings"
+          name: "title"
+        name: "navigation-bar"
+        strings:
+        - key: "settings.navigation-bar.self"
+          name: "self"
+          translation: "Some Reserved Keyword there"
+      - name: "user__profile_section"
+        strings:
+        - key: "settings.user__profile_section.footer_text"
+          name: "footer_text"
+          translation: "Here you can change some user profile settings."
+        - key: "settings.user__profile_section.HEADER_TITLE"
+          name: "HEADER_TITLE"
+          translation: "User Profile Settings"
+      name: "settings"
+    strings:
+    - key: "alert__message"
+      name: "alert__message"
+      translation: "Some alert body there"
+    - key: "alert__title"
+      name: "alert__title"
+      translation: "Title of the alert"
+    - key: "ObjectOwnership"
+      name: "ObjectOwnership"
+      translation: "These are %3$@'s %1$d %2$@."
+      types:
+      - "Int"
+      - "String"
+      - "String"
+    - key: "percent"
+      name: "percent"
+      translation: "This is a %% character."
+    - key: "private"
+      name: "private"
+      translation: "Hello, my name is %@ and I'm %d"
+      types:
+      - "String"
+      - "Int"
+    - key: "types"
+      name: "types"
+      translation: "Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString:
+        '%s', Pointer: '%p'"
+      types:
+      - "String"
+      - "CChar"
+      - "Int"
+      - "Float"
+      - "UnsafePointer<CChar>"
+      - "UnsafeRawPointer"
+  name: "Localizable"

@@ -62,7 +62,11 @@ import {{module}}
 {{accessModifier}} extension StoryboardType {
   static var storyboard: {{prefix}}Storyboard {
     let name = {% if isAppKit %}NSStoryboard.Name({% endif %}self.storyboardName{% if isAppKit %}){% endif %}
-    return {{prefix}}Storyboard(name: name, bundle: BundleToken.bundle)
+    {% if param.lookupFunction %}
+    return {{param.lookupFunction}}(name)
+    {% else %}
+    return {{prefix}}Storyboard(name: name, bundle: {{param.bundle|default:"BundleToken.bundle"}})
+    {% endif %}
   }
 }
 
@@ -89,6 +93,7 @@ import {{module}}
     return controller
   }
 }
+{% if not param.bundle and not param.lookupFunction %}
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
@@ -97,6 +102,7 @@ private final class BundleToken {
   }()
 }
 // swiftlint:enable convenience_type
+{% endif %}
 {% elif storyboards %}
 // Mixed AppKit and UIKit storyboard files found, please invoke swiftgen with these separately
 {% else %}

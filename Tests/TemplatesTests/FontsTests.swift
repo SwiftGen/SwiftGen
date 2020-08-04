@@ -13,6 +13,7 @@ final class FontsTests: XCTestCase {
   }
 
   // generate variations to test customname generation
+  // swiftlint:disable:next closure_body_length
   private let variations: VariationGenerator = { name, context in
     guard name == "defaults" else { return [(context: context, suffix: "")] }
 
@@ -22,8 +23,26 @@ final class FontsTests: XCTestCase {
         suffix: ""
       ),
       (
-        context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomFamily"]),
+        context: try StencilContext.enrich(context: context, parameters: ["bundle=ResourcesBundle.bundle"]),
+        suffix: "-customBundle"
+      ),
+      (
+        context: try StencilContext.enrich(
+          context: context,
+          parameters: [
+            "enumName=CustomFamily",
+            "fontTypeName=MyFontConvertible",
+            "fontAliasName=MyFont"
+          ]
+        ),
         suffix: "-customName"
+      ),
+      (
+        context: try StencilContext.enrich(
+          context: context,
+          parameters: ["lookupFunction=myFontFinder(name:family:path:)"]
+        ),
+        suffix: "-lookupFunction"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),

@@ -1,0 +1,11 @@
+
+# Mark some files as being "Generated" so they are not loaded by default in GitHub PRs
+/Tests/Fixtures/Generated/** linguist-generated
+/Tests/Fixtures/StencilContexts/** linguist-generated
+/Tests/Fixtures/Generated/**/compilation-configuration.yml -linguist-generated
+
+# Mark some files which are not really part of SwiftGen's codebase as "not detectable by linguist", so they are not counted in the repo's languages stats
+Rakefile -linguist-detectable
+rakelib/** -linguist-detectable
+/Scripts/** -linguist-detectable
+/Tests/Fixtures/**  -linguist-detectable

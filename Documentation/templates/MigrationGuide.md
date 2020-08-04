@@ -1,3 +1,9 @@
+# SwiftGen 6.3 Templates Migration Guide
+
+There are no major changes in the templates, only a small deprecation notice:
+
+In the `fonts` templates, we're deprecating the generated `Font` typealias. So if you were using it somewhere in your own code, you should instead create your own typealias, or use the platform-specific type such as `UIFont`/`NSFont`. The `Font` typealias will be removed in the next major release of SwiftGen.
+
 # SwiftGen 6.2 Templates Migration Guide
 
 ### Removed Swift 3 templates

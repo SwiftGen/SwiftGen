@@ -55,7 +55,7 @@ import Foundation
   {% endfor %}
 {% endmacro %}
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:disable nesting type_body_length type_name
+// swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 {% set enumName %}{{param.enumName|default:"L10n"}}{% endset %}
 {{accessModifier}} enum {{enumName}} {
   {% if tables.count > 1 or param.forceFileNameEnum %}
@@ -69,7 +69,7 @@ import Foundation
   {% endif %}
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:enable nesting type_body_length type_name
+// swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
 
 // MARK: - Implementation Details
 
@@ -78,18 +78,16 @@ extension {{enumName}} {
     {% if param.lookupFunction %}
     let format = {{ param.lookupFunction }}(key, table)
     {% else %}
-    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
+    let format = {{param.bundle|default:"BundleToken.bundle"}}.localizedString(forKey: key, value: nil, table: table)
     {% endif %}
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
-{% if not param.lookupFunction %}
+{% if not param.bundle and not param.lookupFunction %}
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
-  static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
-  }()
+  static let bundle = Bundle(for: BundleToken.self)
 }
 // swiftlint:enable convenience_type
 {% endif %}

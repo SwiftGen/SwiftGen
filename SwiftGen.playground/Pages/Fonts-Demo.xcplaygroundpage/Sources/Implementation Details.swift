@@ -15,7 +15,7 @@ public struct FontConvertible {
 
   public func font(size: CGFloat) -> Font {
     guard let font = Font(font: self, size: size) else {
-      fatalError("Unabble to initialize font '\(name)' (\(family))")
+      fatalError("Unable to initialize font '\(name)' (\(family))")
     }
     return font
   }

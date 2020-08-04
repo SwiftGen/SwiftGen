@@ -64,12 +64,23 @@ final class PlistTests: XCTestCase {
         suffix: ""
       ),
       (
+        context: try StencilContext.enrich(context: context, parameters: ["bundle=ResourcesBundle.bundle"]),
+        suffix: "-customBundle"
+      ),
+      (
         context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomPlist"]),
         suffix: "-customName"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
         suffix: "-forceFileNameEnum"
+      ),
+      (
+        context: try StencilContext.enrich(
+          context: context,
+          parameters: ["lookupFunction=myPlistFinder(path:)"]
+        ),
+        suffix: "-lookupFunction"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),

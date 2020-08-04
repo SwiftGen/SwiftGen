@@ -67,8 +67,11 @@ import Foundation
 // MARK: - Implementation Details
 
 private func objectFromJSON<T>(at path: String) -> T {
-  let bundle = BundleToken.bundle
-  guard let url = bundle.url(forResource: path, withExtension: nil),
+  {% if param.lookupFunction %}
+  guard let url = {{param.lookupFunction}}(path),
+  {% else %}
+  guard let url = {{param.bundle|default:"BundleToken.bundle"}}.url(forResource: path, withExtension: nil),
+  {% endif %}
     let json = try? JSONSerialization.jsonObject(with: Data(contentsOf: url), options: []),
     let result = json as? T else {
     fatalError("Unable to load JSON at path: \(path)")
@@ -90,6 +93,7 @@ private struct JSONDocument {
     return result
   }
 }
+{% if not param.bundle and not param.lookupFunction %}
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
@@ -98,6 +102,7 @@ private final class BundleToken {
   }()
 }
 // swiftlint:enable convenience_type
+{% endif %}
 {% else %}
 // No files found
 {% endif %}

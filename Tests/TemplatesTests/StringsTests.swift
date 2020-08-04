@@ -9,7 +9,15 @@ import XCTest
 
 final class StringsTests: XCTestCase {
   private enum Contexts {
-    static let all = ["empty", "localizable", "multiple"]
+    static let all = [
+      "empty",
+      "localizable",
+      "multiple",
+      "plurals",
+      "plurals-same-table",
+      "plurals-advanced",
+      "plurals-unsupported"
+    ]
   }
 
   // generate variations to test customname generation
@@ -20,6 +28,10 @@ final class StringsTests: XCTestCase {
       (
         context: context,
         suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["bundle=ResourcesBundle.bundle"]),
+        suffix: "-customBundle"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["enumName=XCTLoc"]),
@@ -54,6 +66,10 @@ final class StringsTests: XCTestCase {
       (
         context: context,
         suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["bundle=[ResourcesBundle bundle]"]),
+        suffix: "-customBundle"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["noComments"]),

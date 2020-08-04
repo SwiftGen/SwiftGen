@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>mixed.placeholders-and-variables.string-int</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%@ %#@has_rating@</string>
+		<key>has_rating</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>has no rating</string>
+			<key>one</key>
+			<string>has one rating</string>
+			<key>other</key>
+			<string>has %d ratings</string>
+		</dict>
+	</dict>
+	<key>mixed.placeholders-and-variables.string-positional2int</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%@ %2$#@has_rating@</string>
+		<key>has_rating</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>has no rating</string>
+			<key>one</key>
+			<string>has one rating</string>
+			<key>other</key>
+			<string>has %d ratings</string>
+		</dict>
+	</dict>
+	<key>mixed.placeholders-and-variables.string-positional3int</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%@ %3$#@has_rating@</string>
+		<key>has_rating</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>has no rating</string>
+			<key>one</key>
+			<string>has one rating</string>
+			<key>other</key>
+			<string>has %d ratings</string>
+		</dict>
+	</dict>
+	<key>mixed.placeholders-and-variables.positionalstring-positional3int</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%1$@ %3$#@has_rating@</string>
+		<key>has_rating</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>has no rating</string>
+			<key>one</key>
+			<string>has one rating</string>
+			<key>other</key>
+			<string>has %d ratings</string>
+		</dict>
+	</dict>
+	<key>multiple.placeholders-and-variables.int-string-string</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<!-- Your <Grocery> list contains <3 items. You should buy them> <today>. -->
+		<string>Your %3$@ list contains %1$#@first@ %2$@.</string>
+		<key>first</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>no items. Add one</string>
+			<key>one</key>
+			<string>one item. You should buy it</string>
+			<key>other</key>
+			<string>%1$d items. You should buy them</string>
+		</dict>
+	</dict>
+	<key>multiple.variables.three-variables-in-formatkey</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@files@ (%#@bytes@, %#@minutes@)</string>
+		<key>files</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d file remaining</string>
+			<key>other</key>
+			<string>%d files remaining</string>
+		</dict>
+		<key>bytes</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d byte</string>
+			<key>other</key>
+			<string>%d bytes</string>
+		</dict>
+		<key>minutes</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d minute</string>
+			<key>other</key>
+			<string>%d minutes</string>
+		</dict>
+	</dict>
+	<key>many.placeholders.plurals.base</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%@ - %#@d2@ - %#@f3@ - %5$#@d5@ - %04$#@f4@ - %6$#@d6@ - %007$@ - %8$3.2#@f8@ - %11$#@f11@ - %9$@ - %10$#@d10@</string>
+		<key>d2</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d two</string>
+			<key>other</key>
+			<string>%d twos</string>
+		</dict>
+		<key>f3</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>f</string>
+			<key>one</key>
+			<string>%f three</string>
+			<key>other</key>
+			<string>%f threes</string>
+		</dict>
+		<key>f4</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>f</string>
+			<key>one</key>
+			<string>%f four</string>
+			<key>other</key>
+			<string>%f fours</string>
+		</dict>
+		<key>d5</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d five</string>
+			<key>other</key>
+			<string>%d fives</string>
+		</dict>
+		<key>d6</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d six</string>
+			<key>other</key>
+			<string>%d sixes</string>
+		</dict>
+		<key>f8</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>f</string>
+			<key>one</key>
+			<string>%f eight</string>
+			<key>other</key>
+			<string>%f eights</string>
+		</dict>
+		<key>d10</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d ten</string>
+			<key>other</key>
+			<string>%d tens</string>
+		</dict>
+		<key>f11</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>f</string>
+			<key>one</key>
+			<string>%1.2f eleven</string>
+			<key>other</key>
+			<string>%1.2f elevens</string>
+		</dict>
+	</dict>
+	<key>many.placeholders.plurals.zero</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%@ - %#@d2@ - %0$#@zero@ - %#@f3@ - %5$#@d5@ - %04$#@f4@ - %6$#@d6@ - %007$@ - %8$3.2#@f8@ - %11$#@f11@ - %9$@ - %10$#@d10@</string>
+		<key>zero</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d zero</string>
+			<key>other</key>
+			<string>%d zeros</string>
+		</dict>
+		<key>d2</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d two</string>
+			<key>other</key>
+			<string>%d twos</string>
+		</dict>
+		<key>f3</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>f</string>
+			<key>one</key>
+			<string>%f three</string>
+			<key>other</key>
+			<string>%f threes</string>
+		</dict>
+		<key>f4</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>f</string>
+			<key>one</key>
+			<string>%f four</string>
+			<key>other</key>
+			<string>%f fours</string>
+		</dict>
+		<key>d5</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d five</string>
+			<key>other</key>
+			<string>%d fives</string>
+		</dict>
+		<key>d6</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d six</string>
+			<key>other</key>
+			<string>%d sixes</string>
+		</dict>
+		<key>f8</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>f</string>
+			<key>one</key>
+			<string>%f eight</string>
+			<key>other</key>
+			<string>%f eights</string>
+		</dict>
+		<key>d10</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d ten</string>
+			<key>other</key>
+			<string>%d tens</string>
+		</dict>
+		<key>f11</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>f</string>
+			<key>one</key>
+			<string>%1.2f eleven</string>
+			<key>other</key>
+			<string>%1.2f elevens</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

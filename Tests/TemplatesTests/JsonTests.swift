@@ -64,12 +64,23 @@ final class JsonTests: XCTestCase {
         suffix: ""
       ),
       (
+        context: try StencilContext.enrich(context: context, parameters: ["bundle=ResourcesBundle.bundle"]),
+        suffix: "-customBundle"
+      ),
+      (
         context: try StencilContext.enrich(context: context, parameters: ["enumName=CustomJSON"]),
         suffix: "-customname"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["forceFileNameEnum"]),
         suffix: "-forceFileNameEnum"
+      ),
+      (
+        context: try StencilContext.enrich(
+          context: context,
+          parameters: ["lookupFunction=myJSONFinder(path:)"]
+        ),
+        suffix: "-lookupFunction"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),

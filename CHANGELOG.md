@@ -2,6 +2,47 @@
 
 ---
 
+## 6.3.0
+
+### Deprecations
+
+* Fonts: the generated `Font` typealias (to `UIFont`/`NSFont`) is deprecated and will be removed in the next major release.  
+  [David Jennes](https://github.com/djbe)
+  [#728](https://github.com/SwiftGen/SwiftGen/pull/728)
+
+### New Features
+
+* Strings: support for plurals declared in `.stringsdict` files.  
+  [Florian Fittschen](https://github.com/ffittschen)
+  [#184](https://github.com/SwiftGen/SwiftGen/issues/184)
+  [#634](https://github.com/SwiftGen/SwiftGen/pull/634)
+* Fonts: the templates now support a new `fontTypeName` template parameter that you can use to change the name of the `struct` representing a font to something else.  
+  [David Jennes](https://github.com/djbe)
+  [#728](https://github.com/SwiftGen/SwiftGen/pull/728)
+* Fonts: the templates now support a new `fontAliasName` that you can use to change the `typealias`'s name from `Font` to something else. For example: this is useful when working with SwiftUI which already defines a `Font` type. Note that as this `typealias` is deprecated (see deprecations above), this template parameter will also be removed in the next major release.  
+  [David Jennes](https://github.com/djbe)
+  [#647](https://github.com/SwiftGen/SwiftGen/issues/647)
+  [#728](https://github.com/SwiftGen/SwiftGen/pull/728)
+* CoreData: Deprecates `fetchRequest()` and adds `makeFetchRequest()` to avoid ambiguous function usage.  
+  [David Rothera](https://github.com/davidrothera)
+  [#726](https://github.com/SwiftGen/SwiftGen/pull/726)
+* XCAssets: image assets now load faster on macOS if they're in the `main` bundle. MacOS only provides a caching mechanism for images in the `main` bundle, for other cases you may need to provide your own caching mechanism as needed.  
+  [David Jennes](https://github.com/djbe)
+  [#648](https://github.com/SwiftGen/SwiftGen/issues/648)
+  [#733](https://github.com/SwiftGen/SwiftGen/pull/733)
+* Fonts/IB/JSON/Plist/Strings/XCAssets: all templates that load data at runtime from a bundle now support a `bundle` template parameter, which you can use to override the bundle from which resources are loaded. Check out the [template specific documentation](Documentation/templates/) for more information. For an in-depth explanation, also check the [customize loading of resources](Documentation/Articles/Customize-loading-of-resources.md) article.  
+  [David Jennes](https://github.com/djbe)
+  [#737](https://github.com/SwiftGen/SwiftGen/pull/737)
+* Fonts/IB/JSON/Plist: Similar to the `strings` templates, these templates now support a `lookupFunction` template parameter, which allows you to provide your own resource lookup mechanism at runtime. Check the [template specific documentation](Documentation/templates/) for more information. For an in-depth explanation, also check the [customize loading of resources](Documentation/Articles/Customize-loading-of-resources.md) article.  
+  [David Jennes](https://github.com/djbe)
+  [#738](https://github.com/SwiftGen/SwiftGen/pull/738)
+
+### Bug Fixes
+
+* Strings: fix incorrect interpretation of format placeholders when there were missing positional parameters (e.g. `"%2$@"` without a `%1$…` defined).  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#634](https://github.com/SwiftGen/SwiftGen/pull/634)
+
 ## 6.2.1
 
 There are no major changes in this release, although JSON & Plist template writers may want to read the [small migration guide](Documentation/SwiftGenKit%20Contexts/MigrationGuide.md##swiftgen-621-migration-guide) to prepare for upcoming context changes.
@@ -23,7 +64,7 @@ There are no major changes in this release, although JSON & Plist template write
   [@fjtrujy](https://github.com/fjtrujy)
 * Avoid breaking the system swift installation when installing SwiftGen via Homebrew on macOS 10.14.4 or higher.  
   [David Jennes](https://github.com/djbe)
-  [#686](https://github.com/SwiftGen/SwiftGen/issue/686)
+  [#686](https://github.com/SwiftGen/SwiftGen/issues/686)
   [#730](https://github.com/SwiftGen/SwiftGen/pull/730)
 
 ### Internal Changes

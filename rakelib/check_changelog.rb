@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This analyze the CHANGELOG.md file and report warnings on its content
 #
 # It checks:
@@ -11,9 +13,12 @@ def check_changelog
   current_repo = File.basename(`git remote get-url origin`.chomp, '.git').freeze
   slug_re = '([a-zA-Z]*/[a-zA-Z]*)'
   links = %r{\[#{slug_re}?\#([0-9]+)\]\(https://github.com/#{slug_re}/(issues|pull)/([0-9]+)\)}
+  links_typos = %r{https://github.com/#{slug_re}/(issue|pulls)/([0-9]+)}
+
   all_warnings = []
   inside_entry = false
   last_line_has_correct_ending = false
+
   File.readlines('CHANGELOG.md').each_with_index do |line, idx|
     line.chomp! # Remove \n the end, it's easier for checks below
     was_inside_entry = inside_entry
@@ -35,7 +40,7 @@ def check_changelog
     #   should be considered as not needing the '.  ' ending.
     last_line_has_correct_ending = line.end_with?('.  ') || line.end_with?('/CHANGELOG.md)')
 
-    # Now, check that links [#nn](…/nn) have matching numbers in link title & URL
+    # Now, check that links [#nn](.../nn) have matching numbers in link title & URL
     wrong_links = line.scan(links).reject do |m|
       slug = m[0] || "SwiftGen/#{current_repo}"
       (slug == m[2]) && (m[1] == m[4])
@@ -43,7 +48,13 @@ def check_changelog
     all_warnings.concat Array(wrong_links.map do |m|
       link_text = "#{m[0]}##{m[1]}"
       link_url = "#{m[2]}##{m[4]}"
-      { line: idx+1, message: "Link text is #{link_text} but links points to #{link_url}." }
+      { line: idx + 1, message: "Link text is #{link_text} but links points to #{link_url}." }
+    end)
+
+    # Flag common typos in GitHub issue/PR URLs
+    typo_links = line.scan(links_typos)
+    all_warnings.concat Array(typo_links.map do |_|
+      { line: idx + 1, message: 'This looks like a GitHub link URL with a typo. Issue links should use `/issues/123` (plural) and PR links should use `/pull/123` (singular).' }
     end)
   end
   all_warnings

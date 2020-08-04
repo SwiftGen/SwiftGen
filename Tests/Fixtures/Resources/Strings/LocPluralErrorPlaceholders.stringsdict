@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>plural.wrong-positional-value</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%@ of %@ %2$#@has_rating@</string>
+		<key>has_rating</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>has no rating</string>
+			<key>one</key>
+			<string>has one rating</string>
+			<key>other</key>
+			<string>has %d ratings</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,13 @@
+tables:
+- levels:
+    children:
+    - children:
+      - name: "placeholders-in-variable-rule"
+        strings:
+        - key: "unsupported-use.placeholders-in-variable-rule.string-int"
+          name: "string-int"
+          translation: "Plural format key: \"%#@elements@\""
+          types:
+          - "Int"
+      name: "unsupported-use"
+  name: "LocPluralUnsupported"

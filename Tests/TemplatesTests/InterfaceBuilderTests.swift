@@ -13,7 +13,7 @@ class InterfaceBuilderTests: XCTestCase {
   }
 
   // swiftlint:disable:next closure_body_length
-  let variations: VariationGenerator = { name, bareContext in
+  private let commonVariations: VariationGenerator = { name, bareContext in
     guard name == "all" else { return [(context: bareContext, suffix: "")] }
 
     // Our target (for testing) is "SwiftGen"
@@ -77,5 +77,39 @@ class InterfaceBuilderTests: XCTestCase {
         suffix: "-publicAccess"
       )
     ]
+  }
+
+  private(set) lazy var sceneVariations: VariationGenerator = { name, bareContext in
+    guard name == "all" else { return [(context: bareContext, suffix: "")] }
+
+    // Our target (for testing) is "SwiftGen"
+    let context = try StencilContext.enrich(
+      context: bareContext,
+      parameters: [],
+      environment: ["PRODUCT_MODULE_NAME": "SwiftGen"]
+    )
+
+    return try self.commonVariations(name, bareContext) + [
+      // test: bundle parameter
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["bundle=ResourcesBundle.bundle"]),
+        suffix: "-customBundle"
+      ),
+
+      // test: lookup function parameter
+      (
+        context: try StencilContext.enrich(
+          context: context,
+          parameters: ["lookupFunction=myStoryboardFinder(name:)"]
+        ),
+        suffix: "-lookupFunction"
+      )
+    ]
+  }
+
+  private(set) lazy var segueVariations: VariationGenerator = { name, bareContext in
+    guard name == "all" else { return [(context: bareContext, suffix: "")] }
+
+    return try self.commonVariations(name, bareContext)
   }
 }

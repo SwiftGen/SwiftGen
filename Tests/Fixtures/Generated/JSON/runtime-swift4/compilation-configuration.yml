@@ -3,3 +3,10 @@ common:
   swift_versions:
     - 4
     - 4.2
+file_specific:
+  all-customBundle.swift:
+    files:
+      - Common-CustomBundle.swift
+  all-lookupFunction.swift:
+    files:
+      - Common-LookupFunction.swift
