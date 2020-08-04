@@ -176,8 +176,8 @@ namespace :release do
       formula = File.read(formula_file)
 
       new_formula = formula
-                    .gsub(/(:tag\s+=>\s+)".*"/, %(\\1"#{tag}"))
-                    .gsub(/(:revision\s+=>\s+)".*"/, %(\\1"#{revision}"))
+                    .gsub(/(tag:\s+)".*"/, %(\\1"#{tag}"))
+                    .gsub(/(revision:\s+)".*"/, %(\\1"#{revision}"))
       File.write(formula_file, new_formula)
 
       Utils.print_info 'Formula has been auto-updated. Do you need to also do manual updates to it before continuing [y/n]?'
