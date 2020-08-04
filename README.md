@@ -115,7 +115,6 @@ swiftgen …
 To install SwiftGen via [Mint](https://github.com/yonaskolb/Mint), simply use:
 
 ```sh
-$ brew install libxml2
 $ mint install SwiftGen/SwiftGen
 ```
 ---

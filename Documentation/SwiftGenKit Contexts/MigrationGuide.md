@@ -26,13 +26,13 @@ The parser will no longer normalize string keys, which can lead to duplicate key
 
 SwiftGenKit will no longer consolidate these into one "abcNews" case. It is up to the user to fix this inconsistent casing in their `strings` files, or to adapt a custom template to take that into consideration.
 
-</details>
-
 ## Changes for template writers
 
 ### XCAssets
 
 Groups now have an extra attribute `isNamespaced` that reflects the "provides namespace" setting in Xcode.
+
+</details>
 
 # SwiftGenKit 2.0 (SwiftGen 5.0) Migration Guide
 

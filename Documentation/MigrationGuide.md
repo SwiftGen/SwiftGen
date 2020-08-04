@@ -34,15 +34,19 @@ The `swiftgen <parser>` commands will be completely removed in SwiftGen 7.0, onl
 The command to manage templates (list bundled templates, print their content to generate custom templates, open documentation…) has been renamed `swiftgen template` (singular).
 
 `swiftgen templates` (plural) is thus deprecated and will be removed in SwiftGen 7.0.
+
+## Template changes
+
+With Xcode dropping support for Swift 3, we've decided to remove the corresponding bundled templates. For these and other template changes, read the [templates Migration Guide](templates/MigrationGuide.md#swiftgen-62-migration-guide).
  
 # Migrating to SwiftGen 6.0
+
+<details>
+<summary>Migration Guide</summary>
 
 If you're migrating from SwiftGen 5.x to SwiftGen 6.0, there might be some migration steps you'll need to use.
 
 Below is a list of pointers to help you migrate to the new SwiftGen 6.0.
-
-<details>
-<summary>Migration Guide</summary>
 
 ## `storyboards` command has been renamed
 
