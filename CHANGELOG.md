@@ -16,7 +16,7 @@ _None_
 
 * .swift-version: fix .swift-version with Swift 5.0 to build in 6.2.0 or later.  
   [@cfiken](https://github.com/cfiken)
-  [#764](https://github.com/SwiftGen/SwiftGen/issue/764)
+  [#764](https://github.com/SwiftGen/SwiftGen/issues/764)
 
 ### Internal Changes
 
