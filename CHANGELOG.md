@@ -14,7 +14,7 @@ _None_
 
 ### Bug Fixes
 
-* .swift-version: fix .swift-version with Swift 5.2 to build in 6.2.0 or later.  
+* Update the Swift version in `.swift-version` so that the right version is used when building manually (using `swiftenv`).  
   [@cfiken](https://github.com/cfiken)
   [#764](https://github.com/SwiftGen/SwiftGen/issues/764)
 
