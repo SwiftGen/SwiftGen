@@ -14,7 +14,9 @@ _None_
 
 ### Bug Fixes
 
-_None_
+* Update the Swift version in `.swift-version` so that the right version is used when building manually (using `swiftenv`).  
+  [@cfiken](https://github.com/cfiken)
+  [#764](https://github.com/SwiftGen/SwiftGen/issues/764)
 
 ### Internal Changes
 
