@@ -33,7 +33,7 @@ extension ColorsFileTypeParser {
 // MARK: - Private Helpers
 
 extension Colors {
-  static func parse(hex hexString: String, key: String? = nil, path: Path) throws -> UInt32 {
+  static func parse(hex hexString: String, key: String? = nil, path: Path, useArgb: Bool = false) throws -> UInt32 {
     let scanner = Scanner(string: hexString)
 
     let prefixLen: Int
@@ -54,6 +54,9 @@ extension Colors {
     if len == 6 {
       // There were no alpha component, assume 0xff
       value = (value << 8) | 0xff
+    } else if len == 8 && useArgb {
+      // When using argb, the alpha component should be moved to the back
+      value = (value << 8) | (value >> 24)
     }
 
     return value
