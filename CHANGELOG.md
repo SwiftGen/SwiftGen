@@ -10,7 +10,10 @@ _None_
 
 ### New Features
 
-_None_
+* Colors: the XML parser now accepts a `argb` option, used to change the color format to ARGB instead of RGBA. The default equals `false`.
+  [@kevinstier](https://github.com/kevinstier)
+  [#562](https://github.com/SwiftGen/SwiftGen/issues/562)
+  [#768](https://github.com/SwiftGen/SwiftGen/pull/768)
 
 ### Bug Fixes
 
@@ -926,7 +929,7 @@ Note: The next minor version will focus on bringing more documentation for all t
   [Ignacio Romero Zurbuchen](https://github.com/dzenbot)
   [HanxuanZhou](https://github.com/GenoZhou)
   [Syo Ikeda](https://github.com/ikesyo)
-  
+
 
 ## 3.0.0
 
