@@ -29,6 +29,14 @@ public enum Colors {
     }
   }
 
+  public enum Option {
+    static let argb = ParserOption(
+      key: "argb",
+      defaultValue: false,
+      help: "Use argb when the alpha component is leading the 6 character color component"
+    )
+  }
+
   public final class Parser: SwiftGenKit.Parser {
     private var parsers = [String: ColorsFileTypeParser.Type]()
     private let options: ParserOptionValues
