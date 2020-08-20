@@ -10,7 +10,7 @@ _None_
 
 ### New Features
 
-* Colors: the XML parser now accepts a `argb` option, used to change the color format to ARGB instead of RGBA. The default equals `false`.  
+* Colors: the XML parser now accepts a `colorFormat` option, used to change the color format. The default equals `rgba`.  
   [@kevinstier](https://github.com/kevinstier)
   [#562](https://github.com/SwiftGen/SwiftGen/issues/562)
   [#768](https://github.com/SwiftGen/SwiftGen/pull/768)
