@@ -116,7 +116,7 @@ final class ColorParserTests: XCTestCase {
   }
 
   func testStringWithAlphaArgb() throws {
-    let color = try Colors.parse(hex: "CCFFFFFF", path: #file, useArgb: true)
+    let color = try Colors.parse(hex: "CCFFFFFF", path: #file, format: .argb)
     XCTAssertEqual(color, 0xFFFFFFCC)
   }
 

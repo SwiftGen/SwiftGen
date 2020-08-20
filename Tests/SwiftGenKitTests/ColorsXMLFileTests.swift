@@ -21,12 +21,25 @@ final class ColorsXMLFileTests: XCTestCase {
 
   func testFileWithArgb() throws {
     let parser = try Colors.Parser()
-    let options = try ParserOptionValues(options: ["argb": true], available: Colors.XMLFileParser.allOptions)
+    let options = try ParserOptionValues(options: ["colorFormat": "argb"], available: Colors.XMLFileParser.allOptions)
     let xmlParser = Colors.XMLFileParser(options: options)
     parser.palettes = [try xmlParser.parseFile(at: Fixtures.path(for: "colors-argb.xml", sub: .colors))]
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "argb", sub: .colors)
+  }
+
+  func testFileWithUnsupportedColorFormat() {
+    do {
+      let options = try ParserOptionValues(options: ["colorFormat": "bad"], available: Colors.XMLFileParser.allOptions)
+      let xmlParser = Colors.XMLFileParser(options: options)
+      _ = try xmlParser.parseFile(at: Fixtures.path(for: "colors-argb.xml", sub: .colors))
+      XCTFail("Code did parse file successfully while it was expected to fail for unsupported color format")
+    } catch Colors.ParserError.unsupportedColorFormat {
+      // That's the expected exception we want to happen
+    } catch let error {
+      XCTFail("Unexpected error occured while parsing: \(error)")
+    }
   }
 
   func testFileWithBadSyntax() {
