@@ -10,7 +10,9 @@ _None_
 
 ### New Features
 
-_None_
+* Added `xcfilelist` subcommand to generated input and output file lists to be used with Xcode's Run Script build phase.  
+  [@CraigSiemens](https://github.com/CraigSiemens)
+  [#441](https://github.com/SwiftGen/SwiftGen/issues/441)
 
 ### Bug Fixes
 
