@@ -47,6 +47,8 @@ let main = Group {
     }
   }
 
+  $0.addCommand("xcfilelist", "generates xcfilelists based on the configuration file ", XCFileListCLI.generate)
+
   // Deprecated: Remove this in SwiftGen 7.0
   $0.group("templates", "DEPRECATED - use `template` subcommand instead") {
     $0.addDeprecatedCommand("list", replacement: "template list", TemplateCLI.list)
