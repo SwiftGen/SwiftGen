@@ -19,16 +19,16 @@ enum XCFileListCLI {
       validator: checkPath(type: "config file") { $0.isFile }
     )
 
-    static let inputs = Option<Path>(
+    static let inputs = Option<Path?>(
       "inputs",
-      default: "./swiftgen-input.xcfilelist",
+      default: nil,
       flag: "i",
       description: "Path to write the xcfilelist for the input files"
     )
 
-    static let outputs = Option<Path>(
+    static let outputs = Option<Path?>(
       "outputs",
-      default: "./swiftgen-output.xcfilelist",
+      default: nil,
       flag: "o",
       description: "Path to write the xcfilelist for the output files"
     )
@@ -42,8 +42,17 @@ enum XCFileListCLI {
     try ErrorPrettifier.execute {
       let config = try Config(file: configPath)
 
-      try writeInputsXCFileList(for: config, to: inputPath)
-      try writeOutputsXCFileList(for: config, to: outputPath)
+      if let inputPath = inputPath {
+        try writeInputsXCFileList(for: config, to: inputPath)
+      }
+
+      if let outputPath = outputPath {
+        try writeOutputsXCFileList(for: config, to: outputPath)
+      }
+
+      if inputPath == nil, outputPath == nil {
+        logMessage(.error, "An input or output path must be provided.")
+      }
     }
   }
 
@@ -65,12 +74,15 @@ enum XCFileListCLI {
     try path.write(content)
   }
 
-  private static func pathsByCommand(for config: Config, paths: (ConfigEntry) -> [Path]) -> [String: Set<Path>] {
+  private static func pathsByCommand(
+    for config: Config,
+    pathsForEntry: (ConfigEntry) -> [Path]
+  ) -> [String: Set<Path>] {
     var pathsByCommand: [String: Set<Path>] = [:]
 
     for (command, var entry) in config.commands {
       entry.makeRelativeTo(inputDir: config.inputDir, outputDir: config.outputDir)
-      pathsByCommand[command.name, default: []].formUnion(paths(entry))
+      pathsByCommand[command.name, default: []].formUnion(pathsForEntry(entry))
     }
 
     return pathsByCommand
