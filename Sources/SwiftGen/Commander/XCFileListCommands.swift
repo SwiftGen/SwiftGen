@@ -51,7 +51,7 @@ enum XCFileListCLI {
       }
 
       if inputPath == nil, outputPath == nil {
-        logMessage(.error, "An input or output path must be provided.")
+        logMessage(.error, "You must provide the path of an input or output xcfilelist (or both).")
       }
     }
   }

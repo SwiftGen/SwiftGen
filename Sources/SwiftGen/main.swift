@@ -48,7 +48,7 @@ let main = Group {
   }
 
   $0.group("xcfilelist", "manage xcfilelists") {
-    $0.addCommand("generate", "generates xcfilelists based on the configuration file", XCFileListCLI.generate)
+    $0.addCommand("generate", "generates xcfilelists based on the configuration file, for use in an Xcode build step that executes `swiftgen config run`", XCFileListCLI.generate)
   }
 
   // Deprecated: Remove this in SwiftGen 7.0
