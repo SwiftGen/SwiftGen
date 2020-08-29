@@ -47,7 +47,7 @@ import Foundation
   }
 
   {{accessModifier}} func url(locale: Locale?) -> URL {
-    let bundle = BundleToken.bundle
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
     let url = bundle.url(forResource: name, withExtension: ext, subdirectory: path, localization: locale?.identifier)
     guard let result = url else {
       let file = name + (ext ? "." + ext : "")
@@ -61,7 +61,7 @@ import Foundation
   }
 
   {{accessModifier}} func path(locale: Locale?) -> String {
-    let bundle = BundleToken.bundle
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
     let path = bundle.path(forResource: name, ofType: ext, inDirectory: path, forLocalization: locale?.identifier)
     guard let result = path else {
       let file = name + (ext ? "." + ext : "")
@@ -70,12 +70,14 @@ import Foundation
     return result
   }
 }
+{% if not param.bundle %}
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = Bundle(for: BundleToken.self)
 }
 // swiftlint:enable convenience_type
+{% endif %}
 {% else %}
 // No files found
 {% endif %}
