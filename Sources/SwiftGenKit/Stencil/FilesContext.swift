@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import PathKit
 
 extension Files.Parser {
   public func stencilContext() -> [String: Any] {
@@ -21,7 +22,7 @@ extension Files.Parser {
     [
       "name": file.name,
       "ext": file.ext ?? "",
-      "path": file.path,
+      "path": file.path.joined(separator: Path.separator),
       "mimeType": file.mimeType
     ]
   }

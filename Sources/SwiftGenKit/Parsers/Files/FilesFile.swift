@@ -11,7 +11,7 @@ extension Files {
   struct File {
     let name: String
     let ext: String?
-    let path: String
+    let path: [String]
     let mimeType: String
 
     init(path: Path, relativeTo parent: Path? = nil) throws {
@@ -23,9 +23,9 @@ extension Files {
       self.name = path.lastComponentWithoutExtension
       if let relative = parent.flatMap({ path.relative(to: $0) })?.parent(),
         relative != "." {
-        self.path = relative.string
+        self.path = Array(relative.components.dropFirst())
       } else {
-        self.path = ""
+        self.path = [""]
       }
 
       if let ext = self.ext,
