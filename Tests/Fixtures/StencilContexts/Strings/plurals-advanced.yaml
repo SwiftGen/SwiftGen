@@ -1,0 +1,89 @@
+tables:
+- levels:
+    children:
+    - children:
+      - children:
+        - name: "plurals"
+          strings:
+          - key: "many.placeholders.plurals.base"
+            name: "base"
+            translation: "Plural format key: \"%@ - %#@d2@ - %#@f3@ - %5$#@d5@ - %04$#@f4@
+              - %6$#@d6@ - %007$@ - %8$3.2#@f8@ - %11$#@f11@ - %9$@ - %10$#@d10@\""
+            types:
+            - "String"
+            - "Int"
+            - "Float"
+            - "Float"
+            - "Int"
+            - "Int"
+            - "String"
+            - "String"
+            - "Int"
+            - "Float"
+          - key: "many.placeholders.plurals.zero"
+            name: "zero"
+            translation: "Plural format key: \"%@ - %#@d2@ - %0$#@zero@ - %#@f3@ -
+              %5$#@d5@ - %04$#@f4@ - %6$#@d6@ - %007$@ - %8$3.2#@f8@ - %11$#@f11@
+              - %9$@ - %10$#@d10@\""
+            types:
+            - "String"
+            - "Int"
+            - "Float"
+            - "Float"
+            - "Int"
+            - "Int"
+            - "String"
+            - "String"
+            - "Int"
+            - "Float"
+        name: "placeholders"
+      name: "many"
+    - children:
+      - name: "placeholders-and-variables"
+        strings:
+        - key: "mixed.placeholders-and-variables.positionalstring-positional3int"
+          name: "positionalstring-positional3int"
+          translation: "Plural format key: \"%1$@ %3$#@has_rating@\""
+          types:
+          - "String"
+          - "Int"
+        - key: "mixed.placeholders-and-variables.string-int"
+          name: "string-int"
+          translation: "Plural format key: \"%@ %#@has_rating@\""
+          types:
+          - "String"
+          - "Int"
+        - key: "mixed.placeholders-and-variables.string-positional2int"
+          name: "string-positional2int"
+          translation: "Plural format key: \"%@ %2$#@has_rating@\""
+          types:
+          - "String"
+          - "Int"
+        - key: "mixed.placeholders-and-variables.string-positional3int"
+          name: "string-positional3int"
+          translation: "Plural format key: \"%@ %3$#@has_rating@\""
+          types:
+          - "String"
+          - "Int"
+      name: "mixed"
+    - children:
+      - name: "placeholders-and-variables"
+        strings:
+        - key: "multiple.placeholders-and-variables.int-string-string"
+          name: "int-string-string"
+          translation: "Plural format key: \"Your %3$@ list contains %1$#@first@ %2$@.\""
+          types:
+          - "Int"
+          - "String"
+          - "String"
+      - name: "variables"
+        strings:
+        - key: "multiple.variables.three-variables-in-formatkey"
+          name: "three-variables-in-formatkey"
+          translation: "Plural format key: \"%#@files@ (%#@bytes@, %#@minutes@)\""
+          types:
+          - "Int"
+          - "Int"
+          - "Int"
+      name: "multiple"
+  name: "LocPluralAdvanced"

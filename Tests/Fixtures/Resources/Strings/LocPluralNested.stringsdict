@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>nested.formatkey-in-variable</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@geese@</string>
+		<key>geese</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>A goose landed on %#@goose_fields@</string>
+			<key>other</key>
+			<string>%d geese landed on %#@geese_fields@</string>
+		</dict>
+		<key>goose_fields</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>its own field</string>
+			<key>other</key>
+			<string>its own %d fields</string>
+		</dict>
+		<key>geese_fields</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>their shared field</string>
+			<key>other</key>
+			<string>their %d fields</string>
+		</dict>
+	</dict>
+	<key>nested.formatkey-in-variable-deep</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%1$#@first_level@</string>
+		<key>first_level</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>One first level %2$#@second_level@</string>
+			<key>other</key>
+			<string>%1$d first levels %2$#@second_levels@</string>
+		</dict>
+		<key>second_level</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>has one second level and %3$#@third_level@</string>
+			<key>other</key>
+			<string>has %2$d second levels and %3$#@third_levels@</string>
+		</dict>
+		<key>second_levels</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>have one second level and %3$#@third_level@</string>
+			<key>other</key>
+			<string>have %2$d second levels and %3$#@third_levels@</string>
+		</dict>
+		<key>third_level</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>has one third level</string>
+			<key>other</key>
+			<string>has %3$d third levels</string>
+		</dict>
+		<key>third_levels</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>have one third level</string>
+			<key>other</key>
+			<string>have %3$d third levels</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

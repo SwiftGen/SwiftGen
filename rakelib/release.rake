@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Used constants:
 # _none_
 
@@ -5,13 +7,12 @@ require 'net/http'
 require 'uri'
 require 'open3'
 
-def first_match_in_file(file, re)
-   File.foreach(file) do |line|
-     m = re.match(line)
-     return m if m
-   end
-   return nil
- end
+def first_match_in_file(file, regexp)
+  File.foreach(file) do |line|
+    m = regexp.match(line)
+    return m if m
+  end
+end
 
 ## [ Release a new version ] ##################################################
 
@@ -42,8 +43,8 @@ namespace :release do
 
     results << Utils.table_result(
       sg_version == sgk_version,
-      "SwiftGen & SwiftGenKit versions equal",
-      "Please ensure SwiftGen & SwiftGenKit use the same version numbers"
+      'SwiftGen & SwiftGenKit versions equal',
+      'Please ensure SwiftGen & SwiftGenKit use the same version numbers'
     )
 
     # Check if version matches the SwiftGen-Info.plist
@@ -68,7 +69,7 @@ namespace :release do
     results << Utils.table_result(
       lock_version == pod_version,
       "StencilSwiftKit up-to-date (latest: #{pod_version})",
-      "Please update StencilSwiftKit to latest version in your Podfile"
+      'Please update StencilSwiftKit to latest version in your Podfile'
     )
 
     # Check if entry present in CHANGELOG
@@ -87,7 +88,7 @@ namespace :release do
     )
 
     # Check README instructions
-    readme_pod_version = first_match_in_file('README.md', /pod 'SwiftGen', '(.*)'/) || ['0.0','0.0']
+    readme_pod_version = first_match_in_file('README.md', /pod 'SwiftGen', '(.*)'/) || ['0.0', '0.0']
     readme_requirement = Gem::Requirement.new(readme_pod_version[1])
     readme_requirement_ok = readme_requirement.satisfied_by?(Gem::Version.new(sg_version))
     results << Utils.table_result(
@@ -118,7 +119,7 @@ namespace :release do
     yield req if block_given?
     req.basic_auth 'SwiftGen', File.read('.apitoken').chomp
 
-    response = Net::HTTP.start(uri.host, uri.port, :use_ssl => (uri.scheme == 'https')) do |http|
+    response = Net::HTTP.start(uri.host, uri.port, use_ssl: (uri.scheme == 'https')) do |http|
       http.request(req)
     end
     unless response.code == '201'
@@ -138,7 +139,7 @@ namespace :release do
     puts changelog
 
     json = post('https://api.github.com/repos/SwiftGen/SwiftGen/releases', 'application/json') do |req|
-      req.body = { :tag_name => v, :name => v, :body => changelog, :draft => false, :prerelease => false }.to_json
+      req.body = { tag_name: v, name: v, body: changelog, draft: false, prerelease: false }.to_json
     end
 
     upload_url = json['upload_url'].gsub(/\{.*\}/, "?name=swiftgen-#{v}.zip")
@@ -175,13 +176,13 @@ namespace :release do
       formula = File.read(formula_file)
 
       new_formula = formula
-                    .gsub(/(:tag\s+=>\s+)".*"/, %(\\1"#{tag}"))
-                    .gsub(/(:revision\s+=>\s+)".*"/, %(\\1"#{revision}"))
+                    .gsub(/(tag:\s+)".*"/, %(\\1"#{tag}"))
+                    .gsub(/(revision:\s+)".*"/, %(\\1"#{revision}"))
       File.write(formula_file, new_formula)
 
-      Utils.print_info "Formula has been auto-updated. Do you need to also do manual updates to it before continuing [y/n]?"
+      Utils.print_info 'Formula has been auto-updated. Do you need to also do manual updates to it before continuing [y/n]?'
       if STDIN.gets.chomp.downcase == 'y'
-        sh "open", formula_file
+        sh 'open', formula_file
         puts "Once you've finished editing the formula file, press enter to continue."
         STDIN.gets.chomp
       end
@@ -196,8 +197,11 @@ namespace :release do
       Utils.print_header 'Pushing to Homebrew'
       sh "git add #{formula_file}"
       sh "git commit -m 'swiftgen #{tag}'"
+      # Add remote pointing to our fork, if it doesn't exist yet, then push the new branch to it before opening the PR
+      sh 'git remote add SwiftGen https://github.com/SwiftGen/homebrew-core 2>/dev/null || true'
       sh "git push -u SwiftGen swiftgen-#{tag}"
       sh "open 'https://github.com/Homebrew/homebrew-core/compare/master...SwiftGen:swiftgen-#{tag}?expand=1'"
+      sh 'git checkout master'
     end
   end
 end

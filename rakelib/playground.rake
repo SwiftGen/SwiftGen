@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Used constants:
 # _none_
 

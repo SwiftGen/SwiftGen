@@ -8,6 +8,22 @@
 
 _None_
 
+### New Features
+
+_None_
+
+### Bug Fixes
+
+* Update the Swift version in `.swift-version` so that the right version is used when building manually (using `swiftenv`).  
+  [@cfiken](https://github.com/cfiken)
+  [#764](https://github.com/SwiftGen/SwiftGen/issues/764)
+
+### Internal Changes
+
+_None_
+
+## 6.3.0
+
 ### Deprecations
 
 * Fonts: the generated `Font` typealias (to `UIFont`/`NSFont`) is deprecated and will be removed in the next major release.  
@@ -16,6 +32,10 @@ _None_
 
 ### New Features
 
+* Strings: support for plurals declared in `.stringsdict` files.  
+  [Florian Fittschen](https://github.com/ffittschen)
+  [#184](https://github.com/SwiftGen/SwiftGen/issues/184)
+  [#634](https://github.com/SwiftGen/SwiftGen/pull/634)
 * Fonts: the templates now support a new `fontTypeName` template parameter that you can use to change the name of the `struct` representing a font to something else.  
   [David Jennes](https://github.com/djbe)
   [#728](https://github.com/SwiftGen/SwiftGen/pull/728)
@@ -30,20 +50,18 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#648](https://github.com/SwiftGen/SwiftGen/issues/648)
   [#733](https://github.com/SwiftGen/SwiftGen/pull/733)
-* Fonts/IB/JSON/Plist/Strings/XCAssets: all templates that load data at runtime from a bundle now support a `bundle` template parameter, which you can use to override the bundle from which resources are loaded. Check out the [template specific documentation](Documentation/templates/) for more information.  
+* Fonts/IB/JSON/Plist/Strings/XCAssets: all templates that load data at runtime from a bundle now support a `bundle` template parameter, which you can use to override the bundle from which resources are loaded. Check out the [template specific documentation](Documentation/templates/) for more information. For an in-depth explanation, also check the [customize loading of resources](Documentation/Articles/Customize-loading-of-resources.md) article.  
   [David Jennes](https://github.com/djbe)
   [#737](https://github.com/SwiftGen/SwiftGen/pull/737)
-* Fonts/IB/JSON/Plist: Similar to the `strings` templates, these templates now support a `lookupFunction` template parameter, which allows you to provide your own resource lookup mechanism at runtime. Check the [template specific documentation](Documentation/templates/) for more information.  
+* Fonts/IB/JSON/Plist: Similar to the `strings` templates, these templates now support a `lookupFunction` template parameter, which allows you to provide your own resource lookup mechanism at runtime. Check the [template specific documentation](Documentation/templates/) for more information. For an in-depth explanation, also check the [customize loading of resources](Documentation/Articles/Customize-loading-of-resources.md) article.  
   [David Jennes](https://github.com/djbe)
   [#738](https://github.com/SwiftGen/SwiftGen/pull/738)
 
 ### Bug Fixes
 
-_None_
-
-### Internal Changes
-
-_None_
+* Strings: fix incorrect interpretation of format placeholders when there were missing positional parameters (e.g. `"%2$@"` without a `%1$…` defined).  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#634](https://github.com/SwiftGen/SwiftGen/pull/634)
 
 ## 6.2.1
 

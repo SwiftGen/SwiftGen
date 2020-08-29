@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 Pod::Spec.new do |s|
   s.name         = 'SwiftGenKit'
-  s.version      = '6.2.1'
+  s.version      = '6.3.0'
   s.summary      = 'The SwiftGen framework responsible for parsing assets and turn them ' \
                    'in a dictionary representation suitable for Stencil templates'
 
@@ -9,7 +11,7 @@ Pod::Spec.new do |s|
                    [SwiftGen](https://github.com/SwiftGen/SwiftGen), as well as
                    methods for converting the data into contexts for
                    [Stencil](https://github.com/kylef/Stencil).
-                   DESC
+  DESC
 
   s.homepage     = 'https://github.com/SwiftGen/SwiftGenKit'
   s.license      = 'MIT'
@@ -22,7 +24,7 @@ Pod::Spec.new do |s|
   s.swift_version = '4.2'
   s.cocoapods_version = '>= 1.4.0'
 
-  s.source       = {
+  s.source = {
     git: 'https://github.com/SwiftGen/SwiftGenKit.git',
     tag: s.version.to_s
   }
