@@ -9,7 +9,7 @@ import XCTest
 
 final class FilesTests: XCTestCase {
   private enum Contexts {
-    static let all = ["empty", "defaults"]
+    static let all = ["empty", "defaults", "mp4s"]
   }
 
   func testSwift5() {
@@ -20,10 +20,10 @@ final class FilesTests: XCTestCase {
     )
   }
 
-  func testStructuredSwift5() {
+  func testFlatSwift5() {
     test(
-      template: "structured-swift5",
-      contextNames: ["structured"],
+      template: "flat-swift5",
+      contextNames: Contexts.all,
       directory: .files
     )
   }

@@ -12,13 +12,7 @@ extension Files.Parser {
     let files = self.files
       .sorted { lhs, rhs in lhs.name < rhs.name }
 
-    if self.options[Files.Option.structured] {
-      return structure(entries: files, usingMapper: map(file:))
-    } else {
-      return [
-        "files": files.map(map(file:))
-      ]
-    }
+    return structure(entries: files, usingMapper: map(file:))
   }
 
   private func map(file: Files.File) -> [String: Any] {

@@ -25,15 +25,21 @@ final class FilesTests: XCTestCase {
     XCTDiffContexts(result, expected: "defaults", sub: .files)
   }
 
-  // MARK: - Custom options
+  func testMp4s() throws {
+    let parser = try Files.Parser()
+    let path = Fixtures.directory(sub: .files)
+    let dirChildren = path.iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
+    let parentDir = path.absolute().parent()
 
-  func testStructuredDirs() throws {
-    let parser = try Files.Parser(options: ["structured": true])
-    try parser.searchAndParse(path: Fixtures.directory(sub: .files))
+    for path in dirChildren where path.matches(filter: try Filter(pattern: ".mp4")) {
+      try parser.parse(path: path, relativeTo: parentDir)
+    }
 
     let result = parser.stencilContext()
-    XCTDiffContexts(result, expected: "structured", sub: .files)
+    XCTDiffContexts(result, expected: "mp4s", sub: .files)
   }
+
+  // MARK: - Custom options
 
   func testUnknownOption() throws {
     do {

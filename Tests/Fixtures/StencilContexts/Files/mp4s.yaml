@@ -7,25 +7,9 @@ dirs:
       path: "empty intermediate/subfolder"
     name: "subfolder"
   name: "empty intermediate"
-- dirs:
-  - files:
-    - ext: "svg"
-      mimeType: "image/svg+xml"
-      name: "graphic"
-      path: "subdir/subdir"
-    name: "subdir"
-  files:
+- files:
   - ext: "mp4"
     mimeType: "video/mp4"
     name: "A Video With Spaces"
     path: "subdir"
   name: "subdir"
-files:
-- ext: ""
-  mimeType: "application/octet-stream"
-  name: "File"
-  path: ""
-- ext: "txt"
-  mimeType: "text/plain"
-  name: "test"
-  path: ""

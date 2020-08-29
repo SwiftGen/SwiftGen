@@ -1,24 +1,44 @@
 // swiftlint:disable all
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
-{% if files.count > 0 %}
+{% if files.count > 0 or dirs.count > 0 %}
 {% set enumName %}{{param.enumName|default:"Files"}}{% endset %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 {% set resourceType %}{{param.resourceTypeName|default:"File"}}{% endset %}
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Files
 
-// swiftlint:disable identifier_name line_length number_separator type_body_length
-{{accessModifier}} enum {{enumName}} {
-  {% for file in files %}
+{% macro fileBlock file %}
   /// {% if file.path %}{{file.path}}/{% endif %}{{file.name}}{% if file.ext %}.{{file.ext}}{% endif %}
   {{accessModifier}} static let {{file.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% if file.ext %}{{file.ext|swiftIdentifier:"pretty"|capitalize|escapeReservedKeywords}}{% endif %} = {{resourceType}}(name: "{{file.name}}", ext: {% if file.ext %}"{{file.ext}}"{% else %}nil{% endif %}, path: "{{file.path}}", mimeType: "{{file.mimeType}}")
+{% endmacro %}
+{% macro dirBlock directory parent %}
+  {% set fullDir %}{{parent}}{{directory.name}}/{% endset %}
+  /// {{ fullDir }}
+  {{accessModifier}} enum {{directory.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} {
+    {% for file in directory.files %}
+    {% filter indent:2 %}{% call fileBlock file %}{% endfilter %}
+    {% endfor %}
+    {% for dir in directory.dirs %}
+    {% filter indent:2 %}{% call dirBlock dir fullDir %}{% endfilter %}
+    {% endfor %}
+  }
+{% endmacro %}
+// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
+{{accessModifier}} enum {{enumName}} {
+  {% for file in files %}
+  {% call fileBlock file %}
+  {% endfor %}
+  {% for dir in dirs %}
+  {% call dirBlock dir "" %}
   {% endfor %}
 }
+// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
 
 // MARK: - Implementation Details
 
@@ -59,7 +79,7 @@ import Foundation
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
-  static let bundle: Bundle = Bundle(for: BundleToken.self)
+  static let bundle = Bundle(for: BundleToken.self)
 }
 // swiftlint:enable convenience_type
 {% else %}
