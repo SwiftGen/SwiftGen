@@ -10,7 +10,7 @@ _None_
 
 ### New Features
 
-* Files: Add new parser for accessing any files specified from the bundle
+* Files: Add new parser for accessing any files specified from the bundle.  
   [Mike Gray](https://github.com/mgray88)
   [#665](https://github.com/SwiftGen/SwiftGen/issues/665)
   [#734](https://github.com/SwiftGen/SwiftGen/pull/734)
