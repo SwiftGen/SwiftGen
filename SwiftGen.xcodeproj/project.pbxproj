@@ -45,7 +45,7 @@
 		37DC60381F98D7DD00B7B31C /* config-missing-paths.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC60311F98D1DA00B7B31C /* config-missing-paths.yml */; };
 		37DC60391F98D7DD00B7B31C /* config-missing-template.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC602B1F98D1D900B7B31C /* config-missing-template.yml */; };
 		37DC603B1F98E74E00B7B31C /* config-absolute-paths-prefix.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */; };
-		44A9AF3024F227820093FD8D /* XCFileListCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A9AF2F24F227820093FD8D /* XCFileListCommands.swift */; };
+		447B6D3224FAFB6A00B03219 /* Config+XCFileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447B6D3124FAFB6A00B03219 /* Config+XCFileList.swift */; };
 		5DE172C4BAE478DDAA63064F /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00832FEC9F060E93DAD1228 /* Pods_swiftgen.framework */; };
 		80F8014301BF496E905CA2CF /* Pods_SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16DF0A0F13A222BCA7B60102 /* Pods_SwiftGenKit.framework */; };
 		846BDF9321ADB71B00DDCEE9 /* config-with-env-placeholder.yml in Resources */ = {isa = PBXBuildFile; fileRef = 846BDF9221ADB71B00DDCEE9 /* config-with-env-placeholder.yml */; };
@@ -362,7 +362,7 @@
 		37DC60301F98D1DA00B7B31C /* config-absolute-paths-direct.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-absolute-paths-direct.yml"; sourceTree = "<group>"; };
 		37DC60311F98D1DA00B7B31C /* config-missing-paths.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-missing-paths.yml"; sourceTree = "<group>"; };
 		37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-absolute-paths-prefix.yml"; sourceTree = "<group>"; };
-		44A9AF2F24F227820093FD8D /* XCFileListCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCFileListCommands.swift; sourceTree = "<group>"; };
+		447B6D3124FAFB6A00B03219 /* Config+XCFileList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config+XCFileList.swift"; sourceTree = "<group>"; };
 		4CBF21A0D5701D1232758A8C /* Pods-SwiftGenKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit.release.xcconfig"; sourceTree = "<group>"; };
 		4D5D3E5746871F59AC9CA625 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8FC9E0F4B4EF9E07633BF2 /* Pods-swiftgen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.debug.xcconfig"; sourceTree = "<group>"; };
@@ -636,6 +636,7 @@
 				0934050A1F8158B800187787 /* Config.swift */,
 				0987AC792475802700388153 /* Config+Example.swift */,
 				DD75551A24A103CB00E61756 /* Config+Run.swift */,
+				447B6D3124FAFB6A00B03219 /* Config+XCFileList.swift */,
 				09D009FE1F9BB3450026A755 /* ConfigEntry.swift */,
 				DDB0B9C1209E390700E467C2 /* ConfigOutput.swift */,
 			);
@@ -650,7 +651,6 @@
 				DD906FA71EE777C600C29B8A /* ParserCLICommands.swift */,
 				091150301BD31A3300EBC803 /* Path+Commander.swift */,
 				0921FBA01BE7D6B900B488B5 /* TemplateCommands.swift */,
-				44A9AF2F24F227820093FD8D /* XCFileListCommands.swift */,
 			);
 			path = Commander;
 			sourceTree = "<group>";
@@ -1501,13 +1501,13 @@
 				0987AC7A2475802700388153 /* Config+Example.swift in Sources */,
 				234F7E7F1DEBD765001B3C10 /* TemplateCommands.swift in Sources */,
 				D4F73738247F62FD00554A9C /* Array+Parallel.swift in Sources */,
-				44A9AF3024F227820093FD8D /* XCFileListCommands.swift in Sources */,
 				09D009FF1F9BB3450026A755 /* ConfigEntry.swift in Sources */,
 				DDB0B9C2209E390700E467C2 /* ConfigOutput.swift in Sources */,
 				379C7E8D1F8ECB2400267096 /* Path+CommonLocations.swift in Sources */,
 				0934050E1F815A8C00187787 /* ParserCLI.swift in Sources */,
 				DD75551B24A103CB00E61756 /* Config+Run.swift in Sources */,
 				DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */,
+				447B6D3224FAFB6A00B03219 /* Config+XCFileList.swift in Sources */,
 				379C7E921F8ECC1A00267096 /* Logs.swift in Sources */,
 				379C7E871F8ECA0C00267096 /* TemplateRef.swift in Sources */,
 				093405051F8113AA00187787 /* ConfigCommands.swift in Sources */,

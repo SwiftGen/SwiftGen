@@ -32,6 +32,7 @@ let main = Group {
     $0.addCommand("run", "run commands listed in the configuration file", ConfigCLI.run)
     $0.addCommand("init", "create an initial configuration file", ConfigCLI.create)
     $0.addCommand("doc", "open the documentation for the configuration file on GitHub", ConfigCLI.doc)
+    $0.addCommand("generate-xcfilelists", ConfigCLI.generateXCFileListsDescription, ConfigCLI.generateXCFileLists)
   }
 
   $0.group("template", "manage custom templates") {
@@ -45,10 +46,6 @@ let main = Group {
     for cmd in ParserCLI.allCommands {
       $0.addCommand(cmd.name, cmd.description, cmd.command())
     }
-  }
-
-  $0.group("xcfilelist", "manage xcfilelists") {
-    $0.addCommand("generate", "generates xcfilelists based on the configuration file, for use in an Xcode build step that executes `swiftgen config run`", XCFileListCLI.generate)
   }
 
   // Deprecated: Remove this in SwiftGen 7.0

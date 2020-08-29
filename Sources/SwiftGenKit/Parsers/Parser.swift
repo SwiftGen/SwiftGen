@@ -55,16 +55,33 @@ public extension Parser {
   /// - Parameter path: The path to search recursively through.
   /// - Parameter filter: The filter to apply to each path.
   func searchAndParse(path: Path, filter: Filter) throws {
+    for (path, parentDir) in try Self.subpaths(in: path, matching: filter) {
+      try parse(path: path, relativeTo: parentDir)
+    }
+  }
+
+  /// Recursively search through the given paths, returning any files or folders that matches the given filter.
+  ///
+  /// - Parameter paths: The paths to search recursively through.
+  /// - Parameter filter: The filter to apply to each path.
+  static func subpaths(in paths: [Path], matching filter: Filter) throws -> [(path: Path, parentDir: Path)] {
+    try paths.flatMap { try subpaths(in: $0, matching: filter) }
+  }
+
+  /// Recursively search through the given path, returning any files or folders that matches the given filter.
+  ///
+  /// - Parameter path: The path to search recursively through.
+  /// - Parameter filter: The filter to apply to each path.
+  static func subpaths(in path: Path, matching filter: Filter) throws -> [(path: Path, parentDir: Path)] {
     if path.matches(filter: filter) {
       let parentDir = path.absolute().parent()
-      try parse(path: path, relativeTo: parentDir)
+      return [(path, parentDir)]
     } else {
-      let dirChildren = path.iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
       let parentDir = path.absolute()
-
-      for path in dirChildren where path.matches(filter: filter) {
-        try parse(path: path, relativeTo: parentDir)
-      }
+      return path
+        .iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
+        .filter { $0.matches(filter: filter) }
+        .map { ($0, parentDir) }
     }
   }
 }

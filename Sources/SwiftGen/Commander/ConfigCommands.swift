@@ -80,10 +80,41 @@ enum ConfigCLI {
     }
   }
 
+  // MARK: Doc
+
   static let doc = command {
     let docURL = gitHubDocURL(version: Version.swiftgen, path: "ConfigFile.md")
     logMessage(.info, "Open documentation at: \(docURL)")
     NSWorkspace.shared.open(docURL)
+  }
+
+  // MARK: Generate XCFileLists
+
+  // swiftlint:disable:next line_length
+  static let generateXCFileListsDescription = "generates xcfilelists based on the configuration file, for use in an Xcode build step that executes `swiftgen config run`"
+
+  static let generateXCFileLists = command(
+    CLIOption.configFile(),
+    Option<Path?>("inputs", default: nil, flag: "i", description: "Path to write the xcfilelist for the input files"),
+    Option<Path?>("outputs", default: nil, flag: "o", description: "Path to write the xcfilelist for the output files")
+  ) { configPath, inputPath, outputPath in
+    try ErrorPrettifier.execute {
+      let config = try Config(file: configPath)
+
+      if let inputPath = inputPath {
+        let content = try config.inputXCFileList()
+        try inputPath.write(content)
+      }
+
+      if let outputPath = outputPath {
+        let content = try config.outputXCFileList()
+        try outputPath.write(content)
+      }
+
+      if inputPath == nil, outputPath == nil {
+        logMessage(.error, "You must provide the path of an input or output xcfilelist (or both).")
+      }
+    }
   }
 }
 
