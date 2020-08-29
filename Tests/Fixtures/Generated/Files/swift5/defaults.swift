@@ -10,10 +10,15 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 internal enum Files {
+  /// subdir/A Video With Spaces.mp4
   internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", path: "subdir", mimeType: "video/mp4")
+  /// File
   internal static let file = File(name: "File", ext: nil, path: "", mimeType: "application/octet-stream")
+  /// empty intermediate/subfolder/another video.mp4
   internal static let anotherVideoMp4 = File(name: "another video", ext: "mp4", path: "empty intermediate/subfolder", mimeType: "video/mp4")
+  /// subdir/subdir/graphic.svg
   internal static let graphicSvg = File(name: "graphic", ext: "svg", path: "subdir/subdir", mimeType: "image/svg+xml")
+  /// test.txt
   internal static let testTxt = File(name: "test", ext: "txt", path: "", mimeType: "text/plain")
 }
 

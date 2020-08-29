@@ -12,15 +12,18 @@ import Foundation
 // MARK: - Files
 
 {% macro fileBlock file %}
+  /// {% if file.path %}{{file.path}}/{% endif %}{{file.name}}{% if file.ext %}.{{file.ext}}{% endif %}
   {{accessModifier}} static let {{file.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% if file.ext %}{{file.ext|swiftIdentifier:"pretty"|capitalize|escapeReservedKeywords}}{% endif %} = {{resourceType}}(name: "{{file.name}}", ext: {% if file.ext %}"{{file.ext}}"{% else %}nil{% endif %}, path: "{{file.path}}", mimeType: "{{file.mimeType}}")
 {% endmacro %}
-{% macro dirBlock directory %}
+{% macro dirBlock directory parent %}
+  {% set fullDir %}{{parent}}{{directory.name}}/{% endset %}
+  /// {{ fullDir }}
   {{accessModifier}} enum {{directory.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} {
     {% for file in directory.files %}
     {% filter indent:2 %}{% call fileBlock file %}{% endfilter %}
     {% endfor %}
     {% for dir in directory.dirs %}
-    {% filter indent:2 %}{% call dirBlock dir %}{% endfilter %}
+    {% filter indent:2 %}{% call dirBlock dir fullDir %}{% endfilter %}
     {% endfor %}
   }
 {% endmacro %}
@@ -31,7 +34,7 @@ import Foundation
   {% call fileBlock file %}
   {% endfor %}
   {% for dir in dirs %}
-  {% call dirBlock dir %}
+  {% call dirBlock dir "" %}
   {% endfor %}
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

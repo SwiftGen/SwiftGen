@@ -10,16 +10,25 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Files {
+  /// File
   internal static let file = File(name: "File", ext: nil, path: "", mimeType: "application/octet-stream")
+  /// test.txt
   internal static let testTxt = File(name: "test", ext: "txt", path: "", mimeType: "text/plain")
+  /// empty intermediate/
   internal enum emptyIntermediate {
+    /// empty intermediate/subfolder/
     internal enum subfolder {
+      /// empty intermediate/subfolder/another video.mp4
       internal static let anotherVideoMp4 = File(name: "another video", ext: "mp4", path: "empty intermediate/subfolder", mimeType: "video/mp4")
     }
   }
+  /// subdir/
   internal enum subdir {
+    /// subdir/A Video With Spaces.mp4
     internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", path: "subdir", mimeType: "video/mp4")
+    /// subdir/subdir/
     internal enum subdir {
+      /// subdir/subdir/graphic.svg
       internal static let graphicSvg = File(name: "graphic", ext: "svg", path: "subdir/subdir", mimeType: "image/svg+xml")
     }
   }
