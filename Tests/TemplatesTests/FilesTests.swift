@@ -19,4 +19,12 @@ final class FilesTests: XCTestCase {
       directory: .files
     )
   }
+
+  func testStructuredSwift5() {
+    test(
+      template: "structured-swift5",
+      contextNames: ["structured"],
+      directory: .files
+    )
+  }
 }

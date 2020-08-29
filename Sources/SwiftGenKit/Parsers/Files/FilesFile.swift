@@ -25,7 +25,7 @@ extension Files {
         relative != "." {
         self.path = Array(relative.components.dropFirst())
       } else {
-        self.path = [""]
+        self.path = []
       }
 
       if let ext = self.ext,

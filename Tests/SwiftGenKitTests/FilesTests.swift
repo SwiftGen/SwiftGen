@@ -27,6 +27,14 @@ final class FilesTests: XCTestCase {
 
   // MARK: - Custom options
 
+  func testStructuredDirs() throws {
+    let parser = try Files.Parser(options: ["structured": true])
+    try parser.searchAndParse(path: Fixtures.directory(sub: .files))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "structured", sub: .files)
+  }
+
   func testUnknownOption() throws {
     do {
       _ = try Files.Parser(options: ["SomeOptionThatDoesntExist": "foo"])

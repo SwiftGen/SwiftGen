@@ -20,10 +20,18 @@ public enum Files {
     }
   }
 
+  public enum Option {
+    static let structured = ParserOption(
+      key: "structured",
+      defaultValue: false,
+      help: "Generates context with array structured into subdirectories"
+    )
+  }
+
   // MARK: Resource File Parser
 
   public class Parser: SwiftGenKit.Parser {
-    private let options: ParserOptionValues
+    internal let options: ParserOptionValues
     var files: [File] = []
     public var warningHandler: Parser.MessageHandler?
 
@@ -32,6 +40,7 @@ public enum Files {
       self.warningHandler = warningHandler
     }
 
+    public static let allOptions: ParserOptionList = [Option.structured]
     public static var defaultFilter: String = ".*"
 
     public func parse(path: Path, relativeTo parent: Path) throws {
