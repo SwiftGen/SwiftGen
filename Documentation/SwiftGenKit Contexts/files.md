@@ -2,7 +2,7 @@
 
 ## Input
 
-The files parser accepts multiple files or directories, which it will recursively search for files that match the given filter (default `.*`).
+The files parser is intended to just list the name and mimetype of the files and subdirectories in a given directory. Unlike other parsers, this one doesn't parse the file content per se, but only list those files so that you can point to them (get back their path or URL relative to your bundle) easily in your code. The parser accepts multiple files or directories, which it will recursively search for files that match the given filter (default `.*`).
 
 The list of files will be converted into a structured directory tree.
 
@@ -10,18 +10,18 @@ The list of files will be converted into a structured directory tree.
 
 The output context has the following structure:
 
--`files`:`Array` — list of files in the base directory specified
--`dirs`:`Dictionary` — tree structure of subdirectory and its contents
- -`name`:`String` — name of the directory
- -`files`:`Array` — list of files in this directory
- -`dirs`:`Array` — recursive tree of subdirectories
+-`files`: `Array<File>` — list of files in the base directory specified
+-`dirs`: `Array` — tree structure of subdirectory and its contents
+ -`name`: `String` — name of the directory
+ -`files`: `Array<File>` — list of files in this directory
+ -`dirs`: `Array` — recursive tree of subdirectories
 
-Each file has the following properties:
+Each `File` has the following properties:
 
--`name`:`String` — name of the file
--`ext`:`String` — file extension
--`path`:`String` — the path to the file, relative to the folder being scanned
--`mimeType`:`String` — mime type of the file
+-`name`: `String` — name of the file
+-`ext`: `String` — file extension
+-`path`: `String` — the path to the file, relative to the folder being scanned
+-`mimeType`: `String` — mime type of the file
 
 ## Example
 

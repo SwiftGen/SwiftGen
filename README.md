@@ -539,7 +539,7 @@ let relatedItem = myMainItem.manyToMany.first
 ```yaml
 files:
   inputs: path/to/search
-  filter: .+\.xib$
+  filter: .+\.mp4$
   outputs:
     templateName: swift5
     output: Files.swift
