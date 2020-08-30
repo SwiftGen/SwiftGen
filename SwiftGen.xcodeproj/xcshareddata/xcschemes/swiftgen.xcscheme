@@ -150,7 +150,7 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "run files --templateName flat-swift5 $(PROJECT_DIR/Tests/Fixtures/Resources/Files"
+            argument = "run files --templateName flat-swift5 $(PROJECT_DIR)/Tests/Fixtures/Resources/Files"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
