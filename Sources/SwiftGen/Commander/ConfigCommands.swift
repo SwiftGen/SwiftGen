@@ -90,9 +90,6 @@ enum ConfigCLI {
 
   // MARK: Generate XCFileLists
 
-  // swiftlint:disable:next line_length
-  static let generateXCFileListsDescription = "generates xcfilelists based on the configuration file, for use in an Xcode build step that executes `swiftgen config run`"
-
   static let generateXCFileLists = command(
     CLIOption.configFile(),
     Option<Path?>("inputs", default: nil, flag: "i", description: "Path to write the xcfilelist for the input files"),

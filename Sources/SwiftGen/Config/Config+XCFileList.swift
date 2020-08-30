@@ -48,6 +48,13 @@ extension Config {
     return pathsByCommand
   }
 
+  /// Generates `xcfilelist` with all the paths, grouped per command into sections, like:
+  ///
+  ///     # fonts
+  ///     …
+  ///
+  ///     # xcassets
+  ///     …
   private func xcFileList(for pathsByCommand: [String: Set<Path>]) -> String {
     pathsByCommand
       .sorted { $0.key < $1.key }
