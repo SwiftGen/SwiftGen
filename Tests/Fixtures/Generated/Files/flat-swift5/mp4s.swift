@@ -3,17 +3,20 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command file_length implicit_return
+// swiftlint:disable superfluous_disable_command file_length line_length implicit_return
 
 // MARK: - Files
 
-// swiftlint:disable identifier_name line_length number_separator type_body_length
+// swiftlint:disable explicit_type_interface identifier_name
+// swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Files {
   /// empty intermediate/subfolder/another video.mp4
   internal static let anotherVideoMp4 = File(name: "another video", ext: "mp4", relativePath: "empty intermediate/subfolder", mimeType: "video/mp4")
   /// subdir/A Video With Spaces.mp4
   internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", relativePath: "subdir", mimeType: "video/mp4")
 }
+// swiftlint:enable explicit_type_interface identifier_name
+// swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
 
 // MARK: - Implementation Details
 
@@ -29,7 +32,12 @@ internal struct File {
 
   internal func url(locale: Locale?) -> URL {
     let bundle = BundleToken.bundle
-    let url = bundle.url(forResource: name, withExtension: ext, subdirectory: relativePath, localization: locale?.identifier)
+    let url = bundle.url(
+      forResource: name,
+      withExtension: ext,
+      subdirectory: relativePath,
+      localization: locale?.identifier
+    )
     guard let result = url else {
       let file = name + (ext != nil ? "." + ext : "")
       fatalError("Could not locate file named \(file)")

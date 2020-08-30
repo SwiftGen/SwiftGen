@@ -3,11 +3,11 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command file_length implicit_return
+// swiftlint:disable superfluous_disable_command file_length line_length implicit_return
 
 // MARK: - Files
 
-// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable explicit_type_interface identifier_name
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum Files {
   /// File
@@ -33,7 +33,7 @@ public enum Files {
     }
   }
 }
-// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable explicit_type_interface identifier_name
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
 
 // MARK: - Implementation Details
@@ -50,7 +50,12 @@ public struct File {
 
   public func url(locale: Locale?) -> URL {
     let bundle = BundleToken.bundle
-    let url = bundle.url(forResource: name, withExtension: ext, subdirectory: relativePath, localization: locale?.identifier)
+    let url = bundle.url(
+      forResource: name,
+      withExtension: ext,
+      subdirectory: relativePath,
+      localization: locale?.identifier
+    )
     guard let result = url else {
       let file = name + (ext != nil ? "." + ext : "")
       fatalError("Could not locate file named \(file)")

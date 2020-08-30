@@ -8,7 +8,7 @@
 {% set resourceType %}{{param.resourceTypeName|default:"File"}}{% endset %}
 import Foundation
 
-// swiftlint:disable superfluous_disable_command file_length implicit_return
+// swiftlint:disable superfluous_disable_command file_length line_length implicit_return
 
 // MARK: - Files
 
@@ -28,7 +28,7 @@ import Foundation
     {% endfor %}
   }
 {% endmacro %}
-// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable explicit_type_interface identifier_name
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 {{accessModifier}} enum {{enumName}} {
   {% for file in files %}
@@ -38,7 +38,7 @@ import Foundation
   {% call dirBlock dir "" %}
   {% endfor %}
 }
-// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable explicit_type_interface identifier_name
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
 
 // MARK: - Implementation Details
@@ -55,7 +55,12 @@ import Foundation
 
   {{accessModifier}} func url(locale: Locale?) -> URL {
     let bundle = {{param.bundle|default:"BundleToken.bundle"}}
-    let url = bundle.url(forResource: name, withExtension: ext, subdirectory: relativePath, localization: locale?.identifier)
+    let url = bundle.url(
+      forResource: name,
+      withExtension: ext,
+      subdirectory: relativePath,
+      localization: locale?.identifier
+    )
     guard let result = url else {
       let file = name + (ext != nil ? "." + ext : "")
       fatalError("Could not locate file named \(file)")
