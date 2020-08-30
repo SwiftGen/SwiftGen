@@ -12,11 +12,42 @@ final class FilesTests: XCTestCase {
     static let all = ["empty", "defaults", "mp4s"]
   }
 
+  private let variations: VariationGenerator = { name, context in
+    guard name == "defaults" else { return [(context: context, suffix: "")] }
+
+    return [
+      (
+        context: context,
+        suffix: ""
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["bundle=ResourcesBundle.bundle"]),
+        suffix: "-customBundle"
+      ),
+      (
+        context: try StencilContext.enrich(
+          context: context,
+          parameters: ["enumName=FileList", "resourceTypeName=Resource"]
+        ),
+        suffix: "-customName"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["useExtension=false"]),
+        suffix: "-dontUseExtension"
+      )
+    ]
+  }
+
   func testStructuredSwift5() {
     test(
       template: "structured-swift5",
       contextNames: Contexts.all,
-      directory: .files
+      directory: .files,
+      contextVariations: variations
     )
   }
 
@@ -24,7 +55,8 @@ final class FilesTests: XCTestCase {
     test(
       template: "flat-swift5",
       contextNames: Contexts.all,
-      directory: .files
+      directory: .files,
+      contextVariations: variations
     )
   }
 }

@@ -14,7 +14,7 @@ import Foundation
 
 {% macro fileBlock file %}
   /// {% if file.path %}{{file.path}}/{% endif %}{{file.name}}{% if file.ext %}.{{file.ext}}{% endif %}
-  {{accessModifier}} static let {{file.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% if useExt and file.ext %}{{file.ext|swiftIdentifier:"pretty"|capitalize|escapeReservedKeywords}}{% endif %} = {{resourceType}}(name: "{{file.name}}", ext: {% if file.ext %}"{{file.ext}}"{% else %}nil{% endif %}, path: "{{file.path}}", mimeType: "{{file.mimeType}}")
+  {{accessModifier}} static let {{file.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% if useExt == "true" and file.ext %}{{file.ext|swiftIdentifier:"pretty"|capitalize|escapeReservedKeywords}}{% endif %} = {{resourceType}}(name: "{{file.name}}", ext: {% if file.ext %}"{{file.ext}}"{% else %}nil{% endif %}, path: "{{file.path}}", mimeType: "{{file.mimeType}}")
 {% endmacro %}
 {% macro dirBlock directory parent %}
   {% set fullDir %}{{parent}}{{directory.name}}/{% endset %}
