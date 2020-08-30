@@ -32,7 +32,7 @@ public enum Files {
       self.warningHandler = warningHandler
     }
 
-    public static var defaultFilter: String = ".*"
+    public static let defaultFilter: String = ".*"
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       if path.isDirectory {

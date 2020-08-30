@@ -10,7 +10,7 @@ import PathKit
 extension Files.Parser {
   public func stencilContext() -> [String: Any] {
     let files = self.files
-      .sorted { lhs, rhs in lhs.name < rhs.name }
+      .sorted { $0.name.lowercased() < $1.name.lowercased() }
 
     return structure(entries: files, usingMapper: map(file:))
   }
@@ -35,6 +35,7 @@ extension Files.Parser {
       structuredFiles["name"] = name
     }
 
+    // Collect the files at this level
     let files = entries
       .filter { $0.path == keyPath }
       .sorted { $0.name.lowercased() < $1.name.lowercased() }
@@ -44,9 +45,11 @@ extension Files.Parser {
       structuredFiles["files"] = files
     }
 
+    // Collect files deeper in the hierarchy, group them by directory name,
+    // sort and structure those files
     let childEntries = entries.filter { $0.path.count > keyPath.count }
     let children = Dictionary(grouping: childEntries) { $0.path[keyPath.count] }
-      .sorted { $0.key < $1.key }
+      .sorted { $0.key.lowercased() < $1.key.lowercased() }
       .map { name, entries in
         structure(entries: entries, atKeyPath: keyPath + [name], usingMapper: mapper)
       }
