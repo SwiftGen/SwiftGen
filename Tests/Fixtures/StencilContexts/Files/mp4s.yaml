@@ -1,17 +1,15 @@
 directories:
 - directories:
-  - directories:
-    - files:
-      - ext: "mp4"
-        mimeType: "video/mp4"
-        name: "another video"
-        path: "Files/empty intermediate/subfolder"
-      name: "subfolder"
-    name: "empty intermediate"
   - files:
     - ext: "mp4"
       mimeType: "video/mp4"
-      name: "A Video With Spaces"
-      path: "Files/subdir"
-    name: "subdir"
-  name: "Files"
+      name: "another video"
+      path: "empty intermediate/subfolder"
+    name: "subfolder"
+  name: "empty intermediate"
+- files:
+  - ext: "mp4"
+    mimeType: "video/mp4"
+    name: "A Video With Spaces"
+    path: "subdir"
+  name: "subdir"

@@ -27,13 +27,7 @@ final class FilesTests: XCTestCase {
 
   func testMp4s() throws {
     let parser = try Files.Parser()
-    let path = Fixtures.directory(sub: .files)
-    let dirChildren = path.iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
-    let parentDir = path.absolute().parent()
-
-    for path in dirChildren where path.matches(filter: try Filter(pattern: ".mp4")) {
-      try parser.parse(path: path, relativeTo: parentDir)
-    }
+    try parser.searchAndParse(path: Fixtures.directory(sub: .files), filter: try Filter(pattern: ".mp4"))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "mp4s", sub: .files)
