@@ -65,6 +65,14 @@ final class FilesTests: XCTestCase {
     XCTDiffContexts(result, expected: "relativeCompactFilter", sub: .files)
   }
 
+  func testSpecificFile() throws {
+    let parser = try Files.Parser(options: ["relativeTo": Fixtures.directory().string, "compact": true])
+    try parser.searchAndParse(path: Fixtures.directory(sub: .files) + "subdir/subdir/graphic.svg")
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "specificFile", sub: .files)
+  }
+
   func testUnknownOption() throws {
     do {
       _ = try Files.Parser(options: ["SomeOptionThatDoesntExist": "foo"])
