@@ -11,10 +11,10 @@ The list of files will be converted into a structured directory tree.
 The output context has the following structure:
 
 -`files`: `Array<File>` — list of files in the base directory specified
--`dirs`: `Array` — tree structure of subdirectory and its contents
+-`directories`: `Array` — tree structure of subdirectory and its contents
  -`name`: `String` — name of the directory
  -`files`: `Array<File>` — list of files in this directory
- -`dirs`: `Array` — recursive tree of subdirectories
+ -`directories`: `Array` — recursive tree of subdirectories
 
 Each `File` has the following properties:
 
@@ -35,9 +35,9 @@ files:
   ext: "txt"
   path: ""
   mimeType: "text/plain"
-dirs:
+directories:
 - name: "empty intermediate"
-  dirs:
+  directories:
   - name: "subfolder"
     files:
     - name: "another video"
@@ -50,7 +50,7 @@ dirs:
     ext: "mp4"
     path: "subdir"
     mimeType: "video/mp4"
-  dirs:
+  directories:
   - name: "subdir"
     files:
     - ext: "svg"

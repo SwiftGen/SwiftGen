@@ -55,7 +55,7 @@ extension Files.Parser {
       }
 
     if !children.isEmpty {
-      structuredFiles["dirs"] = children
+      structuredFiles["directories"] = children
     }
 
     return structuredFiles

@@ -1,7 +1,7 @@
 // swiftlint:disable all
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
-{% if files.count > 0 or dirs.count > 0 %}
+{% if files.count > 0 or directories.count > 0 %}
 {% set enumName %}{{param.enumName|default:"Files"}}{% endset %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 {% set resourceType %}{{param.resourceTypeName|default:"File"}}{% endset %}
@@ -22,7 +22,7 @@ import Foundation
     {% for file in directory.files %}
     {% filter indent:2 %}{% call fileBlock file %}{% endfilter %}
     {% endfor %}
-    {% for dir in directory.dirs %}
+    {% for dir in directory.directories %}
     {% filter indent:2 %}{% call dirBlock dir fullDir %}{% endfilter %}
     {% endfor %}
   }
@@ -33,7 +33,7 @@ import Foundation
   {% for file in files %}
   {% call fileBlock file %}
   {% endfor %}
-  {% for dir in dirs %}
+  {% for dir in directories %}
   {% call dirBlock dir "" %}
   {% endfor %}
 }

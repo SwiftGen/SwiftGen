@@ -1,5 +1,5 @@
-dirs:
-- dirs:
+directories:
+- directories:
   - files:
     - ext: "mp4"
       mimeType: "video/mp4"
@@ -7,7 +7,7 @@ dirs:
       path: "empty intermediate/subfolder"
     name: "subfolder"
   name: "empty intermediate"
-- dirs:
+- directories:
   - files:
     - ext: "svg"
       mimeType: "image/svg+xml"
