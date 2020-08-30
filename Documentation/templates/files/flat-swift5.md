@@ -19,6 +19,7 @@
 | -------------- | ------------- | ----------- |
 | `bundle` | `BundleToken.bundle` | Allows you to set from which bundle files are loaded from. By default, it'll point to the same bundle as where the generated code is. |
 | `enumName` | `Files` | Allows you to change the name of the generated `enum` containing the file tree. |
+| `useExtension` | `true` | Whether or not to use the extension in the name of the constant. i.e. `let testTxt` vs `let test`. Behavior is undefined with file name conflicts. |
 | `resourceTypeName` | `File` | Allows you to change the name of the struct type representing a file. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 

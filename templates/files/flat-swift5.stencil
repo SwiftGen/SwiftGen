@@ -3,18 +3,18 @@
 
 {% if files.count > 0 or directories.count > 0 %}
 {% set enumName %}{{param.enumName|default:"Files"}}{% endset %}
+{% set useExt %}{{param.useExtension|default:"true"}}{% endset %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 {% set resourceType %}{{param.resourceTypeName|default:"File"}}{% endset %}
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Files
 
 {% macro fileBlock file %}
   /// {% if file.path %}{{file.path}}/{% endif %}{{file.name}}{% if file.ext %}.{{file.ext}}{% endif %}
-  {{accessModifier}} static let {{file.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% if file.ext %}{{file.ext|swiftIdentifier:"pretty"|capitalize|escapeReservedKeywords}}{% endif %} = {{resourceType}}(name: "{{file.name}}", ext: {% if file.ext %}"{{file.ext}}"{% else %}nil{% endif %}, path: "{{file.path}}", mimeType: "{{file.mimeType}}")
+  {{accessModifier}} static let {{file.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% if useExt and file.ext %}{{file.ext|swiftIdentifier:"pretty"|capitalize|escapeReservedKeywords}}{% endif %} = {{resourceType}}(name: "{{file.name}}", ext: {% if file.ext %}"{{file.ext}}"{% else %}nil{% endif %}, path: "{{file.path}}", mimeType: "{{file.mimeType}}")
 {% endmacro %}
 {% macro dirBlock directory %}
   {% for file in directory.files %}
@@ -43,7 +43,7 @@ import Foundation
   {{accessModifier}} fileprivate(set) var mimeType: String
 
   {{accessModifier}} var url: URL {
-    url(locale: nil)
+    return url(locale: nil)
   }
 
   {{accessModifier}} func url(locale: Locale?) -> URL {
@@ -57,17 +57,11 @@ import Foundation
   }
 
   {{accessModifier}} var path: String {
-    path(locale: nil)
+    return path(locale: nil)
   }
 
   {{accessModifier}} func path(locale: Locale?) -> String {
-    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
-    let path = bundle.path(forResource: name, ofType: ext, inDirectory: path, forLocalization: locale?.identifier)
-    guard let result = path else {
-      let file = name + (ext ? "." + ext : "")
-      fatalError("Could not locate file named \(file)")
-    }
-    return result
+    return url(locale: locale).path
   }
 }
 {% if not param.bundle %}

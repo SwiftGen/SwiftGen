@@ -3,8 +3,7 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Files
 
@@ -31,7 +30,7 @@ internal struct File {
   internal fileprivate(set) var mimeType: String
 
   internal var url: URL {
-    url(locale: nil)
+    return url(locale: nil)
   }
 
   internal func url(locale: Locale?) -> URL {
@@ -45,17 +44,11 @@ internal struct File {
   }
 
   internal var path: String {
-    path(locale: nil)
+    return path(locale: nil)
   }
 
   internal func path(locale: Locale?) -> String {
-    let bundle = BundleToken.bundle
-    let path = bundle.path(forResource: name, ofType: ext, inDirectory: path, forLocalization: locale?.identifier)
-    guard let result = path else {
-      let file = name + (ext ? "." + ext : "")
-      fatalError("Could not locate file named \(file)")
-    }
-    return result
+    return url(locale: locale).path
   }
 }
 

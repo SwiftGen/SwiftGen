@@ -12,9 +12,9 @@ final class FilesTests: XCTestCase {
     static let all = ["empty", "defaults", "mp4s"]
   }
 
-  func testSwift5() {
+  func testStructuredSwift5() {
     test(
-      template: "swift5",
+      template: "structured-swift5",
       contextNames: Contexts.all,
       directory: .files
     )
