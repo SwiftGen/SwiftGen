@@ -59,6 +59,12 @@ extension ParserCLI {
       pathDescription: "Core Data models (.xcdatamodel or .xcdatamodeld) to parse."
     ),
     .init(
+      parserType: Files.Parser.self,
+      name: "files",
+      description: "generate code for referencing specified files",
+      pathDescription: "Files and/or directories to recursively search."
+    ),
+    .init(
       parserType: Fonts.Parser.self,
       name: "fonts",
       description: "generate code for your fonts",
@@ -99,12 +105,6 @@ extension ParserCLI {
       name: "yaml",
       description: "generate code for custom yaml configuration files",
       pathDescription: "YAML files (or directories that contain them) to parse."
-    ),
-    .init(
-      parserType: Files.Parser.self,
-      name: "files",
-      description: "generate code for referencing specified files",
-      pathDescription: "Files and/or directories to recursively search"
     ),
 
     // Deprecated
