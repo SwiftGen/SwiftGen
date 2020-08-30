@@ -11,25 +11,25 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum FileList {
   /// File
-  internal static let file = Resource(name: "File", ext: nil, path: "", mimeType: "application/octet-stream")
+  internal static let file = Resource(name: "File", ext: nil, relativePath: "", mimeType: "application/octet-stream")
   /// test.txt
-  internal static let testTxt = Resource(name: "test", ext: "txt", path: "", mimeType: "text/plain")
+  internal static let testTxt = Resource(name: "test", ext: "txt", relativePath: "", mimeType: "text/plain")
   /// empty intermediate/
   internal enum emptyIntermediate {
     /// empty intermediate/subfolder/
     internal enum subfolder {
       /// empty intermediate/subfolder/another video.mp4
-      internal static let anotherVideoMp4 = Resource(name: "another video", ext: "mp4", path: "empty intermediate/subfolder", mimeType: "video/mp4")
+      internal static let anotherVideoMp4 = Resource(name: "another video", ext: "mp4", relativePath: "empty intermediate/subfolder", mimeType: "video/mp4")
     }
   }
   /// subdir/
   internal enum subdir {
     /// subdir/A Video With Spaces.mp4
-    internal static let aVideoWithSpacesMp4 = Resource(name: "A Video With Spaces", ext: "mp4", path: "subdir", mimeType: "video/mp4")
+    internal static let aVideoWithSpacesMp4 = Resource(name: "A Video With Spaces", ext: "mp4", relativePath: "subdir", mimeType: "video/mp4")
     /// subdir/subdir/
     internal enum subdir {
       /// subdir/subdir/graphic.svg
-      internal static let graphicSvg = Resource(name: "graphic", ext: "svg", path: "subdir/subdir", mimeType: "image/svg+xml")
+      internal static let graphicSvg = Resource(name: "graphic", ext: "svg", relativePath: "subdir/subdir", mimeType: "image/svg+xml")
     }
   }
 }
@@ -41,7 +41,7 @@ internal enum FileList {
 internal struct Resource {
   internal fileprivate(set) var name: String
   internal fileprivate(set) var ext: String?
-  internal fileprivate(set) var path: String
+  internal fileprivate(set) var relativePath: String
   internal fileprivate(set) var mimeType: String
 
   internal var url: URL {
@@ -50,9 +50,9 @@ internal struct Resource {
 
   internal func url(locale: Locale?) -> URL {
     let bundle = BundleToken.bundle
-    let url = bundle.url(forResource: name, withExtension: ext, subdirectory: path, localization: locale?.identifier)
+    let url = bundle.url(forResource: name, withExtension: ext, subdirectory: relativePath, localization: locale?.identifier)
     guard let result = url else {
-      let file = name + (ext ? "." + ext : "")
+      let file = name + (ext != nil ? "." + ext : "")
       fatalError("Could not locate file named \(file)")
     }
     return result

@@ -14,7 +14,7 @@ import Foundation
 
 {% macro fileBlock file %}
   /// {% if file.path %}{{file.path}}/{% endif %}{{file.name}}{% if file.ext %}.{{file.ext}}{% endif %}
-  {{accessModifier}} static let {{file.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% if useExt == "true" and file.ext %}{{file.ext|swiftIdentifier:"pretty"|capitalize|escapeReservedKeywords}}{% endif %} = {{resourceType}}(name: "{{file.name}}", ext: {% if file.ext %}"{{file.ext}}"{% else %}nil{% endif %}, path: "{{file.path}}", mimeType: "{{file.mimeType}}")
+  {{accessModifier}} static let {{file.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% if useExt == "true" and file.ext %}{{file.ext|swiftIdentifier:"pretty"|capitalize|escapeReservedKeywords}}{% endif %} = {{resourceType}}(name: "{{file.name}}", ext: {% if file.ext %}"{{file.ext}}"{% else %}nil{% endif %}, relativePath: "{{file.path}}", mimeType: "{{file.mimeType}}")
 {% endmacro %}
 {% macro dirBlock directory %}
   {% for file in directory.files %}
@@ -39,7 +39,7 @@ import Foundation
 {{accessModifier}} struct {{resourceType}} {
   {{accessModifier}} fileprivate(set) var name: String
   {{accessModifier}} fileprivate(set) var ext: String?
-  {{accessModifier}} fileprivate(set) var path: String
+  {{accessModifier}} fileprivate(set) var relativePath: String
   {{accessModifier}} fileprivate(set) var mimeType: String
 
   {{accessModifier}} var url: URL {
@@ -48,9 +48,9 @@ import Foundation
 
   {{accessModifier}} func url(locale: Locale?) -> URL {
     let bundle = {{param.bundle|default:"BundleToken.bundle"}}
-    let url = bundle.url(forResource: name, withExtension: ext, subdirectory: path, localization: locale?.identifier)
+    let url = bundle.url(forResource: name, withExtension: ext, subdirectory: relativePath, localization: locale?.identifier)
     guard let result = url else {
-      let file = name + (ext ? "." + ext : "")
+      let file = name + (ext != nil ? "." + ext : "")
       fatalError("Could not locate file named \(file)")
     }
     return result

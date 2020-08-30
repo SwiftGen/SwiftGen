@@ -10,15 +10,15 @@ import Foundation
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 public enum Files {
   /// File
-  public static let file = File(name: "File", ext: nil, path: "", mimeType: "application/octet-stream")
+  public static let file = File(name: "File", ext: nil, relativePath: "", mimeType: "application/octet-stream")
   /// test.txt
-  public static let testTxt = File(name: "test", ext: "txt", path: "", mimeType: "text/plain")
+  public static let testTxt = File(name: "test", ext: "txt", relativePath: "", mimeType: "text/plain")
   /// empty intermediate/subfolder/another video.mp4
-  public static let anotherVideoMp4 = File(name: "another video", ext: "mp4", path: "empty intermediate/subfolder", mimeType: "video/mp4")
+  public static let anotherVideoMp4 = File(name: "another video", ext: "mp4", relativePath: "empty intermediate/subfolder", mimeType: "video/mp4")
   /// subdir/A Video With Spaces.mp4
-  public static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", path: "subdir", mimeType: "video/mp4")
+  public static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", relativePath: "subdir", mimeType: "video/mp4")
   /// subdir/subdir/graphic.svg
-  public static let graphicSvg = File(name: "graphic", ext: "svg", path: "subdir/subdir", mimeType: "image/svg+xml")
+  public static let graphicSvg = File(name: "graphic", ext: "svg", relativePath: "subdir/subdir", mimeType: "image/svg+xml")
 }
 
 // MARK: - Implementation Details
@@ -26,7 +26,7 @@ public enum Files {
 public struct File {
   public fileprivate(set) var name: String
   public fileprivate(set) var ext: String?
-  public fileprivate(set) var path: String
+  public fileprivate(set) var relativePath: String
   public fileprivate(set) var mimeType: String
 
   public var url: URL {
@@ -35,9 +35,9 @@ public struct File {
 
   public func url(locale: Locale?) -> URL {
     let bundle = BundleToken.bundle
-    let url = bundle.url(forResource: name, withExtension: ext, subdirectory: path, localization: locale?.identifier)
+    let url = bundle.url(forResource: name, withExtension: ext, subdirectory: relativePath, localization: locale?.identifier)
     guard let result = url else {
-      let file = name + (ext ? "." + ext : "")
+      let file = name + (ext != nil ? "." + ext : "")
       fatalError("Could not locate file named \(file)")
     }
     return result
