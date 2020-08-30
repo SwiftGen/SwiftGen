@@ -64,6 +64,7 @@ public extension Parser {
   ///
   /// - Parameter paths: The paths to search recursively through.
   /// - Parameter filter: The filter to apply to each path.
+  /// - Returns: Each path, and it's parent path, found matching the filter.
   static func subpaths(in paths: [Path], matching filter: Filter) throws -> [(path: Path, parentDir: Path)] {
     try paths.flatMap { try subpaths(in: $0, matching: filter) }
   }
@@ -72,6 +73,7 @@ public extension Parser {
   ///
   /// - Parameter path: The path to search recursively through.
   /// - Parameter filter: The filter to apply to each path.
+  /// - Returns: Each path, and it's parent path, found matching the filter.
   static func subpaths(in path: Path, matching filter: Filter) throws -> [(path: Path, parentDir: Path)] {
     if path.matches(filter: filter) {
       let parentDir = path.absolute().parent()
