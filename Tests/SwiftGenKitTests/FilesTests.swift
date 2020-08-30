@@ -41,6 +41,30 @@ final class FilesTests: XCTestCase {
 
   // MARK: - Custom options
 
+  func testRelativeTo() throws {
+    let parser = try Files.Parser(options: ["relativeTo": Fixtures.directory(sub: .files).string])
+    try parser.searchAndParse(path: Fixtures.directory(sub: .files))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "relativeTo", sub: .files)
+  }
+
+  func testCompact() throws {
+    let parser = try Files.Parser(options: ["compact": true])
+    try parser.searchAndParse(path: Fixtures.directory(sub: .files))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "compact", sub: .files)
+  }
+
+  func testRelativeCompactFilter() throws {
+    let parser = try Files.Parser(options: ["relativeTo": Fixtures.directory().string, "compact": true])
+    try parser.searchAndParse(path: Fixtures.directory(sub: .files), filter: try Filter(pattern: ".mp4"))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "relativeCompactFilter", sub: .files)
+  }
+
   func testUnknownOption() throws {
     do {
       _ = try Files.Parser(options: ["SomeOptionThatDoesntExist": "foo"])

@@ -23,7 +23,7 @@ extension Files {
       self.name = path.lastComponentWithoutExtension
       if let relative = parent.flatMap({ path.relative(to: $0) })?.parent(),
         relative != "." {
-        self.path = Array(relative.components.dropFirst())
+        self.path = relative.components
       } else {
         self.path = []
       }

@@ -10,26 +10,29 @@ import Foundation
 // swiftlint:disable explicit_type_interface identifier_name
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum Files {
-  /// File
-  public static let file = File(name: "File", ext: nil, relativePath: "", mimeType: "application/octet-stream")
-  /// test.txt
-  public static let testTxt = File(name: "test", ext: "txt", relativePath: "", mimeType: "text/plain")
-  /// empty intermediate/
-  public enum emptyIntermediate {
-    /// empty intermediate/subfolder/
-    public enum subfolder {
-      /// empty intermediate/subfolder/another video.mp4
-      public static let anotherVideoMp4 = File(name: "another video", ext: "mp4", relativePath: "empty intermediate/subfolder", mimeType: "video/mp4")
+  /// Files/
+  public enum files {
+    /// Files/File
+    public static let file = File(name: "File", ext: nil, relativePath: "Files", mimeType: "application/octet-stream")
+    /// Files/test.txt
+    public static let testTxt = File(name: "test", ext: "txt", relativePath: "Files", mimeType: "text/plain")
+    /// Files/empty intermediate/
+    public enum emptyIntermediate {
+      /// Files/empty intermediate/subfolder/
+      public enum subfolder {
+        /// Files/empty intermediate/subfolder/another video.mp4
+        public static let anotherVideoMp4 = File(name: "another video", ext: "mp4", relativePath: "Files/empty intermediate/subfolder", mimeType: "video/mp4")
+      }
     }
-  }
-  /// subdir/
-  public enum subdir {
-    /// subdir/A Video With Spaces.mp4
-    public static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", relativePath: "subdir", mimeType: "video/mp4")
-    /// subdir/subdir/
+    /// Files/subdir/
     public enum subdir {
-      /// subdir/subdir/graphic.svg
-      public static let graphicSvg = File(name: "graphic", ext: "svg", relativePath: "subdir/subdir", mimeType: "image/svg+xml")
+      /// Files/subdir/A Video With Spaces.mp4
+      public static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", relativePath: "Files/subdir", mimeType: "video/mp4")
+      /// Files/subdir/subdir/
+      public enum subdir {
+        /// Files/subdir/subdir/graphic.svg
+        public static let graphicSvg = File(name: "graphic", ext: "svg", relativePath: "Files/subdir/subdir", mimeType: "image/svg+xml")
+      }
     }
   }
 }

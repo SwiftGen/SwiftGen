@@ -12,7 +12,26 @@ extension Files.Parser {
     let files = self.files
       .sorted { $0.name.lowercased() < $1.name.lowercased() }
 
-    return structure(entries: files, usingMapper: map(file:))
+    if options[Files.Option.compact] && !files.isEmpty && !files[0].path.isEmpty {
+      // Find a common ancestor of all files to reduce nested enums
+      var common = [files[0].path[0]]
+      loop: repeat {
+        for index in 0..<files.count {
+          if !files[index].path.starts(with: common) {
+            common.removeLast()
+            break loop
+          }
+        }
+        if files[0].path.count > common.count {
+          common += [files[0].path[common.count]]
+        } else {
+          break loop
+        }
+      } while (true)
+      return structure(entries: files, atKeyPath: common, usingMapper: map(file:))
+    } else {
+      return structure(entries: files, usingMapper: map(file:))
+    }
   }
 
   private func map(file: Files.File) -> [String: Any] {

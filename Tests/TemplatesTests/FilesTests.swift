@@ -9,7 +9,7 @@ import XCTest
 
 final class FilesTests: XCTestCase {
   private enum Contexts {
-    static let all = ["empty", "defaults", "mp4s"]
+    static let all = ["empty", "defaults", "mp4s", "relativeTo", "compact", "relativeCompactFilter"]
   }
 
   private let variations: VariationGenerator = { name, context in

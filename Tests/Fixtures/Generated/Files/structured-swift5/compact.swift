@@ -10,10 +10,28 @@ import Foundation
 // swiftlint:disable explicit_type_interface identifier_name
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Files {
-  /// Files/empty intermediate/subfolder/another video.mp4
-  internal static let anotherVideoMp4 = File(name: "another video", ext: "mp4", relativePath: "Files/empty intermediate/subfolder", mimeType: "video/mp4")
-  /// Files/subdir/A Video With Spaces.mp4
-  internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", relativePath: "Files/subdir", mimeType: "video/mp4")
+  /// Files/File
+  internal static let file = File(name: "File", ext: nil, relativePath: "Files", mimeType: "application/octet-stream")
+  /// Files/test.txt
+  internal static let testTxt = File(name: "test", ext: "txt", relativePath: "Files", mimeType: "text/plain")
+  /// empty intermediate/
+  internal enum emptyIntermediate {
+    /// empty intermediate/subfolder/
+    internal enum subfolder {
+      /// Files/empty intermediate/subfolder/another video.mp4
+      internal static let anotherVideoMp4 = File(name: "another video", ext: "mp4", relativePath: "Files/empty intermediate/subfolder", mimeType: "video/mp4")
+    }
+  }
+  /// subdir/
+  internal enum subdir {
+    /// Files/subdir/A Video With Spaces.mp4
+    internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", relativePath: "Files/subdir", mimeType: "video/mp4")
+    /// subdir/subdir/
+    internal enum subdir {
+      /// Files/subdir/subdir/graphic.svg
+      internal static let graphicSvg = File(name: "graphic", ext: "svg", relativePath: "Files/subdir/subdir", mimeType: "image/svg+xml")
+    }
+  }
 }
 // swiftlint:enable explicit_type_interface identifier_name
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
@@ -56,6 +74,6 @@ internal struct File {
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
-  static let bundle: Bundle = Bundle(for: BundleToken.self)
+  static let bundle = Bundle(for: BundleToken.self)
 }
 // swiftlint:enable convenience_type
