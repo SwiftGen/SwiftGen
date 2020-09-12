@@ -17,13 +17,12 @@ _None_
 * Update the Swift version in `.swift-version` so that the right version is used when building manually (using `swiftenv`).  
   [@cfiken](https://github.com/cfiken)
   [#764](https://github.com/SwiftGen/SwiftGen/issues/764)
-* Update Yams version from `3.0.0` to `4.0.0` in order to use latest version of SwiftGen with other popular tools (such as SwiftLint) as Swift package dependencies.  
-  [@hungrxyz](https://github.com/hungrxyz)
-  [#772](https://github.com/SwiftGen/SwiftGen/issues/772)
 
 ### Internal Changes
 
-_None_
+* Update Yams from `3.0.0` to `4.0.0`.  
+  [@hungrxyz](https://github.com/hungrxyz)
+  [#772](https://github.com/SwiftGen/SwiftGen/issues/772)
 
 ## 6.3.0
 
