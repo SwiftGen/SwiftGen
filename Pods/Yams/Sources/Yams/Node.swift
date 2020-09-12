@@ -9,7 +9,7 @@
 import Foundation
 
 /// YAML Node.
-public enum Node {
+public enum Node: Hashable {
     /// Scalar node.
     case scalar(Scalar)
     /// Mapping node.
@@ -186,43 +186,6 @@ extension Node {
             self[Node(string, tag.copy(with: .implicit))] = newValue
         }
     }
-}
-
-// MARK: Hashable
-
-extension Node: Hashable {
-#if !swift(>=4.1.50)
-    /// This `Node`'s Hashable `hashValue`.
-    public var hashValue: Int {
-        switch self {
-        case let .scalar(scalar):
-            return scalar.string.hashValue
-        case let .mapping(mapping):
-            return mapping.count
-        case let .sequence(sequence):
-            return sequence.count
-        }
-    }
-
-    /// Returns true if both nodes are equal.
-    ///
-    /// - parameter lhs: The left hand side Node to compare.
-    /// - parameter rhs: The right hand side Node to compare.
-    ///
-    /// - returns: True if both nodes are equal.
-    public static func == (lhs: Node, rhs: Node) -> Bool {
-        switch (lhs, rhs) {
-        case let (.scalar(lhs), .scalar(rhs)):
-            return lhs == rhs
-        case let (.mapping(lhs), .mapping(rhs)):
-            return lhs == rhs
-        case let (.sequence(lhs), .sequence(rhs)):
-            return lhs == rhs
-        default:
-            return false
-        }
-    }
-#endif
 }
 
 // MARK: Comparable

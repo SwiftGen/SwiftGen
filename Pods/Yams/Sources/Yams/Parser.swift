@@ -136,11 +136,21 @@ public final class Parser {
             }
             return key.utf8.withContiguousStorageIfAvailable({ _ in true }) != nil ? .utf8 : .utf16
         }()
+
+        /// The equivalent `Swift.Encoding` value for `self`.
+        internal var swiftStringEncoding: String.Encoding {
+            switch self {
+            case .utf8:
+                return .utf8
+            case .utf16:
+                return .utf16
+            }
+        }
     }
     /// Encoding
     public let encoding: Encoding
 
-    /// Set up Parser.
+    /// Set up a `Parser` with a `String` value as input.
     ///
     /// - parameter string: YAML string.
     /// - parameter resolver: Resolver, `.default` if omitted.
@@ -180,6 +190,30 @@ public final class Parser {
             buffer = .utf16(data)
             try data.withUnsafeBytes(startParse(with:))
         }
+    }
+
+    /// Set up a `Parser` with a `Data` value as input.
+    ///
+    /// - parameter string: YAML Data encoded using the `encoding` encoding.
+    /// - parameter resolver: Resolver, `.default` if omitted.
+    /// - parameter constructor: Constructor, `.default` if omitted.
+    /// - parameter encoding: Encoding, `.default` if omitted.
+    ///
+    /// - throws: `YamlError`.
+    public convenience init(yaml data: Data,
+                            resolver: Resolver = .default,
+                            constructor: Constructor = .default,
+                            encoding: Encoding = .default) throws {
+        guard let yamlString = String(data: data, encoding: encoding.swiftStringEncoding) else {
+            throw YamlError.dataCouldNotBeDecoded(encoding: encoding.swiftStringEncoding)
+        }
+
+        try self.init(
+            yaml: yamlString,
+            resolver: resolver,
+            constructor: constructor,
+            encoding: encoding
+        )
     }
 
     deinit {
@@ -351,13 +385,8 @@ private class Event {
         return string(from: event.data.scalar.anchor)
     }
     var scalarStyle: Node.Scalar.Style {
-#if os(Windows)
         // swiftlint:disable:next force_unwrapping
-        return Node.Scalar.Style(rawValue: UInt32(event.data.scalar.style.rawValue))!
-#else
-        // swiftlint:disable:next force_unwrapping
-        return Node.Scalar.Style(rawValue: event.data.scalar.style.rawValue)!
-#endif
+        return Node.Scalar.Style(rawValue: numericCast(event.data.scalar.style.rawValue))!
     }
     var scalarTag: String? {
         if event.data.scalar.quoted_implicit == 1 {
@@ -378,13 +407,8 @@ private class Event {
         return string(from: event.data.sequence_start.anchor)
     }
     var sequenceStyle: Node.Sequence.Style {
-#if os(Windows)
         // swiftlint:disable:next force_unwrapping
-        return Node.Sequence.Style(rawValue: UInt32(event.data.sequence_start.style.rawValue))!
-#else
-        // swiftlint:disable:next force_unwrapping
-        return Node.Sequence.Style(rawValue: event.data.sequence_start.style.rawValue)!
-#endif
+        return Node.Sequence.Style(rawValue: numericCast(event.data.sequence_start.style.rawValue))!
     }
     var sequenceTag: String? {
         return event.data.sequence_start.implicit != 0
@@ -396,13 +420,8 @@ private class Event {
         return string(from: event.data.scalar.anchor)
     }
     var mappingStyle: Node.Mapping.Style {
-#if os(Windows)
         // swiftlint:disable:next force_unwrapping
-        return Node.Mapping.Style(rawValue: UInt32(event.data.mapping_start.style.rawValue))!
-#else
-        // swiftlint:disable:next force_unwrapping
-        return Node.Mapping.Style(rawValue: event.data.mapping_start.style.rawValue)!
-#endif
+        return Node.Mapping.Style(rawValue: numericCast(event.data.mapping_start.style.rawValue))!
     }
     var mappingTag: String? {
         return event.data.mapping_start.implicit != 0
@@ -418,39 +437,3 @@ private class Event {
 private func string(from pointer: UnsafePointer<UInt8>!) -> String? {
     return String.decodeCString(pointer, as: UTF8.self, repairingInvalidCodeUnits: true)?.result
 }
-
-#if swift(>=4.2)
-#if !compiler(>=5)
-private extension Data {
-    func withUnsafeBytes<Result>(_ apply: (UnsafeRawBufferPointer) throws -> Result) rethrows -> Result {
-        return try withUnsafeBytes {
-            try apply(UnsafeRawBufferPointer(start: $0, count: count))
-        }
-    }
-}
-#endif
-#else
-private extension Data {
-    func withUnsafeBytes<Result>(_ apply: (UnsafeRawBufferPointer) throws -> Result) rethrows -> Result {
-        return try withUnsafeBytes {
-            try apply(UnsafeRawBufferPointer(start: $0, count: count))
-        }
-    }
-}
-#endif
-
-#if swift(>=4.2)
-#if !compiler(>=5)
-private extension String.UTF8View {
-    func withContiguousStorageIfAvailable<R>(_ body: (UnsafeBufferPointer<Element>) throws -> R) rethrows -> R? {
-        return nil
-    }
-}
-#endif
-#else
-private extension String.UTF8View {
-    func withContiguousStorageIfAvailable<R>(_ body: (UnsafeBufferPointer<Element>) throws -> R) rethrows -> R? {
-        return nil
-    }
-}
-#endif

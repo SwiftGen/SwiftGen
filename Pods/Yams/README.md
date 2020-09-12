@@ -13,7 +13,7 @@ A sweet and swifty [YAML](http://yaml.org/) parser built on
 
 ## Installation
 
-Building Yams requires Xcode 10.x or a Swift 4.1+/5.x toolchain with the
+Building Yams requires Xcode 11.x or a Swift 5.1+ toolchain with the
 Swift Package Manager or CMake and Ninja.
 
 ### CMake
@@ -38,7 +38,7 @@ cmake --build /path/to/build
 
 ### Swift Package Manager
 
-Add `.package(url: "https://github.com/jpsim/Yams.git", from: "3.0.1")` to your
+Add `.package(url: "https://github.com/jpsim/Yams.git", from: "4.0.0")` to your
 `Package.swift` file's `dependencies`.
 
 ### CocoaPods
@@ -65,7 +65,8 @@ and a third one for a [Yams-native](#yamsnode) representation.
 - **Encoding: `YAMLEncoder.encode(_:)`**
   Produces a YAML `String` from an instance of type conforming to `Encodable`.
 - **Decoding: `YAMLDecoder.decode(_:from:)`**
-  Decodes an instance of type conforming to `Decodable` from YAML `String`.
+  Decodes an instance of type conforming to `Decodable` from YAML `String` or
+  `Data`.
 
 ```swift
 import Foundation
@@ -158,6 +159,25 @@ yaml == """
 """
 let node = try Yams.compose(yaml: yaml)
 map == node
+```
+
+#### Integrating with [Combine](https://developer.apple.com/documentation/combine)
+
+When Apple's Combine framework is available, `YAMLDecoder` conforms to the
+`TopLevelDecoder` protocol, which allows it to be used with the
+`decode(type:decoder:)` operator:
+
+```swift
+import Combine
+import Foundation
+import Yams
+
+func fetchBook(from url: URL) -> AnyPublisher<Book, Error> {
+    URLSession.shared.dataTaskPublisher(for: url)
+        .map(\.data)
+        .decode(type: Book.self, decoder: YAMLDecoder())
+        .eraseToAnyPublisher()
+}
 ```
 
 ## License
