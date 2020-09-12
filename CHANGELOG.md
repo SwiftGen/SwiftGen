@@ -10,7 +10,7 @@ _None_
 
 ### New Features
 
-* Added `config generate-xcfilelist` subcommand to generated input and output `xcfilelists` based on your configuration file. This should be used in an Xcode build step that executes `swiftgen config run`.  
+* Added `config generate-xcfilelist` subcommand to generate input and output `xcfilelist`s based on your configuration file. These files should then be used in an Xcode build step that executes `swiftgen config run`. Don't forget to regenerate the file lists after adding/removing resources in your project in a way that might impact them.  
   [@CraigSiemens](https://github.com/CraigSiemens)
   [#441](https://github.com/SwiftGen/SwiftGen/issues/441)
 
