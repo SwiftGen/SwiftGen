@@ -7,93 +7,106 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05EDF65272825167DE26C88FED651268 /* yaml.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB4F5499B1BFAECCFDBCA794ECAB6CA /* yaml.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		08130948D746A91F20ACED7D3081B01B /* Node.Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CB467C9BB43BD8FE57709796A67A36 /* Node.Sequence.swift */; };
-		08AB77AE356DE28077EA97E5743275D9 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E9FD5944CD60D8213797570030B9D /* Resolver.swift */; };
-		1FAE337044202A3E13584E109F40194D /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6CC05A19F2DEBDBF21987FAF5CB269 /* Mark.swift */; };
-		2F41EAC15D695B9B8258CD3443B1475C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9534D4AC6D0E25EFB4D58E61F5A0AC61 /* Cocoa.framework */; };
-		39D766D53E567D642B305DDD6E403C01 /* Yams-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CC041293A12F5E693395C57E6775B9 /* Yams-dummy.m */; };
-		3B4E0BC433920B50EC7AFC5D1D2125B0 /* CYaml.h in Headers */ = {isa = PBXBuildFile; fileRef = 14043F141B96AAB0118E9E2C2E0FE4E2 /* CYaml.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4D9E3FCB062BFC04E3B025689B922873 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E712D7C6AD990E9027D775114F0496 /* Decoder.swift */; };
-		5DEA1BC26C2C686EC328B9324691A606 /* scanner.c in Sources */ = {isa = PBXBuildFile; fileRef = 576A0292A2434EF45974F53DC9B74CE0 /* scanner.c */; };
-		6473E6F66CAD641D0178FB1C96011AEB /* Emitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D30378462B60C67CDACC181F6171 /* Emitter.swift */; };
-		77744DF556744E40C74373C08D2E1E68 /* Yams-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B3C7F6EBD458FB97509067CA4B7A9C3 /* Yams-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E0B914F9792F2B119D3E3607FED125A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C1029A0D87627C3B530A3522E97B6E /* Parser.swift */; };
-		85A9C1A13853329D7DD48369820A12C2 /* Node.Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = E389742AA413518D04368286BFC347C5 /* Node.Mapping.swift */; };
-		882B4A968628D3A004205CD510CCDACA /* Node.Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7360BD0AB1C41EC384F78A1D69812BCE /* Node.Scalar.swift */; };
-		89159E997F75477DEC8D8C1E16F021B2 /* reader.c in Sources */ = {isa = PBXBuildFile; fileRef = D01B9252C73D2AD4FC4055392A19E700 /* reader.c */; };
-		8D2CCB786FEC6B4235F73DF3DCB7CFC1 /* shim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229348C650ABD6F4831594C49CEA1A0F /* shim.swift */; };
-		8EB86A9A133344DC8CA6322639E25B8B /* yaml_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DBF5FDAD31A97986CD0A5C0824F07D7 /* yaml_private.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		96EB8957E5221731C61626160F176A34 /* Yams.h in Headers */ = {isa = PBXBuildFile; fileRef = ED43515965CAA77E3319395E8CEDFD0A /* Yams.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		97E32A0B8B22E76B2A783189DFE16D99 /* String+Yams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C9F1D091D37877F8442E7760D6C7C /* String+Yams.swift */; };
-		9F93EC3EB74C8CDB0B132DC63FBE6E0A /* emitter.c in Sources */ = {isa = PBXBuildFile; fileRef = 0537645FEBAD9625BAE2BCE6097AD7E4 /* emitter.c */; };
-		A4E1F5BC3565E5A65CB95162A3D4DFEA /* Representer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E7C81DB384A20DCB6E1EF06110C8C /* Representer.swift */; };
-		A945F971EE26E665222EB519BA4B4E27 /* YamlError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0615239E9C05C2BCA04CAAFA0E398354 /* YamlError.swift */; };
-		AD64AA71B9EFC47368580281652DFBC2 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681598FDEDA746A9FE6F4177A1536AA9 /* Node.swift */; };
-		B0AC4A4E8F9DD943B62CEAE7F2D9D1C6 /* api.c in Sources */ = {isa = PBXBuildFile; fileRef = 80A5E0202AF1469AE495C12A24FED683 /* api.c */; };
-		C4EAAC4749B623EE77A1949B531797AE /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5CBC3F2845B42FEB1CC6644C77B198 /* Constructor.swift */; };
-		C5DC44E30FC2725D920FDA1F9930A864 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CE9C0C3371671DEA71562CCEF8D169 /* Encoder.swift */; };
-		DD873847AB0C926D3EFC9C69AE057864 /* parser.c in Sources */ = {isa = PBXBuildFile; fileRef = 800A3C5F20F4AC56FBA00F81FA7682B2 /* parser.c */; };
-		FA7C7C9E075805399A03366FE4A2AB4B /* writer.c in Sources */ = {isa = PBXBuildFile; fileRef = 9518F07E13D2E8C83BF88BA18CB2B5CF /* writer.c */; };
-		FCB74AC3519581B1E016264DC638AFDB /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CE3F1EDA17C23602221D197DF46A33 /* Tag.swift */; };
+		15BD9FF1424AF1B0B22DC8A89E7379FF /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579E97B6CDB8766BBB48ABE90FCD45F /* Node.swift */; };
+		2F7CFE4AD9FEFEABD625D67460820706 /* Node.Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78457F9CBA580915DE6CF4CC0E7F47DF /* Node.Mapping.swift */; };
+		34BE802E23EC77117DFC02A96880C013 /* yaml_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 66FC4AEB140591E1D2D379A84F18B3FB /* yaml_private.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		41A898BCDCDADC3006336632B2954957 /* parser.c in Sources */ = {isa = PBXBuildFile; fileRef = FB8F80B6AA1A84C85331421F6CF0CFCA /* parser.c */; };
+		4393F2AD9A6F59F755DB1FA0EEE54F09 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABF1EDD0AA2CB09D5A2CEA92B9729D6 /* Decoder.swift */; };
+		491AAF6CB32CFDF801ACDB807EBCAADE /* yaml.h in Headers */ = {isa = PBXBuildFile; fileRef = F8FBE648D6797630B1E07022A9C27D64 /* yaml.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4F7ECA7AE8533A69372935BCDDC37AB5 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1371DFA233921E63CE47470322D534DE /* Mark.swift */; };
+		582396B8FF479D962824F59EB367EECF /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD6688935A8E933C72C75FC723A16F7 /* Resolver.swift */; };
+		5881A5B32EC291C28CFCA564D62F3D86 /* Node.Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB4A1C2D290CAAEC98AC675321A9FE8 /* Node.Sequence.swift */; };
+		6A24C0A4B5A4EB5231D3C013B957FB90 /* Yams-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A252F6D507F23D479F3F7A105B124AF6 /* Yams-dummy.m */; };
+		701896EC7DC9ED8A8FB32F3E2CBCD0AA /* api.c in Sources */ = {isa = PBXBuildFile; fileRef = 99E07F90C5F2522D4486E195B693317E /* api.c */; };
+		70EFDD554EE131588937E67D72EE7B32 /* CYaml.h in Headers */ = {isa = PBXBuildFile; fileRef = D73068E2E1175B1660094C6F86B2C3E1 /* CYaml.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		731BC73F1E81DDC13D3268967BB68FF2 /* String+Yams.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB37B215EB43FE27F482BC42D42BF6F6 /* String+Yams.swift */; };
+		833A60E461FC2A82D41FAE84FF882270 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C86665B1AA5E50BF38171D432A74BB /* Tag.swift */; };
+		8498A519955CB78F013E48E2021FBB95 /* YamlError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7DD9BBC945362E721AB47512B544CA /* YamlError.swift */; };
+		865DAAFF0EEFAD1C29EC1174EE3CB058 /* Yams.h in Headers */ = {isa = PBXBuildFile; fileRef = E841C3E3051DC5C6A0EB1B37A54837A3 /* Yams.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8A418B2E1AA9EE3519D2A1166475A348 /* Emitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA8C1E85507A5DE0147E9881DFBD6C2 /* Emitter.swift */; };
+		9A8AD6E857B042BFD336C464344014E2 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6118D40104E5B8D2418517631706B9B1 /* Encoder.swift */; };
+		AF1D66CF6BA4479936FC197B64074CBE /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6C5ADA950DA34A28BAC956B76DCFE0 /* Parser.swift */; };
+		B42EA75AE37E752987F37E5525580246 /* scanner.c in Sources */ = {isa = PBXBuildFile; fileRef = F830EE968F7C35D626F33B2875D5CEB0 /* scanner.c */; };
+		B9C9D1BEF4BDC7FC4646C8AF6BA63B7A /* writer.c in Sources */ = {isa = PBXBuildFile; fileRef = C707FA51A74F12257D5514A8F5A88CBD /* writer.c */; };
+		BD4800E5A1DCB45FA6828CDAF62D850F /* emitter.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A3B528CDBAF2A49CCD2568EC8A44A /* emitter.c */; };
+		C7002EADBA5A136DD92BBDE9A12EA07A /* Yams-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A82BE2EA7EA7C4B2D4B263B4C8DC44C1 /* Yams-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D171C5939976902BCF522A6E89DFA1D0 /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75487366A867F8808419AAD562A5BD5D /* Constructor.swift */; };
+		D80B8949385D98E83DA1A02BA7236209 /* Representer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7612E04DAB4115F5BF3A94178C452A89 /* Representer.swift */; };
+		DD687DF57034AF46B09D3EFD4FA86026 /* reader.c in Sources */ = {isa = PBXBuildFile; fileRef = C05AE05D1AFDF283E671C91A3313D1D3 /* reader.c */; };
+		E54724A1DB4B2638ECE8EA69C2BB340A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9534D4AC6D0E25EFB4D58E61F5A0AC61 /* Cocoa.framework */; };
+		FABA2A53BB8B32E333344604D0680964 /* Node.Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AA0D6E49E902C81FADD446DA7327A1 /* Node.Scalar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0537645FEBAD9625BAE2BCE6097AD7E4 /* emitter.c */ = {isa = PBXFileReference; includeInIndex = 1; name = emitter.c; path = Sources/CYaml/src/emitter.c; sourceTree = "<group>"; };
-		0615239E9C05C2BCA04CAAFA0E398354 /* YamlError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YamlError.swift; path = Sources/Yams/YamlError.swift; sourceTree = "<group>"; };
-		0C96E08F97C1A764F0404565CD555AE4 /* Yams-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Yams-prefix.pch"; sourceTree = "<group>"; };
-		14043F141B96AAB0118E9E2C2E0FE4E2 /* CYaml.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CYaml.h; path = Sources/CYaml/include/CYaml.h; sourceTree = "<group>"; };
-		229348C650ABD6F4831594C49CEA1A0F /* shim.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = shim.swift; path = Sources/Yams/shim.swift; sourceTree = "<group>"; };
-		2F5CBC3F2845B42FEB1CC6644C77B198 /* Constructor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constructor.swift; path = Sources/Yams/Constructor.swift; sourceTree = "<group>"; };
-		3B3C7F6EBD458FB97509067CA4B7A9C3 /* Yams-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Yams-umbrella.h"; sourceTree = "<group>"; };
-		40CB467C9BB43BD8FE57709796A67A36 /* Node.Sequence.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Node.Sequence.swift; path = Sources/Yams/Node.Sequence.swift; sourceTree = "<group>"; };
-		45E712D7C6AD990E9027D775114F0496 /* Decoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Decoder.swift; path = Sources/Yams/Decoder.swift; sourceTree = "<group>"; };
+		02AA0D6E49E902C81FADD446DA7327A1 /* Node.Scalar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Node.Scalar.swift; path = Sources/Yams/Node.Scalar.swift; sourceTree = "<group>"; };
+		0579E97B6CDB8766BBB48ABE90FCD45F /* Node.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Node.swift; path = Sources/Yams/Node.swift; sourceTree = "<group>"; };
+		1371DFA233921E63CE47470322D534DE /* Mark.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mark.swift; path = Sources/Yams/Mark.swift; sourceTree = "<group>"; };
+		2C4A3B528CDBAF2A49CCD2568EC8A44A /* emitter.c */ = {isa = PBXFileReference; includeInIndex = 1; name = emitter.c; path = Sources/CYaml/src/emitter.c; sourceTree = "<group>"; };
+		478736C458ADB77D804B1244CA9D94EE /* Yams.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Yams.release.xcconfig; sourceTree = "<group>"; };
 		5217BBE1718B3BC3F01F46E66C76F8F3 /* Yams.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Yams.framework; path = Yams.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		53C1029A0D87627C3B530A3522E97B6E /* Parser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = Sources/Yams/Parser.swift; sourceTree = "<group>"; };
-		576A0292A2434EF45974F53DC9B74CE0 /* scanner.c */ = {isa = PBXFileReference; includeInIndex = 1; name = scanner.c; path = Sources/CYaml/src/scanner.c; sourceTree = "<group>"; };
-		5CB4F5499B1BFAECCFDBCA794ECAB6CA /* yaml.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = yaml.h; path = Sources/CYaml/include/yaml.h; sourceTree = "<group>"; };
-		681598FDEDA746A9FE6F4177A1536AA9 /* Node.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Node.swift; path = Sources/Yams/Node.swift; sourceTree = "<group>"; };
-		69CE9C0C3371671DEA71562CCEF8D169 /* Encoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Encoder.swift; path = Sources/Yams/Encoder.swift; sourceTree = "<group>"; };
-		6D9F019076020D02421A6AAF1B5DE9F5 /* Yams.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Yams.release.xcconfig; sourceTree = "<group>"; };
-		6DBF5FDAD31A97986CD0A5C0824F07D7 /* yaml_private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = yaml_private.h; path = Sources/CYaml/src/yaml_private.h; sourceTree = "<group>"; };
-		6F6CC05A19F2DEBDBF21987FAF5CB269 /* Mark.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mark.swift; path = Sources/Yams/Mark.swift; sourceTree = "<group>"; };
-		7360BD0AB1C41EC384F78A1D69812BCE /* Node.Scalar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Node.Scalar.swift; path = Sources/Yams/Node.Scalar.swift; sourceTree = "<group>"; };
-		7569253A6101383E477ECB32316E8EAA /* Yams-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Yams-Info.plist"; sourceTree = "<group>"; };
-		756C9F1D091D37877F8442E7760D6C7C /* String+Yams.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Yams.swift"; path = "Sources/Yams/String+Yams.swift"; sourceTree = "<group>"; };
-		800A3C5F20F4AC56FBA00F81FA7682B2 /* parser.c */ = {isa = PBXFileReference; includeInIndex = 1; name = parser.c; path = Sources/CYaml/src/parser.c; sourceTree = "<group>"; };
-		80A5E0202AF1469AE495C12A24FED683 /* api.c */ = {isa = PBXFileReference; includeInIndex = 1; name = api.c; path = Sources/CYaml/src/api.c; sourceTree = "<group>"; };
-		84C3D30378462B60C67CDACC181F6171 /* Emitter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Emitter.swift; path = Sources/Yams/Emitter.swift; sourceTree = "<group>"; };
-		865979F8EA297777D5EE61555BE150EA /* Yams.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Yams.debug.xcconfig; sourceTree = "<group>"; };
-		87CC041293A12F5E693395C57E6775B9 /* Yams-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Yams-dummy.m"; sourceTree = "<group>"; };
-		8A5E9FD5944CD60D8213797570030B9D /* Resolver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Resolver.swift; path = Sources/Yams/Resolver.swift; sourceTree = "<group>"; };
-		8B569ADD9E4BF3A9A46998C3424FBE7A /* Yams.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Yams.modulemap; sourceTree = "<group>"; };
-		9518F07E13D2E8C83BF88BA18CB2B5CF /* writer.c */ = {isa = PBXFileReference; includeInIndex = 1; name = writer.c; path = Sources/CYaml/src/writer.c; sourceTree = "<group>"; };
+		6118D40104E5B8D2418517631706B9B1 /* Encoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Encoder.swift; path = Sources/Yams/Encoder.swift; sourceTree = "<group>"; };
+		66FC4AEB140591E1D2D379A84F18B3FB /* yaml_private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = yaml_private.h; path = Sources/CYaml/src/yaml_private.h; sourceTree = "<group>"; };
+		75487366A867F8808419AAD562A5BD5D /* Constructor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constructor.swift; path = Sources/Yams/Constructor.swift; sourceTree = "<group>"; };
+		7612E04DAB4115F5BF3A94178C452A89 /* Representer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Representer.swift; path = Sources/Yams/Representer.swift; sourceTree = "<group>"; };
+		78457F9CBA580915DE6CF4CC0E7F47DF /* Node.Mapping.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Node.Mapping.swift; path = Sources/Yams/Node.Mapping.swift; sourceTree = "<group>"; };
+		83C86665B1AA5E50BF38171D432A74BB /* Tag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Tag.swift; path = Sources/Yams/Tag.swift; sourceTree = "<group>"; };
+		8ABF1EDD0AA2CB09D5A2CEA92B9729D6 /* Decoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Decoder.swift; path = Sources/Yams/Decoder.swift; sourceTree = "<group>"; };
+		8D6C5ADA950DA34A28BAC956B76DCFE0 /* Parser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = Sources/Yams/Parser.swift; sourceTree = "<group>"; };
 		9534D4AC6D0E25EFB4D58E61F5A0AC61 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		A2CE3F1EDA17C23602221D197DF46A33 /* Tag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Tag.swift; path = Sources/Yams/Tag.swift; sourceTree = "<group>"; };
-		B55E7C81DB384A20DCB6E1EF06110C8C /* Representer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Representer.swift; path = Sources/Yams/Representer.swift; sourceTree = "<group>"; };
-		D01B9252C73D2AD4FC4055392A19E700 /* reader.c */ = {isa = PBXFileReference; includeInIndex = 1; name = reader.c; path = Sources/CYaml/src/reader.c; sourceTree = "<group>"; };
-		E389742AA413518D04368286BFC347C5 /* Node.Mapping.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Node.Mapping.swift; path = Sources/Yams/Node.Mapping.swift; sourceTree = "<group>"; };
-		ED43515965CAA77E3319395E8CEDFD0A /* Yams.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Yams.h; path = Sources/Yams/Yams.h; sourceTree = "<group>"; };
+		99793527AE42E4F06269ED0381AF1F81 /* Yams-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Yams-prefix.pch"; sourceTree = "<group>"; };
+		99E07F90C5F2522D4486E195B693317E /* api.c */ = {isa = PBXFileReference; includeInIndex = 1; name = api.c; path = Sources/CYaml/src/api.c; sourceTree = "<group>"; };
+		A252F6D507F23D479F3F7A105B124AF6 /* Yams-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Yams-dummy.m"; sourceTree = "<group>"; };
+		A43EA5070404C2432DEAE73C42A84B95 /* Yams.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Yams.debug.xcconfig; sourceTree = "<group>"; };
+		A82BE2EA7EA7C4B2D4B263B4C8DC44C1 /* Yams-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Yams-umbrella.h"; sourceTree = "<group>"; };
+		A8FB6DF8A98749C4E73BAAF8AF0F4F70 /* Yams.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Yams.modulemap; sourceTree = "<group>"; };
+		AEEC456F16BF071659D5598E8F6645DD /* Yams-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Yams-Info.plist"; sourceTree = "<group>"; };
+		C05AE05D1AFDF283E671C91A3313D1D3 /* reader.c */ = {isa = PBXFileReference; includeInIndex = 1; name = reader.c; path = Sources/CYaml/src/reader.c; sourceTree = "<group>"; };
+		C707FA51A74F12257D5514A8F5A88CBD /* writer.c */ = {isa = PBXFileReference; includeInIndex = 1; name = writer.c; path = Sources/CYaml/src/writer.c; sourceTree = "<group>"; };
+		CFB4A1C2D290CAAEC98AC675321A9FE8 /* Node.Sequence.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Node.Sequence.swift; path = Sources/Yams/Node.Sequence.swift; sourceTree = "<group>"; };
+		D73068E2E1175B1660094C6F86B2C3E1 /* CYaml.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CYaml.h; path = Sources/CYaml/include/CYaml.h; sourceTree = "<group>"; };
+		E841C3E3051DC5C6A0EB1B37A54837A3 /* Yams.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Yams.h; path = Sources/Yams/Yams.h; sourceTree = "<group>"; };
+		EBA8C1E85507A5DE0147E9881DFBD6C2 /* Emitter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Emitter.swift; path = Sources/Yams/Emitter.swift; sourceTree = "<group>"; };
+		EBD6688935A8E933C72C75FC723A16F7 /* Resolver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Resolver.swift; path = Sources/Yams/Resolver.swift; sourceTree = "<group>"; };
+		F830EE968F7C35D626F33B2875D5CEB0 /* scanner.c */ = {isa = PBXFileReference; includeInIndex = 1; name = scanner.c; path = Sources/CYaml/src/scanner.c; sourceTree = "<group>"; };
+		F8FBE648D6797630B1E07022A9C27D64 /* yaml.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = yaml.h; path = Sources/CYaml/include/yaml.h; sourceTree = "<group>"; };
+		FA7DD9BBC945362E721AB47512B544CA /* YamlError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YamlError.swift; path = Sources/Yams/YamlError.swift; sourceTree = "<group>"; };
+		FB37B215EB43FE27F482BC42D42BF6F6 /* String+Yams.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Yams.swift"; path = "Sources/Yams/String+Yams.swift"; sourceTree = "<group>"; };
+		FB8F80B6AA1A84C85331421F6CF0CFCA /* parser.c */ = {isa = PBXFileReference; includeInIndex = 1; name = parser.c; path = Sources/CYaml/src/parser.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6D16E87CBD5CCAD5726D4BB24CED312F /* Frameworks */ = {
+		F750F5F3EB0EC73441AE593321E0B522 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F41EAC15D695B9B8258CD3443B1475C /* Cocoa.framework in Frameworks */,
+				E54724A1DB4B2638ECE8EA69C2BB340A /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0CC98CEC7E843C5E5586270FD6177B1B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A8FB6DF8A98749C4E73BAAF8AF0F4F70 /* Yams.modulemap */,
+				A252F6D507F23D479F3F7A105B124AF6 /* Yams-dummy.m */,
+				AEEC456F16BF071659D5598E8F6645DD /* Yams-Info.plist */,
+				99793527AE42E4F06269ED0381AF1F81 /* Yams-prefix.pch */,
+				A82BE2EA7EA7C4B2D4B263B4C8DC44C1 /* Yams-umbrella.h */,
+				A43EA5070404C2432DEAE73C42A84B95 /* Yams.debug.xcconfig */,
+				478736C458ADB77D804B1244CA9D94EE /* Yams.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Yams";
+			sourceTree = "<group>";
+		};
 		1C653B3F49615D5CF26A26F719790B96 = {
 			isa = PBXGroup;
 			children = (
 				2C709219F61FB7D2E90083EFC095A04F /* Frameworks */,
 				F549D8589E2A55655A23BC798E996CD6 /* Products */,
-				6B228E544CBBAF67FD61D7FB88AD5512 /* Yams */,
+				82359838846527ADA14013B01BC197B9 /* Yams */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,36 +118,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6B228E544CBBAF67FD61D7FB88AD5512 /* Yams */ = {
+		82359838846527ADA14013B01BC197B9 /* Yams */ = {
 			isa = PBXGroup;
 			children = (
-				80A5E0202AF1469AE495C12A24FED683 /* api.c */,
-				2F5CBC3F2845B42FEB1CC6644C77B198 /* Constructor.swift */,
-				14043F141B96AAB0118E9E2C2E0FE4E2 /* CYaml.h */,
-				45E712D7C6AD990E9027D775114F0496 /* Decoder.swift */,
-				0537645FEBAD9625BAE2BCE6097AD7E4 /* emitter.c */,
-				84C3D30378462B60C67CDACC181F6171 /* Emitter.swift */,
-				69CE9C0C3371671DEA71562CCEF8D169 /* Encoder.swift */,
-				6F6CC05A19F2DEBDBF21987FAF5CB269 /* Mark.swift */,
-				681598FDEDA746A9FE6F4177A1536AA9 /* Node.swift */,
-				E389742AA413518D04368286BFC347C5 /* Node.Mapping.swift */,
-				7360BD0AB1C41EC384F78A1D69812BCE /* Node.Scalar.swift */,
-				40CB467C9BB43BD8FE57709796A67A36 /* Node.Sequence.swift */,
-				800A3C5F20F4AC56FBA00F81FA7682B2 /* parser.c */,
-				53C1029A0D87627C3B530A3522E97B6E /* Parser.swift */,
-				D01B9252C73D2AD4FC4055392A19E700 /* reader.c */,
-				B55E7C81DB384A20DCB6E1EF06110C8C /* Representer.swift */,
-				8A5E9FD5944CD60D8213797570030B9D /* Resolver.swift */,
-				576A0292A2434EF45974F53DC9B74CE0 /* scanner.c */,
-				229348C650ABD6F4831594C49CEA1A0F /* shim.swift */,
-				756C9F1D091D37877F8442E7760D6C7C /* String+Yams.swift */,
-				A2CE3F1EDA17C23602221D197DF46A33 /* Tag.swift */,
-				9518F07E13D2E8C83BF88BA18CB2B5CF /* writer.c */,
-				5CB4F5499B1BFAECCFDBCA794ECAB6CA /* yaml.h */,
-				6DBF5FDAD31A97986CD0A5C0824F07D7 /* yaml_private.h */,
-				0615239E9C05C2BCA04CAAFA0E398354 /* YamlError.swift */,
-				ED43515965CAA77E3319395E8CEDFD0A /* Yams.h */,
-				96F89E1A554E52FD6AA8338F8A0091B0 /* Support Files */,
+				99E07F90C5F2522D4486E195B693317E /* api.c */,
+				75487366A867F8808419AAD562A5BD5D /* Constructor.swift */,
+				D73068E2E1175B1660094C6F86B2C3E1 /* CYaml.h */,
+				8ABF1EDD0AA2CB09D5A2CEA92B9729D6 /* Decoder.swift */,
+				2C4A3B528CDBAF2A49CCD2568EC8A44A /* emitter.c */,
+				EBA8C1E85507A5DE0147E9881DFBD6C2 /* Emitter.swift */,
+				6118D40104E5B8D2418517631706B9B1 /* Encoder.swift */,
+				1371DFA233921E63CE47470322D534DE /* Mark.swift */,
+				0579E97B6CDB8766BBB48ABE90FCD45F /* Node.swift */,
+				78457F9CBA580915DE6CF4CC0E7F47DF /* Node.Mapping.swift */,
+				02AA0D6E49E902C81FADD446DA7327A1 /* Node.Scalar.swift */,
+				CFB4A1C2D290CAAEC98AC675321A9FE8 /* Node.Sequence.swift */,
+				FB8F80B6AA1A84C85331421F6CF0CFCA /* parser.c */,
+				8D6C5ADA950DA34A28BAC956B76DCFE0 /* Parser.swift */,
+				C05AE05D1AFDF283E671C91A3313D1D3 /* reader.c */,
+				7612E04DAB4115F5BF3A94178C452A89 /* Representer.swift */,
+				EBD6688935A8E933C72C75FC723A16F7 /* Resolver.swift */,
+				F830EE968F7C35D626F33B2875D5CEB0 /* scanner.c */,
+				FB37B215EB43FE27F482BC42D42BF6F6 /* String+Yams.swift */,
+				83C86665B1AA5E50BF38171D432A74BB /* Tag.swift */,
+				C707FA51A74F12257D5514A8F5A88CBD /* writer.c */,
+				F8FBE648D6797630B1E07022A9C27D64 /* yaml.h */,
+				66FC4AEB140591E1D2D379A84F18B3FB /* yaml_private.h */,
+				FA7DD9BBC945362E721AB47512B544CA /* YamlError.swift */,
+				E841C3E3051DC5C6A0EB1B37A54837A3 /* Yams.h */,
+				0CC98CEC7E843C5E5586270FD6177B1B /* Support Files */,
 			);
 			name = Yams;
 			path = Yams;
@@ -148,21 +160,6 @@
 			name = "OS X";
 			sourceTree = "<group>";
 		};
-		96F89E1A554E52FD6AA8338F8A0091B0 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				8B569ADD9E4BF3A9A46998C3424FBE7A /* Yams.modulemap */,
-				87CC041293A12F5E693395C57E6775B9 /* Yams-dummy.m */,
-				7569253A6101383E477ECB32316E8EAA /* Yams-Info.plist */,
-				0C96E08F97C1A764F0404565CD555AE4 /* Yams-prefix.pch */,
-				3B3C7F6EBD458FB97509067CA4B7A9C3 /* Yams-umbrella.h */,
-				865979F8EA297777D5EE61555BE150EA /* Yams.debug.xcconfig */,
-				6D9F019076020D02421A6AAF1B5DE9F5 /* Yams.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Yams";
-			sourceTree = "<group>";
-		};
 		F549D8589E2A55655A23BC798E996CD6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,15 +171,15 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		7634C4E9312231F27ABAC8CC5D587870 /* Headers */ = {
+		C493F13B3C0C0C03AAA81368B4610C6A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B4E0BC433920B50EC7AFC5D1D2125B0 /* CYaml.h in Headers */,
-				05EDF65272825167DE26C88FED651268 /* yaml.h in Headers */,
-				8EB86A9A133344DC8CA6322639E25B8B /* yaml_private.h in Headers */,
-				77744DF556744E40C74373C08D2E1E68 /* Yams-umbrella.h in Headers */,
-				96EB8957E5221731C61626160F176A34 /* Yams.h in Headers */,
+				70EFDD554EE131588937E67D72EE7B32 /* CYaml.h in Headers */,
+				491AAF6CB32CFDF801ACDB807EBCAADE /* yaml.h in Headers */,
+				34BE802E23EC77117DFC02A96880C013 /* yaml_private.h in Headers */,
+				C7002EADBA5A136DD92BBDE9A12EA07A /* Yams-umbrella.h in Headers */,
+				865DAAFF0EEFAD1C29EC1174EE3CB058 /* Yams.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,12 +188,12 @@
 /* Begin PBXNativeTarget section */
 		1A02B50228A8EE851568FFB6A9533223 /* Yams */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 226CD7D944A159C68F4DEE9F87579DF6 /* Build configuration list for PBXNativeTarget "Yams" */;
+			buildConfigurationList = 480DCCAE4D613C802289D424229275CD /* Build configuration list for PBXNativeTarget "Yams" */;
 			buildPhases = (
-				7634C4E9312231F27ABAC8CC5D587870 /* Headers */,
-				CB0F3EE08A5304F3F5226952C5725B2D /* Sources */,
-				6D16E87CBD5CCAD5726D4BB24CED312F /* Frameworks */,
-				60543D3F8E451BF575E3CBDE943B46DC /* Resources */,
+				C493F13B3C0C0C03AAA81368B4610C6A /* Headers */,
+				003E18636A1569C19A73BB3286BF853D /* Sources */,
+				F750F5F3EB0EC73441AE593321E0B522 /* Frameworks */,
+				D28BDB7198256F8A576077A09B50247B /* Resources */,
 			);
 			buildRules = (
 			);
@@ -235,7 +232,7 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		60543D3F8E451BF575E3CBDE943B46DC /* Resources */ = {
+		D28BDB7198256F8A576077A09B50247B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -245,72 +242,38 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CB0F3EE08A5304F3F5226952C5725B2D /* Sources */ = {
+		003E18636A1569C19A73BB3286BF853D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0AC4A4E8F9DD943B62CEAE7F2D9D1C6 /* api.c in Sources */,
-				C4EAAC4749B623EE77A1949B531797AE /* Constructor.swift in Sources */,
-				4D9E3FCB062BFC04E3B025689B922873 /* Decoder.swift in Sources */,
-				9F93EC3EB74C8CDB0B132DC63FBE6E0A /* emitter.c in Sources */,
-				6473E6F66CAD641D0178FB1C96011AEB /* Emitter.swift in Sources */,
-				C5DC44E30FC2725D920FDA1F9930A864 /* Encoder.swift in Sources */,
-				1FAE337044202A3E13584E109F40194D /* Mark.swift in Sources */,
-				85A9C1A13853329D7DD48369820A12C2 /* Node.Mapping.swift in Sources */,
-				882B4A968628D3A004205CD510CCDACA /* Node.Scalar.swift in Sources */,
-				08130948D746A91F20ACED7D3081B01B /* Node.Sequence.swift in Sources */,
-				AD64AA71B9EFC47368580281652DFBC2 /* Node.swift in Sources */,
-				DD873847AB0C926D3EFC9C69AE057864 /* parser.c in Sources */,
-				7E0B914F9792F2B119D3E3607FED125A /* Parser.swift in Sources */,
-				89159E997F75477DEC8D8C1E16F021B2 /* reader.c in Sources */,
-				A4E1F5BC3565E5A65CB95162A3D4DFEA /* Representer.swift in Sources */,
-				08AB77AE356DE28077EA97E5743275D9 /* Resolver.swift in Sources */,
-				5DEA1BC26C2C686EC328B9324691A606 /* scanner.c in Sources */,
-				8D2CCB786FEC6B4235F73DF3DCB7CFC1 /* shim.swift in Sources */,
-				97E32A0B8B22E76B2A783189DFE16D99 /* String+Yams.swift in Sources */,
-				FCB74AC3519581B1E016264DC638AFDB /* Tag.swift in Sources */,
-				FA7C7C9E075805399A03366FE4A2AB4B /* writer.c in Sources */,
-				A945F971EE26E665222EB519BA4B4E27 /* YamlError.swift in Sources */,
-				39D766D53E567D642B305DDD6E403C01 /* Yams-dummy.m in Sources */,
+				701896EC7DC9ED8A8FB32F3E2CBCD0AA /* api.c in Sources */,
+				D171C5939976902BCF522A6E89DFA1D0 /* Constructor.swift in Sources */,
+				4393F2AD9A6F59F755DB1FA0EEE54F09 /* Decoder.swift in Sources */,
+				BD4800E5A1DCB45FA6828CDAF62D850F /* emitter.c in Sources */,
+				8A418B2E1AA9EE3519D2A1166475A348 /* Emitter.swift in Sources */,
+				9A8AD6E857B042BFD336C464344014E2 /* Encoder.swift in Sources */,
+				4F7ECA7AE8533A69372935BCDDC37AB5 /* Mark.swift in Sources */,
+				2F7CFE4AD9FEFEABD625D67460820706 /* Node.Mapping.swift in Sources */,
+				FABA2A53BB8B32E333344604D0680964 /* Node.Scalar.swift in Sources */,
+				5881A5B32EC291C28CFCA564D62F3D86 /* Node.Sequence.swift in Sources */,
+				15BD9FF1424AF1B0B22DC8A89E7379FF /* Node.swift in Sources */,
+				41A898BCDCDADC3006336632B2954957 /* parser.c in Sources */,
+				AF1D66CF6BA4479936FC197B64074CBE /* Parser.swift in Sources */,
+				DD687DF57034AF46B09D3EFD4FA86026 /* reader.c in Sources */,
+				D80B8949385D98E83DA1A02BA7236209 /* Representer.swift in Sources */,
+				582396B8FF479D962824F59EB367EECF /* Resolver.swift in Sources */,
+				B42EA75AE37E752987F37E5525580246 /* scanner.c in Sources */,
+				731BC73F1E81DDC13D3268967BB68FF2 /* String+Yams.swift in Sources */,
+				833A60E461FC2A82D41FAE84FF882270 /* Tag.swift in Sources */,
+				B9C9D1BEF4BDC7FC4646C8AF6BA63B7A /* writer.c in Sources */,
+				8498A519955CB78F013E48E2021FBB95 /* YamlError.swift in Sources */,
+				6A24C0A4B5A4EB5231D3C013B957FB90 /* Yams-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		021BAC56583E0E45F775510BC5B0C717 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 865979F8EA297777D5EE61555BE150EA /* Yams.debug.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/Yams/Yams-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Yams/Yams-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MODULEMAP_FILE = "Target Support Files/Yams/Yams.modulemap";
-				PRODUCT_MODULE_NAME = Yams;
-				PRODUCT_NAME = Yams;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.2;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		24DF9D5C61A659E23B2FB62F98B7264D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -375,9 +338,42 @@
 			};
 			name = Debug;
 		};
-		97C2DE5EC81AD5776952497BFB10297A /* Release */ = {
+		59142A61B1C0FDBE5B46823578E397E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D9F019076020D02421A6AAF1B5DE9F5 /* Yams.release.xcconfig */;
+			baseConfigurationReference = A43EA5070404C2432DEAE73C42A84B95 /* Yams.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/Yams/Yams-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Yams/Yams-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "Target Support Files/Yams/Yams.modulemap";
+				PRODUCT_MODULE_NAME = Yams;
+				PRODUCT_NAME = Yams;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		858E2EFFF9FC752989933ABB14F22494 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 478736C458ADB77D804B1244CA9D94EE /* Yams.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
@@ -471,11 +467,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		226CD7D944A159C68F4DEE9F87579DF6 /* Build configuration list for PBXNativeTarget "Yams" */ = {
+		480DCCAE4D613C802289D424229275CD /* Build configuration list for PBXNativeTarget "Yams" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				021BAC56583E0E45F775510BC5B0C717 /* Debug */,
-				97C2DE5EC81AD5776952497BFB10297A /* Release */,
+				59142A61B1C0FDBE5B46823578E397E7 /* Debug */,
+				858E2EFFF9FC752989933ABB14F22494 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

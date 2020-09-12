@@ -81,10 +81,10 @@ CACHE_KEYS:
       Yams:
         :debug: bd049f3173d31876da7ed672e2e00ece
         :release: bd049f3173d31876da7ed672e2e00ece
-    CHECKSUM: 4199a97883e0369046e3fe882fcc95e559966370
+    CHECKSUM: 9d49b85824751ee13d31e9ec6617c4dfb9a8c3cd
     PROJECT_NAME: Yams
     SPECS:
-      - Yams (3.0.1)
+      - Yams (4.0.0)
 OBJECT_VERSION: 47
 PLUGINS:
   cocoapods-stats:

@@ -20,7 +20,9 @@ _None_
 
 ### Internal Changes
 
-_None_
+* Update Yams from `3.0.0` to `4.0.0`.  
+  [@hungrxyz](https://github.com/hungrxyz)
+  [#772](https://github.com/SwiftGen/SwiftGen/issues/772)
 
 ## 6.3.0
 
