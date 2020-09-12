@@ -411,11 +411,7 @@ extension Emitter {
 
     private func serializeScalar(_ scalar: Node.Scalar) throws {
         var value = scalar.string.utf8CString, tag = scalar.resolvedTag.name.rawValue.utf8CString
-#if os(Windows)
-        let scalarStyle = yaml_scalar_style_t(rawValue: Int32(scalar.style.rawValue))
-#else
-        let scalarStyle = yaml_scalar_style_t(rawValue: scalar.style.rawValue)
-#endif
+        let scalarStyle = yaml_scalar_style_t(rawValue: numericCast(scalar.style.rawValue))
         var event = yaml_event_t()
         _ = value.withUnsafeMutableBytes { value in
             tag.withUnsafeMutableBytes { tag in
@@ -436,11 +432,7 @@ extension Emitter {
     private func serializeSequence(_ sequence: Node.Sequence) throws {
         var tag = sequence.resolvedTag.name.rawValue.utf8CString
         let implicit: Int32 = sequence.tag.name == .seq ? 1 : 0
-#if os(Windows)
-        let sequenceStyle = yaml_sequence_style_t(rawValue: Int32(sequence.style.rawValue))
-#else
-        let sequenceStyle = yaml_sequence_style_t(rawValue: sequence.style.rawValue)
-#endif
+        let sequenceStyle = yaml_sequence_style_t(rawValue: numericCast(sequence.style.rawValue))
         var event = yaml_event_t()
         _ = tag.withUnsafeMutableBytes { tag in
             yaml_sequence_start_event_initialize(
@@ -459,11 +451,7 @@ extension Emitter {
     private func serializeMapping(_ mapping: Node.Mapping) throws {
         var tag = mapping.resolvedTag.name.rawValue.utf8CString
         let implicit: Int32 = mapping.tag.name == .map ? 1 : 0
-#if os(Windows)
-        let mappingStyle = yaml_mapping_style_t(rawValue: Int32(mapping.style.rawValue))
-#else
-        let mappingStyle = yaml_mapping_style_t(rawValue: mapping.style.rawValue)
-#endif
+        let mappingStyle = yaml_mapping_style_t(rawValue: numericCast(mapping.style.rawValue))
         var event = yaml_event_t()
         _ = tag.withUnsafeMutableBytes { tag in
             yaml_mapping_start_event_initialize(
