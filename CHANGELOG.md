@@ -10,6 +10,9 @@ _None_
 
 ### New Features
 
+* The built-in templates will now correctly handle Swift Package Manager resources, using `Bundle.module` if it's available. As before, you can override the used `Bundle` using the `bundle` or `lookupFunction` template parameters.  
+  [Arnaud Dorgans](https://github.com/arnauddorgans)
+  [#763](https://github.com/SwiftGen/SwiftGen/pull/763)
 * Added `config generate-xcfilelist` subcommand to generate input and output `xcfilelist`s based on your configuration file. These files should then be used in an Xcode build step that executes `swiftgen config run`. Don't forget to regenerate the file lists after adding/removing resources in your project in a way that might impact them.  
   [@CraigSiemens](https://github.com/CraigSiemens)
   [#441](https://github.com/SwiftGen/SwiftGen/issues/441)
@@ -22,7 +25,9 @@ _None_
 
 ### Internal Changes
 
-_None_
+* Update Yams from `3.0.0` to `4.0.0`.  
+  [@hungrxyz](https://github.com/hungrxyz)
+  [#772](https://github.com/SwiftGen/SwiftGen/issues/772)
 
 ## 6.3.0
 

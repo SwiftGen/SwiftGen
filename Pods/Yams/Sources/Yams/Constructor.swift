@@ -414,18 +414,10 @@ private extension Dictionary {
     static func _construct_mapping(from mapping: Node.Mapping) -> [AnyHashable: Any] {
         let mapping = mapping.flatten()
         // TODO: YAML supports keys other than str.
-#if swift(>=5.0)
         return [AnyHashable: Any](
             mapping.map { (String.construct(from: $0.key)!, mapping.tag.constructor.any(from: $0.value)) },
             uniquingKeysWith: { _, second in second }
         )
-#else
-        var dictionary = [AnyHashable: Any](minimumCapacity: mapping.count)
-        mapping.forEach {
-            dictionary[String.construct(from: $0.key)!] = mapping.tag.constructor.any(from: $0.value)
-        }
-        return dictionary
-#endif
     }
 }
 

@@ -86,7 +86,6 @@ extension Node.Scalar: Equatable {
     }
 }
 
-#if swift(>=4.1.50)
 extension Node.Scalar: Hashable {
     /// :nodoc:
     public func hash(into hasher: inout Hasher) {
@@ -94,7 +93,6 @@ extension Node.Scalar: Hashable {
         hasher.combine(resolvedTag)
     }
 }
-#endif
 
 extension Node.Scalar: TagResolvable {
     static let defaultTagName = Tag.Name.str
