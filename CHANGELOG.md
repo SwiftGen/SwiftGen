@@ -10,7 +10,9 @@ _None_
 
 ### New Features
 
-_None_
+* The built-in templates will now correctly handle Swift Package Manager resources, using `Bundle.module` if it's available. As before, you can override the used `Bundle` using the `bundle` or `lookupFunction` template parameters.  
+  [Arnaud Dorgans](https://github.com/arnauddorgans)
+  [#763](https://github.com/SwiftGen/SwiftGen/pull/763)
 
 ### Bug Fixes
 
