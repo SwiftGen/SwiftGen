@@ -12,6 +12,7 @@ public enum Colors {
     case invalidHexColor(path: Path, string: String, key: String?)
     case invalidFile(path: Path, reason: String)
     case unsupportedFileType(path: Path, supported: [String])
+    case unsupportedColorFormat(path: Path, string: String, supported: [String])
 
     public var description: String {
       switch self {
@@ -25,8 +26,26 @@ public enum Colors {
           error: Unsupported file type for \(path). \
           The supported file types are: \(supported.joined(separator: ", "))
           """
+      case .unsupportedColorFormat(let path, let string, let supported):
+        return """
+        error: Unsupported color format \(string) (\(path)). \
+        The supported color formats are: \(supported.joined(separator: ", "))
+        """
       }
     }
+  }
+
+  public enum Option {
+    static let colorFormat = ParserOption(
+      key: "colorFormat",
+      defaultValue: "rgba",
+      help: "Give the format of the colors in the file you want to parse."
+    )
+  }
+
+  public enum ColorFormat: String, CaseIterable {
+    case rgba
+    case argb
   }
 
   public final class Parser: SwiftGenKit.Parser {

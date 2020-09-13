@@ -10,8 +10,13 @@ import PathKit
 
 extension Colors {
   final class XMLFileParser: ColorsFileTypeParser {
+    private let options: ParserOptionValues
+
     init(options: ParserOptionValues) {
+      self.options = options
     }
+
+    static var allOptions: ParserOptionList = [Option.colorFormat]
 
     static let extensions = ["xml"]
 
@@ -38,7 +43,12 @@ extension Colors {
           throw ParserError.invalidFile(path: path, reason: "Invalid structure, color \(value) must have a name.")
         }
 
-        colors[name] = try Colors.parse(hex: value, key: name, path: path)
+        let format = options[Option.colorFormat]
+        guard let colorFormat = ColorFormat(rawValue: format) else {
+          let formats: [String] = ColorFormat.allCases.compactMap { $0.rawValue }
+          throw ParserError.unsupportedColorFormat(path: path, string: format, supported: formats)
+        }
+        colors[name] = try Colors.parse(hex: value, key: name, path: path, format: colorFormat)
       }
 
       let name = path.lastComponentWithoutExtension

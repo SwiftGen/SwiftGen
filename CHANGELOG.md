@@ -16,6 +16,10 @@ _None_
 * Added `config generate-xcfilelist` subcommand to generate input and output `xcfilelist`s based on your configuration file. These files should then be used in an Xcode build step that executes `swiftgen config run`. Don't forget to regenerate the file lists after adding/removing resources in your project in a way that might impact them.  
   [@CraigSiemens](https://github.com/CraigSiemens)
   [#441](https://github.com/SwiftGen/SwiftGen/issues/441)
+* Colors: the XML parser now accepts a `colorFormat` option, used to change the color format. The default equals `rgba`.  
+  [@kevinstier](https://github.com/kevinstier)
+  [#562](https://github.com/SwiftGen/SwiftGen/issues/562)
+  [#768](https://github.com/SwiftGen/SwiftGen/pull/768)
 
 ### Bug Fixes
 
@@ -933,7 +937,7 @@ Note: The next minor version will focus on bringing more documentation for all t
   [Ignacio Romero Zurbuchen](https://github.com/dzenbot)
   [HanxuanZhou](https://github.com/GenoZhou)
   [Syo Ikeda](https://github.com/ikesyo)
-  
+
 
 ## 3.0.0
 
