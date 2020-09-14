@@ -37,7 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 {% macro emitOneMethod table item %}
 {% for string in item.strings %}
 {% if not param.noComments %}
-/// {{string.key}} --> "{{string.translation}}"
+{% for line in string.translation|split:"\n" %}
+/// {{line}}
+{% endfor %}
 {% endif %}
 {% if string.types %}
   {% if string.types.count == 1 %}
