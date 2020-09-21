@@ -9,6 +9,7 @@ import Foundation
 extension Strings {
   public enum PlaceholderType: String {
     case object = "String"
+    case number = "NSNumber"
     case float = "Float"
     case int = "Int"
     case char = "CChar"
@@ -22,6 +23,8 @@ extension Strings {
       switch lcChar {
       case "@":
         self = .object
+      case "ℝ":
+        self = .number
       case "a", "e", "f", "g":
         self = .float
       case "d", "i", "o", "u", "x":
@@ -45,6 +48,8 @@ extension Strings.PlaceholderType {
     let patternInt = "(?:h|hh|l|ll|q|z|t|j)?([dioux])"
     // valid flags for float
     let patternFloat = "[aefg]"
+    // internal flags for NSNumber
+    let objectNumber = "[ℝ]"
     // like in "%3$" to make positional specifiers
     let position = "(\\d+\\$)?"
     // precision like in "%1.2f"
@@ -52,7 +57,7 @@ extension Strings.PlaceholderType {
 
     do {
       return try NSRegularExpression(
-        pattern: "(?:^|(?<!%)(?:%%)*)%\(position)\(precision)(@|\(patternInt)|\(patternFloat)|[csp])",
+        pattern: "(?:^|(?<!%)(?:%%)*)%\(position)\(precision)(@|\(patternInt)|\(patternFloat)|\(objectNumber)|[csp])",
         options: [.caseInsensitive]
       )
     } catch {

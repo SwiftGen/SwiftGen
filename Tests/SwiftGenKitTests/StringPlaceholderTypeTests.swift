@@ -13,6 +13,11 @@ final class StringPlaceholderTypeTests: XCTestCase {
     XCTAssertEqual(placeholders, [.object])
   }
 
+  func testParseInternalNumberPlaceholder() throws {
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: "%ℝ")
+    XCTAssertEqual(placeholders, [.number])
+  }
+
   func testParseFloatPlaceholder() throws {
     let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: "%f")
     XCTAssertEqual(placeholders, [.float])
@@ -142,6 +147,37 @@ final class StringPlaceholderTypeTests: XCTestCase {
     XCTAssertEqual(
       placeholders,
       [.object, .int, .float, .float, .int, .int, .object, .float, .object, .int, .float]
+    )
+  }
+
+  func testStringsDictPlaceholdersConversionWithNSNumber() throws {
+    let rawEntry = StringsDict.PluralEntry(
+      formatKey:
+      """
+      %1$@ - %2$#@num@
+      """,
+      variables: [
+        pluralVariable("num", type: "@", one: "%@ two", other: "%@ twos")
+      ]
+    )
+
+    // Since we rewrite `@` during decoding of `StringsDict.PluralEntry.Variable.VariableRule`,
+    // here we manually trigger the decode logic to get desired outcome.
+    let encoder = JSONEncoder()
+    let payload = try encoder.encode(rawEntry)
+    let decoder = JSONDecoder()
+    let entry = try decoder.decode(StringsDict.PluralEntry.self, from: payload)
+
+    let converted = entry.formatKeyWithVariableValueTypes
+    XCTAssertEqual(
+      converted,
+      "%1$@ - %2$ℝ"
+    )
+
+    let placeholders = try Strings.PlaceholderType.placeholderTypes(fromFormat: converted)
+    XCTAssertEqual(
+      placeholders,
+      [.object, .number]
     )
   }
 

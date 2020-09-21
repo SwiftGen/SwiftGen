@@ -114,7 +114,8 @@ extension StringsDict: Decodable {
       let variables = try variableNames.reduce(into: [PluralEntry.Variable]()) { variables, variableName in
         let variableRule = try container.decode(PluralEntry.VariableRule.self, forKey: CodingKeys(key: variableName))
         // Combination of the format specifiers of the `PlaceholderType.float` and `PlaceholderType.int`.
-        guard ["a", "e", "f", "g", "d", "i", "o", "u", "x"].contains(variableRule.valueTypeKey.suffix(1)) else {
+        // "ℝ" is included for NSNumber as the internal presentation.
+        guard ["a", "e", "f", "g", "d", "i", "o", "u", "x", "ℝ"].contains(variableRule.valueTypeKey.suffix(1)) else {
           throw Strings.ParserError.invalidVariableRuleValueType(
             variableName: variableName,
             valueType: variableRule.valueTypeKey
@@ -126,6 +127,27 @@ extension StringsDict: Decodable {
     case let (.none, .some(variableWidthRules)):
       self = .variableWidthEntry(VariableWidthEntry(rules: variableWidthRules))
     }
+  }
+}
+
+extension StringsDict.PluralEntry.VariableRule {
+  init(from coder: Decoder) throws {
+    let container = try coder.container(keyedBy: CodingKeys.self)
+    specTypeKey = try container.decode(String.self, forKey: .specTypeKey)
+
+    let originalValueTypeKey = try container.decode(String.self, forKey: .valueTypeKey)
+    if originalValueTypeKey == "@" {
+      valueTypeKey = "ℝ"
+    } else {
+      valueTypeKey = originalValueTypeKey
+    }
+
+    zero = try container.decodeIfPresent(String.self, forKey: .zero)
+    one = try container.decodeIfPresent(String.self, forKey: .one)
+    two = try container.decodeIfPresent(String.self, forKey: .two)
+    few = try container.decodeIfPresent(String.self, forKey: .few)
+    many = try container.decodeIfPresent(String.self, forKey: .many)
+    other = try container.decode(String.self, forKey: .other)
   }
 }
 
