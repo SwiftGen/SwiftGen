@@ -87,6 +87,16 @@ internal struct SceneType<T> {
     }
     return controller
   }
+
+  @available(OSX 10.15, *)
+  internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+    let identifier = NSStoryboard.SceneIdentifier(self.identifier)
+    guard let controller = storyboard.storyboard
+      .__instantiateController(withIdentifier: identifier, creator: block) as? T else {
+        fatalError("Controller '\(identifier)' is not of the expected class \(T.self).")
+    }
+    return controller
+  }
 }
 
 internal struct InitialSceneType<T> {
@@ -95,6 +105,15 @@ internal struct InitialSceneType<T> {
   internal func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitialController() as? T else {
       fatalError("Controller is not of the expected class \(T.self).")
+    }
+    return controller
+  }
+
+  @available(OSX 10.15, *)
+  internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+    guard let controller = storyboard.storyboard
+      .__instantiateInitialController(creator: block) as? T else {
+        fatalError("Controller is not of the expected class \(T.self).")
     }
     return controller
   }

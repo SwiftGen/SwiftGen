@@ -113,6 +113,14 @@ public struct SceneType<T: UIViewController> {
     }
     return controller
   }
+
+  @available(iOS 13.0, tvOS 13.0, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+    let identifier = self.identifier
+    let controller = storyboard.storyboard
+      .instantiateViewController(identifier: identifier, creator: block)
+    return controller
+  }
 }
 
 public struct InitialSceneType<T: UIViewController> {
@@ -121,6 +129,15 @@ public struct InitialSceneType<T: UIViewController> {
   public func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitialViewController() as? T else {
       fatalError("ViewController is not of the expected class \(T.self).")
+    }
+    return controller
+  }
+
+  @available(iOS 13.0, tvOS 13.0, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+    guard let controller = storyboard.storyboard
+      .instantiateInitialViewController(creator: block) else {
+        fatalError("ViewController is not of the expected class \(T.self).")
     }
     return controller
   }

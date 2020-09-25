@@ -81,6 +81,21 @@ import {{module}}
     }
     return controller
   }
+
+  @available({% if isAppKit %}OSX 10.15{% else %}iOS 13.0, tvOS 13.0{% endif %}, *)
+  {{accessModifier}} func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+    let identifier = {% if isAppKit %}NSStoryboard.SceneIdentifier({% endif %}self.identifier{% if isAppKit %}){% endif %}
+    {% if isAppKit %}
+    guard let controller = storyboard.storyboard
+      .__instantiate{{controller}}(withIdentifier: identifier, creator: block) as? T else {
+        fatalError("Controller '\(identifier)' is not of the expected class \(T.self).")
+    }
+    {% else %}
+    let controller = storyboard.storyboard
+      .instantiate{{controller}}(identifier: identifier, creator: block)
+    {% endif %}
+    return controller
+  }
 }
 
 {{accessModifier}} struct InitialSceneType<T{% if not isAppKit %}: UIViewController{% endif %}> {
@@ -89,6 +104,15 @@ import {{module}}
   {{accessModifier}} func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitial{{controller}}() as? T else {
       fatalError("{{controller}} is not of the expected class \(T.self).")
+    }
+    return controller
+  }
+
+  @available({% if isAppKit %}OSX 10.15{% else %}iOS 13.0, tvOS 13.0{% endif %}, *)
+  {{accessModifier}} func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+    guard let controller = storyboard.storyboard
+      .{% if isAppKit %}__{% endif %}instantiateInitial{{controller}}(creator: block){% if isAppKit %} as? T{% endif %} else {
+        fatalError("{{controller}} is not of the expected class \(T.self).")
     }
     return controller
   }
