@@ -26,6 +26,9 @@ _None_
 * Update the Swift version in `.swift-version` so that the right version is used when building manually (using `swiftenv`).  
   [@cfiken](https://github.com/cfiken)
   [#764](https://github.com/SwiftGen/SwiftGen/issues/764)
+* Plist: fix Bool being assigned Integer when using `inline` template.  
+  [@fortmarek](https://github.com/fortmarek)
+  [#779](https://github.com/SwiftGen/SwiftGen/pull/779)
 
 ### Internal Changes
 
@@ -73,9 +76,6 @@ _None_
 * Strings: fix incorrect interpretation of format placeholders when there were missing positional parameters (e.g. `"%2$@"` without a `%1$…` defined).  
   [@AliSoftware](https://github.com/AliSoftware)
   [#634](https://github.com/SwiftGen/SwiftGen/pull/634)
-* Plist: fix Bool being assigned Integer when using `inline` template
-  [@fortmarek](https://github.com/fortmarek)
-  [#779](https://github.com/SwiftGen/SwiftGen/pull/779)
 
 ## 6.2.1
 
