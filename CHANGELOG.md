@@ -73,6 +73,9 @@ _None_
 * Strings: fix incorrect interpretation of format placeholders when there were missing positional parameters (e.g. `"%2$@"` without a `%1$…` defined).  
   [@AliSoftware](https://github.com/AliSoftware)
   [#634](https://github.com/SwiftGen/SwiftGen/pull/634)
+* Plist: fix Bool being assigned Integer when using `inline` template
+  [@fortmarek](https://github.com/fortmarek)
+  [#779](https://github.com/SwiftGen/SwiftGen/pull/779)
 
 ## 6.2.1
 
