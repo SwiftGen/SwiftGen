@@ -36,7 +36,7 @@ internal enum CustomPlist {
     internal static let uiStatusBarStyle: String = _document["UIStatusBarStyle"]
     internal static let uiSupportedInterfaceOrientations: [String] = _document["UISupportedInterfaceOrientations"]
     internal static let uiSupportedInterfaceOrientationsIpad: [String] = _document["UISupportedInterfaceOrientations~ipad"]
-    internal static let userAmbiguousInteger: Bool = _document["User Ambiguous Integer"]
+    internal static let userAmbiguousInteger: Int = _document["User Ambiguous Integer"]
     internal static let userBoolean: Bool = _document["User Boolean"]
     internal static let userDate: Date = _document["User Date"]
     internal static let userFloat: Double = _document["User Float"]

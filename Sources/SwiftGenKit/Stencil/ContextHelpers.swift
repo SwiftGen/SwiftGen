@@ -18,9 +18,7 @@ final class StencilContextLazyDocument: NSObject, ContextConvertible {
   @objc private(set) lazy var metadata: [String: Any] = Metadata.generate(for: data)
 
   init(data: Any) {
-    // Make a round trip to YAML to fix NSDictionary-land interpretation of NSNumber/Bool and similar
-    let normalizedData = try? YAML.decode(string: YAML.encode(object: data))
-    self.data = normalizedData ?? data
+    self.data = data
     super.init()
   }
 }

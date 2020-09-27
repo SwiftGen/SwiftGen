@@ -19,6 +19,7 @@
 		093405101F815B2500187787 /* config-with-params.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405071F81539100187787 /* config-with-params.yml */; };
 		093405131F87AA6A00187787 /* config-with-multi-entries.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405111F87AA6500187787 /* config-with-multi-entries.yml */; };
 		0987AC7A2475802700388153 /* Config+Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0987AC792475802700388153 /* Config+Example.swift */; };
+		099E49DD2521184200F7269D /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E49DB2521182100F7269D /* AnyCodable.swift */; };
 		09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030C171B6D43D400275BF5 /* TestsHelper.swift */; };
 		09A87B5C1BCCA37F00D9B9F5 /* ConfigReadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD81B6D2E5900275BF5 /* ConfigReadTests.swift */; };
 		09D009FF1F9BB3450026A755 /* ConfigEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D009FE1F9BB3450026A755 /* ConfigEntry.swift */; };
@@ -338,6 +339,7 @@
 		0934050D1F815A8C00187787 /* ParserCLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserCLI.swift; sourceTree = "<group>"; };
 		093405111F87AA6500187787 /* config-with-multi-entries.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-with-multi-entries.yml"; sourceTree = "<group>"; };
 		0987AC792475802700388153 /* Config+Example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config+Example.swift"; sourceTree = "<group>"; };
+		099E49DB2521182100F7269D /* AnyCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCodable.swift; sourceTree = "<group>"; };
 		09A87B501BCCA2C600D9B9F5 /* SwiftGen UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftGen UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09C7B2D31BCC382800D7F488 /* main.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; tabWidth = 2; };
 		09D009FE1F9BB3450026A755 /* ConfigEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigEntry.swift; sourceTree = "<group>"; };
@@ -753,6 +755,7 @@
 				DDCC331A220E3FE700982694 /* ParserOption.swift */,
 				DDCC331C220E491600982694 /* ParserOptionList.swift */,
 				DD48AD7E2210AC5E00336621 /* ParserOptionValues.swift */,
+				099E49DB2521182100F7269D /* AnyCodable.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -1562,6 +1565,7 @@
 				DDC82117209672E1007A55F3 /* String.swift in Sources */,
 				DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */,
 				D4A93E27247E307400BE8651 /* JSONParser.swift in Sources */,
+				099E49DD2521184200F7269D /* AnyCodable.swift in Sources */,
 				DD9F687C20955D51004EB720 /* Catalog.swift in Sources */,
 				C322627121012F42001AC9CD /* Attribute.swift in Sources */,
 				DDCC331D220E491600982694 /* ParserOptionList.swift in Sources */,
