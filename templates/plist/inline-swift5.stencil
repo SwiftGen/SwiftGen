@@ -58,7 +58,7 @@ import Foundation
       :
     {% endfor %}]
   {% elif metadata.type == "Bool" %}
-    Bool(truncating: {{ value }})
+    {% if value %}true{% else %}false{% endif %}
   {% else %}
     {{ value }}
   {% endif %}
