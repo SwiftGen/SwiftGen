@@ -4,6 +4,8 @@
 // MIT Licence
 //
 
+// Original credits to Ian Keen (https://gist.github.com/IanKeen/df3bed29e2613ead94aa3b16967b9d14)
+
 import Foundation
 
 // swiftlint:disable cyclomatic_complexity force_unwrapping function_body_length
