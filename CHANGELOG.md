@@ -26,8 +26,9 @@ _None_
 * Update the Swift version in `.swift-version` so that the right version is used when building manually (using `swiftenv`).  
   [@cfiken](https://github.com/cfiken)
   [#764](https://github.com/SwiftGen/SwiftGen/issues/764)
-* Plist: fix Bool being assigned Integer when using `inline` template.  
+* Plist: Update the parsing strategy (using `Codable`) to fix parsing of `Bool` values as `Integer` in some cases.  
   [@fortmarek](https://github.com/fortmarek)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#779](https://github.com/SwiftGen/SwiftGen/pull/779)
 
 ### Internal Changes
