@@ -8,7 +8,7 @@
 
 import Foundation
 
-// swiftlint:disable cyclomatic_complexity force_unwrapping function_body_length
+// swiftlint:disable cyclomatic_complexity function_body_length
 public struct AnyCodable: Codable {
   public let value: Any?
 
@@ -22,7 +22,7 @@ public struct AnyCodable: Codable {
     if container.decodeNil() {
       self.value = nil
     } else if let value = try? container.decode([String: AnyCodable].self) {
-      self.value = value.filter({ $0.value.value != nil }).mapValues({ $0.value! })
+      self.value = value.compactMapValues({ $0.value })
     } else if let value = try? container.decode([AnyCodable].self) {
       self.value = value.compactMap({ $0.value })
     } else if let value = try? container.decode(Bool.self) {
@@ -56,7 +56,10 @@ public struct AnyCodable: Codable {
     } else if let value = try? container.decode(Float.self) {
       self.value = value
     } else {
-      throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unable to decode value")
+      throw DecodingError.dataCorruptedError(
+        in: container,
+        debugDescription: "Unable to decode value"
+      )
     }
   }
   public func encode(to encoder: Encoder) throws {
@@ -104,11 +107,14 @@ public struct AnyCodable: Codable {
     case let value as Float:
       try container.encode(value)
     default:
-      throw EncodingError.invalidValue(value!, .init(codingPath: [], debugDescription: "Unable to encode value"))
+      throw EncodingError.invalidValue(
+        value ?? "<nil>",
+        .init(codingPath: container.codingPath, debugDescription: "Unable to encode value")
+      )
     }
   }
 }
-// swiftlint:enable cyclomatic_complexity force_unwrapping function_body_length
+// swiftlint:enable cyclomatic_complexity function_body_length
 
 extension KeyedDecodingContainer {
   public func decode(_ type: [String: Any].Type, forKey key: K) throws -> [String: Any] {
@@ -117,7 +123,7 @@ extension KeyedDecodingContainer {
       let type = Swift.type(of: anyCodable.value)
       throw DecodingError.typeMismatch(
         type,
-        .init(codingPath: [], debugDescription: "Expected [String: Any], found \(type)")
+        .init(codingPath: self.codingPath, debugDescription: "Expected [String: Any], found \(type)")
       )
     }
     return value
