@@ -35,7 +35,7 @@ public enum PlistFiles {
     public static let uiStatusBarStyle: String = "UIStatusBarStyleDefault"
     public static let uiSupportedInterfaceOrientations: [String] = ["UIInterfaceOrientationPortrait", "UIInterfaceOrientationPortraitUpsideDown", "UIInterfaceOrientationLandscapeRight", "UIInterfaceOrientationLandscapeLeft"]
     public static let uiSupportedInterfaceOrientationsIpad: [String] = ["UIInterfaceOrientationLandscapeLeft", "UIInterfaceOrientationLandscapeRight", "UIInterfaceOrientationPortraitUpsideDown", "UIInterfaceOrientationPortrait"]
-    public static let userAmbiguousInteger: Bool = true
+    public static let userAmbiguousInteger: Int = 1
     public static let userBoolean: Bool = false
     public static let userDate: Date = Date(timeIntervalSinceReferenceDate: 547184366)
     public static let userFloat: Double = 3.14

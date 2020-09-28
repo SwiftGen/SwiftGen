@@ -26,6 +26,10 @@ _None_
 * Update the Swift version in `.swift-version` so that the right version is used when building manually (using `swiftenv`).  
   [@cfiken](https://github.com/cfiken)
   [#764](https://github.com/SwiftGen/SwiftGen/issues/764)
+* Plist: Update the parsing strategy (using `Codable`) to fix parsing of `Bool` values as `Integer` in some cases.  
+  [@fortmarek](https://github.com/fortmarek)
+  [Olivier Halligon](https://github.com/AliSoftware)
+  [#779](https://github.com/SwiftGen/SwiftGen/pull/779)
 
 ### Internal Changes
 
@@ -71,7 +75,7 @@ _None_
 ### Bug Fixes
 
 * Strings: fix incorrect interpretation of format placeholders when there were missing positional parameters (e.g. `"%2$@"` without a `%1$…` defined).  
-  [@AliSoftware](https://github.com/AliSoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#634](https://github.com/SwiftGen/SwiftGen/pull/634)
 
 ## 6.2.1
@@ -129,25 +133,25 @@ Read the [SwiftGen 6.2 Migration Guide](Documentation/MigrationGuide.md#migratin
   [David Jennes](https://github.com/djbe)
   [#614](https://github.com/SwiftGen/SwiftGen/pull/614)
 * The use of `swiftgen <parser>` (e.g. `swiftgen strings`, `swiftgen xcassets`, …) command line for running individual parsers is now deprecated in favor of `swiftgen run <parser>`. See "New Features" below.  
-  [@AliSoftware](https://github.com/AliSoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#705](https://github.com/SwiftGen/SwiftGen/pull/705)
 * The subcommand `swiftgen templates` has been renamed `swiftgen template` (singular); the plural form of the command has been deprecated and will be removed in next major version.  
-  [@AliSoftware](https://github.com/AliSoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#697](https://github.com/SwiftGen/SwiftGen/pull/697)
 * The ability for SwiftGen to search custom named templates in `~/Library/Application Support` has been deprecated and will be removed in SwiftGen 7.0. This little known feature made SwiftGen dependent on the machine it was running on. Use `templatePath` to reference custom templates by path instead.  
-  [@AliSoftware](https://github.com/AliSoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#717](https://github.com/SwiftGen/SwiftGen/pull/717)
 
 ### New Features
 
 * Invoking individual parsers from the command line is now done via `swiftgen run <parser>`.  We still highly recommend to use a configuration file for flexibility and performance reasons in your projects, and only use `swiftgen run <parser>` for things like quick iterations when writing your own custom templates.  
-  [@AliSoftware](https://github.com/AliSoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#705](https://github.com/SwiftGen/SwiftGen/pull/705)
 * You can now easily create a new config file using `swiftgen config init`. This will create an example and commented config file and open it to let you edit it to your needs.  _Note that the generated config file is static content which doesn't take the user's project into account (though that might change in the future)_.  
-  [@AliSoftware](https://github.com/AliSoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#694](https://github.com/SwiftGen/SwiftGen/pull/694)
 * You can now use `swiftgen template doc [parser] [templateName]` on the command line to quickly open the documentation for templates on GitHub directly from your terminal.  
-  [@AliSoftware](https://github.com/AliSoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#697](https://github.com/SwiftGen/SwiftGen/pull/697)
 * Each parser now accepts an `options` dictionary, with which you can set internal parser settings to change its behaviour. See the parser's specific documentation for available options.  
   [David Jennes](https://github.com/djbe)
@@ -189,13 +193,13 @@ Read the [SwiftGen 6.2 Migration Guide](Documentation/MigrationGuide.md#migratin
 * Most templates now accept a parameter to force having the file name used as namespace (`enum <FileName>`) in generated code _even if_ there's only one single input file.  
   [Viktoras Laukevičius](https://github.com/viktorasl)
   [#669](https://github.com/SwiftGen/SwiftGen/issues/669)
-  [@AliSoftware](https://github.com/AliSoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#693](https://github.com/SwiftGen/SwiftGen/pull/693)
 
 ### Bug Fixes
 
 * SwiftGen now properly shows a better help message and the command usage when running an incomplete command, instead of complaining about a config file.  
-  [@AliSoftware](https://github.com/AliSoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#706](https://github.com/SwiftGen/SwiftGen/pull/706)
 * XCAssets: improved the performance for color assets by caching the resolved colors.  
   [David Jennes](https://github.com/djbe)
@@ -224,13 +228,13 @@ Read the [SwiftGen 6.2 Migration Guide](Documentation/MigrationGuide.md#migratin
 ### Internal Changes
 
 * The main branch of the repository has been renamed from `master` to `stable`. If you pointed your `Podfile` or dependency managment tool to `master` instead of an official release/tag, you will have to update the branch name in your dependency file.  
-  [@AliSoftware](https://github.com/AliSoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#714](https://github.com/SwiftGen/SwiftGen/pull/714)
 * Documentation: Improved doc for creating custom templates, and added a Documentation Table of Contents.  
-  [@AliSoftware](https://github.com/AliSoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#713](https://github.com/SwiftGen/SwiftGen/pull/713)
 * Refactoring: Reduce globals & rearrange CLI code.  
-  [@AliSoftware](https://github.com/AliSoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [#586](https://github.com/SwiftGen/SwiftGen/pull/586)
 * Moved generated test output files into subdirectories per template.  
   [David Jennes](https://github.com/djbe)
@@ -782,7 +786,7 @@ See [#244](https://github.com/SwiftGen/SwiftGen/issues/244) and [the Migration G
 
 * SwiftGen has migrated to [its own GitHub organization](https://github.com/SwiftGen/SwiftGen) 🎉.  
 * SwiftGen has been split in multiple repositories and separate modules.  
-  [@AliSoftware](https://github.com/AliSoftware)
+  [Olivier Halligon](https://github.com/AliSoftware)
   [@djbe](https://github.com/djbe)
   [#240](https://github.com/SwiftGen/SwiftGen/issues/240)
   [#265](https://github.com/SwiftGen/SwiftGen/pull/265)
