@@ -67,6 +67,8 @@ import Foundation
     {% empty %}
       :
     {% endfor %}]
+  {% elif metadata.type == "Bool" %}
+    {% if value %}true{% else %}false{% endif %}
   {% else %}
     {{ value }}
   {% endif %}
