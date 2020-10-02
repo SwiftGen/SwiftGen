@@ -35,7 +35,7 @@ final class ColorsTextFileTests: XCTestCase {
       let txtParser = Colors.TextFileParser(options: try ParserOptionValues(options: [:], available: []))
       _ = try txtParser.parseFile(at: Fixtures.path(for: "bad-value.txt", sub: .colors))
       XCTFail("Code did parse file successfully while it was expected to fail for bad value")
-    } catch Colors.ParserError.invalidHexColor(path: _, string: "thisIsn'tAColor", key: "ArticleTitle"?) {
+    } catch Colors.ParserError.invalidHexColor(path: _, string: "thisIsn'tAColor", key: "ArticleTitle") {
       // That's the expected exception we want to happen
     } catch let error {
       XCTFail("Unexpected error occured while parsing: \(error)")
