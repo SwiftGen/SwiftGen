@@ -17,10 +17,19 @@ extension Plist {
       self.path = parent.flatMap { path.relative(to: $0) } ?? path
       self.name = path.lastComponentWithoutExtension
 
-      if let data = NSDictionary(contentsOf: path.url) as? [String: Any] {
-        self.document = data
-      } else if let data = NSArray(contentsOf: path.url) as? [Any] {
-        self.document = data
+      let content: Any?
+      do {
+        let decoder = PropertyListDecoder()
+        let data = try Data(contentsOf: path.url)
+        content = try decoder.decode(AnyCodable.self, from: data).value
+      } catch let error {
+        throw ParserError.invalidFile(path: path, reason: error.localizedDescription)
+      }
+
+      if let doc = content as? [String: Any] {
+        self.document = doc
+      } else if let doc = content as? [Any] {
+        self.document = doc
       } else {
         throw ParserError.invalidFile(path: path, reason: "Unknown plist contents")
       }

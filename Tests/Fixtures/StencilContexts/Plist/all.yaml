@@ -41,7 +41,7 @@ files:
       - "UIInterfaceOrientationLandscapeRight"
       - "UIInterfaceOrientationPortraitUpsideDown"
       - "UIInterfaceOrientationPortrait"
-      User Ambiguous Integer: true
+      User Ambiguous Integer: 1
       User Boolean: false
       User Date: 2018-05-05T03:39:26Z
       User Float: 3.14e+0
@@ -121,7 +121,7 @@ files:
             type: "String"
           type: "Array"
         User Ambiguous Integer:
-          type: "Bool"
+          type: "Int"
         User Boolean:
           type: "Bool"
         User Date:
@@ -173,7 +173,7 @@ files:
       - "UIInterfaceOrientationLandscapeRight"
       - "UIInterfaceOrientationPortraitUpsideDown"
       - "UIInterfaceOrientationPortrait"
-      User Ambiguous Integer: true
+      User Ambiguous Integer: 1
       User Boolean: false
       User Date: 2018-05-05T03:39:26Z
       User Float: 3.14e+0
@@ -253,7 +253,7 @@ files:
             type: "String"
           type: "Array"
         User Ambiguous Integer:
-          type: "Bool"
+          type: "Int"
         User Boolean:
           type: "Bool"
         User Date:

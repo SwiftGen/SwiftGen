@@ -61,7 +61,7 @@ final class ColorsXMLFileTests: XCTestCase {
       let xmlParser = Colors.XMLFileParser(options: options)
       _ = try xmlParser.parseFile(at: Fixtures.path(for: "bad-value.xml", sub: .colors))
       XCTFail("Code did parse file successfully while it was expected to fail for bad value")
-    } catch Colors.ParserError.invalidHexColor(path: _, string: "this isn't a color", key: "ArticleTitle"?) {
+    } catch Colors.ParserError.invalidHexColor(path: _, string: "this isn't a color", key: "ArticleTitle") {
       // That's the expected exception we want to happen
     } catch let error {
       XCTFail("Unexpected error occured while parsing: \(error)")

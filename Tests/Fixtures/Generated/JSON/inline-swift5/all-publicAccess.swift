@@ -17,7 +17,9 @@ public enum JSONFiles {
     public static let apiVersion: String = "2"
     public static let country: Any? = nil
     public static let environment: String = "staging"
+    public static let newLayout: Bool = true
     public static let options: [String: Any] = ["screen-order": ["1", "2", "3"]]
+    public static let quickSearch: Bool = false
   }
 }
 // swiftlint:enable identifier_name line_length number_separator type_body_length
