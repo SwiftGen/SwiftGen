@@ -8,7 +8,7 @@ import ExtraModule
 import PrefsWindowController
 
 // swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable file_length implicit_return
 
 // MARK: - Storyboard Scenes
 
@@ -88,14 +88,14 @@ public struct SceneType<T> {
     return controller
   }
 
-  @available(OSX 10.15, *)
-  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
-    let identifier = NSStoryboard.SceneIdentifier(self.identifier)
-    guard let controller = storyboard.storyboard
-      .__instantiateController(withIdentifier: identifier, creator: block) as? T else {
-        fatalError("Controller '\(identifier)' is not of the expected class \(T.self).")
-    }
-    return controller
+  @available(macOS 10.15, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSViewController {
+    return storyboard.storyboard.instantiateController(identifier: identifier, creator: block)
+  }
+
+  @available(macOS 10.15, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSWindowController {
+    return storyboard.storyboard.instantiateController(identifier: identifier, creator: block)
   }
 }
 
@@ -109,11 +109,18 @@ public struct InitialSceneType<T> {
     return controller
   }
 
-  @available(OSX 10.15, *)
-  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
-    guard let controller = storyboard.storyboard
-      .__instantiateInitialController(creator: block) as? T else {
-        fatalError("Controller is not of the expected class \(T.self).")
+  @available(macOS 10.15, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSViewController {
+    guard let controller = storyboard.storyboard.instantiateInitialController(creator: block) else {
+      fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
+    }
+    return controller
+  }
+
+  @available(macOS 10.15, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSWindowController {
+    guard let controller = storyboard.storyboard.instantiateInitialController(creator: block) else {
+      fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
     }
     return controller
   }
