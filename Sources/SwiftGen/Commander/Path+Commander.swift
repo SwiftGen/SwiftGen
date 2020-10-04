@@ -9,14 +9,12 @@ import PathKit
 
 // MARK: Validators
 
-// swiftlint:disable opening_brace
 func checkPath(type: String, assertion: @escaping (Path) -> Bool) -> ((Path) throws -> Path) {
   { (path: Path) throws -> Path in
     guard assertion(path) else { throw ArgumentError.invalidType(value: path.description, type: type, argument: nil) }
     return path
   }
 }
-// swiftlint:enable opening_brace
 
 typealias PathValidator = ([Path]) throws -> ([Path])
 let pathsExist: PathValidator = { paths in try paths.map(checkPath(type: "path") { $0.exists }) }

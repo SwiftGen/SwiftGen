@@ -17,7 +17,7 @@ SCHEME_NAME = 'swiftgen'
 CONFIGURATION = 'Debug'
 RELEASE_CONFIGURATION = 'Release'
 POD_NAME = 'SwiftGen'
-MIN_XCODE_VERSION = 11.4
+MIN_XCODE_VERSION = 12.0
 
 BUILD_DIR = File.absolute_path('./build')
 BIN_NAME = 'swiftgen'

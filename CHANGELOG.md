@@ -36,6 +36,9 @@ _None_
 * Update Yams from `3.0.0` to `4.0.0`.  
   [@hungrxyz](https://github.com/hungrxyz)
   [#772](https://github.com/SwiftGen/SwiftGen/issues/772)
+* Updated Pods and Gems dependencies, and Xcode 12.  
+  [David Jennes](https://github.com/djbe)
+  [#782](https://github.com/SwiftGen/SwiftGen/pull/782)
 
 ## 6.3.0
 
