@@ -20,6 +20,10 @@ _None_
   [@kevinstier](https://github.com/kevinstier)
   [#562](https://github.com/SwiftGen/SwiftGen/issues/562)
   [#768](https://github.com/SwiftGen/SwiftGen/pull/768)
+* IB: Added support for instantiating scenes while providing a `creator` block, commonly used for dependency injection. This feature is available in generated code starting from iOS 13, tvOS 13 and macOS 10.15.  
+  [@matsune](https://github.com/matsune)
+  [David Jennes](https://github.com/djbe)
+  [#778](https://github.com/SwiftGen/SwiftGen/pull/778)
 
 ### Bug Fixes
 
