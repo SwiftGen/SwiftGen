@@ -1,4 +1,4 @@
-swiftlint_version: 0.39.2
+swiftlint_version: 0.40.3
 
 opt_in_rules:
  - anyobject_protocol
@@ -52,6 +52,7 @@ opt_in_rules:
  - overridden_super_call
  - override_in_extension
  - prefer_self_type_over_type_of_self
+ - prefer_zero_over_explicit_init
  - private_action
  - private_outlet
  - prohibited_super_call

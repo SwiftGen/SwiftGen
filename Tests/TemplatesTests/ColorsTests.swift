@@ -13,7 +13,6 @@ final class ColorsTests: XCTestCase {
   }
 
   // generate variations to test customname generation
-  // swiftlint:disable opening_brace
   private func variations(customName: String) -> VariationGenerator {
     { name, context in
       guard name == "defaults" else { return [(context: context, suffix: "")] }
@@ -41,7 +40,6 @@ final class ColorsTests: XCTestCase {
       ]
     }
   }
-  // swiftlint:enable opening_brace
 
   func testSwift4() {
     test(
