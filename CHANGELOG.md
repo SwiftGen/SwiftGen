@@ -20,6 +20,9 @@ _None_
   [@kevinstier](https://github.com/kevinstier)
   [#562](https://github.com/SwiftGen/SwiftGen/issues/562)
   [#768](https://github.com/SwiftGen/SwiftGen/pull/768)
+* Support using NSNumber as variable for stringsdict.  
+  [#777](https://github.com/SwiftGen/SwiftGen/pull/777)
+  [@KhaosT](https://github.com/KhaosT)
 
 ### Bug Fixes
 
