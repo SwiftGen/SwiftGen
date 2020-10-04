@@ -4,5 +4,7 @@
   "options": {
     "screen-order": ["1", "2", "3"]
   },
-  "country": null
+  "country": null,
+  "new-layout": true,
+  "quick-search": false
 }

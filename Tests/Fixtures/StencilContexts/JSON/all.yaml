@@ -22,11 +22,13 @@ files:
       api-version: "2"
       country: null
       environment: "staging"
+      new-layout: true
       options:
         screen-order:
         - "1"
         - "2"
         - "3"
+      quick-search: false
     metadata:
       properties:
         api-version:
@@ -35,6 +37,8 @@ files:
           type: "Optional"
         environment:
           type: "String"
+        new-layout:
+          type: "Bool"
         options:
           properties:
             screen-order:
@@ -42,17 +46,21 @@ files:
                 type: "String"
               type: "Array"
           type: "Dictionary"
+        quick-search:
+          type: "Bool"
       type: "Dictionary"
   documents:
   - data:
       api-version: "2"
       country: null
       environment: "staging"
+      new-layout: true
       options:
         screen-order:
         - "1"
         - "2"
         - "3"
+      quick-search: false
     metadata:
       properties:
         api-version:
@@ -61,6 +69,8 @@ files:
           type: "Optional"
         environment:
           type: "String"
+        new-layout:
+          type: "Bool"
         options:
           properties:
             screen-order:
@@ -68,6 +78,8 @@ files:
                 type: "String"
               type: "Array"
           type: "Dictionary"
+        quick-search:
+          type: "Bool"
       type: "Dictionary"
   name: "configuration"
   path: "configuration.json"

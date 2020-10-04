@@ -10,6 +10,8 @@ files:
       - "John"
       - "Peter"
       - "Nick"
+      newLayout: true
+      quickSearch: false
       weight: 3.33e+1
     metadata:
       properties:
@@ -28,6 +30,10 @@ files:
           element:
             type: "String"
           type: "Array"
+        newLayout:
+          type: "Bool"
+        quickSearch:
+          type: "Bool"
         weight:
           type: "Double"
       type: "Dictionary"

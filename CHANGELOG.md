@@ -30,6 +30,9 @@ _None_
   [@fortmarek](https://github.com/fortmarek)
   [Olivier Halligon](https://github.com/AliSoftware)
   [#779](https://github.com/SwiftGen/SwiftGen/pull/779)
+* JSON/YAML: the `inline` templates incorrectly generated `1`/`0` as values, instead of `true`/`false` as expected.  
+  [David Jennes](https://github.com/djbe)
+  [#783](https://github.com/SwiftGen/SwiftGen/pull/783)
 
 ### Internal Changes
 

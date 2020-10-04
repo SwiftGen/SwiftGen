@@ -18,7 +18,9 @@ internal enum JSONFiles {
     internal static let apiVersion: String = _document["api-version"]
     internal static let country: Any? = _document["country"]
     internal static let environment: String = _document["environment"]
+    internal static let newLayout: Bool = _document["new-layout"]
     internal static let options: [String: Any] = _document["options"]
+    internal static let quickSearch: Bool = _document["quick-search"]
   }
 }
 // swiftlint:enable identifier_name line_length type_body_length

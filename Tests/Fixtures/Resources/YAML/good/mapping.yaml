@@ -4,6 +4,8 @@ foo:
   bar: banana
   baz: orange
 car: null
+newLayout: true
+quickSearch: false
 names:
   - John
   - Peter
