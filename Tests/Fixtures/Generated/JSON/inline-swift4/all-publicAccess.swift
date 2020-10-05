@@ -20,7 +20,7 @@ public enum JSONFiles {
     public static let environment: String = "staging"
     public static let flags: [Bool] = [true, false, true]
     public static let mixed: [Any] = ["one", 2, true]
-    public static let mixed2: [Double] = [0.1, 2, true]
+    public static let mixed2: [Any] = [0.1, 2, true]
     public static let newLayout: Bool = true
     public static let one: Int = 1
     public static let options: [String: Any] = ["screen-order": ["1", "2", "3"]]

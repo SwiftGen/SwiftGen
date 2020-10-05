@@ -20,7 +20,7 @@ internal enum JSONFiles {
     internal static let environment: String = "staging"
     internal static let flags: [Bool] = [true, false, true]
     internal static let mixed: [Any] = ["one", 2, true]
-    internal static let mixed2: [Double] = [0.1, 2, true]
+    internal static let mixed2: [Any] = [0.1, 2, true]
     internal static let newLayout: Bool = true
     internal static let one: Int = 1
     internal static let options: [String: Any] = ["screen-order": ["1", "2", "3"]]

@@ -21,7 +21,7 @@ internal enum CustomJSON {
     internal static let environment: String = _document["environment"]
     internal static let flags: [Bool] = _document["flags"]
     internal static let mixed: [Any] = _document["mixed"]
-    internal static let mixed2: [Double] = _document["mixed2"]
+    internal static let mixed2: [Any] = _document["mixed2"]
     internal static let newLayout: Bool = _document["new-layout"]
     internal static let one: Int = _document["one"]
     internal static let options: [String: Any] = _document["options"]

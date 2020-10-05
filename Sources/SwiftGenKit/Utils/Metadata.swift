@@ -51,7 +51,7 @@ enum Metadata {
     } else if dataType == Data.self {
       return [Key.type: ValueType.data]
     } else if let data = data as? NSNumber {
-      return generate(for: data)
+      return [Key.type: valueType(for: data)]
     } else if let data = data as? [Any] {
       return [
         Key.type: ValueType.array,
@@ -69,25 +69,6 @@ enum Metadata {
     }
   }
 
-  static func generate(for number: NSNumber) -> [String: Any] {
-    if CFGetTypeID(number) == CFBooleanGetTypeID() {
-      return [Key.type: ValueType.bool]
-    } else {
-      switch CFNumberGetType(number) {
-      case .sInt8Type, .sInt16Type, .sInt32Type, .sInt64Type, .charType, .intType, .longType, .longLongType:
-        return [Key.type: ValueType.int]
-      case .float32Type, .float64Type, .floatType, .doubleType:
-        return [Key.type: ValueType.double]
-      case .nsIntegerType:
-        return [Key.type: ValueType.int]
-      case .cgFloatType:
-        return [Key.type: ValueType.double]
-      default:
-        return [Key.type: ValueType.any]
-      }
-    }
-  }
-
   private static func describe(dictionary: [String: Any]) -> [String: Any] {
     Dictionary(
       uniqueKeysWithValues: dictionary.map { item in
@@ -99,12 +80,8 @@ enum Metadata {
   private static func describe(arrayElement array: [Any]) -> [String: Any] {
     if array is [String] {
       return [Key.type: ValueType.string]
-    } else if array is [Bool] {
-      return [Key.type: ValueType.bool]
-    } else if array is [Int] {
-      return [Key.type: ValueType.int]
-    } else if array is [Double] {
-      return [Key.type: ValueType.double]
+    } else if let array = array as? [NSNumber], let valueType = elementValueType(for: array) {
+      return [Key.type: valueType]
     } else if array is [Date] {
       return [Key.type: ValueType.date]
     } else if array is [Data] {
@@ -124,6 +101,32 @@ enum Metadata {
         Key.type: ValueType.any,
         Key.items: array.map { Metadata.generate(for: $0) }
       ]
+    }
+  }
+
+  private static func valueType(for number: NSNumber) -> String {
+    if CFGetTypeID(number) == CFBooleanGetTypeID() {
+      return ValueType.bool
+    } else {
+      switch CFNumberGetType(number) {
+      case .sInt8Type, .sInt16Type, .sInt32Type, .sInt64Type, .charType, .intType, .longType, .longLongType,
+        .nsIntegerType:
+        return ValueType.int
+      case .float32Type, .float64Type, .floatType, .doubleType, .cgFloatType:
+        return ValueType.double
+      default:
+        return ValueType.any
+      }
+    }
+  }
+
+  private static func elementValueType(for array: [NSNumber]) -> String? {
+    let valueTypes = Set(array.map(valueType(for:)))
+
+    if valueTypes.count < 2, let elementType = valueTypes.first {
+      return elementType
+    } else {
+      return nil
     }
   }
 }

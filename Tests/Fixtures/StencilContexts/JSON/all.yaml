@@ -73,7 +73,11 @@ files:
           type: "Array"
         mixed2:
           element:
-            type: "Double"
+            items:
+            - type: "Double"
+            - type: "Int"
+            - type: "Bool"
+            type: "Any"
           type: "Array"
         new-layout:
           type: "Bool"
@@ -151,7 +155,11 @@ files:
           type: "Array"
         mixed2:
           element:
-            type: "Double"
+            items:
+            - type: "Double"
+            - type: "Int"
+            - type: "Bool"
+            type: "Any"
           type: "Array"
         new-layout:
           type: "Bool"
