@@ -36,33 +36,55 @@ enum Metadata {
   /// - Parameter data: The value to describe
   /// - Returns: Dictionary with type information about the value (for Stencil context)
   static func generate(for data: Any) -> [String: Any] {
-    switch data {
-    case is String:
+    let dataType = type(of: data)
+
+    if data is String {
       return [Key.type: ValueType.string]
-    case is Bool:
+    } else if dataType == Bool.self {
       return [Key.type: ValueType.bool]
-    case is Int:
+    } else if dataType == Int.self {
       return [Key.type: ValueType.int]
-    case is Double:
+    } else if dataType == Double.self {
       return [Key.type: ValueType.double]
-    case is Date:
+    } else if dataType == Date.self {
       return [Key.type: ValueType.date]
-    case is Data:
+    } else if dataType == Data.self {
       return [Key.type: ValueType.data]
-    case let data as [Any]:
+    } else if let data = data as? NSNumber {
+      return generate(for: data)
+    } else if let data = data as? [Any] {
       return [
         Key.type: ValueType.array,
         Key.element: Metadata.describe(arrayElement: data)
       ]
-    case let data as [String: Any]:
+    } else if let data = data as? [String: Any] {
       return [
         Key.type: ValueType.dictionary,
         Key.properties: Metadata.describe(dictionary: data)
       ]
-    case is NSNull, nil:
+    } else if dataType == NSNull.self || Mirror(reflecting: data).displayStyle == .optional {
       return [Key.type: ValueType.optional]
-    default:
+    } else {
       return [Key.type: ValueType.any]
+    }
+  }
+
+  static func generate(for number: NSNumber) -> [String: Any] {
+    if CFGetTypeID(number) == CFBooleanGetTypeID() {
+      return [Key.type: ValueType.bool]
+    } else {
+      switch CFNumberGetType(number) {
+      case .sInt8Type, .sInt16Type, .sInt32Type, .sInt64Type, .charType, .intType, .longType, .longLongType:
+        return [Key.type: ValueType.int]
+      case .float32Type, .float64Type, .floatType, .doubleType:
+        return [Key.type: ValueType.double]
+      case .nsIntegerType:
+        return [Key.type: ValueType.int]
+      case .cgFloatType:
+        return [Key.type: ValueType.double]
+      default:
+        return [Key.type: ValueType.any]
+      }
     }
   }
 

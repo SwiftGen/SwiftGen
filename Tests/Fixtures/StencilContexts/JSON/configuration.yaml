@@ -60,7 +60,7 @@ files:
         new-layout:
           type: "Bool"
         one:
-          type: "Bool"
+          type: "Int"
         options:
           properties:
             screen-order:
@@ -75,7 +75,7 @@ files:
         quick-search:
           type: "Bool"
         zero:
-          type: "Bool"
+          type: "Int"
       type: "Dictionary"
   documents:
   - data:
@@ -138,7 +138,7 @@ files:
         new-layout:
           type: "Bool"
         one:
-          type: "Bool"
+          type: "Int"
         options:
           properties:
             screen-order:
@@ -153,7 +153,7 @@ files:
         quick-search:
           type: "Bool"
         zero:
-          type: "Bool"
+          type: "Int"
       type: "Dictionary"
   name: "configuration"
   path: "configuration.json"
