@@ -7,7 +7,7 @@ import AppKit
 import PrefsWindowController
 
 // swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable file_length implicit_return
 
 // MARK: - Storyboard Scenes
 
@@ -86,6 +86,18 @@ internal struct SceneType<T> {
     }
     return controller
   }
+
+  @available(macOS 10.15, *)
+  internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSViewController {
+    let identifier = NSStoryboard.SceneIdentifier(self.identifier)
+    return storyboard.storyboard.instantiateController(identifier: identifier, creator: block)
+  }
+
+  @available(macOS 10.15, *)
+  internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSWindowController {
+    let identifier = NSStoryboard.SceneIdentifier(self.identifier)
+    return storyboard.storyboard.instantiateController(identifier: identifier, creator: block)
+  }
 }
 
 internal struct InitialSceneType<T> {
@@ -94,6 +106,22 @@ internal struct InitialSceneType<T> {
   internal func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitialController() as? T else {
       fatalError("Controller is not of the expected class \(T.self).")
+    }
+    return controller
+  }
+
+  @available(macOS 10.15, *)
+  internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSViewController {
+    guard let controller = storyboard.storyboard.instantiateInitialController(creator: block) else {
+      fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
+    }
+    return controller
+  }
+
+  @available(macOS 10.15, *)
+  internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSWindowController {
+    guard let controller = storyboard.storyboard.instantiateInitialController(creator: block) else {
+      fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
     }
     return controller
   }
