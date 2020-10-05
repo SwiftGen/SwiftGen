@@ -1,12 +1,32 @@
-hello: world
-weight: 33.3
+car: null
+doors: 5
+flags:
+  - true
+  - false
+  - true
 foo:
   bar: banana
   baz: orange
-car: null
-newLayout: true
-quickSearch: false
+hello: world
+mixed:
+  - one
+  - 2
+  - true
+mixed2:
+  - 0.1
+  - 2
+  - true
 names:
   - John
   - Peter
   - Nick
+newLayout: true
+one: 1
+primes:
+  - 2
+  - 3
+  - 5
+  - 7
+quickSearch: false
+weight: 33.3
+zero: 0
