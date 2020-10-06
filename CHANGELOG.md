@@ -2,11 +2,7 @@
 
 ---
 
-## Develop
-
-### Breaking Changes
-
-_None_
+## 6.4.0
 
 ### New Features
 
@@ -16,7 +12,7 @@ _None_
 * Added `config generate-xcfilelist` subcommand to generate input and output `xcfilelist`s based on your configuration file. These files should then be used in an Xcode build step that executes `swiftgen config run`. Don't forget to regenerate the file lists after adding/removing resources in your project in a way that might impact them.  
   [@CraigSiemens](https://github.com/CraigSiemens)
   [#441](https://github.com/SwiftGen/SwiftGen/issues/441)
-* Colors: the XML parser now accepts a `colorFormat` option, used to change the color format. The default equals `rgba`.  
+* Colors: the XML parser now accepts a `colorFormat` option, used to change the color format. The default format is `rgba`.  
   [@kevinstier](https://github.com/kevinstier)
   [#562](https://github.com/SwiftGen/SwiftGen/issues/562)
   [#768](https://github.com/SwiftGen/SwiftGen/pull/768)
@@ -27,15 +23,13 @@ _None_
 
 ### Bug Fixes
 
-* Update the Swift version in `.swift-version` so that the right version is used when building manually (using `swiftenv`).  
-  [@cfiken](https://github.com/cfiken)
-  [#764](https://github.com/SwiftGen/SwiftGen/issues/764)
 * Plist: Update the parsing strategy (using `Codable`) to fix parsing of `Bool` values as `Integer` in some cases.  
   [@fortmarek](https://github.com/fortmarek)
   [Olivier Halligon](https://github.com/AliSoftware)
   [#779](https://github.com/SwiftGen/SwiftGen/pull/779)
-* JSON/YAML: the `inline` templates incorrectly generated `1`/`0` as values, instead of `true`/`false` as expected.  
+* JSON/Plist/YAML: the `inline` templates incorrectly generated `1`/`0` as values, instead of `true`/`false` as expected.  
   [David Jennes](https://github.com/djbe)
+  [#779](https://github.com/SwiftGen/SwiftGen/pull/779)
   [#783](https://github.com/SwiftGen/SwiftGen/pull/783)
 * JSON: the parser now correctly recognizes `0` and `1` as `Int` (instead of `Bool`).  
   [David Jennes](https://github.com/djbe)
@@ -43,6 +37,9 @@ _None_
 
 ### Internal Changes
 
+* Update the Swift version in `.swift-version` so that the right version is used when building manually (using `swiftenv`).  
+  [@cfiken](https://github.com/cfiken)
+  [#764](https://github.com/SwiftGen/SwiftGen/issues/764)
 * Update Yams from `3.0.0` to `4.0.0`.  
   [@hungrxyz](https://github.com/hungrxyz)
   [#772](https://github.com/SwiftGen/SwiftGen/issues/772)
