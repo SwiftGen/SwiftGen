@@ -27,7 +27,7 @@
   [@fortmarek](https://github.com/fortmarek)
   [Olivier Halligon](https://github.com/AliSoftware)
   [#779](https://github.com/SwiftGen/SwiftGen/pull/779)
-* JSON/Plist/YAML: the `inline` templates incorrectly generated `1`/`0` as values, instead of `true`/`false` as expected.  
+* JSON/Plist/YAML: fixed issue with `inline` templates which incorrectly generated `1`/`0` as values, instead of `true`/`false` as expected.  
   [David Jennes](https://github.com/djbe)
   [#779](https://github.com/SwiftGen/SwiftGen/pull/779)
   [#783](https://github.com/SwiftGen/SwiftGen/pull/783)
