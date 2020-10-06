@@ -115,6 +115,11 @@ final class ColorParserTests: XCTestCase {
     XCTAssertEqual(color, 0xFFFFFFCC)
   }
 
+  func testStringWithAlphaArgb() throws {
+    let color = try Colors.parse(hex: "CCFFFFFF", path: #file, format: .argb)
+    XCTAssertEqual(color, 0xFFFFFFCC)
+  }
+
   // MARK: - Hex Value
 
   func testHexValues() {

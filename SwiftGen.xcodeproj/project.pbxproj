@@ -19,6 +19,7 @@
 		093405101F815B2500187787 /* config-with-params.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405071F81539100187787 /* config-with-params.yml */; };
 		093405131F87AA6A00187787 /* config-with-multi-entries.yml in Resources */ = {isa = PBXBuildFile; fileRef = 093405111F87AA6500187787 /* config-with-multi-entries.yml */; };
 		0987AC7A2475802700388153 /* Config+Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0987AC792475802700388153 /* Config+Example.swift */; };
+		099E49DD2521184200F7269D /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E49DB2521182100F7269D /* AnyCodable.swift */; };
 		09A87B581BCCA2CF00D9B9F5 /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030C171B6D43D400275BF5 /* TestsHelper.swift */; };
 		09A87B5C1BCCA37F00D9B9F5 /* ConfigReadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09030BD81B6D2E5900275BF5 /* ConfigReadTests.swift */; };
 		09D009FF1F9BB3450026A755 /* ConfigEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D009FE1F9BB3450026A755 /* ConfigEntry.swift */; };
@@ -45,6 +46,7 @@
 		37DC60381F98D7DD00B7B31C /* config-missing-paths.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC60311F98D1DA00B7B31C /* config-missing-paths.yml */; };
 		37DC60391F98D7DD00B7B31C /* config-missing-template.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC602B1F98D1D900B7B31C /* config-missing-template.yml */; };
 		37DC603B1F98E74E00B7B31C /* config-absolute-paths-prefix.yml in Resources */ = {isa = PBXBuildFile; fileRef = 37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */; };
+		447B6D3224FAFB6A00B03219 /* Config+XCFileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447B6D3124FAFB6A00B03219 /* Config+XCFileList.swift */; };
 		5DE172C4BAE478DDAA63064F /* Pods_swiftgen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00832FEC9F060E93DAD1228 /* Pods_swiftgen.framework */; };
 		80F8014301BF496E905CA2CF /* Pods_SwiftGenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16DF0A0F13A222BCA7B60102 /* Pods_SwiftGenKit.framework */; };
 		846BDF9321ADB71B00DDCEE9 /* config-with-env-placeholder.yml in Resources */ = {isa = PBXBuildFile; fileRef = 846BDF9221ADB71B00DDCEE9 /* config-with-env-placeholder.yml */; };
@@ -337,6 +339,7 @@
 		0934050D1F815A8C00187787 /* ParserCLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserCLI.swift; sourceTree = "<group>"; };
 		093405111F87AA6500187787 /* config-with-multi-entries.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "config-with-multi-entries.yml"; sourceTree = "<group>"; };
 		0987AC792475802700388153 /* Config+Example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config+Example.swift"; sourceTree = "<group>"; };
+		099E49DB2521182100F7269D /* AnyCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCodable.swift; sourceTree = "<group>"; };
 		09A87B501BCCA2C600D9B9F5 /* SwiftGen UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftGen UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09C7B2D31BCC382800D7F488 /* main.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; tabWidth = 2; };
 		09D009FE1F9BB3450026A755 /* ConfigEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigEntry.swift; sourceTree = "<group>"; };
@@ -361,6 +364,7 @@
 		37DC60301F98D1DA00B7B31C /* config-absolute-paths-direct.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-absolute-paths-direct.yml"; sourceTree = "<group>"; };
 		37DC60311F98D1DA00B7B31C /* config-missing-paths.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-missing-paths.yml"; sourceTree = "<group>"; };
 		37DC603A1F98E74600B7B31C /* config-absolute-paths-prefix.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-absolute-paths-prefix.yml"; sourceTree = "<group>"; };
+		447B6D3124FAFB6A00B03219 /* Config+XCFileList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config+XCFileList.swift"; sourceTree = "<group>"; };
 		4CBF21A0D5701D1232758A8C /* Pods-SwiftGenKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftGenKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftGenKit/Pods-SwiftGenKit.release.xcconfig"; sourceTree = "<group>"; };
 		4D5D3E5746871F59AC9CA625 /* Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftGenKit_SwiftGenKit_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8FC9E0F4B4EF9E07633BF2 /* Pods-swiftgen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftgen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftgen/Pods-swiftgen.debug.xcconfig"; sourceTree = "<group>"; };
@@ -634,6 +638,7 @@
 				0934050A1F8158B800187787 /* Config.swift */,
 				0987AC792475802700388153 /* Config+Example.swift */,
 				DD75551A24A103CB00E61756 /* Config+Run.swift */,
+				447B6D3124FAFB6A00B03219 /* Config+XCFileList.swift */,
 				09D009FE1F9BB3450026A755 /* ConfigEntry.swift */,
 				DDB0B9C1209E390700E467C2 /* ConfigOutput.swift */,
 			);
@@ -750,6 +755,7 @@
 				DDCC331A220E3FE700982694 /* ParserOption.swift */,
 				DDCC331C220E491600982694 /* ParserOptionList.swift */,
 				DD48AD7E2210AC5E00336621 /* ParserOptionValues.swift */,
+				099E49DB2521182100F7269D /* AnyCodable.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -1067,7 +1073,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = AliSoftware;
 				TargetAttributes = {
 					09A87B4F1BCCA2C600D9B9F5 = {
@@ -1504,6 +1510,7 @@
 				0934050E1F815A8C00187787 /* ParserCLI.swift in Sources */,
 				DD75551B24A103CB00E61756 /* Config+Run.swift in Sources */,
 				DD906FA81EE777C600C29B8A /* ParserCLICommands.swift in Sources */,
+				447B6D3224FAFB6A00B03219 /* Config+XCFileList.swift in Sources */,
 				379C7E921F8ECC1A00267096 /* Logs.swift in Sources */,
 				379C7E871F8ECA0C00267096 /* TemplateRef.swift in Sources */,
 				093405051F8113AA00187787 /* ConfigCommands.swift in Sources */,
@@ -1558,6 +1565,7 @@
 				DDC82117209672E1007A55F3 /* String.swift in Sources */,
 				DD9F687420955D0C004EB720 /* ColorsFileTypeParser.swift in Sources */,
 				D4A93E27247E307400BE8651 /* JSONParser.swift in Sources */,
+				099E49DD2521184200F7269D /* AnyCodable.swift in Sources */,
 				DD9F687C20955D51004EB720 /* Catalog.swift in Sources */,
 				C322627121012F42001AC9CD /* Attribute.swift in Sources */,
 				DDCC331D220E491600982694 /* ParserOptionList.swift in Sources */,
@@ -1671,6 +1679,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1726,6 +1735,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1758,7 +1768,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/SwiftGenTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1772,7 +1782,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/SwiftGenTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1886,7 +1896,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/TemplatesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.TemplatesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1900,7 +1910,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/TemplatesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.TemplatesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1914,7 +1924,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/SwiftGenKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1928,7 +1938,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/SwiftGenKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alisoftware.SwiftGenKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

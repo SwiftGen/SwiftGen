@@ -11,7 +11,7 @@ import SlackTextViewController
 import UIKit
 
 // swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable file_length implicit_return
 
 // MARK: - Storyboard Scenes
 
@@ -113,6 +113,11 @@ public struct SceneType<T: UIViewController> {
     }
     return controller
   }
+
+  @available(iOS 13.0, tvOS 13.0, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+    return storyboard.storyboard.instantiateViewController(identifier: identifier, creator: block)
+  }
 }
 
 public struct InitialSceneType<T: UIViewController> {
@@ -124,12 +129,24 @@ public struct InitialSceneType<T: UIViewController> {
     }
     return controller
   }
+
+  @available(iOS 13.0, tvOS 13.0, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+    guard let controller = storyboard.storyboard.instantiateInitialViewController(creator: block) else {
+      fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
+    }
+    return controller
+  }
 }
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type

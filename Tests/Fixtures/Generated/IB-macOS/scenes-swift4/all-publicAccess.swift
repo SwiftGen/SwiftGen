@@ -8,7 +8,7 @@ import ExtraModule
 import PrefsWindowController
 
 // swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable file_length implicit_return
 
 // MARK: - Storyboard Scenes
 
@@ -87,6 +87,16 @@ public struct SceneType<T> {
     }
     return controller
   }
+
+  @available(macOS 10.15, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSViewController {
+    return storyboard.storyboard.instantiateController(identifier: identifier, creator: block)
+  }
+
+  @available(macOS 10.15, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSWindowController {
+    return storyboard.storyboard.instantiateController(identifier: identifier, creator: block)
+  }
 }
 
 public struct InitialSceneType<T> {
@@ -98,12 +108,32 @@ public struct InitialSceneType<T> {
     }
     return controller
   }
+
+  @available(macOS 10.15, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSViewController {
+    guard let controller = storyboard.storyboard.instantiateInitialController(creator: block) else {
+      fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
+    }
+    return controller
+  }
+
+  @available(macOS 10.15, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSWindowController {
+    guard let controller = storyboard.storyboard.instantiateInitialController(creator: block) else {
+      fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
+    }
+    return controller
+  }
 }
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type

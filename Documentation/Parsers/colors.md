@@ -17,7 +17,9 @@ You can provide a custom filter using the `filter` option, it accepts any valid 
 
 ## Customization
 
-This parser currently doesn't accept any options.
+| Option Name | Default Value | Description |
+| -------------- | ------------- | ----------- |
+| `colorFormat` | `rgba` | Each color value is interpreted using the given color format. The supported formats are: <ul><li>`rgba`: 8 hexadecimal digits, with each pair of the hexadecimal digits representing the values of the Red, Green, Blue and Alpha channel, respectively.</li><li>`argb`: 8 hexadecimal digits, with each pair of the hexadecimal digits representing the values of the Alpha, Red, Green and Blue channel, respectively.</li></ul> |
 
 ## Templates
 

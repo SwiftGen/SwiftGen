@@ -36,7 +36,7 @@ public enum PlistFiles {
     public static let uiStatusBarStyle: String = _document["UIStatusBarStyle"]
     public static let uiSupportedInterfaceOrientations: [String] = _document["UISupportedInterfaceOrientations"]
     public static let uiSupportedInterfaceOrientationsIpad: [String] = _document["UISupportedInterfaceOrientations~ipad"]
-    public static let userAmbiguousInteger: Bool = _document["User Ambiguous Integer"]
+    public static let userAmbiguousInteger: Int = _document["User Ambiguous Integer"]
     public static let userBoolean: Bool = _document["User Boolean"]
     public static let userDate: Date = _document["User Date"]
     public static let userFloat: Double = _document["User Float"]
@@ -45,8 +45,14 @@ public enum PlistFiles {
   public enum Configuration {
     private static let _document = PlistDocument(path: "configuration.plist")
     public static let environment: String = _document["Environment"]
+    public static let flags: [Bool] = _document["Flags"]
+    public static let mixed: [Any] = _document["Mixed"]
+    public static let mixed2: [Any] = _document["Mixed2"]
     public static let names: [String] = _document["Names"]
+    public static let one: Int = _document["One"]
     public static let options: [String: Any] = _document["Options"]
+    public static let primes: [Int] = _document["Primes"]
+    public static let zero: Int = _document["Zero"]
   }
   public enum ShoppingList {
     public static let items: [String] = arrayFromPlist(at: "shopping-list.plist")
@@ -86,7 +92,11 @@ private struct PlistDocument {
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type

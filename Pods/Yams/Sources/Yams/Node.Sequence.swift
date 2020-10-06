@@ -75,7 +75,6 @@ extension Node.Sequence: Equatable {
     }
 }
 
-#if swift(>=4.1.50)
 extension Node.Sequence: Hashable {
     /// :nodoc:
     public func hash(into hasher: inout Hasher) {
@@ -83,7 +82,6 @@ extension Node.Sequence: Hashable {
         hasher.combine(resolvedTag)
     }
 }
-#endif
 
 extension Node.Sequence: ExpressibleByArrayLiteral {
     /// :nodoc:

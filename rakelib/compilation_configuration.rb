@@ -22,10 +22,10 @@ class Platform
   attr_accessor :sdk, :target
 
   ALL = {
-    'iOS' => Platform.new('iphoneos', 'arm64-apple-ios12.0'),
-    'macOS' => Platform.new('macosx', 'x86_64-apple-macosx10.13'),
-    'tvOS' => Platform.new('appletvos', 'arm64-apple-tvos12.0'),
-    'watchOS' => Platform.new('watchos', 'armv7k-apple-watchos5.0')
+    'iOS' => Platform.new('iphoneos', 'arm64-apple-ios14.0'),
+    'macOS' => Platform.new('macosx', 'x86_64-apple-macosx10.15'),
+    'tvOS' => Platform.new('appletvos', 'arm64-apple-tvos14.0'),
+    'watchOS' => Platform.new('watchos', 'armv7k-apple-watchos7.0')
   }.freeze
 
   SWIFT_VERSIONS = [4, 4.2, 5].freeze
