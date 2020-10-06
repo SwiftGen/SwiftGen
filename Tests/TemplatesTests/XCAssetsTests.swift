@@ -39,6 +39,7 @@ final class XCAssetsTests: XCTestCase {
             "colorTypeName=XCTColorAsset",
             "dataTypeName=XCTDataAsset",
             "imageTypeName=XCTImageAsset",
+            "symbolTypeName=XCTSymbolAsset",
             // deprecated parameters
             "colorAliasName=XCTColor",
             "imageAliasName=XCTImage"
