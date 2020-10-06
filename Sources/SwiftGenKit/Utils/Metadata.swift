@@ -31,13 +31,16 @@ enum Metadata {
   /// for complex types (such as arrays and dictionaries), describing the type information of sub-elements (such as an
   /// array's element, or each of a dictionary's properties).
   ///
-  /// Note: this is used for the Plist and YAML Stencil contexts
+  /// Note: this is used for the JSON, Plist and YAML Stencil contexts
   ///
   /// - Parameter data: The value to describe
   /// - Returns: Dictionary with type information about the value (for Stencil context)
   static func generate(for data: Any) -> [String: Any] {
     let dataType = type(of: data)
 
+    // We want to use toll-free briding using `data is X`, to for example easily check if something is a `String` (or
+    // `String`-like). In other cases we actually want to avoid it, and use `dataType == X.self`. TFB to `NSNumber` for
+    // example leads to confusion for ambiguous values (0, 1, true, false, ...). 
     if data is String {
       return [Key.type: ValueType.string]
     } else if dataType == Bool.self {
@@ -46,9 +49,9 @@ enum Metadata {
       return [Key.type: ValueType.int]
     } else if dataType == Double.self {
       return [Key.type: ValueType.double]
-    } else if dataType == Date.self {
+    } else if data is Date {
       return [Key.type: ValueType.date]
-    } else if dataType == Data.self {
+    } else if data is Data {
       return [Key.type: ValueType.data]
     } else if let data = data as? NSNumber {
       return [Key.type: valueType(for: data)]
@@ -104,6 +107,13 @@ enum Metadata {
     }
   }
 
+  /// Get the value type of a number if possible.
+  ///
+  /// `NSNumber` does not provide an easy way for checking the internal value type. Therefore we first have to check if
+  /// it's a boolean, and if not try to match the CF type to something Swift-y.
+  ///
+  /// - Parameter number: The value to describe
+  /// - Returns: `ValueType` case (may be `any` if no match is found)
   private static func valueType(for number: NSNumber) -> String {
     if CFGetTypeID(number) == CFBooleanGetTypeID() {
       return ValueType.bool
@@ -120,6 +130,13 @@ enum Metadata {
     }
   }
 
+  /// Returns the element value type, if all elements have the same type.
+  ///
+  /// The problem with `NSNumber` arrays is that they can contain mixed content, such as `[0.1, 2, true]`. Therefore,
+  /// we have to check the type of each element.
+  ///
+  /// - Parameter array: The value to describe
+  /// - Returns: `ValueType` case if array is uniform (`nil` otherwise)
   private static func elementValueType(for array: [NSNumber]) -> String? {
     let valueTypes = Set(array.map(valueType(for:)))
 
