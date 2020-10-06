@@ -43,8 +43,14 @@ internal enum PlistFiles {
   }
   internal enum Configuration {
     internal static let environment: String = "development"
+    internal static let flags: [Bool] = [true, false, true]
+    internal static let mixed: [Any] = ["One", 1, true]
+    internal static let mixed2: [Any] = [0.1, 1, true]
     internal static let names: [String] = ["John", "Peter", "Nick"]
+    internal static let one: Int = 1
     internal static let options: [String: Any] = ["Animation Style": "Party Mode"]
+    internal static let primes: [Int] = [2, 3, 5, 7]
+    internal static let zero: Int = 0
   }
   internal enum ShoppingList {
     internal static let items: [String] = ["Eggs", "Bread", "Milk"]

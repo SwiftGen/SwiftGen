@@ -1,10 +1,17 @@
 {
-  "environment": "staging",
   "api-version": "2",
+  "country": null,
+  "doors": 5,
+  "environment": "staging",
+  "flags": [true, false, true],
+  "mixed": ["one", 2, true],
+  "mixed2": [0.1, 2, true],
+  "new-layout": true,
   "options": {
     "screen-order": ["1", "2", "3"]
   },
-  "country": null,
-  "new-layout": true,
-  "quick-search": false
+  "one": 1,
+  "primes": [2, 3, 5, 7],
+  "quick-search": false,
+  "zero": 0
 }

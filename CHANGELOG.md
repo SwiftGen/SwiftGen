@@ -37,6 +37,9 @@ _None_
 * JSON/YAML: the `inline` templates incorrectly generated `1`/`0` as values, instead of `true`/`false` as expected.  
   [David Jennes](https://github.com/djbe)
   [#783](https://github.com/SwiftGen/SwiftGen/pull/783)
+* JSON: the parser now correctly recognizes `0` and `1` as `Int` (instead of `Bool`).  
+  [David Jennes](https://github.com/djbe)
+  [#786](https://github.com/SwiftGen/SwiftGen/pull/786)
 
 ### Internal Changes
 

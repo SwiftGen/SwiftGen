@@ -54,14 +54,29 @@ extension NSData: ScalarRepresentable {
 
 extension NSNumber: ScalarRepresentable {
   public func represented() -> Node.Scalar {
-    if let value = Bool(exactly: self) {
-      return value.represented()
-    } else if let value = Double(exactly: self), floor(value) != value {
-      return value.represented()
-    } else if let value = Int(exactly: self) {
-      return value.represented()
+    if CFGetTypeID(self) == CFBooleanGetTypeID() {
+      return boolValue.represented()
     } else {
-      return Double.nan.represented()
+      switch CFNumberGetType(self) {
+      case .sInt8Type:
+        return int8Value.represented()
+      case .sInt16Type:
+        return int16Value.represented()
+      case .sInt32Type:
+        return int32Value.represented()
+      case .sInt64Type:
+        return int64Value.represented()
+      case .charType:
+        return uint8Value.represented()
+      case .intType, .longType, .longLongType, .nsIntegerType:
+        return intValue.represented()
+      case .float32Type, .floatType:
+        return floatValue.represented()
+      case .float64Type, .doubleType, .cgFloatType:
+        return doubleValue.represented()
+      default:
+        return Double.nan.represented()
+      }
     }
   }
 }

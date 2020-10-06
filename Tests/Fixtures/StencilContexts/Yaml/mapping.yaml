@@ -2,21 +2,47 @@ files:
 - documents:
   - data:
       car: null
+      doors: 5
+      flags:
+      - true
+      - false
+      - true
       foo:
         bar: "banana"
         baz: "orange"
       hello: "world"
+      mixed:
+      - "one"
+      - 2
+      - true
+      mixed2:
+      - 1e-1
+      - 2
+      - true
       names:
       - "John"
       - "Peter"
       - "Nick"
       newLayout: true
+      one: 1
+      primes:
+      - 2
+      - 3
+      - 5
+      - 7
       quickSearch: false
       weight: 3.33e+1
+      zero: 0
     metadata:
       properties:
         car:
           type: "Optional"
+        doors:
+          type: "Int"
+        flags:
+          element:
+            type: "Bool"
+          type: "Array"
         foo:
           properties:
             bar:
@@ -26,16 +52,40 @@ files:
           type: "Dictionary"
         hello:
           type: "String"
+        mixed:
+          element:
+            items:
+            - type: "String"
+            - type: "Int"
+            - type: "Bool"
+            type: "Any"
+          type: "Array"
+        mixed2:
+          element:
+            items:
+            - type: "Double"
+            - type: "Int"
+            - type: "Bool"
+            type: "Any"
+          type: "Array"
         names:
           element:
             type: "String"
           type: "Array"
         newLayout:
           type: "Bool"
+        one:
+          type: "Int"
+        primes:
+          element:
+            type: "Int"
+          type: "Array"
         quickSearch:
           type: "Bool"
         weight:
           type: "Double"
+        zero:
+          type: "Int"
       type: "Dictionary"
   name: "mapping"
   path: "mapping.yaml"

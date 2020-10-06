@@ -3,24 +3,68 @@ files:
     data:
       api-version: "2"
       country: null
+      doors: 5
       environment: "staging"
+      flags:
+      - true
+      - false
+      - true
+      mixed:
+      - "one"
+      - 2
+      - true
+      mixed2:
+      - 1e-1
+      - 2
+      - true
       new-layout: true
+      one: 1
       options:
         screen-order:
         - "1"
         - "2"
         - "3"
+      primes:
+      - 2
+      - 3
+      - 5
+      - 7
       quick-search: false
+      zero: 0
     metadata:
       properties:
         api-version:
           type: "String"
         country:
           type: "Optional"
+        doors:
+          type: "Int"
         environment:
           type: "String"
+        flags:
+          element:
+            type: "Bool"
+          type: "Array"
+        mixed:
+          element:
+            items:
+            - type: "String"
+            - type: "Int"
+            - type: "Bool"
+            type: "Any"
+          type: "Array"
+        mixed2:
+          element:
+            items:
+            - type: "Double"
+            - type: "Int"
+            - type: "Bool"
+            type: "Any"
+          type: "Array"
         new-layout:
           type: "Bool"
+        one:
+          type: "Int"
         options:
           properties:
             screen-order:
@@ -28,31 +72,81 @@ files:
                 type: "String"
               type: "Array"
           type: "Dictionary"
+        primes:
+          element:
+            type: "Int"
+          type: "Array"
         quick-search:
           type: "Bool"
+        zero:
+          type: "Int"
       type: "Dictionary"
   documents:
   - data:
       api-version: "2"
       country: null
+      doors: 5
       environment: "staging"
+      flags:
+      - true
+      - false
+      - true
+      mixed:
+      - "one"
+      - 2
+      - true
+      mixed2:
+      - 1e-1
+      - 2
+      - true
       new-layout: true
+      one: 1
       options:
         screen-order:
         - "1"
         - "2"
         - "3"
+      primes:
+      - 2
+      - 3
+      - 5
+      - 7
       quick-search: false
+      zero: 0
     metadata:
       properties:
         api-version:
           type: "String"
         country:
           type: "Optional"
+        doors:
+          type: "Int"
         environment:
           type: "String"
+        flags:
+          element:
+            type: "Bool"
+          type: "Array"
+        mixed:
+          element:
+            items:
+            - type: "String"
+            - type: "Int"
+            - type: "Bool"
+            type: "Any"
+          type: "Array"
+        mixed2:
+          element:
+            items:
+            - type: "Double"
+            - type: "Int"
+            - type: "Bool"
+            type: "Any"
+          type: "Array"
         new-layout:
           type: "Bool"
+        one:
+          type: "Int"
         options:
           properties:
             screen-order:
@@ -60,8 +154,14 @@ files:
                 type: "String"
               type: "Array"
           type: "Dictionary"
+        primes:
+          element:
+            type: "Int"
+          type: "Array"
         quick-search:
           type: "Bool"
+        zero:
+          type: "Int"
       type: "Dictionary"
   name: "configuration"
   path: "configuration.json"
