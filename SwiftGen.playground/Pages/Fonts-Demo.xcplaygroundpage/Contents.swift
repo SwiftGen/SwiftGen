@@ -14,10 +14,8 @@
 
 #if os(macOS)
   import AppKit.NSFont
-  internal typealias Font = NSFont
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIFont
-  internal typealias Font = UIFont
 #endif
 
 // swiftlint:disable superfluous_disable_command
