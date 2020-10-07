@@ -49,6 +49,11 @@ namespace :cli do
 
     Utils.print_header 'Building Binary'
     plist_file = (Pathname.new(BUILD_DIR) + "Build/Products/#{RELEASE_CONFIGURATION}/swiftgen.app/Contents/Info.plist").to_s
+
+    # Ensure we have an Info.plist at the destination (Xcode 12 new build system's circular build dependencies detection seems to require this)
+    FileUtils.mkdir_p File.dirname(plist_file)
+    FileUtils.touch plist_file
+
     Utils.run(
       %(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "#{SCHEME_NAME}" -configuration "#{RELEASE_CONFIGURATION}") +
       %( -derivedDataPath "#{BUILD_DIR}" TEMPLATE_PATH="#{tpl_rel_path}") +
@@ -112,4 +117,3 @@ namespace :cli do
 end
 
 task :default => 'cli:build'
-
