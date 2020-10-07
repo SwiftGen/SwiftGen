@@ -16,7 +16,9 @@ _None_
 
 ### Bug Fixes
 
-_None_
+* XCAssets: fixed some availability annotations that were incorrect.  
+  [David Jennes](https://github.com/djbe)
+  [#789](https://github.com/SwiftGen/SwiftGen/pull/789)
 
 ### Internal Changes
 
