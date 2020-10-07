@@ -13,6 +13,9 @@ _None_
 * XCAssets: the parser now supports Symbol sets, so you can safely use custom symbols.  
   [David Jennes](https://github.com/djbe)
   [#788](https://github.com/SwiftGen/SwiftGen/pull/788)
+* XCAssets: you can now provide a trait collection when initializing a color or image asset (on iOS/tvOS).  
+  [David Jennes](https://github.com/djbe)
+  [#790](https://github.com/SwiftGen/SwiftGen/pull/790)
 
 ### Bug Fixes
 
