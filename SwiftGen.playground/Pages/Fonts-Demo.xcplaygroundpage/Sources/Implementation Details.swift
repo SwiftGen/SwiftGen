@@ -1,4 +1,4 @@
-#if os(OSX)
+#if os(macOS)
   import AppKit.NSFont
   public typealias Font = NSFont
 #elseif os(iOS) || os(tvOS) || os(watchOS)
@@ -45,7 +45,7 @@ public extension Font {
     if !UIFont.fontNames(forFamilyName: font.family).contains(font.name) {
       font.register()
     }
-    #elseif os(OSX)
+    #elseif os(macOS)
     if let url = font.url, CTFontManagerGetScopeForURL(url as CFURL) == .none {
       font.register()
     }
