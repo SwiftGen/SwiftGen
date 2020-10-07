@@ -1,7 +1,7 @@
 // swiftlint:disable all
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
-#if os(OSX)
+#if os(macOS)
   import AppKit
   internal enum ColorName { }
 #elseif os(iOS) || os(tvOS) || os(watchOS)
