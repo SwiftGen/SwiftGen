@@ -5,7 +5,7 @@ import UIKit
 public final class SlideDownSegue: UIStoryboardSegue {}
 public final class ValidatePasswordViewController: UIViewController {}
 
-#elseif os(OSX)
+#elseif os(macOS)
 
 import Cocoa
 
