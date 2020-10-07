@@ -28,6 +28,11 @@ public struct SceneType<T: UIViewController> {
     return controller
   }
 
+  @available(iOS 13.0, tvOS 13.0, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+    return storyboard.storyboard.instantiateViewController(identifier: identifier, creator: block)
+  }
+
   // Extra for playgrounds
   public init(storyboard: StoryboardType.Type, identifier: String) {
     self.storyboard = storyboard
@@ -41,6 +46,14 @@ public struct InitialSceneType<T: UIViewController> {
   public func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitialViewController() as? T else {
       fatalError("ViewController is not of the expected class \(T.self).")
+    }
+    return controller
+  }
+
+  @available(iOS 13.0, tvOS 13.0, *)
+  public func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+    guard let controller = storyboard.storyboard.instantiateInitialViewController(creator: block) else {
+      fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
     }
     return controller
   }
