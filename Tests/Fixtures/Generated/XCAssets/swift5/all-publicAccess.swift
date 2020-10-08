@@ -57,6 +57,10 @@ public enum Asset {
       public static let tint = ColorAsset(name: "Vengo/Tint")
     }
   }
+  public enum Symbols {
+    public static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
+    public static let plus = SymbolAsset(name: "Plus")
+  }
   public enum Targets {
     public static let bottles = ARResourceGroupAsset(name: "Bottles")
     public static let paintings = ARResourceGroupAsset(name: "Paintings")
@@ -204,6 +208,39 @@ public extension ImageAsset.Image {
     self.init(named: asset.name)
     #endif
   }
+}
+
+public struct SymbolAsset {
+  public fileprivate(set) var name: String
+
+  #if os(iOS) || os(tvOS) || os(watchOS)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  public typealias Configuration = UIImage.SymbolConfiguration
+  public typealias Image = UIImage
+
+  @available(iOS 12.0, tvOS 12.0, watchOS 5.0, *)
+  public var image: Image {
+    let bundle = BundleToken.bundle
+    #if os(iOS) || os(tvOS)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
+    #elseif os(watchOS)
+    let image = Image(named: name)
+    #endif
+    guard let result = image else {
+      fatalError("Unable to load symbol asset named \(name).")
+    }
+    return result
+  }
+
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  public func image(with configuration: Configuration) -> Image {
+    let bundle = BundleToken.bundle
+    guard let result = Image(named: name, in: bundle, with: configuration) else {
+      fatalError("Unable to load symbol asset named \(name).")
+    }
+    return result
+  }
+  #endif
 }
 
 // swiftlint:disable convenience_type

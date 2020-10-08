@@ -30,6 +30,7 @@ You can customize some elements of this template by overriding the following par
 | `forceProvidesNamespaces` | N/A | If set, generates namespaces even for non namespacing asset folders (i.e. "Provides Namespace" is unchecked) |
 | `imageTypeName` | `ImageAsset` | Allows you to change the name of the struct type representing an image. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
+| `symbolTypeName` | `SymbolAsset` | Allows you to change the name of the struct type representing a symbol. |
 | `colorAliasName` | `AssetColorTypeAlias` | **Deprecated** Allows you to change the name of the generated `typealias` for the platform specific color type. |
 | `imageAliasName` | `AssetImageTypeAlias` | **Deprecated** Allows you to change the name of the generated `typealias` for the platform specific image type. |
 
@@ -91,4 +92,9 @@ let bottles = Asset.Targets.bottles.referenceObjects
 let sameBottles = ARReferenceImage.referenceImages(in: Asset.Targets.bottles)
 let paintings = Asset.Targets.paintings.referenceImages
 let samePosters = ARReferenceObject.referenceObjects(in: Asset.Targets.paintings)
+
+// You can create new symbol images by referring to the enum instance and calling `.image` on it (with or without configuration)
+let plus = Asset.Symbols.plus.image
+let style = UIImage.SymbolConfiguration(textStyle: .headline)
+let styled = Asset.Symbols.exclamationMark.image(with: style)
 ```

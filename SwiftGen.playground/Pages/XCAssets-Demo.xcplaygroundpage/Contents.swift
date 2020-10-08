@@ -34,6 +34,7 @@ bundle = BundleToken.bundle
 #elseif os(tvOS) || os(watchOS)
   import UIKit
 #endif
+import PlaygroundSupport
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -75,6 +76,10 @@ internal enum Asset {
       internal static let tint = ColorAsset(name: "Vengo/Tint")
     }
   }
+  internal enum Symbols {
+    internal static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
+    internal static let plus = SymbolAsset(name: "Plus")
+  }
   internal enum Targets {
     internal static let bottles = ARResourceGroupAsset(name: "Bottles")
     internal static let paintings = ARResourceGroupAsset(name: "Paintings")
@@ -91,7 +96,6 @@ internal enum Asset {
 let image1 = UIImage(asset: Asset.Food.Exotic.banana)
 let image2 = Asset.Food.Round.tomato.image
 
-import PlaygroundSupport
 // Show fruits animated in the playground's liveView
 PlaygroundPage.current.liveView = {
   let assets = [
@@ -133,3 +137,8 @@ print(readmeText)
 // AR resources
 let paintingReferenceImages = Asset.Targets.paintings.referenceImages
 let bottleReferenceObjects = Asset.Targets.bottles.referenceObjects
+
+// symbols
+let plus = Asset.Symbols.plus.image
+let style = UIImage.SymbolConfiguration(textStyle: .headline)
+let styled = Asset.Symbols.exclamationMark.image(with: style)

@@ -40,6 +40,8 @@ internal enum Asset {
     ]
     internal static let allImages: [ImageAsset] = [
     ]
+    internal static let allSymbols: [SymbolAsset] = [
+    ]
     // swiftlint:enable trailing_comma
   }
   internal enum Food {
@@ -72,6 +74,8 @@ internal enum Asset {
       Round.tomato,
       `private`,
     ]
+    internal static let allSymbols: [SymbolAsset] = [
+    ]
     // swiftlint:enable trailing_comma
   }
   internal enum Other {
@@ -83,6 +87,8 @@ internal enum Asset {
     internal static let allDataAssets: [DataAsset] = [
     ]
     internal static let allImages: [ImageAsset] = [
+    ]
+    internal static let allSymbols: [SymbolAsset] = [
     ]
     // swiftlint:enable trailing_comma
   }
@@ -110,6 +116,26 @@ internal enum Asset {
     internal static let allImages: [ImageAsset] = [
       orange,
     ]
+    internal static let allSymbols: [SymbolAsset] = [
+    ]
+    // swiftlint:enable trailing_comma
+  }
+  internal enum Symbols {
+    internal static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
+    internal static let plus = SymbolAsset(name: "Plus")
+    // swiftlint:disable trailing_comma
+    internal static let allResourceGroups: [ARResourceGroupAsset] = [
+    ]
+    internal static let allColors: [ColorAsset] = [
+    ]
+    internal static let allDataAssets: [DataAsset] = [
+    ]
+    internal static let allImages: [ImageAsset] = [
+    ]
+    internal static let allSymbols: [SymbolAsset] = [
+      exclamationMark,
+      plus,
+    ]
     // swiftlint:enable trailing_comma
   }
   internal enum Targets {
@@ -127,6 +153,8 @@ internal enum Asset {
     internal static let allDataAssets: [DataAsset] = [
     ]
     internal static let allImages: [ImageAsset] = [
+    ]
+    internal static let allSymbols: [SymbolAsset] = [
     ]
     // swiftlint:enable trailing_comma
   }
@@ -264,6 +292,39 @@ internal extension ImageAsset.Image {
     self.init(named: asset.name)
     #endif
   }
+}
+
+internal struct SymbolAsset {
+  internal fileprivate(set) var name: String
+
+  #if os(iOS) || os(tvOS) || os(watchOS)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  internal typealias Configuration = UIImage.SymbolConfiguration
+  internal typealias Image = UIImage
+
+  @available(iOS 12.0, tvOS 12.0, watchOS 5.0, *)
+  internal var image: Image {
+    let bundle = BundleToken.bundle
+    #if os(iOS) || os(tvOS)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
+    #elseif os(watchOS)
+    let image = Image(named: name)
+    #endif
+    guard let result = image else {
+      fatalError("Unable to load symbol asset named \(name).")
+    }
+    return result
+  }
+
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  internal func image(with configuration: Configuration) -> Image {
+    let bundle = BundleToken.bundle
+    guard let result = Image(named: name, in: bundle, with: configuration) else {
+      fatalError("Unable to load symbol asset named \(name).")
+    }
+    return result
+  }
+  #endif
 }
 
 // swiftlint:disable convenience_type

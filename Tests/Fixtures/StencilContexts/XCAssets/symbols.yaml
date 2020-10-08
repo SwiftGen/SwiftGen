@@ -1,0 +1,11 @@
+catalogs:
+- assets:
+  - name: "Exclamation Mark"
+    type: "symbol"
+    value: "Exclamation Mark"
+  - name: "Plus"
+    type: "symbol"
+    value: "Plus"
+  name: "Symbols"
+resourceCount:
+  symbol: 2

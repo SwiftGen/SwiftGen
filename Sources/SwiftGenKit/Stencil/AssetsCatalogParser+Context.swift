@@ -81,6 +81,8 @@ extension Constants.Item {
       return "data"
     case .imageSet:
       return "image"
+    case .symbolSet:
+      return "symbol"
     }
   }
 }

@@ -10,7 +10,9 @@ _None_
 
 ### New Features
 
-_None_
+* XCAssets: the parser now supports Symbol sets, so you can safely use custom symbols.  
+  [David Jennes](https://github.com/djbe)
+  [#788](https://github.com/SwiftGen/SwiftGen/pull/788)
 
 ### Bug Fixes
 
