@@ -21,7 +21,7 @@ class Utils
 
   # run a command using xcrun and xcpretty if applicable
   def self.run(command, task, subtask = '', xcrun: false, formatter: :raw)
-    commands = if xcrun
+    commands = if xcrun and OS.mac?
                  Array(command).map { |cmd| "#{version_select} xcrun #{cmd}" }
                else
                  Array(command)
@@ -130,14 +130,12 @@ class Utils
 
   # run a command, pipe output through 'xcpretty' and store the output in CI artifacts
   def self.xcpretty(cmd, task, subtask)
-    name = (task.name + (subtask.empty? ? '' : "_#{subtask}")).gsub(/[:-]/, '_')
     command = Array(cmd).join(' && \\' + "\n")
 
-    if ENV['CIRCLECI']
-      Rake.sh "set -o pipefail && (\\\n#{command} \\\n) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\" | " \
-        "bundle exec xcpretty --color --report junit --output \"#{ENV['CIRCLE_TEST_REPORTS']}/xcode/#{name}.xml\""
+    if ENV['CI']
+      Rake.sh %(set -o pipefail && (\\\n#{command} \\\n) | bundle exec xcpretty --color --report junit)
     elsif system('which xcpretty > /dev/null')
-      Rake.sh "set -o pipefail && (\\\n#{command} \\\n) | bundle exec xcpretty -c"
+      Rake.sh %(set -o pipefail && (\\\n#{command} \\\n) | bundle exec xcpretty --color)
     else
       Rake.sh command
     end
@@ -146,11 +144,15 @@ class Utils
 
   # run a command and store the output in CI artifacts
   def self.plain(cmd, task, subtask)
-    name = (task.name + (subtask.empty? ? '' : "_#{subtask}")).gsub(/[:-]/, '_')
     command = Array(cmd).join(' && \\' + "\n")
 
-    if ENV['CIRCLECI']
-      Rake.sh "set -o pipefail && (#{command}) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\""
+    if ENV['CI']
+      if OS.mac?
+        Rake.sh %(set -o pipefail && (#{command}))
+      else
+        # dash on linux doesn't support `set -o`
+        Rake.sh %(/bin/bash -eo pipefail -c "#{command}")
+      end
     else
       Rake.sh command
     end
@@ -180,7 +182,7 @@ class Utils
     return '' if version_req.satisfied_by? Gem::Version.new(current_xcode_version)
 
     supported_versions = all_xcode_versions.select { |app| version_req.satisfied_by?(app[:vers]) }
-    latest_supported_xcode = supported_versions.max_by { |app| app[:vers] }
+    latest_supported_xcode = supported_versions.sort_by { |app| app[:vers] }.last
 
     # Check if it's at least the right version
     if latest_supported_xcode.nil?
@@ -203,6 +205,18 @@ class Utils
     end
   end
   private_class_method :all_xcode_versions
+end
+
+# OS detection
+#
+module OS
+  def OS.mac?
+   (/darwin/ =~ RUBY_PLATFORM) != nil
+  end
+
+  def OS.linux?
+    OS.unix? and not OS.mac?
+  end
 end
 
 # Colorization support for Strings
