@@ -79,6 +79,12 @@ opt_in_rules:
 conditional_returns_on_newline:
   if_only: true
 
+deployment_target:
+  iOS_deployment_target: 1.0
+  macOS_deployment_target: 10.0
+  tvOS_deployment_target: 1.0
+  watchOS_deployment_target: 1.0
+
 file_header:
   required_pattern: |
                     \/\/(

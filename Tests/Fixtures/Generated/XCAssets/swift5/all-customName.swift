@@ -144,30 +144,26 @@ internal extension XCTColorAsset.Color {
 internal struct XCTDataAsset {
   internal fileprivate(set) var name: String
 
-  #if os(iOS) || os(tvOS) || os(macOS)
-  @available(iOS 9.0, macOS 10.11, *)
+  @available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
   internal var data: NSDataAsset {
     guard let data = NSDataAsset(asset: self) else {
       fatalError("Unable to load data asset named \(name).")
     }
     return data
   }
-  #endif
 }
 
-#if os(iOS) || os(tvOS) || os(macOS)
-@available(iOS 9.0, macOS 10.11, *)
+@available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
 internal extension NSDataAsset {
   convenience init?(asset: XCTDataAsset) {
     let bundle = BundleToken.bundle
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS) || os(watchOS)
     self.init(name: asset.name, bundle: bundle)
     #elseif os(macOS)
     self.init(name: NSDataAsset.Name(asset.name), bundle: bundle)
     #endif
   }
 }
-#endif
 
 internal struct XCTImageAsset {
   internal fileprivate(set) var name: String
@@ -178,6 +174,7 @@ internal struct XCTImageAsset {
   internal typealias Image = UIImage
   #endif
 
+  @available(iOS 8.0, tvOS 9.0, watchOS 2.0, macOS 10.7, *)
   internal var image: Image {
     let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS)
@@ -196,6 +193,7 @@ internal struct XCTImageAsset {
 }
 
 internal extension XCTImageAsset.Image {
+  @available(iOS 8.0, tvOS 9.0, watchOS 2.0, *)
   @available(macOS, deprecated,
     message: "This initializer is unsafe on macOS, please use the XCTImageAsset.image property")
   convenience init?(asset: XCTImageAsset) {
