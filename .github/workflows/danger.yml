@@ -1,0 +1,33 @@
+name: Danger
+
+on:
+  push:
+    branches: stable
+    paths:
+      - '.github/workflows/danger.yml'
+      - '**/*.swift'
+      - 'templates/**'
+  pull_request:
+    paths:
+      - '.github/workflows/danger.yml'
+      - '**/*.swift'
+      - 'templates/**'
+
+jobs:
+  check:
+    name: Danger Check
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      -
+        name: Run Danger
+        run: bundle exec danger --verbose
+        env:
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.danger_github_api_token }}

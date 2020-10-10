@@ -1,0 +1,31 @@
+name: Output
+
+on:
+  push:
+    branches: stable
+    paths:
+      - '.github/workflows/compile-output.yml'
+      - 'Tests/Fixtures/**/*.swift'
+      - 'Tests/Fixtures/**/compilation-configuration.yml'
+  pull_request:
+    paths:
+      - '.github/workflows/compile-output.yml'
+      - 'Tests/Fixtures/**/*.swift'
+      - 'Tests/Fixtures/**/compilation-configuration.yml'
+
+jobs:
+  compile:
+    name: Compile Output
+    runs-on: macos-latest
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      -
+        name: Run tests
+        run: bundle exec rake output:compile

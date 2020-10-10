@@ -1,0 +1,30 @@
+name: Test SPM
+
+on:
+  push:
+    branches: stable
+    paths:
+      - '.github/workflows/test-spm.yml'
+      - '**/*.swift'
+  pull_request:
+    paths:
+      - '.github/workflows/test-spm.yml'
+      - '**/*.swift'
+
+jobs:
+  macos:
+    name: Test SPM macOS
+    runs-on: macos-latest
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      # TODO: This should run the tests once SPM supports testing an executable
+      -
+        name: Build
+        run: bundle exec rake spm:build
