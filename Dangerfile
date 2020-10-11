@@ -58,19 +58,18 @@ end
 
 ################################################
 # Check `lock` files
-podfile_changed = git.modified_files.include?('Podfile.lock')
 package_changed = git.modified_files.include?('Package.resolved')
 versions_changed = git.modified_files.include?('Sources/SwiftGen/Version.swift')
 # rubocop:disable Style/IfUnlessModifier
-if podfile_changed ^ package_changed ^ versions_changed
-  need_fixes << warn('You should make sure that `Podfile.lock`, `Package.resolved` and `Sources/SwiftGen/Version.swift` are changed in sync')
+if package_changed ^ versions_changed
+  need_fixes << warn("You should make sure that `Package.resolved` and `Sources/SwiftGen/Version.swift` are changed in sync")
 end
 # rubocop:enable Style/IfUnlessModifier
 
 # Check if DEPENDENCIES needs changes
 swiftgenkit_podspec_changed = git.modified_files.include?('SwiftGenKit.podspec')
 dependencies_doc_changed = git.modified_files.include?('DEPENDENCIES.md')
-if podfile_changed || swiftgenkit_podspec_changed || dependencies_doc_changed
+if package_changed || swiftgenkit_podspec_changed || dependencies_doc_changed
   stdout, _, status = Open3.capture3('bundle', 'exec', 'rake', 'dependencies:check[true]')
   unless status.success?
     stdout.lines.each do |message|
