@@ -30,6 +30,8 @@ let package = Package(
       "StencilSwiftKit",
       "SwiftGenKit",
       "Yams"
+    ], resources: [
+      .copy("templates")
     ]),
     .target(name: "SwiftGenKit", dependencies: [
       "Kanna",
@@ -40,7 +42,7 @@ let package = Package(
       "SwiftGenKit"
     ]),
     .testTarget(name: "SwiftGenTests", dependencies: [
-      "SwiftGen"
+      "SwiftGenCLI"
     ]),
     .testTarget(name: "TemplatesTests", dependencies: [
       "StencilSwiftKit",
