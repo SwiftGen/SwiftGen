@@ -32,6 +32,9 @@ _None_
 * Switch to GitHub Actions.  
   [#794](https://github.com/SwiftGen/SwiftGen/pull/794)
   [David Jennes](https://github.com/djbe)
+* Switched the whole project over to use Swift Package Manager, restructuring some of the internals in the process.  
+  [David Jennes](https://github.com/djbe)
+  [#793](https://github.com/SwiftGen/SwiftGen/pull/793)
 
 ## 6.4.0
 
