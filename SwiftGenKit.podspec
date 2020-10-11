@@ -21,14 +21,14 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/aligatr'
 
   s.platform = :osx, '10.9'
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
   s.cocoapods_version = '>= 1.4.0'
 
   s.source = {
     git: 'https://github.com/SwiftGen/SwiftGenKit.git',
     tag: s.version.to_s
   }
-  s.source_files = 'Sources/**/*.swift'
+  s.source_files = 'Sources/SwiftGenKit/**/*.swift'
 
   s.dependency 'Kanna', '~> 5.2'
   s.dependency 'PathKit', '~> 0.9'

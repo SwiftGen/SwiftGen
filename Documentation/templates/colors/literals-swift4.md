@@ -38,7 +38,7 @@ internal extension ColorName {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Colors/literals-swift4/defaults.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/Colors/literals-swift4/defaults.swift)
 
 ## Usage example
 

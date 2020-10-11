@@ -39,7 +39,7 @@ You can customize some elements of this template by overriding the following par
 @end
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Strings/objc-m/localizable.m)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/Strings/objc-m/localizable.m)
 
 ## Usage example
 

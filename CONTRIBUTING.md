@@ -66,11 +66,13 @@ Here's a recap of what each repository in the SwiftGen organization does:
 
 This repository contains the following components:
 
-#### swiftgen
+#### swiftgen and SwiftGenCLI
 
 The code for the command-line interface of SwiftGen.
 
-It is the main target of the Xcode project, to build the MacOS command-line app which is only responsible for parsing its command-line arguments and then invoking the proper methods in the frameworks composing SwiftGen. This component also has a corresponding unit tests target, for testing configuration parsing.
+The `swiftgen` executable target is used to build the macOS command-line app which is only responsible  for parsing its command-line arguments. It then passes that information to `SwiftGenCLI`.
+
+The `SwiftGenCLI` framework actually contains the logic for interpreting commands and parsing configuration files. It then invokes the proper methods in the frameworks composing SwiftGen. This component also has a corresponding unit tests target, for testing configuration parsing.
 
 If you need to add new command-line options and flags, that's the place to do it.
 
@@ -108,13 +110,25 @@ Depending on the scope of the feature you want to develop, it might be easiest t
 
 First you need to make sure your machine fulfills the following requirements:
 
-- You have [SwiftLint](https://github.com/realm/SwiftLint) installed – otherwise run `brew install swiftlint`. This will help you keep your code style consistent with the project's while contributing.
+- Have the latest official Xcode release installed.
 - For Core Contributors who plan to release new versions of SwiftGen, you'll also need:
   - To have [Homebrew](http://brew.sh) and [Bundler](https://bundler.io) installed
   - To install the project's tools dependencies by running `bundler install` from the project root directory
 
-Unless you're adding (or updating) dependencies, you won't have to run `pod install` as all dependencies are already checked in to the repository.
-
 ### Building & Running
 
-The Xcode workspace, by default, is configured to run SwiftGen built as an app bundle, with some default parameters. You can switch (and modify) these by going to `Product > Scheme > Edit Scheme... > Arguments`, and checking (and unchecking) the command you want to test.
+Just open the SwiftGen directory (repository) in Xcode, and select the `swiftgen` target. By default, it is configured to run SwiftGen with some default parameters. You can switch (and modify) these by going to `Product > Scheme > Edit Scheme... > Arguments`, and checking (and unchecking) the command you want to test.
+
+Make sure to regularly test your changes by running the Unit Tests, using `Product > Test` or the shortcut `⌘ + U`.
+
+### Committing & Pushing
+
+Before you commit and push, we recommend you install the commit hooks using the following command:
+
+```bash
+swift run komondor install
+```
+
+This will install pre-commit & pre-push hooks to ensure the necessary checks are executed locally before you push code to our repository.
+
+While not mandatory as most of these checks are also run on our CI platform, it may help save you some time by getting direct feedback on some issues.
