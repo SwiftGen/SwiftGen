@@ -1,6 +1,0 @@
-framework module StencilSwiftKit {
-  umbrella header "StencilSwiftKit-umbrella.h"
-
-  export *
-  module * { export * }
-}
