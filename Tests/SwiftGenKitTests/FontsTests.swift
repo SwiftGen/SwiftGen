@@ -7,6 +7,7 @@
 import AppKit.NSFont
 import PathKit
 @testable import SwiftGenKit
+import TestUtils
 import XCTest
 
 final class FontsTests: XCTestCase {
@@ -19,7 +20,7 @@ final class FontsTests: XCTestCase {
 
   func testDefaults() throws {
     let parser = try Fonts.Parser()
-    try parser.searchAndParse(path: Fixtures.directory())
+    try parser.searchAndParse(path: Fixtures.resourceDirectory())
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "defaults", sub: .fonts)

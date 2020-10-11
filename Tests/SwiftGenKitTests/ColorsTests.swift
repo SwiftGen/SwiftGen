@@ -6,6 +6,7 @@
 
 import PathKit
 @testable import SwiftGenKit
+import TestUtils
 import XCTest
 
 private final class TestFileParser1: ColorsFileTypeParser {
@@ -86,8 +87,8 @@ final class ColorParserTests: XCTestCase {
 
   func testParseMultipleFiles() throws {
     let parser = try Colors.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "colors.clr", sub: .colors))
-    try parser.searchAndParse(path: Fixtures.path(for: "extra.txt", sub: .colors))
+    try parser.searchAndParse(path: Fixtures.resource(for: "colors.clr", sub: .colors))
+    try parser.searchAndParse(path: Fixtures.resource(for: "extra.txt", sub: .colors))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "multiple", sub: .colors)

@@ -5,11 +5,11 @@
 //
 
 import PathKit
+@testable import SwiftGenCLI
+import TestUtils
 import XCTest
 
 final class ConfigLintTests: XCTestCase {
-  private lazy var bundle = Bundle(for: type(of: self))
-
   private func testLint(
     fixture: String,
     expectedLogs: [(LogLevel, String)],
@@ -18,10 +18,7 @@ final class ConfigLintTests: XCTestCase {
     file: StaticString = #file,
     line: UInt = #line
   ) {
-    guard let path = bundle.path(forResource: fixture, ofType: "yml") else {
-      fatalError("Fixture \(fixture) not found")
-    }
-    let configFile = Path(path)
+    let configFile = Fixtures.config(for: fixture)
     let logger = TestLogger(expectedLogs: expectedLogs, unwantedLevels: unwantedLevels, file: file, line: line)
 
     do {

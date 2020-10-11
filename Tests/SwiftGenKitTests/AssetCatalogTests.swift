@@ -6,6 +6,7 @@
 
 import PathKit
 @testable import SwiftGenKit
+import TestUtils
 import XCTest
 
 final class AssetCatalogTests: XCTestCase {
@@ -18,7 +19,7 @@ final class AssetCatalogTests: XCTestCase {
 
   func testARResourceGroups() throws {
     let parser = try AssetsCatalog.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Targets.xcassets", sub: .xcassets))
+    try parser.searchAndParse(path: Fixtures.resource(for: "Targets.xcassets", sub: .xcassets))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "targets", sub: .xcassets)
@@ -26,7 +27,7 @@ final class AssetCatalogTests: XCTestCase {
 
   func testColors() throws {
     let parser = try AssetsCatalog.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Styles.xcassets", sub: .xcassets))
+    try parser.searchAndParse(path: Fixtures.resource(for: "Styles.xcassets", sub: .xcassets))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "styles", sub: .xcassets)
@@ -34,7 +35,7 @@ final class AssetCatalogTests: XCTestCase {
 
   func testData() throws {
     let parser = try AssetsCatalog.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Files.xcassets", sub: .xcassets))
+    try parser.searchAndParse(path: Fixtures.resource(for: "Files.xcassets", sub: .xcassets))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "files", sub: .xcassets)
@@ -42,7 +43,7 @@ final class AssetCatalogTests: XCTestCase {
 
   func testImages() throws {
     let parser = try AssetsCatalog.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Food.xcassets", sub: .xcassets))
+    try parser.searchAndParse(path: Fixtures.resource(for: "Food.xcassets", sub: .xcassets))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "food", sub: .xcassets)
@@ -50,7 +51,7 @@ final class AssetCatalogTests: XCTestCase {
 
   func testSymbols() throws {
     let parser = try AssetsCatalog.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Symbols.xcassets", sub: .xcassets))
+    try parser.searchAndParse(path: Fixtures.resource(for: "Symbols.xcassets", sub: .xcassets))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "symbols", sub: .xcassets)
@@ -61,7 +62,7 @@ final class AssetCatalogTests: XCTestCase {
     let paths = [
       "Files.xcassets", "Food.xcassets", "Styles.xcassets", "Symbols.xcassets", "Targets.xcassets", "Other.xcassets"
     ]
-    try parser.searchAndParse(paths: paths.map { Fixtures.path(for: $0, sub: .xcassets) })
+    try parser.searchAndParse(paths: paths.map { Fixtures.resource(for: $0, sub: .xcassets) })
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "all", sub: .xcassets)

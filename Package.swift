@@ -39,14 +39,17 @@ let package = Package(
       "Yams"
     ]),
     .testTarget(name: "SwiftGenKitTests", dependencies: [
-      "SwiftGenKit"
+      "SwiftGenKit",
+      "TestUtils"
     ]),
     .testTarget(name: "SwiftGenTests", dependencies: [
-      "SwiftGenCLI"
+      "SwiftGenCLI",
+      "TestUtils"
     ]),
     .testTarget(name: "TemplatesTests", dependencies: [
       "StencilSwiftKit",
-      "SwiftGenKit"
+      "SwiftGenKit",
+      "TestUtils"
     ]),
     .target(name: "TestUtils", dependencies: [
       "PathKit",

@@ -4,6 +4,8 @@
 // MIT Licence
 //
 
+@testable import SwiftGenCLI
+import TestUtils
 import XCTest
 import Yams
 
