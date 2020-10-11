@@ -60,9 +60,10 @@ end
 # Check `lock` files
 podfile_changed = git.modified_files.include?('Podfile.lock')
 package_changed = git.modified_files.include?('Package.resolved')
+versions_changed = git.modified_files.include?('Sources/SwiftGen/Version.swift')
 # rubocop:disable Style/IfUnlessModifier
-if podfile_changed ^ package_changed
-  need_fixes << warn('You should make sure that `Podfile.lock` and `Package.resolved` are changed in sync')
+if podfile_changed ^ package_changed ^ versions_changed
+  need_fixes << warn('You should make sure that `Podfile.lock`, `Package.resolved` and `Sources/SwiftGen/Version.swift` are changed in sync')
 end
 # rubocop:enable Style/IfUnlessModifier
 

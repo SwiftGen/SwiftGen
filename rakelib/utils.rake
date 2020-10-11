@@ -61,6 +61,15 @@ class Utils
     /^[0-9.]*/.match(last_version_line)[0] # Just the 'x.y.z' part
   end
 
+  def self.spm_resolved_version(dep)
+    dependencies = JSON.load(File.new('Package.resolved'))['object']['pins']
+    dependencies.find { |d| d['package'] == dep }['state']['version']
+  end
+
+  def self.last_git_tag_version
+    `git describe --tags --abbrev=0`.strip
+  end
+
   # @returns An array containing the CFBundleVersion & CFBundleShortVersionString
   #          values for the Info.plist of the given library
   def self.plist_version(lib)
