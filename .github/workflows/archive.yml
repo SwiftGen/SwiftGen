@@ -63,4 +63,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: SwiftGen.zip
-          path: build/swiftgen-*.zip
+          path: .build/swiftgen-*.zip

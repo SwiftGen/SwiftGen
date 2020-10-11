@@ -29,4 +29,4 @@ jobs:
       # TODO: This should run the tests once SPM supports testing an executable
       -
         name: Build
-        run: bundle exec rake spm:build
+        run: bundle exec rake spm:test
