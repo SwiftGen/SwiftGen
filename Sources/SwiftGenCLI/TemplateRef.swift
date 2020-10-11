@@ -6,7 +6,7 @@
 
 import PathKit
 
-enum TemplateRef: Equatable {
+public enum TemplateRef: Equatable {
   case name(String)
   case path(Path)
 
@@ -17,7 +17,7 @@ enum TemplateRef: Equatable {
     case multipleTemplateOptions(path: String, name: String)
   }
 
-  init(templateShortName: String, templateFullPath: String) throws {
+  public init(templateShortName: String, templateFullPath: String) throws {
     switch (!templateFullPath.isEmpty, !templateShortName.isEmpty) {
     case (false, false):
       throw TemplateRef.Error.noTemplateProvided
@@ -42,7 +42,7 @@ enum TemplateRef: Equatable {
   /// - Returns: The Path matching the template found
   /// - Throws: TemplateRef.Error
   ///
-  func resolvePath(forParser parser: ParserCLI, logger: (LogLevel, String) -> Void = logMessage) throws -> Path {
+  public func resolvePath(forParser parser: ParserCLI, logger: (LogLevel, String) -> Void = logMessage) throws -> Path {
     switch self {
     case .name(let templateShortName):
       var path = Path.deprecatedAppSupportTemplates + parser.templateFolder + "\(templateShortName).stencil"

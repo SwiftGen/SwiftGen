@@ -5,7 +5,7 @@
 //
 
 extension Config {
-  static func example(versionForDocLink: String, commentAllLines: Bool = true) -> String {
+  public static func example(versionForDocLink: String, commentAllLines: Bool = true) -> String {
     var content = exampleYAMLContent(version: versionForDocLink)
     if commentAllLines {
       // Comment all lines, except empty lines.

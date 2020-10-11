@@ -12,7 +12,7 @@ import PathKit
 // Once it is fixed, we should move `ConfigEntry` back into an extension of `Config`.
 // https://bugs.swift.org/browse/SR-5734
 
-struct ConfigEntry {
+public struct ConfigEntry {
   enum Keys {
     static let inputs = "inputs"
     static let filter = "filter"

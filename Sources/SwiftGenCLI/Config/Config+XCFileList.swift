@@ -10,7 +10,7 @@ import SwiftGenKit
 
 extension Config {
   // MARK: Input XCFileList
-  func inputXCFileList() throws -> String {
+  public func inputXCFileList() throws -> String {
     let inputPaths = try groupPathsByCommand { command, entry -> [Path] in
       let inputPaths = entry.inputs.map { (sourcePath + $0).absolute() }
       let filter = try Filter(pattern: entry.filter ?? command.parserType.defaultFilter)
@@ -24,7 +24,7 @@ extension Config {
   }
 
   // MARK: Output XCFileList
-  func outputXCFileList() throws -> String {
+  public func outputXCFileList() throws -> String {
     let outputPaths = try groupPathsByCommand { _, entry -> [Path] in
       entry.outputs.map { (sourcePath + $0.output).absolute() }
     }

@@ -26,7 +26,7 @@ extension ParserCLI {
     )
   }
 
-  static func command(named name: String) -> ParserCLI? {
+  public static func command(named name: String) -> ParserCLI? {
     allCommands.first { $0.name == name }
   }
 }
@@ -45,7 +45,7 @@ extension ParserCLI: Hashable {
 // MARK: - All Parser Commands
 
 extension ParserCLI {
-  static let allCommands: [ParserCLI] = [
+  public static let allCommands: [ParserCLI] = [
     .init(
       parserType: Colors.Parser.self,
       name: "colors",

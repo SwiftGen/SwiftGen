@@ -34,8 +34,8 @@ extension Path {
   }()
 
   // Deprecated: Remove this in SwiftGen 7.0
-  static let deprecatedAppSupportTemplates = Path.deprecatedApplicationSupport + "SwiftGen/templates"
-  static let bundledTemplates = binary.parent() + templatesRelativePath
+  public static let deprecatedAppSupportTemplates = Path.deprecatedApplicationSupport + "SwiftGen/templates"
+  public static let bundledTemplates = Path(Bundle.module.path(forResource: "templates", ofType: nil) ?? "")
 
   // MARK: Private
 
@@ -51,7 +51,7 @@ extension Path {
 }
 
 /// URL to the Documentation on GitHub
-func gitHubDocURL(version: String, path: String = "") -> URL {
+public func gitHubDocURL(version: String, path: String = "") -> URL {
   let type = path.isEmpty || path.hasSuffix("/") ? "tree" : "blob"
   return URL(
     string: "https://github.com/SwiftGen/SwiftGen/\(type)/\(version)/Documentation/\(path)"

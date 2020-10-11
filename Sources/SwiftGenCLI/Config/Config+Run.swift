@@ -10,7 +10,7 @@ import StencilSwiftKit
 import SwiftGenKit
 
 extension Config {
-  func runCommands(verbose: Bool, logger: (LogLevel, String) -> Void = logMessage) throws {
+  public func runCommands(verbose: Bool, logger: (LogLevel, String) -> Void = logMessage) throws {
     let errors = commands.parallelCompactMap { cmd, entry -> Swift.Error? in
       do {
         try run(parserCommand: cmd, entry: entry, verbose: verbose, logger: logger)

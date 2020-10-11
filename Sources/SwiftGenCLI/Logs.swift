@@ -8,7 +8,7 @@ import Foundation
 
 // MARK: Printing on stderr
 
-enum LogLevel {
+public enum LogLevel {
   case info, warning, error
 }
 
@@ -41,7 +41,7 @@ enum ANSIColor: UInt8, CustomStringConvertible {
 
 // Based on https://github.com/realm/SwiftLint/blob/0.39.2/Source/SwiftLintFramework/Extensions/QueuedPrint.swift
 
-func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
+public func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
   logQueue.async {
     switch level {
     case .info:
@@ -71,13 +71,14 @@ private let logQueue: DispatchQueue = {
   return queue
 }()
 
-struct ErrorPrettifier: Error, CustomStringConvertible {
+public struct ErrorPrettifier: Error, CustomStringConvertible {
   let nsError: NSError
-  var description: String {
+
+  public var description: String {
     "\(nsError.localizedDescription) (\(nsError.domain) code \(nsError.code))"
   }
 
-  static func execute(closure: () throws -> Void ) rethrows {
+  public static func execute(closure: () throws -> Void ) rethrows {
     do {
       try closure()
     } catch let error as NSError where error.domain == NSCocoaErrorDomain {
