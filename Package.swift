@@ -47,6 +47,18 @@ let package = Package(
     .testTarget(name: "TemplatesTests", dependencies: [
       "StencilSwiftKit",
       "SwiftGenKit"
+    ]),
+    .target(name: "TestUtils", dependencies: [
+      "PathKit",
+      "SwiftGenKit",
+      "SwiftGenCLI"
+    ], exclude: [
+      "Fixtures/CompilationEnvironment"
+    ], resources: [
+      .copy("Fixtures/Configs"),
+      .copy("Fixtures/Generated"),
+      .copy("Fixtures/Resources"),
+      .copy("Fixtures/StencilContexts")
     ])
   ],
   swiftLanguageVersions: [.v5]
