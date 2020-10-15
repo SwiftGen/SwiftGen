@@ -171,6 +171,17 @@
     return color
   }()
 
+  #if os(iOS) || os(tvOS)
+  @available(iOS 11.0, tvOS 11.0, *)
+  {{accessModifier}} func color(compatibleWith traitCollection: UITraitCollection) -> Color {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    guard let color = Color(named: name, in: bundle, compatibleWith: traitCollection) else {
+      fatalError("Unable to load color asset named \(name).")
+    }
+    return color
+  }
+  #endif
+
   fileprivate init(name: String) {
     self.name = name
   }
@@ -243,6 +254,17 @@
     }
     return result
   }
+
+  #if os(iOS) || os(tvOS)
+  @available(iOS 8.0, tvOS 9.0, *)
+  {{accessModifier}} func image(compatibleWith traitCollection: UITraitCollection) -> Image {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    guard let result = Image(named: name, in: bundle, compatibleWith: traitCollection) else {
+      fatalError("Unable to load image asset named \(name).")
+    }
+    return result
+  }
+  #endif
 }
 
 {{accessModifier}} extension {{imageType}}.Image {
