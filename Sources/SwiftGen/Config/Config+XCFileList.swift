@@ -13,7 +13,10 @@ extension Config {
   func inputXCFileList() throws -> String {
     let inputPaths = try groupPathsByCommand { command, entry -> [Path] in
       let inputPaths = entry.inputs.map { (sourcePath + $0).absolute() }
-      let filter = try Filter(pattern: entry.filter ?? command.parserType.defaultFilter)
+      let filter = try Filter(
+        pattern: entry.filter ?? command.parserType.defaultFilter,
+        options: command.parserType.filterOptions
+      )
 
       return try command.parserType
         .subpaths(in: inputPaths, matching: filter)

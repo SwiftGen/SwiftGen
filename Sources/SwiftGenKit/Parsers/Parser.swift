@@ -18,7 +18,10 @@ public protocol Parser {
   /// Regex for the default filter
   static var defaultFilter: String { get }
 
-  /// List of supported options
+  /// Filter options (defaults to skipping hidden files, package descendants and directories)
+  static var filterOptions: Filter.Options { get }
+
+  /// List of supported options (defaults to none)
   static var allOptions: ParserOptionList { get }
 
   /// Try to parse the file (or directory) at the given path, relative to some parent path.
@@ -89,6 +92,10 @@ public extension Parser {
 }
 
 public extension Parser {
+  static var filterOptions: Filter.Options {
+    .default
+  }
+
   static var allOptions: ParserOptionList {
     []
   }
