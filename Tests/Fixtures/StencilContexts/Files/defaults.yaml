@@ -1,11 +1,11 @@
-directories:
+groups:
 - directories:
   - directories:
     - files:
       - ext: "mp4"
         mimeType: "video/mp4"
         name: "another video"
-        path: "Files/empty intermediate/subfolder"
+        path: "empty intermediate/subfolder"
       name: "subfolder"
     name: "empty intermediate"
   - directories:
@@ -13,21 +13,21 @@ directories:
       - ext: "svg"
         mimeType: "image/svg+xml"
         name: "graphic"
-        path: "Files/subdir/subdir"
+        path: "subdir/subdir"
       name: "subdir"
     files:
     - ext: "mp4"
       mimeType: "video/mp4"
       name: "A Video With Spaces"
-      path: "Files/subdir"
+      path: "subdir"
     name: "subdir"
   files:
   - ext: ""
     mimeType: "application/octet-stream"
     name: "File"
-    path: "Files"
+    path: ""
   - ext: "txt"
     mimeType: "text/plain"
     name: "test"
-    path: "Files"
+    path: ""
   name: "Files"

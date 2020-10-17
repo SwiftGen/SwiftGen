@@ -1,6 +1,0 @@
-files:
-- ext: "svg"
-  mimeType: "image/svg+xml"
-  name: "graphic"
-  path: "Files/subdir/subdir"
-name: "subdir"
