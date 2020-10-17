@@ -4,7 +4,7 @@
 {% if palettes %}
 {% set enumName %}{{param.enumName|default:"ColorName"}}{% endset %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
-#if os(OSX)
+#if os(macOS)
   import AppKit
   {% if enumName != 'NSColor' %}{{accessModifier}} enum {{enumName}} { }{% endif %}
 #elseif os(iOS) || os(tvOS) || os(watchOS)

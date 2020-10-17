@@ -13,7 +13,7 @@ import {{module}}
 {% endfor %}
 
 // swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable file_length implicit_return
 
 // MARK: - Storyboard Scenes
 
@@ -81,6 +81,23 @@ import {{module}}
     }
     return controller
   }
+
+  {% if isAppKit %}
+  @available(macOS 10.15, *)
+  {{accessModifier}} func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSViewController {
+    return storyboard.storyboard.instantiate{{controller}}(identifier: identifier, creator: block)
+  }
+
+  @available(macOS 10.15, *)
+  {{accessModifier}} func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSWindowController {
+    return storyboard.storyboard.instantiate{{controller}}(identifier: identifier, creator: block)
+  }
+  {% else %}
+  @available(iOS 13.0, tvOS 13.0, *)
+  {{accessModifier}} func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+    return storyboard.storyboard.instantiate{{controller}}(identifier: identifier, creator: block)
+  }
+  {% endif %}
 }
 
 {{accessModifier}} struct InitialSceneType<T{% if not isAppKit %}: UIViewController{% endif %}> {
@@ -92,13 +109,43 @@ import {{module}}
     }
     return controller
   }
+
+  {% if isAppKit %}
+  @available(macOS 10.15, *)
+  {{accessModifier}} func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSViewController {
+    guard let controller = storyboard.storyboard.instantiateInitial{{controller}}(creator: block) else {
+      fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
+    }
+    return controller
+  }
+
+  @available(macOS 10.15, *)
+  {{accessModifier}} func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSWindowController {
+    guard let controller = storyboard.storyboard.instantiateInitial{{controller}}(creator: block) else {
+      fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
+    }
+    return controller
+  }
+  {% else %}
+  @available(iOS 13.0, tvOS 13.0, *)
+  {{accessModifier}} func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+    guard let controller = storyboard.storyboard.instantiateInitial{{controller}}(creator: block) else {
+      fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
+    }
+    return controller
+  }
+  {% endif %}
 }
 {% if not param.bundle and not param.lookupFunction %}
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type

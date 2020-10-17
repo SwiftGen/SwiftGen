@@ -72,19 +72,19 @@ CACHE_KEYS:
       SwiftLint:
         :debug: 1c745809f0563c8c5f3436c1fbfc0fd3
         :release: 1c745809f0563c8c5f3436c1fbfc0fd3
-    CHECKSUM: 22ccbbe3b8008684be5955693bab135e0ed6a447
+    CHECKSUM: dfd554ff0dff17288ee574814ccdd5cea85d76f7
     PROJECT_NAME: SwiftLint
     SPECS:
-      - SwiftLint (0.39.2)
+      - SwiftLint (0.40.3)
   Yams:
     BUILD_SETTINGS_CHECKSUM:
       Yams:
         :debug: bd049f3173d31876da7ed672e2e00ece
         :release: bd049f3173d31876da7ed672e2e00ece
-    CHECKSUM: 4199a97883e0369046e3fe882fcc95e559966370
+    CHECKSUM: 9d49b85824751ee13d31e9ec6617c4dfb9a8c3cd
     PROJECT_NAME: Yams
     SPECS:
-      - Yams (3.0.1)
+      - Yams (4.0.0)
 OBJECT_VERSION: 47
 PLUGINS:
   cocoapods-stats:

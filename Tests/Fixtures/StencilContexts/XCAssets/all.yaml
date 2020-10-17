@@ -89,6 +89,14 @@ catalogs:
     type: "group"
   name: "Styles"
 - assets:
+  - name: "Exclamation Mark"
+    type: "symbol"
+    value: "Exclamation Mark"
+  - name: "Plus"
+    type: "symbol"
+    value: "Plus"
+  name: "Symbols"
+- assets:
   - name: "Bottles"
     type: "arresourcegroup"
     value: "Bottles"
@@ -104,3 +112,4 @@ resourceCount:
   color: 4
   data: 3
   image: 8
+  symbol: 2

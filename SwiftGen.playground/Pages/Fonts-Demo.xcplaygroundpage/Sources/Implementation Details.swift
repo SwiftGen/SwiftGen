@@ -1,9 +1,7 @@
-#if os(OSX)
+#if os(macOS)
   import AppKit.NSFont
-  public typealias Font = NSFont
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIFont
-  public typealias Font = UIFont
 #endif
 
 // MARK: - Implementation Details
@@ -12,6 +10,12 @@ public struct FontConvertible {
   public let name: String
   public let family: String
   public let path: String
+
+  #if os(macOS)
+  public typealias Font = NSFont
+  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  public typealias Font = UIFont
+  #endif
 
   public func font(size: CGFloat) -> Font {
     guard let font = Font(font: self, size: size) else {
@@ -39,13 +43,13 @@ public struct FontConvertible {
   }
 }
 
-public extension Font {
+public extension FontConvertible.Font {
   convenience init?(font: FontConvertible, size: CGFloat) {
     #if os(iOS) || os(tvOS) || os(watchOS)
     if !UIFont.fontNames(forFamilyName: font.family).contains(font.name) {
       font.register()
     }
-    #elseif os(OSX)
+    #elseif os(macOS)
     if let url = font.url, CTFontManagerGetScopeForURL(url as CFURL) == .none {
       font.register()
     }
@@ -58,7 +62,11 @@ public extension Font {
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type

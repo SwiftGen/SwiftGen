@@ -57,6 +57,10 @@ public enum Asset {
       public static let tint = ColorAsset(name: "Vengo/Tint")
     }
   }
+  public enum Symbols {
+    public static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
+    public static let plus = SymbolAsset(name: "Plus")
+  }
   public enum Targets {
     public static let bottles = ARResourceGroupAsset(name: "Bottles")
     public static let paintings = ARResourceGroupAsset(name: "Paintings")
@@ -113,6 +117,17 @@ public final class ColorAsset {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
   public private(set) lazy var color: Color = Color(asset: self)
 
+  #if os(iOS) || os(tvOS)
+  @available(iOS 11.0, tvOS 11.0, *)
+  public func color(compatibleWith traitCollection: UITraitCollection) -> Color {
+    let bundle = BundleToken.bundle
+    guard let color = Color(named: name, in: bundle, compatibleWith: traitCollection) else {
+      fatalError("Unable to load color asset named \(name).")
+    }
+    return color
+  }
+  #endif
+
   fileprivate init(name: String) {
     self.name = name
   }
@@ -135,27 +150,23 @@ public extension ColorAsset.Color {
 public struct DataAsset {
   public fileprivate(set) var name: String
 
-  #if os(iOS) || os(tvOS) || os(macOS)
-  @available(iOS 9.0, macOS 10.11, *)
+  @available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
   public var data: NSDataAsset {
     return NSDataAsset(asset: self)
   }
-  #endif
 }
 
-#if os(iOS) || os(tvOS) || os(macOS)
-@available(iOS 9.0, macOS 10.11, *)
+@available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
 public extension NSDataAsset {
   convenience init!(asset: DataAsset) {
     let bundle = BundleToken.bundle
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS) || os(watchOS)
     self.init(name: asset.name, bundle: bundle)
     #elseif os(macOS)
     self.init(name: NSDataAsset.Name(asset.name), bundle: bundle)
     #endif
   }
 }
-#endif
 
 public struct ImageAsset {
   public fileprivate(set) var name: String
@@ -166,6 +177,7 @@ public struct ImageAsset {
   public typealias Image = UIImage
   #endif
 
+  @available(iOS 8.0, tvOS 9.0, watchOS 2.0, macOS 10.7, *)
   public var image: Image {
     let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS)
@@ -177,13 +189,25 @@ public struct ImageAsset {
     let image = Image(named: name)
     #endif
     guard let result = image else {
-      fatalError("Unable to load image named \(name).")
+      fatalError("Unable to load image asset named \(name).")
     }
     return result
   }
+
+  #if os(iOS) || os(tvOS)
+  @available(iOS 8.0, tvOS 9.0, *)
+  public func image(compatibleWith traitCollection: UITraitCollection) -> Image {
+    let bundle = BundleToken.bundle
+    guard let result = Image(named: name, in: bundle, compatibleWith: traitCollection) else {
+      fatalError("Unable to load image asset named \(name).")
+    }
+    return result
+  }
+  #endif
 }
 
 public extension ImageAsset.Image {
+  @available(iOS 8.0, tvOS 9.0, watchOS 2.0, *)
   @available(macOS, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
   convenience init!(asset: ImageAsset) {
@@ -198,10 +222,47 @@ public extension ImageAsset.Image {
   }
 }
 
+public struct SymbolAsset {
+  public fileprivate(set) var name: String
+
+  #if os(iOS) || os(tvOS) || os(watchOS)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  public typealias Configuration = UIImage.SymbolConfiguration
+  public typealias Image = UIImage
+
+  @available(iOS 12.0, tvOS 12.0, watchOS 5.0, *)
+  public var image: Image {
+    let bundle = BundleToken.bundle
+    #if os(iOS) || os(tvOS)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
+    #elseif os(watchOS)
+    let image = Image(named: name)
+    #endif
+    guard let result = image else {
+      fatalError("Unable to load symbol asset named \(name).")
+    }
+    return result
+  }
+
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  public func image(with configuration: Configuration) -> Image {
+    let bundle = BundleToken.bundle
+    guard let result = Image(named: name, in: bundle, with: configuration) else {
+      fatalError("Unable to load symbol asset named \(name).")
+    }
+    return result
+  }
+  #endif
+}
+
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type

@@ -4,7 +4,7 @@
 {% if palettes %}
 {% set colorAlias %}{{param.colorAliasName|default:"Color"}}{% endset %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
-#if os(OSX)
+#if os(macOS)
   import AppKit.NSColor
   {{accessModifier}} typealias {{colorAlias}} = NSColor
 #elseif os(iOS) || os(tvOS) || os(watchOS)

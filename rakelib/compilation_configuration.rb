@@ -21,11 +21,13 @@ class Platform
 
   attr_accessor :sdk, :target
 
+  # The `target` is the deployment target for a specific platform,
+  # it defines the minimum OS version we support for that platform.
   ALL = {
-    'iOS' => Platform.new('iphoneos', 'arm64-apple-ios12.0'),
-    'macOS' => Platform.new('macosx', 'x86_64-apple-macosx10.13'),
-    'tvOS' => Platform.new('appletvos', 'arm64-apple-tvos12.0'),
-    'watchOS' => Platform.new('watchos', 'armv7k-apple-watchos5.0')
+    'iOS' => Platform.new('iphoneos', 'arm64-apple-ios8.0'),
+    'macOS' => Platform.new('macosx', 'x86_64-apple-macosx10.10'),
+    'tvOS' => Platform.new('appletvos', 'arm64-apple-tvos9.0'),
+    'watchOS' => Platform.new('watchos', 'armv7k-apple-watchos2.0')
   }.freeze
 
   SWIFT_VERSIONS = [4, 4.2, 5].freeze

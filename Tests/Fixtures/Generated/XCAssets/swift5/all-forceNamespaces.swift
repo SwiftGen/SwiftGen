@@ -59,6 +59,10 @@ internal enum Asset {
       internal static let tint = ColorAsset(name: "Vengo/Tint")
     }
   }
+  internal enum Symbols {
+    internal static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
+    internal static let plus = SymbolAsset(name: "Plus")
+  }
   internal enum Targets {
     internal static let bottles = ARResourceGroupAsset(name: "Bottles")
     internal static let paintings = ARResourceGroupAsset(name: "Paintings")
@@ -120,6 +124,17 @@ internal final class ColorAsset {
     return color
   }()
 
+  #if os(iOS) || os(tvOS)
+  @available(iOS 11.0, tvOS 11.0, *)
+  internal func color(compatibleWith traitCollection: UITraitCollection) -> Color {
+    let bundle = BundleToken.bundle
+    guard let color = Color(named: name, in: bundle, compatibleWith: traitCollection) else {
+      fatalError("Unable to load color asset named \(name).")
+    }
+    return color
+  }
+  #endif
+
   fileprivate init(name: String) {
     self.name = name
   }
@@ -142,30 +157,26 @@ internal extension ColorAsset.Color {
 internal struct DataAsset {
   internal fileprivate(set) var name: String
 
-  #if os(iOS) || os(tvOS) || os(macOS)
-  @available(iOS 9.0, macOS 10.11, *)
+  @available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
   internal var data: NSDataAsset {
     guard let data = NSDataAsset(asset: self) else {
       fatalError("Unable to load data asset named \(name).")
     }
     return data
   }
-  #endif
 }
 
-#if os(iOS) || os(tvOS) || os(macOS)
-@available(iOS 9.0, macOS 10.11, *)
+@available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
 internal extension NSDataAsset {
   convenience init?(asset: DataAsset) {
     let bundle = BundleToken.bundle
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS) || os(watchOS)
     self.init(name: asset.name, bundle: bundle)
     #elseif os(macOS)
     self.init(name: NSDataAsset.Name(asset.name), bundle: bundle)
     #endif
   }
 }
-#endif
 
 internal struct ImageAsset {
   internal fileprivate(set) var name: String
@@ -176,6 +187,7 @@ internal struct ImageAsset {
   internal typealias Image = UIImage
   #endif
 
+  @available(iOS 8.0, tvOS 9.0, watchOS 2.0, macOS 10.7, *)
   internal var image: Image {
     let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS)
@@ -191,9 +203,21 @@ internal struct ImageAsset {
     }
     return result
   }
+
+  #if os(iOS) || os(tvOS)
+  @available(iOS 8.0, tvOS 9.0, *)
+  internal func image(compatibleWith traitCollection: UITraitCollection) -> Image {
+    let bundle = BundleToken.bundle
+    guard let result = Image(named: name, in: bundle, compatibleWith: traitCollection) else {
+      fatalError("Unable to load image asset named \(name).")
+    }
+    return result
+  }
+  #endif
 }
 
 internal extension ImageAsset.Image {
+  @available(iOS 8.0, tvOS 9.0, watchOS 2.0, *)
   @available(macOS, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
   convenience init?(asset: ImageAsset) {
@@ -208,10 +232,47 @@ internal extension ImageAsset.Image {
   }
 }
 
+internal struct SymbolAsset {
+  internal fileprivate(set) var name: String
+
+  #if os(iOS) || os(tvOS) || os(watchOS)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  internal typealias Configuration = UIImage.SymbolConfiguration
+  internal typealias Image = UIImage
+
+  @available(iOS 12.0, tvOS 12.0, watchOS 5.0, *)
+  internal var image: Image {
+    let bundle = BundleToken.bundle
+    #if os(iOS) || os(tvOS)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
+    #elseif os(watchOS)
+    let image = Image(named: name)
+    #endif
+    guard let result = image else {
+      fatalError("Unable to load symbol asset named \(name).")
+    }
+    return result
+  }
+
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  internal func image(with configuration: Configuration) -> Image {
+    let bundle = BundleToken.bundle
+    guard let result = Image(named: name, in: bundle, with: configuration) else {
+      fatalError("Unable to load symbol asset named \(name).")
+    }
+    return result
+  }
+  #endif
+}
+
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type

@@ -339,6 +339,10 @@ internal enum Asset {
       internal static let tint = ColorAsset(value: "Vengo/Tint")
     }
   }
+  internal enum Symbols {
+    internal static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
+    internal static let plus = SymbolAsset(name: "Plus")
+  }
   internal enum Targets {
     internal static let bottles = ARResourceGroupAsset(name: "Bottles")
     internal static let paintings = ARResourceGroupAsset(name: "Paintings")
@@ -362,9 +366,14 @@ let tintColor = Asset.Styles.Vengo.tint.color
 let data = Asset.data.data
 let readme = Asset.readme.data
 
-// you can load an AR resource group's items using:
+// You can load an AR resource group's items using:
 let bottles = Asset.Targets.bottles.referenceObjects
 let paintings = Asset.Targets.paintings.referenceImages
+
+// You can create new symbol images by referring to the enum instance and calling `.image` on it (with or without configuration)
+let plus = Asset.Symbols.plus.image
+let style = UIImage.SymbolConfiguration(textStyle: .headline)
+let styled = Asset.Symbols.exclamationMark.image(with: style)
 ```
 
 ## Colors

@@ -7,6 +7,7 @@
 {% set colorType %}{{param.colorTypeName|default:"ColorAsset"}}{% endset %}
 {% set dataType %}{{param.dataTypeName|default:"DataAsset"}}{% endset %}
 {% set imageType %}{{param.imageTypeName|default:"ImageAsset"}}{% endset %}
+{% set symbolType %}{{param.symbolTypeName|default:"SymbolAsset"}}{% endset %}
 {% set forceNamespaces %}{{param.forceProvidesNamespaces|default:"false"}}{% endset %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 #if os(macOS)
@@ -59,6 +60,11 @@
     {% filter indent:2 %}{% call allValuesBlock assets "image" "" %}{% endfilter %}
   ]
   {% endif %}
+  {% if resourceCount.symbol > 0 %}
+  {{accessModifier}} static let allSymbols: [{{symbolType}}] = [
+    {% filter indent:2 %}{% call allValuesBlock assets "symbol" "" %}{% endfilter %}
+  ]
+  {% endif %}
   // swiftlint:enable trailing_comma
   {% endif %}
 {% endmacro %}
@@ -72,6 +78,8 @@
   {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{dataType}}(name: "{{asset.value}}")
   {% elif asset.type == "image" %}
   {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{imageType}}(name: "{{asset.value}}")
+  {% elif asset.type == "symbol" %}
+  {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{symbolType}}(name: "{{asset.value}}")
   {% elif asset.items and ( forceNamespaces == "true" or asset.isNamespaced == "true" ) %}
   {{accessModifier}} enum {{asset.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
     {% filter indent:2 %}{% call casesBlock asset.items %}{% endfilter %}
@@ -163,6 +171,17 @@
     return color
   }()
 
+  #if os(iOS) || os(tvOS)
+  @available(iOS 11.0, tvOS 11.0, *)
+  {{accessModifier}} func color(compatibleWith traitCollection: UITraitCollection) -> Color {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    guard let color = Color(named: name, in: bundle, compatibleWith: traitCollection) else {
+      fatalError("Unable to load color asset named \(name).")
+    }
+    return color
+  }
+  #endif
+
   fileprivate init(name: String) {
     self.name = name
   }
@@ -187,30 +206,26 @@
 {{accessModifier}} struct {{dataType}} {
   {{accessModifier}} fileprivate(set) var name: String
 
-  #if os(iOS) || os(tvOS) || os(macOS)
-  @available(iOS 9.0, macOS 10.11, *)
+  @available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
   {{accessModifier}} var data: NSDataAsset {
     guard let data = NSDataAsset(asset: self) else {
       fatalError("Unable to load data asset named \(name).")
     }
     return data
   }
-  #endif
 }
 
-#if os(iOS) || os(tvOS) || os(macOS)
-@available(iOS 9.0, macOS 10.11, *)
+@available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
 {{accessModifier}} extension NSDataAsset {
   convenience init?(asset: {{dataType}}) {
     let bundle = {{param.bundle|default:"BundleToken.bundle"}}
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS) || os(watchOS)
     self.init(name: asset.name, bundle: bundle)
     #elseif os(macOS)
     self.init(name: NSDataAsset.Name(asset.name), bundle: bundle)
     #endif
   }
 }
-#endif
 {% endif %}
 {% if resourceCount.image > 0 %}
 
@@ -223,6 +238,7 @@
   {{accessModifier}} typealias Image = UIImage
   #endif
 
+  @available(iOS 8.0, tvOS 9.0, watchOS 2.0, macOS 10.7, *)
   {{accessModifier}} var image: Image {
     let bundle = {{param.bundle|default:"BundleToken.bundle"}}
     #if os(iOS) || os(tvOS)
@@ -238,9 +254,21 @@
     }
     return result
   }
+
+  #if os(iOS) || os(tvOS)
+  @available(iOS 8.0, tvOS 9.0, *)
+  {{accessModifier}} func image(compatibleWith traitCollection: UITraitCollection) -> Image {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    guard let result = Image(named: name, in: bundle, compatibleWith: traitCollection) else {
+      fatalError("Unable to load image asset named \(name).")
+    }
+    return result
+  }
+  #endif
 }
 
 {{accessModifier}} extension {{imageType}}.Image {
+  @available(iOS 8.0, tvOS 9.0, watchOS 2.0, *)
   @available(macOS, deprecated,
     message: "This initializer is unsafe on macOS, please use the {{imageType}}.image property")
   convenience init?(asset: {{imageType}}) {
@@ -255,12 +283,51 @@
   }
 }
 {% endif %}
+{% if resourceCount.symbol > 0 %}
+
+{{accessModifier}} struct {{symbolType}} {
+  {{accessModifier}} fileprivate(set) var name: String
+
+  #if os(iOS) || os(tvOS) || os(watchOS)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  {{accessModifier}} typealias Configuration = UIImage.SymbolConfiguration
+  {{accessModifier}} typealias Image = UIImage
+
+  @available(iOS 12.0, tvOS 12.0, watchOS 5.0, *)
+  {{accessModifier}} var image: Image {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    #if os(iOS) || os(tvOS)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
+    #elseif os(watchOS)
+    let image = Image(named: name)
+    #endif
+    guard let result = image else {
+      fatalError("Unable to load symbol asset named \(name).")
+    }
+    return result
+  }
+
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  {{accessModifier}} func image(with configuration: Configuration) -> Image {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    guard let result = Image(named: name, in: bundle, with: configuration) else {
+      fatalError("Unable to load symbol asset named \(name).")
+    }
+    return result
+  }
+  #endif
+}
+{% endif %}
 {% if not param.bundle %}
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type

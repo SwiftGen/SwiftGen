@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="ArticleTitle">#33fe66</color>
+  <color name="ArticleBody">#339666</color>
+  <color name="ArticleFootnote">#ffff66cc</color>
+  <color name="private">#ccffffff</color>
+</resources>

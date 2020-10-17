@@ -1,7 +1,7 @@
 // swiftlint:disable all
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
-#if os(OSX)
+#if os(macOS)
   import AppKit.NSFont
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIFont
@@ -68,7 +68,7 @@ public struct FontConvertible {
   public let family: String
   public let path: String
 
-  #if os(OSX)
+  #if os(macOS)
   public typealias Font = NSFont
   #elseif os(iOS) || os(tvOS) || os(watchOS)
   public typealias Font = UIFont
@@ -99,7 +99,7 @@ public extension FontConvertible.Font {
     if !UIFont.fontNames(forFamilyName: font.family).contains(font.name) {
       font.register()
     }
-    #elseif os(OSX)
+    #elseif os(macOS)
     if let url = font.url, CTFontManagerGetScopeForURL(url as CFURL) == .none {
       font.register()
     }
@@ -112,7 +112,11 @@ public extension FontConvertible.Font {
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type

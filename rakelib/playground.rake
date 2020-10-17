@@ -13,10 +13,11 @@ namespace :playground do
 
   task :coredata do
     sdk = Utils.run('--sdk iphonesimulator --show-sdk-path', task, xcrun: true, formatter: :to_string).strip
+    source = File.expand_path('Tests/Fixtures/Resources/CoreData/Model.xcdatamodeld', Dir.pwd)
     destination = File.expand_path('SwiftGen.playground/Resources', Dir.pwd)
     Utils.run(
       %(momc --sdkroot "#{sdk}" --iphonesimulator-deployment-target 12.0 ) +
-        %(Tests/Fixtures/Resources/CoreData/Model.xcdatamodeld "#{destination}"),
+        %("#{source}" "#{destination}"),
       task,
       xcrun: true
     )

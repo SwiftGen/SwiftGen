@@ -36,7 +36,7 @@ internal enum PlistFiles {
     internal static let uiStatusBarStyle: String = _document["UIStatusBarStyle"]
     internal static let uiSupportedInterfaceOrientations: [String] = _document["UISupportedInterfaceOrientations"]
     internal static let uiSupportedInterfaceOrientationsIpad: [String] = _document["UISupportedInterfaceOrientations~ipad"]
-    internal static let userAmbiguousInteger: Bool = _document["User Ambiguous Integer"]
+    internal static let userAmbiguousInteger: Int = _document["User Ambiguous Integer"]
     internal static let userBoolean: Bool = _document["User Boolean"]
     internal static let userDate: Date = _document["User Date"]
     internal static let userFloat: Double = _document["User Float"]
@@ -45,8 +45,14 @@ internal enum PlistFiles {
   internal enum Configuration {
     private static let _document = PlistDocument(path: "configuration.plist")
     internal static let environment: String = _document["Environment"]
+    internal static let flags: [Bool] = _document["Flags"]
+    internal static let mixed: [Any] = _document["Mixed"]
+    internal static let mixed2: [Any] = _document["Mixed2"]
     internal static let names: [String] = _document["Names"]
+    internal static let one: Int = _document["One"]
     internal static let options: [String: Any] = _document["Options"]
+    internal static let primes: [Int] = _document["Primes"]
+    internal static let zero: Int = _document["Zero"]
   }
   internal enum ShoppingList {
     internal static let items: [String] = arrayFromPlist(at: "shopping-list.plist")
