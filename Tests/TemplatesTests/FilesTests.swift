@@ -46,9 +46,9 @@ final class FilesTests: XCTestCase {
     ]
   }
 
-  func testStructuredSwift5() {
+  func testFlatSwift4() {
     test(
-      template: "structured-swift5",
+      template: "flat-swift4",
       contextNames: Contexts.all,
       directory: .files,
       contextVariations: variations
@@ -58,6 +58,24 @@ final class FilesTests: XCTestCase {
   func testFlatSwift5() {
     test(
       template: "flat-swift5",
+      contextNames: Contexts.all,
+      directory: .files,
+      contextVariations: variations
+    )
+  }
+
+  func testStructuredSwift4() {
+    test(
+      template: "structured-swift4",
+      contextNames: Contexts.all,
+      directory: .files,
+      contextVariations: variations
+    )
+  }
+
+  func testStructuredSwift5() {
+    test(
+      template: "structured-swift5",
       contextNames: Contexts.all,
       directory: .files,
       contextVariations: variations
