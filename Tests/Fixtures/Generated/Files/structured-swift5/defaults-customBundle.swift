@@ -10,29 +10,26 @@ import Foundation
 // swiftlint:disable explicit_type_interface identifier_name
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Files {
-  /// Files/
-  internal enum files {
-    /// Files/File
-    internal static let file = File(name: "File", ext: nil, relativePath: "Files", mimeType: "application/octet-stream")
-    /// Files/test.txt
-    internal static let testTxt = File(name: "test", ext: "txt", relativePath: "Files", mimeType: "text/plain")
-    /// Files/empty intermediate/
-    internal enum emptyIntermediate {
-      /// Files/empty intermediate/subfolder/
-      internal enum subfolder {
-        /// Files/empty intermediate/subfolder/another video.mp4
-        internal static let anotherVideoMp4 = File(name: "another video", ext: "mp4", relativePath: "Files/empty intermediate/subfolder", mimeType: "video/mp4")
-      }
+  /// File
+  internal static let file = File(name: "File", ext: nil, relativePath: "", mimeType: "application/octet-stream")
+  /// test.txt
+  internal static let testTxt = File(name: "test", ext: "txt", relativePath: "", mimeType: "text/plain")
+  /// empty intermediate/
+  internal enum EmptyIntermediate {
+    /// empty intermediate/subfolder/
+    internal enum Subfolder {
+      /// another video.mp4
+      internal static let anotherVideoMp4 = File(name: "another video", ext: "mp4", relativePath: "", mimeType: "video/mp4")
     }
-    /// Files/subdir/
-    internal enum subdir {
-      /// Files/subdir/A Video With Spaces.mp4
-      internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", relativePath: "Files/subdir", mimeType: "video/mp4")
-      /// Files/subdir/subdir/
-      internal enum subdir {
-        /// Files/subdir/subdir/graphic.svg
-        internal static let graphicSvg = File(name: "graphic", ext: "svg", relativePath: "Files/subdir/subdir", mimeType: "image/svg+xml")
-      }
+  }
+  /// subdir/
+  internal enum Subdir {
+    /// A Video With Spaces.mp4
+    internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", relativePath: "", mimeType: "video/mp4")
+    /// subdir/subdir/
+    internal enum Subdir {
+      /// graphic.svg
+      internal static let graphicSvg = File(name: "graphic", ext: "svg", relativePath: "", mimeType: "image/svg+xml")
     }
   }
 }
@@ -42,10 +39,10 @@ internal enum Files {
 // MARK: - Implementation Details
 
 internal struct File {
-  internal fileprivate(set) var name: String
-  internal fileprivate(set) var ext: String?
-  internal fileprivate(set) var relativePath: String
-  internal fileprivate(set) var mimeType: String
+  internal let name: String
+  internal let ext: String?
+  internal let relativePath: String
+  internal let mimeType: String
 
   internal var url: URL {
     return url(locale: nil)
@@ -60,7 +57,7 @@ internal struct File {
       localization: locale?.identifier
     )
     guard let result = url else {
-      let file = name + (ext != nil ? "." + ext : "")
+      let file = name + (ext.flatMap { ".\($0)" } ?? "")
       fatalError("Could not locate file named \(file)")
     }
     return result

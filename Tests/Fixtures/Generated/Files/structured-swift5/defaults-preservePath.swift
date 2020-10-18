@@ -10,18 +10,27 @@ import Foundation
 // swiftlint:disable explicit_type_interface identifier_name
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Files {
+  /// File
+  internal static let file = File(name: "File", ext: nil, relativePath: "", mimeType: "application/octet-stream")
+  /// test.txt
+  internal static let testTxt = File(name: "test", ext: "txt", relativePath: "", mimeType: "text/plain")
   /// empty intermediate/
-  internal enum emptyIntermediate {
+  internal enum EmptyIntermediate {
     /// empty intermediate/subfolder/
-    internal enum subfolder {
+    internal enum Subfolder {
       /// empty intermediate/subfolder/another video.mp4
       internal static let anotherVideoMp4 = File(name: "another video", ext: "mp4", relativePath: "empty intermediate/subfolder", mimeType: "video/mp4")
     }
   }
   /// subdir/
-  internal enum subdir {
+  internal enum Subdir {
     /// subdir/A Video With Spaces.mp4
     internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", relativePath: "subdir", mimeType: "video/mp4")
+    /// subdir/subdir/
+    internal enum Subdir {
+      /// subdir/subdir/graphic.svg
+      internal static let graphicSvg = File(name: "graphic", ext: "svg", relativePath: "subdir/subdir", mimeType: "image/svg+xml")
+    }
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name
@@ -30,10 +39,10 @@ internal enum Files {
 // MARK: - Implementation Details
 
 internal struct File {
-  internal fileprivate(set) var name: String
-  internal fileprivate(set) var ext: String?
-  internal fileprivate(set) var relativePath: String
-  internal fileprivate(set) var mimeType: String
+  internal let name: String
+  internal let ext: String?
+  internal let relativePath: String
+  internal let mimeType: String
 
   internal var url: URL {
     return url(locale: nil)
@@ -48,7 +57,7 @@ internal struct File {
       localization: locale?.identifier
     )
     guard let result = url else {
-      let file = name + (ext != nil ? "." + ext : "")
+      let file = name + (ext.flatMap { ".\($0)" } ?? "")
       fatalError("Could not locate file named \(file)")
     }
     return result
@@ -65,6 +74,12 @@ internal struct File {
 
 // swiftlint:disable convenience_type explicit_type_interface
 private final class BundleToken {
-  static let bundle = Bundle(for: BundleToken.self)
+  static let bundle: Bundle = {
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
+  }()
 }
 // swiftlint:enable convenience_type explicit_type_interface

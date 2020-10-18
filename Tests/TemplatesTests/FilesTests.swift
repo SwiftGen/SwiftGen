@@ -9,7 +9,7 @@ import XCTest
 
 final class FilesTests: XCTestCase {
   private enum Contexts {
-    static let all = ["empty", "defaults", "mp4s", "relativeTo", "compact", "relativeCompactFilter", "specificFile"]
+    static let all = ["empty", "defaults"]
   }
 
   private let variations: VariationGenerator = { name, context in
@@ -32,12 +32,16 @@ final class FilesTests: XCTestCase {
         suffix: "-customName"
       ),
       (
-        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
-        suffix: "-publicAccess"
-      ),
-      (
         context: try StencilContext.enrich(context: context, parameters: ["useExtension=false"]),
         suffix: "-dontUseExtension"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["preservePath"]),
+        suffix: "-preservePath"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
+        suffix: "-publicAccess"
       )
     ]
   }
