@@ -6,10 +6,10 @@ public var bundle: Bundle!
 // MARK: - Implementation Details
 
 public struct File {
-  public private(set) var name: String
-  public private(set) var ext: String?
-  public private(set) var relativePath: String
-  public private(set) var mimeType: String
+  public let name: String
+  public let ext: String?
+  public let relativePath: String
+  public let mimeType: String
 
   public var url: URL {
     return url(locale: nil)

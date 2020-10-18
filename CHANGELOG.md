@@ -18,6 +18,7 @@ _None_
   [#790](https://github.com/SwiftGen/SwiftGen/pull/790)
 * Files: Add new parser for accessing loose files in your project.  
   [Mike Gray](https://github.com/mgray88)
+  [David Jennes](https://github.com/djbe)
   [#665](https://github.com/SwiftGen/SwiftGen/issues/665)
   [#734](https://github.com/SwiftGen/SwiftGen/pull/734)
 

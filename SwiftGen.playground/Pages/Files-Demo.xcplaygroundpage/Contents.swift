@@ -14,7 +14,13 @@
 // Setup code
 // swiftlint:disable convenience_type
 private final class BundleToken {
-  static let bundle = Bundle(for: BundleToken.self)
+  static let bundle: Bundle = {
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
+  }()
 }
 // swiftlint:enable convenience_type
 bundle = BundleToken.bundle
@@ -29,57 +35,27 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Files {
-  /// array.json
-  internal static let arrayJson = File(name: "array", ext: "json", relativePath: "", mimeType: "application/json")
-  /// Assets.car
-  internal static let assetsCar = File(name: "Assets", ext: "car", relativePath: "", mimeType: "application/octet-stream")
-  /// Avenir.ttc
-  internal static let avenirTtc = File(name: "Avenir", ext: "ttc", relativePath: "", mimeType: "application/octet-stream")
-  /// configuration.plist
-  internal static let configurationPlist = File(name: "configuration", ext: "plist", relativePath: "", mimeType: "application/octet-stream")
-  /// configuration.json
-  internal static let configurationJson = File(name: "configuration", ext: "json", relativePath: "", mimeType: "application/json")
-  /// Localizable.strings
-  internal static let localizableStrings = File(name: "Localizable", ext: "strings", relativePath: "", mimeType: "application/octet-stream")
-  /// shopping-list.plist
-  internal static let shoppingListPlist = File(name: "shopping-list", ext: "plist", relativePath: "", mimeType: "application/octet-stream")
-  /// TestInfo.plist
-  internal static let testInfoPlist = File(name: "TestInfo", ext: "plist", relativePath: "", mimeType: "application/octet-stream")
-  /// ZapfDingbats.ttf
-  internal static let zapfDingbatsTtf = File(name: "ZapfDingbats", ext: "ttf", relativePath: "", mimeType: "application/octet-stream")
-  /// Model.momd/
-  internal enum modelMomd {
-    /// Model.momd/Model.mom
-    internal static let modelMom = File(name: "Model", ext: "mom", relativePath: "Model.momd", mimeType: "application/octet-stream")
-    /// Model.momd/Model 2.mom
-    internal static let model2Mom = File(name: "Model 2", ext: "mom", relativePath: "Model.momd", mimeType: "application/octet-stream")
-    /// Model.momd/Model 2.omo
-    internal static let model2Omo = File(name: "Model 2", ext: "omo", relativePath: "Model.momd", mimeType: "application/octet-stream")
-    /// Model.momd/VersionInfo.plist
-    internal static let versionInfoPlist = File(name: "VersionInfo", ext: "plist", relativePath: "Model.momd", mimeType: "application/octet-stream")
+  /// File
+  internal static let file = File(name: "File", ext: nil, relativePath: "", mimeType: "application/octet-stream")
+  /// test.txt
+  internal static let testTxt = File(name: "test", ext: "txt", relativePath: "", mimeType: "text/plain")
+  /// empty intermediate/
+  internal enum EmptyIntermediate {
+    /// empty intermediate/subfolder/
+    internal enum Subfolder {
+      /// empty intermediate/subfolder/another video.mp4
+      internal static let anotherVideoMp4 = File(name: "another video", ext: "mp4", relativePath: "empty intermediate/subfolder", mimeType: "video/mp4")
+    }
   }
-  /// Wizard.storyboardc/
-  internal enum wizardStoryboardc {
-    /// Wizard.storyboardc/30h-14-fok-view-rJE-c0-6Bp.nib
-    internal static let _30h14FokViewRJEC06BpNib = File(name: "30h-14-fok-view-rJE-c0-6Bp", ext: "nib", relativePath: "Wizard.storyboardc", mimeType: "application/octet-stream")
-    /// Wizard.storyboardc/Accept-ToS.nib
-    internal static let acceptToSNib = File(name: "Accept-ToS", ext: "nib", relativePath: "Wizard.storyboardc", mimeType: "application/octet-stream")
-    /// Wizard.storyboardc/CreateAccount.nib
-    internal static let createAccountNib = File(name: "CreateAccount", ext: "nib", relativePath: "Wizard.storyboardc", mimeType: "application/octet-stream")
-    /// Wizard.storyboardc/designable.storyboard
-    internal static let designableStoryboard = File(name: "designable", ext: "storyboard", relativePath: "Wizard.storyboardc", mimeType: "application/octet-stream")
-    /// Wizard.storyboardc/Info.plist
-    internal static let infoPlist = File(name: "Info", ext: "plist", relativePath: "Wizard.storyboardc", mimeType: "application/octet-stream")
-    /// Wizard.storyboardc/Preferences.nib
-    internal static let preferencesNib = File(name: "Preferences", ext: "nib", relativePath: "Wizard.storyboardc", mimeType: "application/octet-stream")
-    /// Wizard.storyboardc/rJ7-m2-Mn7-view-wtR-sc-VB5.nib
-    internal static let rj7M2Mn7ViewWtRScVB5Nib = File(name: "rJ7-m2-Mn7-view-wtR-sc-VB5", ext: "nib", relativePath: "Wizard.storyboardc", mimeType: "application/octet-stream")
-    /// Wizard.storyboardc/txY-Mc-CKa-view-wQH-MG-v6Y.nib
-    internal static let txYMcCKaViewWQHMGV6YNib = File(name: "txY-Mc-CKa-view-wQH-MG-v6Y", ext: "nib", relativePath: "Wizard.storyboardc", mimeType: "application/octet-stream")
-    /// Wizard.storyboardc/Validate_Password.nib
-    internal static let validatePasswordNib = File(name: "Validate_Password", ext: "nib", relativePath: "Wizard.storyboardc", mimeType: "application/octet-stream")
-    /// Wizard.storyboardc/w6o-YQ-YLg-view-N1u-m6-6Oc.nib
-    internal static let w6oYQYLgViewN1uM66OcNib = File(name: "w6o-YQ-YLg-view-N1u-m6-6Oc", ext: "nib", relativePath: "Wizard.storyboardc", mimeType: "application/octet-stream")
+  /// subdir/
+  internal enum Subdir {
+    /// subdir/A Video With Spaces.mp4
+    internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", relativePath: "subdir", mimeType: "video/mp4")
+    /// subdir/subdir/
+    internal enum Subdir {
+      /// subdir/subdir/graphic.svg
+      internal static let graphicSvg = File(name: "graphic", ext: "svg", relativePath: "subdir/subdir", mimeType: "image/svg+xml")
+    }
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
@@ -88,11 +64,9 @@ internal enum Files {
 //: #### Usage Example
 
 // Access file urls or relativePaths using simple field accessors
-let arrayFileUrl = Files.arrayJson.url
-let arrayFilePath = Files.arrayJson.path
+let txt = Files.testTxt.url
+let video = Files.Subdir.aVideoWithSpacesMp4.path
 
-// File properties available as well
-let arrayFileName = Files.arrayJson.name
-let arrayFileExt = Files.arrayJson.ext
-let arrayFileRelPath = Files.arrayJson.relativePath
-let arrayFileMimeType = Files.arrayJson.mimeType
+// In addition, there are `url(locale:)` and `path(locale:)` to specify a locale
+let localeTxt = Files.testTxt.url(locale: Locale.current)
+let localeVideo = Files.Subdir.aVideoWithSpacesMp4.path(locale: Locale.current)
