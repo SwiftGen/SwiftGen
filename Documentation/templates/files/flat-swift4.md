@@ -2,14 +2,14 @@
 
 | Name      | Description       |
 | --------- | ----------------- |
-| File name | files/flat-swift5.stencil |
-| Configuration example | <pre>files:<br />  inputs: dir/to/search/with/filter<br />  filter: .+\.*$<br />  outputs:<br />    templateName: flat-swift5<br />    output:Files.swift</pre> |
-| Language | Swift 5 |
+| File name | files/flat-swift4.stencil |
+| Configuration example | <pre>files:<br />  inputs: dir/to/search/with/filter<br />  filter: .+\.*$<br />  outputs:<br />    templateName: flat-swift4<br />    output:Files.swift</pre> |
+| Language | Swift 4 |
 | Author | Mike Gray |
 
 ## When to use it
 
-- When you need to generate *Swift 5* code.
+- When you need to generate *Swift 4* code.
 - If you don't need a directory structure for your files.
 - **NOTE:** This template does not handle uniquing file names. Behavior with file name clashes is undefined.
 
@@ -37,7 +37,7 @@ internal enum Files {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Files/flat-swift5/defaults.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Files/flat-swift4/defaults.swift)
 
 ## Usage example
 

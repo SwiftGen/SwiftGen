@@ -2,14 +2,14 @@
 
 | Name      | Description       |
 | --------- | ----------------- |
-| File name | files/structured-swift5.stencil |
-| Configuration example | <pre>files:<br />  inputs: dir/to/search/with/filter<br />  filter: .+\.*$<br />  outputs:<br />    templateName: structured-swift5<br />    output:Files.swift</pre> |
-| Language | Swift 5 |
+| File name | files/structured-swift4.stencil |
+| Configuration example | <pre>files:<br />  inputs: dir/to/search/with/filter<br />  filter: .+\.*$<br />  outputs:<br />    templateName: structured-swift4<br />    output:Files.swift</pre> |
+| Language | Swift 4 |
 | Author | Mike Gray |
 
 ## When to use it
 
-- When you need to generate *Swift 5* code.
+- When you need to generate *Swift 4* code.
 
 ## Customization
 
@@ -38,7 +38,7 @@ internal enum Files {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Files/swift5/defaults.swift)
+[Full generated code](../../../Tests/Fixtures/Generated/Files/swift4/defaults.swift)
 
 ## Usage example
 
