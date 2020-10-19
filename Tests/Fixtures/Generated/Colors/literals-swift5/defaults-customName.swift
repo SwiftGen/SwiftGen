@@ -23,5 +23,7 @@ internal extension UIColor {
   static let articleTitle = #colorLiteral(red: 0.2, green: 0.99607843, blue: 0.4, alpha: 1.0)
   /// 0xffffffcc (r: 255, g: 255, b: 255, a: 204)
   static let `private` = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.8)
+  /// 0xff66ccff (r: 255, g: 102, b: 204, a: 255)
+  static let themeCyan = #colorLiteral(red: 1.0, green: 0.4, blue: 0.8, alpha: 1.0)
 }
 // swiftlint:enable identifier_name line_length type_body_length
