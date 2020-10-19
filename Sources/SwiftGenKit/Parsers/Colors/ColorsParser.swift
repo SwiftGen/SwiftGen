@@ -9,6 +9,7 @@ import PathKit
 
 public enum Colors {
   public enum ParserError: Error, CustomStringConvertible {
+    case colorNotFound(path: Path, name: String)
     case invalidHexColor(path: Path, string: String, key: String?)
     case invalidFile(path: Path, reason: String)
     case unsupportedFileType(path: Path, supported: [String])
@@ -16,6 +17,8 @@ public enum Colors {
 
     public var description: String {
       switch self {
+      case .colorNotFound(let path, let name):
+        return "error: Unable to find color \"\(name)\" (\(path))."
       case .invalidHexColor(let path, let string, let key):
         let keyInfo = key.flatMap { " for key \"\($0)\"" } ?? ""
         return "error: Invalid hex color \"\(string)\" found\(keyInfo) (\(path))."

@@ -40,9 +40,8 @@ extension Colors {
         throw ParserError.invalidFile(path: path, reason: "XML parser error: \(error).")
       }
 
-      var colors = [String: UInt32]()
-
-      for color in document.xpath(XML.colorXPath) {
+      // 1st pass: parse color names & values
+      let named: [String: String] = try Dictionary(uniqueKeysWithValues: document.xpath(XML.colorXPath).map { color in
         guard let value = color.text else {
           throw ParserError.invalidFile(path: path, reason: "Invalid structure, color must have a value.")
         }
@@ -50,7 +49,21 @@ extension Colors {
           throw ParserError.invalidFile(path: path, reason: "Invalid structure, color \(value) must have a name.")
         }
 
-        colors[name] = try Colors.parse(hex: value, key: name, path: path, format: colorFormat)
+        return (name, value)
+      })
+
+      // 2nd pass: resolve values
+      let colors: [String: UInt32] = try named.reduce(into: [:]) { result, item in
+        var value = item.value
+        while value.hasPrefix("@color/") {
+          if let newValue = named[String(value.dropFirst(7))] {
+            value = newValue
+          } else {
+            throw ParserError.colorNotFound(path: path, name: value)
+          }
+        }
+
+        result[item.key] = try Colors.parse(hex: value, key: item.key, path: path, format: colorFormat)
       }
 
       let name = path.lastComponentWithoutExtension
