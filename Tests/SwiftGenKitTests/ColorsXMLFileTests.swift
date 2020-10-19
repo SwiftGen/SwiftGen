@@ -45,6 +45,19 @@ final class ColorsXMLFileTests: XCTestCase {
     }
   }
 
+  func testFileWithUnknownName() {
+    do {
+      let options = try ParserOptionValues(options: [:], available: Colors.XMLFileParser.allOptions)
+      let xmlParser = try Colors.XMLFileParser(options: options)
+      _ = try xmlParser.parseFile(at: Fixtures.path(for: "bad-name.xml", sub: .colors))
+      XCTFail("Code did parse file successfully while it was expected to fail for unknown name")
+    } catch Colors.ParserError.colorNotFound(path: _, name: "@color/bar") {
+      // That's the expected exception we want to happen
+    } catch let error {
+      XCTFail("Unexpected error occured while parsing: \(error)")
+    }
+  }
+
   // MARK: - Custom options
 
   func testFileWithArgb() throws {
