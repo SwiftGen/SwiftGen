@@ -11,7 +11,7 @@ extension Colors {
   final class TextFileParser: ColorsFileTypeParser {
     private var colors = [String: UInt32]()
 
-    init(options: ParserOptionValues) {
+    init(options: ParserOptionValues) throws {
     }
 
     static let extensions = ["txt"]

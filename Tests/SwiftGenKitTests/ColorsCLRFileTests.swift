@@ -11,7 +11,7 @@ import XCTest
 final class ColorsCLRFileTests: XCTestCase {
   func testFileWithDefaults() throws {
     let parser = try Colors.Parser()
-    let clrParser = Colors.CLRFileParser(options: try ParserOptionValues(options: [:], available: []))
+    let clrParser = try Colors.CLRFileParser(options: try ParserOptionValues(options: [:], available: []))
     parser.palettes = [try clrParser.parseFile(at: Fixtures.path(for: "colors.clr", sub: .colors))]
 
     let result = parser.stencilContext()
@@ -20,7 +20,7 @@ final class ColorsCLRFileTests: XCTestCase {
 
   func testFileWithBadFile() {
     do {
-      let clrParser = Colors.CLRFileParser(options: try ParserOptionValues(options: [:], available: []))
+      let clrParser = try Colors.CLRFileParser(options: try ParserOptionValues(options: [:], available: []))
       _ = try clrParser.parseFile(at: Fixtures.path(for: "bad.clr", sub: .colors))
       XCTFail("Code did parse file successfully while it was expected to fail for bad file")
     } catch Colors.ParserError.invalidFile {

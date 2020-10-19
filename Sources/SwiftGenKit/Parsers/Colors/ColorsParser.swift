@@ -12,7 +12,7 @@ public enum Colors {
     case invalidHexColor(path: Path, string: String, key: String?)
     case invalidFile(path: Path, reason: String)
     case unsupportedFileType(path: Path, supported: [String])
-    case unsupportedColorFormat(path: Path, string: String, supported: [String])
+    case unsupportedColorFormat(string: String, supported: [String])
 
     public var description: String {
       switch self {
@@ -26,9 +26,9 @@ public enum Colors {
           error: Unsupported file type for \(path). \
           The supported file types are: \(supported.joined(separator: ", "))
           """
-      case .unsupportedColorFormat(let path, let string, let supported):
+      case .unsupportedColorFormat(let string, let supported):
         return """
-        error: Unsupported color format \(string) (\(path)). \
+        error: Unsupported color format \(string). \
         The supported color formats are: \(supported.joined(separator: ", "))
         """
       }
@@ -84,7 +84,7 @@ public enum Colors {
         throw ParserError.unsupportedFileType(path: path, supported: parsers.keys.sorted())
       }
 
-      let parser = parserType.init(options: options)
+      let parser = try parserType.init(options: options)
       let palette = try parser.parseFile(at: path)
       palettes += [palette]
     }
