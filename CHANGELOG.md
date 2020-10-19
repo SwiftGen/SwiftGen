@@ -16,6 +16,10 @@ _None_
 * XCAssets: you can now provide a trait collection when initializing a color or image asset (on iOS/tvOS).  
   [David Jennes](https://github.com/djbe)
   [#790](https://github.com/SwiftGen/SwiftGen/pull/790)
+* Colors: The XML parser now supports Android color aliases (using `@color/...`).  
+  [David Jennes](https://github.com/djbe)
+  [#562](https://github.com/SwiftGen/SwiftGen/issues/562)
+  [#797](https://github.com/SwiftGen/SwiftGen/pull/797)
 
 ### Bug Fixes
 
