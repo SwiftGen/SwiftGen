@@ -29,7 +29,9 @@ _None_
 
 ### Internal Changes
 
-_None_
+* Switch to GitHub Actions.  
+  [#794](https://github.com/SwiftGen/SwiftGen/pull/794)
+  [David Jennes](https://github.com/djbe)
 
 ## 6.4.0
 
