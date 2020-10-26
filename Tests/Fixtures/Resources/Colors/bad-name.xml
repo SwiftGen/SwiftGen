@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="ArticleTitle">@color/foo</color>
+  <color name="foo">@color/bar</color>
+  <color name="test">#ffffff</color>
+</resources>

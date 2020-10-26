@@ -10,10 +10,17 @@ import PathKit
 
 extension Colors {
   final class XMLFileParser: ColorsFileTypeParser {
-    private let options: ParserOptionValues
+    private let colorFormat: ColorFormat
 
-    init(options: ParserOptionValues) {
-      self.options = options
+    init(options: ParserOptionValues) throws {
+      let format = options[Option.colorFormat]
+
+      if let colorFormat = ColorFormat(rawValue: format) {
+        self.colorFormat = colorFormat
+      } else {
+        let formats: [String] = ColorFormat.allCases.compactMap { $0.rawValue }
+        throw ParserError.unsupportedColorFormat(string: format, supported: formats)
+      }
     }
 
     static var allOptions: ParserOptionList = [Option.colorFormat]
@@ -33,9 +40,8 @@ extension Colors {
         throw ParserError.invalidFile(path: path, reason: "XML parser error: \(error).")
       }
 
-      var colors = [String: UInt32]()
-
-      for color in document.xpath(XML.colorXPath) {
+      // 1st pass: parse color names & values
+      let named: [String: String] = try Dictionary(uniqueKeysWithValues: document.xpath(XML.colorXPath).map { color in
         guard let value = color.text else {
           throw ParserError.invalidFile(path: path, reason: "Invalid structure, color must have a value.")
         }
@@ -43,12 +49,21 @@ extension Colors {
           throw ParserError.invalidFile(path: path, reason: "Invalid structure, color \(value) must have a name.")
         }
 
-        let format = options[Option.colorFormat]
-        guard let colorFormat = ColorFormat(rawValue: format) else {
-          let formats: [String] = ColorFormat.allCases.compactMap { $0.rawValue }
-          throw ParserError.unsupportedColorFormat(path: path, string: format, supported: formats)
+        return (name, value)
+      })
+
+      // 2nd pass: resolve values
+      let colors: [String: UInt32] = try named.reduce(into: [:]) { result, item in
+        var value = item.value
+        while value.hasPrefix("@color/") {
+          if let newValue = named[String(value.dropFirst(7))] {
+            value = newValue
+          } else {
+            throw ParserError.colorNotFound(path: path, name: value)
+          }
         }
-        colors[name] = try Colors.parse(hex: value, key: name, path: path, format: colorFormat)
+
+        result[item.key] = try Colors.parse(hex: value, key: item.key, path: path, format: colorFormat)
       }
 
       let name = path.lastComponentWithoutExtension
