@@ -198,8 +198,7 @@ class Utils
   # @return [Array<Hash>] A list of { :vers => ... , :path => ... } hashes
   #                       of all Xcodes found on the machine using Spotlight
   def self.all_xcode_versions
-    mdfind_xcodes, _, _ = Open3.capture3('mdfind', "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode'")
-    xcodes = mdfind_xcodes.chomp.split("\n")
+    xcodes = `mdfind "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode'"`.chomp.split("\n")
     xcodes.map do |path|
       { vers: Gem::Version.new(`mdls -name kMDItemVersion -raw "#{path}"`), path: path }
     end
