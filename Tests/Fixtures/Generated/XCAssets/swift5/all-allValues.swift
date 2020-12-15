@@ -9,6 +9,9 @@
 #elseif os(tvOS) || os(watchOS)
   import UIKit
 #endif
+#if canImport(SwiftUI)
+    import  SwiftUI
+#endif
 
 // Deprecated typealiases
 @available(*, deprecated, renamed: "ColorAsset.Color", message: "This typealias will be removed in SwiftGen 7.0")
@@ -224,6 +227,11 @@ internal final class ColorAsset {
     return color
   }
   #endif
+
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  internal private(set) lazy var colorView: SwiftUI.Color = {
+    return SwiftUI.Color(name)
+  }()
 
   fileprivate init(name: String) {
     self.name = name

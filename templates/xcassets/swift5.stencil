@@ -20,6 +20,9 @@
 #elseif os(tvOS) || os(watchOS)
   import UIKit
 #endif
+#if canImport(SwiftUI)
+    import  SwiftUI
+#endif
 
 // Deprecated typealiases
 {% if resourceCount.color > 0 %}
@@ -181,6 +184,11 @@
     return color
   }
   #endif
+
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  {{accessModifier}} private(set) lazy var colorView: SwiftUI.Color = {
+    return SwiftUI.Color(name)
+  }()
 
   fileprivate init(name: String) {
     self.name = name
