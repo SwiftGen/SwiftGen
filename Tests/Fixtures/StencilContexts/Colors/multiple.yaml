@@ -20,6 +20,11 @@ palettes:
     green: "ff"
     name: "private"
     red: "ff"
+  - alpha: "ff"
+    blue: "cc"
+    green: "66"
+    name: "theme_cyan"
+    red: "ff"
   name: "colors"
 - colors:
   - alpha: "ff"

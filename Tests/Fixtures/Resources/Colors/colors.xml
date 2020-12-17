@@ -2,6 +2,7 @@
 <resources>
   <color name="ArticleTitle">#33fe66</color>
   <color name="ArticleBody">#339666</color>
-  <color name="ArticleFootnote">#ff66ccff</color>
+  <color name="ArticleFootnote">@color/theme_cyan</color>
   <color name="private">#ffffffcc</color>
+  <color name="theme_cyan">#ff66ccff</color>
 </resources>

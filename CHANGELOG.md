@@ -21,6 +21,10 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#665](https://github.com/SwiftGen/SwiftGen/issues/665)
   [#734](https://github.com/SwiftGen/SwiftGen/pull/734)
+* Colors: The XML parser now supports Android color aliases (using `@color/...`).  
+  [David Jennes](https://github.com/djbe)
+  [#562](https://github.com/SwiftGen/SwiftGen/issues/562)
+  [#797](https://github.com/SwiftGen/SwiftGen/pull/797)
 
 ### Bug Fixes
 

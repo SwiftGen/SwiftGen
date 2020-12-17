@@ -30,6 +30,9 @@ internal struct XCTColors {
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
   /// Alpha: 80% <br/> (0xffffffcc)
   internal static let `private` = XCTColors(rgbaValue: 0xffffffcc)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
+  /// Alpha: 100% <br/> (0xff66ccff)
+  internal static let themeCyan = XCTColors(rgbaValue: 0xff66ccff)
 }
 // swiftlint:enable identifier_name line_length type_body_length
 

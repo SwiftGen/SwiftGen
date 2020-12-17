@@ -714,9 +714,9 @@ vc.perform(segue: StoryboardSegue.Message.embed)
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
   switch StoryboardSegue.Message(segue) {
   case .embed?:
-    // Prepare for your custom segue transition, passing information to the destionation VC
+    // Prepare for your custom segue transition, passing information to the destination VC
   case .customBack?:
-    // Prepare for your custom segue transition, passing information to the destionation VC
+    // Prepare for your custom segue transition, passing information to the destination VC
   default:
     // Other segues from other scenes, not handled by this VC
     break
