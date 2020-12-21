@@ -23,12 +23,18 @@ extension Strings {
         throw ParserError.failureOnLoading(path: path)
       }
 
-      let dict = try PropertyListDecoder()
+      let entries = try PropertyListDecoder()
         .decode([String: String].self, from: data)
+        .map { key, translation in
+          try Entry(key: key, translation: translation, keyStructureSeparator: options[Option.separator])
+        }
 
-      return try dict.map { key, translation in
-        try Entry(key: key, translation: translation, keyStructureSeparator: options[Option.separator])
+      var dict = Dictionary(uniqueKeysWithValues: entries.map { ($0.key, $0) })
+      if let parser = StringsFileWithCommentsParser(file: path) {
+        parser.enrich(entries: &dict)
       }
+
+      return Array(dict.values)
     }
   }
 }

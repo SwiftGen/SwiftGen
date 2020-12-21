@@ -28,6 +28,10 @@ extension Strings.Parser {
         "translation": entry.translation.newlineEscaped
       ]
 
+      if let comment = entry.comment {
+        result["comment"] = comment.newlineEscaped
+      }
+
       if !entry.types.isEmpty {
         result["types"] = entry.types.map { $0.rawValue }
       }

@@ -9,6 +9,7 @@ import PathKit
 
 extension Strings {
   struct Entry {
+    var comment: String?
     let key: String
     let translation: String
     let types: [PlaceholderType]
