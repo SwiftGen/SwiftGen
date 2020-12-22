@@ -12,12 +12,19 @@ extension Config {
   // MARK: Input XCFileList
   public func inputXCFileList() throws -> String {
     let inputPaths = try groupPathsByCommand { command, entry -> [Path] in
+      let templatePaths = entry.outputs.compactMap { output -> Path? in
+        guard case .path(let path) = output.template else { return nil }
+        return path
+      }
+
       let inputPaths = entry.inputs.map { (sourcePath + $0).absolute() }
       let filter = try Filter(pattern: entry.filter ?? command.parserType.defaultFilter)
 
-      return try command.parserType
+      let matchingInputPaths = try command.parserType
         .subpaths(in: inputPaths, matching: filter)
         .map { $0.path }
+
+      return templatePaths + matchingInputPaths
     }
 
     return xcFileList(for: inputPaths)
