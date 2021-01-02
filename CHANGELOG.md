@@ -29,6 +29,9 @@ _None_
 * Strings: `objc-h` template now emits valid documentation comments.  
   [@szotp](https://github.com/szotp)
   [#822](https://github.com/SwiftGen/SwiftGen/pull/822)
+* Generate `xcfilelist`: Adds the template file path to the inputs `xcfilelist` (for custom templates).  
+  [Craig Siemens](https://github.com/CraigSiemens)
+  [#815](https://github.com/SwiftGen/SwiftGen/pull/815)
 
 ### Internal Changes
 
