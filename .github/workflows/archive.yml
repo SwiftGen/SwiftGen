@@ -3,15 +3,7 @@ name: Archive
 on:
   push:
     branches: stable
-    paths:
-      - '.github/workflows/archive.yml'
-      - '**/*.swift'
-      - 'templates/**'
   pull_request:
-    paths:
-      - '.github/workflows/archive.yml'
-      - '**/*.swift'
-      - 'templates/**'
 
 jobs:
   install:

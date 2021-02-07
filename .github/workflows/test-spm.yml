@@ -3,13 +3,7 @@ name: Test SPM
 on:
   push:
     branches: stable
-    paths:
-      - '.github/workflows/test-spm.yml'
-      - '**/*.swift'
   pull_request:
-    paths:
-      - '.github/workflows/test-spm.yml'
-      - '**/*.swift'
 
 jobs:
   macos:

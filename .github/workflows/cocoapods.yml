@@ -3,13 +3,7 @@ name: Cocoapods
 on:
   push:
     branches: stable
-    paths:
-      - '.github/workflows/cocoapods.yml'
-      - '*.podspec'
   pull_request:
-    paths:
-      - '.github/workflows/cocoapods.yml'
-      - '*.podspec'
 
 jobs:
   lint:

@@ -3,17 +3,7 @@ name: Test Xcode
 on:
   push:
     branches: stable
-    paths:
-      - '.github/workflows/test-xcode.yml'
-      - '**/*.swift'
-      - 'templates/**'
-      - 'Tests/**'
   pull_request:
-    paths:
-      - '.github/workflows/test-xcode.yml'
-      - '**/*.swift'
-      - 'templates/**'
-      - 'Tests/**'
 
 jobs:
   test:

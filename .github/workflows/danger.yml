@@ -3,15 +3,7 @@ name: Danger
 on:
   push:
     branches: stable
-    paths:
-      - '.github/workflows/danger.yml'
-      - '**/*.swift'
-      - 'templates/**'
   pull_request:
-    paths:
-      - '.github/workflows/danger.yml'
-      - '**/*.swift'
-      - 'templates/**'
 
 jobs:
   check:

@@ -3,15 +3,7 @@ name: Output
 on:
   push:
     branches: stable
-    paths:
-      - '.github/workflows/compile-output.yml'
-      - 'Tests/Fixtures/**/*.swift'
-      - 'Tests/Fixtures/**/compilation-configuration.yml'
   pull_request:
-    paths:
-      - '.github/workflows/compile-output.yml'
-      - 'Tests/Fixtures/**/*.swift'
-      - 'Tests/Fixtures/**/compilation-configuration.yml'
 
 jobs:
   compile:
