@@ -26,6 +26,9 @@ _None_
 * XCAssets: fixed some availability annotations that were incorrect.  
   [David Jennes](https://github.com/djbe)
   [#789](https://github.com/SwiftGen/SwiftGen/pull/789)
+* Strings: `objc-h` template now emits valid documentation comments.  
+  [@szotp](https://github.com/szotp)
+  [#822](https://github.com/SwiftGen/SwiftGen/pull/822)
 
 ### Internal Changes
 
