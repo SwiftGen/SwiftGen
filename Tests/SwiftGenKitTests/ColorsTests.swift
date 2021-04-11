@@ -73,7 +73,7 @@ final class ColorParserTests: XCTestCase {
     var warned = false
 
     let parser = try Colors.Parser()
-    parser.warningHandler = { message, file, line in
+    parser.warningHandler = { _, _, _ in
       warned = true
     }
 

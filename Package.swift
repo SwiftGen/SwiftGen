@@ -11,13 +11,13 @@ let package = Package(
     .library(name: "SwiftGenKit", targets: ["SwiftGenKit"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/jpsim/Yams.git", from: "4.0.0"),
-    .package(url: "https://github.com/kylef/Commander.git", from: "0.9.0"),
-    .package(url: "https://github.com/kylef/PathKit.git", from: "0.9.0"),
-    .package(url: "https://github.com/kylef/Stencil.git", from: "0.13.0"),
-    .package(url: "https://github.com/shibapm/Komondor.git", from: "1.0.0"),
-    .package(url: "https://github.com/SwiftGen/StencilSwiftKit.git", from: "2.7.0"),
-    .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.2")
+    .package(url: "https://github.com/jpsim/Yams.git", from: "4.0.6"),
+    .package(url: "https://github.com/kylef/Commander.git", from: "0.9.1"),
+    .package(url: "https://github.com/kylef/PathKit.git", from: "1.0.0"),
+    .package(url: "https://github.com/kylef/Stencil.git", from: "0.14.1"),
+    .package(url: "https://github.com/shibapm/Komondor.git", from: "1.0.6"),
+    .package(url: "https://github.com/SwiftGen/StencilSwiftKit.git", from: "2.8.0"),
+    .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.4")
   ],
   targets: [
     .target(name: "SwiftGen", dependencies: [
