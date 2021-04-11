@@ -146,11 +146,11 @@ bundle install
 You can now install to the default locations (no parameter) or to custom locations:
 
 ```sh
-# Binary is installed in `./build/swiftgen/bin`, frameworks in `./build/swiftgen/lib` and templates in `./build/swiftgen/templates`
+# Binary is installed in `./.build/swiftgen/bin`
 $ rake cli:install
 # - OR -
-# Binary will be installed in `~/swiftgen/bin`, frameworks in `~/swiftgen/fmk` and templates in `~/swiftgen/tpl`
-$ rake cli:install[~/swiftgen/bin,~/swiftgen/fmk,~/swiftgen/tpl]
+# Binary will be installed in `~/swiftgen/bin``
+$ rake cli:install[~/swiftgen/bin]
 ```
 
 You can then invoke SwiftGen using the path to the binary where you installed it:
@@ -391,9 +391,9 @@ This will generate a `enum ColorName` with one `static let` per color listed in 
 
 The input file is expected to be either:
 
-* a [plain text file](Tests/Fixtures/Resources/Colors/extra.txt), with one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`) or the name of another color in the file. Whitespaces are ignored.
-* a [JSON file](Tests/Fixtures/Resources/Colors/colors.json), representing a dictionary of names -> values, each value being the hex representation of the color
-* a [XML file](Tests/Fixtures/Resources/Colors/colors.xml), expected to be the same format as the Android colors.xml files, containing tags `<color name="AColorName">AColorHexRepresentation</color>`
+* a [plain text file](Sources/TestUtils/Fixtures/Resources/Colors/extra.txt), with one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`) or the name of another color in the file. Whitespaces are ignored.
+* a [JSON file](Sources/TestUtils/Fixtures/Resources/Colors/colors.json), representing a dictionary of names -> values, each value being the hex representation of the color
+* a [XML file](Sources/TestUtils/Fixtures/Resources/Colors/colors.xml), expected to be the same format as the Android colors.xml files, containing tags `<color name="AColorName">AColorHexRepresentation</color>`
 * a [`*.clr` file](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/DrawColor/Concepts/AboutColorLists.html#//apple_ref/doc/uid/20000757-BAJHJEDI) used by Apple's Color Palettes.
 
 For example you can use this command to generate colors from one of your system color lists:

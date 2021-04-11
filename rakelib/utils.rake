@@ -46,13 +46,6 @@ class Utils
     podspec_as_json(file)['version']
   end
 
-  def self.podfile_lock_version(pod)
-    require 'yaml'
-    root_pods = YAML.load_file('Podfile.lock')['PODS'].map { |n| n.is_a?(Hash) ? n.keys.first : n }
-    pod_vers = root_pods.select { |n| n.start_with?(pod) }.first # "SwiftGen (x.y.z)"
-    /\((.*)\)$/.match(pod_vers)[1] # Just the 'x.y.z' part
-  end
-
   def self.pod_trunk_last_version(pod)
     require 'yaml'
     stdout, _, _ = Open3.capture3('bundle', 'exec', 'pod', 'trunk', 'info', pod)
@@ -61,12 +54,18 @@ class Utils
     /^[0-9.]*/.match(last_version_line)[0] # Just the 'x.y.z' part
   end
 
-  # @returns An array containing the CFBundleVersion & CFBundleShortVersionString
-  #          values for the Info.plist of the given library
-  def self.plist_version(lib)
-    require 'plist'
-    plist = Plist.parse_xml("Resources/#{lib}-Info.plist")
-    [plist['CFBundleVersion'], plist['CFBundleShortVersionString']]
+  def self.spm_own_version(dep)
+    dependencies = JSON.load(File.new('Package.resolved'))['object']['pins']
+    dependencies.find { |d| d['package'] == dep }['state']['version']
+  end  
+
+  def self.spm_resolved_version(dep)
+    dependencies = JSON.load(File.new('Package.resolved'))['object']['pins']
+    dependencies.find { |d| d['package'] == dep }['state']['version']
+  end
+
+  def self.last_git_tag_version
+    `git describe --tags --abbrev=0`.strip
   end
 
   def self.octokit_client

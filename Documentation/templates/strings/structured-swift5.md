@@ -60,7 +60,7 @@ internal enum L10n {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Strings/structured-swift5/localizable.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/Strings/structured-swift5/localizable.swift)
 
 ## Usage example
 

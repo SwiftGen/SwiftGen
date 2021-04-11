@@ -6,6 +6,7 @@
 
 import PathKit
 @testable import SwiftGenKit
+import TestUtils
 import XCTest
 
 class JSONTests: XCTestCase {
@@ -18,7 +19,7 @@ class JSONTests: XCTestCase {
 
   func testDictionary() throws {
     let parser = try JSON.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "configuration.json", sub: .json))
+    try parser.searchAndParse(path: Fixtures.resource(for: "configuration.json", sub: .json))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "configuration", sub: .json)
@@ -26,7 +27,7 @@ class JSONTests: XCTestCase {
 
   func testArray() throws {
     let parser = try JSON.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "array.json", sub: .json))
+    try parser.searchAndParse(path: Fixtures.resource(for: "array.json", sub: .json))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "array", sub: .json)
@@ -36,7 +37,7 @@ class JSONTests: XCTestCase {
     do {
       let parser = try JSON.Parser()
       let filter = try Filter(pattern: "[^/]*\\.json$")
-      try parser.searchAndParse(path: Fixtures.directory(sub: .json), filter: filter)
+      try parser.searchAndParse(path: Fixtures.resourceDirectory(sub: .json), filter: filter)
 
       let result = parser.stencilContext()
       XCTDiffContexts(result, expected: "all", sub: .json)

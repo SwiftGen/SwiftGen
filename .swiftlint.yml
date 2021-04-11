@@ -75,6 +75,9 @@ opt_in_rules:
  - xct_specific_matcher
  - yoda_condition
 
+excluded:
+  - Fixtures
+
 # Rules customization
 conditional_returns_on_newline:
   if_only: true

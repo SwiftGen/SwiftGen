@@ -8,6 +8,7 @@ import AppKit
 import Commander
 import PathKit
 import StencilSwiftKit
+import SwiftGenCLI
 import SwiftGenKit
 
 // MARK: - Commands

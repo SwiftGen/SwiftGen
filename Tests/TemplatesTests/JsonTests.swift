@@ -5,6 +5,7 @@
 //
 
 import StencilSwiftKit
+import TestUtils
 import XCTest
 
 final class JsonTests: XCTestCase {

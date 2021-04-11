@@ -1,20 +1,19 @@
 # frozen_string_literal: true
 
 # Used constants:
-# none
+# _none_
 
 require 'yaml'
 
 namespace :dependencies do
+  TOOLS = %w(SwiftLint)
+
   desc 'Check if the DEPENDENCIES.md file and Podfile.lock + SwiftGenKit.podspec are in sync'
   # options: Use 'check[plain]' to avoid coloring and dashes. Useful for using in Dangerfile.
   task :check, [:plain] do |_, args|
-    podfile_deps = YAML.load_file('Podfile.lock')['PODS'].map do |entry|
-      key = entry.is_a?(Hash) ? entry.keys.first : entry
-      key.gsub(/ \([0-9.]*\)$/, '')
-    end
+    spm_deps = File.open('Package.swift').grep(/\.package\(url: ".+\/(.+?)\.git", from: .+\)/) { Regexp.last_match(1) }
     swiftgenkit_deps = Utils.podspec_as_json('SwiftGenKit')['dependencies'].keys
-    all_core_deps = (podfile_deps + swiftgenkit_deps).uniq
+    all_core_deps = (TOOLS + spm_deps + swiftgenkit_deps).uniq
     documented_deps = File.open('DEPENDENCIES.md').grep(/### (.*)/) { Regexp.last_match(1) }
 
     missing_deps = (all_core_deps - documented_deps).sort

@@ -69,7 +69,7 @@ enum Asset {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/XCAssets/swift5/all.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/XCAssets/swift5/all.swift)
 
 ## Usage example
 
