@@ -70,8 +70,11 @@ extension Config {
           .map { $0.string.replacingOccurrences(of: Path.current.absolute().string, with: "$(SRCROOT)") }
           .joined(separator: "\n")
 
-        return "# \(commandName)\n\(formattedPaths)\n"
+        return """
+          # \(commandName)
+          \(formattedPaths)
+          """
       }
-      .joined(separator: "\n")
+      .joined(separator: "\n\n")
   }
 }
