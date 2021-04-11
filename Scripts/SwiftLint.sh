@@ -3,6 +3,12 @@
 PROJECT_DIR="${PROJECT_DIR:-`cd "$(dirname $0)/..";pwd`}"
 SWIFTLINT="${PROJECT_DIR}/Pods/SwiftLint/swiftlint"
 CONFIG="${PROJECT_DIR}/.swiftlint.yml"
+if [ $CI ]; then
+  REPORTER="--reporter github-actions-logging"
+else
+  REPORTER=
+fi
+
 
 # possible paths
 paths_swiftgen_sources="Sources/SwiftGen"
@@ -42,8 +48,8 @@ if [ "$key" = "templates_generated" ]; then
     sed "s/swiftlint:disable all/ --/" "$f" > "$temp_file"
   done
 
-  "$SWIFTLINT" lint --strict --config "$CONFIG" --path "$scratch" | sed s@"$scratch"@"${PROJECT_DIR}"@
+  "$SWIFTLINT" lint --strict --config "$CONFIG" --path "$scratch" $REPORTER | sed s@"$scratch"@"${PROJECT_DIR}"@
   exit ${PIPESTATUS[0]}
 else
-  "$SWIFTLINT" lint --strict --config "$CONFIG" --path "${PROJECT_DIR}/${selected_path}"
+  "$SWIFTLINT" lint --strict --config "$CONFIG" --path "${PROJECT_DIR}/${selected_path}" $REPORTER
 fi
