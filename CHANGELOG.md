@@ -32,6 +32,9 @@ _None_
 * Generate `xcfilelist`: Adds the template file path to the inputs `xcfilelist` (for custom templates).  
   [Craig Siemens](https://github.com/CraigSiemens)
   [#815](https://github.com/SwiftGen/SwiftGen/pull/815)
+* Strings: built-in templates now have better handling of multi-line translations.  
+  [@mrackwitz](https://github.com/mrackwitz)
+  [#774](https://github.com/SwiftGen/SwiftGen/pull/774)
 
 ### Internal Changes
 
