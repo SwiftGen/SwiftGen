@@ -56,11 +56,14 @@ internal enum L10n {
     internal static let settingsUserProfileSectionHEADERTITLE = L10n.tr("Localizable", "settings.user__profile_section.HEADER_TITLE")
   }
   internal enum LocMultiline {
-    /// multi\nline
+    /// multi
+    /// line
     internal static let multiline = L10n.tr("LocMultiline", "MULTILINE")
     /// test
     internal static let multiLineNKey = L10n.tr("LocMultiline", "multiLine\nKey")
-    /// another\nmulti\n    line
+    /// another
+    /// multi
+    ///     line
     internal static let multiline2 = L10n.tr("LocMultiline", "MULTILINE2")
     /// single line
     internal static let singleline = L10n.tr("LocMultiline", "SINGLELINE")
