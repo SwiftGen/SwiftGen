@@ -56,7 +56,7 @@ public struct Filter {
   /// Creates a filter with the given pattern, must be a valid regular expression.
   ///
   /// - Parameter pattern: The regular expression provided by the user
-  /// - Parameter options: Fitler options to further narrow searching
+  /// - Parameter options: Filter options to further narrow searching
   public init(pattern: String, options: Options = .default) throws {
     do {
       regex = try NSRegularExpression(pattern: pattern, options: [])
