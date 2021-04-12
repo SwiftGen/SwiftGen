@@ -82,7 +82,7 @@ extension ParserCLI {
           logMessage(.warning, msg)
         }
 
-        let filter = try Filter(pattern: filter)
+        let filter = try Filter(pattern: filter, options: parserType.filterOptions)
         try parser.searchAndParse(paths: paths, filter: filter)
 
         let resolvedTemplateName = templateName.isEmpty ? oldTemplateName : templateName

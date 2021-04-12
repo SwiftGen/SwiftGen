@@ -42,6 +42,7 @@ public enum CoreData {
     }
 
     public static let defaultFilter = filterRegex(forExtensions: ["xcdatamodel", "xcdatamodeld"])
+    public static let filterOptions: Filter.Options = [.skipsHiddenFiles, .skipsPackageDescendants]
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       if path.extension == Constants.modelBundleExtension {

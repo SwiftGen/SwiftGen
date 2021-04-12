@@ -4,7 +4,7 @@ By default, the built-in templates provided by SwiftGen will load resources from
 - If your generated code is in the main app, it will load resources from the `main` bundle.
 - If your generated code is in a Framework, it will load resources from that Framework's bundle.
 
-This works for most users, but there may be sitations where you'll need a more advanced solution.
+This works for most users, but there may be situations where you'll need a more advanced solution.
 
 ## Override the default Bundle
 
@@ -37,11 +37,18 @@ final class MyAwesomePod {
 ```
 
 You want SwiftGen to generate code to load resources from `MyAwesomePod.resourcesBundle`. Update your configuration file and add the `bundle` parameter, like so:
-Since you want SwiftGen to generate code to load resources (localized strings and fonts for example) from `MyAwesomePod.resourcesBundle`, you can update your configuration file to add the `bundle` parameter, like so:
+Since you want SwiftGen to generate code to load resources (localized strings, general files, and fonts for example) from `MyAwesomePod.resourcesBundle`, you can update your configuration file to add the `bundle` parameter, like so:
 
 ```yaml
 input_dir: Resources
 output_dir: Sources
+files:
+  inputs: files/dir
+  outputs:
+    templateName: swift5
+    output: Generated/Files.swift
+    params:
+      bundle: MyAwesomePod.resourcesBundle
 fonts:
   inputs: Fonts
   outputs:

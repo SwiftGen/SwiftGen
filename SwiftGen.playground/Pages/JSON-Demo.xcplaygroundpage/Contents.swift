@@ -2,6 +2,7 @@
 //:
 //: * [Demo for `colors` parser](Colors-Demo)
 //: * [Demo for `coredata` parser](CoreData-Demo)
+//: * [Demo for `files` parser](Files-Demo)
 //: * [Demo for `fonts` parser](Fonts-Demo)
 //: * [Demo for `ib` parser](InterfaceBuilder-Demo)
 //: * Demo for `json` parser

@@ -19,6 +19,7 @@ public enum AssetsCatalog {
     }
 
     public static let defaultFilter = filterRegex(forExtensions: ["xcassets"])
+    public static let filterOptions: Filter.Options = [.skipsFiles, .skipsHiddenFiles, .skipsPackageDescendants]
 
     public func parse(path: Path, relativeTo parent: Path) throws {
       let catalog = Catalog(path: path)

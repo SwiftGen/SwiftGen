@@ -3,6 +3,7 @@
     <pages>
         <page name='Colors-Demo'/>
         <page name='CoreData-Demo'/>
+        <page name='Files-Demo'/>
         <page name='Fonts-Demo'/>
         <page name='InterfaceBuilder-Demo'/>
         <page name='JSON-Demo'/>

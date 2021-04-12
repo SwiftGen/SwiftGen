@@ -41,6 +41,7 @@ public class Fixtures {
   public enum Directory: String {
     case colors = "Colors"
     case coreData = "CoreData"
+    case files = "Files"
     case fonts = "Fonts"
     case interfaceBuilder = "IB"
     case interfaceBuilderiOS = "IB-iOS"

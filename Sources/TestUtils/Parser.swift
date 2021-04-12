@@ -9,7 +9,7 @@ import SwiftGenKit
 
 public extension SwiftGenKit.Parser {
   func searchAndParse(path: Path) throws {
-    let filter = try Filter(pattern: Self.defaultFilter)
+    let filter = try Filter(pattern: Self.defaultFilter, options: Self.filterOptions)
     try searchAndParse(path: path, filter: filter)
   }
 

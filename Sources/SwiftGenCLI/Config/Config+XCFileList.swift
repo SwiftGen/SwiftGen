@@ -18,7 +18,10 @@ extension Config {
       }
 
       let inputPaths = entry.inputs.map { (sourcePath + $0).absolute() }
-      let filter = try Filter(pattern: entry.filter ?? command.parserType.defaultFilter)
+      let filter = try Filter(
+        pattern: entry.filter ?? command.parserType.defaultFilter,
+        options: command.parserType.filterOptions
+      )
 
       let matchingInputPaths = try command.parserType
         .subpaths(in: inputPaths, matching: filter)

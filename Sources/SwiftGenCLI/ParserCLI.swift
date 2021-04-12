@@ -59,6 +59,12 @@ extension ParserCLI {
       pathDescription: "Core Data models (.xcdatamodel or .xcdatamodeld) to parse."
     ),
     .init(
+      parserType: Files.Parser.self,
+      name: "files",
+      description: "generate code for referencing specified files",
+      pathDescription: "Files and/or directories to recursively search."
+    ),
+    .init(
       parserType: Fonts.Parser.self,
       name: "fonts",
       description: "generate code for your fonts",

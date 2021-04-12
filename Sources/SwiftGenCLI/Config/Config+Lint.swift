@@ -86,7 +86,7 @@ extension Config {
       }
     }
 
-    if let regex = entry.filter, (try? Filter(pattern: regex)) == nil {
+    if let regex = entry.filter, (try? Filter(pattern: regex, options: cmd.parserType.filterOptions)) == nil {
       logger(.error, "\(cmd.name).filter: \(regex) is not a valid regular expression.")
     }
 

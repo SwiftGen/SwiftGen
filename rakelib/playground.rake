@@ -22,6 +22,9 @@ namespace :playground do
       xcrun: true
     )
   end
+  task :files do
+    sh %(cp -R Tests/Fixtures/Resources/Files/* SwiftGen.playground/Resources/)
+  end
   task :fonts do
     sh %(cp Sources/TestUtils/Fixtures/Resources/Fonts/Avenir.ttc SwiftGen.playground/Resources/)
     sh %(cp Sources/TestUtils/Fixtures/Resources/Fonts/ZapfDingbats.ttf SwiftGen.playground/Resources/)
@@ -62,5 +65,5 @@ namespace :playground do
 
   desc "Regenerate all the Playground resources based on the test fixtures.\n" \
     'This compiles the needed fixtures and place them in SwiftGen.playground/Resources'
-  task :resources => %w[clean coredata fonts ib json plist strings xcassets]
+  task :resources => %w[clean coredata files fonts ib json plist strings xcassets]
 end

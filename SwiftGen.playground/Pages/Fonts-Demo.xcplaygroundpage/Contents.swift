@@ -3,6 +3,7 @@
 //: * [Demo for `colors` parser](Colors-Demo)
 //: * [Demo for `coredata` parser](CoreData-Demo)
 //: * Demo for `fonts` parser
+//: * [Demo for `files` parser](Files-Demo)
 //: * [Demo for `ib` parser](InterfaceBuilder-Demo)
 //: * [Demo for `json` parser](JSON-Demo)
 //: * [Demo for `plist` parser](Plist-Demo)

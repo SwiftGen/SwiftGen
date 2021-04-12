@@ -178,6 +178,14 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "run files --templateName flat-swift5 $(PROJECT_DIR)/Sources/TestUtils/Fixtures/Resources/Files"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "run files --templateName structured-swift5 $(PROJECT_DIR)/Sources/TestUtils/Fixtures/Resources/Files"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "run fonts --templateName swift5 $(PROJECT_DIR)/Sources/TestUtils/Fixtures/Resources/Fonts"
             isEnabled = "NO">
          </CommandLineArgument>
