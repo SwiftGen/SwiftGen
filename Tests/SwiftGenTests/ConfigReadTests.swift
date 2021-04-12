@@ -5,16 +5,15 @@
 //
 
 import PathKit
+@testable import SwiftGenCLI
+import TestUtils
 import XCTest
 
 final class ConfigReadTests: XCTestCase {
   private lazy var bundle = Bundle(for: type(of: self))
 
   func testConfigWithParams() throws {
-    guard let path = bundle.path(forResource: "config-with-params", ofType: "yml") else {
-      fatalError("Fixture not found")
-    }
-    let file = Path(path)
+    let file = Fixtures.config(for: "config-with-params")
     do {
       let config = try Config(file: file)
 
@@ -51,13 +50,8 @@ final class ConfigReadTests: XCTestCase {
   }
 
   func testConfigWithENVS() throws {
-    guard let paramsConfigFilePath = bundle.path(forResource: "config-with-params", ofType: "yml"),
-      let envConfigFilePath = bundle.path(forResource: "config-with-env-placeholder", ofType: "yml") else {
-      fatalError("Fixture not found")
-    }
-
-    let paramsFile = Path(paramsConfigFilePath)
-    let envFile = Path(envConfigFilePath)
+    let paramsFile = Fixtures.config(for: "config-with-params")
+    let envFile = Fixtures.config(for: "config-with-env-placeholder")
 
     do {
       let paramsConfig = try Config(file: paramsFile)
@@ -78,10 +72,7 @@ final class ConfigReadTests: XCTestCase {
   }
 
   func testConfigWithMultiEntries() throws {
-    guard let path = bundle.path(forResource: "config-with-multi-entries", ofType: "yml") else {
-      fatalError("Fixture not found")
-    }
-    let file = Path(path)
+    let file = Fixtures.config(for: "config-with-multi-entries")
     do {
       let config = try Config(file: file)
 
@@ -128,10 +119,7 @@ final class ConfigReadTests: XCTestCase {
   }
 
   func testConfigWithMultiOutputs() throws {
-    guard let path = bundle.path(forResource: "config-with-multi-outputs", ofType: "yml") else {
-      fatalError("Fixture not found")
-    }
-    let file = Path(path)
+    let file = Fixtures.config(for: "config-with-multi-outputs")
     do {
       let config = try Config(file: file)
 
@@ -182,10 +170,8 @@ final class ConfigReadTests: XCTestCase {
     ]
     for (configFile, expectedError) in badConfigs {
       do {
-        guard let path = bundle.path(forResource: configFile, ofType: "yml") else {
-          fatalError("Fixture not found")
-        }
-        _ = try Config(file: Path(path))
+        let path = Fixtures.config(for: configFile)
+        _ = try Config(file: path)
         XCTFail(
           """
           Trying to parse config file \(configFile) should have thrown \
@@ -208,10 +194,7 @@ final class ConfigReadTests: XCTestCase {
   // MARK: - Deprecations
 
   func testDeprecatedOutput() throws {
-    guard let path = bundle.path(forResource: "config-deprecated-output", ofType: "yml") else {
-      fatalError("Fixture not found")
-    }
-    let file = Path(path)
+    let file = Fixtures.config(for: "config-deprecated-output")
     do {
       let config = try Config(file: file)
 
@@ -232,10 +215,7 @@ final class ConfigReadTests: XCTestCase {
   }
 
   func testDeprecatedPaths() throws {
-    guard let path = bundle.path(forResource: "config-deprecated-paths", ofType: "yml") else {
-      fatalError("Fixture not found")
-    }
-    let file = Path(path)
+    let file = Fixtures.config(for: "config-deprecated-paths")
     do {
       let config = try Config(file: file)
 
@@ -250,10 +230,7 @@ final class ConfigReadTests: XCTestCase {
   }
 
   func testDeprecatedUseNewerProperties() throws {
-    guard let path = bundle.path(forResource: "config-deprecated-mixed-with-new", ofType: "yml") else {
-      fatalError("Fixture not found")
-    }
-    let file = Path(path)
+    let file = Fixtures.config(for: "config-deprecated-mixed-with-new")
     do {
       let config = try Config(file: file)
 

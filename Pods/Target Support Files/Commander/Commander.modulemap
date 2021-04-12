@@ -1,6 +1,0 @@
-framework module Commander {
-  umbrella header "Commander-umbrella.h"
-
-  export *
-  module * { export * }
-}

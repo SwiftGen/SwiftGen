@@ -5,6 +5,7 @@
 //
 
 import StencilSwiftKit
+import TestUtils
 import XCTest
 
 final class StringsTests: XCTestCase {
@@ -59,7 +60,7 @@ final class StringsTests: XCTestCase {
     ]
   }
 
-  let variationsObjC: VariationGenerator = { name, context in
+  private let variationsObjC: VariationGenerator = { name, context in
     guard name == "localizable" else { return [(context: context, suffix: "")] }
 
     return [

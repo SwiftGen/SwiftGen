@@ -5,6 +5,8 @@
 //
 
 import PathKit
+@testable import SwiftGenCLI
+import TestUtils
 import XCTest
 import Yams
 
@@ -19,10 +21,7 @@ final class ConfigRunTests: XCTestCase {
     file: StaticString = #file,
     line: UInt = #line
   ) {
-    guard let path = bundle.path(forResource: fixture, ofType: "yml") else {
-      fatalError("Fixture \(fixture) not found")
-    }
-    let configFile = Path(path)
+    let configFile = Fixtures.config(for: fixture)
     let logger = TestLogger(expectedLogs: expectedLogs, unwantedLevels: unwantedLevels, file: file, line: line)
 
     do {

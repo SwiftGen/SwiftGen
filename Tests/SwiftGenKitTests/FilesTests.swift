@@ -4,9 +4,8 @@
 // MIT Licence
 //
 
-import Foundation
-import PathKit
 @testable import SwiftGenKit
+import TestUtils
 import XCTest
 
 final class FilesTests: XCTestCase {
@@ -19,7 +18,7 @@ final class FilesTests: XCTestCase {
 
   func testDefaults() throws {
     let parser = try Files.Parser()
-    try parser.searchAndParse(path: Fixtures.directory(sub: .files))
+    try parser.searchAndParse(path: Fixtures.resourceDirectory(sub: .files))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "defaults", sub: .files)
@@ -27,7 +26,7 @@ final class FilesTests: XCTestCase {
 
   func testMp4s() throws {
     let parser = try Files.Parser()
-    try parser.searchAndParse(path: Fixtures.directory(sub: .files), filter: try Filter(pattern: ".mp4"))
+    try parser.searchAndParse(path: Fixtures.resourceDirectory(sub: .files), filter: try Filter(pattern: ".mp4"))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "mp4s", sub: .files)

@@ -17,13 +17,13 @@ import CoreData
 import Foundation
 
 public enum IntegerEnum: Int16 {
-	case test1
-	case test2
+  case test1
+  case test2
 }
 public enum StringEnum: String {
-	case test1
-	case test2
-	case test3
+  case test1
+  case test2
+  case test3
 }
 
 // MARK: - MainEntity

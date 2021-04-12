@@ -45,7 +45,7 @@ internal enum PlistFiles {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Plist/runtime-swift4/all.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/Plist/runtime-swift4/all.swift)
 
 ## Usage example
 

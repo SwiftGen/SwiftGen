@@ -37,7 +37,7 @@ internal enum Files {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Files/flat-swift5/defaults.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/Files/flat-swift5/defaults.swift)
 
 ## Usage example
 

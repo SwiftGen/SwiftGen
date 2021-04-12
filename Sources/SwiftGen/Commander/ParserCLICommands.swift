@@ -7,6 +7,7 @@
 import Commander
 import PathKit
 import StencilSwiftKit
+import SwiftGenCLI
 import SwiftGenKit
 
 extension ParserCLI {

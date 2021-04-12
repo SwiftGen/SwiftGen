@@ -47,7 +47,7 @@ internal enum JSONFiles {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/JSON/runtime-swift5/all.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/JSON/runtime-swift5/all.swift)
 
 ## Usage example
 

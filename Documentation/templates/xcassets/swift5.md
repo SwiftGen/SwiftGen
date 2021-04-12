@@ -21,6 +21,7 @@ You can customize some elements of this template by overriding the following par
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
+| `bundle` | `BundleToken.bundle` | Allows you to set from which bundle strings are loaded from. By default, it'll point to the same bundle as where the generated code is. |
 | `allValues` | N/A | Setting this parameter will enable the generation of the `allColors`, `allImages` and other such constants. |
 | `arResourceGroupTypeName` | `ARResourceGroupAsset` | Allows you to change the name of the struct type representing an AR resource group. |
 | `colorTypeName` | `ColorAsset` | Allows you to change the name of the struct type representing a color. |
@@ -68,7 +69,7 @@ enum Asset {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/XCAssets/swift5/all.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/XCAssets/swift5/all.swift)
 
 ## Usage example
 

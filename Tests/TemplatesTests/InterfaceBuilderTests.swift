@@ -5,9 +5,11 @@
 //
 
 import StencilSwiftKit
+import TestUtils
 import XCTest
 
 class InterfaceBuilderTests: XCTestCase {
+  // swiftlint:disable:next test_case_accessibility
   enum Contexts {
     static let all = ["empty", "all"]
   }
@@ -79,6 +81,7 @@ class InterfaceBuilderTests: XCTestCase {
     ]
   }
 
+  // swiftlint:disable:next test_case_accessibility
   private(set) lazy var sceneVariations: VariationGenerator = { name, bareContext in
     guard name == "all" else { return [(context: bareContext, suffix: "")] }
 
@@ -107,6 +110,7 @@ class InterfaceBuilderTests: XCTestCase {
     ]
   }
 
+  // swiftlint:disable:next test_case_accessibility
   private(set) lazy var segueVariations: VariationGenerator = { name, bareContext in
     guard name == "all" else { return [(context: bareContext, suffix: "")] }
 

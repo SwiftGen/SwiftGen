@@ -27,19 +27,19 @@ You can customize some elements of this template by overriding the following par
 
 ```swift
 @interface Localizable : NSObject
-// alert__message --> "Some alert body there"
+/// alert__message --> "Some alert body there"
 + (NSString*)alertMessage;
-// alert__title --> "Title of the alert"
+/// alert__title --> "Title of the alert"
 + (NSString*)alertTitle;
-// ObjectOwnership --> "These are %3$@'s %1$d %2$@."
+/// ObjectOwnership --> "These are %3$@'s %1$d %2$@."
 + (NSString*)objectOwnershipWithValues:(NSInteger)p1 :(NSString*)p2 :(NSString*)p3;
-// percent --> "This is a %% character."
+/// percent --> "This is a %% character."
 + (NSString*)percent;
 ...
 @end
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Strings/objc-m/localizable.m)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/Strings/objc-m/localizable.m)
 
 ## Usage example
 

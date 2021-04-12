@@ -1,0 +1,23 @@
+name: Cocoapods
+
+on:
+  push:
+    branches: stable
+  pull_request:
+
+jobs:
+  lint:
+    name: Pod Lint
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      -
+        name: Lint podspec
+        run: bundle exec rake pod:lint

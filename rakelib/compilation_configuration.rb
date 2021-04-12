@@ -3,8 +3,8 @@
 require 'yaml'
 
 COMPILATION_CONFIGURATION_FILE = 'compilation-configuration.yml'
-MODULE_INPUT_PATH = 'Tests/Fixtures/CompilationEnvironment/Modules'
-MODULE_OUTPUT_PATH = 'Tests/Fixtures/CompilationEnvironment'
+MODULE_INPUT_PATH = 'Sources/TestUtils/Fixtures/CompilationEnvironment/Modules'
+MODULE_OUTPUT_PATH = 'Sources/TestUtils/Fixtures/CompilationEnvironment'
 TOOLCHAIN = 'com.apple.dt.toolchain.XcodeDefault'
 
 # Define a Platform's associated sdk and target triple

@@ -21,7 +21,7 @@ class Utils
 
   # run a command using xcrun and xcpretty if applicable
   def self.run(command, task, subtask = '', xcrun: false, formatter: :raw)
-    commands = if xcrun
+    commands = if xcrun and OS.mac?
                  Array(command).map { |cmd| "#{version_select} xcrun #{cmd}" }
                else
                  Array(command)
@@ -46,13 +46,6 @@ class Utils
     podspec_as_json(file)['version']
   end
 
-  def self.podfile_lock_version(pod)
-    require 'yaml'
-    root_pods = YAML.load_file('Podfile.lock')['PODS'].map { |n| n.is_a?(Hash) ? n.keys.first : n }
-    pod_vers = root_pods.select { |n| n.start_with?(pod) }.first # "SwiftGen (x.y.z)"
-    /\((.*)\)$/.match(pod_vers)[1] # Just the 'x.y.z' part
-  end
-
   def self.pod_trunk_last_version(pod)
     require 'yaml'
     stdout, _, _ = Open3.capture3('bundle', 'exec', 'pod', 'trunk', 'info', pod)
@@ -61,12 +54,18 @@ class Utils
     /^[0-9.]*/.match(last_version_line)[0] # Just the 'x.y.z' part
   end
 
-  # @returns An array containing the CFBundleVersion & CFBundleShortVersionString
-  #          values for the Info.plist of the given library
-  def self.plist_version(lib)
-    require 'plist'
-    plist = Plist.parse_xml("Resources/#{lib}-Info.plist")
-    [plist['CFBundleVersion'], plist['CFBundleShortVersionString']]
+  def self.spm_own_version(dep)
+    dependencies = JSON.load(File.new('Package.resolved'))['object']['pins']
+    dependencies.find { |d| d['package'] == dep }['state']['version']
+  end  
+
+  def self.spm_resolved_version(dep)
+    dependencies = JSON.load(File.new('Package.resolved'))['object']['pins']
+    dependencies.find { |d| d['package'] == dep }['state']['version']
+  end
+
+  def self.last_git_tag_version
+    `git describe --tags --abbrev=0`.strip
   end
 
   def self.octokit_client
@@ -130,14 +129,12 @@ class Utils
 
   # run a command, pipe output through 'xcpretty' and store the output in CI artifacts
   def self.xcpretty(cmd, task, subtask)
-    name = (task.name + (subtask.empty? ? '' : "_#{subtask}")).gsub(/[:-]/, '_')
     command = Array(cmd).join(' && \\' + "\n")
 
-    if ENV['CIRCLECI']
-      Rake.sh "set -o pipefail && (\\\n#{command} \\\n) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\" | " \
-        "bundle exec xcpretty --color --report junit --output \"#{ENV['CIRCLE_TEST_REPORTS']}/xcode/#{name}.xml\""
+    if ENV['CI']
+      Rake.sh %(set -o pipefail && (\\\n#{command} \\\n) | bundle exec xcpretty --color --report junit)
     elsif system('which xcpretty > /dev/null')
-      Rake.sh "set -o pipefail && (\\\n#{command} \\\n) | bundle exec xcpretty -c"
+      Rake.sh %(set -o pipefail && (\\\n#{command} \\\n) | bundle exec xcpretty --color)
     else
       Rake.sh command
     end
@@ -146,11 +143,15 @@ class Utils
 
   # run a command and store the output in CI artifacts
   def self.plain(cmd, task, subtask)
-    name = (task.name + (subtask.empty? ? '' : "_#{subtask}")).gsub(/[:-]/, '_')
     command = Array(cmd).join(' && \\' + "\n")
 
-    if ENV['CIRCLECI']
-      Rake.sh "set -o pipefail && (#{command}) | tee \"#{ENV['CIRCLE_ARTIFACTS']}/#{name}_raw.log\""
+    if ENV['CI']
+      if OS.mac?
+        Rake.sh %(set -o pipefail && (#{command}))
+      else
+        # dash on linux doesn't support `set -o`
+        Rake.sh %(/bin/bash -eo pipefail -c "#{command}")
+      end
     else
       Rake.sh command
     end
@@ -180,7 +181,7 @@ class Utils
     return '' if version_req.satisfied_by? Gem::Version.new(current_xcode_version)
 
     supported_versions = all_xcode_versions.select { |app| version_req.satisfied_by?(app[:vers]) }
-    latest_supported_xcode = supported_versions.max_by { |app| app[:vers] }
+    latest_supported_xcode = supported_versions.sort_by { |app| app[:vers] }.last
 
     # Check if it's at least the right version
     if latest_supported_xcode.nil?
@@ -196,13 +197,24 @@ class Utils
   # @return [Array<Hash>] A list of { :vers => ... , :path => ... } hashes
   #                       of all Xcodes found on the machine using Spotlight
   def self.all_xcode_versions
-    mdfind_xcodes, _, _ = Open3.capture3('mdfind', "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode'")
-    xcodes = mdfind_xcodes.chomp.split("\n")
+    xcodes = `mdfind "kMDItemCFBundleIdentifier = 'com.apple.dt.Xcode'"`.chomp.split("\n")
     xcodes.map do |path|
       { vers: Gem::Version.new(`mdls -name kMDItemVersion -raw "#{path}"`), path: path }
     end
   end
   private_class_method :all_xcode_versions
+end
+
+# OS detection
+#
+module OS
+  def OS.mac?
+   (/darwin/ =~ RUBY_PLATFORM) != nil
+  end
+
+  def OS.linux?
+    OS.unix? and not OS.mac?
+  end
 end
 
 # Colorization support for Strings

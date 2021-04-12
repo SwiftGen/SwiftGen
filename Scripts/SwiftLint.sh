@@ -1,16 +1,24 @@
 #!/bin/bash
 
 PROJECT_DIR="${PROJECT_DIR:-`cd "$(dirname $0)/..";pwd`}"
-SWIFTLINT="${PROJECT_DIR}/Pods/SwiftLint/swiftlint"
+SWIFTLINT="${PROJECT_DIR}/.build/swiftlint/swiftlint"
 CONFIG="${PROJECT_DIR}/.swiftlint.yml"
+if [ $CI ]; then
+  REPORTER="--reporter github-actions-logging"
+else
+  REPORTER=
+fi
+
 
 # possible paths
 paths_swiftgen_sources="Sources/SwiftGen"
 paths_swiftgen_tests="Tests/SwiftGenTests"
+paths_swiftgencli_sources="Sources/SwiftGenCLI"
 paths_swiftgenkit_sources="Sources/SwiftGenKit"
 paths_swiftgenkit_tests="Tests/SwiftGenKitTests"
 paths_templates_tests="Tests/TemplatesTests"
-paths_templates_generated="Tests/Fixtures/Generated"
+paths_templates_generated="Sources/TestUtils/Fixtures/Generated"
+paths_testutils_sources="Sources/TestUtils"
 
 # load selected group
 if [ $# -gt 0 ]; then
@@ -42,8 +50,8 @@ if [ "$key" = "templates_generated" ]; then
     sed "s/swiftlint:disable all/ --/" "$f" > "$temp_file"
   done
 
-  "$SWIFTLINT" lint --strict --config "$CONFIG" --path "$scratch" | sed s@"$scratch"@"${PROJECT_DIR}"@
+  "$SWIFTLINT" lint --strict --config "$CONFIG" --path "$scratch" $REPORTER | sed s@"$scratch"@"${PROJECT_DIR}"@
   exit ${PIPESTATUS[0]}
 else
-  "$SWIFTLINT" lint --strict --config "$CONFIG" --path "${PROJECT_DIR}/${selected_path}"
+  "$SWIFTLINT" lint --strict --config "$CONFIG" --path "${PROJECT_DIR}/${selected_path}" $REPORTER
 fi

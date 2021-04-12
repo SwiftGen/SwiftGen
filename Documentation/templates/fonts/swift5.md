@@ -45,7 +45,7 @@ internal enum FontFamily {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Fonts/swift5/defaults.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/Fonts/swift5/defaults.swift)
 
 ## Usage example
 
