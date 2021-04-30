@@ -114,7 +114,7 @@ GEM
     rake (13.0.1)
     rchardet (1.8.0)
     regexp_parser (1.8.1)
-    rexml (3.2.4)
+    rexml (3.2.5)
     rouge (2.0.7)
     rubocop (0.92.0)
       parallel (~> 1.10)
