@@ -28,12 +28,12 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-internal enum PlistFiles {
-  internal enum Configuration {
+enum PlistFiles {
+  enum Configuration {
     internal static let environment: String = "development"
     internal static let options: [String: Any] = ["Animation Style": "Party Mode"]
   }
-  internal enum ShoppingList {
+  enum ShoppingList {
     internal static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
 }

@@ -8,7 +8,7 @@ import Foundation
 // MARK: - Strings
 
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
-internal enum L10n {
+enum L10n {
   /// Plural format key: "%#@elements@"
   internal static func unsupportedUsePlaceholdersInVariableRuleStringInt(_ p1: Int) -> String {
     return L10n.tr("LocPluralUnsupported", "unsupported-use.placeholders-in-variable-rule.string-int", p1)

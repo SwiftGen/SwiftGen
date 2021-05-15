@@ -33,11 +33,11 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-internal enum JSONFiles {
-  internal enum Array {
+enum JSONFiles {
+  enum Array {
     internal static let items: [String] = objectFromJSON(at: "array.json")
   }
-  internal enum Configuration {
+  enum Configuration {
     private static let _document = JSONDocument(path: "configuration.json")
     internal static let apiVersion: String = _document["api-version"]
     internal static let country: Any? = _document["country"]

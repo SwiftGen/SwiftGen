@@ -16,20 +16,20 @@ import UIKit
 // MARK: - Storyboard Segues
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-internal enum StoryboardSegue {
-  internal enum AdditionalImport: String, SegueType {
+enum StoryboardSegue {
+  enum AdditionalImport: String, SegueType {
     case afterDelay = "After Delay"
     case `open`
     case `private`
     case `public`
   }
-  internal enum Message: String, SegueType {
+  enum Message: String, SegueType {
     case customBack = "CustomBack"
     case embed = "Embed"
     case nonCustom = "NonCustom"
     case showNavCtrl = "Show-NavCtrl"
   }
-  internal enum Wizard: String, SegueType {
+  enum Wizard: String, SegueType {
     case showPassword = "ShowPassword"
   }
 }

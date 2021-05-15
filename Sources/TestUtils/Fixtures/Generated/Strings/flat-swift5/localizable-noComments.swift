@@ -8,7 +8,7 @@ import Foundation
 // MARK: - Strings
 
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
-internal enum L10n {
+enum L10n {
   internal static let alertMessage = L10n.tr("Localizable", "alert__message")
   internal static let alertTitle = L10n.tr("Localizable", "alert__title")
   internal static func objectOwnership(_ p1: Int, _ p2: Any, _ p3: Any) -> String {

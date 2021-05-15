@@ -9,19 +9,19 @@ import Foundation
 // MARK: - YAML Files
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
-internal enum YAMLFiles {
-  internal enum Documents {
-    internal enum Document1 {
+enum YAMLFiles {
+  enum Documents {
+    enum Document1 {
       internal static let items: [String] = ["Mark McGwire", "Sammy Sosa", "Ken Griffey"]
     }
-    internal enum Document2 {
+    enum Document2 {
       internal static let items: [String] = ["Chicago Cubs", "St Louis Cardinals"]
     }
   }
-  internal enum GroceryList {
+  enum GroceryList {
     internal static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
-  internal enum Mapping {
+  enum Mapping {
     internal static let car: Any? = nil
     internal static let doors: Int = 5
     internal static let flags: [Bool] = [true, false, true]
@@ -37,7 +37,7 @@ internal enum YAMLFiles {
     internal static let weight: Double = 33.3
     internal static let zero: Int = 0
   }
-  internal enum Version {
+  enum Version {
     internal static let value: String = "1.2.3.beta.4"
   }
 }

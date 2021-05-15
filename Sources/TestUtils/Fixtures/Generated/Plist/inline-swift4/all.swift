@@ -9,8 +9,8 @@ import Foundation
 // MARK: - Plist Files
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
-internal enum PlistFiles {
-  internal enum Info {
+enum PlistFiles {
+  enum Info {
     internal static let cfBundleDevelopmentRegion: String = "en"
     internal static let cfBundleDisplayName: String = "${PRODUCT_NAME}"
     internal static let cfBundleExecutable: String = "${EXECUTABLE_NAME}"
@@ -41,7 +41,7 @@ internal enum PlistFiles {
     internal static let userFloat: Double = 3.14
     internal static let userInteger: Int = 5
   }
-  internal enum Configuration {
+  enum Configuration {
     internal static let environment: String = "development"
     internal static let flags: [Bool] = [true, false, true]
     internal static let mixed: [Any] = ["One", 1, true]
@@ -52,7 +52,7 @@ internal enum PlistFiles {
     internal static let primes: [Int] = [2, 3, 5, 7]
     internal static let zero: Int = 0
   }
-  internal enum ShoppingList {
+  enum ShoppingList {
     internal static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
 }

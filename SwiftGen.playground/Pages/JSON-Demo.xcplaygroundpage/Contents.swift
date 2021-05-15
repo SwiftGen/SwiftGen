@@ -35,11 +35,11 @@ import Foundation
 // MARK: - JSON Files
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
-internal enum JSONFilesInline {
-  internal enum Array {
+enum JSONFilesInline {
+  enum Array {
     internal static let items: [String] = ["Anna", "Bob"]
   }
-  internal enum Configuration {
+  enum Configuration {
     internal static let apiVersion: String = "2"
     internal static let country: Any? = nil
     internal static let environment: String = "staging"
@@ -56,11 +56,11 @@ internal enum JSONFilesInline {
 // MARK: - JSON Files
 
 // swiftlint:disable identifier_name line_length type_body_length
-internal enum JSONFilesRuntime {
-  internal enum Array {
+enum JSONFilesRuntime {
+  enum Array {
     internal static let items: [String] = objectFromJSON(at: "array.json")
   }
-  internal enum Configuration {
+  enum Configuration {
     private static let _document = JSONDocument(path: "configuration.json")
     internal static let apiVersion: String = _document["api-version"]
     internal static let country: Any? = _document["country"]

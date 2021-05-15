@@ -13,21 +13,21 @@ import PrefsWindowController
 // MARK: - Storyboard Scenes
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-internal enum StoryboardScene {
-  internal enum AdditionalImport: StoryboardType {
+enum StoryboardScene {
+  enum AdditionalImport: StoryboardType {
     internal static let storyboardName = "AdditionalImport"
 
     internal static let `private` = SceneType<PrefsWindowController.DBPrefsWindowController>(storyboard: AdditionalImport.self, identifier: "private")
   }
-  internal enum Anonymous: StoryboardType {
+  enum Anonymous: StoryboardType {
     internal static let storyboardName = "Anonymous"
   }
-  internal enum Dependency: StoryboardType {
+  enum Dependency: StoryboardType {
     internal static let storyboardName = "Dependency"
 
     internal static let dependent = SceneType<ExtraModule.LoginViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
-  internal enum KnownTypes: StoryboardType {
+  enum KnownTypes: StoryboardType {
     internal static let storyboardName = "Known Types"
 
     internal static let item1 = SceneType<AppKit.NSWindowController>(storyboard: KnownTypes.self, identifier: "item 1")
@@ -40,7 +40,7 @@ internal enum StoryboardScene {
 
     internal static let item5 = SceneType<AppKit.NSTabViewController>(storyboard: KnownTypes.self, identifier: "item 5")
   }
-  internal enum Message: StoryboardType {
+  enum Message: StoryboardType {
     internal static let storyboardName = "Message"
 
     internal static let messageDetails = SceneType<SwiftGen.DetailsViewController>(storyboard: Message.self, identifier: "MessageDetails")
@@ -55,7 +55,7 @@ internal enum StoryboardScene {
 
     internal static let windowCtrl = SceneType<AppKit.NSWindowController>(storyboard: Message.self, identifier: "WindowCtrl")
   }
-  internal enum Placeholder: StoryboardType {
+  enum Placeholder: StoryboardType {
     internal static let storyboardName = "Placeholder"
 
     internal static let window = SceneType<AppKit.NSWindowController>(storyboard: Placeholder.self, identifier: "Window")

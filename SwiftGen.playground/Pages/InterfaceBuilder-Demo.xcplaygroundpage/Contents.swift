@@ -37,8 +37,8 @@ import UIKit
 // MARK: - Storyboard Scenes
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-internal enum StoryboardScene {
-  internal enum Wizard: StoryboardType {
+enum StoryboardScene {
+  enum Wizard: StoryboardType {
     internal static let storyboardName = "Wizard"
 
     internal static let initialScene = InitialSceneType<SwiftGen.CreateAccViewController>(storyboard: Wizard.self)
@@ -59,14 +59,14 @@ internal enum StoryboardScene {
 // MARK: - Storyboard Segues
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-internal enum StoryboardSegue {
-  internal enum Message: String, SegueType {
+enum StoryboardSegue {
+  enum Message: String, SegueType {
     case customBack = "CustomBack"
     case embed = "Embed"
     case nonCustom = "NonCustom"
     case showNavCtrl = "Show-NavCtrl"
   }
-  internal enum Wizard: String, SegueType {
+  enum Wizard: String, SegueType {
     case showPassword = "ShowPassword"
   }
 }

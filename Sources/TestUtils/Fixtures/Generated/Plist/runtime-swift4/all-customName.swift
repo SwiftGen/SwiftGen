@@ -9,8 +9,8 @@ import Foundation
 // MARK: - Plist Files
 
 // swiftlint:disable identifier_name line_length type_body_length
-internal enum CustomPlist {
-  internal enum Info {
+enum CustomPlist {
+  enum Info {
     private static let _document = PlistDocument(path: "Info.plist")
     internal static let cfBundleDevelopmentRegion: String = _document["CFBundleDevelopmentRegion"]
     internal static let cfBundleDisplayName: String = _document["CFBundleDisplayName"]
@@ -42,7 +42,7 @@ internal enum CustomPlist {
     internal static let userFloat: Double = _document["User Float"]
     internal static let userInteger: Int = _document["User Integer"]
   }
-  internal enum Configuration {
+  enum Configuration {
     private static let _document = PlistDocument(path: "configuration.plist")
     internal static let environment: String = _document["Environment"]
     internal static let flags: [Bool] = _document["Flags"]
@@ -54,7 +54,7 @@ internal enum CustomPlist {
     internal static let primes: [Int] = _document["Primes"]
     internal static let zero: Int = _document["Zero"]
   }
-  internal enum ShoppingList {
+  enum ShoppingList {
     internal static let items: [String] = arrayFromPlist(at: "shopping-list.plist")
   }
 }

@@ -9,11 +9,11 @@ import Foundation
 // MARK: - JSON Files
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
-internal enum JSONFiles {
-  internal enum Array {
+enum JSONFiles {
+  enum Array {
     internal static let items: [String] = ["Anna", "Bob"]
   }
-  internal enum Configuration {
+  enum Configuration {
     internal static let apiVersion: String = "2"
     internal static let country: Any? = nil
     internal static let doors: Int = 5

@@ -8,8 +8,8 @@ import Foundation
 // MARK: - Strings
 
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
-internal enum L10n {
-  internal enum Localizable {
+enum L10n {
+  enum Localizable {
     /// Some alert body there
     internal static let alertMessage = L10n.tr("Localizable", "alert__message")
     /// Title of the alert

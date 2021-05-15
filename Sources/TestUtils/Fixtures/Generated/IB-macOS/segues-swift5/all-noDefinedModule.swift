@@ -14,8 +14,8 @@ import SwiftGen
 // MARK: - Storyboard Segues
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-internal enum StoryboardSegue {
-  internal enum Message: String, SegueType {
+enum StoryboardSegue {
+  enum Message: String, SegueType {
     case embed = "Embed"
     case fade = "Fade"
     case login = "Login"

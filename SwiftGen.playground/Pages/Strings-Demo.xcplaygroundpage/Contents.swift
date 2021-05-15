@@ -22,7 +22,7 @@ import Foundation
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
-internal enum L10n {
+enum L10n {
   /// Some alert body there
   internal static let alertMessage = L10n.tr("Localizable", "alert_message")
   /// Title of the alert
@@ -36,22 +36,22 @@ internal enum L10n {
     return L10n.tr("Localizable", "private", p1, p2)
   }
 
-  internal enum Apples {
+  enum Apples {
     /// You have %d apples
     internal static func count(_ p1: Int) -> String {
       return L10n.tr("Localizable", "apples.count", p1)
     }
   }
 
-  internal enum Bananas {
+  enum Bananas {
     /// Those %d bananas belong to %@.
     internal static func owner(_ p1: Int, _ p2: String) -> String {
       return L10n.tr("Localizable", "bananas.owner", p1, p2)
     }
   }
 
-  internal enum Settings {
-    internal enum UserProfileSection {
+  enum Settings {
+    enum UserProfileSection {
       /// Here you can change some user profile settings.
       internal static let footerText = L10n.tr("Localizable", "settings.user_profile_section.footer_text")
       /// User Profile Settings

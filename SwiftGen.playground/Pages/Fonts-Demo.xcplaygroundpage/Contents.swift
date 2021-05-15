@@ -25,8 +25,8 @@
 // MARK: - Fonts
 
 // swiftlint:disable identifier_name line_length type_body_length
-internal enum FontFamily {
-  internal enum Avenir {
+enum FontFamily {
+  enum Avenir {
     internal static let black = FontConvertible(name: "Avenir-Black", family: "Avenir", path: "Avenir.ttc")
     internal static let blackOblique = FontConvertible(name: "Avenir-BlackOblique", family: "Avenir", path: "Avenir.ttc")
     internal static let book = FontConvertible(name: "Avenir-Book", family: "Avenir", path: "Avenir.ttc")
@@ -41,7 +41,7 @@ internal enum FontFamily {
     internal static let roman = FontConvertible(name: "Avenir-Roman", family: "Avenir", path: "Avenir.ttc")
     internal static let all: [FontConvertible] = [black, blackOblique, book, bookOblique, heavy, heavyOblique, light, lightOblique, medium, mediumOblique, oblique, roman]
   }
-  internal enum ZapfDingbats {
+  enum ZapfDingbats {
     internal static let regular = FontConvertible(name: "ZapfDingbatsITC", family: "Zapf Dingbats", path: "ZapfDingbats.ttf")
     internal static let all: [FontConvertible] = [regular]
   }

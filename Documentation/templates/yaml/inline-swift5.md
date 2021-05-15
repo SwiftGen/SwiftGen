@@ -29,19 +29,19 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-internal enum YAMLFiles {
-  internal enum Documents {
-    internal enum Document1 {
+enum YAMLFiles {
+  enum Documents {
+    enum Document1 {
       internal static let items: [String] = ["Mark McGwire", "Sammy Sosa", "Ken Griffey"]
     }
-    internal enum Document2 {
+    enum Document2 {
       internal static let items: [String] = ["Chicago Cubs", "St Louis Cardinals"]
     }
   }
-  internal enum GroceryList {
+  enum GroceryList {
     internal static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
-  internal enum Mapping {
+  enum Mapping {
     internal static let car: Any? = nil
     internal static let foo: [String: Any] = ["bar": "banana", "baz": "orange"]
     internal static let hello: String = "world"

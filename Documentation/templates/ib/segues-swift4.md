@@ -31,8 +31,8 @@ Note: the generated code may look differently depending on the platform the stor
 **Extract:**
 
 ```swift
-internal enum StoryboardSegue {
-  internal enum Message: String, SegueType {
+enum StoryboardSegue {
+  enum Message: String, SegueType {
     case customBack = "CustomBack"
     case embed = "Embed"
     case nonCustom = "NonCustom"

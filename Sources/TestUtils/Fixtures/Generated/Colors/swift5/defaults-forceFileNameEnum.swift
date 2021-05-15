@@ -18,7 +18,7 @@ internal struct ColorName {
   internal let rgbaValue: UInt32
   internal var color: Color { return Color(named: self) }
 
-  internal enum Colors {
+  enum Colors {
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>
     /// Alpha: 100% <br/> (0x339666ff)
     internal static let articleBody = ColorName(rgbaValue: 0x339666ff)

@@ -32,7 +32,7 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-internal enum L10n {
+enum L10n {
   /// Some alert body there
   internal static let alertMessage = L10n.tr("Localizable", "alert__message")
   /// Title of the alert

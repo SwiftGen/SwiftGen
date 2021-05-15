@@ -18,21 +18,21 @@ internal typealias MyFont = MyFontConvertible.Font
 // MARK: - Fonts
 
 // swiftlint:disable identifier_name line_length type_body_length
-internal enum CustomFamily {
-  internal enum SFNSDisplay {
+enum CustomFamily {
+  enum SFNSDisplay {
     internal static let black = MyFontConvertible(name: ".SFNSDisplay-Black", family: ".SF NS Display", path: "SFNSDisplay-Black.otf")
     internal static let bold = MyFontConvertible(name: ".SFNSDisplay-Bold", family: ".SF NS Display", path: "SFNSDisplay-Bold.otf")
     internal static let heavy = MyFontConvertible(name: ".SFNSDisplay-Heavy", family: ".SF NS Display", path: "SFNSDisplay-Heavy.otf")
     internal static let regular = MyFontConvertible(name: ".SFNSDisplay-Regular", family: ".SF NS Display", path: "SFNSDisplay-Regular.otf")
     internal static let all: [MyFontConvertible] = [black, bold, heavy, regular]
   }
-  internal enum SFNSText {
+  enum SFNSText {
     internal static let bold = MyFontConvertible(name: ".SFNSText-Bold", family: ".SF NS Text", path: "SFNSText-Bold.otf")
     internal static let heavy = MyFontConvertible(name: ".SFNSText-Heavy", family: ".SF NS Text", path: "SFNSText-Heavy.otf")
     internal static let regular = MyFontConvertible(name: ".SFNSText-Regular", family: ".SF NS Text", path: "SFNSText-Regular.otf")
     internal static let all: [MyFontConvertible] = [bold, heavy, regular]
   }
-  internal enum Avenir {
+  enum Avenir {
     internal static let black = MyFontConvertible(name: "Avenir-Black", family: "Avenir", path: "Avenir.ttc")
     internal static let blackOblique = MyFontConvertible(name: "Avenir-BlackOblique", family: "Avenir", path: "Avenir.ttc")
     internal static let book = MyFontConvertible(name: "Avenir-Book", family: "Avenir", path: "Avenir.ttc")
@@ -47,11 +47,11 @@ internal enum CustomFamily {
     internal static let roman = MyFontConvertible(name: "Avenir-Roman", family: "Avenir", path: "Avenir.ttc")
     internal static let all: [MyFontConvertible] = [black, blackOblique, book, bookOblique, heavy, heavyOblique, light, lightOblique, medium, mediumOblique, oblique, roman]
   }
-  internal enum ZapfDingbats {
+  enum ZapfDingbats {
     internal static let regular = MyFontConvertible(name: "ZapfDingbatsITC", family: "Zapf Dingbats", path: "ZapfDingbats.ttf")
     internal static let all: [MyFontConvertible] = [regular]
   }
-  internal enum Public {
+  enum Public {
     internal static let `internal` = MyFontConvertible(name: "private", family: "public", path: "class.ttf")
     internal static let all: [MyFontConvertible] = [`internal`]
   }

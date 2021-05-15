@@ -27,11 +27,11 @@
 **Extract:**
 
 ```swift
-internal enum Files {
+enum Files {
   /// test.txt
   internal static let testTxt = File(name: "test", ext: "txt", path: "", mimeType: "text/plain")
   /// subdir/
-  internal enum Subdir {
+  enum Subdir {
     /// subdir/A Video With Spaces.mp4
     internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", path: "subdir", mimeType: "video/mp4")
   }

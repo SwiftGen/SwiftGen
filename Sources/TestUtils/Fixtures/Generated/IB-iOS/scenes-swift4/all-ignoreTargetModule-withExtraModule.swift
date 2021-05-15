@@ -15,25 +15,25 @@ import UIKit
 // MARK: - Storyboard Scenes
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-internal enum StoryboardScene {
-  internal enum AdditionalImport: StoryboardType {
+enum StoryboardScene {
+  enum AdditionalImport: StoryboardType {
     internal static let storyboardName = "AdditionalImport"
 
     internal static let initialScene = InitialSceneType<LocationPicker.LocationPickerViewController>(storyboard: AdditionalImport.self)
 
     internal static let `public` = SceneType<SlackTextViewController.SLKTextViewController>(storyboard: AdditionalImport.self, identifier: "public")
   }
-  internal enum Anonymous: StoryboardType {
+  enum Anonymous: StoryboardType {
     internal static let storyboardName = "Anonymous"
 
     internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Anonymous.self)
   }
-  internal enum Dependency: StoryboardType {
+  enum Dependency: StoryboardType {
     internal static let storyboardName = "Dependency"
 
     internal static let dependent = SceneType<ValidatePasswordViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
-  internal enum KnownTypes: StoryboardType {
+  enum KnownTypes: StoryboardType {
     internal static let storyboardName = "Known Types"
 
     internal static let item1 = SceneType<GLKit.GLKViewController>(storyboard: KnownTypes.self, identifier: "item 1")
@@ -54,7 +54,7 @@ internal enum StoryboardScene {
 
     internal static let item9 = SceneType<UIKit.UIViewController>(storyboard: KnownTypes.self, identifier: "item 9")
   }
-  internal enum Message: StoryboardType {
+  enum Message: StoryboardType {
     internal static let storyboardName = "Message"
 
     internal static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: Message.self)
@@ -67,12 +67,12 @@ internal enum StoryboardScene {
 
     internal static let urlChooser = SceneType<PickerViewController>(storyboard: Message.self, identifier: "URLChooser")
   }
-  internal enum Placeholder: StoryboardType {
+  enum Placeholder: StoryboardType {
     internal static let storyboardName = "Placeholder"
 
     internal static let navigation = SceneType<UIKit.UINavigationController>(storyboard: Placeholder.self, identifier: "Navigation")
   }
-  internal enum Wizard: StoryboardType {
+  enum Wizard: StoryboardType {
     internal static let storyboardName = "Wizard"
 
     internal static let initialScene = InitialSceneType<CreateAccViewController>(storyboard: Wizard.self)

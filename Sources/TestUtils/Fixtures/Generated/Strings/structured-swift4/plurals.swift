@@ -9,17 +9,17 @@ import Foundation
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
-internal enum L10n {
+enum L10n {
 
-  internal enum Apples {
+  enum Apples {
     /// Plural format key: "%#@apples@"
     internal static func count(_ p1: Int) -> String {
       return L10n.tr("Localizable", "apples.count", p1)
     }
   }
 
-  internal enum Competition {
-    internal enum Event {
+  enum Competition {
+    enum Event {
       /// Plural format key: "%#@Matches@"
       internal static func numberOfMatches(_ p1: Int) -> String {
         return L10n.tr("Localizable", "competition.event.number-of-matches", p1)
@@ -27,8 +27,8 @@ internal enum L10n {
     }
   }
 
-  internal enum Feed {
-    internal enum Subscription {
+  enum Feed {
+    enum Subscription {
       /// Plural format key: "%#@Subscriptions@"
       internal static func count(_ p1: Int) -> String {
         return L10n.tr("Localizable", "feed.subscription.count", p1)

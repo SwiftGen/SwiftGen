@@ -28,11 +28,11 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-internal enum JSONFiles {
-  internal enum Array {
+enum JSONFiles {
+  enum Array {
     internal static let items: [String] = ["Anna", "Bob"]
   }
-  internal enum Configuration {
+  enum Configuration {
     internal static let apiVersion: String = "2"
     internal static let country: Any? = nil
     internal static let environment: String = "staging"

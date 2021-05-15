@@ -3,7 +3,7 @@
 
 #if os(macOS)
   import AppKit
-  internal enum UIColor { }
+  enum UIColor { }
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit
 #endif

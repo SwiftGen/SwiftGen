@@ -17,10 +17,10 @@
 
 #if os(macOS)
   import AppKit
-  internal enum ColorName { }
+  enum ColorName { }
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit
-  internal enum ColorName { }
+  enum ColorName { }
 #endif
 
 // swiftlint:disable superfluous_disable_command

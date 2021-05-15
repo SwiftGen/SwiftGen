@@ -18,15 +18,15 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 // MARK: - Asset Catalogs
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-internal enum Asset {
-  internal enum Exotic {
+enum Asset {
+  enum Exotic {
     internal static let banana = ImageAsset(name: "Exotic/Banana")
     internal static let mango = ImageAsset(name: "Exotic/Mango")
   }
-  internal enum Round {
+  enum Round {
     internal static let apricot = ImageAsset(name: "Round/Apricot")
     internal static let apple = ImageAsset(name: "Round/Apple")
-    internal enum Double {
+    enum Double {
       internal static let cherry = ImageAsset(name: "Round/Double/Cherry")
     }
     internal static let tomato = ImageAsset(name: "Round/Tomato")

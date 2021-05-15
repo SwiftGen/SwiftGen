@@ -9,7 +9,7 @@ import Foundation
 
 // swiftlint:disable explicit_type_interface identifier_name
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
-internal enum Files {
+enum Files {
   /// File
   internal static let file = File(name: "File", ext: nil, relativePath: "", mimeType: "application/octet-stream")
   /// test.txt

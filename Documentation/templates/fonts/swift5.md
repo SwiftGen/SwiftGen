@@ -32,14 +32,14 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-internal enum FontFamily {
-  internal enum SFNSDisplay {
+enum FontFamily {
+  enum SFNSDisplay {
     internal static let black = FontConvertible(name: ".SFNSDisplay-Black", family: ".SF NS Display", path: "SFNSDisplay-Black.otf")
     internal static let bold = FontConvertible(name: ".SFNSDisplay-Bold", family: ".SF NS Display", path: "SFNSDisplay-Bold.otf")
     internal static let heavy = FontConvertible(name: ".SFNSDisplay-Heavy", family: ".SF NS Display", path: "SFNSDisplay-Heavy.otf")
     internal static let regular = FontConvertible(name: ".SFNSDisplay-Regular", family: ".SF NS Display", path: "SFNSDisplay-Regular.otf")
   }
-  internal enum ZapfDingbats {
+  enum ZapfDingbats {
     internal static let regular = FontConvertible(name: "ZapfDingbatsITC", family: "Zapf Dingbats", path: "ZapfDingbats.ttf")
   }
 }

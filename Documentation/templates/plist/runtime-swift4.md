@@ -33,13 +33,13 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-internal enum PlistFiles {
-  internal enum Configuration {
+enum PlistFiles {
+  enum Configuration {
     private static let _document = PlistDocument(path: "configuration.plist")
     internal static let environment: String = _document["Environment"]
     internal static let options: [String: Any] = _document["Options"]
   }
-  internal enum ShoppingList {
+  enum ShoppingList {
     internal static let items: [String] = arrayFromPlist(at: "shopping-list.plist")
   }
 }
