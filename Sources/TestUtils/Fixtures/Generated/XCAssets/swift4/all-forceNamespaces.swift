@@ -78,12 +78,12 @@ internal struct ARResourceGroupAsset {
 
   #if os(iOS)
   @available(iOS 11.3, *)
-  internal var referenceImages: Set<ARReferenceImage> {
+  var referenceImages: Set<ARReferenceImage> {
     return ARReferenceImage.referenceImages(in: self)
   }
 
   @available(iOS 12.0, *)
-  internal var referenceObjects: Set<ARReferenceObject> {
+  var referenceObjects: Set<ARReferenceObject> {
     return ARReferenceObject.referenceObjects(in: self)
   }
   #endif
@@ -153,7 +153,7 @@ internal struct DataAsset {
   internal fileprivate(set) var name: String
 
   @available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
-  internal var data: NSDataAsset {
+  var data: NSDataAsset {
     return NSDataAsset(asset: self)
   }
 }
@@ -180,7 +180,7 @@ internal struct ImageAsset {
   #endif
 
   @available(iOS 8.0, tvOS 9.0, watchOS 2.0, macOS 10.7, *)
-  internal var image: Image {
+  var image: Image {
     let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)
@@ -233,7 +233,7 @@ internal struct SymbolAsset {
   internal typealias Image = UIImage
 
   @available(iOS 12.0, tvOS 12.0, watchOS 5.0, *)
-  internal var image: Image {
+  var image: Image {
     let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)

@@ -428,7 +428,7 @@ The generated code will look like this:
 ```swift
 internal struct ColorName {
   internal let rgbaValue: UInt32
-  internal var color: Color { return Color(named: self) }
+  var color: Color { return Color(named: self) }
 
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>
   /// Alpha: 100% <br/> (0x339666ff)
@@ -485,13 +485,13 @@ internal class MainEntity: NSManagedObject {
     return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
-  @NSManaged internal var attributedString: NSAttributedString?
-  @NSManaged internal var binaryData: Data?
-  @NSManaged internal var boolean: Bool
-  @NSManaged internal var date: Date?
-  @NSManaged internal var float: Float
-  @NSManaged internal var int64: Int64
-  internal var integerEnum: IntegerEnum {
+  @NSManaged var attributedString: NSAttributedString?
+  @NSManaged var binaryData: Data?
+  @NSManaged var boolean: Bool
+  @NSManaged var date: Date?
+  @NSManaged var float: Float
+  @NSManaged var int64: Int64
+  var integerEnum: IntegerEnum {
     get {
       let key = "integerEnum"
       willAccessValue(forKey: key)
@@ -511,7 +511,7 @@ internal class MainEntity: NSManagedObject {
       setPrimitiveValue(newValue.rawValue, forKey: key)
     }
   }
-  @NSManaged internal var manyToMany: Set<SecondaryEntity>
+  @NSManaged var manyToMany: Set<SecondaryEntity>
 }
 
 // MARK: Relationship ManyToMany

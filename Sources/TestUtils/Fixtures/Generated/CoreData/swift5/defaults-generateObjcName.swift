@@ -93,17 +93,17 @@ internal class MainEntity: NSManagedObject {
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
-  @NSManaged internal var attributedString: NSAttributedString?
-  @NSManaged internal var binaryData: Data?
-  @NSManaged internal var boolean: Bool
-  @NSManaged internal var date: Date?
-  @NSManaged internal var decimal: NSDecimalNumber?
-  @NSManaged internal var double: Double
-  @NSManaged internal var float: Float
-  @NSManaged internal var int16: Int16
-  @NSManaged internal var int32: Int32
-  @NSManaged internal var int64: Int64
-  internal var integerEnum: IntegerEnum {
+  @NSManaged var attributedString: NSAttributedString?
+  @NSManaged var binaryData: Data?
+  @NSManaged var boolean: Bool
+  @NSManaged var date: Date?
+  @NSManaged var decimal: NSDecimalNumber?
+  @NSManaged var double: Double
+  @NSManaged var float: Float
+  @NSManaged var int16: Int16
+  @NSManaged var int32: Int32
+  @NSManaged var int64: Int64
+  var integerEnum: IntegerEnum {
     get {
       let key = "integerEnum"
       willAccessValue(forKey: key)
@@ -123,7 +123,7 @@ internal class MainEntity: NSManagedObject {
       setPrimitiveValue(newValue.rawValue, forKey: key)
     }
   }
-  internal var optionalBoolean: Bool? {
+  var optionalBoolean: Bool? {
     get {
       let key = "optionalBoolean"
       willAccessValue(forKey: key)
@@ -139,7 +139,7 @@ internal class MainEntity: NSManagedObject {
       setPrimitiveValue(newValue, forKey: key)
     }
   }
-  internal var optionalDouble: Double? {
+  var optionalDouble: Double? {
     get {
       let key = "optionalDouble"
       willAccessValue(forKey: key)
@@ -155,8 +155,8 @@ internal class MainEntity: NSManagedObject {
       setPrimitiveValue(newValue, forKey: key)
     }
   }
-  @NSManaged internal var optionalFloat: Float
-  internal var optionalInt16: Int16? {
+  @NSManaged var optionalFloat: Float
+  var optionalInt16: Int16? {
     get {
       let key = "optionalInt16"
       willAccessValue(forKey: key)
@@ -172,8 +172,8 @@ internal class MainEntity: NSManagedObject {
       setPrimitiveValue(newValue, forKey: key)
     }
   }
-  @NSManaged internal var optionalInt32: Int32
-  internal var optionalInt64: Int64? {
+  @NSManaged var optionalInt32: Int32
+  var optionalInt64: Int64? {
     get {
       let key = "optionalInt64"
       willAccessValue(forKey: key)
@@ -189,9 +189,9 @@ internal class MainEntity: NSManagedObject {
       setPrimitiveValue(newValue, forKey: key)
     }
   }
-  @NSManaged internal var optionalString: String?
-  @NSManaged internal var string: String
-  internal var stringEnum: StringEnum? {
+  @NSManaged var optionalString: String?
+  @NSManaged var string: String
+  var stringEnum: StringEnum? {
     get {
       let key = "stringEnum"
       willAccessValue(forKey: key)
@@ -210,16 +210,16 @@ internal class MainEntity: NSManagedObject {
       setPrimitiveValue(newValue?.rawValue, forKey: key)
     }
   }
-  @NSManaged internal var transformable: AnyObject?
-  @NSManaged internal var transformableCustomArray: CustomArray?
-  @NSManaged internal var transformableCustomPolyline: CustomPolyline?
-  @NSManaged internal var transient: String?
-  @NSManaged internal var uri: URL?
-  @NSManaged internal var uuid: UUID?
-  @NSManaged internal var manyToMany: Set<SecondaryEntity>?
-  @NSManaged internal var oneToMany: NSOrderedSet?
-  @NSManaged internal var oneToOne: SecondaryEntity?
-  @NSManaged internal var fetchedProperty: [NewEntity]
+  @NSManaged var transformable: AnyObject?
+  @NSManaged var transformableCustomArray: CustomArray?
+  @NSManaged var transformableCustomPolyline: CustomPolyline?
+  @NSManaged var transient: String?
+  @NSManaged var uri: URL?
+  @NSManaged var uuid: UUID?
+  @NSManaged var manyToMany: Set<SecondaryEntity>?
+  @NSManaged var oneToMany: NSOrderedSet?
+  @NSManaged var oneToOne: SecondaryEntity?
+  @NSManaged var fetchedProperty: [NewEntity]
   // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
 
@@ -361,7 +361,7 @@ internal class NewEntity: AbstractEntity {
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
-  @NSManaged internal var identifier: UUID?
+  @NSManaged var identifier: UUID?
   // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
 
@@ -387,10 +387,10 @@ internal class SecondaryEntity: NSManagedObject {
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
-  @NSManaged internal var name: String
-  @NSManaged internal var manyToMany: Set<MainEntity>?
-  @NSManaged internal var oneToMany: MainEntity?
-  @NSManaged internal var oneToOne: MainEntity?
+  @NSManaged var name: String
+  @NSManaged var manyToMany: Set<MainEntity>?
+  @NSManaged var oneToMany: MainEntity?
+  @NSManaged var oneToOne: MainEntity?
   // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
 

@@ -32,7 +32,7 @@ internal struct Resource {
   internal let relativePath: String
   internal let mimeType: String
 
-  internal var url: URL {
+  var url: URL {
     return url(locale: nil)
   }
 
@@ -51,7 +51,7 @@ internal struct Resource {
     return result
   }
 
-  internal var path: String {
+  var path: String {
     return path(locale: nil)
   }
 

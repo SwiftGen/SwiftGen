@@ -50,13 +50,13 @@ internal class MainEntity: NSManagedObject {
     return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
-  @NSManaged internal var attributedString: NSAttributedString?
-  @NSManaged internal var binaryData: Data?
-  @NSManaged internal var boolean: Bool
-  @NSManaged internal var date: Date?
-  @NSManaged internal var float: Float
-  @NSManaged internal var int64: Int64
-  internal var integerEnum: IntegerEnum {
+  @NSManaged var attributedString: NSAttributedString?
+  @NSManaged var binaryData: Data?
+  @NSManaged var boolean: Bool
+  @NSManaged var date: Date?
+  @NSManaged var float: Float
+  @NSManaged var int64: Int64
+  var integerEnum: IntegerEnum {
     get {
       let key = "integerEnum"
       willAccessValue(forKey: key)
@@ -76,7 +76,7 @@ internal class MainEntity: NSManagedObject {
       setPrimitiveValue(newValue.rawValue, forKey: key)
     }
   }
-  @NSManaged internal var manyToMany: Set<SecondaryEntity>
+  @NSManaged var manyToMany: Set<SecondaryEntity>
 }
 
 // MARK: Relationship ManyToMany
