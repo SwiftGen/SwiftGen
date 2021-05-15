@@ -29,16 +29,16 @@ public enum StringEnum: String {
 // MARK: - MainEntity
 
 @objc(MainEntity)
-internal class MainEntity: NSManagedObject {
-  internal class var entityName: String {
+class MainEntity: NSManagedObject {
+  class var entityName: String {
     return "MainEntity"
   }
 
-  internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+  class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
-  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<MainEntity> {
+  @nonobjc class func makeFetchRequest() -> NSFetchRequest<MainEntity> {
     return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 

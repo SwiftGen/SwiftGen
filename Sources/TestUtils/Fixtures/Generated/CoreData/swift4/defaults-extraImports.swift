@@ -13,21 +13,21 @@ import Transformables
 
 // MARK: - AbstractEntity
 
-internal class AbstractEntity: NSManagedObject {
-  internal class var entityName: String {
+class AbstractEntity: NSManagedObject {
+  class var entityName: String {
     return "AbstractEntity"
   }
 
-  internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+  class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
   @available(*, deprecated, renamed: "makeFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `makeFetchRequest()` instead.")
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<AbstractEntity> {
+  @nonobjc class func fetchRequest() -> NSFetchRequest<AbstractEntity> {
     return NSFetchRequest<AbstractEntity>(entityName: entityName)
   }
 
-  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<AbstractEntity> {
+  @nonobjc class func makeFetchRequest() -> NSFetchRequest<AbstractEntity> {
     return NSFetchRequest<AbstractEntity>(entityName: entityName)
   }
 
@@ -45,21 +45,21 @@ internal class AbstractEntity: NSManagedObject {
 
 // MARK: - ChildEntity
 
-internal class ChildEntity: MainEntity {
-  override internal class var entityName: String {
+class ChildEntity: MainEntity {
+  override class var entityName: String {
     return "ChildEntity"
   }
 
-  override internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+  override class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
   @available(*, deprecated, renamed: "makeFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `makeFetchRequest()` instead.")
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<ChildEntity> {
+  @nonobjc class func fetchRequest() -> NSFetchRequest<ChildEntity> {
     return NSFetchRequest<ChildEntity>(entityName: entityName)
   }
 
-  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<ChildEntity> {
+  @nonobjc class func makeFetchRequest() -> NSFetchRequest<ChildEntity> {
     return NSFetchRequest<ChildEntity>(entityName: entityName)
   }
 
@@ -73,21 +73,21 @@ internal class ChildEntity: MainEntity {
 
 // MARK: - MainEntity
 
-internal class MainEntity: NSManagedObject {
-  internal class var entityName: String {
+class MainEntity: NSManagedObject {
+  class var entityName: String {
     return "MainEntity"
   }
 
-  internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+  class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
   @available(*, deprecated, renamed: "makeFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `makeFetchRequest()` instead.")
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<MainEntity> {
+  @nonobjc class func fetchRequest() -> NSFetchRequest<MainEntity> {
     return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
-  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<MainEntity> {
+  @nonobjc class func makeFetchRequest() -> NSFetchRequest<MainEntity> {
     return NSFetchRequest<MainEntity>(entityName: entityName)
   }
 
@@ -340,21 +340,21 @@ extension MainEntity {
 
 // MARK: - NewEntity
 
-internal class NewEntity: AbstractEntity {
-  override internal class var entityName: String {
+class NewEntity: AbstractEntity {
+  override class var entityName: String {
     return "NewEntity"
   }
 
-  override internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+  override class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
   @available(*, deprecated, renamed: "makeFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `makeFetchRequest()` instead.")
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<NewEntity> {
+  @nonobjc class func fetchRequest() -> NSFetchRequest<NewEntity> {
     return NSFetchRequest<NewEntity>(entityName: entityName)
   }
 
-  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<NewEntity> {
+  @nonobjc class func makeFetchRequest() -> NSFetchRequest<NewEntity> {
     return NSFetchRequest<NewEntity>(entityName: entityName)
   }
 
@@ -365,21 +365,21 @@ internal class NewEntity: AbstractEntity {
 
 // MARK: - SecondaryEntity
 
-internal class SecondaryEntity: NSManagedObject {
-  internal class var entityName: String {
+class SecondaryEntity: NSManagedObject {
+  class var entityName: String {
     return "SecondaryEntity"
   }
 
-  internal class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+  class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     return NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
   }
 
   @available(*, deprecated, renamed: "makeFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `makeFetchRequest()` instead.")
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<SecondaryEntity> {
+  @nonobjc class func fetchRequest() -> NSFetchRequest<SecondaryEntity> {
     return NSFetchRequest<SecondaryEntity>(entityName: entityName)
   }
 
-  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<SecondaryEntity> {
+  @nonobjc class func makeFetchRequest() -> NSFetchRequest<SecondaryEntity> {
     return NSFetchRequest<SecondaryEntity>(entityName: entityName)
   }
 
