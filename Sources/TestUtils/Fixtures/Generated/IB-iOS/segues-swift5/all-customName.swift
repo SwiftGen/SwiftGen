@@ -37,7 +37,7 @@ enum XCTStoryboardCustom {
 
 // MARK: - Implementation Details
 
-internal protocol SegueType: RawRepresentable {}
+protocol SegueType: RawRepresentable {}
 
 extension UIViewController {
   func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {

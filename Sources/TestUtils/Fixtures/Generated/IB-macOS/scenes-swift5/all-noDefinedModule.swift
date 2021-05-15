@@ -66,7 +66,7 @@ enum StoryboardScene {
 
 // MARK: - Implementation Details
 
-internal protocol StoryboardType {
+protocol StoryboardType {
   static var storyboardName: String { get }
 }
 
