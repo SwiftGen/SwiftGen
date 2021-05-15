@@ -75,11 +75,11 @@ struct FontConvertible {
   typealias Font = UIFont
   #endif
 
-  internal func font(size: CGFloat) -> Font! {
+  func font(size: CGFloat) -> Font! {
     return Font(font: self, size: size)
   }
 
-  internal func register() {
+  func register() {
     // swiftlint:disable:next conditional_returns_on_newline
     guard let url = url else { return }
     CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)

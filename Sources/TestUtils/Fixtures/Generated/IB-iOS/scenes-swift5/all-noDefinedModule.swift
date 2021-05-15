@@ -107,7 +107,7 @@ struct SceneType<T: UIViewController> {
   let storyboard: StoryboardType.Type
   let identifier: String
 
-  internal func instantiate() -> T {
+  func instantiate() -> T {
     let identifier = self.identifier
     guard let controller = storyboard.storyboard.instantiateViewController(withIdentifier: identifier) as? T else {
       fatalError("ViewController '\(identifier)' is not of the expected class \(T.self).")
@@ -116,7 +116,7 @@ struct SceneType<T: UIViewController> {
   }
 
   @available(iOS 13.0, tvOS 13.0, *)
-  internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+  func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
     return storyboard.storyboard.instantiateViewController(identifier: identifier, creator: block)
   }
 }
@@ -124,7 +124,7 @@ struct SceneType<T: UIViewController> {
 struct InitialSceneType<T: UIViewController> {
   let storyboard: StoryboardType.Type
 
-  internal func instantiate() -> T {
+  func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitialViewController() as? T else {
       fatalError("ViewController is not of the expected class \(T.self).")
     }
@@ -132,7 +132,7 @@ struct InitialSceneType<T: UIViewController> {
   }
 
   @available(iOS 13.0, tvOS 13.0, *)
-  internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
+  func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
     guard let controller = storyboard.storyboard.instantiateInitialViewController(creator: block) else {
       fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
     }

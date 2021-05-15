@@ -80,7 +80,7 @@ struct SceneType<T> {
   let storyboard: StoryboardType.Type
   let identifier: String
 
-  internal func instantiate() -> T {
+  func instantiate() -> T {
     let identifier = NSStoryboard.SceneIdentifier(self.identifier)
     guard let controller = storyboard.storyboard.instantiateController(withIdentifier: identifier) as? T else {
       fatalError("Controller '\(identifier)' is not of the expected class \(T.self).")
@@ -89,13 +89,13 @@ struct SceneType<T> {
   }
 
   @available(macOS 10.15, *)
-  internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSViewController {
+  func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSViewController {
     let identifier = NSStoryboard.SceneIdentifier(self.identifier)
     return storyboard.storyboard.instantiateController(identifier: identifier, creator: block)
   }
 
   @available(macOS 10.15, *)
-  internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSWindowController {
+  func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSWindowController {
     let identifier = NSStoryboard.SceneIdentifier(self.identifier)
     return storyboard.storyboard.instantiateController(identifier: identifier, creator: block)
   }
@@ -104,7 +104,7 @@ struct SceneType<T> {
 struct InitialSceneType<T> {
   let storyboard: StoryboardType.Type
 
-  internal func instantiate() -> T {
+  func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitialController() as? T else {
       fatalError("Controller is not of the expected class \(T.self).")
     }
@@ -112,7 +112,7 @@ struct InitialSceneType<T> {
   }
 
   @available(macOS 10.15, *)
-  internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSViewController {
+  func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSViewController {
     guard let controller = storyboard.storyboard.instantiateInitialController(creator: block) else {
       fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
     }
@@ -120,7 +120,7 @@ struct InitialSceneType<T> {
   }
 
   @available(macOS 10.15, *)
-  internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSWindowController {
+  func instantiate(creator block: @escaping (NSCoder) -> T?) -> T where T: NSWindowController {
     guard let controller = storyboard.storyboard.instantiateInitialController(creator: block) else {
       fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
     }

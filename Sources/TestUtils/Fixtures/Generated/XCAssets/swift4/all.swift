@@ -119,7 +119,7 @@ internal final class ColorAsset {
 
   #if os(iOS) || os(tvOS)
   @available(iOS 11.0, tvOS 11.0, *)
-  internal func color(compatibleWith traitCollection: UITraitCollection) -> Color {
+  func color(compatibleWith traitCollection: UITraitCollection) -> Color {
     let bundle = BundleToken.bundle
     guard let color = Color(named: name, in: bundle, compatibleWith: traitCollection) else {
       fatalError("Unable to load color asset named \(name).")
@@ -196,7 +196,7 @@ struct ImageAsset {
 
   #if os(iOS) || os(tvOS)
   @available(iOS 8.0, tvOS 9.0, *)
-  internal func image(compatibleWith traitCollection: UITraitCollection) -> Image {
+  func image(compatibleWith traitCollection: UITraitCollection) -> Image {
     let bundle = BundleToken.bundle
     guard let result = Image(named: name, in: bundle, compatibleWith: traitCollection) else {
       fatalError("Unable to load image asset named \(name).")
@@ -245,7 +245,7 @@ struct SymbolAsset {
   }
 
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-  internal func image(with configuration: Configuration) -> Image {
+  func image(with configuration: Configuration) -> Image {
     let bundle = BundleToken.bundle
     guard let result = Image(named: name, in: bundle, with: configuration) else {
       fatalError("Unable to load symbol asset named \(name).")

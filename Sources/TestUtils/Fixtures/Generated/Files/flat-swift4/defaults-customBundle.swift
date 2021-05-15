@@ -36,7 +36,7 @@ struct File {
     return url(locale: nil)
   }
 
-  internal func url(locale: Locale?) -> URL {
+  func url(locale: Locale?) -> URL {
     let bundle = ResourcesBundle.bundle
     let url = bundle.url(
       forResource: name,
@@ -55,7 +55,7 @@ struct File {
     return path(locale: nil)
   }
 
-  internal func path(locale: Locale?) -> String {
+  func path(locale: Locale?) -> String {
     return url(locale: locale).path
   }
 }
