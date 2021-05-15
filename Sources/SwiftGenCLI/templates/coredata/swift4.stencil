@@ -14,7 +14,7 @@ import {{ import }}
 
 // swiftlint:disable attributes file_length vertical_whitespace_closing_braces
 // swiftlint:disable identifier_name line_length type_body_length
-{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}{% endif %}{% endset %}
 
 {% for model in models %}
 {% for name, entity in model.entities %}

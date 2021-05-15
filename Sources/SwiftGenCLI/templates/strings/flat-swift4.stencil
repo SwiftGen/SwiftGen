@@ -2,7 +2,7 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if tables.count > 0 %}
-{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}{% endif %}{% endset %}
 import Foundation
 
 // swiftlint:disable superfluous_disable_command file_length implicit_return

@@ -2,7 +2,7 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if files %}
-{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}{% endif %}{% endset %}
 {% set documentPrefix %}{{param.documentName|default:"Document"}}{% endset %}
 import Foundation
 

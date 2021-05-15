@@ -2,7 +2,7 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if platform and storyboards %}
-{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}{% endif %}{% endset %}
 {% set isAppKit %}{% if platform == "macOS" %}true{% endif %}{% endset %}
 // swiftlint:disable sorted_imports
 import Foundation

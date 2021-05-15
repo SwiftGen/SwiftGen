@@ -4,7 +4,7 @@
 {% if groups.count > 0 %}
 {% set enumName %}{{param.enumName|default:"Files"}}{% endset %}
 {% set useExt %}{% if param.useExtension|default:"true" %}true{% endif %}{% endset %}
-{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}{% endif %}{% endset %}
 {% set resourceType %}{{param.resourceTypeName|default:"File"}}{% endset %}
 import Foundation
 

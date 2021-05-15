@@ -9,7 +9,7 @@
 {% set imageType %}{{param.imageTypeName|default:"ImageAsset"}}{% endset %}
 {% set symbolType %}{{param.symbolTypeName|default:"SymbolAsset"}}{% endset %}
 {% set forceNamespaces %}{{param.forceProvidesNamespaces|default:"false"}}{% endset %}
-{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}{% endif %}{% endset %}
 #if os(macOS)
   import AppKit
 #elseif os(iOS)
