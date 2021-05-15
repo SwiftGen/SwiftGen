@@ -72,7 +72,7 @@ enum XCTAssets {
 // MARK: - Implementation Details
 
 internal struct XCTARResourceGroup {
-  internal fileprivate(set) var name: String
+  fileprivate(set) var name: String
 
   #if os(iOS)
   @available(iOS 11.3, *)
@@ -106,7 +106,7 @@ extension ARReferenceObject {
 #endif
 
 internal final class XCTColorAsset {
-  internal fileprivate(set) var name: String
+  fileprivate(set) var name: String
 
   #if os(macOS)
   internal typealias Color = NSColor
@@ -153,7 +153,7 @@ extension XCTColorAsset.Color {
 }
 
 internal struct XCTDataAsset {
-  internal fileprivate(set) var name: String
+  fileprivate(set) var name: String
 
   @available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
   var data: NSDataAsset {
@@ -177,7 +177,7 @@ extension NSDataAsset {
 }
 
 internal struct XCTImageAsset {
-  internal fileprivate(set) var name: String
+  fileprivate(set) var name: String
 
   #if os(macOS)
   internal typealias Image = NSImage
@@ -231,7 +231,7 @@ extension XCTImageAsset.Image {
 }
 
 internal struct XCTSymbolAsset {
-  internal fileprivate(set) var name: String
+  fileprivate(set) var name: String
 
   #if os(iOS) || os(tvOS) || os(watchOS)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
