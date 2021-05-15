@@ -15,7 +15,7 @@
 
 // swiftlint:disable identifier_name line_length type_body_length
 internal struct XCTColors {
-  internal let rgbaValue: UInt32
+  let rgbaValue: UInt32
   var color: XCTColor { return XCTColor(named: self) }
 
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>

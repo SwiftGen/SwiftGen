@@ -27,10 +27,10 @@ enum FileList {
 // MARK: - Implementation Details
 
 internal struct Resource {
-  internal let name: String
-  internal let ext: String?
-  internal let relativePath: String
-  internal let mimeType: String
+  let name: String
+  let ext: String?
+  let relativePath: String
+  let mimeType: String
 
   var url: URL {
     return url(locale: nil)

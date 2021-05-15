@@ -427,7 +427,7 @@ The generated code will look like this:
 
 ```swift
 internal struct ColorName {
-  internal let rgbaValue: UInt32
+  let rgbaValue: UInt32
   var color: Color { return Color(named: self) }
 
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>

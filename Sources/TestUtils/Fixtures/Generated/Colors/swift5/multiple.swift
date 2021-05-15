@@ -15,7 +15,7 @@
 
 // swiftlint:disable identifier_name line_length type_body_length
 internal struct ColorName {
-  internal let rgbaValue: UInt32
+  let rgbaValue: UInt32
   var color: Color { return Color(named: self) }
 
   enum Colors {

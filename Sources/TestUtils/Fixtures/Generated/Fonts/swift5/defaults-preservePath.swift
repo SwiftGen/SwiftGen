@@ -64,9 +64,9 @@ enum FontFamily {
 // MARK: - Implementation Details
 
 internal struct FontConvertible {
-  internal let name: String
-  internal let family: String
-  internal let path: String
+  let name: String
+  let family: String
+  let path: String
 
   #if os(macOS)
   internal typealias Font = NSFont

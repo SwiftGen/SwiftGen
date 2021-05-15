@@ -24,7 +24,7 @@ public enum Files {
 
   public final class Parser: SwiftGenKit.Parser {
     var files: [String: [File]] = [:]
-    internal let options: ParserOptionValues
+    let options: ParserOptionValues
     public var warningHandler: Parser.MessageHandler?
 
     public required init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {

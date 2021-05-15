@@ -103,8 +103,8 @@ extension StoryboardType {
 }
 
 internal struct SceneType<T: UIViewController> {
-  internal let storyboard: StoryboardType.Type
-  internal let identifier: String
+  let storyboard: StoryboardType.Type
+  let identifier: String
 
   internal func instantiate() -> T {
     let identifier = self.identifier
@@ -121,7 +121,7 @@ internal struct SceneType<T: UIViewController> {
 }
 
 internal struct InitialSceneType<T: UIViewController> {
-  internal let storyboard: StoryboardType.Type
+  let storyboard: StoryboardType.Type
 
   internal func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitialViewController() as? T else {
