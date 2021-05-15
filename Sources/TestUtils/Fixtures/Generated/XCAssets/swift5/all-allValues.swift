@@ -197,7 +197,7 @@ extension ARReferenceObject {
 }
 #endif
 
-internal final class ColorAsset {
+final class ColorAsset {
   fileprivate(set) var name: String
 
   #if os(macOS)
