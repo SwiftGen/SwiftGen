@@ -71,7 +71,7 @@ enum XCTAssets {
 
 // MARK: - Implementation Details
 
-internal struct XCTARResourceGroup {
+struct XCTARResourceGroup {
   fileprivate(set) var name: String
 
   #if os(iOS)
@@ -152,7 +152,7 @@ extension XCTColorAsset.Color {
   }
 }
 
-internal struct XCTDataAsset {
+struct XCTDataAsset {
   fileprivate(set) var name: String
 
   @available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
@@ -176,7 +176,7 @@ extension NSDataAsset {
   }
 }
 
-internal struct XCTImageAsset {
+struct XCTImageAsset {
   fileprivate(set) var name: String
 
   #if os(macOS)
@@ -230,7 +230,7 @@ extension XCTImageAsset.Image {
   }
 }
 
-internal struct XCTSymbolAsset {
+struct XCTSymbolAsset {
   fileprivate(set) var name: String
 
   #if os(iOS) || os(tvOS) || os(watchOS)

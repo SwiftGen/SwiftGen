@@ -63,7 +63,7 @@ enum FontFamily {
 
 // MARK: - Implementation Details
 
-internal struct FontConvertible {
+struct FontConvertible {
   let name: String
   let family: String
   let path: String

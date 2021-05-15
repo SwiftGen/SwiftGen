@@ -28,7 +28,7 @@ You can customize some elements of this template by overriding the following par
 **Extract:**
 
 ```swift
-internal struct ColorName {
+struct ColorName {
   let rgbaValue: UInt32
   var color: Color { return Color(named: self) }
 

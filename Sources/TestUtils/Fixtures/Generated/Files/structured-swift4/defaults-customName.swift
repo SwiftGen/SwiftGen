@@ -38,7 +38,7 @@ enum FileList {
 
 // MARK: - Implementation Details
 
-internal struct Resource {
+struct Resource {
   let name: String
   let ext: String?
   let relativePath: String

@@ -426,7 +426,7 @@ Translucent      : ffffffcc
 The generated code will look like this:
 
 ```swift
-internal struct ColorName {
+struct ColorName {
   let rgbaValue: UInt32
   var color: Color { return Color(named: self) }
 

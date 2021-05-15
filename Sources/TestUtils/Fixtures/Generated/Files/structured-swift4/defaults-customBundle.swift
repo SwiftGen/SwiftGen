@@ -38,7 +38,7 @@ enum Files {
 
 // MARK: - Implementation Details
 
-internal struct File {
+struct File {
   let name: String
   let ext: String?
   let relativePath: String
