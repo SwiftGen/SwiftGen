@@ -52,6 +52,9 @@ _None_
 * Updated Pods and Gems dependencies.  
   [David Jennes](https://github.com/djbe)
   [#827](https://github.com/SwiftGen/SwiftGen/pull/827)
+* Updated swift access control level by removing internal, default, access control lavel usage
+  [Cruz](https://github.com/cruisediary)
+  [#836](https://github.com/SwiftGen/SwiftGen/pull/836)
 
 ## 6.4.0
 
