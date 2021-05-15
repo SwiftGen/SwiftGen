@@ -69,7 +69,7 @@ internal protocol StoryboardType {
   static var storyboardName: String { get }
 }
 
-internal extension StoryboardType {
+extension StoryboardType {
   static var storyboard: NSStoryboard {
     let name = NSStoryboard.Name(self.storyboardName)
     return myStoryboardFinder(name:)(name)

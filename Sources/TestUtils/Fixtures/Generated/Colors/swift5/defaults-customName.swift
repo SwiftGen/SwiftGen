@@ -38,7 +38,7 @@ internal struct XCTColors {
 
 // MARK: - Implementation Details
 
-internal extension XCTColor {
+extension XCTColor {
   convenience init(rgbaValue: UInt32) {
     let components = RGBAComponents(rgbaValue: rgbaValue).normalized
     self.init(red: components[0], green: components[1], blue: components[2], alpha: components[3])
@@ -68,7 +68,7 @@ private struct RGBAComponents {
   }
 }
 
-internal extension XCTColor {
+extension XCTColor {
   convenience init(named color: XCTColors) {
     self.init(rgbaValue: color.rgbaValue)
   }

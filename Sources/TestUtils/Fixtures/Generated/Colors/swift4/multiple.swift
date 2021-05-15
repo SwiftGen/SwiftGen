@@ -63,7 +63,7 @@ internal struct ColorName {
 
 // MARK: - Implementation Details
 
-internal extension Color {
+extension Color {
   convenience init(rgbaValue: UInt32) {
     let components = RGBAComponents(rgbaValue: rgbaValue).normalized
     self.init(red: components[0], green: components[1], blue: components[2], alpha: components[3])
@@ -93,7 +93,7 @@ private struct RGBAComponents {
   }
 }
 
-internal extension Color {
+extension Color {
   convenience init(named color: ColorName) {
     self.init(rgbaValue: color.rgbaValue)
   }

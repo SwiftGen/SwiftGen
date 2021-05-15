@@ -89,7 +89,7 @@ internal struct ARResourceGroupAsset {
 
 #if os(iOS)
 @available(iOS 11.3, *)
-internal extension ARReferenceImage {
+extension ARReferenceImage {
   static func referenceImages(in asset: ARResourceGroupAsset) -> Set<ARReferenceImage> {
     let bundle = BundleToken.bundle
     return referenceImages(inGroupNamed: asset.name, bundle: bundle) ?? Set()
@@ -97,7 +97,7 @@ internal extension ARReferenceImage {
 }
 
 @available(iOS 12.0, *)
-internal extension ARReferenceObject {
+extension ARReferenceObject {
   static func referenceObjects(in asset: ARResourceGroupAsset) -> Set<ARReferenceObject> {
     let bundle = BundleToken.bundle
     return referenceObjects(inGroupNamed: asset.name, bundle: bundle) ?? Set()
@@ -138,7 +138,7 @@ internal final class ColorAsset {
   }
 }
 
-internal extension ColorAsset.Color {
+extension ColorAsset.Color {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
   convenience init?(asset: ColorAsset) {
     let bundle = BundleToken.bundle
@@ -165,7 +165,7 @@ internal struct DataAsset {
 }
 
 @available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
-internal extension NSDataAsset {
+extension NSDataAsset {
   convenience init?(asset: DataAsset) {
     let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS) || os(watchOS)
@@ -214,7 +214,7 @@ internal struct ImageAsset {
   #endif
 }
 
-internal extension ImageAsset.Image {
+extension ImageAsset.Image {
   @available(iOS 8.0, tvOS 9.0, watchOS 2.0, *)
   @available(macOS, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")

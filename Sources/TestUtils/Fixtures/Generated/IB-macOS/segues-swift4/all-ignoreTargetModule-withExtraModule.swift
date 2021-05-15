@@ -31,14 +31,14 @@ enum StoryboardSegue {
 
 internal protocol SegueType: RawRepresentable {}
 
-internal extension NSSeguePerforming {
+extension NSSeguePerforming {
   func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
     let identifier = NSStoryboardSegue.Identifier(segue.rawValue)
     performSegue?(withIdentifier: identifier, sender: sender)
   }
 }
 
-internal extension SegueType where RawValue == String {
+extension SegueType where RawValue == String {
   init?(_ segue: NSStoryboardSegue) {
     #if swift(>=4.2)
     guard let identifier = segue.identifier else { return nil }

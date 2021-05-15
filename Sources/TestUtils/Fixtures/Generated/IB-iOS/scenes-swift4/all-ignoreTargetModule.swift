@@ -95,7 +95,7 @@ internal protocol StoryboardType {
   static var storyboardName: String { get }
 }
 
-internal extension StoryboardType {
+extension StoryboardType {
   static var storyboard: UIStoryboard {
     let name = self.storyboardName
     return UIStoryboard(name: name, bundle: BundleToken.bundle)

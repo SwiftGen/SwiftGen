@@ -90,7 +90,7 @@ internal struct FontConvertible {
   }
 }
 
-internal extension FontConvertible.Font {
+extension FontConvertible.Font {
   convenience init?(font: FontConvertible, size: CGFloat) {
     #if os(iOS) || os(tvOS) || os(watchOS)
     if !UIFont.fontNames(forFamilyName: font.family).contains(font.name) {

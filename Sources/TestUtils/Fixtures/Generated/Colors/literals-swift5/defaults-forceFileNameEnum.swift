@@ -15,7 +15,7 @@
 // MARK: - Colors
 
 // swiftlint:disable identifier_name line_length type_body_length
-internal extension ColorName {
+extension ColorName {
   enum Colors {
     /// 0x339666ff (r: 51, g: 150, b: 102, a: 255)
     internal static let articleBody = #colorLiteral(red: 0.2, green: 0.5882353, blue: 0.4, alpha: 1.0)

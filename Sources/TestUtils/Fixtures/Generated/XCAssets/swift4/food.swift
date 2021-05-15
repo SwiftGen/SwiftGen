@@ -75,7 +75,7 @@ internal struct ImageAsset {
   #endif
 }
 
-internal extension ImageAsset.Image {
+extension ImageAsset.Image {
   @available(iOS 8.0, tvOS 9.0, watchOS 2.0, *)
   @available(macOS, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")

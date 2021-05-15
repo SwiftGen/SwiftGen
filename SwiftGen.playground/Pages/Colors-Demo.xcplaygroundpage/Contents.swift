@@ -29,7 +29,7 @@
 // MARK: - Colors
 
 // swiftlint:disable identifier_name line_length type_body_length
-internal extension ColorName {
+extension ColorName {
   /// 0x339666ff (r: 51, g: 150, b: 102, a: 255)
   static let articleBody = #colorLiteral(red: 0.2, green: 0.588235, blue: 0.4, alpha: 1.0)
   /// 0xff66ccff (r: 255, g: 102, b: 204, a: 255)
