@@ -3,10 +3,10 @@
 
 #if os(macOS)
   import AppKit.NSColor
-  internal typealias Color = NSColor
+  typealias Color = NSColor
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIColor
-  internal typealias Color = UIColor
+  typealias Color = UIColor
 #endif
 
 // swiftlint:disable superfluous_disable_command file_length implicit_return

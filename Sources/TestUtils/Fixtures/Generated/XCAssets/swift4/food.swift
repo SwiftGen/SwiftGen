@@ -11,7 +11,7 @@
 
 // Deprecated typealiases
 @available(*, deprecated, renamed: "ImageAsset.Image", message: "This typealias will be removed in SwiftGen 7.0")
-internal typealias AssetImageTypeAlias = ImageAsset.Image
+typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable superfluous_disable_command file_length implicit_return
 
@@ -41,9 +41,9 @@ internal struct ImageAsset {
   fileprivate(set) var name: String
 
   #if os(macOS)
-  internal typealias Image = NSImage
+  typealias Image = NSImage
   #elseif os(iOS) || os(tvOS) || os(watchOS)
-  internal typealias Image = UIImage
+  typealias Image = UIImage
   #endif
 
   @available(iOS 8.0, tvOS 9.0, watchOS 2.0, macOS 10.7, *)

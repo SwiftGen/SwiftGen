@@ -12,9 +12,9 @@
 
 // Deprecated typealiases
 @available(*, deprecated, renamed: "ColorAsset.Color", message: "This typealias will be removed in SwiftGen 7.0")
-internal typealias AssetColorTypeAlias = ColorAsset.Color
+typealias AssetColorTypeAlias = ColorAsset.Color
 @available(*, deprecated, renamed: "ImageAsset.Image", message: "This typealias will be removed in SwiftGen 7.0")
-internal typealias AssetImageTypeAlias = ImageAsset.Image
+typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable superfluous_disable_command file_length implicit_return
 
@@ -111,9 +111,9 @@ internal final class ColorAsset {
   fileprivate(set) var name: String
 
   #if os(macOS)
-  internal typealias Color = NSColor
+  typealias Color = NSColor
   #elseif os(iOS) || os(tvOS) || os(watchOS)
-  internal typealias Color = UIColor
+  typealias Color = UIColor
   #endif
 
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
@@ -182,9 +182,9 @@ internal struct ImageAsset {
   fileprivate(set) var name: String
 
   #if os(macOS)
-  internal typealias Image = NSImage
+  typealias Image = NSImage
   #elseif os(iOS) || os(tvOS) || os(watchOS)
-  internal typealias Image = UIImage
+  typealias Image = UIImage
   #endif
 
   @available(iOS 8.0, tvOS 9.0, watchOS 2.0, macOS 10.7, *)
@@ -237,8 +237,8 @@ internal struct SymbolAsset {
 
   #if os(iOS) || os(tvOS) || os(watchOS)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-  internal typealias Configuration = UIImage.SymbolConfiguration
-  internal typealias Image = UIImage
+  typealias Configuration = UIImage.SymbolConfiguration
+  typealias Image = UIImage
 
   @available(iOS 12.0, tvOS 12.0, watchOS 5.0, *)
   var image: Image {

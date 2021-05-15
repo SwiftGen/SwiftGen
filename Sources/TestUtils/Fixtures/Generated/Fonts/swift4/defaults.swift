@@ -9,7 +9,7 @@
 
 // Deprecated typealiases
 @available(*, deprecated, renamed: "FontConvertible.Font", message: "This typealias will be removed in SwiftGen 7.0")
-internal typealias Font = FontConvertible.Font
+typealias Font = FontConvertible.Font
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
@@ -70,9 +70,9 @@ internal struct FontConvertible {
   let path: String
 
   #if os(macOS)
-  internal typealias Font = NSFont
+  typealias Font = NSFont
   #elseif os(iOS) || os(tvOS) || os(watchOS)
-  internal typealias Font = UIFont
+  typealias Font = UIFont
   #endif
 
   internal func font(size: CGFloat) -> Font! {
