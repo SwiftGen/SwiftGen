@@ -24,7 +24,7 @@ You can customize some elements of this template by overriding the following par
 | `ignoreTargetModule` | N/A | Setting this parameter will disable the behaviour of prefixing classes with their module name for (only) the target module. |
 | `lookupFunction` | N/A¹ | Allows you to set your own custom lookup function. The function needs to have as signature: `(name: NSStoryboard.Name) -> NSStoryboard` on macOS, and `(name: String) -> UIStoryboard` on other platforms. The parameters of your function can have any name (or even no external name), but if it has named parameters, you must provide the complete function signature, including those named parameters – e.g. `myStoryboardFinder(name:)`. Note: if you define this parameter, the `bundle` parameter will be ignored. |
 | `module` | N/A | By default, the template will import the needed modules for custom classes, but won’t import the target’s module to avoid an import warning — using the `PRODUCT_MODULE_NAME` environment variable to detect it. Should you need to ignore an additional module, you can provide it here. |
-| `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
+| `publicAccess` | N/A | If set, the generated constants will be marked as `public`.  |
 
 1. _If you don't provide a `lookupFunction`, we will use `NS/UIStoryboard(name:bundle:)` with the `bundle` parameter instead._
 

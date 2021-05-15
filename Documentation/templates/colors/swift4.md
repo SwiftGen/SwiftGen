@@ -21,7 +21,7 @@ You can customize some elements of this template by overriding the following par
 | `colorAliasName` | `Color` | Allows you to change the name of the generated `typealias` for the platform specific color type. |
 | `enumName` | `ColorName` | Allows you to change the name of the generated `enum` containing all colors. |
 | `forceFileNameEnum` | N/A | Setting this parameter will generate an `enum <FileName>` _even if_ only one FileName was provided as input. |
-| `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
+| `publicAccess` | N/A | If set, the generated constants will be marked as `public`.  |
 
 ## Generated Code
 

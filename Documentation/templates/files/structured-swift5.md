@@ -18,7 +18,7 @@
 | `bundle` | `BundleToken.bundle` | Allows you to set from which bundle files are loaded from. By default, it'll point to the same bundle as where the generated code is. |
 | `enumName` | `Files` | Allows you to change the name of the generated `enum` containing the file tree. |
 | `preservePath` | N/A | Setting this parameter will disable the basename filter applied to all font paths. Use this if you added your font folder as a "folder reference" in your Xcode project, making that folder hierarchy preserved once copied in the build app bundle. The path will be relative to the folder you provided to SwiftGen. |
-| `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
+| `publicAccess` | N/A | If set, the generated constants will be marked as `public`.  |
 | `resourceTypeName` | `File` | Allows you to change the name of the struct type representing a file. |
 | `useExtension` | `true` | Whether or not to use the extension in the name of the constant. i.e. `let testTxt` vs `let test`. Behavior is undefined with file name conflicts. |
 
