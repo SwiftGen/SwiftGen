@@ -12,33 +12,33 @@ import Foundation
 enum YAMLFiles {
   enum Documents {
     enum Document1 {
-      internal static let items: [String] = ["Mark McGwire", "Sammy Sosa", "Ken Griffey"]
+      static let items: [String] = ["Mark McGwire", "Sammy Sosa", "Ken Griffey"]
     }
     enum Document2 {
-      internal static let items: [String] = ["Chicago Cubs", "St Louis Cardinals"]
+      static let items: [String] = ["Chicago Cubs", "St Louis Cardinals"]
     }
   }
   enum GroceryList {
-    internal static let items: [String] = ["Eggs", "Bread", "Milk"]
+    static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
   enum Mapping {
-    internal static let car: Any? = nil
-    internal static let doors: Int = 5
-    internal static let flags: [Bool] = [true, false, true]
-    internal static let foo: [String: Any] = ["bar": "banana", "baz": "orange"]
-    internal static let hello: String = "world"
-    internal static let mixed: [Any] = ["one", 2, true]
-    internal static let mixed2: [Any] = [0.1, 2, true]
-    internal static let names: [String] = ["John", "Peter", "Nick"]
-    internal static let newLayout: Bool = true
-    internal static let one: Int = 1
-    internal static let primes: [Int] = [2, 3, 5, 7]
-    internal static let quickSearch: Bool = false
-    internal static let weight: Double = 33.3
-    internal static let zero: Int = 0
+    static let car: Any? = nil
+    static let doors: Int = 5
+    static let flags: [Bool] = [true, false, true]
+    static let foo: [String: Any] = ["bar": "banana", "baz": "orange"]
+    static let hello: String = "world"
+    static let mixed: [Any] = ["one", 2, true]
+    static let mixed2: [Any] = [0.1, 2, true]
+    static let names: [String] = ["John", "Peter", "Nick"]
+    static let newLayout: Bool = true
+    static let one: Int = 1
+    static let primes: [Int] = [2, 3, 5, 7]
+    static let quickSearch: Bool = false
+    static let weight: Double = 33.3
+    static let zero: Int = 0
   }
   enum Version {
-    internal static let value: String = "1.2.3.beta.4"
+    static let value: String = "1.2.3.beta.4"
   }
 }
 // swiftlint:enable identifier_name line_length number_separator type_body_length

@@ -34,15 +34,15 @@ You can customize some elements of this template by overriding the following par
 ```swift
 enum L10n {
   /// Some alert body there
-  internal static let alertMessage = L10n.tr("Localizable", "alert__message")
+  static let alertMessage = L10n.tr("Localizable", "alert__message")
   /// Title of the alert
-  internal static let alertTitle = L10n.tr("Localizable", "alert__title")
+  static let alertTitle = L10n.tr("Localizable", "alert__title")
   /// You have %d apples
-  internal static func applesCount(_ p1: Int) -> String {
+  static func applesCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "apples.count", p1)
   }
   /// Those %d bananas belong to %@.
-  internal static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
+  static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
     return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
   }
 }

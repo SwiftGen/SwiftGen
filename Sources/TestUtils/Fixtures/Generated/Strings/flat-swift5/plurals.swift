@@ -10,15 +10,15 @@ import Foundation
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 enum L10n {
   /// Plural format key: "%#@apples@"
-  internal static func applesCount(_ p1: Int) -> String {
+  static func applesCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "apples.count", p1)
   }
   /// Plural format key: "%#@Matches@"
-  internal static func competitionEventNumberOfMatches(_ p1: Int) -> String {
+  static func competitionEventNumberOfMatches(_ p1: Int) -> String {
     return L10n.tr("Localizable", "competition.event.number-of-matches", p1)
   }
   /// Plural format key: "%#@Subscriptions@"
-  internal static func feedSubscriptionCount(_ p1: Int) -> String {
+  static func feedSubscriptionCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "feed.subscription.count", p1)
   }
 }

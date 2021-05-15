@@ -37,16 +37,16 @@ Note: the generated code may look differently depending on the platform the stor
 ```swift
 enum StoryboardScene {
   enum Dependency: StoryboardType {
-    internal static let storyboardName = "Dependency"
+    static let storyboardName = "Dependency"
 
-    internal static let dependent = SceneType<ExtraModule.ValidatePasswordViewController>(storyboard: Dependency.self, identifier: "Dependent")
+    static let dependent = SceneType<ExtraModule.ValidatePasswordViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
   enum Message: StoryboardType {
-    internal static let storyboardName = "Message"
+    static let storyboardName = "Message"
 
-    internal static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: Message.self)
+    static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: Message.self)
 
-    internal static let messagesList = SceneType<UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
+    static let messagesList = SceneType<UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
   }
 }
 ```

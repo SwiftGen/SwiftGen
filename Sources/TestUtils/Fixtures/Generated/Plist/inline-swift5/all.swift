@@ -11,49 +11,49 @@ import Foundation
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 enum PlistFiles {
   enum Info {
-    internal static let cfBundleDevelopmentRegion: String = "en"
-    internal static let cfBundleDisplayName: String = "${PRODUCT_NAME}"
-    internal static let cfBundleExecutable: String = "${EXECUTABLE_NAME}"
-    internal static let cfBundleIdentifier: String = "$(PRODUCT_BUNDLE_IDENTIFIER)"
-    internal static let cfBundleInfoDictionaryVersion: String = "6.0"
-    internal static let cfBundleName: String = "${PRODUCT_NAME}"
-    internal static let cfBundlePackageType: String = "APPL"
-    internal static let cfBundleShortVersionString: String = "1.2.0"
-    internal static let cfBundleSignature: String = "????"
-    internal static let cfBundleVersion: String = "0"
-    internal static let fabric: [String: Any] = ["APIKey": "512345678900aaafffff", "Kits": [["KitInfo": [:], "KitName": "Crashlytics"]]]
-    internal static let itsAppUsesNonExemptEncryption: Bool = false
-    internal static let lsRequiresIPhoneOS: Bool = true
-    internal static let nsAppTransportSecurity: [String: Any] = [:]
-    internal static let nsCameraUsageDescription: String = "24 Vision needs access to your camera for uploading photos for caes, or for your profile picture."
-    internal static let nsPhotoLibraryUsageDescription: String = "24 Vision needs access to your photo library for uploading photos for caes, or for your profile picture."
-    internal static let uiBackgroundModes: [String] = ["remote-notification"]
-    internal static let uiLaunchStoryboardName: String = "LaunchScreen"
-    internal static let uiMainStoryboardFile: String = "Start"
-    internal static let uiRequiredDeviceCapabilities: [String] = ["armv7"]
-    internal static let uiRequiresFullScreen: Bool = true
-    internal static let uiStatusBarStyle: String = "UIStatusBarStyleDefault"
-    internal static let uiSupportedInterfaceOrientations: [String] = ["UIInterfaceOrientationPortrait", "UIInterfaceOrientationPortraitUpsideDown", "UIInterfaceOrientationLandscapeRight", "UIInterfaceOrientationLandscapeLeft"]
-    internal static let uiSupportedInterfaceOrientationsIpad: [String] = ["UIInterfaceOrientationLandscapeLeft", "UIInterfaceOrientationLandscapeRight", "UIInterfaceOrientationPortraitUpsideDown", "UIInterfaceOrientationPortrait"]
-    internal static let userAmbiguousInteger: Int = 1
-    internal static let userBoolean: Bool = false
-    internal static let userDate: Date = Date(timeIntervalSinceReferenceDate: 547184366)
-    internal static let userFloat: Double = 3.14
-    internal static let userInteger: Int = 5
+    static let cfBundleDevelopmentRegion: String = "en"
+    static let cfBundleDisplayName: String = "${PRODUCT_NAME}"
+    static let cfBundleExecutable: String = "${EXECUTABLE_NAME}"
+    static let cfBundleIdentifier: String = "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    static let cfBundleInfoDictionaryVersion: String = "6.0"
+    static let cfBundleName: String = "${PRODUCT_NAME}"
+    static let cfBundlePackageType: String = "APPL"
+    static let cfBundleShortVersionString: String = "1.2.0"
+    static let cfBundleSignature: String = "????"
+    static let cfBundleVersion: String = "0"
+    static let fabric: [String: Any] = ["APIKey": "512345678900aaafffff", "Kits": [["KitInfo": [:], "KitName": "Crashlytics"]]]
+    static let itsAppUsesNonExemptEncryption: Bool = false
+    static let lsRequiresIPhoneOS: Bool = true
+    static let nsAppTransportSecurity: [String: Any] = [:]
+    static let nsCameraUsageDescription: String = "24 Vision needs access to your camera for uploading photos for caes, or for your profile picture."
+    static let nsPhotoLibraryUsageDescription: String = "24 Vision needs access to your photo library for uploading photos for caes, or for your profile picture."
+    static let uiBackgroundModes: [String] = ["remote-notification"]
+    static let uiLaunchStoryboardName: String = "LaunchScreen"
+    static let uiMainStoryboardFile: String = "Start"
+    static let uiRequiredDeviceCapabilities: [String] = ["armv7"]
+    static let uiRequiresFullScreen: Bool = true
+    static let uiStatusBarStyle: String = "UIStatusBarStyleDefault"
+    static let uiSupportedInterfaceOrientations: [String] = ["UIInterfaceOrientationPortrait", "UIInterfaceOrientationPortraitUpsideDown", "UIInterfaceOrientationLandscapeRight", "UIInterfaceOrientationLandscapeLeft"]
+    static let uiSupportedInterfaceOrientationsIpad: [String] = ["UIInterfaceOrientationLandscapeLeft", "UIInterfaceOrientationLandscapeRight", "UIInterfaceOrientationPortraitUpsideDown", "UIInterfaceOrientationPortrait"]
+    static let userAmbiguousInteger: Int = 1
+    static let userBoolean: Bool = false
+    static let userDate: Date = Date(timeIntervalSinceReferenceDate: 547184366)
+    static let userFloat: Double = 3.14
+    static let userInteger: Int = 5
   }
   enum Configuration {
-    internal static let environment: String = "development"
-    internal static let flags: [Bool] = [true, false, true]
-    internal static let mixed: [Any] = ["One", 1, true]
-    internal static let mixed2: [Any] = [0.1, 1, true]
-    internal static let names: [String] = ["John", "Peter", "Nick"]
-    internal static let one: Int = 1
-    internal static let options: [String: Any] = ["Animation Style": "Party Mode"]
-    internal static let primes: [Int] = [2, 3, 5, 7]
-    internal static let zero: Int = 0
+    static let environment: String = "development"
+    static let flags: [Bool] = [true, false, true]
+    static let mixed: [Any] = ["One", 1, true]
+    static let mixed2: [Any] = [0.1, 1, true]
+    static let names: [String] = ["John", "Peter", "Nick"]
+    static let one: Int = 1
+    static let options: [String: Any] = ["Animation Style": "Party Mode"]
+    static let primes: [Int] = [2, 3, 5, 7]
+    static let zero: Int = 0
   }
   enum ShoppingList {
-    internal static let items: [String] = ["Eggs", "Bread", "Milk"]
+    static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
 }
 // swiftlint:enable identifier_name line_length number_separator type_body_length

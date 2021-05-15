@@ -9,35 +9,35 @@ import Foundation
 
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 enum L10n {
-  internal static let alertMessage = L10n.tr("Localizable", "alert__message")
-  internal static let alertTitle = L10n.tr("Localizable", "alert__title")
-  internal static func objectOwnership(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
+  static let alertMessage = L10n.tr("Localizable", "alert__message")
+  static let alertTitle = L10n.tr("Localizable", "alert__title")
+  static func objectOwnership(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
     return L10n.tr("Localizable", "ObjectOwnership", p1, String(describing: p2), String(describing: p3))
   }
-  internal static let percent = L10n.tr("Localizable", "percent")
-  internal static func `private`(_ p1: Any, _ p2: Int) -> String {
+  static let percent = L10n.tr("Localizable", "percent")
+  static func `private`(_ p1: Any, _ p2: Int) -> String {
     return L10n.tr("Localizable", "private", String(describing: p1), p2)
   }
-  internal static func types(_ p1: Any, _ p2: CChar, _ p3: Int, _ p4: Float, _ p5: UnsafePointer<CChar>, _ p6: UnsafeRawPointer) -> String {
+  static func types(_ p1: Any, _ p2: CChar, _ p3: Int, _ p4: Float, _ p5: UnsafePointer<CChar>, _ p6: UnsafeRawPointer) -> String {
     return L10n.tr("Localizable", "types", String(describing: p1), p2, p3, p4, p5, Int(bitPattern: p6))
   }
-  internal static func applesCount(_ p1: Int) -> String {
+  static func applesCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "apples.count", p1)
   }
-  internal static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
+  static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
     return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
   }
-  internal static func manyPlaceholdersBase(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Float, _ p9: Any, _ p10: Int, _ p11: Float) -> String {
+  static func manyPlaceholdersBase(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Float, _ p9: Any, _ p10: Int, _ p11: Float) -> String {
     return L10n.tr("Localizable", "many.placeholders.base", String(describing: p1), p2, p3, p4, p5, p6, String(describing: p7), p8, String(describing: p9), p10, p11)
   }
-  internal static func manyPlaceholdersZero(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Float, _ p9: Any, _ p10: Int, _ p11: Float) -> String {
+  static func manyPlaceholdersZero(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Float, _ p9: Any, _ p10: Int, _ p11: Float) -> String {
     return L10n.tr("Localizable", "many.placeholders.zero", String(describing: p1), p2, p3, p4, p5, p6, String(describing: p7), p8, String(describing: p9), p10, p11)
   }
-  internal static let settingsNavigationBarSelf = L10n.tr("Localizable", "settings.navigation-bar.self")
-  internal static let settingsNavigationBarTitleDeeperThanWeCanHandleNoReallyThisIsDeep = L10n.tr("Localizable", "settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep")
-  internal static let settingsNavigationBarTitleEvenDeeper = L10n.tr("Localizable", "settings.navigation-bar.title.even.deeper")
-  internal static let settingsUserProfileSectionFooterText = L10n.tr("Localizable", "settings.user__profile_section.footer_text")
-  internal static let settingsUserProfileSectionHEADERTITLE = L10n.tr("Localizable", "settings.user__profile_section.HEADER_TITLE")
+  static let settingsNavigationBarSelf = L10n.tr("Localizable", "settings.navigation-bar.self")
+  static let settingsNavigationBarTitleDeeperThanWeCanHandleNoReallyThisIsDeep = L10n.tr("Localizable", "settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep")
+  static let settingsNavigationBarTitleEvenDeeper = L10n.tr("Localizable", "settings.navigation-bar.title.even.deeper")
+  static let settingsUserProfileSectionFooterText = L10n.tr("Localizable", "settings.user__profile_section.footer_text")
+  static let settingsUserProfileSectionHEADERTITLE = L10n.tr("Localizable", "settings.user__profile_section.HEADER_TITLE")
 }
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length
 

@@ -36,11 +36,11 @@ You can customize some elements of this template by overriding the following par
 enum PlistFiles {
   enum Configuration {
     private static let _document = PlistDocument(path: "configuration.plist")
-    internal static let environment: String = _document["Environment"]
-    internal static let options: [String: Any] = _document["Options"]
+    static let environment: String = _document["Environment"]
+    static let options: [String: Any] = _document["Options"]
   }
   enum ShoppingList {
-    internal static let items: [String] = arrayFromPlist(at: "shopping-list.plist")
+    static let items: [String] = arrayFromPlist(at: "shopping-list.plist")
   }
 }
 ```

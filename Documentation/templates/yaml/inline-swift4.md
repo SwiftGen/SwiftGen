@@ -32,20 +32,20 @@ You can customize some elements of this template by overriding the following par
 enum YAMLFiles {
   enum Documents {
     enum Document1 {
-      internal static let items: [String] = ["Mark McGwire", "Sammy Sosa", "Ken Griffey"]
+      static let items: [String] = ["Mark McGwire", "Sammy Sosa", "Ken Griffey"]
     }
     enum Document2 {
-      internal static let items: [String] = ["Chicago Cubs", "St Louis Cardinals"]
+      static let items: [String] = ["Chicago Cubs", "St Louis Cardinals"]
     }
   }
   enum GroceryList {
-    internal static let items: [String] = ["Eggs", "Bread", "Milk"]
+    static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
   enum Mapping {
-    internal static let car: Any? = nil
-    internal static let foo: [String: Any] = ["bar": "banana", "baz": "orange"]
-    internal static let hello: String = "world"
-    internal static let weight: Double = 33.3
+    static let car: Any? = nil
+    static let foo: [String: Any] = ["bar": "banana", "baz": "orange"]
+    static let hello: String = "world"
+    static let weight: Double = 33.3
   }
 }
 ```

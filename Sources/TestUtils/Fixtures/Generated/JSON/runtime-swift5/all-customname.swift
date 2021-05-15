@@ -11,23 +11,23 @@ import Foundation
 // swiftlint:disable identifier_name line_length type_body_length
 enum CustomJSON {
   enum Array {
-    internal static let items: [String] = objectFromJSON(at: "array.json")
+    static let items: [String] = objectFromJSON(at: "array.json")
   }
   enum Configuration {
     private static let _document = JSONDocument(path: "configuration.json")
-    internal static let apiVersion: String = _document["api-version"]
-    internal static let country: Any? = _document["country"]
-    internal static let doors: Int = _document["doors"]
-    internal static let environment: String = _document["environment"]
-    internal static let flags: [Bool] = _document["flags"]
-    internal static let mixed: [Any] = _document["mixed"]
-    internal static let mixed2: [Any] = _document["mixed2"]
-    internal static let newLayout: Bool = _document["new-layout"]
-    internal static let one: Int = _document["one"]
-    internal static let options: [String: Any] = _document["options"]
-    internal static let primes: [Int] = _document["primes"]
-    internal static let quickSearch: Bool = _document["quick-search"]
-    internal static let zero: Int = _document["zero"]
+    static let apiVersion: String = _document["api-version"]
+    static let country: Any? = _document["country"]
+    static let doors: Int = _document["doors"]
+    static let environment: String = _document["environment"]
+    static let flags: [Bool] = _document["flags"]
+    static let mixed: [Any] = _document["mixed"]
+    static let mixed2: [Any] = _document["mixed2"]
+    static let newLayout: Bool = _document["new-layout"]
+    static let one: Int = _document["one"]
+    static let options: [String: Any] = _document["options"]
+    static let primes: [Int] = _document["primes"]
+    static let quickSearch: Bool = _document["quick-search"]
+    static let zero: Int = _document["zero"]
   }
 }
 // swiftlint:enable identifier_name line_length type_body_length

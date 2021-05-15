@@ -30,13 +30,13 @@ You can customize some elements of this template by overriding the following par
 ```swift
 enum JSONFiles {
   enum Array {
-    internal static let items: [String] = ["Anna", "Bob"]
+    static let items: [String] = ["Anna", "Bob"]
   }
   enum Configuration {
-    internal static let apiVersion: String = "2"
-    internal static let country: Any? = nil
-    internal static let environment: String = "staging"
-    internal static let options: [String: Any] = ["screen-order": ["1", "2", "3"]]
+    static let apiVersion: String = "2"
+    static let country: Any? = nil
+    static let environment: String = "staging"
+    static let options: [String: Any] = ["screen-order": ["1", "2", "3"]]
   }
 }
 ```

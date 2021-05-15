@@ -20,19 +20,19 @@ internal struct XCTColors {
 
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>
   /// Alpha: 100% <br/> (0x339666ff)
-  internal static let articleBody = XCTColors(rgbaValue: 0x339666ff)
+  static let articleBody = XCTColors(rgbaValue: 0x339666ff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
   /// Alpha: 100% <br/> (0xff66ccff)
-  internal static let articleFootnote = XCTColors(rgbaValue: 0xff66ccff)
+  static let articleFootnote = XCTColors(rgbaValue: 0xff66ccff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#33fe66"></span>
   /// Alpha: 100% <br/> (0x33fe66ff)
-  internal static let articleTitle = XCTColors(rgbaValue: 0x33fe66ff)
+  static let articleTitle = XCTColors(rgbaValue: 0x33fe66ff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
   /// Alpha: 80% <br/> (0xffffffcc)
-  internal static let `private` = XCTColors(rgbaValue: 0xffffffcc)
+  static let `private` = XCTColors(rgbaValue: 0xffffffcc)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
   /// Alpha: 100% <br/> (0xff66ccff)
-  internal static let themeCyan = XCTColors(rgbaValue: 0xff66ccff)
+  static let themeCyan = XCTColors(rgbaValue: 0xff66ccff)
 }
 // swiftlint:enable identifier_name line_length type_body_length
 

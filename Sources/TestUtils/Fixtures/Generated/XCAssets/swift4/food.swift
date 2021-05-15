@@ -20,18 +20,18 @@ typealias AssetImageTypeAlias = ImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
   enum Exotic {
-    internal static let banana = ImageAsset(name: "Exotic/Banana")
-    internal static let mango = ImageAsset(name: "Exotic/Mango")
+    static let banana = ImageAsset(name: "Exotic/Banana")
+    static let mango = ImageAsset(name: "Exotic/Mango")
   }
   enum Round {
-    internal static let apricot = ImageAsset(name: "Round/Apricot")
-    internal static let apple = ImageAsset(name: "Round/Apple")
+    static let apricot = ImageAsset(name: "Round/Apricot")
+    static let apple = ImageAsset(name: "Round/Apple")
     enum Double {
-      internal static let cherry = ImageAsset(name: "Round/Double/Cherry")
+      static let cherry = ImageAsset(name: "Round/Double/Cherry")
     }
-    internal static let tomato = ImageAsset(name: "Round/Tomato")
+    static let tomato = ImageAsset(name: "Round/Tomato")
   }
-  internal static let `private` = ImageAsset(name: "private")
+  static let `private` = ImageAsset(name: "private")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

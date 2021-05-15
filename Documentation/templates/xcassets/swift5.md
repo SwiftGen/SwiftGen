@@ -63,8 +63,8 @@ enum Asset {
     static let plus = SymbolAsset(name: "Plus")
   }
   enum Targets {
-    internal static let bottles = ARResourceGroupAsset(name: "Bottles")
-    internal static let paintings = ARResourceGroupAsset(name: "Paintings")
+    static let bottles = ARResourceGroupAsset(name: "Bottles")
+    static let paintings = ARResourceGroupAsset(name: "Paintings")
   }
 }
 ```

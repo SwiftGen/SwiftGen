@@ -23,50 +23,50 @@ typealias AssetImageTypeAlias = ImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
   enum Files {
-    internal static let data = DataAsset(name: "Data")
+    static let data = DataAsset(name: "Data")
     enum Json {
-      internal static let data = DataAsset(name: "Json/Data")
+      static let data = DataAsset(name: "Json/Data")
     }
-    internal static let readme = DataAsset(name: "README")
+    static let readme = DataAsset(name: "README")
   }
   enum Food {
     enum Exotic {
-      internal static let banana = ImageAsset(name: "Exotic/Banana")
-      internal static let mango = ImageAsset(name: "Exotic/Mango")
+      static let banana = ImageAsset(name: "Exotic/Banana")
+      static let mango = ImageAsset(name: "Exotic/Mango")
     }
     enum Round {
-      internal static let apricot = ImageAsset(name: "Round/Apricot")
+      static let apricot = ImageAsset(name: "Round/Apricot")
       enum Red {
-        internal static let apple = ImageAsset(name: "Round/Apple")
+        static let apple = ImageAsset(name: "Round/Apple")
         enum Double {
-          internal static let cherry = ImageAsset(name: "Round/Double/Cherry")
+          static let cherry = ImageAsset(name: "Round/Double/Cherry")
         }
-        internal static let tomato = ImageAsset(name: "Round/Tomato")
+        static let tomato = ImageAsset(name: "Round/Tomato")
       }
     }
-    internal static let `private` = ImageAsset(name: "private")
+    static let `private` = ImageAsset(name: "private")
   }
   enum Other {
   }
   enum Styles {
     enum _24Vision {
-      internal static let background = ColorAsset(name: "24Vision/Background")
-      internal static let primary = ColorAsset(name: "24Vision/Primary")
+      static let background = ColorAsset(name: "24Vision/Background")
+      static let primary = ColorAsset(name: "24Vision/Primary")
     }
-    internal static let orange = ImageAsset(name: "Orange")
+    static let orange = ImageAsset(name: "Orange")
     enum Vengo {
-      internal static let primary = ColorAsset(name: "Vengo/Primary")
-      internal static let tint = ColorAsset(name: "Vengo/Tint")
+      static let primary = ColorAsset(name: "Vengo/Primary")
+      static let tint = ColorAsset(name: "Vengo/Tint")
     }
   }
   enum Symbols {
-    internal static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
-    internal static let plus = SymbolAsset(name: "Plus")
+    static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
+    static let plus = SymbolAsset(name: "Plus")
   }
   enum Targets {
-    internal static let bottles = ARResourceGroupAsset(name: "Bottles")
-    internal static let paintings = ARResourceGroupAsset(name: "Paintings")
-    internal static let posters = ARResourceGroupAsset(name: "Posters")
+    static let bottles = ARResourceGroupAsset(name: "Bottles")
+    static let paintings = ARResourceGroupAsset(name: "Paintings")
+    static let posters = ARResourceGroupAsset(name: "Posters")
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

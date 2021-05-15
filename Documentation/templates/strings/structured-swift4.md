@@ -40,20 +40,20 @@ You can customize some elements of this template by overriding the following par
 ```swift
 enum L10n {
   /// Some alert body there
-  internal static let alertMessage = L10n.tr("alert_message")
+  static let alertMessage = L10n.tr("alert_message")
   /// Title of the alert
-  internal static let alertTitle = L10n.tr("alert_title")
+  static let alertTitle = L10n.tr("alert_title")
 
   enum Apples {
     /// You have %d apples
-    internal static func count(_ p1: Int) -> String {
+    static func count(_ p1: Int) -> String {
       return L10n.tr("apples.count", p1)
     }
   }
 
   enum Bananas {
     /// Those %d bananas belong to %@.
-    internal static func owner(_ p1: Int, _ p2: Any) -> String {
+    static func owner(_ p1: Int, _ p2: Any) -> String {
       return L10n.tr("bananas.owner", p1, String(describing: p2))
     }
   }

@@ -13,7 +13,7 @@ enum L10n {
 
   enum Apples {
     /// Plural format key: "%#@apples@"
-    internal static func count(_ p1: Int) -> String {
+    static func count(_ p1: Int) -> String {
       return L10n.tr("Localizable", "apples.count", p1)
     }
   }
@@ -21,7 +21,7 @@ enum L10n {
   enum Competition {
     enum Event {
       /// Plural format key: "%#@Matches@"
-      internal static func numberOfMatches(_ p1: Int) -> String {
+      static func numberOfMatches(_ p1: Int) -> String {
         return L10n.tr("Localizable", "competition.event.number-of-matches", p1)
       }
     }
@@ -30,7 +30,7 @@ enum L10n {
   enum Feed {
     enum Subscription {
       /// Plural format key: "%#@Subscriptions@"
-      internal static func count(_ p1: Int) -> String {
+      static func count(_ p1: Int) -> String {
         return L10n.tr("Localizable", "feed.subscription.count", p1)
       }
     }

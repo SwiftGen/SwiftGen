@@ -35,14 +35,14 @@ You can customize some elements of this template by overriding the following par
 ```swift
 enum JSONFiles {
   enum Array {
-    internal static let items: [String] = objectFromJSON(at: "array.json")
+    static let items: [String] = objectFromJSON(at: "array.json")
   }
   enum Configuration {
     private static let _document = JSONDocument(path: "configuration.json")
-    internal static let apiVersion: String = _document["api-version"]
-    internal static let country: Any? = _document["country"]
-    internal static let environment: String = _document["environment"]
-    internal static let options: [String: Any] = _document["options"]
+    static let apiVersion: String = _document["api-version"]
+    static let country: Any? = _document["country"]
+    static let environment: String = _document["environment"]
+    static let options: [String: Any] = _document["options"]
   }
 }
 ```

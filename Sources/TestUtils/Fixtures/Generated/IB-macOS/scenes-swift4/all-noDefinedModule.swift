@@ -16,50 +16,50 @@ import SwiftGen
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 enum StoryboardScene {
   enum AdditionalImport: StoryboardType {
-    internal static let storyboardName = "AdditionalImport"
+    static let storyboardName = "AdditionalImport"
 
-    internal static let `private` = SceneType<PrefsWindowController.DBPrefsWindowController>(storyboard: AdditionalImport.self, identifier: "private")
+    static let `private` = SceneType<PrefsWindowController.DBPrefsWindowController>(storyboard: AdditionalImport.self, identifier: "private")
   }
   enum Anonymous: StoryboardType {
-    internal static let storyboardName = "Anonymous"
+    static let storyboardName = "Anonymous"
   }
   enum Dependency: StoryboardType {
-    internal static let storyboardName = "Dependency"
+    static let storyboardName = "Dependency"
 
-    internal static let dependent = SceneType<ExtraModule.LoginViewController>(storyboard: Dependency.self, identifier: "Dependent")
+    static let dependent = SceneType<ExtraModule.LoginViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
   enum KnownTypes: StoryboardType {
-    internal static let storyboardName = "Known Types"
+    static let storyboardName = "Known Types"
 
-    internal static let item1 = SceneType<AppKit.NSWindowController>(storyboard: KnownTypes.self, identifier: "item 1")
+    static let item1 = SceneType<AppKit.NSWindowController>(storyboard: KnownTypes.self, identifier: "item 1")
 
-    internal static let item2 = SceneType<AppKit.NSSplitViewController>(storyboard: KnownTypes.self, identifier: "item 2")
+    static let item2 = SceneType<AppKit.NSSplitViewController>(storyboard: KnownTypes.self, identifier: "item 2")
 
-    internal static let item3 = SceneType<AppKit.NSViewController>(storyboard: KnownTypes.self, identifier: "item 3")
+    static let item3 = SceneType<AppKit.NSViewController>(storyboard: KnownTypes.self, identifier: "item 3")
 
-    internal static let item4 = SceneType<AppKit.NSPageController>(storyboard: KnownTypes.self, identifier: "item 4")
+    static let item4 = SceneType<AppKit.NSPageController>(storyboard: KnownTypes.self, identifier: "item 4")
 
-    internal static let item5 = SceneType<AppKit.NSTabViewController>(storyboard: KnownTypes.self, identifier: "item 5")
+    static let item5 = SceneType<AppKit.NSTabViewController>(storyboard: KnownTypes.self, identifier: "item 5")
   }
   enum Message: StoryboardType {
-    internal static let storyboardName = "Message"
+    static let storyboardName = "Message"
 
-    internal static let messageDetails = SceneType<DetailsViewController>(storyboard: Message.self, identifier: "MessageDetails")
+    static let messageDetails = SceneType<DetailsViewController>(storyboard: Message.self, identifier: "MessageDetails")
 
-    internal static let messageList = SceneType<AppKit.NSViewController>(storyboard: Message.self, identifier: "MessageList")
+    static let messageList = SceneType<AppKit.NSViewController>(storyboard: Message.self, identifier: "MessageList")
 
-    internal static let messageListFooter = SceneType<AppKit.NSViewController>(storyboard: Message.self, identifier: "MessageListFooter")
+    static let messageListFooter = SceneType<AppKit.NSViewController>(storyboard: Message.self, identifier: "MessageListFooter")
 
-    internal static let messagesTab = SceneType<SwiftGen.CustomTabViewController>(storyboard: Message.self, identifier: "MessagesTab")
+    static let messagesTab = SceneType<SwiftGen.CustomTabViewController>(storyboard: Message.self, identifier: "MessagesTab")
 
-    internal static let splitMessages = SceneType<AppKit.NSSplitViewController>(storyboard: Message.self, identifier: "SplitMessages")
+    static let splitMessages = SceneType<AppKit.NSSplitViewController>(storyboard: Message.self, identifier: "SplitMessages")
 
-    internal static let windowCtrl = SceneType<AppKit.NSWindowController>(storyboard: Message.self, identifier: "WindowCtrl")
+    static let windowCtrl = SceneType<AppKit.NSWindowController>(storyboard: Message.self, identifier: "WindowCtrl")
   }
   enum Placeholder: StoryboardType {
-    internal static let storyboardName = "Placeholder"
+    static let storyboardName = "Placeholder"
 
-    internal static let window = SceneType<AppKit.NSWindowController>(storyboard: Placeholder.self, identifier: "Window")
+    static let window = SceneType<AppKit.NSWindowController>(storyboard: Placeholder.self, identifier: "Window")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

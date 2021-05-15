@@ -323,29 +323,29 @@ This will generate an `enum Asset` with one `static let` per asset (image set, c
 ```swift
 enum Asset {
   enum Files {
-    internal static let data = DataAsset(value: "Data")
-    internal static let readme = DataAsset(value: "README")
+    static let data = DataAsset(value: "Data")
+    static let readme = DataAsset(value: "README")
   }
   enum Food {
     enum Exotic {
-      internal static let banana = ImageAsset(value: "Exotic/Banana")
-      internal static let mango = ImageAsset(value: "Exotic/Mango")
+      static let banana = ImageAsset(value: "Exotic/Banana")
+      static let mango = ImageAsset(value: "Exotic/Mango")
     }
-    internal static let `private` = ImageAsset(value: "private")
+    static let `private` = ImageAsset(value: "private")
   }
   enum Styles {
     enum Vengo {
-      internal static let primary = ColorAsset(value: "Vengo/Primary")
-      internal static let tint = ColorAsset(value: "Vengo/Tint")
+      static let primary = ColorAsset(value: "Vengo/Primary")
+      static let tint = ColorAsset(value: "Vengo/Tint")
     }
   }
   enum Symbols {
-    internal static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
-    internal static let plus = SymbolAsset(name: "Plus")
+    static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
+    static let plus = SymbolAsset(name: "Plus")
   }
   enum Targets {
-    internal static let bottles = ARResourceGroupAsset(name: "Bottles")
-    internal static let paintings = ARResourceGroupAsset(name: "Paintings")
+    static let bottles = ARResourceGroupAsset(name: "Bottles")
+    static let paintings = ARResourceGroupAsset(name: "Paintings")
   }
 }
 ```
@@ -432,10 +432,10 @@ internal struct ColorName {
 
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#339666"></span>
   /// Alpha: 100% <br/> (0x339666ff)
-  internal static let articleBody = ColorName(rgbaValue: 0x339666ff)
+  static let articleBody = ColorName(rgbaValue: 0x339666ff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff66cc"></span>
   /// Alpha: 100% <br/> (0xff66ccff)
-  internal static let articleFootnote = ColorName(rgbaValue: 0xff66ccff)
+  static let articleFootnote = ColorName(rgbaValue: 0xff66ccff)
 
   ...
 }
@@ -562,11 +562,11 @@ The files parser is intended to just list the name and mimetype of the files and
 ```swift
 enum Files {
   /// test.txt
-  internal static let testTxt = File(name: "test", ext: "txt", path: "", mimeType: "text/plain")
+  static let testTxt = File(name: "test", ext: "txt", path: "", mimeType: "text/plain")
   /// subdir/
   enum Subdir {
     /// subdir/A Video With Spaces.mp4
-    internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", path: "subdir", mimeType: "video/mp4")
+    static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", path: "subdir", mimeType: "video/mp4")
   }
 }
 ```
@@ -594,9 +594,9 @@ SwiftGen also has a template if you're not interested in keeping the folder stru
 ```swift
 enum Files {
   /// test.txt
-  internal static let testTxt = File(name: "test", ext: "txt", path: "", mimeType: "text/plain")
+  static let testTxt = File(name: "test", ext: "txt", path: "", mimeType: "text/plain")
   /// subdir/A Video With Spaces.mp4
-  internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", path: "subdir", mimeType: "video/mp4")
+  static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", path: "subdir", mimeType: "video/mp4")
   }
 }
 ```
@@ -632,10 +632,10 @@ This will recursively go through the specified directory, finding any typeface f
 ```swift
 enum FontFamily {
   enum SFNSDisplay: String, FontConvertible {
-    internal static let regular = FontConvertible(name: ".SFNSDisplay-Regular", family: ".SF NS Display", path: "SFNSDisplay-Regular.otf")
+    static let regular = FontConvertible(name: ".SFNSDisplay-Regular", family: ".SF NS Display", path: "SFNSDisplay-Regular.otf")
   }
   enum ZapfDingbats: String, FontConvertible {
-    internal static let regular = FontConvertible(name: "ZapfDingbatsITC", family: "Zapf Dingbats", path: "ZapfDingbats.ttf")
+    static let regular = FontConvertible(name: "ZapfDingbatsITC", family: "Zapf Dingbats", path: "ZapfDingbats.ttf")
   }
 }
 ```
@@ -677,14 +677,14 @@ The generated code will look like this:
 
 enum StoryboardScene {
   enum Dependency: StoryboardType {
-    internal static let storyboardName = "Dependency"
+    static let storyboardName = "Dependency"
 
-    internal static let dependent = SceneType<UIViewController>(storyboard: Dependency.self, identifier: "Dependent")
+    static let dependent = SceneType<UIViewController>(storyboard: Dependency.self, identifier: "Dependent")
   }
   enum Message: StoryboardType {
-    internal static let storyboardName = "Message"
+    static let storyboardName = "Message"
 
-    internal static let messagesList = SceneType<UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
+    static let messagesList = SceneType<UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
   }
 }
 
@@ -750,12 +750,12 @@ Unlike other parsers, this one is intended to allow you to use more custom input
 enum JSONFiles {
   enum Info {
     private static let _document = JSONDocument(path: "info.json")
-    internal static let key1: String = _document["key1"]
-    internal static let key2: String = _document["key2"]
-    internal static let key3: [String: Any] = _document["key3"]
+    static let key1: String = _document["key1"]
+    static let key2: String = _document["key2"]
+    static let key3: [String: Any] = _document["key3"]
   }
   enum Sequence {
-    internal static let items: [Int] = objectFromJSON(at: "sequence.json")
+    static let items: [Int] = objectFromJSON(at: "sequence.json")
   }
 }
 ```
@@ -791,12 +791,12 @@ Unlike other parsers, this one is intended to allow you to use more custom input
 ```swift
 enum PlistFiles {
   enum Test {
-    internal static let items: [String] = arrayFromPlist(at: "array.plist")
+    static let items: [String] = arrayFromPlist(at: "array.plist")
   }
   enum Stuff {
     private static let _document = PlistDocument(path: "dictionary.plist")
-    internal static let key1: Int = _document["key1"]
-    internal static let key2: [String: Any] = _document["key2"]
+    static let key1: Int = _document["key1"]
+    static let key2: [String: Any] = _document["key2"]
   }
 }
 ```
@@ -872,20 +872,20 @@ The generated code will contain this:
 ```swift
 enum L10n {
   /// Some alert body there
-  internal static let alertMessage = L10n.tr("alert_message")
+  static let alertMessage = L10n.tr("alert_message")
   /// Title of the alert
-  internal static let alertTitle = L10n.tr("alert_title")
+  static let alertTitle = L10n.tr("alert_title")
 
   enum Apples {
     /// Plural format key: "%#@apples@"
-    internal static func count(_ p1: Int) -> String {
+    static func count(_ p1: Int) -> String {
       return L10n.tr("apples.count", p1)
     }
   }
 
   enum Bananas {
     /// Those %d bananas belong to %@.
-    internal static func owner(_ p1: Int, _ p2: Any) -> String {
+    static func owner(_ p1: Int, _ p2: Any) -> String {
       return L10n.tr("bananas.owner", p1, String(describing: p2))
     }
   }
@@ -919,15 +919,15 @@ SwiftGen also has a template to support flat strings files (i.e. without splitti
 ```swift
 enum L10n {
   /// Some alert body there
-  internal static let alertMessage = L10n.tr("Localizable", "alert__message")
+  static let alertMessage = L10n.tr("Localizable", "alert__message")
   /// Title of the alert
-  internal static let alertTitle = L10n.tr("Localizable", "alert__title")
+  static let alertTitle = L10n.tr("Localizable", "alert__title")
   /// Plural format key: "%#@apples@"
-  internal static func applesCount(_ p1: Int) -> String {
+  static func applesCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "apples.count", p1)
   }
   /// Those %d bananas belong to %@.
-  internal static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
+  static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
     return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
   }
 }

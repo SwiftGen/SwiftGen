@@ -23,48 +23,48 @@ typealias XCTImage = XCTImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum XCTAssets {
   enum Files {
-    internal static let data = XCTDataAsset(name: "Data")
+    static let data = XCTDataAsset(name: "Data")
     enum Json {
-      internal static let data = XCTDataAsset(name: "Json/Data")
+      static let data = XCTDataAsset(name: "Json/Data")
     }
-    internal static let readme = XCTDataAsset(name: "README")
+    static let readme = XCTDataAsset(name: "README")
   }
   enum Food {
     enum Exotic {
-      internal static let banana = XCTImageAsset(name: "Exotic/Banana")
-      internal static let mango = XCTImageAsset(name: "Exotic/Mango")
+      static let banana = XCTImageAsset(name: "Exotic/Banana")
+      static let mango = XCTImageAsset(name: "Exotic/Mango")
     }
     enum Round {
-      internal static let apricot = XCTImageAsset(name: "Round/Apricot")
-      internal static let apple = XCTImageAsset(name: "Round/Apple")
+      static let apricot = XCTImageAsset(name: "Round/Apricot")
+      static let apple = XCTImageAsset(name: "Round/Apple")
       enum Double {
-        internal static let cherry = XCTImageAsset(name: "Round/Double/Cherry")
+        static let cherry = XCTImageAsset(name: "Round/Double/Cherry")
       }
-      internal static let tomato = XCTImageAsset(name: "Round/Tomato")
+      static let tomato = XCTImageAsset(name: "Round/Tomato")
     }
-    internal static let `private` = XCTImageAsset(name: "private")
+    static let `private` = XCTImageAsset(name: "private")
   }
   enum Other {
   }
   enum Styles {
     enum _24Vision {
-      internal static let background = XCTColorAsset(name: "24Vision/Background")
-      internal static let primary = XCTColorAsset(name: "24Vision/Primary")
+      static let background = XCTColorAsset(name: "24Vision/Background")
+      static let primary = XCTColorAsset(name: "24Vision/Primary")
     }
-    internal static let orange = XCTImageAsset(name: "Orange")
+    static let orange = XCTImageAsset(name: "Orange")
     enum Vengo {
-      internal static let primary = XCTColorAsset(name: "Vengo/Primary")
-      internal static let tint = XCTColorAsset(name: "Vengo/Tint")
+      static let primary = XCTColorAsset(name: "Vengo/Primary")
+      static let tint = XCTColorAsset(name: "Vengo/Tint")
     }
   }
   enum Symbols {
-    internal static let exclamationMark = XCTSymbolAsset(name: "Exclamation Mark")
-    internal static let plus = XCTSymbolAsset(name: "Plus")
+    static let exclamationMark = XCTSymbolAsset(name: "Exclamation Mark")
+    static let plus = XCTSymbolAsset(name: "Plus")
   }
   enum Targets {
-    internal static let bottles = XCTARResourceGroup(name: "Bottles")
-    internal static let paintings = XCTARResourceGroup(name: "Paintings")
-    internal static let posters = XCTARResourceGroup(name: "Posters")
+    static let bottles = XCTARResourceGroup(name: "Bottles")
+    static let paintings = XCTARResourceGroup(name: "Paintings")
+    static let posters = XCTARResourceGroup(name: "Posters")
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

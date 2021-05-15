@@ -27,26 +27,26 @@
 // swiftlint:disable identifier_name line_length type_body_length
 enum FontFamily {
   enum Avenir {
-    internal static let black = FontConvertible(name: "Avenir-Black", family: "Avenir", path: "Avenir.ttc")
-    internal static let blackOblique = FontConvertible(name: "Avenir-BlackOblique", family: "Avenir", path: "Avenir.ttc")
-    internal static let book = FontConvertible(name: "Avenir-Book", family: "Avenir", path: "Avenir.ttc")
-    internal static let bookOblique = FontConvertible(name: "Avenir-BookOblique", family: "Avenir", path: "Avenir.ttc")
-    internal static let heavy = FontConvertible(name: "Avenir-Heavy", family: "Avenir", path: "Avenir.ttc")
-    internal static let heavyOblique = FontConvertible(name: "Avenir-HeavyOblique", family: "Avenir", path: "Avenir.ttc")
-    internal static let light = FontConvertible(name: "Avenir-Light", family: "Avenir", path: "Avenir.ttc")
-    internal static let lightOblique = FontConvertible(name: "Avenir-LightOblique", family: "Avenir", path: "Avenir.ttc")
-    internal static let medium = FontConvertible(name: "Avenir-Medium", family: "Avenir", path: "Avenir.ttc")
-    internal static let mediumOblique = FontConvertible(name: "Avenir-MediumOblique", family: "Avenir", path: "Avenir.ttc")
-    internal static let oblique = FontConvertible(name: "Avenir-Oblique", family: "Avenir", path: "Avenir.ttc")
-    internal static let roman = FontConvertible(name: "Avenir-Roman", family: "Avenir", path: "Avenir.ttc")
-    internal static let all: [FontConvertible] = [black, blackOblique, book, bookOblique, heavy, heavyOblique, light, lightOblique, medium, mediumOblique, oblique, roman]
+    static let black = FontConvertible(name: "Avenir-Black", family: "Avenir", path: "Avenir.ttc")
+    static let blackOblique = FontConvertible(name: "Avenir-BlackOblique", family: "Avenir", path: "Avenir.ttc")
+    static let book = FontConvertible(name: "Avenir-Book", family: "Avenir", path: "Avenir.ttc")
+    static let bookOblique = FontConvertible(name: "Avenir-BookOblique", family: "Avenir", path: "Avenir.ttc")
+    static let heavy = FontConvertible(name: "Avenir-Heavy", family: "Avenir", path: "Avenir.ttc")
+    static let heavyOblique = FontConvertible(name: "Avenir-HeavyOblique", family: "Avenir", path: "Avenir.ttc")
+    static let light = FontConvertible(name: "Avenir-Light", family: "Avenir", path: "Avenir.ttc")
+    static let lightOblique = FontConvertible(name: "Avenir-LightOblique", family: "Avenir", path: "Avenir.ttc")
+    static let medium = FontConvertible(name: "Avenir-Medium", family: "Avenir", path: "Avenir.ttc")
+    static let mediumOblique = FontConvertible(name: "Avenir-MediumOblique", family: "Avenir", path: "Avenir.ttc")
+    static let oblique = FontConvertible(name: "Avenir-Oblique", family: "Avenir", path: "Avenir.ttc")
+    static let roman = FontConvertible(name: "Avenir-Roman", family: "Avenir", path: "Avenir.ttc")
+    static let all: [FontConvertible] = [black, blackOblique, book, bookOblique, heavy, heavyOblique, light, lightOblique, medium, mediumOblique, oblique, roman]
   }
   enum ZapfDingbats {
-    internal static let regular = FontConvertible(name: "ZapfDingbatsITC", family: "Zapf Dingbats", path: "ZapfDingbats.ttf")
-    internal static let all: [FontConvertible] = [regular]
+    static let regular = FontConvertible(name: "ZapfDingbatsITC", family: "Zapf Dingbats", path: "ZapfDingbats.ttf")
+    static let all: [FontConvertible] = [regular]
   }
-  internal static let allCustomFonts: [FontConvertible] = [Avenir.all, ZapfDingbats.all].flatMap { $0 }
-  internal static func registerAllCustomFonts() {
+  static let allCustomFonts: [FontConvertible] = [Avenir.all, ZapfDingbats.all].flatMap { $0 }
+  static func registerAllCustomFonts() {
     allCustomFonts.forEach { $0.register() }
   }
 }

@@ -39,17 +39,17 @@ import UIKit
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 enum StoryboardScene {
   enum Wizard: StoryboardType {
-    internal static let storyboardName = "Wizard"
+    static let storyboardName = "Wizard"
 
-    internal static let initialScene = InitialSceneType<SwiftGen.CreateAccViewController>(storyboard: Wizard.self)
+    static let initialScene = InitialSceneType<SwiftGen.CreateAccViewController>(storyboard: Wizard.self)
 
-    internal static let acceptToS = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "Accept-ToS")
+    static let acceptToS = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "Accept-ToS")
 
-    internal static let createAccount = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "CreateAccount")
+    static let createAccount = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "CreateAccount")
 
-    internal static let preferences = SceneType<UIKit.UITableViewController>(storyboard: Wizard.self, identifier: "Preferences")
+    static let preferences = SceneType<UIKit.UITableViewController>(storyboard: Wizard.self, identifier: "Preferences")
 
-    internal static let validatePassword = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "Validate_Password")
+    static let validatePassword = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "Validate_Password")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

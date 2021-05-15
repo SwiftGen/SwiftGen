@@ -30,11 +30,11 @@ You can customize some elements of this template by overriding the following par
 ```swift
 enum PlistFiles {
   enum Configuration {
-    internal static let environment: String = "development"
-    internal static let options: [String: Any] = ["Animation Style": "Party Mode"]
+    static let environment: String = "development"
+    static let options: [String: Any] = ["Animation Style": "Party Mode"]
   }
   enum ShoppingList {
-    internal static let items: [String] = ["Eggs", "Bread", "Milk"]
+    static let items: [String] = ["Eggs", "Bread", "Milk"]
   }
 }
 ```

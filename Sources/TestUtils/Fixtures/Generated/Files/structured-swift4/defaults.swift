@@ -11,25 +11,25 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 enum Files {
   /// File
-  internal static let file = File(name: "File", ext: nil, relativePath: "", mimeType: "application/octet-stream")
+  static let file = File(name: "File", ext: nil, relativePath: "", mimeType: "application/octet-stream")
   /// test.txt
-  internal static let testTxt = File(name: "test", ext: "txt", relativePath: "", mimeType: "text/plain")
+  static let testTxt = File(name: "test", ext: "txt", relativePath: "", mimeType: "text/plain")
   /// empty intermediate/
   enum EmptyIntermediate {
     /// empty intermediate/subfolder/
     enum Subfolder {
       /// another video.mp4
-      internal static let anotherVideoMp4 = File(name: "another video", ext: "mp4", relativePath: "", mimeType: "video/mp4")
+      static let anotherVideoMp4 = File(name: "another video", ext: "mp4", relativePath: "", mimeType: "video/mp4")
     }
   }
   /// subdir/
   enum Subdir {
     /// A Video With Spaces.mp4
-    internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", relativePath: "", mimeType: "video/mp4")
+    static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", relativePath: "", mimeType: "video/mp4")
     /// subdir/subdir/
     enum Subdir {
       /// graphic.svg
-      internal static let graphicSvg = File(name: "graphic", ext: "svg", relativePath: "", mimeType: "image/svg+xml")
+      static let graphicSvg = File(name: "graphic", ext: "svg", relativePath: "", mimeType: "image/svg+xml")
     }
   }
 }

@@ -15,11 +15,11 @@ enum L10n {
     enum Placeholders {
       enum Plurals {
         /// Plural format key: "%@ - %#@d2@ - %#@f3@ - %5$#@d5@ - %04$#@f4@ - %6$#@d6@ - %007$@ - %8$3.2#@f8@ - %11$#@f11@ - %9$@ - %10$#@d10@"
-        internal static func base(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Any, _ p9: Int, _ p10: Float) -> String {
+        static func base(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Any, _ p9: Int, _ p10: Float) -> String {
           return L10n.tr("LocPluralAdvanced", "many.placeholders.plurals.base", String(describing: p1), p2, p3, p4, p5, p6, String(describing: p7), String(describing: p8), p9, p10)
         }
         /// Plural format key: "%@ - %#@d2@ - %0$#@zero@ - %#@f3@ - %5$#@d5@ - %04$#@f4@ - %6$#@d6@ - %007$@ - %8$3.2#@f8@ - %11$#@f11@ - %9$@ - %10$#@d10@"
-        internal static func zero(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Any, _ p9: Int, _ p10: Float) -> String {
+        static func zero(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Any, _ p9: Int, _ p10: Float) -> String {
           return L10n.tr("LocPluralAdvanced", "many.placeholders.plurals.zero", String(describing: p1), p2, p3, p4, p5, p6, String(describing: p7), String(describing: p8), p9, p10)
         }
       }
@@ -29,19 +29,19 @@ enum L10n {
   enum Mixed {
     enum PlaceholdersAndVariables {
       /// Plural format key: "%1$@ %3$#@has_rating@"
-      internal static func positionalstringPositional3int(_ p1: Any, _ p2: Int) -> String {
+      static func positionalstringPositional3int(_ p1: Any, _ p2: Int) -> String {
         return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.positionalstring-positional3int", String(describing: p1), p2)
       }
       /// Plural format key: "%@ %#@has_rating@"
-      internal static func stringInt(_ p1: Any, _ p2: Int) -> String {
+      static func stringInt(_ p1: Any, _ p2: Int) -> String {
         return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.string-int", String(describing: p1), p2)
       }
       /// Plural format key: "%@ %2$#@has_rating@"
-      internal static func stringPositional2int(_ p1: Any, _ p2: Int) -> String {
+      static func stringPositional2int(_ p1: Any, _ p2: Int) -> String {
         return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.string-positional2int", String(describing: p1), p2)
       }
       /// Plural format key: "%@ %3$#@has_rating@"
-      internal static func stringPositional3int(_ p1: Any, _ p2: Int) -> String {
+      static func stringPositional3int(_ p1: Any, _ p2: Int) -> String {
         return L10n.tr("LocPluralAdvanced", "mixed.placeholders-and-variables.string-positional3int", String(describing: p1), p2)
       }
     }
@@ -50,13 +50,13 @@ enum L10n {
   enum Multiple {
     enum PlaceholdersAndVariables {
       /// Plural format key: "Your %3$@ list contains %1$#@first@ %2$@."
-      internal static func intStringString(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
+      static func intStringString(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
         return L10n.tr("LocPluralAdvanced", "multiple.placeholders-and-variables.int-string-string", p1, String(describing: p2), String(describing: p3))
       }
     }
     enum Variables {
       /// Plural format key: "%#@files@ (%#@bytes@, %#@minutes@)"
-      internal static func threeVariablesInFormatkey(_ p1: Int, _ p2: Int, _ p3: Int) -> String {
+      static func threeVariablesInFormatkey(_ p1: Int, _ p2: Int, _ p3: Int) -> String {
         return L10n.tr("LocPluralAdvanced", "multiple.variables.three-variables-in-formatkey", p1, p2, p3)
       }
     }
