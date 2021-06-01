@@ -163,6 +163,53 @@ Or add the path to the `bin` folder to your `$PATH` and invoke `swiftgen` direct
 
 ---
 </details>
+<details>
+<summary><strong>Using Swift Package Manager</strong></summary>
+
+To set up SwiftGen as an Xcode build phase, do the following:
+
+#### 1) Create a BuildTools folder & Package.swift
+
+1. Create a folder called `BuildTools` in the same folder as your xcodeproj file
+2. In this folder, create a file called `Package.swift`, with the following contents:
+```swift
+// swift-tools-version:5.3
+import PackageDescription
+
+let package = Package(
+    name: "SwiftGenerator",
+    platforms: [.iOS("14.0")],
+    dependencies: [
+        .package(url: "https://github.com/SwiftGen/SwiftGen", from: "6.4.0"),
+    ],
+    targets: [
+        .target(
+            name: "SwiftGenerator",
+            path: "",
+            resources: [
+                .process("swiftgen.yml"),
+            ]
+        ),
+    ]
+)
+```
+3. If you are running Xcode 11.4 or later, in the `BuildTools` folder create a file called `Empty.swift` with nothing in it. This is to satisfy a change in Swift Package Manager.
+
+#### 2) Add a Build phases to your app target
+
+1. Click on your project in the file list, choose your target under `TARGETS`, click the `Build Phases` tab
+2. Add a `New Run Script Phase` by clicking the little plus icon in the top left
+3. Drag the new `Run Script` phase **above** the `Compile Sources` phase, expand it and paste the following script:
+
+    ```bash
+    cd BuildTools
+    SDKROOT=iphoneos4.0
+    #swift package update #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file
+    swift run -c release --package-path Tools/SwiftFormatter swiftformat --swiftversion "5.3" "$SRCROOT"
+    ```
+
+**NOTE:** You may wish to check BuildTools/Package.swift into your source control so that the version used by your run-script phase is kept in version control. It is recommended to add the following to your .gitignore file: `BuildTools/.build` and `BuildTools/.swiftpm`.
+</details>
 
 ### Known Installation Issues On macOS Before 10.14.4
 
