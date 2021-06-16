@@ -205,7 +205,7 @@ let package = Package(
     cd BuildTools
     SDKROOT=iphoneos4.0
     #swift package update #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file
-    swift run -c release --package-path Tools/SwiftFormatter swiftformat --swiftversion "5.3" "$SRCROOT"
+    swift run -c release --package-path Tools/SwiftGenerator swiftgen
     ```
 
 **NOTE:** You may wish to check BuildTools/Package.swift into your source control so that the version used by your run-script phase is kept in version control. It is recommended to add the following to your .gitignore file: `BuildTools/.build` and `BuildTools/.swiftpm`.
