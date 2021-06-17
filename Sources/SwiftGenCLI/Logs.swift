@@ -8,6 +8,8 @@ import Foundation
 
 // MARK: Printing on stderr
 
+var commandLogLevel: CommandLogLevel = .default
+
 public enum LogLevel {
   case info, warning, error
 }
@@ -41,7 +43,9 @@ enum ANSIColor: UInt8, CustomStringConvertible {
 
 // Based on https://github.com/realm/SwiftLint/blob/0.39.2/Source/SwiftLintFramework/Extensions/QueuedPrint.swift
 
+
 public func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
+  if commandLogLevel == .silent { return }
   logQueue.async {
     switch level {
     case .info:

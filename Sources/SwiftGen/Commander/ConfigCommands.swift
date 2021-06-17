@@ -11,6 +11,10 @@ import StencilSwiftKit
 import SwiftGenCLI
 import SwiftGenKit
 
+enum CommandLogLevel: String {
+  case silent, `default`, verbose
+}
+
 // MARK: - Commands
 
 enum ConfigCLI {
@@ -39,20 +43,27 @@ enum ConfigCLI {
   }
 
   // MARK: Run
-
+  
   static let run = command(
     CLIOption.configFile(),
+    Option("logLevel", default: CommandLogLevel.default.rawValue, description: "Log level"),
     Flag("verbose", default: false, flag: "v", description: "Print each command being executed")
-  ) { file, verbose in
+  ) { file, logLevel, legacyVerbose in
     do {
       try ErrorPrettifier.execute {
         let config = try Config(file: file)
-
-        if verbose {
+        
+        if legacyVerbose {
+          commandLogLevel = .verbose
+        } else {
+          commandLogLevel = CommandLogLevel(rawValue: logLevel) ?? .default
+        }
+        
+        if commandLogLevel == .verbose {
           logMessage(.info, "Executing configuration file \(file)")
         }
         try file.parent().chdir {
-          try config.runCommands(verbose: verbose)
+          try config.runCommands(logLevel: commandLogLevel)
         }
       }
     } catch let error as Config.Error {

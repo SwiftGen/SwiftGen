@@ -10,10 +10,14 @@ import StencilSwiftKit
 import SwiftGenKit
 
 extension Config {
+<<<<<<< HEAD:Sources/SwiftGenCLI/Config/Config+Run.swift
   public func runCommands(verbose: Bool, logger: (LogLevel, String) -> Void = logMessage) throws {
+=======
+  func runCommands(logLevel: CommandLogLevel, logger: (LogLevel, String) -> Void = logMessage) throws {
+>>>>>>> db0f5178... Adding silent mode:Sources/SwiftGen/Config/Config+Run.swift
     let errors = commands.parallelCompactMap { cmd, entry -> Swift.Error? in
       do {
-        try run(parserCommand: cmd, entry: entry, verbose: verbose, logger: logger)
+        try run(parserCommand: cmd, entry: entry, logLevel: logLevel, logger: logger)
         return nil
       } catch {
         return error
@@ -26,17 +30,17 @@ extension Config {
       throw Error.multipleErrors(errors)
     }
   }
-
+  
   private func run(
     parserCommand: ParserCLI,
     entry: ConfigEntry,
-    verbose: Bool,
+    logLevel: CommandLogLevel,
     logger: (LogLevel, String) -> Void
   ) throws {
     var entry = entry
 
     entry.makeRelativeTo(inputDir: inputDir, outputDir: outputDir)
-    if verbose {
+    if logLevel == .verbose {
       for item in entry.commandLine(forCommand: parserCommand.name) {
         logger(.info, " $ \(item)")
       }
