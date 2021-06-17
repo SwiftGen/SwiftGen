@@ -8,7 +8,11 @@ import Foundation
 
 // MARK: Printing on stderr
 
-var commandLogLevel: CommandLogLevel = .default
+public enum CommandLogLevel: String {
+  case silent, `default`, verbose
+}
+
+public var commandLogLevel: CommandLogLevel = .default
 
 public enum LogLevel {
   case info, warning, error

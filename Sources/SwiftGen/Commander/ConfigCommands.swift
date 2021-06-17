@@ -11,10 +11,6 @@ import StencilSwiftKit
 import SwiftGenCLI
 import SwiftGenKit
 
-enum CommandLogLevel: String {
-  case silent, `default`, verbose
-}
-
 // MARK: - Commands
 
 enum ConfigCLI {
