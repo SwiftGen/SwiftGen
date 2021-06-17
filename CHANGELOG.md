@@ -10,7 +10,10 @@ _None_
 
 ### New Features
 
-_None_
+* Adding support for quiet log level.
+  [Andre113](https://github.com/Andre113)
+  [#562](https://github.com/SwiftGen/SwiftGen/issues/823)
+  [#797](https://github.com/SwiftGen/SwiftGen/pull/846)
 
 ### Bug Fixes
 
