@@ -7,6 +7,7 @@
 import AppKit
 import Commander
 import PathKit
+import SwiftGenCLI
 
 enum TemplateCLI {
   static let list = command(

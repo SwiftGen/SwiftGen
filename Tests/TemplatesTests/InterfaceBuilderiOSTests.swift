@@ -4,6 +4,8 @@
 // MIT Licence
 //
 
+import TestUtils
+
 final class InterfaceBuilderiOSTests: InterfaceBuilderTests {
   func testScenesSwift4() {
     test(

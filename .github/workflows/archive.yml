@@ -1,0 +1,66 @@
+name: Archive
+
+on:
+  push:
+    branches: stable
+  pull_request:
+
+jobs:
+  install:
+    name: Install
+    runs-on: macos-latest
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - 
+        name: Cache SPM
+        uses: actions/cache@v2
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+      -
+        name: Verify installation
+        run: bundle exec rake cli:install[./standalone,./standalone/frameworks,./standalone/stencils]
+      -
+        name: Check swiftgen binary
+        run: |
+            ./standalone/swiftgen --version
+            ./standalone/swiftgen templates list
+
+  zip:
+    name: Zip
+    runs-on: macos-latest
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - 
+        name: Cache SPM
+        uses: actions/cache@v2
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+      -
+        name: Create zip
+        run: bundle exec rake release:zip
+      -
+        name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: SwiftGen.zip
+          path: .build/swiftgen-*.zip

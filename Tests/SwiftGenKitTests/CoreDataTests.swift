@@ -5,6 +5,7 @@
 //
 
 @testable import SwiftGenKit
+import TestUtils
 import XCTest
 
 final class CoreDataTests: XCTestCase {
@@ -18,7 +19,7 @@ final class CoreDataTests: XCTestCase {
   func testDefaults() throws {
     let parser = try CoreData.Parser()
     do {
-      try parser.searchAndParse(path: Fixtures.path(for: "Model.xcdatamodeld", sub: .coreData))
+      try parser.searchAndParse(path: Fixtures.resource(for: "Model.xcdatamodeld", sub: .coreData))
     } catch {
       print("Error: \(error.localizedDescription)")
     }

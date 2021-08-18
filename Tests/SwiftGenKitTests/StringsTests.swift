@@ -5,6 +5,7 @@
 //
 
 @testable import SwiftGenKit
+import TestUtils
 import XCTest
 
 final class StringsTests: XCTestCase {
@@ -17,7 +18,7 @@ final class StringsTests: XCTestCase {
 
   func testLocalizable() throws {
     let parser = try Strings.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "Localizable.strings", sub: .strings))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "localizable", sub: .strings)
@@ -25,7 +26,7 @@ final class StringsTests: XCTestCase {
 
   func testMultiline() throws {
     let parser = try Strings.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "LocMultiline.strings", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "LocMultiline.strings", sub: .strings))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "multiline", sub: .strings)
@@ -33,7 +34,7 @@ final class StringsTests: XCTestCase {
 
   func testUTF8File() throws {
     let parser = try Strings.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "LocUTF8.strings", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "LocUTF8.strings", sub: .strings))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "utf8", sub: .strings)
@@ -41,7 +42,7 @@ final class StringsTests: XCTestCase {
 
   func testStructuredOnly() throws {
     let parser = try Strings.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "LocStructuredOnly.strings", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "LocStructuredOnly.strings", sub: .strings))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "structuredonly", sub: .strings)
@@ -49,8 +50,8 @@ final class StringsTests: XCTestCase {
 
   func testMultipleFiles() throws {
     let parser = try Strings.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
-    try parser.searchAndParse(path: Fixtures.path(for: "LocMultiline.strings", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "Localizable.strings", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "LocMultiline.strings", sub: .strings))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "multiple", sub: .strings)
@@ -58,7 +59,7 @@ final class StringsTests: XCTestCase {
 
   func testPlurals() throws {
     let parser = try Strings.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.stringsdict", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "Localizable.stringsdict", sub: .strings))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "plurals", sub: .strings)
@@ -66,7 +67,7 @@ final class StringsTests: XCTestCase {
 
   func testAdvancedPlurals() throws {
     let parser = try Strings.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "LocPluralAdvanced.stringsdict", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "LocPluralAdvanced.stringsdict", sub: .strings))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "plurals-advanced", sub: .strings)
@@ -76,7 +77,7 @@ final class StringsTests: XCTestCase {
 //
 //  func testNestedPlurals() throws {
 //    let parser = try Strings.Parser()
-//    try parser.searchAndParse(path: Fixtures.path(for: "LocPluralNested.stringsdict", sub: .strings))
+//    try parser.searchAndParse(path: Fixtures.resource(for: "LocPluralNested.stringsdict", sub: .strings))
 //
 //    let result = parser.stencilContext()
 //    XCTDiffContexts(result, expected: "plurals-nested", sub: .strings)
@@ -84,8 +85,8 @@ final class StringsTests: XCTestCase {
 
   func testSameTableWithPluralsParsingStringsFirst() throws {
     let parser = try Strings.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
-    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.stringsdict", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "Localizable.strings", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "Localizable.stringsdict", sub: .strings))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "plurals-same-table", sub: .strings)
@@ -93,8 +94,8 @@ final class StringsTests: XCTestCase {
 
   func testSameTableWithPluralsParsingPluralsFirst() throws {
     let parser = try Strings.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.stringsdict", sub: .strings))
-    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "Localizable.stringsdict", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "Localizable.strings", sub: .strings))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "plurals-same-table", sub: .strings)
@@ -102,10 +103,10 @@ final class StringsTests: XCTestCase {
 
   func testErrorWhenSameTableWithDifferentPath() throws {
     let parser = try Strings.Parser()
-    let path1 = Fixtures.path(for: "Localizable.strings", sub: .strings)
+    let path1 = Fixtures.resource(for: "Localizable.strings", sub: .strings)
     try parser.searchAndParse(path: path1)
 
-    let path2 = Fixtures.path(for: "en.lproj/Localizable.strings", sub: .strings)
+    let path2 = Fixtures.resource(for: "en.lproj/Localizable.strings", sub: .strings)
     XCTAssertThrowsError(
       try parser.searchAndParse(path: path2),
       "Expected an error to be thrown"
@@ -128,7 +129,7 @@ final class StringsTests: XCTestCase {
     let filter = try Filter(pattern: Strings.Parser.filterRegex(forExtensions: ["clr"]))
 
     XCTAssertThrowsError(
-      try parser.searchAndParse(path: Fixtures.path(for: "colors.clr", sub: .colors), filter: filter),
+      try parser.searchAndParse(path: Fixtures.resource(for: "colors.clr", sub: .colors), filter: filter),
       "Expected an error to be thrown"
     ) { error in
       guard
@@ -146,9 +147,10 @@ final class StringsTests: XCTestCase {
 
   func testErrorWhenBothPluralAndVariableWidthKeys() throws {
     let parser = try Strings.Parser()
+    let path = Fixtures.resource(for: "LocPluralErrorBothTypeKeys.stringsdict", sub: .strings)
 
     XCTAssertThrowsError(
-      try parser.searchAndParse(path: Fixtures.path(for: "LocPluralErrorBothTypeKeys.stringsdict", sub: .strings)),
+      try parser.searchAndParse(path: path),
       "Expected an error to be thrown"
     ) { error in
       guard
@@ -171,9 +173,10 @@ final class StringsTests: XCTestCase {
 
   func testErrorWhenMissingVariableInPluralDefinition() throws {
     let parser = try Strings.Parser()
+    let path = Fixtures.resource(for: "LocPluralErrorMissingVariable.stringsdict", sub: .strings)
 
     XCTAssertThrowsError(
-      try parser.searchAndParse(path: Fixtures.path(for: "LocPluralErrorMissingVariable.stringsdict", sub: .strings)),
+      try parser.searchAndParse(path: path),
       "Expected an error to be thrown"
     ) { error in
       guard
@@ -191,9 +194,10 @@ final class StringsTests: XCTestCase {
 
   func testErrorWhenWrongPositionalValueInFormatKey() throws {
     let parser = try Strings.Parser()
+    let path = Fixtures.resource(for: "LocPluralErrorPlaceholders.stringsdict", sub: .strings)
 
     XCTAssertThrowsError(
-      try parser.searchAndParse(path: Fixtures.path(for: "LocPluralErrorPlaceholders.stringsdict", sub: .strings)),
+      try parser.searchAndParse(path: path),
       "Expected an error to be thrown"
     ) { error in
       guard
@@ -208,10 +212,10 @@ final class StringsTests: XCTestCase {
 
   func testErrorWhenInvalidValueInVariable() throws {
     let parser = try Strings.Parser()
+    let path = Fixtures.resource(for: "LocPluralErrorInvalidVariableValue.stringsdict", sub: .strings)
 
     XCTAssertThrowsError(
-      // swiftlint:disable:next line_length
-      try parser.searchAndParse(path: Fixtures.path(for: "LocPluralErrorInvalidVariableValue.stringsdict", sub: .strings)),
+      try parser.searchAndParse(path: path),
       "Expected an error to be thrown"
     ) { error in
       guard
@@ -229,7 +233,7 @@ final class StringsTests: XCTestCase {
 
   func testUnsupportedPluralDefinition() throws {
     let parser = try Strings.Parser()
-    try parser.searchAndParse(path: Fixtures.path(for: "LocPluralUnsupported.stringsdict", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "LocPluralUnsupported.stringsdict", sub: .strings))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "plurals-unsupported", sub: .strings)
@@ -239,7 +243,7 @@ final class StringsTests: XCTestCase {
 
   func testCustomSeparator() throws {
     let parser = try Strings.Parser(options: ["separator": "__"])
-    try parser.searchAndParse(path: Fixtures.path(for: "Localizable.strings", sub: .strings))
+    try parser.searchAndParse(path: Fixtures.resource(for: "Localizable.strings", sub: .strings))
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "custom-separator", sub: .strings)

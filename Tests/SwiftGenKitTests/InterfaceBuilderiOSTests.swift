@@ -5,6 +5,7 @@
 //
 
 @testable import SwiftGenKit
+import TestUtils
 import XCTest
 
 final class InterfaceBuilderiOSTests: XCTestCase {
@@ -18,7 +19,7 @@ final class InterfaceBuilderiOSTests: XCTestCase {
   func testMessageStoryboard() throws {
     let parser = try InterfaceBuilder.Parser()
     do {
-      try parser.searchAndParse(path: Fixtures.path(for: "Message.storyboard", sub: .interfaceBuilderiOS))
+      try parser.searchAndParse(path: Fixtures.resource(for: "Message.storyboard", sub: .interfaceBuilderiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -30,7 +31,7 @@ final class InterfaceBuilderiOSTests: XCTestCase {
   func testAnonymousStoryboard() throws {
     let parser = try InterfaceBuilder.Parser()
     do {
-      try parser.searchAndParse(path: Fixtures.path(for: "Anonymous.storyboard", sub: .interfaceBuilderiOS))
+      try parser.searchAndParse(path: Fixtures.resource(for: "Anonymous.storyboard", sub: .interfaceBuilderiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -42,7 +43,7 @@ final class InterfaceBuilderiOSTests: XCTestCase {
   func testAllStoryboards() throws {
     let parser = try InterfaceBuilder.Parser()
     do {
-      try parser.searchAndParse(path: Fixtures.directory(sub: .interfaceBuilderiOS))
+      try parser.searchAndParse(path: Fixtures.resourceDirectory(sub: .interfaceBuilderiOS))
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -56,7 +57,7 @@ final class InterfaceBuilderiOSTests: XCTestCase {
     let fakeModuleName = "NotCurrentModule"
 
     let parser = try InterfaceBuilder.Parser()
-    try parser.searchAndParse(path: Fixtures.directory(sub: .interfaceBuilderiOS))
+    try parser.searchAndParse(path: Fixtures.resourceDirectory(sub: .interfaceBuilderiOS))
 
     XCTAssert(
       parser.storyboards.contains {

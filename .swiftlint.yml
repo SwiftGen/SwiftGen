@@ -1,19 +1,23 @@
-swiftlint_version: 0.40.3
+swiftlint_version: 0.43.1
 
 opt_in_rules:
  - anyobject_protocol
  - array_init
  - attributes
+ - balanced_xctest_lifecycle
  - closure_body_length
  - closure_end_indentation
  - closure_spacing
  - collection_alignment
+ - comment_spacing
  - conditional_returns_on_newline
  - contains_over_filter_count
  - contains_over_filter_is_empty
  - contains_over_first_not_nil
  - contains_over_range_nil_comparison
  - convenience_type
+ - discarded_notification_center_observer
+ - discouraged_assert
  - discouraged_optional_boolean
  - discouraged_optional_collection
  - empty_collection_literal
@@ -30,6 +34,7 @@ opt_in_rules:
  - identical_operands
  - implicit_return
  - implicitly_unwrapped_optional
+ - inclusive_language
  - indentation_width
  - joined_default_parameter
  - last_where
@@ -55,6 +60,7 @@ opt_in_rules:
  - prefer_zero_over_explicit_init
  - private_action
  - private_outlet
+ - private_subject
  - prohibited_super_call
  - raw_value_for_camel_cased_codable_enum
  - reduce_into
@@ -64,6 +70,7 @@ opt_in_rules:
  - static_operator
  - strong_iboutlet
  - switch_case_on_newline
+ - test_case_accessibility
  - toggle_bool
  - trailing_closure
  - unavailable_function
@@ -75,9 +82,18 @@ opt_in_rules:
  - xct_specific_matcher
  - yoda_condition
 
+excluded:
+  - Sources/TestUtils/Fixtures
+
 # Rules customization
 conditional_returns_on_newline:
   if_only: true
+
+deployment_target:
+  iOS_deployment_target: 1.0
+  macOS_deployment_target: 10.0
+  tvOS_deployment_target: 1.0
+  watchOS_deployment_target: 1.0
 
 file_header:
   required_pattern: |

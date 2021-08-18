@@ -41,7 +41,7 @@ internal struct ColorName {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Colors/swift4/defaults.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/Colors/swift4/defaults.swift)
 
 ## Usage example
 

@@ -5,6 +5,7 @@
 //
 
 import StencilSwiftKit
+import TestUtils
 import XCTest
 
 final class XCAssetsTests: XCTestCase {
@@ -39,6 +40,7 @@ final class XCAssetsTests: XCTestCase {
             "colorTypeName=XCTColorAsset",
             "dataTypeName=XCTDataAsset",
             "imageTypeName=XCTImageAsset",
+            "symbolTypeName=XCTSymbolAsset",
             // deprecated parameters
             "colorAliasName=XCTColor",
             "imageAliasName=XCTImage"

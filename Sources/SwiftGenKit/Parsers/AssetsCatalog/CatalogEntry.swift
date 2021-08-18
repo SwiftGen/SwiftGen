@@ -50,6 +50,7 @@ enum Constants {
     case colorSet = "colorset"
     case dataSet = "dataset"
     case imageSet = "imageset"
+    case symbolSet = "symbolset"
   }
 }
 
@@ -60,6 +61,7 @@ extension AssetsCatalog.Entry {
   /// - A colorset, which is essentially a group containing a list of colors (the latter is ignored).
   /// - A dataset, which is essentially a group containing a list of files (the latter is ignored).
   /// - An imageset, which is essentially a group containing a list of files (the latter is ignored).
+  /// - A symbolset, which is essentially a group containing a list of files (the latter is ignored).
   /// - A group, containing sub items such as imagesets or groups. A group can provide a namespaced,
   ///   which means that all the sub items will have to be prefixed with their parent's name.
   ///

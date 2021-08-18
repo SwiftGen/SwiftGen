@@ -2,6 +2,7 @@
 //:
 //: * [Demo for `colors` parser](Colors-Demo)
 //: * Demo for `coredata` parser
+//: * [Demo for `files` parser](Files-Demo)
 //: * [Demo for `fonts` parser](Fonts-Demo)
 //: * [Demo for `ib` parser](InterfaceBuilder-Demo)
 //: * [Demo for `json` parser](JSON-Demo)
@@ -16,13 +17,13 @@ import CoreData
 import Foundation
 
 public enum IntegerEnum: Int16 {
-	case test1
-	case test2
+  case test1
+  case test2
 }
 public enum StringEnum: String {
-	case test1
-	case test2
-	case test3
+  case test1
+  case test2
+  case test3
 }
 
 // MARK: - MainEntity

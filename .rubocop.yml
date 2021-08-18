@@ -18,10 +18,8 @@ Naming/FileName:
     - '*.podspec'
 
 # Rake uses `task :x => [deps]`, we don't want to convert it to `task x: [deps]`
-# Podfile also has specific DSL so it's ok to not be strict about Hash syntax there
 Style/HashSyntax:
   Exclude:
-    - 'Podfile'
     - 'Rakefile'
     - 'rakelib/*.rake'
 

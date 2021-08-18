@@ -21,7 +21,7 @@ private extension String {
 
 extension Strings.Parser {
   public func stencilContext() -> [String: Any] {
-    let entryToStringMapper = { (entry: Strings.Entry, keyPath: [String]) -> [String: Any] in
+    let entryToStringMapper = { (entry: Strings.Entry, _: [String]) -> [String: Any] in
       var result: [String: Any] = [
         "name": entry.keyStructure.last ?? "",
         "key": entry.key.newlineEscaped,

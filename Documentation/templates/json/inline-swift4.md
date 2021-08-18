@@ -41,7 +41,7 @@ internal enum JSONFiles {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/JSON/inline-swift4/all.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/JSON/inline-swift4/all.swift)
 
 ## Usage example
 

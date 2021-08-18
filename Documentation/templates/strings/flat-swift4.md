@@ -48,7 +48,7 @@ internal enum L10n {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/Strings/flat-swift4/localizable.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/Strings/flat-swift4/localizable.swift)
 
 ## Usage example
 

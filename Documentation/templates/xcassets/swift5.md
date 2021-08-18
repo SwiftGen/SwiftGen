@@ -21,6 +21,7 @@ You can customize some elements of this template by overriding the following par
 
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
+| `bundle` | `BundleToken.bundle` | Allows you to set from which bundle strings are loaded from. By default, it'll point to the same bundle as where the generated code is. |
 | `allValues` | N/A | Setting this parameter will enable the generation of the `allColors`, `allImages` and other such constants. |
 | `arResourceGroupTypeName` | `ARResourceGroupAsset` | Allows you to change the name of the struct type representing an AR resource group. |
 | `colorTypeName` | `ColorAsset` | Allows you to change the name of the struct type representing a color. |
@@ -30,6 +31,7 @@ You can customize some elements of this template by overriding the following par
 | `forceProvidesNamespaces` | N/A | If set, generates namespaces even for non namespacing asset folders (i.e. "Provides Namespace" is unchecked) |
 | `imageTypeName` | `ImageAsset` | Allows you to change the name of the struct type representing an image. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
+| `symbolTypeName` | `SymbolAsset` | Allows you to change the name of the struct type representing a symbol. |
 | `colorAliasName` | `AssetColorTypeAlias` | **Deprecated** Allows you to change the name of the generated `typealias` for the platform specific color type. |
 | `imageAliasName` | `AssetImageTypeAlias` | **Deprecated** Allows you to change the name of the generated `typealias` for the platform specific image type. |
 
@@ -56,6 +58,10 @@ enum Asset {
       static let tint = ColorAsset(value: "Vengo/Tint")
     }
   }
+  enum Symbols {
+    static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
+    static let plus = SymbolAsset(name: "Plus")
+  }
   enum Targets {
     internal static let bottles = ARResourceGroupAsset(name: "Bottles")
     internal static let paintings = ARResourceGroupAsset(name: "Paintings")
@@ -63,7 +69,7 @@ enum Asset {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/XCAssets/swift5/all.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/XCAssets/swift5/all.swift)
 
 ## Usage example
 
@@ -91,4 +97,9 @@ let bottles = Asset.Targets.bottles.referenceObjects
 let sameBottles = ARReferenceImage.referenceImages(in: Asset.Targets.bottles)
 let paintings = Asset.Targets.paintings.referenceImages
 let samePosters = ARReferenceObject.referenceObjects(in: Asset.Targets.paintings)
+
+// You can create new symbol images by referring to the enum instance and calling `.image` on it (with or without configuration)
+let plus = Asset.Symbols.plus.image
+let style = UIImage.SymbolConfiguration(textStyle: .headline)
+let styled = Asset.Symbols.exclamationMark.image(with: style)
 ```

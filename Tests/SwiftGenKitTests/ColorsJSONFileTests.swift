@@ -6,13 +6,14 @@
 
 import PathKit
 @testable import SwiftGenKit
+import TestUtils
 import XCTest
 
 final class ColorsJSONFileTests: XCTestCase {
   func testFileWithDefaults() throws {
     let parser = try Colors.Parser()
-    let jsonParser = Colors.JSONFileParser(options: try ParserOptionValues(options: [:], available: []))
-    parser.palettes = [try jsonParser.parseFile(at: Fixtures.path(for: "colors.json", sub: .colors))]
+    let jsonParser = try Colors.JSONFileParser(options: try ParserOptionValues(options: [:], available: []))
+    parser.palettes = [try jsonParser.parseFile(at: Fixtures.resource(for: "colors.json", sub: .colors))]
 
     let result = parser.stencilContext()
     XCTDiffContexts(result, expected: "defaults", sub: .colors)
@@ -20,8 +21,8 @@ final class ColorsJSONFileTests: XCTestCase {
 
   func testFileWithBadSyntax() {
     do {
-      let jsonParser = Colors.JSONFileParser(options: try ParserOptionValues(options: [:], available: []))
-      _ = try jsonParser.parseFile(at: Fixtures.path(for: "bad-syntax.json", sub: .colors))
+      let jsonParser = try Colors.JSONFileParser(options: try ParserOptionValues(options: [:], available: []))
+      _ = try jsonParser.parseFile(at: Fixtures.resource(for: "bad-syntax.json", sub: .colors))
       XCTFail("Code did parse file successfully while it was expected to fail for bad syntax")
     } catch Colors.ParserError.invalidFile {
       // That's the expected exception we want to happen
@@ -32,8 +33,8 @@ final class ColorsJSONFileTests: XCTestCase {
 
   func testFileWithBadValue() {
     do {
-      let jsonParser = Colors.JSONFileParser(options: try ParserOptionValues(options: [:], available: []))
-      _ = try jsonParser.parseFile(at: Fixtures.path(for: "bad-value.json", sub: .colors))
+      let jsonParser = try Colors.JSONFileParser(options: try ParserOptionValues(options: [:], available: []))
+      _ = try jsonParser.parseFile(at: Fixtures.resource(for: "bad-value.json", sub: .colors))
       XCTFail("Code did parse file successfully while it was expected to fail for bad value")
     } catch Colors.ParserError.invalidHexColor(path: _, string: "this isn't a color", key: "ArticleTitle") {
       // That's the expected exception we want to happen

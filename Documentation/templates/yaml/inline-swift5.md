@@ -50,7 +50,7 @@ internal enum YAMLFiles {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/YAML/inline-swift5/all.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/YAML/inline-swift5/all.swift)
 
 ## Usage example
 

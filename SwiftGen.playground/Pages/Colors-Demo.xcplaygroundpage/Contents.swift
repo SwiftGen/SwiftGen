@@ -2,6 +2,7 @@
 //:
 //: * Demo for `colors` parser
 //: * [Demo for `coredata` parser](CoreData-Demo)
+//: * [Demo for `files` parser](Files-Demo)
 //: * [Demo for `fonts` parser](Fonts-Demo)
 //: * [Demo for `ib` parser](InterfaceBuilder-Demo)
 //: * [Demo for `json` parser](JSON-Demo)
@@ -14,7 +15,7 @@
 //:  - Note: The `colors` parsers is primarily aimed to parse Android `colors.xml` files and text files.
 //:          In most cases, you should prefer defining your colors in asset catalogs – as those support multiple variants for light/dark mode, P3 colorspace, and more – and use the `xcassets` parser instead to generate constants for those colors.
 
-#if os(OSX)
+#if os(macOS)
   import AppKit
   internal enum ColorName { }
 #elseif os(iOS) || os(tvOS) || os(watchOS)

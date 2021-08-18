@@ -8,6 +8,7 @@ The assets parser accepts one (or more) asset catalogs, which it'll parse for su
 - Color Set Type (colorset)
 - Data Set Type (dataset)
 - Image Set Type (imageset)
+- Symbol Set Type (symbolset)
 
 For a full documentation of asset catalog types, please read the [Apple documentation](https://developer.apple.com/library/content/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format/AssetTypes.html).
 
