@@ -965,7 +965,7 @@ If you want to contribute, don't hesitate to open a Pull Request, or even join t
 
 ## Other Libraries / Tools
 
-If you want to also get rid of String-based APIs not only for your ressources, but also for `UITableViewCell`, `UICollectionViewCell` and XIB-based views, you should take a look at my Mixin [Reusable](https://github.com/AliSoftware/Reusable).
+If you want to also get rid of String-based APIs not only for your resources, but also for `UITableViewCell`, `UICollectionViewCell` and XIB-based views, you should take a look at my Mixin [Reusable](https://github.com/AliSoftware/Reusable).
 
 If you want to generate Swift code from your own Swift code (so meta!), like generate `Equatable` conformance to your types and a lot of other similar things, use [Sourcery](https://github.com/krzysztofzablocki/Sourcery).
 
