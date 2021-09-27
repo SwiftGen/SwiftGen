@@ -49,9 +49,11 @@ _None_
 * Switched the whole project over to use Swift Package Manager, restructuring some of the internals in the process.  
   [David Jennes](https://github.com/djbe)
   [#793](https://github.com/SwiftGen/SwiftGen/pull/793)
-* Updated Pods and Gems dependencies.  
+* Updated dependencies and gems, particularyly PathKit to support Xcode 13.  
   [David Jennes](https://github.com/djbe)
+  [Jared Sorge](https://github.com/jsorge)
   [#827](https://github.com/SwiftGen/SwiftGen/pull/827)
+  [#874](https://github.com/SwiftGen/SwiftGen/pull/874)
 
 ## 6.4.0
 
