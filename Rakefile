@@ -46,8 +46,8 @@ namespace :cli do
        "(defaults $bindir=#{BUILD_DIR}/swiftgen/bin/)"
   task :install, %i[bindir] => :build do |task, args|
     bindir = defaults(args)
-    generated_binary_path = "#{BUILD_DIR}/release/swiftgen"
-    generated_bundle_path = "#{BUILD_DIR}/release/SwiftGen_SwiftGenCLI.bundle"
+    generated_binary_path = "#{BUILD_DIR}/apple/Products/Release/swiftgen"
+    generated_bundle_path = "#{BUILD_DIR}/apple/Products/Release/SwiftGen_SwiftGenCLI.bundle"
 
     Utils.print_header "Installing binary in #{bindir}"
     Utils.run([
