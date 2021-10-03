@@ -54,6 +54,7 @@ _None_
   [Jared Sorge](https://github.com/jsorge)
   [#827](https://github.com/SwiftGen/SwiftGen/pull/827)
   [#874](https://github.com/SwiftGen/SwiftGen/pull/874)
+  [#879](https://github.com/SwiftGen/SwiftGen/pull/879)
 
 ## 6.4.0
 

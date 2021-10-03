@@ -15,9 +15,9 @@ let package = Package(
     .package(url: "https://github.com/kylef/Commander.git", from: "0.9.1"),
     .package(url: "https://github.com/kylef/PathKit.git", from: "1.0.1"),
     .package(url: "https://github.com/kylef/Stencil.git", from: "0.14.1"),
-    .package(url: "https://github.com/shibapm/Komondor.git", from: "1.0.6"),
+    .package(url: "https://github.com/shibapm/Komondor.git", from: "1.1.1"),
     .package(url: "https://github.com/SwiftGen/StencilSwiftKit.git", from: "2.8.0"),
-    .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.4")
+    .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.7")
   ],
   targets: [
     .target(name: "SwiftGen", dependencies: [

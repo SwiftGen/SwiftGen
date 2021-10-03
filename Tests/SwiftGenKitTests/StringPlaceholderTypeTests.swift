@@ -99,15 +99,17 @@ final class StringPlaceholderTypeTests: XCTestCase {
     one: String,
     other: String
   ) -> StringsDict.PluralEntry.Variable {
-    .init(name: name, rule: .init(
-      specTypeKey: "NSStringPluralRuleType",
-      valueTypeKey: type,
-      zero: nil,
-      one: one,
-      two: nil,
-      few: nil,
-      many: nil,
-      other: other
+    .init(
+      name: name,
+      rule: .init(
+        specTypeKey: "NSStringPluralRuleType",
+        valueTypeKey: type,
+        zero: nil,
+        one: one,
+        two: nil,
+        few: nil,
+        many: nil,
+        other: other
       )
     )
   }
