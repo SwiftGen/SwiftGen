@@ -20,7 +20,8 @@ namespace :spm do
 
   desc 'Update versions'
   task :update_versions, %i[swiftgen] do |task, args|
-    swiftgen = args.swiftgen.to_s.empty? ? Utils.last_git_tag_version : args.swiftgen
+    args.with_defaults(:swiftgen => Utils.last_git_tag_version)
+    swiftgen = args.swiftgen
     swiftgenkit = swiftgen
     stencil = Utils.spm_resolved_version('Stencil')
     stencilswiftkit = Utils.spm_resolved_version('StencilSwiftKit')
