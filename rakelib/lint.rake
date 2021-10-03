@@ -5,7 +5,7 @@
 
 namespace :lint do
   SWIFTLINT = 'Scripts/SwiftLint.sh'
-  SWIFTLINT_VERSION = '0.43.1'
+  SWIFTLINT_VERSION = '0.44.0'
 
   task :install do |task| 
     next if check_version

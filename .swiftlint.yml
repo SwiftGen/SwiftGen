@@ -1,4 +1,4 @@
-swiftlint_version: 0.43.1
+swiftlint_version: 0.44.0
 
 opt_in_rules:
  - anyobject_protocol
@@ -18,6 +18,7 @@ opt_in_rules:
  - convenience_type
  - discarded_notification_center_observer
  - discouraged_assert
+ - discouraged_none_name
  - discouraged_optional_boolean
  - discouraged_optional_collection
  - empty_collection_literal
@@ -76,6 +77,7 @@ opt_in_rules:
  - unavailable_function
  - unneeded_parentheses_in_closure_argument
  - unowned_variable_capture
+ - unused_closure_parameter
  - vertical_parameter_alignment_on_call
  - vertical_whitespace_closing_braces
  - vertical_whitespace_opening_braces
