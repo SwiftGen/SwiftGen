@@ -2,6 +2,65 @@
 
 ---
 
+## 6.5.0
+
+### Changes in core dependencies of SwiftGen
+
+* [StencilSwiftKit 2.8.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.8.0/CHANGELOG.md)
+* [Stencil 0.14.1](https://github.com/kylef/Stencil/blob/0.14.1/CHANGELOG.md)
+
+### New Features
+
+* XCAssets: the parser now supports Symbol sets, so you can safely use custom symbols.  
+  [David Jennes](https://github.com/djbe)
+  [#788](https://github.com/SwiftGen/SwiftGen/pull/788)
+* XCAssets: you can now provide a trait collection when initializing a color or image asset (on iOS/tvOS).  
+  [David Jennes](https://github.com/djbe)
+  [#790](https://github.com/SwiftGen/SwiftGen/pull/790)
+* Files: Add new parser for accessing loose files in your project.  
+  [Mike Gray](https://github.com/mgray88)
+  [David Jennes](https://github.com/djbe)
+  [#665](https://github.com/SwiftGen/SwiftGen/issues/665)
+  [#734](https://github.com/SwiftGen/SwiftGen/pull/734)
+* Colors: The XML parser now supports Android color aliases (using `@color/...`).  
+  [David Jennes](https://github.com/djbe)
+  [#562](https://github.com/SwiftGen/SwiftGen/issues/562)
+  [#797](https://github.com/SwiftGen/SwiftGen/pull/797)
+* Support M1 and Intel devices (universal binary).  
+  [David Jennes](https://github.com/djbe)
+  [#805](https://github.com/SwiftGen/SwiftGen/issues/805)
+  [#880](https://github.com/SwiftGen/SwiftGen/pull/880)
+
+### Bug Fixes
+
+* XCAssets: fixed some availability annotations that were incorrect.  
+  [David Jennes](https://github.com/djbe)
+  [#789](https://github.com/SwiftGen/SwiftGen/pull/789)
+* Strings: `objc-h` template now emits valid documentation comments.  
+  [@szotp](https://github.com/szotp)
+  [#822](https://github.com/SwiftGen/SwiftGen/pull/822)
+* Generate `xcfilelist`: Adds the template file path to the inputs `xcfilelist` (for custom templates).  
+  [Craig Siemens](https://github.com/CraigSiemens)
+  [#815](https://github.com/SwiftGen/SwiftGen/pull/815)
+* Strings: built-in templates now have better handling of multi-line translations.  
+  [@mrackwitz](https://github.com/mrackwitz)
+  [#774](https://github.com/SwiftGen/SwiftGen/pull/774)
+
+### Internal Changes
+
+* Switch to GitHub Actions.  
+  [#794](https://github.com/SwiftGen/SwiftGen/pull/794)
+  [David Jennes](https://github.com/djbe)
+* Switched the whole project over to use Swift Package Manager, restructuring some of the internals in the process.  
+  [David Jennes](https://github.com/djbe)
+  [#793](https://github.com/SwiftGen/SwiftGen/pull/793)
+* Updated dependencies and gems, particularyly PathKit to support Xcode 13.  
+  [David Jennes](https://github.com/djbe)
+  [Jared Sorge](https://github.com/jsorge)
+  [#827](https://github.com/SwiftGen/SwiftGen/pull/827)
+  [#874](https://github.com/SwiftGen/SwiftGen/pull/874)
+  [#879](https://github.com/SwiftGen/SwiftGen/pull/879)
+
 ## 6.4.0
 
 ### New Features

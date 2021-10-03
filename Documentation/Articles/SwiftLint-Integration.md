@@ -21,6 +21,11 @@ custom_rules:
     regex: '(UIColor(\.init)?|#colorLiteral)\(((red|displayP3Red):.+?,green:.+?,blue:.+?,alpha:.+?)|(white:.+?,alpha:.+?)|(hue:.+?,saturation:.+?,brightness:.+?,alpha:.+?)\)'
     message: "Use ColorName.<color> instead"
     severity: error
+  swiftgen_files:
+    name: "SwiftGen Files"
+    regex: '(url\(forResource: ?"?.+"?, ?withExtension: ?"?.+"?, ?subdirectory: ?"?.+"?(, ?localization: ?"?.+"?)?\))|(path\(forResource: ?"?.+"?, ?ofType: ?"?.+"?(, ?inDirectory: ?"?.+"?(, ?forLocalization: ?"?.+"?)?)?\))'
+    message: "Use Files.<dir/file> instead"
+    severity: error
   swiftgen_fonts:
     name: "SwiftGen Fonts"
     regex: 'UIFont(\.init)?\(name: ?"?.+"?, ?size:.+?\)'

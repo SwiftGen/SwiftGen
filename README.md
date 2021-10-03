@@ -21,6 +21,7 @@ SwiftGen is a tool to automatically generate Swift code for resources of your pr
       <li><a href="#asset-catalog">Assets Catalogs</a>
       <li><a href="#colors">Colors</a>
       <li><a href="#core-data">Core Data</a>
+      <li><a href="#files">Files</a>
       <li><a href="#fonts">Fonts</a>
       <li><a href="#interface-builder">Interface Builder files</a>
       <li><a href="#json-and-yaml">JSON and YAML files</a>
@@ -146,11 +147,11 @@ bundle install
 You can now install to the default locations (no parameter) or to custom locations:
 
 ```sh
-# Binary is installed in `./build/swiftgen/bin`, frameworks in `./build/swiftgen/lib` and templates in `./build/swiftgen/templates`
+# Binary is installed in `./.build/swiftgen/bin`
 $ rake cli:install
 # - OR -
-# Binary will be installed in `~/swiftgen/bin`, frameworks in `~/swiftgen/fmk` and templates in `~/swiftgen/tpl`
-$ rake cli:install[~/swiftgen/bin,~/swiftgen/fmk,~/swiftgen/tpl]
+# Binary will be installed in `~/swiftgen/bin``
+$ rake cli:install[~/swiftgen/bin]
 ```
 
 You can then invoke SwiftGen using the path to the binary where you installed it:
@@ -222,6 +223,7 @@ While we highly recommend the use a configuration file for performance reasons (
 
 * `swiftgen run colors [OPTIONS] DIRORFILE1 …`
 * `swiftgen run coredata [OPTIONS] DIRORFILE1 …`
+* `swiftgen run files [OPTIONS] DIRORFILE1 …`
 * `swiftgen run fonts [OPTIONS] DIRORFILE1 …`
 * `swiftgen run ib [OPTIONS] DIRORFILE1 …`
 * `swiftgen run json [OPTIONS] DIRORFILE1 …`
@@ -251,7 +253,7 @@ SwiftGen is based on templates (it uses [Stencil](https://github.com/stencilproj
 
 ### Bundled templates vs. Custom ones
 
-SwiftGen comes bundled with some templates for each of the parsers (`colors`, `coredata`, `fonts`, `ib`, `json`, `plist`, `strings`, `xcassets`, `yaml`), which will fit most needs; simply use the `templateName` output option to specify the name of the template to use. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs: just store them anywhere (like in your project repository) and use the `templatePath` output option instead of `templateName`, to specify their path.
+SwiftGen comes bundled with some templates for each of the parsers (`colors`, `coredata`, `files`, `fonts`, `ib`, `json`, `plist`, `strings`, `xcassets`, `yaml`), which will fit most needs; simply use the `templateName` output option to specify the name of the template to use. But you can also create your own templates if the bundled ones don't suit your coding conventions or needs: just store them anywhere (like in your project repository) and use the `templatePath` output option instead of `templateName`, to specify their path.
 
 💡 You can use the `swiftgen template list` command to list all the available bundled templates for each parser, and use `swiftgen template cat` to show a template's content and duplicate it to create your own variation.
 
@@ -337,6 +339,10 @@ internal enum Asset {
       internal static let tint = ColorAsset(value: "Vengo/Tint")
     }
   }
+  internal enum Symbols {
+    internal static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
+    internal static let plus = SymbolAsset(name: "Plus")
+  }
   internal enum Targets {
     internal static let bottles = ARResourceGroupAsset(name: "Bottles")
     internal static let paintings = ARResourceGroupAsset(name: "Paintings")
@@ -360,9 +366,14 @@ let tintColor = Asset.Styles.Vengo.tint.color
 let data = Asset.data.data
 let readme = Asset.readme.data
 
-// you can load an AR resource group's items using:
+// You can load an AR resource group's items using:
 let bottles = Asset.Targets.bottles.referenceObjects
 let paintings = Asset.Targets.paintings.referenceImages
+
+// You can create new symbol images by referring to the enum instance and calling `.image` on it (with or without configuration)
+let plus = Asset.Symbols.plus.image
+let style = UIImage.SymbolConfiguration(textStyle: .headline)
+let styled = Asset.Symbols.exclamationMark.image(with: style)
 ```
 
 ## Colors
@@ -382,9 +393,9 @@ This will generate a `enum ColorName` with one `static let` per color listed in 
 
 The input file is expected to be either:
 
-* a [plain text file](Tests/Fixtures/Resources/Colors/extra.txt), with one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`) or the name of another color in the file. Whitespaces are ignored.
-* a [JSON file](Tests/Fixtures/Resources/Colors/colors.json), representing a dictionary of names -> values, each value being the hex representation of the color
-* a [XML file](Tests/Fixtures/Resources/Colors/colors.xml), expected to be the same format as the Android colors.xml files, containing tags `<color name="AColorName">AColorHexRepresentation</color>`
+* a [plain text file](Sources/TestUtils/Fixtures/Resources/Colors/extra.txt), with one line per color to register, each line being composed by the Name to give to the color, followed by ":", followed by the Hex representation of the color (like `rrggbb` or `rrggbbaa`, optionally prefixed by `#` or `0x`) or the name of another color in the file. Whitespaces are ignored.
+* a [JSON file](Sources/TestUtils/Fixtures/Resources/Colors/colors.json), representing a dictionary of names -> values, each value being the hex representation of the color
+* a [XML file](Sources/TestUtils/Fixtures/Resources/Colors/colors.xml), expected to be the same format as the Android colors.xml files, containing tags `<color name="AColorName">AColorHexRepresentation</color>`
 * a [`*.clr` file](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/DrawColor/Concepts/AboutColorLists.html#//apple_ref/doc/uid/20000757-BAJHJEDI) used by Apple's Color Palettes.
 
 For example you can use this command to generate colors from one of your system color lists:
@@ -532,6 +543,77 @@ let mainItems = try myContext.execute(request)
 let relatedItem = myMainItem.manyToMany.first
 ```
 
+## Files
+
+```yaml
+files:
+  inputs: path/to/search
+  filter: .+\.mp4$
+  outputs:
+    templateName: structured-swift5
+    output: Files.swift
+```
+
+The files parser is intended to just list the name and mimetype of the files and subdirectories in a given directory. This will recursively search the specified directory using the given filter (default `.*`), defining a `struct File` for each matching file, and an hierarchical enum representing the directory structure of files.
+
+<details>
+<summary>Example of code generated by the bundled template</summary>
+
+```swift
+internal enum Files {
+  /// test.txt
+  internal static let testTxt = File(name: "test", ext: "txt", path: "", mimeType: "text/plain")
+  /// subdir/
+  internal enum Subdir {
+    /// subdir/A Video With Spaces.mp4
+    internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", path: "subdir", mimeType: "video/mp4")
+  }
+}
+```
+</details>
+
+### Usage Example
+
+```swift
+// Access files using the `url` or `path` fields
+let txt = Files.testTxt.url
+let video = Files.Subdir.aVideoWithSpacesMp4.path
+
+// In addition, there are `url(locale:)` and `path(locale:)` to specify a locale
+let localeTxt = Files.testTxt.url(locale: Locale.current)
+let localeVideo = Files.Subdir.aVideoWithSpacesMp4.path(locale: Locale.current)
+```
+
+### Flat Structure Support
+
+SwiftGen also has a template if you're not interested in keeping the folder structure in the generated code.
+
+<details>
+<summary>Example of code generated by the flat bundled template</summary>
+
+```swift
+internal enum Files {
+  /// test.txt
+  internal static let testTxt = File(name: "test", ext: "txt", path: "", mimeType: "text/plain")
+  /// subdir/A Video With Spaces.mp4
+  internal static let aVideoWithSpacesMp4 = File(name: "A Video With Spaces", ext: "mp4", path: "subdir", mimeType: "video/mp4")
+  }
+}
+```
+</details>
+
+Given the same file and folder structure as above the usage will now be:
+
+```swift
+// Access files using the `url` or `path` fields
+let txt = Files.testTxt.url
+let video = Files.aVideoWithSpacesMp4.path
+
+// In addition, there are `url(locale:)` and `path(locale:)` to specify a locale
+let localeTxt = Files.testTxt.url(locale: Locale.current)
+let localeVideo = Files.aVideoWithSpacesMp4.path(locale: Locale.current)
+```
+
 ## Fonts
 
 ```yaml
@@ -632,9 +714,9 @@ vc.perform(segue: StoryboardSegue.Message.embed)
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
   switch StoryboardSegue.Message(segue) {
   case .embed?:
-    // Prepare for your custom segue transition, passing information to the destionation VC
+    // Prepare for your custom segue transition, passing information to the destination VC
   case .customBack?:
-    // Prepare for your custom segue transition, passing information to the destionation VC
+    // Prepare for your custom segue transition, passing information to the destination VC
   default:
     // Other segues from other scenes, not handled by this VC
     break
@@ -883,7 +965,7 @@ If you want to contribute, don't hesitate to open a Pull Request, or even join t
 
 ## Other Libraries / Tools
 
-If you want to also get rid of String-based APIs not only for your ressources, but also for `UITableViewCell`, `UICollectionViewCell` and XIB-based views, you should take a look at my Mixin [Reusable](https://github.com/AliSoftware/Reusable).
+If you want to also get rid of String-based APIs not only for your resources, but also for `UITableViewCell`, `UICollectionViewCell` and XIB-based views, you should take a look at my Mixin [Reusable](https://github.com/AliSoftware/Reusable).
 
 If you want to generate Swift code from your own Swift code (so meta!), like generate `Equatable` conformance to your types and a lot of other similar things, use [Sourcery](https://github.com/krzysztofzablocki/Sourcery).
 

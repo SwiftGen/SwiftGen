@@ -9,6 +9,7 @@ import Foundation
 import PathKit
 import Stencil
 import StencilSwiftKit
+import SwiftGenCLI
 import SwiftGenKit
 
 // MARK: - Main

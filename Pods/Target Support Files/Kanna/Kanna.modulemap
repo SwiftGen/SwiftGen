@@ -1,6 +1,0 @@
-framework module Kanna {
-  umbrella header "Kanna-umbrella.h"
-
-  export *
-  module * { export * }
-}

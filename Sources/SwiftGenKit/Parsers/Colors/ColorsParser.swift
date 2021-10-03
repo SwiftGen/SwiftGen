@@ -9,13 +9,16 @@ import PathKit
 
 public enum Colors {
   public enum ParserError: Error, CustomStringConvertible {
+    case colorNotFound(path: Path, name: String)
     case invalidHexColor(path: Path, string: String, key: String?)
     case invalidFile(path: Path, reason: String)
     case unsupportedFileType(path: Path, supported: [String])
-    case unsupportedColorFormat(path: Path, string: String, supported: [String])
+    case unsupportedColorFormat(string: String, supported: [String])
 
     public var description: String {
       switch self {
+      case .colorNotFound(let path, let name):
+        return "error: Unable to find color \"\(name)\" (\(path))."
       case .invalidHexColor(let path, let string, let key):
         let keyInfo = key.flatMap { " for key \"\($0)\"" } ?? ""
         return "error: Invalid hex color \"\(string)\" found\(keyInfo) (\(path))."
@@ -26,9 +29,9 @@ public enum Colors {
           error: Unsupported file type for \(path). \
           The supported file types are: \(supported.joined(separator: ", "))
           """
-      case .unsupportedColorFormat(let path, let string, let supported):
+      case .unsupportedColorFormat(let string, let supported):
         return """
-        error: Unsupported color format \(string) (\(path)). \
+        error: Unsupported color format \(string). \
         The supported color formats are: \(supported.joined(separator: ", "))
         """
       }
@@ -84,7 +87,7 @@ public enum Colors {
         throw ParserError.unsupportedFileType(path: path, supported: parsers.keys.sorted())
       }
 
-      let parser = parserType.init(options: options)
+      let parser = try parserType.init(options: options)
       let palette = try parser.parseFile(at: path)
       palettes += [palette]
     }

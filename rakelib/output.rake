@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Used constants:
-#  - WORKSPACE
+# _none_
 
 require_relative 'compilation_configuration'
 
@@ -9,25 +9,29 @@ require_relative 'compilation_configuration'
 
 namespace :generate do
   desc 'Generate Test Contexts'
-  task :contexts => 'xcode:build' do |task|
+  task :contexts => 'spm:build' do |task|
     Utils.print_header 'Generating contexts...'
+
+    ENV['GENERATE_CONTEXTS'] = 'YES'
     Utils.run(
-      %(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "SwiftGenKit - Generate Contexts" -configuration "#{CONFIGURATION}" test-without-building),
+      %(swift test --parallel --filter SwiftGenKitTests),
       task,
-      xcrun: true,
-      formatter: :xcpretty
+      xcrun: true
     )
+    ENV['GENERATE_CONTEXTS'] = ''
   end
 
   desc 'Generate Test Output'
-  task :output => 'xcode:build' do |task|
+  task :output => 'spm:build' do |task|
     Utils.print_header 'Generating expected test output files...'
+    
+    ENV['GENERATE_OUTPUT'] = 'YES'
     Utils.run(
-      %(xcodebuild -workspace "#{WORKSPACE}.xcworkspace" -scheme "Templates - Generate Output" -configuration "#{CONFIGURATION}" test-without-building),
+      %(swift test --parallel --filter TemplatesTests),
       task,
-      xcrun: true,
-      formatter: :xcpretty
+      xcrun: true
     )
+    ENV['GENERATE_OUTPUT'] = ''
   end
 end
 
@@ -76,7 +80,7 @@ namespace :output do
     Utils.print_header 'Compiling template output files'
 
     failures = []
-    Dir.glob('Tests/Fixtures/Generated/*/*/').each do |folder|
+    Dir.glob('Sources/TestUtils/Fixtures/Generated/*/*/').each do |folder|
       Utils.print_info "Loading config for #{folder}…\n"
       config = CompilationConfiguration.load(folder)
       next if config.nil?

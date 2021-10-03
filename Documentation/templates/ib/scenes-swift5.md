@@ -51,7 +51,7 @@ internal enum StoryboardScene {
 }
 ```
 
-[Full generated code](../../../Tests/Fixtures/Generated/IB-iOS/scenes-swift5/all.swift)
+[Full generated code](../../../Sources/TestUtils/Fixtures/Generated/IB-iOS/scenes-swift5/all.swift)
 
 ## Usage example
 

@@ -1,0 +1,23 @@
+name: Output
+
+on:
+  push:
+    branches: stable
+  pull_request:
+
+jobs:
+  compile:
+    name: Compile Output
+    runs-on: macos-11
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      -
+        name: Run tests
+        run: bundle exec rake output:compile
