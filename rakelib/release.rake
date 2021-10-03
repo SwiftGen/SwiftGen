@@ -18,7 +18,7 @@ end
 
 namespace :release do
   desc 'Create a new release on GitHub, CocoaPods and Homebrew'
-  task :new => [:check_versions, :confirm, 'xcode:test', :github, :cocoapods, :homebrew]
+  task :new => [:check_versions, :confirm, 'spm:test', :github, :cocoapods, :homebrew]
 
   desc 'Check if all versions from the podspecs and CHANGELOG match'
   task :check_versions do
