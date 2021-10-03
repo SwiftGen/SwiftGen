@@ -37,7 +37,7 @@ namespace :cli do
   task :build do |task, args|
     Utils.print_header 'Building Binary'
     Utils.run(
-      %(swift build --disable-sandbox -c release),
+      %(swift build --disable-sandbox -c release --arch arm64 --arch x86_64),
       task, xcrun: true, formatter: :raw
     )
   end

@@ -25,6 +25,10 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#562](https://github.com/SwiftGen/SwiftGen/issues/562)
   [#797](https://github.com/SwiftGen/SwiftGen/pull/797)
+* Support M1 and Intel devices (universal binary).  
+  [David Jennes](https://github.com/djbe)
+  [#805](https://github.com/SwiftGen/SwiftGen/issues/805)
+  [#880](https://github.com/SwiftGen/SwiftGen/pull/880)
 
 ### Bug Fixes
 
