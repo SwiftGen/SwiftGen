@@ -14,7 +14,7 @@ _None_
 
 ### Bug Fixes
 
-* Workaround for Mint that does not yet support the SPM resource bundle.
+* Workaround for Mint that does not yet support the SPM resource bundle.  
   [@tid-kijyun](https://github.com/tid-kijyun)
   [#883](https://github.com/SwiftGen/SwiftGen/issues/883)
   [#885](https://github.com/SwiftGen/SwiftGen/pull/885)
