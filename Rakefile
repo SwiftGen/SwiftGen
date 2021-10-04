@@ -16,38 +16,28 @@ POD_NAME = 'SwiftGen'
 MIN_XCODE_VERSION = 13.0
 BUILD_DIR = File.absolute_path('./.build')
 
-## [ Utils ] ##################################################################
-
-def path(str)
-  return nil if str.nil? || str.empty?
-
-  Pathname.new(str)
-end
-
-def defaults(args)
-  bindir = path(args.bindir) || (Pathname.new(BUILD_DIR) + 'swiftgen/bin')
-  bindir.expand_path
-end
-
 ## [ Build Tasks ] ############################################################
 
 namespace :cli do
   desc "Build the CLI binary\n" \
     "(in #{BUILD_DIR})"
-  task :build do |task, args|
+  task :build, %[universal] do |task, args|
+    args.with_defaults(universal: false)
+
     Utils.print_header 'Building Binary'
-    Utils.run(
-      %(swift build --disable-sandbox -c release --arch arm64 --arch x86_64),
-      task, xcrun: true, formatter: :raw
-    )
+    archs = args.universal ? '--arch arm64 --arch x86_64' : ''
+    Utils.run(%(swift build --disable-sandbox -c release #{archs}), task, xcrun: true, formatter: :raw)
   end
 
   desc "Install the binary in $bindir\n" \
        "(defaults $bindir=#{BUILD_DIR}/swiftgen/bin/)"
-  task :install, %i[bindir] => :build do |task, args|
-    bindir = defaults(args)
-    generated_binary_path = "#{BUILD_DIR}/apple/Products/Release/swiftgen"
-    generated_bundle_path = "#{BUILD_DIR}/apple/Products/Release/SwiftGen_SwiftGenCLI.bundle"
+  task :install, %i[bindir universal] => :build do |task, args|
+    args.with_defaults(bindir: "#{BUILD_DIR}/swiftgen/bin/", universal: false)
+
+    bindir = Pathname.new(args.bindir).expand_path
+    actual_build_dir = args.universal ? "#{BUILD_DIR}/apple/Products/Release" : "#{BUILD_DIR}/release"
+    generated_binary_path = "#{actual_build_dir}/swiftgen"
+    generated_bundle_path = "#{actual_build_dir}/SwiftGen_SwiftGenCLI.bundle"
 
     Utils.print_header "Installing binary in #{bindir}"
     Utils.run([

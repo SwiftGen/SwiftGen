@@ -36,18 +36,6 @@ extension Path {
   // Deprecated: Remove this in SwiftGen 7.0
   public static let deprecatedAppSupportTemplates = Path.deprecatedApplicationSupport + "SwiftGen/templates"
   public static let bundledTemplates = Path(Bundle.module.path(forResource: "templates", ofType: nil) ?? "")
-
-  // MARK: Private
-
-  private static let templatesRelativePath: String = {
-    if let path = Bundle.main.object(forInfoDictionaryKey: "TemplatePath") as? String, !path.isEmpty {
-      return path
-    } else if let path = BundleToken.bundle.path(forResource: "templates", ofType: nil) {
-      return path
-    } else {
-      return "../templates"
-    }
-  }()
 }
 
 /// URL to the Documentation on GitHub
@@ -57,11 +45,3 @@ public func gitHubDocURL(version: String, path: String = "") -> URL {
     string: "https://github.com/SwiftGen/SwiftGen/\(type)/\(version)/Documentation/\(path)"
   )! // swiftlint:disable:this force_unwrapping
 }
-
-// swiftlint:disable convenience_type
-private final class BundleToken {
-  static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
-  }()
-}
-// swiftlint:enable convenience_type
