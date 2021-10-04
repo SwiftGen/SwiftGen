@@ -42,22 +42,23 @@ enum ConfigCLI {
   
   static let run = command(
     CLIOption.configFile(),
-    Option("logLevel", default: CommandLogLevel.default.rawValue, description: "Log level"),
+    Flag("quiet", default: false, flag: "q", description: "Hide all non error logs"),
     Flag("verbose", default: false, flag: "v", description: "Print each command being executed")
-  ) { file, logLevel, legacyVerbose in
+  ) { file, logLevel, verbose in
     do {
       try ErrorPrettifier.execute {
         let config = try Config(file: file)
         
-        if legacyVerbose {
-          commandLogLevel = .verbose
-        } else {
-          commandLogLevel = CommandLogLevel(rawValue: logLevel) ?? .default
+        switch (quiet, verbose) {
+        case (true, _):
+            commandLogLevel = .quiet
+        case (_, true):
+            commandLogLevel = .verbose
+            logMessage(.info, "Executing configuration file \(file)")
+        default:
+            commandLogLevel = .default
         }
-        
-        if commandLogLevel == .verbose {
-          logMessage(.info, "Executing configuration file \(file)")
-        }
+          
         try file.parent().chdir {
           try config.runCommands(logLevel: commandLogLevel)
         }

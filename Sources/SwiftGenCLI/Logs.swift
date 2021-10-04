@@ -8,8 +8,8 @@ import Foundation
 
 // MARK: Printing on stderr
 
-public enum CommandLogLevel: String {
-  case silent, `default`, verbose
+public enum CommandLogLevel {
+  case quiet, `default`, verbose
 }
 
 public var commandLogLevel: CommandLogLevel = .default
@@ -49,7 +49,7 @@ enum ANSIColor: UInt8, CustomStringConvertible {
 
 
 public func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
-  if commandLogLevel == .silent { return }
+  if commandLogLevel == .quiet { return }
   logQueue.async {
     switch level {
     case .info:
