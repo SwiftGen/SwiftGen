@@ -2,15 +2,7 @@
 
 ---
 
-## Develop
-
-### Breaking Changes
-
-_None_
-
-### New Features
-
-_None_
+## 6.5.1
 
 ### Bug Fixes
 
