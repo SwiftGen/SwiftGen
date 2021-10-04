@@ -49,12 +49,13 @@ enum ANSIColor: UInt8, CustomStringConvertible {
 
 
 public func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
-  if commandLogLevel == .quiet { return }
   logQueue.async {
     switch level {
     case .info:
+      if commandLogLevel == .quiet { return }
       fputs(ANSIColor.green.format("\(string)\n"), stdout)
     case .warning:
+      if commandLogLevel == .quiet { return }
       fputs(ANSIColor.yellow.format("swiftgen: warning: \(string)\n"), stderr)
     case .error:
       fputs(ANSIColor.red.format("swiftgen: error: \(string)\n"), stderr)
