@@ -18,7 +18,9 @@ _None_
 
 ### Internal Changes
 
-_None_
+* Tweak release script to handle both universal & slim builds.  
+  [David Jennes](https://github.com/djbe)
+  [#884](https://github.com/SwiftGen/SwiftGen/pull/884)
 
 ## 6.5.0
 
