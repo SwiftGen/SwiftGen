@@ -2,6 +2,21 @@
 
 ---
 
+## 6.5.1
+
+### Bug Fixes
+
+* Workaround for Mint that does not yet support the SPM resource bundle.  
+  [@tid-kijyun](https://github.com/tid-kijyun)
+  [#883](https://github.com/SwiftGen/SwiftGen/issues/883)
+  [#885](https://github.com/SwiftGen/SwiftGen/pull/885)
+
+### Internal Changes
+
+* Tweak release script to handle both universal & slim builds.  
+  [David Jennes](https://github.com/djbe)
+  [#884](https://github.com/SwiftGen/SwiftGen/pull/884)
+
 ## 6.5.0
 
 ### Changes in core dependencies of SwiftGen

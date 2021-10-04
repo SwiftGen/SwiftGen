@@ -8,6 +8,7 @@ let package = Package(
   ],
   products: [
     .executable(name: "swiftgen", targets: ["SwiftGen"]),
+    .library(name: "SwiftGenCLI", targets: ["SwiftGenCLI"]),
     .library(name: "SwiftGenKit", targets: ["SwiftGenKit"]),
   ],
   dependencies: [
