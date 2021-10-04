@@ -44,7 +44,7 @@ enum ConfigCLI {
     CLIOption.configFile(),
     Flag("quiet", default: false, flag: "q", description: "Hide all non error logs"),
     Flag("verbose", default: false, flag: "v", description: "Print each command being executed")
-  ) { file, logLevel, verbose in
+  ) { file, quiet, verbose in
     do {
       try ErrorPrettifier.execute {
         let config = try Config(file: file)
