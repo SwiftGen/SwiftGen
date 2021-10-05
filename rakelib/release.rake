@@ -3,9 +3,11 @@
 # Used constants:
 # - BUILD_DIR
 
+require 'digest'
 require 'net/http'
-require 'uri'
 require 'open3'
+require 'open-uri'
+require 'uri'
 
 def first_match_in_file(file, regexp)
   File.foreach(file) do |line|
@@ -165,10 +167,12 @@ namespace :release do
   desc 'Release a new version on Homebrew and prepare a PR'
   task :homebrew do
     Utils.print_header 'Updating Homebrew Formula'
+    
     tag = Utils.podspec_version('SwiftGen')
-    sh 'git pull --tags'
-    revision = `git rev-list -1 #{tag}`.chomp
-    formulas_dir = Bundler.with_clean_env { `brew --repository homebrew/core`.chomp }
+    archive_url = "https://github.com/SwiftGen/SwiftGen/archive/#{tag}.tar.gz"
+    digest = Digest::SHA256.hexdigest URI.open(archive_url).read
+
+    formulas_dir = Bundler.with_original_env { `brew --repository homebrew/core`.chomp }
     Dir.chdir(formulas_dir) do
       sh 'git checkout master'
       sh 'git pull'
@@ -178,8 +182,8 @@ namespace :release do
       formula = File.read(formula_file)
 
       new_formula = formula
-                    .gsub(/(tag:\s+)".*"/, %(\\1"#{tag}"))
-                    .gsub(/(revision:\s+)".*"/, %(\\1"#{revision}"))
+                    .gsub(/(url\s+)".*"/, %(\\1"#{archive_url}"))
+                    .gsub(/(sha256\s+)".*"/, %(\\1"#{digest}"))
       File.write(formula_file, new_formula)
 
       Utils.print_info 'Formula has been auto-updated. Do you need to also do manual updates to it before continuing [y/n]?'
@@ -190,7 +194,7 @@ namespace :release do
       end
 
       Utils.print_header 'Checking Homebrew formula...'
-      Bundler.with_clean_env do
+      Bundler.with_original_env do
         sh 'brew audit --strict --online swiftgen'
         sh 'brew reinstall swiftgen --build-from-source'
         sh 'brew test swiftgen'
