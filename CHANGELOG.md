@@ -10,7 +10,7 @@ _None_
 
 ### New Features
 
-* Adding support for quiet log level.
+* Added support for `--quiet/-q` flag, to suppress all logs (except errors).  
   [Andre113](https://github.com/Andre113)
   [#562](https://github.com/SwiftGen/SwiftGen/issues/823)
   [#797](https://github.com/SwiftGen/SwiftGen/pull/846)
