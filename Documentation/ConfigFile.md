@@ -141,7 +141,7 @@ If you need more control when using a configuration file, you can use some advan
       ```sh
       swiftgen config run --verbose
       ```
-  * Quiet mode (`--quiet` or `-q` flag), which will silent every command being executed when executing it (except for errors):
+  * Quiet mode (`--quiet` or `-q` flag), which will silence all logs (except for errors):
 
       ```sh
       swiftgen config run --quiet
