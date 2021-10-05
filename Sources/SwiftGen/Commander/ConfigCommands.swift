@@ -51,14 +51,15 @@ enum ConfigCLI {
         
         switch (quiet, verbose) {
         case (true, _):
-            commandLogLevel = .quiet
+          commandLogLevel = .quiet
         case (_, true):
-            commandLogLevel = .verbose
-            logMessage(.info, "Executing configuration file \(file)")
+          commandLogLevel = .verbose
         default:
-            commandLogLevel = .default
+          commandLogLevel = .default
         }
-          
+        
+        logMessage(.info, "Executing configuration file \(file)")
+        
         try file.parent().chdir {
           try config.runCommands(logLevel: commandLogLevel)
         }
