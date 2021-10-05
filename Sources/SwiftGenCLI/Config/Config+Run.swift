@@ -26,7 +26,7 @@ extension Config {
       throw Error.multipleErrors(errors)
     }
   }
-  
+
   private func run(
     parserCommand: ParserCLI,
     entry: ConfigEntry,

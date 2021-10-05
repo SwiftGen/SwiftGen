@@ -39,7 +39,7 @@ enum ConfigCLI {
   }
 
   // MARK: Run
-  
+
   static let run = command(
     CLIOption.configFile(),
     Flag("quiet", default: false, flag: "q", description: "Hide all non error logs"),
@@ -48,7 +48,7 @@ enum ConfigCLI {
     do {
       try ErrorPrettifier.execute {
         let config = try Config(file: file)
-        
+
         switch (quiet, verbose) {
         case (true, _):
           commandLogLevel = .quiet
@@ -57,9 +57,9 @@ enum ConfigCLI {
         default:
           commandLogLevel = .default
         }
-        
+
         logMessage(.info, "Executing configuration file \(file)")
-        
+
         try file.parent().chdir {
           try config.runCommands(logLevel: commandLogLevel)
         }
