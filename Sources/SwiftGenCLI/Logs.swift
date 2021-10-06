@@ -8,6 +8,12 @@ import Foundation
 
 // MARK: Printing on stderr
 
+public enum CommandLogLevel {
+  case quiet, `default`, verbose
+}
+
+public var commandLogLevel: CommandLogLevel = .default
+
 public enum LogLevel {
   case info, warning, error
 }
@@ -43,12 +49,16 @@ enum ANSIColor: UInt8, CustomStringConvertible {
 
 public func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
   logQueue.async {
-    switch level {
-    case .info:
+    switch (level, commandLogLevel) {
+    case (.info, .quiet):
+      break
+    case (.info, _):
       fputs(ANSIColor.green.format("\(string)\n"), stdout)
-    case .warning:
+    case (.warning, .quiet):
+      break
+    case (.warning, _):
       fputs(ANSIColor.yellow.format("swiftgen: warning: \(string)\n"), stderr)
-    case .error:
+    case (.error, _):
       fputs(ANSIColor.red.format("swiftgen: error: \(string)\n"), stderr)
     }
   }

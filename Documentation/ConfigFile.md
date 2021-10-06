@@ -132,13 +132,20 @@ If you need more control when using a configuration file, you can use some advan
   swiftgen config init --config tools/swiftgen/swiftgen-config.yml
   ```
   
-* Enable the verbose mode, which will print every command being executed when executing it, using the `--verbose` flag. This allows your to:
-  * control what is being run, by logging what happens during execution
-  * know the equivalent command to type if you were to run each swiftgen command manually instead of using the config file — which can be useful if you need to debug or tweak a particular command in isolation for example
+* Change the default log level to quiet or verbose. If no log level is specified, default will be used.
 
-  ```sh
-  swiftgen config run --verbose
-  ```
+  * Verbose mode (`--verbose` or `-v` flag), which will print every command being executed when executing it. This allows your to:
+    * control what is being run, by logging what happens during execution
+    * know the equivalent command to type if you were to run each swiftgen command manually instead of using the config file — which can be useful if you need to debug or tweak a particular command in isolation for example
+
+      ```sh
+      swiftgen config run --verbose
+      ```
+  * Quiet mode (`--quiet` or `-q` flag), which will silence all logs (except for errors):
+
+      ```sh
+      swiftgen config run --quiet
+      ```
 
 ## Linting the configuration file
 
