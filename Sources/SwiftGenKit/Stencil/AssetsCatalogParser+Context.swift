@@ -14,7 +14,7 @@ import Foundation
 extension AssetsCatalog.Parser {
   public func stencilContext() -> [String: Any] {
     let catalogs = self.catalogs
-      .sorted { lhs, rhs in lhs.name < rhs.name }
+      .sorted { $0.name.compare($1.name, options: .caseInsensitive) == .orderedAscending }
       .map { catalog -> [String: Any] in
         [
           "name": catalog.name,

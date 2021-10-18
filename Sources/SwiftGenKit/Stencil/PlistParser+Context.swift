@@ -14,7 +14,7 @@ import Foundation
 extension Plist.Parser {
   public func stencilContext() -> [String: Any] {
     let files = self.files
-      .sorted { lhs, rhs in lhs.name < rhs.name }
+      .sorted { $0.name.compare($1.name, options: .caseInsensitive) == .orderedAscending }
       .map(map(file:))
 
     return [

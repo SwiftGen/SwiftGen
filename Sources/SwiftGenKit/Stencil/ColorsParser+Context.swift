@@ -14,10 +14,10 @@ import Foundation
 extension Colors.Parser {
   public func stencilContext() -> [String: Any] {
     let palettes: [[String: Any]] = self.palettes
-      .sorted { $0.name < $1.name }
+      .sorted { $0.name.compare($1.name, options: .caseInsensitive) == .orderedAscending }
       .map { palette in
         let colors = palette.colors
-          .sorted { $0.key < $1.key }
+          .sorted { $0.key.compare($1.key, options: .caseInsensitive) == .orderedAscending }
           .map(map(color:value:))
 
         return [

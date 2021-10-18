@@ -15,9 +15,11 @@ extension Fonts.Parser {
   public func stencilContext() -> [String: Any] {
     // turn into array of dictionaries
     let families = entries
+      .sorted { $0.key.compare($1.key, options: .caseInsensitive) == .orderedAscending }
       .map { (name: String, family: Set<Fonts.Font>) -> [String: Any] in
         // Font
         let fonts = family
+          .sorted { $0.postScriptName.compare($1.postScriptName, options: .caseInsensitive) == .orderedAscending }
           .map { (font: Fonts.Font) -> [String: String] in
             [
               "name": font.postScriptName,
@@ -25,18 +27,12 @@ extension Fonts.Parser {
               "style": font.style
             ]
           }
-          .sorted { lhs, rhs in
-            lhs["name"] ?? "" < rhs["name"] ?? ""
-          }
 
         // Family
         return [
           "name": name,
           "fonts": fonts
         ]
-      }
-      .sorted { lhs, rhs in
-        lhs["name"] as? String ?? "" < rhs["name"] as? String ?? ""
       }
 
     return [
