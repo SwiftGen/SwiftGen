@@ -141,7 +141,7 @@ extension StringsDict {
   /// - Parameter formatKey: The formatKey from which the variable names should be parsed.
   /// - Returns: An array of discovered variable names, their range within the `formatKey` and the positional argument.
   private static func variableNames(fromFormatKey formatKey: String) -> [VariableNameResult] {
-    let pattern = #"%(?>(\d+)\$)?#@([\w\.\p{Pd}]+)@"#
+    let pattern = #"%(?>(\d+)\$?)?#@([\w\.\p{Pd}]+)@"#
     guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
       fatalError("Unable to compile regular expression when parsing StringsDict entries")
     }
