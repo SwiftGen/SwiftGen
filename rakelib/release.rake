@@ -132,7 +132,7 @@ namespace :release do
     end
 
     # Zip the bundle
-    `cd #{BUILD_DIR}/swiftgen.artifactbundle; zip -r ../swiftgen-#{Utils.podspec_version('SwiftGen')}.artifactbundle.zip .`
+    `cd #{BUILD_DIR}; zip -r swiftgen.artifactbundle.zip swiftgen.artifactbundle/`
   end
 
   def post(url, content_type)
@@ -153,7 +153,7 @@ namespace :release do
     JSON.parse(response.body)
   end
 
-  def github_upload(filename)
+  def github_upload(json, filename)
     upload_url = json['upload_url'].gsub(/\{.*\}/, "?name=#{filename}")
     zipfile = "#{BUILD_DIR}/#{filename}"
     zipsize = File.size(zipfile)
@@ -178,8 +178,8 @@ namespace :release do
       req.body = { tag_name: v, name: v, body: changelog, draft: false, prerelease: false }.to_json
     end
    
-    github_upload("swiftgen-#{v}.zip")
-    github_upload("swiftgen-#{v}.artifactbundle.zip")
+    github_upload(json, "swiftgen-#{v}.zip")
+    github_upload(json, "swiftgen.artifactbundle.zip")
   end
 
   desc 'pod trunk push SwiftGen to CocoaPods'
