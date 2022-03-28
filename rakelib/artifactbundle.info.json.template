@@ -1,0 +1,15 @@
+{
+    "schemaVersion": "1.0",
+    "artifacts": {
+        "swiftgen": {
+            "type": "executable",
+            "version": "VERSION",
+            "variants": [
+                {
+                    "path": "swiftgen/bin/swiftgen",
+                    "supportedTriples": ["x86_64-apple-macosx", "arm64-apple-macosx"]
+                },
+            ]
+        }
+    }
+}
