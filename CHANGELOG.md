@@ -18,6 +18,7 @@ _None_
 * Added `.artifactbundle` release uploads to support SE-0325 Swift Plugins.  
   [nicorichard](https://github.com/nicorichard)
   [#913](https://github.com/SwiftGen/SwiftGen/issues/913)
+  [#926](https://github.com/SwiftGen/SwiftGen/pull/926)
 
 ### Bug Fixes
 
