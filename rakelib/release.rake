@@ -170,16 +170,32 @@ namespace :release do
   task :github => :artifactbundle do
     v = Utils.podspec_version('SwiftGen')
 
+    artifact_paths = [
+      "swiftgen-#{v}.zip",
+      "swiftgen.artifactbundle.zip"
+    ]    
+
+    # Pick out the relevant CHANGELOG information for this release
     changelog = `sed -n /'^## #{v}$'/,/'^## '/p CHANGELOG.md`.gsub(/^## .*$/, '').strip
+
+    # Append checksums for our generated artifacts
+    changelog << "\n### Checksums\n"
+    for artifact_path in artifact_paths
+      changelog << "- #{artifact_path} #{Digest::SHA256.file(artifact_path)}"
+    end
+
     Utils.print_header "Releasing version #{v} on GitHub"
     puts changelog
 
+    # Create the release
     json = post('https://api.github.com/repos/SwiftGen/SwiftGen/releases', 'application/json') do |req|
       req.body = { tag_name: v, name: v, body: changelog, draft: false, prerelease: false }.to_json
     end
    
-    github_upload(json, "swiftgen-#{v}.zip")
-    github_upload(json, "swiftgen.artifactbundle.zip")
+    # Upload our artifacts
+    for artifact_path in artifact_paths
+      github_upload(json, artifact_path)
+    end
   end
 
   desc 'pod trunk push SwiftGen to CocoaPods'
