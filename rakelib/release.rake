@@ -170,7 +170,7 @@ namespace :release do
   task :github => :artifactbundle do
     v = Utils.podspec_version('SwiftGen')
 
-    artifact_paths = [
+    artifact_names = [
       "swiftgen-#{v}.zip",
       "swiftgen.artifactbundle.zip"
     ]    
@@ -179,9 +179,9 @@ namespace :release do
     changelog = `sed -n /'^## #{v}$'/,/'^## '/p CHANGELOG.md`.gsub(/^## .*$/, '').strip
 
     # Append checksums for our generated artifacts
-    changelog << "\n### Checksums\n"
-    for artifact_path in artifact_paths
-      changelog << "- #{artifact_path} #{Digest::SHA256.file(artifact_path)}"
+    changelog << "\n\n### Checksums\n"
+    for artifact_name in artifact_names
+      changelog << "\n- #{artifact_name} `#{Digest::SHA256.file("#{BUILD_DIR}/#{artifact_name}")}`"
     end
 
     Utils.print_header "Releasing version #{v} on GitHub"
@@ -193,8 +193,8 @@ namespace :release do
     end
    
     # Upload our artifacts
-    for artifact_path in artifact_paths
-      github_upload(json, artifact_path)
+    for artifact_name in artifact_names
+      github_upload(json, artifact_name)
     end
   end
 
