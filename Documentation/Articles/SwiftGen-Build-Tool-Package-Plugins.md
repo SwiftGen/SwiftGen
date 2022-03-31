@@ -27,7 +27,7 @@ targets: [
 
 > 👋 Remember to replace the version and checksum with appropriate values, you can find the most recent SwiftGen releases [HERE](https://github.com/SwiftGen/SwiftGen/releases)
 
-> 🧮 To generate the checksum yourself you can use `shasum -a 256 swiftgen.artifactbundle.zip`
+> 🧮 To generate the [checksum](https://developer.apple.com/documentation/swift_packages/target/3583312-checksum) yourself you can use `swift package compute-checksum swiftgen.artifactbundle.zip`.
 
 ## Using the tool in your plugin
 
