@@ -27,6 +27,8 @@ targets: [
 
 > 👋 Remember to replace the version and checksum with appropriate values, you can find the most recent SwiftGen releases [HERE](https://github.com/SwiftGen/SwiftGen/releases)
 
+> 🧮 To generate the checksum yourself you can use `shasum -a 256 swiftgen.artifactbundle.zip`
+
 ## Using the tool in your plugin
 
 After the SwiftGen binary has been introduced to your package, your plugin will be able to execute SwiftGen by searching the context for a tool named `swiftgen`.
