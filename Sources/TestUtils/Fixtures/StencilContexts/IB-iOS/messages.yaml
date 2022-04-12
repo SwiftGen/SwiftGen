@@ -1,3 +1,87 @@
+customSceneTypes:
+- module: "<placeholder>"
+  moduleIsPlaceholder: true
+  segues:
+  - customClass: ""
+    customModule: ""
+    destination:
+      customClass: "PickerViewController"
+      customModule: "NotCurrentModule"
+      identifier: "URLChooser"
+      module: "NotCurrentModule"
+      moduleIsPlaceholder: true
+      type: "PickerViewController"
+    identifier: ""
+    kind: "show"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "TableViewController"
+      identifier: "MessagesList"
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UITableViewController"
+    identifier: ""
+    kind: "relationship"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  - customClass: "SlideLeftSegue"
+    customModule: "SwiftGen"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UIViewController"
+    identifier: "CustomBack"
+    kind: "custom"
+    module: "SwiftGen"
+    moduleIsPlaceholder: false
+    type: "SlideLeftSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UIViewController"
+    identifier: "Embed"
+    kind: "embed"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: "Composer"
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UIViewController"
+    identifier: "NonCustom"
+    kind: "showDetail"
+    module: "UIKit"
+    moduleIsPlaceholder: false
+    type: "UIStoryboardSegue"
+  - customClass: "CustomSegueClass"
+    customModule: "NotCurrentModule"
+    destination:
+      baseType: "NavigationController"
+      identifier: "NavCtrl"
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UINavigationController"
+    identifier: "Show-NavCtrl"
+    kind: "presentation"
+    module: "NotCurrentModule"
+    moduleIsPlaceholder: true
+    type: "CustomSegueClass"
+  type: "PickerViewController"
 modules:
 - "SwiftGen"
 - "UIKit"
@@ -36,25 +120,53 @@ storyboards:
   segues:
   - customClass: "SlideLeftSegue"
     customModule: "SwiftGen"
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UIViewController"
     identifier: "CustomBack"
+    kind: "custom"
     module: "SwiftGen"
     moduleIsPlaceholder: false
     type: "SlideLeftSegue"
   - customClass: ""
     customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: ""
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UIViewController"
     identifier: "Embed"
+    kind: "embed"
     module: "UIKit"
     moduleIsPlaceholder: false
     type: "UIStoryboardSegue"
   - customClass: ""
     customModule: ""
+    destination:
+      baseType: "ViewController"
+      identifier: "Composer"
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UIViewController"
     identifier: "NonCustom"
+    kind: "showDetail"
     module: "UIKit"
     moduleIsPlaceholder: false
     type: "UIStoryboardSegue"
   - customClass: "CustomSegueClass"
     customModule: "NotCurrentModule"
+    destination:
+      baseType: "NavigationController"
+      identifier: "NavCtrl"
+      module: "UIKit"
+      moduleIsPlaceholder: false
+      type: "UINavigationController"
     identifier: "Show-NavCtrl"
+    kind: "presentation"
     module: "NotCurrentModule"
     moduleIsPlaceholder: true
     type: "CustomSegueClass"

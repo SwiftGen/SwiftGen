@@ -1,3 +1,4 @@
+customSceneTypes: []
 modules:
 - "AppKit"
 platform: "macOS"

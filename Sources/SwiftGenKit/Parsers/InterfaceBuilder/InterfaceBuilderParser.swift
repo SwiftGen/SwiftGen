@@ -64,5 +64,26 @@ public enum InterfaceBuilder {
         return platforms.first
       }
     }
+
+    func destination(for sceneID: String, in storyboard: Storyboard) -> Scene? {
+      // directly to a scene
+      if let scene = storyboard.scenes.first(where: { $0.sceneID == sceneID }) {
+        return scene
+      }
+
+      // to a scene placeholder
+      if let placeholder = storyboard.placeholders.first(where: { $0.sceneID == sceneID }),
+        let storyboard = storyboards.first(where: { $0.name == placeholder.storyboardName }) {
+        // can be either a scene by identifier, or the initial scene
+        if let referencedIdentifier = placeholder.referencedIdentifier,
+          let scene = storyboard.scenes.first(where: { $0.identifier == referencedIdentifier }) {
+          return scene
+        } else if placeholder.referencedIdentifier == nil {
+          return storyboard.initialScene
+        }
+      }
+
+      return nil
+    }
   }
 }
