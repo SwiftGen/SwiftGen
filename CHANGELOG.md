@@ -14,6 +14,9 @@ _None_
   [Andre113](https://github.com/Andre113)
   [#823](https://github.com/SwiftGen/SwiftGen/issues/823)
   [#846](https://github.com/SwiftGen/SwiftGen/pull/846)
+* CoreData: ensure generated classes are `final` when model isn't abstract.  
+  [grsouza](https://github.com/grsouza)
+  [#940](https://github.com/SwiftGen/SwiftGen/pull/940)
 
 * Added `.artifactbundle` release uploads to support SE-0325 Swift Plugins.  
   [nicorichard](https://github.com/nicorichard)
