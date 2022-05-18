@@ -20,6 +20,7 @@ import {{ import }}
 {% for name, entity in model.entities %}
 {% set superclass %}{{ model.entities[entity.superEntity].className|default:"NSManagedObject" }}{% endset %}
 {% set entityClassName %}{{ entity.className|default:"NSManagedObject" }}{% endset %}
+{% set hasChildren %}{% for aName,anEntity in model.entities where anEntity.superEntity == name %}1{% endfor %}{% endset %}
 // MARK: - {{ entity.name }}
 
 {% if not entity.shouldGenerateCode %}
@@ -32,7 +33,7 @@ import {{ import }}
 {% if param.generateObjcName %}
 @objc({{ entityClassName }})
 {% endif %}
-{{ accessModifier }} class {{ entityClassName }}: {{ superclass }} {
+{{ accessModifier }} {% if not entity.isAbstract and not hasChildren %}final {% endif %}class {{ entityClassName }}: {{ superclass }} {
   {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
   {{ override }}{{ accessModifier }} class var entityName: String {
     return "{{ entity.name }}"
