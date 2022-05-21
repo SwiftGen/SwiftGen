@@ -17,7 +17,7 @@
 static NSString* tr(NSString *tableName, NSString *key, ...) {
     NSBundle *bundle = {{param.bundle|default:"[NSBundle bundleForClass:BundleToken.class]"}};
     NSString *format = [bundle localizedStringForKey:key value:nil table:tableName];
-    NSLocale *locale = [NSLocale currentLocale];
+    NSLocale *locale = {{param.stringLocale|default:"[NSLocale currentLocale]"}};
 
     va_list args;
     va_start(args, key);

@@ -54,6 +54,10 @@ final class StringsTests: XCTestCase {
         suffix: "-noComments"
       ),
       (
+        context: try StencilContext.enrich(context: context, parameters: ["stringLocale"]),
+        suffix: "-stringLocale"
+      ),
+      (
         context: try StencilContext.enrich(context: context, parameters: ["publicAccess"]),
         suffix: "-publicAccess"
       )
@@ -71,6 +75,10 @@ final class StringsTests: XCTestCase {
       (
         context: try StencilContext.enrich(context: context, parameters: ["bundle=[ResourcesBundle bundle]"]),
         suffix: "-customBundle"
+      ),
+      (
+        context: try StencilContext.enrich(context: context, parameters: ["stringLocale"]),
+        suffix: "-stringLocale"
       ),
       (
         context: try StencilContext.enrich(context: context, parameters: ["noComments"]),

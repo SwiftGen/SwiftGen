@@ -22,6 +22,7 @@ You can customize some elements of this template by overriding the following par
 | `enumName` | `L10n` | Allows you to change the name of the generated `enum` containing all string tables. |
 | `forceFileNameEnum` | N/A | Setting this parameter will generate an `enum <FileName>` _even if_ only one FileName was provided as input. |
 | `lookupFunction` | N/A¹ | Allows you to set your own custom localization function. The function needs to have as signature: `(key: String, table: String) -> String`. The parameters of your function can have any name (or even no external name), but if it has named parameters, you must provide the complete function signature, including those named parameters – e.g. `yourFunctionName(forKey:table:)`. Note: if you define this parameter, the `bundle` parameter will be ignored. |
+| `stringLocale` | N/A | If you use bundle or lookupFunction to customize the string format, and the locale of the string format is different from the current locale of the system, using the plural in stringDict will always return the plural characters pointed to by other, you can use stringLocale to specify the same as string format locale. |
 | `noComments` | N/A | Setting this parameter will disable the comments describing the translation of a key. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 
