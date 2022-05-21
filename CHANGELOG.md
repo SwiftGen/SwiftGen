@@ -15,6 +15,9 @@ _None_
   [#823](https://github.com/SwiftGen/SwiftGen/issues/823)
   [#846](https://github.com/SwiftGen/SwiftGen/pull/846)
 
+* add `stringLocale` parameter fixes a bug where plurals were not displayed correctly when using bundle or lookupFunction
+  [HonQi](https://github.com/HonQii)
+
 ### Bug Fixes
 
 _None_
