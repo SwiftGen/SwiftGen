@@ -14,6 +14,9 @@ _None_
   [Andre113](https://github.com/Andre113)
   [#823](https://github.com/SwiftGen/SwiftGen/issues/823)
   [#846](https://github.com/SwiftGen/SwiftGen/pull/846)
+* Added `Identifiable` protocol conformance for CoreData generation.  
+  [davidrothera](https://github.com/davidrothera)
+  [#943](https://github.com/SwiftGen/SwiftGen/pull/943)
 
 ### Bug Fixes
 

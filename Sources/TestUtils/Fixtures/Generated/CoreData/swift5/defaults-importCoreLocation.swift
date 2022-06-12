@@ -34,6 +34,10 @@ internal class AbstractEntity: NSManagedObject {
   // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
 
+// MARK: Protocol conformance
+
+extension AbstractEntity: Identifiable {}
+
 // MARK: - AutoClassGen
 
 // Note: 'AutoClassGen' has codegen enabled for Xcode, skipping code generation.
@@ -65,6 +69,10 @@ internal class ChildEntity: MainEntity {
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
   // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
+
+// MARK: Protocol conformance
+
+extension ChildEntity: Identifiable {}
 
 // MARK: - ImpossibleType
 
@@ -337,6 +345,10 @@ extension MainEntity {
 
 }
 
+// MARK: Protocol conformance
+
+extension MainEntity: Identifiable {}
+
 // MARK: - NewEntity
 
 internal class NewEntity: AbstractEntity {
@@ -361,6 +373,10 @@ internal class NewEntity: AbstractEntity {
   @NSManaged internal var identifier: UUID?
   // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
+
+// MARK: Protocol conformance
+
+extension NewEntity: Identifiable {}
 
 // MARK: - SecondaryEntity
 
@@ -405,5 +421,9 @@ extension SecondaryEntity {
   @objc(removeManyToMany:)
   @NSManaged public func removeFromManyToMany(_ values: Set<MainEntity>)
 }
+
+// MARK: Protocol conformance
+
+extension SecondaryEntity: Identifiable {}
 
 // swiftlint:enable identifier_name line_length type_body_length

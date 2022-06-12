@@ -205,6 +205,10 @@ extension {{ entityClassName }} {
 }
 
 {% endif %}
+// MARK: Protocol conformance
+
+extension {{ entityClassName }}: Identifiable {}
+
 {% endif %}
 {% endfor %}
 {% endfor %}
