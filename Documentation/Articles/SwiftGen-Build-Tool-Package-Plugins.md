@@ -6,7 +6,7 @@ Using this new functionality it is possible to create a SwiftGen plugin for our 
 
 ## Making the SwiftGen binary available to your plugin
 
-Simply add the following binary target to your `Package.swift`, each SwiftGen release includes a `.artifactbundle` compatible with Swift Plugin development.
+Simply add the following binary target to your `Package.swift`. Each recent SwiftGen release includes a `.artifactbundle` compatible with Swift Plugin development.
 
 ```swift
 targets: [

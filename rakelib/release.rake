@@ -116,7 +116,7 @@ namespace :release do
     `cd #{BUILD_DIR}/swiftgen; zip -r ../swiftgen-#{Utils.podspec_version('SwiftGen')}.zip .`
   end
 
-  desc 'Create a zip containing all the prebuilt binaries in the artifact bundle format'
+  desc 'Create a zip containing all the prebuilt binaries in the artifact bundle format (for SwiftPM Package Plugins)'
   task :artifactbundle => :zip do
     bundle_dir = "#{BUILD_DIR}/swiftgen.artifactbundle"
     # Copy the built product to an artifact bundle
@@ -153,9 +153,9 @@ namespace :release do
     JSON.parse(response.body)
   end
 
-  def github_upload(json, filename)
-    upload_url = json['upload_url'].gsub(/\{.*\}/, "?name=#{filename}")
-    zipfile = "#{BUILD_DIR}/#{filename}"
+  def github_upload(upload_url:, filename:)
+    upload_url = upload_url.gsub(/\{.*\}/, "?name=#{filename}")
+    zipfile = File.join(BUILD_DIR, filename)
     zipsize = File.size(zipfile)
 
     Utils.print_header "Uploading ZIP (#{zipsize} bytes)"
@@ -180,8 +180,8 @@ namespace :release do
 
     # Append checksums for our generated artifacts
     changelog << "\n\n### Checksums\n"
-    for artifact_name in artifact_names
-      changelog << "\n- #{artifact_name} `#{Digest::SHA256.file("#{BUILD_DIR}/#{artifact_name}")}`"
+    artifact_names.each do |artifact_name|
+      changelog << "\n- `#{artifact_name}`: `#{Digest::SHA256.file(File.join(BUILD_DIR, artifact_name))}`"
     end
 
     Utils.print_header "Releasing version #{v} on GitHub"
@@ -193,8 +193,8 @@ namespace :release do
     end
    
     # Upload our artifacts
-    for artifact_name in artifact_names
-      github_upload(json, artifact_name)
+    artifact_names.each do |artifact_name|
+      github_upload(upload_url: json['upload_url'], filename: artifact_name)
     end
   end
 
