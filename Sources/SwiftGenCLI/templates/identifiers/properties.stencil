@@ -8,11 +8,13 @@
 
 {{accessModifier}} enum AccessibilityIdentifier {
   {% for container in containers %}
+  {% if container.accessibility.count > 0 %}
   {{accessModifier}} enum {{container.name}}: String {
     {% for accessibility in container.accessibility %}
     {{accessModifier}} static let {{accessibility.identifier}} = "{{accessibility.rawValue}}"
     {% endfor %}
   }
+  {% endif %}
   {% endfor %}
 }
 
