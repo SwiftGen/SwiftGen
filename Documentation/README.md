@@ -24,6 +24,10 @@ This directory contains documentation for various topics related to SwiftGen, su
 
 Most of the SwiftGen provided templates generate code that allows you to load resources at runtime, but in some cases you may want to modify how these resources are loaded. The built-in templates [can be configured to handle these cases](Articles/Customize-loading-of-resources.md) without resorting to custom templates.
 
+### Creating a SwiftGen plugin
+
+Learn how to use SwiftGen [in your Swift Build-Tool/Command Plugin](Articles/SwiftGen-Build-Tool-Package-Plugins.md).
+
 ## [Parsers Documentation](Parsers/)
 
 SwiftGen uses parsers to parse different type of input files, like asset catalogs, strings files, font files, etc.

@@ -116,6 +116,25 @@ namespace :release do
     `cd #{BUILD_DIR}/swiftgen; zip -r ../swiftgen-#{Utils.podspec_version('SwiftGen')}.zip .`
   end
 
+  desc 'Create a zip containing all the prebuilt binaries in the artifact bundle format (for SwiftPM Package Plugins)'
+  task :artifactbundle => :zip do
+    bundle_dir = "#{BUILD_DIR}/swiftgen.artifactbundle"
+    # Copy the built product to an artifact bundle
+    `mkdir -p #{bundle_dir}`
+    `cp -Rf #{BUILD_DIR}/swiftgen #{bundle_dir}`
+
+    # Write the `info.json` artifact bundle manifest
+    info_template = File.read("rakelib/artifactbundle.info.json.template")
+    info_file_content = info_template.gsub(/(VERSION)/, Utils.podspec_version('SwiftGen'))
+    
+    File.open("#{bundle_dir}/info.json", "w") do |f|
+      f.write(info_file_content)   
+    end
+
+    # Zip the bundle
+    `cd #{BUILD_DIR}; zip -r swiftgen.artifactbundle.zip swiftgen.artifactbundle/`
+  end
+
   def post(url, content_type)
     uri = URI.parse(url)
     req = Net::HTTP::Post.new(uri)
@@ -134,20 +153,9 @@ namespace :release do
     JSON.parse(response.body)
   end
 
-  desc 'Upload the zipped binaries to a new GitHub release'
-  task :github => :zip do
-    v = Utils.podspec_version('SwiftGen')
-
-    changelog = `sed -n /'^## #{v}$'/,/'^## '/p CHANGELOG.md`.gsub(/^## .*$/, '').strip
-    Utils.print_header "Releasing version #{v} on GitHub"
-    puts changelog
-
-    json = post('https://api.github.com/repos/SwiftGen/SwiftGen/releases', 'application/json') do |req|
-      req.body = { tag_name: v, name: v, body: changelog, draft: false, prerelease: false }.to_json
-    end
-
-    upload_url = json['upload_url'].gsub(/\{.*\}/, "?name=swiftgen-#{v}.zip")
-    zipfile = "#{BUILD_DIR}/swiftgen-#{v}.zip"
+  def github_upload(upload_url:, filename:)
+    upload_url = upload_url.gsub(/\{.*\}/, "?name=#{filename}")
+    zipfile = File.join(BUILD_DIR, filename)
     zipsize = File.size(zipfile)
 
     Utils.print_header "Uploading ZIP (#{zipsize} bytes)"
@@ -155,6 +163,38 @@ namespace :release do
       req.body_stream = File.open(zipfile, 'rb')
       req.add_field('Content-Length', zipsize)
       req.add_field('Content-Transfer-Encoding', 'binary')
+    end
+  end
+
+  desc 'Upload the zipped binaries to a new GitHub release'
+  task :github => :artifactbundle do
+    v = Utils.podspec_version('SwiftGen')
+
+    artifact_names = [
+      "swiftgen-#{v}.zip",
+      "swiftgen.artifactbundle.zip"
+    ]    
+
+    # Pick out the relevant CHANGELOG information for this release
+    changelog = `sed -n /'^## #{v}$'/,/'^## '/p CHANGELOG.md`.gsub(/^## .*$/, '').strip
+
+    # Append checksums for our generated artifacts
+    changelog << "\n\n### Checksums\n"
+    artifact_names.each do |artifact_name|
+      changelog << "\n- `#{artifact_name}`: `#{Digest::SHA256.file(File.join(BUILD_DIR, artifact_name))}`"
+    end
+
+    Utils.print_header "Releasing version #{v} on GitHub"
+    puts changelog
+
+    # Create the release
+    json = post('https://api.github.com/repos/SwiftGen/SwiftGen/releases', 'application/json') do |req|
+      req.body = { tag_name: v, name: v, body: changelog, draft: false, prerelease: false }.to_json
+    end
+   
+    # Upload our artifacts
+    artifact_names.each do |artifact_name|
+      github_upload(upload_url: json['upload_url'], filename: artifact_name)
     end
   end
 
