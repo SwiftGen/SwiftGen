@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/shibapm/Komondor.git",
         "state": {
           "branch": null,
-          "revision": "7c3c6040c01c99b83afc7eaa8f2a8a69337f659a",
-          "version": "1.1.1"
+          "revision": "90b087b1e39069684b1ff4bf915c2aae594f2d60",
+          "version": "1.1.3"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/shibapm/PackageConfig.git",
         "state": {
           "branch": null,
-          "revision": "8a390979f64d0447ecd78abba4786db0d96ff568",
-          "version": "1.0.1"
+          "revision": "58523193c26fb821ed1720dcd8a21009055c7cdb",
+          "version": "1.1.3"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/stencilproject/Stencil.git",
         "state": {
           "branch": null,
-          "revision": "973e190edf5d09274e4a6bc2e636c86899ed84c3",
-          "version": "0.14.1"
+          "revision": "ccd9402682f4c07dac9561befd207c8156e80e20",
+          "version": "0.14.2"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/SwiftGen/StencilSwiftKit.git",
         "state": {
           "branch": null,
-          "revision": "54cbedcdbb4334e03930adcff7343ffaf317bf0f",
-          "version": "2.8.0"
+          "revision": "a329217a79ce9b20557f870b926f7ae9769af05e",
+          "version": "2.9.0"
         }
       },
       {
