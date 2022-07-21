@@ -26,7 +26,9 @@ _None_
 
 ### Internal Changes
 
-_None_
+* Updated GitHub Actions to use macOS 12.  
+  [#956](https://github.com/SwiftGen/SwiftGen/pull/956)
+  [David Jennes](https://github.com/djbe)
 
 ## 6.5.1
 
