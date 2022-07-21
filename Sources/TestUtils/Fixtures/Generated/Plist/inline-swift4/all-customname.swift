@@ -10,6 +10,17 @@ import Foundation
 
 // swiftlint:disable identifier_name line_length number_separator type_body_length
 internal enum CustomPlist {
+  internal enum Configuration {
+    internal static let environment: String = "development"
+    internal static let flags: [Bool] = [true, false, true]
+    internal static let mixed: [Any] = ["One", 1, true]
+    internal static let mixed2: [Any] = [0.1, 1, true]
+    internal static let names: [String] = ["John", "Peter", "Nick"]
+    internal static let one: Int = 1
+    internal static let options: [String: Any] = ["Animation Style": "Party Mode"]
+    internal static let primes: [Int] = [2, 3, 5, 7]
+    internal static let zero: Int = 0
+  }
   internal enum Info {
     internal static let cfBundleDevelopmentRegion: String = "en"
     internal static let cfBundleDisplayName: String = "${PRODUCT_NAME}"
@@ -40,17 +51,6 @@ internal enum CustomPlist {
     internal static let userDate: Date = Date(timeIntervalSinceReferenceDate: 547184366)
     internal static let userFloat: Double = 3.14
     internal static let userInteger: Int = 5
-  }
-  internal enum Configuration {
-    internal static let environment: String = "development"
-    internal static let flags: [Bool] = [true, false, true]
-    internal static let mixed: [Any] = ["One", 1, true]
-    internal static let mixed2: [Any] = [0.1, 1, true]
-    internal static let names: [String] = ["John", "Peter", "Nick"]
-    internal static let one: Int = 1
-    internal static let options: [String: Any] = ["Animation Style": "Party Mode"]
-    internal static let primes: [Int] = [2, 3, 5, 7]
-    internal static let zero: Int = 0
   }
   internal enum ShoppingList {
     internal static let items: [String] = ["Eggs", "Bread", "Milk"]

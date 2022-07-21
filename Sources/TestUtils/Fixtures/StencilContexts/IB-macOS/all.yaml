@@ -124,18 +124,6 @@ storyboards:
     module: "AppKit"
     moduleIsPlaceholder: false
     type: "NSStoryboardSegue"
-  - customClass: ""
-    customModule: ""
-    identifier: "Sheet"
-    module: "AppKit"
-    moduleIsPlaceholder: false
-    type: "NSStoryboardSegue"
-  - customClass: ""
-    customModule: ""
-    identifier: "Show"
-    module: "AppKit"
-    moduleIsPlaceholder: false
-    type: "NSStoryboardSegue"
   - customClass: "RotateSegue"
     customModule: "NotCurrentModule"
     identifier: "private"
@@ -148,6 +136,18 @@ storyboards:
     module: "SwiftGen"
     moduleIsPlaceholder: false
     type: "ZoomSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Sheet"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
+  - customClass: ""
+    customModule: ""
+    identifier: "Show"
+    module: "AppKit"
+    moduleIsPlaceholder: false
+    type: "NSStoryboardSegue"
 - name: "Placeholder"
   platform: "macOS"
   scenes:
