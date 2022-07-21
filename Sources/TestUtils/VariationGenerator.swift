@@ -39,11 +39,16 @@ public extension XCTestCase {
     contextVariations: VariationGenerator? = nil,
     outputExtension: String = "swift"
   ) {
-    let templateString = Fixtures.template(for: "\(templateName).stencil", sub: directory)
-    let template = StencilSwiftTemplate(
-      templateString: templateString,
-      environment: stencilSwiftEnvironment()
-    )
+    let template: StencilSwiftTemplate
+    do {
+      let templateRealPath = Fixtures.template(for: "\(templateName).stencil", sub: directory)
+      template = StencilSwiftTemplate(
+        templateString: try templateRealPath.read(),
+        environment: stencilSwiftEnvironment(templatePaths: [templateRealPath.parent()])
+      )
+    } catch {
+      fatalError("Unable to load fixture \(templateName)'s content: \(error)")
+    }
 
     // default values
     let contextVariations = contextVariations ?? { [(context: $1, suffix: "")] }
