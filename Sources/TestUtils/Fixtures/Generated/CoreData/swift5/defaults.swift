@@ -43,7 +43,7 @@ internal class AbstractEntity: NSManagedObject {
 
 // MARK: - ChildEntity
 
-internal class ChildEntity: MainEntity {
+internal final class ChildEntity: MainEntity {
   override internal class var entityName: String {
     return "ChildEntity"
   }
@@ -338,7 +338,7 @@ extension MainEntity {
 
 // MARK: - NewEntity
 
-internal class NewEntity: AbstractEntity {
+internal final class NewEntity: AbstractEntity {
   override internal class var entityName: String {
     return "NewEntity"
   }
@@ -363,7 +363,7 @@ internal class NewEntity: AbstractEntity {
 
 // MARK: - SecondaryEntity
 
-internal class SecondaryEntity: NSManagedObject {
+internal final class SecondaryEntity: NSManagedObject {
   internal class var entityName: String {
     return "SecondaryEntity"
   }
