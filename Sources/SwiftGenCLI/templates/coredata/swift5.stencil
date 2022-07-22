@@ -113,7 +113,7 @@ import {{ import }}
   {% endif %}
   {% endfor %}
   {% for fetchedProperty in entity.fetchedProperties %}
-  @NSManaged {{ accessModifier }} var {{ fetchedProperty.name }}: [{{ fetchedProperty.fetchRequest.entity }}]
+  @NSManaged {{ accessModifier }} var {{ fetchedProperty.name }}: [{{ model.entities[fetchedProperty.fetchRequest.entity].className|default:"NSManagedObject" }}]
   {% endfor %}
   // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }

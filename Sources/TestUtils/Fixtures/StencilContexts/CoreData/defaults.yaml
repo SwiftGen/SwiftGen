@@ -334,7 +334,7 @@ models:
         typeName: "UUID"
         userInfo: {}
         usesScalarValueType: false
-      className: "MainEntity"
+      className: "CustomMainEntity"
       fetchedProperties:
       - fetchRequest:
           entity: "NewEntity"
@@ -410,7 +410,7 @@ models:
         typeName: "UUID"
         userInfo: {}
         usesScalarValueType: false
-      className: "NewEntity"
+      className: "CheckedNewEntity"
       fetchedProperties: []
       isAbstract: false
       name: "NewEntity"

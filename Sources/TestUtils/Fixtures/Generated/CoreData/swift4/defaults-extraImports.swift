@@ -45,7 +45,7 @@ internal class AbstractEntity: NSManagedObject {
 
 // MARK: - ChildEntity
 
-internal final class ChildEntity: MainEntity {
+internal final class ChildEntity: CustomMainEntity {
   override internal class var entityName: String {
     return "ChildEntity"
   }
@@ -73,7 +73,7 @@ internal final class ChildEntity: MainEntity {
 
 // MARK: - MainEntity
 
-internal class MainEntity: NSManagedObject {
+internal class CustomMainEntity: NSManagedObject {
   internal class var entityName: String {
     return "MainEntity"
   }
@@ -83,12 +83,12 @@ internal class MainEntity: NSManagedObject {
   }
 
   @available(*, deprecated, renamed: "makeFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `makeFetchRequest()` instead.")
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<MainEntity> {
-    return NSFetchRequest<MainEntity>(entityName: entityName)
+  @nonobjc internal class func fetchRequest() -> NSFetchRequest<CustomMainEntity> {
+    return NSFetchRequest<CustomMainEntity>(entityName: entityName)
   }
 
-  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<MainEntity> {
-    return NSFetchRequest<MainEntity>(entityName: entityName)
+  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<CustomMainEntity> {
+    return NSFetchRequest<CustomMainEntity>(entityName: entityName)
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
@@ -218,13 +218,13 @@ internal class MainEntity: NSManagedObject {
   @NSManaged internal var manyToMany: Set<SecondaryEntity>?
   @NSManaged internal var oneToMany: NSOrderedSet?
   @NSManaged internal var oneToOne: SecondaryEntity?
-  @NSManaged internal var fetchedProperty: [NewEntity]
+  @NSManaged internal var fetchedProperty: [CheckedNewEntity]
   // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
 
 // MARK: Relationship ManyToMany
 
-extension MainEntity {
+extension CustomMainEntity {
   @objc(addManyToManyObject:)
   @NSManaged public func addToManyToMany(_ value: SecondaryEntity)
 
@@ -240,7 +240,7 @@ extension MainEntity {
 
 // MARK: Relationship OneToMany
 
-extension MainEntity {
+extension CustomMainEntity {
   @objc(insertObject:inOneToManyAtIndex:)
   @NSManaged public func insertIntoOneToMany(_ value: SecondaryEntity, at idx: Int)
 
@@ -274,7 +274,7 @@ extension MainEntity {
 
 // MARK: Fetch Requests
 
-extension MainEntity {
+extension CustomMainEntity {
   class func fetchDictionaryFetchRequest(managedObjectContext: NSManagedObjectContext) throws -> [[String: Any]] {
     guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
       fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
@@ -295,7 +295,7 @@ extension MainEntity {
     return result
   }
 
-  class func fetchObjectFetchRequest(managedObjectContext: NSManagedObjectContext, uuid: UUID) throws -> [MainEntity] {
+  class func fetchObjectFetchRequest(managedObjectContext: NSManagedObjectContext, uuid: UUID) throws -> [CustomMainEntity] {
     guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
       fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
     }
@@ -308,7 +308,7 @@ extension MainEntity {
       fatalError("No fetch request template named 'ObjectFetchRequest' found.")
     }
 
-    guard let result = try managedObjectContext.fetch(fetchRequest) as? [MainEntity] else {
+    guard let result = try managedObjectContext.fetch(fetchRequest) as? [CustomMainEntity] else {
       fatalError("Unable to cast fetch result to correct result type.")
     }
 
@@ -340,7 +340,7 @@ extension MainEntity {
 
 // MARK: - NewEntity
 
-internal final class NewEntity: AbstractEntity {
+internal final class CheckedNewEntity: AbstractEntity {
   override internal class var entityName: String {
     return "NewEntity"
   }
@@ -350,12 +350,12 @@ internal final class NewEntity: AbstractEntity {
   }
 
   @available(*, deprecated, renamed: "makeFetchRequest", message: "To avoid collisions with the less concrete method in `NSManagedObject`, please use `makeFetchRequest()` instead.")
-  @nonobjc internal class func fetchRequest() -> NSFetchRequest<NewEntity> {
-    return NSFetchRequest<NewEntity>(entityName: entityName)
+  @nonobjc internal class func fetchRequest() -> NSFetchRequest<CheckedNewEntity> {
+    return NSFetchRequest<CheckedNewEntity>(entityName: entityName)
   }
 
-  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<NewEntity> {
-    return NSFetchRequest<NewEntity>(entityName: entityName)
+  @nonobjc internal class func makeFetchRequest() -> NSFetchRequest<CheckedNewEntity> {
+    return NSFetchRequest<CheckedNewEntity>(entityName: entityName)
   }
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
@@ -385,9 +385,9 @@ internal final class SecondaryEntity: NSManagedObject {
 
   // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
   @NSManaged internal var name: String
-  @NSManaged internal var manyToMany: Set<MainEntity>?
-  @NSManaged internal var oneToMany: MainEntity?
-  @NSManaged internal var oneToOne: MainEntity?
+  @NSManaged internal var manyToMany: Set<CustomMainEntity>?
+  @NSManaged internal var oneToMany: CustomMainEntity?
+  @NSManaged internal var oneToOne: CustomMainEntity?
   // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
 }
 
@@ -395,16 +395,16 @@ internal final class SecondaryEntity: NSManagedObject {
 
 extension SecondaryEntity {
   @objc(addManyToManyObject:)
-  @NSManaged public func addToManyToMany(_ value: MainEntity)
+  @NSManaged public func addToManyToMany(_ value: CustomMainEntity)
 
   @objc(removeManyToManyObject:)
-  @NSManaged public func removeFromManyToMany(_ value: MainEntity)
+  @NSManaged public func removeFromManyToMany(_ value: CustomMainEntity)
 
   @objc(addManyToMany:)
-  @NSManaged public func addToManyToMany(_ values: Set<MainEntity>)
+  @NSManaged public func addToManyToMany(_ values: Set<CustomMainEntity>)
 
   @objc(removeManyToMany:)
-  @NSManaged public func removeFromManyToMany(_ values: Set<MainEntity>)
+  @NSManaged public func removeFromManyToMany(_ values: Set<CustomMainEntity>)
 }
 
 // swiftlint:enable identifier_name line_length type_body_length
