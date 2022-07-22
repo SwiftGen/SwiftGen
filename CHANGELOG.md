@@ -8,6 +8,12 @@
 
 _None_
 
+### Deprecations
+
+* The Swift 4 templates are now deprecated. This means we will no longer test if the generated output is valid Swift code. We will still try to keep these up-to-date with context changes.  
+  [David Jennes](https://github.com/djbe)
+  [#955](https://github.com/SwiftGen/SwiftGen/pull/955)
+
 ### New Features
 
 * Added support for `--quiet/-q` flag, to suppress all logs (except errors).  
