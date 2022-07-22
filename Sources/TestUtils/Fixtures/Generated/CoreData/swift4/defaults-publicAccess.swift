@@ -29,8 +29,8 @@ public class AbstractEntity: NSManagedObject {
     return NSFetchRequest<AbstractEntity>(entityName: entityName)
   }
 
-  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
-  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection implicit_getter
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection implicit_getter
 }
 
 // MARK: - AutoClassGen
@@ -61,8 +61,34 @@ public final class ChildEntity: CustomMainEntity {
     return NSFetchRequest<ChildEntity>(entityName: entityName)
   }
 
-  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
-  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection implicit_getter
+  public var canonicalOptionalString: String? {
+    let key = "canonicalOptionalString"
+    willAccessValue(forKey: key)
+    defer { didAccessValue(forKey: key) }
+
+    return primitiveValue(forKey: key) as? String
+  }
+  public var derivedCount: Int64? {
+    get {
+      let key = "derivedCount"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      return primitiveValue(forKey: key) as? Int64
+    }
+  }
+  public var now: Double {
+    let key = "now"
+    willAccessValue(forKey: key)
+    defer { didAccessValue(forKey: key) }
+
+    guard let value = primitiveValue(forKey: key) as? Double else {
+      fatalError("Could not convert value for key '\(key)' to type 'Double'")
+    }
+    return value
+  }
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection implicit_getter
 }
 
 // MARK: - ImpossibleType
@@ -89,7 +115,7 @@ public class CustomMainEntity: NSManagedObject {
     return NSFetchRequest<CustomMainEntity>(entityName: entityName)
   }
 
-  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection implicit_getter
   @NSManaged public var attributedString: NSAttributedString?
   @NSManaged public var binaryData: Data?
   @NSManaged public var boolean: Bool
@@ -238,7 +264,7 @@ public class CustomMainEntity: NSManagedObject {
   @NSManaged public var oneToMany: NSOrderedSet?
   @NSManaged public var oneToOne: SecondaryEntity?
   @NSManaged public var fetchedProperty: [CheckedNewEntity]
-  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection implicit_getter
 }
 
 // MARK: Relationship ManyToMany
@@ -377,9 +403,9 @@ public final class CheckedNewEntity: AbstractEntity {
     return NSFetchRequest<CheckedNewEntity>(entityName: entityName)
   }
 
-  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection implicit_getter
   @NSManaged public var identifier: UUID?
-  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection implicit_getter
 }
 
 // MARK: - SecondaryEntity
@@ -402,12 +428,12 @@ public final class SecondaryEntity: NSManagedObject {
     return NSFetchRequest<SecondaryEntity>(entityName: entityName)
   }
 
-  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection implicit_getter
   @NSManaged public var name: String
   @NSManaged public var manyToMany: Set<CustomMainEntity>?
   @NSManaged public var oneToMany: CustomMainEntity?
   @NSManaged public var oneToOne: CustomMainEntity?
-  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection implicit_getter
 }
 
 // MARK: Relationship ManyToMany
