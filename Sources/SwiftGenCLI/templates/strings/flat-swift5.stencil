@@ -40,13 +40,13 @@ import Foundation
   {% endif %}
   {% if string.types %}
   {{accessModifier}} static func {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}({% call parametersBlock string.types %}) -> String {
-    return {{enumName}}.tr("{{table}}", "{{string.key}}", {% call argumentsBlock string.types %})
+    return {{enumName}}.tr("{{table}}", "{{string.key}}", {% call argumentsBlock string.types %}, fallback: #"{{string.translation}}"#)
   }
   {% elif param.lookupFunction %}
   {# custom localization function is mostly used for in-app lang selection, so we want the loc to be recomputed at each call for those (hence the computed var) #}
-  {{accessModifier}} static var {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: String { return {{enumName}}.tr("{{table}}", "{{string.key}}") }
+  {{accessModifier}} static var {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: String { return {{enumName}}.tr("{{table}}", "{{string.key}}", fallback: #"{{string.translation}}"#) }
   {% else %}
-  {{accessModifier}} static let {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{table}}", "{{string.key}}")
+  {{accessModifier}} static let {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{table}}", "{{string.key}}", fallback: #"{{string.translation}}"#)
   {% endif %}
   {% endfor %}
   {% for child in item.children %}
@@ -71,11 +71,11 @@ import Foundation
 // MARK: - Implementation Details
 
 extension {{enumName}} {
-  private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
+  private static func tr(_ table: String, _ key: String, _ args: CVarArg..., fallback value: String) -> String {
     {% if param.lookupFunction %}
-    let format = {{ param.lookupFunction }}(key, table)
+    let format = {{ param.lookupFunction }}(key, table, value)
     {% else %}
-    let format = {{param.bundle|default:"BundleToken.bundle"}}.localizedString(forKey: key, value: nil, table: table)
+    let format = {{param.bundle|default:"BundleToken.bundle"}}.localizedString(forKey: key, value: value, table: table)
     {% endif %}
     return String(format: format, locale: Locale.current, arguments: args)
   }
