@@ -34,7 +34,7 @@ import Foundation
 {% macro recursiveBlock table item %}
   {% for string in item.strings %}
   {% if not param.noComments %}
-  {% for line in string.translation|split:"\n" %}
+  {% for line in string.comment|default:string.translation|split:"\n" %}
   /// {{line}}
   {% endfor %}
   {% endif %}
