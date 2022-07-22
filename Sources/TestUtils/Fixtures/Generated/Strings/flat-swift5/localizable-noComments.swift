@@ -11,6 +11,7 @@ import Foundation
 internal enum L10n {
   internal static let alertMessage = L10n.tr("Localizable", "alert__message")
   internal static let alertTitle = L10n.tr("Localizable", "alert__title")
+  internal static let key1 = L10n.tr("Localizable", "key1")
   internal static func objectOwnership(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
     return L10n.tr("Localizable", "ObjectOwnership", p1, String(describing: p2), String(describing: p3))
   }
@@ -27,6 +28,7 @@ internal enum L10n {
   internal static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
     return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
   }
+  internal static let key1Anonymous = L10n.tr("Localizable", "key1.anonymous")
   internal static func manyPlaceholdersBase(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Float, _ p9: Any, _ p10: Int, _ p11: Float) -> String {
     return L10n.tr("Localizable", "many.placeholders.base", String(describing: p1), p2, p3, p4, p5, p6, String(describing: p7), p8, String(describing: p9), p10, p11)
   }
@@ -38,6 +40,7 @@ internal enum L10n {
   internal static let settingsNavigationBarTitleEvenDeeper = L10n.tr("Localizable", "settings.navigation-bar.title.even.deeper")
   internal static let settingsUserProfileSectionFooterText = L10n.tr("Localizable", "settings.user__profile_section.footer_text")
   internal static let settingsUserProfileSectionHEADERTITLE = L10n.tr("Localizable", "settings.user__profile_section.HEADER_TITLE")
+  internal static let whatHappensHere = L10n.tr("Localizable", "what./*happens*/.here")
 }
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length
 

@@ -7,12 +7,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Localizable : NSObject
 + (NSString*)alertMessage;
 + (NSString*)alertTitle;
++ (NSString*)key1;
 + (NSString*)objectOwnershipWithValues:(NSInteger)p1 :(id)p2 :(id)p3;
 + (NSString*)percent;
 + (NSString*)privateWithValues:(id)p1 :(NSInteger)p2;
 + (NSString*)typesWithValues:(id)p1 :(char)p2 :(NSInteger)p3 :(float)p4 :(char*)p5 :(void*)p6;
 + (NSString*)applesCountWithValue:(NSInteger)p1;
 + (NSString*)bananasOwnerWithValues:(NSInteger)p1 :(id)p2;
++ (NSString*)key1Anonymous;
 + (NSString*)manyPlaceholdersBaseWithValues:(id)p1 :(NSInteger)p2 :(float)p3 :(float)p4 :(NSInteger)p5 :(NSInteger)p6 :(id)p7 :(float)p8 :(id)p9 :(NSInteger)p10 :(float)p11;
 + (NSString*)manyPlaceholdersZeroWithValues:(id)p1 :(NSInteger)p2 :(float)p3 :(float)p4 :(NSInteger)p5 :(NSInteger)p6 :(id)p7 :(float)p8 :(id)p9 :(NSInteger)p10 :(float)p11;
 + (NSString*)settingsNavigationBarSelf;
@@ -20,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)settingsNavigationBarTitleEvenDeeper;
 + (NSString*)settingsUserProfileSectionFooterText;
 + (NSString*)settingsUserProfileSectionHEADERTITLE;
++ (NSString*)whatHappensHere;
 @end
 
 

@@ -13,8 +13,10 @@ internal enum L10n {
   internal enum Localizable {
     /// Some alert body there
     internal static let alertMessage = L10n.tr("Localizable", "alert__message")
-    /// Title of the alert
+    /// Title for an alert
     internal static let alertTitle = L10n.tr("Localizable", "alert__title")
+    /// value1
+    internal static let key1 = L10n.tr("Localizable", "key1")
     /// These are %3$@'s %1$d %2$@.
     internal static func objectOwnership(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
       return L10n.tr("Localizable", "ObjectOwnership", p1, String(describing: p2), String(describing: p3))
@@ -36,10 +38,14 @@ internal enum L10n {
       }
     }
     internal enum Bananas {
-      /// Those %d bananas belong to %@.
+      /// A comment with no space above it
       internal static func owner(_ p1: Int, _ p2: Any) -> String {
         return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
       }
+    }
+    internal enum Key1 {
+      /// Same as "key1" = "value1"; but in the context of user not logged in
+      internal static let anonymous = L10n.tr("Localizable", "key1.anonymous")
     }
     internal enum Many {
       internal enum Placeholders {
@@ -89,6 +95,12 @@ internal enum L10n {
         internal static let footerText = L10n.tr("Localizable", "settings.user__profile_section.footer_text")
         /// User Profile Settings
         internal static let headerTitle = L10n.tr("Localizable", "settings.user__profile_section.HEADER_TITLE")
+      }
+    }
+    internal enum What {
+      internal enum Happens {
+        /// some comment
+        internal static let here = L10n.tr("Localizable", "what./*happens*/.here")
       }
     }
   }
