@@ -45,6 +45,7 @@ extension CoreData.Parser {
     [
       "name": attribute.name,
       "propertyType": "attribute",
+      "isDerived": attribute.isDerived,
       "isIndexed": attribute.isIndexed,
       "isOptional": attribute.isOptional,
       "isTransient": attribute.isTransient,
