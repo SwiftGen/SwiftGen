@@ -134,7 +134,7 @@ tables:
       translation: "This is a %% character."
     - key: "private"
       name: "private"
-      translation: "Hello, my name is %@ and I'm %d"
+      translation: "Hello, my name is \"%@\" and I'm %d"
       types:
       - "String"
       - "Int"
