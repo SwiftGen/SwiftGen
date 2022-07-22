@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)objectOwnershipWithValues:(NSInteger)p1 :(id)p2 :(id)p3;
 /// This is a %% character.
 + (NSString*)percent;
-/// Hello, my name is %@ and I'm %d
+/// Hello, my name is "%@" and I'm %d
 + (NSString*)privateWithValues:(id)p1 :(NSInteger)p2;
 /// Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString: '%s', Pointer: '%p'
 + (NSString*)typesWithValues:(id)p1 :(char)p2 :(NSInteger)p3 :(float)p4 :(char*)p5 :(void*)p6;
