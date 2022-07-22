@@ -25,7 +25,9 @@ _None_
 
 ### Bug Fixes
 
-_None_
+* CoreData: ensure fetched properties use the right class name.  
+  [David Jennes](https://github.com/djbe)
+  [#960](https://github.com/SwiftGen/SwiftGen/pull/960)
 
 ### Internal Changes
 
