@@ -31,6 +31,10 @@ _None_
   [CraigSiemens](https://github.com/CraigSiemens)
   [#563](https://github.com/SwiftGen/SwiftGen/issues/563)
   [#813](https://github.com/SwiftGen/SwiftGen/pull/813)
+* CoreData: support derived attributes.  
+  [David Jennes](https://github.com/djbe)
+  [#928](https://github.com/SwiftGen/SwiftGen/issues/928)
+  [#961](https://github.com/SwiftGen/SwiftGen/pull/961)
 
 ### Bug Fixes
 
