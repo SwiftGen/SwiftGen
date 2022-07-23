@@ -63,17 +63,16 @@ import {{ import }}
       willAccessValue(forKey: key)
       defer { didAccessValue(forKey: key) }
 
-      {% if unwrapOptional %}
-      guard let value = primitiveValue(forKey: key) as? {{ rawType }}.RawValue,
-        let result = {{ rawType }}(rawValue: value) else {
+      guard let value = primitiveValue(forKey: key) as? {{ rawType }}.RawValue else {
+        {% if unwrapOptional %}fatalError("Could not convert value for key '\(key)' to type '{{ rawType }}.RawValue'"){% else %}return nil{% endif %}
+      }
+      {% if attribute.userInfo.nonOptionalInit or not unwrapOptional %}
+      return {{ rawType }}(rawValue: value)
+      {% else %}
+      guard let result = {{ rawType }}(rawValue: value) else {
         fatalError("Could not convert value for key '\(key)' to type '{{ rawType }}'")
       }
       return result
-      {% else %}
-      guard let value = primitiveValue(forKey: key) as? {{ rawType }}.RawValue else {
-        return nil
-      }
-      return {{ rawType }}(rawValue: value)
       {% endif %}
     }
     set {
