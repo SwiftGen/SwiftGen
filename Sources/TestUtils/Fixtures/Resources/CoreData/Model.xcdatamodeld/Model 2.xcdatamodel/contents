@@ -30,6 +30,13 @@
                 <entry key="unwrapOptional" value="true"/>
             </userInfo>
         </attribute>
+        <attribute name="integerOptionSet" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES">
+            <userInfo>
+                <entry key="nonOptionalInit" value="true"/>
+                <entry key="RawType" value="IntegerOptionSet"/>
+                <entry key="unwrapOptional" value="true"/>
+            </userInfo>
+        </attribute>
         <attribute name="optionalBoolean" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="optionalDouble" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="optionalFloat" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -91,7 +98,7 @@
         <element name="AutoExtensionGen" positionX="-27" positionY="144" width="128" height="45"/>
         <element name="ChildEntity" positionX="-36" positionY="126" width="128" height="45"/>
         <element name="ImpossibleType" positionX="160" positionY="192" width="128" height="43"/>
-        <element name="MainEntity" positionX="-63" positionY="-18" width="128" height="485"/>
+        <element name="MainEntity" positionX="-63" positionY="-18" width="128" height="500"/>
         <element name="NewEntity" positionX="-27" positionY="144" width="128" height="44"/>
         <element name="SecondaryEntity" positionX="-54" positionY="108" width="128" height="105"/>
     </elements>

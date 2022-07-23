@@ -23,7 +23,6 @@ _None_
 * CoreData: ensure generated classes are `final` when model isn't abstract.  
   [grsouza](https://github.com/grsouza)
   [#940](https://github.com/SwiftGen/SwiftGen/pull/940)
-
 * Added `.artifactbundle` release uploads to support SE-0325 Swift Plugins.  
   [nicorichard](https://github.com/nicorichard)
   [#913](https://github.com/SwiftGen/SwiftGen/issues/913)
@@ -33,13 +32,18 @@ _None_
 
 * CoreData: ensure fetched properties use the right class name.  
   [David Jennes](https://github.com/djbe)
+  [#936](https://github.com/SwiftGen/SwiftGen/issues/936)
   [#960](https://github.com/SwiftGen/SwiftGen/pull/960)
+* CoreData: now correctly generate code for `OptionSet` attributes by setting the "User Info" key `nonOptionalInit` to true.  
+  [David Jennes](https://github.com/djbe)
+  [#727](https://github.com/SwiftGen/SwiftGen/issues/727)
+  [#965](https://github.com/SwiftGen/SwiftGen/pull/965)
 
 ### Internal Changes
 
 * Updated GitHub Actions to use macOS 12.  
-  [#956](https://github.com/SwiftGen/SwiftGen/pull/956)
   [David Jennes](https://github.com/djbe)
+  [#956](https://github.com/SwiftGen/SwiftGen/pull/956)
 
 ## 6.5.1
 

@@ -187,6 +187,19 @@ models:
         isIndexed: false
         isOptional: true
         isTransient: false
+        name: "integerOptionSet"
+        propertyType: "attribute"
+        type: "Integer 16"
+        typeName: "Int16"
+        userInfo:
+          RawType: "IntegerOptionSet"
+          nonOptionalInit: true
+          unwrapOptional: true
+        usesScalarValueType: true
+      - customClassName: ""
+        isIndexed: false
+        isOptional: true
+        isTransient: false
         name: "optionalBoolean"
         propertyType: "attribute"
         type: "Boolean"
