@@ -822,7 +822,7 @@ strings:
     output: Strings.swift
 ```
 
-This will generate a Swift `enum L10n` that will map all your `Localizable.strings` and `Localizable.stringsdict` (or other tables) keys to a `static let` constant. And if it detects placeholders like `%@`,`%d`,`%f`, it will generate a `static func` with the proper argument types instead, to provide type-safe formatting.
+This will generate a Swift `enum L10n` that will map all your `Localizable.strings` and `Localizable.stringsdict` (or other tables) keys to a `static let` constant. And if it detects placeholders like `%@`,`%d`,`%f`, it will generate a `static func` with the proper argument types instead, to provide type-safe formatting. By default it will add comments to the generated constants and functions using the comments from the strings file if present, or the default translation of the string.
 
 > Note that all dots within the key names are converted to dots in code (by using nested enums). You can provide a different separator than `.` to split key names into substructures by using a parser option – see [the parser documentation](Documentation/Parsers/strings.md).
 
@@ -832,6 +832,7 @@ This will generate a Swift `enum L10n` that will map all your `Localizable.strin
 Given the following `Localizable.strings` file:
 
 ```swift
+/* Some comment on the title */
 "alert_title" = "Title of the alert";
 "alert_message" = "Some alert body there";
 "bananas.owner" = "Those %d bananas belong to %@.";
@@ -873,7 +874,7 @@ The generated code will contain this:
 internal enum L10n {
   /// Some alert body there
   internal static let alertMessage = L10n.tr("alert_message")
-  /// Title of the alert
+  /// Some comment on the title
   internal static let alertTitle = L10n.tr("alert_title")
 
   internal enum Apples {

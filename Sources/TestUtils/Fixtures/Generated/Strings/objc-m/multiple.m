@@ -32,6 +32,9 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 + (NSString*)alertTitle {
     return tr(@"Localizable", @"alert__title");
 }
++ (NSString*)key1 {
+    return tr(@"Localizable", @"key1");
+}
 + (NSString*)objectOwnershipWithValues:(NSInteger)p1 :(id)p2 :(id)p3
 {
     return tr(@"Localizable", @"ObjectOwnership", p1, p2, p3);
@@ -54,6 +57,9 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 + (NSString*)bananasOwnerWithValues:(NSInteger)p1 :(id)p2
 {
     return tr(@"Localizable", @"bananas.owner", p1, p2);
+}
++ (NSString*)key1Anonymous {
+    return tr(@"Localizable", @"key1.anonymous");
 }
 + (NSString*)manyPlaceholdersBaseWithValues:(id)p1 :(NSInteger)p2 :(float)p3 :(float)p4 :(NSInteger)p5 :(NSInteger)p6 :(id)p7 :(float)p8 :(id)p9 :(NSInteger)p10 :(float)p11
 {
@@ -78,6 +84,9 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 + (NSString*)settingsUserProfileSectionHEADERTITLE {
     return tr(@"Localizable", @"settings.user__profile_section.HEADER_TITLE");
 }
++ (NSString*)whatHappensHere {
+    return tr(@"Localizable", @"what./*happens*/.here");
+}
 @end
 
 @implementation LocMultiline : NSObject
@@ -86,6 +95,9 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 }
 + (NSString*)multiLineNKey {
     return tr(@"LocMultiline", @"multiLine\nKey");
+}
++ (NSString*)multilineComment {
+    return tr(@"LocMultiline", @"multiline-comment");
 }
 + (NSString*)multiline2 {
     return tr(@"LocMultiline", @"MULTILINE2");

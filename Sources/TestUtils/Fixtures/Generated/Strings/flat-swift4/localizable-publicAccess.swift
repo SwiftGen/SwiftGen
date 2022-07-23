@@ -11,8 +11,10 @@ import Foundation
 public enum L10n {
   /// Some alert body there
   public static let alertMessage = L10n.tr("Localizable", "alert__message")
-  /// Title of the alert
+  /// Title for an alert
   public static let alertTitle = L10n.tr("Localizable", "alert__title")
+  /// value1
+  public static let key1 = L10n.tr("Localizable", "key1")
   /// These are %3$@'s %1$d %2$@.
   public static func objectOwnership(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
     return L10n.tr("Localizable", "ObjectOwnership", p1, String(describing: p2), String(describing: p3))
@@ -31,10 +33,12 @@ public enum L10n {
   public static func applesCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "apples.count", p1)
   }
-  /// Those %d bananas belong to %@.
+  /// A comment with no space above it
   public static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
     return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
   }
+  /// Same as "key1" = "value1"; but in the context of user not logged in
+  public static let key1Anonymous = L10n.tr("Localizable", "key1.anonymous")
   /// %@ %d %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d
   public static func manyPlaceholdersBase(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Float, _ p9: Any, _ p10: Int, _ p11: Float) -> String {
     return L10n.tr("Localizable", "many.placeholders.base", String(describing: p1), p2, p3, p4, p5, p6, String(describing: p7), p8, String(describing: p9), p10, p11)
@@ -53,6 +57,8 @@ public enum L10n {
   public static let settingsUserProfileSectionFooterText = L10n.tr("Localizable", "settings.user__profile_section.footer_text")
   /// User Profile Settings
   public static let settingsUserProfileSectionHEADERTITLE = L10n.tr("Localizable", "settings.user__profile_section.HEADER_TITLE")
+  /// some comment
+  public static let whatHappensHere = L10n.tr("Localizable", "what./*happens*/.here")
 }
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length
 
