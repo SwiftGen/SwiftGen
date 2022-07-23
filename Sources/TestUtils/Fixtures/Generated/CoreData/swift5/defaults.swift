@@ -106,14 +106,35 @@ internal class CustomMainEntity: NSManagedObject {
       willAccessValue(forKey: key)
       defer { didAccessValue(forKey: key) }
 
-      guard let value = primitiveValue(forKey: key) as? IntegerEnum.RawValue,
-        let result = IntegerEnum(rawValue: value) else {
+      guard let value = primitiveValue(forKey: key) as? IntegerEnum.RawValue else {
+        fatalError("Could not convert value for key '\(key)' to type 'IntegerEnum.RawValue'")
+      }
+      guard let result = IntegerEnum(rawValue: value) else {
         fatalError("Could not convert value for key '\(key)' to type 'IntegerEnum'")
       }
       return result
     }
     set {
       let key = "integerEnum"
+      willChangeValue(forKey: key)
+      defer { didChangeValue(forKey: key) }
+
+      setPrimitiveValue(newValue.rawValue, forKey: key)
+    }
+  }
+  internal var integerOptionSet: IntegerOptionSet {
+    get {
+      let key = "integerOptionSet"
+      willAccessValue(forKey: key)
+      defer { didAccessValue(forKey: key) }
+
+      guard let value = primitiveValue(forKey: key) as? IntegerOptionSet.RawValue else {
+        fatalError("Could not convert value for key '\(key)' to type 'IntegerOptionSet.RawValue'")
+      }
+      return IntegerOptionSet(rawValue: value)
+    }
+    set {
+      let key = "integerOptionSet"
       willChangeValue(forKey: key)
       defer { didChangeValue(forKey: key) }
 
