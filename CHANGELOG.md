@@ -42,6 +42,10 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#727](https://github.com/SwiftGen/SwiftGen/issues/727)
   [#965](https://github.com/SwiftGen/SwiftGen/pull/965)
+* Fonts: fix file-type check in sandboxed environments.  
+  [David Jennes](https://github.com/djbe)
+  [#952](https://github.com/SwiftGen/SwiftGen/issues/952)
+  [#967](https://github.com/SwiftGen/SwiftGen/pull/967)
 
 ### Internal Changes
 
