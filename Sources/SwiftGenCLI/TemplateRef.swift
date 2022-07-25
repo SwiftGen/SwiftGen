@@ -70,6 +70,20 @@ public enum TemplateRef: Equatable {
       return fullPath
     }
   }
+
+  /// Check if the template is a bundled template for the given parser
+  /// - Parameter parserName: The folder to search for the template.
+  ///                         Typically the name of one of the SwiftGen parsers like `strings`, `colors`, etc
+  /// - Returns: The Path matching the template found
+  public func isBundled(forParser parser: ParserCLI) -> Bool {
+    switch self {
+    case .name(let templateShortName):
+      let path = Path.bundledTemplates + parser.templateFolder + "\(templateShortName).stencil"
+      return path.isFile
+    case .path:
+      return false
+    }
+  }
 }
 
 extension TemplateRef.Error: CustomStringConvertible {
