@@ -2,11 +2,6 @@ Use this file to track all dependencies required by this project.
 
 ## Added via SPM
 
-### Commander
-
-- Added to have access to a swifty way of defining CLI commands and options.
-- License: [BSD 3-Clause](https://github.com/kylef/Commander/blob/master/LICENSE)
-
 ### Kanna
 
 - Added because the XML parser provided by Foundation is quite old and non-swifty, and doesn't have any XPath support.
@@ -32,6 +27,11 @@ Use this file to track all dependencies required by this project.
 
 - Additional tags/filters for Stencil, developed and maintained by the SwiftGen project.
 - License: [MIT](https://github.com/SwiftGen/StencilSwiftKit/blob/stable/LICENCE)
+
+### swift-argument-parser
+
+- Added to have access to a swifty way of defining CLI commands and options.
+- License: [Apache 2.0](https://github.com/apple/swift-argument-parser/blob/main/LICENSE.txt)
 
 ### Yams
 

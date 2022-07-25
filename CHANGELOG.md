@@ -66,6 +66,9 @@ _None_
 * Implement automatic publication using GitHub Actions.  
   [David Jennes](https://github.com/djbe)
   [#969](https://github.com/SwiftGen/SwiftGen/pull/969)
+* Switched from [Commander](https://github.com/kylef/Commander) to Swift's own [ArgumentParser](https://github.com/apple/swift-argument-parser) library.  
+  [David Jennes](https://github.com/djbe)
+  [#966](https://github.com/SwiftGen/SwiftGen/pull/966)
 
 ## 6.5.1
 
