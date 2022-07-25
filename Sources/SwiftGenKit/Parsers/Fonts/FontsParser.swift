@@ -22,12 +22,7 @@ public enum Fonts {
     public static let defaultFilter = filterRegex(forExtensions: ["otf", "ttc", "ttf"])
 
     public func parse(path: Path, relativeTo parent: Path) throws {
-      guard let values = try? path.url.resourceValues(forKeys: [.typeIdentifierKey]),
-        let uti = values.typeIdentifier else {
-        warningHandler?("Unable to determine the Universal Type Identifier for file \(path)", #file, #line)
-        return
-      }
-      guard UTTypeConformsTo(uti as CFString, kUTTypeFont) else {
+      guard checkIsFont(path: path) else {
         warningHandler?("File is not a known font type: \(path)", #file, #line)
         return
       }
@@ -35,10 +30,27 @@ public enum Fonts {
       let fonts = CTFont.parse(file: path, relativeTo: parent)
       fonts.forEach { addFont($0) }
     }
+  }
+}
 
-    private func addFont(_ font: Font) {
-      let familyName = font.familyName
-      entries[familyName, default: []].insert(font)
+// MARK: - Helpers
+
+private extension Fonts.Parser {
+  /// Try to quickly check if the given file is an actual font file.
+  ///
+  /// - Note: This can seemingly fail in sandboxed environments.
+  func checkIsFont(path: Path) -> Bool {
+    guard let values = try? path.url.resourceValues(forKeys: [.typeIdentifierKey]),
+      let uti = values.typeIdentifier else {
+      warningHandler?("Unable to determine the Universal Type Identifier for file \(path)", #file, #line)
+      return true
     }
+
+    return UTTypeConformsTo(uti as CFString, kUTTypeFont)
+  }
+
+  func addFont(_ font: Fonts.Font) {
+    let familyName = font.familyName
+    entries[familyName, default: []].insert(font)
   }
 }
