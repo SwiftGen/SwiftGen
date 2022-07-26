@@ -20,6 +20,6 @@ jobs:
           bundler-cache: true
       -
         name: Run Danger
-        run: bundle exec danger --verbose
+        run: bundle exec danger --verbose --dangerfile=rakelib/Dangerfile
         env:
           DANGER_GITHUB_API_TOKEN: ${{ secrets.danger_github_api_token }}

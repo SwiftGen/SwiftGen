@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'rakelib/check_changelog'
+require_relative 'check_changelog'
 
 is_release = github.branch_for_head.start_with?('release/')
 is_hotfix = github.branch_for_head.start_with?('hotfix/')

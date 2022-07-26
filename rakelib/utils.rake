@@ -4,8 +4,8 @@
 # - MIN_XCODE_VERSION
 
 require 'json'
-require 'pathname'
 require 'open3'
+require 'pathname'
 
 # Utility functions to run Xcode commands, extract versionning info and logs messages
 #
@@ -69,7 +69,8 @@ class Utils
   end
 
   def self.octokit_client
-    token   = File.exist?('.apitoken') && File.read('.apitoken')
+    token   = ENV['DANGER_GITHUB_API_TOKEN']
+    token ||= File.exist?('.apitoken') && File.read('.apitoken')
     token ||= File.exist?('../.apitoken') && File.read('../.apitoken')
     Utils.print_error('No .apitoken file found') unless token
     require 'octokit'
