@@ -26,7 +26,6 @@ jobs:
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
-      # TODO: This should run the tests once SPM supports testing an executable
       -
-        name: Build
+        name: Run tests
         run: bundle exec rake spm:test

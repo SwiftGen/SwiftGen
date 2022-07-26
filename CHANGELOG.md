@@ -46,6 +46,10 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#952](https://github.com/SwiftGen/SwiftGen/issues/952)
   [#967](https://github.com/SwiftGen/SwiftGen/pull/967)
+* Fixed Stencil tags that can refer to other templates, such as the `include` tag.  
+  [David Jennes](https://github.com/djbe)
+  [#950](https://github.com/SwiftGen/SwiftGen/issues/950)
+  [#959](https://github.com/SwiftGen/SwiftGen/pull/959)
 
 ### Internal Changes
 

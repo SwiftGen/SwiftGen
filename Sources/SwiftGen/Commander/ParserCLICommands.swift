@@ -91,10 +91,11 @@ extension ParserCLI {
           templateFullPath: templatePath
         )
         let templateRealPath = try templateRef.resolvePath(forParser: self)
+        let environment = stencilSwiftEnvironment(templatePaths: [templateRealPath.parent()])
 
         let template = try StencilSwiftTemplate(
           templateString: templateRealPath.read(),
-          environment: stencilSwiftEnvironment()
+          environment: environment
         )
 
         let context = parser.stencilContext()

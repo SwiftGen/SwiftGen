@@ -91,14 +91,9 @@ public class Fixtures {
     return result
   }
 
-  static func template(for name: String, sub: Directory) -> String {
-    do {
-      // Directly load from SwiftGenFramework bundle
-      let path = Path.bundledTemplates + sub.rawValue.lowercased() + name
-      return try path.read()
-    } catch let error {
-      fatalError("Unable to load fixture \(name)'s content: \(error)")
-    }
+  static func template(for name: String, sub: Directory) -> Path {
+    // Directly load from SwiftGenFramework bundle
+    return Path.bundledTemplates + sub.rawValue.lowercased() + name
   }
 
   static func output(template: String, variation: String, sub: Directory) -> String {
