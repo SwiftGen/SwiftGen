@@ -4,6 +4,9 @@
     <entity name="AutoClassGen" representedClassName="AutoClassGen" syncable="YES" codeGenerationType="class"/>
     <entity name="AutoExtensionGen" representedClassName="AutoExtensionGen" syncable="YES" codeGenerationType="category"/>
     <entity name="ChildEntity" representedClassName="SwiftGen.ChildEntity" parentEntity="MainEntity" syncable="YES">
+        <attribute name="canonicalOptionalString" optional="YES" attributeType="String" derived="YES" derivationExpression="canonical:(optionalString)"/>
+        <attribute name="derivedCount" optional="YES" attributeType="Integer 64" derived="YES" derivationExpression="oneToMany.@count" usesScalarValueType="YES"/>
+        <attribute name="now" attributeType="Double" derived="YES" derivationExpression="now()" usesScalarValueType="YES"/>
         <userInfo>
             <entry key="key" value="value"/>
         </userInfo>
@@ -96,7 +99,7 @@
         <element name="AbstractEntity" positionX="-9" positionY="162" width="128" height="45"/>
         <element name="AutoClassGen" positionX="-36" positionY="135" width="128" height="45"/>
         <element name="AutoExtensionGen" positionX="-27" positionY="144" width="128" height="45"/>
-        <element name="ChildEntity" positionX="-36" positionY="126" width="128" height="45"/>
+        <element name="ChildEntity" positionX="-36" positionY="126" width="128" height="74"/>
         <element name="ImpossibleType" positionX="160" positionY="192" width="128" height="43"/>
         <element name="MainEntity" positionX="-63" positionY="-18" width="128" height="500"/>
         <element name="NewEntity" positionX="-27" positionY="144" width="128" height="44"/>

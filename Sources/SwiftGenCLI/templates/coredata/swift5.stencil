@@ -52,7 +52,7 @@ import {{ import }}
     return NSFetchRequest<{{ entityClassName }}>(entityName: entityName)
   }
 
-  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection implicit_getter
   {% for attribute in entity.attributes %}
   {% if attribute.userInfo.RawType %}
   {% set rawType attribute.userInfo.RawType %}
@@ -74,14 +74,14 @@ import {{ import }}
       }
       return result
       {% endif %}
-    }
+    }{% if not attribute.isDerived %}
     set {
       let key = "{{ attribute.name }}"
       willChangeValue(forKey: key)
       defer { didChangeValue(forKey: key) }
 
       setPrimitiveValue(newValue{% if not unwrapOptional %}?{% endif %}.rawValue, forKey: key)
-    }
+    }{% endif %}
   }
   {% elif attribute.usesScalarValueType and attribute.isOptional %}
   {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}? {
@@ -91,14 +91,29 @@ import {{ import }}
       defer { didAccessValue(forKey: key) }
 
       return primitiveValue(forKey: key) as? {{ attribute.typeName }}
-    }
+    }{% if not attribute.isDerived %}
     set {
       let key = "{{ attribute.name }}"
       willChangeValue(forKey: key)
       defer { didChangeValue(forKey: key) }
 
       setPrimitiveValue(newValue, forKey: key)
+    }{% endif %}
+  }
+  {% elif attribute.isDerived %}
+  {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional %}?{% endif %} {
+    let key = "{{ attribute.name }}"
+    willAccessValue(forKey: key)
+    defer { didAccessValue(forKey: key) }
+
+    {% if attribute.isOptional %}
+    return primitiveValue(forKey: key) as? {{ attribute.typeName }}
+    {% else %}
+    guard let value = primitiveValue(forKey: key) as? {{ attribute.typeName }} else {
+      fatalError("Could not convert value for key '\(key)' to type '{{ attribute.typeName }}'")
     }
+    return value
+    {% endif %}
   }
   {% else %}
   @NSManaged {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional %}?{% endif %}
@@ -114,7 +129,7 @@ import {{ import }}
   {% for fetchedProperty in entity.fetchedProperties %}
   @NSManaged {{ accessModifier }} var {{ fetchedProperty.name }}: [{{ model.entities[fetchedProperty.fetchRequest.entity].className|default:"NSManagedObject" }}]
   {% endfor %}
-  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
+  // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection implicit_getter
 }
 
 {% for relationship in entity.relationships where relationship.isToMany %}
