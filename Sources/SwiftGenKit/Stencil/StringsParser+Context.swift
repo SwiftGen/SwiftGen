@@ -40,7 +40,7 @@ extension Strings.Parser {
     }
 
     let tables = self.tables
-      .sorted { $0.key.lowercased() < $1.key.lowercased() }
+      .sorted { $0.key.compare($1.key, options: .caseInsensitive) == .orderedAscending }
       .map { name, entries in
         [
           "name": name,
@@ -70,7 +70,7 @@ extension Strings.Parser {
     // collect strings for this level
     let strings = entries
       .filter { $0.keyStructure.count == keyPath.count + 1 }
-      .sorted { $0.key.lowercased() < $1.key.lowercased() }
+      .sorted { $0.key.compare($1.key, options: .caseInsensitive) == .orderedAscending }
       .map { mapper($0, keyPath) }
 
     if !strings.isEmpty {
@@ -81,7 +81,7 @@ extension Strings.Parser {
     // and then structure those grouped entries
     let childEntries = entries.filter { $0.keyStructure.count > keyPath.count + 1 }
     let children = Dictionary(grouping: childEntries) { $0.keyStructure[keyPath.count] }
-      .sorted { $0.key < $1.key }
+      .sorted { $0.key.compare($1.key, options: .caseInsensitive) == .orderedAscending }
       .map { name, entries in
         structure(entries: entries, atKeyPath: keyPath + [name], usingMapper: mapper)
       }
