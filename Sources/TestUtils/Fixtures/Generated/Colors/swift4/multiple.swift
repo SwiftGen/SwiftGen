@@ -83,9 +83,7 @@ private struct RGBAComponents {
   }
 
   private var components: [CGFloat] {
-    shifts.map {
-      CGFloat($0 & 0xff)
-    }
+    shifts.map { CGFloat($0 & 0xff) }
   }
 
   var normalized: [CGFloat] {
