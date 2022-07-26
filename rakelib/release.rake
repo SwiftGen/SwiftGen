@@ -36,7 +36,7 @@ namespace :release do
     )
 
     # Extract version from SwiftGen.podspec
-    sg_version = Utils.podspec_version('SwiftGen')
+    sg_version = Utils.podspec_version(POD_NAME)
     Utils.table_info('SwiftGen.podspec', sg_version)
 
     # Extract version from SwiftGenKit.podspec
@@ -103,7 +103,7 @@ namespace :release do
   end
 
   task :confirm do
-    version = Utils.podspec_version('SwiftGen')
+    version = Utils.podspec_version(POD_NAME)
     print "Release version #{version} [Y/n]? "
     exit 2 unless STDIN.gets.chomp == 'Y'
   end
@@ -113,102 +113,65 @@ namespace :release do
     # Force a universal build
     task('cli:install').invoke(nil, true)
     `cp LICENCE README.md CHANGELOG.md #{BUILD_DIR}/swiftgen`
-    `cd #{BUILD_DIR}/swiftgen; zip -r ../swiftgen-#{Utils.podspec_version('SwiftGen')}.zip .`
+    `cd #{BUILD_DIR}/swiftgen; zip -r ../swiftgen-#{Utils.podspec_version(POD_NAME)}.zip .`
   end
 
   desc 'Create a zip containing all the prebuilt binaries in the artifact bundle format (for SwiftPM Package Plugins)'
   task :artifactbundle => :zip do
     bundle_dir = "#{BUILD_DIR}/swiftgen.artifactbundle"
+    version = Utils.podspec_version(POD_NAME)
+
     # Copy the built product to an artifact bundle
     `mkdir -p #{bundle_dir}`
     `cp -Rf #{BUILD_DIR}/swiftgen #{bundle_dir}`
 
     # Write the `info.json` artifact bundle manifest
     info_template = File.read("rakelib/artifactbundle.info.json.template")
-    info_file_content = info_template.gsub(/(VERSION)/, Utils.podspec_version('SwiftGen'))
+    info_file_content = info_template.gsub(/(VERSION)/, version)
     
     File.open("#{bundle_dir}/info.json", "w") do |f|
       f.write(info_file_content)   
     end
 
     # Zip the bundle
-    `cd #{BUILD_DIR}; zip -r swiftgen.artifactbundle.zip swiftgen.artifactbundle/`
+    `cd #{BUILD_DIR}; zip -r swiftgen-#{version}.artifactbundle.zip swiftgen.artifactbundle/`
   end
 
-  def post(url, content_type)
-    uri = URI.parse(url)
-    req = Net::HTTP::Post.new(uri)
-    req['Content-Type'] = content_type unless content_type.nil?
-    yield req if block_given?
-    req.basic_auth 'SwiftGen', File.read('.apitoken').chomp
+  desc "Create a new GitHub release"
+  task :github do
+    require 'octokit'
 
-    response = Net::HTTP.start(uri.host, uri.port, use_ssl: (uri.scheme == 'https')) do |http|
-      http.request(req)
-    end
-    unless response.code == '201'
-      Utils.print_error "Error: #{response.code} - #{response.message}"
-      puts response.body
-      exit 3
-    end
-    JSON.parse(response.body)
-  end
-
-  def github_upload(upload_url:, filename:)
-    upload_url = upload_url.gsub(/\{.*\}/, "?name=#{filename}")
-    zipfile = File.join(BUILD_DIR, filename)
-    zipsize = File.size(zipfile)
-
-    Utils.print_header "Uploading ZIP (#{zipsize} bytes)"
-    post(upload_url, 'application/zip') do |req|
-      req.body_stream = File.open(zipfile, 'rb')
-      req.add_field('Content-Length', zipsize)
-      req.add_field('Content-Transfer-Encoding', 'binary')
-    end
-  end
-
-  desc 'Upload the zipped binaries to a new GitHub release'
-  task :github => :artifactbundle do
-    v = Utils.podspec_version('SwiftGen')
-
-    artifact_names = [
-      "swiftgen-#{v}.zip",
-      "swiftgen.artifactbundle.zip"
-    ]    
-
-    # Pick out the relevant CHANGELOG information for this release
-    changelog = `sed -n /'^## #{v}$'/,/'^## '/p CHANGELOG.md`.gsub(/^## .*$/, '').strip
-
-    # Append checksums for our generated artifacts
-    changelog << "\n\n### Checksums\n"
-    artifact_names.each do |artifact_name|
-      changelog << "\n- `#{artifact_name}`: `#{Digest::SHA256.file(File.join(BUILD_DIR, artifact_name))}`"
-    end
-
-    Utils.print_header "Releasing version #{v} on GitHub"
-    puts changelog
-
+    client = Utils.octokit_client
+    version = Utils.podspec_version(POD_NAME)
+    body = Utils.top_changelog_entry
+    artifacts = [
+      "swiftgen-#{version}.zip",
+      "swiftgen-#{version}.artifactbundle.zip"
+    ]
+    repo_name = File.basename(`git remote get-url origin`.chomp, '.git').freeze
+    
     # Create the release
-    json = post('https://api.github.com/repos/SwiftGen/SwiftGen/releases', 'application/json') do |req|
-      req.body = { tag_name: v, name: v, body: changelog, draft: false, prerelease: false }.to_json
-    end
-   
+    puts "Pushing release notes for tag #{version}"
+    release = client.create_release("SwiftGen/#{repo_name}", version, name: version, body: body)
+
     # Upload our artifacts
-    artifact_names.each do |artifact_name|
-      github_upload(upload_url: json['upload_url'], filename: artifact_name)
+    artifacts.each do |artifact|
+      artifact_path = File.join(BUILD_DIR, artifact)
+      client.upload_asset(release.url, artifact_path, name: artifact, content_type: 'application/zip')
     end
   end
 
   desc 'pod trunk push SwiftGen to CocoaPods'
   task :cocoapods do
     Utils.print_header 'Pushing pod to CocoaPods Trunk'
-    sh 'bundle exec pod trunk push SwiftGen.podspec'
+    sh "bundle exec pod trunk push #{POD_NAME}.podspec"
   end
 
   desc 'Release a new version on Homebrew and prepare a PR'
   task :homebrew do
     Utils.print_header 'Updating Homebrew Formula'
     
-    tag = Utils.podspec_version('SwiftGen')
+    tag = Utils.podspec_version(POD_NAME)
     archive_url = "https://github.com/SwiftGen/SwiftGen/archive/#{tag}.tar.gz"
     digest = Digest::SHA256.hexdigest URI.open(archive_url).read
 
