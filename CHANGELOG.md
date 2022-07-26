@@ -63,6 +63,7 @@ _None_
 * Update dependencies such as SwiftLint (and enable some extra rules).  
   [David Jennes](https://github.com/djbe)
   [#968](https://github.com/SwiftGen/SwiftGen/pull/968)
+  [#970](https://github.com/SwiftGen/SwiftGen/pull/970)
 * Implement automatic publication using GitHub Actions.  
   [David Jennes](https://github.com/djbe)
   [#969](https://github.com/SwiftGen/SwiftGen/pull/969)

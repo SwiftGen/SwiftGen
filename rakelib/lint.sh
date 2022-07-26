@@ -9,7 +9,6 @@ else
   REPORTER=
 fi
 
-
 # possible paths
 paths_swiftgen_sources="Sources/SwiftGen"
 paths_swiftgen_tests="Tests/SwiftGenTests"
@@ -50,8 +49,8 @@ if [ "$key" = "templates_generated" ]; then
     sed "s/swiftlint:disable all/ --/" "$f" > "$temp_file"
   done
 
-  "$SWIFTLINT" lint --strict --config "$CONFIG" --path "$scratch" $REPORTER | sed s@"$scratch"@"${PROJECT_DIR}"@
+  "$SWIFTLINT" lint --strict --config "$CONFIG" $REPORTER "$scratch" | sed s@"$scratch"@"${PROJECT_DIR}"@
   exit ${PIPESTATUS[0]}
 else
-  "$SWIFTLINT" lint --strict --config "$CONFIG" --path "${PROJECT_DIR}/${selected_path}" $REPORTER
+  "$SWIFTLINT" lint --strict --config "$CONFIG" $REPORTER "${PROJECT_DIR}/${selected_path}"
 fi
