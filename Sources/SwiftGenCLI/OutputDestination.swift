@@ -4,19 +4,11 @@
 // MIT Licence
 //
 
-import Commander
 import PathKit
 
-public enum OutputDestination: ArgumentConvertible {
+public enum OutputDestination {
   case console
   case file(Path)
-
-  public init(parser: ArgumentParser) throws {
-    guard let path = parser.shift() else {
-      throw ArgumentError.missingValue(argument: nil)
-    }
-    self = .file(Path(path))
-  }
 
   public var description: String {
     switch self {

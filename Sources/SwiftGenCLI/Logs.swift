@@ -80,19 +80,3 @@ private let kLogQueue: DispatchQueue = {
 
   return queue
 }()
-
-public struct ErrorPrettifier: Error, CustomStringConvertible {
-  let nsError: NSError
-
-  public var description: String {
-    "\(nsError.localizedDescription) (\(nsError.domain) code \(nsError.code))"
-  }
-
-  public static func execute(closure: () throws -> Void ) rethrows {
-    do {
-      try closure()
-    } catch let error as NSError where error.domain == NSCocoaErrorDomain {
-      throw ErrorPrettifier(nsError: error)
-    }
-  }
-}
