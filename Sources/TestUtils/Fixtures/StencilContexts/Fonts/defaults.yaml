@@ -63,12 +63,12 @@ families:
     style: "Roman"
   name: "Avenir"
 - fonts:
-  - name: "ZapfDingbatsITC"
-    path: "Fonts/ZapfDingbats.ttf"
-    style: "Regular"
-  name: "Zapf Dingbats"
-- fonts:
   - name: "private"
     path: "Fonts/class.ttf"
     style: "internal"
   name: "public"
+- fonts:
+  - name: "ZapfDingbatsITC"
+    path: "Fonts/ZapfDingbats.ttf"
+    style: "Regular"
+  name: "Zapf Dingbats"

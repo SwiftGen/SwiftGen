@@ -54,6 +54,11 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#950](https://github.com/SwiftGen/SwiftGen/issues/950)
   [#959](https://github.com/SwiftGen/SwiftGen/pull/959)
+* All parsers: fixed unstable output for keys that differed just by case.  
+  [grigorye](https://github.com/grigorye)
+  [David Jennes](https://github.com/djbe)
+  [#891](https://github.com/SwiftGen/SwiftGen/issues/891)
+  [#890](https://github.com/SwiftGen/SwiftGen/pull/890)
 
 ### Internal Changes
 

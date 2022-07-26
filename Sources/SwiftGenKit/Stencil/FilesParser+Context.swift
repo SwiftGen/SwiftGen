@@ -10,7 +10,7 @@ import PathKit
 extension Files.Parser {
   public func stencilContext() -> [String: Any] {
     let groups: [[String: Any]] = files
-      .sorted { $0.key.lowercased() < $1.key.lowercased() }
+      .sorted { $0.key.compare($1.key, options: .caseInsensitive) == .orderedAscending }
       .map { name, files in
         var contents = structure(entries: files, usingMapper: map(file:))
         contents["name"] = name
@@ -43,7 +43,7 @@ extension Files.Parser {
     // Collect the files at this level
     let files = entries
       .filter { $0.path == keyPath }
-      .sorted { $0.name.lowercased() < $1.name.lowercased() }
+      .sorted { $0.name.compare($1.name, options: .caseInsensitive) == .orderedAscending }
       .map { mapper($0) }
 
     if !files.isEmpty {
@@ -54,7 +54,7 @@ extension Files.Parser {
     // sort and structure those files
     let childEntries = entries.filter { $0.path.count > keyPath.count }
     let children = Dictionary(grouping: childEntries) { $0.path[keyPath.count] }
-      .sorted { $0.key.lowercased() < $1.key.lowercased() }
+      .sorted { $0.key.compare($1.key, options: .caseInsensitive) == .orderedAscending }
       .map { name, entries in
         structure(entries: entries, atKeyPath: keyPath + [name], usingMapper: mapper)
       }

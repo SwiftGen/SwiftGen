@@ -47,15 +47,15 @@ internal enum CustomFamily {
     internal static let roman = MyFontConvertible(name: "Avenir-Roman", family: "Avenir", path: "Avenir.ttc")
     internal static let all: [MyFontConvertible] = [black, blackOblique, book, bookOblique, heavy, heavyOblique, light, lightOblique, medium, mediumOblique, oblique, roman]
   }
-  internal enum ZapfDingbats {
-    internal static let regular = MyFontConvertible(name: "ZapfDingbatsITC", family: "Zapf Dingbats", path: "ZapfDingbats.ttf")
-    internal static let all: [MyFontConvertible] = [regular]
-  }
   internal enum Public {
     internal static let `internal` = MyFontConvertible(name: "private", family: "public", path: "class.ttf")
     internal static let all: [MyFontConvertible] = [`internal`]
   }
-  internal static let allCustomFonts: [MyFontConvertible] = [SFNSDisplay.all, SFNSText.all, Avenir.all, ZapfDingbats.all, Public.all].flatMap { $0 }
+  internal enum ZapfDingbats {
+    internal static let regular = MyFontConvertible(name: "ZapfDingbatsITC", family: "Zapf Dingbats", path: "ZapfDingbats.ttf")
+    internal static let all: [MyFontConvertible] = [regular]
+  }
+  internal static let allCustomFonts: [MyFontConvertible] = [SFNSDisplay.all, SFNSText.all, Avenir.all, Public.all, ZapfDingbats.all].flatMap { $0 }
   internal static func registerAllCustomFonts() {
     allCustomFonts.forEach { $0.register() }
   }

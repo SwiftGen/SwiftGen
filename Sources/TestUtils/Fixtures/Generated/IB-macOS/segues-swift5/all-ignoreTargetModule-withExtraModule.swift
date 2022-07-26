@@ -19,10 +19,10 @@ internal enum StoryboardSegue {
     case login = "Login"
     case modal = "Modal"
     case popover = "Popover"
-    case sheet = "Sheet"
-    case show = "Show"
     case `private`
     case `public`
+    case sheet = "Sheet"
+    case show = "Show"
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

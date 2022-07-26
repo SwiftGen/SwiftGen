@@ -14,7 +14,7 @@ import Foundation
 extension InterfaceBuilder.Parser {
   public func stencilContext() -> [String: Any] {
     let storyboards = self.storyboards
-      .sorted { lhs, rhs in lhs.name < rhs.name }
+      .sorted { $0.name.compare($1.name, options: .caseInsensitive) == .orderedAscending }
       .map(map(storyboard:))
     return [
       "modules": modules.sorted(),
@@ -27,10 +27,10 @@ extension InterfaceBuilder.Parser {
     var result: [String: Any] = [
       "name": storyboard.name,
       "scenes": storyboard.scenes
-        .sorted { $0.identifier < $1.identifier }
+        .sorted { $0.identifier.compare($1.identifier, options: .caseInsensitive) == .orderedAscending }
         .map(map(scene:)),
       "segues": storyboard.segues
-        .sorted { $0.identifier < $1.identifier }
+        .sorted { $0.identifier.compare($1.identifier, options: .caseInsensitive) == .orderedAscending }
         .map(map(segue:)),
       "platform": storyboard.platform.name
     ]
