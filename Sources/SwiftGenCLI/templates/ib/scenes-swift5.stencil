@@ -40,13 +40,13 @@ import {{module}}
     {% if storyboard.initialScene %}
 
     {% set sceneClass %}{% call className storyboard.initialScene %}{% endset %}
-    {{accessModifier}} static let initialScene = InitialSceneType<{{sceneClass}}>(storyboard: {{storyboardName}}.self)
+    {{accessModifier}} static let initialScene = InitialSceneType<{{sceneClass}}>(storyboard: Self.self)
     {% endif %}
     {% for scene in storyboard.scenes %}
 
     {% set sceneID %}{{scene.identifier|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% endset %}
     {% set sceneClass %}{% call className scene %}{% endset %}
-    {{accessModifier}} static let {{sceneID}} = SceneType<{{sceneClass}}>(storyboard: {{storyboardName}}.self, identifier: "{{scene.identifier}}")
+    {{accessModifier}} static let {{sceneID}} = SceneType<{{sceneClass}}>(storyboard: Self.self, identifier: "{{scene.identifier}}")
     {% endfor %}
   }
   {% endfor %}
