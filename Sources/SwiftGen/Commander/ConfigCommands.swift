@@ -66,7 +66,7 @@ enum ConfigCLI {
       }
     } catch let error as Config.Error {
       logMessage(.error, error)
-      logMessage(.error, configRunErrorMessageWithSuggestions)
+      logMessage(.error, kConfigRunErrorMessageWithSuggestions)
     }
   }
 
@@ -127,7 +127,7 @@ enum ConfigCLI {
 
 // MARK: - Private
 
-private let configRunErrorMessageWithSuggestions =
+private let kConfigRunErrorMessageWithSuggestions =
   """
   It seems like there was an error running SwiftGen.
 

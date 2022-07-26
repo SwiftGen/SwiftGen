@@ -14,9 +14,9 @@ import SwiftGenKit
 
 // MARK: - Main
 
-// swiftlint:disable:next closure_body_length
-let main = Group {
-  $0.noCommand = { path, group, parser in
+// swiftlint:disable:next closure_body_length prefixed_toplevel_constant
+let main = Group { group in
+  group.noCommand = { path, group, parser in
     if path == nil && !parser.hasOption("help") {
       // `swiftgen` invoked with no subcommand AND no `--help` flag ==> run `swiftgen config run`
       try ConfigCLI.run.run(parser)
@@ -28,12 +28,12 @@ let main = Group {
       throw GroupError.noCommand(path, group)
     }
   }
-  $0.group("config", "manage and run configuration files") {
-    $0.addCommand("lint", "lint the configuration file", ConfigCLI.lint)
-    $0.addCommand("run", "run commands listed in the configuration file", ConfigCLI.run)
-    $0.addCommand("init", "create an initial configuration file", ConfigCLI.create)
-    $0.addCommand("doc", "open the documentation for the configuration file on GitHub", ConfigCLI.doc)
-    $0.addCommand(
+  group.group("config", "manage and run configuration files") { group in
+    group.addCommand("lint", "lint the configuration file", ConfigCLI.lint)
+    group.addCommand("run", "run commands listed in the configuration file", ConfigCLI.run)
+    group.addCommand("init", "create an initial configuration file", ConfigCLI.create)
+    group.addCommand("doc", "open the documentation for the configuration file on GitHub", ConfigCLI.doc)
+    group.addCommand(
       "generate-xcfilelists",
       """
       generates xcfilelists based on the configuration file, \
@@ -43,29 +43,29 @@ let main = Group {
     )
   }
 
-  $0.group("template", "manage custom templates") {
-    $0.addCommand("list", "list bundled and custom templates", TemplateCLI.list)
-    $0.addCommand("which", "print path of a given named template", TemplateCLI.which)
-    $0.addCommand("cat", "print content of a given named template", TemplateCLI.cat)
-    $0.addCommand("doc", "open the documentation for templates on GitHub", TemplateCLI.doc)
+  group.group("template", "manage custom templates") { group in
+    group.addCommand("list", "list bundled and custom templates", TemplateCLI.list)
+    group.addCommand("which", "print path of a given named template", TemplateCLI.which)
+    group.addCommand("cat", "print content of a given named template", TemplateCLI.cat)
+    group.addCommand("doc", "open the documentation for templates on GitHub", TemplateCLI.doc)
   }
 
-  $0.group("run", "run individual parser commands, outside of a config file") {
+  group.group("run", "run individual parser commands, outside of a config file") { group in
     for cmd in ParserCLI.allCommands {
-      $0.addCommand(cmd.name, cmd.description, cmd.command())
+      group.addCommand(cmd.name, cmd.description, cmd.command())
     }
   }
 
   // Deprecated: Remove this in SwiftGen 7.0
-  $0.group("templates", "DEPRECATED - use `template` subcommand instead") {
-    $0.addDeprecatedCommand("list", replacement: "template list", TemplateCLI.list)
-    $0.addDeprecatedCommand("which", replacement: "template which", TemplateCLI.which)
-    $0.addDeprecatedCommand("cat", replacement: "template cat", TemplateCLI.cat)
-    $0.addDeprecatedCommand("doc", replacement: "template doc", TemplateCLI.doc)
+  group.group("templates", "DEPRECATED - use `template` subcommand instead") { group in
+    group.addDeprecatedCommand("list", replacement: "template list", TemplateCLI.list)
+    group.addDeprecatedCommand("which", replacement: "template which", TemplateCLI.which)
+    group.addDeprecatedCommand("cat", replacement: "template cat", TemplateCLI.cat)
+    group.addDeprecatedCommand("doc", replacement: "template doc", TemplateCLI.doc)
   }
 
   for cmd in ParserCLI.allCommands {
-    $0.addDeprecatedCommand(cmd.name, replacement: "swiftgen run \(cmd.name)", cmd.command())
+    group.addDeprecatedCommand(cmd.name, replacement: "swiftgen run \(cmd.name)", cmd.command())
   }
   // Deprecation end
 }
@@ -90,7 +90,7 @@ extension Group {
       try wrappedCommand.run(parser)
     }
   }
-  public func addDeprecatedCommand(_ name: String, replacement: String, _ command: CommandType) {
+  func addDeprecatedCommand(_ name: String, replacement: String, _ command: CommandType) {
     let depCmd = DeprecatedCommand(wrappedCommand: command, replacement: replacement)
     addCommand(name, "DEPRECATED - use `\(replacement)` instead", depCmd)
   }

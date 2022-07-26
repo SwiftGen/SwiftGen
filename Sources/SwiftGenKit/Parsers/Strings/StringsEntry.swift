@@ -19,7 +19,7 @@ extension Strings {
       self.key = key
       self.translation = translation
       self.types = types
-      self.keyStructure = Entry.split(key: key, separator: keyStructureSeparator)
+      self.keyStructure = Self.split(key: key, separator: keyStructureSeparator)
     }
 
     init(key: String, translation: String, keyStructureSeparator: String) throws {
