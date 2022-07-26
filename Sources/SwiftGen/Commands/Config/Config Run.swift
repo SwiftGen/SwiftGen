@@ -44,7 +44,9 @@ extension Commands.Config {
 
         - If you have any other questions or issues, we have extensive documentation and an issue tracker on GitHub:
         > https://github.com/SwiftGen/SwiftGen
+
         """)
+		throw ValidationError("There was an error with your configuration file, see above for more information.")
       }
     }
   }
