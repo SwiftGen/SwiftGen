@@ -27,7 +27,7 @@ public enum Plist {
     public var warningHandler: Parser.MessageHandler?
 
     public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
-      self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
+      self.options = try ParserOptionValues(options: options, available: Self.allOptions)
       self.warningHandler = warningHandler
     }
 

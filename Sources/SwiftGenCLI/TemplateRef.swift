@@ -20,13 +20,13 @@ public enum TemplateRef: Equatable {
   public init(templateShortName: String, templateFullPath: String) throws {
     switch (!templateFullPath.isEmpty, !templateShortName.isEmpty) {
     case (false, false):
-      throw TemplateRef.Error.noTemplateProvided
+      throw Self.Error.noTemplateProvided
     case (false, true):
       self = .name(templateShortName)
     case (true, false):
       self = .path(Path(templateFullPath))
     case (true, true):
-      throw TemplateRef.Error.multipleTemplateOptions(path: templateFullPath, name: templateShortName)
+      throw Self.Error.multipleTemplateOptions(path: templateFullPath, name: templateShortName)
     }
   }
 
@@ -60,12 +60,12 @@ public enum TemplateRef: Equatable {
         path = Path.bundledTemplates + parser.templateFolder + "\(templateShortName).stencil"
       }
       guard path.isFile else {
-        throw TemplateRef.Error.namedTemplateNotFound(name: templateShortName)
+        throw Self.Error.namedTemplateNotFound(name: templateShortName)
       }
       return path
     case .path(let fullPath):
       guard fullPath.isFile else {
-        throw TemplateRef.Error.templatePathNotFound(path: fullPath)
+        throw Self.Error.templatePathNotFound(path: fullPath)
       }
       return fullPath
     }

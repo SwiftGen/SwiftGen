@@ -3,7 +3,7 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command file_length implicit_return
+// swiftlint:disable superfluous_disable_command file_length implicit_return prefer_self_in_static_references
 
 // MARK: - Strings
 

@@ -19,71 +19,71 @@ internal enum StoryboardScene {
   internal enum AdditionalImport: StoryboardType {
     internal static let storyboardName = "AdditionalImport"
 
-    internal static let initialScene = InitialSceneType<LocationPicker.LocationPickerViewController>(storyboard: AdditionalImport.self)
+    internal static let initialScene = InitialSceneType<LocationPicker.LocationPickerViewController>(storyboard: Self.self)
 
-    internal static let `public` = SceneType<SlackTextViewController.SLKTextViewController>(storyboard: AdditionalImport.self, identifier: "public")
+    internal static let `public` = SceneType<SlackTextViewController.SLKTextViewController>(storyboard: Self.self, identifier: "public")
   }
   internal enum Anonymous: StoryboardType {
     internal static let storyboardName = "Anonymous"
 
-    internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Anonymous.self)
+    internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Self.self)
   }
   internal enum Dependency: StoryboardType {
     internal static let storyboardName = "Dependency"
 
-    internal static let dependent = SceneType<ExtraModule.ValidatePasswordViewController>(storyboard: Dependency.self, identifier: "Dependent")
+    internal static let dependent = SceneType<ExtraModule.ValidatePasswordViewController>(storyboard: Self.self, identifier: "Dependent")
   }
   internal enum KnownTypes: StoryboardType {
     internal static let storyboardName = "Known Types"
 
-    internal static let item1 = SceneType<GLKit.GLKViewController>(storyboard: KnownTypes.self, identifier: "item 1")
+    internal static let item1 = SceneType<GLKit.GLKViewController>(storyboard: Self.self, identifier: "item 1")
 
-    internal static let item2 = SceneType<AVKit.AVPlayerViewController>(storyboard: KnownTypes.self, identifier: "item 2")
+    internal static let item2 = SceneType<AVKit.AVPlayerViewController>(storyboard: Self.self, identifier: "item 2")
 
-    internal static let item3 = SceneType<UIKit.UITabBarController>(storyboard: KnownTypes.self, identifier: "item 3")
+    internal static let item3 = SceneType<UIKit.UITabBarController>(storyboard: Self.self, identifier: "item 3")
 
-    internal static let item4 = SceneType<UIKit.UINavigationController>(storyboard: KnownTypes.self, identifier: "item 4")
+    internal static let item4 = SceneType<UIKit.UINavigationController>(storyboard: Self.self, identifier: "item 4")
 
-    internal static let item5 = SceneType<UIKit.UISplitViewController>(storyboard: KnownTypes.self, identifier: "item 5")
+    internal static let item5 = SceneType<UIKit.UISplitViewController>(storyboard: Self.self, identifier: "item 5")
 
-    internal static let item6 = SceneType<UIKit.UIPageViewController>(storyboard: KnownTypes.self, identifier: "item 6")
+    internal static let item6 = SceneType<UIKit.UIPageViewController>(storyboard: Self.self, identifier: "item 6")
 
-    internal static let item7 = SceneType<UIKit.UITableViewController>(storyboard: KnownTypes.self, identifier: "item 7")
+    internal static let item7 = SceneType<UIKit.UITableViewController>(storyboard: Self.self, identifier: "item 7")
 
-    internal static let item8 = SceneType<UIKit.UICollectionViewController>(storyboard: KnownTypes.self, identifier: "item 8")
+    internal static let item8 = SceneType<UIKit.UICollectionViewController>(storyboard: Self.self, identifier: "item 8")
 
-    internal static let item9 = SceneType<UIKit.UIViewController>(storyboard: KnownTypes.self, identifier: "item 9")
+    internal static let item9 = SceneType<UIKit.UIViewController>(storyboard: Self.self, identifier: "item 9")
   }
   internal enum Message: StoryboardType {
     internal static let storyboardName = "Message"
 
-    internal static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: Message.self)
+    internal static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: Self.self)
 
-    internal static let composer = SceneType<UIKit.UIViewController>(storyboard: Message.self, identifier: "Composer")
+    internal static let composer = SceneType<UIKit.UIViewController>(storyboard: Self.self, identifier: "Composer")
 
-    internal static let messagesList = SceneType<UIKit.UITableViewController>(storyboard: Message.self, identifier: "MessagesList")
+    internal static let messagesList = SceneType<UIKit.UITableViewController>(storyboard: Self.self, identifier: "MessagesList")
 
-    internal static let navCtrl = SceneType<UIKit.UINavigationController>(storyboard: Message.self, identifier: "NavCtrl")
+    internal static let navCtrl = SceneType<UIKit.UINavigationController>(storyboard: Self.self, identifier: "NavCtrl")
 
-    internal static let urlChooser = SceneType<SwiftGen.PickerViewController>(storyboard: Message.self, identifier: "URLChooser")
+    internal static let urlChooser = SceneType<SwiftGen.PickerViewController>(storyboard: Self.self, identifier: "URLChooser")
   }
   internal enum Placeholder: StoryboardType {
     internal static let storyboardName = "Placeholder"
 
-    internal static let navigation = SceneType<UIKit.UINavigationController>(storyboard: Placeholder.self, identifier: "Navigation")
+    internal static let navigation = SceneType<UIKit.UINavigationController>(storyboard: Self.self, identifier: "Navigation")
   }
   internal enum Wizard: StoryboardType {
     internal static let storyboardName = "Wizard"
 
-    internal static let initialScene = InitialSceneType<SwiftGen.CreateAccViewController>(storyboard: Wizard.self)
+    internal static let initialScene = InitialSceneType<SwiftGen.CreateAccViewController>(storyboard: Self.self)
 
-    internal static let acceptToS = SceneType<UIKit.UIViewController>(storyboard: Wizard.self, identifier: "Accept-ToS")
+    internal static let acceptToS = SceneType<UIKit.UIViewController>(storyboard: Self.self, identifier: "Accept-ToS")
 
-    internal static let createAccount = SceneType<SwiftGen.CreateAccViewController>(storyboard: Wizard.self, identifier: "CreateAccount")
+    internal static let createAccount = SceneType<SwiftGen.CreateAccViewController>(storyboard: Self.self, identifier: "CreateAccount")
 
-    internal static let preferences = SceneType<UIKit.UITableViewController>(storyboard: Wizard.self, identifier: "Preferences")
+    internal static let preferences = SceneType<UIKit.UITableViewController>(storyboard: Self.self, identifier: "Preferences")
 
-    internal static let validatePassword = SceneType<ExtraModule.ValidatePasswordViewController>(storyboard: Wizard.self, identifier: "Validate_Password")
+    internal static let validatePassword = SceneType<ExtraModule.ValidatePasswordViewController>(storyboard: Self.self, identifier: "Validate_Password")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

@@ -17,7 +17,9 @@ func checkPath(type: String, assertion: @escaping (Path) -> Bool) -> ((Path) thr
 }
 
 typealias PathValidator = ([Path]) throws -> ([Path])
-let pathsExist: PathValidator = { paths in try paths.map(checkPath(type: "path") { $0.exists }) }
+enum Validator {
+  static let pathsExist: PathValidator = { paths in try paths.map(checkPath(type: "path") { $0.exists }) }
+}
 
 // MARK: Path as Input Argument
 

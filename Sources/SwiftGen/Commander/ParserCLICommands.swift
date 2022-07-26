@@ -74,7 +74,7 @@ extension ParserCLI {
       CLIOption.params,
       CLIOption.filter(for: self),
       OutputDestination.cliOption,
-      Argument<[Path]>("PATH", description: self.pathDescription, validator: pathsExist)
+      Argument<[Path]>("PATH", description: self.pathDescription, validator: Validator.pathsExist)
     ) { oldTemplateName, templateName, templatePath, parserOptions, parameters, filter, output, paths in
       try ErrorPrettifier.execute {
         let options = try Parameters.parse(items: parserOptions)

@@ -38,7 +38,7 @@ enum ANSIColor: UInt8, CustomStringConvertible {
   func format(_ string: String) -> String {
     if let termType = getenv("TERM"), String(cString: termType).lowercased() != "dumb" &&
       isatty(fileno(stdout)) != 0 {
-      return "\(self)\(string)\(ANSIColor.reset)"
+      return "\(self)\(string)\(Self.reset)"
     } else {
       return string
     }
@@ -48,7 +48,7 @@ enum ANSIColor: UInt8, CustomStringConvertible {
 // Based on https://github.com/realm/SwiftLint/blob/0.39.2/Source/SwiftLintFramework/Extensions/QueuedPrint.swift
 
 public func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
-  logQueue.async {
+  kLogQueue.async {
     switch (level, commandLogLevel) {
     case (.info, .quiet):
       break
@@ -64,7 +64,7 @@ public func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
   }
 }
 
-private let logQueue: DispatchQueue = {
+private let kLogQueue: DispatchQueue = {
   let queue = DispatchQueue(
     label: "swiftgen.log.queue",
     qos: .userInteractive,

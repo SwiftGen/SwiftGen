@@ -9,17 +9,19 @@ import SwiftGenCLI
 import SwiftGenKit
 import XCTest
 
-let colorCode: (String) -> String =
-  ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
-let (msgColor, reset) = (colorCode("fg250,0,0"), colorCode(""))
-let okCode = (
-  num: colorCode("fg127,127,127"),
-  code: colorCode("")
-)
-let koCode = (
-  num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
-  code: colorCode("fg250,250,250") + colorCode("bg127,0,0")
-)
+enum TTY {
+  static let colorCode: (String) -> String =
+    ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
+  static let (msgColor, reset) = (colorCode("fg250,0,0"), colorCode(""))
+  static let okCode = (
+    num: colorCode("fg127,127,127"),
+    code: colorCode("")
+  )
+  static let koCode = (
+    num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
+    code: colorCode("fg250,250,250") + colorCode("bg127,0,0")
+  )
+}
 
 public func XCTAssertEqualDict(
   _ result: [String: Any],

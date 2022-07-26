@@ -16,7 +16,7 @@ private func diff(_ result: [String: Any], _ expected: [String: Any], path: Stri
     let rhs = expected.keys.map { " - \($0): \(expected[$0] ?? "")" }.joined(separator: "\n")
     let path = (!path.isEmpty) ? " at '\(path)'" : ""
     return """
-      \(msgColor)Keys do not match\(path):\(reset)
+      \(TTY.msgColor)Keys do not match\(path):\(TTY.reset)
       >>>>>> result
       \(lhs)
       ======
@@ -70,7 +70,7 @@ private func compare<T: Equatable>(_ lhs: T, _ rhs: T, keyPath: String) -> Strin
     return nil
   } else {
     return """
-    \(msgColor)Values do not match for '\(keyPath)':\(reset)
+    \(TTY.msgColor)Values do not match for '\(keyPath)':\(TTY.reset)
     >>>>>> result
     \(lhs)
     ======

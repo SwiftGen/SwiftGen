@@ -31,14 +31,14 @@ private func diff(_ result: String, _ expected: String) -> String? {
       slice.enumerated().map { (idx: Int, line: String) in
         let num = idx + slice.startIndex
         let lineNum = "\(num + 1)".padding(toLength: 3, withPad: " ", startingAt: 0) + "|"
-        let clr = num == badLineIdx ? koCode : okCode
-        return "\(clr.num)\(lineNum)\(reset)\(clr.code)\(line)\(reset)"
+        let clr = num == badLineIdx ? TTY.koCode : TTY.okCode
+        return "\(clr.num)\(lineNum)\(TTY.reset)\(clr.code)\(line)\(TTY.reset)"
       }
     }
     let lhsNum = addLineNumbers(slice(lhsLines, 4)).joined(separator: "\n")
     let rhsNum = addLineNumbers(slice(rhsLines, 4)).joined(separator: "\n")
     return [
-      "\(msgColor)Mismatch at line \(badLineIdx)\(reset)",
+      "\(TTY.msgColor)Mismatch at line \(badLineIdx)\(TTY.reset)",
       ">>>>>> result",
       "\(lhsNum)",
       "======",

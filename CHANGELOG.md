@@ -56,6 +56,9 @@ _None_
 * Updated GitHub Actions to use macOS 12.  
   [David Jennes](https://github.com/djbe)
   [#956](https://github.com/SwiftGen/SwiftGen/pull/956)
+* Update dependencies such as SwiftLint (and enable some extra rules).  
+  [David Jennes](https://github.com/djbe)
+  [#968](https://github.com/SwiftGen/SwiftGen/pull/968)
 
 ## 6.5.1
 

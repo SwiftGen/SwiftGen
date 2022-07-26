@@ -11,7 +11,8 @@ import PrefsWindowController
 
 // MARK: - Storyboard Scenes
 
-// swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
+// swiftlint:disable explicit_type_interface identifier_name line_length prefer_self_in_static_references
+// swiftlint:disable type_body_length type_name
 internal enum StoryboardScene {
   internal enum AdditionalImport: StoryboardType {
     internal static let storyboardName = "AdditionalImport"
@@ -60,7 +61,8 @@ internal enum StoryboardScene {
     internal static let window = SceneType<AppKit.NSWindowController>(storyboard: Placeholder.self, identifier: "Window")
   }
 }
-// swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
+// swiftlint:enable explicit_type_interface identifier_name line_length prefer_self_in_static_references
+// swiftlint:enable type_body_length type_name
 
 // MARK: - Implementation Details
 
