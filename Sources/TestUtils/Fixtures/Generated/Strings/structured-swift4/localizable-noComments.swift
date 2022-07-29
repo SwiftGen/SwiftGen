@@ -23,23 +23,19 @@ internal enum L10n {
   internal static func types(_ p1: Any, _ p2: CChar, _ p3: Int, _ p4: Float, _ p5: UnsafePointer<CChar>, _ p6: UnsafeRawPointer) -> String {
     return L10n.tr("Localizable", "types", String(describing: p1), p2, p3, p4, p5, Int(bitPattern: p6), fallback: "Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString: '%s', Pointer: '%p'")
   }
-
   internal enum Apples {
     internal static func count(_ p1: Int) -> String {
       return L10n.tr("Localizable", "apples.count", p1, fallback: "You have %d apples")
     }
   }
-
   internal enum Bananas {
     internal static func owner(_ p1: Int, _ p2: Any) -> String {
       return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2), fallback: "Those %d bananas belong to %@.")
     }
   }
-
   internal enum Key1 {
     internal static let anonymous = L10n.tr("Localizable", "key1.anonymous", fallback: "value2")
   }
-
   internal enum Many {
     internal enum Placeholders {
       internal static func base(_ p1: Any, _ p2: Int, _ p3: Float, _ p4: Float, _ p5: Int, _ p6: Int, _ p7: Any, _ p8: Float, _ p9: Any, _ p10: Int, _ p11: Float) -> String {
@@ -50,7 +46,6 @@ internal enum L10n {
       }
     }
   }
-
   internal enum Settings {
     internal enum NavigationBar {
       internal static let `self` = L10n.tr("Localizable", "settings.navigation-bar.self", fallback: "Some Reserved Keyword there")
@@ -84,7 +79,6 @@ internal enum L10n {
       internal static let headerTitle = L10n.tr("Localizable", "settings.user__profile_section.HEADER_TITLE", fallback: "User Profile Settings")
     }
   }
-
   internal enum What {
     internal enum Happens {
       internal static let here = L10n.tr("Localizable", "what./*happens*/.here", fallback: "hello world! /* still in string */")

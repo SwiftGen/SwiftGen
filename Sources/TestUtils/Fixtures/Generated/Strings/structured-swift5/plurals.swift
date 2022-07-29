@@ -3,21 +3,19 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command file_length implicit_return prefer_self_in_static_references 
+// swiftlint:disable superfluous_disable_command file_length implicit_return prefer_self_in_static_references
 
 // MARK: - Strings
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
-
   internal enum Apples {
     /// Plural format key: "%#@apples@"
     internal static func count(_ p1: Int) -> String {
       return L10n.tr("Localizable", "apples.count", p1, fallback: #"Plural format key: "%#@apples@""#)
     }
   }
-
   internal enum Competition {
     internal enum Event {
       /// Plural format key: "%#@Matches@"
@@ -26,7 +24,6 @@ internal enum L10n {
       }
     }
   }
-
   internal enum Feed {
     internal enum Subscription {
       /// Plural format key: "%#@Subscriptions@"

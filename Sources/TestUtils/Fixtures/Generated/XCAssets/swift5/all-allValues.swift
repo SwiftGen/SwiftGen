@@ -28,19 +28,12 @@ internal enum Asset {
       internal static let data = DataAsset(name: "Json/Data")
     }
     internal static let readme = DataAsset(name: "README")
+
     // swiftlint:disable trailing_comma
-    internal static let allResourceGroups: [ARResourceGroupAsset] = [
-    ]
-    internal static let allColors: [ColorAsset] = [
-    ]
     internal static let allDataAssets: [DataAsset] = [
       data,
       Json.data,
       readme,
-    ]
-    internal static let allImages: [ImageAsset] = [
-    ]
-    internal static let allSymbols: [SymbolAsset] = [
     ]
     // swiftlint:enable trailing_comma
   }
@@ -58,13 +51,8 @@ internal enum Asset {
       internal static let tomato = ImageAsset(name: "Round/Tomato")
     }
     internal static let `private` = ImageAsset(name: "private")
+
     // swiftlint:disable trailing_comma
-    internal static let allResourceGroups: [ARResourceGroupAsset] = [
-    ]
-    internal static let allColors: [ColorAsset] = [
-    ]
-    internal static let allDataAssets: [DataAsset] = [
-    ]
     internal static let allImages: [ImageAsset] = [
       Exotic.banana,
       Exotic.mango,
@@ -74,23 +62,9 @@ internal enum Asset {
       Round.tomato,
       `private`,
     ]
-    internal static let allSymbols: [SymbolAsset] = [
-    ]
     // swiftlint:enable trailing_comma
   }
   internal enum Other {
-    // swiftlint:disable trailing_comma
-    internal static let allResourceGroups: [ARResourceGroupAsset] = [
-    ]
-    internal static let allColors: [ColorAsset] = [
-    ]
-    internal static let allDataAssets: [DataAsset] = [
-    ]
-    internal static let allImages: [ImageAsset] = [
-    ]
-    internal static let allSymbols: [SymbolAsset] = [
-    ]
-    // swiftlint:enable trailing_comma
   }
   internal enum Styles {
     internal enum _24Vision {
@@ -102,36 +76,24 @@ internal enum Asset {
       internal static let primary = ColorAsset(name: "Vengo/Primary")
       internal static let tint = ColorAsset(name: "Vengo/Tint")
     }
+
     // swiftlint:disable trailing_comma
-    internal static let allResourceGroups: [ARResourceGroupAsset] = [
-    ]
     internal static let allColors: [ColorAsset] = [
       _24Vision.background,
       _24Vision.primary,
       Vengo.primary,
       Vengo.tint,
     ]
-    internal static let allDataAssets: [DataAsset] = [
-    ]
     internal static let allImages: [ImageAsset] = [
       orange,
-    ]
-    internal static let allSymbols: [SymbolAsset] = [
     ]
     // swiftlint:enable trailing_comma
   }
   internal enum Symbols {
     internal static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
     internal static let plus = SymbolAsset(name: "Plus")
+
     // swiftlint:disable trailing_comma
-    internal static let allResourceGroups: [ARResourceGroupAsset] = [
-    ]
-    internal static let allColors: [ColorAsset] = [
-    ]
-    internal static let allDataAssets: [DataAsset] = [
-    ]
-    internal static let allImages: [ImageAsset] = [
-    ]
     internal static let allSymbols: [SymbolAsset] = [
       exclamationMark,
       plus,
@@ -142,19 +104,12 @@ internal enum Asset {
     internal static let bottles = ARResourceGroupAsset(name: "Bottles")
     internal static let paintings = ARResourceGroupAsset(name: "Paintings")
     internal static let posters = ARResourceGroupAsset(name: "Posters")
+
     // swiftlint:disable trailing_comma
     internal static let allResourceGroups: [ARResourceGroupAsset] = [
       bottles,
       paintings,
       posters,
-    ]
-    internal static let allColors: [ColorAsset] = [
-    ]
-    internal static let allDataAssets: [DataAsset] = [
-    ]
-    internal static let allImages: [ImageAsset] = [
-    ]
-    internal static let allSymbols: [SymbolAsset] = [
     ]
     // swiftlint:enable trailing_comma
   }
