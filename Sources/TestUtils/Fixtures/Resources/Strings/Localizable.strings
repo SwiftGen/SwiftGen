@@ -3,7 +3,7 @@
 "alert__message" = "Some alert body there";
 
 "percent" = "This is a %% character.";
-"private" = "Hello, my name is %@ and I'm %d";
+"private" = "Hello, my name is \"%@\" and I'm %d";
 
 "key1" = "value1";
 /* Same as "key1" = "value1"; but in the context of user not logged in */

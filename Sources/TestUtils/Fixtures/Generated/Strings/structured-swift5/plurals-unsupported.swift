@@ -15,7 +15,7 @@ internal enum L10n {
     internal enum PlaceholdersInVariableRule {
       /// Plural format key: "%#@elements@"
       internal static func stringInt(_ p1: Int) -> String {
-        return L10n.tr("LocPluralUnsupported", "unsupported-use.placeholders-in-variable-rule.string-int", p1)
+        return L10n.tr("LocPluralUnsupported", "unsupported-use.placeholders-in-variable-rule.string-int", p1, fallback: #"Plural format key: "%#@elements@""#)
       }
     }
   }
@@ -26,8 +26,8 @@ internal enum L10n {
 // MARK: - Implementation Details
 
 extension L10n {
-  private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
+  private static func tr(_ table: String, _ key: String, _ args: CVarArg..., fallback value: String) -> String {
+    let format = BundleToken.bundle.localizedString(forKey: key, value: value, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }

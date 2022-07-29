@@ -1,3 +1,9 @@
+# SwiftGen 6.6 Templates Migration Guide
+
+There are no major changes in the templates, only a small edge case:
+
+In the `strings` templates, if you were providing a custom `lookupFunction`, the signature of that function has changed. Previously, the function had to accept 2 parameters (table and key), now the function must accept 3 parameters: table, key and value.
+
 # SwiftGen 6.3 Templates Migration Guide
 
 There are no major changes in the templates, only a small deprecation notice:

@@ -14,9 +14,9 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wformat-security"
 
-static NSString* tr(NSString *tableName, NSString *key, ...) {
+static NSString* tr(NSString *tableName, NSString *key, NSString *value, ...) {
     NSBundle *bundle = {{param.bundle|default:"[NSBundle bundleForClass:BundleToken.class]"}};
-    NSString *format = [bundle localizedStringForKey:key value:nil table:tableName];
+    NSString *format = [bundle localizedStringForKey:key value:value table:tableName];
     NSLocale *locale = [NSLocale currentLocale];
 
     va_list args;
@@ -66,11 +66,11 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValues:{% call parametersBlock string.types %}
     {% endif %}
 {
-    return tr(@"{{table}}", @"{{string.key}}", {% call argumentsBlock string.types %});
+    return tr(@"{{table}}", @"{{string.key}}", @"{{string.translation|replace:'"','\"'}}", {% call argumentsBlock string.types %});
 }
 {% else %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}} {
-    return tr(@"{{table}}", @"{{string.key}}");
+    return tr(@"{{table}}", @"{{string.key}}", @"{{string.translation|replace:'"','\"'}}");
 }
   {% endif %}
   {% endfor %}

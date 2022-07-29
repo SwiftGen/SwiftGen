@@ -12,8 +12,8 @@ func myPlistFinder(path: String) -> URL? {
   return Bundle.main.url(forResource: path, withExtension: nil)
 }
 
-func XCTLocFunc(forKey key: String, table tableName: String?) -> String {
-  return NSLocalizedString(key, tableName: tableName, comment: "")
+func XCTLocFunc(forKey key: String, table tableName: String?, fallback: String) -> String {
+  return NSLocalizedString(key, tableName: tableName, value: fallback, comment: "")
 }
 
 #if canImport(AppKit)

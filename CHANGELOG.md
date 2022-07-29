@@ -6,7 +6,9 @@
 
 ### Breaking Changes
 
-_None_
+* Strings: due to the bugfix for fallback translations, custom `lookupFunction`s will need to accept 3 arguments (table, key and value), up from 2 arguments (table and key).  
+  [David Jennes](https://github.com/djbe)
+  [#964](https://github.com/SwiftGen/SwiftGen/pull/964)
 
 ### Deprecations
 
@@ -54,6 +56,11 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#950](https://github.com/SwiftGen/SwiftGen/issues/950)
   [#959](https://github.com/SwiftGen/SwiftGen/pull/959)
+* Strings: now correctly provides the default translation as fallback.  
+  [David Jennes](https://github.com/djbe)
+  [#381](https://github.com/SwiftGen/SwiftGen/issues/381)
+  [#937](https://github.com/SwiftGen/SwiftGen/issues/937)
+  [#964](https://github.com/SwiftGen/SwiftGen/pull/964)
 
 ### Internal Changes
 
