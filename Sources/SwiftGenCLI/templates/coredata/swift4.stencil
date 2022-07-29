@@ -9,7 +9,9 @@ import Foundation
 import {{ import }}
 {% empty %}
 {# If extraImports is a single String instead of an array, `for` considers it empty but we still have to check if there's a single String value #}
-{% if param.extraImports %}import {{ param.extraImports }}{% endif %}
+{%- if param.extraImports %}
+import {{ param.extraImports }}
+{% endif %}
 {% endfor %}
 
 // swiftlint:disable attributes file_length vertical_whitespace_closing_braces
@@ -33,8 +35,8 @@ import {{ import }}
 {% if param.generateObjcName %}
 @objc({{ entityClassName }})
 {% endif %}
-{{ accessModifier }} {% if not entity.isAbstract and not hasChildren %}final {% endif %}class {{ entityClassName }}: {{ superclass }} {
-  {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
+{{ accessModifier }} {%+ if not entity.isAbstract and not hasChildren %}final {%+ endif %}class {{ entityClassName }}: {{ superclass }} {
+  {% set override %}{% if superclass != "NSManagedObject" %}override {%+ endif %}{% endset %}
   {{ override }}{{ accessModifier }} class var entityName: String {
     return "{{ entity.name }}"
   }
@@ -64,7 +66,7 @@ import {{ import }}
       defer { didAccessValue(forKey: key) }
 
       guard let value = primitiveValue(forKey: key) as? {{ rawType }}.RawValue else {
-        {% if unwrapOptional %}fatalError("Could not convert value for key '\(key)' to type '{{ rawType }}.RawValue'"){% else %}return nil{% endif %}
+        {%+ if unwrapOptional %}fatalError("Could not convert value for key '\(key)' to type '{{ rawType }}.RawValue'"){% else %}return nil{% endif +%}
       }
       {% if attribute.userInfo.nonOptionalInit or not unwrapOptional %}
       return {{ rawType }}(rawValue: value)
@@ -74,14 +76,16 @@ import {{ import }}
       }
       return result
       {% endif %}
-    }{% if not attribute.isDerived %}
+    }
+    {% if not attribute.isDerived %}
     set {
       let key = "{{ attribute.name }}"
       willChangeValue(forKey: key)
       defer { didChangeValue(forKey: key) }
 
       setPrimitiveValue(newValue{% if not unwrapOptional %}?{% endif %}.rawValue, forKey: key)
-    }{% endif %}
+    }
+    {% endif %}
   }
   {% elif attribute.usesScalarValueType and attribute.isOptional %}
   {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}? {
@@ -91,14 +95,16 @@ import {{ import }}
       defer { didAccessValue(forKey: key) }
 
       return primitiveValue(forKey: key) as? {{ attribute.typeName }}
-    }{% if not attribute.isDerived %}
+    }
+    {% if not attribute.isDerived %}
     set {
       let key = "{{ attribute.name }}"
       willChangeValue(forKey: key)
       defer { didChangeValue(forKey: key) }
 
       setPrimitiveValue(newValue, forKey: key)
-    }{% endif %}
+    }
+    {% endif %}
   }
   {% elif attribute.isDerived %}
   {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional %}?{% endif %} {
@@ -116,14 +122,14 @@ import {{ import }}
     {% endif %}
   }
   {% else %}
-  @NSManaged {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional %}?{% endif %}
+  @NSManaged {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional %}?{% endif +%}
   {% endif %}
   {% endfor %}
   {% for relationship in entity.relationships %}
   {% if relationship.isToMany %}
-  @NSManaged {{ accessModifier }} var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}Set<{{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}>{% endif %}{% if relationship.isOptional %}?{% endif %}
+  @NSManaged {{ accessModifier }} var {{ relationship.name }}: {%+ if relationship.isOrdered %}NSOrderedSet{% else %}Set<{{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}>{% endif %}{% if relationship.isOptional %}?{% endif +%}
   {% else %}
-  @NSManaged {{ accessModifier }} var {{ relationship.name }}: {{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}{% if relationship.isOptional %}?{% endif %}
+  @NSManaged {{ accessModifier }} var {{ relationship.name }}: {{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}{% if relationship.isOptional %}?{% endif +%}
   {% endif %}
   {% endfor %}
   {% for fetchedProperty in entity.fetchedProperties %}
@@ -178,21 +184,20 @@ extension {{ entityClassName }} {
 
 extension {{ entityClassName }} {
   {% for fetchRequest in model.fetchRequests[entity.name] %}
-  {% set resultTypeName %}{% filter removeNewlines:"leading" %}
-    {% if fetchRequest.resultType == "Object" %}
+  {% set resultTypeName -%}
+    {%- if fetchRequest.resultType == "Object" -%}
     {{ entityClassName }}
-    {% elif fetchRequest.resultType == "Object ID" %}
+    {%- elif fetchRequest.resultType == "Object ID" -%}
     NSManagedObjectID
-    {% elif fetchRequest.resultType == "Dictionary" %}
+    {%- elif fetchRequest.resultType == "Dictionary" -%}
     [String: Any]
-    {% endif %}
-  {% endfilter %}{% endset %}
-  class func fetch{{ fetchRequest.name | upperFirstLetter }}({% filter removeNewlines:"leading" %}
-    managedObjectContext: NSManagedObjectContext
-    {% for variableName, variableType in fetchRequest.substitutionVariables %}
+    {%- endif -%}
+  {%- endset %}
+  class func fetch{{ fetchRequest.name | upperFirstLetter }}(managedObjectContext: NSManagedObjectContext
+    {%- for variableName, variableType in fetchRequest.substitutionVariables -%}
     , {{ variableName | lowerFirstWord }}: {{ variableType }}
-    {% endfor %}
-  {% endfilter %}) throws -> [{{ resultTypeName }}] {
+    {%- endfor -%}
+  ) throws -> [{{ resultTypeName }}] {
     guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
       fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
     }

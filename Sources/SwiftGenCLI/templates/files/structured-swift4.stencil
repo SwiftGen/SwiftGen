@@ -21,19 +21,19 @@ import Foundation
   {% endfor %}
 {% endmacro %}
 {% macro fileBlock file %}
-  /// {% if file.path and param.preservePath %}{{file.path}}/{% endif %}{{file.name}}{% if file.ext %}.{{file.ext}}{% endif %}
+  /// {%+ if file.path and param.preservePath %}{{file.path}}/{% endif %}{{file.name}}{% if file.ext %}.{{file.ext}}{% endif +%}
   {% set identifier %}{{ file.name }}{% if useExt %}.{{ file.ext }}{% endif %}{% endset %}
-  {{accessModifier}} static let {{identifier|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{resourceType}}(name: "{{file.name}}", ext: {% if file.ext %}"{{file.ext}}"{% else %}nil{% endif %}, relativePath: "{{file.path if param.preservePath}}", mimeType: "{{file.mimeType}}")
+  {{accessModifier}} static let {{identifier|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{resourceType}}(name: "{{file.name}}", ext: {%+ if file.ext %}"{{file.ext}}"{% else %}nil{% endif %}, relativePath: "{{file.path if param.preservePath}}", mimeType: "{{file.mimeType}}")
 {% endmacro %}
 {% macro dirBlock directory parent %}
   {% set fullDir %}{{parent}}{{directory.name}}/{% endset %}
   /// {{ fullDir }}
   {{accessModifier}} enum {{directory.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
     {% for file in directory.files %}
-    {% filter indent:2 %}{% call fileBlock file %}{% endfilter %}
+    {% filter indent:2," ",true %}{% call fileBlock file %}{% endfilter %}
     {% endfor %}
     {% for dir in directory.directories %}
-    {% filter indent:2 %}{% call dirBlock dir fullDir %}{% endfilter %}
+    {% filter indent:2," ",true %}{% call dirBlock dir fullDir %}{% endfilter %}
     {% endfor %}
   }
 {% endmacro %}
@@ -43,7 +43,7 @@ import Foundation
   {% if groups.count > 1 or param.forceFileNameEnum %}
   {% for group in groups %}
   {{accessModifier}} enum {{group.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
-    {% filter indent:2 %}{% call groupBlock group %}{% endfilter %}
+    {% filter indent:2," ",true %}{% call groupBlock group %}{% endfilter %}
   }
   {% endfor %}
   {% else %}
