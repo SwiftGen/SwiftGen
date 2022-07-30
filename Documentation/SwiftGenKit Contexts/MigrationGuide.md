@@ -1,3 +1,11 @@
+# SwiftGen 6.6.0 Migration Guide
+
+## Changes for template writers
+
+### XCAssets
+
+The `resourceCount` variable is now deprecated.
+
 # SwiftGen 6.2.1 Migration Guide
 
 ## Changes for template writers
