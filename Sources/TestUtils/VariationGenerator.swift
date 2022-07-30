@@ -43,7 +43,7 @@ public extension XCTestCase {
     let template: Template
     do {
       let templateRealPath = Fixtures.template(for: "\(templateName).stencil", sub: directory)
-      template = try Template.load(from: templateRealPath, modernSpacing: false)
+      template = try Template.load(from: templateRealPath, modernSpacing: true)
     } catch {
       fatalError("Unable to load fixture \(templateName)'s content: \(error)")
     }

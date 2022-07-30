@@ -70,7 +70,9 @@ extension ConfigEntry {
 
     for entryOutput in outputs {
       let templateRealPath = try entryOutput.template.resolvePath(forParser: parserCommand, logger: logger)
-      let template = try Template.load(from: templateRealPath, modernSpacing: modernSpacing)
+      let isBundledTemplate = entryOutput.template.isBundled(forParser: parserCommand)
+      let template = try Template.load(from: templateRealPath, modernSpacing: isBundledTemplate || modernSpacing)
+
       let enriched = try StencilContext.enrich(context: context, parameters: entryOutput.parameters)
       let rendered = try template.render(enriched)
       let output = OutputDestination.file(entryOutput.output)

@@ -74,7 +74,12 @@ extension Commands.Run {
       try parser.searchAndParse(paths: paths, filter: filter)
 
       let templateRealPath = try template.reference.resolvePath(forParser: Parser.info)
-      let template = try Template.load(from: templateRealPath, modernSpacing: spacing.modernSpacing)
+      let isBundledTemplate = try template.reference.isBundled(forParser: Parser.info)
+      let template = try Template.load(
+        from: templateRealPath,
+        modernSpacing: isBundledTemplate || spacing.modernSpacing
+      )
+
       let context = parser.stencilContext()
       let enriched = try StencilContext.enrich(context: context, parameters: templateParameters)
       let rendered = try template.render(enriched)
