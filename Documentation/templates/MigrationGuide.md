@@ -4,6 +4,14 @@ There are no major changes in the templates, only a small edge case:
 
 In the `strings` templates, if you were providing a custom `lookupFunction`, the signature of that function has changed. Previously, the function had to accept 2 parameters (table and key), now the function must accept 3 parameters: table, key and value.
 
+### Deprecation notices for template writers
+
+There are a few deprecation notices:
+
+- Our workaround for spacing/trimming is deprecated, and will soon switch to Stencil's "smart" trimming behaviour.
+- StencilSwiftKit's `removeNewlines` filter is deprecated (replaced by Stencil's new syntax).
+- You can see a preview of all these changes by taking a look at our built-in templates, which have been updated to the new syntax. If you'd like to try it for your own templates, use the `--experimental-modern-spacing` CLI flag.
+
 # SwiftGen 6.3 Templates Migration Guide
 
 There are no major changes in the templates, only a small deprecation notice:

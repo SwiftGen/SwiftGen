@@ -15,6 +15,9 @@
 * The Swift 4 templates are now deprecated. This means we will no longer test if the generated output is valid Swift code. We will still try to keep these up-to-date with context changes.  
   [David Jennes](https://github.com/djbe)
   [#955](https://github.com/SwiftGen/SwiftGen/pull/955)
+* Our spacing & trimming "hack" is now considered deprecated, and in the next major version we'll switch to Stencil's new "smart" trimming behaviour (see [Stencil documentation](https://stencil.fuller.li/en/latest/templates.html#whitespace-control) for more information). Our built-in templates have already switched to this modern behaviour, you can try it with your own templates by using the `--experimental-modern-spacing` flag.  
+  [David Jennes](https://github.com/djbe)
+  [#976](https://github.com/SwiftGen/SwiftGen/pull/976)
 
 ### New Features
 
@@ -37,6 +40,9 @@
   [David Jennes](https://github.com/djbe)
   [#928](https://github.com/SwiftGen/SwiftGen/issues/928)
   [#961](https://github.com/SwiftGen/SwiftGen/pull/961)
+* Added an experimental flag `--experimental-modern-spacing` to enable modern spacing control, see [Stencil documentation](https://stencil.fuller.li/en/latest/templates.html#whitespace-control) for more information. It will disable our own trimming "hack", and enable Stencil's "smart" trimming.  
+  [David Jennes](https://github.com/djbe)
+  [#976](https://github.com/SwiftGen/SwiftGen/pull/976)
 
 ### Bug Fixes
 
@@ -77,6 +83,9 @@
 * Switched from [Commander](https://github.com/kylef/Commander) to Swift's own [ArgumentParser](https://github.com/apple/swift-argument-parser) library.  
   [David Jennes](https://github.com/djbe)
   [#966](https://github.com/SwiftGen/SwiftGen/pull/966)
+* Updated to Stencil 0.15 and StencilSwiftKit 2.10.  
+  [David Jennes](https://github.com/djbe)
+  [#976](https://github.com/SwiftGen/SwiftGen/pull/976)
 
 ## 6.5.1
 
