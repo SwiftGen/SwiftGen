@@ -111,7 +111,7 @@ file_header:
   required_pattern: |
                     \/\/(
                     \/\/ (SwiftGen(Kit)?|.* UnitTests)
-                    \/\/ Copyright © 2020 SwiftGen
+                    \/\/ Copyright © 2022 SwiftGen
                     \/\/ MIT Licence
                     \/\/| Generated using SwiftGen — https:\/\/github.com\/SwiftGen\/SwiftGen)
 

@@ -29,7 +29,7 @@ namespace :spm do
     versions = <<-VERSIONS.gsub(/^\s*\|/, '')
       |//
       |// SwiftGen
-      |// Copyright © 2020 SwiftGen
+      |// Copyright © 2022 SwiftGen
       |// MIT Licence
       |//
       |
