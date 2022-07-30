@@ -30,6 +30,7 @@ internal enum Asset {
     internal static let readme = DataAsset(name: "README")
 
     // swiftlint:disable trailing_comma
+    @available(*, deprecated, message: "All values properties are now deprecated")
     internal static let allDataAssets: [DataAsset] = [
       data,
       Json.data,
@@ -53,6 +54,7 @@ internal enum Asset {
     internal static let `private` = ImageAsset(name: "private")
 
     // swiftlint:disable trailing_comma
+    @available(*, deprecated, message: "All values properties are now deprecated")
     internal static let allImages: [ImageAsset] = [
       Exotic.banana,
       Exotic.mango,
@@ -78,12 +80,14 @@ internal enum Asset {
     }
 
     // swiftlint:disable trailing_comma
+    @available(*, deprecated, message: "All values properties are now deprecated")
     internal static let allColors: [ColorAsset] = [
       _24Vision.background,
       _24Vision.primary,
       Vengo.primary,
       Vengo.tint,
     ]
+    @available(*, deprecated, message: "All values properties are now deprecated")
     internal static let allImages: [ImageAsset] = [
       orange,
     ]
@@ -94,6 +98,7 @@ internal enum Asset {
     internal static let plus = SymbolAsset(name: "Plus")
 
     // swiftlint:disable trailing_comma
+    @available(*, deprecated, message: "All values properties are now deprecated")
     internal static let allSymbols: [SymbolAsset] = [
       exclamationMark,
       plus,
@@ -106,6 +111,7 @@ internal enum Asset {
     internal static let posters = ARResourceGroupAsset(name: "Posters")
 
     // swiftlint:disable trailing_comma
+    @available(*, deprecated, message: "All values properties are now deprecated")
     internal static let allResourceGroups: [ARResourceGroupAsset] = [
       bottles,
       paintings,

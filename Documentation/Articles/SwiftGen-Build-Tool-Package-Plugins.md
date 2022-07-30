@@ -4,6 +4,8 @@
 
 Using this new functionality it is possible to create a SwiftGen plugin for our Swift Packages which automatically keeps our generated files up to date.
 
+SwiftGen provides an [official plugin](https://github.com/SwiftGen/SwiftGenPlugin) that provides most of the functionality you may ever need. The rest of this article is for if you ever want to create your own SwiftGen plugin.
+
 ## Making the SwiftGen binary available to your plugin
 
 Simply add the following binary target to your `Package.swift`. Each recent SwiftGen release includes a `.artifactbundle` compatible with Swift Plugin development.
@@ -67,6 +69,5 @@ struct SwiftGenPlugin: BuildToolPlugin {
 
 Other examples of Swift package build tool plugins development
 
-- <https://github.com/nicorichard/SwiftGenPlugin>
 - <https://github.com/abertelrud/swiftpm-buildtool-plugin-examples>
 - <https://github.com/apple/swift-package-manager/tree/main/Fixtures/Miscellaneous/Plugins/MyBinaryToolPlugin>

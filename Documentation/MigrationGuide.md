@@ -21,6 +21,9 @@ Our built-in templates have been adapted for the new behaviour, and you can prev
 
 # Migrating to SwiftGen 6.2
 
+<details>
+<summary>Migration Guide</summary>
+
 ## Deprecation of Application Support lookup for named templates
 
 In previous versions of SwiftGen, SwiftGen looked for named templates inside `~/Library/Application Support` before looking for bundled templates. This feature was little known and made the documentation quite confusing, in addition to making your project dependent on what was installed on your machine. This is why it has been is deprecated in SwiftGen 6.2 and will be removed in 7.0.
@@ -46,7 +49,9 @@ The command to manage templates (list bundled templates, print their content to 
 ## Template changes
 
 With Xcode dropping support for Swift 3, we've decided to remove the corresponding bundled templates. For these and other template changes, read the [templates Migration Guide](templates/MigrationGuide.md#swiftgen-62-migration-guide).
- 
+
+</details>
+
 # Migrating to SwiftGen 6.0
 
 <details>

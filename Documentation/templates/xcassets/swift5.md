@@ -22,7 +22,6 @@ You can customize some elements of this template by overriding the following par
 | Parameter Name | Default Value | Description |
 | -------------- | ------------- | ----------- |
 | `bundle` | `BundleToken.bundle` | Allows you to set from which bundle strings are loaded from. By default, it'll point to the same bundle as where the generated code is. |
-| `allValues` | N/A | Setting this parameter will enable the generation of the `allColors`, `allImages` and other such constants. |
 | `arResourceGroupTypeName` | `ARResourceGroupAsset` | Allows you to change the name of the struct type representing an AR resource group. |
 | `colorTypeName` | `ColorAsset` | Allows you to change the name of the struct type representing a color. |
 | `dataTypeName` | `DataAsset` | Allows you to change the name of the struct type representing a data asset. |
@@ -32,6 +31,7 @@ You can customize some elements of this template by overriding the following par
 | `imageTypeName` | `ImageAsset` | Allows you to change the name of the struct type representing an image. |
 | `publicAccess` | N/A | If set, the generated constants will be marked as `public`. Otherwise, they'll be declared `internal`. |
 | `symbolTypeName` | `SymbolAsset` | Allows you to change the name of the struct type representing a symbol. |
+| `allValues` | N/A | **Deprecated**Setting this parameter will enable the generation of the `allColors`, `allImages` and other such constants. |
 | `colorAliasName` | `AssetColorTypeAlias` | **Deprecated** Allows you to change the name of the generated `typealias` for the platform specific color type. |
 | `imageAliasName` | `AssetImageTypeAlias` | **Deprecated** Allows you to change the name of the generated `typealias` for the platform specific image type. |
 

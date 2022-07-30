@@ -106,10 +106,4 @@ catalogs:
     type: "arresourcegroup"
     value: "Posters"
   name: "Targets"
-resourceCount:
-  arresourcegroup: 3
-  color: 4
-  data: 3
-  image: 8
-  symbol: 2
 ```
