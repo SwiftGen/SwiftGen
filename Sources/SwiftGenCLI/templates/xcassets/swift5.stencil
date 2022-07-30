@@ -34,6 +34,9 @@
 #elseif os(tvOS) || os(watchOS)
   import UIKit
 #endif
+#if canImport(SwiftUI)
+  import SwiftUI
+#endif
 
 // Deprecated typealiases
 {% if hasColor %}
@@ -208,6 +211,13 @@
   }
   #endif
 
+  #if canImport(SwiftUI)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  {{accessModifier}} private(set) lazy var swiftUIColor: SwiftUI.Color = {
+    SwiftUI.Color(asset: self)
+  }()
+  #endif
+
   fileprivate init(name: String) {
     self.name = name
   }
@@ -226,6 +236,16 @@
     #endif
   }
 }
+
+#if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+{{accessModifier}} extension SwiftUI.Color {
+  init(asset: {{colorType}}) {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    self.init(asset.name, bundle: bundle)
+  }
+}
+#endif
 {% endif %}
 {% if hasData %}
 
