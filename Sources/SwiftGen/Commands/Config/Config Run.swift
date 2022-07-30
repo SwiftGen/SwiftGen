@@ -17,6 +17,9 @@ extension Commands.Config {
     @Flag
     var logLevel: CommandLogLevel = .default
 
+    @OptionGroup(visibility: .hidden)
+    var spacing: Commands.ExperimentalSpacing
+
     func validate() throws {
       try config.validateExists()
     }
@@ -29,7 +32,7 @@ extension Commands.Config {
 
         logMessage(.info, "Executing configuration file \(config.file)")
         try config.file.parent().chdir {
-          try configuration.runCommands(logLevel: commandLogLevel)
+          try configuration.runCommands(modernSpacing: spacing.modernSpacing, logLevel: commandLogLevel)
         }
       } catch let error as Config.Error {
         logMessage(.error, error)

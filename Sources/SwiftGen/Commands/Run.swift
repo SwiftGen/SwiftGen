@@ -6,6 +6,7 @@
 
 import ArgumentParser
 import PathKit
+import Stencil
 import StencilSwiftKit
 import SwiftGenCLI
 import SwiftGenKit
@@ -57,6 +58,9 @@ extension Commands.Run {
     @OptionGroup
     var output: Commands.OutputDestination
 
+    @OptionGroup(visibility: .hidden)
+    var spacing: Commands.ExperimentalSpacing
+
     @Argument(help: .init(Parser.info.pathDescription, valueName: "path"))
     var paths: [Path]
 
@@ -70,9 +74,10 @@ extension Commands.Run {
       try parser.searchAndParse(paths: paths, filter: filter)
 
       let templateRealPath = try template.reference.resolvePath(forParser: Parser.info)
-      let template = try StencilSwiftTemplate(
-        templateString: templateRealPath.read(),
-        environment: stencilSwiftEnvironment()
+      let isBundledTemplate = try template.reference.isBundled(forParser: Parser.info)
+      let template = try Template.load(
+        from: templateRealPath,
+        modernSpacing: isBundledTemplate || spacing.modernSpacing
       )
 
       let context = parser.stencilContext()

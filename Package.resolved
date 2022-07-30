@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/stencilproject/Stencil.git",
       "state" : {
-        "revision" : "ccd9402682f4c07dac9561befd207c8156e80e20",
-        "version" : "0.14.2"
+        "revision" : "8989f8a18998bd67b1727c2c0798b7c0436aa481",
+        "version" : "0.15.0"
       }
     },
     {
@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftGen/StencilSwiftKit.git",
       "state" : {
-        "revision" : "a329217a79ce9b20557f870b926f7ae9769af05e",
-        "version" : "2.9.0"
+        "revision" : "631c85b83b89e9b229b2a7d5affe3b24f4a9701e",
+        "version" : "2.10.0"
       }
     },
     {

@@ -3,14 +3,13 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command file_length implicit_return prefer_self_in_static_references 
+// swiftlint:disable superfluous_disable_command file_length implicit_return prefer_self_in_static_references
 
 // MARK: - Strings
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
-
   internal enum Many {
     internal enum Placeholders {
       internal enum Plurals {
@@ -25,7 +24,6 @@ internal enum L10n {
       }
     }
   }
-
   internal enum Mixed {
     internal enum PlaceholdersAndVariables {
       /// Plural format key: "%1$@ %3$#@has_rating@"
@@ -46,7 +44,6 @@ internal enum L10n {
       }
     }
   }
-
   internal enum Multiple {
     internal enum PlaceholdersAndVariables {
       /// Plural format key: "Your %3$@ list contains %1$#@first@ %2$@."

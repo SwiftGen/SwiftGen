@@ -21,7 +21,7 @@ import {{module}}
   {{accessModifier}} enum {{storyboard.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}: String, SegueType {
     {% for segue in storyboard.segues %}
     {% set segueID %}{{segue.identifier|swiftIdentifier:"pretty"|lowerFirstWord}}{% endset %}
-    case {{segueID|escapeReservedKeywords}}{% if segueID != segue.identifier %} = "{{segue.identifier}}"{% endif %}
+    case {{segueID|escapeReservedKeywords}}{% if segueID != segue.identifier %} = "{{segue.identifier}}"{% endif +%}
     {% endfor %}
   }
   {% endfor %}
@@ -32,15 +32,15 @@ import {{module}}
 
 {{accessModifier}} protocol SegueType: RawRepresentable {}
 
-{{accessModifier}} extension {% if isAppKit %}NSSeguePerforming{% else %}UIViewController{% endif %} {
+{{accessModifier}} extension {%+ if isAppKit %}NSSeguePerforming{% else %}UIViewController{% endif %} {
   func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
-    let identifier = {% if isAppKit %}NSStoryboardSegue.Identifier({% endif %}segue.rawValue{% if isAppKit %}){% endif %}
+    let identifier = {%+ if isAppKit %}NSStoryboardSegue.Identifier({% endif %}segue.rawValue{% if isAppKit %}){% endif +%}
     performSegue{% if isAppKit %}?{% endif %}(withIdentifier: identifier, sender: sender)
   }
 }
 
 {{accessModifier}} extension SegueType where RawValue == String {
-  init?(_ segue: {% if isAppKit %}NS{% else %}UI{% endif %}StoryboardSegue) {
+  init?(_ segue: {%+ if isAppKit %}NS{% else %}UI{% endif %}StoryboardSegue) {
     {% if isAppKit %}
     #if swift(>=4.2)
     guard let identifier = segue.identifier else { return nil }

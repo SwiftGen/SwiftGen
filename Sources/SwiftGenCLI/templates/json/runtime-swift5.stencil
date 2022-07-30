@@ -18,44 +18,43 @@ import Foundation
   {{accessModifier}} static let items: {{rootType}} = objectFromJSON(at: "{% call transformPath file.path %}")
   {% elif document.metadata.type == "Dictionary" %}
   private static let _document = JSONDocument(path: "{% call transformPath file.path %}")
-
   {% for key,value in document.metadata.properties %}
-  {{accessModifier}} {% call propertyBlock key value %}
+  {{accessModifier}} {%+ call propertyBlock key value %}
   {% endfor %}
   {% else %}
   {{accessModifier}} static let value: {{rootType}} = objectFromJSON(at: "{% call transformPath file.path %}")
   {% endif %}
 {% endmacro %}
-{% macro typeBlock metadata %}{% filter removeNewlines:"leading" %}
-  {% if metadata.type == "Array" %}
+{% macro typeBlock metadata %}
+  {%- if metadata.type == "Array" -%}
     [{% call typeBlock metadata.element %}]
-  {% elif metadata.type == "Dictionary" %}
+  {%- elif metadata.type == "Dictionary" -%}
     [String: Any]
-  {% elif metadata.type == "Optional" %}
+  {%- elif metadata.type == "Optional" -%}
     Any?
-  {% else %}
+  {%- else -%}
     {{metadata.type}}
-  {% endif %}
-{% endfilter %}{% endmacro %}
-{% macro propertyBlock key metadata %}{% filter removeNewlines:"leading" %}
-  {% set propertyName %}{{key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% endset %}
-  {% set propertyType %}{% call typeBlock metadata %}{% endset %}
+  {%- endif -%}
+{% endmacro %}
+{% macro propertyBlock key metadata %}
+  {%- set propertyName %}{{key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{% endset -%}
+  {%- set propertyType %}{% call typeBlock metadata %}{% endset -%}
   static let {{propertyName}}: {{propertyType}} = _document["{{key}}"]
-{% endfilter %}{% endmacro %}
-{% macro transformPath path %}{% filter removeNewlines %}
-  {% if param.preservePath %}
+{% endmacro %}
+{% macro transformPath path %}
+  {%- if param.preservePath -%}
     {{path}}
-  {% else %}
+  {%- else -%}
     {{path|basename}}
-  {% endif %}
-{% endfilter %}{% endmacro %}
+  {%- endif -%}
+{% endmacro %}
 
 // swiftlint:disable identifier_name line_length type_body_length
 {{accessModifier}} enum {{param.enumName|default:"JSONFiles"}} {
   {% if files.count > 1 or param.forceFileNameEnum %}
   {% for file in files %}
   {{accessModifier}} enum {{file.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
-    {% filter indent:2 %}{% call fileBlock file %}{% endfilter %}
+    {% filter indent:2," ",true %}{% call fileBlock file %}{% endfilter %}
   }
   {% endfor %}
   {% else %}

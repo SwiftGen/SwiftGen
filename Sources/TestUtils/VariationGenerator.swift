@@ -5,6 +5,7 @@
 //
 
 import PathKit
+import Stencil
 import StencilSwiftKit
 import SwiftGenKit
 import XCTest
@@ -39,13 +40,10 @@ public extension XCTestCase {
     contextVariations: VariationGenerator? = nil,
     outputExtension: String = "swift"
   ) {
-    let template: StencilSwiftTemplate
+    let template: Template
     do {
       let templateRealPath = Fixtures.template(for: "\(templateName).stencil", sub: directory)
-      template = StencilSwiftTemplate(
-        templateString: try templateRealPath.read(),
-        environment: stencilSwiftEnvironment(templatePaths: [templateRealPath.parent()])
-      )
+      template = try Template.load(from: templateRealPath, modernSpacing: true)
     } catch {
       fatalError("Unable to load fixture \(templateName)'s content: \(error)")
     }

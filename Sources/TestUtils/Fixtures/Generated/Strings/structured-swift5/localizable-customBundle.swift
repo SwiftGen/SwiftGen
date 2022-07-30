@@ -3,7 +3,7 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command file_length implicit_return prefer_self_in_static_references 
+// swiftlint:disable superfluous_disable_command file_length implicit_return prefer_self_in_static_references
 
 // MARK: - Strings
 
@@ -30,26 +30,22 @@ internal enum L10n {
   internal static func types(_ p1: Any, _ p2: CChar, _ p3: Int, _ p4: Float, _ p5: UnsafePointer<CChar>, _ p6: UnsafeRawPointer) -> String {
     return L10n.tr("Localizable", "types", String(describing: p1), p2, p3, p4, p5, Int(bitPattern: p6), fallback: #"Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString: '%s', Pointer: '%p'"#)
   }
-
   internal enum Apples {
     /// You have %d apples
     internal static func count(_ p1: Int) -> String {
       return L10n.tr("Localizable", "apples.count", p1, fallback: #"You have %d apples"#)
     }
   }
-
   internal enum Bananas {
     /// A comment with no space above it
     internal static func owner(_ p1: Int, _ p2: Any) -> String {
       return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2), fallback: #"Those %d bananas belong to %@."#)
     }
   }
-
   internal enum Key1 {
     /// Same as "key1" = "value1"; but in the context of user not logged in
     internal static let anonymous = L10n.tr("Localizable", "key1.anonymous", fallback: #"value2"#)
   }
-
   internal enum Many {
     internal enum Placeholders {
       /// %@ %d %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d
@@ -62,7 +58,6 @@ internal enum L10n {
       }
     }
   }
-
   internal enum Settings {
     internal enum NavigationBar {
       /// Some Reserved Keyword there
@@ -101,7 +96,6 @@ internal enum L10n {
       internal static let headerTitle = L10n.tr("Localizable", "settings.user__profile_section.HEADER_TITLE", fallback: #"User Profile Settings"#)
     }
   }
-
   internal enum What {
     internal enum Happens {
       /// some comment

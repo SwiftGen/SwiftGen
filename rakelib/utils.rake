@@ -49,19 +49,19 @@ class Utils
   def self.pod_trunk_last_version(pod)
     require 'yaml'
     stdout, _, _ = Open3.capture3('bundle', 'exec', 'pod', 'trunk', 'info', pod)
-    stdout.sub!("\n#{pod}\n", '')
-    last_version_line = YAML.safe_load(stdout).first['Versions'].last
-    /^[0-9.]*/.match(last_version_line)[0] # Just the 'x.y.z' part
+    stdout.sub!("\n#{pod}\n", '').gsub!(/ \(\d+-\d+-\d+ \d+:\d+:\d+ .+\)/, '')
+    versions = YAML.safe_load(stdout).first['Versions']
+    versions.sort_by { |v| Gem::Version.new(v) }.last
   end
 
   def self.spm_own_version(dep)
-    dependencies = JSON.load(File.new('Package.resolved'))['object']['pins']
-    dependencies.find { |d| d['package'] == dep }['state']['version']
+    dependencies = JSON.load(File.new('Package.resolved'))['pins']
+    dependencies.find { |d| d['identity'] == dep.downcase }['state']['version']
   end  
 
   def self.spm_resolved_version(dep)
-    dependencies = JSON.load(File.new('Package.resolved'))['object']['pins']
-    dependencies.find { |d| d['package'] == dep }['state']['version']
+    dependencies = JSON.load(File.new('Package.resolved'))['pins']
+    dependencies.find { |d| d['identity'] == dep.downcase }['state']['version']
   end
 
   def self.last_git_tag_version
