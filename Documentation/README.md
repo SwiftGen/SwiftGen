@@ -11,7 +11,9 @@ This directory contains documentation for various topics related to SwiftGen, su
 
 #### Integrating SwiftGen with other tooling
 
-* [Integrate SwiftGen in your Xcode projects as a Script Build Phase](Articles/Xcode-Integration.md)
+* Integrate SwiftGen in your [SPM projects as a build plugin/command](https://github.com/SwiftGen/SwiftGenPlugin)
+* Integrate SwiftGen in your [Xcode projects as a Script Build Phase](Articles/Xcode-Integration.md)
+* Learn how to use SwiftGen [in your custom Swift Build-Tool/Command Plugin](Articles/SwiftGen-Build-Tool-Package-Plugins.md).
 * [Use SwiftLint to generate warnings about code not using SwiftGen-generated constants](Articles/SwiftLint-Integration.md)
 * An alternative way to [integrate SwiftGen on your CI](Articles/Making-CI-check-SwiftGen-changes.md)
 
@@ -23,10 +25,6 @@ This directory contains documentation for various topics related to SwiftGen, su
 ### Customize loading of resources
 
 Most of the SwiftGen provided templates generate code that allows you to load resources at runtime, but in some cases you may want to modify how these resources are loaded. The built-in templates [can be configured to handle these cases](Articles/Customize-loading-of-resources.md) without resorting to custom templates.
-
-### Creating a SwiftGen plugin
-
-Learn how to use SwiftGen [in your Swift Build-Tool/Command Plugin](Articles/SwiftGen-Build-Tool-Package-Plugins.md).
 
 ## [Parsers Documentation](Parsers/)
 
