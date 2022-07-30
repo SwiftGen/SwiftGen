@@ -1,6 +1,6 @@
 //
 // SwiftGen
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
