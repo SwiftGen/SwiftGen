@@ -17,7 +17,10 @@
   [#955](https://github.com/SwiftGen/SwiftGen/pull/955)
 * Our spacing & trimming "hack" is now considered deprecated, and in the next major version we'll switch to Stencil's new "smart" trimming behaviour (see [Stencil documentation](https://stencil.fuller.li/en/latest/templates.html#whitespace-control) for more information). Our built-in templates have already switched to this modern behaviour, you can try it with your own templates by using the `--experimental-modern-spacing` flag.  
   [David Jennes](https://github.com/djbe)
-  [#976](https://github.com/SwiftGen/SwiftGen/pull/976)
+  [#977](https://github.com/SwiftGen/SwiftGen/pull/977)
+* XCAssets: some old properties & parameters are being deprecated. Read the migration guides for more information.  
+  [David Jennes](https://github.com/djbe)
+  [#978](https://github.com/SwiftGen/SwiftGen/pull/978)
 
 ### New Features
 
@@ -42,7 +45,7 @@
   [#961](https://github.com/SwiftGen/SwiftGen/pull/961)
 * Added an experimental flag `--experimental-modern-spacing` to enable modern spacing control, see [Stencil documentation](https://stencil.fuller.li/en/latest/templates.html#whitespace-control) for more information. It will disable our own trimming "hack", and enable Stencil's "smart" trimming.  
   [David Jennes](https://github.com/djbe)
-  [#976](https://github.com/SwiftGen/SwiftGen/pull/976)
+  [#977](https://github.com/SwiftGen/SwiftGen/pull/977)
 
 ### Bug Fixes
 
@@ -85,7 +88,7 @@
   [#966](https://github.com/SwiftGen/SwiftGen/pull/966)
 * Updated to Stencil 0.15 and StencilSwiftKit 2.10.  
   [David Jennes](https://github.com/djbe)
-  [#976](https://github.com/SwiftGen/SwiftGen/pull/976)
+  [#977](https://github.com/SwiftGen/SwiftGen/pull/977)
 
 ## 6.5.1
 

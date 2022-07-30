@@ -4,6 +4,12 @@ There are no major changes in the templates, only a small edge case:
 
 In the `strings` templates, if you were providing a custom `lookupFunction`, the signature of that function has changed. Previously, the function had to accept 2 parameters (table and key), now the function must accept 3 parameters: table, key and value.
 
+### Deprecation notices for users
+
+There are a few deprecation notices:
+
+- The `xcassets` templates' `allValues` parameter is now deprecated, and will be removed in the next version.
+
 ### Deprecation notices for template writers
 
 There are a few deprecation notices:
