@@ -6,6 +6,7 @@
 
 import Foundation
 import PathKit
+import Stencil
 import SwiftGenKit
 import XCTest
 
@@ -110,30 +111,11 @@ private func convertToDictionary(_ value: Any) -> [String: Any]? {
   switch value {
   case let value as [String: Any]:
     return value
-  case let value as NSObject & ContextConvertible:
-    return value.convertToDictionary()
+  case let value as LazyValueWrapper:
+    guard let resolved = try? value.resolve(.init()) else { return nil }
+    return convertToDictionary(resolved)
   default:
     return nil
-  }
-}
-
-extension ContextConvertible where Self: NSObject {
-  func convertToDictionary() -> [String: Any] {
-    var result: [(String, Any)] = []
-    var mirror: Mirror? = Mirror(reflecting: self)
-
-    repeat {
-      // At runtime when mirroring, labels for lazy vars get the "$__lazy_storage_$_" prefix
-      // so we need to delete the prefix to handle those lazy var cases.
-      // We use `object.value(forKey:) to force load lazy variables because `someMirrorChild.value`
-      // evaluates to `nil` for lazy variables and doesn't trigger the lazy var evaluation.
-      result += mirror?.children
-        .compactMap { $0.label?.deletingPrefix("$__lazy_storage_$_") }
-        .map { ($0, self.value(forKey: $0) as Any) } ?? []
-      mirror = mirror?.superclassMirror
-    } while mirror != nil
-
-    return Dictionary(uniqueKeysWithValues: result)
   }
 }
 
@@ -146,26 +128,27 @@ private extension String {
 
 private extension Dictionary where Key == String {
   func convertedToContext() -> [String: Any] {
-    self.mapValues(convertToContext)
+    self.compactMapValues(convertToContext)
   }
 }
 
 private extension Array {
   func convertedToContext() -> [Any] {
-    self.map(convertToContext)
+    self.compactMap(convertToContext)
   }
 }
 
 /// Recursive dig into the object to convert any `ContextConvertible`
 /// into a context-compatible structure (Dict, Array, …)
-private func convertToContext(_ object: Any) -> Any {
+private func convertToContext(_ object: Any) -> Any? {
   switch object {
   case let array as [Any]:
     return array.convertedToContext()
   case let dict as [String: Any]:
     return dict.convertedToContext()
-  case let convertible as NSObject & ContextConvertible:
-    return convertible.convertToDictionary()
+  case let value as LazyValueWrapper:
+    guard let resolved = try? value.resolve(.init()) else { return nil }
+    return convertToContext(resolved)
   default:
     return object
   }
