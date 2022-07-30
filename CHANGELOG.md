@@ -46,6 +46,9 @@
 * Added an experimental flag `--experimental-modern-spacing` to enable modern spacing control, see [Stencil documentation](https://stencil.fuller.li/en/latest/templates.html#whitespace-control) for more information. It will disable our own trimming "hack", and enable Stencil's "smart" trimming.  
   [David Jennes](https://github.com/djbe)
   [#977](https://github.com/SwiftGen/SwiftGen/pull/977)
+* XCAssets & Fonts: added support for SwiftUI. You can now easily access colors images, symbols and custom fonts from your SwiftUI code.  
+  [David Jennes](https://github.com/djbe)
+  [#979](https://github.com/SwiftGen/SwiftGen/pull/979)
 
 ### Bug Fixes
 
