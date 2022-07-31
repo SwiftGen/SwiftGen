@@ -47,13 +47,13 @@ extension Commands.Run {
     var filter: String = Parser.self.defaultFilter
 
     @Option(name: [.customLong("option")], help: "List of parser options. \(Parser.self.allOptions)")
-    var options: [String]
+    var options: [String] = []
 
     @OptionGroup
     var template: TemplateOptions
 
     @Option(name: [.customLong("param")], help: "List of template parameters.")
-    var templateParameters: [String]
+    var templateParameters: [String] = []
 
     @OptionGroup
     var output: Commands.OutputDestination
