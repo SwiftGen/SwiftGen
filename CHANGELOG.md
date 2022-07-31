@@ -92,6 +92,9 @@
 * Updated to Stencil 0.15 and StencilSwiftKit 2.10.  
   [David Jennes](https://github.com/djbe)
   [#977](https://github.com/SwiftGen/SwiftGen/pull/977)
+* Added `Difference` library for easier testing of context differences.  
+  [David Jennes](https://github.com/djbe)
+  [#981](https://github.com/SwiftGen/SwiftGen/pull/981)
 
 ## 6.5.1
 
