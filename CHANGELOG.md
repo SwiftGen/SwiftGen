@@ -14,7 +14,12 @@ _None_
 
 ### Bug Fixes
 
-_None_
+* CLI: fixed `run parser` when no `params` or `options` are provided (broken in 6.6.0).  
+  [David Jennes](https://github.com/djbe)
+  [#983](https://github.com/SwiftGen/SwiftGen/pull/983)
+* JSON/Plist/YAML: fixed code generation (broken in 6.6.0).  
+  [David Jennes](https://github.com/djbe)
+  [#983](https://github.com/SwiftGen/SwiftGen/pull/983)
 
 ### Internal Changes
 
