@@ -2,7 +2,12 @@
 
 ---
 
-## Develop
+## 6.6.0
+
+### Changes in core dependencies of SwiftGen
+
+* [StencilSwiftKit 2.10.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.10.0/CHANGELOG.md)
+* [Stencil 0.15.0](https://github.com/kylef/Stencil/blob/0.15.0/CHANGELOG.md)
 
 ### Breaking Changes
 

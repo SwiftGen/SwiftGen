@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name         = 'SwiftGenKit'
-  s.version      = '6.5.1'
+  s.version      = '6.6.0'
   s.summary      = 'The SwiftGen framework responsible for parsing assets and turn them ' \
                    'in a dictionary representation suitable for Stencil templates'
 
@@ -16,7 +16,8 @@ Pod::Spec.new do |s|
   s.homepage     = 'https://github.com/SwiftGen/SwiftGenKit'
   s.license      = 'MIT'
   s.author       = {
-    'Olivier Halligon' => 'olivier@halligon.net'
+    'Olivier Halligon' => 'olivier@halligon.net',
+    'David Jennes' => 'david.jennes@gmail.com'
   }
   s.social_media_url = 'https://twitter.com/aligatr'
 
