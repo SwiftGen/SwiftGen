@@ -2,6 +2,15 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 {% if catalogs %}
+{% macro hasValuesBlock assets filter %}
+  {%- for asset in assets -%}
+    {%- if asset.type == filter -%}
+      1
+    {%- elif asset.items -%}
+      {% call hasValuesBlock asset.items filter %}
+    {%- endif -%}
+  {%- endfor -%}
+{% endmacro %}
 {% set enumName %}{{param.enumName|default:"Asset"}}{% endset %}
 {% set arResourceGroupType %}{{param.arResourceGroupTypeName|default:"ARResourceGroupAsset"}}{% endset %}
 {% set colorType %}{{param.colorTypeName|default:"ColorAsset"}}{% endset %}
@@ -10,23 +19,31 @@
 {% set symbolType %}{{param.symbolTypeName|default:"SymbolAsset"}}{% endset %}
 {% set forceNamespaces %}{{param.forceProvidesNamespaces|default:"false"}}{% endset %}
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set hasARResourceGroup %}{% for catalog in catalogs %}{% call hasValuesBlock catalog.assets "arresourcegroup" %}{% endfor %}{% endset %}
+{% set hasColor %}{% for catalog in catalogs %}{% call hasValuesBlock catalog.assets "color" %}{% endfor %}{% endset %}
+{% set hasData %}{% for catalog in catalogs %}{% call hasValuesBlock catalog.assets "data" %}{% endfor %}{% endset %}
+{% set hasImage %}{% for catalog in catalogs %}{% call hasValuesBlock catalog.assets "image" %}{% endfor %}{% endset %}
+{% set hasSymbol %}{% for catalog in catalogs %}{% call hasValuesBlock catalog.assets "symbol" %}{% endfor %}{% endset %}
 #if os(macOS)
   import AppKit
 #elseif os(iOS)
-{% if resourceCount.arresourcegroup > 0 %}
+{% if hasARResourceGroup %}
   import ARKit
 {% endif %}
   import UIKit
 #elseif os(tvOS) || os(watchOS)
   import UIKit
 #endif
+#if canImport(SwiftUI)
+  import SwiftUI
+#endif
 
 // Deprecated typealiases
-{% if resourceCount.color > 0 %}
+{% if hasColor %}
 @available(*, deprecated, renamed: "{{colorType}}.Color", message: "This typealias will be removed in SwiftGen 7.0")
 {{accessModifier}} typealias {{param.colorAliasName|default:"AssetColorTypeAlias"}} = {{colorType}}.Color
 {% endif %}
-{% if resourceCount.image > 0 %}
+{% if hasImage %}
 @available(*, deprecated, renamed: "{{imageType}}.Image", message: "This typealias will be removed in SwiftGen 7.0")
 {{accessModifier}} typealias {{param.imageAliasName|default:"AssetImageTypeAlias"}} = {{imageType}}.Image
 {% endif %}
@@ -99,15 +116,6 @@
   {% endif %}
   {% endfor %}
 {% endmacro %}
-{% macro hasValuesBlock assets filter %}
-  {%- for asset in assets -%}
-    {%- if asset.type == filter -%}
-      1
-    {%- elif asset.items -%}
-      {% call hasValuesBlock asset.items filter %}
-    {%- endif -%}
-  {%- endfor -%}
-{% endmacro %}
 {% macro allValuesBlock assets filter prefix %}
   {% for asset in assets %}
   {% if asset.type == filter %}
@@ -137,7 +145,7 @@
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
-{% if resourceCount.arresourcegroup > 0 %}
+{% if hasARResourceGroup %}
 
 {{accessModifier}} struct {{arResourceGroupType}} {
   {{accessModifier}} fileprivate(set) var name: String
@@ -173,7 +181,7 @@
 }
 #endif
 {% endif %}
-{% if resourceCount.color > 0 %}
+{% if hasColor %}
 
 {{accessModifier}} final class {{colorType}} {
   {{accessModifier}} fileprivate(set) var name: String
@@ -203,6 +211,13 @@
   }
   #endif
 
+  #if canImport(SwiftUI)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  {{accessModifier}} private(set) lazy var swiftUIColor: SwiftUI.Color = {
+    SwiftUI.Color(asset: self)
+  }()
+  #endif
+
   fileprivate init(name: String) {
     self.name = name
   }
@@ -221,8 +236,18 @@
     #endif
   }
 }
+
+#if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+{{accessModifier}} extension SwiftUI.Color {
+  init(asset: {{colorType}}) {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    self.init(asset.name, bundle: bundle)
+  }
+}
+#endif
 {% endif %}
-{% if resourceCount.data > 0 %}
+{% if hasData %}
 
 {{accessModifier}} struct {{dataType}} {
   {{accessModifier}} fileprivate(set) var name: String
@@ -248,7 +273,7 @@
   }
 }
 {% endif %}
-{% if resourceCount.image > 0 %}
+{% if hasImage %}
 
 {{accessModifier}} struct {{imageType}} {
   {{accessModifier}} fileprivate(set) var name: String
@@ -286,6 +311,13 @@
     return result
   }
   #endif
+
+  #if canImport(SwiftUI)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  {{accessModifier}} var swiftUIImage: SwiftUI.Image {
+    SwiftUI.Image(asset: self)
+  }
+  #endif
 }
 
 {{accessModifier}} extension {{imageType}}.Image {
@@ -303,8 +335,28 @@
     #endif
   }
 }
+
+#if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+{{accessModifier}} extension SwiftUI.Image {
+  init(asset: {{imageType}}) {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    self.init(asset.name, bundle: bundle)
+  }
+
+  init(asset: {{imageType}}, label: Text) {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    self.init(asset.name, bundle: bundle, label: label)
+  }
+
+  init(decorative asset: {{imageType}}) {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    self.init(decorative: asset.name, bundle: bundle)
+  }
+}
+#endif
 {% endif %}
-{% if resourceCount.symbol > 0 %}
+{% if hasSymbol %}
 
 {{accessModifier}} struct {{symbolType}} {
   {{accessModifier}} fileprivate(set) var name: String
@@ -337,7 +389,34 @@
     return result
   }
   #endif
+
+  #if canImport(SwiftUI)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  {{accessModifier}} var swiftUIImage: SwiftUI.Image {
+    SwiftUI.Image(asset: self)
+  }
+  #endif
 }
+
+#if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+{{accessModifier}} extension SwiftUI.Image {
+  init(asset: {{symbolType}}) {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    self.init(asset.name, bundle: bundle)
+  }
+
+  init(asset: {{symbolType}}, label: Text) {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    self.init(asset.name, bundle: bundle, label: label)
+  }
+
+  init(decorative asset: {{symbolType}}) {
+    let bundle = {{param.bundle|default:"BundleToken.bundle"}}
+    self.init(decorative: asset.name, bundle: bundle)
+  }
+}
+#endif
 {% endif %}
 {% if not param.bundle %}
 
