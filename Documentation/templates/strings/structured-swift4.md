@@ -40,21 +40,19 @@ You can customize some elements of this template by overriding the following par
 ```swift
 internal enum L10n {
   /// Some alert body there
-  internal static let alertMessage = L10n.tr("alert_message")
-  /// Title of the alert
-  internal static let alertTitle = L10n.tr("alert_title")
-
+  internal static let alertMessage = L10n.tr("Localizable", "alert__message", fallback: "Some alert body there")
+  /// Title for an alert
+  internal static let alertTitle = L10n.tr("Localizable", "alert__title", fallback: "Title of the alert")
   internal enum Apples {
     /// You have %d apples
     internal static func count(_ p1: Int) -> String {
-      return L10n.tr("apples.count", p1)
+      return L10n.tr("Localizable", "apples.count", p1, fallback: "You have %d apples")
     }
   }
-
   internal enum Bananas {
-    /// Those %d bananas belong to %@.
+    /// A comment with no space above it
     internal static func owner(_ p1: Int, _ p2: Any) -> String {
-      return L10n.tr("bananas.owner", p1, String(describing: p2))
+      return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2), fallback: "Those %d bananas belong to %@.")
     }
   }
 }

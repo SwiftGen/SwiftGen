@@ -832,9 +832,10 @@ This will generate a Swift `enum L10n` that will map all your `Localizable.strin
 Given the following `Localizable.strings` file:
 
 ```swift
-/* Some comment on the title */
+/* Title for an alert */
 "alert_title" = "Title of the alert";
 "alert_message" = "Some alert body there";
+/* A comment with no space above it */
 "bananas.owner" = "Those %d bananas belong to %@.";
 ```
 
@@ -873,21 +874,19 @@ The generated code will contain this:
 ```swift
 internal enum L10n {
   /// Some alert body there
-  internal static let alertMessage = L10n.tr("alert_message")
-  /// Some comment on the title
-  internal static let alertTitle = L10n.tr("alert_title")
-
+  internal static let alertMessage = L10n.tr("Localizable", "alert__message", fallback: #"Some alert body there"#)
+  /// Title for an alert
+  internal static let alertTitle = L10n.tr("Localizable", "alert__title", fallback: #"Title of the alert"#)
   internal enum Apples {
-    /// Plural format key: "%#@apples@"
+    /// You have %d apples
     internal static func count(_ p1: Int) -> String {
-      return L10n.tr("apples.count", p1)
+      return L10n.tr("Localizable", "apples.count", p1, fallback: #"You have %d apples"#)
     }
   }
-
   internal enum Bananas {
-    /// Those %d bananas belong to %@.
+    /// A comment with no space above it
     internal static func owner(_ p1: Int, _ p2: Any) -> String {
-      return L10n.tr("bananas.owner", p1, String(describing: p2))
+      return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2), fallback: #"Those %d bananas belong to %@."#)
     }
   }
 }
@@ -920,16 +919,16 @@ SwiftGen also has a template to support flat strings files (i.e. without splitti
 ```swift
 internal enum L10n {
   /// Some alert body there
-  internal static let alertMessage = L10n.tr("Localizable", "alert__message")
-  /// Title of the alert
-  internal static let alertTitle = L10n.tr("Localizable", "alert__title")
-  /// Plural format key: "%#@apples@"
+  internal static let alertMessage = L10n.tr("Localizable", "alert__message", fallback: #"Some alert body there"#)
+  /// Title for an alert
+  internal static let alertTitle = L10n.tr("Localizable", "alert__title", fallback: #"Title of the alert"#)
+  /// You have %d apples
   internal static func applesCount(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "apples.count", p1)
+    return L10n.tr("Localizable", "apples.count", p1, fallback: #"You have %d apples"#)
   }
-  /// Those %d bananas belong to %@.
+  /// A comment with no space above it
   internal static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
-    return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2))
+    return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2), fallback: #"Those %d bananas belong to %@."#)
   }
 }
 ```

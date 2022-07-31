@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import Stencil
 
 //
 // See the documentation file for a full description of this context's structure:
@@ -26,7 +27,12 @@ extension Yaml.Parser {
     [
       "name": file.name,
       "path": file.path.string,
-      "documents": file.documents.map(StencilContextLazyDocument.init)
+      "documents": file.documents.map { document in
+        [
+          "data": document,
+          "metadata": LazyValueWrapper(Metadata.generate(for: document))
+        ]
+      }
     ]
   }
 }
