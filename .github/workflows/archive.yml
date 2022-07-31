@@ -34,6 +34,9 @@ jobs:
         run: |
             ./standalone/swiftgen --version
             ./standalone/swiftgen templates list
+      -
+        name: Test binary output
+        run: bundle exec rake cli:test[./standalone,./standalone/frameworks,./standalone/stencils]
 
   zip:
     name: Zip
@@ -56,8 +59,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-spm-
       -
-        name: Create zip
-        run: bundle exec rake release:zip
+        name: Create zip & artifactbundle
+        run: bundle exec rake release:artifactbundle
       -
         name: Upload artifact
         uses: actions/upload-artifact@v3

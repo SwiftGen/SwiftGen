@@ -2,6 +2,21 @@
 
 ---
 
+## 6.6.1
+
+### Changes in core dependencies of SwiftGen
+
+* [Stencil 0.15.1](https://github.com/kylef/Stencil/blob/0.15.1/CHANGELOG.md)
+
+### Bug Fixes
+
+* CLI: fixed `run parser` when no `params` or `options` are provided (broken in 6.6.0).  
+  [David Jennes](https://github.com/djbe)
+  [#983](https://github.com/SwiftGen/SwiftGen/pull/983)
+* JSON/Plist/YAML: fixed code generation (broken in 6.6.0).  
+  [David Jennes](https://github.com/djbe)
+  [#983](https://github.com/SwiftGen/SwiftGen/pull/983)
+
 ## 6.6.0
 
 ### Changes in core dependencies of SwiftGen
