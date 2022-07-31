@@ -2,6 +2,11 @@ Use this file to track all dependencies required by this project.
 
 ## Added via SPM
 
+### Difference
+
+- Used for our tests, to easily check the difference between large structures of data.
+- License: [MIT](https://github.com/krzysztofzablocki/Difference/blob/master/LICENSE)
+
 ### Kanna
 
 - Added because the XML parser provided by Foundation is quite old and non-swifty, and doesn't have any XPath support.

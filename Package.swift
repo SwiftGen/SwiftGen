@@ -15,6 +15,7 @@ let package = Package(
     .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.0.0"),
     .package(url: "https://github.com/jpsim/Yams.git", from: "4.0.6"),
     .package(url: "https://github.com/kylef/PathKit.git", from: "1.0.1"),
+    .package(url: "https://github.com/krzysztofzablocki/Difference.git", branch: "master"),
     .package(url: "https://github.com/stencilproject/Stencil.git", from: "0.15.0"),
     .package(url: "https://github.com/shibapm/Komondor.git", exact: "1.1.3"),
     .package(url: "https://github.com/SwiftGen/StencilSwiftKit.git", from: "2.10.0"),
@@ -54,6 +55,7 @@ let package = Package(
       "TestUtils"
     ]),
     .target(name: "TestUtils", dependencies: [
+      "Difference",
       "PathKit",
       "SwiftGenKit",
       "SwiftGenCLI"

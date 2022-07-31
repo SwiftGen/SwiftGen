@@ -9,35 +9,7 @@ import SwiftGenCLI
 import SwiftGenKit
 import XCTest
 
-enum TTY {
-  static let colorCode: (String) -> String =
-    ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
-  static let (msgColor, reset) = (colorCode("fg250,0,0"), colorCode(""))
-  static let okCode = (
-    num: colorCode("fg127,127,127"),
-    code: colorCode("")
-  )
-  static let koCode = (
-    num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
-    code: colorCode("fg250,250,250") + colorCode("bg127,0,0")
-  )
-}
-
-public func XCTAssertEqualDict(
-  _ result: [String: Any],
-  _ expected: [String: Any],
-  file: StaticString = #file,
-  line: UInt = #line
-) {
-  XCTAssertTrue(
-    NSDictionary(dictionary: result).isEqual(to: expected),
-    "expected \(expected), got \(result)",
-    file: file,
-    line: line
-  )
-}
-
-// MARK: Safe access to fixtures
+// MARK: - Safe access to fixtures
 
 public class Fixtures {
   public enum Directory: String {
