@@ -2,15 +2,11 @@
 
 ---
 
-## Develop
+## 6.6.1
 
-### Breaking Changes
+### Changes in core dependencies of SwiftGen
 
-_None_
-
-### New Features
-
-_None_
+* [Stencil 0.15.1](https://github.com/kylef/Stencil/blob/0.15.1/CHANGELOG.md)
 
 ### Bug Fixes
 
@@ -20,10 +16,6 @@ _None_
 * JSON/Plist/YAML: fixed code generation (broken in 6.6.0).  
   [David Jennes](https://github.com/djbe)
   [#983](https://github.com/SwiftGen/SwiftGen/pull/983)
-
-### Internal Changes
-
-_None_
 
 ## 6.6.0
 
