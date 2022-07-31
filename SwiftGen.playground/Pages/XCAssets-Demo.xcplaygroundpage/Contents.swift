@@ -143,3 +143,29 @@ let bottleReferenceObjects = Asset.Targets.bottles.referenceObjects
 let plus = Asset.Symbols.plus.image
 let style = UIImage.SymbolConfiguration(textStyle: .headline)
 let styled = Asset.Symbols.exclamationMark.image(with: style)
+
+// SwiftUI
+
+import SwiftUI
+import PlaygroundSupport
+
+struct ContentView: View {
+  var body: some View {
+    VStack {
+      Image(decorative: Asset.Food.Exotic.mango)
+      Button(action: {}) {
+        HStack {
+          Asset.Symbols.plus.swiftUIImage
+          Text("Add")
+        }
+      }
+      .padding()
+      .foregroundColor(Asset.Styles.Vengo.tint.swiftUIColor)
+      .background(Asset.Styles.Vengo.primary.swiftUIColor)
+      .cornerRadius(.infinity)
+    }
+  }
+}
+
+PlaygroundPage.current.setLiveView(ContentView())
+

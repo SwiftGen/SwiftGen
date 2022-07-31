@@ -16,14 +16,14 @@ namespace :playground do
     source = File.expand_path('Sources/TestUtils/Fixtures/Resources/CoreData/Model.xcdatamodeld', Dir.pwd)
     destination = File.expand_path('SwiftGen.playground/Resources', Dir.pwd)
     Utils.run(
-      %(momc --sdkroot "#{sdk}" --iphonesimulator-deployment-target 12.0 ) +
+      %(momc --sdkroot "#{sdk}" --iphonesimulator-deployment-target 13.0 ) +
         %("#{source}" "#{destination}"),
       task,
       xcrun: true
     )
   end
   task :files do
-    sh %(cp -R Tests/Fixtures/Resources/Files/* SwiftGen.playground/Resources/)
+    sh %(cp -R Sources/TestUtils/Fixtures/Resources/Files/* SwiftGen.playground/Resources/)
   end
   task :fonts do
     sh %(cp Sources/TestUtils/Fixtures/Resources/Fonts/Avenir.ttc SwiftGen.playground/Resources/)
