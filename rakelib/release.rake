@@ -138,7 +138,7 @@ namespace :release do
   end
 
   desc "Create a new GitHub release"
-  task :github do
+  task :github => :artifactbundle do
     require 'octokit'
 
     client = Utils.octokit_client
@@ -150,9 +150,14 @@ namespace :release do
     ]
     repo_name = File.basename(`git remote get-url origin`.chomp, '.git').freeze
     
-    # Create the release
+    # Create (or update) release
     puts "Pushing release notes for tag #{version}"
-    release = client.create_release("SwiftGen/#{repo_name}", version, name: version, body: body)
+    begin
+      release = client.release_for_tag("SwiftGen/#{repo_name}", version)
+      client.update_release(release.url, tag_name: version, name: version, body: body)
+    rescue Octokit::NotFound
+      release = client.create_release("SwiftGen/#{repo_name}", version, name: version, body: body)
+    end
 
     # Upload our artifacts
     artifacts.each do |artifact|
