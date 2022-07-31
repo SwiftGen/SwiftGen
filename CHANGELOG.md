@@ -2,6 +2,24 @@
 
 ---
 
+## Develop
+
+### Breaking Changes
+
+_None_
+
+### New Features
+
+_None_
+
+### Bug Fixes
+
+_None_
+
+### Internal Changes
+
+_None_
+
 ## 6.6.0
 
 ### Changes in core dependencies of SwiftGen
