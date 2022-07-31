@@ -14,9 +14,9 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wformat-security"
 
-static NSString* tr(NSString *tableName, NSString *key, ...) {
+static NSString* tr(NSString *tableName, NSString *key, NSString *value, ...) {
     NSBundle *bundle = {{param.bundle|default:"[NSBundle bundleForClass:BundleToken.class]"}};
-    NSString *format = [bundle localizedStringForKey:key value:nil table:tableName];
+    NSString *format = [bundle localizedStringForKey:key value:value table:tableName];
     NSLocale *locale = [NSLocale currentLocale];
 
     va_list args;
@@ -28,49 +28,49 @@ static NSString* tr(NSString *tableName, NSString *key, ...) {
 };
 #pragma clang diagnostic pop
 
-{% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
-  {% for type in types %}
+{% macro parametersBlock types %}
+  {%- for type in types -%}
     ({% call paramTranslate type %})p{{ forloop.counter }}{{ " :" if not forloop.last }}
-  {% endfor %}
-{% endfilter %}{% endmacro %}
-{% macro argumentsBlock types %}{% filter removeNewlines:"leading" %}
-  {% for type in types %}
+  {%- endfor -%}
+{% endmacro %}
+{% macro argumentsBlock types %}
+  {%- for type in types -%}
     p{{forloop.counter}}{{ ", " if not forloop.last }}
-  {% endfor %}
-{% endfilter %}{% endmacro %}
+  {%- endfor -%}
+{% endmacro %}
 {% macro paramTranslate swiftType %}
-  {% if swiftType == "Any" %}
+  {%- if swiftType == "Any" -%}
     id
-  {% elif swiftType == "CChar" %}
+  {%- elif swiftType == "CChar" -%}
     char
-  {% elif swiftType == "Float" %}
+  {%- elif swiftType == "Float" -%}
     float
-  {% elif swiftType == "Int" %}
+  {%- elif swiftType == "Int" -%}
     NSInteger
-  {% elif swiftType == "String" %}
+  {%- elif swiftType == "String" -%}
     id
-  {% elif swiftType == "UnsafePointer<CChar>" %}
+  {%- elif swiftType == "UnsafePointer<CChar>" -%}
     char*
-  {% elif swiftType == "UnsafeRawPointer" %}
+  {%- elif swiftType == "UnsafeRawPointer" -%}
     void*
-  {% else %}
+  {%- else -%}
     objc-m.stencil is missing '{{swiftType}}'
-  {% endif %}
+  {%- endif -%}
 {% endmacro %}
 {% macro tableContents table item %}
   {% for string in item.strings %}
   {% if string.types %}
     {% if string.types.count == 1 %}
-+ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValue:{% call parametersBlock string.types %}
++ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValue:{% call parametersBlock string.types +%}
     {% else %}
-+ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValues:{% call parametersBlock string.types %}
++ (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValues:{% call parametersBlock string.types +%}
     {% endif %}
 {
-    return tr(@"{{table}}", @"{{string.key}}", {% call argumentsBlock string.types %});
+    return tr(@"{{table}}", @"{{string.key}}", @"{{string.translation|replace:'"','\"'}}", {%+ call argumentsBlock string.types %});
 }
 {% else %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}} {
-    return tr(@"{{table}}", @"{{string.key}}");
+    return tr(@"{{table}}", @"{{string.key}}", @"{{string.translation|replace:'"','\"'}}");
 }
   {% endif %}
   {% endfor %}

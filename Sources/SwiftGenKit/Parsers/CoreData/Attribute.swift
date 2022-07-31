@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -10,6 +10,7 @@ import Kanna
 extension CoreData {
   public struct Attribute {
     public let name: String
+    public let isDerived: Bool
     public let isIndexed: Bool
     public let isOptional: Bool
     public let isTransient: Bool
@@ -40,6 +41,7 @@ extension CoreData {
 private enum XML {
   fileprivate enum Attributes {
     static let name = "name"
+    static let isDerived = "derived"
     static let isIndexed = "indexed"
     static let isOptional = "optional"
     static let isTransient = "transient"
@@ -63,6 +65,7 @@ extension CoreData.Attribute {
     }
 
     name = attributeName
+    isDerived = object[XML.Attributes.isDerived].flatMap(Bool.init(from:)) ?? false
     isIndexed = object[XML.Attributes.isIndexed].flatMap(Bool.init(from:)) ?? false
     isOptional = object[XML.Attributes.isOptional].flatMap(Bool.init(from:)) ?? false
     isTransient = object[XML.Attributes.isTransient].flatMap(Bool.init(from:)) ?? false

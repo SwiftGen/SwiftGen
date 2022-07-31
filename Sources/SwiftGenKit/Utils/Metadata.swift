@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -58,12 +58,12 @@ enum Metadata {
     } else if let data = data as? [Any] {
       return [
         Key.type: ValueType.array,
-        Key.element: Metadata.describe(arrayElement: data)
+        Key.element: describe(arrayElement: data)
       ]
     } else if let data = data as? [String: Any] {
       return [
         Key.type: ValueType.dictionary,
-        Key.properties: Metadata.describe(dictionary: data)
+        Key.properties: describe(dictionary: data)
       ]
     } else if dataType == NSNull.self || Mirror(reflecting: data).displayStyle == .optional {
       return [Key.type: ValueType.optional]
@@ -75,7 +75,7 @@ enum Metadata {
   private static func describe(dictionary: [String: Any]) -> [String: Any] {
     Dictionary(
       uniqueKeysWithValues: dictionary.map { item in
-        (key: item.key, value: Metadata.generate(for: item.value))
+        (key: item.key, value: generate(for: item.value))
       }
     )
   }
@@ -92,17 +92,17 @@ enum Metadata {
     } else if array is [[Any]] {
       return [
         Key.type: ValueType.array,
-        Key.items: array.map { Metadata.generate(for: $0) }
+        Key.items: array.map { generate(for: $0) }
       ]
     } else if array is [[String: Any]] {
       return [
         Key.type: ValueType.dictionary,
-        Key.items: array.map { Metadata.generate(for: $0) }
+        Key.items: array.map { generate(for: $0) }
       ]
     } else {
       return [
         Key.type: ValueType.any,
-        Key.items: array.map { Metadata.generate(for: $0) }
+        Key.items: array.map { generate(for: $0) }
       ]
     }
   }

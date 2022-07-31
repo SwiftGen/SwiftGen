@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -61,8 +61,8 @@ extension CoreData.Entity {
 
     let isAbstract = object[XML.Attributes.isAbstract].flatMap(Bool.init(from:)) ?? false
     let superEntity = object[XML.Attributes.superEntity]
-    let shouldGenerateCode = object[XML.Attributes.codeGenerationType].map {
-      $0 != XML.Values.categoryCodeGeneration && $0 != XML.Values.classCodeGeneration
+    let shouldGenerateCode = object[XML.Attributes.codeGenerationType].map { value in
+      value != XML.Values.categoryCodeGeneration && value != XML.Values.classCodeGeneration
     } ?? true
 
     let attributes = try object.xpath(XML.attributesPath).map(CoreData.Attribute.init(with:))
@@ -70,8 +70,8 @@ extension CoreData.Entity {
     let fetchedProperties = try object.xpath(XML.fetchedPropertiesPath).map(CoreData.FetchedProperty.init(with:))
 
     let userInfo = try object.at_xpath(XML.userInfoPath).map { try CoreData.UserInfo.parse(from: $0) } ?? [:]
-    let uniquenessConstraints = try object.at_xpath(XML.uniquenessConstraintsPath).map {
-      try CoreData.UniquenessConstraints.parse(from: $0)
+    let uniquenessConstraints = try object.at_xpath(XML.uniquenessConstraintsPath).map { element in
+      try CoreData.UniquenessConstraints.parse(from: element)
     } ?? []
 
     self.init(

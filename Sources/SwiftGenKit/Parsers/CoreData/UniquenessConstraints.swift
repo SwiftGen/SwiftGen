@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -20,8 +20,8 @@ extension CoreData {
   public enum UniquenessConstraints {
     public static func parse(from object: Kanna.XMLElement) throws -> [[String]] {
       try object.xpath(XML.uniquenessConstraintPath).map { uniquenessConstraintElement in
-        try uniquenessConstraintElement.xpath(XML.constraintPath).map {
-          guard let value = $0[XML.Attributes.value] else {
+        try uniquenessConstraintElement.xpath(XML.constraintPath).map { constaint in
+          guard let value = constaint[XML.Attributes.value] else {
             throw CoreData.ParserError.invalidFormat(reason: "Missing required uniqueness constraint value")
           }
 

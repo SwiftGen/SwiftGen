@@ -1,10 +1,11 @@
 //
 // Templates UnitTests
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
 import PathKit
+import Stencil
 import StencilSwiftKit
 import SwiftGenKit
 import XCTest
@@ -39,11 +40,13 @@ public extension XCTestCase {
     contextVariations: VariationGenerator? = nil,
     outputExtension: String = "swift"
   ) {
-    let templateString = Fixtures.template(for: "\(templateName).stencil", sub: directory)
-    let template = StencilSwiftTemplate(
-      templateString: templateString,
-      environment: stencilSwiftEnvironment()
-    )
+    let template: Template
+    do {
+      let templateRealPath = Fixtures.template(for: "\(templateName).stencil", sub: directory)
+      template = try Template.load(from: templateRealPath, modernSpacing: true)
+    } catch {
+      fatalError("Unable to load fixture \(templateName)'s content: \(error)")
+    }
 
     // default values
     let contextVariations = contextVariations ?? { [(context: $1, suffix: "")] }

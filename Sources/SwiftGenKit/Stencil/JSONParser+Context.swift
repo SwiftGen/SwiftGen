@@ -1,10 +1,11 @@
 //
 // SwiftGen
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
 import Foundation
+import Stencil
 
 //
 // See the documentation file for a full description of this context's structure:
@@ -23,7 +24,10 @@ extension JSON.Parser {
   }
 
   private func map(file: JSON.File) -> [String: Any] {
-    let document = StencilContextLazyDocument(data: file.document)
+    let document = [
+      "data": file.document,
+      "metadata": LazyValueWrapper(Metadata.generate(for: file.document))
+    ]
 
     return [
       "name": file.name,

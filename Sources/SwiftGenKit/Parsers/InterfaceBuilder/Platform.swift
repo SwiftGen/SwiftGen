@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -16,7 +16,7 @@ extension InterfaceBuilder {
     init?(runtime: String) {
       // files without "trait variations" will have a runtime value of (for example):
       // "iOS.CocoaTouch.iPad"
-      if let platform = Platform.allCases.first(where: { runtime.hasPrefix($0.rawValue) }) {
+      if let platform = Self.allCases.first(where: { runtime.hasPrefix($0.rawValue) }) {
         self = platform
       } else {
         return nil

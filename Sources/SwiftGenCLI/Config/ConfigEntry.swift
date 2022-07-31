@@ -1,6 +1,6 @@
 //
 // SwiftGen
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -37,10 +37,10 @@ public struct ConfigEntry {
     if let inputDir = inputDir {
       self.inputs = self.inputs.map { $0.isRelative ? inputDir + $0 : $0 }
     }
-    self.outputs = self.outputs.map {
-      var output = $0
-      output.makingRelativeTo(outputDir: outputDir)
-      return output
+    self.outputs = self.outputs.map { output in
+      var result = output
+      result.makingRelativeTo(outputDir: outputDir)
+      return result
     }
   }
 }
@@ -48,21 +48,17 @@ public struct ConfigEntry {
 extension ConfigEntry {
   init(yaml: [String: Any], cmd: String, logger: (LogLevel, String) -> Void) throws {
     if let inputs = yaml[Keys.inputs] {
-      self.inputs = try ConfigEntry.parseValueOrArray(yaml: inputs, key: Keys.inputs) {
-        Path($0)
-      }
+      self.inputs = try Self.parseValueOrArray(yaml: inputs, key: Keys.inputs, parseValue: Path.init(stringLiteral:))
     } else if let inputs = yaml[Keys.paths] {
       // Legacy: remove this once we stop supporting the old paths key (replaced by inputs)
       logger(.warning, "\(cmd): `paths` is a deprecated in favour of `inputs`.")
-      self.inputs = try ConfigEntry.parseValueOrArray(yaml: inputs, key: Keys.inputs) {
-        Path($0)
-      }
+      self.inputs = try Self.parseValueOrArray(yaml: inputs, key: Keys.inputs, parseValue: Path.init(stringLiteral:))
     } else {
       throw Config.Error.missingEntry(key: Keys.inputs)
     }
 
     filter = yaml[Keys.filter] as? String
-    options = try ConfigEntry.getOptionalField(yaml: yaml, key: Keys.options) ?? [:]
+    options = try Self.getOptionalField(yaml: yaml, key: Keys.options) ?? [:]
 
     if let outputs = yaml[Keys.outputs] {
       do {
@@ -87,8 +83,8 @@ extension ConfigEntry {
   }
 
   static func parseCommandEntry(yaml: Any, cmd: String, logger: (LogLevel, String) -> Void) throws -> [ConfigEntry] {
-    try ConfigEntry.parseValueOrArray(yaml: yaml) {
-      try ConfigEntry(yaml: $0, cmd: cmd, logger: logger)
+    try parseValueOrArray(yaml: yaml) { yaml in
+      try ConfigEntry(yaml: yaml, cmd: cmd, logger: logger)
     }
   }
 
@@ -117,8 +113,8 @@ extension ConfigEntry {
 ///
 extension ConfigEntry {
   func commandLine(forCommand cmd: String) -> [String] {
-    outputs.map {
-      $0.commandLine(forCommand: cmd, inputs: inputs, filter: filter, options: options)
+    outputs.map { output in
+      output.commandLine(forCommand: cmd, inputs: inputs, filter: filter, options: options)
     }
   }
 }

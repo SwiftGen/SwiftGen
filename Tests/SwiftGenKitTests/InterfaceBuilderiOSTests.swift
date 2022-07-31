@@ -1,6 +1,6 @@
 //
 // SwiftGenKit UnitTests
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -60,9 +60,9 @@ final class InterfaceBuilderiOSTests: XCTestCase {
     try parser.searchAndParse(path: Fixtures.resourceDirectory(sub: .interfaceBuilderiOS))
 
     XCTAssert(
-      parser.storyboards.contains {
-        $0.scenes.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName } &&
-        $0.segues.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName }
+      parser.storyboards.contains { storyboard in
+        storyboard.scenes.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName } &&
+        storyboard.segues.contains { $0.moduleIsPlaceholder && $0.module == fakeModuleName }
       }
     )
   }

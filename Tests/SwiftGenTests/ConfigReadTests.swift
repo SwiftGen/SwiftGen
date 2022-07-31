@@ -1,6 +1,6 @@
 //
 // SwiftGen UnitTests
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -24,7 +24,8 @@ final class ConfigReadTests: XCTestCase {
       let stringEntries = config.entries(for: "strings")
       XCTAssertEqual(stringEntries.count, 1)
       guard let entry = stringEntries.first else {
-        return XCTFail("Expected a single strings entry")
+        XCTFail("Expected a single strings entry")
+        return
       }
 
       XCTAssertEqual(entry.inputs, ["Sources1/Folder"])
@@ -32,7 +33,8 @@ final class ConfigReadTests: XCTestCase {
 
       XCTAssertEqual(entry.outputs.count, 1)
       guard let output = entry.outputs.first else {
-        return XCTFail("Expected a single strings entry output")
+        XCTFail("Expected a single strings entry output")
+        return
       }
       XCTAssertEqualDict(
         output.parameters,
@@ -63,7 +65,8 @@ final class ConfigReadTests: XCTestCase {
       XCTAssertEqual(paramsConfig.outputDir, envConfig.outputDir)
       guard let paramsList = paramsConfig.entries(for: "strings").first?.outputs.first?.parameters["baz"] as? [String],
         let envList = envConfig.entries(for: "strings").first?.outputs.first?.parameters["baz"] as? [String] else {
-        return XCTFail("Could not find strings entry output")
+        XCTFail("Could not find strings entry output")
+        return
       }
       XCTAssertEqual(paramsList, envList)
     } catch let error {
@@ -199,12 +202,14 @@ final class ConfigReadTests: XCTestCase {
       let config = try Config(file: file)
 
       guard let entry = config.entries(for: "strings").first else {
-        return XCTFail("Strings entry not found")
+        XCTFail("Strings entry not found")
+        return
       }
 
       XCTAssertEqual(entry.outputs.count, 1)
       guard let output = entry.outputs.first else {
-        return XCTFail("Expected a single strings entry output")
+        XCTFail("Expected a single strings entry output")
+        return
       }
       XCTAssertEqualDict(output.parameters, ["foo": "baz"])
       XCTAssertEqual(output.output, "my-strings.swift")
@@ -220,7 +225,8 @@ final class ConfigReadTests: XCTestCase {
       let config = try Config(file: file)
 
       guard let entry = config.entries(for: "strings").first else {
-        return XCTFail("Strings entry not found")
+        XCTFail("Strings entry not found")
+        return
       }
 
       XCTAssertEqual(entry.inputs, ["Sources2/Folder"])

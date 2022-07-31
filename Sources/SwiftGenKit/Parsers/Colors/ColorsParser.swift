@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -65,10 +65,10 @@ public enum Colors {
     ]
 
     public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
-      self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
+      self.options = try ParserOptionValues(options: options, available: Self.allOptions)
       self.warningHandler = warningHandler
 
-      for parser in Parser.subParsers {
+      for parser in Self.subParsers {
         register(parser: parser)
       }
     }
@@ -79,7 +79,7 @@ public enum Colors {
     }
 
     public static var allOptions: ParserOptionList {
-      ParserOptionList(lists: Parser.subParsers.map { $0.allOptions })
+      ParserOptionList(lists: Self.subParsers.map { $0.allOptions })
     }
 
     public func parse(path: Path, relativeTo parent: Path) throws {

@@ -2,6 +2,105 @@
 
 ---
 
+## 6.6.0
+
+### Changes in core dependencies of SwiftGen
+
+* [StencilSwiftKit 2.10.0](https://github.com/SwiftGen/StencilSwiftKit/blob/2.10.0/CHANGELOG.md)
+* [Stencil 0.15.0](https://github.com/kylef/Stencil/blob/0.15.0/CHANGELOG.md)
+
+### Breaking Changes
+
+* Strings: due to the bugfix for fallback translations, custom `lookupFunction`s will need to accept 3 arguments (table, key and value), up from 2 arguments (table and key).  
+  [David Jennes](https://github.com/djbe)
+  [#964](https://github.com/SwiftGen/SwiftGen/pull/964)
+
+### Deprecations
+
+* The Swift 4 templates are now deprecated. This means we will no longer test if the generated output is valid Swift code. We will still try to keep these up-to-date with context changes.  
+  [David Jennes](https://github.com/djbe)
+  [#955](https://github.com/SwiftGen/SwiftGen/pull/955)
+* Our spacing & trimming "hack" is now considered deprecated, and in the next major version we'll switch to Stencil's new "smart" trimming behaviour (see [Stencil documentation](https://stencil.fuller.li/en/latest/templates.html#whitespace-control) for more information). Our built-in templates have already switched to this modern behaviour, you can try it with your own templates by using the `--experimental-modern-spacing` flag.  
+  [David Jennes](https://github.com/djbe)
+  [#977](https://github.com/SwiftGen/SwiftGen/pull/977)
+* XCAssets: some old properties & parameters are being deprecated. Read the migration guides for more information.  
+  [David Jennes](https://github.com/djbe)
+  [#978](https://github.com/SwiftGen/SwiftGen/pull/978)
+
+### New Features
+
+* Added support for `--quiet/-q` flag, to suppress all logs (except errors).  
+  [Andre113](https://github.com/Andre113)
+  [#823](https://github.com/SwiftGen/SwiftGen/issues/823)
+  [#846](https://github.com/SwiftGen/SwiftGen/pull/846)
+* CoreData: ensure generated classes are `final` when model isn't abstract.  
+  [grsouza](https://github.com/grsouza)
+  [#940](https://github.com/SwiftGen/SwiftGen/pull/940)
+* Added `.artifactbundle` release uploads to support SE-0325 Swift Plugins.  
+  [nicorichard](https://github.com/nicorichard)
+  [#913](https://github.com/SwiftGen/SwiftGen/issues/913)
+  [#926](https://github.com/SwiftGen/SwiftGen/pull/926)
+* Strings: added support for `.strings` files comments. The built-in templates will now use them for comments instead of the translation of a key.  
+  [CraigSiemens](https://github.com/CraigSiemens)
+  [#563](https://github.com/SwiftGen/SwiftGen/issues/563)
+  [#813](https://github.com/SwiftGen/SwiftGen/pull/813)
+* CoreData: support derived attributes.  
+  [David Jennes](https://github.com/djbe)
+  [#928](https://github.com/SwiftGen/SwiftGen/issues/928)
+  [#961](https://github.com/SwiftGen/SwiftGen/pull/961)
+* Added an experimental flag `--experimental-modern-spacing` to enable modern spacing control, see [Stencil documentation](https://stencil.fuller.li/en/latest/templates.html#whitespace-control) for more information. It will disable our own trimming "hack", and enable Stencil's "smart" trimming.  
+  [David Jennes](https://github.com/djbe)
+  [#977](https://github.com/SwiftGen/SwiftGen/pull/977)
+* XCAssets & Fonts: added support for SwiftUI. You can now easily access colors images, symbols and custom fonts from your SwiftUI code.  
+  [David Jennes](https://github.com/djbe)
+  [#979](https://github.com/SwiftGen/SwiftGen/pull/979)
+
+### Bug Fixes
+
+* CoreData: ensure fetched properties use the right class name.  
+  [David Jennes](https://github.com/djbe)
+  [#936](https://github.com/SwiftGen/SwiftGen/issues/936)
+  [#960](https://github.com/SwiftGen/SwiftGen/pull/960)
+* CoreData: now correctly generate code for `OptionSet` attributes by setting the "User Info" key `nonOptionalInit` to true.  
+  [David Jennes](https://github.com/djbe)
+  [#727](https://github.com/SwiftGen/SwiftGen/issues/727)
+  [#965](https://github.com/SwiftGen/SwiftGen/pull/965)
+* Fonts: fix file-type check in sandboxed environments.  
+  [David Jennes](https://github.com/djbe)
+  [#952](https://github.com/SwiftGen/SwiftGen/issues/952)
+  [#967](https://github.com/SwiftGen/SwiftGen/pull/967)
+* Fixed Stencil tags that can refer to other templates, such as the `include` tag.  
+  [David Jennes](https://github.com/djbe)
+  [#950](https://github.com/SwiftGen/SwiftGen/issues/950)
+  [#959](https://github.com/SwiftGen/SwiftGen/pull/959)
+* Strings: now correctly provides the default translation as fallback.  
+  [David Jennes](https://github.com/djbe)
+  [#381](https://github.com/SwiftGen/SwiftGen/issues/381)
+  [#937](https://github.com/SwiftGen/SwiftGen/issues/937)
+  [#964](https://github.com/SwiftGen/SwiftGen/pull/964)
+
+### Internal Changes
+
+* Updated GitHub Actions to use macOS 12.  
+  [David Jennes](https://github.com/djbe)
+  [#956](https://github.com/SwiftGen/SwiftGen/pull/956)
+* Update dependencies such as SwiftLint (and enable some extra rules).  
+  [David Jennes](https://github.com/djbe)
+  [#968](https://github.com/SwiftGen/SwiftGen/pull/968)
+  [#970](https://github.com/SwiftGen/SwiftGen/pull/970)
+* Implement automatic publication using GitHub Actions.  
+  [David Jennes](https://github.com/djbe)
+  [#969](https://github.com/SwiftGen/SwiftGen/pull/969)
+* Switched from [Commander](https://github.com/kylef/Commander) to Swift's own [ArgumentParser](https://github.com/apple/swift-argument-parser) library.  
+  [David Jennes](https://github.com/djbe)
+  [#966](https://github.com/SwiftGen/SwiftGen/pull/966)
+* Updated to Stencil 0.15 and StencilSwiftKit 2.10.  
+  [David Jennes](https://github.com/djbe)
+  [#977](https://github.com/SwiftGen/SwiftGen/pull/977)
+* Added `Difference` library for easier testing of context differences.  
+  [David Jennes](https://github.com/djbe)
+  [#981](https://github.com/SwiftGen/SwiftGen/pull/981)
+
 ## 6.5.1
 
 ### Bug Fixes

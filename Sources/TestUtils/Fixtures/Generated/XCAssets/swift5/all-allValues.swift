@@ -9,6 +9,9 @@
 #elseif os(tvOS) || os(watchOS)
   import UIKit
 #endif
+#if canImport(SwiftUI)
+  import SwiftUI
+#endif
 
 // Deprecated typealiases
 @available(*, deprecated, renamed: "ColorAsset.Color", message: "This typealias will be removed in SwiftGen 7.0")
@@ -28,19 +31,13 @@ internal enum Asset {
       internal static let data = DataAsset(name: "Json/Data")
     }
     internal static let readme = DataAsset(name: "README")
+
     // swiftlint:disable trailing_comma
-    internal static let allResourceGroups: [ARResourceGroupAsset] = [
-    ]
-    internal static let allColors: [ColorAsset] = [
-    ]
+    @available(*, deprecated, message: "All values properties are now deprecated")
     internal static let allDataAssets: [DataAsset] = [
       data,
       Json.data,
       readme,
-    ]
-    internal static let allImages: [ImageAsset] = [
-    ]
-    internal static let allSymbols: [SymbolAsset] = [
     ]
     // swiftlint:enable trailing_comma
   }
@@ -58,13 +55,9 @@ internal enum Asset {
       internal static let tomato = ImageAsset(name: "Round/Tomato")
     }
     internal static let `private` = ImageAsset(name: "private")
+
     // swiftlint:disable trailing_comma
-    internal static let allResourceGroups: [ARResourceGroupAsset] = [
-    ]
-    internal static let allColors: [ColorAsset] = [
-    ]
-    internal static let allDataAssets: [DataAsset] = [
-    ]
+    @available(*, deprecated, message: "All values properties are now deprecated")
     internal static let allImages: [ImageAsset] = [
       Exotic.banana,
       Exotic.mango,
@@ -74,23 +67,9 @@ internal enum Asset {
       Round.tomato,
       `private`,
     ]
-    internal static let allSymbols: [SymbolAsset] = [
-    ]
     // swiftlint:enable trailing_comma
   }
   internal enum Other {
-    // swiftlint:disable trailing_comma
-    internal static let allResourceGroups: [ARResourceGroupAsset] = [
-    ]
-    internal static let allColors: [ColorAsset] = [
-    ]
-    internal static let allDataAssets: [DataAsset] = [
-    ]
-    internal static let allImages: [ImageAsset] = [
-    ]
-    internal static let allSymbols: [SymbolAsset] = [
-    ]
-    // swiftlint:enable trailing_comma
   }
   internal enum Styles {
     internal enum _24Vision {
@@ -102,36 +81,27 @@ internal enum Asset {
       internal static let primary = ColorAsset(name: "Vengo/Primary")
       internal static let tint = ColorAsset(name: "Vengo/Tint")
     }
+
     // swiftlint:disable trailing_comma
-    internal static let allResourceGroups: [ARResourceGroupAsset] = [
-    ]
+    @available(*, deprecated, message: "All values properties are now deprecated")
     internal static let allColors: [ColorAsset] = [
       _24Vision.background,
       _24Vision.primary,
       Vengo.primary,
       Vengo.tint,
     ]
-    internal static let allDataAssets: [DataAsset] = [
-    ]
+    @available(*, deprecated, message: "All values properties are now deprecated")
     internal static let allImages: [ImageAsset] = [
       orange,
-    ]
-    internal static let allSymbols: [SymbolAsset] = [
     ]
     // swiftlint:enable trailing_comma
   }
   internal enum Symbols {
     internal static let exclamationMark = SymbolAsset(name: "Exclamation Mark")
     internal static let plus = SymbolAsset(name: "Plus")
+
     // swiftlint:disable trailing_comma
-    internal static let allResourceGroups: [ARResourceGroupAsset] = [
-    ]
-    internal static let allColors: [ColorAsset] = [
-    ]
-    internal static let allDataAssets: [DataAsset] = [
-    ]
-    internal static let allImages: [ImageAsset] = [
-    ]
+    @available(*, deprecated, message: "All values properties are now deprecated")
     internal static let allSymbols: [SymbolAsset] = [
       exclamationMark,
       plus,
@@ -142,19 +112,13 @@ internal enum Asset {
     internal static let bottles = ARResourceGroupAsset(name: "Bottles")
     internal static let paintings = ARResourceGroupAsset(name: "Paintings")
     internal static let posters = ARResourceGroupAsset(name: "Posters")
+
     // swiftlint:disable trailing_comma
+    @available(*, deprecated, message: "All values properties are now deprecated")
     internal static let allResourceGroups: [ARResourceGroupAsset] = [
       bottles,
       paintings,
       posters,
-    ]
-    internal static let allColors: [ColorAsset] = [
-    ]
-    internal static let allDataAssets: [DataAsset] = [
-    ]
-    internal static let allImages: [ImageAsset] = [
-    ]
-    internal static let allSymbols: [SymbolAsset] = [
     ]
     // swiftlint:enable trailing_comma
   }
@@ -225,6 +189,13 @@ internal final class ColorAsset {
   }
   #endif
 
+  #if canImport(SwiftUI)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  internal private(set) lazy var swiftUIColor: SwiftUI.Color = {
+    SwiftUI.Color(asset: self)
+  }()
+  #endif
+
   fileprivate init(name: String) {
     self.name = name
   }
@@ -243,6 +214,16 @@ internal extension ColorAsset.Color {
     #endif
   }
 }
+
+#if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+internal extension SwiftUI.Color {
+  init(asset: ColorAsset) {
+    let bundle = BundleToken.bundle
+    self.init(asset.name, bundle: bundle)
+  }
+}
+#endif
 
 internal struct DataAsset {
   internal fileprivate(set) var name: String
@@ -304,6 +285,13 @@ internal struct ImageAsset {
     return result
   }
   #endif
+
+  #if canImport(SwiftUI)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  internal var swiftUIImage: SwiftUI.Image {
+    SwiftUI.Image(asset: self)
+  }
+  #endif
 }
 
 internal extension ImageAsset.Image {
@@ -321,6 +309,26 @@ internal extension ImageAsset.Image {
     #endif
   }
 }
+
+#if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+internal extension SwiftUI.Image {
+  init(asset: ImageAsset) {
+    let bundle = BundleToken.bundle
+    self.init(asset.name, bundle: bundle)
+  }
+
+  init(asset: ImageAsset, label: Text) {
+    let bundle = BundleToken.bundle
+    self.init(asset.name, bundle: bundle, label: label)
+  }
+
+  init(decorative asset: ImageAsset) {
+    let bundle = BundleToken.bundle
+    self.init(decorative: asset.name, bundle: bundle)
+  }
+}
+#endif
 
 internal struct SymbolAsset {
   internal fileprivate(set) var name: String
@@ -353,7 +361,34 @@ internal struct SymbolAsset {
     return result
   }
   #endif
+
+  #if canImport(SwiftUI)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  internal var swiftUIImage: SwiftUI.Image {
+    SwiftUI.Image(asset: self)
+  }
+  #endif
 }
+
+#if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+internal extension SwiftUI.Image {
+  init(asset: SymbolAsset) {
+    let bundle = BundleToken.bundle
+    self.init(asset.name, bundle: bundle)
+  }
+
+  init(asset: SymbolAsset, label: Text) {
+    let bundle = BundleToken.bundle
+    self.init(asset.name, bundle: bundle, label: label)
+  }
+
+  init(decorative asset: SymbolAsset) {
+    let bundle = BundleToken.bundle
+    self.init(decorative: asset.name, bundle: bundle)
+  }
+}
+#endif
 
 // swiftlint:disable convenience_type
 private final class BundleToken {

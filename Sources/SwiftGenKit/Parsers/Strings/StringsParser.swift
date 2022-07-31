@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -71,7 +71,7 @@ public enum Strings {
     ]
 
     public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
-      self.options = try ParserOptionValues(options: options, available: Parser.allOptions)
+      self.options = try ParserOptionValues(options: options, available: Self.allOptions)
       self.warningHandler = warningHandler
     }
 
@@ -82,16 +82,16 @@ public enum Strings {
     }
 
     public func parse(path: Path, relativeTo parent: Path) throws {
-      guard let parserType = Parser.subParsers.first(where: { $0.supports(path: path) }) else {
-        throw ParserError.unsupportedFileType(path: path, supported: Parser.subParsers.flatMap { $0.extensions })
+      guard let parserType = Self.subParsers.first(where: { $0.supports(path: path) }) else {
+        throw ParserError.unsupportedFileType(path: path, supported: Self.subParsers.flatMap { $0.extensions })
       }
 
       let name = path.lastComponentWithoutExtension
       let parser = parserType.init(options: options)
 
       var files = tableFiles[name] ?? []
-      let previouslyParsedFile = files.first {
-        $0.path.lastComponent.compare(path.lastComponent, options: .caseInsensitive) == .orderedSame
+      let previouslyParsedFile = files.first { file in
+        file.path.lastComponent.compare(path.lastComponent, options: .caseInsensitive) == .orderedSame
       }
       if let existing = previouslyParsedFile {
         // 2nd time we try to parse a file with that name, e.g. same filename from 2 different .lprojs
@@ -113,8 +113,8 @@ public enum Strings {
     private func collectEntries(in files: [File]) -> [Entry] {
       // sort files by parser priority (higher priority first)
       let files = files.sorted { lhs, rhs in
-        let lhsPriority = Parser.subParsers.firstIndex { $0.supports(path: lhs.path) } ?? 0
-        let rhsPriority = Parser.subParsers.firstIndex { $0.supports(path: rhs.path) } ?? 0
+        let lhsPriority = Self.subParsers.firstIndex { $0.supports(path: lhs.path) } ?? 0
+        let rhsPriority = Self.subParsers.firstIndex { $0.supports(path: rhs.path) } ?? 0
         return lhsPriority < rhsPriority
       }
 

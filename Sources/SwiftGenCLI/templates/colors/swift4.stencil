@@ -27,13 +27,13 @@
   {% for color in colors %}
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#{{color.red}}{{color.green}}{{color.blue}}"></span>
   /// Alpha: {{color.alpha|hexToInt|int255toFloat|percent}} <br/> (0x{{color.red}}{{color.green}}{{color.blue}}{{color.alpha}})
-  {{accessModifier}} static let {{color.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}(rgbaValue: {% call rgbaValue color %})
+  {{accessModifier}} static let {{color.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}(rgbaValue: {%+ call rgbaValue color %})
   {% endfor %}
 {% endmacro %}
   {% if palettes.count > 1 or param.forceFileNameEnum %}
   {% for palette in palettes %}
   {{accessModifier}} enum {{palette.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
-    {% filter indent:2 %}{% call enumBlock palette.colors %}{% endfilter %}
+    {% filter indent:2," ",true %}{% call enumBlock palette.colors %}{% endfilter %}
   }
   {% endfor %}
   {% else %}
@@ -64,9 +64,7 @@ private struct RGBAComponents {
   }
 
   private var components: [CGFloat] {
-    shifts.map {
-      CGFloat($0 & 0xff)
-    }
+    shifts.map { CGFloat($0 & 0xff) }
   }
 
   var normalized: [CGFloat] {

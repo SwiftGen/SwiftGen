@@ -14,14 +14,16 @@ The output context has the following structure:
    - `entities`: `Dictionary` – Map of all the entities in the model, each key being the entity's name, and
      corresponding value is a dictionary described below:
      - `name`: `String` - Entity name
+     - `attributes`: `Array` - List of attributes (see `Entity Attribute`)
      - `className`: `String` - Class name as specified by the user (usually the same as `name`)
      - `isAbstract`: `Bool` - Whether the entity is an abstract or not
+     - `fetchedProperties`: `Array` - List of fetched properties (see `Entity Fetched Property`)
+     - `relationships`: `Array` - List of relationships (see `Entity Relationship`)
+     - `shouldGenerateCode`: `Bool` - Whether the template should generate code or not (Xcode will take care of it)
      - `superEntity`: `String` - Name of the super (parent) entity
+     - `userInfo`: `Dictionary` - Dictionary of keys/values defined by the user
      - `uniquenessConstraints`: `Array<Array<String>>` - List of uniqueness constraints, each being a list of
        attributes
-     - `attributes`: `Array` - List of attributes (see `Entity Attribute`)
-     - `relationships`: `Array` - List of relationships (see `Entity Relationship`)
-     - `fetchedProperties`: `Array` - List of fetched properties (see `Entity Fetched Property`)
    - `fetchRequests`: `Dictionary` - All fetch requests, grouped by entity. Each key will be an entity name, each value
      will be a list of corresponding fetch requests (see `Fetch Request`)
 
@@ -29,11 +31,11 @@ An `Entity Attribute` will have the following properties:
 
  - `name`: `String` - Attribute name
  - `customClassName`: `String` - Custom class name (if one has been defined)
+ - `isDerived`: `Bool` - Whether the property is derived or not.
  - `isIndexed`: `Bool` - Whether the property is indexed or not.
  - `isOptional`: `Bool` - Whether the property is optional or not.
  - `isTransient`: `Bool` - Whether the property is transient or not.
  - `propertyType`: `String` - Property type, will be "attribute"
- - `shouldGenerateCode`: `Bool` - Whether the template should generate code or not (Xcode will take care of it)
  - `type`: `String` - Type of the attribute (Transformable, Binary, Boolean, ...)
  - `typeName`: `String` - Actual attribute type, based on the values for `type`, `usesScalarValueType` and
    `customClassName`
@@ -46,7 +48,7 @@ An `Entity Relationship` will have the following properties:
  - `destinationEntity`: `String` - The name of the destination's entity.
  - `inverseRelationship`: `Dictionary` - The inverse of this relationship:
    - `name`: `String`: The name of the inverse relationship.
-   - `destinationEntity`: `String` - The name of the inverse relationship's entity.
+   - `entityName`: `String` - The name of the inverse relationship's entity.
  - `isIndexed`: `Bool` - Whether the property is indexed or not.
  - `isOptional`: `Bool` - Whether the property is optional or not.
  - `isOrdered`: `Bool` - Whether the relationship is ordered or unordered.

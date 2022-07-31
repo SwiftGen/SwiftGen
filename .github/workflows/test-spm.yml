@@ -8,11 +8,11 @@ on:
 jobs:
   macos:
     name: Test SPM macOS
-    runs-on: macos-11
+    runs-on: macos-12
     steps:
       - 
         name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - 
         name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -20,13 +20,12 @@ jobs:
           bundler-cache: true
       - 
         name: Cache SPM
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: .build
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
-      # TODO: This should run the tests once SPM supports testing an executable
       -
-        name: Build
+        name: Run tests
         run: bundle exec rake spm:test

@@ -34,7 +34,7 @@ custom_rules:
   swiftgen_storyboards:
     name: "SwiftGen Storyboard Scenes"
     regex: '(UIStoryboard\(name: ?"?.+"?, ?bundle:.+\))|(instantiateViewController\(withIdentifier:.+?\))|(instantiateInitialViewController\(\))'
-    message: "Use StoryboardScene.<storyboad>.<scene>.instantiate() instead"
+    message: "Use StoryboardScene.<storyboard>.<scene>.instantiate() instead"
     severity: error
   swiftgen_strings:
     name: "SwiftGen Strings"

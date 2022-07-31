@@ -10,3 +10,7 @@ Key" = "test";
 
 "ending.with." = "Ceci n'est pas une pipe.";
 "..some..dots.and..empty..components.." = "Veni, vidi, vici";
+
+/* A multiline
+   comment */
+"multiline-comment" = "This string should have a multiline comment";

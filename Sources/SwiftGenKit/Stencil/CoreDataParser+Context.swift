@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -45,6 +45,7 @@ extension CoreData.Parser {
     [
       "name": attribute.name,
       "propertyType": "attribute",
+      "isDerived": attribute.isDerived,
       "isIndexed": attribute.isIndexed,
       "isOptional": attribute.isOptional,
       "isTransient": attribute.isTransient,
@@ -66,10 +67,10 @@ extension CoreData.Parser {
       "isToMany": relationship.isToMany,
       "isOrdered": relationship.isOrdered,
       "destinationEntity": relationship.destinationEntity,
-      "inverseRelationship": relationship.inverseRelationship.map {
+      "inverseRelationship": relationship.inverseRelationship.map { relationship in
         [
-          "name": $0.name,
-          "entityName": $0.entityName
+          "name": relationship.name,
+          "entityName": relationship.entityName
         ]
       } as Any,
       "userInfo": relationship.userInfo

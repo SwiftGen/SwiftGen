@@ -1,19 +1,24 @@
 //
 // SwiftGen
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
 import AppKit
 import PathKit
+import Stencil
 import StencilSwiftKit
 import SwiftGenKit
 
 extension Config {
-  public func runCommands(verbose: Bool, logger: (LogLevel, String) -> Void = logMessage) throws {
+  public func runCommands(
+    modernSpacing: Bool,
+    logLevel: CommandLogLevel,
+    logger: (LogLevel, String) -> Void = logMessage
+  ) throws {
     let errors = commands.parallelCompactMap { cmd, entry -> Swift.Error? in
       do {
-        try run(parserCommand: cmd, entry: entry, verbose: verbose, logger: logger)
+        try run(parserCommand: cmd, entry: entry, modernSpacing: modernSpacing, logLevel: logLevel, logger: logger)
         return nil
       } catch {
         return error
@@ -30,25 +35,26 @@ extension Config {
   private func run(
     parserCommand: ParserCLI,
     entry: ConfigEntry,
-    verbose: Bool,
+    modernSpacing: Bool,
+    logLevel: CommandLogLevel,
     logger: (LogLevel, String) -> Void
   ) throws {
     var entry = entry
 
     entry.makeRelativeTo(inputDir: inputDir, outputDir: outputDir)
-    if verbose {
+    if logLevel == .verbose {
       for item in entry.commandLine(forCommand: parserCommand.name) {
         logger(.info, " $ \(item)")
       }
     }
 
     try entry.checkPaths()
-    try entry.run(parserCommand: parserCommand, logger: logger)
+    try entry.run(parserCommand: parserCommand, modernSpacing: modernSpacing, logger: logger)
   }
 }
 
 extension ConfigEntry {
-  func run(parserCommand: ParserCLI, logger: (LogLevel, String) -> Void) throws {
+  func run(parserCommand: ParserCLI, modernSpacing: Bool, logger: (LogLevel, String) -> Void) throws {
     let context: [String: Any] = try withoutActuallyEscaping(logger) { logger in
       let parser = try parserCommand.parserType.init(options: options) { msg, _, _ in
         logger(.warning, msg)
@@ -64,10 +70,8 @@ extension ConfigEntry {
 
     for entryOutput in outputs {
       let templateRealPath = try entryOutput.template.resolvePath(forParser: parserCommand, logger: logger)
-      let template = try StencilSwiftTemplate(
-        templateString: templateRealPath.read(),
-        environment: stencilSwiftEnvironment()
-      )
+      let isBundledTemplate = entryOutput.template.isBundled(forParser: parserCommand)
+      let template = try Template.load(from: templateRealPath, modernSpacing: isBundledTemplate || modernSpacing)
 
       let enriched = try StencilContext.enrich(context: context, parameters: entryOutput.parameters)
       let rendered = try template.render(enriched)

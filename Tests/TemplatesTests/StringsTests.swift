@@ -1,6 +1,6 @@
 //
 // Templates UnitTests
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -45,7 +45,7 @@ final class StringsTests: XCTestCase {
       (
         context: try StencilContext.enrich(
           context: context,
-          parameters: ["lookupFunction=XCTLocFunc(forKey:table:)"]
+          parameters: ["lookupFunction=XCTLocFunc(forKey:table:fallback:)"]
         ),
         suffix: "-lookupFunction"
       ),

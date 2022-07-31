@@ -5,39 +5,39 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-{% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
-  {% for type in types %}
+{% macro parametersBlock types %}
+  {%- for type in types -%}
     ({% call paramTranslate type %})p{{ forloop.counter }}{{ " :" if not forloop.last }}
-  {% endfor %}
-{% endfilter %}{% endmacro %}
-{% macro argumentsBlock types %}{% filter removeNewlines:"leading" %}
-  {% for type in types %}
+  {%- endfor -%}
+{% endmacro %}
+{% macro argumentsBlock types %}
+  {%- for type in types -%}
     p{{forloop.counter}}{{ ", " if not forloop.last }}
-  {% endfor %}
-{% endfilter %}{% endmacro %}
+  {%- endfor -%}
+{% endmacro %}
 {% macro paramTranslate swiftType %}
-  {% if swiftType == "Any" %}
+  {%- if swiftType == "Any" -%}
     id
-  {% elif swiftType == "CChar" %}
+  {%- elif swiftType == "CChar" -%}
     char
-  {% elif swiftType == "Float" %}
+  {%- elif swiftType == "Float" -%}
     float
-  {% elif swiftType == "Int" %}
+  {%- elif swiftType == "Int" -%}
     NSInteger
-  {% elif swiftType == "String" %}
+  {%- elif swiftType == "String" -%}
     id
-  {% elif swiftType == "UnsafePointer<CChar>" %}
+  {%- elif swiftType == "UnsafePointer<CChar>" -%}
     char*
-  {% elif swiftType == "UnsafeRawPointer" %}
+  {%- elif swiftType == "UnsafeRawPointer" -%}
     void*
-  {% else %}
+  {%- else -%}
     objc-h.stencil is missing '{{swiftType}}'
-  {% endif %}
+  {%- endif -%}
 {% endmacro %}
 {% macro emitOneMethod table item %}
 {% for string in item.strings %}
 {% if not param.noComments %}
-{% for line in string.translation|split:"\n" %}
+{% for line in string.comment|default:string.translation|split:"\n" %}
 /// {{line}}
 {% endfor %}
 {% endif %}

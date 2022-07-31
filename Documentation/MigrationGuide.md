@@ -11,7 +11,18 @@ All the migration guides for SwiftGen are spread out over a few files, depending
 
 ----
 
+# Migrating to SwiftGen 6.6
+
+## Deprecation of whitespace behaviour
+
+We're deprecating our old workarounds for issues with Stencil whitespace control, now that Stencil supports granular control on how whitespace is generated and trimmed in template output.
+
+Our built-in templates have been adapted for the new behaviour, and you can preview it in your own custom templates using the `--experimental-modern-spacing` CLI flag. Do note that this behaviour is subject to changes until the release of SwiftGen 7.0.
+
 # Migrating to SwiftGen 6.2
+
+<details>
+<summary>Migration Guide</summary>
 
 ## Deprecation of Application Support lookup for named templates
 
@@ -38,7 +49,9 @@ The command to manage templates (list bundled templates, print their content to 
 ## Template changes
 
 With Xcode dropping support for Swift 3, we've decided to remove the corresponding bundled templates. For these and other template changes, read the [templates Migration Guide](templates/MigrationGuide.md#swiftgen-62-migration-guide).
- 
+
+</details>
+
 # Migrating to SwiftGen 6.0
 
 <details>

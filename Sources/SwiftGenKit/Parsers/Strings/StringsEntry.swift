@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -9,6 +9,7 @@ import PathKit
 
 extension Strings {
   struct Entry {
+    var comment: String?
     let key: String
     let translation: String
     let types: [PlaceholderType]
@@ -18,7 +19,7 @@ extension Strings {
       self.key = key
       self.translation = translation
       self.types = types
-      self.keyStructure = Entry.split(key: key, separator: keyStructureSeparator)
+      self.keyStructure = Self.split(key: key, separator: keyStructureSeparator)
     }
 
     init(key: String, translation: String, keyStructureSeparator: String) throws {

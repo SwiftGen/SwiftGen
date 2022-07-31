@@ -17,21 +17,22 @@ import {{module}}
 
 // MARK: - Storyboard Scenes
 
-// swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-{% macro moduleName item %}{% filter removeNewlines %}
-  {% if item.moduleIsPlaceholder %}
+// swiftlint:disable explicit_type_interface identifier_name line_length prefer_self_in_static_references
+// swiftlint:disable type_body_length type_name
+{% macro moduleName item %}
+  {%- if item.moduleIsPlaceholder -%}
     {{ env.PRODUCT_MODULE_NAME|default:param.module }}
-  {% else %}
+  {%- else -%}
     {{ item.module }}
-  {% endif %}
-{% endfilter %}{% endmacro %}
-{% macro className item %}{% filter removeNewlines %}
-  {% set module %}{% call moduleName item %}{% endset %}
-  {% if module and ( not param.ignoreTargetModule or module != env.PRODUCT_MODULE_NAME and module != param.module ) %}
+  {%- endif -%}
+{% endmacro %}
+{% macro className item %}
+  {%- set module %}{% call moduleName item %}{% endset -%}
+  {%- if module and ( not param.ignoreTargetModule or module != env.PRODUCT_MODULE_NAME and module != param.module ) -%}
     {{module}}.
-  {% endif %}
+  {%- endif -%}
   {{item.type}}
-{% endfilter %}{% endmacro %}
+{%- endmacro %}
 {{accessModifier}} enum {{param.enumName|default:"StoryboardScene"}} {
   {% for storyboard in storyboards %}
   {% set storyboardName %}{{storyboard.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}{% endset %}
@@ -51,7 +52,8 @@ import {{module}}
   }
   {% endfor %}
 }
-// swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
+// swiftlint:enable explicit_type_interface identifier_name line_length prefer_self_in_static_references
+// swiftlint:enable type_body_length type_name
 
 // MARK: - Implementation Details
 
@@ -61,7 +63,7 @@ import {{module}}
 
 {{accessModifier}} extension StoryboardType {
   static var storyboard: {{prefix}}Storyboard {
-    let name = {% if isAppKit %}NSStoryboard.Name({% endif %}self.storyboardName{% if isAppKit %}){% endif %}
+    let name = {%+ if isAppKit %}NSStoryboard.Name({% endif %}self.storyboardName{% if isAppKit %}){% endif +%}
     {% if param.lookupFunction %}
     return {{param.lookupFunction}}(name)
     {% else %}
@@ -75,7 +77,7 @@ import {{module}}
   {{accessModifier}} let identifier: String
 
   {{accessModifier}} func instantiate() -> T {
-    let identifier = {% if isAppKit %}NSStoryboard.SceneIdentifier({% endif %}self.identifier{% if isAppKit %}){% endif %}
+    let identifier = {%+ if isAppKit %}NSStoryboard.SceneIdentifier({% endif %}self.identifier{% if isAppKit %}){% endif +%}
     guard let controller = storyboard.storyboard.instantiate{{controller}}(withIdentifier: identifier) as? T else {
       fatalError("{{controller}} '\(identifier)' is not of the expected class \(T.self).")
     }

@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -68,16 +68,16 @@ extension InterfaceBuilder.Storyboard {
 
     // Scenes
     scenes = Set<InterfaceBuilder.Scene>(
-      document.xpath(XML.sceneXPath).compactMap {
-        guard !XML.placeholderTags.contains($0.tagName ?? "") else { return nil }
-        return InterfaceBuilder.Scene(with: $0, platform: platform)
+      document.xpath(XML.sceneXPath).compactMap { element in
+        guard !XML.placeholderTags.contains(element.tagName ?? "") else { return nil }
+        return InterfaceBuilder.Scene(with: element, platform: platform)
       }
     )
 
     // Segues
     segues = Set<InterfaceBuilder.Segue>(
-      document.xpath(XML.segueXPath).map {
-        InterfaceBuilder.Segue(with: $0, platform: platform)
+      document.xpath(XML.segueXPath).map { element in
+        InterfaceBuilder.Segue(with: element, platform: platform)
       }
     )
   }

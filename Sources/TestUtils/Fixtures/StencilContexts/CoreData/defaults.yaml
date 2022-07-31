@@ -46,7 +46,40 @@ models:
       uniquenessConstraints: []
       userInfo: {}
     ChildEntity:
-      attributes: []
+      attributes:
+      - customClassName: ""
+        isDerived: true
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "canonicalOptionalString"
+        propertyType: "attribute"
+        type: "String"
+        typeName: "String"
+        userInfo: {}
+        usesScalarValueType: false
+      - customClassName: ""
+        isDerived: true
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "derivedCount"
+        propertyType: "attribute"
+        type: "Integer 64"
+        typeName: "Int64"
+        userInfo: {}
+        usesScalarValueType: true
+      - customClassName: ""
+        isDerived: true
+        isIndexed: false
+        isOptional: false
+        isTransient: false
+        name: "now"
+        propertyType: "attribute"
+        type: "Double"
+        typeName: "Double"
+        userInfo: {}
+        usesScalarValueType: true
       className: "ChildEntity"
       fetchedProperties: []
       isAbstract: false
@@ -71,6 +104,7 @@ models:
     MainEntity:
       attributes:
       - customClassName: "NSAttributedString"
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -81,6 +115,7 @@ models:
         userInfo: {}
         usesScalarValueType: false
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -92,6 +127,7 @@ models:
           key: "value"
         usesScalarValueType: false
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: false
         isTransient: false
@@ -102,6 +138,7 @@ models:
         userInfo: {}
         usesScalarValueType: true
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -112,6 +149,7 @@ models:
         userInfo: {}
         usesScalarValueType: false
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -122,6 +160,7 @@ models:
         userInfo: {}
         usesScalarValueType: false
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: false
         isTransient: false
@@ -132,6 +171,7 @@ models:
         userInfo: {}
         usesScalarValueType: true
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: false
         isTransient: false
@@ -142,6 +182,7 @@ models:
         userInfo: {}
         usesScalarValueType: true
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: false
         isTransient: false
@@ -152,6 +193,7 @@ models:
         userInfo: {}
         usesScalarValueType: true
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: false
         isTransient: false
@@ -162,6 +204,7 @@ models:
         userInfo: {}
         usesScalarValueType: true
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: false
         isTransient: false
@@ -172,6 +215,7 @@ models:
         userInfo: {}
         usesScalarValueType: true
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -184,6 +228,21 @@ models:
           unwrapOptional: true
         usesScalarValueType: true
       - customClassName: ""
+        isDerived: false
+        isIndexed: false
+        isOptional: true
+        isTransient: false
+        name: "integerOptionSet"
+        propertyType: "attribute"
+        type: "Integer 16"
+        typeName: "Int16"
+        userInfo:
+          RawType: "IntegerOptionSet"
+          nonOptionalInit: true
+          unwrapOptional: true
+        usesScalarValueType: true
+      - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -194,6 +253,7 @@ models:
         userInfo: {}
         usesScalarValueType: true
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -204,6 +264,7 @@ models:
         userInfo: {}
         usesScalarValueType: true
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: false
         isTransient: false
@@ -214,6 +275,7 @@ models:
         userInfo: {}
         usesScalarValueType: true
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -224,6 +286,7 @@ models:
         userInfo: {}
         usesScalarValueType: true
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: false
         isTransient: false
@@ -234,6 +297,7 @@ models:
         userInfo: {}
         usesScalarValueType: true
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -244,6 +308,7 @@ models:
         userInfo: {}
         usesScalarValueType: true
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -254,6 +319,7 @@ models:
         userInfo: {}
         usesScalarValueType: false
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: false
         isTransient: false
@@ -264,6 +330,7 @@ models:
         userInfo: {}
         usesScalarValueType: false
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -275,6 +342,7 @@ models:
           RawType: "StringEnum"
         usesScalarValueType: false
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -285,6 +353,7 @@ models:
         userInfo: {}
         usesScalarValueType: false
       - customClassName: "CustomArray"
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -295,6 +364,7 @@ models:
         userInfo: {}
         usesScalarValueType: false
       - customClassName: "CustomPolyline"
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -305,6 +375,7 @@ models:
         userInfo: {}
         usesScalarValueType: false
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: true
@@ -315,6 +386,7 @@ models:
         userInfo: {}
         usesScalarValueType: false
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -325,6 +397,7 @@ models:
         userInfo: {}
         usesScalarValueType: false
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -334,7 +407,7 @@ models:
         typeName: "UUID"
         userInfo: {}
         usesScalarValueType: false
-      className: "MainEntity"
+      className: "CustomMainEntity"
       fetchedProperties:
       - fetchRequest:
           entity: "NewEntity"
@@ -401,6 +474,7 @@ models:
     NewEntity:
       attributes:
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: true
         isTransient: false
@@ -410,7 +484,7 @@ models:
         typeName: "UUID"
         userInfo: {}
         usesScalarValueType: false
-      className: "NewEntity"
+      className: "CheckedNewEntity"
       fetchedProperties: []
       isAbstract: false
       name: "NewEntity"
@@ -423,6 +497,7 @@ models:
     SecondaryEntity:
       attributes:
       - customClassName: ""
+        isDerived: false
         isIndexed: false
         isOptional: false
         isTransient: false

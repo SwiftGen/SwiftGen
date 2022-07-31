@@ -11,7 +11,9 @@ This directory contains documentation for various topics related to SwiftGen, su
 
 #### Integrating SwiftGen with other tooling
 
-* [Integrate SwiftGen in your Xcode projects as a Script Build Phase](Articles/Xcode-Integration.md)
+* Integrate SwiftGen in your [SPM projects as a build plugin/command](https://github.com/SwiftGen/SwiftGenPlugin)
+* Integrate SwiftGen in your [Xcode projects as a Script Build Phase](Articles/Xcode-Integration.md)
+* Learn how to use SwiftGen [in your custom Swift Build-Tool/Command Plugin](Articles/SwiftGen-Build-Tool-Package-Plugins.md).
 * [Use SwiftLint to generate warnings about code not using SwiftGen-generated constants](Articles/SwiftLint-Integration.md)
 * An alternative way to [integrate SwiftGen on your CI](Articles/Making-CI-check-SwiftGen-changes.md)
 

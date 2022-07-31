@@ -7,4 +7,4 @@ updates:
       interval: "daily"
     target-branch: "develop"
     commit-message:
-      prefix: "#trivial Dependabot"
+      prefix: "#trivial Dependabot "

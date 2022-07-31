@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -25,7 +25,7 @@ extension InterfaceBuilder {
     var type: String {
       if let customClass = customClass {
         return customClass
-      } else if let type = Scene.tagTypeMap[tag]?.type {
+      } else if let type = Self.tagTypeMap[tag]?.type {
         return type
       } else {
         return "\(platform.prefix)\(tag.uppercasedFirst())"
@@ -35,7 +35,7 @@ extension InterfaceBuilder {
     var module: String? {
       if let customModule = customModule {
         return customModule
-      } else if let type = Scene.tagTypeMap[tag]?.module {
+      } else if let type = Self.tagTypeMap[tag]?.module {
         return type
       } else if customClass == nil {
         return platform.module

@@ -1,6 +1,6 @@
 //
 // SwiftGen
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -43,8 +43,8 @@ extension ConfigEntryOutput {
   }
 
   static func parseCommandOutput(yaml: Any, logger: (LogLevel, String) -> Void) throws -> [ConfigEntryOutput] {
-    try ConfigEntry.parseValueOrArray(yaml: yaml) {
-      try ConfigEntryOutput(yaml: $0, logger: logger)
+    try ConfigEntry.parseValueOrArray(yaml: yaml) { yaml in
+      try ConfigEntryOutput(yaml: yaml, logger: logger)
     }
   }
 }

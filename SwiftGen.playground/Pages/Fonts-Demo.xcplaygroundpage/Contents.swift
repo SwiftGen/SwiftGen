@@ -60,3 +60,18 @@ let title = FontFamily.ZapfDingbats.regular.font(size: 20.0)
 
 let bodyHuge = FontFamily.Avenir.black.font(size: 100.0)
 let titleTiny = UIFont(font: FontFamily.ZapfDingbats.regular, size: 8.0)
+
+// SwiftUI
+
+import SwiftUI
+import PlaygroundSupport
+
+struct ContentView: View {
+  var body: some View {
+    Text("Hello World")
+      .font(FontFamily.Avenir.book.swiftUIFont(size: 18, relativeTo: .body))
+  }
+}
+
+PlaygroundPage.current.setLiveView(ContentView())
+

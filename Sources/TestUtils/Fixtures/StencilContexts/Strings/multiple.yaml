@@ -10,12 +10,20 @@ tables:
         - "Int"
     - name: "bananas"
       strings:
-      - key: "bananas.owner"
+      - comment: "A comment with no space above it"
+        key: "bananas.owner"
         name: "owner"
         translation: "Those %d bananas belong to %@."
         types:
         - "Int"
         - "String"
+    - name: "key1"
+      strings:
+      - comment: "Same as \"key1\" = \"value1\"; but in the context of user not logged
+          in"
+        key: "key1.anonymous"
+        name: "anonymous"
+        translation: "value2"
     - children:
       - name: "placeholders"
         strings:
@@ -95,13 +103,25 @@ tables:
           name: "HEADER_TITLE"
           translation: "User Profile Settings"
       name: "settings"
+    - children:
+      - name: "/*happens*/"
+        strings:
+        - comment: "some comment"
+          key: "what./*happens*/.here"
+          name: "here"
+          translation: "hello world! /* still in string */"
+      name: "what"
     strings:
     - key: "alert__message"
       name: "alert__message"
       translation: "Some alert body there"
-    - key: "alert__title"
+    - comment: "Title for an alert"
+      key: "alert__title"
       name: "alert__title"
       translation: "Title of the alert"
+    - key: "key1"
+      name: "key1"
+      translation: "value1"
     - key: "ObjectOwnership"
       name: "ObjectOwnership"
       translation: "These are %3$@'s %1$d %2$@."
@@ -114,7 +134,7 @@ tables:
       translation: "This is a %% character."
     - key: "private"
       name: "private"
-      translation: "Hello, my name is %@ and I'm %d"
+      translation: "Hello, my name is \"%@\" and I'm %d"
       types:
       - "String"
       - "Int"
@@ -155,6 +175,10 @@ tables:
     - key: "multiLine\\nKey"
       name: "multiLine\nKey"
       translation: "test"
+    - comment: "A multiline\\n   comment"
+      key: "multiline-comment"
+      name: "multiline-comment"
+      translation: "This string should have a multiline comment"
     - key: "MULTILINE2"
       name: "MULTILINE2"
       translation: "another\\nmulti\\n    line"

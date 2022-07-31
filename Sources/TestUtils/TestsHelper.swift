@@ -1,6 +1,6 @@
 //
 // SwiftGenKit UnitTests
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -9,33 +9,7 @@ import SwiftGenCLI
 import SwiftGenKit
 import XCTest
 
-let colorCode: (String) -> String =
-  ProcessInfo().environment["XcodeColors"] == "YES" ? { "\u{001b}[\($0);" } : { _ in "" }
-let (msgColor, reset) = (colorCode("fg250,0,0"), colorCode(""))
-let okCode = (
-  num: colorCode("fg127,127,127"),
-  code: colorCode("")
-)
-let koCode = (
-  num: colorCode("fg127,127,127") + colorCode("bg127,0,0"),
-  code: colorCode("fg250,250,250") + colorCode("bg127,0,0")
-)
-
-public func XCTAssertEqualDict(
-  _ result: [String: Any],
-  _ expected: [String: Any],
-  file: StaticString = #file,
-  line: UInt = #line
-) {
-  XCTAssertTrue(
-    NSDictionary(dictionary: result).isEqual(to: expected),
-    "expected \(expected), got \(result)",
-    file: file,
-    line: line
-  )
-}
-
-// MARK: Safe access to fixtures
+// MARK: - Safe access to fixtures
 
 public class Fixtures {
   public enum Directory: String {
@@ -91,14 +65,9 @@ public class Fixtures {
     return result
   }
 
-  static func template(for name: String, sub: Directory) -> String {
-    do {
-      // Directly load from SwiftGenFramework bundle
-      let path = Path.bundledTemplates + sub.rawValue.lowercased() + name
-      return try path.read()
-    } catch let error {
-      fatalError("Unable to load fixture \(name)'s content: \(error)")
-    }
+  static func template(for name: String, sub: Directory) -> Path {
+    // Directly load from SwiftGenFramework bundle
+    return Path.bundledTemplates + sub.rawValue.lowercased() + name
   }
 
   static func output(template: String, variation: String, sub: Directory) -> String {

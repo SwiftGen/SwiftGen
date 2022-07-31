@@ -42,6 +42,7 @@ The output context has the following structure:
          (useful to do recursion when splitting keys against `.` for structured templates)
        - `key`  : `String` — the full translation key, as it appears in the strings file
        - `translation`: `String` — the translation for that key in the strings file
+       - `comment`: `String` — the full comment, if it is present in the strings file
        - `types`: `Array<String>` — defined only if localized string has parameter placeholders like `%d` and `%@` etc.
           Contains a list of types like `"String"`, `"Int"`, etc
 
@@ -56,6 +57,7 @@ tables:
       - key: "apples.count"
         name: "count"
         translation: "You have %d apples"
+        comment: "The number of apples the user has."
         types:
         - "Int"
     - name: "bananas"
@@ -63,6 +65,7 @@ tables:
       - key: "bananas.owner"
         name: "owner"
         translation: "Those %d bananas belong to %@."
+        comment: "The number of bananas another user has. Contains the number and the owners name."
         types:
         - "Int"
         - "String"

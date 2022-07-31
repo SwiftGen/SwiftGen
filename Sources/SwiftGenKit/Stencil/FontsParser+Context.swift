@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -25,8 +25,8 @@ extension Fonts.Parser {
               "style": font.style
             ]
           }
-          .sorted {
-            $0["name"] ?? "" < $1["name"] ?? ""
+          .sorted { lhs, rhs in
+            lhs["name"] ?? "" < rhs["name"] ?? ""
           }
 
         // Family
@@ -35,8 +35,8 @@ extension Fonts.Parser {
           "fonts": fonts
         ]
       }
-      .sorted {
-        $0["name"] as? String ?? "" < $1["name"] as? String ?? ""
+      .sorted { lhs, rhs in
+        lhs["name"] as? String ?? "" < rhs["name"] as? String ?? ""
       }
 
     return [

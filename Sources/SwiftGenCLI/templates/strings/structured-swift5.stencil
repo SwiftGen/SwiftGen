@@ -5,54 +5,52 @@
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 import Foundation
 
-// swiftlint:disable superfluous_disable_command file_length implicit_return
+// swiftlint:disable superfluous_disable_command file_length implicit_return prefer_self_in_static_references
 
 // MARK: - Strings
 
-{% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
-  {% for type in types %}
-    {% if type == "String" %}
+{% macro parametersBlock types %}
+  {%- for type in types -%}
+    {%- if type == "String" -%}
     _ p{{forloop.counter}}: Any
-    {% else %}
+    {%- else -%}
     _ p{{forloop.counter}}: {{type}}
-    {% endif %}
+    {%- endif -%}
     {{ ", " if not forloop.last }}
-  {% endfor %}
-{% endfilter %}{% endmacro %}
-{% macro argumentsBlock types %}{% filter removeNewlines:"leading" %}
-  {% for type in types %}
-    {% if type == "String" %}
+  {%- endfor -%}
+{% endmacro %}
+{% macro argumentsBlock types %}
+  {%- for type in types -%}
+    {%- if type == "String" -%}
     String(describing: p{{forloop.counter}})
-    {% elif type == "UnsafeRawPointer" %}
+    {%- elif type == "UnsafeRawPointer" -%}
     Int(bitPattern: p{{forloop.counter}})
-    {% else %}
+    {%- else -%}
     p{{forloop.counter}}
-    {% endif %}
+    {%- endif -%}
     {{ ", " if not forloop.last }}
-  {% endfor %}
-{% endfilter %}{% endmacro %}
+  {%- endfor -%}
+{% endmacro %}
 {% macro recursiveBlock table item %}
   {% for string in item.strings %}
   {% if not param.noComments %}
-  {% for line in string.translation|split:"\n" %}
+  {% for line in string.comment|default:string.translation|split:"\n" %}
   /// {{line}}
   {% endfor %}
   {% endif %}
   {% if string.types %}
   {{accessModifier}} static func {{string.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}({% call parametersBlock string.types %}) -> String {
-    return {{enumName}}.tr("{{table}}", "{{string.key}}", {% call argumentsBlock string.types %})
+    return {{enumName}}.tr("{{table}}", "{{string.key}}", {%+ call argumentsBlock string.types %}, fallback: #"{{string.translation}}"#)
   }
   {% elif param.lookupFunction %}
-  {# custom localization function is mostly used for in-app lang selection, so we want the loc to be recomputed at each call for those (hence the computed var) #}
-  {{accessModifier}} static var {{string.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: String { return {{enumName}}.tr("{{table}}", "{{string.key}}") }
+  {{accessModifier}} static var {{string.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: String { return {{enumName}}.tr("{{table}}", "{{string.key}}", fallback: #"{{string.translation}}"#) }
   {% else %}
-  {{accessModifier}} static let {{string.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{table}}", "{{string.key}}")
+  {{accessModifier}} static let {{string.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{table}}", "{{string.key}}", fallback: #"{{string.translation}}"#)
   {% endif %}
   {% endfor %}
   {% for child in item.children %}
-
   {{accessModifier}} enum {{child.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
-    {% filter indent:2 %}{% call recursiveBlock table child %}{% endfilter %}
+    {% filter indent:2," ",true %}{% call recursiveBlock table child %}{% endfilter %}
   }
   {% endfor %}
 {% endmacro %}
@@ -63,7 +61,7 @@ import Foundation
   {% if tables.count > 1 or param.forceFileNameEnum %}
   {% for table in tables %}
   {{accessModifier}} enum {{table.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
-    {% filter indent:2 %}{% call recursiveBlock table.name table.levels %}{% endfilter %}
+    {% filter indent:2," ",true %}{% call recursiveBlock table.name table.levels %}{% endfilter %}
   }
   {% endfor %}
   {% else %}
@@ -76,11 +74,11 @@ import Foundation
 // MARK: - Implementation Details
 
 extension {{enumName}} {
-  private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
+  private static func tr(_ table: String, _ key: String, _ args: CVarArg..., fallback value: String) -> String {
     {% if param.lookupFunction %}
-    let format = {{ param.lookupFunction }}(key, table)
+    let format = {{ param.lookupFunction }}(key, table, value)
     {% else %}
-    let format = {{param.bundle|default:"BundleToken.bundle"}}.localizedString(forKey: key, value: nil, table: table)
+    let format = {{param.bundle|default:"BundleToken.bundle"}}.localizedString(forKey: key, value: value, table: table)
     {% endif %}
     return String(format: format, locale: Locale.current, arguments: args)
   }

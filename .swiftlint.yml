@@ -1,6 +1,8 @@
-swiftlint_version: 0.44.0
+swiftlint_version: 0.48.0
 
 opt_in_rules:
+ - accessibility_label_for_image
+ - anonymous_argument_in_multiline_closure
  - anyobject_protocol
  - array_init
  - attributes
@@ -32,6 +34,7 @@ opt_in_rules:
  - first_where
  - flatmap_over_map_reduce
  - force_unwrapping
+ - ibinspectable_in_extension
  - identical_operands
  - implicit_return
  - implicitly_unwrapped_optional
@@ -57,8 +60,10 @@ opt_in_rules:
  - optional_enum_case_matching
  - overridden_super_call
  - override_in_extension
+ - prefer_self_in_static_references
  - prefer_self_type_over_type_of_self
  - prefer_zero_over_explicit_init
+ - prefixed_toplevel_constant
  - private_action
  - private_outlet
  - private_subject
@@ -66,6 +71,9 @@ opt_in_rules:
  - raw_value_for_camel_cased_codable_enum
  - reduce_into
  - redundant_nil_coalescing
+ - required_enum_case
+ - return_value_from_void_function
+ - single_test_class
  - sorted_first_last
  - sorted_imports
  - static_operator
@@ -81,6 +89,8 @@ opt_in_rules:
  - vertical_parameter_alignment_on_call
  - vertical_whitespace_closing_braces
  - vertical_whitespace_opening_braces
+ - void_function_in_ternary
+ - weak_delegate
  - xct_specific_matcher
  - yoda_condition
 
@@ -101,7 +111,7 @@ file_header:
   required_pattern: |
                     \/\/(
                     \/\/ (SwiftGen(Kit)?|.* UnitTests)
-                    \/\/ Copyright © 2020 SwiftGen
+                    \/\/ Copyright © 2022 SwiftGen
                     \/\/ MIT Licence
                     \/\/| Generated using SwiftGen — https:\/\/github.com\/SwiftGen\/SwiftGen)
 

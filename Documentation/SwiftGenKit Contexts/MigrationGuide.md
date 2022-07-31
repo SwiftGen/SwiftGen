@@ -1,4 +1,15 @@
+# SwiftGen 6.6.0 Migration Guide
+
+## Changes for template writers
+
+### XCAssets
+
+The `resourceCount` variable is now deprecated.
+
 # SwiftGen 6.2.1 Migration Guide
+
+<details>
+<summary>Migration Guide</summary>
 
 ## Changes for template writers
 
@@ -7,6 +18,8 @@
 The `documents` variable of each "file" is now considered as deprecated, it's replacement is `document`. The `documents` variable is still available, but will be removed in SwiftGen 7.0.
 
 Initially we provided `documents` to keep the (context) data model the same for the JSON, Plist and YAML parsers, even though only YAML files can have multiple documents in one file. We've decided to forgo that approach, as our contexts should match the underlying content.
+
+</details>
 
 # SwiftGen 6.0 Migration Guide
 

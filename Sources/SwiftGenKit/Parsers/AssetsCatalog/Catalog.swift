@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -26,8 +26,8 @@ extension AssetsCatalog.Catalog {
   /// This method recursively parses a directory structure, processing each folder (files are ignored).
   ///
   static func process(folder: Path, withPrefix prefix: String = "") -> [AssetsCatalogEntry] {
-    (try? folder.children().sorted(by: <).compactMap {
-      AssetsCatalog.Entry.parse(path: $0, withPrefix: prefix)
+    (try? folder.children().sorted(by: <).compactMap { path in
+      AssetsCatalog.Entry.parse(path: path, withPrefix: prefix)
     }) ?? []
   }
 }

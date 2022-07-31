@@ -1,6 +1,6 @@
 //
 // SwiftGen
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -71,11 +71,11 @@ public struct AnyCodable: Codable {
     case let value as [String: AnyCodable]:
       try container.encode(value)
     case let value as [String: Any]:
-      try container.encode(value.mapValues(AnyCodable.init))
+      try container.encode(value.mapValues(Self.init))
     case let value as [AnyCodable]:
       try container.encode(value)
     case let value as [Any]:
-      try container.encode(value.map(AnyCodable.init))
+      try container.encode(value.map(Self.init))
     case let value as Bool:
       try container.encode(value)
     case let value as String:

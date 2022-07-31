@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -44,11 +44,11 @@ public struct ParserOptionList {
   /// - Parameter dict: the dictionary to verify
   /// - Returns: a list of messages if there are any issues
   public func lint(options dict: [String: Any]) -> [String] {
-    let unknownKeys = Set(dict.keys).subtracting(knownKeys).map {
-      "\($0) is not a valid option."
+    let unknownKeys = Set(dict.keys).subtracting(knownKeys).map { key in
+      "\(key) is not a valid option."
     }
-    let invalidValues = options.filter { !$0.check(dict: dict) }.map {
-      "Invalid value for option \($0)."
+    let invalidValues = options.filter { !$0.check(dict: dict) }.map { option in
+      "Invalid value for option \(option)."
     }
 
     return unknownKeys + invalidValues

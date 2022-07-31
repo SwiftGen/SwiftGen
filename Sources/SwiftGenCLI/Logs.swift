@@ -1,12 +1,18 @@
 //
 // SwiftGen
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
 import Foundation
 
 // MARK: Printing on stderr
+
+public enum CommandLogLevel {
+  case quiet, `default`, verbose
+}
+
+public var commandLogLevel: CommandLogLevel = .default
 
 public enum LogLevel {
   case info, warning, error
@@ -32,7 +38,7 @@ enum ANSIColor: UInt8, CustomStringConvertible {
   func format(_ string: String) -> String {
     if let termType = getenv("TERM"), String(cString: termType).lowercased() != "dumb" &&
       isatty(fileno(stdout)) != 0 {
-      return "\(self)\(string)\(ANSIColor.reset)"
+      return "\(self)\(string)\(Self.reset)"
     } else {
       return string
     }
@@ -42,19 +48,23 @@ enum ANSIColor: UInt8, CustomStringConvertible {
 // Based on https://github.com/realm/SwiftLint/blob/0.39.2/Source/SwiftLintFramework/Extensions/QueuedPrint.swift
 
 public func logMessage(_ level: LogLevel, _ string: CustomStringConvertible) {
-  logQueue.async {
-    switch level {
-    case .info:
+  kLogQueue.async {
+    switch (level, commandLogLevel) {
+    case (.info, .quiet):
+      break
+    case (.info, _):
       fputs(ANSIColor.green.format("\(string)\n"), stdout)
-    case .warning:
+    case (.warning, .quiet):
+      break
+    case (.warning, _):
       fputs(ANSIColor.yellow.format("swiftgen: warning: \(string)\n"), stderr)
-    case .error:
+    case (.error, _):
       fputs(ANSIColor.red.format("swiftgen: error: \(string)\n"), stderr)
     }
   }
 }
 
-private let logQueue: DispatchQueue = {
+private let kLogQueue: DispatchQueue = {
   let queue = DispatchQueue(
     label: "swiftgen.log.queue",
     qos: .userInteractive,
@@ -70,19 +80,3 @@ private let logQueue: DispatchQueue = {
 
   return queue
 }()
-
-public struct ErrorPrettifier: Error, CustomStringConvertible {
-  let nsError: NSError
-
-  public var description: String {
-    "\(nsError.localizedDescription) (\(nsError.domain) code \(nsError.code))"
-  }
-
-  public static func execute(closure: () throws -> Void ) rethrows {
-    do {
-      try closure()
-    } catch let error as NSError where error.domain == NSCocoaErrorDomain {
-      throw ErrorPrettifier(nsError: error)
-    }
-  }
-}

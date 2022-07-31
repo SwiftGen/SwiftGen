@@ -30,7 +30,7 @@ class Platform
     'watchOS' => Platform.new('watchos', 'armv7k-apple-watchos2.0')
   }.freeze
 
-  SWIFT_VERSIONS = [4, 4.2, 5].freeze
+  SWIFT_VERSIONS = [5].freeze
 end
 
 # Helper methods to manipulate Swift Modules

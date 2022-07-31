@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -27,6 +27,10 @@ extension Strings.Parser {
         "key": entry.key.newlineEscaped,
         "translation": entry.translation.newlineEscaped
       ]
+
+      if let comment = entry.comment {
+        result["comment"] = comment.newlineEscaped
+      }
 
       if !entry.types.isEmpty {
         result["types"] = entry.types.map { $0.rawValue }

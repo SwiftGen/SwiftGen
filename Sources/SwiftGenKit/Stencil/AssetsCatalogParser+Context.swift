@@ -1,6 +1,6 @@
 //
 // SwiftGenKit
-// Copyright © 2020 SwiftGen
+// Copyright © 2022 SwiftGen
 // MIT Licence
 //
 
@@ -24,6 +24,7 @@ extension AssetsCatalog.Parser {
 
     return [
       "catalogs": catalogs,
+      // Deprecated: remains for legacy/compatibility reasons; will be removed in 7.0
       "resourceCount": AssetsCatalog.Parser.countTypes(catalogs: self.catalogs)
     ]
   }
