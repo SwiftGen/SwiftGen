@@ -139,7 +139,7 @@ tables:
       translation: "Title of the alert"
     - key: "key1"
       name: "key1"
-      translation: "value1"
+      translation: "value1\tvalue"
     - key: "ObjectOwnership"
       name: "ObjectOwnership"
       translation: "These are %3$@'s %1$d %2$@."

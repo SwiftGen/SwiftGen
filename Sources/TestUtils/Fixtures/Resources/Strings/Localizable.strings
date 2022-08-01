@@ -5,7 +5,7 @@
 "percent" = "This is a %% character.";
 "private" = "Hello, my name is \"%@\" and I'm %d";
 
-"key1" = "value1";
+"key1" = "value1\tvalue";
 /* Same as "key1" = "value1"; but in the context of user not logged in */
 "key1.anonymous" = "value2";
 
