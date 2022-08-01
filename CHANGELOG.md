@@ -18,7 +18,11 @@ _None_
 
 ### Internal Changes
 
-_None_
+* Strings: correctly handle strings containing `\t` (tabs) and `"#`.  
+  [David Jennes](https://github.com/djbe)
+  [#985](https://github.com/SwiftGen/SwiftGen/issues/985)
+  [#986](https://github.com/SwiftGen/SwiftGen/issues/986)
+  [#988](https://github.com/SwiftGen/SwiftGen/pull/988)
 
 ## 6.6.1
 
