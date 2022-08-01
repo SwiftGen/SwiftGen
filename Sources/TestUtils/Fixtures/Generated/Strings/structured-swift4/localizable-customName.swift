@@ -14,8 +14,8 @@ internal enum XCTLoc {
   internal static let alertMessage = XCTLoc.tr("Localizable", "alert__message", fallback: "Some alert body there")
   /// Title for an alert
   internal static let alertTitle = XCTLoc.tr("Localizable", "alert__title", fallback: "Title of the alert")
-  /// value1
-  internal static let key1 = XCTLoc.tr("Localizable", "key1", fallback: "value1")
+  /// value1	value
+  internal static let key1 = XCTLoc.tr("Localizable", "key1", fallback: "value1\tvalue")
   /// These are %3$@'s %1$d %2$@.
   internal static func objectOwnership(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
     return XCTLoc.tr("Localizable", "ObjectOwnership", p1, String(describing: p2), String(describing: p3), fallback: "These are %3$@'s %1$d %2$@.")

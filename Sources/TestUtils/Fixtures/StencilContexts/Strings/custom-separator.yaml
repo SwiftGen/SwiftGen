@@ -33,7 +33,7 @@ tables:
       - "String"
     - key: "key1"
       name: "key1"
-      translation: "value1"
+      translation: "value1\tvalue"
     - comment: "Same as \"key1\" = \"value1\"; but in the context of user not logged
         in"
       key: "key1.anonymous"

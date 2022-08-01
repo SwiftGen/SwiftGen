@@ -14,8 +14,8 @@ internal enum L10n {
   internal static var alertMessage: String { return L10n.tr("Localizable", "alert__message", fallback: "Some alert body there") }
   /// Title for an alert
   internal static var alertTitle: String { return L10n.tr("Localizable", "alert__title", fallback: "Title of the alert") }
-  /// value1
-  internal static var key1: String { return L10n.tr("Localizable", "key1", fallback: "value1") }
+  /// value1	value
+  internal static var key1: String { return L10n.tr("Localizable", "key1", fallback: "value1\tvalue") }
   /// These are %3$@'s %1$d %2$@.
   internal static func objectOwnership(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
     return L10n.tr("Localizable", "ObjectOwnership", p1, String(describing: p2), String(describing: p3), fallback: "These are %3$@'s %1$d %2$@.")

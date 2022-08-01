@@ -33,7 +33,7 @@ static NSString* tr(NSString *tableName, NSString *key, NSString *value, ...) {
     return tr(@"Localizable", @"alert__title", @"Title of the alert");
 }
 + (NSString*)key1 {
-    return tr(@"Localizable", @"key1", @"value1");
+    return tr(@"Localizable", @"key1", @"value1\tvalue");
 }
 + (NSString*)objectOwnershipWithValues:(NSInteger)p1 :(id)p2 :(id)p3
 {
