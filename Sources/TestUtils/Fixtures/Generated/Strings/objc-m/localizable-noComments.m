@@ -27,7 +27,7 @@ static NSString* tr(NSString *tableName, NSString *key, NSString *value, ...) {
 
 @implementation Localizable : NSObject
 + (NSString*)alertMessage {
-    return tr(@"Localizable", @"alert__message", @"Some alert body there");
+    return tr(@"Localizable", @"alert__message", @"Some /*alert body there");
 }
 + (NSString*)alertTitle {
     return tr(@"Localizable", @"alert__title", @"Title of the alert");
@@ -69,8 +69,8 @@ static NSString* tr(NSString *tableName, NSString *key, NSString *value, ...) {
 {
     return tr(@"Localizable", @"many.placeholders.zero", @"%@ %d %0$@ %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d", p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
 }
-+ (NSString*)settingsNavigationBarSelf {
-    return tr(@"Localizable", @"settings.navigation-bar.self", @"Some Reserved Keyword there");
++ (NSString*)settingsNavigationBarSelf_️ {
+    return tr(@"Localizable", @"settings.navigation-bar.self♦️", @"Some Reserved Keyword there👍🏽");
 }
 + (NSString*)settingsNavigationBarTitleDeeperThanWeCanHandleNoReallyThisIsDeep {
     return tr(@"Localizable", @"settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep", @"DeepSettings");

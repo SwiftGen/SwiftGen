@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)key1Anonymous;
 + (NSString*)manyPlaceholdersBaseWithValues:(id)p1 :(NSInteger)p2 :(float)p3 :(float)p4 :(NSInteger)p5 :(NSInteger)p6 :(id)p7 :(float)p8 :(id)p9 :(NSInteger)p10 :(float)p11;
 + (NSString*)manyPlaceholdersZeroWithValues:(id)p1 :(NSInteger)p2 :(float)p3 :(float)p4 :(NSInteger)p5 :(NSInteger)p6 :(id)p7 :(float)p8 :(id)p9 :(NSInteger)p10 :(float)p11;
-+ (NSString*)settingsNavigationBarSelf;
++ (NSString*)settingsNavigationBarSelf_️;
 + (NSString*)settingsNavigationBarTitleDeeperThanWeCanHandleNoReallyThisIsDeep;
 + (NSString*)settingsNavigationBarTitleEvenDeeper;
 + (NSString*)settingsUserProfileSectionFooterText;
