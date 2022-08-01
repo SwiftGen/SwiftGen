@@ -14,7 +14,7 @@ internal enum L10n {
     internal enum PlaceholdersInVariableRule {
       /// Plural format key: "%#@elements@"
       internal static func stringInt(_ p1: Int) -> String {
-        return L10n.tr("LocPluralUnsupported", "unsupported-use.placeholders-in-variable-rule.string-int", p1, fallback: #"Plural format key: "%#@elements@""#)
+        return L10n.tr("LocPluralUnsupported", "unsupported-use.placeholders-in-variable-rule.string-int", p1, fallback: ###"Plural format key: "%#@elements@""###)
       }
     }
   }

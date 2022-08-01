@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)alertMessage;
 /// Title for an alert
 + (NSString*)alertTitle;
-/// value1
+/// value1	value
 + (NSString*)key1;
 /// These are %3$@'s %1$d %2$@.
 + (NSString*)objectOwnershipWithValues:(NSInteger)p1 :(id)p2 :(id)p3;

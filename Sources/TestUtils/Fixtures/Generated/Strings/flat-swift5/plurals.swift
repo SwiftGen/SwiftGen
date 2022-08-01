@@ -11,15 +11,15 @@ import Foundation
 internal enum L10n {
   /// Plural format key: "%#@apples@"
   internal static func applesCount(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "apples.count", p1, fallback: #"Plural format key: "%#@apples@""#)
+    return L10n.tr("Localizable", "apples.count", p1, fallback: ###"Plural format key: "%#@apples@""###)
   }
   /// Plural format key: "%#@Matches@"
   internal static func competitionEventNumberOfMatches(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "competition.event.number-of-matches", p1, fallback: #"Plural format key: "%#@Matches@""#)
+    return L10n.tr("Localizable", "competition.event.number-of-matches", p1, fallback: ###"Plural format key: "%#@Matches@""###)
   }
   /// Plural format key: "%#@Subscriptions@"
   internal static func feedSubscriptionCount(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "feed.subscription.count", p1, fallback: #"Plural format key: "%#@Subscriptions@""#)
+    return L10n.tr("Localizable", "feed.subscription.count", p1, fallback: ###"Plural format key: "%#@Subscriptions@""###)
   }
 }
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length
