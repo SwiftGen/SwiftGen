@@ -10,9 +10,9 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum XCTLoc {
-  /// Some alert body there
-  internal static let alertMessage = XCTLoc.tr("Localizable", "alert__message", fallback: "Some alert body there")
-  /// Title for an alert
+  /// Some /*alert body there
+  internal static let alertMessage = XCTLoc.tr("Localizable", "alert__message", fallback: "Some /*alert body there")
+  /// Title for an alert 1️⃣
   internal static let alertTitle = XCTLoc.tr("Localizable", "alert__title", fallback: "Title of the alert")
   /// value1	value
   internal static let key1 = XCTLoc.tr("Localizable", "key1", fallback: "value1\tvalue")
@@ -60,8 +60,8 @@ internal enum XCTLoc {
   }
   internal enum Settings {
     internal enum NavigationBar {
-      /// Some Reserved Keyword there
-      internal static let `self` = XCTLoc.tr("Localizable", "settings.navigation-bar.self", fallback: "Some Reserved Keyword there")
+      /// Some Reserved Keyword there👍🏽
+      internal static let self_️ = XCTLoc.tr("Localizable", "settings.navigation-bar.self♦️", fallback: "Some Reserved Keyword there👍🏽")
       internal enum Title {
         internal enum Deeper {
           internal enum Than {
@@ -98,7 +98,7 @@ internal enum XCTLoc {
   }
   internal enum What {
     internal enum Happens {
-      /// some comment
+      /// some comment 👨‍👩‍👧‍👦
       internal static let here = XCTLoc.tr("Localizable", "what./*happens*/.here", fallback: "hello world! /* still in string */")
     }
   }

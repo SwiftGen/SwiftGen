@@ -17,7 +17,7 @@ public func XCTAssertEqualDict(
   file: StaticString = #file,
   line: UInt = #line
 ) {
-  for difference in diff(received, expected) where !difference.isEmpty {
+  for difference in diff(expected, received) where !difference.isEmpty {
     XCTFail(difference, file: file, line: line)
   }
 }

@@ -17,98 +17,132 @@ extension Strings {
     }
 
     func enrich(entries: inout [String: Strings.Entry]) {
-      let scanner = Scanner(string: data)
-
-      while !scanner.isAtEnd {
-        let comment = scanner.scanComment()
-        if let key = scanner.scanQuotedString() {
-          entries[key]?.comment = comment
-
-          // Scan in the value and ignore it.
-          scanner.scanUpTo(.quote, into: nil)
-          scanner.scanQuotedString()
-        }
+      let scanner = Scanner(data: data)
+      scanner.parse { key, comment in
+        entries[key]?.comment = comment
       }
     }
   }
 }
 
-// MARK: - Scanner helpers
+// MARK: - Scanner
 
-private extension String {
-  static let startComment = "/*"
-  static let endComment = "*/"
-  static let quote = "\""
+private struct Scanner {
+  let data: String
+
+  func parse(handler: (_ key: String, _ comment: String?) -> Void) {
+    var scratchpad = Scratchpad()
+    var lastCharacter: Character?
+
+    for character in data {
+      scratchpad.process(character: character, last: lastCharacter, handler: handler)
+      lastCharacter = character
+    }
+  }
 }
+
+// MARK: - Scan Processor
+
+private struct Scratchpad {
+  enum Mode {
+    case nothing
+    case comment
+    case key
+    case beforeValue
+    case value
+  }
+
+  private var mode: Mode = .nothing
+  private var temp: String = ""
+  private var comment: String?
+}
+
+extension Scratchpad {
+  typealias ItemHandler = (_ key: String, _ comment: String?) -> Void
+
+  // swiftlint:disable:next cyclomatic_complexity
+  mutating func process(character: Character, last: Character?, handler: ItemHandler) {
+    switch mode {
+    case .nothing:
+      if character == .quote {
+        start(.key)
+      } else if [last, character] == Character.startComment {
+        start(.comment)
+      }
+    case .comment:
+      append(character)
+      if [last, character] == Character.endComment {
+        finishedComment()
+      }
+    case .key:
+      if character == .quote && last != .backslash {
+        handler(temp, comment)
+        finishedKey()
+      } else {
+        append(character, unescape: last == .backslash)
+      }
+    case .beforeValue:
+      if character == .quote {
+        start(.value)
+      }
+    case .value:
+      if character == .quote && last != .backslash {
+        finishedValue()
+      } else {
+        append(character, unescape: last == .backslash)
+      }
+    }
+  }
+}
+
+private extension Scratchpad {
+  mutating func append(_ character: Character, unescape: Bool = false) {
+    if unescape {
+      temp.removeLast()
+      temp.append(character.unescaped)
+    } else {
+      temp.append(character)
+    }
+  }
+
+  mutating func start(_ mode: Mode) {
+    self.mode = mode
+  }
+
+  mutating func finishedComment() {
+    comment = temp.dropLast(2).trimmingCharacters(in: .whitespacesAndNewlines)
+    temp = ""
+    mode = .nothing
+  }
+
+  mutating func finishedKey() {
+    temp = ""
+    comment = nil
+    mode = .beforeValue
+  }
+
+  mutating func finishedValue() {
+    temp = ""
+    mode = .nothing
+  }
+}
+
+// MARK: - Used delimiters
 
 private extension Character {
-  static let backslash: Character = "\\"
+  static let startComment: [Character] = ["/", "*"]
+  static let endComment: [Character] = ["*", "/"]
   static let quote: Character = "\""
-}
+  static let backslash: Character = "\\"
 
-private extension Scanner {
-  /// Try to scan a comment (if found)
-  func scanComment() -> String? {
-    var optionalComment: NSString?
-
-    scanUpTo(.startComment, into: nil)
-    guard scanString(.startComment, into: nil),
-      scanUpTo(.endComment, into: &optionalComment),
-      let comment = optionalComment else {
-      return nil
-    }
-    scanString(.endComment, into: nil)
-
-    return comment.trimmingCharacters(in: .whitespacesAndNewlines)
-  }
-
-  /// Try to scan a string surrounded by quotes
-  @discardableResult
-  func scanQuotedString() -> String? {
-    guard scanString(.quote, into: nil) else { return nil }
-
-    var result = ""
-
-    // temporarily disable skipping of characters (default is whitespace/newlines)
-    let startingCharactersToBeSkipped = charactersToBeSkipped
-    charactersToBeSkipped = nil
-    defer { charactersToBeSkipped = startingCharactersToBeSkipped }
-
-    while let character = scanCharacter(), character != .quote {
-      if character == .backslash, let escapedCharacter = scanEscapedCharacter() {
-        result.append(escapedCharacter)
-      } else {
-        result.append(character)
-      }
-    }
-    scanString(.quote, into: nil)
-
-    return result
-  }
-
-  /// Loosely based on
-  /// https://opensource.apple.com/source/CF/CF-550/CFPropertyList.c.auto.html
-  func scanEscapedCharacter() -> Character? {
-    let character = scanCharacter()
-
-    switch character {
+  var unescaped: Character {
+    switch self {
     case "n":
       return "\n"
     case "t":
       return "\t"
-    case "\"":
-      return "\""
     default:
-      return character
+      return self
     }
-  }
-
-  func scanCharacter() -> Character? {
-    guard let index = string.index(string.startIndex, offsetBy: scanLocation, limitedBy: string.endIndex) else {
-      return nil
-    }
-
-    defer { scanLocation += 1 }
-    return string[index]
   }
 }

@@ -10,9 +10,9 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum L10n {
-  /// Some alert body there
-  public static let alertMessage = L10n.tr("Localizable", "alert__message", fallback: "Some alert body there")
-  /// Title for an alert
+  /// Some /*alert body there
+  public static let alertMessage = L10n.tr("Localizable", "alert__message", fallback: "Some /*alert body there")
+  /// Title for an alert 1️⃣
   public static let alertTitle = L10n.tr("Localizable", "alert__title", fallback: "Title of the alert")
   /// value1	value
   public static let key1 = L10n.tr("Localizable", "key1", fallback: "value1\tvalue")
@@ -60,8 +60,8 @@ public enum L10n {
   }
   public enum Settings {
     public enum NavigationBar {
-      /// Some Reserved Keyword there
-      public static let `self` = L10n.tr("Localizable", "settings.navigation-bar.self", fallback: "Some Reserved Keyword there")
+      /// Some Reserved Keyword there👍🏽
+      public static let self_️ = L10n.tr("Localizable", "settings.navigation-bar.self♦️", fallback: "Some Reserved Keyword there👍🏽")
       public enum Title {
         public enum Deeper {
           public enum Than {
@@ -98,7 +98,7 @@ public enum L10n {
   }
   public enum What {
     public enum Happens {
-      /// some comment
+      /// some comment 👨‍👩‍👧‍👦
       public static let here = L10n.tr("Localizable", "what./*happens*/.here", fallback: "hello world! /* still in string */")
     }
   }

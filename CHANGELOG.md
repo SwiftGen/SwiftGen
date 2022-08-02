@@ -23,6 +23,10 @@ _None_
   [#985](https://github.com/SwiftGen/SwiftGen/issues/985)
   [#986](https://github.com/SwiftGen/SwiftGen/issues/986)
   [#988](https://github.com/SwiftGen/SwiftGen/pull/988)
+* Strings: greatly improve the performance of the new comments parser.  
+  [David Jennes](https://github.com/djbe)
+  [#987](https://github.com/SwiftGen/SwiftGen/issues/987)
+  [#989](https://github.com/SwiftGen/SwiftGen/pull/989)
 
 ## 6.6.1
 
