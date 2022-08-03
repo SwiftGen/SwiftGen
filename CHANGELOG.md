@@ -27,6 +27,10 @@ _None_
   [David Jennes](https://github.com/djbe)
   [#987](https://github.com/SwiftGen/SwiftGen/issues/987)
   [#989](https://github.com/SwiftGen/SwiftGen/pull/989)
+* Strings: fix the Objective-C template.  
+  [David Jennes](https://github.com/djbe)
+  [#990](https://github.com/SwiftGen/SwiftGen/issues/990)
+  [#991](https://github.com/SwiftGen/SwiftGen/pull/991)
 
 ## 6.6.1
 
