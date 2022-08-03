@@ -17,7 +17,7 @@ static NSString* tr(NSString *tableName, NSString *key, NSString *value, ...) {
     NSLocale *locale = [NSLocale currentLocale];
 
     va_list args;
-    va_start(args, key);
+    va_start(args, value);
     NSString *result = [[NSString alloc] initWithFormat:format locale:locale arguments:args];
     va_end(args);
 
