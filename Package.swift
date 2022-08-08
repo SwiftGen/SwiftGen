@@ -13,7 +13,7 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.0.0"),
-    .package(url: "https://github.com/jpsim/Yams.git", from: "4.0.6"),
+    .package(url: "https://github.com/jpsim/Yams.git", from: "5.0.1"),
     .package(url: "https://github.com/kylef/PathKit.git", from: "1.0.1"),
     .package(url: "https://github.com/krzysztofzablocki/Difference.git", branch: "master"),
     .package(url: "https://github.com/stencilproject/Stencil.git", from: "0.15.0"),
