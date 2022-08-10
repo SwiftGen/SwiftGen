@@ -18,11 +18,12 @@ _None_
 
 ### Internal Changes
 
-* Strings: correctly handle strings containing `\t` (tabs) and `"#`.  
+* Strings: correctly handle translations containing `\t` (tabs) and other escape sequences.  
   [David Jennes](https://github.com/djbe)
   [#985](https://github.com/SwiftGen/SwiftGen/issues/985)
   [#986](https://github.com/SwiftGen/SwiftGen/issues/986)
   [#988](https://github.com/SwiftGen/SwiftGen/pull/988)
+  [#998](https://github.com/SwiftGen/SwiftGen/pull/998)
 * Strings: greatly improve the performance of the new comments parser.  
   [David Jennes](https://github.com/djbe)
   [#987](https://github.com/SwiftGen/SwiftGen/issues/987)
