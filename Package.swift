@@ -39,6 +39,7 @@ let package = Package(
     .target(name: "SwiftGenKit", dependencies: [
       "Kanna",
       "PathKit",
+      "Stencil",
       "Yams"
     ]),
     .testTarget(name: "SwiftGenKitTests", dependencies: [
