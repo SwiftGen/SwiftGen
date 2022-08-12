@@ -13,14 +13,14 @@ internal enum L10n {
   internal enum Apples {
     /// Plural format key: "%#@apples@"
     internal static func count(_ p1: Int) -> String {
-      return L10n.tr("Localizable", "apples.count", p1, fallback: ###"Plural format key: "%#@apples@""###)
+      return L10n.tr("Localizable", "apples.count", p1, fallback: "Plural format key: \"%#@apples@\"")
     }
   }
   internal enum Competition {
     internal enum Event {
       /// Plural format key: "%#@Matches@"
       internal static func numberOfMatches(_ p1: Int) -> String {
-        return L10n.tr("Localizable", "competition.event.number-of-matches", p1, fallback: ###"Plural format key: "%#@Matches@""###)
+        return L10n.tr("Localizable", "competition.event.number-of-matches", p1, fallback: "Plural format key: \"%#@Matches@\"")
       }
     }
   }
@@ -28,7 +28,7 @@ internal enum L10n {
     internal enum Subscription {
       /// Plural format key: "%#@Subscriptions@"
       internal static func count(_ p1: Int) -> String {
-        return L10n.tr("Localizable", "feed.subscription.count", p1, fallback: ###"Plural format key: "%#@Subscriptions@""###)
+        return L10n.tr("Localizable", "feed.subscription.count", p1, fallback: "Plural format key: \"%#@Subscriptions@\"")
       }
     }
   }
