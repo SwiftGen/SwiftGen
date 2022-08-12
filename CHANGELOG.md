@@ -2,21 +2,13 @@
 
 ---
 
-## Develop
+## 6.6.2
 
-### Breaking Changes
+### Changes in core dependencies of SwiftGen
 
-_None_
-
-### New Features
-
-_None_
+* [StencilSwiftKit 2.10.1](https://github.com/SwiftGen/StencilSwiftKit/blob/2.10.1/CHANGELOG.md)
 
 ### Bug Fixes
-
-_None_
-
-### Internal Changes
 
 * Strings: correctly handle translations containing `\t` (tabs) and other escape sequences.  
   [David Jennes](https://github.com/djbe)
@@ -24,14 +16,17 @@ _None_
   [#986](https://github.com/SwiftGen/SwiftGen/issues/986)
   [#988](https://github.com/SwiftGen/SwiftGen/pull/988)
   [#998](https://github.com/SwiftGen/SwiftGen/pull/998)
-* Strings: greatly improve the performance of the new comments parser.  
-  [David Jennes](https://github.com/djbe)
-  [#987](https://github.com/SwiftGen/SwiftGen/issues/987)
-  [#989](https://github.com/SwiftGen/SwiftGen/pull/989)
 * Strings: fix the Objective-C template.  
   [David Jennes](https://github.com/djbe)
   [#990](https://github.com/SwiftGen/SwiftGen/issues/990)
   [#991](https://github.com/SwiftGen/SwiftGen/pull/991)
+
+### Internal Changes
+
+* Strings: greatly improve the performance of the new comments parser.  
+  [David Jennes](https://github.com/djbe)
+  [#987](https://github.com/SwiftGen/SwiftGen/issues/987)
+  [#989](https://github.com/SwiftGen/SwiftGen/pull/989)
 
 ## 6.6.1
 
