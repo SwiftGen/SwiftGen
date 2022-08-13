@@ -10,9 +10,9 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
-  internal static let alertMessage = L10n.tr("Localizable", "alert__message", fallback: "Some alert body there")
+  internal static let alertMessage = L10n.tr("Localizable", "alert__message", fallback: "Some /*alert body there")
   internal static let alertTitle = L10n.tr("Localizable", "alert__title", fallback: "Title of the alert")
-  internal static let key1 = L10n.tr("Localizable", "key1", fallback: "value1")
+  internal static let key1 = L10n.tr("Localizable", "key1", fallback: "value1\tvalue")
   internal static func objectOwnership(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
     return L10n.tr("Localizable", "ObjectOwnership", p1, String(describing: p2), String(describing: p3), fallback: "These are %3$@'s %1$d %2$@.")
   }
@@ -48,7 +48,7 @@ internal enum L10n {
   }
   internal enum Settings {
     internal enum NavigationBar {
-      internal static let `self` = L10n.tr("Localizable", "settings.navigation-bar.self", fallback: "Some Reserved Keyword there")
+      internal static let self_️ = L10n.tr("Localizable", "settings.navigation-bar.self♦️", fallback: "Some Reserved Keyword there👍🏽")
       internal enum Title {
         internal enum Deeper {
           internal enum Than {

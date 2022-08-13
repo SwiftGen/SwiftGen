@@ -18,14 +18,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - 
-        name: Cache SPM
-        uses: actions/cache@v3
-        with:
-          path: .build
-          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-spm-
+      # Note: there's no SPM cache step here, to ensure "clean" compilation works
       -
         name: Verify installation
         run: bundle exec rake cli:install[./standalone,./standalone/frameworks,./standalone/stencils]

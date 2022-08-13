@@ -109,9 +109,9 @@ tables:
           name: "title"
         name: "navigation-bar"
         strings:
-        - key: "settings.navigation-bar.self"
-          name: "self"
-          translation: "Some Reserved Keyword there"
+        - key: "settings.navigation-bar.self\u2666\uFE0F"
+          name: "self\u2666\uFE0F"
+          translation: "Some Reserved Keyword there\U0001F44D\U0001F3FD"
       - name: "user__profile_section"
         strings:
         - key: "settings.user__profile_section.footer_text"
@@ -124,7 +124,7 @@ tables:
     - children:
       - name: "/*happens*/"
         strings:
-        - comment: "some comment"
+        - comment: "some comment \U0001F468\u200D\U0001F469\u200D\U0001F467\u200D\U0001F466"
           key: "what./*happens*/.here"
           name: "here"
           translation: "hello world! /* still in string */"
@@ -132,14 +132,14 @@ tables:
     strings:
     - key: "alert__message"
       name: "alert__message"
-      translation: "Some alert body there"
-    - comment: "Title for an alert"
+      translation: "Some /*alert body there"
+    - comment: "Title for an alert 1\uFE0F\u20E3"
       key: "alert__title"
       name: "alert__title"
       translation: "Title of the alert"
     - key: "key1"
       name: "key1"
-      translation: "value1"
+      translation: "value1\tvalue"
     - key: "ObjectOwnership"
       name: "ObjectOwnership"
       translation: "These are %3$@'s %1$d %2$@."

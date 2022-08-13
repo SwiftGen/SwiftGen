@@ -5,11 +5,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Localizable : NSObject
-/// Some alert body there
+/// Some /*alert body there
 + (NSString*)alertMessage;
-/// Title for an alert
+/// Title for an alert 1️⃣
 + (NSString*)alertTitle;
-/// value1
+/// value1	value
 + (NSString*)key1;
 /// These are %3$@'s %1$d %2$@.
 + (NSString*)objectOwnershipWithValues:(NSInteger)p1 :(id)p2 :(id)p3;
@@ -29,8 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)manyPlaceholdersBaseWithValues:(id)p1 :(NSInteger)p2 :(float)p3 :(float)p4 :(NSInteger)p5 :(NSInteger)p6 :(id)p7 :(float)p8 :(id)p9 :(NSInteger)p10 :(float)p11;
 /// %@ %d %0$@ %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d
 + (NSString*)manyPlaceholdersZeroWithValues:(id)p1 :(NSInteger)p2 :(float)p3 :(float)p4 :(NSInteger)p5 :(NSInteger)p6 :(id)p7 :(float)p8 :(id)p9 :(NSInteger)p10 :(float)p11;
-/// Some Reserved Keyword there
-+ (NSString*)settingsNavigationBarSelf;
+/// Some Reserved Keyword there👍🏽
++ (NSString*)settingsNavigationBarSelf_️;
 /// DeepSettings
 + (NSString*)settingsNavigationBarTitleDeeperThanWeCanHandleNoReallyThisIsDeep;
 /// Settings
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)settingsUserProfileSectionFooterText;
 /// User Profile Settings
 + (NSString*)settingsUserProfileSectionHEADERTITLE;
-/// some comment
+/// some comment 👨‍👩‍👧‍👦
 + (NSString*)whatHappensHere;
 @end
 
