@@ -9,7 +9,7 @@ on:
 jobs:
   cocoapods:
     name: Push To CocoaPods
-    runs-on: ubuntu-latest
+    runs-on: macos-12
     steps:
       -
         name: Checkout
@@ -19,6 +19,15 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - 
+        # Need SPM cache because we're building & uploading a binary
+        name: Cache SPM
+        uses: actions/cache@v3
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
       -
         name: Create release on GitHub
         run: bundle exec rake release:github
