@@ -10,7 +10,10 @@ _None_
 
 ### New Features
 
-_None_
+* CLI: Added support for `--quiet` and `--verbose` flags to `swiftgen run`.  
+  [John Szumski](https://github.com/jszumski)
+  [#1007](https://github.com/SwiftGen/SwiftGen/issues/1007)
+  [#1008](https://github.com/SwiftGen/SwiftGen/pull/1008)
 
 ### Bug Fixes
 
