@@ -26,7 +26,10 @@ extension AssetsCatalog.Catalog {
   /// This method recursively parses a directory structure, processing each folder (files are ignored).
   ///
   static func process(folder: Path, withPrefix prefix: String = "") -> [AssetsCatalogEntry] {
-    (try? folder.children().sorted(by: <).compactMap { path in
+    let children = try? folder.children()
+    let sorted = children?.sorted(by: <)
+
+    return (sorted?.compactMap { path in
       AssetsCatalog.Entry.parse(path: path, withPrefix: prefix)
     }) ?? []
   }

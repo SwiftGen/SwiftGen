@@ -18,7 +18,7 @@ public enum AssetsCatalog {
       self.warningHandler = warningHandler
     }
 
-    public static let defaultFilter = filterRegex(forExtensions: ["xcassets"])
+    public static let defaultFilter = filterRegex(forExtensions: ["xcassets", "complicationset"])
     public static let filterOptions: Filter.Options = [.skipsFiles, .skipsHiddenFiles, .skipsPackageDescendants]
 
     public func parse(path: Path, relativeTo parent: Path) throws {
