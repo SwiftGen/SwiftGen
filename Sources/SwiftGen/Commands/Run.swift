@@ -64,7 +64,12 @@ extension Commands.Run {
     @Argument(help: .init(Parser.info.pathDescription, valueName: "path"))
     var paths: [Path]
 
+    @Flag
+    var logLevel: CommandLogLevel = .default
+
     mutating func run() throws {
+      commandLogLevel = logLevel
+
       let parserOptions = try Parameters.parse(items: options)
       let parser = try Parser(options: parserOptions) { msg, _, _ in
         logMessage(.warning, msg)

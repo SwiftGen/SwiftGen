@@ -2,12 +2,32 @@
 
 ---
 
+## Develop
+
+### Breaking Changes
+
+_None_
+
 ### New Features
 
+* CLI: Added support for `--quiet` and `--verbose` flags to `swiftgen run`.  
+  [John Szumski](https://github.com/jszumski)
+  [#1007](https://github.com/SwiftGen/SwiftGen/issues/1007)
+  [#1008](https://github.com/SwiftGen/SwiftGen/pull/1008)
+  
 * XCAssets: the parser now supports complicationset set, so you can use watchOS complications in asset cataloge.  
   [Patrick Kladek](https://github.com/Patrick-Kladek)
   [#1051](https://github.com/SwiftGen/SwiftGen/pull/1051)
+  
 
+### Bug Fixes
+
+_None_
+
+### Internal Changes
+
+_None_
+>>>>>>> 46a6c907000ba475b1cde6672508e1deaff5debc
 
 ## 6.6.2
 
