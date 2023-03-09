@@ -2,6 +2,13 @@
 
 ---
 
+### New Features
+
+* XCAssets: the parser now supports complicationset set, so you can use watchOS complications in asset cataloge.  
+  [Patrick Kladek](https://github.com/Patrick-Kladek)
+  [#1051](https://github.com/SwiftGen/SwiftGen/pull/1051)
+
+
 ## 6.6.2
 
 ### Changes in core dependencies of SwiftGen
