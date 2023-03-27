@@ -97,3 +97,4 @@ private final class BundleToken {
 {% else %}
 // No string found
 {% endif %}
+// swiftlint:enable all
