@@ -27,17 +27,17 @@ public struct Filter {
     }
 
     /// Equivalent of Path.DirectoryEnumerationOptions.skipsSubdirectoryDescendants
-    public static let skipsSubdirectoryDescendants = Options(rawValue: 1 << 0)
+    public static let skipsSubdirectoryDescendants = Self(rawValue: 1 << 0)
     /// Equivalent of Path.DirectoryEnumerationOptions.skipsPackageDescendants
-    public static let skipsPackageDescendants = Options(rawValue: 1 << 1)
+    public static let skipsPackageDescendants = Self(rawValue: 1 << 1)
     /// Equivalent of Path.DirectoryEnumerationOptions.skipsHiddenFiles
-    public static let skipsHiddenFiles = Options(rawValue: 1 << 2)
+    public static let skipsHiddenFiles = Self(rawValue: 1 << 2)
     /// Ignore directories
-    public static let skipsDirectories = Options(rawValue: 1 << 3)
+    public static let skipsDirectories = Self(rawValue: 1 << 3)
     /// Ignore files
-    public static let skipsFiles = Options(rawValue: 1 << 4)
+    public static let skipsFiles = Self(rawValue: 1 << 4)
 
-    public static let `default`: Options = [.skipsDirectories, .skipsHiddenFiles, .skipsPackageDescendants]
+    public static let `default`: Self = [.skipsDirectories, .skipsHiddenFiles, .skipsPackageDescendants]
 
     fileprivate var directoryEnumerationOptions: Path.DirectoryEnumerationOptions {
       Path.DirectoryEnumerationOptions(
