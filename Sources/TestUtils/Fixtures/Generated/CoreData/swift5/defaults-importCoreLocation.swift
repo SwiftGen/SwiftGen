@@ -454,3 +454,4 @@ extension SecondaryEntity {
 }
 
 // swiftlint:enable identifier_name line_length type_body_length
+// swiftlint:enable all

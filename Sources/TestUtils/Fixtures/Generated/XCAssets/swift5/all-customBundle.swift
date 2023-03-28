@@ -336,3 +336,4 @@ internal extension SwiftUI.Image {
   }
 }
 #endif
+// swiftlint:enable all

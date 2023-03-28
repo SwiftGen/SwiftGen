@@ -57,3 +57,4 @@ private struct JSONDocument {
     return result
   }
 }
+// swiftlint:enable all

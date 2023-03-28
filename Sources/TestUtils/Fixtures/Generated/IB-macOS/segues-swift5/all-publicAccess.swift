@@ -49,3 +49,4 @@ public extension SegueType where RawValue == String {
     self.init(rawValue: identifier)
   }
 }
+// swiftlint:enable all
