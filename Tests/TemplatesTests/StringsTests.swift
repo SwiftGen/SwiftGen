@@ -22,6 +22,7 @@ final class StringsTests: XCTestCase {
   }
 
   // generate variations to test customname generation
+  // swiftlint:disable:next closure_body_length
   private let variations: VariationGenerator = { name, context in
     guard name == "localizable" else { return [(context: context, suffix: "")] }
 
