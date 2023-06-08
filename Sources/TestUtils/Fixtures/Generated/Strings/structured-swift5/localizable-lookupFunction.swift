@@ -109,8 +109,15 @@ internal enum L10n {
 // MARK: - Implementation Details
 
 extension L10n {
+  #if swift(>=5.6)
+  private static func tr(_ table: String, _ key: String, _ args: any CVarArg..., fallback value: String) -> String {
+    let format = XCTLocFunc(forKey:table:fallback:)(key, table, value)
+    return String(format: format, locale: Locale.current, arguments: args)
+  }
+  #else
   private static func tr(_ table: String, _ key: String, _ args: CVarArg..., fallback value: String) -> String {
     let format = XCTLocFunc(forKey:table:fallback:)(key, table, value)
     return String(format: format, locale: Locale.current, arguments: args)
   }
+  #endif
 }
