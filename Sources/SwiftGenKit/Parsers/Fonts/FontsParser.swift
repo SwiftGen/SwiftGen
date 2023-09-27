@@ -35,18 +35,44 @@ public enum Fonts {
 
 // MARK: - Helpers
 
+private extension Data {
+    var isTrueTypeFont: Bool {
+        let trueTypeFontHeaderBytes: [UInt8] = [0x00, 0x01, 0x00, 0x00, 0x00] // https://en.wikipedia.org/wiki/List_of_file_signatures
+        var values = [UInt8](repeating: 0, count: trueTypeFontHeaderBytes.count)
+        self.copyBytes(to: &values, count: trueTypeFontHeaderBytes.count)
+        return values == trueTypeFontHeaderBytes
+    }
+
+    var isOpenTypeFont: Bool {
+        let openTypeFontHeaderBytes: [UInt8] = [0x4F, 0x54, 0x54, 0x4F] // https://en.wikipedia.org/wiki/List_of_file_signatures
+        var values = [UInt8](repeating: 0, count: openTypeFontHeaderBytes.count)
+        self.copyBytes(to: &values, count: openTypeFontHeaderBytes.count)
+        return values == openTypeFontHeaderBytes
+    }
+}
+
 private extension Fonts.Parser {
   /// Try to quickly check if the given file is an actual font file.
   ///
   /// - Note: This can seemingly fail in sandboxed environments.
   func checkIsFont(path: Path) -> Bool {
-    guard let values = try? path.url.resourceValues(forKeys: [.typeIdentifierKey]),
-      let uti = values.typeIdentifier else {
-      warningHandler?("Unable to determine the Universal Type Identifier for file \(path)", #file, #line)
+    do {
+      let values = try path.url.resourceValues(forKeys: [.typeIdentifierKey])
+      guard let uti = values.typeIdentifier else {
+        return true
+      }
+      return UTTypeConformsTo(uti as CFString, kUTTypeFont)
+    } catch {
+      if let handle = try? FileHandle(forReadingFrom: path.url) {
+        defer { handle.closeFile() }
+        let fileHeaderData = handle.readData(ofLength: 5)
+        if fileHeaderData.isTrueTypeFont || fileHeaderData.isOpenTypeFont {
+          return true
+        }
+      }
+      warningHandler?("Unable to determine the Universal Type Identifier for file \(path) : \(error)", #file, #line)
       return true
     }
-
-    return UTTypeConformsTo(uti as CFString, kUTTypeFont)
   }
 
   func addFont(_ font: Fonts.Font) {
