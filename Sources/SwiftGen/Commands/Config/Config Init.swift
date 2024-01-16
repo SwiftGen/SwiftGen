@@ -26,7 +26,7 @@ extension Commands.Config {
 
     func run() throws {
       let content = Config.example(versionForDocLink: Version.swiftgen, commentAllLines: true)
-      try config.file.write(content)
+      try config.file.writeFix(content)
       logMessage(.info, "Example configuration file created: \(config.file)")
       if open {
         NSWorkspace.shared.open(config.file.url)
