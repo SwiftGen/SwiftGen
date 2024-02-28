@@ -175,7 +175,7 @@ class Utils
   #       to point to an exact, very specific version
   #
   def self.compute_developer_dir(version_req)
-    version_req = Gem::Requirement.new("~> #{version_req}") if version_req.is_a?(Float)
+    version_req = Gem::Requirement.new(">= #{version_req}") if version_req.is_a?(Float)
     version_req = Gem::Requirement.new(version_req) unless version_req.is_a?(Gem::Requirement)
     # if current Xcode already fulfills min version don't force DEVELOPER_DIR=...
     current_xcode_version = `xcodebuild -version`.split("\n").first.match(/[0-9.]+/).to_s
