@@ -17,7 +17,11 @@ _None_
 
 ### Bug Fixes
 
-_None_
+* Build: Fixed the `rake cli:install` command and with it the Homebrew formula.  
+  [Liquidsoul](https://github.com/liquidsoul)
+  [#1030](https://github.com/SwiftGen/SwiftGen/issues/1030)
+  [#1104](https://github.com/SwiftGen/SwiftGen/issues/1104)
+  [#1105](https://github.com/SwiftGen/SwiftGen/pull/1105)
 
 ### Internal Changes
 
