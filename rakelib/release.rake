@@ -128,9 +128,9 @@ namespace :release do
     # Write the `info.json` artifact bundle manifest
     info_template = File.read("rakelib/artifactbundle.info.json.template")
     info_file_content = info_template.gsub(/(VERSION)/, version)
-    
+
     File.open("#{bundle_dir}/info.json", "w") do |f|
-      f.write(info_file_content)   
+      f.write(info_file_content)
     end
 
     # Zip the bundle
@@ -149,7 +149,7 @@ namespace :release do
       "swiftgen-#{version}.artifactbundle.zip"
     ]
     repo_name = File.basename(`git remote get-url origin`.chomp, '.git').freeze
-    
+
     # Create (or update) release
     puts "Pushing release notes for tag #{version}"
     begin
@@ -175,7 +175,7 @@ namespace :release do
   desc 'Release a new version on Homebrew and prepare a PR'
   task :homebrew do
     Utils.print_header 'Updating Homebrew Formula'
-    
+
     tag = Utils.podspec_version(POD_NAME)
     archive_url = "https://github.com/SwiftGen/SwiftGen/archive/#{tag}.tar.gz"
     digest = Digest::SHA256.hexdigest URI.open(archive_url).read
