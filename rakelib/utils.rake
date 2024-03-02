@@ -57,7 +57,7 @@ class Utils
   def self.spm_own_version(dep)
     dependencies = JSON.load(File.new('Package.resolved'))['pins']
     dependencies.find { |d| d['identity'] == dep.downcase }['state']['version']
-  end  
+  end
 
   def self.spm_resolved_version(dep)
     dependencies = JSON.load(File.new('Package.resolved'))['pins']
@@ -175,7 +175,7 @@ class Utils
   #       to point to an exact, very specific version
   #
   def self.compute_developer_dir(version_req)
-    version_req = Gem::Requirement.new("~> #{version_req}") if version_req.is_a?(Float)
+    version_req = Gem::Requirement.new(">= #{version_req}") if version_req.is_a?(Float)
     version_req = Gem::Requirement.new(version_req) unless version_req.is_a?(Gem::Requirement)
     # if current Xcode already fulfills min version don't force DEVELOPER_DIR=...
     current_xcode_version = `xcodebuild -version`.split("\n").first.match(/[0-9.]+/).to_s
