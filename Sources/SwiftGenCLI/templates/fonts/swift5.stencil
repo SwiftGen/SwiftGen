@@ -6,7 +6,7 @@
 {% set fontType %}{{param.fontTypeName|default:"FontConvertible"}}{% endset %}
 #if os(macOS)
   import AppKit.NSFont
-#elseif os(iOS) || os(tvOS) || os(watchOS)
+#elseif os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
   import UIKit.UIFont
 #endif
 #if canImport(SwiftUI)
@@ -54,7 +54,7 @@
 
   #if os(macOS)
   {{accessModifier}} typealias Font = NSFont
-  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  #elseif os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
   {{accessModifier}} typealias Font = UIFont
   #endif
 
@@ -66,17 +66,17 @@
   }
 
   #if canImport(SwiftUI)
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1, macOS 10.15, *)
   {{accessModifier}} func swiftUIFont(size: CGFloat) -> SwiftUI.Font {
     return SwiftUI.Font.custom(self, size: size)
   }
 
-  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, visionOS 1, macOS 11.0, *)
   {{accessModifier}} func swiftUIFont(fixedSize: CGFloat) -> SwiftUI.Font {
     return SwiftUI.Font.custom(self, fixedSize: fixedSize)
   }
 
-  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, visionOS 1, macOS 11.0, *)
   {{accessModifier}} func swiftUIFont(size: CGFloat, relativeTo textStyle: SwiftUI.Font.TextStyle) -> SwiftUI.Font {
     return SwiftUI.Font.custom(self, size: size, relativeTo: textStyle)
   }
@@ -89,7 +89,7 @@
   }
 
   fileprivate func registerIfNeeded() {
-    #if os(iOS) || os(tvOS) || os(watchOS)
+    #if os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
     if !UIFont.fontNames(forFamilyName: family).contains(name) {
       register()
     }
@@ -118,7 +118,7 @@
 }
 
 #if canImport(SwiftUI)
-@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1, macOS 10.15, *)
 {{accessModifier}} extension SwiftUI.Font {
   static func custom(_ font: {{fontType}}, size: CGFloat) -> SwiftUI.Font {
     font.registerIfNeeded()
@@ -126,7 +126,7 @@
   }
 }
 
-@available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+@available(iOS 14.0, tvOS 14.0, watchOS 7.0, visionOS 1, macOS 11.0, *)
 {{accessModifier}} extension SwiftUI.Font {
   static func custom(_ font: {{fontType}}, fixedSize: CGFloat) -> SwiftUI.Font {
     font.registerIfNeeded()

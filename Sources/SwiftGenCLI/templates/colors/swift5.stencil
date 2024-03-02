@@ -7,7 +7,7 @@
 #if os(macOS)
   import AppKit.NSColor
   {{accessModifier}} typealias {{colorAlias}} = NSColor
-#elseif os(iOS) || os(tvOS) || os(watchOS)
+#elseif os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
   import UIKit.UIColor
   {{accessModifier}} typealias {{colorAlias}} = UIColor
 #endif

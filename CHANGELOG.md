@@ -32,6 +32,9 @@ _None_
   [John Szumski](https://github.com/jszumski)
   [#1007](https://github.com/SwiftGen/SwiftGen/issues/1007)
   [#1008](https://github.com/SwiftGen/SwiftGen/pull/1008)
+* CLI: Added support for visionOS platform.  
+  [Denis Dzyubenko](https://github.com/shadone)
+  [#1099](https://github.com/SwiftGen/SwiftGen/issues/1099)
 
 ### Bug Fixes
 

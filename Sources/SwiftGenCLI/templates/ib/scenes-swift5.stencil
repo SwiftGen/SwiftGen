@@ -95,7 +95,7 @@ import {{module}}
     return storyboard.storyboard.instantiate{{controller}}(identifier: identifier, creator: block)
   }
   {% else %}
-  @available(iOS 13.0, tvOS 13.0, *)
+  @available(iOS 13.0, tvOS 13.0, visionOS 1, *)
   {{accessModifier}} func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
     return storyboard.storyboard.instantiate{{controller}}(identifier: identifier, creator: block)
   }
@@ -129,7 +129,7 @@ import {{module}}
     return controller
   }
   {% else %}
-  @available(iOS 13.0, tvOS 13.0, *)
+  @available(iOS 13.0, tvOS 13.0, visionOS 1, *)
   {{accessModifier}} func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
     guard let controller = storyboard.storyboard.instantiateInitial{{controller}}(creator: block) else {
       fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
