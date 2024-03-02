@@ -177,7 +177,7 @@ namespace :release do
     Utils.print_header 'Updating Homebrew Formula'
 
     tag = Utils.podspec_version(POD_NAME)
-    archive_url = "https://github.com/SwiftGen/SwiftGen/archive/#{tag}.tar.gz"
+    archive_url = "https://github.com/SwiftGen/SwiftGen/archive/refs/tags/#{tag}.tar.gz"
     digest = Digest::SHA256.hexdigest URI.open(archive_url).read
 
     formulas_dir = Bundler.with_original_env { `brew --repository homebrew/core`.chomp }
@@ -186,7 +186,7 @@ namespace :release do
       sh 'git pull'
       sh "git checkout -b swiftgen-#{tag} origin/master"
 
-      formula_file = "#{formulas_dir}/Formula/swiftgen.rb"
+      formula_file = "#{formulas_dir}/Formula/s/swiftgen.rb"
       formula = File.read(formula_file)
 
       new_formula = formula
