@@ -12,6 +12,10 @@ _None_
 
 _None_
 
+* Identifiers: generate accessibility identifiers using `swiftgen identifiers`.  
+  [Ian Keen](https://github.com/iankeen)
+  [#369](https://github.com/SwiftGen/SwiftGen/pull/369)
+
 ### Bug Fixes
 
 _None_
