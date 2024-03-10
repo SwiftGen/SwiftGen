@@ -10,6 +10,7 @@ is_hotfix = github.branch_for_head.start_with?('hotfix/')
 markdown [
   "Hey 👋 I'm Eve, the friendly bot watching over SwiftGen 🤖",
   'Thanks a lot for your contribution!',
+  'Testaing new token',
   '', '---', ''
 ]
 
