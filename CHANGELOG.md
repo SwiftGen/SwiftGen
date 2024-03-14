@@ -47,7 +47,12 @@ _None_
 
 ### Internal Changes
 
-_None_
+* Update gems to their latest allowed version using bundle update.  
+  [Liquidsoul](https://github.com/liquidsoul)
+  [#1036](https://github.com/SwiftGen/SwiftGen/issues/1036)
+  [#1052](https://github.com/SwiftGen/SwiftGen/issues/1052)
+  [#1108](https://github.com/SwiftGen/SwiftGen/issues/1108)
+
 
 ## 6.6.2
 
