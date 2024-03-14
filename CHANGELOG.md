@@ -14,27 +14,6 @@ _None_
 
 ### Bug Fixes
 
-_None_
-
-### Internal Changes
-
-_None_
-
-## 6.6.3
-
-### Breaking Changes
-
-_None_
-
-### New Features
-
-* CLI: Added support for `--quiet` and `--verbose` flags to `swiftgen run`.  
-  [John Szumski](https://github.com/jszumski)
-  [#1007](https://github.com/SwiftGen/SwiftGen/issues/1007)
-  [#1008](https://github.com/SwiftGen/SwiftGen/pull/1008)
-
-### Bug Fixes
-
 * Build: Fixed the `rake cli:install` command and with it the Homebrew formula.  
   [Liquidsoul](https://github.com/liquidsoul)
   [#1030](https://github.com/SwiftGen/SwiftGen/issues/1030)
@@ -53,6 +32,26 @@ _None_
   [#1052](https://github.com/SwiftGen/SwiftGen/issues/1052)
   [#1108](https://github.com/SwiftGen/SwiftGen/issues/1108)
 
+## 6.6.3
+
+### Breaking Changes
+
+_None_
+
+### New Features
+
+* CLI: Added support for `--quiet` and `--verbose` flags to `swiftgen run`.  
+  [John Szumski](https://github.com/jszumski)
+  [#1007](https://github.com/SwiftGen/SwiftGen/issues/1007)
+  [#1008](https://github.com/SwiftGen/SwiftGen/pull/1008)
+
+### Bug Fixes
+
+_None_
+
+### Internal Changes
+
+_None_
 
 ## 6.6.2
 
