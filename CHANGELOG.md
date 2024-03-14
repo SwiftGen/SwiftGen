@@ -40,6 +40,10 @@ _None_
   [#1030](https://github.com/SwiftGen/SwiftGen/issues/1030)
   [#1104](https://github.com/SwiftGen/SwiftGen/issues/1104)
   [#1105](https://github.com/SwiftGen/SwiftGen/pull/1105)
+* XCAssets: Fix rake output:compile for XCAsserts templates by removing lazy vars.  
+  [Liquidsoul](https://github.com/liquidsoul)
+  [#1022](https://github.com/SwiftGen/SwiftGen/issues/1022)
+  [#1107](https://github.com/SwiftGen/SwiftGen/pull/1107)
 
 ### Internal Changes
 
