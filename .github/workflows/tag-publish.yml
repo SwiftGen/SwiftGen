@@ -22,7 +22,7 @@ jobs:
       - 
         # Need SPM cache because we're building & uploading a binary
         name: Cache SPM
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .build
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
