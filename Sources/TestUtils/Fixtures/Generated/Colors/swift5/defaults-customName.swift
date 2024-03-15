@@ -71,3 +71,4 @@ internal extension XCTColor {
     self.init(rgbaValue: color.rgbaValue)
   }
 }
+// swiftlint:enable all

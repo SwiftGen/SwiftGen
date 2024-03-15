@@ -14,11 +14,13 @@ enum StringsDict {
 }
 
 extension StringsDict {
+  // swiftlint:disable line_length
   /// Plural entries are used to define language plural rules.
   ///
   /// Reference: https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/StringsdictFileFormat/StringsdictFileFormat.html
-  // swiftlint:disable:previous line_length
   struct PluralEntry: Codable {
+    // swiftlint:enable line_length
+
     /// A format string that contains variables.
     /// Each variable is preceded by the %#@ characters and followed by the @ character.
     let formatKey: String
@@ -90,8 +92,8 @@ extension StringsDict: Decodable {
     }
 
     // fixed keys
-    static let formatKey = CodingKeys(key: "NSStringLocalizedFormatKey")
-    static let variableWidthRules = CodingKeys(key: "NSStringVariableWidthRuleType")
+    static let formatKey = Self(key: "NSStringLocalizedFormatKey")
+    static let variableWidthRules = Self(key: "NSStringVariableWidthRuleType")
   }
 
   init(from coder: Decoder) throws {

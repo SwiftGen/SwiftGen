@@ -28,3 +28,4 @@ public extension ColorName {
   static let themeCyan = #colorLiteral(red: 1.0, green: 0.4, blue: 0.8, alpha: 1.0)
 }
 // swiftlint:enable identifier_name line_length type_body_length
+// swiftlint:enable all

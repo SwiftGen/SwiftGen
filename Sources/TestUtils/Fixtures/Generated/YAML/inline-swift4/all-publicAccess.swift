@@ -42,3 +42,4 @@ public enum YAMLFiles {
   }
 }
 // swiftlint:enable identifier_name line_length number_separator type_body_length
+// swiftlint:enable all

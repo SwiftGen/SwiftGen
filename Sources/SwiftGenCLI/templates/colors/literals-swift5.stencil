@@ -45,3 +45,4 @@
 {% else %}
 // No color found
 {% endif %}
+// swiftlint:enable all

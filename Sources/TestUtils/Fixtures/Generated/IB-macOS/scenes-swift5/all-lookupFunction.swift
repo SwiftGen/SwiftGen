@@ -127,3 +127,4 @@ internal struct InitialSceneType<T> {
     return controller
   }
 }
+// swiftlint:enable all

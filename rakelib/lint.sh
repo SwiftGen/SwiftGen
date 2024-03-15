@@ -42,11 +42,12 @@ trap finish EXIT
 
 # actually run swiftlint
 if [ "$key" = "templates_generated" ]; then
-  # copy the generated output to a temp dir and strip the "swiftlint:disable:all"
+  # copy the generated output to a temp dir and strip the "swiftlint:disable all" and "swiftlint:enable all".
+  # Replace them with " --" so the whole line reads as "// --".
   for f in `find "${PROJECT_DIR}/${selected_path}" -name '*.swift'`; do
     temp_file="${scratch}${f#"$PROJECT_DIR"}"
     mkdir -p $(dirname "$temp_file")
-    sed "s/swiftlint:disable all/ --/" "$f" > "$temp_file"
+    sed "s/swiftlint:\(enable\|disable\) all/ --/" "$f" > "$temp_file"
   done
 
   "$SWIFTLINT" lint --strict --config "$CONFIG" $REPORTER "$scratch" | sed s@"$scratch"@"${PROJECT_DIR}"@

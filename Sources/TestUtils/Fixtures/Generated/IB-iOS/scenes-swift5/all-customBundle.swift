@@ -138,3 +138,4 @@ internal struct InitialSceneType<T: UIViewController> {
     return controller
   }
 }
+// swiftlint:enable all

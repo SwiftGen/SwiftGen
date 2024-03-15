@@ -157,3 +157,4 @@ private final class BundleToken {
 {% else %}
 // No storyboard found
 {% endif %}
+// swiftlint:enable all
