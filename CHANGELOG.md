@@ -50,7 +50,9 @@ _None_
 
 ### Bug Fixes
 
-_None_
+* Fixed a permission failure when writing files to DerivedData folder when located on external drive, e.g. in Xcode Cloud.  
+  [Denis Dzyubenko](https://github.com/shadone)
+  [#18](https://github.com/SwiftGen/SwiftGenPlugin/issues/18)
 
 ### Internal Changes
 
