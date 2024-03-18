@@ -77,7 +77,11 @@ public extension StoryboardType {
 }
 
 public struct SceneType<T> {
+  #if swift(>=5.6)
+  public let storyboard: any StoryboardType.Type
+  #else
   public let storyboard: StoryboardType.Type
+  #endif
   public let identifier: String
 
   public func instantiate() -> T {
@@ -102,7 +106,11 @@ public struct SceneType<T> {
 }
 
 public struct InitialSceneType<T> {
+  #if swift(>=5.6)
+  public let storyboard: any StoryboardType.Type
+  #else
   public let storyboard: StoryboardType.Type
+  #endif
 
   public func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitialController() as? T else {

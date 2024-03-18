@@ -104,7 +104,11 @@ internal extension StoryboardType {
 }
 
 internal struct SceneType<T: UIViewController> {
+  #if swift(>=5.6)
+  internal let storyboard: any StoryboardType.Type
+  #else
   internal let storyboard: StoryboardType.Type
+  #endif
   internal let identifier: String
 
   internal func instantiate() -> T {
@@ -122,7 +126,11 @@ internal struct SceneType<T: UIViewController> {
 }
 
 internal struct InitialSceneType<T: UIViewController> {
+  #if swift(>=5.6)
+  internal let storyboard: any StoryboardType.Type
+  #else
   internal let storyboard: StoryboardType.Type
+  #endif
 
   internal func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitialViewController() as? T else {

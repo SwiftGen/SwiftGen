@@ -71,7 +71,11 @@ import {{module}}
 }
 
 {{accessModifier}} struct SceneType<T{% if not isAppKit %}: UIViewController{% endif %}> {
+  #if swift(>=5.6)
+  {{accessModifier}} let storyboard: any StoryboardType.Type
+  #else
   {{accessModifier}} let storyboard: StoryboardType.Type
+  #endif
   {{accessModifier}} let identifier: String
 
   {{accessModifier}} func instantiate() -> T {
@@ -103,7 +107,11 @@ import {{module}}
 }
 
 {{accessModifier}} struct InitialSceneType<T{% if not isAppKit %}: UIViewController{% endif %}> {
+  #if swift(>=5.6)
+  {{accessModifier}} let storyboard: any StoryboardType.Type
+  #else
   {{accessModifier}} let storyboard: StoryboardType.Type
+  #endif
 
   {{accessModifier}} func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitial{{controller}}() as? T else {
