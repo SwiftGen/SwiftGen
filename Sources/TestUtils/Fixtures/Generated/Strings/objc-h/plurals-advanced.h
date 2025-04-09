@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)mixedPlaceholdersAndVariablesStringPositional3intWithValues:(id)p1 :(NSInteger)p2;
 /// Plural format key: "Your %3$@ list contains %1$#@first@ %2$@."
 + (NSString*)multiplePlaceholdersAndVariablesIntStringStringWithValues:(NSInteger)p1 :(id)p2 :(id)p3;
+/// Plural format key: "%#@elements@"
++ (NSString*)multiplePlaceholdersAndVariablesPositionalstringPositional2intWithValues:(id)p1 :(NSInteger)p2;
 /// Plural format key: "%#@files@ (%#@bytes@, %#@minutes@)"
 + (NSString*)multipleVariablesThreeVariablesInFormatkeyWithValues:(NSInteger)p1 :(NSInteger)p2 :(NSInteger)p3;
 @end

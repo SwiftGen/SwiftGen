@@ -76,6 +76,12 @@ tables:
           - "Int"
           - "String"
           - "String"
+        - key: "multiple.placeholders-and-variables.positionalstring-positional2int"
+          name: "positionalstring-positional2int"
+          translation: "Plural format key: \"%#@elements@\""
+          types:
+          - "String"
+          - "Int"
       - name: "variables"
         strings:
         - key: "multiple.variables.three-variables-in-formatkey"

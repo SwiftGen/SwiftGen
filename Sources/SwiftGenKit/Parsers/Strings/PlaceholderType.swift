@@ -64,10 +64,18 @@ extension Strings.PlaceholderType {
   ///
   /// Example: "I give %d apples to %@" --> [.int, .string]
   static func placeholderTypes(fromFormat formatString: String) throws -> [Strings.PlaceholderType] {
+    let chars = placeholderChars(fromFormat: formatString)
+    return try placeholderTypes(fromChars: chars)
+  }
+
+  /// Extracts an array of format chars and their optional positional specifier from a format key
+  ///
+  /// Example: "I give %1$d apples to %2$@" --> [("d", 1), ("@", 2)]
+  static func placeholderChars(fromFormat formatString: String) -> [(String, Int?)] {
     let range = NSRange(location: 0, length: (formatString as NSString).length)
 
     // Extract the list of chars (conversion specifiers) and their optional positional specifier
-    let chars = formatTypesRegEx.matches(in: formatString, options: [], range: range)
+    return formatTypesRegEx.matches(in: formatString, options: [], range: range)
       .compactMap { match -> (String, Int?)? in
         let range: NSRange
         if match.range(at: 3).location != NSNotFound {
@@ -94,8 +102,6 @@ extension Strings.PlaceholderType {
           return (char, pos)
         }
       }
-
-    return try placeholderTypes(fromChars: chars)
   }
 
   /// Creates an array of `PlaceholderType` from an array of format chars and their optional positional specifier
@@ -107,7 +113,7 @@ extension Strings.PlaceholderType {
   /// - Parameter chars: An array of format chars and their optional positional specifier
   /// - Throws: `Strings.ParserError.invalidPlaceholder` in case a `PlaceholderType` would be overwritten
   /// - Returns: An array of `PlaceholderType`
-  private static func placeholderTypes(fromChars chars: [(String, Int?)]) throws -> [Strings.PlaceholderType] {
+  static func placeholderTypes(fromChars chars: [(String, Int?)]) throws -> [Strings.PlaceholderType] {
     var list = [Int: Strings.PlaceholderType]()
     var nextNonPositional = 1
 

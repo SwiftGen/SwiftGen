@@ -54,6 +54,10 @@ static NSString* tr(NSString *tableName, NSString *key, NSString *value, ...) {
 {
     return tr(@"LocPluralAdvanced", @"multiple.placeholders-and-variables.int-string-string", @"Plural format key: \"Your %3$@ list contains %1$#@first@ %2$@.\"", p1, p2, p3);
 }
++ (NSString*)multiplePlaceholdersAndVariablesPositionalstringPositional2intWithValues:(id)p1 :(NSInteger)p2
+{
+    return tr(@"LocPluralAdvanced", @"multiple.placeholders-and-variables.positionalstring-positional2int", @"Plural format key: \"%#@elements@\"", p1, p2);
+}
 + (NSString*)multipleVariablesThreeVariablesInFormatkeyWithValues:(NSInteger)p1 :(NSInteger)p2 :(NSInteger)p3
 {
     return tr(@"LocPluralAdvanced", @"multiple.variables.three-variables-in-formatkey", @"Plural format key: \"%#@files@ (%#@bytes@, %#@minutes@)\"", p1, p2, p3);

@@ -37,6 +37,10 @@ internal enum L10n {
   internal static func multiplePlaceholdersAndVariablesIntStringString(_ p1: Int, _ p2: Any, _ p3: Any) -> String {
     return L10n.tr("LocPluralAdvanced", "multiple.placeholders-and-variables.int-string-string", p1, String(describing: p2), String(describing: p3), fallback: "Plural format key: \"Your %3$@ list contains %1$#@first@ %2$@.\"")
   }
+  /// Plural format key: "%#@elements@"
+  internal static func multiplePlaceholdersAndVariablesPositionalstringPositional2int(_ p1: Any, _ p2: Int) -> String {
+    return L10n.tr("LocPluralAdvanced", "multiple.placeholders-and-variables.positionalstring-positional2int", String(describing: p1), p2, fallback: "Plural format key: \"%#@elements@\"")
+  }
   /// Plural format key: "%#@files@ (%#@bytes@, %#@minutes@)"
   internal static func multipleVariablesThreeVariablesInFormatkey(_ p1: Int, _ p2: Int, _ p3: Int) -> String {
     return L10n.tr("LocPluralAdvanced", "multiple.variables.three-variables-in-formatkey", p1, p2, p3, fallback: "Plural format key: \"%#@files@ (%#@bytes@, %#@minutes@)\"")
