@@ -39,7 +39,12 @@
   {% endfor %}
   {{accessModifier}} static let allCustomFonts: [{{fontType}}] = [{% for family in families %}{{family.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}.all{{ ", " if not forloop.last }}{% endfor %}].flatMap { $0 }
   {{accessModifier}} static func registerAllCustomFonts() {
-    allCustomFonts.forEach { $0.register() }
+    let uniqueCustomFonts = allCustomFonts.reduce(into: []) { partialResult, fontConvertible in
+      if !partialResult.contains(where: { $0.path == fontConvertible.path }) {
+        partialResult.append(fontConvertible)
+      }
+    }
+    uniqueCustomFonts.forEach { $0.register() }
   }
 }
 // swiftlint:enable identifier_name line_length type_body_length
@@ -108,4 +113,3 @@ private final class BundleToken {
 {% else %}
 // No fonts found
 {% endif %}
-// swiftlint:enable all

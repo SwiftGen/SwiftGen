@@ -26,6 +26,8 @@ _None_
 * Templates: added `// swiftlint:enable all` to the bottom of templates to fix [warning](https://github.com/realm/SwiftLint/pull/4731) introduced by SwiftLint [0.51.0](https://github.com/realm/SwiftLint/releases/tag/0.51.0).  
  [Zev Eisenberg](https://github.com/ZevEisenberg)
  [#1054](https://github.com/SwiftGen/pull/1054)
+* Templates: fonts generate an issue with error logs in Xcode console during register custom variable fonts
+  [Christoph Giesenhagen](https://github.com/AF-cgi)
 
 ### Internal Changes
 
