@@ -16,9 +16,17 @@ extension Config {
     logLevel: CommandLogLevel,
     logger: (LogLevel, String) -> Void = logMessage
   ) throws {
+    let mentor = AIMentor()
     let errors = commands.parallelCompactMap { cmd, entry -> Swift.Error? in
       do {
-        try run(parserCommand: cmd, entry: entry, modernSpacing: modernSpacing, logLevel: logLevel, logger: logger)
+        try run(
+          parserCommand: cmd,
+          entry: entry,
+          modernSpacing: modernSpacing,
+          logLevel: logLevel,
+          mentor: mentor,
+          logger: logger
+        )
         return nil
       } catch {
         return error
@@ -37,6 +45,7 @@ extension Config {
     entry: ConfigEntry,
     modernSpacing: Bool,
     logLevel: CommandLogLevel,
+    mentor: AIMentor,
     logger: (LogLevel, String) -> Void
   ) throws {
     var entry = entry
@@ -49,18 +58,29 @@ extension Config {
     }
 
     try entry.checkPaths()
-    try entry.run(parserCommand: parserCommand, modernSpacing: modernSpacing, logger: logger)
+    try entry.run(
+      parserCommand: parserCommand,
+      modernSpacing: modernSpacing,
+      mentor: mentor,
+      logger: logger
+    )
   }
 }
 
 extension ConfigEntry {
-  func run(parserCommand: ParserCLI, modernSpacing: Bool, logger: (LogLevel, String) -> Void) throws {
+  func run(
+    parserCommand: ParserCLI,
+    modernSpacing: Bool,
+    mentor: AIMentor,
+    logger: (LogLevel, String) -> Void
+  ) throws {
+    let filterPattern = self.filter ?? parserCommand.parserType.defaultFilter
     let context: [String: Any] = try withoutActuallyEscaping(logger) { logger in
       let parser = try parserCommand.parserType.init(options: options) { msg, _, _ in
         logger(.warning, msg)
       }
       let filter = try Filter(
-        pattern: self.filter ?? parserCommand.parserType.defaultFilter,
+        pattern: filterPattern,
         options: parserCommand.parserType.filterOptions
       )
 
@@ -68,12 +88,41 @@ extension ConfigEntry {
       return parser.stencilContext()
     }
 
+    let optionSignature = AIMentor.makeOptionSignature(from: options)
+    let inputDigest = AIMentor.makeInputDigest(from: inputs.map { $0.string })
+
     for entryOutput in outputs {
       let templateRealPath = try entryOutput.template.resolvePath(forParser: parserCommand, logger: logger)
       let isBundledTemplate = entryOutput.template.isBundled(forParser: parserCommand)
       let template = try Template.load(from: templateRealPath, modernSpacing: isBundledTemplate || modernSpacing)
 
       let enriched = try StencilContext.enrich(context: context, parameters: entryOutput.parameters)
+      let parameterSignature = AIMentor.makeParameterSignature(from: entryOutput.parameters)
+      let snapshot = AIMentor.PromptSnapshot(
+        commandName: parserCommand.name,
+        templateName: entryOutput.template.displayName,
+        filter: filterPattern,
+        optionSignature: optionSignature,
+        parameterSignature: parameterSignature,
+        inputCount: inputs.count,
+        inputDigest: inputDigest
+      )
+      mentor.observe(prompt: snapshot)
+
+      let proposed = AIMentor.ProposedOutput(
+        commandName: parserCommand.name,
+        templateName: entryOutput.template.displayName,
+        filter: filterPattern,
+        optionSignature: optionSignature,
+        parameterSignature: parameterSignature,
+        inputCount: inputs.count,
+        inputDigest: inputDigest,
+        context: context,
+        outputDescription: entryOutput.output.description
+      )
+      for tip in mentor.advice(for: proposed) {
+        logger(.info, "💡 Mentor Tip: \(tip)")
+      }
       let rendered = try template.render(enriched)
       let output = OutputDestination.file(entryOutput.output)
       try output.write(content: rendered, onlyIfChanged: true, logger: logger)
