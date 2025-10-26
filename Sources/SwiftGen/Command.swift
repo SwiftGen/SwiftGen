@@ -15,6 +15,7 @@ struct SwiftGen: ParsableCommand {
     subcommands: [
       Commands.Config.self,
       Commands.Template.self,
+      Commands.RemixDeck.self,
       Commands.Run.self,
 
       // deprecated
