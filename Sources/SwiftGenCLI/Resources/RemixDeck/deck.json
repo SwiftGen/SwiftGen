@@ -1,0 +1,82 @@
+{
+  "name": "Prompt Remix Deck",
+  "version": 1,
+  "description": "Creative remix cards that help reshape story drafts with focused constraints.",
+  "cards": [
+    {
+      "id": "genre-swap",
+      "title": "Genre Swap",
+      "summary": "Rewrite the selected section as if it belonged to a different genre.",
+      "instructions": [
+        "Preserve the central character motivations and plot beats.",
+        "Adopt the tone, pacing, and tropes of the target genre.",
+        "Introduce one iconic detail that clearly signals the new genre."
+      ],
+      "constraints": [
+        "Keep the rewrite under 250 words.",
+        "Mention a sensory detail that reinforces the new genre."
+      ],
+      "tags": ["genre", "tone", "structure"]
+    },
+    {
+      "id": "time-period-flip",
+      "title": "Time Period Flip",
+      "summary": "Move the scene into a different historical era or future timeline.",
+      "instructions": [
+        "Translate technology, culture, and dialogue to the new era.",
+        "Highlight how the protagonist adapts (or fails to adapt).",
+        "Anchor the rewrite around one vivid historical or futuristic detail."
+      ],
+      "constraints": [
+        "Open with a line that establishes the new time period.",
+        "Include at least one reference to the era's dominant technology."
+      ],
+      "tags": ["world", "setting"]
+    },
+    {
+      "id": "pov-change",
+      "title": "POV Change",
+      "summary": "Retell the moment from a different character's perspective.",
+      "instructions": [
+        "Shift the internal monologue and emotional stakes to the new narrator.",
+        "Reveal information that the original POV could not see.",
+        "End with a line that hints at the narrator's next intention."
+      ],
+      "constraints": [
+        "Use first-person narration for the new POV.",
+        "Limit the rewrite to two paragraphs."
+      ],
+      "tags": ["character", "voice"]
+    },
+    {
+      "id": "stakes-raise",
+      "title": "Raise the Stakes",
+      "summary": "Heighten tension by escalating what the protagonist stands to lose.",
+      "instructions": [
+        "Clarify the immediate consequence if the protagonist fails.",
+        "Introduce a ticking-clock element or urgent deadline.",
+        "Show how another character reacts to the increased pressure."
+      ],
+      "constraints": [
+        "Include a reference to time passing or running out.",
+        "Close with a sentence that leaves a question unanswered."
+      ],
+      "tags": ["conflict", "pacing"]
+    },
+    {
+      "id": "sensory-shift",
+      "title": "Sensory Shift",
+      "summary": "Reimagine the scene by amplifying an unexpected sensory lens.",
+      "instructions": [
+        "Choose one dominant sense (smell, sound, touch, taste, or sight).",
+        "Filter the narration so that sense drives imagery and emotion.",
+        "Connect the sense to a character memory or association."
+      ],
+      "constraints": [
+        "Begin each paragraph with a sensory-focused sentence.",
+        "Use at least two metaphors tied to the selected sense."
+      ],
+      "tags": ["style", "voice", "revision"]
+    }
+  ]
+}

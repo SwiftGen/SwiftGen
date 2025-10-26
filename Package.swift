@@ -34,7 +34,8 @@ let package = Package(
       "SwiftGenKit",
       "Yams"
     ], resources: [
-      .copy("templates")
+      .copy("templates"),
+      .process("Resources")
     ]),
     .target(name: "SwiftGenKit", dependencies: [
       "Kanna",
