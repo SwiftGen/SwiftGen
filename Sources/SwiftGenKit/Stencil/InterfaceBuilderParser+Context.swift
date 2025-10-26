@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import StoryboardCore
 
 //
 // See the documentation file for a full description of this context's structure:
@@ -28,7 +29,7 @@ extension InterfaceBuilder.Parser {
       "name": storyboard.name,
       "scenes": storyboard.scenes
         .sorted { $0.identifier < $1.identifier }
-        .map(map(scene:)),
+        .map { map(scene: $0, storyboardName: storyboard.name) },
       "segues": storyboard.segues
         .sorted { $0.identifier < $1.identifier }
         .map(map(segue:)),
@@ -36,15 +37,17 @@ extension InterfaceBuilder.Parser {
     ]
 
     if let scene = storyboard.initialScene {
-      result["initialScene"] = map(scene: scene)
+      result["initialScene"] = map(scene: scene, storyboardName: storyboard.name)
     }
 
     return result
   }
 
-  private func map(scene: InterfaceBuilder.Scene) -> [String: Any] {
+  private func map(scene: InterfaceBuilder.Scene, storyboardName: String) -> [String: Any] {
+    var result: [String: Any]
+
     if let customClass = scene.customClass {
-      return [
+      result = [
         "identifier": scene.identifier,
         "customClass": customClass,
         "customModule": scene.customModule ?? "",
@@ -53,7 +56,7 @@ extension InterfaceBuilder.Parser {
         "moduleIsPlaceholder": scene.moduleIsPlaceholder
       ]
     } else {
-      return [
+      result = [
         "identifier": scene.identifier,
         "baseType": scene.tag.uppercasedFirst(),
         "type": scene.type,
@@ -61,6 +64,16 @@ extension InterfaceBuilder.Parser {
         "moduleIsPlaceholder": scene.moduleIsPlaceholder
       ]
     }
+
+    if let primer = characterAtlas?.promptPrimer(forScene: scene.identifier, storyboardName: storyboardName) {
+      let prompt = primer.renderPrompt()
+      if !prompt.isEmpty {
+        result["characterPrompt"] = prompt
+      }
+      result["characterAtlas"] = primer.contextDictionary()
+    }
+
+    return result
   }
 
   private func map(segue: InterfaceBuilder.Segue) -> [String: Any] {

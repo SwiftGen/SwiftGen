@@ -7,6 +7,7 @@
 import Foundation
 import Kanna
 import PathKit
+import StoryboardCore
 
 public enum InterfaceBuilder {
   public enum ParserError: Error, CustomStringConvertible {
@@ -25,12 +26,24 @@ public enum InterfaceBuilder {
 
   public final class Parser: SwiftGenKit.Parser {
     private let options: ParserOptionValues
+    let characterAtlas: CharacterAtlas?
     var storyboards = [Storyboard]()
     public var warningHandler: Parser.MessageHandler?
 
     public init(options: [String: Any] = [:], warningHandler: Parser.MessageHandler? = nil) throws {
       self.options = try ParserOptionValues(options: options, available: Self.allOptions)
       self.warningHandler = warningHandler
+      let atlasPath = self.options[Option.characterAtlas].trimmingCharacters(in: .whitespacesAndNewlines)
+      if atlasPath.isEmpty {
+        characterAtlas = nil
+      } else {
+        let path = Path(atlasPath)
+        do {
+          characterAtlas = try CharacterAtlasLoader.load(at: path)
+        } catch {
+          throw ParserError.invalidFile(path: path, reason: "Character atlas error: \(error)")
+        }
+      }
     }
 
     public static let defaultFilter = filterRegex(forExtensions: ["storyboard"])
@@ -65,4 +78,18 @@ public enum InterfaceBuilder {
       }
     }
   }
+}
+
+extension InterfaceBuilder.Parser {
+  enum Option {
+    static let characterAtlas = ParserOption<String>(
+      key: "characterAtlas",
+      defaultValue: "",
+      help: "Path to a character atlas file describing characters, voice samples, and relationships."
+    )
+  }
+
+  public static let allOptions: ParserOptionList = [
+    Option.characterAtlas
+  ]
 }

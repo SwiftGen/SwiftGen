@@ -8,6 +8,7 @@ let package = Package(
   ],
   products: [
     .executable(name: "swiftgen", targets: ["SwiftGen"]),
+    .library(name: "StoryboardCore", targets: ["StoryboardCore"]),
     .library(name: "SwiftGenCLI", targets: ["SwiftGenCLI"]),
     .library(name: "SwiftGenKit", targets: ["SwiftGenKit"]),
   ],
@@ -22,6 +23,7 @@ let package = Package(
     .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.7")
   ],
   targets: [
+    .target(name: "StoryboardCore", dependencies: []),
     .executableTarget(name: "SwiftGen", dependencies: [
       "SwiftGenCLI"
     ]),
@@ -40,6 +42,7 @@ let package = Package(
       "Kanna",
       "PathKit",
       "Stencil",
+      "StoryboardCore",
       "Yams"
     ]),
     .testTarget(name: "SwiftGenKitTests", dependencies: [
