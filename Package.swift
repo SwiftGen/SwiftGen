@@ -8,8 +8,10 @@ let package = Package(
   ],
   products: [
     .executable(name: "swiftgen", targets: ["SwiftGen"]),
+    .library(name: "StoryboardCore", targets: ["StoryboardCore"]),
     .library(name: "SwiftGenCLI", targets: ["SwiftGenCLI"]),
     .library(name: "SwiftGenKit", targets: ["SwiftGenKit"]),
+    .library(name: "StoryboardCore", targets: ["StoryboardCore"]),
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.1.3"),
@@ -22,9 +24,11 @@ let package = Package(
     .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.7")
   ],
   targets: [
+    .target(name: "StoryboardCore", dependencies: []),
     .executableTarget(name: "SwiftGen", dependencies: [
       "SwiftGenCLI"
     ]),
+    .target(name: "StoryboardCore"),
     .target(name: "SwiftGenCLI", dependencies: [
       .product(name: "ArgumentParser", package: "swift-argument-parser"),
       "Kanna",
@@ -34,12 +38,14 @@ let package = Package(
       "SwiftGenKit",
       "Yams"
     ], resources: [
-      .copy("templates")
+      .copy("templates"),
+      .process("Resources")
     ]),
     .target(name: "SwiftGenKit", dependencies: [
       "Kanna",
       "PathKit",
       "Stencil",
+      "StoryboardCore",
       "Yams"
     ]),
     .testTarget(name: "SwiftGenKitTests", dependencies: [
@@ -54,6 +60,9 @@ let package = Package(
       "StencilSwiftKit",
       "SwiftGenKit",
       "TestUtils"
+    ]),
+    .testTarget(name: "StoryboardCoreTests", dependencies: [
+      "StoryboardCore"
     ]),
     .target(name: "TestUtils", dependencies: [
       "Difference",

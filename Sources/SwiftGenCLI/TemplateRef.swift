@@ -84,6 +84,15 @@ public enum TemplateRef: Equatable {
       return false
     }
   }
+
+  public var displayName: String {
+    switch self {
+    case .name(let name):
+      return name
+    case .path(let path):
+      return path.lastComponent
+    }
+  }
 }
 
 extension TemplateRef.Error: CustomStringConvertible {

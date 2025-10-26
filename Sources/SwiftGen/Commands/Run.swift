@@ -70,22 +70,54 @@ extension Commands.Run {
     mutating func run() throws {
       commandLogLevel = logLevel
 
+      let mentor = AIMentor()
       let parserOptions = try Parameters.parse(items: options)
+      let optionSignature = AIMentor.makeOptionSignature(from: parserOptions)
       let parser = try Parser(options: parserOptions) { msg, _, _ in
         logMessage(.warning, msg)
       }
 
-      let filter = try Filter(pattern: filter, options: Parser.self.filterOptions)
+      let filterPattern = filter
+      let filter = try Filter(pattern: filterPattern, options: Parser.self.filterOptions)
       try parser.searchAndParse(paths: paths, filter: filter)
 
-      let templateRealPath = try template.reference.resolvePath(forParser: Parser.info)
-      let isBundledTemplate = try template.reference.isBundled(forParser: Parser.info)
+      let templateRef = try template.reference
+      let templateRealPath = try templateRef.resolvePath(forParser: Parser.info)
+      let isBundledTemplate = templateRef.isBundled(forParser: Parser.info)
       let template = try Template.load(
         from: templateRealPath,
         modernSpacing: isBundledTemplate || spacing.modernSpacing
       )
 
       let context = parser.stencilContext()
+      let parameterSignature = AIMentor.makeParameterSignature(from: templateParameters)
+      let inputDigest = AIMentor.makeInputDigest(from: paths.map { $0.string })
+      let snapshot = AIMentor.PromptSnapshot(
+        commandName: Parser.info.name,
+        templateName: templateRef.displayName,
+        filter: filterPattern,
+        optionSignature: optionSignature,
+        parameterSignature: parameterSignature,
+        inputCount: paths.count,
+        inputDigest: inputDigest
+      )
+      mentor.observe(prompt: snapshot)
+
+      let proposed = AIMentor.ProposedOutput(
+        commandName: Parser.info.name,
+        templateName: templateRef.displayName,
+        filter: filterPattern,
+        optionSignature: optionSignature,
+        parameterSignature: parameterSignature,
+        inputCount: paths.count,
+        inputDigest: inputDigest,
+        context: context,
+        outputDescription: output.destination.description
+      )
+      for tip in mentor.advice(for: proposed) {
+        logMessage(.info, "💡 Mentor Tip: \(tip)")
+      }
+
       let enriched = try StencilContext.enrich(context: context, parameters: templateParameters)
       let rendered = try template.render(enriched)
       try output.destination.write(content: rendered, onlyIfChanged: true)

@@ -69,7 +69,7 @@ public extension Parser {
   /// - Parameter filter: The filter to apply to each path.
   /// - Returns: Each path, and it's parent path, found matching the filter.
   static func subpaths(in paths: [Path], matching filter: Filter) throws -> [(path: Path, parentDir: Path)] {
-    try paths.flatMap { try subpaths(in: $0, matching: filter) }
+    try paths.flatMap { try $0.subpaths(matching: filter) }
   }
 
   /// Recursively search through the given path, returning any files or folders that matches the given filter.
@@ -78,16 +78,7 @@ public extension Parser {
   /// - Parameter filter: The filter to apply to each path.
   /// - Returns: Each path, and it's parent path, found matching the filter.
   static func subpaths(in path: Path, matching filter: Filter) throws -> [(path: Path, parentDir: Path)] {
-    if path.matches(filter: filter) {
-      let parentDir = path.absolute().parent()
-      return [(path, parentDir)]
-    } else {
-      let parentDir = path.absolute()
-      return path
-        .iterateChildren(options: [.skipsHiddenFiles, .skipsPackageDescendants])
-        .filter { $0.matches(filter: filter) }
-        .map { ($0, parentDir) }
-    }
+    try path.subpaths(matching: filter)
   }
 }
 
