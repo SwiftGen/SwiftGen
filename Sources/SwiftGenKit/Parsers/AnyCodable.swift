@@ -8,7 +8,7 @@
 
 import Foundation
 
-// swiftlint:disable cyclomatic_complexity function_body_length
+// swiftlint:disable cyclomatic_complexity
 public struct AnyCodable: Codable {
   public let value: Any?
 
@@ -114,7 +114,7 @@ public struct AnyCodable: Codable {
     }
   }
 }
-// swiftlint:enable cyclomatic_complexity function_body_length
+// swiftlint:enable cyclomatic_complexity
 
 extension KeyedDecodingContainer {
   public func decode(_ type: [String: Any].Type, forKey key: K) throws -> [String: Any] {

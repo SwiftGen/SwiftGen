@@ -96,3 +96,4 @@ internal extension Color {
     self.init(rgbaValue: color.rgbaValue)
   }
 }
+// swiftlint:enable all

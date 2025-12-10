@@ -157,3 +157,4 @@ internal extension SwiftUI.Font {
   }
 }
 #endif
+// swiftlint:enable all

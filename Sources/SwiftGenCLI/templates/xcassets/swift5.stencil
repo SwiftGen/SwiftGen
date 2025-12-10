@@ -193,12 +193,12 @@
   #endif
 
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
-  {{accessModifier}} private(set) lazy var color: Color = {
+  {{accessModifier}} var color: Color {
     guard let color = Color(asset: self) else {
       fatalError("Unable to load color asset named \(name).")
     }
     return color
-  }()
+  }
 
   #if os(iOS) || os(tvOS)
   @available(iOS 11.0, tvOS 11.0, *)
@@ -213,9 +213,9 @@
 
   #if canImport(SwiftUI)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-  {{accessModifier}} private(set) lazy var swiftUIColor: SwiftUI.Color = {
+  {{accessModifier}} var swiftUIColor: SwiftUI.Color {
     SwiftUI.Color(asset: self)
-  }()
+  }
   #endif
 
   fileprivate init(name: String) {
@@ -435,3 +435,4 @@ private final class BundleToken {
 {% else %}
 // No assets found
 {% endif %}
+// swiftlint:enable all

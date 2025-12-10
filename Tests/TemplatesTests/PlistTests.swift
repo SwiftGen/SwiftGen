@@ -56,6 +56,7 @@ final class PlistTests: XCTestCase {
   }
 
   // generate variations to test customname generation
+  // swiftlint:disable:next closure_body_length
   private let runtimeVariations: VariationGenerator = { name, context in
     guard name == "all" else { return [(context: context, suffix: "")] }
 

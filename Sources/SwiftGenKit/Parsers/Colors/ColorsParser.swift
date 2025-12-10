@@ -74,7 +74,7 @@ public enum Colors {
     }
 
     public static var defaultFilter: String {
-      let extensions = Parser.subParsers.flatMap { $0.extensions }.sorted()
+      let extensions = Self.subParsers.flatMap { $0.extensions }.sorted()
       return filterRegex(forExtensions: extensions)
     }
 

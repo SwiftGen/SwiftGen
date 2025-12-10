@@ -1,9 +1,8 @@
-swiftlint_version: 0.48.0
+swiftlint_version: 0.51.0
 
 opt_in_rules:
  - accessibility_label_for_image
  - anonymous_argument_in_multiline_closure
- - anyobject_protocol
  - array_init
  - attributes
  - balanced_xctest_lifecycle
@@ -98,6 +97,10 @@ excluded:
   - Sources/TestUtils/Fixtures
 
 # Rules customization
+attributes:
+  always_on_line_above:
+    ["@Flag", "@OptionGroup"]
+
 conditional_returns_on_newline:
   if_only: true
 
@@ -117,6 +120,9 @@ file_header:
 
 indentation_width:
   indentation_width: 2
+
+large_tuple:
+  warning: 3
 
 line_length:
   warning: 120

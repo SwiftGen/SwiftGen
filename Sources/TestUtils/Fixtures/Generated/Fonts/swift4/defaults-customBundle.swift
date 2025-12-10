@@ -105,3 +105,4 @@ internal extension FontConvertible.Font {
     self.init(name: font.name, size: size)
   }
 }
+// swiftlint:enable all

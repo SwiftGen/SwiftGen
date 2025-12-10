@@ -59,3 +59,4 @@ internal struct File {
     return url(locale: locale).path
   }
 }
+// swiftlint:enable all

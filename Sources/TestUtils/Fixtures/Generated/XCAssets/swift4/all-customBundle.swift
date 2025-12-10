@@ -254,3 +254,4 @@ internal struct SymbolAsset {
   }
   #endif
 }
+// swiftlint:enable all

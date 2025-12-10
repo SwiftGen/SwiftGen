@@ -83,3 +83,4 @@ private final class BundleToken {
   }()
 }
 // swiftlint:enable convenience_type explicit_type_interface
+// swiftlint:enable all

@@ -105,3 +105,4 @@ private final class BundleToken {
 {% else %}
 // No files found
 {% endif %}
+// swiftlint:enable all

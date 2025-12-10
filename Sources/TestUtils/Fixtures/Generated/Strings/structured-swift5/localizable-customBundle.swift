@@ -121,3 +121,4 @@ extension L10n {
   }
   #endif
 }
+// swiftlint:enable all

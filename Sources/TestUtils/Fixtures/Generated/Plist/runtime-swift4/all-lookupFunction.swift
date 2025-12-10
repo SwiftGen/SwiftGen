@@ -88,3 +88,4 @@ private struct PlistDocument {
     return result
   }
 }
+// swiftlint:enable all

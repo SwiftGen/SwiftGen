@@ -160,3 +160,4 @@ private final class BundleToken {
 {% else %}
 // No fonts found
 {% endif %}
+// swiftlint:enable all

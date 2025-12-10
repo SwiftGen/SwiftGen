@@ -118,12 +118,12 @@ internal final class ColorAsset {
   #endif
 
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
-  internal private(set) lazy var color: Color = {
+  internal var color: Color {
     guard let color = Color(asset: self) else {
       fatalError("Unable to load color asset named \(name).")
     }
     return color
-  }()
+  }
 
   #if os(iOS) || os(tvOS)
   @available(iOS 11.0, tvOS 11.0, *)
@@ -138,9 +138,9 @@ internal final class ColorAsset {
 
   #if canImport(SwiftUI)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-  internal private(set) lazy var swiftUIColor: SwiftUI.Color = {
+  internal var swiftUIColor: SwiftUI.Color {
     SwiftUI.Color(asset: self)
-  }()
+  }
   #endif
 
   fileprivate init(name: String) {
@@ -336,3 +336,4 @@ internal extension SwiftUI.Image {
   }
 }
 #endif
+// swiftlint:enable all

@@ -5,7 +5,7 @@
 
 namespace :lint do
   SWIFTLINT = 'rakelib/lint.sh'
-  SWIFTLINT_VERSION = '0.48.0'
+  SWIFTLINT_VERSION = '0.51.0'
 
   task :install do |task| 
     next if check_version

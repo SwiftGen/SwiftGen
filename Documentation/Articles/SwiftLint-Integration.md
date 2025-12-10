@@ -18,7 +18,7 @@ custom_rules:
     severity: error
   swiftgen_colors:
     name: "SwiftGen Colors"
-    regex: '(UIColor(\.init)?|#colorLiteral)\(((red|displayP3Red):.+?,green:.+?,blue:.+?,alpha:.+?)|(white:.+?,alpha:.+?)|(hue:.+?,saturation:.+?,brightness:.+?,alpha:.+?)\)'
+    regex: '(UIColor\s*(\.init)?|#colorLiteral)\s*\(\s*((red|displayP3Red):.+?,\s*green:.+?,\s*blue:.+?,\s*alpha:.+?)|(white:.+?,alpha:.+?)|(hue:.+?,saturation:.+?,brightness:.+?,alpha:.+?)\)'
     message: "Use ColorName.<color> instead"
     severity: error
   swiftgen_files:
