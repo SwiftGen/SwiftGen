@@ -9,7 +9,7 @@ on:
 jobs:
   cocoapods:
     name: Push To CocoaPods
-    runs-on: macos-12
+    runs-on: macos-26
     steps:
       -
         name: Checkout
