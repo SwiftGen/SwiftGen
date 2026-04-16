@@ -71,6 +71,16 @@ import Foundation
 // MARK: - Implementation Details
 
 extension {{enumName}} {
+  #if swift(>=5.6)
+  private static func tr(_ table: String, _ key: String, _ args: any CVarArg..., fallback value: String) -> String {
+    {% if param.lookupFunction %}
+    let format = {{ param.lookupFunction }}(key, table, value)
+    {% else %}
+    let format = {{param.bundle|default:"BundleToken.bundle"}}.localizedString(forKey: key, value: value, table: table)
+    {% endif %}
+    return String(format: format, locale: Locale.current, arguments: args)
+  }
+  #else
   private static func tr(_ table: String, _ key: String, _ args: CVarArg..., fallback value: String) -> String {
     {% if param.lookupFunction %}
     let format = {{ param.lookupFunction }}(key, table, value)
@@ -79,6 +89,7 @@ extension {{enumName}} {
     {% endif %}
     return String(format: format, locale: Locale.current, arguments: args)
   }
+  #endif
 }
 {% if not param.bundle and not param.lookupFunction %}
 

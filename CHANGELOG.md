@@ -48,6 +48,10 @@ _None_
   [#1007](https://github.com/SwiftGen/SwiftGen/issues/1007)
   [#1008](https://github.com/SwiftGen/SwiftGen/pull/1008)
 
+* Added support the existential `any` to `StoryboardType` and `CVarArg` for Swift 5.6 or later.  
+  [treastrain / Tanaka Ryoga](https://github.com/treastrain)
+  [#1056](https://github.com/SwiftGen/SwiftGen/pull/1056)
+
 ### Bug Fixes
 
 _None_

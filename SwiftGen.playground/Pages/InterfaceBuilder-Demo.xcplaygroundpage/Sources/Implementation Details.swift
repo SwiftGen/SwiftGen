@@ -17,7 +17,11 @@ public extension StoryboardType {
 }
 
 public struct SceneType<T: UIViewController> {
+  #if swift(>=5.6)
+  public let storyboard: any StoryboardType.Type
+  #else
   public let storyboard: StoryboardType.Type
+  #endif
   public let identifier: String
 
   public func instantiate() -> T {
@@ -33,15 +37,27 @@ public struct SceneType<T: UIViewController> {
     return storyboard.storyboard.instantiateViewController(identifier: identifier, creator: block)
   }
 
+  #if swift(>=5.6)
+  // Extra for playgrounds
+  public init(storyboard: any StoryboardType.Type, identifier: String) {
+    self.storyboard = storyboard
+    self.identifier = identifier
+  }
+  #else
   // Extra for playgrounds
   public init(storyboard: StoryboardType.Type, identifier: String) {
     self.storyboard = storyboard
     self.identifier = identifier
   }
+  #endif
 }
 
 public struct InitialSceneType<T: UIViewController> {
+  #if swift(>=5.6)
+  public let storyboard: any StoryboardType.Type
+  #else
   public let storyboard: StoryboardType.Type
+  #endif
 
   public func instantiate() -> T {
     guard let controller = storyboard.storyboard.instantiateInitialViewController() as? T else {
@@ -58,10 +74,17 @@ public struct InitialSceneType<T: UIViewController> {
     return controller
   }
 
+  #if swift(>=5.6)
+  // Extra for playgrounds
+  public init(storyboard: any StoryboardType.Type) {
+    self.storyboard = storyboard
+  }
+  #else
   // Extra for playgrounds
   public init(storyboard: StoryboardType.Type) {
     self.storyboard = storyboard
   }
+  #endif
 }
 
 // MARK: - Implementation Details (segues)
