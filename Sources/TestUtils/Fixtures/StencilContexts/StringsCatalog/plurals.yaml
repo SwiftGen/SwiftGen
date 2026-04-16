@@ -1,0 +1,37 @@
+tables:
+- levels:
+    children:
+    - name: "apples"
+      strings:
+      - key: "apples.count"
+        name: "count"
+        translation: "Plural format key: apples.count"
+        types:
+        - "Int"
+    - children:
+      - name: "event"
+        strings:
+        - key: "competition.event.number-of-matches"
+          name: "number-of-matches"
+          translation: "Plural format key: competition.event.number-of-matches"
+          types:
+          - "Int"
+      - name: "tab"
+        strings:
+        - key: "competition.tab.favorite-players"
+          name: "favorite-players"
+          translation: "Key: competition.tab.favorite-players"
+        - key: "competition.tab.favorite-teams"
+          name: "favorite-teams"
+          translation: "Key: competition.tab.favorite-teams"
+      name: "competition"
+    - children:
+      - name: "subscription"
+        strings:
+        - key: "feed.subscription.count"
+          name: "count"
+          translation: "Plural format key: feed.subscription.count"
+          types:
+          - "Int"
+      name: "feed"
+  name: "LocalizableDict"

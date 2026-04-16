@@ -1,0 +1,61 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "settings.navigation-bar.self" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some Reserved Keyword there"
+          }
+        }
+      }
+    },
+    "settings.navigation-bar.title.even.deeper" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "settings.user_profile_section.footer_text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Here you can change some user profile settings."
+          }
+        }
+      }
+    },
+    "settings.user_profile_section.HEADER_TITLE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "User Profile Settings"
+          }
+        }
+      }
+    },
+    "settings.user_profile_section.points" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome %@! You have %d points on your account."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

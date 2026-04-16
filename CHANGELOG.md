@@ -10,7 +10,10 @@ _None_
 
 ### New Features
 
-_None_
+* Added Strings Catalog support.  
+  [Łukasz Lech](https://github.com/leszko11)
+  [#1124](https://github.com/SwiftGen/SwiftGen/pull/1124)
+  [#1065](https://github.com/SwiftGen/SwiftGen/issues/1065)
 
 ### Bug Fixes
 

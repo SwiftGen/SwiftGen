@@ -25,6 +25,7 @@ public class Fixtures {
     case plistBad = "Plist/bad"
     case plistGood = "Plist/good"
     case strings = "Strings"
+    case stringsCatalog = "StringsCatalog"
     case xcassets = "XCAssets"
     case yaml = "YAML"
     case yamlBad = "YAML/bad"

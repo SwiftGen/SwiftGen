@@ -1,0 +1,139 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "apples.count" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "You have one apple"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "You have %d apples. Wow that is a lot!"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "You have zero apples"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "competition.event.number-of-matches" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%ld match"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%ld matches"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "No matches"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "competition.tab.favorite-players" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "width" : {
+              "20" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Fav. Players"
+                }
+              },
+              "25" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Favorite Players"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "competition.tab.favorite-teams" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "width" : {
+              "20" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Fav. Teams"
+                }
+              },
+              "25" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Favorite Teams"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "feed.subscription.count" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%ld subscription"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%ld subscriptions"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "No subscriptions yet"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

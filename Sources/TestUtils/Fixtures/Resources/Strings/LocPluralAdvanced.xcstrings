@@ -1,0 +1,627 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "many.placeholders.plurals.base" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ - %#@d2@ - %#@f3@ - %#@d5@ - %04$#@f4@ - %#@d6@ - %007$@ - %8$3.2#@f8@ - %#@f11@ - %9$@ - %#@d10@"
+          },
+          "substitutions" : {
+            "d2" : {
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg two"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg twos"
+                    }
+                  }
+                }
+              }
+            },
+            "d5" : {
+              "argNum" : 5,
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%d five"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%d fives"
+                    }
+                  }
+                }
+              }
+            },
+            "d6" : {
+              "argNum" : 6,
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%d six"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%d sixes"
+                    }
+                  }
+                }
+              }
+            },
+            "d10" : {
+              "argNum" : 10,
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%d ten"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%d tens"
+                    }
+                  }
+                }
+              }
+            },
+            "f3" : {
+              "formatSpecifier" : "f",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg three"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg threes"
+                    }
+                  }
+                }
+              }
+            },
+            "f4" : {
+              "formatSpecifier" : "f",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg four"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg fours"
+                    }
+                  }
+                }
+              }
+            },
+            "f8" : {
+              "formatSpecifier" : "f",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg eight"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg eights"
+                    }
+                  }
+                }
+              }
+            },
+            "f11" : {
+              "argNum" : 11,
+              "formatSpecifier" : "f",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%1.2f eleven"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%1.2f elevens"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "many.placeholders.plurals.zero" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ - %#@d2@ - %0$#@zero@ - %#@f3@ - %#@d5@ - %04$#@f4@ - %#@d6@ - %007$@ - %8$3.2#@f8@ - %#@f11@ - %9$@ - %#@d10@"
+          },
+          "substitutions" : {
+            "d2" : {
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg two"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg twos"
+                    }
+                  }
+                }
+              }
+            },
+            "d5" : {
+              "argNum" : 5,
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%d five"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%d fives"
+                    }
+                  }
+                }
+              }
+            },
+            "d6" : {
+              "argNum" : 6,
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%d six"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%d sixes"
+                    }
+                  }
+                }
+              }
+            },
+            "d10" : {
+              "argNum" : 10,
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%d ten"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%d tens"
+                    }
+                  }
+                }
+              }
+            },
+            "f3" : {
+              "formatSpecifier" : "f",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg three"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg threes"
+                    }
+                  }
+                }
+              }
+            },
+            "f4" : {
+              "formatSpecifier" : "f",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg four"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg fours"
+                    }
+                  }
+                }
+              }
+            },
+            "f8" : {
+              "formatSpecifier" : "f",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg eight"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg eights"
+                    }
+                  }
+                }
+              }
+            },
+            "f11" : {
+              "argNum" : 11,
+              "formatSpecifier" : "f",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%1.2f eleven"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%1.2f elevens"
+                    }
+                  }
+                }
+              }
+            },
+            "zero" : {
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg zero"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg zeros"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mixed.placeholders-and-variables.positionalstring-positional3int" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %#@has_rating@"
+          },
+          "substitutions" : {
+            "has_rating" : {
+              "argNum" : 3,
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "has one rating"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "has %d ratings"
+                    }
+                  },
+                  "zero" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "has no rating"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mixed.placeholders-and-variables.string-int" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %#@has_rating@"
+          },
+          "substitutions" : {
+            "has_rating" : {
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "has one rating"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "has %arg ratings"
+                    }
+                  },
+                  "zero" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "has no rating"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mixed.placeholders-and-variables.string-positional2int" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %#@has_rating@"
+          },
+          "substitutions" : {
+            "has_rating" : {
+              "argNum" : 2,
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "has one rating"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "has %d ratings"
+                    }
+                  },
+                  "zero" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "has no rating"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mixed.placeholders-and-variables.string-positional3int" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %#@has_rating@"
+          },
+          "substitutions" : {
+            "has_rating" : {
+              "argNum" : 3,
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "has one rating"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "has %d ratings"
+                    }
+                  },
+                  "zero" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "has no rating"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "multiple.placeholders-and-variables.int-string-string" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your %3$@ list contains %#@first@ %2$@."
+          },
+          "substitutions" : {
+            "first" : {
+              "argNum" : 1,
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "one item. You should buy it"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg items. You should buy them"
+                    }
+                  },
+                  "zero" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "no items. Add one"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "multiple.variables.three-variables-in-formatkey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%#@files@ (%#@bytes@, %#@minutes@)"
+          },
+          "substitutions" : {
+            "bytes" : {
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg byte"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg bytes"
+                    }
+                  }
+                }
+              }
+            },
+            "files" : {
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg file remaining"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg files remaining"
+                    }
+                  }
+                }
+              }
+            },
+            "minutes" : {
+              "formatSpecifier" : "d",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg minute"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg minutes"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -1,0 +1,208 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "alert__message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some /*alert body there"
+          }
+        }
+      }
+    },
+    "alert__title" : {
+      "comment" : "Title for an alert 1️⃣",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Title of the alert"
+          }
+        }
+      }
+    },
+    "apples.count" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have %d apples"
+          }
+        }
+      }
+    },
+    "bananas.owner" : {
+      "comment" : "A comment with no space above it",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Those %d bananas belong to %@."
+          }
+        }
+      }
+    },
+    "key1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "value1\tvalue"
+          }
+        }
+      }
+    },
+    "key1.anonymous" : {
+      "comment" : "Same as \"key1\" = \"value1\"; but in the context of user not logged in",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "value2"
+          }
+        }
+      }
+    },
+    "many.placeholders.base" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %d %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d"
+          }
+        }
+      }
+    },
+    "many.placeholders.zero" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %d %0$@ %f %5$d %04$f %6$d %007$@ %8$3.2f %11$1.2f %9$@ %10$d"
+          }
+        }
+      }
+    },
+    "ObjectOwnership" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These are %3$@'s %1$d %2$@."
+          }
+        }
+      }
+    },
+    "percent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is a %% character."
+          }
+        }
+      }
+    },
+    "private" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hello, my name is \"%@\" and I'm %d"
+          }
+        }
+      }
+    },
+    "settings.navigation-bar.self♦️" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some Reserved Keyword there👍🏽"
+          }
+        }
+      }
+    },
+    "settings.navigation-bar.title.deeper.than.we.can.handle.no.really.this.is.deep" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepSettings"
+          }
+        }
+      }
+    },
+    "settings.navigation-bar.title.even.deeper" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "settings.user__profile_section.footer_text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Here you can change some user profile settings."
+          }
+        }
+      }
+    },
+    "settings.user__profile_section.HEADER_TITLE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "User Profile Settings"
+          }
+        }
+      }
+    },
+    "types" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString: '%s', Pointer: '%p'"
+          }
+        }
+      }
+    },
+    "what./*happens*/.here" : {
+      "comment" : "some comment 👨‍👩‍👧‍👦",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "hello world! /* still in string */"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

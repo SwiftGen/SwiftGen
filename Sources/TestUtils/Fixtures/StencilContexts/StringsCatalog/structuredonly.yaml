@@ -1,0 +1,33 @@
+tables:
+- levels:
+    children:
+    - children:
+      - children:
+        - children:
+          - name: "even"
+            strings:
+            - key: "settings.navigation-bar.title.even.deeper"
+              name: "deeper"
+              translation: "Settings"
+          name: "title"
+        name: "navigation-bar"
+        strings:
+        - key: "settings.navigation-bar.self"
+          name: "self"
+          translation: "Some Reserved Keyword there"
+      - name: "user_profile_section"
+        strings:
+        - key: "settings.user_profile_section.footer_text"
+          name: "footer_text"
+          translation: "Here you can change some user profile settings."
+        - key: "settings.user_profile_section.HEADER_TITLE"
+          name: "HEADER_TITLE"
+          translation: "User Profile Settings"
+        - key: "settings.user_profile_section.points"
+          name: "points"
+          translation: "Welcome %@! You have %d points on your account."
+          types:
+          - "String"
+          - "Int"
+      name: "settings"
+  name: "LocStructuredOnly"

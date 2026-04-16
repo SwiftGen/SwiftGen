@@ -1,0 +1,95 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "..some..dots.and..empty..components.." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veni, vidi, vici"
+          }
+        }
+      }
+    },
+    "ending.with." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ceci n'est pas une pipe."
+          }
+        }
+      }
+    },
+    "MULTILINE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "multi\nline"
+          }
+        }
+      }
+    },
+    "multiLine\nKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "test"
+          }
+        }
+      }
+    },
+    "multiline-comment" : {
+      "comment" : "A multiline\n   comment",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This string should have a multiline comment"
+          }
+        }
+      }
+    },
+    "MULTILINE2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "another\nmulti\n    line"
+          }
+        }
+      }
+    },
+    "SINGLELINE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "single line"
+          }
+        }
+      }
+    },
+    "SINGLELINE2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "another single line"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

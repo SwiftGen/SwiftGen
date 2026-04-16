@@ -1,0 +1,40 @@
+tables:
+- levels:
+    children:
+    - name: "ending"
+      strings:
+      - key: "ending.with."
+        name: "with"
+        translation: "Ceci n'est pas une pipe."
+    - children:
+      - children:
+        - children:
+          - name: "empty"
+            strings:
+            - key: "..some..dots.and..empty..components.."
+              name: "components"
+              translation: "Veni, vidi, vici"
+          name: "and"
+        name: "dots"
+      name: "some"
+    strings:
+    - key: "MULTILINE"
+      name: "MULTILINE"
+      translation: "multi\\nline"
+    - key: "multiLine\\nKey"
+      name: "multiLine\nKey"
+      translation: "test"
+    - comment: "A multiline\\n   comment"
+      key: "multiline-comment"
+      name: "multiline-comment"
+      translation: "This string should have a multiline comment"
+    - key: "MULTILINE2"
+      name: "MULTILINE2"
+      translation: "another\\nmulti\\n    line"
+    - key: "SINGLELINE"
+      name: "SINGLELINE"
+      translation: "single line"
+    - key: "SINGLELINE2"
+      name: "SINGLELINE2"
+      translation: "another single line"
+  name: "LocMultiline"

@@ -1,0 +1,116 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "alert_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contenu détaillé de l'alerte"
+          }
+        }
+      }
+    },
+    "alert_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titre de l'alerte"
+          }
+        }
+      }
+    },
+    "apples.count" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous avez %d pommes"
+          }
+        }
+      }
+    },
+    "bananas.owner" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ces %d bananes appartiennent à %@."
+          }
+        }
+      }
+    },
+    "greetings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonjour, mon nom est %@ et j'ai %d ans"
+          }
+        }
+      }
+    },
+    "ObjectOwnership" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce sont les %1$d %2$@ de %3$@."
+          }
+        }
+      }
+    },
+    "settings.navigation-bar.self" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quelques mots-clés réservés"
+          }
+        }
+      }
+    },
+    "settings.navigation-bar.title.even.deeper" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paramètres"
+          }
+        }
+      }
+    },
+    "settings.user-profile-section.footer_text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ici, vous pouvez modifier certains paramètres de profil d'utilisateur."
+          }
+        }
+      }
+    },
+    "settings.user-profile-section.HEADER_TITLE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil de l'utilisateur Paramètres"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

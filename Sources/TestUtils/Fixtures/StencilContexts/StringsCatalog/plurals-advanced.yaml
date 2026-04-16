@@ -1,0 +1,83 @@
+tables:
+- levels:
+    children:
+    - children:
+      - children:
+        - name: "plurals"
+          strings:
+          - key: "many.placeholders.plurals.base"
+            name: "base"
+            translation: "%@ - %#@d2@ - %#@f3@ - %#@d5@ - %04$#@f4@ - %#@d6@ - %007$@
+              - %8$3.2#@f8@ - %#@f11@ - %9$@ - %#@d10@"
+            types:
+            - "String"
+            - "String"
+            - "String"
+            - "String"
+            - "String"
+            - "String"
+            - "String"
+            - "String"
+          - key: "many.placeholders.plurals.zero"
+            name: "zero"
+            translation: "%@ - %#@d2@ - %0$#@zero@ - %#@f3@ - %#@d5@ - %04$#@f4@ -
+              %#@d6@ - %007$@ - %8$3.2#@f8@ - %#@f11@ - %9$@ - %#@d10@"
+            types:
+            - "String"
+            - "String"
+            - "String"
+            - "String"
+            - "String"
+            - "String"
+            - "String"
+            - "String"
+        name: "placeholders"
+      name: "many"
+    - children:
+      - name: "placeholders-and-variables"
+        strings:
+        - key: "mixed.placeholders-and-variables.positionalstring-positional3int"
+          name: "positionalstring-positional3int"
+          translation: "%1$@ %#@has_rating@"
+          types:
+          - "String"
+        - key: "mixed.placeholders-and-variables.string-int"
+          name: "string-int"
+          translation: "%@ %#@has_rating@"
+          types:
+          - "String"
+          - "String"
+        - key: "mixed.placeholders-and-variables.string-positional2int"
+          name: "string-positional2int"
+          translation: "%@ %#@has_rating@"
+          types:
+          - "String"
+          - "String"
+        - key: "mixed.placeholders-and-variables.string-positional3int"
+          name: "string-positional3int"
+          translation: "%@ %#@has_rating@"
+          types:
+          - "String"
+          - "String"
+      name: "mixed"
+    - children:
+      - name: "placeholders-and-variables"
+        strings:
+        - key: "multiple.placeholders-and-variables.int-string-string"
+          name: "int-string-string"
+          translation: "Your %3$@ list contains %#@first@ %2$@."
+          types:
+          - "String"
+          - "String"
+          - "String"
+      - name: "variables"
+        strings:
+        - key: "multiple.variables.three-variables-in-formatkey"
+          name: "three-variables-in-formatkey"
+          translation: "%#@files@ (%#@bytes@, %#@minutes@)"
+          types:
+          - "String"
+          - "String"
+          - "String"
+      name: "multiple"
+  name: "LocPluralAdvanced"

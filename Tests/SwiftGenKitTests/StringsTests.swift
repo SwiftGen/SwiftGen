@@ -141,7 +141,7 @@ final class StringsTests: XCTestCase {
       }
 
       XCTAssertEqual(path.lastComponent, "colors.clr")
-      XCTAssertEqual(supported, ["stringsdict", "strings"])
+      XCTAssertEqual(supported, ["stringsdict", "strings", "xcstrings"])
     }
   }
 

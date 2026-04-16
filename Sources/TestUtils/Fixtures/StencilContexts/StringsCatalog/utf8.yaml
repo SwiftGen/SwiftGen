@@ -1,0 +1,63 @@
+tables:
+- levels:
+    children:
+    - name: "apples"
+      strings:
+      - key: "apples.count"
+        name: "count"
+        translation: "Vous avez %d pommes"
+        types:
+        - "Int"
+    - name: "bananas"
+      strings:
+      - key: "bananas.owner"
+        name: "owner"
+        translation: "Ces %d bananes appartiennent \xE0 %@."
+        types:
+        - "Int"
+        - "String"
+    - children:
+      - children:
+        - children:
+          - name: "even"
+            strings:
+            - key: "settings.navigation-bar.title.even.deeper"
+              name: "deeper"
+              translation: "Param\xE8tres"
+          name: "title"
+        name: "navigation-bar"
+        strings:
+        - key: "settings.navigation-bar.self"
+          name: "self"
+          translation: "Quelques mots-cl\xE9s r\xE9serv\xE9s"
+      - name: "user-profile-section"
+        strings:
+        - key: "settings.user-profile-section.footer_text"
+          name: "footer_text"
+          translation: "Ici, vous pouvez modifier certains param\xE8tres de profil
+            d'utilisateur."
+        - key: "settings.user-profile-section.HEADER_TITLE"
+          name: "HEADER_TITLE"
+          translation: "Profil de l'utilisateur Param\xE8tres"
+      name: "settings"
+    strings:
+    - key: "alert_message"
+      name: "alert_message"
+      translation: "Contenu d\xE9taill\xE9 de l'alerte"
+    - key: "alert_title"
+      name: "alert_title"
+      translation: "Titre de l'alerte"
+    - key: "greetings"
+      name: "greetings"
+      translation: "Bonjour, mon nom est %@ et j'ai %d ans"
+      types:
+      - "String"
+      - "Int"
+    - key: "ObjectOwnership"
+      name: "ObjectOwnership"
+      translation: "Ce sont les %1$d %2$@ de %3$@."
+      types:
+      - "Int"
+      - "String"
+      - "String"
+  name: "LocUTF8"
