@@ -8,7 +8,7 @@ on:
 jobs:
   install:
     name: Install
-    runs-on: macos-12
+    runs-on: macos-15
     steps:
       - 
         name: Checkout
@@ -33,7 +33,7 @@ jobs:
 
   zip:
     name: Zip
-    runs-on: macos-12
+    runs-on: macos-15
     steps:
       - 
         name: Checkout
@@ -56,7 +56,7 @@ jobs:
         run: bundle exec rake release:artifactbundle
       -
         name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: SwiftGen.zip
           path: .build/swiftgen-*.zip
