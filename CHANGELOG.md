@@ -6,7 +6,9 @@
 
 ### Breaking Changes
 
-_None_
+* Strings: due to the bugfix for bare strings, for structured-swift5, `%%` in bare strings will be rendered as-such, instead of single `%`.  
+  [Grigory Entin](https://github.com/grigorye)
+  [#1038](https://github.com/SwiftGen/SwiftGen/pull/1038)
 
 ### New Features
 

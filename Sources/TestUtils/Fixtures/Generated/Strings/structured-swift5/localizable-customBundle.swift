@@ -113,5 +113,8 @@ extension L10n {
     let format = ResourcesBundle.bundle.localizedString(forKey: key, value: value, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
+  private static func tr(_ table: String, _ key: String, fallback value: String) -> String {
+    return ResourcesBundle.bundle.localizedString(forKey: key, value: value, table: table)
+  }
 }
 // swiftlint:enable all

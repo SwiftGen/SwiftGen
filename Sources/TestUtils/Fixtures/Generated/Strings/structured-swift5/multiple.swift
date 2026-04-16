@@ -147,6 +147,9 @@ extension L10n {
     let format = BundleToken.bundle.localizedString(forKey: key, value: value, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
+  private static func tr(_ table: String, _ key: String, fallback value: String) -> String {
+    return BundleToken.bundle.localizedString(forKey: key, value: value, table: table)
+  }
 }
 
 // swiftlint:disable convenience_type

@@ -83,6 +83,13 @@ extension {{enumName}} {
     {% endif %}
     return String(format: format, locale: Locale.current, arguments: args)
   }
+  private static func tr(_ table: String, _ key: String, fallback value: String) -> String {
+    {% if param.lookupFunction %}
+    return {{ param.lookupFunction }}(key, table, value)
+    {% else %}
+    return {{param.bundle|default:"BundleToken.bundle"}}.localizedString(forKey: key, value: value, table: table)
+    {% endif %}
+  }
 }
 {% if not param.bundle and not param.lookupFunction %}
 

@@ -113,5 +113,8 @@ extension L10n {
     let format = XCTLocFunc(forKey:table:fallback:)(key, table, value)
     return String(format: format, locale: Locale.current, arguments: args)
   }
+  private static func tr(_ table: String, _ key: String, fallback value: String) -> String {
+    return XCTLocFunc(forKey:table:fallback:)(key, table, value)
+  }
 }
 // swiftlint:enable all
