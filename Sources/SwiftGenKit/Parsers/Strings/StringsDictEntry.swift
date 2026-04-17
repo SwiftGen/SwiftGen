@@ -167,6 +167,40 @@ extension StringsDict {
 }
 
 extension StringsDict.PluralEntry {
+  func placeholderTypes() throws -> [Strings.PlaceholderType] {
+    if let rulesPlaceholderTypes = try placeholderTypesFromRulesWithPosition(), rulesPlaceholderTypes.count > 1 {
+      return rulesPlaceholderTypes
+    }
+    return try Strings.PlaceholderType.placeholderTypes(fromFormat: formatKeyWithVariableValueTypes)
+  }
+
+  func placeholderTypesFromRulesWithPosition() throws -> [Strings.PlaceholderType]? {
+    var chars = [(String, Int)]()
+    for variable in variables {
+      let knownRules = [
+        variable.rule.zero,
+        variable.rule.one,
+        variable.rule.two,
+        variable.rule.few,
+        variable.rule.many,
+        variable.rule.other
+      ].compactMap { $0 }
+
+      for rule in knownRules {
+        let ruleChars = Strings.PlaceholderType.placeholderChars(fromFormat: rule)
+        let ruleCharsWithPositions = ruleChars.compactMap { char, position -> (String, Int)? in
+          guard let position else { return nil }
+          return (char, position)
+        }
+        guard ruleCharsWithPositions.count == ruleChars.count else {
+          return nil // Some placeholders do not have a position
+        }
+        chars.append(contentsOf: ruleCharsWithPositions)
+      }
+    }
+    return try Strings.PlaceholderType.placeholderTypes(fromChars: chars)
+  }
+
   /// Extract the placeholders (`NSStringFormatValueTypeKey`) from the different variable
   /// definitions into a single flattened list of placeholders
   var formatKeyWithVariableValueTypes: String {

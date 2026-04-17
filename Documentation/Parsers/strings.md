@@ -137,6 +137,33 @@ This example should cover the most common use case of plurals that is also suppo
 
 <details>
 
+<summary>Placeholders with positional arguments that are only used in the variables but not in the format key</summary>
+
+```xml
+<key>multiple.placeholders-and-variables.positionalstring-positional2int</key>
+<dict>
+    <key>NSStringLocalizedFormatKey</key>
+    <string>%#@elements@</string>
+    <key>elements</key>
+    <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>zero</key>
+        <string>%1$@ has no rating</string>
+        <key>one</key>
+        <string>%1$@ has one rating</string>
+        <key>other</key>
+        <string>%1$@ has %2$d ratings</string>
+    </dict>
+</dict>
+```
+
+</details>
+
+<details>
+
 <summary>Multiple variables in format key</summary>
 
 ```xml

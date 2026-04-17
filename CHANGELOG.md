@@ -10,7 +10,9 @@ _None_
 
 ### New Features
 
-_None_
+* Strings: added support for plural with positional parameters.  
+  [Arnaud Dorgans](https://github.com/arnauddorgans)
+  [#1147](https://github.com/SwiftGen/SwiftGen/pull/1147)
 
 ### Bug Fixes
 

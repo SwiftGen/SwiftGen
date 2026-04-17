@@ -93,6 +93,24 @@
 			<string>%1$d items. You should buy them</string>
 		</dict>
 	</dict>
+	<key>multiple.placeholders-and-variables.positionalstring-positional2int</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@elements@</string>
+		<key>elements</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%1$@ has no rating</string>
+			<key>one</key>
+			<string>%1$@ has one rating</string>
+			<key>other</key>
+			<string>%1$@ has %2$d ratings</string>
+		</dict>
+	</dict>
 	<key>multiple.variables.three-variables-in-formatkey</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
