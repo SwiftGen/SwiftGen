@@ -50,9 +50,15 @@ import Foundation
   {% endif %}
   {% endfor %}
   {% for child in item.children %}
+  {% if child.name == "type" %}
+  {{accessModifier}} enum _{{child.name|swiftIdentifier:"pretty"}} {
+    {% filter indent:2 %}{% call recursiveBlock table child %}{% endfilter %}
+  }
+  {% else %}
   {{accessModifier}} enum {{child.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
     {% filter indent:2," ",true %}{% call recursiveBlock table child %}{% endfilter %}
   }
+  {% endif %}
   {% endfor %}
 {% endmacro %}
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length

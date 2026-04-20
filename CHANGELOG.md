@@ -26,6 +26,9 @@ _None_
 * Templates: added `// swiftlint:enable all` to the bottom of templates to fix [warning](https://github.com/realm/SwiftLint/pull/4731) introduced by SwiftLint [0.51.0](https://github.com/realm/SwiftLint/releases/tag/0.51.0).  
  [Zev Eisenberg](https://github.com/ZevEisenberg)
  [#1054](https://github.com/SwiftGen/pull/1054)
+* Templates: Fix the way we escape the `type` keyword in strings using the `structured-swift5.stencil` template. It's now `_Type` instead of `` `Type` ``.  
+  [qeude](https://github.com/qeude)
+  [#1131](https://github.com/SwiftGen/SwiftGen/pull/1131)
 
 ### Internal Changes
 
