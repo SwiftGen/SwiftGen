@@ -33,9 +33,12 @@ extension Strings {
 
         return try plurals.map { keyValuePair -> Entry in
           let (key, pluralEntry) = keyValuePair
+          // We are taking "Other" rule, since its the only one that always should be there
+          let translation = (pluralEntry.variables.first?.rule.other) ?? ""
           return Entry(
             key: key,
-            translation: "Plural format key: \"\(pluralEntry.formatKey)\"",
+            formatKey: pluralEntry.formatKey,
+            translation: translation,
             types: try PlaceholderType.placeholderTypes(
               fromFormat: pluralEntry.formatKeyWithVariableValueTypes
             ),

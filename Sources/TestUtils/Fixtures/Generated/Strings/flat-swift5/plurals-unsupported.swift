@@ -9,9 +9,9 @@ import Foundation
 
 // swiftlint:disable function_parameter_count identifier_name line_length type_body_length
 internal enum L10n {
-  /// Plural format key: "%#@elements@"
+  /// %@ has %d ratings
   internal static func unsupportedUsePlaceholdersInVariableRuleStringInt(_ p1: Int) -> String {
-    return L10n.tr("LocPluralUnsupported", "unsupported-use.placeholders-in-variable-rule.string-int", p1, fallback: "Plural format key: \"%#@elements@\"")
+    return L10n.tr("LocPluralUnsupported", "unsupported-use.placeholders-in-variable-rule.string-int", p1, fallback: "%@ has %d ratings")
   }
 }
 // swiftlint:enable function_parameter_count identifier_name line_length type_body_length

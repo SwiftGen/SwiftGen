@@ -31,9 +31,9 @@ internal enum L10n {
     return L10n.tr("Localizable", "types", String(describing: p1), p2, p3, p4, p5, Int(bitPattern: p6), fallback: "Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString: '%s', Pointer: '%p'")
   }
   internal enum Apples {
-    /// Plural format key: "%#@apples@"
+    /// You have %d apples. Wow that is a lot!
     internal static func count(_ p1: Int) -> String {
-      return L10n.tr("Localizable", "apples.count", p1, fallback: "Plural format key: \"%#@apples@\"")
+      return L10n.tr("Localizable", "apples.count", p1, fallback: "You have %d apples. Wow that is a lot!")
     }
   }
   internal enum Bananas {
@@ -44,17 +44,17 @@ internal enum L10n {
   }
   internal enum Competition {
     internal enum Event {
-      /// Plural format key: "%#@Matches@"
+      /// %ld matches
       internal static func numberOfMatches(_ p1: Int) -> String {
-        return L10n.tr("Localizable", "competition.event.number-of-matches", p1, fallback: "Plural format key: \"%#@Matches@\"")
+        return L10n.tr("Localizable", "competition.event.number-of-matches", p1, fallback: "%ld matches")
       }
     }
   }
   internal enum Feed {
     internal enum Subscription {
-      /// Plural format key: "%#@Subscriptions@"
+      /// %ld subscriptions
       internal static func count(_ p1: Int) -> String {
-        return L10n.tr("Localizable", "feed.subscription.count", p1, fallback: "Plural format key: \"%#@Subscriptions@\"")
+        return L10n.tr("Localizable", "feed.subscription.count", p1, fallback: "%ld subscriptions")
       }
     }
   }

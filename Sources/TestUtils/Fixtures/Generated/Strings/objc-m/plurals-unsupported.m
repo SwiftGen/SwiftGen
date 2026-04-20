@@ -28,7 +28,7 @@ static NSString* tr(NSString *tableName, NSString *key, NSString *value, ...) {
 @implementation LocPluralUnsupported : NSObject
 + (NSString*)unsupportedUsePlaceholdersInVariableRuleStringIntWithValue:(NSInteger)p1
 {
-    return tr(@"LocPluralUnsupported", @"unsupported-use.placeholders-in-variable-rule.string-int", @"Plural format key: \"%#@elements@\"", p1);
+    return tr(@"LocPluralUnsupported", @"unsupported-use.placeholders-in-variable-rule.string-int", @"%@ has %d ratings", p1);
 }
 @end
 

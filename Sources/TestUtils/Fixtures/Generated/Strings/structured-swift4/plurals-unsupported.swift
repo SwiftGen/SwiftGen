@@ -12,9 +12,9 @@ import Foundation
 internal enum L10n {
   internal enum UnsupportedUse {
     internal enum PlaceholdersInVariableRule {
-      /// Plural format key: "%#@elements@"
+      /// %@ has %d ratings
       internal static func stringInt(_ p1: Int) -> String {
-        return L10n.tr("LocPluralUnsupported", "unsupported-use.placeholders-in-variable-rule.string-int", p1, fallback: "Plural format key: \"%#@elements@\"")
+        return L10n.tr("LocPluralUnsupported", "unsupported-use.placeholders-in-variable-rule.string-int", p1, fallback: "%@ has %d ratings")
       }
     }
   }

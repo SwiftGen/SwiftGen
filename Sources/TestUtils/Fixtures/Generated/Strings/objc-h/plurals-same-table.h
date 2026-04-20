@@ -19,13 +19,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)privateWithValues:(id)p1 :(NSInteger)p2;
 /// Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString: '%s', Pointer: '%p'
 + (NSString*)typesWithValues:(id)p1 :(char)p2 :(NSInteger)p3 :(float)p4 :(char*)p5 :(void*)p6;
-/// Plural format key: "%#@apples@"
+/// You have %d apples. Wow that is a lot!
 + (NSString*)applesCountWithValue:(NSInteger)p1;
 /// A comment with no space above it
 + (NSString*)bananasOwnerWithValues:(NSInteger)p1 :(id)p2;
-/// Plural format key: "%#@Matches@"
+/// %ld matches
 + (NSString*)competitionEventNumberOfMatchesWithValue:(NSInteger)p1;
-/// Plural format key: "%#@Subscriptions@"
+/// %ld subscriptions
 + (NSString*)feedSubscriptionCountWithValue:(NSInteger)p1;
 /// Same as "key1" = "value1"; but in the context of user not logged in
 + (NSString*)key1Anonymous;

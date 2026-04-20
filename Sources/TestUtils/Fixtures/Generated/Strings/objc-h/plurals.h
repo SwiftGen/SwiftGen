@@ -5,11 +5,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Localizable : NSObject
-/// Plural format key: "%#@apples@"
+/// You have %d apples. Wow that is a lot!
 + (NSString*)applesCountWithValue:(NSInteger)p1;
-/// Plural format key: "%#@Matches@"
+/// %ld matches
 + (NSString*)competitionEventNumberOfMatchesWithValue:(NSInteger)p1;
-/// Plural format key: "%#@Subscriptions@"
+/// %ld subscriptions
 + (NSString*)feedSubscriptionCountWithValue:(NSInteger)p1;
 @end
 

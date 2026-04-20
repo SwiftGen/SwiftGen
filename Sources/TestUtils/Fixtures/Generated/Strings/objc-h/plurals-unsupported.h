@@ -5,7 +5,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LocPluralUnsupported : NSObject
-/// Plural format key: "%#@elements@"
+/// %@ has %d ratings
 + (NSString*)unsupportedUsePlaceholdersInVariableRuleStringIntWithValue:(NSInteger)p1;
 @end
 

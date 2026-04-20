@@ -29,21 +29,21 @@ internal enum L10n {
   internal static func types(_ p1: Any, _ p2: CChar, _ p3: Int, _ p4: Float, _ p5: UnsafePointer<CChar>, _ p6: UnsafeRawPointer) -> String {
     return L10n.tr("Localizable", "types", String(describing: p1), p2, p3, p4, p5, Int(bitPattern: p6), fallback: "Object: '%@', Character: '%c', Integer: '%d', Float: '%f', CString: '%s', Pointer: '%p'")
   }
-  /// Plural format key: "%#@apples@"
+  /// You have %d apples. Wow that is a lot!
   internal static func applesCount(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "apples.count", p1, fallback: "Plural format key: \"%#@apples@\"")
+    return L10n.tr("Localizable", "apples.count", p1, fallback: "You have %d apples. Wow that is a lot!")
   }
   /// A comment with no space above it
   internal static func bananasOwner(_ p1: Int, _ p2: Any) -> String {
     return L10n.tr("Localizable", "bananas.owner", p1, String(describing: p2), fallback: "Those %d bananas belong to %@.")
   }
-  /// Plural format key: "%#@Matches@"
+  /// %ld matches
   internal static func competitionEventNumberOfMatches(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "competition.event.number-of-matches", p1, fallback: "Plural format key: \"%#@Matches@\"")
+    return L10n.tr("Localizable", "competition.event.number-of-matches", p1, fallback: "%ld matches")
   }
-  /// Plural format key: "%#@Subscriptions@"
+  /// %ld subscriptions
   internal static func feedSubscriptionCount(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "feed.subscription.count", p1, fallback: "Plural format key: \"%#@Subscriptions@\"")
+    return L10n.tr("Localizable", "feed.subscription.count", p1, fallback: "%ld subscriptions")
   }
   /// Same as "key1" = "value1"; but in the context of user not logged in
   internal static let key1Anonymous = L10n.tr("Localizable", "key1.anonymous", fallback: "value2")

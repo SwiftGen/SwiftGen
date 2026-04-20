@@ -14,6 +14,9 @@ _None_
 
 ### Bug Fixes
 
+* Strings: Translation entry for String Dictionaries now returns translation value instead of formatKey.   
+  [Paul Taykalo](https://github.com/PaulTaykalo)
+
 * Build: Fixed the `rake cli:install` command and with it the Homebrew formula.  
   [Liquidsoul](https://github.com/liquidsoul)
   [#1030](https://github.com/SwiftGen/SwiftGen/issues/1030)

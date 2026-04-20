@@ -5,7 +5,7 @@ tables:
       strings:
       - key: "apples.count"
         name: "count"
-        translation: "Plural format key: \"%#@apples@\""
+        translation: "You have %d apples. Wow that is a lot!"
         types:
         - "Int"
     - children:
@@ -13,7 +13,7 @@ tables:
         strings:
         - key: "competition.event.number-of-matches"
           name: "number-of-matches"
-          translation: "Plural format key: \"%#@Matches@\""
+          translation: "%ld matches"
           types:
           - "Int"
       name: "competition"
@@ -22,7 +22,7 @@ tables:
         strings:
         - key: "feed.subscription.count"
           name: "count"
-          translation: "Plural format key: \"%#@Subscriptions@\""
+          translation: "%ld subscriptions"
           types:
           - "Int"
       name: "feed"

@@ -52,7 +52,7 @@ static NSString* tr(NSString *tableName, NSString *key, NSString *value, ...) {
 }
 + (NSString*)applesCountWithValue:(NSInteger)p1
 {
-    return tr(@"Localizable", @"apples.count", @"Plural format key: \"%#@apples@\"", p1);
+    return tr(@"Localizable", @"apples.count", @"You have %d apples. Wow that is a lot!", p1);
 }
 + (NSString*)bananasOwnerWithValues:(NSInteger)p1 :(id)p2
 {
@@ -60,11 +60,11 @@ static NSString* tr(NSString *tableName, NSString *key, NSString *value, ...) {
 }
 + (NSString*)competitionEventNumberOfMatchesWithValue:(NSInteger)p1
 {
-    return tr(@"Localizable", @"competition.event.number-of-matches", @"Plural format key: \"%#@Matches@\"", p1);
+    return tr(@"Localizable", @"competition.event.number-of-matches", @"%ld matches", p1);
 }
 + (NSString*)feedSubscriptionCountWithValue:(NSInteger)p1
 {
-    return tr(@"Localizable", @"feed.subscription.count", @"Plural format key: \"%#@Subscriptions@\"", p1);
+    return tr(@"Localizable", @"feed.subscription.count", @"%ld subscriptions", p1);
 }
 + (NSString*)key1Anonymous {
     return tr(@"Localizable", @"key1.anonymous", @"value2");
