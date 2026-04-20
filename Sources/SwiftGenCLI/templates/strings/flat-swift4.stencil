@@ -77,7 +77,11 @@ extension {{enumName}} {
     {% else %}
     let format = {{param.bundle|default:"BundleToken.bundle"}}.localizedString(forKey: key, value: value, table: table)
     {% endif %}
-    return String(format: format, locale: Locale.current, arguments: args)
+    // Workaround for https://github.com/SwiftGen/SwiftGen/issues/859
+    let regex = try! NSRegularExpression(pattern: "(?<!%)%(?!%|d|i|u|f|@|[0-9])")
+    let range = NSRange(location: 0, length: format.utf16.count)
+    let result = regex.stringByReplacingMatches(in: format, options: [], range: range, withTemplate: "%%$1")
+    return String(format: result, locale: Locale.current, arguments: args)
   }
 }
 {% if not param.bundle and not param.lookupFunction %}

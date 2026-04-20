@@ -26,6 +26,9 @@ _None_
 * Templates: added `// swiftlint:enable all` to the bottom of templates to fix [warning](https://github.com/realm/SwiftLint/pull/4731) introduced by SwiftLint [0.51.0](https://github.com/realm/SwiftLint/releases/tag/0.51.0).  
  [Zev Eisenberg](https://github.com/ZevEisenberg)
  [#1054](https://github.com/SwiftGen/pull/1054)
+* Templates: Add a workaround to handle a percent sign [Swift bug](https://github.com/SwiftGen/SwiftGen/issues/859) with `String(format:)` that hasn't been addressed for a while now.  
+  [qeude](https://github.com/qeude)
+  [#1133](https://github.com/SwiftGen/SwiftGen/pull/1133)
 
 ### Internal Changes
 
