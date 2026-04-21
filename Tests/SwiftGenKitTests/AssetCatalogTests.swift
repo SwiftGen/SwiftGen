@@ -57,6 +57,14 @@ final class AssetCatalogTests: XCTestCase {
     XCTDiffContexts(result, expected: "symbols", sub: .xcassets)
   }
 
+  func testOther() throws {
+    let parser = try AssetsCatalog.Parser()
+    try parser.searchAndParse(path: Fixtures.resource(for: "Other.xcassets", sub: .xcassets))
+
+    let result = parser.stencilContext()
+    XCTDiffContexts(result, expected: "other", sub: .xcassets)
+  }
+
   func testAll() throws {
     let parser = try AssetsCatalog.Parser()
     let paths = [

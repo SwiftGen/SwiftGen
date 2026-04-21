@@ -92,6 +92,15 @@ extension AssetsCatalog.Entry {
         isNamespaced: isNamespaced,
         items: AssetsCatalog.Catalog.process(folder: path, withPrefix: subPrefix)
       )
+    } else if type == "complicationset" {
+        print(path)
+        let filename = path.lastComponentWithoutExtension
+
+        return AssetsCatalog.Entry.Group (
+            name: filename,
+            isNamespaced: true,
+            items: AssetsCatalog.Catalog.process(folder: path, withPrefix: "\(prefix)\(filename)/")
+        )
     } else {
       // Unknown extension
       return nil

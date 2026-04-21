@@ -61,7 +61,38 @@ catalogs:
     type: "image"
     value: "private"
   name: "Food"
-- assets: []
+- assets:
+  - isNamespaced: "true"
+    name: "Complication"
+    type: "group"
+    items:
+    - name: "Circular"
+      type: "image"
+      value: "Complication/Circular"
+    - name: "Extra Large"
+      type: "image"
+      value: "Complication/Extra Large"
+    - name: "Graphic Bezel"
+      type: "image"
+      value: "Complication/Graphic Bezel"
+    - name: "Graphic Circular"
+      type: "image"
+      value: "Complication/Graphic Circular"
+    - name: "Graphic Corner"
+      type: "image"
+      value: "Complication/Graphic Corner"
+    - name: "Graphic Extra Large"
+      type: "image"
+      value: "Complication/Graphic Extra Large"
+    - name: "Graphic Large Rectangular"
+      type: "image"
+      value: "Complication/Graphic Large Rectangular"
+    - name: "Modular"
+      type: "image"
+      value: "Complication/Modular"
+    - name: "Utilitarian"
+      type: "image"
+      value: "Complication/Utilitarian"
   name: "Other"
 - assets:
   - isNamespaced: "true"
@@ -111,5 +142,5 @@ resourceCount:
   arresourcegroup: 3
   color: 4
   data: 3
-  image: 8
+  image: 17
   symbol: 2
