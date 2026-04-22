@@ -21,7 +21,7 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 // MARK: - Asset Catalogs
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-internal enum Asset {
+internal enum Asset: Sendable {
   internal enum Exotic {
     internal static let banana = ImageAsset(name: "Exotic/Banana")
     internal static let mango = ImageAsset(name: "Exotic/Mango")
@@ -40,7 +40,7 @@ internal enum Asset {
 
 // MARK: - Implementation Details
 
-internal struct ImageAsset {
+internal struct ImageAsset: Sendable {
   internal fileprivate(set) var name: String
 
   #if os(macOS)

@@ -24,7 +24,7 @@ internal typealias XCTImage = XCTImageAsset.Image
 // MARK: - Asset Catalogs
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-internal enum XCTAssets {
+internal enum XCTAssets: Sendable {
   internal enum Files {
     internal static let data = XCTDataAsset(name: "Data")
     internal enum Json {
@@ -196,7 +196,7 @@ internal extension NSDataAsset {
   }
 }
 
-internal struct XCTImageAsset {
+internal struct XCTImageAsset: Sendable {
   internal fileprivate(set) var name: String
 
   #if os(macOS)

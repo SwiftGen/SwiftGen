@@ -129,7 +129,7 @@
   {% endfor %}
 {% endmacro %}
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-{{accessModifier}} enum {{enumName}} {
+{{accessModifier}} enum {{enumName}}: Sendable {
   {% if catalogs.count > 1 or param.forceFileNameEnum %}
   {% for catalog in catalogs %}
   {{accessModifier}} enum {{catalog.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
@@ -275,7 +275,7 @@
 {% endif %}
 {% if hasImage %}
 
-{{accessModifier}} struct {{imageType}} {
+{{accessModifier}} struct {{imageType}}: Sendable {
   {{accessModifier}} fileprivate(set) var name: String
 
   #if os(macOS)

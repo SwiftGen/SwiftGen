@@ -10,7 +10,9 @@ _None_
 
 ### New Features
 
-_None_
+* Add Sendable conformance to the generated Assets.
+  [SergeyPetrachkov](https://github.com/SergeyPetrachkov)
+  [#1119](https://github.com/SwiftGen/SwiftGen/pull/1119)
 
 ### Bug Fixes
 

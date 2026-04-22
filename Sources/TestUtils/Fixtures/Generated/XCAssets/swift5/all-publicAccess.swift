@@ -24,7 +24,7 @@ public typealias AssetImageTypeAlias = ImageAsset.Image
 // MARK: - Asset Catalogs
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-public enum Asset {
+public enum Asset: Sendable {
   public enum Files {
     public static let data = DataAsset(name: "Data")
     public enum Json {
@@ -196,7 +196,7 @@ public extension NSDataAsset {
   }
 }
 
-public struct ImageAsset {
+public struct ImageAsset: Sendable {
   public fileprivate(set) var name: String
 
   #if os(macOS)
