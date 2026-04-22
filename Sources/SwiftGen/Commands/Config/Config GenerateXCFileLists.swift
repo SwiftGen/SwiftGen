@@ -48,12 +48,12 @@ extension Commands.Config {
 
       if let inputPath = inputs {
         let content = try configuration.inputXCFileList()
-        try inputPath.write(content)
+        try inputPath.writeFix(content)
       }
 
       if let outputPath = outputs {
         let content = try configuration.outputXCFileList()
-        try outputPath.write(content)
+        try outputPath.writeFix(content)
       }
     }
   }

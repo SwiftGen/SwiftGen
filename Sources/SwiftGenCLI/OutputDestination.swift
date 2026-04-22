@@ -34,8 +34,18 @@ extension OutputDestination {
         logMessage(.info, "Not writing the file as content is unchanged")
         return
       }
-      try path.write(content)
+      try path.writeFix(content)
       logMessage(.info, "File written: \(path)")
     }
   }
+}
+
+import Foundation
+
+extension Path {
+    /// Workaround for a bug in SPM that prevents SwiftGen from writing files to DerivedData folder located on an external drive.
+    /// https://github.com/apple/swift-package-manager/issues/6948#issuecomment-1747196926
+    public func writeFix(_ string: String, encoding: String.Encoding = String.Encoding.utf8) throws {
+      try string.write(toFile: normalize().string, atomically: false, encoding: encoding)
+    }
 }
