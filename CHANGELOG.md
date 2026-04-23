@@ -48,6 +48,10 @@ _None_
   [#1007](https://github.com/SwiftGen/SwiftGen/issues/1007)
   [#1008](https://github.com/SwiftGen/SwiftGen/pull/1008)
 
+* Identifiers: generate accessibility identifiers using `swiftgen identifiers`.  
+  [Ian Keen](https://github.com/iankeen)
+  [#369](https://github.com/SwiftGen/SwiftGen/pull/369)
+
 ### Bug Fixes
 
 _None_

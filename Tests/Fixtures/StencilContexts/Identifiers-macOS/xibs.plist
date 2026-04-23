@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>containers</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>XibViewController</string>
+            <key>accessibility</key>
+            <array>
+                <dict>
+                    <key>elementType</key>
+                    <string>button</string>
+                    <key>identifier</key>
+                    <string>XibViewController_button</string>
+                    <key>rawValue</key>
+                    <string>XibViewController-button</string>
+                </dict>
+                <dict>
+                    <key>elementType</key>
+                    <string>textField</string>
+                    <key>identifier</key>
+                    <string>XibViewController_textfield</string>
+                    <key>rawValue</key>
+                    <string>XibViewController-textfield</string>
+                </dict>
+            </array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>XibWindowController</string>
+            <key>accessibility</key>
+            <array>
+                <dict>
+                    <key>elementType</key>
+                    <string>button</string>
+                    <key>identifier</key>
+                    <string>XibWindowController_button</string>
+                    <key>rawValue</key>
+                    <string>XibWindowController-button</string>
+                </dict>
+                <dict>
+                    <key>elementType</key>
+                    <string>textField</string>
+                    <key>identifier</key>
+                    <string>XibWindowController_textfield</string>
+                    <key>rawValue</key>
+                    <string>XibWindowController-textfield</string>
+                </dict>
+            </array>
+		</dict>
+	</array>
+</dict>
+</plist>

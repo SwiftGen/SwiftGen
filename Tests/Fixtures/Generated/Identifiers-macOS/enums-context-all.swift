@@ -1,0 +1,46 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+// swiftlint:disable identifier_name
+
+internal enum AccessibilityIdentifier {
+  internal enum ChildViewController: String {
+    case ChildViewController_button = "ChildViewController-button"
+    case ChildViewController_textfield = "ChildViewController-textfield"
+  }
+  internal enum ContainerViewController: String {
+    case ContainerViewController_button = "ContainerViewController-button"
+    case ContainerViewController_textfield = "ContainerViewController-textfield"
+  }
+  internal enum PageController: String {
+    case PageController_button = "PageController-button"
+    case PageController_textfield = "PageController-textfield"
+  }
+  internal enum SplitViewPageController: String {
+    case SplitViewPageController_button = "SplitViewPageController-button"
+    case SplitViewPageController_textfield = "SplitViewPageController-textfield"
+  }
+  internal enum TabViewPageViewController: String {
+    case TabViewPageViewController_button = "TabViewPageViewController-button"
+    case TabViewPageViewController_textfield = "TabViewPageViewController-textfield"
+  }
+  internal enum ViewController: String {
+    case ViewController_button = "ViewController-button"
+    case ViewController_textfield = "ViewController-textfield"
+  }
+  internal enum WindowViewController: String {
+    case WindowViewController_button = "WindowViewController-button"
+    case WindowViewController_textfield = "WindowViewController-textfield"
+  }
+  internal enum XibViewController: String {
+    case XibViewController_button = "XibViewController-button"
+    case XibViewController_textfield = "XibViewController-textfield"
+  }
+  internal enum XibWindowController: String {
+    case XibWindowController_button = "XibWindowController-button"
+    case XibWindowController_textfield = "XibWindowController-textfield"
+  }
+}
+
+// swiftlint:enable identifier_name line_length type_body_length
