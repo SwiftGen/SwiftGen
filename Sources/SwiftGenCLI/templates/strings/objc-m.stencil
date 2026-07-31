@@ -59,6 +59,7 @@ static NSString* tr(NSString *tableName, NSString *key, NSString *value, ...) {
 {% endmacro %}
 {% macro tableContents table item %}
   {% for string in item.strings %}
+  {% set key string.key|replace:'"','\"' %}
   {% if string.types %}
     {% if string.types.count == 1 %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValue:{% call parametersBlock string.types +%}
@@ -66,11 +67,11 @@ static NSString* tr(NSString *tableName, NSString *key, NSString *value, ...) {
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}}WithValues:{% call parametersBlock string.types +%}
     {% endif %}
 {
-    return tr(@"{{table}}", @"{{string.key}}", @"{{string.translation|replace:'"','\"'|replace:'	','\t'}}", {%+ call argumentsBlock string.types %});
+    return tr(@"{{table}}", @"{{key}}", @"{{string.translation|replace:'"','\"'|replace:'	','\t'}}", {%+ call argumentsBlock string.types %});
 }
 {% else %}
 + (NSString*){{string.key|swiftIdentifier:"pretty"|lowerFirstWord}} {
-    return tr(@"{{table}}", @"{{string.key}}", @"{{string.translation|replace:'"','\"'|replace:'	','\t'}}");
+    return tr(@"{{table}}", @"{{key}}", @"{{string.translation|replace:'"','\"'|replace:'	','\t'}}");
 }
   {% endif %}
   {% endfor %}

@@ -38,15 +38,16 @@ import Foundation
   /// {{line}}
   {% endfor %}
   {% endif %}
+  {% set key string.key|replace:'"','\"' %}
   {% set translation string.translation|replace:'"','\"'|replace:'	','\t' %}
   {% if string.types %}
   {{accessModifier}} static func {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}({% call parametersBlock string.types %}) -> String {
-    return {{enumName}}.tr("{{table}}", "{{string.key}}", {%+ call argumentsBlock string.types %}, fallback: "{{translation}}")
+    return {{enumName}}.tr("{{table}}", "{{key}}", {%+ call argumentsBlock string.types %}, fallback: "{{translation}}")
   }
   {% elif param.lookupFunction %}
-  {{accessModifier}} static var {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: String { return {{enumName}}.tr("{{table}}", "{{string.key}}", fallback: "{{translation}}") }
+  {{accessModifier}} static var {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: String { return {{enumName}}.tr("{{table}}", "{{key}}", fallback: "{{translation}}") }
   {% else %}
-  {{accessModifier}} static let {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{table}}", "{{string.key}}", fallback: "{{translation}}")
+  {{accessModifier}} static let {{string.key|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{table}}", "{{key}}", fallback: "{{translation}}")
   {% endif %}
   {% endfor %}
   {% for child in item.children %}
