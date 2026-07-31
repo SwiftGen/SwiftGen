@@ -119,6 +119,33 @@ final class StringsTests: XCTestCase {
     )
   }
 
+  func testSwiftTemplatesEscapeQuotedKeys() throws {
+    let context: [String: Any] = [
+      "tables": [[
+        "name": "Localizable",
+        "levels": [
+          "strings": [[
+            "key": #"click "Connect" to get started"#,
+            "name": "clickConnect",
+            "translation": #"click "Connect" to get started"#
+          ]]
+        ]
+      ]]
+    ]
+
+    for templateName in ["flat-swift4", "flat-swift5", "structured-swift4", "structured-swift5"] {
+      let template = try Template.load(
+        from: Fixtures.template(for: "\(templateName).stencil", sub: .strings),
+        modernSpacing: true
+      )
+      let result = try template.render(context)
+      XCTAssertTrue(
+        result.contains(#"click \"Connect\" to get started"#),
+        "Expected quoted key to be escaped in \(templateName):\n\(result)"
+      )
+    }
+  }
+
   func testObjectiveCHeader() {
     test(
       template: "objc-h",
